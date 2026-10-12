@@ -31,18 +31,25 @@ def prepare(source: Path, output: Path) -> dict:
     transformed = {}
     counts = {}
     for split in ('train','validation'):
-        rows = [json.loads(line) for line in (source/f'{split}.jsonl').read_text().splitlines() if line.strip()]
+        # JSONL records are delimited by LF, not Unicode U+0085/U+2028/U+2029
+        # which may legitimately occur inside JSON string values.
+        rows = [json.loads(line) for line in (source/f'{split}.jsonl').read_text(
+            encoding='utf-8').split('\n') if line.strip()]
         for row in rows:
             row['domain'] = domain(row['question'])
         counts[split] = dict(Counter(row['domain'] for row in rows))
         if len(counts[split])!=2:
             raise ValueError('both declared subdomains must occur; no arbitrary alternating labels')
-        transformed[split] = ''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in rows).encode()
+        # Escape Unicode in transport only; json.loads recovers identical text.
+        # This also makes the output compatible with existing text.splitlines
+        # consumers without changing the shared checkpoint runtime.
+        transformed[split] = ''.join(json.dumps(row,ensure_ascii=True)+'\n' for row in rows).encode('utf-8')
     manifest = dict(original)
     manifest['partition_sha256'] = {split:hashlib.sha256(raw).hexdigest() for split,raw in transformed.items()}
     manifest['original_partition_sha256'] = original['partition_sha256']
     manifest['domain_transformation'] = 'question-only monetary term regex; answer never used; original train-only partition unchanged'
     manifest['domain_counts'] = counts
+    manifest['jsonl_serialization'] = 'LF-delimited UTF-8 JSON; ensure_ascii=True escapes preserve decoded Unicode strings'
     manifest['limitation'] = 'two arithmetic subdomains and general frozen teachers, not original specialized medical/math domains'
     output.mkdir(parents=True)
     for split,raw in transformed.items():
