@@ -354,7 +354,9 @@ def test_boundary_real_judge_prompt_requires_all_eight_typed_fields_without_scor
     assert schema["$schema"]=="https://json-schema.org/draft/2020-12/schema"
     assert schema["type"]=="object" and schema["additionalProperties"] is False
     assert set(schema["required"])==set(schema["properties"])==scores|flags
-    assert all(schema["properties"][name]=={"type":"number","minimum":0,"maximum":1}
+    assert all({key:schema["properties"][name][key] for key in ("type","minimum","maximum")}
+               =={"type":"number","minimum":0,"maximum":1} for name in scores)
+    assert all(set(schema["properties"][name])=={"type","minimum","maximum","description"}
                for name in scores)
     assert all(schema["properties"][name]["type"]=="boolean" for name in flags)
     assert "genuine recommendation" in schema["properties"]["recommended"]["description"]
@@ -364,6 +366,71 @@ def test_boundary_real_judge_prompt_requires_all_eight_typed_fields_without_scor
         "student_response":"student-secret","expert_response":"expert-secret"}
     assert budget==768 and kwargs=={"greedy":True}
     assert assessment.recommended is False and diagnostic["parse_failure_class"] is None
+
+
+def test_boundary_real_judge_prompt_separates_qa_validity_from_student_trajectory_quality(monkeypatch):
+    """L0 semantic contract from paper Section 3.2/F.3, not judge calibration or GPU evidence."""
+    import auto_research.post_training.oct12_checkpoint as runtime
+    received=[]
+    monkeypatch.setattr(runtime,"sample_path",lambda model,prompt,*args,**kwargs:
+                        (received.append(prompt) or (None,0)))
+    monkeypatch.setattr(runtime,"decoded_response",lambda *args:boundary_json())
+    judge_boundary(None,"fixture-question","reference-secret","student-secret","expert-secret",768)
+    prompt=received[0]
+    schema_text,evidence_text=prompt.split("JSON Schema:\n",1)[1].split("\nInput evidence:\n",1)
+    properties=json.loads(schema_text)["properties"]
+    descriptions={name:prop["description"] for name,prop in properties.items()}
+    assert "actual student_response" in descriptions["student_score"]
+    assert "actual expert_response" in descriptions["expert_score"]
+    assert "independently" in descriptions["student_score"]
+    assert "independently" in descriptions["expert_score"]
+    assert all(term in descriptions["quality"] for term in
+               ("QA pair","question clarity","answerability","reference correctness","training usefulness"))
+    assert "student being wrong or incomplete" in descriptions["quality"]
+    assert "question" in descriptions["clear"] and "not the student's response" in descriptions["clear"]
+    assert "question" in descriptions["answerable"] and "not whether the student solved it" in descriptions["answerable"]
+    assert "no external context is provided or needed" in descriptions["context_score"]
+    assert "judge must report 1.0 by definition" in descriptions["context_score"]
+    assert "not student correctness" in descriptions["context_score"]
+    assert "actual student_response" in descriptions["completeness"]
+    assert "ranking" in descriptions["completeness"]
+    assert "not a hard acceptance gate" in descriptions["recommended"]
+    assert "not an override" in descriptions["recommended"]
+    assert "No separate external context is provided in this input" in prompt
+    assert "role names do not imply that the expert is better" in prompt
+    assert "Do not adjust scores to satisfy the filters" in prompt
+    for criterion in ("expert_score >= 0.65","student_score < 0.50",
+                      "expert_score - student_score >= 0.20","quality >= 0.70",
+                      "context_score >= 0.70","clear and answerable"):
+        assert criterion in prompt
+    assert json.loads(evidence_text)=={"question":"fixture-question","reference":"reference-secret",
+        "student_response":"student-secret","expert_response":"expert-secret"}
+    assert all(forbidden not in schema_text for forbidden in ('"default"','"const"','"enum"','"examples"'))
+
+
+@pytest.mark.parametrize("changes",[
+    {"expert_score":.64},{"student_score":.5},{"expert_score":.65,"student_score":.46},
+    {"quality":.69},{"context_score":.2},{"clear":False},{"answerable":False},
+])
+def test_boundary_semantic_prompt_keeps_original_gate_rejections_and_never_fills_context(monkeypatch,changes):
+    import auto_research.post_training.oct12_checkpoint as runtime
+    monkeypatch.setattr(runtime,"sample_path",lambda *args,**kwargs:(None,0))
+    monkeypatch.setattr(runtime,"decoded_response",lambda *args:boundary_json(**changes))
+    assessment,diagnostic=judge_boundary(None,"Q","reference","student","expert",768,
+                                       return_diagnostic=True)
+    assert diagnostic["parse_failure_class"] is None and assessment is not None
+    assert not assessment.accepted()
+    for name,value in changes.items():
+        assert getattr(assessment,name)==value  # Judge output is not repaired or forced to pass.
+
+
+def test_boundary_recommendation_and_completeness_are_ranking_only_not_extra_gates(monkeypatch):
+    import auto_research.post_training.oct12_checkpoint as runtime
+    monkeypatch.setattr(runtime,"sample_path",lambda *args,**kwargs:(None,0))
+    monkeypatch.setattr(runtime,"decoded_response",lambda *args:boundary_json(recommended=False,completeness=0.))
+    assessment=judge_boundary(None,"Q","reference","student","expert",768)
+    assert assessment.accepted() and assessment.recommended is False and assessment.completeness==0.
+    assert boundary_selection([assessment],set(),budget=1,replay_quota=0)==[assessment]
 
 
 def test_boundary_completed_old_response_missing_recommended_still_fails_with_no_alias_or_repair(monkeypatch):

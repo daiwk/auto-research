@@ -346,15 +346,37 @@ def judge_boundary(analyzer, question, reference, student_text, expert_text, max
         "additionalProperties":False,"required":list(score_fields+flag_fields),
         "properties":{**{name:{"type":"number","minimum":0,"maximum":1} for name in score_fields},
                       **{name:{"type":"boolean"} for name in flag_fields}}}
-    schema["properties"]["recommended"]["description"] = (
-        "Your genuine recommendation whether this question and the supplied independent trajectories "
-        "are suitable for capability-boundary training, considering correctness, reasoning reliability, "
-        "data quality and validity. Make the decision from the evidence; do not assume a fixed value.")
+    # QA validity and response quality are distinct in v1 Section 3.2 / Appendix F.3.
+    descriptions = {
+        "student_score":"Score actual student_response correctness and reasoning reliability independently "
+            "against question/reference. The student role alone is not evidence of low correctness.",
+        "expert_score":"Score actual expert_response correctness and reasoning reliability independently "
+            "against question/reference. The expert role alone does not prove correctness or superiority.",
+        "quality":"QA pair training suitability: question clarity, answerability, reference correctness, "
+            "and training usefulness. Do not penalize the QA solely for student being wrong or incomplete.",
+        "clear":"Whether the question is clear and unambiguous, not the student's response.",
+        "answerable":"Whether the question can be answered from its given information, "
+            "not whether the student solved it.",
+        "context_score":"Support from external context, not student correctness. When no external context "
+            "is provided or needed, the judge must report 1.0 by definition; otherwise judge actual support.",
+        "completeness":"Completion of the actual student_response reasoning and final conclusion, distinct "
+            "from correctness; a novel-acquisition ranking signal, not a hard acceptance gate.",
+        "recommended":"Your genuine recommendation for training from QA validity and actual trajectories; "
+            "a ranking aid, not a hard acceptance gate and not an override of the filters. "
+            "Decide from evidence, not a fixed value."}
+    for name,description in descriptions.items():
+        schema["properties"][name]["description"] = description
     prompt = ("You are an external training-data quality judge, not a solver. Return only one assessment "
         "JSON object conforming to the following JSON Schema. All eight fields are required, including "
-        "recommended even when you do not recommend the example. Score correctness and reasoning "
-        "reliability; quality measures training suitability. Decide each score and boolean from the "
-        "supplied evidence. Do not omit fields, use substitute field names, or invent default scores. "
+        "recommended even when you do not recommend the example. Judge QA validity separately from "
+        "model responses. Score both actual responses independently; role names do not imply that the "
+        "expert is better. No separate external context is provided in this input; givens in the question "
+        "are not missing external context. Student errors or incomplete responses do not by themselves "
+        "make the question defective. Existing downstream filters (criteria, not desired scores): "
+        "expert_score >= 0.65; student_score < 0.50; expert_score - student_score >= 0.20; quality >= 0.70; "
+        "clear and answerable; context_score >= 0.70. Do not adjust scores to satisfy the filters. "
+        "Decide each score and boolean from the supplied evidence. Do not omit fields, use substitute "
+        "field names, or invent default scores. "
         "The schema is not an example answer: do not echo the schema or input, and do not use markdown.\n"
         "JSON Schema:\n"+json.dumps(schema,ensure_ascii=False)+"\nInput evidence:\n"+
         json.dumps({"question":question,"reference":reference,"student_response":student_text,
