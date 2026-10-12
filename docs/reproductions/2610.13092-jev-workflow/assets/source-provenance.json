@@ -1,0 +1,15 @@
+{
+  "arxiv_v1": "https://arxiv.org/html/2610.13092v1",
+  "published": "2026-10-09",
+  "reviewed_at": "2026-10-12",
+  "institution_source": "original HTML author affiliations",
+  "upstream_code": "https://anonymous.4open.science/r/jev-emp-5BF4/",
+  "upstream_status": "是：[作者匿名实验代码链接](https://anonymous.4open.science/r/jev-emp-5BF4/)",
+  "figure": {
+    "number": "2",
+    "url": "https://arxiv.org/html/2610.13092v1/conditions.png"
+  },
+  "local_diagram": "architecture.mmd",
+  "full_text_reviewed": true,
+  "online_ab": "not reported"
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "key": "janus",
+  "arxiv_id": "2610.13194",
+  "title": "Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models",
+  "paper_url": "https://arxiv.org/abs/2610.13194",
+  "organization": "Institute of Computing Technology / University of Chinese Academy of Sciences",
+  "published": "2026-10-09",
+  "upstream_code": "否：作者[项目页](https://github.com/bilemond/JANUS)目前仅 README/assets，未找到可执行实现（2026-10-12）",
+  "track": "llm",
+  "topics": [
+    "autonomous-research",
+    "world-model",
+    "evolving-skills"
+  ],
+  "local_code": "src/auto_research/reproductions/janus",
+  "documentation": "docs/reproductions/2610.13194-janus/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "public-circle-packing-26"
+  ],
+  "baseline": "初始几何可行程序；原文对照完整自主研究框架",
+  "metrics": [
+    "graph",
+    "audit"
+  ],
+  "mechanisms": [
+    "在研究图中先生成未执行提案，再预测价值提升、信息增益和探索收益；稀疏 pairwise tournament 拟合软 Bradley–Terry 分数。执行选中实验后，从成功/失败抽象 intra/cross-task 技能并更新预测、探索、协调协议。"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.janus.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Institute of Computing Technology / University of Chinese Academy of Sciences",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据"
+    },
+    "omitted_core_components": [
+      "MLS-Bench-Lite 与原文5小时/任务资源协议",
+      "原文闭源大型backbone、跨任务实验环境"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-janus-a100.json"
+  }
+}

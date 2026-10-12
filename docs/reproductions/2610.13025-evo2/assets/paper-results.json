@@ -1,0 +1,23 @@
+{
+  "source": "original paper only",
+  "source_url": "https://arxiv.org/html/2610.13025v1",
+  "local_run": false,
+  "reviewed_at": "2026-10-12",
+  "rows": [
+    {
+      "metric": "Polyglot pass@1",
+      "reported_value": "82.1%",
+      "comparator_or_protocol": "GEA 62.6%"
+    },
+    {
+      "metric": "SWE-bench Verified resolved",
+      "reported_value": "48.3%",
+      "comparator_or_protocol": "HGM 41.0%"
+    },
+    {
+      "metric": "LiveCodeBench pass@1",
+      "reported_value": "58.0%",
+      "comparator_or_protocol": "HGM 56.0%"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "key": "evo2",
+  "arxiv_id": "2610.13025",
+  "title": "Evo2: Evolving the Evolver through Weight-Harness Co-Evolution",
+  "paper_url": "https://arxiv.org/abs/2610.13025",
+  "organization": "Google DeepMind / University of Illinois Urbana-Champaign",
+  "published": "2026-10-09",
+  "upstream_code": "否：未找到原作者公开实现（2026-10-12 核查原文与作者项目链接；机构以原 PDF 首页为准）",
+  "track": "llm",
+  "topics": [
+    "agent-evolution",
+    "weight-harness-co-evolution",
+    "dual-role-grpo"
+  ],
+  "local_code": "src/auto_research/reproductions/evo2",
+  "documentation": "docs/reproductions/2610.13025-evo2/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "public-circle-packing-26"
+  ],
+  "baseline": "固定 executor 与初始可执行 harness",
+  "metrics": [
+    "best_validation_score",
+    "nodes",
+    "executor_weights_unchanged"
+  ],
+  "mechanisms": [
+    "固定任务 executor，共享 Proposer/Reflector 编辑 harness；树搜索与跨分支 crossover 的执行反馈反过来训练 evolver。EvoTIDE 恢复有效编辑轨迹，先 SFT，再交错更新两个角色。"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.evo2.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Google DeepMind / University of Illinois Urbana-Champaign",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据"
+    },
+    "omitted_core_components": [
+      "原文任意多文件 harness 自修改与 coding/memory benchmark",
+      "27B 模型与大规模 EvoTIDE 训练；本地仅 prompt-edit L1"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-evo2-a100.json"
+  }
+}

@@ -1,0 +1,9 @@
+graph LR
+ A[研究图与技能] --> B[模型生成候选]
+ B --> C[VI/IG/EV稀疏预测tournament]
+ C --> D[辩论与refine再预测]
+ D --> E[真实实现与sandbox实验]
+ E --> F[intra/cross技能]
+ E --> G[预测/探索/协调技能]
+ F --> A
+ G --> A

@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "key": "rsi-anything",
+  "arxiv_id": "2610.13912",
+  "title": "RSI-Anything: Unlocking Recursive Self-Improvement with World Models",
+  "paper_url": "https://arxiv.org/abs/2610.13912",
+  "organization": "PhAI Labs / The Chinese University of Hong Kong 等",
+  "published": "2026-10-09",
+  "upstream_code": "是：[RSI-Anything](https://github.com/Gen-Verse/RSI-Anything)",
+  "track": "llm",
+  "topics": [
+    "recursive-self-improvement",
+    "world-model",
+    "compatibility-retention"
+  ],
+  "local_code": "src/auto_research/reproductions/rsi_anything",
+  "documentation": "docs/reproductions/2610.13912-rsi-anything/README.md",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "public-circle-packing-26"
+  ],
+  "baseline": "初始 policy workflow 与初始 predictor 配对",
+  "metrics": [
+    "rounds",
+    "feedback_records"
+  ],
+  "mechanisms": [
+    "候选先经世界模型预测，再向外部验证申请反馈；反馈更新持久 policy/workflow，可靠性不足且数据/预算足够时适配 predictor。只有组件检查和配对兼容性检查均通过的版本进入下一轮。"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.rsi_anything.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Gen-Verse/RSI-Anything",
+      "organization": "PhAI Labs / The Chinese University of Hong Kong 等",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据"
+    },
+    "omitted_core_components": [
+      "作者 JEPA-Anything 预训练权重与领域 outcome adapter",
+      "官方 code-repair/GUI/laboratory/reaction benchmark"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-rsi-anything-a100.json"
+  }
+}

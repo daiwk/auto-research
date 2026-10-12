@@ -1,0 +1,8 @@
+graph LR
+ A[相同task/run两配置实际执行] --> B[外部核验交付成功]
+ A --> C[决策与总延迟/费用]
+ A --> D[failed recovery与提前完成]
+ B --> E[完整attempt资源每success]
+ C --> E
+ D --> E
+ B --> F[matched-success子集比较]

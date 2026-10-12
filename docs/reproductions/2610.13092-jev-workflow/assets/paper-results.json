@@ -1,0 +1,23 @@
+{
+  "source": "original paper only",
+  "source_url": "https://arxiv.org/html/2610.13092v1",
+  "local_run": false,
+  "reviewed_at": "2026-10-12",
+  "rows": [
+    {
+      "metric": "total executions",
+      "reported_value": "4500",
+      "comparator_or_protocol": "ALFWorld/AndroidWorld，各配置三次"
+    },
+    {
+      "metric": "T3A cost per delivered success, base/Jev",
+      "reported_value": "68.70 / 73.97 mUSD",
+      "comparator_or_protocol": "+7.7%，95%区间跨0"
+    },
+    {
+      "metric": "FastAgent time per delivered success, base/Jev",
+      "reported_value": "239.4 / 377.8 seconds",
+      "comparator_or_protocol": "成功率下降削弱单步收益"
+    }
+  ]
+}

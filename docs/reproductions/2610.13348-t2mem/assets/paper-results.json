@@ -1,0 +1,23 @@
+{
+  "source": "original paper only",
+  "source_url": "https://arxiv.org/html/2610.13348v1",
+  "local_run": false,
+  "reviewed_at": "2026-10-12",
+  "rows": [
+    {
+      "metric": "LoCoMo average, Qwen3.5-27B",
+      "reported_value": "71.69",
+      "comparator_or_protocol": "LazyMem 69.84"
+    },
+    {
+      "metric": "LoCoMo temporal, Qwen3.5-27B",
+      "reported_value": "75.70",
+      "comparator_or_protocol": "LazyMem 62.50"
+    },
+    {
+      "metric": "LoCoMo average, Gemma4-31B",
+      "reported_value": "71.30",
+      "comparator_or_protocol": "LazyMem 70.49"
+    }
+  ]
+}

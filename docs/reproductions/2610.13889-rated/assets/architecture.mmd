@@ -1,0 +1,8 @@
+graph LR
+ A[训练query/tool正对] --> B[双encoder InfoNCE]
+ B --> C[冻结语义topK]
+ D[metadata prior] --> E[discounted LinUCB重排]
+ C --> E
+ E --> F[实际工具执行/失败]
+ F --> G[仅selected arm更新]
+ G --> E

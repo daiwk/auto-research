@@ -1,0 +1,20 @@
+{
+  "domain": "agent-research",
+  "key": "jev-workflow",
+  "title": "When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows",
+  "paper_url": "https://arxiv.org/abs/2610.13092",
+  "detail_path": "reproductions/2610.13092-jev-workflow/README.md",
+  "topic": [
+    "agent-evaluation",
+    "delivered-outcome",
+    "latency-cost-recovery"
+  ],
+  "first_author": "Yuchen Ling",
+  "first_author_affiliation": "Nanjing University",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": "https://anonymous.4open.science/r/jev-emp-5BF4/",
+  "adapter": "jev-workflow",
+  "requires_gpu_validation": false,
+  "gpu_validation_artifact": null
+}

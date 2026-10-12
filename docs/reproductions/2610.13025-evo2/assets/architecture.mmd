@@ -1,0 +1,9 @@
+graph LR
+ A[共享Proposer] --> B[真实harness编辑]
+ B --> C[固定executor与外部验证]
+ C --> D[Reflector诊断]
+ E[跨分支策略库] --> D
+ D --> A
+ C --> F[编辑恢复与SFT]
+ F --> G[双角色交错GRPO]
+ G --> A

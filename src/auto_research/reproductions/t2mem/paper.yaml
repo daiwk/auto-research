@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "key": "t2mem",
+  "arxiv_id": "2610.13348",
+  "title": "Test-Time Memory Construction",
+  "paper_url": "https://arxiv.org/abs/2610.13348",
+  "organization": "Northeastern University / Tsinghua University / Alibaba Group",
+  "published": "2026-10-09",
+  "upstream_code": "是：[T2Mem](https://github.com/OpenBMB/T2Mem)",
+  "track": "llm",
+  "topics": [
+    "long-term-memory",
+    "test-time-construction",
+    "adaptive-retrieval"
+  ],
+  "local_code": "src/auto_research/reproductions/t2mem",
+  "documentation": "docs/reproductions/2610.13348-t2mem/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "LoCoMo / LongMemEval normalized JSONL"
+  ],
+  "baseline": "原文 Naive RAG/structured offline memory；本地未做稳定多seed对照",
+  "metrics": [
+    "queries",
+    "outputs"
+  ],
+  "mechanisms": [
+    "离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.t2mem.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/OpenBMB/T2Mem",
+      "organization": "Northeastern University / Tsinghua University / Alibaba Group",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据"
+    },
+    "omitted_core_components": [
+      "原文27B/31B backbone与Qwen3.5-Plus judge",
+      "完整token-budget matched benchmark"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-t2mem-a100.json"
+  }
+}

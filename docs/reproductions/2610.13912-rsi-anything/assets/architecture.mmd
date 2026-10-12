@@ -1,0 +1,9 @@
+graph LR
+ A[持久policy生成候选] --> B[动作条件latent预测]
+ B --> C[选择外部验证]
+ C --> D[版本归因反馈]
+ D --> E[workflow更新]
+ D --> F[条件predictor适配]
+ E --> G[组件与pair gate]
+ F --> G
+ G --> A

@@ -1,0 +1,20 @@
+{
+  "domain": "agent-research",
+  "key": "t2mem",
+  "title": "Test-Time Memory Construction",
+  "paper_url": "https://arxiv.org/abs/2610.13348",
+  "detail_path": "reproductions/2610.13348-t2mem/README.md",
+  "topic": [
+    "long-term-memory",
+    "test-time-construction",
+    "adaptive-retrieval"
+  ],
+  "first_author": "Zijun Wang",
+  "first_author_affiliation": "Northeastern University",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": "https://github.com/OpenBMB/T2Mem",
+  "adapter": "t2mem",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct12-t2mem-a100.json"
+}

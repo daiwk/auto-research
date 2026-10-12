@@ -1,0 +1,15 @@
+{
+  "arxiv_v1": "https://arxiv.org/html/2610.13194v1",
+  "published": "2026-10-09",
+  "reviewed_at": "2026-10-12",
+  "institution_source": "original HTML author affiliations",
+  "upstream_code": null,
+  "upstream_status": "否：作者[项目页](https://github.com/bilemond/JANUS)目前仅 README/assets，未找到可执行实现（2026-10-12）",
+  "figure": {
+    "number": "2",
+    "url": "https://arxiv.org/html/2610.13194v1/method.png"
+  },
+  "local_diagram": "architecture.mmd",
+  "full_text_reviewed": true,
+  "online_ab": "not reported"
+}
