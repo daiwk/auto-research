@@ -43,6 +43,7 @@ class ExecutorFixture:
         self.outputs = iter(outputs or ["Reasoning. \\boxed{12}","Incorrect. \\boxed{5}"])
         self.inputs = []
         self.max_tokens = kwargs.get("max_tokens",256)
+        self.attention_backend = kwargs.get("attention_backend","eager")
     def generate(self,messages,sample=True):
         assert sample is False
         self.inputs.append(messages)
@@ -125,7 +126,8 @@ def test_non_evo_rejects_gsm_environment_before_model_or_dataset_access(method):
         entry.run_method(method,environment="gsm8k-harness")
 
 
-def test_evo_gsm_entrypoint_preserves_active_gate_and_separate_executor_budget(tmp_path,monkeypatch):
+@pytest.mark.parametrize("attention_backend",["eager","sdpa"])
+def test_evo_gsm_entrypoint_preserves_active_gate_and_separate_executor_budget(tmp_path,monkeypatch,attention_backend):
     path=holdout(tmp_path);loads=[]
     def model(path,**kwargs):
         loads.append(kwargs)
@@ -144,8 +146,11 @@ def test_evo_gsm_entrypoint_preserves_active_gate_and_separate_executor_budget(t
     monkeypatch.setattr(entry,"Evo2",ControllerFixture)
     monkeypatch.setattr(entry,"verify_local_checkpoint",lambda *args:{"verified_fixture_only":True})
     result=entry.run_method("evo2",checkpoint="L0-only",environment="gsm8k-harness",dataset=path,
-                            evaluation_examples=2,max_tokens=768,executor_max_tokens=256)
+                            evaluation_examples=2,max_tokens=768,executor_max_tokens=256,
+                            attention_backend=attention_backend)
     assert [row["max_tokens"] for row in loads]==[768,256]
+    assert [row["attention_backend"] for row in loads]==[attention_backend,attention_backend]
+    assert result["attention_backend"]==result["executor_attention_backend"]==attention_backend
     assert result["environment"]=="gsm8k-harness" and result["evaluation_examples"]==2
     assert result["policy_max_tokens"]==768 and result["executor_max_tokens"]==256
     assert result["scores"][0]["normalized_score"]==.5 and result["diagnostic_only"]

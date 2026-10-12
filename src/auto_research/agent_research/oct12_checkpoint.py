@@ -20,6 +20,7 @@ from .program_sandbox import CIRCLE_TASK, ProgramSandbox
 
 INITIAL_PROMPT = "Write a valid complete Python circle-packing solver. Return source code only."
 GSM_INITIAL_PROMPT = "Solve the arithmetic word problem carefully. Explain your reasoning and end with the numerical answer in \\boxed{...}."
+ATTENTION_BACKENDS = ("eager", "sdpa")
 
 
 def harness_source(prompt):
@@ -42,6 +43,9 @@ def extract_source(output):
 
 class CheckpointPolicy(LocalLanguageModel):
     def __init__(self, checkpoint, **kwargs):
+        attention_backend = kwargs.get("attention_backend", "eager")
+        if attention_backend not in ATTENTION_BACKENDS:
+            raise ValueError("attention_backend must be eager or sdpa")
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
         device, seed = kwargs.get("device","cpu"), kwargs.get("seed",42)
@@ -50,7 +54,8 @@ class CheckpointPolicy(LocalLanguageModel):
         self.model = AutoModelForCausalLM.from_pretrained(checkpoint,local_files_only=True,
             trust_remote_code=False,use_safetensors=True,
             torch_dtype=torch.bfloat16 if device == "cuda" else torch.float32,
-            attn_implementation="eager").to(device)
+            attn_implementation=attention_backend).to(device)
+        self.attention_backend = self.model.config._attn_implementation
         self.device,self.max_tokens = device,kwargs.get("max_tokens",256)
         self.revision,self.training_audits = "initial",[]
         self.last_truncated = False

@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 
 from .oct12_checkpoint import (CheckpointPolicy, Evo2Policy, HarnessEvaluator, GSMHarnessEvaluator,
-    INITIAL_PROMPT, GSM_INITIAL_PROMPT,
+    INITIAL_PROMPT, GSM_INITIAL_PROMPT, ATTENTION_BACKENDS,
     JanusBackend, RSIBackend, harness_source, make_factorized_predictor)
 from .oct12_evolution import Evaluation, Evo2, Janus, RSIAnything
 from .oct12_memory_tools import DualEncoder, RATED, T2Mem, WorkflowOutcome, audit_workflows
@@ -47,16 +47,23 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
                executor_checkpoint=None,executor_id=None,executor_revision=None,
                query_checkpoint_id=None,query_checkpoint_revision=None,
                tool_checkpoint_id=None,tool_checkpoint_revision=None,
-               environment="circle-packing",evaluation_examples=8,executor_max_tokens=None):
+               environment="circle-packing",evaluation_examples=8,executor_max_tokens=None,
+               attention_backend="eager"):
     if method not in METHODS:
         raise ValueError("unknown October agent method")
+    if attention_backend not in ATTENTION_BACKENDS:
+        raise ValueError("attention_backend must be eager or sdpa")
+    if attention_backend != "eager" and method in {"rated","jev-workflow"}:
+        raise ValueError("attention_backend selection is supported only by causal-checkpoint agent paths")
     if environment not in ENVIRONMENTS or (environment != "circle-packing" and method != "evo2"):
         raise ValueError("non-default environment is supported only for Evo2")
     if executor_max_tokens is not None and (method != "evo2" or executor_max_tokens < 1):
         raise ValueError("positive executor_max_tokens is supported only for Evo2")
     if method not in {"rated", "jev-workflow"} and not checkpoint:
         raise ValueError("local checkpoint required")
-    settings = {"device": device, "seed": seed, "max_tokens": max_tokens}
+    settings = {"device": device, "seed": seed, "max_tokens": max_tokens,
+                "attention_backend":attention_backend}
+    actual_attention_backend = None
     provenance = {}
     if method not in {"rated","jev-workflow"}:
         provenance["policy"] = verify_local_checkpoint(checkpoint,checkpoint_id,checkpoint_revision)
@@ -73,6 +80,7 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
         policy = Evo2Policy(checkpoint, **settings)
         executor = CheckpointPolicy(executor_checkpoint, **{**settings,
             "max_tokens":executor_max_tokens if executor_max_tokens is not None else max_tokens})
+        actual_attention_backend = policy.attention_backend
         if environment == "gsm8k-harness":
             evaluator = GSMHarnessEvaluator(executor,dataset,examples=evaluation_examples)
             initial_prompt = GSM_INITIAL_PROMPT
@@ -89,6 +97,7 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
         result["environment"] = "gsm8k-harness" if environment == "gsm8k-harness" else "public-circle-packing-26"
         result["policy_max_tokens"] = max_tokens
         result["executor_max_tokens"] = executor.max_tokens
+        result["executor_attention_backend"] = executor.attention_backend
         if environment == "gsm8k-harness":
             result["dataset"] = evaluator.dataset_provenance
             result["evaluation_examples"] = evaluator.evaluation_examples
@@ -105,6 +114,7 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
                 item["external_scoring_trace"] = list(node.evaluation.trace)
     elif method == "rsi-anything":
         backend = RSIBackend(checkpoint, **settings)
+        actual_attention_backend = backend.attention_backend
         sandbox = ProgramSandbox()
         dimension = backend.embedding(CIRCLE_TASK).numel()
         predictor = make_factorized_predictor(dimension, device)
@@ -122,6 +132,7 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
         result["split_limitation"] = "single-task context partition; not independent capability validation"
     elif method == "janus":
         backend = JanusBackend(checkpoint, **settings)
+        actual_attention_backend = backend.attention_backend
         initial = ProgramSandbox().evaluate_packing(CIRCLE_INITIAL)
         controller = Janus(backend, backend.execute, initial_evidence={"score": initial.score,
                                                                      "feedback": initial.feedback})
@@ -129,6 +140,7 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
         result["environment"] = "public-circle-packing-26"
     elif method == "t2mem":
         backend = CheckpointPolicy(checkpoint, **settings)
+        actual_attention_backend = backend.attention_backend
         outputs = []
         for row in load_jsonl(dataset):
             if not row.get("source_revision") or not isinstance(row.get("question"), str):
@@ -194,6 +206,7 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
         result["source"] = "caller-supplied actual measured execution records"
     result.update({"method": method, "seed": seed, "diagnostic_only": True,
         "evaluation_tier": "L1", "device": device, "checkpoint": provenance,
+        "attention_backend":actual_attention_backend,
         "capability_comparison": False, "evolve_promotion_eligible": False})
     return result
 

@@ -2,7 +2,7 @@
 import argparse
 import json
 from pathlib import Path
-from auto_research.agent_research.oct12_entrypoint import ENVIRONMENTS, METHODS, run_method
+from auto_research.agent_research.oct12_entrypoint import ATTENTION_BACKENDS, ENVIRONMENTS, METHODS, run_method
 
 
 def main():
@@ -29,6 +29,7 @@ def main():
     parser.add_argument("--executor-max-tokens", type=int)
     parser.add_argument("--environment",choices=ENVIRONMENTS,default="circle-packing")
     parser.add_argument("--evaluation-examples",type=int,default=8)
+    parser.add_argument("--attention-backend",choices=ATTENTION_BACKENDS,default="eager")
     parser.add_argument("--train-steps", type=int, default=2)
     arguments = vars(parser.parse_args())
     output = arguments.pop("output")
@@ -38,7 +39,8 @@ def main():
         result = run_method(**arguments)
     except (RuntimeError,ValueError,OSError) as error:
         result = {"status":"failed","failure_reason":str(error),"method":arguments["method"],
-                  "seed":arguments["seed"],"diagnostic_only":True,"capability_comparison":False}
+                  "seed":arguments["seed"],"diagnostic_only":True,"capability_comparison":False,
+                  "attention_backend_requested":arguments["attention_backend"]}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({key: value for key, value in result.items() if key not in

@@ -47,7 +47,9 @@ def test_jev_is_evaluation_infrastructure_not_a_gpu_model_claim():
     adapter = adapter_from_spec("jev-workflow")
     assert adapter.requires_gpu_validation is False
     assert adapter.gpu_validation_artifact is None
-    assert adapter.paper.code_url == "https://anonymous.4open.science/r/jev-emp-5BF4/"
+    assert adapter.paper.code_url is None
+    spec = load_spec(ROOT / "src/auto_research/reproductions/jev_workflow/paper.yaml")
+    assert "匿名实验代码链接" in spec.upstream_code and "未核实可用源码" in spec.upstream_code
 
 
 def test_six_catalog_records_resolve_to_packaged_specs_and_runnable_bindings():
