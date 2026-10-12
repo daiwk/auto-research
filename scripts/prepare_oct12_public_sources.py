@@ -16,26 +16,27 @@ from auto_research.multimodal.oct12_reward_transition import (
     COCO_DATASET, COCO_REVISION, VLM_CHECKPOINT, VLM_REVISION,
     WOVEN_REVISION, load_coco, load_woven,
 )
-from auto_research.oct12_public_sources import sha256_file
+from auto_research.oct12_public_sources import (
+    checkpoint_input_files, managed_stream, public_parquet_rows, sha256_file,
+)
 from auto_research.reproductions.oct12_foundation_multimodal import (
     SMOLLM_CHECKPOINT, SMOLLM_REVISION, WIKITEXT_REVISION,
 )
 
 
 def export_wikitext(output: Path, train_bytes: int, eval_bytes: int):
-    from datasets import load_dataset
-    dataset = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1", revision=WIKITEXT_REVISION,
-                           streaming=True)
     files, counts = {}, {}
     for split in ("train", "validation", "test"):
         budget = train_bytes if split == "train" else eval_bytes
         chunks, size = [], 0
-        for row in dataset[split]:
-            piece = (row["text"] + "\n").encode("utf-8")
-            chunks.append(piece)
-            size += len(piece)
-            if size >= budget:
-                break
+        with managed_stream(public_parquet_rows("Salesforce/wikitext", WIKITEXT_REVISION, split,
+                                               configuration="wikitext-2-raw-v1")) as iterator:
+            for row in iterator:
+                piece = (row["text"] + "\n").encode("utf-8")
+                chunks.append(piece)
+                size += len(piece)
+                if size >= budget:
+                    break
         raw = b"".join(chunks)[:budget]
         target = output / f"{split}.txt"
         target.write_bytes(raw)
@@ -89,9 +90,9 @@ def export_checkpoint(output: Path, name: str):
                             (SMOLLM_CHECKPOINT, SMOLLM_REVISION))
     snapshot_download(public_id, revision=revision, local_dir=output,
                        allow_patterns=["*.json", "*.safetensors", "*.txt"], ignore_patterns=["onnx/*"])
-    files = {p.relative_to(output).as_posix(): sha256_file(p) for p in output.rglob("*")
-             if p.is_file() and (p.name.endswith(".json") or p.name.endswith(".safetensors")
-                                or p.name in {"merges.txt", "vocab.txt"}) and ".cache" not in p.parts}
+    files = {relative: sha256_file(path) for relative, path in checkpoint_input_files(output).items()}
+    if "config.json" not in files or not any(key.endswith(".safetensors") for key in files):
+        raise ValueError("downloaded checkpoint must contain config and safetensors weights before sealing")
     return {"kind": "checkpoint", "public_id": public_id, "revision": revision, "files": files}
 
 

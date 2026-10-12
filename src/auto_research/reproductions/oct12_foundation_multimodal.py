@@ -18,7 +18,10 @@ from torch.nn import functional as F
 from auto_research.foundation_models.oct12_mechanisms import (
     DualQuantLinear, MSARLM, OrthrosLM, TinyTransformerLM,
 )
-from auto_research.oct12_public_sources import checkpoint_source, recorded_verified_files, verify_offline_manifest
+from auto_research.oct12_public_sources import (
+    checkpoint_source, managed_stream, public_parquet_rows,
+    recorded_verified_files, verify_offline_manifest,
+)
 
 WIKITEXT_REVISION = "b08601e04326c79dfdd32d625aee71d232d685c3"
 SMOLLM_REVISION = "93efa2f097d58c2a74874c7e644dbc9b0cee75a2"
@@ -41,10 +44,6 @@ def load_public_text(dataset_dir: Path, train_bytes: int = 32768,
             f"{s}.txt" in provenance["files"] for s in ("train", "validation", "test")):
             raise ValueError("local mirror must hash all THREE official raw-v1 splits")
         source = None
-    else:
-        from datasets import load_dataset
-        source = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1",
-                              revision=WIKITEXT_REVISION, cache_dir=str(dataset_dir), streaming=True)
     tokens, hashes, counts = {}, {}, {}
     for split in ("train", "validation", "test"):
         budget = train_bytes if split == "train" else eval_bytes
@@ -52,12 +51,15 @@ def load_public_text(dataset_dir: Path, train_bytes: int = 32768,
             raw = (dataset_dir / f"{split}.txt").read_bytes()[:budget]
         else:
             pieces, size = [], 0
-            for row in source[split]:
-                piece = (row["text"] + "\n").encode("utf-8")
-                pieces.append(piece)
-                size += len(piece)
-                if size >= budget:
-                    break
+            with managed_stream(public_parquet_rows("Salesforce/wikitext", WIKITEXT_REVISION, split,
+                                                   configuration="wikitext-2-raw-v1",
+                                                   cache_dir=dataset_dir)) as iterator:
+                for row in iterator:
+                    piece = (row["text"] + "\n").encode("utf-8")
+                    pieces.append(piece)
+                    size += len(piece)
+                    if size >= budget:
+                        break
             raw = b"".join(pieces)[:budget]
         tokens[split] = torch.tensor(list(raw), dtype=torch.long)
         hashes[split], counts[split] = hashlib.sha256(raw).hexdigest(), len(raw)

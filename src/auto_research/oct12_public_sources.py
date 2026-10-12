@@ -5,6 +5,7 @@ local bytes. It is not a claim that an arbitrary unverified cache is an
 official split. Preparation must originate from the pinned upstream revision.
 """
 from __future__ import annotations
+from contextlib import contextmanager
 import hashlib
 import json
 from pathlib import Path
@@ -16,6 +17,76 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def checkpoint_input_files(directory: Path) -> dict[str, Path]:
+    """Select model inputs relative to the mirror, not its absolute ancestors."""
+    root = Path(directory)
+    files = {}
+    for path in root.rglob("*"):
+        relative = path.relative_to(root)
+        if relative.parts[:2] == (".cache", "huggingface"):
+            continue  # snapshot_download bookkeeping, never a model input
+        if path.is_file() and path.name != "provenance.json" and (
+            path.suffix in {".json", ".safetensors"}
+            or path.name in {"pytorch_model.bin", "merges.txt", "vocab.txt"}
+        ):
+            files[relative.as_posix()] = path
+    return files
+
+
+@contextmanager
+def managed_stream(dataset):
+    """Close a streaming generator even when its ordered prefix is sufficient."""
+    iterator = iter(dataset)
+    try:
+        yield iterator
+    finally:
+        close = getattr(iterator, "close", None)
+        if close is not None:
+            close()
+
+
+def iter_parquet_file(handle, batch_size: int = 8):
+    """Strictly synchronous Arrow reads, including CPU column decoding.
+
+    Arrow #50482 documents Python-file threaded shutdown hangs. Disabling
+    pre_buffer alone does not disable the default CPU decode worker pool.
+    Both official switches are needed for finite prefix reads, and both
+    reader/batch iterator are explicitly closed before the file context ends.
+    """
+    from pyarrow.parquet import ParquetFile
+    parquet = ParquetFile(handle, pre_buffer=False)
+    try:
+        with managed_stream(parquet.iter_batches(batch_size=batch_size, use_threads=False)) as batches:
+            for batch in batches:
+                yield from batch.to_pylist()
+    finally:
+        parquet.close()
+
+
+def public_parquet_rows(public_id: str, revision: str, split: str,
+                        *, configuration: str | None = None, data_files=None,
+                        cache_dir: Path | None = None):
+    """Resolve ordered official shard paths at the pinned revision, then read.
+
+    DatasetBuilder is used only for the public config/split/shard resolution;
+    its threaded Arrow scanner is not started. Image structs remain raw and
+    are decoded by the existing visual-input loader without changing text.
+    """
+    import fsspec
+    from datasets import load_dataset_builder
+    builder = load_dataset_builder(public_id, configuration, revision=revision,
+                                   data_files=data_files, cache_dir=str(cache_dir) if cache_dir else None)
+    paths = builder.config.data_files.get(split, [])
+    if not paths or any(not str(path).endswith(".parquet") for path in paths):
+        raise ValueError("pinned public source must resolve the requested split to parquet shards")
+    for path in paths:
+        # The builder's DataFilesList preserves official shard order. fsspec
+        # supplies a bounded seekable range reader instead of downloading the
+        # complete multi-gigabyte dataset just to consume an ordered prefix.
+        with fsspec.open(str(path), "rb") as handle:
+            yield from iter_parquet_file(handle)
 
 
 def verify_offline_manifest(directory: Path, public_id: str, revision: str, kind: str) -> dict:
@@ -38,10 +109,7 @@ def verify_offline_manifest(directory: Path, public_id: str, revision: str, kind
         if "config.json" not in files or not any(
             key.endswith(".safetensors") or key.endswith("pytorch_model.bin") for key in files):
             raise ValueError("checkpoint provenance must cover config and actual weight files")
-        actual = {p.relative_to(directory).as_posix() for p in Path(directory).rglob("*") if p.is_file()
-                  and (p.name.endswith(".json") or p.name.endswith(".safetensors")
-                       or p.name in {"pytorch_model.bin", "merges.txt", "vocab.txt"})
-                  and p.name != "provenance.json"}
+        actual = set(checkpoint_input_files(directory))
         if not actual <= set(files):
             raise ValueError("checkpoint contains unhashed model/tokenizer/processor input files")
     return manifest
@@ -72,6 +140,12 @@ def read_jsonl_mirror(directory: Path, filename: str, public_id: str, revision: 
     rows = [json.loads(line) for line in (Path(directory) / filename).read_text().splitlines() if line.strip()]
     if manifest.get("rows") != len(rows):
         raise ValueError("offline mirror row count does not match provenance")
+    for row in rows:
+        if "source_row_sha256" in row:
+            original = {key: value for key, value in row.items() if key != "source_row_sha256"}
+            actual = hashlib.sha256(json.dumps(original, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+            if actual != row["source_row_sha256"]:
+                raise ValueError("offline mirror per-row SHA256 mismatch")
     return rows, manifest
 
 

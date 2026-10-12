@@ -95,7 +95,7 @@ def decode_image(value: Any):
 
 
 def load_woven(dataset_dir: Path, maximum: int = 96):
-    from datasets import load_dataset
+    from auto_research.oct12_public_sources import managed_stream, public_parquet_rows
     if maximum < 5:
         raise ValueError("maximum must allow a grouped mini-suite")
     if (Path(dataset_dir) / "woven.jsonl").exists():
@@ -105,16 +105,16 @@ def load_woven(dataset_dir: Path, maximum: int = 96):
             row["images"] = [decode_image({"path": str(verified_image_path(x, dataset_dir, manifest))}) for x in row["images"]]
             result.append(row)
         return result
-    dataset = load_dataset("MLL-Lab/WOVEN", revision=WOVEN_REVISION,
-                           data_files="train/questions-*.parquet", split="train",
-                           streaming=True, cache_dir=str(dataset_dir))
+    dataset = public_parquet_rows("MLL-Lab/WOVEN", WOVEN_REVISION, "train",
+                                  data_files="train/questions-*.parquet", cache_dir=dataset_dir)
     rows = []
-    for row in dataset:
-        row = dict(row)
-        row["images"] = [decode_image(x) for x in row["images"]]
-        rows.append(row)
-        if len(rows) >= maximum:
-            break
+    with managed_stream(dataset) as iterator:
+        for row in iterator:
+            row = dict(row)
+            row["images"] = [decode_image(x) for x in row["images"]]
+            rows.append(row)
+            if len(rows) >= maximum:
+                break
     return rows
 
 
@@ -124,18 +124,18 @@ def load_coco(dataset_dir: Path, maximum: int = 80):
         for row in rows[:maximum]:
             row["image"] = decode_image({"path": str(verified_image_path(row["image"], dataset_dir, manifest))})
         return rows[:maximum]
-    from datasets import load_dataset
-    dataset = load_dataset(COCO_DATASET, revision=COCO_REVISION, split="val",
-                           streaming=True, cache_dir=str(dataset_dir))
+    from auto_research.oct12_public_sources import managed_stream, public_parquet_rows
+    dataset = public_parquet_rows(COCO_DATASET, COCO_REVISION, "val", cache_dir=dataset_dir)
     rows = []
-    for row in dataset:
-        references = row["answer"]
-        if not isinstance(references, list) or not references:
-            raise ValueError("caption row must carry public reference captions")
-        rows.append({"id": str(row["id"]), "image": decode_image(row["image"]),
-                     "caption": references[0], "references": references})
-        if len(rows) >= maximum:
-            break
+    with managed_stream(dataset) as iterator:
+        for row in iterator:
+            references = row["answer"]
+            if not isinstance(references, list) or not references:
+                raise ValueError("caption row must carry public reference captions")
+            rows.append({"id": str(row["id"]), "image": decode_image(row["image"]),
+                         "caption": references[0], "references": references})
+            if len(rows) >= maximum:
+                break
     return rows
 
 
