@@ -725,6 +725,65 @@
     },
     {
       "domain": "agent-research",
+      "key": "evo2",
+      "title": "Evo2: Evolving the Evolver through Weight-Harness Co-Evolution",
+      "paper_url": "https://arxiv.org/abs/2610.13025",
+      "detail_path": "reproductions/2610.13025-evo2/README.md",
+      "topic": [
+        "agent-evolution",
+        "weight-harness-co-evolution",
+        "dual-role-grpo"
+      ],
+      "first_author": "Chejian Xu",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign / Google DeepMind",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "evo2",
+        "arxiv_id": "2610.13025",
+        "title": "Evo2: Evolving the Evolver through Weight-Harness Co-Evolution",
+        "paper_url": "https://arxiv.org/abs/2610.13025",
+        "track": "llm",
+        "organization": "Google DeepMind / University of Illinois Urbana-Champaign",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "agent-evolution",
+          "weight-harness-co-evolution",
+          "dual-role-grpo"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/evo2",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "public-circle-packing-26"
+        ],
+        "baseline": "固定 executor 与初始可执行 harness",
+        "metrics": [
+          "best_validation_score",
+          "nodes",
+          "executor_weights_unchanged"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-evo2-a100.json",
+        "online_evidence": [],
+        "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据",
+        "evolve_operators": []
+      },
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-evo2-a100.json"
+    },
+    {
+      "domain": "agent-research",
       "key": "evoalloc",
       "title": "EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution",
       "paper_url": "https://arxiv.org/abs/2610.12086",
@@ -1168,6 +1227,64 @@
       "priority": "P1"
     },
     {
+      "domain": "agent-research",
+      "key": "janus",
+      "title": "Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models",
+      "paper_url": "https://arxiv.org/abs/2610.13194",
+      "detail_path": "reproductions/2610.13194-janus/README.md",
+      "topic": [
+        "autonomous-research",
+        "world-model",
+        "evolving-skills"
+      ],
+      "first_author": "Mengdi Liu",
+      "first_author_affiliation": "Institute of Computing Technology, Chinese Academy of Sciences",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "janus",
+        "arxiv_id": "2610.13194",
+        "title": "Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models",
+        "paper_url": "https://arxiv.org/abs/2610.13194",
+        "track": "llm",
+        "organization": "Institute of Computing Technology / University of Chinese Academy of Sciences",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "autonomous-research",
+          "world-model",
+          "evolving-skills"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/janus",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "public-circle-packing-26"
+        ],
+        "baseline": "初始几何可行程序；原文对照完整自主研究框架",
+        "metrics": [
+          "graph",
+          "audit"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-janus-a100.json",
+        "online_evidence": [],
+        "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据",
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-janus-a100.json"
+    },
+    {
       "key": "jev-lookahead",
       "title": "Code Owns the Simulation, Jev Owns the Evaluation",
       "paper_url": "https://arxiv.org/abs/2610.01834",
@@ -1201,6 +1318,64 @@
       "code": null,
       "adapter": "jev-spawn",
       "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "jev-workflow",
+      "title": "When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows",
+      "paper_url": "https://arxiv.org/abs/2610.13092",
+      "detail_path": "reproductions/2610.13092-jev-workflow/README.md",
+      "topic": [
+        "agent-evaluation",
+        "delivered-outcome",
+        "latency-cost-recovery"
+      ],
+      "first_author": "Yuchen Ling",
+      "first_author_affiliation": "Nanjing University",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "jev-workflow",
+        "arxiv_id": "2610.13092",
+        "title": "When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows",
+        "paper_url": "https://arxiv.org/abs/2610.13092",
+        "track": "llm",
+        "organization": "Nanjing University / Technical University of Munich",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "agent-evaluation",
+          "delivered-outcome",
+          "latency-cost-recovery"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/jev_workflow",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "actual paired workflow execution JSONL"
+        ],
+        "baseline": "同task/run的原配置与替换decision配置",
+        "metrics": [
+          "paired_executions",
+          "matched_success_pairs",
+          "configurations"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [],
+        "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据",
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": false,
+      "gpu_validation_artifact": null
     },
     {
       "domain": "agent-research",
@@ -1885,6 +2060,65 @@
     },
     {
       "domain": "agent-research",
+      "key": "rated",
+      "title": "RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics",
+      "paper_url": "https://arxiv.org/abs/2610.13889",
+      "detail_path": "reproductions/2610.13889-rated/README.md",
+      "topic": [
+        "tool-retrieval",
+        "execution-reliability",
+        "contextual-bandit"
+      ],
+      "first_author": "Weiliang Chen",
+      "first_author_affiliation": "Texas Tech University",
+      "published": "2026-10-09",
+      "code": "https://github.com/Elliotes/EcoAgent",
+      "adapter": {
+        "adapter_key": "rated",
+        "arxiv_id": "2610.13889",
+        "title": "RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics",
+        "paper_url": "https://arxiv.org/abs/2610.13889",
+        "track": "llm",
+        "organization": "Texas Tech University",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/Elliotes/EcoAgent",
+        "topics": [
+          "tool-retrieval",
+          "execution-reliability",
+          "contextual-bandit"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rated",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "EcoAgent-compatible positive pairs and authorized local tool bindings"
+        ],
+        "baseline": "冻结语义dual encoder；线上反馈重排实验组",
+        "metrics": [
+          "steps",
+          "execution_success_rate",
+          "external_semantic_recall_at_1"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-rated-a100.json",
+        "online_evidence": [],
+        "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据",
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-rated-a100.json"
+    },
+    {
+      "domain": "agent-research",
       "key": "react",
       "title": "ReAct",
       "paper_url": "https://arxiv.org/abs/2210.03629",
@@ -1992,6 +2226,64 @@
       "published": "2023-05-29",
       "code": "https://github.com/billxbf/ReWOO",
       "adapter": "rewoo"
+    },
+    {
+      "domain": "agent-research",
+      "key": "rsi-anything",
+      "title": "RSI-Anything: Unlocking Recursive Self-Improvement with World Models",
+      "paper_url": "https://arxiv.org/abs/2610.13912",
+      "detail_path": "reproductions/2610.13912-rsi-anything/README.md",
+      "topic": [
+        "recursive-self-improvement",
+        "world-model",
+        "compatibility-retention"
+      ],
+      "first_author": "Taoyong Cui",
+      "first_author_affiliation": "PhAI Labs / The Chinese University of Hong Kong",
+      "published": "2026-10-09",
+      "code": "https://github.com/Gen-Verse/RSI-Anything",
+      "adapter": {
+        "adapter_key": "rsi-anything",
+        "arxiv_id": "2610.13912",
+        "title": "RSI-Anything: Unlocking Recursive Self-Improvement with World Models",
+        "paper_url": "https://arxiv.org/abs/2610.13912",
+        "track": "llm",
+        "organization": "PhAI Labs / The Chinese University of Hong Kong 等",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/Gen-Verse/RSI-Anything",
+        "topics": [
+          "recursive-self-improvement",
+          "world-model",
+          "compatibility-retention"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/rsi_anything",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "public-circle-packing-26"
+        ],
+        "baseline": "初始 policy workflow 与初始 predictor 配对",
+        "metrics": [
+          "rounds",
+          "feedback_records"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-rsi-anything-a100.json",
+        "online_evidence": [],
+        "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据",
+        "evolve_operators": []
+      },
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-rsi-anything-a100.json"
     },
     {
       "domain": "agent-research",
@@ -2453,6 +2745,64 @@
       "code": null,
       "adapter": "t1-terminal-rl",
       "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "t2mem",
+      "title": "Test-Time Memory Construction",
+      "paper_url": "https://arxiv.org/abs/2610.13348",
+      "detail_path": "reproductions/2610.13348-t2mem/README.md",
+      "topic": [
+        "long-term-memory",
+        "test-time-construction",
+        "adaptive-retrieval"
+      ],
+      "first_author": "Zijun Wang",
+      "first_author_affiliation": "Northeastern University",
+      "published": "2026-10-09",
+      "code": "https://github.com/OpenBMB/T2Mem",
+      "adapter": {
+        "adapter_key": "t2mem",
+        "arxiv_id": "2610.13348",
+        "title": "Test-Time Memory Construction",
+        "paper_url": "https://arxiv.org/abs/2610.13348",
+        "track": "llm",
+        "organization": "Northeastern University / Tsinghua University / Alibaba Group",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/OpenBMB/T2Mem",
+        "topics": [
+          "long-term-memory",
+          "test-time-construction",
+          "adaptive-retrieval"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/t2mem",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "LoCoMo / LongMemEval normalized JSONL"
+        ],
+        "baseline": "原文 Naive RAG/structured offline memory；本地未做稳定多seed对照",
+        "metrics": [
+          "queries",
+          "outputs"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "显式checkpoint、少量轮次；L1机制诊断不宣称稳定能力提升",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-t2mem-a100.json",
+        "online_evidence": [],
+        "selection_exception": "用户明确指定的 2026-10-09 agent 研究；非生产线上 A/B 证据",
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-t2mem-a100.json"
     },
     {
       "domain": "agent-research",
@@ -3985,6 +4335,64 @@
       "priority": "P1",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/dqwen35-a100-20260919.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "dualquant",
+      "title": "DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs",
+      "paper_url": "https://arxiv.org/abs/2610.13767",
+      "detail_path": "reproductions/2610.13767-dualquant/README.md",
+      "topic": [
+        "quantization",
+        "calibration-free",
+        "weight-activation-quantization"
+      ],
+      "first_author": "Mahsa Salmani",
+      "first_author_affiliation": "d-Matrix",
+      "published": "2026-10-09",
+      "code": "https://github.com/MahsaMoonlike/dualquant",
+      "adapter": {
+        "adapter_key": "dualquant",
+        "arxiv_id": "2610.13767",
+        "title": "DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs",
+        "paper_url": "https://arxiv.org/abs/2610.13767",
+        "track": "llm",
+        "organization": "d-Matrix",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/MahsaMoonlike/dualquant",
+        "topics": [
+          "quantization",
+          "calibration-free",
+          "weight-activation-quantization"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/dualquant",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "WikiText-2 raw, official validation/test"
+        ],
+        "baseline": "same public checkpoint with single-scale INT4 W+A reference arithmetic",
+        "metrics": [
+          "baseline.test_nll",
+          "method.test_nll"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "L1 partial checkpoint diagnostic: SmolLM2-135M, four decoder nn.Linear modules, INT4/MXINT4 software simulation, BCD15",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-dualquant-a100.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-dualquant-a100.json"
     },
     {
       "domain": "foundation-models",
@@ -5586,6 +5994,64 @@
     },
     {
       "domain": "foundation-models",
+      "key": "msar",
+      "title": "Multi-Stream Attention Residuals",
+      "paper_url": "https://arxiv.org/abs/2610.13630",
+      "detail_path": "reproductions/2610.13630-msar/README.md",
+      "topic": [
+        "llm-architecture",
+        "depth-attention",
+        "residual-mixing"
+      ],
+      "first_author": "Xiaohan Qin",
+      "first_author_affiliation": "Shanghai Jiao Tong University",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "msar",
+        "arxiv_id": "2610.13630",
+        "title": "Multi-Stream Attention Residuals",
+        "paper_url": "https://arxiv.org/abs/2610.13630",
+        "track": "llm",
+        "organization": "Shanghai Jiao Tong University / Shanghai Innovation Institute / Xiaohongshu / Peking University",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "llm-architecture",
+          "depth-attention",
+          "residual-mixing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/msar",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "WikiText-2 raw, official splits, UTF-8 bytes"
+        ],
+        "baseline": "matched real dense causal Transformer trained for the same steps",
+        "metrics": [
+          "baseline.test_byte_nll",
+          "method.test_byte_nll"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "L1 diagnostic: width64 layers2, 40 fixed steps/variant, 32768 train bytes, 4096 eval bytes/split",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-msar-a100.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-msar-a100.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "muon",
       "title": "Muon is Scalable for LLM Training",
       "paper_url": "https://arxiv.org/abs/2502.16982",
@@ -6015,6 +6481,65 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "orthros",
+      "title": "Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers",
+      "paper_url": "https://arxiv.org/abs/2610.13735",
+      "detail_path": "reproductions/2610.13735-orthros/README.md",
+      "topic": [
+        "llm-architecture",
+        "efficient-attention",
+        "long-context"
+      ],
+      "first_author": "Yuhong Chou",
+      "first_author_affiliation": "The Hong Kong Polytechnic University",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "orthros",
+        "arxiv_id": "2610.13735",
+        "title": "Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers",
+        "paper_url": "https://arxiv.org/abs/2610.13735",
+        "track": "llm",
+        "organization": "The Hong Kong Polytechnic University / University of Chinese Academy of Sciences / University of Sydney",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "llm-architecture",
+          "efficient-attention",
+          "long-context"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/orthros",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "WikiText-2 raw, official splits, UTF-8 bytes"
+        ],
+        "baseline": "same pretrained tiny Transformer continued for the same adaptation steps",
+        "metrics": [
+          "baseline.test_byte_nll",
+          "method.test_byte_nll",
+          "stages.cache.batch_vs_cached_max_abs_error"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "L1 diagnostic: tiny-LM pretrain10 steps, convert, 40 adaptation steps, width64 layers2 window16",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-orthros-a100.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-orthros-a100.json"
     },
     {
       "domain": "foundation-models",
@@ -7811,6 +8336,66 @@
     },
     {
       "domain": "multimodal-models",
+      "key": "umrm",
+      "title": "Unsupervised Multimodal Reward Modeling",
+      "paper_url": "https://arxiv.org/abs/2610.12707",
+      "detail_path": "reproductions/2610.12707-umrm/README.md",
+      "topic": [
+        "multimodal-foundation-model",
+        "reward-modeling",
+        "frozen-layer-probe",
+        "verifier-bootstrap"
+      ],
+      "first_author": "Yueying Li",
+      "first_author_affiliation": "Massachusetts Institute of Technology",
+      "published": "2026-10-08",
+      "code": null,
+      "adapter": {
+        "adapter_key": "umrm",
+        "arxiv_id": "2610.12707",
+        "title": "Unsupervised Multimodal Reward Modeling",
+        "paper_url": "https://arxiv.org/abs/2610.12707",
+        "track": "llm",
+        "organization": "Massachusetts Institute of Technology / Cornell University / Scale AI / Harvard University",
+        "published": "2026-10-08",
+        "code_url": null,
+        "topics": [
+          "multimodal-foundation-model",
+          "reward-modeling",
+          "frozen-layer-probe",
+          "verifier-bootstrap"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/umrm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "COCO-Caption2017 public val, disjoint image-id local diagnostic split"
+        ],
+        "baseline": "zero bias-free head (ties score half); random own-candidate selection for verifier utility",
+        "metrics": [
+          "baseline.pair_accuracy",
+          "method.pair_accuracy"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "L1 diagnostic: SmolVLM-256M frozen, max80 images, 3 intermediate layers, head200 steps, own-policy Best-of4/verifier bootstrap8 prompts",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-umrm-a100.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-umrm-a100.json"
+    },
+    {
+      "domain": "multimodal-models",
       "key": "vcola",
       "title": "V-CoLA: Vision Token Compression with Linear Attention",
       "paper_url": "https://arxiv.org/abs/2610.11251",
@@ -7865,6 +8450,64 @@
       "priority": "P1",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/vimod-a100-20261010.json"
+    },
+    {
+      "domain": "multimodal-models",
+      "key": "woven",
+      "title": "WOVEN: Weaving Visual World Modeling into Multimodal LLMs",
+      "paper_url": "https://arxiv.org/abs/2610.12417",
+      "detail_path": "reproductions/2610.12417-woven/README.md",
+      "topic": [
+        "multimodal-foundation-model",
+        "visual-transition-reasoning",
+        "world-model-supervision"
+      ],
+      "first_author": "Zheyu Fan",
+      "first_author_affiliation": "Northwestern University",
+      "published": "2026-10-08",
+      "code": "https://github.com/mll-lab-nu/WOVEN",
+      "adapter": {
+        "adapter_key": "woven",
+        "arxiv_id": "2610.12417",
+        "title": "WOVEN: Weaving Visual World Modeling into Multimodal LLMs",
+        "paper_url": "https://arxiv.org/abs/2610.12417",
+        "track": "llm",
+        "organization": "Northwestern University / Carnegie Mellon University / UNC Chapel Hill / Amazon",
+        "published": "2026-10-08",
+        "code_url": "https://github.com/mll-lab-nu/WOVEN",
+        "topics": [
+          "multimodal-foundation-model",
+          "visual-transition-reasoning",
+          "world-model-supervision"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/woven",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "MLL-Lab/WOVEN published train split, source_id-grouped diagnostic split"
+        ],
+        "baseline": "same frozen SmolVLM public checkpoint with zero LoRA residual",
+        "metrics": [
+          "baseline.accuracy",
+          "method.accuracy"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "L1 SFT diagnostic: SmolVLM-256M, max96 train-source questions, 24 LoRA steps/rank16; no GRPO/transfer claim",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-woven-a100.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-woven-a100.json"
     },
     {
       "domain": "post-training",
@@ -7963,6 +8606,124 @@
     },
     {
       "domain": "post-training",
+      "key": "boundary-evo",
+      "title": "BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.13285",
+      "detail_path": "reproductions/2610.13285-boundary-evo/README.md",
+      "topic": [
+        "Capability boundary",
+        "Data-model co-evolution",
+        "Reasoning distillation"
+      ],
+      "first_author": "Jiaming Su",
+      "first_author_affiliation": "Shanghai Artificial Intelligence Laboratory",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "boundary-evo",
+        "arxiv_id": "2610.13285",
+        "title": "BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation",
+        "paper_url": "https://arxiv.org/abs/2610.13285",
+        "track": "post-training",
+        "organization": "Shanghai Artificial Intelligence Laboratory / Nanjing University / Tongji University / The Chinese University of Hong Kong",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Capability boundary",
+          "Data-model co-evolution",
+          "Reasoning distillation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/boundary_evo",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "Public numerical-reasoning train-only holdout"
+        ],
+        "baseline": "未完成同预算能力对照；本地只报告真实 checkpoint runtime 诊断",
+        "metrics": [
+          "metrics.adapter_parameter_delta_l2",
+          "metrics.validation_exact_match"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "bounded checkpoint runtime; explicit pinned configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/boundary-evo-a100-20261012.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed",
+        "evolve_operators": []
+      },
+      "code_status": "not released / not found; paper promises future code and data",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/boundary-evo-a100-20261012.json"
+    },
+    {
+      "domain": "post-training",
+      "key": "branch-opd",
+      "title": "Branching On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.13481",
+      "detail_path": "reproductions/2610.13481-branch-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "Student-policy branching",
+        "Protocol-boundary repair"
+      ],
+      "first_author": "Dongyang Chen",
+      "first_author_affiliation": "Tsinghua University / SenseTime Research",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "branch-opd",
+        "arxiv_id": "2610.13481",
+        "title": "Branching On-Policy Distillation",
+        "paper_url": "https://arxiv.org/abs/2610.13481",
+        "track": "post-training",
+        "organization": "Tsinghua University / Peking University / SenseTime Research",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "On-policy distillation",
+          "Student-policy branching",
+          "Protocol-boundary repair"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/branch_opd",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "Public numerical-reasoning train-only holdout"
+        ],
+        "baseline": "未完成同预算能力对照；本地只报告真实 checkpoint runtime 诊断",
+        "metrics": [
+          "metrics.adapter_parameter_delta_l2",
+          "metrics.validation_exact_match"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "bounded checkpoint runtime; explicit pinned configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/branch-opd-a100-20261012.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed",
+        "evolve_operators": []
+      },
+      "code_status": "not released implementation; upstream currently LICENSE/README only",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/branch-opd-a100-20261012.json"
+    },
+    {
+      "domain": "post-training",
       "key": "c2-dpo",
       "title": "Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization",
       "paper_url": "https://arxiv.org/abs/2608.12158",
@@ -8010,6 +8771,65 @@
       "code": null,
       "adapter": "carm",
       "priority": "P1"
+    },
+    {
+      "domain": "post-training",
+      "key": "cast-opd",
+      "title": "CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.13257",
+      "detail_path": "reproductions/2610.13257-cast-opd/README.md",
+      "topic": [
+        "Cross-tokenizer distillation",
+        "Token credit assignment",
+        "Selective KL anchoring"
+      ],
+      "first_author": "Jingru Yang",
+      "first_author_affiliation": "Taobao & Tmall Group of Alibaba",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "cast-opd",
+        "arxiv_id": "2610.13257",
+        "title": "CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation",
+        "paper_url": "https://arxiv.org/abs/2610.13257",
+        "track": "post-training",
+        "organization": "Taobao & Tmall Group of Alibaba / Singapore Management University",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Cross-tokenizer distillation",
+          "Token credit assignment",
+          "Selective KL anchoring"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/cast_opd",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "Public numerical-reasoning train-only holdout"
+        ],
+        "baseline": "未完成同预算能力对照；本地只报告真实 checkpoint runtime 诊断",
+        "metrics": [
+          "metrics.adapter_parameter_delta_l2",
+          "metrics.validation_exact_match"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "bounded checkpoint runtime; explicit pinned configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/cast-opd-a100-20261012.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed",
+        "evolve_operators": []
+      },
+      "code_status": "not released / not found",
+      "priority": "P0",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/cast-opd-a100-20261012.json"
     },
     {
       "domain": "post-training",
@@ -9901,6 +10721,65 @@
       "published": "2026-08-27",
       "code": "https://github.com/Di-viner/LLM-Fusion",
       "adapter": "rlvr-fusion"
+    },
+    {
+      "domain": "post-training",
+      "key": "road-mopd",
+      "title": "Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.13521",
+      "detail_path": "reproductions/2610.13521-road-mopd/README.md",
+      "topic": [
+        "Multi-teacher distillation",
+        "Gradient projection",
+        "Cross-domain guarding"
+      ],
+      "first_author": "Shi-Yu Tian",
+      "first_author_affiliation": "Nanjing University / JD.com",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "road-mopd",
+        "arxiv_id": "2610.13521",
+        "title": "Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation",
+        "paper_url": "https://arxiv.org/abs/2610.13521",
+        "track": "post-training",
+        "organization": "Nanjing University / JD.com",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Multi-teacher distillation",
+          "Gradient projection",
+          "Cross-domain guarding"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/road_mopd",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "Public numerical-reasoning train-only holdout"
+        ],
+        "baseline": "未完成同预算能力对照；本地只报告真实 checkpoint runtime 诊断",
+        "metrics": [
+          "metrics.adapter_parameter_delta_l2",
+          "metrics.validation_exact_match"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "bounded checkpoint runtime; explicit pinned configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/road-mopd-a100-20261012.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed",
+        "evolve_operators": []
+      },
+      "code_status": "not released / not found",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/road-mopd-a100-20261012.json"
     },
     {
       "domain": "post-training",
@@ -16545,6 +17424,77 @@
             "source_url": "https://arxiv.org/html/2609.32839",
             "source_location": "Section 4, online A/B paragraph",
             "retrieved_at": "2026-09-29"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "forte",
+      "title": "FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems",
+      "paper_url": "https://arxiv.org/abs/2610.13806",
+      "detail_path": "reproductions/2610.13806-forte/README.md",
+      "topic": [
+        "features",
+        "efficiency",
+        "feature-deprecation"
+      ],
+      "first_author": "Vishnu Arun",
+      "first_author_affiliation": "Pinterest",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "forte",
+        "arxiv_id": "2610.13806",
+        "title": "FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems",
+        "paper_url": "https://arxiv.org/abs/2610.13806",
+        "track": "recommendation",
+        "organization": "Pinterest",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "features",
+          "efficiency",
+          "feature-deprecation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/forte",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "movielens-100k chronological 80/10/10"
+        ],
+        "baseline": "matched multi-head incumbent with all public features",
+        "metrics": [
+          "test.head0.roc_auc",
+          "test.head0.pr_auc",
+          "test.head1.roc_auc",
+          "test.head1.pr_auc"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "6 epochs per incumbent and each of 3 nested ablation arms",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct12-forte-a100.json",
+        "online_evidence": [
+          {
+            "product": "Pinterest Search Relevance",
+            "metric": "page wait time",
+            "lift_percent": -0.1696,
+            "traffic": "live search traffic; US and non-US segments; 48-feature treatment",
+            "source_url": "https://arxiv.org/html/2610.13806v1",
+            "source_location": "Section 7.1, Table 1 and Results",
+            "experiment_duration": "not stated for search arm",
+            "significance": "p=0.0012; 59-feature arm rejected by secondary guardrail",
+            "retrieved_at": "2026-10-12"
           }
         ],
         "selection_exception": null,

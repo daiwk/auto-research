@@ -5,11 +5,11 @@
 ## 论文信息
 
 | 项目 | 内容 |
-|---|---|
+| --- | --- |
 | 论文链接 | [arXiv 2608.27413](https://arxiv.org/abs/2608.27413) |
-| 公司/机构 | AI VK（第一作者第一署名单位） |
+| 公司/机构 | AI VK |
 | 首次公开日期 | 2026-08-27（arXiv v1） |
-| 原文开源代码 | 是：[makut/VK-GNN](https://github.com/makut/VK-GNN) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/makut/VK-GNN) |
 | Adapter | `friend-gnn` |
 | 本地复现代码 | [`src/auto_research/reproductions/friend_gnn/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/friend_gnn/) |
 

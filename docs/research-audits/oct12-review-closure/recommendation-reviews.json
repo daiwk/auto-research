@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-12",
+  "scope": "12 new IDs assigned recommendation first; cross-track transfers retained",
+  "abstracts_reviewed": 12,
+  "bounded_fulltext_reviews": 10,
+  "reviews": [
+    {
+      "id": "2610.09906",
+      "title": "Constrained-Action AI Remediation for SIEM/XDR via a NeMo-Guardrails Proxy",
+      "published": "2026-10-07T12:00:51Z",
+      "track": "recommendation",
+      "decision": "reviewed_deferred",
+      "priority": "P1",
+      "reason": "SIEM/XDR闭集intent与参数验证+现成NeMo proxy的安全评测；§VI 200攻击/1000良性及真实红队，§VII称OT仅架构适配非实测部署。与Agent安全相关，需公开corpus/完整代理边界复核和隔离沙箱，转下一批；不授权真实端点remediation。",
+      "locations": [
+        "§III–§V",
+        "§VI Preliminary Evaluation",
+        "§VII Limitations"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.09906v1",
+      "fulltext_sha256": "4c8de66b15a586c77fe9595cd945eff9aedea5c673cf21ae6e370322a21baba2",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.09906v1",
+          "result": "retrieved",
+          "sha256": "4c8de66b15a586c77fe9595cd945eff9aedea5c673cf21ae6e370322a21baba2"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.13504",
+      "title": "Beyond Temporal Proximity: Explanatory World Models for Credit Assignment in Reinforcement Learning",
+      "published": "2026-10-09T12:30:14Z",
+      "track": "recommendation",
+      "decision": "reviewed_deferred",
+      "priority": "P1",
+      "reason": "Spotify EWM用解释图递归重新分配延迟奖励并保留未折扣episode return；Crafter/WordCraft可作后续通用RL候选。§5.2明确hidden termination rule模拟用户，非线上生产A/B；§5.3是held-out日志离线replay。工业收录门槛未过，通用后训练部分转下一批，非这16项实现。",
+      "locations": [
+        "§3 Explanatory World Models",
+        "§4.1–4.2",
+        "§5.1–5.3"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.13504v1",
+      "fulltext_sha256": "7afbcadb10735c1f26375b49759803de18826164027fab0e91b16d2085041258",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.13504v1",
+          "result": "retrieved",
+          "sha256": "7afbcadb10735c1f26375b49759803de18826164027fab0e91b16d2085041258"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.13806",
+      "title": "FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems",
+      "published": "2026-10-09T16:18:39Z",
+      "track": "recommendation",
+      "decision": "accepted",
+      "priority": "P0",
+      "reason": "Pinterest 原文§4各阶段与§7.1/7.2生产A/B逐项核对；48-feature上线、59-feature护栏失败；已实现的公开离线核心机制与生产结果分开。",
+      "locations": [
+        "§3 Eq1",
+        "§4.1–4.5",
+        "§5.1",
+        "§6.2",
+        "§7.1 Table1",
+        "§7.2 Table2"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.13806v1",
+      "fulltext_sha256": "4e30ba8df33f09a72fa542cbfe96a67ba1d900336c150b228eada2ecb6dcce89",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.13806v1",
+          "result": "retrieved",
+          "sha256": "4e30ba8df33f09a72fa542cbfe96a67ba1d900336c150b228eada2ecb6dcce89"
+        }
+      ],
+      "implementation_scope": "accepted 16-item batch only"
+    },
+    {
+      "id": "2610.13398",
+      "title": "Towards the Roof of the World: NLP Progress in Tibetan Languages",
+      "published": "2026-10-09T11:11:10Z",
+      "track": "recommendation",
+      "decision": "rejected_or_out_of_scope",
+      "priority": "P2",
+      "reason": "藏语NLP系统文献计量综述140篇，不是新可执行训练/Agent算法或独立新benchmark。本次读完整摘要定界，不假称方法全文已审。",
+      "locations": [],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": false,
+      "review_level": "abstract_scope_triage",
+      "source_url": "https://arxiv.org/html/2610.13398v1",
+      "fulltext_sha256": "82ae30a24931990d2cc495c767a9cc28c99fd268881125f3c223b0e12f99815d",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.13398v1",
+          "result": "retrieved",
+          "sha256": "82ae30a24931990d2cc495c767a9cc28c99fd268881125f3c223b0e12f99815d"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.13057",
+      "title": "CoBe: A Benchmark For Conversational Counterfactual Text Editing",
+      "published": "2026-10-09T06:11:12Z",
+      "track": "recommendation",
+      "decision": "reviewed_deferred",
+      "priority": "P1",
+      "reason": "Columbia CoBe 2000题counterfactual text editing与保持因果无关事实的scorer；§3构造与§4 nine-model评测可作LLM benchmark候选，须核公开样本与评分器可获取性后接入。没有新工业搜广推算法，留下一批基础模型评测。",
+      "locations": [
+        "§3 CoBe Dataset",
+        "§4 Results",
+        "§5"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.13057v1",
+      "fulltext_sha256": "b1d6cf3e0ecc0d2733bd27ed9504c7fe7283f00e71ffd445dc395c2f2c36d7bd",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.13057v1",
+          "result": "retrieved",
+          "sha256": "b1d6cf3e0ecc0d2733bd27ed9504c7fe7283f00e71ffd445dc395c2f2c36d7bd"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.11501",
+      "title": "Beyond Sequences: Distilling Structured Decision Memory for LLM Recommendation",
+      "published": "2026-10-08T08:40:35Z",
+      "track": "recommendation",
+      "decision": "rejected_or_out_of_scope",
+      "priority": "P2",
+      "reason": "阿里MARI的PHDD/SDM记忆与检索LLM结构相关，但§V是私有MBR/PHDD离线NIP/DCP评测；正文online指推理/部署范式，没有本方法量化生产A/B或经批准的全流量证据。不能因工业署名或online inference词接受。",
+      "locations": [
+        "§IV-A–IV-D",
+        "§V Experiments Setup",
+        "§VI Evaluation"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.11501v1",
+      "fulltext_sha256": "306f5a312384b60c2a0182b79c986c1935ddafe1bcdeeb3b1e190c861b19bda2",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.11501v1",
+          "result": "retrieved",
+          "sha256": "306f5a312384b60c2a0182b79c986c1935ddafe1bcdeeb3b1e190c861b19bda2"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.10920",
+      "title": "Language Models for Page-Level Layout Decisions in E-commerce Search",
+      "published": "2026-10-07T21:19:47Z",
+      "track": "recommendation",
+      "decision": "rejected_or_out_of_scope",
+      "priority": "P2",
+      "reason": "Walmart页面布局工作实际研究offline LM evaluator；A/B出现于动机/评价成本和引用前作，不是该方法新生产实验。按正文完整评测范围拒绝工业门槛，非摘要关键词过滤。",
+      "locations": [
+        "§1 Introduction",
+        "§3–§5 offline evaluation"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.10920v1",
+      "fulltext_sha256": "99d2e214224503992140a7ccab4187a879b216fc3c502b086b5041f5f704930e",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.10920v1",
+          "result": "retrieved",
+          "sha256": "99d2e214224503992140a7ccab4187a879b216fc3c502b086b5041f5f704930e"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.10639",
+      "title": "Visible Reasoning Is Not a Universal Optimizer: Persona- and Thinking-Dependent Effects in Analytics Code Generation",
+      "published": "2026-10-07T14:27:58Z",
+      "track": "recommendation",
+      "decision": "reviewed_deferred",
+      "priority": "P1",
+      "reason": "Optum在BIRD-Persona上的matched SQL/pandas、persona、CoT和内部思考配置比较；§3预注册304问题、§4主family252tests无BH发现，结论不支持通用CoT收益。可纳入执行型评测参考，非新推荐模型、非这16项实现。",
+      "locations": [
+        "§3.1–3.3",
+        "§4.1–4.4",
+        "§7 Limitations"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.10639v1",
+      "fulltext_sha256": "38e39c02e1a5ffee3c67f1a49b4902c08917291425076a418daf97152e243f0f",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.10639v1",
+          "result": "retrieved",
+          "sha256": "38e39c02e1a5ffee3c67f1a49b4902c08917291425076a418daf97152e243f0f"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.10124",
+      "title": "Training with Missed Targets in Generative Recommendation: Separating Supervision from Probability Competition",
+      "published": "2026-10-07T14:07:06Z",
+      "track": "recommendation",
+      "decision": "reviewed_deferred",
+      "priority": "P1",
+      "reason": "独立作者/浙大对missed-target reranker loss做三组匹配分解，OneRec/Amazon公开离线结果及development-set选损失可作生成排序方法学参考。没有工业线上证据，不收为工业复现；跨领域loss研究留后续独立例外/通用训练审查，不在本批16项。",
+      "locations": [
+        "§3 matched losses",
+        "§4–§5 experiments",
+        "§6 Discussion"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.10124v1",
+      "fulltext_sha256": "2719045f0faecb2628363a3025498c0225d22b3637f96a0d43dfd21efc135523",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.10124v1",
+          "result": "retrieved",
+          "sha256": "2719045f0faecb2628363a3025498c0225d22b3637f96a0d43dfd21efc135523"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.09070",
+      "title": "Covariate-dependent Joint Modeling of Multivariate Ordinal Preferences and Its Connections with Comparison Models",
+      "published": "2026-10-06T20:15:43Z",
+      "track": "recommendation",
+      "decision": "reviewed_deferred",
+      "priority": "P2",
+      "reason": "CR–MRF joint ordinal preference统计方法有MovieLens与合成MLE/MPLE对照，但§7明确LLM reward model只是future work。没有真正LLM/工业生产训练链路；保留统计参考，不伪装后训练算法已实现。",
+      "locations": [
+        "§3.4 likelihood estimation",
+        "§5 Numerical experiments",
+        "§7 Conclusions",
+        "Supp S.6"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.09070v1",
+      "fulltext_sha256": "34abdcd7f076570064aaf6302f7a705485ff3cf851639565eae908eddd61bff0",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.09070v1",
+          "result": "retrieved",
+          "sha256": "34abdcd7f076570064aaf6302f7a705485ff3cf851639565eae908eddd61bff0"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.10560",
+      "title": "Strategic Governance of AI Models in Earth Science",
+      "published": "2026-10-01T00:15:04Z",
+      "track": "recommendation",
+      "decision": "rejected_or_out_of_scope",
+      "priority": "P2",
+      "reason": "地球科学AI治理/物理可信评估优先事项的观点文章，非项目目标LLM/Agent训练算法；官方摘要明确研究治理优先项，按摘要范围排除，不冒称通读全文。",
+      "locations": [],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": false,
+      "review_level": "abstract_scope_triage",
+      "source_url": "https://arxiv.org/html/2610.10560v1",
+      "fulltext_sha256": null,
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.10560v1",
+          "result": "failed",
+          "error": "404 Client Error: Not Found for url: https://arxiv.org/html/2610.10560v1"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.10560v1",
+          "result": "failed",
+          "error": "404 Client Error: Not Found for url: https://arxiv.org/html/2610.10560v1"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    },
+    {
+      "id": "2610.10556",
+      "title": "LIFT: A Lifecycle-aware Interaction Factorization Transformer for Unified Retrieval and Ranking",
+      "published": "2026-09-29T05:50:33Z",
+      "track": "recommendation",
+      "decision": "rejected_or_out_of_scope",
+      "priority": "P2",
+      "reason": "LIFT拆Request/Item/Context/Action并做role-conditioned attention与Pre-LN bias；§4仅ML-20M/Taobao离线指标及消融。online serving的共享prefill描述不是实际量化生产A/B；v1日期9月29日，属于历史补发现。",
+      "locations": [
+        "§3.1–3.3",
+        "§4.1–4.4",
+        "§5"
+      ],
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "review_level": "bounded_methods_and_evaluation",
+      "source_url": "https://arxiv.org/html/2610.10556v1",
+      "fulltext_sha256": "82d3ba8a589a5261781f1df5bb6ce75979b602382b707bf5ec857ce9fbe3dcb0",
+      "attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.10556v1",
+          "result": "retrieved",
+          "sha256": "82d3ba8a589a5261781f1df5bb6ce75979b602382b707bf5ec857ce9fbe3dcb0"
+        }
+      ],
+      "implementation_scope": "not implemented by this review"
+    }
+  ]
+}

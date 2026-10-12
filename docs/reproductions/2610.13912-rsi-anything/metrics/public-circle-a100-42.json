@@ -1,0 +1,169 @@
+{
+  "schema_version": 2,
+  "adapter_key": "rsi-anything",
+  "method": "rsi-anything",
+  "seeds": [
+    42
+  ],
+  "dataset": {
+    "id": "public-circle-packing-26",
+    "revision": "3eae2c8863678692a8cf2de988d4562314c2731f",
+    "revision_kind": "executed repository environment source, not an external dataset revision",
+    "task_spec_sha256": "c51cb7f0c67e705dd88b8fdcdfefc222bb80e5a82a2e6f909daefa83ad575aa3",
+    "environment_source_sha256": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+    "partition": "single task with different train/gate context strings; not independent capability validation/test",
+    "external_dataset_downloaded": false
+  },
+  "checkpoint": {
+    "policy": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "budget": {
+    "rounds": 2,
+    "group_size": 2,
+    "train_steps": 2,
+    "max_tokens": 1536
+  },
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "capability_comparison": false,
+  "evolve_promotion_eligible": false,
+  "metrics": {
+    "rounds": 2,
+    "feedback_records": 2,
+    "predictor_update_rounds": 1,
+    "predictor_training_steps": 2,
+    "predictor_loss_first": 0.24024838209152222,
+    "predictor_loss_last": 0.19830742478370667,
+    "predictor_gradient_norm_first": 0.6622512340545654,
+    "predictor_gradient_norm_last": 0.5989798307418823,
+    "policy_component_accept_count": 2,
+    "model_component_accept_count": 1,
+    "pair_accept_count": 2,
+    "circle_fitness_before": 0.0,
+    "circle_fitness_after": 0.0,
+    "pair_prediction_error_before_adaptation": 0.2382378494734292,
+    "pair_prediction_error_after_adaptation": 0.15235200799976756
+  },
+  "run": {
+    "rounds": 2,
+    "feedback_records": 2,
+    "audit": [
+      {
+        "cycle": 0,
+        "reliability": "insufficient",
+        "current_version_prediction_error": 0.2382386349796093,
+        "policy_component_accepted": true,
+        "model_component_accepted": false,
+        "pair_accepted": true,
+        "old_validation_score": 0.0,
+        "pair_validation_score": 0.0,
+        "old_pair_prediction_error": 0.23824884667779234,
+        "proposed_pair_prediction_error": 0.23824788659428364,
+        "training": null,
+        "policy_version": "70b45a9f371fa0e1111c1d6614525f579910b1e79a2651f6112fc2d2ca4449c9",
+        "model_version": "677d4d2cb7b39abf0945ae1ab7fea60136a133f59eb5e7471e2e8cceee1c1b16"
+      },
+      {
+        "cycle": 1,
+        "reliability": "unreliable",
+        "current_version_prediction_error": 0.23824637380219116,
+        "policy_component_accepted": true,
+        "model_component_accepted": true,
+        "pair_accepted": true,
+        "old_validation_score": 0.0,
+        "pair_validation_score": 0.0,
+        "old_pair_prediction_error": 0.2382378494734292,
+        "proposed_pair_prediction_error": 0.15235200799976756,
+        "training": {
+          "steps": [
+            {
+              "loss": 0.24024838209152222,
+              "gradient_norm": 0.6622512340545654
+            },
+            {
+              "loss": 0.19830742478370667,
+              "gradient_norm": 0.5989798307418823
+            }
+          ],
+          "latent_target": "encoded observed execution feedback",
+          "source_model": "local small predictor, not authors JEPA-Anything checkpoint"
+        },
+        "policy_version": "434debeeca94a8bb7888f42e1901e5414d7011060cf0de6bf53d2fc8c758543a",
+        "model_version": "5b020d6f8f765b8c78455322e1a4d3c2cf46ca30ed29854c8784f24f42c4fd56"
+      }
+    ],
+    "environment": "public-circle-packing-26",
+    "split_limitation": "single-task context partition; not independent capability validation",
+    "method": "rsi-anything",
+    "seed": 42,
+    "diagnostic_only": true,
+    "evaluation_tier": "L1",
+    "device": "cuda",
+    "checkpoint": {
+      "policy": {
+        "id": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+        "immutable_revision_verified": true,
+        "file_sha256": {
+          "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+          "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+          "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+          "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+          "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+          "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "local_files_only": true,
+        "trust_remote_code": false,
+        "verification": "pinned official-source offline byte-hash manifest"
+      }
+    },
+    "capability_comparison": false,
+    "evolve_promotion_eligible": false
+  },
+  "provenance": {
+    "executed_commit": "3eae2c8863678692a8cf2de988d4562314c2731f",
+    "raw_result_sha256": "dc2ab419dc917c04510f6f0587bb4a8ab2c2e0d321d63c124432138a09a0fecd",
+    "source_hash_origin": "git show executed_commit:path; not current HEAD or dirty files",
+    "artifact_path": "docs/reproductions/2610.13912-rsi-anything/metrics/public-circle-a100-42.json",
+    "dataset_fingerprint": "d941dd643a2a6078cf8a03d8a056b87f6dcf59d259ac2f2c93c0c3b8ca051921",
+    "dataset_fingerprint_kind": "sha256 of canonical JSON actual dataset/revision/input-or-split hash descriptors; not a digest of the full upstream dataset",
+    "executed_code_commit": "3eae2c8863678692a8cf2de988d4562314c2731f",
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-rsi-anything-a100.json"
+  },
+  "manifest_ref": "reproduction:rsi-anything",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  }
+}

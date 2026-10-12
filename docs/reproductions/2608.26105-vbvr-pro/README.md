@@ -5,11 +5,11 @@
 ## 论文信息
 
 | 项目 | 内容 |
-|---|---|
+| --- | --- |
 | 论文链接 | [arXiv 2608.26105](https://arxiv.org/abs/2608.26105) |
-| 公司/机构 | 南洋理工大学 / VBVR Community（第一作者第一署名单位为南洋理工大学） |
+| 公司/机构 | Nanyang Technological University / VBVR Community |
 | 首次公开日期 | 2026-08-26（arXiv v1） |
-| 原文开源代码 | 是：[项目页与公开资源](https://www.video-reason.com/?v=pro) |
+| 原文开源代码 | 是：[官方/作者代码](https://www.video-reason.com/?v=pro) |
 | Adapter | `vbvr-pro` |
 | 本地复现代码 | [`src/auto_research/reproductions/vbvr_pro/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/vbvr_pro/) |
 

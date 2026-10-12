@@ -1,0 +1,280 @@
+{
+  "schema_version": 2,
+  "adapter_key": "msar",
+  "method": "msar",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "name": "Salesforce/wikitext",
+    "configuration": "wikitext-2-raw-v1",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "tokenization": "UTF-8 byte vocabulary (256)",
+    "split_sha256": {
+      "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+      "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+      "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+    },
+    "split_tokens": {
+      "train": 32768,
+      "validation": 4096,
+      "test": 4096
+    },
+    "official_splits": true,
+    "offline_source_verification": {
+      "public_id": "Salesforce/wikitext",
+      "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "file_sha256": {
+        "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+        "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+        "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+      },
+      "rows": null
+    }
+  },
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "metrics": {
+    "baseline_test_byte_nll_mean": 3.232541186468942,
+    "baseline_test_byte_nll_std": 0.012633924426831571,
+    "method_test_byte_nll_mean": 3.2030824744512163,
+    "method_test_byte_nll_std": 0.010813868817060411
+  },
+  "runs": [
+    {
+      "paper": {
+        "key": "msar"
+      },
+      "seed": 42,
+      "dataset": {
+        "name": "Salesforce/wikitext",
+        "configuration": "wikitext-2-raw-v1",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "tokenization": "UTF-8 byte vocabulary (256)",
+        "split_sha256": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "split_tokens": {
+          "train": 32768,
+          "validation": 4096,
+          "test": 4096
+        },
+        "official_splits": true,
+        "offline_source_verification": {
+          "public_id": "Salesforce/wikitext",
+          "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+          "file_sha256": {
+            "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+            "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+            "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+          },
+          "rows": null
+        }
+      },
+      "evaluation_tier": "L1",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "baseline": {
+        "name": "matched dense causal Transformer",
+        "test_byte_nll": 3.217979434936766
+      },
+      "method": {
+        "name": "msar",
+        "test_byte_nll": 3.192735520620195
+      },
+      "validation": {
+        "baseline": 3.0883663495381675,
+        "method": 3.0632361003330777
+      },
+      "stages": {
+        "training_steps_per_variant": 40,
+        "sequence_length": 64,
+        "width": 64,
+        "layers": 2,
+        "shared_conversion_pretrain_steps": 0,
+        "initialization": "from scratch; real trainable PyTorch attention/SwiGLU LM",
+        "baseline_parameters": 180544,
+        "method_parameters": 190292,
+        "training_loss_first_last": {
+          "baseline": [
+            5.749533653259277,
+            3.0895168781280518
+          ],
+          "method": [
+            5.749533653259277,
+            3.0720107555389404
+          ]
+        },
+        "cache": null,
+        "shared_pretrain_loss": []
+      },
+      "scope": "公开 WikiText byte-LM 机制诊断；不复刻论文大模型、预训练数据、kernel 或论文吞吐。"
+    },
+    {
+      "paper": {
+        "key": "msar"
+      },
+      "seed": 43,
+      "dataset": {
+        "name": "Salesforce/wikitext",
+        "configuration": "wikitext-2-raw-v1",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "tokenization": "UTF-8 byte vocabulary (256)",
+        "split_sha256": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "split_tokens": {
+          "train": 32768,
+          "validation": 4096,
+          "test": 4096
+        },
+        "official_splits": true,
+        "offline_source_verification": {
+          "public_id": "Salesforce/wikitext",
+          "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+          "file_sha256": {
+            "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+            "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+            "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+          },
+          "rows": null
+        }
+      },
+      "evaluation_tier": "L1",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "baseline": {
+        "name": "matched dense causal Transformer",
+        "test_byte_nll": 3.2390587859683566
+      },
+      "method": {
+        "name": "msar",
+        "test_byte_nll": 3.20220242606269
+      },
+      "validation": {
+        "baseline": 3.1103265588245694,
+        "method": 3.071159249260312
+      },
+      "stages": {
+        "training_steps_per_variant": 40,
+        "sequence_length": 64,
+        "width": 64,
+        "layers": 2,
+        "shared_conversion_pretrain_steps": 0,
+        "initialization": "from scratch; real trainable PyTorch attention/SwiGLU LM",
+        "baseline_parameters": 180544,
+        "method_parameters": 190292,
+        "training_loss_first_last": {
+          "baseline": [
+            5.711073875427246,
+            3.0140960216522217
+          ],
+          "method": [
+            5.711073875427246,
+            2.9675328731536865
+          ]
+        },
+        "cache": null,
+        "shared_pretrain_loss": []
+      },
+      "scope": "公开 WikiText byte-LM 机制诊断；不复刻论文大模型、预训练数据、kernel 或论文吞吐。"
+    },
+    {
+      "paper": {
+        "key": "msar"
+      },
+      "seed": 44,
+      "dataset": {
+        "name": "Salesforce/wikitext",
+        "configuration": "wikitext-2-raw-v1",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "tokenization": "UTF-8 byte vocabulary (256)",
+        "split_sha256": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "split_tokens": {
+          "train": 32768,
+          "validation": 4096,
+          "test": 4096
+        },
+        "official_splits": true,
+        "offline_source_verification": {
+          "public_id": "Salesforce/wikitext",
+          "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+          "file_sha256": {
+            "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+            "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+            "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+          },
+          "rows": null
+        }
+      },
+      "evaluation_tier": "L1",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "baseline": {
+        "name": "matched dense causal Transformer",
+        "test_byte_nll": 3.2405853385017034
+      },
+      "method": {
+        "name": "msar",
+        "test_byte_nll": 3.2143094766707647
+      },
+      "validation": {
+        "baseline": 3.125895833212232,
+        "method": 3.10350035107325
+      },
+      "stages": {
+        "training_steps_per_variant": 40,
+        "sequence_length": 64,
+        "width": 64,
+        "layers": 2,
+        "shared_conversion_pretrain_steps": 0,
+        "initialization": "from scratch; real trainable PyTorch attention/SwiGLU LM",
+        "baseline_parameters": 180544,
+        "method_parameters": 190292,
+        "training_loss_first_last": {
+          "baseline": [
+            5.692225456237793,
+            2.9623148441314697
+          ],
+          "method": [
+            5.692225456237793,
+            2.935330867767334
+          ]
+        },
+        "cache": null,
+        "shared_pretrain_loss": []
+      },
+      "scope": "公开 WikiText byte-LM 机制诊断；不复刻论文大模型、预训练数据、kernel 或论文吞吐。"
+    }
+  ],
+  "evaluation_protocol": {
+    "formal_comparison": false,
+    "test_used_for_selection": false,
+    "scope": "bounded UTF8 byte language-model mechanism diagnostic, not original large-model benchmark",
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "manifest_ref": "reproduction:msar",
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.13630-msar/metrics/wikitext-a100-seeds42-44.json",
+    "dataset_fingerprint": "d32632f2cac1f9ece4b8abde8ebf9d4c62e00c28dba07601bbed104c49e3929c",
+    "dataset_fingerprint_kind": "sha256 of canonical JSON actual dataset/revision/input-or-split hash descriptors; not a digest of the full upstream dataset",
+    "executed_code_commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265",
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-msar-a100.json"
+  }
+}

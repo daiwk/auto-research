@@ -4,10 +4,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv v1](https://arxiv.org/abs/2609.12842) |
-| 公司/机构 | Alibaba International Digital Commerce Group（第一作者第一署名单位） |
+| 公司/机构 | Alibaba International Digital Commerce Group |
 | 首次公开日期 | 2026-09-11（arXiv v1） |
 | 原文开源代码 | 否：未发现原作者公开代码（核查日期：2026-09-15） |
 | Adapter | `mima` |

@@ -2,12 +2,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2610.12417](https://arxiv.org/abs/2610.12417) |
-| 公司/机构 | Northwestern University、Carnegie Mellon University、UNC Chapel Hill、Amazon |
+| 公司/机构 | Northwestern University / Carnegie Mellon University / UNC Chapel Hill / Amazon |
 | 首次公开日期 | 2026-10-08（arXiv v1） |
-| 原文开源代码 | 是：[mll-lab-nu/WOVEN](https://github.com/mll-lab-nu/WOVEN) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/mll-lab-nu/WOVEN) |
 | Adapter | `woven` |
 | 本地复现代码 | [`src/auto_research/reproductions/woven/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/woven/) |
 
@@ -47,7 +47,9 @@ flowchart LR
 
 本地SFT保留该训练链路：
 
-$$\mathcal L_{SFT}=-\sum_{t\in\text{response}}\log p_\theta(y_t\mid s,a,\mathrm{options},y_{<t}),\quad W'=W+\tfrac\alpha r BA.$$
+$$
+\mathcal L_{SFT}=-\sum_{t\in\text{response}}\log p_\theta(y_t\mid s,a,\mathrm{options},y_{<t}),\quad W'=W+\tfrac\alpha r BA.
+$$
 
 四种option permutation同步搬迁target letter，但不改变选项内容/图像指向。原文SFT采用LoRA r16/alpha4/dropout.05，q/k/v/o投影、3epochs、lr1e-4；full-mix只SFT，subset另接GRPO。[原文 §2与AppendixG.1](https://arxiv.org/html/2610.12417v1#S2)。本地只执行SFT，不把“尚未运行GRPO”藏起来。
 
@@ -83,7 +85,9 @@ PYTHONPATH=src python scripts/run_oct12_multimodal.py --paper woven \
 
 `scripts/prepare_oct12_public_sources.py --source woven` 可streaming导出小subset。同步只需 `woven.jsonl`、images与 `provenance.json`；每行/图片/file有SHA256，离线读取必须hash验证。checkpoint镜像用 `--checkpoint-path`，固定public身份与revision保留，不把本地path当public revision或写进receipt。
 
-`metrics/protocol.json`记录待GPU验证，不伪造accuracy。单测已核验option-target重映射、真实image引用顺序、gold metadata剔除和source分组隔离。计划receipt `docs/gpu-validations/oct12-woven-a100.json`，A100/A30实跑前该门槛未通过。
+2026-10-12 A100实跑：96条公开train前缀按source组切为56/16/24条，训练24步；24条本地test各评估四种选项排列，共96次打分。冻结基线accuracy `0.28125`，LoRA SFT后 `0.27083`，退化结果原样保留。test没有用于选择预算；这不是作者官方test或迁移能力结论。
+
+实测及分组哈希见 [public-vlm-a100-42.json](metrics/public-vlm-a100-42.json)，回执见 [GPU证据](../../gpu-validations/oct12-woven-a100.json)。单测另外核验了option-target重映射、真实image顺序、gold剔除和source隔离。
 
 ### 代码映射与边界
 

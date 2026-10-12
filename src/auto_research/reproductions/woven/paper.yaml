@@ -1,23 +1,59 @@
 {
-  "schema_version": 2, "key": "woven", "arxiv_id": "2610.12417",
+  "schema_version": 2,
+  "key": "woven",
+  "arxiv_id": "2610.12417",
   "title": "WOVEN: Weaving Visual World Modeling into Multimodal LLMs",
   "paper_url": "https://arxiv.org/abs/2610.12417",
   "organization": "Northwestern University / Carnegie Mellon University / UNC Chapel Hill / Amazon",
-  "published": "2026-10-08", "upstream_code": "https://github.com/mll-lab-nu/WOVEN",
-  "track": "llm", "topics": ["multimodal-foundation-model", "visual-transition-reasoning", "world-model-supervision"],
+  "published": "2026-10-08",
+  "upstream_code": "https://github.com/mll-lab-nu/WOVEN",
+  "track": "llm",
+  "topics": [
+    "multimodal-foundation-model",
+    "visual-transition-reasoning",
+    "world-model-supervision"
+  ],
   "local_code": "src/auto_research/reproductions/woven",
   "documentation": "docs/reproductions/2610.12417-woven/README.md",
-  "fidelity": "core_mechanism", "evaluation_tier": "l1_mechanism",
-  "datasets": ["MLL-Lab/WOVEN published train split, source_id-grouped diagnostic split"],
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "MLL-Lab/WOVEN published train split, source_id-grouped diagnostic split"
+  ],
   "baseline": "same frozen SmolVLM public checkpoint with zero LoRA residual",
-  "metrics": ["baseline.accuracy", "method.accuracy"],
-  "mechanisms": ["actual visual states/action-conditioned VLM MCQ input", "transition response-token LoRA SFT", "four option permutations with consistent target remapping", "disjoint source_id validation/test"],
-  "evolve_operators": [], "adapter_module": "auto_research.reproductions.woven.adapter",
+  "metrics": [
+    "baseline.accuracy",
+    "method.accuracy"
+  ],
+  "mechanisms": [
+    "actual visual states/action-conditioned VLM MCQ input",
+    "transition response-token LoRA SFT",
+    "four option permutations with consistent target remapping",
+    "disjoint source_id validation/test"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.woven.adapter",
   "execution": {
-    "paper": {"code_url": "https://github.com/mll-lab-nu/WOVEN", "organization": "Northwestern University / Carnegie Mellon University / UNC Chapel Hill / Amazon", "published": "2026-10-08", "publication_label": null, "publication_source": null, "online_ab": [], "selection_exception": null},
-    "omitted_core_components": [], "default_seeds": [42],
+    "paper": {
+      "code_url": "https://github.com/mll-lab-nu/WOVEN",
+      "organization": "Northwestern University / Carnegie Mellon University / UNC Chapel Hill / Amazon",
+      "published": "2026-10-08",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42
+    ],
     "budget": "L1 SFT diagnostic: SmolVLM-256M, max96 train-source questions, 24 LoRA steps/rank16; no GRPO/transfer claim",
-    "device_capabilities": ["cpu", "cuda"], "infer_device_capabilities": false,
-    "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/oct12-woven-a100.json"
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-woven-a100.json"
   }
 }

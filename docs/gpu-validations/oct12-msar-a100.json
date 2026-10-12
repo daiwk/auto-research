@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "adapter_key": "msar",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_foundation.py",
+    "--paper",
+    "msar",
+    "--dataset-dir",
+    "data/wikitext",
+    "--output",
+    "runs/msar-42",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--steps",
+    "40"
+  ],
+  "dataset": {
+    "name": "Salesforce/wikitext",
+    "configuration": "wikitext-2-raw-v1",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "tokenization": "UTF-8 byte vocabulary (256)",
+    "split_sha256": {
+      "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+      "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+      "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+    },
+    "split_tokens": {
+      "train": 32768,
+      "validation": 4096,
+      "test": 4096
+    },
+    "official_splits": true,
+    "offline_source_verification": {
+      "public_id": "Salesforce/wikitext",
+      "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "file_sha256": {
+        "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+        "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+        "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+      },
+      "rows": null
+    }
+  },
+  "checkpoint": {
+    "initialization": "from-scratch byte LM",
+    "architecture_source_commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265"
+  },
+  "result": "passed",
+  "metrics": {
+    "baseline_test_byte_nll_mean": 3.232541186468942,
+    "baseline_test_byte_nll_std": 0.012633924426831571,
+    "method_test_byte_nll_mean": 3.2030824744512163,
+    "method_test_byte_nll_std": 0.010813868817060411
+  },
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "execution_checks": {
+    "completed_seeds": 3,
+    "trained_baseline_and_method": true,
+    "cache_equivalence_checked": false
+  },
+  "limitations": [
+    "32KiB training prefix, 4KiB official validation/test prefixes; not a capability benchmark.",
+    "Equal training steps and width, not equal parameter count; all variant costs disclosed."
+  ],
+  "executed_source_sha256": {
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "scripts/run_oct12_foundation.py": "a636f3a779e9a0b157d294b4ef5c3625ed67fc8746d1ffdb2b5f59625179fcba",
+    "src/auto_research/reproductions/oct12_foundation_multimodal.py": "37ebc1120f157f0f69fefd7d35ce2f37acd8175a3e4143c2793dd954d2f761e3",
+    "src/auto_research/foundation_models/oct12_mechanisms.py": "7331f5d205e4cc668132b0bd09ac57a857146d091951d7b50ea64afef8721ee3"
+  },
+  "provenance": {
+    "commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265",
+    "artifact_path": "docs/gpu-validations/oct12-msar-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13630-msar/metrics/wikitext-a100-seeds42-44.json",
+    "checkpoint_committed": false
+  }
+}

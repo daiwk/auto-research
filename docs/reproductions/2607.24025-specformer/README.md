@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2607.24025](https://arxiv.org/abs/2607.24025) |
-| 公司/机构 | Zhejiang University（按第一作者所属机构聚合） |
+| 公司/机构 | Zhejiang University |
 | 首次公开日期 | 2026-07-27（arXiv v1） |
 | 原文开源代码 | 是：[istarryn/SpecFormer](https://github.com/istarryn/SpecFormer) |
 | Adapter | `specformer` |

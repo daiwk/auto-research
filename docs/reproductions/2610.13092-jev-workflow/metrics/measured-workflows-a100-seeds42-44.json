@@ -1,0 +1,275 @@
+{
+  "schema_version": 2,
+  "adapter_key": "jev-workflow",
+  "method": "jev-workflow",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "metrics": {
+    "paired_executions": 3,
+    "budget64_success_rate": 0.0,
+    "budget256_success_rate": 0.0,
+    "budget64_mean_task_seconds": 2.7145877853035927,
+    "budget256_mean_task_seconds": 10.010931720336279
+  },
+  "dataset": {
+    "name": "public-circle-packing-26 task specification",
+    "revision": "6765289590741a1b656dde7f3d0495349c70f485",
+    "task_specification_sha256": "c51cb7f0c67e705dd88b8fdcdfefc222bb80e5a82a2e6f909daefa83ad575aa3"
+  },
+  "measurement": {
+    "schema_version": 1,
+    "status": "completed",
+    "task_id": "public-circle-packing-26",
+    "measurement_kind": "real_public_checkpoint_workflow_measurement",
+    "real_model_execution": true,
+    "diagnostic_only": true,
+    "capability_comparison": false,
+    "evolve_promotion_eligible": false,
+    "model_claim": "workflow measurement infrastructure, not Jev model reproduction",
+    "checkpoint": {
+      "id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "model.safetensors": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c",
+        "tokenizer_config.json": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+        "special_tokens_map.json": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+        "config.json": "8eb740e8bbe4cff95ea7b4588d17a2432deb16e8075bc5828ff7ba9be94d982a",
+        "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+        "train_results.json": "713996ce10b9d99a440fec73c0f3bdb2f3c4db6adba3d027bdaa40796f059b2d",
+        "generation_config.json": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+        "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+        "eval_results.json": "6c7ecd0c2c0e8f6af8cbb34065fb2d5eb4c504febf2e266a7c7f948f13c70b7c",
+        "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+        "all_results.json": "1f68a2e167194d764c414643b54f0960945dc3f46bc47ec53b02475df527f376",
+        "trainer_state.json": "9664b2f12a8a29cad27a12da7b0d3a1081c8ba1392bcec71fa3bfd4fafc11284"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    },
+    "device": "cuda",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budgets": [
+      64,
+      256
+    ],
+    "sampling": {
+      "do_sample": true,
+      "temperature": 0.8,
+      "top_p": 0.95,
+      "top_k": 0
+    },
+    "rng_reset_per_configuration": [
+      "python",
+      "numpy",
+      "torch",
+      "torch_cuda_if_used"
+    ],
+    "weight_audit": "requires_grad false, eval mode and unchanged parameter version counters",
+    "cost_unit": "generated_token_units",
+    "billing_currency": null,
+    "token_count_rule": "exact emitted token IDs, including EOS; no prompt tokens or retokenization",
+    "timing_unit": "perf_counter_seconds",
+    "decision_time_scope": "seed reset, prompt tokenization, synchronized generation and decode",
+    "task_time_scope": "decision plus source extraction, Linux sandbox and external geometry check",
+    "timing_excludes": "checkpoint loading, disk artifact writes; no warmup generations performed",
+    "configuration_order_policy": "alternate the two budgets by run index; actual order in traces",
+    "success_definition": "26 finite nonnegative-radius circles, unit-square bounds, no overlaps; valid geometry only, not best-known optimization score",
+    "behavior_annotation_applicability": {
+      "failed_recovery": "not_applicable: one-shot workflow has no recovery attempt",
+      "premature_completion": "not_applicable: no agent completion-claim protocol"
+    },
+    "behavior_schema_note": "False booleans are not_applicable schema placeholders; aggregate zero counts do not prove these agent failure modes were measured",
+    "gold_boundary": "only public task specification enters generation; no gold or solved program",
+    "public_task_specification": "Place exactly 26 circles inside the unit square [0,1]^2, with nonnegative radii and no overlaps. Maximize the sum of radii. Write a complete standard-library-only Python program. It must print exactly one JSON object with 'centers' (26 [x,y] pairs) and 'radii' (26 numbers). All values must be finite; the external evaluator checks every boundary and pairwise distance (tolerance 1e-6). No network, files, numpy, or subprocesses are available. CPU budget 5 seconds; memory 256 MiB.",
+    "public_task_specification_sha256": "c51cb7f0c67e705dd88b8fdcdfefc222bb80e5a82a2e6f909daefa83ad575aa3",
+    "runner_source_sha256": "598ec48810d37796cbe994d610f8c98d23fd95a54416c9ff34da7b169c2fe1a1",
+    "timing_source": "time.perf_counter",
+    "audit": {
+      "configurations": {
+        "budget-256": {
+          "executions": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "mean_decision_seconds": 9.944839987903833,
+          "mean_task_seconds": 10.010931720336279,
+          "cost_per_success": null,
+          "time_per_success": null,
+          "failed_recovery_executions": 0,
+          "premature_completion_executions": 0,
+          "failure_cost_share": 1.0
+        },
+        "budget-64": {
+          "executions": 3,
+          "successes": 0,
+          "success_rate": 0.0,
+          "mean_decision_seconds": 2.6470123206575713,
+          "mean_task_seconds": 2.7145877853035927,
+          "cost_per_success": null,
+          "time_per_success": null,
+          "failed_recovery_executions": 0,
+          "premature_completion_executions": 0,
+          "failure_cost_share": 1.0
+        }
+      },
+      "matched_success_pairs": 0,
+      "paired_executions": 3,
+      "model_claim": "evaluation infrastructure; supplied configurations are not automatically Jev"
+    },
+    "traces": [
+      {
+        "task_id": "public-circle-packing-26",
+        "run_id": 42,
+        "seed": 42,
+        "configuration": "budget-64",
+        "configured_budget": 64,
+        "execution_order": [
+          64,
+          256
+        ],
+        "prompt_tokens": 156,
+        "generated_tokens": 64,
+        "generated_token_ids_sha256": "51861369777359183e9db7cd80f6d16cc176a8de13922fd0c5fc2a8ae0b675b3",
+        "budget_exhausted": true,
+        "sandbox_return_code": 1,
+        "external_geometry_score": null,
+        "external_feedback": "execution failed (1):   File \"/candidate.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n",
+        "model_output_sha256": "c0f1348b124121bbe295c4da53af64b10dbfcc148cb287d82428a70b0cb780fc",
+        "sandbox_program_sha256": "c0f1348b124121bbe295c4da53af64b10dbfcc148cb287d82428a70b0cb780fc"
+      },
+      {
+        "task_id": "public-circle-packing-26",
+        "run_id": 42,
+        "seed": 42,
+        "configuration": "budget-256",
+        "configured_budget": 256,
+        "execution_order": [
+          64,
+          256
+        ],
+        "prompt_tokens": 156,
+        "generated_tokens": 256,
+        "generated_token_ids_sha256": "d010ba92899606d3cb3ace135036f62772a99ad9718c364a2dee0f0defe497b4",
+        "budget_exhausted": true,
+        "sandbox_return_code": 1,
+        "external_geometry_score": null,
+        "external_feedback": "execution failed (1):   File \"/candidate.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n",
+        "model_output_sha256": "edfb3234c59f552a89ebd179d8000bf5a436b891238c22c718b02c828b722e0d",
+        "sandbox_program_sha256": "3407698ce490a3e7732121b4ce615055b21a5f56c2ac6f562d2cbfc65a40a499"
+      },
+      {
+        "task_id": "public-circle-packing-26",
+        "run_id": 43,
+        "seed": 43,
+        "configuration": "budget-256",
+        "configured_budget": 256,
+        "execution_order": [
+          256,
+          64
+        ],
+        "prompt_tokens": 156,
+        "generated_tokens": 256,
+        "generated_token_ids_sha256": "25593109ee249ec1ec1827946dc9c2fd9d407b34a2dd2477ad799687170a3d1c",
+        "budget_exhausted": true,
+        "sandbox_return_code": 1,
+        "external_geometry_score": null,
+        "external_feedback": "execution failed (1):   File \"/candidate.py\", line 1\n    The following Python code defines a function to find the maximum of three points given a distance, the coordinates of the centers, and a bounding box (in 2D).\n                                                                                                                                                              ^\nSyntaxError: invalid decimal literal\n",
+        "model_output_sha256": "6ec3b6af60de1dbcfd2264bc96595fdc88ffe1fcb68f65b6bbb779e58b20464c",
+        "sandbox_program_sha256": "6ec3b6af60de1dbcfd2264bc96595fdc88ffe1fcb68f65b6bbb779e58b20464c"
+      },
+      {
+        "task_id": "public-circle-packing-26",
+        "run_id": 43,
+        "seed": 43,
+        "configuration": "budget-64",
+        "configured_budget": 64,
+        "execution_order": [
+          256,
+          64
+        ],
+        "prompt_tokens": 156,
+        "generated_tokens": 64,
+        "generated_token_ids_sha256": "94e69b0f750423869b8942af731c91413d3e31448c4f2043bc123cc8169174ba",
+        "budget_exhausted": true,
+        "sandbox_return_code": 1,
+        "external_geometry_score": null,
+        "external_feedback": "execution failed (1):   File \"/candidate.py\", line 1\n    The following Python code defines a function to find the maximum of three points given a distance, the coordinates of the centers, and a bounding box (in 2D).\n                                                                                                                                                              ^\nSyntaxError: invalid decimal literal\n",
+        "model_output_sha256": "7ce68e7aa32a39a5b3cb044acf4d5f351b1b22fd8f924e69821b7340b2127be5",
+        "sandbox_program_sha256": "7ce68e7aa32a39a5b3cb044acf4d5f351b1b22fd8f924e69821b7340b2127be5"
+      },
+      {
+        "task_id": "public-circle-packing-26",
+        "run_id": 44,
+        "seed": 44,
+        "configuration": "budget-64",
+        "configured_budget": 64,
+        "execution_order": [
+          64,
+          256
+        ],
+        "prompt_tokens": 156,
+        "generated_tokens": 64,
+        "generated_token_ids_sha256": "76f623025fb7f8b08a08688f4a75b9aa595df6dd4e32dde9e7ac16edfd66f654",
+        "budget_exhausted": true,
+        "sandbox_return_code": 1,
+        "external_geometry_score": null,
+        "external_feedback": "execution failed (1):   File \"/candidate.py\", line 5\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 12)\n",
+        "model_output_sha256": "0cf683e507e8fc343c9ece95ab5794ef0b92a3d66f9fb001c25af461b754e90e",
+        "sandbox_program_sha256": "0cf683e507e8fc343c9ece95ab5794ef0b92a3d66f9fb001c25af461b754e90e"
+      },
+      {
+        "task_id": "public-circle-packing-26",
+        "run_id": 44,
+        "seed": 44,
+        "configuration": "budget-256",
+        "configured_budget": 256,
+        "execution_order": [
+          64,
+          256
+        ],
+        "prompt_tokens": 156,
+        "generated_tokens": 256,
+        "generated_token_ids_sha256": "8cb320f52fdde9b1ea76606e9c6bcb2bd8529d6fe41446824d7e6a4fc538a375",
+        "budget_exhausted": true,
+        "sandbox_return_code": 1,
+        "external_geometry_score": null,
+        "external_feedback": "execution failed (1):   File \"/candidate.py\", line 30\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 31)\n",
+        "model_output_sha256": "c3337df5aea850cd0f6342c910ab61bfd52e157c7da8cd5378516760486b2ab3",
+        "sandbox_program_sha256": "c3337df5aea850cd0f6342c910ab61bfd52e157c7da8cd5378516760486b2ab3"
+      }
+    ],
+    "files": {
+      "pairs.jsonl": "6abe788a9ca7c361a0d65bd6b415126f44069d60a4224a2cbf5d2080371e8bdf"
+    },
+    "curation_notice": "Exact output/token records remain in execution cache; public trace keeps actual counts and hashes, not generated code."
+  },
+  "capability_comparison": false,
+  "manifest_ref": "reproduction:jev-workflow",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.13092-jev-workflow/metrics/measured-workflows-a100-seeds42-44.json",
+    "dataset_fingerprint": "5f4dd355d77bde189506c5302c9cfd67c9e80511917bb7672f4d98b86360297e",
+    "dataset_fingerprint_kind": "sha256 of canonical JSON actual dataset/revision/input-or-split hash descriptors; not a digest of the full upstream dataset",
+    "executed_code_commit": "6765289590741a1b656dde7f3d0495349c70f485",
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-jev-workflow-measurement-a100.json"
+  }
+}

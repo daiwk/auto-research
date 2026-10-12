@@ -6,7 +6,7 @@
   "paper_url": "https://arxiv.org/abs/2610.13521",
   "organization": "Nanjing University / JD.com",
   "published": "2026-10-09",
-  "upstream_code": "not released / not found",
+  "upstream_code": "否：未找到原作者公开实现（2026-10-12 核查）",
   "track": "post-training",
   "topics": [
     "Multi-teacher distillation",
@@ -14,7 +14,7 @@
     "Cross-domain guarding"
   ],
   "local_code": "src/auto_research/reproductions/road_mopd",
-  "documentation": "docs/post-training/2610.13521-road-mopd/README.md",
+  "documentation": "docs/reproductions/2610.13521-road-mopd/README.md",
   "fidelity": "core_mechanism",
   "evaluation_tier": "l1_mechanism",
   "datasets": [
@@ -37,8 +37,8 @@
       "code_url": null,
       "organization": "Nanjing University / JD.com",
       "published": "2026-10-09",
-      "publication_label": "arXiv v1",
-      "publication_source": "https://arxiv.org/abs/2610.13521",
+      "publication_label": null,
+      "publication_source": null,
       "online_ab": [],
       "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed"
     },

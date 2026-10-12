@@ -4,10 +4,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv v1](https://arxiv.org/abs/2609.23718) |
-| 公司/机构 | Beihang University（第一作者 Zhuang Liu 所属机构；实习研究在百度完成，其他多位作者属 Baidu） |
+| 公司/机构 | Beihang University |
 | 首次公开日期 | 2026-09-20（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-09-26 未找到原作者发布的 UNIQUE 实现仓库 |
 | Adapter | `unique` |

@@ -61,6 +61,10 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
+        "Cross-tokenizer distillation": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
+        "Multi-teacher distillation": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
+        "Capability boundary": ("奖励、信用与课程", "课程与能力边界"),
         "组相对策略优化": ("在线强化学习与稳定性", "PPO、REINFORCE 与 group RL"),
         "KL 校准": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "学习信号诊断": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
@@ -153,6 +157,12 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "agent-evolution": ("Agentic RL 与后训练", "Harness 与运行时策略"),
+        "recursive-self-improvement": ("规划、搜索与反思", "Harness 与自我改进"),
+        "autonomous-research": ("规划、搜索与反思", "环境模拟与前瞻决策"),
+        "long-term-memory": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "tool-retrieval": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
+        "agent-evaluation": ("工具调用与环境执行", "电脑操作与 reward 评测"),
         "模拟前瞻与动作选择": ("规划、搜索与反思", "环境模拟与前瞻决策"),
         "因果检索干预": ("记忆、技能与持续学习", "主动 / 长期记忆"),
         "本地 Agent 运行框架": ("工具调用与环境执行", "本地工具与完成验收"),
@@ -275,6 +285,9 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "msar": ("网络架构", "MoE、状态空间与残差路径"),
+    "orthros": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+    "dualquant": ("推理与系统效率", "量化"),
     "sas-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
     "beaconkv": ("推理与系统效率", "推测解码与 KV cache"),
     "kvmem": ("推理与系统效率", "推测解码与 KV cache"),
@@ -692,6 +705,7 @@ def manifest_domain_rows(domain: str, hierarchy: dict[str, tuple[str, str]]) -> 
         rows.append({
             "key": paper["key"], "title": paper["title"],
             "link": paper["detail_path"], "href": f"../../{paper['detail_path']}",
+            "index_href": f"../{paper['detail_path']}",
             "organization": _normalize_affiliation(paper["first_author_affiliation"].split(" / ", 1)[0]),
             "date": paper["published"], "summary": detail_summary(paper["detail_path"]),
             "domain": cluster[0], "cluster": cluster[1],
@@ -701,10 +715,14 @@ def manifest_domain_rows(domain: str, hierarchy: dict[str, tuple[str, str]]) -> 
 
 def foundation_rows() -> list[dict[str, str]]:
     links = reproduction_doc_links()
+    manifest = json.loads((DOCS / "research-manifest.json").read_text(encoding="utf-8"))
+    domains = {paper["key"]: paper["domain"] for paper in manifest["papers"]}
     rows = []
     for adapter in list_adapters():
         paper = adapter.paper
-        if paper.track != "llm" or adapter.key in POST_TRAINING_REPRODUCTION_KEYS:
+        # A shared LLM runtime is not a research-domain assignment. The canonical
+        # catalog owns routing, including Agent and multimodal checkpoint methods.
+        if paper.track != "llm" or domains.get(adapter.key) != "foundation-models":
             continue
         try:
             domain, cluster = FOUNDATION_TOPIC_HIERARCHY[adapter.key]
@@ -825,6 +843,8 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "woven": ("视觉世界模型与时序推理", "视觉状态转移监督"),
+        "umrm": ("多模态奖励与后训练", "冻结中间层探针与验证器自举"),
         "vcola": ("多模态基础模型", "视觉 token 压缩与动态证据恢复"),
         "vimod": ("多模态基础模型", "视觉 token 压缩与动态证据恢复"),
         "videomm": ("多模态基础模型", "视频理解与 token 压缩"),

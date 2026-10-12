@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.29241](https://arxiv.org/abs/2607.29241) |
 | 公司/机构 | Huazhong Agricultural University (Kuaishou internship) |
 | 首次公开日期 | 2026-07-31（arXiv v1） |
-| 原文开源代码 | 是：[RecHarness](https://github.com/6lyc/RecHarness) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/6lyc/RecHarness) |
 | Adapter | `recharness` |
 | 本地复现代码 | [`src/auto_research/reproductions/recharness/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/recharness/) |
 

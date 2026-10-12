@@ -1,9 +1,9 @@
-/Users/bytedance/.bash_profile: line 24: /Users/bytedance/.openclaw/completions/openclaw.bash: No such file or directory
 # 按年月
 
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-10
+- [FORTE](../2610.13806-forte/README.md)：用类型约束的配对扰动、跨时间窗多目标门槛和真实重训选择可退役特征，再审计依赖消费者的移除顺序。
 - [AgentWebRec](../2610.01705-agent-web-rec/README.md)：以语义—时间衰减检索私有记忆，并在低置信时门控协作偏好模式。
 - [Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)](../2610.01533-gris/README.md)：将内容语义与协同图联合写入层级 Semantic ID；图为空时退化为内容量化。
 - [Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders](../2610.01270-repair-state/README.md)：从冻结 encoder 的历史 cache 选择纠正证据，以 residual update 修复有损 preference state。

@@ -3,7 +3,7 @@
   "key": "boundary-evo",
   "title": "BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation",
   "paper_url": "https://arxiv.org/abs/2610.13285",
-  "detail_path": "post-training/2610.13285-boundary-evo/README.md",
+  "detail_path": "reproductions/2610.13285-boundary-evo/README.md",
   "topic": [
     "Capability boundary",
     "Data-model co-evolution",

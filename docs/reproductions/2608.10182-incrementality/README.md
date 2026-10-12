@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2608.10182](https://arxiv.org/abs/2608.10182) |
-| 公司/机构 | LinkedIn（第一作者 Changshuai Wei） |
+| 公司/机构 | LinkedIn |
 | 首次公开日期 | 2026-08-10（arXiv v1） |
 | 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-09-01） |
 | Adapter | `incrementality` |

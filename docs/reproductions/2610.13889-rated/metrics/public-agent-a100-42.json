@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "adapter_key": "rated",
+  "method": "rated",
+  "seeds": [
+    42
+  ],
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "evaluation_tier": "L1",
+  "dataset": {
+    "source": {
+      "kind": "dataset",
+      "public_id": "Elliotes/EcoAgent",
+      "revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+      "upstream_file_sha256": {
+        "tools_clean_with_reliability.csv": "1b388d317aeb1004c266eb65ff64a4864e7907412a2fbfb4667c492a871e8d8e",
+        "train_pairs.csv": "e89aed2b42bba90ed6133bb64d1918591b50c60e9ec8561dce9799ae857f4760",
+        "eval_real_test.jsonl": "922ba0256f49205f7b5225467e20d0d45ed4af243fc3f7313267327818a8e93c"
+      },
+      "files": {
+        "rated-train32-test8.json": "3bcd676153d48aaaa9cff821dc0e88921f6775ac0e41092abfb78673baadc772"
+      },
+      "training_pairs": 32,
+      "pool_tools": 32,
+      "test_queries": 8,
+      "transformation": "pool from first ordered training positives only; first eight disjoint official test queries; no test-label-selected tools",
+      "execution_limitation": "original service bindings unavailable; explicit fail-closed sandbox errors, not fake metadata-only successes"
+    },
+    "input_sha256": "3bcd676153d48aaaa9cff821dc0e88921f6775ac0e41092abfb78673baadc772",
+    "input_preparation_commit": "916a56ca630027b4ce99ebfb39a3fea441c4eaca"
+  },
+  "checkpoint": {
+    "query_encoder": {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    },
+    "tool_encoder": {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "metrics": {
+    "external_semantic_recall_at_1": 0.125,
+    "execution_success_rate": 0.0,
+    "evaluated_queries": 8
+  },
+  "capability_comparison": false,
+  "evolve_promotion_eligible": false,
+  "contrastive_training": [
+    {
+      "loss": 2.4462027549743652,
+      "gradient_norm": 6.8310651779174805
+    },
+    {
+      "loss": 2.307036876678467,
+      "gradient_norm": 7.065086364746094
+    },
+    {
+      "loss": 2.1663424968719482,
+      "gradient_norm": 7.269076824188232
+    },
+    {
+      "loss": 2.0249502658843994,
+      "gradient_norm": 7.428124904632568
+    }
+  ],
+  "execution_trace": [
+    {
+      "selected": "langchain::apify",
+      "outcome": 0,
+      "execution_seconds": 0.07056699879467487,
+      "failure_class": "original_backend_unavailable"
+    },
+    {
+      "selected": "langchain::bing-search",
+      "outcome": 0,
+      "execution_seconds": 0.0724146943539381,
+      "failure_class": "original_backend_unavailable"
+    },
+    {
+      "selected": "langchain::asknews",
+      "outcome": 0,
+      "execution_seconds": 0.06936521269381046,
+      "failure_class": "original_backend_unavailable"
+    },
+    {
+      "selected": "langchain::arxiv",
+      "outcome": 0,
+      "execution_seconds": 0.068997947499156,
+      "failure_class": "original_backend_unavailable"
+    },
+    {
+      "selected": "langchain::asknews",
+      "outcome": 0,
+      "execution_seconds": 0.0667953360825777,
+      "failure_class": "original_backend_unavailable"
+    },
+    {
+      "selected": "langchain::arxiv",
+      "outcome": 0,
+      "execution_seconds": 0.06987273320555687,
+      "failure_class": "original_backend_unavailable"
+    },
+    {
+      "selected": "langchain::brightdatawebscraperapi",
+      "outcome": 0,
+      "execution_seconds": 0.06987673975527287,
+      "failure_class": "original_backend_unavailable"
+    },
+    {
+      "selected": "langchain::apify",
+      "outcome": 0,
+      "execution_seconds": 0.06990528106689453,
+      "failure_class": "original_backend_unavailable"
+    }
+  ],
+  "original_api_backend_available": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "L1 encoder/bandit mechanism diagnostic; original service backends unavailable; no capability gain claim",
+    "description": "frozen encoders; prequential test query stream with bandit updates from real backend failures, never gold"
+  },
+  "manifest_ref": "reproduction:rated",
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.13889-rated/metrics/public-agent-a100-42.json",
+    "dataset_fingerprint": "ccfb7fbf450835f8e7044b4ce0a9099482b5b23ef3fd53c26c858c8bf33598c9",
+    "dataset_fingerprint_kind": "sha256 of canonical JSON actual dataset/revision/input-or-split hash descriptors; not a digest of the full upstream dataset",
+    "executed_code_commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265",
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-rated-a100.json"
+  }
+}

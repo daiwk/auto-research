@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "adapter_key": "rsi-anything",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_agents.py",
+    "--method",
+    "rsi-anything",
+    "--checkpoint",
+    "<policy-checkpoint-cache>",
+    "--checkpoint-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--checkpoint-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--rounds",
+    "2",
+    "--group-size",
+    "2",
+    "--train-steps",
+    "2",
+    "--max-tokens",
+    "1536",
+    "--output",
+    "<output-json>"
+  ],
+  "command_sanitization": "Only local checkpoint/output locations are descriptive placeholders; public identity/revision and all numeric parameters retain the executed configuration.",
+  "dataset": {
+    "id": "public-circle-packing-26",
+    "revision": "3eae2c8863678692a8cf2de988d4562314c2731f",
+    "revision_kind": "executed repository environment source, not an external dataset revision",
+    "task_spec_sha256": "c51cb7f0c67e705dd88b8fdcdfefc222bb80e5a82a2e6f909daefa83ad575aa3",
+    "environment_source_sha256": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+    "partition": "single task with different train/gate context strings; not independent capability validation/test",
+    "external_dataset_downloaded": false
+  },
+  "checkpoint": {
+    "policy": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "budget": {
+    "rounds": 2,
+    "group_size": 2,
+    "train_steps": 2,
+    "max_tokens": 1536
+  },
+  "result": "passed",
+  "metrics": {
+    "rounds": 2,
+    "feedback_records": 2,
+    "predictor_update_rounds": 1,
+    "predictor_training_steps": 2,
+    "predictor_loss_first": 0.24024838209152222,
+    "predictor_loss_last": 0.19830742478370667,
+    "predictor_gradient_norm_first": 0.6622512340545654,
+    "predictor_gradient_norm_last": 0.5989798307418823,
+    "policy_component_accept_count": 2,
+    "model_component_accept_count": 1,
+    "pair_accept_count": 2,
+    "circle_fitness_before": 0.0,
+    "circle_fitness_after": 0.0,
+    "pair_prediction_error_before_adaptation": 0.2382378494734292,
+    "pair_prediction_error_after_adaptation": 0.15235200799976756
+  },
+  "additional_seeds": [],
+  "execution_checks": {
+    "completed": true,
+    "conditional_predictor_training_executed": true,
+    "nonzero_gradients": true,
+    "component_and_pair_gates_executed": true,
+    "pair_retention_executed": true,
+    "validation_fitness_zero_retained": true,
+    "independent_capability_validation": false,
+    "capability_comparison": false,
+    "evolve_promotion_eligible": false
+  },
+  "limitations": [
+    "Single-circle-task context partition is not independent generalization validation/test.",
+    "All observed validation circle fitness values are0; lower predictor loss does not establish solver capability improvement.",
+    "Two rounds, two predictor steps, one seed; local factorized predictor is not author JEPA-Anything checkpoint.",
+    "concept_demo/L1 diagnostic only; no Evolve promotion.",
+    "Passed covers the specified executed commit and source hashes, not every current HEAD or working-tree change."
+  ],
+  "executed_source_sha256": {
+    "scripts/run_oct12_agents.py": "85c6452b2a41e3a287227a4ddce4e59a53e3f2fab76f960fdaafe8d07cc1a8ae",
+    "src/auto_research/agent_research/oct12_entrypoint.py": "acc89866c06c34d67027e275c51831f71be86f226d105ef0d8da0c7f0585dd94",
+    "src/auto_research/agent_research/oct12_checkpoint.py": "930e178e49d803827c910e973ba3f67666477b475996a558fa91a507989d77da",
+    "src/auto_research/agent_research/oct12_evolution.py": "79101f021ddbe128f93a9dcc07c5a60cba9434f778a52b5582c33e6a31d43f32",
+    "src/auto_research/agent_research/oct10_backend.py": "108acb77f3497cddb2cdf5b96831ce25fb733d1b35c503db69076918684b7219",
+    "src/auto_research/agent_research/oct12_memory_tools.py": "f2d12f7824a1dbaba0b67f4b046e57173b2e902e4b8a138087522c418ff2982a",
+    "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093"
+  },
+  "provenance": {
+    "commit": "3eae2c8863678692a8cf2de988d4562314c2731f",
+    "artifact_path": "docs/gpu-validations/oct12-rsi-anything-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13912-rsi-anything/metrics/public-circle-a100-42.json",
+    "raw_result_sha256": "dc2ab419dc917c04510f6f0587bb4a8ab2c2e0d321d63c124432138a09a0fecd",
+    "checkpoint_committed": false,
+    "source_hash_origin": "git show executed commit"
+  }
+}

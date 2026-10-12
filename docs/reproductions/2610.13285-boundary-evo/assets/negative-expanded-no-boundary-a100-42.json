@@ -1,0 +1,1214 @@
+{
+  "schema_version": 1,
+  "adapter_key": "boundary-evo",
+  "status": "not_passed_boundary_evolution",
+  "diagnostic_only": true,
+  "measurement_kind": "real_gpu_negative_boundary_acquisition_diagnostic",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_post_training.py",
+    "--objective",
+    "boundary-evo",
+    "--student-path",
+    "<student-checkpoint-cache>",
+    "--student-id",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--student-revision",
+    "7ae557604adf67be50417f59c2c2f167def9a775",
+    "--teacher-path",
+    "<teacher-checkpoint-cache>",
+    "--teacher-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--teacher-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--expert-path",
+    "<expert-checkpoint-cache>",
+    "--expert-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--expert-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--analyzer-path",
+    "<analyzer-checkpoint-cache>",
+    "--analyzer-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--analyzer-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--train-path",
+    "<public-train-jsonl>",
+    "--validation-path",
+    "<public-validation-jsonl>",
+    "--split-manifest",
+    "<public-split-manifest>",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--output",
+    "<output-json>",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--steps",
+    "2",
+    "--validation-examples",
+    "4",
+    "--max-tokens",
+    "768",
+    "--priming-examples",
+    "2",
+    "--rounds",
+    "2",
+    "--pool-examples",
+    "24",
+    "--acquisition",
+    "2",
+    "--replay-quota",
+    "1",
+    "--teacher-rollouts",
+    "2",
+    "--analyzer-tokens",
+    "768"
+  ],
+  "command_sanitization": "Only local checkpoint/data/output locations replaced; parent-confirmed actual expanded-v4 budgets and public role identities retained. Unified --steps=2 does not imply Stage 2 ran.",
+  "raw_result_sha256": "2f00491e944f4bc62e15d2d2d1038a439eda6b8fc33a965bf9030d2876f4fb30",
+  "observations": {
+    "priming_optimizer_steps": 2,
+    "evolution_optimizer_steps": 0,
+    "boundary_rounds_with_updates": 0,
+    "analyzer_responses": 48,
+    "analyzer_parse_successes": 42,
+    "analyzer_parse_failures": 6,
+    "analyzer_parse_failure_classes": {
+      "missing_required_fields": 4,
+      "json_decode_error": 2
+    },
+    "analyzer_budget_exhaustions": 0,
+    "analyzer_token_budget": 768,
+    "accepted_candidates": 0,
+    "selected_questions": 0,
+    "verified_teacher_trajectories": 0,
+    "rejected_assessments_by_gate": {
+      "expert_below_0_65": 20,
+      "student_not_below_0_50": 12,
+      "gap_below_0_20": 21,
+      "quality_below_0_70": 19,
+      "clear_false": 20,
+      "answerable_false": 0,
+      "context_below_0_70": 15
+    },
+    "rejection_counting": "Gate failures overlap; counted from the forty-two actual parsed scalar assessments using unchanged accepted() thresholds. These scalar-only records do not establish why the judge assigned each score or flag."
+  },
+  "claim_scope": "Expanded train-only candidate pool and longer solver generation produced forty-two parsed assessments out of forty-eight analyzer responses, but accepted no boundary candidate and performed no Stage 2 optimizer update. The real parameter delta and validation exact match 0.5 remain priming-only diagnostics, not effective co-evolution or a capability improvement.",
+  "sanitization": "Retained public identities/revisions/hashes, scalar losses/counters/assessments, response hashes and failure classes only; no gold/reference/question, solver/analyzer text, machine identity or checkpoint weights.",
+  "run": {
+    "schema_version": 1,
+    "adapter_key": "boundary-evo",
+    "seed": 42,
+    "diagnostic_only": true,
+    "evaluation_tier": "l1_mechanism",
+    "claim_scope": "bounded real checkpoint runtime validation; no benchmark gain claim",
+    "models": {
+      "student": {
+        "id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "immutable_revision_verified": true,
+        "verification": "pinned public-source manifest with exact file SHA256",
+        "file_sha256": {
+          "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "teacher": {
+        "id": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+        "immutable_revision_verified": true,
+        "verification": "pinned public-source manifest with exact file SHA256",
+        "file_sha256": {
+          "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+          "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+          "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+          "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+          "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+          "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "expert": {
+        "id": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+        "immutable_revision_verified": true,
+        "verification": "pinned public-source manifest with exact file SHA256",
+        "file_sha256": {
+          "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+          "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+          "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+          "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+          "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+          "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "analyzer": {
+        "id": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+        "immutable_revision_verified": true,
+        "verification": "pinned public-source manifest with exact file SHA256",
+        "file_sha256": {
+          "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+          "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+          "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+          "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+          "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+          "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      }
+    },
+    "dataset": {
+      "id": "openai/grade-school-math",
+      "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "train_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "budget": {
+      "steps": 2,
+      "max_tokens": 768,
+      "group": 2,
+      "forks": 3,
+      "continuations": 2,
+      "priming_examples": 2,
+      "rounds": 2,
+      "pool_examples": 24,
+      "acquisition": 2,
+      "teacher_rollouts": 2
+    },
+    "metrics": {
+      "adapter_parameter_delta_l2": 0.007703710666217913,
+      "validation_examples": 4,
+      "validation_exact_match": 0.5,
+      "priming_optimizer_steps": 2,
+      "evolution_optimizer_steps": 0,
+      "boundary_rounds_with_updates": 0,
+      "analyzer_parse_failures": 6
+    },
+    "history": [
+      {
+        "stage": "priming",
+        "loss": 0.40377098321914673,
+        "gradient_l2": 0.4742562472820282,
+        "response_tokens": 144
+      },
+      {
+        "stage": "priming",
+        "loss": 0.8740767240524292,
+        "gradient_l2": 0.574048638343811,
+        "response_tokens": 315
+      },
+      {
+        "stage": "evolution",
+        "round": 0,
+        "candidate_count": 24,
+        "analyzer_parse_failures": 2,
+        "accepted_candidates": 0,
+        "analyzer_parse_failure_classes": {
+          "missing_required_fields": 1,
+          "json_decode_error": 1
+        },
+        "analyzer_budget_exhaustions": 0,
+        "analyzer_parse_diagnostics": [
+          {
+            "candidate_index": 0,
+            "parse_failure_class": null,
+            "response_sha256": "bc02db3867f5a3fdc11ce801724e3ad03d68e27e3766445c813f344686583d4b",
+            "response_tokens": 73,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 1,
+            "parse_failure_class": null,
+            "response_sha256": "128e0a9524c6c1e8e8166b1702651cce78f21c758ecb39edd1b7699bd532857b",
+            "response_tokens": 127,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 2,
+            "parse_failure_class": null,
+            "response_sha256": "97afe57acad67c25b755a03181b6855505c546fd4a340c5f64ec91f0bf7d78da",
+            "response_tokens": 245,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 3,
+            "parse_failure_class": null,
+            "response_sha256": "3d24f6794f268780ae9f68ad3095040aff0b2060c1a13f54b180b4df6087c88d",
+            "response_tokens": 111,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 4,
+            "parse_failure_class": null,
+            "response_sha256": "8f74e4b754cfd108803aa46a0351a5dca60ee0521d8151df40d4171f03558a44",
+            "response_tokens": 219,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 5,
+            "parse_failure_class": null,
+            "response_sha256": "2f0ac201ea1a389c29f45d1db6ea609f287b43a14dace7000c499c7582c75b36",
+            "response_tokens": 208,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 6,
+            "parse_failure_class": null,
+            "response_sha256": "b1b4b4ca840b77b90725aee698b3589ad3cb9930bb5d4355b5d6bdb9eec41df9",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 7,
+            "parse_failure_class": null,
+            "response_sha256": "a8e2654a5d8570eb7a34472669efca0f95bd32ca87cd54db7eb34ce468ebe554",
+            "response_tokens": 222,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 8,
+            "parse_failure_class": null,
+            "response_sha256": "0fc01960687543752e9c8e8d930ef2a8eb715e55cc7dd26680ec28b0bda633df",
+            "response_tokens": 160,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 9,
+            "parse_failure_class": null,
+            "response_sha256": "ca6f5cc2c5e6ba09fac5e801d1dc3532140aee8a6a65fda01dfe7414cae72ca2",
+            "response_tokens": 111,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 10,
+            "parse_failure_class": "missing_required_fields",
+            "response_sha256": "2524f455e3c6aaa3342eda58b0c1cefec624340ba7a118e138aa7d7300d92047",
+            "response_tokens": 73,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair",
+            "missing_required_fields": [
+              "answerable"
+            ]
+          },
+          {
+            "candidate_index": 11,
+            "parse_failure_class": null,
+            "response_sha256": "ad60d9c8040a6fbc2adc5a79e9c46000642ae290b0f13274de9f187829f01e85",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 12,
+            "parse_failure_class": "json_decode_error",
+            "response_sha256": "381df4f1523bdb2c62dfa700fcc1cd69ab9a2e9e7418fc7fbcf880ec8991549e",
+            "response_tokens": 79,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 13,
+            "parse_failure_class": null,
+            "response_sha256": "7ba78db959d4c4da09df74e62b529e1caa3a687a4bcfb7df7e72de387a7e6bd0",
+            "response_tokens": 296,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 14,
+            "parse_failure_class": null,
+            "response_sha256": "e755cecf68696611156138feb22e517f4c291cad28df8201df3afb5fc69d80a0",
+            "response_tokens": 563,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 15,
+            "parse_failure_class": null,
+            "response_sha256": "94c84e0172ff9f3db5a2e92c0bf707c194ad1b45576d92842375e8e62fb4043f",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 16,
+            "parse_failure_class": null,
+            "response_sha256": "186cafbbd307e319b009202b6cf12f20556ef82e6b840d3671fe9f1158f06169",
+            "response_tokens": 122,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 17,
+            "parse_failure_class": null,
+            "response_sha256": "122a0b7a223f852b48fbee4729931d87293721006309ba953c93e60566dd290c",
+            "response_tokens": 171,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 18,
+            "parse_failure_class": null,
+            "response_sha256": "8ec9335fd207e0f2dae6f96f6757aadbe31f8ba9cd077c4119140e66b0322b0b",
+            "response_tokens": 70,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 19,
+            "parse_failure_class": null,
+            "response_sha256": "d274c6b904cab33b708b8749ef55f2282cb12133c19aa6736d91d99acf77dad0",
+            "response_tokens": 267,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 20,
+            "parse_failure_class": null,
+            "response_sha256": "ebdd8e268f39959e0fe8bb750a47f2b7bbe4081150090549777283fc179576ed",
+            "response_tokens": 70,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 21,
+            "parse_failure_class": null,
+            "response_sha256": "cdcaa821b4d6d4a8deea7f00aca5ae539ad0cbd2e483e74d33be96eaf5e0a2a3",
+            "response_tokens": 133,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 22,
+            "parse_failure_class": null,
+            "response_sha256": "cdceb7df3ecfe4f99f6d3b558a1bf1ed9d3910fec561de994e610bdc92515bb6",
+            "response_tokens": 70,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 23,
+            "parse_failure_class": null,
+            "response_sha256": "dbd70e116d1f7d1f71e3dad550e0269108560df1f825023ef9c029034e062ca6",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          }
+        ],
+        "selected_questions": 0,
+        "verified_teacher_trajectories": 0,
+        "optimizer_steps": 0,
+        "selected_question_sha256": [],
+        "assessments": [
+          {
+            "student_score": 0.8,
+            "expert_score": 0.9,
+            "quality": 0.85,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.9,
+            "completeness": 0.8,
+            "recommended": true
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.5,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.5,
+            "completeness": 0.5,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.9,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.9,
+            "clear": true,
+            "answerable": true,
+            "context_score": 1,
+            "completeness": 1,
+            "recommended": true
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.2,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.4,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.7,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0.6,
+            "expert_score": 0.8,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.3,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.5,
+            "completeness": 0.2,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.8,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.9,
+            "completeness": 0.9,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.8,
+            "clear": true,
+            "answerable": true,
+            "context_score": 1,
+            "completeness": 0.9,
+            "recommended": true
+          },
+          {
+            "student_score": 0.4,
+            "expert_score": 0.7,
+            "quality": 0.5,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.3,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0,
+            "completeness": 0,
+            "recommended": false
+          },
+          {
+            "student_score": 0.3,
+            "expert_score": 0.8,
+            "quality": 0.5,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.7,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0.5,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.3,
+            "completeness": 0.4,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.85,
+            "clear": true,
+            "answerable": true,
+            "context_score": 1,
+            "completeness": 0.95,
+            "recommended": true
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0.75,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.5,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.2,
+            "completeness": 0.4,
+            "recommended": false
+          },
+          {
+            "student_score": 0.6,
+            "expert_score": 0.9,
+            "quality": 0.7,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.7,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0.4,
+            "quality": 0.2,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.1,
+            "completeness": 0.3,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.5,
+            "completeness": 0.7,
+            "recommended": false
+          },
+          {
+            "student_score": 0.7,
+            "expert_score": 0.9,
+            "quality": 0.8,
+            "clear": true,
+            "answerable": true,
+            "context_score": 1,
+            "completeness": 0.9,
+            "recommended": true
+          },
+          {
+            "student_score": 0.6,
+            "expert_score": 0.9,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.6,
+            "recommended": false
+          }
+        ],
+        "response_tokens": 0
+      },
+      {
+        "stage": "evolution",
+        "round": 1,
+        "candidate_count": 24,
+        "analyzer_parse_failures": 4,
+        "accepted_candidates": 0,
+        "analyzer_parse_failure_classes": {
+          "json_decode_error": 1,
+          "missing_required_fields": 3
+        },
+        "analyzer_budget_exhaustions": 0,
+        "analyzer_parse_diagnostics": [
+          {
+            "candidate_index": 0,
+            "parse_failure_class": "json_decode_error",
+            "response_sha256": "5b6811748b51d9d19d4013795277f911719c73d27cbade4c094bb159b3d8ee90",
+            "response_tokens": 76,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 1,
+            "parse_failure_class": null,
+            "response_sha256": "c9b7a4bb4fd3fd5458070202b6730c1d9a5df81803671c473ae909d8b4396e23",
+            "response_tokens": 107,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 2,
+            "parse_failure_class": "missing_required_fields",
+            "response_sha256": "b6676e274bbd6d3904e1a55dcf2601d1f9f84f26124114bb9a7f01f0abe75a8f",
+            "response_tokens": 63,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair",
+            "missing_required_fields": [
+              "student_score"
+            ]
+          },
+          {
+            "candidate_index": 3,
+            "parse_failure_class": null,
+            "response_sha256": "824a899baed3abdc7682086a18eae44d0ad97100dcd82ec8f4e947258b7039e7",
+            "response_tokens": 112,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 4,
+            "parse_failure_class": "missing_required_fields",
+            "response_sha256": "b269f45f46e032e45e6266d8b6cfe147af9b2e35f80178063136f19469914afa",
+            "response_tokens": 75,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair",
+            "missing_required_fields": [
+              "student_score"
+            ]
+          },
+          {
+            "candidate_index": 5,
+            "parse_failure_class": null,
+            "response_sha256": "17a6a467670942094a3d35befd3010e8cf58ddafe235bcf372f3a3b5abedb7fa",
+            "response_tokens": 262,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 6,
+            "parse_failure_class": null,
+            "response_sha256": "76c81a0c1c76faaea29cd511bd373c9155abd53078f854ccfe9d717942a2446c",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 7,
+            "parse_failure_class": null,
+            "response_sha256": "421065edda00479aa2e362eb28751371ff74602bd0f2c42b49f0cf65b6470d38",
+            "response_tokens": 68,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 8,
+            "parse_failure_class": null,
+            "response_sha256": "f3d067167a03ba32b94b4b6f7e02a40f9d0331b590d5c99e88b8c7d75d64ef6a",
+            "response_tokens": 125,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 9,
+            "parse_failure_class": null,
+            "response_sha256": "658e053c65016f1a9e3a753a15b6b9466881c38d725061bf23b13114a4d5f16f",
+            "response_tokens": 111,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 10,
+            "parse_failure_class": null,
+            "response_sha256": "f8f3982ad6f7ad78696d710b83a9a165d933fe61c87cafc757545dd5467f3141",
+            "response_tokens": 150,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 11,
+            "parse_failure_class": null,
+            "response_sha256": "c5b36de6cde011a4876e1926cb93d6de16f96d1504272c733dd55a369a621ed1",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 12,
+            "parse_failure_class": null,
+            "response_sha256": "1bb6c02552e481c8275b2b14e91525fea1de3fc67c343e7362eb6e9b2f9ba39a",
+            "response_tokens": 137,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 13,
+            "parse_failure_class": "missing_required_fields",
+            "response_sha256": "b6676e274bbd6d3904e1a55dcf2601d1f9f84f26124114bb9a7f01f0abe75a8f",
+            "response_tokens": 63,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair",
+            "missing_required_fields": [
+              "student_score"
+            ]
+          },
+          {
+            "candidate_index": 14,
+            "parse_failure_class": null,
+            "response_sha256": "7ba5a939111f7366a7b612d73654d388aa5994ba25db0970bf78355091dabad5",
+            "response_tokens": 183,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 15,
+            "parse_failure_class": null,
+            "response_sha256": "ab8fdfb1972b9a55017de4ddc0f562975e3ac6ea5905d78cd55639d2272074dd",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 16,
+            "parse_failure_class": null,
+            "response_sha256": "79e427881adbc9ad234ab96b9266935b55e5557a18f208926d60a4dd28f6e4f3",
+            "response_tokens": 105,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 17,
+            "parse_failure_class": null,
+            "response_sha256": "0e668f121f083c3e46e6fac2768f2752b5c6ca13f0c4f3eb40ee968f52b2d05e",
+            "response_tokens": 260,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 18,
+            "parse_failure_class": null,
+            "response_sha256": "25e309d42421eca51caabb6006cd9e8c8cfdbc1ff1a33055bda06433e1c7abff",
+            "response_tokens": 68,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 19,
+            "parse_failure_class": null,
+            "response_sha256": "46504f0c16baf59a18a82ac3bd07c69f51a3e793ea002484a671ae8489ede5ba",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 20,
+            "parse_failure_class": null,
+            "response_sha256": "d171b46705051dc444f0678a0173eed7a0d76f070a0ca773bb7630798d443585",
+            "response_tokens": 226,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 21,
+            "parse_failure_class": null,
+            "response_sha256": "0a792ef334d7c974e6e5f729457a1f227568de483b30f3e292cd1cc5f6f83ed0",
+            "response_tokens": 288,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 22,
+            "parse_failure_class": null,
+            "response_sha256": "625f5c30ac81825c09e304d75e9d035c35f129c1cdd6ff34e340fc88c24364e9",
+            "response_tokens": 72,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          },
+          {
+            "candidate_index": 23,
+            "parse_failure_class": null,
+            "response_sha256": "f6c3a2e181b4d67efaf1ac4bb533ca6ebdfdeb3117e06c87b9d8634c296e0468",
+            "response_tokens": 193,
+            "token_budget": 768,
+            "truncated": false,
+            "truncation_basis": "generation budget exhausted without terminal EOS; not proof of incomplete JSON",
+            "object_extraction_rule": "last complete nonnested brace span; no invented fields or repair"
+          }
+        ],
+        "selected_questions": 0,
+        "verified_teacher_trajectories": 0,
+        "optimizer_steps": 0,
+        "selected_question_sha256": [],
+        "assessments": [
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.8,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.9,
+            "completeness": 0.9,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.9,
+            "clear": true,
+            "answerable": true,
+            "context_score": 1,
+            "completeness": 1,
+            "recommended": true
+          },
+          {
+            "student_score": 0.5,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.7,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0.6,
+            "expert_score": 0.8,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.7,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.9,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.9,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.8,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.9,
+            "completeness": 0.7,
+            "recommended": false
+          },
+          {
+            "student_score": 0.8,
+            "expert_score": 0.9,
+            "quality": 0.85,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.9,
+            "completeness": 0.9,
+            "recommended": true
+          },
+          {
+            "student_score": 0.3,
+            "expert_score": 0.7,
+            "quality": 0.4,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.2,
+            "completeness": 0.5,
+            "recommended": false
+          },
+          {
+            "student_score": 0.3,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.5,
+            "completeness": 0.4,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.4,
+            "completeness": 0.7,
+            "recommended": false
+          },
+          {
+            "student_score": 0.4,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.5,
+            "completeness": 0.7,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.8,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.9,
+            "completeness": 0.95,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.2,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.4,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0.6,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0,
+            "expert_score": 0,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.6,
+            "recommended": false
+          },
+          {
+            "student_score": 0.4,
+            "expert_score": 0.8,
+            "quality": 0.6,
+            "clear": false,
+            "answerable": true,
+            "context_score": 0.3,
+            "completeness": 0.5,
+            "recommended": false
+          },
+          {
+            "student_score": 0.6,
+            "expert_score": 0.8,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.5,
+            "completeness": 0.8,
+            "recommended": false
+          },
+          {
+            "student_score": 0.6,
+            "expert_score": 0.9,
+            "quality": 0.7,
+            "clear": true,
+            "answerable": true,
+            "context_score": 0.8,
+            "completeness": 0.6,
+            "recommended": false
+          }
+        ],
+        "response_tokens": 0
+      }
+    ],
+    "split_provenance": {
+      "verified": true,
+      "test_read": false,
+      "source_id": "openai/grade-school-math",
+      "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "partition_sha256": {
+        "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+        "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+      },
+      "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+    },
+    "test_read": false,
+    "validation_used_for_selection": false,
+    "gold_in_rollout": false
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct12_post_training.py": "96be02c4fd798c922190195723393543fb2da644ecc5eb3aae1f0a4418ca7aa2",
+    "src/auto_research/post_training/oct12_checkpoint.py": "7d4ed0b6466c99d941054c8179bb9298eb35078958e5a84a0c2a54b37d627dfd",
+    "src/auto_research/post_training/oct12_objectives.py": "f03b54c0900c21f84ce09c8d7119a3c020b0dfef04dec001610d0556d037a227",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e"
+  },
+  "provenance": {
+    "executed_commit": "8e3298a8c9075520486de4b0e4d0eda57b411af4",
+    "artifact_path": "docs/reproductions/2610.13285-boundary-evo/assets/negative-expanded-no-boundary-a100-42.json",
+    "source_hash_origin": "git show actual executed 8e3298a8c9075520486de4b0e4d0eda57b411af4; not the later semantic-prompt source",
+    "command_basis": "Parent-confirmed same expanded-v4 launch public roles/data/remaining budgets as v3; solver max_tokens changed from 384 to 768 and train-only pool_examples from 8 to 24, cross-checked with raw budget/model/dataset fields."
+  },
+  "followup": "The later semantic-prompt source 70c10c2d2fd47369523ff1407cff88853a7a24b2 separates QA validity from response correctness under paper Section 3.2 / Appendix F.3 without changing parser/gates/sampling/training. A separate real GPU execution at the same 24-pool/768-token budgets is running; this asset contains no result from that execution and is never a passed receipt."
+}

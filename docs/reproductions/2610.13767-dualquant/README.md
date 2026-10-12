@@ -2,16 +2,16 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2610.13767](https://arxiv.org/abs/2610.13767) |
 | 公司/机构 | d-Matrix |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 是：[MahsaMoonlike/dualquant](https://github.com/MahsaMoonlike/dualquant) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/MahsaMoonlike/dualquant) |
 | Adapter | `dualquant` |
 | 本地复现代码 | [`src/auto_research/reproductions/dualquant/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/dualquant/) |
 
-本地是 `core_mechanism / L1` 的限定格式software simulation，不声称A100具备原生FP4矩阵乘法。GPU验证待真实回执。
+本地是 `core_mechanism / L1` 的限定格式software simulation，已在A100执行；不声称A100具备原生FP4矩阵乘法。
 
 ## 原始论文总结
 
@@ -47,11 +47,15 @@ flowchart LR
 
 ### 核心公式
 
-$$W\approx D_\alpha^{-1}Q(D_\alpha W D_\beta)D_\beta^{-1},\quad XW^\top\approx (XD_\beta^{-1})\hat Q^\top D_\alpha^{-1}.$$
+$$
+W\approx D_\alpha^{-1}Q(D_\alpha W D_\beta)D_\beta^{-1},\quad XW^\top\approx (XD_\beta^{-1})\hat Q^\top D_\alpha^{-1}.
+$$
 
 记outer inverse-scales为 $a=\alpha^{-1},b=\beta^{-1}$，固定codes时令 $R=\hat QD_b,S=D_a\hat Q$：
 
-$$a_i\leftarrow\Pi_{F_a}\frac{\sum_j W_{ij}R_{ij}}{\sum_j R_{ij}^2},\quad b_j\leftarrow\Pi_{F_b}\frac{\sum_i W_{ij}S_{ij}}{\sum_i S_{ij}^2}.$$
+$$
+a_i\leftarrow\Pi_{F_a}\frac{\sum_j W_{ij}R_{ij}}{\sum_j R_{ij}^2},\quad b_j\leftarrow\Pi_{F_b}\frac{\sum_i W_{ij}S_{ij}}{\sum_i S_{ij}^2}.
+$$
 
 row更新后必须重新量化，再解column并重新量化；零codes slice采用scale1约定。投影的是**inverse-scale**，不是把任意正实数声称为硬件合法scale。[原文 §4、Algorithm1](https://arxiv.org/html/2610.13767v1#S4)。codes稳定之后的descent结论，不等于codes变化时期也无条件单调。
 
@@ -86,7 +90,9 @@ PYTHONPATH=src python scripts/run_oct12_foundation.py --paper dualquant \
 
 离线公开镜像须用 `--checkpoint-path`，身份/固定revision与所有model/tokenizer文件SHA256校验成功后才以local_files_only加载。`scripts/prepare_oct12_public_sources.py --source smollm` 下载固定revision并seal哈希；不把本地path、主机名或账号写回执。
 
-`metrics/protocol.json`记录待验证状态。公式单测已覆盖quantizer调用顺序、两步闭式解、zero slice、可表示scale和真实非线性activation rounding；它不是公开checkpoint质量或速度证据。计划GPU receipt `docs/gpu-validations/oct12-dualquant-a100.json`，待主集成实跑并提交。
+2026-10-12 A100实跑使用 `--max-linear-layers 0 --iterations 5`，覆盖全部合格decoder线性层。单seed隔离test NLL：single-scale `4.52491`，dual-scale `4.41843`，全精度 `3.61779`。dual-scale损伤更小，但仍劣于全精度；不能称为模型能力提升，也不支持低位kernel加速结论。
+
+实测及精确module名单见 [smollm2-wikitext-a100-42.json](metrics/smollm2-wikitext-a100-42.json)，回执见 [GPU证据](../../gpu-validations/oct12-dualquant-a100.json)。公式单测覆盖调用顺序、闭式解、zero slice、可表示scale与activation rounding。
 
 ### 代码映射与边界
 

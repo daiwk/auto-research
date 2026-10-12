@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2609.37800](https://arxiv.org/abs/2609.37800) |
-| 公司/机构 | DFKI / RPTU Kaiserslautern-Landau（按第一作者署名单位） |
+| 公司/机构 | DFKI / RPTU Kaiserslautern-Landau |
 | 首次公开日期 | 2026-09-29（arXiv v1） |
-| 原文开源代码 | 是：[https://github.com/etowho/university-games](https://github.com/etowho/university-games) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/etowho/university-games) |
 | Adapter | `cohortmix-ts` |
 | 本地复现代码 | [`src/auto_research/reproductions/cohortmix_ts/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/cohortmix_ts/) |
 

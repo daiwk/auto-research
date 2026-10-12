@@ -1,0 +1,368 @@
+{
+  "schema_version": 2,
+  "adapter_key": "janus",
+  "method": "janus",
+  "seeds": [
+    42
+  ],
+  "dataset": {
+    "id": "public-circle-packing-26",
+    "revision": "f30bf47278995c72b9b96c19a0806974d73f64bc",
+    "revision_kind": "executed environment source snapshot; no external dataset download",
+    "fingerprint_kind": "SHA256 of compact sorted JSON task specification, initial program and environment-source hashes",
+    "task_spec_sha256": "c51cb7f0c67e705dd88b8fdcdfefc222bb80e5a82a2e6f909daefa83ad575aa3",
+    "initial_program_sha256": "fc8f76ffed862958681350e8fe4e72e32e490d18f7d378fe3a0e824dd027e7c3",
+    "environment_source_sha256": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+    "partition": "single circle task; no independent capability validation/test"
+  },
+  "checkpoint": {
+    "policy": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "budget": {
+    "rounds": 2,
+    "group_size": 3,
+    "max_tokens": 1536,
+    "train_steps_cli_default": 2,
+    "train_steps_used_by_janus": false,
+    "attention_backend": "sdpa"
+  },
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "capability_comparison": false,
+  "evolve_promotion_eligible": false,
+  "manifest_ref": "reproduction:janus",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Single-task L1 mechanism diagnostic; both generated trials score0 and initial baseline remains best. No research/circle capability improvement or Evolve promotion.",
+    "independent_capability_test": false,
+    "old_eager_comparison": "Historical eager run used group2; new SDPA run uses group3. Not an equal-budget attention-backend performance comparison."
+  },
+  "metrics": {
+    "graph_nodes": 7,
+    "generated_proposals": 6,
+    "actual_trials": 2,
+    "pruned_proposals": 4,
+    "recorded_preference_probabilities": 18,
+    "debate_refined_trials": 2,
+    "final_nonempty_skill_sets": 5,
+    "initial_raw_circle_score": 2.166666666666666,
+    "trial0_raw_circle_score": 0.0,
+    "trial1_raw_circle_score": 0.0,
+    "best_realized_raw_circle_score": 2.166666666666666
+  },
+  "sanitized_trace": {
+    "graph": [
+      {
+        "id": "root",
+        "parents": [],
+        "status": "executed",
+        "proposal_sha256": "ac1b5c0961a7269b6a053ee64276ed0e20a7f48aefb9f67519539d23aaf10149",
+        "evidence": {
+          "score": 2.166666666666666,
+          "feedback_sha256": "18b1e9a43eb05074ccf8b0e3467859a4fe6e59165e473b75421e387bb093cbb9",
+          "role": "initial legal baseline, not a generated trial"
+        }
+      },
+      {
+        "id": "proposal-1",
+        "parents": [
+          "root"
+        ],
+        "status": "executed",
+        "predictions": {
+          "VI": 1.0,
+          "IG": 1.0,
+          "EV": 1.0
+        },
+        "priority": 1.0,
+        "proposal_sha256": "ef76a76dde6ff840fe115a257d989df51d44f3c56681737896b2f2585cfba6e1",
+        "evidence": {
+          "score": 0.0,
+          "feedback_sha256": "39ba3aee644ad4e5b700339e513bb9abc9f3adcce26655aee636d3bb477a1cbb",
+          "implementation_sha256": "bfca06a6f06958385ae4463c47814ab79cbdd87c095a72f04e7ffd610612bc2f",
+          "failure_category": "invalid_circle_packing"
+        }
+      },
+      {
+        "id": "proposal-2",
+        "parents": [
+          "root"
+        ],
+        "status": "pruned",
+        "predictions": {
+          "VI": 0.5811023712158203,
+          "IG": 0.8437771201133728,
+          "EV": 0.6693897247314453
+        },
+        "priority": 0.6688428968191147,
+        "proposal_sha256": "b3995dbf0b6012d941e222cfbc74b18d199c0d8290f521a33d63d40ba887ed4c"
+      },
+      {
+        "id": "proposal-3",
+        "parents": [
+          "root"
+        ],
+        "status": "pruned",
+        "predictions": {
+          "VI": 0.0,
+          "IG": 0.0,
+          "EV": 0.0
+        },
+        "priority": 0.0,
+        "proposal_sha256": "2f390b76a2c48547b997a20d17ae39ff498564d240c83221d06b4e827ebedbc6"
+      },
+      {
+        "id": "proposal-4",
+        "parents": [
+          "proposal-1"
+        ],
+        "status": "executed",
+        "predictions": {
+          "VI": 1.0,
+          "IG": 1.0,
+          "EV": 1.0
+        },
+        "priority": 1.0,
+        "proposal_sha256": "c1126f931e6aa295f21e6552bb3307bd889c7a60ea47c6126b031b6d52ec78d9",
+        "evidence": {
+          "score": 0.0,
+          "feedback_sha256": "b5d9e1bdb306bb760db5930db72cc868569b0b02d59358dbbf192c326a78de4e",
+          "implementation_sha256": "5ffceac376862dea1cef0ea85eadb71cf01dd19755cd6617ac3eb1277b9ae64f",
+          "failure_category": "NameError"
+        }
+      },
+      {
+        "id": "proposal-5",
+        "parents": [
+          "proposal-1"
+        ],
+        "status": "pruned",
+        "predictions": {
+          "VI": 0.5070235729217529,
+          "IG": 0.5257255434989929,
+          "EV": 0.5285905003547668
+        },
+        "priority": 0.5170907974243164,
+        "proposal_sha256": "2021ed90a56da0305bb2ee72c4456a414cf3d3637715dc9c67399f1526125e98"
+      },
+      {
+        "id": "proposal-6",
+        "parents": [
+          "proposal-1"
+        ],
+        "status": "pruned",
+        "predictions": {
+          "VI": 0.0,
+          "IG": 0.0,
+          "EV": 0.0
+        },
+        "priority": 0.0,
+        "proposal_sha256": "cf2b0609b2f71401eb9f2b3040f24fa7b4ebe8727dc4004ef65730eecd2c2196"
+      }
+    ],
+    "audit": [
+      {
+        "iteration": 0,
+        "selected": "proposal-1",
+        "beta": 0.5,
+        "gamma": 0.5,
+        "remaining": 2,
+        "comparisons": {
+          "VI": [
+            [
+              0,
+              1,
+              0.4843800961971283
+            ],
+            [
+              1,
+              2,
+              0.5
+            ],
+            [
+              0,
+              2,
+              0.6513549089431763
+            ]
+          ],
+          "IG": [
+            [
+              0,
+              1,
+              0.5
+            ],
+            [
+              1,
+              2,
+              0.622459352016449
+            ],
+            [
+              0,
+              2,
+              0.7057850360870361
+            ]
+          ],
+          "EV": [
+            [
+              0,
+              1,
+              0.5467381477355957
+            ],
+            [
+              1,
+              2,
+              0.6076632142066956
+            ],
+            [
+              0,
+              2,
+              0.6926419734954834
+            ]
+          ]
+        },
+        "debate_refined": true,
+        "evidence": {
+          "score": 0.0,
+          "feedback_sha256": "39ba3aee644ad4e5b700339e513bb9abc9f3adcce26655aee636d3bb477a1cbb",
+          "implementation_sha256": "bfca06a6f06958385ae4463c47814ab79cbdd87c095a72f04e7ffd610612bc2f",
+          "failure_category": "invalid_circle_packing"
+        }
+      },
+      {
+        "iteration": 1,
+        "selected": "proposal-4",
+        "beta": 0.5,
+        "gamma": 0.5,
+        "remaining": 1,
+        "comparisons": {
+          "VI": [
+            [
+              0,
+              1,
+              0.957912266254425
+            ],
+            [
+              1,
+              2,
+              0.9626730680465698
+            ],
+            [
+              0,
+              2,
+              0.9626730680465698
+            ]
+          ],
+          "IG": [
+            [
+              0,
+              1,
+              0.9525741338729858
+            ],
+            [
+              1,
+              2,
+              0.970687747001648
+            ],
+            [
+              0,
+              2,
+              0.9525741338729858
+            ]
+          ],
+          "EV": [
+            [
+              0,
+              1,
+              0.9553191661834717
+            ],
+            [
+              1,
+              2,
+              0.9740425944328308
+            ],
+            [
+              0,
+              2,
+              0.9626730680465698
+            ]
+          ]
+        },
+        "debate_refined": true,
+        "evidence": {
+          "score": 0.0,
+          "feedback_sha256": "b5d9e1bdb306bb760db5930db72cc868569b0b02d59358dbbf192c326a78de4e",
+          "implementation_sha256": "5ffceac376862dea1cef0ea85eadb71cf01dd19755cd6617ac3eb1277b9ae64f",
+          "failure_category": "NameError"
+        }
+      }
+    ],
+    "final_skills": {
+      "intra": {
+        "sha256": "d1f1fb81c33b7728b5c70136f9021634cf179015db26a7b8609af6cc8484a7ad",
+        "utf8_bytes": 6171,
+        "nonempty": true
+      },
+      "cross": {
+        "sha256": "8f179ad2f12b7d4be0e4b97874a7853ce7377be01541eb90b47b90c5d9d64436",
+        "utf8_bytes": 5889,
+        "nonempty": true
+      },
+      "prediction": {
+        "sha256": "75bc5ab73d62ca98172c6b723a8663acdb303942506d2d040e8ec1caebf4a16c",
+        "utf8_bytes": 5634,
+        "nonempty": true
+      },
+      "exploration": {
+        "sha256": "c033ddfe4b236eb3e75538948fcc758f07d238d943d9c5e4766b1b10ae508a69",
+        "utf8_bytes": 5575,
+        "nonempty": true
+      },
+      "coordination": {
+        "sha256": "c61d3da7108789b4ee9a6d7d40bfedb4c833d0d642eb497f02b3a18f3de589aa",
+        "utf8_bytes": 5414,
+        "nonempty": true
+      }
+    },
+    "skill_update_events": 2,
+    "skill_update_event_evidence": "The verified controller appends each audit entry only after evolve_skills returns all five keys. Only final skill texts are present in raw; no claim that every skill changed on every round.",
+    "tournament_recording_limitation": "Audit retains final post-debate comparisons only; pre-debate probability values are not preserved and are not reconstructed.",
+    "environment": "public-circle-packing-26",
+    "attention_backend": "sdpa"
+  },
+  "provenance": {
+    "executed_commit": "f30bf47278995c72b9b96c19a0806974d73f64bc",
+    "artifact_path": "docs/reproductions/2610.13194-janus/metrics/public-circle-sdpa-a100-42.json",
+    "dataset_fingerprint": "26bf2d5e9a146d148eedec77dc25bcdc572dfda71f3df200ac8b43eb16a7876b",
+    "raw_result_sha256": "26b469aa9eaa12dce486a9f3110f851f08e38409b79b3f05fa2ea544bbe9a577",
+    "source_hash_origin": "git show executed_commit:path; not current HEAD or later Boundary changes",
+    "executed_code_commit": "f30bf47278995c72b9b96c19a0806974d73f64bc",
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-janus-a100.json"
+  },
+  "historical_eager_failure_evidence": "../assets/historical-eager-oom.json"
+}

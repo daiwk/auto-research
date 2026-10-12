@@ -1,0 +1,5081 @@
+{
+  "schema_version": 2,
+  "track": "agent",
+  "window": {
+    "start": "2026-10-07",
+    "end": "2026-10-12"
+  },
+  "query_matrix": [
+    "llm-agent",
+    "agentic-rl",
+    "tool-agent",
+    "web-agent",
+    "software-agent",
+    "agent-memory",
+    "agent-planning",
+    "multi-agent"
+  ],
+  "candidate_count": 213,
+  "triage_counts": {
+    "new": 208,
+    "implemented": 5,
+    "reviewed": 0,
+    "google_meta_priority_review": 0
+  },
+  "candidates": [
+    {
+      "arxiv_id": "2610.13886",
+      "title": "X-AgentRed: Red-Teaming Personal Agents in Evolving Multi-Service Ecosystems",
+      "published": "2026-10-09T17:34:44Z",
+      "url": "http://arxiv.org/abs/2610.13886v1",
+      "authors": [
+        "Yeonsung Jung",
+        "Zhiyuan Wang",
+        "Zifan Wang",
+        "Vítor Albiero",
+        "Benjamin Newman",
+        "Edoardo Debenedetti",
+        "Ivan Evtimov",
+        "Ninareh Mehrabi"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13841",
+      "title": "Returning to Development States: When Full Sandbox Snapshots Help Coding Agents",
+      "published": "2026-10-09T16:50:19Z",
+      "url": "http://arxiv.org/abs/2610.13841v1",
+      "authors": [
+        "Daniel Thi Graviet",
+        "Tanmay Shah"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13772",
+      "title": "MARGoS: A Configuration-Driven Platform for Reproducible MARL Experiments in ARGoS",
+      "published": "2026-10-09T15:55:16Z",
+      "url": "http://arxiv.org/abs/2610.13772v1",
+      "authors": [
+        "Tom Philipp Backert",
+        "Mohammad D. Soorati",
+        "Javad Ghofrani"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13755",
+      "title": "Matched-Context Group Policy Optimization for LLM Agent Training",
+      "published": "2026-10-09T15:41:37Z",
+      "url": "http://arxiv.org/abs/2610.13755v1",
+      "authors": [
+        "Chenxu Zhang",
+        "Yaorui Shi",
+        "Wenlong Zhang",
+        "Jianchao Tan",
+        "Zihan Wang",
+        "Yiming Cheng"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13737",
+      "title": "SafeDiSTL: Decomposing Joint Constraints for Safe Multi-Agent Reinforcement Learning",
+      "published": "2026-10-09T15:32:06Z",
+      "url": "http://arxiv.org/abs/2610.13737v1",
+      "authors": [
+        "Hongrui Zheng",
+        "Aditya Singh",
+        "Rahul Mangharam"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13703",
+      "title": "A Baseline Assessment for the Agentic Web Technology Stack",
+      "published": "2026-10-09T14:59:24Z",
+      "url": "http://arxiv.org/abs/2610.13703v1",
+      "authors": [
+        "Vagner Figueredo de Santana",
+        "Diogo Cortiz"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13668",
+      "title": "(When) Should a Software Factory be Lights-off? Benchmarking Code Review Agents on Bug Detection",
+      "published": "2026-10-09T14:37:15Z",
+      "url": "http://arxiv.org/abs/2610.13668v1",
+      "authors": [
+        "Chenyang Yang",
+        "Hao He",
+        "Ti-Chung Cheng",
+        "Jenna Butler",
+        "Emerson Murphy-Hill",
+        "Carmen Badea",
+        "Christian Bird"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13663",
+      "title": "A Multi-Agent LLM System for Automated Tuning of Specialized Neural Network Models",
+      "published": "2026-10-09T14:34:22Z",
+      "url": "http://arxiv.org/abs/2610.13663v1",
+      "authors": [
+        "Ivan Moloshnikov",
+        "Dmitry Kunitsyn",
+        "Alexander Sboev",
+        "Maksim Skorokhodov",
+        "Roman Rybka",
+        "Yuanchao Liu"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13647",
+      "title": "A-SAW: The Agentic Software Architecture Workflow",
+      "published": "2026-10-09T14:25:24Z",
+      "url": "http://arxiv.org/abs/2610.13647v1",
+      "authors": [
+        "Finn Klatt",
+        "Luca Di Grazia",
+        "Johannes Schneider"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13632",
+      "title": "Humanize Olympiad Agents: A Multi-Session Workflow for Olympiad Problem Solving with Solve, Review, Wiki, Verify",
+      "published": "2026-10-09T14:14:14Z",
+      "url": "http://arxiv.org/abs/2610.13632v1",
+      "authors": [
+        "Zhengyang Zhang",
+        "Jing Xiong",
+        "Hongzhou Lin",
+        "Juihui Chung",
+        "Zijian Zhang",
+        "Song Han",
+        "Sihao Liu",
+        "Ligeng Zhu"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13594",
+      "title": "MENTOR: Learning from Failure with On-Policy Pedagogical Intervention",
+      "published": "2026-10-09T13:43:49Z",
+      "url": "http://arxiv.org/abs/2610.13594v1",
+      "authors": [
+        "Guanlan Yue",
+        "Hang Yu",
+        "Xiaoyong Huang",
+        "Ruipeng Li",
+        "Wei Zhang",
+        "Bingchang Liu",
+        "Rui Wang"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13563",
+      "title": "Not All Correct Fixes Run Alike: An Empirical Study of Patch Performance in Repository-Level Issue Resolution",
+      "published": "2026-10-09T13:17:53Z",
+      "url": "http://arxiv.org/abs/2610.13563v1",
+      "authors": [
+        "Han Peng",
+        "Xing Hu",
+        "Feifei Niu",
+        "Huan Li",
+        "Xin Xia"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13494",
+      "title": "Humanize MLE Agents: Multi-Agent Session Alternation Beyond Single-Agent Limits",
+      "published": "2026-10-09T12:26:34Z",
+      "url": "http://arxiv.org/abs/2610.13494v1",
+      "authors": [
+        "Changye Li",
+        "Zijian Zhang",
+        "Muheng Li",
+        "Yiduo Pang",
+        "Tingjun Wu",
+        "Menghan Li",
+        "Yitong Liu",
+        "Hongkai Guo",
+        "Mengchi Chen",
+        "Chenyu He",
+        "Kaisheng Ma",
+        "Wei Xu",
+        "Song Han",
+        "Sihao Liu",
+        "Ligeng Zhu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13455",
+      "title": "Agentic Large Language Models",
+      "published": "2026-10-09T11:57:04Z",
+      "url": "http://arxiv.org/abs/2610.13455v1",
+      "authors": [
+        "Max van Duijn",
+        "Michiel van der Meer",
+        "Aske Plaat",
+        "Niki van Stein"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13439",
+      "title": "Collective Autonomous Vehicle Routing Needs Social Awareness for Coexistence with Human Drivers",
+      "published": "2026-10-09T11:37:47Z",
+      "url": "http://arxiv.org/abs/2610.13439v1",
+      "authors": [
+        "Anastasia Psarou",
+        "Mikolaj Rams",
+        "Blazej Torbus",
+        "Rafal Kucharski"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13438",
+      "title": "Rollout-Time Intervention: Unlocking Agentic Reinforcement Learning Beyond Policy Limits",
+      "published": "2026-10-09T11:37:09Z",
+      "url": "http://arxiv.org/abs/2610.13438v1",
+      "authors": [
+        "Chen Xi",
+        "Ding Ruixue",
+        "Wang Zhigaoyuan",
+        "Zhang Fanrui",
+        "Zhang Qiang",
+        "Chen Boli",
+        "Wang Shihang",
+        "Wang Tianfu",
+        "Ren Ailin",
+        "Wang Pengyong",
+        "Xie Pengjun",
+        "Xiong Hui"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "agentic-rl",
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13421",
+      "title": "REINS: Agent-guided Thread Scheduling for Concurrency Bug Detection and Reproduction",
+      "published": "2026-10-09T11:27:12Z",
+      "url": "http://arxiv.org/abs/2610.13421v1",
+      "authors": [
+        "Yu Zhang",
+        "Corina S. Pasareanu",
+        "Guowei Yang"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13416",
+      "title": "Web$hell: A Unified Interface for Agentic Web Access",
+      "published": "2026-10-09T11:23:40Z",
+      "url": "http://arxiv.org/abs/2610.13416v1",
+      "authors": [
+        "Sunghwan Kim",
+        "Deogyong Kim",
+        "Sangam Lee",
+        "Donguk Kwon",
+        "Dongha Lee"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "web-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13395",
+      "title": "ProgramGym: Scaling Training Environments for Long-Horizon Program Reproduction Agents",
+      "published": "2026-10-09T11:09:54Z",
+      "url": "http://arxiv.org/abs/2610.13395v1",
+      "authors": [
+        "Chengyi Yang",
+        "Renxu Bao",
+        "Jue Hou",
+        "Zongpei Teng",
+        "Ziheng Wang",
+        "Yujie Lin",
+        "Chengsong Huang",
+        "Junnan Zhu",
+        "Delai Qiu",
+        "Yining Wang",
+        "Shengping Liu",
+        "Fei Long",
+        "Jinsong Su"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13361",
+      "title": "AgentSWE: Can Coding Agents Build the Agent You Actually Want?",
+      "published": "2026-10-09T10:35:27Z",
+      "url": "http://arxiv.org/abs/2610.13361v1",
+      "authors": [
+        "Jiahao Wang",
+        "Hongjin Qian",
+        "Yuyang Hu",
+        "Jiajun Zhang",
+        "Zheng Liu"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13356",
+      "title": "SWE-Critix: Post-Training Generalist Verifiers for Assessing Coding-Agent Trajectories",
+      "published": "2026-10-09T10:30:21Z",
+      "url": "http://arxiv.org/abs/2610.13356v1",
+      "authors": [
+        "Jiajun Hu",
+        "Chun Yong Chong"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13335",
+      "title": "AgentTune: A Unified Training Lifecycle for Tool-Using LLM Agents",
+      "published": "2026-10-09T10:09:27Z",
+      "url": "http://arxiv.org/abs/2610.13335v1",
+      "authors": [
+        "R E Zera Marveen Lyngkhoi",
+        "Abhivansh Gupta",
+        "Vidushee Vats",
+        "Ram Mohan Rao Kadiyala",
+        "Vinay Kumar Sankarapu",
+        "Pratinav Seth"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13330",
+      "title": "Masked Diffusion Language Agents for Tool-Integrated Chemical Reasoning",
+      "published": "2026-10-09T10:07:37Z",
+      "url": "http://arxiv.org/abs/2610.13330v1",
+      "authors": [
+        "Mengdi Liu",
+        "Chenghao Jia",
+        "Hong Chang",
+        "Shiguang Shan"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13325",
+      "title": "Taking Tokenization off the Host for Agentic LLM Serving",
+      "published": "2026-10-09T10:05:09Z",
+      "url": "http://arxiv.org/abs/2610.13325v1",
+      "authors": [
+        "Mohammad Siavashi",
+        "Pascal Schwinte",
+        "Ali Banaei",
+        "Gerald Q. Maguire",
+        "Marco Chiesa",
+        "Dejan Kostić"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13296",
+      "title": "PRIME: Pre-Retrieval Index Modeling Enhancement for Structured Document Retrieval-Real",
+      "published": "2026-10-09T09:44:47Z",
+      "url": "http://arxiv.org/abs/2610.13296v1",
+      "authors": [
+        "Cheuk Hei Chung",
+        "Li Liu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13273",
+      "title": "Agent4Spec: An LLM-based Agentic System to Optimize API Specifications through Automated Validation and Market Analysis",
+      "published": "2026-10-09T09:25:30Z",
+      "url": "http://arxiv.org/abs/2610.13273v1",
+      "authors": [
+        "Yongjian Tang",
+        "Costel Moraru",
+        "Doruk Tuncel",
+        "Hanya Elhashemy",
+        "Steffen Klepke",
+        "Thomas Runkler"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13267",
+      "title": "Forgetting is Not Always Bad: A Neuro-Inspired Memory Repair Mechanism for Poisoned LLM Agents",
+      "published": "2026-10-09T09:17:00Z",
+      "url": "http://arxiv.org/abs/2610.13267v1",
+      "authors": [
+        "Lei Liu",
+        "Yunji Liang",
+        "Xiaowen Zhang",
+        "Jingqi Liu",
+        "Qi Li",
+        "Bin Guo",
+        "Zhiwen Yu"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13227",
+      "title": "Understanding and Mitigating Cross-Session Attacks via Persistent Artifacts in Agent Skill Composition",
+      "published": "2026-10-09T08:45:27Z",
+      "url": "http://arxiv.org/abs/2610.13227v1",
+      "authors": [
+        "Dianshu Liao",
+        "Shidong Pan",
+        "Guangdong Bai",
+        "Zhenchang Xing",
+        "Xiaoyu Sun"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13172",
+      "title": "RoleWorld: Knowledge Transfer in World Modeling with Functional Role Abstractions",
+      "published": "2026-10-09T07:58:45Z",
+      "url": "http://arxiv.org/abs/2610.13172v1",
+      "authors": [
+        "Boyuan Xiao",
+        "Pu Wang",
+        "Ji Feng",
+        "Yao-Xiang Ding"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13166",
+      "title": "Scaling Agentic Data for Long-Horizon Terminal Intelligence",
+      "published": "2026-10-09T07:55:55Z",
+      "url": "http://arxiv.org/abs/2610.13166v1",
+      "authors": [
+        "Shun Zou",
+        "Ziyu Ma",
+        "Yi Zou",
+        "Yong Wang",
+        "Lin Chen",
+        "Zehui Chen",
+        "Guanhua Chen",
+        "Xiangxiang Chu",
+        "Feng Zhao"
+      ],
+      "matched_queries": [
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13152",
+      "title": "Quality, Not Just Outcome: A Structural Scoring Framework for Selecting Coding-Agent Trajectories for Supervised Fine-Tuning",
+      "published": "2026-10-09T07:40:42Z",
+      "url": "http://arxiv.org/abs/2610.13152v1",
+      "authors": [
+        "Sida Li",
+        "Yuanxin Liu",
+        "Shicheng Li",
+        "Linli Yao",
+        "Xu Sun",
+        "Haoli Bai",
+        "Xiaohui Li"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13144",
+      "title": "Competence-Aware Orchestration for LLM-Based Multi-Agent Systems",
+      "published": "2026-10-09T07:33:42Z",
+      "url": "http://arxiv.org/abs/2610.13144v1",
+      "authors": [
+        "Songmiao Wang",
+        "Yuchen Wang",
+        "Chenglin Yu",
+        "Hongxia Yang",
+        "Ming Li"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13116",
+      "title": "DRYLAB-Bench: Benchmarking the Biosecurity Risk of Agentic LLM Mutation Design",
+      "published": "2026-10-09T07:09:16Z",
+      "url": "http://arxiv.org/abs/2610.13116v1",
+      "authors": [
+        "Yuzhen Wang",
+        "Chunxiao Li",
+        "Baichen Le",
+        "Lewen Yan",
+        "Jie Zhang",
+        "Yucheng T. Yang",
+        "Xing-Ming Zhao",
+        "Lijun Li",
+        "Jing Shao"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13092",
+      "title": "When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows",
+      "published": "2026-10-09T06:45:23Z",
+      "url": "http://arxiv.org/abs/2610.13092v1",
+      "authors": [
+        "Yuchen Ling",
+        "Shengcheng Yu",
+        "Zhenyu Chen",
+        "Chunrong Fang"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13071",
+      "title": "CAPE - Context-Aware Prioritization Engine for Vulnerability Scoring and Management",
+      "published": "2026-10-09T06:30:34Z",
+      "url": "http://arxiv.org/abs/2610.13071v1",
+      "authors": [
+        "Rakesh Podder",
+        "Viktoria Koscinski",
+        "Indrajit Ray"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13065",
+      "title": "TestSuiteBench: Coding Agents Struggle to Generate Strong Test Suites from Specifications",
+      "published": "2026-10-09T06:26:02Z",
+      "url": "http://arxiv.org/abs/2610.13065v1",
+      "authors": [
+        "Kazuki Egashira",
+        "Niels Mündler-Sasahara",
+        "Mark Niklas Müller",
+        "Martin Vechev"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13025",
+      "title": "Evo$^2$: Evolving the Evolver through Weight-Harness Co-Evolution",
+      "published": "2026-10-09T05:28:02Z",
+      "url": "http://arxiv.org/abs/2610.13025v1",
+      "authors": [
+        "Chejian Xu",
+        "Shujian Zhang",
+        "Wenxuan Zhou",
+        "John Lambert",
+        "Beck Chen",
+        "Bo Li",
+        "Andrew Hard",
+        "Rajiv Mathews"
+      ],
+      "matched_queries": [
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.13022",
+      "title": "Don't Guess, Just Ask: Evaluating Interactive Requirement Clarification for Repository-Level Software Development",
+      "published": "2026-10-09T05:23:01Z",
+      "url": "http://arxiv.org/abs/2610.13022v1",
+      "authors": [
+        "Mingyu Chen",
+        "Zhiqing Zhong",
+        "Manyi Wang",
+        "Linxi Liang",
+        "Rouyu Chen",
+        "Pinjia He"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12975",
+      "title": "SmartSalesBench: A Resistance-Aware Multi-Turn Benchmark for Evaluating LLM Sales Agents",
+      "published": "2026-10-09T04:21:12Z",
+      "url": "http://arxiv.org/abs/2610.12975v1",
+      "authors": [
+        "P N Bhargav Teja",
+        "Velpula Lokesh Reddy",
+        "Madhu Basumata",
+        "Susen Sarkar",
+        "Rajasekhara Reddy Duvvuru Muni"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12957",
+      "title": "JoyInside-VLM-Agent: Product-Conditioned Multimodal Policy Learning for Embodied Agents",
+      "published": "2026-10-09T03:54:58Z",
+      "url": "http://arxiv.org/abs/2610.12957v1",
+      "authors": [
+        "Gangyi Li",
+        "LuYao Wang",
+        "Jingfu Sun",
+        "Jingyi Yuan",
+        "Hang Liu",
+        "Hao Zong",
+        "Yujia Hu",
+        "Tingting Gao",
+        "Jianyong Wang",
+        "Xu Yang"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12932",
+      "title": "SEEDS: Preview-Guided Evidence Admission for Search Agents",
+      "published": "2026-10-09T03:25:39Z",
+      "url": "http://arxiv.org/abs/2610.12932v1",
+      "authors": [
+        "Jiajin Liu",
+        "Chenxi Xu",
+        "Dongzhe Fan",
+        "Yuanfu Sun",
+        "Qiaoyu Tan"
+      ],
+      "matched_queries": [
+        "multi-agent",
+        "web-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12927",
+      "title": "Collaborative Learning and Reasoning over Model Slices",
+      "published": "2026-10-09T03:17:29Z",
+      "url": "http://arxiv.org/abs/2610.12927v1",
+      "authors": [
+        "Yuheng Wang",
+        "Runde Yang",
+        "Zhuohan Bao",
+        "Qiran Zhang",
+        "Huatao Li",
+        "Yiyang Zheng",
+        "Lin Wu",
+        "Jingru Fan",
+        "Shu Yao",
+        "Yihan Li",
+        "Zhi Li",
+        "Chen Qian"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12874",
+      "title": "Temporal Evidence Forests for Long-Horizon Multi-Party Conversational Memory",
+      "published": "2026-10-09T02:05:38Z",
+      "url": "http://arxiv.org/abs/2610.12874v1",
+      "authors": [
+        "Junyou Guo",
+        "Chongyang Tao",
+        "Yan He",
+        "Yong Wang",
+        "Shuai Ma"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12849",
+      "title": "Co-Modifying Application Code and Deployment Infrastructure: A Causal Study of AI Agent Pull Requests",
+      "published": "2026-10-09T01:16:04Z",
+      "url": "http://arxiv.org/abs/2610.12849v1",
+      "authors": [
+        "Mohammad Wathiq Soualhi",
+        "Basem Suleiman"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12822",
+      "title": "Reward Hacking as a Transmissible Strategy in Multi-Agent Coding Systems",
+      "published": "2026-10-09T00:02:59Z",
+      "url": "http://arxiv.org/abs/2610.12822v1",
+      "authors": [
+        "Yuepeng Hu",
+        "Pegah Ghahremani",
+        "Reza Aghajani",
+        "Mahesh Pasupuleti",
+        "Himaghna Bhattacharjee"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "agent-planning",
+        "agentic-rl",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12813",
+      "title": "VEPA: Verified Evolving Formal Policy for Lifelong LLM Agent Guardrails",
+      "published": "2026-10-08T23:49:50Z",
+      "url": "http://arxiv.org/abs/2610.12813v1",
+      "authors": [
+        "Duy Nguyen",
+        "Lesly Miculicich",
+        "Bhavana Dalvi Mishra",
+        "Shuo Li",
+        "Krishnamurthy Dj Dvijotham",
+        "Mohit Bansal",
+        "Tomas Pfister",
+        "Long T. Le"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12794",
+      "title": "Meta-Reflective Evolution Effectively Improves Production AI Systems",
+      "published": "2026-10-08T23:00:44Z",
+      "url": "http://arxiv.org/abs/2610.12794v1",
+      "authors": [
+        "Seung Won Wilson Yoo",
+        "Chang Zeng",
+        "Aditi Somayajula",
+        "Sahithi Ankireddy",
+        "Rohan Kosalge",
+        "Avishree Khare",
+        "John Mitchell",
+        "Aditya G. Parameswaran",
+        "Rajhans Samdani",
+        "Anupam Datta"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12792",
+      "title": "Large Language Models, Machine-Assisted Cultural Analytics, and the Agentic Turn",
+      "published": "2026-10-08T22:54:57Z",
+      "url": "http://arxiv.org/abs/2610.12792v1",
+      "authors": [
+        "Andres Karjus"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12789",
+      "title": "EvoBelief: Falsifiable World Models for Self-Improving LLM Agents",
+      "published": "2026-10-08T22:46:14Z",
+      "url": "http://arxiv.org/abs/2610.12789v1",
+      "authors": [
+        "Janet Wang",
+        "Jiang Guo",
+        "Yi Xiang",
+        "Jiaqing Yuan",
+        "Mingwen Dong",
+        "Hideo Kobayashi",
+        "Shuaichen Chang",
+        "Chandan K. Reddy",
+        "Jiarong Jiang"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "agent-planning",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12668",
+      "title": "Recurrent Harness for Agentic Continual Learning",
+      "published": "2026-10-08T19:44:43Z",
+      "url": "http://arxiv.org/abs/2610.12668v1",
+      "authors": [
+        "Yuxin Xiao",
+        "Zhiyun Lu",
+        "Jianyu Wang",
+        "Yangtian Zhang",
+        "Yang Song",
+        "Qifan Wang",
+        "Bailin Wang"
+      ],
+      "matched_queries": [
+        "agent-memory"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12655",
+      "title": "CLEAT: Learning Value-Guided Clarification for Interactive Agents",
+      "published": "2026-10-08T19:22:21Z",
+      "url": "http://arxiv.org/abs/2610.12655v1",
+      "authors": [
+        "Jiatan Huang",
+        "Zheyuan Zhang",
+        "Ziming Li",
+        "Tianyi Ma",
+        "Mingchen Li",
+        "Yanfang Ye",
+        "Chuxu Zhang"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12651",
+      "title": "SynAct: Synergistic Active Feedback Learning for LLM Agents",
+      "published": "2026-10-08T19:20:10Z",
+      "url": "http://arxiv.org/abs/2610.12651v1",
+      "authors": [
+        "Ning Liu",
+        "Ian Li",
+        "Kristina Klinkner"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12611",
+      "title": "SoftwareGym: Scaling Computer-Use Agent Training with Diverse Synthesized Software Environments",
+      "published": "2026-10-08T18:31:16Z",
+      "url": "http://arxiv.org/abs/2610.12611v1",
+      "authors": [
+        "Tian Jin",
+        "Wenhao Wang",
+        "Jing Kang",
+        "Haoting Shi",
+        "Rui Ye",
+        "Yijun Lu",
+        "Siheng Chen"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12601",
+      "title": "Reflective Prompt Optimization of a Deep-Research Agent: A Topic-Disjoint, Multi-Seed Protocol for Measuring Transferable Gains and Prompt-Level Overfitting",
+      "published": "2026-10-08T18:23:23Z",
+      "url": "http://arxiv.org/abs/2610.12601v1",
+      "authors": [
+        "Elias Lumer",
+        "Sahil Sen",
+        "Vamse Kumar Subbiah",
+        "Kevin Paul"
+      ],
+      "matched_queries": [
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12598",
+      "title": "Beyond Binary Verifiable Rewards: Behavioral Self-Rewarding for SWE Agents",
+      "published": "2026-10-08T18:21:10Z",
+      "url": "http://arxiv.org/abs/2610.12598v1",
+      "authors": [
+        "Yiran Wu",
+        "Andrew Zhao",
+        "Yurui Chang",
+        "Qingyun Wu",
+        "Xuan Feng"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12596",
+      "title": "SpireBench: Evaluating Long-Horizon Strategic Play of Agentic Models with Slay the Spire",
+      "published": "2026-10-08T18:18:19Z",
+      "url": "http://arxiv.org/abs/2610.12596v1",
+      "authors": [
+        "Scott C. Lowe",
+        "Sander W. Keemink"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12593",
+      "title": "Know What You Don't Know: Agentic Data Synthesis by Evolving Generation Space for Closed-Loop Learning",
+      "published": "2026-10-08T18:17:20Z",
+      "url": "http://arxiv.org/abs/2610.12593v1",
+      "authors": [
+        "Wei Yang",
+        "Qing Ping",
+        "Youzhi Luo",
+        "Yawei Wang",
+        "Abhishek Kumar",
+        "Panpan Xu",
+        "Jun Huan"
+      ],
+      "matched_queries": [
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12569",
+      "title": "SWE-Duel: Towards a Self-Scaling Arena for Coding Agents",
+      "published": "2026-10-08T18:01:00Z",
+      "url": "http://arxiv.org/abs/2610.12569v1",
+      "authors": [
+        "Wei Minn",
+        "Zhensu Sun",
+        "Lwin Khin Shar",
+        "David Lo"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12445",
+      "title": "Caught in the Act: Probes Effectively Detect Sabotage and Catch Unverbalized Deception",
+      "published": "2026-10-08T17:58:13Z",
+      "url": "http://arxiv.org/abs/2610.12445v1",
+      "authors": [
+        "Oskar J. Hollinsworth",
+        "Alex F. Spies",
+        "Tigist Diriba",
+        "Adam Gleave",
+        "Chris Cundy"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12375",
+      "title": "OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport",
+      "published": "2026-10-08T17:32:08Z",
+      "url": "http://arxiv.org/abs/2610.12375v1",
+      "authors": [
+        "Babak Barazandeh",
+        "Connor Swanson",
+        "Chinmay Kulkarni",
+        "Nikhil Mungel"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12360",
+      "title": "Accurate but Not Humble: Evaluating Epistemic Humility in LLM Agents under Knowledge Conflict",
+      "published": "2026-10-08T17:25:06Z",
+      "url": "http://arxiv.org/abs/2610.12360v1",
+      "authors": [
+        "Kaiser Sun",
+        "Bernal Jimenez Gutierrez",
+        "Hongjun Liu",
+        "Jingyu Zhang",
+        "Jie Gao",
+        "Mark Dredze",
+        "Daniel Khashabi"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12341",
+      "title": "Can AI Agents Learn Their Way to the Top? Evaluating Heuristic Learning in a Long-Running Game Agent Competition",
+      "published": "2026-10-08T17:15:48Z",
+      "url": "http://arxiv.org/abs/2610.12341v1",
+      "authors": [
+        "Kaisen Yang",
+        "Qingle Liu",
+        "Kejin Wang",
+        "Yicheng Zhao",
+        "Jieming Li",
+        "Shenghan Zheng",
+        "Ruize Yang",
+        "Bojun Yang",
+        "Heng Gong",
+        "Xiang Gao",
+        "Lanyue Zhang",
+        "Kaiyu Zhong",
+        "Zhuo Liu",
+        "Shaoxuan Li",
+        "Chengxi Li",
+        "Yong Yan",
+        "Weixuan Zhang",
+        "Tianwei Luo",
+        "Situ Wang",
+        "Youjie Zheng",
+        "Sihan Zhao",
+        "Shengyuan Wang",
+        "Huan-ang Gao",
+        "Jiazheng Xu",
+        "Xiaohui Xie",
+        "Wentao Han",
+        "Hongning Wang"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12325",
+      "title": "Prior or Feedback? What an LLM Uses When Adapting Neural Operators",
+      "published": "2026-10-08T17:06:23Z",
+      "url": "http://arxiv.org/abs/2610.12325v1",
+      "authors": [
+        "Julian Chan",
+        "Javier Mora Jimenez"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12289",
+      "title": "TestPrism: Rethinking Test Evaluation Beyond a Single Reference",
+      "published": "2026-10-08T16:44:39Z",
+      "url": "http://arxiv.org/abs/2610.12289v1",
+      "authors": [
+        "Han Li",
+        "Lingxiang Hu",
+        "Jiacheng Huang",
+        "Ziqian Jiang",
+        "Jingkai Luo",
+        "Wei Gao",
+        "Yunfan Tan",
+        "Zun Wang",
+        "Jiaheng Liu"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12281",
+      "title": "Unlocking the Regulatory Genome by ARGUS: An Evidence-Constrained Agentic Framework for Interpreting Single Nucleotide Variants",
+      "published": "2026-10-08T16:38:32Z",
+      "url": "http://arxiv.org/abs/2610.12281v1",
+      "authors": [
+        "Pratik Dutta",
+        "Matthew B. Obusan",
+        "Max Chao",
+        "Rekha Sathian",
+        "Nimisha Papineni",
+        "Ramana V. Davuluri"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12269",
+      "title": "Cadence: Strategic Guidance for Coding Agents",
+      "published": "2026-10-08T16:34:02Z",
+      "url": "http://arxiv.org/abs/2610.12269v1",
+      "authors": [
+        "Minxing Wang",
+        "He Ye",
+        "Earl T. Barr",
+        "Yintong Huo"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12183",
+      "title": "A Closer Look at Agentic BBO: Benchmarking LLM Agents for Black-Box Optimization",
+      "published": "2026-10-08T15:48:07Z",
+      "url": "http://arxiv.org/abs/2610.12183v1",
+      "authors": [
+        "Ming Chen",
+        "Rong-Xi Tan",
+        "Ke Xue",
+        "Yu-Jie Zhou",
+        "Taiye Lu",
+        "Zhi-Xuan Gao",
+        "Peng Xie",
+        "Zijun Shen",
+        "Chen Lu",
+        "Haopu Shang",
+        "Chao Qian"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12135",
+      "title": "Q-Shaped Options for Hierarchical Reinforcement Learning",
+      "published": "2026-10-08T15:23:39Z",
+      "url": "http://arxiv.org/abs/2610.12135v1",
+      "authors": [
+        "Clarisse Wibault",
+        "Antoine Gorceix",
+        "Antonio Léon Villares",
+        "Alexey Zakharov",
+        "Evangelos Chatzaroulas",
+        "Michael Matthews",
+        "Eduardo Pignatelli",
+        "Jakob Foerster"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12124",
+      "title": "Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents",
+      "published": "2026-10-08T15:16:56Z",
+      "url": "http://arxiv.org/abs/2610.12124v1",
+      "authors": [
+        "Xiangyi Zeng",
+        "Baihang Liu",
+        "Xutong Wang",
+        "Ze Jin",
+        "Yunpeng Li",
+        "Qixu Liu"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12086",
+      "title": "EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution",
+      "published": "2026-10-08T14:57:35Z",
+      "url": "http://arxiv.org/abs/2610.12086v1",
+      "authors": [
+        "Yanning Dai",
+        "Yuhui Wang",
+        "Nanbo Li",
+        "Wenyi Wang",
+        "Jürgen Schmidhuber"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12061",
+      "title": "When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation",
+      "published": "2026-10-08T14:43:09Z",
+      "url": "http://arxiv.org/abs/2610.12061v1",
+      "authors": [
+        "Yiruo Cheng",
+        "Shen Huang",
+        "Xiaoshuai Song",
+        "Jiejun Tan",
+        "Guanting Dong",
+        "Pengjun Xie",
+        "Ji-Rong Wen",
+        "Zhicheng Dou"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12022",
+      "title": "Examining Social Attribution in LLM Reasoning: A Theory-Guided Probing Methodology",
+      "published": "2026-10-08T14:20:06Z",
+      "url": "http://arxiv.org/abs/2610.12022v1",
+      "authors": [
+        "Zhaoxin Yu",
+        "Qingchao Kong",
+        "Dajun Zeng",
+        "Wenji Mao"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.12002",
+      "title": "Agentic-TTT: Training test-time policy for test-time training",
+      "published": "2026-10-08T14:06:26Z",
+      "url": "http://arxiv.org/abs/2610.12002v1",
+      "authors": [
+        "Jiahao Lu",
+        "Mohan Kankanhalli"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11966",
+      "title": "MindFlow: Mind Supernet Powered Thinking Flows for Research Idea Innovation",
+      "published": "2026-10-08T13:45:51Z",
+      "url": "http://arxiv.org/abs/2610.11966v1",
+      "authors": [
+        "Mengdi Liu",
+        "Wenjue Chen",
+        "Wenyue Chen",
+        "Cheng Yang",
+        "Fanqi Kong",
+        "Zhangyang Gao",
+        "Xiaoxue Cheng",
+        "Yiheng Li",
+        "Yujian Yuan",
+        "Keliang Li",
+        "Hong Chang",
+        "Shiguang Shan",
+        "Chenglin Wu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11963",
+      "title": "Can LLMs Fix It Without Code? Toward Automated Verification of No-Code Bug Fixes",
+      "published": "2026-10-08T13:44:53Z",
+      "url": "http://arxiv.org/abs/2610.11963v1",
+      "authors": [
+        "Utku Boran Torun",
+        "Veli Karakaya",
+        "Eray Tüzün"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11959",
+      "title": "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+      "published": "2026-10-08T13:41:53Z",
+      "url": "http://arxiv.org/abs/2610.11959v1",
+      "authors": [
+        "Xiaomi LLM-Core Team",
+        ":",
+        "Zongming Qiao",
+        "Ziyue Hua",
+        "Zirui Ou",
+        "Zihao Yue",
+        "Zihan Jiang",
+        "Zhuo Huang",
+        "Zhiyang Chen",
+        "Zhixian Zheng",
+        "Zhipeng Xu",
+        "Zhengrui Ma",
+        "Yuyang Hu",
+        "Yuhang Dong",
+        "Yuechen Zhang",
+        "Yudong Wang",
+        "Yuanxin Liu",
+        "Yixin Yang",
+        "Yishuo Cai",
+        "Yikai Zhao",
+        "Yihan Yan",
+        "Yifan Zhang",
+        "Yifan Song",
+        "Xiyu Wei",
+        "Xing Zhang",
+        "Xin Zhang",
+        "Xiaoqian Liu",
+        "Xiaodong Ji",
+        "Xiangwei Deng",
+        "Xueyu Guo",
+        "Wenhan Ma",
+        "Weimin Xiong",
+        "Weikun Wang",
+        "Weiji Zhuang",
+        "Shuo Liu",
+        "Shuhuai Ren",
+        "Shuhao Gu",
+        "Shimao Chen",
+        "Shijie Cao",
+        "Shihua Yu",
+        "Shicheng Li",
+        "Shengjie Zhou",
+        "Shaolei Zhang",
+        "Rang Li",
+        "Qiying Wang",
+        "Qingkai Fang",
+        "Qianli Chen",
+        "Minzheng Wang",
+        "Liwen Wang",
+        "Linli Yao",
+        "Linghao Zhang",
+        "Liangyu Cheng",
+        "Liang Zhao",
+        "Lei Li",
+        "Jinhao Dong",
+        "Jinyu Xiang",
+        "Jianyu Wei",
+        "Jiangshan Duo",
+        "Huaqiu Liu",
+        "Huanjie Fan",
+        "Hongyi Guan",
+        "Hongshen Xu",
+        "Hao Tian",
+        "Hanyu Li",
+        "Hailin Zhang",
+        "Gang Wang",
+        "Fuli Luo",
+        "Feng Wei",
+        "Dong Zhang",
+        "Dawei Zhu",
+        "Chiheng Lou",
+        "Chenhong He",
+        "Chenhao He",
+        "Chenghua Liu",
+        "Bowen Ye",
+        "Bowen Shen",
+        "Boshen Xu",
+        "Bo Yang",
+        "Bingquan Xia",
+        "Bangjun Xiao",
+        "Baixuan Xu",
+        "Zhouxiang Mao",
+        "Zhiyang Zhang",
+        "Zhixiang Xu",
+        "Zhenru Lin",
+        "Zhengju Tang",
+        "Zhaojun Huang",
+        "Yuzhe Weng",
+        "Yuxing Xiang",
+        "Yuxiao Li",
+        "Yuheng Yang",
+        "Yuhang Wang",
+        "Yuchen Liu",
+        "Yuanyuan Tian",
+        "Yuanliang Dong",
+        "Yu Cheng",
+        "Yongzhe He",
+        "Yongshun Liang",
+        "Yong Wang",
+        "Yiyan Wang",
+        "Yitian Gong",
+        "Yijie Zhang",
+        "Yanshu Xin",
+        "Xun Zhang",
+        "Xingjian Zhao",
+        "Wenyu Yang",
+        "Wenshan Huang",
+        "Wenhao Li",
+        "Tingwei Huang",
+        "Tianyu Yu",
+        "Tianyang Lu",
+        "Taoyu Yang",
+        "Sinan Du",
+        "Shutong Tian",
+        "Shulin Du",
+        "Shengfan Wang",
+        "Shanchuan Fang",
+        "Qihao Zhang",
+        "Qibin Yang",
+        "Qian Yu",
+        "Qian Tu",
+        "Pengrong Xie",
+        "Peipei Wang",
+        "Peidian Li",
+        "Minkun Guo",
+        "Mingchen Shao",
+        "Luohan Gao",
+        "Lijie Wang",
+        "Liang Shi",
+        "Kaiqi Chen",
+        "Kaiming Liu",
+        "Kaifei Wang",
+        "Kai Yang",
+        "Jinlong Xue",
+        "Jiechen Zhang",
+        "Jiaxuan Liu",
+        "Hongxu An",
+        "Hao Peng",
+        "Hanglong Lü",
+        "Guonan Wang",
+        "Feiyu Yang",
+        "Fanyu Cao",
+        "Fangyue Liu",
+        "Fan Cui",
+        "Cong Wang",
+        "Chun Chen",
+        "Chenxu Bai",
+        "Chengxuan Zhu",
+        "Chenghua Wang",
+        "Boyi Zeng"
+      ],
+      "matched_queries": [
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11920",
+      "title": "Event-Centric Memory with Query-Aware Graph Augmentation for Long-Term Conversational Agents",
+      "published": "2026-10-08T13:17:59Z",
+      "url": "http://arxiv.org/abs/2610.11920v1",
+      "authors": [
+        "Yichen Liu",
+        "Chunfeng Yuan",
+        "Haowei Liu",
+        "Wenjuan Li",
+        "Zefeng Lin",
+        "Bing Li",
+        "Xu Chen",
+        "Weiming Hu"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11899",
+      "title": "Forms of LLM-Integrated Applications from LLM-Chats to Autonomous AI Agent System",
+      "published": "2026-10-08T13:05:33Z",
+      "url": "http://arxiv.org/abs/2610.11899v1",
+      "authors": [
+        "Irene Weber"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "llm-agent",
+        "multi-agent",
+        "software-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11862",
+      "title": "LEVER: Adaptive Cost-Aware Proof Search Over AND/OR Graphs",
+      "published": "2026-10-08T12:40:14Z",
+      "url": "http://arxiv.org/abs/2610.11862v1",
+      "authors": [
+        "Nihal Jain",
+        "Shuangjie Yao",
+        "Begum Cicekdag",
+        "Zhuo Zhang",
+        "Suman Jana"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11858",
+      "title": "Trajectory-Guided Fault Localization for Agent Skill Evolution",
+      "published": "2026-10-08T12:38:51Z",
+      "url": "http://arxiv.org/abs/2610.11858v1",
+      "authors": [
+        "Yu Ge",
+        "Linna Xie",
+        "Zhong Li",
+        "Yu Pei",
+        "Tian Zhang"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11794",
+      "title": "Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks",
+      "published": "2026-10-08T12:06:54Z",
+      "url": "http://arxiv.org/abs/2610.11794v1",
+      "authors": [
+        "Haoyu Zhao",
+        "Zhengxu Yu",
+        "Zhiyuan He",
+        "Meng Fang",
+        "Rasul Tutunov",
+        "Haitham Bou-Ammar",
+        "Weilin Luo",
+        "Jun Wang"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "agent-planning",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "implemented",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11773",
+      "title": "Safe Actions Alone Do Not Ensure Safe Agents: Identifying Unfulfilled Obligations with Guard Models",
+      "published": "2026-10-08T11:54:04Z",
+      "url": "http://arxiv.org/abs/2610.11773v1",
+      "authors": [
+        "Youwei Feng",
+        "Yitong Zhang",
+        "Yuetong Liu",
+        "Jia Li"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11768",
+      "title": "Narrow and Deep: An Ontology Tower as the Knowledge of an LLM Agent for an Industrial Equipment System",
+      "published": "2026-10-08T11:50:51Z",
+      "url": "http://arxiv.org/abs/2610.11768v1",
+      "authors": [
+        "Younghwan Joo",
+        "Sung-il Kim"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11732",
+      "title": "MemTrial: Learning When to Trust Memory in LLM Portfolio Agents",
+      "published": "2026-10-08T11:27:49Z",
+      "url": "http://arxiv.org/abs/2610.11732v1",
+      "authors": [
+        "Guanghao Wu",
+        "Zhuo Cai",
+        "Shoujin Wang"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11725",
+      "title": "Implementing the Spec Growth Engine: Preventing Spec-Code Divergence, and Growing the Spec with Agents",
+      "published": "2026-10-08T11:24:55Z",
+      "url": "http://arxiv.org/abs/2610.11725v1",
+      "authors": [
+        "Hartwig Grabowski"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11716",
+      "title": "4-Tensor Attention Model for Semantic Physical Reality",
+      "published": "2026-10-08T11:19:23Z",
+      "url": "http://arxiv.org/abs/2610.11716v1",
+      "authors": [
+        "Jongwook Kim",
+        "Sangheon Yun"
+      ],
+      "matched_queries": [
+        "agent-planning"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11696",
+      "title": "A 3D Characterization Framework for Intelligent Sequential Decision Making",
+      "published": "2026-10-08T11:06:51Z",
+      "url": "http://arxiv.org/abs/2610.11696v1",
+      "authors": [
+        "Sadig Gojayev",
+        "Carolina Fortuna"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11678",
+      "title": "TRACE: Diagnosing Verifier Brittleness in Agentic Evaluation",
+      "published": "2026-10-08T10:52:26Z",
+      "url": "http://arxiv.org/abs/2610.11678v1",
+      "authors": [
+        "Radhika Gaonkar"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11663",
+      "title": "Constrained Command-Conditioned Reinforcement Learning with Bandit Strategy Selection in Real-Time Strategy Games",
+      "published": "2026-10-08T10:37:33Z",
+      "url": "http://arxiv.org/abs/2610.11663v1",
+      "authors": [
+        "Nick Leenders",
+        "Roy Lindelauf",
+        "Joost van Oijen",
+        "Boris Cule"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11655",
+      "title": "Harness Evolution Hits a Ceiling: When Weight Training Should Begin",
+      "published": "2026-10-08T10:33:29Z",
+      "url": "http://arxiv.org/abs/2610.11655v1",
+      "authors": [
+        "Yuan Tian",
+        "Bing Hu",
+        "Hao Wang",
+        "Binghang Lu",
+        "Fang Wu"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11651",
+      "title": "Evidence-Traceable Dynamic Interviewer Architecture for Expertise-Adaptive Qualitative Interviews Using Local LLMs",
+      "published": "2026-10-08T10:26:13Z",
+      "url": "http://arxiv.org/abs/2610.11651v1",
+      "authors": [
+        "Aisvarya Adeseye",
+        "Jouni Isoaho",
+        "Adeyemi Adeseye",
+        "Seppo Virtanen",
+        "Mohammad Tahir"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11647",
+      "title": "One Skill Too Many: How Co-Installed Skills Conflict in Coding Agents",
+      "published": "2026-10-08T10:20:47Z",
+      "url": "http://arxiv.org/abs/2610.11647v1",
+      "authors": [
+        "Chaoliang Yan",
+        "Zihao Xu",
+        "Yuekang Li",
+        "Shangzhi Xu",
+        "Yi Liu",
+        "Gelei Deng",
+        "Siqi Ma"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11618",
+      "title": "PolyCodeEval: Benchmarking Multilingual Code Generation from Functions to Repositories",
+      "published": "2026-10-08T09:58:32Z",
+      "url": "http://arxiv.org/abs/2610.11618v1",
+      "authors": [
+        "Bowen Yang",
+        "Jiajun Jiang",
+        "Luxue Yu",
+        "Yihao Wang",
+        "Fengjie Li",
+        "Dong Wang"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11602",
+      "title": "Where Do the Tokens Go? Understanding and Reducing Costs in LLM Agents for Vulnerability Discovery",
+      "published": "2026-10-08T09:47:18Z",
+      "url": "http://arxiv.org/abs/2610.11602v1",
+      "authors": [
+        "Li Lu",
+        "Yanjie Zhao",
+        "Hongjie Chen",
+        "Haoyu Wang"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11600",
+      "title": "Error-Propagation Modeling for Failure Attribution in LLM-Based Multi-Agent Systems",
+      "published": "2026-10-08T09:44:59Z",
+      "url": "http://arxiv.org/abs/2610.11600v1",
+      "authors": [
+        "Jiaqi Liao",
+        "Yuanzhao Zhai",
+        "Huanxi Liu",
+        "Xu Zhang",
+        "Zheming Zhuang",
+        "Dawei Feng",
+        "Bo Ding",
+        "Huaimin Wang"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11593",
+      "title": "Runnable Commit Untangling for Coding Agents",
+      "published": "2026-10-08T09:42:27Z",
+      "url": "http://arxiv.org/abs/2610.11593v1",
+      "authors": [
+        "Jinfeng Jiang",
+        "Dongsun Kim",
+        "Dayi Lin",
+        "Zhou Yang"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11578",
+      "title": "Chronos Enables Code Agents to Reason over Software Evolution",
+      "published": "2026-10-08T09:31:37Z",
+      "url": "http://arxiv.org/abs/2610.11578v1",
+      "authors": [
+        "Xin Yin",
+        "Yiang Zhang",
+        "Zhiyuan Peng",
+        "Chao Ni",
+        "Zhe Cui",
+        "Xiaohua Xin"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent",
+        "multi-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11573",
+      "title": "Memory Type Varies: Empowering LLM Agents for Long-Term Memory with Diverse Strategies",
+      "published": "2026-10-08T09:28:31Z",
+      "url": "http://arxiv.org/abs/2610.11573v1",
+      "authors": [
+        "Yi Wen",
+        "Derong Xu",
+        "Pengyue Jia",
+        "Yichao Wang",
+        "Yingyi Zhang",
+        "Maolin Wang",
+        "Junyi Li",
+        "Wenlin Zhang",
+        "Xiaopeng Li",
+        "Yong Liu",
+        "Xiangyu Zhao"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11561",
+      "title": "Workerville: Towards an Organizational Behavior Account of Agent Safety",
+      "published": "2026-10-08T09:23:28Z",
+      "url": "http://arxiv.org/abs/2610.11561v1",
+      "authors": [
+        "Hanjun Luo",
+        "Junting Mao",
+        "Yuhan Lu",
+        "Haobo Zhang",
+        "Zhimu Huang",
+        "Yankai Chen",
+        "Hanan Salam",
+        "Xue Liu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11559",
+      "title": "SWE-Journey: Towards More Realistic Evaluation of Coding Assistants through Long-Horizon, Multi-Turn Interaction",
+      "published": "2026-10-08T09:21:49Z",
+      "url": "http://arxiv.org/abs/2610.11559v1",
+      "authors": [
+        "Hexuan Deng",
+        "Yue Wang",
+        "Wenyu Jiang",
+        "Cheng Yang",
+        "Haolin Yang",
+        "Zhaohua Zhang",
+        "Chenchen Zhao",
+        "Beiduo Chen",
+        "Muxi Chen",
+        "Sa Zhu",
+        "Geyuan Zhu",
+        "Jianhuan Zhuo",
+        "Qiuyong Xiao",
+        "Tianwen Jiang",
+        "Jihong Zhang",
+        "Xuebo Liu"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11552",
+      "title": "Safe, Persistent, and Evolving Agent Harness for Understanding Partially Observable Worlds",
+      "published": "2026-10-08T09:15:28Z",
+      "url": "http://arxiv.org/abs/2610.11552v1",
+      "authors": [
+        "Yisen Gao",
+        "Yue Guo",
+        "Qing Zong",
+        "Yiwen Guo",
+        "Yangqiu Song"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11546",
+      "title": "Learning to Orchestrate Evolutionary Search: Progression-Aware Deep Reinforcement Learning for Dynamic DE-CMA-ES Coordination in Optimization and Structural Model Updating",
+      "published": "2026-10-08T09:12:13Z",
+      "url": "http://arxiv.org/abs/2610.11546v1",
+      "authors": [
+        "Lechen Li",
+        "Rongye Shi",
+        "Wanhuan Zhou"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11542",
+      "title": "Constitutional Gating and Deterministic Recovery for Multi-Agent LLM Negotiation: Ablations Against a Stateful Adversarial Gatekeeper",
+      "published": "2026-10-08T09:10:45Z",
+      "url": "http://arxiv.org/abs/2610.11542v2",
+      "authors": [
+        "Masaaki Nakatsu",
+        "Reno Wang"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11523",
+      "title": "When to Intervene? State-Aware Sparse Manipulation in Federated Reinforcement Learning",
+      "published": "2026-10-08T08:55:10Z",
+      "url": "http://arxiv.org/abs/2610.11523v2",
+      "authors": [
+        "Shutong Zheng",
+        "Sijia Chen"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11514",
+      "title": "SSCBench: Evaluating the Evidential Validity of Fault-Injection Tests for Tool-Using LLM Agents",
+      "published": "2026-10-08T08:50:31Z",
+      "url": "http://arxiv.org/abs/2610.11514v1",
+      "authors": [
+        "Xincheng He",
+        "Wanli Dong",
+        "Zhaoqiang Guo",
+        "Yan Liu",
+        "Lei Xu"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11482",
+      "title": "Evaluating Local Language Model Agents for Reproducible Data Engineering: An Empirical Software Engineering Study of Mobility Workflows",
+      "published": "2026-10-08T08:26:46Z",
+      "url": "http://arxiv.org/abs/2610.11482v1",
+      "authors": [
+        "Jorge García-Carrasco",
+        "Javier Sanchis",
+        "Alejandro Reina-Reina",
+        "Alejandro Maté",
+        "Juan Trujillo"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent",
+        "software-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11464",
+      "title": "Who Verifies the Verifier? Co-Evolving Inspectable Graders with Self-Improving Agents",
+      "published": "2026-10-08T08:13:53Z",
+      "url": "http://arxiv.org/abs/2610.11464v1",
+      "authors": [
+        "Xing Zhang",
+        "Guanghui Wang",
+        "Yanwei Cui",
+        "Ziyuan Li",
+        "Wei Qiu",
+        "Bing Zhu",
+        "Peiyang He"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11451",
+      "title": "SAIL: Scientific Agentic Intelligence via a Science-Aware Loop",
+      "published": "2026-10-08T08:04:22Z",
+      "url": "http://arxiv.org/abs/2610.11451v1",
+      "authors": [
+        "SAIL Model Team",
+        "Boyuan Sun",
+        "Bryan Dai",
+        "Che Liu",
+        "Chi Liu",
+        "Derek Li",
+        "Hongming Piao",
+        "Mengzhuo Chen",
+        "Xidong Wang",
+        "Yan Shu",
+        "Yinda Chen",
+        "Ziyang Zeng"
+      ],
+      "matched_queries": [
+        "agent-planning"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11447",
+      "title": "Closed-loop evaluation of LLM agents for embedded software development",
+      "published": "2026-10-08T08:02:10Z",
+      "url": "http://arxiv.org/abs/2610.11447v1",
+      "authors": [
+        "Jorge García-Carrasco",
+        "Sergio García-Carrasco",
+        "Alejandro Maté",
+        "Juan Trujillo"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11384",
+      "title": "Environmental Feedback Modeling Matters: Rethinking Feedback Treatment in Agentic Hindsight Self-Distillation",
+      "published": "2026-10-08T07:16:00Z",
+      "url": "http://arxiv.org/abs/2610.11384v1",
+      "authors": [
+        "Hangxi Guo",
+        "Fengyuan Liu",
+        "Yue Wang",
+        "Yuhua Qi",
+        "Haoyi Xiong",
+        "Fei Sun",
+        "Mengnan Du"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11373",
+      "title": "From a Prompt to Repertoires: Evolving Functional REpertoires Enable LLM Continual Learning",
+      "published": "2026-10-08T07:06:52Z",
+      "url": "http://arxiv.org/abs/2610.11373v1",
+      "authors": [
+        "Fengyuan Liu",
+        "Yue Wang",
+        "Hangxi Guo",
+        "Fengyuan Liu",
+        "Chenxu Wu",
+        "Yanguang Liu",
+        "Mengnan Du"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11370",
+      "title": "RIT-RAG: Navigating Document Corpora with Retrieval-Induced Trees",
+      "published": "2026-10-08T07:03:17Z",
+      "url": "http://arxiv.org/abs/2610.11370v1",
+      "authors": [
+        "Meghanadh Pulivarthi",
+        "Swaraj Kumar Biswal",
+        "Kushagra Bhushan",
+        "Yatin Nandwani",
+        "Sachindra Joshi",
+        "Dinesh Raghu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11358",
+      "title": "RaReCache: Bridging the Gap in Cross-Model KV Cache Reuse via Rank disagreement-based Selective Recomputation",
+      "published": "2026-10-08T06:49:28Z",
+      "url": "http://arxiv.org/abs/2610.11358v1",
+      "authors": [
+        "Sreetama Sarkar",
+        "Saptarshi Mitra",
+        "Sitao Huang",
+        "Souvik Kundu",
+        "Peter A. Beerel"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11351",
+      "title": "Deception by Omission: Language Models Knowingly Hide Their Mistakes",
+      "published": "2026-10-08T06:45:02Z",
+      "url": "http://arxiv.org/abs/2610.11351v1",
+      "authors": [
+        "Lucas Florin",
+        "Amelie Knecht",
+        "Ulysse Schaller",
+        "Thilo Hagendorff"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11345",
+      "title": "SynCo: Data Synthesis Co-Training for Self-Evolving LLMs via Multi-Agent Reinforcement Learning",
+      "published": "2026-10-08T06:40:18Z",
+      "url": "http://arxiv.org/abs/2610.11345v1",
+      "authors": [
+        "Wei Yang",
+        "Shawn Li",
+        "Yuehan Qin",
+        "Yawei Wang",
+        "Mingxi Wang",
+        "Shixuan Li",
+        "Tiankai Yang",
+        "Jiate Li",
+        "Jesse Thomason",
+        "Xuezhe Ma",
+        "Yue Zhao"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11334",
+      "title": "ReCast: Attribution-Oriented Step Representation Learning for LLM-Based Agent Systems",
+      "published": "2026-10-08T06:31:37Z",
+      "url": "http://arxiv.org/abs/2610.11334v1",
+      "authors": [
+        "Weilin Jin",
+        "Mingyu Wang",
+        "Taiyu Zhu",
+        "Ziqi Zhou",
+        "Wenbo Li",
+        "Haoyang Huang",
+        "Nan Duan",
+        "Yifan Wu",
+        "Ying Li",
+        "Zhonghai Wu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11314",
+      "title": "From Retrieval to Reconstruction: Constructing Evolvable Cognitive Memory for Long-Term Dialogue",
+      "published": "2026-10-08T06:21:45Z",
+      "url": "http://arxiv.org/abs/2610.11314v1",
+      "authors": [
+        "Zirui Liao",
+        "Zhengxian Wu",
+        "Zhuohong Chen",
+        "Yunyao Yu",
+        "Xiaoyu Liu",
+        "Yifan Xu",
+        "Haoqian Wang"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11312",
+      "title": "MedBenchAgent: Towards Systematic Automation of Medical VLM Benchmark Construction",
+      "published": "2026-10-08T06:17:33Z",
+      "url": "http://arxiv.org/abs/2610.11312v1",
+      "authors": [
+        "Yulin Fu",
+        "Junren Wang",
+        "Guangjing Yang",
+        "Zhangyuan Yu",
+        "Wanran Sun",
+        "Jiabao Zhou",
+        "Jin Yin",
+        "Qicheng Lao"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11299",
+      "title": "DuplexAgent-RSI: Recursive Harness Improvement for Full-Duplex Voice Agent Collaboration",
+      "published": "2026-10-08T06:06:42Z",
+      "url": "http://arxiv.org/abs/2610.11299v1",
+      "authors": [
+        "Yingda Shen",
+        "Yuxiang Wang",
+        "Kunyu Feng",
+        "Qinke Ni",
+        "Jiaqi Li",
+        "Minghao Hsu",
+        "Junan Zhang",
+        "Dekun Chen",
+        "Yutong Bian",
+        "Zhizheng Wu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11287",
+      "title": "REMORY: Learning Residual Memory for Context Compaction",
+      "published": "2026-10-08T05:50:50Z",
+      "url": "http://arxiv.org/abs/2610.11287v1",
+      "authors": [
+        "Hanchen Xia",
+        "Baoyou Chen",
+        "Yutang Ge",
+        "Naihao Deng",
+        "Senqiao Yang",
+        "Zilong Dong",
+        "Weihao Yuan",
+        "Siyu Zhu"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11253",
+      "title": "LLM-IDEA: Identifiability-Driven Experimental Agent for Autonomous Discovery of Mechanistic World Models",
+      "published": "2026-10-08T05:01:30Z",
+      "url": "http://arxiv.org/abs/2610.11253v1",
+      "authors": [
+        "Surya Shetty",
+        "Ulisses Braga-Neto"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11188",
+      "title": "What to Admit and How to Present: Governing Persistent Memory in LLM Agents",
+      "published": "2026-10-08T03:45:28Z",
+      "url": "http://arxiv.org/abs/2610.11188v1",
+      "authors": [
+        "Chang Liu",
+        "Deliang Ding"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11183",
+      "title": "RAG-Stress: Probing the Limits of Evidence Reliance in Retrieval-Augmented Generation",
+      "published": "2026-10-08T03:40:48Z",
+      "url": "http://arxiv.org/abs/2610.11183v1",
+      "authors": [
+        "Shunyuan Zhou",
+        "Hao Chen",
+        "Tianyu Wang",
+        "Goose Lin",
+        "Zaiyuan Wang",
+        "Haiying Zhao"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11179",
+      "title": "Who Pays the Review Cost? Triage, Fairness, and Accountability in AI-authored Pull Requests",
+      "published": "2026-10-08T03:38:29Z",
+      "url": "http://arxiv.org/abs/2610.11179v1",
+      "authors": [
+        "Md Shamimur Rahman",
+        "Khairul Alam",
+        "Banani Roy",
+        "Chanchal K. Roy"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11169",
+      "title": "Skill Constellations: Tracing the Supply Chain of Agent Skills on GitHub",
+      "published": "2026-10-08T03:25:22Z",
+      "url": "http://arxiv.org/abs/2610.11169v1",
+      "authors": [
+        "Fahd Seddik"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11152",
+      "title": "Do LLMs Learn from Rewards in Context? : Rethinking the role of reward in In-Context Reinforcement Learning",
+      "published": "2026-10-08T03:15:00Z",
+      "url": "http://arxiv.org/abs/2610.11152v1",
+      "authors": [
+        "Minchan Kwon",
+        "Seunghee Koh",
+        "Sunghyun Baek",
+        "Minsung Bae",
+        "Junmo Kim"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11136",
+      "title": "The \"10th Juror\": Open-Set Standpoint Screening for Bureaucratic Bias Detection",
+      "published": "2026-10-08T03:05:08Z",
+      "url": "http://arxiv.org/abs/2610.11136v1",
+      "authors": [
+        "Yuchen Miao",
+        "Zijun Wang",
+        "Chang Han",
+        "Yurui Shi",
+        "Mingtai Zhang",
+        "Siyang Xu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11123",
+      "title": "When Interfaces Speak: Data-Aware Generative UI Harness for Active Interaction",
+      "published": "2026-10-08T02:49:35Z",
+      "url": "http://arxiv.org/abs/2610.11123v1",
+      "authors": [
+        "Xiaolong Li",
+        "Xiaohan Xu",
+        "Jinyang Li",
+        "Xinnuo Xu",
+        "Ge Qu",
+        "Nan Huo",
+        "Jack Williams",
+        "Reynold Cheng"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11030",
+      "title": "NOMOS: Compiling Written Policies into Statically Verified Tool-Call Gates for LLM Agents",
+      "published": "2026-10-08T00:23:22Z",
+      "url": "http://arxiv.org/abs/2610.11030v1",
+      "authors": [
+        "Min-Young Yu",
+        "Tony Kim",
+        "Jang Won Choi"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11015",
+      "title": "Prompts versus Rules: Auditing and Controlling Speech Naturalness Behaviors in Voice User Simulators",
+      "published": "2026-10-07T23:55:27Z",
+      "url": "http://arxiv.org/abs/2610.11015v1",
+      "authors": [
+        "Riqiang Wang",
+        "Elena Khasanova",
+        "Harsh Saini",
+        "Lex Konnelly",
+        "Parsa Kavehzadeh",
+        "Matthias Lee",
+        "Mohamed Attia"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11008",
+      "title": "Why LLM Agents Favor Their Group: Stakes, Observed Norms, and Reputation",
+      "published": "2026-10-07T23:46:37Z",
+      "url": "http://arxiv.org/abs/2610.11008v1",
+      "authors": [
+        "Yujiao Chen"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.11007",
+      "title": "Curating Always-Loaded Context for LLM Agents: A Capacitated Assortment Model with Censored Feedback",
+      "published": "2026-10-07T23:44:32Z",
+      "url": "http://arxiv.org/abs/2610.11007v1",
+      "authors": [
+        "Zexuan Liu",
+        "Yuning Yang",
+        "Tiancheng Zhao"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10988",
+      "title": "Back in Style: A Sociolinguistic Approach to Authoring and Measuring Persona Fidelity in User Simulation",
+      "published": "2026-10-07T23:21:49Z",
+      "url": "http://arxiv.org/abs/2610.10988v1",
+      "authors": [
+        "Lex Konnelly",
+        "Elena Khasanova",
+        "Riqiang Wang",
+        "Matthias Lee",
+        "Harsh Saini",
+        "Parsa Kavehzadeh"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10962",
+      "title": "iAm.md: Robot Skill Self-Assessment through Agentic Introspection for Unknown Open-Vocabulary Domains",
+      "published": "2026-10-07T22:28:28Z",
+      "url": "http://arxiv.org/abs/2610.10962v1",
+      "authors": [
+        "Vincenzo Guarino",
+        "Emanuele Musumeci",
+        "Vincenzo Suriani",
+        "Daniele Nardi"
+      ],
+      "matched_queries": [
+        "agent-planning"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10961",
+      "title": "Cross-Provider Review as a Runtime Contract for Coding Agents: A Controlled Pilot and Fault-Injection Study",
+      "published": "2026-10-07T22:28:22Z",
+      "url": "http://arxiv.org/abs/2610.10961v1",
+      "authors": [
+        "Bowen Xu",
+        "Boyu Chen"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10942",
+      "title": "StoreBench: A Live-Commerce Environment for Evaluating and Training Autonomous Operator Agents",
+      "published": "2026-10-07T21:46:10Z",
+      "url": "http://arxiv.org/abs/2610.10942v1",
+      "authors": [
+        "Daksh Raghuvanshi",
+        "Ved Vedere",
+        "Yifan Wang"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "agentic-rl",
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10926",
+      "title": "Adaptive Multi-Discriminator WGAN Framework for Resource-Constrained Internet of Vehicles Using Reinforcement Learning and Game Theory",
+      "published": "2026-10-07T21:28:46Z",
+      "url": "http://arxiv.org/abs/2610.10926v1",
+      "authors": [
+        "Farhoud Jafari Kaleibar",
+        "Amr M. Zaki",
+        "Marin Litoiu"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10906",
+      "title": "Reading the Room: Foundations, Design, and Challenges of Normative Competence in LLMs",
+      "published": "2026-10-07T21:02:52Z",
+      "url": "http://arxiv.org/abs/2610.10906v1",
+      "authors": [
+        "Andrea Wynn",
+        "Harsh Satija",
+        "Seokhyun",
+        "Baek",
+        "Anqi Liu",
+        "Eric Nalisnick",
+        "Gillian K. Hadfield"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10878",
+      "title": "Stochastic Teacher Intervention for Agentic On-Policy Distillation",
+      "published": "2026-10-07T20:29:29Z",
+      "url": "http://arxiv.org/abs/2610.10878v1",
+      "authors": [
+        "Junnan Liu",
+        "Linhao Luo",
+        "Zhijun Chen",
+        "Qianren Mao",
+        "Thuy-Trang Vu",
+        "Gholamreza Haffari"
+      ],
+      "matched_queries": [
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10858",
+      "title": "RFChipAgent: Multi-Agentic AI Flow for Analog/RF Chip Design",
+      "published": "2026-10-07T20:02:33Z",
+      "url": "http://arxiv.org/abs/2610.10858v1",
+      "authors": [
+        "Awani Khodkumbhe",
+        "Yunfei Feng",
+        "Raj Rangarajan",
+        "Kevin Wang",
+        "Kamal Sahota"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10833",
+      "title": "On the Clock: Towards Punctual and Productive Time-Budgeted AI Agents",
+      "published": "2026-10-07T19:35:08Z",
+      "url": "http://arxiv.org/abs/2610.10833v1",
+      "authors": [
+        "Aaron Wang",
+        "Neelabh Madan",
+        "Vlad Sobal",
+        "Matthew Trager",
+        "Michael Kleinman",
+        "Elman Mansimov",
+        "Wei Xia",
+        "Stefano Soatto"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10787",
+      "title": "NavGPT-3: Harnessing Context in a Hierarchical Navigation Runtime",
+      "published": "2026-10-07T18:45:56Z",
+      "url": "http://arxiv.org/abs/2610.10787v1",
+      "authors": [
+        "Gengze Zhou",
+        "Yicong Hong",
+        "Jiazhao Zhang",
+        "Xunyi Zhao",
+        "Jian Zhou",
+        "Zixing Lei",
+        "Zun Wang",
+        "Chongyang Zhao",
+        "Xionghui Chen",
+        "Stephen Gould",
+        "Anton van den Hengel",
+        "Qi Wu"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10786",
+      "title": "Plan-and-Patch: Diffusion Language Models for Agentic Planning",
+      "published": "2026-10-07T18:45:45Z",
+      "url": "http://arxiv.org/abs/2610.10786v1",
+      "authors": [
+        "Syamantak Kumar",
+        "Jiang Guo",
+        "Hassan Hamad",
+        "Hideo Kobayashi",
+        "Yi Xiang",
+        "Yezhou Yang",
+        "Yanjun Qi",
+        "Daniele Bonadiman",
+        "Jiarong Jiang"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10768",
+      "title": "Strategic Investment Decision Making for Value Creation in Energy Transition: A Reinforcement Learning Approach",
+      "published": "2026-10-07T18:29:31Z",
+      "url": "http://arxiv.org/abs/2610.10768v1",
+      "authors": [
+        "Yasaman Cheraghi",
+        "Reidar B. Bratvold",
+        "Aojie Hong",
+        "Ressi B. Muhammad",
+        "Sergey Alyaev"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10740",
+      "title": "Conversational Task Disambiguation over Tabular Data: Leakage-Aware Formulation, Benchmark Suite, and Training",
+      "published": "2026-10-07T18:09:55Z",
+      "url": "http://arxiv.org/abs/2610.10740v1",
+      "authors": [
+        "Nafiseh Ghoroghchian",
+        "Luis Scoccola",
+        "Tina Sedaghat",
+        "Omid Vaheb",
+        "Hannah Chen",
+        "Dino D'Agostino",
+        "Keyvan Golestan"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10507",
+      "title": "RECAST: Learning to Compute the Right Context through Adaptive Evidence Routing",
+      "published": "2026-10-07T17:51:08Z",
+      "url": "http://arxiv.org/abs/2610.10507v1",
+      "authors": [
+        "Yilun Hao",
+        "Krishna Sayana",
+        "Isabella Ye",
+        "James S Ren",
+        "Sukhdeep Sodhi",
+        "Craig Boutilier",
+        "Chuchu Fan"
+      ],
+      "matched_queries": [
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10478",
+      "title": "Before They Can Solve: Predicting Post-Training Coding-Agent Performance from Base Models",
+      "published": "2026-10-07T17:37:19Z",
+      "url": "http://arxiv.org/abs/2610.10478v1",
+      "authors": [
+        "Tan Yu",
+        "Alexander Bukharin",
+        "Khushi Bhardwaj",
+        "Jennifer Williams",
+        "Zirui Liu",
+        "Jonathan Lingjie Li",
+        "Soumye Singhal",
+        "Joseph Jennings",
+        "Sanjeev Satheesh",
+        "Yash Jain",
+        "Ashish Vaswani",
+        "Venkat Krishna Srinivasan",
+        "Matthew Papakipos",
+        "Hyunwoo Kim",
+        "Jian Zhang",
+        "Oleksii Kuchaiev",
+        "Markus Kliegl",
+        "Mostofa Patwary",
+        "Mohammad Shoeybi",
+        "Bryan Catanzaro",
+        "Jonathan Cohen",
+        "Jiantao Jiao"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10444",
+      "title": "RunningTab: Direct Workspace Interaction with Environment-Side Tabs",
+      "published": "2026-10-07T17:16:56Z",
+      "url": "http://arxiv.org/abs/2610.10444v1",
+      "authors": [
+        "Jinheon Baek",
+        "Soyeong Jeong",
+        "Yumin Choi",
+        "Dongsu Han",
+        "Sung Ju Hwang"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10659",
+      "title": "Applying Security by Design at the Point of Execution: How Governed Security Requirements Affect the Security of AI-Generated Code",
+      "published": "2026-10-07T17:02:09Z",
+      "url": "http://arxiv.org/abs/2610.10659v1",
+      "authors": [
+        "Pedro Farinha"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10407",
+      "title": "SOTA: Stock Options Trading Agents Guided by Option-Implied Return Distributions",
+      "published": "2026-10-07T16:55:05Z",
+      "url": "http://arxiv.org/abs/2610.10407v1",
+      "authors": [
+        "Yizhen Xie",
+        "Mengyang Liu"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10378",
+      "title": "Document-Level Text Simplification in Estonian Using Large Language Models",
+      "published": "2026-10-07T16:38:26Z",
+      "url": "http://arxiv.org/abs/2610.10378v1",
+      "authors": [
+        "Meeri-Ly Muru",
+        "Eduard Barbu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10320",
+      "title": "LLM-Assisted Generation of Transparent, Open-Source Multiphysics Models of Electrochemical Devices",
+      "published": "2026-10-07T16:11:56Z",
+      "url": "http://arxiv.org/abs/2610.10320v1",
+      "authors": [
+        "Sebastian Castro",
+        "Maya F. Schuchert",
+        "Spencer A. McCluskey",
+        "Eric W. Lees",
+        "Justin C. Bui"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10302",
+      "title": "Continual Graph Multi-Agent Reinforcement Learning",
+      "published": "2026-10-07T15:56:31Z",
+      "url": "http://arxiv.org/abs/2610.10302v1",
+      "authors": [
+        "Tommaso Marzi",
+        "Ahmed Hendawy",
+        "Jan Peters",
+        "Carlo D'Eramo",
+        "Andrea Cini",
+        "Cesare Alippi"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10265",
+      "title": "Stale, Misattributed, or Late: Where Personal Memory Fails Before Generation",
+      "published": "2026-10-07T15:37:12Z",
+      "url": "http://arxiv.org/abs/2610.10265v1",
+      "authors": [
+        "Haonan Deng",
+        "Park Sinchaisri"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10263",
+      "title": "When Sub-Agents Work in Parallel: The Promises and Pitfalls of Dynamic Concurrency in Long-Horizon Coding Tasks",
+      "published": "2026-10-07T15:35:22Z",
+      "url": "http://arxiv.org/abs/2610.10263v1",
+      "authors": [
+        "Han Li",
+        "HanHaoNing Li",
+        "Ziqian Jiang",
+        "Yiling Lou"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10258",
+      "title": "QuSema: Detecting Silent Bugs in Quantum Libraries via Quantum-knowledge-enhanced Agents",
+      "published": "2026-10-07T15:33:38Z",
+      "url": "http://arxiv.org/abs/2610.10258v1",
+      "authors": [
+        "Yujin Song",
+        "Kaining Zhang",
+        "Qixin Zhang",
+        "Shuai Wang",
+        "Pingchuan Ma",
+        "Yuxuan Du"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10256",
+      "title": "OOM-RL II: Reality Is an Oracle, Not a Debugger Provenance-Constrained Diagnosis in Continually Evolving Agent-Engineered Systems",
+      "published": "2026-10-07T15:33:17Z",
+      "url": "http://arxiv.org/abs/2610.10256v1",
+      "authors": [
+        "Kun Liu",
+        "Liqun Chen"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10242",
+      "title": "TestGRAD: Evolving Test Suites via Failure Pattern Momentum for SWE-Agent Ensemble",
+      "published": "2026-10-07T15:25:15Z",
+      "url": "http://arxiv.org/abs/2610.10242v1",
+      "authors": [
+        "Pengfei He",
+        "Jiayuan Zhou",
+        "Shaowei Wang",
+        "Ruiqi Pan"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10226",
+      "title": "Why Software Engineering Is Indispensable in the Age of Coding Agents",
+      "published": "2026-10-07T15:17:37Z",
+      "url": "http://arxiv.org/abs/2610.10226v1",
+      "authors": [
+        "Alfonso Fuggetta"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10206",
+      "title": "Computations of the slice genus and the unknotting number of links via machine learning",
+      "published": "2026-10-07T15:04:04Z",
+      "url": "http://arxiv.org/abs/2610.10206v1",
+      "authors": [
+        "Yutong Dai",
+        "Oliver Hayman",
+        "András Juhász",
+        "Ludovico Morellato"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10184",
+      "title": "Agentic AI-Assisted Modeling for Production Scheduling: Assessment in Constraint Programming",
+      "published": "2026-10-07T14:51:37Z",
+      "url": "http://arxiv.org/abs/2610.10184v1",
+      "authors": [
+        "Ángel Sánchez-Fernández",
+        "Javier Pernas-Álvarez",
+        "Diego Crespo-Pereira"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10183",
+      "title": "VideoEvolve: Co-Evolving Memory and Retrieval for Long Video Understanding",
+      "published": "2026-10-07T14:51:23Z",
+      "url": "http://arxiv.org/abs/2610.10183v1",
+      "authors": [
+        "Yongchao Xu",
+        "Bowen Ye",
+        "Jiefeng Gan",
+        "Junkai Ma",
+        "Wenzhao Li",
+        "Sen Tao",
+        "Yi Wei",
+        "Jiawei Liu"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10179",
+      "title": "Beyond Outcome Rewards: Constructing and Assigning Retrieval Credit for Search Agents",
+      "published": "2026-10-07T14:48:47Z",
+      "url": "http://arxiv.org/abs/2610.10179v1",
+      "authors": [
+        "Wenyu Huang",
+        "Xinyu Hou",
+        "Pavlos Vougiouklis",
+        "Ruofei Lai",
+        "Jeff Z. Pan"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent",
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10150",
+      "title": "On the Reliability of LLM-Based Vulnerability Patching Benchmarks",
+      "published": "2026-10-07T14:26:57Z",
+      "url": "http://arxiv.org/abs/2610.10150v1",
+      "authors": [
+        "Dang K Le",
+        "Wenxuan Shi",
+        "Xinyu Xing"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10141",
+      "title": "AdaT$^2$: Adaptive Test Transformations for Black-Box Boundary Testing of Conversational Agents",
+      "published": "2026-10-07T14:19:02Z",
+      "url": "http://arxiv.org/abs/2610.10141v1",
+      "authors": [
+        "Liting Lin",
+        "Boxi Yu",
+        "Qinghua Xu",
+        "Yuzhong Zhang",
+        "Lionel Briand",
+        "Emir Muñoz"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10126",
+      "title": "Know the Shape, Find the Fault: Topology-Conditioned Diagnosis of Multi-Agent LLM Failures",
+      "published": "2026-10-07T14:07:48Z",
+      "url": "http://arxiv.org/abs/2610.10126v1",
+      "authors": [
+        "Xinwen Liu",
+        "Zhuocheng Pan",
+        "Isabella Zhu",
+        "Jawei Zhang",
+        "Xudong Liu",
+        "Tianyu Wo"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10120",
+      "title": "RewardWeaver: Long-Horizon Interactive Learning for Language Agents via Self-Evolving Reward Adaptation",
+      "published": "2026-10-07T14:04:45Z",
+      "url": "http://arxiv.org/abs/2610.10120v1",
+      "authors": [
+        "Hengbo Xiao",
+        "Boyao Zhang",
+        "Purui Liu",
+        "Yuxuan Zheng",
+        "Haoran Yin",
+        "Haibo Liu",
+        "Fan Zhang"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10091",
+      "title": "ExperienceIndex: Artifact-Grounded Memory",
+      "published": "2026-10-07T13:50:33Z",
+      "url": "http://arxiv.org/abs/2610.10091v1",
+      "authors": [
+        "Peter Baile Chen",
+        "Geoffrey X. Yu",
+        "Xinming Liu",
+        "Samuel Madden",
+        "Dan Roth",
+        "Jacob Andreas",
+        "Doug Downey",
+        "Michael Cafarella"
+      ],
+      "matched_queries": [
+        "agent-memory"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10071",
+      "title": "HGP:An on-device personalized agent memory via hybrid graph storage",
+      "published": "2026-10-07T13:37:38Z",
+      "url": "http://arxiv.org/abs/2610.10071v1",
+      "authors": [
+        "Ran Zhou",
+        "Xueming Han",
+        "Jiaheng Liu",
+        "Yuyao Zhang",
+        "Fanyu Meng",
+        "Junlan Feng",
+        "Yuxiang Ren"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10062",
+      "title": "Loud Failures, Quiet Failures: Fault Detection and Recovery in Tool-Using Language Model Agents",
+      "published": "2026-10-07T13:29:59Z",
+      "url": "http://arxiv.org/abs/2610.10062v1",
+      "authors": [
+        "Obada Kraishan"
+      ],
+      "matched_queries": [
+        "agent-planning",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10061",
+      "title": "TRACK: Telemetry-Based Racing Analysis and Coaching Kit in Sim Racing Games",
+      "published": "2026-10-07T13:29:45Z",
+      "url": "http://arxiv.org/abs/2610.10061v1",
+      "authors": [
+        "Efe Çangırılı",
+        "Murat Kurt"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10633",
+      "title": "Has LLM Screening Performance Stalled in Software Engineering Systematic Reviews?",
+      "published": "2026-10-07T13:25:54Z",
+      "url": "http://arxiv.org/abs/2610.10633v1",
+      "authors": [
+        "Aleksi Huotala",
+        "Miikka Kuutila",
+        "Mika Mäntylä"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10042",
+      "title": "Learning to Accumulate Knowledge with Mutual Information",
+      "published": "2026-10-07T13:20:18Z",
+      "url": "http://arxiv.org/abs/2610.10042v1",
+      "authors": [
+        "Yuyang Zhao",
+        "Lizi Liao",
+        "Leyang Shen",
+        "Xiaoyan Zhao",
+        "Yang Zhang",
+        "Fuli Feng",
+        "Xiangnan He"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09995",
+      "title": "Designing Collaborative AI-Driven Workflows for Scientific Software Engineering",
+      "published": "2026-10-07T12:55:07Z",
+      "url": "http://arxiv.org/abs/2610.09995v1",
+      "authors": [
+        "Akash Dhruv",
+        "Max Knobbe",
+        "Pedro Machado",
+        "Anshu Dubey"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09973",
+      "title": "From Expected Harmfulness to Likelihood: A Probabilistic Reformulation of Jailbreaking LLM Agents",
+      "published": "2026-10-07T12:40:20Z",
+      "url": "http://arxiv.org/abs/2610.09973v1",
+      "authors": [
+        "Juanyang Xu",
+        "Zheng Wang",
+        "Xingyu Zhao",
+        "Siddartha Khastgir",
+        "Andi Zhang"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10629",
+      "title": "The Harness as the Only Mutable Surface: Compliance-Bounded Self-Evolution of LLM Agents in Credit Pipelines, with a Measured Admission Gate",
+      "published": "2026-10-07T12:33:48Z",
+      "url": "http://arxiv.org/abs/2610.10629v1",
+      "authors": [
+        "Ravil Akhtyamov"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09935",
+      "title": "AgentTracer: Tracing Indirect Prompt Injection Attack through Fine-Grained Intention-Execution Alignment",
+      "published": "2026-10-07T12:19:56Z",
+      "url": "http://arxiv.org/abs/2610.09935v1",
+      "authors": [
+        "Zitong Yao",
+        "Jiangrong Wu",
+        "Yixi Lin",
+        "Anrui Huang",
+        "Luoyun Zhang",
+        "Yuhong Nan"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09906",
+      "title": "Constrained-Action AI Remediation for SIEM/XDR via a NeMo-Guardrails Proxy",
+      "published": "2026-10-07T12:00:51Z",
+      "url": "http://arxiv.org/abs/2610.09906v1",
+      "authors": [
+        "Georgios Koutidis",
+        "Nikolaos Kekatos",
+        "Tom Nianios",
+        "Alexios Lekidis"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09872",
+      "title": "LiveMACE: Process-Aware Evaluation of LLM Agent Capabilities in Evolving Markets",
+      "published": "2026-10-07T11:33:21Z",
+      "url": "http://arxiv.org/abs/2610.09872v1",
+      "authors": [
+        "Jun Zhao",
+        "Leiming Fu",
+        "Yanbo Wen",
+        "Yiding Wang",
+        "Xuantong Liu",
+        "Yang Shu",
+        "Yuyang Lu",
+        "Xuanran Xing",
+        "Jingqi Tong",
+        "Hao Xu",
+        "Qi Zhang",
+        "Xuanjing Huang"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09870",
+      "title": "Deadline-Aware Multi-Agent Reinforcement Learning for TSN-Based Vehicular Edge Networks",
+      "published": "2026-10-07T11:30:19Z",
+      "url": "http://arxiv.org/abs/2610.09870v1",
+      "authors": [
+        "Bernardo A. C. Pereira",
+        "Marcos Carvalho",
+        "Fatih Temiz",
+        "Shavbo Salehi",
+        "Melike Erol-Kantarci",
+        "Andreas Gavrielides",
+        "Johann M. Marquez-Barja",
+        "Daniel F. Macedo"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10628",
+      "title": "Agent4RE: A Self-Refining Multi-agent Framework for End-to-End Software Requirements Engineering and Benchmarking",
+      "published": "2026-10-07T11:23:11Z",
+      "url": "http://arxiv.org/abs/2610.10628v1",
+      "authors": [
+        "Yongjian Tang",
+        "Linhan Li",
+        "Thomas Runkler"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09858",
+      "title": "Training Advisors for LLM Agents from Task Outcomes",
+      "published": "2026-10-07T11:14:26Z",
+      "url": "http://arxiv.org/abs/2610.09858v1",
+      "authors": [
+        "Sergei Polezhaev",
+        "Barys Liskavets",
+        "Ori Press",
+        "Alexander Golubev"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent",
+        "multi-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09856",
+      "title": "Self-Evolve With a Reference:Anchored Training of Tool-Integrated Agents",
+      "published": "2026-10-07T11:13:35Z",
+      "url": "http://arxiv.org/abs/2610.09856v1",
+      "authors": [
+        "Wenjie Liao",
+        "Liangjie Zhao",
+        "Zehong Cao"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09832",
+      "title": "SkillForge: Co-Evolving Skills and Agents via Dynamic Skill Lifecycles",
+      "published": "2026-10-07T10:52:15Z",
+      "url": "http://arxiv.org/abs/2610.09832v1",
+      "authors": [
+        "Yuyao Ge",
+        "Yiwei Wang",
+        "Yuchen He",
+        "Baolong Bi",
+        "Lingrui Mei",
+        "Jiayu Yao",
+        "Lizhe Chen",
+        "Shenghua Liu"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09824",
+      "title": "Homogenization in Multi-Agent Systems",
+      "published": "2026-10-07T10:49:29Z",
+      "url": "http://arxiv.org/abs/2610.09824v1",
+      "authors": [
+        "Prakhar Ganesh",
+        "Kyra Wilson",
+        "Luca Zappella",
+        "Barry-John Theobald",
+        "Nicholas Apostoloff",
+        "Lucas Monteiro Paes",
+        "Nivedha Sivakumar"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09772",
+      "title": "Decoupling Logic from Persona: Structural Immunity of Edge LLM Agents to Context Pollution",
+      "published": "2026-10-07T09:53:28Z",
+      "url": "http://arxiv.org/abs/2610.09772v2",
+      "authors": [
+        "Masaaki Nakatsu",
+        "Reno Wang"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09769",
+      "title": "Bolzano: From Expert-Guided Proof Search to Automated Open-Problem Solving",
+      "published": "2026-10-07T09:52:46Z",
+      "url": "http://arxiv.org/abs/2610.09769v2",
+      "authors": [
+        "Adrián Zámečník",
+        "Matěj Kripner",
+        "Martin Koutecký",
+        "Martin Balko",
+        "Jan Grebík",
+        "Pavel Hubáček",
+        "Robert Šámal",
+        "Václav Rozhoň"
+      ],
+      "matched_queries": [
+        "multi-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09763",
+      "title": "Beyond Policy Support: Interaction Constrained Offline Reinforcement Learning for Autonomous Driving",
+      "published": "2026-10-07T09:48:53Z",
+      "url": "http://arxiv.org/abs/2610.09763v1",
+      "authors": [
+        "Mahmoud Selim",
+        "Cristina Cipriani",
+        "Karl Henrik Johansson"
+      ],
+      "matched_queries": [
+        "agentic-rl"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10622",
+      "title": "WorldBench: Evaluating LLMs on Three.js Voxel World Generation",
+      "published": "2026-10-07T08:52:08Z",
+      "url": "http://arxiv.org/abs/2610.10622v1",
+      "authors": [
+        "Krish Bakshi"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09683",
+      "title": "System Switch: When Should a Fast Decision Model Stop and Think?",
+      "published": "2026-10-07T08:44:47Z",
+      "url": "http://arxiv.org/abs/2610.09683v1",
+      "authors": [
+        "Gian Luca Bailo"
+      ],
+      "matched_queries": [
+        "agent-planning"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09681",
+      "title": "Cost-Efficient Theorem Proving via Agent Orchestration in Program Verification",
+      "published": "2026-10-07T08:42:24Z",
+      "url": "http://arxiv.org/abs/2610.09681v1",
+      "authors": [
+        "Shuangjie Yao",
+        "Nikolaus Holzer",
+        "Mark Paul Santolucito",
+        "Baishakhi Ray",
+        "Suman Jana",
+        "Dongdong She"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09643",
+      "title": "CircuitATLAS: Agentic reasoning over a systems neuroscience knowledge graph for target discovery in circuitopathies",
+      "published": "2026-10-07T08:19:27Z",
+      "url": "http://arxiv.org/abs/2610.09643v1",
+      "authors": [
+        "Gabriel Ocana-Santero",
+        "Marko Tvrdic"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09633",
+      "title": "Coding-Agent Benchmarks Should Match Their Users' Task Flows",
+      "published": "2026-10-07T08:08:39Z",
+      "url": "http://arxiv.org/abs/2610.09633v1",
+      "authors": [
+        "Igor Slinko",
+        "Yaroslav Golubev",
+        "Sergey Titov"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09624",
+      "title": "How Do Agentic LLMs Decide to Call Tools? A Tool-Call Vector Shaped by Suppression",
+      "published": "2026-10-07T08:01:39Z",
+      "url": "http://arxiv.org/abs/2610.09624v1",
+      "authors": [
+        "Xijie Gong",
+        "Tingxu Han",
+        "Jiahao Zhang",
+        "Wei Song",
+        "Ziqi Ding",
+        "Hanqi Yan",
+        "Youcheng Sun",
+        "Lijie Hu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10619",
+      "title": "TestJack: Should you trust the results in coding benchmarks? Agentic Coding Benchmarks Auditing via Evaluator Evolution",
+      "published": "2026-10-07T07:58:04Z",
+      "url": "http://arxiv.org/abs/2610.10619v1",
+      "authors": [
+        "Shuangjie Yao",
+        "Hao Wang",
+        "Koushik Sen",
+        "Simin Chen",
+        "Baishakhi Ray",
+        "Dawn Song"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09590",
+      "title": "Learning Situation-Conditioned Thinking Policies for Long-Term LLM Agents",
+      "published": "2026-10-07T07:34:08Z",
+      "url": "http://arxiv.org/abs/2610.09590v1",
+      "authors": [
+        "Hong Su"
+      ],
+      "matched_queries": [
+        "agent-memory",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09581",
+      "title": "Correct Answers, Unsupported Findings: Evidence Binding in Forensic Reconstruction of LLM Agent Logs",
+      "published": "2026-10-07T07:26:33Z",
+      "url": "http://arxiv.org/abs/2610.09581v1",
+      "authors": [
+        "Taehyeon Yun",
+        "Dongho Kim",
+        "Geonwoo Kim",
+        "Juyoung Seo",
+        "Minseok Hur",
+        "Moohong Min"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10612",
+      "title": "PyCache Trap: The Inspection-Execution Gap in Agent Skill Scanners",
+      "published": "2026-10-07T07:10:11Z",
+      "url": "http://arxiv.org/abs/2610.10612v2",
+      "authors": [
+        "Jie Liao",
+        "Simeng Qin",
+        "Wenqi Ren",
+        "Wei Zhou",
+        "Junhao Wen",
+        "Ranjie Duan",
+        "Yang Liu",
+        "Xiaojun Jia"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10610",
+      "title": "Code Understanding is a Bottleneck for Coding Agents",
+      "published": "2026-10-07T06:29:42Z",
+      "url": "http://arxiv.org/abs/2610.10610v1",
+      "authors": [
+        "Nishant Balepur",
+        "Kiran Tomlinson",
+        "Tobias Schnabel"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09489",
+      "title": "Goldsmith: Gold-Loss-Guided Definition Optimization with an Agentic Annotation Harness",
+      "published": "2026-10-07T05:45:25Z",
+      "url": "http://arxiv.org/abs/2610.09489v1",
+      "authors": [
+        "Yihan Li",
+        "Hanyi Zhang",
+        "Xiaoxi Jiang",
+        "Man Guo"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09484",
+      "title": "MIMESIS: Learning User Simulators as Training Environments for Interactive Agents",
+      "published": "2026-10-07T05:37:09Z",
+      "url": "http://arxiv.org/abs/2610.09484v2",
+      "authors": [
+        "Hoang Phan",
+        "Dat Huynh",
+        "Andrey Zhmoginov",
+        "Qi Zeng",
+        "Wancen Mu",
+        "Yue Cao",
+        "Shengjie Bi",
+        "Yun He",
+        "Changdae Oh",
+        "Deren Lei"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09466",
+      "title": "LLM-Enabled UAV Dispatch: A System-Level Survey and Taxonomy",
+      "published": "2026-10-07T05:22:51Z",
+      "url": "http://arxiv.org/abs/2610.09466v1",
+      "authors": [
+        "Xiao Han",
+        "Aoyang Quan",
+        "Xiangyu Zhao",
+        "Xiangjie Kong",
+        "Guojiang Shen"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09400",
+      "title": "TutorLoop: Regulating Student Learning Behaviors via Sensor-in-the-Loop Generative Feedback",
+      "published": "2026-10-07T04:03:32Z",
+      "url": "http://arxiv.org/abs/2610.09400v1",
+      "authors": [
+        "Songlin Xu",
+        "Xinyu Zhang"
+      ],
+      "matched_queries": [
+        "agentic-rl",
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09374",
+      "title": "DUDA-Bench: Benchmarking LLM Agents on Multimodal Data-Driven Urban Diagnosis",
+      "published": "2026-10-07T03:29:27Z",
+      "url": "http://arxiv.org/abs/2610.09374v1",
+      "authors": [
+        "Yizhi Song",
+        "Hang Ni",
+        "Weijia Zhang",
+        "Hao Liu"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09371",
+      "title": "The Confidence Game: Strategic Miscalibration in Human-AI Delegation",
+      "published": "2026-10-07T03:25:44Z",
+      "url": "http://arxiv.org/abs/2610.09371v1",
+      "authors": [
+        "Raghu Arghal",
+        "Saswati Sarkar",
+        "Shirin Saeedi Bidokhti"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10608",
+      "title": "From Investigation Failures to Reliable SOC Agents: Understanding and Improving LLM-Based Alert Triage",
+      "published": "2026-10-07T03:20:51Z",
+      "url": "http://arxiv.org/abs/2610.10608v1",
+      "authors": [
+        "Saimon Amanuel Tsegai",
+        "Alex Kantchelian",
+        "Danfeng",
+        "Yao",
+        "Peng Gao"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "multi-agent",
+        "tool-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09348",
+      "title": "Relevance Is Not Sufficiency: What Actually Closes the Evidence Gap in Long-Term Memory QA",
+      "published": "2026-10-07T03:09:08Z",
+      "url": "http://arxiv.org/abs/2610.09348v1",
+      "authors": [
+        "Yufeng Li",
+        "Shuxin Li",
+        "Zhenhua Xu",
+        "Junxian Li",
+        "Peng Zeng",
+        "Sheng Yao",
+        "Changting Lin",
+        "Gaolei Li",
+        "Ran Bi",
+        "Meng Han"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.10604",
+      "title": "Beyond Type-checking: Towards Holistic Evaluation of Formal Specification Generation",
+      "published": "2026-10-07T02:11:30Z",
+      "url": "http://arxiv.org/abs/2610.10604v1",
+      "authors": [
+        "Srijith Nair",
+        "Aditya Vempaty",
+        "Jia Liu",
+        "Ashish Jagmohan"
+      ],
+      "matched_queries": [
+        "llm-agent",
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09296",
+      "title": "The AI Evaluation Ecosystem",
+      "published": "2026-10-07T01:58:25Z",
+      "url": "http://arxiv.org/abs/2610.09296v1",
+      "authors": [
+        "Yash Dave",
+        "Sang T. Truong",
+        "Serena Wang",
+        "Sanmi Koyejo"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09267",
+      "title": "Who Broke Me? Execution-Guided Repair of Behavioral Dependency Breaks",
+      "published": "2026-10-07T01:04:51Z",
+      "url": "http://arxiv.org/abs/2610.09267v1",
+      "authors": [
+        "Juntao Chen",
+        "Tingting Bi",
+        "Yanlin Wang",
+        "Patanamon Thongtanunam"
+      ],
+      "matched_queries": [
+        "software-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09264",
+      "title": "Package Hallucination Attacks on Coding Agents through Prompt Injection in Rule Files",
+      "published": "2026-10-07T00:59:19Z",
+      "url": "http://arxiv.org/abs/2610.09264v1",
+      "authors": [
+        "Yupu Wang",
+        "Zhengyuan Jiang",
+        "Reachal Wang",
+        "Neil Zhenqiang Gong"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09243",
+      "title": "We Query, Therefore We Compute: On Oracle Computation beyond the Machine, with an Application to Agents",
+      "published": "2026-10-07T00:14:09Z",
+      "url": "http://arxiv.org/abs/2610.09243v1",
+      "authors": [
+        "Kefan Liu",
+        "Fengning Ou",
+        "Yelin Luo",
+        "Jingdi Lei"
+      ],
+      "matched_queries": [
+        "llm-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    },
+    {
+      "arxiv_id": "2610.09240",
+      "title": "Adversarial Images Hijack Web Agents from Visual Grounding to Browser Execution",
+      "published": "2026-10-07T00:05:53Z",
+      "url": "http://arxiv.org/abs/2610.09240v1",
+      "authors": [
+        "Wanjing Han",
+        "Levi Taiji Li",
+        "Mu Zhang",
+        "Yue Jiang",
+        "Guanhong Tao"
+      ],
+      "matched_queries": [
+        "web-agent"
+      ],
+      "source_provenance": [],
+      "evidence_status": "full-text-review-required",
+      "repository_status": "new",
+      "priority_review_required": false,
+      "priority_query_matches": []
+    }
+  ],
+  "requested_window": {
+    "start": "2026-10-08",
+    "end": "2026-10-12"
+  },
+  "announcement_overlap_days": 1,
+  "recall_mode": "submission-window",
+  "cross_source": {
+    "enabled": false,
+    "config": null,
+    "source_failures": [],
+    "source_stats": [],
+    "coverage_complete": false,
+    "official_review_queue_count": 0,
+    "archived_official_review_count": 0
+  },
+  "arxiv_transport": {
+    "coverage_complete": true,
+    "transport_complete": true,
+    "query_count": 8,
+    "capped_queries": 0,
+    "failed_queries": 0,
+    "cache_fallback_pages": 0,
+    "queries": [
+      {
+        "query": "LLM agent",
+        "categories": [
+          "cs.AI",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "1a365c0d4dac40fe9c54bdf1e37f0a36",
+        "fingerprint": "e171fba0c0a49a311630af474d50c98570e828c38b521285ca2322bab2b2f14f",
+        "next_offset": 128,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 2,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "agentic reinforcement learning",
+        "categories": [
+          "cs.AI",
+          "cs.LG"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "1a365c0d4dac40fe9c54bdf1e37f0a36",
+        "fingerprint": "7a5666ddd592e792b0edfa95e48e84ae4cf7463f9cf72190f8d6dd2fe9549661",
+        "next_offset": 47,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model tool use agent",
+        "categories": [
+          "cs.AI",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "1a365c0d4dac40fe9c54bdf1e37f0a36",
+        "fingerprint": "2cf7fc6fa6cf99a9b1a6158233cba03d820f21d9dac73ab826468697bf249bde",
+        "next_offset": 24,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "web agent language model",
+        "categories": [
+          "cs.AI",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "1a365c0d4dac40fe9c54bdf1e37f0a36",
+        "fingerprint": "13ff31a8466984686d24a2583ff870cba0411292ea6618213681885b313aa558",
+        "next_offset": 3,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "software engineering agent",
+        "categories": [
+          "cs.SE",
+          "cs.AI"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "1a365c0d4dac40fe9c54bdf1e37f0a36",
+        "fingerprint": "af987512cc7adad79d9e7c857e3b46db021f890d811f3e447e0c7b8f2d695624",
+        "next_offset": 61,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model agent memory",
+        "categories": [
+          "cs.AI",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "1a365c0d4dac40fe9c54bdf1e37f0a36",
+        "fingerprint": "da480c731115371f8d8eb857b822deef33ff4df7c541fdb29dcaf05c198ff54d",
+        "next_offset": 20,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "language model agent planning",
+        "categories": [
+          "cs.AI",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "1a365c0d4dac40fe9c54bdf1e37f0a36",
+        "fingerprint": "3ac234974119ad72b19a7813df0dcc1c34a90c400f88566eae0bf35b56aa9996",
+        "next_offset": 17,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      },
+      {
+        "query": "large language model multi agent",
+        "categories": [
+          "cs.AI",
+          "cs.CL"
+        ],
+        "match": "all",
+        "page_size": 100,
+        "maximum_results": 5000,
+        "date_from": "2026-10-07",
+        "date_to": "2026-10-12",
+        "identifier_months": [],
+        "scan_id": "1a365c0d4dac40fe9c54bdf1e37f0a36",
+        "fingerprint": "1b4f07c989d7fa8c1b8fea5069561ea23c9d012eed0cf6dc23808742b0395021",
+        "next_offset": 25,
+        "state": "exhausted",
+        "coverage_complete": true,
+        "transport_complete": true,
+        "cache_fallback_pages": 0,
+        "pages": 1,
+        "resumed": false,
+        "error": null
+      }
+    ],
+    "scope": "configured arXiv API query matrix only; candidate date/identifier-month filtering is separate",
+    "review_complete": false,
+    "watermark_eligible": false,
+    "note": "API retrieval coverage does not certify full-text review or all-source coverage; no review watermark is advanced automatically",
+    "cache_dir": ".cache/paper-discovery/arxiv"
+  },
+  "review_evidence_notice": "Transport completed; per-ID review proof is in the consolidated register, not inferred from retrieval."
+}

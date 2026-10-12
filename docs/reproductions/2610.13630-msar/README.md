@@ -2,16 +2,16 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2610.13630](https://arxiv.org/abs/2610.13630) |
-| 公司/机构 | 上海交通大学、上海创智学院、小红书 Dots Studio、北京大学；另有独立研究者 |
+| 公司/机构 | Shanghai Jiao Tong University / Shanghai Innovation Institute / Xiaohongshu / Peking University |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 否：原作者给出 [jianke0604/MSAR](https://github.com/jianke0604/MSAR)，但 2026-10-12 核查为 404，未找到可用作者源码 |
+| 原文开源代码 | 否：作者提供 https://github.com/jianke0604/MSAR，但2026-10-12核查404，未找到可用作者源码 |
 | Adapter | `msar` |
 | 本地复现代码 | [`src/auto_research/reproductions/msar/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/msar/) |
 
-本地等级为 `core_mechanism / L1`。GPU 验证待完成，不将下列论文数字当成本地测量。
+本地等级为 `core_mechanism / L1`。已完成 A100 三 seed 机制验证；原文数字与本地实测分开。
 
 ## 原始论文总结
 
@@ -48,13 +48,19 @@ flowchart LR
 
 对 source $v_i$，各流保留完整 $d$ 维：
 
-$$v^{(0)}_{i,t}=v_{i,t},\quad v^{(r)}_{i,t}=\sum_{\delta=0}^{\kappa_r-1}c_{i,r,\delta}\odot v_{i,t-\delta}.$$
+$$
+v^{(0)}_{i,t}=v_{i,t},\quad v^{(r)}_{i,t}=\sum_{\delta=0}^{\kappa_r-1}c_{i,r,\delta}\odot v_{i,t-\delta}.
+$$
 
 深度检索与轻量融合分别为：
 
-$$\alpha^{(r)}_{i\to l}=\operatorname{softmax}_i\big((w_l^{(r)})^\top\operatorname{RMSNorm}(v_i^{(r)})\big),\quad z_l^{(r)}=\sum_i\alpha^{(r)}_{i\to l}v_i^{(r)}.$$
+$$
+\alpha^{(r)}_{i\to l}=\operatorname{softmax}_i\big((w_l^{(r)})^\top\operatorname{RMSNorm}(v_i^{(r)})\big),\quad z_l^{(r)}=\sum_i\alpha^{(r)}_{i\to l}v_i^{(r)}.
+$$
 
-$$H_l^{\rm pre}=\sigma\big(a_l\operatorname{RMSNorm}(\operatorname{Flatten}(Z_l))W_l+b_l\big),\quad h_l=\sum_r H_{l,r}^{\rm pre}z_l^{(r)}.$$
+$$
+H_l^{\rm pre}=\sigma\big(a_l\operatorname{RMSNorm}(\operatorname{Flatten}(Z_l))W_l+b_l\big),\quad h_l=\sum_r H_{l,r}^{\rm pre}z_l^{(r)}.
+$$
 
 这里最后一层 mixer 是 sigmoid 而不是 stream softmax；每个流的 depth 权重才必须和为一。Block 摘要为 $b_n=\sum_{j\in B_n}f_j(h_j)$，当前 partial 在 block 首分支不存在，不能额外加入一个零 source 改变 softmax 分母。公式来源：[原文 §3.2–3.3](https://arxiv.org/html/2610.13630v1#S3).
 
@@ -89,9 +95,9 @@ PYTHONPATH=src python scripts/run_oct12_foundation.py --paper msar \
 
 ### 本地结果与验证状态
 
-`metrics/protocol.json` 只记录协议与待验证状态。已实际通过的 CPU 公式/因果/梯度单测不能替代 A100/A30。另有两步、width16/layer1、seed42 的真实公开数据 CPU smoke：基线 test byte NLL 5.682596，MSAR 5.682356；仅用于运行链路检查，非有效性或稳定收益证据。
+2026-10-12 在 A100 完成 seed 42/43/44、每组40步、width64/layers2的真实训练。test byte NLL：基线 `3.23254 ± 0.01263`，MSAR `3.20308 ± 0.01081`（均值 ± 样本标准差）。参数量分别180,544与190,292，训练步数相同但参数量不同；32 KiB训练与各4 KiB验证/test前缀只是机制诊断，不是原论文大模型收益复现。
 
-GPU 入口已声明 `requires_gpu_validation=true`，计划 receipt 为 `docs/gpu-validations/oct12-msar-a100.json`；只有主集成实跑并提交校验通过的 sanitized receipt 后才通过 GPU gate。
+实测见 [wikitext-a100-seeds42-44.json](metrics/wikitext-a100-seeds42-44.json)，脱敏回执见 [GPU证据](../../gpu-validations/oct12-msar-a100.json)。预算与split预先固定，test未用于选择。
 
 ### 代码映射与边界
 

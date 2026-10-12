@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-12",
+  "scope": "five frozen foundation/multimodal implementations; explicit manual-supplement and recalled provenance",
+  "counts": {
+    "reviewed": 5,
+    "accepted": 5,
+    "implemented_core_mechanism_L1": 5,
+    "manual_supplement_not_recalled": 1,
+    "recalled_in_eight_query_retrievals": 4
+  },
+  "coverage_note": "MSAR是八查询未召回的manualsupplement。其余四篇已召回；UMRM被foundation与post-training召回，但去重assignment在post-training。accepted是冻结批次筛选，不表示完整paperbenchmark或新工业A/B复现。",
+  "reviews": [
+    {
+      "arxiv_id": "2610.13630",
+      "key": "msar",
+      "title": "Multi-Stream Attention Residuals",
+      "status": "accepted",
+      "qualifies_for_reproduction_consideration": true,
+      "in_frozen_16_paper_batch": true,
+      "next_batch": false,
+      "implementation_status": "implemented_core_mechanism_L1",
+      "read_scope": "实施阶段已读摘要、作者信息、定义算法方法与主实验，以及列明的相关附录；复用实际实施审查，未宣称全部附录/整篇全文已读。",
+      "full_paper_read": false,
+      "first_author": "Xiaohan Qin",
+      "first_author_affiliation": "Shanghai Jiao Tong University",
+      "first_author_affiliation_evidence": {
+        "source_url": "https://arxiv.org/pdf/2610.13630v1#page=1",
+        "page": 1,
+        "selection_rule": "一作的第一署名机构；合作单位不进入该聚合字段"
+      },
+      "published": "2026-10-09T14:13:02Z",
+      "original_publication_date": "2026-10-09",
+      "publication_date_evidence": {
+        "artifact": ".cache/oct12-foundation-originals/2610.13630.abs.html",
+        "sha256": "8b82c94c6bcc36db9cb64d7b1a61453a3f02946bff0201a850a753abbbdebe2a",
+        "bytes": 42895,
+        "selector": ".submission-history",
+        "text": "Submission history From: Xiaohan Qin [ view email ] [v1] Fri, 9 Oct 2026 14:13:02 UTC (480 KB)",
+        "source_url": "https://arxiv.org/abs/2610.13630v1",
+        "scope": "exact first v1 submission timestamp, not PDF internal draft/date"
+      },
+      "source_url": "https://arxiv.org/html/2610.13630v1",
+      "source_sha256": "4322608f8a599ce171181dc5e4a667977274cf8d1795b12221189511b24fb5dc",
+      "source_bytes": 398513,
+      "source_artifact": ".cache/oct12-foundation-originals/2610.13630.html",
+      "source_pdf": {
+        "artifact": ".cache/oct12-foundation-originals/2610.13630.pdf",
+        "sha256": "cbdddc8f188ff214f65eda12e00bf3eaf1f0663ca785ffa75502b6d78ca797d4",
+        "bytes": 754073
+      },
+      "recall_provenance": "manual_supplement_not_recalled_by_the_eight_queries",
+      "defining_method": "multi-head depth attention不沿hidden channel简单分块；各stream由多尺度因果卷积(4/8/12等)形成contextualviews，pseudo-query对历史单流sources作深度softmax，sigmoid lightweightmix合成单流layerinput。BlockMSAR只持久存single-streamsources，按需展开；最后streammerge与block边界按原方法保留。",
+      "evaluation_evidence": "原论文18B/28B MoE十二downstreambench、iso-loss compute scaling与参数/compute/memory成本ablation；source reported1.58x不是本地实测速度。",
+      "upstream_assets": [
+        {
+          "url": "https://github.com/jianke0604/MSAR",
+          "status": "paper-declared author repository returned404 during implementation review2026-10-12; no usable upstream code found"
+        }
+      ],
+      "evidence_sections": [
+        {
+          "heading": "3.2 MSAR: Multi-Stream Attention Residuals",
+          "source_url": "https://arxiv.org/html/2610.13630v1#S3.SS2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3.3 Block MSAR",
+          "source_url": "https://arxiv.org/html/2610.13630v1#S3.SS3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3.4 Efficiency Analysis",
+          "source_url": "https://arxiv.org/html/2610.13630v1#S3.SS4",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.1 Experimental Setup",
+          "source_url": "https://arxiv.org/html/2610.13630v1#S4.SS1",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.2 Main Results",
+          "source_url": "https://arxiv.org/html/2610.13630v1#S4.SS2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.3 Scaling Laws",
+          "source_url": "https://arxiv.org/html/2610.13630v1#S4.SS3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.4 Ablation Studies",
+          "source_url": "https://arxiv.org/html/2610.13630v1#S4.SS4",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "Appendix C Parameter, Compute, and Memory Costs",
+          "source_url": "https://arxiv.org/html/2610.13630v1#A3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        }
+      ],
+      "evidence_pdf_pages": {
+        "method": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "evaluation": [
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "local_adapter_key": "msar",
+      "local_code_directory": "src/auto_research/reproductions/msar",
+      "fidelity": "L1_core_mechanism",
+      "actual_boundary": "本地tiny真实WikiText byteLM核心机制L1，不复现18B/28B完整训练、不将小样本NLL当paperbenchmark或工业在线收益。",
+      "online_ab": "no quantified randomized production-traffic A/B established in implementation-stage original method/experiment review; acceptance is not based on abstract-only wording",
+      "gpu_evidence_ownership": "root agent owns actual A100 runs and sanitized receipts; this review records paper selection/fidelity, not a fabricated GPU receipt",
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-msar-a100.json",
+      "source_is_research_input_not_authority": true
+    },
+    {
+      "arxiv_id": "2610.13735",
+      "key": "orthros",
+      "title": "Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers",
+      "status": "accepted",
+      "qualifies_for_reproduction_consideration": true,
+      "in_frozen_16_paper_batch": true,
+      "next_batch": false,
+      "implementation_status": "implemented_core_mechanism_L1",
+      "read_scope": "实施阶段已读摘要、作者信息、定义算法方法与主实验，以及列明的相关附录；复用实际实施审查，未宣称全部附录/整篇全文已读。",
+      "full_paper_read": false,
+      "first_author": "Yuhong Chou",
+      "first_author_affiliation": "The Hong Kong Polytechnic University",
+      "first_author_affiliation_evidence": {
+        "source_url": "https://arxiv.org/pdf/2610.13735v1#page=1",
+        "page": 1,
+        "selection_rule": "一作的第一署名机构；合作单位不进入该聚合字段"
+      },
+      "published": "2026-10-09T15:30:08Z",
+      "original_publication_date": "2026-10-09",
+      "publication_date_evidence": {
+        "artifact": ".cache/oct12-foundation-originals/2610.13735.abs.html",
+        "sha256": "23d0ecfd512b4a56b658350e6770b5227797278cea56709d87cbfa1cbb315387",
+        "bytes": 44912,
+        "selector": ".submission-history",
+        "text": "Submission history From: Yuhong Chou [ view email ] [v1] Fri, 9 Oct 2026 15:30:08 UTC (2,303 KB)",
+        "source_url": "https://arxiv.org/abs/2610.13735v1",
+        "scope": "exact first v1 submission timestamp, not PDF internal draft/date"
+      },
+      "source_url": "https://arxiv.org/html/2610.13735v1",
+      "source_sha256": "b7e186007a39f796527eb4a0ae02e1cabf842b6aa55f44f3a65de4cc439a41ae",
+      "source_bytes": 303285,
+      "source_artifact": ".cache/oct12-foundation-originals/2610.13735.html",
+      "source_pdf": {
+        "artifact": ".cache/oct12-foundation-originals/2610.13735.pdf",
+        "sha256": "2f3a1fca8c2436de023aac9f7112f0cda68e5769b2a0c5373fca9a9c6d19ccc4",
+        "bytes": 2454083
+      },
+      "recall_provenance": "recalled_foundation_model_assignment_index29",
+      "defining_method": "phaseaware两stream共享attention参数：base固定窗口SWA产生线性prefill表示，output对base完整同层KV作fullcausalattention。prefill仅需最后output，decode真实state/cache保持完整baseKV；训练包含从scratch或Transformercheckpointconversion，不能kernelizedlinearattention代理SWA/fullcache。",
+      "evaluation_evidence": "原文scaling、scratch、dat-efficientconversion、128kNIAH/realcontextrecall及prefill/end-to-end测时；21.9xprefill是source结果，不能套在本地tiny短context。",
+      "upstream_assets": [
+        {
+          "url": null,
+          "status": "no original-author public implementation found during official-paper/project review"
+        }
+      ],
+      "evidence_sections": [
+        {
+          "heading": "3.1 Orthros attention",
+          "source_url": "https://arxiv.org/html/2610.13735v1#S3.SS1",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3.2 Training & Inference Schemes",
+          "source_url": "https://arxiv.org/html/2610.13735v1#S3.SS2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3.3 Complexity Analysis",
+          "source_url": "https://arxiv.org/html/2610.13735v1#S3.SS3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.3 Conversion Training",
+          "source_url": "https://arxiv.org/html/2610.13735v1#S4.SS3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.4 In-Context Recall Capacity",
+          "source_url": "https://arxiv.org/html/2610.13735v1#S4.SS4",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.5 Prefilling Efficiency",
+          "source_url": "https://arxiv.org/html/2610.13735v1#S4.SS5",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.6 End-to-End Inference",
+          "source_url": "https://arxiv.org/html/2610.13735v1#S4.SS6",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        }
+      ],
+      "evidence_pdf_pages": {
+        "method": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "evaluation": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      },
+      "local_adapter_key": "orthros",
+      "local_code_directory": "src/auto_research/reproductions/orthros",
+      "fidelity": "L1_core_mechanism",
+      "actual_boundary": "本地tinyTransformer转换/训练、真实cache与batchagreement及WikiTextNLL为L1诊断；不宣称完整预训练权重转换、128knear-perfectrecall或paper速度。",
+      "internal_date_note": "PDF frontmatter DateOctober7,2026与arXivv1October9不同；originalpublication按官方arXivsubmissionhistory。",
+      "online_ab": "no quantified randomized production-traffic A/B established in implementation-stage original method/experiment review; acceptance is not based on abstract-only wording",
+      "gpu_evidence_ownership": "root agent owns actual A100 runs and sanitized receipts; this review records paper selection/fidelity, not a fabricated GPU receipt",
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-orthros-a100.json",
+      "source_is_research_input_not_authority": true
+    },
+    {
+      "arxiv_id": "2610.13767",
+      "key": "dualquant",
+      "title": "DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs",
+      "status": "accepted",
+      "qualifies_for_reproduction_consideration": true,
+      "in_frozen_16_paper_batch": true,
+      "next_batch": false,
+      "implementation_status": "implemented_core_mechanism_L1",
+      "read_scope": "实施阶段已读摘要、作者信息、定义算法方法与主实验，以及列明的相关附录；复用实际实施审查，未宣称全部附录/整篇全文已读。",
+      "full_paper_read": false,
+      "first_author": "Mahsa Salmani",
+      "first_author_affiliation": "d-Matrix",
+      "first_author_affiliation_evidence": {
+        "source_url": "https://arxiv.org/pdf/2610.13767v1#page=1",
+        "page": 1,
+        "selection_rule": "一作的第一署名机构；合作单位不进入该聚合字段"
+      },
+      "published": "2026-10-09T15:51:38Z",
+      "original_publication_date": "2026-10-09",
+      "publication_date_evidence": {
+        "artifact": ".cache/oct12-foundation-originals/2610.13767.abs.html",
+        "sha256": "1a76a04424984df8164433823de8f61bbc0f09ce2a3d9f8462be8f3c69a356a7",
+        "bytes": 44096,
+        "selector": ".submission-history",
+        "text": "Submission history From: Mahsa Salmani [ view email ] [v1] Fri, 9 Oct 2026 15:51:38 UTC (940 KB)",
+        "source_url": "https://arxiv.org/abs/2610.13767v1",
+        "scope": "exact first v1 submission timestamp, not PDF internal draft/date"
+      },
+      "source_url": "https://arxiv.org/html/2610.13767v1",
+      "source_sha256": "eb28173622f2e939a056f0fb7aa00e472f9682cf13bfad6c3e49b56a690ac8b4",
+      "source_bytes": 676238,
+      "source_artifact": ".cache/oct12-foundation-originals/2610.13767.html",
+      "source_pdf": {
+        "artifact": ".cache/oct12-foundation-originals/2610.13767.pdf",
+        "sha256": "d6e2fa7d56600c79329eed6643b7d484c92c78de5d5089bc5113e85215f5e3cb",
+        "bytes": 931152
+      },
+      "recall_provenance": "recalled_foundation_model_assignment_index27",
+      "defining_method": "weightreconstructionMSE非微分quantizerblackbox，variable splitting固定Q在innerloop闭式row/columninverse-scale coordinateupdates并格式可行集投影，outerrequantize。dual-scaleactivationfactorization从weightscale导出per-channelactivationrescaling而不用activationcalibration；推理同时W+A量化。",
+      "evaluation_evidence": "Llama/Qwen在WikiText2/C4/zero-shot、INT/MX/NV多格式与ablation；原文RTX4090packedW4A4path报告accuracy/memory/throughput，与本地referencepath分开。",
+      "upstream_assets": [
+        {
+          "url": "https://github.com/MahsaMoonlike/dualquant",
+          "status": "actual author repository identified and inspected during implementation; not the earlier nonexistent placeholder"
+        }
+      ],
+      "evidence_sections": [
+        {
+          "heading": "4.2 Dual-scale parameterization and activation factorization",
+          "source_url": "https://arxiv.org/html/2610.13767v1#S4.SS2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.3 MSE optimization via block coordinate descent",
+          "source_url": "https://arxiv.org/html/2610.13767v1#S4.SS3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4.4 Inference-time procedure and overhead",
+          "source_url": "https://arxiv.org/html/2610.13767v1#S4.SS4",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "Appendix B Closed-form optimal solutions for scales",
+          "source_url": "https://arxiv.org/html/2610.13767v1#A2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "5.1 Joint weight-and-activation quantization",
+          "source_url": "https://arxiv.org/html/2610.13767v1#S5.SS1",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "5.2 Runtime and memory analysis",
+          "source_url": "https://arxiv.org/html/2610.13767v1#S5.SS2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "5.3 Ablation studies",
+          "source_url": "https://arxiv.org/html/2610.13767v1#S5.SS3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "Appendix I Real packed W4A4 deployment",
+          "source_url": "https://arxiv.org/html/2610.13767v1#A9",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        }
+      ],
+      "evidence_pdf_pages": {
+        "method": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "evaluation": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "local_adapter_key": "dualquant",
+      "local_code_directory": "src/auto_research/reproductions/dualquant",
+      "fidelity": "L1_core_mechanism",
+      "actual_boundary": "本地公开SmolLM2 boundedselecteddecoderLinear模块INT4/BF16或MXINT4/E8M0参考W+A；不实现NVFP4/全MXfamily/packedkernel，不称A100原生FP4加速。",
+      "online_ab": "no quantified randomized production-traffic A/B established in implementation-stage original method/experiment review; acceptance is not based on abstract-only wording",
+      "gpu_evidence_ownership": "root agent owns actual A100 runs and sanitized receipts; this review records paper selection/fidelity, not a fabricated GPU receipt",
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-dualquant-a100.json",
+      "source_is_research_input_not_authority": true
+    },
+    {
+      "arxiv_id": "2610.12417",
+      "key": "woven",
+      "title": "WOVEN: Weaving Visual World Modeling into Multimodal LLMs",
+      "status": "accepted",
+      "qualifies_for_reproduction_consideration": true,
+      "in_frozen_16_paper_batch": true,
+      "next_batch": false,
+      "implementation_status": "implemented_core_mechanism_L1",
+      "read_scope": "实施阶段已读摘要、作者信息、定义算法方法与主实验，以及列明的相关附录；复用实际实施审查，未宣称全部附录/整篇全文已读。",
+      "full_paper_read": false,
+      "first_author": "Zheyu Fan",
+      "first_author_affiliation": "Northwestern University",
+      "first_author_affiliation_evidence": {
+        "source_url": "https://arxiv.org/pdf/2610.12417v1#page=1",
+        "page": 1,
+        "selection_rule": "一作的第一署名机构；合作单位不进入该聚合字段"
+      },
+      "published": "2026-10-08T17:52:03Z",
+      "original_publication_date": "2026-10-08",
+      "publication_date_evidence": {
+        "artifact": ".cache/oct12-foundation-originals/2610.12417.abs.html",
+        "sha256": "d7c8d0d5b0969ba453427d08610f8dbc475d15261a40583b79ea3458fc0e3dcc",
+        "bytes": 44794,
+        "selector": ".submission-history",
+        "text": "Submission history From: Zheyu Fan [ view email ] [v1] Thu, 8 Oct 2026 17:52:03 UTC (12,180 KB)",
+        "source_url": "https://arxiv.org/abs/2610.12417v1",
+        "scope": "exact first v1 submission timestamp, not PDF internal draft/date"
+      },
+      "source_url": "https://arxiv.org/html/2610.12417v1",
+      "source_sha256": "d6a25232b04ca31e9ca7f1b2c30de215a8ed8e4317dabe1b7044130866676011",
+      "source_bytes": 3149038,
+      "source_artifact": ".cache/oct12-foundation-originals/2610.12417.html",
+      "source_pdf": {
+        "artifact": ".cache/oct12-foundation-originals/2610.12417.pdf",
+        "sha256": "ee390aa69549056a1ece135009bc4da74cb3e0f768d70070a94190bd6ed6fa47",
+        "bytes": 13871283
+      },
+      "recall_provenance": "recalled_foundation_model_assignment_index90",
+      "defining_method": "以真实视觉transitionrollout、多scene/action/reasoningtype生成supervision，给真实MLLMvisualinput与question/transitiontarget进行SFT/LoRA；通过reasoningoperation而非scene/action/domain选择训练supervision、statechange幅度检验robustness。不是静态imageclassscore替代visualworldmodel。",
+      "evaluation_evidence": "原文36076examples/20scene/5action/8reasoning、38MLLM及human，约2000item不同subsets训练，26externalbench中的22有改善、taskdatareplacement与heldoutrecipeprospectivevalidation。",
+      "upstream_assets": [
+        {
+          "url": "https://github.com/mll-lab-nu/WOVEN",
+          "status": "original author repository and MLL-Lab/WOVEN public dataset inspected; public export exposes train split only"
+        }
+      ],
+      "evidence_sections": [
+        {
+          "heading": "2 WOVEN: visual transition reasoning, controlled axes, rollout generation",
+          "source_url": "https://arxiv.org/html/2610.12417v1#S2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3 Learnability and transfer",
+          "source_url": "https://arxiv.org/html/2610.12417v1#S3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "4 Shared primitive controls",
+          "source_url": "https://arxiv.org/html/2610.12417v1#S4",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "5 Training recipe and held-out prospective validation",
+          "source_url": "https://arxiv.org/html/2610.12417v1#S5",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "Appendix G Training recipes and finding details",
+          "source_url": "https://arxiv.org/html/2610.12417v1#A7",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "Appendix H Controls for the transfer results",
+          "source_url": "https://arxiv.org/html/2610.12417v1#A8",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "Appendix J Prospective validation of the training recipe",
+          "source_url": "https://arxiv.org/html/2610.12417v1#A10",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        }
+      ],
+      "evidence_pdf_pages": {
+        "method": [
+          4,
+          5,
+          6
+        ],
+        "evaluation": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "local_adapter_key": "woven",
+      "local_code_directory": "src/auto_research/reproductions/woven",
+      "fidelity": "L1_core_mechanism",
+      "actual_boundary": "本地fixedrevision96row/source_id分组60/20/20、realSmolVLM LoRA及transitionMCQrotation为diagnostic，不称官方test或26bench复现；不要求正增益。",
+      "online_ab": "no quantified randomized production-traffic A/B established in implementation-stage original method/experiment review; acceptance is not based on abstract-only wording",
+      "gpu_evidence_ownership": "root agent owns actual A100 runs and sanitized receipts; this review records paper selection/fidelity, not a fabricated GPU receipt",
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-woven-a100.json",
+      "source_is_research_input_not_authority": true
+    },
+    {
+      "arxiv_id": "2610.12707",
+      "key": "umrm",
+      "title": "Unsupervised Multimodal Reward Modeling",
+      "status": "accepted",
+      "qualifies_for_reproduction_consideration": true,
+      "in_frozen_16_paper_batch": true,
+      "next_batch": false,
+      "implementation_status": "implemented_core_mechanism_L1",
+      "read_scope": "实施阶段已读摘要、作者信息、定义算法方法与主实验，以及列明的相关附录；复用实际实施审查，未宣称全部附录/整篇全文已读。",
+      "full_paper_read": false,
+      "first_author": "Yueying Li",
+      "first_author_affiliation": "Massachusetts Institute of Technology",
+      "first_author_affiliation_evidence": {
+        "source_url": "https://arxiv.org/pdf/2610.12707v1#page=1",
+        "page": 1,
+        "selection_rule": "一作的第一署名机构；合作单位不进入该聚合字段"
+      },
+      "published": "2026-10-08T20:38:25Z",
+      "original_publication_date": "2026-10-08",
+      "publication_date_evidence": {
+        "artifact": ".cache/oct12-foundation-originals/2610.12707.abs.html",
+        "sha256": "75990eeeb56deec625f1cf0a776e5d5faad891280e8cb4c79d6b9046b9707d0f",
+        "bytes": 42718,
+        "selector": ".submission-history",
+        "text": "Submission history From: Yueying Li [ view email ] [v1] Thu, 8 Oct 2026 20:38:25 UTC (957 KB)",
+        "source_url": "https://arxiv.org/abs/2610.12707v1",
+        "scope": "exact first v1 submission timestamp, not PDF internal draft/date"
+      },
+      "source_url": "https://arxiv.org/html/2610.12707v1",
+      "source_sha256": "bf8fe4d9ecf041ecb1a8efb2caee64631527f1aa5627e740cfaeca358e8e6eb8",
+      "source_bytes": 465725,
+      "source_artifact": ".cache/oct12-foundation-originals/2610.12707.html",
+      "source_pdf": {
+        "artifact": ".cache/oct12-foundation-originals/2610.12707.pdf",
+        "sha256": "4664845c8d10eed6c5d407deaadbb6857b1da60f679e87186577aa7a65b7f28d",
+        "bytes": 1354415
+      },
+      "recall_provenance": "recalled_foundation_and_post_training_queries_but_deduplicated_into_post_training_assignment",
+      "defining_method": "frozenQwen3VL中间language-layer responsefeatures上的biasfreelinearrewardhead，captionnear/span/splice/shuffle等perturbation提供sameimagepair BradleyTerry监督，labelledvalidation只选layer。reward由sampler决定不被benchmark唯一识别；再用policy自身生成candidate与独立verifier标pairbootstraphead，和初始合成扰动训练区分。",
+      "evaluation_evidence": "2B/8B/32B、MMRB1/VLRewardBench等，layerchoice比lastlayer+5.8points；相同bench分数的不同perturbationheads hallucination判断差6.4points，verifierbootstrap改善caption/imagegeneration但所有rewardbench下降。",
+      "upstream_assets": [
+        {
+          "url": null,
+          "status": "no original-author public implementation found during official-paper/project review"
+        }
+      ],
+      "evidence_sections": [
+        {
+          "heading": "2.1 Algorithm",
+          "source_url": "https://arxiv.org/html/2610.12707v1#S2.SS1",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "2.2 What the Objective Identifies",
+          "source_url": "https://arxiv.org/html/2610.12707v1#S2.SS2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "2.3 Experimental Setup",
+          "source_url": "https://arxiv.org/html/2610.12707v1#S2.SS3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3.1 Probe layer and sampler",
+          "source_url": "https://arxiv.org/html/2610.12707v1#S3.SS1",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3.2 Untuned recipe across backbones/benchmarks",
+          "source_url": "https://arxiv.org/html/2610.12707v1#S3.SS2",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3.3 Two probes, one score, two rewards",
+          "source_url": "https://arxiv.org/html/2610.12707v1#S3.SS3",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "3.4 Policy-own verifier bootstrap",
+          "source_url": "https://arxiv.org/html/2610.12707v1#S3.SS4",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "Appendix D Negative Mining and Probe Depth",
+          "source_url": "https://arxiv.org/html/2610.12707v1#A4",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        },
+        {
+          "heading": "Appendix G Actor Training",
+          "source_url": "https://arxiv.org/html/2610.12707v1#A7",
+          "reading": "implementation-stage defining method / experiment / relevant appendix review; no exhaustive-section claim"
+        }
+      ],
+      "evidence_pdf_pages": {
+        "method": [
+          4,
+          5,
+          6
+        ],
+        "evaluation": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "local_adapter_key": "umrm",
+      "local_code_directory": "src/auto_research/reproductions/umrm",
+      "fidelity": "L1_core_mechanism",
+      "actual_boundary": "本地40publicCOCO/sourcegroup分割、frozenSmolVLM真实中间层head与validationlayerselection；caption-supportedobjectlexicon verifier并非officialCHAIR，不复现image-generationactor。无verifiermargin可不retrain，不强行报bootstrap提升。",
+      "internal_date_note": "PDF frontmatter2026-10-12不是首次公开日期；官方arXivv1是2026-10-08T20:38:25Z。一作脚注WorkdoneoutsideNVIDIA，第一署名MIT，合作单位完整信息留README，不按NVIDIA聚合。",
+      "online_ab": "no quantified randomized production-traffic A/B established in implementation-stage original method/experiment review; acceptance is not based on abstract-only wording",
+      "gpu_evidence_ownership": "root agent owns actual A100 runs and sanitized receipts; this review records paper selection/fidelity, not a fabricated GPU receipt",
+      "gpu_validation_artifact": "docs/gpu-validations/oct12-umrm-a100.json",
+      "source_is_research_input_not_authority": true
+    }
+  ]
+}

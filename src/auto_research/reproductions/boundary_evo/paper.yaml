@@ -6,7 +6,7 @@
   "paper_url": "https://arxiv.org/abs/2610.13285",
   "organization": "Shanghai Artificial Intelligence Laboratory / Nanjing University / Tongji University / The Chinese University of Hong Kong",
   "published": "2026-10-09",
-  "upstream_code": "not released / not found; paper promises future code and data",
+  "upstream_code": "否：论文承诺后续公开代码与数据，本次未找到可用实现（2026-10-12 核查）",
   "track": "post-training",
   "topics": [
     "Capability boundary",
@@ -14,7 +14,7 @@
     "Reasoning distillation"
   ],
   "local_code": "src/auto_research/reproductions/boundary_evo",
-  "documentation": "docs/post-training/2610.13285-boundary-evo/README.md",
+  "documentation": "docs/reproductions/2610.13285-boundary-evo/README.md",
   "fidelity": "core_mechanism",
   "evaluation_tier": "l1_mechanism",
   "datasets": [
@@ -37,8 +37,8 @@
       "code_url": null,
       "organization": "Shanghai Artificial Intelligence Laboratory / Nanjing University / Tongji University / The Chinese University of Hong Kong",
       "published": "2026-10-09",
-      "publication_label": "arXiv v1",
-      "publication_source": "https://arxiv.org/abs/2610.13285",
+      "publication_label": null,
+      "publication_source": null,
       "online_ab": [],
       "selection_exception": "user-requested Oct12 paper implementation; no online A/B claimed"
     },

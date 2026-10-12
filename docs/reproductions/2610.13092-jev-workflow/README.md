@@ -4,12 +4,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2610.13092](https://arxiv.org/abs/2610.13092) |
-| 公司/机构 | Nanjing University / Technical University of Munich（一作 Yuchen Ling） |
+| 公司/机构 | Nanjing University / Technical University of Munich |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 是：[作者匿名实验代码链接](https://anonymous.4open.science/r/jev-emp-5BF4/) |
+| 原文开源代码 | 否：作者提供[匿名实验代码链接](https://anonymous.4open.science/r/jev-emp-5BF4/)，本轮仅取得前端页面，API连接超时，未核实可用源码（2026-10-12） |
 | Adapter | `jev-workflow` |
 | 本地复现代码 | [`src/auto_research/reproductions/jev_workflow/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/jev_workflow/) |
 
@@ -34,6 +34,14 @@ graph LR
 
 重绘源码：[architecture.mmd](assets/architecture.mmd)。[原论文 Figure 2](https://arxiv.org/html/2610.13092v1/conditions.png) 展示原文的整体机制；本地重绘没有替换原图作为证据。来源与核查边界见 [source-provenance.json](assets/source-provenance.json)。
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.13092#page=5)
+
+> **原论文 Figure 2（关键图）**：展示原论文方法的总体设计和关键组成。图片来自[原论文](https://arxiv.org/abs/2610.13092)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $Cost_{success}=\sum_iCost_i/\sum_i1\{success_i\}$，$Time_{success}=\sum_iTime_i/\sum_i1\{success_i\}$；$FailureCostShare=\sum_{i:fail}Cost_i/\sum_iCost_i$。matched-success比较只纳入两配置同task/run均成功的配对，并与all-attempt delivery口径分开。
@@ -55,9 +63,9 @@ $Cost_{success}=\sum_iCost_i/\sum_i1\{success_i\}$，$Time_{success}=\sum_iTime_
 实现位于 `src/auto_research/agent_research/oct12_memory_tools.py`；薄 adapter 从明确的 `oct12.json` 加载运行配置，不注入默认固定候选或 gold。统一入口：
 
 ```bash
-PYTHONPATH=src python scripts/run_oct12_agents.py \\
-  --method jev-workflow --device cpu \\
-  --dataset /path/to/public/input --seed 42 --rounds 2 --group-size 2 --train-steps 2 \\
+PYTHONPATH=src python scripts/run_oct12_agents.py \
+  --method jev-workflow --device cpu \
+  --dataset /path/to/public/input --seed 42 --rounds 2 --group-size 2 --train-steps 2 \
   --output runs/oct12/jev-workflow/result.json
 ```
 
@@ -69,7 +77,21 @@ PYTHONPATH=src python scripts/run_oct12_agents.py \\
 
 本地是可执行 paired-trace评测基础设施，不加载/伪造 Jev 权重或API，也不把原文表格录入为本地运行。要求两配置 task/run 完全配对、非负有限实际资源，0成功时每success返回null。作者给出匿名代码链接；主页可访问但本次静态获取只有前端壳，未核实可运行源码。
 
-当前检查为 L0 合同及真梯度测试；本地 NVIDIA 运行由本批集成统一生成脱敏回执，未通过前不得写GPU已验证。该条目为CPU评测基础设施，requires_gpu_validation=false；不需要虚构GPU模型运行。 论文指标与本地指标严格分离；运行日志/模型权重不提交，失败与负结果保留。
+除了CPU聚合器，本轮增加真实测量脚本：冻结已核对全部字节的公开SmolLM2-135M-Instruct，在同一公开26圆任务上，以seed42/43/44配对比较64/256生成预算。每次重置Python/NumPy/torch/CUDA随机状态，交替运行顺序；记录同步生成耗时、沙箱总耗时和精确生成token计数，权重不更新。
+
+```bash
+PYTHONPATH=src python scripts/run_oct12_workflow_measurement.py \
+  --checkpoint checkpoints/smollm2-135m-instruct \
+  --checkpoint-id HuggingFaceTB/SmolLM2-135M-Instruct \
+  --revision 12fd25f77366fa6b3b4b768ec3050bf629380bac \
+  --device cuda --seeds 42,43,44 --budgets 64,256 --output runs/workflow-measured
+PYTHONPATH=src python scripts/run_oct12_agents.py --method jev-workflow \
+  --dataset runs/workflow-measured/pairs.jsonl --output runs/workflow-audit.json
+```
+
+2026-10-12 A100六次真实generation均未交付有效几何解；两种预算成功率都是0。平均总耗时分别 `2.71459 s` 与 `10.01093 s`，每成功成本/耗时都是 `null`，不能以较快生成宣称更好Agent。成本单位为 **generated token units，不是美元**。该one-shot流程不包含恢复或完成声明，failed_recovery/premature_completion是明确N/A的schema占位，不当作已测为零。
+
+实测见 [measured-workflows-a100-seeds42-44.json](metrics/measured-workflows-a100-seeds42-44.json)，实际CUDA测量回执见 [GPU证据](../../gpu-validations/oct12-jev-workflow-measurement-a100.json)。CPU聚合adapter仍不要求CUDA；这证明测量设施能执行，不是Jev模型或原文4500次Agent复测。
 
 测试入口：`python -m pytest tests/test_oct12_agent_algorithms.py tests/test_oct12_agent_delivery.py`。
 

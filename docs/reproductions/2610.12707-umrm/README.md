@@ -2,16 +2,16 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2610.12707](https://arxiv.org/abs/2610.12707) |
-| 公司/机构 | MIT、Cornell University、Scale AI、Harvard University；原文注明相关工作不在NVIDIA期间完成 |
+| 公司/机构 | Massachusetts Institute of Technology / Cornell University / Scale AI / Harvard University |
 | 首次公开日期 | 2026-10-08（arXiv v1） |
 | 原文开源代码 | 否：截至2026-10-12未找到作者公开源码 |
 | Adapter | `umrm` |
 | 本地复现代码 | [`src/auto_research/reproductions/umrm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/umrm/) |
 
-本地 `core_mechanism / L1`；使用真实冻结VLM、不用CLIP scorer替代；GPU gate仍待真实回执。
+本地 `core_mechanism / L1`；使用真实冻结VLM、不用CLIP scorer替代，已完成A100限定机制验证。
 
 ## 原始论文总结
 
@@ -46,7 +46,9 @@ flowchart LR
 
 ### 核心公式
 
-$$s_w(x,q,y)=w^\top\frac1{|y|}\sum_{t\in y}h^{N-k}_t,\quad \mathcal L=\frac1{B^2}\sum_{i,j}-\log\sigma\big(\beta(s_i^+-s_j^-)\big).$$
+$$
+s_w(x,q,y)=w^\top\frac1{|y|}\sum_{t\in y}h^{N-k}_t,\quad \mathcal L=\frac1{B^2}\sum_{i,j}-\log\sigma\big(\beta(s_i^+-s_j^-)\big).
+$$
 
 $B=8,\beta=.1$。必须使用全部B²chosen-rejected组合，而非只做B个same-pair logistic。只有response位置进入pooling；image/prompt token即使特征幅度大也不能混入。negative mixture $q_{neg}=\sum_o\pi_oT_o(y^+)$ 在模型之外编辑response，保持图像不变，near编辑k1、cross-image概率.15。密度比分析依赖额外假设，paper也讨论同entry耦合和length artifact，不应声称不带条件的“真实质量识别”。[原文 §2](https://arxiv.org/html/2610.12707v1#S2)。
 
@@ -77,7 +79,9 @@ bootstrap没有把reference caption送给生成模型。policy prompt只有image
 
 ### 本地结果与验证状态
 
-`metrics/protocol.json`仅保存待验证协议。CPU单测已检查response mask、B²loss、head真实更新、validation-only选层及verifier/no-pair分支；fixture不是能力指标。计划A100/A30 receipt `docs/gpu-validations/oct12-umrm-a100.json`，真实运行结果由主集成回填，不能预填pair accuracy或CHAIR改进。
+2026-10-12 A100实跑使用40个COCO图像，按image分为24/8/8，冻结SmolVLM训练head200步；validation选择第10层。8个本地test合成负例的pair accuracy为 `1.0`，零head基线（ties半分）为 `0.5`。饱和值只说明有限负例可被区分，不是通用奖励能力。
+
+8个训练prompt各生成4个真实候选，独立caption-supported verifier产生6个pair、2次abstain，并实际重训head。隔离test best-of-N有限object score：probe `0.58333`、verified head与random均 `0.48611`；自举没有带来提升，保留负结果。完整见 [public-vlm-a100-42.json](metrics/public-vlm-a100-42.json) 与 [GPU回执](../../gpu-validations/oct12-umrm-a100.json)。这些分数不是CHAIR。
 
 ### 代码映射与边界
 

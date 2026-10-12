@@ -9,7 +9,7 @@
 | 论文链接 | [ICML 2023](https://arxiv.org/abs/2301.12597) |
 | 公司/机构 | Salesforce Research |
 | 首次公开日期 | 2023-01-30（arXiv v1） |
-| 原文开源代码 | 是：[官方 LAVIS/BLIP-2](https://github.com/salesforce/LAVIS) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/salesforce/LAVIS) |
 | Adapter | `blip2` |
 | 本地复现代码 | [`src/auto_research/reproductions/blip2/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/blip2/) |
 

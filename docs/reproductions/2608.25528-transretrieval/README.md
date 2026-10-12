@@ -5,9 +5,9 @@
 ## 论文信息
 
 | 项目 | 内容 |
-|---|---|
+| --- | --- |
 | 论文链接 | [arXiv 2608.25528](https://arxiv.org/abs/2608.25528) |
-| 公司/机构 | 中国人民大学 / 阿里巴巴（第一作者第一署名单位为中国人民大学） |
+| 公司/机构 | Renmin University of China / Taobao & Tmall Group, Alibaba |
 | 首次公开日期 | 2026-08-26（arXiv v1） |
 | 原文开源代码 | 否：未发现原作者公开代码（核查日期：2026-08-28） |
 | Adapter | `transretrieval` |

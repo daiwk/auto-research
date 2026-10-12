@@ -6,7 +6,7 @@
   "paper_url": "https://arxiv.org/abs/2610.13092",
   "organization": "Nanjing University / Technical University of Munich",
   "published": "2026-10-09",
-  "upstream_code": "是：[作者匿名实验代码链接](https://anonymous.4open.science/r/jev-emp-5BF4/)",
+  "upstream_code": "否：作者提供[匿名实验代码链接](https://anonymous.4open.science/r/jev-emp-5BF4/)，本轮仅取得前端页面，API连接超时，未核实可用源码（2026-10-12）",
   "track": "llm",
   "topics": [
     "agent-evaluation",
@@ -33,7 +33,7 @@
   "adapter_module": "auto_research.reproductions.jev_workflow.adapter",
   "execution": {
     "paper": {
-      "code_url": "https://anonymous.4open.science/r/jev-emp-5BF4/",
+      "code_url": null,
       "organization": "Nanjing University / Technical University of Munich",
       "published": "2026-10-09",
       "publication_label": null,

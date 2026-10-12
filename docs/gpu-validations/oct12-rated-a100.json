@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "adapter_key": "rated",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_agents.py",
+    "--method",
+    "rated",
+    "--query-checkpoint",
+    "checkpoints/minilm",
+    "--tool-checkpoint",
+    "checkpoints/minilm",
+    "--query-checkpoint-id",
+    "sentence-transformers/all-MiniLM-L6-v2",
+    "--query-checkpoint-revision",
+    "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "--tool-checkpoint-id",
+    "sentence-transformers/all-MiniLM-L6-v2",
+    "--tool-checkpoint-revision",
+    "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "--dataset",
+    "data/rated/rated-train32-test8.json",
+    "--output",
+    "runs/rated-42.json",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--rounds",
+    "2",
+    "--max-tokens",
+    "128",
+    "--train-steps",
+    "4"
+  ],
+  "dataset": {
+    "source": {
+      "kind": "dataset",
+      "public_id": "Elliotes/EcoAgent",
+      "revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+      "upstream_file_sha256": {
+        "tools_clean_with_reliability.csv": "1b388d317aeb1004c266eb65ff64a4864e7907412a2fbfb4667c492a871e8d8e",
+        "train_pairs.csv": "e89aed2b42bba90ed6133bb64d1918591b50c60e9ec8561dce9799ae857f4760",
+        "eval_real_test.jsonl": "922ba0256f49205f7b5225467e20d0d45ed4af243fc3f7313267327818a8e93c"
+      },
+      "files": {
+        "rated-train32-test8.json": "3bcd676153d48aaaa9cff821dc0e88921f6775ac0e41092abfb78673baadc772"
+      },
+      "training_pairs": 32,
+      "pool_tools": 32,
+      "test_queries": 8,
+      "transformation": "pool from first ordered training positives only; first eight disjoint official test queries; no test-label-selected tools",
+      "execution_limitation": "original service bindings unavailable; explicit fail-closed sandbox errors, not fake metadata-only successes"
+    },
+    "input_sha256": "3bcd676153d48aaaa9cff821dc0e88921f6775ac0e41092abfb78673baadc772",
+    "input_preparation_commit": "916a56ca630027b4ce99ebfb39a3fea441c4eaca"
+  },
+  "checkpoint": {
+    "query_encoder": {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    },
+    "tool_encoder": {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "external_semantic_recall_at_1": 0.125,
+    "execution_success_rate": 0.0,
+    "evaluated_queries": 8
+  },
+  "limitations": [
+    "32 unique positive training tools and eight official test queries; only one reference is in the train-selected pool.",
+    "Original API backends are unavailable: all executions fail honestly; not original semantic tool capability.",
+    "Retrieval stream is prequential, not a fully frozen bandit holdout comparison."
+  ],
+  "execution_checks": {
+    "completed": true,
+    "gold_in_model_input": false,
+    "test_used_for_training": false,
+    "original_tool_backend_unavailable": true
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct12_agents.py": "85c6452b2a41e3a287227a4ddce4e59a53e3f2fab76f960fdaafe8d07cc1a8ae",
+    "src/auto_research/agent_research/oct12_entrypoint.py": "a8c10b0d24ac2c7f8ae21b654d9752832a99f53a1e21fe405a5278071c01aba3",
+    "src/auto_research/agent_research/oct12_checkpoint.py": "c49cb33db3d14b050e1938dbdee08e392ad435d2bc276029cfb1c9b51d7c6ca8",
+    "src/auto_research/agent_research/oct12_memory_tools.py": "f2d12f7824a1dbaba0b67f4b046e57173b2e902e4b8a138087522c418ff2982a",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e",
+    "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c"
+  },
+  "provenance": {
+    "commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265",
+    "artifact_path": "docs/gpu-validations/oct12-rated-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13889-rated/metrics/public-agent-a100-42.json",
+    "checkpoint_committed": false,
+    "input_preparation_commit": "916a56ca630027b4ce99ebfb39a3fea441c4eaca"
+  }
+}

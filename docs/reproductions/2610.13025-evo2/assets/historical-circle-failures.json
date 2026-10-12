@@ -1,0 +1,672 @@
+{
+  "schema_version": 1,
+  "adapter_key": "evo2",
+  "historical_diagnostic_only": true,
+  "measured_locally": true,
+  "gpu_gate_passed": false,
+  "is_gpu_receipt": false,
+  "capability_comparison": false,
+  "evolve_promotion_eligible": false,
+  "scope": "Two historical circle-packing failures; separate from later GSM environment runs. No successful GPU validation is inferred from these records.",
+  "runs": [
+    {
+      "label": "7B circle run with active-update guard",
+      "raw_artifact": {
+        "artifact_basename": "evo2-active-42.json",
+        "sha256": "edabf52e6f7044cfdfa65a4619bc5209dcf5471c0bbf2673870a6026a8696198",
+        "bytes": 23631
+      },
+      "result": "failed",
+      "failure_class": "no_active_grpo_update",
+      "reported_failure_reason": "Evo2 did not complete active SFT and GRPO parameter updates",
+      "source_provenance": {
+        "operator_reported_execution_commit": "3eae2c8863678692a8cf2de988d4562314c2731f",
+        "source_snapshot_sha256": {
+          "scripts/run_oct12_agents.py": "85c6452b2a41e3a287227a4ddce4e59a53e3f2fab76f960fdaafe8d07cc1a8ae",
+          "src/auto_research/agent_research/oct12_entrypoint.py": "acc89866c06c34d67027e275c51831f71be86f226d105ef0d8da0c7f0585dd94",
+          "src/auto_research/agent_research/oct12_checkpoint.py": "930e178e49d803827c910e973ba3f67666477b475996a558fa91a507989d77da",
+          "src/auto_research/agent_research/oct12_evolution.py": "79101f021ddbe128f93a9dcc07c5a60cba9434f778a52b5582c33e6a31d43f32",
+          "src/auto_research/agent_research/oct10_backend.py": "108acb77f3497cddb2cdf5b96831ce25fb733d1b35c503db69076918684b7219",
+          "src/auto_research/agent_research/program_sandbox.py": "fa6cf3707f5ba046c5f1f353035dca426d8c35317e368cf4f11a30bebd9a112c",
+          "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e"
+        },
+        "snapshot_hashes_verified_from_git": true,
+        "execution_commit_independently_embedded_in_raw": false,
+        "limitation": "Integration operator supplied the execution commit. The raw result contains no command/commit/source hashes, so the raw artifact alone cannot independently establish execution-to-commit attribution; listed hashes only verify the reported Git snapshot."
+      },
+      "measurements": {
+        "warmup_positive_gradient_steps": 2,
+        "grpo_attempts": 4,
+        "active_grpo_updates": 0,
+        "normalized_circle_score_max": 0.0,
+        "scored_nodes": 21
+      },
+      "sanitized_run": {
+        "method": "evo2",
+        "seed": 42,
+        "environment": "public-circle-packing-26",
+        "checkpoint": {
+          "policy": {
+            "id": "Qwen/Qwen2.5-7B-Instruct",
+            "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "immutable_revision_verified": true,
+            "file_sha256": {
+              "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+              "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+              "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+              "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+              "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+              "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            },
+            "local_files_only": true,
+            "trust_remote_code": false,
+            "verification": "pinned official-source offline byte-hash manifest"
+          },
+          "executor": {
+            "id": "Qwen/Qwen2.5-7B-Instruct",
+            "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "immutable_revision_verified": true,
+            "file_sha256": {
+              "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+              "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+              "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+              "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+              "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+              "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            },
+            "local_files_only": true,
+            "trust_remote_code": false,
+            "verification": "pinned official-source offline byte-hash manifest"
+          }
+        },
+        "warmup": {
+          "steps": [
+            {
+              "loss": 0.07864506196347065,
+              "gradient_norm": 0.07195301353931427
+            },
+            {
+              "loss": 0.1582668386399746,
+              "gradient_norm": 0.5905143618583679
+            }
+          ],
+          "parameters_changed": true,
+          "native_trajectories": 6,
+          "neutral_trajectories": 6
+        },
+        "training": [
+          {
+            "round": 0,
+            "updated": false,
+            "parameters_changed": false,
+            "gradient_norm": 0.0,
+            "loss": 0.0,
+            "groups": [
+              {
+                "role": "proposer",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              },
+              {
+                "role": "reflector",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              }
+            ],
+            "reason": "no eligible nonzero advantage"
+          },
+          {
+            "round": 0,
+            "updated": false,
+            "parameters_changed": false,
+            "gradient_norm": 0.0,
+            "loss": 0.0,
+            "groups": [
+              {
+                "role": "proposer",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              },
+              {
+                "role": "reflector",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              }
+            ],
+            "reason": "no eligible nonzero advantage"
+          },
+          {
+            "round": 1,
+            "updated": false,
+            "parameters_changed": false,
+            "gradient_norm": 0.0,
+            "loss": 0.0,
+            "groups": [
+              {
+                "role": "proposer",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              },
+              {
+                "role": "reflector",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              }
+            ],
+            "reason": "no eligible nonzero advantage"
+          },
+          {
+            "round": 1,
+            "updated": false,
+            "parameters_changed": false,
+            "gradient_norm": 0.0,
+            "loss": 0.0,
+            "groups": [
+              {
+                "role": "proposer",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              },
+              {
+                "role": "reflector",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              }
+            ],
+            "reason": "no eligible nonzero advantage"
+          }
+        ],
+        "nodes": 21,
+        "strategies": 2,
+        "best_validation_score": 0.0,
+        "executor_calls": 21,
+        "executor_weights_unchanged": true,
+        "scores": [
+          {
+            "id": "root",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-1",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-2",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-3",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-4",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-5",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-6",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-7",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-8",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-9",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-10",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-11",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-12",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-13",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-14",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-15",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-16",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-17",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-18",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-19",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-20",
+            "normalized_score": 0.0
+          }
+        ],
+        "capability_comparison": false,
+        "evolve_promotion_eligible": false
+      },
+      "launch_proof": {
+        "artifact_basename": "run_oct12_agents_gpu.sh",
+        "sha256": "ba31f2e33ef757d1fa5bf22831a79a7b5c15e34242efcea27d32259d7346830a",
+        "bytes": 916,
+        "read_lines": [
+          6,
+          7,
+          8,
+          13
+        ],
+        "scope": "Public checkpoint ID/revision, numeric CLI budget, method loop and output-name mapping verified from actual cached launch script; machine paths are not copied."
+      },
+      "actual_launch_budget": {
+        "seed": 42,
+        "rounds": 2,
+        "group_size": 2,
+        "max_tokens": 1536,
+        "train_steps": 2
+      }
+    },
+    {
+      "label": "earlier memory-fixed run; optimizer-drift false positive",
+      "raw_artifact": {
+        "artifact_basename": "evo2-memory-fixed-42.json",
+        "sha256": "acfa1f1f3edb425eaf3a0e43f1898935e74a8bc683d6c261f1ef734e62c87d2d",
+        "bytes": 11455
+      },
+      "result": "failed_historical_false_positive",
+      "failure_class": "zero_advantage_optimizer_state_drift",
+      "source_provenance": {
+        "executed_commit": null,
+        "execution_commit_independently_verified": false,
+        "limitation": "Raw result has no embedded commit or launch provenance; no source commit is asserted for this earlier run."
+      },
+      "assessment": "All rewards/advantages/losses/gradients are zero, although old flags claimed updated=true and parameters_changed=true. Adam optimizer-state drift is not active GRPO learning, so this history cannot pass the GPU gate.",
+      "measurements": {
+        "reported_updated_records": 4,
+        "reported_parameter_changed_records": 4,
+        "grpo_attempts": 4,
+        "active_grpo_updates": 0,
+        "normalized_circle_score_max": 0.0,
+        "scored_nodes": 21
+      },
+      "sanitized_run": {
+        "method": "evo2",
+        "seed": 42,
+        "environment": "public-circle-packing-26",
+        "checkpoint": {
+          "policy": {
+            "id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "immutable_revision_verified": true,
+            "file_sha256": {
+              "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+              "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            },
+            "local_files_only": true,
+            "trust_remote_code": false,
+            "verification": "pinned official-source offline byte-hash manifest"
+          },
+          "executor": {
+            "id": "Qwen/Qwen2.5-7B-Instruct",
+            "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "immutable_revision_verified": true,
+            "file_sha256": {
+              "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+              "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+              "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+              "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+              "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+              "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            },
+            "local_files_only": true,
+            "trust_remote_code": false,
+            "verification": "pinned official-source offline byte-hash manifest"
+          }
+        },
+        "warmup": {
+          "steps": [
+            {
+              "loss": 0.32274534553289413,
+              "gradient_norm": 1.0104103088378906
+            },
+            {
+              "loss": 0.7311643362045288,
+              "gradient_norm": 1.0245389938354492
+            }
+          ],
+          "parameters_changed": true,
+          "native_trajectories": 5,
+          "neutral_trajectories": 5
+        },
+        "training": [
+          {
+            "round": 0,
+            "updated": true,
+            "loss": 0.0,
+            "parameters_changed": true,
+            "gradient_norm": 0.0,
+            "groups": [
+              {
+                "role": "proposer",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              },
+              {
+                "role": "reflector",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              }
+            ]
+          },
+          {
+            "round": 0,
+            "updated": true,
+            "loss": 0.0,
+            "parameters_changed": true,
+            "gradient_norm": 0.0,
+            "groups": [
+              {
+                "role": "proposer",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              },
+              {
+                "role": "reflector",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              }
+            ]
+          },
+          {
+            "round": 1,
+            "updated": true,
+            "loss": 0.0,
+            "parameters_changed": true,
+            "gradient_norm": 0.0,
+            "groups": [
+              {
+                "role": "proposer",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              },
+              {
+                "role": "reflector",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              }
+            ]
+          },
+          {
+            "round": 1,
+            "updated": true,
+            "loss": 0.0,
+            "parameters_changed": true,
+            "gradient_norm": 0.0,
+            "groups": [
+              {
+                "role": "proposer",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 1
+              },
+              {
+                "role": "reflector",
+                "rewards": [
+                  0.0,
+                  0.0
+                ],
+                "advantages": [
+                  0.0,
+                  0.0
+                ],
+                "masked_truncated": 0
+              }
+            ]
+          }
+        ],
+        "nodes": 21,
+        "strategies": 2,
+        "best_validation_score": 0.0,
+        "executor_calls": 21,
+        "executor_weights_unchanged": true,
+        "scores": [
+          {
+            "id": "root",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-1",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-2",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-3",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-4",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-5",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-6",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-7",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-8",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-9",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-10",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-11",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-12",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-13",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-14",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-15",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-16",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-17",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-18",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-19",
+            "normalized_score": 0.0
+          },
+          {
+            "id": "node-20",
+            "normalized_score": 0.0
+          }
+        ],
+        "capability_comparison": false,
+        "evolve_promotion_eligible": false
+      }
+    }
+  ],
+  "sanitization": "Model outputs/generated source/external error strings, machine paths and machine identifiers are excluded. Original artifacts are retained only by basename, size and SHA256."
+}

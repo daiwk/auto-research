@@ -1,0 +1,171 @@
+{
+  "schema_version": 2,
+  "adapter_key": "road-mopd",
+  "method": "road-mopd",
+  "seeds": [
+    42
+  ],
+  "manifest_ref": "reproduction:road-mopd",
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "7fc9269b2fc00e3f9c0bef61443bfb4ba315d3ce4039f70edbdd7456066dce14",
+    "validation_sha256": "22791ca5f0e040624f758c994fa3adb9dd44c7495ad330e2d4e28b667bb11423"
+  },
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "metrics": {
+    "adapter_parameter_delta_l2": 0.007815992363012461,
+    "validation_examples": 4,
+    "validation_exact_match": 0,
+    "projected_tensors": 39,
+    "conflicting_tensors": 39
+  },
+  "run": {
+    "schema_version": 1,
+    "adapter_key": "road-mopd",
+    "seed": 42,
+    "diagnostic_only": true,
+    "evaluation_tier": "l1_mechanism",
+    "claim_scope": "bounded real checkpoint runtime validation; no benchmark gain claim",
+    "models": {
+      "student": {
+        "id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "immutable_revision_verified": true,
+        "verification": "pinned public-source manifest with exact file SHA256",
+        "file_sha256": {
+          "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "teacher": {
+        "id": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+        "immutable_revision_verified": true,
+        "verification": "pinned public-source manifest with exact file SHA256",
+        "file_sha256": {
+          "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+          "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+          "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+          "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+          "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+          "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "auxiliary": {
+        "id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "immutable_revision_verified": true,
+        "verification": "pinned public-source manifest with exact file SHA256",
+        "file_sha256": {
+          "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      }
+    },
+    "dataset": {
+      "id": "openai/grade-school-math",
+      "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "train_sha256": "7fc9269b2fc00e3f9c0bef61443bfb4ba315d3ce4039f70edbdd7456066dce14",
+      "validation_sha256": "22791ca5f0e040624f758c994fa3adb9dd44c7495ad330e2d4e28b667bb11423"
+    },
+    "budget": {
+      "steps": 2,
+      "max_tokens": 128,
+      "group": 2,
+      "forks": 3,
+      "continuations": 2,
+      "priming_examples": 2,
+      "rounds": 2,
+      "pool_examples": 4,
+      "acquisition": 2,
+      "teacher_rollouts": 2
+    },
+    "metrics": {
+      "adapter_parameter_delta_l2": 0.007815992363012461,
+      "validation_examples": 4,
+      "validation_exact_match": 0,
+      "projected_tensors": 39,
+      "conflicting_tensors": 39
+    },
+    "history": [
+      {
+        "loss": 0.16703900694847107,
+        "gradient_l2": 1.0818610191345215,
+        "conflicting_tensors": 0,
+        "projected_tensors": 0,
+        "target_domains": 2,
+        "response_tokens": 256,
+        "step": 0
+      },
+      {
+        "loss": 0.28455048939213157,
+        "gradient_l2": 1.1292130947113037,
+        "conflicting_tensors": 39,
+        "projected_tensors": 39,
+        "target_domains": 2,
+        "response_tokens": 256,
+        "step": 1
+      }
+    ],
+    "split_provenance": {
+      "verified": true,
+      "test_read": false,
+      "source_id": "openai/grade-school-math",
+      "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "partition_sha256": {
+        "train": "7fc9269b2fc00e3f9c0bef61443bfb4ba315d3ce4039f70edbdd7456066dce14",
+        "validation": "22791ca5f0e040624f758c994fa3adb9dd44c7495ad330e2d4e28b667bb11423"
+      },
+      "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+    },
+    "test_read": false,
+    "validation_used_for_selection": false,
+    "gold_in_rollout": false
+  },
+  "data_transformation": {
+    "manifest_sha256": "8b5c140e0af32b11e6b11d5451d1a83512de77f6aa2b3775444c55853a7603bf",
+    "rule": "question-only monetary term regex; original question/answer strings and train-only partition preserved",
+    "jsonl": "LF-delimited; ensure_ascii=True preserves decoded Unicode strings",
+    "domains": [
+      "monetary-arithmetic",
+      "nonmonetary-arithmetic"
+    ],
+    "limitation": "two arithmetic routing diagnostic subdomains, not paper Math/Medical specialized domains"
+  },
+  "provenance": {
+    "executed_commit": "456a2ffacc47658c4ccb74f386465d47e5f4e357",
+    "raw_result_sha256": "d3fac6e18842345a4610e1ffcf444f9cd74bca79ee179dbb1e17c1a9b5a0497f",
+    "source_hash_origin": "git show executed_commit:path; not current HEAD or dirty files",
+    "artifact_path": "docs/reproductions/2610.13521-road-mopd/metrics/gsm8k-subdomains-a100-42.json",
+    "dataset_fingerprint": "source_sha256:17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465;train_sha256:7fc9269b2fc00e3f9c0bef61443bfb4ba315d3ce4039f70edbdd7456066dce14;validation_sha256:22791ca5f0e040624f758c994fa3adb9dd44c7495ad330e2d4e28b667bb11423",
+    "executed_code_commit": "456a2ffacc47658c4ccb74f386465d47e5f4e357",
+    "gpu_validation_artifact": "docs/gpu-validations/road-mopd-a100-20261012.json"
+  }
+}

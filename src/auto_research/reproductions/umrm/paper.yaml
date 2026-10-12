@@ -1,23 +1,61 @@
 {
-  "schema_version": 2, "key": "umrm", "arxiv_id": "2610.12707",
+  "schema_version": 2,
+  "key": "umrm",
+  "arxiv_id": "2610.12707",
   "title": "Unsupervised Multimodal Reward Modeling",
   "paper_url": "https://arxiv.org/abs/2610.12707",
   "organization": "Massachusetts Institute of Technology / Cornell University / Scale AI / Harvard University",
-  "published": "2026-10-08", "upstream_code": "否：截至2026-10-12未找到作者公开源码",
-  "track": "llm", "topics": ["multimodal-foundation-model", "reward-modeling", "frozen-layer-probe", "verifier-bootstrap"],
+  "published": "2026-10-08",
+  "upstream_code": "否：截至2026-10-12未找到作者公开源码",
+  "track": "llm",
+  "topics": [
+    "multimodal-foundation-model",
+    "reward-modeling",
+    "frozen-layer-probe",
+    "verifier-bootstrap"
+  ],
   "local_code": "src/auto_research/reproductions/umrm",
   "documentation": "docs/reproductions/2610.12707-umrm/README.md",
-  "fidelity": "core_mechanism", "evaluation_tier": "l1_mechanism",
-  "datasets": ["COCO-Caption2017 public val, disjoint image-id local diagnostic split"],
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "COCO-Caption2017 public val, disjoint image-id local diagnostic split"
+  ],
   "baseline": "zero bias-free head (ties score half); random own-candidate selection for verifier utility",
-  "metrics": ["baseline.pair_accuracy", "method.pair_accuracy"],
-  "mechanisms": ["frozen actual VLM intermediate language layer", "response-only mean pooling and bias-free linear reward head", "same-caption perturbation mixture and in-batch matrix Bradley-Terry", "validation-only probe-layer selection", "separate verifier on policy-generated candidates then head bootstrap"],
-  "evolve_operators": [], "adapter_module": "auto_research.reproductions.umrm.adapter",
+  "metrics": [
+    "baseline.pair_accuracy",
+    "method.pair_accuracy"
+  ],
+  "mechanisms": [
+    "frozen actual VLM intermediate language layer",
+    "response-only mean pooling and bias-free linear reward head",
+    "same-caption perturbation mixture and in-batch matrix Bradley-Terry",
+    "validation-only probe-layer selection",
+    "separate verifier on policy-generated candidates then head bootstrap"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.umrm.adapter",
   "execution": {
-    "paper": {"code_url": null, "organization": "Massachusetts Institute of Technology / Cornell University / Scale AI / Harvard University", "published": "2026-10-08", "publication_label": null, "publication_source": null, "online_ab": [], "selection_exception": null},
-    "omitted_core_components": [], "default_seeds": [42],
+    "paper": {
+      "code_url": null,
+      "organization": "Massachusetts Institute of Technology / Cornell University / Scale AI / Harvard University",
+      "published": "2026-10-08",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42
+    ],
     "budget": "L1 diagnostic: SmolVLM-256M frozen, max80 images, 3 intermediate layers, head200 steps, own-policy Best-of4/verifier bootstrap8 prompts",
-    "device_capabilities": ["cpu", "cuda"], "infer_device_capabilities": false,
-    "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/oct12-umrm-a100.json"
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-umrm-a100.json"
   }
 }

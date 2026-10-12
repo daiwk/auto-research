@@ -1,4 +1,3 @@
-/Users/bytedance/.bash_profile: line 24: /Users/bytedance/.openclaw/completions/openclaw.bash: No such file or directory
 # 按公司
 
 每篇论文独占一行；简介只概括主要方法，实验效果与复现边界请进入单篇文档查看。
@@ -211,6 +210,7 @@
 - 2024-02 · [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。
 
 ## Pinterest
+- 2026-10 · [FORTE](../2610.13806-forte/README.md)：用类型约束的配对扰动、跨时间窗多目标门槛和真实重训选择可退役特征，再审计依赖消费者的移除顺序。
 - 2026-07 · [PinEqualizer](../2607.22518-pinequalizer/README.md)：贯通探索 corpus、召回、排序与 utility，通过 engagement dropout、内容交叉、分 cohort calibration 和 UCB 缓解 fresh 内容反馈回路。
 - 2026-07 · [PinDCO](../2609.11943-pindco/README.md)：以组件专塔学习相对广告基线的创意增量分数，再用 PAM 协调整页像素收益并以预筛控制成本。
 - 2026-07 · [Pin-SCALE](../sigir2026-pin-scale-pin-scale/README.md)：用 engagement-aware SID、级联 pooling 和多视角对比对齐接入 dense retrieval。

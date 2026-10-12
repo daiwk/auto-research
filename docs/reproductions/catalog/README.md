@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Serving 与研究基础设施 | [FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems](../2610.13806-forte/README.md) | Pinterest，2026-10-09 | 未发现官方代码 | `forte` |
 | 大模型能力与推荐融合 | [AgentWebRec: Compact Evidence Fusion over the Agent Web for Personalized Recommendation](../2610.01705-agent-web-rec/README.md) | Beihang University，2026-10-01 | 未发现官方代码 | `agent-web-rec` |
 | 生成、排序与冷启动 | [Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)](../2610.01533-gris/README.md) | Huawei Ireland Research Centre，2026-10-01 | [已开源](https://github.com/hirc-airecs/graph-informed-sids) | `gris` |
 | 排序与长序列建模 | [Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders](../2610.01270-repair-state/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `repair-state` |

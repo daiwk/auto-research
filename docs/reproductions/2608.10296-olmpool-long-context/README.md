@@ -4,15 +4,15 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2608.10296](https://arxiv.org/abs/2608.10296) |
 | 公司/机构 | Ai2 |
-| 第一作者 | Amanda Bertsch |
 | 首次公开日期 | 2026-08-10（arXiv v1） |
-| 原文开源代码 | 是：[olmpool](https://github.com/allenai/olmpool/) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/allenai/olmpool/) |
 | Adapter | `olmpool-long-context` |
 | 本地复现代码 | [`src/auto_research/reproductions/olmpool_long_context/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/olmpool_long_context/) |
+| 第一作者 | Amanda Bertsch |
 
 ## 原始论文总结
 

@@ -76,6 +76,21 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.13025-evo2": "2",
+    "2610.13092-jev-workflow": "2",
+    "2610.13194-janus": "2",
+    "2610.13348-t2mem": "1",
+    "2610.13889-rated": "3",
+    "2610.13912-rsi-anything": "2",
+    "2610.13481-branch-opd": "2",
+    "2610.13257-cast-opd": "1",
+    "2610.13285-boundary-evo": "2",
+    "2610.13521-road-mopd": "2",
+    "2610.13630-msar": "2",
+    "2610.13735-orthros": "1",
+    "2610.13767-dualquant": "1",
+    "2610.12417-woven": "2",
+    "2610.12707-umrm": "2",
     "2610.11794-memento3": "2",
     "2610.11251-vcola": "5",
     "2610.12102-data-space-iteration": "1",
@@ -626,6 +641,11 @@ def process(paper: Paper, refresh: bool) -> FigureResult:
     try:
         selected = choose_special_crop(slug)
         extraction = "reviewed-source-crop" if selected is not None else ""
+        if selected is None and slug in {"2610.13285-boundary-evo", "2610.13521-road-mopd"}:
+            # Reviewed original PDF Fig.2 is the method diagram. HTML numbering
+            # differs; do not replace it with a high-scoring introductory plot.
+            selected = choose_pdf_figure(paper.arxiv_id, paper.title, "2")
+            extraction = "arxiv-pdf-crop"
         if selected is None and paper.arxiv_id:
             selected = choose_html_figure(
                 paper.arxiv_id,
@@ -714,7 +734,8 @@ def main() -> int:
     if MANIFEST.exists() and args.only:
         existing = json.loads(MANIFEST.read_text(encoding="utf-8"))
         touched = {result.page for result in results}
-        existing = [item for item in existing if item["page"] not in touched]
+        existing = [item for item in existing if item["page"] not in touched
+                    and (ROOT / item["page"]).is_file()]
     MANIFEST.write_text(
         json.dumps(existing + [asdict(result) for result in results], ensure_ascii=False, indent=2)
         + "\n",

@@ -8,22 +8,52 @@
   "published": "2026-10-09",
   "upstream_code": "否：截至2026-10-12未找到作者公开源码",
   "track": "llm",
-  "topics": ["llm-architecture", "efficient-attention", "long-context"],
+  "topics": [
+    "llm-architecture",
+    "efficient-attention",
+    "long-context"
+  ],
   "local_code": "src/auto_research/reproductions/orthros",
   "documentation": "docs/reproductions/2610.13735-orthros/README.md",
   "fidelity": "core_mechanism",
   "evaluation_tier": "l1_mechanism",
-  "datasets": ["WikiText-2 raw, official splits, UTF-8 bytes"],
+  "datasets": [
+    "WikiText-2 raw, official splits, UTF-8 bytes"
+  ],
   "baseline": "same pretrained tiny Transformer continued for the same adaptation steps",
-  "metrics": ["baseline.test_byte_nll", "method.test_byte_nll", "stages.cache.batch_vs_cached_max_abs_error"],
-  "mechanisms": ["separate base/output token streams", "fixed-window SWA linear prefill", "complete global cross-attention KV cache decode", "identity-affine transformer weight conversion and actual training"],
+  "metrics": [
+    "baseline.test_byte_nll",
+    "method.test_byte_nll",
+    "stages.cache.batch_vs_cached_max_abs_error"
+  ],
+  "mechanisms": [
+    "separate base/output token streams",
+    "fixed-window SWA linear prefill",
+    "complete global cross-attention KV cache decode",
+    "identity-affine transformer weight conversion and actual training"
+  ],
   "evolve_operators": [],
   "adapter_module": "auto_research.reproductions.orthros.adapter",
   "execution": {
-    "paper": {"code_url": null, "organization": "The Hong Kong Polytechnic University / University of Chinese Academy of Sciences / University of Sydney", "published": "2026-10-09", "publication_label": null, "publication_source": null, "online_ab": [], "selection_exception": null},
-    "omitted_core_components": [], "default_seeds": [42],
+    "paper": {
+      "code_url": null,
+      "organization": "The Hong Kong Polytechnic University / University of Chinese Academy of Sciences / University of Sydney",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [],
+    "default_seeds": [
+      42
+    ],
     "budget": "L1 diagnostic: tiny-LM pretrain10 steps, convert, 40 adaptation steps, width64 layers2 window16",
-    "device_capabilities": ["cpu", "cuda"], "infer_device_capabilities": false,
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
     "requires_gpu_validation": true,
     "gpu_validation_artifact": "docs/gpu-validations/oct12-orthros-a100.json"
   }

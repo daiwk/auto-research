@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "adapter_key": "boundary-evo",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_post_training.py",
+    "--objective",
+    "boundary-evo",
+    "--student-path",
+    "<student-checkpoint-cache>",
+    "--student-id",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--student-revision",
+    "7ae557604adf67be50417f59c2c2f167def9a775",
+    "--teacher-path",
+    "<teacher-checkpoint-cache>",
+    "--teacher-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--teacher-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--expert-path",
+    "<expert-checkpoint-cache>",
+    "--expert-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--expert-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--analyzer-path",
+    "<analyzer-checkpoint-cache>",
+    "--analyzer-id",
+    "Qwen/Qwen2.5-7B-Instruct",
+    "--analyzer-revision",
+    "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "--train-path",
+    "<public-train-jsonl>",
+    "--validation-path",
+    "<public-validation-jsonl>",
+    "--split-manifest",
+    "<public-split-manifest>",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c",
+    "--output",
+    "<output-json>",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--steps",
+    "2",
+    "--validation-examples",
+    "4",
+    "--max-tokens",
+    "768",
+    "--priming-examples",
+    "2",
+    "--rounds",
+    "2",
+    "--pool-examples",
+    "24",
+    "--acquisition",
+    "2",
+    "--replay-quota",
+    "1",
+    "--teacher-rollouts",
+    "2",
+    "--analyzer-tokens",
+    "768"
+  ],
+  "command_sanitization": "Only local checkpoint/data/output locations replaced by descriptive placeholders; parent-confirmed semantic-v5 launch public identities, seed and budgets retained. learning_rate=1e-5 was the frozen snapshot default. Unified --steps=2 does not count actual BoundaryEvo SFT updates.",
+  "environment": {
+    "PYTHONPATH": "src"
+  },
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "train_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+    "validation_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+  },
+  "checkpoint": {
+    "student": {
+      "id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "immutable_revision_verified": true,
+      "verification": "pinned public-source manifest with exact file SHA256",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "teacher": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "verification": "pinned public-source manifest with exact file SHA256",
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "expert": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "verification": "pinned public-source manifest with exact file SHA256",
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "analyzer": {
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "immutable_revision_verified": true,
+      "verification": "pinned public-source manifest with exact file SHA256",
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "result": "passed",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "validation_scope": "Bounded real checkpoint core-mechanism execution only",
+  "metrics": {
+    "adapter_parameter_delta_l2": 0.010686376319428153,
+    "validation_examples": 4,
+    "validation_exact_match": 0.5,
+    "priming_optimizer_steps": 2,
+    "evolution_optimizer_steps": 1,
+    "boundary_rounds_with_updates": 1,
+    "analyzer_parse_failures": 5
+  },
+  "additional_seeds": [],
+  "execution_checks": {
+    "priming_optimizer_steps": 2,
+    "priming_finite_positive_gradient_norms": true,
+    "candidate_counts_per_round": [
+      24,
+      24
+    ],
+    "accepted_candidates_per_round": [
+      9,
+      12
+    ],
+    "selected_questions_per_round": [
+      2,
+      2
+    ],
+    "questions_with_verified_teacher_trajectory_per_round": [
+      1,
+      0
+    ],
+    "evolution_optimizer_steps_per_round": [
+      1,
+      0
+    ],
+    "evolution_response_tokens_per_round": [
+      227,
+      0
+    ],
+    "analyzer_parse_failures_per_round": [
+      0,
+      5
+    ],
+    "analyzer_budget_exhaustions_per_round": [
+      0,
+      0
+    ],
+    "boundary_reestimated_after_actual_round0_sft": true,
+    "selected_question_set_changed_between_rounds": true,
+    "fresh_teacher_generation_after_question_selection": true,
+    "independent_reference_verification_before_stage2_sft": true,
+    "round1_zero_verified_trajectory_and_zero_update_retained": true,
+    "three_independently_loaded_frozen_7b_roles": true,
+    "active_total_parameter_update": true,
+    "test_read": false,
+    "gold_in_rollout": false,
+    "validation_used_for_selection": false
+  },
+  "measurement_gaps": [
+    "Evolution SFT loss and gradient L2 were not saved in the raw history. No such numerical values are inferred or filled.",
+    "The adapter parameter delta is total final-minus-initial LoRA L2, not a separately measured Stage 2 delta.",
+    "Verified-teacher counters count selected questions with a usable verified training trajectory; per-rollout verification outcomes were not separately saved."
+  ],
+  "limitations": [
+    "One seed, four validation questions, two priming updates and only one Stage 2 update: L1 mechanism diagnostic, no capability improvement or stable-gain claim.",
+    "Round 0 used one selected question with a verified fresh teacher trajectory; round 1 selected two questions but no teacher trajectory passed verification and no SFT ran.",
+    "Qwen2.5-0.5B student and three independent Qwen2.5-7B teacher/expert/analyzer instances replace the paper's Qwen3.5/closed-model roles; this is not paper-scale reproduction.",
+    "Model-analyzer ratings were not human-calibrated in this short run. The parser and original acceptance thresholds remain unchanged, and all five parse failures are retained.",
+    "Total LoRA parameter delta includes priming and Stage 2; it cannot establish a separately measured evolution gradient or parameter delta.",
+    "Passed applies only to actual executed commit 70c10c2d2fd47369523ff1407cff88853a7a24b2 and recorded source hashes, not the three earlier negative runs or later sources."
+  ],
+  "executed_source_sha256": {
+    "scripts/run_oct12_post_training.py": "96be02c4fd798c922190195723393543fb2da644ecc5eb3aae1f0a4418ca7aa2",
+    "src/auto_research/post_training/oct12_checkpoint.py": "60ce8c245a108ca793e4f35f78ebbf8ca83de3aef81011a63d65b156f539fecd",
+    "src/auto_research/post_training/oct12_objectives.py": "f03b54c0900c21f84ce09c8d7119a3c020b0dfef04dec001610d0556d037a227",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/agent_research/oct12_provenance.py": "0fc596d1b724532cb6741df9f9332b6cd9070b4a5ec6cff156b0b57a1672054e"
+  },
+  "provenance": {
+    "commit": "70c10c2d2fd47369523ff1407cff88853a7a24b2",
+    "artifact_path": "docs/gpu-validations/boundary-evo-a100-20261012.json",
+    "metrics_artifact": "docs/reproductions/2610.13285-boundary-evo/metrics/gsm8k-a100-42.json",
+    "raw_result_sha256": "957c90ce65e8d35a1949433961f6f253a1e8c1bbf65738c2f76d3b399f73e6ac",
+    "checkpoint_committed": false,
+    "source_hash_origin": "git show actual executed commit"
+  }
+}

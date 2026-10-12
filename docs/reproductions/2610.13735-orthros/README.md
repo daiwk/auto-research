@@ -2,16 +2,16 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2610.13735](https://arxiv.org/abs/2610.13735) |
-| 公司/机构 | 香港理工大学、中国科学院大学、悉尼大学；另有独立研究者 |
+| 公司/机构 | The Hong Kong Polytechnic University / University of Chinese Academy of Sciences / University of Sydney |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 否：截至 2026-10-12 未找到作者公开源码 |
+| 原文开源代码 | 否：截至2026-10-12未找到作者公开源码 |
 | Adapter | `orthros` |
 | 本地复现代码 | [`src/auto_research/reproductions/orthros/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/orthros/) |
 
-PDF 另标内部日期 October 7；本目录首次公开日期以 arXiv v1 的 October 9 为准。实现为 `core_mechanism / L1`，GPU gate 尚待真实回执。
+PDF另标内部日期October7；本目录首次公开日期以arXiv v1的October9为准。实现为 `core_mechanism / L1`，已完成A100三seed运行与真实KV一致性验证。
 
 ## 原始论文总结
 
@@ -47,9 +47,13 @@ flowchart LR
 
 ### 核心公式
 
-$$q_t=\alpha\odot(x_tW_Q)+\beta,\quad q'_t=\alpha'\odot(x'_tW_Q)+\beta',\quad k_t=x_tW_K,\ v_t=x_tW_V.$$
+$$
+q_t=\alpha\odot(x_tW_Q)+\beta,\quad q'_t=\alpha'\odot(x'_tW_Q)+\beta',\quad k_t=x_tW_K,\ v_t=x_tW_V.
+$$
 
-$$o_t=\operatorname{softmax}_{j\in[\max(1,t-w+1),t]}(q_tk_j^\top/\sqrt d)V,\quad o'_t=\operatorname{softmax}_{j\in[1,t]}(q'_tk_j^\top/\sqrt d)V.$$
+$$
+o_t=\operatorname{softmax}_{j\in[\max(1,t-w+1),t]}(q_tk_j^\top/\sqrt d)V,\quad o'_t=\operatorname{softmax}_{j\in[1,t]}(q'_tk_j^\top/\sqrt d)V.
+$$
 
 PT时复制整个序列，SFT时只复制回答预测位置；prefill仅最后一个prompt位置执行global retrieval，decode使用完整历史KV。训练损失只从output-specific流计算。来源：[原文 §3、Algorithms1–2](https://arxiv.org/html/2610.13735v1#S3).
 
@@ -81,9 +85,9 @@ PYTHONPATH=src python scripts/run_oct12_foundation.py --paper orthros \
 
 使用 [Salesforce/wikitext](https://huggingface.co/datasets/Salesforce/wikitext) pinned revision `b08601e04326c79dfdd32d625aee71d232d685c3` 的三个官方split。固定byte vocab、预算与window，不使用test调参。哈希验证的offline镜像由 `scripts/prepare_oct12_public_sources.py --source wikitext` 导出。
 
-`metrics/protocol.json` 保留待GPU验证状态，不预填速度或NLL。CPU单测已验证不相同的base/output affine、window3、三层模型：batch PT/SFT与真实prefill+逐token decode等价；完整cache随decode增长而非只留window。runner 对实际运行另设 max-absolute-error <1e-4 强断言。
+2026-10-12 在 A100 完成 seed42/43/44，每组10步共享预训练后分别适配40步。test byte NLL：基线 `3.02851 ± 0.05278`，Orthros `3.02952 ± 0.05255`；实验组略差，保留结果、不宣称提升。真实prefill/decode的batch-cache最大绝对误差 `1.43×10⁻⁶`，低于预先规定 `10⁻⁴` 门槛；完整KV随decode增长。
 
-计划GPU receipt为 `docs/gpu-validations/oct12-orthros-a100.json`，requires_gpu_validation=true；A100/A30运行与回执接受前不能宣称MR已过GPU gate。
+实测见 [wikitext-a100-seeds42-44.json](metrics/wikitext-a100-seeds42-44.json)，回执见 [GPU证据](../../gpu-validations/oct12-orthros-a100.json)。短序列、小型byte模型不支持长上下文或21.9×加速结论。
 
 ### 代码映射与边界
 

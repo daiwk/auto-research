@@ -1,0 +1,317 @@
+{
+  "schema_version": 2,
+  "adapter_key": "orthros",
+  "method": "orthros",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "name": "Salesforce/wikitext",
+    "configuration": "wikitext-2-raw-v1",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "tokenization": "UTF-8 byte vocabulary (256)",
+    "split_sha256": {
+      "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+      "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+      "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+    },
+    "split_tokens": {
+      "train": 32768,
+      "validation": 4096,
+      "test": 4096
+    },
+    "official_splits": true,
+    "offline_source_verification": {
+      "public_id": "Salesforce/wikitext",
+      "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "file_sha256": {
+        "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+        "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+        "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+      },
+      "rows": null
+    }
+  },
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "metrics": {
+    "baseline_test_byte_nll_mean": 3.028505939655203,
+    "baseline_test_byte_nll_std": 0.05277791882406245,
+    "method_test_byte_nll_mean": 3.029515822728475,
+    "method_test_byte_nll_std": 0.052549165810423105,
+    "batch_vs_cached_max_abs_error": 1.430511474609375e-06
+  },
+  "runs": [
+    {
+      "paper": {
+        "key": "orthros"
+      },
+      "seed": 42,
+      "dataset": {
+        "name": "Salesforce/wikitext",
+        "configuration": "wikitext-2-raw-v1",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "tokenization": "UTF-8 byte vocabulary (256)",
+        "split_sha256": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "split_tokens": {
+          "train": 32768,
+          "validation": 4096,
+          "test": 4096
+        },
+        "official_splits": true,
+        "offline_source_verification": {
+          "public_id": "Salesforce/wikitext",
+          "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+          "file_sha256": {
+            "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+            "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+            "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+          },
+          "rows": null
+        }
+      },
+      "evaluation_tier": "L1",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "baseline": {
+        "name": "matched dense causal Transformer",
+        "test_byte_nll": 2.9729998528011263
+      },
+      "method": {
+        "name": "orthros",
+        "test_byte_nll": 2.974239315305437
+      },
+      "validation": {
+        "baseline": 2.8933525350358753,
+        "method": 2.8944909951043507
+      },
+      "stages": {
+        "training_steps_per_variant": 40,
+        "sequence_length": 64,
+        "width": 64,
+        "layers": 2,
+        "shared_conversion_pretrain_steps": 10,
+        "initialization": "from scratch; real trainable PyTorch attention/SwiGLU LM",
+        "baseline_parameters": 180544,
+        "method_parameters": 181056,
+        "training_loss_first_last": {
+          "baseline": [
+            4.565700531005859,
+            2.8745720386505127
+          ],
+          "method": [
+            4.570531845092773,
+            2.876309871673584
+          ]
+        },
+        "cache": {
+          "batch_vs_cached_max_abs_error": 1.430511474609375e-06,
+          "cache_tokens_per_layer": [
+            64,
+            64
+          ],
+          "prefill_global_output_positions": 1,
+          "base_prefill_window": 16,
+          "agreement_atol": 0.0001,
+          "passed": true
+        },
+        "shared_pretrain_loss": [
+          4.68159818649292
+        ]
+      },
+      "scope": "公开 WikiText byte-LM 机制诊断；不复刻论文大模型、预训练数据、kernel 或论文吞吐。"
+    },
+    {
+      "paper": {
+        "key": "orthros"
+      },
+      "seed": 43,
+      "dataset": {
+        "name": "Salesforce/wikitext",
+        "configuration": "wikitext-2-raw-v1",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "tokenization": "UTF-8 byte vocabulary (256)",
+        "split_sha256": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "split_tokens": {
+          "train": 32768,
+          "validation": 4096,
+          "test": 4096
+        },
+        "official_splits": true,
+        "offline_source_verification": {
+          "public_id": "Salesforce/wikitext",
+          "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+          "file_sha256": {
+            "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+            "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+            "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+          },
+          "rows": null
+        }
+      },
+      "evaluation_tier": "L1",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "baseline": {
+        "name": "matched dense causal Transformer",
+        "test_byte_nll": 3.0780492207360646
+      },
+      "method": {
+        "name": "orthros",
+        "test_byte_nll": 3.078828845705305
+      },
+      "validation": {
+        "baseline": 2.96005770516774,
+        "method": 2.9602522282373336
+      },
+      "stages": {
+        "training_steps_per_variant": 40,
+        "sequence_length": 64,
+        "width": 64,
+        "layers": 2,
+        "shared_conversion_pretrain_steps": 10,
+        "initialization": "from scratch; real trainable PyTorch attention/SwiGLU LM",
+        "baseline_parameters": 180544,
+        "method_parameters": 181056,
+        "training_loss_first_last": {
+          "baseline": [
+            4.527065277099609,
+            2.8360819816589355
+          ],
+          "method": [
+            4.5292582511901855,
+            2.8367557525634766
+          ]
+        },
+        "cache": {
+          "batch_vs_cached_max_abs_error": 1.430511474609375e-06,
+          "cache_tokens_per_layer": [
+            64,
+            64
+          ],
+          "prefill_global_output_positions": 1,
+          "base_prefill_window": 16,
+          "agreement_atol": 0.0001,
+          "passed": true
+        },
+        "shared_pretrain_loss": [
+          4.717236042022705
+        ]
+      },
+      "scope": "公开 WikiText byte-LM 机制诊断；不复刻论文大模型、预训练数据、kernel 或论文吞吐。"
+    },
+    {
+      "paper": {
+        "key": "orthros"
+      },
+      "seed": 44,
+      "dataset": {
+        "name": "Salesforce/wikitext",
+        "configuration": "wikitext-2-raw-v1",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "tokenization": "UTF-8 byte vocabulary (256)",
+        "split_sha256": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "split_tokens": {
+          "train": 32768,
+          "validation": 4096,
+          "test": 4096
+        },
+        "official_splits": true,
+        "offline_source_verification": {
+          "public_id": "Salesforce/wikitext",
+          "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+          "file_sha256": {
+            "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+            "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+            "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+          },
+          "rows": null
+        }
+      },
+      "evaluation_tier": "L1",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "baseline": {
+        "name": "matched dense causal Transformer",
+        "test_byte_nll": 3.0344687454284185
+      },
+      "method": {
+        "name": "orthros",
+        "test_byte_nll": 3.0354793071746826
+      },
+      "validation": {
+        "baseline": 2.9891689845493863,
+        "method": 2.990314896144564
+      },
+      "stages": {
+        "training_steps_per_variant": 40,
+        "sequence_length": 64,
+        "width": 64,
+        "layers": 2,
+        "shared_conversion_pretrain_steps": 10,
+        "initialization": "from scratch; real trainable PyTorch attention/SwiGLU LM",
+        "baseline_parameters": 180544,
+        "method_parameters": 181056,
+        "training_loss_first_last": {
+          "baseline": [
+            4.355014801025391,
+            2.7669837474823
+          ],
+          "method": [
+            4.358824253082275,
+            2.76698637008667
+          ]
+        },
+        "cache": {
+          "batch_vs_cached_max_abs_error": 1.430511474609375e-06,
+          "cache_tokens_per_layer": [
+            64,
+            64
+          ],
+          "prefill_global_output_positions": 1,
+          "base_prefill_window": 16,
+          "agreement_atol": 0.0001,
+          "passed": true
+        },
+        "shared_pretrain_loss": [
+          4.723333835601807
+        ]
+      },
+      "scope": "公开 WikiText byte-LM 机制诊断；不复刻论文大模型、预训练数据、kernel 或论文吞吐。"
+    }
+  ],
+  "evaluation_protocol": {
+    "formal_comparison": false,
+    "test_used_for_selection": false,
+    "scope": "bounded UTF8 byte language-model mechanism diagnostic, not original large-model benchmark",
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "manifest_ref": "reproduction:orthros",
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.13735-orthros/metrics/wikitext-a100-seeds42-44.json",
+    "dataset_fingerprint": "d32632f2cac1f9ece4b8abde8ebf9d4c62e00c28dba07601bbed104c49e3929c",
+    "dataset_fingerprint_kind": "sha256 of canonical JSON actual dataset/revision/input-or-split hash descriptors; not a digest of the full upstream dataset",
+    "executed_code_commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265",
+    "gpu_validation_artifact": "docs/gpu-validations/oct12-orthros-a100.json"
+  }
+}

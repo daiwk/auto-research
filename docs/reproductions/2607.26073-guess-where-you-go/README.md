@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2607.26073](https://arxiv.org/abs/2607.26073) |
 | 公司/机构 | Amap / Alibaba |
 | 首次公开日期 | 2026-07-13（arXiv v1） |
-| 原文开源代码 | 是：[SimCIT](https://github.com/alibaba/SimCIT) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/alibaba/SimCIT) |
 | Adapter | `guess-where-you-go` |
 | 本地复现代码 | [`src/auto_research/reproductions/guess_where_you_go/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/guess_where_you_go/) |
 

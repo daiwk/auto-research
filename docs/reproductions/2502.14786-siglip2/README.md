@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2502.14786](https://arxiv.org/abs/2502.14786) |
 | 公司/机构 | Google DeepMind |
 | 首次公开日期 | 2025-02-20（arXiv v1） |
-| 原文开源代码 | 是：[Google big_vision](https://github.com/google-research/big_vision) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/google-research/big_vision) |
 | Adapter | `siglip2` |
 | 本地复现代码 | [`src/auto_research/reproductions/siglip2/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/siglip2/) |
 

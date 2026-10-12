@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2606.16838](https://arxiv.org/abs/2606.16838) |
-| 公司/机构 | Renmin University of China（按第一作者所属机构聚合） |
+| 公司/机构 | Renmin University of China |
 | 首次公开日期 | 2026-06-15（arXiv v1） |
 | 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-09-02） |
 | Adapter | `onerank` |

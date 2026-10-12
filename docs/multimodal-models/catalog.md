@@ -9,10 +9,12 @@
 
 | 方法族 | 论文 | 机构与日期 | Adapter |
 |---|---|---|---|
-| 视觉 token 压缩与动态证据恢复 | [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](2610.12060-vimod/README.md) | City University of Hong Kong，2026-10-08 | `vimod` |
-| 视觉 token 压缩与动态证据恢复 | [V-CoLA: Vision Token Compression with Linear Attention](2610.11251-vcola/README.md) | Alibaba Cloud Computing，2026-10-08 | `vcola` |
-| 视觉 token 与跨模态检索 | [StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection](2609.16841-stacktok/README.md) | Sichuan University，2026-09-15 | `stacktok` |
-| 视频理解与 token 压缩 | [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](2609.16722-videomm/README.md) | University of Science and Technology of China，2026-09-15 | `videomm` |
+| 视觉 token 压缩与动态证据恢复 | [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](../multimodal-models/2610.12060-vimod/README.md) | City University of Hong Kong，2026-10-08 | `vimod` |
+| 冻结中间层探针与验证器自举 | [Unsupervised Multimodal Reward Modeling](../reproductions/2610.12707-umrm/README.md) | Massachusetts Institute of Technology，2026-10-08 | `umrm` |
+| 视觉 token 压缩与动态证据恢复 | [V-CoLA: Vision Token Compression with Linear Attention](../multimodal-models/2610.11251-vcola/README.md) | Alibaba Cloud Computing，2026-10-08 | `vcola` |
+| 视觉状态转移监督 | [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](../reproductions/2610.12417-woven/README.md) | Northwestern University，2026-10-08 | `woven` |
+| 视觉 token 与跨模态检索 | [StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection](../multimodal-models/2609.16841-stacktok/README.md) | Sichuan University，2026-09-15 | `stacktok` |
+| 视频理解与 token 压缩 | [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](../multimodal-models/2609.16722-videomm/README.md) | University of Science and Technology of China，2026-09-15 | `videomm` |
 | 生成辅助监督与理解增强 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | `gas` |
 | 高效视觉 token 压缩 | [SmolVLM: Redefining small and efficient multimodal models](../reproductions/2504.05299-smolvlm/README.md) | Hugging Face，2025-04-07 | `smolvlm` |
 | 对比预训练与自蒸馏 | [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../reproductions/2502.14786-siglip2/README.md) | Google DeepMind，2025-02-20 | `siglip2` |

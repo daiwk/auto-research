@@ -4,10 +4,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2609.37905](https://arxiv.org/abs/2609.37905) |
-| 公司/机构 | Georgia Institute of Technology / Google Research（按第一作者署名单位） |
+| 公司/机构 | Georgia Institute of Technology / Google Research |
 | 首次公开日期 | 2026-09-29（arXiv v1） |
 | 原文开源代码 | 否：截至 2026-10-01 未找到原作者公开仓库 |
 | Adapter | `recap-ctr` |

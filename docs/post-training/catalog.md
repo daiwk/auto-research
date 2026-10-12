@@ -10,6 +10,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Multi-teacher distillation | [Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation](../reproductions/2610.13521-road-mopd/README.md) | Nanjing University / JD.com，2026-10-09 | 未发现官方代码 | `road-mopd` |
+| Capability boundary | [BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation](../reproductions/2610.13285-boundary-evo/README.md) | Shanghai Artificial Intelligence Laboratory，2026-10-09 | 未发现官方代码 | `boundary-evo` |
+| On-policy distillation | [Branching On-Policy Distillation](../reproductions/2610.13481-branch-opd/README.md) | Tsinghua University / SenseTime Research，2026-10-09 | 未发现官方代码 | `branch-opd` |
+| Cross-tokenizer distillation | [CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation](../reproductions/2610.13257-cast-opd/README.md) | Taobao & Tmall Group of Alibaba，2026-10-09 | 未发现官方代码 | `cast-opd` |
 | On-policy distillation | [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](2610.11659-dial-opd/README.md) | Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University，2026-10-08 | [已开源](https://github.com/EIT-NLP/DIAL-OPD) | `dial-opd` |
 | RLVR | [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](2610.11854-grpo-dropout/README.md) | Harbin Institute of Technology (Shenzhen)，2026-10-08 | [已开源](https://github.com/hexuandeng/GRPODropout) | `grpo-dropout` |
 | On-policy distillation | [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](2610.11989-meta-opd/README.md) | East China Normal University，2026-10-08 | 未发现官方代码 | `meta-opd` |

@@ -3,7 +3,7 @@
   "key": "road-mopd",
   "title": "Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation",
   "paper_url": "https://arxiv.org/abs/2610.13521",
-  "detail_path": "post-training/2610.13521-road-mopd/README.md",
+  "detail_path": "reproductions/2610.13521-road-mopd/README.md",
   "topic": [
     "Multi-teacher distillation",
     "Gradient projection",

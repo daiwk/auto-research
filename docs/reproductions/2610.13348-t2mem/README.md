@@ -4,10 +4,10 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
-|---|---|
+| 项目 | 内容 |
+| --- | --- |
 | 论文链接 | [arXiv 2610.13348](https://arxiv.org/abs/2610.13348) |
-| 公司/机构 | Northeastern University / Tsinghua University / Alibaba Group（一作 Zijun Wang） |
+| 公司/机构 | Northeastern University / Tsinghua University / Alibaba Group |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
 | 原文开源代码 | 是：[T2Mem](https://github.com/OpenBMB/T2Mem) |
 | Adapter | `t2mem` |
@@ -35,6 +35,14 @@ graph LR
 
 重绘源码：[architecture.mmd](assets/architecture.mmd)。[原论文 Figure 1](https://arxiv.org/html/2610.13348v1/model.png) 展示原文的整体机制；本地重绘没有替换原图作为证据。来源与核查边界见 [source-provenance.json](assets/source-provenance.json)。
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Test-Time Memory Construction 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13348v1/model.png)
+
+> **原论文 Figure 1（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2610.13348)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 $(r_t,m_t,a_t)=LLM(q,M_{t-1},o_{t-1},T)$；$M_t=M_{t-1}\oplus m_t$。$SearchMeta(q)=Top_k(q,I\setminus I^{seen})$，$ReadRaw(k)=L(i_k)=s_k$；raw读取仅允许已经观察到的 metadata ID。
@@ -56,10 +64,10 @@ $(r_t,m_t,a_t)=LLM(q,M_{t-1},o_{t-1},T)$；$M_t=M_{t-1}\oplus m_t$。$SearchMeta
 实现位于 `src/auto_research/agent_research/oct12_memory_tools.py / oct12_checkpoint.py`；薄 adapter 从明确的 `oct12.json` 加载运行配置，不注入默认固定候选或 gold。统一入口：
 
 ```bash
-PYTHONPATH=src python scripts/run_oct12_agents.py \\
-  --method t2mem --checkpoint /path/to/public/local/checkpoint --device cuda \\
-  --checkpoint-id OWNER/MODEL --checkpoint-revision IMMUTABLE_40_HEX_COMMIT \\
-  --dataset /path/to/public/input --seed 42 --rounds 2 --group-size 2 --train-steps 2 \\
+PYTHONPATH=src python scripts/run_oct12_agents.py \
+  --method t2mem --checkpoint /path/to/public/local/checkpoint --device cuda \
+  --checkpoint-id OWNER/MODEL --checkpoint-revision IMMUTABLE_40_HEX_COMMIT \
+  --dataset /path/to/public/input --seed 42 --rounds 2 --group-size 2 --train-steps 2 \
   --output runs/oct12/t2mem/result.json
 ```
 
@@ -71,7 +79,9 @@ PYTHONPATH=src python scripts/run_oct12_agents.py \\
 
 metadata、memory cache、action选择与最终答案均来自真实 checkpoint；embedding检索排除seen entries，ReadRaw不接受未观察ID。答案字段仅进入最终外部token F1 scorer，不能进入元数据或推理。该 scorer 不等同原文 LLM-judge accuracy，未做 token budget 匹配时不横比论文表格。
 
-当前检查为 L0 合同及真梯度测试；本地 NVIDIA 运行由本批集成统一生成脱敏回执，未通过前不得写GPU已验证。CUDA metadata已声明requires_gpu_validation=true，未来回执路径为 docs/gpu-validations/oct12-t2mem-a100.json；本文不预填数值。 论文指标与本地指标严格分离；运行日志/模型权重不提交，失败与负结果保留。
+2026-10-12已在A100用固定Qwen2.5-0.5B和LongMemEval前两个官方问题执行；保留全部53+45个会话，每题两步真实memory construction。模型实际选择SearchMeta/ReadRaw，外部token F1均为 `0`，不把程序运行成功当作记忆能力成功。
+
+数据可由 `scripts/prepare_oct12_agent_inputs.py --kind t2mem` 从固定公开revision导出；实测与脱敏action trace见 [public-agent-a100-42.json](metrics/public-agent-a100-42.json)，回执见 [GPU证据](../../gpu-validations/oct12-t2mem-a100.json)。不提交会话、gold或模型回答文本；没有正式基线、多seed能力比较或evolve晋级。
 
 测试入口：`python -m pytest tests/test_oct12_agent_algorithms.py tests/test_oct12_agent_delivery.py`。
 

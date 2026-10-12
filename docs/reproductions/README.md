@@ -50,6 +50,23 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `forte` · [FORTE](2610.13806-forte/README.md)：Pinterest 的配对特征退休漏斗；公开 MovieLens 三种子真实 A100 对照全部保留原特征，不强行报告剪枝收益。
+- `evo2` · [Evo²](2610.13025-evo2/README.md)：固定 executor，交替编辑 harness 与训练 Proposer/Reflector；保留真实执行反馈、SFT 与角色 GRPO，本地为概念诊断。
+- `rsi-anything` · [RSI-Anything](2610.13912-rsi-anything/README.md)：以隔离执行的程序反馈驱动递归改进和策略训练；没有金标候选注入，不等同于论文通用能力。
+- `branch-opd` · [BranchOPD](2610.13481-branch-opd/README.md)：在学生真实 rollout 上选择分叉点，独立采样学生续写分支，再由教师评分并执行分支蒸馏与答案格式约束。
+- `cast-opd` · [CAST](2610.13257-cast-opd/README.md)：通过跨 tokenizer 的信用对齐，在异构教师和学生之间传递可训练的 token 级监督；与旧 Agent CAST 的键区分。
+- `road-mopd` · [Road-MOPD](2610.13521-road-mopd/README.md)：域路由教师之外加入跨教师保护，记录监督冲突和被保护的学生更新。
+- `boundary-evo` · [BoundaryEvo](2610.13285-boundary-evo/README.md)：围绕学生能力边界采集教师轨迹并维护回放池，联合迭代数据和模型。
+- `msar` · [MSAR](2610.13630-msar/README.md)：把单一残差流扩展为多流深度注意力残差，比较真实语言模型训练及额外资源成本。
+- `orthros` · [Orthros](2610.13735-orthros/README.md)：滑动窗口骨干与独立全上下文输出流分工，显式验证 prefill/decode 的 KV cache 一致性。
+- `dualquant` · [DualQuant](2610.13767-dualquant/README.md)：以免校准双尺度量化真实权重和激活；软件 INT4 算子不冒充 A100 原生低比特加速。
+- `janus` · [JANUS](2610.13194-janus/README.md)：先预测候选程序的相对收益与不确定性，再实际试验验证预测，保留错误与零收益。
+- `t2mem` · [T2Mem](2610.13348-t2mem/README.md)：用分阶段摘要、时间信息与检索管理长期会话记忆；答案只进入独立评分器。
+- `rated` · [RATED](2610.13889-rated/README.md)：训练真实查询/工具双编码器并按反馈更新工具选择；语义检索诊断不等同于原始工具后端成功率。
+- `jev-workflow` · [Jev 工作流实证评测](2610.13092-jev-workflow/README.md)：在配对轨迹上比较工作流效率、质量与成本，不把评测设施描述为训练算法。
+- `woven` · [WOVEN](2610.12417-woven/README.md)：将视觉状态转移构造成共享训练原语；官方验证/测试集尚未发布，本地使用明确标注的训练集子切分。
+- `umrm` · [UMRM](2610.12707-umrm/README.md)：从冻结视觉语言模型的中间层训练奖励头；公开 caption 支持的对象核验不冒充官方 CHAIR 指标。
+
 - `rptune` · [RPTune](2610.00964-rptune/README.md)：Google 的查询—商品联合打分、裁剪与 suffix 编排；没有量化线上 A/B，按学术/Evolve 机制诊断收录，不进入工业线上证据结论。
 - `agent-web-rec` · [AgentWebRec](2610.01705-agent-web-rec/README.md)：平台语义、目标用户私有时序记忆与低置信邻居模式协作；不暴露私有记录，且无线上 A/B，按学术/Evolve 机制诊断收录。
 - `gear` · [GEAR](2609.39327-gear/README.md)：正交基参数化的 BasisVQ/BasisRQ 与碰撞 item 上下文重排；论文披露抖音广告 7 天、每组 5% 流量 A/B，本地只执行 L1 核心机制。

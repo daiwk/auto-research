@@ -7,7 +7,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2607.25344](https://arxiv.org/abs/2607.25344) |
-| 公司/机构 | 中国科学院信息工程研究所（第一作者 Ruochen Yang） |
+| 公司/机构 | Institute of Information Engineering, Chinese Academy of Sciences |
 | 首次公开日期 | 2026-07-28（arXiv v1） |
 | 原文开源代码 | 否：论文未提供官方/作者代码（核查日期：2026-09-01） |
 | Adapter | `reward-guided-decoding` |

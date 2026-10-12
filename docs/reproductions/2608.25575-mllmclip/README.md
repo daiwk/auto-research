@@ -5,9 +5,9 @@
 ## 论文信息
 
 | 项目 | 内容 |
-|---|---|
+| --- | --- |
 | 论文链接 | [arXiv 2608.25575](https://arxiv.org/abs/2608.25575) |
-| 公司/机构 | KAIST / Sony Group Corporation（第一作者第一署名单位为 KAIST） |
+| 公司/机构 | KAIST / Sony AI |
 | 首次公开日期 | 2026-08-26（arXiv v1） |
 | 原文开源代码 | 否：未发现原作者公开代码（核查日期：2026-08-28） |
 | Adapter | `mllmclip` |

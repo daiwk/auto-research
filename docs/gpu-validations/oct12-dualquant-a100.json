@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "adapter_key": "dualquant",
+  "validated_at": "2026-10-12",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct12_foundation.py",
+    "--paper",
+    "dualquant",
+    "--dataset-dir",
+    "data/wikitext",
+    "--checkpoint-path",
+    "checkpoints/smollm2-135m",
+    "--output",
+    "runs/dualquant-42",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--max-linear-layers",
+    "0",
+    "--iterations",
+    "5"
+  ],
+  "dataset": {
+    "name": "Salesforce/wikitext",
+    "configuration": "wikitext-2-raw-v1",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "tokenization": "UTF-8 byte vocabulary (256)",
+    "split_sha256": {
+      "train": "649f3b49c8a5e04b81ed59d7d1a8f0b7fa50c7897a00e1f092b4f25cf90d5e1b",
+      "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+      "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+    },
+    "split_tokens": {
+      "train": 4096,
+      "validation": 4096,
+      "test": 4096
+    },
+    "official_splits": true,
+    "offline_source_verification": {
+      "public_id": "Salesforce/wikitext",
+      "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "file_sha256": {
+        "train.txt": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+        "validation.txt": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+        "test.txt": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+      },
+      "rows": null
+    }
+  },
+  "checkpoint": {
+    "name": "HuggingFaceTB/SmolLM2-135M",
+    "revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+    "offline_source_verification": {
+      "public_id": "HuggingFaceTB/SmolLM2-135M",
+      "revision": "93efa2f097d58c2a74874c7e644dbc9b0cee75a2",
+      "file_sha256": {
+        "model.safetensors": "80521b40281d6ce74e35c9282c22539e75aa0ac8578892b2a59955ef78d55da1",
+        "tokenizer_config.json": "4bb9af56a342753d39374f4016a16574cab299fe088e896f425ce3c433f61424",
+        "special_tokens_map.json": "e786b595b9a23148bf1630df78d9037a048ea671e48bfd3549a1e3c233742bb3",
+        "config.json": "1d556eab73b69c7f11f64c557a2f9c6f440bd4c6b89bb2584a6b498c92603843",
+        "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+        "generation_config.json": "2056c988e990b0d13670f63f2f3b87b3b6d07edaf7a3416998ba27dab2d8a059",
+        "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+        "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+      }
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "single_scale_test_nll": 4.524907353671362,
+    "dual_scale_test_nll": 4.418429061574739,
+    "full_precision_test_nll": 3.6177937863691665
+  },
+  "additional_seeds": [],
+  "execution_checks": {
+    "quantized_real_checkpoint": true,
+    "max_linear_layers_argument": 0,
+    "calibration_data_used": false
+  },
+  "limitations": [
+    "Software reference INT4 W+A, not A100 native FP4 acceleration.",
+    "Single-seed bounded public-text diagnostic; validation/test do not calibrate static scales."
+  ],
+  "executed_source_sha256": {
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "scripts/run_oct12_foundation.py": "a636f3a779e9a0b157d294b4ef5c3625ed67fc8746d1ffdb2b5f59625179fcba",
+    "src/auto_research/reproductions/oct12_foundation_multimodal.py": "37ebc1120f157f0f69fefd7d35ce2f37acd8175a3e4143c2793dd954d2f761e3",
+    "src/auto_research/foundation_models/oct12_mechanisms.py": "7331f5d205e4cc668132b0bd09ac57a857146d091951d7b50ea64afef8721ee3"
+  },
+  "provenance": {
+    "commit": "36ef7286e973a0f40c017f40d9a1d3a26f81d265",
+    "artifact_path": "docs/gpu-validations/oct12-dualquant-a100.json",
+    "metrics_artifact": "docs/reproductions/2610.13767-dualquant/metrics/smollm2-wikitext-a100-42.json",
+    "checkpoint_committed": false
+  }
+}
