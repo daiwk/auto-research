@@ -251,6 +251,42 @@ def test_evo2_sequential_grpo_matches_uneven_masked_role_gradient(monkeypatch,ma
         torch.testing.assert_close(actual,expected,rtol=1e-5,atol=1e-7)
 
 
+def test_zero_advantage_does_not_move_existing_sft_adam_momentum():
+    from auto_research.post_training.oct10_checkpoint import install_lora
+    from auto_research.agent_research.oct12_checkpoint import parameter_digest
+    policy = Evo2Policy.__new__(Evo2Policy)
+    policy.model,policy.device,policy.max_tokens = NeuralFixture(),"cpu",32
+    install_lora(policy.model)
+    parameters = [p for p in policy.model.parameters() if p.requires_grad]
+    policy.optimizer = torch.optim.AdamW(parameters,lr=3e-5)
+    # Establish nonzero historical momentum, as real SFT does before GRPO.
+    for parameter in parameters:
+        parameter.grad = torch.ones_like(parameter)
+    policy.optimizer.step()
+    policy.optimizer.zero_grad(set_to_none=True)
+    state_before = copy.deepcopy(policy.optimizer.state_dict())
+    before = parameter_digest(policy.model,trainable_only=True)
+    policy.continuation = lambda messages,target: policy.model()[torch.tensor([ord(c)%128 for c in target])]
+    prompt = ({"role":"user","content":"L0 optimizer no-signal regression"},)
+    groups = [[Trajectory(role,"A",prompt,"a",0.,True),Trajectory(role,"A",prompt,"b",0.,True)]
+              for role in ("proposer","reflector")]
+    result = policy.interleaved_grpo(*groups,round_id=0)
+    assert not result["updated"] and not result["parameters_changed"]
+    assert result["gradient_norm"] == 0. and result["reason"] == "no eligible nonzero advantage"
+    assert parameter_digest(policy.model,trainable_only=True) == before
+    for key,state in policy.optimizer.state_dict()["state"].items():
+        for field,value in state.items():
+            torch.testing.assert_close(value,state_before["state"][key][field],rtol=0.,atol=0.)
+
+
+def test_active_grpo_gate_rejects_momentum_drift_or_zero_gradient():
+    from auto_research.agent_research.oct12_entrypoint import active_grpo_update
+    assert not active_grpo_update({"parameters_changed":True,"updated":True,"gradient_norm":0.})
+    assert not active_grpo_update({"parameters_changed":True,"updated":False,"gradient_norm":1.})
+    assert not active_grpo_update({"parameters_changed":True,"updated":True,"gradient_norm":float("nan")})
+    assert active_grpo_update({"parameters_changed":True,"updated":True,"gradient_norm":.01})
+
+
 def test_real_tiny_qwen_checkpointing_retains_full_prompt_likelihood():
     from transformers import Qwen2Config,Qwen2ForCausalLM
     from auto_research.post_training.oct10_checkpoint import install_lora

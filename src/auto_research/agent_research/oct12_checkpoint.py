@@ -293,10 +293,24 @@ class Evo2Policy(CheckpointPolicy):
                 old.append([self.trajectory_logps(t).detach() if not t.truncated else None
                             for t in group])
         self.optimizer.zero_grad()
-        self.prepare_memory_efficient_training()
         role_count = sum(any(value is not None for value in previous) for previous in old)
         loss_value, audit = 0., []
         before = parameter_digest(self.model,trainable_only=True)
+        learning_signal = False
+        for group, previous in zip(groups, old):
+            rewards = torch.tensor([t.reward for t in group], device=self.device)
+            advantages = rewards - rewards.mean()
+            learning_signal |= any(value is not None and float(advantages[i]) != 0.
+                                   for i, value in enumerate(previous))
+            audit.append({"role": group[0].role, "rewards": rewards.tolist(),
+                "advantages": advantages.tolist(), "masked_truncated": sum(t.truncated for t in group)})
+        if not role_count or not learning_signal:
+            # SFT leaves Adam momentum behind. A zero-valued loss followed by
+            # optimizer.step() would move parameters with no GRPO evidence.
+            return {"round":round_id,"updated":False,"parameters_changed":False,
+                    "gradient_norm":0.,"loss":0.,"groups":audit,
+                    "reason":"all samples truncated" if not role_count else "no eligible nonzero advantage"}
+        self.prepare_memory_efficient_training()
         for group, previous in zip(groups, old):
             rewards = torch.tensor([t.reward for t in group], device=self.device)
             advantages = rewards - rewards.mean()
@@ -313,11 +327,13 @@ class Evo2Policy(CheckpointPolicy):
                 loss_value += float(term.detach())
                 term.backward()
                 del current, ratio, clipped, term
-            audit.append({"role": group[0].role, "rewards": rewards.tolist(),
-                "advantages": advantages.tolist(), "masked_truncated": sum(t.truncated for t in group)})
-        if not role_count:
-            return {"round": round_id, "updated": False, "reason": "all samples truncated", "groups": audit}
         norm = torch.nn.utils.clip_grad_norm_(parameters, 1.)
+        if not torch.isfinite(norm):
+            raise RuntimeError("non-finite GRPO gradient; no optimizer step executed")
+        if float(norm) == 0.:
+            return {"round":round_id,"updated":False,"parameters_changed":False,
+                    "gradient_norm":0.,"loss":loss_value,"groups":audit,
+                    "reason":"eligible advantages yielded zero gradient"}
         self.optimizer.step()
         return {"round": round_id, "updated": True, "loss": loss_value,
                 "parameters_changed":parameter_digest(self.model,trainable_only=True) != before,

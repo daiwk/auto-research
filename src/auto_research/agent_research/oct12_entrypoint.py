@@ -2,6 +2,7 @@
 from __future__ import annotations
 from dataclasses import asdict
 import json
+import hashlib
 import math
 from pathlib import Path
 import re
@@ -15,6 +16,12 @@ from .oct12_provenance import verify_local_checkpoint
 
 
 METHODS = ("evo2", "rsi-anything", "janus", "t2mem", "rated", "jev-workflow")
+
+
+def active_grpo_update(row):
+    """Parameter drift from historical optimizer state is not new learning."""
+    return bool(row.get("updated") and row.get("parameters_changed") and
+                math.isfinite(row.get("gradient_norm",0.)) and row.get("gradient_norm",0.) > 0.)
 
 
 def load_jsonl(path):
@@ -58,14 +65,17 @@ def run_method(method, *, checkpoint=None, dataset=None, device="cpu", seed=42,
                                   steps=train_steps)
         result.update(evaluator.frozen_audit())
         if not result["warmup"]["parameters_changed"] or not any(
-                row.get("parameters_changed") for row in result["training"]):
+                active_grpo_update(row) for row in result["training"]):
             result["status"] = "failed"
             result["failure_reason"] = "Evo2 did not complete active SFT and GRPO parameter updates"
         result["environment"] = "public-circle-packing-26"
         result["harness_restriction"] = "executable source edits limited to arbitrary generated PROMPT"
         result["scores"] = [{"id": node.identifier, "normalized_score": node.evaluation.score,
             "raw_geometry_score": next((t["raw_geometry_score"] for t in node.evaluation.trace
-                                         if "raw_geometry_score" in t), None)} for node in controller.nodes]
+                                         if "raw_geometry_score" in t), None),
+            "external_feedback":[t.get("feedback",t.get("error")) for t in node.evaluation.trace],
+            "generated_program_sha256":next((hashlib.sha256(t["generated_program"].encode()).hexdigest()
+                for t in node.evaluation.trace if "generated_program" in t),None)} for node in controller.nodes]
     elif method == "rsi-anything":
         backend = RSIBackend(checkpoint, **settings)
         sandbox = ProgramSandbox()
