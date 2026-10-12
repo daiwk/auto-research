@@ -1,0 +1,1 @@
+"""MSAR paper adapter package."""
