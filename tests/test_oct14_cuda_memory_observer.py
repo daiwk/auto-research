@@ -79,10 +79,53 @@ def test_original_source_config_and_no_added_training_overrides(tmp_path,case):
         "--output",str(tmp_path/"evidence"),"--variant","unfiltered"]
     if case=="source":f.write_text("modified")
     elif case=="config":audit["execution_config_sha256"]="a"*64
-    elif case=="seed":argv[5]="42"
+    elif case=="seed":argv[5]="45"
     elif case=="override":argv += ["--steps","8"]
     if case=="valid":
         flags,_=n["validate_core"](root,contract,audit,argv)
         assert flags["--seed"]=="43"
     else:
         with pytest.raises(ValueError):n["validate_core"](root,contract,audit,argv)
+
+
+def _bound_fixture(tmp_path,commit):
+    root=tmp_path/"root"
+    root.mkdir()
+    f=root/"fixture.py"
+    f.write_text("CPU-only observer binding fixture")
+    config={"shared":{"train_examples":8,"steps":4,"group":8,"max_tokens":512,
+        "validation_examples":4,"context_limit":4096,"learning_rate":1e-5},
+        "methods":{"grpo-difficulty-curriculum":{}}}
+    p=tmp_path/"config.json"
+    p.write_text(json.dumps(config))
+    hashes={"fixture.py":hashlib.sha256(f.read_bytes()).hexdigest()}
+    contract={"source_commit":commit,"source_file_sha256":hashes}
+    audit={**contract,"source_hashes_verified":True,"cuda_initialized":False,"model_instantiated":False,
+        "execution_config_sha256":hashlib.sha256(json.dumps(config,sort_keys=True).encode()).hexdigest()}
+    argv=["--method","grpo-difficulty-curriculum","--config",str(p),"--seed","42",
+        "--output",str(tmp_path/"output"),"--variant","unfiltered"]
+    return root,contract,audit,argv
+
+
+def test_hard_pin_only_precision_repaired_core():
+    n=runpy.run_path(str(ROOT/"scripts/observe_oct14_cuda_memory.py"))
+    assert n["CORE_COMMIT"]=="b90862754bf51b1beeb5add3f7dc2a51ca00ace4"
+
+
+@pytest.mark.parametrize("seed",[42,43,44])
+@pytest.mark.parametrize("variant",["unfiltered","static","fixed-medium","staged","too-hard"])
+def test_exact_fifteen_original_repaired_course_arguments_allowed(tmp_path,seed,variant):
+    n=runpy.run_path(str(ROOT/"scripts/observe_oct14_cuda_memory.py"))
+    root,contract,audit,argv=_bound_fixture(tmp_path,"b90862754bf51b1beeb5add3f7dc2a51ca00ace4")
+    argv[5]=str(seed)
+    argv[9]=variant
+    flags,_=n["validate_core"](root,contract,audit,argv)
+    assert flags["--seed"]==str(seed) and flags["--variant"]==variant
+
+
+def test_old_numerically_invalid_core_rejected_even_if_source_and_audit_match(tmp_path):
+    n=runpy.run_path(str(ROOT/"scripts/observe_oct14_cuda_memory.py"))
+    root,contract,audit,argv=_bound_fixture(tmp_path,"51b4718a76da286b4111c6fc7d8e003d436def72")
+    argv[5]="43"
+    with pytest.raises(ValueError,match="source"):
+        n["validate_core"](root,contract,audit,argv)

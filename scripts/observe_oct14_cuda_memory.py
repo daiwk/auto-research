@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Observe a frozen 51b curriculum invocation without modifying its algorithm."""
+"""Observe a frozen b908 curriculum invocation without modifying its algorithm."""
 from __future__ import annotations
 
 import argparse
@@ -13,7 +13,7 @@ import time
 
 import torch
 
-CORE_COMMIT="51b4718a76da286b4111c6fc7d8e003d436def72"
+CORE_COMMIT="b90862754bf51b1beeb5add3f7dc2a51ca00ace4"
 ALLOWED_VARIANTS={"unfiltered","static","fixed-medium","staged","too-hard"}
 
 
@@ -26,16 +26,16 @@ def validate_core(root,contract,audit,arguments):
             or contract["source_file_sha256"]!=audit["source_file_sha256"]
             or not audit["source_hashes_verified"] or audit["cuda_initialized"] is not False
             or audit["model_instantiated"] is not False):
-        raise ValueError("exact frozen 51b source/CPU audit required")
+        raise ValueError("exact frozen b908 source/CPU audit required")
     for relative,expected in contract["source_file_sha256"].items():
         if digest(root/relative)!=expected:
             raise ValueError("frozen core source mismatch")
     if len(arguments)!=10 or set(arguments[::2])!={"--method","--config","--seed","--output","--variant"}:
         raise ValueError("forward only the original five argument pairs; no added training overrides")
     flags=dict(zip(arguments[::2],arguments[1::2],strict=True))
-    if (flags["--method"]!="grpo-difficulty-curriculum" or flags["--seed"] not in {"43","44"}
+    if (flags["--method"]!="grpo-difficulty-curriculum" or flags["--seed"] not in {"42","43","44"}
             or flags["--variant"] not in ALLOWED_VARIANTS):
-        raise ValueError("only the ten approved curriculum arm/seed jobs may be observed")
+        raise ValueError("only the fifteen fixed curriculum arm/seed jobs may be observed")
     config=json.loads(Path(flags["--config"]).read_text())
     canonical=hashlib.sha256(json.dumps(config,sort_keys=True).encode()).hexdigest()
     c={**config["shared"],**config["methods"]["grpo-difficulty-curriculum"]}
@@ -93,7 +93,7 @@ def main():
     arguments=args.core_arguments[1:] if args.core_arguments[:1]==["--"] else args.core_arguments
     if not args.execute:
         print(json.dumps({"planned_only":True,"observational_only":True,"core_commit":CORE_COMMIT,
-            "allowed_seeds":[43,44],"training_definition_changes":False,"not_gpu_receipt":True}))
+            "allowed_seeds":[42,43,44],"training_definition_changes":False,"not_gpu_receipt":True}))
         return 0
     if args.gpu_grant!="A30-post-training-explicit-slot":
         parser.error("fresh approved A30 curriculum slot required")
@@ -109,7 +109,7 @@ def main():
     sys.path.insert(0,str(args.core_root/"src"))
     package=importlib.util.find_spec("auto_research")
     if package is None or Path(package.origin).resolve()!=(args.core_root/"src/auto_research/__init__.py").resolve():
-        raise ValueError("original core imports must resolve inside the frozen 51b root")
+        raise ValueError("original core imports must resolve inside the frozen b908 root")
     if "A30" not in torch.cuda.get_device_name():
         raise ValueError("observer grant is limited to the actual NVIDIA A30")
     target=args.core_root/"scripts/run_oct13_post_training.py"
