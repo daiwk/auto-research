@@ -19,3 +19,10 @@
 AST 辅助清单仍不覆盖动态键或全程序污点传播，因此不能把 inventory 更新说成完整语义证明。
 
 本轮新增/修改 CUDA 门禁不因网络暂停而放宽；缺失或旧 source receipt 继续作为待完成项。
+
+10 月 14 日诊断增强后的辅助清单再次逐项比对：仅 MBS checkpoint 的 10 项、SOAR
+checkpoint 的 4 项记录行号移动，访问表达式与所属函数均无新增或删除。MBS 新保存的
+真实响应只供训练构造诊断，独立验证仍只给模型 question；训练构造可见答案的角色明确
+写入 trace。SOAR 响应记录不含 scorer gold，来源模板澄清不改变 parser 或 reward。
+已审 diff 后重新生成清单，仍为 140 个文件；相关 gold 隔离及中断 trace 的 CPU 测试通过，
+不将此语法清单当作全程序语义证明或新 GPU 回执。

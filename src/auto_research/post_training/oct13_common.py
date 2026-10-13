@@ -120,22 +120,36 @@ def sft_step(policy, demonstrations, ledger):
     return {**audit, "supervised_tokens": count, "supervised_instances": len(demonstrations)}
 
 
-def centered_advantages(rewards):
-    values = torch.as_tensor(rewards, dtype=torch.float32)
-    if values.numel() < 2 or not torch.isfinite(values).all():
+def centered_advantages(rewards, *, normalize_std=False):
+    values = torch.as_tensor(rewards, dtype=torch.float64, device="cpu")
+    if values.ndim != 1 or values.numel() < 2 or not torch.isfinite(values).all():
         raise ValueError("at least two finite rewards required")
-    return values - values.mean()
+    # Translation leaves group advantages unchanged. Subtracting one actual
+    # reward first makes a constant group exactly zero, instead of amplifying
+    # float32 reduction residue through the subsequent std + epsilon division.
+    offsets = values - values.flatten()[0]
+    centered = offsets - offsets.mean()
+    if normalize_std:
+        # Scalar reductions stay on CPU: CUDA/MPS receive only policy precision.
+        scale = offsets.std(unbiased=False)
+        if not torch.isfinite(scale):
+            raise ValueError("finite reward dispersion required")
+        centered = centered / (scale + 1e-6)
+    if not torch.isfinite(centered).all():
+        raise ValueError("finite centered rewards required")
+    result = centered.to(dtype=torch.float32)
+    if not torch.isfinite(result).all():
+        raise ValueError("centered rewards must fit policy precision")
+    return result
 
 
 def policy_gradient_step(policy, group, rewards, ledger, *, reference=None, kl_beta=0., epsilon=.2,
                          behavior_log_probs=None, normalize_std=False):
     """One actual clipped group update with fixed behavior and optional frozen KL."""
-    advantages = centered_advantages(rewards).to(policy.device)
+    advantages = centered_advantages(rewards, normalize_std=normalize_std).to(policy.device)
     if not bool(advantages.abs().sum()):
         return {"optimizer_update_executed": False, "zero_advantage_group": True,
                 "rewards": list(map(float, rewards))}
-    if normalize_std:
-        advantages = advantages/(torch.as_tensor(rewards,device=policy.device).std(unbiased=False)+1e-6)
     old = behavior_log_probs
     if old is None:
         old = []

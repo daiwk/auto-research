@@ -6,7 +6,7 @@ import torch
 
 from auto_research.oct12_public_sources import read_jsonl_mirror
 from auto_research.post_training.oct10_checkpoint import verified_reward
-from auto_research.post_training.oct13_common import (CostLedger,ExecutionFailure,load_policy,load_split,
+from auto_research.post_training.oct13_common import (CostLedger,ExecutionFailure,centered_advantages,load_policy,load_split,
     policy_gradient_step,result_payload)
 from .algorithm import (LexicalRetriever,internal_messages,normalize,parse_step,source_observation,source_reward)
 
@@ -103,8 +103,7 @@ def run(config,*,seed=42):
                     repeated.append(reward)
                     old.append(ledger.score(policy,messages,response.tokens,role="behavior").detach())
         # Compute the group statistics on TRAJECTORIES, not flattened turns.
-        advantages=torch.tensor(rewards,device=policy.device)
-        advantages=(advantages-advantages.mean())/(advantages.std(unbiased=False)+1e-6)
+        advantages=centered_advantages(rewards,normalize_std=True).to(policy.device)
         turn_advantages=[float(a) for records,a in zip(trajectories,advantages) for _ in records]
         trajectory_token_counts=[sum(len(response.tokens) for _,response in records)
                                  for records in trajectories for _ in records]
