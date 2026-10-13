@@ -63,5 +63,29 @@ verification 响应及其 role/input-gold-scope、原 token IDs、SHA、截断�
 构造各 continue 分支记录明确 reject reason，不新增任何采样；正常失败及中断 payload
 保留实际已有 trace。这些本地响应可能含训练构造答案，不应复制进脱敏 GPU receipt。
 
-新 source 尚未执行 GPU。后续必须另行冻结源码、使用独立不可覆盖运行目录，在原预算内
+上述初始检查点的新 source 当时尚未执行 GPU。后续必须另行冻结源码、使用独立不可覆盖运行目录，在原预算内
 执行明确授权的 probe；旧失败不能重新绑定新源码，不能据 CPU fixture 宣称门禁通过。
+
+## 10月14日 b908 新响应诊断
+
+两项实际执行均绑定 `b90862754bf51b1beeb5add3f7dc2a51ca00ace4`，54个源文件SHA与Git一致；
+响应文本SHA及原token长度另经CPU独立核对。没有回填旧运行响应。
+
+- MBS原限定预算运行 exit1，实际exit记录343.03794秒；failure SHA
+  `a86f6e78c3a9c2c4abd1dbcfcf9c520db64d9bfd7d339c5d367ae20001916a0a`。
+  root4的独立解题通过；两次分解各仅一个子题通过验证。第二子题缺失必要数量/关系，
+  独立解题产生104、2p或2，均不等于提案答案。root7/8的教师解题也实际算错。
+  八条拒绝均非截断且数值不等，没有发现纯数值书写等价被拒绝的证据。
+  仍无合格合成后代和RL更新，不签通过回执。
+- SOAR原train-only格式探针 exit0，实际35.97100秒；diagnosis SHA
+  `29f7478df63701917e2f5370ca502712c7f320a17d7abd8b29250217025a8b1f`。
+  3条有效轨迹、2条source-match、3次实际检索；某同题两次source奖励不同，
+  去source奖励则相同。全部答案准确率为0、optimizer更新为0；这是格式信号，
+  不是整方法验收或能力提升。完整原训练/消融另行执行。
+
+MBS论文§3.3和附录E要求子题自包含、正确worked solution和简洁最终答案。
+现有提示已有self-contained词面要求；新修仅操作化该说明：question包含所有必需数量、
+单位、时间区间、关系和假设，不依赖父题、兄弟题或answer/trace字段；trace给完整解法，
+answer给单一数值。不是复原未公开的作者生产wrapper，也不保证教师算术错误因此消失。
+独立验证仍只读question，不补父题上下文，不改JSON schema、验证器、重试数或预算，
+不注入本次训练题数字、答案或示例。新提示须冻结并真实GPU重测；旧b908失败不重绑。

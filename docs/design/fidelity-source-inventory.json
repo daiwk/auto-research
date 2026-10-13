@@ -11997,7 +11997,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "target_outcomes",
-        "line": 161,
+        "line": 166,
         "qualified_name": "CheckpointConstruction.target_outcomes",
         "expression": "problem.answer",
         "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
@@ -12005,7 +12005,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "construct_paired_hard_roots",
-        "line": 174,
+        "line": 179,
         "qualified_name": "construct_paired_hard_roots",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12013,7 +12013,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 215,
+        "line": 220,
         "qualified_name": "run",
         "expression": "r['answer']",
         "fingerprint": "16bcc64b7732b44ec2b36bf46d5e94e1380c678923c44a75b4f13251de1d001d"
@@ -12021,7 +12021,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 222,
+        "line": 227,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12029,7 +12029,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "train_rl",
-        "line": 244,
+        "line": 249,
         "qualified_name": "train_rl",
         "expression": "problem.answer",
         "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
