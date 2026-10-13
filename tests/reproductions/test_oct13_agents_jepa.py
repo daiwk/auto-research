@@ -466,6 +466,43 @@ def test_libero_init_states_reject_unknown_pickle_global_even_when_byte_manifest
         load_initial_states(tmp_path, SimpleNamespace(problem_folder="libero_goal", init_states_file="task.pruned_init"))
 
 
+def test_training_adapter_extraction_never_injects_released_student_weights(tmp_path):
+    from safetensors.torch import load_file, save_file
+    from auto_research.reproductions.smolwam.training import extract_latent_adapter
+    expected = {"adapter.scale": torch.ones(2, 3), "adapter_inv.scale": torch.ones(2, 3)}
+    source, target = tmp_path / "released.safetensors", tmp_path / "adapter.safetensors"
+    save_file({**expected, "text_proj.weight": torch.ones(768, 1024), "trunk.weight": torch.ones(3)}, str(source))
+    info = extract_latent_adapter(source, target, expected)
+    actual = load_file(str(target))
+    assert set(actual) == set(expected)
+    assert info["released_trunk_text_or_student_weights_loaded"] is False
+    assert info["source_sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
+    assert info["sha256"] == hashlib.sha256(target.read_bytes()).hexdigest()
+    for name in expected:
+        torch.testing.assert_close(actual[name], expected[name])
+
+
+@pytest.mark.parametrize("failure", ["missing_inverse", "shape", "nan", "inf", "non_adapter_template"])
+def test_training_adapter_extraction_rejects_incomplete_or_invalid_native_adapter(tmp_path, failure):
+    from safetensors.torch import save_file
+    from auto_research.reproductions.smolwam.training import extract_latent_adapter
+    expected = {"adapter.scale": torch.ones(2, 3), "adapter_inv.scale": torch.ones(2, 3)}
+    state = {name: value.clone() for name, value in expected.items()}
+    if failure == "missing_inverse":
+        del state["adapter_inv.scale"]
+    elif failure == "shape":
+        state["adapter.scale"] = torch.ones(1)
+    elif failure in {"nan", "inf"}:
+        state["adapter.scale"][0, 0] = float(failure)
+    else:
+        expected["text_proj.weight"] = torch.ones(1)
+    source, target = tmp_path / "released.safetensors", tmp_path / "adapter.safetensors"
+    save_file(state, str(source))
+    with pytest.raises(ValueError):
+        extract_latent_adapter(source, target, expected)
+    assert not target.exists()
+
+
 @pytest.mark.parametrize("key,identifier", [("lewam", "2610.12818"), ("smolwam", "2610.13740"),
     ("near", "2610.13314"), ("beyond-final-embedding", "2610.13277"), ("skilldreamer", "2609.01642")])
 def test_oct13_owned_paper_metadata_and_documentation_are_complete(key, identifier):

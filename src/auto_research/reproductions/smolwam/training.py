@@ -11,12 +11,38 @@ from pathlib import Path
 import sys
 
 from ..lewam.external import PINS, record_trained_candidate, verify_provenance
-from .algorithm import RELEASED_BLOCKS
+from .algorithm import RELEASED_BLOCKS, assert_release
 
 TEACHER_REVISION = "cb689ec0e3347c13667d70a78a3447388f5c3bb8"
 DEMO_REVISION = "b463cbd5d114909e4daea65eb03bed9787290042"
 DEMO_FILE = "success_only/libero_goal_regen/put_the_cream_cheese_in_the_bowl_demo.hdf5"
 STATS_FILE = "success_only/dataset_statistics.json"
+
+
+def extract_latent_adapter(source: Path, target: Path, expected: dict) -> dict:
+    """Derive only complete frozen latent adapters, never released student weights."""
+    import torch
+    from safetensors import safe_open
+    from safetensors.torch import save_file
+    from ..near.data import sha256_file
+    if target.exists():
+        raise FileExistsError("immutable derived adapter already exists")
+    if (not expected or not any(name.startswith("adapter.") for name in expected)
+            or not any(name.startswith("adapter_inv.") for name in expected)
+            or not all(name.startswith(("adapter.", "adapter_inv.")) for name in expected)):
+        raise ValueError("complete native forward/inverse adapter template required")
+    with safe_open(source, framework="pt", device="cpu") as handle:
+        keys = {name for name in handle.keys() if name.startswith(("adapter.", "adapter_inv."))}
+        if keys != set(expected):
+            raise ValueError("released latent adapter keys differ from complete native modules")
+        state = {name: handle.get_tensor(name) for name in sorted(keys)}
+    if any(value.shape != expected[name].shape or not value.is_floating_point()
+           or not torch.isfinite(value).all() for name, value in state.items()):
+        raise ValueError("released latent adapter shape/finite contract differs")
+    save_file(state, str(target))
+    return {"kind": "derived-frozen-latent-adapter-only", "source_sha256": sha256_file(source),
+            "sha256": sha256_file(target), "tensor_keys": sorted(state),
+            "released_trunk_text_or_student_weights_loaded": False}
 
 
 def _cli(module, arguments):
@@ -36,6 +62,7 @@ def train(config):
     import smolwam.train.kd_targets as kd_module
     import smolwam.train.train as train_module
     from smolwam.config import SmolWAMConfig
+    from smolwam.nn.adapter import LatentAdapter, inverse_adapter
     from smolwam.train.data import BankDataset
     teacher_dir, data_dir = Path(config["teacher_dir"]), Path(config["training_data_dir"])
     release_dir, vae_dir = Path(config["model_dir"]), Path(config["vae_dir"])
@@ -55,7 +82,17 @@ def train(config):
     run_root = Path(config["result_path"]).parent / "native-training"
     run_root.mkdir()
     bank, kd, run = run_root / "bank", run_root / "kd", run_root / "student"
-    stats, adapter = data_dir / STATS_FILE, release_dir / "model.safetensors"
+    model_config = json.loads((release_dir / "config.json").read_text())
+    assert_release(model_config)
+    student_config = SmolWAMConfig(trunk_blocks=RELEASED_BLOCKS)
+    if student_config.to_dict() != model_config["model"]:
+        raise ValueError("native student configuration must exactly match the fixed released structure")
+    template = {f"{prefix}.{name}": value for prefix, module in
+                (("adapter", LatentAdapter(student_config.adapter_width)),
+                 ("adapter_inv", inverse_adapter(student_config.adapter_width)))
+                for name, value in module.state_dict().items()}
+    stats, adapter = data_dir / STATS_FILE, run_root / "latent-adapter.safetensors"
+    adapter_info = extract_latent_adapter(release_dir / "model.safetensors", adapter, template)
     original_teacher_file = teacher.teacher_file
     original_episodes = bank_module.list_episodes
     original_dataset = kd_module.BankDataset
@@ -136,7 +173,7 @@ def train(config):
         train_module.build_model, train_module.compute_losses = tracked_builder, tracked_losses
         torch.optim.AdamW.step = tracked_step
         try:
-            best_val = train_module.train(arguments, SmolWAMConfig(trunk_blocks=RELEASED_BLOCKS))
+            best_val = train_module.train(arguments, student_config)
         finally:
             train_module.build_model, train_module.compute_losses = native_builder, native_losses
             torch.optim.AdamW.step = native_step
@@ -170,6 +207,7 @@ def train(config):
         return {"paper": "smolwam", "phase": "train", "seed": config["seed"], "executed": True,
                 "source_revision": PINS["smolwam"], "device": "cuda", "dataset": dataset,
                 "teacher": teacher_resource, "pretrained_adapter_text": release,
+                "latent_adapter": adapter_info,
                 "variants": {"distillation_training": metric}, "losses": losses, "gradients": gradients,
                 "trained_candidate": candidate,
                 "evaluation_tier": "l2_public_dataset", "fidelity": "core_mechanism",
