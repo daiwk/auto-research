@@ -8,16 +8,21 @@ import subprocess
 import sys
 import tempfile
 
+from auto_research.oct12_public_sources import verify_offline_manifest
 
-def check_checkpoint_identity(path: Path, public_id: str, revision: str) -> None:
-    """Require prepared public-source identity; a CLI label alone is not proof."""
-    provenance = path / "provenance.json"
-    if not provenance.is_file():
-        raise ValueError("prepared checkpoint provenance.json is required")
-    values = json.loads(provenance.read_text())
-    identity = values.get("public_id", values.get("id"))
-    if identity != public_id or values.get("revision") != revision:
-        raise ValueError("checkpoint provenance differs from the declared public ID/revision")
+
+def check_checkpoint_identity(path: Path, public_id: str, revision: str) -> dict:
+    """Verify exact model/tokenizer/processor bytes, not only a declared label."""
+    return verify_offline_manifest(path, public_id, revision, "checkpoint")
+
+
+def check_dataset_identity(path: Path, public_id: str, revision: str,
+                           required_files: tuple[str, ...] = ()) -> dict:
+    """Hash verification is an integrity check; data is not fed to a policy."""
+    manifest = verify_offline_manifest(path, public_id, revision, "dataset")
+    if not set(required_files) <= set(manifest["files"]):
+        raise ValueError("offline dataset provenance must cover every consumed input file")
+    return manifest
 
 
 def execute(key: str, script: str, dataset_dir: Path, seed: int) -> dict:

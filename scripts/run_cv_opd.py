@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
+from collections import Counter
 import json
 from pathlib import Path
 
@@ -17,13 +17,20 @@ from PIL import Image
 from transformers import AutoModelForImageTextToText, AutoProcessor
 
 from auto_research.multimodal.cv_opd import (
-    VisionPolicy, ema_update, intersection_over_union, negative_crop, objective, verify_answer,
+    VisionPolicy, ema_update, intersection_over_union, negative_crop, objective, sampled_training_rollouts, verify_answer,
 )
 from auto_research.post_training.local_lora import attach_lora
-from auto_research.foundation_models.oct13_runtime import check_checkpoint_identity
+from auto_research.foundation_models.oct13_runtime import check_checkpoint_identity, check_dataset_identity
+
+COCO_CLASSES = ("person", "cat", "dog", "car", "bus", "bird", "horse", "bicycle")
+COCO_QUESTION = "Name the main object in this picture. Reply with one COCO category name and no other words."
 
 
-def load_rows(path: Path) -> list[dict]:
+def load_rows(path: Path, manifest: dict) -> list[dict]:
+    if manifest.get("public_id") != "COCO2017/train2017" or manifest.get("source_split") != "train2017":
+        raise ValueError("CV diagnostic must identify the original COCO train2017 source split")
+    if path.name not in manifest["files"]:
+        raise ValueError("CV records JSONL must be hashed in the verified dataset manifest")
     rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
     if not rows or any(row.get("split") not in ("train", "validation", "test")
                        or not row.get("verified") or not row.get("bbox")
@@ -31,16 +38,31 @@ def load_rows(path: Path) -> list[dict]:
         raise ValueError("verified image/question/answer/bbox with explicit train/validation/test split required")
     if any(len(row["bbox"]) != 4 for row in rows):
         raise ValueError("bbox must be pixel xyxy, four coordinates")
+    if manifest.get("rows") is not None and manifest["rows"] != len(rows):
+        raise ValueError("CV row count differs from the verified dataset manifest")
     for row in rows:
         row["references"] = row.get("answers", [row.get("answer")])
+        if (not isinstance(row["references"], list) or not row["references"]
+                or any(not isinstance(reference, str) or not reference.strip() for reference in row["references"])):
+            raise ValueError("CV verifier references must be nonempty strings")
         image = Path(row["image"])
-        row["image"] = str(image if image.is_absolute() else path.parent / image)
+        image_path = image if image.is_absolute() else path.parent / image
+        try:
+            relative = image_path.resolve().relative_to(path.parent.resolve()).as_posix()
+        except ValueError as error:
+            raise ValueError("CV images must remain inside the verified dataset mirror") from error
+        if relative not in manifest["files"]:
+            raise ValueError("every CV image must be hashed in the verified dataset manifest")
+        row["image"] = str(image_path)
     image_ids = {}
     for row in rows:
-        identity = row.get("image_id", row.get("id", row["image"]))
-        if identity in image_ids and image_ids[identity] != row["split"]:
-            raise ValueError("same source image cannot cross the training/held-out boundary")
-        image_ids[identity] = row["split"]
+        relative = Path(row["image"]).resolve().relative_to(path.parent.resolve()).as_posix()
+        identities = (("path", relative), ("sha256", manifest["files"][relative]),
+                      ("source_id", str(row.get("image_id", row.get("id", relative)))))
+        for identity in identities:
+            if identity in image_ids and image_ids[identity] != row["split"]:
+                raise ValueError("same source image cannot cross the training/held-out boundary")
+            image_ids[identity] = row["split"]
     return rows
 
 
@@ -76,12 +98,20 @@ def main() -> None:
     args = p.parse_args()
     if min(args.steps, args.rollouts, args.max_new_tokens, args.batch_size) < 1:
         p.error("positive training/rollout budgets required")
-    check_checkpoint_identity(args.checkpoint, args.checkpoint_id, args.checkpoint_revision)
-    rows = load_rows(args.records)
+    checkpoint_manifest = check_checkpoint_identity(args.checkpoint, args.checkpoint_id, args.checkpoint_revision)
+    dataset_manifest = check_dataset_identity(args.records.parent, args.dataset_id, args.dataset_revision,
+                                             (args.records.name,))
+    rows = load_rows(args.records, dataset_manifest)
     train = [row for row in rows if row["split"] == "train"]
     validation = [row for row in rows if row["split"] == "validation"]
     if not train:
         p.error("at least one public TRAIN row required")
+    if any(row["question"] != COCO_QUESTION or len(row["references"]) != 1
+           or row["references"][0] not in COCO_CLASSES for row in rows):
+        p.error("this diagnostic requires the fixed label-free COCO question and exact category labels")
+    label_counts = Counter(row["references"][0] for row in train)
+    if len(label_counts) < 2:
+        p.error("constant-label training is not a valid multiclass visual diagnostic")
     torch.manual_seed(args.seed)
     processor = AutoProcessor.from_pretrained(args.checkpoint, local_files_only=True)
     model = AutoModelForImageTextToText.from_pretrained(
@@ -98,7 +128,7 @@ def main() -> None:
     optimizer = torch.optim.AdamW(parameters, lr=2e-6, weight_decay=0.)
     baseline = evaluate(policy, validation, args.max_new_tokens)
     generator = torch.Generator().manual_seed(args.seed)
-    history, updates, crop_failures = [], 0, []
+    history, updates, crop_failures, rollout_attempts = [], 0, [], []
     for step in range(args.steps):
         trajectories, correctness, sample_ids, crops = [], [], [], []
         for sample in range(args.batch_size):
@@ -110,9 +140,12 @@ def main() -> None:
             except ValueError as error:
                 crop_failures.append({"id": str(row.get("id", "unknown")), "reason": str(error)})
                 continue
-            rollouts = [policy.rollout(image, row["question"], args.max_new_tokens) for _ in range(args.rollouts)]
-            rewards = [verify_answer(processor.tokenizer.decode(tokens, skip_special_tokens=True), row["references"])
-                       for tokens in rollouts]
+            rollouts, rewards = sampled_training_rollouts(policy, image, row["question"], row["references"],
+                                                          args.rollouts, args.max_new_tokens)
+            rollout_attempts.append({"step": step, "id": str(row.get("id", "unknown")),
+                                     "rollouts": len(rollouts), "correct_rollouts": sum(rewards),
+                                     "generated_tokens": sum(len(tokens) for tokens in rollouts),
+                                     "retained": any(rewards)})
             if not any(rewards):
                 continue  # NEVER insert the reference answer to bypass Eq. 13.
             positive_image, negative_image = image.crop(box), image.crop(negative)
@@ -157,18 +190,30 @@ def main() -> None:
     delta = float((torch.cat([value.detach().flatten() for value in parameters]) - before).norm())
     report = {"paper": "2610.13264", "seed": args.seed, "diagnostic_only": True,
               "promotion_eligible": False, "fidelity": "core_mechanism", "evaluation_tier": "l1_mechanism",
-              "checkpoint": {"id": args.checkpoint_id, "revision": args.checkpoint_revision},
+              "checkpoint": {"id": args.checkpoint_id, "revision": args.checkpoint_revision,
+                             "file_sha256": checkpoint_manifest["files"]},
               "dataset": {"id": args.dataset_id, "revision": args.dataset_revision,
-                          "records_sha256": hashlib.sha256(args.records.read_bytes()).hexdigest()},
+                          "records_sha256": dataset_manifest["files"][args.records.name],
+                          "source_split": dataset_manifest["source_split"],
+                          "local_holdout_is_not_official_test": True,
+                          "all_input_hashes_verified": True,
+                          "input_file_sha256": dataset_manifest["files"]},
               "baseline_validation": baseline, "final_validation": final_validation, "final_test": final_test,
               "history": history, "optimizer_updates": updates, "parameter_delta_l2": delta,
               "crop_failures": crop_failures, "rollouts_per_sample": args.rollouts,
+              "rollout_attempts": rollout_attempts,
+              "total_training_rollout_tokens": sum(row["generated_tokens"] for row in rollout_attempts),
+              "task_protocol": {"id": "coco-train2017-main-object-multiclass-v1",
+                                "training_class_counts": dict(label_counts),
+                                "gold_in_policy_prompt": False, "bbox_in_full_image_student_prompt": False,
+                                "positive_negative_teacher_same_question": True,
+                                "verifier": "exact category after case/punctuation/whitespace and leading a/an normalization"},
               "successful_parameter_update": updates > 0 and delta > 0,
               "objective_normalization": "Appendix A.3 Algorithm 1",
               "test_isolated_from_selection": True,
               "limitations": ["SmolVLM-256M + low-rank language updates, not Qwen3.5-4B full paper training",
-                               "tiny public object-presence subset, not fine-grained visual reasoning benchmark",
-                               "rule-based external yes/no verifier, not the GPT-OSS-120B judge",
+                               "tiny public multiclass main-object subset, not fine-grained visual reasoning benchmark",
+                               "strict external normalized category-name verifier, not the GPT-OSS-120B judge",
                                "no matched Vision-OPD training-budget capability comparison",
                                "zero accepted rollouts remains a failed zero-update run"]}
     args.output.parent.mkdir(parents=True, exist_ok=True)

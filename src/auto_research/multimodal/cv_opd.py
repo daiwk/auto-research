@@ -101,13 +101,31 @@ def objective(student_logits: Tensor, positive_logits: Tensor, negative_logits: 
 
 def verify_answer(response: str, references: list[str]) -> bool:
     """External training/evaluation verifier; references never enter the VLM."""
-    normalize = lambda value: re.sub(r"[^a-z0-9 ]+", " ", value.lower()).strip()
+    if not references or any(not isinstance(value, str) or not value.strip() for value in references):
+        raise ValueError("nonempty string references required by the external verifier")
+
+    def normalize(value: str) -> str:
+        normalized = " ".join(re.sub(r"[^a-z0-9 ]+", " ", value.lower()).split())
+        # Only a leading indefinite article is harmless. No substring match,
+        # synonyms, plural conversion, negation removal or label-aware rewrite.
+        return re.sub(r"^(?:a|an)\s+", "", normalized)
+
     normalized = normalize(response)
     expected = [normalize(reference) for reference in references]
     if all(reference in ("yes", "no") for reference in expected):
         decision = re.search(r"\b(yes|no)\b", normalized)
         return bool(decision and decision.group(1) in expected)
     return normalized in expected
+
+
+def sampled_training_rollouts(policy, image, question: str, references: list[str],
+                               count: int, maximum_tokens: int) -> tuple[list[Tensor], list[bool]]:
+    """Trainer/verifier boundary: gold never appears in the policy call."""
+    if count < 1:
+        raise ValueError("positive rollout count required")
+    tokens = [policy.rollout(image, question, maximum_tokens) for _ in range(count)]
+    responses = [policy.processor.tokenizer.decode(row, skip_special_tokens=True) for row in tokens]
+    return tokens, [verify_answer(response, references) for response in responses]
 
 
 class VisionPolicy:

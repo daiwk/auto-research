@@ -80,9 +80,13 @@ Avg6 的差值是 +2.30 **百分点**，不是相对提升 2.30%。CV-OPD 的 HR
 
 ### 数据协议
 
-输入 JSONL 必须包含 `image`、`question`、`answer` 或 `answers`、真实 `bbox=[x0,y0,x1,y1]` 像素坐标、`split` 和 `verified=true`。训练只能用公开 train 源的确定性子集；同一源图像不能跨 train/validation/test。已有 COCO-Caption2017 的 `val` caption 子集没有 bbox，不能静默当作本篇训练数据。
+输入 JSONL 必须包含 `image`、统一问题、一个实际类别 `answer`、真实 `bbox=[x0,y0,x1,y1]` 像素坐标、`split` 和 `verified=true`。训练只能用公开 train 源的确定性子集；同一源图像不能跨 train/validation/test。已有 COCO-Caption2017 的 `val` caption 子集没有 bbox，不能静默当作本篇训练数据。
 
-学生和教师输入均只有图片与问题；答案仅供外部 verifier 判断 rollout 正确性。学生看完整图像，正负教师看对应 crop。若没有同尺寸低 IoU 负 crop，记录失败并跳过；若 8 条 rollout 全错，严格零更新，不插入 gold completion。
+当前诊断任务从 COCO train2017 选取主要对象属于 `person/cat/dog/car/bus/bird/horse/bicycle` 的真实图片，计划每类 2 train、1 validation、1 test，共 32 图；后两组是从 train2017 派生的本地 holdout，并非官方 test。统一问题为 `Name the main object in this picture. Reply with one COCO category name and no other words.`，不含真实类别，full-image 学生也不接收 bbox。脚本拒绝 constant-label 训练数据。verifier 只规范化大小写、标点、空白与开头 `a/an`，仍须精确类别；`not a cat`、`cat or dog`、`cats` 都不算 `cat`。
+
+checkpoint 与数据先通过 `verify_offline_manifest` 核对实际 SHA256，数据 manifest 必须覆盖 JSONL 和所有被引用图像。标签和 bbox 与输入文件绑定，不靠 CLI 自报版本。仅做哈希完整性检查不向模型提供 held-out 内容。
+
+学生和教师输入均只有图片与同一个问题；答案仅供外部 verifier 判断 rollout 正确性。学生看完整图像，正负教师看对应 crop。若没有同尺寸低 IoU 负 crop，记录失败并跳过；若 8 条 rollout 全错，严格零更新，不插入 gold completion。被拒 rollout 仍记入实际 token 成本。低 IoU 只保证几何分离，不证明负区域没有另一同类对象，这是公开诊断的数据边界。
 
 ### 执行入口
 
@@ -92,7 +96,7 @@ PYTHONPATH=src python scripts/run_cv_opd.py \
   --checkpoint-id HuggingFaceTB/SmolVLM-256M-Instruct \
   --checkpoint-revision 7e3e67edbbed1bf9888184d9df282b700a323964 \
   --records /path/to/coco-train-boxes.jsonl \
-  --dataset-id COCO-train2017 --dataset-revision <source-hash> \
+  --dataset-id COCO2017/train2017 --dataset-revision <official-annotation-archive-sha256> \
   --device cuda --steps 3 --rollouts 8 --max-new-tokens 16 \
   --seed 42 --output runs/cv-opd-seed42.json
 ```
@@ -103,7 +107,7 @@ PYTHONPATH=src python scripts/run_cv_opd.py \
 
 [cpu-contracts.json](metrics/cpu-contracts.json)只记录已执行的 4 个行为测试：bbox 尺寸与 IoU、JSD/Top-K tail、样本与 token gate、教师停止梯度和零正确样本的零梯度。测试通过不代表视觉推理能力或 GPU 训练完成。
 
-缩小路径使用 SmolVLM-256M 与语言 q/v rank-8 LoRA；并非 Qwen3.5-4B 的完整训练。公开对象存在性问题、规则式 yes/no verifier 与原文 6 个细粒度 benchmark 不等价。未接入 Evolve，不能靠 registry 标签晋级。
+缩小路径使用 SmolVLM-256M 与语言 q/v rank-8 LoRA；并非 Qwen3.5-4B 的完整训练。公开多类主要对象识别、严格类别 verifier 与原文 6 个细粒度 benchmark 不等价。新增行为检查确认：更换外部 verifier gold 只能改变正确性判断，不能改变 policy 生成调用中的图像/问题/预算。未接入 Evolve，不能靠 registry 标签晋级。
 
 ### 代码映射
 

@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -19,10 +18,12 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from auto_research.foundation_models.oal import (
     GroupedQuadratic, QwenOALAttention, contribution, group_dimensions, install_lora, qwen_states,
 )
-from auto_research.foundation_models.oct13_runtime import check_checkpoint_identity
+from auto_research.foundation_models.oct13_runtime import check_checkpoint_identity, check_dataset_identity
 
 BASE_ID = "Qwen/Qwen2.5-0.5B"
 BASE_REVISION = "060db6499f32faf8b98477b0a26969ef7d8b9987"
+WIKITEXT_ID = "Salesforce/wikitext"
+WIKITEXT_REVISION = "b08601e04326c79dfdd32d625aee71d232d685c3"
 
 
 def blocks(tokenizer, path: Path, length: int, maximum: int) -> torch.Tensor:
@@ -128,14 +129,21 @@ def main() -> None:
     args = p.parse_args()
     if args.checkpoint_id != BASE_ID or args.checkpoint_revision != BASE_REVISION:
         p.error("this public protocol requires the fixed Qwen2.5-0.5B Base, not Instruct")
+    if args.dataset_id != WIKITEXT_ID or args.dataset_revision != WIKITEXT_REVISION:
+        p.error("this public protocol requires the fixed Salesforce/wikitext revision")
     if min(args.steps, args.calibration_steps, args.bootstrap) < 1 or args.sequence_length < 8:
         p.error("positive update budgets and sequence length >=8 required")
-    check_checkpoint_identity(args.checkpoint, args.checkpoint_id, args.checkpoint_revision)
+    checkpoint_manifest = check_checkpoint_identity(args.checkpoint, args.checkpoint_id, args.checkpoint_revision)
+    dataset_manifest = check_dataset_identity(args.data, args.dataset_id, args.dataset_revision,
+                                             ("train.txt", "validation.txt", "test.txt"))
+    if dataset_manifest.get("configuration") != "wikitext-2-raw-v1":
+        p.error("this small protocol requires the verified wikitext-2-raw-v1 mirror")
     torch.manual_seed(args.seed)
     tokenizer = AutoTokenizer.from_pretrained(args.checkpoint, local_files_only=True)
     train = blocks(tokenizer, args.data / "train.txt", args.sequence_length, 16)
     validation = blocks(tokenizer, args.data / "validation.txt", args.sequence_length, 2)
-    # Do not load/tokenize test until coefficient and model checkpoint selection finishes.
+    # Do not tokenize/evaluate test until coefficient and model checkpoint
+    # selection finishes; manifest hash verification is an integrity check only.
     model = AutoModelForCausalLM.from_pretrained(
         args.checkpoint, local_files_only=True, dtype=torch.bfloat16 if args.device == "cuda" else torch.float32,
         attn_implementation="eager").to(args.device).eval()
@@ -198,10 +206,13 @@ def main() -> None:
         outcome.update(test_nll=final, test_ppl=math.exp(min(final, 80)))
     report = {"paper": "2610.13674", "seed": args.seed, "diagnostic_only": True,
               "promotion_eligible": False, "fidelity": "core_mechanism", "evaluation_tier": "l1_mechanism",
-              "checkpoint": {"id": args.checkpoint_id, "revision": args.checkpoint_revision},
+              "checkpoint": {"id": args.checkpoint_id, "revision": args.checkpoint_revision,
+                             "file_sha256": checkpoint_manifest["files"]},
               "dataset": {"id": args.dataset_id, "revision": args.dataset_revision,
-                          "split_hashes": {name: hashlib.sha256((args.data / f"{name}.txt").read_bytes()).hexdigest()
-                                           for name in ("train", "validation", "test")}},
+                          "split_hashes": {name: dataset_manifest["files"][f"{name}.txt"]
+                                           for name in ("train", "validation", "test")},
+                          "configuration": dataset_manifest["configuration"],
+                          "all_input_hashes_verified": True},
               "calibration": calibration, "softmax_lora": baseline_result, "oal_lora": result,
               "converted_layers": layer_ids, "sequence_length": args.sequence_length,
               "steps": args.steps, "calibration_steps_per_initialization": args.calibration_steps,

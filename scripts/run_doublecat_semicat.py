@@ -3,13 +3,16 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 from pathlib import Path
 
 import torch
 
 from auto_research.foundation_models.doublecat_semicat import DiffusionLM, corrupt, denoising_loss, sample
+from auto_research.foundation_models.oct13_runtime import check_dataset_identity
+
+WIKITEXT_ID = "Salesforce/wikitext"
+WIKITEXT_REVISION = "b08601e04326c79dfdd32d625aee71d232d685c3"
 
 
 def read_blocks(path: Path, length: int, limit: int, device: str) -> torch.Tensor:
@@ -47,6 +50,12 @@ def main() -> None:
     args = p.parse_args()
     if min(args.steps, args.batch_size, args.nfe) < 1:
         p.error("positive train and sampling budgets required")
+    if args.dataset_id != WIKITEXT_ID or args.dataset_revision != WIKITEXT_REVISION:
+        p.error("this public protocol requires the fixed Salesforce/wikitext revision")
+    dataset_manifest = check_dataset_identity(args.data, args.dataset_id, args.dataset_revision,
+                                             ("train.txt", "validation.txt", "test.txt"))
+    if dataset_manifest.get("configuration") != "wikitext-2-raw-v1":
+        p.error("this small protocol requires the verified wikitext-2-raw-v1 mirror")
     train = read_blocks(args.data / "train.txt", args.sequence_length, 64, args.device)
     validation = read_blocks(args.data / "validation.txt", args.sequence_length, 8, args.device)
     results, models = {}, {}
@@ -82,7 +91,8 @@ def main() -> None:
                            "parameter_delta_l2": float((torch.cat([p.detach().flatten() for p in parameters]) - before).norm())}
         models[method] = model
     # All architecture/training/checkpoint selection has completed before test
-    # bytes are loaded. Neither test bytes nor reference text enters sampling.
+    # bytes are tokenized/evaluated. The earlier manifest hash check is only an
+    # integrity operation. Neither test/reference text enters sampling.
     test = read_blocks(args.data / "test.txt", args.sequence_length, 8, args.device)
     for method, model in models.items():
         results[method]["test_denoising_ce_t05"] = evaluate(model, test, method, args.seed + 20000)
@@ -96,8 +106,10 @@ def main() -> None:
     report = {"paper": "2610.13834", "seed": args.seed, "diagnostic_only": True,
               "promotion_eligible": False, "fidelity": "core_mechanism", "evaluation_tier": "l1_mechanism",
               "dataset": {"id": args.dataset_id, "revision": args.dataset_revision,
-                          "split_hashes": {name: hashlib.sha256((args.data / f"{name}.txt").read_bytes()).hexdigest()
-                                           for name in ("train", "validation", "test")}},
+                          "split_hashes": {name: dataset_manifest["files"][f"{name}.txt"]
+                                           for name in ("train", "validation", "test")},
+                          "configuration": dataset_manifest["configuration"],
+                          "all_input_hashes_verified": True},
               "checkpoint": {"id": "random-initialized bidirectional DiT denoiser",
                              "revision": "doublecat-semicat-byte-dit-v1", "seed": args.seed},
               "steps": args.steps, "sequence_length": args.sequence_length, "width": args.width,

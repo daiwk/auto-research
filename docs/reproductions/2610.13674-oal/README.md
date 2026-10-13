@@ -72,7 +72,7 @@ Appendix B 的候选边界只来自高贡献尾部，使用固定全样本排序
 
 ### 数据协议
 
-公开 WikiText-2 原始 train/validation/test 分离。train 前 4 个独立块用于分组，随后 4 块用于输出校准，后续块用于 LoRA；validation 用于核初始化与模型 checkpoint 选择；全部模型选择结束后才加载 test。
+公开 WikiText-2 原始 train/validation/test 分离。先用 `verify_offline_manifest` 核对固定 ID/revision/config 以及所有实际数据 SHA256；该完整性检查不把 held-out 内容交给模型。train 前 4 个独立块用于分组，随后 4 块用于输出校准，后续块用于 LoRA；validation 用于核初始化与模型 checkpoint 选择；全部模型选择结束后才 tokenize/evaluate test。checkpoint 同样核验真实权重、config、tokenizer 的文件哈希，不能只凭 CLI 标签把 Instruct 当成 Base。
 
 默认只转换零基第 4 层，保留原生 QKV、RoPE、GQA 和 output projection。原文是第 3–20 层、40 个校准 prompt、1000 次 bootstrap、4096-token、512 次 WikiText-103 更新。缩小预算必须记录，不能称为原 benchmark 复跑。
 

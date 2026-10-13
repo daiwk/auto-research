@@ -17,7 +17,7 @@
   "fidelity": "core_mechanism",
   "evaluation_tier": "l1_mechanism",
   "datasets": [
-    "COCO train2017 object-presence subset"
+    "COCO train2017-derived 8-class main-object subset"
   ],
   "baseline": "same checkpoint before update; no matched Vision-OPD training comparison",
   "metrics": [

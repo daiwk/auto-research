@@ -77,7 +77,7 @@ DoubleCat 训练的推荐推理方式在原文中丢弃 $Y_t$ 项、采用普通
 
 ### 数据协议与执行入口
 
-公开 WikiText-2 raw train/validation/test 使用独立字节块与精确 split hash。256-byte vocabulary 保留真实离散语言数据，但不是 GPT-2/TikToken。只用 validation CE 选 checkpoint；三个模型全部选完才读取 test；无条件采样不读 gold text。
+公开 WikiText-2 raw train/validation/test 使用独立字节块。先用 `verify_offline_manifest` 检查固定 ID/revision/config 和所有实际 split SHA256，不能只靠 CLI 声明；该哈希完整性检查不向模型提供 held-out 内容。256-byte vocabulary 保留真实离散语言数据，但不是 GPT-2/TikToken。只用 validation CE 选 checkpoint；三个模型全部选完才 tokenize/evaluate test；无条件采样不读 gold text。
 
 ```bash
 PYTHONPATH=src python scripts/run_doublecat_semicat.py \
