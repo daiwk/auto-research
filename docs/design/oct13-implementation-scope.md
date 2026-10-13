@@ -57,17 +57,17 @@ GPPO 和 TAPO 与已有的其他论文缩写重名，本轮使用 `gppo-framewor
 | DoubleCat-SemiCat | 修正后的无额外前向核心在 A30 新快照三 seed 实跑，参数变化、实际调用数与负结果已核验 | 全局 CI；原完整 benchmark 未运行，不复用旧标准 SC 结果 |
 | CV-OPD / OAL / ReplaySSM | A100 三 seed 与对照/回放实跑及脱敏回执核验完成；CV-OPD 六臂负差值、OAL seed 44 不优、ReplaySSM 编译兼容边界均保留 | 全局 CI；非原论文完整能力或 serving 效率比较 |
 | NEAR / Beyond | A30 八项实跑；共享 bank 各三 seed及严格 bank-disjoint 各一项，固定编码器/切分与原始 SHA 核验完成 | 全局 CI；同数据三 seed 非独立重复，严格切分仅两条 test，非官方 benchmark |
-| SkillDreamer | `0f5dca9f` A30 三 seed 核心失败、7B旧 validation 探针零动作均保留；`701f4500` 只澄清严格提示契约，`5c07ef42` 新同预算 question-only validation 探针已结束：65 次 CSI、7 题技能加载、56 次环境调用，其中 48 次算术成功 | 仍无 finish/提交；6 次算术错误和2次未知工具调用保留，不能据调用宣称任务成功。`47f0e9ce` 仅公平澄清两工具/显式提交语义，尚待新验证，不用 evaluation ID 挑方案 |
+| SkillDreamer | 旧失败均保留；`47f0e9ce`公平工具说明的新7B question-only validation探针已完成：58次CSI、7题加载、50次环境调用（46次算术成功、4次错误），仍0finish/提交 | 这只是有界机制诊断，没有scorer/能力回执。原完整三臂三seed7B评测需数小时运行时间，已非阻塞询问用户；不使用holdout内容调策略、不把工具调用当任务成功 |
 | LeWAM | `0f5dca9f` A100 三 seed 原生联合训练与新候选三臂闭环已核验，均无规划优势 | 全局 CI；目标来自训练轨迹，非 holdout，未运行原完整训练预算 |
 | SmolWAM | `2b84c377` A100 三 seed 均完成 teacher KD、两布局课程及新学生同初态闭环；24 次真实更新，学生与 no-op 均零成功，源码/原始文件/新权重绑定独立核验通过 | 全局 CI；旧 adapter 输入失败保留，缩放单任务诊断不是正式能力或原规模复现 |
-| SynthSelf / Progressive contraction | 完整 seed42 GPU 产物已独立复算与源绑定；43/44 也已实际运行结束，三种子摘录待最终整合。SynthSelf seed43 retention 下降，Contraction 单42与 full-SFT 相同，均保留 | 核对三种子原始数据、目录与 CI；不宣称稳定能力提升或总计算节省 |
-| UPTURN | 完整42/43运行已产生真实救援信号；44实际运行结束但救援优势全0，只有熵梯度，保持 failed-no-rescue-signal。共享评估负结果保留 | 三种子执行 cohort 与失败收口，不生成三种子全通过回执、不为通过挑预算 |
-| MagicBeanStalk / SOAR | MBS 限定重跑找到3 hard根但无合格后代/无RL；SOAR7B格式探针8次无效/无检索。旧响应正文缺失事实明确；`c6c8ea14` 加响应/拒绝记录，`b9086275` 消除等值奖励舍入伪信号 | 新源同预算诊断与有效核心 GPU 验证；不猜旧响应、降低门槛或用参数变化替代有效训练 |
-| 难度课程 | `6aabe57a` A100 seed42三臂8/9/11次历史更新均有真实奖励差异；旧 A30 static/unfiltered 存在等值奖励伪更新，队列已定向停止，负证据和中断保留 | `b9086275` 数值修复后五臂三种子须同设备/同预算重测；不筛掉错误组冒充整批通过 |
+| SynthSelf / Progressive contraction | 完整42/43/44 native和独立回执已从实际raw复算并保存。SynthSelf seed43 retention为0，Contraction三seed均与full-SFT相同，负结果保留 | 最终整批目录与CI；不宣称稳定能力提升或总计算节省 |
+| UPTURN | 完整42/43有真实救援信号，44救援优势全0、只有熵梯度，保持failed-no-rescue-signal。失败native与完整执行cohort已核验保存 | 最终整批同步与CI；不生成三种子全通过回执、不为通过挑预算 |
+| MagicBeanStalk / SOAR | b908响应trace已独立核验：MBS子题欠条件/teacher算错，仍无后代；SOAR已形成检索与有效格式。7B SOAR首seed两臂完整训练有4/3次真实更新，验证accuracy两臂均0→.25 | MBS通用自包含说明冻结5c后同预算重测；SOAR原始结果摘录与后续种子待收口。不放宽验证器、猜旧响应或用参数变化替代有效训练 |
+| 难度课程 | `b9086275` A30首seed五臂已完成unfiltered/static/fixed三臂；等值奖励组均正确跳过，真实有效更新19/4/7。旧数值负证据与中断已保存 | staged/too-hard首seed及43/44待真实执行核验；不筛掉错误组冒充整批通过 |
 
-原源码快照 `ccad3e67` 与后续不可变快照均已保存。2026-10-14 用户已恢复 GPU 工作；各项运行绑定自己的不可变源，不互换。统一门禁当前缺 MBS、SkillDreamer、SOAR 三篇回执，另有课程新数值核心待重测、三种子结果待整合。门禁缺项数不等于全部剩余任务数。本表不代表 19 篇通过最终验收；registry、单测和提交不能替代 [GPU TODO](../research-audits/oct13-gpu-todo.md) 中的实际验证。
+原源码快照 `ccad3e67` 与后续不可变快照均已保存。2026-10-14 用户已恢复 GPU 工作；各项运行绑定自己的不可变源，不互换。统一门禁当前缺MBS、SkillDreamer、SOAR三篇已提交回执；SOAR首seed真实结果正在摘录，课程修后五臂/多种子未完成。门禁缺项数不等于全部剩余任务数。本表不代表19篇通过最终验收；registry、单测和提交不能替代[GPU TODO](../research-audits/oct13-gpu-todo.md)中的实际验证。
 
-本地目录/原图合同、基础 wheel 安装及文档严格构建已通过；数值修复前完整回归 2372 项通过，新数值合同和相关检查 116 项通过；最新修复快照仍在完整回归。远端 CI 尚未触发。详见[本地收口检查点](../research-audits/oct13-local-closeout.md)。
+本地目录/原图合同、基础wheel安装及文档严格构建已通过；`5c863ab8`稳定快照完整回归2474项通过、24warnings、285.02秒。后续新增摘录器/observer/结果须再补适当检查，不把该次检查冒充后续代码或GPU门禁通过。远端CI尚未触发。详见[本地收口检查点](../research-audits/oct13-local-closeout.md)。
 
 UxSID 的一次 CPU 诊断使用固定公开 SmolLM2-135M 属性编码器、100 用户、10,719 条训练、100 条 validation 和 100 条 test、1 epoch/seed 42。Validation 选择的是 `agnostic` 消融；UxSID 的 test AUC 为 0.5848，对照为 0.5916。这是小规模负结果，保留在本地运行产物，不代表原论文或稳定能力比较。其缓存与直接计算最大差异为 0。
 
