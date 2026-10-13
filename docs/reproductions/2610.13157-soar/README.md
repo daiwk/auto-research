@@ -66,7 +66,7 @@ $R_{\rm mat}=\mathbf1[\operatorname{Verify}(y,\mathcal E_{C_y})]$，仅检查声
 
 ### 数据与标签访问协议
 
-公开checkpoint/data必须固定revision并通过既有 `checkpoint_source` / `validate_holdout` 的文件hash验证。本轮SOAR队列使用明确派生的**工具文档属性QA训练诊断**，不在不匹配的WikiText+GSM上宣称知识QA效果。Actor及冻结reference都用Qwen2.5-0.5B-Instruct revision `7ae557604adf67be50417f59c2c2f167def9a775`，SOAR无需装载7B teacher。参考答案只由独立训练奖励/离线scorer读取，agent消息只含问题与真实工具返回的文档，不接收当前题gold/plan。
+公开checkpoint/data必须固定revision并通过既有 `checkpoint_source` / `validate_holdout` 的文件hash验证。本轮SOAR队列使用明确派生的**工具文档属性QA训练诊断**，不在不匹配的WikiText+GSM上宣称知识QA效果。旧6a两臂Actor/reference为Qwen2.5-0.5B-Instruct；最新完整seed42两臂明确使用已缓存Qwen2.5-7B-Instruct revision `bb46c15ee4bb56c5b63245ef50fd7637234d6f75`，policy与冻结reference同一公开checkpoint，并非另一个teacher生成证据。参考答案只由独立训练奖励/离线scorer读取，agent消息只含问题与真实工具返回的文档，不接收当前题gold/plan。
 
 独立KB来自[固定公开EcoAgent catalog](https://github.com/Elliotes/EcoAgent/blob/bc5db40a20b254c5249401d2220ea71b06c86a5c/data/processed/tools_clean_with_reliability.csv)，revision为 `bc5db40a20b254c5249401d2220ea71b06c86a5c`，原CSV SHA-256为 `1b388d317aeb1004c266eb65ff64a4864e7907412a2fbfb4667c492a871e8d8e`。`scripts/prepare_soar_catalog_qa.py`先封存全部5,172个tool的原始名称、UID、来源、URL、标签和说明（8,394个不超过900字符的连续片段），不使用reliability/quality分数、train_pairs或任何测试标签。之后才按tool UID固定hash分组，生成8条train和4条validation属性问题；两组tool不重叠，查询属性为catalog UID或文档URL。所有问题共享事先封存的完整KB，因此是共享知识库内的检索/来源流诊断，不是未知知识库泛化。
 
@@ -76,11 +76,12 @@ $R_{\rm mat}=\mathbf1[\operatorname{Verify}(y,\mathcal E_{C_y})]$，仅检查声
 
 ### 可执行入口与预算
 
-入口为 `scripts/run_oct13_post_training.py --method soar`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student镜像路径及public id/revision、派生train/validation路径、split manifest、dataset revision与独立KB来源。下面是待实跑配置示例，不表示GPU已完成：
+入口为 `scripts/run_oct13_post_training.py --method soar`，adapter则从数据目录读取 `oct13_execution.json`。必须提供policy镜像路径及public id/revision、派生train/validation路径、split manifest、dataset revision与独立KB来源。下面为最新完整seed42路径的配置示例，目录变量需指向已核验的公开资源：
 
 ```bash
 PYTHONPATH=src python scripts/run_oct13_post_training.py \
-  --method soar --config data/oct13_execution.json \
+  --method soar --config data/oct14_execution-soar7b-full-v1.json \
+  --student-path "$POLICY" --student-id Qwen/Qwen2.5-7B-Instruct --student-revision bb46c15ee4bb56c5b63245ef50fd7637234d6f75 \
   --device cuda --seed 42 --train-examples 8 --group 4 --max-turns 3 --max-tokens 256 --steps 4 --verifier normalized-em --variant source-consistent --corpus-path "$CORPUS" --corpus-id Elliotes/EcoAgent --corpus-revision bc5db40a20b254c5249401d2220ea71b06c86a5c \
   --output runs/oct13/soar-42
 ```
@@ -101,7 +102,18 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [57b 7B训练-only格式探针](metrics/public-a100-train-format-probe-seed42-57b2314d.json)实际执行34.61秒，明确使用已缓存固定Qwen2.5-7B-Instruct，原SYSTEM/parse/reward不变，原序4train×2episodes、最多3turn/cap256、wall300s。8episodes均首turn被原parser判invalid且没有截断，0search/format/source_match/answer，433tokens；没有LoRA/optimizer、validation或test读取/评估，不签整方法GPU回执。
 
-此probe仅记录响应text SHA，没有保存原text/token IDs，不能引述原响应或把提示歧义猜成这8次实际失败原因。更大模型未提供格式信号；没有静默替换正式policy、降低parser门槛或追加预算。旧两奖励臂失败保持，整方法实际非零策略更新与完整多seed计划仍未完成。
+此旧probe仅记录响应text SHA，没有保存原text/token IDs，不能引述原响应或把提示歧义猜成这8次实际失败原因。该次更大模型未提供格式信号，旧两奖励臂与探针失败保持，不以新结果覆盖。后续明确两种合法source模板并增加真实响应追踪，原parser/reward门槛不变。
+
+### 修后固定7B完整机制：seed42两个奖励臂
+
+[完整两臂native结果](metrics/public-a100-complete-seed42-b9086275.json)和[脱敏GPU回执](../../gpu-validations/soar-a100-20261014-seed42.json)绑定真实A100、`b9086275`的54源码SHA、固定公开7B文件及配置canonical SHA `5ee7cfb10fe21078104f439a8de1bf48a528a10a138d08bd26ccbf030b1185a3`。两个臂从相同checkpoint/seed/data初始化，冻结初始4validation指标完全一致。原4steps×4轨迹、3turn、cap256不增。
+
+| seed42臂 | 真实LoRA更新 | 等值奖励组跳过 | validation准确率 | 来源一致性 | 格式合规 | 整次生成tokens | 实际秒数 |
+| --- | ---: | ---: | --- | --- | --- | ---: | ---: |
+| source-consistent | 4 | 0 | 0→0.25 | 0.25→0.50 | 0.50→0.50 | 1,362 | 87.913 |
+| without-source-reward | 3 | 1 | 0→0.25 | 0.25→0.25 | 0.50→0.50 | 1,366 | 85.928 |
+
+无来源奖励臂第1组四轨迹的格式奖励均为1/6，优势精确为零，未执行optimizer；来源臂同组因真实source-match差异产生不同奖励和非零梯度。其余真实更新、零组、policy搜索/隔离recall、reference KL及所有生成/评分成本均保留，不强制优势。四条validation下的来源差异不宣称稳定相对能力提升；两variants不算两个seeds。默认43/44两臂尚未执行，当前单seed机制回执不代表本批或原benchmark完整验收。
 
 ### 代码映射
 
@@ -113,5 +125,5 @@ algorithm.py：双stream、EM、真实文本index及reward；checkpoint.py：pol
 
 小lexical index替代E5/Wikipedia基础设施，不替代source policy/reward。原文未释放EM normalization代码，本地明示词边界匹配；不把它冒充GPT-5.6-Sol fabrication指标。工具文档属性QA不是RATED官方tool-selection test，也不是SOAR七个知识QA benchmark；共享KB下的tool-group隔离不等于未知KB泛化。不能制造来源文本或用参考答案冒充evidence。
 
-仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+完整seed42两臂已实际执行并提交源绑定回执；仍需默认43/44两臂和全局同步/CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

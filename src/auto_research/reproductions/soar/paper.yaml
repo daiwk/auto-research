@@ -59,6 +59,6 @@
     ],
     "infer_device_capabilities": false,
     "requires_gpu_validation": true,
-    "gpu_validation_artifact": "docs/gpu-validations/soar-a100-20261013.json"
+    "gpu_validation_artifact": "docs/gpu-validations/soar-a100-20261014-seed42.json"
   }
 }
