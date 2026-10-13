@@ -69,7 +69,7 @@ GPPO 和 TAPO 与已有的其他论文缩写重名，本轮使用 `gppo-framewor
 
 UxSID 的一次 CPU 诊断使用固定公开 SmolLM2-135M 属性编码器、100 用户、10,719 条训练、100 条 validation 和 100 条 test、1 epoch/seed 42。Validation 选择的是 `agnostic` 消融；UxSID 的 test AUC 为 0.5848，对照为 0.5916。这是小规模负结果，保留在本地运行产物，不代表原论文或稳定能力比较。其缓存与直接计算最大差异为 0。
 
-新增标签访问的角色复核：`proximal_checkpoint` 与 `state_opd/checkpoint` 的参考答案只进入独立 verifier；`ArithmeticEnvironment` 的 `arguments.answer` 是模型自己的提交，不是参考答案。生成器/教师消息均不接收数据参考答案，行为测试覆盖此边界。环境步数计数仅反映实际 `step` 调用，不独立作为任务能力证据。
+新增标签访问的角色复核：`proximal_checkpoint` 与 `state_opd/checkpoint` 的参考答案只进入独立 verifier；`ArithmeticEnvironment` 的 `arguments.answer` 是模型自己的提交，不是参考答案。上述被评估策略消息不接收参考答案，行为测试覆盖此边界。SynthSelf 的离线 aligner 与独立 self-builder 则按论文训练构造角色读取 train gold；不能把其构造生成与无 gold 的 student 评估推理混称。环境步数计数仅反映实际 `step` 调用，不独立作为任务能力证据。
 
 A100 原有四篇实跑已产生绑定 `7e125fd0` 的脱敏 GPU receipt；新快照验证启动时 SSH 在认证代理阶段关闭连接，不能宣称任务已启动。大资源传输中断保留断点；旧结果不覆盖新路径。用户已批准三个分领域实现代理，以及本轮相关源码/脚本和固定版本公开资源的同步，新增资源总量不超过 20 GB；不传私有数据、密钥或整个工作区。
 

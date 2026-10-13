@@ -210,6 +210,10 @@ def result_payload(method, config, seed, split, policy, ledger, baseline, after,
             "dataset": split, "checkpoint": policy.provenance, "baseline": baseline,
             "method_metrics": after, "training": training, "cost": ledger.to_dict(),
             "protocol": {"test_opened": False, "gold_in_student_generation": False,
+                         "gold_in_student_generation_scope": "evaluated_student_inference_only",
+                         "training_construction_roles_with_gold":
+                             ["offline_aligner", "construction_self_rewrite"] if method == "synthself" else [],
+                         "comparison_kind": "matched_budget_control" if method == "upturn" else "before_after_training",
                          "train_examples": config.get("train_examples", 8),
                          "validation_examples": config.get("validation_examples", 4),
                          "max_tokens": config.get("max_tokens", 512)}, **extra}
@@ -244,8 +248,9 @@ def adapter_run(method, dataset_dir, seed):
 
 
 def render_result(result):
+    baseline_label, method_label = ("匹配预算对照 validation", "训练后干预策略 validation") if result["method"] == "upturn" else ("训练前 validation", "训练后 validation")
     return (f"# {result['method']} 本地执行\n\n"
             "公开checkpoint上的小预算机制诊断；不是原benchmark复现或正式能力比较。\n\n"
             f"Seed：{result['seed']}；权重/头部更新：{result.get('parameters_changed', False)}。\n\n"
-            f"训练前 validation：{result['baseline']}\n\n训练后 validation：{result['method_metrics']}\n\n"
+            f"{baseline_label}：{result['baseline']}\n\n{method_label}：{result['method_metrics']}\n\n"
             f"真实预算：{result.get('cost',result.get('sampling',result.get('protocol')))}\n\n不读取官方test，失败和零优势组保留。\n")
