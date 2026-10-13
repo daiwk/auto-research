@@ -15,6 +15,8 @@ def test_dashboard_dataset_label_does_not_dump_revision_manifest():
     assert _dataset_name('', {'dataset': {'name': 'CIFAR-10'}}) == 'CIFAR-10'
     assert _dataset_name('', {'dataset': {'public_id': 'xiaowu0162/longmemeval-cleaned',
                                          'revision': 'fixed-revision'}}) == 'xiaowu0162/longmemeval-cleaned'
+    assert _dataset_name('raw manifest', {'dataset': {'source_id': 'openai/grade-school-math',
+                                                     'source_revision': 'fixed'}}) == 'openai/grade-school-math'
     assert _dataset_name('legacy-dataset', {}) == 'legacy-dataset'
     assert _dataset_name('', {'benchmark': 'public-benchmark'}) == 'public-benchmark'
 

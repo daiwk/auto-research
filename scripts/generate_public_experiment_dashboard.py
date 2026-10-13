@@ -78,7 +78,7 @@ def _dataset_name(row_dataset: str, payload: dict[str, Any]) -> str:
         if isinstance(live_protocol, dict):
             dataset = live_protocol.get("dataset")
     if isinstance(dataset, dict):
-        name = dataset.get("id") or dataset.get("name") or dataset.get("public_id")
+        name = dataset.get("id") or dataset.get("name") or dataset.get("public_id") or dataset.get("source_id")
         if name:
             return str(name)
     elif isinstance(dataset, str) and dataset:

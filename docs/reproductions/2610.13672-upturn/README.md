@@ -99,6 +99,10 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 小 reasoner 同样使用旧段落协议：上述全零仅对应旧采样切点，不能代表修后完整候选切点集合。修后7B的train-only诊断已冻结 `51b4718a`，等待GPU槽，只查gate/段落/rescue信号，不签整方法回执。
 
+### 修后训练集诊断
+
+2026-10-14 修后 [51b训练-only诊断](metrics/public-a100-train-diagnosis-seed42-51b4718a.json) 实际运行118.51秒：32train rollouts中16判正、16个eligible failed，实际cut数3–9；gate24train/8cal、20epochs，两个position组救援奖励分别[0,0,0.5,0]/[0.5,0,0.5,0]，均真实非零优势及更新（梯度norm0.3747/0.3696），不再是熵-only变化。frozen reasoner生成7556、rescue2547tokens，encoder32calls/11220含prompt inputtokens。0LoRA、0validation/test评估，`whole_method_gpu_validation_passed: false`、不是回执；修复后的完整gate/correction与同上限基线评估另跑，尚不能据探针宣称能力收益或完成多seed计划。
+
 ### 代码映射
 
 algorithm.py：真实MLP、cut loss、gate、新user turn及预算；checkpoint.py：failure/head训练和matched maximum-budget推理。

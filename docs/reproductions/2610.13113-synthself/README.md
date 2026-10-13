@@ -100,6 +100,10 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 旧gold不带EOS/rewrite带自然EOS的口径与修后完整响应协议不同，不能择口径求通过。32f修复保留sequence SUM/严格不等式，并要求rewrite自然终止且单EOS；截断或缺终止只记partial诊断、quality0，阻塞selection/SFT。显式train-only诊断入口已冻结 `51b4718a`，不评估validation、不执行LoRA，尚待新GPU槽，不替代整方法GPU验收。
 
+### 修后训练集诊断
+
+2026-10-14 修后 [51b训练-only诊断](metrics/public-a100-train-diagnosis-seed42-51b4718a.json) 已实际运行59.24秒：8aligner/8self均按预声明完整响应EOS口径处理，aligner全部自然终止；gold full-sequence SUM NLL79.45413、rewrite76.84698，quality1.0>0.75，严格Eq6成立。gold增加自然响应边界的canonical EOS后口径与旧69.12545不同，不把端点口径修正称为模型能力提升。生成659+857tokens、scored770+659tokens；0LoRA/SFT、0validation/test评估，明确 `not_gpu_receipt` / `whole_method_gpu_validation_passed: false`。整方法完整SFT及paired gold-SFT控制已另获授权，必须等其实际结果，不能用此探针签通过。
+
 ### 代码映射
 
 algorithm.py：构建prompt、family/size及Eq6合同；checkpoint.py：rewrite/拒绝/真实LoRA SFT、双评测和对照。
