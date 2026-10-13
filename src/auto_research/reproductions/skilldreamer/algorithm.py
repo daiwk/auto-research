@@ -123,10 +123,19 @@ def capability_context(goal: str, observations: list[str], candidates: list[Skil
     return (checkpoint + "Task: " + goal + "\nObserved execution history: " + json.dumps(observations)
             + "\nCandidate skill metadata: " + json.dumps(metadata)
             + "\nLoaded verified gallery skill procedures: " + json.dumps(loaded)
-            + "\nBefore the next action output SUBGOAL, EVIDENCE, CAPABILITY, DECISION and NEXT on five lines. "
+            + "\nBefore the next action output exactly five nonempty assessment lines in LABEL: value format, "
+            "in this order: SUBGOAL, EVIDENCE, CAPABILITY, DECISION, NEXT. Every label needs its colon and "
+            "a nonempty value on the same line. DECISION must start with exactly one of MATCH, PARTIAL_MATCH, "
+            "NO_MATCH, NO_CAPABILITY_GAP; you may follow that first word with a reason. "
             "Reassess capability from unresolved evidence, not from a tool already chosen. For MATCH or "
             "PARTIAL_MATCH choose a candidate skill_id to load before acting. Otherwise use skill_id=null. "
-            'Then output JSON: {"skill_id":null,"tool":"calculator","arguments":{"expression":"..."}} '
+            "Fill this placeholder-only template with your actual assessment, not the placeholder text:\n"
+            "SUBGOAL: <current unresolved subgoal>\n"
+            "EVIDENCE: <observed evidence>\n"
+            "CAPABILITY: <required capability>\n"
+            "DECISION: <one allowed decision value, optionally followed by a reason>\n"
+            "NEXT: <next bounded action>\n"
+            'After these five lines, output one JSON object: {"skill_id":null,"tool":"calculator","arguments":{"expression":"..."}} '
             'or {"skill_id":null,"tool":"finish","arguments":{"answer":"..."}}. '
             "Do not search/install/create skills; use only the fixed candidates. Pseudo skills are not available here.")
 
