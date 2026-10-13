@@ -104,7 +104,21 @@ staged实际transition为new-best/keep/advance/new-best，第4step进入B2；未
 
 [旧6a/51b数值负审计](metrics/public-legacy-curriculum-numerical-negative.json)保留原raw/status/实际optimizer calls：float32均值舍入后，数学等值[1.2×8]/[0.2×8]被归一化成伪非零advantage。A30 unfiltered42有12/32、static42有3/8此类更新；unfiltered43有13/32、static43有2/8。不能放宽容差、删掉伪更新后重新合算passed，也不能把参数变化当真实reward学习信号。
 
-旧A10042三臂8/9/11和A30fixed43 6次更新未发现等值奖励组，但不验证修复后的完整五臂路径。旧A100三臂未执行static和unfiltered；旧A30两controls不作为修后positive证据。旧staged43/B543已定向中止并保留partial/log，五个旧seed44未启动。b908修复后，新A30 unfiltered42已完成：13个等值奖励组全部跳过更新，19次真实奖励差异更新；其余四个seed42臂正在运行，修复后的43/44五臂仍待执行。不同A100/A30/framework基线不作paired能力比较。
+旧A10042三臂8/9/11和A30fixed43 6次更新未发现等值奖励组，但不验证修复后的完整五臂路径。旧A100三臂未执行static和unfiltered；旧A30两controls不作为修后positive证据。旧staged43/B543已定向中止并保留partial/log，五个旧seed44未启动。不同A100/A30/framework基线不作paired能力比较。
+
+### 数值修复后的完整五臂seed42阶段
+
+[新A30五臂seed42 native](metrics/public-a30-complete-five-arms-seed42-b9086275.json)绑定真实B908核心、92c独立观察器、固定公开0.5B/GSM及同配置SHA `96a8984e…`；五臂同设备、同seed初始validation均0.25。13/4个等值奖励组在unfiltered/static中全部精确跳过，拒绝组与零组均留在成本/审计中，不把variants当seeds。
+
+| seed42臂 | 真更新 | 等值组跳过 | validation初始→结束 | 实际秒数 |
+| --- | ---: | ---: | --- | ---: |
+| unfiltered | 19 | 13 | 0.25→0.50 | 606.797 |
+| static | 4 | 4 | 0.25→0.25 | 685.419 |
+| fixed-medium | 7 | 0 | 0.25→0.50 | 636.150 |
+| staged | 10 | 0 | 0.25→0.00 | 673.666 |
+| too-hard | 10 | 0 | 0.25→0.50 | 658.040 |
+
+staged退化到0真实保留；这个tiny B5仍有10次有效更新，不冒称零更新或原文退化复现。allocator实测峰值由观察器记录，不把单点显存读数当峰值。该文件是单seed阶段测量，不是三seedGPU回执；原42/43/44×五臂计划继续执行，完成后另核15个实际run签新源回执，不复用旧6a/51b证明。并行elapsed不比较吞吐，仍仅L1诊断。
 
 ### 代码映射
 

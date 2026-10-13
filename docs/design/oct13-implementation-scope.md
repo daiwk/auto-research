@@ -62,10 +62,11 @@ GPPO 和 TAPO 与已有的其他论文缩写重名，本轮使用 `gppo-framewor
 | SmolWAM | `2b84c377` A100 三 seed 均完成 teacher KD、两布局课程及新学生同初态闭环；24 次真实更新，学生与 no-op 均零成功，源码/原始文件/新权重绑定独立核验通过 | 全局 CI；旧 adapter 输入失败保留，缩放单任务诊断不是正式能力或原规模复现 |
 | SynthSelf / Progressive contraction | 完整42/43/44 native和独立回执已从实际raw复算并保存。SynthSelf seed43 retention为0，Contraction三seed均与full-SFT相同，负结果保留 | 最终整批目录与CI；不宣称稳定能力提升或总计算节省 |
 | UPTURN | 完整42/43有真实救援信号，44救援优势全0、只有熵梯度，保持failed-no-rescue-signal。失败native与完整执行cohort已核验保存 | 最终整批同步与CI；不生成三种子全通过回执、不为通过挑预算 |
-| MagicBeanStalk / SOAR | b908响应trace已独立核验：MBS子题欠条件/teacher算错，仍无后代；SOAR已形成检索与有效格式。7B SOAR首seed两臂完整训练有4/3次真实更新，验证accuracy两臂均0→.25 | MBS通用自包含说明冻结5c后同预算重测；SOAR原始结果摘录与后续种子待收口。不放宽验证器、猜旧响应或用参数变化替代有效训练 |
-| 难度课程 | `b9086275` A30首seed五臂已完成unfiltered/static/fixed三臂；等值奖励组均正确跳过，真实有效更新19/4/7。旧数值负证据与中断已保存 | staged/too-hard首seed及43/44待真实执行核验；不筛掉错误组冒充整批通过 |
+| MagicBeanStalk | b908子题欠条件/teacher算错，5c与773的真实教师JSON仍非法；三次均无合格后代/无RL更新，失败与成本保留 | 基于原文序列化wrapper修复格式约束后须新冻结、真实重跑；不放宽验证器、猜旧响应或用参数变化替代有效训练 |
+| SOAR | `b9086275` A100默认42/43/44×两臂六个实际run已逐字段复算；方法12次、消融10次真更新，消融43准确率0保留；独立三seed回执已保存 | 最终整批目录与CI；仅4条validation/seed的L1机制诊断，不是稳定能力或原benchmark复现 |
+| 难度课程 | `b9086275` A30首seed五臂已全部独立复算：有效更新19/4/7/10/10，等值组精确跳过，staged准确率0与too-hard非零更新均保留 | 修后43/44五臂正在执行，全部15个实际run完成后才签新三种子回执；不筛掉错误组冒充整批通过 |
 
-原源码快照 `ccad3e67` 与后续不可变快照均已保存。2026-10-14 用户已恢复 GPU 工作；各项运行绑定自己的不可变源，不互换。统一门禁当前缺MBS、SkillDreamer、SOAR三篇已提交回执；SOAR首seed真实结果正在摘录，课程修后五臂/多种子未完成。门禁缺项数不等于全部剩余任务数。本表不代表19篇通过最终验收；registry、单测和提交不能替代[GPU TODO](../research-audits/oct13-gpu-todo.md)中的实际验证。
+原源码快照 `ccad3e67` 与后续不可变快照均已保存。2026-10-14 用户已恢复 GPU 工作；各项运行绑定自己的不可变源，不互换。统一门禁当前缺MBS、SkillDreamer两篇已提交回执；课程修后五臂/多种子未完成。门禁缺项数不等于全部剩余任务数。本表不代表19篇通过最终验收；registry、单测和提交不能替代[GPU TODO](../research-audits/oct13-gpu-todo.md)中的实际验证。
 
 本地目录/原图合同、基础wheel安装及文档严格构建已通过；`5c863ab8`稳定快照完整回归2474项通过、24warnings、285.02秒。后续新增摘录器/observer/结果须再补适当检查，不把该次检查冒充后续代码或GPU门禁通过。远端CI尚未触发。详见[本地收口检查点](../research-audits/oct13-local-closeout.md)。
 

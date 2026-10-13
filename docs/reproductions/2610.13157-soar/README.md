@@ -11,7 +11,7 @@
 | Adapter | `soar` |
 | 本地复现代码 | [`src/auto_research/reproductions/soar/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/soar/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
-| GPU门禁 | 必须真实A100/A30执行并提交绑定源码的脱敏回执；未取得者仍未验收 |
+| GPU门禁 | 已完成真实A100三种子×两臂核心执行：[新源绑定回执](../../gpu-validations/soar-a100-20261014-seeds42-44.json)；仅L1，不是原benchmark验收 |
 
 ## 原始论文总结
 
@@ -76,14 +76,56 @@ $R_{\rm mat}=\mathbf1[\operatorname{Verify}(y,\mathcal E_{C_y})]$，仅检查声
 
 ### 可执行入口与预算
 
-入口为 `scripts/run_oct13_post_training.py --method soar`，adapter则从数据目录读取 `oct13_execution.json`。必须提供policy镜像路径及public id/revision、派生train/validation路径、split manifest、dataset revision与独立KB来源。下面为最新完整seed42路径的配置示例，目录变量需指向已核验的公开资源：
+入口为 `scripts/run_oct13_post_training.py --method soar`，adapter则从数据目录读取 `oct13_execution.json`。必须提供policy镜像路径及public id/revision、派生train/validation路径、split manifest、dataset revision与独立KB来源。本次审计中的`oct14_execution-soar7b-full-v1.json`是缓存配置名，**不是仓库已提交的配置文件**，runner不会自动创建它。
+
+新用户可将下面最小模板保存为`data/soar-local.json`，先准备固定revision且带hash/provenance清单的公开checkpoint镜像，修改`student_path`为自己的已核验目录。模板只是新运行路径示例，不含本机路径；不能据此重算或重绑历史配置SHA `5ee7cfb1…`及已测回执。
+
+```json
+{
+  "shared": {
+    "student_path": "data/public/qwen2.5-7b-instruct",
+    "student_id": "Qwen/Qwen2.5-7B-Instruct",
+    "student_revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "device": "cuda",
+    "context_limit": 4096,
+    "learning_rate": 0.00001
+  },
+  "methods": {
+    "soar": {
+      "train_path": "data/soar-catalog-qa/train.jsonl",
+      "validation_path": "data/soar-catalog-qa/validation.jsonl",
+      "split_manifest": "data/soar-catalog-qa/split.json",
+      "dataset_revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+      "corpus_path": "data/soar-catalog-qa/kb",
+      "corpus_id": "Elliotes/EcoAgent",
+      "corpus_revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+      "train_examples": 8,
+      "validation_examples": 4,
+      "steps": 4,
+      "group": 4,
+      "max_turns": 3,
+      "max_tokens": 256,
+      "verifier": "normalized-em",
+      "variant": "source-consistent"
+    }
+  }
+}
+```
+
+使用上文固定revision/SHA的原catalog文件（`CATALOG`指向该文件），可由真实setup生成模板引用的QA分区和KB；目标目录须为新目录，不读取官方test：
+
+```bash
+PYTHONPATH=src python scripts/prepare_soar_catalog_qa.py \
+  --catalog "$CATALOG" --output data/soar-catalog-qa
+```
+
+保存配置、准备公开镜像及数据后，再运行：
 
 ```bash
 PYTHONPATH=src python scripts/run_oct13_post_training.py \
-  --method soar --config data/oct14_execution-soar7b-full-v1.json \
-  --student-path "$POLICY" --student-id Qwen/Qwen2.5-7B-Instruct --student-revision bb46c15ee4bb56c5b63245ef50fd7637234d6f75 \
-  --device cuda --seed 42 --train-examples 8 --group 4 --max-turns 3 --max-tokens 256 --steps 4 --verifier normalized-em --variant source-consistent --corpus-path "$CORPUS" --corpus-id Elliotes/EcoAgent --corpus-revision bc5db40a20b254c5249401d2220ea71b06c86a5c \
-  --output runs/oct13/soar-42
+  --method soar --config data/soar-local.json \
+  --device cuda --seed 42 --variant source-consistent \
+  --output runs/soar-local/source-consistent-42
 ```
 
 对照仅将variant改为 `without-source-reward`，重新从同一checkpoint和seed初始化，保持同一数据、4 steps、4轨迹/组、3 turns和256 token响应上限。两臂各最多36,864个生成token（含内部recall与前后评估），这是配置上界，不是已测成本或FLOPs。真实模型必须产生search并读取公开说明；零检索、无有效来源匹配或零优势不得包装成来源选择能力验证。
@@ -113,7 +155,19 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 | source-consistent | 4 | 0 | 0→0.25 | 0.25→0.50 | 0.50→0.50 | 1,362 | 87.913 |
 | without-source-reward | 3 | 1 | 0→0.25 | 0.25→0.25 | 0.50→0.50 | 1,366 | 85.928 |
 
-无来源奖励臂第1组四轨迹的格式奖励均为1/6，优势精确为零，未执行optimizer；来源臂同组因真实source-match差异产生不同奖励和非零梯度。其余真实更新、零组、policy搜索/隔离recall、reference KL及所有生成/评分成本均保留，不强制优势。四条validation下的来源差异不宣称稳定相对能力提升；两variants不算两个seeds。默认43/44两臂尚未执行，当前单seed机制回执不代表本批或原benchmark完整验收。
+无来源奖励臂第1组四轨迹的格式奖励均为1/6，优势精确为零，未执行optimizer；来源臂同组因真实source-match差异产生不同奖励和非零梯度。其余真实更新、零组、policy搜索/隔离recall、reference KL及所有生成/评分成本均保留，不强制优势。四条validation下的来源差异不宣称稳定相对能力提升；两variants不算两个seeds。以上单seed阶段记录保留，下面是随后完整三seed结果，不覆写原raw或单seed回执。
+
+### 完整默认三种子×两臂：实际核心执行完成
+
+[三seed native](metrics/public-a100-complete-seeds42-44-b9086275.json)与[新独立回执](../../gpu-validations/soar-a100-20261014-seeds42-44.json)逐项绑定六个实际run、同一`b9086275`/配置`5ee7cfb1…`/公开checkpoint与catalog。三个种子各自重新初始化，同seed两臂初始指标一致；没有用variants冒充seeds，没有看test或调reward/parser/cap。
+
+| seed | source奖励更新 / no-source更新 | source奖励准确率 / no-source准确率 | source奖励来源一致性 / no-source来源一致性 |
+| --- | --- | --- | --- |
+| 42 | 4 / 3 | 0.25 / 0.25 | 0.50 / 0.25 |
+| 43 | 4 / 4 | 0.25 / 0.00 | 0.25 / 0.25 |
+| 44 | 4 / 3 | 0.50 / 0.25 | 0.50 / 0.25 |
+
+方法/消融validation准确率mean±样本std为0.3333±0.1443 / 0.1667±0.1443，来源一致性为0.4167±0.1443 / 0.25±0（各n=3，每seed仅4validation）。消融43准确率0及42/44各一个零优势组均保留。方法12次、消融10次真实策略更新；实际生成与评分成本不相等，不从wall时间推吞吐收益。这完成本方法缩小预算下的默认种子核心计划，不代表整个批次验收，也不把三种子L1诊断升级为稳定能力提升、生产A/B或原七QA基准。
 
 ### 代码映射
 
@@ -125,5 +179,5 @@ algorithm.py：双stream、EM、真实文本index及reward；checkpoint.py：pol
 
 小lexical index替代E5/Wikipedia基础设施，不替代source policy/reward。原文未释放EM normalization代码，本地明示词边界匹配；不把它冒充GPT-5.6-Sol fabrication指标。工具文档属性QA不是RATED官方tool-selection test，也不是SOAR七个知识QA benchmark；共享KB下的tool-group隔离不等于未知KB泛化。不能制造来源文本或用参考答案冒充evidence。
 
-完整seed42两臂已实际执行并提交源绑定回执；仍需默认43/44两臂和全局同步/CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+默认42/43/44两臂已实际执行并提交独立源绑定三seed回执；仍需全局同步/CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

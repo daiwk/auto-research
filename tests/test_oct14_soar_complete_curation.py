@@ -107,3 +107,71 @@ def test_complete_soar_rejects_mismatched_or_fabricated_evidence(tmp_path,case):
     (d/"launch.json").write_text(json.dumps(l))
     (d/"exit.json").write_text(json.dumps(e))
     with pytest.raises(ValueError):MODULE["curate"](directories,contract,audit,config)
+
+
+def three_fixtures(tmp_path):
+    directories=[]
+    for seed in (42,43,44):
+        root=tmp_path/str(seed)
+        root.mkdir()
+        pair,contract,audit,config=fixture(root)
+        for d in pair:
+            raw=d/"evidence/result.json"
+            r=json.loads(raw.read_text());r["seed"]=seed;raw.write_text(json.dumps(r))
+            path=d/"launch.json"
+            l=json.loads(path.read_text());l["seed"]=seed
+            l["command"][l["command"].index("--seed")+1]=str(seed)
+            path.write_text(json.dumps(l))
+        directories.extend(pair)
+    return directories,contract,audit,config
+
+
+def test_three_seed_cpu_fixture_completes_only_reduced_scale_plan(tmp_path):
+    a,r=MODULE["curate_three"](*three_fixtures(tmp_path))
+    assert a["seeds"]==r["seeds"]==[42,43,44] and a["actual_cuda_run_count"]==6
+    assert a["default_three_seed_plan_completed"] is True
+    assert a["evaluation_protocol"]["formal_comparison"] is False
+    assert a["evaluation_protocol"]["promotion_eligible"] is False
+    assert all(m["n"]==3 for m in a["aggregate_metrics"].values())
+    assert len(r["all_sanitized_commands"])==len(a["provenance"]["raw_results_sha256"])==6
+    assert r["provenance"]["artifact_path"].endswith("soar-a100-20261014-seeds42-44.json")
+
+
+@pytest.mark.parametrize("case",["missing","duplicate","wrong-seed","failed-exit","zero-update","zero-gradient","nonfinite","budget","resource"])
+def test_three_seed_aggregate_never_hides_one_failed_or_wrong_arm(tmp_path,case):
+    directories,contract,audit,config=three_fixtures(tmp_path)
+    if case=="missing":directories.pop()
+    elif case=="duplicate":directories[-1]=directories[0]
+    elif case=="resource":audit["resources"]["student"]["verified"]=False
+    else:
+        d=directories[-1]
+        name="exit.json" if case=="failed-exit" else "launch.json" if case=="budget" else "evidence/result.json"
+        p=d/name
+        r=json.loads(p.read_text())
+        if case=="wrong-seed":r["seed"]=45
+        elif case=="failed-exit":r["exit_code"]=1
+        elif case=="zero-update":r["parameters_changed"]=False
+        elif case=="budget":r["effective_config"]["group"]=8
+        else:
+            step=next(s for s in r["training"] if s["optimizer_update_executed"])
+            if case=="zero-gradient":step["gradient_l2_norm"]=0.
+            else:step["loss"]=float("nan")
+        p.write_text(json.dumps(r))
+    with pytest.raises(ValueError):MODULE["curate_three"](directories,contract,audit,config)
+
+
+def test_actual_three_seed_soar_keeps_control43_negative_and_old42():
+    path=ROOT/"docs/reproductions/2610.13157-soar/metrics/public-a100-complete-seeds42-44-b9086275.json"
+    a=json.loads(path.read_text())
+    r=json.loads((ROOT/"docs/gpu-validations/soar-a100-20261014-seeds42-44.json").read_text())
+    assert a["seeds"]==r["seeds"]==[42,43,44] and a["actual_cuda_run_count"]==6
+    assert a["default_three_seed_plan_completed"] is True and a["evaluation_protocol"]["formal_comparison"] is False
+    assert a["seed_results"][0]==PUBLIC["seed_results"][0]
+    assert PUBLIC["seeds"]==RECEIPT["seeds"]==[42]
+    assert len(a["provenance"]["raw_results_sha256"])==6
+    assert [a["execution_checks"]["per_seed"][str(s)]["source-consistent"]["actual_optimizer_updates"] for s in (42,43,44)]==[4,4,4]
+    assert [a["execution_checks"]["per_seed"][str(s)]["without-source-reward"]["actual_optimizer_updates"] for s in (42,43,44)]==[3,4,3]
+    assert a["seed_results"][1]["variants"]["without-source-reward"]["method_metrics"]["accuracy"]==0.
+    assert a["aggregate_metrics"]["source-consistent.validation.accuracy"]["mean"]==pytest.approx(1/3)
+    assert a["aggregate_metrics"]["without-source-reward.validation.accuracy"]["mean"]==pytest.approx(1/6)
+    assert all(m["n"]==3 for m in a["aggregate_metrics"].values())

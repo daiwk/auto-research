@@ -45,6 +45,26 @@ def test_cpu_all_five_arms_replay_original_gate_and_schedule(variant):
     assert result["actual_optimizer_updates"]==(8 if variant=="static" else 32)
 
 
+def test_actual_five42_stage_keeps_zero_groups_negative_staged_and_incomplete_default_plan():
+    path=ROOT/"docs/reproductions/2610.13669-grpo-difficulty-curriculum/metrics/public-a30-complete-five-arms-seed42-b9086275.json"
+    a=json.loads(path.read_text())
+    assert a["seeds"]==[42] and a["actual_cuda_run_count"]==5
+    assert a["not_gpu_receipt"] is True and a["whole_method_gpu_validation_passed"] is False
+    assert a["default_three_seed_plan_completed"] is False
+    assert a["evaluation_protocol"]["variants_are_independent_seeds"] is False
+    assert a["evaluation_protocol"]["formal_comparison"] is False
+    rows=a["seed_results"][0]["variants"]
+    checks=a["execution_checks"]["42"]
+    assert [checks[v]["actual_optimizer_updates"] for v in ("unfiltered","static","fixed-medium","staged","too-hard")]==[19,4,7,10,10]
+    assert checks["unfiltered"]["mathematically_equal_reward_groups_skipped"]==13
+    assert checks["static"]["mathematically_equal_reward_groups_skipped"]==4
+    assert rows["staged"]["method_metrics"]["accuracy"]==0.
+    assert all(checks[v]["equal_reward_optimizer_updates"]==0 for v in MODULE["VARIANTS"])
+    assert len(a["provenance"]["raw_results_sha256"])==5
+    assert a["provenance"]["artifact_path"]==str(path.relative_to(ROOT))
+    assert all(MODULE["audit_training"](r)["actual_optimizer_updates"]==checks[v]["actual_optimizer_updates"] for v,r in rows.items())
+
+
 def test_equal_group_missing_advantages_is_recorded_not_fabricated_or_dropped():
     r=fixture()
     g=r["training"][0]["groups"][0]

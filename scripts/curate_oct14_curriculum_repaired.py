@@ -194,6 +194,8 @@ def curate(directories,contract,audit,config):
             "paired_with_old_A100_or_51b":False,"variants_are_independent_seeds":False,
             "concurrent_latency_comparison_eligible":False},
         "provenance":{"code_commit":COMMIT,"executed_source_sha256":contract["source_file_sha256"],
+            "artifact_path":"docs/reproductions/2610.13669-grpo-difficulty-curriculum/metrics/public-a30-complete-five-arms-"+
+                ("seed42" if seeds==[42] else "seeds42-44")+"-b9086275.json",
             "execution_config_sha256":hashlib.sha256(json.dumps(config,sort_keys=True).encode()).hexdigest(),
             "dataset_fingerprint":hashlib.sha256(json.dumps(rows[42,"unfiltered"]["dataset"],sort_keys=True).encode()).hexdigest(),
             "raw_results_sha256":{str(s)+"."+v:h for (s,v),h in hashes.items()}},

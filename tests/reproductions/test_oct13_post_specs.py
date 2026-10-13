@@ -25,7 +25,7 @@ def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,id
     assert spec.fidelity=="core_mechanism" and spec.evaluation_tier=="l1_mechanism"
     assert spec.execution["requires_gpu_validation"] is True
     receipt_date={k:"20261014" for k in ("state-opd","grpo-difficulty-curriculum","synthself","upturn","progressive-contraction","soar")}.get(key,"20261013")
-    suffix="-seeds42-44" if key in {"synthself","progressive-contraction"} else "-seed42" if key=="soar" else ""
+    suffix="-seeds42-44" if key in {"synthself","progressive-contraction","soar"} else ""
     assert spec.execution["gpu_validation_artifact"]==f"docs/gpu-validations/{key}-a100-{receipt_date}{suffix}.json"
     assert spec.evolve_operators==()
     doc=ROOT/spec.documentation
