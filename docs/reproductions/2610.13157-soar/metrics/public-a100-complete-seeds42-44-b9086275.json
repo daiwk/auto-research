@@ -77,7 +77,7 @@
           "training": [
             {
               "step": 1,
-              "loss": 1.862645149230957e-8,
+              "loss": 1.862645149230957e-08,
               "gradient_l2_norm": 0.8607359528541565,
               "optimizer_update_executed": true,
               "components": [
@@ -122,7 +122,7 @@
             },
             {
               "step": 2,
-              "loss": 0.000007048249244689941,
+              "loss": 7.048249244689941e-06,
               "gradient_l2_norm": 0.48065319657325745,
               "optimizer_update_executed": true,
               "components": [
@@ -167,7 +167,7 @@
             },
             {
               "step": 3,
-              "loss": 0.0000018961727619171143,
+              "loss": 1.8961727619171143e-06,
               "gradient_l2_norm": 0.6844468116760254,
               "optimizer_update_executed": true,
               "components": [
@@ -212,7 +212,7 @@
             },
             {
               "step": 4,
-              "loss": 0.000003069639205932617,
+              "loss": 3.069639205932617e-06,
               "gradient_l2_norm": 0.505620002746582,
               "optimizer_update_executed": true,
               "components": [
@@ -434,7 +434,7 @@
             },
             {
               "step": 3,
-              "loss": 0.000008553266525268555,
+              "loss": 8.553266525268555e-06,
               "gradient_l2_norm": 0.6897918581962585,
               "optimizer_update_executed": true,
               "components": [
@@ -479,7 +479,7 @@
             },
             {
               "step": 4,
-              "loss": 0.000007703900337219238,
+              "loss": 7.703900337219238e-06,
               "gradient_l2_norm": 0.6410939693450928,
               "optimizer_update_executed": true,
               "components": [
@@ -632,7 +632,7 @@
           "training": [
             {
               "step": 1,
-              "loss": 2.2351741790771484e-8,
+              "loss": 2.2351741790771484e-08,
               "gradient_l2_norm": 0.7413314580917358,
               "optimizer_update_executed": true,
               "components": [
@@ -677,7 +677,7 @@
             },
             {
               "step": 2,
-              "loss": 0.000006631016731262207,
+              "loss": 6.631016731262207e-06,
               "gradient_l2_norm": 0.45426371693611145,
               "optimizer_update_executed": true,
               "components": [
@@ -722,7 +722,7 @@
             },
             {
               "step": 3,
-              "loss": 0.000008121132850646973,
+              "loss": 8.121132850646973e-06,
               "gradient_l2_norm": 0.6185525059700012,
               "optimizer_update_executed": true,
               "components": [
@@ -767,7 +767,7 @@
             },
             {
               "step": 4,
-              "loss": 0.00000568293035030365,
+              "loss": 5.68293035030365e-06,
               "gradient_l2_norm": 0.5178316831588745,
               "optimizer_update_executed": true,
               "components": [
@@ -913,7 +913,7 @@
           "training": [
             {
               "step": 1,
-              "loss": 1.4901161193847656e-8,
+              "loss": 1.4901161193847656e-08,
               "gradient_l2_norm": 0.7703457474708557,
               "optimizer_update_executed": true,
               "components": [
@@ -958,7 +958,7 @@
             },
             {
               "step": 2,
-              "loss": 0.000003382563591003418,
+              "loss": 3.382563591003418e-06,
               "gradient_l2_norm": 0.41967129707336426,
               "optimizer_update_executed": true,
               "components": [
@@ -1003,7 +1003,7 @@
             },
             {
               "step": 3,
-              "loss": 0.000012055039405822754,
+              "loss": 1.2055039405822754e-05,
               "gradient_l2_norm": 1.0235438346862793,
               "optimizer_update_executed": true,
               "components": [
@@ -1048,7 +1048,7 @@
             },
             {
               "step": 4,
-              "loss": 0.00001230090856552124,
+              "loss": 1.230090856552124e-05,
               "gradient_l2_norm": 0.5682482719421387,
               "optimizer_update_executed": true,
               "components": [
@@ -1201,7 +1201,7 @@
           "training": [
             {
               "step": 1,
-              "loss": -1.4901161193847656e-8,
+              "loss": -1.4901161193847656e-08,
               "gradient_l2_norm": 0.5967000126838684,
               "optimizer_update_executed": true,
               "components": [
@@ -1246,7 +1246,7 @@
             },
             {
               "step": 2,
-              "loss": 0.000008031725883483887,
+              "loss": 8.031725883483887e-06,
               "gradient_l2_norm": 0.582801103591919,
               "optimizer_update_executed": true,
               "components": [
@@ -1291,7 +1291,7 @@
             },
             {
               "step": 3,
-              "loss": 0.000008031725883483887,
+              "loss": 8.031725883483887e-06,
               "gradient_l2_norm": 0.7851511836051941,
               "optimizer_update_executed": true,
               "components": [
@@ -1336,7 +1336,7 @@
             },
             {
               "step": 4,
-              "loss": 0.000004425644874572754,
+              "loss": 4.425644874572754e-06,
               "gradient_l2_norm": 0.6972299218177795,
               "optimizer_update_executed": true,
               "components": [
@@ -1527,7 +1527,7 @@
             },
             {
               "step": 2,
-              "loss": 0.000004798173904418945,
+              "loss": 4.798173904418945e-06,
               "gradient_l2_norm": 0.7705223560333252,
               "optimizer_update_executed": true,
               "components": [
@@ -1572,7 +1572,7 @@
             },
             {
               "step": 3,
-              "loss": 0.000008851289749145508,
+              "loss": 8.851289749145508e-06,
               "gradient_l2_norm": 1.082472562789917,
               "optimizer_update_executed": true,
               "components": [
@@ -2263,7 +2263,8 @@
     "promotion_eligible": false,
     "test_used_for_selection": false,
     "pending_seeds": [],
-    "variants_are_independent_seeds": false
+    "variants_are_independent_seeds": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
   },
   "provenance": {
     "code_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",

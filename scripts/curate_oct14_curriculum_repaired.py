@@ -190,6 +190,7 @@ def curate(directories,contract,audit,config):
         "aggregate_metrics":metrics,"dataset":rows[42,"unfiltered"]["dataset"],"checkpoint":rows[42,"unfiltered"]["checkpoint"],
         "execution_checks":{str(s):{v:checks[s,v] for v in sorted(VARIANTS)} for s in seeds},
         "evaluation_protocol":{"tier":"l1_mechanism","seeds":seeds,"formal_comparison":False,
+            "claim_policy":"single/few-seed smoke result; do not claim a stable improvement",
             "promotion_eligible":False,"test_used_for_selection":False,"within_A30_same_seed_arms_paired":True,
             "paired_with_old_A100_or_51b":False,"variants_are_independent_seeds":False,
             "concurrent_latency_comparison_eligible":False},
@@ -205,13 +206,74 @@ def curate(directories,contract,audit,config):
             "Matched configured budget is not matched realized updates/token cost; concurrency timing is not a throughput comparison."]}
 
 
+def curate_with_receipt(directories,contract,audit,config,observer_contract):
+    """Only all fifteen independently validated repaired runs may be signed."""
+    from auto_research.gpu_validation import validate_gpu_receipt
+    artifact=curate(directories,contract,audit,config)
+    if (artifact["seeds"]!=[42,43,44] or artifact["actual_cuda_run_count"]!=15
+        or artifact["default_three_seed_plan_completed"] is not True
+        or artifact["all_seed_arm_mechanisms_or_negative_controls_accepted"] is not True
+        or observer_contract["source_commit"]!=OBSERVER
+        or observer_contract["source_file_sha256"]!={"scripts/observe_oct14_cuda_memory.py":OBSERVER_SHA}):
+        raise ValueError("all fifteen actual repaired cores and precise independent observer binding required")
+    metric_path="docs/reproductions/2610.13669-grpo-difficulty-curriculum/metrics/public-a30-complete-five-arms-seeds42-44-b9086275.json"
+    receipt_path="docs/gpu-validations/grpo-difficulty-curriculum-a30-20261014-seeds42-44.json"
+    artifact={**artifact,"whole_method_gpu_validation_passed":True,
+        "provenance":{**artifact["provenance"],"artifact_path":metric_path,
+            "observer_commit":OBSERVER,"observer_source_sha256":observer_contract["source_file_sha256"]}}
+    commands=[]
+    for seed in (42,43,44):
+        for v in sorted(VARIANTS):
+            directory="runs/curriculum-"+v+"-s"+str(seed)
+            commands.append(["python","-u","scripts/observe_oct14_cuda_memory.py",
+                "--core-root","workspace/core","--core-contract","data/source-contract-b9086275.json",
+                "--core-audit","data/resource-audit-a30-cpu-b9086275.json",
+                "--observer-root","workspace/observer","--observer-contract","data/observer-contract-92c20818.json",
+                "--memory-output",directory+"/gpu-memory.json","--execute","--gpu-grant","A30-post-training-explicit-slot",
+                "--","--method",KEY,"--config","data/oct14_execution-curriculum-a30-v1.json",
+                "--seed",str(seed),"--output",directory+"/evidence","--variant",v])
+    limitations=artifact["limitations"][:2]+artifact["limitations"][3:]+[
+        "Every first-seed and remaining-seed arm is same-device/source/config; old6a/51b cohorts are not reused or pooled.",
+        "Three seed groups remain L1 diagnostics, not a stable gain, original paper benchmark or production A/B.",
+        "Negative staged and any other lower validation metrics are preserved; too-hard is not forced to have zero updates."]
+    artifact["limitations"]=limitations
+    receipt={"schema_version":1,"adapter_key":KEY,"validated_at":"2026-10-14","seeds":[42,43,44],
+        "accelerator":{"vendor":"NVIDIA","model":"NVIDIA A30"},"command":commands[0],"all_sanitized_commands":commands,
+        "command_path_relocations_only":True,"dataset":artifact["dataset"],"checkpoint":artifact["checkpoint"],
+        "variants":sorted(VARIANTS),"result":"passed","metrics":artifact["aggregate_metrics"],
+        "execution_checks":artifact["execution_checks"],"executed_source_sha256":contract["source_file_sha256"],
+        "observer_binding":{"commit":OBSERVER,"source_file_sha256":observer_contract["source_file_sha256"],
+            "training_core_commit":COMMIT,"source_neutral_observation":True},"limitations":limitations,
+        "provenance":{"commit":COMMIT,"artifact_path":receipt_path,"metrics_artifact":metric_path,
+            "execution_config_sha256":artifact["provenance"]["execution_config_sha256"],
+            "raw_results_sha256":artifact["provenance"]["raw_results_sha256"],"checkpoint_committed":False}}
+    errors=validate_gpu_receipt(receipt)
+    if errors:raise ValueError(errors)
+    return artifact,receipt
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-directory",type=Path,action="append",required=True)
     for name in ("contract","audit","config","output"):
         parser.add_argument("--"+name,type=Path,required=True)
+    parser.add_argument("--observer-contract",type=Path)
+    parser.add_argument("--receipt-output",type=Path)
     args=parser.parse_args()
-    value=curate(args.run_directory,*[json.loads(getattr(args,k).read_text()) for k in ("contract","audit","config")])
+    if bool(args.observer_contract)!=bool(args.receipt_output):
+        parser.error("observer contract and receipt output must be provided together")
+    if args.receipt_output and args.output.resolve()==args.receipt_output.resolve():
+        raise ValueError("native artifact and receipt outputs must be distinct")
+    for path in (args.output,args.receipt_output):
+        if path is not None and path.exists():
+            raise FileExistsError(path)
+    inputs=[json.loads(getattr(args,k).read_text()) for k in ("contract","audit","config")]
+    if args.receipt_output:
+        value,receipt=curate_with_receipt(args.run_directory,*inputs,json.loads(args.observer_contract.read_text()))
+        with args.receipt_output.open("x") as stream:
+            stream.write(json.dumps(receipt,indent=2,allow_nan=False)+"\n")
+    else:
+        value=curate(args.run_directory,*inputs)
     with args.output.open("x") as stream:
         stream.write(json.dumps(value,indent=2,allow_nan=False)+"\n")
 

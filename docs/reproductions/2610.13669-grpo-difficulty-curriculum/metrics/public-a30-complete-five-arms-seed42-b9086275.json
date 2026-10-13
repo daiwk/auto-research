@@ -106,7 +106,7 @@
                     0,
                     1
                   ],
-                  "loss": -2.2351741790771484e-8,
+                  "loss": -2.2351741790771484e-08,
                   "gradient_l2_norm": 0.16067364811897278,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -187,7 +187,7 @@
                     1,
                     0
                   ],
-                  "loss": -7.450580596923828e-9,
+                  "loss": -7.450580596923828e-09,
                   "gradient_l2_norm": 0.17742520570755005,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -312,7 +312,7 @@
                     0,
                     0
                   ],
-                  "loss": -2.9802322387695312e-8,
+                  "loss": -2.9802322387695312e-08,
                   "gradient_l2_norm": 0.15451529622077942,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -437,7 +437,7 @@
                     1,
                     1
                   ],
-                  "loss": -2.2351741790771484e-8,
+                  "loss": -2.2351741790771484e-08,
                   "gradient_l2_norm": 0.17810259759426117,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -746,7 +746,7 @@
                     1,
                     1
                   ],
-                  "loss": -3.725290298461914e-9,
+                  "loss": -3.725290298461914e-09,
                   "gradient_l2_norm": 0.11954058706760406,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -812,7 +812,7 @@
                     0,
                     0
                   ],
-                  "loss": -7.450580596923828e-9,
+                  "loss": -7.450580596923828e-09,
                   "gradient_l2_norm": 0.16927285492420197,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -937,7 +937,7 @@
                     1,
                     1
                   ],
-                  "loss": -7.450580596923828e-9,
+                  "loss": -7.450580596923828e-09,
                   "gradient_l2_norm": 0.16443920135498047,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1130,7 +1130,7 @@
                     0,
                     1
                   ],
-                  "loss": -7.450580596923828e-9,
+                  "loss": -7.450580596923828e-09,
                   "gradient_l2_norm": 0.19066661596298218,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1500,7 +1500,7 @@
                     1,
                     1
                   ],
-                  "loss": -3.725290298461914e-9,
+                  "loss": -3.725290298461914e-09,
                   "gradient_l2_norm": 0.11954058706760406,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1571,7 +1571,7 @@
                     1,
                     0
                   ],
-                  "loss": 7.450580596923828e-9,
+                  "loss": 7.450580596923828e-09,
                   "gradient_l2_norm": 0.1844378262758255,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1701,7 +1701,7 @@
                     0,
                     1
                   ],
-                  "loss": 1.4901161193847656e-8,
+                  "loss": 1.4901161193847656e-08,
                   "gradient_l2_norm": 0.18624506890773773,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -2083,7 +2083,7 @@
                     0,
                     0
                   ],
-                  "loss": -3.725290298461914e-9,
+                  "loss": -3.725290298461914e-09,
                   "gradient_l2_norm": 0.14079557359218597,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -2406,7 +2406,7 @@
                     0,
                     0
                   ],
-                  "loss": -2.2351741790771484e-8,
+                  "loss": -2.2351741790771484e-08,
                   "gradient_l2_norm": 0.17610740661621094,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -2565,7 +2565,7 @@
                     0,
                     0
                   ],
-                  "loss": -7.450580596923828e-9,
+                  "loss": -7.450580596923828e-09,
                   "gradient_l2_norm": 0.15005114674568176,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -2837,7 +2837,7 @@
                     0,
                     0
                   ],
-                  "loss": -3.725290298461914e-9,
+                  "loss": -3.725290298461914e-09,
                   "gradient_l2_norm": 0.14079557359218597,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -3384,7 +3384,7 @@
                     1,
                     1
                   ],
-                  "loss": 1.862645149230957e-8,
+                  "loss": 1.862645149230957e-08,
                   "gradient_l2_norm": 0.14576801657676697,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -4746,7 +4746,8 @@
     "within_A30_same_seed_arms_paired": true,
     "paired_with_old_A100_or_51b": false,
     "variants_are_independent_seeds": false,
-    "concurrent_latency_comparison_eligible": false
+    "concurrent_latency_comparison_eligible": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
   },
   "provenance": {
     "code_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",

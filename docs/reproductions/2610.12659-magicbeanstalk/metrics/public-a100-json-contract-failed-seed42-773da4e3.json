@@ -221,7 +221,7 @@
       "train_examples": 16,
       "validation_examples": 4,
       "max_tokens": 1024,
-      "learning_rate": 0.00001,
+      "learning_rate": 1e-05,
       "group": 4,
       "depth": 1,
       "decomposition_retries": 2,

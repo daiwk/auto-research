@@ -140,6 +140,7 @@ def curate(directories,contract,audit,config,*,expected_seed=42):
         "seed_results":[{"seed":expected_seed,"device":"cuda","diagnostic_only":True,"variants":rows}],
         "aggregate_metrics":metrics,"execution_checks":checks,"dataset":first["dataset"],"checkpoint":first["checkpoint"],
         "evaluation_protocol":{"tier":"l1_mechanism","seeds":[expected_seed],"formal_comparison":False,"promotion_eligible":False,
+            "claim_policy":"single/few-seed smoke result; do not claim a stable improvement",
             "test_used_for_selection":False,"pending_seeds":[s for s in (42,43,44) if s!=expected_seed],"variants_are_independent_seeds":False},
         "provenance":{"code_commit":COMMIT,"artifact_path":metric_path,"executed_source_sha256":contract["source_file_sha256"],
             "execution_config_sha256":canonical,"raw_results_sha256":hashes,

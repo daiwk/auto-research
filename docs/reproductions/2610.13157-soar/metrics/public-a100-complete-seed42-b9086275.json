@@ -842,7 +842,8 @@
       43,
       44
     ],
-    "variants_are_independent_seeds": false
+    "variants_are_independent_seeds": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
   },
   "provenance": {
     "code_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
