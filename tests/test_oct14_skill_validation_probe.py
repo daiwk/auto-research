@@ -156,7 +156,7 @@ def test_failure_preserves_partial_trace_and_never_signs_completed(tmp_path, mon
 
 
 def algorithm_fixture(tmp_path, monkeypatch):
-    root = tmp_path / "auto-research-oct14-701f4500"
+    root = tmp_path / "auto-research-oct14-47f0e9ce"
     source_root = root / "src/auto_research/reproductions"
     hashes, modules = {}, {}
     for name in module.SOURCE_SHA256:
@@ -166,17 +166,17 @@ def algorithm_fixture(tmp_path, monkeypatch):
         hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
         if name.endswith(".py"):
             modules["auto_research.reproductions." + name.removesuffix(".py").replace("/", ".")] = SimpleNamespace(__file__=str(path))
-    (root / ".source-commit").write_text("701f45007be75cf6153f98812ef94e087c94a8f0\n")
+    (root / ".source-commit").write_text("47f0e9cebc196e15c991d494dc4072367f53043b\n")
     monkeypatch.setattr(module, "SOURCE_SHA256", hashes)
     monkeypatch.setattr(module.importlib, "import_module", lambda name: modules[name])
-    config = {"algorithm_commit": "701f45007be75cf6153f98812ef94e087c94a8f0",
+    config = {"algorithm_commit": "47f0e9cebc196e15c991d494dc4072367f53043b",
               "algorithm_source_root": str(root), "source_sha256": dict(hashes)}
     return config, root, modules
 
 
 def test_new_algorithm_contract_is_exactly_frozen_prompt_fix():
-    assert module.ALGORITHM_COMMIT == "701f45007be75cf6153f98812ef94e087c94a8f0"
-    assert module.SOURCE_SHA256["skilldreamer/algorithm.py"] == "e92ca8c36ca5be9949c09a9c4f1a7409b36a15cb4efe600cef46d7df1d89d01a"
+    assert module.ALGORITHM_COMMIT == "47f0e9cebc196e15c991d494dc4072367f53043b"
+    assert module.SOURCE_SHA256["skilldreamer/algorithm.py"] == "c31169a7175fd7e005323a1288905427230a2c61fc906257868b147b1c6e2f76"
 
 
 def test_algorithm_source_root_and_all_six_hashes_are_bound(tmp_path, monkeypatch):
@@ -188,9 +188,9 @@ def test_algorithm_source_root_and_all_six_hashes_are_bound(tmp_path, monkeypatc
 def test_old_arbitrary_or_mismatched_algorithm_source_is_rejected(tmp_path, monkeypatch, failure):
     config, root, modules = algorithm_fixture(tmp_path, monkeypatch)
     if failure == "old_commit":
-        config["algorithm_commit"] = "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e"
+        config["algorithm_commit"] = "701f45007be75cf6153f98812ef94e087c94a8f0"
     elif failure == "old_root":
-        config["algorithm_source_root"] = str(tmp_path / "auto-research-oct14-0f5dca9f")
+        config["algorithm_source_root"] = str(tmp_path / "auto-research-oct14-701f4500")
     elif failure == "marker":
         (root / ".source-commit").write_text("a" * 40)
     elif failure == "configured_hash":

@@ -14,12 +14,12 @@ import signal
 import time
 
 VALIDATION_IDS = ("13", "1", "4", "6", "23", "21", "14", "15")
-ALGORITHM_COMMIT = "701f45007be75cf6153f98812ef94e087c94a8f0"
+ALGORITHM_COMMIT = "47f0e9cebc196e15c991d494dc4072367f53043b"
 MODEL_REVISION = "bb46c15ee4bb56c5b63245ef50fd7637234d6f75"
 ENCODER_REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
 QUESTIONS_SHA256 = "6a3213a1941882e4d0787b903df170452f13ea13f52ad9dbc4e6cb6e418eca5e"
 SOURCE_SHA256 = {
-    "skilldreamer/algorithm.py": "e92ca8c36ca5be9949c09a9c4f1a7409b36a15cb4efe600cef46d7df1d89d01a",
+    "skilldreamer/algorithm.py": "c31169a7175fd7e005323a1288905427230a2c61fc906257868b147b1c6e2f76",
     "skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
     "skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970",
     "near/data.py": "795416bdffeb25880aeaf85b4bfd6480b8677b45cddabe37ba2e49d7bf544eb8",
@@ -105,9 +105,9 @@ def algorithm_binding(config: dict) -> dict:
         raise ValueError("complete fixed algorithm commit and six-file source whitelist required")
     root = Path(config.get("algorithm_source_root", ".")).resolve()
     marker = root / ".source-commit"
-    if (root.name != "auto-research-oct14-701f4500" or not marker.is_file()
+    if (root.name != "auto-research-oct14-47f0e9ce" or not marker.is_file()
             or marker.read_text().strip() != ALGORITHM_COMMIT):
-        raise ValueError("algorithm must use its separately frozen immutable 701f4500 source root")
+        raise ValueError("algorithm must use its separately frozen immutable 47f0e9ce source root")
     modules = {name: importlib.import_module("auto_research.reproductions." + name.removesuffix(".py").replace("/", "."))
                for name in expected if name.endswith(".py")}
     if any(Path(module.__file__).resolve() != root / "src/auto_research/reproductions" / name
@@ -117,7 +117,7 @@ def algorithm_binding(config: dict) -> dict:
     actual["skilldreamer/gallery.json"] = hashlib.sha256(
         Path(modules["skilldreamer/algorithm.py"].__file__).with_name("gallery.json").read_bytes()).hexdigest()
     if actual != expected:
-        raise ValueError("loaded library source differs from the fixed 701f4500 algorithm archive")
+        raise ValueError("loaded library source differs from the fixed 47f0e9ce algorithm archive")
     return actual
 
 
