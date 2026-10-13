@@ -104,7 +104,11 @@ PYTHONPATH=src python scripts/run_skilldreamer.py \
 
 随后固定 Qwen2.5-7B-Instruct、原 `0f5dca9f` 算法和 `d8603f65` probe，在真实 A100 上完成独立8条 question-only validation探针：596.9424秒、210calls、29194tokens，PSG/HSR各7题、实际CSI和gallery load各2次，但工具动作与提交均0。7个runtime episode用尽24次调用，两个load后均因CSI格式/decision失败，而非正常结束或256token截断；仍不签passed。详见 [负结果诊断](metrics/validation-negative-d8603f65.md) 与 [sanitized artifact/raw SHA](metrics/public-a100-validation-negative-d8603f65.json)。
 
-CPU逐条诊断发现原提示没有完整写明解析器要求的五个非空 `LABEL: value` 行及四个DECISION首词，这是提示契约欠明确，**不是已证明的parser bug**。本地只补清提示格式及无答案/无技能判断的占位模板，严格parser/enum、算法、预算与gold隔离保持；该澄清版本尚未GPU执行，不能把CPU检查写成模型能力通过，也不能将历史失败改绑到新源。
+CPU逐条诊断发现原提示没有完整写明解析器要求的五个非空 `LABEL: value` 行及四个DECISION首词，这是提示契约欠明确，**不是已证明的parser bug**。仅补清提示格式及无答案/无技能判断的占位模板，严格parser/enum、算法、预算与gold隔离保持；历史失败始终绑定原实际源。
+
+五行格式澄清后，固定 `701f4500` 算法与 `5c07ef42` runner在A100同8条validation/原预算完成唯一探针：rc0、401.4411秒、159calls、19369tokens，65次真实CSI、7个加载episode。但56次env.step不等于56次成功工具：54次calculator尝试含48次成功、6次错误，另有2次未知工具；**0finish、0提交**。28次调用重复了已成功且结果已反馈的同AST算式。仅据实证明核心入口真实执行，不签passed或能力提升。详见 [native零提交诊断/独立CPU回放](metrics/validation-no-submit-5c07ef42.md) 与 [sanitized artifact](metrics/public-a100-validation-no-submit-5c07ef42.json)。
+
+源与trace另确认Skill当时只列工具JSON，baseline却有明确的calculator计算/finish提交generic说明；同时实际policy也反复计算已有结果、请求不存在的工具。接口不对称与策略停滞分开记录，未证明零提交的因果来源。当前只追加同等公平API文字，明确两工具、提交终止及executor加载语义；不代模型生成答案或强制finish，不改gallery/parser/execute/action预算。该追加文字尚未GPU执行，不能把CPU检查写成模型能力通过。
 
 以公开 GSM8K-style question/answer JSONL 中的 question 为任务，参考答案在独立 external scorer 中按数字比较；模型和环境观察均不接收 gold answer、gold plan 或 gold skill。首N条在读取 relevance 之外预先固定，按固定 hash 分离 validation/test，当前超参数事先固定不看 test 改写。五条本地通用技能为算术验证、比例、库存、金额和时间处理，不含题目答案。
 

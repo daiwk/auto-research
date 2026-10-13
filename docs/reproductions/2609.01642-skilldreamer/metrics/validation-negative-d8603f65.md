@@ -31,4 +31,4 @@ ID4 在全局call51加载rates后，call52–61是5次缺行与5次非法decisio
 
 首次load后再询问是原 `execute_agent` 的显式流程，不是丢失动作：模型必须先看到真实gallery body，然后生成fresh action。环境每次step都计动作，finish同样计动作；因此0动作/answer=null证明没有到达实际工具入口。没有实际unknown-tool执行，也没有工具RuntimeError。
 
-仅对提示文本补清非空冒号行、完整enum和JSON位置；parser、枚举、PSG/HSR/CSI算法、自动纠正/fallback、gold角色、评价IDs与预算均不改变。占位模板不填任务答案或技能判断。CPU fixture 验证严格拒绝保持、load后fresh calculator/finish入口可用；fixture不是模型能力证据。**该澄清版本尚未GPU执行，本负结果仍绑定原0f/d860源，不能重标为修复后结果。** 原0.5B三seed失败也继续保留。
+随后仅对提示文本补清非空冒号行、完整enum和JSON位置；parser、枚举、PSG/HSR/CSI算法、自动纠正/fallback、gold角色、评价IDs与预算均不改变。占位模板不填任务答案或技能判断。CPU fixture 验证严格拒绝保持、load后fresh calculator/finish入口可用；fixture不是模型能力证据。后续701f/5c07的独立同预算测量另见 [核心执行但零提交](validation-no-submit-5c07ef42.md)；**本负结果仍绑定原0f/d860源，不能重标为澄清后结果。** 原0.5B三seed失败也继续保留。
