@@ -11,7 +11,7 @@
 | Adapter | `upturn` |
 | 本地复现代码 | [`src/auto_research/reproductions/upturn/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/upturn/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
-| GPU门禁 | 必须真实A100/A30执行并提交绑定源码的脱敏回执；未取得者仍未验收 |
+| GPU门禁 | seed42真实完整机制回执保留；三seed已执行但44无rescue信号，不签三seed通过回执 |
 
 ## 原始论文总结
 
@@ -107,7 +107,21 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [完整机制结果](metrics/public-a100-complete-seed42.json)与[源码51b绑定GPU回执](../../gpu-validations/upturn-a100-20261014.json)已独立核验：实际186.82秒，原8train×4rollouts、20gate epochs、2position组均真实非零救援优势/更新，encoder与7B reasoner冻结。纠正推理和4validation评估实际执行，不能用前面的train-only探针代替。
 
-这是head训练后的一次共享评估：frozen-reasoner控制avg_accuracy0.625/pass_rate1.0，训练后干预avg_accuracy0.625/pass_rate0.75，**不是训练前→训练后**；pass rate负结果保留。控制每题4个完整generation，方法2个original加至多2个纠正suffix，只匹配最大response allowance（3072tokens/题），并非相同候选池、实际token或runtime。只完成seed42 L1完整机制，仍缺默认seed43/44，不宣称稳定提升。
+这是head训练后的一次共享评估：frozen-reasoner控制avg_accuracy0.625/pass_rate1.0，训练后干预avg_accuracy0.625/pass_rate0.75，**不是训练前→训练后**；pass rate负结果保留。控制每题4个完整generation，方法2个original加至多2个纠正suffix，只匹配最大response allowance（3072tokens/题），并非相同候选池、实际token或runtime。此节仅描述seed42；默认三seed的执行状态另见下一节，不宣称稳定提升。
+
+### 三seed执行完成，但44机制不通过
+
+[完整执行cohort](metrics/public-a100-complete-three-seed-execution-cohort.json)明确 `execution_complete: true`、`all_seed_mechanism_passed: false`、`accepted_mechanism_aggregate: false`。42/43各有真实非零rescue信号；[seed44独立负结果](metrics/public-a100-complete-failed-seed44.json)实际153.99秒，15个eligible失败rollout、20gate epochs、两position组均rescue/advantage全0，只因entropy项产生2次小梯度更新，仍是failed-no-rescue-signal，不签passed或三seed回执，不retry或调预算。
+
+下表均是训练后同一次控制/干预评估，不是训练前后。
+
+| seed | frozen-reasoner control avg_accuracy / pass_rate | intervention avg_accuracy / pass_rate | 机制状态 |
+| --- | --- | --- | --- |
+| 42 | 0.625 / 1.0 | 0.625 / 0.75 | passed |
+| 43 | 0.375 / 0.75 | 0.5 / 0.75 | passed |
+| 44 | 0.6875 / 1.0 | 0.625 / 0.75 | failed-no-rescue-signal |
+
+cohort中的n=3均值仅描述所有已执行seed（包含失败44），不算accepted三seed机制，更不算稳定能力提升。原42回执与所有旧失败保持原source和数值。
 
 ### 代码映射
 
@@ -119,5 +133,5 @@ algorithm.py：真实MLP、cut loss、gate、新user turn及预算；checkpoint.
 
 Base实际生成2N完整候选，UPTURN为N加至多N替换。报告最大生成数、实际token与correction次数，不声称真实runtime相等。小预算下单类gate/rescue全0如实保留，不宣称纠错提升。
 
-seed42完整机制GPU门禁已通过，但默认seed43/44、全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+默认42/43/44已实际执行，但44没有定义性的rescue学习信号，不能称三seed机制通过。seed42回执仍有效，完整三seed执行cohort包含失败，不增加retry或选择性丢弃。全局目录同步与CI仍需收口；三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

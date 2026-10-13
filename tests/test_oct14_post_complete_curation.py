@@ -135,3 +135,71 @@ def test_defining_mechanism_corruption_rejected(tmp_path,key,case):
     elif case=="route":r["learner_routes"][0]["active_indices"]=[0]
     else:r["exposure"]["full_sft_control"]=4
     with pytest.raises(ValueError):invoke(tmp_path,data)
+
+
+def three_fixtures(tmp_path,key):
+    directories=[]
+    contract=audit=config=None
+    for seed in (42,43,44):
+        r,l,e,contract,audit,config=fixture(tmp_path,key)
+        r["seed"]=l["seed"]=seed
+        l["command"][l["command"].index("--seed")+1]=str(seed)
+        d=tmp_path/str(seed)
+        (d/"evidence").mkdir(parents=True)
+        for path,value in (("evidence/result.json",r),("launch.json",l),("exit.json",e)):
+            (d/path).write_text(json.dumps(value))
+        directories.append(d)
+    return directories,contract,audit,config
+
+
+@pytest.mark.parametrize("key",HASHES)
+def test_three_full_seed_fixtures_complete_only_the_seed_plan_not_formal_capability(tmp_path,key):
+    a,r=MODULE["curate_three"](*three_fixtures(tmp_path,key),accelerator="fixture-no-new-GPU",validated_at="fixture")
+    assert a["seeds"]==r["seeds"]==[42,43,44] and a["actual_cuda_run_count"]==3
+    assert a["default_three_seed_plan_completed"] is True
+    assert a["evaluation_protocol"]["formal_comparison"] is False and a["evaluation_protocol"]["promotion_eligible"] is False
+    assert all(m["n"]==3 for m in a["aggregate_metrics"].values())
+    assert len(r["all_sanitized_commands"])==3
+    assert len(a["provenance"]["raw_results_sha256"])==3
+
+
+@pytest.mark.parametrize("case",["missing","duplicate","wrong-seed","one-failure","one-zero-update","one-budget"])
+def test_three_seed_aggregation_cannot_hide_missing_or_failed_runs(tmp_path,case):
+    directories,contract,audit,config=three_fixtures(tmp_path,"synthself")
+    if case=="missing":directories.pop()
+    elif case=="duplicate":directories[2]=directories[1]
+    else:
+        name="exit.json" if case=="one-failure" else "launch.json" if case=="one-budget" else "evidence/result.json"
+        p=directories[-1]/name
+        data=json.loads(p.read_text())
+        if case=="wrong-seed":data["seed"]=45
+        elif case=="one-failure":data["exit_code"]=1
+        elif case=="one-zero-update":data["training"][0]["optimizer_update_executed"]=False
+        else:data["effective_config"]["max_tokens"]=1024
+        p.write_text(json.dumps(data))
+    with pytest.raises(ValueError):
+        MODULE["curate_three"](directories,contract,audit,config,accelerator="fixture-no-new-GPU",validated_at="fixture")
+
+
+@pytest.mark.parametrize("key",["synthself","progressive-contraction"])
+def test_actual_published_three_seed_receipt_preserves_raw_and_old_single_seed(key):
+    identifier=MODULE["IDENTIFIERS"][key]
+    path=ROOT/f"docs/reproductions/{identifier}-{key}/metrics/public-a100-complete-seeds42-44.json"
+    a=json.loads(path.read_text())
+    receipt=json.loads((ROOT/f"docs/gpu-validations/{key}-a100-20261014-seeds42-44.json").read_text())
+    old,old_receipt=recorded(key)
+    assert a["seeds"]==receipt["seeds"]==[42,43,44]
+    assert a["actual_cuda_run_count"]==3 and a["default_three_seed_plan_completed"] is True
+    assert receipt["provenance"]["artifact_path"].endswith(f"{key}-a100-20261014-seeds42-44.json")
+    assert a["evaluation_protocol"]["formal_comparison"] is False
+    assert a["evaluation_protocol"]["promotion_eligible"] is False
+    assert all(v["n"]==3 for v in a["aggregate_metrics"].values())
+    hashes=a["provenance"]["raw_results_sha256"]
+    assert hashes["42"]==HASHES[key] and len(hashes)==3
+    assert old["seeds"]==old_receipt["seeds"]==[42]
+    assert a["seed_results"][0]["result"]==old["seed_results"][0]["result"]
+    if key=="synthself":
+        assert a["seed_results"][1]["result"]["method_metrics"]["retention"]["accuracy"]==0.
+    else:
+        assert all(row["result"]["method_metrics"]["accuracy"]==row["result"]["control"]["metrics"]["accuracy"]
+                   for row in a["seed_results"])

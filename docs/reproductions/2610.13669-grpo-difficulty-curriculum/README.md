@@ -11,7 +11,7 @@
 | Adapter | `grpo-difficulty-curriculum` |
 | 本地复现代码 | [`src/auto_research/reproductions/grpo_difficulty_curriculum/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/grpo_difficulty_curriculum/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
-| GPU门禁 | [A100 seed42 三臂机制回执](../../gpu-validations/grpo-difficulty-curriculum-a100-20261014.json)已通过；默认 seed43/44 仍未完成，单seed回执不等于全批验收 |
+| GPU门禁 | 旧[A100 seed42三臂记录](../../gpu-validations/grpo-difficulty-curriculum-a100-20261014.json)保留；等值奖励数值修复后五臂CUDA验证待新源码实跑，不复用旧controls签通过 |
 
 ## 原始论文总结
 
@@ -100,6 +100,12 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 staged实际transition为new-best/keep/advance/new-best，第4step进入B2；未完成原B1→B5全课程。三个variants不算三个seeds：这是单seed L1机制smoke，`formal_comparison: false`、`promotion_eligible: false`。4题validation上的fixed-medium变化不能宣称稳定提升；B5本次未发生退化，也不能冒称复现原论文退化结论。同配置caps不等于同实际effective-update或token预算，不以elapsed做吞吐比较。
 
+### 旧课程数值完整性负审计
+
+[旧6a/51b数值负审计](metrics/public-legacy-curriculum-numerical-negative.json)保留原raw/status/实际optimizer calls：float32均值舍入后，数学等值[1.2×8]/[0.2×8]被归一化成伪非零advantage。A30 unfiltered42有12/32、static42有3/8此类更新；unfiltered43有13/32、static43有2/8。不能放宽容差、删掉伪更新后重新合算passed，也不能把参数变化当真实reward学习信号。
+
+旧A10042三臂8/9/11和A30fixed43 6次更新未发现等值奖励组，但不验证修复后的完整五臂路径。旧A100三臂未执行static和unfiltered；旧A30两controls不作为修后positive证据。旧staged43/B543已定向中止并保留partial/log，五个旧seed44未启动。b908修复后，新A30 unfiltered42已完成：13个等值奖励组全部跳过更新，19次真实奖励差异更新；其余四个seed42臂正在运行，修复后的43/44五臂仍待执行。不同A100/A30/framework基线不作paired能力比较。
+
 ### 代码映射
 
 algorithm.py：原5带、plateau和非单调统计；checkpoint.py：当前policy估难、固定行为概率、动态gate、真实更新/B5控制。
@@ -110,5 +116,5 @@ algorithm.py：原5带、plateau和非单调统计；checkpoint.py：当前polic
 
 0.5B/短预算不代表原1.5B全train或三seed能力比较。同steps可能有不同effective updates/选题数/token，按实测解释。B5零更新/退化不能删除，也不是自动能力证明。
 
-默认42/43/44计划仍缺seed43/44；static和unfiltered入口尚未在本次GPU运行。完整原规模/课程与正式能力比较仍未完成，单seed机制GPU门禁通过不代表本批整体完成。还需全局目录同步与CI；三个seed也不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+数值修复后的五臂42/43/44计划未完成；旧controls不能冒充新源码验证。完整原规模/课程与正式能力比较仍未完成，单seed机制GPU门禁通过不代表本批整体完成。还需全局目录同步与CI；三个seed也不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

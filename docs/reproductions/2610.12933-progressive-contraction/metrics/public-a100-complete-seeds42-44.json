@@ -1,0 +1,1171 @@
+{
+  "schema_version": 2,
+  "adapter_key": "progressive-contraction",
+  "manifest_ref": "reproduction:progressive-contraction",
+  "method": "progressive-contraction",
+  "measured_locally": true,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "whole_method_gpu_validation_passed": true,
+  "default_three_seed_plan_completed": true,
+  "seed_results": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "device": "cuda",
+      "result": {
+        "method": "progressive-contraction",
+        "seed": 42,
+        "device": "cuda",
+        "diagnostic_only": true,
+        "promotion_eligible": false,
+        "evaluation_tier": "l1_mechanism",
+        "dataset": {
+          "verified": true,
+          "test_read": false,
+          "source_id": "openai/grade-school-math",
+          "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+          "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+          "partition_sha256": {
+            "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+            "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+          },
+          "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+        },
+        "checkpoint": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "verified_mirror": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "file_sha256": {
+              "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+              "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            }
+          }
+        },
+        "baseline": {
+          "accuracy": 0.5,
+          "examples": 4,
+          "generated_tokens": 1419,
+          "truncated_responses": 1
+        },
+        "method_metrics": {
+          "accuracy": 0.75,
+          "examples": 4,
+          "generated_tokens": 1322,
+          "truncated_responses": 0
+        },
+        "training": [
+          {
+            "phase": "probing-epoch",
+            "loss": 0.46460204763510793,
+            "gradient_l2_norm": 0.36404433846473694,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 388,
+            "supervised_instances": 2
+          },
+          {
+            "phase": "routed-epoch",
+            "loss": 0.5271173330453726,
+            "gradient_l2_norm": 0.4252120554447174,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 260,
+            "supervised_instances": 1
+          },
+          {
+            "phase": "routed-epoch",
+            "loss": 0.5265568659855769,
+            "gradient_l2_norm": 0.4253004789352417,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 260,
+            "supervised_instances": 1
+          }
+        ],
+        "cost": {
+          "generation_calls": {
+            "evaluation": 12,
+            "teacher_backbone": 13,
+            "teacher_profile": 8
+          },
+          "generated_tokens": {
+            "evaluation": 4118,
+            "teacher_backbone": 2948,
+            "teacher_profile": 4761
+          },
+          "scored_response_tokens": {
+            "student_sft": 3191,
+            "student_routing": 776
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "protocol": {
+          "test_opened": false,
+          "gold_in_student_generation": false,
+          "train_examples": 8,
+          "validation_examples": 4,
+          "max_tokens": 512
+        },
+        "parameters_changed": true,
+        "teacher": {
+          "public_id": "Qwen/Qwen2.5-7B-Instruct",
+          "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+          "verified_mirror": {
+            "public_id": "Qwen/Qwen2.5-7B-Instruct",
+            "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "file_sha256": {
+              "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+              "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+              "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+              "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+              "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+              "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            }
+          }
+        },
+        "teacher_audits": [
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 11,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 68,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              11,
+              68
+            ],
+            "response_tokens": 128
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 23,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 61,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              23,
+              61
+            ],
+            "response_tokens": 260
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 28,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 93,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              28,
+              93
+            ],
+            "response_tokens": 239
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 12,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 46,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              12,
+              46
+            ],
+            "response_tokens": 134
+          },
+          {
+            "verified_backbone": false
+          }
+        ],
+        "teacher_uncertainty_scores": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "paragraph_boundary_protocol": "decoded-character-boundaries-to-original-token-prefix-v1",
+        "teacher_pool_indices": [
+          0,
+          1
+        ],
+        "learner_routes": [
+          {
+            "epoch": 2,
+            "normalized_response_nll": [
+              0.34431397914886475,
+              0.5271173119544983
+            ],
+            "active_indices": [
+              1
+            ]
+          },
+          {
+            "epoch": 3,
+            "normalized_response_nll": [
+              0.3444511294364929,
+              0.5265568494796753
+            ],
+            "active_indices": [
+              1
+            ]
+          }
+        ],
+        "exposure": {
+          "method": 4,
+          "full_sft_control": 12,
+          "relative_to_verified_full_sft": 0.3333333333333333,
+          "teacher_profiling_cost_excluded_from_ratio_but_reported": true
+        },
+        "control": {
+          "method": "verified-full-sft",
+          "training": [
+            {
+              "loss": 0.4607242779725485,
+              "gradient_l2_norm": 0.2997905910015106,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 761,
+              "supervised_instances": 4
+            },
+            {
+              "loss": 0.46099232436792925,
+              "gradient_l2_norm": 0.29542118310928345,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 761,
+              "supervised_instances": 4
+            },
+            {
+              "loss": 0.4612269558198505,
+              "gradient_l2_norm": 0.29569756984710693,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 761,
+              "supervised_instances": 4
+            }
+          ],
+          "metrics": {
+            "accuracy": 0.75,
+            "examples": 4,
+            "generated_tokens": 1377,
+            "truncated_responses": 0
+          }
+        },
+        "limitations": [
+          "Qwen2.5 and tiny GSM8K train-only public holdout replace the original scale and Qwen3.5 models.",
+          "Actual MCRT sampled continuation costs are reported separately; exposure reduction is not total compute saving.",
+          "Published v1 HTML has missing appendix labels and no retrievable appendix algorithm; main Eqs1-8 are implemented.",
+          "Finite samples and single-seed runtime validation cannot establish original 135x or downstream gains."
+        ]
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "device": "cuda",
+      "result": {
+        "method": "progressive-contraction",
+        "seed": 43,
+        "device": "cuda",
+        "diagnostic_only": true,
+        "promotion_eligible": false,
+        "evaluation_tier": "l1_mechanism",
+        "dataset": {
+          "verified": true,
+          "test_read": false,
+          "source_id": "openai/grade-school-math",
+          "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+          "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+          "partition_sha256": {
+            "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+            "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+          },
+          "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+        },
+        "checkpoint": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "verified_mirror": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "file_sha256": {
+              "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+              "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            }
+          }
+        },
+        "baseline": {
+          "accuracy": 0.5,
+          "examples": 4,
+          "generated_tokens": 1419,
+          "truncated_responses": 1
+        },
+        "method_metrics": {
+          "accuracy": 0.5,
+          "examples": 4,
+          "generated_tokens": 1234,
+          "truncated_responses": 0
+        },
+        "training": [
+          {
+            "phase": "probing-epoch",
+            "loss": 0.5136273012959899,
+            "gradient_l2_norm": 0.46944835782051086,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 203,
+            "supervised_instances": 1
+          },
+          {
+            "phase": "routed-epoch",
+            "loss": 0.5095720338116726,
+            "gradient_l2_norm": 0.47288355231285095,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 203,
+            "supervised_instances": 1
+          },
+          {
+            "phase": "routed-epoch",
+            "loss": 0.5111208009015163,
+            "gradient_l2_norm": 0.4702812731266022,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 203,
+            "supervised_instances": 1
+          }
+        ],
+        "cost": {
+          "generation_calls": {
+            "evaluation": 12,
+            "teacher_backbone": 13,
+            "teacher_profile": 6
+          },
+          "generated_tokens": {
+            "evaluation": 4118,
+            "teacher_backbone": 3131,
+            "teacher_profile": 4293
+          },
+          "scored_response_tokens": {
+            "student_sft": 2616,
+            "student_routing": 406
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "protocol": {
+          "test_opened": false,
+          "gold_in_student_generation": false,
+          "train_examples": 8,
+          "validation_examples": 4,
+          "max_tokens": 512
+        },
+        "parameters_changed": true,
+        "teacher": {
+          "public_id": "Qwen/Qwen2.5-7B-Instruct",
+          "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+          "verified_mirror": {
+            "public_id": "Qwen/Qwen2.5-7B-Instruct",
+            "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "file_sha256": {
+              "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+              "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+              "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+              "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+              "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+              "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            }
+          }
+        },
+        "teacher_audits": [
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 40,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 93,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              40,
+              93
+            ],
+            "response_tokens": 203
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 19,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 51,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              19,
+              51
+            ],
+            "response_tokens": 258
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 16,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 50,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              16,
+              50
+            ],
+            "response_tokens": 208
+          },
+          {
+            "verified_backbone": false
+          }
+        ],
+        "teacher_uncertainty_scores": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "paragraph_boundary_protocol": "decoded-character-boundaries-to-original-token-prefix-v1",
+        "teacher_pool_indices": [
+          0
+        ],
+        "learner_routes": [
+          {
+            "epoch": 2,
+            "normalized_response_nll": [
+              0.5095720291137695
+            ],
+            "active_indices": [
+              0
+            ]
+          },
+          {
+            "epoch": 3,
+            "normalized_response_nll": [
+              0.5111207962036133
+            ],
+            "active_indices": [
+              0
+            ]
+          }
+        ],
+        "exposure": {
+          "method": 3,
+          "full_sft_control": 9,
+          "relative_to_verified_full_sft": 0.3333333333333333,
+          "teacher_profiling_cost_excluded_from_ratio_but_reported": true
+        },
+        "control": {
+          "method": "verified-full-sft",
+          "training": [
+            {
+              "loss": 0.5618864096511818,
+              "gradient_l2_norm": 0.3470054566860199,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 669,
+              "supervised_instances": 3
+            },
+            {
+              "loss": 0.5598198587049817,
+              "gradient_l2_norm": 0.34317535161972046,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 669,
+              "supervised_instances": 3
+            },
+            {
+              "loss": 0.5596115614088484,
+              "gradient_l2_norm": 0.33972403407096863,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 669,
+              "supervised_instances": 3
+            }
+          ],
+          "metrics": {
+            "accuracy": 0.5,
+            "examples": 4,
+            "generated_tokens": 1465,
+            "truncated_responses": 1
+          }
+        },
+        "limitations": [
+          "Qwen2.5 and tiny GSM8K train-only public holdout replace the original scale and Qwen3.5 models.",
+          "Actual MCRT sampled continuation costs are reported separately; exposure reduction is not total compute saving.",
+          "Published v1 HTML has missing appendix labels and no retrievable appendix algorithm; main Eqs1-8 are implemented.",
+          "Finite samples and single-seed runtime validation cannot establish original 135x or downstream gains."
+        ]
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "device": "cuda",
+      "result": {
+        "method": "progressive-contraction",
+        "seed": 44,
+        "device": "cuda",
+        "diagnostic_only": true,
+        "promotion_eligible": false,
+        "evaluation_tier": "l1_mechanism",
+        "dataset": {
+          "verified": true,
+          "test_read": false,
+          "source_id": "openai/grade-school-math",
+          "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+          "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+          "partition_sha256": {
+            "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+            "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+          },
+          "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+        },
+        "checkpoint": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "verified_mirror": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "file_sha256": {
+              "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+              "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            }
+          }
+        },
+        "baseline": {
+          "accuracy": 0.5,
+          "examples": 4,
+          "generated_tokens": 1419,
+          "truncated_responses": 1
+        },
+        "method_metrics": {
+          "accuracy": 0.5,
+          "examples": 4,
+          "generated_tokens": 1370,
+          "truncated_responses": 0
+        },
+        "training": [
+          {
+            "phase": "probing-epoch",
+            "loss": 0.8423974963201992,
+            "gradient_l2_norm": 0.5175027847290039,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 345,
+            "supervised_instances": 2
+          },
+          {
+            "phase": "routed-epoch",
+            "loss": 0.9089585587785051,
+            "gradient_l2_norm": 0.7286731004714966,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 185,
+            "supervised_instances": 1
+          },
+          {
+            "phase": "routed-epoch",
+            "loss": 0.9006388071421031,
+            "gradient_l2_norm": 0.7130504846572876,
+            "optimizer_update_executed": true,
+            "supervised_tokens": 185,
+            "supervised_instances": 1
+          }
+        ],
+        "cost": {
+          "generation_calls": {
+            "evaluation": 12,
+            "teacher_backbone": 13,
+            "teacher_profile": 10
+          },
+          "generated_tokens": {
+            "evaluation": 4228,
+            "teacher_backbone": 3103,
+            "teacher_profile": 5830
+          },
+          "scored_response_tokens": {
+            "student_sft": 3652,
+            "student_routing": 690
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "protocol": {
+          "test_opened": false,
+          "gold_in_student_generation": false,
+          "train_examples": 8,
+          "validation_examples": 4,
+          "max_tokens": 512
+        },
+        "parameters_changed": true,
+        "teacher": {
+          "public_id": "Qwen/Qwen2.5-7B-Instruct",
+          "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+          "verified_mirror": {
+            "public_id": "Qwen/Qwen2.5-7B-Instruct",
+            "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "file_sha256": {
+              "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+              "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+              "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+              "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+              "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+              "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+              "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+              "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+              "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+              "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+              "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+            }
+          }
+        },
+        "teacher_audits": [
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 11,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 62,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              11,
+              62
+            ],
+            "response_tokens": 133
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": false
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 20,
+                "reachability": 0.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 81,
+                "reachability": 0.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              20,
+              81
+            ],
+            "response_tokens": 257
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 13,
+                "reachability": 0.5,
+                "uncertainty": 1.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 84,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              13,
+              84
+            ],
+            "response_tokens": 160
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 36,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 96,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              36,
+              96
+            ],
+            "response_tokens": 244
+          },
+          {
+            "verified_backbone": true,
+            "profiled": true,
+            "profile": [
+              {
+                "prefix_tokens": 62,
+                "reachability": 0.75,
+                "uncertainty": 0.75,
+                "samples": 4
+              },
+              {
+                "prefix_tokens": 96,
+                "reachability": 1.0,
+                "uncertainty": 0.0,
+                "samples": 4
+              }
+            ],
+            "paragraph_cut_indices": [
+              62,
+              96
+            ],
+            "response_tokens": 185
+          },
+          {
+            "verified_backbone": false
+          }
+        ],
+        "teacher_uncertainty_scores": [
+          0.0,
+          0.0,
+          0.5,
+          0.0,
+          0.375
+        ],
+        "paragraph_boundary_protocol": "decoded-character-boundaries-to-original-token-prefix-v1",
+        "teacher_pool_indices": [
+          2,
+          4
+        ],
+        "learner_routes": [
+          {
+            "epoch": 2,
+            "normalized_response_nll": [
+              0.7650912404060364,
+              0.9089585542678833
+            ],
+            "active_indices": [
+              4
+            ]
+          },
+          {
+            "epoch": 3,
+            "normalized_response_nll": [
+              0.762987494468689,
+              0.9006388187408447
+            ],
+            "active_indices": [
+              4
+            ]
+          }
+        ],
+        "exposure": {
+          "method": 4,
+          "full_sft_control": 15,
+          "relative_to_verified_full_sft": 0.26666666666666666,
+          "teacher_profiling_cost_excluded_from_ratio_but_reported": true
+        },
+        "control": {
+          "method": "verified-full-sft",
+          "training": [
+            {
+              "loss": 0.5928163694044665,
+              "gradient_l2_norm": 0.35145068168640137,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 979,
+              "supervised_instances": 5
+            },
+            {
+              "loss": 0.5925277928166297,
+              "gradient_l2_norm": 0.35414862632751465,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 979,
+              "supervised_instances": 5
+            },
+            {
+              "loss": 0.5917885052658565,
+              "gradient_l2_norm": 0.35145509243011475,
+              "optimizer_update_executed": true,
+              "supervised_tokens": 979,
+              "supervised_instances": 5
+            }
+          ],
+          "metrics": {
+            "accuracy": 0.5,
+            "examples": 4,
+            "generated_tokens": 1439,
+            "truncated_responses": 0
+          }
+        },
+        "limitations": [
+          "Qwen2.5 and tiny GSM8K train-only public holdout replace the original scale and Qwen3.5 models.",
+          "Actual MCRT sampled continuation costs are reported separately; exposure reduction is not total compute saving.",
+          "Published v1 HTML has missing appendix labels and no retrievable appendix algorithm; main Eqs1-8 are implemented.",
+          "Finite samples and single-seed runtime validation cannot establish original 135x or downstream gains."
+        ]
+      }
+    }
+  ],
+  "aggregate_metrics": {
+    "initial.accuracy": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    },
+    "method_validation.accuracy": {
+      "mean": 0.5833333333333334,
+      "std": 0.14433756729740643,
+      "n": 3
+    },
+    "verified-full-sft.accuracy": {
+      "mean": 0.5833333333333334,
+      "std": 0.14433756729740643,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "per_seed": {
+      "42": {
+        "parameters_changed": true,
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 12,
+            "teacher_backbone": 13,
+            "teacher_profile": 8
+          },
+          "generated_tokens": {
+            "evaluation": 4118,
+            "teacher_backbone": 2948,
+            "teacher_profile": 4761
+          },
+          "scored_response_tokens": {
+            "student_sft": 3191,
+            "student_routing": 776
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "method_updates": 3,
+        "control_updates": 3,
+        "verified_profiled_corpus": 4,
+        "teacher_uncertainty_scores": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "teacher_pool_indices": [
+          0,
+          1
+        ],
+        "exposure": {
+          "method": 4,
+          "full_sft_control": 12,
+          "relative_to_verified_full_sft": 0.3333333333333333,
+          "teacher_profiling_cost_excluded_from_ratio_but_reported": true
+        },
+        "exposure_ratio_is_total_compute_saving": false,
+        "invocation_elapsed_seconds": 217.54227962344885,
+        "configured_wall_cap_seconds": 1800
+      },
+      "43": {
+        "parameters_changed": true,
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 12,
+            "teacher_backbone": 13,
+            "teacher_profile": 6
+          },
+          "generated_tokens": {
+            "evaluation": 4118,
+            "teacher_backbone": 3131,
+            "teacher_profile": 4293
+          },
+          "scored_response_tokens": {
+            "student_sft": 2616,
+            "student_routing": 406
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "method_updates": 3,
+        "control_updates": 3,
+        "verified_profiled_corpus": 3,
+        "teacher_uncertainty_scores": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "teacher_pool_indices": [
+          0
+        ],
+        "exposure": {
+          "method": 3,
+          "full_sft_control": 9,
+          "relative_to_verified_full_sft": 0.3333333333333333,
+          "teacher_profiling_cost_excluded_from_ratio_but_reported": true
+        },
+        "exposure_ratio_is_total_compute_saving": false,
+        "invocation_elapsed_seconds": 214.301582518965,
+        "configured_wall_cap_seconds": 1800
+      },
+      "44": {
+        "parameters_changed": true,
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 12,
+            "teacher_backbone": 13,
+            "teacher_profile": 10
+          },
+          "generated_tokens": {
+            "evaluation": 4228,
+            "teacher_backbone": 3103,
+            "teacher_profile": 5830
+          },
+          "scored_response_tokens": {
+            "student_sft": 3652,
+            "student_routing": 690
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "method_updates": 3,
+        "control_updates": 3,
+        "verified_profiled_corpus": 5,
+        "teacher_uncertainty_scores": [
+          0.0,
+          0.0,
+          0.5,
+          0.0,
+          0.375
+        ],
+        "teacher_pool_indices": [
+          2,
+          4
+        ],
+        "exposure": {
+          "method": 4,
+          "full_sft_control": 15,
+          "relative_to_verified_full_sft": 0.26666666666666666,
+          "teacher_profiling_cost_excluded_from_ratio_but_reported": true
+        },
+        "exposure_ratio_is_total_compute_saving": false,
+        "invocation_elapsed_seconds": 228.65010682865977,
+        "configured_wall_cap_seconds": 1800
+      }
+    }
+  },
+  "actual_cuda_run_count": 3,
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "promotion_eligible": false,
+    "test_used_for_selection": false,
+    "default_three_seed_plan_completed": true,
+    "pending_seeds": [],
+    "claim_policy": "three-seed L1 mechanism diagnostic, not formal capability evidence"
+  },
+  "provenance": {
+    "code_commit": "32f873e7a81fa90e6508d5eaad5bf9b830b04139",
+    "artifact_path": "docs/reproductions/2610.12933-progressive-contraction/metrics/public-a100-complete-seeds42-44.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab",
+    "execution_config_sha256": "506dce6568921b9c8fa75d969267537f9bb5c5c5b093a77b283616a2246524c5",
+    "raw_results_sha256": {
+      "42": "179bf4d73896074908a445f9e20e87ceba1e1c34c24927349fd19da312706e2d",
+      "43": "e5cf7cc3e8d82fb0bd86ddf9df748225b6395f884c8d752128a992bdf582e8f2",
+      "44": "1f2f014fdb944b8e6b7464a369799b40a236af866a43521f276395d17412bd69"
+    }
+  },
+  "limitations": [
+    "Three actual full-definition seeds42/43/44 complete this reduced-scale default-seed plan, not the entire multi-method batch.",
+    "Three seeds remain L1 public-data mechanism diagnostics; no formal capability, stable relative gain or original benchmark claim.",
+    "Tiny validation and realized costs are retained, including negative metrics; no test-selected adjustment.",
+    "Only four validation cases; official test content was not opened or used for selection.",
+    "Actual token cost is retained; matched configured caps do not imply identical realized compute.",
+    "Qwen2.5 and tiny GSM8K train-only public holdout replace the original scale and Qwen3.5 models.",
+    "Actual MCRT sampled continuation costs are reported separately; exposure reduction is not total compute saving.",
+    "Published v1 HTML has missing appendix labels and no retrievable appendix algorithm; main Eqs1-8 are implemented."
+  ]
+}

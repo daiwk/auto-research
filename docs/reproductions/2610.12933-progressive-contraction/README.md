@@ -11,7 +11,7 @@
 | Adapter | `progressive-contraction` |
 | 本地复现代码 | [`src/auto_research/reproductions/progressive_contraction/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/progressive_contraction/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
-| GPU门禁 | 必须真实A100/A30执行并提交绑定源码的脱敏回执；未取得者仍未验收 |
+| GPU门禁 | [A100三seed完整机制回执](../../gpu-validations/progressive-contraction-a100-20261014-seeds42-44.json)绑定实际32f源码；仍是L1诊断，不是原benchmark完整验收 |
 
 ## 原始论文总结
 
@@ -104,7 +104,13 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [完整机制结果](metrics/public-a100-complete-seed42.json)与[源码32f绑定GPU回执](../../gpu-validations/progressive-contraction-a100-20261014.json)已独立核验：实际217.54秒，4条verified teacher trajectory各2个真实段落prefix×4个MC continuation；全部reachability1/uncertainty0，teacher收缩tie按原序选2条，不伪造不确定性信号。学生响应NLL路由选1条active，3次方法SFT更新及3次verified-full-SFT控制更新均实际非零。
 
-4validation初始accuracy0.5，方法和full-SFT控制均0.75，没有相对full-SFT收益。方法监督曝光4次、控制12次，1/3仅为监督实例曝光比，排除teacher MC开销，不能写成总计算节省；完整token账另存。只完成seed42 L1定义链路，仍缺默认seed43/44，不是正式能力比较、135×收益或稳定提升。
+4validation初始accuracy0.5，方法和full-SFT控制均0.75，没有相对full-SFT收益。方法监督曝光4次、控制12次，1/3仅为监督实例曝光比，排除teacher MC开销，不能写成总计算节省；完整token账另存。此节仅描述seed42，旧回执/native保留，完整三seed结果另见下一节。
+
+### 修后三seed完整机制（42/43/44）
+
+[三seed实际结果](metrics/public-a100-complete-seeds42-44.json)与[独立三seed回执](../../gpu-validations/progressive-contraction-a100-20261014-seeds42-44.json)绑定32f：三个seed实际完成verified teacher backbone、原token prefix MC、teacher收缩、学生响应NLL路由及各3次方法/verified-full-SFT控制更新。各seed验证accuracy为0.75/0.5/0.5，两臂逐seed相同；均值0.5833/std0.1443，初始均0.5，没有相对full-SFT收益。
+
+MC和构造开销全部保留，监督实例曝光比不能改写成总计算或135×收益。默认三个seed的缩小定义链路已完成，但tiny validation、LoRA和公开替代协议仍只支持L1机制，不构成正式能力比较或本批其它方法验收。
 
 ### 代码映射
 
@@ -116,5 +122,5 @@ algorithm.py：MC uncertainty、floor pool/NLL routing；checkpoint.py：真实p
 
 Qwen2.5匹配词表、少量GSM/LoRA/prefix/K是缩小协议，不覆盖原cross-family与全benchmark。曝光分母为同一verified corpus full-SFT；不宣称135x总成本收益。
 
-seed42完整机制GPU门禁已通过，但默认seed43/44、全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+默认42/43/44的缩小完整机制GPU路径已执行并核验；全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

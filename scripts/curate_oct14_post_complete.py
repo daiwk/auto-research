@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import statistics
 
 from auto_research.gpu_validation import validate_gpu_receipt
 from auto_research.reproductions.progressive_contraction.algorithm import contract_teacher_pool, route_student
@@ -149,7 +150,9 @@ def validate_mechanism(r,c):
     return checks
 
 
-def curate(directory,contract,audit,config,*,accelerator,validated_at):
+def curate(directory,contract,audit,config,*,accelerator,validated_at,expected_seed=42):
+    if expected_seed not in (42,43,44):
+        raise ValueError("only the explicitly planned seeds42/43/44 are supported")
     r=json.loads((directory/"evidence/result.json").read_text())
     launch=json.loads((directory/"launch.json").read_text())
     exit_record=json.loads((directory/"exit.json").read_text())
@@ -169,19 +172,19 @@ def curate(directory,contract,audit,config,*,accelerator,validated_at):
     if (launch["job"].get("timeout_seconds")!=timeout or exit_record.get("elapsed_seconds",0)>timeout):
         raise ValueError("actual invocation must respect the unchanged granted per-job wall cap")
     if (exit_record.get("exit_code")!=0 or exit_record.get("elapsed_seconds",0)<=0
-            or launch.get("seed")!=42 or r.get("seed")!=42 or r.get("device")!="cuda"
+            or launch.get("seed")!=expected_seed or r.get("seed")!=expected_seed or r.get("device")!="cuda"
             or r.get("parameters_changed") is not True or r.get("diagnostic_only") is not True
             or r.get("promotion_eligible") is not False or r["dataset"].get("verified") is not True
             or r["dataset"].get("test_read") is not False or r["protocol"].get("test_opened") is not False
             or r["protocol"].get("gold_in_student_generation") is not False):
-        raise ValueError("actual successful seed42 CUDA/gold/test isolation evidence required")
+        raise ValueError("actual successful expected-seed CUDA/gold/test isolation evidence required")
     c={**config["shared"],**config["methods"][key],**launch["job"]["overrides"]}
     if c!=launch["effective_config"] or launch["job"]["method"]!=key:
         raise ValueError("full effective launch budget must match exact config and overrides")
     for field in ("train_examples","validation_examples","max_tokens"):
         if c[field]!=r["protocol"][field]:
             raise ValueError("measured protocol must match effective budget")
-    for flag,value in {"--method":key,"--seed":"42"}.items():
+    for flag,value in {"--method":key,"--seed":str(expected_seed)}.items():
         command=launch["command"]
         if flag not in command or command[command.index(flag)+1]!=value:
             raise ValueError("actual argv does not match measured method/seed")
@@ -206,10 +209,13 @@ def curate(directory,contract,audit,config,*,accelerator,validated_at):
     flatten(r["method_metrics"],"trained_intervention" if key=="upturn" else "method_validation")
     if key!="upturn":
         flatten(r["control"]["metrics"],r["control"]["method"])
-    metric_path=f"docs/reproductions/{IDENTIFIERS[key]}-{key}/metrics/public-a100-complete-seed42.json"
+    metric_path=f"docs/reproductions/{IDENTIFIERS[key]}-{key}/metrics/public-a100-complete-seed{expected_seed}.json"
     receipt_path=f"docs/gpu-validations/{key}-a100-20261014.json"
-    limitations=["One seed42 full-definition L1 mechanism smoke, not a formal capability comparison or stable gain.",
-        "Original default seeds43/44 remain unfinished; this receipt does not complete the accepted full batch plan.",
+    pending=[s for s in (42,43,44) if s!=expected_seed]
+    unfinished=("Original default seeds43/44 remain unfinished; this receipt does not complete the accepted full batch plan."
+                if expected_seed==42 else "A single-seed receipt does not complete the original default seeds42/43/44 or accepted full batch plan.")
+    limitations=[f"One seed{expected_seed} full-definition L1 mechanism smoke, not a formal capability comparison or stable gain.",
+        unfinished,
         "Only four validation cases; official test content was not opened or used for selection.",
         "Actual token cost is retained; matched configured caps do not imply identical realized compute."]+r["limitations"]
     if key=="upturn":
@@ -217,21 +223,21 @@ def curate(directory,contract,audit,config,*,accelerator,validated_at):
     elif key=="synthself":
         limitations.append("TRAIN gold is visible to offline aligner and construction self-builder, but never evaluated student inference.")
     artifact={"schema_version":2,"adapter_key":key,"manifest_ref":"reproduction:"+key,"method":key,
-        "measured_locally":True,"diagnostic_only":True,"promotion_eligible":False,"seeds":[42],
+        "measured_locally":True,"diagnostic_only":True,"promotion_eligible":False,"seeds":[expected_seed],
         "whole_method_gpu_validation_passed":True,"default_three_seed_plan_completed":False,
-        "seed_results":[{"seed":42,"diagnostic_only":True,"device":"cuda","result":r}],
+        "seed_results":[{"seed":expected_seed,"diagnostic_only":True,"device":"cuda","result":r}],
         "aggregate_metrics":metrics,"execution_checks":checks,"actual_cuda_run_count":1,
         "dataset":r["dataset"],"checkpoint":r["checkpoint"],
-        "evaluation_protocol":{"tier":"l1_mechanism","seeds":[42],"formal_comparison":False,"promotion_eligible":False,
-            "test_used_for_selection":False,"default_three_seed_plan_completed":False,"pending_seeds":[43,44],
+        "evaluation_protocol":{"tier":"l1_mechanism","seeds":[expected_seed],"formal_comparison":False,"promotion_eligible":False,
+            "test_used_for_selection":False,"default_three_seed_plan_completed":False,"pending_seeds":pending,
             "claim_policy":"single-seed mechanism smoke; no stable relative capability or production claim"},
         "provenance":{"code_commit":contract["source_commit"],"artifact_path":metric_path,
             "dataset_fingerprint":hashlib.sha256(json.dumps(r["dataset"],sort_keys=True).encode()).hexdigest(),
             "execution_config_sha256":canonical,"raw_result_sha256":hashlib.sha256((directory/"evidence/result.json").read_bytes()).hexdigest()},
         "limitations":limitations}
     command=["python","scripts/run_oct13_post_training.py","--method",key,"--config","data/oct13_execution.json",
-             "--seed","42","--output","runs/complete-"+key+"-s42"]
-    receipt={"schema_version":1,"adapter_key":key,"validated_at":validated_at,"seeds":[42],
+             "--seed",str(expected_seed),"--output","runs/complete-"+key+"-s"+str(expected_seed)]
+    receipt={"schema_version":1,"adapter_key":key,"validated_at":validated_at,"seeds":[expected_seed],
         "accelerator":{"vendor":"NVIDIA","model":accelerator},"command":command,"command_path_relocations_only":True,
         "dataset":r["dataset"],"checkpoint":{"policy":r["checkpoint"],
             "encoder" if key=="upturn" else "teacher":r["encoder"] if key=="upturn" else r["teacher"]},
@@ -245,20 +251,80 @@ def curate(directory,contract,audit,config,*,accelerator,validated_at):
     return artifact,receipt
 
 
+def curate_three(directories,contract,audit,config,*,accelerator,validated_at):
+    """All three independently validated full runs; still not formal evidence."""
+    if len(directories)!=3:
+        raise ValueError("three actual full-definition run directories required")
+    ordered={}
+    for directory in directories:
+        seed=json.loads((directory/"launch.json").read_text())["seed"]
+        if seed in ordered:
+            raise ValueError("variants/duplicates cannot stand in for independent seeds")
+        ordered[seed]=curate(directory,contract,audit,config,accelerator=accelerator,
+            validated_at=validated_at,expected_seed=seed)
+    if set(ordered)!={42,43,44}:
+        raise ValueError("complete original default seeds42/43/44 required")
+    pairs=[ordered[s] for s in (42,43,44)]
+    first,receipt=pairs[0]
+    if any(a["method"]!=first["method"] or a["dataset"]!=first["dataset"] or a["checkpoint"]!=first["checkpoint"]
+           or a["provenance"]["code_commit"]!=first["provenance"]["code_commit"]
+           or a["provenance"]["execution_config_sha256"]!=first["provenance"]["execution_config_sha256"] for a,_ in pairs):
+        raise ValueError("three seeds must have matching exact core/resources/config")
+    metric_names=set(first["aggregate_metrics"])
+    if any(set(a["aggregate_metrics"])!=metric_names for a,_ in pairs):
+        raise ValueError("all seeds must expose identical actual metric definitions")
+    metrics={}
+    for name in sorted(metric_names):
+        values=[a["aggregate_metrics"][name]["mean"] for a,_ in pairs]
+        metrics[name]={"mean":statistics.mean(values),"std":statistics.stdev(values),"n":3}
+    key=first["method"]
+    metric_path=f"docs/reproductions/{IDENTIFIERS[key]}-{key}/metrics/public-a100-complete-seeds42-44.json"
+    limitations=["Three actual full-definition seeds42/43/44 complete this reduced-scale default-seed plan, not the entire multi-method batch.",
+        "Three seeds remain L1 public-data mechanism diagnostics; no formal capability, stable relative gain or original benchmark claim.",
+        "Tiny validation and realized costs are retained, including negative metrics; no test-selected adjustment."]
+    limitations += [x for x in first["limitations"] if "One seed" not in x and "single-seed" not in x and "default seeds" not in x]
+    artifact={**first,"seeds":[42,43,44],"default_three_seed_plan_completed":True,"actual_cuda_run_count":3,
+        "seed_results":[a["seed_results"][0] for a,_ in pairs],"aggregate_metrics":metrics,
+        "execution_checks":{"per_seed":{str(s):ordered[s][0]["execution_checks"] for s in (42,43,44)}},
+        "evaluation_protocol":{**first["evaluation_protocol"],"seeds":[42,43,44],"default_three_seed_plan_completed":True,
+            "pending_seeds":[],"claim_policy":"three-seed L1 mechanism diagnostic, not formal capability evidence"},
+        "provenance":{k:v for k,v in first["provenance"].items() if k!="raw_result_sha256"},"limitations":limitations}
+    artifact["provenance"].update(artifact_path=metric_path,
+        raw_results_sha256={str(s):ordered[s][0]["provenance"]["raw_result_sha256"] for s in (42,43,44)})
+    receipt={**receipt,"seeds":[42,43,44],"metrics":metrics,"execution_checks":artifact["execution_checks"],
+        "all_sanitized_commands":[r["command"] for _,r in pairs],"limitations":limitations,
+        "provenance":{k:v for k,v in receipt["provenance"].items() if k!="raw_result_sha256"}}
+    receipt["provenance"].update(artifact_path=f"docs/gpu-validations/{key}-a100-20261014-seeds42-44.json",
+        metrics_artifact=metric_path,raw_results_sha256=artifact["provenance"]["raw_results_sha256"])
+    errors=validate_gpu_receipt(receipt)
+    if errors:
+        raise ValueError(errors)
+    return artifact,receipt
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    for field in ("run-directory","contract","audit","config","output"):
+    parser.add_argument("--run-directory",type=Path,action="append",required=True)
+    for field in ("contract","audit","config","output"):
         parser.add_argument("--"+field,type=Path,required=True)
     parser.add_argument("--accelerator",required=True)
     parser.add_argument("--validated-at",required=True)
+    parser.add_argument("--seed",type=int,default=42)
     args=parser.parse_args()
-    artifact,receipt=curate(args.run_directory,json.loads(args.contract.read_text()),json.loads(args.audit.read_text()),
-        json.loads(args.config.read_text()),accelerator=args.accelerator,validated_at=args.validated_at)
+    inputs=(json.loads(args.contract.read_text()),json.loads(args.audit.read_text()),json.loads(args.config.read_text()))
+    if len(args.run_directory)==1:
+        artifact,receipt=curate(args.run_directory[0],*inputs,accelerator=args.accelerator,
+            validated_at=args.validated_at,expected_seed=args.seed)
+    elif len(args.run_directory)==3 and args.seed==42:
+        artifact,receipt=curate_three(args.run_directory,*inputs,accelerator=args.accelerator,validated_at=args.validated_at)
+    else:
+        parser.error("one expected-seed run, or exactly three default-seed runs required")
     args.output.mkdir(parents=True,exist_ok=False)
     for name,value in (("result.json",artifact),("receipt.json",receipt)):
         with (args.output/name).open("x") as stream:
             stream.write(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False)+"\n")
-    print(json.dumps({"method":artifact["method"],"completed_seed":42,"default_three_seed_plan_completed":False}))
+    print(json.dumps({"method":artifact["method"],"completed_seeds":artifact["seeds"],
+        "default_three_seed_plan_completed":artifact["default_three_seed_plan_completed"]}))
 
 
 if __name__=="__main__":

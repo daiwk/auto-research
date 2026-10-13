@@ -26,7 +26,9 @@
 
 LeWAM 已补齐 `0f5dca9f` A100 三 seed 原生联合训练→新候选三臂闭环，各 seed 有 4 次非零更新；三臂均为 16.67% ± 28.87%，未观测到规划优势，目标来自训练轨迹而非 holdout。SmolWAM 已补齐 `2b84c377` A100 三 seed 实际 teacher KD、两布局课程与新学生闭环，每 seed 8 次更新、38 次真实 policy queries，但学生与 no-op 均 0/2 成功；6 个原始文件、请求和新学生权重绑定独立核验通过。
 
-SynthSelf、UPTURN、Progressive Contraction 的完整 seed42 核心链路已经运行、独立复算原始产物并核对固定 Git 源码。三个单种子机制回执不代表默认三种子计划完成；43/44 正在相同源码和预算下续跑。SynthSelf 未观察到提升；UPTURN 同轮匹配预算对照的平均准确率不变、整题通过率下降；Contraction 与 full-SFT 同为 75%，曝光比只指 SFT 样本曝光，不是总计算节省。
+SynthSelf、Progressive Contraction 的默认42/43/44完整核心链路已运行，并逐字段独立复算native与三种子回执。SynthSelf方法acquisition均值0.5、gold-SFT控制0.6667，retention两臂均0.3333；Contraction方法与full-SFT控制逐seed相同、均值0.5833。没有相对控制的稳定收益，曝光比只指SFT样本曝光，不是总计算节省。
+
+UPTURN默认42/43/44也已实际执行：42/43有非零rescue信号，44救援奖励/优势全零，仅entropy项产生参数更新，仍是失败。完整execution cohort包含失败，不签三种子通过回执；旧有效seed42回执保留。三种子执行完成不等于三种子机制通过或能力提升。
 
 难度课程已补齐 `6aabe57a` A100 seed42 三臂的历史机制回执（实际更新 8/9/11）；独立重审这些已签组的奖励均有真实差异，未出现下述等值奖励伪更新。它不能替代数值修复后源码的新 GPU 核验。
 
@@ -48,7 +50,7 @@ A30 `51b4718a` unfiltered/static seed42 与 unfiltered/static/fixed seed43 已�
 | 2 | Progressive Contraction | 真实教师 backbone、MC 前缀续写、teacher pool 收缩、student NLL 路由、full-SFT 对照与教师成本 |
 
 尚未完成的 CUDA adapter 保持 `requires_gpu_validation=True`，不伪造缺失 receipt。
-10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM 与难度课程单 seed 机制回执，以及 SynthSelf、UPTURN、Progressive Contraction 的完整单 seed 核心回执。统一 GPU 门禁当前仅缺 MagicBeanStalk、SkillDreamer、SOAR；另有四项的默认多种子/对照计划未完成，不能将门禁缺项数等同于全部剩余工作。
+10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM，以及SynthSelf与Progressive Contraction完整三种子机制回执；UPTURN保留有效单seed回执和含失败的三seed执行记录。统一 GPU 门禁当前仅缺 MagicBeanStalk、SkillDreamer、SOAR；另有难度课程修后五臂/三种子核验未完成，不能将门禁缺项数等同于全部剩余工作。
 State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替代或合并新实验。
 因此 GPU evidence gate 在这份 TODO 关闭前不能被报告为通过，MR 也不能被标为全部完成。
 
@@ -66,6 +68,7 @@ State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替�
 - SkillDreamer 的独立 7B、8 题 validation 探针真实执行了 7 次 PSG/HSR、2 次 CSI/技能加载，但工具动作仍为 0。原提示未完整说明解析器要求的标签格式与四种决策枚举；只修提示说明、不放宽解析器，修复后必须新冻结源码再测。旧失败不被新结果覆写。
 - MBS `0f5dca9f` 限定重跑已找到 3 个正常终止的 hard 根题，但没有合格后代、没有 RL 更新。SOAR `57b2314d` 7B train-only 格式探针 8 次均首轮无效、未发生检索或训练。旧探针未保存原响应正文，不能凭响应哈希猜测格式失败原因；下一步先补可审计的响应/拒绝阶段记录，不放宽论文核心门槛。
 - 数值修复保留原 GRPO 优势公式和 `std + 1e-6`：CPU FP64 先平移奖励再中心化，等值组精确为零，最后转换成策略精度；SOAR 的逐轨迹标准化复用该计算。没有用容差强制抹掉真实奖励差异，没有改变 gate、奖励或训练预算；新源码仍须真实 GPU 重测后验收。
+- `b9086275`新MBS限定run实际343.08秒，仍没有合格后代；实际响应显示第二子题丢失必要题设、独立验证拒绝，另外两根题的teacher算错，不能放宽验证器签通过。新SOAR同源train-only探针实际35.97秒，3条有效轨迹、2条source-match且真实发生检索；它没有训练或评估，只解除原格式阻碍，不算整方法通过。
 
 每次恢复先核验源代码 SHA 和资源实际字节；确认后再运行。每篇结束取回 JSON/日志，
 验证非零有效更新或明确的负对照边界，再生成 sanitized receipt，最后跑统一门禁。

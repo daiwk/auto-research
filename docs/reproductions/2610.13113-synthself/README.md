@@ -11,7 +11,7 @@
 | Adapter | `synthself` |
 | 本地复现代码 | [`src/auto_research/reproductions/synthself/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/synthself/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
-| GPU门禁 | 必须真实A100/A30执行并提交绑定源码的脱敏回执；未取得者仍未验收 |
+| GPU门禁 | [A100三seed完整机制回执](../../gpu-validations/synthself-a100-20261014-seeds42-44.json)绑定实际51b源码；仍是L1诊断，不是原benchmark完整验收 |
 
 ## 原始论文总结
 
@@ -108,7 +108,13 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [完整机制结果](metrics/public-a100-complete-seed42.json)与[源码51b绑定GPU回执](../../gpu-validations/synthself-a100-20261014.json)已独立核验：实际156.30秒，严格完整响应SUM Eq6成立后，8条verified rewrites上执行2次LoRA SFT更新，独立gold-SFT控制亦2次，梯度与监督token均非零。获取/保持各2validation，初始、方法及控制accuracy均0.5，无相对收益。
 
-`gold_in_student_generation: false`只指被评估student推理；offline aligner和独立冻结self-builder（同student checkpoint）均明确看TRAIN demonstration，gold-SFT使用train响应监督。不能泛称所有模型生成都无gold。训练/控制实际监督token不同，完整成本账保留；本条只完成seed42 L1定义链路，仍缺默认seed43/44，不是正式能力比较或稳定提升。
+`gold_in_student_generation: false`只指被评估student推理；offline aligner和独立冻结self-builder（同student checkpoint）均明确看TRAIN demonstration，gold-SFT使用train响应监督。不能泛称所有模型生成都无gold。训练/控制实际监督token不同，完整成本账保留；此节仅描述seed42，旧回执/native保留，完整三seed结果另见下一节。
+
+### 修后三seed完整机制（42/43/44）
+
+[三seed实际结果](metrics/public-a100-complete-seeds42-44.json)与[独立三seed回执](../../gpu-validations/synthself-a100-20261014-seeds42-44.json)均绑定51b：各2次方法SFT+2次gold-SFT控制，严格完整响应SUM Eq6均满足。平均acquisition：方法0.5、gold-SFT0.6667；平均retention两臂均0.3333，低于初始0.5，seed43方法retention降到0。负结果不删除，不宣称方法优于gold-SFT或保持能力稳定。
+
+默认三个seed的缩小定义链路已实际完成；仍只有每片2个validation、LoRA及同域GSM替代原多域full-finetune，不构成正式能力、稳定提升或本批其它方法验收。
 
 ### 代码映射
 
@@ -122,5 +128,5 @@ algorithm.py：构建prompt、family/size及Eq6合同；checkpoint.py：rewrite/
 
 Eq6未满足时，即使真实SFT产生参数变化，也标为failed-aligner-constraints，命令返回非零，不凭权重变化签发通过回执。
 
-seed42完整机制GPU门禁已通过，但默认seed43/44、全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+默认42/43/44的缩小完整机制GPU路径已执行并核验；全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 
