@@ -1,0 +1,224 @@
+{
+  "schema_version": 2,
+  "adapter_key": "skilldreamer",
+  "manifest_ref": "reproduction:skilldreamer",
+  "seeds": [
+    42
+  ],
+  "result": "native_core_executed_no_submission_validation_diagnostic",
+  "measured_locally": true,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "not_gpu_receipt": true,
+  "gpu_validation_passed": false,
+  "capability_receipt": false,
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "metrics": {
+    "runner_wall_seconds": 404.9072179440409,
+    "invocation_elapsed_seconds": 405.8045824728906,
+    "exit_code": 0,
+    "model_calls": 163,
+    "generated_tokens": 19466,
+    "validation_episodes": 8,
+    "psg_episodes": 7,
+    "hsr_episodes": 7,
+    "actual_csi_assessments": 58,
+    "loaded_skill_episodes": 7,
+    "env_step_calls": 50,
+    "calculator_attempts": 50,
+    "calculator_successes": 46,
+    "calculator_errors": 4,
+    "unknown_tool_calls": 0,
+    "finish_calls": 0,
+    "submitted_answers": 0
+  },
+  "execution_checks": {
+    "psg_episodes": 7,
+    "hsr_episodes": 7,
+    "actual_csi_assessments": 58,
+    "loaded_skill_episodes": 7,
+    "executed_actions": 50
+  },
+  "dataset": {
+    "kind": "public-resource",
+    "public_id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_split": "train",
+    "scope": "fixed_original_validation_only",
+    "validation_ids": [
+      "13",
+      "1",
+      "4",
+      "6",
+      "23",
+      "21",
+      "14",
+      "15"
+    ],
+    "parent_24_rows_sha256": "8f33a9f7a44067e362458e4daf0eb1ad629a2aac2f44ffefe731e36b19dcb8c1",
+    "transformation": "select original fixed validation IDs; keep only id and question; discard every answer before probing",
+    "gold_present": false,
+    "scorer_present": false,
+    "evaluation_ids_used": false,
+    "official_test_opened": false,
+    "files": {
+      "questions.jsonl": "6a3213a1941882e4d0787b903df170452f13ea13f52ad9dbc4e6cb6e418eca5e"
+    }
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "files": {
+      "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+      "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+      "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+      "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+      "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd"
+    }
+  },
+  "encoder": {
+    "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "files": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+      "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    }
+  },
+  "budget": {
+    "seed": 42,
+    "max_new_tokens": 256,
+    "action_budget": 8,
+    "top_k": 3,
+    "question_limit": 8,
+    "calls_limit_per_episode": 30,
+    "calls_limit_total": 240,
+    "total_wall_limit_seconds": 600
+  },
+  "private_original_artifact_hashes": {
+    "seed42.json": {
+      "sha256": "a7042043c7c1c0eb9bcfef60334c8fdec123e9e7d51de095e5adaa90e484e0af",
+      "bytes": 51183,
+      "public_copy": false
+    },
+    "seed42.partial.json": {
+      "sha256": "ef3735ac2baebeeb76ffcf5a2b4ca99a73dddb3f6d05be0b41e5fed90b620486",
+      "bytes": 50946,
+      "public_copy": false
+    },
+    "seed42.trace.jsonl": {
+      "sha256": "1777f98145777026888817d0cf6e7a138178a2be94c9a7de21c98b9e612763ee",
+      "bytes": 556108,
+      "public_copy": false
+    },
+    "exit.json": {
+      "sha256": "2ef1f9f89007f2a7d19b85513246283761426b813e1a0f171ba9902de99ffd2d",
+      "bytes": 678,
+      "public_copy": false
+    },
+    "launcher.log": {
+      "sha256": "c19e893523b69f5cafe8b76d8c9959e1b4c281d567645f579535a8c4bf0e4d45",
+      "bytes": 1157,
+      "public_copy": false
+    }
+  },
+  "resource_audit_artifact_hashes": {
+    "probe-d5bf41b2.json": {
+      "sha256": "e4bbc336251ada6bc815bf5013b351538b8e9ea45b30cd2a9c0f9fca855a06ed",
+      "bytes": 1368,
+      "public_copy": false
+    },
+    "cpu-audit-d5bf41b2.json": {
+      "sha256": "c2c85d45e0874a006897368be541605cdfa82c6a55fdce3bbe93bd10044f6394",
+      "bytes": 4301,
+      "public_copy": false
+    },
+    "questions.jsonl": {
+      "sha256": "6a3213a1941882e4d0787b903df170452f13ea13f52ad9dbc4e6cb6e418eca5e",
+      "bytes": 2091,
+      "public_copy": false
+    }
+  },
+  "cpu_replay": {
+    "exact_runtime_episode_ids": [
+      "1",
+      "4",
+      "6",
+      "23",
+      "21",
+      "14",
+      "15"
+    ],
+    "retained_psg_failure_episode_ids": [
+      "13"
+    ],
+    "runtime_prompts_and_all_outcome_fields_exact": true,
+    "new_generation": false,
+    "cuda_executed": false
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "validation_only": true,
+    "validation_ids": [
+      "13",
+      "1",
+      "4",
+      "6",
+      "23",
+      "21",
+      "14",
+      "15"
+    ],
+    "formal_comparison": false,
+    "gold_present": false,
+    "scorer_present": false,
+    "evaluation_ids_used": false,
+    "official_test_opened": false,
+    "test_used_for_selection": false,
+    "claim_policy": "single-seed question-only validation negative: no correctness measurement, full evaluation, capability claim or promotion"
+  },
+  "provenance": {
+    "code_commit": "47f0e9cebc196e15c991d494dc4072367f53043b",
+    "probe_source": {
+      "commit": "d5bf41b221b1f2aa8c09082792d8cb590235623b",
+      "sha256": "373df1c73b668c3f261c57241e946dbf4d9d06fa4cd331b70b670881b1dc0f12",
+      "immutable_root_bound": true
+    },
+    "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/public-a100-validation-no-submit-seed42-47f0e9ce.json",
+    "executed_source_sha256": {
+      "src/auto_research/reproductions/skilldreamer/algorithm.py": "c31169a7175fd7e005323a1288905427230a2c61fc906257868b147b1c6e2f76",
+      "src/auto_research/reproductions/skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
+      "src/auto_research/reproductions/skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970",
+      "src/auto_research/reproductions/near/data.py": "795416bdffeb25880aeaf85b4bfd6480b8677b45cddabe37ba2e49d7bf544eb8",
+      "src/auto_research/reproductions/near/experiment.py": "197e3fefad06f1f0e54533b608c5d717e57d0b6a919a105f88eee79447d94399",
+      "src/auto_research/reproductions/state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+      "scripts/run_skilldreamer.py": "9b14997fef987797db879554966dccb6c5699496c4ca8a979cf027b17fbd421e"
+    },
+    "algorithm_archive_sha256": "063e7583614b5a1e75f7420c93871c920f18cc42f53cc22eddc2c4256cff8afb",
+    "probe_archive_sha256": "5f9fd1858f5fadede442e487d40e886077a4073f4ad690431e0a9f5286e973e8",
+    "execution_config_sha256": "e4bbc336251ada6bc815bf5013b351538b8e9ea45b30cd2a9c0f9fca855a06ed",
+    "dataset_fingerprint": "8b54e0b9206e2ee831ca074d0661ae75cf5d2212ebefc42f6c613591eed5db62"
+  },
+  "limitations": [
+    "50 environment calls include 46 successful calculations and 4 calculator errors; no finish or submission.",
+    "No external scorer or accuracy measurement; core mechanism invocation is not task success.",
+    "Only the fixed eight validation inputs, not the 16-ID evaluation or a complete three-arm/three-seed run.",
+    "Public record excludes original content and machine details; immutable local raw/config/log hashes remain bound.",
+    "No causal effect of API wording is isolated; earlier failures stay bound to their historical sources."
+  ]
+}

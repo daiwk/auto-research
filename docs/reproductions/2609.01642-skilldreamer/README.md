@@ -121,3 +121,9 @@ CPU逐条诊断发现原提示没有完整写明解析器要求的五个非空 `
 `algorithm.py` 对应 PSG 双阶段、HSR公式/roundrobin、CSI周期检查与技能加载；`experiment.py` 加载真实 checkpoint、执行三方法并独立评分；`gallery.json` 是通用 procedure 集而非训练/测试 gold plan；`paper.yaml` 显式列出未运行的原 benchmark，Evolve operators 为空。
 
 测试：`python -m pytest tests/reproductions/test_oct13_agents_jepa.py`，验证不能读取 gold、pseudo 不进入执行、gallery body 必须先加载后再行动、真实 calculator 输出回到下一次能力评估。
+
+### 47f/d5 独立 validation 无提交负记录
+
+上文“公平 API 文字尚未 GPU 执行”描述的是该历史时点；随后固定 `47f0e9ce` 算法与 `d5bf41b2` probe 已在真实 A100 上完成同一 8 条 question-only validation、seed42 与原预算的唯一探针。实际 163 calls、19466 tokens、58 次 CSI、7 个加载 episode；50 次 env.step 全为 calculator 尝试，其中 46 次成功、4 次错误，**0 finish、0 提交**。runner 与外层调用耗时分别 404.9072 / 405.8046 秒；另一个 episode 的 PSG 失败保留。
+
+详见 [独立脱敏负记录及原始 SHA](metrics/public-a100-validation-no-submit-seed42-47f0e9ce.json)。严格 CPU 整理逐字核对原 raw/partial/trace、source/config/归档及 launcher/exit；独立冻结源重放 7 个 runtime episode 的提示和全部结果字段一致。公开记录不包含原提示、问题/答案、token IDs、机器路径或 build 信息，原始证据保留本地。该 8 条探针没有 scorer，**不测准确率、不属于 16-ID 完整三臂×三 seed 评测、不生成 passed GPU receipt 或能力晋级证据**；没有隔离 API 文字变化的因果效果，也不强制模型 finish 或重试旧探针。
