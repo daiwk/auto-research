@@ -65,7 +65,9 @@ class ResponsePolicy:
         if not isinstance(json_schema, dict):
             raise ValueError("json_schema must be a JSON Schema object")
         try:
-            canonical = json.dumps(json_schema, sort_keys=True, separators=(",", ":"), allow_nan=False)
+            # XGrammar's strict default follows nested properties' declared order.
+            # Sorting keys would silently change generation (e.g. answer first).
+            canonical = json.dumps(json_schema, separators=(",", ":"), allow_nan=False)
         except (TypeError, ValueError) as exc:
             raise ValueError("json_schema must contain only finite JSON values") from exc
         vocab_size = getattr(self.model.config, "vocab_size", None)

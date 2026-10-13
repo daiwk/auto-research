@@ -44,8 +44,8 @@ def _problem(value):
 def construction_schema(operation):
     """Structure only: no answer values, correctness, novelty or safety forced."""
     problem={"type":"object","properties":{"question":{"type":"string"},
-        "answer":{"anyOf":[{"type":"string"},{"type":"number"}]},"trace":{"type":"string"}},
-        "required":["question","answer","trace"],"additionalProperties":False}
+        "trace":{"type":"string"},"answer":{"anyOf":[{"type":"string"},{"type":"number"}]}},
+        "required":["question","trace","answer"],"additionalProperties":False}
     if operation=="propose_children":
         return {"type":"array","items":problem,"minItems":2,"maxItems":2}
     if operation in {"harder_leaf","compose"}:
@@ -128,7 +128,7 @@ class CheckpointConstruction:
         audit=self.record_response(response,role="construction_teacher",input_gold_scope="training-construction-context",
             operation=operation,parsing_completed=False)
         if self.construction_json_schema:
-            schema_sha=hashlib.sha256(json.dumps(schema,sort_keys=True,separators=(",",":"),allow_nan=False).encode()).hexdigest()
+            schema_sha=hashlib.sha256(json.dumps(schema,separators=(",",":"),allow_nan=False).encode()).hexdigest()
             metadata=getattr(self.teacher,"last_json_schema_generation",{})
             if (metadata.get("backend")!="xgrammar-hf" or metadata.get("schema_sha256")!=schema_sha
                     or not isinstance(metadata.get("version"),str) or not metadata["version"]):

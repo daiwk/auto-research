@@ -89,7 +89,7 @@ def test_schema_caches_compilation_not_stateful_processor_and_charges_actual_tok
     ledger = CostLedger()
     schema = {'type': 'array', 'items': {'type': 'string'}}
     first = ledger.sample(policy, [], role='construction_teacher', max_tokens=3, json_schema=schema)
-    second = ledger.sample(policy, [], role='construction_teacher', max_tokens=3, json_schema=dict(reversed(list(schema.items()))))
+    second = ledger.sample(policy, [], role='construction_teacher', max_tokens=3, json_schema=copy.deepcopy(schema))
     assert sum(x[0] == 'tokenizer' for x in calls) == sum(x[0] == 'compiler' for x in calls) == 1
     assert next(x for x in calls if x[0] == 'tokenizer')[2] == 12345
     assert sum(x[0] == 'compile' for x in calls) == 1
@@ -100,6 +100,32 @@ def test_schema_caches_compilation_not_stateful_processor_and_charges_actual_tok
     ledger.sample(policy, [], json_schema={'type': 'object'})
     assert sum(x[0] == 'compile' for x in calls) == 2
     assert policy.model.calls[-1][1]['logits_processor'][0].compiled is not processors[0].compiled
+
+
+def test_compile_cache_and_actual_schema_digest_preserve_nested_property_order(monkeypatch):
+    calls = xgrammar_stub(monkeypatch)
+    policy = bare_policy()
+    properties = {'question': {'type': 'string'}, 'trace': {'type': 'string'}, 'answer': {'type': 'string'}}
+    schema = {'type': 'object', 'properties': properties, 'required': list(properties)}
+    policy.generate([], json_schema=schema)
+    first_digest = policy.last_json_schema_generation['schema_sha256']
+    first_processor = policy.model.calls[-1][1]['logits_processor'][0]
+    first_string = [c[1] for c in calls if c[0] == 'compile'][0]
+    assert list(json.loads(first_string)['properties']) == ['question', 'trace', 'answer']
+    assert first_string == json.dumps(schema, separators=(',', ':'), allow_nan=False)
+    assert first_digest == hashlib.sha256(first_string.encode()).hexdigest()
+    assert first_digest != hashlib.sha256(json.dumps(schema, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    different_order = copy.deepcopy(schema)
+    different_order['properties'] = dict(reversed(list(properties.items())))
+    policy.generate([], json_schema=different_order)
+    second_processor = policy.model.calls[-1][1]['logits_processor'][0]
+    assert policy.last_json_schema_generation['schema_sha256'] != first_digest
+    assert second_processor.compiled is not first_processor.compiled
+    policy.generate([], json_schema=copy.deepcopy(schema))
+    third_processor = policy.model.calls[-1][1]['logits_processor'][0]
+    assert third_processor is not first_processor and third_processor.compiled is first_processor.compiled
+    assert policy.last_json_schema_generation['schema_sha256'] == first_digest
+    assert sum(c[0] == 'compile' for c in calls) == 2
 
 
 def test_missing_dependency_fails_before_model_generation_or_fake_ledger_cost(monkeypatch):
@@ -158,7 +184,7 @@ class RecordingPolicy:
         self.calls.append((messages, kwargs))
         if 'json_schema' in kwargs:
             self.last_json_schema_generation = {'backend': 'xgrammar-hf', 'version': '0.2.8-CPU-STUB',
-                'schema_sha256': hashlib.sha256(json.dumps(kwargs['json_schema'], sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()}
+                'schema_sha256': hashlib.sha256(json.dumps(kwargs['json_schema'], separators=(',', ':'), allow_nan=False).encode()).hexdigest()}
         return [GeneratedResponse((1, 2), self.text, self.truncated)] * kwargs['samples']
 
 
@@ -176,11 +202,12 @@ def test_only_opt_in_construction_teacher_receives_operation_schema_and_audit(op
     if operation in ('propose_children', 'harder_leaf', 'compose'):
         problem = schema['items'] if operation == 'propose_children' else schema
         assert set(problem['required']) == {'question', 'answer', 'trace'}
+        assert list(problem['properties']) == problem['required'] == ['question', 'trace', 'answer']
         answer = problem['properties']['answer']
         assert 'enum' not in json.dumps(answer) and 'const' not in json.dumps(answer)
         assert 'pattern' not in json.dumps(answer) and 'minimum' not in json.dumps(answer)
     assert 'PRIVATE_TRAIN_GOLD' in str(messages)
-    digest = hashlib.sha256(json.dumps(schema, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
+    digest = hashlib.sha256(json.dumps(schema, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
     assert backend.response_audits[-1]['json_schema_sha256'] == digest
     assert backend.response_audits[-1]['json_schema_constrained'] is True
     assert backend.response_audits[-1]['xgrammar_version'] == '0.2.8-CPU-STUB'
