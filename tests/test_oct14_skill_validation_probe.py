@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import signal
 import time
+from types import SimpleNamespace
 
 import pytest
 
@@ -152,3 +153,58 @@ def test_failure_preserves_partial_trace_and_never_signs_completed(tmp_path, mon
     assert retained["capability_receipt"] is False
     assert output.with_suffix(".trace.jsonl").read_text() == '{"event":"CPU fixture attempt retained"}\n'
     assert json.loads(output.with_suffix(".partial.json").read_text()) == retained
+
+
+def algorithm_fixture(tmp_path, monkeypatch):
+    root = tmp_path / "auto-research-oct14-701f4500"
+    source_root = root / "src/auto_research/reproductions"
+    hashes, modules = {}, {}
+    for name in module.SOURCE_SHA256:
+        path = source_root / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("CPU source binding fixture: " + name)
+        hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+        if name.endswith(".py"):
+            modules["auto_research.reproductions." + name.removesuffix(".py").replace("/", ".")] = SimpleNamespace(__file__=str(path))
+    (root / ".source-commit").write_text("701f45007be75cf6153f98812ef94e087c94a8f0\n")
+    monkeypatch.setattr(module, "SOURCE_SHA256", hashes)
+    monkeypatch.setattr(module.importlib, "import_module", lambda name: modules[name])
+    config = {"algorithm_commit": "701f45007be75cf6153f98812ef94e087c94a8f0",
+              "algorithm_source_root": str(root), "source_sha256": dict(hashes)}
+    return config, root, modules
+
+
+def test_new_algorithm_contract_is_exactly_frozen_prompt_fix():
+    assert module.ALGORITHM_COMMIT == "701f45007be75cf6153f98812ef94e087c94a8f0"
+    assert module.SOURCE_SHA256["skilldreamer/algorithm.py"] == "e92ca8c36ca5be9949c09a9c4f1a7409b36a15cb4efe600cef46d7df1d89d01a"
+
+
+def test_algorithm_source_root_and_all_six_hashes_are_bound(tmp_path, monkeypatch):
+    config, _, _ = algorithm_fixture(tmp_path, monkeypatch)
+    assert module.algorithm_binding(config) == config["source_sha256"]
+
+
+@pytest.mark.parametrize("failure", ["old_commit", "old_root", "marker", "configured_hash", "loaded_hash", "loaded_root", "gallery_hash", "missing_file"])
+def test_old_arbitrary_or_mismatched_algorithm_source_is_rejected(tmp_path, monkeypatch, failure):
+    config, root, modules = algorithm_fixture(tmp_path, monkeypatch)
+    if failure == "old_commit":
+        config["algorithm_commit"] = "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e"
+    elif failure == "old_root":
+        config["algorithm_source_root"] = str(tmp_path / "auto-research-oct14-0f5dca9f")
+    elif failure == "marker":
+        (root / ".source-commit").write_text("a" * 40)
+    elif failure == "configured_hash":
+        config["source_sha256"]["skilldreamer/algorithm.py"] = "0" * 64
+    elif failure in {"loaded_hash", "gallery_hash"}:
+        name = "algorithm.py" if failure == "loaded_hash" else "gallery.json"
+        (root / "src/auto_research/reproductions/skilldreamer" / name).write_text("changed fixture source")
+    elif failure == "loaded_root":
+        original = Path(modules["auto_research.reproductions.skilldreamer.algorithm"].__file__)
+        other = tmp_path / "dirty-source/algorithm.py"
+        other.parent.mkdir()
+        other.write_bytes(original.read_bytes())
+        modules["auto_research.reproductions.skilldreamer.algorithm"].__file__ = str(other)
+    else:
+        config["source_sha256"].pop("near/data.py")
+    with pytest.raises(ValueError):
+        module.algorithm_binding(config)

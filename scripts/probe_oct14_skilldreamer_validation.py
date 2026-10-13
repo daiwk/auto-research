@@ -14,12 +14,12 @@ import signal
 import time
 
 VALIDATION_IDS = ("13", "1", "4", "6", "23", "21", "14", "15")
-ALGORITHM_COMMIT = "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e"
+ALGORITHM_COMMIT = "701f45007be75cf6153f98812ef94e087c94a8f0"
 MODEL_REVISION = "bb46c15ee4bb56c5b63245ef50fd7637234d6f75"
 ENCODER_REVISION = "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
 QUESTIONS_SHA256 = "6a3213a1941882e4d0787b903df170452f13ea13f52ad9dbc4e6cb6e418eca5e"
 SOURCE_SHA256 = {
-    "skilldreamer/algorithm.py": "d6e2e446a39826d3b3c4c29691e342599bad5272a9330cb20c666ebbb8500345",
+    "skilldreamer/algorithm.py": "e92ca8c36ca5be9949c09a9c4f1a7409b36a15cb4efe600cef46d7df1d89d01a",
     "skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
     "skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970",
     "near/data.py": "795416bdffeb25880aeaf85b4bfd6480b8677b45cddabe37ba2e49d7bf544eb8",
@@ -99,11 +99,34 @@ def fixed_budget(config: dict) -> None:
         raise ValueError("fixed original algorithm, seed, token/action/retrieval/call/wall budget required")
 
 
+def algorithm_binding(config: dict) -> dict:
+    expected = config.get("source_sha256", {})
+    if config.get("algorithm_commit") != ALGORITHM_COMMIT or expected != SOURCE_SHA256:
+        raise ValueError("complete fixed algorithm commit and six-file source whitelist required")
+    root = Path(config.get("algorithm_source_root", ".")).resolve()
+    marker = root / ".source-commit"
+    if (root.name != "auto-research-oct14-701f4500" or not marker.is_file()
+            or marker.read_text().strip() != ALGORITHM_COMMIT):
+        raise ValueError("algorithm must use its separately frozen immutable 701f4500 source root")
+    modules = {name: importlib.import_module("auto_research.reproductions." + name.removesuffix(".py").replace("/", "."))
+               for name in expected if name.endswith(".py")}
+    if any(Path(module.__file__).resolve() != root / "src/auto_research/reproductions" / name
+           for name, module in modules.items()):
+        raise ValueError("loaded algorithm modules must match the fixed immutable source root")
+    actual = {name: hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest() for name, module in modules.items()}
+    actual["skilldreamer/gallery.json"] = hashlib.sha256(
+        Path(modules["skilldreamer/algorithm.py"].__file__).with_name("gallery.json").read_bytes()).hexdigest()
+    if actual != expected:
+        raise ValueError("loaded library source differs from the fixed 701f4500 algorithm archive")
+    return actual
+
+
 def audit(config: dict, *, framework: bool = False) -> dict:
     if framework and os.environ.get("CUDA_VISIBLE_DEVICES") != "":
         raise ValueError("CPU audit requires CUDA explicitly disabled")
     fixed_budget(config)
     runner = runner_binding(config)
+    actual = algorithm_binding(config)
     rows, input_source = questions_only(Path(config["questions_file"]))
     from auto_research.reproductions.near.experiment import verify_provenance
     model_dir, encoder_dir = Path(config["model_dir"]), Path(config["encoder_dir"])
@@ -118,24 +141,6 @@ def audit(config: dict, *, framework: bool = False) -> dict:
         if set(source.get("files", {})) != set(files):
             raise ValueError("exact public checkpoint file whitelist required")
         resources.append(verify_provenance(directory, public_id, revision, files))
-    expected = config.get("source_sha256", {})
-    names = {"skilldreamer/algorithm.py", "skilldreamer/experiment.py", "skilldreamer/gallery.json",
-             "near/data.py", "near/experiment.py", "state_opd/environment.py"}
-    if set(expected) != names or expected != SOURCE_SHA256:
-        raise ValueError("complete fixed original source whitelist required")
-    modules = {name: importlib.import_module("auto_research.reproductions." + name.removesuffix(".py").replace("/", "."))
-               for name in expected if name.endswith(".py")}
-    actual = {name: hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest() for name, module in modules.items()}
-    algorithm_root = Path(config["algorithm_source_root"]).resolve()
-    if (algorithm_root.name != "auto-research-oct14-0f5dca9f" or any(Path(module.__file__).resolve()
-            != algorithm_root / "src/auto_research/reproductions" / name for name, module in modules.items())):
-        raise ValueError("original algorithm must load from its separate immutable 0f source root")
-    algorithm = modules.get("skilldreamer/algorithm.py")
-    if algorithm is None:
-        raise ValueError("original algorithm source binding required")
-    actual["skilldreamer/gallery.json"] = hashlib.sha256(Path(algorithm.__file__).with_name("gallery.json").read_bytes()).hexdigest()
-    if actual != expected:
-        raise ValueError("loaded library source differs from fixed 0f algorithm archive")
     report = {"mode": "cpu_audit" if framework else "resource_and_source_audit", "questions": len(rows),
               "validation_ids": list(VALIDATION_IDS), "input": input_source, "checkpoint": resources[0], "encoder": resources[1],
               "algorithm_commit": ALGORITHM_COMMIT, "source_sha256": actual,
