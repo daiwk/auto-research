@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "key": "replayssm",
+  "arxiv_id": "2610.13778",
+  "title": "ReplaySSM: Cache SSM Inputs, Not State",
+  "paper_url": "https://arxiv.org/abs/2610.13778",
+  "organization": "Princeton University / NVIDIA",
+  "published": "2026-10-09",
+  "upstream_code": "https://github.com/Johnny-Liou/ReplaySSM",
+  "track": "llm",
+  "topics": [
+    "推理与系统效率",
+    "SSM 缓存与回滚"
+  ],
+  "local_code": "src/auto_research/reproductions/replayssm",
+  "documentation": "docs/reproductions/2610.13778-replayssm/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "seeded random recurrent inputs, protocol v1"
+  ],
+  "baseline": "conventional FP32 recurrence and author s32_rs Triton emulation",
+  "metrics": [
+    "max_output_error",
+    "checkpoint_refreshes",
+    "output_rmse",
+    "anchor_rmse"
+  ],
+  "mechanisms": [
+    "checkpoint and committed/draft input buffer",
+    "causal output-only verification and acceptance pointer rollback",
+    "GDN triangular residual solve and HP refresh recomputation",
+    "independent recurrence/read precision and pinned author Triton execution"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.replayssm.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/Johnny-Liou/ReplaySSM",
+      "organization": "Princeton University / NVIDIA",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "native vLLM end-to-end serving",
+      "physical low-bit storage and H100/B300 bandwidth speedup benchmark",
+      "PG-19 and long-generation downstream model quality"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded diagnostic; explicit local CLI config",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/replayssm-a100-20261013.json"
+  }
+}

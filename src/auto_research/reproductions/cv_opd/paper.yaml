@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "cv-opd",
+  "arxiv_id": "2610.13264",
+  "title": "CV-OPD: Contrastive Vision On-policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13264",
+  "organization": "Xiamen University / Moxin Technology",
+  "published": "2026-10-09",
+  "upstream_code": "https://github.com/HaoLin3419/Contrastive-Vision-OPD",
+  "track": "llm",
+  "topics": [
+    "视觉证据对齐",
+    "On-policy distillation"
+  ],
+  "local_code": "src/auto_research/reproductions/cv_opd",
+  "documentation": "docs/reproductions/2610.13264-cv-opd/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "COCO train2017 object-presence subset"
+  ],
+  "baseline": "same checkpoint before update; no matched Vision-OPD training comparison",
+  "metrics": [
+    "parameter_delta_l2",
+    "optimizer_updates",
+    "gated_tokens",
+    "final_test.accuracy"
+  ],
+  "mechanisms": [
+    "real image VLM and same-prefix positive/negative bbox crops",
+    "student-aligned Top-100 plus tail JSD",
+    "full-vocabulary margin CDL and batch discrepancy gate",
+    "any-correct-rollout sample gate and EMA teacher"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.cv_opd.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/HaoLin3419/Contrastive-Vision-OPD",
+      "organization": "Xiamen University / Moxin Technology",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "Qwen3.5-4B full training on 6.2K visual reasoning data",
+      "six fine-grained benchmarks and GPT-OSS-120B judge"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded diagnostic; explicit local CLI config",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/cv-opd-a100-20261013.json"
+  }
+}

@@ -1,0 +1,1 @@
+{"paper":"2610.13778","seed":42,"evaluation_tier":"l1_mechanism","diagnostic_only":true,"promotion_eligible":false,"device":"cpu","protocol":"replayssm-random-input-protocol-v1","metrics":{"passed_behavior_tests":4,"max_output_error":1.1920928955078125e-7,"accepted_tokens":12,"checkpoint_refreshes":3},"native_bandwidth_speedup_claim":false,"gpu_validation_completed":false}

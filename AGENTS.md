@@ -50,6 +50,7 @@
 - Use the repository environment and `python -m pytest`. The required CI checks are defined in `.github/workflows/quality.yml` and `.github/workflows/docs.yml`; complete applicable gates and fix failures without weakening assertions or relabeling evidence to make tests pass.
 - After relevant checks pass, repeat or broaden them only for a new change, failure, or unresolved concern. Run generators to check consistency; inspect their diff and repair the source of generated content.
 - Preserve unrelated changes and untracked user files. Do not recreate `uv.lock` as routine cleanup. Before a PR handoff, verify its URL, branch, diff, and checks; distinguish pending CI from passed CI.
+- At the end of each run, inspect local disk use and remove the run's disposable, reproducible artifacts (such as generated site/build directories, temporary packaging environments and redundant download archives). Preserve source changes, experiment results including failures, validation receipts, active working directories, and reusable public data/checkpoint caches. Do not delete unfamiliar files or checkpoints merely because they are large; record the cleanup scope and space reclaimed.
 
 ## GPU validation gate
 

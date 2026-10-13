@@ -1,0 +1,19 @@
+{
+  "domain": "multimodal-models",
+  "key": "cv-opd",
+  "title": "CV-OPD: Contrastive Vision On-policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13264",
+  "detail_path": "reproductions/2610.13264-cv-opd/README.md",
+  "topic": [
+    "视觉证据对齐",
+    "On-policy distillation"
+  ],
+  "first_author": "Haowei Wang",
+  "first_author_affiliation": "Xiamen University / Moxin Technology",
+  "published": "2026-10-09",
+  "code": "https://github.com/HaoLin3419/Contrastive-Vision-OPD",
+  "adapter": "cv-opd",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/cv-opd-a100-20261013.json"
+}

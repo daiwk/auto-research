@@ -1,0 +1,1 @@
+{"paper":"2610.13264","evaluation_tier":"l0_contract","diagnostic_only":true,"promotion_eligible":false,"device":"cpu","protocol":"cv-opd-formula-contract-v1","metrics":{"passed_behavior_tests":4},"gpu_validation_completed":false}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "oal",
+  "arxiv_id": "2610.13674",
+  "title": "Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels",
+  "paper_url": "https://arxiv.org/abs/2610.13674",
+  "organization": "The Chinese University of Hong Kong, Shenzhen / Beijing Normal University, Zhuhai / National University of Singapore",
+  "published": "2026-10-09",
+  "upstream_code": "https://github.com/wuqianyue09/OAL",
+  "track": "llm",
+  "topics": [
+    "推理与系统效率",
+    "注意力线性化"
+  ],
+  "local_code": "src/auto_research/reproductions/oal",
+  "documentation": "docs/reproductions/2610.13674-oal/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Salesforce/wikitext wikitext-2-raw-v1"
+  ],
+  "baseline": "same fixed Qwen2.5-0.5B Base with identical q/k/v/o LoRA budget; learned global quadratic calibration",
+  "metrics": [
+    "oal_lora.test_nll",
+    "softmax_lora.test_nll",
+    "parameter_delta_l2",
+    "validation_output_mse"
+  ],
+  "mechanisms": [
+    "post-RoPE QK contribution and native GQA grouping",
+    "prompt-level bootstrap tail boundaries",
+    "positive grouped quadratic kernel and HD recurrence",
+    "attention-output MSE calibration and joint q/k/v/o LoRA"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.oal.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/wuqianyue09/OAL",
+      "organization": "The Chinese University of Hong Kong, Shenzhen / Beijing Normal University, Zhuhai / National University of Singapore",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "author HD block-GEMM/Triton production backend",
+      "512-step WikiText-103 and downstream PIQA/HellaSwag/ARC-E protocol"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded diagnostic; explicit local CLI config",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oal-a100-20261013.json"
+  }
+}
