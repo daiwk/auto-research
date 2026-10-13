@@ -34,7 +34,17 @@ flowchart LR
   T --> S[冻结reasoner预算内suffix]
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.13672v1#S5.F3)；[原始图资源](https://arxiv.org/html/2610.13672v1/framework.svg)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Inject a Turn, Not a Token: Learning Where to Redirect LLM Reasoning for Self-Correction 原论文 Figure 3](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13672v1/framework.svg)
+
+中文图注（原论文 Figure 3）：第一步，冻结 reasoner 产生候选轨迹，冻结 0.6B encoder 与可训练 MLP 在失败轨迹的段落边界选择切点；第二步，保留切点前缀，插入固定指令作为新 user turn，并在新 assistant turn 续写。这是作者原始框架图，图中成功示例不等于本地验证结果。
+
+精确来源：[固定 v1 的 Figure 3，HTML `S5.F3`](https://arxiv.org/html/2610.13672v1#S5.F3)；[原始 SVG](https://arxiv.org/html/2610.13672v1/framework.svg)。本地原始字节副本与 SHA-256 记录在 [figure-source.json](figure-source.json)，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 Figure 3（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.13672v1/framework.svg)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 

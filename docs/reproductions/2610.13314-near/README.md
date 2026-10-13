@@ -38,21 +38,39 @@ graph LR
  F --> I
 ```
 
-重绘源码：[architecture.mmd](assets/architecture.mmd)；原图为[Figure 2](https://arxiv.org/html/2610.13314v1#S2.F2)，官方 HTML 内嵌图的来源见 [source-provenance.json](assets/source-provenance.json)。
+上方为本地重绘示意，源码：[architecture.mmd](assets/architecture.mmd)；固定全文来源见 [source-provenance.json](assets/source-provenance.json)。
+
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![NEAR：用相近记忆构造区分性残差 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.13314v1#page=3)
+
+图 2：左侧离线 memory 邻域形成局部 reference，并构建 anchor-direction 表供在线 query 使用；中间删除 reference 方向上的投影，再生成下一层和 matching view；右侧将原始与多层残差加权拼接为固定 memory key，在线 query 只需一次 ANN 检索。参考表来自 memory bank，不需要 gold retrieval labels。来源：Luo 等，[v1 Figure 2](https://arxiv.org/html/2610.13314v1#S2.F2)，[原 PDF 第 3 页](https://arxiv.org/pdf/2610.13314v1#page=3)。
+
+此图为原文 PDF 的 250 dpi 局部截图，图内文字未改写，已视觉核验；不是本地测量。论文标注 arXiv perpetual non-exclusive license，并非 CC BY；图示版权仍归原作者。PDF/图片 SHA256、页码与裁切范围见 [original-figures.json](assets/original-figures.json)。
+
+> **原论文 Figure 2（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2610.13314v1#page=3)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
 对 memory 或 query 输入状态 $h$ 与单位 reference $c$：
 
-$$r=h-(h^Tc)c,\qquad h^{next}=\operatorname{unit}(r).$$
+$$
+r=h-(h^Tc)c,\qquad h^{next}=\operatorname{unit}(r).
+$$
 
 残差用于打分时可保留长度或单位化，该选择只看 development。各层尺度使用 memory–memory 的 population variance，包含自相似项：
 
-$$\tau_\ell=\max\left(10^{-6},\sqrt{\frac1N\sum_i\operatorname{Var}_j\left[(z_i^{(\ell)})^Tz_j^{(\ell)}\right]}\right).$$
+$$
+\tau_\ell=\max\left(10^{-6},\sqrt{\frac1N\sum_i\operatorname{Var}_j\left[(z_i^{(\ell)})^Tz_j^{(\ell)}\right]}\right).
+$$
 
 实现用 memory covariance 等价计算，避免构造全量 pairwise score。最终融合：
 
-$$S(q,m)=s_0/\tau_0+\frac\alpha L\sum_{\ell=1}^L s_\ell/\tau_\ell.$$
+$$
+S(q,m)=s_0/\tau_0+\frac\alpha L\sum_{\ell=1}^L s_\ell/\tau_\ell.
+$$
 
 将 memory view 按 $\sqrt{\alpha/L}$ 连接，将 query view 另除以对应 $\tau_\ell$，一次内积严格等于上述融合；不能再对连接向量整体归一化，否则改变原式排序。
 

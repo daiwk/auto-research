@@ -174,6 +174,7 @@
 - [Policy-Grounded Dynamic Facet Suggestions](../2605.16479-policy-facet/README.md)：以离线 taxonomy、在线召回和策略约束排序生成动态搜索 facet。
 - [CQ-SID](../2605.14434-cq-sid/README.md)：用类目约束残差 Semantic ID 与 expert-guided GRPO 优化天猫搜索生成式检索。
 - [MM-LLM](../2605.09338-mm-llm/README.md)：把多模态内容转成 caption/token 特征，再注入推荐模型增强内容理解。
+- [UxSID](../2605.09040-uxsid/README.md)：用兴趣锚点压缩全历史，再以目标语义 ID 做两级探针和全局门控，让语义相近候选共享可缓存的用户兴趣记忆；v1 为 5 月 9 日，本轮依据 10 月 v4 更新实现。
 - [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../2605.16344-prl-puts/README.md)：以双头 Q 网络和 Pareto 扫描选择可治理的个性化多目标 utility 策略。
 - [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md)：按任务相似度把 CTR 知识迁移到多个 CVR 塔，并抑制难例负迁移。
 - [PA-Bridge](../2605.05855-pa-bridge/README.md)：对齐主动搜索和被动推荐的表征分布，桥接两类用户表达信号。

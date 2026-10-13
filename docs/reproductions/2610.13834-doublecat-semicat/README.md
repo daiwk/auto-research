@@ -23,7 +23,17 @@ One-hot continuous flow 在接近终点时训练几乎只看见低熵顶点，�
 
 ### 架构图
 
-[原文 Figure 1、Figure 2 与 Algorithm 1](https://arxiv.org/html/2610.13834v1#S3)。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![DoubleCat / SemiCat：连续扩散 LM 的双层插值与离散 reveal 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.13834v1#page=3)
+
+原论文 Figure 1 的完整三面板：左为接近 one-hot 顶点的训练输入，中为跟随有熵 denoiser 的推理轨迹，右为 DoubleCat 在 simplex 内加入的第二层 corruption。它解释的是无需额外 denoiser 前向的训练分布修正，不是两次前向标准 SC 消融，也不是本地能力结果。来源为 [arXiv 2610.13834v1 PDF，第 3 页](https://arxiv.org/pdf/2610.13834v1#page=3)，对应 [v1 HTML Figure 1](https://arxiv.org/html/2610.13834v1#S2.F1)；以 216 DPI 提取完整图和原有面板标签，未重绘、未拼接不同来源。PDF/图像 SHA256 与裁剪范围见 [assets/provenance.json](assets/provenance.json)。
+
+> **原论文 Figure 1（关键图）**：上文说明所选原图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2610.13834v1#page=3)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
+
+下图为本地 DoubleCat/SemiCat 实现映射的重绘示意；SemiCat reveal 依据 [原文 §3.2 与 Algorithm 1](https://arxiv.org/html/2610.13834v1#S3.SS2)：
 
 ```mermaid
 flowchart TD
@@ -110,13 +120,15 @@ adapter 读取 `dataset_dir/doublecat-semicat.json` 的显式 CLI 参数。无�
 
 [cpu-v2-no-extra-forward-seed42.json](metrics/cpu-v2-no-extra-forward-seed42.json)为修正后的同等 CPU 一步预算：三模型实际训练前向各 1 次、validation/test 各 1 次、采样各 2 次，没有 no-grad 训练预前向。test CE 为 onehot 5.6774、DoubleCat 5.6824、SemiCat 5.6012，DoubleCat 在该诊断仍较差；SemiCat 的较低 CE 不能推导语言能力提升。10 个行为测试通过，新旧结果分别保留，不作跨协议提升比较。
 
-CPU 结果不能满足 A100/A30 GPU 门槛。此极小模型没有语言能力比较资格；denoising CE 不是精确 likelihood 或 GPT-2/Qwen Gen.PPL，采样 byte entropy 也不是原文 tokenizer 口径。未运行 TinyGSM、GSM8K、OWT、大规模 pretraining、下游 MCQA、distillation/InfoNoise/confidence sampler；未接入 Evolve。
+[public-a30-seeds42-44.json](metrics/public-a30-seeds42-44.json)与[源码绑定 GPU 回执](../../gpu-validations/doublecat-semicat-a30-20261013.json)记录修正后核心在真实 A30 的三 seed 运行。每 seed / 每结构 40 次真实训练前向、4 次 validation、1 次 test、32 次采样，没有额外标准 SC 前向；三结构均发生参数变化。Test denoising CE 平均±样本标准差为 onehot **3.2930±0.0126**、DoubleCat **3.2970±0.0123**、SemiCat **3.3479±0.0847**。
+
+onehot 与 DoubleCat 三 seed 的采样均坍缩为全空格，byte entropy=0；SemiCat 平均 entropy=3.1005，但更高 entropy 并非更高语言质量。保留这些负结果，不宣称稳定提升。此极小模型没有语言能力比较资格；denoising CE 不是精确 likelihood 或 GPT-2/Qwen Gen.PPL，采样 byte entropy 也不是原文 tokenizer 口径。未运行 TinyGSM、GSM8K、OWT、大规模 pretraining、下游 MCQA、distillation/InfoNoise/confidence sampler；未接入 Evolve。
 
 ### 代码映射
 
 | 原文组件 | 本地实现 |
 | --- | --- |
-| 二级 interpolant、双向 DiT、L2 weighting、reveal；可选标准 SC 消融 | [doublecat_semicat.py](../../../src/auto_research/foundation_models/doublecat_semicat.py) |
-| 真训练、validation 选择和隔离 test | [run_doublecat_semicat.py](../../../scripts/run_doublecat_semicat.py) |
-| 行为测试 | [test_doublecat_semicat.py](../../../tests/test_doublecat_semicat.py) |
+| 二级 interpolant、双向 DiT、L2 weighting、reveal；可选标准 SC 消融 | [doublecat_semicat.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/foundation_models/doublecat_semicat.py) |
+| 真训练、validation 选择和隔离 test | [run_doublecat_semicat.py](https://github.com/daiwk/auto-research/blob/main/scripts/run_doublecat_semicat.py) |
+| 行为测试 | [test_doublecat_semicat.py](https://github.com/daiwk/auto-research/blob/main/tests/test_doublecat_semicat.py) |
 

@@ -6,7 +6,9 @@
 
 ### 课程与能力边界
 
+- [A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO](../../reproductions/2610.13669-grpo-difficulty-curriculum/README.md)（`grpo-difficulty-curriculum`）：difficulty随当前policy变化，样本可能反复进出难度带。论文比较静态easy-to-hard、在线fixed-medium和B1→B5课程，进一步升到B5会退化。
 - [BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation](../../reproductions/2610.13285-boundary-evo/README.md)（`boundary-evo`）：长推理监督的价值随学生能力变化。BoundaryEvo 先不按 correctness 过滤地蒸馏少量教师行为做 capability priming，然后每轮用当前学生、固定 expert 和 analyzer 重估边界，保留仍未掌握的 replay 并补充新问题；选好问题后再生成并验证 fresh teacher trajectories。
+- [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../../reproductions/2610.12659-magicbeanstalk/README.md)（`magicbeanstalk`）：RLVR有效性取决于problem、当前policy、rollout预算。MBS从verified hard seed提炼reasoning蓝图，自顶向下分解并实测child worked examples是否提高parent正确率，再合成更难新leaf、自底向上按原依赖组合。
 - [CoBA-RL](../2606.22317-coba-rl/README.md)（`coba-rl`）：普通 RLVR 可能只重新分配 base model 已有轨迹的概率，提升 pass@1 却不扩展高采样 pass@k 所反映的能力边界。该方法先用多次采样估计边界，在边界附近/之外注入教师推理，再用 RL 巩固。
 - [SPIRAL](../2506.24119-spiral/README.md)（`spiral`）：同一模型扮演出题者和解题者，在可自动判定的零和多轮语言游戏中形成逐步变难的课程。
 - [INTUITOR](../2505.19590-intuitor/README.md)（`intuitor`）：把答案分布相对均匀分布的 KL 作为 intrinsic self-certainty reward，在没有答案和 verifier 时优化。
@@ -14,6 +16,7 @@
 
 ### 过程 / token 信用分配
 
+- [Inject a Turn, Not a Token: Learning Where to Redirect LLM Reasoning for Self-Correction](../../reproductions/2610.13672-upturn/README.md)（`upturn`）：冻结reasoner和小causal encoder，只学习paragraph boundary处的MLP cut policy。真实失败rollout在不同cut被冻结reasoner重新生成，给rescue奖励。
 - [SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning](../2608.26550-spear/README.md)（`spear`）：结果奖励过稀，神经 PRM 又昂贵。SPEAR 把教师推理投影为领域符号 milestone，用 LCS-F1 给学生轨迹提供顺序敏感的稠密奖励。
 - [SRPO: Self-Reflective Policy Optimization for Long-Horizon Reasoning](../2608.23493-srpo/README.md)（`srpo`）：长轨迹只给终局 reward 时，很难知道具体哪个 token/动作导致失败。SRPO 让当前模型先根据完整轨迹和环境结果写出简短 reflection patch，再把 patch 拼回原问题；同一个模型在这个特权上下文中充当教师，对学生的 on-policy rollout 给出逐 token 分数。
 - [ADRS](../2608.03223-adrs/README.md)（`adrs`）：privileged teacher 的高置信并不必然与真实任务回报一致。ADRS 在每个交互 step 内标准化教师分数，以教师置信与 realized return 的相关性形成 TVA gate，再把 gated token signal 写入原生 reward-to-advantage 路径，推理时无需技能。
@@ -36,6 +39,7 @@
 ### on-policy / context 蒸馏
 
 - [Branching On-Policy Distillation](../../reproductions/2610.13481-branch-opd/README.md)（`branch-opd`）：普通 OPD 每个前缀只看到一次后续。BranchOPD 用学生不确定性和师生分歧定位 fork，从同一冻结学生策略独立采样 suffix，前缀只计入一次；并用协议事件监督结束行为。
+- [State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents](../../reproductions/2610.13238-state-opd/README.md)（`state-opd`）：多轮OPD把旧reasoning和实际环境记录混在教师上下文中，可能继承错误推理。State-OPD只给教师已执行action/observation状态，学生仍保留完整history；在高完整词表熵状态扩采整段reasoning+action，额外action不执行。
 - [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](../2610.11659-dial-opd/README.md)（`dial-opd`）：用概率的对数均值调节教师—学生对数差异，降低两者都不认可的低概率 token 的监督优先级。按每条响应选取高分位置，未选位置仍保留为上下文。
 - [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](../2610.11989-meta-opd/README.md)（`meta-opd`）：轻量权重网络根据师生预测学习 token 监督权重。它通过一次可微虚拟学生更新后的参考解损失获得元梯度，再使用新权重执行真实学生更新。
 - [ReCal: Calibrating Structured Pruning for On-Policy Distillation Recovery](../2610.11332-recal/README.md)（`recal`）：先剪枝再蒸馏并不保证可恢复：损坏的学生轨迹会限制 OPD 教师信号。ReCal 先用剪枝 probe 测量教师轨迹上损伤，再用损伤重加权原始未剪枝模型的校准统计，重新选择通道；目标宽度和恢复流程保持一致。
@@ -85,6 +89,8 @@
 
 - [Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation](../../reproductions/2610.13521-road-mopd/README.md)（`road-mopd`）：多域只路由各自教师，不能防止共享参数更新损害其他能力。Road 用未路由教师在当前目标域的同一学生轨迹上给出兼容性证据，调节 token credit，再求真实辅助梯度，投影目标梯度但保留其范数下限。
 - [CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation](../../reproductions/2610.13257-cast-opd/README.md)（`cast-opd`）：异构 tokenizer 的同一文本有不同分段，直接比较 token ID 无意义。CAST 先匹配实际解码文本，将教师 span 的总 log probability 均匀投影到学生 span，再按不确定性×局部平滑度分配 credit；未对齐位置通过初始学生 KL 限制漂移。
+- [Continually Post-training Small Models via Synthetic Self-distillation](../../reproductions/2610.13113-synthself/README.md)（`synthself`）：小模型self-rewrite可能失真，直接SFT又可能偏离base分布。SynthSelf用更大的同家族aligner把train demonstration贪心离线改写，通过答案拒绝采样后SFT。
+- [Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training](../../reproductions/2610.12933-progressive-contraction/README.md)（`progressive-contraction`）：正确teacher CoT也可能经过多种正确/错误后续的reasoning fork。论文对真实prefix做Monte Carlo continuation，按branch不确定性先收缩teacher pool，再经真实student probing epoch按当前NLL选top-M并重路由。
 - [CompassOPD: Cross-Family On-Policy Distillation via Within-Family Likelihood Shifts](../2609.10154-compass-opd/README.md)（`compass-opd`）：异构教师与学生的绝对概率刻度不可直接比较。CompassOPD 用教师相对其 reference 的后训练变化作“指南针”，并在模型族内中心化，保留方向而消除不同模型族的整体偏置。
 - [Eliciting Weak-to-Strong Generalization with On-Policy Reverse Distillation](../2609.08798-oprd/README.md)（`oprd`）：OPRD 不直接模仿弱教师答案，而是先测量弱教师经过后训练后的 logit 变化方向，再沿这个方向增强强模型的可验证奖励梯度；核心假设是“学习方向”比弱模型最终能力更容易迁移。
 - [Preserving General Capabilities during Domain Specialization with Uncertainty-Calibrated MOPD](../2608.26735-uc-mopd/README.md)（`uc-mopd`）：普通 MOPD 很少采到强正优势 token，也无法判断更新方向是否可靠。方法扩大温度覆盖，按轨迹正优势密度挑样本，再用熵校准 CLL 概率门控 token 更新。
@@ -251,6 +257,7 @@
 
 ### 信任域、clip 与梯度稳定
 
+- [Generalized Proximal Policy Optimization: Unifying LLM RL Algorithms from the Perspective of Divergence](../../reproductions/2610.13015-gppo-framework/README.md)（`gppo-framework`）：GPPO把近端优化拆成f-divergence几何和估计拓扑。MC、atomic、binary对采样动作概率/补集的处理不同，诱导实际不同信任域。
 - [Beyond the Stability-Exploration Dilemma: Environmental Regularization for LLM Policy Optimization](../2608.23311-erpo/README.md)（`erpo`）：传统 Policy-KL 直接压回答分布，稳定训练的同时消耗探索预算。ERPO 观察到 RL 过程中模型诱导的问题分布也会漂移，于是把正则放到输入侧：用冻结 reference 的问题似然给 query 静态加权，再以 Query-KL 控制环境分布漂移，不直接对 response score function 施压。
 - [GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs](../2608.11674-gcpo/README.md)（`gcpo`）：GRPO 等 on-policy rollout RL 会偶发进入预训练权重的主奇异子空间，论文观察到这些 spike 常先于验证性能下降。GCPO 固定预训练矩阵两侧的 top-k 奇异空间，只允许低秩更新存在于输入、输出两侧的正交补中；这是硬可行域，不是依赖系数的软 penalty。
 - [RIPO](../2607.10169-ripo/README.md)（`ripo`）：固定 PPO ratio 区间在低概率区域过于保守、在高概率区域又可能过大。RIPO 以 Fisher–Rao 几何定义策略距离，并按旧策略概率设置等距 clip 半径，使不同概率区域获得更均衡的局部 KL 预算。
@@ -261,6 +268,7 @@
 
 ### 序列目标、长度与聚合偏置
 
+- [Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL](../../reproductions/2610.13020-tapo-trajectory/README.md)（`tapo-trajectory`）：autoregressive轨迹的前序policy变化累积state distribution gap。TAPO对token前缀likelihood ratio取几何均值、按长度收紧clipping，并stop-gradient避免前序token反传进当前动作。
 - [RLCPR: Rethinking Probability-Based Reinforcement Learning From Posterior Concentration](../2610.01458-rlcpr/README.md)（`rlcpr`）：概率奖励在同组推理后验接近时难以区分冗长推理；RLCPR 只对“全组都长、答案后验又集中”的组施加相对长度惩罚。另用直接作答时的 token 平均熵把数据分层，让保留分布偏向低不确定样本。
 - [ReCo](../2607.26862-reco/README.md)（`reco-grpo`）：GRPO 容易重复采到高概率回答，并继续放大已经占优的 token，导致大 $k$ 下推理路径覆盖率下降。ReCo 同时修正 response 和 token：按 rollout 组中的期望出现次数抑制高频回答，再用 Bernoulli 方差比把更新集中到尚未饱和的决策点。
 - [ConSPO](../2605.12969-conspo/README.md)（`conspo`）：将同组序列的优劣关系写成长度归一化 InfoNCE，避免 token 求和造成长度和组内尺度偏差。
@@ -280,6 +288,7 @@
 
 ### Agentic RL 与教师调度
 
+- [SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents](../../reproductions/2610.13157-soar/README.md)（`soar`）：只按答案奖训练的search agent可能答对却伪造证据依赖。SOAR独立记录atomic query的internal recall和external retrieval，再要求显式声明source。
 - [Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT](../2610.03361-follow-the-winners/README.md)（`follow-the-winners`）：在有状态工具环境里，为同一提示重复生成一组等价 rollout 往往很贵；而 PPO 的 critic 又占用额外模型资源。FTW 不计算 value，也不要求 GRPO 式同题多轨迹。
 - [Dependency-Aware Reward Shaping for Agentic Reinforcement Learning](../2610.01207-dars/README.md)（`dars`）：把任务进度表示为带先决条件的 predicate 图；验证、失效和修复事件更新图状态，最近破损依赖按图距离衰减已完成工作的 credit，独立分支不受牵连。
 - [My FAULT: Self-Diagnosis as Credit Assignment in Self-Evolving Agentic Reinforcement Learning](../2610.01161-my-fault/README.md)（`my-fault`）：自诊断器提出错误类别与位置，只有经证据验证的 claim 才进入在线 error pricing；学得的相对成本把终局 credit 守恒地重分配到步骤。

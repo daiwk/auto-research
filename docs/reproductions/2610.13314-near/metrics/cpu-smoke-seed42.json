@@ -3,13 +3,17 @@
   "adapter_key": "near",
   "manifest_ref": "reproduction:near",
   "method": "near",
-  "seeds": [42],
+  "seeds": [
+    42
+  ],
   "diagnostic_only": true,
   "measured_locally": true,
   "promotion_eligible": false,
   "evaluation_protocol": {
     "tier": "l2_public_dataset",
-    "seeds": [42],
+    "seeds": [
+      42
+    ],
     "formal_comparison": false,
     "claim_policy": "single-seed CPU smoke, only two test queries; no stable improvement claim"
   },
@@ -37,7 +41,11 @@
     "base_ndcg_at_10": 0.6445324131589439,
     "ndcg_absolute_difference": 0.0
   },
-  "selection": {"depth": 1, "normalize_residual": false, "alpha": 0.25},
+  "selection": {
+    "depth": 1,
+    "normalize_residual": false,
+    "alpha": 0.25
+  },
   "protocol": "strict connected candidate-bank split; exact fixed-key retrieval; validation-only selection",
   "command": "PYTHONPATH=src OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 python scripts/run_oct13_memory.py --paper near --raw-data longmemeval_s_cleaned.json --model-dir minilm --device cpu --seed 42 --max-queries 30 --max-length 64 --batch-size 16 --output fresh.json",
   "note": "Actual immutable run remains in ignored runs/oct13-agents-jepa/near-cpu-seed42.json. Later explicit shared-bank policy did not participate in this run."

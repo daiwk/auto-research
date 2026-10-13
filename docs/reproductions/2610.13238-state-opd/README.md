@@ -35,7 +35,17 @@ flowchart LR
   L --> U[真实LoRA更新]
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.13238v1#S2.F1)；[原始图资源](https://arxiv.org/html/2610.13238v1/state_opd_pipeline.png)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13238v1/state_opd_pipeline.png)
+
+中文图注（原论文 Figure 1）：上半部展示完整学生历史带来的教师前缀噪声；下半部让教师只读取已执行的 action/observation 状态，学生仍保留自己的完整历史。高响应熵触发额外完整响应采样，但这些分支的动作不进入环境执行。此图为作者原图，不是本地实验结果。
+
+精确来源：[固定 v1 的 Figure 1，HTML `S2.F1`](https://arxiv.org/html/2610.13238v1#S2.F1)；[原始 PNG](https://arxiv.org/html/2610.13238v1/state_opd_pipeline.png)。本地原始字节副本与 SHA-256 记录在 [figure-source.json](figure-source.json)，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 Figure 1（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.13238v1/state_opd_pipeline.png)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
@@ -77,6 +87,8 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 真实生成、拒绝、难度校准、teacher profiling及监督token预算进入结果；失败写不可覆盖的 `failure.json`，成功写 `result.json` / `report.md`。不能仅以本地目录名伪造source metadata。
 
 ### 当前结果与验收状态
+
+[A100 三 seed 实测指标](metrics/public-a100-seeds42-44.json)及对应 GPU 回执保留了旧快照 `7e125fd0` 的真实更新和负结果；不覆盖新增 full-history / 无扩采控制。
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 

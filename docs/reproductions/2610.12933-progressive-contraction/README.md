@@ -33,7 +33,23 @@ flowchart LR
   R --> F[后续真实SFT及重路由]
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.12933v1#S1.F1)；[原始图资源](https://arxiv.org/html/2610.12933v1/fig1-v2.png)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training 原论文 方法总览（第 2.1 节原文截图）](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.12933v1#page=3)
+
+中文图注（原文方法总览截图）：第 2.1 节依次描述教师侧以 MCRT 前缀续写估计过程不确定性、收缩为候选池，再按当前学生的归一化 response loss 路由活动训练集。这是原文段落截图，不是作者绘制的流程图。核对固定 v1 HTML 和完整 PDF 后，未发现专门的架构/流程图；上方 Mermaid 仍明确作为本地机制重绘。
+
+精确来源：[固定 v1 PDF 第 3 页，第 2.1 节](https://arxiv.org/pdf/2610.12933v1#page=3)；[HTML `S2.SS1`](https://arxiv.org/html/2610.12933v1#S2.SS1)。截图只做 300 DPI 渲染与边界裁取，未改写内容；PDF 哈希、页码及裁取参数记录在 [figure-source.json](figure-source.json)。
+
+![Progressive Contraction 原论文图1：过程不确定性与训练收缩动机](assets/original-contraction-figure1.png)
+
+中文图注（原论文 Figure 1）：正确或高置信 CoT 仍可能包含高过程不确定性；右侧对比原论文方法与全量 SFT 的优化步数和准确率。该图属于原论文动机及结果图，不能当作流程架构图，也不是本地训练结果。
+
+精确来源：[固定 v1 的 Figure 1，HTML `S1.F1`](https://arxiv.org/html/2610.12933v1#S1.F1)；[原始 PNG](https://arxiv.org/html/2610.12933v1/fig1-v2.png)。本地 PNG 为原始字节副本，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 方法总览（第 2.1 节原文截图）（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2610.12933v1#page=3)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 

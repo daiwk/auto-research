@@ -34,7 +34,17 @@ flowchart TD
   G --> R[真实非零优势RLVR]
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.12659v1#S0.F1)；[原始图资源](https://arxiv.org/html/2610.12659v1/figure1_v3.svg)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2610.12659v1/figure1_v3.svg)
+
+中文图注（原论文 Figure 1）：左侧解释全错或全对的 rollout 组为何没有组相对优势；中间给出“困难种子、保持推理操作与组合、相对策略及预算校准”三条原则；右侧展示验证教师解的自顶向下有效分解、新叶子合成与自底向上组合，最终保留有混合成败且预算内存在完整正确响应的根题。图中数值来自原论文，不是本地实验结果。
+
+精确来源：[固定 v1 的 Figure 1，HTML `S0.F1`](https://arxiv.org/html/2610.12659v1#S0.F1)；[原始 SVG](https://arxiv.org/html/2610.12659v1/figure1_v3.svg)。本地原始字节副本与 SHA-256 记录在 [figure-source.json](figure-source.json)，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 Figure 1（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.12659v1/figure1_v3.svg)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 

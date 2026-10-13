@@ -23,7 +23,21 @@
 
 ### 架构图
 
-[原文 Figure 2、Algorithm 1 与 Appendix B](https://arxiv.org/html/2610.13674v1#S4.F2)。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![OAL：按 QK 离群贡献分组的正二次注意力核 原论文 Algorithm 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.13674v1#page=8)
+
+原论文 Algorithm 1 的完整算法流程：先固定贡献分组并拟合输出，再用 $H_0,H_1,H_2$ 沿序列递推。来源为 [arXiv 2610.13674v1 PDF，第 8 页](https://arxiv.org/pdf/2610.13674v1#page=8)，对应 [v1 HTML Algorithm 1](https://arxiv.org/html/2610.13674v1#alg1)；仅以 216 DPI 渲染并裁出完整算法框，未改写步骤或公式。
+
+![OAL 原论文 Figure 2a：QK 贡献排序与维度分组](assets/arxiv-v1-figure-2a.png)
+
+原论文 Figure 2(a) 的核心分组示意，而非整套架构框图：Qwen2.5-0.5B 第 4 层、第 0 头的 64 个 QK 维度中，60 个 bulk 维度共享一组，高贡献尾部分成其余小组。这是代表性头的示意，不能推广为所有层/头都固定四组。来源为 [arXiv 2610.13674v1，Figure 2(a)](https://arxiv.org/html/2610.13674v1#S4.F2.sf1) 的 [原始 SVG](https://arxiv.org/html/2610.13674v1/qwen_qk_contribution_grouped.svg)；保留原 SVG，PNG 仅作两倍分辨率白底渲染。两张图均已视觉核验，文件及 PDF SHA256 见 [assets/provenance.json](assets/provenance.json)。
+
+> **原论文 Algorithm 1（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2610.13674v1#page=8)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
+
+下图为本地实现映射的重绘示意；分组细节参见原文 Appendix B：
 
 ```mermaid
 flowchart LR
@@ -100,7 +114,7 @@ PYTHONPATH=src python scripts/run_oal.py \
 
 ### 本地结果与边界
 
-[cpu-contracts.json](metrics/cpu-contracts.json)记录已执行的 5 个测试：因果贡献公式、bootstrap/无人工组数上限、正核与 dense/HD 等价、输出校准梯度、实际 Qwen 模块转换与 LoRA 梯度。没有 CPU 单测到 A100 完成的自动晋级。
+[cpu-contracts.json](metrics/cpu-contracts.json)记录已重跑的 5 个测试：因果贡献公式、bootstrap/无人工组数上限、正核与 dense/HD 等价、输出校准梯度、实际 Qwen 模块转换与 LoRA 梯度。每项先固定 seed 42，递推等价/校准专用用例内部使用 seed 11/2；不是独立多 seed 能力实验。没有 CPU 单测到 A100 完成的自动晋级。
 
 作者 HD block-GEMM/Triton 后端未移植，无延迟、吞吐或带宽加速声明。未执行原文下游 benchmark，未接入 Evolve。仅凭原文 LoRA 包的参数配置不能声明转换成功，必须记录实际参数变化和验证/test NLL，包括负结果。
 
@@ -108,7 +122,7 @@ PYTHONPATH=src python scripts/run_oal.py \
 
 | 原文组件 | 本地实现 |
 | --- | --- |
-| 分组、核、HD 递推、Qwen 转换、LoRA | [oal.py](../../../src/auto_research/foundation_models/oal.py) |
-| 真实 checkpoint 校准和同预算基线 | [run_oal.py](../../../scripts/run_oal.py) |
-| 行为测试 | [test_oal.py](../../../tests/test_oal.py) |
+| 分组、核、HD 递推、Qwen 转换、LoRA | [oal.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/foundation_models/oal.py) |
+| 真实 checkpoint 校准和同预算基线 | [run_oal.py](https://github.com/daiwk/auto-research/blob/main/scripts/run_oal.py) |
+| 行为测试 | [test_oal.py](https://github.com/daiwk/auto-research/blob/main/tests/test_oal.py) |
 

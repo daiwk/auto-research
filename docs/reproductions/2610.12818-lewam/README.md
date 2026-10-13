@@ -41,19 +41,45 @@ graph LR
  R --> A[执行首5步并重新观察]
 ```
 
-重绘源码：[architecture.mmd](assets/architecture.mmd)。原图与来源：[原文 Figure 1](https://arxiv.org/html/2610.12818v1#S0.F1)、[Figure 4 潜空间规划](https://arxiv.org/html/2610.12818v1#S3.F4)。[source-provenance.json](assets/source-provenance.json) 记录固定全文、代码和资源版本；原图不是本地测量证据。
+上方为本地重绘示意，源码：[architecture.mmd](assets/architecture.mmd)。固定全文、代码和资源版本见 [source-provenance.json](assets/source-provenance.json)。
+
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![LeWAM：端到端 JEPA 世界—动作联合建模 原论文 Figure 1（上部训练面板）](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.12818v1#page=1)
+
+图 1：共享视觉 encoder 与 SIGReg 正则连接两条训练分支；干净动作驱动未来 latent 的 MSE，噪声动作与 goal 信息驱动 velocity 的 flow-matching MSE。此处仅截取原文 Figure 1 的上部训练面板，未包含下方结果概览。来源：Fu 等，[v1 Figure 1](https://arxiv.org/html/2610.12818v1#S0.F1)，[原 PDF 第 1 页](https://arxiv.org/pdf/2610.12818v1#page=1)。
+
+![LeWAM 原文 Figure 3 的 MoT 注意力可见性](assets/original-figure-3-attention-v1.png)
+
+图 3：填色为允许注意力，白色为禁止；state query 读取历史与干净动作，噪声动作仅读取历史及自身因果前缀，不能读取干净动作。小网格表示动作 token 的因果 mask。来源：Fu 等，[v1 Figure 3](https://arxiv.org/html/2610.12818v1#S3.F3)，[原 PDF 第 4 页](https://arxiv.org/pdf/2610.12818v1#page=4)。
+
+![LeWAM 原文 Figure 4 的潜空间动作规划](assets/original-figure-4-planning-v1.png)
+
+图 4：冻结 encoder 与 MoT，以策略产生的候选动作逐段 rollout 未来 latent；对动作做梯度搜索，再按 goal latent 的距离选择 best-of-N。执行前 K 步后重新观察，形成闭环规划。来源：Fu 等，[v1 Figure 4](https://arxiv.org/html/2610.12818v1#S3.F4)，[原 PDF 第 5 页](https://arxiv.org/pdf/2610.12818v1#page=5)。
+
+以上为原文 PDF 的 250 dpi 局部截图，图内文字未改写，已逐张视觉核验；不是本地实验结果。论文图示采用 CC BY 4.0，归原作者所有。PDF/图片 SHA256、页码与裁切范围见 [original-figures.json](assets/original-figures.json)。
+
+> **原论文 Figure 1（上部训练面板）（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2610.12818v1#page=1)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
 动作 flow 使用从噪声到数据的方向：
 
-$$A^{(s)}=(1-s)\epsilon+sA,\qquad v=A-\epsilon.$$
+$$
+A^{(s)}=(1-s)\epsilon+sA,\qquad v=A-\epsilon.
+$$
 
-$$\mathcal L=\operatorname{MSE}(\hat z_{t+K},z_{t+K})+\operatorname{MSE}(\hat v,A-\epsilon)+0.04\mathcal L_{SIGReg}.$$
+$$
+\mathcal L=\operatorname{MSE}(\hat z_{t+K},z_{t+K})+\operatorname{MSE}(\hat v,A-\epsilon)+0.04\mathcal L_{SIGReg}.
+$$
 
 SIGReg 在 1024 个随机单位方向上比较经验特征函数与标准高斯特征函数，以 17 个积分结点近似 Epps–Pulley 距离，不是仅约束均值和方差。原文采用在线 encoder target、MSE latent prediction，没有 momentum encoder。规划对策略采样的候选 action plan 进行 Adam 更新：
 
-$$J(A)=\operatorname{MSE}(\hat z_{t+L}(A),z_g)+0.01\|A-A_{sample}\|_F^2.$$
+$$
+J(A)=\operatorname{MSE}(\hat z_{t+L}(A),z_g)+0.01\|A-A_{sample}\|_F^2.
+$$
 
 优化仅更新动作；保留、选择候选时使用**未加入 proximity penalty 的 goal cost**，并保留原始候选以避免精炼退化。
 

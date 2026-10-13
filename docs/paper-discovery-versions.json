@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "status": "partial_verified_version_baseline",
+  "reviewed_at": "2026-10-13",
+  "coverage": "Only the 19 explicitly reviewed papers in the Oct 13 accepted scope. Older papers without a verified baseline remain eligible for replacement review; their version is not assumed to be v1.",
+  "limitations": [
+    "This baseline records full-text review, not implementation or GPU acceptance.",
+    "HTML author strings are not used to fabricate an Atom-compatible metadata fingerprint.",
+    "This file does not advance the review watermark or claim source exhaustion."
+  ],
+  "papers": [
+    {
+      "arxiv_id": "2605.09040",
+      "revision": 4,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2605.09040v4",
+          "sha256": "dba869ff05f7f2bbe390deeaa5fd0f601273f0115f50112b44e28fe09f8a3ada"
+        },
+        {
+          "url": "https://arxiv.org/html/2605.09040v4",
+          "sha256": "4f4e54d1cd36b3e98fa74a652926b88dbd6ecec0b8aa2ad1382a700aa969f21c"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2609.01642",
+      "revision": 2,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2609.01642v2",
+          "sha256": "7769f382ffcb9851f31e318dfb6ea85250fd327b5432d8e56930da077c858edb"
+        },
+        {
+          "url": "https://arxiv.org/html/2609.01642v2",
+          "sha256": "7af368e64081b697fac48f10811a33dd7ab32c8a47a6bdd43c6a2999262b0b48"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.12659",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.12659v1",
+          "sha256": "9aa4d01fe9e4c0294d38b03a96d67b9d3c1ee24ee51c8c2dba6352340b683faa"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.12659v1",
+          "sha256": "1809d19c33b862b291b4af107243d9e85ec2bf8a2661813db69bdb34c0c8541b"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.12818",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.12818v1",
+          "sha256": "00eff44e6d568feff298bb7a722dda0f6ba6af0e88e5ca61e7a11a035bcd6b5a"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.12818v1",
+          "sha256": "57edad8dcc27bca6de2d829515269a7ab1cade2f91ef997cb19ddfc6b8a87bfc"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.12933",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.12933v1",
+          "sha256": "8653963fce4d77c900e6f3368567ca39ba301d8749edf861d35209c6da552d5d"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.12933v1",
+          "sha256": "363e744f0c9f4e092d3422bd13bc76f11d7b9af394ac0e3f815e61d4e40bb438"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13015",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13015v1",
+          "sha256": "6b8801ed42adeb10b5bbbf555e63c081702b4d25e381d25aef8abf3d0efb5d8f"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13015v1",
+          "sha256": "1f6dffc7e8caf87991a788198854880b2fa56f679303c99720ff20767b7cd8d9"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13020",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13020v1",
+          "sha256": "1dfb00ad4570cd99a75c1790613eb846bdb17bc5cea64f3f16a828d4ca7e5629"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13020v1",
+          "sha256": "3ba4a21fc07ba6641255ff12f0d59ebd8dfe0e970919e11fa45cf67386f9b839"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13113",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13113v1",
+          "sha256": "60aa2afdca5f3e9bfc04929b8c1933ddc5d02b066e203e3d8463e4179c4d82b5"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13113v1",
+          "sha256": "c9efb4a2c920629101e847e312be5fcc08a6adf85d47017deecae300750ef803"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13157",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13157v1",
+          "sha256": "068826c3e89fddb40c661dc7f3f526afc6236b5379314dc1e5e476fd08a81e3a"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13157v1",
+          "sha256": "fc9298efa96853a85ed1a88300223d739e455ee73e385dcfd7dfeb3cf09361a7"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13238",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13238v1",
+          "sha256": "952ae81e832dde52281c43c01cc7320c273e9cc754a4141865faf1da90e92b65"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13238v1",
+          "sha256": "6582749b8fad4b6643eb0dfa69ab587fa2598afd71338e47bd283ad2969f1fae"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13264",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13264v1",
+          "sha256": "32b965b931cd84d71259ae1295a4330d5dc0d1570b239e30d8fdf1a41dcbcf1d"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13264v1",
+          "sha256": "e79c25f975636777c2bfc57b6cbea716488510293bd1a5e45d3e7056c05a7cce"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13277",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13277v1",
+          "sha256": "d4fbbcc5ecc3daa45009290078c03b1cd7cae2e9fd099f653e25c728e18b80c5"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13277v1",
+          "sha256": "d757c9352fc01b1e232ad3fd1e50a5b3e406b84ca4917a09aecb200e7869b497"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13314",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13314v1",
+          "sha256": "02ba743b249a221261272c5f4091951530d123b2e6e8f0f916e3729567a0e308"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13314v1",
+          "sha256": "0138ff5d70b13c7c36860277f932a2386df0aa155022d7ee31e1c96b29c9ee64"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13669",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13669v1",
+          "sha256": "50f70cf5544066ce7c4e4bff13a7d9e98d7d02b95bdd3e7d7ee9fb806e5b224b"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13669v1",
+          "sha256": "c93e44267e579f8b29eda95fc6b5696d58d90f08f4be4854a6a4e326a68a9f27"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13672",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13672v1",
+          "sha256": "34b415b7dc8b2d9eecc3abadb58b745098a971dd08df7cd1f4d84ec2f3aab2de"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13672v1",
+          "sha256": "56ae1afa9358c70e86988f45a097d95e1453b8489fb11edc7c1b8b032f33d0a4"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13674",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13674v1",
+          "sha256": "5240365c6c975a3a9835ccd4411ad48434d33ce405f066036304ea80076e0721"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13674v1",
+          "sha256": "6e750684cb84630bba5749a0d79f9c5d1a4c239a143df26045f5aab23696b737"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13740",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13740v1",
+          "sha256": "a974d84818514cc05109cf96e001755385b1e9974514be5936423e0f7ea1bbb3"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13740v1",
+          "sha256": "3239237a03c0edd39301a8f03c01b87c4ae1a5a41b67b7183c5e93bc9f983a90"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13778",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13778v1",
+          "sha256": "f7cbfc957ad6efd34115a018de993d8f5857c63d040f14c1fbf64be8bfdb47a2"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13778v1",
+          "sha256": "ef4c2d41abf13552685f641e437599ce8925b4be31dd6673ebb5624ce11874b1"
+        }
+      ]
+    },
+    {
+      "arxiv_id": "2610.13834",
+      "revision": 1,
+      "reviewed_at": "2026-10-13",
+      "review_scope": "algorithm_and_source_evidence",
+      "implementation_acceptance": "tracked separately in docs/design/oct13-implementation-scope.md",
+      "source_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2610.13834v1",
+          "sha256": "1beda09e9efa6ccf03586ae215a433867c38d9238de85d0bc30fbaeae4ae47c2"
+        },
+        {
+          "url": "https://arxiv.org/html/2610.13834v1",
+          "sha256": "66b81f5981737c732c614a0afecaf6e5411d5cbde17e3425d69f9fc2bcc50597"
+        }
+      ]
+    }
+  ]
+}

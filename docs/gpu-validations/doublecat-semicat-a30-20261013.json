@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "adapter_key": "doublecat-semicat",
+  "validated_at": "2026-10-13",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A30"
+  },
+  "command": [
+    "python",
+    "scripts/run_doublecat_semicat.py",
+    "--data",
+    "data/wikitext",
+    "--dataset-id",
+    "Salesforce/wikitext",
+    "--dataset-revision",
+    "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "--device",
+    "cuda",
+    "--steps",
+    "40",
+    "--sequence-length",
+    "32",
+    "--batch-size",
+    "4",
+    "--width",
+    "64",
+    "--layers",
+    "2",
+    "--nfe",
+    "32",
+    "--no-self-conditioning",
+    "--seed",
+    "42",
+    "--output",
+    "runs/doublecat-semicat-v2-42.json"
+  ],
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "Salesforce/wikitext",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "split_hashes": {
+      "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+      "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+      "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+    },
+    "configuration": "wikitext-2-raw-v1",
+    "all_input_hashes_verified": true
+  },
+  "checkpoint": {
+    "id": "random-initialized bidirectional DiT denoiser",
+    "revision": "doublecat-semicat-byte-dit-v2-no-extra-forward-core",
+    "seed": 42
+  },
+  "result": "passed",
+  "metrics": {
+    "onehot.test_denoising_ce_t05": {
+      "mean": 3.293001333872477,
+      "std": 0.012632730907950107,
+      "n": 3
+    },
+    "onehot.sampled_byte_entropy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "onehot.parameter_delta_l2": {
+      "mean": 6.530773639678955,
+      "std": 0.08240348601140392,
+      "n": 3
+    },
+    "doublecat.test_denoising_ce_t05": {
+      "mean": 3.296980301539103,
+      "std": 0.01227524667937726,
+      "n": 3
+    },
+    "doublecat.sampled_byte_entropy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "doublecat.parameter_delta_l2": {
+      "mean": 6.553089777628581,
+      "std": 0.08477104023358828,
+      "n": 3
+    },
+    "semicat.test_denoising_ce_t05": {
+      "mean": 3.3478522300720215,
+      "std": 0.08472735969616245,
+      "n": 3
+    },
+    "semicat.sampled_byte_entropy": {
+      "mean": 3.1005140940348306,
+      "std": 0.09806016883484002,
+      "n": 3
+    },
+    "semicat.parameter_delta_l2": {
+      "mean": 6.503927389780681,
+      "std": 0.09656201110550221,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "real_cuda_execution": true,
+    "completed_seeds": 3,
+    "training_forward_calls_per_variant_seed": 40,
+    "extra_self_conditioning_forwards": 0,
+    "sampling_forward_calls_per_variant_seed": 32,
+    "actual_parameter_changes_checked": true,
+    "negative_generation_collapse_retained": true
+  },
+  "limitations": [
+    "Small random-initialized byte-vocabulary WikiText-2 core-mechanism diagnostic.",
+    "Denoising CE is not exact likelihood, generative perplexity or reasoning accuracy.",
+    "One-hot and DoubleCat collapse to spaces in all three measured seeds; retained as a negative result.",
+    "No stable quality, scaling, serving or original-paper benchmark gain is claimed."
+  ],
+  "executed_source_sha256": {
+    "scripts/run_doublecat_semicat.py": "9caeefa3e942624ae6d3164e2a2e7ea138c3ba731879d380f6168b9a3a8b409d",
+    "src/auto_research/foundation_models/doublecat_semicat.py": "a3b4675785d4a4fe6f40e8061f6cc806e9ac7b4d24d7c036acee9db3898539f9",
+    "src/auto_research/foundation_models/oct13_runtime.py": "8e824a564684593100b876d0dd1a4c9de39fc1efd5e34bea3aa0ef1372df7ec8",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093"
+  },
+  "provenance": {
+    "commit": "ccad3e679787f6f5383b8bd3dd1c7b58e7c8c5d0",
+    "artifact_path": "docs/gpu-validations/doublecat-semicat-a30-20261013.json",
+    "metrics_artifact": "docs/reproductions/2610.13834-doublecat-semicat/metrics/public-a30-seeds42-44.json",
+    "checkpoint_committed": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "paper": "2610.13674",
+  "version": "v1",
+  "retrieved_date": "2026-10-13",
+  "figures": [
+    {
+      "label": "Algorithm 1",
+      "caption_zh": "离线贡献分组与输出匹配校准、固定核参数后的因果递推流程",
+      "source_page": "https://arxiv.org/html/2610.13674v1#alg1",
+      "source_url": "https://arxiv.org/pdf/2610.13674v1",
+      "source_pdf_page": 8,
+      "source_pdf_bytes": 1115152,
+      "source_pdf_sha256": "3532ce8eb7d205d42e8f2427c8784396825f0ea348bf5deb430716e69dbfc2ea",
+      "file": "paper-figure-01.png",
+      "bytes": 111498,
+      "sha256": "bce48ce4b878143e64bb37a031254dc2305366810b552470423da98465ccf681",
+      "render_dpi": 216,
+      "crop_points": [60, 81, 538, 287],
+      "transformation": "PDF rasterization and complete algorithm-box extraction only",
+      "visual_verified": true,
+      "visual_checks": ["title and Require line intact", "all steps 1 through 12 intact", "top and bottom borders intact", "no neighboring result table"]
+    },
+    {
+      "label": "Figure 2(a)",
+      "caption_zh": "代表性 Qwen2.5-0.5B 头的贡献排序与维度分组核心示意",
+      "source_page": "https://arxiv.org/html/2610.13674v1#S4.F2.sf1",
+      "source_url": "https://arxiv.org/html/2610.13674v1/qwen_qk_contribution_grouped.svg",
+      "original_file": "arxiv-v1-figure-2a.svg",
+      "original_bytes": 68855,
+      "original_sha256": "7176aa6a11cdddfca84955dafa24bdc7728606aca202ff7d42f986f11b7f559c",
+      "file": "arxiv-v1-figure-2a.png",
+      "bytes": 30612,
+      "sha256": "07d394805284acbe2f5ab663fff220d202b7bb2347e0ccdde94e6fc80f234c0e",
+      "transformation": "unmodified SVG rendered at 2x zoom on a white page background",
+      "visual_verified": true,
+      "visual_checks": ["group legend and both axes intact", "four displayed groups sum to 64 dimensions", "white background preserves dark labels"]
+    }
+  ],
+  "scope": "Original algorithm and representative grouping illustration, not a claim that every head has four groups and not local validation metrics."
+}

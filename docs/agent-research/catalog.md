@@ -10,8 +10,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| memory-retrieval | [Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence](../reproductions/2610.13277-beyond-final-embedding/README.md) | Southeast University，2026-10-09 | 未发现官方代码 | `beyond-final-embedding` |
 | agent-evolution | [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../reproductions/2610.13025-evo2/README.md) | University of Illinois Urbana-Champaign / Google DeepMind，2026-10-09 | 未发现官方代码 | `evo2` |
 | autonomous-research | [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../reproductions/2610.13194-janus/README.md) | Institute of Computing Technology, Chinese Academy of Sciences，2026-10-09 | 未发现官方代码 | `janus` |
+| memory-retrieval | [NEAR: Neighborhood-Aware Residuals for Memory Retrieval](../reproductions/2610.13314-near/README.md) | Southeast University，2026-10-09 | 未发现官方代码 | `near` |
 | tool-retrieval | [RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics](../reproductions/2610.13889-rated/README.md) | Texas Tech University，2026-10-09 | [已开源](https://github.com/Elliotes/EcoAgent) | `rated` |
 | recursive-self-improvement | [RSI-Anything: Unlocking Recursive Self-Improvement with World Models](../reproductions/2610.13912-rsi-anything/README.md) | PhAI Labs / The Chinese University of Hong Kong，2026-10-09 | [已开源](https://github.com/Gen-Verse/RSI-Anything) | `rsi-anything` |
 | long-term-memory | [Test-Time Memory Construction](../reproductions/2610.13348-t2mem/README.md) | Northeastern University，2026-10-09 | [已开源](https://github.com/OpenBMB/T2Mem) | `t2mem` |
@@ -81,6 +83,7 @@
 | Hierarchical skill coevolution | [CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution](2609.04865-coskill/README.md) | Institute of Automation, Chinese Academy of Sciences，2026-09-04 | [已开源](https://github.com/jinyuan-cookie/CoSkill) | `coskill` |
 | Structure-preserving verifier and reward | [SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents](2609.04629-silr/README.md) | Institute of Science Tokyo，2026-09-03 | 未发现官方代码 | `silr` |
 | Multi-harness RL audit | [What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents](2609.04518-multi-harness-rl/README.md) | New York University，2026-09-03 | 未发现官方代码 | `multi-harness-rl` |
+| skill-retrieval | [Imagine Before Acting: Prospective Skill Identification for LLM Agents](../reproductions/2609.01642-skilldreamer/README.md) | Sichuan University，2026-08-28 | 未发现官方代码 | `skilldreamer` |
 | 论文到代码状态子规划 | [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](2608.26557-deeprepro/README.md) | Institute of Computing Technology, Chinese Academy of Sciences，2026-08-27 | [已开源](https://github.com/ruyisy/DeepRepro) | `deeprepro` |
 | 红队技能进化 | [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](2608.27439-redevoagent/README.md) | City University of Hong Kong，2026-08-27 | 未发现官方代码 | `redevoagent` |
 | Agent 技能预训练 | [SPT: Skills as Pre-Training Data for Agentic Language Models](2608.26563-spt/README.md) | Beijing University of Posts and Telecommunications，2026-08-27 | 未发现官方代码 | `spt` |

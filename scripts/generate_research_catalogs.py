@@ -61,6 +61,14 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "RLVR data synthesis": ("奖励、信用与课程", "课程与能力边界"),
+        "Proximal policy optimization": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
+        "Trajectory-aware policy optimization": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
+        "Synthetic self-distillation": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
+        "Self-correction": ("奖励、信用与课程", "过程 / token 信用分配"),
+        "Source-aware RL": ("在线强化学习与稳定性", "Agentic RL 与教师调度"),
+        "GRPO difficulty curriculum": ("奖励、信用与课程", "课程与能力边界"),
+        "Monte Carlo reasoning tree": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
         "On-policy distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "Cross-tokenizer distillation": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
         "Multi-teacher distillation": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
@@ -157,6 +165,8 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "memory-retrieval": ("记忆、技能与持续学习", "记忆检索与表示"),
+        "skill-retrieval": ("记忆、技能与持续学习", "技能获取、检索与调用"),
         "agent-evolution": ("Agentic RL 与后训练", "Harness 与运行时策略"),
         "recursive-self-improvement": ("规划、搜索与反思", "Harness 与自我改进"),
         "autonomous-research": ("规划、搜索与反思", "环境模拟与前瞻决策"),
@@ -285,6 +295,11 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "doublecat-semicat": ("网络架构", "扩散与生成式模型"),
+    "oal": ("注意力与长上下文", "线性与可分离注意力"),
+    "replayssm": ("推理与系统效率", "状态缓存与低精度回放"),
+    "lewam": ("多模态基础模型", "世界模型与具身控制"),
+    "smolwam": ("多模态基础模型", "世界模型与具身控制"),
     "msar": ("网络架构", "MoE、状态空间与残差路径"),
     "orthros": ("注意力与长上下文", "稀疏、门控与动态注意力"),
     "dualquant": ("推理与系统效率", "量化"),
@@ -843,6 +858,7 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "cv-opd": ("多模态奖励与后训练", "视觉证据约束蒸馏"),
         "woven": ("视觉世界模型与时序推理", "视觉状态转移监督"),
         "umrm": ("多模态奖励与后训练", "冻结中间层探针与验证器自举"),
         "vcola": ("多模态基础模型", "视觉 token 压缩与动态证据恢复"),
@@ -857,7 +873,7 @@ def render_multimodal_method_index() -> str:
     lines = [
         "# 多模态大模型方法索引",
         "",
-        "本页汇总已经具有独立 adapter、真实公开图像实验和固定指标的论文实现。",
+        "本页汇总具有独立源码入口的论文；公开数据实跑与 GPU 验收状态请查各篇详情和回执。",
         "底座 connector 与论文 genome 的对应关系也在同一处维护。",
         "",
         "## 已实现论文",

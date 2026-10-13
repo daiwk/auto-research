@@ -1,1 +1,33 @@
-{"paper":"2610.13674","evaluation_tier":"l0_contract","diagnostic_only":true,"promotion_eligible":false,"device":"cpu","protocol":"oal-formula-contract-v1","metrics":{"passed_behavior_tests":5},"gpu_validation_completed":false}
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:oal",
+  "paper": "2610.13674",
+  "seeds": [
+    42
+  ],
+  "evaluation_tier": "l0_contract",
+  "evaluation_protocol": {
+    "tier": "l0_contract",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "fixed-seed formula/behavior contracts only; no capability run or independent multi-seed comparison",
+    "seed_policy": "Each test starts at seed 42; recurrent-equivalence/calibration cases locally override seeds to 11/2. These are test cases, not replicated capability experiments."
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "device": "cpu",
+  "protocol": "oal-formula-contract-v1",
+  "metrics": {
+    "passed_behavior_tests": 5
+  },
+  "gpu_validation_completed": false,
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.13674-oal/metrics/cpu-contracts.json",
+    "dataset_fingerprint": "not applicable: formula/behavior contracts; no public dataset run",
+    "command": "PYTHONPATH=src python -m pytest tests/test_cv_opd.py tests/test_oal.py",
+    "executed_at": "2026-10-13",
+    "test_source_sha256": "132acb911dbf64b3c754d21d978a9c4d7eddcae2c2fda32ca387d46110ed6a87"
+  }
+}

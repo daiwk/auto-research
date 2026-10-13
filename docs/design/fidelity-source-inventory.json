@@ -11001,6 +11001,16 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/foundation_models/replayssm.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "verify",
+        "line": 120,
+        "qualified_name": "ReplayBuffer.verify",
+        "expression": "self.refreshes += 1",
+        "fingerprint": "cdb3ffd258d51dff71f9a2a6723e78e27e55691e22259f3a77cbc19d8085f47f"
+      }
+    ],
     "src/auto_research/multimodal/benchmarks.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -11731,6 +11741,16 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/post_training/oct13_common.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "evaluate",
+        "line": 86,
+        "qualified_name": "evaluate",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
     "src/auto_research/post_training/p0_20260808.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -11849,6 +11869,16 @@
         "fingerprint": "c3ce2bf5e99d13a184c91d91e13d20acbec1ad506092736d5dee43745f1b227e"
       }
     ],
+    "src/auto_research/reproductions/beyond_final_embedding/algorithm.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "local_scores",
+        "line": 34,
+        "qualified_name": "SparseTokenIndex.local_scores",
+        "expression": "self.search_count += 1",
+        "fingerprint": "80a9a2dba2ee1ee7f0be60b2119b27fc4df6b54b9af2855f1099fa37fed6b940"
+      }
+    ],
     "src/auto_research/reproductions/connectionmind/model.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -11893,6 +11923,108 @@
         "qualified_name": "evaluate_policy",
         "expression": "row['gold']",
         "fingerprint": "aa65c8a2d267d383503924595541124c13a3f090c30689410212838771036e6d"
+      }
+    ],
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/algorithm.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 36,
+        "qualified_name": "PlateauSchedule.observe",
+        "expression": "self.stale_evaluations += 1",
+        "fingerprint": "8d6b1ad9c510767c52fd5c54a8ba191ae2bf2b8a7064073dd2948108bef715ea"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "observe",
+        "line": 38,
+        "qualified_name": "PlateauSchedule.observe",
+        "expression": "self.stage += 1",
+        "fingerprint": "8ce83238b3be758933a9e31b36ecb6d270f141a98c2e9679be42a0e6c55724c4"
+      }
+    ],
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 34,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
+    "src/auto_research/reproductions/magicbeanstalk/checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_problem",
+        "line": 33,
+        "qualified_name": "_problem",
+        "expression": "value.get('answer')",
+        "fingerprint": "87e2eceb592e70d1422d3241040f71620f196d77e7fd2547f4b9218458f4e0a4"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "verify",
+        "line": 51,
+        "qualified_name": "CheckpointConstruction.verify",
+        "expression": "problem.answer",
+        "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "verify",
+        "line": 58,
+        "qualified_name": "CheckpointConstruction.verify",
+        "expression": "problem.answer",
+        "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "verify",
+        "line": 59,
+        "qualified_name": "CheckpointConstruction.verify",
+        "expression": "problem.answer",
+        "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "student_rates",
+        "line": 74,
+        "qualified_name": "CheckpointConstruction.student_rates",
+        "expression": "problem.answer",
+        "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "target_outcomes",
+        "line": 125,
+        "qualified_name": "CheckpointConstruction.target_outcomes",
+        "expression": "problem.answer",
+        "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 145,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "train_rl",
+        "line": 161,
+        "qualified_name": "train_rl",
+        "expression": "problem.answer",
+        "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 170,
+        "qualified_name": "run",
+        "expression": "r['answer']",
+        "fingerprint": "16bcc64b7732b44ec2b36bf46d5e94e1380c678923c44a75b4f13251de1d001d"
       }
     ],
     "src/auto_research/reproductions/off_context_grpo/data.py": [
@@ -11973,6 +12105,24 @@
         "fingerprint": "bb7f43bcaea754107320f654a4b51ab61d6c483f572b7450fde3943f64a7abf1"
       }
     ],
+    "src/auto_research/reproductions/progressive_contraction/checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 35,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 49,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
     "src/auto_research/reproductions/recevolve/model.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -11999,11 +12149,89 @@
         "fingerprint": "84ec7bf43e0b8fb0c9351eb2a6b28acfd7e147238d7050c7bcfba9937825fa5d"
       }
     ],
+    "src/auto_research/reproductions/skilldreamer/experiment.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "__call__",
+        "line": 38,
+        "qualified_name": "LocalGenerator.__call__",
+        "expression": "self.calls += 1",
+        "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "__call__",
+        "line": 39,
+        "qualified_name": "LocalGenerator.__call__",
+        "expression": "self.generated_tokens += output.shape[1] - encoded.input_ids.shape[1]",
+        "fingerprint": "fc0a6f94e27625b1c927d297112770086fc02d47a8b02a3a0ebdd76e5da15707"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_skilldreamer",
+        "line": 72,
+        "qualified_name": "run_skilldreamer",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
+    "src/auto_research/reproductions/soar/algorithm.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "source_reward",
+        "line": 43,
+        "qualified_name": "source_reward",
+        "expression": "final['answer']",
+        "fingerprint": "07c8f68009a436a7279018cbea3d4d06d54753c83d482e4dbb91f7e485dc4a4d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "source_reward",
+        "line": 46,
+        "qualified_name": "source_reward",
+        "expression": "components['answer']",
+        "fingerprint": "b40d0fd6d017acea4608f045318070da067d79a344b23fd96112b9a1a79d8450"
+      }
+    ],
+    "src/auto_research/reproductions/soar/checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "assess",
+        "line": 72,
+        "qualified_name": "assess",
+        "expression": "final.get('answer', '')",
+        "fingerprint": "59c7c623bf406adbc4f8b49c5fc1a9f9e98d8b041a462ae05084701016ffbb6e"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "assess",
+        "line": 72,
+        "qualified_name": "assess",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 88,
+        "qualified_name": "run",
+        "expression": "final.get('answer', '')",
+        "fingerprint": "59c7c623bf406adbc4f8b49c5fc1a9f9e98d8b041a462ae05084701016ffbb6e"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 88,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
     "src/auto_research/reproductions/state_opd/checkpoint.py": [
       {
         "kind": "label_access_requires_role_review",
         "function": "evaluate",
-        "line": 56,
+        "line": 59,
         "qualified_name": "evaluate",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12025,6 +12253,106 @@
         "qualified_name": "ArithmeticEnvironment.step",
         "expression": "action['arguments']['answer']",
         "fingerprint": "6873e3b1f283b911e3a650b95902fecbd9d4d80d8a6dd127a83591b435ca91b9"
+      }
+    ],
+    "src/auto_research/reproductions/synthself/checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 39,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 41,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 43,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 44,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 45,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 78,
+        "qualified_name": "run",
+        "expression": "r['answer']",
+        "fingerprint": "16bcc64b7732b44ec2b36bf46d5e94e1380c678923c44a75b4f13251de1d001d"
+      }
+    ],
+    "src/auto_research/reproductions/upturn/checkpoint.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "encode",
+        "line": 62,
+        "qualified_name": "encode",
+        "expression": "ledger.encoder_calls += 1",
+        "fingerprint": "7fc117e647153ef213b83707dfd6545c800ea7d560814cd295a36009cf2507b1"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "encode",
+        "line": 63,
+        "qualified_name": "encode",
+        "expression": "ledger.encoded_input_tokens += prompt.shape[1] + len(tokens)",
+        "fingerprint": "9e88870d2bebd3cf73581b89f09d2c5538f6d2084a174396fcf9a1417fed9490"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 71,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run",
+        "line": 114,
+        "qualified_name": "run",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "assess",
+        "line": 151,
+        "qualified_name": "assess",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "assess",
+        "line": 152,
+        "qualified_name": "assess",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
     "src/auto_research/research_loop/portfolio.py": [

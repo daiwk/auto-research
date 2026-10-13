@@ -25,7 +25,17 @@
 
 ### 架构图
 
-[原文 Figure 3 与训练算法](https://arxiv.org/html/2610.13264v1#S3.F3)。下图按原文重绘，不使用作者仓库错置的 PDF 图。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![CV-OPD：把视觉证据约束加入 on-policy 自蒸馏 原论文 Figure 3](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13264v1/fig2.png)
+
+原论文 Figure 3：完整图像学生与共享参数的正、负 crop 教师，以及 JSD、差异感知门控和对比散度损失。来源为 [arXiv 2610.13264v1，Figure 3](https://arxiv.org/html/2610.13264v1#S3.F3) 的 [原始 PNG](https://arxiv.org/html/2610.13264v1/fig2.png)，未裁剪或重绘；原站文件名虽为 `fig2.png`，正文图号为 Figure 3。图中的 Qwen3.5-4B 是作者配置，不是本地 SmolVLM 诊断结果。来源与文件 SHA256 见 [assets/provenance.json](assets/provenance.json)，不用作者仓库错置的 Vision-OPD PDF。
+
+> **原论文 Figure 3（关键图）**：上文说明所选原图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.13264v1/fig2.png)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
+
+下图为本地实现对应关系的重绘示意，不是原论文图源资产：
 
 ```mermaid
 flowchart TD
@@ -111,7 +121,7 @@ PYTHONPATH=src python scripts/run_cv_opd.py \
 
 ### 本地结果与边界
 
-[cpu-contracts.json](metrics/cpu-contracts.json)只记录已执行的 4 个行为测试：bbox 尺寸与 IoU、JSD/Top-K tail、样本与 token gate、教师停止梯度和零正确样本的零梯度。测试通过不代表视觉推理能力或 GPU 训练完成。
+[cpu-contracts.json](metrics/cpu-contracts.json)记录已重跑的 7 个行为测试：bbox 尺寸与 IoU、JSD/Top-K tail、样本与 token gate、教师停止梯度和零正确样本的零梯度，以及严格多类 verifier、标签隔离和图像来源/切分哈希。每项先固定 seed 42，专用 crop/gate 用例内部使用 seed 2；这些是单测用例，不是独立多 seed 能力实验。测试通过不代表视觉推理能力或 GPU 训练完成。
 
 缩小路径使用 SmolVLM-256M 与语言 q/v rank-8 LoRA；并非 Qwen3.5-4B 的完整训练。公开多类主要对象识别、严格类别 verifier 与原文 6 个细粒度 benchmark 不等价。新增行为检查确认：更换外部 verifier gold 只能改变正确性判断，不能改变 policy 生成调用中的图像/问题/预算。未接入 Evolve，不能靠 registry 标签晋级。
 
@@ -119,7 +129,7 @@ PYTHONPATH=src python scripts/run_cv_opd.py \
 
 | 原文组件 | 本地实现 |
 | --- | --- |
-| 真实正负 crop、JSD、CDL、DAG、EMA | [cv_opd.py](../../../src/auto_research/multimodal/cv_opd.py) |
-| 图像 checkpoint rollout 和参数更新 | [run_cv_opd.py](../../../scripts/run_cv_opd.py) |
-| 行为测试 | [test_cv_opd.py](../../../tests/test_cv_opd.py) |
+| 真实正负 crop、JSD、CDL、DAG、EMA | [cv_opd.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/multimodal/cv_opd.py) |
+| 图像 checkpoint rollout 和参数更新 | [run_cv_opd.py](https://github.com/daiwk/auto-research/blob/main/scripts/run_cv_opd.py) |
+| 行为测试 | [test_cv_opd.py](https://github.com/daiwk/auto-research/blob/main/tests/test_cv_opd.py) |
 

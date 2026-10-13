@@ -49,3 +49,7 @@
 ## University of Wisconsin-Madison
 
 - 2023-04-17 · [Visual Instruction Tuning](../../reproductions/2304.08485-llava/README.md)（`llava`）：冻结视觉 encoder，用可训练 projector 把视觉特征映射到 LLM token 空间，再在 GPT-4 生成的多模态指令数据上做端到端 instruction tuning。
+
+## Xiamen University
+
+- 2026-10-09 · [CV-OPD: Contrastive Vision On-policy Distillation](../../reproductions/2610.13264-cv-opd/README.md)（`cv-opd`）：原来的 crop-to-full-image OPD 可以教会模型答案分布，却不必然教会它依赖正确视觉区域。作者在移除答案相关区域后发现，Vision-OPD 仍取得明显高于随机的准确率。CV-OPD 用同图、同尺寸、低 IoU 的负区域构造第二个共享参数教师，把“接近正教师、远离负教师”的约束加入 JSD 蒸馏。

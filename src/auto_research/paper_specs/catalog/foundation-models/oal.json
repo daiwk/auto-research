@@ -12,7 +12,9 @@
   "first_author_affiliation": "The Chinese University of Hong Kong, Shenzhen",
   "published": "2026-10-09",
   "code": "https://github.com/wuqianyue09/OAL",
-  "adapter": "oal",
+  "adapter": {
+    "spec_key": "oal"
+  },
   "priority": "P1",
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/oal-a100-20261013.json"

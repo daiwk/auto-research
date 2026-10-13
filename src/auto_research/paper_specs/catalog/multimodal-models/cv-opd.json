@@ -12,7 +12,9 @@
   "first_author_affiliation": "Xiamen University / Moxin Technology",
   "published": "2026-10-09",
   "code": "https://github.com/HaoLin3419/Contrastive-Vision-OPD",
-  "adapter": "cv-opd",
+  "adapter": {
+    "spec_key": "cv-opd"
+  },
   "priority": "P1",
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/cv-opd-a100-20261013.json"

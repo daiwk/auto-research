@@ -7,6 +7,17 @@
   "source_resource": "https://arxiv.org/html/2610.13157v1/method.svg",
   "source_type": "arxiv_html_svg_object",
   "copyright": "original authors",
-  "status": "primary-source location verified; local copy integration handled separately"
+  "figure_label": "Figure 2",
+  "figure_kind": "original dual-source reinforcement-learning framework",
+  "local_asset": "assets/original-soar-figure2.svg",
+  "local_asset_sha256": "1dbff32ba5c1300dd66a6c7f27bc16e5a004a215e4a6c83b9594c7ee9e14e34a",
+  "status": "original resource downloaded unchanged; SVG raster preview visually verified",
+  "canonical_render": {
+    "asset": "assets/paper-figure-01.png",
+    "sha256": "43a2eba88e2625b5ef355a0dbe1d06a07a35e619414b45c4452028fdf84722fd",
+    "source_asset": "assets/original-soar-figure2.svg",
+    "source_sha256": "1dbff32ba5c1300dd66a6c7f27bc16e5a004a215e4a6c83b9594c7ee9e14e34a",
+    "transformation": "unchanged copy of the visually verified SVG raster preview; original SVG retained",
+    "visual_verified": true
+  }
 }
-

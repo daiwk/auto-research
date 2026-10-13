@@ -43,17 +43,33 @@ graph LR
  A --> E
 ```
 
-重绘源码：[architecture.mmd](assets/architecture.mmd)；原图：[v2 Figure 2](https://arxiv.org/html/2609.01642v2#S2.F2)。来源版本与边界见 [source-provenance.json](assets/source-provenance.json)。
+上方为本地重绘示意，源码：[architecture.mmd](assets/architecture.mmd)；来源版本与边界见 [source-provenance.json](assets/source-provenance.json)。
+
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![SkillDreamer：行动前想清楚需要什么能力 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/pdf/2609.01642v2#page=3)
+
+图 2：PSG 先推断 required capability 与 semantic anchor，再生成仅用于检索的 pseudo skill；HSR 同时使用原任务与伪技能，召回真实 skill gallery 的候选；执行时 CSI 按当前子任务重评能力，并按需调用真实技能。右侧周期检查沿执行轨迹进行，不是读取 gold plan。来源：Liu 等，[v2 Figure 2](https://arxiv.org/html/2609.01642v2#S2.F2)，[原 PDF 第 3 页](https://arxiv.org/pdf/2609.01642v2#page=3)。
+
+此图为固定 v2 原文 PDF 的 250 dpi 局部截图，图内文字未改写，已视觉核验；不是本地测量，也不将 v2 更新算作 10 月新 v1。论文标注 arXiv perpetual non-exclusive license，并非 CC BY；图示版权仍归原作者。PDF/图片 SHA256、页码与裁切范围见 [original-figures.json](assets/original-figures.json)。
+
+> **原论文 Figure 2（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2609.01642v2#page=3)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
 对 task dense score $r_i^q$、pseudo $j$ 的 dense score $r_{ij}^p$：
 
-$$d_{ij}=2r_i^q+r_{ij}^p.$$
+$$
+d_{ij}=2r_i^q+r_{ij}^p.
+$$
 
 各 pseudo 先选 $K_c=20$ 候选，再在该集合对三项 min-max 标准化：
 
-$$h_{ij}=2\bar r_i^q+\bar r_{ij}^p+\overline{BM25(anchor,s_i)}.$$
+$$
+h_{ij}=2\bar r_i^q+\bar r_{ij}^p+\overline{BM25(anchor,s_i)}.
+$$
 
 逐排名行扫描各 capability 的 top-$K_r$，去重收集 $K$ 技能。CSI 的 periodic context 在 $n\bmod5=0$ 时注入；$n$ 是实际执行动作，不是模型思考次数。
 

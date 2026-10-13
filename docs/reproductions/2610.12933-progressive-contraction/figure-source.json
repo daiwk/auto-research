@@ -7,6 +7,32 @@
   "source_resource": "https://arxiv.org/html/2610.12933v1/fig1-v2.png",
   "source_type": "arxiv_html_image",
   "copyright": "original authors",
-  "status": "primary-source location verified; local copy integration handled separately"
+  "figure_label": "Figure 1",
+  "figure_kind": "original motivation and results, not an architecture diagram",
+  "local_asset": "assets/original-contraction-figure1.png",
+  "local_asset_sha256": "11c8d4c2889afbec5a5e3964680edfe21ca992a41ecbc167f75cfefa1c5ea720",
+  "architecture_figure_status": "not found in fixed-v1 HTML or complete 19-page PDF; method-overview screenshot provided, not a flowchart",
+  "additional_sources": [
+    {
+      "figure_id": "S2.SS1",
+      "figure_label": "Section 2.1 Problem Formulation and Overview",
+      "figure_kind": "original method-text screenshot, not an architecture figure",
+      "html_reference": "https://arxiv.org/html/2610.12933v1#S2.SS1",
+      "source_resource": "https://arxiv.org/pdf/2610.12933v1",
+      "source_type": "arxiv_pdf_method_text_crop",
+      "source_pdf_sha256": "88a2bdf56915238e1cbd329dad642cc97c82e39c1de4b7c264181a805a03c675",
+      "page_index_1based": 3,
+      "rendering": {
+        "tool": "pdftoppm",
+        "dpi": 300,
+        "crop_pixels": {"x": 370, "y": 1020, "width": 1840, "height": 1000},
+        "content_edited": false
+      },
+      "local_asset": "assets/paper-figure-01.png",
+      "local_asset_sha256": "5336cbce380f5a959942888b5f0c4ede3f075dbba1fd221bb731b2f14bdb8d26",
+      "status": "fixed-v1 PDF rendered and method overview cropped; visually verified"
+    }
+  ],
+  "status": "original PNG downloaded unchanged; visually verified; dedicated flowchart unavailable in source"
 }
 

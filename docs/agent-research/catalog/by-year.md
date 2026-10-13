@@ -4,8 +4,10 @@
 
 ## 2026
 
+- 2026-10 · [Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence](../../reproductions/2610.13277-beyond-final-embedding/README.md)（`beyond-final-embedding`）：最终 pooled embedding 会丢掉局部事实线索，但冻结 embedding encoder 的最后层 token states 已经含有上下文证据。论文保留内容 token（排除 query prefix、special tokens 和 padding），离线给每条 token 绑定原 memory ID。
 - 2026-10 · [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../../reproductions/2610.13025-evo2/README.md)（`evo2`）：固定任务 executor，共享 Proposer/Reflector 编辑 harness；树搜索与跨分支 crossover 的执行反馈反过来训练 evolver。EvoTIDE 恢复有效编辑轨迹，先 SFT，再交错更新两个角色。
 - 2026-10 · [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../../reproductions/2610.13194-janus/README.md)（`janus`）：在研究图中先生成未执行提案，再预测价值提升、信息增益和探索收益；稀疏 pairwise tournament 拟合软 Bradley–Terry 分数。执行选中实验后，从成功/失败抽象 intra/cross-task 技能并更新预测、探索、协调协议。
+- 2026-10 · [NEAR: Neighborhood-Aware Residuals for Memory Retrieval](../../reproductions/2610.13314-near/README.md)（`near`）：记忆记录往往共享人名、话题和事件。共享内容会让无关证据的整体 embedding 高于真正包含事实的记录。
 - 2026-10 · [RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics](../../reproductions/2610.13889-rated/README.md)（`rated`）：独立 query/tool encoder 做 CLS 归一化与 contrastive InfoNCE 训练。部署时 encoder 冻结，先语义 top-K，再融合 metadata prior 与逐工具 discounted LinUCB；只从实际选中工具的执行成功、错误或超时更新对应 arm。
 - 2026-10 · [RSI-Anything: Unlocking Recursive Self-Improvement with World Models](../../reproductions/2610.13912-rsi-anything/README.md)（`rsi-anything`）：候选先经世界模型预测，再向外部验证申请反馈；反馈更新持久 policy/workflow，可靠性不足且数据/预算足够时适配 predictor。只有组件检查和配对兼容性检查均通过的版本进入下一轮。
 - 2026-10 · [Test-Time Memory Construction](../../reproductions/2610.13348-t2mem/README.md)（`t2mem`）：离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。
@@ -75,6 +77,7 @@
 - 2026-09 · [CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution](../2609.04865-coskill/README.md)（`coskill`）：以往技能库要么与策略优化分离，要么把元技能写成固定工作流。CoSkill 让 Reasoning Agent 使用任务技能及其子步骤技能，让可学习 Meta-Skill Agent 根据执行回报改写技能；二者共享 backbone 并端到端联合训练。
 - 2026-09 · [SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents](../2609.04629-silr/README.md)（`silr`）：系统已经违规时，安全门不能简单拒绝所有仍不安全的动作，而要允许逐步恢复。SiLR 先 shadow-execute 提案，再比较每个受约束分支的严重度；只有在乘积序上不恶化的动作可进入真实环境，同一结构信号还能作为 GRPO 过程奖励。
 - 2026-09 · [What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents](../2609.04518-multi-harness-rl/README.md)（`multi-harness-rl`）：多 Harness RL 同时改变了执行环境多样性和 GRPO 的分组边界，难以判断增益来源。论文冻结相同 task-harness 轨迹，只比较组内和跨 harness advantage，并用训练中未见的最小 harness 审计能力是否真正迁移。
+- 2026-08 · [Imagine Before Acting: Prospective Skill Identification for LLM Agents](../../reproductions/2609.01642-skilldreamer/README.md)（`skilldreamer`）：任务描述主要说目标，技能文档主要写程序性知识。直接相似度容易优先找到背景相近、但不能解决当前能力缺口的技能；检索到了也未必会在执行时调用。
 - 2026-08 · [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../2608.26557-deeprepro/README.md)（`deeprepro`）：一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。
 - 2026-08 · [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
 - 2026-08 · [SPT: Skills as Pre-Training Data for Agentic Language Models](../2608.26563-spt/README.md)（`spt`）：Agent 轨迹昂贵且只描述一次执行；skill package 则显式编码可复用工作流。SPT 在 post-training 前对 SkillCorpus 做 causal LM mid-training，并把被引用文件插到主说明的首次引用附近。

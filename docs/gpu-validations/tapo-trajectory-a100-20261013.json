@@ -88,14 +88,29 @@
       "mean": 0.5416666666666666,
       "std": 0.07216878364870322,
       "n": 3
+    },
+    "grpo_control.validation.accuracy": {
+      "mean": 0.625,
+      "std": 0.125,
+      "n": 3
+    },
+    "paired_accuracy_difference_vs_grpo": {
+      "mean": -0.08333333333333333,
+      "std": 0.19094065395649334,
+      "n": 3
     }
   },
   "execution_checks": {
     "completed_seeds": 3,
-    "actual_gradient_steps": [
+    "rollout_groups_per_seed": [
       3,
       3,
       3
+    ],
+    "actual_gradient_steps": [
+      6,
+      6,
+      6
     ],
     "rejected_zero_advantage_groups": [
       4,
@@ -108,7 +123,8 @@
       4941
     ],
     "gold_in_policy": false,
-    "official_test_read": false
+    "official_test_read": false,
+    "independent_grpo_control_completed": true
   },
   "limitations": [
     "Three-seed bounded mechanism diagnostic, not a stable capability/production gain claim.",

@@ -1,0 +1,25 @@
+{
+  "paper": "2610.13834",
+  "version": "v1",
+  "retrieved_date": "2026-10-13",
+  "figures": [
+    {
+      "label": "Figure 1",
+      "caption_zh": "one-hot 训练与推理轨迹错配，以及 DoubleCat 的双层连续插值",
+      "source_page": "https://arxiv.org/html/2610.13834v1#S2.F1",
+      "source_url": "https://arxiv.org/pdf/2610.13834v1",
+      "source_pdf_page": 3,
+      "source_pdf_bytes": 1127218,
+      "source_pdf_sha256": "00f2e96e3e72608a054a873cb1a0652f021b1b27e5d1ed5847667c19d1a64701",
+      "file": "paper-figure-01.png",
+      "bytes": 148537,
+      "sha256": "81835f2216fd3a481e04689c5641297883b790300a70e31805e8c1c2ae240483",
+      "render_dpi": 216,
+      "crop_points": [65, 64, 547, 225],
+      "transformation": "PDF rasterization and intact three-panel figure extraction, including original panel labels",
+      "visual_verified": true,
+      "visual_checks": ["all three original panels intact", "X0, denoiser path, Y0 and Yt labels legible", "original (a)/(b)/(c) labels intact", "no neighboring paragraph or reconstructed elements"]
+    }
+  ],
+  "scope": "Original DoubleCat training-path illustration, not optional two-forward standard self-conditioning and not measured local language capability."
+}

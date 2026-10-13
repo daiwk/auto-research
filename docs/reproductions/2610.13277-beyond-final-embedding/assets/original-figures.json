@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "paper_version": "2610.13277v1",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.13277v1",
+  "source_pdf_sha256": "7ca81c241bb14b5217f9cf89c46e20a1ab5139f48ded5aa50d3f51a3e3133b6e",
+  "first_page_version_stamp": "arXiv:2610.13277v1 [cs.IR] 9 Oct 2026",
+  "paper_license": "arXiv.org perpetual non-exclusive license",
+  "rights_notice": "Original figures remain attributable to their authors. The arXiv non-exclusive license is not relabeled as CC BY.",
+  "artifact_kind": "original-paper-pdf-figure-excerpt",
+  "local_measurement_evidence": false,
+  "extraction": "Original PDF rendered and cropped; no redraw, recoloring, translation inside image, or synthetic completion.",
+  "figures": [
+    {
+      "figure": "Figure 2",
+      "pdf_page_one_based": 3,
+      "panel": "complete retrieval diagram without external caption",
+      "source_html_anchor": "https://arxiv.org/html/2610.13277v1#S3.F2",
+      "asset": "paper-figure-01.png",
+      "asset_sha256": "58e4bedc74022df11cbfc9a6a6196521ff419b7f68190d0f2adc6ec678600ccc",
+      "render": {
+        "renderer": "Poppler pdftoppm",
+        "dpi": 250,
+        "crop_box_points_top_left_origin": [
+          105,
+          84,
+          508,
+          266
+        ],
+        "crop_pixels": {
+          "x": 364,
+          "y": 291,
+          "width": 1400,
+          "height": 633
+        },
+        "command": "pdftoppm -f 3 -l 3 -r 250 -x 364 -y 291 -W 1400 -H 633 -png -singlefile 2610.13277v1.pdf original-figure-2-retrieval-v1"
+      },
+      "visual_inspection": {
+        "date": "2026-10-13",
+        "status": "inspected",
+        "checks": "Frozen encoder/bank, optional low-rank query adapter, sparse token matching and memory-ID aggregation visible",
+        "result": "Labels, arrows and selected panel boundaries are complete; no unreadable/missing glyphs observed"
+      }
+    }
+  ]
+}

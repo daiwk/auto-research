@@ -66,7 +66,9 @@ def summarize(key, runs):
     metrics = {f"{arm}.accuracy": statistic([run[arm]["accuracy"] for run in runs])
                for arm in ("baseline", "method_metrics")}
     return metrics, runs[0]["dataset"], runs[0]["checkpoint"], {
-        "completed_seeds": 3, "actual_gradient_steps": [len(run["training"]) for run in runs],
+        "completed_seeds": 3,
+        "rollout_groups_per_seed": [len(run["training"]) for run in runs],
+        "actual_gradient_steps": [sum(len(step["updates"]) for step in run["training"]) for run in runs],
         "rejected_zero_advantage_groups": [run["sampling"]["zero_advantage_groups_retained"] for run in runs],
         "generated_tokens_including_rejected_groups": [
             run["sampling"]["generated_training_tokens_including_rejected_groups"] for run in runs],
@@ -76,6 +78,26 @@ def summarize(key, runs):
 def curate(key, directory, commit):
     runs = [json.loads((directory / f"{key}-{seed}" / "result.json").read_text()) for seed in SEEDS]
     metrics, dataset, checkpoint, checks = summarize(key, runs)
+    controls = {}
+    if key in {"gppo-framework", "tapo-trajectory"}:
+        control_runs = [json.loads((directory / f"grpo-control-{seed}" / "result.json").read_text())
+                        for seed in SEEDS]
+        control_metrics, control_dataset, control_checkpoint, control_checks = summarize("grpo-control", control_runs)
+        if dataset != control_dataset or checkpoint != control_checkpoint:
+            raise ValueError("GRPO control must use the same verified inputs")
+        for run, control in zip(runs, control_runs, strict=True):
+            for field in ("steps", "group", "max_tokens", "inner_updates", "learning_rate"):
+                if run["protocol"][field] != control["protocol"][field]:
+                    raise ValueError(f"control budget mismatch: {field}")
+            if run["baseline"] != control["baseline"]:
+                raise ValueError("paired control must start at the same measured initial student")
+        metrics["grpo_control.validation.accuracy"] = control_metrics["method_metrics.accuracy"]
+        metrics["paired_accuracy_difference_vs_grpo"] = statistic([
+            run["method_metrics"]["accuracy"] - control["method_metrics"]["accuracy"]
+            for run, control in zip(runs, control_runs, strict=True)])
+        controls["grpo-control"] = {"seed_results": control_runs, "execution_checks": control_checks,
+                                    "matched_upper_bound_budget": True, "matched_actual_compute": False}
+        checks["independent_grpo_control_completed"] = True
     artifact = f"docs/reproductions/{IDS[key]}-{key}/metrics/public-a100-seeds42-44.json"
     receipt_path = f"docs/gpu-validations/{key}-a100-20261013.json"
     limitations = ["Three-seed bounded mechanism diagnostic, not a stable capability/production gain claim.",
@@ -122,6 +144,7 @@ def curate(key, directory, commit):
     payload = {"schema_version": 2, "adapter_key": key, "method": key, "manifest_ref": f"reproduction:{key}",
                "diagnostic_only": True, "measured_locally": True, "seeds": list(SEEDS), "dataset": dataset,
                "checkpoint": checkpoint, "aggregate_metrics": metrics, "seed_results": runs,
+               "controls": controls,
                "evaluation_protocol": {"tier": "l2_public_dataset", "seeds": list(SEEDS),
                                        "formal_comparison": False, "test_used_for_selection": False,
                                        "claim_policy": "scoped mechanism diagnostic; do not claim stable capability or production uplift"},

@@ -39,19 +39,37 @@ graph LR
  F --> R[原memory级别排名]
 ```
 
-重绘源码：[architecture.mmd](assets/architecture.mmd)；原图：[Figure 2](https://arxiv.org/html/2610.13277v1#S3.F2)，内嵌图的 source 记录在 [source-provenance.json](assets/source-provenance.json)。
+上方为本地重绘示意，源码：[architecture.mmd](assets/architecture.mmd)；固定全文来源见 [source-provenance.json](assets/source-provenance.json)。
+
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Beyond the Final Embedding：用已有内容 token 寻找记忆证据 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.13277v1#page=3)
+
+图 2：冻结 encoder 保留 memory 的 contextual token state 与源 memory ID；query token 从固定 bank 稀疏匹配证据，按 memory ID 聚合，并与 whole-memory similarity 融合为最终 memory 排名。橙色低秩残差 adapter 为可选项，只训练 query 侧，memory、encoder 与索引保持不变。图中对话和 ID 是原作者示意，不是本地数据或 gold 标签。来源：Luo 等，[v1 Figure 2](https://arxiv.org/html/2610.13277v1#S3.F2)，[原 PDF 第 3 页](https://arxiv.org/pdf/2610.13277v1#page=3)。
+
+此图为原文 PDF 的 250 dpi 局部截图，图内文字未改写，已视觉核验；不是本地测量。论文标注 arXiv perpetual non-exclusive license，并非 CC BY；图示版权仍归原作者。PDF/图片 SHA256、页码与裁切范围见 [original-figures.json](assets/original-figures.json)。
+
+> **原论文 Figure 2（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2610.13277v1#page=3)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
 对每个 query token 的返回集合 $\mathcal R_i$，floor 为 $t_i=\max(0,\min_{h\in\mathcal R_i}h_{q,i}^Th)$。按原 memory ID 聚合：
 
-$$s_{sparse}(q,m)=\frac1{n_q}\sum_i\max\left(t_i,\max_{j:h_{m,j}\in\mathcal R_i}h_{q,i}^Th_{m,j}\right).$$
+$$
+s_{sparse}(q,m)=\frac1{n_q}\sum_i\max\left(t_i,\max_{j:h_{m,j}\in\mathcal R_i}h_{q,i}^Th_{m,j}\right).
+$$
 
-$$s_{fused}=\alpha\frac{s_{pool}-\mu_{pool}}{\max(\sigma_{pool},10^{-6})}+(1-\alpha)\frac{s_{sparse}-\mu_{sparse}}{\max(\sigma_{sparse},10^{-6})}.$$
+$$
+s_{fused}=\alpha\frac{s_{pool}-\mu_{pool}}{\max(\sigma_{pool},10^{-6})}+(1-\alpha)\frac{s_{sparse}-\mu_{sparse}}{\max(\sigma_{sparse},10^{-6})}.
+$$
 
 可选 query adapter 的 bias-free $BA$ 不含激活，并保持输入范数：
 
-$$T(h)=\frac{\|h\|_2(h+BAh)}{\max(\|h+BAh\|_2,\epsilon)},\qquad B_0=0.$$
+$$
+T(h)=\frac{\|h\|_2(h+BAh)}{\max(\|h+BAh\|_2,\epsilon)},\qquad B_0=0.
+$$
 
 用 all-memory MaxSim 的多正例 cross-entropy 训练 adapter（温度0.07），而推理仍为稀疏 token 搜索。不能以 ANN 离散 neighbor selection 的假梯度代替该 surrogate。
 

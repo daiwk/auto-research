@@ -12,7 +12,9 @@
   "first_author_affiliation": "Princeton University",
   "published": "2026-10-09",
   "code": "https://github.com/Johnny-Liou/ReplaySSM",
-  "adapter": "replayssm",
+  "adapter": {
+    "spec_key": "replayssm"
+  },
   "priority": "P1",
   "requires_gpu_validation": true,
   "gpu_validation_artifact": "docs/gpu-validations/replayssm-a100-20261013.json"

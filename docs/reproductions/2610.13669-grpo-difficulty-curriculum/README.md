@@ -34,7 +34,17 @@ flowchart LR
   V --> G
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.13669v1#S1.F2)；[原始图资源](https://arxiv.org/html/2610.13669v1/figures/fig1_training_paradigms.png)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13669v1/figures/fig1_training_paradigms.png)
+
+中文图注（原论文 Figure 2）：标准 GRPO 使用全训练集；静态课程按初始可解率固定排序；fixed-medium 根据当前策略重新估计成功率，但始终选择 B3；staged 同样动态重估，却让活动难度带从 B1 逐步移到 B5。图中的流程对照来自原论文，不是本地课程推进或准确率记录。
+
+精确来源：[固定 v1 的 Figure 2，HTML `S1.F2`](https://arxiv.org/html/2610.13669v1#S1.F2)；[原始 PNG](https://arxiv.org/html/2610.13669v1/figures/fig1_training_paradigms.png)。资源文件名含 `fig1`，但原文图号是 Figure 2，按原文图注记录。本地原始字节副本与 SHA-256 记录在 [figure-source.json](figure-source.json)，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 Figure 2（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.13669v1/figures/fig1_training_paradigms.png)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 

@@ -21,7 +21,7 @@
 | P1 | SkillDreamer / `skilldreamer` | [2609.01642v2](https://arxiv.org/html/2609.01642v2) | pseudo skill 生成、混合检索、执行中的能力重评与技能调用 |
 | P1 | SynthSelf / `synthself` | [2610.13113v1](https://arxiv.org/html/2610.13113v1) | 同家族 aligner、拒绝采样、离线训练、获取/保持双评测 |
 | P1 | UPTURN / `upturn` | [2610.13672v1](https://arxiv.org/html/2610.13672v1) | 冻结 encoder + MLP、失败标签训练、新 user turn 干预、预算对照 |
-| P1 | DoubleCat / SemiCat / `doublecat-semicat` | [2610.13834v1](https://arxiv.org/html/2610.13834v1) | 两层插值 self-conditioning、离散 reveal、真实 diffusion LM 训练 |
+| P1 | DoubleCat / SemiCat / `doublecat-semicat` | [2610.13834v1](https://arxiv.org/html/2610.13834v1) | 无额外前向的两层连续插值、离散 reveal、真实 diffusion LM 训练 |
 | P1 | SOAR / `soar` | [2610.13157v1](https://arxiv.org/html/2610.13157v1) | 内外知识来源流、来源一致性奖励、真实策略训练 |
 | P1 | GRPO 难度课程 / `grpo-difficulty-curriculum` | [2610.13669v1](https://arxiv.org/html/2610.13669v1) | 当前策略难度估计、动态难度带、过难退化对照 |
 | P1 | Uncertainty-guided progressive contraction / `progressive-contraction` | [2610.12933v1](https://arxiv.org/html/2610.12933v1) | Monte Carlo 推理树、教师池收缩、学生感知路由、教师成本核算 |
@@ -51,17 +51,23 @@ GPPO 和 TAPO 与已有的其他论文缩写重名，本轮使用 `gppo-framewor
 | 部分 | 当前可核验进度 | 仍需完成 |
 | --- | --- | --- |
 | 扫描器 | 公告独立召回、缩写查询、版本复核队列、Google/Meta 官方来源优先级、限时重试；相关回归测试已运行 | 真实增量扫描与完整版本基线登记；不自动推进水位 |
-| UxSID | 四结构真实 CPU 训练入口、属性编码、残差量化、双层 probing、同 SID 缓存一致性 | 完整公开协议复核、A100/A30 多 seed、adapter/spec/中文详情与指标 |
-| State-OPD | 状态隔离、完整响应扩采、Appendix D.1 双裁剪、真实 checkpoint 更新入口、无 gold 的算术工具环境 | 真正 GPU 交互训练、原 benchmark 边界复核、adapter/spec/中文详情与指标 |
-| GPPO / TAPO | 12 种 divergence/estimator 组合、两侧 log 的独立定义、局部梯度构造、真实 rollout/LoRA 训练入口 | GPU 非零优势更新与对照、adapter/spec/中文详情与指标 |
-| 其余 15 篇 | 固定清单和原始来源缓存；作者公开仓库已开始核验 | 核心算法、可执行集成、实验、文档与证据均未完成 |
+| UxSID | 四结构、943 用户、MovieLens-100K 实际 A100 三 seed 训练、同 SID 缓存一致性、adapter/spec/中文详情与绑定源码的实测指标 | 全局生成同步与 CI；本次没有稳定提升，不是工业线上复现 |
+| State-OPD | 原快照 A100 三 seed 交互训练，所有步骤非零梯度；8 题 accuracy 前后均为 0，负结果保留 | 新快照默认路径、完整历史 OPD / 无扩采对照及其源码绑定；原三个 benchmark 未运行 |
+| GPPO / TAPO | 原快照 A100 三 seed 真实更新，独立 GRPO-control 三 seed 完成；原文与本地指标分开 | 统一指标/目录/CI 核验；8 题短预算仅支持机制诊断，不宣称稳定能力收益 |
+| DoubleCat-SemiCat | 修正后的无额外前向核心在 A30 新快照三 seed 实跑，参数变化、实际调用数与负结果已核验 | 全局 CI；原完整 benchmark 未运行，不复用旧标准 SC 结果 |
+| CV-OPD / OAL / ReplaySSM | 核心算法、真实 checkpoint/训练入口、行为测试、完整中文详情；公开资源固定版本与实际字节校验 | 新快照 A100/A30 三 seed，暂因网络问题延后 |
+| NEAR / Beyond / SkillDreamer | 冻结真实编码器、可执行检索/技能调用、可选 query adapter、隔离标签访问与显式切分协议 | GPU 实跑及指标；共享记忆库协议单独标为诊断，不包装为未知记忆库泛化 |
+| LeWAM / SmolWAM | 原作者发布策略和有界真实联合训练/teacher KD 入口、两套隔离依赖与资源核验脚本 | 大资源完成传输并校验、依赖修复、真实训练及新 checkpoint 的机器人闭环；未运行原完整训练预算 |
+| MagicBeanStalk / SynthSelf / UPTURN / SOAR / 难度课程 / Progressive contraction | 六篇定义机制、真实 checkpoint 入口、行为测试、adapter/spec/中文详情均落盘 | 真实 GPU 验证；SOAR 独立公开知识库；无有效训练/救援信号时必须保留失败 |
 
-这四篇的代码目前是实施中的模块，**尚未作为验收完成的论文发布到 registry/公开目录**。不能把上述阶段进展说成 19 篇已完成。
+源码快照 `ccad3e67` 已保存。本表是实施检查点：四篇原快照与 DoubleCat 新核心的三 seed 实跑已核验，不代表 19 篇通过最终验收。registry 登记、公式测试和源码提交均不能替代 GPU 门禁。用户已要求暂停不稳定网络上的 GPU 工作；完整剩余链路记在 [GPU TODO](../research-audits/oct13-gpu-todo.md)，不再重试 A100/A30。
+
+本地目录/原图合同、71 项定向检查、基础 wheel 安装及文档严格构建已通过；全量首次 pytest 的 5 个失败点已修复并定向复跑，但最终快照的完整 pytest 与远端 CI 尚未宣称通过。详见[本地收口检查点](../research-audits/oct13-local-closeout.md)。
 
 UxSID 的一次 CPU 诊断使用固定公开 SmolLM2-135M 属性编码器、100 用户、10,719 条训练、100 条 validation 和 100 条 test、1 epoch/seed 42。Validation 选择的是 `agnostic` 消融；UxSID 的 test AUC 为 0.5848，对照为 0.5916。这是小规模负结果，保留在本地运行产物，不代表原论文或稳定能力比较。其缓存与直接计算最大差异为 0。
 
 新增标签访问的角色复核：`proximal_checkpoint` 与 `state_opd/checkpoint` 的参考答案只进入独立 verifier；`ArithmeticEnvironment` 的 `arguments.answer` 是模型自己的提交，不是参考答案。生成器/教师消息均不接收数据参考答案，行为测试覆盖此边界。环境步数计数仅反映实际 `step` 调用，不独立作为任务能力证据。
 
-A100 已通过只读连通/显存检查，已有公开 Qwen2.5-0.5B 与 7B 校验清单。用户已批准三个分领域实现代理，以及本轮相关源码/脚本和固定版本公开资源的同步，新增资源总量不超过 20 GB；不传私有数据、密钥或整个工作区。当前尚未签发新 GPU receipt。
+A100 原有四篇实跑已产生绑定 `7e125fd0` 的脱敏 GPU receipt；新快照验证启动时 SSH 在认证代理阶段关闭连接，不能宣称任务已启动。大资源传输中断保留断点；旧结果不覆盖新路径。用户已批准三个分领域实现代理，以及本轮相关源码/脚本和固定版本公开资源的同步，新增资源总量不超过 20 GB；不传私有数据、密钥或整个工作区。
 
 本轮另接受收尾清理要求：先检查本地占用，删除可重建的站点、构建和打包残留，保留源码、未提交改动、实验结果（含失败）、验证凭据和有复用价值的公开数据/权重缓存；清理不等于删除历史研究证据。

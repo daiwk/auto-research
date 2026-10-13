@@ -12,8 +12,13 @@
 |---|---|---|---|---|
 | 推理与系统效率 | [DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs](../reproductions/2610.13767-dualquant/README.md) | d-Matrix，2026-10-09 | [已开源](https://github.com/MahsaMoonlike/dualquant) | `dualquant` |
 | 网络架构 | [Multi-Stream Attention Residuals](../reproductions/2610.13630-msar/README.md) | Shanghai Jiao Tong University，2026-10-09 | 未发现官方代码 | `msar` |
+| 注意力与长上下文 | [Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels](../reproductions/2610.13674-oal/README.md) | The Chinese University of Hong Kong, Shenzhen，2026-10-09 | [已开源](https://github.com/wuqianyue09/OAL) | `oal` |
+| 网络架构 | [On the Design Space of Continuous Diffusion Language Models](../reproductions/2610.13834-doublecat-semicat/README.md) | University of Oxford / Apple（在 Apple 期间完成），2026-10-09 | 未发现官方代码 | `doublecat-semicat` |
 | 注意力与长上下文 | [Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers](../reproductions/2610.13735-orthros/README.md) | The Hong Kong Polytechnic University，2026-10-09 | 未发现官方代码 | `orthros` |
+| 推理与系统效率 | [ReplaySSM: Cache SSM Inputs, Not State](../reproductions/2610.13778-replayssm/README.md) | Princeton University，2026-10-09 | [已开源](https://github.com/Johnny-Liou/ReplaySSM) | `replayssm` |
+| 多模态基础模型 | [SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices](../reproductions/2610.13740-smolwam/README.md) | ML Collective，2026-10-09 | [已开源](https://github.com/iitimii/SmolWAM) | `smolwam` |
 | 生成模型 | [Few-Step Generation via Data-Space Iteration](2610.12102-data-space-iteration/README.md) | ByteDance Seed，2026-10-08 | [已开源](https://arxiv.org/html/2610.12102v1#A5) | `data-space-iteration` |
+| 多模态基础模型 | [LeWAM: End-to-End World and Action Modeling with JEPAs](../reproductions/2610.12818-lewam/README.md) | UC San Diego，2026-10-08 | [已开源](https://github.com/MinghaoFu/lewam) | `lewam` |
 | 训练优化与稳定性 | [Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization](2610.12444-adamw4bit/README.md) | University of California, Berkeley / Nubank，2026-10-08 | [已开源](https://github.com/nubank/adamw4bit) | `adamw4bit` |
 | 稀疏专家与路由 | [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](2610.11575-elastic-expert-routing/README.md) | Shanghai AI Laboratory / Shanghai Jiao Tong University，2026-10-08 | 未找到作者公开代码 | `elastic-expert-routing` |
 | 推理与系统效率 | [SparseDecoding: Decoding-Aware Pruning for Accurate and Efficient LLM Inference](2610.12327-sparse-decoding/README.md) | Westlake University，2026-10-08 | 尚未发布；项目页 Code (soon): https://wang-qitong.github.io/SparseDecoding/ | `sparse-decoding` |

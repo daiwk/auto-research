@@ -7,6 +7,10 @@
   "source_resource": "https://arxiv.org/html/2610.13015v1/div-geo.png",
   "source_type": "arxiv_html_image",
   "copyright": "original authors",
-  "status": "primary-source location verified; local copy integration handled separately"
+  "figure_label": "Figure 1",
+  "figure_kind": "original proximal-geometry mechanism schematic",
+  "local_asset": "assets/paper-figure-01.png",
+  "local_asset_sha256": "ec84eb67db58a299316f6e7fcc0036ea1b357eae89afef04738a30a989a65a0a",
+  "status": "original resource downloaded unchanged; visually verified"
 }
 

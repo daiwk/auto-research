@@ -4,14 +4,16 @@
 
 | 项目 | 内容 |
 | --- | --- |
-| 论文链接 | [arXiv 2605.09040](https://arxiv.org/abs/2605.09040)；本轮依据 [v4 正文](https://arxiv.org/html/2605.09040v4) |
+| 论文链接 | [arXiv 2605.09040](https://arxiv.org/abs/2605.09040) |
 | 公司/机构 | Kuaishou；一作 Hongwei Zhang |
-| 首次公开日期 | 2026-05-09（arXiv v1）；本轮关注的 v4 为 2026-10-09，不算十月新 v1 |
-| 原文开源代码 | 未找到原作者公开实现（核查日期：2026-10-13） |
+| 首次公开日期 | 2026-05-09（arXiv v1） |
+| 原文开源代码 | 否：未找到原作者公开实现（核查日期：2026-10-13） |
 | Adapter | `uxsid` |
 | 本地复现代码 | [`src/auto_research/reproductions/uxsid/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/uxsid/) |
 
-> **本地对照口径**：四种真实训练结构共享同一冻结语义编码、SID 侧信息、初始参数、样本和训练预算；仅用 validation 选择 epoch/结构，之后报告 test。MovieLens 评分预测不能替代原论文 KuaiRec/XLong 超长历史、CTR/CTCVR 或线上收益。
+本轮依据 2026-10-09 的 [v4 正文](https://arxiv.org/html/2605.09040v4) 实现；v1 与实质更新日期分开记录，不将旧文更新计作十月新 v1。
+
+> **本地对照口径**：基线为 global-only、item-agnostic 与 ungated，实验组为 UxSID；四种真实训练结构共享同一冻结语义编码、SID 侧信息、初始参数、样本和训练预算，仅用 validation 选择 epoch/结构，之后报告 test。本轮未见稳定提升，稳定相对收益不适用。MovieLens 评分预测不能替代原论文 KuaiRec/XLong 超长历史、CTR/CTCVR 或线上收益。
 
 ## 原始论文总结
 
@@ -38,19 +40,33 @@ flowchart TD
   P --> C[用户/SID 共享缓存；线上与离线一致]
 ```
 
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![UxSID 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2605.09040v4/Fig/Overview.png)
+
+> **原论文 Figure 2（关键图）**：展示原论文提出的核心架构、主要模块及其连接关系。图片来自[原论文](https://arxiv.org/abs/2605.09040v4)，版权归原作者所有；点击图片可查看来源。
+<!-- paper-figure:end -->
+
 ### 核心公式
 
 原文 Eq.2 的残差量化为
 
-$$z_i\approx\sum_m\mathcal C_m(k_m),\quad k_m=\arg\min_j\|r_{m-1}-c_{m,j}\|_2.$$
+$$
+z_i\approx\sum_m\mathcal C_m(k_m),\quad k_m=\arg\min_j\|r_{m-1}-c_{m,j}\|_2.
+$$
 
 本地明确使用两级 residual k-means 加七级 finite scalar residual，而不是冒称原文公开实验的 LETTER 四个 256 码本。码本中心与 scalar 范围仅在训练物品属性上拟合，推理使用第一层码 ID。
 
 IAIC 的锚点压缩和原文 Eq.5 正交项为
 
-$$H=\operatorname{softmax}\left((Q_{anc}W_Q)(EW_K)^T/\sqrt d\right)EW_V,$$
+$$
+H=\operatorname{softmax}\left((Q_{anc}W_Q)(EW_K)^T/\sqrt d\right)EW_V,
+$$
 
-$$\mathcal L_{ortho}=\left\|PP^T/\|P\|_2^2-I\right\|_F.$$
+$$
+\mathcal L_{ortho}=\left\|PP^T/\|P\|_2^2-I\right\|_F.
+$$
 
 分母是整个锚点矩阵的 squared L2 norm，不是逐行单位化后的余弦矩阵。每个锚点保留独立参数的 PFFN，而非用一个共享 FFN 替代。
 

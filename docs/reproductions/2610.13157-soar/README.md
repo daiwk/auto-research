@@ -34,7 +34,17 @@ flowchart TD
   V --> U[trajectory GRPO及reference KL]
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.13157v1#S2.F2)；[原始图资源](https://arxiv.org/html/2610.13157v1/method.svg)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents 原论文 Figure 2](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13157v1/method.svg)
+
+中文图注（原论文 Figure 2）：上半部展示 Actor 同时访问搜索引擎与内部知识，形成多条 rollout，结合参考模型和来源一致性规则奖励计算组优势并更新策略；下半部展示不同轨迹如何选择与组合内部、外部证据，把奖励归因到信息选择行为。此图为作者原始训练框架，不是本地检索语料或训练结果。
+
+精确来源：[固定 v1 的 Figure 2，HTML `S2.F2`](https://arxiv.org/html/2610.13157v1#S2.F2)；[原始 SVG](https://arxiv.org/html/2610.13157v1/method.svg)。本地原始字节副本与 SHA-256 记录在 [figure-source.json](figure-source.json)，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 Figure 2（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.13157v1/method.svg)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 

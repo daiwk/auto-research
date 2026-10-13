@@ -39,17 +39,37 @@ graph LR
  A --> E[LIBERO执行完整16步后重新观察]
 ```
 
-重绘源码：[architecture.mmd](assets/architecture.mmd)。原版[Figure 1](https://arxiv.org/html/2610.13740v1#S2.F1) 为 HTML 内嵌图，作者提供[架构 SVG](https://github.com/iitimii/SmolWAM/blob/dde1e5bfe35c439499343c6d70e9cd32c96d0b36/assets/architecture.svg)；[Figure 2](https://arxiv.org/html/2610.13740v1#S4.F2) 为 future 解码展示。[source-provenance.json](assets/source-provenance.json) 留存来源和固定版本。
+上方为本地重绘示意，源码：[architecture.mmd](assets/architecture.mmd)；作者仓库另有[架构 SVG](https://github.com/iitimii/SmolWAM/blob/dde1e5bfe35c439499343c6d70e9cd32c96d0b36/assets/architecture.svg)。[source-provenance.json](assets/source-provenance.json) 留存来源和固定版本。
+
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![SmolWAM：保留世界预测的紧凑机器人动作模型 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.13740v1#page=2)
+
+图 1：从 Cosmos Policy 到 SmolWAM，33-frame VAE 改为单帧 VAE 加 adapter，文本改为缓存 BERT；删除 state/value frame，以 28 个 state-conditioned action query 输出动作及未来相机 latent。token 布局由 1,764 压缩到 1,008，DiT 保留 12 个 block，推理从 5 步变为单步。图中延迟、计算量和显存为作者 A100 原始测量，不是本地结果。来源：Owolabi 等，[v1 Figure 1](https://arxiv.org/html/2610.13740v1#S2.F1)，[原 PDF 第 2 页](https://arxiv.org/pdf/2610.13740v1#page=2)。
+
+![SmolWAM 原文 Figure 4 的动作与世界预测蒸馏训练曲线](assets/original-figure-4-distillation-v1.png)
+
+图 4：原作者以 batch 32 训练动作与未来 latent 的 normalized L1；浅线为训练 batch，带点粗线为 held-out validation。两条竖线分别标出 teacher 布局转 compact 布局，以及随后追加 7,500 步训练的起点。此图保留原始长程训练设置，不能当作本轮缩放训练的测量。来源：Owolabi 等，[v1 Figure 4](https://arxiv.org/html/2610.13740v1#A1.F4)，[原 PDF 第 8 页](https://arxiv.org/pdf/2610.13740v1#page=8)。
+
+以上为原文 PDF 的 250 dpi 局部截图，图内文字未改写，已逐张视觉核验。论文图示采用 CC BY 4.0，归原作者所有；这与模型权重的非商业许可证是不同边界。PDF/图片 SHA256、页码与裁切范围见 [original-figures.json](assets/original-figures.json)。[原文 Figure 2](https://arxiv.org/html/2610.13740v1#S4.F2) 的 future 解码仅用于展示，不作为本地世界预测质量的测量。
+
+> **原论文 Figure 1（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2610.13740v1#page=2)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
 与 LeWAM 的噪声→数据方向不同，这里沿用 teacher 的数据→噪声 rectified flow：
 
-$$x_\tau=(1-\tau)x_0+\tau\epsilon,\quad v_\theta\approx\epsilon-x_0,\quad \hat x_0=x_\tau-\tau v_\theta.$$
+$$
+x_\tau=(1-\tau)x_0+\tau\epsilon,\quad v_\theta\approx\epsilon-x_0,\quad \hat x_0=x_\tau-\tau v_\theta.
+$$
 
 原版预条件化、RoPE 空间 extrapolation=3.0、禁用 fps modulation 均须保留；加载权重成功并不代表错误默认设置下的 trunk 等价。训练四个主要 L1 项为：
 
-$$\mathcal L=\|\hat a-a\|_1+\|\hat a-a^T\|_1+\|\hat z-z\|_1+\|\hat z-z^T\|_1.$$
+$$
+\mathcal L=\|\hat a-a\|_1+\|\hat a-a^T\|_1+\|\hat z-z^T\|_1.
+$$
 
 第一阶段 1000/5000 步用 teacher 的 1764-token layout 恢复 pruning，随后用 1008-token compact layout；原先存在的状态/value 另有 0.1 权重辅助监督。发布推理只需一次 forward，并不依赖先去噪 future 才能输出动作。
 

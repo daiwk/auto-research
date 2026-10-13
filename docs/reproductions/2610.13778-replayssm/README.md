@@ -23,7 +23,17 @@ Mamba2/GDN 解码一般每 token 读写完整矩阵状态，常受显存带宽�
 
 ### 架构图
 
-[原文 Algorithms 1–3 与 Figure 1](https://arxiv.org/html/2610.13778v1#S4)。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![ReplaySSM：缓存 SSM 输入，避免逐 token 状态写回 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13778v1/overview_figure.svg)
+
+原论文 Figure 1 总览：上方将逐 token 状态写回改为输入缓存和周期刷新；下方解释接受指针回滚，以及高精度 recurrence anchor 与低精度 read copy 的分离。来源为 [arXiv 2610.13778v1，Figure 1](https://arxiv.org/html/2610.13778v1#S1.F1) 的 [原始 SVG](https://arxiv.org/html/2610.13778v1/overview_figure.svg)，PNG 仅作两倍分辨率渲染，未重绘。图内吞吐、显存流量注记属于作者原生 serving 设置，**不是**本地 FP32 存储 emulation 的性能测量。原 SVG、PNG 与视觉核验记录见 [assets/provenance.json](assets/provenance.json)。
+
+> **原论文 Figure 1（关键图）**：上文说明所选原图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.13778v1/overview_figure.svg)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
+
+下图为本地实现映射的重绘示意，对应 [原文 Algorithms 1–3](https://arxiv.org/html/2610.13778v1#S4)：
 
 ```mermaid
 flowchart TD
@@ -102,7 +112,7 @@ Native vLLM、Qwen3.5/Nemotron 权重、PG-19 KL 与下游长生成评测仍不�
 
 | 原文组件 | 本地实现 |
 | --- | --- |
-| Replay、output-only、rollback、GDN、双精度 | [replayssm.py](../../../src/auto_research/foundation_models/replayssm.py) |
-| 固定作者 Triton 精度验证 | [run_replayssm.py](../../../scripts/run_replayssm.py) |
-| 行为测试 | [test_replayssm.py](../../../tests/test_replayssm.py) |
+| Replay、output-only、rollback、GDN、双精度 | [replayssm.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/foundation_models/replayssm.py) |
+| 固定作者 Triton 精度验证 | [run_replayssm.py](https://github.com/daiwk/auto-research/blob/main/scripts/run_replayssm.py) |
+| 行为测试 | [test_replayssm.py](https://github.com/daiwk/auto-research/blob/main/tests/test_replayssm.py) |
 

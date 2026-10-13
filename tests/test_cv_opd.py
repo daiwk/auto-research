@@ -6,6 +6,14 @@ import torch
 from auto_research.multimodal.cv_opd import intersection_over_union, jsd, negative_crop, objective, sampled_training_rollouts, topk_tail, verify_answer
 
 
+@pytest.fixture(autouse=True)
+def fixed_contract_random_state():
+    state = torch.random.get_rng_state()
+    torch.manual_seed(42)
+    yield
+    torch.random.set_rng_state(state)
+
+
 def test_real_box_size_iou_and_impossible_crop():
     positive = (5, 5, 25, 25)
     negative = negative_crop((80, 80), positive, generator=torch.Generator().manual_seed(2))

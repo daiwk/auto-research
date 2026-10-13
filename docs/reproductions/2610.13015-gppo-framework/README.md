@@ -34,7 +34,17 @@ flowchart LR
   L --> U[真实LoRA更新]
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.13015v1#S3.F1)；[原始图资源](https://arxiv.org/html/2610.13015v1/div-geo.png)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Generalized Proximal Policy Optimization: Unifying LLM RL Algorithms from the Perspective of Divergence 原论文 Figure 1](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13015v1/div-geo.png)
+
+中文图注（原论文 Figure 1）：以三个采样策略比值、比值中心为 1 的空间为例，TV、Pearson chi-square、KL 与 Hellinger 分别诱导多面体、椭球、对数扭曲与平方根扭曲的近端区域。该原始机制示意图说明 GPPO 的“散度几何”轴，不是本地训练曲线；估计拓扑仍需结合原文公式阅读。
+
+精确来源：[固定 v1 的 Figure 1，HTML `S3.F1`](https://arxiv.org/html/2610.13015v1#S3.F1)；[原始 PNG](https://arxiv.org/html/2610.13015v1/div-geo.png)。本地原始字节副本与 SHA-256 记录在 [figure-source.json](figure-source.json)，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 Figure 1（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.13015v1/div-geo.png)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
@@ -76,6 +86,8 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 真实生成、拒绝、难度校准、teacher profiling及监督token预算进入结果；失败写不可覆盖的 `failure.json`，成功写 `result.json` / `report.md`。不能仅以本地目录名伪造source metadata。
 
 ### 当前结果与验收状态
+
+[A100 三 seed 实测指标](metrics/public-a100-seeds42-44.json)绑定执行快照 `7e125fd0`。同一 8 题 validation、每 seed 3 个 rollout 组（每组 2 次近端更新）、group=4、512-token 上限：GPPO accuracy 为 0.75 / 0.75 / 0.625，平均 0.7083；独立 GRPO-control 为 0.75 / 0.50 / 0.625，平均 0.625。两者均从 accuracy=0.50 的初始学生开始。样本和训练预算很小，重采样实际成本不同，不能宣称稳定收益。
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 

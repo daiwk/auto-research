@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "paper_version": "2610.13740v1",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.13740v1",
+  "source_pdf_sha256": "e72ca0bfbf2e4dc5d84bee12ca18a750b05c7e6990a90fd292b6175d3fcf782a",
+  "first_page_version_stamp": "arXiv:2610.13740v1 [cs.RO] 9 Oct 2026",
+  "paper_license": "CC BY 4.0",
+  "rights_notice": "Original figures remain attributable to their authors. The arXiv non-exclusive license is not relabeled as CC BY.",
+  "artifact_kind": "original-paper-pdf-figure-excerpt",
+  "local_measurement_evidence": false,
+  "extraction": "Original PDF rendered and cropped; no redraw, recoloring, translation inside image, or synthetic completion.",
+  "figures": [
+    {
+      "figure": "Figure 1",
+      "pdf_page_one_based": 2,
+      "panel": "complete teacher/student architecture comparison without external caption",
+      "source_html_anchor": "https://arxiv.org/html/2610.13740v1#S2.F1",
+      "asset": "paper-figure-01.png",
+      "asset_sha256": "de1385dfcdebf47de41c25bd02a976de840f813b9002a841322f3a79e0eaea4a",
+      "render": {
+        "renderer": "Poppler pdftoppm",
+        "dpi": 250,
+        "crop_box_points_top_left_origin": [
+          105,
+          68,
+          508,
+          166
+        ],
+        "crop_pixels": {
+          "x": 364,
+          "y": 236,
+          "width": 1400,
+          "height": 341
+        },
+        "command": "pdftoppm -f 2 -l 2 -r 250 -x 364 -y 236 -W 1400 -H 341 -png -singlefile 2610.13740v1.pdf original-figure-1-architecture-v1"
+      },
+      "visual_inspection": {
+        "date": "2026-10-13",
+        "status": "inspected",
+        "checks": "Encoder labels, all modality slots, 1764/1008 layouts, DiT bars, 5/1 steps and all author cost figures visible",
+        "result": "Labels, arrows and selected panel boundaries are complete; no unreadable/missing glyphs observed"
+      }
+    },
+    {
+      "figure": "Figure 4",
+      "pdf_page_one_based": 8,
+      "panel": "complete distillation plot without external caption",
+      "source_html_anchor": "https://arxiv.org/html/2610.13740v1#A1.F4",
+      "asset": "original-figure-4-distillation-v1.png",
+      "asset_sha256": "fda408fe810b5b61c42354cb42905effc4e9b470e98e2c95047d1e391148a4f5",
+      "render": {
+        "renderer": "Poppler pdftoppm",
+        "dpi": 250,
+        "crop_box_points_top_left_origin": [
+          105,
+          514,
+          508,
+          671
+        ],
+        "crop_pixels": {
+          "x": 364,
+          "y": 1784,
+          "width": 1400,
+          "height": 546
+        },
+        "command": "pdftoppm -f 8 -l 8 -r 250 -x 364 -y 1784 -W 1400 -H 546 -png -singlefile 2610.13740v1.pdf original-figure-4-distillation-v1"
+      },
+      "visual_inspection": {
+        "date": "2026-10-13",
+        "status": "inspected",
+        "checks": "Both axes, training/validation legend, action/future-latent curves, layout switch and continuation markers visible",
+        "result": "Labels, arrows and selected panel boundaries are complete; no unreadable/missing glyphs observed"
+      }
+    }
+  ]
+}

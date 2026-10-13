@@ -1,7 +1,16 @@
+import pytest
 import torch
 from torch.nn import functional as F
 
 from auto_research.foundation_models.oal import GroupedQuadratic, contribution, group_dimensions
+
+
+@pytest.fixture(autouse=True)
+def fixed_contract_random_state():
+    state = torch.random.get_rng_state()
+    torch.manual_seed(42)
+    yield
+    torch.random.set_rng_state(state)
 
 
 def test_causal_contribution_and_prompt_weighting():

@@ -33,7 +33,23 @@ flowchart LR
   D --> B[gold-SFT对照]
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.13113v1#S2.F5.fig1)；[原始图资源](https://arxiv.org/html/2610.13113v1/rewrite_premise.svg)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Continually Post-training Small Models via Synthetic Self-distillation 原论文 Algorithm 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.13113v1#page=6)
+
+中文图注（原论文 Algorithm 1）：完成 aligner 选择后，aligner 对训练 demonstration 贪心改写；答案抽取一致才加入离线数据集，否则拒绝，最后以该数据集进行 response SFT。固定 v1 未提供独立架构流程图，因此这里展示原算法块截图，而非把本地 Mermaid 重绘作为原图。
+
+精确来源：[固定 v1 PDF 第 6 页，Algorithm 1](https://arxiv.org/pdf/2610.13113v1#page=6)；[HTML 算法位置 `alg1`](https://arxiv.org/html/2610.13113v1#alg1)。截图只做 300 DPI 渲染与边界裁取，未改写算法内容；PDF 哈希、页码及裁取参数记录在 [figure-source.json](figure-source.json)。
+
+![SynthSelf 原论文图4：同家族 aligner 改写的分布匹配](assets/original-synthself-figure4.svg)
+
+中文图注（原论文 Figure 4）：对三个 Qwen2.5 学生规模，同家族 aligner 生成的数据具有更低的平均分布偏移；更强的跨家族模型不必然更贴近学生。此图是 aligner 选择的方法依据，数值属于原论文，不是本地 acquisition/retention 测量。
+
+精确来源：[固定 v1 的 Figure 4，HTML `S2.F5.fig1`](https://arxiv.org/html/2610.13113v1#S2.F5.fig1)；[原始 SVG](https://arxiv.org/html/2610.13113v1/rewrite_premise.svg)。本地 SVG 为原始字节副本，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 Algorithm 1（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/pdf/2610.13113v1#page=6)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 

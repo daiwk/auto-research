@@ -54,6 +54,9 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+[10 月 13 日实施检查点](design/oct13-implementation-scope.md)列出本轮 19 篇的完整范围与未完成门禁；
+目前仍在收口，源码登记不等于 GPU 验收完成。逐篇入口见[完整复现与实施状态](reproductions/README.md)。
+
 [10 月 4 日七篇补漏批次](recent-paper-scan-20261004-followup.md)包含 Jev lookahead、T2SPO、
 Weakest-Link、CMP、TESS、RLCPR 和 Mingbird。均为有明确边界的 L1 机制 API；T2SPO
 另有真实官方 TabPFN checkpoint 的 CPU 三种子验证，不计作完整 LLM/Agent benchmark 复现。
@@ -63,7 +66,7 @@ Weakest-Link、CMP、TESS、RLCPR 和 Mingbird。均为有明确边界的 L1 机
 负结果和未完成原始 benchmark 都保留在各篇详情与[运行审计](research-audits/oct11-runtime-audit.md)中；
 “机制执行通过”不等同于“模型效果提高”，也不自动表示已接入 Evolve。
 
-仓库目前注册 **387 个**论文 adapter，统一事实源是
+仓库目前注册 **406 个**论文 adapter，统一事实源是
 [`docs/research-manifest.json`](research-manifest.json)。站点提供按研究域、机构、
 主题和年份浏览的[论文实现索引](reproductions/README.md)，每篇详情页包含论文链接、
 一作机构、发布日期、原作者代码状态、本地 adapter/代码路径、架构与公式、原文线上/离线

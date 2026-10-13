@@ -8,6 +8,7 @@
 
 ## Apple
 
+- 2026-10-09 · [On the Design Space of Continuous Diffusion Language Models](../../reproductions/2610.13834-doublecat-semicat/README.md)（`doublecat-semicat`）：One-hot continuous flow 在接近终点时训练几乎只看见低熵顶点，但推理跟随有熵 denoiser 概率，产生轨迹错配。DoubleCat 在高斯路径内部再插入 simplex prior 到 one-hot 的插值，把训练质量移到更像推理的 simplex 内部。
 - 2026-09-29 · [On Trajectory-Aware Training for Masked Diffusion Language Models](../../foundation-models/2609.37974-pumba/README.md)（`pumba`）：训练时沿模型自己的 progressive-unmasking 轨迹连续展开多个 denoising step，把隐藏 carry 传给下一步，并在固定窗口内通过时间反向传播，使前一步学会产生对后续有用的 carry。
 
 ## Authors did not disclose affiliation
@@ -134,6 +135,10 @@
 
 - 2023-06-01 · [AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration](../../reproductions/2306.00978-awq/README.md)（`awq`）：利用 calibration activation 找到显著输入通道，通过等价通道缩放保护约 1% 关键权重，再执行硬件友好的统一低比特 weight-only 量化。
 
+## ML Collective
+
+- 2026-10-09 · [SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices](../../reproductions/2610.13740-smolwam/README.md)（`smolwam`）：Cosmos Policy 将机器人状态、两路相机、动作和未来状态编码为九个 latent frame，沿用视频生成接口：33 帧 VAE、T5-XXL、28-block 2B DiT、1764 tokens 和五步去噪。SmolWAM 并非只换一个轻量 action head，而是在保留预训练 trunk、token 原位置与 rectified-flow readout 的同时，逐项恢复接口改变造成的分布偏移。
+
 ## McGill University
 
 - 2026-07-20 · [PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning](../../reproductions/2607.18199-ppl-factory/README.md)（`ppl-factory`）：固定的“选最难/最容易”规则会随任务和数据预算失效。PPL-Factory 先用冻结基础模型计算任务相关 NLL：语言建模按 packed block，推理 SFT 只看 reasoning/answer response；再按预算切换策略，高预算偏 easy，较低预算选 middle，极低预算从 middle pool 随机抽样以保覆盖。
@@ -187,6 +192,7 @@
 
 ## Princeton University
 
+- 2026-10-09 · [ReplaySSM: Cache SSM Inputs, Not State](../../reproductions/2610.13778-replayssm/README.md)（`replayssm`）：Mamba2/GDN 解码一般每 token 读写完整矩阵状态，常受显存带宽限制。ReplaySSM 把持久化状态与输出计算拆开：每 16 token 才刷新 checkpoint，其间只记录小型输入；输出由 checkpoint 与输入重放计算。
 - 2026-08-03 · [Learning What to Remember: Test-Time Training via Context Distillation](../../reproductions/2608.01672-ttcd/README.md)（`ttcd`）：长窗口教师以隐藏状态差异监督短窗口学生的 fast weights，使有限记忆优先保留未来有用信息。
 
 ## Qwen
@@ -226,6 +232,10 @@
 
 - 2026-09-11 · [SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking](../../reproductions/2609.13141-sas-attention/README.md)（`sas-attention`）：硬 Top-K 只能改变被选中的索引，语言模型损失无法沿离散索引直接训练 selector。SAS 不再蒸馏 dense attention：selector 先给历史块连续打分，训练时保留 Top-K 块的连续 gate，并把 `log(gate)` 加到注意力 logits 内。
 
+## The Chinese University of Hong Kong, Shenzhen
+
+- 2026-10-09 · [Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels](../../reproductions/2610.13674-oal/README.md)（`oal`）：预训练 attention 的 QK 各维度贡献不均匀，少量高贡献坐标包含较多 softmax 近似误差。OAL 先在 post-RoPE QK 上计算因果贡献，以 prompt bootstrap 识别高贡献尾部的稳定边界；随后学习共享组和组对系数的二次核。
+
 ## The Hong Kong Polytechnic University
 
 - 2026-10-09 · [Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers](../../reproductions/2610.13735-orthros/README.md)（`orthros`）：长 prompt、短回答的推理中，prefill 与 decode 的计算角色不同。Orthros 保留两个 token 流：base tokens 对所有位置执行固定窗口 SWA，并构建完整的逐层 KV；output-specific tokens 只在需预测输出的位置出现，用共享 KV 做全历史 causal cross-attention。
@@ -249,6 +259,7 @@
 
 ## University of California, San Diego
 
+- 2026-10-08 · [LeWAM: End-to-End World and Action Modeling with JEPAs](../../reproductions/2610.12818-lewam/README.md)（`lewam`）：传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。
 - 2026-08-06 · [BaKron: Efficient Quantization with Kronecker-Factored Hessians](../../reproductions/2608.06291-bakron/README.md)（`bakron`）：**主题：二阶量化。** GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。
 
 ## University of Cambridge

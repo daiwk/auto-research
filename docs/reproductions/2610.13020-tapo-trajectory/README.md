@@ -33,7 +33,23 @@ flowchart LR
   L --> U[真实LoRA更新]
 ```
 
-原图来源：[原文图位置](https://arxiv.org/html/2610.13020v1#S1.F1)；[原始图资源](https://arxiv.org/html/2610.13020v1/fig1-2.png)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+<!-- paper-figure:start -->
+### 原论文关键图
+
+[![Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL 原论文 Figure 2（上半部）](assets/paper-figure-01.png)](https://arxiv.org/html/2610.13020v1/fig1-1.png)
+
+中文图注（原论文 Figure 2 上半部）：GRPO 使用当前 token 的比值，GSPO 使用整条序列的几何平均比值；TAPO 则用截至当前位置的前缀轨迹比值，显式纳入历史引起的状态分布修正。这里保存的是 HTML 原始上半图资源，不包含该 Figure 2 的下半训练曲线，也未重新绘制公式。
+
+精确来源：[固定 v1 的 Figure 2，HTML `S1.F2`](https://arxiv.org/html/2610.13020v1#S1.F2)；[上半部原始 PNG](https://arxiv.org/html/2610.13020v1/fig1-1.png)。
+
+![TAPO 原论文图1：长轨迹中 token 与 state 策略漂移](assets/original-tapo-figure1.png)
+
+中文图注（原论文 Figure 1）：原论文在 GRPO 训练中抽样的点显示，token-level ratio 相对稳定，而 state-level ratio 与 KL 随后续位置累积偏移，给出轨迹修正的动机。这是原论文分析结果，不是本地 GPU 数据。
+
+精确来源：[固定 v1 的 Figure 1，HTML `S1.F1`](https://arxiv.org/html/2610.13020v1#S1.F1)；[原始 PNG](https://arxiv.org/html/2610.13020v1/fig1-2.png)。两张本地原始字节副本与 SHA-256 记录在 [figure-source.json](figure-source.json)，版权归原作者；与上方本地 Mermaid 重绘分开。
+
+> **原论文 Figure 2（上半部）（关键图）**：上文说明所选原图或方法截图的范围；并非本地测量。图片来自[原论文](https://arxiv.org/html/2610.13020v1/fig1-1.png)，版权归原作者所有；点击图片可查看固定版本来源。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
@@ -77,6 +93,8 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 真实生成、拒绝、难度校准、teacher profiling及监督token预算进入结果；失败写不可覆盖的 `failure.json`，成功写 `result.json` / `report.md`。不能仅以本地目录名伪造source metadata。
 
 ### 当前结果与验收状态
+
+[A100 三 seed 实测指标](metrics/public-a100-seeds42-44.json)绑定执行快照 `7e125fd0`。同一 8 题 validation、每 seed 3 个 rollout 组（每组 2 次近端更新）、group=4、512-token 上限：按 seed 42/43/44，TAPO accuracy 为 0.50 / 0.625 / 0.50，平均 0.5417；独立 GRPO-control 为 0.75 / 0.50 / 0.625，平均 0.625。本次未表现出优于该对照的效果；不能以非零梯度或三 seed 替代能力提升证据。
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 
