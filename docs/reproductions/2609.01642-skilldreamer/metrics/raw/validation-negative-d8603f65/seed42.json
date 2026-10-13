@@ -1,0 +1,592 @@
+{
+  "scope": "fixed_validation_format_probe",
+  "status": "completed_validation_probe",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "capability_receipt": false,
+  "protocol": {
+    "mode": "resource_and_source_audit",
+    "questions": 8,
+    "validation_ids": [
+      "13",
+      "1",
+      "4",
+      "6",
+      "23",
+      "21",
+      "14",
+      "15"
+    ],
+    "input": {
+      "kind": "public-resource",
+      "public_id": "openai/grade-school-math",
+      "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_split": "train",
+      "scope": "fixed_original_validation_only",
+      "validation_ids": [
+        "13",
+        "1",
+        "4",
+        "6",
+        "23",
+        "21",
+        "14",
+        "15"
+      ],
+      "parent_24_rows_sha256": "8f33a9f7a44067e362458e4daf0eb1ad629a2aac2f44ffefe731e36b19dcb8c1",
+      "transformation": "select original fixed validation IDs; keep only id and question; discard every answer before probing",
+      "gold_present": false,
+      "scorer_present": false,
+      "evaluation_ids_used": false,
+      "official_test_opened": false,
+      "files": {
+        "questions.jsonl": "6a3213a1941882e4d0787b903df170452f13ea13f52ad9dbc4e6cb6e418eca5e"
+      }
+    },
+    "checkpoint": {
+      "public_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "files": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd"
+      }
+    },
+    "encoder": {
+      "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "files": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      }
+    },
+    "algorithm_commit": "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e",
+    "source_sha256": {
+      "skilldreamer/algorithm.py": "d6e2e446a39826d3b3c4c29691e342599bad5272a9330cb20c666ebbb8500345",
+      "skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
+      "near/data.py": "795416bdffeb25880aeaf85b4bfd6480b8677b45cddabe37ba2e49d7bf544eb8",
+      "near/experiment.py": "197e3fefad06f1f0e54533b608c5d717e57d0b6a919a105f88eee79447d94399",
+      "state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+      "skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970"
+    },
+    "probe_source": {
+      "commit": "d8603f65b207e5345f156621f840c69a24ecace2",
+      "sha256": "7799029a67ebd7918bb69db94c86d6a7c1b94558f9510e4eb9581b9c9c1d3d9f",
+      "immutable_root_bound": true
+    },
+    "gold_present": false,
+    "scorer_present": false,
+    "evaluation_ids_used": false,
+    "capability_receipt": false,
+    "budget": {
+      "seed": 42,
+      "max_new_tokens": 256,
+      "action_budget": 8,
+      "top_k": 3,
+      "question_limit": 8,
+      "calls_limit_per_episode": 30,
+      "calls_limit_total": 240,
+      "total_wall_limit_seconds": 600
+    }
+  },
+  "episodes": [
+    {
+      "failure": "model did not produce a valid capability/action JSON object",
+      "psg_completed": false,
+      "hsr_executed": false,
+      "loaded_skills": [],
+      "capability_checks": [],
+      "executed_actions": 0,
+      "id": "13",
+      "model_calls_including_psg": 1,
+      "generated_tokens_including_psg": 208
+    },
+    {
+      "submitted_answer": null,
+      "executed_actions": 0,
+      "loaded_skills": [],
+      "capability_checks": [],
+      "generation_errors": 24,
+      "tool_errors": 0,
+      "model_calls": 24,
+      "observations": [
+        "Calculator ready; no reference answer is available.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+      ],
+      "psg_completed": true,
+      "hsr_executed": true,
+      "pseudo_count": 5,
+      "anchors": [
+        "deep-sea monster rises every hundred years",
+        "ship feast",
+        "847 people consumed",
+        "ships built larger over time",
+        "each new ship has twice as many people as the last ship"
+      ],
+      "retrieved_skills": [
+        "scheduling",
+        "money",
+        "inventory"
+      ],
+      "id": "1",
+      "model_calls_including_psg": 30,
+      "generated_tokens_including_psg": 4309
+    },
+    {
+      "submitted_answer": null,
+      "executed_actions": 0,
+      "loaded_skills": [
+        "rates"
+      ],
+      "capability_checks": [
+        {
+          "executed_actions": 0,
+          "periodic_checkpoint": true,
+          "assessment": {
+            "SUBGOAL": "Calculate the hourly wage for the second job.",
+            "EVIDENCE": "James earns 20% less while working his second job.",
+            "CAPABILITY": "rates",
+            "DECISION": "MATCH",
+            "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"20 * (1 - 0.2)\"}}"
+          }
+        }
+      ],
+      "generation_errors": 23,
+      "tool_errors": 0,
+      "model_calls": 24,
+      "observations": [
+        "Calculator ready; no reference answer is available.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Skill loaded: rates; reread the procedure before selecting the next action.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+      ],
+      "psg_completed": true,
+      "hsr_executed": true,
+      "pseudo_count": 5,
+      "anchors": [
+        "hourly wage",
+        "percentage reduction",
+        "total weekly earnings",
+        "work hours at main job",
+        "work hours at second job"
+      ],
+      "retrieved_skills": [
+        "money",
+        "rates",
+        "scheduling"
+      ],
+      "id": "4",
+      "model_calls_including_psg": 30,
+      "generated_tokens_including_psg": 4153
+    },
+    {
+      "submitted_answer": null,
+      "executed_actions": 0,
+      "loaded_skills": [
+        "arithmetic"
+      ],
+      "capability_checks": [
+        {
+          "executed_actions": 0,
+          "periodic_checkpoint": true,
+          "assessment": {
+            "SUBGOAL": "Calculate the number of additional cans Jennifer bought based on Mark's purchase.",
+            "EVIDENCE": "Jennifer bought 6 additional cans for every 5 cans Mark bought. Mark purchased 50 cans.",
+            "CAPABILITY": "arithmetic",
+            "DECISION": "MATCH",
+            "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(6/5)*50+40\"}}"
+          }
+        }
+      ],
+      "generation_errors": 23,
+      "tool_errors": 0,
+      "model_calls": 24,
+      "observations": [
+        "Calculator ready; no reference answer is available.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+      ],
+      "psg_completed": true,
+      "hsr_executed": true,
+      "pseudo_count": 5,
+      "anchors": [
+        "Jennifer purchased 40 cans of milk",
+        "Mark purchased 50 cans",
+        "Jennifer bought 6 additional cans for every 5 cans Mark bought",
+        "total number of cans Jennifer brought home"
+      ],
+      "retrieved_skills": [
+        "arithmetic",
+        "money",
+        "scheduling"
+      ],
+      "id": "6",
+      "model_calls_including_psg": 30,
+      "generated_tokens_including_psg": 3353
+    },
+    {
+      "submitted_answer": null,
+      "executed_actions": 0,
+      "loaded_skills": [],
+      "capability_checks": [],
+      "generation_errors": 24,
+      "tool_errors": 0,
+      "model_calls": 24,
+      "observations": [
+        "Calculator ready; no reference answer is available.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+      ],
+      "psg_completed": true,
+      "hsr_executed": true,
+      "pseudo_count": 5,
+      "anchors": [
+        "total revenue from cookies",
+        "total revenue from cupcakes",
+        "cost of one set of measuring spoons",
+        "number of measuring spoon sets purchased",
+        "total money spent on measuring spoons",
+        "total earnings from sales",
+        "money left after purchases"
+      ],
+      "retrieved_skills": [
+        "money",
+        "inventory",
+        "arithmetic"
+      ],
+      "id": "23",
+      "model_calls_including_psg": 30,
+      "generated_tokens_including_psg": 3920
+    },
+    {
+      "submitted_answer": null,
+      "executed_actions": 0,
+      "loaded_skills": [],
+      "capability_checks": [],
+      "generation_errors": 24,
+      "tool_errors": 0,
+      "model_calls": 24,
+      "observations": [
+        "Calculator ready; no reference answer is available.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+      ],
+      "psg_completed": true,
+      "hsr_executed": true,
+      "pseudo_count": 5,
+      "anchors": [
+        "jogging speed",
+        "duration of jogging",
+        "number of days",
+        "total distance"
+      ],
+      "retrieved_skills": [
+        "scheduling",
+        "arithmetic",
+        "rates"
+      ],
+      "id": "21",
+      "model_calls_including_psg": 30,
+      "generated_tokens_including_psg": 3939
+    },
+    {
+      "submitted_answer": null,
+      "executed_actions": 0,
+      "loaded_skills": [],
+      "capability_checks": [],
+      "generation_errors": 24,
+      "tool_errors": 0,
+      "model_calls": 24,
+      "observations": [
+        "Calculator ready; no reference answer is available.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+      ],
+      "psg_completed": true,
+      "hsr_executed": true,
+      "pseudo_count": 5,
+      "anchors": [
+        "gallon of whole milk",
+        "cost $3",
+        "now sold at $2",
+        "box of cereal",
+        "sold at a discount of $1",
+        "buy 3 gallons of whole milk and 5 boxes of cereal"
+      ],
+      "retrieved_skills": [
+        "money",
+        "arithmetic",
+        "rates"
+      ],
+      "id": "14",
+      "model_calls_including_psg": 30,
+      "generated_tokens_including_psg": 5194
+    },
+    {
+      "submitted_answer": null,
+      "executed_actions": 0,
+      "loaded_skills": [],
+      "capability_checks": [],
+      "generation_errors": 24,
+      "tool_errors": 0,
+      "model_calls": 24,
+      "observations": [
+        "Calculator ready; no reference answer is available.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+        "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+      ],
+      "psg_completed": true,
+      "hsr_executed": true,
+      "pseudo_count": 4,
+      "anchors": [
+        "germ killing efficiency of sprays",
+        "combined germ reduction",
+        "overlapping germs killed",
+        "final germ percentage remaining"
+      ],
+      "retrieved_skills": [
+        "rates",
+        "money",
+        "inventory"
+      ],
+      "id": "15",
+      "model_calls_including_psg": 29,
+      "generated_tokens_including_psg": 4118
+    }
+  ],
+  "embedding_batches": [
+    {
+      "id": "1",
+      "texts": 11,
+      "shape": [
+        11,
+        384
+      ]
+    },
+    {
+      "id": "4",
+      "texts": 11,
+      "shape": [
+        11,
+        384
+      ]
+    },
+    {
+      "id": "6",
+      "texts": 11,
+      "shape": [
+        11,
+        384
+      ]
+    },
+    {
+      "id": "23",
+      "texts": 11,
+      "shape": [
+        11,
+        384
+      ]
+    },
+    {
+      "id": "21",
+      "texts": 11,
+      "shape": [
+        11,
+        384
+      ]
+    },
+    {
+      "id": "14",
+      "texts": 11,
+      "shape": [
+        11,
+        384
+      ]
+    },
+    {
+      "id": "15",
+      "texts": 10,
+      "shape": [
+        10,
+        384
+      ]
+    }
+  ],
+  "trace": "seed42.trace.jsonl",
+  "wall_seconds": 596.9424207285047,
+  "model_calls": 210,
+  "generated_tokens": 29194,
+  "execution_checks": {
+    "psg_episodes": 7,
+    "hsr_episodes": 7,
+    "actual_csi_assessments": 2,
+    "loaded_skill_episodes": 2,
+    "executed_actions": 0
+  }
+}

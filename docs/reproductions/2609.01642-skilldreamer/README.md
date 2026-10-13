@@ -102,6 +102,10 @@ PYTHONPATH=src python scripts/run_skilldreamer.py \
 
 完整失败 episode 和模型调用计数保存在 [失败诊断汇总](metrics/public-a30-failed-0f5dca9f.json) 与其绑定的 immutable raw SHA 中；旧 `6aabe57a` 中断批次未混入。未生成 `passed` GPU receipt，后续只能先用独立 validation 格式探针诊断，不能用这批 16 个 evaluation ID 挑预算或补 schema fallback。
 
+随后固定 Qwen2.5-7B-Instruct、原 `0f5dca9f` 算法和 `d8603f65` probe，在真实 A100 上完成独立8条 question-only validation探针：596.9424秒、210calls、29194tokens，PSG/HSR各7题、实际CSI和gallery load各2次，但工具动作与提交均0。7个runtime episode用尽24次调用，两个load后均因CSI格式/decision失败，而非正常结束或256token截断；仍不签passed。详见 [负结果诊断](metrics/validation-negative-d8603f65.md) 与 [sanitized artifact/raw SHA](metrics/public-a100-validation-negative-d8603f65.json)。
+
+CPU逐条诊断发现原提示没有完整写明解析器要求的五个非空 `LABEL: value` 行及四个DECISION首词，这是提示契约欠明确，**不是已证明的parser bug**。本地只补清提示格式及无答案/无技能判断的占位模板，严格parser/enum、算法、预算与gold隔离保持；该澄清版本尚未GPU执行，不能把CPU检查写成模型能力通过，也不能将历史失败改绑到新源。
+
 以公开 GSM8K-style question/answer JSONL 中的 question 为任务，参考答案在独立 external scorer 中按数字比较；模型和环境观察均不接收 gold answer、gold plan 或 gold skill。首N条在读取 relevance 之外预先固定，按固定 hash 分离 validation/test，当前超参数事先固定不看 test 改写。五条本地通用技能为算术验证、比例、库存、金额和时间处理，不含题目答案。
 
 环境复用已审查的 `ArithmeticEnvironment`，真实运行有界 AST calculator，只接受数字和允许的算术运算，不执行模型生成 Python、不访问外部系统。记录 actual executed actions、skill loads、生成失败、提交答案和外部 Pass；PSG/schema 失败计零 reward，不删除失败任务。不因 Load 高就宣称策略更强。

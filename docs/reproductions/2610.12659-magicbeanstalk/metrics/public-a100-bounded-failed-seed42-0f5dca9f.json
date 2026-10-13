@@ -1,0 +1,857 @@
+{
+  "schema_version": 2,
+  "adapter_key": "magicbeanstalk",
+  "manifest_ref": "reproduction:magicbeanstalk",
+  "method": "magicbeanstalk",
+  "measured_locally": true,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "not_gpu_receipt": true,
+  "whole_method_gpu_validation_passed": false,
+  "seeds": [
+    42
+  ],
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "stage_result": {
+        "status": "failed",
+        "diagnostic_only": true,
+        "error": "no actual effectivity-validated, novel, verified, target-Goldilocks MBS descendant",
+        "construction_audits": [
+          {
+            "phase": "seed-hardness-calibration",
+            "accepted": true,
+            "rewards": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "truncated": [
+              false,
+              false,
+              false,
+              false
+            ],
+            "actual_precalibration_reused_without_resampling": true
+          },
+          {
+            "phase": "seed-hardness-calibration",
+            "accepted": true,
+            "rewards": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "truncated": [
+              false,
+              false,
+              false,
+              false
+            ],
+            "actual_precalibration_reused_without_resampling": true
+          },
+          {
+            "phase": "verify",
+            "accepted": false,
+            "depth": 0
+          },
+          {
+            "phase": "seed-hardness-calibration",
+            "accepted": true,
+            "rewards": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "truncated": [
+              false,
+              false,
+              false,
+              false
+            ],
+            "actual_precalibration_reused_without_resampling": true
+          },
+          {
+            "phase": "verify",
+            "accepted": false,
+            "depth": 0
+          }
+        ],
+        "hard_root_selection": {
+          "hard_root_limit": 4,
+          "calibrated_training_candidates": 16,
+          "calibration_audits": [
+            {
+              "training_index": 0,
+              "accepted": false,
+              "root_question_sha256": "73429d562982300e6643d83a84428a22e0656773b67dad037d2de2f8bc0b45b9",
+              "rewards": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 1,
+              "accepted": false,
+              "root_question_sha256": "3f23a7d4df7cb484dc2414bb2632f29e51a580a202d5968f1dbca00ed0f210bc",
+              "rewards": [
+                0.0,
+                1.0,
+                0.0,
+                1.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 2,
+              "accepted": false,
+              "root_question_sha256": "9eea4e53dec08963ef76fdee76346277a0ae3356c2c1bb67223507ebd6340740",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                true,
+                false,
+                true,
+                false
+              ]
+            },
+            {
+              "training_index": 3,
+              "accepted": false,
+              "root_question_sha256": "4ed90b091532ab4071ce410731d178b500525d6700568f1e94035e7694c22d23",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                false,
+                true,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 4,
+              "accepted": true,
+              "root_question_sha256": "d38bacc8724a241927dec39e1459b3c17295f79d244c7ec4a518303968c9dc01",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 5,
+              "accepted": false,
+              "root_question_sha256": "cf2595dad6a3ad5bbef4cb35fdf9d90cf2ea8ea8cfa675e9c0af771abd2dea12",
+              "rewards": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 6,
+              "accepted": false,
+              "root_question_sha256": "99c93669d063c21f3c4160988005ee0b93ca9cc212e4815db446c28f9bbff151",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                true
+              ]
+            },
+            {
+              "training_index": 7,
+              "accepted": true,
+              "root_question_sha256": "a13430e732d2c1e663238de0e34daf75abd640df18ff2ab97d0d55479204c2d1",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 8,
+              "accepted": true,
+              "root_question_sha256": "699ab79580f3d4e07173fdf9ff3b39ab4d4aa99e3efdf92ea650753c03c27a4d",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 9,
+              "accepted": false,
+              "root_question_sha256": "3097703f5bcc130a683ad04b50f35470e76b8613faf2a78c10ce14fbf0421795",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                false,
+                false,
+                true,
+                false
+              ]
+            },
+            {
+              "training_index": 10,
+              "accepted": false,
+              "root_question_sha256": "922bb01991f9021652a70a10145417062f164211a83b40dcf1c61b6b67525daf",
+              "rewards": [
+                1.0,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 11,
+              "accepted": false,
+              "root_question_sha256": "da32de9a8fdf17faf139ce3943810fcbe34c0a96e5790b2553a1dde0d4ede5c3",
+              "rewards": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 12,
+              "accepted": false,
+              "root_question_sha256": "9646c1dc9939f268f57613f37f2264d20720261283ad70383e5f14400edd9749",
+              "rewards": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "truncated": [
+                false,
+                false,
+                false,
+                false
+              ]
+            },
+            {
+              "training_index": 13,
+              "accepted": false,
+              "root_question_sha256": "9a9628f61eb62c54b986eccd2adad13cb9bc4748d23d34aae74e563ba95d8183",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                false,
+                false,
+                true,
+                false
+              ]
+            },
+            {
+              "training_index": 14,
+              "accepted": false,
+              "root_question_sha256": "20967bb841486681f21fa9e8384ce8d14e06242428d56c120977d293dfb28842",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                false,
+                false,
+                true,
+                false
+              ]
+            },
+            {
+              "training_index": 15,
+              "accepted": false,
+              "root_question_sha256": "3a8aedcdee8f55b3805f04fc09d8465beff04a0ecc7a94e502a5589c5b996407",
+              "rewards": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "truncated": [
+                true,
+                false,
+                false,
+                true
+              ]
+            }
+          ],
+          "verified_hard_roots_selected": 3,
+          "tree_construction_attempts": 3,
+          "selected_training_root_indices": [
+            4,
+            7,
+            8
+          ],
+          "paired_rl_root_indices": [],
+          "method_and_control_use_same_root_pairs": true,
+          "precalibration_reused_without_duplicate_sampling": true
+        },
+        "cost": {
+          "generation_calls": {
+            "evaluation": 4,
+            "target_calibration": 16,
+            "construction_verification": 10,
+            "effectivity_student": 1,
+            "effectivity_teacher": 1,
+            "construction_teacher": 2
+          },
+          "generated_tokens": {
+            "evaluation": 1541,
+            "target_calibration": 29408,
+            "construction_verification": 2577,
+            "effectivity_student": 1231,
+            "effectivity_teacher": 1038,
+            "construction_teacher": 334
+          },
+          "scored_response_tokens": {},
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        }
+      }
+    }
+  ],
+  "aggregate_metrics": {
+    "generated_response_tokens": {
+      "mean": 36129,
+      "std": 0.0,
+      "n": 1
+    },
+    "invocation_elapsed_seconds": {
+      "mean": 348.2407392859459,
+      "std": 0.0,
+      "n": 1
+    }
+  },
+  "execution_checks": {
+    "hard_root_selection": {
+      "hard_root_limit": 4,
+      "calibrated_training_candidates": 16,
+      "calibration_audits": [
+        {
+          "training_index": 0,
+          "accepted": false,
+          "root_question_sha256": "73429d562982300e6643d83a84428a22e0656773b67dad037d2de2f8bc0b45b9",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 1,
+          "accepted": false,
+          "root_question_sha256": "3f23a7d4df7cb484dc2414bb2632f29e51a580a202d5968f1dbca00ed0f210bc",
+          "rewards": [
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 2,
+          "accepted": false,
+          "root_question_sha256": "9eea4e53dec08963ef76fdee76346277a0ae3356c2c1bb67223507ebd6340740",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "training_index": 3,
+          "accepted": false,
+          "root_question_sha256": "4ed90b091532ab4071ce410731d178b500525d6700568f1e94035e7694c22d23",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            false,
+            true,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 4,
+          "accepted": true,
+          "root_question_sha256": "d38bacc8724a241927dec39e1459b3c17295f79d244c7ec4a518303968c9dc01",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 5,
+          "accepted": false,
+          "root_question_sha256": "cf2595dad6a3ad5bbef4cb35fdf9d90cf2ea8ea8cfa675e9c0af771abd2dea12",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 6,
+          "accepted": false,
+          "root_question_sha256": "99c93669d063c21f3c4160988005ee0b93ca9cc212e4815db446c28f9bbff151",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            true
+          ]
+        },
+        {
+          "training_index": 7,
+          "accepted": true,
+          "root_question_sha256": "a13430e732d2c1e663238de0e34daf75abd640df18ff2ab97d0d55479204c2d1",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 8,
+          "accepted": true,
+          "root_question_sha256": "699ab79580f3d4e07173fdf9ff3b39ab4d4aa99e3efdf92ea650753c03c27a4d",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 9,
+          "accepted": false,
+          "root_question_sha256": "3097703f5bcc130a683ad04b50f35470e76b8613faf2a78c10ce14fbf0421795",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            false,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "training_index": 10,
+          "accepted": false,
+          "root_question_sha256": "922bb01991f9021652a70a10145417062f164211a83b40dcf1c61b6b67525daf",
+          "rewards": [
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 11,
+          "accepted": false,
+          "root_question_sha256": "da32de9a8fdf17faf139ce3943810fcbe34c0a96e5790b2553a1dde0d4ede5c3",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 12,
+          "accepted": false,
+          "root_question_sha256": "9646c1dc9939f268f57613f37f2264d20720261283ad70383e5f14400edd9749",
+          "rewards": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "truncated": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "training_index": 13,
+          "accepted": false,
+          "root_question_sha256": "9a9628f61eb62c54b986eccd2adad13cb9bc4748d23d34aae74e563ba95d8183",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            false,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "training_index": 14,
+          "accepted": false,
+          "root_question_sha256": "20967bb841486681f21fa9e8384ce8d14e06242428d56c120977d293dfb28842",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            false,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "training_index": 15,
+          "accepted": false,
+          "root_question_sha256": "3a8aedcdee8f55b3805f04fc09d8465beff04a0ecc7a94e502a5589c5b996407",
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "truncated": [
+            true,
+            false,
+            false,
+            true
+          ]
+        }
+      ],
+      "verified_hard_roots_selected": 3,
+      "tree_construction_attempts": 3,
+      "selected_training_root_indices": [
+        4,
+        7,
+        8
+      ],
+      "paired_rl_root_indices": [],
+      "method_and_control_use_same_root_pairs": true,
+      "precalibration_reused_without_duplicate_sampling": true
+    },
+    "method_rl_updates": 0,
+    "control_rl_updates": 0,
+    "construction_failed_without_complete_gate_trace": true,
+    "failure_interpretation": "hard roots found, but no surviving descendant; raw trace does not isolate every internal rejection",
+    "invocation_elapsed_seconds": 348.2407392859459,
+    "configured_wall_cap_seconds": 1800,
+    "return_code": 1,
+    "measured_cost": {
+      "generation_calls": {
+        "evaluation": 4,
+        "target_calibration": 16,
+        "construction_verification": 10,
+        "effectivity_student": 1,
+        "effectivity_teacher": 1,
+        "construction_teacher": 2
+      },
+      "generated_tokens": {
+        "evaluation": 1541,
+        "target_calibration": 29408,
+        "construction_verification": 2577,
+        "effectivity_student": 1231,
+        "effectivity_teacher": 1038,
+        "construction_teacher": 334
+      },
+      "scored_response_tokens": {},
+      "frozen_encoder_forward_calls": 0,
+      "frozen_encoder_input_tokens_including_prompt": 0,
+      "scope": "entire invocation, including training controls, profiling and evaluation",
+      "includes_rejected_and_profiling_generations": true
+    }
+  },
+  "dataset": {
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "test_read": false,
+    "verified": true
+  },
+  "checkpoint": {
+    "student": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "teacher": {
+      "public_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "promotion_eligible": false,
+    "test_used_for_selection": false,
+    "claim_policy": "retained failed construction or no-update training diagnostic, not full-method GPU acceptance"
+  },
+  "provenance": {
+    "code_commit": "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e",
+    "artifact_path": "docs/reproductions/2610.12659-magicbeanstalk/metrics/public-a100-bounded-failed-seed42-0f5dca9f.json",
+    "executed_source_sha256": {
+      "scripts/prepare_soar_catalog_qa.py": "483a4eb3d9932d31046888c165c06590e67c6df5575a5b2afd4e302145f445e7",
+      "scripts/run_oct13_post_training.py": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+      "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+      "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+      "src/auto_research/post_training/oct13_common.py": "739f276633d74a85ba790e4d6df25504bce89950c40867ed57302cde03f1ada9",
+      "src/auto_research/post_training/proximal_checkpoint.py": "5307a54204720e5407d2cd0435b654ae0e594f30c85cdf07d55d4e90612a1397",
+      "src/auto_research/post_training/response_policy.py": "e380a5b4d1d53974b973b72b7d9ad6328129dc8c9bae4d233f6c1cbdf8508bf7",
+      "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+      "src/auto_research/reproductions/gppo_framework/__init__.py": "7fe8cab42fef9f32b9653dfb5f54f03182de0753de2c9e5b359d124d7cd763d8",
+      "src/auto_research/reproductions/gppo_framework/adapter.py": "a7f4ee792a8ded3daeeb183cbca5c99de63c1b7d3cb195f5bedd5289cb0e0260",
+      "src/auto_research/reproductions/gppo_framework/objective.py": "0f8fbb2ad397b04a70466dde4e939f4d094ad7e7df07cfbba59f4a6ca5d05dd0",
+      "src/auto_research/reproductions/gppo_framework/paper.yaml": "a023ee98bbd078077b2708122973d27a98085848be816ce461b7d4291aca8e1f",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/__init__.py": "d09d8d7e0e6f5bcec9979241eed06a1d2a6ac8f3fb7a25f49e0df55be0071acb",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/adapter.py": "bbd3e964dc035ea4bbd999a581ea07eccabd986b6456774b21a4c24092cbdfbe",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/algorithm.py": "4131e39279d30c0748b14f611ab657b3fea76147a7c164aea2883c62bde75785",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/checkpoint.py": "d03a7d2db0a19b469fe5429ddce634b02d8cbd0eeed8d09bef0afc51c1d7ac70",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml": "0b4dd86c85907b732df9380a4bd1bbc17785c09c184d5be2793ac37f63768c16",
+      "src/auto_research/reproductions/magicbeanstalk/__init__.py": "8dd207ea37a89dfa34f87b02eb4a2fd26472895678d1362a7e5b59dad5cda616",
+      "src/auto_research/reproductions/magicbeanstalk/adapter.py": "319b6503de342feee49fb6446b7bbdeb117f7dc0dd7b79ed1c3bd34cce1ce73f",
+      "src/auto_research/reproductions/magicbeanstalk/algorithm.py": "78a68baad5b98b402fb87702ab50d5e01000f41250111604b84321e6c3e4900f",
+      "src/auto_research/reproductions/magicbeanstalk/checkpoint.py": "24dd8eb1979c04c2128919533f83fb347d9b40ab52184f7b1b9b3644512e9eae",
+      "src/auto_research/reproductions/magicbeanstalk/paper.yaml": "e9c5619918b4d72d776008aba3fa95d50ba6ebe99afab729ba9e6dfe82fac06e",
+      "src/auto_research/reproductions/progressive_contraction/__init__.py": "e50fe46d888e0a0b11b7d4d6d8f3224ae5940394f8ba8396fc5afb1cd38a4d53",
+      "src/auto_research/reproductions/progressive_contraction/adapter.py": "06f23b5c795f7222f76dee9beaa8164f460eb5183e18c6d374bff011737235dd",
+      "src/auto_research/reproductions/progressive_contraction/algorithm.py": "176743356415111e3e19a26427cf59391b4b84b56697adf8d3fe3038ad0de3c1",
+      "src/auto_research/reproductions/progressive_contraction/checkpoint.py": "958d88b7afba14d8c7833ab3669f2cd93af6c6c19e8412bca87a136b48fec527",
+      "src/auto_research/reproductions/progressive_contraction/paper.yaml": "1beccb702ce7a33b196b1fcc6bab13cdc32fc48952d247565d54e8ce830860c2",
+      "src/auto_research/reproductions/soar/__init__.py": "3d87d1189d7037e32c1e2cb0c249d13609c5af3d7062a19904590ba7923c799a",
+      "src/auto_research/reproductions/soar/adapter.py": "8fbbe8f8fe54b9f014ccc26a75b01e72b73b95e2b03cc379c5b5db4b63c9b31e",
+      "src/auto_research/reproductions/soar/algorithm.py": "9b7068d9774d1c93800c512a04b9ba4d0ee98fc13d308e5ac0970299c8bb2485",
+      "src/auto_research/reproductions/soar/checkpoint.py": "43a83930af442dc3610d61becd06b38ca3c921131ed417837d3d7e11aa672708",
+      "src/auto_research/reproductions/soar/paper.yaml": "2f756cab9f7fefd4613bb69971fd8252c2b9ad451fa5c5eff5d03fa063d91521",
+      "src/auto_research/reproductions/state_opd/__init__.py": "8db07736f0336ed7f39502ae2953bdae76658942542cacbe4b6b2c1fd0abe094",
+      "src/auto_research/reproductions/state_opd/adapter.py": "2f8bf4773e8f40c0eabe777fbd1e1aa6d372a7b05501404c3e3f7b2d54987524",
+      "src/auto_research/reproductions/state_opd/algorithm.py": "dc7fe3eae619ff69ec51c47826f89471f00be564ea4e6730e12726a060ba7e2f",
+      "src/auto_research/reproductions/state_opd/checkpoint.py": "95755e0604f563a5c96f92e9de9069befe3e1274d31c224a43ca20d71f756b09",
+      "src/auto_research/reproductions/state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+      "src/auto_research/reproductions/state_opd/paper.yaml": "f9cdb6c489ab58bcb8cd6f3d8815c9d5c5e7f29616563d96ad5792533961a84d",
+      "src/auto_research/reproductions/synthself/__init__.py": "474bb75e10b95afe6faec1f3631beab2f17f9a43013d3d29e79b7d4b36e06031",
+      "src/auto_research/reproductions/synthself/adapter.py": "db4c08e1ccc2acfc28d19fc72acfa39b0a0dce096bbc430bafe9b21dbb72cddd",
+      "src/auto_research/reproductions/synthself/algorithm.py": "0662ce46de24214370dac4ab691ba766fbbc087717db46d838b2ea5af9d62f3f",
+      "src/auto_research/reproductions/synthself/checkpoint.py": "9835b086272d9262f057a0fc0975d19ff3b84d5e1766cc234ca1e11985164891",
+      "src/auto_research/reproductions/synthself/paper.yaml": "464d06e9cdd535ab61743fdba6641ae2eac4c8345fad27748c63e620544074c7",
+      "src/auto_research/reproductions/tapo_trajectory/__init__.py": "a0dd8d4825b91dd076b71bdd3a3eccb0638ba4bf0240fe9da76d61a7290f69c6",
+      "src/auto_research/reproductions/tapo_trajectory/adapter.py": "c01b75bf7853546caa2d517dd5f9c9faf739537b95207b8f1fd28adcdd5aafa7",
+      "src/auto_research/reproductions/tapo_trajectory/objective.py": "49ab02ac758251acde90091a82b22576449d294a1f25cc3144ff1addd1132ae2",
+      "src/auto_research/reproductions/tapo_trajectory/paper.yaml": "493e59ec67f96ee37ffecf6694dd5c4d8555849b8f756ccb63644da90bbb48d6",
+      "src/auto_research/reproductions/upturn/__init__.py": "1e9793e9ea85e94144f7eac8fa141567d7f964438fa628788b668358154e196e",
+      "src/auto_research/reproductions/upturn/adapter.py": "72e5da3cb70856944d0c9a25376f73d4a1d9f16213efd43e19b3acf2a584afc2",
+      "src/auto_research/reproductions/upturn/algorithm.py": "421abd06cc492c39cf72e9b15c7f85c01e85fae0a7c26fb3053fbd19bc4897a4",
+      "src/auto_research/reproductions/upturn/checkpoint.py": "83ac66cead272cb391fe27c56f838df5414712283db42f2b8088d3509de311f3",
+      "src/auto_research/reproductions/upturn/paper.yaml": "a1e335526f895b54e325331dc8354330f4a2d44f5f8c9c2a37f76ef2f7d589bc"
+    },
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab",
+    "execution_config_sha256": "0dd390a3b6aedb3b0bfb57d24d869cc1b108169aead88e2ea01f7f6cf33e5d9f",
+    "raw_result_sha256": "adcca5400a7e38042407eba85ffac4a8d44ada3493fce8c06ca3b09c94d69df0",
+    "raw_launch_sha256": "5e97eec8b4892d800f0b27508a4fe157b4c539b80319629d7f82c459a544ea47"
+  },
+  "limitations": [
+    "No passed GPU receipt: complete defining mechanism with nonzero policy updates remains unvalidated.",
+    "One seed tiny public training/validation diagnostic, not original benchmark or formal capability evidence.",
+    "Original failure traces retained; no gates lowered, no forced advantage, no retries or test-selected budget."
+  ]
+}

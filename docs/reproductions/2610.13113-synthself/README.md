@@ -98,11 +98,17 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [seed42脱敏负结果](metrics/public-a100-failed-seed42-6aabe57a.json)保留实际A100旧源码 `6aabe57a` 的Eq6失败：gold sequence NLL69.12545，rewrite76.84698；aligner quality1.0/self0.75，但第一条严格不等式不满足。旧流程在拒绝前实际执行过2次SFT更新，仍不算方法通过；获取/保持各2validation均0.5→0.5，elapsed164.40秒，不宣称能力收益。
 
-旧gold不带EOS/rewrite带自然EOS的口径与修后完整响应协议不同，不能择口径求通过。32f修复保留sequence SUM/严格不等式，并要求rewrite自然终止且单EOS；截断或缺终止只记partial诊断、quality0，阻塞selection/SFT。显式train-only诊断入口已冻结 `51b4718a`，不评估validation、不执行LoRA，尚待新GPU槽，不替代整方法GPU验收。
+旧gold不带EOS/rewrite带自然EOS的口径与修后完整响应协议不同，不能择口径求通过。32f修复保留sequence SUM/严格不等式，并要求rewrite自然终止且单EOS；截断或缺终止只记partial诊断、quality0，阻塞selection/SFT。显式train-only诊断入口已冻结 `51b4718a`，不评估validation、不执行LoRA，其结果与下方完整机制实跑分开，不替代整方法GPU验收。
 
 ### 修后训练集诊断
 
-2026-10-14 修后 [51b训练-only诊断](metrics/public-a100-train-diagnosis-seed42-51b4718a.json) 已实际运行59.24秒：8aligner/8self均按预声明完整响应EOS口径处理，aligner全部自然终止；gold full-sequence SUM NLL79.45413、rewrite76.84698，quality1.0>0.75，严格Eq6成立。gold增加自然响应边界的canonical EOS后口径与旧69.12545不同，不把端点口径修正称为模型能力提升。生成659+857tokens、scored770+659tokens；0LoRA/SFT、0validation/test评估，明确 `not_gpu_receipt` / `whole_method_gpu_validation_passed: false`。整方法完整SFT及paired gold-SFT控制已另获授权，必须等其实际结果，不能用此探针签通过。
+2026-10-14 修后 [51b训练-only诊断](metrics/public-a100-train-diagnosis-seed42-51b4718a.json) 已实际运行59.24秒：8aligner/8self均按预声明完整响应EOS口径处理，aligner全部自然终止；gold full-sequence SUM NLL79.45413、rewrite76.84698，quality1.0>0.75，严格Eq6成立。gold增加自然响应边界的canonical EOS后口径与旧69.12545不同，不把端点口径修正称为模型能力提升。生成659+857tokens、scored770+659tokens；0LoRA/SFT、0validation/test评估，明确 `not_gpu_receipt` / `whole_method_gpu_validation_passed: false`。整方法完整SFT及paired gold-SFT控制的实际结果另见下一节，不能用此探针签通过。
+
+### 修后完整机制：单seed42
+
+[完整机制结果](metrics/public-a100-complete-seed42.json)与[源码51b绑定GPU回执](../../gpu-validations/synthself-a100-20261014.json)已独立核验：实际156.30秒，严格完整响应SUM Eq6成立后，8条verified rewrites上执行2次LoRA SFT更新，独立gold-SFT控制亦2次，梯度与监督token均非零。获取/保持各2validation，初始、方法及控制accuracy均0.5，无相对收益。
+
+`gold_in_student_generation: false`只指被评估student推理；offline aligner和独立冻结self-builder（同student checkpoint）均明确看TRAIN demonstration，gold-SFT使用train响应监督。不能泛称所有模型生成都无gold。训练/控制实际监督token不同，完整成本账保留；本条只完成seed42 L1定义链路，仍缺默认seed43/44，不是正式能力比较或稳定提升。
 
 ### 代码映射
 
@@ -116,5 +122,5 @@ algorithm.py：构建prompt、family/size及Eq6合同；checkpoint.py：rewrite/
 
 Eq6未满足时，即使真实SFT产生参数变化，也标为failed-aligner-constraints，命令返回非零，不凭权重变化签发通过回执。
 
-仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+seed42完整机制GPU门禁已通过，但默认seed43/44、全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

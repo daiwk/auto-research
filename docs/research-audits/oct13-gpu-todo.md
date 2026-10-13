@@ -24,7 +24,11 @@
 
 对应指标与脱敏回执均在各篇详情页。旧标准 SC GPU 结果不能替代 DoubleCat 新核心的回执。
 
-LeWAM 已补齐 `0f5dca9f` A100 三 seed 原生联合训练→新候选三臂闭环，各 seed 有 4 次非零更新；三臂均为 16.67% ± 28.87%，未观测到规划优势，目标来自训练轨迹而非 holdout。SmolWAM 已补齐 `2b84c377` A100 三 seed 实际 teacher KD、两布局课程与新学生闭环，每 seed 8 次更新、38 次真实 policy queries，但学生与 no-op 均 0/2 成功；6 个原始文件、请求和新学生权重绑定独立核验通过。难度课程已补齐 `6aabe57a` A100 seed42 三臂的机制回执（实际更新 8/9/11），但 static / unfiltered 和 seeds43/44 仍未完成。
+LeWAM 已补齐 `0f5dca9f` A100 三 seed 原生联合训练→新候选三臂闭环，各 seed 有 4 次非零更新；三臂均为 16.67% ± 28.87%，未观测到规划优势，目标来自训练轨迹而非 holdout。SmolWAM 已补齐 `2b84c377` A100 三 seed 实际 teacher KD、两布局课程与新学生闭环，每 seed 8 次更新、38 次真实 policy queries，但学生与 no-op 均 0/2 成功；6 个原始文件、请求和新学生权重绑定独立核验通过。
+
+SynthSelf、UPTURN、Progressive Contraction 的完整 seed42 核心链路已经运行、独立复算原始产物并核对固定 Git 源码。三个单种子机制回执不代表默认三种子计划完成；43/44 正在相同源码和预算下续跑。SynthSelf 未观察到提升；UPTURN 同轮匹配预算对照的平均准确率不变、整题通过率下降；Contraction 与 full-SFT 同为 75%，曝光比只指 SFT 样本曝光，不是总计算节省。
+
+难度课程已补齐 `6aabe57a` A100 seed42 三臂的机制回执（实际更新 8/9/11）；另有 A30 `51b4718a` unfiltered/static seed42 与 unfiltered seed43 实际完成，其余同预算种子/对照仍在运行。A100 与 A30 的初始准确率不同，不能将两台设备的结果冒充严格配对对照或混成一个平均值。
 
 ## 剩余验证清单
 
@@ -42,7 +46,7 @@ LeWAM 已补齐 `0f5dca9f` A100 三 seed 原生联合训练→新候选三臂闭
 | 2 | Progressive Contraction | 真实教师 backbone、MC 前缀续写、teacher pool 收缩、student NLL 路由、full-SFT 对照与教师成本 |
 
 尚未完成的 CUDA adapter 保持 `requires_gpu_validation=True`，不伪造缺失 receipt。
-10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM 与难度课程单 seed 机制回执；仍有六篇缺整方法 GPU 回执，另有难度课程的对照和种子计划未完成。
+10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM 与难度课程单 seed 机制回执，以及 SynthSelf、UPTURN、Progressive Contraction 的完整单 seed 核心回执。统一 GPU 门禁当前仅缺 MagicBeanStalk、SkillDreamer、SOAR；另有四项的默认多种子/对照计划未完成，不能将门禁缺项数等同于全部剩余工作。
 State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替代或合并新实验。
 因此 GPU evidence gate 在这份 TODO 关闭前不能被报告为通过，MR 也不能被标为全部完成。
 
@@ -57,6 +61,8 @@ State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替�
 - SmolWAM `2a061dd6` 的 adapter 输入错误已保留；修复只提取原生 latent adapter，不改变教师结构。`2b84c377` 三 seed 已完成并核验；24 次实际更新与新候选控制只证明缩放链路执行，不能把全零成功率包装成能力改善。
 - MBS 首轮没有正常终止的 verified-hard 根题；SynthSelf 原口径未通过 Eq.6，且 gold/rewrite EOS 口径需统一；UPTURN 段落 token 检测漏切与无有效救援信号均须分开处理。三者真实失败、成本和源码哈希见[独立审计](oct14-post-failure-review.md)，不能仅凭参数变化签通过回执。
 - SkillDreamer 每个 seed 必须实际发生 CSI 能力评估、真实 gallery 技能加载和工具执行才能签完成回执；全失败记录仍保留，但三 seed 本身不代表定义链路已执行。
+- SkillDreamer 的独立 7B、8 题 validation 探针真实执行了 7 次 PSG/HSR、2 次 CSI/技能加载，但工具动作仍为 0。原提示未完整说明解析器要求的标签格式与四种决策枚举；只修提示说明、不放宽解析器，修复后必须新冻结源码再测。旧失败不被新结果覆写。
+- MBS `0f5dca9f` 限定重跑已找到 3 个正常终止的 hard 根题，但没有合格后代、没有 RL 更新。SOAR `57b2314d` 7B train-only 格式探针 8 次均首轮无效、未发生检索或训练。旧探针未保存原响应正文，不能凭响应哈希猜测格式失败原因；下一步先补可审计的响应/拒绝阶段记录，不放宽论文核心门槛。
 
 每次恢复先核验源代码 SHA 和资源实际字节；确认后再运行。每篇结束取回 JSON/日志，
 验证非零有效更新或明确的负对照边界，再生成 sanitized receipt，最后跑统一门禁。

@@ -1,0 +1,2495 @@
+{
+  "scope": "fixed_validation_trace_cpu_diagnosis",
+  "capability_receipt": false,
+  "wall_seconds": 596.9424207285047,
+  "model_calls": 210,
+  "actual_generated_tokens": 29194,
+  "visible_tokens_reencoded": 29025,
+  "visible_cap_counts": {
+    "pseudo_skill": 33,
+    "csi": 8
+  },
+  "runtime_visible_cap_categories": {
+    "missing_or_invalid_action_json": 1,
+    "csi_label_order_or_missing_line": 5,
+    "csi_invalid_decision_enum": 2
+  },
+  "max_input_tokens_before_truncation": 822,
+  "cpu_fixture_load_requery_calculate_finish": {
+    "passed": true,
+    "model_called": false,
+    "cuda_executed": false,
+    "calls": 3,
+    "actions": 2
+  },
+  "runtime_categories": {
+    "missing_or_invalid_action_json": 12,
+    "csi_label_order_or_missing_line": 79,
+    "csi_invalid_decision_enum": 65,
+    "csi_empty_field": 10,
+    "valid_csi_gallery_load_then_requery": 2
+  },
+  "parsed_runtime_tools_including_rejected_assessments": {
+    "calculator": 151,
+    "finish": 2,
+    "null": 3
+  },
+  "episodes": [
+    {
+      "id": "13",
+      "model_calls": 1,
+      "actual_generated_tokens": 208,
+      "runtime_calls": 0,
+      "runtime_categories": {},
+      "visible_cap_calls_all_stages": [],
+      "post_load_categories": {},
+      "max_input_tokens": 136,
+      "executed_actions": 0,
+      "failure_stage": "psg_json",
+      "cpu_exact_trace_replay": false
+    },
+    {
+      "id": "1",
+      "model_calls": 30,
+      "actual_generated_tokens": 4309,
+      "runtime_calls": 24,
+      "runtime_categories": {
+        "missing_or_invalid_action_json": 5,
+        "csi_label_order_or_missing_line": 18,
+        "csi_invalid_decision_enum": 1
+      },
+      "visible_cap_calls_all_stages": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "post_load_categories": {},
+      "max_input_tokens": 782,
+      "executed_actions": 0,
+      "failure_stage": "runtime_csi_schema_call_limit",
+      "cpu_exact_trace_replay": true
+    },
+    {
+      "id": "4",
+      "model_calls": 30,
+      "actual_generated_tokens": 4153,
+      "runtime_calls": 24,
+      "runtime_categories": {
+        "csi_label_order_or_missing_line": 13,
+        "csi_invalid_decision_enum": 8,
+        "csi_empty_field": 2,
+        "valid_csi_gallery_load_then_requery": 1
+      },
+      "visible_cap_calls_all_stages": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        39
+      ],
+      "post_load_categories": {
+        "csi_label_order_or_missing_line": 5,
+        "csi_invalid_decision_enum": 5
+      },
+      "max_input_tokens": 809,
+      "executed_actions": 0,
+      "failure_stage": "runtime_csi_schema_call_limit",
+      "cpu_exact_trace_replay": true
+    },
+    {
+      "id": "6",
+      "model_calls": 30,
+      "actual_generated_tokens": 3353,
+      "runtime_calls": 24,
+      "runtime_categories": {
+        "csi_label_order_or_missing_line": 9,
+        "missing_or_invalid_action_json": 7,
+        "csi_invalid_decision_enum": 7,
+        "valid_csi_gallery_load_then_requery": 1
+      },
+      "visible_cap_calls_all_stages": [
+        63,
+        64,
+        65,
+        66
+      ],
+      "post_load_categories": {
+        "csi_invalid_decision_enum": 1
+      },
+      "max_input_tokens": 822,
+      "executed_actions": 0,
+      "failure_stage": "runtime_csi_schema_call_limit",
+      "cpu_exact_trace_replay": true
+    },
+    {
+      "id": "23",
+      "model_calls": 30,
+      "actual_generated_tokens": 3920,
+      "runtime_calls": 24,
+      "runtime_categories": {
+        "csi_invalid_decision_enum": 14,
+        "csi_empty_field": 6,
+        "csi_label_order_or_missing_line": 4
+      },
+      "visible_cap_calls_all_stages": [
+        93,
+        94,
+        95,
+        96,
+        97
+      ],
+      "post_load_categories": {},
+      "max_input_tokens": 760,
+      "executed_actions": 0,
+      "failure_stage": "runtime_csi_schema_call_limit",
+      "cpu_exact_trace_replay": true
+    },
+    {
+      "id": "21",
+      "model_calls": 30,
+      "actual_generated_tokens": 3939,
+      "runtime_calls": 24,
+      "runtime_categories": {
+        "csi_empty_field": 2,
+        "csi_label_order_or_missing_line": 4,
+        "csi_invalid_decision_enum": 18
+      },
+      "visible_cap_calls_all_stages": [
+        123,
+        124,
+        125,
+        126,
+        127
+      ],
+      "post_load_categories": {},
+      "max_input_tokens": 743,
+      "executed_actions": 0,
+      "failure_stage": "runtime_csi_schema_call_limit",
+      "cpu_exact_trace_replay": true
+    },
+    {
+      "id": "14",
+      "model_calls": 30,
+      "actual_generated_tokens": 5194,
+      "runtime_calls": 24,
+      "runtime_categories": {
+        "csi_label_order_or_missing_line": 12,
+        "csi_invalid_decision_enum": 12
+      },
+      "visible_cap_calls_all_stages": [
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        163,
+        167,
+        168,
+        178,
+        180
+      ],
+      "post_load_categories": {},
+      "max_input_tokens": 762,
+      "executed_actions": 0,
+      "failure_stage": "runtime_csi_schema_call_limit",
+      "cpu_exact_trace_replay": true
+    },
+    {
+      "id": "15",
+      "model_calls": 29,
+      "actual_generated_tokens": 4118,
+      "runtime_calls": 24,
+      "runtime_categories": {
+        "csi_label_order_or_missing_line": 19,
+        "csi_invalid_decision_enum": 5
+      },
+      "visible_cap_calls_all_stages": [
+        183,
+        184,
+        185,
+        186
+      ],
+      "post_load_categories": {},
+      "max_input_tokens": 771,
+      "executed_actions": 0,
+      "failure_stage": "runtime_csi_schema_call_limit",
+      "cpu_exact_trace_replay": true
+    }
+  ],
+  "calls": [
+    {
+      "id": "13",
+      "call": 1,
+      "stage": "psg",
+      "visible_tokens_reencoded": 207,
+      "input_tokens_before_2048_truncation": 136,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json"
+    },
+    {
+      "id": "1",
+      "call": 2,
+      "stage": "psg",
+      "visible_tokens_reencoded": 159,
+      "input_tokens_before_2048_truncation": 150,
+      "visible_256_token_cap": false,
+      "parsed_tool": null,
+      "category": "psg_json_parsed"
+    },
+    {
+      "id": "1",
+      "call": 3,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 119,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "1",
+      "call": 4,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 116,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "1",
+      "call": 5,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 124,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "1",
+      "call": 6,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 119,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "1",
+      "call": 7,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 120,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "1",
+      "call": 8,
+      "stage": "csi",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 368,
+      "visible_256_token_cap": true,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "1",
+      "call": 9,
+      "stage": "csi",
+      "visible_tokens_reencoded": 249,
+      "input_tokens_before_2048_truncation": 386,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 10,
+      "stage": "csi",
+      "visible_tokens_reencoded": 132,
+      "input_tokens_before_2048_truncation": 404,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 11,
+      "stage": "csi",
+      "visible_tokens_reencoded": 27,
+      "input_tokens_before_2048_truncation": 422,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "1",
+      "call": 12,
+      "stage": "csi",
+      "visible_tokens_reencoded": 120,
+      "input_tokens_before_2048_truncation": 440,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "1",
+      "call": 13,
+      "stage": "csi",
+      "visible_tokens_reencoded": 56,
+      "input_tokens_before_2048_truncation": 458,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 14,
+      "stage": "csi",
+      "visible_tokens_reencoded": 122,
+      "input_tokens_before_2048_truncation": 476,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 15,
+      "stage": "csi",
+      "visible_tokens_reencoded": 38,
+      "input_tokens_before_2048_truncation": 494,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "1",
+      "call": 16,
+      "stage": "csi",
+      "visible_tokens_reencoded": 27,
+      "input_tokens_before_2048_truncation": 512,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "1",
+      "call": 17,
+      "stage": "csi",
+      "visible_tokens_reencoded": 69,
+      "input_tokens_before_2048_truncation": 530,
+      "visible_256_token_cap": false,
+      "parsed_tool": "finish",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 18,
+      "stage": "csi",
+      "visible_tokens_reencoded": 136,
+      "input_tokens_before_2048_truncation": 548,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 19,
+      "stage": "csi",
+      "visible_tokens_reencoded": 135,
+      "input_tokens_before_2048_truncation": 566,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 20,
+      "stage": "csi",
+      "visible_tokens_reencoded": 127,
+      "input_tokens_before_2048_truncation": 584,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 21,
+      "stage": "csi",
+      "visible_tokens_reencoded": 117,
+      "input_tokens_before_2048_truncation": 602,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 22,
+      "stage": "csi",
+      "visible_tokens_reencoded": 141,
+      "input_tokens_before_2048_truncation": 620,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 23,
+      "stage": "csi",
+      "visible_tokens_reencoded": 133,
+      "input_tokens_before_2048_truncation": 638,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 24,
+      "stage": "csi",
+      "visible_tokens_reencoded": 150,
+      "input_tokens_before_2048_truncation": 656,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 25,
+      "stage": "csi",
+      "visible_tokens_reencoded": 26,
+      "input_tokens_before_2048_truncation": 674,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "1",
+      "call": 26,
+      "stage": "csi",
+      "visible_tokens_reencoded": 118,
+      "input_tokens_before_2048_truncation": 692,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 27,
+      "stage": "csi",
+      "visible_tokens_reencoded": 119,
+      "input_tokens_before_2048_truncation": 710,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 28,
+      "stage": "csi",
+      "visible_tokens_reencoded": 114,
+      "input_tokens_before_2048_truncation": 728,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 29,
+      "stage": "csi",
+      "visible_tokens_reencoded": 134,
+      "input_tokens_before_2048_truncation": 746,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 30,
+      "stage": "csi",
+      "visible_tokens_reencoded": 163,
+      "input_tokens_before_2048_truncation": 764,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "1",
+      "call": 31,
+      "stage": "csi",
+      "visible_tokens_reencoded": 137,
+      "input_tokens_before_2048_truncation": 782,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 32,
+      "stage": "psg",
+      "visible_tokens_reencoded": 173,
+      "input_tokens_before_2048_truncation": 131,
+      "visible_256_token_cap": false,
+      "parsed_tool": null,
+      "category": "psg_json_parsed"
+    },
+    {
+      "id": "4",
+      "call": 33,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 111,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "4",
+      "call": 34,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 106,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "4",
+      "call": 35,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 106,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "4",
+      "call": 36,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 107,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "4",
+      "call": 37,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 102,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "4",
+      "call": 38,
+      "stage": "csi",
+      "visible_tokens_reencoded": 144,
+      "input_tokens_before_2048_truncation": 350,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 39,
+      "stage": "csi",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 368,
+      "visible_256_token_cap": true,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 40,
+      "stage": "csi",
+      "visible_tokens_reencoded": 76,
+      "input_tokens_before_2048_truncation": 386,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "4",
+      "call": 41,
+      "stage": "csi",
+      "visible_tokens_reencoded": 110,
+      "input_tokens_before_2048_truncation": 404,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 42,
+      "stage": "csi",
+      "visible_tokens_reencoded": 83,
+      "input_tokens_before_2048_truncation": 422,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "4",
+      "call": 43,
+      "stage": "csi",
+      "visible_tokens_reencoded": 79,
+      "input_tokens_before_2048_truncation": 440,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "4",
+      "call": 44,
+      "stage": "csi",
+      "visible_tokens_reencoded": 82,
+      "input_tokens_before_2048_truncation": 458,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "4",
+      "call": 45,
+      "stage": "csi",
+      "visible_tokens_reencoded": 63,
+      "input_tokens_before_2048_truncation": 476,
+      "visible_256_token_cap": false,
+      "parsed_tool": "null",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 46,
+      "stage": "csi",
+      "visible_tokens_reencoded": 80,
+      "input_tokens_before_2048_truncation": 494,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "4",
+      "call": 47,
+      "stage": "csi",
+      "visible_tokens_reencoded": 74,
+      "input_tokens_before_2048_truncation": 512,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 48,
+      "stage": "csi",
+      "visible_tokens_reencoded": 185,
+      "input_tokens_before_2048_truncation": 530,
+      "visible_256_token_cap": false,
+      "parsed_tool": "null",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 49,
+      "stage": "csi",
+      "visible_tokens_reencoded": 111,
+      "input_tokens_before_2048_truncation": 548,
+      "visible_256_token_cap": false,
+      "parsed_tool": "null",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 50,
+      "stage": "csi",
+      "visible_tokens_reencoded": 197,
+      "input_tokens_before_2048_truncation": 566,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 51,
+      "stage": "csi",
+      "visible_tokens_reencoded": 68,
+      "input_tokens_before_2048_truncation": 584,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "valid_csi_gallery_load_then_requery"
+    },
+    {
+      "id": "4",
+      "call": 52,
+      "stage": "csi",
+      "visible_tokens_reencoded": 85,
+      "input_tokens_before_2048_truncation": 647,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 53,
+      "stage": "csi",
+      "visible_tokens_reencoded": 133,
+      "input_tokens_before_2048_truncation": 665,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 54,
+      "stage": "csi",
+      "visible_tokens_reencoded": 87,
+      "input_tokens_before_2048_truncation": 683,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "4",
+      "call": 55,
+      "stage": "csi",
+      "visible_tokens_reencoded": 72,
+      "input_tokens_before_2048_truncation": 701,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 56,
+      "stage": "csi",
+      "visible_tokens_reencoded": 139,
+      "input_tokens_before_2048_truncation": 719,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "4",
+      "call": 57,
+      "stage": "csi",
+      "visible_tokens_reencoded": 135,
+      "input_tokens_before_2048_truncation": 737,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "4",
+      "call": 58,
+      "stage": "csi",
+      "visible_tokens_reencoded": 94,
+      "input_tokens_before_2048_truncation": 755,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "4",
+      "call": 59,
+      "stage": "csi",
+      "visible_tokens_reencoded": 93,
+      "input_tokens_before_2048_truncation": 773,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "4",
+      "call": 60,
+      "stage": "csi",
+      "visible_tokens_reencoded": 91,
+      "input_tokens_before_2048_truncation": 791,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "4",
+      "call": 61,
+      "stage": "csi",
+      "visible_tokens_reencoded": 139,
+      "input_tokens_before_2048_truncation": 809,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 62,
+      "stage": "psg",
+      "visible_tokens_reencoded": 168,
+      "input_tokens_before_2048_truncation": 133,
+      "visible_256_token_cap": false,
+      "parsed_tool": null,
+      "category": "psg_json_parsed"
+    },
+    {
+      "id": "6",
+      "call": 63,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 120,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "6",
+      "call": 64,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 115,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "6",
+      "call": 65,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 129,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "6",
+      "call": 66,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 121,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "6",
+      "call": 67,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 246,
+      "input_tokens_before_2048_truncation": 119,
+      "visible_256_token_cap": false,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "6",
+      "call": 68,
+      "stage": "csi",
+      "visible_tokens_reencoded": 109,
+      "input_tokens_before_2048_truncation": 353,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 69,
+      "stage": "csi",
+      "visible_tokens_reencoded": 25,
+      "input_tokens_before_2048_truncation": 371,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "6",
+      "call": 70,
+      "stage": "csi",
+      "visible_tokens_reencoded": 102,
+      "input_tokens_before_2048_truncation": 389,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "6",
+      "call": 71,
+      "stage": "csi",
+      "visible_tokens_reencoded": 56,
+      "input_tokens_before_2048_truncation": 407,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 72,
+      "stage": "csi",
+      "visible_tokens_reencoded": 25,
+      "input_tokens_before_2048_truncation": 425,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "6",
+      "call": 73,
+      "stage": "csi",
+      "visible_tokens_reencoded": 25,
+      "input_tokens_before_2048_truncation": 443,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "6",
+      "call": 74,
+      "stage": "csi",
+      "visible_tokens_reencoded": 96,
+      "input_tokens_before_2048_truncation": 461,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 75,
+      "stage": "csi",
+      "visible_tokens_reencoded": 98,
+      "input_tokens_before_2048_truncation": 479,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "6",
+      "call": 76,
+      "stage": "csi",
+      "visible_tokens_reencoded": 25,
+      "input_tokens_before_2048_truncation": 497,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "6",
+      "call": 77,
+      "stage": "csi",
+      "visible_tokens_reencoded": 99,
+      "input_tokens_before_2048_truncation": 515,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 78,
+      "stage": "csi",
+      "visible_tokens_reencoded": 104,
+      "input_tokens_before_2048_truncation": 533,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 79,
+      "stage": "csi",
+      "visible_tokens_reencoded": 117,
+      "input_tokens_before_2048_truncation": 551,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 80,
+      "stage": "csi",
+      "visible_tokens_reencoded": 89,
+      "input_tokens_before_2048_truncation": 569,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 81,
+      "stage": "csi",
+      "visible_tokens_reencoded": 101,
+      "input_tokens_before_2048_truncation": 587,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "6",
+      "call": 82,
+      "stage": "csi",
+      "visible_tokens_reencoded": 25,
+      "input_tokens_before_2048_truncation": 605,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "6",
+      "call": 83,
+      "stage": "csi",
+      "visible_tokens_reencoded": 94,
+      "input_tokens_before_2048_truncation": 623,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "6",
+      "call": 84,
+      "stage": "csi",
+      "visible_tokens_reencoded": 76,
+      "input_tokens_before_2048_truncation": 641,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 85,
+      "stage": "csi",
+      "visible_tokens_reencoded": 25,
+      "input_tokens_before_2048_truncation": 659,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "6",
+      "call": 86,
+      "stage": "csi",
+      "visible_tokens_reencoded": 210,
+      "input_tokens_before_2048_truncation": 677,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "6",
+      "call": 87,
+      "stage": "csi",
+      "visible_tokens_reencoded": 25,
+      "input_tokens_before_2048_truncation": 695,
+      "visible_256_token_cap": false,
+      "category": "missing_or_invalid_action_json",
+      "after_gallery_loaded": false
+    },
+    {
+      "id": "6",
+      "call": 88,
+      "stage": "csi",
+      "visible_tokens_reencoded": 95,
+      "input_tokens_before_2048_truncation": 713,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "6",
+      "call": 89,
+      "stage": "csi",
+      "visible_tokens_reencoded": 93,
+      "input_tokens_before_2048_truncation": 731,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "6",
+      "call": 90,
+      "stage": "csi",
+      "visible_tokens_reencoded": 81,
+      "input_tokens_before_2048_truncation": 749,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "valid_csi_gallery_load_then_requery"
+    },
+    {
+      "id": "6",
+      "call": 91,
+      "stage": "csi",
+      "visible_tokens_reencoded": 94,
+      "input_tokens_before_2048_truncation": 822,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": true,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 92,
+      "stage": "psg",
+      "visible_tokens_reencoded": 179,
+      "input_tokens_before_2048_truncation": 126,
+      "visible_256_token_cap": false,
+      "parsed_tool": null,
+      "category": "psg_json_parsed"
+    },
+    {
+      "id": "23",
+      "call": 93,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 121,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "23",
+      "call": 94,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 121,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "23",
+      "call": 95,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 123,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "23",
+      "call": 96,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 135,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "23",
+      "call": 97,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 120,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "23",
+      "call": 98,
+      "stage": "csi",
+      "visible_tokens_reencoded": 95,
+      "input_tokens_before_2048_truncation": 346,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 99,
+      "stage": "csi",
+      "visible_tokens_reencoded": 95,
+      "input_tokens_before_2048_truncation": 364,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 100,
+      "stage": "csi",
+      "visible_tokens_reencoded": 96,
+      "input_tokens_before_2048_truncation": 382,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "23",
+      "call": 101,
+      "stage": "csi",
+      "visible_tokens_reencoded": 97,
+      "input_tokens_before_2048_truncation": 400,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "23",
+      "call": 102,
+      "stage": "csi",
+      "visible_tokens_reencoded": 99,
+      "input_tokens_before_2048_truncation": 418,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 103,
+      "stage": "csi",
+      "visible_tokens_reencoded": 96,
+      "input_tokens_before_2048_truncation": 436,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "23",
+      "call": 104,
+      "stage": "csi",
+      "visible_tokens_reencoded": 96,
+      "input_tokens_before_2048_truncation": 454,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "23",
+      "call": 105,
+      "stage": "csi",
+      "visible_tokens_reencoded": 117,
+      "input_tokens_before_2048_truncation": 472,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 106,
+      "stage": "csi",
+      "visible_tokens_reencoded": 99,
+      "input_tokens_before_2048_truncation": 490,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 107,
+      "stage": "csi",
+      "visible_tokens_reencoded": 97,
+      "input_tokens_before_2048_truncation": 508,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 108,
+      "stage": "csi",
+      "visible_tokens_reencoded": 94,
+      "input_tokens_before_2048_truncation": 526,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "23",
+      "call": 109,
+      "stage": "csi",
+      "visible_tokens_reencoded": 117,
+      "input_tokens_before_2048_truncation": 544,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 110,
+      "stage": "csi",
+      "visible_tokens_reencoded": 128,
+      "input_tokens_before_2048_truncation": 562,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 111,
+      "stage": "csi",
+      "visible_tokens_reencoded": 103,
+      "input_tokens_before_2048_truncation": 580,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 112,
+      "stage": "csi",
+      "visible_tokens_reencoded": 115,
+      "input_tokens_before_2048_truncation": 598,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 113,
+      "stage": "csi",
+      "visible_tokens_reencoded": 116,
+      "input_tokens_before_2048_truncation": 616,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 114,
+      "stage": "csi",
+      "visible_tokens_reencoded": 94,
+      "input_tokens_before_2048_truncation": 634,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "23",
+      "call": 115,
+      "stage": "csi",
+      "visible_tokens_reencoded": 93,
+      "input_tokens_before_2048_truncation": 652,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "23",
+      "call": 116,
+      "stage": "csi",
+      "visible_tokens_reencoded": 94,
+      "input_tokens_before_2048_truncation": 670,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "23",
+      "call": 117,
+      "stage": "csi",
+      "visible_tokens_reencoded": 98,
+      "input_tokens_before_2048_truncation": 688,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 118,
+      "stage": "csi",
+      "visible_tokens_reencoded": 102,
+      "input_tokens_before_2048_truncation": 706,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 119,
+      "stage": "csi",
+      "visible_tokens_reencoded": 96,
+      "input_tokens_before_2048_truncation": 724,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "23",
+      "call": 120,
+      "stage": "csi",
+      "visible_tokens_reencoded": 105,
+      "input_tokens_before_2048_truncation": 742,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "23",
+      "call": 121,
+      "stage": "csi",
+      "visible_tokens_reencoded": 94,
+      "input_tokens_before_2048_truncation": 760,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "21",
+      "call": 122,
+      "stage": "psg",
+      "visible_tokens_reencoded": 192,
+      "input_tokens_before_2048_truncation": 111,
+      "visible_256_token_cap": false,
+      "parsed_tool": null,
+      "category": "psg_json_parsed"
+    },
+    {
+      "id": "21",
+      "call": 123,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 101,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "21",
+      "call": 124,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 108,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "21",
+      "call": 125,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 102,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "21",
+      "call": 126,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 97,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "21",
+      "call": 127,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 109,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "21",
+      "call": 128,
+      "stage": "csi",
+      "visible_tokens_reencoded": 85,
+      "input_tokens_before_2048_truncation": 329,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "21",
+      "call": 129,
+      "stage": "csi",
+      "visible_tokens_reencoded": 235,
+      "input_tokens_before_2048_truncation": 347,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "21",
+      "call": 130,
+      "stage": "csi",
+      "visible_tokens_reencoded": 104,
+      "input_tokens_before_2048_truncation": 365,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 131,
+      "stage": "csi",
+      "visible_tokens_reencoded": 86,
+      "input_tokens_before_2048_truncation": 383,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 132,
+      "stage": "csi",
+      "visible_tokens_reencoded": 108,
+      "input_tokens_before_2048_truncation": 401,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 133,
+      "stage": "csi",
+      "visible_tokens_reencoded": 101,
+      "input_tokens_before_2048_truncation": 419,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 134,
+      "stage": "csi",
+      "visible_tokens_reencoded": 97,
+      "input_tokens_before_2048_truncation": 437,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_empty_field"
+    },
+    {
+      "id": "21",
+      "call": 135,
+      "stage": "csi",
+      "visible_tokens_reencoded": 95,
+      "input_tokens_before_2048_truncation": 455,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 136,
+      "stage": "csi",
+      "visible_tokens_reencoded": 93,
+      "input_tokens_before_2048_truncation": 473,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 137,
+      "stage": "csi",
+      "visible_tokens_reencoded": 91,
+      "input_tokens_before_2048_truncation": 491,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "21",
+      "call": 138,
+      "stage": "csi",
+      "visible_tokens_reencoded": 83,
+      "input_tokens_before_2048_truncation": 509,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 139,
+      "stage": "csi",
+      "visible_tokens_reencoded": 79,
+      "input_tokens_before_2048_truncation": 527,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 140,
+      "stage": "csi",
+      "visible_tokens_reencoded": 86,
+      "input_tokens_before_2048_truncation": 545,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 141,
+      "stage": "csi",
+      "visible_tokens_reencoded": 92,
+      "input_tokens_before_2048_truncation": 563,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 142,
+      "stage": "csi",
+      "visible_tokens_reencoded": 105,
+      "input_tokens_before_2048_truncation": 581,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 143,
+      "stage": "csi",
+      "visible_tokens_reencoded": 108,
+      "input_tokens_before_2048_truncation": 599,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 144,
+      "stage": "csi",
+      "visible_tokens_reencoded": 98,
+      "input_tokens_before_2048_truncation": 617,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 145,
+      "stage": "csi",
+      "visible_tokens_reencoded": 108,
+      "input_tokens_before_2048_truncation": 635,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 146,
+      "stage": "csi",
+      "visible_tokens_reencoded": 87,
+      "input_tokens_before_2048_truncation": 653,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "21",
+      "call": 147,
+      "stage": "csi",
+      "visible_tokens_reencoded": 102,
+      "input_tokens_before_2048_truncation": 671,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 148,
+      "stage": "csi",
+      "visible_tokens_reencoded": 97,
+      "input_tokens_before_2048_truncation": 689,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 149,
+      "stage": "csi",
+      "visible_tokens_reencoded": 104,
+      "input_tokens_before_2048_truncation": 707,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "21",
+      "call": 150,
+      "stage": "csi",
+      "visible_tokens_reencoded": 102,
+      "input_tokens_before_2048_truncation": 725,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "21",
+      "call": 151,
+      "stage": "csi",
+      "visible_tokens_reencoded": 96,
+      "input_tokens_before_2048_truncation": 743,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 152,
+      "stage": "psg",
+      "visible_tokens_reencoded": 202,
+      "input_tokens_before_2048_truncation": 127,
+      "visible_256_token_cap": false,
+      "parsed_tool": null,
+      "category": "psg_json_parsed"
+    },
+    {
+      "id": "14",
+      "call": 153,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 125,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "14",
+      "call": 154,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 129,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "14",
+      "call": 155,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 124,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "14",
+      "call": 156,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 123,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "14",
+      "call": 157,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 132,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "14",
+      "call": 158,
+      "stage": "csi",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 348,
+      "visible_256_token_cap": true,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 159,
+      "stage": "csi",
+      "visible_tokens_reencoded": 126,
+      "input_tokens_before_2048_truncation": 366,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 160,
+      "stage": "csi",
+      "visible_tokens_reencoded": 98,
+      "input_tokens_before_2048_truncation": 384,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 161,
+      "stage": "csi",
+      "visible_tokens_reencoded": 199,
+      "input_tokens_before_2048_truncation": 402,
+      "visible_256_token_cap": false,
+      "parsed_tool": "finish",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 162,
+      "stage": "csi",
+      "visible_tokens_reencoded": 117,
+      "input_tokens_before_2048_truncation": 420,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 163,
+      "stage": "csi",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 438,
+      "visible_256_token_cap": true,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 164,
+      "stage": "csi",
+      "visible_tokens_reencoded": 85,
+      "input_tokens_before_2048_truncation": 456,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 165,
+      "stage": "csi",
+      "visible_tokens_reencoded": 112,
+      "input_tokens_before_2048_truncation": 474,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 166,
+      "stage": "csi",
+      "visible_tokens_reencoded": 252,
+      "input_tokens_before_2048_truncation": 492,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 167,
+      "stage": "csi",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 510,
+      "visible_256_token_cap": true,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 168,
+      "stage": "csi",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 528,
+      "visible_256_token_cap": true,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 169,
+      "stage": "csi",
+      "visible_tokens_reencoded": 105,
+      "input_tokens_before_2048_truncation": 546,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 170,
+      "stage": "csi",
+      "visible_tokens_reencoded": 95,
+      "input_tokens_before_2048_truncation": 564,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 171,
+      "stage": "csi",
+      "visible_tokens_reencoded": 135,
+      "input_tokens_before_2048_truncation": 582,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 172,
+      "stage": "csi",
+      "visible_tokens_reencoded": 115,
+      "input_tokens_before_2048_truncation": 600,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 173,
+      "stage": "csi",
+      "visible_tokens_reencoded": 123,
+      "input_tokens_before_2048_truncation": 618,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 174,
+      "stage": "csi",
+      "visible_tokens_reencoded": 47,
+      "input_tokens_before_2048_truncation": 636,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 175,
+      "stage": "csi",
+      "visible_tokens_reencoded": 105,
+      "input_tokens_before_2048_truncation": 654,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 176,
+      "stage": "csi",
+      "visible_tokens_reencoded": 99,
+      "input_tokens_before_2048_truncation": 672,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 177,
+      "stage": "csi",
+      "visible_tokens_reencoded": 139,
+      "input_tokens_before_2048_truncation": 690,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "14",
+      "call": 178,
+      "stage": "csi",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 708,
+      "visible_256_token_cap": true,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 179,
+      "stage": "csi",
+      "visible_tokens_reencoded": 89,
+      "input_tokens_before_2048_truncation": 726,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 180,
+      "stage": "csi",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 744,
+      "visible_256_token_cap": true,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "14",
+      "call": 181,
+      "stage": "csi",
+      "visible_tokens_reencoded": 116,
+      "input_tokens_before_2048_truncation": 762,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 182,
+      "stage": "psg",
+      "visible_tokens_reencoded": 124,
+      "input_tokens_before_2048_truncation": 138,
+      "visible_256_token_cap": false,
+      "parsed_tool": null,
+      "category": "psg_json_parsed"
+    },
+    {
+      "id": "15",
+      "call": 183,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 100,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "15",
+      "call": 184,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 102,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "15",
+      "call": 185,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 102,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "15",
+      "call": 186,
+      "stage": "pseudo_skill",
+      "visible_tokens_reencoded": 256,
+      "input_tokens_before_2048_truncation": 100,
+      "visible_256_token_cap": true,
+      "category": "pseudo_skill_generated"
+    },
+    {
+      "id": "15",
+      "call": 187,
+      "stage": "csi",
+      "visible_tokens_reencoded": 128,
+      "input_tokens_before_2048_truncation": 357,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 188,
+      "stage": "csi",
+      "visible_tokens_reencoded": 123,
+      "input_tokens_before_2048_truncation": 375,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 189,
+      "stage": "csi",
+      "visible_tokens_reencoded": 131,
+      "input_tokens_before_2048_truncation": 393,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 190,
+      "stage": "csi",
+      "visible_tokens_reencoded": 127,
+      "input_tokens_before_2048_truncation": 411,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "15",
+      "call": 191,
+      "stage": "csi",
+      "visible_tokens_reencoded": 128,
+      "input_tokens_before_2048_truncation": 429,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "15",
+      "call": 192,
+      "stage": "csi",
+      "visible_tokens_reencoded": 125,
+      "input_tokens_before_2048_truncation": 447,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 193,
+      "stage": "csi",
+      "visible_tokens_reencoded": 124,
+      "input_tokens_before_2048_truncation": 465,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "15",
+      "call": 194,
+      "stage": "csi",
+      "visible_tokens_reencoded": 134,
+      "input_tokens_before_2048_truncation": 483,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "15",
+      "call": 195,
+      "stage": "csi",
+      "visible_tokens_reencoded": 101,
+      "input_tokens_before_2048_truncation": 501,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 196,
+      "stage": "csi",
+      "visible_tokens_reencoded": 111,
+      "input_tokens_before_2048_truncation": 519,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 197,
+      "stage": "csi",
+      "visible_tokens_reencoded": 130,
+      "input_tokens_before_2048_truncation": 537,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 198,
+      "stage": "csi",
+      "visible_tokens_reencoded": 120,
+      "input_tokens_before_2048_truncation": 555,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 199,
+      "stage": "csi",
+      "visible_tokens_reencoded": 217,
+      "input_tokens_before_2048_truncation": 573,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 200,
+      "stage": "csi",
+      "visible_tokens_reencoded": 123,
+      "input_tokens_before_2048_truncation": 591,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 201,
+      "stage": "csi",
+      "visible_tokens_reencoded": 130,
+      "input_tokens_before_2048_truncation": 609,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 202,
+      "stage": "csi",
+      "visible_tokens_reencoded": 118,
+      "input_tokens_before_2048_truncation": 627,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 203,
+      "stage": "csi",
+      "visible_tokens_reencoded": 148,
+      "input_tokens_before_2048_truncation": 645,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 204,
+      "stage": "csi",
+      "visible_tokens_reencoded": 76,
+      "input_tokens_before_2048_truncation": 663,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 205,
+      "stage": "csi",
+      "visible_tokens_reencoded": 76,
+      "input_tokens_before_2048_truncation": 681,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 206,
+      "stage": "csi",
+      "visible_tokens_reencoded": 60,
+      "input_tokens_before_2048_truncation": 699,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 207,
+      "stage": "csi",
+      "visible_tokens_reencoded": 132,
+      "input_tokens_before_2048_truncation": 717,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 208,
+      "stage": "csi",
+      "visible_tokens_reencoded": 125,
+      "input_tokens_before_2048_truncation": 735,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    },
+    {
+      "id": "15",
+      "call": 209,
+      "stage": "csi",
+      "visible_tokens_reencoded": 135,
+      "input_tokens_before_2048_truncation": 753,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_invalid_decision_enum"
+    },
+    {
+      "id": "15",
+      "call": 210,
+      "stage": "csi",
+      "visible_tokens_reencoded": 123,
+      "input_tokens_before_2048_truncation": 771,
+      "visible_256_token_cap": false,
+      "parsed_tool": "calculator",
+      "after_gallery_loaded": false,
+      "category": "csi_label_order_or_missing_line"
+    }
+  ],
+  "raw_sha256": {
+    "seed42.json": "41bed039696937c502509e8a3bd8b5ec41f8a5acb78554c9c1ffe10c2e1c92a3",
+    "seed42.partial.json": "ed9a60f4b8862fb944e3a41288f57a9ee47020847664a3fae25bbef593e1c3e9",
+    "seed42.trace.jsonl": "07296f521f5d8751237268b96596485217a4e34f81736f4067ebcb2588946259"
+  },
+  "algorithm_source_commit": "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e",
+  "source_sha256": {
+    "skilldreamer/algorithm.py": "d6e2e446a39826d3b3c4c29691e342599bad5272a9330cb20c666ebbb8500345",
+    "skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
+    "near/data.py": "795416bdffeb25880aeaf85b4bfd6480b8677b45cddabe37ba2e49d7bf544eb8",
+    "near/experiment.py": "197e3fefad06f1f0e54533b608c5d717e57d0b6a919a105f88eee79447d94399",
+    "state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+    "skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970"
+  },
+  "probe_source": {
+    "commit": "d8603f65b207e5345f156621f840c69a24ecace2",
+    "sha256": "7799029a67ebd7918bb69db94c86d6a7c1b94558f9510e4eb9581b9c9c1d3d9f",
+    "immutable_root_bound": true
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "files": {
+      "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+      "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+      "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+      "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+      "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd"
+    }
+  },
+  "encoder": {
+    "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "files": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+      "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    }
+  }
+}

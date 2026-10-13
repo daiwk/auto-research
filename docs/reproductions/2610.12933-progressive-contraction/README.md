@@ -98,7 +98,13 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [seed42旧协议负结果](metrics/public-a100-failed-seed42-6aabe57a.json)绑定真实A100 `6aabe57a`：8train中5条verified教师回答全部被判为no reasoning paragraph prefix，未到MC profiling/收缩/SFT。teacher实际生成2484tokens、学生评估1419tokens，elapsed108.03秒，0更新，不签通过。
 
-共享段落helper的Qwen标点/newline融合token漏切已修于32f；此旧失败不能解释为合法算法负结论，更不能代替修后core验证。新单seed同预算完整core及full-SFT control仍需新GPU槽；floor pool0、无verified pool或零更新保持失败，不改定义/门槛。
+共享段落helper的Qwen标点/newline融合token漏切已修于32f；此旧失败不能解释为合法算法负结论，更不能代替修后core验证。新单seed同预算完整core及full-SFT control的实际结果见下一节；floor pool0、无verified pool或零更新保持失败，不改定义/门槛。
+
+### 修后完整机制：单seed42
+
+[完整机制结果](metrics/public-a100-complete-seed42.json)与[源码32f绑定GPU回执](../../gpu-validations/progressive-contraction-a100-20261014.json)已独立核验：实际217.54秒，4条verified teacher trajectory各2个真实段落prefix×4个MC continuation；全部reachability1/uncertainty0，teacher收缩tie按原序选2条，不伪造不确定性信号。学生响应NLL路由选1条active，3次方法SFT更新及3次verified-full-SFT控制更新均实际非零。
+
+4validation初始accuracy0.5，方法和full-SFT控制均0.75，没有相对full-SFT收益。方法监督曝光4次、控制12次，1/3仅为监督实例曝光比，排除teacher MC开销，不能写成总计算节省；完整token账另存。只完成seed42 L1定义链路，仍缺默认seed43/44，不是正式能力比较、135×收益或稳定提升。
 
 ### 代码映射
 
@@ -110,5 +116,5 @@ algorithm.py：MC uncertainty、floor pool/NLL routing；checkpoint.py：真实p
 
 Qwen2.5匹配词表、少量GSM/LoRA/prefix/K是缩小协议，不覆盖原cross-family与全benchmark。曝光分母为同一verified corpus full-SFT；不宣称135x总成本收益。
 
-仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+seed42完整机制GPU门禁已通过，但默认seed43/44、全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

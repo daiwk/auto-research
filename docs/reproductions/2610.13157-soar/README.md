@@ -97,7 +97,11 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [seed42两奖励臂负结果](metrics/public-a100-failed-seed42-6aabe57a.json)绑定真实A100 `6aabe57a` 与预先独立封存EcoAgent公开catalog KB/属性QA train split，不是官方RATED/SOAR benchmark。source-consistent/without-source-reward各4groups全部zero advantage、0更新，全部answer/format/source_match0，训练实际各1search。每臂policy生成1056tokens+隔离recall34tokens，elapsed34.11/34.01秒；失败不强制优势，不签GPU通过回执。
 
-更大已缓存7B policy的train-only格式探针仅是待批准提案：原序4train×2episodes、最多3turn/cap256、wall300s、0LoRA/0评估；不静默换模型或追加预算，不以test挑方案。现有两臂失败保持，整方法实际非零策略更新与完整多seed计划仍未完成。
+### 固定7B训练集格式探针：无信号
+
+[57b 7B训练-only格式探针](metrics/public-a100-train-format-probe-seed42-57b2314d.json)实际执行34.61秒，明确使用已缓存固定Qwen2.5-7B-Instruct，原SYSTEM/parse/reward不变，原序4train×2episodes、最多3turn/cap256、wall300s。8episodes均首turn被原parser判invalid且没有截断，0search/format/source_match/answer，433tokens；没有LoRA/optimizer、validation或test读取/评估，不签整方法GPU回执。
+
+此probe仅记录响应text SHA，没有保存原text/token IDs，不能引述原响应或把提示歧义猜成这8次实际失败原因。更大模型未提供格式信号；没有静默替换正式policy、降低parser门槛或追加预算。旧两奖励臂失败保持，整方法实际非零策略更新与完整多seed计划仍未完成。
 
 ### 代码映射
 

@@ -95,7 +95,11 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [seed42脱敏负结果](metrics/public-a100-failed-seed42-6aabe57a.json)绑定实际A100执行与源码 `6aabe57a`，不是GPU通过回执。原4个校准种子的正确性分别为全对、2/4、全错但2条截断、2/4；严格verified-hard门禁没有接纳任何root，构造/effectivity/Goldilocks/RL未到达。实际elapsed85.60秒，学生校准生成4741tokens、评估1541tokens，教师未生成，不把无更新签成通过。
 
-已批准的新0f方案仅将原序train校准前缀扩至16、限制最多4 verified-hard roots、cap1024、wall1800s；其余depth/retries/group/2steps和门槛保持。新配置CPU审计已通过，尚未CUDA运行，不能把旧失败改名为新证据。
+### 0f有界校准扩展：真实失败
+
+[0f bounded seed42负结果](metrics/public-a100-bounded-failed-seed42-0f5dca9f.json)已实际执行348.24秒：原序16train校准，最多4hard roots、cap1024、wall1800s，其余depth/retries/group/2steps和门槛保持。学生测量接纳原indices[4,7,8]三条非截断全错roots，实际construction attempts3；没有surviving descendant，paired RL roots为空，方法和seed-RL控制均0更新。不是“仍无hard roots”，也不是整方法通过。
+
+完整账记录target calibration29408、construction verification2577、effectivity student1231/teacher1038、construction teacher334、初始validation1541生成tokens。现有raw含两次teacher verification拒绝，但未保存构造回应全文/每个内部门禁拒绝轨迹，不能断言第三root具体因Goldilocks或新颖性失败。没有降低门槛、强制优势或追加retry；旧6a失败保持，整方法实际有效RL与多seed计划仍缺。
 
 ### 代码映射
 

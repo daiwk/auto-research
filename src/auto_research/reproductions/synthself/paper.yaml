@@ -58,6 +58,6 @@
     ],
     "infer_device_capabilities": false,
     "requires_gpu_validation": true,
-    "gpu_validation_artifact": "docs/gpu-validations/synthself-a100-20261013.json"
+    "gpu_validation_artifact": "docs/gpu-validations/synthself-a100-20261014.json"
   }
 }

@@ -24,7 +24,7 @@ def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,id
     assert spec.published==("2026-10-08" if key=="magicbeanstalk" else "2026-10-09")
     assert spec.fidelity=="core_mechanism" and spec.evaluation_tier=="l1_mechanism"
     assert spec.execution["requires_gpu_validation"] is True
-    receipt_date={"state-opd":"20261014","grpo-difficulty-curriculum":"20261014"}.get(key,"20261013")
+    receipt_date={k:"20261014" for k in ("state-opd","grpo-difficulty-curriculum","synthself","upturn","progressive-contraction")}.get(key,"20261013")
     assert spec.execution["gpu_validation_artifact"]==f"docs/gpu-validations/{key}-a100-{receipt_date}.json"
     assert spec.evolve_operators==()
     doc=ROOT/spec.documentation

@@ -97,11 +97,17 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 独立固定Qwen tokenizer检查发现 `'.\n\n'` 融合为ID382，而旧helper仅匹配孤立newline ID271，确会漏掉真实段落。32f已改为decoded字符边界映射原token截止索引，两处runner都调用，prefix不重新编码，并补逐response审计；旧输出不算修后core通过。小0.5B reasoner对照两position组rescue rewards/advantages全部0，虽然熵项导致2次参数更新，仍是failed-no-rescue-signal；4validation均0，elapsed250.57秒，不伪造通过。
 
-小 reasoner 同样使用旧段落协议：上述全零仅对应旧采样切点，不能代表修后完整候选切点集合。修后7B的train-only诊断已冻结 `51b4718a`，等待GPU槽，只查gate/段落/rescue信号，不签整方法回执。
+小 reasoner 同样使用旧段落协议：上述全零仅对应旧采样切点，不能代表修后完整候选切点集合。修后7B的train-only诊断绑定 `51b4718a`，实际结果见下一节，只查gate/段落/rescue信号，不签整方法回执。
 
 ### 修后训练集诊断
 
 2026-10-14 修后 [51b训练-only诊断](metrics/public-a100-train-diagnosis-seed42-51b4718a.json) 实际运行118.51秒：32train rollouts中16判正、16个eligible failed，实际cut数3–9；gate24train/8cal、20epochs，两个position组救援奖励分别[0,0,0.5,0]/[0.5,0,0.5,0]，均真实非零优势及更新（梯度norm0.3747/0.3696），不再是熵-only变化。frozen reasoner生成7556、rescue2547tokens，encoder32calls/11220含prompt inputtokens。0LoRA、0validation/test评估，`whole_method_gpu_validation_passed: false`、不是回执；修复后的完整gate/correction与同上限基线评估另跑，尚不能据探针宣称能力收益或完成多seed计划。
+
+### 修后完整机制：单seed42
+
+[完整机制结果](metrics/public-a100-complete-seed42.json)与[源码51b绑定GPU回执](../../gpu-validations/upturn-a100-20261014.json)已独立核验：实际186.82秒，原8train×4rollouts、20gate epochs、2position组均真实非零救援优势/更新，encoder与7B reasoner冻结。纠正推理和4validation评估实际执行，不能用前面的train-only探针代替。
+
+这是head训练后的一次共享评估：frozen-reasoner控制avg_accuracy0.625/pass_rate1.0，训练后干预avg_accuracy0.625/pass_rate0.75，**不是训练前→训练后**；pass rate负结果保留。控制每题4个完整generation，方法2个original加至多2个纠正suffix，只匹配最大response allowance（3072tokens/题），并非相同候选池、实际token或runtime。只完成seed42 L1完整机制，仍缺默认seed43/44，不宣称稳定提升。
 
 ### 代码映射
 
@@ -113,5 +119,5 @@ algorithm.py：真实MLP、cut loss、gate、新user turn及预算；checkpoint.
 
 Base实际生成2N完整候选，UPTURN为N加至多N替换。报告最大生成数、实际token与correction次数，不声称真实runtime相等。小预算下单类gate/rescue全0如实保留，不宣称纠错提升。
 
-仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+seed42完整机制GPU门禁已通过，但默认seed43/44、全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 
