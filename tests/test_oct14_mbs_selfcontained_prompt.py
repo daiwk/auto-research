@@ -29,6 +29,8 @@ def test_child_contract_is_generic_and_explicit_without_extra_sampling():
     assert "complete step-by-step trace using only that question" in instruction
     assert "exactly one concise numerical final answer" in instruction
     assert "Do not disclose the parent final answer" in instruction
+    assert "array of objects, not an array of strings" in instruction
+    assert "Escape newlines and backslashes" in instruction
     assert not any(x in instruction for x in ("ABSTRACT_PARENT", "SECRET_ANSWER", "SECRET_TRACE", "James", "624"))
     assert json.loads(context)["parent"]["answer"] == "SECRET_ANSWER"  # train construction role only
     assert teacher.calls[0][1] == {"samples": 1, "max_tokens": 1024, "sample": True}
@@ -61,3 +63,14 @@ def test_missing_facts_are_not_repaired_with_parent_gold_or_autoaccepted():
         assert kwargs["max_tokens"] == 1024 and kwargs["samples"] == 1
     assert ledger.calls == {"construction_teacher": 1, "construction_verification": 2}
     assert all(not a["accepted"] for a in backend.response_audits[1:])
+
+
+def test_malformed_array_is_not_repaired_or_promoted_from_partial_objects():
+    text = '[{"question":"child","answer":"8","trace":"first\nsecond"}]'
+    teacher = RecordingPolicy([text])
+    ledger = CostLedger()
+    backend = CheckpointConstruction(teacher, None, ledger)
+    assert backend.propose_children(Problem("parent", "PRIVATE", "TRACE"), []) == []
+    assert backend.response_audits[0]["response_text"] == text
+    assert backend.response_audits[0]["schema_valid_problem_count"] == 0
+    assert ledger.calls == {"construction_teacher": 1}

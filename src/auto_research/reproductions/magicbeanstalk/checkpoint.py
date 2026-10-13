@@ -120,7 +120,9 @@ class CheckpointConstruction:
             "used in its solution. It must be solvable in isolation without the parent, other children, or the "
             "answer/trace fields. Do not rely on facts stated only elsewhere. Give a complete step-by-step trace "
             "using only that question, and put exactly one concise numerical final answer in answer. "
-            "Do not disclose the parent final answer or reproduce its complete plan.",
+            "Do not disclose the parent final answer or reproduce its complete plan. "
+            "Return a valid JSON array of objects, not an array of strings. Escape newlines and backslashes "
+            "inside JSON strings; do not put literal line breaks inside a quoted string.",
             {"parent":vars(parent),"ineffective_decompositions":[[vars(p) for p in group if p] for group in negative]},
             operation="propose_children")
         children=[p for item in value if (p:=_problem(item)) is not None][:3] if isinstance(value,list) else []
