@@ -91,7 +91,8 @@ $$
 ```bash
 PYTHONPATH=src python scripts/run_oct13_memory.py --paper beyond-final-embedding \
   --raw-data /path/to/longmemeval_s_cleaned.json --model-dir /path/to/minilm \
-  --device cuda --seed 42 --max-queries 100 --max-length 128 --adapter-epochs 2 \
+  --device cuda --seed 42 --max-queries 100 --max-length 128 --batch-size 16 --adapter-epochs 2 \
+  --split-policy query-disjoint-shared-bank --diagnostic-only \
   --output runs/beyond/seed42.json
 ```
 
@@ -101,9 +102,33 @@ PYTHONPATH=src python scripts/run_oct13_memory.py --paper beyond-final-embedding
 
 训练 rank32 query residual，用训练 split 的 relevance 标签做真实多正例 MaxSim CE，optimizer 为 AdamW、lr1e-4、wd1e-4、clip1。epoch0/1/2 和 α0.25/0.5/0.75 只看 validation NDCG；选好后只执行一次最终 adapted test，并另报告预先固定 α0.5 training-free 对照。encoder、memory tokens 和 pooled query 从未更新。原文 EvoTrain 源监督替为 LongMemEval 训练 split，明确不是跨数据集泛化复现。
 
-采用 exact 全局 top64 token search，是原文附录 D 的精确检索对照，不报告 HNSW 加速指标。标签仅进入训练 loss 或 evaluator，reference answer 不出现在 encoding 输入；原始 Skill/Agent gold plan 从未用来构造 query。行为证据见 [implementation-contract.json](metrics/implementation-contract.json)，尚不代表正式 GPU benchmark。三 seed、真实参数更新和隔离 test 指标须由实际运行产物与 receipt 回写，失败和负结果照常保留。
+采用 exact 全局 top64 token search，是原文附录 D 的精确检索对照，不报告 HNSW 加速指标。标签仅进入训练 loss 或 evaluator，reference answer 不出现在 encoding 输入；原始 Skill/Agent gold plan 从未用来构造 query。行为合同见 [implementation-contract.json](metrics/implementation-contract.json)；实际 GPU 诊断结果与负结果如下，不能以合同 fixture 代替真实测量。
 
 当公开候选库无法做严格 bank 分组时，可显式加 `--split-policy query-disjoint-shared-bank`。同一冻结 memory/token bank 可共享，但 queryadapter 只接收训练 query 的 relevance loss，validation/test labels 不进入更新；所有选择仍只看validation。该固定索引诊断标记 shared-unlabelled-memory、`diagnostic_only=true`、`promotion_eligible=false`，不宣称未见 bank 泛化，不与默认严格协议混合；默认失败条件不被放宽。
+
+#### 2026-10-14 NVIDIA A30 实际结果与负结果
+
+源码 commit `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`，固定 MiniLM、max_length128、batch16、rank32、两 epoch。LongMemEval 原 JSON 是官方 **evaluation instances**，本地前100条重新分60 train/20 validation/20 test，仅用于非官方研究诊断；**不是官方原 test 成绩或跨数据集泛化实验**。训练标签只来自本地 train 查询，validation 选 epoch/α，test 最后评分。原 raw `l2_public_dataset` 不覆盖，汇总以 `l1_mechanism` 诊断呈现。
+
+| 共享库100 query（相同切分，seed42/43/44） | Test Recall@10 | Test NDCG@10 |
+| --- | --- | --- |
+| 同冻结 MiniLM baseline | 0.900000 | 0.715573 |
+| Validation-selected sparse fusion / queryadapter | 0.912500 | 0.744397 |
+| 预先固定α0.5、无训练 sparse fusion | 0.912500 | 0.757752 |
+
+**训练并未显示优于固定 training-free 对照**，也不依据 test 的高低重新选择α或 checkpoint。三个 seed 的最终排名指标相同，是相同数据上的随机过程核验，不按独立数据重复计算显著性。
+
+| Seed | 两 epoch MaxSim loss | Validation 选 epoch / α | 选中参数更新 L2 |
+| --- | --- | --- | --- |
+| 42 | 1.729410 → 1.713048 | 2 / 0.75 | 0.191639 |
+| 43 | 1.729664 → 1.714434 | **0 / 0.75（训练后未获选）** | **0** |
+| 44 | 1.729765 → 1.715719 | 2 / 0.75 | 0.189032 |
+
+Seed43 确实执行了两轮真实训练，但 validation 选择初始 identity adapter；不能将其描述为“获选训练模型的提升”。encoder、memory tokens 和 pooled 分支始终冻结。
+
+另存 strict bank-disjoint30、seed42：27 train/1 validation/2 test，baseline Recall@10/NDCG@10 为0.5/0.5，本方法为1/0.715338；validation 仍选 epoch0/α0.25（更新 L2=0）。仅两条 test query，结果只用于连通诊断，不与共享库合并或晋级。
+
+四份原始结果、全部命令与 byte SHA 见 [A30 诊断汇总](metrics/a30-diagnostics-34148c2e.json)、[执行上下文](../../research-audits/oct14-memory-execution-context-34148c2e.json) 与 [GPU receipt](../../gpu-validations/oct13-beyond-final-embedding-a30.json)。Receipt/adapter 路径仅为执行后的 artifact metadata 绑定，实际 source 仍为 `34148c2e`，不是后续绑定提交。设备为 **NVIDIA A30**。执行证据通过不意味着正式能力比较通过。
 
 ### 代码映射
 

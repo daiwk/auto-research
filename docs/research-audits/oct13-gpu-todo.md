@@ -17,6 +17,8 @@
 | State-OPD | A100 原快照，42/43/44，实际更新；8 题 accuracy 前后均为 0 | 新源码默认路径、完整历史 OPD / 无扩采控制 |
 | GPPO / TAPO | A100 原快照各三 seed，独立 GRPO-control 三 seed；3 rollout groups × 2 inner updates = 6 次实际 optimizer 更新 | 大规模长轨迹能力结果；8 题仅为机制诊断 |
 | DoubleCat / SemiCat | A30 新核心，42/43/44，真实 40 步与 32 NFE | 原 TinyGSM/OWT 规模；onehot/DoubleCat 坍缩负结果保留 |
+| OAL | A100，42/43/44，实际分组/校准及 OAL/softmax 匹配 LoRA 更新；原始结果和源码哈希核验通过 | 仅一个中间层、3 步、32-token 块；seed 44 不优于基线，非原论文全规模或效率结果 |
+| NEAR / Beyond | A30，共享 bank 100 queries 各三 seed，另各一项严格 bank-disjoint 30-query 诊断；八份原始结果和源码哈希核验通过 | 官方 evaluation 实例再切分的非官方诊断；相同数据的三 seed 非独立重复；严格协议仅 2 test queries，不能合并统计 |
 
 对应指标与脱敏回执均在各篇详情页。旧标准 SC GPU 结果不能替代 DoubleCat 新核心的回执。
 
@@ -28,10 +30,8 @@
 | 优先序 | 论文 | 恢复后要执行的完整链路 |
 | --- | --- | --- |
 | 1 | State-OPD | 最新源码 default/state、full-history-opd、state-no-expansion 三种路径；同预算，实际 token/动作成本单独报告；重绑定 source receipt |
-| 1 | OAL | 固定 Qwen2.5-0.5B Base + WikiText-2；QK 分组/校准、OAL+LoRA 与 softmax+LoRA；不可用 Instruct 替代 |
 | 1 | ReplaySSM | 固定作者 Triton 源码；Mamba2/GDN、四精度、独立读写 rounding、回放/rollback；不宣称 FP32 仿真具有低位 HBM 收益 |
 | 1 | CV-OPD | 已准备的 COCO train2017 16/8/8 分区；八真实类别、正负裁剪与 gate、实际 VLM 更新；全拒绝如实失败 |
-| 1 | NEAR / Beyond | 固定 MiniLM、100 query 显式共享记忆库协议、各三 seed；另保留严格 bank-disjoint 30-query 诊断，不能混合比较 |
 | 2 | SkillDreamer | 固定 checkpoint、公开 train-only GSM8K 子集；no-skills/direct/PSG+HSR+CSI 三臂实际工具执行，参考答案仅外部 scorer 可见 |
 | 2 | MagicBeanStalk | 真实 teacher 分解、独立验证、effectivity、Goldilocks、非零优势 RLVR 与 seed-RLVR 对照；不合格合成不算完成 |
 | 2 | SynthSelf | 实际改写、拒绝采样、Eq.6 aligner 约束、SFT 与 gold-SFT 对照；acquisition/retention 分开，不通过约束不签通过回执 |
@@ -43,6 +43,8 @@
 | 3 | SmolWAM | 独立 LIBERO overlay；固定 Cosmos teacher、一个真实 demo；28→12 block KD、1764→1008 布局课程及新 student/发布模型的同初始状态闭环 |
 
 尚未完成的 CUDA adapter 保持 `requires_gpu_validation=True`，不伪造缺失 receipt。
+10 月 14 日 OAL、NEAR、Beyond 三项已补齐真实回执；当前 GPU evidence gate 仍报告 **11 项缺失**。
+CV-OPD 六臂实际进程已结束，但整理核验和回执尚未完成，暂不移出缺失清单。
 因此 GPU evidence gate 在这份 TODO 关闭前不能被报告为通过，MR 也不能被标为全部完成。
 
 ## 资源与环境检查点

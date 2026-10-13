@@ -63,6 +63,26 @@ def test_boolean_only_implementation_contracts_remain_auditable_not_result_cards
     assert payload["unmeasured_artifact_count"] >= len(unmeasured)
 
 
+def test_resumed_gpu_cards_show_measured_scores_with_explicit_diagnostic_protocols():
+    payload = json.loads((ROOT / "docs/assets/data/experiment-dashboard.json").read_text())
+    filenames = {
+        "oal": "a100-three-seeds-4496283a.json",
+        "near": "a30-diagnostics-34148c2e.json",
+        "beyond-final-embedding": "a30-diagnostics-34148c2e.json",
+    }
+    for method, filename in filenames.items():
+        items = [item for item in payload["experiments"]
+                 if item["method"] == method and item["path"].endswith("/" + filename)]
+        assert len(items) == 1
+        item = items[0]
+        assert item["dataset"] and all(str(seed) in item["seed"] for seed in (42, 43, 44))
+        assert item["metrics"] and "schema_version" not in item["metrics"]
+        assert item["evidence"]["diagnostic_only"]
+        assert not item["evidence"]["formal_comparison"]
+        assert any("test" in key and ("ppl" in key or "ndcg" in key)
+                   for key in item["metrics"])
+
+
 def test_sguid_dashboard_keeps_negative_validation_and_mechanism_tier():
     payload = json.loads((ROOT / "docs/assets/data/experiment-dashboard.json").read_text())
     items = [item for item in payload["experiments"] if item["method"] == "sguid"]

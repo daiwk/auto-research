@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "adapter_key": "beyond-final-embedding",
+  "validated_at": "2026-10-13T17:04:54.053110+00:00",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A30"
+  },
+  "command": [
+    "/tmp/oct14-memory-overlay-4496283a/bin/python",
+    "scripts/run_oct13_memory.py",
+    "--paper",
+    "beyond-final-embedding",
+    "--raw-data",
+    "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+    "--model-dir",
+    "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--max-queries",
+    "100",
+    "--max-length",
+    "128",
+    "--batch-size",
+    "16",
+    "--adapter-epochs",
+    "2",
+    "--split-policy",
+    "query-disjoint-shared-bank",
+    "--diagnostic-only",
+    "--output",
+    "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/beyond-final-embedding-query-disjoint-shared-bank-100q-seed42.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "kind": "dataset",
+    "public_id": "xiaowu0162/longmemeval-cleaned",
+    "revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+    "upstream_file": "longmemeval_s_cleaned.json",
+    "transformation": "none; complete pinned public raw file",
+    "files": {
+      "longmemeval_s_cleaned.json": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442"
+    },
+    "source_verification": {
+      "immutable_revision_verified": true,
+      "verification": "existing public-source pin and local byte-hash verification before transfer"
+    }
+  },
+  "checkpoint": {
+    "kind": "checkpoint",
+    "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "files": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+      "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "source_verification": {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "shared_bank": [
+      {
+        "seed": 42,
+        "baseline": {
+          "recall_at_10": 0.9,
+          "ndcg_at_10": 0.7155734475958628
+        },
+        "test": {
+          "recall_at_10": 0.9125,
+          "ndcg_at_10": 0.7443967037990248
+        },
+        "selection": {
+          "epoch": 2,
+          "alpha": 0.75,
+          "validation": {
+            "recall_at_10": 1,
+            "ndcg_at_10": 0.9353446783304612
+          }
+        },
+        "training_losses": [
+          {
+            "epoch": 1,
+            "maxsim_loss": 1.729410187403361
+          },
+          {
+            "epoch": 2,
+            "maxsim_loss": 1.7130476474761962
+          }
+        ],
+        "selected_parameter_update_l2": 0.19163885712623596,
+        "training_free_test": {
+          "recall_at_10": 0.9125,
+          "ndcg_at_10": 0.7577519635500225
+        }
+      },
+      {
+        "seed": 43,
+        "baseline": {
+          "recall_at_10": 0.9,
+          "ndcg_at_10": 0.7155734475958628
+        },
+        "test": {
+          "recall_at_10": 0.9125,
+          "ndcg_at_10": 0.7443967037990248
+        },
+        "selection": {
+          "epoch": 0,
+          "alpha": 0.75,
+          "validation": {
+            "recall_at_10": 1,
+            "ndcg_at_10": 0.9339915538942147
+          }
+        },
+        "training_losses": [
+          {
+            "epoch": 1,
+            "maxsim_loss": 1.7296643773714702
+          },
+          {
+            "epoch": 2,
+            "maxsim_loss": 1.7144342939058939
+          }
+        ],
+        "selected_parameter_update_l2": 0,
+        "training_free_test": {
+          "recall_at_10": 0.9125,
+          "ndcg_at_10": 0.7577519635500225
+        }
+      },
+      {
+        "seed": 44,
+        "baseline": {
+          "recall_at_10": 0.9,
+          "ndcg_at_10": 0.7155734475958628
+        },
+        "test": {
+          "recall_at_10": 0.9125,
+          "ndcg_at_10": 0.7443967037990248
+        },
+        "selection": {
+          "epoch": 2,
+          "alpha": 0.75,
+          "validation": {
+            "recall_at_10": 1,
+            "ndcg_at_10": 0.9353446783304612
+          }
+        },
+        "training_losses": [
+          {
+            "epoch": 1,
+            "maxsim_loss": 1.729764993985494
+          },
+          {
+            "epoch": 2,
+            "maxsim_loss": 1.7157187263170879
+          }
+        ],
+        "selected_parameter_update_l2": 0.18903198838233948,
+        "training_free_test": {
+          "recall_at_10": 0.9125,
+          "ndcg_at_10": 0.7577519635500225
+        }
+      }
+    ],
+    "strict_bank": [
+      {
+        "seed": 42,
+        "baseline": {
+          "recall_at_10": 0.5,
+          "ndcg_at_10": 0.5
+        },
+        "test": {
+          "recall_at_10": 1,
+          "ndcg_at_10": 0.7153382790366966
+        },
+        "selection": {
+          "epoch": 0,
+          "alpha": 0.25,
+          "validation": {
+            "recall_at_10": 1,
+            "ndcg_at_10": 1
+          }
+        }
+      }
+    ],
+    "diagnostic_only": true,
+    "promotion_eligible": false,
+    "formal_comparison": false
+  },
+  "provenance": {
+    "commit": "34148c2e29c01e9be7e4d5b8cbd09fd0f6016902",
+    "artifact_path": "docs/gpu-validations/oct13-beyond-final-embedding-a30.json",
+    "metrics_artifact_path": "docs/reproductions/2610.13277-beyond-final-embedding/metrics/a30-diagnostics-34148c2e.json",
+    "execution_context_path": "docs/research-audits/oct14-memory-execution-context-34148c2e.json",
+    "source_files_sha256": {
+      "scripts/run_oct13_memory.py": "0ae99379deff465f25e42e922c72635b3646eb904f36ee031cac3f616f7d180c",
+      "scripts/prepare_robotics_venv.py": "6ebc91b431f366cc614f2324d30293414140dbc4458147c873365535bdfa6c75",
+      "src/auto_research/reproductions/near/__init__.py": "e7526576c299eded95c33b11c8c535d972ae4e44052d240d29f9e14f3eb18703",
+      "src/auto_research/reproductions/near/adapter.py": "2c44b4430af86b7b570bb55b8d366b684ae517530aa589ebe8339f2b4db28b3d",
+      "src/auto_research/reproductions/near/algorithm.py": "2058bdd67dd04dabe2482a60c234a61bcb90ad132a7e43cf40d85ef3fedd1906",
+      "src/auto_research/reproductions/near/data.py": "795416bdffeb25880aeaf85b4bfd6480b8677b45cddabe37ba2e49d7bf544eb8",
+      "src/auto_research/reproductions/near/experiment.py": "197e3fefad06f1f0e54533b608c5d717e57d0b6a919a105f88eee79447d94399",
+      "src/auto_research/reproductions/beyond_final_embedding/__init__.py": "b61e251f3e7f6fbb26021eb9ad3996c8f8ca233175dc19b86796b695ecc44a43",
+      "src/auto_research/reproductions/beyond_final_embedding/adapter.py": "3b58025b770656c4a5c2b647854a43977ce67a335abf9fda2d278ef9cd79bce9",
+      "src/auto_research/reproductions/beyond_final_embedding/algorithm.py": "25ddc0d5276ca7f16d416410942a71beef721491633e0103d9b8f88a4f671622",
+      "src/auto_research/reproductions/beyond_final_embedding/experiment.py": "d50cb891d364ca0c5bab3d88fa56e4aab7f4aa8f401590e49ccac32436763760"
+    },
+    "raw_results": [
+      {
+        "path": "docs/reproductions/2610.13277-beyond-final-embedding/metrics/raw/beyond-final-embedding-query-disjoint-shared-bank-100q-seed42.json",
+        "sha256": "6a9277e5739282aa6d3582b8ba5c3d7ac48eccc4a4123be7ac8ed7879822d09a",
+        "command": [
+          "/tmp/oct14-memory-overlay-4496283a/bin/python",
+          "scripts/run_oct13_memory.py",
+          "--paper",
+          "beyond-final-embedding",
+          "--raw-data",
+          "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+          "--model-dir",
+          "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+          "--device",
+          "cuda",
+          "--seed",
+          "42",
+          "--max-queries",
+          "100",
+          "--max-length",
+          "128",
+          "--batch-size",
+          "16",
+          "--adapter-epochs",
+          "2",
+          "--split-policy",
+          "query-disjoint-shared-bank",
+          "--diagnostic-only",
+          "--output",
+          "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/beyond-final-embedding-query-disjoint-shared-bank-100q-seed42.json"
+        ]
+      },
+      {
+        "path": "docs/reproductions/2610.13277-beyond-final-embedding/metrics/raw/beyond-final-embedding-query-disjoint-shared-bank-100q-seed43.json",
+        "sha256": "68ca6e2ab31efe508849b0365e3c31f47711ae65d8241068cc76887d5a0914ba",
+        "command": [
+          "/tmp/oct14-memory-overlay-4496283a/bin/python",
+          "scripts/run_oct13_memory.py",
+          "--paper",
+          "beyond-final-embedding",
+          "--raw-data",
+          "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+          "--model-dir",
+          "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+          "--device",
+          "cuda",
+          "--seed",
+          "43",
+          "--max-queries",
+          "100",
+          "--max-length",
+          "128",
+          "--batch-size",
+          "16",
+          "--adapter-epochs",
+          "2",
+          "--split-policy",
+          "query-disjoint-shared-bank",
+          "--diagnostic-only",
+          "--output",
+          "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/beyond-final-embedding-query-disjoint-shared-bank-100q-seed43.json"
+        ]
+      },
+      {
+        "path": "docs/reproductions/2610.13277-beyond-final-embedding/metrics/raw/beyond-final-embedding-query-disjoint-shared-bank-100q-seed44.json",
+        "sha256": "6fb2046cef8b653571c6fd586b796f56735daf7e93aa8a55aaf86617c1a0ca00",
+        "command": [
+          "/tmp/oct14-memory-overlay-4496283a/bin/python",
+          "scripts/run_oct13_memory.py",
+          "--paper",
+          "beyond-final-embedding",
+          "--raw-data",
+          "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+          "--model-dir",
+          "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+          "--device",
+          "cuda",
+          "--seed",
+          "44",
+          "--max-queries",
+          "100",
+          "--max-length",
+          "128",
+          "--batch-size",
+          "16",
+          "--adapter-epochs",
+          "2",
+          "--split-policy",
+          "query-disjoint-shared-bank",
+          "--diagnostic-only",
+          "--output",
+          "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/beyond-final-embedding-query-disjoint-shared-bank-100q-seed44.json"
+        ]
+      },
+      {
+        "path": "docs/reproductions/2610.13277-beyond-final-embedding/metrics/raw/beyond-final-embedding-bank-disjoint-30q-seed42.json",
+        "sha256": "3dc2a9a321ae1207115c4f0945a14cd0747bbd948b96d7baedd0a35dae9bc645",
+        "command": [
+          "/tmp/oct14-memory-overlay-4496283a/bin/python",
+          "scripts/run_oct13_memory.py",
+          "--paper",
+          "beyond-final-embedding",
+          "--raw-data",
+          "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+          "--model-dir",
+          "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+          "--device",
+          "cuda",
+          "--seed",
+          "42",
+          "--max-queries",
+          "30",
+          "--max-length",
+          "128",
+          "--batch-size",
+          "16",
+          "--adapter-epochs",
+          "2",
+          "--split-policy",
+          "bank-disjoint",
+          "--diagnostic-only",
+          "--output",
+          "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/beyond-final-embedding-bank-disjoint-30q-seed42.json"
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "LongMemEval cleaned JSON contains official evaluation instances; source-order 100 and 30 query subsets are re-split only for a nonofficial research diagnostic, not the official benchmark test score.",
+    "Shared-bank queries use fixed 60/20/20 query-ID hash splits over shared frozen unlabelled memories; no unseen-memory-bank generalization claim.",
+    "The three seeds reuse the same data split and yield identical ranking metrics; they are stochastic algorithm checks, not independent dataset repetitions.",
+    "Strict bank-disjoint 30-query diagnostics contain only 27 train, 1 validation and 2 test queries and are not pooled with shared-bank results.",
+    "All hyperparameters/checkpoints are chosen on validation only; test labels are used only by the final scorer.",
+    "MiniLM/max_length128/exact search replace original backbones/full LMEB/HNSW; no downstream QA or production result was reproduced.",
+    "All runs execute two actual MaxSim training epochs; shared-bank seed43 and strict seed42 select epoch0, with selected parameter update zero. This is a retained negative selection result, not evidence that the trained adapter was selected.",
+    "The fixed alpha0.5 training-free comparison has shared-bank NDCG@10 .7577519635500225, higher than validation-selected adapted variant .7443967037990248; test is not used to reselect."
+  ]
+}

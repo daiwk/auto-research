@@ -86,12 +86,13 @@ $$
 
 ## 本地复现
 
-> **本地对照口径**：基线为同冻结 MiniLM 的原生 masked-mean pooled cosine，实验组为 NEAR 邻域残差融合；目前单 seed 小样本稳定相对提升不适用。
+> **本地对照口径**：基线为同冻结 MiniLM 的原生 masked-mean pooled cosine，实验组为 NEAR 邻域残差融合；已执行三 seed，但同一数据切分与相同排名不构成独立数据重复，稳定相对提升结论不适用。
 
 ```bash
 PYTHONPATH=src python scripts/run_oct13_memory.py --paper near \
   --raw-data /path/to/longmemeval_s_cleaned.json --model-dir /path/to/minilm \
-  --device cuda --seed 42 --max-queries 100 --max-length 128 \
+  --device cuda --seed 42 --max-queries 100 --max-length 128 --batch-size 16 \
+  --split-policy query-disjoint-shared-bank --diagnostic-only \
   --output runs/near/seed42.json
 ```
 
@@ -103,7 +104,22 @@ LongMemEval source 固定 `98d7416c24c778c2fee6e6f3006e7a073259d48f`，原文件
 
 首100条的候选库会形成不足三个连通分量，默认 `--split-policy bank-disjoint` 如实报错。可显式指定 `--split-policy query-disjoint-shared-bank`：仅按 question ID 的无标签固定 hash 分60/20/20，允许共享冻结、无标签 memory encodings，但训练 query/监督、validation选择与test评分仍隔离。该替代协议固定 diagnostic、不可晋级，不声称 unseen-bank 泛化，不与严格协议合并统计，也不自动 fallback。100query 示例只有加上此显式参数才可运行。
 
-2026-10-13 CPU smoke：首30 query、max_length64、seed42，连通分组为 train27/validation1/test2；NEAR 与 Base 的 test Recall@10 都为1，NDCG@10 都为0.6445324132，**持平，不证明提升**。选中 depth1/raw/α0.25。指标见 [cpu-smoke-seed42.json](metrics/cpu-smoke-seed42.json)；样本很小且少于三个 seed，保留 diagnostic 标记。更完整 GPU 三 seed 结果由独立 receipt 回写，不能用已有烟测替代。
+2026-10-13 CPU smoke：首30 query、max_length64、seed42，连通分组为 train27/validation1/test2；NEAR 与 Base 的 test Recall@10 都为1，NDCG@10 都为0.6445324132，**持平，不证明提升**。选中 depth1/raw/α0.25。指标见 [cpu-smoke-seed42.json](metrics/cpu-smoke-seed42.json)；该旧诊断原样保留。
+
+#### 2026-10-14 NVIDIA A30 实际结果
+
+执行源码 commit `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`。原 LongMemEval 文件来自官方 **evaluation instances**；这里取前100条重新以无标签 query-ID hash 分为60 train/20 validation/20 test，只是**非官方研究诊断**，不是官方原 test 成绩。共享无标签 memory bank，不声称 unseen-bank 泛化。原始输出的 `l2_public_dataset` 字段不改写；汇总明确降为 `l1_mechanism`、`diagnostic_only=true`、`promotion_eligible=false`。
+
+| 共享库100 query（seed 42/43/44） | Test Recall@10 | Test NDCG@10 |
+| --- | --- | --- |
+| 同冻结 MiniLM baseline | 0.900000 | 0.715573 |
+| NEAR：validation 选 depth1/raw/α1 | 0.912500 | 0.741030 |
+
+三 seed 在同一切分上给出相同排名指标；这是随机算法重复核验，不是三个独立样本集，不给显著性或稳定泛化结论。每轮 validation Recall@10=1、NDCG@10=0.910872，只在此选择参数。
+
+另存 strict bank-disjoint 首30条、max_length128、seed42：27 train/1 validation/2 test，NEAR 与 baseline 均为 Recall@10=0.5、NDCG@10=0.5，**再次持平**。该小诊断不与共享库统计合并，且显式 `--diagnostic-only` 禁止晋级。
+
+完整命令、切分指纹、逐文件资源 SHA、四份不可变 raw 及其 SHA 见 [A30 诊断汇总](metrics/a30-diagnostics-34148c2e.json)、[执行上下文](../../research-audits/oct14-memory-execution-context-34148c2e.json) 和 [GPU receipt](../../gpu-validations/oct13-near-a30.json)。Receipt/adapter 路径是执行后更新的 artifact metadata 绑定；实际执行源码仍为 `34148c2e`，不把后续绑定提交冒充实跑 source。设备为 **NVIDIA A30**。验证通过仅表示真实执行与证据合同通过，不代表能力提升。
 
 ### 代码映射与边界
 

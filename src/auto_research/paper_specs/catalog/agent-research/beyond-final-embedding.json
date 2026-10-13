@@ -18,5 +18,5 @@
     "spec_key": "beyond-final-embedding"
   },
   "requires_gpu_validation": true,
-  "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a100.json"
+  "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a30.json"
 }

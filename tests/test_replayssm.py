@@ -94,3 +94,107 @@ def test_author_cuda_entry_rejects_dirty_source_before_import_or_execution(tmp_p
                         script["UPSTREAM_REVISION"] if "rev-parse" in command else " M emulation/api.py")
     with pytest.raises(ValueError, match="uncommitted changes"):
         script["author_precision_suite"](tmp_path, 48, 42)
+
+
+def _runner_functions():
+    from pathlib import Path
+    import runpy
+
+    return runpy.run_path(str(Path(__file__).resolve().parents[1] / "scripts/run_replayssm.py"))
+
+
+@pytest.mark.parametrize("expression,operands", [
+    ("mark(0) and mark(1) and mark(2)", 3),
+    ("mark(0) and mark(1) and mark(2) and mark(3)", 4),
+    ("mark(0) or mark(1) or mark(2)", 3),
+    ("mark(0) or mark(1) or mark(2) or mark(3)", 4),
+    ("mark(0) and (mark(1) or mark(2) or mark(3)) and mark(4)", 5),
+])
+def test_jit_parentheses_preserve_boolean_result_and_short_circuit_order(expression, operands):
+    import ast
+    from hashlib import sha256
+    from itertools import product
+
+    original = f"def _gdn_unf_vf_step_kernel(mark):\n    return {expression}\n"
+    transform = _runner_functions()["parenthesize_boolop_chains"]
+    rewritten, audit = transform(original, sha256(original.encode()).hexdigest())
+    assert audit["associative_boolean_ast_equivalent"] is True
+    assert audit["compiled_jit_source_sha256"] == sha256(rewritten.encode()).hexdigest()
+    assert not any(isinstance(node, ast.BoolOp) and len(node.values) > 2
+                   for node in ast.walk(ast.parse(rewritten)))
+    for values in product((False, True), repeat=operands):
+        results = []
+        for source in (original, rewritten):
+            namespace, calls = {}, []
+
+            def mark(index):
+                calls.append(index)
+                return values[index]
+
+            exec(compile(source, "<verified-bool-flags>", "exec"), namespace)
+            results.append((namespace["_gdn_unf_vf_step_kernel"](mark), calls))
+        assert results[0] == results[1]
+
+
+def test_jit_parentheses_only_insert_known_parentheses_and_reject_identity_mismatch():
+    from hashlib import sha256
+
+    source = "def _gdn_unf_vf_step_kernel():\n    if TWOPREC and (not is_flush) and (not is_seed):\n        pass\n"
+    transform = _runner_functions()["parenthesize_boolop_chains"]
+    rewritten, audit = transform(source, sha256(source.encode()).hexdigest())
+    assert rewritten == source.replace("TWOPREC and (not is_flush)", "(TWOPREC and (not is_flush))")
+    assert audit["source_ranges_relative_to_jit_function"] == [
+        {"line": 2, "column": 7, "end_line": 2, "end_column": 51,
+         "operator": "and", "operands": 3}]
+    assert audit["author_file_modified"] is False
+    with pytest.raises(ValueError, match="identity mismatch"):
+        transform(source + "\n", sha256(source.encode()).hexdigest())
+    other = source.replace("_gdn_unf_vf_step_kernel", "other_kernel")
+    with pytest.raises(ValueError, match="restricted to the pinned"):
+        transform(other, sha256(other.encode()).hexdigest())
+
+
+def test_jit_compatibility_guards_file_identity_range_api_and_resets_cache(tmp_path, monkeypatch):
+    from hashlib import sha256
+    from types import SimpleNamespace
+
+    script = _runner_functions()
+    prepare = script["prepare_gdn_jit_compatibility"]
+    source = "def _gdn_unf_vf_step_kernel():\n    if TWOPREC and (not is_flush) and (not is_seed):\n        pass\n"
+    source_file = tmp_path / "gdn_replay_unf_vf.py"
+    source_file.write_text(source)
+    digest = sha256(source.encode()).hexdigest()
+    monkeypatch.setitem(prepare.__globals__, "GDN_FILE_SHA256", digest)
+    monkeypatch.setitem(prepare.__globals__, "GDN_JIT_SOURCE_SHA256", digest)
+    expected_ranges = [{"line": 2, "column": 7, "end_line": 2, "end_column": 51,
+                        "operator": "and", "operands": 3}]
+    monkeypatch.setitem(prepare.__globals__, "GDN_BOOL_OP_RANGES", expected_ranges)
+
+    class FakeKernel:
+        fn = SimpleNamespace(__module__="emulation.gdn_replay_unf_vf", __name__="_gdn_unf_vf_step_kernel")
+        src = source
+        hash = "stale-compiled-cache-key"
+
+        def _unsafe_update_src(self, rewritten):
+            self.hash = None
+            self.src = rewritten
+
+    kernel = FakeKernel()
+    audit = prepare(kernel, source_file)
+    assert kernel.hash is None
+    assert kernel.src != source
+    assert audit["original_author_file_sha256"] == digest
+    assert audit["native_serving_claim"] is False
+    assert source_file.read_text() == source
+    with pytest.raises(ValueError, match="identity mismatch"):
+        prepare(kernel, source_file)  # A second transformation is not accepted.
+    monkeypatch.setitem(prepare.__globals__, "GDN_BOOL_OP_RANGES", [])
+    with pytest.raises(ValueError, match="exactly the known"):
+        prepare(FakeKernel(), source_file)
+    monkeypatch.setitem(prepare.__globals__, "GDN_BOOL_OP_RANGES", expected_ranges)
+    missing_api = SimpleNamespace(fn=FakeKernel.fn, src=source)
+    with pytest.raises(ValueError, match="source-update/cache-reset API"):
+        prepare(missing_api, source_file)
+    source_file.write_text(source + "# unverified author edit\n")
+    with pytest.raises(ValueError, match="exact pinned author"):
+        prepare(FakeKernel(), source_file)

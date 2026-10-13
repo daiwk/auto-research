@@ -1,0 +1,404 @@
+{
+  "schema_version": 2,
+  "paper": "near",
+  "source_commit": "34148c2e29c01e9be7e4d5b8cbd09fd0f6016902",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A30"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "fidelity": "core_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "formal_comparison": false,
+  "protocols_not_pooled": true,
+  "original_official_test_score": false,
+  "dataset": {
+    "kind": "dataset",
+    "public_id": "xiaowu0162/longmemeval-cleaned",
+    "revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+    "upstream_file": "longmemeval_s_cleaned.json",
+    "transformation": "none; complete pinned public raw file",
+    "files": {
+      "longmemeval_s_cleaned.json": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442"
+    },
+    "source_verification": {
+      "immutable_revision_verified": true,
+      "verification": "existing public-source pin and local byte-hash verification before transfer"
+    }
+  },
+  "checkpoint": {
+    "kind": "checkpoint",
+    "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "files": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+      "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "source_verification": {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "immutable_revision_verified": true,
+      "file_sha256": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      },
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "verification": "pinned official-source offline byte-hash manifest"
+    }
+  },
+  "execution_context_path": "docs/research-audits/oct14-memory-execution-context-34148c2e.json",
+  "records": [
+    {
+      "seed": 42,
+      "split_policy": "query-disjoint-shared-bank",
+      "max_queries": 100,
+      "split_counts": {
+        "train": 60,
+        "validation": 20,
+        "test": 20
+      },
+      "split_revision": "0b7eec910a90684ebd001a12164899ed9e442fe670555a27878c79b8d90d50c7",
+      "baseline": {
+        "recall_at_10": 0.9,
+        "ndcg_at_10": 0.7155734475958628
+      },
+      "test": {
+        "recall_at_10": 0.9125,
+        "ndcg_at_10": 0.7410298192197697
+      },
+      "selection": {
+        "parameters": {
+          "depth": 1,
+          "normalize_residual": false,
+          "alpha": 1
+        },
+        "validation": {
+          "recall_at_10": 1,
+          "ndcg_at_10": 0.9108720130444524
+        }
+      },
+      "command": [
+        "/tmp/oct14-memory-overlay-4496283a/bin/python",
+        "scripts/run_oct13_memory.py",
+        "--paper",
+        "near",
+        "--raw-data",
+        "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+        "--model-dir",
+        "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+        "--device",
+        "cuda",
+        "--seed",
+        "42",
+        "--max-queries",
+        "100",
+        "--max-length",
+        "128",
+        "--batch-size",
+        "16",
+        "--adapter-epochs",
+        "2",
+        "--split-policy",
+        "query-disjoint-shared-bank",
+        "--diagnostic-only",
+        "--output",
+        "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/near-query-disjoint-shared-bank-100q-seed42.json"
+      ],
+      "elapsed_seconds": 65.44572398811579,
+      "raw_path": "docs/reproductions/2610.13314-near/metrics/raw/near-query-disjoint-shared-bank-100q-seed42.json",
+      "raw_sha256": "0004ee5048632ce6358b0e8a57f1726677b59de4defb6f8f7faa02a427a19878"
+    },
+    {
+      "seed": 43,
+      "split_policy": "query-disjoint-shared-bank",
+      "max_queries": 100,
+      "split_counts": {
+        "train": 60,
+        "validation": 20,
+        "test": 20
+      },
+      "split_revision": "0b7eec910a90684ebd001a12164899ed9e442fe670555a27878c79b8d90d50c7",
+      "baseline": {
+        "recall_at_10": 0.9,
+        "ndcg_at_10": 0.7155734475958628
+      },
+      "test": {
+        "recall_at_10": 0.9125,
+        "ndcg_at_10": 0.7410298192197697
+      },
+      "selection": {
+        "parameters": {
+          "depth": 1,
+          "normalize_residual": false,
+          "alpha": 1
+        },
+        "validation": {
+          "recall_at_10": 1,
+          "ndcg_at_10": 0.9108720130444524
+        }
+      },
+      "command": [
+        "/tmp/oct14-memory-overlay-4496283a/bin/python",
+        "scripts/run_oct13_memory.py",
+        "--paper",
+        "near",
+        "--raw-data",
+        "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+        "--model-dir",
+        "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+        "--device",
+        "cuda",
+        "--seed",
+        "43",
+        "--max-queries",
+        "100",
+        "--max-length",
+        "128",
+        "--batch-size",
+        "16",
+        "--adapter-epochs",
+        "2",
+        "--split-policy",
+        "query-disjoint-shared-bank",
+        "--diagnostic-only",
+        "--output",
+        "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/near-query-disjoint-shared-bank-100q-seed43.json"
+      ],
+      "elapsed_seconds": 67.64928506314754,
+      "raw_path": "docs/reproductions/2610.13314-near/metrics/raw/near-query-disjoint-shared-bank-100q-seed43.json",
+      "raw_sha256": "323d69304a18c0e0ea2b9833543a03644fc25353325d9db2872e943f0d0c61e5"
+    },
+    {
+      "seed": 44,
+      "split_policy": "query-disjoint-shared-bank",
+      "max_queries": 100,
+      "split_counts": {
+        "train": 60,
+        "validation": 20,
+        "test": 20
+      },
+      "split_revision": "0b7eec910a90684ebd001a12164899ed9e442fe670555a27878c79b8d90d50c7",
+      "baseline": {
+        "recall_at_10": 0.9,
+        "ndcg_at_10": 0.7155734475958628
+      },
+      "test": {
+        "recall_at_10": 0.9125,
+        "ndcg_at_10": 0.7410298192197697
+      },
+      "selection": {
+        "parameters": {
+          "depth": 1,
+          "normalize_residual": false,
+          "alpha": 1
+        },
+        "validation": {
+          "recall_at_10": 1,
+          "ndcg_at_10": 0.9108720130444524
+        }
+      },
+      "command": [
+        "/tmp/oct14-memory-overlay-4496283a/bin/python",
+        "scripts/run_oct13_memory.py",
+        "--paper",
+        "near",
+        "--raw-data",
+        "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+        "--model-dir",
+        "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+        "--device",
+        "cuda",
+        "--seed",
+        "44",
+        "--max-queries",
+        "100",
+        "--max-length",
+        "128",
+        "--batch-size",
+        "16",
+        "--adapter-epochs",
+        "2",
+        "--split-policy",
+        "query-disjoint-shared-bank",
+        "--diagnostic-only",
+        "--output",
+        "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/near-query-disjoint-shared-bank-100q-seed44.json"
+      ],
+      "elapsed_seconds": 63.84514790400863,
+      "raw_path": "docs/reproductions/2610.13314-near/metrics/raw/near-query-disjoint-shared-bank-100q-seed44.json",
+      "raw_sha256": "2c32588612766ac0225451e0e0e064a1c40bb384fb7bce534686fa8c4b417134"
+    },
+    {
+      "seed": 42,
+      "split_policy": "bank-disjoint",
+      "max_queries": 30,
+      "split_counts": {
+        "train": 27,
+        "validation": 1,
+        "test": 2
+      },
+      "split_revision": "8ef63c14b83172a5fc9c28434458d215d876464d428743c5fd4a64dd1dfeb6a5",
+      "baseline": {
+        "recall_at_10": 0.5,
+        "ndcg_at_10": 0.5
+      },
+      "test": {
+        "recall_at_10": 0.5,
+        "ndcg_at_10": 0.5
+      },
+      "selection": {
+        "parameters": {
+          "depth": 1,
+          "normalize_residual": false,
+          "alpha": 0.25
+        },
+        "validation": {
+          "recall_at_10": 1,
+          "ndcg_at_10": 1
+        }
+      },
+      "command": [
+        "/tmp/oct14-memory-overlay-4496283a/bin/python",
+        "scripts/run_oct13_memory.py",
+        "--paper",
+        "near",
+        "--raw-data",
+        "/tmp/auto-research-oct13-ccad3e67/public/longmemeval/longmemeval_s_cleaned.json",
+        "--model-dir",
+        "/tmp/auto-research-oct13-ccad3e67/public/minilm",
+        "--device",
+        "cuda",
+        "--seed",
+        "42",
+        "--max-queries",
+        "30",
+        "--max-length",
+        "128",
+        "--batch-size",
+        "16",
+        "--adapter-epochs",
+        "2",
+        "--split-policy",
+        "bank-disjoint",
+        "--diagnostic-only",
+        "--output",
+        "/tmp/auto-research-oct14-34148c2e/runs/memory-oct14/near-bank-disjoint-30q-seed42.json"
+      ],
+      "elapsed_seconds": 17.084698788821697,
+      "raw_path": "docs/reproductions/2610.13314-near/metrics/raw/near-bank-disjoint-30q-seed42.json",
+      "raw_sha256": "23fd58177cf2743bb713ba95c7ea72ed42c1be6a6fafd6b47d05e5a861ec70f1"
+    }
+  ],
+  "limitations": [
+    "LongMemEval cleaned JSON contains official evaluation instances; source-order 100 and 30 query subsets are re-split only for a nonofficial research diagnostic, not the official benchmark test score.",
+    "Shared-bank queries use fixed 60/20/20 query-ID hash splits over shared frozen unlabelled memories; no unseen-memory-bank generalization claim.",
+    "The three seeds reuse the same data split and yield identical ranking metrics; they are stochastic algorithm checks, not independent dataset repetitions.",
+    "Strict bank-disjoint 30-query diagnostics contain only 27 train, 1 validation and 2 test queries and are not pooled with shared-bank results.",
+    "All hyperparameters/checkpoints are chosen on validation only; test labels are used only by the final scorer.",
+    "MiniLM/max_length128/exact search replace original backbones/full LMEB/HNSW; no downstream QA or production result was reproduced."
+  ],
+  "adapter_key": "near",
+  "method": "near",
+  "manifest_ref": "reproduction:near",
+  "measured_locally": true,
+  "device": "cuda",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "strict_diagnostic_seeds": [
+    42
+  ],
+  "metrics": {
+    "shared100.queries.total": 100,
+    "shared100.queries.train": 60,
+    "shared100.queries.validation": 20,
+    "shared100.queries.test": 20,
+    "shared100.seed42.test.recall_at_10": 0.9125,
+    "shared100.seed42.test.ndcg_at_10": 0.7410298192197697,
+    "shared100.seed42.baseline.recall_at_10": 0.9,
+    "shared100.seed42.baseline.ndcg_at_10": 0.7155734475958628,
+    "shared100.seed43.test.recall_at_10": 0.9125,
+    "shared100.seed43.test.ndcg_at_10": 0.7410298192197697,
+    "shared100.seed43.baseline.recall_at_10": 0.9,
+    "shared100.seed43.baseline.ndcg_at_10": 0.7155734475958628,
+    "shared100.seed44.test.recall_at_10": 0.9125,
+    "shared100.seed44.test.ndcg_at_10": 0.7410298192197697,
+    "shared100.seed44.baseline.recall_at_10": 0.9,
+    "shared100.seed44.baseline.ndcg_at_10": 0.7155734475958628,
+    "strict30.queries.total": 30,
+    "strict30.queries.train": 27,
+    "strict30.queries.validation": 1,
+    "strict30.queries.test": 2,
+    "strict30.seed42.test.recall_at_10": 0.5,
+    "strict30.seed42.test.ndcg_at_10": 0.5,
+    "strict30.seed42.baseline.recall_at_10": 0.5,
+    "strict30.seed42.baseline.ndcg_at_10": 0.5
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "promotion_eligible": false,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "strict_diagnostic_seeds": [
+      42
+    ],
+    "test_isolated": true,
+    "test_used_for_selection": false,
+    "official_test_score": false,
+    "shared_unlabelled_memory": true,
+    "unseen_bank_generalization": false,
+    "protocols_not_pooled": true,
+    "seed_repeats_same_dataset": true,
+    "claim_policy": "Nonofficial research diagnostic on official evaluation instances re-split locally; shared100 and strict30 are separate, same-data seeds are not independent dataset repetitions."
+  },
+  "provenance": {
+    "created_at": "2026-10-13T17:04:54.053110+00:00",
+    "code_commit": "34148c2e29c01e9be7e4d5b8cbd09fd0f6016902",
+    "artifact_path": "docs/reproductions/2610.13314-near/metrics/a30-diagnostics-34148c2e.json",
+    "dataset_id": "xiaowu0162/longmemeval-cleaned",
+    "dataset_revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+    "dataset_fingerprint": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+    "dataset_fingerprint_kind": "SHA256 of the complete pinned raw public JSON actually used for all runs",
+    "protocol_split_fingerprints": {
+      "shared100": "0b7eec910a90684ebd001a12164899ed9e442fe670555a27878c79b8d90d50c7",
+      "strict30": "8ef63c14b83172a5fc9c28434458d215d876464d428743c5fd4a64dd1dfeb6a5"
+    },
+    "execution_context_path": "docs/research-audits/oct14-memory-execution-context-34148c2e.json",
+    "raw_results": [
+      {
+        "path": "docs/reproductions/2610.13314-near/metrics/raw/near-query-disjoint-shared-bank-100q-seed42.json",
+        "sha256": "0004ee5048632ce6358b0e8a57f1726677b59de4defb6f8f7faa02a427a19878"
+      },
+      {
+        "path": "docs/reproductions/2610.13314-near/metrics/raw/near-query-disjoint-shared-bank-100q-seed43.json",
+        "sha256": "323d69304a18c0e0ea2b9833543a03644fc25353325d9db2872e943f0d0c61e5"
+      },
+      {
+        "path": "docs/reproductions/2610.13314-near/metrics/raw/near-query-disjoint-shared-bank-100q-seed44.json",
+        "sha256": "2c32588612766ac0225451e0e0e064a1c40bb384fb7bce534686fa8c4b417134"
+      },
+      {
+        "path": "docs/reproductions/2610.13314-near/metrics/raw/near-bank-disjoint-30q-seed42.json",
+        "sha256": "23fd58177cf2743bb713ba95c7ea72ed42c1be6a6fafd6b47d05e5a861ec70f1"
+      }
+    ],
+    "sanitized": true
+  }
+}

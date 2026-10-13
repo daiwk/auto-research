@@ -1,0 +1,467 @@
+{
+  "paper": "near",
+  "seed": 42,
+  "device": "cuda",
+  "evaluation_tier": "l2_public_dataset",
+  "fidelity": "core_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "protocol": {
+    "dataset": "xiaowu0162/longmemeval-cleaned",
+    "dataset_revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+    "raw_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+    "split_ids": {
+      "train": [
+        "e47becba",
+        "118b2229",
+        "51a45a95",
+        "58bf7951",
+        "c5e8278d",
+        "6ade9755",
+        "6f9b354f",
+        "58ef2f1c",
+        "f8c5f88b",
+        "7527f7e2",
+        "3b6f954b",
+        "726462e0",
+        "94f70d80",
+        "66f24dbb",
+        "af8d2e46",
+        "dccbc061",
+        "8ebdbe50",
+        "6b168ec8",
+        "75499fd8",
+        "21436231",
+        "95bcc1c8",
+        "0862e8bf",
+        "853b0a1d",
+        "a06e4cfe",
+        "37d43f65",
+        "1e043500",
+        "ad7109d1"
+      ],
+      "validation": [
+        "c8c3f81d"
+      ],
+      "test": [
+        "5d3d2817",
+        "c960da58"
+      ]
+    },
+    "split_revision": "8ef63c14b83172a5fc9c28434458d215d876464d428743c5fd4a64dd1dfeb6a5",
+    "split_policy": "bank-disjoint",
+    "split_rule": "connected candidate-session ID components; fixed hash order; 60/20/20",
+    "shared_unlabelled_memory": false,
+    "diagnostic_only_requested": true,
+    "unseen_bank_generalization": false,
+    "memory_encoding_cache": "immutable frozen encodings keyed by source text; no query or relevance",
+    "max_queries": 30,
+    "max_length": 128,
+    "encoder": {
+      "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "files": {
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      }
+    },
+    "index": "exact-inner-product (not original HNSW)",
+    "answer_fields_exposed": false,
+    "label_boundary": "train labels for optional adapter loss; validation selection; test scorer only",
+    "unanswerable_queries": 0,
+    "nonofficial_benchmark": true
+  },
+  "comparison_contract": {
+    "protocol_id": "oct13-near-longmemeval-minilm-bank-disjoint-v1",
+    "dataset_revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f:d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+    "split_revision": "8ef63c14b83172a5fc9c28434458d215d876464d428743c5fd4a64dd1dfeb6a5",
+    "baseline": "frozen MiniLM native pooled cosine",
+    "code_revision": "7f13a0c9ee46c1847c99bf41e2b3fcf6c0a89bda41ab127f5a348ffaf402c002",
+    "test_isolated": true
+  },
+  "selection": {
+    "parameters": {
+      "depth": 1,
+      "normalize_residual": false,
+      "alpha": 0.25
+    },
+    "validation": {
+      "recall_at_10": 1.0,
+      "ndcg_at_10": 1.0
+    }
+  },
+  "validation_trials": [
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": false,
+        "alpha": 0.25
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": false,
+        "alpha": 0.5
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": false,
+        "alpha": 1
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": false,
+        "alpha": 2
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": false,
+        "alpha": 4
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": true,
+        "alpha": 0.25
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": true,
+        "alpha": 0.5
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": true,
+        "alpha": 1
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": true,
+        "alpha": 2
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 1,
+        "normalize_residual": true,
+        "alpha": 4
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": false,
+        "alpha": 0.25
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": false,
+        "alpha": 0.5
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": false,
+        "alpha": 1
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": false,
+        "alpha": 2
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": false,
+        "alpha": 4
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": true,
+        "alpha": 0.25
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": true,
+        "alpha": 0.5
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": true,
+        "alpha": 1
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": true,
+        "alpha": 2
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 2,
+        "normalize_residual": true,
+        "alpha": 4
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": false,
+        "alpha": 0.25
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": false,
+        "alpha": 0.5
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": false,
+        "alpha": 1
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": false,
+        "alpha": 2
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": false,
+        "alpha": 4
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": true,
+        "alpha": 0.25
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": true,
+        "alpha": 0.5
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": true,
+        "alpha": 1
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": true,
+        "alpha": 2
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    },
+    {
+      "parameters": {
+        "depth": 3,
+        "normalize_residual": true,
+        "alpha": 4
+      },
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 1.0
+      }
+    }
+  ],
+  "test": {
+    "recall_at_10": 0.5,
+    "ndcg_at_10": 0.5
+  },
+  "baseline": {
+    "recall_at_10": 0.5,
+    "ndcg_at_10": 0.5
+  },
+  "test_rankings": {
+    "5d3d2817": [
+      "sharegpt_BKl952A_23",
+      "49b78a55_1",
+      "sharegpt_ebWP6Hz_0",
+      "e00298a6_1",
+      "670ca40e",
+      "sharegpt_P6UZzFA_9",
+      "sharegpt_Qga4bRp_0",
+      "e93efd9a_1",
+      "ultrachat_371333",
+      "ultrachat_171456"
+    ],
+    "c960da58": [
+      "answer_e05e4612",
+      "ultrachat_198948",
+      "sharegpt_ErOTMZ3_59",
+      "e7cc239c_4",
+      "737f3685_1",
+      "ultrachat_418604",
+      "sharegpt_OAUjazp_0",
+      "sharegpt_CdnyHep_0",
+      "sharegpt_uulGKeK_0",
+      "ultrachat_575109"
+    ]
+  },
+  "limitations": [
+    "MiniLM replaces paper backbones",
+    "exact search replaces HNSW",
+    "bounded source-order query set; not full LMEB or downstream QA",
+    "three seeds are required before any stable comparison claim"
+  ]
+}

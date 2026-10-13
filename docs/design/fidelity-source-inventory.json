@@ -11005,7 +11005,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "verify",
-        "line": 120,
+        "line": 123,
         "qualified_name": "ReplayBuffer.verify",
         "expression": "self.refreshes += 1",
         "fingerprint": "cdb3ffd258d51dff71f9a2a6723e78e27e55691e22259f3a77cbc19d8085f47f"
@@ -11989,7 +11989,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "student_rates",
-        "line": 74,
+        "line": 75,
         "qualified_name": "CheckpointConstruction.student_rates",
         "expression": "problem.answer",
         "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
@@ -11997,7 +11997,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "target_outcomes",
-        "line": 125,
+        "line": 126,
         "qualified_name": "CheckpointConstruction.target_outcomes",
         "expression": "problem.answer",
         "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
@@ -12005,7 +12005,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 145,
+        "line": 146,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12013,7 +12013,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "train_rl",
-        "line": 161,
+        "line": 162,
         "qualified_name": "train_rl",
         "expression": "problem.answer",
         "fingerprint": "bb90279078a7ceaa4fbdb166112b87b43a684abfe903396e67233ca4e0495779"
@@ -12021,7 +12021,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 170,
+        "line": 171,
         "qualified_name": "run",
         "expression": "r['answer']",
         "fingerprint": "16bcc64b7732b44ec2b36bf46d5e94e1380c678923c44a75b4f13251de1d001d"

@@ -18,5 +18,5 @@
     "spec_key": "near"
   },
   "requires_gpu_validation": true,
-  "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a100.json"
+  "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a30.json"
 }

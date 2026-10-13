@@ -100,6 +100,14 @@ PYTHONPATH=src python scripts/run_replayssm.py \
 
 adapter 的 `dataset_dir/replayssm.json` 包含 `upstream` 与 `steps`。作者需要 PyTorch/Triton + 真实 NVIDIA CUDA，脚本不安装依赖、不加载模型权重、不声称完成 vLLM build。
 
+### 固定作者源码的 JIT 语法兼容
+
+2026-10-13 的 A100 `34148c2e` 实跑在 GDN kernel 编译时失败：当前 Triton 3.3 不接受 `TWOPREC and (not is_flush) and (not is_seed)` 三项链式布尔 AST。该失败保留，不能算作三种子成功，也不能冒充原封不动的 native serving。
+
+兼容入口只对固定作者函数 `_gdn_unf_vf_step_kernel` 的已核验源文本加左结合括号，变为 `(TWOPREC and (not is_flush)) and (not is_seed)`。唯一范围为 JIT 函数相对第 122 行、列 7–51；作者文件 SHA256 为 `80311d6654584c633db01f76e3be5bc189fbdfab031c1bc0711757e1cd09eec3`，原 JIT 文本 SHA256 为 `7f60e87d974bfea4b5095980599043d8a7a615db4ba1b5fdbf7a0c1d0bfc6ab1`。源文件、函数身份、范围或 JIT cache-reset API 不匹配时立即拒绝，不提供宽松 fallback；作者磁盘文件及共享 Torch/Triton 都不改。
+
+此变换仅用于原算法的兼容编译，未替换 kernel、精度或刷新逻辑。结果记录原文与编译文本的 SHA256、精确变换范围。CPU 测试核验 AST 结构和纯布尔标志的计算结果及短路次序；不声称该变换适用于带副作用的自定义 Python truth 对象。新的冻结源码仍须重新在真实 A100 完成三种子，CPU 测试不替代 CUDA 验证。
+
 ### 本地结果与边界
 
 [cpu-contracts.json](metrics/cpu-contracts.json)记录 seed 42 独立参考：最大输出误差 `1.1920928955078125e-7`、接受 12 个 token、刷新 3 次；4 个行为测试覆盖公式、GDN、pending/rollback 和低精度 read 不进入 recurrence。

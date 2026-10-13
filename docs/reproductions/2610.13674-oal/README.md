@@ -116,6 +116,17 @@ PYTHONPATH=src python scripts/run_oal.py \
 
 [cpu-contracts.json](metrics/cpu-contracts.json)记录已重跑的 5 个测试：因果贡献公式、bootstrap/无人工组数上限、正核与 dense/HD 等价、输出校准梯度、实际 Qwen 模块转换与 LoRA 梯度。每项先固定 seed 42，递推等价/校准专用用例内部使用 seed 11/2；不是独立多 seed 能力实验。没有 CPU 单测到 A100 完成的自动晋级。
 
+2026-10-14（北京时间）已在 NVIDIA A100-SXM4-80GB 执行固定 Qwen2.5-0.5B Base 与 WikiText-2 的三 seed 同预算对照，执行源码绑定 `4496283ac8e37c070b8f71b20af6138526cbba15`。每个分支真实进行 3 次 LoRA 更新；仅转换第 4 层、32-token 分块、64 次 bootstrap、每个核初始化 10 次校准，validation/test 各 2 个独立块。每个 seed 的两个分支都有非零参数变化，原始 JSON、状态与日志分别保留。标准 schema v2 的 [a100-three-seeds-4496283a.json](metrics/a100-three-seeds-4496283a.json) 保存原生指标、metadata、源码版本、逐 seed 数值和聚合；[脱敏 GPU receipt](../../gpu-validations/oal-a100-20261013.json)仅证明这一缩小路径真实执行。
+
+| 本地 seed | Softmax + LoRA test PPL | OAL + LoRA test PPL | dense/HD 最大误差 |
+| --- | ---: | ---: | ---: |
+| 42 | 44.1219 | 41.0782 | $1.18\times10^{-6}$ |
+| 43 | 43.2296 | 42.3337 | $1.18\times10^{-6}$ |
+| 44 | 43.1287 | 43.2233 | $1.28\times10^{-6}$ |
+| 均值 ± 样本标准差 | 43.4934 ± 0.5466 | 42.2117 ± 1.0778 | — |
+
+Seed 44 的 OAL PPL **略差于**同预算 softmax+LoRA，负结果不删除。OAL 校准输出 MSE 均值为 0.030467，learned-global 为 0.042056；不同数据、序列长度和层范围使其不能直接对照原论文 Table 2。三 seed、两个极短 test 块仍是 `L1 / diagnostic_only`，不是原文 WikiText-103 / 512-step 协议完成，也不能据此声称稳定能力提升。
+
 作者 HD block-GEMM/Triton 后端未移植，无延迟、吞吐或带宽加速声明。未执行原文下游 benchmark，未接入 Evolve。仅凭原文 LoRA 包的参数配置不能声明转换成功，必须记录实际参数变化和验证/test NLL，包括负结果。
 
 ### 代码映射

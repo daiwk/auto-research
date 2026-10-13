@@ -6,6 +6,8 @@ PyTorch reference are advertised as native bandwidth or serving speedups.
 from __future__ import annotations
 
 import argparse
+import ast
+from hashlib import sha256
 import json
 from pathlib import Path
 import subprocess
@@ -17,6 +19,93 @@ from auto_research.foundation_models.replayssm import gdn_mechanism_suite, mecha
 from auto_research.oct12_public_sources import sha256_file
 
 UPSTREAM_REVISION = "5d3ea597d479ef0c8e9e2eb2845a2adfdb9a8b44"
+GDN_FILE_SHA256 = "80311d6654584c633db01f76e3be5bc189fbdfab031c1bc0711757e1cd09eec3"
+GDN_JIT_SOURCE_SHA256 = "7f60e87d974bfea4b5095980599043d8a7a615db4ba1b5fdbf7a0c1d0bfc6ab1"
+GDN_BOOL_OP_RANGES = [{"line": 122, "column": 7, "end_line": 122,
+                       "end_column": 51, "operator": "and", "operands": 3}]
+
+
+def parenthesize_boolop_chains(source: str, expected_sha256: str) -> tuple[str, dict]:
+    """Only parenthesize 3+ item and/or chains; preserve all other source bytes.
+
+    The caller pins the sole permitted author kernel and source hash. This is
+    a syntax adapter for Triton 3.3, not a substitute kernel or algorithm. The
+    target operands are pure scalar flags; no custom Python truth operators
+    occur in the pinned source. Evaluation order and short-circuiting of bool
+    flags are tested separately.
+    """
+    if sha256(source.encode()).hexdigest() != expected_sha256 or not source.isascii():
+        raise ValueError("JIT source identity mismatch; no compatibility transformation applied")
+    tree = ast.parse(source)
+    if (len(tree.body) != 1 or not isinstance(tree.body[0], ast.FunctionDef)
+            or tree.body[0].name != "_gdn_unf_vf_step_kernel"):
+        raise ValueError("compatibility is restricted to the pinned GDN function")
+    lines = source.splitlines(keepends=True)
+    starts, offset = [], 0
+    for line in lines:
+        starts.append(offset)
+        offset += len(line)
+
+    insertions: dict[int, str] = {}
+    ranges = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.BoolOp) or len(node.values) < 3:
+            continue
+        operator = "and" if isinstance(node.op, ast.And) else "or"
+        start = starts[node.lineno - 1] + node.col_offset
+        insertions[start] = insertions.get(start, "") + "(" * (len(node.values) - 2)
+        for value in node.values[1:-1]:
+            end = starts[value.end_lineno - 1] + value.end_col_offset
+            insertions[end] = insertions.get(end, "") + ")"
+        ranges.append({"line": node.lineno, "column": node.col_offset,
+                       "end_line": node.end_lineno, "end_column": node.end_col_offset,
+                       "operator": operator, "operands": len(node.values)})
+    rewritten = source
+    for position in sorted(insertions, reverse=True):
+        rewritten = rewritten[:position] + insertions[position] + rewritten[position:]
+
+    class FlattenAssociativeBoolOps(ast.NodeTransformer):
+        def visit_BoolOp(self, node):
+            self.generic_visit(node)
+            values = []
+            for child in node.values:
+                values.extend(child.values if isinstance(child, ast.BoolOp) and type(child.op) is type(node.op)
+                              else [child])
+            node.values = values
+            return node
+
+    def canonical(text):
+        return ast.dump(FlattenAssociativeBoolOps().visit(ast.parse(text)), include_attributes=False)
+
+    if canonical(source) != canonical(rewritten):
+        raise ValueError("compatibility changed non-Boolean AST structure")
+    if any(isinstance(node, ast.BoolOp) and len(node.values) > 2 for node in ast.walk(ast.parse(rewritten))):
+        raise ValueError("compatibility left a chained Boolean operation")
+    return rewritten, {"original_jit_source_sha256": expected_sha256,
+                       "compiled_jit_source_sha256": sha256(rewritten.encode()).hexdigest(),
+                       "function": "_gdn_unf_vf_step_kernel",
+                       "transformation": "left-associated parentheses only for 3+ operand and/or chains",
+                       "source_ranges_relative_to_jit_function": ranges,
+                       "associative_boolean_ast_equivalent": True,
+                       "author_file_modified": False}
+
+
+def prepare_gdn_jit_compatibility(kernel, source_file: Path) -> dict:
+    """Guard actual author bytes and reset the JIT cache through its explicit API."""
+    if (sha256_file(source_file) != GDN_FILE_SHA256
+            or kernel.fn.__module__ != "emulation.gdn_replay_unf_vf"
+            or kernel.fn.__name__ != "_gdn_unf_vf_step_kernel"):
+        raise ValueError("only the exact pinned author GDN kernel can be adapted")
+    rewritten, audit = parenthesize_boolop_chains(kernel.src, GDN_JIT_SOURCE_SHA256)
+    if audit["source_ranges_relative_to_jit_function"] != GDN_BOOL_OP_RANGES:
+        raise ValueError("pinned author source must contain exactly the known Boolean chain")
+    if not callable(getattr(kernel, "_unsafe_update_src", None)):
+        raise ValueError("Triton does not expose the required source-update/cache-reset API")
+    kernel._unsafe_update_src(rewritten)
+    if kernel.src != rewritten or sha256_file(source_file) != GDN_FILE_SHA256:
+        raise ValueError("JIT compatibility or author-file immutability check failed")
+    return {**audit, "original_author_file_sha256": GDN_FILE_SHA256,
+            "native_serving_claim": False}
 
 
 def author_precision_suite(upstream: Path, steps: int, seed: int) -> dict:
@@ -37,6 +126,11 @@ def author_precision_suite(upstream: Path, steps: int, seed: int) -> dict:
     if not Path(emulation.__file__).resolve().is_relative_to(upstream.resolve()):
         raise ValueError("imported emulation package is not from the verified author source")
     from emulation import GDNReplay, Mamba2Replay
+    from emulation.gdn_replay_unf_vf import _gdn_unf_vf_step_kernel
+    if GDNReplay.step.__globals__["_gdn_unf_vf_step_kernel"] is not _gdn_unf_vf_step_kernel:
+        raise ValueError("GDN API does not use the verified author kernel")
+    compatibility = prepare_gdn_jit_compatibility(
+        _gdn_unf_vf_step_kernel, upstream / "emulation" / "gdn_replay_unf_vf.py")
 
     torch.manual_seed(seed)
     metrics = {}
@@ -78,6 +172,7 @@ def author_precision_suite(upstream: Path, steps: int, seed: int) -> dict:
             raise RuntimeError("precision-independence check did not exercise rounding")
         metrics[f"{architecture}/independent_read_cast_passed"] = True
     return {"metrics": metrics, "upstream_revision": revision,
+            "jit_source_compatibility": compatibility,
             "upstream_source_files_sha256": {
                 name: sha256_file(upstream / "emulation" / name)
                 for name in ("__init__.py", "api.py", "modes.py", "quant_tl.py", "mamba2_replay.py", "gdn_replay_unf_vf.py")},

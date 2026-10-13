@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -101,6 +102,53 @@ def test_explicit_diagnostic_flag_cannot_be_promoted_even_with_strict_bank(reque
 def test_diagnostic_flag_rejects_ambiguous_string_false():
     with pytest.raises(ValueError, match="explicit boolean"):
         evidence_flags({"diagnostic_only": "false"}, {"shared_unlabelled_memory": False})
+
+
+@pytest.mark.parametrize("key,slug", [
+    ("near", "2610.13314-near"),
+    ("beyond-final-embedding", "2610.13277-beyond-final-embedding"),
+])
+def test_memory_gpu_curation_keeps_protocols_separate_and_imports_only_real_metrics(key, slug, tmp_path):
+    from auto_research.experiment_store.store import ExperimentStore
+    from auto_research.gpu_validation import load_gpu_receipt
+
+    root = Path(__file__).resolve().parents[2]
+    path = root / "docs/reproductions" / slug / "metrics/a30-diagnostics-34148c2e.json"
+    native = json.loads(path.read_text())
+    assert native["schema_version"] == 2
+    assert native["seeds"] == [42, 43, 44]
+    assert native["strict_diagnostic_seeds"] == [42]
+    assert native["evaluation_protocol"]["tier"] == "l1_mechanism"
+    assert native["evaluation_protocol"]["formal_comparison"] is False
+    assert native["promotion_eligible"] is False
+    assert native["provenance"]["code_commit"] == "34148c2e29c01e9be7e4d5b8cbd09fd0f6016902"
+    assert native["provenance"]["dataset_fingerprint"] == native["dataset"]["files"]["longmemeval_s_cleaned.json"]
+    assert native["metrics"]["shared100.queries.test"] == 20
+    assert native["metrics"]["strict30.queries.test"] == 2
+    for record in native["records"]:
+        raw = (root / record["raw_path"]).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == record["raw_sha256"]
+        result = json.loads(raw)
+        assert result["diagnostic_only"] is True and result["promotion_eligible"] is False
+        prefix = "shared100" if record["split_policy"] == "query-disjoint-shared-bank" else "strict30"
+        for variant in ("test", "baseline"):
+            for metric, value in result[variant].items():
+                assert native["metrics"][f"{prefix}.seed{record['seed']}.{variant}.{metric}"] == value
+        if key == "beyond-final-embedding" and record["seed"] == 43:
+            assert result["selection"]["epoch"] == 0
+            assert result["parameter_update_l2"] == 0
+            assert len(result["training_losses"]) == 2
+    with ExperimentStore(tmp_path / "experiments.sqlite") as store:
+        store.import_artifact(path, root=root)
+        row = store.rows(method=key)[0]
+        assert row.seed == "[42, 43, 44]"
+        assert row.metrics == native["metrics"]
+        assert "schema_version" not in row.metrics
+        assert all(metric.startswith(("shared100.", "strict30.")) for metric in row.metrics)
+    artifact = f"docs/gpu-validations/oct13-{key}-a30.json"
+    receipt = load_gpu_receipt(root / artifact)
+    assert receipt["accelerator"]["model"] == "NVIDIA A30"
+    assert receipt["provenance"]["artifact_path"] == artifact
 
 
 def test_sparse_floor_aggregates_by_memory_and_preserves_unmatched_candidates():
@@ -261,7 +309,8 @@ def test_oct13_owned_paper_metadata_and_documentation_are_complete(key, identifi
     spec = load_spec(root / "src/auto_research/reproductions" / module / "paper.yaml")
     assert validate_spec(spec, root=root) == []
     assert spec.execution["requires_gpu_validation"] is True
-    assert spec.execution["gpu_validation_artifact"] == f"docs/gpu-validations/oct13-{key}-a100.json"
+    accelerator = "a30" if key in {"near", "beyond-final-embedding"} else "a100"
+    assert spec.execution["gpu_validation_artifact"] == f"docs/gpu-validations/oct13-{key}-{accelerator}.json"
     assert spec.evolve_operators == ()  # no registry-only evolve integration claim
     readme = root / "docs/reproductions" / f"{identifier}-{key}" / "README.md"
     text = readme.read_text()

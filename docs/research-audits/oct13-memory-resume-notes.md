@@ -4,9 +4,23 @@
 2026-10-14 用户已明确恢复；最新续办状态以 [GPU TODO](oct13-gpu-todo.md) 为准。
 下面命令在暂停阶段没有执行，恢复阶段必须先重新核验实际文件完整性。
 
-本说明只记录本地已有返回状态，不存主机名、用户名、SSH 别名、驱动或构建字符串；未知状态明确写未知。不新增 GPU receipt，不将准备工作写成 GPU 完成。
+本说明不存主机名、用户名、SSH 别名、驱动或构建字符串；未知状态明确写未知。暂停时未新增 receipt，恢复后的真实 GPU 证据单独链接如下，不将准备工作写成 GPU 完成。
 
-## 当前已知状态
+## 2026-10-14 恢复后实际完成
+
+用户恢复网络授权后，MiniLM 六个资源文件和 provenance、LongMemEval 原文件 `277383467` bytes 及 raw-only provenance 均已在执行端重新逐文件 byte SHA 核验通过。旧失败和旧源码快照未覆盖。
+
+独立 overlay `/tmp/oct14-memory-overlay-4496283a` 安装并核验成功：transformers4.57.3、huggingface-hub0.36.0、tokenizers0.22.2、safetensors0.8.0、tqdm4.69.0；所有安装均 target/no-deps/ignore-installed。共享 Torch 文件来源安装前后相同，未修改共享运行时。离线 CPU MiniLM 真实前向输出有限值。准备阶段不据此宣称 CUDA 完成。
+
+随后使用冻结源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`，tar SHA `062bac1d086553e360b69206ad252243619d166175b0fa366919d6d9e1310df7`，新不可覆盖目录 `/tmp/auto-research-oct14-34148c2e`；11个关键文件与提交字节 SHA 核对一致。NVIDIA A30 上八项顺序运行均返回 exit0：NEAR/Beyond 各 shared-bank100q seed42/43/44，另各 strict bank-disjoint30q seed42。全部显式 `--diagnostic-only`，max_length128、batch16、adapter_epochs2；未并发 CUDA。
+
+LongMemEval 源文件来自官方 evaluation instances，本地重新切分只用于非官方诊断，不是官方 test 成绩。三个 seed 共用同一切分且最终排名指标相同，不当独立数据重复。Strict30仅27/1/2，与 shared100的60/20/20不合并统计；所有结果不可晋级。Beyond shared seed43与strict seed42均选 epoch0，训练后未获选的负结果保留。
+
+原始返回 JSON 已取回 `.cache/oct14-memory-raw-34148c2e`，八份 raw 完整 byte SHA 与执行上下文匹配。提交证据见 [执行上下文](oct14-memory-execution-context-34148c2e.json)、[NEAR 汇总](../reproductions/2610.13314-near/metrics/a30-diagnostics-34148c2e.json)、[Beyond 汇总](../reproductions/2610.13277-beyond-final-embedding/metrics/a30-diagnostics-34148c2e.json)，以及 [NEAR receipt](../gpu-validations/oct13-near-a30.json) / [Beyond receipt](../gpu-validations/oct13-beyond-final-embedding-a30.json)。原 raw 的 evaluation tier 不覆盖，curation 明确为 L1 mechanism diagnostic。后续 receipt 路径/spec 绑定只改 metadata，不将新绑定提交冒充已执行 source。
+
+精确可恢复参数已保存于执行上下文的 `jobs[].command`（全部 argv、seed、timeout、exit、输出 SHA）；如果重跑必须使用全新 output/log 路径，不能覆写本轮结果。下文为旧暂停检查点，保留用于审计，不再表示当前资源状态。
+
+## 2026-10-13 历史暂停状态
 
 | 项目 | 本轮实际状态 | 不能据此宣称 |
 | --- | --- | --- |

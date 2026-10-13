@@ -66,20 +66,26 @@ $R_{\rm mat}=\mathbf1[\operatorname{Verify}(y,\mathcal E_{C_y})]$，仅检查声
 
 ### 数据与标签访问协议
 
-公开checkpoint/data必须固定revision并通过既有 `checkpoint_source` / `validate_holdout` 的文件hash验证。GSM8K仅从官方train拆train/validation，官方test不打开。Qwen2.5-0.5B-Instruct revision为 `7ae557604adf67be50417f59c2c2f167def9a775`，需要teacher/reasoner时用Qwen2.5-7B-Instruct revision `bb46c15ee4bb56c5b63245ef50fd7637234d6f75`。参考答案仅在外部训练verifier、SFT监督target或明确的train-only数据构建teacher边界读取；被评估student/agent prompt不接收当前题gold/plan。
+公开checkpoint/data必须固定revision并通过既有 `checkpoint_source` / `validate_holdout` 的文件hash验证。本轮SOAR队列使用明确派生的**工具文档属性QA训练诊断**，不在不匹配的WikiText+GSM上宣称知识QA效果。Actor及冻结reference都用Qwen2.5-0.5B-Instruct revision `7ae557604adf67be50417f59c2c2f167def9a775`，SOAR无需装载7B teacher。参考答案只由独立训练奖励/离线scorer读取，agent消息只含问题与真实工具返回的文档，不接收当前题gold/plan。
+
+独立KB来自[固定公开EcoAgent catalog](https://github.com/Elliotes/EcoAgent/blob/bc5db40a20b254c5249401d2220ea71b06c86a5c/data/processed/tools_clean_with_reliability.csv)，revision为 `bc5db40a20b254c5249401d2220ea71b06c86a5c`，原CSV SHA-256为 `1b388d317aeb1004c266eb65ff64a4864e7907412a2fbfb4667c492a871e8d8e`。`scripts/prepare_soar_catalog_qa.py`先封存全部5,172个tool的原始名称、UID、来源、URL、标签和说明（8,394个不超过900字符的连续片段），不使用reliability/quality分数、train_pairs或任何测试标签。之后才按tool UID固定hash分组，生成8条train和4条validation属性问题；两组tool不重叠，查询属性为catalog UID或文档URL。所有问题共享事先封存的完整KB，因此是共享知识库内的检索/来源流诊断，不是未知知识库泛化。
+
+切分清单将source明确标成 `Elliotes/EcoAgent#derived-tool-document-attribute-training-QA-v1`；其中 `source_split=train` 仅表示本地生成的training-QA源池，不冒充EcoAgent官方train split。generator、独立KB、源QA和两分区的SHA-256均保存；不打开 `eval_real_test.jsonl`，不把LongMemEval等官方eval改成训练集。数据与配置已准备不等于GPU训练已完成。
 
 必须有独立public corpus的revision/hash/rows/source URL；documents不得包含benchmark answer/gold字段。policy实际产生search，recall每次只收query，再接双stream观察。按真实trajectory reward做LoRA；without-source-reward另跑。没有corpus或组全零优势必须真实失败。
 
 ### 可执行入口与预算
 
-入口为 `scripts/run_oct13_post_training.py --method soar`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student/teacher镜像路径、public id/revision、train/validation路径、split manifest与dataset revision。下面是待实跑配置示例，不表示GPU已完成：
+入口为 `scripts/run_oct13_post_training.py --method soar`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student镜像路径及public id/revision、派生train/validation路径、split manifest、dataset revision与独立KB来源。下面是待实跑配置示例，不表示GPU已完成：
 
 ```bash
 PYTHONPATH=src python scripts/run_oct13_post_training.py \
   --method soar --config data/oct13_execution.json \
-  --device cuda --seed 42 --train-examples 8 --group 4 --max-turns 3 --max-tokens 256 --steps 2 --corpus-path "$CORPUS" --corpus-id "$CORPUS_ID" --corpus-revision "$CORPUS_REV" \
+  --device cuda --seed 42 --train-examples 8 --group 4 --max-turns 3 --max-tokens 256 --steps 4 --verifier normalized-em --variant source-consistent --corpus-path "$CORPUS" --corpus-id Elliotes/EcoAgent --corpus-revision bc5db40a20b254c5249401d2220ea71b06c86a5c \
   --output runs/oct13/soar-42
 ```
+
+对照仅将variant改为 `without-source-reward`，重新从同一checkpoint和seed初始化，保持同一数据、4 steps、4轨迹/组、3 turns和256 token响应上限。两臂各最多36,864个生成token（含内部recall与前后评估），这是配置上界，不是已测成本或FLOPs。真实模型必须产生search并读取公开说明；零检索、无有效来源匹配或零优势不得包装成来源选择能力验证。
 
 真实生成、拒绝、难度校准、teacher profiling及监督token预算进入结果；失败写不可覆盖的 `failure.json`，成功写 `result.json` / `report.md`。不能仅以本地目录名伪造source metadata。
 
@@ -89,13 +95,13 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 ### 代码映射
 
-algorithm.py：双stream、EM、真实文本index及reward；checkpoint.py：policy工具循环、隔离recall、trajectory优势/KL/LoRA。
+algorithm.py：双stream、EM、真实文本index及reward；checkpoint.py：policy工具循环、隔离recall、trajectory优势/KL/LoRA。`scripts/prepare_soar_catalog_qa.py`：固定catalog白名单KB与tool-group切分；其隔离与哈希回归在 `tests/reproductions/test_soar_catalog_qa.py`。
 
 共享 `post_training/oct13_common.py` 只承担资源装载、成本记录、response likelihood、真实optimizer step和输出；论文机制保留在本目录。行为测试为 `tests/reproductions/test_oct13_post_training.py`；State/GPPO/TAPO还保留既有专属测试。
 
 ### 边界与未完成项
 
-小lexical index替代E5/Wikipedia基础设施，不替代source policy/reward。原文未释放EM normalization代码，本地明示词边界匹配；不把它冒充GPT-5.6-Sol fabrication指标。数字GSM验证不代表原知识QA。不能制造来源文本或用参考答案冒充evidence。
+小lexical index替代E5/Wikipedia基础设施，不替代source policy/reward。原文未释放EM normalization代码，本地明示词边界匹配；不把它冒充GPT-5.6-Sol fabrication指标。工具文档属性QA不是RATED官方tool-selection test，也不是SOAR七个知识QA benchmark；共享KB下的tool-group隔离不等于未知KB泛化。不能制造来源文本或用参考答案冒充evidence。
 
 仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 
