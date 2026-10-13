@@ -12,7 +12,9 @@ from .algorithm import (LexicalRetriever,internal_messages,normalize,parse_step,
 
 SYSTEM=("Answer the question using actual INTERNAL and EXTERNAL information. "
         "Output <think>reasoning</think> then exactly one <search>atomic query</search> to fetch sources, "
-        "or <information_source>internal/external</information_source><answer>concise answer</answer>. "
+        "or exactly one of these two final-answer templates: "
+        "<information_source>internal</information_source><answer>concise answer</answer> "
+        "or <information_source>external</information_source><answer>concise answer</answer>. "
         "Never generate <information> yourself. A search receives both sources as an observation.")
 
 

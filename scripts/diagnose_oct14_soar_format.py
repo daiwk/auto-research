@@ -71,23 +71,25 @@ def validate_probe_inputs(root,config,contract,audit,*,manifest_sha256=MANIFEST_
         "corpus":{"public_id":corpus["public_id"],"revision":corpus["revision"],"file_sha256":corpus["files"]}}
 
 
-def episode(policy,retriever,question,ledger):
+def episode(policy,retriever,question,ledger,*,audits=None):
     """Original SOAR SYSTEM/parse/source streams, with exactly the original caps."""
     messages=({"role":"system","content":soar_checkpoint.SYSTEM},{"role":"user","content":question})
     streams={"internal":"","external":""}
     final={"kind":"invalid"}
     valid=True
     searches=0
-    audits=[]
+    audits=[] if audits is None else audits
     for turn in range(3):
         response=ledger.sample(policy,messages,role="policy_trajectory",max_tokens=256)[0]
-        action=parse_step(response.text)
         injected="<information>" in response.text
+        audits.append({"turn":turn+1,"action_kind":"unparsed","truncated":response.truncated,
+            "generated_tokens":len(response.tokens),"policy_injected_information":injected,
+            "response_text":response.text,"response_token_ids":list(response.tokens),
+            "response_text_sha256":hashlib.sha256(response.text.encode()).hexdigest()})
+        action=parse_step(response.text)
+        audits[-1]["action_kind"]=action["kind"]
         if response.truncated or injected:
             valid=False
-        audits.append({"turn":turn+1,"action_kind":action["kind"],"truncated":response.truncated,
-            "generated_tokens":len(response.tokens),"policy_injected_information":injected,
-            "response_text_sha256":hashlib.sha256(response.text.encode()).hexdigest()})
         if action["kind"]=="answer":
             final=action
             break
@@ -117,22 +119,26 @@ def diagnose_format(config,train,retriever,ledger,evidence,*,seed=42):
     if any(p.requires_grad for p in policy.model.parameters()):
         raise ValueError("all 7B policy parameters must remain frozen; no LoRA or optimizer")
     rows=evidence.setdefault("training_episode_audits",[])
-    for index,row in enumerate(train):
-        for repeat in range(2):
-            final,streams,valid,searches,turns=episode(policy,retriever,row["question"],ledger)
-            # Reference answer exists ONLY here, in the external training scorer.
-            correct=float(normalize(final.get("answer",""))==normalize(row["answer"])) if final["kind"]=="answer" else 0.
-            with_source,parts=source_reward(final,streams,answer_correct=correct,format_valid=valid,source_coefficient=.1)
-            without_source,_=source_reward(final,streams,answer_correct=correct,format_valid=valid,source_coefficient=0.)
-            rows.append({"training_row":index,"repeat":repeat+1,"final_action_kind":final["kind"],
-                "valid_trajectory":valid,"searches":searches,"turns":turns,**parts,
-                "source_consistent_reward":with_source,"without_source_reward":without_source})
+    # Install provenance before any episode: completed turns remain available
+    # if a later generation/recall/retrieval call fails or reaches the deadline.
     evidence.update(checkpoint={"policy":policy.provenance},policy_role="explicit fixed cached 7B used as frozen policy",
         original_system_sha256=hashlib.sha256(soar_checkpoint.SYSTEM.encode()).hexdigest(),
         gold_access_roles={"policy_generation":"none","isolated_recall":"query only, no inherited reasoning or gold",
             "retriever":"independent presealed public descriptions only","gold":"external training normalized-EM scorer only"},
-        assessment_executed=False,lora_updates=0,optimizer_updates=0,backbone_parameters_frozen=True,
-        diagnosis_status="format-signal-observed" if any(r["format"] for r in rows) else "no-format-signal",
+        assessment_executed=False,lora_updates=0,optimizer_updates=0,backbone_parameters_frozen=True)
+    for index,row in enumerate(train):
+        for repeat in range(2):
+            audit={"training_row":index,"repeat":repeat+1,"completed":False,"turns":[]}
+            rows.append(audit)
+            final,streams,valid,searches,turns=episode(policy,retriever,row["question"],ledger,audits=audit["turns"])
+            # Reference answer exists ONLY here, in the external training scorer.
+            correct=float(normalize(final.get("answer",""))==normalize(row["answer"])) if final["kind"]=="answer" else 0.
+            with_source,parts=source_reward(final,streams,answer_correct=correct,format_valid=valid,source_coefficient=.1)
+            without_source,_=source_reward(final,streams,answer_correct=correct,format_valid=valid,source_coefficient=0.)
+            audit.update({"completed":True,"final_action_kind":final["kind"],
+                "valid_trajectory":valid,"searches":searches,"turns":turns,**parts,
+                "source_consistent_reward":with_source,"without_source_reward":without_source})
+    evidence.update(diagnosis_status="format-signal-observed" if any(r["format"] for r in rows) else "no-format-signal",
         valid_format_episodes=sum(r["format"] for r in rows),source_match_episodes=sum(r["source_match"] for r in rows),
         total_searches=sum(r["searches"] for r in rows))
     if sum(ledger.generated_tokens.values())>12288:
