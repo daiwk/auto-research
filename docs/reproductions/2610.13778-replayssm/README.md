@@ -44,13 +44,19 @@ flowchart TD
 
 ### 核心公式
 
-$$S_h=\gamma_h S_{ckpt}+\sum_{j=1}^h\gamma_{j+1:h}v_j k_j^T,\quad \gamma_{a:b}=\prod_{i=a}^b\alpha_i.$$
+$$
+S_h=\gamma_h S_{ckpt}+\sum_{j=1}^h\gamma_{j+1:h}v_j k_j^T,\quad \gamma_{a:b}=\prod_{i=a}^b\alpha_i.
+$$
 
-$$O=S_{ckpt}QD+V\left(W\odot K^TQ\right),\quad W_{js}=\mathbf1[j\le h+s]\gamma_{j+1:h+s}.$$
+$$
+O=S_{ckpt}QD+V\left(W\odot K^TQ\right),\quad W_{js}=\mathbf1[j\le h+s]\gamma_{j+1:h+s}.
+$$
 
 该重括号形式只计算 key/query 标量积，不产生每 token 的 $d_v\times d_k$ 中间状态。GDN residual满足三角系统：
 
-$$u_j+\sum_{i<j}\beta_j\gamma_{i+1:j}(k_i^Tk_j)u_i=\beta_j\left(v_j-\gamma_j S_{ckpt}k_j\right).$$
+$$
+u_j+\sum_{i<j}\beta_j\gamma_{i+1:j}(k_i^Tk_j)u_i=\beta_j\left(v_j-\gamma_j S_{ckpt}k_j\right).
+$$
 
 刷新规则是从 committed 原始记录构造 $S$，再独立形成 $Q_{HP}(S)$、$Q_{LP}(S)$；不是先把高精度 anchor 舍入，再从已舍入值生成 read copy。投机 flush 条件为 $h+T>L$，在接受数未知时也只能刷新旧 committed 部分。
 

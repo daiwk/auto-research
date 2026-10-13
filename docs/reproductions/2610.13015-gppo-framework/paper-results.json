@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "adapter_key": "gppo-framework",
+  "paper_url": "https://arxiv.org/abs/2610.13015",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "Qwen3-8B-Base数学Avg@8中，GRPO27.7、KL/atomic41.5、chi2/atomic40.5；代码平均分别52.4、59.7、57.2。原文为竞赛benchmark，不是短GSM8K诊断。未报告生产线上A/B。",
+  "metrics": {
+    "math_grpo_avg_at_8": 27.7,
+    "math_kl_atomic_avg_at_8": 41.5,
+    "math_chi2_atomic_avg_at_8": 40.5,
+    "code_grpo_avg_at_8": 52.4,
+    "code_kl_atomic_avg_at_8": 59.7
+  }
+}
+

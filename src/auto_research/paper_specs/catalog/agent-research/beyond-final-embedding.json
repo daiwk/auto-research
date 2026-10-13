@@ -1,0 +1,22 @@
+{
+  "domain": "agent-research",
+  "key": "beyond-final-embedding",
+  "title": "Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence",
+  "paper_url": "https://arxiv.org/abs/2610.13277",
+  "detail_path": "reproductions/2610.13277-beyond-final-embedding/README.md",
+  "topic": [
+    "memory-retrieval",
+    "token-level-evidence",
+    "query-adaptation"
+  ],
+  "first_author": "Han Luo",
+  "first_author_affiliation": "Southeast University",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": null,
+  "adapter": {
+    "spec_key": "beyond-final-embedding"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a100.json"
+}

@@ -1,0 +1,1092 @@
+{
+  "schema_version": 2,
+  "adapter_key": "tapo-trajectory",
+  "method": "tapo-trajectory",
+  "manifest_ref": "reproduction:tapo-trajectory",
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "aggregate_metrics": {
+    "baseline.accuracy": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    },
+    "method_metrics.accuracy": {
+      "mean": 0.5416666666666666,
+      "std": 0.07216878364870322,
+      "n": 3
+    }
+  },
+  "seed_results": [
+    {
+      "method": "tapo-trajectory",
+      "seed": 42,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "verified": true,
+        "test_read": false,
+        "source_id": "openai/grade-school-math",
+        "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+        "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "partition_sha256": {
+          "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+          "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+        },
+        "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+      },
+      "checkpoint": {
+        "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "verified_mirror": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "file_sha256": {
+            "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+            "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+            "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+            "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        }
+      },
+      "baseline": {
+        "accuracy": 0.5,
+        "examples": 8,
+        "generated_tokens": 2619,
+        "truncated_responses": 1
+      },
+      "method_metrics": {
+        "accuracy": 0.5,
+        "examples": 8,
+        "generated_tokens": 2632,
+        "truncated_responses": 0
+      },
+      "training": [
+        {
+          "step": 1,
+          "training_row": 1,
+          "rewards": [
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "advantages": [
+            -0.9999979734420776,
+            0.9999979734420776,
+            -0.9999979734420776,
+            0.9999979734420776
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 2.9802322387695312e-08,
+              "gradient_l2_norm": 0.2794170677661896,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.00018256902694702148,
+              "gradient_l2_norm": 0.2824232578277588,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.006779660936444998,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0053973197937012,
+                  "max_abs_log_ratio": 0.24805212020874023
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0022563934326172,
+                  "max_abs_log_ratio": 0.24724483489990234
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9986444115638733,
+                  "max_abs_log_ratio": 0.18517541885375977
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0010548830032349,
+                  "max_abs_log_ratio": 0.20648550987243652
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "training_row": 3,
+          "rewards": [
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "advantages": [
+            -0.9999979734420776,
+            0.9999979734420776,
+            -0.9999979734420776,
+            0.9999979734420776
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": -2.9802322387695312e-08,
+              "gradient_l2_norm": 0.19474203884601593,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": -0.0011100471019744873,
+              "gradient_l2_norm": 0.17818912863731384,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.028985507786273956,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9980730414390564,
+                  "max_abs_log_ratio": 0.2487812042236328
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0019816160202026,
+                  "max_abs_log_ratio": 0.23344755172729492
+                },
+                {
+                  "clip_fraction": 0.06775067746639252,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0002869367599487,
+                  "max_abs_log_ratio": 0.19481992721557617
+                },
+                {
+                  "clip_fraction": 0.24512535333633423,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.001435399055481,
+                  "max_abs_log_ratio": 0.26273536682128906
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "training_row": 6,
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "advantages": [
+            -0.5773489475250244,
+            -0.5773489475250244,
+            -0.5773489475250244,
+            1.7320468425750732
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 2.9802322387695312e-08,
+              "gradient_l2_norm": 0.2515082061290741,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.0027578026056289673,
+              "gradient_l2_norm": 0.2497870922088623,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9984754920005798,
+                  "max_abs_log_ratio": 0.38154149055480957
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9979711174964905,
+                  "max_abs_log_ratio": 0.242767333984375
+                },
+                {
+                  "clip_fraction": 0.08486238867044449,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9988447427749634,
+                  "max_abs_log_ratio": 0.3051431179046631
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9920685887336731,
+                  "max_abs_log_ratio": 0.2477588653564453
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters_changed": true,
+      "sampling": {
+        "zero_advantage_groups_retained": 4,
+        "tasks_attempted": 7,
+        "generated_training_tokens_including_rejected_groups": 8194
+      },
+      "protocol": {
+        "steps": 3,
+        "group": 4,
+        "max_tokens": 512,
+        "inner_updates": 2,
+        "learning_rate": 1e-05,
+        "geometry": null,
+        "topology": null,
+        "delta": null,
+        "gold_in_generation": false,
+        "test_opened": false
+      },
+      "limitations": [
+        "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+        "Training-only difficulty calibration is charged as sampling cost.",
+        "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+        "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+      ]
+    },
+    {
+      "method": "tapo-trajectory",
+      "seed": 43,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "verified": true,
+        "test_read": false,
+        "source_id": "openai/grade-school-math",
+        "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+        "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "partition_sha256": {
+          "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+          "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+        },
+        "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+      },
+      "checkpoint": {
+        "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "verified_mirror": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "file_sha256": {
+            "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+            "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+            "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+            "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        }
+      },
+      "baseline": {
+        "accuracy": 0.5,
+        "examples": 8,
+        "generated_tokens": 2619,
+        "truncated_responses": 1
+      },
+      "method_metrics": {
+        "accuracy": 0.625,
+        "examples": 8,
+        "generated_tokens": 2615,
+        "truncated_responses": 0
+      },
+      "training": [
+        {
+          "step": 1,
+          "training_row": 0,
+          "rewards": [
+            0.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "advantages": [
+            -1.7320468425750732,
+            0.5773489475250244,
+            0.5773489475250244,
+            0.5773489475250244
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": -1.4901161193847656e-08,
+              "gradient_l2_norm": 0.7702495455741882,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.006542026996612549,
+              "gradient_l2_norm": 0.7606988549232483,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0150513648986816,
+                  "max_abs_log_ratio": 0.24908828735351562
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.999870777130127,
+                  "max_abs_log_ratio": 0.22647690773010254
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9999960660934448,
+                  "max_abs_log_ratio": 0.3441030979156494
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9999628663063049,
+                  "max_abs_log_ratio": 0.16001129150390625
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "training_row": 1,
+          "rewards": [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "advantages": [
+            -0.5773489475250244,
+            -0.5773489475250244,
+            1.7320468425750732,
+            -0.5773489475250244
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 2.9802322387695312e-08,
+              "gradient_l2_norm": 0.24430228769779205,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.0005247890949249268,
+              "gradient_l2_norm": 0.24757738411426544,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.11328125,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9975506067276001,
+                  "max_abs_log_ratio": 0.44944190979003906
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0059645175933838,
+                  "max_abs_log_ratio": 0.31151723861694336
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0015658140182495,
+                  "max_abs_log_ratio": 0.19884562492370605
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0048178434371948,
+                  "max_abs_log_ratio": 0.34631776809692383
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "training_row": 2,
+          "rewards": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "advantages": [
+            1.7320468425750732,
+            -0.5773489475250244,
+            -0.5773489475250244,
+            -0.5773489475250244
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 1.4901161193847656e-08,
+              "gradient_l2_norm": 0.21708944439888,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.0034682899713516235,
+              "gradient_l2_norm": 0.21541382372379303,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9958714842796326,
+                  "max_abs_log_ratio": 0.45978569984436035
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9976255893707275,
+                  "max_abs_log_ratio": 0.1847240924835205
+                },
+                {
+                  "clip_fraction": 0.08743169158697128,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0091469287872314,
+                  "max_abs_log_ratio": 0.3913862705230713
+                },
+                {
+                  "clip_fraction": 0.26229506731033325,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.004871129989624,
+                  "max_abs_log_ratio": 0.3697233200073242
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters_changed": true,
+      "sampling": {
+        "zero_advantage_groups_retained": 0,
+        "tasks_attempted": 3,
+        "generated_training_tokens_including_rejected_groups": 2966
+      },
+      "protocol": {
+        "steps": 3,
+        "group": 4,
+        "max_tokens": 512,
+        "inner_updates": 2,
+        "learning_rate": 1e-05,
+        "geometry": null,
+        "topology": null,
+        "delta": null,
+        "gold_in_generation": false,
+        "test_opened": false
+      },
+      "limitations": [
+        "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+        "Training-only difficulty calibration is charged as sampling cost.",
+        "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+        "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+      ]
+    },
+    {
+      "method": "tapo-trajectory",
+      "seed": 44,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "verified": true,
+        "test_read": false,
+        "source_id": "openai/grade-school-math",
+        "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+        "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "partition_sha256": {
+          "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+          "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+        },
+        "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+      },
+      "checkpoint": {
+        "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "verified_mirror": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "file_sha256": {
+            "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+            "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+            "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+            "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        }
+      },
+      "baseline": {
+        "accuracy": 0.5,
+        "examples": 8,
+        "generated_tokens": 2619,
+        "truncated_responses": 1
+      },
+      "method_metrics": {
+        "accuracy": 0.5,
+        "examples": 8,
+        "generated_tokens": 2663,
+        "truncated_responses": 1
+      },
+      "training": [
+        {
+          "step": 1,
+          "training_row": 1,
+          "rewards": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "advantages": [
+            -0.9999979734420776,
+            -0.9999979734420776,
+            0.9999979734420776,
+            0.9999979734420776
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": -1.4901161193847656e-08,
+              "gradient_l2_norm": 0.1973721832036972,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": -0.00028502941131591797,
+              "gradient_l2_norm": 0.19690893590450287,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.001881718635559,
+                  "max_abs_log_ratio": 0.24945580959320068
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9998350143432617,
+                  "max_abs_log_ratio": 0.3746480941772461
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0017844438552856,
+                  "max_abs_log_ratio": 0.24713945388793945
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0010721683502197,
+                  "max_abs_log_ratio": 0.23376870155334473
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "training_row": 2,
+          "rewards": [
+            0.0,
+            1.0,
+            1.0,
+            0.0
+          ],
+          "advantages": [
+            -0.9999979734420776,
+            0.9999979734420776,
+            0.9999979734420776,
+            -0.9999979734420776
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": -1.4901161193847656e-08,
+              "gradient_l2_norm": 0.24344772100448608,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": -0.0010056793689727783,
+              "gradient_l2_norm": 0.24520298838615417,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.019512195140123367,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9956021308898926,
+                  "max_abs_log_ratio": 0.23948240280151367
+                },
+                {
+                  "clip_fraction": 0.0036630036775022745,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9998971819877625,
+                  "max_abs_log_ratio": 0.37390613555908203
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9963216781616211,
+                  "max_abs_log_ratio": 0.39711904525756836
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9965875148773193,
+                  "max_abs_log_ratio": 0.2328951358795166
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "training_row": 4,
+          "rewards": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "advantages": [
+            1.7320468425750732,
+            -0.5773489475250244,
+            -0.5773489475250244,
+            -0.5773489475250244
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 0.0,
+              "gradient_l2_norm": 0.21267230808734894,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.0,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": -0.0015879422426223755,
+              "gradient_l2_norm": 0.21317237615585327,
+              "response_audits": [
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 1.001876950263977,
+                  "max_abs_log_ratio": 0.2657613754272461
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9993122220039368,
+                  "max_abs_log_ratio": 0.24643754959106445
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9964897632598877,
+                  "max_abs_log_ratio": 0.3742992877960205
+                },
+                {
+                  "clip_fraction": 0.0,
+                  "horizon": 512,
+                  "prefix_stop_gradient": true,
+                  "ratio_mean": 0.9988269805908203,
+                  "max_abs_log_ratio": 0.34122776985168457
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters_changed": true,
+      "sampling": {
+        "zero_advantage_groups_retained": 2,
+        "tasks_attempted": 5,
+        "generated_training_tokens_including_rejected_groups": 4941
+      },
+      "protocol": {
+        "steps": 3,
+        "group": 4,
+        "max_tokens": 512,
+        "inner_updates": 2,
+        "learning_rate": 1e-05,
+        "geometry": null,
+        "topology": null,
+        "delta": null,
+        "gold_in_generation": false,
+        "test_opened": false
+      },
+      "limitations": [
+        "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+        "Training-only difficulty calibration is charged as sampling cost.",
+        "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+        "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+      ]
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "test_used_for_selection": false,
+    "claim_policy": "scoped mechanism diagnostic; do not claim stable capability or production uplift"
+  },
+  "provenance": {
+    "code_commit": "7e125fd08cd492bf69628c289309ba0b83c1e259",
+    "artifact_path": "docs/reproductions/2610.13020-tapo-trajectory/metrics/public-a100-seeds42-44.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab"
+  },
+  "limitations": [
+    "Three-seed bounded mechanism diagnostic, not a stable capability/production gain claim.",
+    "Original-paper results are not copied into measured local metrics.",
+    "Eight holdout questions and three updates are not the original large-model benchmark.",
+    "Sampling rejections are counted; equal optimizer steps are not equal total compute."
+  ]
+}

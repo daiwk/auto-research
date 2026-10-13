@@ -1,0 +1,21 @@
+{
+  "domain": "post-training",
+  "key": "soar",
+  "title": "SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents",
+  "paper_url": "https://arxiv.org/abs/2610.13157",
+  "detail_path": "reproductions/2610.13157-soar/README.md",
+  "topic": [
+    "Source-aware RL",
+    "Search agents",
+    "Source-consistency reward"
+  ],
+  "first_author": "Shengze Huang",
+  "first_author_affiliation": "Zhejiang University / Microsoft",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": null,
+  "adapter": {
+    "spec_key": "soar"
+  }
+}
+

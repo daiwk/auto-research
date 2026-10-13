@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "key": "smolwam",
+  "arxiv_id": "2610.13740",
+  "title": "SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices",
+  "paper_url": "https://arxiv.org/abs/2610.13740",
+  "organization": "ML Collective",
+  "published": "2026-10-09",
+  "upstream_code": "https://github.com/iitimii/SmolWAM",
+  "track": "llm",
+  "topics": [
+    "world-action-model",
+    "robotics",
+    "efficient-inference"
+  ],
+  "local_code": "src/auto_research/reproductions/smolwam",
+  "documentation": "docs/reproductions/2610.13740-smolwam/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "LIBERO fixed simulator initial states",
+    "timiiowolabi/SmolWAM",
+    "Wan2.1 VAE"
+  ],
+  "baseline": "同初始状态的真实no-op闭环",
+  "metrics": [
+    "variants.smolwam.success_rate",
+    "variants.noop.success_rate",
+    "latency_seconds_mean"
+  ],
+  "mechanisms": [
+    "真实Cosmos 12block trunk及6层VL",
+    "单帧VAE与1008tokens单步RF",
+    "原作者蒸馏layout课程合同",
+    "LIBERO动作chunk闭环"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.smolwam.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/iitimii/SmolWAM",
+      "organization": "ML Collective",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "原版teacher targets缓存与5000step蒸馏未重执行",
+      "完整400episodes及Cosmos teacher对照",
+      "worldhead真实输出但未评真实future"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "固定LIBERO task subset × 2 init states/seed",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct13-smolwam-a100.json"
+  }
+}

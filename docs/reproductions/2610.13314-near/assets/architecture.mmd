@@ -1,0 +1,11 @@
+graph LR
+ M[memory embeddings] --> N[邻域reference]
+ N --> R[投影残差]
+ M --> A[球面Kmeans]
+ N --> A
+ Q[query] --> T[reference routing]
+ A --> T
+ R --> K[静态key]
+ T --> F[融合query key]
+ K --> I[单inner-product检索]
+ F --> I

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "key": "tapo-trajectory",
+  "arxiv_id": "2610.13020",
+  "title": "Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL",
+  "paper_url": "https://arxiv.org/abs/2610.13020",
+  "organization": "Tsinghua University AIR / ByteDance Seed",
+  "published": "2026-10-09",
+  "upstream_code": "not released / not found in paper-linked primary sources (2026-10-13)",
+  "track": "post-training",
+  "topics": [
+    "Trajectory-aware policy optimization",
+    "Geometric prefix correction",
+    "Length-aware clipping"
+  ],
+  "local_code": "src/auto_research/reproductions/tapo_trajectory",
+  "documentation": "docs/reproductions/2610.13020-tapo-trajectory/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "GSM8K verified train-only holdout"
+  ],
+  "baseline": "同checkpoint、采样与优化上限的GRPO-control；不是原Qwen3-8B Avg@8结果",
+  "metrics": [
+    "method_metrics.accuracy",
+    "parameters_changed"
+  ],
+  "mechanisms": [
+    "Geometric mean of actual prefix likelihood ratios",
+    "Length-aware epsilon endpoints",
+    "Stop-gradient prefix value with local token policy gradient and real LoRA update"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.tapo_trajectory.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tsinghua University AIR / ByteDance Seed",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoint/data/training budgets and original benchmark suite"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/tapo-trajectory-a100-20261013.json"
+  }
+}
+

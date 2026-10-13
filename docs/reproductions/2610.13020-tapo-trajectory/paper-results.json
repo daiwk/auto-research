@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "adapter_key": "tapo-trajectory",
+  "paper_url": "https://arxiv.org/abs/2610.13020",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "Qwen3-8B-Base数学Avg@8由GRPO27.7到TAPO41.0；代码平均由52.4到58.6。原文覆盖多个竞赛数学/算法代码benchmark。未报告生产线上A/B。",
+  "metrics": {
+    "math_grpo_avg_at_8": 27.7,
+    "math_tapo_avg_at_8": 41,
+    "code_grpo_avg_at_8": 52.4,
+    "code_tapo_avg_at_8": 58.6
+  }
+}
+

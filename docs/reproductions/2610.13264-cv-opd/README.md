@@ -52,11 +52,17 @@ flowchart TD
 
 令学生和共享正负教师分布为 $p_t,\tau_t^+,\tau_t^-$，$m=(p+\tau)/2$：
 
-$$D_{JS}(p,\tau)=\tfrac12 KL(p\|m)+\tfrac12 KL(\tau\|m).$$
+$$
+D_{JS}(p,\tau)=\tfrac12 KL(p\|m)+\tfrac12 KL(\tau\|m).
+$$
 
-$$d_t^\pm=D_{JS}(p_t,\tau_t^\pm),\qquad \ell_t^{CDL}=[\mu+d_t^+-d_t^-]_+,\quad 0<\mu<\log2.$$
+$$
+d_t^\pm=D_{JS}(p_t,\tau_t^\pm),\qquad \ell_t^{CDL}=[\mu+d_t^+-d_t^-]_+,\quad 0<\mu<\log2.
+$$
 
-$$g_t=\mathbf1[d_t^+>\bar d_\mathcal B],\qquad b_x=\mathbf1[\sum_{i=1}^M r_i>0].$$
+$$
+g_t=\mathbf1[d_t^+>\bar d_\mathcal B],\qquad b_x=\mathbf1[\sum_{i=1}^M r_i>0].
+$$
 
 正文 Eq. 14 写出逐 rollout 归一化权重。本地采用 Appendix A.3 Algorithm 1 的明确实现口径：主 JSD 在学生对齐的 Top-100 加完整 tail bucket 上计算，按每条 rollout 的 $1/T_i$ 加权再归一；CDL 使用全词表 JSD，在 gated token 上均值归一。margin 和 CDL 权重均为 0.1，EMA 更新率为 0.05。教师、gate 与生成过程不回传梯度。样本门槛不是“只训练正确 rollout”。
 

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "adapter_key": "magicbeanstalk",
+  "paper_url": "https://arxiv.org/abs/2610.12659",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "约78K数学语料中约88%问题落入零优势组。8个数学benchmark、16K推理预算下，gpt-oss-120b平均pass@1从61.2到69.8，DeepSeek v4 Flash从72.4到77.9。hard seed转化率74.7%，direct synthesis为43.8%。金融SecQue/FinanceBench分别+6.9/+2.4个百分点。未报告生产线上A/B。",
+  "metrics": {
+    "gpt_oss_base_average": 61.2,
+    "gpt_oss_mbs_average": 69.8,
+    "deepseek_base_average": 72.4,
+    "deepseek_mbs_average": 77.9,
+    "mbs_seed_conversion_percent": 74.7,
+    "direct_seed_conversion_percent": 43.8
+  }
+}
+

@@ -1,0 +1,15 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.12818",
+  "reviewed_version": "2610.12818v1",
+  "fulltext_url": "https://arxiv.org/html/2610.12818v1",
+  "figure_source": "https://arxiv.org/html/2610.12818v1#S0.F1",
+  "reviewed_on": "2026-10-13",
+  "first_published": "2026-10-08",
+  "code_url": "https://github.com/MinghaoFu/lewam",
+  "code_status": "author source pin inspected",
+  "local_boundary": [
+    "原版50epoch训练未重执行",
+    "其余九环境及真实机器人",
+    "原始50episode/seed、32proposal规划预算"
+  ]
+}

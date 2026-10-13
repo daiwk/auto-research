@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "key": "magicbeanstalk",
+  "arxiv_id": "2610.12659",
+  "title": "MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis",
+  "paper_url": "https://arxiv.org/abs/2610.12659",
+  "organization": "NVIDIA / University of Washington / Carnegie Mellon University / Stanford University",
+  "published": "2026-10-08",
+  "upstream_code": "not released / not found in paper-linked primary sources (2026-10-13)",
+  "track": "post-training",
+  "topics": [
+    "RLVR data synthesis",
+    "Effectivity-validated decomposition",
+    "Policy-calibrated Goldilocks"
+  ],
+  "local_code": "src/auto_research/reproductions/magicbeanstalk",
+  "documentation": "docs/reproductions/2610.12659-magicbeanstalk/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "GSM8K verified train-only holdout"
+  ],
+  "baseline": "相同学生、steps/group/response上限的seed-RLVR；合成/筛选开销另计，不宣称总成本匹配",
+  "metrics": [
+    "method_metrics.accuracy",
+    "parameters_changed"
+  ],
+  "mechanisms": [
+    "Verified top-down teacher decomposition and actual student effectivity tests",
+    "Harder leaf synthesis and original-pattern bottom-up composition",
+    "Independent teacher re-solving, blueprint/novelty judging, target Goldilocks and real nonzero-advantage RLVR"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.magicbeanstalk.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "NVIDIA / University of Washington / Carnegie Mellon University / Stanford University",
+      "published": "2026-10-08",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoint/data/training budgets and original benchmark suite"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/magicbeanstalk-a100-20261013.json"
+  }
+}
+

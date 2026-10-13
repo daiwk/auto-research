@@ -4,6 +4,9 @@ The denoiser uses bidirectional attention and has no autoregressive token path.
 One-hot signals, Gaussian noise and a simplex prior remain explicit. Sampling
 uses the paper's recommended usual one-hot flow (discard Y_t at inference),
 plus the exact conditional reveal hazard for SemiCat Algorithm 1.
+DoubleCat's two-level interpolant requires no extra denoiser evaluation. The
+standard two-forward self-conditioning in Eq. 2.5/Table 8 is an opt-in ablation,
+not a substitute for that interpolant or part of the default SemiCat path.
 """
 from __future__ import annotations
 
@@ -62,7 +65,7 @@ class DiTBlock(nn.Module):
 
 class DiffusionLM(nn.Module):
     def __init__(self, vocabulary: int = 256, width: int = 64, layers: int = 2,
-                 heads: int = 4, length: int = 64, *, self_conditioning: bool = True):
+                 heads: int = 4, length: int = 64, *, self_conditioning: bool = False):
         super().__init__()
         if width % heads or width % 2 or length < 1:
             raise ValueError("even width divisible by heads and positive length required")
@@ -92,7 +95,17 @@ class DiffusionLM(nn.Module):
 
 
 def denoising_loss(model: DiffusionLM, tokens: Tensor, corruption: Corruption,
-                   *, use_self_condition: bool = False) -> Tensor:
+                   *, use_self_condition: bool = False, l2_weighting: bool = True,
+                   reduction: str = "per_example") -> Tensor:
+    """Eqs. 2.5/3.7 and Appendix E.1, with one default denoiser evaluation.
+
+    Training sums unrevealed positions and averages examples, as in Eq. 3.7.
+    ``per_unrevealed_token`` with weighting disabled is an explicit reporting
+    metric, not the weighted training objective. Only the optional standard SC
+    ablation adds a detached prediction; DoubleCat corruption itself does not.
+    """
+    if reduction not in ("per_example", "per_unrevealed_token"):
+        raise ValueError("supported loss reduction required")
     condition = None
     if use_self_condition:
         if not model.self_conditioning:
@@ -102,10 +115,18 @@ def denoising_loss(model: DiffusionLM, tokens: Tensor, corruption: Corruption,
             condition = torch.where(corruption.revealed[..., None], corruption.state, condition)
     logits = model(corruption.state, corruption.time, condition)
     per_token = F.cross_entropy(logits.flatten(0, 1), tokens.flatten(), reduction="none").reshape_as(tokens)
+    if l2_weighting:
+        # Appendix E.1 explicitly defines Delta = sqrt(||pi-X1||_2 + 1e-2)
+        # (not sqrt of the squared norm). The denominator is stop-gradient,
+        # uses this very prediction, and incurs no further model evaluation.
+        target = F.one_hot(tokens, model.vocabulary).to(logits.dtype)
+        delta = (logits.softmax(-1) - target).norm(dim=-1).add(1e-2).sqrt().detach()
+        per_token = per_token / delta
     valid = ~corruption.revealed
     # Eq. 3.7: loss only on unrevealed tokens, preserving a differentiable zero
     # if a complete example has already been revealed.
-    return (per_token * valid).sum() / valid.sum().clamp_min(1)
+    denominator = len(tokens) if reduction == "per_example" else valid.sum().clamp_min(1)
+    return (per_token * valid).sum() / denominator
 
 
 @torch.no_grad()

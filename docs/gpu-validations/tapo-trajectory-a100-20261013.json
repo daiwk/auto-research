@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "adapter_key": "tapo-trajectory",
+  "validated_at": "2026-10-13",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_proximal_papers.py",
+    "--method",
+    "tapo-trajectory",
+    "--student-path",
+    "checkpoints/qwen2.5-0.5b",
+    "--student-id",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--student-revision",
+    "7ae557604adf67be50417f59c2c2f167def9a775",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--steps",
+    "3",
+    "--group",
+    "4",
+    "--max-tokens",
+    "512",
+    "--inner-updates",
+    "2",
+    "--max-task-attempts",
+    "16",
+    "--validation-examples",
+    "8",
+    "--output",
+    "runs/tapo-trajectory-42",
+    "--train-path",
+    "data/gsm8k-holdout/train.jsonl",
+    "--validation-path",
+    "data/gsm8k-holdout/validation.jsonl",
+    "--split-manifest",
+    "data/gsm8k-holdout/split.json",
+    "--dataset-revision",
+    "3101c7d5072418e28b9008a6636bde82a006892c"
+  ],
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "baseline.accuracy": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    },
+    "method_metrics.accuracy": {
+      "mean": 0.5416666666666666,
+      "std": 0.07216878364870322,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "completed_seeds": 3,
+    "actual_gradient_steps": [
+      3,
+      3,
+      3
+    ],
+    "rejected_zero_advantage_groups": [
+      4,
+      0,
+      2
+    ],
+    "generated_tokens_including_rejected_groups": [
+      8194,
+      2966,
+      4941
+    ],
+    "gold_in_policy": false,
+    "official_test_read": false
+  },
+  "limitations": [
+    "Three-seed bounded mechanism diagnostic, not a stable capability/production gain claim.",
+    "Original-paper results are not copied into measured local metrics.",
+    "Eight holdout questions and three updates are not the original large-model benchmark.",
+    "Sampling rejections are counted; equal optimizer steps are not equal total compute."
+  ],
+  "executed_source_sha256": {
+    "scripts/run_proximal_papers.py": "eeb6f6ead3cc3db5a824a5ab6a8298a134e74fdf76770890a7333b696680e542",
+    "src/auto_research/post_training/proximal_checkpoint.py": "5307a54204720e5407d2cd0435b654ae0e594f30c85cdf07d55d4e90612a1397",
+    "src/auto_research/reproductions/tapo_trajectory/objective.py": "49ab02ac758251acde90091a82b22576449d294a1f25cc3144ff1addd1132ae2",
+    "src/auto_research/post_training/response_policy.py": "e380a5b4d1d53974b973b72b7d9ad6328129dc8c9bae4d233f6c1cbdf8508bf7",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46"
+  },
+  "provenance": {
+    "commit": "7e125fd08cd492bf69628c289309ba0b83c1e259",
+    "artifact_path": "docs/gpu-validations/tapo-trajectory-a100-20261013.json",
+    "metrics_artifact": "docs/reproductions/2610.13020-tapo-trajectory/metrics/public-a100-seeds42-44.json",
+    "checkpoint_committed": false
+  }
+}

@@ -29,7 +29,8 @@
   "mechanisms": [
     "actual bidirectional DiT diffusion LM training",
     "Gaussian/simplex two-level interpolant with kappa=sqrt(t)",
-    "stop-gradient self-conditioning",
+    "single-forward two-level interpolant, with optional standard self-conditioning ablation",
+    "Appendix E.1 stop-gradient L2-weighted training loss",
     "unrevealed-only CE and conditional reveal/carry-over sampler"
   ],
   "evolve_operators": [],

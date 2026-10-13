@@ -1,0 +1,92 @@
+# Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training
+
+## 论文信息
+
+| 字段 | 内容 |
+| --- | --- |
+| 论文链接 | [arXiv 2610.12933](https://arxiv.org/abs/2610.12933) |
+| 公司/机构 | National University of Singapore / Nanjing University / Fudan University / The University of Sydney / The Chinese University of Hong Kong / Nanyang Technological University |
+| 首次公开日期 | 2026-10-09（arXiv v1） |
+| 原文开源代码 | 否：原文与关联原始来源未找到本方法已发布源码（2026-10-13核验）；不是宣称全网不存在 |
+| Adapter | `progressive-contraction` |
+| 本地复现代码 | [`src/auto_research/reproductions/progressive_contraction/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/progressive_contraction/) |
+| 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
+| GPU门禁 | 必须真实A100/A30执行并提交绑定源码的脱敏回执；未取得者仍未验收 |
+
+## 原始论文总结
+
+### 背景与主要改动
+
+正确teacher CoT也可能经过多种正确/错误后续的reasoning fork。论文对真实prefix做Monte Carlo continuation，按branch不确定性先收缩teacher pool，再经真实student probing epoch按当前NLL选top-M并重路由。teacher profiling与student训练曝光必须分开核算。
+
+### 架构与数据流
+
+以下为本地重绘，不冒充原论文图片。
+
+```mermaid
+flowchart LR
+  T[verified teacher backbone] --> M[原open-prefix MC continuations]
+  M --> U[branch结果Bernoulli不确定性]
+  U --> P[teacher top-rho pool]
+  P --> S[真实student probing SFT]
+  S --> R[当前NLL top-M路由]
+  R --> F[后续真实SFT及重路由]
+```
+
+原图来源：[原文图位置](https://arxiv.org/html/2610.12933v1#S1.F1)；[原始图资源](https://arxiv.org/html/2610.12933v1/fig1-v2.png)。版本及资源记录在 [figure-source.json](figure-source.json)。原图版权归作者，原始效果图与本地重绘分开。
+
+### 核心公式
+
+$$
+\hat p_{i,t}=K^{-1}\sum_kZ^{(k)}_{i,t},\quad
+\hat U_{i,t}=4\hat p_{i,t}(1-\hat p_{i,t}),\quad
+q_i^T=m_i^{-1}\sum_t\hat U_{i,t}.
+$$
+保留 $\lfloor\rho N_c\rfloor$ 条高不确定性verified trajectories；student routing为 $q_i^S=-|\mathcal R_i|^{-1}\sum_{j\in\mathcal R_i}\log p_\theta(\tau_{i,j}\mid x_i,\tau_{i,<j})$，选top-M。
+三epoch曝光由 $3N$ 变 $|\mathcal P_\rho|+2M$，不包括teacher profiling，不能等于总GPU加速比。
+
+### 论文离线与线上效果
+
+Qwen3.5-4B/rho10%的student exposure为full-SFT的0.74%；AIME25为83.3%、full-SFT56.7%。9B分别90.0%/86.7%。这不含teacher profiling的总计算。v1 HTML部分Appendix为missing-label且无可读附录pipeline，本地按主文Eq1–8实现并记来源缺口。未报告生产线上A/B。
+
+选取的原文稳定标量与出处保存于 [paper-results.json](paper-results.json)，全部标为paper-reported，不是本地测量。
+
+## 本地复现
+
+> **本地对照口径**：基线为同一真实verified teacher全集的full-SFT；相同epochs，teacher profiling成本不并入student exposure比率；实验组仅支持本页L0/L1机制，稳定相对提升不适用。
+
+### 数据与标签访问协议
+
+公开checkpoint/data必须固定revision并通过既有 `checkpoint_source` / `validate_holdout` 的文件hash验证。GSM8K仅从官方train拆train/validation，官方test不打开。Qwen2.5-0.5B-Instruct revision为 `7ae557604adf67be50417f59c2c2f167def9a775`，需要teacher/reasoner时用Qwen2.5-7B-Instruct revision `bb46c15ee4bb56c5b63245ef50fd7637234d6f75`。参考答案仅在外部训练verifier、SFT监督target或明确的train-only数据构建teacher边界读取；被评估student/agent prompt不接收当前题gold/plan。
+
+真实teacher backbone先外部验证；每个reasoning paragraph prefix拼回同一个open assistant token序列，独立MC采样，不用新user提示代替。全部teacher失败/MCRT token计费。floor pool为0则失败，不偷偷max(1,…)补样本。真实probing/NLL routing/full-SFT控制执行。
+
+### 可执行入口与预算
+
+入口为 `scripts/run_oct13_post_training.py --method progressive-contraction`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student/teacher镜像路径、public id/revision、train/validation路径、split manifest与dataset revision。下面是待实跑配置示例，不表示GPU已完成：
+
+```bash
+PYTHONPATH=src python scripts/run_oct13_post_training.py \
+  --method progressive-contraction --config data/oct13_execution.json \
+  --device cuda --seed 42 --train-examples 8 --teacher-attempts 2 --branches 4 --prefix-states 2 --pool-ratio 0.5 --active-size 1 --epochs 3 --max-tokens 512 \
+  --output runs/oct13/progressive-contraction-42
+```
+
+真实生成、拒绝、难度校准、teacher profiling及监督token预算进入结果；失败写不可覆盖的 `failure.json`，成功写 `result.json` / `report.md`。不能仅以本地目录名伪造source metadata。
+
+### 当前结果与验收状态
+
+[mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
+
+### 代码映射
+
+algorithm.py：MC uncertainty、floor pool/NLL routing；checkpoint.py：真实prefix sampling、probing/routed/full SFT及两侧成本。
+
+共享 `post_training/oct13_common.py` 只承担资源装载、成本记录、response likelihood、真实optimizer step和输出；论文机制保留在本目录。行为测试为 `tests/reproductions/test_oct13_post_training.py`；State/GPPO/TAPO还保留既有专属测试。
+
+### 边界与未完成项
+
+Qwen2.5匹配词表、少量GSM/LoRA/prefix/K是缩小协议，不覆盖原cross-family与全benchmark。曝光分母为同一verified corpus full-SFT；不宣称135x总成本收益。
+
+仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+

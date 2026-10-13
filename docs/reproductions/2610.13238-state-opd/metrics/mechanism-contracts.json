@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "adapter_key": "state-opd",
+  "manifest_ref": "reproduction:state-opd",
+  "seeds": [
+    42
+  ],
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "evaluation_tier": "l0_contract",
+  "metrics": {
+    "uniform_vocabulary_entropy": 2.3025851249694824
+  },
+  "evaluation_protocol": {
+    "tier": "l0_contract",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "deterministic formula/behavior fixtures only; not capability evidence"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.13238-state-opd/metrics/mechanism-contracts.json",
+    "dataset_fingerprint": "deterministic-tensor-mechanism-fixture-v1",
+    "code_revision": "working-tree implementation; GPU code revision is separate"
+  },
+  "limitations": [
+    "仅公式与行为合同测量",
+    "不是公开checkpoint训练效果",
+    "不替代A100/A30 receipt或能力比较"
+  ]
+}
+

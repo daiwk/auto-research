@@ -42,15 +42,23 @@ flowchart LR
 
 ### 核心公式
 
-$$\chi_{p,r}=\frac{1}{|\Omega_p|}\sum_{j\le i}\left|q_{p,i,r}k_{p,j,r}/\sqrt{d_h}\right|,\qquad \chi_r=P^{-1}\sum_p\chi_{p,r}.$$
+$$
+\chi_{p,r}=\frac{1}{|\Omega_p|}\sum_{j\le i}\left|q_{p,i,r}k_{p,j,r}/\sqrt{d_h}\right|,\qquad \chi_r=P^{-1}\sum_p\chi_{p,r}.
+$$
 
 令 $s_g=\sum_{r\in\mathcal G_g}q_r k_r/\sqrt{d_h}$，$\bar s=[1,s_1,\ldots,s_G]^T$：
 
-$$\kappa_{OAL}(q,k)=\epsilon+\bar s^TLL^T\bar s>0.$$
+$$
+\kappa_{OAL}(q,k)=\epsilon+\bar s^TLL^T\bar s>0.
+$$
 
-$$H_{0,i}=\sum_{j\le i}[v_j;1],\quad H_{1,i,r}=\sum_{j\le i}k_{j,r}[v_j;1],\quad H_{2,i,rt}=\sum_{j\le i}k_{j,r}k_{j,t}[v_j;1].$$
+$$
+H_{0,i}=\sum_{j\le i}[v_j;1],\quad H_{1,i,r}=\sum_{j\le i}k_{j,r}[v_j;1],\quad H_{2,i,rt}=\sum_{j\le i}k_{j,r}k_{j,t}[v_j;1].
+$$
 
-$$\tilde u_i=aH_{0,i}+\frac1{\sqrt{d_h}}\sum_r b_rq_{i,r}H_{1,i,r}+\frac1{d_h}\sum_{r,t}C_{rt}q_{i,r}q_{i,t}H_{2,i,rt},\quad \hat y_i=\tilde u_{i,1:d_v}/\tilde u_{i,d_v+1}.$$
+$$
+\tilde u_i=aH_{0,i}+\frac1{\sqrt{d_h}}\sum_r b_rq_{i,r}H_{1,i,r}+\frac1{d_h}\sum_{r,t}C_{rt}q_{i,r}q_{i,t}H_{2,i,rt},\quad \hat y_i=\tilde u_{i,1:d_v}/\tilde u_{i,d_v+1}.
+$$
 
 Appendix B 的候选边界只来自高贡献尾部，使用固定全样本排序进行等权 prompt 重采样。保留全部自然切分，不加组数上限；若不足两组，按 bootstrap support 优先、gap 次优的顺序补边界。核校准直接最小化归一化输出 MSE，三初始化按 validation **逐头**选择。
 

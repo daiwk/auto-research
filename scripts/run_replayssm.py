@@ -14,6 +14,7 @@ import sys
 import torch
 
 from auto_research.foundation_models.replayssm import mechanism_suite
+from auto_research.oct12_public_sources import sha256_file
 
 UPSTREAM_REVISION = "5d3ea597d479ef0c8e9e2eb2845a2adfdb9a8b44"
 
@@ -24,9 +25,17 @@ def author_precision_suite(upstream: Path, steps: int, seed: int) -> dict:
     revision = subprocess.check_output(["git", "-C", str(upstream), "rev-parse", "HEAD"], text=True).strip()
     if revision != UPSTREAM_REVISION:
         raise ValueError("author source revision mismatch")
+    changes = subprocess.check_output(
+        ["git", "-C", str(upstream), "status", "--porcelain", "--untracked-files=all", "--", "emulation"],
+        text=True).strip()
+    if changes:
+        raise ValueError("author emulation source has uncommitted changes")
     if "Apache License" not in (upstream / "LICENSE").read_text():
         raise ValueError("expected upstream Apache license")
     sys.path.insert(0, str(upstream))
+    import emulation
+    if not Path(emulation.__file__).resolve().is_relative_to(upstream.resolve()):
+        raise ValueError("imported emulation package is not from the verified author source")
     from emulation import GDNReplay, Mamba2Replay
 
     torch.manual_seed(seed)
@@ -69,6 +78,9 @@ def author_precision_suite(upstream: Path, steps: int, seed: int) -> dict:
             raise RuntimeError("precision-independence check did not exercise rounding")
         metrics[f"{architecture}/independent_read_cast_passed"] = True
     return {"metrics": metrics, "upstream_revision": revision,
+            "upstream_source_files_sha256": {
+                name: sha256_file(upstream / "emulation" / name)
+                for name in ("__init__.py", "api.py", "modes.py", "quant_tl.py", "mamba2_replay.py", "gdn_replay_unf_vf.py")},
             "accelerator": torch.cuda.get_device_name(), "steps": steps,
             "storage_format": "dequantized FP32", "native_bandwidth_speedup_claim": False}
 

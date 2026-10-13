@@ -1,0 +1,21 @@
+{
+  "domain": "post-training",
+  "key": "state-opd",
+  "title": "State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents",
+  "paper_url": "https://arxiv.org/abs/2610.13238",
+  "detail_path": "reproductions/2610.13238-state-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "Interaction-state isolation",
+    "Entropy-budget allocation"
+  ],
+  "first_author": "Zhentao Zhang",
+  "first_author_affiliation": "Alibaba Group",
+  "published": "2026-10-09",
+  "priority": "P0",
+  "code": null,
+  "adapter": {
+    "spec_key": "state-opd"
+  }
+}
+

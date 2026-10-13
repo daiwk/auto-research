@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "key": "skilldreamer",
+  "arxiv_id": "2609.01642",
+  "title": "Imagine Before Acting: Prospective Skill Identification for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2609.01642",
+  "organization": "Sichuan University",
+  "published": "2026-08-28",
+  "upstream_code": "否：原文与官方页面未找到作者代码（核查 2026-10-13）",
+  "track": "llm",
+  "topics": [
+    "skill-retrieval",
+    "prospective-reasoning",
+    "capability-aware-invocation"
+  ],
+  "local_code": "src/auto_research/reproductions/skilldreamer",
+  "documentation": "docs/reproductions/2609.01642-skilldreamer/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "GSM8K public question subset",
+    "local generic procedural skill gallery"
+  ],
+  "baseline": "no-skills / original-task dense direct retrieval",
+  "metrics": [
+    "variants.skilldreamer.pass_rate",
+    "variants.skilldreamer.load_rate",
+    "variants.direct.pass_rate",
+    "variants.no_skills.pass_rate"
+  ],
+  "mechanisms": [
+    "真实LLM capabilities/anchors/pseudo skills PSG",
+    "HSR双语义+BM25 anchors+roundrobin",
+    "每actualaction CSI能力重评与真实skill加载"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.skilldreamer.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Sichuan University",
+      "published": "2026-08-28",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "原始SkillRet/SkillUsage/SkillNetGym未执行",
+      "原文GPT-5.5/DeepSeek/Qwen3.6模型",
+      "原完整3万skills gallery"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "max_queries=24, action_budget=8, max_new_tokens=256",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct13-skilldreamer-a100.json"
+  }
+}

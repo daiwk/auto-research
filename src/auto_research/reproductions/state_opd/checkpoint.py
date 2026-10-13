@@ -27,7 +27,10 @@ class SamplingPolicy:
 def run_state_opd(*, student_path, teacher_path, student_id, student_revision, teacher_id, teacher_revision,
                   train_path, validation_path, split_manifest, dataset_revision,
                   device="cuda", seed=42, steps=2, max_turns=4, max_tokens=256,
-                  multiplicity=4, concentration=2, validation_examples=4, context_limit=4096):
+                  multiplicity=4, concentration=2, validation_examples=4, context_limit=4096,
+                  variant="state"):
+    if variant not in {"state", "state-no-expansion", "full-history-opd"}:
+        raise ValueError("unknown State-OPD training/control variant")
     if min(steps, validation_examples) < 1:
         raise ValueError("positive train/evaluation budget required")
     split = validate_holdout(split_manifest, train_path, validation_path, dataset_revision=dataset_revision)
@@ -66,16 +69,34 @@ def run_state_opd(*, student_path, teacher_path, student_id, student_revision, t
     training = []
     for step in range(steps):
         row = train[step % len(train)]
-        environment = ArithmeticEnvironment(row["question"])
-        pool, audit = collect_response_pool(SamplingPolicy(student, max_tokens), environment,
-                                            system_prompt=SYSTEM_PROMPT, max_turns=max_turns,
-                                            multiplicity=multiplicity, concentration=concentration)
+        if variant == "full-history-opd":
+            # Vanilla reference executes M independent ROOT trajectories. It
+            # does not execute State-OPD's additional response branches.
+            pool, independent_audits = [], []
+            for _ in range(multiplicity):
+                environment = ArithmeticEnvironment(row["question"])
+                records, root_audit = collect_response_pool(SamplingPolicy(student, max_tokens), environment,
+                    system_prompt=SYSTEM_PROMPT, max_turns=max_turns, multiplicity=1, concentration=1)
+                pool.extend(records)
+                independent_audits.append(root_audit)
+            audit = {"root_trajectories": multiplicity,
+                     "root_turns": sum(a["root_turns"] for a in independent_audits),
+                     "root_actions_executed": sum(a["root_actions_executed"] for a in independent_audits),
+                     "additional_actions_executed": 0, "response_pool_size": len(pool),
+                     "independent_root_audits": independent_audits}
+        else:
+            environment = ArithmeticEnvironment(row["question"])
+            pool, audit = collect_response_pool(SamplingPolicy(student, max_tokens), environment,
+                system_prompt=SYSTEM_PROMPT, max_turns=max_turns,
+                multiplicity=1 if variant == "state-no-expansion" else multiplicity,
+                concentration=concentration)
         denominator = sum(len(record.sample.tokens) for record in pool)
         student.optimizer.zero_grad(set_to_none=True)
         total_loss, teacher_context_digests = 0., []
         prior_reasoning_removed = 0
         for record in pool:
-            teacher_messages = record.state.teacher_messages(SYSTEM_PROMPT)
+            teacher_messages = (record.history if variant == "full-history-opd" else
+                                record.state.teacher_messages(SYSTEM_PROMPT))
             with torch.no_grad():
                 teacher_likelihood, _ = teacher.token_statistics(teacher_messages, record.sample.tokens)
             # Scoring the same realized response-prefix tokens under different
@@ -87,7 +108,8 @@ def run_state_opd(*, student_path, teacher_path, student_id, student_revision, t
             normalized = token_losses.sum() / denominator
             normalized.backward()
             total_loss += float(normalized.detach())
-            prior_reasoning_removed += int(any(m["role"] == "assistant" for m in record.history))
+            prior_reasoning_removed += int(variant != "full-history-opd" and
+                                           any(m["role"] == "assistant" for m in record.history))
             teacher_context_digests.append(hashlib.sha256(str(teacher_messages).encode()).hexdigest())
         gradient_norm = torch.nn.utils.clip_grad_norm_([p for p in student.model.parameters() if p.requires_grad],
                                                        1., error_if_nonfinite=True)
@@ -103,7 +125,7 @@ def run_state_opd(*, student_path, teacher_path, student_id, student_revision, t
                          "gradient_l2_norm": float(gradient_norm),
                          "optimizer_update_executed": float(gradient_norm) > 0,
                          "supervised_tokens": denominator})
-    return {"method": "state-opd", "seed": seed, "device": device, "diagnostic_only": True,
+    return {"method": "state-opd", "variant": variant, "seed": seed, "device": device, "diagnostic_only": True,
             "evaluation_tier": "l1_mechanism", "dataset": split,
             "student": student.provenance, "teacher": teacher.provenance,
             "baseline": baseline, "method_metrics": evaluate(), "training": training,
@@ -112,7 +134,10 @@ def run_state_opd(*, student_path, teacher_path, student_id, student_revision, t
             "protocol": {"steps": steps, "max_turns": max_turns, "response_cap": max_tokens,
                          "transcript_cap": context_limit, "multiplicity": multiplicity,
                          "concentration": concentration, "test_opened": False,
-                         "teacher_and_policy_receive_gold": False},
+                         "effective_multiplicity": 1 if variant == "state-no-expansion" else multiplicity,
+                         "teacher_and_policy_receive_gold": False,
+                         "teacher_preceding_context": "full-history" if variant == "full-history-opd" else "executed-state",
+                         "reference_independent_root_trajectories": multiplicity if variant == "full-history-opd" else 1},
             "limitations": ["Public calculator interaction diagnostic, not ALFWorld/ScienceWorld/WebShop.",
                             "Small Qwen2.5 checkpoints replace original Qwen3 configurations.",
                             "Bounded response/transcript/step budget differs from the original scale.",

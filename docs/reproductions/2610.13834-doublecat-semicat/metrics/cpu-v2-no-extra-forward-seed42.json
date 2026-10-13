@@ -1,0 +1,58 @@
+{
+  "paper": "2610.13834",
+  "seed": 42,
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "device": "cpu",
+  "dataset_id": "Salesforce/wikitext",
+  "dataset_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "configuration": "wikitext-2-raw-v1",
+  "all_input_hashes_verified": true,
+  "split_hashes": {
+    "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+    "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+    "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+  },
+  "protocol": {
+    "revision": "doublecat-semicat-byte-dit-v2-no-extra-forward-core",
+    "steps": 1,
+    "length": 8,
+    "width": 16,
+    "layers": 1,
+    "batch_size": 2,
+    "nfe": 2,
+    "self_conditioning": false,
+    "training_objective": "Appendix E.1 detached L2 weighting, position sum then batch mean",
+    "reported_ce": "unweighted mean over unrevealed tokens at t=0.5"
+  },
+  "metrics": {
+    "onehot": {
+      "validation_denoising_ce_t05": 5.6473846435546875,
+      "test_denoising_ce_t05": 5.677355766296387,
+      "parameter_delta_l2": 0.11831154674291611,
+      "actual_denoiser_forward_calls": {"training": 1, "validation": 1, "test": 1, "sampling": 2},
+      "additional_no_grad_training_forwards": 0
+    },
+    "doublecat": {
+      "validation_denoising_ce_t05": 5.652562141418457,
+      "test_denoising_ce_t05": 5.6824469566345215,
+      "parameter_delta_l2": 0.11831668019294739,
+      "actual_denoiser_forward_calls": {"training": 1, "validation": 1, "test": 1, "sampling": 2},
+      "additional_no_grad_training_forwards": 0
+    },
+    "semicat": {
+      "validation_denoising_ce_t05": 5.64438533782959,
+      "test_denoising_ce_t05": 5.601202964782715,
+      "parameter_delta_l2": 0.11830459535121918,
+      "actual_denoiser_forward_calls": {"training": 1, "validation": 1, "test": 1, "sampling": 2},
+      "additional_no_grad_training_forwards": 0,
+      "final_revealed_tokens": 32,
+      "previously_revealed_changes": 0
+    },
+    "passed_behavior_tests": 10
+  },
+  "test_isolated_from_selection": true,
+  "interpretation": "One-step random-initialized byte-LM mechanism smoke only. DoubleCat CE is worse than onehot; SemiCat's lower CE here is not evidence of a capability improvement.",
+  "gpu_validation_completed": false
+}

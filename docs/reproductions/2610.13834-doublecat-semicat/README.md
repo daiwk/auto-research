@@ -32,8 +32,6 @@ flowchart TD
   B --> D
   D --> E[SemiCat 随机 reveal 干净 token]
   E --> F[双向 DiT denoiser]
-  F --> G[停止梯度预测作 self-conditioning]
-  G --> F
   F --> H[未 reveal token 的 CE]
   H --> I[真实模型训练]
   J[无参考答案的随机初始化] --> K[Euler 连续去噪]
@@ -44,17 +42,33 @@ flowchart TD
 
 ### 核心公式
 
-$$Y_t=(1-\kappa_t)Y_0+\kappa_tX_1,\qquad I_t^{dc}=(1-\gamma_t)X_0+\gamma_t(1-\kappa_t)Y_0+\gamma_t\kappa_tX_1.$$
+$$
+Y_t=(1-\kappa_t)Y_0+\kappa_tX_1,\qquad I_t^{dc}=(1-\gamma_t)X_0+\gamma_t(1-\kappa_t)Y_0+\gamma_t\kappa_tX_1.
+$$
 
 作者保留 uniform-on-simplex prior，$\kappa_t=\sqrt t$。本地使用 `Dirichlet(1)`，不是把常数 $1/|V|$ 当作完整随机 simplex 分布。
 
-$$I_t^{sc,\ell}=I_t^{dc,\ell}\mathbf1[t<\tau^\ell]+X_1^\ell\mathbf1[t\ge\tau^\ell],\quad \tau^\ell\sim U(0,1).$$
+$$
+I_t^{sc,\ell}=I_t^{dc,\ell}\mathbf1[t<\tau^\ell]+X_1^\ell\mathbf1[t\ge\tau^\ell],\quad \tau^\ell\sim U(0,1).
+$$
 
-$$\mathcal L=-\mathbb E\sum_\ell\mathbf1[t<\tau^\ell]\log\pi_t^{\theta,\ell}(X_1^\ell\mid I_t^{sc}).$$
+$$
+\mathcal L=-\mathbb E\sum_\ell\mathbf1[t<\tau^\ell]\log\pi_t^{\theta,\ell}(X_1^\ell\mid I_t^{sc}).
+$$
 
 Algorithm 1 的条件 reveal 概率为 $(t_{n+1}-t_n)/(1-t_n)$。连续 Euler 走向未温度调整的 denoiser $p$，categorical commit 才按温度调整。最后一步 hazard=1，保证全部 token 已 reveal；已 reveal 输入及输出永久 carry-over。
 
-DoubleCat 训练的推荐推理方式在原文中丢弃 $Y_t$ 项、采用普通 one-hot flow，得到更好的结果。本地遵循该推荐，而不是把它误写为未实现 DoubleCat。可选 self-conditioning 使用同时间的真实 denoiser no-grad 预测，绝非参考答案。
+DoubleCat 训练的推荐推理方式在原文中丢弃 $Y_t$ 项、采用普通 one-hot flow，得到更好的结果。本地遵循该推荐，而不是把它误写为未实现 DoubleCat。
+
+**前向次数与自条件边界**：§3.1 / Eq. 3.2 的双层插值本身模拟 self-conditioning 的训练分布收益，不调用 denoiser 构造输入；§3.2 / Eqs. 3.6–3.7 的 SemiCat 也没有额外 SC 前向。因此默认三个模型均关闭标准 SC，一次优化只做一次模型前向。§2 / Eq. 2.5 和 Appendix E.2 / Table 8 明确允许另开标准 SC 消融：Bernoulli($p_{sc}$) 触发同时间 no-grad 预测，再做真实训练前向。该消融只由 `--self-conditioning` 显式开启，额外一次前向如实计入预算，绝不称作 DoubleCat 的零额外前向机制。论文未给固定 $p_{sc}$；本地消融默认 0.5 并写入结果。§4.3 的 Plaid Bayesian posterior proxy 是另一嵌入空间方法，未冒充本实现。
+
+Appendix E.1 对包括 one-hot、DoubleCat、SemiCat 在内的训练使用停止梯度 L2 weighting：
+
+$$
+\Delta_t^\ell=\sqrt{\|\pi_t^{\theta,\ell}(I_t)-X_1^\ell\|_2+10^{-2}},\qquad \mathcal L_{train}=-\mathbb E\sum_\ell\mathbf1[t<\tau^\ell]\frac{\log\pi_t^{\theta,\ell}(X_1^\ell\mid I_t)}{\operatorname{sg}(\Delta_t^\ell)}.
+$$
+
+本地从同一次 denoiser logits 算出权重，不增加前向；训练对位置求和、对 batch 求均值。报告的 denoising CE 则明确为未加权、每个未 reveal token 的均值，不能把两者混为一项指标。可选 SC 推理复用上一采样步的预测，不增加 NFE。
 
 ### 论文离线与线上效果
 
@@ -71,7 +85,7 @@ DoubleCat 训练的推荐推理方式在原文中丢弃 $Y_t$ 项、采用普通
 
 ## 本地复现
 
-`core_mechanism / L1`：从随机初始化训练真实 **双向 DiT diffusion LM**，输入为连续 one-hot 状态，不调用 AR LM 生成后再改分数。每个 seed 实际训练 onehot、DoubleCat、SemiCat 三个同架构、同预算模型。
+`core_mechanism / L1`：从随机初始化训练真实 **双向 DiT diffusion LM**，输入为连续 one-hot 状态，不调用 AR LM 生成后再改分数。每个 seed 实际训练 onehot、DoubleCat、SemiCat 三个同架构、同预算模型；默认三个模型均无标准 SC 额外前向。结果逐阶段记录实际模型调用数，默认训练调用数等于优化步数，采样调用数等于 NFE。
 
 > **本地对照口径**：基线为 one-hot diffusion LM，实验组为 DoubleCat 与 SemiCat；报告固定 t=0.5 的 denoising CE 与采样机制指标，不把它们称作原文 Gen.PPL，相对能力提升百分比不适用。
 
@@ -84,15 +98,17 @@ PYTHONPATH=src python scripts/run_doublecat_semicat.py \
   --data /path/to/wikitext --dataset-id Salesforce/wikitext \
   --dataset-revision b08601e04326c79dfdd32d625aee71d232d685c3 \
   --device cuda --steps 40 --sequence-length 32 --batch-size 4 \
-  --width 64 --layers 2 --nfe 32 --seed 42 \
+  --width 64 --layers 2 --nfe 32 --seed 42 --no-self-conditioning \
   --output runs/doublecat-semicat-seed42.json
 ```
 
-adapter 读取 `dataset_dir/doublecat-semicat.json` 的显式 CLI 参数。无需下载额外模型权重；随机初始化 revision `doublecat-semicat-byte-dit-v1` 与 seed 记入结果。
+adapter 读取 `dataset_dir/doublecat-semicat.json` 的显式 CLI 参数。无需下载额外模型权重；当前随机初始化协议 revision `doublecat-semicat-byte-dit-v2-no-extra-forward-core` 与 seed 记入结果。标准 SC 消融需另加 `--self-conditioning --self-conditioning-probability 0.5`，额外调用单独记录。
 
 ### 本地结果与边界
 
-[cpu-diagnostic-seed42.json](metrics/cpu-diagnostic-seed42.json)为已执行的 CPU 一步、长度 8、宽度 16、1 层、2 NFE 端到端诊断。三模型参数 L2 变化分别约 0.1345；test denoising CE 为 onehot 5.6510、DoubleCat 5.6516、SemiCat 5.6580，SemiCat 此极小预算**没有改善 test CE**。4 个行为测试通过，覆盖双层公式、CE mask、双向依赖和 reveal carry-over。
+[cpu-diagnostic-seed42.json](metrics/cpu-diagnostic-seed42.json)保留先前 `byte-dit-v1` 的 CPU 一步、长度 8、宽度 16、1 层、2 NFE 诊断：当时默认标准 SC 开启，且未采用 Appendix E.1 L2 weighting，不能代表当前无额外前向核心协议。三模型参数 L2 变化分别约 0.1345；test denoising CE 为 onehot 5.6510、DoubleCat 5.6516、SemiCat 5.6580，SemiCat 此极小预算**没有改善 test CE**。旧源码 GPU 诊断也保留，不能通过改名/重绑定充当正确新源结果。当前行为测试另外核验默认核心一次前向、显式 SC 两次前向、采样严格 NFE 次以及停止梯度 L2 weighting。
+
+[cpu-v2-no-extra-forward-seed42.json](metrics/cpu-v2-no-extra-forward-seed42.json)为修正后的同等 CPU 一步预算：三模型实际训练前向各 1 次、validation/test 各 1 次、采样各 2 次，没有 no-grad 训练预前向。test CE 为 onehot 5.6774、DoubleCat 5.6824、SemiCat 5.6012，DoubleCat 在该诊断仍较差；SemiCat 的较低 CE 不能推导语言能力提升。10 个行为测试通过，新旧结果分别保留，不作跨协议提升比较。
 
 CPU 结果不能满足 A100/A30 GPU 门槛。此极小模型没有语言能力比较资格；denoising CE 不是精确 likelihood 或 GPT-2/Qwen Gen.PPL，采样 byte entropy 也不是原文 tokenizer 口径。未运行 TinyGSM、GSM8K、OWT、大规模 pretraining、下游 MCQA、distillation/InfoNoise/confidence sampler；未接入 Evolve。
 
@@ -100,7 +116,7 @@ CPU 结果不能满足 A100/A30 GPU 门槛。此极小模型没有语言能力�
 
 | 原文组件 | 本地实现 |
 | --- | --- |
-| 二级 interpolant、双向 DiT、self-condition、reveal | [doublecat_semicat.py](../../../src/auto_research/foundation_models/doublecat_semicat.py) |
+| 二级 interpolant、双向 DiT、L2 weighting、reveal；可选标准 SC 消融 | [doublecat_semicat.py](../../../src/auto_research/foundation_models/doublecat_semicat.py) |
 | 真训练、validation 选择和隔离 test | [run_doublecat_semicat.py](../../../scripts/run_doublecat_semicat.py) |
 | 行为测试 | [test_doublecat_semicat.py](../../../tests/test_doublecat_semicat.py) |
 

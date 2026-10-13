@@ -1,0 +1,9 @@
+graph LR
+ I[单帧相机] --> V[Wan VAE与adapter]
+ T[BERT与512sink位置] --> C[真实Cosmos12blocks与6层VL]
+ S[proprio28queries] --> C
+ V --> C
+ C --> R[one-step RF]
+ R --> A[16action chunk]
+ R --> F[future latents]
+ A --> E[LIBERO闭环]

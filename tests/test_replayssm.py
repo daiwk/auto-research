@@ -58,3 +58,15 @@ def test_low_read_never_enters_recurrence_and_gdn_refresh_recomputes():
             runner.accept(1)
         torch.testing.assert_close(runners[0].high, runners[1].high, atol=0, rtol=0)
         torch.testing.assert_close(runners[0].current_state(), runners[1].current_state(), atol=0, rtol=0)
+
+
+def test_author_cuda_entry_rejects_dirty_source_before_import_or_execution(tmp_path, monkeypatch):
+    from pathlib import Path
+    import runpy
+
+    script = runpy.run_path(str(Path(__file__).resolve().parents[1] / "scripts/run_replayssm.py"))
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
+    monkeypatch.setattr(script["subprocess"], "check_output", lambda command, **kwargs:
+                        script["UPSTREAM_REVISION"] if "rev-parse" in command else " M emulation/api.py")
+    with pytest.raises(ValueError, match="uncommitted changes"):
+        script["author_precision_suite"](tmp_path, 48, 42)

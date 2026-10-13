@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "soar",
+  "arxiv_id": "2610.13157",
+  "title": "SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents",
+  "paper_url": "https://arxiv.org/abs/2610.13157",
+  "organization": "Microsoft / Zhejiang University",
+  "published": "2026-10-09",
+  "upstream_code": "not released / not found in paper-linked primary sources (2026-10-13)",
+  "track": "post-training",
+  "topics": [
+    "Source-aware RL",
+    "Search agents",
+    "Source-consistency reward"
+  ],
+  "local_code": "src/auto_research/reproductions/soar",
+  "documentation": "docs/reproductions/2610.13157-soar/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Verified public train-only holdout",
+    "Independently sourced hash-verified public retrieval corpus"
+  ],
+  "baseline": "相同source-aware工作流的without-source-reward消融；另有冻结初始策略",
+  "metrics": [
+    "method_metrics.accuracy",
+    "parameters_changed"
+  ],
+  "mechanisms": [
+    "Actual policy-generated search and independent public document index",
+    "Context-isolated internal recall and explicit dual source observations",
+    "Declared-source EM consistency + correctness + format reward",
+    "Trajectory-level group advantages, reference KL and actual LoRA training"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.soar.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Microsoft / Zhejiang University",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoint/data/training budgets and original benchmark suite"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/soar-a100-20261013.json"
+  }
+}
+

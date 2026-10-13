@@ -42,6 +42,18 @@ RESOURCES = {
         "revision": "465df45efe1b87aead4f423d3f8670833c5ddaf4", "kind": "public-resource",
         "files": ["toolhang.h5"],
     },
+    "cosmos-teacher": {
+        "public_id": "nvidia/Cosmos-Policy-LIBERO-Predict2-2B", "repo_type": "model",
+        "revision": "cb689ec0e3347c13667d70a78a3447388f5c3bb8", "kind": "public-resource",
+        "files": ["Cosmos-Policy-LIBERO-Predict2-2B.pt", "libero_t5_embeddings.pkl",
+                  "libero_dataset_statistics.json"],
+    },
+    "cosmos-demo": {
+        "public_id": "nvidia/LIBERO-Cosmos-Policy", "repo_type": "dataset",
+        "revision": "b463cbd5d114909e4daea65eb03bed9787290042", "kind": "public-resource",
+        "files": ["success_only/libero_goal_regen/put_the_cream_cheese_in_the_bowl_demo.hdf5",
+                  "success_only/dataset_statistics.json"],
+    },
 }
 
 

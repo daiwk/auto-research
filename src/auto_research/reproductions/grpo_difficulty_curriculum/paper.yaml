@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "key": "grpo-difficulty-curriculum",
+  "arxiv_id": "2610.13669",
+  "title": "A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO",
+  "paper_url": "https://arxiv.org/abs/2610.13669",
+  "organization": "Dalian Maritime University",
+  "published": "2026-10-09",
+  "upstream_code": "https://github.com/NHLling/GRPO-B",
+  "track": "post-training",
+  "topics": [
+    "GRPO difficulty curriculum",
+    "Current-policy recalibration",
+    "Overly-hard degradation control"
+  ],
+  "local_code": "src/auto_research/reproductions/grpo_difficulty_curriculum",
+  "documentation": "docs/reproductions/2610.13669-grpo-difficulty-curriculum/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "GSM8K verified train-only holdout"
+  ],
+  "baseline": "相同checkpoint与配置的unfiltered、fixed-medium、static、staged、B5-too-hard；按实际effective-update/rollout预算解释",
+  "metrics": [
+    "method_metrics.accuracy",
+    "parameters_changed"
+  ],
+  "mechanisms": [
+    "Actual current-policy correctness rollouts recalibrate difficulty each step",
+    "Paper B1-B5 bands with separate auxiliary length reward",
+    "Fixed-medium/staged/static-easy-to-hard/unfiltered/B5-too-hard execution variants",
+    "Validation-only plateau checkpoint selection and real parameter-update count"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.grpo_difficulty_curriculum.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/NHLling/GRPO-B",
+      "organization": "Dalian Maritime University",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoint/data/training budgets and original benchmark suite"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/grpo-difficulty-curriculum-a100-20261013.json"
+  }
+}
+

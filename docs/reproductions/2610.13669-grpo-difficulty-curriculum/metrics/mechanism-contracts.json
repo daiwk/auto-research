@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "adapter_key": "grpo-difficulty-curriculum",
+  "manifest_ref": "reproduction:grpo-difficulty-curriculum",
+  "seeds": [
+    42
+  ],
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "evaluation_tier": "l0_contract",
+  "metrics": {
+    "paper_success_rate_bands": 5,
+    "primary_plateau_tolerance": 0.0107
+  },
+  "evaluation_protocol": {
+    "tier": "l0_contract",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "deterministic formula/behavior fixtures only; not capability evidence"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.13669-grpo-difficulty-curriculum/metrics/mechanism-contracts.json",
+    "dataset_fingerprint": "deterministic-tensor-mechanism-fixture-v1",
+    "code_revision": "working-tree implementation; GPU code revision is separate"
+  },
+  "limitations": [
+    "仅公式与行为合同测量",
+    "不是公开checkpoint训练效果",
+    "不替代A100/A30 receipt或能力比较"
+  ]
+}
+

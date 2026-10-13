@@ -27,6 +27,7 @@ def main():
     parser.add_argument("--concentration", type=int, default=2)
     parser.add_argument("--validation-examples", type=int, default=4)
     parser.add_argument("--context-limit", type=int, default=4096)
+    parser.add_argument("--variant", choices=("state", "state-no-expansion", "full-history-opd"), default="state")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     output = args.output

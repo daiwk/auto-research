@@ -1,0 +1,10 @@
+graph LR
+ O[图像] --> E[共享encoder]
+ E --> M[无泄露MoT]
+ C[干净动作] --> M
+ N[噪声动作] --> M
+ M --> Z[latent prediction]
+ M --> A[action flow]
+ E --> S[SIGReg]
+ A --> P[latent规划]
+ P --> X[真实闭环]

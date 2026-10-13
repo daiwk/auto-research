@@ -1,0 +1,22 @@
+{
+  "domain": "foundation-models",
+  "key": "lewam",
+  "title": "LeWAM: End-to-End World and Action Modeling with JEPAs",
+  "paper_url": "https://arxiv.org/abs/2610.12818",
+  "detail_path": "reproductions/2610.12818-lewam/README.md",
+  "topic": [
+    "world-action-model",
+    "jepa",
+    "latent-planning"
+  ],
+  "first_author": "Minghao Fu",
+  "first_author_affiliation": "UC San Diego",
+  "published": "2026-10-08",
+  "priority": "P1",
+  "code": "https://github.com/MinghaoFu/lewam",
+  "adapter": {
+    "spec_key": "lewam"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct13-lewam-a100.json"
+}

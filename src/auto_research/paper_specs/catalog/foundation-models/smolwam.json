@@ -1,0 +1,22 @@
+{
+  "domain": "foundation-models",
+  "key": "smolwam",
+  "title": "SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices",
+  "paper_url": "https://arxiv.org/abs/2610.13740",
+  "detail_path": "reproductions/2610.13740-smolwam/README.md",
+  "topic": [
+    "world-action-model",
+    "robotics",
+    "efficient-inference"
+  ],
+  "first_author": "Timi Owolabi",
+  "first_author_affiliation": "ML Collective",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": "https://github.com/iitimii/SmolWAM",
+  "adapter": {
+    "spec_key": "smolwam"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct13-smolwam-a100.json"
+}

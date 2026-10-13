@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "key": "upturn",
+  "arxiv_id": "2610.13672",
+  "title": "Inject a Turn, Not a Token: Learning Where to Redirect LLM Reasoning for Self-Correction",
+  "paper_url": "https://arxiv.org/abs/2610.13672",
+  "organization": "KAIST",
+  "published": "2026-10-09",
+  "upstream_code": "not released / not found in paper-linked primary sources (2026-10-13)",
+  "track": "post-training",
+  "topics": [
+    "Self-correction",
+    "Frozen causal encoder",
+    "Learned cut policy"
+  ],
+  "local_code": "src/auto_research/reproductions/upturn",
+  "documentation": "docs/reproductions/2610.13672-upturn/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "GSM8K verified train-only holdout"
+  ],
+  "baseline": "Base@2N完整rollout，对照UPTURN@N及至多N次替换；预算匹配为最大允许生成数，不等于实际耗时一致",
+  "metrics": [
+    "method_metrics.avg_accuracy",
+    "method_metrics.pass_rate",
+    "position_informative_groups",
+    "parameters_changed"
+  ],
+  "mechanisms": [
+    "Frozen exact-token causal encoder and LayerNorm-MLP paragraph-boundary policy",
+    "Failed-trajectory cut groups with real rescue reward and mean-centered policy gradient",
+    "Separate correctness gate trained/calibrated on train-only prompts",
+    "New user-turn injection and explicit matched maximum generation/token budgets"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.upturn.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "KAIST",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoint/data/training budgets and original benchmark suite"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/upturn-a100-20261013.json"
+  }
+}
+

@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "adapter_key": "progressive-contraction",
+  "manifest_ref": "reproduction:progressive-contraction",
+  "seeds": [
+    42
+  ],
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "evaluation_tier": "l0_contract",
+  "metrics": {
+    "mc_reachability": 0.5,
+    "mc_uncertainty": 1
+  },
+  "evaluation_protocol": {
+    "tier": "l0_contract",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "deterministic formula/behavior fixtures only; not capability evidence"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.12933-progressive-contraction/metrics/mechanism-contracts.json",
+    "dataset_fingerprint": "deterministic-tensor-mechanism-fixture-v1",
+    "code_revision": "working-tree implementation; GPU code revision is separate"
+  },
+  "limitations": [
+    "仅公式与行为合同测量",
+    "不是公开checkpoint训练效果",
+    "不替代A100/A30 receipt或能力比较"
+  ]
+}
+

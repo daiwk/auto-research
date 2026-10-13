@@ -1,0 +1,13 @@
+graph LR
+ Q[任务] --> C[capability与anchors]
+ C --> P[pseudo只供检索]
+ Q --> H[HSR]
+ P --> H
+ C --> B[BM25]
+ H --> B
+ B --> R[roundrobin]
+ R --> S[CSI]
+ E[环境] --> S
+ S --> L[加载真实skill]
+ L --> A[真实action]
+ A --> E

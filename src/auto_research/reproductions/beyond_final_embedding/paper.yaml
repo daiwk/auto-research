@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "key": "beyond-final-embedding",
+  "arxiv_id": "2610.13277",
+  "title": "Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence",
+  "paper_url": "https://arxiv.org/abs/2610.13277",
+  "organization": "Southeast University / MemoraX AI / Leiden University / University of Sydney",
+  "published": "2026-10-09",
+  "upstream_code": "否：原文与官方页面未找到作者代码（核查 2026-10-13）",
+  "track": "llm",
+  "topics": [
+    "memory-retrieval",
+    "token-level-evidence",
+    "query-adaptation"
+  ],
+  "local_code": "src/auto_research/reproductions/beyond_final_embedding",
+  "documentation": "docs/reproductions/2610.13277-beyond-final-embedding/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "LongMemEval public cleaned source-order subset",
+    "sentence-transformers/all-MiniLM-L6-v2"
+  ],
+  "baseline": "冻结MiniLM原生masked-mean pooled cosine",
+  "metrics": [
+    "test.recall_at_10",
+    "test.ndcg_at_10",
+    "training_free_test.ndcg_at_10",
+    "parameter_update_l2"
+  ],
+  "mechanisms": [
+    "冻结内容token全局稀疏匹配",
+    "tail floor与memory ID aggregation",
+    "querywise local-global标准化融合",
+    "norm-preserving lowrank queryadapter + multi-positive MaxSimCE"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.beyond_final_embedding.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Southeast University / MemoraX AI / Leiden University / University of Sydney",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "原版8backbone完整LMEB",
+      "HNSW由exact sparse检索替代",
+      "EvoTrain替为LongMemEval隔离source split",
+      "原文downstream QA未执行"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "max_queries=100, max_length=128; validation-only selection",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a100.json"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "adapter_key": "state-opd",
+  "paper_url": "https://arxiv.org/abs/2610.13238",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "原文用Qwen3-32B教师、1.7B/4B学生，在ALFWorld、ScienceWorld、WebShop训练200步，每配置一个seed。4B五设置macro success由Vanilla OPD的26.07%到31.74%；1.7B由18.90%到20.76%。不是本地计算器环境结果。未报告生产线上A/B。",
+  "metrics": {
+    "qwen3_4b_vanilla_macro_success_percent": 26.07,
+    "qwen3_4b_state_macro_success_percent": 31.74,
+    "qwen3_1_7b_state_macro_success_percent": 20.76
+  }
+}
+
