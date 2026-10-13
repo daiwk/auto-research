@@ -1338,16 +1338,31 @@
       "action_budget": 100,
       "proposals": 4,
       "gradient_steps": 5
-    }
+    },
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "scaled train-derived-goal mechanism diagnostic; no stable improvement claim"
   },
   "provenance": {
     "code_commit": "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e",
-    "artifact_path": "docs/reproductions/2610.12818-lewam/metrics/native-candidate-a100-seeds42-44.json"
+    "artifact_path": "docs/reproductions/2610.12818-lewam/metrics/native-candidate-a100-seeds42-44.json",
+    "dataset_fingerprint": "e5624ac81ad77ee100d44e2c909fd2aa3850ed010613037ba865fe0a016264af"
   },
   "limitations": [
     "Bounded native 1-epoch, 4-batch training, not original 50-epoch training.",
     "Goals sampled from training trajectories; no held-out test or formal capability comparison.",
     "Two episodes per seed/control, 100-step budget, 4 proposals and 5 gradient steps.",
     "Dataset Robosuite metadata 1.4.1 vs author-required runtime 1.5.1 mismatch warning retained."
-  ]
+  ],
+  "manifest_ref": "reproduction:lewam",
+  "dataset": {
+    "public_id": "LeWAM/lewam-toolhang",
+    "revision": "465df45efe1b87aead4f423d3f8670833c5ddaf4",
+    "files": {
+      "toolhang.h5": "98a2578938aae6175a1ab1d28ce308bee45ecda1d662f4109998dfe6e04fca0b"
+    }
+  }
 }

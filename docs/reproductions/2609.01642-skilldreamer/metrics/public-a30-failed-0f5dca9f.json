@@ -232,7 +232,13 @@
       "gold_visible_to_policy": false,
       "original_skill_benchmark": false,
       "environment": "actual AST arithmetic calculator; no model-code execution"
-    }
+    },
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
   },
   "provenance": {
     "code_commit": "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e",
@@ -243,12 +249,14 @@
       "src/auto_research/reproductions/skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
       "src/auto_research/reproductions/skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970"
     },
-    "source_archive_sha256": "3d9ce51e7d42813e3b3aa6f204736ea7755b8e29e417b248667db9a8810502d6"
+    "source_archive_sha256": "3d9ce51e7d42813e3b3aa6f204736ea7755b8e29e417b248667db9a8810502d6",
+    "dataset_fingerprint": "3d10f72c145bdeb681662c3a4407eb1e7b62fcfc251ecb2da68ac26ca178e580"
   },
   "limitations": [
     "Fixed 24-row train-derived arithmetic diagnostic, not official GSM8K test or original skill benchmark.",
     "All 48 SkillDreamer episodes failed before actual CSI assessment, gallery loading and tool execution.",
     "Completed CUDA model calls do not validate the defining SkillDreamer chain.",
     "No passed GPU receipt and no capability/promotion claim. All failures retained."
-  ]
+  ],
+  "manifest_ref": "reproduction:skilldreamer"
 }

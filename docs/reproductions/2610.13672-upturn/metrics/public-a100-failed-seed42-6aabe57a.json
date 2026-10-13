@@ -109,7 +109,7 @@
                 137
               ],
               "loss": -0.0013861844781786203,
-              "gradient_l2_norm": 0.000027731650334317237,
+              "gradient_l2_norm": 2.7731650334317237e-05,
               "optimizer_update_executed": true,
               "advantages": [
                 0,
@@ -203,7 +203,10 @@
     "formal_comparison": false,
     "promotion_eligible": false,
     "test_used_for_selection": false,
-    "claim_policy": "retained failed or old-invalid protocol diagnosis, not a passed GPU validation"
+    "claim_policy": "retained failed or old-invalid protocol diagnosis, not a passed GPU validation",
+    "seeds": [
+      42
+    ]
   },
   "dataset": {
     "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation",

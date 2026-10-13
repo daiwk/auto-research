@@ -146,15 +146,18 @@ def curate(directory: Path, commit: str, source_archive: Path) -> dict:
                    "Dataset Robosuite metadata 1.4.1 vs author-required runtime 1.5.1 mismatch warning retained."]
     artifact = f"{DOC}/native-candidate-a100-seeds42-44.json"
     receipt_path = "docs/gpu-validations/oct13-lewam-a100.json"
-    payload = {"schema_version": 2, "adapter_key": "lewam", "seeds": list(SEEDS),
+    payload = {"schema_version": 2, "adapter_key": "lewam", "manifest_ref": "reproduction:lewam", "seeds": list(SEEDS),
                "diagnostic_only": True, "promotion_eligible": False, "measured_locally": True,
                "aggregate_metrics": metrics, "seed_results": [{"training": training, "candidate_control": evaluation}
                                                                for training, evaluation in pairs],
-               "raw_artifacts": raw, "execution_checks": checks,
-               "evaluation_protocol": {"tier": "l2_public_dataset", "formal_comparison": False,
+               "raw_artifacts": raw, "execution_checks": checks, "dataset": pairs[0][0]["dataset"],
+               "evaluation_protocol": {"tier": "l2_public_dataset", "seeds": list(SEEDS), "formal_comparison": False,
+                                       "claim_policy": "scaled train-derived-goal mechanism diagnostic; no stable improvement claim",
                                        "budget": {"epochs": 1, "batches": 4, "batch_size": 8,
                                                   "episodes": 2, "action_budget": 100, "proposals": 4, "gradient_steps": 5}},
-               "provenance": {"code_commit": commit, "artifact_path": artifact}, "limitations": limitations}
+               "provenance": {"code_commit": commit, "artifact_path": artifact,
+                              "dataset_fingerprint": hashlib.sha256(json.dumps(pairs[0][0]["dataset"], sort_keys=True).encode()).hexdigest()},
+               "limitations": limitations}
     receipt = {"schema_version": 1, "adapter_key": "lewam", "validated_at": datetime.now(timezone.utc).isoformat(),
                "accelerator": {"vendor": "NVIDIA", "model": "NVIDIA A100-SXM4-80GB"},
                "command": ["python", "scripts/run_oct13_robotics.py", "--paper", "lewam", "--phase", "train",

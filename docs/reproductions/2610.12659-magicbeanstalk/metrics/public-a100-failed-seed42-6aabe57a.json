@@ -117,7 +117,7 @@
             "train_examples": 4,
             "validation_examples": 4,
             "max_tokens": 768,
-            "learning_rate": 0.00001,
+            "learning_rate": 1e-05,
             "group": 4,
             "depth": 1,
             "decomposition_retries": 2,
@@ -147,7 +147,10 @@
     "formal_comparison": false,
     "promotion_eligible": false,
     "test_used_for_selection": false,
-    "claim_policy": "retained failed or old-invalid protocol diagnosis, not a passed GPU validation"
+    "claim_policy": "retained failed or old-invalid protocol diagnosis, not a passed GPU validation",
+    "seeds": [
+      42
+    ]
   },
   "dataset": {
     "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation",

@@ -30,12 +30,13 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 | discovery / implementation reconcile | 检查返回 0；不因此推进审查水位 |
 | 基础 wheel 的独立安装检查 | 使用现有缓存离线构建及安装，metadata/help/init 合同通过，未导入可选 ML runtime |
 | MkDocs strict | 通过；新增 12 个仓库代码链接已换成 GitHub 源码链接，不指向不存在的站点路径 |
-| GPU evidence gate | 已核验 LeWAM 与难度课程单 seed 回执后仍缺 7 篇，明确未通过；难度课程剩余对照/种子也未完成，不再以旧快照或入口存在代替 |
+| GPU evidence gate | 已核验 LeWAM、SmolWAM 与难度课程单 seed 回执后仍缺 6 篇，明确未通过；难度课程剩余对照/种子也未完成，不再以旧快照或入口存在代替 |
 | 新快照相关回归 | `0f5dca9f` 的技能 JSON schema、机器人训练候选及隔离加载、MBS 配对根题预算，连同四项产物摘录工具共 110 项通过；Ruff / diff 检查通过 |
 | 新快照全量复跑 | 唯一失败为 State-OPD metadata 测试写死旧回执日期；已显式切换 10 月 14 日三臂回执并增加九次运行/源码约束，12 项定向检查通过；最终新修复快照仍须全量复跑 |
 | SkillDreamer 定义链路门禁 | 摘录工具拒绝每 seed 缺实际 CSI、真实 gallery 加载或工具执行的结果，且核对 episode 与汇总计数；8 项摘录回归通过，不代表 GPU 结果通过 |
 | 后续全量回归 | `32f873e7` 全量 **2148 通过、24 warnings、274.05 秒**；后续 SmolWAM NumPy 与 adapter-only 修复另有 81 项世界模型/LeWAM 定向检查通过，尚不等于最终新快照全量验收 |
 | 有界后训练诊断与课程证据 | 冻结诊断入口 `51b4718a`；diagnosis / curriculum curation / post specs 共 55 项通过。只允许 train-only 诊断，不签整方法能力回执 |
+| 新产物与看板回归 | 新增数据集嵌套协议标签用例先失败后修复；看板/目录/模型spec/postspec/负结果 48 项通过；世界模型摘录/负结果/看板 42 项通过；SOAR train-only 格式探针 13 项通过，均不冒充 GPU 实跑 |
 
 早期完整通过结果绑定源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`，后续全量与定向结果按上表分别记录；随后若有源码修复须补相应检查。
 真实 GPU 缺项仍按 TODO 验收，最终 PR 的 CI 尚未触发；本地测试通过不等于最终 PR 可合并。
@@ -54,6 +55,6 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 ## 下一次恢复顺序
 
 1. 用户明确恢复 GPU 工作后，重新核验源码与公开资源实际 SHA，未知传输状态不当作成功。
-2. 按 GPU TODO 完成当前 7 个缺失回执及难度课程剩余对照/种子；统一 adapter 入口还须核对真实 runner 参数与预算。
+2. 按 GPU TODO 完成当前 6 个缺失回执及难度课程剩余对照/种子；统一 adapter 入口还须核对真实 runner 参数与预算。
 3. 只对实际执行成功或明确保留失败边界的结果生成源码绑定回执，不用旧 receipt 替代新算法。
 4. 重新生成并检查全部目录/指标，执行完整 pytest、GPU 门禁与 CI；完成后提交原定的单个 PR，不自动合并或部署。

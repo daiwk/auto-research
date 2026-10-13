@@ -1,6 +1,6 @@
 # SmolWAM：保留世界预测的紧凑机器人动作模型
 
-> 当前为 `core_mechanism`：实现入口保留真实 Cosmos-derived trunk、LIBERO 动作闭环、teacher target 生成与布局课程，不用 VQA/随机小网络替代。尚待实际 CUDA receipt；原5000步蒸馏未重训，不能称 full_pipeline。
+> 当前为 `core_mechanism`：真实 A100 已完成三 seed 缩放 teacher 蒸馏、两阶段布局课程与新 student LIBERO 闭环，不用 VQA/随机小网络替代。新 student 与 no-op 均无任务成功；原5000步蒸馏未重训，不能称 full_pipeline 或能力提升。
 
 ## 论文信息
 
@@ -88,7 +88,7 @@ $$
 
 ## 本地复现
 
-> **本地对照口径**：基线为同固定 LIBERO 初始状态实际执行的 no-op 策略，实验组为固定 SmolWAM checkpoint；完整 teacher 保持率与相对提速不适用。
+> **本地对照口径**：基线为同固定 LIBERO 初始状态实际执行的 no-op 策略，实验组为各 seed 新训练、validation-selected SmolWAM student；完整 teacher 保持率与相对提速不适用。发布推理入口保留，但本轮成绩不来自发布 student。
 
 ```bash
 PYTHONPATH=src python scripts/run_oct13_robotics.py \
@@ -102,7 +102,17 @@ PYTHONPATH=src python scripts/run_oct13_robotics.py \
 
 发布模型 [timiiowolabi/SmolWAM](https://huggingface.co/timiiowolabi/SmolWAM) revision `c269c6e3a9c113b2b04187daf977c09486e2eadc`，model 3,517,377,924 bytes，text cache 3,936,048 bytes。Wan2.1 VAE 固定 `37ec512624d61f7aa208f7ea8140a131f93afc9a`，只读取 507,609,880-byte `Wan2.1_VAE.pth`，不下载视频 diffusion trunk。LIBERO 原版 Git 固定 `8f1084e3132a39270c3a13ebe37270a43ece2a01`；仅需代码、assets、bddl、init_files，闭环推理不需要 demonstration 下载。
 
-原作者训练代码完整保留了四项蒸馏、6层 VL 和 layout curriculum；本地合同检查这些结构，但没有声称重新生成 teacher targets/执行 5000 步训练。当前为发布推理核心；world latent 实际输出但尚未对真实 future 计算原文图像指标。限定任务/episode 和三 seed 仍不是原版 400-episode benchmark。公式测试证据见 [implementation-contract.json](metrics/implementation-contract.json)，不当作 GPU 闭环结果；GPU gate 尚需真实 receipt。
+原作者训练代码完整保留了四项蒸馏、6层 VL 和 layout curriculum。本轮真实生成缩放 teacher targets 并执行 8 步 student 训练，不冒充原版 5000 步训练；新 student 的 world latent 在闭环中实际输出，但尚未对真实 future 计算原文图像指标。限定任务/episode 和三 seed 仍不是原版 400-episode benchmark。公式测试证据见 [implementation-contract.json](metrics/implementation-contract.json)，不当作 GPU 闭环结果。
+
+2026-10-14，冻结 `2b84c377` 在真实 A100 完成三 seed 的 Wan-VAE latent bank→28-block/T5 teacher targets→12-block student 两阶段课程→新 student 同任务闭环。每 seed 前 8 demonstrations 共 202 rows，32 train/24 validation rows；teacher targets 全量覆盖 202 rows，teacher-vs-demo action L1 约 0.0090183。每 seed 有 8 次非零梯度优化调用、7 次实际参数变化（首步原生 warmup LR 为 0），1764/1008-token 布局分别执行 2/6 步，四项主要 loss、总 loss、validation 与辅助项均有限。
+
+| Seed | 最优 compact validation action L1 | 参数抽样差异 L2 | 新 student / no-op 成功 | 训练＋闭环总耗时 |
+| --- | --- | --- | --- | --- |
+| 42 | 0.332996 | 0.008666 | 0/2 / 0/2 | 352.48 秒 |
+| 43 | 0.348870 | 0.010348 | 0/2 / 0/2 | 353.11 秒 |
+| 44 | 0.325485 | 0.010461 | 0/2 / 0/2 | 351.01 秒 |
+
+每 seed 使用 `libero_goal:6`（cream-cheese-in-bowl）的 2 trials、300-action 预算；新 student 和 no-op 采用相同初始状态。各 student 实际执行 600 个动作、38 次模型查询并输出动作/未来 latent；两个控制臂均为 0% ± 0%，无任务成功或相对提升结论。每 seed 总墙时硬限 1800 秒。完整 loss/gradient/权重与实现 SHA 绑定、6 份 exact raw JSON 见 [真实训练与新 student 指标](metrics/native-student-a100-seeds42-44.json)；[脱敏 GPU 回执](../../gpu-validations/oct13-smolwam-a100.json)证明缩放定义链路执行，不证明原论文能力或完整 benchmark 复现。旧 `2a061dd6` 失败不混入新三 seed。
 
 ### 代码映射
 
@@ -147,6 +157,6 @@ PYTHONPATH=src python scripts/run_oct13_robotics.py --paper smolwam --phase trai
 
 一个必须显式记录的 bounded-data 修正：作者 KD 默认 `val_frac=0` 仍排除一个 episode，单任务规模下它恰好可能排除全部 student validation KD rows。本地仅在 **teacher inference 缓存阶段** 对所有 bounded bank rows 生成真实 targets，包括 validation；student split/validation选checkpoint逻辑不变，未给 student train-loader 加入 validation 行，未修改 upstream pin。`training.py` 强制两种布局都有真实非零梯度/参数更新，所有四项 loss 实际存在、validation 非空，并只接受 compact-layout validation 选择的 checkpoint。
 
-此训练入口目前尚需实际 A100 运行验证。即使8步全部执行，也只是缩小训练机制诊断，不代表原68,830row/5000step效果；重新训练 latent adapter、完整训练、多任务数据覆盖和**新 student**的 LIBERO闭环评测仍未完成。发布版推理不能被写成这些训练阶段已复现。
+此训练入口与新 student 同任务闭环已由上述三 seed A100 证据验证；8 步仅是缩小训练机制诊断，不代表原68,830row/5000step效果。重新训练 latent adapter、完整训练、多任务数据覆盖、原400-episode闭环和teacher闭环比较仍未完成；发布版推理不能被写成这些阶段已复现。
 
-新 student 的 `native-training/student/training-provenance.json` 绑定真实训练的 seed、作者版本、公开数据、非零梯度/参数更新，以及 validation-selected `best.pt` 的 SHA256。闭环配置通过 `trained_model_dir` 读取它；先严格检查 12 blocks、6 VL layers、512位置文本和1008-token compact布局，再加载实际新 student 全部权重。VAE、文本缓存和归一化仍来自已验发布资源。新 student 与 no-op 在每个 task/trial 使用相同初始状态，结果固定为 bounded diagnostic、不可 promotion；当前尚未把该入口标为已完成实跑。
+新 student 的 `native-training/student/training-provenance.json` 绑定真实训练的 seed、作者版本、公开数据、非零梯度/参数更新，以及 validation-selected `best.pt` 的 SHA256。闭环配置通过 `trained_model_dir` 读取它；先严格检查 12 blocks、6 VL layers、512位置文本和1008-token compact布局，再加载实际新 student 全部权重。VAE、文本缓存和归一化仍来自已验发布资源。新 student 与 no-op 在每个 task/trial 使用相同初始状态，结果固定为 bounded diagnostic、不可 promotion；上述回执绑定的是该新 student 入口的实际执行。

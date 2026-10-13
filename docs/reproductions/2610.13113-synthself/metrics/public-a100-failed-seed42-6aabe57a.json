@@ -94,7 +94,7 @@
             "train_examples": 8,
             "validation_examples": 4,
             "max_tokens": 512,
-            "learning_rate": 0.00001,
+            "learning_rate": 1e-05,
             "epochs": 2,
             "control": "gold-sft"
           },
@@ -120,7 +120,10 @@
     "formal_comparison": false,
     "promotion_eligible": false,
     "test_used_for_selection": false,
-    "claim_policy": "retained failed or old-invalid protocol diagnosis, not a passed GPU validation"
+    "claim_policy": "retained failed or old-invalid protocol diagnosis, not a passed GPU validation",
+    "seeds": [
+      42
+    ]
   },
   "dataset": {
     "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation",

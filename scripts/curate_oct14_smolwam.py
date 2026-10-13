@@ -148,12 +148,15 @@ def curate(directory: Path, commit: str, source_archive: Path) -> dict:
     artifact, receipt_path = f"{DOC}/native-student-a100-seeds42-44.json", "docs/gpu-validations/oct13-smolwam-a100.json"
     budget = {"training_episodes": 8, "training_steps": 8, "layout_steps": [2, 6], "max_training_rows": 32,
               "tasks": ["libero_goal:6"], "trials": 2, "action_budget": 300, "total_wall_limit_seconds": 1800}
-    payload = {"schema_version": 2, "adapter_key": "smolwam", "seeds": list(SEEDS), "diagnostic_only": True,
+    payload = {"schema_version": 2, "adapter_key": "smolwam", "manifest_ref": "reproduction:smolwam", "seeds": list(SEEDS), "diagnostic_only": True,
                "promotion_eligible": False, "measured_locally": True, "aggregate_metrics": metrics,
                "seed_results": [{"training": training, "candidate_control": evaluation} for training, evaluation in pairs],
-               "raw_artifacts": raw, "execution_checks": checks,
-               "evaluation_protocol": {"tier": "l2_public_dataset", "formal_comparison": False, "budget": budget},
-               "provenance": {"code_commit": commit, "artifact_path": artifact}, "limitations": limitations}
+               "raw_artifacts": raw, "execution_checks": checks, "dataset": pairs[0][0]["dataset"],
+               "evaluation_protocol": {"tier": "l2_public_dataset", "seeds": list(SEEDS), "formal_comparison": False, "budget": budget,
+                                       "claim_policy": "scaled single-task teacher distillation and closed-loop diagnostic; no stable improvement claim"},
+               "provenance": {"code_commit": commit, "artifact_path": artifact,
+                              "dataset_fingerprint": hashlib.sha256(json.dumps(pairs[0][0]["dataset"], sort_keys=True).encode()).hexdigest()},
+               "limitations": limitations}
     commands = [["python", "scripts/run_oct13_robotics.py", "--paper", "smolwam", "--phase", phase,
                  "--config", f"data/smolwam-{label}.json", "--seed", str(seed), "--output", f"runs/smolwam-{label}-seed{seed}.json"]
                 for seed in SEEDS for phase, label in (("train", "train"), ("eval", "candidate"))]

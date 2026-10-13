@@ -1,0 +1,4080 @@
+{
+  "paper": "smolwam",
+  "phase": "train",
+  "seed": 44,
+  "executed": true,
+  "source_revision": "dde1e5bfe35c439499343c6d70e9cd32c96d0b36",
+  "device": "cuda",
+  "dataset": {
+    "public_id": "nvidia/LIBERO-Cosmos-Policy",
+    "revision": "b463cbd5d114909e4daea65eb03bed9787290042",
+    "files": {
+      "success_only/libero_goal_regen/put_the_cream_cheese_in_the_bowl_demo.hdf5": "533472726b4cf89b2000af1bc275f26fb6cdcd2a5706fbd65cbe019f58180ebb",
+      "success_only/dataset_statistics.json": "5b119a98ad7824507ddff3c6c7507ca244261ee416dcfa623876702160c580d3"
+    }
+  },
+  "teacher": {
+    "public_id": "nvidia/Cosmos-Policy-LIBERO-Predict2-2B",
+    "revision": "cb689ec0e3347c13667d70a78a3447388f5c3bb8",
+    "files": {
+      "Cosmos-Policy-LIBERO-Predict2-2B.pt": "8818528d8c9150cda0ddf8c711b0f221b21dac8ac379bd26d5690235954d33e2",
+      "libero_t5_embeddings.pkl": "8a03499676c6c196127c577144b9fd09bb02c30f9caf058adbcef09bb99ad8f5",
+      "libero_dataset_statistics.json": "5b119a98ad7824507ddff3c6c7507ca244261ee416dcfa623876702160c580d3"
+    }
+  },
+  "pretrained_adapter_text": {
+    "public_id": "timiiowolabi/SmolWAM",
+    "revision": "c269c6e3a9c113b2b04187daf977c09486e2eadc",
+    "files": {
+      "model.safetensors": "dd1f0341e2718fc8eaf616401c83b1a376d0780d34d31a825d8053180c25772a",
+      "config.json": "b3916f24e4597611dd5ca99f46d0d9f3cd40a51919840d3cef92538bd7a54d99",
+      "text_cache.safetensors": "a2b6dc0bca98929000210b2aa9f26489570b88cd7bc2525f2dd410d0a1dda7a6"
+    }
+  },
+  "latent_adapter": {
+    "kind": "derived-frozen-latent-adapter-only",
+    "source_sha256": "dd1f0341e2718fc8eaf616401c83b1a376d0780d34d31a825d8053180c25772a",
+    "sha256": "f3d0233a6f578cfeb2f2d173336feba45ae01c1a154e8997f4f07278d3fff971",
+    "tensor_keys": [
+      "adapter.blocks.0.0.bias",
+      "adapter.blocks.0.0.weight",
+      "adapter.blocks.0.2.bias",
+      "adapter.blocks.0.2.weight",
+      "adapter.blocks.0.3.bias",
+      "adapter.blocks.0.3.weight",
+      "adapter.blocks.0.5.bias",
+      "adapter.blocks.0.5.weight",
+      "adapter.blocks.1.0.bias",
+      "adapter.blocks.1.0.weight",
+      "adapter.blocks.1.2.bias",
+      "adapter.blocks.1.2.weight",
+      "adapter.blocks.1.3.bias",
+      "adapter.blocks.1.3.weight",
+      "adapter.blocks.1.5.bias",
+      "adapter.blocks.1.5.weight",
+      "adapter.blocks.2.0.bias",
+      "adapter.blocks.2.0.weight",
+      "adapter.blocks.2.2.bias",
+      "adapter.blocks.2.2.weight",
+      "adapter.blocks.2.3.bias",
+      "adapter.blocks.2.3.weight",
+      "adapter.blocks.2.5.bias",
+      "adapter.blocks.2.5.weight",
+      "adapter.cam_emb",
+      "adapter.inp.bias",
+      "adapter.inp.weight",
+      "adapter.out.bias",
+      "adapter.out.weight",
+      "adapter.scale",
+      "adapter.shift",
+      "adapter_inv.blocks.0.0.bias",
+      "adapter_inv.blocks.0.0.weight",
+      "adapter_inv.blocks.0.2.bias",
+      "adapter_inv.blocks.0.2.weight",
+      "adapter_inv.blocks.0.3.bias",
+      "adapter_inv.blocks.0.3.weight",
+      "adapter_inv.blocks.0.5.bias",
+      "adapter_inv.blocks.0.5.weight",
+      "adapter_inv.blocks.1.0.bias",
+      "adapter_inv.blocks.1.0.weight",
+      "adapter_inv.blocks.1.2.bias",
+      "adapter_inv.blocks.1.2.weight",
+      "adapter_inv.blocks.1.3.bias",
+      "adapter_inv.blocks.1.3.weight",
+      "adapter_inv.blocks.1.5.bias",
+      "adapter_inv.blocks.1.5.weight",
+      "adapter_inv.blocks.2.0.bias",
+      "adapter_inv.blocks.2.0.weight",
+      "adapter_inv.blocks.2.2.bias",
+      "adapter_inv.blocks.2.2.weight",
+      "adapter_inv.blocks.2.3.bias",
+      "adapter_inv.blocks.2.3.weight",
+      "adapter_inv.blocks.2.5.bias",
+      "adapter_inv.blocks.2.5.weight",
+      "adapter_inv.cam_emb",
+      "adapter_inv.inp.bias",
+      "adapter_inv.inp.weight",
+      "adapter_inv.out.bias",
+      "adapter_inv.out.weight",
+      "adapter_inv.scale",
+      "adapter_inv.shift"
+    ],
+    "released_trunk_text_or_student_weights_loaded": false
+  },
+  "variants": {
+    "distillation_training": {
+      "optimizer_updates": 8,
+      "teacher_layout_updates": 2,
+      "compact_layout_updates": 6,
+      "nonzero_parameter_updates": 7,
+      "nonzero_gradient_updates": 8,
+      "parameter_sample_delta_l2": 0.010460627883859331,
+      "updated_parameter_tensors": 340,
+      "best_validation_action_l1": 0.32548515560726327,
+      "real_teacher_target_rows": 202,
+      "teacher_vs_demo_action_l1": 0.00901833331064865,
+      "train_mean_action_l1": 0.3554840236902237,
+      "train_mean_world_l1": 0.48335758969187737,
+      "train_mean_kd_act_l1": 0.35581374540925026,
+      "train_mean_kd_world_l1": 0.5038045942783356
+    }
+  },
+  "losses": [
+    {
+      "training": true,
+      "tokens": 1764,
+      "action_l1": 0.30763182044029236,
+      "world_l1": 0.6106294989585876,
+      "fut_proprio_l1": 0.3952917456626892,
+      "value_l1": 0.9158770442008972,
+      "kd_act_l1": 0.30983051657676697,
+      "kd_world_l1": 0.6297882795333862,
+      "total": 1.988996982574463
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.39141806960105896,
+      "world_l1": 0.598773717880249,
+      "fut_proprio_l1": 0.44669094681739807,
+      "value_l1": 0.08867886662483215,
+      "kd_act_l1": 0.3934577703475952,
+      "kd_world_l1": 0.6076274514198303,
+      "total": 2.044814109802246
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.42650124430656433,
+      "world_l1": 0.6013988256454468,
+      "fut_proprio_l1": 0.45907360315322876,
+      "value_l1": 0.05168197676539421,
+      "kd_act_l1": 0.4271330237388611,
+      "kd_world_l1": 0.6075862646102905,
+      "total": 2.1136951446533203
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.4258672893047333,
+      "world_l1": 0.60298752784729,
+      "fut_proprio_l1": 0.4609334170818329,
+      "value_l1": 0.014088824391365051,
+      "kd_act_l1": 0.4277407228946686,
+      "kd_world_l1": 0.6105762124061584,
+      "total": 2.1146740913391113
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.41400960087776184,
+      "world_l1": 0.6007802486419678,
+      "fut_proprio_l1": 0.4565652906894684,
+      "value_l1": 0.025265390053391457,
+      "kd_act_l1": 0.41325637698173523,
+      "kd_world_l1": 0.6091108322143555,
+      "total": 2.0853400230407715
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.41189903020858765,
+      "world_l1": 0.6058680415153503,
+      "fut_proprio_l1": 0.44612419605255127,
+      "value_l1": 0.06583280861377716,
+      "kd_act_l1": 0.4101065695285797,
+      "kd_world_l1": 0.6134804487228394,
+      "total": 2.0925498008728027
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3952547013759613,
+      "world_l1": 0.6146602630615234,
+      "fut_proprio_l1": 0.3694957196712494,
+      "value_l1": 0.10833770781755447,
+      "kd_act_l1": 0.3953129053115845,
+      "kd_world_l1": 0.6217291355133057,
+      "total": 2.074740409851074
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3617003560066223,
+      "world_l1": 0.6134637594223022,
+      "fut_proprio_l1": 0.26291608810424805,
+      "value_l1": 0.15529613196849823,
+      "kd_act_l1": 0.35727256536483765,
+      "kd_world_l1": 0.6214956045150757,
+      "total": 1.9957536458969116
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3315276503562927,
+      "world_l1": 0.610234260559082,
+      "fut_proprio_l1": 0.2634682357311249,
+      "value_l1": 0.20407600700855255,
+      "kd_act_l1": 0.3300858438014984,
+      "kd_world_l1": 0.615009605884552,
+      "total": 1.9336118698120117
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.32318687438964844,
+      "world_l1": 0.6023607850074768,
+      "fut_proprio_l1": 0.26716145873069763,
+      "value_l1": 0.2557881474494934,
+      "kd_act_l1": 0.3227364420890808,
+      "kd_world_l1": 0.6108111143112183,
+      "total": 1.9113901853561401
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.32693809270858765,
+      "world_l1": 0.5991623997688293,
+      "fut_proprio_l1": 0.273433119058609,
+      "value_l1": 0.3235574960708618,
+      "kd_act_l1": 0.3263781666755676,
+      "kd_world_l1": 0.6087443828582764,
+      "total": 1.920922040939331
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.34969407320022583,
+      "world_l1": 0.6061201691627502,
+      "fut_proprio_l1": 0.2643270492553711,
+      "value_l1": 0.3686034679412842,
+      "kd_act_l1": 0.34708577394485474,
+      "kd_world_l1": 0.6182454228401184,
+      "total": 1.984438419342041
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3642452359199524,
+      "world_l1": 0.6152306795120239,
+      "fut_proprio_l1": 0.26101812720298767,
+      "value_l1": 0.42592620849609375,
+      "kd_act_l1": 0.36411669850349426,
+      "kd_world_l1": 0.6262494325637817,
+      "total": 2.038536548614502
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3571356236934662,
+      "world_l1": 0.6233852505683899,
+      "fut_proprio_l1": 0.27001655101776123,
+      "value_l1": 0.4854423999786377,
+      "kd_act_l1": 0.3554563820362091,
+      "kd_world_l1": 0.6359187960624695,
+      "total": 2.0474419593811035
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3431357443332672,
+      "world_l1": 0.6315280795097351,
+      "fut_proprio_l1": 0.267912358045578,
+      "value_l1": 0.5465582013130188,
+      "kd_act_l1": 0.3427668809890747,
+      "kd_world_l1": 0.6469278335571289,
+      "total": 2.0458054542541504
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.34901490807533264,
+      "world_l1": 0.6304881572723389,
+      "fut_proprio_l1": 0.2670552432537079,
+      "value_l1": 0.6101592183113098,
+      "kd_act_l1": 0.3479670584201813,
+      "kd_world_l1": 0.6454117894172668,
+      "total": 2.060603380203247
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3343079686164856,
+      "world_l1": 0.6295702457427979,
+      "fut_proprio_l1": 0.2676023840904236,
+      "value_l1": 0.677000880241394,
+      "kd_act_l1": 0.3340699076652527,
+      "kd_world_l1": 0.6431310772895813,
+      "total": 2.035539388656616
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3135788142681122,
+      "world_l1": 0.6276107430458069,
+      "fut_proprio_l1": 0.29242435097694397,
+      "value_l1": 0.7458207607269287,
+      "kd_act_l1": 0.3102909326553345,
+      "kd_world_l1": 0.637334942817688,
+      "total": 1.9926398992538452
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.290513277053833,
+      "world_l1": 0.6211357116699219,
+      "fut_proprio_l1": 0.41953912377357483,
+      "value_l1": 0.8177931308746338,
+      "kd_act_l1": 0.289644718170166,
+      "kd_world_l1": 0.6339718699455261,
+      "total": 1.9589989185333252
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.2657024562358856,
+      "world_l1": 0.6169825196266174,
+      "fut_proprio_l1": 0.44570010900497437,
+      "value_l1": 0.8934618234634399,
+      "kd_act_l1": 0.26494818925857544,
+      "kd_world_l1": 0.6325541138648987,
+      "total": 1.9141035079956055
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.2598583698272705,
+      "world_l1": 0.6149021983146667,
+      "fut_proprio_l1": 0.4485892653465271,
+      "value_l1": 0.9727232456207275,
+      "kd_act_l1": 0.2606256604194641,
+      "kd_world_l1": 0.6335963010787964,
+      "total": 1.9111138582229614
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.24454042315483093,
+      "world_l1": 0.613290011882782,
+      "fut_proprio_l1": 0.44854703545570374,
+      "value_l1": 0.9726700186729431,
+      "kd_act_l1": 0.24352586269378662,
+      "kd_world_l1": 0.6318553686141968,
+      "total": 1.875333309173584
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.22447839379310608,
+      "world_l1": 0.6079318523406982,
+      "fut_proprio_l1": 0.4491453170776367,
+      "value_l1": 0.9805347919464111,
+      "kd_act_l1": 0.22484524548053741,
+      "kd_world_l1": 0.6235828399658203,
+      "total": 1.8238062858581543
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.2172311693429947,
+      "world_l1": 0.6074936389923096,
+      "fut_proprio_l1": 0.44772979617118835,
+      "value_l1": 0.9735155701637268,
+      "kd_act_l1": 0.2181435078382492,
+      "kd_world_l1": 0.6203734874725342,
+      "total": 1.8053662776947021
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.21237991750240326,
+      "world_l1": 0.6074685454368591,
+      "fut_proprio_l1": 0.44776642322540283,
+      "value_l1": 0.9739125370979309,
+      "kd_act_l1": 0.21397727727890015,
+      "kd_world_l1": 0.6180364489555359,
+      "total": 1.7940301895141602
+    },
+    {
+      "training": true,
+      "tokens": 1764,
+      "action_l1": 0.32375478744506836,
+      "world_l1": 0.6026788353919983,
+      "fut_proprio_l1": 0.2554491460323334,
+      "value_l1": 0.3791153132915497,
+      "kd_act_l1": 0.32161960005760193,
+      "kd_world_l1": 0.611626148223877,
+      "total": 1.9231358766555786
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.463977575302124,
+      "world_l1": 0.5346204042434692,
+      "fut_proprio_l1": 0.4723057150840759,
+      "value_l1": 0.06441798061132431,
+      "kd_act_l1": 0.4647780954837799,
+      "kd_world_l1": 0.5538088083267212,
+      "total": 2.070857286453247
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.4870861768722534,
+      "world_l1": 0.5364532470703125,
+      "fut_proprio_l1": 0.48038461804389954,
+      "value_l1": 0.031216125935316086,
+      "kd_act_l1": 0.4882398545742035,
+      "kd_world_l1": 0.5536026954650879,
+      "total": 2.116542100906372
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.480061411857605,
+      "world_l1": 0.5306268930435181,
+      "fut_proprio_l1": 0.4784534275531769,
+      "value_l1": 0.0030738445930182934,
+      "kd_act_l1": 0.4813409447669983,
+      "kd_world_l1": 0.5504257678985596,
+      "total": 2.0906078815460205
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.46813225746154785,
+      "world_l1": 0.52101731300354,
+      "fut_proprio_l1": 0.4718486964702606,
+      "value_l1": 0.039207249879837036,
+      "kd_act_l1": 0.4682190418243408,
+      "kd_world_l1": 0.5414850115776062,
+      "total": 2.049959182739258
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.46400412917137146,
+      "world_l1": 0.5206971168518066,
+      "fut_proprio_l1": 0.4593031108379364,
+      "value_l1": 0.07498615980148315,
+      "kd_act_l1": 0.4629393517971039,
+      "kd_world_l1": 0.5422579646110535,
+      "total": 2.043327569961548
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.4296656548976898,
+      "world_l1": 0.5193795561790466,
+      "fut_proprio_l1": 0.38147100806236267,
+      "value_l1": 0.11564384400844574,
+      "kd_act_l1": 0.43021345138549805,
+      "kd_world_l1": 0.5423473119735718,
+      "total": 1.9713174104690552
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.413486123085022,
+      "world_l1": 0.5117866396903992,
+      "fut_proprio_l1": 0.27732616662979126,
+      "value_l1": 0.16140484809875488,
+      "kd_act_l1": 0.41273826360702515,
+      "kd_world_l1": 0.5355970859527588,
+      "total": 1.9174811840057373
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3683909773826599,
+      "world_l1": 0.5064460039138794,
+      "fut_proprio_l1": 0.28131210803985596,
+      "value_l1": 0.2078654170036316,
+      "kd_act_l1": 0.3669049143791199,
+      "kd_world_l1": 0.5276549458503723,
+      "total": 1.818314552307129
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.38583704829216003,
+      "world_l1": 0.505057156085968,
+      "fut_proprio_l1": 0.2868881821632385,
+      "value_l1": 0.25792816281318665,
+      "kd_act_l1": 0.38603100180625916,
+      "kd_world_l1": 0.5287235975265503,
+      "total": 1.8601304292678833
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.39276763796806335,
+      "world_l1": 0.5083378553390503,
+      "fut_proprio_l1": 0.27954599261283875,
+      "value_l1": 0.3109622001647949,
+      "kd_act_l1": 0.39176785945892334,
+      "kd_world_l1": 0.5332693457603455,
+      "total": 1.8851935863494873
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.4146009087562561,
+      "world_l1": 0.5087296366691589,
+      "fut_proprio_l1": 0.2603849172592163,
+      "value_l1": 0.35140809416770935,
+      "kd_act_l1": 0.4159685969352722,
+      "kd_world_l1": 0.5347550511360168,
+      "total": 1.9352333545684814
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.43404096364974976,
+      "world_l1": 0.5171696543693542,
+      "fut_proprio_l1": 0.25555330514907837,
+      "value_l1": 0.4079061448574066,
+      "kd_act_l1": 0.4358121454715729,
+      "kd_world_l1": 0.5418776273727417,
+      "total": 1.9952462911605835
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.44351962208747864,
+      "world_l1": 0.5310783982276917,
+      "fut_proprio_l1": 0.2645677626132965,
+      "value_l1": 0.4669714868068695,
+      "kd_act_l1": 0.4407723844051361,
+      "kd_world_l1": 0.5566720366477966,
+      "total": 2.045196533203125
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.41736966371536255,
+      "world_l1": 0.5447614789009094,
+      "fut_proprio_l1": 0.26253432035446167,
+      "value_l1": 0.5283251404762268,
+      "kd_act_l1": 0.4162125885486603,
+      "kd_world_l1": 0.5734620690345764,
+      "total": 2.0308916568756104
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.40773433446884155,
+      "world_l1": 0.5477444529533386,
+      "fut_proprio_l1": 0.2621685564517975,
+      "value_l1": 0.5953150987625122,
+      "kd_act_l1": 0.40702834725379944,
+      "kd_world_l1": 0.5747429132461548,
+      "total": 2.022998332977295
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.36982524394989014,
+      "world_l1": 0.542486310005188,
+      "fut_proprio_l1": 0.26327547430992126,
+      "value_l1": 0.6647528409957886,
+      "kd_act_l1": 0.3728162944316864,
+      "kd_world_l1": 0.567749559879303,
+      "total": 1.9456803798675537
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3569642901420593,
+      "world_l1": 0.5370293259620667,
+      "fut_proprio_l1": 0.2888287901878357,
+      "value_l1": 0.7391040921211243,
+      "kd_act_l1": 0.35641446709632874,
+      "kd_world_l1": 0.558073878288269,
+      "total": 1.9112752676010132
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.338780015707016,
+      "world_l1": 0.5329180955886841,
+      "fut_proprio_l1": 0.41640540957450867,
+      "value_l1": 0.8155279755592346,
+      "kd_act_l1": 0.34032079577445984,
+      "kd_world_l1": 0.5571874976158142,
+      "total": 1.892399787902832
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3353649973869324,
+      "world_l1": 0.5340973734855652,
+      "fut_proprio_l1": 0.44239580631256104,
+      "value_l1": 0.8908377885818481,
+      "kd_act_l1": 0.33326029777526855,
+      "kd_world_l1": 0.5593251585960388,
+      "total": 1.8953711986541748
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3360331356525421,
+      "world_l1": 0.5346714854240417,
+      "fut_proprio_l1": 0.4449726343154907,
+      "value_l1": 0.9681169390678406,
+      "kd_act_l1": 0.3363538682460785,
+      "kd_world_l1": 0.5631827116012573,
+      "total": 1.9115501642227173
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3258689045906067,
+      "world_l1": 0.5317038893699646,
+      "fut_proprio_l1": 0.44468456506729126,
+      "value_l1": 0.965696394443512,
+      "kd_act_l1": 0.32542943954467773,
+      "kd_world_l1": 0.5609017610549927,
+      "total": 1.8849421739578247
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3300437927246094,
+      "world_l1": 0.5333171486854553,
+      "fut_proprio_l1": 0.44732099771499634,
+      "value_l1": 0.9832178354263306,
+      "kd_act_l1": 0.3301687240600586,
+      "kd_world_l1": 0.5600795745849609,
+      "total": 1.8966630697250366
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.3269713819026947,
+      "world_l1": 0.5343081951141357,
+      "fut_proprio_l1": 0.44829151034355164,
+      "value_l1": 0.9866300225257874,
+      "kd_act_l1": 0.3259616792201996,
+      "kd_world_l1": 0.5581383109092712,
+      "total": 1.888871669769287
+    },
+    {
+      "training": false,
+      "tokens": 1764,
+      "action_l1": 0.32256433367729187,
+      "world_l1": 0.5346624255180359,
+      "fut_proprio_l1": 0.44829410314559937,
+      "value_l1": 0.9865912199020386,
+      "kd_act_l1": 0.3230336904525757,
+      "kd_world_l1": 0.5567790865898132,
+      "total": 1.8805279731750488
+    },
+    {
+      "training": true,
+      "tokens": 1008,
+      "action_l1": 0.43546250462532043,
+      "world_l1": 0.49680760502815247,
+      "kd_act_l1": 0.4371702969074249,
+      "kd_world_l1": 0.5161733031272888,
+      "total": 1.8856136798858643
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4425010681152344,
+      "world_l1": 0.4706732928752899,
+      "kd_act_l1": 0.44481366872787476,
+      "kd_world_l1": 0.4956793487071991,
+      "total": 1.8536674976348877
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4502011239528656,
+      "world_l1": 0.47143977880477905,
+      "kd_act_l1": 0.4513905644416809,
+      "kd_world_l1": 0.493939608335495,
+      "total": 1.8669710159301758
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4254806637763977,
+      "world_l1": 0.4606764614582062,
+      "kd_act_l1": 0.4270149767398834,
+      "kd_world_l1": 0.4850292205810547,
+      "total": 1.798201322555542
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3917892277240753,
+      "world_l1": 0.4520453214645386,
+      "kd_act_l1": 0.3945528566837311,
+      "kd_world_l1": 0.47736096382141113,
+      "total": 1.7157483100891113
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.36563146114349365,
+      "world_l1": 0.45596519112586975,
+      "kd_act_l1": 0.36641520261764526,
+      "kd_world_l1": 0.47962647676467896,
+      "total": 1.6676383018493652
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3457332253456116,
+      "world_l1": 0.4463886320590973,
+      "kd_act_l1": 0.3461523652076721,
+      "kd_world_l1": 0.4685325622558594,
+      "total": 1.606806755065918
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.33043718338012695,
+      "world_l1": 0.441656231880188,
+      "kd_act_l1": 0.33090463280677795,
+      "kd_world_l1": 0.464213490486145,
+      "total": 1.5672115087509155
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3275972008705139,
+      "world_l1": 0.4374661147594452,
+      "kd_act_l1": 0.3267400860786438,
+      "kd_world_l1": 0.45974379777908325,
+      "total": 1.5515470504760742
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.36574187874794006,
+      "world_l1": 0.4458753168582916,
+      "kd_act_l1": 0.3661436140537262,
+      "kd_world_l1": 0.47524479031562805,
+      "total": 1.653005599975586
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.39502832293510437,
+      "world_l1": 0.469119131565094,
+      "kd_act_l1": 0.3985937535762787,
+      "kd_world_l1": 0.5034642219543457,
+      "total": 1.7662054300308228
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.41935575008392334,
+      "world_l1": 0.47639644145965576,
+      "kd_act_l1": 0.4204561412334442,
+      "kd_world_l1": 0.5107346177101135,
+      "total": 1.8269429206848145
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.43271735310554504,
+      "world_l1": 0.48190322518348694,
+      "kd_act_l1": 0.4305809736251831,
+      "kd_world_l1": 0.5157098174095154,
+      "total": 1.8609113693237305
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4180162250995636,
+      "world_l1": 0.48680579662323,
+      "kd_act_l1": 0.414883017539978,
+      "kd_world_l1": 0.5221754312515259,
+      "total": 1.841880440711975
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.38028484582901,
+      "world_l1": 0.4919452965259552,
+      "kd_act_l1": 0.3803759515285492,
+      "kd_world_l1": 0.5298212170600891,
+      "total": 1.7824273109436035
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.36388346552848816,
+      "world_l1": 0.4944775104522705,
+      "kd_act_l1": 0.3645499348640442,
+      "kd_world_l1": 0.5292242169380188,
+      "total": 1.7521350383758545
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3397717773914337,
+      "world_l1": 0.48618680238723755,
+      "kd_act_l1": 0.3420273959636688,
+      "kd_world_l1": 0.5211676359176636,
+      "total": 1.6891536712646484
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.33628860116004944,
+      "world_l1": 0.47317466139793396,
+      "kd_act_l1": 0.3370138108730316,
+      "kd_world_l1": 0.5023852586746216,
+      "total": 1.648862361907959
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3290085792541504,
+      "world_l1": 0.47703996300697327,
+      "kd_act_l1": 0.32873913645744324,
+      "kd_world_l1": 0.5089390873908997,
+      "total": 1.6437268257141113
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.32533639669418335,
+      "world_l1": 0.4811926484107971,
+      "kd_act_l1": 0.32494446635246277,
+      "kd_world_l1": 0.514381468296051,
+      "total": 1.6458549499511719
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3165811598300934,
+      "world_l1": 0.4850711226463318,
+      "kd_act_l1": 0.31659451127052307,
+      "kd_world_l1": 0.5208339095115662,
+      "total": 1.6390807628631592
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.29419609904289246,
+      "world_l1": 0.4840545952320099,
+      "kd_act_l1": 0.29446133971214294,
+      "kd_world_l1": 0.5203481912612915,
+      "total": 1.5930602550506592
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.29181379079818726,
+      "world_l1": 0.4813208281993866,
+      "kd_act_l1": 0.2934204638004303,
+      "kd_world_l1": 0.5150254368782043,
+      "total": 1.581580400466919
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.28496137261390686,
+      "world_l1": 0.48014962673187256,
+      "kd_act_l1": 0.28364256024360657,
+      "kd_world_l1": 0.5115261673927307,
+      "total": 1.5602796077728271
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2808689475059509,
+      "world_l1": 0.47933098673820496,
+      "kd_act_l1": 0.28162509202957153,
+      "kd_world_l1": 0.5102952718734741,
+      "total": 1.552120327949524
+    },
+    {
+      "training": true,
+      "tokens": 1008,
+      "action_l1": 0.3811514973640442,
+      "world_l1": 0.46572166681289673,
+      "kd_act_l1": 0.3805444538593292,
+      "kd_world_l1": 0.48916715383529663,
+      "total": 1.7165846824645996
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4083085358142853,
+      "world_l1": 0.4556749165058136,
+      "kd_act_l1": 0.4114132821559906,
+      "kd_world_l1": 0.4783687889575958,
+      "total": 1.7537654638290405
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4423690140247345,
+      "world_l1": 0.4569810926914215,
+      "kd_act_l1": 0.4432574212551117,
+      "kd_world_l1": 0.4770340323448181,
+      "total": 1.8196415901184082
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.43876317143440247,
+      "world_l1": 0.4482465386390686,
+      "kd_act_l1": 0.4411245286464691,
+      "kd_world_l1": 0.4694165587425232,
+      "total": 1.797550916671753
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4201526939868927,
+      "world_l1": 0.442823588848114,
+      "kd_act_l1": 0.4203214943408966,
+      "kd_world_l1": 0.46528539061546326,
+      "total": 1.748583197593689
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4224693477153778,
+      "world_l1": 0.45289337635040283,
+      "kd_act_l1": 0.4214368760585785,
+      "kd_world_l1": 0.4739132225513458,
+      "total": 1.7707128524780273
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4132019579410553,
+      "world_l1": 0.4488290548324585,
+      "kd_act_l1": 0.41299760341644287,
+      "kd_world_l1": 0.46961110830307007,
+      "total": 1.7446396350860596
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3808382749557495,
+      "world_l1": 0.44425278902053833,
+      "kd_act_l1": 0.37720605731010437,
+      "kd_world_l1": 0.46409866213798523,
+      "total": 1.6663957834243774
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.35699406266212463,
+      "world_l1": 0.4372696280479431,
+      "kd_act_l1": 0.3559344708919525,
+      "kd_world_l1": 0.45653343200683594,
+      "total": 1.606731653213501
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3451080620288849,
+      "world_l1": 0.4394116699695587,
+      "kd_act_l1": 0.3456130921840668,
+      "kd_world_l1": 0.46564140915870667,
+      "total": 1.5957741737365723
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.34772464632987976,
+      "world_l1": 0.4603327810764313,
+      "kd_act_l1": 0.3480435311794281,
+      "kd_world_l1": 0.49126654863357544,
+      "total": 1.6473674774169922
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3659709692001343,
+      "world_l1": 0.4662722647190094,
+      "kd_act_l1": 0.3643120527267456,
+      "kd_world_l1": 0.496987909078598,
+      "total": 1.6935431957244873
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.38335856795310974,
+      "world_l1": 0.47095605731010437,
+      "kd_act_l1": 0.3834676146507263,
+      "kd_world_l1": 0.5022395253181458,
+      "total": 1.7400217056274414
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3823959529399872,
+      "world_l1": 0.4767703413963318,
+      "kd_act_l1": 0.3798503279685974,
+      "kd_world_l1": 0.5098178386688232,
+      "total": 1.7488343715667725
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3767700493335724,
+      "world_l1": 0.4815947711467743,
+      "kd_act_l1": 0.37656328082084656,
+      "kd_world_l1": 0.5178152322769165,
+      "total": 1.7527433633804321
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.37592756748199463,
+      "world_l1": 0.486483633518219,
+      "kd_act_l1": 0.37466689944267273,
+      "kd_world_l1": 0.5205858945846558,
+      "total": 1.7576639652252197
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.36411479115486145,
+      "world_l1": 0.47858887910842896,
+      "kd_act_l1": 0.36322537064552307,
+      "kd_world_l1": 0.5116401314735413,
+      "total": 1.71756911277771
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3344298005104065,
+      "world_l1": 0.457987904548645,
+      "kd_act_l1": 0.33081483840942383,
+      "kd_world_l1": 0.48554906249046326,
+      "total": 1.6087816953659058
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.31444045901298523,
+      "world_l1": 0.46366143226623535,
+      "kd_act_l1": 0.31329452991485596,
+      "kd_world_l1": 0.4929325580596924,
+      "total": 1.5843290090560913
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.291194885969162,
+      "world_l1": 0.46769222617149353,
+      "kd_act_l1": 0.28812175989151,
+      "kd_world_l1": 0.49885550141334534,
+      "total": 1.5458643436431885
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.285086989402771,
+      "world_l1": 0.4720524251461029,
+      "kd_act_l1": 0.2863238751888275,
+      "kd_world_l1": 0.5056195259094238,
+      "total": 1.54908287525177
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.27101996541023254,
+      "world_l1": 0.4712059795856476,
+      "kd_act_l1": 0.2705775201320648,
+      "kd_world_l1": 0.5055716037750244,
+      "total": 1.518375039100647
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.246168315410614,
+      "world_l1": 0.466410756111145,
+      "kd_act_l1": 0.24624653160572052,
+      "kd_world_l1": 0.49858513474464417,
+      "total": 1.4574106931686401
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2379438281059265,
+      "world_l1": 0.4650212526321411,
+      "kd_act_l1": 0.23826566338539124,
+      "kd_world_l1": 0.4947369396686554,
+      "total": 1.4359676837921143
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.23438474535942078,
+      "world_l1": 0.4634716510772705,
+      "kd_act_l1": 0.23571519553661346,
+      "kd_world_l1": 0.49298763275146484,
+      "total": 1.4265592098236084
+    },
+    {
+      "training": true,
+      "tokens": 1008,
+      "action_l1": 0.3434238135814667,
+      "world_l1": 0.4481133818626404,
+      "kd_act_l1": 0.3425011932849884,
+      "kd_world_l1": 0.4747660756111145,
+      "total": 1.60880446434021
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.39259883761405945,
+      "world_l1": 0.45706766843795776,
+      "kd_act_l1": 0.3959309160709381,
+      "kd_world_l1": 0.47369593381881714,
+      "total": 1.7192933559417725
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.41444605588912964,
+      "world_l1": 0.46046772599220276,
+      "kd_act_l1": 0.4156719446182251,
+      "kd_world_l1": 0.4732198119163513,
+      "total": 1.763805627822876
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.40844932198524475,
+      "world_l1": 0.4472484886646271,
+      "kd_act_l1": 0.40955665707588196,
+      "kd_world_l1": 0.46091803908348083,
+      "total": 1.7261725664138794
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3802315890789032,
+      "world_l1": 0.4319259524345398,
+      "kd_act_l1": 0.38197043538093567,
+      "kd_world_l1": 0.4461856782436371,
+      "total": 1.6403136253356934
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.36805862188339233,
+      "world_l1": 0.43342432379722595,
+      "kd_act_l1": 0.3672584891319275,
+      "kd_world_l1": 0.4475059509277344,
+      "total": 1.6162474155426025
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.36180832982063293,
+      "world_l1": 0.4254922568798065,
+      "kd_act_l1": 0.3618374764919281,
+      "kd_world_l1": 0.4421718418598175,
+      "total": 1.591309905052185
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.32706180214881897,
+      "world_l1": 0.4213114380836487,
+      "kd_act_l1": 0.32365065813064575,
+      "kd_world_l1": 0.4372379183769226,
+      "total": 1.5092618465423584
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3180277943611145,
+      "world_l1": 0.4142180383205414,
+      "kd_act_l1": 0.3178110122680664,
+      "kd_world_l1": 0.4290215075016022,
+      "total": 1.4790782928466797
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.32780686020851135,
+      "world_l1": 0.4138222336769104,
+      "kd_act_l1": 0.32767096161842346,
+      "kd_world_l1": 0.433137446641922,
+      "total": 1.5024374723434448
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3433600962162018,
+      "world_l1": 0.43465757369995117,
+      "kd_act_l1": 0.3442961871623993,
+      "kd_world_l1": 0.45612096786499023,
+      "total": 1.5784348249435425
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.36119353771209717,
+      "world_l1": 0.43844863772392273,
+      "kd_act_l1": 0.36163970828056335,
+      "kd_world_l1": 0.4587782025337219,
+      "total": 1.6200602054595947
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.37726277112960815,
+      "world_l1": 0.442570298910141,
+      "kd_act_l1": 0.3748113512992859,
+      "kd_world_l1": 0.4626477062702179,
+      "total": 1.657292127609253
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3624676465988159,
+      "world_l1": 0.45067697763442993,
+      "kd_act_l1": 0.3600505590438843,
+      "kd_world_l1": 0.4732046127319336,
+      "total": 1.646399736404419
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.33898648619651794,
+      "world_l1": 0.45775458216667175,
+      "kd_act_l1": 0.3388161361217499,
+      "kd_world_l1": 0.4844512343406677,
+      "total": 1.6200084686279297
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3396863639354706,
+      "world_l1": 0.46154335141181946,
+      "kd_act_l1": 0.3394930064678192,
+      "kd_world_l1": 0.4868869185447693,
+      "total": 1.6276097297668457
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.32727712392807007,
+      "world_l1": 0.44999828934669495,
+      "kd_act_l1": 0.32829558849334717,
+      "kd_world_l1": 0.47382867336273193,
+      "total": 1.5793997049331665
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3119295835494995,
+      "world_l1": 0.43253007531166077,
+      "kd_act_l1": 0.30932992696762085,
+      "kd_world_l1": 0.4504297971725464,
+      "total": 1.50421941280365
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2948766350746155,
+      "world_l1": 0.43846243619918823,
+      "kd_act_l1": 0.2931700646877289,
+      "kd_world_l1": 0.4593638777732849,
+      "total": 1.4858729839324951
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2749967873096466,
+      "world_l1": 0.4461233615875244,
+      "kd_act_l1": 0.2747942805290222,
+      "kd_world_l1": 0.4689640402793884,
+      "total": 1.4648784399032593
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.26309219002723694,
+      "world_l1": 0.44915771484375,
+      "kd_act_l1": 0.26372718811035156,
+      "kd_world_l1": 0.47452327609062195,
+      "total": 1.4505003690719604
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2425079643726349,
+      "world_l1": 0.44319385290145874,
+      "kd_act_l1": 0.24244670569896698,
+      "kd_world_l1": 0.4693194031715393,
+      "total": 1.3974679708480835
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.23092593252658844,
+      "world_l1": 0.4361869692802429,
+      "kd_act_l1": 0.23229268193244934,
+      "kd_world_l1": 0.4600289762020111,
+      "total": 1.3594346046447754
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.22435396909713745,
+      "world_l1": 0.43281620740890503,
+      "kd_act_l1": 0.22416871786117554,
+      "kd_world_l1": 0.4537081718444824,
+      "total": 1.3350470066070557
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.22023743391036987,
+      "world_l1": 0.4306686222553253,
+      "kd_act_l1": 0.2215736359357834,
+      "kd_world_l1": 0.45066529512405396,
+      "total": 1.3231450319290161
+    },
+    {
+      "training": true,
+      "tokens": 1008,
+      "action_l1": 0.3300814628601074,
+      "world_l1": 0.41894033551216125,
+      "kd_act_l1": 0.3307766020298004,
+      "kd_world_l1": 0.4360451102256775,
+      "total": 1.515843391418457
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4049188792705536,
+      "world_l1": 0.44602230191230774,
+      "kd_act_l1": 0.40832871198654175,
+      "kd_world_l1": 0.4586108326911926,
+      "total": 1.7178807258605957
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4188797175884247,
+      "world_l1": 0.45373085141181946,
+      "kd_act_l1": 0.4200129806995392,
+      "kd_world_l1": 0.46200814843177795,
+      "total": 1.7546316385269165
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4024093747138977,
+      "world_l1": 0.4371441602706909,
+      "kd_act_l1": 0.4031912684440613,
+      "kd_world_l1": 0.4451262652873993,
+      "total": 1.6878710985183716
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3706294000148773,
+      "world_l1": 0.41397085785865784,
+      "kd_act_l1": 0.3729804754257202,
+      "kd_world_l1": 0.42275384068489075,
+      "total": 1.5803345441818237
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.35078778862953186,
+      "world_l1": 0.4122749865055084,
+      "kd_act_l1": 0.35097819566726685,
+      "kd_world_l1": 0.4204387962818146,
+      "total": 1.5344797372817993
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3461737036705017,
+      "world_l1": 0.3990894556045532,
+      "kd_act_l1": 0.3467538058757782,
+      "kd_world_l1": 0.4106674790382385,
+      "total": 1.5026843547821045
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3199322819709778,
+      "world_l1": 0.39370882511138916,
+      "kd_act_l1": 0.3177568018436432,
+      "kd_world_l1": 0.4043927788734436,
+      "total": 1.435790777206421
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3158802390098572,
+      "world_l1": 0.3838050067424774,
+      "kd_act_l1": 0.31556588411331177,
+      "kd_world_l1": 0.39349713921546936,
+      "total": 1.4087482690811157
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3375997245311737,
+      "world_l1": 0.3802417814731598,
+      "kd_act_l1": 0.3378351926803589,
+      "kd_world_l1": 0.39331528544425964,
+      "total": 1.4489920139312744
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3623160421848297,
+      "world_l1": 0.4128868281841278,
+      "kd_act_l1": 0.3630593419075012,
+      "kd_world_l1": 0.42949119210243225,
+      "total": 1.5677534341812134
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3836798071861267,
+      "world_l1": 0.41593900322914124,
+      "kd_act_l1": 0.38361361622810364,
+      "kd_world_l1": 0.43181464076042175,
+      "total": 1.6150470972061157
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3976568579673767,
+      "world_l1": 0.4188477694988251,
+      "kd_act_l1": 0.39567244052886963,
+      "kd_world_l1": 0.43423783779144287,
+      "total": 1.646414875984192
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3785252869129181,
+      "world_l1": 0.4260202944278717,
+      "kd_act_l1": 0.3751416504383087,
+      "kd_world_l1": 0.4449407458305359,
+      "total": 1.6246280670166016
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3469723165035248,
+      "world_l1": 0.4304828941822052,
+      "kd_act_l1": 0.3466940224170685,
+      "kd_world_l1": 0.45392468571662903,
+      "total": 1.5780738592147827
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3379932940006256,
+      "world_l1": 0.4354740083217621,
+      "kd_act_l1": 0.33794692158699036,
+      "kd_world_l1": 0.4569212794303894,
+      "total": 1.5683355331420898
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3247334659099579,
+      "world_l1": 0.4154491722583771,
+      "kd_act_l1": 0.32600831985473633,
+      "kd_world_l1": 0.43744176626205444,
+      "total": 1.5036327838897705
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3179210126399994,
+      "world_l1": 0.3887389600276947,
+      "kd_act_l1": 0.31735312938690186,
+      "kd_world_l1": 0.40203553438186646,
+      "total": 1.4260485172271729
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3029862642288208,
+      "world_l1": 0.4025686979293823,
+      "kd_act_l1": 0.30241817235946655,
+      "kd_world_l1": 0.4198300838470459,
+      "total": 1.4278032779693604
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.28911346197128296,
+      "world_l1": 0.4191044270992279,
+      "kd_act_l1": 0.28941604495048523,
+      "kd_world_l1": 0.43788379430770874,
+      "total": 1.4355177879333496
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.27831408381462097,
+      "world_l1": 0.42215868830680847,
+      "kd_act_l1": 0.27864155173301697,
+      "kd_world_l1": 0.44414791464805603,
+      "total": 1.4232622385025024
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2571543753147125,
+      "world_l1": 0.40955767035484314,
+      "kd_act_l1": 0.25693437457084656,
+      "kd_world_l1": 0.4327390193939209,
+      "total": 1.3563854694366455
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2480607032775879,
+      "world_l1": 0.3932972550392151,
+      "kd_act_l1": 0.24973714351654053,
+      "kd_world_l1": 0.4142191708087921,
+      "total": 1.305314302444458
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.24182923138141632,
+      "world_l1": 0.3829454481601715,
+      "kd_act_l1": 0.24115988612174988,
+      "kd_world_l1": 0.4000072479248047,
+      "total": 1.265941858291626
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.23856167495250702,
+      "world_l1": 0.37581759691238403,
+      "kd_act_l1": 0.23961344361305237,
+      "kd_world_l1": 0.3913446366786957,
+      "total": 1.2453373670578003
+    },
+    {
+      "training": true,
+      "tokens": 1008,
+      "action_l1": 0.3892928659915924,
+      "world_l1": 0.43109816312789917,
+      "kd_act_l1": 0.3909347355365753,
+      "kd_world_l1": 0.4520346224308014,
+      "total": 1.663360357284546
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.40823879837989807,
+      "world_l1": 0.4287015199661255,
+      "kd_act_l1": 0.4116228222846985,
+      "kd_world_l1": 0.440301775932312,
+      "total": 1.688864827156067
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4243883788585663,
+      "world_l1": 0.4357680380344391,
+      "kd_act_l1": 0.4253033697605133,
+      "kd_world_l1": 0.4427657425403595,
+      "total": 1.7282254695892334
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4048383831977844,
+      "world_l1": 0.417022705078125,
+      "kd_act_l1": 0.40575921535491943,
+      "kd_world_l1": 0.4233962297439575,
+      "total": 1.6510165929794312
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3724413216114044,
+      "world_l1": 0.39019256830215454,
+      "kd_act_l1": 0.37518489360809326,
+      "kd_world_l1": 0.3976074159145355,
+      "total": 1.5354262590408325
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.35301610827445984,
+      "world_l1": 0.3858675956726074,
+      "kd_act_l1": 0.3531702160835266,
+      "kd_world_l1": 0.3924737572669983,
+      "total": 1.484527587890625
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.34933194518089294,
+      "world_l1": 0.3712855577468872,
+      "kd_act_l1": 0.3500162661075592,
+      "kd_world_l1": 0.3810083866119385,
+      "total": 1.4516421556472778
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.32353898882865906,
+      "world_l1": 0.3657861649990082,
+      "kd_act_l1": 0.32089072465896606,
+      "kd_world_l1": 0.37470555305480957,
+      "total": 1.3849214315414429
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3208039700984955,
+      "world_l1": 0.35326454043388367,
+      "kd_act_l1": 0.32050004601478577,
+      "kd_world_l1": 0.36123037338256836,
+      "total": 1.3557989597320557
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.34293970465660095,
+      "world_l1": 0.3453730046749115,
+      "kd_act_l1": 0.3425336182117462,
+      "kd_world_l1": 0.3564964234828949,
+      "total": 1.3873428106307983
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3655100166797638,
+      "world_l1": 0.3833014667034149,
+      "kd_act_l1": 0.36617669463157654,
+      "kd_world_l1": 0.399391233921051,
+      "total": 1.5143795013427734
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3850761950016022,
+      "world_l1": 0.3858168423175812,
+      "kd_act_l1": 0.3852916955947876,
+      "kd_world_l1": 0.4014875292778015,
+      "total": 1.5576722621917725
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.39803215861320496,
+      "world_l1": 0.38894033432006836,
+      "kd_act_l1": 0.39568406343460083,
+      "kd_world_l1": 0.4042094647884369,
+      "total": 1.586866021156311
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3790481686592102,
+      "world_l1": 0.3968733251094818,
+      "kd_act_l1": 0.3764297366142273,
+      "kd_world_l1": 0.4154077470302582,
+      "total": 1.5677589178085327
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3488493859767914,
+      "world_l1": 0.40164023637771606,
+      "kd_act_l1": 0.3487093150615692,
+      "kd_world_l1": 0.42435723543167114,
+      "total": 1.5235562324523926
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.33866605162620544,
+      "world_l1": 0.4080706536769867,
+      "kd_act_l1": 0.3383227586746216,
+      "kd_world_l1": 0.4284941256046295,
+      "total": 1.513553500175476
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3238518238067627,
+      "world_l1": 0.3848552107810974,
+      "kd_act_l1": 0.32663679122924805,
+      "kd_world_l1": 0.40668028593063354,
+      "total": 1.4420242309570312
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3200443387031555,
+      "world_l1": 0.3514265716075897,
+      "kd_act_l1": 0.31920382380485535,
+      "kd_world_l1": 0.3633475601673126,
+      "total": 1.3540222644805908
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3032356798648834,
+      "world_l1": 0.37331777811050415,
+      "kd_act_l1": 0.30287784337997437,
+      "kd_world_l1": 0.3891071379184723,
+      "total": 1.368538498878479
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2909947633743286,
+      "world_l1": 0.39483314752578735,
+      "kd_act_l1": 0.29061299562454224,
+      "kd_world_l1": 0.4122217893600464,
+      "total": 1.3886626958847046
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2796168327331543,
+      "world_l1": 0.3979300856590271,
+      "kd_act_l1": 0.28004685044288635,
+      "kd_world_l1": 0.4188137650489807,
+      "total": 1.3764076232910156
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2593834698200226,
+      "world_l1": 0.38103586435317993,
+      "kd_act_l1": 0.2591402530670166,
+      "kd_world_l1": 0.40326932072639465,
+      "total": 1.3028289079666138
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2517555058002472,
+      "world_l1": 0.35847729444503784,
+      "kd_act_l1": 0.2535397410392761,
+      "kd_world_l1": 0.37880223989486694,
+      "total": 1.2425748109817505
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.24539443850517273,
+      "world_l1": 0.34321773052215576,
+      "kd_act_l1": 0.244674950838089,
+      "kd_world_l1": 0.35907596349716187,
+      "total": 1.1923630237579346
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2421007603406906,
+      "world_l1": 0.33259567618370056,
+      "kd_act_l1": 0.24312034249305725,
+      "kd_world_l1": 0.34627243876457214,
+      "total": 1.1640892028808594
+    },
+    {
+      "training": true,
+      "tokens": 1008,
+      "action_l1": 0.3330734372138977,
+      "world_l1": 0.392871230840683,
+      "kd_act_l1": 0.3331325650215149,
+      "kd_world_l1": 0.42083606123924255,
+      "total": 1.479913353919983
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4079575836658478,
+      "world_l1": 0.4134276211261749,
+      "kd_act_l1": 0.41095679998397827,
+      "kd_world_l1": 0.42471569776535034,
+      "total": 1.657057762145996
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.42514291405677795,
+      "world_l1": 0.42003390192985535,
+      "kd_act_l1": 0.42597922682762146,
+      "kd_world_l1": 0.42666614055633545,
+      "total": 1.6978222131729126
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.4052211344242096,
+      "world_l1": 0.39947718381881714,
+      "kd_act_l1": 0.40616199374198914,
+      "kd_world_l1": 0.4051104485988617,
+      "total": 1.6159708499908447
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3726702630519867,
+      "world_l1": 0.3708266019821167,
+      "kd_act_l1": 0.3753858506679535,
+      "kd_world_l1": 0.3777904808521271,
+      "total": 1.4966732263565063
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.35412919521331787,
+      "world_l1": 0.3645206391811371,
+      "kd_act_l1": 0.354134202003479,
+      "kd_world_l1": 0.37070977687835693,
+      "total": 1.4434938430786133
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.35066545009613037,
+      "world_l1": 0.34935227036476135,
+      "kd_act_l1": 0.35126903653144836,
+      "kd_world_l1": 0.35851213335990906,
+      "total": 1.4097988605499268
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.32432252168655396,
+      "world_l1": 0.3444446623325348,
+      "kd_act_l1": 0.3216373026371002,
+      "kd_world_l1": 0.3524911105632782,
+      "total": 1.3428956270217896
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.320850670337677,
+      "world_l1": 0.3295186161994934,
+      "kd_act_l1": 0.3207048177719116,
+      "kd_world_l1": 0.33682286739349365,
+      "total": 1.3078969717025757
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.34238046407699585,
+      "world_l1": 0.31994742155075073,
+      "kd_act_l1": 0.3418625593185425,
+      "kd_world_l1": 0.3304833471775055,
+      "total": 1.3346737623214722
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3638743758201599,
+      "world_l1": 0.36112353205680847,
+      "kd_act_l1": 0.3645654618740082,
+      "kd_world_l1": 0.377157062292099,
+      "total": 1.466720461845398
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3834308385848999,
+      "world_l1": 0.3632083833217621,
+      "kd_act_l1": 0.38389909267425537,
+      "kd_world_l1": 0.3789556920528412,
+      "total": 1.5094940662384033
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.39608436822891235,
+      "world_l1": 0.36724719405174255,
+      "kd_act_l1": 0.39369258284568787,
+      "kd_world_l1": 0.3828272521495819,
+      "total": 1.539851427078247
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3777366280555725,
+      "world_l1": 0.37580808997154236,
+      "kd_act_l1": 0.3753680884838104,
+      "kd_world_l1": 0.3945018947124481,
+      "total": 1.5234147310256958
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.34857040643692017,
+      "world_l1": 0.3801676630973816,
+      "kd_act_l1": 0.34840407967567444,
+      "kd_world_l1": 0.4027153253555298,
+      "total": 1.4798574447631836
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3391096293926239,
+      "world_l1": 0.3870990574359894,
+      "kd_act_l1": 0.33868226408958435,
+      "kd_world_l1": 0.40728697180747986,
+      "total": 1.4721779823303223
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.3233588933944702,
+      "world_l1": 0.3626916706562042,
+      "kd_act_l1": 0.3260677456855774,
+      "kd_world_l1": 0.3843277096748352,
+      "total": 1.3964459896087646
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.31983309984207153,
+      "world_l1": 0.3256232738494873,
+      "kd_act_l1": 0.3189345896244049,
+      "kd_world_l1": 0.33666548132896423,
+      "total": 1.3010565042495728
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.30224767327308655,
+      "world_l1": 0.3516026735305786,
+      "kd_act_l1": 0.30195796489715576,
+      "kd_world_l1": 0.36653876304626465,
+      "total": 1.3223470449447632
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.29068446159362793,
+      "world_l1": 0.3761824667453766,
+      "kd_act_l1": 0.2901093065738678,
+      "kd_world_l1": 0.39285558462142944,
+      "total": 1.3498318195343018
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.27852386236190796,
+      "world_l1": 0.37889423966407776,
+      "kd_act_l1": 0.2788556218147278,
+      "kd_world_l1": 0.3995974659919739,
+      "total": 1.3358712196350098
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.25880110263824463,
+      "world_l1": 0.35976463556289673,
+      "kd_act_l1": 0.2585129737854004,
+      "kd_world_l1": 0.38191673159599304,
+      "total": 1.2589954137802124
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.24967548251152039,
+      "world_l1": 0.3338492512702942,
+      "kd_act_l1": 0.2514597475528717,
+      "kd_world_l1": 0.35386350750923157,
+      "total": 1.1888478994369507
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.24368196725845337,
+      "world_l1": 0.3157458007335663,
+      "kd_act_l1": 0.24302799999713898,
+      "kd_world_l1": 0.3308494985103607,
+      "total": 1.1333051919937134
+    },
+    {
+      "training": false,
+      "tokens": 1008,
+      "action_l1": 0.2406584620475769,
+      "world_l1": 0.30307742953300476,
+      "kd_act_l1": 0.24167487025260925,
+      "kd_world_l1": 0.31565991044044495,
+      "total": 1.1010706424713135
+    }
+  ],
+  "gradients": [
+    {
+      "tokens": 1764,
+      "norm": 0.9999998346739131,
+      "parameter_sample_delta_l2": 0.0
+    },
+    {
+      "tokens": 1764,
+      "norm": 0.9999999333547278,
+      "parameter_sample_delta_l2": 0.002939385835905803
+    },
+    {
+      "tokens": 1008,
+      "norm": 0.9999999185738613,
+      "parameter_sample_delta_l2": 0.003113070060335804
+    },
+    {
+      "tokens": 1008,
+      "norm": 0.9999998191080456,
+      "parameter_sample_delta_l2": 0.0027134804797407553
+    },
+    {
+      "tokens": 1008,
+      "norm": 0.9999999062067648,
+      "parameter_sample_delta_l2": 0.0018209307495970007
+    },
+    {
+      "tokens": 1008,
+      "norm": 0.9999998869525483,
+      "parameter_sample_delta_l2": 0.0011053272499433992
+    },
+    {
+      "tokens": 1008,
+      "norm": 0.99999988295446,
+      "parameter_sample_delta_l2": 0.000591735530063537
+    },
+    {
+      "tokens": 1008,
+      "norm": 0.9999999346557154,
+      "parameter_sample_delta_l2": 0.0002654258502901398
+    }
+  ],
+  "trained_candidate": {
+    "kind": "local-trained-candidate",
+    "paper": "smolwam",
+    "seed": 44,
+    "source_revision": "dde1e5bfe35c439499343c6d70e9cd32c96d0b36",
+    "selection": "validation only",
+    "dataset": {
+      "public_id": "nvidia/LIBERO-Cosmos-Policy",
+      "revision": "b463cbd5d114909e4daea65eb03bed9787290042",
+      "files": {
+        "success_only/libero_goal_regen/put_the_cream_cheese_in_the_bowl_demo.hdf5": "533472726b4cf89b2000af1bc275f26fb6cdcd2a5706fbd65cbe019f58180ebb",
+        "success_only/dataset_statistics.json": "5b119a98ad7824507ddff3c6c7507ca244261ee416dcfa623876702160c580d3"
+      }
+    },
+    "metrics": {
+      "optimizer_updates": 8,
+      "teacher_layout_updates": 2,
+      "compact_layout_updates": 6,
+      "nonzero_parameter_updates": 7,
+      "nonzero_gradient_updates": 8,
+      "parameter_sample_delta_l2": 0.010460627883859331,
+      "updated_parameter_tensors": 340,
+      "best_validation_action_l1": 0.32548515560726327,
+      "real_teacher_target_rows": 202,
+      "teacher_vs_demo_action_l1": 0.00901833331064865,
+      "train_mean_action_l1": 0.3554840236902237,
+      "train_mean_world_l1": 0.48335758969187737,
+      "train_mean_kd_act_l1": 0.35581374540925026,
+      "train_mean_kd_world_l1": 0.5038045942783356
+    },
+    "training_evidence": {
+      "losses": [
+        {
+          "training": true,
+          "tokens": 1764,
+          "action_l1": 0.30763182044029236,
+          "world_l1": 0.6106294989585876,
+          "fut_proprio_l1": 0.3952917456626892,
+          "value_l1": 0.9158770442008972,
+          "kd_act_l1": 0.30983051657676697,
+          "kd_world_l1": 0.6297882795333862,
+          "total": 1.988996982574463
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.39141806960105896,
+          "world_l1": 0.598773717880249,
+          "fut_proprio_l1": 0.44669094681739807,
+          "value_l1": 0.08867886662483215,
+          "kd_act_l1": 0.3934577703475952,
+          "kd_world_l1": 0.6076274514198303,
+          "total": 2.044814109802246
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.42650124430656433,
+          "world_l1": 0.6013988256454468,
+          "fut_proprio_l1": 0.45907360315322876,
+          "value_l1": 0.05168197676539421,
+          "kd_act_l1": 0.4271330237388611,
+          "kd_world_l1": 0.6075862646102905,
+          "total": 2.1136951446533203
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.4258672893047333,
+          "world_l1": 0.60298752784729,
+          "fut_proprio_l1": 0.4609334170818329,
+          "value_l1": 0.014088824391365051,
+          "kd_act_l1": 0.4277407228946686,
+          "kd_world_l1": 0.6105762124061584,
+          "total": 2.1146740913391113
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.41400960087776184,
+          "world_l1": 0.6007802486419678,
+          "fut_proprio_l1": 0.4565652906894684,
+          "value_l1": 0.025265390053391457,
+          "kd_act_l1": 0.41325637698173523,
+          "kd_world_l1": 0.6091108322143555,
+          "total": 2.0853400230407715
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.41189903020858765,
+          "world_l1": 0.6058680415153503,
+          "fut_proprio_l1": 0.44612419605255127,
+          "value_l1": 0.06583280861377716,
+          "kd_act_l1": 0.4101065695285797,
+          "kd_world_l1": 0.6134804487228394,
+          "total": 2.0925498008728027
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3952547013759613,
+          "world_l1": 0.6146602630615234,
+          "fut_proprio_l1": 0.3694957196712494,
+          "value_l1": 0.10833770781755447,
+          "kd_act_l1": 0.3953129053115845,
+          "kd_world_l1": 0.6217291355133057,
+          "total": 2.074740409851074
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3617003560066223,
+          "world_l1": 0.6134637594223022,
+          "fut_proprio_l1": 0.26291608810424805,
+          "value_l1": 0.15529613196849823,
+          "kd_act_l1": 0.35727256536483765,
+          "kd_world_l1": 0.6214956045150757,
+          "total": 1.9957536458969116
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3315276503562927,
+          "world_l1": 0.610234260559082,
+          "fut_proprio_l1": 0.2634682357311249,
+          "value_l1": 0.20407600700855255,
+          "kd_act_l1": 0.3300858438014984,
+          "kd_world_l1": 0.615009605884552,
+          "total": 1.9336118698120117
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.32318687438964844,
+          "world_l1": 0.6023607850074768,
+          "fut_proprio_l1": 0.26716145873069763,
+          "value_l1": 0.2557881474494934,
+          "kd_act_l1": 0.3227364420890808,
+          "kd_world_l1": 0.6108111143112183,
+          "total": 1.9113901853561401
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.32693809270858765,
+          "world_l1": 0.5991623997688293,
+          "fut_proprio_l1": 0.273433119058609,
+          "value_l1": 0.3235574960708618,
+          "kd_act_l1": 0.3263781666755676,
+          "kd_world_l1": 0.6087443828582764,
+          "total": 1.920922040939331
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.34969407320022583,
+          "world_l1": 0.6061201691627502,
+          "fut_proprio_l1": 0.2643270492553711,
+          "value_l1": 0.3686034679412842,
+          "kd_act_l1": 0.34708577394485474,
+          "kd_world_l1": 0.6182454228401184,
+          "total": 1.984438419342041
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3642452359199524,
+          "world_l1": 0.6152306795120239,
+          "fut_proprio_l1": 0.26101812720298767,
+          "value_l1": 0.42592620849609375,
+          "kd_act_l1": 0.36411669850349426,
+          "kd_world_l1": 0.6262494325637817,
+          "total": 2.038536548614502
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3571356236934662,
+          "world_l1": 0.6233852505683899,
+          "fut_proprio_l1": 0.27001655101776123,
+          "value_l1": 0.4854423999786377,
+          "kd_act_l1": 0.3554563820362091,
+          "kd_world_l1": 0.6359187960624695,
+          "total": 2.0474419593811035
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3431357443332672,
+          "world_l1": 0.6315280795097351,
+          "fut_proprio_l1": 0.267912358045578,
+          "value_l1": 0.5465582013130188,
+          "kd_act_l1": 0.3427668809890747,
+          "kd_world_l1": 0.6469278335571289,
+          "total": 2.0458054542541504
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.34901490807533264,
+          "world_l1": 0.6304881572723389,
+          "fut_proprio_l1": 0.2670552432537079,
+          "value_l1": 0.6101592183113098,
+          "kd_act_l1": 0.3479670584201813,
+          "kd_world_l1": 0.6454117894172668,
+          "total": 2.060603380203247
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3343079686164856,
+          "world_l1": 0.6295702457427979,
+          "fut_proprio_l1": 0.2676023840904236,
+          "value_l1": 0.677000880241394,
+          "kd_act_l1": 0.3340699076652527,
+          "kd_world_l1": 0.6431310772895813,
+          "total": 2.035539388656616
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3135788142681122,
+          "world_l1": 0.6276107430458069,
+          "fut_proprio_l1": 0.29242435097694397,
+          "value_l1": 0.7458207607269287,
+          "kd_act_l1": 0.3102909326553345,
+          "kd_world_l1": 0.637334942817688,
+          "total": 1.9926398992538452
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.290513277053833,
+          "world_l1": 0.6211357116699219,
+          "fut_proprio_l1": 0.41953912377357483,
+          "value_l1": 0.8177931308746338,
+          "kd_act_l1": 0.289644718170166,
+          "kd_world_l1": 0.6339718699455261,
+          "total": 1.9589989185333252
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.2657024562358856,
+          "world_l1": 0.6169825196266174,
+          "fut_proprio_l1": 0.44570010900497437,
+          "value_l1": 0.8934618234634399,
+          "kd_act_l1": 0.26494818925857544,
+          "kd_world_l1": 0.6325541138648987,
+          "total": 1.9141035079956055
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.2598583698272705,
+          "world_l1": 0.6149021983146667,
+          "fut_proprio_l1": 0.4485892653465271,
+          "value_l1": 0.9727232456207275,
+          "kd_act_l1": 0.2606256604194641,
+          "kd_world_l1": 0.6335963010787964,
+          "total": 1.9111138582229614
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.24454042315483093,
+          "world_l1": 0.613290011882782,
+          "fut_proprio_l1": 0.44854703545570374,
+          "value_l1": 0.9726700186729431,
+          "kd_act_l1": 0.24352586269378662,
+          "kd_world_l1": 0.6318553686141968,
+          "total": 1.875333309173584
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.22447839379310608,
+          "world_l1": 0.6079318523406982,
+          "fut_proprio_l1": 0.4491453170776367,
+          "value_l1": 0.9805347919464111,
+          "kd_act_l1": 0.22484524548053741,
+          "kd_world_l1": 0.6235828399658203,
+          "total": 1.8238062858581543
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.2172311693429947,
+          "world_l1": 0.6074936389923096,
+          "fut_proprio_l1": 0.44772979617118835,
+          "value_l1": 0.9735155701637268,
+          "kd_act_l1": 0.2181435078382492,
+          "kd_world_l1": 0.6203734874725342,
+          "total": 1.8053662776947021
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.21237991750240326,
+          "world_l1": 0.6074685454368591,
+          "fut_proprio_l1": 0.44776642322540283,
+          "value_l1": 0.9739125370979309,
+          "kd_act_l1": 0.21397727727890015,
+          "kd_world_l1": 0.6180364489555359,
+          "total": 1.7940301895141602
+        },
+        {
+          "training": true,
+          "tokens": 1764,
+          "action_l1": 0.32375478744506836,
+          "world_l1": 0.6026788353919983,
+          "fut_proprio_l1": 0.2554491460323334,
+          "value_l1": 0.3791153132915497,
+          "kd_act_l1": 0.32161960005760193,
+          "kd_world_l1": 0.611626148223877,
+          "total": 1.9231358766555786
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.463977575302124,
+          "world_l1": 0.5346204042434692,
+          "fut_proprio_l1": 0.4723057150840759,
+          "value_l1": 0.06441798061132431,
+          "kd_act_l1": 0.4647780954837799,
+          "kd_world_l1": 0.5538088083267212,
+          "total": 2.070857286453247
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.4870861768722534,
+          "world_l1": 0.5364532470703125,
+          "fut_proprio_l1": 0.48038461804389954,
+          "value_l1": 0.031216125935316086,
+          "kd_act_l1": 0.4882398545742035,
+          "kd_world_l1": 0.5536026954650879,
+          "total": 2.116542100906372
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.480061411857605,
+          "world_l1": 0.5306268930435181,
+          "fut_proprio_l1": 0.4784534275531769,
+          "value_l1": 0.0030738445930182934,
+          "kd_act_l1": 0.4813409447669983,
+          "kd_world_l1": 0.5504257678985596,
+          "total": 2.0906078815460205
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.46813225746154785,
+          "world_l1": 0.52101731300354,
+          "fut_proprio_l1": 0.4718486964702606,
+          "value_l1": 0.039207249879837036,
+          "kd_act_l1": 0.4682190418243408,
+          "kd_world_l1": 0.5414850115776062,
+          "total": 2.049959182739258
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.46400412917137146,
+          "world_l1": 0.5206971168518066,
+          "fut_proprio_l1": 0.4593031108379364,
+          "value_l1": 0.07498615980148315,
+          "kd_act_l1": 0.4629393517971039,
+          "kd_world_l1": 0.5422579646110535,
+          "total": 2.043327569961548
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.4296656548976898,
+          "world_l1": 0.5193795561790466,
+          "fut_proprio_l1": 0.38147100806236267,
+          "value_l1": 0.11564384400844574,
+          "kd_act_l1": 0.43021345138549805,
+          "kd_world_l1": 0.5423473119735718,
+          "total": 1.9713174104690552
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.413486123085022,
+          "world_l1": 0.5117866396903992,
+          "fut_proprio_l1": 0.27732616662979126,
+          "value_l1": 0.16140484809875488,
+          "kd_act_l1": 0.41273826360702515,
+          "kd_world_l1": 0.5355970859527588,
+          "total": 1.9174811840057373
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3683909773826599,
+          "world_l1": 0.5064460039138794,
+          "fut_proprio_l1": 0.28131210803985596,
+          "value_l1": 0.2078654170036316,
+          "kd_act_l1": 0.3669049143791199,
+          "kd_world_l1": 0.5276549458503723,
+          "total": 1.818314552307129
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.38583704829216003,
+          "world_l1": 0.505057156085968,
+          "fut_proprio_l1": 0.2868881821632385,
+          "value_l1": 0.25792816281318665,
+          "kd_act_l1": 0.38603100180625916,
+          "kd_world_l1": 0.5287235975265503,
+          "total": 1.8601304292678833
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.39276763796806335,
+          "world_l1": 0.5083378553390503,
+          "fut_proprio_l1": 0.27954599261283875,
+          "value_l1": 0.3109622001647949,
+          "kd_act_l1": 0.39176785945892334,
+          "kd_world_l1": 0.5332693457603455,
+          "total": 1.8851935863494873
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.4146009087562561,
+          "world_l1": 0.5087296366691589,
+          "fut_proprio_l1": 0.2603849172592163,
+          "value_l1": 0.35140809416770935,
+          "kd_act_l1": 0.4159685969352722,
+          "kd_world_l1": 0.5347550511360168,
+          "total": 1.9352333545684814
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.43404096364974976,
+          "world_l1": 0.5171696543693542,
+          "fut_proprio_l1": 0.25555330514907837,
+          "value_l1": 0.4079061448574066,
+          "kd_act_l1": 0.4358121454715729,
+          "kd_world_l1": 0.5418776273727417,
+          "total": 1.9952462911605835
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.44351962208747864,
+          "world_l1": 0.5310783982276917,
+          "fut_proprio_l1": 0.2645677626132965,
+          "value_l1": 0.4669714868068695,
+          "kd_act_l1": 0.4407723844051361,
+          "kd_world_l1": 0.5566720366477966,
+          "total": 2.045196533203125
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.41736966371536255,
+          "world_l1": 0.5447614789009094,
+          "fut_proprio_l1": 0.26253432035446167,
+          "value_l1": 0.5283251404762268,
+          "kd_act_l1": 0.4162125885486603,
+          "kd_world_l1": 0.5734620690345764,
+          "total": 2.0308916568756104
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.40773433446884155,
+          "world_l1": 0.5477444529533386,
+          "fut_proprio_l1": 0.2621685564517975,
+          "value_l1": 0.5953150987625122,
+          "kd_act_l1": 0.40702834725379944,
+          "kd_world_l1": 0.5747429132461548,
+          "total": 2.022998332977295
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.36982524394989014,
+          "world_l1": 0.542486310005188,
+          "fut_proprio_l1": 0.26327547430992126,
+          "value_l1": 0.6647528409957886,
+          "kd_act_l1": 0.3728162944316864,
+          "kd_world_l1": 0.567749559879303,
+          "total": 1.9456803798675537
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3569642901420593,
+          "world_l1": 0.5370293259620667,
+          "fut_proprio_l1": 0.2888287901878357,
+          "value_l1": 0.7391040921211243,
+          "kd_act_l1": 0.35641446709632874,
+          "kd_world_l1": 0.558073878288269,
+          "total": 1.9112752676010132
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.338780015707016,
+          "world_l1": 0.5329180955886841,
+          "fut_proprio_l1": 0.41640540957450867,
+          "value_l1": 0.8155279755592346,
+          "kd_act_l1": 0.34032079577445984,
+          "kd_world_l1": 0.5571874976158142,
+          "total": 1.892399787902832
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3353649973869324,
+          "world_l1": 0.5340973734855652,
+          "fut_proprio_l1": 0.44239580631256104,
+          "value_l1": 0.8908377885818481,
+          "kd_act_l1": 0.33326029777526855,
+          "kd_world_l1": 0.5593251585960388,
+          "total": 1.8953711986541748
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3360331356525421,
+          "world_l1": 0.5346714854240417,
+          "fut_proprio_l1": 0.4449726343154907,
+          "value_l1": 0.9681169390678406,
+          "kd_act_l1": 0.3363538682460785,
+          "kd_world_l1": 0.5631827116012573,
+          "total": 1.9115501642227173
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3258689045906067,
+          "world_l1": 0.5317038893699646,
+          "fut_proprio_l1": 0.44468456506729126,
+          "value_l1": 0.965696394443512,
+          "kd_act_l1": 0.32542943954467773,
+          "kd_world_l1": 0.5609017610549927,
+          "total": 1.8849421739578247
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3300437927246094,
+          "world_l1": 0.5333171486854553,
+          "fut_proprio_l1": 0.44732099771499634,
+          "value_l1": 0.9832178354263306,
+          "kd_act_l1": 0.3301687240600586,
+          "kd_world_l1": 0.5600795745849609,
+          "total": 1.8966630697250366
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.3269713819026947,
+          "world_l1": 0.5343081951141357,
+          "fut_proprio_l1": 0.44829151034355164,
+          "value_l1": 0.9866300225257874,
+          "kd_act_l1": 0.3259616792201996,
+          "kd_world_l1": 0.5581383109092712,
+          "total": 1.888871669769287
+        },
+        {
+          "training": false,
+          "tokens": 1764,
+          "action_l1": 0.32256433367729187,
+          "world_l1": 0.5346624255180359,
+          "fut_proprio_l1": 0.44829410314559937,
+          "value_l1": 0.9865912199020386,
+          "kd_act_l1": 0.3230336904525757,
+          "kd_world_l1": 0.5567790865898132,
+          "total": 1.8805279731750488
+        },
+        {
+          "training": true,
+          "tokens": 1008,
+          "action_l1": 0.43546250462532043,
+          "world_l1": 0.49680760502815247,
+          "kd_act_l1": 0.4371702969074249,
+          "kd_world_l1": 0.5161733031272888,
+          "total": 1.8856136798858643
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4425010681152344,
+          "world_l1": 0.4706732928752899,
+          "kd_act_l1": 0.44481366872787476,
+          "kd_world_l1": 0.4956793487071991,
+          "total": 1.8536674976348877
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4502011239528656,
+          "world_l1": 0.47143977880477905,
+          "kd_act_l1": 0.4513905644416809,
+          "kd_world_l1": 0.493939608335495,
+          "total": 1.8669710159301758
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4254806637763977,
+          "world_l1": 0.4606764614582062,
+          "kd_act_l1": 0.4270149767398834,
+          "kd_world_l1": 0.4850292205810547,
+          "total": 1.798201322555542
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3917892277240753,
+          "world_l1": 0.4520453214645386,
+          "kd_act_l1": 0.3945528566837311,
+          "kd_world_l1": 0.47736096382141113,
+          "total": 1.7157483100891113
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.36563146114349365,
+          "world_l1": 0.45596519112586975,
+          "kd_act_l1": 0.36641520261764526,
+          "kd_world_l1": 0.47962647676467896,
+          "total": 1.6676383018493652
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3457332253456116,
+          "world_l1": 0.4463886320590973,
+          "kd_act_l1": 0.3461523652076721,
+          "kd_world_l1": 0.4685325622558594,
+          "total": 1.606806755065918
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.33043718338012695,
+          "world_l1": 0.441656231880188,
+          "kd_act_l1": 0.33090463280677795,
+          "kd_world_l1": 0.464213490486145,
+          "total": 1.5672115087509155
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3275972008705139,
+          "world_l1": 0.4374661147594452,
+          "kd_act_l1": 0.3267400860786438,
+          "kd_world_l1": 0.45974379777908325,
+          "total": 1.5515470504760742
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.36574187874794006,
+          "world_l1": 0.4458753168582916,
+          "kd_act_l1": 0.3661436140537262,
+          "kd_world_l1": 0.47524479031562805,
+          "total": 1.653005599975586
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.39502832293510437,
+          "world_l1": 0.469119131565094,
+          "kd_act_l1": 0.3985937535762787,
+          "kd_world_l1": 0.5034642219543457,
+          "total": 1.7662054300308228
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.41935575008392334,
+          "world_l1": 0.47639644145965576,
+          "kd_act_l1": 0.4204561412334442,
+          "kd_world_l1": 0.5107346177101135,
+          "total": 1.8269429206848145
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.43271735310554504,
+          "world_l1": 0.48190322518348694,
+          "kd_act_l1": 0.4305809736251831,
+          "kd_world_l1": 0.5157098174095154,
+          "total": 1.8609113693237305
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4180162250995636,
+          "world_l1": 0.48680579662323,
+          "kd_act_l1": 0.414883017539978,
+          "kd_world_l1": 0.5221754312515259,
+          "total": 1.841880440711975
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.38028484582901,
+          "world_l1": 0.4919452965259552,
+          "kd_act_l1": 0.3803759515285492,
+          "kd_world_l1": 0.5298212170600891,
+          "total": 1.7824273109436035
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.36388346552848816,
+          "world_l1": 0.4944775104522705,
+          "kd_act_l1": 0.3645499348640442,
+          "kd_world_l1": 0.5292242169380188,
+          "total": 1.7521350383758545
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3397717773914337,
+          "world_l1": 0.48618680238723755,
+          "kd_act_l1": 0.3420273959636688,
+          "kd_world_l1": 0.5211676359176636,
+          "total": 1.6891536712646484
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.33628860116004944,
+          "world_l1": 0.47317466139793396,
+          "kd_act_l1": 0.3370138108730316,
+          "kd_world_l1": 0.5023852586746216,
+          "total": 1.648862361907959
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3290085792541504,
+          "world_l1": 0.47703996300697327,
+          "kd_act_l1": 0.32873913645744324,
+          "kd_world_l1": 0.5089390873908997,
+          "total": 1.6437268257141113
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.32533639669418335,
+          "world_l1": 0.4811926484107971,
+          "kd_act_l1": 0.32494446635246277,
+          "kd_world_l1": 0.514381468296051,
+          "total": 1.6458549499511719
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3165811598300934,
+          "world_l1": 0.4850711226463318,
+          "kd_act_l1": 0.31659451127052307,
+          "kd_world_l1": 0.5208339095115662,
+          "total": 1.6390807628631592
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.29419609904289246,
+          "world_l1": 0.4840545952320099,
+          "kd_act_l1": 0.29446133971214294,
+          "kd_world_l1": 0.5203481912612915,
+          "total": 1.5930602550506592
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.29181379079818726,
+          "world_l1": 0.4813208281993866,
+          "kd_act_l1": 0.2934204638004303,
+          "kd_world_l1": 0.5150254368782043,
+          "total": 1.581580400466919
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.28496137261390686,
+          "world_l1": 0.48014962673187256,
+          "kd_act_l1": 0.28364256024360657,
+          "kd_world_l1": 0.5115261673927307,
+          "total": 1.5602796077728271
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2808689475059509,
+          "world_l1": 0.47933098673820496,
+          "kd_act_l1": 0.28162509202957153,
+          "kd_world_l1": 0.5102952718734741,
+          "total": 1.552120327949524
+        },
+        {
+          "training": true,
+          "tokens": 1008,
+          "action_l1": 0.3811514973640442,
+          "world_l1": 0.46572166681289673,
+          "kd_act_l1": 0.3805444538593292,
+          "kd_world_l1": 0.48916715383529663,
+          "total": 1.7165846824645996
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4083085358142853,
+          "world_l1": 0.4556749165058136,
+          "kd_act_l1": 0.4114132821559906,
+          "kd_world_l1": 0.4783687889575958,
+          "total": 1.7537654638290405
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4423690140247345,
+          "world_l1": 0.4569810926914215,
+          "kd_act_l1": 0.4432574212551117,
+          "kd_world_l1": 0.4770340323448181,
+          "total": 1.8196415901184082
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.43876317143440247,
+          "world_l1": 0.4482465386390686,
+          "kd_act_l1": 0.4411245286464691,
+          "kd_world_l1": 0.4694165587425232,
+          "total": 1.797550916671753
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4201526939868927,
+          "world_l1": 0.442823588848114,
+          "kd_act_l1": 0.4203214943408966,
+          "kd_world_l1": 0.46528539061546326,
+          "total": 1.748583197593689
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4224693477153778,
+          "world_l1": 0.45289337635040283,
+          "kd_act_l1": 0.4214368760585785,
+          "kd_world_l1": 0.4739132225513458,
+          "total": 1.7707128524780273
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4132019579410553,
+          "world_l1": 0.4488290548324585,
+          "kd_act_l1": 0.41299760341644287,
+          "kd_world_l1": 0.46961110830307007,
+          "total": 1.7446396350860596
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3808382749557495,
+          "world_l1": 0.44425278902053833,
+          "kd_act_l1": 0.37720605731010437,
+          "kd_world_l1": 0.46409866213798523,
+          "total": 1.6663957834243774
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.35699406266212463,
+          "world_l1": 0.4372696280479431,
+          "kd_act_l1": 0.3559344708919525,
+          "kd_world_l1": 0.45653343200683594,
+          "total": 1.606731653213501
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3451080620288849,
+          "world_l1": 0.4394116699695587,
+          "kd_act_l1": 0.3456130921840668,
+          "kd_world_l1": 0.46564140915870667,
+          "total": 1.5957741737365723
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.34772464632987976,
+          "world_l1": 0.4603327810764313,
+          "kd_act_l1": 0.3480435311794281,
+          "kd_world_l1": 0.49126654863357544,
+          "total": 1.6473674774169922
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3659709692001343,
+          "world_l1": 0.4662722647190094,
+          "kd_act_l1": 0.3643120527267456,
+          "kd_world_l1": 0.496987909078598,
+          "total": 1.6935431957244873
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.38335856795310974,
+          "world_l1": 0.47095605731010437,
+          "kd_act_l1": 0.3834676146507263,
+          "kd_world_l1": 0.5022395253181458,
+          "total": 1.7400217056274414
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3823959529399872,
+          "world_l1": 0.4767703413963318,
+          "kd_act_l1": 0.3798503279685974,
+          "kd_world_l1": 0.5098178386688232,
+          "total": 1.7488343715667725
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3767700493335724,
+          "world_l1": 0.4815947711467743,
+          "kd_act_l1": 0.37656328082084656,
+          "kd_world_l1": 0.5178152322769165,
+          "total": 1.7527433633804321
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.37592756748199463,
+          "world_l1": 0.486483633518219,
+          "kd_act_l1": 0.37466689944267273,
+          "kd_world_l1": 0.5205858945846558,
+          "total": 1.7576639652252197
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.36411479115486145,
+          "world_l1": 0.47858887910842896,
+          "kd_act_l1": 0.36322537064552307,
+          "kd_world_l1": 0.5116401314735413,
+          "total": 1.71756911277771
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3344298005104065,
+          "world_l1": 0.457987904548645,
+          "kd_act_l1": 0.33081483840942383,
+          "kd_world_l1": 0.48554906249046326,
+          "total": 1.6087816953659058
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.31444045901298523,
+          "world_l1": 0.46366143226623535,
+          "kd_act_l1": 0.31329452991485596,
+          "kd_world_l1": 0.4929325580596924,
+          "total": 1.5843290090560913
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.291194885969162,
+          "world_l1": 0.46769222617149353,
+          "kd_act_l1": 0.28812175989151,
+          "kd_world_l1": 0.49885550141334534,
+          "total": 1.5458643436431885
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.285086989402771,
+          "world_l1": 0.4720524251461029,
+          "kd_act_l1": 0.2863238751888275,
+          "kd_world_l1": 0.5056195259094238,
+          "total": 1.54908287525177
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.27101996541023254,
+          "world_l1": 0.4712059795856476,
+          "kd_act_l1": 0.2705775201320648,
+          "kd_world_l1": 0.5055716037750244,
+          "total": 1.518375039100647
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.246168315410614,
+          "world_l1": 0.466410756111145,
+          "kd_act_l1": 0.24624653160572052,
+          "kd_world_l1": 0.49858513474464417,
+          "total": 1.4574106931686401
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2379438281059265,
+          "world_l1": 0.4650212526321411,
+          "kd_act_l1": 0.23826566338539124,
+          "kd_world_l1": 0.4947369396686554,
+          "total": 1.4359676837921143
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.23438474535942078,
+          "world_l1": 0.4634716510772705,
+          "kd_act_l1": 0.23571519553661346,
+          "kd_world_l1": 0.49298763275146484,
+          "total": 1.4265592098236084
+        },
+        {
+          "training": true,
+          "tokens": 1008,
+          "action_l1": 0.3434238135814667,
+          "world_l1": 0.4481133818626404,
+          "kd_act_l1": 0.3425011932849884,
+          "kd_world_l1": 0.4747660756111145,
+          "total": 1.60880446434021
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.39259883761405945,
+          "world_l1": 0.45706766843795776,
+          "kd_act_l1": 0.3959309160709381,
+          "kd_world_l1": 0.47369593381881714,
+          "total": 1.7192933559417725
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.41444605588912964,
+          "world_l1": 0.46046772599220276,
+          "kd_act_l1": 0.4156719446182251,
+          "kd_world_l1": 0.4732198119163513,
+          "total": 1.763805627822876
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.40844932198524475,
+          "world_l1": 0.4472484886646271,
+          "kd_act_l1": 0.40955665707588196,
+          "kd_world_l1": 0.46091803908348083,
+          "total": 1.7261725664138794
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3802315890789032,
+          "world_l1": 0.4319259524345398,
+          "kd_act_l1": 0.38197043538093567,
+          "kd_world_l1": 0.4461856782436371,
+          "total": 1.6403136253356934
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.36805862188339233,
+          "world_l1": 0.43342432379722595,
+          "kd_act_l1": 0.3672584891319275,
+          "kd_world_l1": 0.4475059509277344,
+          "total": 1.6162474155426025
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.36180832982063293,
+          "world_l1": 0.4254922568798065,
+          "kd_act_l1": 0.3618374764919281,
+          "kd_world_l1": 0.4421718418598175,
+          "total": 1.591309905052185
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.32706180214881897,
+          "world_l1": 0.4213114380836487,
+          "kd_act_l1": 0.32365065813064575,
+          "kd_world_l1": 0.4372379183769226,
+          "total": 1.5092618465423584
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3180277943611145,
+          "world_l1": 0.4142180383205414,
+          "kd_act_l1": 0.3178110122680664,
+          "kd_world_l1": 0.4290215075016022,
+          "total": 1.4790782928466797
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.32780686020851135,
+          "world_l1": 0.4138222336769104,
+          "kd_act_l1": 0.32767096161842346,
+          "kd_world_l1": 0.433137446641922,
+          "total": 1.5024374723434448
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3433600962162018,
+          "world_l1": 0.43465757369995117,
+          "kd_act_l1": 0.3442961871623993,
+          "kd_world_l1": 0.45612096786499023,
+          "total": 1.5784348249435425
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.36119353771209717,
+          "world_l1": 0.43844863772392273,
+          "kd_act_l1": 0.36163970828056335,
+          "kd_world_l1": 0.4587782025337219,
+          "total": 1.6200602054595947
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.37726277112960815,
+          "world_l1": 0.442570298910141,
+          "kd_act_l1": 0.3748113512992859,
+          "kd_world_l1": 0.4626477062702179,
+          "total": 1.657292127609253
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3624676465988159,
+          "world_l1": 0.45067697763442993,
+          "kd_act_l1": 0.3600505590438843,
+          "kd_world_l1": 0.4732046127319336,
+          "total": 1.646399736404419
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.33898648619651794,
+          "world_l1": 0.45775458216667175,
+          "kd_act_l1": 0.3388161361217499,
+          "kd_world_l1": 0.4844512343406677,
+          "total": 1.6200084686279297
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3396863639354706,
+          "world_l1": 0.46154335141181946,
+          "kd_act_l1": 0.3394930064678192,
+          "kd_world_l1": 0.4868869185447693,
+          "total": 1.6276097297668457
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.32727712392807007,
+          "world_l1": 0.44999828934669495,
+          "kd_act_l1": 0.32829558849334717,
+          "kd_world_l1": 0.47382867336273193,
+          "total": 1.5793997049331665
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3119295835494995,
+          "world_l1": 0.43253007531166077,
+          "kd_act_l1": 0.30932992696762085,
+          "kd_world_l1": 0.4504297971725464,
+          "total": 1.50421941280365
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2948766350746155,
+          "world_l1": 0.43846243619918823,
+          "kd_act_l1": 0.2931700646877289,
+          "kd_world_l1": 0.4593638777732849,
+          "total": 1.4858729839324951
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2749967873096466,
+          "world_l1": 0.4461233615875244,
+          "kd_act_l1": 0.2747942805290222,
+          "kd_world_l1": 0.4689640402793884,
+          "total": 1.4648784399032593
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.26309219002723694,
+          "world_l1": 0.44915771484375,
+          "kd_act_l1": 0.26372718811035156,
+          "kd_world_l1": 0.47452327609062195,
+          "total": 1.4505003690719604
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2425079643726349,
+          "world_l1": 0.44319385290145874,
+          "kd_act_l1": 0.24244670569896698,
+          "kd_world_l1": 0.4693194031715393,
+          "total": 1.3974679708480835
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.23092593252658844,
+          "world_l1": 0.4361869692802429,
+          "kd_act_l1": 0.23229268193244934,
+          "kd_world_l1": 0.4600289762020111,
+          "total": 1.3594346046447754
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.22435396909713745,
+          "world_l1": 0.43281620740890503,
+          "kd_act_l1": 0.22416871786117554,
+          "kd_world_l1": 0.4537081718444824,
+          "total": 1.3350470066070557
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.22023743391036987,
+          "world_l1": 0.4306686222553253,
+          "kd_act_l1": 0.2215736359357834,
+          "kd_world_l1": 0.45066529512405396,
+          "total": 1.3231450319290161
+        },
+        {
+          "training": true,
+          "tokens": 1008,
+          "action_l1": 0.3300814628601074,
+          "world_l1": 0.41894033551216125,
+          "kd_act_l1": 0.3307766020298004,
+          "kd_world_l1": 0.4360451102256775,
+          "total": 1.515843391418457
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4049188792705536,
+          "world_l1": 0.44602230191230774,
+          "kd_act_l1": 0.40832871198654175,
+          "kd_world_l1": 0.4586108326911926,
+          "total": 1.7178807258605957
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4188797175884247,
+          "world_l1": 0.45373085141181946,
+          "kd_act_l1": 0.4200129806995392,
+          "kd_world_l1": 0.46200814843177795,
+          "total": 1.7546316385269165
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4024093747138977,
+          "world_l1": 0.4371441602706909,
+          "kd_act_l1": 0.4031912684440613,
+          "kd_world_l1": 0.4451262652873993,
+          "total": 1.6878710985183716
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3706294000148773,
+          "world_l1": 0.41397085785865784,
+          "kd_act_l1": 0.3729804754257202,
+          "kd_world_l1": 0.42275384068489075,
+          "total": 1.5803345441818237
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.35078778862953186,
+          "world_l1": 0.4122749865055084,
+          "kd_act_l1": 0.35097819566726685,
+          "kd_world_l1": 0.4204387962818146,
+          "total": 1.5344797372817993
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3461737036705017,
+          "world_l1": 0.3990894556045532,
+          "kd_act_l1": 0.3467538058757782,
+          "kd_world_l1": 0.4106674790382385,
+          "total": 1.5026843547821045
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3199322819709778,
+          "world_l1": 0.39370882511138916,
+          "kd_act_l1": 0.3177568018436432,
+          "kd_world_l1": 0.4043927788734436,
+          "total": 1.435790777206421
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3158802390098572,
+          "world_l1": 0.3838050067424774,
+          "kd_act_l1": 0.31556588411331177,
+          "kd_world_l1": 0.39349713921546936,
+          "total": 1.4087482690811157
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3375997245311737,
+          "world_l1": 0.3802417814731598,
+          "kd_act_l1": 0.3378351926803589,
+          "kd_world_l1": 0.39331528544425964,
+          "total": 1.4489920139312744
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3623160421848297,
+          "world_l1": 0.4128868281841278,
+          "kd_act_l1": 0.3630593419075012,
+          "kd_world_l1": 0.42949119210243225,
+          "total": 1.5677534341812134
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3836798071861267,
+          "world_l1": 0.41593900322914124,
+          "kd_act_l1": 0.38361361622810364,
+          "kd_world_l1": 0.43181464076042175,
+          "total": 1.6150470972061157
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3976568579673767,
+          "world_l1": 0.4188477694988251,
+          "kd_act_l1": 0.39567244052886963,
+          "kd_world_l1": 0.43423783779144287,
+          "total": 1.646414875984192
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3785252869129181,
+          "world_l1": 0.4260202944278717,
+          "kd_act_l1": 0.3751416504383087,
+          "kd_world_l1": 0.4449407458305359,
+          "total": 1.6246280670166016
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3469723165035248,
+          "world_l1": 0.4304828941822052,
+          "kd_act_l1": 0.3466940224170685,
+          "kd_world_l1": 0.45392468571662903,
+          "total": 1.5780738592147827
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3379932940006256,
+          "world_l1": 0.4354740083217621,
+          "kd_act_l1": 0.33794692158699036,
+          "kd_world_l1": 0.4569212794303894,
+          "total": 1.5683355331420898
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3247334659099579,
+          "world_l1": 0.4154491722583771,
+          "kd_act_l1": 0.32600831985473633,
+          "kd_world_l1": 0.43744176626205444,
+          "total": 1.5036327838897705
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3179210126399994,
+          "world_l1": 0.3887389600276947,
+          "kd_act_l1": 0.31735312938690186,
+          "kd_world_l1": 0.40203553438186646,
+          "total": 1.4260485172271729
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3029862642288208,
+          "world_l1": 0.4025686979293823,
+          "kd_act_l1": 0.30241817235946655,
+          "kd_world_l1": 0.4198300838470459,
+          "total": 1.4278032779693604
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.28911346197128296,
+          "world_l1": 0.4191044270992279,
+          "kd_act_l1": 0.28941604495048523,
+          "kd_world_l1": 0.43788379430770874,
+          "total": 1.4355177879333496
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.27831408381462097,
+          "world_l1": 0.42215868830680847,
+          "kd_act_l1": 0.27864155173301697,
+          "kd_world_l1": 0.44414791464805603,
+          "total": 1.4232622385025024
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2571543753147125,
+          "world_l1": 0.40955767035484314,
+          "kd_act_l1": 0.25693437457084656,
+          "kd_world_l1": 0.4327390193939209,
+          "total": 1.3563854694366455
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2480607032775879,
+          "world_l1": 0.3932972550392151,
+          "kd_act_l1": 0.24973714351654053,
+          "kd_world_l1": 0.4142191708087921,
+          "total": 1.305314302444458
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.24182923138141632,
+          "world_l1": 0.3829454481601715,
+          "kd_act_l1": 0.24115988612174988,
+          "kd_world_l1": 0.4000072479248047,
+          "total": 1.265941858291626
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.23856167495250702,
+          "world_l1": 0.37581759691238403,
+          "kd_act_l1": 0.23961344361305237,
+          "kd_world_l1": 0.3913446366786957,
+          "total": 1.2453373670578003
+        },
+        {
+          "training": true,
+          "tokens": 1008,
+          "action_l1": 0.3892928659915924,
+          "world_l1": 0.43109816312789917,
+          "kd_act_l1": 0.3909347355365753,
+          "kd_world_l1": 0.4520346224308014,
+          "total": 1.663360357284546
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.40823879837989807,
+          "world_l1": 0.4287015199661255,
+          "kd_act_l1": 0.4116228222846985,
+          "kd_world_l1": 0.440301775932312,
+          "total": 1.688864827156067
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4243883788585663,
+          "world_l1": 0.4357680380344391,
+          "kd_act_l1": 0.4253033697605133,
+          "kd_world_l1": 0.4427657425403595,
+          "total": 1.7282254695892334
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4048383831977844,
+          "world_l1": 0.417022705078125,
+          "kd_act_l1": 0.40575921535491943,
+          "kd_world_l1": 0.4233962297439575,
+          "total": 1.6510165929794312
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3724413216114044,
+          "world_l1": 0.39019256830215454,
+          "kd_act_l1": 0.37518489360809326,
+          "kd_world_l1": 0.3976074159145355,
+          "total": 1.5354262590408325
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.35301610827445984,
+          "world_l1": 0.3858675956726074,
+          "kd_act_l1": 0.3531702160835266,
+          "kd_world_l1": 0.3924737572669983,
+          "total": 1.484527587890625
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.34933194518089294,
+          "world_l1": 0.3712855577468872,
+          "kd_act_l1": 0.3500162661075592,
+          "kd_world_l1": 0.3810083866119385,
+          "total": 1.4516421556472778
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.32353898882865906,
+          "world_l1": 0.3657861649990082,
+          "kd_act_l1": 0.32089072465896606,
+          "kd_world_l1": 0.37470555305480957,
+          "total": 1.3849214315414429
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3208039700984955,
+          "world_l1": 0.35326454043388367,
+          "kd_act_l1": 0.32050004601478577,
+          "kd_world_l1": 0.36123037338256836,
+          "total": 1.3557989597320557
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.34293970465660095,
+          "world_l1": 0.3453730046749115,
+          "kd_act_l1": 0.3425336182117462,
+          "kd_world_l1": 0.3564964234828949,
+          "total": 1.3873428106307983
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3655100166797638,
+          "world_l1": 0.3833014667034149,
+          "kd_act_l1": 0.36617669463157654,
+          "kd_world_l1": 0.399391233921051,
+          "total": 1.5143795013427734
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3850761950016022,
+          "world_l1": 0.3858168423175812,
+          "kd_act_l1": 0.3852916955947876,
+          "kd_world_l1": 0.4014875292778015,
+          "total": 1.5576722621917725
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.39803215861320496,
+          "world_l1": 0.38894033432006836,
+          "kd_act_l1": 0.39568406343460083,
+          "kd_world_l1": 0.4042094647884369,
+          "total": 1.586866021156311
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3790481686592102,
+          "world_l1": 0.3968733251094818,
+          "kd_act_l1": 0.3764297366142273,
+          "kd_world_l1": 0.4154077470302582,
+          "total": 1.5677589178085327
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3488493859767914,
+          "world_l1": 0.40164023637771606,
+          "kd_act_l1": 0.3487093150615692,
+          "kd_world_l1": 0.42435723543167114,
+          "total": 1.5235562324523926
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.33866605162620544,
+          "world_l1": 0.4080706536769867,
+          "kd_act_l1": 0.3383227586746216,
+          "kd_world_l1": 0.4284941256046295,
+          "total": 1.513553500175476
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3238518238067627,
+          "world_l1": 0.3848552107810974,
+          "kd_act_l1": 0.32663679122924805,
+          "kd_world_l1": 0.40668028593063354,
+          "total": 1.4420242309570312
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3200443387031555,
+          "world_l1": 0.3514265716075897,
+          "kd_act_l1": 0.31920382380485535,
+          "kd_world_l1": 0.3633475601673126,
+          "total": 1.3540222644805908
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3032356798648834,
+          "world_l1": 0.37331777811050415,
+          "kd_act_l1": 0.30287784337997437,
+          "kd_world_l1": 0.3891071379184723,
+          "total": 1.368538498878479
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2909947633743286,
+          "world_l1": 0.39483314752578735,
+          "kd_act_l1": 0.29061299562454224,
+          "kd_world_l1": 0.4122217893600464,
+          "total": 1.3886626958847046
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2796168327331543,
+          "world_l1": 0.3979300856590271,
+          "kd_act_l1": 0.28004685044288635,
+          "kd_world_l1": 0.4188137650489807,
+          "total": 1.3764076232910156
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2593834698200226,
+          "world_l1": 0.38103586435317993,
+          "kd_act_l1": 0.2591402530670166,
+          "kd_world_l1": 0.40326932072639465,
+          "total": 1.3028289079666138
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2517555058002472,
+          "world_l1": 0.35847729444503784,
+          "kd_act_l1": 0.2535397410392761,
+          "kd_world_l1": 0.37880223989486694,
+          "total": 1.2425748109817505
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.24539443850517273,
+          "world_l1": 0.34321773052215576,
+          "kd_act_l1": 0.244674950838089,
+          "kd_world_l1": 0.35907596349716187,
+          "total": 1.1923630237579346
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2421007603406906,
+          "world_l1": 0.33259567618370056,
+          "kd_act_l1": 0.24312034249305725,
+          "kd_world_l1": 0.34627243876457214,
+          "total": 1.1640892028808594
+        },
+        {
+          "training": true,
+          "tokens": 1008,
+          "action_l1": 0.3330734372138977,
+          "world_l1": 0.392871230840683,
+          "kd_act_l1": 0.3331325650215149,
+          "kd_world_l1": 0.42083606123924255,
+          "total": 1.479913353919983
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4079575836658478,
+          "world_l1": 0.4134276211261749,
+          "kd_act_l1": 0.41095679998397827,
+          "kd_world_l1": 0.42471569776535034,
+          "total": 1.657057762145996
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.42514291405677795,
+          "world_l1": 0.42003390192985535,
+          "kd_act_l1": 0.42597922682762146,
+          "kd_world_l1": 0.42666614055633545,
+          "total": 1.6978222131729126
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.4052211344242096,
+          "world_l1": 0.39947718381881714,
+          "kd_act_l1": 0.40616199374198914,
+          "kd_world_l1": 0.4051104485988617,
+          "total": 1.6159708499908447
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3726702630519867,
+          "world_l1": 0.3708266019821167,
+          "kd_act_l1": 0.3753858506679535,
+          "kd_world_l1": 0.3777904808521271,
+          "total": 1.4966732263565063
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.35412919521331787,
+          "world_l1": 0.3645206391811371,
+          "kd_act_l1": 0.354134202003479,
+          "kd_world_l1": 0.37070977687835693,
+          "total": 1.4434938430786133
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.35066545009613037,
+          "world_l1": 0.34935227036476135,
+          "kd_act_l1": 0.35126903653144836,
+          "kd_world_l1": 0.35851213335990906,
+          "total": 1.4097988605499268
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.32432252168655396,
+          "world_l1": 0.3444446623325348,
+          "kd_act_l1": 0.3216373026371002,
+          "kd_world_l1": 0.3524911105632782,
+          "total": 1.3428956270217896
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.320850670337677,
+          "world_l1": 0.3295186161994934,
+          "kd_act_l1": 0.3207048177719116,
+          "kd_world_l1": 0.33682286739349365,
+          "total": 1.3078969717025757
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.34238046407699585,
+          "world_l1": 0.31994742155075073,
+          "kd_act_l1": 0.3418625593185425,
+          "kd_world_l1": 0.3304833471775055,
+          "total": 1.3346737623214722
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3638743758201599,
+          "world_l1": 0.36112353205680847,
+          "kd_act_l1": 0.3645654618740082,
+          "kd_world_l1": 0.377157062292099,
+          "total": 1.466720461845398
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3834308385848999,
+          "world_l1": 0.3632083833217621,
+          "kd_act_l1": 0.38389909267425537,
+          "kd_world_l1": 0.3789556920528412,
+          "total": 1.5094940662384033
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.39608436822891235,
+          "world_l1": 0.36724719405174255,
+          "kd_act_l1": 0.39369258284568787,
+          "kd_world_l1": 0.3828272521495819,
+          "total": 1.539851427078247
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3777366280555725,
+          "world_l1": 0.37580808997154236,
+          "kd_act_l1": 0.3753680884838104,
+          "kd_world_l1": 0.3945018947124481,
+          "total": 1.5234147310256958
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.34857040643692017,
+          "world_l1": 0.3801676630973816,
+          "kd_act_l1": 0.34840407967567444,
+          "kd_world_l1": 0.4027153253555298,
+          "total": 1.4798574447631836
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3391096293926239,
+          "world_l1": 0.3870990574359894,
+          "kd_act_l1": 0.33868226408958435,
+          "kd_world_l1": 0.40728697180747986,
+          "total": 1.4721779823303223
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.3233588933944702,
+          "world_l1": 0.3626916706562042,
+          "kd_act_l1": 0.3260677456855774,
+          "kd_world_l1": 0.3843277096748352,
+          "total": 1.3964459896087646
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.31983309984207153,
+          "world_l1": 0.3256232738494873,
+          "kd_act_l1": 0.3189345896244049,
+          "kd_world_l1": 0.33666548132896423,
+          "total": 1.3010565042495728
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.30224767327308655,
+          "world_l1": 0.3516026735305786,
+          "kd_act_l1": 0.30195796489715576,
+          "kd_world_l1": 0.36653876304626465,
+          "total": 1.3223470449447632
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.29068446159362793,
+          "world_l1": 0.3761824667453766,
+          "kd_act_l1": 0.2901093065738678,
+          "kd_world_l1": 0.39285558462142944,
+          "total": 1.3498318195343018
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.27852386236190796,
+          "world_l1": 0.37889423966407776,
+          "kd_act_l1": 0.2788556218147278,
+          "kd_world_l1": 0.3995974659919739,
+          "total": 1.3358712196350098
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.25880110263824463,
+          "world_l1": 0.35976463556289673,
+          "kd_act_l1": 0.2585129737854004,
+          "kd_world_l1": 0.38191673159599304,
+          "total": 1.2589954137802124
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.24967548251152039,
+          "world_l1": 0.3338492512702942,
+          "kd_act_l1": 0.2514597475528717,
+          "kd_world_l1": 0.35386350750923157,
+          "total": 1.1888478994369507
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.24368196725845337,
+          "world_l1": 0.3157458007335663,
+          "kd_act_l1": 0.24302799999713898,
+          "kd_world_l1": 0.3308494985103607,
+          "total": 1.1333051919937134
+        },
+        {
+          "training": false,
+          "tokens": 1008,
+          "action_l1": 0.2406584620475769,
+          "world_l1": 0.30307742953300476,
+          "kd_act_l1": 0.24167487025260925,
+          "kd_world_l1": 0.31565991044044495,
+          "total": 1.1010706424713135
+        }
+      ],
+      "gradients": [
+        {
+          "tokens": 1764,
+          "norm": 0.9999998346739131,
+          "parameter_sample_delta_l2": 0.0
+        },
+        {
+          "tokens": 1764,
+          "norm": 0.9999999333547278,
+          "parameter_sample_delta_l2": 0.002939385835905803
+        },
+        {
+          "tokens": 1008,
+          "norm": 0.9999999185738613,
+          "parameter_sample_delta_l2": 0.003113070060335804
+        },
+        {
+          "tokens": 1008,
+          "norm": 0.9999998191080456,
+          "parameter_sample_delta_l2": 0.0027134804797407553
+        },
+        {
+          "tokens": 1008,
+          "norm": 0.9999999062067648,
+          "parameter_sample_delta_l2": 0.0018209307495970007
+        },
+        {
+          "tokens": 1008,
+          "norm": 0.9999998869525483,
+          "parameter_sample_delta_l2": 0.0011053272499433992
+        },
+        {
+          "tokens": 1008,
+          "norm": 0.99999988295446,
+          "parameter_sample_delta_l2": 0.000591735530063537
+        },
+        {
+          "tokens": 1008,
+          "norm": 0.9999999346557154,
+          "parameter_sample_delta_l2": 0.0002654258502901398
+        }
+      ]
+    },
+    "implementation_sha256": {
+      "lewam/external.py": "0e0a9dbaa54d897f01f6d6f2d13584ec26c1dcf84f4e541685bbc04791056b56",
+      "smolwam/algorithm.py": "ee5563a4b6e6da35b066536e31fc63bfda9a75b2ef98b40ecae06aed9220266b",
+      "smolwam/training.py": "7826d69e86534d51239975591d0d43b41d686ad8d7f9dc65c554a6e7977db718",
+      "smolwam/worker.py": "3485d8bafa5b3fa548ae2454677f490cf3f8791ba310d2d14c48d69ca0f7fd8c"
+    },
+    "files": {
+      "best.pt": "57413ea06d58c434722dd182771f698c839b2b52d114824662c57f310831962b"
+    }
+  },
+  "evaluation_tier": "l2_public_dataset",
+  "fidelity": "core_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "protocol": {
+    "teacher_targets_actual_model": true,
+    "teacher_targets_cover_validation": true,
+    "original_source_unchanged": true,
+    "native_apis": [
+      "smolwam.train.bank:main",
+      "smolwam.train.kd_targets:main",
+      "smolwam.train.train:train"
+    ],
+    "episodes": 8,
+    "rows": 202,
+    "steps": 8,
+    "layout_switch_step": 2,
+    "checkpoint_selection": "compact-layout validation action L1 only",
+    "latent_adapter_retrained": false,
+    "bert_text_cache_rebuilt": false,
+    "new_student_closed_loop_evaluated": false
+  },
+  "limitations": [
+    "单任务、前8演示、8步课程是训练机制诊断，不是原68,830row/5000step效果复现",
+    "复用已发布latentadapter与BERTtext；未重新训练单帧/clip映射",
+    "teacher缓存全row覆盖是显式boundeddata适配，未篡改upstream pin",
+    "本阶段不自动将新student用于LIBERO能力比较"
+  ]
+}

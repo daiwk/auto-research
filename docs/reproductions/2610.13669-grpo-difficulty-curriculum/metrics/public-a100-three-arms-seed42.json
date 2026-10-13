@@ -90,7 +90,7 @@
                     1,
                     0
                   ],
-                  "loss": -1.9371509552001953e-7,
+                  "loss": -1.9371509552001953e-07,
                   "gradient_l2_norm": 0.15984754264354706,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -181,7 +181,7 @@
                     0,
                     1
                   ],
-                  "loss": -1.9371509552001953e-7,
+                  "loss": -1.9371509552001953e-07,
                   "gradient_l2_norm": 0.1646161526441574,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -306,7 +306,7 @@
                     0,
                     1
                   ],
-                  "loss": 5.960464477539063e-8,
+                  "loss": 5.960464477539063e-08,
                   "gradient_l2_norm": 0.16914469003677368,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -431,7 +431,7 @@
                     0,
                     1
                   ],
-                  "loss": -2.1606683731079102e-7,
+                  "loss": -2.1606683731079102e-07,
                   "gradient_l2_norm": 0.15342898666858673,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -746,7 +746,7 @@
                     1,
                     0
                   ],
-                  "loss": -2.5331974029541016e-7,
+                  "loss": -2.5331974029541016e-07,
                   "gradient_l2_norm": 0.2029796838760376,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -871,7 +871,7 @@
                     1,
                     1
                   ],
-                  "loss": -3.501772880554199e-7,
+                  "loss": -3.501772880554199e-07,
                   "gradient_l2_norm": 0.20516759157180786,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1045,7 +1045,7 @@
                     0,
                     1
                   ],
-                  "loss": -2.384185791015625e-7,
+                  "loss": -2.384185791015625e-07,
                   "gradient_l2_norm": 0.16247574985027313,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1160,7 +1160,7 @@
                     1,
                     1
                   ],
-                  "loss": 9.685754776000977e-8,
+                  "loss": 9.685754776000977e-08,
                   "gradient_l2_norm": 0.216303288936615,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1451,7 +1451,7 @@
                     0,
                     0
                   ],
-                  "loss": -1.4901161193847656e-8,
+                  "loss": -1.4901161193847656e-08,
                   "gradient_l2_norm": 0.14908787608146667,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1571,7 +1571,7 @@
                     0,
                     0
                   ],
-                  "loss": 1.3783574104309082e-7,
+                  "loss": 1.3783574104309082e-07,
                   "gradient_l2_norm": 0.15373632311820984,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1730,7 +1730,7 @@
                     1,
                     0
                   ],
-                  "loss": 8.195638656616211e-8,
+                  "loss": 8.195638656616211e-08,
                   "gradient_l2_norm": 0.15684774518013,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
@@ -1860,7 +1860,7 @@
                     0,
                     0
                   ],
-                  "loss": -1.862645149230957e-7,
+                  "loss": -1.862645149230957e-07,
                   "gradient_l2_norm": 0.17808710038661957,
                   "optimizer_update_executed": true,
                   "zero_advantage_group": false,
