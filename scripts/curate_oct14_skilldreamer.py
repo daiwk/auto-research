@@ -6,6 +6,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import statistics
 import subprocess
@@ -34,6 +35,17 @@ def curate(directory: Path, commit: str, source_archive: Path) -> dict:
         for arm in ARMS:
             if len(run["episodes"][arm]) != len(run["protocol"]["test_ids"]):
                 raise ValueError("all episodes, including generation failures, must remain")
+            episodes=run["episodes"][arm]
+            if (sum(row.get("model_calls_including_psg",0) for row in episodes)!=run["variants"][arm]["model_calls"]
+                    or sum(row.get("executed_actions",0) for row in episodes)!=run["variants"][arm]["executed_actions"]
+                    or not all(type(value) in {int,float} and math.isfinite(value)
+                               for value in run["variants"][arm].values())):
+                raise ValueError("finite measured summaries must match actual episode calls/actions")
+        episodes=run["episodes"]["skilldreamer"]
+        if (sum(len(row.get("capability_checks",[])) for row in episodes)<1
+                or not any(row.get("loaded_skills") for row in episodes)
+                or sum(row.get("executed_actions",0) for row in episodes)<1):
+            raise ValueError("GPU completion requires actual CSI assessment, gallery loading and tool execution in every seed")
     if any(run["protocol"] != runs[0]["protocol"] for run in runs[1:]):
         raise ValueError("all seeds must share exactly the same frozen input and protocol")
     paths = ["scripts/run_skilldreamer.py", "src/auto_research/reproductions/skilldreamer/experiment.py",
@@ -79,6 +91,9 @@ def curate(directory: Path, commit: str, source_archive: Path) -> dict:
         "executed_actions": [sum(v["executed_actions"] for v in run["variants"].values()) for run in runs],
         "actual_csi_assessments": [sum(len(episode.get("capability_checks", []))
             for episode in run["episodes"]["skilldreamer"]) for run in runs],
+        "skilldreamer_loaded_skill_episodes": [sum(bool(episode.get("loaded_skills"))
+            for episode in run["episodes"]["skilldreamer"]) for run in runs],
+        "skilldreamer_executed_actions": [run["variants"]["skilldreamer"]["executed_actions"] for run in runs],
         "all_generation_failures_retained": True, "gold_visible_to_policy": False,
         "official_test_opened": False, "diagnostic_only": True, "promotion_eligible": False}
     receipt = {"schema_version": 1, "adapter_key": "skilldreamer",

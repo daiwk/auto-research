@@ -24,7 +24,9 @@ def fixture_runs(root, curator):
             "diagnostic_only": True, "promotion_eligible": False,
             "variants": {arm: {"pass_rate": 0.0, "model_calls": 2, "executed_actions": 1}
                          for arm in curator.ARMS},
-            "episodes": {arm: [{"correct": False, "capability_checks": [], "generation_errors": 1}]
+            "episodes": {arm: [{"correct": False, "capability_checks": [{"assessment":"CPU FIXTURE ONLY"}],
+                                "loaded_skills":["fixture-skill"],"executed_actions":1,
+                                "model_calls_including_psg":2,"generation_errors": 1}]
                          for arm in curator.ARMS},
             "protocol": {"gold_visible_to_policy": False, "test_ids": ["0"],
                 "dataset": {"public_id": "fixture", "revision": "a" * 40,
@@ -72,6 +74,8 @@ def test_skill_curation_retains_failed_episodes_and_binds_raw_source_hashes(tmp_
                         lambda command, **kwargs: ("source fixture: " + command[-1].split(":", 1)[1]).encode())
     summary = curator.curate(runs, "a" * 40, archive_path)
     assert summary["checks"]["all_generation_failures_retained"] is True
+    assert summary["checks"]["actual_csi_assessments"]==[1,1,1]
+    assert summary["checks"]["skilldreamer_loaded_skill_episodes"]==[1,1,1]
     receipt = json.loads((tmp_path / "output/docs/gpu-validations/oct13-skilldreamer-a30.json").read_text())
     assert len(receipt["executed_source_sha256"]) == 7
     assert receipt["metrics"]["skilldreamer.pass_rate"]["mean"] == 0
@@ -80,3 +84,34 @@ def test_skill_curation_retains_failed_episodes_and_binds_raw_source_hashes(tmp_
     assert raw["episodes"]["skilldreamer"][0]["correct"] is False
     with pytest.raises(FileExistsError):
         curator.curate(runs, "a" * 40, archive_path)
+
+
+@pytest.mark.parametrize("field,value",[("capability_checks",[]),("loaded_skills",[]),("executed_actions",0)])
+def test_missing_defining_skill_branch_cannot_pass_gpu_gate(tmp_path,monkeypatch,field,value):
+    curator=module()
+    monkeypatch.setattr(curator,"ROOT",tmp_path/"output")
+    runs=tmp_path/"runs"
+    fixture_runs(runs,curator)
+    path=runs/"seed43.json"
+    run=json.loads(path.read_text())
+    run["episodes"]["skilldreamer"][0][field]=value
+    if field=="executed_actions":
+        run["variants"]["skilldreamer"][field]=value
+    path.write_text(json.dumps(run))
+    with pytest.raises(ValueError,match="actual CSI"):
+        curator.curate(runs,"a"*40,tmp_path/"absent.tar")
+    assert not (tmp_path/"output").exists()
+
+
+def test_unmeasured_episode_call_summary_cannot_pass_gpu_gate(tmp_path,monkeypatch):
+    curator=module()
+    monkeypatch.setattr(curator,"ROOT",tmp_path/"output")
+    runs=tmp_path/"runs"
+    fixture_runs(runs,curator)
+    path=runs/"seed42.json"
+    run=json.loads(path.read_text())
+    run["variants"]["skilldreamer"]["model_calls"]+=1
+    path.write_text(json.dumps(run))
+    with pytest.raises(ValueError,match="summaries"):
+        curator.curate(runs,"a"*40,tmp_path/"absent.tar")
+    assert not (tmp_path/"output").exists()

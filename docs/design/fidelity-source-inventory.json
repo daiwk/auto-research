@@ -12117,7 +12117,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 35,
+        "line": 34,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12267,7 +12267,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 39,
+        "line": 40,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12275,7 +12275,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 41,
+        "line": 42,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12283,7 +12283,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 43,
+        "line": 46,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12291,7 +12291,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 44,
+        "line": 47,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12299,7 +12299,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 45,
+        "line": 48,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12307,7 +12307,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 78,
+        "line": 108,
         "qualified_name": "run",
         "expression": "r['answer']",
         "fingerprint": "16bcc64b7732b44ec2b36bf46d5e94e1380c678923c44a75b4f13251de1d001d"
@@ -12317,7 +12317,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "encode",
-        "line": 62,
+        "line": 61,
         "qualified_name": "encode",
         "expression": "ledger.encoder_calls += 1",
         "fingerprint": "7fc117e647153ef213b83707dfd6545c800ea7d560814cd295a36009cf2507b1"
@@ -12325,7 +12325,7 @@
       {
         "kind": "state_update_not_execution_evidence",
         "function": "encode",
-        "line": 63,
+        "line": 62,
         "qualified_name": "encode",
         "expression": "ledger.encoded_input_tokens += prompt.shape[1] + len(tokens)",
         "fingerprint": "9e88870d2bebd3cf73581b89f09d2c5538f6d2084a174396fcf9a1417fed9490"
@@ -12333,7 +12333,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 71,
+        "line": 70,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12341,7 +12341,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "run",
-        "line": 114,
+        "line": 118,
         "qualified_name": "run",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12349,7 +12349,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "assess",
-        "line": 151,
+        "line": 155,
         "qualified_name": "assess",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
@@ -12357,7 +12357,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "assess",
-        "line": 152,
+        "line": 156,
         "qualified_name": "assess",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"

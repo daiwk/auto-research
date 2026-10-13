@@ -56,31 +56,35 @@ def run(config, *, seed=42):
     cuts_per_group, suffixes = int(config.get("cuts",4)), int(config.get("suffixes",2))
     if min(group, cuts_per_group-1, suffixes) < 1 or len(train) < 2:
         raise ValueError("positive rollout budget, >=2 cuts and separate gate train/calibration prompts required")
-    delimiter = reasoner.tokenizer("\n\n", add_special_tokens=False).input_ids
     def encode(messages,tokens):
         prompt=reasoner.prompt_ids(messages)
         ledger.encoder_calls+=1
         ledger.encoded_input_tokens+=prompt.shape[1]+len(tokens)
         return causal_response_features(encoder,messages,tokens,prompt_token_ids=prompt)
-    gate_train, gate_calibration, failed = [], [], []
+    gate_train, gate_calibration, failed, rollout_audits = [], [], [], []
     for row_index,row in enumerate(train):
         messages = problem_messages("Write reasoning paragraphs separated by blank lines.\n"+row["question"])
         responses = ledger.sample(reasoner, messages, role="frozen_reasoner_training", samples=group,max_tokens=max_tokens)
-        for response in responses:
+        for response_index,response in enumerate(responses):
             features = encode(messages,response.tokens)
             correctness = 0. if response.truncated else verified_reward(response.text,row["answer"])
             box = boxed_token_position(response.tokens, encoder.tokenizer)
             if box is not None:
                 destination = gate_calibration if row_index >= max(1,len(train)*3//4) else gate_train
                 destination.append((features[box],correctness))
-            cuts = paragraph_prefixes(response.tokens, delimiter, limit=int(config.get("max_cuts",16)))
+            cuts = paragraph_prefixes(response.tokens,tokenizer=reasoner.tokenizer,limit=int(config.get("max_cuts",16)))
             cuts = [cut for cut in cuts if cut < max_tokens]
+            rollout_audits.append({"training_row":row_index,"response_index":response_index,
+                "correctness":correctness,"truncated":response.truncated,"response_tokens":len(response.tokens),
+                "boxed_answer_detected":box is not None,"paragraph_cut_count":len(cuts),
+                "paragraph_cut_indices":cuts,"eligible_for_position":not correctness and len(cuts)>=2})
             if not correctness and len(cuts)>=2:
                 failed.append((row,messages,response,features,cuts))
     if not gate_train or not gate_calibration or not failed:
         raise ExecutionFailure("insufficient real boxed gate data or failed rollouts with >=2 paragraph cuts",
             {"gate_training_cases":len(gate_train),"gate_calibration_cases":len(gate_calibration),
-             "eligible_failed_rollouts":len(failed),"cost":ledger.to_dict()})
+             "eligible_failed_rollouts":len(failed),"training_rollout_audits":rollout_audits,
+             "cost":ledger.to_dict()})
     gate_features = torch.stack([x[0] for x in gate_train])
     gate_labels = torch.tensor([x[1] for x in gate_train],device=encoder.device)
     gate_history = []
@@ -135,7 +139,7 @@ def run(config, *, seed=42):
                     features = encode(messages,original.tokens)
                     box = boxed_token_position(original.tokens,encoder.tokenizer)
                     score = (float(calibrated_gate(gate(features[box]),temperature=temperature)) if box is not None else 0.)
-                    cuts = [c for c in paragraph_prefixes(original.tokens,delimiter,limit=16) if c<max_tokens]
+                    cuts = [c for c in paragraph_prefixes(original.tokens,tokenizer=reasoner.tokenizer,limit=16) if c<max_tokens]
                     if score>=.4 or not cuts:
                         revised_pool.append(original)
                         continue
@@ -168,6 +172,8 @@ def run(config, *, seed=42):
               "calibration_temperature":temperature,"training_classes":sorted(set(gate_labels.tolist())),
               "threshold":.4,"calibration_split":"disjoint final quarter of train prompts; not validation"},
         position_informative_groups=sum(a["nonzero_rescue_advantage"] for a in training),
+        training_rollout_audits=rollout_audits,
+        paragraph_boundary_protocol="decoded-character-boundaries-to-original-token-prefix-v1",
         execution_status="passed" if any(a["nonzero_rescue_advantage"] for a in training) else "failed-no-rescue-signal",
         generation_budget_controls=budgets,
         limitations=["Qwen2.5 frozen 0.5B encoder/7B reasoner and tiny GSM8K replace original Qwen3 and DAPO.",

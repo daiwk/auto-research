@@ -26,7 +26,6 @@ def run(config, *, seed=42):
         raise ValueError("positive verified-backbone/MCRT budget and >=2 SFT epochs required")
     baseline = evaluate(student, validation, ledger, max_tokens=max_tokens, seed=seed+10000)
     demonstrations, profiles, audits = [], [], []
-    delimiter = teacher.tokenizer("\n\n", add_special_tokens=False).input_ids
     for row in train:
         messages = problem_messages("Write reasoning steps separated by blank lines.\n"+row["question"])
         accepted = None
@@ -38,9 +37,10 @@ def run(config, *, seed=42):
         if accepted is None:
             audits.append({"verified_backbone": False})
             continue
-        cuts = paragraph_prefixes(accepted.tokens, delimiter, limit=prefix_states)
+        cuts = paragraph_prefixes(accepted.tokens,tokenizer=teacher.tokenizer,limit=prefix_states)
         if not cuts:
-            audits.append({"verified_backbone": True, "profiled": False, "reason": "no reasoning paragraph prefix"})
+            audits.append({"verified_backbone": True, "profiled": False, "paragraph_cut_indices":cuts,
+                           "reason": "no reasoning paragraph prefix"})
             continue
         profile = []
         for cut in cuts:
@@ -50,7 +50,7 @@ def run(config, *, seed=42):
             profile.append({"prefix_tokens": cut, **monte_carlo_uncertainty(outcomes)})
         demonstrations.append((row["question"], accepted.tokens))
         profiles.append(profile)
-        audits.append({"verified_backbone": True, "profiled": True, "profile": profile,
+        audits.append({"verified_backbone": True, "profiled": True, "profile": profile,"paragraph_cut_indices":cuts,
                        "response_tokens": len(accepted.tokens)})
     if not demonstrations:
         raise ExecutionFailure("no verified, paragraph-structured teacher backbone survived",
@@ -85,6 +85,7 @@ def run(config, *, seed=42):
     return result_payload("progressive-contraction", config, seed, split, student, ledger,
         baseline, after, training, parameters_changed=before != student.trainable_digest(),
         teacher=teacher.provenance, teacher_audits=audits, teacher_uncertainty_scores=teacher_scores,
+        paragraph_boundary_protocol="decoded-character-boundaries-to-original-token-prefix-v1",
         teacher_pool_indices=pool, learner_routes=routes,
         exposure={"method": exposures, "full_sft_control": epochs*len(demonstrations),
                   "relative_to_verified_full_sft": exposures/(epochs*len(demonstrations)),

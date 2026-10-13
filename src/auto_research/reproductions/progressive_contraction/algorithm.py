@@ -35,7 +35,44 @@ def normalized_response_nll(log_probabilities):
     return -log_probabilities.mean()
 
 
-def paragraph_prefixes(tokens, delimiter_tokens, *, limit=3):
+def paragraph_prefixes(tokens, delimiter_tokens=(), *, limit=3, tokenizer=None):
+    """Map actual decoded paragraph ends to ORIGINAL token-prefix indices.
+
+    BPE may fuse punctuation and newlines into one token. Decoding is only
+    used to locate boundaries; no generated prefix is ever re-tokenized.
+    The tuple-delimiter branch remains for existing deterministic fixtures.
+    """
+    if limit<1:
+        raise ValueError("positive paragraph state budget required")
+    if tokenizer is not None:
+        original=tuple(tokens)
+        def decode(prefix):
+            return tokenizer.decode(prefix,skip_special_tokens=True,clean_up_tokenization_spaces=False)
+        text=decode(original)
+        ends=[]
+        begin=0
+        while (found:=text.find("\n\n",begin))>=0:
+            end=found+2
+            if text[end:].strip():
+                ends.append(end)
+            begin=end
+        cuts=[]
+        boundary=0
+        for cut in range(1,len(original)):
+            if boundary==len(ends):
+                break
+            prefix=decode(original[:cut])
+            # Partial UTF-8 byte tokens can decode to replacement characters.
+            # Only map a boundary at a stable actual prefix of the full text.
+            if not text.startswith(prefix):
+                continue
+            while boundary<len(ends) and ends[boundary]<=len(prefix):
+                if not cuts or cuts[-1]!=cut:
+                    cuts.append(cut)
+                    if len(cuts)==limit:
+                        return cuts
+                boundary+=1
+        return cuts
     delimiter = tuple(delimiter_tokens)
     if not delimiter or limit < 1:
         raise ValueError("tokenized paragraph delimiter and positive state budget required")

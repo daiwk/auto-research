@@ -54,7 +54,8 @@ State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替�
 - A100 两套 simulator overlay 先前 pip 因继承的非 UTF-8 metadata 失败。只在独立 overlay 使用精确小依赖的 `--target/--no-deps/--ignore-installed` 路径；不篡改共享 metadata、不重装共享 Torch。
 - 10 月 14 日 A30 MiniLM、LongMem 原文及 raw-only provenance 全部逐字节核验通过；NEAR/Beyond 八项真实 GPU 结果及对应回执已保存，共享 Torch 未修改。详见[记忆检索恢复说明](oct13-memory-resume-notes.md)。
 - SkillDreamer 旧 `6aabe57a` 的 seed 43 缺失模型输出字段，失败已保留；修复 schema 失败处理后必须在 `0f5dca9f` 上重跑完整三 seed，不混入旧 seed 42。
-- MBS 首轮没有正常终止的 verified-hard 根题；SynthSelf 未通过 Eq.6 分布约束；UPTURN 没有有效救援信号。三者均保留真实失败，不能仅凭参数变化签通过回执。
+- MBS 首轮没有正常终止的 verified-hard 根题；SynthSelf 原口径未通过 Eq.6，且 gold/rewrite EOS 口径需统一；UPTURN 段落 token 检测漏切与无有效救援信号均须分开处理。三者真实失败、成本和源码哈希见[独立审计](oct14-post-failure-review.md)，不能仅凭参数变化签通过回执。
+- SkillDreamer 每个 seed 必须实际发生 CSI 能力评估、真实 gallery 技能加载和工具执行才能签完成回执；全失败记录仍保留，但三 seed 本身不代表定义链路已执行。
 
 每次恢复先核验源代码 SHA 和资源实际字节；确认后再运行。每篇结束取回 JSON/日志，
 验证非零有效更新或明确的负对照边界，再生成 sanitized receipt，最后跑统一门禁。

@@ -32,6 +32,8 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 | MkDocs strict | 通过；新增 12 个仓库代码链接已换成 GitHub 源码链接，不指向不存在的站点路径 |
 | GPU evidence gate | 10 月 14 日补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM 后仍缺 9 篇，明确未通过；State-OPD 新三臂九次运行已另行核验，不再以旧快照代替 |
 | 新快照相关回归 | `0f5dca9f` 的技能 JSON schema、机器人训练候选及隔离加载、MBS 配对根题预算，连同四项产物摘录工具共 110 项通过；Ruff / diff 检查通过 |
+| 新快照全量复跑 | 唯一失败为 State-OPD metadata 测试写死旧回执日期；已显式切换 10 月 14 日三臂回执并增加九次运行/源码约束，12 项定向检查通过；最终新修复快照仍须全量复跑 |
+| SkillDreamer 定义链路门禁 | 摘录工具拒绝每 seed 缺实际 CSI、真实 gallery 加载或工具执行的结果，且核对 episode 与汇总计数；8 项摘录回归通过，不代表 GPU 结果通过 |
 
 本次完整通过结果绑定源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`；随后若有源码修复须补相应检查。
 真实 GPU 缺项仍按 TODO 验收，最终 PR 的 CI 尚未触发；本地测试通过不等于最终 PR 可合并。

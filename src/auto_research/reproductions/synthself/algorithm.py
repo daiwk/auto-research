@@ -22,6 +22,27 @@ def rewrite_messages(question, training_demonstration):
              f"Question: {question}\nResponse to rewrite: {training_demonstration}"},)
 
 
+def complete_response_tokens(tokens,*,eos_token_id):
+    """Canonical full-response target: original token IDs plus exactly one EOS."""
+    if type(eos_token_id) is not int or eos_token_id<0:
+        raise ValueError("explicit valid EOS token identity required")
+    values=tuple(tokens)
+    while values and values[-1]==eos_token_id:
+        values=values[:-1]
+    if eos_token_id in values:
+        raise ValueError("internal EOS cannot be silently truncated or re-encoded")
+    return values+(eos_token_id,)
+
+
+def naturally_complete_response(tokens,*,truncated,eos_token_id):
+    """Only actual normal termination can supply full rewrite-sequence evidence."""
+    if type(eos_token_id) is not int or eos_token_id<0:
+        raise ValueError("explicit valid EOS token identity required")
+    values=tuple(tokens)
+    return (not truncated and bool(values) and values[-1]==eos_token_id
+            and values.count(eos_token_id)==1)
+
+
 def select_aligner(candidates, *, gold_nll, self_quality):
     """Measured validation-of-training-construction constraints, never test selection."""
     if not math.isfinite(gold_nll) or not 0 <= self_quality <= 1:

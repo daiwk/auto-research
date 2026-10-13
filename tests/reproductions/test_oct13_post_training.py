@@ -331,10 +331,11 @@ def test_synthself_checkpoint_isolates_gold_to_offline_builders_and_sft_targets(
             self.model=torch.nn.Linear(1,2 if role=="teacher" else 1,bias=False)
             self.model.requires_grad_(False)
             self.messages=[]
-            self.tokenizer=lambda text,**kwargs:SimpleNamespace(input_ids=[1,2])
+            self.tokenizer=lambda text,**kwargs:SimpleNamespace(input_ids=[1,2,1,2])
+            self.tokenizer.eos_token_id=0
         def generate(self,messages,**kwargs):
             self.messages.append(messages)
-            return [GeneratedResponse((1,2),"\\boxed{997}" if self.role=="teacher" else "\\boxed{13}",False)]
+            return [GeneratedResponse((1,2,0),"\\boxed{997}" if self.role=="teacher" else "\\boxed{13}",False)]
         def token_statistics(self,messages,tokens):
             return -2+self.model.weight.mean()*torch.tensor(tokens,dtype=torch.float32),None
         def prepare_lora(self,**kwargs):
