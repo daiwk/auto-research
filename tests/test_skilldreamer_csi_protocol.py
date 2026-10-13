@@ -96,3 +96,31 @@ def test_public_negative_probe_preserves_actual_cost_scope_and_old_source():
     assert artifact["metrics"]["wall_seconds"] == raw["wall_seconds"] < 600
     assert all(row.get("submitted_answer") is None for row in raw["episodes"])
     assert artifact["diagnosis"]["complete_valid_csi_with_rejected_action_json"] == 0
+
+
+def test_skill_prompt_explicitly_shares_baseline_tool_semantics():
+    prompt = capability_context("QUESTION_ONLY", [], [], {}, 0, 8)
+    assert "Only calculator and finish are environment tools." in prompt
+    assert "Only arithmetic expressions are supported." in prompt
+    assert "calculator returns a value but does not submit an answer" in prompt
+    assert "finish submits the answer you derive from the question and observed results, then terminates the episode" in prompt
+    assert "Completing the task requires you to explicitly choose finish; no automatic submission occurs" in prompt
+
+
+def test_skill_loading_and_assessment_are_not_additional_environment_tools():
+    prompt = capability_context("QUESTION_ONLY", [], [], {}, 0, 8)
+    assert "Capability assessment is the five assessment lines, not a tool" in prompt
+    assert "A candidate skill_id is loaded by the executor" in prompt
+    assert "asks for a fresh action after showing the verified gallery procedure" in prompt
+    assert "load_skill and assess_capability are not tools" in prompt
+
+
+@pytest.mark.parametrize("tool", ["calculator", "load_skill", "assess_capability"])
+def test_api_wording_does_not_auto_correct_tools_or_force_finish(tool):
+    response = ("SUBGOAL: fixture\nEVIDENCE: fixture\nCAPABILITY: fixture\nDECISION: NO_CAPABILITY_GAP\nNEXT: fixture\n"
+                + json.dumps({"skill_id": None, "tool": tool, "arguments": {"expression": "2+3"}}))
+    outcome = execute_agent("QUESTION_ONLY", lambda _: response, [], action_budget=8)
+    assert outcome["executed_actions"] == outcome["model_calls"] == 8
+    assert outcome["submitted_answer"] is None
+    assert outcome["tool_errors"] == (0 if tool == "calculator" else 8)
+    assert outcome["generation_errors"] == 0

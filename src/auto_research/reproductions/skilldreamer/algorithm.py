@@ -123,6 +123,13 @@ def capability_context(goal: str, observations: list[str], candidates: list[Skil
     return (checkpoint + "Task: " + goal + "\nObserved execution history: " + json.dumps(observations)
             + "\nCandidate skill metadata: " + json.dumps(metadata)
             + "\nLoaded verified gallery skill procedures: " + json.dumps(loaded)
+            + "\nOnly calculator and finish are environment tools. Only arithmetic expressions are supported. "
+            "calculator returns a value but does not submit an answer. finish submits the answer you derive "
+            "from the question and observed results, then terminates the episode. Completing the task requires "
+            "you to explicitly choose finish; no automatic submission occurs. Capability assessment is the "
+            "five assessment lines, not a tool. A candidate skill_id is loaded by the executor, which then "
+            "asks for a fresh action after showing the verified gallery procedure; load_skill and "
+            "assess_capability are not tools. "
             + "\nBefore the next action output exactly five nonempty assessment lines in LABEL: value format, "
             "in this order: SUBGOAL, EVIDENCE, CAPABILITY, DECISION, NEXT. Every label needs its colon and "
             "a nonempty value on the same line. DECISION must start with exactly one of MATCH, PARTIAL_MATCH, "
