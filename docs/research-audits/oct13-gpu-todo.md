@@ -32,7 +32,7 @@ UPTURN默认42/43/44也已实际执行：42/43有非零rescue信号，44救援�
 
 SOAR `b9086275` A100默认42/43/44×两臂已完成，六份实际raw逐字段复算为独立三种子native与回执。方法12次、消融10次真实更新；消融43 validation准确率0及等值奖励跳过均保留。仅L1、每seed4条validation，不能升级为稳定能力提升或原benchmark比较。
 
-修后难度课程A30 seed42五臂已完成并独立复算，实际更新19/4/7/10/10；unfiltered/static的13/4等值组全部正确跳过。staged准确率降为0、too-hard仍有非零更新均保留；这是阶段native，不是三种子回执。43/44十项同源同预算实际运行继续，全部15项核验后才签新的完整计划回执。
+修后难度课程A30默认五臂×42/43/44全部15项已完成并逐字段独立复算，另签[新三seed回执](../gpu-validations/grpo-difficulty-curriculum-a30-20261014-seeds42-44.json)。151次真实更新、38个等值奖励组精确跳过；staged42准确率0、too-hard非零更新及全部拒绝成本保留。旧单seed阶段native与历史负证据不覆写、不混算；这个三seed计划仍仅L1机制诊断。
 
 难度课程已补齐 `6aabe57a` A100 seed42 三臂的历史机制回执（实际更新 8/9/11）；独立重审这些已签组的奖励均有真实差异，未出现下述等值奖励伪更新。它不能替代数值修复后源码的新 GPU 核验。
 
@@ -47,10 +47,9 @@ A30 `51b4718a` unfiltered/static seed42 与 unfiltered/static/fixed seed43 已�
 | --- | --- | --- |
 | 2 | SkillDreamer | 固定 checkpoint、公开 train-only GSM8K 子集；no-skills/direct/PSG+HSR+CSI 三臂实际工具执行，参考答案仅外部 scorer 可见 |
 | 2 | MagicBeanStalk | 真实 teacher 分解、独立验证、effectivity、Goldilocks、非零优势 RLVR 与 seed-RLVR 对照；不合格合成不算完成 |
-| 2 | GRPO 难度课程 | fixed-medium/staged/too-hard/unfiltered/static 独立同上限实验；记录校准和拒绝成本，零有效更新不推进 stage |
 
 尚未完成的 CUDA adapter 保持 `requires_gpu_validation=True`，不伪造缺失 receipt。
-10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM，以及SynthSelf、Progressive Contraction与SOAR完整三种子机制回执；UPTURN保留有效单seed回执和含失败的三seed执行记录。统一 GPU 门禁当前仅缺 MagicBeanStalk、SkillDreamer；另有难度课程修后五臂/三种子核验未完成，不能将门禁缺项数等同于全部剩余工作。
+10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM，以及SynthSelf、Progressive Contraction、SOAR和难度课程修后五臂的完整三种子机制回执；UPTURN保留有效单seed回执和含失败的三seed执行记录。统一 GPU 门禁当前仅缺 MagicBeanStalk、SkillDreamer；还有最终整合检查，不能将门禁缺项数等同于全部剩余工作。
 State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替代或合并新实验。
 因此 GPU evidence gate 在这份 TODO 关闭前不能被报告为通过，MR 也不能被标为全部完成。
 

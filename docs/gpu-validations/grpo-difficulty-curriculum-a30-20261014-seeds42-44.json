@@ -1,0 +1,2221 @@
+{
+  "schema_version": 1,
+  "adapter_key": "grpo-difficulty-curriculum",
+  "validated_at": "2026-10-14",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A30"
+  },
+  "command": [
+    "python",
+    "-u",
+    "scripts/observe_oct14_cuda_memory.py",
+    "--core-root",
+    "workspace/core",
+    "--core-contract",
+    "data/source-contract-b9086275.json",
+    "--core-audit",
+    "data/resource-audit-a30-cpu-b9086275.json",
+    "--observer-root",
+    "workspace/observer",
+    "--observer-contract",
+    "data/observer-contract-92c20818.json",
+    "--memory-output",
+    "runs/curriculum-fixed-medium-s42/gpu-memory.json",
+    "--execute",
+    "--gpu-grant",
+    "A30-post-training-explicit-slot",
+    "--",
+    "--method",
+    "grpo-difficulty-curriculum",
+    "--config",
+    "data/oct14_execution-curriculum-a30-v1.json",
+    "--seed",
+    "42",
+    "--output",
+    "runs/curriculum-fixed-medium-s42/evidence",
+    "--variant",
+    "fixed-medium"
+  ],
+  "all_sanitized_commands": [
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-fixed-medium-s42/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/curriculum-fixed-medium-s42/evidence",
+      "--variant",
+      "fixed-medium"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-staged-s42/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/curriculum-staged-s42/evidence",
+      "--variant",
+      "staged"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-static-s42/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/curriculum-static-s42/evidence",
+      "--variant",
+      "static"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-too-hard-s42/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/curriculum-too-hard-s42/evidence",
+      "--variant",
+      "too-hard"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-unfiltered-s42/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/curriculum-unfiltered-s42/evidence",
+      "--variant",
+      "unfiltered"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-fixed-medium-s43/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/curriculum-fixed-medium-s43/evidence",
+      "--variant",
+      "fixed-medium"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-staged-s43/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/curriculum-staged-s43/evidence",
+      "--variant",
+      "staged"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-static-s43/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/curriculum-static-s43/evidence",
+      "--variant",
+      "static"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-too-hard-s43/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/curriculum-too-hard-s43/evidence",
+      "--variant",
+      "too-hard"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-unfiltered-s43/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/curriculum-unfiltered-s43/evidence",
+      "--variant",
+      "unfiltered"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-fixed-medium-s44/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/curriculum-fixed-medium-s44/evidence",
+      "--variant",
+      "fixed-medium"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-staged-s44/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/curriculum-staged-s44/evidence",
+      "--variant",
+      "staged"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-static-s44/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/curriculum-static-s44/evidence",
+      "--variant",
+      "static"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-too-hard-s44/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/curriculum-too-hard-s44/evidence",
+      "--variant",
+      "too-hard"
+    ],
+    [
+      "python",
+      "-u",
+      "scripts/observe_oct14_cuda_memory.py",
+      "--core-root",
+      "workspace/core",
+      "--core-contract",
+      "data/source-contract-b9086275.json",
+      "--core-audit",
+      "data/resource-audit-a30-cpu-b9086275.json",
+      "--observer-root",
+      "workspace/observer",
+      "--observer-contract",
+      "data/observer-contract-92c20818.json",
+      "--memory-output",
+      "runs/curriculum-unfiltered-s44/gpu-memory.json",
+      "--execute",
+      "--gpu-grant",
+      "A30-post-training-explicit-slot",
+      "--",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct14_execution-curriculum-a30-v1.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/curriculum-unfiltered-s44/evidence",
+      "--variant",
+      "unfiltered"
+    ]
+  ],
+  "command_path_relocations_only": true,
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "variants": [
+    "fixed-medium",
+    "staged",
+    "static",
+    "too-hard",
+    "unfiltered"
+  ],
+  "result": "passed",
+  "metrics": {
+    "fixed-medium.initial.accuracy": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixed-medium.validation.accuracy": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    },
+    "staged.initial.accuracy": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 3
+    },
+    "staged.validation.accuracy": {
+      "mean": 0.3333333333333333,
+      "std": 0.28867513459481287,
+      "n": 3
+    },
+    "static.initial.accuracy": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 3
+    },
+    "static.validation.accuracy": {
+      "mean": 0.4166666666666667,
+      "std": 0.14433756729740643,
+      "n": 3
+    },
+    "too-hard.initial.accuracy": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 3
+    },
+    "too-hard.validation.accuracy": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    },
+    "unfiltered.initial.accuracy": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 3
+    },
+    "unfiltered.validation.accuracy": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "42": {
+      "fixed-medium": {
+        "actual_optimizer_updates": 7,
+        "eligible_groups": 7,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 636.1500999443233,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 42,
+          "variant": "fixed-medium",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 633.8375765234232,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 2901858304,
+          "actual_max_memory_reserved_bytes": 5387583488,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8250,
+            "student": 70009
+          },
+          "scored_response_tokens": {
+            "behavior": 70009,
+            "student_rl": 13880
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "staged": {
+        "actual_optimizer_updates": 10,
+        "eligible_groups": 10,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 673.6660227067769,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 42,
+          "variant": "staged",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 671.18108067289,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3108669440,
+          "actual_max_memory_reserved_bytes": 5154799616,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8754,
+            "student": 74288
+          },
+          "scored_response_tokens": {
+            "behavior": 74288,
+            "student_rl": 19984
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "static": {
+        "actual_optimizer_updates": 4,
+        "eligible_groups": 8,
+        "mathematically_equal_reward_groups_skipped": 4,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [
+          {
+            "step": 1,
+            "training_row": 0,
+            "rewards": [
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          }
+        ],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 685.4193786792457,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 42,
+          "variant": "static",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 683.0766994766891,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3514061824,
+          "actual_max_memory_reserved_bytes": 5807013888,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 9164,
+            "student": 74639
+          },
+          "scored_response_tokens": {
+            "behavior": 74639,
+            "student_rl": 9616
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "too-hard": {
+        "actual_optimizer_updates": 10,
+        "eligible_groups": 10,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 658.0403874441981,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 42,
+          "variant": "too-hard",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 655.53652812168,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3842614784,
+          "actual_max_memory_reserved_bytes": 6148849664,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8791,
+            "student": 74204
+          },
+          "scored_response_tokens": {
+            "behavior": 74204,
+            "student_rl": 23930
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "unfiltered": {
+        "actual_optimizer_updates": 19,
+        "eligible_groups": 32,
+        "mathematically_equal_reward_groups_skipped": 13,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [
+          {
+            "step": 1,
+            "training_row": 0,
+            "rewards": [
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 1,
+            "training_row": 2,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 1,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 1,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 2,
+            "training_row": 2,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 2,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 2,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 2,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          }
+        ],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 606.7968027666211,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 42,
+          "variant": "unfiltered",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 604.5412887074053,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3464610816,
+          "actual_max_memory_reserved_bytes": 5729419264,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8577,
+            "student": 73099
+          },
+          "scored_response_tokens": {
+            "behavior": 73099,
+            "student_rl": 41232
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      }
+    },
+    "43": {
+      "fixed-medium": {
+        "actual_optimizer_updates": 8,
+        "eligible_groups": 8,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 677.5788688659668,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 43,
+          "variant": "fixed-medium",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 675.4739038906991,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3551163904,
+          "actual_max_memory_reserved_bytes": 5112856576,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8988,
+            "student": 75998
+          },
+          "scored_response_tokens": {
+            "behavior": 75998,
+            "student_rl": 17576
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "staged": {
+        "actual_optimizer_updates": 9,
+        "eligible_groups": 9,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 692.4588116928935,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 43,
+          "variant": "staged",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 690.2053823918104,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3142192640,
+          "actual_max_memory_reserved_bytes": 4758437888,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8508,
+            "student": 75379
+          },
+          "scored_response_tokens": {
+            "behavior": 75379,
+            "student_rl": 18743
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "static": {
+        "actual_optimizer_updates": 6,
+        "eligible_groups": 8,
+        "mathematically_equal_reward_groups_skipped": 2,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [
+          {
+            "step": 2,
+            "training_row": 2,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          }
+        ],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 690.217955969274,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 43,
+          "variant": "static",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 687.8983246386051,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3544874496,
+          "actual_max_memory_reserved_bytes": 5693767680,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8907,
+            "student": 75594
+          },
+          "scored_response_tokens": {
+            "behavior": 75594,
+            "student_rl": 14595
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "too-hard": {
+        "actual_optimizer_updates": 7,
+        "eligible_groups": 7,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 664.7406627573073,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 43,
+          "variant": "too-hard",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 662.2785841114819,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3273183744,
+          "actual_max_memory_reserved_bytes": 5259657216,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8533,
+            "student": 73796
+          },
+          "scored_response_tokens": {
+            "behavior": 73796,
+            "student_rl": 16620
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "unfiltered": {
+        "actual_optimizer_updates": 22,
+        "eligible_groups": 32,
+        "mathematically_equal_reward_groups_skipped": 10,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [
+          {
+            "step": 1,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 1,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 2,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 2,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 2,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 0,
+            "rewards": [
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          }
+        ],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 677.3662807494402,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 43,
+          "variant": "unfiltered",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 675.1541140787303,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3616701440,
+          "actual_max_memory_reserved_bytes": 5100273664,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8418,
+            "student": 76241
+          },
+          "scored_response_tokens": {
+            "behavior": 76241,
+            "student_rl": 50002
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      }
+    },
+    "44": {
+      "fixed-medium": {
+        "actual_optimizer_updates": 4,
+        "eligible_groups": 4,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 620.4139524810016,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 44,
+          "variant": "fixed-medium",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 618.2496887072921,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3193501696,
+          "actual_max_memory_reserved_bytes": 4833935360,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8212,
+            "student": 73434
+          },
+          "scored_response_tokens": {
+            "behavior": 73434,
+            "student_rl": 8774
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "staged": {
+        "actual_optimizer_updates": 7,
+        "eligible_groups": 7,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 661.6682027466595,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 44,
+          "variant": "staged",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 659.177813436836,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3108116480,
+          "actual_max_memory_reserved_bytes": 4536139776,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8522,
+            "student": 74800
+          },
+          "scored_response_tokens": {
+            "behavior": 74800,
+            "student_rl": 14252
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "static": {
+        "actual_optimizer_updates": 7,
+        "eligible_groups": 8,
+        "mathematically_equal_reward_groups_skipped": 1,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [
+          {
+            "step": 4,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          }
+        ],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 645.960937846452,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 44,
+          "variant": "static",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 643.5252490639687,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3480293888,
+          "actual_max_memory_reserved_bytes": 5156896768,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8619,
+            "student": 72820
+          },
+          "scored_response_tokens": {
+            "behavior": 72820,
+            "student_rl": 15398
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "too-hard": {
+        "actual_optimizer_updates": 7,
+        "eligible_groups": 7,
+        "mathematically_equal_reward_groups_skipped": 0,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 664.2123421393335,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 44,
+          "variant": "too-hard",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 661.9004598706961,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3770255360,
+          "actual_max_memory_reserved_bytes": 5511315456,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 9100,
+            "student": 72857
+          },
+          "scored_response_tokens": {
+            "behavior": 72857,
+            "student_rl": 17190
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      },
+      "unfiltered": {
+        "actual_optimizer_updates": 24,
+        "eligible_groups": 32,
+        "mathematically_equal_reward_groups_skipped": 8,
+        "equal_reward_optimizer_updates": 0,
+        "actual_zero_group_ledgers": [
+          {
+            "step": 1,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 1,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 2,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 2,
+            "training_row": 7,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 0,
+            "rewards": [
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2,
+              1.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 3,
+            "training_row": 4,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 2,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          },
+          {
+            "step": 4,
+            "training_row": 6,
+            "rewards": [
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2,
+              0.2
+            ],
+            "optimizer_update_executed": false,
+            "zero_advantage_group": true,
+            "advantages_recorded": null,
+            "advantages_field_present": false
+          }
+        ],
+        "all_groups_audited": 32,
+        "invocation_elapsed_seconds": 673.5393040217459,
+        "configured_wall_cap_seconds": 900,
+        "peak_memory": {
+          "core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+          "core_runner_sha256": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+          "observer_commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+          "observer_source_sha256": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c",
+          "core_import_binding": "prepend frozen core root/src; refuse mismatched preloaded package",
+          "seed": 44,
+          "variant": "unfiltered",
+          "execution_config_canonical_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+          "artifact_kind": "observational_cuda_memory_not_gpu_receipt",
+          "not_gpu_receipt": true,
+          "core_exit_code": 0,
+          "actual_elapsed_seconds": 671.0687175318599,
+          "no_monkeypatch": true,
+          "training_arguments_forwarded_unchanged": true,
+          "measurement_scope": "whole frozen-core invocation after reset; per-process Torch allocator, not device-global NVML peak",
+          "peak_memory_available": true,
+          "actual_max_memory_allocated_bytes": 3770255360,
+          "actual_max_memory_reserved_bytes": 5515509760,
+          "accelerator": {
+            "vendor": "NVIDIA",
+            "model": "NVIDIA A30"
+          }
+        },
+        "measured_cost": {
+          "generation_calls": {
+            "evaluation": 24,
+            "student": 32
+          },
+          "generated_tokens": {
+            "evaluation": 8471,
+            "student": 75016
+          },
+          "scored_response_tokens": {
+            "behavior": 75016,
+            "student_rl": 55419
+          },
+          "frozen_encoder_forward_calls": 0,
+          "frozen_encoder_input_tokens_including_prompt": 0,
+          "scope": "entire invocation, including training controls, profiling and evaluation",
+          "includes_rejected_and_profiling_generations": true
+        },
+        "execution_complete": true,
+        "mechanism_passed": true,
+        "negative_control_completed": false
+      }
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/prepare_soar_catalog_qa.py": "483a4eb3d9932d31046888c165c06590e67c6df5575a5b2afd4e302145f445e7",
+    "scripts/run_oct13_post_training.py": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/post_training/oct13_common.py": "d19401266a420afdc64867f145f8384fd649dc1991e4b74ea1f7ee8b8d91bde5",
+    "src/auto_research/post_training/proximal_checkpoint.py": "5307a54204720e5407d2cd0435b654ae0e594f30c85cdf07d55d4e90612a1397",
+    "src/auto_research/post_training/response_policy.py": "e380a5b4d1d53974b973b72b7d9ad6328129dc8c9bae4d233f6c1cbdf8508bf7",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/reproductions/gppo_framework/__init__.py": "7fe8cab42fef9f32b9653dfb5f54f03182de0753de2c9e5b359d124d7cd763d8",
+    "src/auto_research/reproductions/gppo_framework/adapter.py": "a7f4ee792a8ded3daeeb183cbca5c99de63c1b7d3cb195f5bedd5289cb0e0260",
+    "src/auto_research/reproductions/gppo_framework/objective.py": "0f8fbb2ad397b04a70466dde4e939f4d094ad7e7df07cfbba59f4a6ca5d05dd0",
+    "src/auto_research/reproductions/gppo_framework/paper.yaml": "a023ee98bbd078077b2708122973d27a98085848be816ce461b7d4291aca8e1f",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/__init__.py": "d09d8d7e0e6f5bcec9979241eed06a1d2a6ac8f3fb7a25f49e0df55be0071acb",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/adapter.py": "bbd3e964dc035ea4bbd999a581ea07eccabd986b6456774b21a4c24092cbdfbe",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/algorithm.py": "4131e39279d30c0748b14f611ab657b3fea76147a7c164aea2883c62bde75785",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/checkpoint.py": "d03a7d2db0a19b469fe5429ddce634b02d8cbd0eeed8d09bef0afc51c1d7ac70",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml": "c417d2269314b15e2dfef4ba52dfb24771b2e1270f808fe5be47a54e9d0c1bb1",
+    "src/auto_research/reproductions/magicbeanstalk/__init__.py": "8dd207ea37a89dfa34f87b02eb4a2fd26472895678d1362a7e5b59dad5cda616",
+    "src/auto_research/reproductions/magicbeanstalk/adapter.py": "319b6503de342feee49fb6446b7bbdeb117f7dc0dd7b79ed1c3bd34cce1ce73f",
+    "src/auto_research/reproductions/magicbeanstalk/algorithm.py": "2fb98f7137f336414ae6e07069fe34584d0e1cbc4bd594683a67e11ffc982aba",
+    "src/auto_research/reproductions/magicbeanstalk/checkpoint.py": "78416567c61f23505f579805b845a40a3098c311e57fb42c7ac8d5ebc67390dd",
+    "src/auto_research/reproductions/magicbeanstalk/paper.yaml": "e9c5619918b4d72d776008aba3fa95d50ba6ebe99afab729ba9e6dfe82fac06e",
+    "src/auto_research/reproductions/progressive_contraction/__init__.py": "e50fe46d888e0a0b11b7d4d6d8f3224ae5940394f8ba8396fc5afb1cd38a4d53",
+    "src/auto_research/reproductions/progressive_contraction/adapter.py": "06f23b5c795f7222f76dee9beaa8164f460eb5183e18c6d374bff011737235dd",
+    "src/auto_research/reproductions/progressive_contraction/algorithm.py": "ba077b8c52a8d10e268a4e5c85770b9cebcb12415f9b2aaf7b9500e1303ca4b1",
+    "src/auto_research/reproductions/progressive_contraction/checkpoint.py": "67fa44814d613d3838716fea68476217d608af14f23a051e32a916b72538e7ec",
+    "src/auto_research/reproductions/progressive_contraction/paper.yaml": "faf5243c71a87407601b982469d98dc4d48ddf842da56c210ede077c2b27c1c1",
+    "src/auto_research/reproductions/soar/__init__.py": "3d87d1189d7037e32c1e2cb0c249d13609c5af3d7062a19904590ba7923c799a",
+    "src/auto_research/reproductions/soar/adapter.py": "8fbbe8f8fe54b9f014ccc26a75b01e72b73b95e2b03cc379c5b5db4b63c9b31e",
+    "src/auto_research/reproductions/soar/algorithm.py": "9b7068d9774d1c93800c512a04b9ba4d0ee98fc13d308e5ac0970299c8bb2485",
+    "src/auto_research/reproductions/soar/checkpoint.py": "91901d9eb9f81faa41dda170ff1f4d2283f56cd17c7df0572348356c7b7eb76e",
+    "src/auto_research/reproductions/soar/paper.yaml": "2f756cab9f7fefd4613bb69971fd8252c2b9ad451fa5c5eff5d03fa063d91521",
+    "src/auto_research/reproductions/state_opd/__init__.py": "8db07736f0336ed7f39502ae2953bdae76658942542cacbe4b6b2c1fd0abe094",
+    "src/auto_research/reproductions/state_opd/adapter.py": "2f8bf4773e8f40c0eabe777fbd1e1aa6d372a7b05501404c3e3f7b2d54987524",
+    "src/auto_research/reproductions/state_opd/algorithm.py": "dc7fe3eae619ff69ec51c47826f89471f00be564ea4e6730e12726a060ba7e2f",
+    "src/auto_research/reproductions/state_opd/checkpoint.py": "95755e0604f563a5c96f92e9de9069befe3e1274d31c224a43ca20d71f756b09",
+    "src/auto_research/reproductions/state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+    "src/auto_research/reproductions/state_opd/paper.yaml": "86c75255f1c416611a181c26359e9f5d9865caaea5266ca7b13dd8a183b906cc",
+    "src/auto_research/reproductions/synthself/__init__.py": "474bb75e10b95afe6faec1f3631beab2f17f9a43013d3d29e79b7d4b36e06031",
+    "src/auto_research/reproductions/synthself/adapter.py": "db4c08e1ccc2acfc28d19fc72acfa39b0a0dce096bbc430bafe9b21dbb72cddd",
+    "src/auto_research/reproductions/synthself/algorithm.py": "1e7ea1ff65d3ba0ece1af889022c19f7147f51d10fb8196ab8f9fa2e18604b95",
+    "src/auto_research/reproductions/synthself/checkpoint.py": "dbcf9f222094c197e0392f82191a0ae6551c6573ee54a9eee8c7d37553472981",
+    "src/auto_research/reproductions/synthself/paper.yaml": "d6d31d755561626c2b667f4fc2b990dee8360fa52f92193b5c6a6e93b1f6ca71",
+    "src/auto_research/reproductions/tapo_trajectory/__init__.py": "a0dd8d4825b91dd076b71bdd3a3eccb0638ba4bf0240fe9da76d61a7290f69c6",
+    "src/auto_research/reproductions/tapo_trajectory/adapter.py": "c01b75bf7853546caa2d517dd5f9c9faf739537b95207b8f1fd28adcdd5aafa7",
+    "src/auto_research/reproductions/tapo_trajectory/objective.py": "49ab02ac758251acde90091a82b22576449d294a1f25cc3144ff1addd1132ae2",
+    "src/auto_research/reproductions/tapo_trajectory/paper.yaml": "493e59ec67f96ee37ffecf6694dd5c4d8555849b8f756ccb63644da90bbb48d6",
+    "src/auto_research/reproductions/upturn/__init__.py": "1e9793e9ea85e94144f7eac8fa141567d7f964438fa628788b668358154e196e",
+    "src/auto_research/reproductions/upturn/adapter.py": "72e5da3cb70856944d0c9a25376f73d4a1d9f16213efd43e19b3acf2a584afc2",
+    "src/auto_research/reproductions/upturn/algorithm.py": "421abd06cc492c39cf72e9b15c7f85c01e85fae0a7c26fb3053fbd19bc4897a4",
+    "src/auto_research/reproductions/upturn/checkpoint.py": "fbcb7c830cf53d3130cfc06621f3178516aa72c7a939f4f765c3c7864b383787",
+    "src/auto_research/reproductions/upturn/paper.yaml": "6eca098f6d945a30732f54cb04f2ee984b165a3c4f06cb65d49879d7edd28696",
+    "scripts/diagnose_oct14_post_training.py": "2a15d720a4f84bd1e415a4f0653c589c9716d526d4842acd5df728fd3575ca5b",
+    "scripts/diagnose_oct14_soar_format.py": "02b375e4359b8b8031246853a7e30e52b0cf7e0a94cf563299758260953f7ded"
+  },
+  "observer_binding": {
+    "commit": "92c2081869dcfbcec89b85580721d9bdb0dd136c",
+    "source_file_sha256": {
+      "scripts/observe_oct14_cuda_memory.py": "e106b23ff74d4d7ffc4572fddd77780ef1811eb2f33cb1967d8f86776874d36c"
+    },
+    "training_core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+    "source_neutral_observation": true
+  },
+  "limitations": [
+    "Zero and rejected groups are fully audited, not dropped from denominators; no old-source pseudo updates are reused.",
+    "Five variants are paired method/control arms, not five independent seeds; only actually completed seeds enter descriptive metrics.",
+    "Matched configured budget is not matched realized updates/token cost; concurrency timing is not a throughput comparison.",
+    "Every first-seed and remaining-seed arm is same-device/source/config; old6a/51b cohorts are not reused or pooled.",
+    "Three seed groups remain L1 diagnostics, not a stable gain, original paper benchmark or production A/B.",
+    "Negative staged and any other lower validation metrics are preserved; too-hard is not forced to have zero updates."
+  ],
+  "provenance": {
+    "commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+    "artifact_path": "docs/gpu-validations/grpo-difficulty-curriculum-a30-20261014-seeds42-44.json",
+    "metrics_artifact": "docs/reproductions/2610.13669-grpo-difficulty-curriculum/metrics/public-a30-complete-five-arms-seeds42-44-b9086275.json",
+    "execution_config_sha256": "96a8984e40ec68ca01186a33a150dfea89c100c7a74d8e613f8f905f98d9b3f9",
+    "raw_results_sha256": {
+      "42.unfiltered": "eb2620796f9897761d9fdee5c5618e0bd41127066890a2491ea3c016ecf839d1",
+      "42.static": "d22403f608483bbfb0778a6c9e11e22d8b8e9e0efb6134e6bf57590550728670",
+      "42.fixed-medium": "bfe4bdae3c65fb7145f15d6465005214745694ea2d0cb54b0ca5a43970e59723",
+      "42.staged": "1759a9d1f8af5119b868fa16b2467f2dada662cedeaf991fe1c0cbd7f27d6cda",
+      "42.too-hard": "1508e40c26ae7e170be357aa2586a15b7979444da016db2abc8d36aa65a52fba",
+      "43.unfiltered": "91551fdeebc05f36c25d3415151b31f84a88f2dc9048131d34864e3dfa82206c",
+      "43.static": "b541c20db2c11c39cd354108b5c7c0b68afdbabcc47967e1a92f72af11286a38",
+      "43.fixed-medium": "93ef5dc2d7e724d3e54eab1b72349af55041a3ac5324475e8fcc421268417add",
+      "43.staged": "40d289e30a4d6c3dc9d505e3d1b0e000e54315b20958e347cebc4696439b8187",
+      "43.too-hard": "8ef0d91ba2dbf8f6f51b9e0e237333b7a5c4de7c392a1cdd7f098e5bd528774e",
+      "44.unfiltered": "8feae863af6560ef29f70f14541e2766d03ae4c397d1f9a4a158e4451b7eadbd",
+      "44.static": "69a614861d169277bad3b6c34b2286d98f342c9c51c685123ef0004a38506132",
+      "44.fixed-medium": "c0c09458e3cac25b95f67263240c6355b9ec44210d338a1ed1f5d843ca33235a",
+      "44.staged": "9d75d1054d367bb518e2382cfbff5e5d0bcc7fbe7dde066d93f93342072b2681",
+      "44.too-hard": "6575fa47b9fe466e29386049a4bc4fd51ba53cfe097a29dc389d99841144b2ce"
+    },
+    "checkpoint_committed": false
+  }
+}

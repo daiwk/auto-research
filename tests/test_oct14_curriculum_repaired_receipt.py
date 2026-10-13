@@ -116,3 +116,34 @@ def test_cli_output_collisions_reject_before_either_output_write(tmp_path,monkey
         "--output",str(output),"--receipt-output",str(receipt)])
     with pytest.raises(ValueError if case=="same-path" else FileExistsError):MODULE["main"]()
     assert {p:p.read_bytes() for p in (output,receipt) if p.exists()}==before
+
+
+def test_actual_fifteen_public_record_keeps_all_zero_ledgers_and_negative_staged():
+    receipt=json.loads((ROOT/"docs/gpu-validations/grpo-difficulty-curriculum-a30-20261014-seeds42-44.json").read_text())
+    native=json.loads((ROOT/receipt["provenance"]["metrics_artifact"]).read_text())
+    assert native["provenance"]["code_commit"]==MODULE["COMMIT"]
+    assert len(receipt["executed_source_sha256"])==54
+    assert receipt["executed_source_sha256"]["src/auto_research/post_training/oct13_common.py"]==MODULE["PRECISION_SHA"]
+    assert receipt["observer_binding"]["commit"]==MODULE["OBSERVER"]
+    assert native["evaluation_protocol"]["claim_policy"]=="single/few-seed smoke result; do not claim a stable improvement"
+    assert native["evaluation_protocol"]["formal_comparison"] is False
+    assert native["not_gpu_receipt"] is True and native["whole_method_gpu_validation_passed"] is True
+    assert receipt["metrics"]==native["aggregate_metrics"]
+    assert receipt["provenance"]["raw_results_sha256"]==native["provenance"]["raw_results_sha256"]
+    expected={"unfiltered":[19,22,24],"static":[4,6,7],"fixed-medium":[7,8,4],"staged":[10,9,7],"too-hard":[10,7,7]}
+    counts=zero=0
+    for row in native["seed_results"]:
+        seed=row["seed"]
+        for variant,r in row["variants"].items():
+            actual=MODULE["audit_training"](r)
+            check=native["execution_checks"][str(seed)][variant]
+            assert actual["actual_optimizer_updates"]==check["actual_optimizer_updates"]==expected[variant][seed-42]
+            assert actual["equal_reward_optimizer_updates"]==check["equal_reward_optimizer_updates"]==0
+            assert actual["actual_zero_group_ledgers"]==check["actual_zero_group_ledgers"]
+            assert 0<check["invocation_elapsed_seconds"]<=900
+            assert sum(r["cost"]["generated_tokens"].values())<=143360
+            zero+=actual["mathematically_equal_reward_groups_skipped"];counts+=actual["all_groups_audited"]
+    assert (counts,zero)==(480,38)
+    staged=native["seed_results"][0]["variants"]["staged"]
+    assert staged["baseline"]["accuracy"]==.25 and staged["method_metrics"]["accuracy"]==0.
+    assert native["aggregate_metrics"]["staged.validation.accuracy"]["mean"]==pytest.approx(1/3)

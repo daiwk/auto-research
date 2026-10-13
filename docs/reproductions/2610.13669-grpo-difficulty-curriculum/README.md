@@ -11,7 +11,7 @@
 | Adapter | `grpo-difficulty-curriculum` |
 | 本地复现代码 | [`src/auto_research/reproductions/grpo_difficulty_curriculum/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/grpo_difficulty_curriculum/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
-| GPU门禁 | 旧[A100 seed42三臂记录](../../gpu-validations/grpo-difficulty-curriculum-a100-20261014.json)保留；等值奖励数值修复后五臂CUDA验证待新源码实跑，不复用旧controls签通过 |
+| GPU门禁 | 已完成修后同源A30五臂×seeds42/43/44：[新三seed回执](../../gpu-validations/grpo-difficulty-curriculum-a30-20261014-seeds42-44.json)；旧[A100 seed42三臂记录](../../gpu-validations/grpo-difficulty-curriculum-a100-20261014.json)保留，不混算 |
 
 ## 原始论文总结
 
@@ -118,7 +118,23 @@ staged实际transition为new-best/keep/advance/new-best，第4step进入B2；未
 | staged | 10 | 0 | 0.25→0.00 | 673.666 |
 | too-hard | 10 | 0 | 0.25→0.50 | 658.040 |
 
-staged退化到0真实保留；这个tiny B5仍有10次有效更新，不冒称零更新或原文退化复现。allocator实测峰值由观察器记录，不把单点显存读数当峰值。该文件是单seed阶段测量，不是三seedGPU回执；原42/43/44×五臂计划继续执行，完成后另核15个实际run签新源回执，不复用旧6a/51b证明。并行elapsed不比较吞吐，仍仅L1诊断。
+staged退化到0真实保留；这个tiny B5仍有10次有效更新，不冒称零更新或原文退化复现。allocator实测峰值由观察器记录，不把单点显存读数当峰值。该文件保留为单seed阶段测量，不是三seedGPU回执；完整计划结果另见下节，不复用旧6a/51b证明。并行elapsed不比较吞吐，仍仅L1诊断。
+
+### 数值修复后的完整五臂三seed结果
+
+[三seed native](metrics/public-a30-complete-five-arms-seeds42-44-b9086275.json)和[独立新回执](../../gpu-validations/grpo-difficulty-curriculum-a30-20261014-seeds42-44.json)来自15个实际CUDA run，均绑定同A30、B908核心54文件、92c独立观察器、固定公开0.5B/GSM及配置SHA `96a8984e…`。原8train、4validation、4steps、group8、cap512、每job900秒上界未扩大，未重试；真实全调用生成tokens为78,259–84,986，全部小于143,360上界。
+
+| 臂 | 真更新（42/43/44） | 等值组跳过（42/43/44） | validation accuracy（42/43/44） | accuracy均值±样本std |
+| --- | --- | --- | --- | --- |
+| unfiltered | 19 / 22 / 24 | 13 / 10 / 8 | 0.50 / 0.50 / 0.50 | 0.5000 ± 0.0000 |
+| static | 4 / 6 / 7 | 4 / 2 / 1 | 0.25 / 0.50 / 0.50 | 0.4167 ± 0.1443 |
+| fixed-medium | 7 / 8 / 4 | 0 / 0 / 0 | 0.50 / 0.50 / 0.50 | 0.5000 ± 0.0000 |
+| staged | 10 / 9 / 7 | 0 / 0 / 0 | 0.00 / 0.50 / 0.50 | 0.3333 ± 0.2887 |
+| too-hard | 10 / 7 / 7 | 0 / 0 / 0 | 0.50 / 0.50 / 0.50 | 0.5000 ± 0.0000 |
+
+同seed五臂初始accuracy均0.25；全部480个校准组被审计，38个数学等值奖励组精确跳过，等值奖励optimizer updates为0。拒绝/零组不从成本或分母删掉，所有151次实际更新都有真实归一化优势和finite正梯度。单job实测606.797–692.459秒，≤2个并行进程的elapsed不用于吞吐比较。
+
+staged42的0和三个B5非零更新原样保留；本次不复现原文完整B1→B5课程或B5退化。五variants是同seed配对的method/control arms，不是五个独立seeds；每项均值的n=3，但仍为L1小样本机制smoke，`formal_comparison: false`、`promotion_eligible: false`，不能宣称稳定相对提升。该默认十五项执行计划已完成，不代表原benchmark/正式能力评测或本批整体验收完成。
 
 ### 代码映射
 
@@ -130,5 +146,5 @@ algorithm.py：原5带、plateau和非单调统计；checkpoint.py：当前polic
 
 0.5B/短预算不代表原1.5B全train或三seed能力比较。同steps可能有不同effective updates/选题数/token，按实测解释。B5零更新/退化不能删除，也不是自动能力证明。
 
-数值修复后的五臂42/43/44计划未完成；旧controls不能冒充新源码验证。完整原规模/课程与正式能力比较仍未完成，单seed机制GPU门禁通过不代表本批整体完成。还需全局目录同步与CI；三个seed也不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+数值修复后的五臂42/43/44默认十五项计划已完成；旧controls不能冒充新源码验证。完整原规模/课程与正式能力比较仍未完成，单seed机制GPU门禁通过不代表本批整体完成，三seed机制回执也不代表正式能力比较。还需全局目录同步与CI；本条未注册未经验证的evolve映射。
 

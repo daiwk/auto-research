@@ -75,6 +75,6 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 ## 下一次恢复顺序
 
 1. 用户明确恢复 GPU 工作后，重新核验源码与公开资源实际 SHA，未知传输状态不当作成功。
-2. 按 GPU TODO 处理当前 2 个缺失回执与难度课程修复后的对照/种子；SynthSelf / Contraction / SOAR 三种子已实际完成，UPTURN三种子已执行但44失败，不再写成尚未启动。统一 adapter 入口还须核对真实 runner 参数与预算。
+2. 按 GPU TODO 处理当前 2 个缺失回执；SynthSelf / Contraction / SOAR及修后课程默认三种子计划已实际完成，UPTURN三种子已执行但44失败，不再写成尚未启动。统一 adapter 入口还须核对真实 runner 参数与预算。
 3. 只对实际执行成功或明确保留失败边界的结果生成源码绑定回执，不用旧 receipt 替代新算法。
 4. 重新生成并检查全部目录/指标，执行完整 pytest、GPU 门禁与 CI；完成后提交原定的单个 PR，不自动合并或部署。

@@ -25,8 +25,9 @@ def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,id
     assert spec.fidelity=="core_mechanism" and spec.evaluation_tier=="l1_mechanism"
     assert spec.execution["requires_gpu_validation"] is True
     receipt_date={k:"20261014" for k in ("state-opd","grpo-difficulty-curriculum","synthself","upturn","progressive-contraction","soar")}.get(key,"20261013")
-    suffix="-seeds42-44" if key in {"synthself","progressive-contraction","soar"} else ""
-    assert spec.execution["gpu_validation_artifact"]==f"docs/gpu-validations/{key}-a100-{receipt_date}{suffix}.json"
+    suffix="-seeds42-44" if key in {"synthself","progressive-contraction","soar","grpo-difficulty-curriculum"} else ""
+    accelerator="a30" if key=="grpo-difficulty-curriculum" else "a100"
+    assert spec.execution["gpu_validation_artifact"]==f"docs/gpu-validations/{key}-{accelerator}-{receipt_date}{suffix}.json"
     assert spec.evolve_operators==()
     doc=ROOT/spec.documentation
     assert doc.parent.name==f"{identifier}-{key}" and doc.parent.parent==ROOT/"docs/reproductions"
@@ -69,9 +70,9 @@ def test_abbreviation_collisions_do_not_replace_historical_catalog_entries():
     assert json.loads((ROOT/"src/auto_research/paper_specs/catalog/agent-research/tapo.json").read_text())["paper_url"].endswith("2607.27973")
 
 
-def test_curriculum_actual_three_variants_are_one_seed_and_do_not_complete_all_controls():
+def test_curriculum_historical_three_variants_are_one_seed_and_do_not_complete_all_controls():
     spec=load_spec(ROOT/"src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml")
-    receipt=json.loads((ROOT/spec.execution["gpu_validation_artifact"]).read_text())
+    receipt=json.loads((ROOT/"docs/gpu-validations/grpo-difficulty-curriculum-a100-20261014.json").read_text())
     result=json.loads((ROOT/receipt["provenance"]["metrics_artifact"]).read_text())
     assert receipt["provenance"]["commit"]=="6aabe57a97ec3a586aac7aeea66128750f9441da"
     assert receipt["variants"]==["fixed-medium","staged","too-hard"] and receipt["seeds"]==[42]
@@ -81,8 +82,25 @@ def test_curriculum_actual_three_variants_are_one_seed_and_do_not_complete_all_c
     assert all(v["n"]==1 for v in result["aggregate_metrics"].values())
     assert [result["execution_checks"][v]["actual_optimizer_updates"] for v in receipt["variants"]]==[8,9,11]
     text=(ROOT/spec.documentation).read_text()
-    assert "数值修复后的五臂42/43/44计划未完成" in text and "旧A100三臂未执行static和unfiltered" in text
+    assert "旧A100三臂未执行static和unfiltered" in text
     assert "三个variants不算三个seeds" in text and "单seed机制GPU门禁通过不代表本批整体完成" in text
+
+
+def test_curriculum_current_receipt_requires_fifteen_repaired_same_device_runs():
+    spec=load_spec(ROOT/"src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml")
+    receipt=json.loads((ROOT/spec.execution["gpu_validation_artifact"]).read_text())
+    result=json.loads((ROOT/receipt["provenance"]["metrics_artifact"]).read_text())
+    assert receipt["provenance"]["commit"]=="b90862754bf51b1beeb5add3f7dc2a51ca00ace4"
+    assert receipt["accelerator"]["model"]=="NVIDIA A30" and receipt["seeds"]==[42,43,44]
+    assert len(receipt["all_sanitized_commands"])==result["actual_cuda_run_count"]==15
+    assert len(receipt["provenance"]["raw_results_sha256"])==15
+    assert result["whole_method_gpu_validation_passed"] is True
+    assert result["default_three_seed_plan_completed"] is True
+    assert result["evaluation_protocol"]["formal_comparison"] is False
+    assert result["evaluation_protocol"]["variants_are_independent_seeds"] is False
+    assert all(x["n"]==3 for x in result["aggregate_metrics"].values())
+    text=(ROOT/spec.documentation).read_text()
+    assert "默认十五项计划已完成" in text and "三seed机制回执也不代表正式能力比较" in text
 
 
 def test_cuda_missing_configuration_does_not_run_a_fixture(tmp_path):
