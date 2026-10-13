@@ -117,3 +117,21 @@ A100已逐字核验54源文件与原公开资源，实际Qwen tokenizer/vocab152
 在XGrammar0.2.8下CPU编译成功，无模型加载/CUDA初始化；新单次seed42同预算GPU运行
 独立登记为attempt06（上限1800秒、不追加重试）。运行是否通过须看真实输出与完整核心链路，
 CPU编译和测试通过不替代GPU门禁，格式合法也不等于数学正确。
+
+attempt06实际结束exit1：374.2966秒、36728生成token；两次提案均为完整合法的两子题JSON，
+四个子题各两次独立验算全部拒绝，没有后代或RL更新。[独立负记录](../reproductions/2610.12659-magicbeanstalk/metrics/public-a100-schema-failed-seed42-f92413aa.json)
+绑定九份原始/来源/依赖证据；不是通过回执。
+
+真实XGrammar CPU matcher随后证实，`sort_keys=True`序列化会把properties排为answer→question→trace，
+原约束接受answer-first prefix、拒绝question-first。新`ce4a4a34`保存显式question→trace→answer顺序，
+compiled grammar缓存键与审计SHA都绑定实际顺序；五种新schema已用真实tokenizer CPU编译，
+question-first合法、answer-first被拒绝。默认无schema路径、预算、验证与RL不改。
+这只确认了结构约束错误，不能归因所有欠条件/算术错误；新attempt07另行同预算实跑，不重绑旧失败。
+
+attempt07现已实际结束exit1：351.71331秒、36425生成token、86份真实响应记录。
+两次提案均为合法两子题JSON；12次独立验算只有训练根题及一个子题通过，
+其余子题或根题仍拒绝。构造成本450tokens，独立验证2757tokens；其余成本分别为
+validation1541、校准29408、学生effectivity1231、教师effectivity1038，合计与实际总量一致。
+没有合格合成后代，`paired_rl_root_indices=[]`，实际RL更新仍为0。
+两项相邻负运行不能用于推断字段顺序导致数学质量改善；结构修复已确认，内容质量门槛未通过。
+保留独立attempt07负证据，不修改旧四份负记录，不额外追加同方案盲目重试。

@@ -52,6 +52,11 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 | 格式约束真实CPU后端检查 | A100上54个冻结源码及公开学生/教师权重逐字核验，XGrammar0.2.8用实际Qwen tokenizer/vocab152064完成五operation schema编译；CUDA未初始化、模型未加载。新源码同预算单次MBS CUDA验证另有独立attempt，不以CPU编译代替实际结果 |
 | 最小安装与协议同步 | 新基础wheel在一次性无ML环境安装后metadata/help/init通过，阻止加载XGrammar/TVM-FFI等可选runtime；统一迁移800个产物时发现6个待变更，3个仅UTF-8格式、3个仅补claim_policy，实测值/诊断等级/原始SHA均不改，生成器同步修复 |
 | 协议修复后定向检查 | 摘录/指标迁移142项、课程回执/看板/目录113项通过；800产物迁移待变更0，平台审计、spec check/validate、README同步和发现闭环检查通过；strict文档构建10.46秒。新课程回执factory仅接受15个真实run，当前未用fixture签实际回执；GPU缺项仍未关闭 |
+| 修后课程十五项实际核验 | 五臂×42/43/44共15份实际raw逐字段独立重放、54个算法源码和observer绑定核验通过；151次真实更新、38个等值组精确跳过，新A30三seed回执已保存。课程/MBS相关101项定向测试通过；负结果和旧阶段native不覆写 |
+| 字段顺序修复与稳定全量 | `ce4a4a34`顺序修复128项主审测试、47项启动器fixture通过，真实CPU grammar确认question-first合法/answer-first拒绝；随后稳定完整回归**2750通过、24 warnings、297.50秒**。该次全量包含f924负证据摘录和课程十五项回执，不包含之后新增的attempt07摘录检查 |
+| 两次MBS格式约束真实失败 | f924与ce4实际CUDA均结束exit1，合法JSON不等于合格后代；分别36728/36425生成token、0次RL更新。保留各自原始响应、成本和独立来源，不签GPU通过回执；当前GPU门禁仍缺MBS、SkillDreamer |
+| attempt07主审与完整复跑 | 主审发现35个漂移反例遗漏实际校验器调用；补齐拒绝断言后，111项负证据检查、153项相关schema/迁移/看板检查通过。两份schema负native分别由九份实际来源与54个Git源文件独立重放且逐字段相等；稳定完整回归**2787通过、24 warnings、276.28秒** |
+| 新负结果生成一致性 | 803个指标产物，迁移待变更0（新attempt07只统一UTF-8格式，JSON值不改）；公开看板756条，manifest/目录/平台审计/spec/README同步/发现闭环/140文件辅助清单通过。strict文档构建10.71秒；GPU门禁仍仅缺MBS、SkillDreamer，不宣称CI全绿 |
 
 早期完整通过结果绑定源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`，后续全量与定向结果按上表分别记录；随后若有源码修复须补相应检查。
 真实 GPU 缺项仍按 TODO 验收，最终 PR 的 CI 尚未触发；本地测试通过不等于最终 PR 可合并。
@@ -71,6 +76,7 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 `5c863ab8`三种子结果与MBS提示说明的strict构建通过后，清理`.cache/oct14-docs-site-5c863ab8`，释放约304 MiB；没有删除数据、权重、原始失败或运行目录。
 `f92413aa`基础wheel独立安装核验后，清理本轮一次性wheel与venv目录，释放约45 MiB；不可变源码包、公开资源、当前运行和失败证据保留。
 协议同步及新负记录strict构建通过后，清理本轮站点输出约305 MiB；未删除真实结果、公开权重或活跃实验。
+两份schema负证据及课程完整结果strict构建通过后，清理`.cache/oct14-docs-site-ce4-negative`，释放约306 MiB；原始响应、失败证据和待复用公开资源保留。
 
 ## 下一次恢复顺序
 

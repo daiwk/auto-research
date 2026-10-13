@@ -129,3 +129,15 @@ algorithm.py：effectivity树与bottom-up构建；checkpoint.py：真实teacher�
 
 配置 `construction_json_schema: true`（仅bool，默认false）通过 [XGrammar HF接口](https://xgrammar.mlc.ai/docs/latest/start/quick_start.html)在生成token时约束构造教师的JSON结构；需要独立 `structured-generation` 可选依赖。分解array长度2只对齐原提示的 exactly two，答案内容与判断布尔值不被强制。独立verifier与学生不使用schema；提示、采样次数、预算、Goldilocks和RL不变。编译grammar缓存，生成matcher不复用；审计记录实际XGrammar版本、schemaSHA和生成token成本。缺依赖或编译失败不退回无约束生成，截断/非法JSON不抽取内层对象或repair。默认false保留原历史parser与生成参数。当前仅CPU合同测试，不代表此新路径已执行真实CUDA或通过整方法门禁。
 
+### f924 结构约束生成：真实格式合法、构造失败
+
+[f924 seed42 脱敏负记录](metrics/public-a100-schema-failed-seed42-f92413aa.json)绑定实际源码 `f92413aabaef0a7d84dcddcb3d4064f5c2d464a3`、54个Git源码SHA与9份原始/配置/资源/依赖/grammar审计SHA。原16train/最多4roots/group4/depth1/cap1024/wall1800s与重试次数不变，实际374.29659676365554秒、36728生成tokens（含1541初始validation tokens）、exit1。两次教师提案均为合法的2子题JSON，共4个子题全部未通过独立验算；13次独立验证仅root4的初始验证被接受，12次拒绝，root7/8仍失败。paired集合为空，方法与控制均0 RL更新；格式合法不等于完整构造或GPU门禁通过。
+
+执行中的schema序列化排序使输出字段为 `answer→question→trace`，旧schemaSHA保持，不回绑到后续 `question→trace→answer` 修复源码；这是已确认的结构约束问题，不足以解释全部题设缺失、trace/answer不一致或独立solver算错。上节待真实新源码验证的状态特指最新顺序修复路径。train构造teacher可见parent答案/trace，独立verifier与学生仍只见其允许的question/示例；未放宽validator、repair响应或扩预算。本记录明确 `not_gpu_receipt=true`，保留旧三次负记录，不宣称能力提升。
+
+### ce4 顺序修复：同预算单次真实构造失败
+
+[ce4 seed42 脱敏负记录](metrics/public-a100-schema-order-failed-seed42-ce4a4a34.json)绑定实际源码 `ce4a4a34520419a50fb730d93967aaed5024fa77`、54个Git源码SHA与9份来源SHA。最新状态以本节为准：`question→trace→answer` 已真实CUDA执行，schemaSHA为新的 `b60afb6e…`，不是将旧f924记录换绑。原配置/预算/采样/verifier门槛不变；实际exit1、351.71331273019314秒、36425生成tokens（含1541初始validation tokens），86条构造/校准响应。
+
+两次提案均为合法2子题JSON，第一次0个子题验算通过、第二次1个通过；12次独立验证共2次接受（root4初验与第二次提案的一个child）、10次拒绝。3条校准hard roots、空paired集合、方法与控制均0 RL更新；effectivity条件测试、synthesis及最终Goldilocks仍未到达。此单seed结果不证明顺序修复造成能力或因果提升，也不签整方法通过回执；保留f924及更早负记录，未repair、扩预算或降低验证门槛。
+
