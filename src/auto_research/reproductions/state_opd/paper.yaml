@@ -20,7 +20,7 @@
   "datasets": [
     "GSM8K verified train-only holdout"
   ],
-  "baseline": "冻结初始学生；另需同预算full-history OPD及无扩采对照，当前不宣称能力提升",
+  "baseline": "冻结初始学生、同配置预算的独立root full-history OPD及无扩采对照；不宣称能力提升",
   "metrics": [
     "method_metrics.accuracy",
     "parameters_changed"
@@ -57,6 +57,6 @@
     ],
     "infer_device_capabilities": false,
     "requires_gpu_validation": true,
-    "gpu_validation_artifact": "docs/gpu-validations/state-opd-a100-20261013.json"
+    "gpu_validation_artifact": "docs/gpu-validations/state-opd-a100-20261014.json"
   }
 }

@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "adapter_key": "replayssm",
+  "validated_at": "2026-10-13T17:50:33.914638+00:00",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_replayssm.py",
+    "--upstream",
+    "PINNED_PUBLIC_AUTHOR_SOURCE",
+    "--steps",
+    "48",
+    "--seed",
+    "42",
+    "--output",
+    "RAW_RESULT"
+  ],
+  "commands": [
+    [
+      "python",
+      "scripts/run_replayssm.py",
+      "--upstream",
+      "PINNED_PUBLIC_AUTHOR_SOURCE",
+      "--steps",
+      "48",
+      "--seed",
+      "42",
+      "--output",
+      "RAW_RESULT"
+    ],
+    [
+      "python",
+      "scripts/run_replayssm.py",
+      "--upstream",
+      "PINNED_PUBLIC_AUTHOR_SOURCE",
+      "--steps",
+      "48",
+      "--seed",
+      "43",
+      "--output",
+      "RAW_RESULT"
+    ],
+    [
+      "python",
+      "scripts/run_replayssm.py",
+      "--upstream",
+      "PINNED_PUBLIC_AUTHOR_SOURCE",
+      "--steps",
+      "48",
+      "--seed",
+      "44",
+      "--output",
+      "RAW_RESULT"
+    ]
+  ],
+  "command_redaction": "Only executable, upstream source and output machine paths replaced by logical roles; actual flags,48-step budget and seeds retained.",
+  "dataset": {
+    "id": "seeded random recurrent inputs",
+    "revision": "replayssm-random-input-protocol-v2-gdn-rollback",
+    "public_dataset_not_used": true,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "protocol": "author 48-step Mamba2/GDN recurrent random-input precision suite; independent CUDA reference zero/partial/full acceptance and refresh"
+  },
+  "checkpoint": {
+    "id": "random recurrent state; no pretrained model checkpoint used",
+    "revision": "not applicable"
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "diagnostic_only": true,
+    "promotion_eligible": false,
+    "formal_comparison": false,
+    "evaluation_tier": "l1_mechanism",
+    "protocol": {
+      "id": "replayssm-random-input-protocol-v2-gdn-rollback",
+      "author_steps": 48,
+      "author_architectures": [
+        "mamba2",
+        "gdn"
+      ],
+      "author_modes": [
+        "s32_rs",
+        "tp8_hi32",
+        "tp4_hi16_sr",
+        "f4_sr_rs"
+      ],
+      "author_batch": 2,
+      "heads": 4,
+      "state_shape": [
+        128,
+        128
+      ],
+      "refresh_window": 16,
+      "reference_acceptance_counts": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3
+      ],
+      "reference_accepted_tokens": 12,
+      "reference_gdn_refreshes": [
+        3,
+        3
+      ],
+      "storage_format": "dequantized FP32",
+      "model_quality_evaluation": false,
+      "native_serving_executed": false
+    },
+    "per_seed": [
+      {
+        "seed": 42,
+        "reference_max_output_error": 7.450580596923828e-8,
+        "gdn_max_output_error": 5.960464477539063e-8,
+        "gdn_max_committed_state_error": 1.4901161193847656e-8,
+        "gdn_read_precision_output_max_difference": 0.00016498565673828125,
+        "gdn_high_anchor_read_precision_max_difference": 0,
+        "mamba2/s32_rs/output_rmse": 0,
+        "mamba2/s32_rs/anchor_rmse": 0,
+        "mamba2/tp8_hi32/output_rmse": 0.027438241988420486,
+        "mamba2/tp8_hi32/anchor_rmse": 0,
+        "mamba2/tp4_hi16_sr/output_rmse": 0.1025368943810463,
+        "mamba2/tp4_hi16_sr/anchor_rmse": 0.000052302024414530024,
+        "mamba2/f4_sr_rs/output_rmse": 0.16027286648750305,
+        "mamba2/f4_sr_rs/anchor_rmse": 0.02460850588977337,
+        "gdn/s32_rs/output_rmse": 0,
+        "gdn/s32_rs/anchor_rmse": 0,
+        "gdn/tp8_hi32/output_rmse": 0.00018871903012041003,
+        "gdn/tp8_hi32/anchor_rmse": 0,
+        "gdn/tp4_hi16_sr/output_rmse": 0.0007024668157100677,
+        "gdn/tp4_hi16_sr/anchor_rmse": 0.00012144105130573735,
+        "gdn/f4_sr_rs/output_rmse": 0.0011008481960743666,
+        "gdn/f4_sr_rs/anchor_rmse": 0.02151380106806755,
+        "elapsed_seconds": 22.891016045585275
+      },
+      {
+        "seed": 43,
+        "reference_max_output_error": 1.1920928955078125e-7,
+        "gdn_max_output_error": 1.1920928955078125e-7,
+        "gdn_max_committed_state_error": 7.450580596923828e-9,
+        "gdn_read_precision_output_max_difference": 0.0001412034034729004,
+        "gdn_high_anchor_read_precision_max_difference": 0,
+        "mamba2/s32_rs/output_rmse": 0,
+        "mamba2/s32_rs/anchor_rmse": 0,
+        "mamba2/tp8_hi32/output_rmse": 0.026876097545027733,
+        "mamba2/tp8_hi32/anchor_rmse": 0,
+        "mamba2/tp4_hi16_sr/output_rmse": 0.09992686659097672,
+        "mamba2/tp4_hi16_sr/anchor_rmse": 0.00005245192369329743,
+        "mamba2/f4_sr_rs/output_rmse": 0.15746580064296722,
+        "mamba2/f4_sr_rs/anchor_rmse": 0.024513665586709976,
+        "gdn/s32_rs/output_rmse": 0,
+        "gdn/s32_rs/anchor_rmse": 0,
+        "gdn/tp8_hi32/output_rmse": 0.00019032687123399228,
+        "gdn/tp8_hi32/anchor_rmse": 0,
+        "gdn/tp4_hi16_sr/output_rmse": 0.0007069700513966382,
+        "gdn/tp4_hi16_sr/anchor_rmse": 0.00011998049740213901,
+        "gdn/f4_sr_rs/output_rmse": 0.0011069281026721,
+        "gdn/f4_sr_rs/anchor_rmse": 0.02151455171406269,
+        "elapsed_seconds": 2.6452158000320196
+      },
+      {
+        "seed": 44,
+        "reference_max_output_error": 1.1920928955078125e-7,
+        "gdn_max_output_error": 8.940696716308594e-8,
+        "gdn_max_committed_state_error": 1.4901161193847656e-8,
+        "gdn_read_precision_output_max_difference": 0.00023543834686279297,
+        "gdn_high_anchor_read_precision_max_difference": 0,
+        "mamba2/s32_rs/output_rmse": 0,
+        "mamba2/s32_rs/anchor_rmse": 0,
+        "mamba2/tp8_hi32/output_rmse": 0.02706584520637989,
+        "mamba2/tp8_hi32/anchor_rmse": 0,
+        "mamba2/tp4_hi16_sr/output_rmse": 0.10109017789363861,
+        "mamba2/tp4_hi16_sr/anchor_rmse": 0.00005236919969320297,
+        "mamba2/f4_sr_rs/output_rmse": 0.15999548137187958,
+        "mamba2/f4_sr_rs/anchor_rmse": 0.024554243311285973,
+        "gdn/s32_rs/output_rmse": 0,
+        "gdn/s32_rs/anchor_rmse": 0,
+        "gdn/tp8_hi32/output_rmse": 0.0001911575091071427,
+        "gdn/tp8_hi32/anchor_rmse": 0,
+        "gdn/tp4_hi16_sr/output_rmse": 0.0007064492092467844,
+        "gdn/tp4_hi16_sr/anchor_rmse": 0.00012641362263821065,
+        "gdn/f4_sr_rs/output_rmse": 0.0011100305709987879,
+        "gdn/f4_sr_rs/anchor_rmse": 0.021631652489304543,
+        "elapsed_seconds": 2.5848526265472174
+      }
+    ],
+    "aggregate": {
+      "reference_max_output_error": {
+        "mean": 1.043081283569336e-7,
+        "sample_std": 2.5809568279517847e-8
+      },
+      "gdn_max_output_error": {
+        "mean": 8.940696716308594e-8,
+        "sample_std": 2.9802322387695312e-8
+      },
+      "gdn_max_committed_state_error": {
+        "mean": 1.241763432820638e-8,
+        "sample_std": 4.3015947132529745e-9
+      },
+      "gdn_read_precision_output_max_difference": {
+        "mean": 0.0001805424690246582,
+        "sample_std": 0.000049005784814746525
+      },
+      "gdn_high_anchor_read_precision_max_difference": {
+        "mean": 0,
+        "sample_std": 0
+      },
+      "mamba2/s32_rs/output_rmse": {
+        "mean": 0,
+        "sample_std": 0
+      },
+      "mamba2/s32_rs/anchor_rmse": {
+        "mean": 0,
+        "sample_std": 0
+      },
+      "mamba2/tp8_hi32/output_rmse": {
+        "mean": 0.02712672824660937,
+        "sample_std": 0.0002859749154209605
+      },
+      "mamba2/tp8_hi32/anchor_rmse": {
+        "mean": 0,
+        "sample_std": 0
+      },
+      "mamba2/tp4_hi16_sr/output_rmse": {
+        "mean": 0.10118464628855388,
+        "sample_std": 0.0013075758006564184
+      },
+      "mamba2/tp4_hi16_sr/anchor_rmse": {
+        "mean": 0.000052374382600343473,
+        "sample_std": 7.50839219711351e-8
+      },
+      "mamba2/f4_sr_rs/output_rmse": {
+        "mean": 0.15924471616744995,
+        "sample_std": 0.0015468163944135722
+      },
+      "mamba2/f4_sr_rs/anchor_rmse": {
+        "mean": 0.02455880492925644,
+        "sample_std": 0.00004758442014115969
+      },
+      "gdn/s32_rs/output_rmse": {
+        "mean": 0,
+        "sample_std": 0
+      },
+      "gdn/s32_rs/anchor_rmse": {
+        "mean": 0,
+        "sample_std": 0
+      },
+      "gdn/tp8_hi32/output_rmse": {
+        "mean": 0.00019006780348718166,
+        "sample_std": 0.000001239710456220457
+      },
+      "gdn/tp8_hi32/anchor_rmse": {
+        "mean": 0,
+        "sample_std": 0
+      },
+      "gdn/tp4_hi16_sr/output_rmse": {
+        "mean": 0.0007052953587844968,
+        "sample_std": 0.000002463394219200695
+      },
+      "gdn/tp4_hi16_sr/anchor_rmse": {
+        "mean": 0.000122611723782029,
+        "sample_std": 0.000003372555501515964
+      },
+      "gdn/f4_sr_rs/output_rmse": {
+        "mean": 0.001105935623248418,
+        "sample_std": 0.0000046709489258591
+      },
+      "gdn/f4_sr_rs/anchor_rmse": {
+        "mean": 0.02155333509047826,
+        "sample_std": 0.00006782589539798648
+      },
+      "elapsed_seconds": {
+        "mean": 9.373694824054837,
+        "sample_std": 11.706382476354774
+      }
+    },
+    "independent_read_cast_passed_all_architectures_and_seeds": true,
+    "native_bandwidth_speedup_claim": false
+  },
+  "jit_source_compatibility": {
+    "original_jit_source_sha256": "7f60e87d974bfea4b5095980599043d8a7a615db4ba1b5fdbf7a0c1d0bfc6ab1",
+    "compiled_jit_source_sha256": "9add48ef24fa9df25a71e5f8a05fc0dac46b35c6b5efdc73012cbeeeae1c8174",
+    "function": "_gdn_unf_vf_step_kernel",
+    "transformation": "left-associated parentheses only for 3+ operand and/or chains",
+    "source_ranges_relative_to_jit_function": [
+      {
+        "line": 122,
+        "column": 7,
+        "end_line": 122,
+        "end_column": 51,
+        "operator": "and",
+        "operands": 3
+      }
+    ],
+    "associative_boolean_ast_equivalent": true,
+    "author_file_modified": false,
+    "original_author_file_sha256": "80311d6654584c633db01f76e3be5bc189fbdfab031c1bc0711757e1cd09eec3",
+    "native_serving_claim": false
+  },
+  "prior_failed_attempt": {
+    "code_commit": "34148c2e29c01e9be7e4d5b8cbd09fd0f6016902",
+    "seed": 42,
+    "returncode": 1,
+    "reason": "Pinned author GDN three-operand Boolean AST unsupported by the installed Triton; no successful report and no receipt issued for this attempt",
+    "raw_files_sha256": {
+      "replayssm-seed42.status.json": "5cbb65aab16e375d2631e205f02edc1440beb48be2d815316ee4b392030051d6",
+      "replayssm-seed42.stderr.log": "1dd1ef042ae8a0a1df846fd9d3c4fd07d6496c98629c06b7cd82c57f1483a830",
+      "replayssm-seed42.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "provenance": {
+    "commit": "6aabe57a97ec3a586aac7aeea66128750f9441da",
+    "artifact_path": "docs/gpu-validations/replayssm-a100-20261013.json",
+    "source_archive_sha256": "6d791e198e741301ac5d77decc64c0b80a1785cd3680c1a8de3c7b218ff33be3",
+    "actual_source_files_sha256": {
+      "scripts/run_replayssm.py": "1e7bd3435279d597e12808cfbb6872d53dea006d82ec0c03f94452a19de9858a",
+      "src/auto_research/foundation_models/replayssm.py": "5b03cb60b19bff0d8a324bc3cadf6a3ecb81a61e1b52da949886ba9fdfb93ab7",
+      "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093"
+    },
+    "upstream_commit": "5d3ea597d479ef0c8e9e2eb2845a2adfdb9a8b44",
+    "upstream_source_files_sha256": {
+      "__init__.py": "4a48d39716c1ce2a001907df9aa7f739cb96a7b8f19b9c4d7827d9c870d16a18",
+      "api.py": "1b5248f3bd4442794f8bad76b287c4e46cdc7f2c6260ddd9e6918124003ea4d1",
+      "modes.py": "4582feba858b9bf6c706ba928d28a6045deb0f07244ee78855bd7320e1e5a1db",
+      "quant_tl.py": "41a7f732c80e8de7a31c6f0330ccae4877d4a80af7611d3c9652e98a16f72c87",
+      "mamba2_replay.py": "cd0bbeb6d1140987619bb32ea016a52fc297d2d02bec1f51a82f1feb7c5d9027",
+      "gdn_replay_unf_vf.py": "80311d6654584c633db01f76e3be5bc189fbdfab031c1bc0711757e1cd09eec3"
+    },
+    "raw_files_sha256": {
+      "replayssm-seed42.json": "e84cc06b9e58b6ad308bb122151ffde0ae5e42d81c840fd7f59d7333c11b86f5",
+      "replayssm-seed42.status.json": "fccfb7e0679269d8b34f4a0050619c0fe1ba316aaf438de528b07fe71b1b7c78",
+      "replayssm-seed42.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "replayssm-seed42.stdout.log": "88bba5a1c7a71832578880223d1ad82b97ed6526f9f49f2569ca0cb2d2febba4",
+      "replayssm-seed43.json": "ddc091f371115f50605cfd8326198d06358e9187006d79d83339f3bc9e013a48",
+      "replayssm-seed43.status.json": "e3b6d5f35d8efd94dba8cc17d115d23007581171f20521c3448533c9ba25920d",
+      "replayssm-seed43.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "replayssm-seed43.stdout.log": "122ce0d87bcbc92644bb593ba72f1aa313181618e348f81055485204e1411cdd",
+      "replayssm-seed44.json": "26ba91635586be301bd0e326d1a792c700ed1771026f043b14c309a5d548fc0c",
+      "replayssm-seed44.status.json": "ebccff7b9dbf40fc9ad6c580e723b7075371f1a794433f99c3a2d0afeb387c3d",
+      "replayssm-seed44.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "replayssm-seed44.stdout.log": "74ec32304e59e89bca95769baccdf588b6852ac03637b3e9b4b971192ce116ae"
+    }
+  },
+  "scope": "Three successful frozen-source A100 random recurrent L1 numerical mechanism diagnostics; no original model-quality reproduction, physical HBM savings or native serving speedup."
+}

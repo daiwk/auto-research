@@ -115,7 +115,13 @@ PYTHONPATH=src python scripts/run_oct13_robotics.py \
 
 测试入口为 `python -m pytest tests/reproductions/test_oct13_agents_jepa.py`。模拟器依赖 `robosuite==1.4.0`、`mujoco==3.3.2`，不同于 LeWAM；两者不能覆盖共享环境版本。
 
+LIBERO 固定版本的初始状态是 NumPy 数组；新版 Torch 默认 weights-only 反序列化会拒绝它。适配器仍使用作者相同 `init_files` 路径，先核固定 public revision 与精确文件 SHA，再在局部 `safe_globals` 中允许 ndarray/dtype/reconstruct 与 Float32/64 dtype，显式保持 `weights_only=True`。未知 pickle 类型仍拒绝；不改作者源码 pin、共享 Torch 或全局加载策略，退出后保留原 allow-set。
+
 ### 接受范围中的真实 teacher 蒸馏与布局课程
+
+训练 manifest 额外绑定本地共享 `lewam/external.py` 和 SmolWAM 的 `algorithm.py`、`training.py`、`worker.py` 的实际 SHA256，闭环前必须一致。更新计数必须是正整数、参数差异必须是正有限数；NaN/Inf、非整数计数或实现变化均拒绝加载候选。
+
+manifest 同时保存实际四项 demonstration/teacher loss、总 loss、validation 与两种 token-layout 的梯度/参数差异 trace，并在训练记录与闭环加载两端检查必需字段、有限性和计数一致。新 student 的本轮评测必须显式设置 `tasks=["libero_goal:6"]`（与单任务 cream-cheese-in-bowl 演示一致），不能借用默认其他任务冒充同任务对照。
 
 训练两机制仍在本轮接受 scope 中。`--phase train` 调用固定作者 `smolwam.train.bank:main`、`smolwam.train.kd_targets:main`、`smolwam.train.train:train`，不是只链接 upstream。真实公开 demonstrations 经 Wan VAE 编码；真实 28-block Cosmos teacher 在同输入/固定噪声下生成 action/future targets；保留 12 block 的 student 先用 1764 tokens，再用 1008 tokens 进行四项 L1 更新。
 
@@ -138,3 +144,5 @@ PYTHONPATH=src python scripts/run_oct13_robotics.py --paper smolwam --phase trai
 一个必须显式记录的 bounded-data 修正：作者 KD 默认 `val_frac=0` 仍排除一个 episode，单任务规模下它恰好可能排除全部 student validation KD rows。本地仅在 **teacher inference 缓存阶段** 对所有 bounded bank rows 生成真实 targets，包括 validation；student split/validation选checkpoint逻辑不变，未给 student train-loader 加入 validation 行，未修改 upstream pin。`training.py` 强制两种布局都有真实非零梯度/参数更新，所有四项 loss 实际存在、validation 非空，并只接受 compact-layout validation 选择的 checkpoint。
 
 此训练入口目前尚需实际 A100 运行验证。即使8步全部执行，也只是缩小训练机制诊断，不代表原68,830row/5000step效果；重新训练 latent adapter、完整训练、多任务数据覆盖和**新 student**的 LIBERO闭环评测仍未完成。发布版推理不能被写成这些训练阶段已复现。
+
+新 student 的 `native-training/student/training-provenance.json` 绑定真实训练的 seed、作者版本、公开数据、非零梯度/参数更新，以及 validation-selected `best.pt` 的 SHA256。闭环配置通过 `trained_model_dir` 读取它；先严格检查 12 blocks、6 VL layers、512位置文本和1008-token compact布局，再加载实际新 student 全部权重。VAE、文本缓存和归一化仍来自已验发布资源。新 student 与 no-op 在每个 task/trial 使用相同初始状态，结果固定为 bounded diagnostic、不可 promotion；当前尚未把该入口标为已完成实跑。

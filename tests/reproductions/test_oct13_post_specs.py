@@ -24,7 +24,8 @@ def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,id
     assert spec.published==("2026-10-08" if key=="magicbeanstalk" else "2026-10-09")
     assert spec.fidelity=="core_mechanism" and spec.evaluation_tier=="l1_mechanism"
     assert spec.execution["requires_gpu_validation"] is True
-    assert spec.execution["gpu_validation_artifact"]==f"docs/gpu-validations/{key}-a100-20261013.json"
+    receipt_date="20261014" if key=="state-opd" else "20261013"
+    assert spec.execution["gpu_validation_artifact"]==f"docs/gpu-validations/{key}-a100-{receipt_date}.json"
     assert spec.evolve_operators==()
     doc=ROOT/spec.documentation
     assert doc.parent.name==f"{identifier}-{key}" and doc.parent.parent==ROOT/"docs/reproductions"
@@ -46,6 +47,19 @@ def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,id
     assert paper_results["measured_locally"] is False
     figure=json.loads((doc.parent/"figure-source.json").read_text())
     assert figure["version"]=="v1" and identifier+"v1" in figure["source_resource"]
+
+
+def test_state_current_receipt_requires_all_new_arms_not_the_old_default_only_run():
+    spec=load_spec(ROOT/"src/auto_research/reproductions/state_opd/paper.yaml")
+    receipt=json.loads((ROOT/spec.execution["gpu_validation_artifact"]).read_text())
+    result=json.loads((ROOT/receipt["provenance"]["metrics_artifact"]).read_text())
+    assert receipt["provenance"]["commit"]=="6aabe57a97ec3a586aac7aeea66128750f9441da"
+    assert receipt["variants"]==["state","full-history-opd","state-no-expansion"]
+    assert receipt["seeds"]==[42,43,44]
+    assert result["actual_cuda_run_count"]==9
+    assert len(result["provenance"]["raw_results_sha256"])==9
+    assert result["evaluation_protocol"]["formal_comparison"] is False
+    assert result["execution_checks"]["full-history-opd"]["teacher_prior_reasoning_removed_responses_per_seed"]==[0,0,0]
 
 
 def test_abbreviation_collisions_do_not_replace_historical_catalog_entries():

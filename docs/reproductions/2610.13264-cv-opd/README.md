@@ -92,13 +92,13 @@ Avg6 的差值是 +2.30 **百分点**，不是相对提升 2.30%。CV-OPD 的 HR
 
 当前实现为 `core_mechanism / L1` 核心机制诊断，真实 VLM 更新而非图像分类打分代理。GPU 完成状态以统一提交的脱敏 receipt 为准，CPU 单测不替代 GPU 门槛。
 
-> **本地对照口径**：基线为同 checkpoint 更新前验证准确率，实验组为 CV-OPD 更新后的模型；没有等训练预算的 Vision-OPD 对照，相对能力提升百分比不适用。
+> **本地对照口径**：基线为同 checkpoint 更新前验证准确率，实验组为 CV-OPD 更新后模型；另实际执行仅关闭 CDL 权重的三 seed 对照。后者仍运行正负 crop、DAG 和教师前向，不是原版 Vision-OPD，且不构成等实际计算成本的能力比较；相对能力提升百分比不适用。
 
 ### 数据协议
 
 输入 JSONL 必须包含 `image`、统一问题、一个实际类别 `answer`、真实 `bbox=[x0,y0,x1,y1]` 像素坐标、`split` 和 `verified=true`。训练只能用公开 train 源的确定性子集；同一源图像不能跨 train/validation/test。已有 COCO-Caption2017 的 `val` caption 子集没有 bbox，不能静默当作本篇训练数据。
 
-当前诊断任务从 COCO train2017 选取主要对象属于 `person/cat/dog/car/bus/bird/horse/bicycle` 的真实图片，计划每类 2 train、1 validation、1 test，共 32 图；后两组是从 train2017 派生的本地 holdout，并非官方 test。统一问题为 `Name the main object in this picture. Reply with one COCO category name and no other words.`，不含真实类别，full-image 学生也不接收 bbox。脚本拒绝 constant-label 训练数据。verifier 只规范化大小写、标点、空白与开头 `a/an`，仍须精确类别；`not a cat`、`cat or dog`、`cats` 都不算 `cat`。
+当前诊断任务从 COCO train2017 选取主要对象属于 `person/cat/dog/car/bus/bird/horse/bicycle` 的真实图片，实际每类 2 train、1 validation、1 test，共 32 图；后两组是从 train2017 派生的本地 holdout，并非官方 test。统一问题为 `Name the main object in this picture. Reply with one COCO category name and no other words.`，不含真实类别，full-image 学生也不接收 bbox。脚本拒绝 constant-label 训练数据。verifier 只规范化大小写、标点、空白与开头 `a/an`，仍须精确类别；`not a cat`、`cat or dog`、`cats` 都不算 `cat`。
 
 checkpoint 与数据先通过 `verify_offline_manifest` 核对实际 SHA256，数据 manifest 必须覆盖 JSONL 和所有被引用图像。标签和 bbox 与输入文件绑定，不靠 CLI 自报版本。仅做哈希完整性检查不向模型提供 held-out 内容。
 
@@ -113,7 +113,7 @@ PYTHONPATH=src python scripts/run_cv_opd.py \
   --checkpoint-revision 7e3e67edbbed1bf9888184d9df282b700a323964 \
   --records /path/to/coco-train-boxes.jsonl \
   --dataset-id COCO2017/train2017 --dataset-revision <official-annotation-archive-sha256> \
-  --device cuda --steps 3 --rollouts 8 --max-new-tokens 16 \
+  --device cuda --steps 16 --rollouts 8 --max-new-tokens 16 \
   --seed 42 --output runs/cv-opd-seed42.json
 ```
 
@@ -124,6 +124,26 @@ PYTHONPATH=src python scripts/run_cv_opd.py \
 [cpu-contracts.json](metrics/cpu-contracts.json)记录已重跑的 7 个行为测试：bbox 尺寸与 IoU、JSD/Top-K tail、样本与 token gate、教师停止梯度和零正确样本的零梯度，以及严格多类 verifier、标签隔离和图像来源/切分哈希。每项先固定 seed 42，专用 crop/gate 用例内部使用 seed 2；这些是单测用例，不是独立多 seed 能力实验。测试通过不代表视觉推理能力或 GPU 训练完成。
 
 缩小路径使用 SmolVLM-256M 与语言 q/v rank-8 LoRA；并非 Qwen3.5-4B 的完整训练。公开多类主要对象识别、严格类别 verifier 与原文 6 个细粒度 benchmark 不等价。新增行为检查确认：更换外部 verifier gold 只能改变正确性判断，不能改变 policy 生成调用中的图像/问题/预算。未接入 Evolve，不能靠 registry 标签晋级。
+
+### 2026-10-14 A100 实测
+
+[脱敏 GPU 回执](../../gpu-validations/cv-opd-a100-20261013.json)与[六臂指标](metrics/a100-six-arms-4496283a.json)绑定实际执行源码 `4496283ac8e37c070b8f71b20af6138526cbba15`、六条实际命令、24 份原始文件 SHA256 和五个核心源码 SHA256。回执文件沿用已声明的 20261013 路径，实际完成时间为 2026-10-13 17:21:37 UTC（北京时间 10 月 14 日）。三 seed、主实验与仅关闭 CDL 的对照共六次均实际成功更新，未根据 test 重选参数。
+
+固定 checkpoint 为 `HuggingFaceTB/SmolVLM-256M-Instruct@7e3e67edbbed1bf9888184d9df282b700a323964`；COCO 官方注释归档 SHA256 为 `113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268`，派生 records SHA256 为 `f23de926af9f803f1c5568eae1bb150b2e55b919fce82a66167e961e764acb00`。完整 checkpoint 文件和全部 32 图输入的 hash 在回执中保存，未提交模型、图片或原始日志。
+
+预算预先冻结为 16 次训练样本尝试、batch 1、每图 8 rollout、最多 16 token；两臂分别 CDL 权重 0.1 / 0，其余执行配置相同。下表均为本地 L1 诊断；准确率是本地 holdout 的正确数/8，不与原论文 benchmark 比较。
+
+| Seed | 主实验 validation | 关闭 CDL validation | 主实验 test | 关闭 CDL test | 两臂各实际更新数 | 主实验 / 对照采样 token | 主实验 / 对照秒 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 42 | 2/8 | 2/8 | 0/8 | 0/8 | 8 | 520 / 520 | 147.99 / 146.34 |
+| 43 | 3/8 | 4/8 | 1/8 | 2/8 | 9 | 512 / 491 | 156.34 / 152.62 |
+| 44 | 2/8 | 2/8 | 0/8 | 1/8 | 10 | 538 / 513 | 168.57 / 165.13 |
+
+主实验 test 均值 ± 样本标准差为 **4.17% ± 7.22%**，对照为 **12.50% ± 12.50%**；配对差值为 **−8.33 ± 7.22 个百分点**。因此本次没有 CDL 优势证据，保留负结果。更新前 validation 为 3/8、3/8、2/8；没有测量更新前 test，不能推断主实验相对初始模型的 test 提升。
+
+两臂每个 seed 均实际采样 128 rollout；拒绝样本也计入 token 成本。参数 L2 更新均非零，主实验为 0.003335/0.003482/0.003787，对照为 0.003192/0.003484/0.003722。两臂更新次数虽逐 seed 相等，实际 token、梯度轨迹与墙钟成本不同；相同最大预算不等于等实际计算成本。所有运行 crop 失败为 0、最大 crop IoU ≤ 0.1；对照仍计算未加权 CDL，不能把它的非零值误读为 CDL 参与损失。
+
+证据只证明真实图像 rollout、样本保留门槛、正负 crop 教师与 CUDA 参数更新可执行。三 seed 不升级 L1 诊断，也不证明视觉推理能力、原版 Vision-OPD 比较或论文约 10% 额外耗时结论。可用 `scripts/curate_oct14_cv_opd.py` 按固定源包只读重算；纯 fixture 测试会拒绝错预算、错权重、零更新与错源码/公开输入身份。
 
 ### 代码映射
 

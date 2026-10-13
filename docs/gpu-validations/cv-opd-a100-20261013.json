@@ -1,0 +1,662 @@
+{
+  "schema_version": 1,
+  "adapter_key": "cv-opd",
+  "validated_at": "2026-10-13T17:21:37.705630+00:00",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_cv_opd.py",
+    "--checkpoint",
+    "PUBLIC_CHECKPOINT",
+    "--checkpoint-id",
+    "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "--checkpoint-revision",
+    "7e3e67edbbed1bf9888184d9df282b700a323964",
+    "--records",
+    "PUBLIC_COCO_DIAGNOSTIC/records.jsonl",
+    "--dataset-id",
+    "COCO2017/train2017",
+    "--dataset-revision",
+    "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+    "--device",
+    "cuda",
+    "--steps",
+    "16",
+    "--rollouts",
+    "8",
+    "--max-new-tokens",
+    "16",
+    "--batch-size",
+    "1",
+    "--contrastive-weight",
+    "0.1",
+    "--seed",
+    "42",
+    "--output",
+    "RAW_RESULT"
+  ],
+  "commands": [
+    {
+      "arm": "main",
+      "seed": 42,
+      "command": [
+        "python",
+        "scripts/run_cv_opd.py",
+        "--checkpoint",
+        "PUBLIC_CHECKPOINT",
+        "--checkpoint-id",
+        "HuggingFaceTB/SmolVLM-256M-Instruct",
+        "--checkpoint-revision",
+        "7e3e67edbbed1bf9888184d9df282b700a323964",
+        "--records",
+        "PUBLIC_COCO_DIAGNOSTIC/records.jsonl",
+        "--dataset-id",
+        "COCO2017/train2017",
+        "--dataset-revision",
+        "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+        "--device",
+        "cuda",
+        "--steps",
+        "16",
+        "--rollouts",
+        "8",
+        "--max-new-tokens",
+        "16",
+        "--batch-size",
+        "1",
+        "--contrastive-weight",
+        "0.1",
+        "--seed",
+        "42",
+        "--output",
+        "RAW_RESULT"
+      ]
+    },
+    {
+      "arm": "main",
+      "seed": 43,
+      "command": [
+        "python",
+        "scripts/run_cv_opd.py",
+        "--checkpoint",
+        "PUBLIC_CHECKPOINT",
+        "--checkpoint-id",
+        "HuggingFaceTB/SmolVLM-256M-Instruct",
+        "--checkpoint-revision",
+        "7e3e67edbbed1bf9888184d9df282b700a323964",
+        "--records",
+        "PUBLIC_COCO_DIAGNOSTIC/records.jsonl",
+        "--dataset-id",
+        "COCO2017/train2017",
+        "--dataset-revision",
+        "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+        "--device",
+        "cuda",
+        "--steps",
+        "16",
+        "--rollouts",
+        "8",
+        "--max-new-tokens",
+        "16",
+        "--batch-size",
+        "1",
+        "--contrastive-weight",
+        "0.1",
+        "--seed",
+        "43",
+        "--output",
+        "RAW_RESULT"
+      ]
+    },
+    {
+      "arm": "main",
+      "seed": 44,
+      "command": [
+        "python",
+        "scripts/run_cv_opd.py",
+        "--checkpoint",
+        "PUBLIC_CHECKPOINT",
+        "--checkpoint-id",
+        "HuggingFaceTB/SmolVLM-256M-Instruct",
+        "--checkpoint-revision",
+        "7e3e67edbbed1bf9888184d9df282b700a323964",
+        "--records",
+        "PUBLIC_COCO_DIAGNOSTIC/records.jsonl",
+        "--dataset-id",
+        "COCO2017/train2017",
+        "--dataset-revision",
+        "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+        "--device",
+        "cuda",
+        "--steps",
+        "16",
+        "--rollouts",
+        "8",
+        "--max-new-tokens",
+        "16",
+        "--batch-size",
+        "1",
+        "--contrastive-weight",
+        "0.1",
+        "--seed",
+        "44",
+        "--output",
+        "RAW_RESULT"
+      ]
+    },
+    {
+      "arm": "without-cdl",
+      "seed": 42,
+      "command": [
+        "python",
+        "scripts/run_cv_opd.py",
+        "--checkpoint",
+        "PUBLIC_CHECKPOINT",
+        "--checkpoint-id",
+        "HuggingFaceTB/SmolVLM-256M-Instruct",
+        "--checkpoint-revision",
+        "7e3e67edbbed1bf9888184d9df282b700a323964",
+        "--records",
+        "PUBLIC_COCO_DIAGNOSTIC/records.jsonl",
+        "--dataset-id",
+        "COCO2017/train2017",
+        "--dataset-revision",
+        "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+        "--device",
+        "cuda",
+        "--steps",
+        "16",
+        "--rollouts",
+        "8",
+        "--max-new-tokens",
+        "16",
+        "--batch-size",
+        "1",
+        "--contrastive-weight",
+        "0.0",
+        "--seed",
+        "42",
+        "--output",
+        "RAW_RESULT"
+      ]
+    },
+    {
+      "arm": "without-cdl",
+      "seed": 43,
+      "command": [
+        "python",
+        "scripts/run_cv_opd.py",
+        "--checkpoint",
+        "PUBLIC_CHECKPOINT",
+        "--checkpoint-id",
+        "HuggingFaceTB/SmolVLM-256M-Instruct",
+        "--checkpoint-revision",
+        "7e3e67edbbed1bf9888184d9df282b700a323964",
+        "--records",
+        "PUBLIC_COCO_DIAGNOSTIC/records.jsonl",
+        "--dataset-id",
+        "COCO2017/train2017",
+        "--dataset-revision",
+        "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+        "--device",
+        "cuda",
+        "--steps",
+        "16",
+        "--rollouts",
+        "8",
+        "--max-new-tokens",
+        "16",
+        "--batch-size",
+        "1",
+        "--contrastive-weight",
+        "0.0",
+        "--seed",
+        "43",
+        "--output",
+        "RAW_RESULT"
+      ]
+    },
+    {
+      "arm": "without-cdl",
+      "seed": 44,
+      "command": [
+        "python",
+        "scripts/run_cv_opd.py",
+        "--checkpoint",
+        "PUBLIC_CHECKPOINT",
+        "--checkpoint-id",
+        "HuggingFaceTB/SmolVLM-256M-Instruct",
+        "--checkpoint-revision",
+        "7e3e67edbbed1bf9888184d9df282b700a323964",
+        "--records",
+        "PUBLIC_COCO_DIAGNOSTIC/records.jsonl",
+        "--dataset-id",
+        "COCO2017/train2017",
+        "--dataset-revision",
+        "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+        "--device",
+        "cuda",
+        "--steps",
+        "16",
+        "--rollouts",
+        "8",
+        "--max-new-tokens",
+        "16",
+        "--batch-size",
+        "1",
+        "--contrastive-weight",
+        "0.0",
+        "--seed",
+        "44",
+        "--output",
+        "RAW_RESULT"
+      ]
+    }
+  ],
+  "command_redaction": "Only executable, checkpoint, records, and output machine paths replaced by public roles.",
+  "dataset": {
+    "id": "COCO2017/train2017",
+    "revision": "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+    "records_sha256": "f23de926af9f803f1c5568eae1bb150b2e55b919fce82a66167e961e764acb00",
+    "source_split": "train2017",
+    "local_holdout_is_not_official_test": true,
+    "all_input_hashes_verified": true,
+    "input_file_sha256": {
+      "images/000000004772.jpg": "a4f98051ffc3c41ceb6991e5aeb7a55838ce3f1677beff1b98a5abebfb9e5a75",
+      "images/000000010498.jpg": "32fdf802f905f38440d0758deaabafb64330f80b5092f27caa31513a10f8b2c1",
+      "images/000000014125.jpg": "7d9bb52f4cd800fdaf7e7429e8462ca64222d4cae70a1e7dee5e9331a2cbe5e2",
+      "images/000000016314.jpg": "32d40087917299df81b633c3b95df9fba3a531f151e77c5b0f5701ae4f70c07b",
+      "images/000000000575.jpg": "33a2e0ea311a75a9fecbcb1f4234e14dfc328baa50dfea2b2c18644072c14b80",
+      "images/000000015070.jpg": "3a3c404fea4874d424ca8bbc36930afd3acd6d10a5252e03156190a00d8c12ce",
+      "images/000000027463.jpg": "4b53c7cf9b480121a548740e2fe1ef864bff24fa421f0ccade1fe22b51de0bb6",
+      "images/000000032727.jpg": "2779be77fc322b836ec79b36dee9dc8da864d8da0a83af26fa45011e4bb9bd8a",
+      "images/000000000042.jpg": "9da8dbb3f415b0549a2c7ef8930e245af324191cc4c4465a7d75f05d96b0781d",
+      "images/000000000581.jpg": "a39df66a0b2bb65d52c0b9ced0d754f45d11547d3a774d5d54b319eac983a132",
+      "images/000000028359.jpg": "e5a8d9619b5848f724972200d14d391ceef3b9ffbf63e7f3f1137ca4583aa7ec",
+      "images/000000029911.jpg": "0d2524acf52d6936e7c35732c76a05e7f3eef7c75aba562fc6ab27d46edb5d46",
+      "images/000000023024.jpg": "12bd9aa0bdfb7d51a29d2442bebbb53594bbea6815e35f393df7f3cf0f77a71c",
+      "images/000000049495.jpg": "3031d9d159c6f675625917bf6e1e56c312c39bb44947afad6404b991c4e172f8",
+      "images/000000111388.jpg": "6c980e1c83b9ff37843eaddcfa2f1802126b97e8aa641f4fd87421b79f3a6278",
+      "images/000000146533.jpg": "7035ec6237e2287b7c56f455ef5c9c2ed6c7eab2eca377c7cc5942a93a17be91",
+      "images/000000003982.jpg": "8ee5567d4e1e47443d1a546929c294d2e183e868c51a8b9664e15a828f636317",
+      "images/000000004032.jpg": "a6a6fcf0eb624ab2004e0aca98bffb0f39b2f826e12426d8c4291e24543a8316",
+      "images/000000019085.jpg": "3bf25778aa0d632926bab2f600974aab0e26bba851887857575b898c135ee989",
+      "images/000000021374.jpg": "2c3fb02852cae4f973e5b0320fe51b5ee88c849d2708f437c3e027c7bb3e8b39",
+      "images/000000003040.jpg": "5ed56e40761140c2636abcbf0cb2f48b1f2eb6c1e6eef2ea7e2a7bbafe3cac88",
+      "images/000000003386.jpg": "ca6ce8ebbbf0ab47f39a3c3a1f1fb1d7823ec119662624bfb4370a9dede44997",
+      "images/000000005694.jpg": "ce9e051e19be1d84ce3f2f44fd8d8a898c10938aa7619e93fac86945daef754a",
+      "images/000000009474.jpg": "9216e45b906e088bea15d78f83b1cbd46ca61f16ce4c45827feae336c24d771d",
+      "images/000000005903.jpg": "ecd1f44704f5180b464102a54654fcb7c30ef3cb0cf6413d15561e7642793a3a",
+      "images/000000011519.jpg": "acc86b8a7699e0343143764bda9a79b5e09914865ec933d6d4aa6686b12d75f5",
+      "images/000000012166.jpg": "a7f48c4ba0917cbfc9c8f16134da5f872a6e34f8f9d548edd466cef2a9fb665a",
+      "images/000000024458.jpg": "df318668cf7660987db8a85da8d4e31bb9d87519b9ee775e69862c39a9431afe",
+      "images/000000013715.jpg": "7dced5fd13f169f9191911033aa2d6d98cfc1660aae0cbc128100a1717841059",
+      "images/000000040625.jpg": "d8b7adf2d27f0bdca9681237882a90d8849457167604691f1423b47a5dc52e10",
+      "images/000000162763.jpg": "dd92c11c45b05ed00c77a750bd1ab99d667eb1c425178efdfa945712222f5279",
+      "images/000000189772.jpg": "c554fec4fe2d9236c60d830ad1582a6205f4ae1842322724aad42ae8b9102042",
+      "records.jsonl": "f23de926af9f803f1c5568eae1bb150b2e55b919fce82a66167e961e764acb00"
+    }
+  },
+  "checkpoint": {
+    "id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+    "file_sha256": {
+      "model.safetensors": "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e",
+      "added_tokens.json": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a",
+      "tokenizer_config.json": "36c6fd44d07d10fd8180ee6b46dcccf69fb7c06753968ff0d7e17b8bfe17b777",
+      "special_tokens_map.json": "aa0ff906077086dfa9734a7f97f68c825877a48f9468807be65504495cdeef09",
+      "chat_template.json": "a68ad1a42681ae44eacd109ff8dd56a840f761c03d72f4ff4c515d092f882168",
+      "config.json": "b70fb4bfde88df9eeebc9d8ff523733b8bf70d6c9b06c610325960e06ae9db52",
+      "tokenizer.json": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+      "processor_config.json": "e7bff42da73ae9eec9042ef20e066e11f1ee20f025358ff79131e3c0fb549b46",
+      "generation_config.json": "067a2a54e5f87162ecac6e0e911cc4665fc8f7f3324794ecbac0f76badb56636",
+      "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+      "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+      "preprocessor_config.json": "6cb6e36d6fcb88ca1502c4a26750715dc3e7dedddc9a8f17b27d8d167d1457e7"
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "diagnostic_only": true,
+    "promotion_eligible": false,
+    "formal_comparison": false,
+    "evaluation_tier": "l1_mechanism",
+    "protocol": {
+      "id": "coco-train2017-main-object-multiclass-v1",
+      "training_class_counts": {
+        "person": 2,
+        "cat": 2,
+        "dog": 2,
+        "car": 2,
+        "bus": 2,
+        "bird": 2,
+        "horse": 2,
+        "bicycle": 2
+      },
+      "gold_in_policy_prompt": false,
+      "bbox_in_full_image_student_prompt": false,
+      "positive_negative_teacher_same_question": true,
+      "verifier": "exact category after case/punctuation/whitespace and leading a/an normalization",
+      "steps": 16,
+      "rollouts_per_sample": 8,
+      "max_new_tokens": 16,
+      "batch_size": 1,
+      "arms": {
+        "main": {
+          "contrastive_weight": 0.1
+        },
+        "without-cdl": {
+          "contrastive_weight": 0
+        }
+      },
+      "train_images": 16,
+      "validation_images": 8,
+      "test_images": 8,
+      "test_isolated_from_selection": true,
+      "no_parameter_reselection": true,
+      "not_matched_compute": true
+    },
+    "per_seed": [
+      {
+        "arm": "main",
+        "seed": 42,
+        "contrastive_weight": 0.1,
+        "baseline_validation_accuracy": 0.375,
+        "validation_accuracy": 0.25,
+        "test_accuracy": 0,
+        "optimizer_updates": 8,
+        "parameter_delta_l2": 0.0033346214331686497,
+        "training_rollout_tokens": 520,
+        "sampled_training_rollouts": 128,
+        "correct_training_rollouts": 49,
+        "retained_samples": 8,
+        "gated_tokens": 64,
+        "valid_tokens_in_updated_trajectories": 210,
+        "crop_failures": 0,
+        "unweighted_cdl_nonzero_steps": 3,
+        "maximum_crop_iou": 0.09930675530867977,
+        "elapsed_seconds": 147.98693973571062,
+        "started_at": "2026-10-13T16:52:17.103612+00:00",
+        "finished_at": "2026-10-13T16:54:45.090549+00:00"
+      },
+      {
+        "arm": "main",
+        "seed": 43,
+        "contrastive_weight": 0.1,
+        "baseline_validation_accuracy": 0.375,
+        "validation_accuracy": 0.375,
+        "test_accuracy": 0.125,
+        "optimizer_updates": 9,
+        "parameter_delta_l2": 0.00348153174854815,
+        "training_rollout_tokens": 512,
+        "sampled_training_rollouts": 128,
+        "correct_training_rollouts": 47,
+        "retained_samples": 9,
+        "gated_tokens": 92,
+        "valid_tokens_in_updated_trajectories": 271,
+        "crop_failures": 0,
+        "unweighted_cdl_nonzero_steps": 4,
+        "maximum_crop_iou": 0.0951229420982376,
+        "elapsed_seconds": 156.34290413744748,
+        "started_at": "2026-10-13T17:08:28.654381+00:00",
+        "finished_at": "2026-10-13T17:11:04.997279+00:00"
+      },
+      {
+        "arm": "main",
+        "seed": 44,
+        "contrastive_weight": 0.1,
+        "baseline_validation_accuracy": 0.25,
+        "validation_accuracy": 0.25,
+        "test_accuracy": 0,
+        "optimizer_updates": 10,
+        "parameter_delta_l2": 0.0037870395462960005,
+        "training_rollout_tokens": 538,
+        "sampled_training_rollouts": 128,
+        "correct_training_rollouts": 47,
+        "retained_samples": 10,
+        "gated_tokens": 105,
+        "valid_tokens_in_updated_trajectories": 321,
+        "crop_failures": 0,
+        "unweighted_cdl_nonzero_steps": 4,
+        "maximum_crop_iou": 0.09007689491028927,
+        "elapsed_seconds": 168.56573438458145,
+        "started_at": "2026-10-13T17:11:05.012736+00:00",
+        "finished_at": "2026-10-13T17:13:53.578466+00:00"
+      },
+      {
+        "arm": "without-cdl",
+        "seed": 42,
+        "contrastive_weight": 0,
+        "baseline_validation_accuracy": 0.375,
+        "validation_accuracy": 0.25,
+        "test_accuracy": 0,
+        "optimizer_updates": 8,
+        "parameter_delta_l2": 0.0031921914778649807,
+        "training_rollout_tokens": 520,
+        "sampled_training_rollouts": 128,
+        "correct_training_rollouts": 50,
+        "retained_samples": 8,
+        "gated_tokens": 64,
+        "valid_tokens_in_updated_trajectories": 227,
+        "crop_failures": 0,
+        "unweighted_cdl_nonzero_steps": 3,
+        "maximum_crop_iou": 0.09930675530867977,
+        "elapsed_seconds": 146.3383744750172,
+        "started_at": "2026-10-13T17:13:53.593597+00:00",
+        "finished_at": "2026-10-13T17:16:19.931965+00:00"
+      },
+      {
+        "arm": "without-cdl",
+        "seed": 43,
+        "contrastive_weight": 0,
+        "baseline_validation_accuracy": 0.375,
+        "validation_accuracy": 0.5,
+        "test_accuracy": 0.25,
+        "optimizer_updates": 9,
+        "parameter_delta_l2": 0.003483548993244767,
+        "training_rollout_tokens": 491,
+        "sampled_training_rollouts": 128,
+        "correct_training_rollouts": 48,
+        "retained_samples": 9,
+        "gated_tokens": 83,
+        "valid_tokens_in_updated_trajectories": 253,
+        "crop_failures": 0,
+        "unweighted_cdl_nonzero_steps": 4,
+        "maximum_crop_iou": 0.0951229420982376,
+        "elapsed_seconds": 152.61570041812956,
+        "started_at": "2026-10-13T17:16:19.946891+00:00",
+        "finished_at": "2026-10-13T17:18:52.562588+00:00"
+      },
+      {
+        "arm": "without-cdl",
+        "seed": 44,
+        "contrastive_weight": 0,
+        "baseline_validation_accuracy": 0.25,
+        "validation_accuracy": 0.25,
+        "test_accuracy": 0.125,
+        "optimizer_updates": 10,
+        "parameter_delta_l2": 0.0037220590747892857,
+        "training_rollout_tokens": 513,
+        "sampled_training_rollouts": 128,
+        "correct_training_rollouts": 49,
+        "retained_samples": 10,
+        "gated_tokens": 112,
+        "valid_tokens_in_updated_trajectories": 315,
+        "crop_failures": 0,
+        "unweighted_cdl_nonzero_steps": 5,
+        "maximum_crop_iou": 0.09007689491028927,
+        "elapsed_seconds": 165.12813321501017,
+        "started_at": "2026-10-13T17:18:52.577502+00:00",
+        "finished_at": "2026-10-13T17:21:37.705630+00:00"
+      }
+    ],
+    "paired_differences": [
+      {
+        "seed": 42,
+        "test_accuracy_main_minus_without_cdl": 0,
+        "validation_accuracy_main_minus_without_cdl": 0,
+        "optimizer_updates_main_minus_without_cdl": 0,
+        "training_rollout_tokens_main_minus_without_cdl": 0
+      },
+      {
+        "seed": 43,
+        "test_accuracy_main_minus_without_cdl": -0.125,
+        "validation_accuracy_main_minus_without_cdl": -0.125,
+        "optimizer_updates_main_minus_without_cdl": 0,
+        "training_rollout_tokens_main_minus_without_cdl": 21
+      },
+      {
+        "seed": 44,
+        "test_accuracy_main_minus_without_cdl": -0.125,
+        "validation_accuracy_main_minus_without_cdl": 0,
+        "optimizer_updates_main_minus_without_cdl": 0,
+        "training_rollout_tokens_main_minus_without_cdl": 25
+      }
+    ],
+    "aggregate": {
+      "main": {
+        "baseline_validation_accuracy": {
+          "mean": 0.3333333333333333,
+          "sample_std": 0.07216878364870322
+        },
+        "validation_accuracy": {
+          "mean": 0.2916666666666667,
+          "sample_std": 0.07216878364870322
+        },
+        "test_accuracy": {
+          "mean": 0.041666666666666664,
+          "sample_std": 0.07216878364870322
+        },
+        "optimizer_updates": {
+          "mean": 9,
+          "sample_std": 1
+        },
+        "parameter_delta_l2": {
+          "mean": 0.0035343975760042667,
+          "sample_std": 0.00023079565432627413
+        },
+        "training_rollout_tokens": {
+          "mean": 523.3333333333334,
+          "sample_std": 13.316656236958785
+        },
+        "correct_training_rollouts": {
+          "mean": 47.666666666666664,
+          "sample_std": 1.1547005383792515
+        },
+        "gated_tokens": {
+          "mean": 87,
+          "sample_std": 20.952326839756964
+        },
+        "elapsed_seconds": {
+          "mean": 157.63185941924652,
+          "sample_std": 10.349770605620051
+        }
+      },
+      "without-cdl": {
+        "baseline_validation_accuracy": {
+          "mean": 0.3333333333333333,
+          "sample_std": 0.07216878364870322
+        },
+        "validation_accuracy": {
+          "mean": 0.3333333333333333,
+          "sample_std": 0.14433756729740643
+        },
+        "test_accuracy": {
+          "mean": 0.125,
+          "sample_std": 0.125
+        },
+        "optimizer_updates": {
+          "mean": 9,
+          "sample_std": 1
+        },
+        "parameter_delta_l2": {
+          "mean": 0.0034659331819663444,
+          "sample_std": 0.00026537267224194765
+        },
+        "training_rollout_tokens": {
+          "mean": 508,
+          "sample_std": 15.132745950421556
+        },
+        "correct_training_rollouts": {
+          "mean": 49,
+          "sample_std": 1
+        },
+        "gated_tokens": {
+          "mean": 86.33333333333333,
+          "sample_std": 24.172987679087857
+        },
+        "elapsed_seconds": {
+          "mean": 154.69406936938563,
+          "sample_std": 9.565744691342362
+        }
+      },
+      "paired_differences": {
+        "test_accuracy_main_minus_without_cdl": {
+          "mean": -0.08333333333333333,
+          "sample_std": 0.07216878364870322
+        },
+        "validation_accuracy_main_minus_without_cdl": {
+          "mean": -0.041666666666666664,
+          "sample_std": 0.07216878364870322
+        },
+        "optimizer_updates_main_minus_without_cdl": {
+          "mean": 0,
+          "sample_std": 0
+        },
+        "training_rollout_tokens_main_minus_without_cdl": {
+          "mean": 15.333333333333334,
+          "sample_std": 13.428824718989125
+        }
+      }
+    },
+    "all_six_runs_nonzero_parameter_update": true,
+    "negative_result_preserved": true
+  },
+  "provenance": {
+    "commit": "4496283ac8e37c070b8f71b20af6138526cbba15",
+    "artifact_path": "docs/gpu-validations/cv-opd-a100-20261013.json",
+    "source_archive_sha256": "f613a1a1355350d3008c36ca41186a799c09d66be82828f52e2734ac47a21cd5",
+    "actual_source_files_sha256": {
+      "scripts/run_cv_opd.py": "4eb8fd20e832dc3db802f7636fe0b0426b3247f17fcdeee5baf42c3bb8fe7334",
+      "src/auto_research/multimodal/cv_opd.py": "6e9cede0fa1db1179d13de9f7cd1f59be2852337e90fb1e4c4d803defdac8a3a",
+      "src/auto_research/post_training/local_lora.py": "cb4c19189c4e8b7e52f5c258fcb844aad632fa454051452ddba68a744f721d98",
+      "src/auto_research/foundation_models/oct13_runtime.py": "8e824a564684593100b876d0dd1a4c9de39fc1efd5e34bea3aa0ef1372df7ec8",
+      "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093"
+    },
+    "raw_files_sha256": {
+      "cv-opd-main-seed42.json": "365fca6ec2b6c54aa6f021a9dafb03225014ae8cf2a86520ebf20b310a25845d",
+      "cv-opd-main-seed42.status.json": "a9dd350b9304f02a1b3852c17fd3eab7a9d859452b45eebb0fd33d66dd625fa6",
+      "cv-opd-main-seed42.stderr.log": "d2ce9e99a7a7f29d242d99a2d9a944cbafc1b813f60c10dca0f6d6f01d46ada8",
+      "cv-opd-main-seed42.stdout.log": "da6ef983e296d1d0db0f20baee3fc4e8182cb126cb6607756187efd3bae076d9",
+      "cv-opd-main-seed43.json": "98ca756bd9de6ff45ffa8720aa85239a8733d4b3472abd148e5eb091158e049d",
+      "cv-opd-main-seed43.status.json": "f3bf091b5e3a236ed3087c1c3c49ea433fd341f5d8124a5192b7c76d722ba8a4",
+      "cv-opd-main-seed43.stderr.log": "30c8520e1d846aca3ec634385dd864e6ecd0358b926a4328217af0e0ebe7ac29",
+      "cv-opd-main-seed43.stdout.log": "31fe6ba82effead7989562ebc36767195bf93d05b49d04d9b77824e1b8d733db",
+      "cv-opd-main-seed44.json": "06933a9fb622d2ee4b135c8b579d0fb1d1080559589b4a2b4432193bf9f380a7",
+      "cv-opd-main-seed44.status.json": "00528e830c1d1095c2479e750b88abecaf470c29afa41b953c01dfe8756ebefc",
+      "cv-opd-main-seed44.stderr.log": "38a66d1204bfc8179c91acca8ba0e1354ba23641aed93ed5b20f1447bf09dc11",
+      "cv-opd-main-seed44.stdout.log": "8a200d02f49fbce7c33167fa5c4f8fcdc599df48e849e915f287eeee59c91553",
+      "cv-opd-without-cdl-seed42.json": "680c3d33d1ad4e82865e2f513952a1af1c669ca5ee1fe8558a8d799fe6dd83f4",
+      "cv-opd-without-cdl-seed42.status.json": "2b94ce6cc5e0393304d4fc589cdb66cf4489b31762be58e485aef68af08b0290",
+      "cv-opd-without-cdl-seed42.stderr.log": "050b284e422704feffa49adf1454b370abda50adc84775c251e4f910ea299ef5",
+      "cv-opd-without-cdl-seed42.stdout.log": "b91fb2faffacffe539ea0e3e0824d582599823224dac4bd515b72715c565c31e",
+      "cv-opd-without-cdl-seed43.json": "4ced0741fb10cfa00d1f3a0c417bd45db4e58cc1b6b1ed48ca729e57d06d2183",
+      "cv-opd-without-cdl-seed43.status.json": "6506cdc6f3ce03e0dc1ffdd66491af26c422e3e9ccb66f40922f2a156c87c1a9",
+      "cv-opd-without-cdl-seed43.stderr.log": "40b534edaad6908c82db9baaead14313de3bea7624855e353bb4b2f234248540",
+      "cv-opd-without-cdl-seed43.stdout.log": "02d32d81e365af50dc1ec117ab1b3f1dde7d8106475acefe558f58c353184448",
+      "cv-opd-without-cdl-seed44.json": "dd2f652e7e08998b7fcdd8161915d8472572559d244f353bd3099780ee6b240a",
+      "cv-opd-without-cdl-seed44.status.json": "f082647b22b6d3dddb7a45c43db90a7b196ac632cd464d4fb4d9a0eee817fca9",
+      "cv-opd-without-cdl-seed44.stderr.log": "4c6109af9b27a88f0b012c2a7cf54adde6085cbe3de7dd2ee7334d27bed63525",
+      "cv-opd-without-cdl-seed44.stdout.log": "9018d41c7121c10713f14303749a92f177dc4ab64c811315f4c7456e98be7c39"
+    }
+  },
+  "scope": "Successful six-arm GPU execution and real parameter updates only. No CDL advantage, original benchmark reproduction, formal capability or native-serving efficiency claim."
+}

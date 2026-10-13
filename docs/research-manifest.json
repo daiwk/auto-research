@@ -373,14 +373,14 @@
           "cuda"
         ],
         "requires_gpu_validation": true,
-        "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a100.json",
+        "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a30.json",
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []
       },
       "priority": "P1",
       "requires_gpu_validation": true,
-      "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a100.json"
+      "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a30.json"
     },
     {
       "domain": "agent-research",
@@ -1897,14 +1897,14 @@
           "cuda"
         ],
         "requires_gpu_validation": true,
-        "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a100.json",
+        "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a30.json",
         "online_evidence": [],
         "selection_exception": null,
         "evolve_operators": []
       },
       "priority": "P1",
       "requires_gpu_validation": true,
-      "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a100.json"
+      "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a30.json"
     },
     {
       "domain": "agent-research",
@@ -7542,7 +7542,7 @@
         "fidelity": "core_mechanism",
         "evaluation_tier": "l1_mechanism",
         "datasets": [
-          "seeded random recurrent inputs, protocol v1"
+          "seeded random recurrent inputs, protocol v2-gdn-rollback"
         ],
         "baseline": "conventional FP32 recurrence and author s32_rs Triton emulation",
         "metrics": [
@@ -12170,7 +12170,7 @@
         "datasets": [
           "GSM8K verified train-only holdout"
         ],
-        "baseline": "冻结初始学生；另需同预算full-history OPD及无扩采对照，当前不宣称能力提升",
+        "baseline": "冻结初始学生、同配置预算的独立root full-history OPD及无扩采对照；不宣称能力提升",
         "metrics": [
           "method_metrics.accuracy",
           "parameters_changed"
@@ -12186,7 +12186,7 @@
           "cuda"
         ],
         "requires_gpu_validation": true,
-        "gpu_validation_artifact": "docs/gpu-validations/state-opd-a100-20261013.json",
+        "gpu_validation_artifact": "docs/gpu-validations/state-opd-a100-20261014.json",
         "online_evidence": [],
         "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
         "evolve_operators": []

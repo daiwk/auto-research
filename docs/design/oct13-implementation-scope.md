@@ -52,22 +52,25 @@ GPPO 和 TAPO 与已有的其他论文缩写重名，本轮使用 `gppo-framewor
 | --- | --- | --- |
 | 扫描器 | 公告独立召回、缩写查询、版本复核队列、Google/Meta 官方来源优先级、限时重试；相关回归测试已运行 | 真实增量扫描与完整版本基线登记；不自动推进水位 |
 | UxSID | 四结构、943 用户、MovieLens-100K 实际 A100 三 seed 训练、同 SID 缓存一致性、adapter/spec/中文详情与绑定源码的实测指标 | 全局生成同步与 CI；本次没有稳定提升，不是工业线上复现 |
-| State-OPD | 原快照 A100 三 seed 交互训练，所有步骤非零梯度；8 题 accuracy 前后均为 0，负结果保留 | 新快照默认路径、完整历史 OPD / 无扩采对照及其源码绑定；原三个 benchmark 未运行 |
+| State-OPD | `6aabe57a` A100 默认/完整历史 OPD/无扩采三臂各三 seed，九项实际更新及源码/原始 SHA 核验完成；8 题 accuracy 前后均为 0 | 全局 CI；原三个 benchmark 未运行，不宣称能力提升 |
 | GPPO / TAPO | 原快照 A100 三 seed 真实更新，独立 GRPO-control 三 seed 完成；原文与本地指标分开 | 统一指标/目录/CI 核验；8 题短预算仅支持机制诊断，不宣称稳定能力收益 |
 | DoubleCat-SemiCat | 修正后的无额外前向核心在 A30 新快照三 seed 实跑，参数变化、实际调用数与负结果已核验 | 全局 CI；原完整 benchmark 未运行，不复用旧标准 SC 结果 |
-| CV-OPD / OAL / ReplaySSM | 核心算法、真实 checkpoint/训练入口、行为测试、完整中文详情；公开资源固定版本与实际字节校验 | 新快照 A100/A30 三 seed，暂因网络问题延后 |
-| NEAR / Beyond / SkillDreamer | 冻结真实编码器、可执行检索/技能调用、可选 query adapter、隔离标签访问与显式切分协议 | GPU 实跑及指标；共享记忆库协议单独标为诊断，不包装为未知记忆库泛化 |
+| CV-OPD / OAL / ReplaySSM | A100 三 seed 与对照/回放实跑及脱敏回执核验完成；CV-OPD 六臂负差值、OAL seed 44 不优、ReplaySSM 编译兼容边界均保留 | 全局 CI；非原论文完整能力或 serving 效率比较 |
+| NEAR / Beyond | A30 八项实跑；共享 bank 各三 seed及严格 bank-disjoint 各一项，固定编码器/切分与原始 SHA 核验完成 | 全局 CI；同数据三 seed 非独立重复，严格切分仅两条 test，非官方 benchmark |
+| SkillDreamer | 旧快照 seed 43 模型 JSON 缺字段的失败保留；修复后已冻结 `0f5dca9f`，A30 新三 seed 已启动 | 完整新批执行及指标核验；不混入旧 seed 42，不包装为正式技能泛化 |
 | LeWAM / SmolWAM | 原作者发布策略和有界真实联合训练/teacher KD 入口、两套隔离依赖与资源核验脚本 | 大资源完成传输并校验、依赖修复、真实训练及新 checkpoint 的机器人闭环；未运行原完整训练预算 |
-| MagicBeanStalk / SynthSelf / UPTURN / SOAR / 难度课程 / Progressive contraction | 六篇定义机制、真实 checkpoint 入口、行为测试、adapter/spec/中文详情均落盘 | 真实 GPU 验证；SOAR 独立公开知识库；无有效训练/救援信号时必须保留失败 |
+| MagicBeanStalk / SynthSelf / UPTURN / SOAR / 难度课程 / Progressive contraction | 固定资源 A100 首种子队列运行中；SOAR 独立公开工具元数据知识库已校验。MBS 无合格硬根题、SynthSelf Eq.6 失败、UPTURN 无有效救援信号均保留 | 继续有界诊断与完整 GPU 验证；不改算法门槛或用参数变化替代有效训练 |
 
-源码快照 `ccad3e67` 已保存。本表是实施检查点：四篇原快照与 DoubleCat 新核心的三 seed 实跑已核验，不代表 19 篇通过最终验收。registry 登记、公式测试和源码提交均不能替代 GPU 门禁。用户已要求暂停不稳定网络上的 GPU 工作；完整剩余链路记在 [GPU TODO](../research-audits/oct13-gpu-todo.md)，不再重试 A100/A30。
+原源码快照 `ccad3e67` 与后续不可变快照均已保存。2026-10-14 用户已恢复 GPU 工作；当前技能、机器人候选和 MBS 预算修复绑定 `0f5dca9f`。本表仍是实施检查点，不代表 19 篇通过最终验收。registry 登记、公式测试和源码提交均不能替代 GPU 门禁；剩余九项见 [GPU TODO](../research-audits/oct13-gpu-todo.md)。
 
-本地目录/原图合同、71 项定向检查、基础 wheel 安装及文档严格构建已通过；全量首次 pytest 的 5 个失败点已修复并定向复跑，但最终快照的完整 pytest 与远端 CI 尚未宣称通过。详见[本地收口检查点](../research-audits/oct13-local-closeout.md)。
+本地目录/原图合同、基础 wheel 安装及文档严格构建已通过；`34148c2e` 全量 2034 项通过，新源码/产物相关 110 项通过。最终快照的完整 pytest 正在复跑，远端 CI 尚未触发。详见[本地收口检查点](../research-audits/oct13-local-closeout.md)。
 
 UxSID 的一次 CPU 诊断使用固定公开 SmolLM2-135M 属性编码器、100 用户、10,719 条训练、100 条 validation 和 100 条 test、1 epoch/seed 42。Validation 选择的是 `agnostic` 消融；UxSID 的 test AUC 为 0.5848，对照为 0.5916。这是小规模负结果，保留在本地运行产物，不代表原论文或稳定能力比较。其缓存与直接计算最大差异为 0。
 
 新增标签访问的角色复核：`proximal_checkpoint` 与 `state_opd/checkpoint` 的参考答案只进入独立 verifier；`ArithmeticEnvironment` 的 `arguments.answer` 是模型自己的提交，不是参考答案。生成器/教师消息均不接收数据参考答案，行为测试覆盖此边界。环境步数计数仅反映实际 `step` 调用，不独立作为任务能力证据。
 
 A100 原有四篇实跑已产生绑定 `7e125fd0` 的脱敏 GPU receipt；新快照验证启动时 SSH 在认证代理阶段关闭连接，不能宣称任务已启动。大资源传输中断保留断点；旧结果不覆盖新路径。用户已批准三个分领域实现代理，以及本轮相关源码/脚本和固定版本公开资源的同步，新增资源总量不超过 20 GB；不传私有数据、密钥或整个工作区。
+
+以上连接失败是 10 月 13 日的历史记录；10 月 14 日后续实际执行情况以本页当前表格和各篇绑定源码的回执为准。新增 MBS 配对根题只从 train 读取标签，参考答案仍只在构造 verifier / RL 训练奖励边界使用，不进入被评估策略消息。
 
 本轮另接受收尾清理要求：先检查本地占用，删除可重建的站点、构建和打包残留，保留源码、未提交改动、实验结果（含失败）、验证凭据和有复用价值的公开数据/权重缓存；清理不等于删除历史研究证据。

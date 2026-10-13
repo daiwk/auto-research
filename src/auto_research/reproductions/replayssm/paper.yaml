@@ -17,7 +17,7 @@
   "fidelity": "core_mechanism",
   "evaluation_tier": "l1_mechanism",
   "datasets": [
-    "seeded random recurrent inputs, protocol v1"
+    "seeded random recurrent inputs, protocol v2-gdn-rollback"
   ],
   "baseline": "conventional FP32 recurrence and author s32_rs Triton emulation",
   "metrics": [

@@ -128,6 +128,10 @@ Checkpoint 为 [LeWAM/lewam-toolhang](https://huggingface.co/LeWAM/lewam-toolhan
 
 ### 接受范围中的联合训练入口
 
+训练 manifest 还绑定本地 `external.py`、`algorithm.py`、`training.py`、`worker.py` 的实际 SHA256，闭环前逐一重核；仅作者 PINS 不足以证明本地训练实现。参数更新计数必须为正整数，参数差异必须为正有限数，NaN/Inf 或实现哈希变化均 fail closed。
+
+实际 train/validation 各 batch 的 action、latent、SIGReg、总 loss 和逐步梯度也保存到 manifest；记录与闭环加载两端均检查必需字段、有限性、非空 validation，以及 trace 与汇总计数一致。任何缺 loss、NaN/Inf 或计数不一致均拒绝作为可控制的新候选。
+
 联合训练没有从本轮 scope 删除。新增 `--phase train` 调用固定作者 `scripts/train_lewam.py:main.__wrapped__`，用已验证的真实 ToolHang HDF5、真实视觉 encoder/MoT 与原生 loss，禁止以 tensor fixture 替代数据。`data.source=h5`、`load_in_ram=false`，原生 `train.steps_per_epoch` 同时限制训练和 validation；默认 1 epoch × 4 batch × 8 examples/seed，仍保留 action flow、latent MSE、SIGReg 三项实际更新。
 
 ```bash
@@ -136,3 +140,5 @@ PYTHONPATH=src python scripts/run_oct13_robotics.py --paper lewam --phase train 
 ```
 
 配置用 `source_root/python/output_dir/data_dir/device=cuda`，可显式设 `train_epochs`、`train_steps_per_epoch`、`train_batch_size`。`training.py` 记录每个真实 batch 的三项 loss、优化步梯度、trainable 参数抽样差异与 validation-selected checkpoint。validation 仍按作者 decision-point 随机 split，不伪称独立轨迹 test。该入口尚需 A100 实跑；完整 50 epoch 与新训练 candidate 的闭环评测仍未完成，发布 checkpoint 的控制结果不能填补这些阶段。
+
+新训练产物在 `native-training/training-provenance.json` 中绑定 seed、固定作者源码、公开数据、实际参数更新证据，以及 `lewam_best.pt`/`lewam_config.json` 的 SHA256。闭环配置可用 `trained_model_dir` 指向该目录；运行前拒绝 seed、选择协议或哈希不符的候选，再由同一新模型执行 reactive / best-of-K / gradient 三臂。三臂按同 seed 重新采样相同起点与目标；发布权重不会替代新候选。该连接是可执行入口，尚不等于真实训练或闭环已完成。

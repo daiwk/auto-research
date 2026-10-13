@@ -30,7 +30,8 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 | discovery / implementation reconcile | 检查返回 0；不因此推进审查水位 |
 | 基础 wheel 的独立安装检查 | 使用现有缓存离线构建及安装，metadata/help/init 合同通过，未导入可选 ML runtime |
 | MkDocs strict | 通过；新增 12 个仓库代码链接已换成 GitHub 源码链接，不指向不存在的站点路径 |
-| GPU evidence gate | 10 月 13 日缺 14 篇；10 月 14 日补齐 OAL、NEAR、Beyond 后仍缺 11 篇，明确未通过；State-OPD 新默认路径与新增对照也未验收 |
+| GPU evidence gate | 10 月 14 日补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM 后仍缺 9 篇，明确未通过；State-OPD 新三臂九次运行已另行核验，不再以旧快照代替 |
+| 新快照相关回归 | `0f5dca9f` 的技能 JSON schema、机器人训练候选及隔离加载、MBS 配对根题预算，连同四项产物摘录工具共 110 项通过；Ruff / diff 检查通过 |
 
 本次完整通过结果绑定源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`；随后若有源码修复须补相应检查。
 真实 GPU 缺项仍按 TODO 验收，最终 PR 的 CI 尚未触发；本地测试通过不等于最终 PR 可合并。
@@ -49,6 +50,6 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 ## 下一次恢复顺序
 
 1. 用户明确恢复 GPU 工作后，重新核验源码与公开资源实际 SHA，未知传输状态不当作成功。
-2. 按 GPU TODO 完成当前 11 个缺失回执及 State-OPD 新对照；统一 adapter 入口还须核对真实 runner 参数与预算。
+2. 按 GPU TODO 完成当前 9 个缺失回执；统一 adapter 入口还须核对真实 runner 参数与预算。
 3. 只对实际执行成功或明确保留失败边界的结果生成源码绑定回执，不用旧 receipt 替代新算法。
 4. 重新生成并检查全部目录/指标，执行完整 pytest、GPU 门禁与 CI；完成后提交原定的单个 PR，不自动合并或部署。

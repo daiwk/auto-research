@@ -11,7 +11,7 @@
 | Adapter | `state-opd` |
 | 本地复现代码 | [`src/auto_research/reproductions/state_opd/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/state_opd/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
-| GPU门禁 | 必须真实A100/A30执行并提交绑定源码的脱敏回执；未取得者仍未验收 |
+| GPU门禁 | 已完成绑定6aabe57a的A100三臂三seed有效更新与脱敏回执；验证准确率全部为0，不表示能力提升 |
 
 ## 原始论文总结
 
@@ -65,22 +65,22 @@ $b=\max(-\rho A,-\operatorname{clip}(\rho,0.8,1.2)A)$；$A<0$ 时使用 $\min(b,
 
 ## 本地复现
 
-> **本地对照口径**：基线为冻结初始学生；另需同预算full-history OPD及无扩采对照，当前不宣称能力提升；实验组仅支持本页L0/L1机制，稳定相对提升不适用。
+> **本地对照口径**：基线为冻结初始学生、同配置预算的独立root full-history OPD及无扩采对照，均已实际执行；实际监督token与耗时不同，不宣称实际总计算匹配或能力提升；实验组仅支持本页L0/L1机制，稳定相对提升不适用。
 
 ### 数据与标签访问协议
 
 公开checkpoint/data必须固定revision并通过既有 `checkpoint_source` / `validate_holdout` 的文件hash验证。GSM8K仅从官方train拆train/validation，官方test不打开。Qwen2.5-0.5B-Instruct revision为 `7ae557604adf67be50417f59c2c2f167def9a775`，需要teacher/reasoner时用Qwen2.5-7B-Instruct revision `bb46c15ee4bb56c5b63245ef50fd7637234d6f75`。参考答案仅在外部训练verifier、SFT监督target或明确的train-only数据构建teacher边界读取；被评估student/agent prompt不接收当前题gold/plan。
 
-已核验A100 seed42/43/44三份原快照结果：每seed两步均真实LoRA更新，但8题validation训练前/后accuracy均为0，明确保留负结果。不能把submission rate或环境step变化解释成能力提升。实跑绑定旧快照7e125fd0；新增full-history-opd/state-no-expansion还需绑定新源码单独实跑。
+旧快照7e125fd0的三seed结果继续保留。2026-10-14另在固定源码6aabe57a运行state/full-history-opd/state-no-expansion三臂×seed42/43/44：9项都完成两步真实LoRA更新，8题validation训练前/后accuracy均为0。所有选择不读取官方test；不能把submission rate或环境step变化解释成能力提升。
 
 ### 可执行入口与预算
 
-入口为 `scripts/run_oct13_post_training.py --method state-opd`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student/teacher镜像路径、public id/revision、train/validation路径、split manifest与dataset revision。下面是待实跑配置示例，不表示GPU已完成：
+入口为 `scripts/run_oct13_post_training.py --method state-opd`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student/teacher镜像路径、public id/revision、train/validation路径、split manifest与dataset revision。以下是已实跑配置的可复用命令；另外两臂分别将variant改为full-history-opd/state-no-expansion，seed使用42/43/44，validation-examples均为8：
 
 ```bash
 PYTHONPATH=src python scripts/run_oct13_post_training.py \
   --method state-opd --config data/oct13_execution.json \
-  --device cuda --seed 42 --variant state --steps 2 --max-turns 3 --max-tokens 256 --multiplicity 2 --concentration 2 \
+  --device cuda --seed 42 --variant state --steps 2 --max-turns 3 --max-tokens 256 --multiplicity 2 --concentration 2 --validation-examples 8 \
   --output runs/oct13/state-opd-42
 ```
 
@@ -89,6 +89,17 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 ### 当前结果与验收状态
 
 [A100 三 seed 实测指标](metrics/public-a100-seeds42-44.json)及对应 GPU 回执保留了旧快照 `7e125fd0` 的真实更新和负结果；不覆盖新增 full-history / 无扩采控制。
+
+新增[三臂三seed指标](metrics/public-a100-three-arms-seeds42-44.json)与[2026-10-14 A100回执](../../gpu-validations/state-opd-a100-20261014.json)绑定实际执行的完整6aabe57a源码哈希和配置哈希，三臂初始validation逐seed完全相同。每项均两次非零梯度更新；新增扩采动作实际执行数始终为0，full-history每步实际执行两条独立root。
+
+| 三臂实测（42 / 43 / 44） | State | Full-history OPD | 无扩采 |
+| --- | --- | --- | --- |
+| 训练后validation准确率 | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 |
+| 训练监督response token | 831 / 648 / 278 | 327 / 391 / 264 | 228 / 238 / 119 |
+| 实际移除历史推理的response数 | 10 / 10 / 8 | 0 / 0 / 0 | 4 / 3 / 3 |
+| 完整调用耗时（秒） | 108.61 / 116.26 / 82.94 | 79.94 / 114.86 / 91.81 | 90.23 / 93.40 / 105.09 |
+
+上述token仅为真实训练监督response token；现State runner未记录validation生成token或完整prompt/FLOP成本，不把配置上界作为实测总成本。三seed、18次有效更新与零准确率仅支持机制执行和负结果，不支持稳定相对能力提升。
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 
@@ -102,5 +113,5 @@ algorithm.py：状态、完整词表熵、预算与双裁剪；environment.py：
 
 计算器是实际执行的公开交互环境，不是原三个benchmark。full-history-opd执行M条独立root轨迹；额外扩采动作仍不会执行。整数取整及各root长度不同会改变实际监督token/动作成本，均须报告，不能声称总成本完全相等。
 
-仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+三臂A100路径、固定执行源码绑定回执已完成；仍需随本批完成全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

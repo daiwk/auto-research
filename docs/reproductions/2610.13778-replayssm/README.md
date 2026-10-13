@@ -106,11 +106,32 @@ adapter 的 `dataset_dir/replayssm.json` 包含 `upstream` 与 `steps`。作者�
 
 兼容入口只对固定作者函数 `_gdn_unf_vf_step_kernel` 的已核验源文本加左结合括号，变为 `(TWOPREC and (not is_flush)) and (not is_seed)`。唯一范围为 JIT 函数相对第 122 行、列 7–51；作者文件 SHA256 为 `80311d6654584c633db01f76e3be5bc189fbdfab031c1bc0711757e1cd09eec3`，原 JIT 文本 SHA256 为 `7f60e87d974bfea4b5095980599043d8a7a615db4ba1b5fdbf7a0c1d0bfc6ab1`。源文件、函数身份、范围或 JIT cache-reset API 不匹配时立即拒绝，不提供宽松 fallback；作者磁盘文件及共享 Torch/Triton 都不改。
 
-此变换仅用于原算法的兼容编译，未替换 kernel、精度或刷新逻辑。结果记录原文与编译文本的 SHA256、精确变换范围。CPU 测试核验 AST 结构和纯布尔标志的计算结果及短路次序；不声称该变换适用于带副作用的自定义 Python truth 对象。新的冻结源码仍须重新在真实 A100 完成三种子，CPU 测试不替代 CUDA 验证。
+此变换仅用于原算法的兼容编译，未替换 kernel、精度或刷新逻辑。结果记录原文与编译文本的 SHA256、精确变换范围。CPU 测试核验 AST 结构和纯布尔标志的计算结果及短路次序；不声称该变换适用于带副作用的自定义 Python truth 对象。冻结源码 `6aabe57a` 已重新在真实 A100 完成三种子，见下文回执；CPU 测试不替代 CUDA 验证。
 
 ### 本地结果与边界
 
 [cpu-contracts.json](metrics/cpu-contracts.json)记录 seed 42 独立参考：最大输出误差 `1.1920928955078125e-7`、接受 12 个 token、刷新 3 次；4 个行为测试覆盖公式、GDN、pending/rollback 和低精度 read 不进入 recurrence。
+
+### 2026-10-14 A100 实测
+
+[三 seed 指标](metrics/a100-three-seeds-6aabe57a.json)与[脱敏 GPU 回执](../../gpu-validations/replayssm-a100-20261013.json)绑定实际执行 commit `6aabe57a97ec3a586aac7aeea66128750f9441da`、源包/三个核心源码 SHA256、固定作者 commit 和六个作者源码 SHA256、12 份成功原始文件 SHA256。回执沿用 adapter 声明的 20261013 路径，实际完成时间为 2026-10-13 17:50:33 UTC（北京时间 10 月 14 日）。三个 seed 为 42/43/44，各运行作者 Mamba2/GDN 四种精度模式 48 步，未增加原预算。
+
+独立 CUDA 参考 Mamba 风格输出误差三 seed 最大为 `1.1920928955078125e-7`；原始 GDN 逐步 recurrence 对照输出最大误差同为 `1.1920928955078125e-7`，committed 状态最大误差 `1.4901161193847656e-8`。零/部分/全部接受均实际执行（接受数 0/1/2/3 重复两轮），累计接受 12 token，FP16/FP32 read 各刷新 3 次。改变 read 精度确实改变输出（最大差值 `2.3543834686279297e-4`），但两条高精度 anchor 的差值每 seed 均为 **0**，没有把低精度读误差写回 recurrence。
+
+下表为作者真实 Triton emulation 相对 `s32_rs` 的 RMSE，均值 ± 样本标准差；不是模型 perplexity、下游能力或吞吐指标。
+
+| 精度模式 | Mamba2 output RMSE | Mamba2 anchor RMSE | GDN output RMSE | GDN anchor RMSE |
+| --- | ---: | ---: | ---: | ---: |
+| `s32_rs` | 0 | 0 | 0 | 0 |
+| `tp8_hi32` | 0.027127 ± 0.000286 | 0 | 0.00019007 ± 0.00000124 | 0 |
+| `tp4_hi16_sr` | 0.101185 ± 0.001308 | 0.000052374 ± 0.000000075 | 0.00070530 ± 0.00000246 | 0.00012261 ± 0.00000337 |
+| `f4_sr_rs` | 0.159245 ± 0.001547 | 0.0245588 ± 0.0000476 | 0.00110594 ± 0.00000467 | 0.0215533 ± 0.0000678 |
+
+两架构、三 seed 的独立 read cast 检查均通过。共享 FP4 recurrence 的 anchor 误差保留，不因执行成功而改成零；分离读写精度在这些随机输入上降低 anchor 误差，不等于验证原文 PG-19/GPQA 质量结论。
+
+原 GDN JIT SHA256 `7f60e87d…` 与仅加括号后的编译文本 SHA256 `9add48ef24fa9df25a71e5f8a05fc0dac46b35c6b5efdc73012cbeeeae1c8174` 全部种子一致，作者文件 hash 不变。`34148c2e` seed 42 的编译失败仍保存，并在新回执保留其三份原始文件 hash；不签失败为 passed，也不把新证据重绑定到未执行的新源码。
+
+48 步 run 墙钟分别为 22.89/2.65/2.58 秒，seed 42 包含冷编译，后续命中缓存；因此不能用于模式之间、原生 serving 或论文加速倍率比较。只读 curator `scripts/curate_oct14_replayssm.py` 与纯 fixture 测试校验源码、JIT 变换、预算、成功状态与非有限值，不依赖 CI 本机的 `runs/`。
 
 作者 emulation 把量化数值解码后存成 **FP32 tensor**。它可验证 FP4/FP8 舍入、独立 cast 与状态误差，但不能验证低比特物理 HBM 流量或带宽速度收益。该 repo 的低精度 CuTe 性能路径面向 B300，不以 A100 FP32-storage 仿真代替。独立 reference buffer 是有界列表，不是原生 CUDA circular allocation。
 
