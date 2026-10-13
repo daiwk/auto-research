@@ -3,6 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import hashlib
 import json
+import math
 from dataclasses import asdict
 import re
 import time
@@ -29,6 +30,7 @@ class ArxivClient:
         minimum_interval_seconds: float = 3.0,
         maximum_retries: int = 3,
         retry_backoff_seconds: float = 3.0,
+        maximum_retry_delay_seconds: float = 30.0,
         cache_dir: Path | None = None,
         checkpoint_dir: Path | None = None,
         resume: bool = False,
@@ -38,12 +40,16 @@ class ArxivClient:
         self.minimum_interval_seconds = minimum_interval_seconds
         self.maximum_retries = maximum_retries
         self.retry_backoff_seconds = retry_backoff_seconds
+        if maximum_retry_delay_seconds < 0:
+            raise ValueError("maximum retry delay must be non-negative")
+        self.maximum_retry_delay_seconds = maximum_retry_delay_seconds
         self.cache_dir = cache_dir
         self.checkpoint_dir = checkpoint_dir
         self.resume = resume
         self.query_reports: list[dict] = []
         self.cache_fallbacks: list[str] = []
         self._last_request_at: float | None = None
+        self._blocked_until = 0.0
 
     def search(
         self,
@@ -253,8 +259,12 @@ class ArxivClient:
         every discovery entry point consistent and avoids four track-specific
         scripts each inventing a different recovery policy.
         """
+        if time.monotonic() < self._blocked_until:
+            return self._cached_or_raise(request.full_url, urllib.error.URLError(
+                "arXiv requested a cooldown beyond this scan's retry budget; query not sent"))
         for attempt in range(self.maximum_retries + 1):
             try:
+                self._last_request_at = time.monotonic()
                 with urllib.request.urlopen(request, timeout=self.timeout) as response:
                     payload = response.read()
                 self._last_request_at = time.monotonic()
@@ -270,7 +280,16 @@ class ArxivClient:
                     delay = float(retry_after) if retry_after else 0.0
                 except ValueError:
                     delay = 0.0
-                delay = max(delay, self.retry_backoff_seconds * (2**attempt))
+                if not math.isfinite(delay) or delay > self.maximum_retry_delay_seconds:
+                    # Do not retry earlier than a server's Retry-After. Stop
+                    # this query instead of blocking the entire scan for hours.
+                    if exc.code == 429:
+                        self._blocked_until = time.monotonic() + (delay if math.isfinite(delay) else 3600)
+                    return self._cached_or_raise(request.full_url, exc)
+                delay = min(
+                    max(delay, self.retry_backoff_seconds * (2**attempt)),
+                    self.maximum_retry_delay_seconds,
+                )
                 time.sleep(delay)
             except (TimeoutError, urllib.error.URLError, ConnectionError):
                 # A read timeout or a transient socket/DNS reset is as common
@@ -279,7 +298,8 @@ class ArxivClient:
                 # discovery job before its bounded retry policy could help.
                 if attempt >= self.maximum_retries:
                     return self._cached_or_raise(request.full_url, None)
-                time.sleep(self.retry_backoff_seconds * (2**attempt))
+                time.sleep(min(self.retry_backoff_seconds * (2**attempt),
+                               self.maximum_retry_delay_seconds))
         raise AssertionError("unreachable")
 
     def _cache_path(self, url: str) -> Path | None:
@@ -314,6 +334,16 @@ def canonical_arxiv_id(arxiv_id: str) -> str:
     return re.sub(r"v\d+$", "", arxiv_id)
 
 
+def paper_revision(paper: Paper) -> int | None:
+    match = re.search(r"v(\d+)$", paper.arxiv_id)
+    return int(match.group(1)) if match else None
+
+
+def paper_recency(paper: Paper) -> tuple[int, str]:
+    """Original publication remains immutable; revision recency is separate."""
+    return paper_revision(paper) or 0, paper.updated or paper.published
+
+
 def deduplicate_papers(groups: Iterable[Iterable[Paper]]) -> list[Paper]:
     """Merge query results, retaining the newest metadata for each arXiv ID."""
     by_id: dict[str, Paper] = {}
@@ -321,7 +351,7 @@ def deduplicate_papers(groups: Iterable[Iterable[Paper]]) -> list[Paper]:
         for paper in group:
             identity = canonical_arxiv_id(paper.arxiv_id)
             current = by_id.get(identity)
-            if current is None or paper.published > current.published:
+            if current is None or paper_recency(paper) > paper_recency(current):
                 by_id[identity] = paper
     return sorted(by_id.values(), key=lambda paper: paper.published, reverse=True)
 
@@ -341,6 +371,7 @@ def parse_arxiv_feed(payload: bytes) -> list[Paper]:
                 published=_text(entry, "atom:published"),
                 url=url,
                 arxiv_id=url.rstrip("/").split("/")[-1],
+                updated=_text(entry, "atom:updated"),
             )
         )
     return papers

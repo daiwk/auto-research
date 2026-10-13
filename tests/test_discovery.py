@@ -198,6 +198,7 @@ def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):
         "implemented": 1,
         "reviewed": 1,
         "google_meta_priority_review": 1,
+        "revision_review": 0,
     }
     assert summary.index("Google / Meta 重点复核") < summary.index("本窗口其他未审候选")
     assert "晚索引或历史未审候选 0 篇" in summary

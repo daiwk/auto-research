@@ -10491,6 +10491,16 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/discovery_announcements.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "handle_endtag",
+        "line": 106,
+        "qualified_name": "_BulletinParser.handle_endtag",
+        "expression": "self.total_expected += total",
+        "fingerprint": "01c8a621240982a0610bfe92cae9da82ab7c17431bdeaca3294a3a414808a659"
+      }
+    ],
     "src/auto_research/evolution/composable.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -11767,6 +11777,24 @@
         "fingerprint": "16bcc64b7732b44ec2b36bf46d5e94e1380c678923c44a75b4f13251de1d001d"
       }
     ],
+    "src/auto_research/post_training/proximal_checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "evaluate",
+        "line": 56,
+        "qualified_name": "evaluate",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_proximal_checkpoint",
+        "line": 74,
+        "qualified_name": "run_proximal_checkpoint",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
     "src/auto_research/post_training/rlvr_fusion_eval.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -11969,6 +11997,34 @@
         "qualified_name": "ResearchLoop.evaluate",
         "expression": "self.rollbacks += 1",
         "fingerprint": "84ec7bf43e0b8fb0c9351eb2a6b28acfd7e147238d7050c7bcfba9937825fa5d"
+      }
+    ],
+    "src/auto_research/reproductions/state_opd/checkpoint.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "evaluate",
+        "line": 56,
+        "qualified_name": "evaluate",
+        "expression": "row['answer']",
+        "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
+    "src/auto_research/reproductions/state_opd/environment.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 58,
+        "qualified_name": "ArithmeticEnvironment.step",
+        "expression": "self.executed_actions += 1",
+        "fingerprint": "b4a345549f86e1e2bdaafe258bf32863547fa4f0a7265be1a75d52f2053bafb7"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "step",
+        "line": 60,
+        "qualified_name": "ArithmeticEnvironment.step",
+        "expression": "action['arguments']['answer']",
+        "fingerprint": "6873e3b1f283b911e3a650b95902fecbd9d4d80d8a6dd127a83591b435ca91b9"
       }
     ],
     "src/auto_research/research_loop/portfolio.py": [

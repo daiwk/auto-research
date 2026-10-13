@@ -9,12 +9,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import datetime as dt
+import hashlib
 import json
 from pathlib import Path
 from typing import Iterable
 
 from .models import Paper
-from .papers import ArxivClient, canonical_arxiv_id
+from .papers import ArxivClient, canonical_arxiv_id, paper_recency, paper_revision
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,9 @@ class DiscoveredPaper:
             "title": self.paper.title,
             "abstract": self.paper.abstract,
             "published": self.paper.published,
+            "updated": self.paper.updated,
+            "revision": paper_revision(self.paper),
+            "metadata_sha256": paper_metadata_sha256(self.paper),
             "url": self.paper.url,
             "authors": self.paper.authors,
             "matched_queries": list(self.query_names),
@@ -58,6 +62,8 @@ RECOMMENDATION_QUERIES: tuple[DiscoveryQuery, ...] = (
     DiscoveryQuery("deployment-evidence", "recommendation deployed production", ("cs.IR", "cs.LG")),
     DiscoveryQuery("search-ranking", "search ranking online A/B", ("cs.IR", "cs.LG")),
     DiscoveryQuery("advertising-ranking", "advertising ranking online A/B", ("cs.IR", "cs.LG")),
+    DiscoveryQuery("user-interest-modeling", "user interests", ("cs.IR", "cs.LG")),
+    DiscoveryQuery("semantic-id-modeling", "SID recommendation", ("cs.IR", "cs.LG")),
 )
 
 FOUNDATION_MODEL_QUERIES: tuple[DiscoveryQuery, ...] = (
@@ -69,6 +75,10 @@ FOUNDATION_MODEL_QUERIES: tuple[DiscoveryQuery, ...] = (
     DiscoveryQuery("multimodal-llm", "multimodal language model", ("cs.CV", "cs.CL")),
     DiscoveryQuery("vision-language", "vision language model", ("cs.CV", "cs.CL")),
     DiscoveryQuery("model-compression", "language model compression", ("cs.CL", "cs.LG")),
+    DiscoveryQuery("llm-abbreviation", "LLM", ("cs.CL", "cs.LG")),
+    DiscoveryQuery("ssm-inference", "SSM speculative", ("cs.CL", "cs.LG")),
+    DiscoveryQuery("jepa-world-action", "JEPA world-action WAM", ("cs.CV", "cs.RO", "cs.LG"), "any"),
+    DiscoveryQuery("diffusion-language", "diffusion language", ("cs.CL", "cs.LG")),
 )
 
 POST_TRAINING_QUERIES: tuple[DiscoveryQuery, ...] = (
@@ -80,6 +90,9 @@ POST_TRAINING_QUERIES: tuple[DiscoveryQuery, ...] = (
     DiscoveryQuery("process-reward", "language model process reward", ("cs.CL", "cs.LG")),
     DiscoveryQuery("test-time-rl", "test time reinforcement learning", ("cs.CL", "cs.LG")),
     DiscoveryQuery("opd", "online policy distillation", ("cs.CL", "cs.LG")),
+    DiscoveryQuery("opd-abbreviation", "OPD", ("cs.CL", "cs.LG", "cs.CV")),
+    DiscoveryQuery("rlvr-abbreviation", "RLVR GRPO PPO", ("cs.CL", "cs.LG"), "any"),
+    DiscoveryQuery("policy-llm-abbreviation", "LLM policy", ("cs.CL", "cs.LG")),
 )
 
 AGENT_QUERIES: tuple[DiscoveryQuery, ...] = (
@@ -91,6 +104,9 @@ AGENT_QUERIES: tuple[DiscoveryQuery, ...] = (
     DiscoveryQuery("agent-memory", "language model agent memory", ("cs.AI", "cs.CL")),
     DiscoveryQuery("agent-planning", "language model agent planning", ("cs.AI", "cs.CL")),
     DiscoveryQuery("multi-agent", "large language model multi agent", ("cs.AI", "cs.CL")),
+    DiscoveryQuery("memory-retrieval", "memory retrieval", ("cs.AI", "cs.CL", "cs.IR")),
+    DiscoveryQuery("skill-retrieval", "skill retrieval", ("cs.AI", "cs.CL")),
+    DiscoveryQuery("agentic-opd", "agentic OPD", ("cs.AI", "cs.CL", "cs.LG")),
 )
 
 PRIORITY_ORGANIZATION_TERMS: tuple[str, ...] = (
@@ -144,6 +160,8 @@ def repository_paper_statuses(
 def triage_candidates(
     papers: Iterable[DiscoveredPaper],
     repository_statuses: dict[str, str],
+    *,
+    repository_versions: dict[str, dict] | None = None,
 ) -> list[dict]:
     """Diff recalled papers against the repository and add review signals."""
     candidates: list[dict] = []
@@ -151,12 +169,38 @@ def triage_candidates(
         item = discovered.to_dict()
         identity = item["arxiv_id"]
         status = repository_statuses.get(identity, "new")
+        baseline = (repository_versions or {}).get(identity, {})
+        revision = item["revision"]
+        baseline_revision = baseline.get("revision")
+        newer = (revision is not None and baseline_revision is not None
+                 and revision > baseline_revision)
+        changed_metadata = bool(
+            baseline.get("metadata_sha256")
+            and item["metadata_sha256"] != baseline["metadata_sha256"]
+            and (baseline_revision is None or revision is None or revision >= baseline_revision)
+        )
+        replacement = any(source.get("entry_kind") == "replacement"
+                          for source in discovered.source_provenance)
+        baseline_missing = status != "new" and not baseline and replacement
+        revision_review = status != "new" and (newer or changed_metadata or baseline_missing)
         priority_matches = sorted(PRIORITY_REVIEW_QUERY_NAMES.intersection(discovered.query_names))
+        priority_sources = sorted({
+            source["organization"] for source in discovered.source_provenance
+            if source.get("organization") in {"Google", "Google DeepMind", "Meta"}
+        })
         item.update(
             {
                 "repository_status": status,
-                "priority_review_required": status == "new" and bool(priority_matches),
+                "priority_review_required": (status == "new" or revision_review) and bool(priority_matches or priority_sources),
                 "priority_query_matches": priority_matches,
+                "priority_source_matches": priority_sources,
+                "revision_review_required": revision_review,
+                "review_required": status == "new" or revision_review,
+                "revision_review_reason": (
+                    "newer-version" if newer else "metadata-changed" if changed_metadata
+                    else "replacement-without-reviewed-baseline" if baseline_missing else None
+                ),
+                "reviewed_revision": baseline_revision,
             }
         )
         candidates.append(item)
@@ -178,8 +222,10 @@ def build_discovery_payload(
     counts["google_meta_priority_review"] = sum(
         bool(candidate["priority_review_required"]) for candidate in candidates
     )
+    counts["revision_review"] = sum(bool(candidate.get("revision_review_required"))
+                                    for candidate in candidates)
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "track": track,
         "window": {"start": str(start_date), "end": str(end_date)},
         "query_matrix": list(query_names),
@@ -198,7 +244,9 @@ def render_discovery_summary(payload: dict) -> str:
         item for item in payload["candidates"] if item["repository_status"] == "new"
     ]
     current = [item for item in new_candidates if requested_start <= item["published"][:10] <= end]
-    backlog = [item for item in new_candidates if not requested_start <= item["published"][:10] <= end]
+    unresolved_dates = [item for item in new_candidates if not item["published"]]
+    backlog = [item for item in new_candidates if item["published"] and not requested_start <= item["published"][:10] <= end]
+    revisions = [item for item in payload["candidates"] if item.get("revision_review_required")]
     lines = [
         f"# {payload['track']} 论文候选差分",
         "",
@@ -212,6 +260,8 @@ def render_discovery_summary(payload: dict) -> str:
         f"其中原始发布日期在本次请求窗口内的未审候选 {len(current)} 篇；"
         f"晚索引或历史未审候选 {len(backlog)} 篇。"
         "‘新候选’只表示仓库尚未审计，并不等于当天新发表；机构词命中也不等于作者单位。",
+        f"已知论文待复核的版本更新 {len(revisions)} 篇，单独计数，不计入新 v1。",
+        f"另有 {len(unresolved_dates)} 篇公告条目的原始日期待解析，不计为当天新发表或历史补漏。",
         "",
         "## Google / Meta 本窗口重点复核",
         "",
@@ -227,6 +277,16 @@ def render_discovery_summary(payload: dict) -> str:
                 f"覆盖未完成：{transport.get('capped_queries', 0)} 个查询达到分页上限、"
                 f"{transport.get('failed_queries', 0)} 个查询失败、"
                 f"{transport['cache_fallback_pages']} 页使用缓存；不可据此推进扫描水位"
+            ),
+            "",
+        ])
+    announcements = payload.get("announcements")
+    if announcements:
+        lines.extend([
+            "公告页独立召回：" + (
+                "已显式禁用" if not announcements.get("enabled") else
+                "请求窗口内页面已解析（不等于全文审查）" if announcements.get("coverage_complete")
+                else "覆盖不完整；失败、过期公告与未解析日期见 JSON。保留已取到的条目。"
             ),
             "",
         ])
@@ -297,6 +357,10 @@ def render_discovery_summary(payload: dict) -> str:
         [item for item in backlog if item["priority_review_required"]],
         empty="本次没有晚索引的 Google / Meta 重点候选。",
     ))
+    lines.extend(["", "## 已知论文版本更新", ""])
+    lines.extend(_candidate_lines(revisions, empty="未发现需复核的已知论文版本更新。"))
+    lines.extend(["", "## 原始发布日期待解析", ""])
+    lines.extend(_candidate_lines(unresolved_dates, empty="没有原始日期待解析的条目。"))
     lines.extend(["", "## 本窗口其他未审候选", ""])
     other_new = [
         item
@@ -326,10 +390,13 @@ def _candidate_lines(candidates: Iterable[dict], *, empty: str) -> list[str]:
     items = list(candidates)
     if not items:
         return [empty]
-    return [
-        f"- [{item['arxiv_id']} · {item['title']}]({item['url']})（{item['published'][:10]}）"
-        for item in items
-    ]
+    lines = []
+    for item in items:
+        title = item['title'].replace('[', '\\[').replace(']', '\\]')
+        date = item['published'][:10] or "原始日期待解析"
+        version = f"，v{item['revision']}" if item.get('revision') is not None else ""
+        lines.append(f"- [{item['arxiv_id']} · {title}]({item['url']})（{date}{version}）")
+    return lines
 
 
 def recommendation_queries() -> tuple[DiscoveryQuery, ...]:
@@ -419,7 +486,7 @@ def _discover_queries(client, queries, *, start_date, end_date, page_size, maxim
             if not paper_is_in_window(paper, start_date=start_date, end_date=end_date):
                 continue
             identity = canonical_arxiv_id(paper.arxiv_id)
-            if identity not in found or paper.published > found[identity].published:
+            if identity not in found or paper_recency(paper) > paper_recency(found[identity]):
                 found[identity] = paper
             origins.setdefault(identity, set()).add(query.name)
     return [
@@ -436,9 +503,10 @@ def paper_is_in_window(paper: Paper, *, start_date: dt.date, end_date: dt.date) 
     date-only filter silently loses those papers, so the canonical ID month is an
     independent recall path; repository/ledger de-duplication handles overlap.
     """
-    published = dt.date.fromisoformat(paper.published[:10])
-    if start_date <= published <= end_date:
-        return True
+    if paper.published:
+        published = dt.date.fromisoformat(paper.published[:10])
+        if start_date <= published <= end_date:
+            return True
     identity = canonical_arxiv_id(paper.arxiv_id)
     match = __import__("re").match(r"^(\d{2})(\d{2})\.\d+$", identity)
     if not match:
@@ -474,8 +542,23 @@ def merge_external_candidates(
                 source for source in sources if source not in current.source_provenance
             )
             merged[identity] = DiscoveredPaper(
-                paper if paper.published > current.paper.published else current.paper,
+                paper if paper_recency(paper) > paper_recency(current.paper) else current.paper,
                 current.query_names,
                 tuple((*current.source_provenance, *additional)),
             )
     return sorted(merged.values(), key=lambda item: item.paper.published, reverse=True)
+
+
+def paper_metadata_sha256(paper: Paper) -> str:
+    """Ignore formatting changes but keep actual title/abstract/author changes."""
+    value = {"title": " ".join(paper.title.split()),
+             "abstract": " ".join(paper.abstract.split()),
+             "authors": [" ".join(author.split()) for author in paper.authors]}
+    return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def repository_paper_versions(path: Path) -> dict[str, dict]:
+    if not path.is_file():
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return {canonical_arxiv_id(row["arxiv_id"]): row for row in payload.get("papers", [])}
