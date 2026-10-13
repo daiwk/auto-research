@@ -26,7 +26,7 @@ def main():
     for name in ("steps","group","max-tokens","train-examples","validation-examples","context-limit","epochs",
                  "teacher-attempts","branches","prefix-states","active-size","cuts","suffixes","gate-epochs",
                  "max-cuts","evaluation-group","depth","decomposition-retries","synthesis-retries","max-turns",
-                 "multiplicity","concentration","inner-updates","max-task-attempts"):
+                 "multiplicity","concentration","inner-updates","max-task-attempts","hard-root-limit"):
         parser.add_argument("--"+name,type=int)
     for name in ("learning-rate","pool-ratio","kl-beta","delta"):
         parser.add_argument("--"+name,type=float)

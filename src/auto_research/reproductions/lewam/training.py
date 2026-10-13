@@ -4,7 +4,7 @@ import importlib.util
 import os
 from pathlib import Path
 
-from .external import PINS, verify_provenance
+from .external import PINS, record_trained_candidate, verify_provenance
 
 
 def train(config):
@@ -79,9 +79,11 @@ def train(config):
               "train_action_loss": sum(row["act"] for row in train_batches) / len(train_batches),
               "train_latent_loss": sum(row["state"] for row in train_batches) / len(train_batches),
               "train_sigreg_loss": sum(row["reg"] for row in train_batches) / len(train_batches)}
+    candidate = record_trained_candidate(run_dir, "lewam", config["seed"],
+        ("lewam_best.pt", "lewam_config.json"), dataset, metric, {"batches": batches, "gradients": gradients})
     return {"paper": "lewam", "phase": "train", "seed": config["seed"], "executed": True,
             "source_revision": PINS["lewam"], "device": "cuda", "dataset": dataset,
-            "variants": {"joint_training": metric}, "batches": batches,
+            "variants": {"joint_training": metric}, "batches": batches, "trained_candidate": candidate,
             "evaluation_tier": "l2_public_dataset", "fidelity": "core_mechanism",
             "diagnostic_only": True, "promotion_eligible": False,
             "protocol": {"native_training_api": "scripts/train_lewam.py:main.__wrapped__",

@@ -8,14 +8,51 @@ from pathlib import Path
 import sys
 import time
 
-from ..lewam.external import PINS, verify_provenance, verify_source
+from ..lewam.external import PINS, verify_provenance, verify_source, verify_trained_candidate
 from .algorithm import assert_release
+
+
+def load_initial_states(libero_root: Path, task):
+    """Verified LIBERO NumPy states with weights-only, narrowly scoped globals."""
+    import numpy as np
+    import pickle
+    import torch
+    relative = Path("libero/libero/init_files") / task.problem_folder / task.init_states_file
+    path = (libero_root / relative).resolve()
+    if not path.is_relative_to(libero_root.resolve()):
+        raise ValueError("initial states must stay inside verified LIBERO resources")
+    # The worker has verified the complete mirror before this function. Recheck
+    # this exact input against its public byte manifest before deserialization.
+    if not (libero_root / ".git").exists():
+        verify_provenance(libero_root, "Lifelong-Robot-Learning/LIBERO", PINS["libero"],
+                          (relative.as_posix(),))
+    else:
+        verify_source(libero_root, "libero")
+    core = getattr(np, "_core", None)
+    if core is None:
+        core = np.core
+    reconstruct = core.multiarray._reconstruct
+    allowed = [(reconstruct, "numpy.core.multiarray._reconstruct"),
+               (reconstruct, "numpy._core.multiarray._reconstruct"), np.ndarray, np.dtype,
+               np.dtypes.Float32DType, np.dtypes.Float64DType]
+    existing = set(torch.serialization.get_safe_globals())
+    additions = [value for value in allowed if value not in existing]
+    try:
+        with torch.serialization.safe_globals(additions):
+            states = np.asarray(torch.load(path, map_location="cpu", weights_only=True))
+    except pickle.UnpicklingError as exc:
+        raise ValueError("LIBERO initial states use unsupported pickle globals") from exc
+    if states.ndim != 2 or not all(states.shape) or not np.issubdtype(states.dtype, np.number) or not np.isfinite(states).all():
+        raise ValueError("finite nonempty numeric LIBERO initial states required")
+    return states
 
 
 def run(config):
     if config.get("phase") == "train":
         from .training import train
         return train(config)
+    if "trained_model_dir" in config and config.get("tasks") != ["libero_goal:6"]:
+        raise ValueError("this bounded trained student requires explicit same-training-task libero_goal:6")
     import numpy as np
     import torch
     from smolwam import SmolWAM
@@ -47,12 +84,25 @@ def run(config):
     if device.startswith("cuda") and not torch.cuda.is_available():
         raise RuntimeError("CUDA requested but unavailable; no CPU substitution")
     policy = SmolWAM.from_pretrained(model_dir, device=device, dtype="bf16" if device.startswith("cuda") else "fp32")
+    candidate = None
+    if "trained_model_dir" in config:
+        from smolwam.config import SmolWAMConfig
+        from smolwam.policy import load_model
+        trained_dir = Path(config["trained_model_dir"])
+        candidate = verify_trained_candidate(trained_dir, "smolwam", config["seed"], ("best.pt",))
+        checkpoint = torch.load(trained_dir / "best.pt", map_location="cpu", weights_only=True)
+        trained_cfg = SmolWAMConfig.from_dict(checkpoint["config"])
+        assert_release({"model": trained_cfg.to_dict()})
+        # Keep the same verified VAE/text/normalization; replace all student weights,
+        # including its frozen adapters, with the actual native selected state.
+        policy.model = load_model(trained_cfg, checkpoint["model"], device, policy.dtype)
+        policy.config = policy.model.cfg
     variants, latencies = {"smolwam": [], "noop": []}, []
     for task_spec in config.get("tasks", ["libero_10:2"]):
         suite_name, task_id = task_spec.split(":")
         suite = benchmark_suite(suite_name)
         task = suite.get_task(int(task_id))
-        initial_states = suite.get_task_init_states(int(task_id))
+        initial_states = load_initial_states(libero_root, task)
         for trial in range(config.get("trials", 2)):
             initial_id = (config["seed"] + trial) % len(initial_states)
             for variant in ("smolwam", "noop"):
@@ -96,19 +146,22 @@ def run(config):
                for name, rows in variants.items()}
     return {"paper": "smolwam", "seed": config["seed"], "executed": True, "device": device,
             "source_revision": PINS["smolwam"], "checkpoint": model_provenance, "vae": vae_provenance,
+            "trained_candidate": candidate,
             "dataset": {"public_id": "Lifelong-Robot-Learning/LIBERO", "revision": PINS["libero"],
                         "resources": ["libero/libero/assets", "libero/libero/bddl_files", "libero/libero/init_files"]},
             "variants": summary, "episodes": variants,
             "latency_seconds_mean": float(np.mean(latencies)),
             "evaluation_tier": "l2_public_dataset", "fidelity": "core_mechanism",
-            "diagnostic_only": False,
+            "diagnostic_only": candidate is not None, "promotion_eligible": False,
             "protocol": {"tasks": config.get("tasks", ["libero_10:2"]), "trials": config.get("trials", 2),
                          "chunk_actions": 16, "initial_wait_actions": NUM_STEPS_WAIT,
                          "nonofficial_benchmark": True, "world_head_executed": True,
-                         "teacher_distillation_retrained": False, "layout_curriculum_retrained": False},
+                         "teacher_distillation_retrained": candidate is not None,
+                         "layout_curriculum_retrained": candidate is not None,
+                         "new_student_closed_loop_evaluated": candidate is not None},
             "limitations": ["bounded LIBERO task/init-state subset; not paper's 400 episodes",
                             "actual world latents executed but not scored against true future",
-                            "no teacher latency/success comparison or training recreation",
+                            "no teacher latency/success comparison; trained candidate remains a bounded diagnostic",
                             "weights: NVIDIA One-Way Noncommercial License; code: Apache-2.0"]}
 
 

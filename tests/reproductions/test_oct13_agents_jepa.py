@@ -235,12 +235,32 @@ def test_skilldreamer_psg_has_real_generation_and_invalid_no_heuristic_fallback(
     prompts = []
     def generator(prompt):
         prompts.append(prompt)
-        return ('{"capabilities":[{"requirement":"compute a percentage"}],"semantic_anchors":["sale"]}'
+        return ('{"capabilities":[{"name":"percentage","requirement":"compute a percentage"}],"semantic_anchors":["sale"]}'
                 if len(prompts) == 1 else "# Hypothetical procedure\nCalculate the sale percentage.")
     pseudo, anchors = prospective_skills("calculate sale", generator)
     assert len(prompts) == 2 and anchors == ["sale"] and "Hypothetical" in pseudo[0]
     with pytest.raises(ValueError):
         prospective_skills("task", lambda _: "invalid")
+
+
+@pytest.mark.parametrize("response", [
+    '{"capabilities":[{"requirement":"arithmetic"}]}',
+    '{"capabilities":[{"requirement":"arithmetic"}],"semantic_anchors":null}',
+    '{"tool":"calculator","semantic_anchors":["arithmetic"]}',
+    '{"capabilities":[{"name":"math","requirement":"compute"}],"semantic_anchors":[]}',
+    '{"capabilities":[{"name":"math","requirement":"compute"}],"semantic_anchors":[""]}',
+    '{"capabilities":[{"name":"math","requirement":""}],"semantic_anchors":["math"]}',
+    '{"capabilities":[{"requirement":"compute"}],"semantic_anchors":["math"]}',
+])
+def test_skilldreamer_missing_psg_fields_are_countable_schema_failures(response):
+    with pytest.raises(ValueError):
+        prospective_skills("task without reference answer", lambda prompt: response)
+
+
+def test_skilldreamer_empty_pseudo_procedure_is_not_a_retrieval_fallback():
+    responses = iter(['{"capabilities":[{"name":"math","requirement":"compute"}],"semantic_anchors":["math"]}', "  "])
+    with pytest.raises(ValueError, match="pseudo procedure must be nonempty"):
+        prospective_skills("task", lambda _: next(responses))
 
 
 def test_skilldreamer_hsr_roundrobin_and_capability_checkpoint():
@@ -298,6 +318,147 @@ def test_offline_author_code_mirror_requires_complete_byte_provenance(tmp_path):
     (tmp_path / "model.py").write_text("VALUE = 2\n")
     with pytest.raises(ValueError, match="checksum"):
         verify_source(tmp_path, "lewam")
+
+
+def candidate_evidence(key):
+    metrics = {"optimizer_updates": 2, "nonzero_gradient_updates": 2,
+               "parameter_sample_delta_l2": 0.5, "updated_parameter_tensors": 1}
+    if key == "lewam":
+        metrics.update(train_batches=1, validation_batches=1, validation_action_loss=1.0,
+            train_action_loss=1.0, train_latent_loss=1.0, train_sigreg_loss=1.0)
+        evidence = {"batches": [{"training": training, "loss": 3.04, "act": 1.0, "state": 1.0, "reg": 1.0}
+                                for training in (True, False)], "gradients": [1.0, 1.0]}
+    else:
+        metrics.update(teacher_layout_updates=1, compact_layout_updates=1, nonzero_parameter_updates=2,
+            best_validation_action_l1=1.0, real_teacher_target_rows=2, teacher_vs_demo_action_l1=1.0,
+            train_mean_action_l1=1.0, train_mean_world_l1=1.0, train_mean_kd_act_l1=1.0, train_mean_kd_world_l1=1.0)
+        evidence = {"losses": [{"training": training, "tokens": tokens, "total": 4.0,
+            "action_l1": 1.0, "world_l1": 1.0, "kd_act_l1": 1.0, "kd_world_l1": 1.0}
+            for training, tokens in ((True, 1764), (True, 1008), (False, 1008))],
+            "gradients": [{"tokens": tokens, "norm": 1.0, "parameter_sample_delta_l2": 0.1}
+                          for tokens in (1764, 1008)]}
+    return metrics, evidence
+
+
+@pytest.mark.parametrize("key,files", [("lewam", ("lewam_best.pt", "lewam_config.json")),
+                                      ("smolwam", ("best.pt",))])
+def test_trained_robotics_candidate_is_hash_bound_seed_bound_and_immutable(tmp_path, key, files):
+    from auto_research.reproductions.lewam.external import record_trained_candidate, verify_trained_candidate
+    for name in files:
+        (tmp_path / name).write_bytes(b"actual-output-fixture")
+    metrics, evidence = candidate_evidence(key)
+    candidate = record_trained_candidate(tmp_path, key, 42, files,
+        {"public_id": "public-fixture", "revision": "a" * 40}, metrics, evidence)
+    assert candidate["kind"] == "local-trained-candidate"
+    assert verify_trained_candidate(tmp_path, key, 42, files) == candidate
+    with pytest.raises(ValueError, match="identity/seed/selection"):
+        verify_trained_candidate(tmp_path, key, 43, files)
+    with pytest.raises(FileExistsError, match="immutable"):
+        record_trained_candidate(tmp_path, key, 42, files, {}, metrics, evidence)
+    tampered = {**candidate, "implementation_sha256": {"claimed-author-pin": "a" * 64}}
+    (tmp_path / "training-provenance.json").write_text(json.dumps(tampered))
+    with pytest.raises(ValueError, match="local implementation checksum"):
+        verify_trained_candidate(tmp_path, key, 42, files)
+    (tmp_path / "training-provenance.json").write_text(json.dumps(candidate))
+    (tmp_path / files[0]).write_bytes(b"substituted-release")
+    with pytest.raises(ValueError, match="checksum"):
+        verify_trained_candidate(tmp_path, key, 42, files)
+
+
+def test_trained_robotics_candidate_rejects_registration_without_real_updates(tmp_path):
+    from auto_research.reproductions.lewam.external import record_trained_candidate
+    with pytest.raises(ValueError, match="actual gradients and parameter updates"):
+        record_trained_candidate(tmp_path, "lewam", 42, (), {},
+            {"nonzero_gradient_updates": 0, "parameter_sample_delta_l2": 0})
+    assert not (tmp_path / "training-provenance.json").exists()
+
+
+@pytest.mark.parametrize("updates,delta", [(float("nan"), 1.0), (float("inf"), 1.0),
+    (1.5, 1.0), (True, 1.0), (1, float("nan")), (1, float("inf")), (1, True), (1, -1.0)])
+def test_trained_robotics_candidate_fails_closed_for_nonfinite_or_noninteger_evidence(tmp_path, updates, delta):
+    from auto_research.reproductions.lewam.external import record_trained_candidate, verify_trained_candidate
+    with pytest.raises(ValueError, match="actual gradients and parameter updates"):
+        record_trained_candidate(tmp_path, "lewam", 42, (), {},
+            {"nonzero_gradient_updates": updates, "parameter_sample_delta_l2": delta})
+    metrics, evidence = candidate_evidence("lewam")
+    manifest = record_trained_candidate(tmp_path, "lewam", 42, (), {}, metrics, evidence)
+    manifest["metrics"] = {"nonzero_gradient_updates": updates, "parameter_sample_delta_l2": delta}
+    (tmp_path / "training-provenance.json").write_text(json.dumps(manifest))
+    with pytest.raises(ValueError, match="actual update evidence"):
+        verify_trained_candidate(tmp_path, "lewam", 42, ())
+
+
+@pytest.mark.parametrize("key", ["lewam", "smolwam"])
+@pytest.mark.parametrize("damage", ["nan_loss", "inf_gradient", "missing_loss", "missing_validation_metric"])
+def test_trained_candidate_rejects_nonfinite_or_incomplete_defining_evidence(tmp_path, key, damage):
+    from auto_research.reproductions.lewam.external import record_trained_candidate, verify_trained_candidate
+    metrics, evidence = candidate_evidence(key)
+    manifest = record_trained_candidate(tmp_path, key, 42, (), {}, metrics, evidence)
+    rows = evidence["batches" if key == "lewam" else "losses"]
+    loss = "state" if key == "lewam" else "kd_world_l1"
+    if damage == "nan_loss":
+        rows[0][loss] = float("nan")
+    elif damage == "inf_gradient":
+        if key == "lewam":
+            evidence["gradients"][0] = float("inf")
+        else:
+            evidence["gradients"][0]["norm"] = float("inf")
+    elif damage == "missing_loss":
+        del rows[0][loss]
+    else:
+        del metrics["validation_action_loss" if key == "lewam" else "best_validation_action_l1"]
+    other = tmp_path / "bad-training"
+    other.mkdir()
+    with pytest.raises(ValueError):
+        record_trained_candidate(other, key, 42, (), {}, metrics, evidence)
+    manifest["metrics"], manifest["training_evidence"] = metrics, evidence
+    (tmp_path / "training-provenance.json").write_text(json.dumps(manifest))
+    with pytest.raises(ValueError):
+        verify_trained_candidate(tmp_path, key, 42, ())
+
+
+@pytest.mark.parametrize("tasks", [None, ["libero_10:2"], ["libero_goal:6", "libero_10:2"]])
+def test_new_smolwam_student_cannot_use_default_or_different_training_task(tasks):
+    from auto_research.reproductions.smolwam.worker import run
+    with pytest.raises(ValueError, match="explicit same-training-task"):
+        run({"trained_model_dir": "unread-fixture", **({"tasks": tasks} if tasks is not None else {})})
+
+
+@pytest.mark.parametrize("dtype", [np.float32, np.float64])
+def test_libero_verified_numpy_init_states_load_weights_only_without_global_patch(tmp_path, dtype):
+    from types import SimpleNamespace
+    from auto_research.reproductions.smolwam.worker import load_initial_states
+    from auto_research.reproductions.lewam.external import PINS
+    relative = "libero/libero/init_files/libero_goal/task.pruned_init"
+    path = tmp_path / relative
+    path.parent.mkdir(parents=True)
+    expected = np.arange(8, dtype=dtype).reshape(2, 4)
+    torch.save(expected, path)
+    manifest = {"public_id": "Lifelong-Robot-Learning/LIBERO", "revision": PINS["libero"],
+                "files": {relative: hashlib.sha256(path.read_bytes()).hexdigest()}}
+    (tmp_path / "provenance.json").write_text(json.dumps(manifest))
+    with torch.serialization.safe_globals([np.ndarray]):
+        before = set(torch.serialization.get_safe_globals())
+        actual = load_initial_states(tmp_path, SimpleNamespace(problem_folder="libero_goal", init_states_file="task.pruned_init"))
+        np.testing.assert_array_equal(actual, expected)
+        assert set(torch.serialization.get_safe_globals()) == before
+    path.write_bytes(b"substituted-unverified-input")
+    with pytest.raises(ValueError, match="checksum"):
+        load_initial_states(tmp_path, SimpleNamespace(problem_folder="libero_goal", init_states_file="task.pruned_init"))
+
+
+def test_libero_init_states_reject_unknown_pickle_global_even_when_byte_manifest_matches(tmp_path):
+    from types import SimpleNamespace
+    from auto_research.reproductions.smolwam.worker import load_initial_states
+    from auto_research.reproductions.lewam.external import PINS
+    relative = "libero/libero/init_files/libero_goal/task.pruned_init"
+    path = tmp_path / relative
+    path.parent.mkdir(parents=True)
+    torch.save(Path("unknown-fixture-class"), path)
+    (tmp_path / "provenance.json").write_text(json.dumps({"public_id": "Lifelong-Robot-Learning/LIBERO",
+        "revision": PINS["libero"], "files": {relative: hashlib.sha256(path.read_bytes()).hexdigest()}}))
+    with pytest.raises(ValueError, match="unsupported pickle globals"):
+        load_initial_states(tmp_path, SimpleNamespace(problem_folder="libero_goal", init_states_file="task.pruned_init"))
 
 
 @pytest.mark.parametrize("key,identifier", [("lewam", "2610.12818"), ("smolwam", "2610.13740"),

@@ -8,7 +8,7 @@ from pathlib import Path
 import tempfile
 import time
 
-from .external import PINS, verify_provenance
+from .external import PINS, verify_provenance, verify_trained_candidate
 
 
 def _jsonable(value):
@@ -34,11 +34,16 @@ def run(config):
     from lewam.eval.build import build_policy
     from lewam.models.lewam import build_model
     source = Path(config["source_root"]).resolve()
-    model_dir, data_dir = Path(config["model_dir"]), Path(config["data_dir"])
-    model_provenance = verify_provenance(model_dir, "LeWAM/lewam-toolhang",
-        "39512799122797828f13c29071d3d797852ce9b5", ("lewam_best.pt", "lewam_config.json"))
+    model_dir, data_dir = Path(config.get("trained_model_dir", config["model_dir"])), Path(config["data_dir"])
+    trained = "trained_model_dir" in config
+    model_provenance = (verify_trained_candidate(model_dir, "lewam", config["seed"],
+        ("lewam_best.pt", "lewam_config.json")) if trained else
+        verify_provenance(model_dir, "LeWAM/lewam-toolhang",
+            "39512799122797828f13c29071d3d797852ce9b5", ("lewam_best.pt", "lewam_config.json")))
     data_provenance = verify_provenance(data_dir, "LeWAM/lewam-toolhang",
         "465df45efe1b87aead4f423d3f8670833c5ddaf4", ("toolhang.h5",))
+    if trained and model_provenance["dataset"] != data_provenance:
+        raise ValueError("trained candidate and control dataset differ")
     device = config.get("device", "cuda")
     if device.startswith("cuda") and not torch.cuda.is_available():
         raise RuntimeError("CUDA required by this run; no CPU substitution")
@@ -79,8 +84,11 @@ def run(config):
             dataset = get_dataset("toolhang", list(cfg.dataset.keys_to_cache), str(home))
             episodes, starts, offsets = sample_eval_episodes(dataset, cfg.eval.num_eval,
                 config["seed"], cfg.eval.goal_offset_steps)
-            starts_receipt = {"episodes": episodes, "starts": starts,
-                              "goal_offset": cfg.eval.goal_offset_steps}
+            sampled = {"episodes": episodes, "starts": starts,
+                       "goal_offset": cfg.eval.goal_offset_steps}
+            if starts_receipt is not None and _jsonable(sampled) != _jsonable(starts_receipt):
+                raise ValueError("LeWAM comparison arms must share exactly the same starts and goals")
+            starts_receipt = sampled
             transform = {"pixels": img_transform(cfg.eval.img_size), "goal": img_transform(cfg.eval.img_size)}
             policy = build_policy(cfg.eval, model, model_cfg, config["seed"], transform, offsets)
             world = swm.World(**cfg.world, image_shape=(224, 224))
@@ -101,7 +109,9 @@ def run(config):
             "evaluation_tier": "l2_public_dataset", "fidelity": "core_mechanism",
             "diagnostic_only": True, "promotion_eligible": False,
             "protocol": {"non_holdout": True, "goal_from_training_episodes": True,
-                         "paper_training_reexecuted": False, "public_checkpoint_executed": True,
+                         "paper_training_reexecuted": False, "native_joint_training_reexecuted": trained,
+                         "public_checkpoint_executed": not trained,
+                         "trained_candidate_closed_loop_evaluated": trained,
                          "proposals": config.get("proposals", 4), "gradient_steps": config.get("gradient_steps", 5),
                          "episodes": config.get("episodes", 2)},
             "limitations": ["原公开checkpoint训练集目标协议，不能视为test隔离比较",

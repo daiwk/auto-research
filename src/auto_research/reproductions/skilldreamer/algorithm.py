@@ -40,21 +40,27 @@ def prospective_skills(goal: str, generate) -> tuple[list[str], list[str]]:
         '{"capabilities":[{"name":"...","requirement":"..."}],"semantic_anchors":["..."]}. '
         "Task: " + goal)
     output = parse_object(response)
-    capabilities = output["capabilities"]
-    anchors = output["semantic_anchors"]
+    capabilities = output.get("capabilities")
+    anchors = output.get("semantic_anchors")
     if not isinstance(capabilities, list) or not 1 <= len(capabilities) <= 5:
         raise ValueError("PSG requires 1–5 model-inferred capabilities; no heuristic fallback")
-    if not isinstance(anchors, list) or not all(isinstance(x, str) for x in anchors):
-        raise ValueError("PSG semantic anchors must be strings")
+    if (not isinstance(anchors, list) or not anchors
+            or not all(isinstance(x, str) and x.strip() for x in anchors)):
+        raise ValueError("PSG requires nonempty semantic anchors")
     pseudo = []
     for capability in capabilities:
-        if not isinstance(capability, dict) or not isinstance(capability.get("requirement"), str):
-            raise ValueError("each model-inferred capability requires its own requirement")
-        pseudo.append(generate(
+        if (not isinstance(capability, dict)
+                or not all(isinstance(capability.get(key), str) and capability[key].strip()
+                           for key in ("name", "requirement"))):
+            raise ValueError("each model-inferred capability requires its nonempty name and requirement")
+        procedure = generate(
             "Write one concise hypothetical SKILL.md describing concrete procedural guidance to realize "
             "this capability. Preserve the supplied anchors, do not broaden the task. This text is only "
             "a retrieval proxy, not an executable skill. Capability: " + capability["requirement"]
-            + "\nSemantic anchors: " + ", ".join(anchors)))
+            + "\nSemantic anchors: " + ", ".join(anchors))
+        if not isinstance(procedure, str) or not procedure.strip():
+            raise ValueError("model-generated pseudo procedure must be nonempty; no fallback")
+        pseudo.append(procedure)
     return pseudo, anchors
 
 

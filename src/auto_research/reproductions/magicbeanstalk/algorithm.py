@@ -29,6 +29,13 @@ def goldilocks(rewards,truncated):
     return 0<rate<1 and any(r and not t for r,t in zip(rewards,truncated))
 
 
+def verified_hard_seed(rewards,truncated):
+    if (len(rewards)<2 or len(rewards)!=len(truncated) or any(r not in (0,1) for r in rewards)
+            or any(not isinstance(flag,bool) for flag in truncated)):
+        raise ValueError("aligned binary outcomes and actual boolean termination flags required")
+    return not any(rewards) and not any(truncated)
+
+
 class MagicBeanStalk:
     """Sections3.2-3.4; student pool is ordered weakest -> strongest."""
     def __init__(self,backend,*,depth=1,decomposition_retries=3,synthesis_retries=3):
@@ -111,11 +118,16 @@ class MagicBeanStalk:
                 return verified
         return None
 
-    def construct(self,seed):
-        seed_rewards,seed_truncated=self.backend.target_outcomes(seed)
-        verified_hard=not any(seed_rewards) and not any(seed_truncated)
-        self.audit.append({"phase":"seed-hardness-calibration","accepted":verified_hard,
-                           "rewards":seed_rewards,"truncated":seed_truncated})
+    def construct(self,seed,*,calibration=None):
+        # A bounded caller may reuse its actual current-policy pre-calibration.
+        # The original hard/termination gate is still enforced, never bypassed.
+        seed_rewards,seed_truncated=(self.backend.target_outcomes(seed) if calibration is None else calibration)
+        verified_hard=verified_hard_seed(seed_rewards,seed_truncated)
+        audit={"phase":"seed-hardness-calibration","accepted":verified_hard,
+               "rewards":seed_rewards,"truncated":seed_truncated}
+        if calibration is not None:
+            audit["actual_precalibration_reused_without_resampling"]=True
+        self.audit.append(audit)
         if not verified_hard:
             return None
         tree=self.decompose(seed)

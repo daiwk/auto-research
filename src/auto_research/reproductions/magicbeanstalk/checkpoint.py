@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import math
 import torch
 
@@ -9,7 +10,7 @@ from auto_research.post_training.oct10_checkpoint import verified_reward
 from auto_research.post_training.proximal_checkpoint import problem_messages
 from auto_research.post_training.oct13_common import (CostLedger,ExecutionFailure,evaluate,load_policy,
     load_split,policy_gradient_step,result_payload)
-from .algorithm import MagicBeanStalk,Problem
+from .algorithm import MagicBeanStalk,Problem,verified_hard_seed
 
 
 def _json(text):
@@ -127,6 +128,37 @@ class CheckpointConstruction:
                 [r.truncated for r in responses])
 
 
+def construct_paired_hard_roots(train,backend,builder,*,hard_root_limit):
+    """Train-only current-policy calibration, bounded trees, matched seed roots."""
+    if type(hard_root_limit) is not int or hard_root_limit<1:
+        raise ValueError("positive integer hard_root_limit required")
+    selected,calibrations=[],[]
+    for index,row in enumerate(train):
+        root=Problem(row["question"],row["answer"],"")
+        rewards,truncated=backend.target_outcomes(root)
+        accepted=verified_hard_seed(rewards,truncated)
+        calibrations.append({"training_index":index,"accepted":accepted,
+            "root_question_sha256":hashlib.sha256(root.question.encode()).hexdigest(),
+            "rewards":rewards,"truncated":truncated})
+        if accepted:
+            selected.append((index,root,(rewards,truncated)))
+            if len(selected)==hard_root_limit:
+                break
+    synthetic,controls,paired_indices=[],[],[]
+    for index,root,calibration in selected:
+        candidate=builder.construct(root,calibration=calibration)
+        if candidate is not None:
+            synthetic.append(candidate)
+            controls.append(root)
+            paired_indices.append(index)
+    return synthetic,controls,{"hard_root_limit":hard_root_limit,
+        "calibrated_training_candidates":len(calibrations),"calibration_audits":calibrations,
+        "verified_hard_roots_selected":len(selected),"tree_construction_attempts":len(selected),
+        "selected_training_root_indices":[i for i,_,_ in selected],
+        "paired_rl_root_indices":paired_indices,"method_and_control_use_same_root_pairs":True,
+        "precalibration_reused_without_duplicate_sampling":True}
+
+
 def run(config,*,seed=42):
     train,validation,split=load_split(config)
     ledger,student=CostLedger(),load_policy(config,seed=seed)
@@ -142,13 +174,20 @@ def run(config,*,seed=42):
                           synthesis_retries=int(config.get("synthesis_retries",2)))
     baseline=evaluate(student,validation,ledger,max_tokens=max_tokens,seed=seed+10000)
     synthetic=[]
-    for row in train:
-        problem=builder.construct(Problem(row["question"],row["answer"],""))
-        if problem is not None:
-            synthetic.append(problem)
+    root_selection=None
+    control_problems=[Problem(r["question"],r["answer"],"") for r in train]
+    if config.get("hard_root_limit") is not None:
+        synthetic,control_problems,root_selection=construct_paired_hard_roots(
+            train,backend,builder,hard_root_limit=config["hard_root_limit"])
+    else:
+        for row in train:
+            problem=builder.construct(Problem(row["question"],row["answer"],""))
+            if problem is not None:
+                synthetic.append(problem)
     if not synthetic:
         raise ExecutionFailure("no actual effectivity-validated, novel, verified, target-Goldilocks MBS descendant",
-                               {"construction_audits":builder.audit,"cost":ledger.to_dict()})
+                               {"construction_audits":builder.audit,"hard_root_selection":root_selection,
+                                "cost":ledger.to_dict()})
     torch.manual_seed(seed)
     student.prepare_lora(learning_rate=float(config.get("learning_rate",1e-5)))
     before=student.trainable_digest()
@@ -168,14 +207,17 @@ def run(config,*,seed=42):
     control=load_policy(config,seed=seed)
     torch.manual_seed(seed)
     control.prepare_lora(learning_rate=float(config.get("learning_rate",1e-5)))
-    control_training=train_rl(control,[Problem(r["question"],r["answer"],"") for r in train],"seed_rlvr_control")
+    control_training=train_rl(control,control_problems,"seed_rlvr_control")
     control_metrics=evaluate(control,validation,ledger,max_tokens=max_tokens,seed=seed+10000)
     changed=before!=student.trainable_digest()
     if not changed:
         raise ExecutionFailure("MBS descendants survived construction but actual RLVR groups supplied no nonzero advantage",
-                               {"training":training,"construction_audits":builder.audit,"cost":ledger.to_dict()})
+                               {"training":training,"control_training":control_training,
+                                "construction_audits":builder.audit,"hard_root_selection":root_selection,
+                                "cost":ledger.to_dict()})
     return result_payload("magicbeanstalk",config,seed,split,student,ledger,baseline,after,training,
         parameters_changed=changed,teacher=teacher.provenance,construction_audits=builder.audit,
+        hard_root_selection=root_selection,
         synthetic_problem_count=len(synthetic),control={"method":"seed-rlvr","training":control_training,"metrics":control_metrics},
         limitations=["Qwen2.5 and tiny train-only GSM8K replace proprietary teacher pools and original math/finance scale.",
                      "Independent re-solving and novelty/blueprint judging use actual teacher calls, not formal proof of synthetic labels.",

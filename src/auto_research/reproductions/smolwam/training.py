@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 import sys
 
-from ..lewam.external import PINS, verify_provenance
+from ..lewam.external import PINS, record_trained_candidate, verify_provenance
 from .algorithm import RELEASED_BLOCKS
 
 TEACHER_REVISION = "cb689ec0e3347c13667d70a78a3447388f5c3bb8"
@@ -165,10 +165,13 @@ def train(config):
                   "teacher_vs_demo_action_l1": kd_meta["teacher_vs_demo_action_l1"]}
         for key in ("action_l1", "world_l1", "kd_act_l1", "kd_world_l1"):
             metric["train_mean_" + key] = float(np.mean([row[key] for row in trained]))
+        candidate = record_trained_candidate(run, "smolwam", config["seed"], ("best.pt",), dataset, metric,
+                                             {"losses": losses, "gradients": gradients})
         return {"paper": "smolwam", "phase": "train", "seed": config["seed"], "executed": True,
                 "source_revision": PINS["smolwam"], "device": "cuda", "dataset": dataset,
                 "teacher": teacher_resource, "pretrained_adapter_text": release,
                 "variants": {"distillation_training": metric}, "losses": losses, "gradients": gradients,
+                "trained_candidate": candidate,
                 "evaluation_tier": "l2_public_dataset", "fidelity": "core_mechanism",
                 "diagnostic_only": True, "promotion_eligible": False,
                 "protocol": {"teacher_targets_actual_model": True, "teacher_targets_cover_validation": True,
