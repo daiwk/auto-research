@@ -12,6 +12,7 @@ from auto_research.reproductions.near.algorithm import (
 )
 from auto_research.reproductions.near.data import (MemoryQuery, grouped_split, load_longmemeval,
                                                  query_disjoint_shared_bank_split)
+from auto_research.reproductions.near.experiment import evidence_flags
 from auto_research.reproductions.beyond_final_embedding.algorithm import (
     SparseTokenIndex, multipositive_maxsim_loss, query_adapter,
 )
@@ -87,6 +88,19 @@ def test_shared_bank_split_is_explicit_query_only_and_never_weakens_strict_defau
     assert {name: len(rows) for name, rows in split.items()} == {"train": 6, "validation": 2, "test": 2}
     ids = [{q.id for q in rows} for rows in split.values()]
     assert all(not a.intersection(b) for i, a in enumerate(ids) for b in ids[i + 1:])
+
+
+@pytest.mark.parametrize("requested,shared,diagnostic", [
+    (False, False, False), (True, False, True), (False, True, True), (True, True, True),
+])
+def test_explicit_diagnostic_flag_cannot_be_promoted_even_with_strict_bank(requested, shared, diagnostic):
+    result = evidence_flags({"diagnostic_only": requested}, {"shared_unlabelled_memory": shared})
+    assert result == {"diagnostic_only": diagnostic, "promotion_eligible": not diagnostic}
+
+
+def test_diagnostic_flag_rejects_ambiguous_string_false():
+    with pytest.raises(ValueError, match="explicit boolean"):
+        evidence_flags({"diagnostic_only": "false"}, {"shared_unlabelled_memory": False})
 
 
 def test_sparse_floor_aggregates_by_memory_and_preserves_unmatched_candidates():

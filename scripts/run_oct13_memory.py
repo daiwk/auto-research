@@ -21,6 +21,8 @@ def main():
     parser.add_argument("--adapter-epochs", type=int, default=2)
     parser.add_argument("--split-policy", choices=("bank-disjoint", "query-disjoint-shared-bank"),
                         default="bank-disjoint")
+    parser.add_argument("--diagnostic-only", action="store_true",
+                        help="explicitly forbid capability promotion, including bounded strict-bank diagnostics")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():
@@ -28,7 +30,8 @@ def main():
     config = {"raw_data": str(args.raw_data), "model_dir": str(args.model_dir),
               "device": args.device, "max_queries": args.max_queries,
               "max_length": args.max_length, "batch_size": args.batch_size,
-              "adapter_epochs": args.adapter_epochs, "split_policy": args.split_policy}
+              "adapter_epochs": args.adapter_epochs, "split_policy": args.split_policy,
+              "diagnostic_only": args.diagnostic_only}
     result = (run_near if args.paper == "near" else run_beyond)(config, args.seed)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")

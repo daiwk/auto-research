@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 
 from ..near.data import retrieval_metrics
-from ..near.experiment import _mean, comparison_contract, pooled_baseline, prepare, render
+from ..near.experiment import _mean, comparison_contract, evidence_flags, pooled_baseline, prepare, render
 from .algorithm import SparseTokenIndex, multipositive_maxsim_loss, query_adapter
 
 
@@ -76,8 +76,7 @@ def run_beyond(config: dict, seed: int) -> dict:
     baseline = pooled_baseline(split["test"], labels, features)
     return {"paper": "beyond-final-embedding", "seed": seed, "device": device,
             "evaluation_tier": "l2_public_dataset", "fidelity": "core_mechanism",
-            "diagnostic_only": protocol["shared_unlabelled_memory"],
-            "promotion_eligible": not protocol["shared_unlabelled_memory"],
+            **evidence_flags(config, protocol),
             "protocol": {**protocol, "token_budget": 64, "adapter_rank": config.get("rank", 32),
                          "adapter_epochs": max_epochs, "encoder_and_memory_frozen": True},
             "comparison_contract": comparison_contract(protocol, "frozen MiniLM native pooled cosine",

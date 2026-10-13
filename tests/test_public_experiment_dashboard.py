@@ -13,6 +13,8 @@ def test_dashboard_dataset_label_does_not_dump_revision_manifest():
     source = {"dataset": {"id": "WikiText-2", "revision": {"train": "a" * 64}}}
     assert _dataset_name(str(source['dataset']), source) == 'WikiText-2'
     assert _dataset_name('', {'dataset': {'name': 'CIFAR-10'}}) == 'CIFAR-10'
+    assert _dataset_name('', {'dataset': {'public_id': 'xiaowu0162/longmemeval-cleaned',
+                                         'revision': 'fixed-revision'}}) == 'xiaowu0162/longmemeval-cleaned'
     assert _dataset_name('legacy-dataset', {}) == 'legacy-dataset'
     assert _dataset_name('', {'benchmark': 'public-benchmark'}) == 'public-benchmark'
 
@@ -35,6 +37,9 @@ def test_public_dashboard_contains_only_committed_documentation_metrics():
 
     assert payload["schema_version"] == 2
     assert payload["artifact_count"] == len(experiments)
+    assert payload["indexed_artifact_count"] == (
+        payload["artifact_count"] + payload["unmeasured_artifact_count"]
+    )
     assert len(experiments) >= 300
     assert all(item["path"].startswith("docs/") for item in experiments)
     assert all(item["method"] != "metrics" for item in experiments)
@@ -42,6 +47,20 @@ def test_public_dashboard_contains_only_committed_documentation_metrics():
     assert any(item["domain"] == "foundation-model" for item in experiments)
     assert any(item["domain"] == "system-one" for item in experiments)
     assert any(item["title"] for item in experiments)
+
+
+def test_boolean_only_implementation_contracts_remain_auditable_not_result_cards():
+    from scripts.generate_public_experiment_dashboard import build_payload
+
+    payload = build_payload()
+    displayed = {item["path"] for item in payload["experiments"]}
+    contracts = list((ROOT / "docs").glob("**/metrics/implementation-contract.json"))
+    unmeasured = [path for path in contracts
+                  if all(isinstance(value, bool)
+                         for value in json.loads(path.read_text())["metrics"].values())]
+    assert unmeasured
+    assert all(path.relative_to(ROOT).as_posix() not in displayed for path in unmeasured)
+    assert payload["unmeasured_artifact_count"] >= len(unmeasured)
 
 
 def test_sguid_dashboard_keeps_negative_validation_and_mechanism_tier():

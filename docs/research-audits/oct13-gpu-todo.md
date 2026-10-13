@@ -1,9 +1,13 @@
 # 2026-10-13 GPU 验证 TODO（网络恢复后继续）
 
-用户已明确要求：网络不稳定时先停止 A100/A30 的连接、传输和新实验，保留为 TODO。
+2026-10-13 用户要求网络不稳定时先停止 A100/A30 的连接、传输和新实验，保留为 TODO。
+2026-10-14 用户已明确恢复使用；两类 NVIDIA GPU 的 SSH 只读检查均成功，已有实验目录仍在。
+当前按固定源码/资源 SHA 核验后续跑，下面未完成项仍不因连接恢复自动验收。
 本轮不因这项暂停删除失败结果、降低 GPU 门禁或宣称 19 篇全部验收完成。
 源码检查点：`ccad3e679787f6f5383b8bd3dd1c7b58e7c8c5d0`；之后的文档/工具收口以分支最新提交为准。
 本地已完成的核验、已修复失败点及最终检查边界见[本地收口检查点](oct13-local-closeout.md)。
+续办源码包绑定提交 `4496283ac8e37c070b8f71b20af6138526cbba15`；仅含公开源码与本轮执行脚本，
+不包含工作区缓存、私有数据或密钥。不覆写旧运行目录，源码修复必须先提交新快照后再运行。
 
 ## 已有真实结果
 
@@ -11,7 +15,7 @@
 | --- | --- | --- |
 | UxSID | A100，42/43/44，943 用户、四结构实际训练、缓存一致性 | 原工业线上收益、完整 XLong/KuaiRec；本次无稳定提升 |
 | State-OPD | A100 原快照，42/43/44，实际更新；8 题 accuracy 前后均为 0 | 新源码默认路径、完整历史 OPD / 无扩采控制 |
-| GPPO / TAPO | A100 原快照各三 seed，独立 GRPO-control 三 seed | 大规模长轨迹能力结果；三步/8题仅为机制诊断 |
+| GPPO / TAPO | A100 原快照各三 seed，独立 GRPO-control 三 seed；3 rollout groups × 2 inner updates = 6 次实际 optimizer 更新 | 大规模长轨迹能力结果；8 题仅为机制诊断 |
 | DoubleCat / SemiCat | A30 新核心，42/43/44，真实 40 步与 32 NFE | 原 TinyGSM/OWT 规模；onehot/DoubleCat 坍缩负结果保留 |
 
 对应指标与脱敏回执均在各篇详情页。旧标准 SC GPU 结果不能替代 DoubleCat 新核心的回执。
@@ -47,7 +51,7 @@
 - 本机已核验 Qwen Base、SmolWAM、Wan VAE、LeWAM release/ToolHang、Cosmos teacher/单任务 demo 的固定版本与实际文件 SHA；同步断点不等于远端文件完整。
 - 固定 LIBERO `8f1084e3132a39270c3a13ebe37270a43ece2a01` 的源 archive 已取得；恢复时为无 `.git` 镜像生成完整逐文件 SHA 清单，不伪造 Git HEAD。
 - A100 两套 simulator overlay 先前 pip 因继承的非 UTF-8 metadata 失败。只在独立 overlay 使用精确小依赖的 `--target/--no-deps/--ignore-installed` 路径；不篡改共享 metadata、不重装共享 Torch。
-- A30 MiniLM 传输返回成功，但远端 SHA 仍未核验；LongMem 原文和 overlay 的实际远端状态未知。没有启动 NEAR/Beyond GPU 任务。详见[记忆检索恢复说明](oct13-memory-resume-notes.md)。
+- 10 月 14 日 A30 MiniLM 全部资源逐字节核验通过；LongMem 原文及 raw-only provenance 已补齐并核验。新独立 overlay 安装/metadata 审计与 CPU 前向已通过，共享 Torch 未修改。NEAR/Beyond 待显式诊断标记修复冻结后启动 CUDA，不能把这些准备工作当作 GPU 结果。详见[记忆检索恢复说明](oct13-memory-resume-notes.md)。
 
 每次恢复先核验源代码 SHA 和资源实际字节；确认后再运行。每篇结束取回 JSON/日志，
 验证非零有效更新或明确的负对照边界，再生成 sanitized receipt，最后跑统一门禁。

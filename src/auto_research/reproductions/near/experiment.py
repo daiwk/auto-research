@@ -19,6 +19,15 @@ def _mean(rows: list[dict]) -> dict:
     return {key: float(np.mean([row[key] for row in rows])) for key in rows[0]}
 
 
+def evidence_flags(config: dict, protocol: dict) -> dict[str, bool]:
+    """A requested diagnostic cannot become promotable under a strict split."""
+    requested = config.get("diagnostic_only", False)
+    if not isinstance(requested, bool):
+        raise ValueError("diagnostic_only must be an explicit boolean")
+    diagnostic = requested or protocol["shared_unlabelled_memory"]
+    return {"diagnostic_only": diagnostic, "promotion_eligible": not diagnostic}
+
+
 def verify_provenance(root: Path, public_id: str, revision: str,
                       required: tuple[str, ...]) -> dict:
     provenance = json.loads((root / "provenance.json").read_text())
@@ -70,6 +79,7 @@ def prepare(config: dict) -> tuple:
                 "split_rule": ("connected candidate-session ID components; fixed hash order; 60/20/20"
                     if split_policy == "bank-disjoint" else "query-ID-only fixed hash order; 60/20/20"),
                 "shared_unlabelled_memory": split_policy == "query-disjoint-shared-bank",
+                "diagnostic_only_requested": config.get("diagnostic_only", False),
                 "unseen_bank_generalization": False,
                 "memory_encoding_cache": "immutable frozen encodings keyed by source text; no query or relevance",
                 "max_queries": config.get("max_queries", 30),
@@ -133,8 +143,7 @@ def run_near(config: dict, seed: int) -> dict:
     baseline = pooled_baseline(split["test"], labels, features)
     return {"paper": "near", "seed": seed, "device": config.get("device", "cpu"),
             "evaluation_tier": "l2_public_dataset", "fidelity": "core_mechanism",
-            "diagnostic_only": protocol["shared_unlabelled_memory"],
-            "promotion_eligible": not protocol["shared_unlabelled_memory"], "protocol": protocol,
+            **evidence_flags(config, protocol), "protocol": protocol,
             "comparison_contract": comparison_contract(protocol, "frozen MiniLM native pooled cosine", "near"),
             "selection": selected, "validation_trials": trials,
             "test": test, "baseline": baseline, "test_rankings": rankings,

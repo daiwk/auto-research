@@ -13,7 +13,7 @@ import sys
 
 import torch
 
-from auto_research.foundation_models.replayssm import mechanism_suite
+from auto_research.foundation_models.replayssm import gdn_mechanism_suite, mechanism_suite
 from auto_research.oct12_public_sources import sha256_file
 
 UPSTREAM_REVISION = "5d3ea597d479ef0c8e9e2eb2845a2adfdb9a8b44"
@@ -97,8 +97,9 @@ def main() -> None:
     report = {"paper": "2610.13778", "seed": args.seed, "diagnostic_only": True,
               "promotion_eligible": False, "fidelity": "core_mechanism",
               "evaluation_tier": "l1_mechanism", "dataset": "seeded random recurrent inputs",
-              "dataset_revision": "replayssm-random-input-protocol-v1",
+              "dataset_revision": "replayssm-random-input-protocol-v2-gdn-rollback",
               "reference": mechanism_suite(args.seed, "cuda"),
+              "reference_gdn": gdn_mechanism_suite(args.seed, "cuda"),
               "author_triton": author_precision_suite(args.upstream, args.steps, args.seed),
               "limitations": ["no model checkpoint or held-out language benchmark",
                                "FP32-storage quantization emulation cannot measure low-bit HBM savings",

@@ -97,7 +97,10 @@ class ReplayBuffer:
         self.refreshes = 0
 
     def _records(self, checkpoint: Tensor, raw: list[Record]) -> list[Record]:
-        return gdn_corrections(checkpoint, raw) if self.gdn else raw
+        # No accepted history is the identity recurrence, including after a
+        # completely rejected GDN verification or a refresh followed by zero
+        # acceptance. Do not send an empty batch to the triangular solver.
+        return gdn_corrections(checkpoint, raw) if self.gdn and raw else raw
 
     def current_state(self) -> Tensor:
         return replay(self.high, self._records(self.high, self.committed))
@@ -160,3 +163,64 @@ def mechanism_suite(seed: int = 42, device: str = "cpu") -> dict:
             "native_bandwidth_speedup_claim": False,
             "limitations": ["bounded-list reference, not fused serving/ring-buffer implementation",
                             "random recurrent inputs, no language-model quality benchmark"]}
+
+
+def gdn_mechanism_suite(seed: int = 42, device: str = "cpu") -> dict:
+    """GDN raw-input rollback/flush against direct recurrence, on the chosen device.
+
+    The FP16/FP32 read-copy pair shares an FP32 recurrence anchor. This checks
+    that low-read residuals do not enter committed state, including after
+    zero/partial/full acceptance and a flush. It is not native vLLM speculation.
+    """
+    torch.manual_seed(seed)
+    checkpoint = torch.randn(2, 8, 8, device=device) * .1
+    runners = [ReplayBuffer(checkpoint, window=4, read_dtype=dtype, gdn=True)
+               for dtype in (torch.float16, torch.float32)]
+    conventional = checkpoint.clone()
+    output_errors, state_errors, read_differences, anchor_differences = [], [], [], []
+    acceptance_counts = []
+    for cycle in range(8):
+        drafts = [Record(torch.full((2,), .95, device=device),
+                         torch.randn(2, 8, device=device) * .1,
+                         torch.randn(2, 8, device=device) * .1,
+                         torch.rand(2, device=device)) for _ in range(3)]
+        queries = torch.randn(3, 2, 8, device=device)
+        actual = [runner.verify(drafts, queries) for runner in runners]
+        # Independent target: execute the original GDN update directly, not
+        # the triangular correction solver used by the replay implementation.
+        expected_outputs, prefix_states = [], [conventional.clone()]
+        for record, query in zip(drafts, queries, strict=True):
+            decayed = record.alpha[..., None, None] * prefix_states[-1]
+            projected = torch.einsum("...vk,...k->...v", decayed, record.key)
+            residual = record.beta[..., None] * (record.value - projected)
+            state = decayed + residual[..., :, None] * record.key[..., None, :]
+            prefix_states.append(state)
+            expected_outputs.append(torch.einsum("...vk,...k->...v", state, query))
+        expected = torch.stack(expected_outputs)
+        output_errors.append(float((actual[1] - expected).abs().max()))
+        read_differences.append(float((actual[0] - actual[1]).abs().max()))
+        torch.testing.assert_close(actual[1], expected, atol=2e-6, rtol=2e-6)
+        assert all(torch.isfinite(value).all() for value in actual)
+        count = cycle % 4
+        acceptance_counts.append(count)
+        for runner in runners:
+            runner.accept(count)
+        conventional = prefix_states[count]
+        for runner in runners:
+            current = runner.current_state()
+            state_errors.append(float((current - conventional).abs().max()))
+            torch.testing.assert_close(current, conventional, atol=2e-6, rtol=2e-6)
+        anchor_differences.append(float((runners[0].high - runners[1].high).abs().max()))
+        torch.testing.assert_close(runners[0].high, runners[1].high, atol=0, rtol=0)
+        torch.testing.assert_close(runners[0].current_state(), runners[1].current_state(), atol=0, rtol=0)
+    return {"seed": seed, "diagnostic_only": True, "promotion_eligible": False,
+            "fidelity": "core_mechanism", "evaluation_tier": "l1_mechanism",
+            "max_output_error": max(output_errors), "max_committed_state_error": max(state_errors),
+            "read_precision_output_max_difference": max(read_differences),
+            "high_anchor_read_precision_max_difference": max(anchor_differences),
+            "accepted_tokens": sum(acceptance_counts), "acceptance_counts": acceptance_counts,
+            "checkpoint_refreshes": [runner.refreshes for runner in runners],
+            "recurrence_dtype": "FP32", "read_dtypes": ["FP16", "FP32"],
+            "native_bandwidth_speedup_claim": False,
+            "limitations": ["bounded-list CUDA/PyTorch reference, not native vLLM speculative kernel",
+                            "random GDN inputs, no language-model quality benchmark"]}

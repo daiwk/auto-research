@@ -90,7 +90,7 @@ $$
 
 ### 数据协议与执行入口
 
-随机 recurrent 输入使用版本化协议 `replayssm-random-input-protocol-v1` 和显式 seed，不是公开语言 benchmark。作者 emulation 每次调用复用 output buffer，本地立即 clone，至少执行 17 步覆盖 16-token refresh。
+随机 recurrent 输入使用版本化协议 `replayssm-random-input-protocol-v2-gdn-rollback` 和显式 seed，不是公开语言 benchmark。除 Mamba 风格 rollback 外，GDN 参考在实际指定设备执行零/部分/全部接受与窗口刷新，对照独立的原始 GDN 逐步 recurrence；FP16/FP32 read copy 共用 FP32 anchor，核验读取误差不进入提交状态。零接受的空 committed history 必须保持 anchor 不变，不能调用空三角求解。作者 emulation 每次调用复用 output buffer，本地立即 clone，至少执行 17 步覆盖 16-token refresh；作者 standalone API 的标准 `.step` 不冒充原生投机 serving。
 
 ```bash
 PYTHONPATH=src python scripts/run_replayssm.py \

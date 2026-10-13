@@ -106,6 +106,22 @@ def test_mbs_effectivity_prompt_never_contains_parent_gold_or_parent_plan():
     assert "separate child" in payload
 
 
+def test_mbs_effectivity_costs_separate_teacher_and_student_tokens():
+    class Policy:
+        def __init__(self,length): self.length=length
+        def generate(self,messages,**kwargs):
+            return [GeneratedResponse(tuple(range(self.length)),"\\boxed{1}",False)]*kwargs["samples"]
+    ledger=CostLedger()
+    backend=CheckpointConstruction(Policy(5),Policy(2),ledger,rollouts=3)
+    problem=Problem("public training question","1","verified train-only trace")
+    assert backend.student_rates(problem,worked_examples=())==[1.,1.]
+    assert ledger.generated_tokens=={"effectivity_student":6,"effectivity_teacher":15}
+    assert ledger.calls=={"effectivity_student":1,"effectivity_teacher":1}
+    assert backend.student_rates(problem,worked_examples=(),through_student=0)==[1.]
+    assert ledger.generated_tokens=={"effectivity_student":12,"effectivity_teacher":15}
+    assert ledger.calls=={"effectivity_student":2,"effectivity_teacher":1}
+
+
 def test_synthself_aligner_family_quality_and_distribution_constraints():
     validate_aligner("Qwen/Qwen2.5-0.5B-Instruct","Qwen/Qwen2.5-7B-Instruct",5,70)
     with pytest.raises(ValueError,match="same-family"):

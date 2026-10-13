@@ -2,7 +2,7 @@ import pytest
 import torch
 
 from auto_research.foundation_models.replayssm import (
-    Record, ReplayBuffer, gdn_corrections, mechanism_suite, output_only, replay,
+    Record, ReplayBuffer, gdn_corrections, gdn_mechanism_suite, mechanism_suite, output_only, replay,
 )
 
 
@@ -58,6 +58,30 @@ def test_low_read_never_enters_recurrence_and_gdn_refresh_recomputes():
             runner.accept(1)
         torch.testing.assert_close(runners[0].high, runners[1].high, atol=0, rtol=0)
         torch.testing.assert_close(runners[0].current_state(), runners[1].current_state(), atol=0, rtol=0)
+
+
+def test_gdn_empty_committed_history_is_identity_after_complete_rejection():
+    state = torch.randn(2, 3, 4)
+    runner = ReplayBuffer(state, window=2, gdn=True)
+    torch.testing.assert_close(runner.current_state(), state, atol=0, rtol=0)
+    records = [Record(torch.full((2,), .9), torch.randn(2, 3),
+                      torch.randn(2, 4) * .1, torch.rand(2)) for _ in range(2)]
+    runner.verify(records, torch.randn(2, 2, 4))
+    runner.accept(0)
+    torch.testing.assert_close(runner.current_state(), state, atol=0, rtol=0)
+
+
+@pytest.mark.parametrize("seed", [42, 43, 44])
+def test_gdn_suite_checks_direct_recurrence_rollback_and_independent_read_precision(seed):
+    result = gdn_mechanism_suite(seed)
+    assert result["acceptance_counts"] == [0, 1, 2, 3, 0, 1, 2, 3]
+    assert result["accepted_tokens"] == 12
+    assert result["checkpoint_refreshes"] == [3, 3]
+    assert result["max_output_error"] < 2e-6
+    assert result["max_committed_state_error"] < 2e-6
+    assert result["read_precision_output_max_difference"] > 0
+    assert result["high_anchor_read_precision_max_difference"] == 0
+    assert result["native_bandwidth_speedup_claim"] is False
 
 
 def test_author_cuda_entry_rejects_dirty_source_before_import_or_execution(tmp_path, monkeypatch):

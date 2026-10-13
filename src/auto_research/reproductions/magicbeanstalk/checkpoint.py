@@ -68,8 +68,9 @@ class CheckpointConstruction:
                if examples else problem.question)
         policies=self.students if through_student is None else self.students[:through_student+1]
         rates=[]
-        for policy in policies:
-            responses=self.ledger.sample(policy,problem_messages(query),role="effectivity_student",
+        for index,policy in enumerate(policies):
+            role="effectivity_student" if index==0 else "effectivity_teacher"
+            responses=self.ledger.sample(policy,problem_messages(query),role=role,
                                           samples=self.rollouts,max_tokens=self.max_tokens)
             rewards=[0. if r.truncated else verified_reward(r.text,problem.answer) for r in responses]
             rates.append(sum(rewards)/len(rewards))
