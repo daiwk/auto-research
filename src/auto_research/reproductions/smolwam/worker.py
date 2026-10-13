@@ -14,6 +14,7 @@ from .algorithm import assert_release
 
 def load_initial_states(libero_root: Path, task):
     """Verified LIBERO NumPy states with weights-only, narrowly scoped globals."""
+    import importlib
     import numpy as np
     import pickle
     import torch
@@ -28,10 +29,9 @@ def load_initial_states(libero_root: Path, task):
                           (relative.as_posix(),))
     else:
         verify_source(libero_root, "libero")
-    core = getattr(np, "_core", None)
-    if core is None:
-        core = np.core
-    reconstruct = core.multiarray._reconstruct
+    # NumPy 1.26 exposes a partial np._core compatibility shim without
+    # multiarray; importing the concrete module also works on NumPy 2.x.
+    reconstruct = importlib.import_module("numpy.core.multiarray")._reconstruct
     allowed = [(reconstruct, "numpy.core.multiarray._reconstruct"),
                (reconstruct, "numpy._core.multiarray._reconstruct"), np.ndarray, np.dtype,
                np.dtypes.Float32DType, np.dtypes.Float64DType]

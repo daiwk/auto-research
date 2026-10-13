@@ -425,7 +425,9 @@ def test_new_smolwam_student_cannot_use_default_or_different_training_task(tasks
 
 
 @pytest.mark.parametrize("dtype", [np.float32, np.float64])
-def test_libero_verified_numpy_init_states_load_weights_only_without_global_patch(tmp_path, dtype):
+@pytest.mark.parametrize("partial_numpy_core_shim", [False, True])
+def test_libero_verified_numpy_init_states_load_weights_only_without_global_patch(
+        tmp_path, dtype, partial_numpy_core_shim, monkeypatch):
     from types import SimpleNamespace
     from auto_research.reproductions.smolwam.worker import load_initial_states
     from auto_research.reproductions.lewam.external import PINS
@@ -437,6 +439,9 @@ def test_libero_verified_numpy_init_states_load_weights_only_without_global_patc
     manifest = {"public_id": "Lifelong-Robot-Learning/LIBERO", "revision": PINS["libero"],
                 "files": {relative: hashlib.sha256(path.read_bytes()).hexdigest()}}
     (tmp_path / "provenance.json").write_text(json.dumps(manifest))
+    if partial_numpy_core_shim:
+        # Real remote NumPy 1.26.3 exposes this incomplete compatibility shim.
+        monkeypatch.setattr(np, "_core", SimpleNamespace(), raising=False)
     with torch.serialization.safe_globals([np.ndarray]):
         before = set(torch.serialization.get_safe_globals())
         actual = load_initial_states(tmp_path, SimpleNamespace(problem_folder="libero_goal", init_states_file="task.pruned_init"))
