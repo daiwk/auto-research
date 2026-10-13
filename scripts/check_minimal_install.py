@@ -23,6 +23,8 @@ class RejectOptionalRuntime(importlib.abc.MetaPathFinder):
             "safetensors",
             "huggingface_hub",
             "soundfile",
+            "xgrammar",
+            "tvm_ffi",
         }:
             raise AssertionError(f"base-only command imported optional runtime: {fullname}")
         return None

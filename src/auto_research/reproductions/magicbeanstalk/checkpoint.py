@@ -41,8 +41,27 @@ def _problem(value):
     return Problem(value["question"],answer,value["trace"])
 
 
+def construction_schema(operation):
+    """Structure only: no answer values, correctness, novelty or safety forced."""
+    problem={"type":"object","properties":{"question":{"type":"string"},
+        "answer":{"anyOf":[{"type":"string"},{"type":"number"}]},"trace":{"type":"string"}},
+        "required":["question","answer","trace"],"additionalProperties":False}
+    if operation=="propose_children":
+        return {"type":"array","items":problem,"minItems":2,"maxItems":2}
+    if operation in {"harder_leaf","compose"}:
+        return problem
+    fields={"scaffold_safe":["scaffold_safe"],"blueprint_and_novelty":["blueprint_preserved","substantive_novelty"]}
+    if operation not in fields:
+        raise ValueError("unknown constrained construction operation")
+    return {"type":"object","properties":{k:{"type":"boolean"} for k in fields[operation]},
+        "required":fields[operation],"additionalProperties":False}
+
+
 class CheckpointConstruction:
-    def __init__(self,teacher,student,ledger,*,max_tokens=768,rollouts=4,teacher_attempts=2):
+    def __init__(self,teacher,student,ledger,*,max_tokens=768,rollouts=4,teacher_attempts=2,construction_json_schema=False):
+        if type(construction_json_schema) is not bool:
+            raise ValueError("construction_json_schema must be an explicit boolean")
+        self.construction_json_schema=construction_json_schema
         self.teacher,self.student,self.ledger=teacher,student,ledger
         self.max_tokens,self.rollouts,self.teacher_attempts=max_tokens,rollouts,teacher_attempts
         self.students=(student,teacher)  # scaled ordered same-family pool
@@ -101,12 +120,27 @@ class CheckpointConstruction:
         return rates
 
     def teacher_json(self,instruction,context,*,operation="teacher_json"):
+        schema=construction_schema(operation) if self.construction_json_schema else None
+        schema_kwargs={} if schema is None else {"json_schema":schema}
         response=self.ledger.sample(self.teacher,({"role":"user","content":instruction+"\n"+
             "Output JSON only, without prose or code fences.\n"+json.dumps(context,ensure_ascii=False)},),
-            role="construction_teacher",max_tokens=self.max_tokens)[0]
+            role="construction_teacher",max_tokens=self.max_tokens,**schema_kwargs)[0]
         audit=self.record_response(response,role="construction_teacher",input_gold_scope="training-construction-context",
             operation=operation,parsing_completed=False)
-        value=None if response.truncated else _json(response.text)
+        if self.construction_json_schema:
+            schema_sha=hashlib.sha256(json.dumps(schema,sort_keys=True,separators=(",",":"),allow_nan=False).encode()).hexdigest()
+            metadata=getattr(self.teacher,"last_json_schema_generation",{})
+            if (metadata.get("backend")!="xgrammar-hf" or metadata.get("schema_sha256")!=schema_sha
+                    or not isinstance(metadata.get("version"),str) or not metadata["version"]):
+                raise ValueError("actual constrained teacher generation metadata required")
+            audit.update(json_schema_constrained=True,json_schema_sha256=schema_sha,
+                json_schema_backend="xgrammar-hf",xgrammar_version=metadata["version"])
+            try:
+                value=None if response.truncated else json.loads(response.text)
+            except json.JSONDecodeError:
+                value=None  # Never extract/repair an inner object in the opt-in path.
+        else:
+            value=None if response.truncated else _json(response.text)
         audit.update(parsing_completed=True,parsed_json_kind=type(value).__name__,
             reject_reason="truncated_json_response" if response.truncated else ("no_json_value" if value is None else None))
         return value
@@ -204,6 +238,9 @@ def construct_paired_hard_roots(train,backend,builder,*,hard_root_limit):
 
 
 def run(config,*,seed=42):
+    construction_json_schema=config.get("construction_json_schema",False)
+    if type(construction_json_schema) is not bool:
+        raise ValueError("construction_json_schema must be an explicit boolean")
     train,validation,split=load_split(config)
     ledger,student=CostLedger(),load_policy(config,seed=seed)
     teacher=load_policy(config,role="teacher",seed=seed)
@@ -212,7 +249,8 @@ def run(config,*,seed=42):
     if min(max_tokens,group-1,int(config.get("steps",2)),int(config.get("teacher_attempts",2)))<1:
         raise ValueError("positive construction/RLVR budget and >=2 real group outcomes required")
     backend=CheckpointConstruction(teacher,student,ledger,max_tokens=max_tokens,rollouts=group,
-                                  teacher_attempts=int(config.get("teacher_attempts",2)))
+                                  teacher_attempts=int(config.get("teacher_attempts",2)),
+                                  construction_json_schema=construction_json_schema)
     builder=MagicBeanStalk(backend,depth=int(config.get("depth",1)),
                           decomposition_retries=int(config.get("decomposition_retries",2)),
                           synthesis_retries=int(config.get("synthesis_retries",2)))

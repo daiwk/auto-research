@@ -32,8 +32,11 @@ class CostLedger:
     encoder_calls: int = 0
     encoded_input_tokens: int = 0
 
-    def sample(self, policy, messages, *, role="student", samples=1, max_tokens=512, sample=True):
-        responses = policy.generate(messages, samples=samples, max_tokens=max_tokens, sample=sample)
+    def sample(self, policy, messages, *, role="student", samples=1, max_tokens=512, sample=True, json_schema=None):
+        if json_schema is None:
+            responses = policy.generate(messages, samples=samples, max_tokens=max_tokens, sample=sample)
+        else:
+            responses = policy.generate(messages, samples=samples, max_tokens=max_tokens, sample=sample, json_schema=json_schema)
         self.calls[role] = self.calls.get(role, 0) + 1
         self.generated_tokens[role] = self.generated_tokens.get(role, 0) + sum(len(r.tokens) for r in responses)
         return responses

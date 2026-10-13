@@ -59,17 +59,49 @@ class ResponsePolicy:
             raise ValueError("complete history exceeds context budget; it is not silently truncated")
         return ids
 
-    def generate(self, messages, *, samples=1, max_tokens=512, sample=True):
+    def _schema_logits_processor(self, json_schema):
+        """Optional token-level structure constraint; never a post-hoc repair."""
+        self.last_json_schema_generation = {}
+        if not isinstance(json_schema, dict):
+            raise ValueError("json_schema must be a JSON Schema object")
+        try:
+            canonical = json.dumps(json_schema, sort_keys=True, separators=(",", ":"), allow_nan=False)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("json_schema must contain only finite JSON values") from exc
+        vocab_size = getattr(self.model.config, "vocab_size", None)
+        if type(vocab_size) is not int or vocab_size < 1:
+            raise ValueError("explicit positive model.config.vocab_size required for token masks")
+        try:
+            import xgrammar as xgr
+            from xgrammar.contrib.hf import LogitsProcessor
+        except ImportError as exc:
+            raise RuntimeError("opt-in JSON schema generation requires the optional xgrammar dependency") from exc
+        from importlib.metadata import version
+        backend_version = version("xgrammar")
+        if not hasattr(self, "_json_schema_compiler"):
+            tokenizer_info = xgr.TokenizerInfo.from_huggingface(self.tokenizer, vocab_size=vocab_size)
+            self._json_schema_compiler = xgr.GrammarCompiler(tokenizer_info)
+            self._json_schema_cache = {}
+        if canonical not in self._json_schema_cache:
+            self._json_schema_cache[canonical] = self._json_schema_compiler.compile_json_schema(canonical)
+        # Matcher/logits-processor state belongs to this generation, not cache.
+        processor = LogitsProcessor(self._json_schema_cache[canonical])
+        self.last_json_schema_generation = {"backend": "xgrammar-hf", "version": backend_version,
+            "schema_sha256": hashlib.sha256(canonical.encode()).hexdigest()}
+        return processor
+
+    def generate(self, messages, *, samples=1, max_tokens=512, sample=True, json_schema=None):
         if min(samples, max_tokens) < 1:
             raise ValueError("positive response sampling budget required")
         prompt = self.prompt_ids(messages)
         budget = min(max_tokens, self.context_limit - prompt.shape[1])
+        schema_kwargs = {} if json_schema is None else {"logits_processor": [self._schema_logits_processor(json_schema)]}
         self.model.eval()
         with torch.no_grad():
             output = self.model.generate(prompt, attention_mask=torch.ones_like(prompt),
                 max_new_tokens=budget, do_sample=sample, num_return_sequences=samples,
                 **({"temperature": 1., "top_p": 1., "top_k": 0} if sample else {}),
-                pad_token_id=self.tokenizer.pad_token_id, use_cache=True)
+                pad_token_id=self.tokenizer.pad_token_id, use_cache=True, **schema_kwargs)
         responses = []
         for row in output:
             tokens = row[prompt.shape[1]:]

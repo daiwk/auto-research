@@ -113,3 +113,19 @@ algorithm.py：effectivity树与bottom-up构建；checkpoint.py：真实teacher�
 
 仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 
+### b908 真实响应 trace：构造仍失败
+
+[b908 seed42 脱敏负记录](metrics/public-a100-trace-failed-seed42-b9086275.json)绑定实际源码 `b90862754bf51b1beeb5add3f7dc2a51ca00ace4`、54个源码SHA与完整成本。原16train/最多4roots/cap1024/wall1800s不变，3条非截断全错校准root中仅root4独立教师验证通过；其两次分解各产生2个合法子题对象、各仅1个子题验证成功，root7/8独立验证失败。实际343.03793690539896秒、36129生成tokens（含1541初始validation tokens），paired集合为空，方法与控制均0 RL更新，effectivity条件测试、synthesis和最终Goldilocks未到达。这里只公开响应SHA、角色、长度、截断/验证结果，不公开响应文本或token IDs；train构造teacher可见parent答案/trace，独立验证仍只见question。不是完整方法通过或能力结论。
+
+### 5c 通用 self-contained 提示：单次真实失败
+
+[5c seed42 脱敏负记录](metrics/public-a100-selfcontained-failed-seed42-5c863ab8.json)绑定实际源码 `5c863ab8fdee702ddb1abcda6b6255646dc832fd`，只增加通用独立子题说明，未注入当前题数字、未增加采样/retry/预算或放宽verifier。3条校准root仍被选中；两次构造外层JSON均非法，原历史parser读到内层dict而非array，得到0个proposed/schema-valid子题；没有自动修复响应。root7/8独立验证失败。实际322.58301595784724秒、35069生成tokens（同样含1541初始validation tokens），paired集合为空，两臂均0 RL更新。两次新负记录与旧0f分别保存，均明确 `not_gpu_receipt=true`、整方法GPU门禁未通过；不能把单次提示修复、真实CUDA调用或严格curation测试当作验收。
+
+### 773 通用 JSON 序列化提示：真实失败
+
+[773 seed42 脱敏负记录](metrics/public-a100-json-contract-failed-seed42-773da4e3.json)绑定实际源码 `773da4e31f5ee3de2b7e4b03b524d61a1513cbdf` 与54个Git源码SHA，原预算不增。两次构造外层JSON仍非法，历史parser分别得到无JSON值、内层dict，均0个proposed子题；未自动repair或追加retry。实际330.63136535696685秒、35413生成tokens（含1541初始validation tokens），3条校准root、空paired集合，方法与控制均0 RL更新。保留旧记录，不签GPU通过回执或推导能力结论。
+
+### 可选结构约束生成（待真实新源码验证）
+
+配置 `construction_json_schema: true`（仅bool，默认false）通过 [XGrammar HF接口](https://xgrammar.mlc.ai/docs/latest/start/quick_start.html)在生成token时约束构造教师的JSON结构；需要独立 `structured-generation` 可选依赖。分解array长度2只对齐原提示的 exactly two，答案内容与判断布尔值不被强制。独立verifier与学生不使用schema；提示、采样次数、预算、Goldilocks和RL不变。编译grammar缓存，生成matcher不复用；审计记录实际XGrammar版本、schemaSHA和生成token成本。缺依赖或编译失败不退回无约束生成，截断/非法JSON不抽取内层对象或repair。默认false保留原历史parser与生成参数。当前仅CPU合同测试，不代表此新路径已执行真实CUDA或通过整方法门禁。
+
