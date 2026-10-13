@@ -91,6 +91,14 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 
+### 2026-10-14 实际失败记录（旧6a源码）
+
+[seed42两个reasoner负结果](metrics/public-a100-failed-seed42-6aabe57a.json)保留实际A100旧源码执行。7B训练有24 boxed gate train/8 calibration、eligible failed rollout0，生成7556tokens/encoder32calls、elapsed79.61秒；旧raw未存逐response正确性/cuts，不能推断所有回答正确。
+
+独立固定Qwen tokenizer检查发现 `'.\n\n'` 融合为ID382，而旧helper仅匹配孤立newline ID271，确会漏掉真实段落。32f已改为decoded字符边界映射原token截止索引，两处runner都调用，prefix不重新编码，并补逐response审计；旧输出不算修后core通过。小0.5B reasoner对照两position组rescue rewards/advantages全部0，虽然熵项导致2次参数更新，仍是failed-no-rescue-signal；4validation均0，elapsed250.57秒，不伪造通过。
+
+小 reasoner 同样使用旧段落协议：上述全零仅对应旧采样切点，不能代表修后完整候选切点集合。修后7B的train-only诊断已冻结 `51b4718a`，等待GPU槽，只查gate/段落/rescue信号，不签整方法回执。
+
 ### 代码映射
 
 algorithm.py：真实MLP、cut loss、gate、新user turn及预算；checkpoint.py：failure/head训练和matched maximum-budget推理。

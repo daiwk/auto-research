@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "adapter_key": "smolwam",
+  "seeds": [42],
+  "result": "failed_adapter_input",
+  "gpu_validation_passed": false,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "measured_locally": true,
+  "accelerator": {"vendor": "NVIDIA", "model": "NVIDIA A100-SXM4-80GB"},
+  "execution_checks": {
+    "actual_latent_bank_completed": true,
+    "latent_bank_episodes": 8,
+    "latent_bank_rows": 202,
+    "teacher_targets_completed": false,
+    "student_optimizer_updates": 0,
+    "new_student_closed_loop_completed": false,
+    "following_seeds_started": false
+  },
+  "failure": {
+    "phase": "teacher KD model construction",
+    "type": "RuntimeError",
+    "reason": "Native adapter loader received the full released student safetensors instead of an adapter-only file; its 768-dimensional text projection conflicts with the correct 1024-dimensional T5 teacher module.",
+    "teacher_configuration_preserved": {"text_dim": 1024, "text_projection": false, "blocks": 28, "tokens": 1764}
+  },
+  "dataset": {"public_id": "nvidia/LIBERO-Cosmos-Policy", "revision": "b463cbd5d114909e4daea65eb03bed9787290042", "task": "put the cream cheese in the bowl"},
+  "checkpoint": {
+    "student_adapter_source": {"public_id": "timiiowolabi/SmolWAM", "revision": "c269c6e3a9c113b2b04187daf977c09486e2eadc"},
+    "teacher": {"public_id": "nvidia/Cosmos-Policy-LIBERO-Predict2-2B", "revision": "cb689ec0e3347c13667d70a78a3447388f5c3bb8"},
+    "vae": {"public_id": "Wan-AI/Wan2.1-T2V-1.3B", "revision": "37ec512624d61f7aa208f7ea8140a131f93afc9a"}
+  },
+  "raw_evidence_sha256": {
+    "launcher_log": "98e8f93c334857d39837709c240ab17871c48f4075e21b325f2793c0a2e8a321",
+    "worker_log": "8e99ed61cfd441722fdcbf6ab444b7728af74eac3ed5d8ce35b0734e38af693c",
+    "worker_request": "4db348ad9deefe68e915ffbbf2c3e593c351be37f01f2c03ed7d27fc6db8992b"
+  },
+  "provenance": {
+    "code_commit": "2a061dd66a023c9be559a37bf4a67b1a2e4cdd9e",
+    "source_archive_sha256": "d3970ae849ec95afafd41161c8b2c8050b3f0df69054c0d2a9463febb0a171b9",
+    "artifact_path": "docs/reproductions/2610.13740-smolwam/metrics/a100-failed-adapter-2a061dd6.json"
+  },
+  "limitations": [
+    "This failed seed proves only the latent-bank phase, not teacher distillation, student updates or closed-loop completion.",
+    "No passed GPU receipt is issued; exact failure logs and already generated bank are preserved separately.",
+    "Any adapter-only correction requires a new immutable source and independent seed batch; this run is not resumed or mixed into it."
+  ]
+}

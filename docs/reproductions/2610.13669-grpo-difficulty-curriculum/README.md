@@ -11,7 +11,7 @@
 | Adapter | `grpo-difficulty-curriculum` |
 | 本地复现代码 | [`src/auto_research/reproductions/grpo_difficulty_curriculum/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/grpo_difficulty_curriculum/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
-| GPU门禁 | 必须真实A100/A30执行并提交绑定源码的脱敏回执；未取得者仍未验收 |
+| GPU门禁 | [A100 seed42 三臂机制回执](../../gpu-validations/grpo-difficulty-curriculum-a100-20261014.json)已通过；默认 seed43/44 仍未完成，单seed回执不等于全批验收 |
 
 ## 原始论文总结
 
@@ -75,7 +75,7 @@ fixed-medium/staged/static/unfiltered/too-hard均可执行。static保留初始�
 
 ### 可执行入口与预算
 
-入口为 `scripts/run_oct13_post_training.py --method grpo-difficulty-curriculum`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student/teacher镜像路径、public id/revision、train/validation路径、split manifest与dataset revision。下面是待实跑配置示例，不表示GPU已完成：
+入口为 `scripts/run_oct13_post_training.py --method grpo-difficulty-curriculum`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student/teacher镜像路径、public id/revision、train/validation路径、split manifest与dataset revision。下面为可复用的独立运行示例；已完成实测使用4steps，不能把此2steps示例当实测命令：
 
 ```bash
 PYTHONPATH=src python scripts/run_oct13_post_training.py \
@@ -90,6 +90,16 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 
+2026-10-14 已在 NVIDIA A100-SXM4-80GB 上完成原固定 Qwen2.5-0.5B/GSM8K train-only holdout 的三个独立seed42运行，源码冻结为 `6aabe57a97ec3a586aac7aeea66128750f9441da`。每臂8train、group8、4steps、response cap512、4validation；实际全部校准和被拒组成本进入ledger，官方test未打开。原始结果SHA、配置SHA、52源码SHA与实际逐步审计保存于 [public-a100-three-arms-seed42.json](metrics/public-a100-three-arms-seed42.json) 和上述回执。
+
+| 实际臂（均seed42） | validation accuracy初始→结束 | 实际有效更新 | 校准/训练生成response tokens | 全调用生成response tokens | 实际elapsed秒 |
+| --- | --- | --- | --- | --- | --- |
+| fixed-medium / B3 | 0.50→0.75 | 8 | 72,642 | 81,055 | 538.18 |
+| staged / B1→B2 | 0.50→0.50 | 9 | 73,273 | 82,431 | 562.04 |
+| B5 / too-hard | 0.50→0.50 | 11 | 74,351 | 83,131 | 555.90 |
+
+staged实际transition为new-best/keep/advance/new-best，第4step进入B2；未完成原B1→B5全课程。三个variants不算三个seeds：这是单seed L1机制smoke，`formal_comparison: false`、`promotion_eligible: false`。4题validation上的fixed-medium变化不能宣称稳定提升；B5本次未发生退化，也不能冒称复现原论文退化结论。同配置caps不等于同实际effective-update或token预算，不以elapsed做吞吐比较。
+
 ### 代码映射
 
 algorithm.py：原5带、plateau和非单调统计；checkpoint.py：当前policy估难、固定行为概率、动态gate、真实更新/B5控制。
@@ -100,5 +110,5 @@ algorithm.py：原5带、plateau和非单调统计；checkpoint.py：当前polic
 
 0.5B/短预算不代表原1.5B全train或三seed能力比较。同steps可能有不同effective updates/选题数/token，按实测解释。B5零更新/退化不能删除，也不是自动能力证明。
 
-仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
+默认42/43/44计划仍缺seed43/44；static和unfiltered入口尚未在本次GPU运行。完整原规模/课程与正式能力比较仍未完成，单seed机制GPU门禁通过不代表本批整体完成。还需全局目录同步与CI；三个seed也不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
 

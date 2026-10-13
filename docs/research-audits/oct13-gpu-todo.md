@@ -24,6 +24,8 @@
 
 对应指标与脱敏回执均在各篇详情页。旧标准 SC GPU 结果不能替代 DoubleCat 新核心的回执。
 
+LeWAM 已补齐 `0f5dca9f` A100 三 seed 原生联合训练→新候选三臂闭环，各 seed 有 4 次非零更新；三臂均为 16.67% ± 28.87%，未观测到规划优势，目标来自训练轨迹而非 holdout。难度课程已补齐 `6aabe57a` A100 seed42 三臂的机制回执（实际更新 8/9/11），但 static / unfiltered 和 seeds43/44 仍未完成。
+
 ## 剩余验证清单
 
 全部使用固定公开 checkpoint/data revision，原始输出不可覆盖。默认 seed 为 42/43/44；
@@ -38,11 +40,10 @@
 | 2 | SOAR | 先准备独立公开知识库（不是题目答案库），再跑 source-consistent / without-source-reward 两臂实际 RL |
 | 2 | GRPO 难度课程 | fixed-medium/staged/too-hard/unfiltered/static 独立同上限实验；记录校准和拒绝成本，零有效更新不推进 stage |
 | 2 | Progressive Contraction | 真实教师 backbone、MC 前缀续写、teacher pool 收缩、student NLL 路由、full-SFT 对照与教师成本 |
-| 3 | LeWAM | 独立 simulator overlay；固定 ToolHang 数据与发布 checkpoint；真实联合训练后以新 checkpoint 跑 reactive/best-of-k/gradient 三控制臂 |
 | 3 | SmolWAM | 独立 LIBERO overlay；固定 Cosmos teacher、一个真实 demo；28→12 block KD、1764→1008 布局课程及新 student/发布模型的同初始状态闭环 |
 
 尚未完成的 CUDA adapter 保持 `requires_gpu_validation=True`，不伪造缺失 receipt。
-10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM 五项真实回执；剩余九项按下表继续验收。
+10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM 与难度课程单 seed 机制回执；仍有七篇缺整方法 GPU 回执，另有难度课程的对照和种子计划未完成。
 State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替代或合并新实验。
 因此 GPU evidence gate 在这份 TODO 关闭前不能被报告为通过，MR 也不能被标为全部完成。
 
@@ -53,7 +54,8 @@ State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替�
 - 固定 LIBERO `8f1084e3132a39270c3a13ebe37270a43ece2a01` 的源 archive 已取得；恢复时为无 `.git` 镜像生成完整逐文件 SHA 清单，不伪造 Git HEAD。
 - A100 两套 simulator overlay 先前 pip 因继承的非 UTF-8 metadata 失败。只在独立 overlay 使用精确小依赖的 `--target/--no-deps/--ignore-installed` 路径；不篡改共享 metadata、不重装共享 Torch。
 - 10 月 14 日 A30 MiniLM、LongMem 原文及 raw-only provenance 全部逐字节核验通过；NEAR/Beyond 八项真实 GPU 结果及对应回执已保存，共享 Torch 未修改。详见[记忆检索恢复说明](oct13-memory-resume-notes.md)。
-- SkillDreamer 旧 `6aabe57a` 的 seed 43 缺失模型输出字段，失败已保留；修复 schema 失败处理后必须在 `0f5dca9f` 上重跑完整三 seed，不混入旧 seed 42。
+- SkillDreamer 旧 `6aabe57a` 的 seed 43 缺失模型输出字段，失败已保留；修复后 `0f5dca9f` 三 seed 已完成，但 CSI、真实技能加载和 SkillDreamer 工具动作均为 0，48/48 episode 未完成核心链路。不签通过回执，也不混入旧 seed42；下一步只使用独立 validation 格式诊断，不用 evaluation ID 挑方案。
+- SmolWAM `2a061dd6` 的 adapter 输入错误已保留；修复只提取原生 latent adapter，不改变教师结构。`2b84c377` seed42 已完成真实 teacher targets、8 次学生更新和新候选闭环，成功 0/2；后续 seed 尚在执行，未签三 seed 回执。
 - MBS 首轮没有正常终止的 verified-hard 根题；SynthSelf 原口径未通过 Eq.6，且 gold/rewrite EOS 口径需统一；UPTURN 段落 token 检测漏切与无有效救援信号均须分开处理。三者真实失败、成本和源码哈希见[独立审计](oct14-post-failure-review.md)，不能仅凭参数变化签通过回执。
 - SkillDreamer 每个 seed 必须实际发生 CSI 能力评估、真实 gallery 技能加载和工具执行才能签完成回执；全失败记录仍保留，但三 seed 本身不代表定义链路已执行。
 

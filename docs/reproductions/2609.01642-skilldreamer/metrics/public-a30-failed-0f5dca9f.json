@@ -1,0 +1,254 @@
+{
+  "schema_version": 2,
+  "adapter_key": "skilldreamer",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "failed_core_execution",
+  "gpu_validation_passed": false,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "measured_locally": true,
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A30"
+  },
+  "aggregate_metrics": {
+    "no_skills.pass_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "no_skills.load_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "no_skills.executed_actions": {
+      "mean": 109,
+      "std": 5.5677643628300215,
+      "n": 3
+    },
+    "no_skills.generation_failures": {
+      "mean": 12,
+      "std": 2.0,
+      "n": 3
+    },
+    "no_skills.tool_failure_episodes": {
+      "mean": 12.333333333333334,
+      "std": 1.5275252316519468,
+      "n": 3
+    },
+    "no_skills.model_calls": {
+      "mean": 139.66666666666666,
+      "std": 12.220201853215574,
+      "n": 3
+    },
+    "no_skills.generated_tokens": {
+      "mean": 5020,
+      "std": 832.3388732962075,
+      "n": 3
+    },
+    "direct.pass_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "direct.load_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "direct.executed_actions": {
+      "mean": 97.66666666666667,
+      "std": 5.507570547286102,
+      "n": 3
+    },
+    "direct.generation_failures": {
+      "mean": 11.666666666666666,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "direct.tool_failure_episodes": {
+      "mean": 12,
+      "std": 1.0,
+      "n": 3
+    },
+    "direct.model_calls": {
+      "mean": 128.66666666666666,
+      "std": 2.309401076758503,
+      "n": 3
+    },
+    "direct.generated_tokens": {
+      "mean": 5891.666666666667,
+      "std": 116.21244913232546,
+      "n": 3
+    },
+    "skilldreamer.pass_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "skilldreamer.load_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "skilldreamer.executed_actions": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "skilldreamer.generation_failures": {
+      "mean": 16,
+      "std": 0.0,
+      "n": 3
+    },
+    "skilldreamer.tool_failure_episodes": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "skilldreamer.model_calls": {
+      "mean": 331.6666666666667,
+      "std": 17.21433511156714,
+      "n": 3
+    },
+    "skilldreamer.generated_tokens": {
+      "mean": 19067.666666666668,
+      "std": 1783.3062926298817,
+      "n": 3
+    }
+  },
+  "execution_checks": [
+    {
+      "seed": 42,
+      "actual_csi_assessments": 0,
+      "loaded_skill_episodes": 0,
+      "skilldreamer_executed_actions": 0,
+      "skilldreamer_model_calls": 351
+    },
+    {
+      "seed": 43,
+      "actual_csi_assessments": 0,
+      "loaded_skill_episodes": 0,
+      "skilldreamer_executed_actions": 0,
+      "skilldreamer_model_calls": 326
+    },
+    {
+      "seed": 44,
+      "actual_csi_assessments": 0,
+      "loaded_skill_episodes": 0,
+      "skilldreamer_executed_actions": 0,
+      "skilldreamer_model_calls": 318
+    }
+  ],
+  "raw_artifacts": {
+    "42": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/failed-0f5dca9f/seed42.json",
+      "sha256": "cf817b8d7da8195a0cf3cf6ebd274d163f4fd860455ef55b45b4ec5eee09270a"
+    },
+    "43": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/failed-0f5dca9f/seed43.json",
+      "sha256": "e02fdd51981a000124f0ff710e98eb525965fa0ee99ef3740ad86c21fbb4ad67"
+    },
+    "44": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/failed-0f5dca9f/seed44.json",
+      "sha256": "7c3083661c419565baa4fe686f263bbf3341a6faac5ea3076f7f368105bc1413"
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_core_mechanism",
+    "formal_comparison": false,
+    "protocol": {
+      "dataset": {
+        "kind": "public-resource",
+        "public_id": "openai/grade-school-math",
+        "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+        "source_split": "train",
+        "official_test_opened": false,
+        "parent_partition": "validation",
+        "parent_partition_rows": 716,
+        "parent_partition_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7",
+        "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "transformation": "first 24 rows of the already verified train-derived validation partition; no question/answer transformation",
+        "files": {
+          "validation24.jsonl": "8f33a9f7a44067e362458e4daf0eb1ad629a2aac2f44ffefe731e36b19dcb8c1"
+        }
+      },
+      "raw_sha256": "8f33a9f7a44067e362458e4daf0eb1ad629a2aac2f44ffefe731e36b19dcb8c1",
+      "validation_ids": [
+        "13",
+        "1",
+        "4",
+        "6",
+        "23",
+        "21",
+        "14",
+        "15"
+      ],
+      "test_ids": [
+        "19",
+        "3",
+        "18",
+        "10",
+        "9",
+        "17",
+        "11",
+        "16",
+        "22",
+        "2",
+        "8",
+        "12",
+        "7",
+        "20",
+        "0",
+        "5"
+      ],
+      "checkpoint": {
+        "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "files": {
+          "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "encoder": {
+        "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "files": {
+          "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+          "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+          "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+        }
+      },
+      "selection": "fixed alpha=2, top_k and action budget specified before test; no test tuning",
+      "gold_visible_to_policy": false,
+      "original_skill_benchmark": false,
+      "environment": "actual AST arithmetic calculator; no model-code execution"
+    }
+  },
+  "provenance": {
+    "code_commit": "0f5dca9f7f0319c6e3bb57aa578cfe26499a6e7e",
+    "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/public-a30-failed-0f5dca9f.json",
+    "source_sha256": {
+      "scripts/run_skilldreamer.py": "9b14997fef987797db879554966dccb6c5699496c4ca8a979cf027b17fbd421e",
+      "src/auto_research/reproductions/skilldreamer/algorithm.py": "d6e2e446a39826d3b3c4c29691e342599bad5272a9330cb20c666ebbb8500345",
+      "src/auto_research/reproductions/skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
+      "src/auto_research/reproductions/skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970"
+    },
+    "source_archive_sha256": "3d9ce51e7d42813e3b3aa6f204736ea7755b8e29e417b248667db9a8810502d6"
+  },
+  "limitations": [
+    "Fixed 24-row train-derived arithmetic diagnostic, not official GSM8K test or original skill benchmark.",
+    "All 48 SkillDreamer episodes failed before actual CSI assessment, gallery loading and tool execution.",
+    "Completed CUDA model calls do not validate the defining SkillDreamer chain.",
+    "No passed GPU receipt and no capability/promotion claim. All failures retained."
+  ]
+}

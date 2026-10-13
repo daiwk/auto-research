@@ -119,6 +119,8 @@ LIBERO 固定版本的初始状态是 NumPy 数组；新版 Torch 默认 weights
 
 ### 接受范围中的真实 teacher 蒸馏与布局课程
 
+2026-10-14 冻结 `2a061dd6` 的真实 A100 seed42 运行已生成前 8 demonstrations 的 202-row latent bank，但在 teacher KD 模型构造时失败：原生接口期望 adapter-only safetensors，而完整发布 student 文件中的 768 维文本层与正确 T5 teacher 的 1024 维结构冲突。失败与 bank 原样保留，未启动 seeds43/44，没有 teacher targets、student 更新或新 student 闭环成绩。[脱敏失败记录](metrics/a100-failed-adapter-2a061dd6.json)不是通过回执；teacher 的 T5、28 blocks 与1764-token布局不会为迁就该输入而改成学生结构。
+
 训练 manifest 额外绑定本地共享 `lewam/external.py` 和 SmolWAM 的 `algorithm.py`、`training.py`、`worker.py` 的实际 SHA256，闭环前必须一致。更新计数必须是正整数、参数差异必须是正有限数；NaN/Inf、非整数计数或实现变化均拒绝加载候选。
 
 manifest 同时保存实际四项 demonstration/teacher loss、总 loss、validation 与两种 token-layout 的梯度/参数差异 trace，并在训练记录与闭环加载两端检查必需字段、有限性和计数一致。新 student 的本轮评测必须显式设置 `tasks=["libero_goal:6"]`（与单任务 cream-cheese-in-bowl 演示一致），不能借用默认其他任务冒充同任务对照。
@@ -131,6 +133,8 @@ PYTHONPATH=src python scripts/run_oct13_robotics.py --paper smolwam --phase trai
 ```
 
 训练配置除既有资源外须有 `teacher_dir` 与 `training_data_dir`；默认按源顺序取前8 demonstrations、训练8步、`curriculum_fraction=0.25`，即2个 teacher-layout 与6个 compact-layout 优化步；`max_training_rows=32`、batch1。原始 latent adapter/BERT text cache 复用发布版，没有声称重新训练单帧↔clip adapter。teacher `.pt` 与缓存 T5 `.pkl` 仅从逐文件 hash 核验的官方固定版本加载。
+
+原生 KD/student 的 `--adapter` 接口只接受冻结 latent adapter。为兼容作者仅发布完整模型文件的资源，本地从已验 `model.safetensors` **仅**提取完整 `adapter.*` 和 `adapter_inv.*`，按作者正向/逆向模块模板严格核对全部 key、shape 与有限值，写独立派生 safetensors，并记录完整公开文件 SHA→派生 SHA/key 清单。发布模型的 trunk、text projection、VL、state/query 等权重不会注入 teacher 或新 student；教师仍用原生 T5/28 blocks/1764 tokens，学生仍以固定原生 12-block 配置从 teacher 初始化，其配置逐字段与发布结构一致。该兼容修复不等于后续 GPU 已通过。
 
 | 增量训练资源 | 固定版本 | 文件/体积 |
 | --- | --- | --- |

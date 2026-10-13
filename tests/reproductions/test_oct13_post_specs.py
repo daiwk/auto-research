@@ -24,7 +24,7 @@ def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,id
     assert spec.published==("2026-10-08" if key=="magicbeanstalk" else "2026-10-09")
     assert spec.fidelity=="core_mechanism" and spec.evaluation_tier=="l1_mechanism"
     assert spec.execution["requires_gpu_validation"] is True
-    receipt_date="20261014" if key=="state-opd" else "20261013"
+    receipt_date={"state-opd":"20261014","grpo-difficulty-curriculum":"20261014"}.get(key,"20261013")
     assert spec.execution["gpu_validation_artifact"]==f"docs/gpu-validations/{key}-a100-{receipt_date}.json"
     assert spec.evolve_operators==()
     doc=ROOT/spec.documentation
@@ -66,6 +66,22 @@ def test_abbreviation_collisions_do_not_replace_historical_catalog_entries():
     catalog=ROOT/"src/auto_research/paper_specs/catalog/post-training"
     assert json.loads((catalog/"gppo.json").read_text())["paper_url"].endswith("2508.07629")
     assert json.loads((ROOT/"src/auto_research/paper_specs/catalog/agent-research/tapo.json").read_text())["paper_url"].endswith("2607.27973")
+
+
+def test_curriculum_actual_three_variants_are_one_seed_and_do_not_complete_all_controls():
+    spec=load_spec(ROOT/"src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml")
+    receipt=json.loads((ROOT/spec.execution["gpu_validation_artifact"]).read_text())
+    result=json.loads((ROOT/receipt["provenance"]["metrics_artifact"]).read_text())
+    assert receipt["provenance"]["commit"]=="6aabe57a97ec3a586aac7aeea66128750f9441da"
+    assert receipt["variants"]==["fixed-medium","staged","too-hard"] and receipt["seeds"]==[42]
+    assert len(result["seed_results"])==1 and result["actual_cuda_run_count"]==3
+    assert result["evaluation_protocol"]["formal_comparison"] is False
+    assert result["evaluation_protocol"]["promotion_eligible"] is False
+    assert all(v["n"]==1 for v in result["aggregate_metrics"].values())
+    assert [result["execution_checks"][v]["actual_optimizer_updates"] for v in receipt["variants"]]==[8,9,11]
+    text=(ROOT/spec.documentation).read_text()
+    assert "仍缺seed43/44" in text and "static和unfiltered入口尚未在本次GPU运行" in text
+    assert "三个variants不算三个seeds" in text and "单seed机制GPU门禁通过不代表本批整体完成" in text
 
 
 def test_cuda_missing_configuration_does_not_run_a_fixture(tmp_path):

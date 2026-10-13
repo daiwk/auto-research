@@ -94,6 +94,12 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 
+### 2026-10-14 实际失败记录（旧6a源码）
+
+[seed42脱敏负结果](metrics/public-a100-failed-seed42-6aabe57a.json)保留实际A100旧源码 `6aabe57a` 的Eq6失败：gold sequence NLL69.12545，rewrite76.84698；aligner quality1.0/self0.75，但第一条严格不等式不满足。旧流程在拒绝前实际执行过2次SFT更新，仍不算方法通过；获取/保持各2validation均0.5→0.5，elapsed164.40秒，不宣称能力收益。
+
+旧gold不带EOS/rewrite带自然EOS的口径与修后完整响应协议不同，不能择口径求通过。32f修复保留sequence SUM/严格不等式，并要求rewrite自然终止且单EOS；截断或缺终止只记partial诊断、quality0，阻塞selection/SFT。显式train-only诊断入口已冻结 `51b4718a`，不评估validation、不执行LoRA，尚待新GPU槽，不替代整方法GPU验收。
+
 ### 代码映射
 
 algorithm.py：构建prompt、family/size及Eq6合同；checkpoint.py：rewrite/拒绝/真实LoRA SFT、双评测和对照。

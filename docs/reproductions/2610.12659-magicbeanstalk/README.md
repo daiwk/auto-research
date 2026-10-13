@@ -91,6 +91,12 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 
+### 2026-10-14 实际失败记录（旧6a源码）
+
+[seed42脱敏负结果](metrics/public-a100-failed-seed42-6aabe57a.json)绑定实际A100执行与源码 `6aabe57a`，不是GPU通过回执。原4个校准种子的正确性分别为全对、2/4、全错但2条截断、2/4；严格verified-hard门禁没有接纳任何root，构造/effectivity/Goldilocks/RL未到达。实际elapsed85.60秒，学生校准生成4741tokens、评估1541tokens，教师未生成，不把无更新签成通过。
+
+已批准的新0f方案仅将原序train校准前缀扩至16、限制最多4 verified-hard roots、cap1024、wall1800s；其余depth/retries/group/2steps和门槛保持。新配置CPU审计已通过，尚未CUDA运行，不能把旧失败改名为新证据。
+
 ### 代码映射
 
 algorithm.py：effectivity树与bottom-up构建；checkpoint.py：真实teacher提案/独立验证/学生测量/Goldilocks/RLVR及seed控制。

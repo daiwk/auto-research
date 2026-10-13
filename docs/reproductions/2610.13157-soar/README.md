@@ -93,6 +93,12 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 
+### 2026-10-14 实际失败记录（旧6a源码）
+
+[seed42两奖励臂负结果](metrics/public-a100-failed-seed42-6aabe57a.json)绑定真实A100 `6aabe57a` 与预先独立封存EcoAgent公开catalog KB/属性QA train split，不是官方RATED/SOAR benchmark。source-consistent/without-source-reward各4groups全部zero advantage、0更新，全部answer/format/source_match0，训练实际各1search。每臂policy生成1056tokens+隔离recall34tokens，elapsed34.11/34.01秒；失败不强制优势，不签GPU通过回执。
+
+更大已缓存7B policy的train-only格式探针仅是待批准提案：原序4train×2episodes、最多3turn/cap256、wall300s、0LoRA/0评估；不静默换模型或追加预算，不以test挑方案。现有两臂失败保持，整方法实际非零策略更新与完整多seed计划仍未完成。
+
 ### 代码映射
 
 algorithm.py：双stream、EM、真实文本index及reward；checkpoint.py：policy工具循环、隔离recall、trajectory优势/KL/LoRA。`scripts/prepare_soar_catalog_qa.py`：固定catalog白名单KB与tool-group切分；其隔离与哈希回归在 `tests/reproductions/test_soar_catalog_qa.py`。

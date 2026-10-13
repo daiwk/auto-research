@@ -1,0 +1,252 @@
+{
+  "schema_version": 2,
+  "adapter_key": "synthself",
+  "manifest_ref": "reproduction:synthself",
+  "method": "synthself",
+  "measured_locally": true,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "whole_method_gpu_validation_passed": false,
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "seeds": [
+    42
+  ],
+  "seed_results": [
+    {
+      "seed": 42,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "variants": {
+        "synthself-gold-control": {
+          "execution_status": "failed-aligner-constraints",
+          "parameters_changed": true,
+          "baseline": {
+            "acquisition": {
+              "accuracy": 0.5,
+              "examples": 2,
+              "generated_tokens": 795,
+              "truncated_responses": 1
+            },
+            "retention": {
+              "accuracy": 0.5,
+              "examples": 2,
+              "generated_tokens": 624,
+              "truncated_responses": 0
+            }
+          },
+          "method_metrics": {
+            "acquisition": {
+              "accuracy": 0.5,
+              "examples": 2,
+              "generated_tokens": 795,
+              "truncated_responses": 1
+            },
+            "retention": {
+              "accuracy": 0.5,
+              "examples": 2,
+              "generated_tokens": 822,
+              "truncated_responses": 0
+            }
+          },
+          "cost": {
+            "generation_calls": {
+              "evaluation": 12,
+              "offline_aligner": 8,
+              "construction_self_rewrite": 8
+            },
+            "generated_tokens": {
+              "evaluation": 4560,
+              "offline_aligner": 659,
+              "construction_self_rewrite": 857
+            },
+            "scored_response_tokens": {
+              "student": 1421,
+              "student_sft": 2842
+            },
+            "frozen_encoder_forward_calls": 0,
+            "frozen_encoder_input_tokens_including_prompt": 0,
+            "scope": "entire invocation, including training controls, profiling and evaluation",
+            "includes_rejected_and_profiling_generations": true
+          },
+          "empirical_aligner_constraints": {
+            "satisfied": false,
+            "gold_sequence_nll": 69.12544560432434,
+            "rewrite_sequence_nll": 76.84697580337524,
+            "aligner_quality": 1,
+            "self_quality": 0.75
+          },
+          "actual_sft_optimizer_updates_before_old_eq6_failure": 2,
+          "old_eos_protocol_not_equivalent_to_repaired_complete_response_protocol": true,
+          "return_code": 1,
+          "invocation_elapsed_seconds": 164.40409300103784,
+          "whole_method_gpu_validation_passed": false,
+          "configured_budget": {
+            "student_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "student_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "teacher_id": "Qwen/Qwen2.5-7B-Instruct",
+            "teacher_revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "dataset_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+            "context_limit": 4096,
+            "device": "cuda",
+            "train_examples": 8,
+            "validation_examples": 4,
+            "max_tokens": 512,
+            "learning_rate": 0.00001,
+            "epochs": 2,
+            "control": "gold-sft"
+          },
+          "old_paragraph_protocol_bug_affects_interpretation": false
+        }
+      }
+    }
+  ],
+  "aggregate_metrics": {
+    "synthself-gold-control.elapsed_seconds": {
+      "mean": 164.40409300103784,
+      "std": 0,
+      "n": 1
+    },
+    "synthself-gold-control.generated_response_tokens": {
+      "mean": 6076,
+      "std": 0,
+      "n": 1
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "promotion_eligible": false,
+    "test_used_for_selection": false,
+    "claim_policy": "retained failed or old-invalid protocol diagnosis, not a passed GPU validation"
+  },
+  "dataset": {
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "test_read": false,
+    "verified": true
+  },
+  "checkpoint": {
+    "per_variant": {
+      "synthself-gold-control": {
+        "student": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+        },
+        "teacher": {
+          "public_id": "Qwen/Qwen2.5-7B-Instruct",
+          "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75"
+        }
+      }
+    }
+  },
+  "provenance": {
+    "code_commit": "6aabe57a97ec3a586aac7aeea66128750f9441da",
+    "artifact_path": "docs/reproductions/2610.13113-synthself/metrics/public-a100-failed-seed42-6aabe57a.json",
+    "execution_config_sha256": "506dce6568921b9c8fa75d969267537f9bb5c5c5b093a77b283616a2246524c5",
+    "raw_results_sha256": {
+      "synthself-gold-control": "33280c1a0cc3357e15fd9d9d7e9059baa8422aef1e32608d741c94bae3d3f21f"
+    },
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab"
+  },
+  "executed_source_sha256": {
+    "scripts/prepare_soar_catalog_qa.py": "483a4eb3d9932d31046888c165c06590e67c6df5575a5b2afd4e302145f445e7",
+    "scripts/run_oct13_post_training.py": "f482471e2c33189bcfed7c02fce0e79fb58ba9606a3a354c12ee2a63bfca8f6b",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/post_training/oct13_common.py": "739f276633d74a85ba790e4d6df25504bce89950c40867ed57302cde03f1ada9",
+    "src/auto_research/post_training/proximal_checkpoint.py": "5307a54204720e5407d2cd0435b654ae0e594f30c85cdf07d55d4e90612a1397",
+    "src/auto_research/post_training/response_policy.py": "e380a5b4d1d53974b973b72b7d9ad6328129dc8c9bae4d233f6c1cbdf8508bf7",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/reproductions/gppo_framework/__init__.py": "7fe8cab42fef9f32b9653dfb5f54f03182de0753de2c9e5b359d124d7cd763d8",
+    "src/auto_research/reproductions/gppo_framework/adapter.py": "a7f4ee792a8ded3daeeb183cbca5c99de63c1b7d3cb195f5bedd5289cb0e0260",
+    "src/auto_research/reproductions/gppo_framework/objective.py": "0f8fbb2ad397b04a70466dde4e939f4d094ad7e7df07cfbba59f4a6ca5d05dd0",
+    "src/auto_research/reproductions/gppo_framework/paper.yaml": "a023ee98bbd078077b2708122973d27a98085848be816ce461b7d4291aca8e1f",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/__init__.py": "d09d8d7e0e6f5bcec9979241eed06a1d2a6ac8f3fb7a25f49e0df55be0071acb",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/adapter.py": "bbd3e964dc035ea4bbd999a581ea07eccabd986b6456774b21a4c24092cbdfbe",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/algorithm.py": "4131e39279d30c0748b14f611ab657b3fea76147a7c164aea2883c62bde75785",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/checkpoint.py": "d03a7d2db0a19b469fe5429ddce634b02d8cbd0eeed8d09bef0afc51c1d7ac70",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml": "0b4dd86c85907b732df9380a4bd1bbc17785c09c184d5be2793ac37f63768c16",
+    "src/auto_research/reproductions/magicbeanstalk/__init__.py": "8dd207ea37a89dfa34f87b02eb4a2fd26472895678d1362a7e5b59dad5cda616",
+    "src/auto_research/reproductions/magicbeanstalk/adapter.py": "319b6503de342feee49fb6446b7bbdeb117f7dc0dd7b79ed1c3bd34cce1ce73f",
+    "src/auto_research/reproductions/magicbeanstalk/algorithm.py": "7705ea33cdb4e55908d732498098e3d34b52c00f121423e23651430ccb8b3114",
+    "src/auto_research/reproductions/magicbeanstalk/checkpoint.py": "f509334fea6b6db2e68668bb7957e8f6e29c522e63012be440779b9346d1c9e0",
+    "src/auto_research/reproductions/magicbeanstalk/paper.yaml": "e9c5619918b4d72d776008aba3fa95d50ba6ebe99afab729ba9e6dfe82fac06e",
+    "src/auto_research/reproductions/progressive_contraction/__init__.py": "e50fe46d888e0a0b11b7d4d6d8f3224ae5940394f8ba8396fc5afb1cd38a4d53",
+    "src/auto_research/reproductions/progressive_contraction/adapter.py": "06f23b5c795f7222f76dee9beaa8164f460eb5183e18c6d374bff011737235dd",
+    "src/auto_research/reproductions/progressive_contraction/algorithm.py": "176743356415111e3e19a26427cf59391b4b84b56697adf8d3fe3038ad0de3c1",
+    "src/auto_research/reproductions/progressive_contraction/checkpoint.py": "958d88b7afba14d8c7833ab3669f2cd93af6c6c19e8412bca87a136b48fec527",
+    "src/auto_research/reproductions/progressive_contraction/paper.yaml": "1beccb702ce7a33b196b1fcc6bab13cdc32fc48952d247565d54e8ce830860c2",
+    "src/auto_research/reproductions/soar/__init__.py": "3d87d1189d7037e32c1e2cb0c249d13609c5af3d7062a19904590ba7923c799a",
+    "src/auto_research/reproductions/soar/adapter.py": "8fbbe8f8fe54b9f014ccc26a75b01e72b73b95e2b03cc379c5b5db4b63c9b31e",
+    "src/auto_research/reproductions/soar/algorithm.py": "9b7068d9774d1c93800c512a04b9ba4d0ee98fc13d308e5ac0970299c8bb2485",
+    "src/auto_research/reproductions/soar/checkpoint.py": "43a83930af442dc3610d61becd06b38ca3c921131ed417837d3d7e11aa672708",
+    "src/auto_research/reproductions/soar/paper.yaml": "2f756cab9f7fefd4613bb69971fd8252c2b9ad451fa5c5eff5d03fa063d91521",
+    "src/auto_research/reproductions/state_opd/__init__.py": "8db07736f0336ed7f39502ae2953bdae76658942542cacbe4b6b2c1fd0abe094",
+    "src/auto_research/reproductions/state_opd/adapter.py": "2f8bf4773e8f40c0eabe777fbd1e1aa6d372a7b05501404c3e3f7b2d54987524",
+    "src/auto_research/reproductions/state_opd/algorithm.py": "dc7fe3eae619ff69ec51c47826f89471f00be564ea4e6730e12726a060ba7e2f",
+    "src/auto_research/reproductions/state_opd/checkpoint.py": "95755e0604f563a5c96f92e9de9069befe3e1274d31c224a43ca20d71f756b09",
+    "src/auto_research/reproductions/state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+    "src/auto_research/reproductions/state_opd/paper.yaml": "f9cdb6c489ab58bcb8cd6f3d8815c9d5c5e7f29616563d96ad5792533961a84d",
+    "src/auto_research/reproductions/synthself/__init__.py": "474bb75e10b95afe6faec1f3631beab2f17f9a43013d3d29e79b7d4b36e06031",
+    "src/auto_research/reproductions/synthself/adapter.py": "db4c08e1ccc2acfc28d19fc72acfa39b0a0dce096bbc430bafe9b21dbb72cddd",
+    "src/auto_research/reproductions/synthself/algorithm.py": "0662ce46de24214370dac4ab691ba766fbbc087717db46d838b2ea5af9d62f3f",
+    "src/auto_research/reproductions/synthself/checkpoint.py": "9835b086272d9262f057a0fc0975d19ff3b84d5e1766cc234ca1e11985164891",
+    "src/auto_research/reproductions/synthself/paper.yaml": "464d06e9cdd535ab61743fdba6641ae2eac4c8345fad27748c63e620544074c7",
+    "src/auto_research/reproductions/tapo_trajectory/__init__.py": "a0dd8d4825b91dd076b71bdd3a3eccb0638ba4bf0240fe9da76d61a7290f69c6",
+    "src/auto_research/reproductions/tapo_trajectory/adapter.py": "c01b75bf7853546caa2d517dd5f9c9faf739537b95207b8f1fd28adcdd5aafa7",
+    "src/auto_research/reproductions/tapo_trajectory/objective.py": "49ab02ac758251acde90091a82b22576449d294a1f25cc3144ff1addd1132ae2",
+    "src/auto_research/reproductions/tapo_trajectory/paper.yaml": "493e59ec67f96ee37ffecf6694dd5c4d8555849b8f756ccb63644da90bbb48d6",
+    "src/auto_research/reproductions/upturn/__init__.py": "1e9793e9ea85e94144f7eac8fa141567d7f964438fa628788b668358154e196e",
+    "src/auto_research/reproductions/upturn/adapter.py": "72e5da3cb70856944d0c9a25376f73d4a1d9f16213efd43e19b3acf2a584afc2",
+    "src/auto_research/reproductions/upturn/algorithm.py": "421abd06cc492c39cf72e9b15c7f85c01e85fae0a7c26fb3053fbd19bc4897a4",
+    "src/auto_research/reproductions/upturn/checkpoint.py": "83ac66cead272cb391fe27c56f838df5414712283db42f2b8088d3509de311f3",
+    "src/auto_research/reproductions/upturn/paper.yaml": "a1e335526f895b54e325331dc8354330f4a2d44f5f8c9c2a37f76ef2f7d589bc"
+  },
+  "limitations": [
+    "Historical seed42 incomplete mechanism execution, retained as failure; not accepted CUDA validation or capability evidence.",
+    "Source6a is not repaired32f; no old output is relabeled as a new successful run.",
+    "No official test was read; no retry, changed threshold, forced reward or advantage is inferred.",
+    "Old rewrite NLL76.84698 exceeded gold69.12545 under old EOS scope; SFT updates occurred before old Eq6 rejection. Repaired selection blocks incomplete/rejected aligners before SFT."
+  ],
+  "preverified_public_resource_inventory": {
+    "student": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "verified_file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "teacher": {
+      "public_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "verified_file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  }
+}

@@ -98,6 +98,10 @@ PYTHONPATH=src python scripts/run_skilldreamer.py \
 
 ### 数据协议、结果与边界
 
+2026-10-14 固定 `0f5dca9f` 源、Qwen2.5-0.5B-Instruct、24 行 train-derived 算术协议在真实 A30 上完成 seeds 42/43/44。三个种子的 SkillDreamer 臂各 16 个执行 episode，实际模型调用为 351/326/318；但 CSI assessment、真实 gallery 加载和工具动作均为 0，48/48 episode 未完成定义链路。三臂 Pass 均为 0。这是**核心执行失败诊断**，不是 GPU gate 通过或能力验证。
+
+完整失败 episode 和模型调用计数保存在 [失败诊断汇总](metrics/public-a30-failed-0f5dca9f.json) 与其绑定的 immutable raw SHA 中；旧 `6aabe57a` 中断批次未混入。未生成 `passed` GPU receipt，后续只能先用独立 validation 格式探针诊断，不能用这批 16 个 evaluation ID 挑预算或补 schema fallback。
+
 以公开 GSM8K-style question/answer JSONL 中的 question 为任务，参考答案在独立 external scorer 中按数字比较；模型和环境观察均不接收 gold answer、gold plan 或 gold skill。首N条在读取 relevance 之外预先固定，按固定 hash 分离 validation/test，当前超参数事先固定不看 test 改写。五条本地通用技能为算术验证、比例、库存、金额和时间处理，不含题目答案。
 
 环境复用已审查的 `ArithmeticEnvironment`，真实运行有界 AST calculator，只接受数字和允许的算术运算，不执行模型生成 Python、不访问外部系统。记录 actual executed actions、skill loads、生成失败、提交答案和外部 Pass；PSG/schema 失败计零 reward，不删除失败任务。不因 Load 高就宣称策略更强。

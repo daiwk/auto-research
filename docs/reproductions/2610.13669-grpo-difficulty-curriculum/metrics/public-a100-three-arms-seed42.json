@@ -1,0 +1,2379 @@
+{
+  "schema_version": 2,
+  "adapter_key": "grpo-difficulty-curriculum",
+  "manifest_ref": "reproduction:grpo-difficulty-curriculum",
+  "method": "grpo-difficulty-curriculum",
+  "measured_locally": true,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "seeds": [
+    42
+  ],
+  "seed_results": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "device": "cuda",
+      "variants": {
+        "fixed-medium": {
+          "method": "grpo-difficulty-curriculum",
+          "seed": 42,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evaluation_tier": "l1_mechanism",
+          "dataset": {
+            "verified": true,
+            "test_read": false,
+            "source_id": "openai/grade-school-math",
+            "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+            "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+            "partition_sha256": {
+              "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+              "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+            },
+            "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+          },
+          "checkpoint": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "verified_mirror": {
+              "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+              "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+              "file_sha256": {
+                "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+                "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+                "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+                "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+                "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+                "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+                "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+              }
+            }
+          },
+          "baseline": {
+            "accuracy": 0.5,
+            "examples": 4,
+            "generated_tokens": 1419,
+            "truncated_responses": 1
+          },
+          "method_metrics": {
+            "accuracy": 0.75,
+            "examples": 4,
+            "generated_tokens": 1263,
+            "truncated_responses": 0
+          },
+          "training": [
+            {
+              "step": 1,
+              "band": [
+                0.375,
+                0.625
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 1,
+                  "eligible": true,
+                  "current_success": 0.5,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0
+                  ],
+                  "loss": -1.9371509552001953e-7,
+                  "gradient_l2_norm": 0.15984754264354706,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.9999978542327881,
+                    0.9999982118606567,
+                    -0.9999978542327881,
+                    0.9999982118606567,
+                    0.9999982118606567,
+                    -0.9999978542327881,
+                    0.9999982118606567,
+                    -0.9999978542327881
+                  ]
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0.25
+                },
+                {
+                  "training_row": 3,
+                  "eligible": false,
+                  "current_success": 0.25
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 5,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.25,
+                "examples": 4,
+                "generated_tokens": 1434,
+                "truncated_responses": 0
+              },
+              "transition": "not-staged",
+              "effective_updates": 1
+            },
+            {
+              "step": 2,
+              "band": [
+                0.375,
+                0.625
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 0.875
+                },
+                {
+                  "training_row": 1,
+                  "eligible": true,
+                  "current_success": 0.5,
+                  "correctness_rewards": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  "loss": -1.9371509552001953e-7,
+                  "gradient_l2_norm": 0.1646161526441574,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    0.9999982118606567,
+                    -0.9999978542327881,
+                    -0.9999978542327881,
+                    0.9999982118606567,
+                    0.9999982118606567,
+                    -0.9999978542327881,
+                    -0.9999978542327881,
+                    0.9999982118606567
+                  ]
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0.25
+                },
+                {
+                  "training_row": 3,
+                  "eligible": true,
+                  "current_success": 0.375,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    1
+                  ],
+                  "loss": -0.00014882534742355347,
+                  "gradient_l2_norm": 0.16405336558818817,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    -0.7745951414108276,
+                    1.2909916639328003,
+                    -0.7745951414108276,
+                    -0.7745951414108276,
+                    -0.7745951414108276,
+                    1.2909916639328003,
+                    -0.7745951414108276,
+                    1.2909916639328003
+                  ]
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 5,
+                  "eligible": false,
+                  "current_success": 1
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.5,
+                "examples": 4,
+                "generated_tokens": 1663,
+                "truncated_responses": 1
+              },
+              "transition": "not-staged",
+              "effective_updates": 2
+            },
+            {
+              "step": 3,
+              "band": [
+                0.375,
+                0.625
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 1,
+                  "eligible": true,
+                  "current_success": 0.5,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1
+                  ],
+                  "loss": 5.960464477539063e-8,
+                  "gradient_l2_norm": 0.16914469003677368,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    -0.9999980926513672,
+                    0.9999979734420776,
+                    -0.9999980926513672,
+                    -0.9999980926513672,
+                    0.9999979734420776,
+                    0.9999979734420776,
+                    -0.9999980926513672,
+                    0.9999979734420776
+                  ]
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0.125
+                },
+                {
+                  "training_row": 3,
+                  "eligible": true,
+                  "current_success": 0.625,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  "loss": -0.0013230517506599426,
+                  "gradient_l2_norm": 0.22981058061122894,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    -1.2909915447235107,
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    -1.2909915447235107,
+                    -1.2909915447235107,
+                    0.7745952606201172
+                  ]
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 5,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0.125
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0.25
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.25,
+                "examples": 4,
+                "generated_tokens": 1371,
+                "truncated_responses": 0
+              },
+              "transition": "not-staged",
+              "effective_updates": 2
+            },
+            {
+              "step": 4,
+              "band": [
+                0.375,
+                0.625
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 1
+                },
+                {
+                  "training_row": 1,
+                  "eligible": true,
+                  "current_success": 0.625,
+                  "correctness_rewards": [
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1
+                  ],
+                  "loss": -2.1606683731079102e-7,
+                  "gradient_l2_norm": 0.15342898666858673,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    -1.2909915447235107,
+                    0.7745952606201172,
+                    -1.2909915447235107,
+                    0.7745952606201172,
+                    -1.2909915447235107,
+                    0.7745952606201172
+                  ]
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0.125
+                },
+                {
+                  "training_row": 3,
+                  "eligible": true,
+                  "current_success": 0.375,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    1,
+                    1,
+                    0
+                  ],
+                  "loss": 0.0008457452058792114,
+                  "gradient_l2_norm": 0.17083901166915894,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.7745951414108276,
+                    1.2909916639328003,
+                    -0.7745951414108276,
+                    -0.7745951414108276,
+                    -0.7745951414108276,
+                    1.2909916639328003,
+                    1.2909916639328003,
+                    -0.7745951414108276
+                  ]
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0.125
+                },
+                {
+                  "training_row": 5,
+                  "eligible": true,
+                  "current_success": 0.625,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  "loss": 0.0008641406893730164,
+                  "gradient_l2_norm": 0.18051153421401978,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    -1.2909917831420898,
+                    0.7745949625968933,
+                    -1.2909917831420898,
+                    -1.2909917831420898,
+                    0.7745949625968933,
+                    0.7745949625968933,
+                    0.7745949625968933,
+                    0.7745949625968933
+                  ]
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.75,
+                "examples": 4,
+                "generated_tokens": 1263,
+                "truncated_responses": 0
+              },
+              "transition": "not-staged",
+              "effective_updates": 3
+            }
+          ],
+          "cost": {
+            "generation_calls": {
+              "evaluation": 24,
+              "student": 32
+            },
+            "generated_tokens": {
+              "evaluation": 8413,
+              "student": 72642
+            },
+            "scored_response_tokens": {
+              "behavior": 72642,
+              "student_rl": 18142
+            },
+            "frozen_encoder_forward_calls": 0,
+            "frozen_encoder_input_tokens_including_prompt": 0,
+            "scope": "entire invocation, including training controls, profiling and evaluation",
+            "includes_rejected_and_profiling_generations": true
+          },
+          "protocol": {
+            "test_opened": false,
+            "gold_in_student_generation": false,
+            "train_examples": 8,
+            "validation_examples": 4,
+            "max_tokens": 512
+          },
+          "parameters_changed": true,
+          "variant": "fixed-medium",
+          "difficulty_history": [
+            [
+              0.75,
+              0.5,
+              0.25,
+              0.25,
+              0,
+              0.75,
+              0,
+              0
+            ],
+            [
+              0.875,
+              0.5,
+              0.25,
+              0.375,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0.75,
+              0.5,
+              0.125,
+              0.625,
+              0,
+              0.75,
+              0.125,
+              0.25
+            ],
+            [
+              1,
+              0.625,
+              0.125,
+              0.375,
+              0.125,
+              0.625,
+              0,
+              0
+            ]
+          ],
+          "difficulty_dynamics": {
+            "span": [
+              0.25,
+              0.125,
+              0.125,
+              0.375,
+              0.125,
+              0.375,
+              0.125,
+              0.25
+            ],
+            "total_variation": [
+              0.5,
+              0.125,
+              0.125,
+              0.625,
+              0.125,
+              0.625,
+              0.25,
+              0.5
+            ],
+            "extra_round_trip_variation": [
+              0.25,
+              0,
+              0,
+              0.25,
+              0,
+              0.25,
+              0.125,
+              0.25
+            ]
+          },
+          "initial_static_easy_to_hard_order": null,
+          "execution_status": "passed",
+          "limitations": [
+            "Small public train-only GSM8K holdout diagnostic; no official test is read.",
+            "Qwen2.5-0.5B replaces 1.5B and diagnostic cadence is scaled to each bounded step.",
+            "Run fixed-medium/staged/too-hard/unfiltered/static separately with matched configured budgets.",
+            "All rejected groups and calibration generations are charged; no invented nonzero advantage.",
+            "Staged diagnostic uses the validation split, not original 128-per-band training-heldout pools."
+          ]
+        },
+        "staged": {
+          "method": "grpo-difficulty-curriculum",
+          "seed": 42,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evaluation_tier": "l1_mechanism",
+          "dataset": {
+            "verified": true,
+            "test_read": false,
+            "source_id": "openai/grade-school-math",
+            "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+            "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+            "partition_sha256": {
+              "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+              "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+            },
+            "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+          },
+          "checkpoint": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "verified_mirror": {
+              "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+              "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+              "file_sha256": {
+                "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+                "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+                "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+                "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+                "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+                "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+                "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+              }
+            }
+          },
+          "baseline": {
+            "accuracy": 0.5,
+            "examples": 4,
+            "generated_tokens": 1419,
+            "truncated_responses": 1
+          },
+          "method_metrics": {
+            "accuracy": 0.5,
+            "examples": 4,
+            "generated_tokens": 1512,
+            "truncated_responses": 1
+          },
+          "training": [
+            {
+              "step": 1,
+              "band": [
+                0.625,
+                0.875
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": true,
+                  "current_success": 0.75,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0
+                  ],
+                  "loss": -2.5331974029541016e-7,
+                  "gradient_l2_norm": 0.2029796838760376,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -1.7320466041564941,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    -1.7320466041564941
+                  ]
+                },
+                {
+                  "training_row": 1,
+                  "eligible": false,
+                  "current_success": 0.5
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0.25
+                },
+                {
+                  "training_row": 3,
+                  "eligible": false,
+                  "current_success": 0.25
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 5,
+                  "eligible": true,
+                  "current_success": 0.75,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1
+                  ],
+                  "loss": 0.0009970217943191528,
+                  "gradient_l2_norm": 0.15946151316165924,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    -1.7320464849472046,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    -1.7320464849472046,
+                    0.5773491859436035
+                  ]
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.5,
+                "examples": 4,
+                "generated_tokens": 1561,
+                "truncated_responses": 0
+              },
+              "transition": "new-best",
+              "effective_updates": 2
+            },
+            {
+              "step": 2,
+              "band": [
+                0.625,
+                0.875
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": true,
+                  "current_success": 0.875,
+                  "correctness_rewards": [
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  "loss": -3.501772880554199e-7,
+                  "gradient_l2_norm": 0.20516759157180786,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    0.37796369194984436,
+                    0.37796369194984436,
+                    0.37796369194984436,
+                    -2.6457431316375732,
+                    0.37796369194984436,
+                    0.37796369194984436,
+                    0.37796369194984436,
+                    0.37796369194984436
+                  ]
+                },
+                {
+                  "training_row": 1,
+                  "eligible": false,
+                  "current_success": 0.25
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 3,
+                  "eligible": true,
+                  "current_success": 0.625,
+                  "correctness_rewards": [
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    1,
+                    1,
+                    0
+                  ],
+                  "loss": 0.0009714290499687195,
+                  "gradient_l2_norm": 0.1547374576330185,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    -1.2909915447235107,
+                    -1.2909915447235107,
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    -1.2909915447235107
+                  ]
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0.125
+                },
+                {
+                  "training_row": 5,
+                  "eligible": true,
+                  "current_success": 0.75,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  "loss": -0.0003462955355644226,
+                  "gradient_l2_norm": 0.17075270414352417,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    -1.7320464849472046,
+                    0.5773491859436035,
+                    -1.7320464849472046,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035
+                  ]
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0.125
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.5,
+                "examples": 4,
+                "generated_tokens": 1562,
+                "truncated_responses": 1
+              },
+              "transition": "keep",
+              "effective_updates": 3
+            },
+            {
+              "step": 3,
+              "band": [
+                0.625,
+                0.875
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 1
+                },
+                {
+                  "training_row": 1,
+                  "eligible": false,
+                  "current_success": 0.375
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0.125
+                },
+                {
+                  "training_row": 3,
+                  "eligible": true,
+                  "current_success": 0.75,
+                  "correctness_rewards": [
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1
+                  ],
+                  "loss": -2.384185791015625e-7,
+                  "gradient_l2_norm": 0.16247574985027313,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    0.5773491859436035,
+                    -1.7320466041564941,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    -1.7320466041564941,
+                    0.5773491859436035
+                  ]
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0.125
+                },
+                {
+                  "training_row": 5,
+                  "eligible": true,
+                  "current_success": 0.75,
+                  "correctness_rewards": [
+                    1,
+                    0,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  "loss": 0.0006367117166519165,
+                  "gradient_l2_norm": 0.16295728087425232,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    0.5773491859436035,
+                    -1.7320466041564941,
+                    -1.7320466041564941,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035,
+                    0.5773491859436035
+                  ]
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0.125
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.5,
+                "examples": 4,
+                "generated_tokens": 1592,
+                "truncated_responses": 0
+              },
+              "transition": "advance",
+              "effective_updates": 2
+            },
+            {
+              "step": 4,
+              "band": [
+                0.5,
+                0.75
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 0.875
+                },
+                {
+                  "training_row": 1,
+                  "eligible": true,
+                  "current_success": 0.5,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    1,
+                    1,
+                    1
+                  ],
+                  "loss": 9.685754776000977e-8,
+                  "gradient_l2_norm": 0.216303288936615,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    -0.9999980926513672,
+                    0.9999979734420776,
+                    -0.9999980926513672,
+                    -0.9999980926513672,
+                    -0.9999980926513672,
+                    0.9999979734420776,
+                    0.9999979734420776,
+                    0.9999979734420776
+                  ]
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 3,
+                  "eligible": true,
+                  "current_success": 0.625,
+                  "correctness_rewards": [
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    1,
+                    1,
+                    0
+                  ],
+                  "loss": -0.000855766236782074,
+                  "gradient_l2_norm": 0.15474621951580048,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    -1.2909915447235107,
+                    -1.2909915447235107,
+                    0.7745952606201172,
+                    0.7745952606201172,
+                    -1.2909915447235107
+                  ]
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 5,
+                  "eligible": false,
+                  "current_success": 0.875
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0.25
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.5,
+                "examples": 4,
+                "generated_tokens": 1512,
+                "truncated_responses": 1
+              },
+              "transition": "new-best",
+              "effective_updates": 2
+            }
+          ],
+          "cost": {
+            "generation_calls": {
+              "evaluation": 24,
+              "student": 32
+            },
+            "generated_tokens": {
+              "evaluation": 9158,
+              "student": 73273
+            },
+            "scored_response_tokens": {
+              "behavior": 73273,
+              "student_rl": 18844
+            },
+            "frozen_encoder_forward_calls": 0,
+            "frozen_encoder_input_tokens_including_prompt": 0,
+            "scope": "entire invocation, including training controls, profiling and evaluation",
+            "includes_rejected_and_profiling_generations": true
+          },
+          "protocol": {
+            "test_opened": false,
+            "gold_in_student_generation": false,
+            "train_examples": 8,
+            "validation_examples": 4,
+            "max_tokens": 512
+          },
+          "parameters_changed": true,
+          "variant": "staged",
+          "difficulty_history": [
+            [
+              0.75,
+              0.5,
+              0.25,
+              0.25,
+              0,
+              0.75,
+              0,
+              0
+            ],
+            [
+              0.875,
+              0.25,
+              0,
+              0.625,
+              0.125,
+              0.75,
+              0,
+              0.125
+            ],
+            [
+              1,
+              0.375,
+              0.125,
+              0.75,
+              0.125,
+              0.75,
+              0,
+              0.125
+            ],
+            [
+              0.875,
+              0.5,
+              0,
+              0.625,
+              0,
+              0.875,
+              0.25,
+              0
+            ]
+          ],
+          "difficulty_dynamics": {
+            "span": [
+              0.25,
+              0.25,
+              0.25,
+              0.5,
+              0.125,
+              0.125,
+              0.25,
+              0.125
+            ],
+            "total_variation": [
+              0.375,
+              0.5,
+              0.5,
+              0.625,
+              0.25,
+              0.125,
+              0.25,
+              0.25
+            ],
+            "extra_round_trip_variation": [
+              0.125,
+              0.25,
+              0.25,
+              0.125,
+              0.125,
+              0,
+              0,
+              0.125
+            ]
+          },
+          "initial_static_easy_to_hard_order": null,
+          "execution_status": "passed",
+          "limitations": [
+            "Small public train-only GSM8K holdout diagnostic; no official test is read.",
+            "Qwen2.5-0.5B replaces 1.5B and diagnostic cadence is scaled to each bounded step.",
+            "Run fixed-medium/staged/too-hard/unfiltered/static separately with matched configured budgets.",
+            "All rejected groups and calibration generations are charged; no invented nonzero advantage.",
+            "Staged diagnostic uses the validation split, not original 128-per-band training-heldout pools."
+          ]
+        },
+        "too-hard": {
+          "method": "grpo-difficulty-curriculum",
+          "seed": 42,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evaluation_tier": "l1_mechanism",
+          "dataset": {
+            "verified": true,
+            "test_read": false,
+            "source_id": "openai/grade-school-math",
+            "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+            "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+            "partition_sha256": {
+              "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+              "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+            },
+            "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+          },
+          "checkpoint": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "verified_mirror": {
+              "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+              "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+              "file_sha256": {
+                "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+                "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+                "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+                "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+                "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+                "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+                "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+              }
+            }
+          },
+          "baseline": {
+            "accuracy": 0.5,
+            "examples": 4,
+            "generated_tokens": 1419,
+            "truncated_responses": 1
+          },
+          "method_metrics": {
+            "accuracy": 0.5,
+            "examples": 4,
+            "generated_tokens": 1487,
+            "truncated_responses": 0
+          },
+          "training": [
+            {
+              "step": 1,
+              "band": [
+                0.125,
+                0.375
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 1,
+                  "eligible": false,
+                  "current_success": 0.5
+                },
+                {
+                  "training_row": 2,
+                  "eligible": true,
+                  "current_success": 0.25,
+                  "correctness_rewards": [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "loss": -1.4901161193847656e-8,
+                  "gradient_l2_norm": 0.14908787608146667,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.5773489475250244,
+                    -0.5773489475250244,
+                    -0.5773489475250244,
+                    1.7320468425750732,
+                    -0.5773489475250244,
+                    1.7320468425750732,
+                    -0.5773489475250244,
+                    -0.5773489475250244
+                  ]
+                },
+                {
+                  "training_row": 3,
+                  "eligible": true,
+                  "current_success": 0.25,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "loss": 0.0004897117614746094,
+                  "gradient_l2_norm": 0.17364460229873657,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.5773490071296692,
+                    1.7320467233657837,
+                    1.7320467233657837,
+                    -0.5773490071296692,
+                    -0.5773490071296692,
+                    -0.5773490071296692,
+                    -0.5773490071296692,
+                    -0.5773490071296692
+                  ]
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 5,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.5,
+                "examples": 4,
+                "generated_tokens": 1497,
+                "truncated_responses": 0
+              },
+              "transition": "not-staged",
+              "effective_updates": 2
+            },
+            {
+              "step": 2,
+              "band": [
+                0.125,
+                0.375
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 1,
+                  "eligible": true,
+                  "current_success": 0.125,
+                  "correctness_rewards": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "loss": 1.3783574104309082e-7,
+                  "gradient_l2_norm": 0.15373632311820984,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    2.6457431316375732,
+                    -0.37796342372894287,
+                    -0.37796342372894287,
+                    -0.37796342372894287,
+                    -0.37796342372894287,
+                    -0.37796342372894287,
+                    -0.37796342372894287,
+                    -0.37796342372894287
+                  ]
+                },
+                {
+                  "training_row": 2,
+                  "eligible": true,
+                  "current_success": 0.375,
+                  "correctness_rewards": [
+                    0,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "loss": 0.0007002353668212891,
+                  "gradient_l2_norm": 0.16592727601528168,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.7745950222015381,
+                    -0.7745950222015381,
+                    1.2909917831420898,
+                    1.2909917831420898,
+                    -0.7745950222015381,
+                    1.2909917831420898,
+                    -0.7745950222015381,
+                    -0.7745950222015381
+                  ]
+                },
+                {
+                  "training_row": 3,
+                  "eligible": false,
+                  "current_success": 0.5
+                },
+                {
+                  "training_row": 4,
+                  "eligible": true,
+                  "current_success": 0.125,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "loss": 0.00017904490232467651,
+                  "gradient_l2_norm": 0.1151842400431633,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.37796345353126526,
+                    2.6457433700561523,
+                    -0.37796345353126526,
+                    -0.37796345353126526,
+                    -0.37796345353126526,
+                    -0.37796345353126526,
+                    -0.37796345353126526,
+                    -0.37796345353126526
+                  ]
+                },
+                {
+                  "training_row": 5,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.5,
+                "examples": 4,
+                "generated_tokens": 1650,
+                "truncated_responses": 1
+              },
+              "transition": "not-staged",
+              "effective_updates": 3
+            },
+            {
+              "step": 3,
+              "band": [
+                0.125,
+                0.375
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 1
+                },
+                {
+                  "training_row": 1,
+                  "eligible": true,
+                  "current_success": 0.25,
+                  "correctness_rewards": [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  "loss": 8.195638656616211e-8,
+                  "gradient_l2_norm": 0.15684774518013,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    1.7320467233657837,
+                    -0.5773490071296692,
+                    -0.5773490071296692,
+                    -0.5773490071296692,
+                    -0.5773490071296692,
+                    -0.5773490071296692,
+                    1.7320467233657837,
+                    -0.5773490071296692
+                  ]
+                },
+                {
+                  "training_row": 2,
+                  "eligible": false,
+                  "current_success": 0.5
+                },
+                {
+                  "training_row": 3,
+                  "eligible": false,
+                  "current_success": 0.5
+                },
+                {
+                  "training_row": 4,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 5,
+                  "eligible": false,
+                  "current_success": 1
+                },
+                {
+                  "training_row": 6,
+                  "eligible": true,
+                  "current_success": 0.25,
+                  "correctness_rewards": [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  "loss": -0.0002179965376853943,
+                  "gradient_l2_norm": 0.16200219094753265,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.5773489475250244,
+                    -0.5773489475250244,
+                    -0.5773489475250244,
+                    1.7320468425750732,
+                    -0.5773489475250244,
+                    1.7320468425750732,
+                    -0.5773489475250244,
+                    -0.5773489475250244
+                  ]
+                },
+                {
+                  "training_row": 7,
+                  "eligible": false,
+                  "current_success": 0
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.75,
+                "examples": 4,
+                "generated_tokens": 1240,
+                "truncated_responses": 0
+              },
+              "transition": "not-staged",
+              "effective_updates": 2
+            },
+            {
+              "step": 4,
+              "band": [
+                0.125,
+                0.375
+              ],
+              "groups": [
+                {
+                  "training_row": 0,
+                  "eligible": false,
+                  "current_success": 0.625
+                },
+                {
+                  "training_row": 1,
+                  "eligible": false,
+                  "current_success": 0.625
+                },
+                {
+                  "training_row": 2,
+                  "eligible": true,
+                  "current_success": 0.375,
+                  "correctness_rewards": [
+                    1,
+                    0,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "loss": -1.862645149230957e-7,
+                  "gradient_l2_norm": 0.17808710038661957,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    1.2,
+                    0.2,
+                    1.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    1.2909919023513794,
+                    -0.7745948433876038,
+                    1.2909919023513794,
+                    1.2909919023513794,
+                    -0.7745948433876038,
+                    -0.7745948433876038,
+                    -0.7745948433876038,
+                    -0.7745948433876038
+                  ]
+                },
+                {
+                  "training_row": 3,
+                  "eligible": true,
+                  "current_success": 0.375,
+                  "correctness_rewards": [
+                    0,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  "loss": -0.0007097646594047546,
+                  "gradient_l2_norm": 0.16549642384052277,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    1.2
+                  ],
+                  "advantages": [
+                    -0.7745951414108276,
+                    1.2909916639328003,
+                    -0.7745951414108276,
+                    -0.7745951414108276,
+                    1.2909916639328003,
+                    -0.7745951414108276,
+                    -0.7745951414108276,
+                    1.2909916639328003
+                  ]
+                },
+                {
+                  "training_row": 4,
+                  "eligible": true,
+                  "current_success": 0.125,
+                  "correctness_rewards": [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "loss": 0.0005903393030166626,
+                  "gradient_l2_norm": 0.14686866104602814,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    0.2,
+                    1.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    2.6457431316375732,
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    -0.3779633343219757
+                  ]
+                },
+                {
+                  "training_row": 5,
+                  "eligible": false,
+                  "current_success": 0.75
+                },
+                {
+                  "training_row": 6,
+                  "eligible": false,
+                  "current_success": 0
+                },
+                {
+                  "training_row": 7,
+                  "eligible": true,
+                  "current_success": 0.125,
+                  "correctness_rewards": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  "loss": -0.00016710534691810608,
+                  "gradient_l2_norm": 0.17707861959934235,
+                  "optimizer_update_executed": true,
+                  "zero_advantage_group": false,
+                  "rewards": [
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    0.2,
+                    1.2,
+                    0.2
+                  ],
+                  "advantages": [
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    -0.3779633343219757,
+                    2.6457431316375732,
+                    -0.3779633343219757
+                  ]
+                }
+              ],
+              "validation_diagnostic": {
+                "accuracy": 0.5,
+                "examples": 4,
+                "generated_tokens": 1487,
+                "truncated_responses": 0
+              },
+              "transition": "not-staged",
+              "effective_updates": 4
+            }
+          ],
+          "cost": {
+            "generation_calls": {
+              "evaluation": 24,
+              "student": 32
+            },
+            "generated_tokens": {
+              "evaluation": 8780,
+              "student": 74351
+            },
+            "scored_response_tokens": {
+              "behavior": 74351,
+              "student_rl": 26978
+            },
+            "frozen_encoder_forward_calls": 0,
+            "frozen_encoder_input_tokens_including_prompt": 0,
+            "scope": "entire invocation, including training controls, profiling and evaluation",
+            "includes_rejected_and_profiling_generations": true
+          },
+          "protocol": {
+            "test_opened": false,
+            "gold_in_student_generation": false,
+            "train_examples": 8,
+            "validation_examples": 4,
+            "max_tokens": 512
+          },
+          "parameters_changed": true,
+          "variant": "too-hard",
+          "difficulty_history": [
+            [
+              0.75,
+              0.5,
+              0.25,
+              0.25,
+              0,
+              0.75,
+              0,
+              0
+            ],
+            [
+              0.75,
+              0.125,
+              0.375,
+              0.5,
+              0.125,
+              0.75,
+              0,
+              0
+            ],
+            [
+              1,
+              0.25,
+              0.5,
+              0.5,
+              0,
+              1,
+              0.25,
+              0
+            ],
+            [
+              0.625,
+              0.625,
+              0.375,
+              0.375,
+              0.125,
+              0.75,
+              0,
+              0.125
+            ]
+          ],
+          "difficulty_dynamics": {
+            "span": [
+              0.375,
+              0.5,
+              0.25,
+              0.25,
+              0.125,
+              0.25,
+              0.25,
+              0.125
+            ],
+            "total_variation": [
+              0.625,
+              0.875,
+              0.375,
+              0.375,
+              0.375,
+              0.5,
+              0.5,
+              0.125
+            ],
+            "extra_round_trip_variation": [
+              0.25,
+              0.375,
+              0.125,
+              0.125,
+              0.25,
+              0.25,
+              0.25,
+              0
+            ]
+          },
+          "initial_static_easy_to_hard_order": null,
+          "execution_status": "passed",
+          "limitations": [
+            "Small public train-only GSM8K holdout diagnostic; no official test is read.",
+            "Qwen2.5-0.5B replaces 1.5B and diagnostic cadence is scaled to each bounded step.",
+            "Run fixed-medium/staged/too-hard/unfiltered/static separately with matched configured budgets.",
+            "All rejected groups and calibration generations are charged; no invented nonzero advantage.",
+            "Staged diagnostic uses the validation split, not original 128-per-band training-heldout pools."
+          ]
+        }
+      }
+    }
+  ],
+  "aggregate_metrics": {
+    "fixed-medium.initial.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    },
+    "fixed-medium.validation.accuracy": {
+      "mean": 0.75,
+      "std": 0,
+      "n": 1
+    },
+    "staged.initial.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    },
+    "staged.validation.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    },
+    "too-hard.initial.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    },
+    "too-hard.validation.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    }
+  },
+  "execution_checks": {
+    "fixed-medium": {
+      "actual_optimizer_updates": 8,
+      "invocation_elapsed_seconds": 538.1836995203048,
+      "validation_examples": 4,
+      "difficulty_recalibration_steps": 4,
+      "actual_bands": [
+        [
+          0.375,
+          0.625
+        ],
+        [
+          0.375,
+          0.625
+        ],
+        [
+          0.375,
+          0.625
+        ],
+        [
+          0.375,
+          0.625
+        ]
+      ],
+      "actual_stage_transitions": [
+        "not-staged",
+        "not-staged",
+        "not-staged",
+        "not-staged"
+      ],
+      "measured_cost": {
+        "generation_calls": {
+          "evaluation": 24,
+          "student": 32
+        },
+        "generated_tokens": {
+          "evaluation": 8413,
+          "student": 72642
+        },
+        "scored_response_tokens": {
+          "behavior": 72642,
+          "student_rl": 18142
+        },
+        "frozen_encoder_forward_calls": 0,
+        "frozen_encoder_input_tokens_including_prompt": 0,
+        "scope": "entire invocation, including training controls, profiling and evaluation",
+        "includes_rejected_and_profiling_generations": true
+      }
+    },
+    "staged": {
+      "actual_optimizer_updates": 9,
+      "invocation_elapsed_seconds": 562.0409296359867,
+      "validation_examples": 4,
+      "difficulty_recalibration_steps": 4,
+      "actual_bands": [
+        [
+          0.625,
+          0.875
+        ],
+        [
+          0.625,
+          0.875
+        ],
+        [
+          0.625,
+          0.875
+        ],
+        [
+          0.5,
+          0.75
+        ]
+      ],
+      "actual_stage_transitions": [
+        "new-best",
+        "keep",
+        "advance",
+        "new-best"
+      ],
+      "measured_cost": {
+        "generation_calls": {
+          "evaluation": 24,
+          "student": 32
+        },
+        "generated_tokens": {
+          "evaluation": 9158,
+          "student": 73273
+        },
+        "scored_response_tokens": {
+          "behavior": 73273,
+          "student_rl": 18844
+        },
+        "frozen_encoder_forward_calls": 0,
+        "frozen_encoder_input_tokens_including_prompt": 0,
+        "scope": "entire invocation, including training controls, profiling and evaluation",
+        "includes_rejected_and_profiling_generations": true
+      }
+    },
+    "too-hard": {
+      "actual_optimizer_updates": 11,
+      "invocation_elapsed_seconds": 555.9015793707222,
+      "validation_examples": 4,
+      "difficulty_recalibration_steps": 4,
+      "actual_bands": [
+        [
+          0.125,
+          0.375
+        ],
+        [
+          0.125,
+          0.375
+        ],
+        [
+          0.125,
+          0.375
+        ],
+        [
+          0.125,
+          0.375
+        ]
+      ],
+      "actual_stage_transitions": [
+        "not-staged",
+        "not-staged",
+        "not-staged",
+        "not-staged"
+      ],
+      "measured_cost": {
+        "generation_calls": {
+          "evaluation": 24,
+          "student": 32
+        },
+        "generated_tokens": {
+          "evaluation": 8780,
+          "student": 74351
+        },
+        "scored_response_tokens": {
+          "behavior": 74351,
+          "student_rl": 26978
+        },
+        "frozen_encoder_forward_calls": 0,
+        "frozen_encoder_input_tokens_including_prompt": 0,
+        "scope": "entire invocation, including training controls, profiling and evaluation",
+        "includes_rejected_and_profiling_generations": true
+      }
+    }
+  },
+  "actual_cuda_run_count": 3,
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "promotion_eligible": false,
+    "test_used_for_selection": false,
+    "matched_configured_budget": true,
+    "matched_actual_compute": false,
+    "claim_policy": "single-seed mechanism smoke, not stable capability or production improvement"
+  },
+  "provenance": {
+    "code_commit": "6aabe57a97ec3a586aac7aeea66128750f9441da",
+    "artifact_path": "docs/reproductions/2610.13669-grpo-difficulty-curriculum/metrics/public-a100-three-arms-seed42.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab",
+    "execution_config_sha256": "506dce6568921b9c8fa75d969267537f9bb5c5c5b093a77b283616a2246524c5",
+    "raw_results_sha256": {
+      "fixed-medium": "49b6015c9161672607353e73c8c9d8d0625c1da2354ffd29a36a2694787fc469",
+      "staged": "26b59149c4c36cf60cc9ca900042f82ebe37cf9c96c5b40f49bcafaeda9740e0",
+      "too-hard": "00242a21ba68dc59e5468af3ae570ac715563290756141f50bd8e8b89465bf46"
+    }
+  },
+  "limitations": [
+    "One seed and three variants are NOT three independent seeds; L1 mechanism smoke only.",
+    "Four validation examples cannot establish stable gains or original B5 degradation; test stayed isolated.",
+    "Matched configured rollout caps do not imply equal effective updates, realized token cost or runtime.",
+    "Only fixed-medium/staged/B5-too-hard were executed; static and unfiltered controls are not claimed.",
+    "Original default seeds 43/44 remain unfinished; passing this CUDA smoke does not complete the batch plan.",
+    "Staged reached B2, not the full original B1-to-B5 curriculum; validation cadence is reduced-scale."
+  ]
+}

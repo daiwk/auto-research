@@ -1,6 +1,6 @@
 # LeWAM：端到端 JEPA 世界—动作联合建模
 
-> 当前为 `core_mechanism`：实现公式合同，并提供调用固定作者代码的完整视觉策略/规划与联合训练入口。CUDA 实跑尚需独立 GPU receipt 验证；不把入口存在、单测通过或原文结果当作已完成 GPU 实验。
+> 当前为 `core_mechanism`：真实 A100 已完成三 seed 缩放联合训练→新候选三臂闭环，证据绑定实际源码与权重哈希。目标来自训练轨迹，仍是非 holdout 诊断；未观测到规划相对 reactive 的优势，不宣称完整论文效果复现。
 
 ## 论文信息
 
@@ -97,7 +97,7 @@ $$
 
 ## 本地复现
 
-> **本地对照口径**：基线为同固定 checkpoint 的 reactive policy，实验组为 best-of-K 与梯度规划；原目标来自训练轨迹，稳定能力相对提升不适用。
+> **本地对照口径**：本轮真实测量用各 seed 的新训练、validation-selected checkpoint；基线为同一候选的 reactive policy，实验组为 best-of-K 与梯度规划。原目标来自训练轨迹，稳定能力相对提升不适用。发布模型入口仍保留，但未将其成绩冒充新候选成绩。
 
 `worker.py` 在隔离 Python 环境实际加载作者 ResNet/MoT 权重，用作者 HDF5 采样、ToolHang 环境、策略与 planner 执行；不是自行模拟 success。资源在下载后逐文件验证 provenance SHA256，运行中离线，不允许隐式改成 CPU。
 
@@ -113,7 +113,19 @@ PYTHONPATH=src python scripts/run_oct13_robotics.py \
 
 Checkpoint 为 [LeWAM/lewam-toolhang](https://huggingface.co/LeWAM/lewam-toolhang)，revision `39512799122797828f13c29071d3d797852ce9b5`；HDF5 为[作者 ToolHang 数据](https://huggingface.co/datasets/LeWAM/lewam-toolhang)，revision `465df45efe1b87aead4f423d3f8670833c5ddaf4`，5,030,456,346 bytes。直接读取 HDF5，不生成 14.4GB 解压帧副本。已发布 checkpoint 为 goal-reaching，不冒充 goal-free behavior cloning。
 
-原作者明确说明目标到达评测从训练轨迹抽取起点和 goal；因此结果固定 `diagnostic_only=true`、`promotion_eligible=false`。没有以此宣称 held-out 泛化，也没有运行原版 50 epoch 联合训练、其他九环境或真实机器人。本轮公式测试见 [implementation-contract.json](metrics/implementation-contract.json)；该文件只有 L0 证据，GPU 结果待独立 receipt 与公开指标回写，不捏造完成。
+原作者明确说明目标到达评测从训练轨迹抽取起点和 goal；因此结果固定 `diagnostic_only=true`、`promotion_eligible=false`。没有以此宣称 held-out 泛化，也没有运行原版 50 epoch 联合训练、其他九环境或真实机器人。本轮公式测试见 [implementation-contract.json](metrics/implementation-contract.json)；该文件只有 L0 证据。
+
+2026-10-14，冻结 `0f5dca9f` 源在真实 A100 上完成 seeds 42/43/44 的原生联合训练，再严格加载各自新选中的权重进行三个控制臂的同初始状态、同目标闭环。每 seed 为 1 epoch × 4 train batch × 8 examples，另有 4 validation batch；各有 4 次非零梯度更新，参数抽样差异 L2 为 0.029696/0.028428/0.028228。action flow、latent MSE、SIGReg 与总 loss/validation 全部实际执行且有限。
+
+| Seed | Reactive | Best-of-K | Gradient | 训练＋三臂总耗时 |
+| --- | --- | --- | --- | --- |
+| 42 | 1/2 成功 | 1/2 成功 | 1/2 成功 | 115.62 秒 |
+| 43 | 0/2 成功 | 0/2 成功 | 0/2 成功 | 157.10 秒 |
+| 44 | 0/2 成功 | 0/2 成功 | 0/2 成功 | 165.90 秒 |
+
+三个控制臂均为 16.67% ± 28.87%（逐 seed 样本标准差），未观测到规划相对 reactive 的优势。每臂每 seed 2 episodes、100-step 预算、4 proposals、5 gradient steps；训练与闭环每 seed 总限 1800 秒。数据的 Robosuite metadata 1.4.1 与作者要求的运行版 1.5.1 不同，原始 warning 保留；隔离依赖未修改共享 Torch。
+
+完整逐 batch/梯度与候选权重、实现 SHA 绑定见 [真实训练与新候选控制指标](metrics/native-candidate-a100-seeds42-44.json)；6 份 exact raw JSON 的路径和哈希在该文件中。[脱敏 GPU 回执](../../gpu-validations/oct13-lewam-a100.json)只证明这条缩放定义链路实际完成，不证明正式能力提升。
 
 ### 代码映射
 
@@ -139,6 +151,6 @@ PYTHONPATH=src python scripts/run_oct13_robotics.py --paper lewam --phase train 
   --config /path/to/lewam-train.json --seed 42 --output runs/lewam/train-seed42.json
 ```
 
-配置用 `source_root/python/output_dir/data_dir/device=cuda`，可显式设 `train_epochs`、`train_steps_per_epoch`、`train_batch_size`。`training.py` 记录每个真实 batch 的三项 loss、优化步梯度、trainable 参数抽样差异与 validation-selected checkpoint。validation 仍按作者 decision-point 随机 split，不伪称独立轨迹 test。该入口尚需 A100 实跑；完整 50 epoch 与新训练 candidate 的闭环评测仍未完成，发布 checkpoint 的控制结果不能填补这些阶段。
+配置用 `source_root/python/output_dir/data_dir/device=cuda`，可显式设 `train_epochs`、`train_steps_per_epoch`、`train_batch_size`。`training.py` 记录每个真实 batch 的三项 loss、优化步梯度、trainable 参数抽样差异与 validation-selected checkpoint。validation 仍按作者 decision-point 随机 split，不伪称独立轨迹 test。本轮已完成上述缩放训练及新候选三臂闭环；完整 50 epoch 仍未重跑，发布 checkpoint 的控制结果不能填补完整训练阶段。
 
-新训练产物在 `native-training/training-provenance.json` 中绑定 seed、固定作者源码、公开数据、实际参数更新证据，以及 `lewam_best.pt`/`lewam_config.json` 的 SHA256。闭环配置可用 `trained_model_dir` 指向该目录；运行前拒绝 seed、选择协议或哈希不符的候选，再由同一新模型执行 reactive / best-of-K / gradient 三臂。三臂按同 seed 重新采样相同起点与目标；发布权重不会替代新候选。该连接是可执行入口，尚不等于真实训练或闭环已完成。
+新训练产物在 `native-training/training-provenance.json` 中绑定 seed、固定作者源码、公开数据、实际参数更新证据，以及 `lewam_best.pt`/`lewam_config.json` 的 SHA256。闭环配置可用 `trained_model_dir` 指向该目录；运行前拒绝 seed、选择协议或哈希不符的候选，再由同一新模型执行 reactive / best-of-K / gradient 三臂。三臂按同 seed 重新采样相同起点与目标；发布权重不会替代新候选。上述 GPU 证据对应此连接实际执行后的结果。
