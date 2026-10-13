@@ -29,6 +29,17 @@ def test_explicit_diagnostic_flags_override_formal_labels():
     assert not _agent_evidence({"dataset": {"id": "public-dataset"}}, {})["diagnostic_only"]
 
 
+def test_dataset_label_reads_declared_live_agent_protocol_without_inventing_metadata():
+    from scripts.generate_public_experiment_dashboard import _dataset_name
+
+    source = {"evaluation_protocol": {"protocol": {"dataset": {
+        "public_id": "openai/grade-school-math", "revision": "fixed",
+        "source_split": "train", "official_test_opened": False}}}}
+    assert _dataset_name("", source) == "openai/grade-school-math"
+    assert _dataset_name("legacy", {"evaluation_protocol": {"protocol": "invalid"}}) == "legacy"
+    assert _dataset_name("", {"evaluation_protocol": {"protocol": {"dataset": {"revision": "fixed"}}}}) == ""
+
+
 def test_public_dashboard_contains_only_committed_documentation_metrics():
     payload = json.loads(
         (ROOT / "docs/assets/data/experiment-dashboard.json").read_text(encoding="utf-8")

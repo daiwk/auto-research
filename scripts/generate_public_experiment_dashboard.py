@@ -73,6 +73,10 @@ def _seed(row_seed: str, payload: dict[str, Any], path: str) -> str:
 def _dataset_name(row_dataset: str, payload: dict[str, Any]) -> str:
     """Keep revision manifests in the artifact, not in a card's dataset label."""
     dataset = payload.get("dataset")
+    if dataset is None:
+        live_protocol = _protocol(payload).get("protocol")
+        if isinstance(live_protocol, dict):
+            dataset = live_protocol.get("dataset")
     if isinstance(dataset, dict):
         name = dataset.get("id") or dataset.get("name") or dataset.get("public_id")
         if name:
