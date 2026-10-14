@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "adapter_key": "skilldreamer",
+  "validated_at": "2026-10-14T00:52:30.457078+00:00",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/observe_oct14_skilldreamer.py",
+    "--config",
+    "data/skilldreamer-full7b.json",
+    "--seed",
+    "42",
+    "--output",
+    "runs/skilldreamer/seed42"
+  ],
+  "config": {
+    "device": "cuda",
+    "max_queries": 24,
+    "max_new_tokens": 256,
+    "top_k": 3,
+    "action_budget": 8
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "kind": "public-resource",
+    "public_id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_split": "train",
+    "official_test_opened": false,
+    "parent_partition": "validation",
+    "parent_partition_rows": 716,
+    "parent_partition_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "transformation": "first 24 rows of the already verified train-derived validation partition; no question/answer transformation",
+    "files": {
+      "validation24.jsonl": "8f33a9f7a44067e362458e4daf0eb1ad629a2aac2f44ffefe731e36b19dcb8c1"
+    }
+  },
+  "checkpoint": {
+    "generator": {
+      "public_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "files": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "encoder": {
+      "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "files": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+      }
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "no_skills.pass_rate": {
+      "mean": 0.20833333333333334,
+      "std": 0.03608439182435161,
+      "n": 3
+    },
+    "no_skills.load_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "no_skills.executed_actions": {
+      "mean": 102.66666666666667,
+      "std": 3.2145502536643185,
+      "n": 3
+    },
+    "no_skills.generation_failures": {
+      "mean": 6,
+      "std": 1.7320508075688772,
+      "n": 3
+    },
+    "no_skills.tool_failure_episodes": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "no_skills.model_calls": {
+      "mean": 118.33333333333333,
+      "std": 4.725815626252609,
+      "n": 3
+    },
+    "no_skills.generated_tokens": {
+      "mean": 16615.333333333332,
+      "std": 2619.858838436402,
+      "n": 3
+    },
+    "direct.pass_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "direct.load_rate": {
+      "mean": 0.041666666666666664,
+      "std": 0.03608439182435161,
+      "n": 3
+    },
+    "direct.executed_actions": {
+      "mean": 128,
+      "std": 0.0,
+      "n": 3
+    },
+    "direct.generation_failures": {
+      "mean": 12.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "direct.tool_failure_episodes": {
+      "mean": 14.333333333333334,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "direct.model_calls": {
+      "mean": 162.33333333333334,
+      "std": 11.060440015358038,
+      "n": 3
+    },
+    "direct.generated_tokens": {
+      "mean": 5630.666666666667,
+      "std": 252.50808567911906,
+      "n": 3
+    },
+    "skilldreamer.pass_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "skilldreamer.load_rate": {
+      "mean": 0.9166666666666666,
+      "std": 0.03608439182435161,
+      "n": 3
+    },
+    "skilldreamer.executed_actions": {
+      "mean": 101.33333333333333,
+      "std": 6.3508529610858835,
+      "n": 3
+    },
+    "skilldreamer.generation_failures": {
+      "mean": 16,
+      "std": 0.0,
+      "n": 3
+    },
+    "skilldreamer.tool_failure_episodes": {
+      "mean": 3.3333333333333335,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "skilldreamer.model_calls": {
+      "mean": 363,
+      "std": 9.539392014169456,
+      "n": 3
+    },
+    "skilldreamer.generated_tokens": {
+      "mean": 42921,
+      "std": 1390.1118660021573,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "completed_seeds": 3,
+    "actual_model_calls": [
+      648,
+      647,
+      636
+    ],
+    "executed_actions": [
+      321,
+      338,
+      337
+    ],
+    "actual_csi_assessments": [
+      108,
+      120,
+      120
+    ],
+    "skilldreamer_loaded_skill_episodes": [
+      14,
+      15,
+      15
+    ],
+    "skilldreamer_executed_actions": [
+      94,
+      105,
+      105
+    ],
+    "all_generation_failures_retained": true,
+    "gold_visible_to_policy": false,
+    "official_test_opened": false,
+    "diagnostic_only": true,
+    "promotion_eligible": false,
+    "environment_step_counts": [
+      {
+        "seed": 42,
+        "arms": {
+          "no_skills": {
+            "successful_calculator_calls": 89,
+            "submissions": 7,
+            "failed_environment_steps": 3
+          },
+          "direct": {
+            "successful_calculator_calls": 29,
+            "submissions": 0,
+            "failed_environment_steps": 99
+          },
+          "skilldreamer": {
+            "successful_calculator_calls": 89,
+            "submissions": 0,
+            "failed_environment_steps": 5
+          }
+        }
+      },
+      {
+        "seed": 43,
+        "arms": {
+          "no_skills": {
+            "successful_calculator_calls": 98,
+            "submissions": 6,
+            "failed_environment_steps": 1
+          },
+          "direct": {
+            "successful_calculator_calls": 20,
+            "submissions": 0,
+            "failed_environment_steps": 108
+          },
+          "skilldreamer": {
+            "successful_calculator_calls": 99,
+            "submissions": 0,
+            "failed_environment_steps": 6
+          }
+        }
+      },
+      {
+        "seed": 44,
+        "arms": {
+          "no_skills": {
+            "successful_calculator_calls": 96,
+            "submissions": 5,
+            "failed_environment_steps": 3
+          },
+          "direct": {
+            "successful_calculator_calls": 22,
+            "submissions": 0,
+            "failed_environment_steps": 106
+          },
+          "skilldreamer": {
+            "successful_calculator_calls": 97,
+            "submissions": 0,
+            "failed_environment_steps": 8
+          }
+        }
+      }
+    ],
+    "skilldreamer_successful_calculator_calls": [
+      89,
+      99,
+      97
+    ],
+    "environment_count_scope": "original executed_actions are env.step attempts; successful calculators, submissions and failed steps are separately reduced from observations",
+    "allocator_peak_allocated_bytes": [
+      15616373248,
+      15616373248,
+      15616636416
+    ],
+    "allocator_peak_reserved_bytes": [
+      16557015040,
+      16557015040,
+      16557015040
+    ],
+    "call_instrumentation": [
+      {
+        "original_call_forwarded_unchanged": true,
+        "temporary_call_instrumentation": true,
+        "restored_after_run": true
+      },
+      {
+        "original_call_forwarded_unchanged": true,
+        "temporary_call_instrumentation": true,
+        "restored_after_run": true
+      },
+      {
+        "original_call_forwarded_unchanged": true,
+        "temporary_call_instrumentation": true,
+        "restored_after_run": true
+      }
+    ],
+    "actual_generation_attempts": [
+      648,
+      647,
+      636
+    ],
+    "actual_generation_responses": [
+      648,
+      647,
+      636
+    ],
+    "actual_failed_generation_attempts": [
+      0,
+      0,
+      0
+    ],
+    "failed_generation_output_token_cost": [
+      0,
+      0,
+      0
+    ],
+    "generation_cost_scope": "raw model_calls are completed responses; attempts include errors; failed output-token costs unknown when no response returned"
+  },
+  "raw_artifacts": {
+    "42": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/a100-47f0e9ce/seed42.json",
+      "sha256": "47c0e660f4221a10ad689739986d35b94df67a38aa9bd5a916d20cb372f357da"
+    },
+    "43": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/a100-47f0e9ce/seed43.json",
+      "sha256": "34d4da0ebdd722194d4608936989577f33dc2556ff0bd02f9d7fe6fc101d414a"
+    },
+    "44": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/a100-47f0e9ce/seed44.json",
+      "sha256": "2b776f26e593a0aad092ecc7c3edee70c1f2c7cbb44e7cdf7d12b42812fc0b00"
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_skilldreamer.py": "9b14997fef987797db879554966dccb6c5699496c4ca8a979cf027b17fbd421e",
+    "src/auto_research/reproductions/skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
+    "src/auto_research/reproductions/skilldreamer/algorithm.py": "c31169a7175fd7e005323a1288905427230a2c61fc906257868b147b1c6e2f76",
+    "src/auto_research/reproductions/skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970",
+    "src/auto_research/reproductions/near/data.py": "795416bdffeb25880aeaf85b4bfd6480b8677b45cddabe37ba2e49d7bf544eb8",
+    "src/auto_research/reproductions/near/experiment.py": "197e3fefad06f1f0e54533b608c5d717e57d0b6a919a105f88eee79447d94399",
+    "src/auto_research/reproductions/state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1"
+  },
+  "executed_source_archive_sha256": "063e7583614b5a1e75f7420c93871c920f18cc42f53cc22eddc2c4256cff8afb",
+  "provenance": {
+    "commit": "47f0e9cebc196e15c991d494dc4072367f53043b",
+    "artifact_path": "docs/gpu-validations/oct13-skilldreamer-a100.json",
+    "metrics_artifact": "docs/reproductions/2609.01642-skilldreamer/metrics/public-a100-seeds42-44-47f0e9ce.json",
+    "checkpoint_committed": false
+  },
+  "limitations": [
+    "Train-derived 24-row arithmetic live-interaction diagnostic; not official GSM8K test.",
+    "Not SkillUsage/SkillRet/SkillNet-Gym, original model scale, or original skill-gallery benchmark.",
+    "All failed generations/tool episodes are kept; skill loading alone is not success.",
+    "Three seeds do not establish formal capability comparison or authorize promotion.",
+    "Original runner tier l2_public_dataset is retained byte-for-byte in raw results; the envelope is assessed as L1 because restricted arithmetic and a local gallery replace the original skill benchmark.",
+    "Allocator/wall observations alone do not establish exclusive execution or a latency, throughput, or compute-savings comparison."
+  ],
+  "all_sanitized_commands": [
+    [
+      "python",
+      "scripts/observe_oct14_skilldreamer.py",
+      "--config",
+      "data/skilldreamer-full7b.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/skilldreamer/seed42"
+    ],
+    [
+      "python",
+      "scripts/observe_oct14_skilldreamer.py",
+      "--config",
+      "data/skilldreamer-full7b.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/skilldreamer/seed43"
+    ],
+    [
+      "python",
+      "scripts/observe_oct14_skilldreamer.py",
+      "--config",
+      "data/skilldreamer-full7b.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/skilldreamer/seed44"
+    ]
+  ],
+  "observer_source": {
+    "commit": "27adb791dd37a0ff314e8d6458e111bf39751206",
+    "sha256": "f447e497a478a178fd1afc279d8732c9ab823c9b9ec6f009a3e124f2f50b2d90",
+    "archive_sha256": "5ea0d6afe65de63264feeca753e775c78a9b6df542a930ec06e0c3a5c3f20071"
+  },
+  "execution_config_sha256": "703c1ae788b0ca029582688ee540f0bf677605dd4d44d29d52b88a661fb72248"
+}

@@ -13,7 +13,7 @@
 | Adapter | `skilldreamer` |
 | 本地复现代码 | [`src/auto_research/reproductions/skilldreamer/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/skilldreamer/) |
 
-当前验证状态：`47f0e9ce`完整三臂seed42已实际在A100结束，16条相同evaluation任务中 no-skills Pass为25%，direct和SkillDreamer均为0。方法实际有108次CSI、14题技能加载和89次成功calculator调用，但0次提交；不能把定义链路执行当成任务成功或能力提升。43/44同源同预算执行中，尚未签三种子GPU回执。下方各负诊断保留其原始时点和源码，不冒充当前完整结果。
+当前验证状态：`47f0e9ce`完整三臂×42/43/44已实际在A100结束并独立核验，[三种子机制回执](../../gpu-validations/oct13-skilldreamer-a100.json)已通过统一证据合同。no-skills平均Pass约20.83%，direct与SkillDreamer均0；方法实际执行348次CSI、44题技能加载和285次成功calculator调用，但0次提交。回执仅证明定义链路在真实GPU执行，不证明任务成功、能力提升或原benchmark复现。
 
 原始 v1 时间为 2026-08-28 13:19:50 UTC；v2 为 2026-10-09 04:15:57 UTC。正文题名为 *Imagine Before Acting: Prospective Skill Identification for LLM Agents*；SkillDreamer 是方法名。
 
@@ -99,6 +99,18 @@ PYTHONPATH=src python scripts/run_skilldreamer.py \
 配置含已验证本地 Instruct `model_dir`、MiniLM `encoder_dir`、带 provenance 的公开 `raw_data`、`device` 和提前固定 `max_queries`、`top_k`、`action_budget`、`max_new_tokens`。模型真实生成 capability/anchors 与 pseudo，HSR 实际编码/BM25/rerank；没有固定 candidate 代替 LLM generation，PSG 无效也不启发式补造。CSI 加载 `gallery.json` 的实际 procedure 后，必须再生成一条 action，才能使用该技能的内容。
 
 ### 数据协议、结果与边界
+
+最新完整结果见[同源三种子指标](metrics/public-a100-seeds42-44-47f0e9ce.json)，原始三臂均覆盖相同16个evaluation ID，所有生成/工具失败保留：
+
+| Seed | no-skills Pass | direct Pass | SkillDreamer Pass | 方法CSI | 方法加载题数 | 方法成功计算器调用 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 42 | 25% | 0% | 0% | 108 | 14 | 89 |
+| 43 | 18.75% | 0% | 0% | 120 | 15 | 99 |
+| 44 | 18.75% | 0% | 0% | 120 | 15 | 97 |
+
+三种子共1931次响应、195501生成token；原工具尝试与成功计算器调用分开计数。独立observer `27adb791` 原样转发调用并恢复包装，逐字绑定算法、模型/编码器revision、固定切分、raw与trace SHA；七个汇总字段逐episode复算。原runner的L2标签在raw中原样保留，外层按受限算术/本地技能库评为L1，不能晋级为formal能力证据。
+
+seed42期间有教师短诊断并存，43/44以两个worker并行；三个wall值不用于延迟、吞吐或总计算节省比较。下文保留历史诊断，不能将它们与最新运行混算；也不会根据这批evaluation得分改提示、重试或挑预算。
 
 2026-10-14 固定 `0f5dca9f` 源、Qwen2.5-0.5B-Instruct、24 行 train-derived 算术协议在真实 A30 上完成 seeds 42/43/44。三个种子的 SkillDreamer 臂各 16 个执行 episode，实际模型调用为 351/326/318；但 CSI assessment、真实 gallery 加载和工具动作均为 0，48/48 episode 未完成定义链路。三臂 Pass 均为 0。这是**核心执行失败诊断**，不是 GPU gate 通过或能力验证。
 

@@ -118,6 +118,7 @@ def test_a100_l1_zero_accuracy_and_zero_finish_do_not_mean_unexecuted_core(tmp_p
     receipt = json.loads((tmp_path / "output/docs/gpu-validations/oct13-skilldreamer-a100.json").read_text())
     assert receipt["accelerator"]["model"] == "NVIDIA A100-SXM4-80GB"
     assert receipt["metrics"]["skilldreamer.pass_rate"]["mean"] == 0
+    assert any("do not establish exclusive execution" in note for note in receipt["limitations"])
     assert [command[command.index("--seed") + 1] for command in receipt["all_sanitized_commands"]] == ["42", "43", "44"]
     artifact = json.loads((tmp_path / "output" / value[0].DOC / "public-a100-seeds42-44-47f0e9ce.json").read_text())
     assert artifact["evaluation_protocol"]["tier"] == "l1_mechanism" and artifact["promotion_eligible"] is False

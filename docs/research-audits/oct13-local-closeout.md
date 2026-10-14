@@ -62,6 +62,7 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 | 本次测试入口指向错误 | 首次新全量遗漏`PYTHONPATH=src`，共享venv导入外层旧editable安装，126个collection错误；不是本分支算法结果。已明确绑定当前内层源码重跑，不修改依赖或弱化测试 |
 | 新教师诊断独立公开整理 | 96项定向检查通过；实际14响应/3876tokens由冻结runner、54core Git文件、10来源SHA和28调用快照逐字段核验并脱敏，记录明确0学生生成/0optimizer。公开native不是GPU通过回执；不依据四例validation宣称稳定收益 |
 | 新greedy路径启动与CPU实核 | 主审84项启动/漂移/进程组隔离检查通过；A100真实54source、学生7/教师11文件和train-only切分重新逐字节核验，五operation新源CPU编译通过且未初始化CUDA。原配置只新增False，原数据/retries/steps/token/wall预算不增；新完整GPU仍未运行 |
+| 教师诊断协议与文档同步 | 新native补齐明确seed与实际dataset fingerprint，实测值/来源SHA不改；804个指标迁移待变更0，公开看板757条，manifest/catalog同步；73项相关合同检查通过。strict构建10.52秒通过，仍不替代两个缺失GPU回执 |
 
 早期完整通过结果绑定源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`，后续全量与定向结果按上表分别记录；随后若有源码修复须补相应检查。
 真实 GPU 缺项仍按 TODO 验收，最终 PR 的 CI 尚未触发；本地测试通过不等于最终 PR 可合并。
@@ -82,6 +83,7 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 `f92413aa`基础wheel独立安装核验后，清理本轮一次性wheel与venv目录，释放约45 MiB；不可变源码包、公开资源、当前运行和失败证据保留。
 协议同步及新负记录strict构建通过后，清理本轮站点输出约305 MiB；未删除真实结果、公开权重或活跃实验。
 两份schema负证据及课程完整结果strict构建通过后，清理`.cache/oct14-docs-site-ce4-negative`，释放约306 MiB；原始响应、失败证据和待复用公开资源保留。
+教师短诊断公开记录strict构建通过后，清理`.cache/oct14-docs-site-quality-6cf83b0e`，释放约306 MiB；没有删除活跃GPU结果、失败记录、公开权重或源归档。
 
 ## 下一次恢复顺序
 

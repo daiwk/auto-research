@@ -266,6 +266,7 @@ def curate(directory: Path, commit: str, source_archive: Path, *, accelerator_mo
         "Three seeds do not establish formal capability comparison or authorize promotion."]
     if a100:
         limitations.append("Original runner tier l2_public_dataset is retained byte-for-byte in raw results; the envelope is assessed as L1 because restricted arithmetic and a local gallery replace the original skill benchmark.")
+        limitations.append("Allocator/wall observations alone do not establish exclusive execution or a latency, throughput, or compute-savings comparison.")
     payload = {"schema_version": 2, "adapter_key": "skilldreamer", "manifest_ref": "reproduction:skilldreamer",
         "seeds": list(SEEDS), "diagnostic_only": True, "promotion_eligible": False, "measured_locally": True,
         "aggregate_metrics": metrics, "seed_results": runs, "raw_artifacts": raw,
