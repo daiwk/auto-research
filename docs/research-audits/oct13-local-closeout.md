@@ -67,11 +67,12 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 | MBS新profile真实负结果 | `4c4710cd` A100唯一seed42自然结束exit1，314.887秒/34814tokens；root4新baseline为学生25%/教师100%，另两root独解错误，无后代/0RL。77响应与全部构造audit按冻结算法独立回放一致，脱敏failed native保存但无passed receipt；43/44未启动，扩大候选池等待用户选择 |
 | 新工具完整回归与链接修复 | 全量2988通过、1失败、24warnings、312.56秒；唯一失败为新MBS失败产物生成时README尚未加入链接。补链接后11项文档合同通过，最后完整复跑**2989通过、24warnings、293.95秒**，Junit报告保留本地；不把此前exit1改写为通过，也不因此宣称MBS GPU验收 |
 | 来源角色清单与当前生成同步 | 辅助清单仅MBS checkpoint行号变化，140文件的访问表达式/作用域/fingerprint均未变，主审后重新生成并校验。806指标迁移待变更0、看板759条；spec check/validate、平台审计、README同步、发现闭环check通过，不因此推进审查水位。最新strict构建10.75秒通过，GPU门禁只缺MBS |
+| 成本延期后的最终本地回归 | 交付源码`636e5e885ef1d1b7dc5086ed0b55a323de641d35`：完整**2994通过、24warnings、354.20秒**，Junit独立核对0失败/0错误/0跳过；Ruff、compileall、140文件来源清单、spec check/validate、平台审计与活跃CUDA门禁通过。32项定向测试覆盖延期不可运行、原规格保留及活跃receipt缺失仍拒绝。806指标迁移待变更0、759看板条目与manifest/catalog重新生成无漂移；隔离base wheel仅NumPy安装、metadata/help/init通过，安装包MBS未注册。CI结果另在PR核对，不把本地检查或L1机制当能力提升 |
 
 早期完整通过结果绑定源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`，后续全量与定向结果按上表分别记录；随后若有源码修复须补相应检查。
 **最新交付决定（2026-10-14）：** 用户将MBS完整方法延期，并新增强制成本门槛。其原CUDA规格原样归档至`deferred-spec.json`，从活跃registry/批量reproduce/公开runner分离，分类页和详情明确“成本过高，暂不复现／待验收”；没有伪造回执、关闭GPU审计或篡改失败。18篇活跃机制实现交付，统一GPU门禁已实测exit0。新测试同时验证延期不可运行及活跃adapter缺失receipt仍失败；32项相关回归通过。源码与既有真实实验材料保留，审查水位仍为10月12日。
 
-最终 PR 的 CI 尚未触发；本地测试通过不等于最终 PR 可合并。上表的旧缺项和等待选择是对应检查点的历史状态，不能覆盖本段最新决定。
+最终 PR 的 CI 结果须在GitHub独立核对；本地测试通过不等于最终 PR 可合并。上表的旧缺项和等待选择是对应检查点的历史状态，不能覆盖本段最新决定。
 原运行源码快照为 `ccad3e679787f6f5383b8bd3dd1c7b58e7c8c5d0`，本地工具/文档收口另存后续提交。
 
 ## 清理与保留
@@ -91,6 +92,8 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 两份schema负证据及课程完整结果strict构建通过后，清理`.cache/oct14-docs-site-ce4-negative`，释放约306 MiB；原始响应、失败证据和待复用公开资源保留。
 教师短诊断公开记录strict构建通过后，清理`.cache/oct14-docs-site-quality-6cf83b0e`，释放约306 MiB；没有删除活跃GPU结果、失败记录、公开权重或源归档。
 SkillDreamer完整结果和新MBS负记录strict构建通过后，清理`.cache/oct14-docs-site-skill-mbs-closure`，再释放约306 MiB；所有真实raw、失败、公开资源与不可变来源归档保留。
+
+强制成本规则的strict构建通过后，清理独立临时站点约306 MiB；本次最终交付还清理仅用于检查的站点306 MiB、wheel约3.1 MiB和基础安装环境约42 MiB（合计约351 MiB）。结果报告、失败证据、源码归档及可复用数据/权重不删除。
 SkillDreamer三份raw中转副本与已提交原字节逐项相等后，清理本轮`.cache/oct14-skill-full7b-curation-47f0e9ce`，释放约5.6 MiB；原始observer/trace/launcher目录和已提交raw仍完整保留。
 
 ## 下一次恢复顺序
