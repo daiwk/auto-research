@@ -62,7 +62,7 @@ GPPO 和 TAPO 与已有的其他论文缩写重名，本轮使用 `gppo-framewor
 | SmolWAM | `2b84c377` A100 三 seed 均完成 teacher KD、两布局课程及新学生同初态闭环；24 次真实更新，学生与 no-op 均零成功，源码/原始文件/新权重绑定独立核验通过 | 全局 CI；旧 adapter 输入失败保留，缩放单任务诊断不是正式能力或原规模复现 |
 | SynthSelf / Progressive contraction | 完整42/43/44 native和独立回执已从实际raw复算并保存。SynthSelf seed43 retention为0，Contraction三seed均与full-SFT相同，负结果保留 | 最终整批目录与CI；不宣称稳定能力提升或总计算节省 |
 | UPTURN | 完整42/43有真实救援信号，44救援优势全0、只有熵梯度，保持failed-no-rescue-signal。失败native与完整执行cohort已核验保存 | 最终整批同步与CI；不生成三种子全通过回执、不为通过挑预算 |
-| MagicBeanStalk | 历史构造失败保留。独立`dd54035d`教师质量诊断实际14次响应/3876tokens/156.41秒：3个train根题仅1个独解正确，其两个子题均通过独立验算；4条validation随机/greedy分别50%/75%。`4c4710cd`新增可选教师构造采样配置，默认行为不变，21个隔离用例通过 | 短诊断没有运行scaffold/effectivity/合成/Goldilocks/学生训练，不签整方法回执；新greedy构造路径须新源完整实跑，不降低安全门槛，不据4题差异宣称稳定提升 |
+| MagicBeanStalk | `4c4710cd`新greedy路径已实际A100结束：314.887秒、34814tokens，77条响应与构造audit独立回放一致。root4的新学生/教师baseline为25%/100%，无经验零成功学生；root7/8教师独解失败，无合格后代/0RL。教师短诊断仍单独保留，不当整方法结果 | 缺整方法通过回执；43/44未启动。后续需要扩大train候选池或换教师，不能用旧0/4覆盖新测量；扩大范围等待用户选择，不盲目重试或放宽门槛 |
 | SOAR | `b9086275` A100默认42/43/44×两臂六个实际run已逐字段复算；方法12次、消融10次真更新，消融43准确率0保留；独立三seed回执已保存 | 最终整批目录与CI；仅4条validation/seed的L1机制诊断，不是稳定能力或原benchmark复现 |
 | 难度课程 | `b9086275` A30默认42/43/44×五臂15个实际run已独立复算并签新源回执；151次真实更新、38个等值组精确跳过，staged42准确率0与too-hard非零更新均保留 | 最终整批目录与CI；三seed仍仅L1，不复用旧数值异常controls、不宣称稳定相对提升 |
 

@@ -1,4 +1,4 @@
-# 2026-10-13 GPU 验证 TODO（网络恢复后继续）
+# 2026-10-13 GPU 验证收口与剩余工作
 
 2026-10-13 用户要求网络不稳定时先停止 A100/A30 的连接、传输和新实验，保留为 TODO。
 2026-10-14 用户已明确恢复使用；两类 NVIDIA GPU 的 SSH 只读检查均成功，已有实验目录仍在。
@@ -45,11 +45,10 @@ A30 `51b4718a` unfiltered/static seed42 与 unfiltered/static/fixed seed43 已�
 
 | 优先序 | 论文 | 恢复后要执行的完整链路 |
 | --- | --- | --- |
-| 2 | SkillDreamer | 固定 checkpoint、公开 train-only GSM8K 子集；no-skills/direct/PSG+HSR+CSI 三臂实际工具执行，参考答案仅外部 scorer 可见 |
 | 2 | MagicBeanStalk | 真实 teacher 分解、独立验证、effectivity、Goldilocks、非零优势 RLVR 与 seed-RLVR 对照；不合格合成不算完成 |
 
 尚未完成的 CUDA adapter 保持 `requires_gpu_validation=True`，不伪造缺失 receipt。
-10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM，以及SynthSelf、Progressive Contraction、SOAR和难度课程修后五臂的完整三种子机制回执；UPTURN保留有效单seed回执和含失败的三seed执行记录。统一 GPU 门禁当前仅缺 MagicBeanStalk、SkillDreamer；还有最终整合检查，不能将门禁缺项数等同于全部剩余工作。
+10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM，以及SynthSelf、Progressive Contraction、SOAR、难度课程修后五臂和SkillDreamer完整三种子机制回执；UPTURN保留有效单seed回执和含失败的三seed执行记录。统一 GPU 门禁当前仅缺 MagicBeanStalk；还有最终整合检查，不能将门禁缺项数等同于全部剩余工作。
 State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替代或合并新实验。
 因此 GPU evidence gate 在这份 TODO 关闭前不能被报告为通过，MR 也不能被标为全部完成。
 
@@ -69,8 +68,9 @@ State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替�
 - 数值修复保留原 GRPO 优势公式和 `std + 1e-6`：CPU FP64 先平移奖励再中心化，等值组精确为零，最后转换成策略精度；SOAR 的逐轨迹标准化复用该计算。没有用容差强制抹掉真实奖励差异，没有改变 gate、奖励或训练预算；新源码仍须真实 GPU 重测后验收。
 - `b9086275`新MBS限定run实际343.08秒，仍没有合格后代；实际响应显示第二子题丢失必要题设、独立验证拒绝，另外两根题的teacher算错，不能放宽验证器签通过。新SOAR同源train-only探针实际35.97秒，3条有效轨迹、2条source-match且真实发生检索；它没有训练或评估，只解除原格式阻碍，不算整方法通过。
 - MBS后续两次独立格式约束运行也保留失败：`f92413aa`的attempt06实际374.297秒、36728生成token，四个子题均未通过独立验算；`ce4a4a34`的attempt07实际351.713秒、36425生成token，修正question→trace→answer顺序后仅一个子题通过，仍无合格合成后代/配对RL根/实际RL更新。二者均为负证据，不签通过回执。CPU后端和真实CUDA已确认结构可解析，但没有因此证明教师生成/验证质量；不将所有失败归因于字段顺序。
-- SkillDreamer完整原计划seed42已实际结束，16个相同evaluation ID覆盖三臂；无技能25%，直接检索/方法均0。方法108次CSI、14题加载、89次成功计算器调用仍不等于完成任务。43/44保持同源同预算执行中；实际峰值显存支持两个worker，未用得分决定继续或改方案。三种子回执须等全部原始结果核验后生成，墙钟受并行/短诊断重叠影响，不作效率结论。
+- SkillDreamer完整原计划42/43/44三臂已实际结束并逐字段核验，[新回执](../gpu-validations/oct13-skilldreamer-a100.json)通过统一合同。方法348次CSI、44题加载、285次成功计算器调用，但0提交；无技能平均20.83%，直接检索/方法均0。仅L1机制执行，不是能力改善；42短诊断重叠/43-44并行的墙钟不作效率结论。
 - `dd54035d`MBS教师短诊断已在真实A100结束，14输出/3876tokens，3个train根题独解1/3正确、root4的两子题独立验算2/2，4条validation随机/greedy为50%/75%；没有学生、optimizer或完整核心链路。`4c4710cd`可选`construction_teacher_sample=False`仅控制教师独解/JSON，学生校准、effectivity随机池、独立验算及所有论文门槛不变；仍须不可变新源完整验证，诊断不能填补缺失回执。
+- `4c4710cd`完整seed42单次GPU现已结束exit1、314.887秒、34814tokens：3个选中hard roots中root4重新独立baseline为学生25%/教师100%，不满足zero-success条件；root7/8教师验算失败，无合格后代/0RL。77响应、audit和配对根选择独立CPU回放一致；不得用先前0/4校准覆盖新1/4测量。43/44未启动，未生成通过回执；扩大同一train候选池的后续方案等待用户选择，现有预算不盲目重试。
 
 每次恢复先核验源代码 SHA 和资源实际字节；确认后再运行。每篇结束取回 JSON/日志，
 验证非零有效更新或明确的负对照边界，再生成 sanitized receipt，最后跑统一门禁。

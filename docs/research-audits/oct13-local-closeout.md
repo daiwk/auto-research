@@ -63,6 +63,10 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 | 新教师诊断独立公开整理 | 96项定向检查通过；实际14响应/3876tokens由冻结runner、54core Git文件、10来源SHA和28调用快照逐字段核验并脱敏，记录明确0学生生成/0optimizer。公开native不是GPU通过回执；不依据四例validation宣称稳定收益 |
 | 新greedy路径启动与CPU实核 | 主审84项启动/漂移/进程组隔离检查通过；A100真实54source、学生7/教师11文件和train-only切分重新逐字节核验，五operation新源CPU编译通过且未初始化CUDA。原配置只新增False，原数据/retries/steps/token/wall预算不增；新完整GPU仍未运行 |
 | 教师诊断协议与文档同步 | 新native补齐明确seed与实际dataset fingerprint，实测值/来源SHA不改；804个指标迁移待变更0，公开看板757条，manifest/catalog同步；73项相关合同检查通过。strict构建10.52秒通过，仍不替代两个缺失GPU回执 |
+| SkillDreamer完整三种子独立核验 | 同源42/43/44三臂、七汇总字段、raw/trace SHA、CSI/真实技能加载/成功环境操作逐项复算；1931响应/195501tokens，方法348CSI/44加载/285成功calculator但0提交。三seed机制receipt通过统一合同；108项摘录/observer检查通过，不宣称能力增益或效率比较 |
+| MBS新profile真实负结果 | `4c4710cd` A100唯一seed42自然结束exit1，314.887秒/34814tokens；root4新baseline为学生25%/教师100%，另两root独解错误，无后代/0RL。77响应与全部构造audit按冻结算法独立回放一致，脱敏failed native保存但无passed receipt；43/44未启动，扩大候选池等待用户选择 |
+| 新工具完整回归与链接修复 | 全量2988通过、1失败、24warnings、312.56秒；唯一失败为新MBS失败产物生成时README尚未加入链接。补链接后11项文档合同通过，最后完整复跑**2989通过、24warnings、293.95秒**，Junit报告保留本地；不把此前exit1改写为通过，也不因此宣称MBS GPU验收 |
+| 来源角色清单与当前生成同步 | 辅助清单仅MBS checkpoint行号变化，140文件的访问表达式/作用域/fingerprint均未变，主审后重新生成并校验。806指标迁移待变更0、看板759条；spec check/validate、平台审计、README同步、发现闭环check通过，不因此推进审查水位。最新strict构建10.75秒通过，GPU门禁只缺MBS |
 
 早期完整通过结果绑定源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`，后续全量与定向结果按上表分别记录；随后若有源码修复须补相应检查。
 真实 GPU 缺项仍按 TODO 验收，最终 PR 的 CI 尚未触发；本地测试通过不等于最终 PR 可合并。
@@ -84,6 +88,8 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 协议同步及新负记录strict构建通过后，清理本轮站点输出约305 MiB；未删除真实结果、公开权重或活跃实验。
 两份schema负证据及课程完整结果strict构建通过后，清理`.cache/oct14-docs-site-ce4-negative`，释放约306 MiB；原始响应、失败证据和待复用公开资源保留。
 教师短诊断公开记录strict构建通过后，清理`.cache/oct14-docs-site-quality-6cf83b0e`，释放约306 MiB；没有删除活跃GPU结果、失败记录、公开权重或源归档。
+SkillDreamer完整结果和新MBS负记录strict构建通过后，清理`.cache/oct14-docs-site-skill-mbs-closure`，再释放约306 MiB；所有真实raw、失败、公开资源与不可变来源归档保留。
+SkillDreamer三份raw中转副本与已提交原字节逐项相等后，清理本轮`.cache/oct14-skill-full7b-curation-47f0e9ce`，释放约5.6 MiB；原始observer/trace/launcher目录和已提交raw仍完整保留。
 
 ## 下一次恢复顺序
 

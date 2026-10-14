@@ -95,6 +95,8 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
 
+最新完整尝试[4c失败记录](metrics/public-a100-failed-seed42-4c4710cd.json)在真实A100自然结束（exit1，314.887秒、34814生成tokens，未超时），没有合格后代和RL更新。原16条train选出3个hard roots；root4独解通过，但独立重新测量学生/教师成功率为25%/100%，池中没有经验零成功学生，未进入分解。root7/8独立教师验算失败。77条构造/校准响应、全部audit与配对根选择已用冻结算法独立CPU回放，结果精确一致；没有用旧0/4校准覆盖新1/4测量或放宽门槛。43/44没有启动，整方法GPU仍未验收。
+
 ### 教师质量短诊断：不是整方法通过
 
 [dd540教师诊断记录](metrics/public-a100-teacher-quality-seed42-dd54035d.json)绑定独立冻结入口、实际A100输出与10份来源/审计SHA、28份逐调用快照。教师实际生成14个响应、3876tokens；3个train hard根题只有1个独解正确，其一次greedy分解的2个子题均通过独立验算。四条固定validation的随机/greedy正确率分别50%/75%，负根题和失败validation全部保留。
