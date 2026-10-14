@@ -398,7 +398,9 @@ def run_diagnostic(*, seed=42, episodes=60):
                          "feedback": "presence of requested public record in actual retrieval",
                          "data_source": "12 generated, openly observable record strings; no benchmark dataset",
                          "capability_comparison": False, "backend": "lexical-linked in-memory"},
-            "metrics": {"retrieval_hit_rate": hits / episodes, "mean_terminal_reward": sum(rewards) / episodes,
+            # Python 3.12 changed sum(float) accumulation. fsum keeps exact
+            # artifact replay consistent with supported Python 3.11 as well.
+            "metrics": {"retrieval_hit_rate": hits / episodes, "mean_terminal_reward": math.fsum(rewards) / episodes,
                         "action_counts": counts, "policy_updates": controller.policy.updates,
                         "state_rows": len(controller.policy.q), "memory_entries": backend.size}}
 

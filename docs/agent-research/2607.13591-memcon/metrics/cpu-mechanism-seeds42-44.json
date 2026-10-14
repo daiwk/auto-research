@@ -89,7 +89,24 @@
   "provenance": {
     "artifact_path": "docs/agent-research/2607.13591-memcon/metrics/cpu-mechanism-seeds42-44.json",
     "dataset_fingerprint": "sha256:e847139b5f5a250d9e426dafc1c0c75c2c224bb9c0e26d5298b50cfe550b3a9a",
-    "source_file_sha256": "6c6aaed2c83cca0fc2667e7c64ac1adaabf0075dfca272a2c5912ccc881faecb",
+    "source_file_sha256": "d92415ef0105a7403623eaed1e8578a92a16ae83218b062c75d019411fc18655",
+    "cross_python_revalidation": {
+      "validated_on": "2026-10-14",
+      "python_versions": [
+        "3.11",
+        "3.12"
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "episodes_per_seed": 60,
+      "exact_json_match": true,
+      "aggregation": "math.fsum(rewards) / episodes",
+      "measurement_changed": false,
+      "scope": "CPU diagnostic replay only; no new LLM/GPU run or capability claim"
+    },
     "base_commit": "fcc81a35cbcc81ff0975d87004af007da99efdef",
     "command": "python -c 'from auto_research.agent_research.memcon import run_diagnostic; [run_diagnostic(seed=s, episodes=60) for s in (42,43,44)]'",
     "paper_revision": "2607.13591v3",

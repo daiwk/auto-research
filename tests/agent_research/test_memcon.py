@@ -1,5 +1,6 @@
 import json
 import math
+import hashlib
 from pathlib import Path
 
 import pytest
@@ -190,6 +191,21 @@ def test_cpu_diagnostic_is_reproducible_and_not_capability_result():
     assert "answer_accuracy" not in result["metrics"]
 
 
+def test_terminal_reward_mean_uses_stable_summation(monkeypatch):
+    rewards = []
+    original = MemCon.finish
+    def finish(controller, **kwargs):
+        reward = original(controller, **kwargs)
+        rewards.append(reward)
+        return reward
+    monkeypatch.setattr(MemCon, "finish", finish)
+    result = run_diagnostic(seed=42, episodes=60)
+    assert len(rewards) == 60
+    expected = math.fsum(rewards) / 60
+    assert expected == math.fsum(reversed(rewards)) / 60
+    assert result["metrics"]["mean_terminal_reward"] == expected
+
+
 def test_documented_artifact_replays_and_binding_does_not_enable_gold_fixture():
     root = Path(__file__).resolve().parents[2]
     spec = json.loads((root / "src/auto_research/paper_specs/catalog/agent-research/memcon.json").read_text())
@@ -203,5 +219,7 @@ def test_documented_artifact_replays_and_binding_does_not_enable_gold_fixture():
     artifact = json.loads((root / "docs" / spec["detail_path"]).parent.joinpath(
         "metrics/cpu-mechanism-seeds42-44.json").read_text())
     assert artifact["evaluation_protocol"]["formal_comparison"] is False
+    source = root / "src/auto_research/agent_research/memcon.py"
+    assert artifact["provenance"]["source_file_sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
     for row in artifact["runs"]:
         assert {"seed": row["seed"], **run_diagnostic(seed=row["seed"], episodes=60)["metrics"]} == row
