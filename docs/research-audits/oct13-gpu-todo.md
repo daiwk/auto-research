@@ -40,12 +40,14 @@ A30 `51b4718a` unfiltered/static seed42 与 unfiltered/static/fixed seed43 已�
 
 ## 剩余验证清单
 
+**2026-10-14 用户决定：MagicBeanStalk 保留待验收，先交付其余成果。** 不再启动扩大候选池、后续种子或额外诊断；已有失败与缺失回执保持原样。随后新增的强制成本门槛同样适用于本项：继续扩展真实训练的成本与可验收信号不确定，标注“成本过高，暂不复现”，不因旧续跑说明自动恢复。本项需要从本次已验收交付范围中分离，不能用延期标签让缺失 GPU 证据的实现冒充已完成。
+
 全部使用固定公开 checkpoint/data revision，原始输出不可覆盖。默认 seed 为 42/43/44；
 只能依据训练/validation 诊断调整训练预算，不以 test 挑方案。失败与零梯度必须保留。
 
 | 优先序 | 论文 | 恢复后要执行的完整链路 |
 | --- | --- | --- |
-| 2 | MagicBeanStalk | 真实 teacher 分解、独立验证、effectivity、Goldilocks、非零优势 RLVR 与 seed-RLVR 对照；不合格合成不算完成 |
+| 延期，不启动 | MagicBeanStalk | 成本过高，暂不复现；完整 teacher→Goldilocks→RLVR 与对照仍待验收，先交付其余成果 |
 
 尚未完成的 CUDA adapter 保持 `requires_gpu_validation=True`，不伪造缺失 receipt。
 10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM，以及SynthSelf、Progressive Contraction、SOAR、难度课程修后五臂和SkillDreamer完整三种子机制回执；UPTURN保留有效单seed回执和含失败的三seed执行记录。统一 GPU 门禁当前仅缺 MagicBeanStalk；还有最终整合检查，不能将门禁缺项数等同于全部剩余工作。
@@ -72,6 +74,6 @@ State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替�
 - `dd54035d`MBS教师短诊断已在真实A100结束，14输出/3876tokens，3个train根题独解1/3正确、root4的两子题独立验算2/2，4条validation随机/greedy为50%/75%；没有学生、optimizer或完整核心链路。`4c4710cd`可选`construction_teacher_sample=False`仅控制教师独解/JSON，学生校准、effectivity随机池、独立验算及所有论文门槛不变；仍须不可变新源完整验证，诊断不能填补缺失回执。
 - `4c4710cd`完整seed42单次GPU现已结束exit1、314.887秒、34814tokens：3个选中hard roots中root4重新独立baseline为学生25%/教师100%，不满足zero-success条件；root7/8教师验算失败，无合格后代/0RL。77响应、audit和配对根选择独立CPU回放一致；不得用先前0/4校准覆盖新1/4测量。43/44未启动，未生成通过回执；扩大同一train候选池的后续方案等待用户选择，现有预算不盲目重试。
 
-每次恢复先核验源代码 SHA 和资源实际字节；确认后再运行。每篇结束取回 JSON/日志，
+如用户在获知成本后明确要求恢复，先核验源代码 SHA 和资源实际字节；确认后再运行。每篇结束取回 JSON/日志，
 验证非零有效更新或明确的负对照边界，再生成 sanitized receipt，最后跑统一门禁。
 本机大资源是待恢复用途，暂不删；每轮完成清理可重建的中转副本、站点/打包/页渲染，保留结果和失败证据。
