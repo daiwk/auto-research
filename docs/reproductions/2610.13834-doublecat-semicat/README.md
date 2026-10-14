@@ -131,4 +131,3 @@ onehot 与 DoubleCat 三 seed 的采样均坍缩为全空格，byte entropy=0；
 | 二级 interpolant、双向 DiT、L2 weighting、reveal；可选标准 SC 消融 | [doublecat_semicat.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/foundation_models/doublecat_semicat.py) |
 | 真训练、validation 选择和隔离 test | [run_doublecat_semicat.py](https://github.com/daiwk/auto-research/blob/main/scripts/run_doublecat_semicat.py) |
 | 行为测试 | [test_doublecat_semicat.py](https://github.com/daiwk/auto-research/blob/main/tests/test_doublecat_semicat.py) |
-

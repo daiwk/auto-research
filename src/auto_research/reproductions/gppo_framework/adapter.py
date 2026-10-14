@@ -14,4 +14,3 @@ def render(result):
 
 
 ADAPTER = register(adapter_from_spec(key="gppo-framework", run=run, render=render))
-

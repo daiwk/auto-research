@@ -152,4 +152,3 @@ PYTHONPATH=src python scripts/run_cv_opd.py \
 | 真实正负 crop、JSD、CDL、DAG、EMA | [cv_opd.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/multimodal/cv_opd.py) |
 | 图像 checkpoint rollout 和参数更新 | [run_cv_opd.py](https://github.com/daiwk/auto-research/blob/main/scripts/run_cv_opd.py) |
 | 行为测试 | [test_cv_opd.py](https://github.com/daiwk/auto-research/blob/main/tests/test_cv_opd.py) |
-

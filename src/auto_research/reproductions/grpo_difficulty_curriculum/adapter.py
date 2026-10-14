@@ -14,4 +14,3 @@ def render(result):
 
 
 ADAPTER = register(adapter_from_spec(key="grpo-difficulty-curriculum", run=run, render=render))
-

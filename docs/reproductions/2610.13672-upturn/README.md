@@ -134,4 +134,3 @@ algorithm.py：真实MLP、cut loss、gate、新user turn及预算；checkpoint.
 Base实际生成2N完整候选，UPTURN为N加至多N替换。报告最大生成数、实际token与correction次数，不声称真实runtime相等。小预算下单类gate/rescue全0如实保留，不宣称纠错提升。
 
 默认42/43/44已实际执行，但44没有定义性的rescue学习信号，不能称三seed机制通过。seed42回执仍有效，完整三seed执行cohort包含失败，不增加retry或选择性丢弃。全局目录同步与CI仍需收口；三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
-

@@ -14,4 +14,3 @@ def render(result):
 
 
 ADAPTER = register(adapter_from_spec(key="progressive-contraction", run=run, render=render))
-

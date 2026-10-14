@@ -102,4 +102,3 @@ objective.py：divergence、probability-aware信任域和loss；post_training/pr
 12种几何/拓扑有公式及边界测试。0.5B/LoRA/GSM8K/短响应不同于原训练规模；重采样次数可能改变，配置上限匹配不等于实际总计算匹配或稳定能力收益。
 
 仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
-

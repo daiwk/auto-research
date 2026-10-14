@@ -180,4 +180,3 @@ algorithm.py：双stream、EM、真实文本index及reward；checkpoint.py：pol
 小lexical index替代E5/Wikipedia基础设施，不替代source policy/reward。原文未释放EM normalization代码，本地明示词边界匹配；不把它冒充GPT-5.6-Sol fabrication指标。工具文档属性QA不是RATED官方tool-selection test，也不是SOAR七个知识QA benchmark；共享KB下的tool-group隔离不等于未知KB泛化。不能制造来源文本或用参考答案冒充evidence。
 
 默认42/43/44两臂已实际执行并提交独立源绑定三seed回执；仍需全局同步/CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
-

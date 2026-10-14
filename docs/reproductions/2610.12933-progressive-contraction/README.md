@@ -123,4 +123,3 @@ algorithm.py：MC uncertainty、floor pool/NLL routing；checkpoint.py：真实p
 Qwen2.5匹配词表、少量GSM/LoRA/prefix/K是缩小协议，不覆盖原cross-family与全benchmark。曝光分母为同一verified corpus full-SFT；不宣称135x总成本收益。
 
 默认42/43/44的缩小完整机制GPU路径已执行并核验；全局目录同步与CI仍需收口。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
-

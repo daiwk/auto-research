@@ -154,4 +154,3 @@ algorithm.py：effectivity树与bottom-up构建；checkpoint.py：真实teacher�
 [ce4 seed42 脱敏负记录](metrics/public-a100-schema-order-failed-seed42-ce4a4a34.json)绑定实际源码 `ce4a4a34520419a50fb730d93967aaed5024fa77`、54个Git源码SHA与9份来源SHA。最新状态以本节为准：`question→trace→answer` 已真实CUDA执行，schemaSHA为新的 `b60afb6e…`，不是将旧f924记录换绑。原配置/预算/采样/verifier门槛不变；实际exit1、351.71331273019314秒、36425生成tokens（含1541初始validation tokens），86条构造/校准响应。
 
 两次提案均为合法2子题JSON，第一次0个子题验算通过、第二次1个通过；12次独立验证共2次接受（root4初验与第二次提案的一个child）、10次拒绝。3条校准hard roots、空paired集合、方法与控制均0 RL更新；effectivity条件测试、synthesis及最终Goldilocks仍未到达。此单seed结果不证明顺序修复造成能力或因果提升，也不签整方法通过回执；保留f924及更早负记录，未repair、扩预算或降低验证门槛。
-

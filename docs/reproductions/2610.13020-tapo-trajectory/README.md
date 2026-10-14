@@ -109,4 +109,3 @@ objective.py：trajectory_ratio/length_aware_clipping；post_training/proximal_c
 缩小到Qwen2.5-0.5B/LoRA与有限horizon，不是原long-horizon能力比较。T=1明确处理，不通过截断prompt隐式规避长度协议。
 
 仍需适用A100/A30路径及对照实跑、新源码绑定脱敏receipt、全局目录同步与CI。三个seed不会自动升级机制诊断为正式能力证据。本条未注册未经验证的evolve映射。
-

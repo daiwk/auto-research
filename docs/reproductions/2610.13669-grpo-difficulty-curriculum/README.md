@@ -147,4 +147,3 @@ algorithm.py：原5带、plateau和非单调统计；checkpoint.py：当前polic
 0.5B/短预算不代表原1.5B全train或三seed能力比较。同steps可能有不同effective updates/选题数/token，按实测解释。B5零更新/退化不能删除，也不是自动能力证明。
 
 数值修复后的五臂42/43/44默认十五项计划已完成；旧controls不能冒充新源码验证。完整原规模/课程与正式能力比较仍未完成，单seed机制GPU门禁通过不代表本批整体完成，三seed机制回执也不代表正式能力比较。还需全局目录同步与CI；本条未注册未经验证的evolve映射。
-

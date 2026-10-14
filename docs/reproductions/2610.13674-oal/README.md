@@ -136,4 +136,3 @@ Seed 44 的 OAL PPL **略差于**同预算 softmax+LoRA，负结果不删除。O
 | 分组、核、HD 递推、Qwen 转换、LoRA | [oal.py](https://github.com/daiwk/auto-research/blob/main/src/auto_research/foundation_models/oal.py) |
 | 真实 checkpoint 校准和同预算基线 | [run_oal.py](https://github.com/daiwk/auto-research/blob/main/scripts/run_oal.py) |
 | 行为测试 | [test_oal.py](https://github.com/daiwk/auto-research/blob/main/tests/test_oal.py) |
-
