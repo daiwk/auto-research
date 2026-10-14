@@ -101,7 +101,7 @@
         43,
         44
       ],
-      "episodes_per_seed": 60,
+      "protocol_ref": "evaluation_protocol",
       "exact_json_match": true,
       "aggregation": "math.fsum(rewards) / episodes",
       "measurement_changed": false,
