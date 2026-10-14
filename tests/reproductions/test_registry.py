@@ -7,7 +7,7 @@ from auto_research.reproductions.reporting import write_reproduction_result
 
 def test_builtin_adapters_are_discoverable():
     assert {adapter.key for adapter in list_adapters()} == {
-        "uxsid", "state-opd", "magicbeanstalk", "gppo-framework", "tapo-trajectory",
+        "uxsid", "state-opd", "gppo-framework", "tapo-trajectory",
         "cv-opd", "oal", "replayssm", "lewam", "smolwam", "near",
         "beyond-final-embedding", "skilldreamer", "synthself", "upturn",
         "doublecat-semicat", "soar", "grpo-difficulty-curriculum",

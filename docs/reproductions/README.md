@@ -372,24 +372,24 @@ pytest tests/test_research_module_docs.py
 
 | 保真度 | Adapter / 论文 | 原论文线上效果 | 本地结论 |
 |---|---|---|---|
-| 核心机制 | `state-opd` · [State-OPD](2610.13238-state-opd/README.md) | 无工业 A/B；交互任务离线结果 | 原快照 A100 三 seed 真实更新，8 题 accuracy 均为 0；新增完整历史/无扩采控制待验证 |
-| 核心机制 | `magicbeanstalk` · [MagicBeanStalk](2610.12659-magicbeanstalk/README.md) | 无工业 A/B；数学/金融合成训练 | 实际教师构建、effectivity 与 Goldilocks 门禁、RLVR 入口；GPU 验收待完成 |
+| 核心机制 | `state-opd` · [State-OPD](2610.13238-state-opd/README.md) | 无工业 A/B；交互任务离线结果 | A100三臂×三seed完成实际更新与回执，8题准确率均0；不是能力提升 |
+| 延期研究材料 | [MagicBeanStalk](2610.12659-magicbeanstalk/README.md)（历史计划键`magicbeanstalk`，未注册） | 无工业 A/B；数学/金融合成训练 | 成本过高，暂不复现；完整方法待验收，保留源码和真实失败，不提供可执行入口 |
 | 核心机制 | `gppo-framework` · [GPPO framework](2610.13015-gppo-framework/README.md) | 无工业 A/B；近端优化离线结果 | A100 三 seed、8 题机制诊断，独立 GRPO 对照，不能据此宣称稳定提升 |
 | 核心机制 | `tapo-trajectory` · [TAPO trajectory](2610.13020-tapo-trajectory/README.md) | 无工业 A/B；长轨迹离线结果 | A100 三 seed，本次小预算未优于 GRPO 对照，负结果保留 |
-| 核心机制 | `cv-opd` · [CV-OPD](2610.13264-cv-opd/README.md) | 无工业 A/B；视觉依赖离线结果 | 同图正负裁剪、CDL/JSD、双层 gate 与真实 VLM 更新入口；GPU 待验证 |
-| 核心机制 | `oal` · [OAL](2610.13674-oal/README.md) | 无工业 A/B；注意力替换离线结果 | QK 分组、输出校准与真实 Base checkpoint/LoRA 转换；GPU 待验证 |
-| 核心机制 | `replayssm` · [ReplaySSM](2610.13778-replayssm/README.md) | 无工业 A/B；状态精度与系统实验 | 作者 Triton 精度/rollback 入口；GPU 待验证，不以 FP32 仿真宣称低位带宽收益 |
-| 核心机制 | `lewam` · [LeWAM](2610.12818-lewam/README.md) | 无工业 A/B；机器人与规划实验 | 原生 flow/latent/SIGReg 训练及控制入口；大资源与 GPU 闭环待验证 |
-| 核心机制 | `smolwam` · [SmolWAM](2610.13740-smolwam/README.md) | 无工业 A/B；LIBERO 实验 | 真实 Cosmos 教师蒸馏、布局课程和发布模型闭环入口；GPU 待验证 |
-| 核心机制 | `near` · [NEAR](2610.13314-near/README.md) | 无工业 A/B；记忆检索离线结果 | 冻结编码器与残差单索引检索；显式切分协议，GPU 多 seed 待完成 |
-| 核心机制 | `beyond-final-embedding` · [Beyond the Final Embedding](2610.13277-beyond-final-embedding/README.md) | 无工业 A/B；稀疏记忆检索离线结果 | 冻结 token 匹配、ID 聚合与真实 query adapter；GPU 待验证 |
-| 核心机制 | `skilldreamer` · [SkillDreamer](2609.01642-skilldreamer/README.md) | 无工业 A/B；技能工具任务 | v2 的 PSG/HSR/CSI 与实际计算器入口；不能读取参考答案，GPU 待验证 |
-| 核心机制 | `synthself` · [SynthSelf](2610.13113-synthself/README.md) | 无工业 A/B；多域后训练结果 | 真正 aligner 改写与 SFT，获取/保持分开评估；约束失败不算通过，GPU 待验证 |
-| 核心机制 | `upturn` · [UPTURN](2610.13672-upturn/README.md) | 无工业 A/B；推理干预结果 | 冻结 encoder/reasoner、切点策略与失败救援；无真实 rescue 信号必须保留失败，GPU 待验证 |
+| 核心机制 | `cv-opd` · [CV-OPD](2610.13264-cv-opd/README.md) | 无工业 A/B；视觉依赖离线结果 | A100方法/消融各三seed真实更新；测试均值4.17%/12.5%，负结果保留 |
+| 核心机制 | `oal` · [OAL](2610.13674-oal/README.md) | 无工业 A/B；注意力替换离线结果 | A100三seed QK分组、校准和LoRA转换完成；seed44不优，非原规模能力/效率比较 |
+| 核心机制 | `replayssm` · [ReplaySSM](2610.13778-replayssm/README.md) | 无工业 A/B；状态精度与系统实验 | A100三seed实际低位内核/rollback完成；JIT兼容层边界保留，不宣称质量或HBM收益 |
+| 核心机制 | `lewam` · [LeWAM](2610.12818-lewam/README.md) | 无工业 A/B；机器人与规划实验 | A100三seed原生联合训练和新候选三臂闭环完成，无规划优势；仅单任务缩放诊断 |
+| 核心机制 | `smolwam` · [SmolWAM](2610.13740-smolwam/README.md) | 无工业 A/B；LIBERO 实验 | A100三seed教师KD、课程和新学生闭环完成；学生/no-op均零成功，不是能力改善 |
+| 核心机制 | `near` · [NEAR](2610.13314-near/README.md) | 无工业 A/B；记忆检索离线结果 | A30共享bank三seed与严格bank-disjoint单seed完成；同数据三seed不是独立重复 |
+| 核心机制 | `beyond-final-embedding` · [Beyond the Final Embedding](2610.13277-beyond-final-embedding/README.md) | 无工业 A/B；稀疏记忆检索离线结果 | A30 token匹配、ID融合与query adapter完成；严格协议仅2个test query，非官方benchmark |
+| 核心机制 | `skilldreamer` · [SkillDreamer](2609.01642-skilldreamer/README.md) | 无工业 A/B；技能工具任务 | A100三臂×三seed完整机制回执；方法CSI/加载/工具实际执行但零提交，负结果保留 |
+| 核心机制 | `synthself` · [SynthSelf](2610.13113-synthself/README.md) | 无工业 A/B；多域后训练结果 | A100三seed aligner与SFT完成，获取/保持双评测；不优于gold-SFT对照 |
+| 核心机制 | `upturn` · [UPTURN](2610.13672-upturn/README.md) | 无工业 A/B；推理干预结果 | A100三seed均执行，42/43有救援，44无救援信号保留失败；只有有效单seed回执，不宣称三seed全通过 |
 | 核心机制 | `doublecat-semicat` · [DoubleCat/SemiCat](2610.13834-doublecat-semicat/README.md) | 无工业 A/B；扩散语言模型结果 | 修正后的无额外前向核心在 A30 三 seed 通过；one-hot/DoubleCat 生成坍缩负结果保留 |
-| 核心机制 | `soar` · [SOAR](2610.13157-soar/README.md) | 无工业 A/B；来源一致性推理 | 内外知识来源与真实策略更新入口；独立公开知识库与 GPU 待验证 |
-| 核心机制 | `grpo-difficulty-curriculum` · [GRPO difficulty curriculum](2610.13669-grpo-difficulty-curriculum/README.md) | 无工业 A/B；难度课程实验 | 当前策略校准难度带、真实 GRPO 与过难对照入口；GPU 待验证 |
-| 核心机制 | `progressive-contraction` · [Progressive Contraction](2610.12933-progressive-contraction/README.md) | 无工业 A/B；教师池收缩离线结果 | MC 推理树、真实学生 NLL 路由与教师成本账本；GPU 待验证 |
+| 核心机制 | `soar` · [SOAR](2610.13157-soar/README.md) | 无工业 A/B；来源一致性推理 | A100方法/消融×三seed共六run真实更新完成；消融43为零准确率，4条validation仅机制诊断 |
+| 核心机制 | `grpo-difficulty-curriculum` · [GRPO difficulty curriculum](2610.13669-grpo-difficulty-curriculum/README.md) | 无工业 A/B；难度课程实验 | A30五臂×三seed共十五run完成；151次真更新、38个等值组精确跳过，负结果与旧数值错误保留 |
+| 核心机制 | `progressive-contraction` · [Progressive Contraction](2610.12933-progressive-contraction/README.md) | 无工业 A/B；教师池收缩离线结果 | A100三seed真实MC树/学生路由与更新完成；与full-SFT对照逐seed相同，不宣称总成本节省 |
 | 核心机制 | `uxsid` · [UxSID](2605.09040-uxsid/README.md) | v4 正文报告工业线上 A/B，详见独立页面 | MovieLens-100K 四结构 A100 三 seed、缓存一致性通过；没有稳定提升，不代替工业业务复现 |
 | 核心机制 | `pace-vlm` · [PACE](2608.27206-pace-vlm/README.md) | 无工业 A/B；论文报告 10% 视觉 token 保留 93.8% 平均性能、TTFT 最高 3.1× | APC/DDAE 公式、RealWorldQA 同 checkpoint 质量/token/延迟/显存和 Evolve 配方均可审计 |
 | 核心机制 | `twinkv` · [TwinKV](2608.27128-twinkv/README.md) | 无工业 A/B；LongBench/LooGLE/RULER/MMLU-Pro 离线结果且含失败任务 | fixed-budget repair、真实 Qwen3 KV reconstruction/延迟/显存和 Evolve attention operator 均可审计 |

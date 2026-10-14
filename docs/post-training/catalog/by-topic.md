@@ -8,7 +8,7 @@
 
 - [A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO](../../reproductions/2610.13669-grpo-difficulty-curriculum/README.md)（`grpo-difficulty-curriculum`）：difficulty随当前policy变化，样本可能反复进出难度带。论文比较静态easy-to-hard、在线fixed-medium和B1→B5课程，进一步升到B5会退化。
 - [BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation](../../reproductions/2610.13285-boundary-evo/README.md)（`boundary-evo`）：长推理监督的价值随学生能力变化。BoundaryEvo 先不按 correctness 过滤地蒸馏少量教师行为做 capability priming，然后每轮用当前学生、固定 expert 和 analyzer 重估边界，保留仍未掌握的 replay 并补充新问题；选好问题后再生成并验证 fresh teacher trajectories。
-- [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../../reproductions/2610.12659-magicbeanstalk/README.md)（`magicbeanstalk`）：RLVR有效性取决于problem、当前policy、rollout预算。MBS从verified hard seed提炼reasoning蓝图，自顶向下分解并实测child worked examples是否提高parent正确率，再合成更难新leaf、自底向上按原依赖组合。
+- [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../../reproductions/2610.12659-magicbeanstalk/README.md)（`magicbeanstalk`）：RLVR有效性取决于problem、当前policy、rollout预算。MBS从verified hard seed提炼reasoning蓝图，自顶向下分解并实测child worked examples是否提高parent正确率，再合成更难新leaf、自底向上按原依赖组合。 **成本过高，暂不复现；待验收，未注册可执行入口。**
 - [CoBA-RL](../2606.22317-coba-rl/README.md)（`coba-rl`）：普通 RLVR 可能只重新分配 base model 已有轨迹的概率，提升 pass@1 却不扩展高采样 pass@k 所反映的能力边界。该方法先用多次采样估计边界，在边界附近/之外注入教师推理，再用 RL 巩固。
 - [SPIRAL](../2506.24119-spiral/README.md)（`spiral`）：同一模型扮演出题者和解题者，在可自动判定的零和多轮语言游戏中形成逐步变难的课程。
 - [INTUITOR](../2505.19590-intuitor/README.md)（`intuitor`）：把答案分布相对均匀分布的 KL 作为 intrinsic self-certainty reward，在没有答案和 verifier 时优化。

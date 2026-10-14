@@ -1,5 +1,7 @@
 # MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis
 
+> **当前状态（2026-10-14）：成本过高，暂不复现／完整方法待验收。** 用户要求先交付其余成果，不再扩大候选池、更换教师或启动后续种子。本页保留论文解读、实验源码和所有失败证据；`magicbeanstalk` 只是历史计划键，已从可执行 registry、批量 reproduce 和公开训练 runner 中移出，不是已完成实现，也未接入 evolve。原 CUDA 验收要求保存在 `deferred-spec.json`，没有改成免验收或签发通过回执。
+
 ## 论文信息
 
 | 字段 | 内容 |
@@ -8,7 +10,7 @@
 | 公司/机构 | NVIDIA / University of Washington / Carnegie Mellon University / Stanford University |
 | 首次公开日期 | 2026-10-08（arXiv v1） |
 | 原文开源代码 | 否：原文与关联原始来源未找到本方法已发布源码（2026-10-13核验）；不是宣称全网不存在 |
-| Adapter | `magicbeanstalk` |
+| Adapter | `magicbeanstalk`（历史计划键；延期，未注册可执行入口） |
 | 本地复现代码 | [`src/auto_research/reproductions/magicbeanstalk/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/magicbeanstalk/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |
 | GPU门禁 | 必须真实A100/A30执行并提交绑定源码的脱敏回执；未取得者仍未验收 |
@@ -74,9 +76,9 @@ seed先在目标policy真实校准，必须全失败且全部正常结束；截�
 
 worked-child scaffold先拒绝与parent相同的问题/完整trace，再由外部构建teacher实际评审是否直接泄露parent答案或完整plan；该安全评审不等于形式化语义证明。
 
-### 可执行入口与预算
+### 历史执行配置与预算（当前禁用）
 
-入口为 `scripts/run_oct13_post_training.py --method magicbeanstalk`，adapter则从数据目录读取 `oct13_execution.json`。必须提供student/teacher镜像路径、public id/revision、train/validation路径、split manifest与dataset revision。下面是待实跑配置示例，不表示GPU已完成：
+以下是历史运行配置，仅供复核已有证据，不是当前可执行教程。旧入口 `scripts/run_oct13_post_training.py --method magicbeanstalk` 已移出可选方法，直接调用历史 adapter 也会拒绝运行。恢复须在明确成本后获得用户要求，并重新验收完整方法；不能只恢复注册就宣称完成。旧配置需要student/teacher镜像路径、public id/revision、train/validation路径、split manifest与dataset revision：
 
 ```bash
 PYTHONPATH=src python scripts/run_oct13_post_training.py \

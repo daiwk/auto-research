@@ -19,16 +19,29 @@ def _slug(adapter) -> str:
 def test_every_adapter_is_present_in_all_documentation_indexes():
     adapters = list_adapters()
     expected = {_slug(adapter) for adapter in adapters}
+    research_manifest = json.loads(
+        (ROOT / "docs" / "research-manifest.json").read_text(encoding="utf-8")
+    )
+    deferred = set()
+    for paper in research_manifest["papers"]:
+        if paper.get("implementation_status") != "deferred_high_cost":
+            continue
+        assert paper.get("adapter") is None
+        assert paper["gpu_validation_passed"] is False
+        assert "成本过高，暂不复现" in paper["deferral_reason"]
+        archived = ROOT / paper["deferred_execution_spec"]
+        assert archived.is_file() and not archived.with_name("paper.yaml").exists()
+        detail = ROOT / "docs" / paper["detail_path"]
+        assert "待验收" in detail.read_text(encoding="utf-8")
+        if detail.parent.parent == DOCS:
+            deferred.add(detail.parent.name)
     actual = {
         path.parent.name
         for path in DOCS.glob("*/README.md")
         if path.parent.name != "catalog"
     }
-    assert actual == expected
-
-    research_manifest = json.loads(
-        (ROOT / "docs" / "research-manifest.json").read_text(encoding="utf-8")
-    )
+    assert actual == expected | deferred
+    assert not expected & deferred
     manifest_adapter_keys = {
         paper["key"] for paper in research_manifest["papers"]
         if isinstance(paper.get("adapter"), dict)

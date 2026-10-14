@@ -49,10 +49,10 @@ A30 `51b4718a` unfiltered/static seed42 与 unfiltered/static/fixed seed43 已�
 | --- | --- | --- |
 | 延期，不启动 | MagicBeanStalk | 成本过高，暂不复现；完整 teacher→Goldilocks→RLVR 与对照仍待验收，先交付其余成果 |
 
-尚未完成的 CUDA adapter 保持 `requires_gpu_validation=True`，不伪造缺失 receipt。
+MBS原CUDA规格原样保存在 `src/auto_research/reproductions/magicbeanstalk/deferred-spec.json`，`requires_gpu_validation=True`仍保留，缺失receipt不伪造；该规格不再被registry加载，历史adapter拒绝运行，公开runner也不提供MBS。保留源码用于审计，并不代表已验收CUDA实现。
 10 月 14 日已补齐 OAL、NEAR、Beyond、CV-OPD、ReplaySSM、LeWAM、SmolWAM，以及SynthSelf、Progressive Contraction、SOAR、难度课程修后五臂和SkillDreamer完整三种子机制回执；UPTURN保留有效单seed回执和含失败的三seed执行记录。统一 GPU 门禁当前仅缺 MagicBeanStalk；还有最终整合检查，不能将门禁缺项数等同于全部剩余工作。
 State-OPD 新三臂已完成并保存独立回执；旧快照仍保留，不替代或合并新实验。
-因此 GPU evidence gate 在这份 TODO 关闭前不能被报告为通过，MR 也不能被标为全部完成。
+此前19篇全部活跃时GPU gate缺MBS；按用户最新延期决定，改为交付18篇活跃实现。门禁仍检查所有活跃CUDA adapter，MBS的研究延期不再阻塞其他成果。不能据此声称MBS或原19篇范围全部完成。
 
 ## 资源与环境检查点
 

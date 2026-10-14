@@ -476,7 +476,15 @@ def read_rows(module: str, domain: str | None = None) -> list[dict[str, str]]:
             "institution": organization,
             "first-author": author,
             "organization": organization,
-            "summary": read_method_summary(module, link),
+            "summary": read_method_summary(module, link) + (
+                " **成本过高，暂不复现；待验收，未注册可执行入口。**"
+                if paper.get("implementation_status") == "deferred_high_cost" else ""
+            ),
+            "execution_label": (
+                "成本过高，暂不复现；待验收（仅研究资料）"
+                if paper.get("implementation_status") == "deferred_high_cost"
+                else f"`{paper['key']}`"
+            ),
         })
     return rows
 
@@ -531,7 +539,7 @@ def render_method_index(
         "打包的 `paper.yaml` 和按领域保存的 catalog 规格，不直接编辑生成产物。",
         "背景、架构、公式、原文效果和本地实验请进入独立详情页。",
         "",
-        "## 已实现论文与资料",
+        "## 论文实现与研究资料",
         "",
         '<div class="ar-method-index" markdown>',
         "",
@@ -545,7 +553,7 @@ def render_method_index(
         link = f"../{row['link']}" if module == "reproductions" else row["link"]
         lines.append(
             f"| {row['topic']} | [{row['title']}]({link}) | "
-            f"{row['institution']}，{row['date']} | {code} | `{row['key']}` |"
+            f"{row['institution']}，{row['date']} | {code} | {row['execution_label']} |"
         )
     lines.extend(["", "</div>"])
     browse_links = (

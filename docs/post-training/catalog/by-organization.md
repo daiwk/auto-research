@@ -499,7 +499,7 @@
 
 ## University of Washington
 
-- 2026-10-08 · 一作：Ximing Lu · [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../../reproductions/2610.12659-magicbeanstalk/README.md)（`magicbeanstalk`）：RLVR有效性取决于problem、当前policy、rollout预算。MBS从verified hard seed提炼reasoning蓝图，自顶向下分解并实测child worked examples是否提高parent正确率，再合成更难新leaf、自底向上按原依赖组合。
+- 2026-10-08 · 一作：Ximing Lu · [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../../reproductions/2610.12659-magicbeanstalk/README.md)（`magicbeanstalk`）：RLVR有效性取决于problem、当前policy、rollout预算。MBS从verified hard seed提炼reasoning蓝图，自顶向下分解并实测child worked examples是否提高parent正确率，再合成更难新leaf、自底向上按原依赖组合。 **成本过高，暂不复现；待验收，未注册可执行入口。**
 - 2026-09-10 · 一作：Dongfang Zhao · [LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation](../2609.11739-locus/README.md)（`locus`）：学习任务相关低秩后训练子空间，只在紧凑方向上更新以缩短回答，同时保留任务能力。
 - 2025-04-21 · 一作：Jianhao Yan · [LUFFY](../2504.14945-luffy/README.md)（`luffy`）：把离线高质量推理与在线 rollout 放进同一 support，通过正则化 importance ratio 保留 on-policy 行为。
 

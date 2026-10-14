@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Run one of the nine Oct13 papers on verified public checkpoint/holdout inputs."""
+"""Run one of the eight accepted Oct13 post-training checkpoint paths.
+
+MagicBeanStalk is archived and deferred for cost; it is not a runnable choice.
+"""
 from __future__ import annotations
 
 import argparse
@@ -10,7 +13,7 @@ import sys
 from auto_research.post_training.oct13_common import ExecutionFailure,execute,render_result
 from auto_research.post_training.proximal_checkpoint import ProximalExecutionFailure
 
-METHODS=("state-opd","magicbeanstalk","gppo-framework","tapo-trajectory","synthself","upturn",
+METHODS=("state-opd","gppo-framework","tapo-trajectory","synthself","upturn",
          "soar","grpo-difficulty-curriculum","progressive-contraction")
 
 

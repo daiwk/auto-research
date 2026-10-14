@@ -18,10 +18,11 @@ PAPERS={
 
 @pytest.mark.parametrize("key,identifier",PAPERS.items())
 def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,identifier):
-    spec=load_spec(ROOT/"src/auto_research/reproductions"/key.replace("-","_")/"paper.yaml")
+    deferred = key == "magicbeanstalk"
+    spec=load_spec(ROOT/"src/auto_research/reproductions"/key.replace("-","_")/("deferred-spec.json" if deferred else "paper.yaml"))
     assert not validate_spec(spec,root=ROOT)
     assert spec.key==key and spec.arxiv_id==identifier
-    assert spec.published==("2026-10-08" if key=="magicbeanstalk" else "2026-10-09")
+    assert spec.published==("2026-10-08" if deferred else "2026-10-09")
     assert spec.fidelity=="core_mechanism" and spec.evaluation_tier=="l1_mechanism"
     assert spec.execution["requires_gpu_validation"] is True
     receipt_date={k:"20261014" for k in ("state-opd","grpo-difficulty-curriculum","synthself","upturn","progressive-contraction","soar")}.get(key,"20261013")
@@ -32,14 +33,20 @@ def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,id
     doc=ROOT/spec.documentation
     assert doc.parent.name==f"{identifier}-{key}" and doc.parent.parent==ROOT/"docs/reproductions"
     text=doc.read_text()
+    adapter_label = (f"| Adapter | `{key}`（历史计划键；延期，未注册可执行入口） |"
+                     if deferred else f"| Adapter | `{key}` |")
     required=("## 论文信息",f"| 论文链接 | [arXiv {identifier}](https://arxiv.org/abs/{identifier}) |",
               "| 公司/机构 |",f"| 首次公开日期 | {spec.published}（arXiv v1） |","| 原文开源代码 |",
-              f"| Adapter | `{key}` |","| 本地复现代码 |","## 原始论文总结","### 背景与主要改动",
+              adapter_label,"| 本地复现代码 |","## 原始论文总结","### 背景与主要改动",
               "### 核心公式","### 论文离线与线上效果","```mermaid","## 本地复现",
               "> **本地对照口径**：","未报告生产线上A/B","mechanism-contracts.json","formal_comparison: false")
     assert all(entry in text for entry in required)
     row=json.loads((ROOT/"src/auto_research/paper_specs/catalog/post-training"/(key+".json")).read_text())
-    assert row["adapter"]=={"spec_key":key}
+    if deferred:
+        assert "adapter" not in row
+        assert row["implementation_status"] == "deferred_high_cost"
+    else:
+        assert row["adapter"]=={"spec_key":key}
     assert row["detail_path"]==spec.documentation.removeprefix("docs/")
     metrics=json.loads((doc.parent/"metrics/mechanism-contracts.json").read_text())
     assert metrics["diagnostic_only"] is True

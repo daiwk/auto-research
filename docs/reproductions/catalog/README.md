@@ -4,7 +4,7 @@
 打包的 `paper.yaml` 和按领域保存的 catalog 规格，不直接编辑生成产物。
 背景、架构、公式、原文效果和本地实验请进入独立详情页。
 
-## 已实现论文与资料
+## 论文实现与研究资料
 
 <div class="ar-method-index" markdown>
 

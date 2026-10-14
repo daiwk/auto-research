@@ -4,7 +4,7 @@
 打包的 `paper.yaml` 和按领域保存的 catalog 规格，不直接编辑生成产物。
 背景、架构、公式、原文效果和本地实验请进入独立详情页。
 
-## 已实现论文与资料
+## 论文实现与研究资料
 
 <div class="ar-method-index" markdown>
 
@@ -24,7 +24,7 @@
 | Trajectory-aware policy optimization | [Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL](../reproductions/2610.13020-tapo-trajectory/README.md) | Tsinghua University AIR，2026-10-09 | 未发现官方代码 | `tapo-trajectory` |
 | On-policy distillation | [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](2610.11659-dial-opd/README.md) | Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University，2026-10-08 | [已开源](https://github.com/EIT-NLP/DIAL-OPD) | `dial-opd` |
 | RLVR | [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](2610.11854-grpo-dropout/README.md) | Harbin Institute of Technology (Shenzhen)，2026-10-08 | [已开源](https://github.com/hexuandeng/GRPODropout) | `grpo-dropout` |
-| RLVR data synthesis | [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../reproductions/2610.12659-magicbeanstalk/README.md) | University of Washington，2026-10-08 | 未发现官方代码 | `magicbeanstalk` |
+| RLVR data synthesis | [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../reproductions/2610.12659-magicbeanstalk/README.md) | University of Washington，2026-10-08 | 未发现官方代码 | 成本过高，暂不复现；待验收（仅研究资料） |
 | On-policy distillation | [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](2610.11989-meta-opd/README.md) | East China Normal University，2026-10-08 | 未发现官方代码 | `meta-opd` |
 | On-policy 蒸馏 | [PIVOT: Perplexity-Informed KD-to-RL Transition Scheduling for Vertical-Domain Few-Shot Distillation](2610.11167-pivot/README.md) | Ping An Technology / University of Science and Technology of China，2026-10-08 | 未发现官方代码 | `pivot` |
 | On-policy distillation | [ReCal: Calibrating Structured Pruning for On-Policy Distillation Recovery](2610.11332-recal/README.md) | Zhongguancun Academy / Tencent / University of Science and Technology of China，2026-10-08 | [已开源](https://github.com/jianghoucheng/ReCal) | `recal` |
