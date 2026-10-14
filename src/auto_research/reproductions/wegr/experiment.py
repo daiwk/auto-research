@@ -62,7 +62,7 @@ def public_data(root: Path, max_users=64):
 
 def run(root: Path, seed: int, *, device="cpu", max_users=64, tokenizer_steps=24,
         sft_steps=32, stage_steps=6, batch_size=16):
-    if device not in {"cpu", "cuda"} or min(max_users, tokenizer_steps, sft_steps, stage_steps, batch_size) < 1:
+    if torch.device(device).type not in {"cpu", "cuda"} or min(max_users, tokenizer_steps, sft_steps, stage_steps, batch_size) < 1:
         raise ValueError("positive bounded training budgets and cpu/cuda required")
     if max_users > 128 or tokenizer_steps > 100 or sft_steps > 100 or stage_steps > 20 or batch_size > 64:
         raise ValueError("budget exceeds the affordable diagnostic; review cost before expansion")

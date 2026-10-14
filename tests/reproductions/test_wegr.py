@@ -49,3 +49,14 @@ def test_causal_sid_decoder_has_no_future_token_access():
     second = model.logits(context, torch.tensor([[1, 7]]))
     assert torch.allclose(first[:, :2], second[:, :2])
     assert not torch.allclose(first[:, 2], second[:, 2])
+
+
+def test_registered_adapter_forwards_explicit_runtime_device_without_silent_cpu(tmp_path, monkeypatch):
+    from auto_research.reproductions.wegr import adapter, experiment
+    from auto_research import runtime
+    monkeypatch.setenv(runtime.DEVICE_ENV, "cuda:0")
+    calls = []
+    monkeypatch.setattr(runtime, "device_for", lambda torch, request: torch.device(request))
+    monkeypatch.setattr(experiment, "run", lambda root, seed, **kw: calls.append((root, seed, kw)))
+    adapter.reproduce(tmp_path, 42)
+    assert calls == [(tmp_path, 42, {"device": "cuda:0"})]

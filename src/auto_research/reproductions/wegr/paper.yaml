@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "key": "wegr",
+  "arxiv_id": "2610.16979",
+  "title": "WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat",
+  "paper_url": "https://arxiv.org/abs/2610.16979",
+  "organization": "WeChat E-commerce Search team",
+  "published": "2026-10-12",
+  "upstream_code": "未找到原作者公开实现（固定 v1 与关联原始来源，2026-10-14 核验）",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "semantic-id",
+    "preference-optimization"
+  ],
+  "local_code": "src/auto_research/reproductions/wegr",
+  "documentation": "docs/reproductions/2610.16979-wegr/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K positive-event chronological leave-last-two"
+  ],
+  "baseline": "same CoCo-VAE and SFT initialization: SFT / exact-SID GRPO+MSFT / DHPO+MSFT",
+  "metrics": [
+    "arms.dhpo.test.mrr",
+    "arms.dhpo.test.hr_at_10"
+  ],
+  "mechanisms": [
+    "Q2I/I2I continuous contrastive supervision",
+    "EMA first-codebook refresh",
+    "top-k residual fidelity and pairwise collision penalty",
+    "matched reward/gradient horizons and multi-positive SFT"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.wegr.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "WeChat E-commerce Search team",
+      "published": "2026-10-12",
+      "online_ab": [
+        {
+          "product": "WeChat E-commerce Search",
+          "metric": "Orders",
+          "lift_percent": 2.539,
+          "traffic": "production A/B versus incumbent; v1.2 removes 80% of other retrieval channels",
+          "source_url": "https://arxiv.org/html/2610.16979v1",
+          "source_location": "Section 4.4, Table 3",
+          "experiment_duration": "June 22 through August 4, 2026",
+          "significance": "p<0.05",
+          "retrieved_at": "2026-10-14"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private search query/multimodal features and click/order logs",
+      "GPT-2 Small pretrained weights and original training scale",
+      "production retrieval/serving and online A/B"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "64 users; 24 tokenizer updates, 32 SFT updates, 18 matched RL updates per arm; no pretrained downloads",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/wegr-a100-20261014.json"
+  }
+}
