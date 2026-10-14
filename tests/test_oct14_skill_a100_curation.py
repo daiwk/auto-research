@@ -70,10 +70,12 @@ def fixture(tmp_path, monkeypatch):
     for seed in (42, 43, 44):
         episode = {"correct": False, "submitted_answer": None, "capability_checks": [{"assessment": "CPU fixture only"}],
                    "loaded_skills": ["CPU-fixture-skill"], "executed_actions": 1, "model_calls_including_psg": 2,
-                   "generated_tokens_including_psg": 10, "generation_errors": 1}
+                   "generated_tokens_including_psg": 10, "generation_errors": 1, "tool_errors": 0,
+                   "observations": ["Calculator ready; no reference answer is available.", "Calculator result: 7"]}
         raw = {"paper": "skilldreamer", "seed": seed, "device": "cuda", "diagnostic_only": True, "promotion_eligible": False,
                "evaluation_tier": "l2_public_dataset",
-               "variants": {arm: {"pass_rate": 0.0, "model_calls": 32, "generated_tokens": 160, "executed_actions": 16} for arm in curator.ARMS},
+               "variants": {arm: {"pass_rate": 0.0, "load_rate": 1.0, "generation_failures": 16,
+                   "tool_failure_episodes": 0, "model_calls": 32, "generated_tokens": 160, "executed_actions": 16} for arm in curator.ARMS},
                "episodes": {arm: [{**episode, "id": identifier} for identifier in ordered[8:]] for arm in curator.ARMS},
                "protocol": {"gold_visible_to_policy": False, "validation_ids": ordered[:8], "test_ids": ordered[8:],
                             "raw_sha256": dataset["files"]["validation24.jsonl"], "dataset": dataset, "checkpoint": model, "encoder": encoder}}
@@ -220,4 +222,147 @@ def test_a100_trace_keeps_actual_generation_error_with_unique_attempt(tmp_path, 
     record_path.write_text(json.dumps(record))
     result = invoke(value)
     assert result["checks"]["actual_model_calls"] == [96, 96, 96]
+    assert result["checks"]["actual_generation_attempts"] == [96, 97, 96]
+    assert result["checks"]["actual_generation_responses"] == [96, 96, 96]
+    assert result["checks"]["actual_failed_generation_attempts"] == [0, 1, 0]
+    assert result["checks"]["failed_generation_output_token_cost"] == [0, None, 0]
     assert "generation_error" in trace_path.read_text()
+
+
+@pytest.mark.parametrize('arm', ['no_skills', 'direct', 'skilldreamer'])
+@pytest.mark.parametrize('field', ['pass_rate', 'load_rate', 'generation_failures', 'tool_failure_episodes',
+    'model_calls', 'generated_tokens', 'executed_actions'])
+def test_every_arm_summary_drift_is_rejected_even_with_updated_raw_sha(tmp_path, monkeypatch, arm, field):
+    value = fixture(tmp_path, monkeypatch)
+    raw_path = value[1] / 'seed43.json'
+    raw = json.loads(raw_path.read_text())
+    raw['variants'][arm][field] += 1
+    raw_path.write_text(json.dumps(raw))
+    record_path = value[1] / 'observer-seed43.json'
+    record = json.loads(record_path.read_text())
+    record['raw_sha256'] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+    record_path.write_text(json.dumps(record))
+    with pytest.raises(ValueError, match='summaries'): invoke(value)
+    assert not (tmp_path / 'output').exists()
+
+
+@pytest.mark.parametrize('field,value_', [('correct', 1), ('correct', 'false'), ('loaded_skills', 'skill'),
+    ('executed_actions', True), ('generation_errors', -1), ('tool_errors', 0.0),
+    ('model_calls_including_psg', False), ('generated_tokens_including_psg', float('nan'))])
+def test_episode_scalar_types_are_actual_not_truthy_or_illegal(tmp_path, monkeypatch, field, value_):
+    value = fixture(tmp_path, monkeypatch)
+    raw_path = value[1] / 'seed43.json'; raw = json.loads(raw_path.read_text())
+    raw['episodes']['direct'][0][field] = value_
+    raw_path.write_text(json.dumps(raw))
+    with pytest.raises(ValueError): invoke(value)
+    assert not (tmp_path / 'output').exists()
+
+
+@pytest.mark.parametrize('target', ['artifact', 'receipt', 'last_raw', 'validator'])
+def test_all_validation_and_collision_checks_precede_any_output_write(tmp_path, monkeypatch, target):
+    value = fixture(tmp_path, monkeypatch)
+    root = tmp_path / 'output'
+    if target == 'validator':
+        monkeypatch.setattr(value[0], 'validate_gpu_receipt', lambda _receipt: ['CPU fixture invalid receipt'])
+        expected = ValueError; before = set()
+    else:
+        relative = {'artifact': value[0].DOC + '/public-a100-seeds42-44-47f0e9ce.json',
+            'receipt': 'docs/gpu-validations/oct13-skilldreamer-a100.json',
+            'last_raw': value[0].DOC + '/raw/a100-47f0e9ce/seed44.json'}[target]
+        path = root / relative; path.parent.mkdir(parents=True); path.write_bytes(b'EXISTING CPU FIXTURE ONLY')
+        expected = FileExistsError; before = {p.relative_to(root): p.read_bytes() for p in root.rglob('*') if p.is_file()}
+    with pytest.raises(expected): invoke(value)
+    after = {p.relative_to(root): p.read_bytes() for p in root.rglob('*') if p.is_file()} if root.exists() else set()
+    assert after == before
+
+
+def test_pure_invalid_env_steps_cannot_pass_successful_calculator_gate(tmp_path, monkeypatch):
+    value = fixture(tmp_path, monkeypatch)
+    raw_path = value[1] / 'seed43.json'; raw = json.loads(raw_path.read_text())
+    for row in raw['episodes']['skilldreamer']:
+        row['observations'][-1] = 'Invalid action schema. Use calculator or finish with the specified JSON arguments.'
+        row['tool_errors'] = 1
+    raw['variants']['skilldreamer']['tool_failure_episodes'] = 16
+    raw_path.write_text(json.dumps(raw))
+    record_path = value[1] / 'observer-seed43.json'; record = json.loads(record_path.read_text())
+    record['raw_sha256'] = hashlib.sha256(raw_path.read_bytes()).hexdigest(); record_path.write_text(json.dumps(record))
+    with pytest.raises(ValueError, match='successful calculator'): invoke(value)
+    assert not (tmp_path / 'output').exists()
+
+
+def test_actual_calculator_submission_and_failed_step_counts_are_separate():
+    curator = module()
+    row = {'executed_actions': 3, 'tool_errors': 1, 'observations': ['Calculator ready; no reference answer is available.',
+        'Skill loaded: CPU-fixture; reread procedure.', 'Invalid JSON/capability assessment; no tool was executed.',
+        'Calculator error: ZeroDivisionError', 'Calculator result: 7',
+        'Submission recorded. No correctness feedback is exposed to the policy.']}
+    assert curator.observed_environment_steps(row) == {'successful_calculator_calls': 1, 'submissions': 1,
+        'failed_environment_steps': 1}
+    row['executed_actions'] = 4
+    with pytest.raises(ValueError, match='env.step'): curator.observed_environment_steps(row)
+
+
+@pytest.mark.parametrize('field,value_', [('pass_rate', False), ('load_rate', float('nan')),
+    ('tool_failure_episodes', False), ('generation_failures', 16.0)])
+def test_summary_types_are_strict_even_when_python_numeric_equality_matches(tmp_path, monkeypatch, field, value_):
+    value = fixture(tmp_path, monkeypatch)
+    path = value[1] / 'seed42.json'; raw = json.loads(path.read_text())
+    raw['variants']['direct'][field] = value_; path.write_text(json.dumps(raw))
+    with pytest.raises(ValueError, match='summaries'): invoke(value)
+    assert not (tmp_path / 'output').exists()
+
+
+def test_original_valueerror_episode_without_observations_or_error_fields_is_kept(tmp_path, monkeypatch):
+    value = fixture(tmp_path, monkeypatch)
+    path = value[1] / 'seed43.json'; raw = json.loads(path.read_text())
+    original = raw['episodes']['direct'][0]
+    raw['episodes']['direct'][0] = {'id': original['id'], 'correct': False, 'loaded_skills': [], 'executed_actions': 0,
+        'failure': 'CPU fixture original PSG ValueError', 'model_calls': 0,
+        'model_calls_including_psg': 2, 'generated_tokens_including_psg': 10}
+    raw['variants']['direct']['load_rate'] = 15 / 16
+    raw['variants']['direct']['executed_actions'] = 15
+    path.write_text(json.dumps(raw))
+    record_path = value[1] / 'observer-seed43.json'; record = json.loads(record_path.read_text())
+    record['raw_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest(); record_path.write_text(json.dumps(record))
+    result = invoke(value)
+    assert result['metrics']['direct.generation_failures']['mean'] == 16
+    copied = json.loads((tmp_path / 'output' / value[0].DOC / 'raw/a100-47f0e9ce/seed43.json').read_text())
+    assert copied['episodes']['direct'][0] == raw['episodes']['direct'][0]
+
+
+def test_per_arm_tokens_cannot_be_shifted_while_total_and_trace_still_match(tmp_path, monkeypatch):
+    value = fixture(tmp_path, monkeypatch)
+    path = value[1] / 'seed43.json'; raw = json.loads(path.read_text())
+    raw['variants']['direct']['generated_tokens'] += 1
+    raw['variants']['no_skills']['generated_tokens'] -= 1
+    path.write_text(json.dumps(raw))
+    record_path = value[1] / 'observer-seed43.json'; record = json.loads(record_path.read_text())
+    record['raw_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest(); record_path.write_text(json.dumps(record))
+    with pytest.raises(ValueError, match='summaries'): invoke(value)
+    assert not (tmp_path / 'output').exists()
+
+
+def test_identical_existing_raw_is_not_rewritten_during_valid_publication(tmp_path, monkeypatch):
+    value = fixture(tmp_path, monkeypatch)
+    existing = tmp_path / 'output' / value[0].DOC / 'raw/a100-47f0e9ce/seed42.json'
+    existing.parent.mkdir(parents=True)
+    existing.write_bytes((value[1] / 'seed42.json').read_bytes())
+    original_open = Path.open
+    def protected(path, mode='r', *args, **kwargs):
+        if path == existing and any(flag in mode for flag in ('w', 'a', 'x')):
+            pytest.fail('identical immutable raw must never be rewritten')
+        return original_open(path, mode, *args, **kwargs)
+    monkeypatch.setattr(Path, 'open', protected)
+    invoke(value)
+    assert existing.read_bytes() == (value[1] / 'seed42.json').read_bytes()
+
+
+@pytest.mark.parametrize('field,value_', [('observations', ['Calculator result: 7', 'Calculator result: 8']),
+    ('tool_errors', 1)])
+def test_observation_counter_mismatch_rejects_before_any_write(tmp_path, monkeypatch, field, value_):
+    value = fixture(tmp_path, monkeypatch)
+    path = value[1] / 'seed43.json'; raw = json.loads(path.read_text())
+    raw['episodes']['direct'][0][field] = value_
+    path.write_text(json.dumps(raw))
+    with pytest.raises(ValueError, match='env.step'): invoke(value)
+    assert not (tmp_path / 'output').exists()

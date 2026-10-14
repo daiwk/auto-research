@@ -22,11 +22,14 @@ def fixture_runs(root, curator):
     for seed in curator.SEEDS:
         run = {"paper": "skilldreamer", "seed": seed, "device": "cuda",
             "diagnostic_only": True, "promotion_eligible": False,
-            "variants": {arm: {"pass_rate": 0.0, "model_calls": 2, "executed_actions": 1}
+            "variants": {arm: {"pass_rate": 0.0, "load_rate": 1.0, "generation_failures": 1,
+                "tool_failure_episodes": 0, "model_calls": 2, "generated_tokens": 10, "executed_actions": 1}
                          for arm in curator.ARMS},
             "episodes": {arm: [{"correct": False, "capability_checks": [{"assessment":"CPU FIXTURE ONLY"}],
                                 "loaded_skills":["fixture-skill"],"executed_actions":1,
-                                "model_calls_including_psg":2,"generation_errors": 1}]
+                                "model_calls_including_psg":2,"generated_tokens_including_psg":10,
+                                "generation_errors": 1,"tool_errors":0,"id":"0",
+                                "observations":["Calculator ready; no reference answer is available.", "Calculator result: 7"]}]
                          for arm in curator.ARMS},
             "protocol": {"gold_visible_to_policy": False, "test_ids": ["0"],
                 "dataset": {"public_id": "fixture", "revision": "a" * 40,
@@ -97,6 +100,9 @@ def test_missing_defining_skill_branch_cannot_pass_gpu_gate(tmp_path,monkeypatch
     run["episodes"]["skilldreamer"][0][field]=value
     if field=="executed_actions":
         run["variants"]["skilldreamer"][field]=value
+        run["episodes"]["skilldreamer"][0]["observations"] = ["Calculator ready; no reference answer is available."]
+    elif field=="loaded_skills":
+        run["variants"]["skilldreamer"]["load_rate"] = 0.0
     path.write_text(json.dumps(run))
     with pytest.raises(ValueError,match="actual CSI"):
         curator.curate(runs,"a"*40,tmp_path/"absent.tar")

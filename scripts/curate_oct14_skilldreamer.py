@@ -25,6 +25,54 @@ MODEL_FILES = {"config.json", "generation_config.json", "merges.txt", "model.saf
 ENCODER_FILES = {"model.safetensors", "config.json", "tokenizer.json", "tokenizer_config.json", "special_tokens_map.json", "vocab.txt"}
 INSTRUMENTATION = {"original_call_forwarded_unchanged": True,
                    "temporary_call_instrumentation": True, "restored_after_run": True}
+SUMMARY_FIELDS = {"pass_rate", "load_rate", "executed_actions", "generation_failures",
+                  "tool_failure_episodes", "model_calls", "generated_tokens"}
+
+
+def observed_environment_steps(row):
+    observations = row.get("observations", [])
+    if not isinstance(observations, list) or any(not isinstance(x, str) for x in observations):
+        raise ValueError("actual observation strings required")
+    counts = {"successful_calculator_calls": sum(x.startswith("Calculator result:") for x in observations),
+              "submissions": sum(x.startswith("Submission recorded.") for x in observations),
+              "failed_environment_steps": sum(x.startswith(("Calculator error:", "Invalid action schema.",
+                                                            "Invalid tool argument")) for x in observations)}
+    if sum(counts.values()) != row["executed_actions"] or counts["failed_environment_steps"] != row.get("tool_errors", 0):
+        raise ValueError("actual env.step attempts/errors must match original observations")
+    return counts
+
+
+def recompute_arm(episodes):
+    if not isinstance(episodes, list) or not episodes:
+        raise ValueError("all actual episodes required")
+    step_counts = {"successful_calculator_calls": 0, "submissions": 0, "failed_environment_steps": 0}
+    for row in episodes:
+        if not isinstance(row, dict):
+            raise ValueError("actual episode dictionaries required")
+        if (type(row.get("correct")) is not bool or not isinstance(row.get("loaded_skills"), list)
+                or any(not isinstance(x, str) or not x for x in row["loaded_skills"])):
+            raise ValueError("external correct bool and actual loaded skill ID list required")
+        for field in ("executed_actions", "model_calls_including_psg", "generated_tokens_including_psg"):
+            if type(row.get(field)) is not int or row[field] < 0:
+                raise ValueError("actual nonnegative integer episode cost/action counters required")
+        for field in ("generation_errors", "tool_errors"):
+            if type(row.get(field, 0)) is not int or row.get(field, 0) < 0:
+                raise ValueError("actual nonnegative integer episode error counters required")
+        if "failure" in row and not isinstance(row["failure"], str):
+            raise ValueError("actual generation failure text must be retained")
+        if row["correct"] and ("failure" in row or row.get("generation_errors", 0) or row.get("tool_errors", 0)):
+            raise ValueError("original external scorer cannot mark an errored episode correct")
+        for key, value in observed_environment_steps(row).items():
+            step_counts[key] += value
+    # Exactly the unchanged experiment.py reductions; no reference answer read.
+    summary = {"pass_rate": sum(r["correct"] for r in episodes) / len(episodes),
+               "load_rate": sum(bool(r["loaded_skills"]) for r in episodes) / len(episodes),
+               "executed_actions": sum(r["executed_actions"] for r in episodes),
+               "generation_failures": sum("failure" in r or r.get("generation_errors", 0) > 0 for r in episodes),
+               "tool_failure_episodes": sum(r.get("tool_errors", 0) > 0 for r in episodes),
+               "model_calls": sum(r["model_calls_including_psg"] for r in episodes),
+               "generated_tokens": sum(r["generated_tokens_including_psg"] for r in episodes)}
+    return summary, step_counts
 
 
 def a100_observers(directory, runs, commit, hashes, observer_commit, observer_archive, config_path):
@@ -129,6 +177,10 @@ def a100_observers(directory, runs, commit, hashes, observer_commit, observer_ar
                 or any(type(row.get("generated_tokens")) is not int or not 0 <= row["generated_tokens"] <= 256 for row in responses)):
             raise ValueError("actual raw/trace/call/token observation differs")
         records.append({"seed": seed, "wall_seconds": record["wall_seconds"], "model_calls": calls, "generated_tokens": tokens,
+            "generation_attempts": len(attempts), "generation_responses": len(responses),
+            "failed_generation_attempts": len(terminals) - len(responses),
+            "failed_generation_output_token_cost": None if len(terminals) != len(responses) else 0,
+            "generation_cost_scope": "raw model_calls count completed responses; returned tokens measured; failed-attempt output tokens unknown, never imputed as zero",
             "accelerator": record["accelerator"], "observer_source": audit["observer_source"],
             "instrumentation": record["instrumentation"],
             "execution_config_sha256": execution_sha, "run_config_sha256": config_sha,
@@ -145,6 +197,7 @@ def curate(directory: Path, commit: str, source_archive: Path, *, accelerator_mo
         raise ValueError("explicit supported accelerator model required")
     a100 = accelerator_model == "NVIDIA A100-SXM4-80GB"
     runs = [json.loads((directory / f"seed{seed}.json").read_text()) for seed in SEEDS]
+    environment_counts = []
     for seed, run in zip(SEEDS, runs, strict=True):
         if (run.get("paper") != "skilldreamer" or run.get("seed") != seed
                 or run.get("device") != "cuda" or run.get("diagnostic_only") is not True
@@ -155,20 +208,29 @@ def curate(directory: Path, commit: str, source_archive: Path, *, accelerator_mo
         source = run["protocol"]["dataset"]
         if source.get("source_split") != "train" or source.get("official_test_opened") is not False:
             raise ValueError("only verified train-derived inputs, no official test, are in scope")
+        ids = run["protocol"]["test_ids"]
+        if not isinstance(ids, list) or not ids or any(not isinstance(x, str) for x in ids) or len(set(ids)) != len(ids):
+            raise ValueError("unique original evaluation IDs required")
+        arm_steps = {}
         for arm in ARMS:
-            if len(run["episodes"][arm]) != len(run["protocol"]["test_ids"]):
+            episodes = run["episodes"][arm]
+            if (not isinstance(episodes, list) or any(not isinstance(row, dict) for row in episodes)
+                    or [row.get("id") for row in episodes] != ids):
                 raise ValueError("all episodes, including generation failures, must remain")
-            episodes=run["episodes"][arm]
-            if (sum(row.get("model_calls_including_psg",0) for row in episodes)!=run["variants"][arm]["model_calls"]
-                    or sum(row.get("executed_actions",0) for row in episodes)!=run["variants"][arm]["executed_actions"]
-                    or not all(type(value) in {int,float} and math.isfinite(value)
-                               for value in run["variants"][arm].values())):
-                raise ValueError("finite measured summaries must match actual episode calls/actions")
+            expected, arm_steps[arm] = recompute_arm(episodes)
+            summary = run["variants"][arm]
+            if (set(summary) != SUMMARY_FIELDS or summary != expected
+                    or any(type(summary[k]) not in (int, float) or not math.isfinite(summary[k]) for k in ("pass_rate", "load_rate"))
+                    or any(type(summary[k]) is not int for k in SUMMARY_FIELDS - {"pass_rate", "load_rate"})):
+                raise ValueError("finite measured summaries must match all seven original episode reductions")
         episodes=run["episodes"]["skilldreamer"]
         if (sum(len(row.get("capability_checks",[])) for row in episodes)<1
                 or not any(row.get("loaded_skills") for row in episodes)
                 or sum(row.get("executed_actions",0) for row in episodes)<1):
             raise ValueError("GPU completion requires actual CSI assessment, gallery loading and tool execution in every seed")
+        if arm_steps["skilldreamer"]["successful_calculator_calls"] < 1:
+            raise ValueError("GPU completion requires an actual successful calculator call, not invalid env.step attempts")
+        environment_counts.append({"seed": seed, "arms": arm_steps})
     if any(run["protocol"] != runs[0]["protocol"] for run in runs[1:]):
         raise ValueError("all seeds must share exactly the same frozen input and protocol")
     paths = ["scripts/run_skilldreamer.py", "src/auto_research/reproductions/skilldreamer/experiment.py",
@@ -191,15 +253,12 @@ def curate(directory: Path, commit: str, source_archive: Path, *, accelerator_mo
                for values in [[run["variants"][arm][key] for run in runs]]}
     artifact = f"{DOC}/public-a100-seeds42-44-47f0e9ce.json" if a100 else f"{DOC}/public-a30-seeds42-44.json"
     receipt_path = "docs/gpu-validations/oct13-skilldreamer-a100.json" if a100 else "docs/gpu-validations/oct13-skilldreamer-a30.json"
-    raw = {}
+    raw, pending = {}, []
     for seed in SEEDS:
         content = (directory / f"seed{seed}.json").read_bytes()
         relative = f"{DOC}/raw/a100-47f0e9ce/seed{seed}.json" if a100 else f"{DOC}/raw/seed{seed}.json"
         target = ROOT / relative
-        target.parent.mkdir(parents=True, exist_ok=True)
-        if target.exists() and target.read_bytes() != content:
-            raise FileExistsError("immutable raw evidence differs")
-        target.write_bytes(content)
+        pending.append((target, content, True))
         raw[str(seed)] = {"artifact_path": relative, "sha256": hashlib.sha256(content).hexdigest()}
     limitations = ["Train-derived 24-row arithmetic live-interaction diagnostic; not official GSM8K test.",
         "Not SkillUsage/SkillRet/SkillNet-Gym, original model scale, or original skill-gallery benchmark.",
@@ -218,6 +277,7 @@ def curate(directory: Path, commit: str, source_archive: Path, *, accelerator_mo
         "provenance": {"code_commit": commit, "artifact_path": artifact,
             "dataset_fingerprint": hashlib.sha256(json.dumps(runs[0]["protocol"]["dataset"], sort_keys=True).encode()).hexdigest()},
         "limitations": limitations}
+    payload["environment_step_counts"] = environment_counts
     checks = {"completed_seeds": 3, "actual_model_calls": [sum(v["model_calls"] for v in run["variants"].values()) for run in runs],
         "executed_actions": [sum(v["executed_actions"] for v in run["variants"].values()) for run in runs],
         "actual_csi_assessments": [sum(len(episode.get("capability_checks", []))
@@ -227,6 +287,9 @@ def curate(directory: Path, commit: str, source_archive: Path, *, accelerator_mo
         "skilldreamer_executed_actions": [run["variants"]["skilldreamer"]["executed_actions"] for run in runs],
         "all_generation_failures_retained": True, "gold_visible_to_policy": False,
         "official_test_opened": False, "diagnostic_only": True, "promotion_eligible": False}
+    checks["environment_step_counts"] = environment_counts
+    checks["skilldreamer_successful_calculator_calls"] = [r["arms"]["skilldreamer"]["successful_calculator_calls"] for r in environment_counts]
+    checks["environment_count_scope"] = "original executed_actions are env.step attempts; successful calculators, submissions and failed steps are separately reduced from observations"
     receipt = {"schema_version": 1, "adapter_key": "skilldreamer",
         "validated_at": datetime.now(timezone.utc).isoformat(),
         "accelerator": {"vendor": "NVIDIA", "model": accelerator_model},
@@ -251,6 +314,11 @@ def curate(directory: Path, commit: str, source_archive: Path, *, accelerator_mo
         receipt["all_sanitized_commands"] = [["python", "scripts/observe_oct14_skilldreamer.py", "--config", "data/skilldreamer-full7b.json",
             "--seed", str(seed), "--output", f"runs/skilldreamer/seed{seed}"] for seed in SEEDS]
         checks["call_instrumentation"] = [row["instrumentation"] for row in observer_records]
+        checks["actual_generation_attempts"] = [r["generation_attempts"] for r in observer_records]
+        checks["actual_generation_responses"] = [r["generation_responses"] for r in observer_records]
+        checks["actual_failed_generation_attempts"] = [r["failed_generation_attempts"] for r in observer_records]
+        checks["failed_generation_output_token_cost"] = [r["failed_generation_output_token_cost"] for r in observer_records]
+        checks["generation_cost_scope"] = "raw model_calls are completed responses; attempts include errors; failed output-token costs unknown when no response returned"
         receipt["config"] = {name: actual_config[name] for name in ("device", "max_queries", "max_new_tokens", "top_k", "action_budget")}
         receipt["observer_source"] = {"commit": observer_commit,
             "sha256": observer_records[0]["observer_source"]["sha256"],
@@ -260,10 +328,19 @@ def curate(directory: Path, commit: str, source_archive: Path, *, accelerator_mo
         raise ValueError(errors)
     for relative, document in ((artifact, payload), (receipt_path, receipt)):
         target = ROOT / relative
-        if target.exists():
-            raise FileExistsError("immutable curated evidence already exists")
+        content = (json.dumps(document, ensure_ascii=False, indent=2, allow_nan=False) + "\n").encode()
+        pending.append((target, content, False))
+    # No output directory/file exists until every object, validation and target
+    # collision has been checked. Existing identical raw copies stay untouched.
+    for target, content, raw_copy in pending:
+        if target.exists() and (not raw_copy or target.read_bytes() != content):
+            raise FileExistsError("immutable curated/raw evidence already exists or differs")
+    for target, content, raw_copy in pending:
+        if raw_copy and target.exists():
+            continue
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(json.dumps(document, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+        with target.open("xb") as stream:
+            stream.write(content)
     return {"metrics": metrics, "checks": checks}
 
 
