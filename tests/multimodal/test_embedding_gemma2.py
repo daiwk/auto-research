@@ -47,3 +47,23 @@ def test_multipositive_retrieval_and_no_unpaired_caption():
 def test_floating_checkpoint_revision_rejected_before_download():
     with pytest.raises(ValueError, match="immutable"):
         EmbeddingGemma2Encoder.load(revision="main")
+
+
+def test_independent_images_use_nested_singletons_not_one_interleaved_example():
+    images = [object(), object()]
+    def processor(**kwargs):
+        assert kwargs["images"] == [[images[0]], [images[1]]]
+        assert "text" not in kwargs and kwargs["max_soft_tokens"] == 70
+        return {"attention_mask": torch.ones(2, 2)}
+    encoder = EmbeddingGemma2Encoder(processor, lambda **kw: SimpleNamespace(last_hidden_state=torch.ones(2, 2, 768)))
+    assert encoder.encode(images=images, batch_size=2).shape == (2, 768)
+    encoder.model = lambda **kw: SimpleNamespace(last_hidden_state=torch.ones(1, 2, 768))
+    with pytest.raises(ValueError):
+        encoder.encode(images=images, batch_size=2)
+
+
+def test_retrieval_rejects_collapsed_or_nonfinite_image_vectors():
+    with pytest.raises(ValueError, match="paired"):
+        retrieval_recall(torch.ones(1, 2), torch.ones(2, 2), ["a", "b"], ["a", "b"])
+    with pytest.raises(ValueError, match="finite"):
+        retrieval_recall(torch.full((2, 2), float("nan")), torch.ones(2, 2), ["a", "b"], ["a", "b"])

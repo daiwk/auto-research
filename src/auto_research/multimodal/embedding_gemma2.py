@@ -93,20 +93,29 @@ class EmbeddingGemma2Encoder:
                 batch = self.processor(text=[prefix + text for text in rows], padding=True,
                                        truncation=True, max_length=256, return_tensors="pt")
             else:
-                batch = self.processor(images=rows, padding=True, return_tensors="pt",
+                # A flat image list means ONE interleaved multi-image example
+                # upstream. Nested singletons preserve retrieval sample axes.
+                batch = self.processor(images=[[image] for image in rows], padding=True, return_tensors="pt",
                                        max_soft_tokens=70)
             batch = {key: value.to(self.device) if isinstance(value, torch.Tensor) else value
                      for key, value in batch.items()}
             with torch.inference_mode():
                 output = self.model(**batch)
-            vectors.append(masked_mean(output.last_hidden_state, batch["attention_mask"],
-                                       dimensions=self.dimensions).cpu())
+            vector = masked_mean(output.last_hidden_state, batch["attention_mask"], dimensions=self.dimensions)
+            if len(vector) != len(rows):
+                raise ValueError("processor/model collapsed distinct retrieval samples")
+            vectors.append(vector.cpu())
         return torch.cat(vectors)
 
 
 def retrieval_recall(image_vectors, text_vectors, text_image_ids, image_ids):
     """Multi-positive paired retrieval; do not assume one caption per image."""
     import torch
+    if (image_vectors.ndim != 2 or text_vectors.ndim != 2
+            or len(image_vectors) != len(image_ids) or not image_ids
+            or image_vectors.shape[1] != text_vectors.shape[1]
+            or not torch.isfinite(image_vectors).all() or not torch.isfinite(text_vectors).all()):
+        raise ValueError("finite paired embedding matrices with matching dimensions required")
     if len(set(image_ids)) != len(image_ids) or len(text_image_ids) != len(text_vectors):
         raise ValueError("unique images and a paired caption map required")
     if set(text_image_ids) != set(image_ids):
