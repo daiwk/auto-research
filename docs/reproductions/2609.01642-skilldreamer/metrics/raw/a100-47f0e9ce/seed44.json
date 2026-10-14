@@ -1,0 +1,2802 @@
+{
+  "paper": "skilldreamer",
+  "seed": 44,
+  "device": "cuda",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "variants": {
+    "no_skills": {
+      "pass_rate": 0.1875,
+      "load_rate": 0.0,
+      "executed_actions": 104,
+      "generation_failures": 8,
+      "tool_failure_episodes": 1,
+      "model_calls": 122,
+      "generated_tokens": 16963
+    },
+    "direct": {
+      "pass_rate": 0.0,
+      "load_rate": 0.0,
+      "executed_actions": 128,
+      "generation_failures": 10,
+      "tool_failure_episodes": 14,
+      "model_calls": 152,
+      "generated_tokens": 5633
+    },
+    "skilldreamer": {
+      "pass_rate": 0.0,
+      "load_rate": 0.9375,
+      "executed_actions": 105,
+      "generation_failures": 16,
+      "tool_failure_episodes": 4,
+      "model_calls": 362,
+      "generated_tokens": 43331
+    }
+  },
+  "episodes": {
+    "no_skills": [
+      {
+        "submitted_answer": "6",
+        "executed_actions": 2,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 2,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 6",
+          "Submission recorded. No correctness feedback is exposed to the policy."
+        ],
+        "correct": true,
+        "model_calls_including_psg": 2,
+        "generated_tokens_including_psg": 434,
+        "id": "19"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 0,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 4",
+          "Calculator result: 4",
+          "Calculator result: 4",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 4",
+          "Calculator result: 4",
+          "Calculator result: 4",
+          "Calculator result: 4",
+          "Calculator result: 4"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 550,
+        "id": "3"
+      },
+      {
+        "submitted_answer": "32",
+        "executed_actions": 4,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 4,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 32",
+          "Calculator result: 32",
+          "Calculator result: 32",
+          "Submission recorded. No correctness feedback is exposed to the policy."
+        ],
+        "correct": true,
+        "model_calls_including_psg": 4,
+        "generated_tokens_including_psg": 907,
+        "id": "18"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 280",
+          "Calculator result: 280",
+          "Calculator result: 280",
+          "Calculator result: 280",
+          "Calculator result: 1120",
+          "Calculator result: 280",
+          "Calculator result: 280",
+          "Calculator result: 280"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 1001,
+        "id": "10"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 6,
+        "tool_errors": 3,
+        "model_calls": 14,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 45",
+          "Calculator error: ValueError",
+          "Calculator result: 45",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator error: SyntaxError",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator error: ValueError",
+          "Calculator result: 45",
+          "Calculator result: 45",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 45"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 14,
+        "generated_tokens_including_psg": 3398,
+        "id": "9"
+      },
+      {
+        "submitted_answer": "8",
+        "executed_actions": 5,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 4,
+        "tool_errors": 0,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 8",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 8",
+          "Calculator result: 8",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 8",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Submission recorded. No correctness feedback is exposed to the policy."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 1739,
+        "id": "17"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 2,
+        "tool_errors": 0,
+        "model_calls": 10,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 1000",
+          "Calculator result: 2000",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 0.833333333333",
+          "Calculator result: 2000",
+          "Calculator result: 0.333333333333",
+          "Calculator result: 2000",
+          "Calculator result: 2000",
+          "Calculator result: 2000"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 10,
+        "generated_tokens_including_psg": 802,
+        "id": "11"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Calculator result: 60"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 998,
+        "id": "16"
+      },
+      {
+        "submitted_answer": "2",
+        "executed_actions": 3,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 3,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 2",
+          "Calculator result: 2",
+          "Submission recorded. No correctness feedback is exposed to the policy."
+        ],
+        "correct": true,
+        "model_calls_including_psg": 3,
+        "generated_tokens_including_psg": 422,
+        "id": "22"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 0,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 32",
+          "Calculator result: 160",
+          "Calculator result: 192",
+          "Calculator result: 24",
+          "Calculator result: 192",
+          "Calculator result: 160",
+          "Calculator result: 160",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 160"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 1201,
+        "id": "2"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 2,
+        "tool_errors": 0,
+        "model_calls": 10,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 46",
+          "Calculator result: 22",
+          "Calculator result: 24",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 57",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 57",
+          "Calculator result: 57",
+          "Calculator result: 11",
+          "Calculator result: 24"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 10,
+        "generated_tokens_including_psg": 1459,
+        "id": "8"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 50",
+          "Calculator result: 50",
+          "Calculator result: 50",
+          "Calculator result: 50",
+          "Calculator result: 50",
+          "Calculator result: 50",
+          "Calculator result: 50",
+          "Calculator result: 50"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 918,
+        "id": "12"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 90",
+          "Calculator result: 90",
+          "Calculator result: 90",
+          "Calculator result: 90",
+          "Calculator result: 90",
+          "Calculator result: 90",
+          "Calculator result: 90",
+          "Calculator result: 90"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 817,
+        "id": "7"
+      },
+      {
+        "submitted_answer": "18",
+        "executed_actions": 2,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 0,
+        "model_calls": 3,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 18",
+          "Submission recorded. No correctness feedback is exposed to the policy."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 3,
+        "generated_tokens_including_psg": 563,
+        "id": "20"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 0,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 35",
+          "Calculator result: 18",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 28",
+          "Calculator result: 28",
+          "Calculator result: 35",
+          "Calculator result: 35",
+          "Calculator result: 35",
+          "Calculator result: 28"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 917,
+        "id": "0"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 72",
+          "Calculator result: 72",
+          "Calculator result: 72",
+          "Calculator result: 72",
+          "Calculator result: 72",
+          "Calculator result: 72",
+          "Calculator result: 72",
+          "Calculator result: 72"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 837,
+        "id": "5"
+      }
+    ],
+    "direct": [
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 7,
+        "tool_errors": 8,
+        "model_calls": 15,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 15,
+        "generated_tokens_including_psg": 182,
+        "id": "19"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 8,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 248,
+        "id": "3"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 8,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 442,
+        "id": "18"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 8,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 201,
+        "id": "10"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 2,
+        "tool_errors": 7,
+        "model_calls": 10,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 45",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 10,
+        "generated_tokens_including_psg": 719,
+        "id": "9"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 8,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 209,
+        "id": "17"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 8,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 129,
+        "id": "11"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 8,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 431,
+        "id": "16"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 3,
+        "tool_errors": 7,
+        "model_calls": 11,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 5",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 11,
+        "generated_tokens_including_psg": 261,
+        "id": "22"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 32",
+          "Calculator result: 32",
+          "Calculator result: 160",
+          "Calculator result: 160",
+          "Calculator result: 24",
+          "Calculator result: 160",
+          "Calculator result: 24",
+          "Calculator result: 192"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 900,
+        "id": "2"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 0,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Calculator result: 40.5",
+          "Calculator result: 35",
+          "Calculator result: 35",
+          "Calculator result: 35",
+          "Calculator result: 35",
+          "Calculator result: 35",
+          "Calculator result: 35",
+          "Calculator result: 35"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 518,
+        "id": "8"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 8,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 136,
+        "id": "12"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 7,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Calculator result: 90",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 276,
+        "id": "7"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 1,
+        "tool_errors": 8,
+        "model_calls": 9,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 9,
+        "generated_tokens_including_psg": 116,
+        "id": "20"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 0,
+        "tool_errors": 5,
+        "model_calls": 8,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Calculator result: 7",
+          "Calculator result: 18",
+          "Calculator result: 18",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 8,
+        "generated_tokens_including_psg": 614,
+        "id": "0"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [],
+        "capability_checks": [],
+        "generation_errors": 6,
+        "tool_errors": 8,
+        "model_calls": 14,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid action schema. Use calculator or finish with the specified JSON arguments."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 14,
+        "generated_tokens_including_psg": 251,
+        "id": "5"
+      }
+    ],
+    "skilldreamer": [
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "rates"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time and add the time spent at the destination.",
+              "EVIDENCE": "Manex drives 55 miles to the destination and 65 miles back (55 + 10). He drives 1 mile in 2 minutes and stays 2 hours at the destination.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"((55+65)*2)+120\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time and add the stay time at the destination.",
+              "EVIDENCE": "Manex drives 55 miles to the destination and 65 miles back. He drives 1 mile in 2 minutes and stays 2 hours at the destination.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(55+65)*2/60+2\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time",
+              "EVIDENCE": "Manex drives 55 miles to the destination and 65 miles back",
+              "CAPABILITY": "Rates and proportions",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(55+65)*2\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time",
+              "EVIDENCE": "Manex drives 55 miles to the destination and 65 miles back",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(55+65)*2\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time",
+              "EVIDENCE": "Manex drives 55 miles to the destination and 65 miles back",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(55+65)*2\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time",
+              "EVIDENCE": "Need to calculate the time for a 55-mile trip and a 65-mile return trip",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(55+65)*2\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time",
+              "EVIDENCE": "55 miles to the destination and 65 miles back",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(55+65)*2\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time",
+              "EVIDENCE": "Manex drives 55 miles to the destination and 65 miles back. He drives 1 mile in 2 minutes.",
+              "CAPABILITY": "Rates and proportions",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(55+65)*2\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total driving time",
+              "EVIDENCE": "The distance to the destination is 55 miles, and the return trip is 10 miles farther.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(55+55+10)*2\"}}"
+            }
+          }
+        ],
+        "generation_errors": 6,
+        "tool_errors": 0,
+        "model_calls": 15,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: rates; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 6",
+          "Calculator result: 240",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 240",
+          "Calculator result: 240",
+          "Calculator result: 240",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 240",
+          "Calculator result: 240",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 240"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 21,
+        "generated_tokens_including_psg": 2560,
+        "id": "19"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine how much money Leah has left after her expenditures and losses.",
+              "EVIDENCE": "Leah earned $28, spent 1/7 on a milkshake, put half of the remainder in savings, and lost the rest except $1.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"28 - (28 / 7) - ((28 - (28 / 7)) / 2) + 1\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the amount Leah spent on the milkshake and the remaining money after buying it.",
+              "EVIDENCE": "Leah earned $28 and spent a seventh of it on a milkshake.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"28 / 7\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine how much money Leah lost",
+              "EVIDENCE": "Leah earned $28, spent 1/7 on a milkshake, put half of the rest in savings, and had the remainder in her wallet. Her dog shredded most of it except $1.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the amount Leah lost",
+              "EVIDENCE": "Leah earned $28, spent 1/7 on a milkshake, put half of the rest in savings, and had the rest in her wallet before it was shredded except for $1",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"28 - 1/7*28 - 1/2*(28 - 1/7*28) - 1\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the amount Leah lost",
+              "EVIDENCE": "Leah earned $28, spent a seventh on a milkshake, put half of the rest in savings, and had $1 left after her dog shredded the rest.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate how much Leah lost",
+              "EVIDENCE": "Leah earned $28, spent 1/7 on a milkshake, put half of the rest in savings, and had the rest in her wallet before losing the money.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"28 - 1/7 * 28 - 1/2 * (28 - 1/7 * 28) - 1\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine how much money Leah has left after spending and saving.",
+              "EVIDENCE": "Leah earned $28, spent 1/7 on a milkshake, and put half of the rest into savings.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate how much money Leah lost",
+              "EVIDENCE": "Leah earned $28, spent 1/7 on a milkshake, put half of the rest in savings, and had $1 left after her dog shredded most of the money.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"28 - (28/7 + (28 - 28/7)/2 + 1)\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the amount Leah lost",
+              "EVIDENCE": "Leah earned $28, spent $4 on a milkshake, put $11 in savings, and had $13 left. Her dog shredded all but $1.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          }
+        ],
+        "generation_errors": 11,
+        "tool_errors": 0,
+        "model_calls": 20,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 4",
+          "Calculator result: 11",
+          "Calculator result: 11",
+          "Calculator result: 27",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 11",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 12",
+          "Calculator result: 11",
+          "Calculator result: 12"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 26,
+        "generated_tokens_including_psg": 3123,
+        "id": "3"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "inventory"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday.",
+              "EVIDENCE": "Buddy starts with 30 cards, loses half on Tuesday, and buys 12 on Wednesday. On Thursday, he buys a third of what he had on Tuesday.",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30/2 + 12 + (30/2)/3\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday",
+              "EVIDENCE": "Buddy starts with 30 cards, loses half on Tuesday, buys 12 on Wednesday, and buys a third of what he had on Tuesday on Thursday",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30 - 30/2 + 12 + (30/2)/3\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday",
+              "EVIDENCE": "Buddy starts with 30 cards on Monday, loses half on Tuesday, and buys 12 on Wednesday. On Thursday, he buys a third of what he had on Tuesday.",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30 - (30 / 2) + 12 + ((30 / 2) / 3)\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday",
+              "EVIDENCE": "Buddy starts with 30 cards on Monday, loses half on Tuesday, and buys 12 on Wednesday. On Thursday, he buys a third of what he had on Tuesday.",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30 - 30/2 + 12 + (30/2)/3\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday",
+              "EVIDENCE": "Buddy starts with 30 cards, loses half on Tuesday, and buys 12 and a third of Tuesday's remaining amount on Thursday",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30 - (30/2) + 12 + ((30/2)/3)\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday",
+              "EVIDENCE": "On Monday Buddy has 30 baseball cards. On Tuesday Buddy loses half of them. On Wednesday Buddy buys 12 baseball cards. On Thursday he buys a third of what he had on Tuesday.",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30/2+12+(30/2)/3\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday",
+              "EVIDENCE": "On Monday Buddy has 30 baseball cards. On Tuesday Buddy loses half of them (15 cards), leaving him with 15 cards. On Wednesday Buddy buys 12 baseball cards, bringing his total to 27 cards. On Thursday he buys a third of what he had on Tuesday (5 cards), increasing his total to 32 cards.",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30 - 30/2 + 12 + 15/3\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday",
+              "EVIDENCE": "On Monday Buddy has 30 baseball cards. On Tuesday Buddy loses half of them. On Wednesday Buddy buys 12 baseball cards. On Thursday he buys a third of what he had on Tuesday.",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30 - (30/2) + 12 + (30/2)/3\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of baseball cards Buddy has on Thursday",
+              "EVIDENCE": "On Monday: 30 cards, Tuesday: 30/2 = 15 cards, Wednesday: 15 + 12 = 27 cards, Thursday: 27 + 15/3 = 32 cards",
+              "CAPABILITY": "inventory",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"inventory\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"30 - 30/2 + 12 + (30/2)/3\"}}"
+            }
+          }
+        ],
+        "generation_errors": 7,
+        "tool_errors": 0,
+        "model_calls": 16,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: inventory; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 32",
+          "Calculator result: 32",
+          "Calculator result: 32",
+          "Calculator result: 32",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 32",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 32",
+          "Calculator result: 32",
+          "Calculator result: 32"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 22,
+        "generated_tokens_including_psg": 3004,
+        "id": "18"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total amount of money Carrie has earned in a month.",
+              "EVIDENCE": "Carrie earns $8 an hour and works 35 hours a week. It's been a month since she started working.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"8 * 35 * 4\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate Carrie's total earnings in a month",
+              "EVIDENCE": "Carrie earns $8 an hour and works 35 hours a week. It's been a month since she started working.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate Carrie's total earnings in a month",
+              "EVIDENCE": "Carrie works 35 hours a week at $8 per hour and it's been a month since she started.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(8 * 35 * 4)\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate Carrie's total earnings in a month",
+              "EVIDENCE": "Carrie earns $8 an hour and works 35 hours a week. It has been a month since she started.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"8 * 35 * 4\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate Carrie's total earnings over a month",
+              "EVIDENCE": "Carrie earns $8 an hour and works 35 hours a week. It's been a month since she started.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(8 * 35 * 4)\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate Carrie's earnings over a month",
+              "EVIDENCE": "Carrie earns $8 an hour and works 35 hours a week",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"8 * 35 * 4\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate total earnings for a month",
+              "EVIDENCE": "Carrie earns $8 an hour and works 35 hours a week",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"8 * 35 * 4\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate Carrie's total earnings in a month",
+              "EVIDENCE": "Carrie works for $8 an hour and 35 hours a week",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"8 * 35 * 4\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate Carrie's total earnings over a month",
+              "EVIDENCE": "Carrie earns $8 an hour for 35 hours a week, and it has been a month since she started.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"8 * 35 * 4\"}}"
+            }
+          }
+        ],
+        "generation_errors": 1,
+        "tool_errors": 0,
+        "model_calls": 10,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Calculator result: 1120",
+          "Calculator result: 1120",
+          "Calculator result: 1120",
+          "Calculator result: 1120",
+          "Calculator result: 1120",
+          "Calculator result: 1120",
+          "Calculator result: 1120",
+          "Calculator result: 1120"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 16,
+        "generated_tokens_including_psg": 2212,
+        "id": "10"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of gumballs Hector purchased.",
+              "EVIDENCE": "Hector gave 4 to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (4*8-5=27). He had 6 remaining.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4 + 8 + 27 + 6\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of gumballs Hector purchased.",
+              "EVIDENCE": "Hector gave 4 to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (which is 4 * 8 - 5 = 27). He had 6 remaining.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4 + 8 + 27 + 6\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the initial number of gumballs Hector purchased",
+              "EVIDENCE": "Hector gave 4 to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (4*8-5=27). He had 6 remaining.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4+8+27+6\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of gumballs Hector purchased",
+              "EVIDENCE": "Hector gave 4 to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (4*8-5=27). He had 6 left.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4+8+27+6\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the initial number of gumballs Hector purchased",
+              "EVIDENCE": "Hector gave 4 to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (32-5=27). He had 6 left.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4 + 8 + 27 + 6\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the initial number of gumballs Hector purchased",
+              "EVIDENCE": "Hector gave 4 to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (4*8-5=27). He had 6 left.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4 + 8 + 27 + 6\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of gumballs Hector purchased.",
+              "EVIDENCE": "Hector gave 4 to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (4*8-5=27). He had 6 remaining.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4 + 8 + 27 + 6\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the initial number of gumballs Hector purchased.",
+              "EVIDENCE": "Hector gave 4 gumballs to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (32-5=27). After these distributions, he had 6 gumballs left.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4 + 8 + 27 + 6\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of gumballs Hector purchased.",
+              "EVIDENCE": "Hector gave 4 gumballs to Todd, twice as many (8) to Alisha, and 5 less than four times as many to Bobby as he had given to Alisha (32-5=27). He had 6 gumballs remaining.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4+8+27+6\"}}"
+            }
+          }
+        ],
+        "generation_errors": 2,
+        "tool_errors": 0,
+        "model_calls": 11,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Calculator result: 45",
+          "Calculator result: 45",
+          "Calculator result: 45",
+          "Calculator result: 45",
+          "Calculator result: 45",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 45",
+          "Calculator result: 45",
+          "Calculator result: 45"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 17,
+        "generated_tokens_including_psg": 2736,
+        "id": "9"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 5,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the number of packages delivered by the third butcher.",
+              "EVIDENCE": "The total weight of ground beef is 100 pounds. The first butcher delivered 10 packages, and the second butcher delivered 7 packages. Each package weighs 4 pounds.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the number of packages delivered by the third butcher.",
+              "EVIDENCE": "First butcher delivered 10 packages, second delivered 7 packages, total weight is 100 pounds, each package weighs 4 pounds.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of packages delivered by the third butcher",
+              "EVIDENCE": "First butcher delivered 10 packages, second delivered 7 packages, total weight is 100 pounds, each package weighs 4 pounds",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(100/(4)) - (10 + 7)\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of packages delivered by the third butcher",
+              "EVIDENCE": "First butcher delivered 10 packages, second delivered 7 packages, total weight is 100 pounds, each package weighs 4 pounds",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(100/(4)) - (10 + 7)\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of packages delivered by the third butcher",
+              "EVIDENCE": "First butcher delivered 10 packages, second delivered 7 packages, total weight is 100 pounds, each package weighs 4 pounds",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(100/4) - (10 + 7)\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of packages delivered by the third butcher",
+              "EVIDENCE": "First butcher delivered 10 packages, second butcher delivered 7 packages, total weight is 100 pounds, each package weighs 4 pounds",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          }
+        ],
+        "generation_errors": 18,
+        "tool_errors": 0,
+        "model_calls": 24,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Calculator result: 8",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 8",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 8",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 8",
+          "Calculator result: 8",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 30,
+        "generated_tokens_including_psg": 3261,
+        "id": "17"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 7,
+        "loaded_skills": [
+          "rates"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of hours required to fill the truck.",
+              "EVIDENCE": "Stella and Twinkle fill at 250 blocks/hour/person, working for 4 hours initially, then 6 more people join them.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of hours required to fill the truck.",
+              "EVIDENCE": "Stella and Twinkle work at a rate of 250 blocks per hour per person. They work for four hours and are then joined by 6 other people who also work at the same rate.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(6000 - (4 * 2 * 250)) / ((4 + 6) * 250) + 4\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of hours required to fill the truck.",
+              "EVIDENCE": "Stella and Twinkle work at a rate of 250 blocks per hour per person, they work for 4 hours initially, and then 6 more people join them.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(250 * 2 * 4 + 250 * 8 * x) / 6000\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of hours required to fill the truck",
+              "EVIDENCE": "Stella and Twinkle work for 4 hours at a rate of 250 blocks per hour per person, then 8 people work together to reach the truck's capacity of 6000 blocks.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(250 * 2 * 4 + 6000) / (250 * 8)\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of hours required to fill the truck.",
+              "EVIDENCE": "Stella and Twinkle work at a rate of 250 blocks per hour per person. They work for four hours and are then joined by 6 other people who also work at the same rate. The truck's capacity is 6000 stone blocks.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(250*2*4 + 250*(2+6)*h) = 6000\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total time taken to fill the truck",
+              "EVIDENCE": "Stella and Twinkle fill the truck at 250 blocks/hour/person for 4 hours, then 8 people (Stella, Twinkle, and 6 others) fill the truck at 250 blocks/hour/person. The truck's capacity is 6000 blocks.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(250*2*4 + 250*8*(x-4))/6000\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of hours required to fill the truck.",
+              "EVIDENCE": "Stella and Twinkle work for 4 hours at a rate of 250 blocks per hour per person.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(250*2*4+(6*250*(x-4))/6000)\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of hours to fill the truck",
+              "EVIDENCE": "Stella and Twinkle work at a rate of 250 blocks per hour per person, they work for 4 hours initially, and then 6 more people join them.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(250 * 2 * 4 + 250 * 8 * (x - 4)) = 6000\"}}"
+            }
+          }
+        ],
+        "generation_errors": 16,
+        "tool_errors": 5,
+        "model_calls": 24,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: rates; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 5.6",
+          "Calculator error: ValueError",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 4",
+          "Calculator error: SyntaxError",
+          "Calculator error: ValueError",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator error: ValueError",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator error: SyntaxError",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 30,
+        "generated_tokens_including_psg": 3490,
+        "id": "11"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "rates"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of goldfish in the pond.",
+              "EVIDENCE": "Toby counted 15 goldfish at the surface, representing 25% of the total goldfish population.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of goldfish based on the percentage visible.",
+              "EVIDENCE": "Toby counted 15 goldfish which represent 25% of the total goldfish population.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of goldfish based on the count of goldfish at the surface.",
+              "EVIDENCE": "Toby counted 15 goldfish, which represent 25% of the total goldfish population.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of goldfish based on the proportion visible",
+              "EVIDENCE": "Toby counts 15 goldfish, which represent 25% of the total goldfish population",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of goldfish in the pond",
+              "EVIDENCE": "Toby counts 15 goldfish which represent 25% of the total goldfish population",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of goldfish based on the proportion visible",
+              "EVIDENCE": "Toby counted 15 goldfish, which represent 25% of the total goldfish population.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of goldfish based on the percentage visible.",
+              "EVIDENCE": "Toby counted 15 goldfish, which represent 25% of the total.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of goldfish based on the visible fraction.",
+              "EVIDENCE": "Toby counted 15 goldfish which represent 25% of the total population.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of goldfish",
+              "EVIDENCE": "Toby counts 15 goldfish at the surface, which represent 25% of the total goldfish population.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"15 / 0.25\"}}"
+            }
+          }
+        ],
+        "generation_errors": 11,
+        "tool_errors": 0,
+        "model_calls": 20,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: rates; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 60",
+          "Calculator result: 60",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 60"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 23,
+        "generated_tokens_including_psg": 1957,
+        "id": "16"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink.",
+              "EVIDENCE": "Andy spent $1 on soda and $4 on hamburgers, totaling $5. Bob spent $6 excluding the fruit drink.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"6 - (1 + 2*2)\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink",
+              "EVIDENCE": "Andy's expenses: $1 (soda) + $4 (2 hamburgers) = $5; Bob's expenses: $6 - $3 (sandwiches) = $3 for fruit drink",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink",
+              "EVIDENCE": "Andy's total: $1 (soda) + $4 (2 hamburgers) = $5; Bob's sandwich cost: $3; Both spent the same amount",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"5-3\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink",
+              "EVIDENCE": "Andy's total: $1 (soda) + $2 * 2 (hamburgers) = $5; Bob's sandwich cost: $3; both spent the same amount",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"5 - 3\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink",
+              "EVIDENCE": "Andy's total cost is $1 (soda) + $4 (2 hamburgers) = $5",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"5-3-2\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink",
+              "EVIDENCE": "Andy's total: $1 (soda) + $4 (2 hamburgers) = $5; Bob's total matches Andy's",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"5-3\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink",
+              "EVIDENCE": "Andy's total: 1 + 2*2 = 5, Bob's total: 3 + x (x is the cost of the fruit drink), Andy and Bob spent the same amount",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"3 + x = 5\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink",
+              "EVIDENCE": "Andy spent $5 ($1 for soda + $2 * 2 for hamburgers) and spent the same amount as Bob. Bob spent $3 on sandwiches and an unknown amount on a fruit drink.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"5-3\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the cost of Bob's fruit drink",
+              "EVIDENCE": "Andy's total: 1 + 2*2 = 5 dollars, Bob's total equals Andy's total, Bob bought 2 sandwiches for 3*2 = 6 dollars",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "PARTIAL_MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"5 - 6\"}}"
+            }
+          }
+        ],
+        "generation_errors": 10,
+        "tool_errors": 1,
+        "model_calls": 19,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 2",
+          "Calculator result: 2",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 2",
+          "Calculator result: 0",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 2",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator error: SyntaxError",
+          "Calculator result: 2",
+          "Calculator result: -1"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 25,
+        "generated_tokens_including_psg": 3075,
+        "id": "22"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total area of fabric used and subtract it from the initial bolt size.",
+              "EVIDENCE": "Ann cuts a 4x6 rectangle and a 2x4 rectangle. The bolt size is 16x12.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total area of fabric used and subtract it from the initial bolt area.",
+              "EVIDENCE": "The dimensions of the fabric used are 4x6 feet for the living room and 2x4 feet for the bedroom. The bolt of fabric is 16x12 feet.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6) + (2*4)\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total area of fabric used and subtract from the original bolt size to find remaining fabric.",
+              "EVIDENCE": "Living room curtain fabric is 4*6=24 square feet, bedroom curtain fabric is 2*4=8 square feet. Bolt of fabric is 16*12=192 square feet.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"192 - (24 + 8)\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total area of fabric used and subtract it from the original bolt size.",
+              "EVIDENCE": "The living room curtain uses 4*6=24 square feet, and the bedroom curtain uses 2*4=8 square feet. The bolt of fabric is 16*12=192 square feet.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"192 - (24 + 8)\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total area of fabric used",
+              "EVIDENCE": "Ann cuts a 4 foot by 6 foot rectangle and a 2 foot by 4 foot rectangle",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6)+(2*4)\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total area of fabric used",
+              "EVIDENCE": "Ann cuts a 4 foot by 6 foot rectangle and a 2 foot by 4 foot rectangle",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6) + (2*4)\"}}"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total fabric used and subtract from the initial bolt size to find the remaining fabric.",
+              "EVIDENCE": "Living room curtain fabric = 4 * 6 = 24 square feet; bedroom curtain fabric = 2 * 4 = 8 square feet; bolt size = 16 * 12 = 192 square feet.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"192 - (24 + 8)\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total area of fabric used",
+              "EVIDENCE": "Ann cuts a 4 foot by 6 foot rectangle for the living room, and a 2 foot by 4 foot rectangle for the bedroom.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6) + (2*4)\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total area of fabric used and subtract it from the initial fabric area.",
+              "EVIDENCE": "The living room curtain is 4 feet by 6 feet, and the bedroom curtain is 2 feet by 4 feet. The bolt of fabric is 16 feet by 12 feet.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "PARTIAL_MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6 + 2*4) + (16*12 - (4*6 + 2*4))\"}}"
+            }
+          }
+        ],
+        "generation_errors": 2,
+        "tool_errors": 0,
+        "model_calls": 11,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Calculator result: 32",
+          "Calculator result: 160",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 160",
+          "Calculator result: 32",
+          "Calculator result: 32",
+          "Calculator result: 160",
+          "Calculator result: 32",
+          "Calculator result: 192"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 17,
+        "generated_tokens_including_psg": 2534,
+        "id": "2"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 5,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of books Nancy started with.",
+              "EVIDENCE": "Nancy shelved 12 history books, 8 romance books, and 4 poetry books from the top section, and 5 Western novels and 6 biographies from the bottom section. Half of the books on the bottom section were mystery books.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"12 + 8 + 4 + 5 + 6\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of books Nancy had on the cart initially.",
+              "EVIDENCE": "Top section: 12 history + 8 romance + 4 poetry = 24 books. Bottom section: half mystery, then 5 Western + 6 biographies = 11 books.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of books on the cart",
+              "EVIDENCE": "12 history books, 8 romance books, 4 poetry books, half the books on the bottom section were mystery books, 5 Western novels, and 6 biographies",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"12 + 8 + 4 + (5 + 6) * 2\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the total number of books on the cart",
+              "EVIDENCE": "Top section: 12 history + 8 romance + 4 poetry = 24 books. Bottom section: 5 Western + 6 biographies = 11 books. Mystery books are half of the bottom section, so 11 * 2 = 22 books.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"24 + 11 + 22\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of books Nancy had on the cart initially.",
+              "EVIDENCE": "Top section: 12 history + 8 romance + 4 poetry = 24 books. Bottom section: 5 Western + 6 biographies = 11 books. Total from both sections: 24 + 11 = 35 books.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"12 + 8 + 4 + 5 + 6\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the total number of books Nancy had on the cart initially.",
+              "EVIDENCE": "Top section: 12 history + 8 romance + 4 poetry = 24 books. Bottom section: 5 Western novels + 6 biographies = 11 books (half were mystery). Total = 24 + 11 + (11 * 2) = 57 books.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"24 + 11 + (11 * 2)\"}}"
+            }
+          }
+        ],
+        "generation_errors": 18,
+        "tool_errors": 0,
+        "model_calls": 24,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Calculator result: 35",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 46",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 57",
+          "Calculator result: 35",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 57",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 29,
+        "generated_tokens_including_psg": 3198,
+        "id": "8"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the number of free ice cream cones given away.",
+              "EVIDENCE": "Dan sold $100 worth of cones, and each cone costs $2.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"100 / 2\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the number of free ice cream cones given away.",
+              "EVIDENCE": "Dan sold $100 worth of cones at $2 each, and every sixth customer gets a free cone.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"100 / 2 = x; x / 5\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the number of free ice cream cones given away",
+              "EVIDENCE": "Dan sold $100 worth of $2 cones",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"100/2\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of free cones given away",
+              "EVIDENCE": "Sold $100 worth of cones, each cone costs $2",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"100/2\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of free cones given away",
+              "EVIDENCE": "Sold $100 worth of cones, each cone costs $2",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of free cones given away",
+              "EVIDENCE": "Dan sold $100 worth of cones and every sixth customer gets a free cone. Cones cost $2 each.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Determine the number of free ice cream cones given away.",
+              "EVIDENCE": "Sold $100 worth of cones at $2 each; every sixth customer gets a free cone.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"100/2*5\"}}"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the number of free ice cream cones given away",
+              "EVIDENCE": "Dan sold $100 worth of $2 cones",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"100/2\"}}"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Determine the number of free ice cream cones given away",
+              "EVIDENCE": "Sold $100 worth of cones, each cone costs $2",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"100/2\"}}"
+            }
+          }
+        ],
+        "generation_errors": 10,
+        "tool_errors": 1,
+        "model_calls": 19,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Calculator error: SyntaxError",
+          "Calculator result: 50",
+          "Calculator result: 50",
+          "Calculator result: 50",
+          "Calculator result: 250",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 250",
+          "Calculator result: 50",
+          "Calculator result: 50"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 25,
+        "generated_tokens_including_psg": 2705,
+        "id": "12"
+      },
+      {
+        "correct": false,
+        "loaded_skills": [],
+        "executed_actions": 0,
+        "failure": "PSG requires nonempty semantic anchors",
+        "model_calls": 0,
+        "model_calls_including_psg": 1,
+        "generated_tokens_including_psg": 133,
+        "id": "7"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 2,
+        "loaded_skills": [
+          "rates"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the time difference needed for the turtle to finish the race with a head start.",
+              "EVIDENCE": "The hare runs at 10 feet/second and the turtle at 1 foot/second over a 20-foot distance.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(20 / 1) - (20 / 10)\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the head start needed for the turtle to finish the race at the same time as the hare.",
+              "EVIDENCE": "Hare's speed = 10 ft/s, Turtle's speed = 1 ft/s, Race distance = 20 ft.",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the head start needed for the turtle to finish the race at the same time as the hare",
+              "EVIDENCE": "Hare runs 10 feet/second, turtle crawls 1 foot/second, race length is 20 feet",
+              "CAPABILITY": "rates",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"rates\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(20 / 1) - (20 / 10)\"}}"
+            }
+          }
+        ],
+        "generation_errors": 21,
+        "tool_errors": 0,
+        "model_calls": 24,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: rates; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 18",
+          "Calculator result: 18",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema."
+        ],
+        "correct": false,
+        "model_calls_including_psg": 30,
+        "generated_tokens_including_psg": 3275,
+        "id": "20"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 8,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple and green flowers based on given relationships.",
+              "EVIDENCE": "Yellow flowers = 10; Purple flowers = 10 + 80% of 10; Green flowers = 25% of (Yellow + Purple).",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple and green flowers based on the given information.",
+              "EVIDENCE": "Yellow flowers = 10, Purple flowers = 10 + 80% of 10, Green flowers = 25% of (Yellow + Purple)",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple flowers",
+              "EVIDENCE": "There are 10 yellow flowers and 80% more purple flowers than yellow",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple flowers",
+              "EVIDENCE": "Ten yellow flowers, 80% more purple than yellow",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple and green flowers",
+              "EVIDENCE": "Ten yellow flowers, 80% more purple than yellow, 25% as many green as yellow and purple combined",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple flowers",
+              "EVIDENCE": "Ten yellow flowers and 80% more purple than yellow",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple and green flowers.",
+              "EVIDENCE": "Yellow flowers = 10, Purple flowers = 10 + 80% of 10 = 18, Green flowers = 25% of (Yellow + Purple) = 25% of 28 = 7",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 6,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple flowers",
+              "EVIDENCE": "Ten yellow flowers, 80% more purple than yellow",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 7,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the number of purple flowers",
+              "EVIDENCE": "Ten yellow flowers and 80% more purple flowers",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          }
+        ],
+        "generation_errors": 5,
+        "tool_errors": 1,
+        "model_calls": 14,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator error: SyntaxError",
+          "Calculator result: 18",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 28",
+          "Calculator result: 35",
+          "Calculator result: 18",
+          "Calculator result: 35",
+          "Calculator result: 18",
+          "Calculator result: 18"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 20,
+        "generated_tokens_including_psg": 2676,
+        "id": "0"
+      },
+      {
+        "submitted_answer": null,
+        "executed_actions": 6,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "capability_checks": [
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the current volume of water in the aquarium",
+              "EVIDENCE": "The aquarium dimensions are 4 feet long, 6 feet wide, and 3 feet high. Initially, Nancy filled it halfway, then spilled half of it, and finally tripled the remaining amount.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6*3)/2*(1/2)*3\"}}"
+            }
+          },
+          {
+            "executed_actions": 0,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the final volume of water in the aquarium",
+              "EVIDENCE": "Aquarium dimensions are 4 feet long, 6 feet wide, and 3 feet high. It was filled halfway, spilled half, and then Nancy tripled the remaining water.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6*3/2)/2 * 3\"}}"
+            }
+          },
+          {
+            "executed_actions": 1,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the final volume of water in the aquarium",
+              "EVIDENCE": "Aquarium dimensions are 4 feet long, 6 feet wide, and 3 feet high. Nancy fills it halfway, then half is spilled, and finally, the amount is tripled.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6*3)/2 * 0.5 * 3\"}}"
+            }
+          },
+          {
+            "executed_actions": 2,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the final volume of water in the aquarium",
+              "EVIDENCE": "Aquarium dimensions are 4 feet long, 6 feet wide, and 3 feet high. Nancy fills it halfway, then half is spilled, and finally the amount is tripled.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"(4*6*3)/2*(1/2)*3\"}}"
+            }
+          },
+          {
+            "executed_actions": 3,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the final volume of water in the aquarium",
+              "EVIDENCE": "Aquarium dimensions are 4 feet long, 6 feet wide, and 3 feet high. Nancy fills it halfway, then half is spilled, and finally the amount is tripled.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "{\"skill_id\":\"arithmetic\",\"tool\":\"calculator\",\"arguments\":{\"expression\":\"4*6*3*0.5*0.5*3\"}}"
+            }
+          },
+          {
+            "executed_actions": 4,
+            "periodic_checkpoint": false,
+            "assessment": {
+              "SUBGOAL": "Calculate the final volume of water in the aquarium",
+              "EVIDENCE": "Aquarium dimensions are 4 feet long, 6 feet wide, and 3 feet high. It was filled halfway, then half spilled, and finally tripled.",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          },
+          {
+            "executed_actions": 5,
+            "periodic_checkpoint": true,
+            "assessment": {
+              "SUBGOAL": "Calculate the final volume of water in the aquarium",
+              "EVIDENCE": "Aquarium dimensions (4 ft x 6 ft x 3 ft), initial fill (1/2), spill (1/2 of 1/2), and refill (triple the remaining)",
+              "CAPABILITY": "arithmetic",
+              "DECISION": "MATCH",
+              "NEXT": "calculator"
+            }
+          }
+        ],
+        "generation_errors": 17,
+        "tool_errors": 0,
+        "model_calls": 24,
+        "observations": [
+          "Calculator ready; no reference answer is available.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Skill loaded: arithmetic; reread the procedure before selecting the next action.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 54",
+          "Calculator result: 54",
+          "Calculator result: 54",
+          "Calculator result: 54",
+          "Calculator result: 54",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Invalid JSON/capability assessment; no tool was executed. Follow the complete schema.",
+          "Calculator result: 54"
+        ],
+        "correct": false,
+        "model_calls_including_psg": 30,
+        "generated_tokens_including_psg": 3392,
+        "id": "5"
+      }
+    ]
+  },
+  "protocol": {
+    "dataset": {
+      "kind": "public-resource",
+      "public_id": "openai/grade-school-math",
+      "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+      "source_split": "train",
+      "official_test_opened": false,
+      "parent_partition": "validation",
+      "parent_partition_rows": 716,
+      "parent_partition_sha256": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7",
+      "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "transformation": "first 24 rows of the already verified train-derived validation partition; no question/answer transformation",
+      "files": {
+        "validation24.jsonl": "8f33a9f7a44067e362458e4daf0eb1ad629a2aac2f44ffefe731e36b19dcb8c1"
+      }
+    },
+    "raw_sha256": "8f33a9f7a44067e362458e4daf0eb1ad629a2aac2f44ffefe731e36b19dcb8c1",
+    "validation_ids": [
+      "13",
+      "1",
+      "4",
+      "6",
+      "23",
+      "21",
+      "14",
+      "15"
+    ],
+    "test_ids": [
+      "19",
+      "3",
+      "18",
+      "10",
+      "9",
+      "17",
+      "11",
+      "16",
+      "22",
+      "2",
+      "8",
+      "12",
+      "7",
+      "20",
+      "0",
+      "5"
+    ],
+    "checkpoint": {
+      "public_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "files": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "encoder": {
+      "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "files": {
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+      }
+    },
+    "selection": "fixed alpha=2, top_k and action budget specified before test; no test tuning",
+    "gold_visible_to_policy": false,
+    "original_skill_benchmark": false,
+    "environment": "actual AST arithmetic calculator; no model-code execution"
+  },
+  "limitations": [
+    "GSM8K and five local generic skills replace original executable skill benchmarks",
+    "this is a scaled live-interaction diagnostic, not SkillUsage/SkillNet-Gym capability proof",
+    "skill load rate alone is not task success; generation failures preserved as zero rewards"
+  ]
+}

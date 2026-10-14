@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "lewam",
+  "arxiv_id": "2610.12818",
+  "title": "LeWAM: End-to-End World and Action Modeling with JEPAs",
+  "paper_url": "https://arxiv.org/abs/2610.12818",
+  "organization": "UC San Diego / ETH Zurich / University of British Columbia / Brown University",
+  "published": "2026-10-08",
+  "upstream_code": "https://github.com/MinghaoFu/lewam",
+  "track": "llm",
+  "topics": [
+    "world-action-model",
+    "jepa",
+    "latent-planning"
+  ],
+  "local_code": "src/auto_research/reproductions/lewam",
+  "documentation": "docs/reproductions/2610.12818-lewam/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "LeWAM ToolHang public checkpoint and HDF5 trajectories"
+  ],
+  "baseline": "同checkpoint reactive policy / best-of-K / gradient planning",
+  "metrics": [
+    "variants.reactive.metrics",
+    "variants.best_of_k.metrics",
+    "variants.grad.metrics"
+  ],
+  "mechanisms": [
+    "无泄露MoT双分支",
+    "action flow + latent prediction + SIGReg",
+    "真实ToolHang闭环policy与latent planning"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.lewam.adapter",
+  "execution": {
+    "paper": {
+      "code_url": "https://github.com/MinghaoFu/lewam",
+      "organization": "UC San Diego / ETH Zurich / University of British Columbia / Brown University",
+      "published": "2026-10-08",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "原版50epoch训练未重执行",
+      "其余九环境及真实机器人",
+      "原始50episode/seed、32proposal规划预算"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "2episodes/seed, 4proposals, 5gradient updates",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oct13-lewam-a100.json"
+  }
+}

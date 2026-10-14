@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "adapter_key": "uxsid",
+  "validated_at": "2026-10-13",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_uxsid.py",
+    "--dataset-dir",
+    "data",
+    "--encoder-path",
+    "checkpoints/qwen2.5-0.5b",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--epochs",
+    "3",
+    "--batch-size",
+    "256",
+    "--max-history",
+    "256",
+    "--output",
+    "runs/uxsid-42"
+  ],
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "dataset": {
+    "public_id": "MovieLens-100K",
+    "revision": "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
+    "source": "https://raw.githubusercontent.com/rudrasingh21/Data-ML-100k-/f74a79d7debb00d39a8b757876b6b2038d52825c/ml-100k.zip",
+    "ratings_sha256": "06416e597f82b7342361e41163890c81036900f418ad91315590814211dca490",
+    "split": "per-user chronological leave-last-two; all observed earlier ratings form history",
+    "target": "observed rating >=4, not private advertising CTR/CTCVR",
+    "max_users": null,
+    "max_history": 256,
+    "counts": {
+      "train": 97171,
+      "validation": 943,
+      "test": 943
+    },
+    "split_sha256": {
+      "train": "bbbb05597525f5848477e0b15f2b79f131f79477b9afeadf6ceaf190267d2ab0",
+      "validation": "0abf4f475b2a086d883200825950199b38cd218e71d4dae6b3a7f57924c03b05",
+      "test": "5292f4cf5d57e25f07f9fe06e0d2e8c7b5b3e4e95a8c162a3c803bc2273bede5"
+    }
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "attributes_sha256": "ce151372e9dd2c836ec49d4f92fff3441af0f5190a13e9bde796a10e70cb0978",
+    "embedding_sha256": "4bacda328c9b162c1da0c0db1ba58a78749a28f88ec5288f2cb00f217f16def1",
+    "pooling": "attention-mask mean of final hidden state; no labels",
+    "modality": "public movie title + genre text; no private video frames"
+  },
+  "result": "passed",
+  "metrics": {
+    "global-only.test.roc_auc": {
+      "mean": 0.7412253851647791,
+      "std": 0.011335482665814661,
+      "n": 3
+    },
+    "global-only.test.pr_auc": {
+      "mean": 0.73018046065829,
+      "std": 0.015885035292695207,
+      "n": 3
+    },
+    "agnostic.test.roc_auc": {
+      "mean": 0.7404496539968911,
+      "std": 0.012986561328354651,
+      "n": 3
+    },
+    "agnostic.test.pr_auc": {
+      "mean": 0.7273193540411923,
+      "std": 0.01711517628537843,
+      "n": 3
+    },
+    "ungated.test.roc_auc": {
+      "mean": 0.7414159419507014,
+      "std": 0.01007520072994607,
+      "n": 3
+    },
+    "ungated.test.pr_auc": {
+      "mean": 0.732518632833696,
+      "std": 0.015293088012663244,
+      "n": 3
+    },
+    "uxsid.test.roc_auc": {
+      "mean": 0.7410243252489241,
+      "std": 0.010187892065929129,
+      "n": 3
+    },
+    "uxsid.test.pr_auc": {
+      "mean": 0.730906222119977,
+      "std": 0.014354753799343051,
+      "n": 3
+    },
+    "cache.max_abs_error": 0.0
+  },
+  "execution_checks": {
+    "completed_seeds": 3,
+    "retrained_variants_per_seed": 4,
+    "validation_selected_variants": [
+      "uxsid",
+      "global-only",
+      "global-only"
+    ],
+    "test_selection": false,
+    "cached_direct_parity_checked": true,
+    "production_latency_measured": false
+  },
+  "limitations": [
+    "Three-seed bounded mechanism diagnostic, not a stable capability/production gain claim.",
+    "Original-paper results are not copied into measured local metrics.",
+    "MovieLens observed-rating classification, not XLong/KuaiRec or advertising CTR.",
+    "Local text-only semantic encoding and explicit hybrid codebook replace private multimodal/LETTER protocol."
+  ],
+  "executed_source_sha256": {
+    "scripts/run_uxsid.py": "9356b7f287e5f8480a8c576b865d5e70660f3a2cbbd752168170f209a1f8648b",
+    "src/auto_research/reproductions/uxsid/model.py": "6c049eb95b6ff1990d1e33a69d441f9bbd22d71575f7bea9a7f6b1ff282b386a",
+    "src/auto_research/reproductions/uxsid/experiment.py": "ba3f7839321cbc8aedfe0b8ff3999d0c0dfe22a73ad3cdc1c89d1ab86fecb564",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/reproductions/forte/experiment.py": "f3d9541f29abf08e15af1aec36fd30f3a8b77794afb883c76f5ce7bb93d8f891",
+    "src/auto_research/datasets.py": "d763805cbee52957e72fa804f25a065905a22718b1324a576b7cf2fb11c06bce"
+  },
+  "provenance": {
+    "commit": "7e125fd08cd492bf69628c289309ba0b83c1e259",
+    "artifact_path": "docs/gpu-validations/uxsid-a100-20261013.json",
+    "metrics_artifact": "docs/reproductions/2605.09040-uxsid/metrics/public-a100-seeds42-44.json",
+    "checkpoint_committed": false
+  }
+}

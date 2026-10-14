@@ -1,0 +1,22 @@
+{
+  "domain": "agent-research",
+  "key": "skilldreamer",
+  "title": "Imagine Before Acting: Prospective Skill Identification for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2609.01642",
+  "detail_path": "reproductions/2609.01642-skilldreamer/README.md",
+  "topic": [
+    "skill-retrieval",
+    "prospective-reasoning",
+    "capability-aware-invocation"
+  ],
+  "first_author": "Shuo Liu",
+  "first_author_affiliation": "Sichuan University",
+  "published": "2026-08-28",
+  "priority": "P1",
+  "code": null,
+  "adapter": {
+    "spec_key": "skilldreamer"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct13-skilldreamer-a100.json"
+}

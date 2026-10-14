@@ -1,0 +1,15 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.13740",
+  "reviewed_version": "2610.13740v1",
+  "fulltext_url": "https://arxiv.org/html/2610.13740v1",
+  "figure_source": "https://arxiv.org/html/2610.13740v1#S2.F1",
+  "reviewed_on": "2026-10-13",
+  "first_published": "2026-10-09",
+  "code_url": "https://github.com/iitimii/SmolWAM",
+  "code_status": "author source pin inspected",
+  "local_boundary": [
+    "原版teacher targets缓存与5000step蒸馏未重执行",
+    "完整400episodes及Cosmos teacher对照",
+    "worldhead真实输出但未评真实future"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "paper": "2610.13264",
+  "version": "v1",
+  "retrieved_date": "2026-10-13",
+  "figures": [
+    {
+      "label": "Figure 3",
+      "caption_zh": "完整图像学生与共享正负视觉教师的对比蒸馏流程",
+      "source_page": "https://arxiv.org/html/2610.13264v1#S3.F3",
+      "source_url": "https://arxiv.org/html/2610.13264v1/fig2.png",
+      "file": "paper-figure-01.png",
+      "bytes": 420589,
+      "sha256": "e9a5d637223390b79851e3b5a62cf068651dac11b2c5cdba4c162809e9990a7f",
+      "transformation": "none; original PNG, despite its fig2.png filename the paper labels it Figure 3",
+      "visual_verified": true,
+      "visual_checks": ["student/positive/negative teacher labels intact", "JSD and discrepancy gate intact", "no clipped edges or labels"]
+    }
+  ],
+  "scope": "Original paper illustration, not a local GPU result. Do not use the different Vision-OPD PDF found in the author repository."
+}

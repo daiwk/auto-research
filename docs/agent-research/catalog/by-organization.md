@@ -372,8 +372,14 @@
 
 - 2026-08-27 · 一作：Hanchong Chen · [When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems](../2608.26895-covemem/README.md)（`covemem`）：文本记忆要反复调用 LLM 重写，且丢掉全目录协同几何。CoVeMem 用冻结 LightGCN 状态构造 bank，由当前候选集检索相关历史，投影成 soft token，并通过语义对齐和 masked listwise 联训让 LLM 真正读取记忆。
 
+## Sichuan University
+
+- 2026-08-28 · 一作：Shuo Liu · [Imagine Before Acting: Prospective Skill Identification for LLM Agents](../../reproductions/2609.01642-skilldreamer/README.md)（`skilldreamer`）：任务描述主要说目标，技能文档主要写程序性知识。直接相似度容易优先找到背景相近、但不能解决当前能力缺口的技能；检索到了也未必会在执行时调用。
+
 ## Southeast University
 
+- 2026-10-09 · 一作：Han Luo · [Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence](../../reproductions/2610.13277-beyond-final-embedding/README.md)（`beyond-final-embedding`）：最终 pooled embedding 会丢掉局部事实线索，但冻结 embedding encoder 的最后层 token states 已经含有上下文证据。论文保留内容 token（排除 query prefix、special tokens 和 padding），离线给每条 token 绑定原 memory ID。
+- 2026-10-09 · 一作：Han Luo · [NEAR: Neighborhood-Aware Residuals for Memory Retrieval](../../reproductions/2610.13314-near/README.md)（`near`）：记忆记录往往共享人名、话题和事件。共享内容会让无关证据的整体 embedding 高于真正包含事实的记录。
 - 2026-10-02 · 一作：Yu Li · [Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents](../2610.03634-depgpo/README.md)（`depgpo`）：终端 Agent 通常只拿到任务结束后的 verifier 奖励。GRPO 把同一条轨迹的优势分给所有生成 token，无法区分真正生成答案的命令、为其提供数据的读取，以及后来被覆盖或无关的操作。
 
 ## Stanford University

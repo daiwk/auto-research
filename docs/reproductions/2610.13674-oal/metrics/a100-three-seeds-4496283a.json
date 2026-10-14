@@ -1,0 +1,371 @@
+{
+  "paper": "2610.13674",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_commit": "4496283ac8e37c070b8f71b20af6138526cbba15",
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "device": "cuda",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "formal_comparison": false,
+  "metrics": {
+    "softmax_test_ppl": {
+      "mean": 43.493385911606055,
+      "sample_std": 0.5466455246313341
+    },
+    "oal_test_ppl": {
+      "mean": 42.21174510332888,
+      "sample_std": 1.0777510153027128
+    },
+    "softmax_test_nll": {
+      "mean": 3.77255646387736,
+      "sample_std": 0.012525278719127711
+    },
+    "oal_test_nll": {
+      "mean": 3.742480516433716,
+      "sample_std": 0.025592865795155528
+    },
+    "oal_validation_output_mse_mean": 0.030467448756098747,
+    "global_validation_output_mse_mean": 0.04205557331442833,
+    "recurrent_dense_max_error_max": 1.2814998626708984e-06,
+    "softmax_parameter_delta_l2_mean": 0.7806260585784912,
+    "oal_parameter_delta_l2_mean": 0.7760411898295084
+  },
+  "evaluation_tier": "l1_mechanism",
+  "fidelity": "core_mechanism",
+  "checkpoint": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "files_sha256": {
+      "config.json": "479dcf0c5286339e41ad3992cd08ae88a467c4187587936248e2b7c96283484b",
+      "generation_config.json": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model.safetensors": "88c142557820ccad55bb59756bfcfcf891de9cc6202816bd346445188a0ed342",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "dataset": {
+    "id": "Salesforce/wikitext",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "configuration": "wikitext-2-raw-v1",
+    "all_actual_input_hashes_verified": true,
+    "split_hashes": {
+      "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+      "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+      "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+    }
+  },
+  "protocol": {
+    "id": "oal-qwen2.5-base-wikitext2-small-block-v1",
+    "steps_per_candidate": 3,
+    "calibration_steps_per_initialization": 10,
+    "calibration_initializations": 3,
+    "global_calibration_steps": 10,
+    "sequence_length": 32,
+    "converted_layers": [
+      4
+    ],
+    "bootstrap_replicates": 64,
+    "train_blocks": 16,
+    "grouping_train_blocks": 4,
+    "calibration_train_blocks": 4,
+    "adaptation_train_blocks": 8,
+    "validation_blocks": 2,
+    "test_blocks": 2,
+    "lora": {
+      "rank": 8,
+      "alpha": 16,
+      "dropout": 0.05,
+      "projections": "q/k/v/o in all layers"
+    },
+    "test_isolated_from_selection": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "softmax_test_ppl": 44.121902313940375,
+      "oal_test_ppl": 41.07818607477422,
+      "softmax_test_nll": 3.786956310272217,
+      "oal_test_nll": 3.715477228164673,
+      "softmax_parameter_delta_l2": 0.7798302173614502,
+      "oal_parameter_delta_l2": 0.7767224907875061,
+      "oal_validation_output_mse": 0.03053223341703415,
+      "global_validation_output_mse": 0.04205557331442833,
+      "recurrent_dense_max_error": 1.1771917343139648e-06
+    },
+    {
+      "seed": 43,
+      "softmax_test_ppl": 43.229592337624766,
+      "oal_test_ppl": 42.333743550593795,
+      "softmax_test_nll": 3.7665252685546875,
+      "oal_test_nll": 3.745584487915039,
+      "softmax_parameter_delta_l2": 0.7835220694541931,
+      "oal_parameter_delta_l2": 0.7786442637443542,
+      "oal_validation_output_mse": 0.03049851395189762,
+      "global_validation_output_mse": 0.04205557331442833,
+      "recurrent_dense_max_error": 1.1771917343139648e-06
+    },
+    {
+      "seed": 44,
+      "softmax_test_ppl": 43.128663083253024,
+      "oal_test_ppl": 43.223305684618616,
+      "softmax_test_nll": 3.764187812805176,
+      "oal_test_nll": 3.7663798332214355,
+      "softmax_parameter_delta_l2": 0.7785258889198303,
+      "oal_parameter_delta_l2": 0.772756814956665,
+      "oal_validation_output_mse": 0.03037159889936447,
+      "global_validation_output_mse": 0.04205557331442833,
+      "recurrent_dense_max_error": 1.2814998626708984e-06
+    }
+  ],
+  "aggregate": {
+    "softmax_test_ppl": {
+      "mean": 43.493385911606055,
+      "sample_std": 0.5466455246313341
+    },
+    "oal_test_ppl": {
+      "mean": 42.21174510332888,
+      "sample_std": 1.0777510153027128
+    },
+    "softmax_test_nll": {
+      "mean": 3.77255646387736,
+      "sample_std": 0.012525278719127711
+    },
+    "oal_test_nll": {
+      "mean": 3.742480516433716,
+      "sample_std": 0.025592865795155528
+    },
+    "softmax_parameter_delta_l2": {
+      "mean": 0.7806260585784912,
+      "sample_std": 0.0025914238200345414
+    },
+    "oal_parameter_delta_l2": {
+      "mean": 0.7760411898295084,
+      "sample_std": 0.003002272731355724
+    },
+    "oal_validation_output_mse": {
+      "mean": 0.030467448756098747,
+      "sample_std": 8.470328718095468e-05
+    },
+    "global_validation_output_mse": {
+      "mean": 0.04205557331442833,
+      "sample_std": 0
+    },
+    "recurrent_dense_max_error": {
+      "mean": 1.2119611104329426e-06,
+      "sample_std": 6.022232598554165e-08
+    }
+  },
+  "standard_deviation": "sample standard deviation (n-1)",
+  "raw_files_sha256": {
+    "oal-seed42.json": "1345cc3786709e80f649b64b45c53630b9110fc4afc1a9c90dad2d2144630f18",
+    "oal-seed42.status.json": "e62b870101cd126409b3212b488f38fea3a254eea81b24b2cef668b765ba9ba0",
+    "oal-seed42.stdout.log": "cac783a0c2aafef2f712be4112d09ea9097fdda60615134707351f524ff2f298",
+    "oal-seed42.stderr.log": "7c75967c5bd2259c1fcb0f458902adfdb7223e4320d4621904989a3d40a81961",
+    "oal-seed43.json": "c27ca8f1a59543e1bd133593098389bdbe078f2f44b84a5e166ca7417215d3ec",
+    "oal-seed43.status.json": "32ac8b93303b71db227a0ea289174ec497fcfd4f58284ae52f181f357f9ba1a1",
+    "oal-seed43.stdout.log": "51f9024c5f49f8275288b90c4d1a5ea42c480be7c9faf23a314486643a3dfbb1",
+    "oal-seed43.stderr.log": "c0b9b15d9d67e220185ef851021437a1b0a5f147e12a66f17edeb7aa5fe035a6",
+    "oal-seed44.json": "1fdd6cd5803cca4924fb236979d7dc48a5ba1d6a6e4838d032f6caab445f7b26",
+    "oal-seed44.status.json": "6286158e864ebb326ade0c0a07dc76fd4dbb07ccbd9af996270b41df2124bf02",
+    "oal-seed44.stdout.log": "b1f8c73c20676f58e432bacc42f32933ade909c4e6686034162024daab30c649",
+    "oal-seed44.stderr.log": "54b2c9b7cc1e1d3290406ee6b668e64547e1191b1a8ce8fd46cbcb8daf646301"
+  },
+  "negative_result": "Seed 44 OAL test PPL 43.2233056846 is worse than matched softmax+LoRA 43.1286630833. Three seeds on two 32-token test blocks do not establish a capability improvement.",
+  "gpu_validation_completed": true,
+  "limitations": [
+    "small WikiText-2 block diagnostic, not author WikiText-103/512-step protocol",
+    "one intermediate converted layer, not full layers 3..20",
+    "dense exact-kernel adaptation with separately verified recurrent equivalence, not a native serving backend",
+    "no latency/bandwidth or downstream capability claim"
+  ],
+  "schema_version": 2,
+  "manifest": {
+    "adapter_key": "oal",
+    "arxiv_id": "2610.13674",
+    "title": "Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels",
+    "paper_url": "https://arxiv.org/abs/2610.13674",
+    "track": "llm",
+    "organization": "The Chinese University of Hong Kong, Shenzhen / Beijing Normal University, Zhuhai / National University of Singapore",
+    "published": "2026-10-09",
+    "code_url": "https://github.com/wuqianyue09/OAL",
+    "topics": [
+      "推理与系统效率",
+      "注意力线性化"
+    ],
+    "local_code_dir": "src/auto_research/reproductions/oal",
+    "fidelity": "core_mechanism",
+    "evaluation_tier": "l1_mechanism",
+    "datasets": [
+      "Salesforce/wikitext wikitext-2-raw-v1"
+    ],
+    "baseline": "same fixed Qwen2.5-0.5B Base with identical q/k/v/o LoRA budget; learned global quadratic calibration",
+    "metrics": [
+      "oal_lora.test_nll",
+      "softmax_lora.test_nll",
+      "parameter_delta_l2",
+      "validation_output_mse"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded diagnostic; explicit local CLI config",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/oal-a100-20261013.json",
+    "online_evidence": [],
+    "selection_exception": null,
+    "evolve_operators": []
+  },
+  "provenance": {
+    "created_at": "2026-10-13T17:11:54.066247+00:00",
+    "code_commit": "4496283ac8e37c070b8f71b20af6138526cbba15",
+    "dataset_id": "Salesforce/wikitext",
+    "dataset_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "dataset_fingerprint": "e2c74e281100a8f303b124560bb0261a773bd331d6f2a45c61b2dd10a244df0a",
+    "dataset_fingerprint_kind": "SHA256 of canonical JSON of verified actual split hashes",
+    "raw_files_sha256": {
+      "oal-seed42.json": "1345cc3786709e80f649b64b45c53630b9110fc4afc1a9c90dad2d2144630f18",
+      "oal-seed42.status.json": "e62b870101cd126409b3212b488f38fea3a254eea81b24b2cef668b765ba9ba0",
+      "oal-seed42.stdout.log": "cac783a0c2aafef2f712be4112d09ea9097fdda60615134707351f524ff2f298",
+      "oal-seed42.stderr.log": "7c75967c5bd2259c1fcb0f458902adfdb7223e4320d4621904989a3d40a81961",
+      "oal-seed43.json": "c27ca8f1a59543e1bd133593098389bdbe078f2f44b84a5e166ca7417215d3ec",
+      "oal-seed43.status.json": "32ac8b93303b71db227a0ea289174ec497fcfd4f58284ae52f181f357f9ba1a1",
+      "oal-seed43.stdout.log": "51f9024c5f49f8275288b90c4d1a5ea42c480be7c9faf23a314486643a3dfbb1",
+      "oal-seed43.stderr.log": "c0b9b15d9d67e220185ef851021437a1b0a5f147e12a66f17edeb7aa5fe035a6",
+      "oal-seed44.json": "1fdd6cd5803cca4924fb236979d7dc48a5ba1d6a6e4838d032f6caab445f7b26",
+      "oal-seed44.status.json": "6286158e864ebb326ade0c0a07dc76fd4dbb07ccbd9af996270b41df2124bf02",
+      "oal-seed44.stdout.log": "b1f8c73c20676f58e432bacc42f32933ade909c4e6686034162024daab30c649",
+      "oal-seed44.stderr.log": "54b2c9b7cc1e1d3290406ee6b668e64547e1191b1a8ce8fd46cbcb8daf646301"
+    },
+    "sanitized": true,
+    "artifact_path": "docs/reproductions/2610.13674-oal/metrics/a100-three-seeds-4496283a.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism_diagnostic",
+    "tier_label": "L1 机制诊断（非正式能力比较）",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "one converted layer; 3 matched LoRA updates; 10 calibration steps/initialization; 32-token blocks; 64 bootstrap replicates",
+    "test_isolated": true,
+    "policy_version": 1,
+    "diagnostic_only": true,
+    "formal_comparison": false,
+    "claim_policy": "not a formal capability comparison; capability_tier_not_established; comparison_contract_missing; diagnostic_or_ineligible; mechanism_or_contract_only; test_isolation_not_established",
+    "eligibility_reasons": [
+      "capability_tier_not_established",
+      "comparison_contract_missing",
+      "diagnostic_or_ineligible",
+      "mechanism_or_contract_only",
+      "test_isolation_not_established"
+    ]
+  },
+  "seed_results": [
+    {
+      "seed": 42,
+      "softmax_test_ppl": 44.121902313940375,
+      "oal_test_ppl": 41.07818607477422,
+      "softmax_test_nll": 3.786956310272217,
+      "oal_test_nll": 3.715477228164673,
+      "softmax_parameter_delta_l2": 0.7798302173614502,
+      "oal_parameter_delta_l2": 0.7767224907875061,
+      "oal_validation_output_mse": 0.03053223341703415,
+      "global_validation_output_mse": 0.04205557331442833,
+      "recurrent_dense_max_error": 1.1771917343139648e-06
+    },
+    {
+      "seed": 43,
+      "softmax_test_ppl": 43.229592337624766,
+      "oal_test_ppl": 42.333743550593795,
+      "softmax_test_nll": 3.7665252685546875,
+      "oal_test_nll": 3.745584487915039,
+      "softmax_parameter_delta_l2": 0.7835220694541931,
+      "oal_parameter_delta_l2": 0.7786442637443542,
+      "oal_validation_output_mse": 0.03049851395189762,
+      "global_validation_output_mse": 0.04205557331442833,
+      "recurrent_dense_max_error": 1.1771917343139648e-06
+    },
+    {
+      "seed": 44,
+      "softmax_test_ppl": 43.128663083253024,
+      "oal_test_ppl": 43.223305684618616,
+      "softmax_test_nll": 3.764187812805176,
+      "oal_test_nll": 3.7663798332214355,
+      "softmax_parameter_delta_l2": 0.7785258889198303,
+      "oal_parameter_delta_l2": 0.772756814956665,
+      "oal_validation_output_mse": 0.03037159889936447,
+      "global_validation_output_mse": 0.04205557331442833,
+      "recurrent_dense_max_error": 1.2814998626708984e-06
+    }
+  ],
+  "aggregate_metrics": {
+    "softmax_test_ppl": {
+      "mean": 43.493385911606055,
+      "std": 0.5466455246313341,
+      "ci95": 0.6185876439625217,
+      "n": 3
+    },
+    "oal_test_ppl": {
+      "mean": 42.21174510332887,
+      "std": 1.0777510153027128,
+      "ci95": 1.2195900840566507,
+      "n": 3
+    },
+    "softmax_test_nll": {
+      "mean": 3.77255646387736,
+      "std": 0.012525278719127711,
+      "ci95": 0.01417368715872041,
+      "n": 3
+    },
+    "oal_test_nll": {
+      "mean": 3.742480516433716,
+      "std": 0.025592865795155528,
+      "ci95": 0.02896105399408734,
+      "n": 3
+    },
+    "softmax_parameter_delta_l2": {
+      "mean": 0.7806260585784912,
+      "std": 0.0025914238200345414,
+      "ci95": 0.0029324721105594477,
+      "n": 3
+    },
+    "oal_parameter_delta_l2": {
+      "mean": 0.7760411898295084,
+      "std": 0.003002272731355724,
+      "ci95": 0.0033973914204726446,
+      "n": 3
+    },
+    "oal_validation_output_mse": {
+      "mean": 0.030467448756098747,
+      "std": 8.470328718095468e-05,
+      "ci95": 9.585079268413391e-05,
+      "n": 3
+    },
+    "global_validation_output_mse": {
+      "mean": 0.04205557331442833,
+      "std": 0,
+      "ci95": 0,
+      "n": 3
+    },
+    "recurrent_dense_max_error": {
+      "mean": 1.2119611104329426e-06,
+      "std": 6.022232598554165e-08,
+      "ci95": 6.814797719319663e-08,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:oal"
+}

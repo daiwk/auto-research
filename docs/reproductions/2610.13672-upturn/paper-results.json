@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "adapter_key": "upturn",
+  "paper_url": "https://arxiv.org/abs/2610.13672",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "原position head为LayerNorm-1024→128→1（133377参数），gate约66K。DAPO训练30步，N/G/M均8、8192 token。UPTURN@16对照Base@32，4个冻结reasoner、6个数学benchmark；Qwen3-4B AIME24平均准确率32.6%→50.8%。未报告生产线上A/B。",
+  "metrics": {
+    "qwen3_4b_aime24_base_avg_percent": 32.6,
+    "qwen3_4b_aime24_upturn_avg_percent": 50.8,
+    "position_head_parameters": 133377,
+    "gate_threshold": 0.4
+  }
+}

@@ -4,7 +4,7 @@
 打包的 `paper.yaml` 和按领域保存的 catalog 规格，不直接编辑生成产物。
 背景、架构、公式、原文效果和本地实验请进入独立详情页。
 
-## 已实现论文与资料
+## 论文实现与研究资料
 
 <div class="ar-method-index" markdown>
 
@@ -168,6 +168,7 @@
 | 生成、排序与冷启动 | [Towards Sustainable Growth: A Multi-Value-Aware Retrieval Framework for E-Commerce Search](../2605.17994-growthgr/README.md) | Alibaba Group / Taobao & Tmall，2026-05-18 | 未发现官方代码 | `growthgr` |
 | 生成、排序与冷启动 | [Policy-Grounded Dynamic Facet Suggestions for Job Search](../2605.16479-policy-facet/README.md) | LinkedIn，2026-05-15 | 未发现官方代码 | `policy-facet` |
 | 生成、排序与冷启动 | [Efficient Generative Retrieval for E-commerce Search with Semantic Cluster IDs and Expert-Guided RL](../2605.14434-cq-sid/README.md) | Alibaba Taobao & Tmall Group，2026-05-14 | 未发现官方代码 | `cq-sid` |
+| 生成、排序与冷启动 | [UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence](../2605.09040-uxsid/README.md) | Kuaishou，2026-05-09 | 未发现官方代码 | `uxsid` |
 | 多阶段排序与混排 | [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../2605.16344-prl-puts/README.md) | Pinterest，2026-05-08 | 未发现官方代码 | `prl-puts` |
 | 训练目标与决策优化 | [Bridging Passive and Active: Enhancing Conversation Starter Recommendation via Active Expression Modeling](../2605.05855-pa-bridge/README.md) | ByteDance，2026-05-07 | 未发现官方代码 | `pa-bridge` |
 | 生成、排序与冷启动 | [Effective Knowledge Transfer for Multi-Task Recommendation Models](../2605.05730-ektm/README.md) | Huawei Technologies，2026-05-07 | 未发现官方代码 | `ektm` |

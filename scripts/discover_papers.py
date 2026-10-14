@@ -17,7 +17,9 @@ from auto_research.discovery import (
     triage_candidates,
     merge_external_candidates,
     paper_is_in_window,
+    repository_paper_versions,
 )
+from auto_research.discovery_announcements import discover_announcements
 from auto_research.discovery_sources import (
     DiscoverySource, catalog_papers_from_manifest, discover_external, load_sources,
     load_source_snapshots, official_review_queue,
@@ -41,7 +43,11 @@ def effective_start_date(
     """
     if announcement_overlap_days < 0:
         raise ValueError("announcement-overlap-days must be non-negative")
-    return requested_start - dt.timedelta(days=announcement_overlap_days)
+    start = requested_start - dt.timedelta(days=announcement_overlap_days)
+    if announcement_overlap_days:
+        while start.weekday() >= 5:
+            start -= dt.timedelta(days=1)
+    return start
 
 
 def external_paper_in_window(
@@ -94,6 +100,10 @@ def main() -> int:
     parser.add_argument("--github-actions", action="store_true")
     parser.add_argument("--manifest", default="docs/research-manifest.json")
     parser.add_argument("--ledger", default="docs/paper-discovery-ledger.json")
+    parser.add_argument("--reviewed-versions", type=Path,
+                        default=Path("docs/paper-discovery-versions.json"))
+    parser.add_argument("--skip-announcements", action="store_true",
+                        help="disable the independent bulletin channel explicitly; coverage is reported separately")
     parser.add_argument(
         "--arxiv-cache-dir", type=Path,
         default=Path(".cache/paper-discovery/arxiv"),
@@ -145,6 +155,12 @@ def main() -> int:
     )
     source_failures = []
     source_stats = []
+    announcement_reports = []
+    if not args.skip_announcements:
+        bulletin, provenance, announcement_reports = discover_announcements(
+            track=args.track, start_date=start_date, end_date=args.end_date, client=client,
+        )
+        papers = merge_external_candidates(papers, bulletin, provenance)
     if args.cross_source_config or args.author_page or args.github_page or args.snowball_seeds:
         sources = (
             list(load_sources(args.cross_source_config, args.track))
@@ -174,7 +190,9 @@ def main() -> int:
         )]
         papers = merge_external_candidates(papers, external, provenance)
     statuses = repository_paper_statuses(Path(args.manifest), Path(args.ledger))
-    candidates = triage_candidates(papers, statuses)
+    candidates = triage_candidates(
+        papers, statuses, repository_versions=repository_paper_versions(args.reviewed_versions),
+    )
     payload = build_discovery_payload(
         track=args.track,
         start_date=start_date,
@@ -188,6 +206,15 @@ def main() -> int:
     }
     payload["announcement_overlap_days"] = args.announcement_overlap_days
     payload["recall_mode"] = args.recall_mode
+    payload["announcements"] = {
+        "enabled": not args.skip_announcements,
+        "sources": announcement_reports,
+        "coverage_complete": bool(announcement_reports) and all(
+            row.get("coverage_complete") for row in announcement_reports
+        ),
+        "review_complete": False,
+        "watermark_eligible": False,
+    }
     review_queue = official_review_queue(
         source_stats, start_date=start_date, end_date=args.end_date,
     )

@@ -1,0 +1,761 @@
+{
+  "schema_version": 2,
+  "adapter_key": "grpo-difficulty-curriculum",
+  "manifest_ref": "reproduction:grpo-difficulty-curriculum",
+  "method": "grpo-difficulty-curriculum",
+  "measured_locally": true,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "not_gpu_receipt": true,
+  "whole_method_gpu_validation_passed": false,
+  "seeds": [
+    42,
+    43
+  ],
+  "seed_results": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "variants": {
+        "A100.too-hard": {
+          "raw_sha256": "00242a21ba68dc59e5468af3ae570ac715563290756141f50bd8e8b89465bf46",
+          "source_commit": "6aabe57a97ec3a586aac7aeea66128750f9441da",
+          "seed": 42,
+          "variant": "too-hard",
+          "raw_reported_optimizer_updates": 11,
+          "mathematically_equal_reward_optimizer_updates": 0,
+          "equal_reward_group_audits": [],
+          "no_salvage_by_filtering": true,
+          "accelerator_model": "A100",
+          "invocation_elapsed_seconds": 555.9015793707222,
+          "raw_execution_status": "passed",
+          "genuine_reward_varying_optimizer_calls": 11,
+          "corrected_source_validation_still_required": true
+        },
+        "A100.fixed-medium": {
+          "raw_sha256": "49b6015c9161672607353e73c8c9d8d0625c1da2354ffd29a36a2694787fc469",
+          "source_commit": "6aabe57a97ec3a586aac7aeea66128750f9441da",
+          "seed": 42,
+          "variant": "fixed-medium",
+          "raw_reported_optimizer_updates": 8,
+          "mathematically_equal_reward_optimizer_updates": 0,
+          "equal_reward_group_audits": [],
+          "no_salvage_by_filtering": true,
+          "accelerator_model": "A100",
+          "invocation_elapsed_seconds": 538.1836995203048,
+          "raw_execution_status": "passed",
+          "genuine_reward_varying_optimizer_calls": 8,
+          "corrected_source_validation_still_required": true
+        },
+        "A100.staged": {
+          "raw_sha256": "26b59149c4c36cf60cc9ca900042f82ebe37cf9c96c5b40f49bcafaeda9740e0",
+          "source_commit": "6aabe57a97ec3a586aac7aeea66128750f9441da",
+          "seed": 42,
+          "variant": "staged",
+          "raw_reported_optimizer_updates": 9,
+          "mathematically_equal_reward_optimizer_updates": 0,
+          "equal_reward_group_audits": [],
+          "no_salvage_by_filtering": true,
+          "accelerator_model": "A100",
+          "invocation_elapsed_seconds": 562.0409296359867,
+          "raw_execution_status": "passed",
+          "genuine_reward_varying_optimizer_calls": 9,
+          "corrected_source_validation_still_required": true
+        },
+        "A30.unfiltered": {
+          "raw_sha256": "ed5fe3718ab76e367a848374b630ecea34dbc2406c81b9d9e898d8a4be46462b",
+          "source_commit": "51b4718a76da286b4111c6fc7d8e003d436def72",
+          "seed": 42,
+          "variant": "unfiltered",
+          "raw_reported_optimizer_updates": 32,
+          "mathematically_equal_reward_optimizer_updates": 12,
+          "equal_reward_group_audits": [
+            {
+              "step": 1,
+              "training_row": 0,
+              "equal_reward": 1.2,
+              "actual_advantages": [
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125
+              ],
+              "gradient_l2_norm": 0.024663517251610756
+            },
+            {
+              "step": 1,
+              "training_row": 2,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.004424100276082754
+            },
+            {
+              "step": 1,
+              "training_row": 4,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.003542511723935604
+            },
+            {
+              "step": 1,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0038890589494258165
+            },
+            {
+              "step": 2,
+              "training_row": 4,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.003441296750679612
+            },
+            {
+              "step": 2,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0036837204825133085
+            },
+            {
+              "step": 2,
+              "training_row": 7,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0038898964412510395
+            },
+            {
+              "step": 3,
+              "training_row": 0,
+              "equal_reward": 1.2,
+              "actual_advantages": [
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125
+              ],
+              "gradient_l2_norm": 0.0224381722509861
+            },
+            {
+              "step": 3,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.004224193282425404
+            },
+            {
+              "step": 3,
+              "training_row": 7,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0040555112063884735
+            },
+            {
+              "step": 4,
+              "training_row": 4,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0036645210348069668
+            },
+            {
+              "step": 4,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.004634507931768894
+            }
+          ],
+          "no_salvage_by_filtering": true,
+          "accelerator_model": "A30",
+          "invocation_elapsed_seconds": 640.8192978836596,
+          "raw_execution_status": "passed",
+          "genuine_reward_varying_optimizer_calls": 20,
+          "corrected_source_validation_still_required": true
+        },
+        "A30.static": {
+          "raw_sha256": "6501f55be3d888c295b08e35e66ff59ae4c37f0807614209ecb04e258fe3f890",
+          "source_commit": "51b4718a76da286b4111c6fc7d8e003d436def72",
+          "seed": 42,
+          "variant": "static",
+          "raw_reported_optimizer_updates": 8,
+          "mathematically_equal_reward_optimizer_updates": 3,
+          "equal_reward_group_audits": [
+            {
+              "step": 1,
+              "training_row": 0,
+              "equal_reward": 1.2,
+              "actual_advantages": [
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125
+              ],
+              "gradient_l2_norm": 0.024663517251610756
+            },
+            {
+              "step": 4,
+              "training_row": 4,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.003953105770051479
+            },
+            {
+              "step": 4,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.003424643538892269
+            }
+          ],
+          "no_salvage_by_filtering": true,
+          "accelerator_model": "A30",
+          "invocation_elapsed_seconds": 645.0610911920667,
+          "raw_execution_status": "passed",
+          "genuine_reward_varying_optimizer_calls": 5,
+          "corrected_source_validation_still_required": true
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "variants": {
+        "A30.unfiltered": {
+          "raw_sha256": "3af3d34da4cc385d2546d579ab1fada56579f541679c81b14165da0280f6fbca",
+          "source_commit": "51b4718a76da286b4111c6fc7d8e003d436def72",
+          "seed": 43,
+          "variant": "unfiltered",
+          "raw_reported_optimizer_updates": 32,
+          "mathematically_equal_reward_optimizer_updates": 13,
+          "equal_reward_group_audits": [
+            {
+              "step": 1,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0038134760688990355
+            },
+            {
+              "step": 1,
+              "training_row": 7,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0035206249449402094
+            },
+            {
+              "step": 2,
+              "training_row": 2,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.003118375316262245
+            },
+            {
+              "step": 2,
+              "training_row": 4,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0041674464009702206
+            },
+            {
+              "step": 2,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.004254941362887621
+            },
+            {
+              "step": 2,
+              "training_row": 7,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0036626975052058697
+            },
+            {
+              "step": 3,
+              "training_row": 2,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0033781263045966625
+            },
+            {
+              "step": 3,
+              "training_row": 4,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0217344518750906
+            },
+            {
+              "step": 3,
+              "training_row": 7,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.003388064680621028
+            },
+            {
+              "step": 4,
+              "training_row": 0,
+              "equal_reward": 1.2,
+              "actual_advantages": [
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125
+              ],
+              "gradient_l2_norm": 0.027055349200963974
+            },
+            {
+              "step": 4,
+              "training_row": 5,
+              "equal_reward": 1.2,
+              "actual_advantages": [
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125,
+                0.11920928955078125
+              ],
+              "gradient_l2_norm": 0.027287984266877174
+            },
+            {
+              "step": 4,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0037369253113865852
+            },
+            {
+              "step": 4,
+              "training_row": 7,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0034153396263718605
+            }
+          ],
+          "no_salvage_by_filtering": true,
+          "accelerator_model": "A30",
+          "invocation_elapsed_seconds": 679.9004967920482,
+          "raw_execution_status": "passed",
+          "genuine_reward_varying_optimizer_calls": 19,
+          "corrected_source_validation_still_required": true
+        },
+        "A30.fixed-medium": {
+          "raw_sha256": "0470c03cc249c1ff3c128eeb22700b8dd5234076cdfc8caf494143cce89b8065",
+          "source_commit": "51b4718a76da286b4111c6fc7d8e003d436def72",
+          "seed": 43,
+          "variant": "fixed-medium",
+          "raw_reported_optimizer_updates": 6,
+          "mathematically_equal_reward_optimizer_updates": 0,
+          "equal_reward_group_audits": [],
+          "no_salvage_by_filtering": true,
+          "accelerator_model": "A30",
+          "invocation_elapsed_seconds": 667.6038201376796,
+          "raw_execution_status": "passed",
+          "genuine_reward_varying_optimizer_calls": 6,
+          "corrected_source_validation_still_required": true
+        },
+        "A30.static": {
+          "raw_sha256": "11792c483f79df10ab211873e175e8c6186e7967f804dc91c32cb6cd89dabbeb",
+          "source_commit": "51b4718a76da286b4111c6fc7d8e003d436def72",
+          "seed": 43,
+          "variant": "static",
+          "raw_reported_optimizer_updates": 8,
+          "mathematically_equal_reward_optimizer_updates": 2,
+          "equal_reward_group_audits": [
+            {
+              "step": 4,
+              "training_row": 6,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0038434702437371016
+            },
+            {
+              "step": 4,
+              "training_row": 7,
+              "equal_reward": 0.2,
+              "actual_advantages": [
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656,
+                -0.014901161193847656
+              ],
+              "gradient_l2_norm": 0.0035347207449376583
+            }
+          ],
+          "no_salvage_by_filtering": true,
+          "accelerator_model": "A30",
+          "invocation_elapsed_seconds": 664.4766422882676,
+          "raw_execution_status": "passed",
+          "genuine_reward_varying_optimizer_calls": 6,
+          "corrected_source_validation_still_required": true
+        }
+      }
+    }
+  ],
+  "aggregate_metrics": {
+    "A100.too-hard.s42.mathematically_equal_reward_optimizer_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 1
+    },
+    "A100.fixed-medium.s42.mathematically_equal_reward_optimizer_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 1
+    },
+    "A100.staged.s42.mathematically_equal_reward_optimizer_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 1
+    },
+    "A30.unfiltered.s42.mathematically_equal_reward_optimizer_calls": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 1
+    },
+    "A30.static.s42.mathematically_equal_reward_optimizer_calls": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 1
+    },
+    "A30.unfiltered.s43.mathematically_equal_reward_optimizer_calls": {
+      "mean": 13,
+      "std": 0.0,
+      "n": 1
+    },
+    "A30.fixed-medium.s43.mathematically_equal_reward_optimizer_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 1
+    },
+    "A30.static.s43.mathematically_equal_reward_optimizer_calls": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 1
+    }
+  },
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "issue": "float32 centering residual for mathematically equal shaped rewards was divided by std+1e-6 and wrongly admitted as a nonzero update",
+  "execution_checks": {
+    "old_completed_runs_reviewed": 8,
+    "no_old_raw_bytes_modified": true,
+    "posthoc_filtering_cannot_salvage_passed_status": true,
+    "old_controls_positive_evidence_withdrawn": true,
+    "interrupted_old_a30_jobs": [
+      {
+        "variant": "staged",
+        "seed": 43,
+        "exit_code": -15,
+        "elapsed_seconds": 373.3356864899397
+      },
+      {
+        "variant": "too-hard",
+        "seed": 43,
+        "exit_code": -15,
+        "elapsed_seconds": 370.19657531380653
+      }
+    ],
+    "seed44_old_five_arms_not_launched": true,
+    "new_corrected_core_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+    "new_core_gpu_validation_pending": true
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43
+    ],
+    "formal_comparison": false,
+    "promotion_eligible": false,
+    "test_used_for_selection": false,
+    "claim_policy": "numerical-integrity negative audit, not accepted corrected-source mechanism evidence"
+  },
+  "provenance": {
+    "code_commit": "51b4718a76da286b4111c6fc7d8e003d436def72",
+    "source_commit_scope": "primary affected A30 cohort51b; separately tagged historical6a A100 rows retained",
+    "artifact_path": "docs/reproductions/2610.13669-grpo-difficulty-curriculum/metrics/public-legacy-curriculum-numerical-negative.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab",
+    "raw_results_sha256": {
+      "A100.too-hard.s42": "00242a21ba68dc59e5468af3ae570ac715563290756141f50bd8e8b89465bf46",
+      "A100.fixed-medium.s42": "49b6015c9161672607353e73c8c9d8d0625c1da2354ffd29a36a2694787fc469",
+      "A100.staged.s42": "26b59149c4c36cf60cc9ca900042f82ebe37cf9c96c5b40f49bcafaeda9740e0",
+      "A30.unfiltered.s42": "ed5fe3718ab76e367a848374b630ecea34dbc2406c81b9d9e898d8a4be46462b",
+      "A30.static.s42": "6501f55be3d888c295b08e35e66ff59ae4c37f0807614209ecb04e258fe3f890",
+      "A30.unfiltered.s43": "3af3d34da4cc385d2546d579ab1fada56579f541679c81b14165da0280f6fbca",
+      "A30.fixed-medium.s43": "0470c03cc249c1ff3c128eeb22700b8dd5234076cdfc8caf494143cce89b8065",
+      "A30.static.s43": "11792c483f79df10ab211873e175e8c6186e7967f804dc91c32cb6cd89dabbeb"
+    }
+  },
+  "limitations": [
+    "Reported optimizer calls and original metrics are not rewritten; mathematically equal-reward calls are numerical artifacts, not genuine reward signal.",
+    "Historical A10042 three arms and A30fixed43 had no equal-reward admitted groups, but do not validate the newly repaired full five-arm path.",
+    "No old passed status is salvaged by subtracting pseudo updates; corrected-source same-budget GPU runs are required.",
+    "A100 and A30/framework cohorts are not paired capability baselines; variants are not independent seeds."
+  ]
+}

@@ -1,0 +1,506 @@
+{
+  "schema_version": 1,
+  "adapter_key": "state-opd",
+  "validated_at": "2026-10-14",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "variants": [
+    "state",
+    "full-history-opd",
+    "state-no-expansion"
+  ],
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct13_post_training.py",
+    "--method",
+    "state-opd",
+    "--config",
+    "data/oct13_execution.json",
+    "--seed",
+    "42",
+    "--output",
+    "runs/state-state-s42",
+    "--variant",
+    "state"
+  ],
+  "all_sanitized_commands": [
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/state-state-s42",
+      "--variant",
+      "state"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/state-state-s43",
+      "--variant",
+      "state"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/state-state-s44",
+      "--variant",
+      "state"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/state-full-history-opd-s42",
+      "--variant",
+      "full-history-opd"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/state-full-history-opd-s43",
+      "--variant",
+      "full-history-opd"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/state-full-history-opd-s44",
+      "--variant",
+      "full-history-opd"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/state-state-no-expansion-s42",
+      "--variant",
+      "state-no-expansion"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "43",
+      "--output",
+      "runs/state-state-no-expansion-s43",
+      "--variant",
+      "state-no-expansion"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "state-opd",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "44",
+      "--output",
+      "runs/state-state-no-expansion-s44",
+      "--variant",
+      "state-no-expansion"
+    ]
+  ],
+  "command_path_relocations_only": true,
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "student": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "verified_mirror": {
+        "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "file_sha256": {
+          "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      }
+    },
+    "teacher": {
+      "public_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "verified_mirror": {
+        "public_id": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+        "file_sha256": {
+          "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+          "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+          "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+          "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+          "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+          "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      }
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "state.initial.accuracy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "state.initial.submission_rate": {
+      "mean": 0.08333333333333333,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "state.initial.mean_executed_actions": {
+      "mean": 2.9166666666666665,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "state.validation.accuracy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "state.validation.submission_rate": {
+      "mean": 0.16666666666666666,
+      "std": 0.19094065395649334,
+      "n": 3
+    },
+    "state.validation.mean_executed_actions": {
+      "mean": 2.9583333333333335,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "full-history-opd.initial.accuracy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "full-history-opd.initial.submission_rate": {
+      "mean": 0.08333333333333333,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "full-history-opd.initial.mean_executed_actions": {
+      "mean": 2.9166666666666665,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "full-history-opd.validation.accuracy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "full-history-opd.validation.submission_rate": {
+      "mean": 0.125,
+      "std": 0.125,
+      "n": 3
+    },
+    "full-history-opd.validation.mean_executed_actions": {
+      "mean": 2.9583333333333335,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "state-no-expansion.initial.accuracy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "state-no-expansion.initial.submission_rate": {
+      "mean": 0.08333333333333333,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "state-no-expansion.initial.mean_executed_actions": {
+      "mean": 2.9166666666666665,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "state-no-expansion.validation.accuracy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "state-no-expansion.validation.submission_rate": {
+      "mean": 0.125,
+      "std": 0.125,
+      "n": 3
+    },
+    "state-no-expansion.validation.mean_executed_actions": {
+      "mean": 2.875,
+      "std": 0.125,
+      "n": 3
+    },
+    "state.paired_accuracy_difference_vs_full-history-opd": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "state.paired_accuracy_difference_vs_state-no-expansion": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "state": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 10,
+          "executed_root_actions": 6,
+          "response_pool_size": 14,
+          "supervised_tokens": 831,
+          "invocation_elapsed_seconds": 108.6140403021127
+        },
+        {
+          "seed": 43,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 10,
+          "executed_root_actions": 6,
+          "response_pool_size": 14,
+          "supervised_tokens": 648,
+          "invocation_elapsed_seconds": 116.26493715681136
+        },
+        {
+          "seed": 44,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 8,
+          "executed_root_actions": 6,
+          "response_pool_size": 14,
+          "supervised_tokens": 278,
+          "invocation_elapsed_seconds": 82.93957048468292
+        }
+      ],
+      "completed_seeds": 3,
+      "teacher_context_from_actual_protocol": "executed-state",
+      "teacher_prior_reasoning_removed_responses_per_seed": [
+        10,
+        10,
+        8
+      ],
+      "teacher_prior_reasoning_removed_observed": true,
+      "expanded_actions_executed": 0
+    },
+    "full-history-opd": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 0,
+          "executed_root_actions": 10,
+          "response_pool_size": 10,
+          "supervised_tokens": 327,
+          "invocation_elapsed_seconds": 79.93653836101294
+        },
+        {
+          "seed": 43,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 0,
+          "executed_root_actions": 11,
+          "response_pool_size": 11,
+          "supervised_tokens": 391,
+          "invocation_elapsed_seconds": 114.86450449563563
+        },
+        {
+          "seed": 44,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 0,
+          "executed_root_actions": 12,
+          "response_pool_size": 12,
+          "supervised_tokens": 264,
+          "invocation_elapsed_seconds": 91.80875194817781
+        }
+      ],
+      "completed_seeds": 3,
+      "teacher_context_from_actual_protocol": "full-history",
+      "teacher_prior_reasoning_removed_responses_per_seed": [
+        0,
+        0,
+        0
+      ],
+      "teacher_prior_reasoning_removed_observed": false,
+      "expanded_actions_executed": 0
+    },
+    "state-no-expansion": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 4,
+          "executed_root_actions": 6,
+          "response_pool_size": 6,
+          "supervised_tokens": 228,
+          "invocation_elapsed_seconds": 90.22789410315454
+        },
+        {
+          "seed": 43,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 3,
+          "executed_root_actions": 5,
+          "response_pool_size": 5,
+          "supervised_tokens": 238,
+          "invocation_elapsed_seconds": 93.40040184371173
+        },
+        {
+          "seed": 44,
+          "actual_optimizer_updates": 2,
+          "teacher_prior_reasoning_removed_responses": 3,
+          "executed_root_actions": 5,
+          "response_pool_size": 5,
+          "supervised_tokens": 119,
+          "invocation_elapsed_seconds": 105.08867189660668
+        }
+      ],
+      "completed_seeds": 3,
+      "teacher_context_from_actual_protocol": "executed-state",
+      "teacher_prior_reasoning_removed_responses_per_seed": [
+        4,
+        3,
+        3
+      ],
+      "teacher_prior_reasoning_removed_observed": true,
+      "expanded_actions_executed": 0
+    }
+  },
+  "limitations": [
+    "Three-seed L1 public calculator mechanism diagnostic, not original environment or formal capability evaluation.",
+    "Negative/zero validation metrics are retained; optimizer updates alone do not prove task improvement.",
+    "Configured response/step budgets match; realized response pools/tokens differ and full prompt/FLOP costs are not measured.",
+    "Measured token cost here is training supervised response tokens; validation generation tokens are not recorded by the State runner."
+  ],
+  "executed_source_sha256": {
+    "scripts/prepare_soar_catalog_qa.py": "483a4eb3d9932d31046888c165c06590e67c6df5575a5b2afd4e302145f445e7",
+    "scripts/run_oct13_post_training.py": "f482471e2c33189bcfed7c02fce0e79fb58ba9606a3a354c12ee2a63bfca8f6b",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/post_training/oct13_common.py": "739f276633d74a85ba790e4d6df25504bce89950c40867ed57302cde03f1ada9",
+    "src/auto_research/post_training/proximal_checkpoint.py": "5307a54204720e5407d2cd0435b654ae0e594f30c85cdf07d55d4e90612a1397",
+    "src/auto_research/post_training/response_policy.py": "e380a5b4d1d53974b973b72b7d9ad6328129dc8c9bae4d233f6c1cbdf8508bf7",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/reproductions/gppo_framework/__init__.py": "7fe8cab42fef9f32b9653dfb5f54f03182de0753de2c9e5b359d124d7cd763d8",
+    "src/auto_research/reproductions/gppo_framework/adapter.py": "a7f4ee792a8ded3daeeb183cbca5c99de63c1b7d3cb195f5bedd5289cb0e0260",
+    "src/auto_research/reproductions/gppo_framework/objective.py": "0f8fbb2ad397b04a70466dde4e939f4d094ad7e7df07cfbba59f4a6ca5d05dd0",
+    "src/auto_research/reproductions/gppo_framework/paper.yaml": "a023ee98bbd078077b2708122973d27a98085848be816ce461b7d4291aca8e1f",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/__init__.py": "d09d8d7e0e6f5bcec9979241eed06a1d2a6ac8f3fb7a25f49e0df55be0071acb",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/adapter.py": "bbd3e964dc035ea4bbd999a581ea07eccabd986b6456774b21a4c24092cbdfbe",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/algorithm.py": "4131e39279d30c0748b14f611ab657b3fea76147a7c164aea2883c62bde75785",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/checkpoint.py": "d03a7d2db0a19b469fe5429ddce634b02d8cbd0eeed8d09bef0afc51c1d7ac70",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml": "0b4dd86c85907b732df9380a4bd1bbc17785c09c184d5be2793ac37f63768c16",
+    "src/auto_research/reproductions/magicbeanstalk/__init__.py": "8dd207ea37a89dfa34f87b02eb4a2fd26472895678d1362a7e5b59dad5cda616",
+    "src/auto_research/reproductions/magicbeanstalk/adapter.py": "319b6503de342feee49fb6446b7bbdeb117f7dc0dd7b79ed1c3bd34cce1ce73f",
+    "src/auto_research/reproductions/magicbeanstalk/algorithm.py": "7705ea33cdb4e55908d732498098e3d34b52c00f121423e23651430ccb8b3114",
+    "src/auto_research/reproductions/magicbeanstalk/checkpoint.py": "f509334fea6b6db2e68668bb7957e8f6e29c522e63012be440779b9346d1c9e0",
+    "src/auto_research/reproductions/magicbeanstalk/paper.yaml": "e9c5619918b4d72d776008aba3fa95d50ba6ebe99afab729ba9e6dfe82fac06e",
+    "src/auto_research/reproductions/progressive_contraction/__init__.py": "e50fe46d888e0a0b11b7d4d6d8f3224ae5940394f8ba8396fc5afb1cd38a4d53",
+    "src/auto_research/reproductions/progressive_contraction/adapter.py": "06f23b5c795f7222f76dee9beaa8164f460eb5183e18c6d374bff011737235dd",
+    "src/auto_research/reproductions/progressive_contraction/algorithm.py": "176743356415111e3e19a26427cf59391b4b84b56697adf8d3fe3038ad0de3c1",
+    "src/auto_research/reproductions/progressive_contraction/checkpoint.py": "958d88b7afba14d8c7833ab3669f2cd93af6c6c19e8412bca87a136b48fec527",
+    "src/auto_research/reproductions/progressive_contraction/paper.yaml": "1beccb702ce7a33b196b1fcc6bab13cdc32fc48952d247565d54e8ce830860c2",
+    "src/auto_research/reproductions/soar/__init__.py": "3d87d1189d7037e32c1e2cb0c249d13609c5af3d7062a19904590ba7923c799a",
+    "src/auto_research/reproductions/soar/adapter.py": "8fbbe8f8fe54b9f014ccc26a75b01e72b73b95e2b03cc379c5b5db4b63c9b31e",
+    "src/auto_research/reproductions/soar/algorithm.py": "9b7068d9774d1c93800c512a04b9ba4d0ee98fc13d308e5ac0970299c8bb2485",
+    "src/auto_research/reproductions/soar/checkpoint.py": "43a83930af442dc3610d61becd06b38ca3c921131ed417837d3d7e11aa672708",
+    "src/auto_research/reproductions/soar/paper.yaml": "2f756cab9f7fefd4613bb69971fd8252c2b9ad451fa5c5eff5d03fa063d91521",
+    "src/auto_research/reproductions/state_opd/__init__.py": "8db07736f0336ed7f39502ae2953bdae76658942542cacbe4b6b2c1fd0abe094",
+    "src/auto_research/reproductions/state_opd/adapter.py": "2f8bf4773e8f40c0eabe777fbd1e1aa6d372a7b05501404c3e3f7b2d54987524",
+    "src/auto_research/reproductions/state_opd/algorithm.py": "dc7fe3eae619ff69ec51c47826f89471f00be564ea4e6730e12726a060ba7e2f",
+    "src/auto_research/reproductions/state_opd/checkpoint.py": "95755e0604f563a5c96f92e9de9069befe3e1274d31c224a43ca20d71f756b09",
+    "src/auto_research/reproductions/state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+    "src/auto_research/reproductions/state_opd/paper.yaml": "f9cdb6c489ab58bcb8cd6f3d8815c9d5c5e7f29616563d96ad5792533961a84d",
+    "src/auto_research/reproductions/synthself/__init__.py": "474bb75e10b95afe6faec1f3631beab2f17f9a43013d3d29e79b7d4b36e06031",
+    "src/auto_research/reproductions/synthself/adapter.py": "db4c08e1ccc2acfc28d19fc72acfa39b0a0dce096bbc430bafe9b21dbb72cddd",
+    "src/auto_research/reproductions/synthself/algorithm.py": "0662ce46de24214370dac4ab691ba766fbbc087717db46d838b2ea5af9d62f3f",
+    "src/auto_research/reproductions/synthself/checkpoint.py": "9835b086272d9262f057a0fc0975d19ff3b84d5e1766cc234ca1e11985164891",
+    "src/auto_research/reproductions/synthself/paper.yaml": "464d06e9cdd535ab61743fdba6641ae2eac4c8345fad27748c63e620544074c7",
+    "src/auto_research/reproductions/tapo_trajectory/__init__.py": "a0dd8d4825b91dd076b71bdd3a3eccb0638ba4bf0240fe9da76d61a7290f69c6",
+    "src/auto_research/reproductions/tapo_trajectory/adapter.py": "c01b75bf7853546caa2d517dd5f9c9faf739537b95207b8f1fd28adcdd5aafa7",
+    "src/auto_research/reproductions/tapo_trajectory/objective.py": "49ab02ac758251acde90091a82b22576449d294a1f25cc3144ff1addd1132ae2",
+    "src/auto_research/reproductions/tapo_trajectory/paper.yaml": "493e59ec67f96ee37ffecf6694dd5c4d8555849b8f756ccb63644da90bbb48d6",
+    "src/auto_research/reproductions/upturn/__init__.py": "1e9793e9ea85e94144f7eac8fa141567d7f964438fa628788b668358154e196e",
+    "src/auto_research/reproductions/upturn/adapter.py": "72e5da3cb70856944d0c9a25376f73d4a1d9f16213efd43e19b3acf2a584afc2",
+    "src/auto_research/reproductions/upturn/algorithm.py": "421abd06cc492c39cf72e9b15c7f85c01e85fae0a7c26fb3053fbd19bc4897a4",
+    "src/auto_research/reproductions/upturn/checkpoint.py": "83ac66cead272cb391fe27c56f838df5414712283db42f2b8088d3509de311f3",
+    "src/auto_research/reproductions/upturn/paper.yaml": "a1e335526f895b54e325331dc8354330f4a2d44f5f8c9c2a37f76ef2f7d589bc"
+  },
+  "provenance": {
+    "commit": "6aabe57a97ec3a586aac7aeea66128750f9441da",
+    "artifact_path": "docs/gpu-validations/state-opd-a100-20261014.json",
+    "metrics_artifact": "docs/reproductions/2610.13238-state-opd/metrics/public-a100-three-arms-seeds42-44.json",
+    "checkpoint_committed": false,
+    "execution_config_sha256": "506dce6568921b9c8fa75d969267537f9bb5c5c5b093a77b283616a2246524c5"
+  }
+}

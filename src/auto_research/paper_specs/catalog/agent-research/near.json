@@ -1,0 +1,22 @@
+{
+  "domain": "agent-research",
+  "key": "near",
+  "title": "NEAR: Neighborhood-Aware Residuals for Memory Retrieval",
+  "paper_url": "https://arxiv.org/abs/2610.13314",
+  "detail_path": "reproductions/2610.13314-near/README.md",
+  "topic": [
+    "memory-retrieval",
+    "neighborhood-residual",
+    "single-index-retrieval"
+  ],
+  "first_author": "Han Luo",
+  "first_author_affiliation": "Southeast University",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": null,
+  "adapter": {
+    "spec_key": "near"
+  },
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a30.json"
+}

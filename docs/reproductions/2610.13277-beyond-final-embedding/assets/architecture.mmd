@@ -1,0 +1,10 @@
+graph LR
+ M[memory] --> E[冻结encoder]
+ E --> P[pooled]
+ E --> T[content tokens与memory ID]
+ Q[query] --> A[可选低秩adapter]
+ A --> K[global sparse top64]
+ T --> K
+ K --> S[floor与IDaggregation]
+ P --> F[local-global fusion]
+ S --> F

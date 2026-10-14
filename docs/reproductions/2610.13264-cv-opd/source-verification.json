@@ -1,0 +1,14 @@
+{
+  "paper": "2610.13264v1",
+  "verified_on": "2026-10-13",
+  "official_pdf": "https://arxiv.org/pdf/2610.13264v1",
+  "official_pdf_bytes": 4275630,
+  "official_pdf_sha256": "bbe3f9ccc0040f196699626aefa6dce608d73ef23b612e31af36b0766a0d28de",
+  "source_location": "PDF page 1 affiliation block; official HTML Appendix A.3 Algorithm 1",
+  "organization": ["Xiamen University", "Moxin Technology"],
+  "first_author": "Haowei Wang",
+  "first_author_affiliations": ["Xiamen University", "Moxin Technology"],
+  "upstream_revision": "e9452a00ea50ddb776645b9acc49275e0180955e",
+  "upstream_license": "Apache-2.0",
+  "upstream_asset_anomaly": "paper_assets/paper.pdf is Vision-OPD 2605.18740v4, not CV-OPD; excluded from paper evidence"
+}

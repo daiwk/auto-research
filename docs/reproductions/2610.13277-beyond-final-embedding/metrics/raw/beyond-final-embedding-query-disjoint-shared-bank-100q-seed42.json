@@ -1,0 +1,511 @@
+{
+  "paper": "beyond-final-embedding",
+  "seed": 42,
+  "device": "cuda",
+  "evaluation_tier": "l2_public_dataset",
+  "fidelity": "core_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "protocol": {
+    "dataset": "xiaowu0162/longmemeval-cleaned",
+    "dataset_revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+    "raw_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+    "split_ids": {
+      "train": [
+        "ccb36322",
+        "577d4d32",
+        "f8c5f88b",
+        "gpt4_5501fe77",
+        "e01b8e2f",
+        "29f2956b",
+        "66f24dbb",
+        "gpt4_2ba83207",
+        "0a995998",
+        "21436231",
+        "95bcc1c8",
+        "311778f1",
+        "faba32e5",
+        "8e9d538c",
+        "b86304ba",
+        "8550ddae",
+        "28dc39ac",
+        "19b5f2b3_abs",
+        "gpt4_59c863d7",
+        "gpt4_f2262a51",
+        "aae3761f",
+        "d682f1a2",
+        "86b68151",
+        "3a704032",
+        "a82c026e",
+        "ad7109d1",
+        "0862e8bf",
+        "29f2956b_abs",
+        "c14c00dd",
+        "f4f1d8a4_abs",
+        "6f9b354f",
+        "gpt4_2f8be40d",
+        "gpt4_d84a3211",
+        "b5ef892d",
+        "f4f1d8a4",
+        "3d86fd0a",
+        "8a137a7f",
+        "88432d0a",
+        "19b5f2b3",
+        "c8c3f81d",
+        "5d3d2817",
+        "853b0a1d",
+        "bc8a6e93",
+        "2e6d26dc",
+        "46a3abf7",
+        "58ef2f1c",
+        "d52b4f67",
+        "b320f3f8",
+        "60d45044",
+        "76d63226",
+        "1faac195",
+        "545bd2b5",
+        "gpt4_a56e767c",
+        "3f1e9474",
+        "118b2229",
+        "8ebdbe50",
+        "e831120c",
+        "7024f17c",
+        "94f70d80",
+        "726462e0"
+      ],
+      "validation": [
+        "2ce6a0f2",
+        "75499fd8",
+        "gpt4_7fce9456",
+        "15745da0",
+        "c19f7a0b",
+        "2318644b",
+        "25e5aa4f",
+        "caf9ead2",
+        "6cb6f249",
+        "gpt4_15e38248",
+        "001be529",
+        "36b9f61e",
+        "d23cf73b",
+        "37d43f65",
+        "a06e4cfe",
+        "af8d2e46",
+        "4100d0a0",
+        "0862e8bf_abs",
+        "c960da58",
+        "4fd1909e"
+      ],
+      "test": [
+        "ec81a493",
+        "86f00804",
+        "gpt4_d12ceb0e",
+        "dd2973ad",
+        "6ade9755",
+        "6b168ec8",
+        "c4a1ceb8",
+        "36580ce8",
+        "51a45a95",
+        "58bf7951",
+        "c5e8278d",
+        "1e043500",
+        "6d550036",
+        "15745da0_abs",
+        "7527f7e2",
+        "3b6f954b",
+        "bc8a6e93_abs",
+        "e47becba",
+        "80ec1f4f",
+        "dccbc061"
+      ]
+    },
+    "split_revision": "0b7eec910a90684ebd001a12164899ed9e442fe670555a27878c79b8d90d50c7",
+    "split_policy": "query-disjoint-shared-bank",
+    "split_rule": "query-ID-only fixed hash order; 60/20/20",
+    "shared_unlabelled_memory": true,
+    "diagnostic_only_requested": true,
+    "unseen_bank_generalization": false,
+    "memory_encoding_cache": "immutable frozen encodings keyed by source text; no query or relevance",
+    "max_queries": 100,
+    "max_length": 128,
+    "encoder": {
+      "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "files": {
+        "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      }
+    },
+    "index": "exact-inner-product (not original HNSW)",
+    "answer_fields_exposed": false,
+    "label_boundary": "train labels for optional adapter loss; validation selection; test scorer only",
+    "unanswerable_queries": 0,
+    "nonofficial_benchmark": true,
+    "token_budget": 64,
+    "adapter_rank": 32,
+    "adapter_epochs": 2,
+    "encoder_and_memory_frozen": true
+  },
+  "comparison_contract": {
+    "protocol_id": "oct13-beyond-final-embedding-longmemeval-minilm-query-disjoint-shared-bank-v1",
+    "dataset_revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f:d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+    "split_revision": "0b7eec910a90684ebd001a12164899ed9e442fe670555a27878c79b8d90d50c7",
+    "baseline": "frozen MiniLM native pooled cosine",
+    "code_revision": "a08811f2434a148819ed526e7953e98ab125798a29c9ad4f86d9c176e7b6bc9f",
+    "test_isolated": true
+  },
+  "selection": {
+    "epoch": 2,
+    "alpha": 0.75,
+    "validation": {
+      "recall_at_10": 1.0,
+      "ndcg_at_10": 0.9353446783304612
+    }
+  },
+  "validation_trials": [
+    {
+      "epoch": 0,
+      "alpha": 0.25,
+      "validation": {
+        "recall_at_10": 0.95,
+        "ndcg_at_10": 0.8981163566946438
+      }
+    },
+    {
+      "epoch": 0,
+      "alpha": 0.5,
+      "validation": {
+        "recall_at_10": 0.95,
+        "ndcg_at_10": 0.9278843995021436
+      }
+    },
+    {
+      "epoch": 0,
+      "alpha": 0.75,
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 0.9339915538942147
+      }
+    },
+    {
+      "epoch": 1,
+      "alpha": 0.25,
+      "validation": {
+        "recall_at_10": 0.95,
+        "ndcg_at_10": 0.9200360411124013
+      }
+    },
+    {
+      "epoch": 1,
+      "alpha": 0.5,
+      "validation": {
+        "recall_at_10": 0.95,
+        "ndcg_at_10": 0.9278843995021436
+      }
+    },
+    {
+      "epoch": 1,
+      "alpha": 0.75,
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 0.9339915538942147
+      }
+    },
+    {
+      "epoch": 2,
+      "alpha": 0.25,
+      "validation": {
+        "recall_at_10": 0.95,
+        "ndcg_at_10": 0.9200360411124013
+      }
+    },
+    {
+      "epoch": 2,
+      "alpha": 0.5,
+      "validation": {
+        "recall_at_10": 0.95,
+        "ndcg_at_10": 0.9278843995021436
+      }
+    },
+    {
+      "epoch": 2,
+      "alpha": 0.75,
+      "validation": {
+        "recall_at_10": 1.0,
+        "ndcg_at_10": 0.9353446783304612
+      }
+    }
+  ],
+  "training_losses": [
+    {
+      "epoch": 1,
+      "maxsim_loss": 1.729410187403361
+    },
+    {
+      "epoch": 2,
+      "maxsim_loss": 1.7130476474761962
+    }
+  ],
+  "test": {
+    "recall_at_10": 0.9125,
+    "ndcg_at_10": 0.7443967037990248
+  },
+  "training_free_test": {
+    "recall_at_10": 0.9125,
+    "ndcg_at_10": 0.7577519635500225
+  },
+  "baseline": {
+    "recall_at_10": 0.9,
+    "ndcg_at_10": 0.7155734475958628
+  },
+  "test_rankings": {
+    "ec81a493": [
+      "answer_ed1982fc",
+      "6f55019d",
+      "ultrachat_74904",
+      "sharegpt_KUXG6gY_40",
+      "ffbd49a4",
+      "bb2180e9_1",
+      "sharegpt_nh3eDLi_5",
+      "ab4643a2_4",
+      "ultrachat_142535",
+      "616fdd27"
+    ],
+    "86f00804": [
+      "answer_96b8c9ee",
+      "35c5419d_abs_3",
+      "6e672b84_3",
+      "sharegpt_sCFErnY_22",
+      "sharegpt_K3jwzdd_0",
+      "sharegpt_BAHXiar_14",
+      "07e6a3bd_2",
+      "830c739e",
+      "cf9010c2_1",
+      "35c5419d_abs_1"
+    ],
+    "gpt4_d12ceb0e": [
+      "answer_2504635e_2",
+      "answer_2504635e_3",
+      "73f4798f",
+      "answer_2504635e_1",
+      "d8e33f5c_abs_2",
+      "a1166ecc_3",
+      "0672cd7b_1",
+      "sharegpt_WAvGCwn_0",
+      "f0c6ddb9_2",
+      "ultrachat_55863"
+    ],
+    "dd2973ad": [
+      "56266c38_1",
+      "answer_f9de4602_2",
+      "answer_f9de4602_1",
+      "bc542ef7_2",
+      "ultrachat_478199",
+      "sharegpt_O6NO7Vo_9",
+      "sharegpt_3M5Jh8E_0",
+      "41743aae_1",
+      "sharegpt_WGS6keq_29",
+      "b192ae00_2"
+    ],
+    "6ade9755": [
+      "answer_9398da02",
+      "de5634fc_2",
+      "ultrachat_462",
+      "ultrachat_270925",
+      "a200b713_4",
+      "5d049e3c",
+      "e49a0b52_1",
+      "ultrachat_62167",
+      "5df2f487",
+      "sharegpt_2o1zvbh_11"
+    ],
+    "6b168ec8": [
+      "answer_e623ae87",
+      "sharegpt_1kE6haW_52",
+      "ultrachat_414934",
+      "afffd8ec_3",
+      "518d26d3_5",
+      "sharegpt_S5r9zqT_0",
+      "443688cc_2",
+      "ultrachat_404512",
+      "sharegpt_18LCW88_0",
+      "32cf110f_1"
+    ],
+    "c4a1ceb8": [
+      "answer_56d02cab_3",
+      "answer_56d02cab_4",
+      "answer_56d02cab_1",
+      "answer_56d02cab_2",
+      "sharegpt_jJ39WlB_0",
+      "ultrachat_441000",
+      "ultrachat_476874",
+      "ba9f938b_2",
+      "1dc2b670_2",
+      "sharegpt_WanXxRQ_0"
+    ],
+    "36580ce8": [
+      "ultrachat_318891",
+      "ultrachat_32917",
+      "ultrachat_149170",
+      "answer_93e1bd22",
+      "ultrachat_53784",
+      "sharegpt_A6FQIZB_0",
+      "ultrachat_272552",
+      "ultrachat_270984",
+      "sharegpt_nYWWPnO_0",
+      "2865bf22_2"
+    ],
+    "51a45a95": [
+      "answer_d61669c7",
+      "sharegpt_apWLb2c_0",
+      "sharegpt_MKMWjX0_25",
+      "07ba9acd_2",
+      "07d1915d_1",
+      "55e0c6db_2",
+      "sharegpt_3vxz2Zr_0",
+      "f32d1ccf_1",
+      "dfe646a7_1",
+      "ultrachat_123028"
+    ],
+    "58bf7951": [
+      "ultrachat_71618",
+      "ultrachat_155546",
+      "5b83c26e_1",
+      "answer_355c48bb",
+      "ultrachat_304942",
+      "793382f9_2",
+      "ultrachat_278141",
+      "ultrachat_268434",
+      "sharegpt_OFiElWf_37",
+      "ultrachat_38680"
+    ],
+    "c5e8278d": [
+      "answer_f6168136",
+      "sharegpt_WPGrlAK_0",
+      "89b1028d_1",
+      "sharegpt_DB8U4oH_9",
+      "e01eaa19_2",
+      "f58317c6",
+      "ultrachat_13721",
+      "sharegpt_i8AISRh_0",
+      "0fe848c5_3",
+      "ultrachat_246365"
+    ],
+    "1e043500": [
+      "8020d945_2",
+      "sharegpt_bph7DTk_7",
+      "01bd9def",
+      "sharegpt_Clr6oyu_0",
+      "2d0d0004",
+      "sharegpt_Ij8JbdT_0",
+      "sharegpt_uQMdL9t_0",
+      "answer_3e012175",
+      "sharegpt_bdOsvAI_45",
+      "e132259f"
+    ],
+    "6d550036": [
+      "sharegpt_zciCXP1_12",
+      "2e4430d8_2",
+      "sharegpt_J7ZAFLd_0",
+      "sharegpt_UbMVpdp_93",
+      "sharegpt_nVi6tIt_0",
+      "answer_ec904b3c_1",
+      "sharegpt_jDUWXpR_57",
+      "dae3906e_2",
+      "sharegpt_JlhNyfC_0",
+      "a245a0df_2"
+    ],
+    "15745da0_abs": [
+      "answer_586de428_abs",
+      "375e27b9_2",
+      "565929a2_2",
+      "9b638f21_4",
+      "be976c82_1",
+      "ultrachat_499527",
+      "ultrachat_127739",
+      "268e8532_2",
+      "7dfe0b9d_1",
+      "83dae08b"
+    ],
+    "7527f7e2": [
+      "44bbd8cd_2",
+      "answer_7cb94507",
+      "sharegpt_0yC9gyQ_0",
+      "sharegpt_xIDRgaY_0",
+      "88fed3ed_2",
+      "sharegpt_1i8PAcL_0",
+      "afbd7193_1",
+      "c7c4cf1e_2",
+      "18a06652_3",
+      "4e2acecc"
+    ],
+    "3b6f954b": [
+      "ultrachat_294369",
+      "ultrachat_64326",
+      "ultrachat_230611",
+      "c85ef24e_3",
+      "c271c071",
+      "sharegpt_7R4dDcT_0",
+      "ultrachat_572251",
+      "4ed9cd1b_1",
+      "e27891d3_2",
+      "sharegpt_vWCvD89_0"
+    ],
+    "bc8a6e93_abs": [
+      "answer_e6143162_abs",
+      "31f3f40d_4",
+      "de1f4aec_1",
+      "ba944cdc",
+      "b3763b6b_2",
+      "9c68c22f",
+      "375354d1_2",
+      "sharegpt_hn3IS1q_0",
+      "f2ce866d_2",
+      "sharegpt_G18Riup_0"
+    ],
+    "e47becba": [
+      "sharegpt_QZMeA7V_17",
+      "sharegpt_PdnvIns_0",
+      "sharegpt_T1EiHWI_13",
+      "d414cac5_4",
+      "f6859b48_2",
+      "sharegpt_UnjngE7_65",
+      "answer_280352e9",
+      "41abc171_4",
+      "sharegpt_Jcy1CVN_0",
+      "ultrachat_530213"
+    ],
+    "80ec1f4f": [
+      "answer_990c8992_3",
+      "answer_990c8992_1",
+      "ultrachat_318441",
+      "b909542d_1",
+      "answer_990c8992_2",
+      "sharegpt_nzDNOrq_29",
+      "32387419_4",
+      "9a584663_2",
+      "176594fa_2",
+      "d935c3b7"
+    ],
+    "dccbc061": [
+      "answer_8f276838",
+      "ultrachat_343",
+      "sharegpt_buGcwO5_33",
+      "ultrachat_519037",
+      "sharegpt_MKMWjX0_25",
+      "79bb1298_3",
+      "25d1830a_2",
+      "3cdad629_4",
+      "ultrachat_114448",
+      "sharegpt_sZKME3y_0"
+    ]
+  },
+  "parameter_update_l2": 0.19163885712623596,
+  "limitations": [
+    "MiniLM replaces original backbones",
+    "exact sparse search replaces HNSW",
+    "LongMemEval source split replaces EvoTrain; no original downstream QA",
+    "training uses memory relevance labels, never reference answer text"
+  ]
+}

@@ -1,0 +1,116 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import pytest
+
+from auto_research.paper_specs.schema import load_spec,validate_spec
+
+ROOT=Path(__file__).resolve().parents[2]
+PAPERS={
+    "state-opd":"2610.13238", "magicbeanstalk":"2610.12659",
+    "gppo-framework":"2610.13015", "tapo-trajectory":"2610.13020",
+    "synthself":"2610.13113", "upturn":"2610.13672", "soar":"2610.13157",
+    "grpo-difficulty-curriculum":"2610.13669", "progressive-contraction":"2610.12933",
+}
+
+
+@pytest.mark.parametrize("key,identifier",PAPERS.items())
+def test_oct13_paper_metadata_complete_and_diagnostic_boundaries_explicit(key,identifier):
+    deferred = key == "magicbeanstalk"
+    spec=load_spec(ROOT/"src/auto_research/reproductions"/key.replace("-","_")/("deferred-spec.json" if deferred else "paper.yaml"))
+    assert not validate_spec(spec,root=ROOT)
+    assert spec.key==key and spec.arxiv_id==identifier
+    assert spec.published==("2026-10-08" if deferred else "2026-10-09")
+    assert spec.fidelity=="core_mechanism" and spec.evaluation_tier=="l1_mechanism"
+    assert spec.execution["requires_gpu_validation"] is True
+    receipt_date={k:"20261014" for k in ("state-opd","grpo-difficulty-curriculum","synthself","upturn","progressive-contraction","soar")}.get(key,"20261013")
+    suffix="-seeds42-44" if key in {"synthself","progressive-contraction","soar","grpo-difficulty-curriculum"} else ""
+    accelerator="a30" if key=="grpo-difficulty-curriculum" else "a100"
+    assert spec.execution["gpu_validation_artifact"]==f"docs/gpu-validations/{key}-{accelerator}-{receipt_date}{suffix}.json"
+    assert spec.evolve_operators==()
+    doc=ROOT/spec.documentation
+    assert doc.parent.name==f"{identifier}-{key}" and doc.parent.parent==ROOT/"docs/reproductions"
+    text=doc.read_text()
+    adapter_label = (f"| Adapter | `{key}`（历史计划键；延期，未注册可执行入口） |"
+                     if deferred else f"| Adapter | `{key}` |")
+    required=("## 论文信息",f"| 论文链接 | [arXiv {identifier}](https://arxiv.org/abs/{identifier}) |",
+              "| 公司/机构 |",f"| 首次公开日期 | {spec.published}（arXiv v1） |","| 原文开源代码 |",
+              adapter_label,"| 本地复现代码 |","## 原始论文总结","### 背景与主要改动",
+              "### 核心公式","### 论文离线与线上效果","```mermaid","## 本地复现",
+              "> **本地对照口径**：","未报告生产线上A/B","mechanism-contracts.json","formal_comparison: false")
+    assert all(entry in text for entry in required)
+    row=json.loads((ROOT/"src/auto_research/paper_specs/catalog/post-training"/(key+".json")).read_text())
+    if deferred:
+        assert "adapter" not in row
+        assert row["implementation_status"] == "deferred_high_cost"
+    else:
+        assert row["adapter"]=={"spec_key":key}
+    assert row["detail_path"]==spec.documentation.removeprefix("docs/")
+    metrics=json.loads((doc.parent/"metrics/mechanism-contracts.json").read_text())
+    assert metrics["diagnostic_only"] is True
+    assert metrics["evaluation_protocol"]["tier"]=="l0_contract"
+    assert metrics["evaluation_protocol"]["formal_comparison"] is False
+    paper_results=json.loads((doc.parent/"paper-results.json").read_text())
+    assert paper_results["measured_locally"] is False
+    figure=json.loads((doc.parent/"figure-source.json").read_text())
+    assert figure["version"]=="v1" and identifier+"v1" in figure["source_resource"]
+
+
+def test_state_current_receipt_requires_all_new_arms_not_the_old_default_only_run():
+    spec=load_spec(ROOT/"src/auto_research/reproductions/state_opd/paper.yaml")
+    receipt=json.loads((ROOT/spec.execution["gpu_validation_artifact"]).read_text())
+    result=json.loads((ROOT/receipt["provenance"]["metrics_artifact"]).read_text())
+    assert receipt["provenance"]["commit"]=="6aabe57a97ec3a586aac7aeea66128750f9441da"
+    assert receipt["variants"]==["state","full-history-opd","state-no-expansion"]
+    assert receipt["seeds"]==[42,43,44]
+    assert result["actual_cuda_run_count"]==9
+    assert len(result["provenance"]["raw_results_sha256"])==9
+    assert result["evaluation_protocol"]["formal_comparison"] is False
+    assert result["execution_checks"]["full-history-opd"]["teacher_prior_reasoning_removed_responses_per_seed"]==[0,0,0]
+
+
+def test_abbreviation_collisions_do_not_replace_historical_catalog_entries():
+    catalog=ROOT/"src/auto_research/paper_specs/catalog/post-training"
+    assert json.loads((catalog/"gppo.json").read_text())["paper_url"].endswith("2508.07629")
+    assert json.loads((ROOT/"src/auto_research/paper_specs/catalog/agent-research/tapo.json").read_text())["paper_url"].endswith("2607.27973")
+
+
+def test_curriculum_historical_three_variants_are_one_seed_and_do_not_complete_all_controls():
+    spec=load_spec(ROOT/"src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml")
+    receipt=json.loads((ROOT/"docs/gpu-validations/grpo-difficulty-curriculum-a100-20261014.json").read_text())
+    result=json.loads((ROOT/receipt["provenance"]["metrics_artifact"]).read_text())
+    assert receipt["provenance"]["commit"]=="6aabe57a97ec3a586aac7aeea66128750f9441da"
+    assert receipt["variants"]==["fixed-medium","staged","too-hard"] and receipt["seeds"]==[42]
+    assert len(result["seed_results"])==1 and result["actual_cuda_run_count"]==3
+    assert result["evaluation_protocol"]["formal_comparison"] is False
+    assert result["evaluation_protocol"]["promotion_eligible"] is False
+    assert all(v["n"]==1 for v in result["aggregate_metrics"].values())
+    assert [result["execution_checks"][v]["actual_optimizer_updates"] for v in receipt["variants"]]==[8,9,11]
+    text=(ROOT/spec.documentation).read_text()
+    assert "旧A100三臂未执行static和unfiltered" in text
+    assert "三个variants不算三个seeds" in text and "单seed机制GPU门禁通过不代表本批整体完成" in text
+
+
+def test_curriculum_current_receipt_requires_fifteen_repaired_same_device_runs():
+    spec=load_spec(ROOT/"src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml")
+    receipt=json.loads((ROOT/spec.execution["gpu_validation_artifact"]).read_text())
+    result=json.loads((ROOT/receipt["provenance"]["metrics_artifact"]).read_text())
+    assert receipt["provenance"]["commit"]=="b90862754bf51b1beeb5add3f7dc2a51ca00ace4"
+    assert receipt["accelerator"]["model"]=="NVIDIA A30" and receipt["seeds"]==[42,43,44]
+    assert len(receipt["all_sanitized_commands"])==result["actual_cuda_run_count"]==15
+    assert len(receipt["provenance"]["raw_results_sha256"])==15
+    assert result["whole_method_gpu_validation_passed"] is True
+    assert result["default_three_seed_plan_completed"] is True
+    assert result["evaluation_protocol"]["formal_comparison"] is False
+    assert result["evaluation_protocol"]["variants_are_independent_seeds"] is False
+    assert all(x["n"]==3 for x in result["aggregate_metrics"].values())
+    text=(ROOT/spec.documentation).read_text()
+    assert "默认十五项计划已完成" in text and "三seed机制回执也不代表正式能力比较" in text
+
+
+def test_cuda_missing_configuration_does_not_run_a_fixture(tmp_path):
+    from auto_research.post_training.oct13_common import adapter_run
+    with pytest.raises(FileNotFoundError,match="oct13_execution.json"):
+        adapter_run("synthself",tmp_path,42)

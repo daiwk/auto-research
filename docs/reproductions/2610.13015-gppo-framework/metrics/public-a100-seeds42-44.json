@@ -1,0 +1,2293 @@
+{
+  "schema_version": 2,
+  "adapter_key": "gppo-framework",
+  "method": "gppo-framework",
+  "manifest_ref": "reproduction:gppo-framework",
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "aggregate_metrics": {
+    "baseline.accuracy": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    },
+    "method_metrics.accuracy": {
+      "mean": 0.7083333333333334,
+      "std": 0.07216878364870322,
+      "n": 3
+    },
+    "grpo_control.validation.accuracy": {
+      "mean": 0.625,
+      "std": 0.125,
+      "n": 3
+    },
+    "paired_accuracy_difference_vs_grpo": {
+      "mean": 0.08333333333333333,
+      "std": 0.14433756729740643,
+      "n": 3
+    }
+  },
+  "seed_results": [
+    {
+      "method": "gppo-framework",
+      "seed": 42,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "verified": true,
+        "test_read": false,
+        "source_id": "openai/grade-school-math",
+        "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+        "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "partition_sha256": {
+          "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+          "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+        },
+        "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+      },
+      "checkpoint": {
+        "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "verified_mirror": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "file_sha256": {
+            "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+            "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+            "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+            "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        }
+      },
+      "baseline": {
+        "accuracy": 0.5,
+        "examples": 8,
+        "generated_tokens": 2619,
+        "truncated_responses": 1
+      },
+      "method_metrics": {
+        "accuracy": 0.75,
+        "examples": 8,
+        "generated_tokens": 2866,
+        "truncated_responses": 0
+      },
+      "training": [
+        {
+          "step": 1,
+          "training_row": 1,
+          "rewards": [
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "advantages": [
+            -0.9999979734420776,
+            0.9999979734420776,
+            -0.9999979734420776,
+            0.9999979734420776
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 2.9802322387695312e-08,
+              "gradient_l2_norm": 0.27938181161880493,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6441754698753357,
+                  "upper_mean": 1.8258450031280518,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7638880610466003,
+                  "upper_mean": 1.119031548500061,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6880136132240295,
+                  "upper_mean": 1.3826349973678589,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7456892728805542,
+                  "upper_mean": 1.1441248655319214,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.0015807896852493286,
+              "gradient_l2_norm": 0.2842092216014862,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6441754698753357,
+                  "upper_mean": 1.8258450031280518,
+                  "max_abs_log_ratio": 0.22674989700317383
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7638880610466003,
+                  "upper_mean": 1.119031548500061,
+                  "max_abs_log_ratio": 0.30282139778137207
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6880136132240295,
+                  "upper_mean": 1.3826349973678589,
+                  "max_abs_log_ratio": 0.33664536476135254
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7456892728805542,
+                  "upper_mean": 1.1441248655319214,
+                  "max_abs_log_ratio": 0.2366175651550293
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "training_row": 2,
+          "rewards": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "advantages": [
+            -0.5773489475250244,
+            -0.5773489475250244,
+            -0.5773489475250244,
+            1.7320468425750732
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 2.9802322387695312e-08,
+              "gradient_l2_norm": 0.20347140729427338,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.38904497027397156,
+                  "upper_mean": 12.276872634887695,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6635510921478271,
+                  "upper_mean": 1.465986728668213,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.30666613578796387,
+                  "upper_mean": 14.512420654296875,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7449688911437988,
+                  "upper_mean": 1.2690287828445435,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 1.6435980796813965e-05,
+              "gradient_l2_norm": 0.20364715158939362,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.38904497027397156,
+                  "upper_mean": 12.276872634887695,
+                  "max_abs_log_ratio": 0.30322766304016113
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6635510921478271,
+                  "upper_mean": 1.465986728668213,
+                  "max_abs_log_ratio": 0.23088812828063965
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.30666613578796387,
+                  "upper_mean": 14.512420654296875,
+                  "max_abs_log_ratio": 0.28983449935913086
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7449688911437988,
+                  "upper_mean": 1.2690287828445435,
+                  "max_abs_log_ratio": 0.16321206092834473
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "training_row": 3,
+          "rewards": [
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "advantages": [
+            0.5773489475250244,
+            0.5773489475250244,
+            -1.7320468425750732,
+            0.5773489475250244
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": -1.4901161193847656e-08,
+              "gradient_l2_norm": 0.17604497075080872,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7597278952598572,
+                  "upper_mean": 1.1017508506774902,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7725993990898132,
+                  "upper_mean": 1.108332633972168,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.4296582341194153,
+                  "upper_mean": 6.536031723022461,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7467419505119324,
+                  "upper_mean": 1.2012642621994019,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": -0.0017516165971755981,
+              "gradient_l2_norm": 0.17496754229068756,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7597278952598572,
+                  "upper_mean": 1.1017508506774902,
+                  "max_abs_log_ratio": 0.2373208999633789
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7725993990898132,
+                  "upper_mean": 1.108332633972168,
+                  "max_abs_log_ratio": 0.28150010108947754
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.4296582341194153,
+                  "upper_mean": 6.536031723022461,
+                  "max_abs_log_ratio": 0.23376226425170898
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7467419505119324,
+                  "upper_mean": 1.2012642621994019,
+                  "max_abs_log_ratio": 0.1964888572692871
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters_changed": true,
+      "sampling": {
+        "zero_advantage_groups_retained": 1,
+        "tasks_attempted": 4,
+        "generated_training_tokens_including_rejected_groups": 4513
+      },
+      "protocol": {
+        "steps": 3,
+        "group": 4,
+        "max_tokens": 512,
+        "inner_updates": 2,
+        "learning_rate": 1e-05,
+        "geometry": "chi2",
+        "topology": "atomic",
+        "delta": 0.04,
+        "gold_in_generation": false,
+        "test_opened": false
+      },
+      "limitations": [
+        "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+        "Training-only difficulty calibration is charged as sampling cost.",
+        "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+        "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+      ]
+    },
+    {
+      "method": "gppo-framework",
+      "seed": 43,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "verified": true,
+        "test_read": false,
+        "source_id": "openai/grade-school-math",
+        "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+        "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "partition_sha256": {
+          "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+          "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+        },
+        "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+      },
+      "checkpoint": {
+        "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "verified_mirror": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "file_sha256": {
+            "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+            "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+            "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+            "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        }
+      },
+      "baseline": {
+        "accuracy": 0.5,
+        "examples": 8,
+        "generated_tokens": 2619,
+        "truncated_responses": 1
+      },
+      "method_metrics": {
+        "accuracy": 0.75,
+        "examples": 8,
+        "generated_tokens": 2798,
+        "truncated_responses": 0
+      },
+      "training": [
+        {
+          "step": 1,
+          "training_row": 0,
+          "rewards": [
+            0.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "advantages": [
+            -1.7320468425750732,
+            0.5773489475250244,
+            0.5773489475250244,
+            0.5773489475250244
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": -1.4901161193847656e-08,
+              "gradient_l2_norm": 0.7702589631080627,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6533134579658508,
+                  "upper_mean": 1.7457265853881836,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7781939506530762,
+                  "upper_mean": 1.0590468645095825,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7443346977233887,
+                  "upper_mean": 2.9523260593414307,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7689198851585388,
+                  "upper_mean": 1.0925825834274292,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.0010142773389816284,
+              "gradient_l2_norm": 0.7628710269927979,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6533134579658508,
+                  "upper_mean": 1.7457265853881836,
+                  "max_abs_log_ratio": 0.22510385513305664
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7781939506530762,
+                  "upper_mean": 1.0590468645095825,
+                  "max_abs_log_ratio": 0.3517320156097412
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7443346977233887,
+                  "upper_mean": 2.9523260593414307,
+                  "max_abs_log_ratio": 0.23279380798339844
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7689198851585388,
+                  "upper_mean": 1.0925825834274292,
+                  "max_abs_log_ratio": 0.2349395751953125
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "training_row": 2,
+          "rewards": [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "advantages": [
+            -0.5773489475250244,
+            1.7320468425750732,
+            -0.5773489475250244,
+            -0.5773489475250244
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 0.0,
+              "gradient_l2_norm": 0.25078603625297546,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7144697904586792,
+                  "upper_mean": 2.324948787689209,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6458332538604736,
+                  "upper_mean": 1.704894781112671,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7152525782585144,
+                  "upper_mean": 1.4154162406921387,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.5810362100601196,
+                  "upper_mean": 5.117345333099365,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": -0.0016822963953018188,
+              "gradient_l2_norm": 0.2517269253730774,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7144697904586792,
+                  "upper_mean": 2.324948787689209,
+                  "max_abs_log_ratio": 0.22870206832885742
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6458332538604736,
+                  "upper_mean": 1.704894781112671,
+                  "max_abs_log_ratio": 0.42691564559936523
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7152525782585144,
+                  "upper_mean": 1.4154162406921387,
+                  "max_abs_log_ratio": 0.24328899383544922
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.5810362100601196,
+                  "upper_mean": 5.117345333099365,
+                  "max_abs_log_ratio": 0.3750729560852051
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "training_row": 11,
+          "rewards": [
+            0.0,
+            1.0,
+            1.0,
+            0.0
+          ],
+          "advantages": [
+            -0.9999979734420776,
+            0.9999979734420776,
+            0.9999979734420776,
+            -0.9999979734420776
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 0.0,
+              "gradient_l2_norm": 0.2015499472618103,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.4880874752998352,
+                  "upper_mean": 11.945059776306152,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7350879311561584,
+                  "upper_mean": 1.1882470846176147,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.75047367811203,
+                  "upper_mean": 1.1740858554840088,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7704131603240967,
+                  "upper_mean": 1.0752562284469604,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.0022327005863189697,
+              "gradient_l2_norm": 0.20404399931430817,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.4880874752998352,
+                  "upper_mean": 11.945059776306152,
+                  "max_abs_log_ratio": 0.36459803581237793
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7350879311561584,
+                  "upper_mean": 1.1882470846176147,
+                  "max_abs_log_ratio": 0.31634199619293213
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.75047367811203,
+                  "upper_mean": 1.1740858554840088,
+                  "max_abs_log_ratio": 0.2417292594909668
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7704131603240967,
+                  "upper_mean": 1.0752562284469604,
+                  "max_abs_log_ratio": 0.23015952110290527
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters_changed": true,
+      "sampling": {
+        "zero_advantage_groups_retained": 9,
+        "tasks_attempted": 12,
+        "generated_training_tokens_including_rejected_groups": 15352
+      },
+      "protocol": {
+        "steps": 3,
+        "group": 4,
+        "max_tokens": 512,
+        "inner_updates": 2,
+        "learning_rate": 1e-05,
+        "geometry": "chi2",
+        "topology": "atomic",
+        "delta": 0.04,
+        "gold_in_generation": false,
+        "test_opened": false
+      },
+      "limitations": [
+        "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+        "Training-only difficulty calibration is charged as sampling cost.",
+        "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+        "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+      ]
+    },
+    {
+      "method": "gppo-framework",
+      "seed": 44,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "verified": true,
+        "test_read": false,
+        "source_id": "openai/grade-school-math",
+        "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+        "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "partition_sha256": {
+          "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+          "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+        },
+        "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+      },
+      "checkpoint": {
+        "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "verified_mirror": {
+          "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+          "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+          "file_sha256": {
+            "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+            "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+            "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+            "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        }
+      },
+      "baseline": {
+        "accuracy": 0.5,
+        "examples": 8,
+        "generated_tokens": 2619,
+        "truncated_responses": 1
+      },
+      "method_metrics": {
+        "accuracy": 0.625,
+        "examples": 8,
+        "generated_tokens": 2712,
+        "truncated_responses": 1
+      },
+      "training": [
+        {
+          "step": 1,
+          "training_row": 1,
+          "rewards": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "advantages": [
+            -0.9999979734420776,
+            -0.9999979734420776,
+            0.9999979734420776,
+            0.9999979734420776
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": -1.4901161193847656e-08,
+              "gradient_l2_norm": 0.19745734333992004,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7323322892189026,
+                  "upper_mean": 1.1610910892486572,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7461478114128113,
+                  "upper_mean": 1.974495530128479,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7349182367324829,
+                  "upper_mean": 1.18876314163208,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7676163911819458,
+                  "upper_mean": 1.083073377609253,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.001971721649169922,
+              "gradient_l2_norm": 0.20105725526809692,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7323322892189026,
+                  "upper_mean": 1.1610910892486572,
+                  "max_abs_log_ratio": 0.24931901693344116
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7461478114128113,
+                  "upper_mean": 1.974495530128479,
+                  "max_abs_log_ratio": 0.3705940246582031
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7349182367324829,
+                  "upper_mean": 1.18876314163208,
+                  "max_abs_log_ratio": 0.316159725189209
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7676163911819458,
+                  "upper_mean": 1.083073377609253,
+                  "max_abs_log_ratio": 0.203904390335083
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "training_row": 2,
+          "rewards": [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "advantages": [
+            -0.5773489475250244,
+            -0.5773489475250244,
+            1.7320468425750732,
+            -0.5773489475250244
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": -1.4901161193847656e-08,
+              "gradient_l2_norm": 0.2185678333044052,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7420560717582703,
+                  "upper_mean": 1.1529061794281006,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6769663095474243,
+                  "upper_mean": 1.2898989915847778,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.734659731388092,
+                  "upper_mean": 1.5469142198562622,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7190536260604858,
+                  "upper_mean": 1.2630780935287476,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.002204790711402893,
+              "gradient_l2_norm": 0.2228059619665146,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7420560717582703,
+                  "upper_mean": 1.1529061794281006,
+                  "max_abs_log_ratio": 0.20563721656799316
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.6769663095474243,
+                  "upper_mean": 1.2898989915847778,
+                  "max_abs_log_ratio": 0.3023662567138672
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.734659731388092,
+                  "upper_mean": 1.5469142198562622,
+                  "max_abs_log_ratio": 0.3404366970062256
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7190536260604858,
+                  "upper_mean": 1.2630780935287476,
+                  "max_abs_log_ratio": 0.24411249160766602
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "training_row": 3,
+          "rewards": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "advantages": [
+            -0.9999979734420776,
+            -0.9999979734420776,
+            0.9999979734420776,
+            0.9999979734420776
+          ],
+          "updates": [
+            {
+              "inner_update": 1,
+              "loss": 0.0,
+              "gradient_l2_norm": 0.2408640831708908,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7508477568626404,
+                  "upper_mean": 1.1807000637054443,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7586772441864014,
+                  "upper_mean": 1.103638768196106,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.5582422614097595,
+                  "upper_mean": 6.741913795471191,
+                  "max_abs_log_ratio": 0.0
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7377598881721497,
+                  "upper_mean": 1.3181971311569214,
+                  "max_abs_log_ratio": 0.0
+                }
+              ]
+            },
+            {
+              "inner_update": 2,
+              "loss": 0.0001548975706100464,
+              "gradient_l2_norm": 0.25161680579185486,
+              "response_audits": [
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7508477568626404,
+                  "upper_mean": 1.1807000637054443,
+                  "max_abs_log_ratio": 0.24138259887695312
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7586772441864014,
+                  "upper_mean": 1.103638768196106,
+                  "max_abs_log_ratio": 0.44321370124816895
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.5582422614097595,
+                  "upper_mean": 6.741913795471191,
+                  "max_abs_log_ratio": 0.4983668327331543
+                },
+                {
+                  "geometry": "chi2",
+                  "topology": "atomic",
+                  "clip_fraction": 0.0,
+                  "lower_mean": 0.7377598881721497,
+                  "upper_mean": 1.3181971311569214,
+                  "max_abs_log_ratio": 0.27849018573760986
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "parameters_changed": true,
+      "sampling": {
+        "zero_advantage_groups_retained": 1,
+        "tasks_attempted": 4,
+        "generated_training_tokens_including_rejected_groups": 3897
+      },
+      "protocol": {
+        "steps": 3,
+        "group": 4,
+        "max_tokens": 512,
+        "inner_updates": 2,
+        "learning_rate": 1e-05,
+        "geometry": "chi2",
+        "topology": "atomic",
+        "delta": 0.04,
+        "gold_in_generation": false,
+        "test_opened": false
+      },
+      "limitations": [
+        "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+        "Training-only difficulty calibration is charged as sampling cost.",
+        "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+        "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+      ]
+    }
+  ],
+  "controls": {
+    "grpo-control": {
+      "seed_results": [
+        {
+          "method": "grpo-control",
+          "seed": 42,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "dataset": {
+            "verified": true,
+            "test_read": false,
+            "source_id": "openai/grade-school-math",
+            "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+            "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+            "partition_sha256": {
+              "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+              "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+            },
+            "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+          },
+          "checkpoint": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "verified_mirror": {
+              "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+              "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+              "file_sha256": {
+                "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+                "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+                "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+                "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+                "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+                "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+                "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+              }
+            }
+          },
+          "baseline": {
+            "accuracy": 0.5,
+            "examples": 8,
+            "generated_tokens": 2619,
+            "truncated_responses": 1
+          },
+          "method_metrics": {
+            "accuracy": 0.75,
+            "examples": 8,
+            "generated_tokens": 2697,
+            "truncated_responses": 1
+          },
+          "training": [
+            {
+              "step": 1,
+              "training_row": 1,
+              "rewards": [
+                0.0,
+                1.0,
+                0.0,
+                1.0
+              ],
+              "advantages": [
+                -0.9999979734420776,
+                0.9999979734420776,
+                -0.9999979734420776,
+                0.9999979734420776
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": 2.9802322387695312e-08,
+                  "gradient_l2_norm": 0.27938181161880493,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1110137701034546,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.8000000715255737,
+                      "upper_mean": 1.0431897640228271,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.7999999523162842,
+                      "upper_mean": 1.0893381834030151,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.7999999523162842,
+                      "upper_mean": 1.057865858078003,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": 0.002030596137046814,
+                  "gradient_l2_norm": 0.28472134470939636,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.016949152573943138,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1110137701034546,
+                      "max_abs_log_ratio": 0.22674989700317383
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.018939394503831863,
+                      "lower_mean": 0.8000000715255737,
+                      "upper_mean": 1.0431897640228271,
+                      "max_abs_log_ratio": 0.30282139778137207
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.028985507786273956,
+                      "lower_mean": 0.7999999523162842,
+                      "upper_mean": 1.0893381834030151,
+                      "max_abs_log_ratio": 0.33664536476135254
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0076045626774430275,
+                      "lower_mean": 0.7999999523162842,
+                      "upper_mean": 1.057865858078003,
+                      "max_abs_log_ratio": 0.2366175651550293
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "training_row": 3,
+              "rewards": [
+                1.0,
+                1.0,
+                0.0,
+                1.0
+              ],
+              "advantages": [
+                0.5773489475250244,
+                0.5773489475250244,
+                -1.7320468425750732,
+                0.5773489475250244
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": 2.9802322387695312e-08,
+                  "gradient_l2_norm": 0.26535335183143616,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0559899806976318,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0503207445144653,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0673279762268066,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.073014497756958,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": -0.00016336143016815186,
+                  "gradient_l2_norm": 0.26423126459121704,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.006849315017461777,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0559899806976318,
+                      "max_abs_log_ratio": 0.2420504093170166
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0503207445144653,
+                      "max_abs_log_ratio": 0.20047569274902344
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.005076142027974129,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0673279762268066,
+                      "max_abs_log_ratio": 0.20008587837219238
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.00909090880304575,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.073014497756958,
+                      "max_abs_log_ratio": 0.22644686698913574
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "step": 3,
+              "training_row": 6,
+              "rewards": [
+                0.0,
+                1.0,
+                0.0,
+                0.0
+              ],
+              "advantages": [
+                -0.5773489475250244,
+                1.7320468425750732,
+                -0.5773489475250244,
+                -0.5773489475250244
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": -2.9802322387695312e-08,
+                  "gradient_l2_norm": 0.26925307512283325,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0699514150619507,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1135221719741821,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.079010009765625,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.072474718093872,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": 0.0001488327980041504,
+                  "gradient_l2_norm": 0.26429787278175354,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.013215859420597553,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0699514150619507,
+                      "max_abs_log_ratio": 0.42737579345703125
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.01224489789456129,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1135221719741821,
+                      "max_abs_log_ratio": 0.2332448959350586
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.02427184395492077,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.079010009765625,
+                      "max_abs_log_ratio": 0.38122880458831787
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.072474718093872,
+                      "max_abs_log_ratio": 0.2218790054321289
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters_changed": true,
+          "sampling": {
+            "zero_advantage_groups_retained": 4,
+            "tasks_attempted": 7,
+            "generated_training_tokens_including_rejected_groups": 6789
+          },
+          "protocol": {
+            "steps": 3,
+            "group": 4,
+            "max_tokens": 512,
+            "inner_updates": 2,
+            "learning_rate": 1e-05,
+            "geometry": null,
+            "topology": null,
+            "delta": null,
+            "gold_in_generation": false,
+            "test_opened": false
+          },
+          "limitations": [
+            "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+            "Training-only difficulty calibration is charged as sampling cost.",
+            "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+            "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+          ]
+        },
+        {
+          "method": "grpo-control",
+          "seed": 43,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "dataset": {
+            "verified": true,
+            "test_read": false,
+            "source_id": "openai/grade-school-math",
+            "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+            "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+            "partition_sha256": {
+              "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+              "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+            },
+            "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+          },
+          "checkpoint": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "verified_mirror": {
+              "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+              "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+              "file_sha256": {
+                "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+                "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+                "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+                "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+                "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+                "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+                "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+              }
+            }
+          },
+          "baseline": {
+            "accuracy": 0.5,
+            "examples": 8,
+            "generated_tokens": 2619,
+            "truncated_responses": 1
+          },
+          "method_metrics": {
+            "accuracy": 0.5,
+            "examples": 8,
+            "generated_tokens": 2832,
+            "truncated_responses": 1
+          },
+          "training": [
+            {
+              "step": 1,
+              "training_row": 0,
+              "rewards": [
+                0.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "advantages": [
+                -1.7320468425750732,
+                0.5773489475250244,
+                0.5773489475250244,
+                0.5773489475250244
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": -1.4901161193847656e-08,
+                  "gradient_l2_norm": 0.7702589631080627,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0755953788757324,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.032602310180664,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0455633401870728,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0367013216018677,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": 0.0012336820363998413,
+                  "gradient_l2_norm": 0.7327209115028381,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.017241379246115685,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0755953788757324,
+                      "max_abs_log_ratio": 0.22510385513305664
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.013100436888635159,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.032602310180664,
+                      "max_abs_log_ratio": 0.3517320156097412
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.009478673338890076,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0455633401870728,
+                      "max_abs_log_ratio": 0.23279380798339844
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0043290043249726295,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0367013216018677,
+                      "max_abs_log_ratio": 0.2349395751953125
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "training_row": 3,
+              "rewards": [
+                0.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "advantages": [
+                -1.7320468425750732,
+                0.5773489475250244,
+                0.5773489475250244,
+                0.5773489475250244
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": 0.0,
+                  "gradient_l2_norm": 0.207352876663208,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1591262817382812,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.7999999523162842,
+                      "upper_mean": 1.056793451309204,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0515841245651245,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.074959397315979,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": -0.000846371054649353,
+                  "gradient_l2_norm": 0.20182053744792938,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.005859375,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1591262817382812,
+                      "max_abs_log_ratio": 0.2349104881286621
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.010600706562399864,
+                      "lower_mean": 0.7999999523162842,
+                      "upper_mean": 1.056793451309204,
+                      "max_abs_log_ratio": 0.3737301826477051
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.003968254197388887,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0515841245651245,
+                      "max_abs_log_ratio": 0.22510647773742676
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.004950494971126318,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.074959397315979,
+                      "max_abs_log_ratio": 0.27245402336120605
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "step": 3,
+              "training_row": 4,
+              "rewards": [
+                1.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              "advantages": [
+                0.9999979734420776,
+                -0.9999979734420776,
+                0.9999979734420776,
+                -0.9999979734420776
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": 0.0,
+                  "gradient_l2_norm": 0.25229400396347046,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0540868043899536,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.053783893585205,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0912079811096191,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1795438528060913,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": 7.742643356323242e-05,
+                  "gradient_l2_norm": 0.25660523772239685,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0042553190141916275,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0540868043899536,
+                      "max_abs_log_ratio": 0.21998977661132812
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.015564202331006527,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.053783893585205,
+                      "max_abs_log_ratio": 0.35675859451293945
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.012145749293267727,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0912079811096191,
+                      "max_abs_log_ratio": 0.5651524066925049
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.009765625,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1795438528060913,
+                      "max_abs_log_ratio": 0.5699958801269531
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters_changed": true,
+          "sampling": {
+            "zero_advantage_groups_retained": 2,
+            "tasks_attempted": 5,
+            "generated_training_tokens_including_rejected_groups": 5259
+          },
+          "protocol": {
+            "steps": 3,
+            "group": 4,
+            "max_tokens": 512,
+            "inner_updates": 2,
+            "learning_rate": 1e-05,
+            "geometry": null,
+            "topology": null,
+            "delta": null,
+            "gold_in_generation": false,
+            "test_opened": false
+          },
+          "limitations": [
+            "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+            "Training-only difficulty calibration is charged as sampling cost.",
+            "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+            "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+          ]
+        },
+        {
+          "method": "grpo-control",
+          "seed": 44,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "dataset": {
+            "verified": true,
+            "test_read": false,
+            "source_id": "openai/grade-school-math",
+            "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+            "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+            "partition_sha256": {
+              "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+              "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+            },
+            "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+          },
+          "checkpoint": {
+            "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+            "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+            "verified_mirror": {
+              "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+              "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+              "file_sha256": {
+                "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+                "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+                "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+                "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+                "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+                "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+                "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+              }
+            }
+          },
+          "baseline": {
+            "accuracy": 0.5,
+            "examples": 8,
+            "generated_tokens": 2619,
+            "truncated_responses": 1
+          },
+          "method_metrics": {
+            "accuracy": 0.625,
+            "examples": 8,
+            "generated_tokens": 2870,
+            "truncated_responses": 1
+          },
+          "training": [
+            {
+              "step": 1,
+              "training_row": 1,
+              "rewards": [
+                0.0,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "advantages": [
+                -0.9999979734420776,
+                -0.9999979734420776,
+                0.9999979734420776,
+                0.9999979734420776
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": -1.4901161193847656e-08,
+                  "gradient_l2_norm": 0.19745734333992004,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0735050439834595,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0531048774719238,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0629602670669556,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.7999999523162842,
+                      "upper_mean": 1.0456827878952026,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": 0.002298027276992798,
+                  "gradient_l2_norm": 0.19605231285095215,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.030837005004286766,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0735050439834595,
+                      "max_abs_log_ratio": 0.24931901693344116
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.011976048350334167,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0531048774719238,
+                      "max_abs_log_ratio": 0.3705940246582031
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.009677419438958168,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0629602670669556,
+                      "max_abs_log_ratio": 0.316159725189209
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.004291845485568047,
+                      "lower_mean": 0.7999999523162842,
+                      "upper_mean": 1.0456827878952026,
+                      "max_abs_log_ratio": 0.203904390335083
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "training_row": 2,
+              "rewards": [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              "advantages": [
+                -0.5773489475250244,
+                -0.5773489475250244,
+                1.7320468425750732,
+                -0.5773489475250244
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": 0.0,
+                  "gradient_l2_norm": 0.2067834883928299,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.131280779838562,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.152910828590393,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0704345703125,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1026160717010498,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": 0.0002161264419555664,
+                  "gradient_l2_norm": 0.20600925385951996,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0070588234812021255,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.131280779838562,
+                      "max_abs_log_ratio": 0.28953123092651367
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.004938271827995777,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.152910828590393,
+                      "max_abs_log_ratio": 0.23798131942749023
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.009259259328246117,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0704345703125,
+                      "max_abs_log_ratio": 0.4944419860839844
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0117647061124444,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.1026160717010498,
+                      "max_abs_log_ratio": 0.2365093231201172
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "step": 3,
+              "training_row": 3,
+              "rewards": [
+                0.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "advantages": [
+                -1.7320468425750732,
+                0.5773489475250244,
+                0.5773489475250244,
+                0.5773489475250244
+              ],
+              "updates": [
+                {
+                  "inner_update": 1,
+                  "loss": -1.4901161193847656e-08,
+                  "gradient_l2_norm": 0.23904232680797577,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0602742433547974,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.049420714378357,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.8000000715255737,
+                      "upper_mean": 1.0461844205856323,
+                      "max_abs_log_ratio": 0.0
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.0,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0558152198791504,
+                      "max_abs_log_ratio": 0.0
+                    }
+                  ]
+                },
+                {
+                  "inner_update": 2,
+                  "loss": 0.0017343610525131226,
+                  "gradient_l2_norm": 0.24148331582546234,
+                  "response_audits": [
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.010256410576403141,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0602742433547974,
+                      "max_abs_log_ratio": 0.24920368194580078
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.01860465109348297,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.049420714378357,
+                      "max_abs_log_ratio": 0.24724578857421875
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.013392857275903225,
+                      "lower_mean": 0.8000000715255737,
+                      "upper_mean": 1.0461844205856323,
+                      "max_abs_log_ratio": 0.25767087936401367
+                    },
+                    {
+                      "geometry": "tv",
+                      "topology": "mc",
+                      "clip_fraction": 0.00800000037997961,
+                      "lower_mean": 0.800000011920929,
+                      "upper_mean": 1.0558152198791504,
+                      "max_abs_log_ratio": 0.35553252696990967
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters_changed": true,
+          "sampling": {
+            "zero_advantage_groups_retained": 1,
+            "tasks_attempted": 4,
+            "generated_training_tokens_including_rejected_groups": 4228
+          },
+          "protocol": {
+            "steps": 3,
+            "group": 4,
+            "max_tokens": 512,
+            "inner_updates": 2,
+            "learning_rate": 1e-05,
+            "geometry": null,
+            "topology": null,
+            "delta": null,
+            "gold_in_generation": false,
+            "test_opened": false
+          },
+          "limitations": [
+            "Few-step GSM8K runtime diagnostic, not original AIME/coding Avg@8 results.",
+            "Training-only difficulty calibration is charged as sampling cost.",
+            "Current-policy rejected-group counts may differ: no equal-total-compute superiority claim.",
+            "GPPO default chi2/atomic avoids equating literal KL with the paper's separate two-sided mapping."
+          ]
+        }
+      ],
+      "execution_checks": {
+        "completed_seeds": 3,
+        "rollout_groups_per_seed": [
+          3,
+          3,
+          3
+        ],
+        "actual_gradient_steps": [
+          6,
+          6,
+          6
+        ],
+        "rejected_zero_advantage_groups": [
+          4,
+          2,
+          1
+        ],
+        "generated_tokens_including_rejected_groups": [
+          6789,
+          5259,
+          4228
+        ],
+        "gold_in_policy": false,
+        "official_test_read": false
+      },
+      "matched_upper_bound_budget": true,
+      "matched_actual_compute": false
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "test_used_for_selection": false,
+    "claim_policy": "scoped mechanism diagnostic; do not claim stable capability or production uplift"
+  },
+  "provenance": {
+    "code_commit": "7e125fd08cd492bf69628c289309ba0b83c1e259",
+    "artifact_path": "docs/reproductions/2610.13015-gppo-framework/metrics/public-a100-seeds42-44.json",
+    "dataset_fingerprint": "69efc634f51a589335fcdea85238bf3218653a94de2ba2604a64056960547dab"
+  },
+  "limitations": [
+    "Three-seed bounded mechanism diagnostic, not a stable capability/production gain claim.",
+    "Original-paper results are not copied into measured local metrics.",
+    "Eight holdout questions and three updates are not the original large-model benchmark.",
+    "Sampling rejections are counted; equal optimizer steps are not equal total compute."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "key": "progressive-contraction",
+  "arxiv_id": "2610.12933",
+  "title": "Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training",
+  "paper_url": "https://arxiv.org/abs/2610.12933",
+  "organization": "National University of Singapore / Nanjing University / Fudan University / The University of Sydney / The Chinese University of Hong Kong / Nanyang Technological University",
+  "published": "2026-10-09",
+  "upstream_code": "not released / not found in paper-linked primary sources (2026-10-13)",
+  "track": "post-training",
+  "topics": [
+    "Monte Carlo reasoning tree",
+    "Teacher-side uncertainty contraction",
+    "Learner-aware SFT routing"
+  ],
+  "local_code": "src/auto_research/reproductions/progressive_contraction",
+  "documentation": "docs/reproductions/2610.12933-progressive-contraction/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "GSM8K verified train-only holdout"
+  ],
+  "baseline": "同一真实verified teacher全集的full-SFT；相同epochs，teacher profiling成本不并入student exposure比率",
+  "metrics": [
+    "method_metrics.accuracy",
+    "parameters_changed"
+  ],
+  "mechanisms": [
+    "Verified real teacher backbone and exact open-prefix Monte Carlo continuations",
+    "Bernoulli branch uncertainty and floor(rho*N) teacher-pool contraction",
+    "Actual probing SFT epoch and current-student response-NLL top-M routing",
+    "Full-SFT control with separate teacher profiling tokens and student exposure accounting"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.progressive_contraction.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "National University of Singapore / Nanjing University / Fudan University / The University of Sydney / The Chinese University of Hong Kong / Nanyang Technological University",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoint/data/training budgets and original benchmark suite"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/progressive-contraction-a100-20261014-seeds42-44.json"
+  }
+}

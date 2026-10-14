@@ -1,0 +1,21 @@
+{
+  "domain": "foundation-models",
+  "key": "oal",
+  "title": "Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels",
+  "paper_url": "https://arxiv.org/abs/2610.13674",
+  "detail_path": "reproductions/2610.13674-oal/README.md",
+  "topic": [
+    "推理与系统效率",
+    "注意力线性化"
+  ],
+  "first_author": "Weiqi Sun",
+  "first_author_affiliation": "The Chinese University of Hong Kong, Shenzhen",
+  "published": "2026-10-09",
+  "code": "https://github.com/wuqianyue09/OAL",
+  "adapter": {
+    "spec_key": "oal"
+  },
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oal-a100-20261013.json"
+}

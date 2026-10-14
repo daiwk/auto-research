@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "adapter_key": "progressive-contraction",
+  "paper_url": "https://arxiv.org/abs/2610.12933",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "Qwen3.5-4B/rho10%的student exposure为full-SFT的0.74%；AIME25为83.3%、full-SFT56.7%。9B分别90.0%/86.7%。这不含teacher profiling的总计算。v1 HTML部分Appendix为missing-label且无可读附录pipeline，本地按主文Eq1–8实现并记来源缺口。未报告生产线上A/B。",
+  "metrics": {
+    "qwen3_5_4b_rho_10_student_exposure_percent": 0.74,
+    "qwen3_5_4b_full_sft_aime25_percent": 56.7,
+    "qwen3_5_4b_rho_10_aime25_percent": 83.3,
+    "qwen3_5_9b_full_sft_aime25_percent": 86.7,
+    "qwen3_5_9b_rho_10_aime25_percent": 90
+  }
+}

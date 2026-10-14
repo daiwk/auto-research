@@ -1,0 +1,8 @@
+{
+  "domain": "recommendation",
+  "key": "uxsid",
+  "detail_path": "reproductions/2605.09040-uxsid/README.md",
+  "first_author": "Hongwei Zhang",
+  "first_author_affiliation": "Kuaishou",
+  "adapter": {"spec_key": "uxsid"}
+}

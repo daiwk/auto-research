@@ -1,6 +1,6 @@
 # 多模态大模型方法索引
 
-本页汇总已经具有独立 adapter、真实公开图像实验和固定指标的论文实现。
+本页汇总具有独立源码入口的论文；公开数据实跑与 GPU 验收状态请查各篇详情和回执。
 底座 connector 与论文 genome 的对应关系也在同一处维护。
 
 ## 已实现论文
@@ -9,6 +9,7 @@
 
 | 方法族 | 论文 | 机构与日期 | Adapter |
 |---|---|---|---|
+| 视觉证据约束蒸馏 | [CV-OPD: Contrastive Vision On-policy Distillation](../reproductions/2610.13264-cv-opd/README.md) | Xiamen University，2026-10-09 | `cv-opd` |
 | 视觉 token 压缩与动态证据恢复 | [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](../multimodal-models/2610.12060-vimod/README.md) | City University of Hong Kong，2026-10-08 | `vimod` |
 | 冻结中间层探针与验证器自举 | [Unsupervised Multimodal Reward Modeling](../reproductions/2610.12707-umrm/README.md) | Massachusetts Institute of Technology，2026-10-08 | `umrm` |
 | 视觉 token 压缩与动态证据恢复 | [V-CoLA: Vision Token Compression with Linear Attention](../multimodal-models/2610.11251-vcola/README.md) | Alibaba Cloud Computing，2026-10-08 | `vcola` |

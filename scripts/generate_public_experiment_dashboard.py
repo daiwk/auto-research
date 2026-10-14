@@ -73,8 +73,12 @@ def _seed(row_seed: str, payload: dict[str, Any], path: str) -> str:
 def _dataset_name(row_dataset: str, payload: dict[str, Any]) -> str:
     """Keep revision manifests in the artifact, not in a card's dataset label."""
     dataset = payload.get("dataset")
+    if dataset is None:
+        live_protocol = _protocol(payload).get("protocol")
+        if isinstance(live_protocol, dict):
+            dataset = live_protocol.get("dataset")
     if isinstance(dataset, dict):
-        name = dataset.get("id", dataset.get("name"))
+        name = dataset.get("id") or dataset.get("name") or dataset.get("public_id") or dataset.get("source_id")
         if name:
             return str(name)
     elif isinstance(dataset, str) and dataset:
@@ -94,7 +98,7 @@ def _agent_evidence(payload: dict[str, Any], metrics: dict[str, float]) -> dict[
     training = training if isinstance(training, dict) else {}
     dataset = payload.get("dataset", "")
     if isinstance(dataset, dict):
-        dataset = dataset.get("id", dataset.get("name", ""))
+        dataset = dataset.get("id") or dataset.get("name") or dataset.get("public_id", "")
     diagnostic_only = assessment["diagnostic_only"] or (
         any(section.get("diagnostic_only") is True or section.get("promotion_eligible") is False
             for section in (payload, diagnostics, training, protocol))
@@ -142,6 +146,10 @@ def build_payload() -> dict:
             rows = sorted(store.rows(), key=lambda row: (row.domain, row.method, row.path))
     experiments = []
     for row in rows:
+        # Boolean-only implementation contracts remain in the audit index, but
+        # are not measured experiments and must not become empty result cards.
+        if not row.metrics:
+            continue
         paper = _metadata_for(row.path, papers)
         payload = _artifact_payload(row.path)
         public_domain = _public_domain(paper["domain"]) if paper else row.domain
@@ -161,7 +169,9 @@ def build_payload() -> dict:
         "schema_version": 2,
         "source": "committed audited metrics under docs/",
         "experiments": experiments,
-        "artifact_count": imported,
+        "artifact_count": len(experiments),
+        "indexed_artifact_count": imported,
+        "unmeasured_artifact_count": len(rows) - len(experiments),
     }
 
 

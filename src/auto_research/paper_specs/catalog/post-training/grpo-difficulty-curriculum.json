@@ -1,0 +1,20 @@
+{
+  "domain": "post-training",
+  "key": "grpo-difficulty-curriculum",
+  "title": "A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO",
+  "paper_url": "https://arxiv.org/abs/2610.13669",
+  "detail_path": "reproductions/2610.13669-grpo-difficulty-curriculum/README.md",
+  "topic": [
+    "GRPO difficulty curriculum",
+    "Current-policy recalibration",
+    "Overly-hard degradation control"
+  ],
+  "first_author": "Ronghan Li",
+  "first_author_affiliation": "Dalian Maritime University",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": "https://github.com/NHLling/GRPO-B",
+  "adapter": {
+    "spec_key": "grpo-difficulty-curriculum"
+  }
+}

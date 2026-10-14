@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "adapter_key": "grpo-difficulty-curriculum",
+  "validated_at": "2026-10-14",
+  "seeds": [
+    42
+  ],
+  "variants": [
+    "fixed-medium",
+    "staged",
+    "too-hard"
+  ],
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct13_post_training.py",
+    "--method",
+    "grpo-difficulty-curriculum",
+    "--config",
+    "data/oct13_execution.json",
+    "--seed",
+    "42",
+    "--output",
+    "runs/curriculum-fixed-medium-s42",
+    "--variant",
+    "fixed-medium"
+  ],
+  "all_sanitized_commands": [
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/curriculum-fixed-medium-s42",
+      "--variant",
+      "fixed-medium"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/curriculum-staged-s42",
+      "--variant",
+      "staged"
+    ],
+    [
+      "python",
+      "scripts/run_oct13_post_training.py",
+      "--method",
+      "grpo-difficulty-curriculum",
+      "--config",
+      "data/oct13_execution.json",
+      "--seed",
+      "42",
+      "--output",
+      "runs/curriculum-too-hard-s42",
+      "--variant",
+      "too-hard"
+    ]
+  ],
+  "command_path_relocations_only": true,
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "openai/grade-school-math",
+    "source_revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "partition_sha256": {
+      "train": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+      "validation": "2cf1119ad7b2e31e825274487ef32c073e03a8ed44f08ecd3e0366c1f40ebdb7"
+    },
+    "partition": "normalized-question sha256 unsigned-prefix / 2^64 < 0.1 validation"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "file_sha256": {
+        "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+        "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "fixed-medium.initial.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    },
+    "fixed-medium.validation.accuracy": {
+      "mean": 0.75,
+      "std": 0,
+      "n": 1
+    },
+    "staged.initial.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    },
+    "staged.validation.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    },
+    "too-hard.initial.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    },
+    "too-hard.validation.accuracy": {
+      "mean": 0.5,
+      "std": 0,
+      "n": 1
+    }
+  },
+  "execution_checks": {
+    "fixed-medium": {
+      "actual_optimizer_updates": 8,
+      "invocation_elapsed_seconds": 538.1836995203048,
+      "validation_examples": 4,
+      "difficulty_recalibration_steps": 4,
+      "actual_bands": [
+        [
+          0.375,
+          0.625
+        ],
+        [
+          0.375,
+          0.625
+        ],
+        [
+          0.375,
+          0.625
+        ],
+        [
+          0.375,
+          0.625
+        ]
+      ],
+      "actual_stage_transitions": [
+        "not-staged",
+        "not-staged",
+        "not-staged",
+        "not-staged"
+      ],
+      "measured_cost": {
+        "generation_calls": {
+          "evaluation": 24,
+          "student": 32
+        },
+        "generated_tokens": {
+          "evaluation": 8413,
+          "student": 72642
+        },
+        "scored_response_tokens": {
+          "behavior": 72642,
+          "student_rl": 18142
+        },
+        "frozen_encoder_forward_calls": 0,
+        "frozen_encoder_input_tokens_including_prompt": 0,
+        "scope": "entire invocation, including training controls, profiling and evaluation",
+        "includes_rejected_and_profiling_generations": true
+      }
+    },
+    "staged": {
+      "actual_optimizer_updates": 9,
+      "invocation_elapsed_seconds": 562.0409296359867,
+      "validation_examples": 4,
+      "difficulty_recalibration_steps": 4,
+      "actual_bands": [
+        [
+          0.625,
+          0.875
+        ],
+        [
+          0.625,
+          0.875
+        ],
+        [
+          0.625,
+          0.875
+        ],
+        [
+          0.5,
+          0.75
+        ]
+      ],
+      "actual_stage_transitions": [
+        "new-best",
+        "keep",
+        "advance",
+        "new-best"
+      ],
+      "measured_cost": {
+        "generation_calls": {
+          "evaluation": 24,
+          "student": 32
+        },
+        "generated_tokens": {
+          "evaluation": 9158,
+          "student": 73273
+        },
+        "scored_response_tokens": {
+          "behavior": 73273,
+          "student_rl": 18844
+        },
+        "frozen_encoder_forward_calls": 0,
+        "frozen_encoder_input_tokens_including_prompt": 0,
+        "scope": "entire invocation, including training controls, profiling and evaluation",
+        "includes_rejected_and_profiling_generations": true
+      }
+    },
+    "too-hard": {
+      "actual_optimizer_updates": 11,
+      "invocation_elapsed_seconds": 555.9015793707222,
+      "validation_examples": 4,
+      "difficulty_recalibration_steps": 4,
+      "actual_bands": [
+        [
+          0.125,
+          0.375
+        ],
+        [
+          0.125,
+          0.375
+        ],
+        [
+          0.125,
+          0.375
+        ],
+        [
+          0.125,
+          0.375
+        ]
+      ],
+      "actual_stage_transitions": [
+        "not-staged",
+        "not-staged",
+        "not-staged",
+        "not-staged"
+      ],
+      "measured_cost": {
+        "generation_calls": {
+          "evaluation": 24,
+          "student": 32
+        },
+        "generated_tokens": {
+          "evaluation": 8780,
+          "student": 74351
+        },
+        "scored_response_tokens": {
+          "behavior": 74351,
+          "student_rl": 26978
+        },
+        "frozen_encoder_forward_calls": 0,
+        "frozen_encoder_input_tokens_including_prompt": 0,
+        "scope": "entire invocation, including training controls, profiling and evaluation",
+        "includes_rejected_and_profiling_generations": true
+      }
+    }
+  },
+  "limitations": [
+    "One seed and three variants are NOT three independent seeds; L1 mechanism smoke only.",
+    "Four validation examples cannot establish stable gains or original B5 degradation; test stayed isolated.",
+    "Matched configured rollout caps do not imply equal effective updates, realized token cost or runtime.",
+    "Only fixed-medium/staged/B5-too-hard were executed; static and unfiltered controls are not claimed.",
+    "Original default seeds 43/44 remain unfinished; passing this CUDA smoke does not complete the batch plan.",
+    "Staged reached B2, not the full original B1-to-B5 curriculum; validation cadence is reduced-scale."
+  ],
+  "executed_source_sha256": {
+    "scripts/prepare_soar_catalog_qa.py": "483a4eb3d9932d31046888c165c06590e67c6df5575a5b2afd4e302145f445e7",
+    "scripts/run_oct13_post_training.py": "f482471e2c33189bcfed7c02fce0e79fb58ba9606a3a354c12ee2a63bfca8f6b",
+    "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+    "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+    "src/auto_research/post_training/oct13_common.py": "739f276633d74a85ba790e4d6df25504bce89950c40867ed57302cde03f1ada9",
+    "src/auto_research/post_training/proximal_checkpoint.py": "5307a54204720e5407d2cd0435b654ae0e594f30c85cdf07d55d4e90612a1397",
+    "src/auto_research/post_training/response_policy.py": "e380a5b4d1d53974b973b72b7d9ad6328129dc8c9bae4d233f6c1cbdf8508bf7",
+    "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+    "src/auto_research/reproductions/gppo_framework/__init__.py": "7fe8cab42fef9f32b9653dfb5f54f03182de0753de2c9e5b359d124d7cd763d8",
+    "src/auto_research/reproductions/gppo_framework/adapter.py": "a7f4ee792a8ded3daeeb183cbca5c99de63c1b7d3cb195f5bedd5289cb0e0260",
+    "src/auto_research/reproductions/gppo_framework/objective.py": "0f8fbb2ad397b04a70466dde4e939f4d094ad7e7df07cfbba59f4a6ca5d05dd0",
+    "src/auto_research/reproductions/gppo_framework/paper.yaml": "a023ee98bbd078077b2708122973d27a98085848be816ce461b7d4291aca8e1f",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/__init__.py": "d09d8d7e0e6f5bcec9979241eed06a1d2a6ac8f3fb7a25f49e0df55be0071acb",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/adapter.py": "bbd3e964dc035ea4bbd999a581ea07eccabd986b6456774b21a4c24092cbdfbe",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/algorithm.py": "4131e39279d30c0748b14f611ab657b3fea76147a7c164aea2883c62bde75785",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/checkpoint.py": "d03a7d2db0a19b469fe5429ddce634b02d8cbd0eeed8d09bef0afc51c1d7ac70",
+    "src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml": "0b4dd86c85907b732df9380a4bd1bbc17785c09c184d5be2793ac37f63768c16",
+    "src/auto_research/reproductions/magicbeanstalk/__init__.py": "8dd207ea37a89dfa34f87b02eb4a2fd26472895678d1362a7e5b59dad5cda616",
+    "src/auto_research/reproductions/magicbeanstalk/adapter.py": "319b6503de342feee49fb6446b7bbdeb117f7dc0dd7b79ed1c3bd34cce1ce73f",
+    "src/auto_research/reproductions/magicbeanstalk/algorithm.py": "7705ea33cdb4e55908d732498098e3d34b52c00f121423e23651430ccb8b3114",
+    "src/auto_research/reproductions/magicbeanstalk/checkpoint.py": "f509334fea6b6db2e68668bb7957e8f6e29c522e63012be440779b9346d1c9e0",
+    "src/auto_research/reproductions/magicbeanstalk/paper.yaml": "e9c5619918b4d72d776008aba3fa95d50ba6ebe99afab729ba9e6dfe82fac06e",
+    "src/auto_research/reproductions/progressive_contraction/__init__.py": "e50fe46d888e0a0b11b7d4d6d8f3224ae5940394f8ba8396fc5afb1cd38a4d53",
+    "src/auto_research/reproductions/progressive_contraction/adapter.py": "06f23b5c795f7222f76dee9beaa8164f460eb5183e18c6d374bff011737235dd",
+    "src/auto_research/reproductions/progressive_contraction/algorithm.py": "176743356415111e3e19a26427cf59391b4b84b56697adf8d3fe3038ad0de3c1",
+    "src/auto_research/reproductions/progressive_contraction/checkpoint.py": "958d88b7afba14d8c7833ab3669f2cd93af6c6c19e8412bca87a136b48fec527",
+    "src/auto_research/reproductions/progressive_contraction/paper.yaml": "1beccb702ce7a33b196b1fcc6bab13cdc32fc48952d247565d54e8ce830860c2",
+    "src/auto_research/reproductions/soar/__init__.py": "3d87d1189d7037e32c1e2cb0c249d13609c5af3d7062a19904590ba7923c799a",
+    "src/auto_research/reproductions/soar/adapter.py": "8fbbe8f8fe54b9f014ccc26a75b01e72b73b95e2b03cc379c5b5db4b63c9b31e",
+    "src/auto_research/reproductions/soar/algorithm.py": "9b7068d9774d1c93800c512a04b9ba4d0ee98fc13d308e5ac0970299c8bb2485",
+    "src/auto_research/reproductions/soar/checkpoint.py": "43a83930af442dc3610d61becd06b38ca3c921131ed417837d3d7e11aa672708",
+    "src/auto_research/reproductions/soar/paper.yaml": "2f756cab9f7fefd4613bb69971fd8252c2b9ad451fa5c5eff5d03fa063d91521",
+    "src/auto_research/reproductions/state_opd/__init__.py": "8db07736f0336ed7f39502ae2953bdae76658942542cacbe4b6b2c1fd0abe094",
+    "src/auto_research/reproductions/state_opd/adapter.py": "2f8bf4773e8f40c0eabe777fbd1e1aa6d372a7b05501404c3e3f7b2d54987524",
+    "src/auto_research/reproductions/state_opd/algorithm.py": "dc7fe3eae619ff69ec51c47826f89471f00be564ea4e6730e12726a060ba7e2f",
+    "src/auto_research/reproductions/state_opd/checkpoint.py": "95755e0604f563a5c96f92e9de9069befe3e1274d31c224a43ca20d71f756b09",
+    "src/auto_research/reproductions/state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+    "src/auto_research/reproductions/state_opd/paper.yaml": "f9cdb6c489ab58bcb8cd6f3d8815c9d5c5e7f29616563d96ad5792533961a84d",
+    "src/auto_research/reproductions/synthself/__init__.py": "474bb75e10b95afe6faec1f3631beab2f17f9a43013d3d29e79b7d4b36e06031",
+    "src/auto_research/reproductions/synthself/adapter.py": "db4c08e1ccc2acfc28d19fc72acfa39b0a0dce096bbc430bafe9b21dbb72cddd",
+    "src/auto_research/reproductions/synthself/algorithm.py": "0662ce46de24214370dac4ab691ba766fbbc087717db46d838b2ea5af9d62f3f",
+    "src/auto_research/reproductions/synthself/checkpoint.py": "9835b086272d9262f057a0fc0975d19ff3b84d5e1766cc234ca1e11985164891",
+    "src/auto_research/reproductions/synthself/paper.yaml": "464d06e9cdd535ab61743fdba6641ae2eac4c8345fad27748c63e620544074c7",
+    "src/auto_research/reproductions/tapo_trajectory/__init__.py": "a0dd8d4825b91dd076b71bdd3a3eccb0638ba4bf0240fe9da76d61a7290f69c6",
+    "src/auto_research/reproductions/tapo_trajectory/adapter.py": "c01b75bf7853546caa2d517dd5f9c9faf739537b95207b8f1fd28adcdd5aafa7",
+    "src/auto_research/reproductions/tapo_trajectory/objective.py": "49ab02ac758251acde90091a82b22576449d294a1f25cc3144ff1addd1132ae2",
+    "src/auto_research/reproductions/tapo_trajectory/paper.yaml": "493e59ec67f96ee37ffecf6694dd5c4d8555849b8f756ccb63644da90bbb48d6",
+    "src/auto_research/reproductions/upturn/__init__.py": "1e9793e9ea85e94144f7eac8fa141567d7f964438fa628788b668358154e196e",
+    "src/auto_research/reproductions/upturn/adapter.py": "72e5da3cb70856944d0c9a25376f73d4a1d9f16213efd43e19b3acf2a584afc2",
+    "src/auto_research/reproductions/upturn/algorithm.py": "421abd06cc492c39cf72e9b15c7f85c01e85fae0a7c26fb3053fbd19bc4897a4",
+    "src/auto_research/reproductions/upturn/checkpoint.py": "83ac66cead272cb391fe27c56f838df5414712283db42f2b8088d3509de311f3",
+    "src/auto_research/reproductions/upturn/paper.yaml": "a1e335526f895b54e325331dc8354330f4a2d44f5f8c9c2a37f76ef2f7d589bc"
+  },
+  "provenance": {
+    "commit": "6aabe57a97ec3a586aac7aeea66128750f9441da",
+    "artifact_path": "docs/gpu-validations/grpo-difficulty-curriculum-a100-20261014.json",
+    "metrics_artifact": "docs/reproductions/2610.13669-grpo-difficulty-curriculum/metrics/public-a100-three-arms-seed42.json",
+    "execution_config_sha256": "506dce6568921b9c8fa75d969267537f9bb5c5c5b093a77b283616a2246524c5",
+    "checkpoint_committed": false
+  }
+}

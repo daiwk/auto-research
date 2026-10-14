@@ -1,0 +1,21 @@
+{
+  "domain": "foundation-models",
+  "key": "replayssm",
+  "title": "ReplaySSM: Cache SSM Inputs, Not State",
+  "paper_url": "https://arxiv.org/abs/2610.13778",
+  "detail_path": "reproductions/2610.13778-replayssm/README.md",
+  "topic": [
+    "推理与系统效率",
+    "SSM 缓存与回滚"
+  ],
+  "first_author": "Ze-Wei Liou",
+  "first_author_affiliation": "Princeton University",
+  "published": "2026-10-09",
+  "code": "https://github.com/Johnny-Liou/ReplaySSM",
+  "adapter": {
+    "spec_key": "replayssm"
+  },
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/replayssm-a100-20261013.json"
+}

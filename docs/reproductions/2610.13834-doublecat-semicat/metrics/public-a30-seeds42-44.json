@@ -1,0 +1,1288 @@
+{
+  "schema_version": 2,
+  "method": "doublecat-semicat",
+  "adapter_key": "doublecat-semicat",
+  "manifest_ref": "reproduction:doublecat-semicat",
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "Salesforce/wikitext",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "split_hashes": {
+      "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+      "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+      "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+    },
+    "configuration": "wikitext-2-raw-v1",
+    "all_input_hashes_verified": true
+  },
+  "checkpoint": {
+    "id": "random-initialized bidirectional DiT denoiser",
+    "revision": "doublecat-semicat-byte-dit-v2-no-extra-forward-core",
+    "seed": 42
+  },
+  "aggregate_metrics": {
+    "onehot.test_denoising_ce_t05": {
+      "mean": 3.293001333872477,
+      "std": 0.012632730907950107,
+      "n": 3
+    },
+    "onehot.sampled_byte_entropy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "onehot.parameter_delta_l2": {
+      "mean": 6.530773639678955,
+      "std": 0.08240348601140392,
+      "n": 3
+    },
+    "doublecat.test_denoising_ce_t05": {
+      "mean": 3.296980301539103,
+      "std": 0.01227524667937726,
+      "n": 3
+    },
+    "doublecat.sampled_byte_entropy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "doublecat.parameter_delta_l2": {
+      "mean": 6.553089777628581,
+      "std": 0.08477104023358828,
+      "n": 3
+    },
+    "semicat.test_denoising_ce_t05": {
+      "mean": 3.3478522300720215,
+      "std": 0.08472735969616245,
+      "n": 3
+    },
+    "semicat.sampled_byte_entropy": {
+      "mean": 3.1005140940348306,
+      "std": 0.09806016883484002,
+      "n": 3
+    },
+    "semicat.parameter_delta_l2": {
+      "mean": 6.503927389780681,
+      "std": 0.09656201110550221,
+      "n": 3
+    }
+  },
+  "seed_results": [
+    {
+      "paper": "2610.13834",
+      "seed": 42,
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "fidelity": "core_mechanism",
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "id": "Salesforce/wikitext",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "split_hashes": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "configuration": "wikitext-2-raw-v1",
+        "all_input_hashes_verified": true
+      },
+      "checkpoint": {
+        "id": "random-initialized bidirectional DiT denoiser",
+        "revision": "doublecat-semicat-byte-dit-v2-no-extra-forward-core",
+        "seed": 42
+      },
+      "steps": 40,
+      "sequence_length": 32,
+      "width": 64,
+      "layers": 2,
+      "self_conditioning": false,
+      "standard_self_conditioning_probability": 0.0,
+      "self_conditioning_protocol": "off; two-level interpolant only",
+      "training_objective": {
+        "loss": "unrevealed position sum, batch mean",
+        "l2_weighting": "Appendix E.1: divide CE by sg(sqrt(||pi-X1||_2 + 1e-2))"
+      },
+      "reported_ce": "unweighted mean over unrevealed tokens at t=0.5",
+      "gamma": "linear t",
+      "kappa": "sqrt(t)",
+      "simplex_prior": "Dirichlet(1)",
+      "results": {
+        "onehot": {
+          "validation_denoising_ce_t05": 3.2461934089660645,
+          "training_loss_history": [
+            181.7683563232422,
+            179.3959503173828,
+            177.561767578125,
+            175.49075317382812,
+            176.07125854492188,
+            174.27581787109375,
+            163.42990112304688,
+            161.4451141357422,
+            163.9695281982422,
+            165.9910888671875,
+            149.63101196289062,
+            154.55709838867188,
+            141.36151123046875,
+            135.61221313476562,
+            150.013427734375,
+            139.6321563720703,
+            134.66184997558594,
+            139.4778289794922,
+            135.4590301513672,
+            128.88290405273438,
+            127.27655792236328,
+            122.03189086914062,
+            122.15570068359375,
+            117.448486328125,
+            111.96009063720703,
+            114.81422424316406,
+            110.77716064453125,
+            110.79579162597656,
+            109.68395233154297,
+            108.17800903320312,
+            109.95832061767578,
+            110.87336730957031,
+            110.28170776367188,
+            106.08427429199219,
+            103.52922821044922,
+            102.8431396484375,
+            102.54500579833984,
+            106.5147705078125,
+            101.65586853027344,
+            106.341796875
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.565521240234375,
+          "test_denoising_ce_t05": 3.278510570526123,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper recommended one-hot sampler"
+          },
+          "sampled_byte_entropy": -0.0,
+          "generated_hex": [
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        },
+        "doublecat": {
+          "validation_denoising_ce_t05": 3.2524094581604004,
+          "training_loss_history": [
+            181.80117797851562,
+            179.51560974121094,
+            177.71304321289062,
+            175.71273803710938,
+            176.29225158691406,
+            174.46200561523438,
+            163.870361328125,
+            161.92205810546875,
+            164.30079650878906,
+            166.41049194335938,
+            150.2218780517578,
+            154.9131317138672,
+            141.89776611328125,
+            136.19085693359375,
+            150.28494262695312,
+            139.97805786132812,
+            135.03826904296875,
+            139.5393829345703,
+            135.40277099609375,
+            128.95709228515625,
+            127.29623413085938,
+            122.19712829589844,
+            122.42313385009766,
+            117.70922088623047,
+            112.15632629394531,
+            114.95246887207031,
+            110.93504333496094,
+            110.8916015625,
+            109.8085708618164,
+            108.28009033203125,
+            110.09999084472656,
+            110.97245025634766,
+            110.4623031616211,
+            106.17414855957031,
+            103.64264678955078,
+            103.02053833007812,
+            102.68428039550781,
+            106.58860778808594,
+            101.76004028320312,
+            106.41778564453125
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.590885639190674,
+          "test_denoising_ce_t05": 3.2829833030700684,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper recommended one-hot sampler"
+          },
+          "sampled_byte_entropy": -0.0,
+          "generated_hex": [
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        },
+        "semicat": {
+          "validation_denoising_ce_t05": 3.223145008087158,
+          "training_loss_history": [
+            91.18722534179688,
+            106.30318450927734,
+            109.98342895507812,
+            92.35902404785156,
+            68.13069152832031,
+            112.6220703125,
+            66.1864242553711,
+            81.59660339355469,
+            100.0442123413086,
+            102.10597229003906,
+            65.40621185302734,
+            88.18870544433594,
+            29.25664520263672,
+            41.930885314941406,
+            72.76026916503906,
+            71.36329650878906,
+            70.63734436035156,
+            105.87012481689453,
+            96.04792022705078,
+            86.09683227539062,
+            88.10948181152344,
+            43.31201171875,
+            24.762798309326172,
+            56.87651824951172,
+            49.15496826171875,
+            68.82823181152344,
+            52.74311065673828,
+            56.03618621826172,
+            34.63679504394531,
+            66.69450378417969,
+            51.860382080078125,
+            62.29598617553711,
+            25.541934967041016,
+            74.01522827148438,
+            44.8165397644043,
+            39.271751403808594,
+            51.96391296386719,
+            61.88897705078125,
+            53.56034469604492,
+            67.97946166992188
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.592197418212891,
+          "test_denoising_ce_t05": 3.276698589324951,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              5,
+              7,
+              9,
+              10,
+              13,
+              16,
+              19,
+              24,
+              27,
+              32,
+              36,
+              39,
+              40,
+              46,
+              52,
+              53,
+              61,
+              67,
+              69,
+              72,
+              77,
+              80,
+              83,
+              87,
+              91,
+              94,
+              105,
+              107,
+              113,
+              118,
+              124,
+              128
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper Algorithm 1"
+          },
+          "sampled_byte_entropy": 3.037458896636963,
+          "generated_hex": [
+            "619a6c766c20697261656f65316c696120692c6c722061746ebb6965c7703964",
+            "4d6c6520202074656c646572706620206965206f6969722061696f64616e6520",
+            "69cf64656c6f72ea657f772d7220699320656146492e656968746c65692020c4",
+            "65786e206532c7654e65729666217420206165727465746b65566566746a649d"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        }
+      },
+      "test_isolated_from_selection": true,
+      "limitations": [
+        "small random-initialized byte-vocabulary diffusion LM",
+        "WikiText-2, not TinyGSM/OpenWebText paper benchmark",
+        "denoising CE is not exact likelihood or GPT-2 generative perplexity",
+        "no downstream reasoning accuracy, scaling or stable uplift claim"
+      ]
+    },
+    {
+      "paper": "2610.13834",
+      "seed": 43,
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "fidelity": "core_mechanism",
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "id": "Salesforce/wikitext",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "split_hashes": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "configuration": "wikitext-2-raw-v1",
+        "all_input_hashes_verified": true
+      },
+      "checkpoint": {
+        "id": "random-initialized bidirectional DiT denoiser",
+        "revision": "doublecat-semicat-byte-dit-v2-no-extra-forward-core",
+        "seed": 43
+      },
+      "steps": 40,
+      "sequence_length": 32,
+      "width": 64,
+      "layers": 2,
+      "self_conditioning": false,
+      "standard_self_conditioning_probability": 0.0,
+      "self_conditioning_protocol": "off; two-level interpolant only",
+      "training_objective": {
+        "loss": "unrevealed position sum, batch mean",
+        "l2_weighting": "Appendix E.1: divide CE by sg(sqrt(||pi-X1||_2 + 1e-2))"
+      },
+      "reported_ce": "unweighted mean over unrevealed tokens at t=0.5",
+      "gamma": "linear t",
+      "kappa": "sqrt(t)",
+      "simplex_prior": "Dirichlet(1)",
+      "results": {
+        "onehot": {
+          "validation_denoising_ce_t05": 3.24643611907959,
+          "training_loss_history": [
+            178.0787353515625,
+            180.76589965820312,
+            171.0865936279297,
+            174.38818359375,
+            168.88214111328125,
+            164.19839477539062,
+            160.3876953125,
+            166.14437866210938,
+            158.35440063476562,
+            159.8079833984375,
+            156.68939208984375,
+            163.20187377929688,
+            148.6013641357422,
+            159.26844787597656,
+            155.46107482910156,
+            135.6257781982422,
+            129.9546356201172,
+            130.3918914794922,
+            128.6453857421875,
+            125.4164810180664,
+            118.42674255371094,
+            132.562744140625,
+            117.38922882080078,
+            115.49455261230469,
+            134.3233642578125,
+            128.01129150390625,
+            114.52835083007812,
+            113.33311462402344,
+            110.12741088867188,
+            116.62773132324219,
+            115.33624267578125,
+            112.04244232177734,
+            120.12045288085938,
+            106.92135620117188,
+            105.75926971435547,
+            103.2576904296875,
+            106.70692443847656,
+            110.92619323730469,
+            109.5546875,
+            110.4737777709961
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.590112209320068,
+          "test_denoising_ce_t05": 3.3016955852508545,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper recommended one-hot sampler"
+          },
+          "sampled_byte_entropy": -0.0,
+          "generated_hex": [
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        },
+        "doublecat": {
+          "validation_denoising_ce_t05": 3.250383138656616,
+          "training_loss_history": [
+            178.06883239746094,
+            180.81558227539062,
+            171.28465270996094,
+            174.57540893554688,
+            169.25369262695312,
+            164.62416076660156,
+            160.74649047851562,
+            166.53988647460938,
+            158.8614501953125,
+            160.1015625,
+            156.96636962890625,
+            163.36288452148438,
+            148.90489196777344,
+            159.2757568359375,
+            155.59063720703125,
+            135.92071533203125,
+            130.25808715820312,
+            130.69769287109375,
+            128.70680236816406,
+            125.49012756347656,
+            118.4698486328125,
+            132.75241088867188,
+            117.58987426757812,
+            115.62252807617188,
+            134.3367156982422,
+            127.97431182861328,
+            114.61326599121094,
+            113.4298095703125,
+            110.12295532226562,
+            116.73994445800781,
+            115.42605590820312,
+            112.11849975585938,
+            120.23564147949219,
+            106.95448303222656,
+            105.85720825195312,
+            103.34381103515625,
+            106.78009033203125,
+            111.00932312011719,
+            109.62278747558594,
+            110.57583618164062
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.612388610839844,
+          "test_denoising_ce_t05": 3.3059139251708984,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper recommended one-hot sampler"
+          },
+          "sampled_byte_entropy": -0.0,
+          "generated_hex": [
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        },
+        "semicat": {
+          "validation_denoising_ce_t05": 3.4466185569763184,
+          "training_loss_history": [
+            99.73273468017578,
+            111.266845703125,
+            32.90838623046875,
+            97.31352233886719,
+            64.45216369628906,
+            64.39128112792969,
+            83.79074096679688,
+            94.83187103271484,
+            59.183589935302734,
+            95.06585693359375,
+            94.25101470947266,
+            90.39459228515625,
+            70.1721420288086,
+            133.08792114257812,
+            77.40373229980469,
+            66.26560974121094,
+            51.551422119140625,
+            52.79315948486328,
+            78.40170288085938,
+            58.65213394165039,
+            71.8919677734375,
+            45.12221908569336,
+            29.785259246826172,
+            36.59185791015625,
+            69.12882995605469,
+            97.69937133789062,
+            46.5147705078125,
+            72.77902221679688,
+            79.83721923828125,
+            49.66405487060547,
+            65.68881225585938,
+            72.61414337158203,
+            57.6292724609375,
+            60.83164978027344,
+            65.79954528808594,
+            54.94486999511719,
+            55.289520263671875,
+            54.02751922607422,
+            58.594390869140625,
+            58.48367691040039
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.5187883377075195,
+          "test_denoising_ce_t05": 3.32527756690979,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              5,
+              9,
+              11,
+              13,
+              19,
+              24,
+              30,
+              33,
+              35,
+              39,
+              43,
+              43,
+              49,
+              54,
+              58,
+              62,
+              65,
+              67,
+              72,
+              75,
+              79,
+              87,
+              90,
+              97,
+              105,
+              109,
+              112,
+              114,
+              115,
+              122,
+              126,
+              128
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper Algorithm 1"
+          },
+          "sampled_byte_entropy": 3.2134900093078613,
+          "generated_hex": [
+            "6c6159202e79617472206c2c49202065742c7420747f9d6f6e6e206820932069",
+            "2020646f2020656c650c6922207672207300fb6d2c1d6f6c6f20a5836079736c",
+            "e4206e284e2079e32c650a796165204a626e666920206f756973bbb76ead2072",
+            "616e206f276f20204a6120ed6b692059726f6920c4796a6f206f562061656520"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        }
+      },
+      "test_isolated_from_selection": true,
+      "limitations": [
+        "small random-initialized byte-vocabulary diffusion LM",
+        "WikiText-2, not TinyGSM/OpenWebText paper benchmark",
+        "denoising CE is not exact likelihood or GPT-2 generative perplexity",
+        "no downstream reasoning accuracy, scaling or stable uplift claim"
+      ]
+    },
+    {
+      "paper": "2610.13834",
+      "seed": 44,
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "fidelity": "core_mechanism",
+      "evaluation_tier": "l1_mechanism",
+      "dataset": {
+        "id": "Salesforce/wikitext",
+        "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "split_hashes": {
+          "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+          "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+          "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+        },
+        "configuration": "wikitext-2-raw-v1",
+        "all_input_hashes_verified": true
+      },
+      "checkpoint": {
+        "id": "random-initialized bidirectional DiT denoiser",
+        "revision": "doublecat-semicat-byte-dit-v2-no-extra-forward-core",
+        "seed": 44
+      },
+      "steps": 40,
+      "sequence_length": 32,
+      "width": 64,
+      "layers": 2,
+      "self_conditioning": false,
+      "standard_self_conditioning_probability": 0.0,
+      "self_conditioning_protocol": "off; two-level interpolant only",
+      "training_objective": {
+        "loss": "unrevealed position sum, batch mean",
+        "l2_weighting": "Appendix E.1: divide CE by sg(sqrt(||pi-X1||_2 + 1e-2))"
+      },
+      "reported_ce": "unweighted mean over unrevealed tokens at t=0.5",
+      "gamma": "linear t",
+      "kappa": "sqrt(t)",
+      "simplex_prior": "Dirichlet(1)",
+      "results": {
+        "onehot": {
+          "validation_denoising_ce_t05": 3.2685697078704834,
+          "training_loss_history": [
+            185.760498046875,
+            179.51193237304688,
+            176.68319702148438,
+            177.2762908935547,
+            180.8523712158203,
+            169.76817321777344,
+            177.82821655273438,
+            165.994140625,
+            158.72769165039062,
+            162.56536865234375,
+            158.59201049804688,
+            160.87857055664062,
+            149.3785400390625,
+            157.99893188476562,
+            155.3431396484375,
+            141.82040405273438,
+            146.1826171875,
+            129.5792236328125,
+            131.47772216796875,
+            124.85076904296875,
+            130.32241821289062,
+            127.20655822753906,
+            120.01986694335938,
+            118.50645446777344,
+            121.82170867919922,
+            119.83247375488281,
+            118.14309692382812,
+            119.28439331054688,
+            110.55718994140625,
+            111.93571472167969,
+            109.64553833007812,
+            113.33457946777344,
+            128.77279663085938,
+            109.0682144165039,
+            106.21122741699219,
+            115.67567443847656,
+            104.21652221679688,
+            106.52391052246094,
+            106.33922576904297,
+            108.14634704589844
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.436687469482422,
+          "test_denoising_ce_t05": 3.298797845840454,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper recommended one-hot sampler"
+          },
+          "sampled_byte_entropy": -0.0,
+          "generated_hex": [
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        },
+        "doublecat": {
+          "validation_denoising_ce_t05": 3.271794080734253,
+          "training_loss_history": [
+            185.7852325439453,
+            179.58139038085938,
+            176.77609252929688,
+            177.4104461669922,
+            180.96417236328125,
+            170.00830078125,
+            178.05589294433594,
+            166.30743408203125,
+            159.1639404296875,
+            163.05355834960938,
+            158.91583251953125,
+            161.10208129882812,
+            149.83511352539062,
+            158.37591552734375,
+            155.61871337890625,
+            142.2369842529297,
+            146.24874877929688,
+            129.91876220703125,
+            131.81375122070312,
+            125.24217224121094,
+            130.3749542236328,
+            127.47044372558594,
+            120.30133819580078,
+            118.80260467529297,
+            121.96949005126953,
+            120.05995178222656,
+            118.29875946044922,
+            119.46894836425781,
+            110.82978820800781,
+            112.12079620361328,
+            109.78199768066406,
+            113.46438598632812,
+            128.90542602539062,
+            109.20886993408203,
+            106.27678680419922,
+            115.77639770507812,
+            104.28887176513672,
+            106.68223571777344,
+            106.46380615234375,
+            108.19053649902344
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.455995082855225,
+          "test_denoising_ce_t05": 3.3020436763763428,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper recommended one-hot sampler"
+          },
+          "sampled_byte_entropy": -0.0,
+          "generated_hex": [
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020",
+            "2020202020202020202020202020202020202020202020202020202020202020"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        },
+        "semicat": {
+          "validation_denoising_ce_t05": 3.343454360961914,
+          "training_loss_history": [
+            156.17234802246094,
+            97.4804916381836,
+            101.25485229492188,
+            94.2618408203125,
+            144.76034545898438,
+            86.77640533447266,
+            102.166748046875,
+            105.21609497070312,
+            44.861595153808594,
+            55.83153533935547,
+            72.17564392089844,
+            95.33650207519531,
+            68.36444091796875,
+            88.25592041015625,
+            104.61095428466797,
+            63.58037567138672,
+            88.5908203125,
+            46.079463958740234,
+            64.62956237792969,
+            36.18342971801758,
+            78.05604553222656,
+            60.3697395324707,
+            56.275543212890625,
+            41.65105438232422,
+            93.77613830566406,
+            31.450122833251953,
+            78.68550109863281,
+            71.93759155273438,
+            40.166748046875,
+            50.99760437011719,
+            62.73862838745117,
+            63.18804931640625,
+            52.01432800292969,
+            54.137603759765625,
+            76.67052459716797,
+            61.77784729003906,
+            71.87986755371094,
+            40.77119445800781,
+            61.105743408203125,
+            90.16997528076172
+          ],
+          "standard_self_conditioning_steps": 0,
+          "parameter_delta_l2": 6.400796413421631,
+          "test_denoising_ce_t05": 3.4415805339813232,
+          "sampling": {
+            "nfe": 32,
+            "revealed_counts": [
+              4,
+              7,
+              11,
+              13,
+              15,
+              23,
+              27,
+              32,
+              34,
+              39,
+              43,
+              46,
+              48,
+              57,
+              63,
+              66,
+              70,
+              76,
+              79,
+              81,
+              84,
+              84,
+              87,
+              90,
+              99,
+              107,
+              112,
+              118,
+              118,
+              125,
+              125,
+              128
+            ],
+            "previously_revealed_changes": 0,
+            "sampler": "paper Algorithm 1"
+          },
+          "sampled_byte_entropy": 3.050593376159668,
+          "generated_hex": [
+            "610fa120207d4e61696570742068656198e36c53722c61202069656169747272",
+            "31746c706c6f4c20736120612c6570b284de6c6570096520a56f204c2c617918",
+            "6c53616122206169696d7372736f20614a65690b2020697920aa726c61f72069",
+            "692e206f742074206b4d616c656f6979746161617961206f6166206920eb6e20"
+          ],
+          "actual_denoiser_forward_calls": {
+            "training": {
+              "total": 40,
+              "with_grad": 40,
+              "no_grad": 0
+            },
+            "validation": {
+              "total": 4,
+              "with_grad": 0,
+              "no_grad": 4
+            },
+            "test": {
+              "total": 1,
+              "with_grad": 0,
+              "no_grad": 1
+            },
+            "sampling": {
+              "total": 32,
+              "with_grad": 0,
+              "no_grad": 32
+            }
+          }
+        }
+      },
+      "test_isolated_from_selection": true,
+      "limitations": [
+        "small random-initialized byte-vocabulary diffusion LM",
+        "WikiText-2, not TinyGSM/OpenWebText paper benchmark",
+        "denoising CE is not exact likelihood or GPT-2 generative perplexity",
+        "no downstream reasoning accuracy, scaling or stable uplift claim"
+      ]
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "test_used_for_selection": false,
+    "claim_policy": "three-seed mechanism diagnostic; no formal language-quality comparison"
+  },
+  "provenance": {
+    "code_commit": "ccad3e679787f6f5383b8bd3dd1c7b58e7c8c5d0",
+    "artifact_path": "docs/reproductions/2610.13834-doublecat-semicat/metrics/public-a30-seeds42-44.json",
+    "dataset_fingerprint": "cbc4dce80b4e6fe03d4b106c25aeb72eaaf60c616c62df041ce5b9d26e507241"
+  },
+  "limitations": [
+    "Small random-initialized byte-vocabulary WikiText-2 core-mechanism diagnostic.",
+    "Denoising CE is not exact likelihood, generative perplexity or reasoning accuracy.",
+    "One-hot and DoubleCat collapse to spaces in all three measured seeds; retained as a negative result.",
+    "No stable quality, scaling, serving or original-paper benchmark gain is claimed."
+  ]
+}

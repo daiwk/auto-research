@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "paper_version": "2610.12818v1",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.12818v1",
+  "source_pdf_sha256": "059942527366ac96c2ff413cc9b0c9b9cd7382be4d7a0c2ba01ba13756e734ce",
+  "first_page_version_stamp": "arXiv:2610.12818v1 [cs.RO] 8 Oct 2026",
+  "paper_license": "CC BY 4.0",
+  "rights_notice": "Original figures remain attributable to their authors. The arXiv non-exclusive license is not relabeled as CC BY.",
+  "artifact_kind": "original-paper-pdf-figure-excerpt",
+  "local_measurement_evidence": false,
+  "extraction": "Original PDF rendered and cropped; no redraw, recoloring, translation inside image, or synthetic completion.",
+  "figures": [
+    {
+      "figure": "Figure 1",
+      "pdf_page_one_based": 1,
+      "panel": "upper training panel only; results overview excluded",
+      "source_html_anchor": "https://arxiv.org/html/2610.12818v1#S0.F1",
+      "asset": "paper-figure-01.png",
+      "asset_sha256": "91ceb32e8ebfd045aada0cf342f330a3faacec40829a88511df63a5e0ab3e8f7",
+      "render": {
+        "renderer": "Poppler pdftoppm",
+        "dpi": 250,
+        "crop_box_points_top_left_origin": [
+          104,
+          379,
+          508,
+          490
+        ],
+        "crop_pixels": {
+          "x": 361,
+          "y": 1315,
+          "width": 1403,
+          "height": 387
+        },
+        "command": "pdftoppm -f 1 -l 1 -r 250 -x 361 -y 1315 -W 1403 -H 387 -png -singlefile 2610.12818v1.pdf original-figure-1-training-v1"
+      },
+      "visual_inspection": {
+        "date": "2026-10-13",
+        "status": "inspected",
+        "checks": "Both MSE branches, goal information and two SIGReg labels visible",
+        "result": "Labels, arrows and selected panel boundaries are complete; no unreadable/missing glyphs observed"
+      },
+      "renderer_warning": "Poppler reported a PDF font-type mismatch; selected diagram was visually checked and its labels are complete."
+    },
+    {
+      "figure": "Figure 3",
+      "pdf_page_one_based": 4,
+      "panel": "complete attention diagram without external caption",
+      "source_html_anchor": "https://arxiv.org/html/2610.12818v1#S3.F3",
+      "asset": "original-figure-3-attention-v1.png",
+      "asset_sha256": "afd9c0fd32b51e6547b1bc2d82556b724b878fdc7f56affdb2287ad97d747bc4",
+      "render": {
+        "renderer": "Poppler pdftoppm",
+        "dpi": 250,
+        "crop_box_points_top_left_origin": [
+          343,
+          82,
+          508,
+          214
+        ],
+        "crop_pixels": {
+          "x": 1190,
+          "y": 284,
+          "width": 574,
+          "height": 460
+        },
+        "command": "pdftoppm -f 4 -l 4 -r 250 -x 1190 -y 284 -W 574 -H 460 -png -singlefile 2610.12818v1.pdf original-figure-3-attention-v1"
+      },
+      "visual_inspection": {
+        "date": "2026-10-13",
+        "status": "inspected",
+        "checks": "Legend, Query/Key labels, causal grids and both output arrows visible",
+        "result": "Labels, arrows and selected panel boundaries are complete; no unreadable/missing glyphs observed"
+      }
+    },
+    {
+      "figure": "Figure 4",
+      "pdf_page_one_based": 5,
+      "panel": "complete planning diagram without external caption",
+      "source_html_anchor": "https://arxiv.org/html/2610.12818v1#S3.F4",
+      "asset": "original-figure-4-planning-v1.png",
+      "asset_sha256": "2a7a131bf65325017d0c348bdedbe2f349c808112dd6edd94f3bd3b1f91cade7",
+      "render": {
+        "renderer": "Poppler pdftoppm",
+        "dpi": 250,
+        "crop_box_points_top_left_origin": [
+          105,
+          82,
+          508,
+          183
+        ],
+        "crop_pixels": {
+          "x": 364,
+          "y": 284,
+          "width": 1400,
+          "height": 352
+        },
+        "command": "pdftoppm -f 5 -l 5 -r 250 -x 364 -y 284 -W 1400 -H 352 -png -singlefile 2610.12818v1.pdf original-figure-4-planning-v1"
+      },
+      "visual_inspection": {
+        "date": "2026-10-13",
+        "status": "inspected",
+        "checks": "Frozen encoder/MoT marks, gradient-search arrows, latent rollout and best-of-N selection visible",
+        "result": "Labels, arrows and selected panel boundaries are complete; no unreadable/missing glyphs observed"
+      }
+    }
+  ]
+}

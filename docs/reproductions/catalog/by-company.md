@@ -157,6 +157,7 @@
 - 2026-06 · [UniFormer](../2606.27058-uniformer/README.md)：拆分 feature/task token 空间并统一交互，支持模型中心协同扩展。
 - 2026-06 · [Recommendation as Generation](../2606.25496-rag-generation/README.md)：以解耦语义 ID 连接生成式推荐和兴趣条件内容生成。
 - 2026-06 · [Taiji](../2606.03866-taiji/README.md)：在语义匹配与协同信号之间自适应选择 Pareto 工作点，兼顾冷启动与成熟内容。
+- 2026-05 · [UxSID](../2605.09040-uxsid/README.md)：用兴趣锚点压缩全历史，再以目标语义 ID 做两级探针和全局门控，让语义相近候选共享可缓存的用户兴趣记忆；本轮依据 10 月 v4 更新实现。
 - 2026-04 · [GloRank](../2604.25291-glorank/README.md)：在全局 Semantic ID action space 上做 listwise SFT 与组相对奖励优化，避免局部候选池限制。
 - 2026-04 · [CS3](../2604.19269-cs3/README.md)：通过循环自修正、跨塔同步和级联教师信号增强仍可 ANN 服务的双塔模型。
 - 2026-04 · [Dual-Rerank](../2604.07420-dual-rerank/README.md)：以 AR 顺序教师蒸馏 NAR 并行名次学生，并把列表效用与延迟共同纳入目标。

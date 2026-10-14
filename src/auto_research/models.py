@@ -12,6 +12,7 @@ class Paper:
     published: str
     url: str
     arxiv_id: str
+    updated: str = ""
 
 
 @dataclass(frozen=True)

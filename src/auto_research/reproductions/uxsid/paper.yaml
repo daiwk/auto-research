@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "key": "uxsid",
+  "arxiv_id": "2605.09040",
+  "title": "UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence",
+  "paper_url": "https://arxiv.org/abs/2605.09040",
+  "organization": "Kuaishou",
+  "published": "2026-05-09",
+  "upstream_code": "未找到原作者公开实现（核查日期：2026-10-13；实现依据 v4）",
+  "track": "recommendation",
+  "topics": [
+    "long-sequence",
+    "ranking",
+    "semantic-id",
+    "compression"
+  ],
+  "local_code": "src/auto_research/reproductions/uxsid",
+  "documentation": "docs/reproductions/2605.09040-uxsid/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l2_public_dataset",
+  "datasets": [
+    "MovieLens-100K per-user chronological leave-last-two"
+  ],
+  "baseline": "matched global-only / item-agnostic / ungated ablations with the same SID side information",
+  "metrics": [
+    "variants.uxsid.test.roc_auc",
+    "variants.uxsid.test.pr_auc",
+    "cache.offline_online_max_abs_error"
+  ],
+  "mechanisms": [
+    "residual k-means plus finite scalar quantization",
+    "interest-anchor compression with per-anchor PFFN",
+    "hierarchical SID probing and global-context gate",
+    "user/SID shared memory with invalidation"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.uxsid.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Kuaishou",
+      "published": "2026-05-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [
+        {
+          "product": "Kuaishou short-video advertising",
+          "metric": "Revenue",
+          "lift_percent": 0.337,
+          "traffic": "live large-scale advertising traffic; production online A/B versus incumbent",
+          "source_url": "https://arxiv.org/html/2605.09040v4",
+          "source_location": "Section 4.1, Table 3 and Performance in Online A/B Testing",
+          "experiment_duration": "one week",
+          "significance": "paper describes significant gains; p-value and confidence interval not reported",
+          "retrieved_at": "2026-10-13"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "private multimodal business-aligned encoder and advertising features",
+      "public LETTER codebook protocol / KuaiRec-Big and XLong benchmarks",
+      "distributed embedding server and production multi-task serving"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "3 epochs per four matched variants; frozen Qwen2.5-0.5B attribute encoder",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/uxsid-a100-20261013.json"
+  }
+}

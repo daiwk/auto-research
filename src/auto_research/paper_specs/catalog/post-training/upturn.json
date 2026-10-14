@@ -1,0 +1,20 @@
+{
+  "domain": "post-training",
+  "key": "upturn",
+  "title": "Inject a Turn, Not a Token: Learning Where to Redirect LLM Reasoning for Self-Correction",
+  "paper_url": "https://arxiv.org/abs/2610.13672",
+  "detail_path": "reproductions/2610.13672-upturn/README.md",
+  "topic": [
+    "Self-correction",
+    "Frozen causal encoder",
+    "Learned cut policy"
+  ],
+  "first_author": "Jiwon Jeon",
+  "first_author_affiliation": "KAIST",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": null,
+  "adapter": {
+    "spec_key": "upturn"
+  }
+}

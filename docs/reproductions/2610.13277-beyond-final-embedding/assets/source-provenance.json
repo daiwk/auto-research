@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.13277",
+  "reviewed_version": "2610.13277v1",
+  "fulltext_url": "https://arxiv.org/html/2610.13277v1",
+  "figure_source": "https://arxiv.org/html/2610.13277v1#S3.F2",
+  "reviewed_on": "2026-10-13",
+  "first_published": "2026-10-09",
+  "code_url": null,
+  "code_status": "not found in inspected primary full text",
+  "local_boundary": [
+    "原版8backbone完整LMEB",
+    "HNSW由exact sparse检索替代",
+    "EvoTrain替为LongMemEval隔离source split",
+    "原文downstream QA未执行"
+  ]
+}

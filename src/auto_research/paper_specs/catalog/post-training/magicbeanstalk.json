@@ -1,0 +1,22 @@
+{
+  "domain": "post-training",
+  "key": "magicbeanstalk",
+  "title": "MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis",
+  "paper_url": "https://arxiv.org/abs/2610.12659",
+  "detail_path": "reproductions/2610.12659-magicbeanstalk/README.md",
+  "topic": [
+    "RLVR data synthesis",
+    "Effectivity-validated decomposition",
+    "Policy-calibrated Goldilocks"
+  ],
+  "first_author": "Ximing Lu",
+  "first_author_affiliation": "University of Washington",
+  "published": "2026-10-08",
+  "priority": "P0",
+  "code": null,
+  "implementation_status": "deferred_high_cost",
+  "deferral_reason": "成本过高，暂不复现；小预算多次真实运行未取得合格合成后代及RL更新，扩展候选池/教师/多种子成本与信号不确定，用户于2026-10-14要求保留待验收并交付其余成果。",
+  "local_code": "src/auto_research/reproductions/magicbeanstalk",
+  "deferred_execution_spec": "src/auto_research/reproductions/magicbeanstalk/deferred-spec.json",
+  "gpu_validation_passed": false
+}

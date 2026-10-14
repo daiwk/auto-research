@@ -52,12 +52,15 @@ def classify_candidate(track: str, candidate: dict) -> dict:
     text = f"{candidate.get('title', '')}\n{candidate.get('abstract', '')}".lower()
     anchors = tuple(anchor for anchor in TRACK_ANCHORS[track] if anchor in text)
     industrial_evidence = tuple(anchor for anchor in INDUSTRIAL_EVIDENCE_ANCHORS if anchor in text)
-    priority = any(
+    priority = bool(candidate.get("priority_review_required")) or any(
         query == prefix or query.startswith(prefix + "-")
         for query in matched_queries
         for prefix in PRIORITY_QUERY_PREFIXES
     )
-    if candidate.get("repository_status") != "new":
+    if candidate.get("revision_review_required"):
+        bucket = "revision-fulltext-review"
+        reason = "known paper revision requires independent full-text review; not a new v1"
+    elif candidate.get("repository_status") != "new":
         bucket = "already-closed"
         reason = f"repository status is {candidate.get('repository_status')}"
     elif priority:
@@ -82,7 +85,8 @@ def classify_candidate(track: str, candidate: dict) -> dict:
         "matched_track_anchors": list(anchors),
         "matched_industrial_evidence_anchors": list(industrial_evidence),
         "full_text_review_required": bucket in {
-            "priority-fulltext-review", "industrial-fulltext-review", "manual-review"
+            "priority-fulltext-review", "industrial-fulltext-review", "manual-review",
+            "revision-fulltext-review"
         },
     }
 
@@ -103,5 +107,7 @@ def unresolved_candidates(artifacts: Iterable[dict]) -> list[dict]:
         row
         for artifact in artifacts
         for row in artifact.get("candidates", [])
-        if row.get("full_text_review_required") and row.get("repository_status") == "new"
+        if row.get("full_text_review_required") and (
+            row.get("repository_status") == "new" or row.get("revision_review_required")
+        )
     ]

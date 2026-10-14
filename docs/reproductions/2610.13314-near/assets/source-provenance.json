@@ -1,0 +1,15 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.13314",
+  "reviewed_version": "2610.13314v1",
+  "fulltext_url": "https://arxiv.org/html/2610.13314v1",
+  "figure_source": "https://arxiv.org/html/2610.13314v1#S2.F2",
+  "reviewed_on": "2026-10-13",
+  "first_published": "2026-10-09",
+  "code_url": null,
+  "code_status": "not found in inspected primary full text",
+  "local_boundary": [
+    "原文九backbone与完整LMEB",
+    "HNSW由bounded exact索引替代",
+    "原版downstream QA未执行"
+  ]
+}

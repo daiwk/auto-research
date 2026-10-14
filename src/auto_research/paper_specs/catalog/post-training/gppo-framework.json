@@ -1,0 +1,20 @@
+{
+  "domain": "post-training",
+  "key": "gppo-framework",
+  "title": "Generalized Proximal Policy Optimization: Unifying LLM RL Algorithms from the Perspective of Divergence",
+  "paper_url": "https://arxiv.org/abs/2610.13015",
+  "detail_path": "reproductions/2610.13015-gppo-framework/README.md",
+  "topic": [
+    "Proximal policy optimization",
+    "f-divergence geometry",
+    "Probability-aware estimator"
+  ],
+  "first_author": "Zhicheng Cai",
+  "first_author_affiliation": "Tsinghua University AIR",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": null,
+  "adapter": {
+    "spec_key": "gppo-framework"
+  }
+}

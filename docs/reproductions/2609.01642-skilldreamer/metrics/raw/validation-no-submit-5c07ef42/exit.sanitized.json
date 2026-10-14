@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 401.4410872403532,
+  "algorithm_source_commit": "701f45007be75cf6153f98812ef94e087c94a8f0",
+  "probe_source_commit": "5c07ef42bbb008e7adc3fc03fd5e85695c2bcc86",
+  "execution_config_sha256": "bd18c5587e1c455092139624af0194c4d4496727a6b3a2833440372e989a0558",
+  "original_exit_sha256": "2b45f22ce46633bc7163b0845d881ed7e11dcc3d49ad27beb012a76d19398a63",
+  "command": "CUDA_VISIBLE_DEVICES=0 PYTHONPATH=<algorithm-source>/src timeout --kill-after=10s 600s python <probe-source>/scripts/probe_oct14_skilldreamer_validation.py --config <verified-validation-config> --output <fresh-probe-output>"
+}

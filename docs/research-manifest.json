@@ -321,6 +321,69 @@
     },
     {
       "domain": "agent-research",
+      "key": "beyond-final-embedding",
+      "title": "Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence",
+      "paper_url": "https://arxiv.org/abs/2610.13277",
+      "detail_path": "reproductions/2610.13277-beyond-final-embedding/README.md",
+      "topic": [
+        "memory-retrieval",
+        "token-level-evidence",
+        "query-adaptation"
+      ],
+      "first_author": "Han Luo",
+      "first_author_affiliation": "Southeast University",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "beyond-final-embedding",
+        "arxiv_id": "2610.13277",
+        "title": "Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence",
+        "paper_url": "https://arxiv.org/abs/2610.13277",
+        "track": "llm",
+        "organization": "Southeast University / MemoraX AI / Leiden University / University of Sydney",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "memory-retrieval",
+          "token-level-evidence",
+          "query-adaptation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/beyond_final_embedding",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "LongMemEval public cleaned source-order subset",
+          "sentence-transformers/all-MiniLM-L6-v2"
+        ],
+        "baseline": "冻结MiniLM原生masked-mean pooled cosine",
+        "metrics": [
+          "test.recall_at_10",
+          "test.ndcg_at_10",
+          "training_free_test.ndcg_at_10",
+          "parameter_update_l2"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "max_queries=100, max_length=128; validation-only selection",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a30.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct13-beyond-final-embedding-a30.json"
+    },
+    {
+      "domain": "agent-research",
       "key": "branch-mixture",
       "title": "Mixture of Self-Improving Branches for Agent Harness Optimization",
       "paper_url": "https://arxiv.org/abs/2609.37834",
@@ -1782,6 +1845,69 @@
     },
     {
       "domain": "agent-research",
+      "key": "near",
+      "title": "NEAR: Neighborhood-Aware Residuals for Memory Retrieval",
+      "paper_url": "https://arxiv.org/abs/2610.13314",
+      "detail_path": "reproductions/2610.13314-near/README.md",
+      "topic": [
+        "memory-retrieval",
+        "neighborhood-residual",
+        "single-index-retrieval"
+      ],
+      "first_author": "Han Luo",
+      "first_author_affiliation": "Southeast University",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "near",
+        "arxiv_id": "2610.13314",
+        "title": "NEAR: Neighborhood-Aware Residuals for Memory Retrieval",
+        "paper_url": "https://arxiv.org/abs/2610.13314",
+        "track": "llm",
+        "organization": "Southeast University / MemoraX AI / Leiden University / University of Sydney",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "memory-retrieval",
+          "neighborhood-residual",
+          "single-index-retrieval"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/near",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "LongMemEval public cleaned source-order subset",
+          "sentence-transformers/all-MiniLM-L6-v2"
+        ],
+        "baseline": "冻结MiniLM原生masked-mean pooled cosine",
+        "metrics": [
+          "test.recall_at_10",
+          "test.ndcg_at_10",
+          "baseline.recall_at_10",
+          "baseline.ndcg_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "max_queries=100, max_length=128; validation-only selection",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a30.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct13-near-a30.json"
+    },
+    {
+      "domain": "agent-research",
       "key": "ocsd",
       "title": "OCSD",
       "paper_url": "https://arxiv.org/abs/2608.04788",
@@ -2577,6 +2703,69 @@
       "code": "https://github.com/manulife-ai/emnlp2026/",
       "adapter": "skill-retention",
       "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "skilldreamer",
+      "title": "Imagine Before Acting: Prospective Skill Identification for LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2609.01642",
+      "detail_path": "reproductions/2609.01642-skilldreamer/README.md",
+      "topic": [
+        "skill-retrieval",
+        "prospective-reasoning",
+        "capability-aware-invocation"
+      ],
+      "first_author": "Shuo Liu",
+      "first_author_affiliation": "Sichuan University",
+      "published": "2026-08-28",
+      "code": null,
+      "adapter": {
+        "adapter_key": "skilldreamer",
+        "arxiv_id": "2609.01642",
+        "title": "Imagine Before Acting: Prospective Skill Identification for LLM Agents",
+        "paper_url": "https://arxiv.org/abs/2609.01642",
+        "track": "llm",
+        "organization": "Sichuan University",
+        "published": "2026-08-28",
+        "code_url": null,
+        "topics": [
+          "skill-retrieval",
+          "prospective-reasoning",
+          "capability-aware-invocation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/skilldreamer",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "GSM8K public question subset",
+          "local generic procedural skill gallery"
+        ],
+        "baseline": "no-skills / original-task dense direct retrieval",
+        "metrics": [
+          "variants.skilldreamer.pass_rate",
+          "variants.skilldreamer.load_rate",
+          "variants.direct.pass_rate",
+          "variants.no_skills.pass_rate"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "max_queries=24, action_budget=8, max_new_tokens=256",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct13-skilldreamer-a100.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct13-skilldreamer-a100.json"
     },
     {
       "domain": "agent-research",
@@ -4318,6 +4507,66 @@
     },
     {
       "domain": "foundation-models",
+      "key": "doublecat-semicat",
+      "title": "On the Design Space of Continuous Diffusion Language Models",
+      "paper_url": "https://arxiv.org/abs/2610.13834",
+      "detail_path": "reproductions/2610.13834-doublecat-semicat/README.md",
+      "topic": [
+        "扩散语言模型",
+        "Self-conditioning"
+      ],
+      "first_author": "Oscar Davis",
+      "first_author_affiliation": "University of Oxford / Apple（在 Apple 期间完成）",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "doublecat-semicat",
+        "arxiv_id": "2610.13834",
+        "title": "On the Design Space of Continuous Diffusion Language Models",
+        "paper_url": "https://arxiv.org/abs/2610.13834",
+        "track": "llm",
+        "organization": "Apple / University of Oxford / University of Amsterdam",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "扩散语言模型",
+          "Self-conditioning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/doublecat_semicat",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "Salesforce/wikitext wikitext-2-raw-v1"
+        ],
+        "baseline": "one-hot continuous diffusion LM, same bidirectional DiT and training budget",
+        "metrics": [
+          "test_denoising_ce_t05",
+          "parameter_delta_l2",
+          "sampled_byte_entropy",
+          "previously_revealed_changes"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded diagnostic; explicit local CLI config",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/doublecat-semicat-a30-20261013.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/doublecat-semicat-a30-20261013.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "dqwen35",
       "title": "dQwen3.5: Adapting Hybrid Language Models into Bidirectional Diffusion Language Models",
       "paper_url": "https://arxiv.org/abs/2609.20751",
@@ -5167,6 +5416,67 @@
       "priority": "P1",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/leapquant-a100-20260930.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "lewam",
+      "title": "LeWAM: End-to-End World and Action Modeling with JEPAs",
+      "paper_url": "https://arxiv.org/abs/2610.12818",
+      "detail_path": "reproductions/2610.12818-lewam/README.md",
+      "topic": [
+        "world-action-model",
+        "jepa",
+        "latent-planning"
+      ],
+      "first_author": "Minghao Fu",
+      "first_author_affiliation": "UC San Diego",
+      "published": "2026-10-08",
+      "code": "https://github.com/MinghaoFu/lewam",
+      "adapter": {
+        "adapter_key": "lewam",
+        "arxiv_id": "2610.12818",
+        "title": "LeWAM: End-to-End World and Action Modeling with JEPAs",
+        "paper_url": "https://arxiv.org/abs/2610.12818",
+        "track": "llm",
+        "organization": "UC San Diego / ETH Zurich / University of British Columbia / Brown University",
+        "published": "2026-10-08",
+        "code_url": "https://github.com/MinghaoFu/lewam",
+        "topics": [
+          "world-action-model",
+          "jepa",
+          "latent-planning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/lewam",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "LeWAM ToolHang public checkpoint and HDF5 trajectories"
+        ],
+        "baseline": "同checkpoint reactive policy / best-of-K / gradient planning",
+        "metrics": [
+          "variants.reactive.metrics",
+          "variants.best_of_k.metrics",
+          "variants.grad.metrics"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "2episodes/seed, 4proposals, 5gradient updates",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct13-lewam-a100.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct13-lewam-a100.json"
     },
     {
       "domain": "foundation-models",
@@ -6275,6 +6585,66 @@
     },
     {
       "domain": "foundation-models",
+      "key": "oal",
+      "title": "Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels",
+      "paper_url": "https://arxiv.org/abs/2610.13674",
+      "detail_path": "reproductions/2610.13674-oal/README.md",
+      "topic": [
+        "推理与系统效率",
+        "注意力线性化"
+      ],
+      "first_author": "Weiqi Sun",
+      "first_author_affiliation": "The Chinese University of Hong Kong, Shenzhen",
+      "published": "2026-10-09",
+      "code": "https://github.com/wuqianyue09/OAL",
+      "adapter": {
+        "adapter_key": "oal",
+        "arxiv_id": "2610.13674",
+        "title": "Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels",
+        "paper_url": "https://arxiv.org/abs/2610.13674",
+        "track": "llm",
+        "organization": "The Chinese University of Hong Kong, Shenzhen / Beijing Normal University, Zhuhai / National University of Singapore",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/wuqianyue09/OAL",
+        "topics": [
+          "推理与系统效率",
+          "注意力线性化"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/oal",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "Salesforce/wikitext wikitext-2-raw-v1"
+        ],
+        "baseline": "same fixed Qwen2.5-0.5B Base with identical q/k/v/o LoRA budget; learned global quadratic calibration",
+        "metrics": [
+          "oal_lora.test_nll",
+          "softmax_lora.test_nll",
+          "parameter_delta_l2",
+          "validation_output_mse"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded diagnostic; explicit local CLI config",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oal-a100-20261013.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oal-a100-20261013.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "oda",
       "title": "On-Demand Attention: Efficient Long-Context Decoding with Learned Recall",
       "paper_url": "https://arxiv.org/abs/2609.20734",
@@ -7143,6 +7513,66 @@
     },
     {
       "domain": "foundation-models",
+      "key": "replayssm",
+      "title": "ReplaySSM: Cache SSM Inputs, Not State",
+      "paper_url": "https://arxiv.org/abs/2610.13778",
+      "detail_path": "reproductions/2610.13778-replayssm/README.md",
+      "topic": [
+        "推理与系统效率",
+        "SSM 缓存与回滚"
+      ],
+      "first_author": "Ze-Wei Liou",
+      "first_author_affiliation": "Princeton University",
+      "published": "2026-10-09",
+      "code": "https://github.com/Johnny-Liou/ReplaySSM",
+      "adapter": {
+        "adapter_key": "replayssm",
+        "arxiv_id": "2610.13778",
+        "title": "ReplaySSM: Cache SSM Inputs, Not State",
+        "paper_url": "https://arxiv.org/abs/2610.13778",
+        "track": "llm",
+        "organization": "Princeton University / NVIDIA",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/Johnny-Liou/ReplaySSM",
+        "topics": [
+          "推理与系统效率",
+          "SSM 缓存与回滚"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/replayssm",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "seeded random recurrent inputs, protocol v2-gdn-rollback"
+        ],
+        "baseline": "conventional FP32 recurrence and author s32_rs Triton emulation",
+        "metrics": [
+          "max_output_error",
+          "checkpoint_refreshes",
+          "output_rmse",
+          "anchor_rmse"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded diagnostic; explicit local CLI config",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/replayssm-a100-20261013.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/replayssm-a100-20261013.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "retoken",
       "title": "ReToken: One Token to Improve Vision–Language Models for Visual Retrieval",
       "paper_url": "https://arxiv.org/abs/2607.28627",
@@ -7479,6 +7909,69 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "smolwam",
+      "title": "SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices",
+      "paper_url": "https://arxiv.org/abs/2610.13740",
+      "detail_path": "reproductions/2610.13740-smolwam/README.md",
+      "topic": [
+        "world-action-model",
+        "robotics",
+        "efficient-inference"
+      ],
+      "first_author": "Timi Owolabi",
+      "first_author_affiliation": "ML Collective",
+      "published": "2026-10-09",
+      "code": "https://github.com/iitimii/SmolWAM",
+      "adapter": {
+        "adapter_key": "smolwam",
+        "arxiv_id": "2610.13740",
+        "title": "SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices",
+        "paper_url": "https://arxiv.org/abs/2610.13740",
+        "track": "llm",
+        "organization": "ML Collective",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/iitimii/SmolWAM",
+        "topics": [
+          "world-action-model",
+          "robotics",
+          "efficient-inference"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/smolwam",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "LIBERO fixed simulator initial states",
+          "timiiowolabi/SmolWAM",
+          "Wan2.1 VAE"
+        ],
+        "baseline": "同初始状态的真实no-op闭环",
+        "metrics": [
+          "variants.smolwam.success_rate",
+          "variants.noop.success_rate",
+          "latency_seconds_mean"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "固定LIBERO task subset × 2 init states/seed",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oct13-smolwam-a100.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oct13-smolwam-a100.json"
     },
     {
       "domain": "foundation-models",
@@ -8316,6 +8809,66 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "multimodal-models",
+      "key": "cv-opd",
+      "title": "CV-OPD: Contrastive Vision On-policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.13264",
+      "detail_path": "reproductions/2610.13264-cv-opd/README.md",
+      "topic": [
+        "视觉证据对齐",
+        "On-policy distillation"
+      ],
+      "first_author": "Haowei Wang",
+      "first_author_affiliation": "Xiamen University / Moxin Technology",
+      "published": "2026-10-09",
+      "code": "https://github.com/HaoLin3419/Contrastive-Vision-OPD",
+      "adapter": {
+        "adapter_key": "cv-opd",
+        "arxiv_id": "2610.13264",
+        "title": "CV-OPD: Contrastive Vision On-policy Distillation",
+        "paper_url": "https://arxiv.org/abs/2610.13264",
+        "track": "llm",
+        "organization": "Xiamen University / Moxin Technology",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/HaoLin3419/Contrastive-Vision-OPD",
+        "topics": [
+          "视觉证据对齐",
+          "On-policy distillation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/cv_opd",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "COCO train2017-derived 8-class main-object subset"
+        ],
+        "baseline": "same checkpoint before update; no matched Vision-OPD training comparison",
+        "metrics": [
+          "parameter_delta_l2",
+          "optimizer_updates",
+          "gated_tokens",
+          "final_test.accuracy"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded diagnostic; explicit local CLI config",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/cv-opd-a100-20261013.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/cv-opd-a100-20261013.json"
     },
     {
       "domain": "multimodal-models",
@@ -9428,6 +9981,64 @@
     },
     {
       "domain": "post-training",
+      "key": "gppo-framework",
+      "title": "Generalized Proximal Policy Optimization: Unifying LLM RL Algorithms from the Perspective of Divergence",
+      "paper_url": "https://arxiv.org/abs/2610.13015",
+      "detail_path": "reproductions/2610.13015-gppo-framework/README.md",
+      "topic": [
+        "Proximal policy optimization",
+        "f-divergence geometry",
+        "Probability-aware estimator"
+      ],
+      "first_author": "Zhicheng Cai",
+      "first_author_affiliation": "Tsinghua University AIR",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "gppo-framework",
+        "arxiv_id": "2610.13015",
+        "title": "Generalized Proximal Policy Optimization: Unifying LLM RL Algorithms from the Perspective of Divergence",
+        "paper_url": "https://arxiv.org/abs/2610.13015",
+        "track": "post-training",
+        "organization": "Tsinghua University AIR / ByteDance Seed",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Proximal policy optimization",
+          "f-divergence geometry",
+          "Probability-aware estimator"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/gppo_framework",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "GSM8K verified train-only holdout"
+        ],
+        "baseline": "同checkpoint与配置的GRPO-control；零优势重采样成本显式记录",
+        "metrics": [
+          "method_metrics.accuracy",
+          "parameters_changed"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/gppo-framework-a100-20261013.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
+        "evolve_operators": []
+      },
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "gprl",
       "title": "GPRL",
       "paper_url": "https://arxiv.org/abs/2605.18721",
@@ -9520,6 +10131,64 @@
       "published": "2024-02-05",
       "code": "https://github.com/deepseek-ai/DeepSeek-Math",
       "adapter": "grpo"
+    },
+    {
+      "domain": "post-training",
+      "key": "grpo-difficulty-curriculum",
+      "title": "A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO",
+      "paper_url": "https://arxiv.org/abs/2610.13669",
+      "detail_path": "reproductions/2610.13669-grpo-difficulty-curriculum/README.md",
+      "topic": [
+        "GRPO difficulty curriculum",
+        "Current-policy recalibration",
+        "Overly-hard degradation control"
+      ],
+      "first_author": "Ronghan Li",
+      "first_author_affiliation": "Dalian Maritime University",
+      "published": "2026-10-09",
+      "code": "https://github.com/NHLling/GRPO-B",
+      "adapter": {
+        "adapter_key": "grpo-difficulty-curriculum",
+        "arxiv_id": "2610.13669",
+        "title": "A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO",
+        "paper_url": "https://arxiv.org/abs/2610.13669",
+        "track": "post-training",
+        "organization": "Dalian Maritime University",
+        "published": "2026-10-09",
+        "code_url": "https://github.com/NHLling/GRPO-B",
+        "topics": [
+          "GRPO difficulty curriculum",
+          "Current-policy recalibration",
+          "Overly-hard degradation control"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/grpo_difficulty_curriculum",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "GSM8K verified train-only holdout"
+        ],
+        "baseline": "相同checkpoint与配置的unfiltered、fixed-medium、static、staged、B5-too-hard；按实际effective-update/rollout预算解释",
+        "metrics": [
+          "method_metrics.accuracy",
+          "parameters_changed"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/grpo-difficulty-curriculum-a30-20261014-seeds42-44.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
+        "evolve_operators": []
+      },
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -9799,6 +10468,28 @@
       "code": "https://github.com/yhao-wang/MAESTRO",
       "adapter": "maestro-opd",
       "priority": "P1"
+    },
+    {
+      "domain": "post-training",
+      "key": "magicbeanstalk",
+      "title": "MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis",
+      "paper_url": "https://arxiv.org/abs/2610.12659",
+      "detail_path": "reproductions/2610.12659-magicbeanstalk/README.md",
+      "topic": [
+        "RLVR data synthesis",
+        "Effectivity-validated decomposition",
+        "Policy-calibrated Goldilocks"
+      ],
+      "first_author": "Ximing Lu",
+      "first_author_affiliation": "University of Washington",
+      "published": "2026-10-08",
+      "priority": "P0",
+      "code": null,
+      "implementation_status": "deferred_high_cost",
+      "deferral_reason": "成本过高，暂不复现；小预算多次真实运行未取得合格合成后代及RL更新，扩展候选池/教师/多种子成本与信号不确定，用户于2026-10-14要求保留待验收并交付其余成果。",
+      "local_code": "src/auto_research/reproductions/magicbeanstalk",
+      "deferred_execution_spec": "src/auto_research/reproductions/magicbeanstalk/deferred-spec.json",
+      "gpu_validation_passed": false
     },
     {
       "domain": "post-training",
@@ -10340,6 +11031,64 @@
       "published": "2023-05-31",
       "code": "https://github.com/openai/prm800k",
       "adapter": "process-supervision"
+    },
+    {
+      "domain": "post-training",
+      "key": "progressive-contraction",
+      "title": "Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training",
+      "paper_url": "https://arxiv.org/abs/2610.12933",
+      "detail_path": "reproductions/2610.12933-progressive-contraction/README.md",
+      "topic": [
+        "Monte Carlo reasoning tree",
+        "Teacher-side uncertainty contraction",
+        "Learner-aware SFT routing"
+      ],
+      "first_author": "Suorong Yang",
+      "first_author_affiliation": "National University of Singapore / Nanjing University",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "progressive-contraction",
+        "arxiv_id": "2610.12933",
+        "title": "Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training",
+        "paper_url": "https://arxiv.org/abs/2610.12933",
+        "track": "post-training",
+        "organization": "National University of Singapore / Nanjing University / Fudan University / The University of Sydney / The Chinese University of Hong Kong / Nanyang Technological University",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Monte Carlo reasoning tree",
+          "Teacher-side uncertainty contraction",
+          "Learner-aware SFT routing"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/progressive_contraction",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "GSM8K verified train-only holdout"
+        ],
+        "baseline": "同一真实verified teacher全集的full-SFT；相同epochs，teacher profiling成本不并入student exposure比率",
+        "metrics": [
+          "method_metrics.accuracy",
+          "parameters_changed"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/progressive-contraction-a100-20261014-seeds42-44.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
+        "evolve_operators": []
+      },
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -11172,6 +11921,65 @@
     },
     {
       "domain": "post-training",
+      "key": "soar",
+      "title": "SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents",
+      "paper_url": "https://arxiv.org/abs/2610.13157",
+      "detail_path": "reproductions/2610.13157-soar/README.md",
+      "topic": [
+        "Source-aware RL",
+        "Search agents",
+        "Source-consistency reward"
+      ],
+      "first_author": "Shengze Huang",
+      "first_author_affiliation": "Zhejiang University / Microsoft",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "soar",
+        "arxiv_id": "2610.13157",
+        "title": "SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents",
+        "paper_url": "https://arxiv.org/abs/2610.13157",
+        "track": "post-training",
+        "organization": "Microsoft / Zhejiang University",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Source-aware RL",
+          "Search agents",
+          "Source-consistency reward"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/soar",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "Verified public train-only holdout",
+          "Independently sourced hash-verified public retrieval corpus"
+        ],
+        "baseline": "相同source-aware工作流的without-source-reward消融；另有冻结初始策略",
+        "metrics": [
+          "method_metrics.accuracy",
+          "parameters_changed"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/soar-a100-20261014-seeds42-44.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
+        "evolve_operators": []
+      },
+      "priority": "P1"
+    },
+    {
+      "domain": "post-training",
       "key": "sparse-opd",
       "title": "Extremely Sparse Supervision Incentivizes Reasoning Ability",
       "paper_url": "https://arxiv.org/abs/2609.04565",
@@ -11293,6 +12101,64 @@
     },
     {
       "domain": "post-training",
+      "key": "state-opd",
+      "title": "State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents",
+      "paper_url": "https://arxiv.org/abs/2610.13238",
+      "detail_path": "reproductions/2610.13238-state-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "Interaction-state isolation",
+        "Entropy-budget allocation"
+      ],
+      "first_author": "Zhentao Zhang",
+      "first_author_affiliation": "Alibaba Group",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "state-opd",
+        "arxiv_id": "2610.13238",
+        "title": "State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents",
+        "paper_url": "https://arxiv.org/abs/2610.13238",
+        "track": "post-training",
+        "organization": "Alibaba Group / Tsinghua University / Shanghai Jiao Tong University / University of Science and Technology of China",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "On-policy distillation",
+          "Interaction-state isolation",
+          "Entropy-budget allocation"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/state_opd",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "GSM8K verified train-only holdout"
+        ],
+        "baseline": "冻结初始学生、同配置预算的独立root full-history OPD及无扩采对照；不宣称能力提升",
+        "metrics": [
+          "method_metrics.accuracy",
+          "parameters_changed"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/state-opd-a100-20261014.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
+        "evolve_operators": []
+      },
+      "priority": "P0"
+    },
+    {
+      "domain": "post-training",
       "key": "steerlm",
       "title": "SteerLM",
       "paper_url": "https://arxiv.org/abs/2310.05344",
@@ -11322,6 +12188,65 @@
       "code": null,
       "adapter": "stride-opd",
       "priority": "P0"
+    },
+    {
+      "domain": "post-training",
+      "key": "synthself",
+      "title": "Continually Post-training Small Models via Synthetic Self-distillation",
+      "paper_url": "https://arxiv.org/abs/2610.13113",
+      "detail_path": "reproductions/2610.13113-synthself/README.md",
+      "topic": [
+        "Synthetic self-distillation",
+        "Same-family aligner",
+        "Offline rejection-sampled SFT"
+      ],
+      "first_author": "Woosung Koh",
+      "first_author_affiliation": "KAIST AI / LG AI Research",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "synthself",
+        "arxiv_id": "2610.13113",
+        "title": "Continually Post-training Small Models via Synthetic Self-distillation",
+        "paper_url": "https://arxiv.org/abs/2610.13113",
+        "track": "post-training",
+        "organization": "LG AI Research / KAIST AI",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Synthetic self-distillation",
+          "Same-family aligner",
+          "Offline rejection-sampled SFT"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/synthself",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "GSM8K verified train-only holdout"
+        ],
+        "baseline": "同初始学生与epochs的gold-SFT；另可unfiltered-rewrite消融，真实token预算不相同则明确记录",
+        "metrics": [
+          "method_metrics.acquisition.accuracy",
+          "method_metrics.retention.accuracy",
+          "parameters_changed"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/synthself-a100-20261014-seeds42-44.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
+        "evolve_operators": []
+      },
+      "priority": "P1"
     },
     {
       "key": "t2spo",
@@ -11354,6 +12279,64 @@
       "published": "2026-07-08",
       "code": "https://github.com/xiuyilou/TACO",
       "adapter": "taco"
+    },
+    {
+      "domain": "post-training",
+      "key": "tapo-trajectory",
+      "title": "Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL",
+      "paper_url": "https://arxiv.org/abs/2610.13020",
+      "detail_path": "reproductions/2610.13020-tapo-trajectory/README.md",
+      "topic": [
+        "Trajectory-aware policy optimization",
+        "Geometric prefix correction",
+        "Length-aware clipping"
+      ],
+      "first_author": "Zhicheng Cai",
+      "first_author_affiliation": "Tsinghua University AIR",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "tapo-trajectory",
+        "arxiv_id": "2610.13020",
+        "title": "Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL",
+        "paper_url": "https://arxiv.org/abs/2610.13020",
+        "track": "post-training",
+        "organization": "Tsinghua University AIR / ByteDance Seed",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Trajectory-aware policy optimization",
+          "Geometric prefix correction",
+          "Length-aware clipping"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/tapo_trajectory",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "GSM8K verified train-only holdout"
+        ],
+        "baseline": "同checkpoint、采样与优化上限的GRPO-control；不是原Qwen3-8B Avg@8结果",
+        "metrics": [
+          "method_metrics.accuracy",
+          "parameters_changed"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/tapo-trajectory-a100-20261013.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
+        "evolve_operators": []
+      },
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -11532,6 +12515,66 @@
       "published": "2026-08-27",
       "code": null,
       "adapter": "uc-mopd"
+    },
+    {
+      "domain": "post-training",
+      "key": "upturn",
+      "title": "Inject a Turn, Not a Token: Learning Where to Redirect LLM Reasoning for Self-Correction",
+      "paper_url": "https://arxiv.org/abs/2610.13672",
+      "detail_path": "reproductions/2610.13672-upturn/README.md",
+      "topic": [
+        "Self-correction",
+        "Frozen causal encoder",
+        "Learned cut policy"
+      ],
+      "first_author": "Jiwon Jeon",
+      "first_author_affiliation": "KAIST",
+      "published": "2026-10-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "upturn",
+        "arxiv_id": "2610.13672",
+        "title": "Inject a Turn, Not a Token: Learning Where to Redirect LLM Reasoning for Self-Correction",
+        "paper_url": "https://arxiv.org/abs/2610.13672",
+        "track": "post-training",
+        "organization": "KAIST",
+        "published": "2026-10-09",
+        "code_url": null,
+        "topics": [
+          "Self-correction",
+          "Frozen causal encoder",
+          "Learned cut policy"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/upturn",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "GSM8K verified train-only holdout"
+        ],
+        "baseline": "Base@2N完整rollout，对照UPTURN@N及至多N次替换；预算匹配为最大允许生成数，不等于实际耗时一致",
+        "metrics": [
+          "method_metrics.avg_accuracy",
+          "method_metrics.pass_rate",
+          "position_informative_groups",
+          "parameters_changed"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/upturn-a100-20261014.json",
+        "online_evidence": [],
+        "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed",
+        "evolve_operators": []
+      },
+      "priority": "P1"
     },
     {
       "domain": "post-training",
@@ -33662,6 +34705,78 @@
             "traffic": "5% traffic, 2026-03-07 to 2026-03-11",
             "source_url": "https://arxiv.org/abs/2605.05803",
             "source_location": "original paper online-result disclosure: product=WeChat Channels Ads; metric=GMV(normal)"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      }
+    },
+    {
+      "domain": "recommendation",
+      "key": "uxsid",
+      "title": "UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence",
+      "paper_url": "https://arxiv.org/abs/2605.09040",
+      "detail_path": "reproductions/2605.09040-uxsid/README.md",
+      "topic": [
+        "long-sequence",
+        "ranking",
+        "semantic-id",
+        "compression"
+      ],
+      "first_author": "Hongwei Zhang",
+      "first_author_affiliation": "Kuaishou",
+      "published": "2026-05-09",
+      "code": null,
+      "adapter": {
+        "adapter_key": "uxsid",
+        "arxiv_id": "2605.09040",
+        "title": "UxSID: Semantic-Aware User Interests Modeling for Ultra-Long Sequence",
+        "paper_url": "https://arxiv.org/abs/2605.09040",
+        "track": "recommendation",
+        "organization": "Kuaishou",
+        "published": "2026-05-09",
+        "code_url": null,
+        "topics": [
+          "long-sequence",
+          "ranking",
+          "semantic-id",
+          "compression"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/uxsid",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K per-user chronological leave-last-two"
+        ],
+        "baseline": "matched global-only / item-agnostic / ungated ablations with the same SID side information",
+        "metrics": [
+          "variants.uxsid.test.roc_auc",
+          "variants.uxsid.test.pr_auc",
+          "cache.offline_online_max_abs_error"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "3 epochs per four matched variants; frozen Qwen2.5-0.5B attribute encoder",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/uxsid-a100-20261013.json",
+        "online_evidence": [
+          {
+            "product": "Kuaishou short-video advertising",
+            "metric": "Revenue",
+            "lift_percent": 0.337,
+            "traffic": "live large-scale advertising traffic; production online A/B versus incumbent",
+            "source_url": "https://arxiv.org/html/2605.09040v4",
+            "source_location": "Section 4.1, Table 3 and Performance in Online A/B Testing",
+            "experiment_duration": "one week",
+            "significance": "paper describes significant gains; p-value and confidence interval not reported",
+            "retrieved_at": "2026-10-13"
           }
         ],
         "selection_exception": null,

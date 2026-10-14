@@ -50,10 +50,18 @@
 - Use the repository environment and `python -m pytest`. The required CI checks are defined in `.github/workflows/quality.yml` and `.github/workflows/docs.yml`; complete applicable gates and fix failures without weakening assertions or relabeling evidence to make tests pass.
 - After relevant checks pass, repeat or broaden them only for a new change, failure, or unresolved concern. Run generators to check consistency; inspect their diff and repair the source of generated content.
 - Preserve unrelated changes and untracked user files. Do not recreate `uv.lock` as routine cleanup. Before a PR handoff, verify its URL, branch, diff, and checks; distinguish pending CI from passed CI.
+- At the end of each run, inspect local disk use and remove the run's disposable, reproducible artifacts (such as generated site/build directories, temporary packaging environments and redundant download archives). Preserve source changes, experiment results including failures, validation receipts, active working directories, and reusable public data/checkpoint caches. Do not delete unfamiliar files or checkpoints merely because they are large; record the cleanup scope and space reclaimed.
+
+## Mandatory reproduction cost gate
+
+- Before downloading large resources, implementing a new reproduction, or launching/resuming experiments, assess the expected total cost from the paper configuration, upstream requirements and existing measurements. The available budget is one A100 or A30, or the local Mac; do not assume multi-GPU capacity or simultaneous access to both GPU hosts.
+- If a faithful reproduction is clearly expensive for that budget (for example, an oversized checkpoint/data download, insufficient device memory, heavy Mac swapping, long rollouts, or a multi-arm/multi-seed plan expected to take hours), mark it **“成本过高，暂不复现”** and continue with affordable papers. Do not download, attempt a trial reproduction, expand the experiment, or repeatedly retry merely to prove that it is costly. If material cost uncertainty cannot be resolved with cheap read-only checks, defer rather than launch a costly probe.
+- Record the paper/source, model and data scale, available resource, known or estimated cost with its basis, and the reason for deferral in the discovery ledger or task scope. Distinguish estimates from measurements. Keep valuable paper metadata and existing results, but do not advertise an unvalidated implementation as completed, add it as an executable evolve operator, or let its deferred reproduction block unrelated delivery or review-watermark closure.
+- This default applies to every research domain and agent model, and to unfinished work with earlier general execution authorization. Resume a high-cost reproduction only if the user explicitly requests it after seeing the cost warning; do not repeatedly ask for approval by default. Preserve prior failures and never replace a defining algorithm with a cheap fixture to bypass this rule or the validation gate.
 
 ## GPU validation gate
 
-- Any new or materially upgraded implementation whose advertised path requires CUDA must be executed on a real NVIDIA A100 or A30 before its MR is declared complete.
+- Any new or materially upgraded implementation whose advertised path requires CUDA must be executed on a real NVIDIA A100 or A30 before its MR is declared complete. Apply the cost gate first: a high-cost deferred paper is not an accepted CUDA implementation and must not be declared complete without this evidence.
 - The adapter must set `requires_gpu_validation=True` and point `gpu_validation_artifact` at a committed sanitized receipt accepted by `scripts/validate_gpu_evidence.py`.
 - Receipts must include the public dataset/checkpoint revision, command, seed, metrics, accelerator model and commit, while excluding hostnames, SSH aliases, usernames, driver/build strings and checkpoints.
 

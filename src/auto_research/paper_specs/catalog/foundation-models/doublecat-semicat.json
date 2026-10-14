@@ -1,0 +1,21 @@
+{
+  "domain": "foundation-models",
+  "key": "doublecat-semicat",
+  "title": "On the Design Space of Continuous Diffusion Language Models",
+  "paper_url": "https://arxiv.org/abs/2610.13834",
+  "detail_path": "reproductions/2610.13834-doublecat-semicat/README.md",
+  "topic": [
+    "扩散语言模型",
+    "Self-conditioning"
+  ],
+  "first_author": "Oscar Davis",
+  "first_author_affiliation": "University of Oxford / Apple（在 Apple 期间完成）",
+  "published": "2026-10-09",
+  "code": "未找到原作者公开实现（截至 2026-10-13；原文只链接通用 tiktoken）",
+  "adapter": {
+    "spec_key": "doublecat-semicat"
+  },
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/doublecat-semicat-a30-20261013.json"
+}

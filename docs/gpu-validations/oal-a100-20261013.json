@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "adapter_key": "oal",
+  "validated_at": "2026-10-13T16:52:17.088264+00:00",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oal.py",
+    "--checkpoint",
+    "<fixed-public-Qwen2.5-0.5B-Base-mirror>",
+    "--data",
+    "<fixed-public-WikiText2-mirror>",
+    "--dataset-id",
+    "Salesforce/wikitext",
+    "--dataset-revision",
+    "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "--device",
+    "cuda",
+    "--steps",
+    "3",
+    "--calibration-steps",
+    "10",
+    "--sequence-length",
+    "32",
+    "--layers",
+    "4",
+    "--bootstrap",
+    "64",
+    "--seed",
+    "42",
+    "--output",
+    "<immutable-oal-seed42-result.json>"
+  ],
+  "commands": [
+    [
+      "python",
+      "scripts/run_oal.py",
+      "--checkpoint",
+      "<fixed-public-Qwen2.5-0.5B-Base-mirror>",
+      "--data",
+      "<fixed-public-WikiText2-mirror>",
+      "--dataset-id",
+      "Salesforce/wikitext",
+      "--dataset-revision",
+      "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "--device",
+      "cuda",
+      "--steps",
+      "3",
+      "--calibration-steps",
+      "10",
+      "--sequence-length",
+      "32",
+      "--layers",
+      "4",
+      "--bootstrap",
+      "64",
+      "--seed",
+      "42",
+      "--output",
+      "<immutable-oal-seed42-result.json>"
+    ],
+    [
+      "python",
+      "scripts/run_oal.py",
+      "--checkpoint",
+      "<fixed-public-Qwen2.5-0.5B-Base-mirror>",
+      "--data",
+      "<fixed-public-WikiText2-mirror>",
+      "--dataset-id",
+      "Salesforce/wikitext",
+      "--dataset-revision",
+      "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "--device",
+      "cuda",
+      "--steps",
+      "3",
+      "--calibration-steps",
+      "10",
+      "--sequence-length",
+      "32",
+      "--layers",
+      "4",
+      "--bootstrap",
+      "64",
+      "--seed",
+      "43",
+      "--output",
+      "<immutable-oal-seed43-result.json>"
+    ],
+    [
+      "python",
+      "scripts/run_oal.py",
+      "--checkpoint",
+      "<fixed-public-Qwen2.5-0.5B-Base-mirror>",
+      "--data",
+      "<fixed-public-WikiText2-mirror>",
+      "--dataset-id",
+      "Salesforce/wikitext",
+      "--dataset-revision",
+      "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "--device",
+      "cuda",
+      "--steps",
+      "3",
+      "--calibration-steps",
+      "10",
+      "--sequence-length",
+      "32",
+      "--layers",
+      "4",
+      "--bootstrap",
+      "64",
+      "--seed",
+      "44",
+      "--output",
+      "<immutable-oal-seed44-result.json>"
+    ]
+  ],
+  "command_redaction": "Only Python executable and checkpoint/data/output machine paths are replaced by logical roles; flags, budgets and seed values are from actual captured subprocess argv.",
+  "dataset": {
+    "id": "Salesforce/wikitext",
+    "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+    "configuration": "wikitext-2-raw-v1",
+    "all_actual_input_hashes_verified": true,
+    "split_hashes": {
+      "train": "827deb5b33baeba281d95c526af492566408ac8ee905987add71d3ca69f8419f",
+      "validation": "fe3ff869fba282f0bee15a35f3ee81a063e1431d2691137715084b9b4db8e671",
+      "test": "fa2bd58ba4986c2c3c618ff4084bd1332d98ada4664eb76a17320efd1938adf6"
+    }
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "files_sha256": {
+      "config.json": "479dcf0c5286339e41ad3992cd08ae88a467c4187587936248e2b7c96283484b",
+      "generation_config.json": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model.safetensors": "88c142557820ccad55bb59756bfcfcf891de9cc6202816bd346445188a0ed342",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "c91efca15ceff6e9ee9424db58a6f59cd41294e550a86cbd07e3c1fb500b34f9",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "result": "passed",
+  "metrics": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "diagnostic_only": true,
+    "promotion_eligible": false,
+    "evaluation_tier": "l1_mechanism",
+    "protocol": {
+      "id": "oal-qwen2.5-base-wikitext2-small-block-v1",
+      "steps_per_candidate": 3,
+      "calibration_steps_per_initialization": 10,
+      "calibration_initializations": 3,
+      "global_calibration_steps": 10,
+      "sequence_length": 32,
+      "converted_layers": [
+        4
+      ],
+      "bootstrap_replicates": 64,
+      "train_blocks": 16,
+      "grouping_train_blocks": 4,
+      "calibration_train_blocks": 4,
+      "adaptation_train_blocks": 8,
+      "validation_blocks": 2,
+      "test_blocks": 2,
+      "lora": {
+        "rank": 8,
+        "alpha": 16,
+        "dropout": 0.05,
+        "projections": "q/k/v/o in all layers"
+      },
+      "test_isolated_from_selection": true
+    },
+    "per_seed": [
+      {
+        "seed": 42,
+        "softmax_test_ppl": 44.121902313940375,
+        "oal_test_ppl": 41.07818607477422,
+        "softmax_test_nll": 3.786956310272217,
+        "oal_test_nll": 3.715477228164673,
+        "softmax_parameter_delta_l2": 0.7798302173614502,
+        "oal_parameter_delta_l2": 0.7767224907875061,
+        "oal_validation_output_mse": 0.03053223341703415,
+        "global_validation_output_mse": 0.04205557331442833,
+        "recurrent_dense_max_error": 0.0000011771917343139648
+      },
+      {
+        "seed": 43,
+        "softmax_test_ppl": 43.229592337624766,
+        "oal_test_ppl": 42.333743550593795,
+        "softmax_test_nll": 3.7665252685546875,
+        "oal_test_nll": 3.745584487915039,
+        "softmax_parameter_delta_l2": 0.7835220694541931,
+        "oal_parameter_delta_l2": 0.7786442637443542,
+        "oal_validation_output_mse": 0.03049851395189762,
+        "global_validation_output_mse": 0.04205557331442833,
+        "recurrent_dense_max_error": 0.0000011771917343139648
+      },
+      {
+        "seed": 44,
+        "softmax_test_ppl": 43.128663083253024,
+        "oal_test_ppl": 43.223305684618616,
+        "softmax_test_nll": 3.764187812805176,
+        "oal_test_nll": 3.7663798332214355,
+        "softmax_parameter_delta_l2": 0.7785258889198303,
+        "oal_parameter_delta_l2": 0.772756814956665,
+        "oal_validation_output_mse": 0.03037159889936447,
+        "global_validation_output_mse": 0.04205557331442833,
+        "recurrent_dense_max_error": 0.0000012814998626708984
+      }
+    ],
+    "aggregate": {
+      "softmax_test_ppl": {
+        "mean": 43.493385911606055,
+        "sample_std": 0.5466455246313341
+      },
+      "oal_test_ppl": {
+        "mean": 42.21174510332888,
+        "sample_std": 1.0777510153027128
+      },
+      "softmax_test_nll": {
+        "mean": 3.77255646387736,
+        "sample_std": 0.012525278719127711
+      },
+      "oal_test_nll": {
+        "mean": 3.742480516433716,
+        "sample_std": 0.025592865795155528
+      },
+      "softmax_parameter_delta_l2": {
+        "mean": 0.7806260585784912,
+        "sample_std": 0.0025914238200345414
+      },
+      "oal_parameter_delta_l2": {
+        "mean": 0.7760411898295084,
+        "sample_std": 0.003002272731355724
+      },
+      "oal_validation_output_mse": {
+        "mean": 0.030467448756098747,
+        "sample_std": 0.00008470328718095468
+      },
+      "global_validation_output_mse": {
+        "mean": 0.04205557331442833,
+        "sample_std": 0
+      },
+      "recurrent_dense_max_error": {
+        "mean": 0.0000012119611104329426,
+        "sample_std": 6.022232598554165e-8
+      }
+    },
+    "all_candidates_nonzero_parameter_update": true,
+    "recurrent_dense_error_bound": 0.0005,
+    "negative_result_preserved": true
+  },
+  "provenance": {
+    "commit": "4496283ac8e37c070b8f71b20af6138526cbba15",
+    "artifact_path": "docs/gpu-validations/oal-a100-20261013.json",
+    "source_archive_sha256": "f613a1a1355350d3008c36ca41186a799c09d66be82828f52e2734ac47a21cd5",
+    "actual_source_files_sha256": {
+      "scripts/run_oal.py": "ec611b2b5f65c6f1685e5b34695dbd339d72de0878202f9f9a906ebb84d5b934",
+      "src/auto_research/foundation_models/oal.py": "da0de39fba5c0d01fb7b69f149e878643a409fe337111c6f4046d765011cfcdf",
+      "src/auto_research/foundation_models/oct13_runtime.py": "8e824a564684593100b876d0dd1a4c9de39fc1efd5e34bea3aa0ef1372df7ec8",
+      "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093"
+    },
+    "raw_files_sha256": {
+      "oal-seed42.json": "1345cc3786709e80f649b64b45c53630b9110fc4afc1a9c90dad2d2144630f18",
+      "oal-seed42.status.json": "e62b870101cd126409b3212b488f38fea3a254eea81b24b2cef668b765ba9ba0",
+      "oal-seed42.stdout.log": "cac783a0c2aafef2f712be4112d09ea9097fdda60615134707351f524ff2f298",
+      "oal-seed42.stderr.log": "7c75967c5bd2259c1fcb0f458902adfdb7223e4320d4621904989a3d40a81961",
+      "oal-seed43.json": "c27ca8f1a59543e1bd133593098389bdbe078f2f44b84a5e166ca7417215d3ec",
+      "oal-seed43.status.json": "32ac8b93303b71db227a0ea289174ec497fcfd4f58284ae52f181f357f9ba1a1",
+      "oal-seed43.stdout.log": "51f9024c5f49f8275288b90c4d1a5ea42c480be7c9faf23a314486643a3dfbb1",
+      "oal-seed43.stderr.log": "c0b9b15d9d67e220185ef851021437a1b0a5f147e12a66f17edeb7aa5fe035a6",
+      "oal-seed44.json": "1fdd6cd5803cca4924fb236979d7dc48a5ba1d6a6e4838d032f6caab445f7b26",
+      "oal-seed44.status.json": "6286158e864ebb326ade0c0a07dc76fd4dbb07ccbd9af996270b41df2124bf02",
+      "oal-seed44.stdout.log": "b1f8c73c20676f58e432bacc42f32933ade909c4e6686034162024daab30c649",
+      "oal-seed44.stderr.log": "54b2c9b7cc1e1d3290406ee6b668e64547e1191b1a8ce8fd46cbcb8daf646301"
+    }
+  },
+  "scope": "GPU execution, formula equivalence, calibration and matched LoRA updates passed. This L1 diagnostic does not establish original benchmark reproduction, stable uplift or native serving efficiency."
+}

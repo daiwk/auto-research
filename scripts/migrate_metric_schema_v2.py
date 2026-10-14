@@ -50,7 +50,9 @@ def _integer_seeds(payload: dict[str, Any], path: Path) -> list[int]:
         return [candidates]
     if isinstance(candidates, list):
         result = [int(value) for value in candidates if isinstance(value, int)]
-        if result:
+        # An explicit empty list denotes a seedless deterministic contract,
+        # not a missing value from which a stochastic seed may be invented.
+        if result or not candidates:
             return sorted(set(result))
     match = re.search(r"-seeds?(\d+)(?:-(\d+))?$", path.stem)
     if match:

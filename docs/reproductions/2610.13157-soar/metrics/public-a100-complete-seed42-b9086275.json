@@ -1,0 +1,921 @@
+{
+  "schema_version": 2,
+  "adapter_key": "soar",
+  "manifest_ref": "reproduction:soar",
+  "method": "soar",
+  "measured_locally": true,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "seeds": [
+    42
+  ],
+  "whole_method_gpu_validation_passed": true,
+  "default_three_seed_plan_completed": false,
+  "actual_cuda_run_count": 2,
+  "seed_results": [
+    {
+      "seed": 42,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "variants": {
+        "source-consistent": {
+          "method": "soar",
+          "seed": 42,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evaluation_tier": "l1_mechanism",
+          "dataset": {
+            "verified": true,
+            "test_read": false,
+            "source_id": "Elliotes/EcoAgent#derived-tool-document-attribute-training-QA-v1",
+            "source_revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+            "source_sha256": "24b94a6905137c6835c4ff9afbf418d833d0d854505686295caee8f7608a7771",
+            "partition_sha256": {
+              "train": "973266e4083994c6eee1e84dabb748af028b8cd5e4f00e6201496152d7be93d5",
+              "validation": "2d1c706f6e0d4a05eaaddb3ecbb16d7e325d35dab265612c308e99a011fb4f9e"
+            },
+            "partition": "tool UID sha256(soar-tool-group-v1|UID) unsigned 64-bit prefix <0.2 validation; original-order bounded prefixes"
+          },
+          "checkpoint": {
+            "public_id": "Qwen/Qwen2.5-7B-Instruct",
+            "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "verified_mirror": {
+              "public_id": "Qwen/Qwen2.5-7B-Instruct",
+              "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+              "file_sha256": {
+                "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+                "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+                "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+                "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+                "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+                "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+                "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+                "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+                "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+                "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+                "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+              }
+            }
+          },
+          "baseline": {
+            "accuracy": 0.0,
+            "source_consistency": 0.25,
+            "format_compliance": 0.5,
+            "mean_searches": 0.25,
+            "examples": 4
+          },
+          "method_metrics": {
+            "accuracy": 0.25,
+            "source_consistency": 0.5,
+            "format_compliance": 0.5,
+            "mean_searches": 0.5,
+            "examples": 4
+          },
+          "training": [
+            {
+              "step": 1,
+              "loss": 1.862645149230957e-08,
+              "gradient_l2_norm": 0.8607359528541565,
+              "optimizer_update_executed": true,
+              "components": [
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 0.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                }
+              ],
+              "trajectory_rewards": [
+                0.23076923076923078,
+                0.23076923076923078,
+                0.15384615384615385,
+                0.23076923076923078
+              ],
+              "trajectory_advantages": [
+                0.5773329138755798,
+                0.5773329138755798,
+                -1.7319988012313843,
+                0.5773329138755798
+              ],
+              "zero_advantage_group": false
+            },
+            {
+              "step": 2,
+              "loss": 7.048249244689941e-06,
+              "gradient_l2_norm": 0.48065319657325745,
+              "optimizer_update_executed": true,
+              "components": [
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                }
+              ],
+              "trajectory_rewards": [
+                0.23076923076923078,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "trajectory_advantages": [
+                1.7320334911346436,
+                -0.5773444771766663,
+                -0.5773444771766663,
+                -0.5773444771766663
+              ],
+              "zero_advantage_group": false
+            },
+            {
+              "step": 3,
+              "loss": 1.8961727619171143e-06,
+              "gradient_l2_norm": 0.6844468116760254,
+              "optimizer_update_executed": true,
+              "components": [
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                }
+              ],
+              "trajectory_rewards": [
+                0.23076923076923078,
+                0.23076923076923078,
+                0.0,
+                0.23076923076923078
+              ],
+              "trajectory_advantages": [
+                0.5773444771766663,
+                0.5773444771766663,
+                -1.7320334911346436,
+                0.5773444771766663
+              ],
+              "zero_advantage_group": false
+            },
+            {
+              "step": 4,
+              "loss": 3.069639205932617e-06,
+              "gradient_l2_norm": 0.505620002746582,
+              "optimizer_update_executed": true,
+              "components": [
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                }
+              ],
+              "trajectory_rewards": [
+                0.0,
+                0.0,
+                0.15384615384615385,
+                0.0
+              ],
+              "trajectory_advantages": [
+                -0.577341616153717,
+                -0.577341616153717,
+                1.7320247888565063,
+                -0.577341616153717
+              ],
+              "zero_advantage_group": false
+            }
+          ],
+          "cost": {
+            "generation_calls": {
+              "policy_trajectory": 35,
+              "isolated_internal_recall": 11
+            },
+            "generated_tokens": {
+              "policy_trajectory": 954,
+              "isolated_internal_recall": 408
+            },
+            "scored_response_tokens": {
+              "behavior": 632,
+              "student_rl": 632,
+              "reference": 632
+            },
+            "frozen_encoder_forward_calls": 0,
+            "frozen_encoder_input_tokens_including_prompt": 0,
+            "scope": "entire invocation, including training controls, profiling and evaluation",
+            "includes_rejected_and_profiling_generations": true
+          },
+          "protocol": {
+            "test_opened": false,
+            "gold_in_student_generation": false,
+            "gold_in_student_generation_scope": "evaluated_student_inference_only",
+            "training_construction_roles_with_gold": [],
+            "comparison_kind": "before_after_training",
+            "train_examples": 8,
+            "validation_examples": 4,
+            "max_tokens": 256
+          },
+          "parameters_changed": true,
+          "variant": "source-consistent",
+          "corpus": {
+            "public_id": "Elliotes/EcoAgent",
+            "revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+            "file_sha256": {
+              "documents.jsonl": "46114b2abb1d1597cd101d90decbffe8ab671ab1fa6d4ec33b8c0fce5b9d8121"
+            }
+          },
+          "limitations": [
+            "Lexical retrieval over a small hash-verified public source corpus replaces E5 + 2018 Wikipedia infrastructure.",
+            "Policy searches, internal recall, source declaration and GRPO updates are real; no gold-generated source text.",
+            "EM source matching is a bounded operationalization; published v1 does not specify its normalization code.",
+            "Tiny checkpoint/holdout diagnostics do not reproduce the seven QA benchmarks or external judge fabrication rate."
+          ]
+        },
+        "without-source-reward": {
+          "method": "soar",
+          "seed": 42,
+          "device": "cuda",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evaluation_tier": "l1_mechanism",
+          "dataset": {
+            "verified": true,
+            "test_read": false,
+            "source_id": "Elliotes/EcoAgent#derived-tool-document-attribute-training-QA-v1",
+            "source_revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+            "source_sha256": "24b94a6905137c6835c4ff9afbf418d833d0d854505686295caee8f7608a7771",
+            "partition_sha256": {
+              "train": "973266e4083994c6eee1e84dabb748af028b8cd5e4f00e6201496152d7be93d5",
+              "validation": "2d1c706f6e0d4a05eaaddb3ecbb16d7e325d35dab265612c308e99a011fb4f9e"
+            },
+            "partition": "tool UID sha256(soar-tool-group-v1|UID) unsigned 64-bit prefix <0.2 validation; original-order bounded prefixes"
+          },
+          "checkpoint": {
+            "public_id": "Qwen/Qwen2.5-7B-Instruct",
+            "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+            "verified_mirror": {
+              "public_id": "Qwen/Qwen2.5-7B-Instruct",
+              "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+              "file_sha256": {
+                "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+                "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+                "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+                "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+                "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+                "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+                "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+                "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+                "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+                "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+                "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+              }
+            }
+          },
+          "baseline": {
+            "accuracy": 0.0,
+            "source_consistency": 0.25,
+            "format_compliance": 0.5,
+            "mean_searches": 0.25,
+            "examples": 4
+          },
+          "method_metrics": {
+            "accuracy": 0.25,
+            "source_consistency": 0.25,
+            "format_compliance": 0.5,
+            "mean_searches": 0.25,
+            "examples": 4
+          },
+          "training": [
+            {
+              "step": 1,
+              "optimizer_update_executed": false,
+              "zero_advantage_group": true,
+              "components": [
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 0.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                }
+              ]
+            },
+            {
+              "step": 2,
+              "loss": 0.0,
+              "gradient_l2_norm": 0.5580287575721741,
+              "optimizer_update_executed": true,
+              "components": [
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 0.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 0.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                }
+              ],
+              "trajectory_rewards": [
+                0.16666666666666669,
+                0.0,
+                0.16666666666666669,
+                0.0
+              ],
+              "trajectory_advantages": [
+                0.9999880194664001,
+                -0.9999880194664001,
+                0.9999880194664001,
+                -0.9999880194664001
+              ],
+              "zero_advantage_group": false
+            },
+            {
+              "step": 3,
+              "loss": 8.553266525268555e-06,
+              "gradient_l2_norm": 0.6897918581962585,
+              "optimizer_update_executed": true,
+              "components": [
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 1.0,
+                  "searches": 1
+                }
+              ],
+              "trajectory_rewards": [
+                0.16666666666666669,
+                0.0,
+                0.0,
+                0.16666666666666669
+              ],
+              "trajectory_advantages": [
+                0.9999880194664001,
+                -0.9999880194664001,
+                -0.9999880194664001,
+                0.9999880194664001
+              ],
+              "zero_advantage_group": false
+            },
+            {
+              "step": 4,
+              "loss": 7.703900337219238e-06,
+              "gradient_l2_norm": 0.6410939693450928,
+              "optimizer_update_executed": true,
+              "components": [
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 1.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                },
+                {
+                  "answer": 0.0,
+                  "format": 0.0,
+                  "source_match": 0.0,
+                  "searches": 0
+                }
+              ],
+              "trajectory_rewards": [
+                0.0,
+                0.16666666666666669,
+                0.0,
+                0.0
+              ],
+              "trajectory_advantages": [
+                -0.5773422718048096,
+                1.7320268154144287,
+                -0.5773422718048096,
+                -0.5773422718048096
+              ],
+              "zero_advantage_group": false
+            }
+          ],
+          "cost": {
+            "generation_calls": {
+              "policy_trajectory": 34,
+              "isolated_internal_recall": 10
+            },
+            "generated_tokens": {
+              "policy_trajectory": 1002,
+              "isolated_internal_recall": 364
+            },
+            "scored_response_tokens": {
+              "behavior": 705,
+              "student_rl": 513,
+              "reference": 513
+            },
+            "frozen_encoder_forward_calls": 0,
+            "frozen_encoder_input_tokens_including_prompt": 0,
+            "scope": "entire invocation, including training controls, profiling and evaluation",
+            "includes_rejected_and_profiling_generations": true
+          },
+          "protocol": {
+            "test_opened": false,
+            "gold_in_student_generation": false,
+            "gold_in_student_generation_scope": "evaluated_student_inference_only",
+            "training_construction_roles_with_gold": [],
+            "comparison_kind": "before_after_training",
+            "train_examples": 8,
+            "validation_examples": 4,
+            "max_tokens": 256
+          },
+          "parameters_changed": true,
+          "variant": "without-source-reward",
+          "corpus": {
+            "public_id": "Elliotes/EcoAgent",
+            "revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+            "file_sha256": {
+              "documents.jsonl": "46114b2abb1d1597cd101d90decbffe8ab671ab1fa6d4ec33b8c0fce5b9d8121"
+            }
+          },
+          "limitations": [
+            "Lexical retrieval over a small hash-verified public source corpus replaces E5 + 2018 Wikipedia infrastructure.",
+            "Policy searches, internal recall, source declaration and GRPO updates are real; no gold-generated source text.",
+            "EM source matching is a bounded operationalization; published v1 does not specify its normalization code.",
+            "Tiny checkpoint/holdout diagnostics do not reproduce the seven QA benchmarks or external judge fabrication rate."
+          ]
+        }
+      }
+    }
+  ],
+  "aggregate_metrics": {
+    "source-consistent.initial.accuracy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "source-consistent.initial.source_consistency": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 1
+    },
+    "source-consistent.initial.format_compliance": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 1
+    },
+    "source-consistent.initial.mean_searches": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 1
+    },
+    "source-consistent.validation.accuracy": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 1
+    },
+    "source-consistent.validation.source_consistency": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 1
+    },
+    "source-consistent.validation.format_compliance": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 1
+    },
+    "source-consistent.validation.mean_searches": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 1
+    },
+    "without-source-reward.initial.accuracy": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "without-source-reward.initial.source_consistency": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 1
+    },
+    "without-source-reward.initial.format_compliance": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 1
+    },
+    "without-source-reward.initial.mean_searches": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 1
+    },
+    "without-source-reward.validation.accuracy": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 1
+    },
+    "without-source-reward.validation.source_consistency": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 1
+    },
+    "without-source-reward.validation.format_compliance": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 1
+    },
+    "without-source-reward.validation.mean_searches": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 1
+    }
+  },
+  "execution_checks": {
+    "source-consistent": {
+      "actual_optimizer_updates": 4,
+      "equal_reward_groups_skipped": 0,
+      "all_four_groups_audited": true,
+      "reward_derivation_audits": [
+        {
+          "step": 1,
+          "derived_rewards": [
+            0.23076923076923078,
+            0.23076923076923078,
+            0.15384615384615385,
+            0.23076923076923078
+          ],
+          "mathematically_equal": false,
+          "optimizer_update_executed": true
+        },
+        {
+          "step": 2,
+          "derived_rewards": [
+            0.23076923076923078,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mathematically_equal": false,
+          "optimizer_update_executed": true
+        },
+        {
+          "step": 3,
+          "derived_rewards": [
+            0.23076923076923078,
+            0.23076923076923078,
+            0.0,
+            0.23076923076923078
+          ],
+          "mathematically_equal": false,
+          "optimizer_update_executed": true
+        },
+        {
+          "step": 4,
+          "derived_rewards": [
+            0.0,
+            0.0,
+            0.15384615384615385,
+            0.0
+          ],
+          "mathematically_equal": false,
+          "optimizer_update_executed": true
+        }
+      ],
+      "invocation_elapsed_seconds": 87.91338889487088,
+      "configured_wall_cap_seconds": 1800,
+      "measured_cost": {
+        "generation_calls": {
+          "policy_trajectory": 35,
+          "isolated_internal_recall": 11
+        },
+        "generated_tokens": {
+          "policy_trajectory": 954,
+          "isolated_internal_recall": 408
+        },
+        "scored_response_tokens": {
+          "behavior": 632,
+          "student_rl": 632,
+          "reference": 632
+        },
+        "frozen_encoder_forward_calls": 0,
+        "frozen_encoder_input_tokens_including_prompt": 0,
+        "scope": "entire invocation, including training controls, profiling and evaluation",
+        "includes_rejected_and_profiling_generations": true
+      }
+    },
+    "without-source-reward": {
+      "actual_optimizer_updates": 3,
+      "equal_reward_groups_skipped": 1,
+      "all_four_groups_audited": true,
+      "reward_derivation_audits": [
+        {
+          "step": 1,
+          "derived_rewards": [
+            0.16666666666666669,
+            0.16666666666666669,
+            0.16666666666666669,
+            0.16666666666666669
+          ],
+          "mathematically_equal": true,
+          "optimizer_update_executed": false
+        },
+        {
+          "step": 2,
+          "derived_rewards": [
+            0.16666666666666669,
+            0.0,
+            0.16666666666666669,
+            0.0
+          ],
+          "mathematically_equal": false,
+          "optimizer_update_executed": true
+        },
+        {
+          "step": 3,
+          "derived_rewards": [
+            0.16666666666666669,
+            0.0,
+            0.0,
+            0.16666666666666669
+          ],
+          "mathematically_equal": false,
+          "optimizer_update_executed": true
+        },
+        {
+          "step": 4,
+          "derived_rewards": [
+            0.0,
+            0.16666666666666669,
+            0.0,
+            0.0
+          ],
+          "mathematically_equal": false,
+          "optimizer_update_executed": true
+        }
+      ],
+      "invocation_elapsed_seconds": 85.92835174314678,
+      "configured_wall_cap_seconds": 1800,
+      "measured_cost": {
+        "generation_calls": {
+          "policy_trajectory": 34,
+          "isolated_internal_recall": 10
+        },
+        "generated_tokens": {
+          "policy_trajectory": 1002,
+          "isolated_internal_recall": 364
+        },
+        "scored_response_tokens": {
+          "behavior": 705,
+          "student_rl": 513,
+          "reference": 513
+        },
+        "frozen_encoder_forward_calls": 0,
+        "frozen_encoder_input_tokens_including_prompt": 0,
+        "scope": "entire invocation, including training controls, profiling and evaluation",
+        "includes_rejected_and_profiling_generations": true
+      }
+    }
+  },
+  "dataset": {
+    "verified": true,
+    "test_read": false,
+    "source_id": "Elliotes/EcoAgent#derived-tool-document-attribute-training-QA-v1",
+    "source_revision": "bc5db40a20b254c5249401d2220ea71b06c86a5c",
+    "source_sha256": "24b94a6905137c6835c4ff9afbf418d833d0d854505686295caee8f7608a7771",
+    "partition_sha256": {
+      "train": "973266e4083994c6eee1e84dabb748af028b8cd5e4f00e6201496152d7be93d5",
+      "validation": "2d1c706f6e0d4a05eaaddb3ecbb16d7e325d35dab265612c308e99a011fb4f9e"
+    },
+    "partition": "tool UID sha256(soar-tool-group-v1|UID) unsigned 64-bit prefix <0.2 validation; original-order bounded prefixes"
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "verified_mirror": {
+      "public_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+      "file_sha256": {
+        "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+        "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+        "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+        "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+        "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd",
+        "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "promotion_eligible": false,
+    "test_used_for_selection": false,
+    "pending_seeds": [
+      43,
+      44
+    ],
+    "variants_are_independent_seeds": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "code_commit": "b90862754bf51b1beeb5add3f7dc2a51ca00ace4",
+    "artifact_path": "docs/reproductions/2610.13157-soar/metrics/public-a100-complete-seed42-b9086275.json",
+    "executed_source_sha256": {
+      "scripts/prepare_soar_catalog_qa.py": "483a4eb3d9932d31046888c165c06590e67c6df5575a5b2afd4e302145f445e7",
+      "scripts/run_oct13_post_training.py": "916b3b9a0eaeeaf30bad811376fa05305011754c922bb368a0f39833aad07ffa",
+      "src/auto_research/oct12_public_sources.py": "4e1150cbe4ea975819c244267180f853c83c4ad4c2c27f9e0ce95cc16793e093",
+      "src/auto_research/post_training/oct10_checkpoint.py": "247f1f97a3ca701277f241ec81d99296f0ea82e1db8f68006fcd7bfdc661cd74",
+      "src/auto_research/post_training/oct13_common.py": "d19401266a420afdc64867f145f8384fd649dc1991e4b74ea1f7ee8b8d91bde5",
+      "src/auto_research/post_training/proximal_checkpoint.py": "5307a54204720e5407d2cd0435b654ae0e594f30c85cdf07d55d4e90612a1397",
+      "src/auto_research/post_training/response_policy.py": "e380a5b4d1d53974b973b72b7d9ad6328129dc8c9bae4d233f6c1cbdf8508bf7",
+      "src/auto_research/public_holdout.py": "033d9c1fd112accf5ac79573b99d9f31cffc646bcab6911cf3e49459fa003b46",
+      "src/auto_research/reproductions/gppo_framework/__init__.py": "7fe8cab42fef9f32b9653dfb5f54f03182de0753de2c9e5b359d124d7cd763d8",
+      "src/auto_research/reproductions/gppo_framework/adapter.py": "a7f4ee792a8ded3daeeb183cbca5c99de63c1b7d3cb195f5bedd5289cb0e0260",
+      "src/auto_research/reproductions/gppo_framework/objective.py": "0f8fbb2ad397b04a70466dde4e939f4d094ad7e7df07cfbba59f4a6ca5d05dd0",
+      "src/auto_research/reproductions/gppo_framework/paper.yaml": "a023ee98bbd078077b2708122973d27a98085848be816ce461b7d4291aca8e1f",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/__init__.py": "d09d8d7e0e6f5bcec9979241eed06a1d2a6ac8f3fb7a25f49e0df55be0071acb",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/adapter.py": "bbd3e964dc035ea4bbd999a581ea07eccabd986b6456774b21a4c24092cbdfbe",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/algorithm.py": "4131e39279d30c0748b14f611ab657b3fea76147a7c164aea2883c62bde75785",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/checkpoint.py": "d03a7d2db0a19b469fe5429ddce634b02d8cbd0eeed8d09bef0afc51c1d7ac70",
+      "src/auto_research/reproductions/grpo_difficulty_curriculum/paper.yaml": "c417d2269314b15e2dfef4ba52dfb24771b2e1270f808fe5be47a54e9d0c1bb1",
+      "src/auto_research/reproductions/magicbeanstalk/__init__.py": "8dd207ea37a89dfa34f87b02eb4a2fd26472895678d1362a7e5b59dad5cda616",
+      "src/auto_research/reproductions/magicbeanstalk/adapter.py": "319b6503de342feee49fb6446b7bbdeb117f7dc0dd7b79ed1c3bd34cce1ce73f",
+      "src/auto_research/reproductions/magicbeanstalk/algorithm.py": "2fb98f7137f336414ae6e07069fe34584d0e1cbc4bd594683a67e11ffc982aba",
+      "src/auto_research/reproductions/magicbeanstalk/checkpoint.py": "78416567c61f23505f579805b845a40a3098c311e57fb42c7ac8d5ebc67390dd",
+      "src/auto_research/reproductions/magicbeanstalk/paper.yaml": "e9c5619918b4d72d776008aba3fa95d50ba6ebe99afab729ba9e6dfe82fac06e",
+      "src/auto_research/reproductions/progressive_contraction/__init__.py": "e50fe46d888e0a0b11b7d4d6d8f3224ae5940394f8ba8396fc5afb1cd38a4d53",
+      "src/auto_research/reproductions/progressive_contraction/adapter.py": "06f23b5c795f7222f76dee9beaa8164f460eb5183e18c6d374bff011737235dd",
+      "src/auto_research/reproductions/progressive_contraction/algorithm.py": "ba077b8c52a8d10e268a4e5c85770b9cebcb12415f9b2aaf7b9500e1303ca4b1",
+      "src/auto_research/reproductions/progressive_contraction/checkpoint.py": "67fa44814d613d3838716fea68476217d608af14f23a051e32a916b72538e7ec",
+      "src/auto_research/reproductions/progressive_contraction/paper.yaml": "faf5243c71a87407601b982469d98dc4d48ddf842da56c210ede077c2b27c1c1",
+      "src/auto_research/reproductions/soar/__init__.py": "3d87d1189d7037e32c1e2cb0c249d13609c5af3d7062a19904590ba7923c799a",
+      "src/auto_research/reproductions/soar/adapter.py": "8fbbe8f8fe54b9f014ccc26a75b01e72b73b95e2b03cc379c5b5db4b63c9b31e",
+      "src/auto_research/reproductions/soar/algorithm.py": "9b7068d9774d1c93800c512a04b9ba4d0ee98fc13d308e5ac0970299c8bb2485",
+      "src/auto_research/reproductions/soar/checkpoint.py": "91901d9eb9f81faa41dda170ff1f4d2283f56cd17c7df0572348356c7b7eb76e",
+      "src/auto_research/reproductions/soar/paper.yaml": "2f756cab9f7fefd4613bb69971fd8252c2b9ad451fa5c5eff5d03fa063d91521",
+      "src/auto_research/reproductions/state_opd/__init__.py": "8db07736f0336ed7f39502ae2953bdae76658942542cacbe4b6b2c1fd0abe094",
+      "src/auto_research/reproductions/state_opd/adapter.py": "2f8bf4773e8f40c0eabe777fbd1e1aa6d372a7b05501404c3e3f7b2d54987524",
+      "src/auto_research/reproductions/state_opd/algorithm.py": "dc7fe3eae619ff69ec51c47826f89471f00be564ea4e6730e12726a060ba7e2f",
+      "src/auto_research/reproductions/state_opd/checkpoint.py": "95755e0604f563a5c96f92e9de9069befe3e1274d31c224a43ca20d71f756b09",
+      "src/auto_research/reproductions/state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+      "src/auto_research/reproductions/state_opd/paper.yaml": "86c75255f1c416611a181c26359e9f5d9865caaea5266ca7b13dd8a183b906cc",
+      "src/auto_research/reproductions/synthself/__init__.py": "474bb75e10b95afe6faec1f3631beab2f17f9a43013d3d29e79b7d4b36e06031",
+      "src/auto_research/reproductions/synthself/adapter.py": "db4c08e1ccc2acfc28d19fc72acfa39b0a0dce096bbc430bafe9b21dbb72cddd",
+      "src/auto_research/reproductions/synthself/algorithm.py": "1e7ea1ff65d3ba0ece1af889022c19f7147f51d10fb8196ab8f9fa2e18604b95",
+      "src/auto_research/reproductions/synthself/checkpoint.py": "dbcf9f222094c197e0392f82191a0ae6551c6573ee54a9eee8c7d37553472981",
+      "src/auto_research/reproductions/synthself/paper.yaml": "d6d31d755561626c2b667f4fc2b990dee8360fa52f92193b5c6a6e93b1f6ca71",
+      "src/auto_research/reproductions/tapo_trajectory/__init__.py": "a0dd8d4825b91dd076b71bdd3a3eccb0638ba4bf0240fe9da76d61a7290f69c6",
+      "src/auto_research/reproductions/tapo_trajectory/adapter.py": "c01b75bf7853546caa2d517dd5f9c9faf739537b95207b8f1fd28adcdd5aafa7",
+      "src/auto_research/reproductions/tapo_trajectory/objective.py": "49ab02ac758251acde90091a82b22576449d294a1f25cc3144ff1addd1132ae2",
+      "src/auto_research/reproductions/tapo_trajectory/paper.yaml": "493e59ec67f96ee37ffecf6694dd5c4d8555849b8f756ccb63644da90bbb48d6",
+      "src/auto_research/reproductions/upturn/__init__.py": "1e9793e9ea85e94144f7eac8fa141567d7f964438fa628788b668358154e196e",
+      "src/auto_research/reproductions/upturn/adapter.py": "72e5da3cb70856944d0c9a25376f73d4a1d9f16213efd43e19b3acf2a584afc2",
+      "src/auto_research/reproductions/upturn/algorithm.py": "421abd06cc492c39cf72e9b15c7f85c01e85fae0a7c26fb3053fbd19bc4897a4",
+      "src/auto_research/reproductions/upturn/checkpoint.py": "fbcb7c830cf53d3130cfc06621f3178516aa72c7a939f4f765c3c7864b383787",
+      "src/auto_research/reproductions/upturn/paper.yaml": "6eca098f6d945a30732f54cb04f2ee984b165a3c4f06cb65d49879d7edd28696",
+      "scripts/diagnose_oct14_post_training.py": "2a15d720a4f84bd1e415a4f0653c589c9716d526d4842acd5df728fd3575ca5b",
+      "scripts/diagnose_oct14_soar_format.py": "02b375e4359b8b8031246853a7e30e52b0cf7e0a94cf563299758260953f7ded"
+    },
+    "execution_config_sha256": "5ee7cfb10fe21078104f439a8de1bf48a528a10a138d08bd26ccbf030b1185a3",
+    "raw_results_sha256": {
+      "source-consistent": "f0597403b4e7f02ff5e9e5c70def793f5c4c8c38ea406efbcbd86e9bd8267d9b",
+      "without-source-reward": "3e8f9a849a9e9aa2557b0ee0d15fc270dce73406b2d7a650c03980f08ccd5409"
+    },
+    "dataset_fingerprint": "4998fb0bde7e1ebb8e55794a74ad5258d94389a2cfef32a7870b77a2d486fa6c"
+  },
+  "limitations": [
+    "One seed42 and two reward arms are not two seeds; default43/44 remain pending.",
+    "Independent public tool-catalog attribute QA is not the original RATED or seven-QA benchmark; tiny4validation is L1 only.",
+    "Real LoRA policy, isolated same-policy internal recall, lexical retrieval and frozen-reference trajectory GRPO are executed.",
+    "Raw zero groups and all actual generation/scoring costs are retained; matched configured budget is not identical realized compute.",
+    "The measured source-match difference is not a stable capability or production improvement claim."
+  ]
+}

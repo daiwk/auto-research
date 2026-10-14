@@ -1,0 +1,20 @@
+{
+  "domain": "post-training",
+  "key": "progressive-contraction",
+  "title": "Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training",
+  "paper_url": "https://arxiv.org/abs/2610.12933",
+  "detail_path": "reproductions/2610.12933-progressive-contraction/README.md",
+  "topic": [
+    "Monte Carlo reasoning tree",
+    "Teacher-side uncertainty contraction",
+    "Learner-aware SFT routing"
+  ],
+  "first_author": "Suorong Yang",
+  "first_author_affiliation": "National University of Singapore / Nanjing University",
+  "published": "2026-10-09",
+  "priority": "P1",
+  "code": null,
+  "adapter": {
+    "spec_key": "progressive-contraction"
+  }
+}

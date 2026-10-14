@@ -1,0 +1,393 @@
+{
+  "schema_version": 2,
+  "adapter_key": "skilldreamer",
+  "manifest_ref": "reproduction:skilldreamer",
+  "seeds": [
+    42
+  ],
+  "result": "native_core_executed_no_submission_validation_diagnostic",
+  "measured_locally": true,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "not_gpu_receipt": true,
+  "gpu_validation_passed": false,
+  "capability_receipt": false,
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "metrics": {
+    "runner_wall_seconds": 400.5551997758448,
+    "invocation_elapsed_seconds": 401.4410872403532,
+    "exit_code": 0,
+    "model_calls": 159,
+    "generated_tokens": 19369,
+    "validation_episodes": 8,
+    "psg_episodes": 7,
+    "hsr_episodes": 7,
+    "actual_csi_assessments": 65,
+    "loaded_skill_episodes": 7,
+    "env_step_calls": 56,
+    "calculator_attempts": 54,
+    "calculator_successes": 48,
+    "calculator_errors": 6,
+    "unknown_tool_calls": 2,
+    "generation_schema_failures": 52,
+    "finish_calls": 0,
+    "submitted_answers": 0,
+    "repeated_previously_successful_expression_calls": 28
+  },
+  "execution_checks": {
+    "psg_episodes": 7,
+    "hsr_episodes": 7,
+    "actual_csi_assessments": 65,
+    "loaded_skill_episodes": 7,
+    "executed_actions": 56
+  },
+  "dataset": {
+    "kind": "public-resource",
+    "public_id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_split": "train",
+    "scope": "fixed_original_validation_only",
+    "validation_ids": [
+      "13",
+      "1",
+      "4",
+      "6",
+      "23",
+      "21",
+      "14",
+      "15"
+    ],
+    "parent_24_rows_sha256": "8f33a9f7a44067e362458e4daf0eb1ad629a2aac2f44ffefe731e36b19dcb8c1",
+    "transformation": "select original fixed validation IDs; keep only id and question; discard every answer before probing",
+    "gold_present": false,
+    "scorer_present": false,
+    "evaluation_ids_used": false,
+    "official_test_opened": false,
+    "files": {
+      "questions.jsonl": "6a3213a1941882e4d0787b903df170452f13ea13f52ad9dbc4e6cb6e418eca5e"
+    }
+  },
+  "checkpoint": {
+    "public_id": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "bb46c15ee4bb56c5b63245ef50fd7637234d6f75",
+    "files": {
+      "config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+      "generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model.safetensors.index.json": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+      "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "model-00001-of-00004.safetensors": "a1333e6293854747c481288ea83b348226af178dd565c49b6f9495ba1966aba7",
+      "model-00002-of-00004.safetensors": "f5d25a2772cb825164a2a2c0fb6d51a87e282abf21e4dd75bc5cfb3cd0ea6185",
+      "model-00003-of-00004.safetensors": "8efdec4c1bc12317ae1a38dc42b595ce777738a64deea3fcb8a0a91381bcdfd5",
+      "model-00004-of-00004.safetensors": "1a72d403cdf0c1ec3cb7f289f17b394a01e64394c2e9b3c0f94dbce3faf879bd"
+    }
+  },
+  "encoder": {
+    "public_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "files": {
+      "model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+      "config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+      "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+      "tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+      "special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    }
+  },
+  "budget": {
+    "seed": 42,
+    "max_new_tokens": 256,
+    "action_budget": 8,
+    "top_k": 3,
+    "question_limit": 8,
+    "calls_limit_per_episode": 30,
+    "calls_limit_total": 240,
+    "total_wall_limit_seconds": 600
+  },
+  "raw_artifacts": {
+    "seed42.json": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/validation-no-submit-5c07ef42/seed42.json",
+      "sha256": "4504d636d803f784d69e663cb869e6cb36208f01e5f45b3b892721dde85c5791"
+    },
+    "seed42.partial.json": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/validation-no-submit-5c07ef42/seed42.partial.json",
+      "sha256": "936201a10891bbc8ab5e090083cb52a0b835da36a8222e02d641250b1b2dc76d"
+    },
+    "seed42.trace.jsonl": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/validation-no-submit-5c07ef42/seed42.trace.jsonl",
+      "sha256": "3a25b149b2b7d989ca12286d8420bbdc0da5759f413743133ae4f525207facb7"
+    },
+    "submission-analysis.json": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/validation-no-submit-5c07ef42/submission-analysis.json",
+      "sha256": "913b1f3390992d0171175bb650fef9986c5a259117e3fcd474cd7cf873efe4f7"
+    },
+    "exit.sanitized.json": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/validation-no-submit-5c07ef42/exit.sanitized.json",
+      "sha256": "dca092e82803c5780ca2d1226ac98f3dcf7f67a62df8d7a4714ecb252ae9268e"
+    }
+  },
+  "cpu_replay_source": {
+    "skilldreamer/algorithm.py": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/validation-no-submit-5c07ef42/frozen-source/skill_probe_701f/skilldreamer/algorithm.py",
+      "sha256": "e92ca8c36ca5be9949c09a9c4f1a7409b36a15cb4efe600cef46d7df1d89d01a"
+    },
+    "state_opd/environment.py": {
+      "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/raw/validation-no-submit-5c07ef42/frozen-source/skill_probe_701f/state_opd/environment.py",
+      "sha256": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1"
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_core_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "validation_only": true,
+    "validation_ids": [
+      "13",
+      "1",
+      "4",
+      "6",
+      "23",
+      "21",
+      "14",
+      "15"
+    ],
+    "gold_present": false,
+    "scorer_present": false,
+    "evaluation_ids_used": false,
+    "official_test_opened": false,
+    "test_used_for_selection": false,
+    "claim_policy": "single-seed question-only validation diagnostic: real core calls but zero finish; no correctness score, capability claim or passed GPU acceptance"
+  },
+  "diagnosis": {
+    "runtime_stages": {
+      "gallery_load": 9,
+      "environment_step": 56,
+      "generation_schema_failure": 52
+    },
+    "environment_tools": {
+      "calculator": 54,
+      "assess_capability": 1,
+      "load_skill": 1
+    },
+    "episodes": [
+      {
+        "id": "13",
+        "calls": 1,
+        "tokens": 208,
+        "runtime_calls": 0,
+        "csi": 0,
+        "loaded_skills": [],
+        "actions": 0,
+        "calculator_successes": 0,
+        "tool_errors": 0,
+        "generation_errors": 0,
+        "repeated_successful_expression_calls": [],
+        "submitted": false,
+        "cpu_exact_replay": false
+      },
+      {
+        "id": "1",
+        "calls": 28,
+        "tokens": 3198,
+        "runtime_calls": 22,
+        "csi": 9,
+        "loaded_skills": [
+          "scheduling"
+        ],
+        "actions": 8,
+        "calculator_successes": 1,
+        "tool_errors": 7,
+        "generation_errors": 13,
+        "repeated_successful_expression_calls": [],
+        "submitted": false,
+        "cpu_exact_replay": true
+      },
+      {
+        "id": "4",
+        "calls": 17,
+        "tokens": 2321,
+        "runtime_calls": 11,
+        "csi": 9,
+        "loaded_skills": [
+          "rates"
+        ],
+        "actions": 8,
+        "calculator_successes": 7,
+        "tool_errors": 1,
+        "generation_errors": 2,
+        "repeated_successful_expression_calls": [
+          42,
+          43,
+          45,
+          46
+        ],
+        "submitted": false,
+        "cpu_exact_replay": true
+      },
+      {
+        "id": "6",
+        "calls": 27,
+        "tokens": 2932,
+        "runtime_calls": 21,
+        "csi": 9,
+        "loaded_skills": [
+          "arithmetic"
+        ],
+        "actions": 8,
+        "calculator_successes": 8,
+        "tool_errors": 0,
+        "generation_errors": 12,
+        "repeated_successful_expression_calls": [
+          69,
+          71,
+          73
+        ],
+        "submitted": false,
+        "cpu_exact_replay": true
+      },
+      {
+        "id": "23",
+        "calls": 19,
+        "tokens": 2481,
+        "runtime_calls": 13,
+        "csi": 10,
+        "loaded_skills": [
+          "money",
+          "arithmetic"
+        ],
+        "actions": 8,
+        "calculator_successes": 8,
+        "tool_errors": 0,
+        "generation_errors": 3,
+        "repeated_successful_expression_calls": [
+          84,
+          85,
+          86,
+          88,
+          89,
+          90,
+          92
+        ],
+        "submitted": false,
+        "cpu_exact_replay": true
+      },
+      {
+        "id": "21",
+        "calls": 16,
+        "tokens": 2167,
+        "runtime_calls": 10,
+        "csi": 9,
+        "loaded_skills": [
+          "rates"
+        ],
+        "actions": 8,
+        "calculator_successes": 8,
+        "tool_errors": 0,
+        "generation_errors": 1,
+        "repeated_successful_expression_calls": [
+          101,
+          103,
+          105,
+          106,
+          107,
+          108
+        ],
+        "submitted": false,
+        "cpu_exact_replay": true
+      },
+      {
+        "id": "14",
+        "calls": 25,
+        "tokens": 3257,
+        "runtime_calls": 19,
+        "csi": 10,
+        "loaded_skills": [
+          "money",
+          "arithmetic"
+        ],
+        "actions": 8,
+        "calculator_successes": 8,
+        "tool_errors": 0,
+        "generation_errors": 9,
+        "repeated_successful_expression_calls": [
+          127,
+          128,
+          129,
+          133
+        ],
+        "submitted": false,
+        "cpu_exact_replay": true
+      },
+      {
+        "id": "15",
+        "calls": 26,
+        "tokens": 2805,
+        "runtime_calls": 21,
+        "csi": 9,
+        "loaded_skills": [
+          "rates"
+        ],
+        "actions": 8,
+        "calculator_successes": 8,
+        "tool_errors": 0,
+        "generation_errors": 12,
+        "repeated_successful_expression_calls": [
+          142,
+          144,
+          156,
+          159
+        ],
+        "submitted": false,
+        "cpu_exact_replay": true
+      }
+    ],
+    "protocol_comparison": {
+      "skill_has_finish_json_schema": true,
+      "skill_has_generic_submit_semantics": false,
+      "skill_has_numeric_expression_only_instruction": false,
+      "baseline_has_generic_system_prompt": true,
+      "generic_system_prompt": "Solve the public arithmetic word problem. You may reason before your action. End each turn with a JSON object: {\"tool\":\"calculator\",\"arguments\":{\"expression\":\"2+3\"}} to calculate, or {\"tool\":\"finish\",\"arguments\":{\"answer\":\"5\"}} to submit. Only arithmetic expressions are supported. Returned observations contain tool results, not reference answers.",
+      "causal_conclusion": "No causal effect isolated. Prompt asymmetry exists; repeated successful calculations with delivered feedback demonstrate policy stagnation. Neither establishes task correctness without forbidden scoring."
+    },
+    "cpu_exact_replay_episodes": 7,
+    "causal_effect_of_tool_prompt_semantics_isolated": false,
+    "unresolved_task_completion": "All seven executing episodes exhausted eight environment steps without finish. Repeated already-successful expressions show stagnation, not a verified outstanding subgoal; correctness was not scored."
+  },
+  "provenance": {
+    "code_commit": "701f45007be75cf6153f98812ef94e087c94a8f0",
+    "probe_source": {
+      "commit": "5c07ef42bbb008e7adc3fc03fd5e85695c2bcc86",
+      "sha256": "49df52769e253ab5c453cfc121d48e9f0dd8d91ec44eb9d2a50b0b0b53516a45",
+      "immutable_root_bound": true
+    },
+    "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/public-a100-validation-no-submit-5c07ef42.json",
+    "executed_source_sha256": {
+      "skilldreamer/algorithm.py": "e92ca8c36ca5be9949c09a9c4f1a7409b36a15cb4efe600cef46d7df1d89d01a",
+      "skilldreamer/experiment.py": "5d327072480d34b940d3aebbb4f6a638dffb81fb6c342c09a799ad8eeb8524c8",
+      "near/data.py": "795416bdffeb25880aeaf85b4bfd6480b8677b45cddabe37ba2e49d7bf544eb8",
+      "near/experiment.py": "197e3fefad06f1f0e54533b608c5d717e57d0b6a919a105f88eee79447d94399",
+      "state_opd/environment.py": "0e9564f9ec540985eb010b1e70f46938acc1bd946041b518d6579253762080e1",
+      "skilldreamer/gallery.json": "9ff5e28de7d2eb7b3581ef01bbee66b0d201a543033bde6a2aa66da37f687970"
+    },
+    "algorithm_archive_sha256": "e9de57488b9d75a8748428217fb9fcb8ff92da42f125134721b717d4cdcb73e8",
+    "probe_archive_sha256": "3016e06d6fcdcddcec7cdf76b4618ca3d44e2d3b1b2d3011c0a1ee4076be7f36",
+    "execution_config_sha256": "bd18c5587e1c455092139624af0194c4d4496727a6b3a2833440372e989a0558",
+    "dataset_fingerprint": "8b54e0b9206e2ee831ca074d0661ae75cf5d2212ebefc42f6c613591eed5db62",
+    "raw_result_sha256": "4504d636d803f784d69e663cb869e6cb36208f01e5f45b3b892721dde85c5791",
+    "original_exit_sha256": "2b45f22ce46633bc7163b0845d881ed7e11dcc3d49ad27beb012a76d19398a63"
+  },
+  "limitations": [
+    "56 env.step calls are not 56 successful tools: 54 calculator attempts yielded 48 results and 6 errors, plus 2 unsupported tools.",
+    "Zero finish/submission; no external scorer or correctness measurement. Core invocation is not task success.",
+    "Tool-prompt asymmetry and policy repetition are separately observed; no causal effect isolated.",
+    "One fixed validation seed, not official benchmark, 16-ID evaluation, formal three-arm comparison, or capability validation.",
+    "Historical failures stay bound to their actual sources; any later API wording clarification is separate and unexecuted."
+  ]
+}

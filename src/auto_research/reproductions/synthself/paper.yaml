@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "key": "synthself",
+  "arxiv_id": "2610.13113",
+  "title": "Continually Post-training Small Models via Synthetic Self-distillation",
+  "paper_url": "https://arxiv.org/abs/2610.13113",
+  "organization": "LG AI Research / KAIST AI",
+  "published": "2026-10-09",
+  "upstream_code": "not released / not found in paper-linked primary sources (2026-10-13)",
+  "track": "post-training",
+  "topics": [
+    "Synthetic self-distillation",
+    "Same-family aligner",
+    "Offline rejection-sampled SFT"
+  ],
+  "local_code": "src/auto_research/reproductions/synthself",
+  "documentation": "docs/reproductions/2610.13113-synthself/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "GSM8K verified train-only holdout"
+  ],
+  "baseline": "同初始学生与epochs的gold-SFT；另可unfiltered-rewrite消融，真实token预算不相同则明确记录",
+  "metrics": [
+    "method_metrics.acquisition.accuracy",
+    "method_metrics.retention.accuracy",
+    "parameters_changed"
+  ],
+  "mechanisms": [
+    "Larger same-family aligner greedy training-demonstration rewrite",
+    "External answer rejection and empirical Eq.6 NLL/quality constraints",
+    "Actual response-only LoRA SFT, gold-SFT/unfiltered controls and disjoint acquisition/retention diagnostics"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.synthself.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "LG AI Research / KAIST AI",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoint/data/training budgets and original benchmark suite"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/synthself-a100-20261014-seeds42-44.json"
+  }
+}

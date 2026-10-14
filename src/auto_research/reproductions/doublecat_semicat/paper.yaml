@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "key": "doublecat-semicat",
+  "arxiv_id": "2610.13834",
+  "title": "On the Design Space of Continuous Diffusion Language Models",
+  "paper_url": "https://arxiv.org/abs/2610.13834",
+  "organization": "Apple / University of Oxford / University of Amsterdam",
+  "published": "2026-10-09",
+  "upstream_code": "未找到原作者公开实现（截至 2026-10-13；原文只链接通用 tiktoken）",
+  "track": "llm",
+  "topics": [
+    "扩散语言模型",
+    "Self-conditioning"
+  ],
+  "local_code": "src/auto_research/reproductions/doublecat_semicat",
+  "documentation": "docs/reproductions/2610.13834-doublecat-semicat/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Salesforce/wikitext wikitext-2-raw-v1"
+  ],
+  "baseline": "one-hot continuous diffusion LM, same bidirectional DiT and training budget",
+  "metrics": [
+    "test_denoising_ce_t05",
+    "parameter_delta_l2",
+    "sampled_byte_entropy",
+    "previously_revealed_changes"
+  ],
+  "mechanisms": [
+    "actual bidirectional DiT diffusion LM training",
+    "Gaussian/simplex two-level interpolant with kappa=sqrt(t)",
+    "single-forward two-level interpolant, with optional standard self-conditioning ablation",
+    "Appendix E.1 stop-gradient L2-weighted training loss",
+    "unrevealed-only CE and conditional reveal/carry-over sampler"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.doublecat_semicat.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Apple / University of Oxford / University of Amsterdam",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "TinyGSM/GSM8K and OpenWebText original benchmarks",
+      "1.7B / 2.1T-token Nemotron pretraining",
+      "GPT-2/Qwen generative perplexity and InfoNoise/confidence sampler"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded diagnostic; explicit local CLI config",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/doublecat-semicat-a30-20261013.json"
+  }
+}

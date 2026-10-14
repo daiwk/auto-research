@@ -1,0 +1,189 @@
+{
+  "paper": "lewam",
+  "seed": 42,
+  "executed": true,
+  "device": "cuda",
+  "source_revision": "22914305c15c5fab767ce4122a97b05338cd0bd0",
+  "checkpoint": {
+    "dataset": {
+      "files": {
+        "toolhang.h5": "98a2578938aae6175a1ab1d28ce308bee45ecda1d662f4109998dfe6e04fca0b"
+      },
+      "public_id": "LeWAM/lewam-toolhang",
+      "revision": "465df45efe1b87aead4f423d3f8670833c5ddaf4"
+    },
+    "files": {
+      "lewam_best.pt": "0c1072bba6747f43891d4131bafda3b4924e581137a0db29b0f84d292a5e835d",
+      "lewam_config.json": "b9a2584be432f2858406d17189e4b55bd366fc8a5567e596fa9f211c09d0564d"
+    },
+    "implementation_sha256": {
+      "lewam/algorithm.py": "bbc695fd27609ca20c44ac8b4af133b7d573180ff3e7da0331ca07057106c98a",
+      "lewam/external.py": "0e0a9dbaa54d897f01f6d6f2d13584ec26c1dcf84f4e541685bbc04791056b56",
+      "lewam/training.py": "9d9361bf19c66126484a7ebe57afe69d1de35cb14b1b82e37f2c9e44cb153a36",
+      "lewam/worker.py": "36994bf6828ca5fb513275cd3fb72e8e4443e70cfe13a0ee386949a32ccb3d0f"
+    },
+    "kind": "local-trained-candidate",
+    "metrics": {
+      "nonzero_gradient_updates": 4,
+      "optimizer_updates": 4,
+      "parameter_sample_delta_l2": 0.02969569651630722,
+      "train_action_loss": 2.61287784576416,
+      "train_batches": 4,
+      "train_latent_loss": 0.32587549090385437,
+      "train_sigreg_loss": 2.451853573322296,
+      "updated_parameter_tensors": 164,
+      "validation_action_loss": 2.3556047976017,
+      "validation_batches": 4
+    },
+    "paper": "lewam",
+    "seed": 42,
+    "selection": "validation only",
+    "source_revision": "22914305c15c5fab767ce4122a97b05338cd0bd0",
+    "training_evidence": {
+      "batches": [
+        {
+          "act": 3.399151563644409,
+          "loss": 4.000113487243652,
+          "reg": 2.452310085296631,
+          "state": 0.5028692483901978,
+          "training": true,
+          "zstd": 0.32705017924308777
+        },
+        {
+          "act": 2.4490246772766113,
+          "loss": 2.879277229309082,
+          "reg": 2.45120906829834,
+          "state": 0.33220410346984863,
+          "training": true,
+          "zstd": 0.2947058081626892
+        },
+        {
+          "act": 2.6124162673950195,
+          "loss": 2.9854345321655273,
+          "reg": 2.4674878120422363,
+          "state": 0.2743186354637146,
+          "training": true,
+          "zstd": 0.34680745005607605
+        },
+        {
+          "act": 1.9909188747406006,
+          "loss": 2.282485008239746,
+          "reg": 2.4364073276519775,
+          "state": 0.1941099762916565,
+          "training": true,
+          "zstd": 0.30497509241104126
+        },
+        {
+          "act": 2.468904733657837,
+          "loss": 2.685692071914673,
+          "reg": 3.2266688346862793,
+          "state": 0.08772073686122894,
+          "training": false,
+          "zstd": 0.003546246327459812
+        },
+        {
+          "act": 2.8037497997283936,
+          "loss": 3.0226426124572754,
+          "reg": 3.226987838745117,
+          "state": 0.089813232421875,
+          "training": false,
+          "zstd": 0.00354779209010303
+        },
+        {
+          "act": 1.9171124696731567,
+          "loss": 2.131098508834839,
+          "reg": 3.2266547679901123,
+          "state": 0.08491984009742737,
+          "training": false,
+          "zstd": 0.00393932219594717
+        },
+        {
+          "act": 2.232652187347412,
+          "loss": 2.4481334686279297,
+          "reg": 3.2269842624664307,
+          "state": 0.08640201389789581,
+          "training": false,
+          "zstd": 0.003873417852446437
+        }
+      ],
+      "gradients": [
+        0.9999999053872646,
+        0.9999998653770683,
+        0.9999999653786733,
+        0.999999816950451
+      ]
+    }
+  },
+  "dataset": {
+    "public_id": "LeWAM/lewam-toolhang",
+    "revision": "465df45efe1b87aead4f423d3f8670833c5ddaf4",
+    "files": {
+      "toolhang.h5": "98a2578938aae6175a1ab1d28ce308bee45ecda1d662f4109998dfe6e04fca0b"
+    }
+  },
+  "variants": {
+    "reactive": {
+      "metrics": {
+        "success_rate": 50.0,
+        "episode_successes": [
+          true,
+          false
+        ],
+        "seeds": null
+      },
+      "wall_seconds": 23.813271349295974
+    },
+    "best_of_k": {
+      "metrics": {
+        "success_rate": 50.0,
+        "episode_successes": [
+          true,
+          false
+        ],
+        "seeds": null
+      },
+      "wall_seconds": 24.349718417972326
+    },
+    "grad": {
+      "metrics": {
+        "success_rate": 50.0,
+        "episode_successes": [
+          true,
+          false
+        ],
+        "seeds": null
+      },
+      "wall_seconds": 28.74035724811256
+    }
+  },
+  "sampled_starts": {
+    "episodes": [
+      14,
+      152
+    ],
+    "starts": [
+      195,
+      624
+    ],
+    "goal_offset": 50
+  },
+  "evaluation_tier": "l2_public_dataset",
+  "fidelity": "core_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "protocol": {
+    "non_holdout": true,
+    "goal_from_training_episodes": true,
+    "paper_training_reexecuted": false,
+    "native_joint_training_reexecuted": true,
+    "public_checkpoint_executed": false,
+    "trained_candidate_closed_loop_evaluated": true,
+    "proposals": 4,
+    "gradient_steps": 5,
+    "episodes": 2
+  },
+  "limitations": [
+    "原公开checkpoint训练集目标协议，不能视为test隔离比较",
+    "原论文50epoch训练未重执行；候选数/规划更新/episode数缩小"
+  ]
+}

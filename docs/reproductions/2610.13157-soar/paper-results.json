@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "adapter_key": "soar",
+  "paper_url": "https://arxiv.org/abs/2610.13157",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "原文Qwen2.5-3B/7B、E5-base-v2和2018 Wikipedia，在NQ/HotpotQA train学习、7个QA benchmark评测。主文报告3B平均EM0.414、7B0.448；3B fabrication从16.08%到4.05%。HTML部分表格转换缺失，以4.2/表4正文为出处，不补造全表。未报告生产线上A/B。",
+  "metrics": {
+    "qwen2_5_3b_average_em": 0.414,
+    "qwen2_5_7b_average_em": 0.448,
+    "search_r1_fabrication_percent": 16.08,
+    "soar_fabrication_percent": 4.05
+  }
+}

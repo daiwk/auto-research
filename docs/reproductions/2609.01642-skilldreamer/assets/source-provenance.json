@@ -1,0 +1,15 @@
+{
+  "paper_url": "https://arxiv.org/abs/2609.01642",
+  "reviewed_version": "2609.01642v2",
+  "fulltext_url": "https://arxiv.org/html/2609.01642v2",
+  "figure_source": "https://arxiv.org/html/2609.01642v2#S2.F2",
+  "reviewed_on": "2026-10-13",
+  "first_published": "2026-08-28",
+  "code_url": null,
+  "code_status": "not found in inspected primary full text",
+  "local_boundary": [
+    "原始SkillRet/SkillUsage/SkillNetGym未执行",
+    "原文GPT-5.5/DeepSeek/Qwen3.6模型",
+    "原完整3万skills gallery"
+  ]
+}

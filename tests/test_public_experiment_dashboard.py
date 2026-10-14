@@ -13,6 +13,10 @@ def test_dashboard_dataset_label_does_not_dump_revision_manifest():
     source = {"dataset": {"id": "WikiText-2", "revision": {"train": "a" * 64}}}
     assert _dataset_name(str(source['dataset']), source) == 'WikiText-2'
     assert _dataset_name('', {'dataset': {'name': 'CIFAR-10'}}) == 'CIFAR-10'
+    assert _dataset_name('', {'dataset': {'public_id': 'xiaowu0162/longmemeval-cleaned',
+                                         'revision': 'fixed-revision'}}) == 'xiaowu0162/longmemeval-cleaned'
+    assert _dataset_name('raw manifest', {'dataset': {'source_id': 'openai/grade-school-math',
+                                                     'source_revision': 'fixed'}}) == 'openai/grade-school-math'
     assert _dataset_name('legacy-dataset', {}) == 'legacy-dataset'
     assert _dataset_name('', {'benchmark': 'public-benchmark'}) == 'public-benchmark'
 
@@ -27,6 +31,17 @@ def test_explicit_diagnostic_flags_override_formal_labels():
     assert not _agent_evidence({"dataset": {"id": "public-dataset"}}, {})["diagnostic_only"]
 
 
+def test_dataset_label_reads_declared_live_agent_protocol_without_inventing_metadata():
+    from scripts.generate_public_experiment_dashboard import _dataset_name
+
+    source = {"evaluation_protocol": {"protocol": {"dataset": {
+        "public_id": "openai/grade-school-math", "revision": "fixed",
+        "source_split": "train", "official_test_opened": False}}}}
+    assert _dataset_name("", source) == "openai/grade-school-math"
+    assert _dataset_name("legacy", {"evaluation_protocol": {"protocol": "invalid"}}) == "legacy"
+    assert _dataset_name("", {"evaluation_protocol": {"protocol": {"dataset": {"revision": "fixed"}}}}) == ""
+
+
 def test_public_dashboard_contains_only_committed_documentation_metrics():
     payload = json.loads(
         (ROOT / "docs/assets/data/experiment-dashboard.json").read_text(encoding="utf-8")
@@ -35,6 +50,9 @@ def test_public_dashboard_contains_only_committed_documentation_metrics():
 
     assert payload["schema_version"] == 2
     assert payload["artifact_count"] == len(experiments)
+    assert payload["indexed_artifact_count"] == (
+        payload["artifact_count"] + payload["unmeasured_artifact_count"]
+    )
     assert len(experiments) >= 300
     assert all(item["path"].startswith("docs/") for item in experiments)
     assert all(item["method"] != "metrics" for item in experiments)
@@ -42,6 +60,40 @@ def test_public_dashboard_contains_only_committed_documentation_metrics():
     assert any(item["domain"] == "foundation-model" for item in experiments)
     assert any(item["domain"] == "system-one" for item in experiments)
     assert any(item["title"] for item in experiments)
+
+
+def test_boolean_only_implementation_contracts_remain_auditable_not_result_cards():
+    from scripts.generate_public_experiment_dashboard import build_payload
+
+    payload = build_payload()
+    displayed = {item["path"] for item in payload["experiments"]}
+    contracts = list((ROOT / "docs").glob("**/metrics/implementation-contract.json"))
+    unmeasured = [path for path in contracts
+                  if all(isinstance(value, bool)
+                         for value in json.loads(path.read_text())["metrics"].values())]
+    assert unmeasured
+    assert all(path.relative_to(ROOT).as_posix() not in displayed for path in unmeasured)
+    assert payload["unmeasured_artifact_count"] >= len(unmeasured)
+
+
+def test_resumed_gpu_cards_show_measured_scores_with_explicit_diagnostic_protocols():
+    payload = json.loads((ROOT / "docs/assets/data/experiment-dashboard.json").read_text())
+    filenames = {
+        "oal": "a100-three-seeds-4496283a.json",
+        "near": "a30-diagnostics-34148c2e.json",
+        "beyond-final-embedding": "a30-diagnostics-34148c2e.json",
+    }
+    for method, filename in filenames.items():
+        items = [item for item in payload["experiments"]
+                 if item["method"] == method and item["path"].endswith("/" + filename)]
+        assert len(items) == 1
+        item = items[0]
+        assert item["dataset"] and all(str(seed) in item["seed"] for seed in (42, 43, 44))
+        assert item["metrics"] and "schema_version" not in item["metrics"]
+        assert item["evidence"]["diagnostic_only"]
+        assert not item["evidence"]["formal_comparison"]
+        assert any("test" in key and ("ppl" in key or "ndcg" in key)
+                   for key in item["metrics"])
 
 
 def test_sguid_dashboard_keeps_negative_validation_and_mechanism_tier():

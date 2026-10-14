@@ -40,6 +40,9 @@ post-training-gpu = [
   "datasets>=4.0,<5",
   "safetensors>=0.5",
 ]
+structured-generation = [
+  "xgrammar==0.2.8",
+]
 sparse-decoding-gpu = [
   "torch>=2.7.0a0,<3",
   "transformers>=5.0,<6",

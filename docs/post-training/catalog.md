@@ -4,18 +4,27 @@
 打包的 `paper.yaml` 和按领域保存的 catalog 规格，不直接编辑生成产物。
 背景、架构、公式、原文效果和本地实验请进入独立详情页。
 
-## 已实现论文与资料
+## 论文实现与研究资料
 
 <div class="ar-method-index" markdown>
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| GRPO difficulty curriculum | [A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO](../reproductions/2610.13669-grpo-difficulty-curriculum/README.md) | Dalian Maritime University，2026-10-09 | [已开源](https://github.com/NHLling/GRPO-B) | `grpo-difficulty-curriculum` |
 | Multi-teacher distillation | [Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation](../reproductions/2610.13521-road-mopd/README.md) | Nanjing University / JD.com，2026-10-09 | 未发现官方代码 | `road-mopd` |
 | Capability boundary | [BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation](../reproductions/2610.13285-boundary-evo/README.md) | Shanghai Artificial Intelligence Laboratory，2026-10-09 | 未发现官方代码 | `boundary-evo` |
 | On-policy distillation | [Branching On-Policy Distillation](../reproductions/2610.13481-branch-opd/README.md) | Tsinghua University / SenseTime Research，2026-10-09 | 未发现官方代码 | `branch-opd` |
 | Cross-tokenizer distillation | [CAST: Credit Alignment for Cross-Tokenizer On-Policy Distillation](../reproductions/2610.13257-cast-opd/README.md) | Taobao & Tmall Group of Alibaba，2026-10-09 | 未发现官方代码 | `cast-opd` |
+| Synthetic self-distillation | [Continually Post-training Small Models via Synthetic Self-distillation](../reproductions/2610.13113-synthself/README.md) | KAIST AI / LG AI Research，2026-10-09 | 未发现官方代码 | `synthself` |
+| Proximal policy optimization | [Generalized Proximal Policy Optimization: Unifying LLM RL Algorithms from the Perspective of Divergence](../reproductions/2610.13015-gppo-framework/README.md) | Tsinghua University AIR，2026-10-09 | 未发现官方代码 | `gppo-framework` |
+| Self-correction | [Inject a Turn, Not a Token: Learning Where to Redirect LLM Reasoning for Self-Correction](../reproductions/2610.13672-upturn/README.md) | KAIST，2026-10-09 | 未发现官方代码 | `upturn` |
+| Monte Carlo reasoning tree | [Learning More by Training Less: Uncertainty-Guided Progressive Contraction for Efficient Reasoning Post-Training](../reproductions/2610.12933-progressive-contraction/README.md) | National University of Singapore / Nanjing University，2026-10-09 | 未发现官方代码 | `progressive-contraction` |
+| Source-aware RL | [SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents](../reproductions/2610.13157-soar/README.md) | Zhejiang University / Microsoft，2026-10-09 | 未发现官方代码 | `soar` |
+| On-policy distillation | [State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents](../reproductions/2610.13238-state-opd/README.md) | Alibaba Group，2026-10-09 | 未发现官方代码 | `state-opd` |
+| Trajectory-aware policy optimization | [Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL](../reproductions/2610.13020-tapo-trajectory/README.md) | Tsinghua University AIR，2026-10-09 | 未发现官方代码 | `tapo-trajectory` |
 | On-policy distillation | [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](2610.11659-dial-opd/README.md) | Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University，2026-10-08 | [已开源](https://github.com/EIT-NLP/DIAL-OPD) | `dial-opd` |
 | RLVR | [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](2610.11854-grpo-dropout/README.md) | Harbin Institute of Technology (Shenzhen)，2026-10-08 | [已开源](https://github.com/hexuandeng/GRPODropout) | `grpo-dropout` |
+| RLVR data synthesis | [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../reproductions/2610.12659-magicbeanstalk/README.md) | University of Washington，2026-10-08 | 未发现官方代码 | 成本过高，暂不复现；待验收（仅研究资料） |
 | On-policy distillation | [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](2610.11989-meta-opd/README.md) | East China Normal University，2026-10-08 | 未发现官方代码 | `meta-opd` |
 | On-policy 蒸馏 | [PIVOT: Perplexity-Informed KD-to-RL Transition Scheduling for Vertical-Domain Few-Shot Distillation](2610.11167-pivot/README.md) | Ping An Technology / University of Science and Technology of China，2026-10-08 | 未发现官方代码 | `pivot` |
 | On-policy distillation | [ReCal: Calibrating Structured Pruning for On-Policy Distillation Recovery](2610.11332-recal/README.md) | Zhongguancun Academy / Tencent / University of Science and Technology of China，2026-10-08 | [已开源](https://github.com/jianghoucheng/ReCal) | `recal` |

@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "key": "gppo-framework",
+  "arxiv_id": "2610.13015",
+  "title": "Generalized Proximal Policy Optimization: Unifying LLM RL Algorithms from the Perspective of Divergence",
+  "paper_url": "https://arxiv.org/abs/2610.13015",
+  "organization": "Tsinghua University AIR / ByteDance Seed",
+  "published": "2026-10-09",
+  "upstream_code": "not released / not found in paper-linked primary sources (2026-10-13)",
+  "track": "post-training",
+  "topics": [
+    "Proximal policy optimization",
+    "f-divergence geometry",
+    "Probability-aware estimator"
+  ],
+  "local_code": "src/auto_research/reproductions/gppo_framework",
+  "documentation": "docs/reproductions/2610.13015-gppo-framework/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "GSM8K verified train-only holdout"
+  ],
+  "baseline": "同checkpoint与配置的GRPO-control；零优势重采样成本显式记录",
+  "metrics": [
+    "method_metrics.accuracy",
+    "parameters_changed"
+  ],
+  "mechanisms": [
+    "Four divergence integrands x MC/atomic/binary estimators",
+    "Actual probability-aware proximal sublevel regions",
+    "True on-policy group rollouts, fixed behavior likelihoods and LoRA updates"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.gppo_framework.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Tsinghua University AIR / ByteDance Seed",
+      "published": "2026-10-09",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": "user-requested Oct13 implementation; no online A/B or formal capability comparison claimed"
+    },
+    "omitted_core_components": [
+      "paper-scale checkpoint/data/training budgets and original benchmark suite"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "bounded real checkpoint execution; explicit pinned resources and configuration required",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/gppo-framework-a100-20261013.json"
+  }
+}

@@ -62,3 +62,22 @@ def test_migration_does_not_promote_historical_proxy_to_adapter_default_tier():
     migrated = MODULE.migrate_payload(path, payload)
 
     assert migrated["evaluation_protocol"]["tier"] == "l1_mechanism"
+
+
+def test_migration_preserves_explicit_seedless_formula_contract():
+    path = ROOT / "docs" / "reproductions" / "2610.13674-oal" / "metrics" / "cpu-contracts.json"
+    payload = {
+        "evaluation_tier": "l0_contract",
+        "seeds": [],
+        "diagnostic_only": True,
+        "metrics": {"passed_behavior_tests": 5},
+    }
+
+    migrated = MODULE.migrate_payload(path, payload)
+
+    assert migrated["seeds"] == []
+    assert migrated["evaluation_protocol"]["seeds"] == []
+    assert migrated["evaluation_protocol"]["tier"] == "l0_contract"
+    assert migrated["evaluation_protocol"]["formal_comparison"] is False
+    assert migrated["metrics"] == payload["metrics"]
+    assert MODULE.migrate_payload(path, migrated) == migrated

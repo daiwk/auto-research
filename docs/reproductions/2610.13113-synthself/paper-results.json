@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "adapter_key": "synthself",
+  "paper_url": "https://arxiv.org/abs/2610.13113",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "science/mixture、tool-use、medicine实验使用0.5B/1.5B/3B学生及7B/14B aligner，14项retention任务。表1平均acquisition：SynthSelf56.4、SFT52.2；retention：SynthSelf41.7、SFT40.5、ASFT41.8，不能把微小差异写成确定优胜。原文全参数finetune，每cell一个seed42。未报告生产线上A/B。",
+  "metrics": {
+    "average_synthself_acquisition": 56.4,
+    "average_sft_acquisition": 52.2,
+    "average_synthself_retention": 41.7,
+    "average_sft_retention": 40.5,
+    "average_asft_retention": 41.8
+  }
+}

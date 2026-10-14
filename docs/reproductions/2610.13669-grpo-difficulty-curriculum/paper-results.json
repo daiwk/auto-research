@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "adapter_key": "grpo-difficulty-curriculum",
+  "paper_url": "https://arxiv.org/abs/2610.13669",
+  "paper_version": "v1",
+  "measured_locally": false,
+  "scope": "paper-reported scalar excerpt; not local capability evidence",
+  "source_notes": "原Qwen2.5-1.5B/GSM8K：32次离线估难、8次在线。详细run的fixed-medium事后最佳test0.6459，选定B4为0.6558；再100个B5有效更新降到0.6353。三seed B5后0.6405±0.0053。部分原比较采用事后最佳test，本地不能因此用test选参。未报告生产线上A/B。",
+  "metrics": {
+    "fixed_medium_detailed_best_test_accuracy": 0.6459,
+    "selected_b4_detailed_test_accuracy": 0.6558,
+    "after_100_b5_detailed_test_accuracy": 0.6353,
+    "after_b5_three_seed_mean": 0.6405,
+    "after_b5_three_seed_std": 0.0053
+  }
+}

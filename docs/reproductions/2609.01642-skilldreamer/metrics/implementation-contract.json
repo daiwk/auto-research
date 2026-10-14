@@ -1,0 +1,29 @@
+{
+  "schema_version": 2,
+  "adapter_key": "skilldreamer",
+  "manifest_ref": "reproduction:skilldreamer",
+  "method": "skilldreamer",
+  "seeds": [
+    42
+  ],
+  "diagnostic_only": true,
+  "measured_locally": true,
+  "promotion_eligible": false,
+  "evaluation_protocol": {
+    "tier": "l0_contract",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "formula/behavior contracts only; no checkpoint or control capability claim"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2609.01642-skilldreamer/metrics/implementation-contract.json",
+    "dataset_fingerprint": "deterministic unit inputs, not a public benchmark"
+  },
+  "metrics": {
+    "formula_and_behavior_tests_passed": true
+  },
+  "test_command": "PYTHONPATH=src python -m pytest tests/reproductions/test_oct13_agents_jepa.py",
+  "measurement_boundary": "Only algorithm/interface tests; GPU execution and original benchmark are not implied"
+}

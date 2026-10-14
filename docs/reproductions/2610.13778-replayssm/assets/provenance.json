@@ -1,0 +1,23 @@
+{
+  "paper": "2610.13778",
+  "version": "v1",
+  "retrieved_date": "2026-10-13",
+  "figures": [
+    {
+      "label": "Figure 1",
+      "caption_zh": "输入缓存与周期刷新、指针回滚、高精度递推和低精度读取分离的总览",
+      "source_page": "https://arxiv.org/html/2610.13778v1#S1.F1",
+      "source_url": "https://arxiv.org/html/2610.13778v1/overview_figure.svg",
+      "original_file": "arxiv-v1-figure-1.svg",
+      "original_bytes": 378745,
+      "original_sha256": "2e0087974602edbc4280fa84ae8e5aa42744beb36de052f5ef190cc220c321ca",
+      "file": "paper-figure-01.png",
+      "bytes": 220076,
+      "sha256": "e1689300f3bb6e1b54629b0bbfc57c0c943f42b0164f917eaa60728d3ee825b8",
+      "transformation": "unmodified SVG rendered at 2x zoom",
+      "visual_verified": true,
+      "visual_checks": ["conventional and ReplaySSM panels intact", "checkpoint, buffer, rollback pointer and HP/LP arrows intact", "all three bottom mechanism panels and annotations intact"]
+    }
+  ],
+  "scope": "Paper native-serving state-traffic and latency annotations are not local A100 FP32-storage emulation performance measurements."
+}
