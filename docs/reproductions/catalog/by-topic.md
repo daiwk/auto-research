@@ -99,6 +99,8 @@
 - [GenFacet: End-to-End Generative Faceted Search via Multi-Task Preference Alignment in E-Commerce](../2603.19665-genfacet/README.md)：联合生成搜索分面和改写 query，再以检索满意度执行偏好对齐。
 
 ### 生成式召回与端到端推荐
+- [UniSGR-V2 / TacGR](../2610.16132-unisgr-v2/README.md)：用逐级连续侧信息预测与解码器内交叉条件化语义码生成和排序，并以辅助锚定及单向掩码处理目标坍塌与噪声。**成本过高，暂不复现；待验收，未注册可执行入口。**
+- [WeGR](../2610.16979-wegr/README.md)：以查询/商品协同对比、码字刷新和量化残差保真学习语义ID，再让奖励与策略更新在相同前缀范围逐步扩展。
 - [Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)](../2610.01533-gris/README.md)：将内容语义与协同图联合写入层级 Semantic ID；图为空时退化为内容量化。
 - [Generative End-to-end Ad Retrieval at Douyin](../2609.39327-gear/README.md)：用正交基参数化的 BasisVQ/BasisRQ 学习层级广告 Semantic ID，并对碰撞候选执行上下文条件重排。
 - [GRP v0.1](../2609.36688-grp/README.md)：用独立 SID block 生成候选，以 stop-gradient 排序头提供 reward，并用 mGRPO 在提升策略时保护 logged-target 召回。
@@ -366,6 +368,7 @@
 - [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，并针对冷启动内容进行序列预训练。
 
 ### 相关性审核与数据质量
+- [LLM-based User-Product Relevance Evaluation for DPA](../2610.14550-snap-dpa-relevance/README.md)：通过SID与事件分层意图、人工业务对齐的准则和教师学生蒸馏构建相关性judge，再分别按用户-候选对与用户等权聚合。**成本过高，暂不复现；待验收，未注册可执行入口。**
 - [ASARL](../2607.26593-asarl/README.md)：以 Reason、Critic 和 Gen Agent 审核、修复长尾 relevance 数据，再蒸馏到线上 student。
 - [CORE](../2607.24417-core-relevance/README.md)：把 High/Mid/Low 相关性拆成级联边界，用 step-GRPO 训练 reasoning 后蒸馏给在线审核/排序头。
 - [MESH](../2607.12392-mesh/README.md)：通过异构塔与 residual gated bias correction 防止 fresh/tail 内容信号被头部样本淹没。

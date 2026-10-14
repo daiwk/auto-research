@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "deferred_reproduction_plan",
+  "key": "snap-dpa-relevance",
+  "arxiv_id": "2610.14550",
+  "title": "LLM-based User-Product Relevance Evaluation for Dynamic Product Advertising",
+  "paper_url": "https://arxiv.org/abs/2610.14550",
+  "organization": "Snap Inc.",
+  "published": "2026-10-10",
+  "upstream_code": "not found in fixed-v1 paper-linked primary sources (2026-10-14)",
+  "track": "recommendation",
+  "topics": [
+    "ads-retrieval",
+    "llm-judge",
+    "evaluation"
+  ],
+  "local_code": "src/auto_research/reproductions/snap_dpa_relevance",
+  "documentation": "docs/reproductions/2610.14550-snap-dpa-relevance/README.md",
+  "proposed_fidelity": "core_mechanism",
+  "proposed_evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Private Snap DPA retrieval logs and human-audited relevance pairs"
+  ],
+  "baseline": "完整历史、随机抽样、最近一天、SID-only及不同judge；不得把无人工对齐的固定规则称完整方法",
+  "metrics": [
+    "microrel",
+    "macrorel",
+    "judge_f1",
+    "online_metric_correlation"
+  ],
+  "mechanisms": [
+    "Semantic-ID grouping and event-stratified weighted intent representatives",
+    "Agentic guideline discovery with paired-bootstrap acceptance and human business alignment",
+    "Guideline-conditioned teacher-student distillation and MicroRel/MacroRel aggregation"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "",
+  "implementation_status": "deferred_high_cost",
+  "fidelity_is_planned_only": true,
+  "deferral_reason": "成本过高，暂不复现；原文§4–5依赖10K私有日志经GPT-5、Gemini-2.5-Pro与多轮人工审定；生产student为Gemini-2.5-Flash微调并经Vertex AI调用。商业API、人工标注和私有数据不是当前单卡可直接复现的资源；未测量本地或API总成本，不启动付费教师调用或替换为启发式judge。",
+  "cost_assessment": {
+    "checked_on": "2026-10-14",
+    "source": "https://arxiv.org/html/2610.14550v1",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac; not simultaneous multi-GPU",
+    "basis": "原文§4–5依赖10K私有日志经GPT-5、Gemini-2.5-Pro与多轮人工审定；生产student为Gemini-2.5-Flash微调并经Vertex AI调用。商业API、人工标注和私有数据不是当前单卡可直接复现的资源；未测量本地或API总成本，不启动付费教师调用或替换为启发式judge。",
+    "measured_locally": false,
+    "downloads_started": false,
+    "experiments_started": false
+  },
+  "execution": {
+    "enabled": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": null,
+    "activation_requirements": [
+      "Explicit user request after cost warning",
+      "Pinned public checkpoint/data and validation/test isolation",
+      "Implement all defining mechanisms without heuristic or gold-answer substitution",
+      "Actual NVIDIA A100/A30 execution and sanitized receipt for advertised CUDA path"
+    ],
+    "paper": {
+      "code_url": null,
+      "organization": "Snap Inc.",
+      "published": "2026-10-10",
+      "online_ab": []
+    }
+  }
+}
+

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_id": "2610.14324",
+  "version": "v1",
+  "html_url": "https://arxiv.org/html/2610.14324v1",
+  "figure_id": "S3.F2",
+  "source_resource": "https://arxiv.org/html/2610.14324v1/Method.png",
+  "source_type": "arxiv_html_original_png",
+  "source_resource_sha256": "1900c0bdf37c86b94c3beb10e4167cb3d3e826a0c4115824dfdd8f8f2c4be2c6",
+  "copyright": "original authors",
+  "figure_label": "Figure 2",
+  "local_asset": "assets/paper-figure-01.png",
+  "local_asset_sha256": "fdb8f018b8a02760d041ff32a7f9a52f28c304e46019380d2d89a8f11fe5f8a3",
+  "transformation": "repository save_png: RGB PNG conversion; maximum width 1800, preserving aspect ratio",
+  "width": 1800,
+  "height": 589,
+  "bytes": 344071,
+  "visual_verified": true,
+  "verification": "Original fixed-v1 figure number and local PNG visually inspected on 2026-10-14; no capability result or runtime acceptance implied"
+}
+

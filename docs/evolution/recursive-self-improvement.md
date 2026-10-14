@@ -35,6 +35,9 @@ flowchart LR
 - [Sentry](../agent-research/2610.02994-sentry/README.md)：失败时检索经验，只在结果盲的恢复验证后写入记忆；本地使用真实 Qwen 与只读文档工具，测试冻结 playbook。恢复判断不等于最终答对，不宣称原文浏览器/软件工程结果。
 - [RRSI](https://arxiv.org/abs/2609.24972)：针对 Agent harness 的提案和选择加正则，强调分布外能力与 token 成本；**待审候选，尚无本地 adapter**。
 - [RSIBench-Data](https://arxiv.org/abs/2607.25886)：固定后训练栈，测 Agent 能否根据训练反馈改进数据策略；**待审评测候选，尚未接入本地统一评测**。
+- [RSIPO](../reproductions/2610.15772-rsipo/README.md)：技能与策略共同进化，用分离的重放对照估计技能收益，并结合可靠性加权的 OPD/RL。**已完成论文解读与成本审查；成本过高，暂不复现／待验收**，不是可执行 evolve 算子。
+- [LoOPSD](../reproductions/2610.18162-loopsd/README.md)：在当前模型中搜索循环层路径形成自教师，再交替在线蒸馏和重新搜索。**已收录，完整多轮训练延期**；不是已经验证的递归能力提升。
+- [MemCon](../agent-research/2607.13591-memcon/README.md)：已实现低成本记忆控制器和持久化学习状态，但仅是 RSI 的可继承组件，不将局部 UCB 反馈循环直接称为通用自我进化。
 
 ## 验收协议
 

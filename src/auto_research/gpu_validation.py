@@ -16,6 +16,7 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "embedding-gemma2": "docs/gpu-validations/embedding-gemma2-a100-20261014.json",
     "jev-workflow-measurement": "docs/gpu-validations/oct12-jev-workflow-measurement-a100.json",
     "sguid": "docs/gpu-validations/sguid-a100-20261012.json",
     "data-space-iteration": "docs/gpu-validations/data-space-iteration-a100-20261011.json",

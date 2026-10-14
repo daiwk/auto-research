@@ -7,13 +7,14 @@
 
 <div class="ar-method-index" markdown>
 
-| 方法族 | 论文 | 机构与日期 | Adapter |
+| 方法族 | 论文 / 官方模型 | 机构与日期 | Adapter / 独立组件 |
 |---|---|---|---|
 | 视觉证据约束蒸馏 | [CV-OPD: Contrastive Vision On-policy Distillation](../reproductions/2610.13264-cv-opd/README.md) | Xiamen University，2026-10-09 | `cv-opd` |
 | 视觉 token 压缩与动态证据恢复 | [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](../multimodal-models/2610.12060-vimod/README.md) | City University of Hong Kong，2026-10-08 | `vimod` |
 | 冻结中间层探针与验证器自举 | [Unsupervised Multimodal Reward Modeling](../reproductions/2610.12707-umrm/README.md) | Massachusetts Institute of Technology，2026-10-08 | `umrm` |
 | 视觉 token 压缩与动态证据恢复 | [V-CoLA: Vision Token Compression with Linear Attention](../multimodal-models/2610.11251-vcola/README.md) | Alibaba Cloud Computing，2026-10-08 | `vcola` |
 | 视觉状态转移监督 | [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](../reproductions/2610.12417-woven/README.md) | Northwestern University，2026-10-08 | `woven` |
+| 视觉 token 与跨模态检索 | [EmbeddingGemma 2: Open Multimodal Embeddings](../multimodal-models/embeddinggemma2/README.md) | Google DeepMind，2026-10-06 | `embedding-gemma2` |
 | 视觉 token 与跨模态检索 | [StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection](../multimodal-models/2609.16841-stacktok/README.md) | Sichuan University，2026-09-15 | `stacktok` |
 | 视频理解与 token 压缩 | [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](../multimodal-models/2609.16722-videomm/README.md) | University of Science and Technology of China，2026-09-15 | `videomm` |
 | 生成辅助监督与理解增强 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | `gas` |

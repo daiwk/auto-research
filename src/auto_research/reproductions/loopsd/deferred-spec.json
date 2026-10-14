@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "deferred_reproduction_plan",
+  "key": "loopsd",
+  "arxiv_id": "2610.18162",
+  "title": "LoOPSD: On-Policy Self-Distillation with Looped Teachers",
+  "paper_url": "https://arxiv.org/abs/2610.18162",
+  "organization": "Anhui Province Key Laboratory of Digital Security / Token Foundry, Alibaba Group / Independent Researcher",
+  "published": "2026-10-13",
+  "upstream_code": "not found in fixed-v1 paper-linked primary sources (2026-10-14)",
+  "track": "post-training",
+  "topics": [
+    "on-policy-self-distillation",
+    "layer-route-search",
+    "iterative-teacher"
+  ],
+  "local_code": "src/auto_research/reproductions/loopsd",
+  "documentation": "docs/reproductions/2610.18162-loopsd/README.md",
+  "proposed_fidelity": "core_mechanism",
+  "proposed_evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "GSM8K train-only route search and validation",
+    "PRM800K/MATH-500",
+    "SVAMP",
+    "ProofWriter"
+  ],
+  "baseline": "原模型 / CRISP / Elastic Reasoning；路由搜索与教师评分成本必须另计",
+  "metrics": [
+    "answer_accuracy",
+    "thinking_tokens",
+    "teacher_layer_evaluations"
+  ],
+  "mechanisms": [
+    "Search contiguous repeated layer intervals with frozen weights",
+    "Freeze selected route teacher and score student-generated prefixes",
+    "Reverse-KL on-policy distillation and validation-gated iterative teacher renewal"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "",
+  "implementation_status": "deferred_high_cost",
+  "fidelity_is_planned_only": true,
+  "deferral_reason": "成本过高，暂不复现；原文Appendix A：全部连续层区间先筛128题，24条候选再评872题，前5与标准路径评独立100题；每轮200updates×12题×4responses、每响应上限1024tokens，最多10轮。以Qwen3-1.7B/4B/8B等重复教师计算，完整路线搜索和OPD总预算明显较高；这是上限/配置推断而非实测时长，不做昂贵探针。",
+  "cost_assessment": {
+    "checked_on": "2026-10-14",
+    "source": "https://arxiv.org/html/2610.18162v1",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac; not simultaneous multi-GPU",
+    "basis": "原文Appendix A：全部连续层区间先筛128题，24条候选再评872题，前5与标准路径评独立100题；每轮200updates×12题×4responses、每响应上限1024tokens，最多10轮。以Qwen3-1.7B/4B/8B等重复教师计算，完整路线搜索和OPD总预算明显较高；这是上限/配置推断而非实测时长，不做昂贵探针。",
+    "measured_locally": false,
+    "downloads_started": false,
+    "experiments_started": false
+  },
+  "execution": {
+    "enabled": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": null,
+    "activation_requirements": [
+      "Explicit user request after cost warning",
+      "Pinned public checkpoint/data and validation/test isolation",
+      "Implement all defining mechanisms without heuristic or gold-answer substitution",
+      "Actual NVIDIA A100/A30 execution and sanitized receipt for advertised CUDA path"
+    ],
+    "paper": {
+      "code_url": null,
+      "organization": "Anhui Province Key Laboratory of Digital Security / Token Foundry, Alibaba Group / Independent Researcher",
+      "published": "2026-10-13",
+      "online_ab": []
+    }
+  }
+}
+

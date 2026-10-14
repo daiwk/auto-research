@@ -61,6 +61,7 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "on-policy-self-distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "RLVR data synthesis": ("奖励、信用与课程", "课程与能力边界"),
         "Proximal policy optimization": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "Trajectory-aware policy optimization": ("在线强化学习与稳定性", "序列目标、长度与聚合偏置"),
@@ -165,6 +166,7 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "agentic-rl": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "memory-retrieval": ("记忆、技能与持续学习", "记忆检索与表示"),
         "skill-retrieval": ("记忆、技能与持续学习", "技能获取、检索与调用"),
         "agent-evolution": ("Agentic RL 与后训练", "Harness 与运行时策略"),
@@ -295,6 +297,7 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "ev-jepa": ("多模态基础模型", "视频表征与弹性跨设备推理"),
     "doublecat-semicat": ("网络架构", "扩散与生成式模型"),
     "oal": ("注意力与长上下文", "线性与可分离注意力"),
     "replayssm": ("推理与系统效率", "状态缓存与低精度回放"),
@@ -481,7 +484,7 @@ def read_rows(module: str, domain: str | None = None) -> list[dict[str, str]]:
                 if paper.get("implementation_status") == "deferred_high_cost" else ""
             ),
             "execution_label": (
-                "成本过高，暂不复现；待验收（仅研究资料）"
+                f"计划键 `{paper['key']}`：成本过高，暂不复现；待验收（仅研究资料）"
                 if paper.get("implementation_status") == "deferred_high_cost"
                 else f"`{paper['key']}`"
             ),
@@ -730,7 +733,11 @@ def manifest_domain_rows(domain: str, hierarchy: dict[str, tuple[str, str]]) -> 
             "link": paper["detail_path"], "href": f"../../{paper['detail_path']}",
             "index_href": f"../{paper['detail_path']}",
             "organization": _normalize_affiliation(paper["first_author_affiliation"].split(" / ", 1)[0]),
-            "date": paper["published"], "summary": detail_summary(paper["detail_path"]),
+            "date": paper["published"],
+            "summary": detail_summary(paper["detail_path"]) + (
+                " **成本过高，暂不复现；待验收，未注册可执行入口。**"
+                if paper.get("implementation_status") == "deferred_high_cost" else ""
+            ),
             "domain": cluster[0], "cluster": cluster[1],
         })
     return rows
@@ -770,6 +777,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "ev-jepa": FOUNDATION_TOPIC_HIERARCHY["ev-jepa"],
         "data-space-iteration": ("网络架构", "扩散与生成式模型"),
         "vfold": ("推理与系统效率", "推测解码与 KV cache"),
         "sparse-decoding": ("推理与系统效率", "动态计算与模型压缩"),
@@ -873,6 +881,7 @@ def multimodal_rows() -> list[dict[str, str]]:
         "vimod": ("多模态基础模型", "视觉 token 压缩与动态证据恢复"),
         "videomm": ("多模态基础模型", "视频理解与 token 压缩"),
         "stacktok": ("多模态基础模型", "视觉 token 与跨模态检索"),
+        "embedding-gemma2": ("多模态基础模型", "视觉 token 与跨模态检索"),
     }))
     return _date_descending(rows)
 
@@ -888,7 +897,7 @@ def render_multimodal_method_index() -> str:
         "",
         '<div class="ar-method-index" markdown>',
         "",
-        "| 方法族 | 论文 | 机构与日期 | Adapter |",
+        "| 方法族 | 论文 / 官方模型 | 机构与日期 | Adapter / 独立组件 |",
         "|---|---|---|---|",
     ]
     for row in multimodal_rows():

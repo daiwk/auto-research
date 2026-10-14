@@ -1,0 +1,87 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:jev-regional-transfer",
+  "evaluation_protocol": {
+    "tier": "public_prediction_reanalysis",
+    "seeds": [
+      0
+    ],
+    "seed_roles": [
+      {
+        "role": "local_deterministic_public_prediction_reanalysis",
+        "value": null
+      },
+      {
+        "role": "upstream_published_IndoBERT_training",
+        "value": 0
+      }
+    ],
+    "model_training_seeds": [],
+    "formal_comparison": false,
+    "selection_split": "valid",
+    "evaluation_split": "test",
+    "claim_policy": "Deterministic CPU reanalysis of author predictions. Seed 0 describes only the author-published fallback; no new local model training or multi-seed stability claim."
+  },
+  "provenance": {
+    "artifact_path": "docs/system-one/2610.14112-regional-transfer/metrics/public-predictions-cpu.json",
+    "dataset_fingerprint": "sha256:c9f2077775b58a7f8a21aa7e1d8580eb8eda5265105edf1eba94ec71e2961f32",
+    "fingerprint_scope": "SHA256 of canonical role-to-file-SHA256 mapping (sorted JSON, compact separators); four independently Git-blob-verified published prediction files, source paths below"
+  },
+  "paper": "2610.14112",
+  "evaluation_tier": "public_prediction_reanalysis",
+  "benchmark_only": true,
+  "training_permitted": false,
+  "model_inference_performed": false,
+  "evaluated_on": "2026-10-14",
+  "device": "CPU",
+  "upstream_revision": "a8499c2b71815ca512563dbb7fdc5c51dc783f6a",
+  "dataset": "nusax_senti",
+  "condition": "A1-choice_en",
+  "validation_examples": 1200,
+  "test_examples": 4800,
+  "languages": 12,
+  "macro_accuracy": 0.7997916666666667,
+  "reported_argmax_disagreements": 7,
+  "javanese": {
+    "validation_examples": 100,
+    "test_examples": 400,
+    "base_accuracy": 0.89,
+    "raw_ece_15_bins": 0.049773484848484706,
+    "raw_brier": 0.1640568147127844,
+    "raw_aurc_author_stable": 0.02832553486425384,
+    "temperature_selected_on_validation": 1.5,
+    "calibrated_ece": 0.04110157614188256,
+    "fallback": "published IndoBERT per-language nfull seed 0",
+    "selected_rank_route_fraction": 0.1,
+    "selection_split": "valid",
+    "test_cascade_accuracy": 0.91,
+    "test_cascade_macro_f1": 0.8990524570448034
+  },
+  "source_files": {
+    "validation": {
+      "path": "runs/jev/valid-A1-choice_en-nusax_senti.parquet",
+      "bytes": 29158,
+      "sha256": "ca16a0e7da8a62c093be392bb324405f2e33370052e8db9d9add5b5cbffcd0cd",
+      "git_blob_sha1": "a2b48386f1a0697bedff107d564c1c981532f654"
+    },
+    "test": {
+      "path": "runs/jev/test-full-A1-choice_en-nusax_senti.parquet",
+      "bytes": 66824,
+      "sha256": "5eff499425b65e417d78e449b6aa47f4959f717892b024b589c4f6b312ca1042",
+      "git_blob_sha1": "8ecc7a19bb8479929c9bb59beb45366525a1d53e"
+    },
+    "fallback_validation": {
+      "path": "runs/B2/valid/b2-nusax_senti-jav-s0-nfull.parquet",
+      "bytes": 15805,
+      "sha256": "da5c283d18099f061f3f59da5eeca16717a721149407f32b810ef2ddbfafc0bc",
+      "git_blob_sha1": "3e573d51f95d9a2ac24b19bf9533ba7c7076bf8c"
+    },
+    "fallback_test": {
+      "path": "runs/B2/b2-nusax_senti-jav-s0-nfull.parquet",
+      "bytes": 28797,
+      "sha256": "0f58961ca9ce680d2b7d3071069b0c9f85b84d8401f115329d0efc8d91d51375",
+      "git_blob_sha1": "e5eb405df3693b357ae3633d2710fcf2894faade"
+    }
+  },
+  "claim_scope": "Author-published predictions, no fresh model calls; one Choice condition and one fallback seed. Jev outputs cannot be used for training or distillation."
+}

@@ -5389,6 +5389,24 @@
         "fingerprint": "61c2b47bcc2dd79d3bb912f07fa7f39d1eb4ed6b800be04fc4cbf8768448350a"
       }
     ],
+    "src/auto_research/agent_research/memcon.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "update",
+        "line": 126,
+        "qualified_name": "TabularPolicy.update",
+        "expression": "self.updates += 1",
+        "fingerprint": "610a1aaf7d798369a03e0a7195f60ae3f8d47b6babec4e7a00e8a0a65095d363"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "finish",
+        "line": 324,
+        "qualified_name": "MemCon.finish",
+        "expression": "self.task_index += 1",
+        "fingerprint": "49e965149d9c563e5586db8fcdb2ed4a4fed04e3ed9808cc10392ed04e94415c"
+      }
+    ],
     "src/auto_research/agent_research/memento3.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -12441,6 +12459,88 @@
         "qualified_name": "LocalDecisionModel.fit",
         "expression": "self.weight -= learning_rate * np.clip(gradient, -2.0, 2.0)",
         "fingerprint": "38d82b80ad2cfc1f412ef9a7f845def210d3ddb9daed4bb747fe8dc7bbb7baa0"
+      }
+    ],
+    "src/auto_research/system_one/regional_transfer.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "validate_predictions",
+        "line": 78,
+        "qualified_name": "validate_predictions",
+        "expression": "row.gold",
+        "fingerprint": "225c3648d1ae9d656cbb1f3a9e8bfefc01e9f04b51f78d5ac80a1ae14cbe1708"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "read_parquet",
+        "line": 109,
+        "qualified_name": "read_parquet",
+        "expression": "record['gold']",
+        "fingerprint": "2bc2211666af7200d4908634cfb9a2f3a265f1ea7704c83b8771e620fb30080d"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "probability_metrics",
+        "line": 139,
+        "qualified_name": "probability_metrics",
+        "expression": "r.gold",
+        "fingerprint": "556157087adb6102b8446336d9137f8704f102a0ca00ef384afdf05a502e3b8f"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "macro_f1",
+        "line": 182,
+        "qualified_name": "macro_f1",
+        "expression": "r.gold",
+        "fingerprint": "556157087adb6102b8446336d9137f8704f102a0ca00ef384afdf05a502e3b8f"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "macro_f1",
+        "line": 183,
+        "qualified_name": "macro_f1",
+        "expression": "r.gold",
+        "fingerprint": "556157087adb6102b8446336d9137f8704f102a0ca00ef384afdf05a502e3b8f"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "macro_f1",
+        "line": 184,
+        "qualified_name": "macro_f1",
+        "expression": "r.gold",
+        "fingerprint": "556157087adb6102b8446336d9137f8704f102a0ca00ef384afdf05a502e3b8f"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_aligned_fallback",
+        "line": 191,
+        "qualified_name": "_aligned_fallback",
+        "expression": "indexed[r.key].gold",
+        "fingerprint": "bb9ba48b847c8b34d3f6a7d842ee7aa7fdc9d521f31dbbdbdcdb89007b67a792"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_aligned_fallback",
+        "line": 191,
+        "qualified_name": "_aligned_fallback",
+        "expression": "r.gold",
+        "fingerprint": "556157087adb6102b8446336d9137f8704f102a0ca00ef384afdf05a502e3b8f"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "rate_cascade",
+        "line": 203,
+        "qualified_name": "rate_cascade",
+        "expression": "r.gold",
+        "fingerprint": "556157087adb6102b8446336d9137f8704f102a0ca00ef384afdf05a502e3b8f"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "evaluate_transfer",
+        "line": 243,
+        "qualified_name": "evaluate_transfer",
+        "expression": "r.gold",
+        "fingerprint": "556157087adb6102b8446336d9137f8704f102a0ca00ef384afdf05a502e3b8f"
       }
     ]
   }

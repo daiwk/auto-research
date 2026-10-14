@@ -2,12 +2,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
+| 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2610.13264](https://arxiv.org/abs/2610.13264) |
-| 公司/机构 | Xiamen University（中国教育部多媒体可信感知与高效计算重点实验室） / Moxin Technology |
+| 公司/机构 | Xiamen University / Moxin Technology |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 是：[Contrastive-Vision-OPD](https://github.com/HaoLin3419/Contrastive-Vision-OPD) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/HaoLin3419/Contrastive-Vision-OPD) |
 | Adapter | `cv-opd` |
 | 本地复现代码 | [`src/auto_research/reproductions/cv_opd/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/cv_opd/) |
 

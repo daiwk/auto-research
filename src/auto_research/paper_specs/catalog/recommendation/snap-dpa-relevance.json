@@ -1,0 +1,23 @@
+{
+  "domain": "recommendation",
+  "key": "snap-dpa-relevance",
+  "title": "LLM-based User-Product Relevance Evaluation for Dynamic Product Advertising",
+  "paper_url": "https://arxiv.org/abs/2610.14550",
+  "detail_path": "reproductions/2610.14550-snap-dpa-relevance/README.md",
+  "topic": [
+    "ads-retrieval",
+    "llm-judge",
+    "evaluation"
+  ],
+  "first_author": "Wen Zhang",
+  "first_author_affiliation": "Snap Inc.",
+  "published": "2026-10-10",
+  "priority": "P0",
+  "code": null,
+  "implementation_status": "deferred_high_cost",
+  "deferral_reason": "成本过高，暂不复现；原文§4–5依赖10K私有日志经GPT-5、Gemini-2.5-Pro与多轮人工审定；生产student为Gemini-2.5-Flash微调并经Vertex AI调用。商业API、人工标注和私有数据不是当前单卡可直接复现的资源；未测量本地或API总成本，不启动付费教师调用或替换为启发式judge。",
+  "local_code": "src/auto_research/reproductions/snap_dpa_relevance",
+  "deferred_execution_spec": "src/auto_research/reproductions/snap_dpa_relevance/deferred-spec.json",
+  "gpu_validation_passed": false
+}
+

@@ -19,6 +19,7 @@
 - 2026-09 · [GESE](../2609.15094-gese/README.md)：先生成多样且忠实的标题候选，再依据当前用户上下文选择展示标题。
 
 ## Alibaba International Digital Commerce Group
+- 2026-10 · [UniSGR-V2 / TacGR](../2610.16132-unisgr-v2/README.md)：每级语义码之前预测连续商品侧信息，以解码器内交叉同时条件化生成和排序；辅助锚定塔防坍塌，单向掩码隔离预测噪声。**成本过高，暂不复现；待验收，未注册可执行入口。**
 - 2026-09 · [LazFormer](../2609.14978-lazformer/README.md)：以生成式预训练迁移序列知识，再用 residual adapter 与近密远疏注意力适配工业排序。
 
 ## Yandex
@@ -229,6 +230,7 @@
 - 2025-04 · [PinRec](../2504.10507-pinrec/README.md)：根据目标 outcome 生成多 token 物品表示，以条件生成方式完成召回。
 
 ## Tencent / WeChat
+- 2026-10 · [WeGR](../2610.16979-wegr/README.md)：协同对比信号、低使用率码字刷新与残差保真训练语义ID，再以逐级扩大的前缀奖励和策略更新范围执行动态偏好优化。
 - 2026-07 · [CCFormer](../2607.28070-ccformer/README.md)：分离 ID 与内容字段后门控融合，并以分层压缩保留近期细节和远期兴趣，服务腾讯视频推荐。
 - 2026-07 · [ASARL](../2607.26593-asarl/README.md)：用 Reason/Critic/Gen 多 Agent 闭环整理社交搜索数据，再经 SCT、偏好优化和蒸馏得到在线相关性模型。
 - 2026-07 · [BARGE](../2607.21028-barge/README.md)：用 item-level ICA 恢复多 token Semantic ID 边界，通过逐层 HPR 与正交双路径 DPD 抑制生成漂移。
@@ -411,6 +413,7 @@
 - 2026-08 · [DrEM](../2608.12778-drem/README.md)：用偏好保持筛选、翻转风险反演和一致性融合稳定噪声 pxtr 集成排序。
 
 ## Snap Inc.
+- 2026-10 · [LLM-based User-Product Relevance Evaluation for DPA](../2610.14550-snap-dpa-relevance/README.md)：按语义ID与事件类型压缩意图，通过自动发现且人工业务对齐的准则蒸馏学生judge，再计算MicroRel/MacroRel。**成本过高，暂不复现；待验收，未注册可执行入口。**
 - 2026-09 · [GRP v0.1](../2609.36688-grp/README.md)：以独立 Semantic ID block、生成/排序梯度隔离和带单边召回保护的 mGRPO，渐进式把统一生成模型接入召回与排序。
 - 2026-08 · [CAMIE: Co-Engagement-Aware Multimodal Item Embeddings for Snap Dynamic Product Ads Retrieval](../2608.30255-camie/README.md)：用共同互动商品对训练对称多模态向量，使内容表征同时保留用户旅程中的行为相似性。
 - 2026-08 · [SetMIR: Multi-Interest Retrieval as Set Prediction](../2608.30251-setmir/README.md)：把多兴趣召回改写为集合预测，以 presence gate 和 query-level NMS 动态减少重复 ANN 请求。

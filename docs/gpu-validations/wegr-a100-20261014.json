@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "adapter_key": "wegr",
+  "validated_at": "2026-10-14",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_wegr.py",
+    "--dataset-dir",
+    "data",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--output",
+    "runs/wegr-42"
+  ],
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "dataset": {
+    "public_id": "MovieLens-100K",
+    "revision": "50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229",
+    "source": "https://raw.githubusercontent.com/rudrasingh21/Data-ML-100k-/f74a79d7debb00d39a8b757876b6b2038d52825c/ml-100k.zip",
+    "ratings_sha256": "06416e597f82b7342361e41163890c81036900f418ad91315590814211dca490",
+    "split": "per-user positive events in timestamp order, leave-last-two",
+    "counts": {
+      "train": 1308,
+      "validation": 63,
+      "test": 63
+    },
+    "max_users": 64,
+    "training_session": "three consecutive training-only positive events; prior 24 form context",
+    "surrogate_reward": "rating 5 -> 2; rating 4 -> 1; not click/order labels",
+    "attributes": "19 public genre flags + normalized 32-bin title character counts",
+    "split_sha256": {
+      "train": "93b8462976b6189509761063b9280c057ffe8ebebed2eb395530c3c50a96da7f",
+      "validation": "45abc8e5b1756292be2bd7698bf652d05208faaebbd208ecf5d18e3353956778",
+      "test": "475058a1fc81b30bd9670196d2cefc0c5265740abcbae61c8074227076e77b63"
+    }
+  },
+  "checkpoint": {
+    "public_id": "locally-initialized-two-layer-causal-transformer",
+    "revision": "seeded-no-pretrained-weights"
+  },
+  "result": "passed",
+  "metrics": {
+    "sft.test.hr_at_10": {
+      "mean": 0.005291005291005291,
+      "std": 0.009164289987136916,
+      "n": 3
+    },
+    "sft.test.mrr": {
+      "mean": 0.003976337703621258,
+      "std": 7.815190742300905e-05,
+      "n": 3
+    },
+    "exact-grpo.test.hr_at_10": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "exact-grpo.test.mrr": {
+      "mean": 0.00395596062110924,
+      "std": 0.00028125683563502127,
+      "n": 3
+    },
+    "dhpo.test.hr_at_10": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "dhpo.test.mrr": {
+      "mean": 0.0034509260976594413,
+      "std": 0.0004746800892422414,
+      "n": 3
+    },
+    "elapsed_seconds_total": 16.69947133027017
+  },
+  "execution_checks": {
+    "real_tokenizer_training": true,
+    "real_sft_training": true,
+    "three_matched_arms": true,
+    "all_horizons_executed": true,
+    "negative_results_retained": true,
+    "stable_improvement_claimed": false,
+    "unified_cli_cuda_device_forwarded": true,
+    "cli_standalone_same_seed_agreement": true
+  },
+  "additional_validated_commands": [
+    [
+      "python",
+      "-m",
+      "auto_research.cli",
+      "reproduce",
+      "--paper",
+      "wegr",
+      "--dataset-dir",
+      "data",
+      "--device",
+      "cuda",
+      "--cpu-threads",
+      "4",
+      "--seeds",
+      "42",
+      "--budget",
+      "smoke",
+      "--output-dir",
+      "runs/wegr-cli"
+    ]
+  ],
+  "executed_source_sha256": {
+    "src/auto_research/reproductions/wegr/model.py": "ea41364359ee93c23501685ad8427f512cc2a555764c9c50e1ed5de4ad456153",
+    "src/auto_research/reproductions/wegr/experiment.py": "639e5a7f7e759b3beaafe5d2336edb0d66d3f2ae348be8f7c6683c40e3144ae8",
+    "scripts/run_wegr.py": "53c16ccb5f3cbaa67abc09312ff8ef5dedd33e391571c26ae47722a714a0ebd3",
+    "src/auto_research/datasets.py": "d763805cbee52957e72fa804f25a065905a22718b1324a576b7cf2fb11c06bce",
+    "src/auto_research/reproductions/forte/experiment.py": "f3d9541f29abf08e15af1aec36fd30f3a8b77794afb883c76f5ce7bb93d8f891",
+    "src/auto_research/reproductions/wegr/adapter.py": "362d37385f53f8112d6e84641cdcc43ceb776fd7291319fa579dc50de3768f2f",
+    "src/auto_research/runtime.py": "0a924b7c06e0129f74e8b94ab98b56b05bf9d2e66d8c7d745fc24a66150670e3"
+  },
+  "provenance": {
+    "commit": "1cef8401a5d4bf67f8eaccfb80c6e156e5598cc7",
+    "artifact_path": "docs/gpu-validations/wegr-a100-20261014.json",
+    "metrics_artifact": "docs/reproductions/2610.16979-wegr/metrics/public-a100-seeds42-44.json",
+    "checkpoint_committed": false
+  },
+  "limitations": [
+    "MovieLens history and rating utility replace private query/click/order sessions.",
+    "Small random-initialized Transformer replaces GPT-2 Small; no pretrained language claim.",
+    "Public genre/title attributes replace private multimodal semantic features.",
+    "This is a bounded mechanism diagnostic, not stable improvement or production A/B reproduction.",
+    "SID collisions retain stable item-ID ties; no extra collision resolution learned."
+  ]
+}

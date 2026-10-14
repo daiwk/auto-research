@@ -8,6 +8,7 @@
 
 ## 当前能力
 
+- [EmbeddingGemma 2](embeddinggemma2/README.md)：官方图文 checkpoint 的预算受限检索推理，固定版本、mask 池化与 MRL；不声称复现预训练或已接入 evolve。
 - `visual-shapes`：完全离线生成颜色、形状和方位问答图像；
 - `fashion-mnist-qa`：约 30MB 的公开服饰图像，适合 Mac/CPU 快速复跑；
 - `cifar10-qa`：官方 CIFAR-10 自然图像，MD5 校验后缓存，固定分层 validation/test；

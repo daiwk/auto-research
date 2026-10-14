@@ -2,12 +2,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
+| 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2610.13778](https://arxiv.org/abs/2610.13778) |
 | 公司/机构 | Princeton University / NVIDIA |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 是：[ReplaySSM](https://github.com/Johnny-Liou/ReplaySSM) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/Johnny-Liou/ReplaySSM) |
 | Adapter | `replayssm` |
 | 本地复现代码 | [`src/auto_research/reproductions/replayssm/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/replayssm/) |
 

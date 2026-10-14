@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "deferred_reproduction_plan",
+  "key": "rsipo",
+  "arxiv_id": "2610.15772",
+  "title": "RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution",
+  "paper_url": "https://arxiv.org/abs/2610.15772",
+  "organization": "CUHK / Tsinghua University / NUS / Tongji University / UW-Madison / Westlake University / Shanghai AI Laboratory / Peking University",
+  "published": "2026-10-11",
+  "upstream_code": "https://github.com/zfkarl/RSIPO",
+  "track": "agent-research",
+  "topics": [
+    "agentic-rl",
+    "on-policy-self-distillation",
+    "recursive-self-improvement"
+  ],
+  "local_code": "src/auto_research/reproductions/rsipo",
+  "documentation": "docs/reproductions/2610.15772-rsipo/README.md",
+  "proposed_fidelity": "core_mechanism",
+  "proposed_evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "ALFWorld",
+    "NQ/TriviaQA/PopQA",
+    "HotpotQA/2WikiMultiHopQA/MuSiQue/Bamboogle"
+  ],
+  "baseline": "GRPO / GRPO+OPSD / SEED；需分别计入SFT、技能生成、重放与教师评分成本",
+  "metrics": [
+    "task_success_rate",
+    "exact_match",
+    "replay_gain",
+    "generated_tokens"
+  ],
+  "mechanisms": [
+    "Outcome-independent equal evidence/control split and exact-initial-state skill replay",
+    "Task-type empirical-Bayes gain shrinkage for teacher trust",
+    "On-policy skill generation reward combined with RLVR and trust-weighted OPSD"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "",
+  "implementation_status": "deferred_high_cost",
+  "fidelity_is_planned_only": true,
+  "deferral_reason": "成本过高，暂不复现；原文Table2：Qwen2.5-3B/7B、Qwen3-1.7B，150训练steps；ALFWorld每step16任务×8rollouts，最长50turns，每任务另4次初态重放与4096token技能生成；搜索每step128任务×8rollouts。之前还要GLM-5.2标注的技能SFT。多轮环境训练与教师评分在单卡预计长时间，未作本地测速；不下载或启动。",
+  "cost_assessment": {
+    "checked_on": "2026-10-14",
+    "source": "https://arxiv.org/html/2610.15772v1",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac; not simultaneous multi-GPU",
+    "basis": "原文Table2：Qwen2.5-3B/7B、Qwen3-1.7B，150训练steps；ALFWorld每step16任务×8rollouts，最长50turns，每任务另4次初态重放与4096token技能生成；搜索每step128任务×8rollouts。之前还要GLM-5.2标注的技能SFT。多轮环境训练与教师评分在单卡预计长时间，未作本地测速；不下载或启动。",
+    "measured_locally": false,
+    "downloads_started": false,
+    "experiments_started": false
+  },
+  "execution": {
+    "enabled": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": null,
+    "activation_requirements": [
+      "Explicit user request after cost warning",
+      "Pinned public checkpoint/data and validation/test isolation",
+      "Implement all defining mechanisms without heuristic or gold-answer substitution",
+      "Actual NVIDIA A100/A30 execution and sanitized receipt for advertised CUDA path"
+    ],
+    "paper": {
+      "code_url": "https://github.com/zfkarl/RSIPO",
+      "organization": "CUHK / Tsinghua University / NUS / Tongji University / UW-Madison / Westlake University / Shanghai AI Laboratory / Peking University",
+      "published": "2026-10-11",
+      "online_ab": []
+    }
+  }
+}
+

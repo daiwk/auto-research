@@ -1,0 +1,23 @@
+{
+  "domain": "recommendation",
+  "key": "unisgr-v2",
+  "title": "UniSGR-V2: Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation",
+  "paper_url": "https://arxiv.org/abs/2610.16132",
+  "detail_path": "reproductions/2610.16132-unisgr-v2/README.md",
+  "topic": [
+    "generative-recommendation",
+    "target-side-feature",
+    "multitask-ranking"
+  ],
+  "first_author": "Jun Yang",
+  "first_author_affiliation": "Alibaba International Digital Commerce Group",
+  "published": "2026-10-12",
+  "priority": "P0",
+  "code": null,
+  "implementation_status": "deferred_high_cost",
+  "deferral_reason": "成本过高，暂不复现；原文§4.1：24.2亿私有样本、646万用户、753万商品；8层512维GQA/SwiGLU-MoE解码器，64专家top-2、序列长度1024。数据不可用，原规模训练超出单卡A100/A30或Mac预算；没有实测本地耗时，不用昂贵试跑估算。",
+  "local_code": "src/auto_research/reproductions/unisgr_v2",
+  "deferred_execution_spec": "src/auto_research/reproductions/unisgr_v2/deferred-spec.json",
+  "gpu_validation_passed": false
+}
+

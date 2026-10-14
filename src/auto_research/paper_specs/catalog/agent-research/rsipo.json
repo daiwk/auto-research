@@ -1,0 +1,23 @@
+{
+  "domain": "agent-research",
+  "key": "rsipo",
+  "title": "RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution",
+  "paper_url": "https://arxiv.org/abs/2610.15772",
+  "detail_path": "reproductions/2610.15772-rsipo/README.md",
+  "topic": [
+    "agentic-rl",
+    "on-policy-self-distillation",
+    "recursive-self-improvement"
+  ],
+  "first_author": "Fan Zhang",
+  "first_author_affiliation": "Chinese University of Hong Kong",
+  "published": "2026-10-11",
+  "priority": "P1",
+  "code": "https://github.com/zfkarl/RSIPO",
+  "implementation_status": "deferred_high_cost",
+  "deferral_reason": "成本过高，暂不复现；原文Table2：Qwen2.5-3B/7B、Qwen3-1.7B，150训练steps；ALFWorld每step16任务×8rollouts，最长50turns，每任务另4次初态重放与4096token技能生成；搜索每step128任务×8rollouts。之前还要GLM-5.2标注的技能SFT。多轮环境训练与教师评分在单卡预计长时间，未作本地测速；不下载或启动。",
+  "local_code": "src/auto_research/reproductions/rsipo",
+  "deferred_execution_spec": "src/auto_research/reproductions/rsipo/deferred-spec.json",
+  "gpu_validation_passed": false
+}
+

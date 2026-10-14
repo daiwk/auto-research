@@ -67,3 +67,17 @@ def test_retrieval_rejects_collapsed_or_nonfinite_image_vectors():
         retrieval_recall(torch.ones(1, 2), torch.ones(2, 2), ["a", "b"], ["a", "b"])
     with pytest.raises(ValueError, match="finite"):
         retrieval_recall(torch.full((2, 2), float("nan")), torch.ones(2, 2), ["a", "b"], ["a", "b"])
+
+
+def test_public_preparation_has_a_hard_budget_and_fixed_revision(tmp_path, monkeypatch):
+    from scripts import prepare_embedding_gemma2 as prepare
+    calls = []
+    monkeypatch.setattr(prepare.subprocess, "run", lambda command, **kw: calls.append((command, kw)))
+    prepare.download_inputs(tmp_path, maximum_seconds=10)
+    assert len(calls) == len(prepare.FILES)
+    for command, kwargs in calls:
+        assert "/resolve/914f7f89142e33e77833254d9c9b90c3cef7303b/" in command[-1]
+        assert "--max-time" in command and kwargs["check"] and kwargs["timeout"] <= 12
+        assert "--retry" not in command
+    with pytest.raises(ValueError, match="budget"):
+        prepare.download_inputs(tmp_path, maximum_seconds=901)

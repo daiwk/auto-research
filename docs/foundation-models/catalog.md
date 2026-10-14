@@ -10,7 +10,10 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| System One / JEV | [The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval](../system-one/2610.14631-request-audit/README.md) | Tsinghua University，2026-10-10 | 未找到本论文 artifact 的公开下载地址（2026-10-14 核验） | `jev-request-audit` |
+| System One / JEV | [Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages](../system-one/2610.14112-regional-transfer/README.md) | Universitas Budi Luhur，2026-10-09 | [已开源](https://github.com/tnromy/evaluating-system-one-models-for-indonesian-regional-languages) | `jev-regional-transfer` |
 | 推理与系统效率 | [DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs](../reproductions/2610.13767-dualquant/README.md) | d-Matrix，2026-10-09 | [已开源](https://github.com/MahsaMoonlike/dualquant) | `dualquant` |
+| 多模态基础模型 | [EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference](../reproductions/2610.14324-ev-jepa/README.md) | Meta Reality Labs Research，2026-10-09 | 未发现官方代码 | 计划键 `ev-jepa`：成本过高，暂不复现；待验收（仅研究资料） |
 | 网络架构 | [Multi-Stream Attention Residuals](../reproductions/2610.13630-msar/README.md) | Shanghai Jiao Tong University，2026-10-09 | 未发现官方代码 | `msar` |
 | 注意力与长上下文 | [Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels](../reproductions/2610.13674-oal/README.md) | The Chinese University of Hong Kong, Shenzhen，2026-10-09 | [已开源](https://github.com/wuqianyue09/OAL) | `oal` |
 | 网络架构 | [On the Design Space of Continuous Diffusion Language Models](../reproductions/2610.13834-doublecat-semicat/README.md) | University of Oxford / Apple（在 Apple 期间完成），2026-10-09 | 未发现官方代码 | `doublecat-semicat` |

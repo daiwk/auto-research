@@ -13,6 +13,7 @@ import hashlib
 import json
 from pathlib import Path
 from typing import Iterable
+from urllib.parse import urlparse
 
 from .models import Paper
 from .papers import ArxivClient, canonical_arxiv_id, paper_recency, paper_revision
@@ -142,9 +143,12 @@ def repository_paper_statuses(
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     for paper in manifest.get("papers", []):
         paper_url = str(paper.get("paper_url", ""))
+        if urlparse(paper_url).hostname not in {"arxiv.org", "www.arxiv.org", "export.arxiv.org"}:
+            continue  # Official model releases are not fabricated arXiv IDs.
         arxiv_id = paper_url.rstrip("/").split("/")[-1]
         if arxiv_id:
-            statuses[canonical_arxiv_id(arxiv_id)] = "implemented"
+            status = "reviewed" if str(paper.get("implementation_status", "")).startswith("deferred") else "implemented"
+            statuses[canonical_arxiv_id(arxiv_id)] = status
 
     ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
     for batch in ledger.get("batches", []):

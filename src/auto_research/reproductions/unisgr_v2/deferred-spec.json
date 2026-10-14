@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "deferred_reproduction_plan",
+  "key": "unisgr-v2",
+  "arxiv_id": "2610.16132",
+  "title": "UniSGR-V2: Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation",
+  "paper_url": "https://arxiv.org/abs/2610.16132",
+  "organization": "Alibaba International Digital Commerce Group / Lazada",
+  "published": "2026-10-12",
+  "upstream_code": "not found in fixed-v1 paper-linked primary sources (2026-10-14)",
+  "track": "recommendation",
+  "topics": [
+    "generative-recommendation",
+    "target-side-feature",
+    "multitask-ranking"
+  ],
+  "local_code": "src/auto_research/reproductions/unisgr_v2",
+  "documentation": "docs/reproductions/2610.16132-unisgr-v2/README.md",
+  "proposed_fidelity": "core_mechanism",
+  "proposed_evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Private Lazada industrial recommendation logs"
+  ],
+  "baseline": "同骨干UniRec-CoA / UniSGR；未来公开数据替代须保留侧信息预测、锚定及掩码",
+  "metrics": [
+    "click_hr_at_100",
+    "pay_hr_at_100",
+    "click_auc",
+    "pay_auc"
+  ],
+  "mechanisms": [
+    "Stepwise continuous target-side feature anticipation and in-decoder crossing",
+    "Ground-truth feature anchoring tower and unidirectional visibility mask",
+    "Gated convolution denoising and pyramid cross-attention memory funnel"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "",
+  "implementation_status": "deferred_high_cost",
+  "fidelity_is_planned_only": true,
+  "deferral_reason": "成本过高，暂不复现；原文§4.1：24.2亿私有样本、646万用户、753万商品；8层512维GQA/SwiGLU-MoE解码器，64专家top-2、序列长度1024。数据不可用，原规模训练超出单卡A100/A30或Mac预算；没有实测本地耗时，不用昂贵试跑估算。",
+  "cost_assessment": {
+    "checked_on": "2026-10-14",
+    "source": "https://arxiv.org/html/2610.16132v1",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac; not simultaneous multi-GPU",
+    "basis": "原文§4.1：24.2亿私有样本、646万用户、753万商品；8层512维GQA/SwiGLU-MoE解码器，64专家top-2、序列长度1024。数据不可用，原规模训练超出单卡A100/A30或Mac预算；没有实测本地耗时，不用昂贵试跑估算。",
+    "measured_locally": false,
+    "downloads_started": false,
+    "experiments_started": false
+  },
+  "execution": {
+    "enabled": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": null,
+    "activation_requirements": [
+      "Explicit user request after cost warning",
+      "Pinned public checkpoint/data and validation/test isolation",
+      "Implement all defining mechanisms without heuristic or gold-answer substitution",
+      "Actual NVIDIA A100/A30 execution and sanitized receipt for advertised CUDA path"
+    ],
+    "paper": {
+      "code_url": null,
+      "organization": "Alibaba International Digital Commerce Group / Lazada",
+      "published": "2026-10-12",
+      "online_ab": []
+    }
+  }
+}
+

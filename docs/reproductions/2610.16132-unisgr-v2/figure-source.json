@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "paper_id": "2610.16132",
+  "version": "v1",
+  "html_url": "https://arxiv.org/html/2610.16132v1",
+  "figure_id": "S3.F1",
+  "source_resource": "https://arxiv.org/html/2610.16132v1/tacgr_overview.png",
+  "source_type": "arxiv_html_original_png",
+  "source_resource_sha256": "360343da9eb5d028e68665592c361eb73f3e5b81ef23275bd731876e1dcace3f",
+  "copyright": "original authors",
+  "figure_label": "Figure 1",
+  "local_asset": "assets/paper-figure-01.png",
+  "local_asset_sha256": "482c51eea9b897e241a814d47edcb4e636ba6e4866f100fc142a11545e0dae8f",
+  "transformation": "repository save_png: RGB PNG conversion; maximum width 1800, preserving aspect ratio",
+  "width": 1800,
+  "height": 893,
+  "bytes": 473664,
+  "visual_verified": true,
+  "verification": "Original fixed-v1 figure number and local PNG visually inspected on 2026-10-14; no capability result or runtime acceptance implied"
+}
+

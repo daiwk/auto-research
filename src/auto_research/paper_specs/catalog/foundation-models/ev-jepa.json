@@ -1,0 +1,23 @@
+{
+  "domain": "foundation-models",
+  "key": "ev-jepa",
+  "title": "EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference",
+  "paper_url": "https://arxiv.org/abs/2610.14324",
+  "detail_path": "reproductions/2610.14324-ev-jepa/README.md",
+  "topic": [
+    "jepa",
+    "video-representation",
+    "elastic-inference"
+  ],
+  "first_author": "Anxhelo Diko",
+  "first_author_affiliation": "Meta Reality Labs Research",
+  "published": "2026-10-09",
+  "priority": "P0",
+  "code": null,
+  "implementation_status": "deferred_high_cost",
+  "deferral_reason": "成本过高，暂不复现；原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。",
+  "local_code": "src/auto_research/reproductions/ev_jepa",
+  "deferred_execution_spec": "src/auto_research/reproductions/ev_jepa/deferred-spec.json",
+  "gpu_validation_passed": false
+}
+

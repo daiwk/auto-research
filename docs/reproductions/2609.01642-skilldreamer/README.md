@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2609.01642](https://arxiv.org/abs/2609.01642) |
 | 公司/机构 | Sichuan University |
 | 首次公开日期 | 2026-08-28（arXiv v1） |
-| 原文开源代码 | 否：原文与官方页面未找到作者实现仓库（核查日期 2026-10-13） |
+| 原文开源代码 | 否：原文与官方页面未找到作者代码（核查 2026-10-13） |
 | Adapter | `skilldreamer` |
 | 本地复现代码 | [`src/auto_research/reproductions/skilldreamer/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/skilldreamer/) |
 
