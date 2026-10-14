@@ -108,4 +108,3 @@ def test_netflix_does_not_bypass_industrial_production_gate():
     assert excluded["evolve_integrated"] is False
     assert not any(row["paper_url"].endswith("/2610.15864")
                    for row in catalog_records())
-

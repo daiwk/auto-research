@@ -73,4 +73,3 @@ def test_new_october_entries_remain_date_descending_after_normal_sort(tmp_path):
     dates = [module._paper_date(link) for link in links]
     assert dates == sorted(dates, reverse=True)
     assert dates[:3] == ["2026-10-12", "2026-10-12", "2026-10-10"]
-
