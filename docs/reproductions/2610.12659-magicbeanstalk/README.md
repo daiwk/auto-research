@@ -87,9 +87,19 @@ PYTHONPATH=src python scripts/run_oct13_post_training.py \
 
 真实生成、拒绝、难度校准、teacher profiling及监督token预算进入结果；失败写不可覆盖的 `failure.json`，成功写 `result.json` / `report.md`。不能仅以本地目录名伪造source metadata。
 
+配置中的 `construction_teacher_sample` 必须为 JSON 布尔值，默认 `true` 保留原有随机教师行为。可选 `false` 只将教师独立解题与构造 JSON 改为确定性生成；学生 hard-seed/Goldilocks 校准、effectivity 的学生/教师随机池、RL rollout 和所有验收门槛保持不变。独立解题仍只见 question，构造教师读取 train 参考解的权限不变；该选项不能强制安全、有效性、新颖性或验算通过。
+
+本轮新路径固定在 `4c4710cd`，仅依据 train/validation 教师短诊断提出，尚须新源码完整 GPU 验证。短诊断没有学生训练；4条validation的随机50%/greedy75%不是稳定收益结论。完整构造失败仍保留原样，不以生成合法JSON、两子题验算正确或单独参数变化替代论文定义链路。
+
 ### 当前结果与验收状态
 
 [mechanism-contracts.json](metrics/mechanism-contracts.json)保存已CPU执行的公式/行为合同标量，deterministic tensor/fixture协议，`diagnostic_only: true`、`formal_comparison: false`。不替代公开checkpoint训练、GPU回执、同预算能力比较或原benchmark。GPU指标由实际结果核验后另行摘录；本页不声明未执行实验已经完成。
+
+### 教师质量短诊断：不是整方法通过
+
+[dd540教师诊断记录](metrics/public-a100-teacher-quality-seed42-dd54035d.json)绑定独立冻结入口、实际A100输出与10份来源/审计SHA、28份逐调用快照。教师实际生成14个响应、3876tokens；3个train hard根题只有1个独解正确，其一次greedy分解的2个子题均通过独立验算。四条固定validation的随机/greedy正确率分别50%/75%，负根题和失败validation全部保留。
+
+诊断没有加载学生、没有执行scaffold安全评审、effectivity、合成或Goldilocks，optimizer更新为0。因此它仅用于定位教师生成质量，不填补完整MBS门禁，不证明稳定收益。内部/外层耗时156.41/157.33秒；当时与一个SkillDreamer任务并存，不作独占延迟、吞吐或总计算节省比较。公开记录只保留响应SHA与计数，不含原提示、答案文本、token IDs或机器信息。
 
 ### 2026-10-14 实际失败记录（旧6a源码）
 

@@ -57,6 +57,11 @@ A100/A30 连接及相关公开资源已核验，正在按 [GPU TODO](oct13-gpu-t
 | 两次MBS格式约束真实失败 | f924与ce4实际CUDA均结束exit1，合法JSON不等于合格后代；分别36728/36425生成token、0次RL更新。保留各自原始响应、成本和独立来源，不签GPU通过回执；当前GPU门禁仍缺MBS、SkillDreamer |
 | attempt07主审与完整复跑 | 主审发现35个漂移反例遗漏实际校验器调用；补齐拒绝断言后，111项负证据检查、153项相关schema/迁移/看板检查通过。两份schema负native分别由九份实际来源与54个Git源文件独立重放且逐字段相等；稳定完整回归**2787通过、24 warnings、276.28秒** |
 | 新负结果生成一致性 | 803个指标产物，迁移待变更0（新attempt07只统一UTF-8格式，JSON值不改）；公开看板756条，manifest/目录/平台审计/spec/README同步/发现闭环/140文件辅助清单通过。strict文档构建10.71秒；GPU门禁仍仅缺MBS、SkillDreamer，不宣称CI全绿 |
+| 教师短诊断与Skill摘录修复 | `dd54035d`独立教师诊断入口及`ac5807dd`严格七字段复算、真实环境步数/失败成本和写入前校验修复后，稳定全量**2878通过、24warnings、304.79秒**。真实seed42的7字段/调用/环境计数已独立核验；43/44尚在运行，不用fixtures签三种子回执 |
+| 教师采样配置隔离 | `4c4710cd`默认随机行为不变，False仅影响教师独解/JSON；21个新用例及相关**174项通过**。明确绑定内层源码的新全量以exit0结束、24warnings；双quiet入口没有输出总计，后续collect-only已含新整理工具用例，不能混用其数量。尚无此新源的完整MBS GPU结果，不降低scaffold、effectivity、Goldilocks或有效更新要求 |
+| 本次测试入口指向错误 | 首次新全量遗漏`PYTHONPATH=src`，共享venv导入外层旧editable安装，126个collection错误；不是本分支算法结果。已明确绑定当前内层源码重跑，不修改依赖或弱化测试 |
+| 新教师诊断独立公开整理 | 96项定向检查通过；实际14响应/3876tokens由冻结runner、54core Git文件、10来源SHA和28调用快照逐字段核验并脱敏，记录明确0学生生成/0optimizer。公开native不是GPU通过回执；不依据四例validation宣称稳定收益 |
+| 新greedy路径启动与CPU实核 | 主审84项启动/漂移/进程组隔离检查通过；A100真实54source、学生7/教师11文件和train-only切分重新逐字节核验，五operation新源CPU编译通过且未初始化CUDA。原配置只新增False，原数据/retries/steps/token/wall预算不增；新完整GPU仍未运行 |
 
 早期完整通过结果绑定源码 `34148c2e29c01e9be7e4d5b8cbd09fd0f6016902`，后续全量与定向结果按上表分别记录；随后若有源码修复须补相应检查。
 真实 GPU 缺项仍按 TODO 验收，最终 PR 的 CI 尚未触发；本地测试通过不等于最终 PR 可合并。

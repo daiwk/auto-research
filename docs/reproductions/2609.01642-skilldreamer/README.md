@@ -13,6 +13,8 @@
 | Adapter | `skilldreamer` |
 | 本地复现代码 | [`src/auto_research/reproductions/skilldreamer/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/skilldreamer/) |
 
+当前验证状态：`47f0e9ce`完整三臂seed42已实际在A100结束，16条相同evaluation任务中 no-skills Pass为25%，direct和SkillDreamer均为0。方法实际有108次CSI、14题技能加载和89次成功calculator调用，但0次提交；不能把定义链路执行当成任务成功或能力提升。43/44同源同预算执行中，尚未签三种子GPU回执。下方各负诊断保留其原始时点和源码，不冒充当前完整结果。
+
 原始 v1 时间为 2026-08-28 13:19:50 UTC；v2 为 2026-10-09 04:15:57 UTC。正文题名为 *Imagine Before Acting: Prospective Skill Identification for LLM Agents*；SkillDreamer 是方法名。
 
 ## 原始论文总结
