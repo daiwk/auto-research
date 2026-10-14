@@ -13,8 +13,6 @@ from pathlib import Path
 
 import torch
 from torch.nn import functional as F
-from PIL import Image
-from transformers import AutoModelForImageTextToText, AutoProcessor
 
 from auto_research.multimodal.cv_opd import (
     VisionPolicy, ema_update, intersection_over_union, negative_crop, objective, sampled_training_rollouts, verify_answer,
@@ -67,6 +65,8 @@ def load_rows(path: Path, manifest: dict) -> list[dict]:
 
 
 def evaluate(policy, rows, maximum_tokens: int) -> dict:
+    from PIL import Image
+
     correct, total, lengths = 0, 0, []
     for row in rows:
         image = Image.open(row["image"]).convert("RGB")
@@ -113,6 +113,11 @@ def main() -> None:
     if len(label_counts) < 2:
         p.error("constant-label training is not a valid multiclass visual diagnostic")
     torch.manual_seed(args.seed)
+    # Metadata/provenance validation and CLI help do not require the optional
+    # vision runtime. Resolve it only when actually decoding pixels/loading VLMs.
+    from PIL import Image
+    from transformers import AutoModelForImageTextToText, AutoProcessor
+
     processor = AutoProcessor.from_pretrained(args.checkpoint, local_files_only=True)
     model = AutoModelForImageTextToText.from_pretrained(
         args.checkpoint, local_files_only=True, dtype=torch.bfloat16 if args.device == "cuda" else torch.float32,
