@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "paper_id": "2610.15772",
+  "version": "v1",
+  "html_url": "https://arxiv.org/html/2610.15772v1",
+  "figure_id": "S2.F3",
+  "source_resource": "https://arxiv.org/html/2610.15772v1/RSIPO_method_main.png",
+  "source_type": "arxiv_html_original_png",
+  "source_resource_sha256": "1701bd576d2cb49fcd83a360bded2ea20cb32d479f93ec9a210e9b75763257a9",
+  "copyright": "original authors",
+  "figure_label": "Figure 3",
+  "local_asset": "assets/paper-figure-01.png",
+  "local_asset_sha256": "ba7b961945ab4e2481c3d03986fc70978bd3e98a3b17fdd4d9fb12d3e5294a01",
+  "transformation": "repository save_png: RGB PNG conversion; maximum width 1800, preserving aspect ratio",
+  "width": 860,
+  "height": 459,
+  "bytes": 189703,
+  "visual_verified": true,
+  "verification": "Original fixed-v1 figure number and local PNG visually inspected on 2026-10-14; no capability result or runtime acceptance implied"
+}

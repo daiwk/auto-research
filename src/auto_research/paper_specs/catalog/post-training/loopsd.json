@@ -1,0 +1,22 @@
+{
+  "domain": "post-training",
+  "key": "loopsd",
+  "title": "LoOPSD: On-Policy Self-Distillation with Looped Teachers",
+  "paper_url": "https://arxiv.org/abs/2610.18162",
+  "detail_path": "reproductions/2610.18162-loopsd/README.md",
+  "topic": [
+    "on-policy-self-distillation",
+    "layer-route-search",
+    "iterative-teacher"
+  ],
+  "first_author": "Wei Fan",
+  "first_author_affiliation": "Anhui Province Key Laboratory of Digital Security",
+  "published": "2026-10-13",
+  "priority": "P1",
+  "code": null,
+  "implementation_status": "deferred_high_cost",
+  "deferral_reason": "成本过高，暂不复现；原文Appendix A：全部连续层区间先筛128题，24条候选再评872题，前5与标准路径评独立100题；每轮200updates×12题×4responses、每响应上限1024tokens，最多10轮。以Qwen3-1.7B/4B/8B等重复教师计算，完整路线搜索和OPD总预算明显较高；这是上限/配置推断而非实测时长，不做昂贵探针。",
+  "local_code": "src/auto_research/reproductions/loopsd",
+  "deferred_execution_spec": "src/auto_research/reproductions/loopsd/deferred-spec.json",
+  "gpu_validation_passed": false
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "foundation-models",
+  "key": "jev-request-audit",
+  "title": "The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval",
+  "paper_url": "https://arxiv.org/abs/2610.14631",
+  "detail_path": "system-one/2610.14631-request-audit/README.md",
+  "topic": ["System One / JEV", "公共评测与能力边界"],
+  "first_author": "Jianbo Chen",
+  "first_author_affiliation": "Tsinghua University",
+  "published": "2026-10-10",
+  "code": "未找到本论文 artifact 的公开下载地址（2026-10-14 核验）",
+  "adapter": "jev-request-audit",
+  "priority": "P1",
+  "summary": "把请求问题增加、证据增加和候选资格变化分开，量化严格翻转、动作变化及输出标签质量。本地实现配对审计协议；没有重跑原论文七模型，完整评测因成本和 artifact 不可得暂缓。"
+}

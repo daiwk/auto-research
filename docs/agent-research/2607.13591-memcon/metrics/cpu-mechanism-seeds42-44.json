@@ -1,0 +1,116 @@
+{
+  "schema_version": 2,
+  "method": "memcon",
+  "manifest_ref": "agent-research:memcon",
+  "dataset": "12 generated openly observable records; not a capability benchmark",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "diagnostic_only": true,
+    "claim_policy": "Controller/backend execution regression only; seeds vary record order, not independent capability tasks; do not claim agent improvement",
+    "gold_access": false,
+    "llm_calls": 0,
+    "episodes_per_seed": 60,
+    "memory_decisions_per_episode": 2,
+    "feedback": "Presence of requested openly observable record in actual retrieval output"
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "retrieval_hit_rate": 0.8666666666666667,
+      "mean_terminal_reward": 1.0799999999999998,
+      "action_counts": [
+        17,
+        21,
+        16,
+        15,
+        11,
+        8,
+        8,
+        16,
+        8
+      ],
+      "policy_updates": 60,
+      "state_rows": 7,
+      "memory_entries": 65
+    },
+    {
+      "seed": 43,
+      "retrieval_hit_rate": 0.8666666666666667,
+      "mean_terminal_reward": 1.0799999999999998,
+      "action_counts": [
+        17,
+        21,
+        16,
+        15,
+        11,
+        8,
+        8,
+        16,
+        8
+      ],
+      "policy_updates": 60,
+      "state_rows": 7,
+      "memory_entries": 65
+    },
+    {
+      "seed": 44,
+      "retrieval_hit_rate": 0.8666666666666667,
+      "mean_terminal_reward": 1.0799999999999998,
+      "action_counts": [
+        17,
+        21,
+        16,
+        15,
+        11,
+        8,
+        8,
+        16,
+        8
+      ],
+      "policy_updates": 60,
+      "state_rows": 7,
+      "memory_entries": 65
+    }
+  ],
+  "provenance": {
+    "artifact_path": "docs/agent-research/2607.13591-memcon/metrics/cpu-mechanism-seeds42-44.json",
+    "dataset_fingerprint": "sha256:e847139b5f5a250d9e426dafc1c0c75c2c224bb9c0e26d5298b50cfe550b3a9a",
+    "source_file_sha256": "d92415ef0105a7403623eaed1e8578a92a16ae83218b062c75d019411fc18655",
+    "cross_python_revalidation": {
+      "validated_on": "2026-10-14",
+      "python_versions": [
+        "3.11",
+        "3.12"
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "protocol_ref": "evaluation_protocol",
+      "exact_json_match": true,
+      "aggregation": "math.fsum(rewards) / episodes",
+      "measurement_changed": false,
+      "scope": "CPU diagnostic replay only; no new LLM/GPU run or capability claim"
+    },
+    "base_commit": "fcc81a35cbcc81ff0975d87004af007da99efdef",
+    "command": "python -c 'from auto_research.agent_research.memcon import run_diagnostic; [run_diagnostic(seed=s, episodes=60) for s in (42,43,44)]'",
+    "paper_revision": "2607.13591v3",
+    "raw_predictions_committed": false,
+    "checkpoint_committed": false
+  }
+}

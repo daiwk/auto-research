@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| agentic-rl | [RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution](../reproductions/2610.15772-rsipo/README.md) | Chinese University of Hong Kong，2026-10-11 | [已开源](https://github.com/zfkarl/RSIPO) | 计划键 `rsipo`：成本过高，暂不复现；待验收（仅研究资料） |
 | memory-retrieval | [Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence](../reproductions/2610.13277-beyond-final-embedding/README.md) | Southeast University，2026-10-09 | 未发现官方代码 | `beyond-final-embedding` |
 | agent-evolution | [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../reproductions/2610.13025-evo2/README.md) | University of Illinois Urbana-Champaign / Google DeepMind，2026-10-09 | 未发现官方代码 | `evo2` |
 | autonomous-research | [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../reproductions/2610.13194-janus/README.md) | Institute of Computing Technology, Chinese Academy of Sciences，2026-10-09 | 未发现官方代码 | `janus` |
@@ -140,6 +141,7 @@
 | Hierarchical skill memory | [HiSkill](2607.25853-hiskill/README.md) | Beijing University of Posts and Telecommunications，2026-07-28 | [已开源](https://github.com/BUPT-GAMMA/HiSkill) | `hiskill` |
 | Continual agent memory | [UniMem](2607.26017-unimem/README.md) | CASIA，2026-07-28 | 未发现官方代码 | `unimem` |
 | Agentic RL / hindsight skill | [SEED](2607.14777-seed/README.md) | Tsinghua University，2026-07-16 | [已开源](https://github.com/jinyangwu/SEED) | `seed` |
+| 主动记忆 | [Memory as a Controlled Process: Learned Adaptive Memory Management for LLM Agents](2607.13591-memcon/README.md) | 未明确标注（正文 HTML 未显示一作机构映射），2026-07-15 | [已开源](https://github.com/ericjiang18/MemCon/) | `memcon` |
 | Agentic OPD / rollout budgeting | [TurnOPD](2607.05804-turn-opd/README.md) | Academic author team，2026-07-07 | 未发现官方代码 | `turn-opd` |
 | 研究自动化 | [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](2606.26859-agentx/README.md) | Kuaishou，2026-06-26 | 未发现官方代码 | `agentx` |
 | 训练服务优化 | [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](mlsys2026-prompts/README.md) | University of Maryland / Google，2026-05-18 | 未发现官方代码 | `prompts` |

@@ -1587,6 +1587,34 @@
     },
     {
       "domain": "agent-research",
+      "key": "memcon",
+      "title": "Memory as a Controlled Process: Learned Adaptive Memory Management for LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2607.13591",
+      "detail_path": "agent-research/2607.13591-memcon/README.md",
+      "topic": [
+        "主动记忆",
+        "在线上下文 bandit",
+        "记忆维护与计划复用"
+      ],
+      "first_author": "Eric Hanchen Jiang",
+      "first_author_affiliation": "未明确标注（正文 HTML 未显示一作机构映射）",
+      "published": "2026-07-15",
+      "reviewed_version": "2607.13591v3",
+      "version_updated": "2026-10-12",
+      "code": "https://github.com/ericjiang18/MemCon/",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "cpu_core_operator_diagnostic",
+      "local_operator": "auto_research.agent_research.memcon.MemCon",
+      "local_command": "python -m auto_research.agent_research.memcon --episodes 60 --seed 42",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "requires_gpu_validation": false,
+      "fidelity_note": "核心控制器和可观测backend操作实际执行；未接入旧gold mini-suite或evolve能力比较，原多模型六benchmark完整评测成本过高，本轮不启动。"
+    },
+    {
+      "domain": "agent-research",
       "key": "memento-skills",
       "title": "Memento-Skills",
       "paper_url": "https://arxiv.org/abs/2603.18743",
@@ -2410,6 +2438,28 @@
       "priority": "P0",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/oct12-rsi-anything-a100.json"
+    },
+    {
+      "domain": "agent-research",
+      "key": "rsipo",
+      "title": "RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution",
+      "paper_url": "https://arxiv.org/abs/2610.15772",
+      "detail_path": "reproductions/2610.15772-rsipo/README.md",
+      "topic": [
+        "agentic-rl",
+        "on-policy-self-distillation",
+        "recursive-self-improvement"
+      ],
+      "first_author": "Fan Zhang",
+      "first_author_affiliation": "Chinese University of Hong Kong",
+      "published": "2026-10-11",
+      "priority": "P1",
+      "code": "https://github.com/zfkarl/RSIPO",
+      "implementation_status": "deferred_high_cost",
+      "deferral_reason": "成本过高，暂不复现；原文Table2：Qwen2.5-3B/7B、Qwen3-1.7B，150训练steps；ALFWorld每step16任务×8rollouts，最长50turns，每任务另4次初态重放与4096token技能生成；搜索每step128任务×8rollouts。之前还要GLM-5.2标注的技能SFT。多轮环境训练与教师评分在单卡预计长时间，未作本地测速；不下载或启动。",
+      "local_code": "src/auto_research/reproductions/rsipo",
+      "deferred_execution_spec": "src/auto_research/reproductions/rsipo/deferred-spec.json",
+      "gpu_validation_passed": false
     },
     {
       "domain": "agent-research",
@@ -4745,6 +4795,28 @@
     },
     {
       "domain": "foundation-models",
+      "key": "ev-jepa",
+      "title": "EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference",
+      "paper_url": "https://arxiv.org/abs/2610.14324",
+      "detail_path": "reproductions/2610.14324-ev-jepa/README.md",
+      "topic": [
+        "jepa",
+        "video-representation",
+        "elastic-inference"
+      ],
+      "first_author": "Anxhelo Diko",
+      "first_author_affiliation": "Meta Reality Labs Research",
+      "published": "2026-10-09",
+      "priority": "P0",
+      "code": null,
+      "implementation_status": "deferred_high_cost",
+      "deferral_reason": "成本过高，暂不复现；原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。",
+      "local_code": "src/auto_research/reproductions/ev_jepa",
+      "deferred_execution_spec": "src/auto_research/reproductions/ev_jepa/deferred-spec.json",
+      "gpu_validation_passed": false
+    },
+    {
+      "domain": "foundation-models",
       "key": "frac-ssm",
       "title": "Fractional State Space Transition for Long Sequence Modeling",
       "paper_url": "https://arxiv.org/abs/2609.36314",
@@ -5335,6 +5407,42 @@
       "priority": "P1",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/jev-capability-a100-20261010.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "jev-regional-transfer",
+      "title": "Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages",
+      "paper_url": "https://arxiv.org/abs/2610.14112",
+      "detail_path": "system-one/2610.14112-regional-transfer/README.md",
+      "topic": [
+        "System One / JEV",
+        "公共评测与能力边界"
+      ],
+      "first_author": "Romi Fadli",
+      "first_author_affiliation": "Universitas Budi Luhur",
+      "published": "2026-10-09",
+      "code": "https://github.com/tnromy/evaluating-system-one-models-for-indonesian-regional-languages",
+      "adapter": "jev-regional-transfer",
+      "priority": "P1",
+      "summary": "在印尼区域语言上区分准确率、校准和错误排序能力，并以验证集选择置信度级联比例。本地复算作者固定公开预测，不调用商业服务，不使用 Jev 输出训练或蒸馏。"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "jev-request-audit",
+      "title": "The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval",
+      "paper_url": "https://arxiv.org/abs/2610.14631",
+      "detail_path": "system-one/2610.14631-request-audit/README.md",
+      "topic": [
+        "System One / JEV",
+        "公共评测与能力边界"
+      ],
+      "first_author": "Jianbo Chen",
+      "first_author_affiliation": "Tsinghua University",
+      "published": "2026-10-10",
+      "code": "未找到本论文 artifact 的公开下载地址（2026-10-14 核验）",
+      "adapter": "jev-request-audit",
+      "priority": "P1",
+      "summary": "把请求问题增加、证据增加和候选资格变化分开，量化严格翻转、动作变化及输出标签质量。本地实现配对审计协议；没有重跑原论文七模型，完整评测因成本和 artifact 不可得暂缓。"
     },
     {
       "domain": "foundation-models",
@@ -8872,6 +8980,31 @@
     },
     {
       "domain": "multimodal-models",
+      "key": "embedding-gemma2",
+      "title": "EmbeddingGemma 2: Open Multimodal Embeddings",
+      "paper_url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/",
+      "detail_path": "multimodal-models/embeddinggemma2/README.md",
+      "topic": [
+        "多模态基础模型",
+        "跨模态检索",
+        "Matryoshka 表示"
+      ],
+      "first_author": "Google DeepMind 官方模型发布（无论文一作排序）",
+      "first_author_affiliation": "Google DeepMind",
+      "published": "2026-10-06",
+      "code": "https://github.com/huggingface/transformers/tree/28034545c35acac05793695bd5c878f66e6b544e/src/transformers/models/embedding_gemma2",
+      "adapter": null,
+      "local_operator": "auto_research.multimodal.embedding_gemma2.EmbeddingGemma2Encoder",
+      "priority": "P0",
+      "implementation_status": "checkpoint_inference",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/embedding-gemma2-a100-20261014.json",
+      "checkpoint_revision": "914f7f89142e33e77833254d9c9b90c3cef7303b",
+      "evolve_integrated": false,
+      "summary": "加载官方图文 checkpoint，采用 attention-mask 均值池化、固定 MRL 截断和重新归一化。只做预算受限的公开检索推理，不复现原始预训练或完整多模态 benchmark。"
+    },
+    {
+      "domain": "multimodal-models",
       "key": "stacktok",
       "title": "StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection",
       "paper_url": "https://arxiv.org/abs/2609.16841",
@@ -10400,6 +10533,28 @@
       "code": null,
       "adapter": "locus",
       "priority": "P1"
+    },
+    {
+      "domain": "post-training",
+      "key": "loopsd",
+      "title": "LoOPSD: On-Policy Self-Distillation with Looped Teachers",
+      "paper_url": "https://arxiv.org/abs/2610.18162",
+      "detail_path": "reproductions/2610.18162-loopsd/README.md",
+      "topic": [
+        "on-policy-self-distillation",
+        "layer-route-search",
+        "iterative-teacher"
+      ],
+      "first_author": "Wei Fan",
+      "first_author_affiliation": "Anhui Province Key Laboratory of Digital Security",
+      "published": "2026-10-13",
+      "priority": "P1",
+      "code": null,
+      "implementation_status": "deferred_high_cost",
+      "deferral_reason": "成本过高，暂不复现；原文Appendix A：全部连续层区间先筛128题，24条候选再评872题，前5与标准路径评独立100题；每轮200updates×12题×4responses、每响应上限1024tokens，最多10轮。以Qwen3-1.7B/4B/8B等重复教师计算，完整路线搜索和OPD总预算明显较高；这是上限/配置推断而非实测时长，不做昂贵探针。",
+      "local_code": "src/auto_research/reproductions/loopsd",
+      "deferred_execution_spec": "src/auto_research/reproductions/loopsd/deferred-spec.json",
+      "gpu_validation_passed": false
     },
     {
       "domain": "post-training",
@@ -31625,6 +31780,28 @@
     },
     {
       "domain": "recommendation",
+      "key": "snap-dpa-relevance",
+      "title": "LLM-based User-Product Relevance Evaluation for Dynamic Product Advertising",
+      "paper_url": "https://arxiv.org/abs/2610.14550",
+      "detail_path": "reproductions/2610.14550-snap-dpa-relevance/README.md",
+      "topic": [
+        "ads-retrieval",
+        "llm-judge",
+        "evaluation"
+      ],
+      "first_author": "Wen Zhang",
+      "first_author_affiliation": "Snap Inc.",
+      "published": "2026-10-10",
+      "priority": "P0",
+      "code": null,
+      "implementation_status": "deferred_high_cost",
+      "deferral_reason": "成本过高，暂不复现；原文§4–5依赖10K私有日志经GPT-5、Gemini-2.5-Pro与多轮人工审定；生产student为Gemini-2.5-Flash微调并经Vertex AI调用。商业API、人工标注和私有数据不是当前单卡可直接复现的资源；未测量本地或API总成本，不启动付费教师调用或替换为启发式judge。",
+      "local_code": "src/auto_research/reproductions/snap_dpa_relevance",
+      "deferred_execution_spec": "src/auto_research/reproductions/snap_dpa_relevance/deferred-spec.json",
+      "gpu_validation_passed": false
+    },
+    {
+      "domain": "recommendation",
       "key": "snaplgr",
       "title": "LLM-Based Generative Retrieval for Snapchat Content Recommendation",
       "paper_url": "https://arxiv.org/abs/2607.28895",
@@ -34634,6 +34811,28 @@
     },
     {
       "domain": "recommendation",
+      "key": "unisgr-v2",
+      "title": "UniSGR-V2: Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation",
+      "paper_url": "https://arxiv.org/abs/2610.16132",
+      "detail_path": "reproductions/2610.16132-unisgr-v2/README.md",
+      "topic": [
+        "generative-recommendation",
+        "target-side-feature",
+        "multitask-ranking"
+      ],
+      "first_author": "Jun Yang",
+      "first_author_affiliation": "Alibaba International Digital Commerce Group",
+      "published": "2026-10-12",
+      "priority": "P0",
+      "code": null,
+      "implementation_status": "deferred_high_cost",
+      "deferral_reason": "成本过高，暂不复现；原文§4.1：24.2亿私有样本、646万用户、753万商品；8层512维GQA/SwiGLU-MoE解码器，64专家top-2、序列长度1024。数据不可用，原规模训练超出单卡A100/A30或Mac预算；没有实测本地耗时，不用昂贵试跑估算。",
+      "local_code": "src/auto_research/reproductions/unisgr_v2",
+      "deferred_execution_spec": "src/auto_research/reproductions/unisgr_v2/deferred-spec.json",
+      "gpu_validation_passed": false
+    },
+    {
+      "domain": "recommendation",
       "key": "univa",
       "title": "Unified Value Alignment for Generative Recommendation in Industrial Advertising",
       "paper_url": "https://arxiv.org/abs/2605.05803",
@@ -34782,6 +34981,76 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "recommendation",
+      "key": "wegr",
+      "title": "WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat",
+      "paper_url": "https://arxiv.org/abs/2610.16979",
+      "detail_path": "reproductions/2610.16979-wegr/README.md",
+      "topic": [
+        "generative-recommendation",
+        "semantic-id",
+        "preference-optimization"
+      ],
+      "first_author": "Jiajun Han / Guoxin Ma / Felix",
+      "first_author_affiliation": "WeChat E-commerce Search team（正文未单列作者机构）",
+      "published": "2026-10-12",
+      "code": null,
+      "adapter": {
+        "adapter_key": "wegr",
+        "arxiv_id": "2610.16979",
+        "title": "WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat",
+        "paper_url": "https://arxiv.org/abs/2610.16979",
+        "track": "recommendation",
+        "organization": "WeChat E-commerce Search team",
+        "published": "2026-10-12",
+        "code_url": null,
+        "topics": [
+          "generative-recommendation",
+          "semantic-id",
+          "preference-optimization"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/wegr",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "MovieLens-100K positive-event chronological leave-last-two"
+        ],
+        "baseline": "same CoCo-VAE and SFT initialization: SFT / exact-SID GRPO+MSFT / DHPO+MSFT",
+        "metrics": [
+          "arms.dhpo.test.mrr",
+          "arms.dhpo.test.hr_at_10"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "64 users; 24 tokenizer updates, 32 SFT updates, 18 matched RL updates per arm; no pretrained downloads",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/wegr-a100-20261014.json",
+        "online_evidence": [
+          {
+            "product": "WeChat E-commerce Search",
+            "metric": "Orders",
+            "lift_percent": 2.539,
+            "traffic": "production A/B versus incumbent; v1.2 removes 80% of other retrieval channels",
+            "source_url": "https://arxiv.org/html/2610.16979v1",
+            "source_location": "Section 4.4, Table 3",
+            "experiment_duration": "June 22 through August 4, 2026",
+            "significance": "p<0.05",
+            "retrieved_at": "2026-10-14"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P0"
     },
     {
       "domain": "recommendation",

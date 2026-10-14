@@ -2,12 +2,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
+| 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2610.13669](https://arxiv.org/abs/2610.13669) |
 | 公司/机构 | Dalian Maritime University |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 是：[作者仓库](https://github.com/NHLling/GRPO-B) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/NHLling/GRPO-B) |
 | Adapter | `grpo-difficulty-curriculum` |
 | 本地复现代码 | [`src/auto_research/reproductions/grpo_difficulty_curriculum/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/grpo_difficulty_curriculum/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |

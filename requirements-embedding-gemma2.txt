@@ -1,0 +1,14 @@
+# Isolated inference environment: do not combine with legacy HF-hub<2 extras.
+# Immutable upstream source adds EmbeddingGemma2 before the stable release.
+transformers @ https://github.com/huggingface/transformers/archive/28034545c35acac05793695bd5c878f66e6b544e.tar.gz
+huggingface-hub==2.2.0
+tokenizers==0.23.3
+torch>=2.6,<3
+torchvision>=0.21,<1
+Pillow>=11,<13
+safetensors>=0.8.0
+numpy>=2.0
+# Public COCO mirror preparation (no dataset download during installation).
+datasets>=4,<6
+fsspec>=2024.6
+pyarrow>=18

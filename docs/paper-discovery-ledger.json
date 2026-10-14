@@ -2,6 +2,32 @@
   "schema_version": 1,
   "batches": [
     {
+      "batch": "2026-10-14-affordable-selected-delivery",
+      "checked_at": "2026-10-14T16:17:46+08:00",
+      "scope_kind": "selected-paper-implementation",
+      "window": "selected 2026-10-09 through 2026-10-13 v1 papers, plus MemCon v3 and October-6 official-release backfill; not exhaustive coverage",
+      "sources": ["arXiv original method/evaluation passages", "official code and fixed public predictions", "Google official release and pinned model card"],
+      "required_tracks": ["recommendation", "foundation-model", "post-training", "agent", "system-one"],
+      "review_watermark_advanced": false,
+      "coverage_complete": false,
+      "delivery_artifact": "research-audits/2026-10-14-delivery.md",
+      "official_releases": [
+        {"source_id":"google/embeddinggemma-2","key":"embedding-gemma2","priority":"P0","track":"multimodal-model","status":"implemented","doc":"multimodal-models/embeddinggemma2/README.md","publication_date":"2026-10-06","intake_class":"official-release-historical-backfill","implementation_scope":"fixed official checkpoint text-image retrieval only; no pretraining reproduction","gpu_validation_artifact":"docs/gpu-validations/embedding-gemma2-a100-20261014.json"}
+      ],
+      "candidates": [
+        {"id":"2610.16979","key":"wegr","priority":"P0","track":"recommendation","status":"implemented","doc":"reproductions/2610.16979-wegr/README.md","implementation_scope":"CoCo-VAE + DHPO/MSFT bounded public-data training; negative A100 results retained; not production replication","gpu_validation_artifact":"docs/gpu-validations/wegr-a100-20261014.json"},
+        {"id":"2610.16132","key":"unisgr-v2","priority":"P0","track":"recommendation","status":"deferred","implementation_status":"deferred_high_cost","doc":"reproductions/2610.16132-unisgr-v2/README.md","reason":"成本过高，暂不复现；24.2亿样本、64专家和1024行为序列；未启动训练或下载"},
+        {"id":"2610.14550","key":"snap-dpa-relevance","priority":"P0","track":"recommendation","status":"deferred","implementation_status":"deferred_high_cost","doc":"reproductions/2610.14550-snap-dpa-relevance/README.md","reason":"成本过高，暂不复现；商业教师与不可得私有人工标签；不造本地标签替代"},
+        {"id":"2610.14112","key":"jev-regional-transfer","priority":"P1","track":"system-one","status":"implemented","doc":"system-one/2610.14112-regional-transfer/README.md","implementation_scope":"fixed public predictions reanalysis only; no paid API or training/distillation"},
+        {"id":"2610.14631","key":"jev-request-audit","priority":"P1","track":"system-one","status":"implemented","doc":"system-one/2610.14631-request-audit/README.md","implementation_scope":"request interventions and paired-prediction protocol only; no real seven-checkpoint rerun"},
+        {"id":"2607.13591","revision":3,"key":"memcon","priority":"P1","track":"agent","status":"implemented","doc":"agent-research/2607.13591-memcon/README.md","implementation_scope":"CPU memory controller with real retrieval/forgetting/consolidation; L1 mechanism, not full six-benchmark capability"},
+        {"id":"2610.14324","key":"ev-jepa","priority":"P0","track":"foundation-model","status":"deferred","implementation_status":"deferred_high_cost","doc":"reproductions/2610.14324-ev-jepa/README.md","reason":"成本过高，暂不复现；Meta原文128 GPU/300 epochs视频训练；不启动原规模下载"},
+        {"id":"2610.18162","key":"loopsd","priority":"P1","track":"post-training","status":"deferred","implementation_status":"deferred_high_cost","doc":"reproductions/2610.18162-loopsd/README.md","reason":"成本过高，暂不复现；重复路径搜索与最多十轮大模型更新"},
+        {"id":"2610.15772","key":"rsipo","priority":"P1","track":"agent","status":"deferred","implementation_status":"deferred_high_cost","doc":"reproductions/2610.15772-rsipo/README.md","reason":"成本过高，暂不复现；3B/7B多环境长轨迹、教师标注、技能重放与多轮训练"},
+        {"id":"2610.15864","priority":"P2","track":"recommendation","status":"rejected","decision":"excluded_missing_online_ab","review_artifact":"research-audits/oct14-screening/netflix-sid-excluded.json","reason":"正文§5明确缺少线上A/B；不自动批准工业经典例外"}
+      ]
+    },
+    {
       "batch": "2026-08-08-p0-p1-closed-audit",
       "checked_at": "2026-08-08T23:59:59+08:00",
       "window": "2026-01-01 through 2026-08-08",

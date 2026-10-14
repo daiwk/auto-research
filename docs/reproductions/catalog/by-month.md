@@ -3,6 +3,9 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-10
+- [UniSGR-V2 / TacGR](../2610.16132-unisgr-v2/README.md)：逐级预测连续商品侧信息并在解码器内交叉，同时补充语义码生成和多目标排序；锚定塔防坍塌，单向掩码隔离噪声。**成本过高，暂不复现；待验收，未注册可执行入口。**
+- [WeGR](../2610.16979-wegr/README.md)：联合协同语义量化与生成检索，以码字刷新、残差保真和碰撞约束改善编码，再逐级扩大偏好奖励与策略更新的SID前缀。
+- [LLM-based User-Product Relevance Evaluation for DPA](../2610.14550-snap-dpa-relevance/README.md)：用语义ID与事件分组形成带权意图，人工对齐自动发现的相关性准则并蒸馏学生judge，将候选覆盖聚合为MicroRel/MacroRel。**成本过高，暂不复现；待验收，未注册可执行入口。**
 - [FORTE](../2610.13806-forte/README.md)：用类型约束的配对扰动、跨时间窗多目标门槛和真实重训选择可退役特征，再审计依赖消费者的移除顺序。
 - [AgentWebRec](../2610.01705-agent-web-rec/README.md)：以语义—时间衰减检索私有记忆，并在低置信时门控协作偏好模式。
 - [Neither Black nor White: Balancing Semantic and Collaborative Signals with Graph-Informed Semantic IDs (GrIS)](../2610.01533-gris/README.md)：将内容语义与协同图联合写入层级 Semantic ID；图为空时退化为内容量化。

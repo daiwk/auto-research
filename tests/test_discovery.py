@@ -1,4 +1,5 @@
 import datetime as dt
+import json
 import pytest
 
 from auto_research.discovery import (
@@ -184,7 +185,6 @@ def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):
         "new",
     ]
     assert [item["priority_review_required"] for item in candidates] == [False, False, True, False]
-
     payload = build_discovery_payload(
         track="recommendation",
         start_date=dt.date(2026, 8, 1),
@@ -203,6 +203,17 @@ def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):
     assert summary.index("Google / Meta 重点复核") < summary.index("本窗口其他未审候选")
     assert "晚索引或历史未审候选 0 篇" in summary
     assert "Netflix 及其他机构进入普通候选队列" in summary
+
+
+def test_deferred_documents_are_reviewed_not_implemented_and_releases_are_not_arxiv(tmp_path):
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(json.dumps({"papers": [
+        {"paper_url": "https://arxiv.org/abs/2610.14324", "implementation_status": "deferred_high_cost", "adapter": None},
+        {"paper_url": "https://blog.google/embeddinggemma-2/", "implementation_status": "checkpoint_inference"},
+    ]}))
+    ledger = tmp_path / "ledger.json"
+    ledger.write_text('{"batches": []}')
+    assert repository_paper_statuses(manifest, ledger) == {"2610.14324": "reviewed"}
 
 
 def test_summary_separates_recent_publications_from_late_indexed_backlog():

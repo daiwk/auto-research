@@ -5,9 +5,9 @@
 | 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2605.09040](https://arxiv.org/abs/2605.09040) |
-| 公司/机构 | Kuaishou；一作 Hongwei Zhang |
+| 公司/机构 | Kuaishou |
 | 首次公开日期 | 2026-05-09（arXiv v1） |
-| 原文开源代码 | 否：未找到原作者公开实现（核查日期：2026-10-13） |
+| 原文开源代码 | 否：未找到原作者公开实现（核查日期：2026-10-13；实现依据 v4） |
 | Adapter | `uxsid` |
 | 本地复现代码 | [`src/auto_research/reproductions/uxsid/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/uxsid/) |
 

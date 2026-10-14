@@ -1,0 +1,21 @@
+{
+  "domain": "multimodal-models",
+  "key": "embedding-gemma2",
+  "title": "EmbeddingGemma 2: Open Multimodal Embeddings",
+  "paper_url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/",
+  "detail_path": "multimodal-models/embeddinggemma2/README.md",
+  "topic": ["多模态基础模型", "跨模态检索", "Matryoshka 表示"],
+  "first_author": "Google DeepMind 官方模型发布（无论文一作排序）",
+  "first_author_affiliation": "Google DeepMind",
+  "published": "2026-10-06",
+  "code": "https://github.com/huggingface/transformers/tree/28034545c35acac05793695bd5c878f66e6b544e/src/transformers/models/embedding_gemma2",
+  "adapter": null,
+  "local_operator": "auto_research.multimodal.embedding_gemma2.EmbeddingGemma2Encoder",
+  "priority": "P0",
+  "implementation_status": "checkpoint_inference",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/embedding-gemma2-a100-20261014.json",
+  "checkpoint_revision": "914f7f89142e33e77833254d9c9b90c3cef7303b",
+  "evolve_integrated": false,
+  "summary": "加载官方图文 checkpoint，采用 attention-mask 均值池化、固定 MRL 截断和重新归一化。只做预算受限的公开检索推理，不复现原始预训练或完整多模态 benchmark。"
+}

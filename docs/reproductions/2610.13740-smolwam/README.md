@@ -9,7 +9,7 @@
 | 论文链接 | [arXiv 2610.13740](https://arxiv.org/abs/2610.13740) |
 | 公司/机构 | ML Collective |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 是：[作者 SmolWAM 仓库](https://github.com/iitimii/SmolWAM) |
+| 原文开源代码 | 是：[官方/作者代码](https://github.com/iitimii/SmolWAM) |
 | Adapter | `smolwam` |
 | 本地复现代码 | [`src/auto_research/reproductions/smolwam/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/smolwam/) |
 

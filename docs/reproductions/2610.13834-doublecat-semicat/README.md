@@ -2,12 +2,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
+| 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2610.13834](https://arxiv.org/abs/2610.13834) |
 | 公司/机构 | Apple / University of Oxford / University of Amsterdam |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 否：截至 2026-10-13，原文未链接作者实现，未找到公开作者仓库；通用 tiktoken 不是本篇代码 |
+| 原文开源代码 | 否：未找到原作者公开实现（截至 2026-10-13；原文只链接通用 tiktoken） |
 | Adapter | `doublecat-semicat` |
 | 本地复现代码 | [`src/auto_research/reproductions/doublecat_semicat/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/doublecat_semicat/) |
 

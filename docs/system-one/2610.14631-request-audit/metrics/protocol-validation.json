@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:jev-request-audit",
+  "evaluation_protocol": {
+    "tier": "L0_protocol_tests",
+    "seeds": [
+      20260928
+    ],
+    "seed_roles": [
+      {
+        "role": "query_cluster_bootstrap_test_rng",
+        "value": 20260928
+      }
+    ],
+    "model_training_seeds": [],
+    "formal_comparison": false,
+    "claim_policy": "L0 formula/fixture tests only. Bootstrap RNG is not a model seed; no checkpoint inference or capability comparison was performed."
+  },
+  "provenance": {
+    "artifact_path": "docs/system-one/2610.14631-request-audit/metrics/protocol-validation.json",
+    "dataset_fingerprint": "sha256:27208a135c430856d5f8d5ae6a2a8e70a2a54718c9ea15dc368f7c154825a502",
+    "fingerprint_scope": "Committed protocol-test source including hand-calculated paired fixtures; not TREC data or author predictions",
+    "fixture_source_path": "tests/test_jev_request_audit.py"
+  },
+  "paper": "2610.14631",
+  "evaluation_tier": "L0_protocol_tests",
+  "diagnostic_only": true,
+  "evaluated_on": "2026-10-14",
+  "model_inference_performed": false,
+  "native_checkpoint_coverage": 0,
+  "source_kind": "hand-calculated protocol fixtures, not author predictions",
+  "checks": [
+    "separated interventions",
+    "gold-free independent compilation",
+    "allowed alphabet support mass",
+    "conditional retained A/B preference",
+    "strict flips excluding ties",
+    "action change without binary flip",
+    "query-cluster year-separated bootstrap",
+    "incomplete scenario rejection"
+  ],
+  "claim_scope": "Formula and protocol implementation only; no reproduction of seven-model capability results",
+  "deferred": "Full multi-checkpoint inference: cost and unavailable public paper artifact"
+}

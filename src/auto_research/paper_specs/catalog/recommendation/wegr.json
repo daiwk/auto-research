@@ -1,0 +1,9 @@
+{
+  "domain": "recommendation",
+  "key": "wegr",
+  "detail_path": "reproductions/2610.16979-wegr/README.md",
+  "first_author": "Jiajun Han / Guoxin Ma / Felix",
+  "first_author_affiliation": "WeChat E-commerce Search team（正文未单列作者机构）",
+  "priority": "P0",
+  "adapter": {"spec_key": "wegr"}
+}

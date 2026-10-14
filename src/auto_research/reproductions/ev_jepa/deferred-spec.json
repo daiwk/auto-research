@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "deferred_reproduction_plan",
+  "key": "ev-jepa",
+  "arxiv_id": "2610.14324",
+  "title": "EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference",
+  "paper_url": "https://arxiv.org/abs/2610.14324",
+  "organization": "Meta Reality Labs Research / FAIR at Meta",
+  "published": "2026-10-09",
+  "upstream_code": "not found in fixed-v1 paper-linked primary sources (2026-10-14)",
+  "track": "foundation-models",
+  "topics": [
+    "jepa",
+    "video-representation",
+    "elastic-inference"
+  ],
+  "local_code": "src/auto_research/reproductions/ev_jepa",
+  "documentation": "docs/reproductions/2610.14324-ev-jepa/README.md",
+  "proposed_fidelity": "core_mechanism",
+  "proposed_evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "Kinetics-710",
+    "Something-Something V2",
+    "HowTo100M"
+  ],
+  "baseline": "固定宽度独立训练 / MatFormer-style / US-Net-style；必须同教师数据和掩码",
+  "metrics": [
+    "ssv2_top1",
+    "k400_top1",
+    "ek100_recall_at_5",
+    "communication_payload"
+  ],
+  "mechanisms": [
+    "Nested full-width parameter slicing and learned cross-width projection",
+    "Transition-aware triplet training of small hybrid and large paths",
+    "Frozen V-JEPA2 dense masked-token target and elastic token compression"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "",
+  "implementation_status": "deferred_high_cost",
+  "fidelity_is_planned_only": true,
+  "deferral_reason": "成本过高，暂不复现；原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。",
+  "cost_assessment": {
+    "checked_on": "2026-10-14",
+    "source": "https://arxiv.org/html/2610.14324v1",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac; not simultaneous multi-GPU",
+    "basis": "原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。",
+    "measured_locally": false,
+    "downloads_started": false,
+    "experiments_started": false
+  },
+  "execution": {
+    "enabled": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": null,
+    "activation_requirements": [
+      "Explicit user request after cost warning",
+      "Pinned public checkpoint/data and validation/test isolation",
+      "Implement all defining mechanisms without heuristic or gold-answer substitution",
+      "Actual NVIDIA A100/A30 execution and sanitized receipt for advertised CUDA path"
+    ],
+    "paper": {
+      "code_url": null,
+      "organization": "Meta Reality Labs Research / FAIR at Meta",
+      "published": "2026-10-09",
+      "online_ab": []
+    }
+  }
+}

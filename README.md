@@ -52,6 +52,11 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+[10 月 14 日成本受限交付清单](docs/research-audits/2026-10-14-delivery.md)包含 WeGR 的真实缩比训练、
+MemCon 的记忆控制器、JEV 公开预测复算/请求审计，以及 EmbeddingGemma 2 官方 checkpoint 接入。
+另五篇高成本论文只收录中文解读和禁用的延期计划；不注册训练入口、不填充假指标，也不自动进入 Evolve。
+本轮不是新窗口全来源审查，审查水位仍为 2026-10-12。
+
 [10 月 13 日实施检查点](docs/design/oct13-implementation-scope.md)保留本轮 19 篇的固定审查范围；
 其中 18 篇提供经真实 GPU 验证的缩放机制入口，MBS 按用户决定标注“成本过高，暂不复现”，
 仅保留研究资料与失败证据，不注册可执行入口。机制验证不等于原 benchmark 复现或能力提升；
@@ -66,7 +71,7 @@ Weakest-Link、CMP、TESS、RLCPR 和 Mingbird。均为有明确边界的 L1 机
 负结果和未完成原始 benchmark 都保留在各篇详情与[运行审计](docs/research-audits/oct11-runtime-audit.md)中；
 “机制执行通过”不等同于“模型效果提高”，也不自动表示已接入 Evolve。
 
-仓库目前注册 **405 个**论文 adapter，统一事实源是
+仓库目前注册 **406 个**论文 adapter，统一事实源是
 [`docs/research-manifest.json`](docs/research-manifest.json)。站点提供按研究域、机构、
 主题和年份浏览的[论文实现索引](docs/reproductions/README.md)，每篇详情页包含论文链接、
 一作机构、发布日期、原作者代码状态、本地 adapter/代码路径、架构与公式、原文线上/离线

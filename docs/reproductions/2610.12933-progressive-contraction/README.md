@@ -2,12 +2,12 @@
 
 ## 论文信息
 
-| 字段 | 内容 |
+| 项目 | 内容 |
 | --- | --- |
 | 论文链接 | [arXiv 2610.12933](https://arxiv.org/abs/2610.12933) |
 | 公司/机构 | National University of Singapore / Nanjing University / Fudan University / The University of Sydney / The Chinese University of Hong Kong / Nanyang Technological University |
 | 首次公开日期 | 2026-10-09（arXiv v1） |
-| 原文开源代码 | 否：原文与关联原始来源未找到本方法已发布源码（2026-10-13核验）；不是宣称全网不存在 |
+| 原文开源代码 | 否：not released / not found in paper-linked primary sources (2026-10-13) |
 | Adapter | `progressive-contraction` |
 | 本地复现代码 | [`src/auto_research/reproductions/progressive_contraction/`](https://github.com/daiwk/auto-research/tree/main/src/auto_research/reproductions/progressive_contraction/) |
 | 实现/评测层级 | 核心算法实际模型路径；L0/L1机制诊断，不是原benchmark完整复现 |

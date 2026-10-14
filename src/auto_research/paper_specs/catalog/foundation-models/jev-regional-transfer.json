@@ -1,0 +1,15 @@
+{
+  "domain": "foundation-models",
+  "key": "jev-regional-transfer",
+  "title": "Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages",
+  "paper_url": "https://arxiv.org/abs/2610.14112",
+  "detail_path": "system-one/2610.14112-regional-transfer/README.md",
+  "topic": ["System One / JEV", "公共评测与能力边界"],
+  "first_author": "Romi Fadli",
+  "first_author_affiliation": "Universitas Budi Luhur",
+  "published": "2026-10-09",
+  "code": "https://github.com/tnromy/evaluating-system-one-models-for-indonesian-regional-languages",
+  "adapter": "jev-regional-transfer",
+  "priority": "P1",
+  "summary": "在印尼区域语言上区分准确率、校准和错误排序能力，并以验证集选择置信度级联比例。本地复算作者固定公开预测，不调用商业服务，不使用 Jev 输出训练或蒸馏。"
+}

@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| on-policy-self-distillation | [LoOPSD: On-Policy Self-Distillation with Looped Teachers](../reproductions/2610.18162-loopsd/README.md) | Anhui Province Key Laboratory of Digital Security，2026-10-13 | 未发现官方代码 | 计划键 `loopsd`：成本过高，暂不复现；待验收（仅研究资料） |
 | GRPO difficulty curriculum | [A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO](../reproductions/2610.13669-grpo-difficulty-curriculum/README.md) | Dalian Maritime University，2026-10-09 | [已开源](https://github.com/NHLling/GRPO-B) | `grpo-difficulty-curriculum` |
 | Multi-teacher distillation | [Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation](../reproductions/2610.13521-road-mopd/README.md) | Nanjing University / JD.com，2026-10-09 | 未发现官方代码 | `road-mopd` |
 | Capability boundary | [BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation](../reproductions/2610.13285-boundary-evo/README.md) | Shanghai Artificial Intelligence Laboratory，2026-10-09 | 未发现官方代码 | `boundary-evo` |
@@ -24,7 +25,7 @@
 | Trajectory-aware policy optimization | [Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL](../reproductions/2610.13020-tapo-trajectory/README.md) | Tsinghua University AIR，2026-10-09 | 未发现官方代码 | `tapo-trajectory` |
 | On-policy distillation | [DIAL-OPD: Learning More from Fewer Tokens in On-Policy Distillation](2610.11659-dial-opd/README.md) | Eastern Institute of Technology, Ningbo / The Hong Kong Polytechnic University，2026-10-08 | [已开源](https://github.com/EIT-NLP/DIAL-OPD) | `dial-opd` |
 | RLVR | [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](2610.11854-grpo-dropout/README.md) | Harbin Institute of Technology (Shenzhen)，2026-10-08 | [已开源](https://github.com/hexuandeng/GRPODropout) | `grpo-dropout` |
-| RLVR data synthesis | [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../reproductions/2610.12659-magicbeanstalk/README.md) | University of Washington，2026-10-08 | 未发现官方代码 | 成本过高，暂不复现；待验收（仅研究资料） |
+| RLVR data synthesis | [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../reproductions/2610.12659-magicbeanstalk/README.md) | University of Washington，2026-10-08 | 未发现官方代码 | 计划键 `magicbeanstalk`：成本过高，暂不复现；待验收（仅研究资料） |
 | On-policy distillation | [MetaOPD: Meta-Learned Token Weighting for On-Policy Distillation](2610.11989-meta-opd/README.md) | East China Normal University，2026-10-08 | 未发现官方代码 | `meta-opd` |
 | On-policy 蒸馏 | [PIVOT: Perplexity-Informed KD-to-RL Transition Scheduling for Vertical-Domain Few-Shot Distillation](2610.11167-pivot/README.md) | Ping An Technology / University of Science and Technology of China，2026-10-08 | 未发现官方代码 | `pivot` |
 | On-policy distillation | [ReCal: Calibrating Structured Pruning for On-Policy Distillation Recovery](2610.11332-recal/README.md) | Zhongguancun Academy / Tencent / University of Science and Technology of China，2026-10-08 | [已开源](https://github.com/jianghoucheng/ReCal) | `recal` |
