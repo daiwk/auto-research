@@ -58,10 +58,14 @@ def construction_schema(operation):
 
 
 class CheckpointConstruction:
-    def __init__(self,teacher,student,ledger,*,max_tokens=768,rollouts=4,teacher_attempts=2,construction_json_schema=False):
+    def __init__(self,teacher,student,ledger,*,max_tokens=768,rollouts=4,teacher_attempts=2,construction_json_schema=False,
+                 construction_teacher_sample=True):
         if type(construction_json_schema) is not bool:
             raise ValueError("construction_json_schema must be an explicit boolean")
         self.construction_json_schema=construction_json_schema
+        if type(construction_teacher_sample) is not bool:
+            raise ValueError("construction_teacher_sample must be an explicit boolean")
+        self.construction_teacher_sample=construction_teacher_sample
         self.teacher,self.student,self.ledger=teacher,student,ledger
         self.max_tokens,self.rollouts,self.teacher_attempts=max_tokens,rollouts,teacher_attempts
         self.students=(student,teacher)  # scaled ordered same-family pool
@@ -84,9 +88,9 @@ class CheckpointConstruction:
         # Independent solving receives question ONLY, not proposed answer/trace.
         for attempt in range(self.teacher_attempts):
             response=self.ledger.sample(self.teacher,problem_messages(problem.question),
-                role="construction_verification",max_tokens=self.max_tokens)[0]
+                role="construction_verification",max_tokens=self.max_tokens,sample=self.construction_teacher_sample)[0]
             audit=self.record_response(response,role="construction_verification",
-                input_gold_scope="question-only-no-answer-or-trace",attempt=attempt+1,
+                input_gold_scope="question-only-no-answer-or-trace",attempt=attempt+1,sample=self.construction_teacher_sample,
                 question_sha256=hashlib.sha256(problem.question.encode()).hexdigest(),verification_completed=False)
             accepted=not response.truncated and bool(verified_reward(response.text,problem.answer))
             audit.update(verification_completed=True,accepted=accepted,
@@ -115,7 +119,7 @@ class CheckpointConstruction:
                     input_gold_scope="child-worked-examples-only-no-parent-answer-or-trace" if worked_examples
                                      else "question-only-no-answer-or-trace",
                     question_sha256=hashlib.sha256(problem.question.encode()).hexdigest(),reward=reward,
-                    worked_example_count=len(worked_examples))
+                    worked_example_count=len(worked_examples),sample=True)
             rates.append(sum(rewards)/len(rewards))
         return rates
 
@@ -124,9 +128,9 @@ class CheckpointConstruction:
         schema_kwargs={} if schema is None else {"json_schema":schema}
         response=self.ledger.sample(self.teacher,({"role":"user","content":instruction+"\n"+
             "Output JSON only, without prose or code fences.\n"+json.dumps(context,ensure_ascii=False)},),
-            role="construction_teacher",max_tokens=self.max_tokens,**schema_kwargs)[0]
+            role="construction_teacher",max_tokens=self.max_tokens,sample=self.construction_teacher_sample,**schema_kwargs)[0]
         audit=self.record_response(response,role="construction_teacher",input_gold_scope="training-construction-context",
-            operation=operation,parsing_completed=False)
+            operation=operation,parsing_completed=False,sample=self.construction_teacher_sample)
         if self.construction_json_schema:
             schema_sha=hashlib.sha256(json.dumps(schema,separators=(",",":"),allow_nan=False).encode()).hexdigest()
             metadata=getattr(self.teacher,"last_json_schema_generation",{})
@@ -202,7 +206,7 @@ class CheckpointConstruction:
         rewards=[0. if r.truncated else verified_reward(r.text,problem.answer) for r in responses]
         for response,reward in zip(responses,rewards):
             self.record_response(response,role="target_calibration",input_gold_scope="question-only-no-answer-or-trace",
-                question_sha256=hashlib.sha256(problem.question.encode()).hexdigest(),reward=reward)
+                question_sha256=hashlib.sha256(problem.question.encode()).hexdigest(),reward=reward,sample=True)
         return (rewards,[r.truncated for r in responses])
 
 
@@ -241,6 +245,9 @@ def run(config,*,seed=42):
     construction_json_schema=config.get("construction_json_schema",False)
     if type(construction_json_schema) is not bool:
         raise ValueError("construction_json_schema must be an explicit boolean")
+    construction_teacher_sample=config.get("construction_teacher_sample",True)
+    if type(construction_teacher_sample) is not bool:
+        raise ValueError("construction_teacher_sample must be an explicit boolean")
     train,validation,split=load_split(config)
     ledger,student=CostLedger(),load_policy(config,seed=seed)
     teacher=load_policy(config,role="teacher",seed=seed)
@@ -250,7 +257,8 @@ def run(config,*,seed=42):
         raise ValueError("positive construction/RLVR budget and >=2 real group outcomes required")
     backend=CheckpointConstruction(teacher,student,ledger,max_tokens=max_tokens,rollouts=group,
                                   teacher_attempts=int(config.get("teacher_attempts",2)),
-                                  construction_json_schema=construction_json_schema)
+                                  construction_json_schema=construction_json_schema,
+                                  construction_teacher_sample=construction_teacher_sample)
     builder=MagicBeanStalk(backend,depth=int(config.get("depth",1)),
                           decomposition_retries=int(config.get("decomposition_retries",2)),
                           synthesis_retries=int(config.get("synthesis_retries",2)))
@@ -270,10 +278,12 @@ def run(config,*,seed=42):
     except Exception as exc:
         raise ExecutionFailure("MBS construction interrupted; actual partial trace retained",
             {"error_type":type(exc).__name__,"construction_audits":builder.audit,
+             "construction_teacher_sample":construction_teacher_sample,
              "construction_response_audits":backend.response_audits,"cost":ledger.to_dict()}) from exc
     if not synthetic:
         raise ExecutionFailure("no actual effectivity-validated, novel, verified, target-Goldilocks MBS descendant",
-                               {"construction_audits":builder.audit,"construction_response_audits":backend.response_audits,
+                               {"construction_teacher_sample":construction_teacher_sample,
+                                "construction_audits":builder.audit,"construction_response_audits":backend.response_audits,
                                 "hard_root_selection":root_selection,
                                 "cost":ledger.to_dict()})
     torch.manual_seed(seed)
@@ -300,12 +310,14 @@ def run(config,*,seed=42):
     changed=before!=student.trainable_digest()
     if not changed:
         raise ExecutionFailure("MBS descendants survived construction but actual RLVR groups supplied no nonzero advantage",
-                               {"training":training,"control_training":control_training,
+                               {"construction_teacher_sample":construction_teacher_sample,
+                                "training":training,"control_training":control_training,
                                 "construction_audits":builder.audit,"hard_root_selection":root_selection,
                                 "construction_response_audits":backend.response_audits,
                                 "cost":ledger.to_dict()})
     return result_payload("magicbeanstalk",config,seed,split,student,ledger,baseline,after,training,
         parameters_changed=changed,teacher=teacher.provenance,construction_audits=builder.audit,
+        construction_teacher_sample=construction_teacher_sample,
         construction_response_audits=backend.response_audits,
         hard_root_selection=root_selection,
         synthetic_problem_count=len(synthetic),control={"method":"seed-rlvr","training":control_training,"metrics":control_metrics},
