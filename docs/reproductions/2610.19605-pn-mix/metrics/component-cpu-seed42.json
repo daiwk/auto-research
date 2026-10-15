@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "method": "pn-mix-packed-cache-component",
+  "manifest_ref": "reproduction:pn-mix",
+  "seed": 42,
+  "diagnostic_only": true,
+  "dataset": {
+    "id": "public-domain-Hamlet-byte-diagnostic",
+    "revision": "sha256:378fdfa57b25e18e5eadfd448a7b4a17bb017893f425c1b0d35b1f2c342568c6"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "L1 actual-cache attention diagnostic; not language capability or throughput evidence"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.19605-pn-mix/metrics/component-cpu-seed42.json",
+    "dataset_fingerprint": "sha256:378fdfa57b25e18e5eadfd448a7b4a17bb017893f425c1b0d35b1f2c342568c6",
+    "dataset": "public-domain-Hamlet-byte-diagnostic",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "model": "random-initialized-single-layer-RoPE-GQA",
+    "model_revision": "pn-mix-reference-rope-v1",
+    "pretrained": false,
+    "command": "PYTHONPATH=src python scripts/run_pn_mix.py --device cpu --seed 42"
+  },
+  "protocol": {
+    "prefill_tokens": 384,
+    "decode_tokens": 64,
+    "sink_tokens": 32,
+    "group_size": 128,
+    "residual_size": 128,
+    "key_high_bits": 3,
+    "key_low_bits": 1,
+    "high_ratio": 0.5,
+    "value_bits": 2,
+    "pair_layout": "adjacent",
+    "input_and_metadata_precision": "float32",
+    "fused_kernel": false,
+    "evolve_eligible": false
+  },
+  "metrics": {
+    "key_mse": 0.06574339419603348,
+    "value_mse": 0.05338819697499275,
+    "attention_kl": 0.011478330008685589,
+    "attention_output_mse": 0.004013621713966131,
+    "attention_output_cosine": 0.9500405192375183,
+    "sink_key_max_error": 0.0,
+    "saliency_computations": 1,
+    "mask_unchanged_after_decode": true,
+    "actual_attention_calls": 66,
+    "quantized_tokens": 384,
+    "residual_tokens": 32,
+    "key_bytes": 24068,
+    "value_bytes": 28672,
+    "persistent_cache_bytes": 52740,
+    "temporary_dequantized_cache_included": false
+  },
+  "full_experiment": {
+    "status": "not_reproduced_high_cost",
+    "review_done": true
+  }
+}

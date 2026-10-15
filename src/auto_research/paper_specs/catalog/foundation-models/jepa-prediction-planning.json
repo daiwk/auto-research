@@ -1,0 +1,21 @@
+{
+  "domain": "foundation-models",
+  "key": "jepa-prediction-planning",
+  "title": "One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models",
+  "paper_url": "https://arxiv.org/abs/2610.19375v1",
+  "detail_path": "foundation-models/2610.19375-jepa-prediction-planning/README.md",
+  "topic": ["世界模型评测", "冻结物理状态解码器", "预测与规划配对比较"],
+  "first_author": "Joshua Cheung",
+  "first_author_affiliation": "论文未列机构",
+  "published": "2026-10-14",
+  "code": null,
+  "adapter": null,
+  "local_operator": "auto_research.jepa_evaluation.run_protocol",
+  "priority": "P1",
+  "implementation_status": "evaluation_protocol_interface",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_artifact": null,
+  "evolve_integrated": false,
+  "summary": "在训练期真实 encoder 表征上拟合并冻结物理状态解码器，分别计算表示误差、预测误差和差值；规划结果独立导入，保留配对种子、层级 bootstrap 与噪声审计。只实现 CPU 协议，不重训世界模型、不复现三环境完整实验。"
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "manifest_ref": "agent-research:autoformbench",
+  "seeds": [],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l0_interface",
+  "kind": "fixed_release_interface_validation_not_experiment",
+  "dataset": {
+    "id": "Meta-AutoformBench-fixed-release-metadata",
+    "revision": "af1aa38fd44e019e566bce0b5a168609a886d8e6"
+  },
+  "checks": {
+    "task_ids": 341,
+    "sources": 24,
+    "proof_obligations": 1155,
+    "result_files_imported": 9,
+    "official_rows_parsed": 3069,
+    "budget_overrun_rows_retained": 1
+  },
+  "local_model_inference_performed": false,
+  "lean_verification_performed": false,
+  "local_capability_score": null,
+  "source_condition_of_imported_results": "source-present",
+  "exported_workspace_condition": "source-free",
+  "input_sha256": {
+    "manifest": "8fcde3381403e456b42639ab040a2cc47cb02369bddfedc345fa7d42cd8af674",
+    "sources": "854135c5c49acc2506a38a08dfbd5f205f71a5e26f40f0d38b865aedf60e73c8",
+    "results": {
+      "deepseek-v4.1-flash": "3a1dff2ae51ddfa19cd8fec259401eed80fe05e3e2a2d4c0688cf22db9f321af",
+      "fable-5": "1782cb70e5ace247ef68544ce8b4eaabe3bc0bee5a3f0adcf2330a5e4e43ab86",
+      "gemini-3.7-flash": "b9cf19baf50d7e412542e9f7461d7056f78fa53e2292bc24d0891ad4fab00d2d",
+      "gpt-5.6-sol": "8c27c44596ae0bd37dda27ddde1cbd01ba6ba001cdb6841cf3bcca05809abb6e",
+      "gpt-6-astra": "64a2174e047eac29468a7925768f1671f9c9ab8fd59d4547f78b1d80ff340bd5",
+      "kimi-k3": "3a24b1722663fd1968a140f3f9433d2677c7e81cb3379497cc9d85f9b701c401",
+      "opus-4.8": "a8134523cb7a96dbea01156dd190c8589f0d45448d2f9599305442243a8e5bb5",
+      "opus-5": "bfcfa3893a4040f61ed8924df850b921bb406480f107e9cf438e9b7cd5c9b8cc",
+      "sonnet-5": "f323d879c43e681b488b391b23231dccaf3614f19f43e933d29234f9ee132cfb"
+    }
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [],
+    "formal_comparison": false,
+    "claim_policy": "Deterministic fixed-file parser validation; no model or stochastic experiment was run, so a random seed is not applicable."
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/autoformbench/validation/interface-cpu.json",
+    "dataset_fingerprint": "MANIFEST:8fcde3381403e456b42639ab040a2cc47cb02369bddfedc345fa7d42cd8af674;SOURCES:854135c5c49acc2506a38a08dfbd5f205f71a5e26f40f0d38b865aedf60e73c8"
+  }
+}

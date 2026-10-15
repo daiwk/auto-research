@@ -1,0 +1,99 @@
+{
+  "schema_version": 2,
+  "protocol": "frozen-decoder-prediction-planning-v1",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "seed": 42,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "controlled-array-interface-example",
+    "revision": "controlled-v1",
+    "synthetic": true
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "metrics": {
+    "representation_error": 0.0049037730411983825,
+    "prediction_error": 0.027396742591945845,
+    "excess_error": 0.022492969550747463,
+    "latent_drift": 0.20990922416453406,
+    "persistence_error": 0.0029629629629629593,
+    "constant_velocity_error": 5.021684003143015e-33
+  },
+  "decoder": {
+    "kind": "two-layer-ReLU-MLP",
+    "hidden": 16,
+    "best_epoch": 59,
+    "validation_loss": 0.001815500112531899,
+    "fit_role": "provided encoder latents on training-only episodes; no predicted/test latents"
+  },
+  "fidelity": {
+    "metrics": {
+      "representation_error": 0.0049037730411983825,
+      "prediction_error": 0.027396742591945845,
+      "excess_error": 0.022492969550747463,
+      "latent_drift": 0.20990922416453406,
+      "persistence_error": 0.0029629629629629593,
+      "constant_velocity_error": 5.021684003143015e-33
+    },
+    "episode_metrics": {
+      "representation_error": {
+        "test0": 0.007391825317395253,
+        "test1": 0.002516864414765249,
+        "test2": 0.004802629391434646
+      },
+      "prediction_error": {
+        "test0": 0.033109475498363836,
+        "test1": 0.005310708214545908,
+        "test2": 0.043770044062927796
+      },
+      "excess_error": {
+        "test0": 0.025717650180968582,
+        "test1": 0.002793843799780659,
+        "test2": 0.03896741467149315
+      },
+      "latent_drift": {
+        "test0": 0.22360679774997902,
+        "test1": 0.1825140769936442,
+        "test2": 0.22360679774997894
+      },
+      "persistence_error": {
+        "test0": 0.0029629629629629615,
+        "test1": 0.0029629629629629615,
+        "test2": 0.0029629629629629554
+      },
+      "constant_velocity_error": {
+        "test0": 0.0,
+        "test1": 4.565167275584559e-34,
+        "test2": 1.4608535281870588e-32
+      }
+    },
+    "episodes": 3,
+    "transitions": 4,
+    "aggregation": "transitions within episodes, then equally weighted episodes",
+    "decoder_sha256": "47454b06cdff1a3351d7be507e866431d06e0a273085bceb283962d0ae5a14fc",
+    "normalization_sha256": "71557e40fc97dab5c6c71d9cdac39cac089caad5a30b7e6ee16aa81e661b0fc0",
+    "decoder_dominance_ratio": 0.8210089018889419,
+    "decoder_dominance_warning": false,
+    "test_isolated": true,
+    "prediction_is_not_planning": true
+  },
+  "limitations": [
+    "CPU protocol component, not a new JEPA checkpoint or a full benchmark reproduction.",
+    "Planning rows are external measurements; the component does not generate planner success.",
+    "Predictive fidelity is never used as a replacement for planning outcomes."
+  ],
+  "input_sha256": "0094a00e7546726a337dd93df74997c93954ff354e173c6b5b3bf190d2c246b9",
+  "manifest_ref": "foundation-models:controlled-cpu",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.19375-jepa-prediction-planning/metrics/controlled-cpu.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

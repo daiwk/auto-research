@@ -1,0 +1,13 @@
+{
+  "domain": "recommendation",
+  "key": "casi",
+  "detail_path": "reproductions/2610.20293-casi/README.md",
+  "first_author": "Xinyi Cheng",
+  "first_author_affiliation": "Xiaohongshu",
+  "priority": "P0",
+  "implementation_status": "component_only",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evolve_integrated": false,
+  "adapter": {"spec_key": "casi"},
+  "summary": "冻结一次检索快照并重组子集，用精确或置换Shapley分配信用，再以组共享尺度和有界零和投影生成action/token优势。仅执行CPU组件诊断，未训练LLM检索策略或复现私有生产拍卖。"
+}

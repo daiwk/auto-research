@@ -1,0 +1,353 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:pn-mix",
+  "method": "pn-mix",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "actual packed-cache CUDA component; not language capability, peak memory or fused throughput"
+  },
+  "dataset": {
+    "id": "public-domain-Hamlet-byte-diagnostic",
+    "revision": "sha256:378fdfa57b25e18e5eadfd448a7b4a17bb017893f425c1b0d35b1f2c342568c6",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "split": "fixed-input-mechanism-diagnostic-no-task-labels"
+  },
+  "checkpoint": {
+    "id": "random-initialized-single-layer-RoPE-GQA",
+    "revision": "pn-mix-reference-rope-v1",
+    "pretrained": false
+  },
+  "protocol": {
+    "prefill_tokens": 384,
+    "decode_tokens": 64,
+    "config": {
+      "high_ratio": 0.5,
+      "group_size": 128,
+      "residual_size": 128,
+      "sink_tokens": 32,
+      "value_bits": 2,
+      "value_group_size": 128,
+      "pair_layout": "adjacent"
+    },
+    "input_precision": "torch.float16",
+    "saliency_source": "prefill_only",
+    "fused_kernel": false,
+    "evolve_eligible": false
+  },
+  "metrics": {
+    "key_mse": {
+      "mean": 0.0666692207256953,
+      "std": 0.0014421205826379256,
+      "n": 3
+    },
+    "value_mse": {
+      "mean": 0.047429648538430534,
+      "std": 0.005765456916668747,
+      "n": 3
+    },
+    "attention_kl": {
+      "mean": 0.010784379206597805,
+      "std": 0.0006033641009184931,
+      "n": 3
+    },
+    "attention_output_mse": {
+      "mean": 0.003879882705708345,
+      "std": 0.000633493050528286,
+      "n": 3
+    },
+    "attention_output_cosine": {
+      "mean": 0.9359698494275411,
+      "std": 0.017309394347688835,
+      "n": 3
+    },
+    "sink_key_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "saliency_computations": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "actual_attention_calls": {
+      "mean": 66,
+      "std": 0.0,
+      "n": 3
+    },
+    "online_vs_final_cache_attention_max_delta": {
+      "mean": 0.06618913014729817,
+      "std": 0.005402342052971527,
+      "n": 3
+    },
+    "key_bytes": {
+      "mean": 15108,
+      "std": 0.0,
+      "n": 3
+    },
+    "value_bytes": {
+      "mean": 17408,
+      "std": 0.0,
+      "n": 3
+    },
+    "persistent_cache_bytes": {
+      "mean": 32516,
+      "std": 0.0,
+      "n": 3
+    },
+    "quantized_tokens": {
+      "mean": 384,
+      "std": 0.0,
+      "n": 3
+    },
+    "sink_tokens": {
+      "mean": 32,
+      "std": 0.0,
+      "n": 3
+    },
+    "residual_tokens": {
+      "mean": 32,
+      "std": 0.0,
+      "n": 3
+    },
+    "key_bits_per_element_including_sink_residual": {
+      "mean": 4.215401785714286,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "runs": [
+    {
+      "schema_version": 2,
+      "paper": "pn-mix",
+      "arxiv_id": "2610.19605",
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "evidence_scope": "actual_packed_cache_and_attention_component_not_language_capability",
+      "protocol": {
+        "prefill_tokens": 384,
+        "decode_tokens": 64,
+        "config": {
+          "high_ratio": 0.5,
+          "group_size": 128,
+          "residual_size": 128,
+          "sink_tokens": 32,
+          "value_bits": 2,
+          "value_group_size": 128,
+          "pair_layout": "adjacent"
+        },
+        "input_precision": "torch.float16",
+        "saliency_source": "prefill_only",
+        "fused_kernel": false,
+        "evolve_eligible": false
+      },
+      "dataset": {
+        "dataset": "public-domain-Hamlet-byte-diagnostic",
+        "revision": "sha256:378fdfa57b25e18e5eadfd448a7b4a17bb017893f425c1b0d35b1f2c342568c6",
+        "source_url": "https://www.gutenberg.org/ebooks/1524",
+        "split": "fixed-input-mechanism-diagnostic-no-task-labels"
+      },
+      "checkpoint": {
+        "id": "random-initialized-single-layer-RoPE-GQA",
+        "revision": "pn-mix-reference-rope-v1",
+        "initialization_seed": 42,
+        "pretrained": false
+      },
+      "metrics": {
+        "key_mse": 0.06573781371116638,
+        "value_mse": 0.053384047001600266,
+        "attention_kl": 0.011478296481072903,
+        "attention_output_mse": 0.004256284795701504,
+        "attention_output_cosine": 0.9475743770599365,
+        "sink_key_max_error": 0.0,
+        "saliency_computations": 1,
+        "mask_unchanged_after_decode": true,
+        "actual_attention_calls": 66,
+        "online_vs_final_cache_attention_max_delta": 0.07177734375,
+        "key_bytes": 15108,
+        "value_bytes": 17408,
+        "persistent_cache_bytes": 32516,
+        "quantized_tokens": 384,
+        "sink_tokens": 32,
+        "residual_tokens": 32,
+        "key_bits_per_element_including_sink_residual": 4.215401785714286,
+        "temporary_dequantized_cache_included": false
+      },
+      "runtime": {
+        "device_kind": "cuda",
+        "accelerator_model": "NVIDIA A100-SXM4-80GB",
+        "elapsed_seconds": 0.8417991604655981,
+        "peak_allocated_bytes": 16514560
+      },
+      "full_experiment": {
+        "status": "not_reproduced_high_cost",
+        "review_done": true,
+        "reason": "8B-32B multi-model, up-to-32K-output multi-task sweeps exceed this component-only budget"
+      }
+    },
+    {
+      "schema_version": 2,
+      "paper": "pn-mix",
+      "arxiv_id": "2610.19605",
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "evidence_scope": "actual_packed_cache_and_attention_component_not_language_capability",
+      "protocol": {
+        "prefill_tokens": 384,
+        "decode_tokens": 64,
+        "config": {
+          "high_ratio": 0.5,
+          "group_size": 128,
+          "residual_size": 128,
+          "sink_tokens": 32,
+          "value_bits": 2,
+          "value_group_size": 128,
+          "pair_layout": "adjacent"
+        },
+        "input_precision": "torch.float16",
+        "saliency_source": "prefill_only",
+        "fused_kernel": false,
+        "evolve_eligible": false
+      },
+      "dataset": {
+        "dataset": "public-domain-Hamlet-byte-diagnostic",
+        "revision": "sha256:378fdfa57b25e18e5eadfd448a7b4a17bb017893f425c1b0d35b1f2c342568c6",
+        "source_url": "https://www.gutenberg.org/ebooks/1524",
+        "split": "fixed-input-mechanism-diagnostic-no-task-labels"
+      },
+      "checkpoint": {
+        "id": "random-initialized-single-layer-RoPE-GQA",
+        "revision": "pn-mix-reference-rope-v1",
+        "initialization_seed": 43,
+        "pretrained": false
+      },
+      "metrics": {
+        "key_mse": 0.06593948602676392,
+        "value_mse": 0.04187381640076637,
+        "attention_kl": 0.010383500717580318,
+        "attention_output_mse": 0.0031484924256801605,
+        "attention_output_cosine": 0.9442607164382935,
+        "sink_key_max_error": 0.0,
+        "saliency_computations": 1,
+        "mask_unchanged_after_decode": true,
+        "actual_attention_calls": 66,
+        "online_vs_final_cache_attention_max_delta": 0.06099414825439453,
+        "key_bytes": 15108,
+        "value_bytes": 17408,
+        "persistent_cache_bytes": 32516,
+        "quantized_tokens": 384,
+        "sink_tokens": 32,
+        "residual_tokens": 32,
+        "key_bits_per_element_including_sink_residual": 4.215401785714286,
+        "temporary_dequantized_cache_included": false
+      },
+      "runtime": {
+        "device_kind": "cuda",
+        "accelerator_model": "NVIDIA A100-SXM4-80GB",
+        "elapsed_seconds": 0.7286233883351088,
+        "peak_allocated_bytes": 16514560
+      },
+      "full_experiment": {
+        "status": "not_reproduced_high_cost",
+        "review_done": true,
+        "reason": "8B-32B multi-model, up-to-32K-output multi-task sweeps exceed this component-only budget"
+      }
+    },
+    {
+      "schema_version": 2,
+      "paper": "pn-mix",
+      "arxiv_id": "2610.19605",
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "evidence_scope": "actual_packed_cache_and_attention_component_not_language_capability",
+      "protocol": {
+        "prefill_tokens": 384,
+        "decode_tokens": 64,
+        "config": {
+          "high_ratio": 0.5,
+          "group_size": 128,
+          "residual_size": 128,
+          "sink_tokens": 32,
+          "value_bits": 2,
+          "value_group_size": 128,
+          "pair_layout": "adjacent"
+        },
+        "input_precision": "torch.float16",
+        "saliency_source": "prefill_only",
+        "fused_kernel": false,
+        "evolve_eligible": false
+      },
+      "dataset": {
+        "dataset": "public-domain-Hamlet-byte-diagnostic",
+        "revision": "sha256:378fdfa57b25e18e5eadfd448a7b4a17bb017893f425c1b0d35b1f2c342568c6",
+        "source_url": "https://www.gutenberg.org/ebooks/1524",
+        "split": "fixed-input-mechanism-diagnostic-no-task-labels"
+      },
+      "checkpoint": {
+        "id": "random-initialized-single-layer-RoPE-GQA",
+        "revision": "pn-mix-reference-rope-v1",
+        "initialization_seed": 44,
+        "pretrained": false
+      },
+      "metrics": {
+        "key_mse": 0.06833036243915558,
+        "value_mse": 0.04703108221292496,
+        "attention_kl": 0.010491340421140194,
+        "attention_output_mse": 0.00423487089574337,
+        "attention_output_cosine": 0.9160744547843933,
+        "sink_key_max_error": 0.0,
+        "saliency_computations": 1,
+        "mask_unchanged_after_decode": true,
+        "actual_attention_calls": 66,
+        "online_vs_final_cache_attention_max_delta": 0.0657958984375,
+        "key_bytes": 15108,
+        "value_bytes": 17408,
+        "persistent_cache_bytes": 32516,
+        "quantized_tokens": 384,
+        "sink_tokens": 32,
+        "residual_tokens": 32,
+        "key_bits_per_element_including_sink_residual": 4.215401785714286,
+        "temporary_dequantized_cache_included": false
+      },
+      "runtime": {
+        "device_kind": "cuda",
+        "accelerator_model": "NVIDIA A100-SXM4-80GB",
+        "elapsed_seconds": 0.7283119093626738,
+        "peak_allocated_bytes": 16514560
+      },
+      "full_experiment": {
+        "status": "not_reproduced_high_cost",
+        "review_done": true,
+        "reason": "8B-32B multi-model, up-to-32K-output multi-task sweeps exceed this component-only budget"
+      }
+    }
+  ],
+  "unified_cli": {
+    "seed": 42,
+    "actual_device": "cuda",
+    "same_seed_metrics_identical": true
+  },
+  "provenance": {
+    "commit": "f65507e48851e4a576b296392126414efe36d62b",
+    "artifact_path": "docs/reproductions/2610.19605-pn-mix/metrics/component-a100-seeds42-44.json",
+    "dataset_fingerprint": "sha256:378fdfa57b25e18e5eadfd448a7b4a17bb017893f425c1b0d35b1f2c342568c6",
+    "gpu_receipt": "docs/gpu-validations/pn-mix-a100-20261015.json"
+  },
+  "full_experiment_status": "not_reproduced_high_cost"
+}

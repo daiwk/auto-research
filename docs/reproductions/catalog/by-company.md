@@ -244,6 +244,7 @@
 - 2020-09 · [PLE](../recsys2020-ple-ple/README.md)：把共享 experts 与任务专属 experts 分组，通过 CGC gates 逐层分离共性和任务特性。
 
 ## Xiaohongshu
+- 2026-10 · [CASI](../2610.20293-casi/README.md)：冻结一次检索的候选快照，重组子集并以 Shapley 分配动作信用，再通过有界零和投影生成优势。本地只执行 CPU 信用组件，私有拍卖与 LLM 策略训练不复现。
 - 2026-09 · [SIRF](../2609.11752-sirf/README.md)：把 trigger、exemption 与账户级规则关系合成为持续预训练数据，并以单次 verdict 和 P95 阈值服务工业内容风控。
 - 2026-08 · [OneModel](../2608.18606-onemodel/README.md)：以共享长序列 backbone、场景条件门控和全局/局部分层表征统一推荐、广告与商家排序。
 - 2026-03 · [IDProxy](../2603.01590-idproxy/README.md)：先把多模态 LLM 表征对齐到协同 ID 空间，再通过多层 proxy adapter 和残差门控注入排序器。

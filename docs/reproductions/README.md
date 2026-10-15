@@ -392,6 +392,9 @@ pytest tests/test_research_module_docs.py
 | 核心机制 | `progressive-contraction` · [Progressive Contraction](2610.12933-progressive-contraction/README.md) | 无工业 A/B；教师池收缩离线结果 | A100三seed真实MC树/学生路由与更新完成；与full-SFT对照逐seed相同，不宣称总成本节省 |
 | 核心机制 | `uxsid` · [UxSID](2605.09040-uxsid/README.md) | v4 正文报告工业线上 A/B，详见独立页面 | MovieLens-100K 四结构 A100 三 seed、缓存一致性通过；没有稳定提升，不代替工业业务复现 |
 | 核心机制 | `wegr` · [WeGR](2610.16979-wegr/README.md) | 微信搜索正文生产 A/B：订单 +2.539%，CTR +1.508% | MovieLens-100K、CoCo-VAE / DHPO / MSFT 的 A100 三种子诊断；效果偏低且未优于对照，负结果保留 |
+| 核心机制 | `casi` · [CASI](2610.20293-casi/README.md) | 小红书七天随机生产 A/B：Advv +3.51% | 冻结快照/精确与置换信用/有界零和优势的 CPU 组件；未训练 LLM 策略，完整高成本实验不复现 |
+| 核心机制 | `pn-mix` · [PN-Mix](2610.19605-pn-mix/README.md) | 无工业 A/B；原文为缓存量化离线实验 | 真正位打包与 attention 消费的 L1 参考路径；不是预训练 LLM 质量或 fused kernel 吞吐复现 |
+| 核心机制 | `smrc-pmrc` · [SMRC / PMRC](2610.19844-smrc-pmrc/README.md) | 无工业 A/B；原文为优化器训练实验 | 真实参数与 optimizer state 更新、论文二次反例和小 MLP 对照；完整预训练不复现 |
 | 核心机制 | `pace-vlm` · [PACE](2608.27206-pace-vlm/README.md) | 无工业 A/B；论文报告 10% 视觉 token 保留 93.8% 平均性能、TTFT 最高 3.1× | APC/DDAE 公式、RealWorldQA 同 checkpoint 质量/token/延迟/显存和 Evolve 配方均可审计 |
 | 核心机制 | `twinkv` · [TwinKV](2608.27128-twinkv/README.md) | 无工业 A/B；LongBench/LooGLE/RULER/MMLU-Pro 离线结果且含失败任务 | fixed-budget repair、真实 Qwen3 KV reconstruction/延迟/显存和 Evolve attention operator 均可审计 |
 | 核心机制 | `prl-puts` · [PRL-PUTS](2605.16344-prl-puts/README.md) | P2P impressions +0.30% | 双头 Q 网络与 Pareto utility 扫描；NDCG@10 +39.64% |

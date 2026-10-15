@@ -266,6 +266,7 @@
 ## 训练目标与决策优化
 
 ### 采样、蒸馏与强化学习
+- [CASI](../2610.20293-casi/README.md)：冻结一次检索的候选快照，重组子集并以 Shapley 分配动作信用，再通过有界零和投影生成优势。本地只执行 CPU 信用组件，私有拍卖与 LLM 策略训练不复现。
 - [LLM Thompson Priors](../2608.03382-llm-ts-prior/README.md)：用 LLM 初始化分群 bandit 先验，并由 Thompson Sampling 在持续反馈下完成可校正的冷启动决策。
 - [KGD](../2608.02738-kgd/README.md)：以 BMTP 和冻结知识分支保留可刷新的预训练信息，并用正交 ACR 控制它与协同几何的干扰。
 - [HRPO](../2608.00750-hrpo/README.md)：依据层级生成前缀的后续收益分配 residual credit，使组相对策略优化不再只依赖整序列标量奖励。

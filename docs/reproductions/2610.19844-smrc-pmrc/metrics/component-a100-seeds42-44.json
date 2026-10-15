@@ -1,0 +1,647 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "reproduction:smrc-pmrc",
+  "method": "smrc-pmrc",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic formula/parameter updates only; preserve negative baselines, no LLM capability or efficiency claim"
+  },
+  "dataset": {
+    "public_id": "paper-appendix-E.1.1-quadratic + seeded-small-MLP-regression",
+    "revision": "arxiv:2610.19844v1:appendix-E.1.1:equation-30",
+    "source": "https://arxiv.org/html/2610.19844v1#A5.SS1.SSS1",
+    "input_sha256_per_seed": {
+      "42": "cda3bac5d18e5011ddeef77c61cb391822d4b7d5dcfb3d7c9df6ea97dcde7b49",
+      "43": "ebcd7da332b5edbbae6f1c28ea147fa084de1c67481f5e41c770ead66e300f86",
+      "44": "45249b76c8d4ad249438bfe04c70fe1b328720bbe1ec7c1b866529659981f5aa"
+    }
+  },
+  "metrics": {
+    "numeric.smrc_full_rank_max_abs_error": {
+      "mean": 5.551115123125783e-17,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.smrc_boundary_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.smrc_state_resume_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.pmrc_full_rank_max_abs_error": {
+      "mean": 2.220446049250313e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.pmrc_boundary_max_abs_error": {
+      "mean": 2.7755575615628914e-17,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.pmrc_state_resume_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "quadratic.smrc.final_true_gradient_norm": {
+      "mean": 0.4775596945459611,
+      "std": 0.0,
+      "n": 3
+    },
+    "quadratic.pmrc.final_true_gradient_norm": {
+      "mean": 3.3183929960789156,
+      "std": 2.7733362266239673e-15,
+      "n": 3
+    },
+    "quadratic.pmrc_practical.final_true_gradient_norm": {
+      "mean": 3.6302205030949053,
+      "std": 0.05653035623705971,
+      "n": 3
+    },
+    "quadratic.full_ema_sgd.final_true_gradient_norm": {
+      "mean": 0.22104417414557118,
+      "std": 0.0,
+      "n": 3
+    },
+    "quadratic.full_muon.final_true_gradient_norm": {
+      "mean": 3.391584539121821,
+      "std": 5.127900497022837e-16,
+      "n": 3
+    },
+    "quadratic.adamw.final_true_gradient_norm": {
+      "mean": 0.37933627731559555,
+      "std": 0.0,
+      "n": 3
+    },
+    "mlp.smrc.validation_mse": {
+      "mean": 0.20510957141717276,
+      "std": 0.02596251642335146,
+      "n": 3
+    },
+    "mlp.pmrc.validation_mse": {
+      "mean": 0.047500340888897576,
+      "std": 0.0051421093843023805,
+      "n": 3
+    },
+    "mlp.pmrc_practical.validation_mse": {
+      "mean": 0.06874141345421474,
+      "std": 0.0067255045233066075,
+      "n": 3
+    },
+    "mlp.full_ema_sgd.validation_mse": {
+      "mean": 0.1934781620899836,
+      "std": 0.024734806800845235,
+      "n": 3
+    },
+    "mlp.full_muon.validation_mse": {
+      "mean": 0.020187460506955784,
+      "std": 0.0036469486199900273,
+      "n": 3
+    },
+    "mlp.adamw.validation_mse": {
+      "mean": 0.019841013476252556,
+      "std": 0.001936938059218089,
+      "n": 3
+    }
+  },
+  "runs": [
+    {
+      "schema_version": 2,
+      "method": "smrc-pmrc",
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "evolve_eligible": false,
+      "device": "cuda",
+      "accelerator": "NVIDIA A100-SXM4-80GB",
+      "elapsed_seconds": 2.5333705712109804,
+      "dataset": "paper-appendix-E.1.1-quadratic + seeded-small-MLP-regression",
+      "dataset_revision": "arxiv:2610.19844v1:appendix-E.1.1:equation-30",
+      "dataset_source": "https://arxiv.org/html/2610.19844v1#A5.SS1.SSS1",
+      "host_reference": "NumPy FP64 SVD oracle and complete-QR protocol construction; torch CUDA kernels tested independently",
+      "checkpoint_revision": "none; deterministic matrices and randomly initialized MLP",
+      "public_protocol_sha256": "cda3bac5d18e5011ddeef77c61cb391822d4b7d5dcfb3d7c9df6ea97dcde7b49",
+      "budget": {
+        "steps_per_arm": 80,
+        "mlp_steps_per_arm": 80,
+        "arms": 6,
+        "max_seconds": 120.0
+      },
+      "numeric_controls": {
+        "smrc_full_rank_max_abs_error": 5.551115123125783e-17,
+        "smrc_boundary_max_abs_error": 0.0,
+        "smrc_state_resume_max_abs_error": 0.0,
+        "pmrc_full_rank_max_abs_error": 2.220446049250313e-16,
+        "pmrc_boundary_max_abs_error": 2.7755575615628914e-17,
+        "pmrc_state_resume_max_abs_error": 0.0
+      },
+      "low_precision_controls": {
+        "smrc_fp16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 3.057718276977539e-05,
+          "comparison_atol": 0.0002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "pmrc_practical_fp16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 5.3406693041324615e-06,
+          "comparison_atol": 0.0002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "smrc_bf16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 0.00022120773792266846,
+          "comparison_atol": 0.002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "pmrc_practical_bf16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 4.1134655475616455e-05,
+          "comparison_atol": 0.002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        }
+      },
+      "paper_quadratic": {
+        "smrc": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.4775596945459611,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "pmrc": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.3183929960789187,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "pmrc_practical": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.577340530429615,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "full_ema_sgd": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.22104417414557118,
+          "optimizer_state_elements": 240,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "full_muon": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.3915845391218205,
+          "optimizer_state_elements": 240,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "adamw": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.37933627731559555,
+          "optimizer_state_elements": 480,
+          "parameter_elements": 240,
+          "updates": 80
+        }
+      },
+      "small_mlp": {
+        "smrc": {
+          "initial_validation_mse": 0.3499470353126526,
+          "final_validation_mse": 0.1844656765460968,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "pmrc": {
+          "initial_validation_mse": 0.3499470353126526,
+          "final_validation_mse": 0.05342918634414673,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "pmrc_practical": {
+          "initial_validation_mse": 0.3499470353126526,
+          "final_validation_mse": 0.07473090291023254,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "full_ema_sgd": {
+          "initial_validation_mse": 0.3499470353126526,
+          "final_validation_mse": 0.172523632645607,
+          "optimizer_state_elements": 848,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "full_muon": {
+          "initial_validation_mse": 0.3499470353126526,
+          "final_validation_mse": 0.016444260254502296,
+          "optimizer_state_elements": 848,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "adamw": {
+          "initial_validation_mse": 0.3499470353126526,
+          "final_validation_mse": 0.017611341550946236,
+          "optimizer_state_elements": 1616,
+          "parameter_elements": 808,
+          "updates": 80
+        }
+      },
+      "full_experiment": {
+        "status": "not_reproduced_high_cost",
+        "review_status": "done",
+        "reason": "C4 60M–1.3B, 1.162B–26.84B tokens / multi-GPU pretraining and 7B–8B SFT omitted"
+      },
+      "limitations": [
+        "Fixed tiny diagnostic hyperparameters, not the paper grid search or downstream comparison",
+        "Synthetic real parameter updates only; not WikiText/C4 capability or wall-clock speed evidence",
+        "Practical QR uses torch.linalg.qr, not authors' SCQR performance kernel",
+        "No distributed state, AMP scaler/graph capture or torch.compile certification"
+      ]
+    },
+    {
+      "schema_version": 2,
+      "method": "smrc-pmrc",
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "evolve_eligible": false,
+      "device": "cuda",
+      "accelerator": "NVIDIA A100-SXM4-80GB",
+      "elapsed_seconds": 2.4481881335377693,
+      "dataset": "paper-appendix-E.1.1-quadratic + seeded-small-MLP-regression",
+      "dataset_revision": "arxiv:2610.19844v1:appendix-E.1.1:equation-30",
+      "dataset_source": "https://arxiv.org/html/2610.19844v1#A5.SS1.SSS1",
+      "host_reference": "NumPy FP64 SVD oracle and complete-QR protocol construction; torch CUDA kernels tested independently",
+      "checkpoint_revision": "none; deterministic matrices and randomly initialized MLP",
+      "public_protocol_sha256": "ebcd7da332b5edbbae6f1c28ea147fa084de1c67481f5e41c770ead66e300f86",
+      "budget": {
+        "steps_per_arm": 80,
+        "mlp_steps_per_arm": 80,
+        "arms": 6,
+        "max_seconds": 120.0
+      },
+      "numeric_controls": {
+        "smrc_full_rank_max_abs_error": 5.551115123125783e-17,
+        "smrc_boundary_max_abs_error": 0.0,
+        "smrc_state_resume_max_abs_error": 0.0,
+        "pmrc_full_rank_max_abs_error": 2.220446049250313e-16,
+        "pmrc_boundary_max_abs_error": 2.7755575615628914e-17,
+        "pmrc_state_resume_max_abs_error": 0.0
+      },
+      "low_precision_controls": {
+        "smrc_fp16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 3.057718276977539e-05,
+          "comparison_atol": 0.0002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "pmrc_practical_fp16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 5.3406693041324615e-06,
+          "comparison_atol": 0.0002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "smrc_bf16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 0.00022120773792266846,
+          "comparison_atol": 0.002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "pmrc_practical_bf16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 4.1134655475616455e-05,
+          "comparison_atol": 0.002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        }
+      },
+      "paper_quadratic": {
+        "smrc": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.4775596945459611,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "pmrc": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.3183929960789134,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "pmrc_practical": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.623517427642654,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "full_ema_sgd": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.22104417414557118,
+          "optimizer_state_elements": 240,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "full_muon": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.3915845391218213,
+          "optimizer_state_elements": 240,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "adamw": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.37933627731559555,
+          "optimizer_state_elements": 480,
+          "parameter_elements": 240,
+          "updates": 80
+        }
+      },
+      "small_mlp": {
+        "smrc": {
+          "initial_validation_mse": 0.4590691328048706,
+          "final_validation_mse": 0.23425768315792084,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "pmrc": {
+          "initial_validation_mse": 0.4590691328048706,
+          "final_validation_mse": 0.044256843626499176,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "pmrc_practical": {
+          "initial_validation_mse": 0.4590691328048706,
+          "final_validation_mse": 0.0700276643037796,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "full_ema_sgd": {
+          "initial_validation_mse": 0.4590691328048706,
+          "final_validation_mse": 0.22076290845870972,
+          "optimizer_state_elements": 848,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "full_muon": {
+          "initial_validation_mse": 0.4590691328048706,
+          "final_validation_mse": 0.02038826048374176,
+          "optimizer_state_elements": 848,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "adamw": {
+          "initial_validation_mse": 0.4590691328048706,
+          "final_validation_mse": 0.020803693681955338,
+          "optimizer_state_elements": 1616,
+          "parameter_elements": 808,
+          "updates": 80
+        }
+      },
+      "full_experiment": {
+        "status": "not_reproduced_high_cost",
+        "review_status": "done",
+        "reason": "C4 60M–1.3B, 1.162B–26.84B tokens / multi-GPU pretraining and 7B–8B SFT omitted"
+      },
+      "limitations": [
+        "Fixed tiny diagnostic hyperparameters, not the paper grid search or downstream comparison",
+        "Synthetic real parameter updates only; not WikiText/C4 capability or wall-clock speed evidence",
+        "Practical QR uses torch.linalg.qr, not authors' SCQR performance kernel",
+        "No distributed state, AMP scaler/graph capture or torch.compile certification"
+      ]
+    },
+    {
+      "schema_version": 2,
+      "method": "smrc-pmrc",
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "evolve_eligible": false,
+      "device": "cuda",
+      "accelerator": "NVIDIA A100-SXM4-80GB",
+      "elapsed_seconds": 2.451157819479704,
+      "dataset": "paper-appendix-E.1.1-quadratic + seeded-small-MLP-regression",
+      "dataset_revision": "arxiv:2610.19844v1:appendix-E.1.1:equation-30",
+      "dataset_source": "https://arxiv.org/html/2610.19844v1#A5.SS1.SSS1",
+      "host_reference": "NumPy FP64 SVD oracle and complete-QR protocol construction; torch CUDA kernels tested independently",
+      "checkpoint_revision": "none; deterministic matrices and randomly initialized MLP",
+      "public_protocol_sha256": "45249b76c8d4ad249438bfe04c70fe1b328720bbe1ec7c1b866529659981f5aa",
+      "budget": {
+        "steps_per_arm": 80,
+        "mlp_steps_per_arm": 80,
+        "arms": 6,
+        "max_seconds": 120.0
+      },
+      "numeric_controls": {
+        "smrc_full_rank_max_abs_error": 5.551115123125783e-17,
+        "smrc_boundary_max_abs_error": 0.0,
+        "smrc_state_resume_max_abs_error": 0.0,
+        "pmrc_full_rank_max_abs_error": 2.220446049250313e-16,
+        "pmrc_boundary_max_abs_error": 2.7755575615628914e-17,
+        "pmrc_state_resume_max_abs_error": 0.0
+      },
+      "low_precision_controls": {
+        "smrc_fp16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 3.057718276977539e-05,
+          "comparison_atol": 0.0002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "pmrc_practical_fp16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 5.3406693041324615e-06,
+          "comparison_atol": 0.0002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "smrc_bf16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 0.00022120773792266846,
+          "comparison_atol": 0.002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        },
+        "pmrc_practical_bf16": {
+          "updates": 6,
+          "parameter_changed": true,
+          "state_dtype": "float32",
+          "max_abs_error_to_fp32": 4.1134655475616455e-05,
+          "comparison_atol": 0.002,
+          "state_resume_max_abs_error": 0.0,
+          "state_restore_exact": true
+        }
+      },
+      "paper_quadratic": {
+        "smrc": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.4775596945459611,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "pmrc": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.3183929960789147,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "pmrc_practical": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.689803551212447,
+          "optimizer_state_elements": 76,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "full_ema_sgd": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.22104417414557118,
+          "optimizer_state_elements": 240,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "full_muon": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 3.3915845391218205,
+          "optimizer_state_elements": 240,
+          "parameter_elements": 240,
+          "updates": 80
+        },
+        "adamw": {
+          "initial_true_gradient_norm": 7.615773105863908,
+          "final_true_gradient_norm": 0.37933627731559555,
+          "optimizer_state_elements": 480,
+          "parameter_elements": 240,
+          "updates": 80
+        }
+      },
+      "small_mlp": {
+        "smrc": {
+          "initial_validation_mse": 0.43394023180007935,
+          "final_validation_mse": 0.1966053545475006,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "pmrc": {
+          "initial_validation_mse": 0.43394023180007935,
+          "final_validation_mse": 0.04481499269604683,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "pmrc_practical": {
+          "initial_validation_mse": 0.43394023180007935,
+          "final_validation_mse": 0.06146567314863205,
+          "optimizer_state_elements": 256,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "full_ema_sgd": {
+          "initial_validation_mse": 0.43394023180007935,
+          "final_validation_mse": 0.18714794516563416,
+          "optimizer_state_elements": 848,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "full_muon": {
+          "initial_validation_mse": 0.43394023180007935,
+          "final_validation_mse": 0.02372986078262329,
+          "optimizer_state_elements": 848,
+          "parameter_elements": 808,
+          "updates": 80
+        },
+        "adamw": {
+          "initial_validation_mse": 0.43394023180007935,
+          "final_validation_mse": 0.021108005195856094,
+          "optimizer_state_elements": 1616,
+          "parameter_elements": 808,
+          "updates": 80
+        }
+      },
+      "full_experiment": {
+        "status": "not_reproduced_high_cost",
+        "review_status": "done",
+        "reason": "C4 60M–1.3B, 1.162B–26.84B tokens / multi-GPU pretraining and 7B–8B SFT omitted"
+      },
+      "limitations": [
+        "Fixed tiny diagnostic hyperparameters, not the paper grid search or downstream comparison",
+        "Synthetic real parameter updates only; not WikiText/C4 capability or wall-clock speed evidence",
+        "Practical QR uses torch.linalg.qr, not authors' SCQR performance kernel",
+        "No distributed state, AMP scaler/graph capture or torch.compile certification"
+      ]
+    }
+  ],
+  "unified_cli": {
+    "seed": 42,
+    "actual_device": "cuda",
+    "same_seed_mlp_and_numeric_metrics_identical": true
+  },
+  "previous_failed_attempt": {
+    "commit": "f65507e48851e4a576b296392126414efe36d62b",
+    "result": "failed_dependency_check",
+    "reason": "Independent CPU Torch SVD oracle required unavailable LAPACK. No numeric acceptance was claimed. The oracle was switched to NumPy FP64; CUDA optimizer and tolerances were unchanged."
+  },
+  "provenance": {
+    "commit": "fe182240d2ddb76adccec86e67c1c7cf52ac3ee0",
+    "artifact_path": "docs/reproductions/2610.19844-smrc-pmrc/metrics/component-a100-seeds42-44.json",
+    "dataset_fingerprint": "cda3bac5d18e5011ddeef77c61cb391822d4b7d5dcfb3d7c9df6ea97dcde7b49",
+    "gpu_receipt": "docs/gpu-validations/smrc-pmrc-a100-20261015.json"
+  },
+  "full_experiment_status": "not_reproduced_high_cost"
+}

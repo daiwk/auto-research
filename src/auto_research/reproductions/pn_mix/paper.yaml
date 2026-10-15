@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "pn-mix",
+  "arxiv_id": "2610.19605",
+  "title": "PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference",
+  "paper_url": "https://arxiv.org/abs/2610.19605",
+  "organization": "Seoul National University",
+  "published": "2026-10-14",
+  "upstream_code": "否：截至 2026-10-15 未发现 PN-Mix 原作者公开代码；正文链接的 Kitty 是对照基线，不是 PN-Mix 代码",
+  "track": "llm",
+  "topics": [
+    "kv-cache",
+    "quantization",
+    "inference-serving",
+    "long-context"
+  ],
+  "local_code": "src/auto_research/reproductions/pn_mix",
+  "documentation": "docs/reproductions/2610.19605-pn-mix/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "public-domain Hamlet fixed-input attention diagnostic"
+  ],
+  "baseline": "identical RoPE/GQA states and causal positions with an unquantized full cache",
+  "metrics": [
+    "attention_kl",
+    "attention_output_mse",
+    "key_mse",
+    "persistent_cache_bytes",
+    "sink_key_max_error"
+  ],
+  "mechanisms": [
+    "prefill-only GQA query-key RoPE pair-norm selection",
+    "H3/L1 key bit packing with one-bit midpoint correction",
+    "sink/residual preservation and quantized-cache attention consumption"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.pn_mix.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Seoul National University",
+      "published": "2026-10-14",
+      "publication_label": null,
+      "publication_source": null,
+      "online_ab": [],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "fused on-chip Triton dequantization/attention kernels",
+      "8B-32B pretrained-model 32K-output multi-task sweeps and serving throughput study"
+    ],
+    "default_seeds": [
+      42
+    ],
+    "budget": "L1 bounded single-layer attention diagnostic, <=2048 tokens; no training or downloads",
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": true,
+    "gpu_validation_artifact": "docs/gpu-validations/pn-mix-a100-20261015.json"
+  }
+}

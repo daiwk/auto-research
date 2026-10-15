@@ -1,0 +1,74 @@
+{
+  "schema_version": 2,
+  "key": "casi",
+  "arxiv_id": "2610.20293",
+  "title": "CASI: Credit Assignment via Set Intervention for Agentic Retrieval",
+  "paper_url": "https://arxiv.org/abs/2610.20293",
+  "organization": "Xiaohongshu",
+  "published": "2026-10-14",
+  "upstream_code": "未找到原作者公开实现（2026-10-15，官方v1与关联来源核验）",
+  "track": "recommendation",
+  "topics": [
+    "agentic-retrieval",
+    "credit-assignment",
+    "policy-optimization"
+  ],
+  "local_code": "src/auto_research/reproductions/casi",
+  "documentation": "docs/reproductions/2610.20293-casi/README.md",
+  "fidelity": "core_mechanism",
+  "evaluation_tier": "l1_mechanism",
+  "datasets": [
+    "controlled frozen retrieval snapshot or caller-supplied cached candidates"
+  ],
+  "baseline": "Singleton and leave-one-out on the identical frozen coalition function",
+  "metrics": [
+    "metrics.shapley_efficiency_error",
+    "metrics.zero_sum_error",
+    "metrics.action_mean_error"
+  ],
+  "mechanisms": [
+    "retrieve once and cached coalition reconstruction",
+    "exact and deduplicated permutation Shapley",
+    "group-scale bounded zero-sum projection",
+    "action and shared-token advantage assignment"
+  ],
+  "evolve_operators": [],
+  "adapter_module": "auto_research.reproductions.casi.adapter",
+  "execution": {
+    "paper": {
+      "code_url": null,
+      "organization": "Xiaohongshu",
+      "published": "2026-10-14",
+      "online_ab": [
+        {
+          "product": "Xiaohongshu sponsored search",
+          "metric": "advertiser value (Advv)",
+          "lift_percent": 3.51,
+          "traffic": "randomized production A/B; 10% traffic",
+          "source_url": "https://arxiv.org/html/2610.20293v1",
+          "source_location": "Section 4.5",
+          "experiment_duration": "7 days",
+          "retrieved_at": "2026-10-15"
+        }
+      ],
+      "selection_exception": null
+    },
+    "omitted_core_components": [
+      "LLM joint action generation and policy training",
+      "private pr_filter evaluator, auction replay and production ranking",
+      "five-run policy comparison and online A/B"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
+    "budget": "5 actions; 31 exact frozen evaluator calls and 128 cached permutations; no model downloads or policy training",
+    "device_capabilities": [
+      "cpu"
+    ],
+    "infer_device_capabilities": false,
+    "requires_gpu_validation": false,
+    "gpu_validation_artifact": null
+  }
+}

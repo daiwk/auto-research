@@ -7,8 +7,8 @@
   "review_finalized_on": "2026-10-15",
   "policy": "observed-catalog-and-evidence-not-capability-v1",
   "counts": {
-    "catalogued": 99,
-    "not_catalogued": 3645
+    "catalogued": 103,
+    "not_catalogued": 3641
   },
   "accepted_counts": {
     "not_catalogued": 14
@@ -493,8 +493,19 @@
       "title": "CASI: Credit Assignment via Set Intervention for Agentic Retrieval",
       "review_decision": "reviewed_deferred",
       "frozen_implementation_status": "not_implemented_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "recommendation",
+          "key": "casi",
+          "detail_path": "reproductions/2610.20293-casi/README.md",
+          "document_exists": true,
+          "registered_executable": true,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.20288",
@@ -1045,8 +1056,19 @@
       "title": "Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon",
       "review_decision": "reviewed_deferred",
       "frozen_implementation_status": "not_implemented_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "smrc-pmrc",
+          "detail_path": "reproductions/2610.19844-smrc-pmrc/README.md",
+          "document_exists": true,
+          "registered_executable": true,
+          "gpu_receipt": "docs/gpu-validations/smrc-pmrc-a100-20261015.json",
+          "gpu_receipt_valid": true,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.19832",
@@ -1405,8 +1427,19 @@
       "title": "PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference",
       "review_decision": "reviewed_deferred",
       "frozen_implementation_status": "not_implemented_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "pn-mix",
+          "detail_path": "reproductions/2610.19605-pn-mix/README.md",
+          "document_exists": true,
+          "registered_executable": true,
+          "gpu_receipt": "docs/gpu-validations/pn-mix-a100-20261015.json",
+          "gpu_receipt_valid": true,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.19603",
@@ -1741,8 +1774,19 @@
       "title": "One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models",
       "review_decision": "reviewed_deferred",
       "frozen_implementation_status": "not_implemented_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "jepa-prediction-planning",
+          "detail_path": "foundation-models/2610.19375-jepa-prediction-planning/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.19372",

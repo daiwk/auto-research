@@ -130,6 +130,20 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.19844-smrc-pmrc": {
+        "pdf_url": "https://arxiv.org/pdf/2610.19844v1",
+        "page": 4,
+        "rect": (100, 75, 512, 245),
+        "label": "Algorithm 2",
+        "caption": "多阶段 SMRC：投影内动量、子空间外残差与换基前参数边界修正。",
+    },
+    "autoformbench": {
+        "pdf_url": "https://raw.githubusercontent.com/facebookresearch/autoformbench/af1aa38fd44e019e566bce0b5a168609a886d8e6/paper.pdf",
+        "page": 3,
+        "rect": (65, 200, 548, 391),
+        "label": "Figure 2",
+        "caption": "AutoformBench 原论文评测协议：隔离 Lean 工作区、工具反馈与 clean-room 独立验证；图中原文访问条件不同于公开 source-free 发布。",
+    },
     "2610.12102-data-space-iteration": {
         "pdf_url": "https://arxiv.org/pdf/2610.12102",
         "page": 0,

@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 训练目标与决策优化 | [CASI: Credit Assignment via Set Intervention for Agentic Retrieval](../2610.20293-casi/README.md) | Xiaohongshu，2026-10-14 | 未发现官方代码 | `casi`：仅低成本组件，完整实验不复现 |
 | 生成、排序与冷启动 | [UniSGR-V2: Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation](../2610.16132-unisgr-v2/README.md) | Alibaba International Digital Commerce Group，2026-10-12 | 未发现官方代码 | 计划键 `unisgr-v2`：成本过高，暂不复现；待验收（仅研究资料） |
 | 生成、排序与冷启动 | [WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat](../2610.16979-wegr/README.md) | WeChat E-commerce Search team（正文未单列作者机构），2026-10-12 | 未发现官方代码 | `wegr` |
 | 内容理解、审核与风险控制 | [LLM-based User-Product Relevance Evaluation for Dynamic Product Advertising](../2610.14550-snap-dpa-relevance/README.md) | Snap Inc.，2026-10-10 | 未发现官方代码 | 计划键 `snap-dpa-relevance`：成本过高，暂不复现；待验收（仅研究资料） |
