@@ -111,6 +111,29 @@ def audit_review_watermark(root: Path) -> list[str]:
                     f"{receipt['artifact']}: retrieved IDs are not reviewed")
         sources = state.get("source_reviews", [])
         archived_keys = set()
+        # An identified paper can have a genuinely unavailable new document too.
+        # Keep that exception tied to its reviewed identity and real retrieval
+        # attempts, rather than silently omitting it from the candidate pool.
+        paper_map = {paper["id"]: paper for paper in papers}
+        for row in register.get("source_exceptions", []):
+            label = f"candidate source / {row.get('id')}"
+            exception(row, label)
+            paper = paper_map.get(row.get("id"), {})
+            require(bool(paper) and paper.get("status") == "archived_source_exception",
+                    f"{label}: exception lacks a non-accepted reviewed candidate")
+            require(row.get("organization") == "arXiv" and row.get("exception_type") == "document_unavailable",
+                    f"{label}: candidate exception must describe an unavailable primary document")
+            attempts = row.get("attempts", [])
+            require(bool(attempts) and all(isinstance(attempt, dict) and attempt.get("url")
+                                          and attempt.get("result") == "unavailable"
+                                          and attempt.get("error") for attempt in attempts),
+                    f"{label}: candidate exception lacks failed primary-source attempts")
+            require(any(review.get("resolution") == "source_exception_archived"
+                        and review.get("review_done") is True
+                        and review.get("fulltext_review_completed") is False
+                        for review in paper.get("reviews", [])),
+                    f"{label}: source exception cannot substitute for an unread or accepted review")
+            archived_keys.add((row.get("organization"), row.get("url"), row.get("exception_type")))
         require({s["organization"] for s in sources} >= {"Google", "Meta"}, "Google/Meta reviews are required")
         for source in sources:
             artifact = read(source["artifact"])

@@ -3,6 +3,8 @@ import json
 import pytest
 
 from auto_research.discovery_watermark import POLICY, audit_review_watermark, partition_archived_official_reviews
+from scripts import audit_paper_coverage
+from scripts.record_discovery_review import build_batch
 
 
 def _write(root, name, value):
@@ -64,6 +66,55 @@ def test_explicit_exceptions_can_close_scoped_review_but_not_claim_exhaustivenes
     assert audit_review_watermark(tmp_path) == []
 
 
+@pytest.mark.parametrize("blocker", [None, "unread", "capped"])
+def test_high_cost_nonreproduction_is_review_done_not_implementation(tmp_path, monkeypatch, blocker):
+    state = _fixture(tmp_path)
+    artifact = {
+        "track": "agent", "window": state["window"],
+        "candidates": [{
+            "arxiv_id": "2610.00001", "title": "Expensive agent training",
+            "repository_status": "new", "matched_queries": ["priority-org-meta"],
+        }],
+    }
+    decision = {
+        "id": "2610.00001", "priority": "P0", "status": "deferred",
+        "resolution": "not_reproduced_high_cost",
+        "reason": "Published multi-GPU configuration exceeds the one-GPU budget; do not reproduce.",
+        "cost_assessment": {
+            "source_url": "https://example.test/expensive-agent",
+            "basis": "Appendix training configuration",
+            "available_resource": "one A100 or A30, or a Mac",
+        },
+        "full_text_review": {
+            "scope": "full-text", "source_locations": ["Appendix training configuration"],
+        },
+    }
+    batch = build_batch(artifact, {"decisions": [decision]}, batch_name="cost-closed")
+    row = batch["candidates"][0]
+    assert row["status"] == "deferred"
+    assert row["resolution"] == "not_reproduced_high_cost"
+    assert row["cost_assessment"] == decision["cost_assessment"]
+    assert not {"doc", "key", "metrics", "gpu_validation_artifact"}.intersection(row)
+    _write(tmp_path, "paper-discovery-ledger.json", {"schema_version": 1, "batches": [batch]})
+    _write(tmp_path, "pending.json", artifact)
+    _write(tmp_path, "register.json", {
+        "candidate_review_complete": True,
+        "papers": [{**decision, "status": "pending" if blocker == "unread" else "deferred"}],
+    })
+    if blocker == "capped":
+        path = tmp_path / "docs/agent-late-index.json"
+        payload = json.loads(path.read_text())
+        payload["arxiv_transport"]["capped_queries"] = 1
+        _write(tmp_path, path.name, payload)
+    monkeypatch.setattr(audit_paper_coverage, "ROOT", tmp_path)
+    monkeypatch.setattr(audit_paper_coverage, "LEDGER", tmp_path / "docs/paper-discovery-ledger.json")
+    errors = audit_paper_coverage.audit(strict=True, pending_artifacts=(tmp_path / "docs/pending.json",))
+    if blocker:
+        assert any(blocker in error for error in errors)
+    else:
+        assert errors == []
+
+
 @pytest.mark.parametrize("field,value,error", [
     ("user_authorized_exceptions", False, "authorization"),
     ("all_sources_exhaustive", True, "exhaustiveness"),
@@ -112,6 +163,61 @@ def test_accepted_candidate_still_requires_full_text(tmp_path):
     register["papers"][0]["reviews"][0]["fulltext_review_completed"] = False
     _write(tmp_path, "register.json", register)
     assert any("full text" in e for e in audit_review_watermark(tmp_path))
+
+
+def _candidate_source_exception(root):
+    _fixture(root)
+    row = {
+        "id": "2610.00001", "organization": "arXiv",
+        "url": "https://arxiv.org/html/2610.00001v2",
+        "exception_type": "document_unavailable", "reason": "Official HTML and PDF were unavailable.",
+        "attempts": [
+            {"url": "https://arxiv.org/html/2610.00001v2", "result": "unavailable", "error": "HTTP 404"},
+            {"url": "https://arxiv.org/pdf/2610.00001v2", "result": "unavailable", "error": "HTTP 503"},
+        ],
+        "scope_triage_completed": True, "counts_as_accepted": False,
+        "reopen_when": "A new primary document becomes available.",
+    }
+    _write(root, "register.json", {"candidate_review_complete": True, "papers": [{
+        "id": row["id"], "status": "archived_source_exception", "reviews": [{
+            "resolution": "source_exception_archived", "review_done": True,
+            "fulltext_review_completed": False,
+        }],
+    }], "source_exceptions": [row]})
+    archive = json.loads((root / "docs/exceptions.json").read_text())
+    archive["entries"].append(dict(row, status="archived", blocking=False))
+    archive["record_count"] += 1
+    _write(root, "exceptions.json", archive)
+
+
+def test_unavailable_candidate_document_is_archived_without_disappearing(tmp_path):
+    _candidate_source_exception(tmp_path)
+    assert audit_review_watermark(tmp_path) == []
+
+
+@pytest.mark.parametrize("mutation,error", [
+    ("accepted", "non-accepted"), ("unread", "unread"),
+    ("no_attempts", "attempts"), ("successful_source", "failed primary-source"),
+    ("unarchived", "inconsistent"),
+])
+def test_candidate_exception_cannot_hide_acceptance_unread_or_missing_evidence(tmp_path, mutation, error):
+    _candidate_source_exception(tmp_path)
+    register = json.loads((tmp_path / "docs/register.json").read_text())
+    if mutation == "accepted":
+        register["papers"][0]["status"] = "accepted"
+    elif mutation == "unread":
+        register["papers"][0]["reviews"][0]["review_done"] = False
+    elif mutation == "no_attempts":
+        register["source_exceptions"][0]["attempts"] = []
+    elif mutation == "successful_source":
+        register["source_exceptions"][0]["attempts"][0]["result"] = "retrieved"
+    else:
+        archive = json.loads((tmp_path / "docs/exceptions.json").read_text())
+        archive["entries"] = [entry for entry in archive["entries"] if entry["organization"] != "arXiv"]
+        archive["record_count"] = len(archive["entries"])
+        _write(tmp_path, "exceptions.json", archive)
+    _write(tmp_path, "register.json", register)
+    assert any(error in message for message in audit_review_watermark(tmp_path))
 
 
 def test_artifacts_cannot_escape_docs(tmp_path):

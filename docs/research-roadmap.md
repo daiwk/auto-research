@@ -1,17 +1,22 @@
 # 统一后续路线图与 TODO
 
-## 审查截至 2026-10-12：覆盖范围与归档例外
+## 审查截至 2026-10-15：覆盖范围与归档例外
 
 当前审查水位与例外以[统一状态](paper-discovery-watermark.json)为准；
-[本轮审查闭环](research-audits/oct12-review-closure/README.md)记录四轨八查询、定向补发现、Google/Meta/DeepMind来源与例外。
+[本轮审查闭环](research-audits/oct15-review-closure/README.md)记录四轨两通道、Google/Meta/DeepMind来源、成本终态与例外。
 严格来源穷尽水位已退休。现在只显示审查水位、覆盖范围和归档例外，不承诺全网无遗漏；实现进度独立记录。
-本批八查询去重1,597条：继承1,019、本轮新审578，另10条独立补发现；登记集合含旧范围3条，共1,610。
-官方范围为Google28页/406条、Meta6页/144条、DeepMind9页/265条；[33项例外](research-audits/oct12-review-closure/exception-archive.json)非阻塞归档。
-后续增量扫描从10月11日重叠到新的截止日；旧月份补查、新v1、更新revision与独立补发现分开，不重复算作“当天新论文”。
+本批召回去重3,742个身份：此前未登记的窗口首发794、历史/重叠1,320、已有1,628；另有2个非arXiv官方身份。
+11个已有论文的最新版本另行复核，不算新文。历史项允许只做身份/日期/摘要范围分流，不能冒称逐篇算法全文审查。
+官方范围为Google28页/412条、Meta6页/144条、DeepMind9页/265条；[当前例外](research-audits/oct15-review-closure/exception-archive.json)非阻塞归档。
+后续增量扫描从10月14日重叠到新的截止时间；旧文补发现、新首发、更新revision与独立官方身份分开，不重复算作“当天新论文”。
 历史相关论文保留为候选线索；归档例外仅在出现新证据时重开，不每轮反复重试。
 
-当前16项实现与实际验收见[固定范围](design/oct12-papers-and-review.md)，不能用审查水位替代GPU、算法或能力验收。
-16项的真实CUDA机制/运行设施验证已完成，负结果和不可用原环境均保留；不声明原论文规模、线上收益或正式能力比较已复现。
+**高成本明确不复现即审查 DONE**，不是待算力TODO，不自动重试/实现/evolve；用户获知成本后明确要求才重开。
+本 MR 不训练、不新增算法实现，不能用审查水位替代GPU、算法或能力验收。
+少量可负担的[审查候选](research-audits/oct15-review-closure/priority-decisions.md)仍是未实现，需另定保真验收范围。
+
+此前16项实现与实际验收保留在[10月12日固定范围](design/oct12-papers-and-review.md)：
+CUDA机制/运行设施验证、负结果和不可用原环境均保留；不声明原论文规模、线上收益或正式能力比较已复现。
 
 ## PR #195 候选审查快照（来源补齐已由上节续办）
 

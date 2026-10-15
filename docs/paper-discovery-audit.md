@@ -1,5 +1,9 @@
 # 论文发现闭环与防遗漏审计
 
+最新审查为 [2026-10-13～10-15 收口](research-audits/oct15-review-closure/README.md)：
+新首发、历史补发现和修订版分别统计；高成本候选明确不复现、审查完成。
+当前日期、覆盖范围、截至时间和例外仍以[统一状态](paper-discovery-watermark.json)为准。
+
 2026-10-01～10-07 的完整候选清单、逐篇审查与补查回执见
 [本批审查收口](research-audits/oct07-review-closure/README.md)。日期窗口查询和月份编号
 补查分别保存；Google 官方目录按页面声明的总页数读取，并报告是否超过配置预算。
@@ -18,15 +22,50 @@
 实现进度仍独立记录。`accepted/deferred` 不是算法实现完成，不能因水位推进改变论文证据等级。
 当前状态不再保留 `source_exhaustiveness_watermark`，审计会拒绝重新引入它；旧回执只作为历史快照。
 
+### 高成本不复现：审查已完成（2026-10-15 明确）
+
+当原文配置或已有测量表明复现超出单卡 A100/A30、Mac 的合理成本，记录成本依据并标注
+**“成本过高，不复现”**，该候选就按 **审查 DONE** 处理，不是等待算力的未完成 TODO。
+它不阻塞批次完成或审查水位推进，也不自动进入重跑、实现或执行型 evolve 队列。
+无需为了审查收口补代码、实验指标或 GPU 回执；只有用户看到成本说明后明确要求，才重开复现。
+
+为兼容已有账本，沿用终态 `status: deferred`；已有目录的 `deferred_high_cost` 也保留。
+新决定可附加 `resolution: not_reproduced_high_cost`，让“明确不复现”区别于一般后续候选，例如：
+
+```json
+{
+  "id": "2610.20174",
+  "priority": "P1",
+  "status": "deferred",
+  "resolution": "not_reproduced_high_cost",
+  "reason": "成本过高，不复现：原文训练使用 2 节点、每节点 8 张 H800；本地只有单卡 A100/A30。",
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2610.20174v1",
+    "basis": "原文 training corpus 与 training hardware 段落",
+    "scale": "7B 模型、多领域专家训练与整合，74K 偏好对",
+    "available_resource": "单卡 A100 或 A30，或本地 Mac",
+    "cost_type": "published_configuration_not_local_measurement"
+  }
+}
+```
+
+成本终态只关闭该候选，不把它伪装成 `implemented` 或真实能力验证完成，也不豁免其他
+未读候选或未完成的召回查询。正常补齐窗口覆盖和逐项决定后，即使有高成本不复现项，
+仍应更新账本并正常推进审查水位。
+
 当前状态的唯一入口是 [`paper-discovery-watermark.json`](paper-discovery-watermark.json)，
-本批逐条来源补齐见[10 月 7 日来源验收](research-audits/oct07-source-closure/README.md)。
-归档清单见[32 项非阻塞例外](research-audits/oct07-source-closure/exception-archive.json)。
+本批逐条来源补齐见[10 月 15 日审查验收](research-audits/oct15-review-closure/README.md)。
+归档清单见[当前非阻塞例外](research-audits/oct15-review-closure/exception-archive.json)。
 旧扫描回执中的水位是当时快照，不应覆写为新的结论。
 
 允许的例外仅包括身份/日期无法确定、原文无法取得、目录分页覆盖无法证明；
 必须记录 URL、原创理由、实际尝试、研究范围初筛和重开条件，不计为 accepted。
 “没有读”“查询触顶”“确认在窗口内但尚未审查”不能当作例外跳过。
 Google/Meta 的优先级、正文线上 A/B/全流量证据门槛、真实实现与 GPU 验证门槛均不变。
+
+已确认 arXiv 身份、但在本轮有界读取中 HTML/PDF 确实无法取得的原文，也保留在候选登记中：
+`source_exceptions` 记录版本、实际失败 URL/错误与重开条件，逐项对应归档清单。
+其状态为 `archived_source_exception`，不是接受、阅读全文或实现；仅有摘要不能绕过全文接受门槛。
 
 `python scripts/audit_paper_coverage.py --strict` 同时检查该状态文件及引用产物：
 缺召回通道、失败/触顶查询、未审候选、缺尝试的忽略项、把窗口内论文误标为历史、

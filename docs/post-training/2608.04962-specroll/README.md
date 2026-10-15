@@ -2,6 +2,8 @@
 
 > **复现级别：核心机制 mini-suite。** 本地实现执行论文特有的 RL rollout 加速 算子；不把确定性小型评测写成论文完整复现。
 
+> **版本边界（2026-10-15 复核）**：本页与 `specroll` 保留原 v1 的 fast/slow 机制，不代表已经实现 [v2 SPARK](https://arxiv.org/html/2608.04962v2)。v2 改为同一 prompt group 内共享、每轮重置的低秩 logit correction，并由 verifier 反馈更新、跨 rollout 学习投影；不能把旧 adapter 改名就算新版已接入。新版完整 GRPO 多模型实验不复现，审查已完成，现有 mini-suite 的证据等级不变。
+
 ## 论文信息
 
 | 字段 | 内容 |
