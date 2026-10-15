@@ -18,6 +18,37 @@
 实现进度仍独立记录。`accepted/deferred` 不是算法实现完成，不能因水位推进改变论文证据等级。
 当前状态不再保留 `source_exhaustiveness_watermark`，审计会拒绝重新引入它；旧回执只作为历史快照。
 
+### 高成本不复现：审查已完成（2026-10-15 明确）
+
+当原文配置或已有测量表明复现超出单卡 A100/A30、Mac 的合理成本，记录成本依据并标注
+**“成本过高，不复现”**，该候选就按 **审查 DONE** 处理，不是等待算力的未完成 TODO。
+它不阻塞批次完成或审查水位推进，也不自动进入重跑、实现或执行型 evolve 队列。
+无需为了审查收口补代码、实验指标或 GPU 回执；只有用户看到成本说明后明确要求，才重开复现。
+
+为兼容已有账本，沿用终态 `status: deferred`；已有目录的 `deferred_high_cost` 也保留。
+新决定可附加 `resolution: not_reproduced_high_cost`，让“明确不复现”区别于一般后续候选，例如：
+
+```json
+{
+  "id": "2610.20174",
+  "priority": "P1",
+  "status": "deferred",
+  "resolution": "not_reproduced_high_cost",
+  "reason": "成本过高，不复现：原文训练使用 2 节点、每节点 8 张 H800；本地只有单卡 A100/A30。",
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2610.20174v1",
+    "basis": "原文 training corpus 与 training hardware 段落",
+    "scale": "7B 模型、多领域专家训练与整合，74K 偏好对",
+    "available_resource": "单卡 A100 或 A30，或本地 Mac",
+    "cost_type": "published_configuration_not_local_measurement"
+  }
+}
+```
+
+成本终态只关闭该候选，不把它伪装成 `implemented` 或真实能力验证完成，也不豁免其他
+未读候选或未完成的召回查询。正常补齐窗口覆盖和逐项决定后，即使有高成本不复现项，
+仍应更新账本并正常推进审查水位。
+
 当前状态的唯一入口是 [`paper-discovery-watermark.json`](paper-discovery-watermark.json)，
 本批逐条来源补齐见[10 月 7 日来源验收](research-audits/oct07-source-closure/README.md)。
 归档清单见[32 项非阻塞例外](research-audits/oct07-source-closure/exception-archive.json)。

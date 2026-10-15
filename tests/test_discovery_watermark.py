@@ -3,6 +3,8 @@ import json
 import pytest
 
 from auto_research.discovery_watermark import POLICY, audit_review_watermark, partition_archived_official_reviews
+from scripts import audit_paper_coverage
+from scripts.record_discovery_review import build_batch
 
 
 def _write(root, name, value):
@@ -62,6 +64,55 @@ def _fixture(root):
 def test_explicit_exceptions_can_close_scoped_review_but_not_claim_exhaustiveness(tmp_path):
     _fixture(tmp_path)
     assert audit_review_watermark(tmp_path) == []
+
+
+@pytest.mark.parametrize("blocker", [None, "unread", "capped"])
+def test_high_cost_nonreproduction_is_review_done_not_implementation(tmp_path, monkeypatch, blocker):
+    state = _fixture(tmp_path)
+    artifact = {
+        "track": "agent", "window": state["window"],
+        "candidates": [{
+            "arxiv_id": "2610.00001", "title": "Expensive agent training",
+            "repository_status": "new", "matched_queries": ["priority-org-meta"],
+        }],
+    }
+    decision = {
+        "id": "2610.00001", "priority": "P0", "status": "deferred",
+        "resolution": "not_reproduced_high_cost",
+        "reason": "Published multi-GPU configuration exceeds the one-GPU budget; do not reproduce.",
+        "cost_assessment": {
+            "source_url": "https://example.test/expensive-agent",
+            "basis": "Appendix training configuration",
+            "available_resource": "one A100 or A30, or a Mac",
+        },
+        "full_text_review": {
+            "scope": "full-text", "source_locations": ["Appendix training configuration"],
+        },
+    }
+    batch = build_batch(artifact, {"decisions": [decision]}, batch_name="cost-closed")
+    row = batch["candidates"][0]
+    assert row["status"] == "deferred"
+    assert row["resolution"] == "not_reproduced_high_cost"
+    assert row["cost_assessment"] == decision["cost_assessment"]
+    assert not {"doc", "key", "metrics", "gpu_validation_artifact"}.intersection(row)
+    _write(tmp_path, "paper-discovery-ledger.json", {"schema_version": 1, "batches": [batch]})
+    _write(tmp_path, "pending.json", artifact)
+    _write(tmp_path, "register.json", {
+        "candidate_review_complete": True,
+        "papers": [{**decision, "status": "pending" if blocker == "unread" else "deferred"}],
+    })
+    if blocker == "capped":
+        path = tmp_path / "docs/agent-late-index.json"
+        payload = json.loads(path.read_text())
+        payload["arxiv_transport"]["capped_queries"] = 1
+        _write(tmp_path, path.name, payload)
+    monkeypatch.setattr(audit_paper_coverage, "ROOT", tmp_path)
+    monkeypatch.setattr(audit_paper_coverage, "LEDGER", tmp_path / "docs/paper-discovery-ledger.json")
+    errors = audit_paper_coverage.audit(strict=True, pending_artifacts=(tmp_path / "docs/pending.json",))
+    if blocker:
+        assert any(blocker in error for error in errors)
+    else:
+        assert errors == []
 
 
 @pytest.mark.parametrize("field,value,error", [
