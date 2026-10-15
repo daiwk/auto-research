@@ -1,0 +1,9 @@
+{
+  "domain": "foundation-models",
+  "key": "smrc-pmrc",
+  "detail_path": "reproductions/2610.19844-smrc-pmrc/README.md",
+  "first_author": "Sifan Yang",
+  "first_author_affiliation": "Nanjing University / Alibaba Token Hub",
+  "summary": "把优化器动量压到低秩子空间，同时显式保留正交残差梯度；SMRC 在换基时修正参数并重置动量，PMRC 则对低维动量做矩阵符号更新。本地仅验收 CPU/CUDA 优化器组件，不复现完整多卡预训练。",
+  "adapter": {"spec_key": "smrc-pmrc"}
+}

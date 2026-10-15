@@ -1,0 +1,12 @@
+{
+  "domain": "foundation-models",
+  "key": "pn-mix",
+  "detail_path": "reproductions/2610.19605-pn-mix/README.md",
+  "first_author": "Gil Jae Song",
+  "first_author_affiliation": "Seoul National University",
+  "adapter": {"spec_key": "pn-mix"},
+  "summary": "在 prefill 中以 query–key RoPE 通道对范数乘积选择高精度对，后续共享该选择，以 H3/L1 压缩 K 并保留 sink 与残差缓冲。本地实际执行打包缓存与 attention 消费，仅为 L1 组件诊断，不代表完整长输出基准或生产吞吐复现。",
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/pn-mix-a100-20261015.json"
+}
