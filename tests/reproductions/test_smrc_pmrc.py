@@ -353,3 +353,23 @@ def test_unified_adapter_rejects_explicit_mps(monkeypatch, tmp_path):
     monkeypatch.setenv(DEVICE_ENV, "mps")
     with pytest.raises(ValueError, match="CPU/CUDA"):
         experiment.reproduce(tmp_path, 42)
+
+
+def test_cpu_oracle_and_protocol_do_not_require_pytorch_cpu_lapack(monkeypatch):
+    from auto_research.reproductions.smrc_pmrc.experiment import _paper_quadratic, _polar_reference
+
+    def no_lapack(*_args, **_kwargs):
+        raise RuntimeError("simulated torch build without CPU LAPACK")
+
+    monkeypatch.setattr(torch.linalg, "svd", no_lapack)
+    monkeypatch.setattr(torch.linalg, "qr", no_lapack)
+    matrix = torch.tensor([[3., 0., 0.], [0., -2., 0.]], dtype=torch.float64)
+    result = _polar_reference(matrix)
+    torch.testing.assert_close(result, torch.tensor([[1., 0., 0.], [0., -1., 0.]],
+                                                   dtype=torch.float64), atol=1e-15, rtol=0)
+    signal, noise, pattern, noise_right, initial = _paper_quadratic("cpu")
+    torch.testing.assert_close(noise_right.T @ noise_right, torch.eye(2, dtype=torch.float64),
+                               atol=1e-15, rtol=0)
+    torch.testing.assert_close((pattern / (8 ** 0.5)) @ noise_right,
+                               torch.zeros(2, 2, dtype=torch.float64), atol=1e-15, rtol=0)
+    assert signal.shape == noise.shape == (30, 2) and initial.shape == (30, 8)

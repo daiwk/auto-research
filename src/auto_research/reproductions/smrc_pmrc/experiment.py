@@ -9,6 +9,7 @@ import re
 import time
 from pathlib import Path
 
+import numpy as np
 import torch
 from torch import Tensor, nn
 
@@ -21,10 +22,16 @@ PUBLIC_REVISION = "arxiv:2610.19844v1:appendix-E.1.1:equation-30"
 
 
 def _polar_reference(value: Tensor) -> Tensor:
-    """Independent CPU double-precision SVD reference (zero null directions)."""
-    left, singular, right = torch.linalg.svd(value.double().cpu(), full_matrices=False)
-    cutoff = torch.finfo(torch.float64).eps * max(value.shape) * singular.max()
-    return (left * (singular > cutoff).double()) @ right
+    """Independent NumPy CPU FP64 oracle, without PyTorch CPU LAPACK.
+
+    GPU-only PyTorch builds can have CUDA SVD but no host LAPACK. Keeping the
+    oracle on NumPy also makes it independent of the tested torch.linalg path.
+    The sign definition and the numerical acceptance tolerance are unchanged.
+    """
+    array = value.detach().double().cpu().numpy()
+    left, singular, right = np.linalg.svd(array, full_matrices=False)
+    cutoff = np.finfo(np.float64).eps * max(value.shape) * singular.max()
+    return torch.from_numpy((left * (singular > cutoff)) @ right)
 
 
 def _numerical_controls(device: str) -> dict[str, float]:
@@ -85,7 +92,10 @@ def _paper_quadratic(device: str):
     noise = torch.eye(30, dtype=torch.float64)[:, -2:]
     pattern = torch.tensor([[1.] * 8, [1., -1.] * 4], dtype=torch.float64)
     signal_right = pattern.T / (8 ** 0.5)
-    noise_right = torch.linalg.qr(signal_right, mode="complete").Q[:, 2:4]
+    # Host construction must not require LAPACK in the PyTorch build. The
+    # tested optimizer's CUDA SVD/QR remains unchanged and still runs on CUDA.
+    complete_q = np.linalg.qr(signal_right.numpy(), mode="complete")[0]
+    noise_right = torch.from_numpy(complete_q[:, 2:4].copy())
     start = signal @ torch.diag(torch.tensor([1.8, 0.9], dtype=torch.float64)) @ pattern
     return tuple(value.to(device) for value in (signal, noise, pattern, noise_right, start))
 
@@ -265,8 +275,13 @@ def run_diagnostic(
         }
     if resolved.type == "cuda":
         torch.cuda.synchronize(resolved)
-    digest = hashlib.sha256(json.dumps({"revision": PUBLIC_REVISION, "shape": [30, 8],
-                                       "signs": signs}, sort_keys=True).encode()).hexdigest()
+    protocol_digest = hashlib.sha256(json.dumps(
+        {"revision": PUBLIC_REVISION, "shape": [30, 8], "signs": signs},
+        sort_keys=True,
+    ).encode())
+    for value in (signal, noise, pattern, noise_right, initial):
+        protocol_digest.update(value.detach().cpu().contiguous().numpy().tobytes())
+    digest = protocol_digest.hexdigest()
     return {
         "schema_version": 2,
         "method": "smrc-pmrc",
@@ -280,6 +295,7 @@ def run_diagnostic(
         "dataset": "paper-appendix-E.1.1-quadratic + seeded-small-MLP-regression",
         "dataset_revision": PUBLIC_REVISION,
         "dataset_source": PUBLIC_PROTOCOL,
+        "host_reference": "NumPy FP64 SVD oracle and complete-QR protocol construction; torch CUDA kernels tested independently",
         "checkpoint_revision": "none; deterministic matrices and randomly initialized MLP",
         "public_protocol_sha256": digest,
         "budget": {"steps_per_arm": steps, "mlp_steps_per_arm": min(steps, 80),
