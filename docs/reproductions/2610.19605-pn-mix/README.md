@@ -126,6 +126,8 @@ A100 的 FP16 输入/metadata 已完成 seed 42/43/44，三个网络初始化各
 
 完整记录见 [A100 三种子组件结果](metrics/component-a100-seeds42-44.json)及[绑定源码的脱敏回执](../../gpu-validations/pn-mix-a100-20261015.json)。统一 `auto-research reproduce` 的 CUDA 入口也实际运行 seed42，数值与独立脚本一致。这里三 seed 只是三个随机初始化的量化输入，**不是预训练 LLM 的语言任务比较**。持久缓存 32,516 字节不包含 dense 反量化临时空间，不能据此宣称端到端显存收益。
 
+本轮没有可复用的预训练权重缓存，故 GPU 回执仅覆盖默认网络与缓存组件；可选 `--checkpoint` 提取接口**未做真实权重端到端验收**，不在本轮通过范围内，也不代表已验证完整 Llama/SmolLM2 适配。使用该实验性接口前仍需单独核对所安装 Transformers 版本和实际模型的 RoPE 布局。
+
 ### API 与代码映射
 
 | 入口 | 实际职责 |

@@ -146,6 +146,7 @@
     "actual_attention_calls_per_run": 66,
     "unified_cli_cuda_and_same_seed_agreement": true,
     "fused_kernel": false,
+    "offline_checkpoint_extraction_tested": false,
     "full_pretrained_llm_quality_tested": false
   },
   "executed_source_sha256": {
