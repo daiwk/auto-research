@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "adapter_key": "rap-walk",
+  "validated_at": "2026-10-16",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_rap_walk.py",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--output",
+    "runs/rap-walk.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "explicit-transitive-and-cyclic-mechanism-fixtures",
+    "revision": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "capability_dataset": false
+  },
+  "command_path_policy": "public input paths relativized; exact content revision retained",
+  "checkpoint": {
+    "public_id": "none-independent-seeded-initialization",
+    "revision": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.004659698499987523,
+      "std": 0.00047621256913355176,
+      "n": 6
+    },
+    "maximum_stationary_residual": 9.311007520551584e-11
+  },
+  "execution_checks": {
+    "actual_grpo_backward_and_update": true,
+    "explicit_fixture_not_video": true,
+    "video_generation_performed": false,
+    "judge_model_called": false
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "executed_source_sha256": {
+    "src/auto_research/post_training/rap_walk.py": "6f879f3d78462b06890156c3f2e857693db6929828ca16b72f01ff1c714a21af",
+    "scripts/run_rap_walk.py": "a19bd88cf42bc20c07670086a068823e26f76afe7050088c1610a0e0872b31ca"
+  },
+  "prior_failed_attempts": [],
+  "provenance": {
+    "commit": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "artifact_path": "docs/gpu-validations/rap-walk-a100-20261016.json",
+    "metric_artifact_path": "docs/post-training/2610.20089-rap-walk/metrics/component-seeds42-44.json"
+  },
+  "full_experiment_status": "not_reproduced_high_cost"
+}

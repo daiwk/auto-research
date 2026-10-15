@@ -54,6 +54,12 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+[10 月 16 日八项 P1 组件与接口](design/oct16-eight-p1.md)包含 OOB 全数据锚点正则、
+透明上下文压缩、FormCraft 类型组合库、散度路由 DrOPD、RAP-Walk 偏好信用、CTXGAP、
+Selective Reasoning 与 CLASHarness 评测接口。低成本算法实际执行、公开统计回放和接口
+分别标注，不把作者历史成绩当成本地模型能力；完整高成本实验统一标注“不复现（审查 DONE）”。
+CUDA 路径的实际结果和失败修复见交付清单，不自动进入 Evolve 能力晋级。
+
 [10 月 15 日五项组件与接口](design/oct15-affordable-components.md)包含 CASI 冻结快照信用分配、
 PN-Mix KV 量化、SMRC/PMRC 优化器、Meta AutoformBench 任务/结果接口与 JEPA 预测—规划评测。
 只交付低成本可执行部分；完整生产训练、大模型扫评和多环境重训明确标注“不复现（审查 DONE）”。
@@ -78,7 +84,7 @@ Weakest-Link、CMP、TESS、RLCPR 和 Mingbird。均为有明确边界的 L1 机
 负结果和未完成原始 benchmark 都保留在各篇详情与[运行审计](research-audits/oct11-runtime-audit.md)中；
 “机制执行通过”不等同于“模型效果提高”，也不自动表示已接入 Evolve。
 
-仓库目前注册 **409 个**论文 adapter，统一事实源是
+仓库目前注册 **410 个**论文 adapter，统一事实源是
 [`docs/research-manifest.json`](research-manifest.json)。站点提供按研究域、机构、
 主题和年份浏览的[论文实现索引](reproductions/README.md)，每篇详情页包含论文链接、
 一作机构、发布日期、原作者代码状态、本地 adapter/代码路径、架构与公式、原文线上/离线

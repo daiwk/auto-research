@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "method": "clasharness",
+  "kind": "official_reference_import_validation",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "local_capability_score": null,
+  "local_agent_executed": false,
+  "accelerator": "CPU",
+  "command": "PYTHONPATH=src python scripts/run_clasharness.py import-reference --release-dir .cache/oct16-interfaces/clasharness --output .cache/oct16-interfaces/clasharness-result.json",
+  "upstream": {
+    "repository": "https://github.com/google-research/CLASHarness",
+    "revision": "234161ddc44755017215dd734d38be15419a45e0",
+    "code_license": "Apache-2.0",
+    "data_license": "CC-BY-4.0",
+    "input_sha256": {
+      "analysis/dead_rounds_exclusion.json": "cfbf94aecddf386ac97973b89c6e8c4ad775a34f3dbad87480ea44ffa18fa611",
+      "analysis/v8_check_fairness_audit.json": "25a69bbc4c76183ec4e4c7795a9411dd68afc465d1957ee3199c406e94613509",
+      "analysis/cost_high.json": "84e058226436bd2fb4d4a9715899e50694d7fd1f5f496e9e698f47127fdcae4e",
+      "docs/analysis/analysis_v8/curated_rounds.json": "41a29d41b1b3c64604e152b4c617f025d70cbd6aaf4fa36321215d17c96576b0"
+    }
+  },
+  "validation": {
+    "source_hashes_verified": true,
+    "audit_set_counts_match_author_totals": true,
+    "listed_checks": 775,
+    "conservative_demoted_check_union": 306,
+    "selected_rounds": 8,
+    "selected_models": 13,
+    "selected_records": 104,
+    "unscorable_required_check_records": 1,
+    "raw_result_sha256": "0876d078b5c7306030597b2aa14c6e50906e07ce1def58bfb5e05bfe33ac2484"
+  },
+  "official_reference_statistics": {
+    "source": "fixed authors' audit and selected published records, not new environment execution",
+    "set_counts": {"message_over_specified": 280, "protocol_unrequested_both_judges": 106, "protocol_unrequested_or_ambiguous_opus": 112, "message_unsupported_or_unasked": 373, "value_conflict": 200, "message_ambiguous_or_no_verdict": 10},
+    "pre_repair_dead_rounds": {"conflict_vlm_v8_3.6_flash": 18, "conflict_vlm_sonnet_5": 9},
+    "fairness_policy": "conservative: union(value_conflict, protocol_unrequested_both_judges)",
+    "upper_bound_demoted_checks": 775,
+    "upper_bound_is_fairness_estimate": false,
+    "sensitivity_rates_are_author_report_not_recomputed": true,
+    "unscorable_required_checks": [{"round": "expense_reimbursement_conflict_v02_r05", "model": "3.1-pro", "reason": "no_required_checks_in_curated_record"}]
+  },
+  "boundaries": {
+    "full_corpus_leaderboard_reproduced": false,
+    "fairness_recomputed_from_curated": false,
+    "semantic_judging_performed": false,
+    "official_task_inventory_verified": false,
+    "reference_isolation_verified": false,
+    "public_input_trust_boundary": "caller_declared_public_not_content_audited",
+    "task_archive_downloaded": false,
+    "full_experiment_status": "not_reproduced_high_cost"
+  }
+}

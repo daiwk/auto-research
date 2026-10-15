@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "adapter_key": "divergence-routed-opd",
+  "validated_at": "2026-10-16",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_divergence_routed_tiny.py",
+    "--corpus-path",
+    "public/hamlet.txt",
+    "--corpus-id",
+    "gutenberg/1524",
+    "--corpus-revision",
+    "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "--device",
+    "cuda",
+    "--teacher-steps",
+    "16",
+    "--steps",
+    "2",
+    "--max-tokens",
+    "16",
+    "--seeds",
+    "42,43,44",
+    "--output",
+    "runs/divergence-routed-opd.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "gutenberg/1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "byte_ranges": {
+      "train": [
+        0,
+        186205
+      ],
+      "validation": [
+        186205,
+        206895
+      ]
+    }
+  },
+  "command_path_policy": "public input paths relativized; exact content revision retained",
+  "checkpoint": {
+    "public_id": "none-independent-seeded-initialization",
+    "revision": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.23675437448432038,
+      "std": 0.0013413178754452754,
+      "n": 3
+    },
+    "teacher_parameter_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "generated_tokens": {
+      "mean": 64,
+      "std": 0.0,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 5.582959016164144,
+      "std": 0.017913444419674504,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 5.56505807240804,
+      "std": 0.019265382764358695,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "actual_online_sampling": true,
+    "frozen_teacher_unchanged": true,
+    "student_updated": true,
+    "appendix_kth_score_router": true,
+    "heldout_bytes_not_used_for_training": true,
+    "hf_checkpoint_path_validated": false
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "executed_source_sha256": {
+    "src/auto_research/post_training/divergence_routed_opd.py": "c9a9f696a352ec9bf42835b1faace73ce5e12c7d09b049e341741179889e3f2b",
+    "scripts/run_divergence_routed_tiny.py": "4204a1440b2c1340b7fc89b0963c4c8942bf800270a6241a0246e5b5eeadf3bc"
+  },
+  "prior_failed_attempts": [
+    {
+      "commit": "662e33b4eb1bfba87193a77f08fe516bd81a3203",
+      "error_type": "RuntimeError",
+      "reason": "cuDNN RNN backward rejected eval-mode gradient forward",
+      "resolution": "temporary evaluation contexts and explicit train-mode PPO forward; regression test and CUDA rerun"
+    }
+  ],
+  "provenance": {
+    "commit": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "artifact_path": "docs/gpu-validations/divergence-routed-opd-a100-20261016.json",
+    "metric_artifact_path": "docs/post-training/2610.19572-divergence-routed-opd/metrics/component-seeds42-44.json"
+  },
+  "full_experiment_status": "not_reproduced_high_cost"
+}

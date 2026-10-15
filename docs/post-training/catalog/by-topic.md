@@ -28,6 +28,7 @@
 
 ### 奖励构造与排序信号
 
+- [When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO](../2610.20089-rap-walk/README.md)（`rap-walk`）：RAP-Walk 不把成对视频偏好压成相互独立的胜率，而保留对手身份、循环关系和边清晰度。它在从输者到赢家的可靠随机游走中计算平稳偏好信用，经最低熵校准后修正原始胜率优势，最后仍交给同一 GRPO 更新。
 - [RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction](../2608.06310-rrc/README.md)（`rrc`）：**主题：生成式奖励模型。** 生成式 RM 擅长相对比较，却被传统 RL 强制压成独立标量。
 
 ### 多模态与结构化 reward
@@ -38,6 +39,7 @@
 
 ### on-policy / context 蒸馏
 
+- [Divergence-Routed On-Policy Distillation for Language Models](../2610.19572-divergence-routed-opd/README.md)（`divergence-routed-opd`）：DrOPD 在学生自己生成的轨迹上比较师生分布，以 JS 散度识别教师支持而学生严重欠覆盖的位置。它在所有位置保留 reverse-KL，并仅向高分歧位置增加 forward-KL 的纠正信号，通过候选级优势执行 PPO clipped 更新。
 - [LoOPSD: On-Policy Self-Distillation with Looped Teachers](../../reproductions/2610.18162-loopsd/README.md)（`loopsd`）：在线自蒸馏需要比学生更有用的教师，但更大外部模型或额外答案上下文并非唯一来源。LoOPSD在不改权重时搜索重复层区间来构造教师，用学生自产前缀进行蒸馏，再从更新后的学生重新搜索下一轮教师。 **成本过高，暂不复现；待验收，未注册可执行入口。**
 - [Branching On-Policy Distillation](../../reproductions/2610.13481-branch-opd/README.md)（`branch-opd`）：普通 OPD 每个前缀只看到一次后续。BranchOPD 用学生不确定性和师生分歧定位 fork，从同一冻结学生策略独立采样 suffix，前缀只计入一次；并用协议事件监督结束行为。
 - [State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents](../../reproductions/2610.13238-state-opd/README.md)（`state-opd`）：多轮OPD把旧reasoning和实际环境记录混在教师上下文中，可能继承错误推理。State-OPD只给教师已执行action/observation状态，学生仍保留完整history；在高完整词表熵状态扩采整段reasoning+action，额外action不执行。

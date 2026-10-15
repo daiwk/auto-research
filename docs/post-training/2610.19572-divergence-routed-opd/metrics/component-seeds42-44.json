@@ -1,0 +1,187 @@
+{
+  "schema_version": 2,
+  "method": "divergence-routed-opd",
+  "manifest_ref": "post-training:divergence-routed-opd",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "gutenberg/1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "byte_ranges": {
+      "train": [
+        0,
+        186205
+      ],
+      "validation": [
+        186205,
+        206895
+      ]
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component execution only; not full paper benchmark or capability improvement"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.23675437448432038,
+      "std": 0.0013413178754452754,
+      "n": 3
+    },
+    "teacher_parameter_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "generated_tokens": {
+      "mean": 64,
+      "std": 0.0,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 5.582959016164144,
+      "std": 0.017913444419674504,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 5.56505807240804,
+      "std": 0.019265382764358695,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "parameter_delta_l2": 0.23528979334735306,
+      "teacher_parameter_delta_l2": 0.0,
+      "teacher_warmup_steps": 16,
+      "generated_tokens": 64,
+      "baseline_validation_nll": 5.56227445602417,
+      "final_validation_nll": 5.542822360992432,
+      "history": [
+        {
+          "step": 0,
+          "loss": 2.9334521293640137,
+          "gradient_norm": 0.8563632965087891,
+          "reverse_kl": 3.1209521293640137,
+          "forward_kl": 0.9837887287139893,
+          "js": 0.2655836343765259,
+          "routed_fraction": 0.1875,
+          "mean_unique_candidates": 31.25,
+          "response_positions": 32
+        },
+        {
+          "step": 1,
+          "loss": 3.0838441848754883,
+          "gradient_norm": 0.834825873374939,
+          "reverse_kl": 3.2713441848754883,
+          "forward_kl": 0.9798232316970825,
+          "js": 0.26546794176101685,
+          "routed_fraction": 0.1875,
+          "mean_unique_candidates": 30.9375,
+          "response_positions": 32
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "parameter_delta_l2": 0.23792299659294142,
+      "teacher_parameter_delta_l2": 0.0,
+      "teacher_warmup_steps": 16,
+      "generated_tokens": 64,
+      "baseline_validation_nll": 5.593244552612305,
+      "final_validation_nll": 5.575597286224365,
+      "history": [
+        {
+          "step": 0,
+          "loss": 3.1229357719421387,
+          "gradient_norm": 0.763404130935669,
+          "reverse_kl": 3.3104357719421387,
+          "forward_kl": 0.9484153389930725,
+          "js": 0.25877371430397034,
+          "routed_fraction": 0.1875,
+          "mean_unique_candidates": 31.1875,
+          "response_positions": 32
+        },
+        {
+          "step": 1,
+          "loss": 2.9263172149658203,
+          "gradient_norm": 0.8287535905838013,
+          "reverse_kl": 3.1138172149658203,
+          "forward_kl": 0.8925034999847412,
+          "js": 0.2461872547864914,
+          "routed_fraction": 0.1875,
+          "mean_unique_candidates": 30.46875,
+          "response_positions": 32
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "parameter_delta_l2": 0.2370503335126667,
+      "teacher_parameter_delta_l2": 0.0,
+      "teacher_warmup_steps": 16,
+      "generated_tokens": 64,
+      "baseline_validation_nll": 5.593358039855957,
+      "final_validation_nll": 5.576754570007324,
+      "history": [
+        {
+          "step": 0,
+          "loss": 3.0988714694976807,
+          "gradient_norm": 0.8619272112846375,
+          "reverse_kl": 3.2863714694976807,
+          "forward_kl": 1.1480039358139038,
+          "js": 0.28806978464126587,
+          "routed_fraction": 0.1875,
+          "mean_unique_candidates": 30.96875,
+          "response_positions": 32
+        },
+        {
+          "step": 1,
+          "loss": 2.937739372253418,
+          "gradient_norm": 0.8945667743682861,
+          "reverse_kl": 3.125239372253418,
+          "forward_kl": 1.1239511966705322,
+          "js": 0.2819918692111969,
+          "routed_fraction": 0.1875,
+          "mean_unique_candidates": 31.21875,
+          "response_positions": 32
+        }
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_online_sampling": true,
+    "frozen_teacher_unchanged": true,
+    "student_updated": true,
+    "appendix_kth_score_router": true,
+    "heldout_bytes_not_used_for_training": true,
+    "hf_checkpoint_path_validated": false
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.19572-divergence-routed-opd/metrics/component-seeds42-44.json",
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "commit": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/divergence_routed_opd.py": "c9a9f696a352ec9bf42835b1faace73ce5e12c7d09b049e341741179889e3f2b",
+      "scripts/run_divergence_routed_tiny.py": "4204a1440b2c1340b7fc89b0963c4c8942bf800270a6241a0246e5b5eeadf3bc"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

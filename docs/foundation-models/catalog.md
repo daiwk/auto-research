@@ -10,9 +10,11 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 预训练与数据 | [Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning](../reproductions/2610.20158-oob-regularization/README.md) | European Molecular Biology Laboratory (EMBL)，2026-10-14 | 未发现官方代码 | `oob-regularization`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon](../reproductions/2610.19844-smrc-pmrc/README.md) | Nanjing University / Alibaba Token Hub，2026-10-14 | 未发现官方代码 | `smrc-pmrc`：仅低成本组件，完整实验不复现 |
 | 多模态基础模型 | [One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models](2610.19375-jepa-prediction-planning/README.md) | 论文未列机构，2026-10-14 | 未发现官方代码 | `jepa-prediction-planning`：CPU 评测接口，不执行模型 |
 | 推理与系统效率 | [PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference](../reproductions/2610.19605-pn-mix/README.md) | Seoul National University，2026-10-14 | 未发现官方代码 | `pn-mix`：仅低成本组件，完整实验不复现 |
+| System One / JEV | [Selective Reasoning for Typed Decision Models: When to Start, Read, and Stop](../system-one/2610.19644-selective-reasoning/README.md) | University of Electronic Science and Technology of China，2026-10-14 | [已开源](https://github.com/binzheng-joey/selective-reasoning) | `selective-reasoning`：CPU 评测接口，不执行模型 |
 | System One / JEV | [The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval](../system-one/2610.14631-request-audit/README.md) | Tsinghua University，2026-10-10 | 未找到本论文 artifact 的公开下载地址（2026-10-14 核验） | `jev-request-audit` |
 | System One / JEV | [Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages](../system-one/2610.14112-regional-transfer/README.md) | Universitas Budi Luhur，2026-10-09 | [已开源](https://github.com/tnromy/evaluating-system-one-models-for-indonesian-regional-languages) | `jev-regional-transfer` |
 | 推理与系统效率 | [DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs](../reproductions/2610.13767-dualquant/README.md) | d-Matrix，2026-10-09 | [已开源](https://github.com/MahsaMoonlike/dualquant) | `dualquant` |

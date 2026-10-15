@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "method": "selective-reasoning-official-measurement-replay",
+  "manifest_ref": "foundation-models:selective-reasoning",
+  "seeds": [],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l0_interface",
+  "evaluation_protocol": {
+    "tier": "l0_interface", "seeds": [], "formal_comparison": false,
+    "claim_policy": "official author measurement recomputation only; no local model inference or capability score"
+  },
+  "dataset": {
+    "id": "selective-reasoning-v1.0-anonymous-author-measurements",
+    "revision": "sha256:02ecdbeaeee1cdad125facc08fab0257f3cf9be7a6d4d75aa336e108528a719a"
+  },
+  "provenance": {
+    "artifact_path": "docs/system-one/2610.19644-selective-reasoning/validation/official-statistics-cpu.json",
+    "dataset_fingerprint": "sha256:02ecdbeaeee1cdad125facc08fab0257f3cf9be7a6d4d75aa336e108528a719a",
+    "source_url": "https://github.com/binzheng-joey/selective-reasoning/releases/tag/v1.0",
+    "upstream_revision": "26795854fe148e7a4caa37ef6cc051431b8b8790",
+    "recompute_script_sha256": "d08d369f6bb577453dcab22f8e48e338f49463176743495b93b4807c030eea66",
+    "data_zip_sha256": "1f82d594eb67556cec89cac810a9852f3d90e44a3b12bf51c732946ce54448ac",
+    "software_zip_sha256": "11819e28329d28f6e89f70c3b2d0fd532ea11b7341e97f3d9f8cf590d9c4b3a8",
+    "command": "PYTHONPATH=src python scripts/run_selective_reasoning.py replay --release-dir <pinned-v1.0> --output <new-run>",
+    "accelerator": "CPU", "model_inference_performed": false
+  },
+  "protocol": {
+    "evidence_kind": "official_measurement_recomputation", "bootstrap_seed": 20261010,
+    "bootstrap_draws": 10000, "pointwise_intervals": true,
+    "raw_trace_or_prefix_relations_verified": false, "expected_numbers_used_as_computation_inputs": false
+  },
+  "metrics": {
+    "series_count": 9, "measurement_rows": 29808, "numeric_values_checked": 16888,
+    "all_fixed_checks_passed": true, "local_model_inference_calls": 0
+  },
+  "official_reference_statistics": {
+    "series": "primary13", "questions": 768,
+    "direct_correct": 545, "ours_entropy70_correct": 648, "full_1024_correct": 657,
+    "not_local_capability_results": true
+  },
+  "local_capability_score": null,
+  "full_experiment": {"status": "not_reproduced_high_cost", "review_done": true}
+}

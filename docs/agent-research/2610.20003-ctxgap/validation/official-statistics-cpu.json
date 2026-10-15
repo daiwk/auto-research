@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "method": "ctxgap",
+  "kind": "frozen_score_reproduction_validation",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "local_capability_score": null,
+  "models_called": false,
+  "accelerator": "CPU",
+  "command": "PYTHONPATH=src python scripts/run_ctxgap.py reproduce --release-dir .cache/oct16-interfaces/ctxgap --bootstrap 10000 --output .cache/oct16-interfaces/ctxgap-result.json",
+  "upstream": {
+    "repository": "https://github.com/Kaguraaaaaa/Ctxgap",
+    "revision": "04d8c618238923c1e797b9b154b977091222c1a2",
+    "code_license": "MIT",
+    "data_license": "CC-BY-4.0",
+    "input_sha256": {
+      "data/anon/main37_units.csv": "920b345138bfa8a5ca6712f333677de4b36fd6d74f679e84497d156e8230568e",
+      "data/anon/e2_units.csv": "64bfcc685956c1b582cbf8c83f8c7f10dfc78d6be3c6ebd4722d0ce7a07b44a3",
+      "data/anon/cross_harness_units.csv": "a19811ac734de97cbc09aaee9e0daf1993fa4c444f1a713820e88bcf4a576e12",
+      "data/anon/task_success.csv": "fee5deed1fe9d29db706752f8a7ecc8c1acd851b5c251e7eae5bc3f87c654a14",
+      "data/reproduced_all.json": "93832f4b9d12e3f4612d9713e84e8fa02e1e8a5d1a07b64f236627df6e3cfd09"
+    }
+  },
+  "bootstrap": {"group": "task/run", "seed": 0, "draws": 10000, "paired": true},
+  "validation": {
+    "reference_matches": true,
+    "valid_probes": 4799,
+    "tasks": 37,
+    "reference_comparison": "all frozen output fields exactly equal the pinned author data/reproduced_all.json",
+    "raw_result_sha256": "506c91dbecfd61c739059385633c98e4868e2f80b318a6c4a9bf9dfa8bbd954d"
+  },
+  "official_reference_statistics": {
+    "source": "recomputed from authors' frozen numerical scores; not local observer/Agent inference",
+    "main": {"n_valid_probes": 4799, "n_tasks": 37, "acc_U": 0.5205, "acc_T_full": 0.927081, "acc_actor": 0.936429, "gap": 0.406582, "gap_ci95": [0.373278, 0.43809]},
+    "successful_tasks_k4": {"n_tasks": 30, "n_probes": 1172, "acc_U": 0.570544, "acc_T_full": 0.918471, "gap": 0.347926, "gap_ci95": [0.281607, 0.412632]},
+    "cross_harness": {
+      "ClaudeCode": {"n_probes": 1664, "n_tasks": 12, "acc_U_pooled": 0.524959, "acc_T_full_pooled": 0.927144, "gap_task_equal": 0.406963, "gap_ci95": [0.348256, 0.46748]},
+      "DSH": {"n_probes": 1880, "n_tasks": 12, "acc_U_pooled": 0.414652, "acc_T_full_pooled": 0.920829, "gap_task_equal": 0.489845, "gap_ci95": [0.427496, 0.552534]},
+      "Pi": {"n_probes": 1609, "n_tasks": 12, "acc_U_pooled": 0.524309, "acc_T_full_pooled": 0.941487, "gap_task_equal": 0.390271, "gap_ci95": [0.318556, 0.487488]}
+    },
+    "e2": {"n_probes": 4175, "acc": {"A": 0.6716, "B": 0.754514, "C": 0.756562}, "B-A": {"diff": 0.082915, "ci95": [0.057177, 0.104186]}, "C-A": {"diff": 0.084962, "ci95": [0.063368, 0.10576]}, "C-B": {"diff": 0.002047, "ci95": [-0.014774, 0.017842]}}
+  },
+  "boundaries": {
+    "T_public_is_T_full": false,
+    "new_public_measurement_executed": false,
+    "private_reasoning_recovered": false,
+    "reference_data_is_local_capability": false,
+    "full_experiment_status": "not_reproduced_high_cost"
+  }
+}

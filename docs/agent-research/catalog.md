@@ -10,6 +10,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Agent记忆与上下文 | [Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents](2610.20116-transparent-compact/README.md) | Hokkaido University，2026-10-14 | [已开源](https://github.com/felixwoolford/transparent-compact-pi) | `transparent-compact`：仅低成本组件，完整实验不复现 |
+| 可验证能力组合 | [Recursive Formation and First-Class Reuse of Compositional Capabilities](2610.19414-formcraft/README.md) | not listed in paper，2026-10-14 | [已开源](https://github.com/lancelot138505-cpu/f-system) | `formcraft`：仅低成本组件，完整实验不复现 |
+| 公共评测与协议 | [What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports](2610.20003-ctxgap/README.md) | Tencent，2026-10-14 | [已开源](https://github.com/Kaguraaaaaa/Ctxgap) | `ctxgap`：CPU 评测接口，不执行模型 |
+| 公共评测与协议 | [CLASHarness: Benchmarking Multi-Agent Conflict in Computer Use via a Controllable and Verifiable Generation Pipeline](2610.19128-clasharness/README.md) | Google / Emory University（共同署名），2026-10-13 | [已开源](https://github.com/google-research/CLASHarness) | `clasharness`：CPU 评测接口，不执行模型 |
 | agentic-rl | [RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution](../reproductions/2610.15772-rsipo/README.md) | Chinese University of Hong Kong，2026-10-11 | [已开源](https://github.com/zfkarl/RSIPO) | 计划键 `rsipo`：成本过高，暂不复现；待验收（仅研究资料） |
 | memory-retrieval | [Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence](../reproductions/2610.13277-beyond-final-embedding/README.md) | Southeast University，2026-10-09 | 未发现官方代码 | `beyond-final-embedding` |
 | agent-evolution | [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../reproductions/2610.13025-evo2/README.md) | University of Illinois Urbana-Champaign / Google DeepMind，2026-10-09 | 未发现官方代码 | `evo2` |

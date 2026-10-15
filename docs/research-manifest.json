@@ -574,6 +574,34 @@
     },
     {
       "domain": "agent-research",
+      "key": "clasharness",
+      "title": "CLASHarness: Benchmarking Multi-Agent Conflict in Computer Use via a Controllable and Verifiable Generation Pipeline",
+      "paper_url": "https://arxiv.org/abs/2610.19128",
+      "detail_path": "agent-research/2610.19128-clasharness/README.md",
+      "topic": [
+        "公共评测与协议",
+        "多 Agent 冲突与计算机使用"
+      ],
+      "first_author": "Yuxiang Lai",
+      "first_author_affiliation": "Google / Emory University（共同署名）",
+      "published": "2026-10-13",
+      "code": "https://github.com/google-research/CLASHarness",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.agent_research.clasharness.import_release",
+      "local_command": "PYTHONPATH=src python scripts/run_clasharness.py import-reference --release-dir .cache/clasharness-release --output runs/clasharness/reference.json",
+      "upstream_revision": "234161ddc44755017215dd734d38be15419a45e0",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "先预承诺真实状态，再执行参考轨迹并编译混合检查，构建共享计算机环境中的多 Agent 冲突任务。本地固定导入公开审计与八轮精选结果，保留失败、无 required-check 和公平性边界；另提供调用方声明的公开输入及外部 verdict 聚合接口，不执行完整环境或声称本地 Agent 得分。"
+    },
+    {
+      "domain": "agent-research",
       "key": "cobra-skills",
       "title": "COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization",
       "paper_url": "https://arxiv.org/abs/2609.11682",
@@ -681,6 +709,34 @@
       "published": "2023-05-19",
       "code": "https://github.com/microsoft/ProphetNet/tree/master/CRITIC",
       "adapter": "critic"
+    },
+    {
+      "domain": "agent-research",
+      "key": "ctxgap",
+      "title": "What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports",
+      "paper_url": "https://arxiv.org/abs/2610.20003",
+      "detail_path": "agent-research/2610.20003-ctxgap/README.md",
+      "topic": [
+        "公共评测与协议",
+        "任务状态可恢复性与报告审计"
+      ],
+      "first_author": "Guoyang Xu",
+      "first_author_affiliation": "Tencent",
+      "published": "2026-10-14",
+      "code": "https://github.com/Kaguraaaaaa/Ctxgap",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.agent_research.ctxgap.reproduce_release",
+      "local_command": "PYTHONPATH=src python scripts/run_ctxgap.py reproduce --release-dir .cache/ctxgap-release --bootstrap 10000 --output runs/ctxgap/reference.json",
+      "upstream_revision": "04d8c618238923c1e797b9b154b977091222c1a2",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "把同一任务状态拆成报告视图与完整执行视图，用原子事实探针及任务聚类 bootstrap 测量信息遗漏。本地固定官方小型数值表重算全部统计，并提供公开视图输入和外部标签聚合接口；不把公开子集当作私有 T_full，也不声称测得本地 Agent 能力。"
     },
     {
       "domain": "agent-research",
@@ -957,6 +1013,34 @@
       "code": null,
       "adapter": "flowright",
       "priority": "P1"
+    },
+    {
+      "domain": "agent-research",
+      "key": "formcraft",
+      "title": "Recursive Formation and First-Class Reuse of Compositional Capabilities",
+      "paper_url": "https://arxiv.org/abs/2610.19414",
+      "detail_path": "agent-research/2610.19414-formcraft/README.md",
+      "topic": [
+        "可验证能力组合",
+        "持久技能与递归复用"
+      ],
+      "first_author": "Hang Lin",
+      "first_author_affiliation": "not listed in paper",
+      "published": "2026-10-14",
+      "code": "https://github.com/lancelot138505-cpu/f-system",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.formcraft.run_sequence_study",
+      "local_command": "PYTHONPATH=src python scripts/run_formcraft.py --seeds 42,43,44 --output runs/formcraft/result.json",
+      "upstream_revision": "b6199c88148a0c8dec1eb649eb2315c377e2fc6a",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "fidelity_note": "从论文独立实现CPU序列域组合、验证准入、持久Library及一等复用；本地固定D01–D12不是作者原始任务，不声明原论文计数或LLM能力提升；未复制无许可上游源码。"
     },
     {
       "domain": "agent-research",
@@ -3193,6 +3277,34 @@
       "published": "2026-08-26",
       "code": "https://huggingface.co/datasets/jerryyan/TraceML",
       "adapter": "traceml"
+    },
+    {
+      "domain": "agent-research",
+      "key": "transparent-compact",
+      "title": "Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents",
+      "paper_url": "https://arxiv.org/abs/2610.20116",
+      "detail_path": "agent-research/2610.20116-transparent-compact/README.md",
+      "topic": [
+        "Agent记忆与上下文",
+        "透明压缩与恢复"
+      ],
+      "first_author": "Felix Woolford",
+      "first_author_affiliation": "Hokkaido University",
+      "published": "2026-10-14",
+      "code": "https://github.com/felixwoolford/transparent-compact-pi",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.transparent_compact.compact",
+      "local_command": "PYTHONPATH=src python scripts/run_transparent_compact.py --input session.jsonl --output runs/transparent-compact/result.json",
+      "upstream_revision": "6b970d3",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "fidelity_note": "真实CPU消息压缩与精确原负载恢复索引；不含Pi全部运行时语义、模型context_lookup或记忆准确率；27B/128k多臂实验成本过高不复现。"
     },
     {
       "domain": "agent-research",
@@ -6912,6 +7024,74 @@
     },
     {
       "domain": "foundation-models",
+      "key": "oob-regularization",
+      "title": "Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning",
+      "paper_url": "https://arxiv.org/abs/2610.20158",
+      "detail_path": "reproductions/2610.20158-oob-regularization/README.md",
+      "topic": [
+        "self-supervised-learning",
+        "joint-embedding",
+        "small-batch",
+        "representation-learning"
+      ],
+      "first_author": "Konstantinos Almpanakis",
+      "first_author_affiliation": "European Molecular Biology Laboratory (EMBL)",
+      "published": "2026-10-14",
+      "code": null,
+      "adapter": {
+        "adapter_key": "oob-regularization",
+        "arxiv_id": "2610.20158",
+        "title": "Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning",
+        "paper_url": "https://arxiv.org/abs/2610.20158",
+        "track": "llm",
+        "organization": "European Molecular Biology Laboratory (EMBL)",
+        "published": "2026-10-14",
+        "code_url": null,
+        "topics": [
+          "self-supervised-learning",
+          "joint-embedding",
+          "small-batch",
+          "representation-learning"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/oob_regularization",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l2_public_dataset",
+        "datasets": [
+          "CIFAR-10 official data_batch_1 training-only fixed 512/128 split"
+        ],
+        "baseline": "matched in-batch Gaussian quantile regularization and SimCLR, same initialization/views/steps",
+        "metrics": [
+          "validation_knn5_accuracy",
+          "last_training_loss",
+          "refreshes",
+          "maximum_cache_age_steps"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "bounded four-arm 40-step true-image training; 512 train/128 validation; <=120 seconds per seed",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/oob-regularization-a100-20261016.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/oob-regularization-a100-20261016.json",
+      "summary": "定期对整个训练子集构建 Gaussian 分位数或 spherical 锚点，缓存在 CPU 并按样本索引读取，使小 batch 获得全数据抗坍塌正则。本地是有限 CIFAR 真图像训练对照，保留短预算负结果；不声称完成多数据集原研究。"
+    },
+    {
+      "domain": "foundation-models",
       "key": "open-1b-audit",
       "title": "OPEN-1B: A Fully Auditable Training Run",
       "paper_url": "https://arxiv.org/abs/2609.17380",
@@ -8007,6 +8187,35 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "selective-reasoning",
+      "title": "Selective Reasoning for Typed Decision Models: When to Start, Read, and Stop",
+      "paper_url": "https://arxiv.org/abs/2610.19644",
+      "detail_path": "system-one/2610.19644-selective-reasoning/README.md",
+      "topic": [
+        "System One / JEV",
+        "自适应推理与提前退出",
+        "公共评测与能力边界"
+      ],
+      "first_author": "Bin Zheng / Zheng Chen（共同一作）",
+      "first_author_affiliation": "University of Electronic Science and Technology of China",
+      "published": "2026-10-14",
+      "code": "https://github.com/binzheng-joey/selective-reasoning",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.system_one.selective_reasoning.replay_official",
+      "local_command": "PYTHONPATH=src python scripts/run_selective_reasoning.py replay --release-dir .cache/selective-reasoning-v1.0 --output runs/selective-reasoning/replay",
+      "upstream_revision": "26795854fe148e7a4caa37ef6cc051431b8b8790",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "以共享候选读取头衔接直接决策与按需推理，通过 benefit gate、读取触发器和归一化熵阈值控制启动、读取和停止。本地固定作者小发布包复算全部九组统计，并提供不读取 gold 的控制器接口；未重跑 Qwen 在线能力或原始前缀审计。"
     },
     {
       "domain": "foundation-models",
@@ -9977,6 +10186,32 @@
     },
     {
       "domain": "post-training",
+      "key": "divergence-routed-opd",
+      "title": "Divergence-Routed On-Policy Distillation for Language Models",
+      "paper_url": "https://arxiv.org/abs/2610.19572v1",
+      "detail_path": "post-training/2610.19572-divergence-routed-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "散度路由",
+        "Token 级监督"
+      ],
+      "first_author": "Tiantian Peng",
+      "first_author_affiliation": "Peking University",
+      "published": "2026-10-14",
+      "code": null,
+      "code_status": "原文及作者公开入口未找到方法代码仓库",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.divergence_routed_opd.routed_ppo_loss",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/divergence-routed-opd-a100-20261016.json",
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "在师生 top-k 候选并集上以 JS 散度选择高分歧位置，全位置保留 reverse-KL，额外路由 forward-KL，并执行 detached 候选优势的 PPO clipped 更新。本地只验证微型自回归模型真实在线采样和参数更新，不复现 11.83 小时的原文训练或数学基准结论。"
+    },
+    {
+      "domain": "post-training",
       "key": "dpo",
       "title": "DPO",
       "paper_url": "https://arxiv.org/abs/2305.18290",
@@ -11512,6 +11747,32 @@
       "code": null,
       "adapter": "range-grpo",
       "priority": "P0"
+    },
+    {
+      "domain": "post-training",
+      "key": "rap-walk",
+      "title": "When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO",
+      "paper_url": "https://arxiv.org/abs/2610.20089v1",
+      "detail_path": "post-training/2610.20089-rap-walk/README.md",
+      "topic": [
+        "偏好图信用分配",
+        "GRPO",
+        "视频后训练"
+      ],
+      "first_author": "Xinrui Lin",
+      "first_author_affiliation": "未确认（已读 arXiv HTML 未列机构）",
+      "published": "2026-10-14",
+      "code": null,
+      "code_status": "原文及作者公开入口未找到方法代码仓库",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.rap_walk.rap_walk_grpo_loss",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/rap-walk-a100-20261016.json",
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "以边清晰度和三角循环不一致性控制从输者到赢家的偏好随机游走，经平稳信用、最低熵校准后修正 GRPO 优势。本地实现图算子与可微策略更新接口，不生成视频、不用小图诊断冒充 Wan 与大型 VLM 评审的效果。"
     },
     {
       "domain": "post-training",

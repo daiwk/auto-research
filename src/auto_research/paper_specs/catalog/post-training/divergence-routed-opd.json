@@ -1,0 +1,22 @@
+{
+  "domain": "post-training",
+  "key": "divergence-routed-opd",
+  "title": "Divergence-Routed On-Policy Distillation for Language Models",
+  "paper_url": "https://arxiv.org/abs/2610.19572v1",
+  "detail_path": "post-training/2610.19572-divergence-routed-opd/README.md",
+  "topic": ["On-policy distillation", "散度路由", "Token 级监督"],
+  "first_author": "Tiantian Peng",
+  "first_author_affiliation": "Peking University",
+  "published": "2026-10-14",
+  "code": null,
+  "code_status": "原文及作者公开入口未找到方法代码仓库",
+  "adapter": null,
+  "local_operator": "auto_research.post_training.divergence_routed_opd.routed_ppo_loss",
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/divergence-routed-opd-a100-20261016.json",
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "summary": "在师生 top-k 候选并集上以 JS 散度选择高分歧位置，全位置保留 reverse-KL，额外路由 forward-KL，并执行 detached 候选优势的 PPO clipped 更新。本地只验证微型自回归模型真实在线采样和参数更新，不复现 11.83 小时的原文训练或数学基准结论。"
+}

@@ -1,0 +1,121 @@
+{
+  "failures": [],
+  "records": [
+    {
+      "body": [
+        "0"
+      ],
+      "identity": "7e2280f86a072ba7f16fa9ada2f612eff95bb555203242995cecf24150aecbcb",
+      "kind": "append",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "1"
+      ],
+      "identity": "cb98ac27af52f55cc0959600fd88402859adab05efc077b4089810b43f7b5dae",
+      "kind": "append",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "7e2280f86a072ba7f16fa9ada2f612eff95bb555203242995cecf24150aecbcb",
+        "cb98ac27af52f55cc0959600fd88402859adab05efc077b4089810b43f7b5dae"
+      ],
+      "identity": "dbbd9add702de173324f9da0fe1ce0a96f4236332e2fd6aa8c4b64b4da5c8b62",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "dbbd9add702de173324f9da0fe1ce0a96f4236332e2fd6aa8c4b64b4da5c8b62",
+        "7e2280f86a072ba7f16fa9ada2f612eff95bb555203242995cecf24150aecbcb"
+      ],
+      "identity": "c51178e99bc32f040cde27e252e92882ddd08eb47011b54a17a0598467e49e9b",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "dbbd9add702de173324f9da0fe1ce0a96f4236332e2fd6aa8c4b64b4da5c8b62",
+        "dbbd9add702de173324f9da0fe1ce0a96f4236332e2fd6aa8c4b64b4da5c8b62"
+      ],
+      "identity": "b988ed313f164a1a03290a0d6d58b8ab5c5aaadf84249eac07ee7937cf973847",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "b988ed313f164a1a03290a0d6d58b8ab5c5aaadf84249eac07ee7937cf973847",
+        "cb98ac27af52f55cc0959600fd88402859adab05efc077b4089810b43f7b5dae"
+      ],
+      "identity": "e408ded1d1e51c99cf71752c3a1b72eb3f39555de891e3e5cbc2a7f230876172",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "e408ded1d1e51c99cf71752c3a1b72eb3f39555de891e3e5cbc2a7f230876172",
+        "7e2280f86a072ba7f16fa9ada2f612eff95bb555203242995cecf24150aecbcb"
+      ],
+      "identity": "61bd98ad40e468dd6f59fcb4e8e1b48e333439945d923cadd551a136088bcb90",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "e408ded1d1e51c99cf71752c3a1b72eb3f39555de891e3e5cbc2a7f230876172",
+        "dbbd9add702de173324f9da0fe1ce0a96f4236332e2fd6aa8c4b64b4da5c8b62"
+      ],
+      "identity": "eef9e7b1eb5d05ea1272e5ce681edfda6fb050db6f23910334a44e87a9cd007d",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "eef9e7b1eb5d05ea1272e5ce681edfda6fb050db6f23910334a44e87a9cd007d",
+        "cb98ac27af52f55cc0959600fd88402859adab05efc077b4089810b43f7b5dae"
+      ],
+      "identity": "6e2f30811572e3207a23ddcdacbc48dd06bf69d4958d58b5cff38eb419bf8054",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "6e2f30811572e3207a23ddcdacbc48dd06bf69d4958d58b5cff38eb419bf8054",
+        "7e2280f86a072ba7f16fa9ada2f612eff95bb555203242995cecf24150aecbcb"
+      ],
+      "identity": "b5d62ef9aee4709aca21535e0a7e3720ba676702f9cb47e9c32e58848288827a",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "6e2f30811572e3207a23ddcdacbc48dd06bf69d4958d58b5cff38eb419bf8054",
+        "dbbd9add702de173324f9da0fe1ce0a96f4236332e2fd6aa8c4b64b4da5c8b62"
+      ],
+      "identity": "d2ffad002dd4b5d95014a3daea5e06e25a70df05d845a26ae4ed6d3952a3fe35",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "d2ffad002dd4b5d95014a3daea5e06e25a70df05d845a26ae4ed6d3952a3fe35",
+        "cb98ac27af52f55cc0959600fd88402859adab05efc077b4089810b43f7b5dae"
+      ],
+      "identity": "340e0283afb154c1b29c8052cc258c8e5111d00032c54bf214f26b2098f5dc2f",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    },
+    {
+      "body": [
+        "340e0283afb154c1b29c8052cc258c8e5111d00032c54bf214f26b2098f5dc2f",
+        "cb98ac27af52f55cc0959600fd88402859adab05efc077b4089810b43f7b5dae"
+      ],
+      "identity": "8a29c67d510f8fa56a14cdbbbb19a556a42cfab32c923c0ea4cc0c7b21b9804d",
+      "kind": "compose",
+      "signature": "sequence[int] -> sequence[int]"
+    }
+  ],
+  "schema_version": 1
+}

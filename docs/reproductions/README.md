@@ -50,6 +50,7 @@ pytest tests/test_research_module_docs.py
 
 ## 当前进度
 
+- `oob-regularization` · [OOB Regularization](2610.20158-oob-regularization/README.md)：全数据Gaussian分位数/球面锚点、CPU缓存与周期刷新，公开CIFAR四臂短训练已在A100三seed验证；负结果保留，完整多数据研究不复现。
 - `forte` · [FORTE](2610.13806-forte/README.md)：Pinterest 的配对特征退休漏斗；公开 MovieLens 三种子真实 A100 对照全部保留原特征，不强行报告剪枝收益。
 - `evo2` · [Evo²](2610.13025-evo2/README.md)：固定 executor，交替编辑 harness 与训练 Proposer/Reflector；保留真实执行反馈、SFT 与角色 GRPO，本地为概念诊断。
 - `rsi-anything` · [RSI-Anything](2610.13912-rsi-anything/README.md)：以隔离执行的程序反馈驱动递归改进和策略训练；没有金标候选注入，不等同于论文通用能力。
@@ -395,6 +396,7 @@ pytest tests/test_research_module_docs.py
 | 核心机制 | `casi` · [CASI](2610.20293-casi/README.md) | 小红书七天随机生产 A/B：Advv +3.51% | 冻结快照/精确与置换信用/有界零和优势的 CPU 组件；未训练 LLM 策略，完整高成本实验不复现 |
 | 核心机制 | `pn-mix` · [PN-Mix](2610.19605-pn-mix/README.md) | 无工业 A/B；原文为缓存量化离线实验 | 真正位打包与 attention 消费的 L1 参考路径；不是预训练 LLM 质量或 fused kernel 吞吐复现 |
 | 核心机制 | `smrc-pmrc` · [SMRC / PMRC](2610.19844-smrc-pmrc/README.md) | 无工业 A/B；原文为优化器训练实验 | 真实参数与 optimizer state 更新、论文二次反例和小 MLP 对照；完整预训练不复现 |
+| 核心机制 | `oob-regularization` · [OOB Regularization](2610.20158-oob-regularization/README.md) | 无工业 A/B；原文为自监督表示学习实验 | 真实Gaussian/球面锚点及周期刷新，官方CIFAR训练子集四臂A100三seed；不宣称原论文或稳定能力收益 |
 | 核心机制 | `pace-vlm` · [PACE](2608.27206-pace-vlm/README.md) | 无工业 A/B；论文报告 10% 视觉 token 保留 93.8% 平均性能、TTFT 最高 3.1× | APC/DDAE 公式、RealWorldQA 同 checkpoint 质量/token/延迟/显存和 Evolve 配方均可审计 |
 | 核心机制 | `twinkv` · [TwinKV](2608.27128-twinkv/README.md) | 无工业 A/B；LongBench/LooGLE/RULER/MMLU-Pro 离线结果且含失败任务 | fixed-budget repair、真实 Qwen3 KV reconstruction/延迟/显存和 Evolve attention operator 均可审计 |
 | 核心机制 | `prl-puts` · [PRL-PUTS](2605.16344-prl-puts/README.md) | P2P impressions +0.30% | 双头 Q 网络与 Pareto utility 扫描；NDCG@10 +39.64% |

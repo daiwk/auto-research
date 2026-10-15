@@ -61,6 +61,7 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "偏好图信用分配": ("奖励、信用与课程", "奖励构造与排序信号"),
         "on-policy-self-distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "RLVR data synthesis": ("奖励、信用与课程", "课程与能力边界"),
         "Proximal policy optimization": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
@@ -166,6 +167,9 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "公共评测与协议": ("工具调用与环境执行", "公共协议与状态审计"),
+        "可验证能力组合": ("记忆、技能与持续学习", "技能图与跨任务积累"),
+        "Agent记忆与上下文": ("记忆、技能与持续学习", "上下文压缩与精确恢复"),
         "形式化数学 Agent": ("工具调用与环境执行", "形式化数学与独立验证"),
         "agentic-rl": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "memory-retrieval": ("记忆、技能与持续学习", "记忆检索与表示"),
@@ -298,6 +302,7 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "oob-regularization": ("预训练与数据", "自监督表征与正则化"),
     "pn-mix": ("推理与系统效率", "量化"),
     "smrc-pmrc": ("预训练与数据", "优化器与训练稳定性"),
     "jepa-prediction-planning": ("多模态基础模型", "世界模型与具身控制"),
@@ -793,6 +798,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "selective-reasoning": ("推理与系统效率", "结构化决策与自适应推理"),
         "jepa-prediction-planning": FOUNDATION_TOPIC_HIERARCHY["jepa-prediction-planning"],
         "ev-jepa": FOUNDATION_TOPIC_HIERARCHY["ev-jepa"],
         "data-space-iteration": ("网络架构", "扩散与生成式模型"),

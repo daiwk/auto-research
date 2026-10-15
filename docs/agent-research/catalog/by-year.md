@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-10 · [Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents](../2610.20116-transparent-compact/README.md)（`transparent-compact`）：长会话压缩通常依赖模型重写摘要，可能丢失只在对话出现的承诺或悄悄改变其措辞。本方法保留用户与助手原话，将思考和工具输出移出活跃上下文，留下明确删减标记，并提供到完整原始会话的恢复路径。
+- 2026-10 · [Recursive Formation and First-Class Reuse of Compositional Capabilities](../2610.19414-formcraft/README.md)（`formcraft`）：一次合成出的能力不应只留下推导历史，而应成为可独立调用、继续组合、持久保存的一等操作。FormCraft 区分三个阶段：类型与接口相容的形成、独立验证后的持久准入、通过相同公开接口直接复用。
+- 2026-10 · [What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports](../2610.20003-ctxgap/README.md)（`ctxgap`）：编码 Agent 的最终报告可能“听起来完整”，却不足以让用户恢复真实任务状态。CTXGAP 不用任务完成率替代信息质量，而是从执行记录抽取原子事实，生成有参考答案的探针，在**同一问题**上比较只读累积报告的观察者 $U$、读取完整执行视图的观察者 $T_{full}$，以及直接询问执行 Agent 的条件。
+- 2026-10 · [CLASHarness: Benchmarking Multi-Agent Conflict in Computer Use via a Controllable and Verifiable Generation Pipeline](../2610.19128-clasharness/README.md)（`clasharness`）：多个 Agent 共享文件、网页和任务上下文时，其他参与者可能给出错误事实、过期状态或矛盾指令。CLASHarness 要求被测 Agent 依据可见环境核对信息并完成任务，而不只是识别一段文字冲突。
 - 2026-10 · [RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution](../../reproductions/2610.15772-rsipo/README.md)（`rsipo`）：静态或离线训练的技能库难以跟随策略进步，而技能增强教师也可能比学生更差。RSIPO从当前策略轨迹产生技能，以独立控制组与同初态重放测量技能收益，联合优化技能生成、RLVR和按经验贝叶斯可靠性加权的自蒸馏。 **成本过高，暂不复现；待验收，未注册可执行入口。**
 - 2026-10 · [Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence](../../reproductions/2610.13277-beyond-final-embedding/README.md)（`beyond-final-embedding`）：最终 pooled embedding 会丢掉局部事实线索，但冻结 embedding encoder 的最后层 token states 已经含有上下文证据。论文保留内容 token（排除 query prefix、special tokens 和 padding），离线给每条 token 绑定原 memory ID。
 - 2026-10 · [Evo2: Evolving the Evolver through Weight-Harness Co-Evolution](../../reproductions/2610.13025-evo2/README.md)（`evo2`）：固定任务 executor，共享 Proposer/Reflector 编辑 harness；树搜索与跨分支 crossover 的执行反馈反过来训练 evolver。EvoTIDE 恢复有效编辑轨迹，先 SFT，再交错更新两个角色。
