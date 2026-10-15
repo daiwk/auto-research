@@ -1,5 +1,9 @@
 # 论文发现闭环与防遗漏审计
 
+最新审查为 [2026-10-13～10-15 收口](research-audits/oct15-review-closure/README.md)：
+新首发、历史补发现和修订版分别统计；高成本候选明确不复现、审查完成。
+当前日期、覆盖范围、截至时间和例外仍以[统一状态](paper-discovery-watermark.json)为准。
+
 2026-10-01～10-07 的完整候选清单、逐篇审查与补查回执见
 [本批审查收口](research-audits/oct07-review-closure/README.md)。日期窗口查询和月份编号
 补查分别保存；Google 官方目录按页面声明的总页数读取，并报告是否超过配置预算。
@@ -50,14 +54,18 @@
 仍应更新账本并正常推进审查水位。
 
 当前状态的唯一入口是 [`paper-discovery-watermark.json`](paper-discovery-watermark.json)，
-本批逐条来源补齐见[10 月 7 日来源验收](research-audits/oct07-source-closure/README.md)。
-归档清单见[32 项非阻塞例外](research-audits/oct07-source-closure/exception-archive.json)。
+本批逐条来源补齐见[10 月 15 日审查验收](research-audits/oct15-review-closure/README.md)。
+归档清单见[当前非阻塞例外](research-audits/oct15-review-closure/exception-archive.json)。
 旧扫描回执中的水位是当时快照，不应覆写为新的结论。
 
 允许的例外仅包括身份/日期无法确定、原文无法取得、目录分页覆盖无法证明；
 必须记录 URL、原创理由、实际尝试、研究范围初筛和重开条件，不计为 accepted。
 “没有读”“查询触顶”“确认在窗口内但尚未审查”不能当作例外跳过。
 Google/Meta 的优先级、正文线上 A/B/全流量证据门槛、真实实现与 GPU 验证门槛均不变。
+
+已确认 arXiv 身份、但在本轮有界读取中 HTML/PDF 确实无法取得的原文，也保留在候选登记中：
+`source_exceptions` 记录版本、实际失败 URL/错误与重开条件，逐项对应归档清单。
+其状态为 `archived_source_exception`，不是接受、阅读全文或实现；仅有摘要不能绕过全文接受门槛。
 
 `python scripts/audit_paper_coverage.py --strict` 同时检查该状态文件及引用产物：
 缺召回通道、失败/触顶查询、未审候选、缺尝试的忽略项、把窗口内论文误标为历史、

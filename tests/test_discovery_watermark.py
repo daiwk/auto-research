@@ -165,6 +165,61 @@ def test_accepted_candidate_still_requires_full_text(tmp_path):
     assert any("full text" in e for e in audit_review_watermark(tmp_path))
 
 
+def _candidate_source_exception(root):
+    _fixture(root)
+    row = {
+        "id": "2610.00001", "organization": "arXiv",
+        "url": "https://arxiv.org/html/2610.00001v2",
+        "exception_type": "document_unavailable", "reason": "Official HTML and PDF were unavailable.",
+        "attempts": [
+            {"url": "https://arxiv.org/html/2610.00001v2", "result": "unavailable", "error": "HTTP 404"},
+            {"url": "https://arxiv.org/pdf/2610.00001v2", "result": "unavailable", "error": "HTTP 503"},
+        ],
+        "scope_triage_completed": True, "counts_as_accepted": False,
+        "reopen_when": "A new primary document becomes available.",
+    }
+    _write(root, "register.json", {"candidate_review_complete": True, "papers": [{
+        "id": row["id"], "status": "archived_source_exception", "reviews": [{
+            "resolution": "source_exception_archived", "review_done": True,
+            "fulltext_review_completed": False,
+        }],
+    }], "source_exceptions": [row]})
+    archive = json.loads((root / "docs/exceptions.json").read_text())
+    archive["entries"].append(dict(row, status="archived", blocking=False))
+    archive["record_count"] += 1
+    _write(root, "exceptions.json", archive)
+
+
+def test_unavailable_candidate_document_is_archived_without_disappearing(tmp_path):
+    _candidate_source_exception(tmp_path)
+    assert audit_review_watermark(tmp_path) == []
+
+
+@pytest.mark.parametrize("mutation,error", [
+    ("accepted", "non-accepted"), ("unread", "unread"),
+    ("no_attempts", "attempts"), ("successful_source", "failed primary-source"),
+    ("unarchived", "inconsistent"),
+])
+def test_candidate_exception_cannot_hide_acceptance_unread_or_missing_evidence(tmp_path, mutation, error):
+    _candidate_source_exception(tmp_path)
+    register = json.loads((tmp_path / "docs/register.json").read_text())
+    if mutation == "accepted":
+        register["papers"][0]["status"] = "accepted"
+    elif mutation == "unread":
+        register["papers"][0]["reviews"][0]["review_done"] = False
+    elif mutation == "no_attempts":
+        register["source_exceptions"][0]["attempts"] = []
+    elif mutation == "successful_source":
+        register["source_exceptions"][0]["attempts"][0]["result"] = "retrieved"
+    else:
+        archive = json.loads((tmp_path / "docs/exceptions.json").read_text())
+        archive["entries"] = [entry for entry in archive["entries"] if entry["organization"] != "arXiv"]
+        archive["record_count"] = len(archive["entries"])
+        _write(tmp_path, "exceptions.json", archive)
+    _write(tmp_path, "register.json", register)
+    assert any(error in message for message in audit_review_watermark(tmp_path))
+
+
 def test_artifacts_cannot_escape_docs(tmp_path):
     state = _fixture(tmp_path)
     state["candidate_register"] = "../../private.json"
