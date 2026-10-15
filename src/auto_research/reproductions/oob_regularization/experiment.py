@@ -183,7 +183,7 @@ def run_comparison(directory: Path, *, seed: int = 42, device: str = "cpu", step
             "maximum_cache_age_steps": max(ages, default=0),
             "cache_cpu_resident": cache is None or cache.targets.device.type == "cpu",
             "cached_targets_require_grad": cache is not None and cache.targets.requires_grad,
-            "peak_cuda_allocated_bytes": torch.cuda.max_memory_allocated() if device == "cuda" else None,
+            "process_peak_cuda_allocated_bytes": torch.cuda.max_memory_allocated() if device == "cuda" else None,
         }
     return {
         "schema_version": 2, "paper": "oob-regularization", "seed": seed,
@@ -192,7 +192,7 @@ def run_comparison(directory: Path, *, seed: int = 42, device: str = "cpu", step
         "evidence_scope": "bounded public-image training comparison; not full paper capability reproduction",
         "full_experiment_status": "not_reproduced_high_cost", "dataset": metadata,
         "protocol_id": PROTOCOL, "device": device,
-        "accelerator": torch.cuda.get_device_name(0) if device == "cuda" else "CPU",
+        "accelerator": torch.cuda.get_device_name() if device == "cuda" else "CPU",
         "configuration": {"steps_per_arm": steps, "arms": list(ARMS), "batch_size": batch_size,
                           "refresh_interval": refresh_interval, "projection_count": 32,
                           "spherical_anchor_steps": 20, "maximum_seconds": maximum_seconds,

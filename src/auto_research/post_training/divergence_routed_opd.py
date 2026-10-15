@@ -28,10 +28,10 @@ def _candidate_log_probs(logits, indices, support):
 
 
 def prepare_routing(student_logits, teacher_logits, response_mask, *, top_k=16, fraction=.2):
-    """Freeze the unique top-k union and batch-valid JS quantile (eqs. 6--7).
+    """Freeze top-k union and the Kth-largest valid JS cutoff (Appendix B.1).
 
-    Quantile ties are retained, as in the paper's >= gate; the realized routed
-    fraction can therefore exceed the requested fraction for tied scores.
+    K=round(fraction * valid_positions); K=0 routes nothing. Cutoff ties are
+    retained, so the realized routed count may exceed K for tied JS scores.
     """
     if student_logits.shape != teacher_logits.shape or student_logits.ndim < 2:
         raise ValueError("aligned student/teacher vocabulary logits required")
@@ -57,8 +57,13 @@ def prepare_routing(student_logits, teacher_logits, response_mask, *, top_k=16, 
         dp = torch.where(support, lp - lm, 0.)
         dq = torch.where(support, lq - lm, 0.)
         js = .5 * (p * dp + q * dq).sum(-1)
-        threshold = torch.quantile(js[response_mask], 1. - fraction)
-        gate = (js >= threshold) & response_mask
+        scores = js[response_mask]
+        selected_count = round(fraction * scores.numel())
+        if selected_count == 0:
+            gate = torch.zeros_like(response_mask)
+        else:
+            threshold = scores.topk(selected_count).values[-1]
+            gate = (js >= threshold) & response_mask
     return RoutedCandidates(indices, support, lp, lq, response_mask.detach().clone(), js, gate)
 
 

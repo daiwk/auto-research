@@ -20,7 +20,7 @@ def test_topk_union_keeps_each_teacher_and_student_token_once():
     assert torch.allclose(same.js, torch.zeros_like(same.js))
 
 
-def test_js_gate_uses_valid_batch_positions_and_retains_quantile_ties():
+def test_js_gate_uses_valid_batch_positions_and_retains_cutoff_ties():
     p = torch.zeros(1, 5, 2)
     q = torch.tensor([[[0., 0.], [1., 0.], [2., 0.], [3., 0.], [30., -30.]]])
     mask = torch.tensor([[True, True, True, True, False]])
@@ -33,7 +33,7 @@ def test_js_gate_uses_valid_batch_positions_and_retains_quantile_ties():
 def test_candidate_reward_matches_paper_and_teacher_is_detached():
     p = torch.tensor([[[0., -4., -5.]]], requires_grad=True)
     q = torch.tensor([[[-4., 0., -5.]]], requires_grad=True)
-    route = prepare_routing(p, q, torch.ones(1, 1, dtype=torch.bool), top_k=2)
+    route = prepare_routing(p, q, torch.ones(1, 1, dtype=torch.bool), top_k=2, fraction=1.)
     expected = -route.old_log_probs.exp() * torch.where(
         route.support, route.old_log_probs - route.teacher_log_probs, 0.)
     expected += route.teacher_log_probs.exp()
@@ -78,7 +78,7 @@ def test_invalid_mask_empty_response_and_nonfinite_fail():
 def test_offpolicy_ratios_apply_the_clipped_candidate_surrogate():
     old = torch.zeros(1, 1, 2)
     teacher = torch.tensor([[[-2., 2.]]])
-    route = prepare_routing(old, teacher, torch.ones(1, 1, dtype=torch.bool), top_k=2)
+    route = prepare_routing(old, teacher, torch.ones(1, 1, dtype=torch.bool), top_k=2, fraction=1.)
     current = torch.tensor([[[-1., 1.]]], requires_grad=True)
     clipped, _ = routed_ppo_loss(current, route, clip_epsilon=.1)
     wider, _ = routed_ppo_loss(current, route, clip_epsilon=.9)
@@ -99,3 +99,36 @@ def test_masked_positions_do_not_contribute_to_ppo_loss():
     loss, _ = routed_ppo_loss(current, route)
     loss.backward()
     assert torch.equal(current.grad[~mask], torch.zeros_like(current.grad[~mask]))
+
+
+def test_appendix_kth_largest_rule_routes_six_of_32_valid_positions():
+    old = torch.zeros(1, 40, 2)
+    teacher = torch.zeros_like(old)
+    teacher[0, :32, 0] = torch.linspace(.01, 4., 32)
+    teacher[0, 32:, 0] = 100.  # Invalid positions must not affect count or cutoff.
+    mask = torch.arange(40).unsqueeze(0) < 32
+    route = prepare_routing(old, teacher, mask, top_k=2, fraction=.2)
+    assert int(route.gate.sum()) == 6  # round(.2 * 32), not interpolated quantile's 7.
+    assert route.gate[0, :26].tolist() == [False] * 26
+    assert route.gate[0, 26:32].tolist() == [True] * 6
+    assert not route.gate[~mask].any()
+
+
+def test_single_valid_position_has_k_zero_unless_fraction_is_explicitly_one():
+    old = torch.zeros(1, 1, 2)
+    teacher = torch.tensor([[[0., 2.]]])
+    mask = torch.ones(1, 1, dtype=torch.bool)
+    no_route = prepare_routing(old, teacher, mask, top_k=2)
+    assert not no_route.gate.any()
+    difference = torch.where(no_route.support,
+                             no_route.old_log_probs - no_route.teacher_log_probs, 0.)
+    assert torch.allclose(candidate_rewards(no_route), -no_route.old_log_probs.exp() * difference)
+    routed = prepare_routing(old, teacher, mask, top_k=2, fraction=1.)
+    assert routed.gate.all()
+
+
+def test_kth_largest_cutoff_keeps_equal_scores_even_when_count_exceeds_k():
+    old = torch.zeros(1, 32, 2)
+    teacher = torch.ones_like(old)
+    route = prepare_routing(old, teacher, torch.ones(1, 32, dtype=torch.bool), top_k=2)
+    assert route.gate.all()  # K=6, all 32 positions share the actual Kth score.
