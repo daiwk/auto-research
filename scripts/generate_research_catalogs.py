@@ -657,7 +657,7 @@ def _date_descending(rows: list[dict[str, str]]) -> list[dict[str, str]]:
 
     ordered = sorted(rows, key=lambda item: item["title"].lower())
     return sorted(ordered, key=lambda item: item["date"]
-                  if re.fullmatch(r"\d{4}-\d{2}-\d{2}", item["date"]) else "", reverse=True)
+                  if re.fullmatch(r"\d{4}(?:-\d{2}){0,2}", item["date"]) else "", reverse=True)
 
 
 def _paper_date(link: str) -> str:

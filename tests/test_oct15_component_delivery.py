@@ -60,6 +60,10 @@ def test_unconfirmed_autoformbench_publication_date_stays_unconfirmed():
     assert page.index("## 2026") < page.index("## 未标注")
     rows = [{"title": "unknown", "date": "未标注"}, {"title": "known", "date": "2026-10-14"}]
     assert module._date_descending(rows)[0]["title"] == "known"
+    # Older catalog rows may have only year/month precision. Keep their real
+    # chronological position without inventing a day or treating them unknown.
+    rows += [{"title": "month", "date": "2026-09"}, {"title": "year", "date": "2025"}]
+    assert [r["title"] for r in module._date_descending(rows)] == ["known", "month", "year", "unknown"]
 
 
 def test_controlled_jepa_input_is_not_reported_as_a_real_environment_or_planner():
