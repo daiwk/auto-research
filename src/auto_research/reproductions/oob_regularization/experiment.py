@@ -14,7 +14,7 @@ import torch
 from torch import Tensor, nn
 from torch.nn import functional as F
 
-from auto_research.runtime import DEVICE_ENV, device_for
+from auto_research.runtime import device_for
 
 from .algorithm import (
     GaussianAnchors, SphericalAnchors, alignment_loss, in_batch_gaussian_loss,
@@ -213,8 +213,15 @@ def run_comparison(directory: Path, *, seed: int = 42, device: str = "cpu", step
 
 
 def reproduce(dataset_dir: Path, seed: int = 42) -> dict:
-    device = device_for(DEVICE_ENV, "auto", supported=("cpu", "cuda"), allow_mps=False)
-    return run_comparison(dataset_dir, seed=seed, device=device)
+    device = device_for(torch)
+    if device.type == "cuda":
+        # The bounded runner uses the current CUDA device. Preserve an explicit
+        # cuda:<index> resolved by the shared runtime instead of ignoring it.
+        with torch.cuda.device(device):
+            return run_comparison(dataset_dir, seed=seed, device="cuda")
+    if device.type != "cpu":
+        raise ValueError("OOB regularization supports CPU or CUDA; explicitly select --device cpu on MPS")
+    return run_comparison(dataset_dir, seed=seed, device="cpu")
 
 
 def render(result: dict) -> str:

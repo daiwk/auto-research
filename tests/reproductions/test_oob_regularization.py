@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+from contextlib import contextmanager
 
 import pytest
 
@@ -127,3 +128,49 @@ def test_bounds_reject_before_loading_data(tmp_path):
     for kwargs in ({"steps": 121}, {"maximum_seconds": 3600}, {"batch_size": 1}, {"device": "mps"}):
         with pytest.raises(ValueError):
             run_comparison(tmp_path, **kwargs)
+
+
+@pytest.mark.parametrize("requested", ("cpu", "cuda", "cuda:1"))
+def test_unified_reproduce_obeys_runtime_device_environment_without_gpu_or_downloads(
+        tmp_path, monkeypatch, requested):
+    from auto_research.reproductions.oob_regularization import experiment
+    from auto_research.runtime import device_for as runtime_device_for
+
+    monkeypatch.setenv("AUTO_RESEARCH_DEVICE", requested)
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: True)
+    monkeypatch.setattr(torch.cuda, "device_count", lambda: 2)
+    observed = {"context": None}
+
+    def resolve(torch_argument, requested_device=None):
+        # A narrow spy catches unsupported kwargs or passing an env-name
+        # string in place of the actual torch module before any GPU work.
+        assert torch_argument is torch
+        assert requested_device is None
+        return runtime_device_for(torch_argument, requested_device)
+
+    @contextmanager
+    def cuda_context(device):
+        observed["context"] = str(device)
+        yield
+
+    def comparison(directory, *, seed, device):
+        observed.update(directory=directory, seed=seed, device=device)
+        return {"fixture_only": True, "device": device}
+
+    monkeypatch.setattr(experiment, "device_for", resolve)
+    monkeypatch.setattr(torch.cuda, "device", cuda_context)
+    monkeypatch.setattr(experiment, "run_comparison", comparison)
+    result = experiment.reproduce(tmp_path, seed=43)
+    assert result["fixture_only"] is True
+    assert observed["directory"] == tmp_path and observed["seed"] == 43
+    assert observed["device"] == ("cuda" if requested.startswith("cuda") else "cpu")
+    assert observed["context"] == (requested if requested.startswith("cuda") else None)
+
+
+def test_unified_reproduce_rejects_resolved_mps_before_loading_data(tmp_path, monkeypatch):
+    from auto_research.reproductions.oob_regularization import experiment
+
+    monkeypatch.setattr(experiment, "device_for", lambda torch_argument: torch.device("mps"))
+    monkeypatch.setattr(experiment, "run_comparison", lambda *a, **kw: pytest.fail("unsupported device ran"))
+    with pytest.raises(ValueError, match="CPU or CUDA"):
+        experiment.reproduce(tmp_path)
