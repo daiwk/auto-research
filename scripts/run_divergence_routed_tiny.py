@@ -8,10 +8,22 @@ This is L1 algorithm execution, not pretrained-model or benchmark evidence.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import hashlib
 import json
 from pathlib import Path
 import time
+
+
+@contextmanager
+def evaluation_mode(model):
+    """Temporarily evaluate without leaving the trainable policy in eval mode."""
+    previous = model.training
+    try:
+        model.eval()
+        yield
+    finally:
+        model.train(previous)
 
 
 def run(args):
@@ -55,7 +67,7 @@ def run(args):
     def heldout_nll(model):
         # Fixed validation windows, independent of train sampling and seeds.
         ids = validation[:129].unsqueeze(0)
-        with torch.no_grad():
+        with evaluation_mode(model), torch.no_grad():
             return float(F.cross_entropy(model(ids[:, :-1]).reshape(-1, 256), ids[:, 1:].reshape(-1)))
 
     started, outcomes = time.monotonic(), []
@@ -82,7 +94,7 @@ def run(args):
         for step in range(args.steps):
             prefix = batch(train, width=16, count=2)[:, :16]
             ids = prefix
-            with torch.no_grad():
+            with evaluation_mode(student), torch.no_grad():
                 for _ in range(args.max_tokens):
                     probabilities = student(ids)[:, -1].softmax(-1)
                     ids = torch.cat((ids, torch.multinomial(probabilities, 1)), -1)
@@ -92,6 +104,9 @@ def run(args):
                 target = teacher(ids)[:, :-1]
                 routing = prepare_routing(old, target, mask, top_k=16, fraction=.2)
             generated_tokens += int(mask.sum())
+            # cuDNN RNN backward requires that this gradient-bearing forward
+            # was executed in training mode. CPU GRU does not enforce it.
+            student.train()
             optimizer.zero_grad()
             loss, diagnostics = routed_ppo_loss(student(ids)[:, :-1], routing)
             loss.backward()
