@@ -561,6 +561,8 @@ def test_post_training_and_agent_catalogs_cover_three_browse_dimensions():
 
 
 def test_organization_catalogs_group_by_first_author_affiliation():
+    manifest = json.loads((ROOT / "docs/research-manifest.json").read_text())
+    by_key = {(row["domain"], row["key"]): row for row in manifest["papers"]}
     for module, methods in MODULES.items():
         text = (
             ROOT / "docs" / module / "catalog" / "by-organization.md"
@@ -573,7 +575,17 @@ def test_organization_catalogs_group_by_first_author_affiliation():
             if line.startswith("- ") and "](../" in line
         ]
         assert len(entries) == _manifest_count(module)
-        assert all(re.search(r"^- \d{4}-\d{2}-\d{2} · 一作：.+ · \[", line) for line in entries)
+        for line in entries:
+            if line.startswith("- 未标注 · "):
+                # Unknown publication dates are permitted only when explicitly
+                # documented by the source-owned catalog, never fabricated.
+                key = re.search(r"（`([^`]+)`）", line).group(1)
+                record = by_key[module, key]
+                assert not record.get("published")
+                assert record.get("publication_date_note")
+                assert re.search(r"^- 未标注 · 一作：.+ · \[", line)
+            else:
+                assert re.search(r"^- \d{4}-\d{2}-\d{2} · 一作：.+ · \[", line)
         assert "（按一作归档）" not in text
 
 

@@ -195,6 +195,7 @@
 | 神经符号路由 | [MRKL](2205.00445-mrkl/README.md) | AI21 Labs，2022-05-01 | 未发现官方代码 | `mrkl` |
 | 具身规划 | [SayCan](2204.01691-saycan/README.md) | Robotics at Google，2022-04-04 | [已开源](https://github.com/google-research/google-research/tree/master/saycan) | `saycan` |
 | 浏览问答 | [WebGPT](2112.09332-webgpt/README.md) | OpenAI，2021-12-17 | [已开源](https://huggingface.co/datasets/openai/webgpt_comparisons) | `webgpt` |
+| 形式化数学 Agent | [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](autoformbench/README.md) | FAIR at Meta，未标注 | [已开源](https://github.com/facebookresearch/autoformbench) | `autoformbench`：CPU 评测接口，不执行模型 |
 
 </div>
 

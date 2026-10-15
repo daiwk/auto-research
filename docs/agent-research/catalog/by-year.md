@@ -204,3 +204,7 @@
 ## 2021
 
 - 2021-12 · [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。
+
+## 未标注
+
+- 未标注 · [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](../autoformbench/README.md)（`autoformbench`）：AutoformBench 不只要求补一个孤立证明，而是让 Agent 在固定 Lean/Mathlib 上构造支撑高级数学命题的定义、辅助引理和证明。341 个任务来自 24 个数学来源，共有 1,155 个需要完成的证明义务；一个任务只有全部义务均通过可信验证才算成功。

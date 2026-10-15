@@ -1,0 +1,192 @@
+{
+  "schema_version": 2,
+  "method": "smrc-pmrc",
+  "seed": 42,
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "evolve_eligible": false,
+  "device": "cpu",
+  "accelerator": "CPU",
+  "elapsed_seconds": 1.599120541010052,
+  "dataset": "paper-appendix-E.1.1-quadratic + seeded-small-MLP-regression",
+  "dataset_revision": "arxiv:2610.19844v1:appendix-E.1.1:equation-30",
+  "dataset_source": "https://arxiv.org/html/2610.19844v1#A5.SS1.SSS1",
+  "host_reference": "NumPy FP64 SVD oracle and complete-QR protocol construction; torch CUDA kernels tested independently",
+  "checkpoint_revision": "none; deterministic matrices and randomly initialized MLP",
+  "public_protocol_sha256": "ffcc43947adef1dad30b4bbae2a46b57ddbc4f5293a2e69b1fc1934777218232",
+  "budget": {
+    "steps_per_arm": 80,
+    "mlp_steps_per_arm": 80,
+    "arms": 6,
+    "max_seconds": 120
+  },
+  "numeric_controls": {
+    "smrc_full_rank_max_abs_error": 1.3877787807814457e-17,
+    "smrc_boundary_max_abs_error": 0,
+    "smrc_state_resume_max_abs_error": 0,
+    "pmrc_full_rank_max_abs_error": 1.3877787807814457e-16,
+    "pmrc_boundary_max_abs_error": 0,
+    "pmrc_state_resume_max_abs_error": 0
+  },
+  "low_precision_controls": {
+    "smrc_fp16": {
+      "updates": 6,
+      "parameter_changed": true,
+      "state_dtype": "float32",
+      "max_abs_error_to_fp32": 3.458932042121887e-05,
+      "comparison_atol": 0.0002,
+      "state_resume_max_abs_error": 0,
+      "state_restore_exact": true
+    },
+    "pmrc_practical_fp16": {
+      "updates": 6,
+      "parameter_changed": true,
+      "state_dtype": "float32",
+      "max_abs_error_to_fp32": 5.694106221199036e-06,
+      "comparison_atol": 0.0002,
+      "state_resume_max_abs_error": 0,
+      "state_restore_exact": true
+    },
+    "smrc_bf16": {
+      "updates": 6,
+      "parameter_changed": true,
+      "state_dtype": "float32",
+      "max_abs_error_to_fp32": 0.00018548592925071716,
+      "comparison_atol": 0.002,
+      "state_resume_max_abs_error": 0,
+      "state_restore_exact": true
+    },
+    "pmrc_practical_bf16": {
+      "updates": 6,
+      "parameter_changed": true,
+      "state_dtype": "float32",
+      "max_abs_error_to_fp32": 6.232969462871552e-05,
+      "comparison_atol": 0.002,
+      "state_resume_max_abs_error": 0,
+      "state_restore_exact": true
+    }
+  },
+  "paper_quadratic": {
+    "smrc": {
+      "initial_true_gradient_norm": 7.615773105863909,
+      "final_true_gradient_norm": 0.47755969454596114,
+      "optimizer_state_elements": 76,
+      "parameter_elements": 240,
+      "updates": 80
+    },
+    "pmrc": {
+      "initial_true_gradient_norm": 7.615773105863909,
+      "final_true_gradient_norm": 3.3183929960789103,
+      "optimizer_state_elements": 76,
+      "parameter_elements": 240,
+      "updates": 80
+    },
+    "pmrc_practical": {
+      "initial_true_gradient_norm": 7.615773105863909,
+      "final_true_gradient_norm": 3.577340530429617,
+      "optimizer_state_elements": 76,
+      "parameter_elements": 240,
+      "updates": 80
+    },
+    "full_ema_sgd": {
+      "initial_true_gradient_norm": 7.615773105863909,
+      "final_true_gradient_norm": 0.22104417414557112,
+      "optimizer_state_elements": 240,
+      "parameter_elements": 240,
+      "updates": 80
+    },
+    "full_muon": {
+      "initial_true_gradient_norm": 7.615773105863909,
+      "final_true_gradient_norm": 3.3915845391218205,
+      "optimizer_state_elements": 240,
+      "parameter_elements": 240,
+      "updates": 80
+    },
+    "adamw": {
+      "initial_true_gradient_norm": 7.615773105863909,
+      "final_true_gradient_norm": 0.3793362773155953,
+      "optimizer_state_elements": 480,
+      "parameter_elements": 240,
+      "updates": 80
+    }
+  },
+  "small_mlp": {
+    "smrc": {
+      "initial_validation_mse": 0.3499470353126526,
+      "final_validation_mse": 0.1844657063484192,
+      "optimizer_state_elements": 256,
+      "parameter_elements": 808,
+      "updates": 80
+    },
+    "pmrc": {
+      "initial_validation_mse": 0.3499470353126526,
+      "final_validation_mse": 0.053428955376148224,
+      "optimizer_state_elements": 256,
+      "parameter_elements": 808,
+      "updates": 80
+    },
+    "pmrc_practical": {
+      "initial_validation_mse": 0.3499470353126526,
+      "final_validation_mse": 0.0747310221195221,
+      "optimizer_state_elements": 256,
+      "parameter_elements": 808,
+      "updates": 80
+    },
+    "full_ema_sgd": {
+      "initial_validation_mse": 0.3499470353126526,
+      "final_validation_mse": 0.1725236475467682,
+      "optimizer_state_elements": 848,
+      "parameter_elements": 808,
+      "updates": 80
+    },
+    "full_muon": {
+      "initial_validation_mse": 0.3499470353126526,
+      "final_validation_mse": 0.01644427701830864,
+      "optimizer_state_elements": 848,
+      "parameter_elements": 808,
+      "updates": 80
+    },
+    "adamw": {
+      "initial_validation_mse": 0.3499470353126526,
+      "final_validation_mse": 0.017611343413591385,
+      "optimizer_state_elements": 1616,
+      "parameter_elements": 808,
+      "updates": 80
+    }
+  },
+  "full_experiment": {
+    "status": "not_reproduced_high_cost",
+    "review_status": "done",
+    "reason": "C4 60M–1.3B, 1.162B–26.84B tokens / multi-GPU pretraining and 7B–8B SFT omitted"
+  },
+  "limitations": [
+    "Fixed tiny diagnostic hyperparameters, not the paper grid search or downstream comparison",
+    "Synthetic real parameter updates only; not WikiText/C4 capability or wall-clock speed evidence",
+    "Practical QR uses torch.linalg.qr, not authors' SCQR performance kernel",
+    "No distributed state, AMP scaler/graph capture or torch.compile certification"
+  ],
+  "adapter_key": "smrc-pmrc",
+  "manifest_ref": "reproduction:smrc-pmrc",
+  "measured_locally": true,
+  "seeds": [
+    42
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single-seed component diagnostic; not a stable capability comparison"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.19844-smrc-pmrc/metrics/cpu-seed42.json",
+    "dataset_fingerprint": "ffcc43947adef1dad30b4bbae2a46b57ddbc4f5293a2e69b1fc1934777218232",
+    "code_state": "CPU run from the implementation working tree; exact source hashes below",
+    "source_sha256": {
+      "src/auto_research/reproductions/smrc_pmrc/optim.py": "fa29076e8ff1dbd96fd432bc7b5d1554540831abf7801865a8c16c09d5e6ef8e",
+      "src/auto_research/reproductions/smrc_pmrc/experiment.py": "2ed4d8c247d48961e3f8480273a7d8f493c46a20c847d6aded7373bd1f7cd76f",
+      "scripts/run_smrc_pmrc.py": "7405d248fbbb7018301ab7559f2ef14ea6aed2588b862e9541d1e3a90afc54b8"
+    }
+  }
+}

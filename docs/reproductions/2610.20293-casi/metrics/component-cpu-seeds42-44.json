@@ -1,0 +1,406 @@
+{
+  "schema_version": 2,
+  "seed_scope": "permutation estimators on one controlled snapshot, not independent policy trainings",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "controlled frozen retrieval example; no private production data",
+    "revision": "6514afce2017e291781ae74415c5266bb5e3456bbf2cb8bcd79d1cf96a887f05"
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "full_paper_reproduction": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "dataset": {
+        "id": "controlled frozen retrieval example; no private production data",
+        "revision": "6514afce2017e291781ae74415c5266bb5e3456bbf2cb8bcd79d1cf96a887f05"
+      },
+      "backend": "frozen-top2-rerun component diagnostic; not private pr_filter",
+      "snapshot_sha256": "6514afce2017e291781ae74415c5266bb5e3456bbf2cb8bcd79d1cf96a887f05",
+      "coalition_values": [
+        0.0,
+        6.0,
+        3.0,
+        6.0,
+        1.0,
+        6.0,
+        3.0,
+        6.0,
+        4.0,
+        6.0,
+        6.0,
+        6.0,
+        -1.0,
+        6.0,
+        6.0,
+        6.0,
+        5.0,
+        6.0,
+        3.0,
+        6.0,
+        3.0,
+        6.0,
+        3.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ],
+      "credits": {
+        "shapley": [
+          2.4333333333333336,
+          0.9333333333333335,
+          -0.15,
+          1.35,
+          1.4333333333333336
+        ],
+        "singleton": [
+          6.0,
+          3.0,
+          1.0,
+          4.0,
+          5.0
+        ],
+        "loo": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "action_advantages": [
+        [
+          -0.3,
+          -0.5553400014755511,
+          -0.7,
+          -0.47987636309979964,
+          -0.4647836354246493
+        ],
+        [
+          0.2,
+          -0.18111273210180354,
+          -0.2,
+          -5.551115123125783e-18,
+          0.18111273210180354
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      ],
+      "group_std": 1.1042845848984963,
+      "metrics": {
+        "shapley_efficiency_error": 8.881784197001252e-16,
+        "zero_sum_error": 3.944304526105059e-30,
+        "action_mean_error": 0.0,
+        "shared_token_error": 0.0,
+        "permutation_credit_l2_error": 0.4694525984457854,
+        "retrieval_calls": 5,
+        "exact_evaluator_calls": 31,
+        "permutation_evaluator_calls": 31
+      },
+      "limitations": [
+        "No learned retrieval policy, auction replay, production labels or online A/B.",
+        "Only the snapshot/credit/advantage component is executed.",
+        "Negative marginals and negative results are retained."
+      ]
+    },
+    {
+      "seed": 43,
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "full_paper_reproduction": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "dataset": {
+        "id": "controlled frozen retrieval example; no private production data",
+        "revision": "6514afce2017e291781ae74415c5266bb5e3456bbf2cb8bcd79d1cf96a887f05"
+      },
+      "backend": "frozen-top2-rerun component diagnostic; not private pr_filter",
+      "snapshot_sha256": "6514afce2017e291781ae74415c5266bb5e3456bbf2cb8bcd79d1cf96a887f05",
+      "coalition_values": [
+        0.0,
+        6.0,
+        3.0,
+        6.0,
+        1.0,
+        6.0,
+        3.0,
+        6.0,
+        4.0,
+        6.0,
+        6.0,
+        6.0,
+        -1.0,
+        6.0,
+        6.0,
+        6.0,
+        5.0,
+        6.0,
+        3.0,
+        6.0,
+        3.0,
+        6.0,
+        3.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ],
+      "credits": {
+        "shapley": [
+          2.4333333333333336,
+          0.9333333333333335,
+          -0.15,
+          1.35,
+          1.4333333333333336
+        ],
+        "singleton": [
+          6.0,
+          3.0,
+          1.0,
+          4.0,
+          5.0
+        ],
+        "loo": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "action_advantages": [
+        [
+          -0.3,
+          -0.5553400014755511,
+          -0.7,
+          -0.47987636309979964,
+          -0.4647836354246493
+        ],
+        [
+          0.2,
+          -0.18111273210180354,
+          -0.2,
+          -5.551115123125783e-18,
+          0.18111273210180354
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      ],
+      "group_std": 1.1042845848984963,
+      "metrics": {
+        "shapley_efficiency_error": 8.881784197001252e-16,
+        "zero_sum_error": 3.944304526105059e-30,
+        "action_mean_error": 0.0,
+        "shared_token_error": 0.0,
+        "permutation_credit_l2_error": 0.5404081935213417,
+        "retrieval_calls": 5,
+        "exact_evaluator_calls": 31,
+        "permutation_evaluator_calls": 31
+      },
+      "limitations": [
+        "No learned retrieval policy, auction replay, production labels or online A/B.",
+        "Only the snapshot/credit/advantage component is executed.",
+        "Negative marginals and negative results are retained."
+      ]
+    },
+    {
+      "seed": 44,
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "full_paper_reproduction": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "dataset": {
+        "id": "controlled frozen retrieval example; no private production data",
+        "revision": "6514afce2017e291781ae74415c5266bb5e3456bbf2cb8bcd79d1cf96a887f05"
+      },
+      "backend": "frozen-top2-rerun component diagnostic; not private pr_filter",
+      "snapshot_sha256": "6514afce2017e291781ae74415c5266bb5e3456bbf2cb8bcd79d1cf96a887f05",
+      "coalition_values": [
+        0.0,
+        6.0,
+        3.0,
+        6.0,
+        1.0,
+        6.0,
+        3.0,
+        6.0,
+        4.0,
+        6.0,
+        6.0,
+        6.0,
+        -1.0,
+        6.0,
+        6.0,
+        6.0,
+        5.0,
+        6.0,
+        3.0,
+        6.0,
+        3.0,
+        6.0,
+        3.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0,
+        6.0
+      ],
+      "credits": {
+        "shapley": [
+          2.4333333333333336,
+          0.9333333333333335,
+          -0.15,
+          1.35,
+          1.4333333333333336
+        ],
+        "singleton": [
+          6.0,
+          3.0,
+          1.0,
+          4.0,
+          5.0
+        ],
+        "loo": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "action_advantages": [
+        [
+          -0.3,
+          -0.5553400014755511,
+          -0.7,
+          -0.47987636309979964,
+          -0.4647836354246493
+        ],
+        [
+          0.2,
+          -0.18111273210180354,
+          -0.2,
+          -5.551115123125783e-18,
+          0.18111273210180354
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      ],
+      "group_std": 1.1042845848984963,
+      "metrics": {
+        "shapley_efficiency_error": 8.881784197001252e-16,
+        "zero_sum_error": 3.944304526105059e-30,
+        "action_mean_error": 0.0,
+        "shared_token_error": 0.0,
+        "permutation_credit_l2_error": 0.33232676799976046,
+        "retrieval_calls": 5,
+        "exact_evaluator_calls": 31,
+        "permutation_evaluator_calls": 31
+      },
+      "limitations": [
+        "No learned retrieval policy, auction replay, production labels or online A/B.",
+        "Only the snapshot/credit/advantage component is executed.",
+        "Negative marginals and negative results are retained."
+      ]
+    }
+  ],
+  "full_experiment_status": "not_reproduced_high_cost",
+  "metrics": {
+    "shapley_efficiency_error": {
+      "mean": 8.881784197001252e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "zero_sum_error": {
+      "mean": 3.944304526105059e-30,
+      "std": 0.0,
+      "n": 3
+    },
+    "action_mean_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "shared_token_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "permutation_credit_l2_error": {
+      "mean": 0.44739585332229587,
+      "std": 0.10577969992326164,
+      "n": 3
+    },
+    "retrieval_calls": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    },
+    "exact_evaluator_calls": {
+      "mean": 31,
+      "std": 0.0,
+      "n": 3
+    },
+    "permutation_evaluator_calls": {
+      "mean": 31,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "manifest_ref": "reproduction:casi",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "single/few-seed smoke result; do not claim a stable improvement"
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.20293-casi/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "not recorded in historical artifact"
+  }
+}

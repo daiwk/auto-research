@@ -273,6 +273,34 @@
     },
     {
       "domain": "agent-research",
+      "key": "autoformbench",
+      "title": "AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics",
+      "paper_url": "https://github.com/facebookresearch/autoformbench/blob/af1aa38fd44e019e566bce0b5a168609a886d8e6/paper.pdf",
+      "detail_path": "agent-research/autoformbench/README.md",
+      "topic": [
+        "形式化数学 Agent",
+        "评测协议与结果导入"
+      ],
+      "first_author": "Charles Arnal / Ahmad Rammal（共同一作，随机排序）",
+      "first_author_affiliation": "FAIR at Meta",
+      "published": "",
+      "publication_date_note": "首次公开日未确定；论文文稿2026-10-05、CITATION软件日期2026-09-30、官方发布页2026-10-13语义不同。",
+      "code": "https://github.com/facebookresearch/autoformbench",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.agent_research.autoformbench.load_release",
+      "local_command": "PYTHONPATH=src python scripts/run_autoformbench.py tasks --release-dir .cache/autoformbench-af1aa38 --output runs/autoformbench/tasks.json",
+      "upstream_revision": "af1aa38fd44e019e566bce0b5a168609a886d8e6",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "fidelity_note": "已实现固定341任务清单、source-free任务视图/Harbor参数计划、官方source-present结果导入与协议校验；不执行Lean或模型，不提供本地能力分数，不接入evolve。九模型完整长轨迹评测成本过高，不复现（审查DONE）。"
+    },
+    {
+      "domain": "agent-research",
       "key": "autogen",
       "title": "AutoGen",
       "paper_url": "https://arxiv.org/abs/2308.08155",
@@ -5391,6 +5419,31 @@
     },
     {
       "domain": "foundation-models",
+      "key": "jepa-prediction-planning",
+      "title": "One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models",
+      "paper_url": "https://arxiv.org/abs/2610.19375v1",
+      "detail_path": "foundation-models/2610.19375-jepa-prediction-planning/README.md",
+      "topic": [
+        "世界模型评测",
+        "冻结物理状态解码器",
+        "预测与规划配对比较"
+      ],
+      "first_author": "Joshua Cheung",
+      "first_author_affiliation": "论文未列机构",
+      "published": "2026-10-14",
+      "code": null,
+      "adapter": null,
+      "local_operator": "auto_research.jepa_evaluation.run_protocol",
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "gpu_validation_artifact": null,
+      "evolve_integrated": false,
+      "summary": "在训练期真实 encoder 表征上拟合并冻结物理状态解码器，分别计算表示误差、预测误差和差值；规划结果独立导入，保留配对种子、层级 bootstrap 与噪声审计。只实现 CPU 协议，不重训世界模型、不复现三环境完整实验。"
+    },
+    {
+      "domain": "foundation-models",
       "key": "jev-capability",
       "title": "Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks",
       "paper_url": "https://arxiv.org/abs/2610.11978",
@@ -7232,6 +7285,73 @@
     },
     {
       "domain": "foundation-models",
+      "key": "pn-mix",
+      "title": "PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference",
+      "paper_url": "https://arxiv.org/abs/2610.19605",
+      "detail_path": "reproductions/2610.19605-pn-mix/README.md",
+      "topic": [
+        "kv-cache",
+        "quantization",
+        "inference-serving",
+        "long-context"
+      ],
+      "first_author": "Gil Jae Song",
+      "first_author_affiliation": "Seoul National University",
+      "published": "2026-10-14",
+      "code": null,
+      "adapter": {
+        "adapter_key": "pn-mix",
+        "arxiv_id": "2610.19605",
+        "title": "PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference",
+        "paper_url": "https://arxiv.org/abs/2610.19605",
+        "track": "llm",
+        "organization": "Seoul National University",
+        "published": "2026-10-14",
+        "code_url": null,
+        "topics": [
+          "kv-cache",
+          "quantization",
+          "inference-serving",
+          "long-context"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/pn_mix",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "public-domain Hamlet fixed-input attention diagnostic"
+        ],
+        "baseline": "identical RoPE/GQA states and causal positions with an unquantized full cache",
+        "metrics": [
+          "attention_kl",
+          "attention_output_mse",
+          "key_mse",
+          "persistent_cache_bytes",
+          "sink_key_max_error"
+        ],
+        "default_seeds": [
+          42
+        ],
+        "budget": "L1 bounded single-layer attention diagnostic, <=2048 tokens; no training or downloads",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/pn-mix-a100-20261015.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "evolve_integrated": false,
+      "summary": "在 prefill 中以 query–key RoPE 通道对范数乘积选择高精度对，后续共享该选择，以 H3/L1 压缩 K 并保留 sink 与残差缓冲。本地实际执行打包缓存与 attention 消费，仅为 L1 组件诊断，不代表完整长输出基准或生产吞吐复现。",
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/pn-mix-a100-20261015.json"
+    },
+    {
+      "domain": "foundation-models",
       "key": "ppl-factory",
       "title": "PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning",
       "paper_url": "https://arxiv.org/abs/2607.18199",
@@ -8080,6 +8200,75 @@
       "priority": "P1",
       "requires_gpu_validation": true,
       "gpu_validation_artifact": "docs/gpu-validations/oct13-smolwam-a100.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "smrc-pmrc",
+      "title": "Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon",
+      "paper_url": "https://arxiv.org/abs/2610.19844",
+      "detail_path": "reproductions/2610.19844-smrc-pmrc/README.md",
+      "topic": [
+        "llm-training",
+        "optimizer",
+        "training-efficiency"
+      ],
+      "first_author": "Sifan Yang",
+      "first_author_affiliation": "Nanjing University / Alibaba Token Hub",
+      "published": "2026-10-14",
+      "code": null,
+      "adapter": {
+        "adapter_key": "smrc-pmrc",
+        "arxiv_id": "2610.19844",
+        "title": "Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon",
+        "paper_url": "https://arxiv.org/abs/2610.19844",
+        "track": "llm",
+        "organization": "Nanjing University / Alibaba Token Hub",
+        "published": "2026-10-14",
+        "code_url": null,
+        "topics": [
+          "llm-training",
+          "optimizer",
+          "training-efficiency"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/smrc_pmrc",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "paper Appendix E.1.1 public 30x8 stochastic quadratic",
+          "seeded 808-parameter MLP regression diagnostic"
+        ],
+        "baseline": "full-space EMA momentum SGD / exact matrix-sign Muon / AdamW; fixed equal update counts, not downstream accuracy comparisons",
+        "metrics": [
+          "numeric_controls.smrc_full_rank_max_abs_error",
+          "numeric_controls.pmrc_full_rank_max_abs_error",
+          "numeric_controls.smrc_boundary_max_abs_error",
+          "numeric_controls.pmrc_boundary_max_abs_error",
+          "paper_quadratic.smrc.final_true_gradient_norm",
+          "paper_quadratic.pmrc.final_true_gradient_norm"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "6 arms x 80 paper-quadratic updates + 6 x 80 tiny-MLP updates; <=120 seconds per seed; no downloads",
+        "device_capabilities": [
+          "cpu",
+          "cuda"
+        ],
+        "requires_gpu_validation": true,
+        "gpu_validation_artifact": "docs/gpu-validations/smrc-pmrc-a100-20261015.json",
+        "online_evidence": [],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "evolve_integrated": false,
+      "priority": "P1",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/smrc-pmrc-a100-20261015.json",
+      "summary": "把优化器动量压到低秩子空间，同时显式保留正交残差梯度；SMRC 在换基时修正参数并重置动量，PMRC 则对低维动量做矩阵符号更新。本地仅验收 CPU/CUDA 优化器组件，不复现完整多卡预训练。"
     },
     {
       "domain": "foundation-models",
@@ -14530,6 +14719,79 @@
           "context:channel-trigger-routing"
         ]
       }
+    },
+    {
+      "domain": "recommendation",
+      "key": "casi",
+      "title": "CASI: Credit Assignment via Set Intervention for Agentic Retrieval",
+      "paper_url": "https://arxiv.org/abs/2610.20293",
+      "detail_path": "reproductions/2610.20293-casi/README.md",
+      "topic": [
+        "agentic-retrieval",
+        "credit-assignment",
+        "policy-optimization"
+      ],
+      "first_author": "Xinyi Cheng",
+      "first_author_affiliation": "Xiaohongshu",
+      "published": "2026-10-14",
+      "code": null,
+      "adapter": {
+        "adapter_key": "casi",
+        "arxiv_id": "2610.20293",
+        "title": "CASI: Credit Assignment via Set Intervention for Agentic Retrieval",
+        "paper_url": "https://arxiv.org/abs/2610.20293",
+        "track": "recommendation",
+        "organization": "Xiaohongshu",
+        "published": "2026-10-14",
+        "code_url": null,
+        "topics": [
+          "agentic-retrieval",
+          "credit-assignment",
+          "policy-optimization"
+        ],
+        "local_code_dir": "src/auto_research/reproductions/casi",
+        "fidelity": "core_mechanism",
+        "evaluation_tier": "l1_mechanism",
+        "datasets": [
+          "controlled frozen retrieval snapshot or caller-supplied cached candidates"
+        ],
+        "baseline": "Singleton and leave-one-out on the identical frozen coalition function",
+        "metrics": [
+          "metrics.shapley_efficiency_error",
+          "metrics.zero_sum_error",
+          "metrics.action_mean_error"
+        ],
+        "default_seeds": [
+          42,
+          43,
+          44
+        ],
+        "budget": "5 actions; 31 exact frozen evaluator calls and 128 cached permutations; no model downloads or policy training",
+        "device_capabilities": [
+          "cpu"
+        ],
+        "requires_gpu_validation": false,
+        "gpu_validation_artifact": null,
+        "online_evidence": [
+          {
+            "product": "Xiaohongshu sponsored search",
+            "metric": "advertiser value (Advv)",
+            "lift_percent": 3.51,
+            "traffic": "randomized production A/B; 10% traffic",
+            "source_url": "https://arxiv.org/html/2610.20293v1",
+            "source_location": "Section 4.5",
+            "experiment_duration": "7 days",
+            "retrieved_at": "2026-10-15"
+          }
+        ],
+        "selection_exception": null,
+        "evolve_operators": []
+      },
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "evolve_integrated": false,
+      "summary": "冻结一次检索快照并重组子集，用精确或置换Shapley分配信用，再以组共享尺度和有界零和投影生成action/token优势。仅执行CPU组件诊断，未训练LLM检索策略或复现私有生产拍卖。"
     },
     {
       "domain": "recommendation",

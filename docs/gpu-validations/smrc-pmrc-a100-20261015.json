@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "adapter_key": "smrc-pmrc",
+  "validated_at": "2026-10-15",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_smrc_pmrc.py",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--steps",
+    "80",
+    "--max-seconds",
+    "120",
+    "--output",
+    "runs/smrc-pmrc-42"
+  ],
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "additional_validated_commands": [
+    [
+      "python",
+      "-m",
+      "auto_research.cli",
+      "reproduce",
+      "--paper",
+      "smrc-pmrc",
+      "--device",
+      "cuda",
+      "--cpu-threads",
+      "1",
+      "--seeds",
+      "42",
+      "--budget",
+      "smoke",
+      "--output-dir",
+      "runs/smrc-pmrc-cli"
+    ]
+  ],
+  "dataset": {
+    "public_id": "paper-appendix-E.1.1-quadratic + seeded-small-MLP-regression",
+    "revision": "arxiv:2610.19844v1:appendix-E.1.1:equation-30",
+    "source": "https://arxiv.org/html/2610.19844v1#A5.SS1.SSS1",
+    "input_sha256_per_seed": {
+      "42": "cda3bac5d18e5011ddeef77c61cb391822d4b7d5dcfb3d7c9df6ea97dcde7b49",
+      "43": "ebcd7da332b5edbbae6f1c28ea147fa084de1c67481f5e41c770ead66e300f86",
+      "44": "45249b76c8d4ad249438bfe04c70fe1b328720bbe1ec7c1b866529659981f5aa"
+    }
+  },
+  "checkpoint": {
+    "public_id": "none-deterministic-matrices-and-random-808-parameter-MLP",
+    "revision": "fe182240d2ddb76adccec86e67c1c7cf52ac3ee0",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "numeric.smrc_full_rank_max_abs_error": {
+      "mean": 5.551115123125783e-17,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.smrc_boundary_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.smrc_state_resume_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.pmrc_full_rank_max_abs_error": {
+      "mean": 2.220446049250313e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.pmrc_boundary_max_abs_error": {
+      "mean": 2.7755575615628914e-17,
+      "std": 0.0,
+      "n": 3
+    },
+    "numeric.pmrc_state_resume_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "quadratic.smrc.final_true_gradient_norm": {
+      "mean": 0.4775596945459611,
+      "std": 0.0,
+      "n": 3
+    },
+    "quadratic.pmrc.final_true_gradient_norm": {
+      "mean": 3.3183929960789156,
+      "std": 2.7733362266239673e-15,
+      "n": 3
+    },
+    "quadratic.pmrc_practical.final_true_gradient_norm": {
+      "mean": 3.6302205030949053,
+      "std": 0.05653035623705971,
+      "n": 3
+    },
+    "quadratic.full_ema_sgd.final_true_gradient_norm": {
+      "mean": 0.22104417414557118,
+      "std": 0.0,
+      "n": 3
+    },
+    "quadratic.full_muon.final_true_gradient_norm": {
+      "mean": 3.391584539121821,
+      "std": 5.127900497022837e-16,
+      "n": 3
+    },
+    "quadratic.adamw.final_true_gradient_norm": {
+      "mean": 0.37933627731559555,
+      "std": 0.0,
+      "n": 3
+    },
+    "mlp.smrc.validation_mse": {
+      "mean": 0.20510957141717276,
+      "std": 0.02596251642335146,
+      "n": 3
+    },
+    "mlp.pmrc.validation_mse": {
+      "mean": 0.047500340888897576,
+      "std": 0.0051421093843023805,
+      "n": 3
+    },
+    "mlp.pmrc_practical.validation_mse": {
+      "mean": 0.06874141345421474,
+      "std": 0.0067255045233066075,
+      "n": 3
+    },
+    "mlp.full_ema_sgd.validation_mse": {
+      "mean": 0.1934781620899836,
+      "std": 0.024734806800845235,
+      "n": 3
+    },
+    "mlp.full_muon.validation_mse": {
+      "mean": 0.020187460506955784,
+      "std": 0.0036469486199900273,
+      "n": 3
+    },
+    "mlp.adamw.validation_mse": {
+      "mean": 0.019841013476252556,
+      "std": 0.001936938059218089,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "real_parameter_updates": true,
+    "six_matched_arms": true,
+    "fp64_formula_controls": true,
+    "fp16_bf16_real_updates": true,
+    "fp32_optimizer_state_restore_exact": true,
+    "cuda_svd_qr_executed": true,
+    "negative_results_retained": true,
+    "unified_cli_cuda_and_same_seed_agreement": true,
+    "full_llm_training": false
+  },
+  "previous_failed_attempt": {
+    "commit": "f65507e48851e4a576b296392126414efe36d62b",
+    "result": "failed_dependency_check",
+    "reason": "Independent CPU Torch SVD oracle required unavailable LAPACK. No numeric acceptance was claimed. The oracle was switched to NumPy FP64; CUDA optimizer and tolerances were unchanged."
+  },
+  "executed_source_sha256": {
+    "src/auto_research/reproductions/smrc_pmrc/optim.py": "fa29076e8ff1dbd96fd432bc7b5d1554540831abf7801865a8c16c09d5e6ef8e",
+    "src/auto_research/reproductions/smrc_pmrc/experiment.py": "2ed4d8c247d48961e3f8480273a7d8f493c46a20c847d6aded7373bd1f7cd76f",
+    "scripts/run_smrc_pmrc.py": "7405d248fbbb7018301ab7559f2ef14ea6aed2588b862e9541d1e3a90afc54b8",
+    "src/auto_research/runtime.py": "0a924b7c06e0129f74e8b94ab98b56b05bf9d2e66d8c7d745fc24a66150670e3"
+  },
+  "provenance": {
+    "commit": "fe182240d2ddb76adccec86e67c1c7cf52ac3ee0",
+    "artifact_path": "docs/gpu-validations/smrc-pmrc-a100-20261015.json",
+    "metrics_artifact": "docs/reproductions/2610.19844-smrc-pmrc/metrics/component-a100-seeds42-44.json",
+    "scope": "l1_component_only"
+  }
+}

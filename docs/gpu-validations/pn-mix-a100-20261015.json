@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "adapter_key": "pn-mix",
+  "validated_at": "2026-10-15",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_pn_mix.py",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--output",
+    "runs/pn-mix-42.json"
+  ],
+  "additional_seeds": [
+    43,
+    44
+  ],
+  "additional_validated_commands": [
+    [
+      "python",
+      "-m",
+      "auto_research.cli",
+      "reproduce",
+      "--paper",
+      "pn-mix",
+      "--device",
+      "cuda",
+      "--cpu-threads",
+      "1",
+      "--seeds",
+      "42",
+      "--budget",
+      "smoke",
+      "--output-dir",
+      "runs/pn-mix-cli"
+    ]
+  ],
+  "dataset": {
+    "id": "public-domain-Hamlet-byte-diagnostic",
+    "revision": "sha256:378fdfa57b25e18e5eadfd448a7b4a17bb017893f425c1b0d35b1f2c342568c6",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "split": "fixed-input-mechanism-diagnostic-no-task-labels"
+  },
+  "checkpoint": {
+    "public_id": "none-random-initialized-single-layer-RoPE-GQA",
+    "revision": "pn-mix-reference-rope-v1",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "key_mse": {
+      "mean": 0.0666692207256953,
+      "std": 0.0014421205826379256,
+      "n": 3
+    },
+    "value_mse": {
+      "mean": 0.047429648538430534,
+      "std": 0.005765456916668747,
+      "n": 3
+    },
+    "attention_kl": {
+      "mean": 0.010784379206597805,
+      "std": 0.0006033641009184931,
+      "n": 3
+    },
+    "attention_output_mse": {
+      "mean": 0.003879882705708345,
+      "std": 0.000633493050528286,
+      "n": 3
+    },
+    "attention_output_cosine": {
+      "mean": 0.9359698494275411,
+      "std": 0.017309394347688835,
+      "n": 3
+    },
+    "sink_key_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "saliency_computations": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "actual_attention_calls": {
+      "mean": 66,
+      "std": 0.0,
+      "n": 3
+    },
+    "online_vs_final_cache_attention_max_delta": {
+      "mean": 0.06618913014729817,
+      "std": 0.005402342052971527,
+      "n": 3
+    },
+    "key_bytes": {
+      "mean": 15108,
+      "std": 0.0,
+      "n": 3
+    },
+    "value_bytes": {
+      "mean": 17408,
+      "std": 0.0,
+      "n": 3
+    },
+    "persistent_cache_bytes": {
+      "mean": 32516,
+      "std": 0.0,
+      "n": 3
+    },
+    "quantized_tokens": {
+      "mean": 384,
+      "std": 0.0,
+      "n": 3
+    },
+    "sink_tokens": {
+      "mean": 32,
+      "std": 0.0,
+      "n": 3
+    },
+    "residual_tokens": {
+      "mean": 32,
+      "std": 0.0,
+      "n": 3
+    },
+    "key_bits_per_element_including_sink_residual": {
+      "mean": 4.215401785714286,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "packed_codes_consumed_by_attention": true,
+    "prefill_only_mask": true,
+    "three_initializations": true,
+    "actual_attention_calls_per_run": 66,
+    "unified_cli_cuda_and_same_seed_agreement": true,
+    "fused_kernel": false,
+    "full_pretrained_llm_quality_tested": false
+  },
+  "executed_source_sha256": {
+    "src/auto_research/reproductions/pn_mix/cache.py": "4b57d79487fccdc8643429d4d90c394e9e196c6ac27496f50528bb1884caaa57",
+    "src/auto_research/reproductions/pn_mix/experiment.py": "c782d894803b3080241f56243abb3df58ec8af8d11b445c06da2690097c84351",
+    "scripts/run_pn_mix.py": "d94b2ca59af5b3f5b687502140670aa411d86d00f8370113975f60fab839ea28",
+    "src/auto_research/runtime.py": "0a924b7c06e0129f74e8b94ab98b56b05bf9d2e66d8c7d745fc24a66150670e3"
+  },
+  "provenance": {
+    "commit": "f65507e48851e4a576b296392126414efe36d62b",
+    "artifact_path": "docs/gpu-validations/pn-mix-a100-20261015.json",
+    "metrics_artifact": "docs/reproductions/2610.19605-pn-mix/metrics/component-a100-seeds42-44.json",
+    "scope": "l1_component_only"
+  }
+}

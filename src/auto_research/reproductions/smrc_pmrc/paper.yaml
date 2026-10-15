@@ -8,15 +8,34 @@
   "published": "2026-10-14",
   "upstream_code": "未找到原作者 SMRC/PMRC 专用公开仓库；论文引用 Minimalist_LLM_Pretraining 等基础实现，不等于新方法已开源（v1，2026-10-15 核验）",
   "track": "llm",
-  "topics": ["llm-training", "optimizer", "training-efficiency"],
+  "topics": [
+    "llm-training",
+    "optimizer",
+    "training-efficiency"
+  ],
   "local_code": "src/auto_research/reproductions/smrc_pmrc",
   "documentation": "docs/reproductions/2610.19844-smrc-pmrc/README.md",
   "fidelity": "core_mechanism",
   "evaluation_tier": "l1_mechanism",
-  "datasets": ["paper Appendix E.1.1 public 30x8 stochastic quadratic", "seeded 808-parameter MLP regression diagnostic"],
+  "datasets": [
+    "paper Appendix E.1.1 public 30x8 stochastic quadratic",
+    "seeded 808-parameter MLP regression diagnostic"
+  ],
   "baseline": "full-space EMA momentum SGD / exact matrix-sign Muon / AdamW; fixed equal update counts, not downstream accuracy comparisons",
-  "metrics": ["numeric_controls.smrc_full_rank_max_abs_error", "numeric_controls.pmrc_full_rank_max_abs_error", "numeric_controls.smrc_boundary_max_abs_error", "numeric_controls.pmrc_boundary_max_abs_error", "paper_quadratic.smrc.final_true_gradient_norm", "paper_quadratic.pmrc.final_true_gradient_norm"],
-  "mechanisms": ["orthogonal residual gradient outside the low-rank optimizer state", "SMRC parameter boundary correction with momentum reset", "PMRC exact matrix sign and reset-only stage transition", "practical PMRC residual cap, shape scaling, Nesterov and warm-start row-normalized QR"],
+  "metrics": [
+    "numeric_controls.smrc_full_rank_max_abs_error",
+    "numeric_controls.pmrc_full_rank_max_abs_error",
+    "numeric_controls.smrc_boundary_max_abs_error",
+    "numeric_controls.pmrc_boundary_max_abs_error",
+    "paper_quadratic.smrc.final_true_gradient_norm",
+    "paper_quadratic.pmrc.final_true_gradient_norm"
+  ],
+  "mechanisms": [
+    "orthogonal residual gradient outside the low-rank optimizer state",
+    "SMRC parameter boundary correction with momentum reset",
+    "PMRC exact matrix sign and reset-only stage transition",
+    "practical PMRC residual cap, shape scaling, Nesterov and warm-start row-normalized QR"
+  ],
   "evolve_operators": [],
   "adapter_module": "auto_research.reproductions.smrc_pmrc.adapter",
   "execution": {
@@ -27,10 +46,21 @@
       "online_ab": [],
       "selection_exception": null
     },
-    "omitted_core_components": ["multi-GPU C4 pretraining at 60M–1.3B / 1.162B–26.84B tokens", "7B–8B SFT and downstream benchmark campaign", "authors SCQR speed kernel and distributed optimizer implementation"],
-    "default_seeds": [42, 43, 44],
+    "omitted_core_components": [
+      "multi-GPU C4 pretraining at 60M–1.3B / 1.162B–26.84B tokens",
+      "7B–8B SFT and downstream benchmark campaign",
+      "authors SCQR speed kernel and distributed optimizer implementation"
+    ],
+    "default_seeds": [
+      42,
+      43,
+      44
+    ],
     "budget": "6 arms x 80 paper-quadratic updates + 6 x 80 tiny-MLP updates; <=120 seconds per seed; no downloads",
-    "device_capabilities": ["cpu", "cuda"],
+    "device_capabilities": [
+      "cpu",
+      "cuda"
+    ],
     "infer_device_capabilities": false,
     "requires_gpu_validation": true,
     "gpu_validation_artifact": "docs/gpu-validations/smrc-pmrc-a100-20261015.json"

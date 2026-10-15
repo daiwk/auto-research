@@ -1,6 +1,12 @@
 {
   "domain": "foundation-models",
   "key": "smrc-pmrc",
+  "implementation_status": "component_only",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evolve_integrated": false,
+  "priority": "P1",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/smrc-pmrc-a100-20261015.json",
   "detail_path": "reproductions/2610.19844-smrc-pmrc/README.md",
   "first_author": "Sifan Yang",
   "first_author_affiliation": "Nanjing University / Alibaba Token Hub",

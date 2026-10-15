@@ -11897,6 +11897,16 @@
         "fingerprint": "80a9a2dba2ee1ee7f0be60b2119b27fc4df6b54b9af2855f1099fa37fed6b940"
       }
     ],
+    "src/auto_research/reproductions/casi/algorithm.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "value",
+        "line": 96,
+        "qualified_name": "CachedCoalitionEvaluator.value",
+        "expression": "self.calls += 1",
+        "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
+      }
+    ],
     "src/auto_research/reproductions/connectionmind/model.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -12129,6 +12139,16 @@
         "qualified_name": "_load_rows",
         "expression": "row.get('answer')",
         "fingerprint": "bb7f43bcaea754107320f654a4b51ab61d6c483f572b7450fde3943f64a7abf1"
+      }
+    ],
+    "src/auto_research/reproductions/pn_mix/cache.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "append",
+        "line": 364,
+        "qualified_name": "PNMixCache.append",
+        "expression": "self.total_tokens += key.shape[-2]",
+        "fingerprint": "5fc8b572e0ab1e20dd0eaa904c3906d183b8723a4ff974057b0c83542f8000f1"
       }
     ],
     "src/auto_research/reproductions/progressive_contraction/checkpoint.py": [

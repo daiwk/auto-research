@@ -1,6 +1,9 @@
 {
   "domain": "foundation-models",
   "key": "pn-mix",
+  "implementation_status": "component_only",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evolve_integrated": false,
   "detail_path": "reproductions/2610.19605-pn-mix/README.md",
   "first_author": "Gil Jae Song",
   "first_author_affiliation": "Seoul National University",

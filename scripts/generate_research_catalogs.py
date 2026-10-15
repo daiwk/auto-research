@@ -166,6 +166,7 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "形式化数学 Agent": ("工具调用与环境执行", "形式化数学与独立验证"),
         "agentic-rl": ("Agentic RL 与后训练", "技能、turn 与 rollout credit"),
         "memory-retrieval": ("记忆、技能与持续学习", "记忆检索与表示"),
         "skill-retrieval": ("记忆、技能与持续学习", "技能获取、检索与调用"),
@@ -297,6 +298,9 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "pn-mix": ("推理与系统效率", "量化"),
+    "smrc-pmrc": ("预训练与数据", "优化器与训练稳定性"),
+    "jepa-prediction-planning": ("多模态基础模型", "世界模型与具身控制"),
     "ev-jepa": ("多模态基础模型", "视频表征与弹性跨设备推理"),
     "doublecat-semicat": ("网络架构", "扩散与生成式模型"),
     "oal": ("注意力与长上下文", "线性与可分离注意力"),
@@ -453,7 +457,10 @@ def read_rows(module: str, domain: str | None = None) -> list[dict[str, str]]:
         if not organization and isinstance(adapter, dict):
             organization = adapter.get("organization")
         if date == "未标注":
-            date = page_metadata.get("首次公开日期", date)[:10]
+            candidate = page_metadata.get("首次公开日期", "")
+            match = re.match(r"(\d{4}-\d{2}-\d{2})(?!\d)", candidate)
+            if match:
+                date = match.group(1)
         organization = organization or page_metadata.get("公司/机构")
         author = author or "未单独登记"
         organization = organization or "未标注机构"
@@ -486,6 +493,10 @@ def read_rows(module: str, domain: str | None = None) -> list[dict[str, str]]:
             "execution_label": (
                 f"计划键 `{paper['key']}`：成本过高，暂不复现；待验收（仅研究资料）"
                 if paper.get("implementation_status") == "deferred_high_cost"
+                else f"`{paper['key']}`：CPU 评测接口，不执行模型"
+                if paper.get("implementation_status") == "evaluation_protocol_interface"
+                else f"`{paper['key']}`：仅低成本组件，完整实验不复现"
+                if paper.get("implementation_status") == "component_only"
                 else f"`{paper['key']}`"
             ),
         })
@@ -594,7 +605,11 @@ def render(module: str, dimension: str, title: str) -> str:
         BROWSE_INTROS[dimension],
         "",
     ]
-    for group in sorted(groups, reverse=dimension == "year"):
+    group_order = (
+        sorted(groups, key=lambda group: (group.isdigit(), group), reverse=True)
+        if dimension == "year" else sorted(groups)
+    )
+    for group in group_order:
         lines.extend([f"## {group}", ""])
         ordered = _date_descending(groups[group])
         for row in ordered:
@@ -641,7 +656,8 @@ def _date_descending(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     """Newest first, with title ascending as a deterministic same-day tie-break."""
 
     ordered = sorted(rows, key=lambda item: item["title"].lower())
-    return sorted(ordered, key=lambda item: item["date"], reverse=True)
+    return sorted(ordered, key=lambda item: item["date"]
+                  if re.fullmatch(r"\d{4}-\d{2}-\d{2}", item["date"]) else "", reverse=True)
 
 
 def _paper_date(link: str) -> str:
@@ -777,6 +793,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "jepa-prediction-planning": FOUNDATION_TOPIC_HIERARCHY["jepa-prediction-planning"],
         "ev-jepa": FOUNDATION_TOPIC_HIERARCHY["ev-jepa"],
         "data-space-iteration": ("网络架构", "扩散与生成式模型"),
         "vfold": ("推理与系统效率", "推测解码与 KV cache"),

@@ -232,6 +232,10 @@
 - [Toolformer](../2302.04761-toolformer/README.md)（`toolformer`）：手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。
 - [PAL](../2211.10435-pal/README.md)（`pal`）：LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。
 
+### 形式化数学与独立验证
+
+- [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](../autoformbench/README.md)（`autoformbench`）：AutoformBench 不只要求补一个孤立证明，而是让 Agent 在固定 Lean/Mathlib 上构造支撑高级数学命题的定义、辅助引理和证明。341 个任务来自 24 个数学来源，共有 1,155 个需要完成的证明义务；一个任务只有全部义务均通过可信验证才算成功。
+
 ### 电脑操作与 reward 评测
 
 - [When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows](../../reproductions/2610.13092-jev-workflow/README.md)（`jev-workflow`）：这是一篇评测研究，不是新的 self-improvement 算法。比较决策延迟/费用与端到端成功交付；failed recovery、premature completion 和失败开销计入资源每成功，而非只报告单步省时。
