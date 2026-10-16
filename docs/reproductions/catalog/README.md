@@ -30,6 +30,7 @@
 | Serving 与研究基础设施 | [Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation](../2609.32839-flvm/README.md) | Google / YouTube，2026-09-26 | 未发现官方代码 | `flvm` |
 | 生成、排序与冷启动 | [KuaFu: Compressing Long User Behavior into Understanding at Billion Scale](../2609.31045-kuafu/README.md) | Tencent，2026-09-25 | 未发现官方代码 | `kuafu` |
 | 生成、排序与冷启动 | [X-Rec Technical Report](../2609.29180-xrec/README.md) | TikTok (ByteDance)，2026-09-24 | 未发现官方代码 | `xrec` |
+| 多目标与多任务学习 | [Learned Cross-Task Relationships in Multi-Task Models](../../recommendation-components/2609.28776-cross-task-relationships/README.md) | Google，2026-09-23 | 未发现官方代码 | `cross-task-relationships`：仅低成本组件，完整实验不复现 |
 | 多阶段排序与混排 | [OneTrans-V2: Unifying Retrieval, Pre-rank, and Fine-rank with One Transformer in Industrial Recommender](../2609.28589-onetrans-v2/README.md) | ByteDance，2026-09-23 | 未发现官方代码 | `onetrans-v2` |
 | 排序与长序列建模 | [Lightweight Ranking Heads: Accelerating Multi-Task Experimentation in Production Recommender Systems](../2609.25433-light-heads/README.md) | Google，2026-09-21 | 未发现官方代码 | `light-heads` |
 | 大模型能力与推荐融合 | [Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery](../2609.23877-music-rationales/README.md) | Google，2026-09-20 | 未发现官方代码 | `music-rationales` |
@@ -81,7 +82,7 @@
 | 生成、排序与冷启动 | [Hierarchical Residual Policy Optimization for Generative Recommendations](../2608.00750-hrpo/README.md) | City University of Hong Kong / Kuaishou，2026-08-01 | [已开源](https://github.com/Applied-Machine-Learning-Lab/KDD2026-HRPO) | `hrpo` |
 | 内容理解、审核与风险控制 | [GALA: Generative Aligned Learning for Adaptive Multimodal Representation in the Taobao Shangou Recommender System](../2607.29213-gala/README.md) | Rajax Network Technology / Taobao Shangou / Alibaba，2026-07-31 | 未发现官方代码 | `gala` |
 | 训练目标与决策优化 | [RecHarness: A Bandit-Routed Agentic Harness for Self-Evolving Recommender Systems](../2607.29241-recharness/README.md) | Huazhong Agricultural University (Kuaishou internship)，2026-07-31 | [已开源](https://github.com/6lyc/RecHarness) | `recharness` |
-| 生成、排序与冷启动 | [TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings](../2607.28940-transx/README.md) | LinkedIn，2026-07-31 | 未发现官方代码 | `transx` |
+| 生成、排序与冷启动 | [TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings](../2607.28940-transx/README.md) | LinkedIn，2026-07-31 | 未发现官方代码 | `transx`：仅低成本组件，完整实验不复现 |
 | 大模型能力与推荐融合 | [Building a User Foundation Model for the Open Web](../2607.28019-open-web-ufm/README.md) | Teads，2026-07-30 | 未发现官方代码 | `open-web-ufm` |
 | 生成、排序与冷启动 | [CCFormer: Efficient Cross-Field Interaction and Hierarchical Sequence Compression for Industrial Recommendation at Tencent](../2607.28070-ccformer/README.md) | Tencent Platform and Content Group，2026-07-30 | 未发现官方代码 | `ccformer` |
 | 训练目标与决策优化 | [From Understanding to Action: Feedback-Grounded Policy Discovery for Generative Recommendation](../2607.27789-feedback-policy/README.md) | Huazhong Agricultural University (Kuaishou internship)，2026-07-30 | 未发现官方代码 | `feedback-policy` |
@@ -214,6 +215,7 @@
 | 大模型能力与推荐融合 | [Zero-shot Cross-domain Knowledge Distillation: A Case study on YouTube Music](../2603.28994-cross-domain-kd/README.md) | Google / YouTube，2026-03 | 未发现官方代码 | `cross-domain-kd` |
 | 生成、排序与冷启动 | [Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale](../2603.00632-quasid/README.md) | University of Electronic Science and Technology of China / Kuaishou，2026-02-28 | 未发现官方代码 | `quasid` |
 | 生成、排序与冷启动 | [Learning to Reflect and Correct: Towards Better Decoding Trajectories for Large-Scale Generative Recommendation](../2602.23639-grc/README.md) | Alibaba International / Wuhan University，2026-02-27 | 未发现官方代码 | `grc` |
+| 生成式推荐 | [Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators](../../recommendation-components/2602.22647-static-constraint-decoding/README.md) | Google，2026-02-26 | [已开源](https://github.com/youtube/static-constraint-decoding) | `static-constraint-decoding`：仅低成本组件，完整实验不复现 |
 | 大模型能力与推荐融合 | [Generative Pseudo-Labeling for Pre-Ranking with LLMs](../2602.20995-gpl-prerank/README.md) | Alibaba Group / Renmin University，2026-02-24 | 未发现官方代码 | `gpl-prerank` |
 | 生成、排序与冷启动 | [HiSAC: Hierarchical Sparse Activation Compression for Ultra-long Sequence Modeling in Recommenders](../2602.21009-hisac/README.md) | Alibaba / Taobao，2026-02-24 | 未发现官方代码 | `hisac` |
 | 训练目标与决策优化 | [A Long-term Value Prediction Framework In Video Ranking](../2602.17058-ltv-video-ranking/README.md) | Alibaba Group / Tsinghua University，2026-02-19 | 未发现官方代码 | `ltv-video-ranking` |

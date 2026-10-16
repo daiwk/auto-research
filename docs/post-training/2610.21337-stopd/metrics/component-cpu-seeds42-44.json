@@ -1,0 +1,307 @@
+{
+  "schema_version": 2,
+  "method": "stopd",
+  "manifest_ref": "post-training:stopd",
+  "adapter": null,
+  "evaluation_tier": "l1_mechanism",
+  "measured_locally": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "dataset": {
+    "id": "gutenberg:1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "byte_ranges": {
+      "train": [
+        0,
+        165516
+      ],
+      "validation": [
+        165516,
+        186205
+      ],
+      "test": [
+        186205,
+        206895
+      ]
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "selection": "none; fixed budgets, final heldout NLL only",
+    "claim_policy": "actual component execution only; not paper benchmark, capability comparison or correctness improvement",
+    "model": "257-token causal cumulative-embedding BytePolicy, width24",
+    "separate_train_validation_test": true,
+    "teacher_steps": 8,
+    "specialist_steps": 4,
+    "student_steps": 2,
+    "max_new_tokens": 16,
+    "sif": "default550 exclusion plus explicit K2/w4/s2 short-window diagnostic",
+    "tf_opd": "actual teacher self-generation; naturalEOS+DEFLATE filter; correctness ungraded text",
+    "waypoint": "same actual tiny RL run, byte-parity reward, frozen initial/middle/final",
+    "cce": "controlled mathematical premise fixture; same sampled prefix, no semantic extractor",
+    "waypoint_teacher_rl": "fixed 8 updates x 64 one-action rollouts; checkpoints 0/4/8; causal first-action REINFORCE; no selection or retries"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.0012173685761107664,
+      "std": 0.0002722530619364018,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 4.913514455159505,
+      "std": 0.11217339741777624,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 4.91320784886678,
+      "std": 0.11224262914863821,
+      "n": 3
+    },
+    "final_test_nll": {
+      "mean": 4.875405788421631,
+      "std": 0.09585021279891572,
+      "n": 3
+    },
+    "generated_tokens": {
+      "mean": 97.33333333333333,
+      "std": 4.618802153517006,
+      "n": 3
+    },
+    "natural_eos_rollouts": {
+      "mean": 0,
+      "std": 0,
+      "n": 3
+    },
+    "rejected_diagnostic_groups": {
+      "mean": 0,
+      "std": 0,
+      "n": 3
+    },
+    "frozen_teacher_parameter_delta_l2": {
+      "mean": 0,
+      "std": 0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "parameter_delta_l2": 0.0010315599108429256,
+      "baseline_validation_nll": 5.039752006530762,
+      "final_validation_nll": 5.039505958557129,
+      "final_test_nll": 4.984007835388184,
+      "generated_tokens": 100,
+      "natural_eos_rollouts": 0,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.010709669440984726,
+          "gradient_norm": 0.017936991527676582,
+          "warmup": true,
+          "denominator": 64,
+          "weighted_count_for_next_batch": 64,
+          "retained_tokens": 64,
+          "cutoffs": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "normalizer_source": "current_exact_warmup"
+        },
+        {
+          "step": 1,
+          "loss": 0.011098338291049004,
+          "gradient_norm": 0.01817081682384014,
+          "warmup": false,
+          "denominator": 64,
+          "weighted_count_for_next_batch": 58.66666666666666,
+          "retained_tokens": 36,
+          "cutoffs": [
+            4,
+            4,
+            16,
+            12
+          ],
+          "normalizer_source": "previous_batch"
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 43,
+      "parameter_delta_l2": 0.0010906639729809436,
+      "baseline_validation_nll": 4.875514030456543,
+      "final_validation_nll": 4.875257968902588,
+      "final_test_nll": 4.839583396911621,
+      "generated_tokens": 100,
+      "natural_eos_rollouts": 0,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.014618675224483013,
+          "gradient_norm": 0.019889965653419495,
+          "warmup": true,
+          "denominator": 64,
+          "weighted_count_for_next_batch": 64,
+          "retained_tokens": 64,
+          "cutoffs": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "normalizer_source": "current_exact_warmup"
+        },
+        {
+          "step": 1,
+          "loss": 0.012644795700907707,
+          "gradient_norm": 0.01759037934243679,
+          "warmup": false,
+          "denominator": 64,
+          "weighted_count_for_next_batch": 47.99999999999999,
+          "retained_tokens": 36,
+          "cutoffs": [
+            4,
+            12,
+            12,
+            8
+          ],
+          "normalizer_source": "previous_batch"
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 44,
+      "parameter_delta_l2": 0.0015298818445084298,
+      "baseline_validation_nll": 4.825277328491211,
+      "final_validation_nll": 4.824859619140625,
+      "final_test_nll": 4.802626132965088,
+      "generated_tokens": 92,
+      "natural_eos_rollouts": 0,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.023613426834344864,
+          "gradient_norm": 0.031987935304641724,
+          "warmup": true,
+          "denominator": 64,
+          "weighted_count_for_next_batch": 64,
+          "retained_tokens": 64,
+          "cutoffs": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "normalizer_source": "current_exact_warmup"
+        },
+        {
+          "step": 1,
+          "loss": 0.014866486191749573,
+          "gradient_norm": 0.021183479577302933,
+          "warmup": false,
+          "denominator": 64,
+          "weighted_count_for_next_batch": 45.33333333333333,
+          "retained_tokens": 28,
+          "cutoffs": [
+            16,
+            4,
+            4,
+            4
+          ],
+          "normalizer_source": "previous_batch"
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_teacher_self_generation": false,
+    "actual_online_student_sampling": true,
+    "actual_parameters_changed": true,
+    "frozen_teacher_unchanged": true,
+    "heldout_bytes_not_used_for_training": true,
+    "no_pretrained_checkpoint_downloaded": true,
+    "original_sif_550_online_path_validated": false,
+    "extreme_finite_padding_zero_gradients": "not_applicable",
+    "undefined_tied_weight_policy_rejected": "not_applicable",
+    "oversized_corpus_rejected_before_read": true,
+    "fixed_teacher_rl_8x64_and_0_4_8_lineage": "not_applicable",
+    "zero_waypoint_gate_still_rejected": "not_applicable"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.21337-stopd/metrics/component-cpu-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "uncommitted_source_at_cpu_run": true,
+    "implementation_sha256": "2e43cde3fed4acca52e4c3b0066728ba650f2eeb4f28eec92d53f91f56cea134",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/tf_opd.py": "f55ffd16aacb6ebfec653c6a8f7f80248fcd6e95f846a3eb8702ecc1390ef9db",
+      "src/auto_research/post_training/waypoint_opd.py": "83d90361e94dc759f89282fed6d39d2c971e62be6d22b0268c518c84b9da75f6",
+      "src/auto_research/post_training/ggpo.py": "5c2870decb8446660f0f10391019f2b4c6f32213ef47e555163b7983cd4d4fbb",
+      "src/auto_research/post_training/stopd.py": "2e43cde3fed4acca52e4c3b0066728ba650f2eeb4f28eec92d53f91f56cea134",
+      "src/auto_research/post_training/cce_opd.py": "263e67876ef532e9c4bb737918c8c4307b3bfc32b5eeca0c8d60a6a8e53920c6",
+      "src/auto_research/post_training/sif.py": "6fef189f89034ac52d60b889ab23d82d1aba4876d348263dadc7ef327c5dfed6",
+      "scripts/run_oct16_post_components.py": "d6c823f4b3f96984ae07b5d613b9d60eca0ac0e0f7a4dd2b4432d397e49c8995"
+    },
+    "accelerator": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --corpus-path .cache/oct16-interfaces/hamlet.txt --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --corpus-sha256 31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output .cache/oct16-post-components-cpu-teacher-rl-final.json",
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "raw_artifact": ".cache/oct16-post-components-cpu-teacher-rl-final.json",
+    "previous_cpu_raw_artifacts_retained": [
+      ".cache/oct16-post-components-cpu-bounded.json",
+      ".cache/oct16-post-components-cpu-teacher-rl-repair.json"
+    ]
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment": {
+    "review_done": true,
+    "resolution": "成本过高，不复现（审查 DONE）",
+    "available_budget": "one A100 or A30 / local Mac; not simultaneous multi-GPU capacity",
+    "cost_basis": "Section4:batch256,250steps×3seeds,max16K,1.7Bstudent4Bteacher,2H100/run; larger2H200/GB200",
+    "cost_type": "paper-reported configuration/cost, not a local full-run measurement",
+    "automatic_retry": false
+  }
+}

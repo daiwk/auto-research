@@ -1,0 +1,502 @@
+{
+  "schema_version": 2,
+  "method": "waypoint-opd",
+  "manifest_ref": "post-training:waypoint-opd",
+  "adapter": null,
+  "evaluation_tier": "l1_mechanism",
+  "measured_locally": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "dataset": {
+    "id": "gutenberg:1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "byte_ranges": {
+      "train": [
+        0,
+        165516
+      ],
+      "validation": [
+        165516,
+        186205
+      ],
+      "test": [
+        186205,
+        206895
+      ]
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "selection": "none; fixed budgets, final heldout NLL only",
+    "claim_policy": "actual component execution only; not paper benchmark, capability comparison or correctness improvement",
+    "model": "257-token causal cumulative-embedding BytePolicy, width24",
+    "separate_train_validation_test": true,
+    "teacher_steps": 8,
+    "specialist_steps": 4,
+    "student_steps": 2,
+    "max_new_tokens": 16,
+    "sif": "default550 exclusion plus explicit K2/w4/s2 short-window diagnostic",
+    "tf_opd": "actual teacher self-generation; naturalEOS+DEFLATE filter; correctness ungraded text",
+    "waypoint": "same actual tiny RL run, byte-parity reward, frozen initial/middle/final",
+    "cce": "controlled mathematical premise fixture; same sampled prefix, no semantic extractor",
+    "waypoint_teacher_rl": "fixed 8 updates x 64 one-action rollouts; checkpoints 0/4/8; causal first-action REINFORCE; no selection or retries"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.0002951228485426021,
+      "std": 8.432872959841884e-05,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 4.913514455159505,
+      "std": 0.11217339741777624,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 4.913506825764974,
+      "std": 0.11218476514878416,
+      "n": 3
+    },
+    "final_test_nll": {
+      "mean": 4.875728448232015,
+      "std": 0.09578371473521148,
+      "n": 3
+    },
+    "generated_tokens": {
+      "mean": 118.33333333333333,
+      "std": 8.386497083606084,
+      "n": 3
+    },
+    "natural_eos_rollouts": {
+      "mean": 1,
+      "std": 1,
+      "n": 3
+    },
+    "rejected_diagnostic_groups": {
+      "mean": 0,
+      "std": 0,
+      "n": 3
+    },
+    "frozen_teacher_parameter_delta_l2": {
+      "mean": 0,
+      "std": 0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "parameter_delta_l2": 0.00023678944098612533,
+      "baseline_validation_nll": 5.039752006530762,
+      "final_validation_nll": 5.039755821228027,
+      "final_test_nll": 4.984272003173828,
+      "generated_tokens": 128,
+      "natural_eos_rollouts": 0,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 3.410605131648481e-12,
+          "gradient_norm": 0.00457781832665205,
+          "mean_gate": 0.7162261009216309,
+          "zero_gate_fraction": 0,
+          "batch_scale": 1.116965651512146,
+          "valid_tokens": 64
+        },
+        {
+          "step": 1,
+          "loss": -7.003109203651547e-11,
+          "gradient_norm": 0.0041630989871919155,
+          "mean_gate": 0.659672737121582,
+          "zero_gate_fraction": 0,
+          "batch_scale": 1.212722659111023,
+          "valid_tokens": 64
+        }
+      ],
+      "teacher_snapshot_lineage": [
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 0
+        },
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 4
+        },
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 8
+        }
+      ],
+      "teacher_rl_reward": "first sampled byte ID is even; not language capability",
+      "teacher_rl_audit": {
+        "updates": 8,
+        "rollouts_per_update": 64,
+        "rollout_horizon": 1,
+        "checkpoint_steps": [
+          0,
+          4,
+          8
+        ],
+        "total_sampled_actions": 512,
+        "learning_rate": 0.2,
+        "history": [
+          {
+            "step": 1,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.5,
+            "gradient_norm": 0.12613138556480408
+          },
+          {
+            "step": 2,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.453125,
+            "gradient_norm": 0.12252398580312729
+          },
+          {
+            "step": 3,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.640625,
+            "gradient_norm": 0.1211710274219513
+          },
+          {
+            "step": 4,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.546875,
+            "gradient_norm": 0.13027732074260712
+          },
+          {
+            "step": 5,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.4375,
+            "gradient_norm": 0.12932150065898895
+          },
+          {
+            "step": 6,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.53125,
+            "gradient_norm": 0.12761010229587555
+          },
+          {
+            "step": 7,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.546875,
+            "gradient_norm": 0.1262025535106659
+          },
+          {
+            "step": 8,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.59375,
+            "gradient_norm": 0.1190977618098259
+          }
+        ],
+        "selection": "none; fixed 0/4/8 checkpoints, no retries or reward/gate-based selection",
+        "gradient_estimator": "REINFORCE on the causal first action; detached centered binary reward"
+      },
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 43,
+      "parameter_delta_l2": 0.000256767372203336,
+      "baseline_validation_nll": 4.875514030456543,
+      "final_validation_nll": 4.8755083084106445,
+      "final_test_nll": 4.839848041534424,
+      "generated_tokens": 113,
+      "natural_eos_rollouts": 1,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 2.836138615625039e-11,
+          "gradient_norm": 0.004559004679322243,
+          "mean_gate": 0.638650119304657,
+          "zero_gate_fraction": 0,
+          "batch_scale": 1.252642035484314,
+          "valid_tokens": 49
+        },
+        {
+          "step": 1,
+          "loss": -3.410605131648481e-11,
+          "gradient_norm": 0.0043999869376420975,
+          "mean_gate": 0.8188883066177368,
+          "zero_gate_fraction": 0,
+          "batch_scale": 0.9769342541694641,
+          "valid_tokens": 64
+        }
+      ],
+      "teacher_snapshot_lineage": [
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 0
+        },
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 4
+        },
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 8
+        }
+      ],
+      "teacher_rl_reward": "first sampled byte ID is even; not language capability",
+      "teacher_rl_audit": {
+        "updates": 8,
+        "rollouts_per_update": 64,
+        "rollout_horizon": 1,
+        "checkpoint_steps": [
+          0,
+          4,
+          8
+        ],
+        "total_sampled_actions": 512,
+        "learning_rate": 0.2,
+        "history": [
+          {
+            "step": 1,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.59375,
+            "gradient_norm": 0.12788569927215576
+          },
+          {
+            "step": 2,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.390625,
+            "gradient_norm": 0.13831259310245514
+          },
+          {
+            "step": 3,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.53125,
+            "gradient_norm": 0.13993187248706818
+          },
+          {
+            "step": 4,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.53125,
+            "gradient_norm": 0.13402476906776428
+          },
+          {
+            "step": 5,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.5625,
+            "gradient_norm": 0.1322244554758072
+          },
+          {
+            "step": 6,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.46875,
+            "gradient_norm": 0.13350114226341248
+          },
+          {
+            "step": 7,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.5625,
+            "gradient_norm": 0.13122184574604034
+          },
+          {
+            "step": 8,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.453125,
+            "gradient_norm": 0.13394665718078613
+          }
+        ],
+        "selection": "none; fixed 0/4/8 checkpoints, no retries or reward/gate-based selection",
+        "gradient_estimator": "REINFORCE on the causal first action; detached centered binary reward"
+      },
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 44,
+      "parameter_delta_l2": 0.00039181173243834505,
+      "baseline_validation_nll": 4.825277328491211,
+      "final_validation_nll": 4.82525634765625,
+      "final_test_nll": 4.803065299987793,
+      "generated_tokens": 114,
+      "natural_eos_rollouts": 2,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": -4.6129572384145945e-11,
+          "gradient_norm": 0.008264915086328983,
+          "mean_gate": 0.6612300872802734,
+          "zero_gate_fraction": 0,
+          "batch_scale": 1.2098664045333862,
+          "valid_tokens": 50
+        },
+        {
+          "step": 1,
+          "loss": -4.888534022029489e-11,
+          "gradient_norm": 0.005513675045222044,
+          "mean_gate": 0.7005763053894043,
+          "zero_gate_fraction": 0,
+          "batch_scale": 1.141917109489441,
+          "valid_tokens": 64
+        }
+      ],
+      "teacher_snapshot_lineage": [
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 0
+        },
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 4
+        },
+        {
+          "run_id": "tiny-byte-parity-rl",
+          "step": 8
+        }
+      ],
+      "teacher_rl_reward": "first sampled byte ID is even; not language capability",
+      "teacher_rl_audit": {
+        "updates": 8,
+        "rollouts_per_update": 64,
+        "rollout_horizon": 1,
+        "checkpoint_steps": [
+          0,
+          4,
+          8
+        ],
+        "total_sampled_actions": 512,
+        "learning_rate": 0.2,
+        "history": [
+          {
+            "step": 1,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.484375,
+            "gradient_norm": 0.1535269320011139
+          },
+          {
+            "step": 2,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.453125,
+            "gradient_norm": 0.1443566232919693
+          },
+          {
+            "step": 3,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.578125,
+            "gradient_norm": 0.13970665633678436
+          },
+          {
+            "step": 4,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.515625,
+            "gradient_norm": 0.16912396252155304
+          },
+          {
+            "step": 5,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.484375,
+            "gradient_norm": 0.14101818203926086
+          },
+          {
+            "step": 6,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.515625,
+            "gradient_norm": 0.15852612257003784
+          },
+          {
+            "step": 7,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.5625,
+            "gradient_norm": 0.15183568000793457
+          },
+          {
+            "step": 8,
+            "sampled_actions": 64,
+            "mean_rule_reward": 0.6875,
+            "gradient_norm": 0.13307617604732513
+          }
+        ],
+        "selection": "none; fixed 0/4/8 checkpoints, no retries or reward/gate-based selection",
+        "gradient_estimator": "REINFORCE on the causal first action; detached centered binary reward"
+      },
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_teacher_self_generation": false,
+    "actual_online_student_sampling": true,
+    "actual_parameters_changed": true,
+    "frozen_teacher_unchanged": true,
+    "heldout_bytes_not_used_for_training": true,
+    "no_pretrained_checkpoint_downloaded": true,
+    "original_sif_550_online_path_validated": false,
+    "extreme_finite_padding_zero_gradients": true,
+    "undefined_tied_weight_policy_rejected": "not_applicable",
+    "oversized_corpus_rejected_before_read": true,
+    "fixed_teacher_rl_8x64_and_0_4_8_lineage": true,
+    "zero_waypoint_gate_still_rejected": true
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.21601-waypoint-opd/metrics/component-cpu-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "uncommitted_source_at_cpu_run": true,
+    "implementation_sha256": "83d90361e94dc759f89282fed6d39d2c971e62be6d22b0268c518c84b9da75f6",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/tf_opd.py": "f55ffd16aacb6ebfec653c6a8f7f80248fcd6e95f846a3eb8702ecc1390ef9db",
+      "src/auto_research/post_training/waypoint_opd.py": "83d90361e94dc759f89282fed6d39d2c971e62be6d22b0268c518c84b9da75f6",
+      "src/auto_research/post_training/ggpo.py": "5c2870decb8446660f0f10391019f2b4c6f32213ef47e555163b7983cd4d4fbb",
+      "src/auto_research/post_training/stopd.py": "2e43cde3fed4acca52e4c3b0066728ba650f2eeb4f28eec92d53f91f56cea134",
+      "src/auto_research/post_training/cce_opd.py": "263e67876ef532e9c4bb737918c8c4307b3bfc32b5eeca0c8d60a6a8e53920c6",
+      "src/auto_research/post_training/sif.py": "6fef189f89034ac52d60b889ab23d82d1aba4876d348263dadc7ef327c5dfed6",
+      "scripts/run_oct16_post_components.py": "d6c823f4b3f96984ae07b5d613b9d60eca0ac0e0f7a4dd2b4432d397e49c8995"
+    },
+    "accelerator": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --corpus-path .cache/oct16-interfaces/hamlet.txt --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --corpus-sha256 31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output .cache/oct16-post-components-cpu-teacher-rl-final.json",
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "raw_artifact": ".cache/oct16-post-components-cpu-teacher-rl-final.json",
+    "previous_cpu_raw_artifacts_retained": [
+      ".cache/oct16-post-components-cpu-bounded.json",
+      ".cache/oct16-post-components-cpu-teacher-rl-repair.json"
+    ]
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment": {
+    "review_done": true,
+    "resolution": "成本过高，不复现（审查 DONE）",
+    "available_budget": "one A100 or A30 / local Mac; not simultaneous multi-GPU capacity",
+    "cost_basis": "Appendix H Table9:8H20,8h02m21s=64.31 GPUh for8B100steps, excluding eval and teacher RL",
+    "cost_type": "paper-reported configuration/cost, not a local full-run measurement",
+    "automatic_retry": false
+  }
+}

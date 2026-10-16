@@ -22,6 +22,23 @@ GENERIC_BASELINES = {"baseline", "paper-specific matched baseline"}
 GENERIC_METRICS = {"paper-specific primary metric"}
 
 
+def complete_evaluation_protocol(payload: dict) -> bool:
+    """Require real seeds, or an explicit seedless deterministic non-comparison.
+
+    A missing seed field is not the same as an empty list. Deterministic
+    arithmetic/contracts have no stochastic run to which a seed can be assigned;
+    this exception cannot qualify a formal comparison or seedless random run.
+    """
+    protocol = payload.get("evaluation_protocol") or {}
+    seeds = protocol.get("seeds")
+    policy = protocol.get("claim_policy")
+    if not isinstance(seeds, list) or not isinstance(policy, str) or not policy.strip():
+        return False
+    if seeds:
+        return all(type(seed) is int for seed in seeds)
+    return payload.get("deterministic") is True and protocol.get("formal_comparison") is False
+
+
 def audit() -> list[str]:
     errors: list[str] = []
     adapters = list_adapters()
@@ -100,13 +117,13 @@ def audit() -> list[str]:
         if not payload.get("manifest_ref"):
             errors.append(f"{relative}: manifest_ref missing")
         protocol = payload.get("evaluation_protocol") or {}
-        seeds = protocol.get("seeds") or []
-        if not seeds or not protocol.get("claim_policy"):
+        seeds = protocol.get("seeds")
+        if not complete_evaluation_protocol(payload):
             errors.append(f"{relative}: incomplete evaluation protocol")
         # Three or more seeds are necessary for a formal comparison, but are
         # not sufficient: an L1 mechanism diagnostic can use multiple seeds
         # solely to check determinism/stability without measuring capability.
-        if protocol.get("formal_comparison") and len(seeds) < 3:
+        if protocol.get("formal_comparison") and (not isinstance(seeds, list) or len(seeds) < 3):
             errors.append(f"{relative}: formal comparison requires at least three seeds")
         provenance = payload.get("provenance") or {}
         if not provenance.get("artifact_path") or not provenance.get("dataset_fingerprint"):

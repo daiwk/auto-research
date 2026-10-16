@@ -16,6 +16,10 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    **{key: f"docs/gpu-validations/{key}-a100-20261016.json" for key in (
+        "static-constraint-decoding", "cross-task-relationships", "transx-report-components",
+        "rope-relay", "cots", "tf-opd", "waypoint-opd", "ggpo", "stopd", "cce-opd", "sif",
+    )},
     "divergence-routed-opd": "docs/gpu-validations/divergence-routed-opd-a100-20261016.json",
     "rap-walk": "docs/gpu-validations/rap-walk-a100-20261016.json",
     "embedding-gemma2": "docs/gpu-validations/embedding-gemma2-a100-20261014.json",

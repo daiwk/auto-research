@@ -1,0 +1,345 @@
+{
+  "schema_version": 2,
+  "method": "cross-task-relationships",
+  "manifest_ref": "recommendation:cross-task-relationships",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evolve_integrated": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l2_public_dataset",
+  "dataset": {
+    "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+    "source_url": "https://zenodo.org/records/10439422",
+    "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+    "selected_fields": [
+      "user_id",
+      "video_id",
+      "time_ms",
+      "duration_ms",
+      "hourmin",
+      "is_click",
+      "long_view"
+    ],
+    "rows": 4096,
+    "prefix_limit": 4096,
+    "split": "chronological 70/15/15 after fixed file-prefix selection",
+    "features": "pre-impression user/video identifiers, duration and hour only",
+    "selection_bias": "file-prefix diagnostic, not a representative production sample"
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded operators/updates only, no paper benchmark or production lift"
+  },
+  "metrics": {
+    "marginals": {
+      "validation_bce": {
+        "mean": 0.6688406467437744,
+        "std": 0.004571526357013012,
+        "n": 3
+      },
+      "validation_brier": {
+        "mean": 0.23796532054742178,
+        "std": 0.002185015376882862,
+        "n": 3
+      },
+      "test_bce": {
+        "mean": 0.6649555166562399,
+        "std": 0.0030111818383491366,
+        "n": 3
+      },
+      "test_brier": {
+        "mean": 0.23613581558068594,
+        "std": 0.001488048725532,
+        "n": 3
+      },
+      "parameter_delta_l2": {
+        "mean": 0.6637544830640157,
+        "std": 0.04541086773788056,
+        "n": 3
+      }
+    },
+    "cross-label": {
+      "validation_bce": {
+        "mean": 0.6684800386428833,
+        "std": 0.004394786793603987,
+        "n": 3
+      },
+      "validation_brier": {
+        "mean": 0.23779756824175516,
+        "std": 0.0021062337879431446,
+        "n": 3
+      },
+      "test_bce": {
+        "mean": 0.665025512377421,
+        "std": 0.002711966936259754,
+        "n": 3
+      },
+      "test_brier": {
+        "mean": 0.23616336782773337,
+        "std": 0.001349208159797088,
+        "n": 3
+      },
+      "parameter_delta_l2": {
+        "mean": 0.683772067228953,
+        "std": 0.07389342079057873,
+        "n": 3
+      }
+    },
+    "shuffled-cross-control": {
+      "validation_bce": {
+        "mean": 0.6688550114631653,
+        "std": 0.004678932613898141,
+        "n": 3
+      },
+      "validation_brier": {
+        "mean": 0.2379812349875768,
+        "std": 0.0022431126704356755,
+        "n": 3
+      },
+      "test_bce": {
+        "mean": 0.6651498874028524,
+        "std": 0.002505075542317682,
+        "n": 3
+      },
+      "test_brier": {
+        "mean": 0.23622694611549377,
+        "std": 0.0012462277915885123,
+        "n": 3
+      },
+      "parameter_delta_l2": {
+        "mean": 0.6618914405504862,
+        "std": 0.04366181297307116,
+        "n": 3
+      }
+    }
+  },
+  "per_seed": [
+    {
+      "method": "cross-task-relationships",
+      "seed": 42,
+      "dataset": {
+        "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+        "source_url": "https://zenodo.org/records/10439422",
+        "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+        "selected_fields": [
+          "user_id",
+          "video_id",
+          "time_ms",
+          "duration_ms",
+          "hourmin",
+          "is_click",
+          "long_view"
+        ],
+        "rows": 4096,
+        "prefix_limit": 4096,
+        "split": "chronological 70/15/15 after fixed file-prefix selection",
+        "features": "pre-impression user/video identifiers, duration and hour only",
+        "selection_bias": "file-prefix diagnostic, not a representative production sample"
+      },
+      "training_pair_counts": {
+        "00": 1575,
+        "01": 4,
+        "10": 374,
+        "11": 914
+      },
+      "arms": {
+        "marginals": {
+          "validation_bce": 0.6719343066215515,
+          "validation_brier": 0.23947331309318542,
+          "test_bce": 0.6647301316261292,
+          "test_brier": 0.23607206344604492,
+          "parameter_delta_l2": 0.6570429801940918,
+          "optimizer_steps": 32
+        },
+        "cross-label": {
+          "validation_bce": 0.6716183423995972,
+          "validation_brier": 0.2393333464860916,
+          "test_bce": 0.6648101210594177,
+          "test_brier": 0.23610465228557587,
+          "parameter_delta_l2": 0.6582249999046326,
+          "optimizer_steps": 32
+        },
+        "shuffled-cross-control": {
+          "validation_bce": 0.6720370054244995,
+          "validation_brier": 0.23953430354595184,
+          "test_bce": 0.6650375723838806,
+          "test_brier": 0.23621852695941925,
+          "parameter_delta_l2": 0.653938353061676,
+          "optimizer_steps": 32
+        }
+      },
+      "hyperparameter_selection": false,
+      "test_used_only_after_fixed_training": true,
+      "input_contains_feedback": false,
+      "diagnostic_only": true,
+      "promotion_eligible": false
+    },
+    {
+      "method": "cross-task-relationships",
+      "seed": 43,
+      "dataset": {
+        "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+        "source_url": "https://zenodo.org/records/10439422",
+        "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+        "selected_fields": [
+          "user_id",
+          "video_id",
+          "time_ms",
+          "duration_ms",
+          "hourmin",
+          "is_click",
+          "long_view"
+        ],
+        "rows": 4096,
+        "prefix_limit": 4096,
+        "split": "chronological 70/15/15 after fixed file-prefix selection",
+        "features": "pre-impression user/video identifiers, duration and hour only",
+        "selection_bias": "file-prefix diagnostic, not a representative production sample"
+      },
+      "training_pair_counts": {
+        "00": 1575,
+        "01": 4,
+        "10": 374,
+        "11": 914
+      },
+      "arms": {
+        "marginals": {
+          "validation_bce": 0.6635896563529968,
+          "validation_brier": 0.23545953631401062,
+          "test_bce": 0.6680730581283569,
+          "test_brier": 0.23765471577644348,
+          "parameter_delta_l2": 0.6220728754997253,
+          "optimizer_steps": 32
+        },
+        "cross-label": {
+          "validation_bce": 0.6634572744369507,
+          "validation_brier": 0.23539650440216064,
+          "test_bce": 0.6678387522697449,
+          "test_brier": 0.23754097521305084,
+          "parameter_delta_l2": 0.6260420680046082,
+          "optimizer_steps": 32
+        },
+        "shuffled-cross-control": {
+          "validation_bce": 0.663482666015625,
+          "validation_brier": 0.23540955781936646,
+          "test_bce": 0.667709231376648,
+          "test_brier": 0.2374773621559143,
+          "parameter_delta_l2": 0.622752845287323,
+          "optimizer_steps": 32
+        }
+      },
+      "hyperparameter_selection": false,
+      "test_used_only_after_fixed_training": true,
+      "input_contains_feedback": false,
+      "diagnostic_only": true,
+      "promotion_eligible": false
+    },
+    {
+      "method": "cross-task-relationships",
+      "seed": 44,
+      "dataset": {
+        "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+        "source_url": "https://zenodo.org/records/10439422",
+        "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+        "selected_fields": [
+          "user_id",
+          "video_id",
+          "time_ms",
+          "duration_ms",
+          "hourmin",
+          "is_click",
+          "long_view"
+        ],
+        "rows": 4096,
+        "prefix_limit": 4096,
+        "split": "chronological 70/15/15 after fixed file-prefix selection",
+        "features": "pre-impression user/video identifiers, duration and hour only",
+        "selection_bias": "file-prefix diagnostic, not a representative production sample"
+      },
+      "training_pair_counts": {
+        "00": 1575,
+        "01": 4,
+        "10": 374,
+        "11": 914
+      },
+      "arms": {
+        "marginals": {
+          "validation_bce": 0.6709979772567749,
+          "validation_brier": 0.23896311223506927,
+          "test_bce": 0.6620633602142334,
+          "test_brier": 0.2346806675195694,
+          "parameter_delta_l2": 0.71214759349823,
+          "optimizer_steps": 32
+        },
+        "cross-label": {
+          "validation_bce": 0.670364499092102,
+          "validation_brier": 0.23866285383701324,
+          "test_bce": 0.6624276638031006,
+          "test_brier": 0.23484447598457336,
+          "parameter_delta_l2": 0.7670491337776184,
+          "optimizer_steps": 32
+        },
+        "shuffled-cross-control": {
+          "validation_bce": 0.6710453629493713,
+          "validation_brier": 0.2389998435974121,
+          "test_bce": 0.6627028584480286,
+          "test_brier": 0.23498494923114777,
+          "parameter_delta_l2": 0.7089831233024597,
+          "optimizer_steps": 32
+        }
+      },
+      "hyperparameter_selection": false,
+      "test_used_only_after_fixed_training": true,
+      "input_contains_feedback": false,
+      "diagnostic_only": true,
+      "promotion_eligible": false
+    }
+  ],
+  "execution_checks": {
+    "three_actual_training_arms": true,
+    "same_initialization_and_minibatch_stream": true,
+    "authentic_public_feedback_labels": true,
+    "no_hyperparameter_selection": true,
+    "test_after_fixed_training_only": true,
+    "production_rl_policy_trained": false
+  },
+  "provenance": {
+    "artifact_path": "docs/recommendation-components/2609.28776-cross-task-relationships/metrics/component-a100-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "executed_source_sha256": {
+      "src/auto_research/reproductions/cross_task_relationships/model.py": "199952ecfd945af42ef91f5f9536d6bf51312a8281d69cabae823fffbc4de99d",
+      "scripts/run_oct16_recommendation_components.py": "83c903fba74b40b4b8c087c46dcee2bf32d02b71bb60be70253cf0ab135e5547"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "command": [
+      "python",
+      "scripts/run_oct16_recommendation_components.py",
+      "--csv",
+      "public/kuairand-prefix.csv",
+      "--device",
+      "cuda",
+      "--seeds",
+      "42,43,44",
+      "--output",
+      "runs/oct16-p0p1/recommendation.json"
+    ],
+    "dataset_fingerprint": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+    "dataset_fingerprint_scope": "public-selected-input-fields",
+    "raw_result_sha256": "f6b7fde172262f6eb16917db585dbeab3403b50c8ac8a0ba244c02673722042d",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

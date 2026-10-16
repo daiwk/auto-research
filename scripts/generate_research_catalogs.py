@@ -61,6 +61,7 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "自置信轨迹过滤": ("奖励、信用与课程", "课程与能力边界"),
         "偏好图信用分配": ("奖励、信用与课程", "奖励构造与排序信号"),
         "on-policy-self-distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
         "RLVR data synthesis": ("奖励、信用与课程", "课程与能力边界"),
@@ -816,6 +817,9 @@ def foundation_rows() -> list[dict[str, str]]:
         "tadm": ("推理与系统效率", "扩散解码与缓存"),
         "pumba": ("预训练与数据", "扩散语言模型训练"),
         "splash": ("推理与系统效率", "并行服务与 KV cache"),
+        "novelty-patching": ("预训练与数据", "字节级建模与因果分块"),
+        "rope-relay": ("推理与系统效率", "推测解码与 KV cache"),
+        "cots": ("推理与系统效率", "结构化决策与自适应推理"),
     })
     return _date_descending(rows + extra)
 
@@ -1055,6 +1059,51 @@ def sort_reproduction_catalog(path: Path) -> None:
     path.write_text("\n".join(output).rstrip() + "\n", encoding="utf-8")
 
 
+def sync_recommendation_component_browse() -> None:
+    """Expose standalone industrial components without inventing model adapters.
+
+    Facts/placement come from the same catalog specs as the method index. Existing
+    hand-curated adapter sections remain intact; only each component's own link is
+    replaced, making regeneration idempotent.
+    """
+    papers = json.loads((DOCS / "research-manifest.json").read_text())["papers"]
+    rows = [row for row in papers if row["domain"] == "recommendation" and row.get("adapter") is None
+            and row.get("implementation_status") in {"component_only", "evaluation_protocol_interface"}]
+
+    def section_end(lines, start, level):
+        for index in range(start + 1, len(lines)):
+            match = re.match(r"^(#+) ", lines[index])
+            if match and len(match[1]) <= level:
+                return index
+        return len(lines)
+
+    for name in ("by-company.md", "by-topic.md", "by-month.md"):
+        path = DOCS / "reproductions/catalog" / name
+        lines = path.read_text().splitlines()
+        for row in rows:
+            link = "../../" + row["detail_path"]
+            lines = [line for line in lines if f"]({link})" not in line]
+            if name == "by-company.md":
+                headings = [row.get("browse_company") or row["first_author_affiliation"]]
+            elif name == "by-month.md":
+                headings = [row["published"][:7]]
+            else:
+                headings = row.get("browse_topic") or ["其他工业组件", row["topic"][0]]
+            lower, upper = 0, len(lines)
+            for level, title in enumerate(headings, 2):
+                heading = "#" * level + " " + title
+                found = next((i for i in range(lower, upper) if lines[i] == heading), None)
+                if found is None:
+                    found = upper
+                    lines[found:found] = ["", heading, ""]
+                    found += 1
+                lower = found + 1
+                upper = section_end(lines, found, level)
+            summary = row["summary"].strip()
+            lines[lower:lower] = ["", f"- [{row['title']}]({link})：{summary}", ""]
+        path.write_text("\n".join(lines).rstrip() + "\n")
+
+
 def main() -> None:
     for module, label, domain in (
         ("reproductions", "搜广推与 LLM 应用", "recommendation"),
@@ -1106,6 +1155,7 @@ def main() -> None:
         for adapter in list_adapters()
         if adapter.paper.track == "llm"
     }
+    sync_recommendation_component_browse()
     for name in ("by-company.md", "by-topic.md", "by-month.md"):
         path = DOCS / "reproductions" / "catalog" / name
         remove_non_industrial_entries(path, llm_links)

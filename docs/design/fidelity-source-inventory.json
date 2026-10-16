@@ -10499,6 +10499,40 @@
         "fingerprint": "b5afa4aed88228d06259fc36116c0815717075a6af15fb61454d31896a11bd7c"
       }
     ],
+    "src/auto_research/agent_research/tool_bottleneck_bench.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "call",
+        "line": 142,
+        "qualified_name": "Sandbox.call",
+        "expression": "self.turns += 1",
+        "fingerprint": "94e585b921a6d009f48997fbff9b0677525ef6a6e92a73cae28081fd60aea047"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "record_response",
+        "line": 179,
+        "qualified_name": "Sandbox.record_response",
+        "expression": "self.used_tokens += tokens",
+        "fingerprint": "162186d853b39785e82de0a8f3f7cc54f67e882c998f23461d667c50359244fd"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "record_response",
+        "line": 180,
+        "qualified_name": "Sandbox.record_response",
+        "expression": "self.truncated |= finish_reason == 'length' or completion_tokens > 1024",
+        "fingerprint": "372a855d924f29bb479e4c450bb67a1fcc14055b52ff4b38bec361525e953e4d"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "record_response",
+        "line": 181,
+        "qualified_name": "Sandbox.record_response",
+        "expression": "self.turns += 1",
+        "fingerprint": "94e585b921a6d009f48997fbff9b0677525ef6a6e92a73cae28081fd60aea047"
+      }
+    ],
     "src/auto_research/datasets.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -11629,6 +11663,32 @@
         "fingerprint": "c3ce2bf5e99d13a184c91d91e13d20acbec1ad506092736d5dee43745f1b227e"
       }
     ],
+    "src/auto_research/post_training/ggpo.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "sync_behavior",
+        "line": 95,
+        "qualified_name": "GGPOPolicies.sync_behavior",
+        "expression": "self.behavior_syncs += 1",
+        "fingerprint": "227a00a3c592343c14b9ff091824e4d30716d62cc3a0cd834393370fd3b675d9"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "after_optimizer_step",
+        "line": 99,
+        "qualified_name": "GGPOPolicies.after_optimizer_step",
+        "expression": "self.updates += 1",
+        "fingerprint": "610a1aaf7d798369a03e0a7195f60ae3f8d47b6babec4e7a00e8a0a65095d363"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "after_optimizer_step",
+        "line": 104,
+        "qualified_name": "GGPOPolicies.after_optimizer_step",
+        "expression": "self.reference_refreshes += 1",
+        "fingerprint": "290b421dce5cc3f30ea316e1a1dd3f6adfc0373eaa3e75edbd3f6e916ff421ed"
+      }
+    ],
     "src/auto_research/post_training/hf_runner.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -11875,6 +11935,16 @@
         "qualified_name": "distill",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
+    "src/auto_research/post_training/stopd.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "finish_batch",
+        "line": 93,
+        "qualified_name": "STOPDSchedule.finish_batch",
+        "expression": "self.step += 1",
+        "fingerprint": "b720558b0505c8388059dea439af9995673b069659600e0fa4645e01206f3004"
       }
     ],
     "src/auto_research/reasoning_budget.py": [

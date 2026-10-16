@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "adapter_key": "waypoint-opd",
+  "validated_at": "2026-10-16",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct16_post_components.py",
+    "--corpus-path",
+    "public/hamlet.txt",
+    "--corpus-id",
+    "gutenberg:1524",
+    "--corpus-revision",
+    "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "--corpus-sha256",
+    "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--output",
+    "runs/oct16-p0p1/post-training.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "gutenberg:1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "byte_ranges": {
+      "train": [
+        0,
+        165516
+      ],
+      "validation": [
+        165516,
+        186205
+      ],
+      "test": [
+        186205,
+        206895
+      ]
+    },
+    "source_url": "https://www.gutenberg.org/ebooks/1524"
+  },
+  "checkpoint": {
+    "public_id": "none-independent-seeded-initialization",
+    "revision": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.0002383551161786357,
+      "std": 4.4218029252729764e-05,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 4.944682916005452,
+      "std": 0.10589508104076427,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 4.944677670796712,
+      "std": 0.1059099675929924,
+      "n": 3
+    },
+    "final_test_nll": {
+      "mean": 4.910683631896973,
+      "std": 0.11985295841605519,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "actual_policy_generation_and_parameter_change": true,
+    "teacher_self_generation_and_filtered_replay": false,
+    "frozen_teachers_unchanged": true,
+    "train_validation_test_bytes_separated": true,
+    "public_unlabeled_text_or_controlled_rule_reward_diagnostic": true,
+    "full_paper_benchmark": false,
+    "default_550_token_sif_training": false
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "executed_source_sha256": {
+    "src/auto_research/post_training/waypoint_opd.py": "83d90361e94dc759f89282fed6d39d2c971e62be6d22b0268c518c84b9da75f6",
+    "scripts/run_oct16_post_components.py": "d6c823f4b3f96984ae07b5d613b9d60eca0ac0e0f7a4dd2b4432d397e49c8995"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "command_path_policy": "public input and output paths relativized; source/data content hashes retained",
+  "provenance": {
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "artifact_path": "docs/gpu-validations/waypoint-opd-a100-20261016.json",
+    "metric_artifact_path": "docs/post-training/2610.21601-waypoint-opd/metrics/component-a100-seeds42-44.json",
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "dataset_fingerprint_scope": "public-corpus-bytes",
+    "raw_result_sha256": "5b2244ecbd0234e1245ff352b6600af585ff876b0e1f3b37f2118d346482c744",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  }
+}

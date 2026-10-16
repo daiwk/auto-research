@@ -4,6 +4,23 @@
   "detail_path": "reproductions/2607.28940-transx/README.md",
   "first_author": null,
   "first_author_affiliation": "LinkedIn",
+  "priority": "P0",
+  "implementation_status": "component_only",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evolve_integrated": false,
+  "local_operator": "auto_research.reproductions.transx.technical_report.multi_cutoff_memory",
+  "component_key": "transx-report-components",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/transx-report-components-a100-20261016.json",
+  "supplemental_papers": [{
+    "paper_url": "https://arxiv.org/abs/2610.20913",
+    "published": "2026-10-14",
+    "first_author": "Da Xu",
+    "first_author_affiliation": "LinkedIn",
+    "title": "TransX Technical Report: Scaling Sequence Transduction for Recommendation",
+    "code_status": "原文未给出专属方法仓库"
+  }],
+  "summary": "将历史编码与候选预测解耦，本轮补充报告实现精确 local/global memory、跨事件原子分段复用和按逻辑步聚合的 row-wise Adagrad。旧 NumPy 固定权重 scorer 保留为 concept demo；新增张量算子只验证前向/梯度一致性，不重复注册模型或宣称完成生产训练。",
   "adapter": {
     "spec_key": "transx"
   }

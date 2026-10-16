@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 公共评测与协议 | [Librarian Agents: Training LLMs to Curate Long-Context Workspaces that Anticipate Future Queries](2610.22273-librarian-agents/README.md) | Stanford University，2026-10-15 | [已开源](https://github.com/teresaz05/librarian-agents) | `librarian-agents`：CPU 评测接口，不执行模型 |
+| 公共评测与协议 | [SciPIvot: Benchmarking Principal-Investigator Judgment at Pivotal Moments of Scientific AutoResearch Agents](2610.21082-scipivot/README.md) | University of Maryland, College Park / The Chinese University of Hong Kong（PDF上标已核），2026-10-15 | [已开源](https://github.com/AutoResearch-Factory/SciPIvot) | `scipivot`：CPU 评测接口，不执行模型 |
+| 公共评测与协议 | [ToolBottleneckBench: Measuring Tool-Agent Performance under Controlled Pressures and Fixed Harness Budgets](2610.21098-tool-bottleneck-bench/README.md) | University of Osaka，2026-10-15 | [已开源](https://github.com/zichuanxu/tool-bottleneck-bench) | `tool-bottleneck-bench`：CPU 评测接口，不执行模型 |
 | Agent记忆与上下文 | [Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents](2610.20116-transparent-compact/README.md) | Hokkaido University，2026-10-14 | [已开源](https://github.com/felixwoolford/transparent-compact-pi) | `transparent-compact`：仅低成本组件，完整实验不复现 |
 | 可验证能力组合 | [Recursive Formation and First-Class Reuse of Compositional Capabilities](2610.19414-formcraft/README.md) | not listed in paper，2026-10-14 | [已开源](https://github.com/lancelot138505-cpu/f-system) | `formcraft`：仅低成本组件，完整实验不复现 |
 | 公共评测与协议 | [What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports](2610.20003-ctxgap/README.md) | Tencent，2026-10-14 | [已开源](https://github.com/Kaguraaaaaa/Ctxgap) | `ctxgap`：CPU 评测接口，不执行模型 |

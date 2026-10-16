@@ -1,0 +1,286 @@
+{
+  "schema_version": 2,
+  "method": "tf-opd",
+  "manifest_ref": "post-training:tf-opd",
+  "adapter": null,
+  "evaluation_tier": "l1_mechanism",
+  "measured_locally": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "dataset": {
+    "id": "gutenberg:1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_url": "https://www.gutenberg.org/ebooks/1524",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "byte_ranges": {
+      "train": [
+        0,
+        165516
+      ],
+      "validation": [
+        165516,
+        186205
+      ],
+      "test": [
+        186205,
+        206895
+      ]
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "selection": "none; fixed budgets, final heldout NLL only",
+    "claim_policy": "actual component execution only; not paper benchmark, capability comparison or correctness improvement",
+    "model": "257-token causal cumulative-embedding BytePolicy, width24",
+    "separate_train_validation_test": true,
+    "teacher_steps": 8,
+    "specialist_steps": 4,
+    "student_steps": 2,
+    "max_new_tokens": 16,
+    "sif": "default550 exclusion plus explicit K2/w4/s2 short-window diagnostic",
+    "tf_opd": "actual teacher self-generation; naturalEOS+DEFLATE filter; correctness ungraded text",
+    "waypoint": "same actual tiny RL run, byte-parity reward, frozen initial/middle/final",
+    "cce": "controlled mathematical premise fixture; same sampled prefix, no semantic extractor",
+    "waypoint_teacher_rl": "fixed 8 updates x 64 one-action rollouts; checkpoints 0/4/8; causal first-action REINFORCE; no selection or retries"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 3.7131068823818834,
+      "std": 0.26627981920300936,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 4.913514455159505,
+      "std": 0.11217339741777624,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 4.382055441538493,
+      "std": 0.15112259080710144,
+      "n": 3
+    },
+    "final_test_nll": {
+      "mean": 4.3497443199157715,
+      "std": 0.13950475944743612,
+      "n": 3
+    },
+    "frozen_teacher_parameter_delta_l2": {
+      "mean": 0,
+      "std": 0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "parameter_delta_l2": 3.4337327948529084,
+      "baseline_validation_nll": 5.039752006530762,
+      "final_validation_nll": 4.554707050323486,
+      "final_test_nll": 4.510159492492676,
+      "teacher_rollout_audits": [
+        {
+          "seen_rollouts": 7,
+          "kept_rollouts": 4,
+          "layer_token_counts": {
+            "head": 209
+          },
+          "source": "teacher_self_generated_then_teacher_forced",
+          "correctness_filter": false
+        },
+        {
+          "seen_rollouts": 20,
+          "kept_rollouts": 4,
+          "layer_token_counts": {
+            "head": 168
+          },
+          "source": "teacher_self_generated_then_teacher_forced",
+          "correctness_filter": false
+        }
+      ],
+      "linear_layers": {
+        "head": {
+          "unreproduced_share": [
+            0.014877384641869265,
+            0.010062713499117895
+          ],
+          "normal_equation_residual_l2": 8.167219891507281e-16,
+          "solve_dtype": "float64",
+          "storage_dtype": "float32",
+          "pseudoinverse": false
+        }
+      },
+      "method_optimizer_updates": 0,
+      "specialists": "same base; four SFT updates each, not RL specialists",
+      "correctness_filter": "unavailable on unlabeled text; termination/loop filters only",
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 43,
+      "parameter_delta_l2": 3.964003330100361,
+      "baseline_validation_nll": 4.875514030456543,
+      "final_validation_nll": 4.3176751136779785,
+      "final_test_nll": 4.282257080078125,
+      "teacher_rollout_audits": [
+        {
+          "seen_rollouts": 13,
+          "kept_rollouts": 4,
+          "layer_token_counts": {
+            "head": 156
+          },
+          "source": "teacher_self_generated_then_teacher_forced",
+          "correctness_filter": false
+        },
+        {
+          "seen_rollouts": 4,
+          "kept_rollouts": 4,
+          "layer_token_counts": {
+            "head": 190
+          },
+          "source": "teacher_self_generated_then_teacher_forced",
+          "correctness_filter": false
+        }
+      ],
+      "linear_layers": {
+        "head": {
+          "unreproduced_share": [
+            0.008028304699992817,
+            0.011782033676267794
+          ],
+          "normal_equation_residual_l2": 1.1717643015216832e-15,
+          "solve_dtype": "float64",
+          "storage_dtype": "float32",
+          "pseudoinverse": false
+        }
+      },
+      "method_optimizer_updates": 0,
+      "specialists": "same base; four SFT updates each, not RL specialists",
+      "correctness_filter": "unavailable on unlabeled text; termination/loop filters only",
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 44,
+      "parameter_delta_l2": 3.741584522192382,
+      "baseline_validation_nll": 4.825277328491211,
+      "final_validation_nll": 4.273784160614014,
+      "final_test_nll": 4.256816387176514,
+      "teacher_rollout_audits": [
+        {
+          "seen_rollouts": 4,
+          "kept_rollouts": 4,
+          "layer_token_counts": {
+            "head": 147
+          },
+          "source": "teacher_self_generated_then_teacher_forced",
+          "correctness_filter": false
+        },
+        {
+          "seen_rollouts": 7,
+          "kept_rollouts": 4,
+          "layer_token_counts": {
+            "head": 150
+          },
+          "source": "teacher_self_generated_then_teacher_forced",
+          "correctness_filter": false
+        }
+      ],
+      "linear_layers": {
+        "head": {
+          "unreproduced_share": [
+            0.006943366716346514,
+            0.008239081226750327
+          ],
+          "normal_equation_residual_l2": 1.166941484738665e-15,
+          "solve_dtype": "float64",
+          "storage_dtype": "float32",
+          "pseudoinverse": false
+        }
+      },
+      "method_optimizer_updates": 0,
+      "specialists": "same base; four SFT updates each, not RL specialists",
+      "correctness_filter": "unavailable on unlabeled text; termination/loop filters only",
+      "frozen_teacher_parameter_deltas_l2": [
+        0,
+        0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_teacher_self_generation": true,
+    "actual_online_student_sampling": false,
+    "actual_parameters_changed": true,
+    "frozen_teacher_unchanged": true,
+    "heldout_bytes_not_used_for_training": true,
+    "no_pretrained_checkpoint_downloaded": true,
+    "original_sif_550_online_path_validated": false,
+    "extreme_finite_padding_zero_gradients": "not_applicable",
+    "undefined_tied_weight_policy_rejected": true,
+    "oversized_corpus_rejected_before_read": true,
+    "fixed_teacher_rl_8x64_and_0_4_8_lineage": "not_applicable",
+    "zero_waypoint_gate_still_rejected": "not_applicable"
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.22236-tf-opd/metrics/component-cpu-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "uncommitted_source_at_cpu_run": true,
+    "implementation_sha256": "f55ffd16aacb6ebfec653c6a8f7f80248fcd6e95f846a3eb8702ecc1390ef9db",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/tf_opd.py": "f55ffd16aacb6ebfec653c6a8f7f80248fcd6e95f846a3eb8702ecc1390ef9db",
+      "src/auto_research/post_training/waypoint_opd.py": "83d90361e94dc759f89282fed6d39d2c971e62be6d22b0268c518c84b9da75f6",
+      "src/auto_research/post_training/ggpo.py": "5c2870decb8446660f0f10391019f2b4c6f32213ef47e555163b7983cd4d4fbb",
+      "src/auto_research/post_training/stopd.py": "2e43cde3fed4acca52e4c3b0066728ba650f2eeb4f28eec92d53f91f56cea134",
+      "src/auto_research/post_training/cce_opd.py": "263e67876ef532e9c4bb737918c8c4307b3bfc32b5eeca0c8d60a6a8e53920c6",
+      "src/auto_research/post_training/sif.py": "6fef189f89034ac52d60b889ab23d82d1aba4876d348263dadc7ef327c5dfed6",
+      "scripts/run_oct16_post_components.py": "d6c823f4b3f96984ae07b5d613b9d60eca0ac0e0f7a4dd2b4432d397e49c8995"
+    },
+    "accelerator": "cpu",
+    "command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --corpus-path .cache/oct16-interfaces/hamlet.txt --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --corpus-sha256 31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output .cache/oct16-post-components-cpu-teacher-rl-final.json",
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "raw_artifact": ".cache/oct16-post-components-cpu-teacher-rl-final.json",
+    "previous_cpu_raw_artifacts_retained": [
+      ".cache/oct16-post-components-cpu-bounded.json",
+      ".cache/oct16-post-components-cpu-teacher-rl-repair.json"
+    ]
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment": {
+    "review_done": true,
+    "resolution": "成本过高，不复现（审查 DONE）",
+    "available_budget": "one A100 or A30 / local Mac; not simultaneous multi-GPU capacity",
+    "cost_basis": "Appendix B Table4: OLMo3 7B two-specialist fusion about10 GPUh, plus2.5–3 GPUh/AIME25model on48GB GPUs",
+    "cost_type": "paper-reported configuration/cost, not a local full-run measurement",
+    "automatic_retry": false
+  }
+}

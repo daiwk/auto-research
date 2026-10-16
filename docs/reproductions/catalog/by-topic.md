@@ -313,6 +313,9 @@
 - [Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework](../2602.12972-unimvt/README.md)：联合学习去偏 CTR 与因果 uplift，并显式估计 treatment 和 counterfactual 响应。
 - [Hierarchical Contextual Uplift Bandits for Catalog Personalization](../2601.14333-hcub/README.md)：用层级上下文 uplift bandit 在目录个性化中学习增量收益。
 
+### 多任务与联合标签
+- [Learned Cross-Task Relationships in Multi-Task Models](../../recommendation-components/2609.28776-cross-task-relationships/README.md)：在共享多任务网络中加入成对 cross-label 或缺失的无条件辅助头，显式估计联合概率与协方差。公开 KuaiRand 小切片对比原始边际头、真实联合标签和打乱联合标签控制；不混淆辅助训练收益与把新预测输入下游 RL 策略的生产收益。
+
 ## 多阶段排序与混排
 
 ### 实时序列与 listwise 重排
@@ -411,6 +414,7 @@
 - [CS3](../2604.19269-cs3/README.md)：在保持双塔 ANN 兼容的前提下，以循环修正、跨塔同步和教师协同补充交互能力。
 - [LWGR](../2605.18771-lwgr/README.md)：在 nearline 阶段缓存世界知识，线上只执行轻量 cross-attention 融合。
 - [SIGMA](../2602.22913-sigma/README.md)：使用 prefix-local item retrieval 和 nearline U2I 控制生成检索成本。
+- [Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators](../../recommendation-components/2602.22647-static-constraint-decoding/README.md)：将合法 item-token 前缀树离线转换为 CSR 状态迁移，解码时用向量化候选抽取与早层 dense lookup 在设备内更新 beam。实现保留 log-softmax 后掩码和父 beam 状态重排；只验证有限公开 ID 约束，不把确定性 ID 编码称为学得的语义 ID，也不宣称线上收益。
 - [S-GRec](../2602.10606-s-grec/README.md)：LLM judge 只在训练期调用，线上仅部署轻量 SID generator。
 - [OneTrans](../2510.26104-onetrans/README.md)：在多场景间共享因果 Transformer，并复用 KV cache 加速线上推理。
 - [OneRec-V2](../2508.20900-onerec-v2/README.md)：用 lazy decoder 和并行策略降低生成式推荐延迟。

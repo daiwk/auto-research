@@ -1,0 +1,127 @@
+{
+  "schema_version": 2,
+  "implementation_status": "evaluation_protocol_interface",
+  "evidence_kind": "official_single_configuration_discovery_recomputation",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "new_agent_evaluated": false,
+  "upstream_revision": "6f7fe7157c702c5c10937080f15bb3d48ce73d69",
+  "regrading_scope": "availability/selection/recorded terminal status; original full execution traces not imported",
+  "planned": 216,
+  "observed": 216,
+  "successes": 163,
+  "itt_success": 0.7546296296296297,
+  "terminal_status_counts": {
+    "verified_success": 163,
+    "capability_unavailable": 53,
+    "missing_response": 0
+  },
+  "cells": {
+    "R=2048:flat": {
+      "planned": 36,
+      "successes": 7,
+      "itt_success": 0.19444444444444445,
+      "ci95": [
+        0.05555555555555555,
+        0.3888888888888889
+      ],
+      "required_tool_clusters": 18
+    },
+    "R=2048:hierarchical": {
+      "planned": 36,
+      "successes": 28,
+      "itt_success": 0.7777777777777778,
+      "ci95": [
+        0.5833333333333334,
+        0.9444444444444444
+      ],
+      "required_tool_clusters": 18
+    },
+    "R=32:flat": {
+      "planned": 36,
+      "successes": 36,
+      "itt_success": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "required_tool_clusters": 18
+    },
+    "R=32:hierarchical": {
+      "planned": 36,
+      "successes": 36,
+      "itt_success": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "required_tool_clusters": 18
+    },
+    "R=512:flat": {
+      "planned": 36,
+      "successes": 28,
+      "itt_success": 0.7777777777777778,
+      "ci95": [
+        0.5833333333333334,
+        0.9444444444444444
+      ],
+      "required_tool_clusters": 18
+    },
+    "R=512:hierarchical": {
+      "planned": 36,
+      "successes": 28,
+      "itt_success": 0.7777777777777778,
+      "ci95": [
+        0.5833333333333334,
+        0.9444444444444444
+      ],
+      "required_tool_clusters": 18
+    }
+  },
+  "bootstrap": {
+    "unit": "required_tool_within_cell",
+    "resamples": 10000,
+    "seed": 42
+  },
+  "plan_hash": "e88d728d87b2ba7b03600fa007a2a98243d5715b3e40a5eb78cdaa5340ce9ab5",
+  "inputs": [
+    {
+      "file": "gemini-36-flash-primary-discovery.json",
+      "sha256": "486ae15a5591645df4c6fffa9d47733f5225f45a1e19a197ce381a5b18074ac7"
+    },
+    {
+      "file": "gemini-36-flash-primary-discovery.jsonl",
+      "sha256": "b5a57e002faed5f309d622cf82e5d32430599bce9c3e625776505b96c13eb6b0"
+    }
+  ],
+  "command": "PYTHONPATH=src python scripts/run_tool_bottleneck_bench.py --plan docs/agent-research/2610.21098-tool-bottleneck-bench/validation/upstream/gemini-36-flash-primary-discovery.json --rows docs/agent-research/2610.21098-tool-bottleneck-bench/validation/upstream/gemini-36-flash-primary-discovery.jsonl --resamples 10000 --seed 42 --output .cache/oct16-tbb-dataset-metadata.json",
+  "manifest_ref": "agent-research:tool-bottleneck-bench",
+  "dataset": {
+    "id": "ToolBottleneckBench/official-discovery-plan-and-scored-rows",
+    "revision": "6f7fe7157c702c5c10937080f15bb3d48ce73d69",
+    "input_sha256": {
+      "gemini-36-flash-primary-discovery.json": "486ae15a5591645df4c6fffa9d47733f5225f45a1e19a197ce381a5b18074ac7",
+      "gemini-36-flash-primary-discovery.jsonl": "b5a57e002faed5f309d622cf82e5d32430599bce9c3e625776505b96c13eb6b0"
+    },
+    "split": "one released frozen discovery configuration; no new model run"
+  },
+  "seeds": [
+    42
+  ],
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Official single-configuration discovery recomputation, not new Agent capability."
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.21098-tool-bottleneck-bench/metrics/official-discovery-cpu.json",
+    "dataset_fingerprint": "486ae15a5591645df4c6fffa9d47733f5225f45a1e19a197ce381a5b18074ac7:b5a57e002faed5f309d622cf82e5d32430599bce9c3e625776505b96c13eb6b0",
+    "command": "PYTHONPATH=src python scripts/run_tool_bottleneck_bench.py --plan docs/agent-research/2610.21098-tool-bottleneck-bench/validation/upstream/gemini-36-flash-primary-discovery.json --rows docs/agent-research/2610.21098-tool-bottleneck-bench/validation/upstream/gemini-36-flash-primary-discovery.jsonl --resamples 10000 --seed 42 --output .cache/oct16-tbb-dataset-metadata.json",
+    "source_sha256": "eaa4c655533d60de3059f0d36c0e1471f6c771d2cd0a559fb1483ef5dc67bb62",
+    "implementation_sha256": "741776e8cdec23ed23d7dd83329fa97d9cd4c4afd71e11ef78304f5e98ef158d"
+  }
+}

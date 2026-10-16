@@ -1,4 +1,7 @@
 {
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "fidelity_review": "2026-10-16: retained historical measurements; fixed-weight scorer has no trained paper network",
   "paper": {
     "arxiv_id": "2607.28940",
     "title": "TransX: Scaling Transformer-based Recommendation via Behavioral and Serving Stream Crossings",
@@ -65,8 +68,8 @@
       "serving"
     ],
     "local_code_dir": "src/auto_research/reproductions/industrial_2026",
-    "fidelity": "core_mechanism",
-    "evaluation_tier": "l2_public_dataset",
+    "fidelity": "concept_demo",
+    "evaluation_tier": "l1_mechanism",
     "datasets": [
       "MovieLens 100K"
     ],
@@ -120,16 +123,16 @@
     "artifact_path": "docs/reproductions/2607.28940-transx/metrics/public-seeds42-44.json"
   },
   "evaluation_protocol": {
-    "tier": "l2_public_dataset",
-    "tier_label": "L2 公开数据集训练",
+    "tier": "l1_mechanism",
+    "tier_label": "L1 历史启发式评分诊断；没有模型训练",
     "seeds": [
       42,
       43,
       44
     ],
     "budget": "220 users / 360 items; global token plus 8 cached local tokens",
-    "formal_comparison": true,
-    "claim_policy": "formal multi-seed comparison"
+    "formal_comparison": false,
+    "claim_policy": "historical fixed-weight NumPy scoring diagnostic; retained measurements do not establish trained TransX capability"
   },
   "seed_results": [
     {

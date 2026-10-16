@@ -25,6 +25,7 @@
 - [FLVM](../2609.32839-flvm/README.md)：用受限时长/时段基线与三因子高斯潜变量解释长观看、点击、喜欢和讨厌；公开数据诊断未证明稳定正负语义。
 - [KuaFu](../2609.31045-kuafu/README.md)：把单条行为压成可跨用户复用的低维记忆，通过双轴投影和分阶段训练控制长历史压缩后的事实损失；本地仅完成公开 MRQA 诊断。
 - [X-Rec](../2609.29180-xrec/README.md)：先预测 item 的语义聚类锚点，再沿球面测地线训练条件速度场，以末层交互生成多兴趣召回向量。
+- [Learned Cross-Task Relationships in Multi-Task Models](../../recommendation-components/2609.28776-cross-task-relationships/README.md)：在共享多任务网络中加入成对 cross-label 或缺失的无条件辅助头，显式估计联合概率与协方差。公开 KuaiRand 小切片对比原始边际头、真实联合标签和打乱联合标签控制；不混淆辅助训练收益与把新预测输入下游 RL 策略的生产收益。
 - [OneTrans-V2](../2609.28589-onetrans-v2/README.md)：用共享因果历史编码执行决策条件三级 SID 检索、预排/精排双目标学习和精排到预排蒸馏。
 - [Light Heads](../2609.25433-light-heads/README.md)：通过 stop-gradient 隔离新多任务目标，并在训练窗口重置轻头以保持跨模型预测空间一致。
 - [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：把真实 LLM 艺人提名与理由生成放在异步离线阶段，在线仅用过滤后的缓存画像或 CF 回退。
@@ -225,6 +226,7 @@
 - [GRC](../2602.23639-grc/README.md)：让生成式推荐器结构化地反思首错位置和语义属性，再纠正 SID 轨迹。
 - [GR4AD](../2602.22732-gr4ad/README.md)：构造用户感知 Semantic ID，结合 LazyAR、可变长度生成和 RSPO 完成生成式广告召回。
 - [SIGMA](../2602.22913-sigma/README.md)：用 LLM 对物品做多视角语义 grounding，以混合 SID/ID token 和多任务 SFT 训练生成式推荐器。
+- [Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators](../../recommendation-components/2602.22647-static-constraint-decoding/README.md)：将合法 item-token 前缀树离线转换为 CSR 状态迁移，解码时用向量化候选抽取与早层 dense lookup 在设备内更新 beam。实现保留 log-softmax 后掩码和父 beam 状态重排；只验证有限公开 ID 约束，不把确定性 ID 编码称为学得的语义 ID，也不宣称线上收益。
 - [Generative Pseudo-Labeling for Pre-Ranking with LLMs](../2602.20995-gpl-prerank/README.md)：LLM 为未曝光候选生成伪标签，线上预排序器不增加 LLM 时延。
 - [HiSAC](../2602.21009-hisac/README.md)：用层级投票把超长历史压缩为少量兴趣 agent，再做 query-conditioned soft routing。
 - [A Long-term Value Prediction Framework In Video Ranking](../2602.17058-ltv-video-ranking/README.md)：组合位置去偏、会话归因与作者周期任务建模长期价值。

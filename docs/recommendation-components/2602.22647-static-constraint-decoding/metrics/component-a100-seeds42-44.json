@@ -1,0 +1,188 @@
+{
+  "schema_version": 2,
+  "method": "static-constraint-decoding",
+  "manifest_ref": "recommendation:static-constraint-decoding",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evolve_integrated": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+    "source_url": "https://zenodo.org/records/10439422",
+    "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+    "selected_fields": [
+      "user_id",
+      "video_id",
+      "time_ms",
+      "duration_ms",
+      "hourmin",
+      "is_click",
+      "long_view"
+    ],
+    "rows": 4096,
+    "prefix_limit": 4096,
+    "split": "chronological 70/15/15 after fixed file-prefix selection",
+    "features": "pre-impression user/video identifiers, duration and hour only",
+    "selection_bias": "file-prefix diagnostic, not a representative production sample"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded operators/updates only, no paper benchmark or production lift"
+  },
+  "metrics": {
+    "validity": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "mean_extraction_ms": {
+      "mean": 0.057280504455169044,
+      "std": 0.001951801846895206,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "method": "static-constraint-decoding",
+      "seed": 42,
+      "dataset": {
+        "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+        "source_url": "https://zenodo.org/records/10439422",
+        "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+        "selected_fields": [
+          "user_id",
+          "video_id",
+          "time_ms",
+          "duration_ms",
+          "hourmin",
+          "is_click",
+          "long_view"
+        ],
+        "rows": 4096,
+        "prefix_limit": 4096,
+        "split": "chronological 70/15/15 after fixed file-prefix selection",
+        "features": "pre-impression user/video identifiers, duration and hour only",
+        "selection_bias": "file-prefix diagnostic, not a representative production sample"
+      },
+      "constraint_items": 1852,
+      "identifier_tokens": 4,
+      "decoded": 64,
+      "valid_decoded": 64,
+      "validity": 1.0,
+      "mean_extraction_ms": 0.05663899704813957,
+      "identifier_protocol": "reversible base16 public video IDs, not learned semantic IDs",
+      "diagnostic_only": true,
+      "promotion_eligible": false
+    },
+    {
+      "method": "static-constraint-decoding",
+      "seed": 43,
+      "dataset": {
+        "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+        "source_url": "https://zenodo.org/records/10439422",
+        "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+        "selected_fields": [
+          "user_id",
+          "video_id",
+          "time_ms",
+          "duration_ms",
+          "hourmin",
+          "is_click",
+          "long_view"
+        ],
+        "rows": 4096,
+        "prefix_limit": 4096,
+        "split": "chronological 70/15/15 after fixed file-prefix selection",
+        "features": "pre-impression user/video identifiers, duration and hour only",
+        "selection_bias": "file-prefix diagnostic, not a representative production sample"
+      },
+      "constraint_items": 1852,
+      "identifier_tokens": 4,
+      "decoded": 64,
+      "valid_decoded": 64,
+      "validity": 1.0,
+      "mean_extraction_ms": 0.055730193853378296,
+      "identifier_protocol": "reversible base16 public video IDs, not learned semantic IDs",
+      "diagnostic_only": true,
+      "promotion_eligible": false
+    },
+    {
+      "method": "static-constraint-decoding",
+      "seed": 44,
+      "dataset": {
+        "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+        "source_url": "https://zenodo.org/records/10439422",
+        "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+        "selected_fields": [
+          "user_id",
+          "video_id",
+          "time_ms",
+          "duration_ms",
+          "hourmin",
+          "is_click",
+          "long_view"
+        ],
+        "rows": 4096,
+        "prefix_limit": 4096,
+        "split": "chronological 70/15/15 after fixed file-prefix selection",
+        "features": "pre-impression user/video identifiers, duration and hour only",
+        "selection_bias": "file-prefix diagnostic, not a representative production sample"
+      },
+      "constraint_items": 1852,
+      "identifier_tokens": 4,
+      "decoded": 64,
+      "valid_decoded": 64,
+      "validity": 1.0,
+      "mean_extraction_ms": 0.05947232246398926,
+      "identifier_protocol": "reversible base16 public video IDs, not learned semantic IDs",
+      "diagnostic_only": true,
+      "promotion_eligible": false
+    }
+  ],
+  "execution_checks": {
+    "csr_and_dense_decode_executed": true,
+    "all_emitted_identifiers_in_public_constraint_set": true,
+    "trained_sid_or_retrieval_model": false,
+    "microbenchmark_not_end_to_end_latency": true
+  },
+  "provenance": {
+    "artifact_path": "docs/recommendation-components/2602.22647-static-constraint-decoding/metrics/component-a100-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "executed_source_sha256": {
+      "src/auto_research/reproductions/static_constraint_decoding/algorithm.py": "1729da82f9c487769a32a3f0454f429ddd08454a1f56c7910099f466f26bde5f",
+      "scripts/run_oct16_recommendation_components.py": "83c903fba74b40b4b8c087c46dcee2bf32d02b71bb60be70253cf0ab135e5547"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "command": [
+      "python",
+      "scripts/run_oct16_recommendation_components.py",
+      "--csv",
+      "public/kuairand-prefix.csv",
+      "--device",
+      "cuda",
+      "--seeds",
+      "42,43,44",
+      "--output",
+      "runs/oct16-p0p1/recommendation.json"
+    ],
+    "dataset_fingerprint": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+    "dataset_fingerprint_scope": "public-selected-input-fields",
+    "raw_result_sha256": "f6b7fde172262f6eb16917db585dbeab3403b50c8ac8a0ba244c02673722042d",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

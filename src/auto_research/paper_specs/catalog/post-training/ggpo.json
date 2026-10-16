@@ -1,0 +1,31 @@
+{
+  "domain": "post-training",
+  "key": "ggpo",
+  "title": "Gibbs-Gap Policy Optimization for Off-Policy RL with Verifiable Rewards",
+  "paper_url": "https://arxiv.org/abs/2610.20814v1",
+  "detail_path": "post-training/2610.20814-ggpo/README.md",
+  "topic": [
+    "离策略推理 RL",
+    "后训练算法组件",
+    "GGPO"
+  ],
+  "first_author": "Xuanchang Zhang",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2026-10-14",
+  "published_at": "2026-10-14T18:59:29Z",
+  "code": "https://github.com/thunderous77/GGPO",
+  "code_status": "原作者公开Apache-2.0仓库；本地按公式独立实现",
+  "adapter": null,
+  "local_operator": "auto_research.post_training.ggpo.ggpo_loss",
+  "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods ggpo --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/ggpo-a100-20261016.json",
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "summary": "KL-adjusted reward稳定log-mean-exp gap的直接autograd，严格分开冻结behavior/reference和周期reference refresh；可选clipped detached-coefficient surrogate单独提供，饱和token保留score gradient。本地真实小策略用规则verifier诊断，不声称数学能力或完整4GH200训练复现。"
+}

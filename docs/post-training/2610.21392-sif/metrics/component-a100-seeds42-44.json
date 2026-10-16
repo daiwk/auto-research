@@ -1,0 +1,259 @@
+{
+  "schema_version": 2,
+  "method": "sif",
+  "manifest_ref": "post-training:sif",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evolve_integrated": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "gutenberg:1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "byte_ranges": {
+      "train": [
+        0,
+        165516
+      ],
+      "validation": [
+        165516,
+        186205
+      ],
+      "test": [
+        186205,
+        206895
+      ]
+    },
+    "source_url": "https://www.gutenberg.org/ebooks/1524"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded operators/updates only, no paper benchmark or production lift"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.008407569944376641,
+      "std": 0.0009239542150544694,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 4.944682916005452,
+      "std": 0.10589508104076427,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 4.9447563489278155,
+      "std": 0.10598726602783558,
+      "n": 3
+    },
+    "final_test_nll": {
+      "mean": 4.910694440205892,
+      "std": 0.11998199345861164,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "parameter_delta_l2": 0.0074347750977672225,
+      "baseline_validation_nll": 5.066959857940674,
+      "final_validation_nll": 5.067139625549316,
+      "final_test_nll": 5.048848628997803,
+      "generated_tokens": 383,
+      "natural_eos_rollouts": 1,
+      "rejected_diagnostic_groups": 4,
+      "history": [
+        {
+          "step": 0,
+          "loss": -1.4901161193847656e-08,
+          "gradient_norm": 0.16994121670722961,
+          "eligible_responses": 4,
+          "retained_groups": 1,
+          "updated_tokens": 64,
+          "policy_loss": -1.4901161193847656e-08,
+          "kl_loss": 0.0,
+          "paper_default_minimum_length": 550,
+          "paper_default_eligible_responses": 0,
+          "diagnostic_minimum_length": 6,
+          "short_window_diagnostic_only": true
+        },
+        {
+          "step": 1,
+          "loss": -1.4901161193847656e-08,
+          "gradient_norm": 0.18150119483470917,
+          "eligible_responses": 4,
+          "retained_groups": 1,
+          "updated_tokens": 64,
+          "policy_loss": -1.4901161193847656e-08,
+          "kl_loss": 1.2852251529693604e-07,
+          "paper_default_minimum_length": 550,
+          "paper_default_eligible_responses": 0,
+          "diagnostic_minimum_length": 6,
+          "short_window_diagnostic_only": true
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 43,
+      "parameter_delta_l2": 0.009273366934529468,
+      "baseline_validation_nll": 4.883718490600586,
+      "final_validation_nll": 4.883790016174316,
+      "final_test_nll": 4.850603103637695,
+      "generated_tokens": 119,
+      "natural_eos_rollouts": 1,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": -1.4901161193847656e-08,
+          "gradient_norm": 0.17111541330814362,
+          "eligible_responses": 4,
+          "retained_groups": 1,
+          "updated_tokens": 64,
+          "policy_loss": -1.4901161193847656e-08,
+          "kl_loss": 0.0,
+          "paper_default_minimum_length": 550,
+          "paper_default_eligible_responses": 0,
+          "diagnostic_minimum_length": 6,
+          "short_window_diagnostic_only": true
+        },
+        {
+          "step": 1,
+          "loss": -1.4901161193847656e-08,
+          "gradient_norm": 0.24964109063148499,
+          "eligible_responses": 4,
+          "retained_groups": 1,
+          "updated_tokens": 55,
+          "policy_loss": -1.4901161193847656e-08,
+          "kl_loss": 1.309173427443966e-07,
+          "paper_default_minimum_length": 550,
+          "paper_default_eligible_responses": 0,
+          "diagnostic_minimum_length": 6,
+          "short_window_diagnostic_only": true
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 44,
+      "parameter_delta_l2": 0.008514567800833234,
+      "baseline_validation_nll": 4.883370399475098,
+      "final_validation_nll": 4.8833394050598145,
+      "final_test_nll": 4.832631587982178,
+      "generated_tokens": 192,
+      "natural_eos_rollouts": 0,
+      "rejected_diagnostic_groups": 1,
+      "history": [
+        {
+          "step": 0,
+          "loss": -1.4901161193847656e-08,
+          "gradient_norm": 0.2161790430545807,
+          "eligible_responses": 4,
+          "retained_groups": 1,
+          "updated_tokens": 64,
+          "policy_loss": -1.4901161193847656e-08,
+          "kl_loss": 0.0,
+          "paper_default_minimum_length": 550,
+          "paper_default_eligible_responses": 0,
+          "diagnostic_minimum_length": 6,
+          "short_window_diagnostic_only": true
+        },
+        {
+          "step": 1,
+          "loss": -1.4901161193847656e-08,
+          "gradient_norm": 0.18377433717250824,
+          "eligible_responses": 4,
+          "retained_groups": 1,
+          "updated_tokens": 64,
+          "policy_loss": -1.4901161193847656e-08,
+          "kl_loss": 4.7497451305389404e-08,
+          "paper_default_minimum_length": 550,
+          "paper_default_eligible_responses": 0,
+          "diagnostic_minimum_length": 6,
+          "short_window_diagnostic_only": true
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_policy_generation_and_parameter_change": true,
+    "teacher_self_generation_and_filtered_replay": false,
+    "frozen_teachers_unchanged": true,
+    "train_validation_test_bytes_separated": true,
+    "public_unlabeled_text_or_controlled_rule_reward_diagnostic": true,
+    "full_paper_benchmark": false,
+    "default_550_token_sif_training": false
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.21392-sif/metrics/component-a100-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/sif.py": "6fef189f89034ac52d60b889ab23d82d1aba4876d348263dadc7ef327c5dfed6",
+      "scripts/run_oct16_post_components.py": "d6c823f4b3f96984ae07b5d613b9d60eca0ac0e0f7a4dd2b4432d397e49c8995"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "command": [
+      "python",
+      "scripts/run_oct16_post_components.py",
+      "--corpus-path",
+      "public/hamlet.txt",
+      "--corpus-id",
+      "gutenberg:1524",
+      "--corpus-revision",
+      "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+      "--corpus-sha256",
+      "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+      "--device",
+      "cuda",
+      "--seeds",
+      "42,43,44",
+      "--output",
+      "runs/oct16-p0p1/post-training.json"
+    ],
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "dataset_fingerprint_scope": "public-corpus-bytes",
+    "raw_result_sha256": "5b2244ecbd0234e1245ff352b6600af585ff876b0e1f3b37f2118d346482c744",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

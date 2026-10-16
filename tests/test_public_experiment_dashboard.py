@@ -7,6 +7,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_seedless_deterministic_audits_are_labeled_without_inventing_seeds():
+    from scripts.generate_public_experiment_dashboard import _seed
+
+    payload = {"deterministic": True, "evaluation_protocol": {"seeds": []}}
+    assert _seed("", payload, "audit.json") == "不适用（确定性审计）"
+    assert _seed("", {"evaluation_protocol": {"seeds": []}}, "audit.json") == ""
+    assert _seed("", {"deterministic": True}, "audit.json") == ""
+    assert _seed("", {"evaluation_protocol": {"seeds": [42, 43, 44]}}, "audit.json") == "42, 43, 44"
+
+
 def test_dashboard_dataset_label_does_not_dump_revision_manifest():
     from scripts.generate_public_experiment_dashboard import _dataset_name
 
