@@ -6,6 +6,7 @@ multi-cutoff pooling/gradient sharing and row-wise Adagrad, not LinkedIn serving
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 
 import torch
 from torch import Tensor
@@ -101,7 +102,7 @@ def multi_cutoff_memory(values: Tensor, scores: Tensor, cutoffs: list[int], *,
 class RowWiseAdagrad(torch.optim.Optimizer):
     """Appendix A.1; coalesce logical-step sparse gradients BEFORE squaring."""
     def __init__(self, params, lr: float = 0.01, eps: float = 1e-8):
-        if lr <= 0 or eps <= 0:
+        if not math.isfinite(lr) or not math.isfinite(eps) or lr <= 0 or eps <= 0:
             raise ValueError("positive learning rate and epsilon required")
         super().__init__(params, {"lr": lr, "eps": eps})
 
@@ -120,13 +121,16 @@ class RowWiseAdagrad(torch.optim.Optimizer):
                 gradient = parameter.grad
                 if not gradient.is_sparse or gradient.sparse_dim() != 1:
                     raise ValueError("use row-sparse complete logical-step gradients")
-                gradient = gradient.coalesce()
+                # FP16 epsilon/squared gradients may underflow; coalesce in work
+                # precision too, including rows whose contributions cancel out.
+                work_dtype = torch.float64 if parameter.dtype == torch.float64 else torch.float32
+                gradient = gradient.to(dtype=work_dtype).coalesce()
                 indices, values = gradient.indices()[0], gradient.values()
                 state = self.state[parameter]
                 if "sum" not in state:
-                    state["sum"] = torch.zeros(parameter.shape[0], device=parameter.device, dtype=parameter.dtype)
+                    state["sum"] = torch.zeros(parameter.shape[0], device=parameter.device, dtype=work_dtype)
                 accumulator = state["sum"]
                 accumulator.index_add_(0, indices, values.square().mean(-1))
                 update = values / (accumulator[indices].sqrt()[:, None] + group["eps"])
-                parameter.index_add_(0, indices, update, alpha=-group["lr"])
+                parameter.index_add_(0, indices, update.to(parameter.dtype), alpha=-group["lr"])
         return loss

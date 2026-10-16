@@ -121,3 +121,15 @@ def test_transx_causality_associativity_and_sparse_duplicate_aggregation():
     assert opt.state[parameter]["sum"][1] == 26  # mean(([1,2]+[3,4])**2), not sum of squares
     torch.testing.assert_close(parameter[1], torch.tensor([-.4, -.6], dtype=torch.float64) / (26 ** .5 + 1e-8))
     assert not parameter[0].any() and not parameter[2].any()
+
+
+def test_transx_half_precision_cancelled_row_keeps_finite_state():
+    parameter = torch.nn.Parameter(torch.zeros(4, 2, dtype=torch.float16))
+    parameter.grad = torch.sparse_coo_tensor(
+        torch.tensor([[1, 1, 2]]), torch.tensor([[1., 2.], [-1., -2.], [1., 1.]], dtype=torch.float16), (4, 2),
+    )
+    optimizer = RowWiseAdagrad([parameter])
+    optimizer.step()
+    assert torch.isfinite(parameter).all()
+    assert not parameter[1].any()
+    assert optimizer.state[parameter]["sum"].dtype == torch.float32
