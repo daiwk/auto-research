@@ -298,10 +298,17 @@ def run(args):
         raise ValueError("one to three distinct seeds required")
     if not 2 <= args.steps <= 10 or not 1 <= args.teacher_steps <= 32 or not 8 <= args.max_tokens <= 64:
         raise ValueError("bounded diagnostic budgets: steps2..10, teacher1..32, tokens8..64")
-    payload = args.corpus_path.read_bytes()
-    digest = hashlib.sha256(payload).hexdigest()
-    if not 4096 <= len(payload) <= 2_000_000 or not args.corpus_id or not args.corpus_revision:
+    initial_size = args.corpus_path.stat().st_size
+    if not 4096 <= initial_size <= 2_000_000 or not args.corpus_id or not args.corpus_revision:
         raise ValueError("4KB..2MB corpus with explicit public identity/revision required")
+    # Reject an oversized input before reading it; a bounded read also protects
+    # against a file growing between stat and open. No accidental large download
+    # or path typo may allocate the whole file merely to fail the cost gate.
+    with args.corpus_path.open("rb") as handle:
+        payload = handle.read(2_000_001)
+    if len(payload) != initial_size:
+        raise ValueError("corpus size changed during bounded read; immutable input required")
+    digest = hashlib.sha256(payload).hexdigest()
     if args.corpus_sha256 and digest != args.corpus_sha256:
         raise ValueError("corpus does not match the declared immutable content hash")
     tokens = torch.tensor(list(payload), dtype=torch.long, device=args.device)

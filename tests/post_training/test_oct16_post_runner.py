@@ -58,3 +58,32 @@ def test_runner_rejects_false_corpus_hash_and_excess_budget_before_training(tmp_
     args.steps = 100
     with pytest.raises(ValueError, match="bounded diagnostic"):
         runner["run"](args)
+
+
+def test_runner_rejects_oversized_corpus_before_any_content_read(tmp_path, monkeypatch):
+    runner = runpy.run_path(str(ROOT / "scripts/run_oct16_post_components.py"))
+    corpus = tmp_path / "too-large.txt"
+    with corpus.open("wb") as handle:
+        handle.truncate(2_000_001)
+    args = argparse.Namespace(corpus_path=corpus, corpus_id="fixture", corpus_revision="v1",
+        corpus_sha256=None, output=tmp_path / "out.json", device="cpu", seeds="42",
+        methods="ggpo", steps=2, teacher_steps=1, max_tokens=8)
+    reads = []
+    original_open = Path.open
+
+    def tracked_open(path, *arguments, **keywords):
+        if path == corpus:
+            reads.append(path)
+            raise AssertionError("oversized input must not be opened for reading")
+        return original_open(path, *arguments, **keywords)
+
+    def forbidden_read_bytes(path):
+        if path == corpus:
+            reads.append(path)
+        raise AssertionError("no unbounded read_bytes path is allowed")
+
+    monkeypatch.setattr(Path, "open", tracked_open)
+    monkeypatch.setattr(Path, "read_bytes", forbidden_read_bytes)
+    with pytest.raises(ValueError, match="4KB..2MB"):
+        runner["run"](args)
+    assert not reads and not args.output.exists()
