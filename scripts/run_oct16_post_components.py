@@ -22,6 +22,10 @@ from auto_research.post_training import cce_opd, ggpo, sif, stopd, tf_opd, waypo
 METHODS = ("tf-opd", "waypoint-opd", "ggpo", "stopd", "cce-opd", "sif")
 PAPERS = dict(zip(METHODS, ("2610.22236", "2610.21601", "2610.20814", "2610.21337", "2610.21195", "2610.21392"), strict=True))
 EOS = 256
+TEACHER_RL_UPDATES = 8
+TEACHER_RL_BATCH_SIZE = 64
+TEACHER_RL_CHECKPOINTS = (0, 4, 8)
+TEACHER_RL_LEARNING_RATE = .2
 
 
 class BytePolicy(nn.Module):
@@ -105,28 +109,45 @@ def heldout_nll(model, source):
         return float(F.cross_entropy(model(ids[:, :-1]).reshape(-1, 257), ids[:, 1:].reshape(-1)))
 
 
-def rl_snapshots(initial, prompt, max_tokens):
-    """One true, tiny RL trajectory; byte-parity reward is diagnostic, not quality."""
+def rl_snapshots(initial, prompt):
+    """Fixed 8x64 one-action RL; checkpoints are always 0/4/8, never selected.
+
+    Reward depends only on the first sampled byte. Using the whole continuation's
+    length-averaged logp adds unrelated-action noise and rescales this one-action
+    objective; the old 4-sample/two-update setup failed its nonzero student-gradient
+    check on a real A100 (the failing gate values were not retained). Match
+    REINFORCE to the reward's causal action instead.
+    This is still a byte-parity mechanism diagnostic, not language capability.
+    """
     learner = deepcopy(initial).train().requires_grad_(True)
     snapshots = [frozen_copy(learner)]
-    optimizer = torch.optim.SGD(learner.parameters(), lr=.04)
-    for step in range(2):
-        for _ in range(16):
-            ids, mask, _ = sample_group(learner, prompt, count=4, max_tokens=max_tokens)
-            reward = (ids[:, prompt.shape[1]] % 2 == 0).float()
-            if reward.min() != reward.max():
-                break
-        else:
-            raise RuntimeError("bounded teacher RL collection found no mixed byte-parity group")
+    optimizer = torch.optim.SGD(learner.parameters(), lr=TEACHER_RL_LEARNING_RATE)
+    history = []
+    for step in range(1, TEACHER_RL_UPDATES + 1):
+        ids, mask, _ = sample_group(learner, prompt, count=TEACHER_RL_BATCH_SIZE, max_tokens=1)
+        if mask.shape != (TEACHER_RL_BATCH_SIZE, 1) or not bool(mask.all()):
+            raise RuntimeError("teacher RL requires exactly one actually sampled action per response")
+        reward = (ids[:, prompt.shape[1]] % 2 == 0).float()
         learner.train()
         _, lp, _ = scores(learner, ids, prompt.shape[1])
         advantage = (reward - reward.mean()).detach()
-        loss = -(advantage * lp.masked_fill(~mask, 0).sum(-1) / mask.sum(-1)).mean()
+        loss = -(advantage * lp[:, 0]).mean()
         optimizer.zero_grad()
         loss.backward()
+        norm = torch.nn.utils.clip_grad_norm_(learner.parameters(), 1., error_if_nonfinite=True)
         optimizer.step()
-        snapshots.append(frozen_copy(learner))
-    return snapshots, [{"run_id": "tiny-byte-parity-rl", "step": s} for s in range(3)]
+        history.append({"step": step, "sampled_actions": int(mask.sum()),
+                        "mean_rule_reward": float(reward.mean()), "gradient_norm": float(norm)})
+        if step in TEACHER_RL_CHECKPOINTS[1:]:
+            snapshots.append(frozen_copy(learner))
+    lineage = [{"run_id": "tiny-byte-parity-rl", "step": s} for s in TEACHER_RL_CHECKPOINTS]
+    audit = {"updates": TEACHER_RL_UPDATES, "rollouts_per_update": TEACHER_RL_BATCH_SIZE,
+        "rollout_horizon": 1, "checkpoint_steps": list(TEACHER_RL_CHECKPOINTS),
+        "total_sampled_actions": TEACHER_RL_UPDATES * TEACHER_RL_BATCH_SIZE,
+        "learning_rate": TEACHER_RL_LEARNING_RATE, "history": history,
+        "selection": "none; fixed 0/4/8 checkpoints, no retries or reward/gate-based selection",
+        "gradient_estimator": "REINFORCE on the causal first action; detached centered binary reward"}
+    return snapshots, lineage, audit
 
 
 def run_seed(args, seed, train, validation, test, selected):
@@ -139,7 +160,7 @@ def run_seed(args, seed, train, validation, test, selected):
     teachers = [frozen_copy(t) for t in teachers]
     teacher_before = [parameters(t) for t in teachers]
     prompt = train[:16][None, :]
-    snapshot_models, lineage = rl_snapshots(base, prompt, min(12, args.max_tokens)) if "waypoint-opd" in selected else (None, None)
+    snapshot_models, lineage, teacher_rl_audit = rl_snapshots(base, prompt) if "waypoint-opd" in selected else (None, None, None)
     snapshot_before = [parameters(t) for t in snapshot_models] if snapshot_models else []
     outcomes = {}
 
@@ -254,7 +275,7 @@ def run_seed(args, seed, train, validation, test, selected):
             loss.backward()
             norm = torch.nn.utils.clip_grad_norm_(student.parameters(), 1., error_if_nonfinite=True)
             if not float(norm) > 0:
-                raise RuntimeError(f"{method} has no actual policy gradient")
+                raise RuntimeError(f"{method} has no actual policy gradient (seed={seed}, step={step}, diagnostics={json.dumps(diagnostics)})")
             optimizer.step()
             if schedule:
                 schedule.finish_batch(plan, mask)
@@ -275,6 +296,7 @@ def run_seed(args, seed, train, validation, test, selected):
         if method == "waypoint-opd":
             outcomes[method]["teacher_snapshot_lineage"] = lineage
             outcomes[method]["teacher_rl_reward"] = "first sampled byte ID is even; not language capability"
+            outcomes[method]["teacher_rl_audit"] = teacher_rl_audit
         if method == "cce-opd":
             outcomes[method]["condition_pair_source"] = "explicit controlled mathematical-premise fixture; removing evenness changes answer determinacy; no automatic semantic annotation"
     teacher_deltas = [parameter_delta(t, old) for t, old in zip(teachers, teacher_before, strict=True)]
@@ -332,6 +354,7 @@ def run(args):
             "max_new_tokens": args.max_tokens, "sif": "default550 exclusion plus explicit K2/w4/s2 short-window diagnostic",
             "tf_opd": "actual teacher self-generation; naturalEOS+DEFLATE filter; correctness ungraded text",
             "waypoint": "same actual tiny RL run, byte-parity reward, frozen initial/middle/final",
+            "waypoint_teacher_rl": "fixed 8 updates x 64 one-action rollouts; checkpoints 0/4/8; causal first-action REINFORCE; no selection or retries",
             "cce": "controlled mathematical premise fixture; same sampled prefix, no semantic extractor"},
         "not_claimed": ["paper benchmark reproduction", "pretrained LLM capability", "semantic condition extraction", "default550 SIF online training", "evolve integration"],
         "accelerator": torch.cuda.get_device_name() if args.device.startswith("cuda") else args.device,

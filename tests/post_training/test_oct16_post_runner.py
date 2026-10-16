@@ -1,5 +1,6 @@
 """Real bounded online generation and parameter updates, never a score fixture."""
 import argparse
+from dataclasses import replace
 import hashlib
 from pathlib import Path
 import runpy
@@ -37,6 +38,10 @@ def test_six_components_run_actual_policy_steps_and_keep_frozen_roles(tmp_path):
             assert row["generated_tokens"] >= 8 and len(row["history"]) == 2
             assert all(h["gradient_norm"] > 0 for h in row["history"])
     assert result["results"]["ggpo"][0]["reference_refreshes"] == 1
+    waypoint = result["results"]["waypoint-opd"][0]
+    assert [item["step"] for item in waypoint["teacher_snapshot_lineage"]] == [0, 4, 8]
+    assert waypoint["teacher_rl_audit"]["total_sampled_actions"] == 512
+    assert len(waypoint["teacher_rl_audit"]["history"]) == 8
     assert result["results"]["stopd"][0]["history"][1]["normalizer_source"] == "previous_batch"
     assert all(h["paper_default_eligible_responses"] == 0 for h in result["results"]["sif"][0]["history"])
     assert "mathematical-premise" in result["results"]["cce-opd"][0]["condition_pair_source"]
@@ -87,3 +92,56 @@ def test_runner_rejects_oversized_corpus_before_any_content_read(tmp_path, monke
     with pytest.raises(ValueError, match="4KB..2MB"):
         runner["run"](args)
     assert not reads and not args.output.exists()
+
+
+def test_teacher_rl_has_fixed_8x64_single_action_budget_and_0_4_8_snapshots(monkeypatch):
+    runner = runpy.run_path(str(ROOT / "scripts/run_oct16_post_components.py"))
+    snapshots_fn = runner["rl_snapshots"]
+    globals_ = snapshots_fn.__globals__
+    original_sample = globals_["sample_group"]
+    calls = []
+
+    def tracked_sample(model, prompt, **kwargs):
+        calls.append((kwargs["count"], kwargs["max_tokens"]))
+        return original_sample(model, prompt, **kwargs)
+
+    monkeypatch.setitem(globals_, "sample_group", tracked_sample)
+    threads = torch.get_num_threads()
+    try:
+        torch.set_num_threads(1)
+        torch.manual_seed(12)
+        initial = runner["BytePolicy"]()
+        before = runner["parameters"](initial)
+        snapshots, lineage, audit = snapshots_fn(initial, torch.tensor([[1, 2, 3, 4]]))
+    finally:
+        torch.set_num_threads(threads)
+    assert calls == [(64, 1)] * 8  # no retries, no gate/reward-based collection
+    assert [item["step"] for item in lineage] == [0, 4, 8]
+    assert audit["checkpoint_steps"] == [0, 4, 8] and audit["total_sampled_actions"] == 512
+    assert audit["rollout_horizon"] == 1 and len(audit["history"]) == 8
+    assert all(step["sampled_actions"] == 64 and step["gradient_norm"] > 0 for step in audit["history"])
+    assert runner["parameter_delta"](initial, before) == 0
+    assert all(not parameter.requires_grad for model in snapshots for parameter in model.parameters())
+    assert runner["parameter_delta"](snapshots[1], runner["parameters"](snapshots[0])) > 0
+    assert runner["parameter_delta"](snapshots[2], runner["parameters"](snapshots[1])) > 0
+
+
+def test_all_zero_waypoint_gate_still_rejects_zero_policy_gradient(monkeypatch):
+    runner = runpy.run_path(str(ROOT / "scripts/run_oct16_post_components.py"))
+    original_prepare = runner["waypoint_opd"].prepare_credit
+
+    def zero_gate(*args, **kwargs):
+        credit = original_prepare(*args, **kwargs)
+        return replace(credit, gate=torch.zeros_like(credit.gate),
+                       advantages=torch.zeros_like(credit.advantages))
+
+    monkeypatch.setattr(runner["waypoint_opd"], "prepare_credit", zero_gate)
+    source = torch.tensor(list(b"Explicit non-public unit-test fixture.\n" * 160), dtype=torch.long)
+    args = argparse.Namespace(device="cpu", teacher_steps=2, max_tokens=8, steps=2)
+    threads = torch.get_num_threads()
+    try:
+        torch.set_num_threads(1)
+        with pytest.raises(RuntimeError, match="waypoint-opd has no actual policy gradient"):
+            runner["run_seed"](args, 42, source[:4000], source[4000:4300], source[4300:4600], ("waypoint-opd",))
+    finally:
+        torch.set_num_threads(threads)
