@@ -115,8 +115,17 @@ def sparse_diagnostic(seed: int, device: str) -> dict:
     reference_grads = torch.autograd.grad(reference, (reference_z, reference_w), grad)
     gradient_error = max(float((a - b).abs().max()) for a, b in zip(actual_grads, reference_grads, strict=True))
     error = float((actual - reference).abs().max().detach())
+    rejected = 0
+    for value in (float("nan"), float("inf"), -float("inf")):
+        try:
+            sparse_activation_linear(torch.tensor([[value, 1.]], device=device),
+                                     torch.ones(1, 2, device=device), tile_size=4)
+        except ValueError:
+            rejected += 1
     assert exact and error == 0 and gradient_error < 1e-10
+    assert rejected == 3
     return {"bf16_bitwise_roundtrip": exact, "forward_max_error": error,
+            "nonfinite_input_rejection_cases": rejected,
             "backward_max_error": gradient_error, "dense_activation_bytes": h.numel() * h.element_size(),
             "compact_activation_bytes_including_mask_prefix": packed.storage_bytes,
             "storage_ratio_dense_over_compact": h.numel() * h.element_size() / packed.storage_bytes,
@@ -176,9 +185,17 @@ def roleq_diagnostic(seed: int, device: str) -> dict:
     naive_loss = (vector - naive_codes * naive_scale).square().sum()
     assert gap < 1e-12 and axis_error == 0 and float(naive_loss - actual_loss) > -1e-12
     assert reader.scales.shape == (7,) and writer.scales.shape == (11,)
+    extreme_cases = 0
+    for dtype, amplitude in ((torch.float32, 1e20), (torch.float32, 1e-30),
+                             (torch.float64, 1e200), (torch.float64, 1e-200)):
+        extreme = torch.full((2,), amplitude, device=device, dtype=dtype)
+        extreme_code, extreme_scale = exact_ternary_fit(extreme)
+        assert extreme_code.tolist() == [1, 1] and torch.equal(extreme_code * extreme_scale, extreme)
+        extreme_cases += 1
     bits = reader.bit_accounting()
     assert bits["payload_and_scale_storage_bits"] == reader.packed_trits.numel() * 8 + reader.scales.numel() * 64
     return {"bruteforce_global_optimum_loss_gap": gap, "writer_equals_transposed_reader_max_error": axis_error,
+            "extreme_scale_invariance_cases": extreme_cases,
             "exact_loss": float(actual_loss), "threshold_control_loss": float(naive_loss),
             "reader_scale_count": reader.scales.numel(), "writer_scale_count": writer.scales.numel(),
             "actual_packed_code_bits": bits["packed_code_bits"], "actual_scale_bits": bits["scale_bits"],

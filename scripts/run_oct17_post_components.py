@@ -248,7 +248,20 @@ def run_elite(device, steps):
         norms.append(update(learner, optimizer, loss))
     balanced = archive.sample_balanced(60)
     counts = [sum(e.question == q for e in balanced) for q in operands]
+    ratio_guard = False
+    try:
+        elite_replay.grpo_replay_loss(
+            torch.full((1, 2, 1), -1., dtype=torch.float64, device=device, requires_grad=True),
+            torch.tensor([[[-1000.], [-1.]]], dtype=torch.float64, device=device),
+            torch.tensor([[1., 0.]], dtype=torch.float64, device=device),
+            torch.ones(1, 2, 1, dtype=torch.bool, device=device),
+            torch.zeros(1, 1, dtype=torch.float64, device=device),
+            torch.ones(1, 1, dtype=torch.bool, device=device))
+    except ValueError:
+        ratio_guard = True
+    assert ratio_guard
     return {**audit, "parameter_delta_l2": delta(learner, initial), "frozen_base_delta_l2": delta(base, frozen),
+        "unrepresentable_ratio_rejected": ratio_guard,
         "gradient_norm_min": min(norms), "optimizer_updates": steps,
         "replay_reference_max_abs_error": max(reference_errors), "question_sampling_count_gap": max(counts) - min(counts),
         "verified_archive_fraction": sum(verify(e.question, e.solution) for e in balanced) / len(balanced),

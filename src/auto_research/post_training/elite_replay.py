@@ -6,6 +6,7 @@ and realized descriptors. It does not pretend that IID sampling is QD search.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 import random
 from typing import Callable, Hashable
 
@@ -146,6 +147,14 @@ def grpo_replay_loss(current_logps: Tensor, old_logps: Tensor, rewards: Tensor,
     reward = rewards.detach()
     advantage = (reward - reward.mean(-1, keepdim=True)) / (reward.std(-1, keepdim=True, unbiased=False) + epsilon)
     log_ratio = (current_logps.masked_fill(~mask, 0) - old_logps.detach().masked_fill(~mask, 0))
+    # A clipped finite forward value does not guarantee a finite backward:
+    # an unselected exp(inf) branch can still produce 0*inf -> NaN. Reject
+    # unrepresentable ratios explicitly rather than silently altering PPO.
+    maximum = torch.tensor(math.log(torch.finfo(log_ratio.dtype).max),
+                           dtype=log_ratio.dtype, device=log_ratio.device)
+    maximum = torch.nextafter(maximum, torch.full_like(maximum, -torch.inf))
+    if not bool(torch.isfinite(log_ratio[mask]).all()) or bool((log_ratio[mask] > maximum).any()):
+        raise ValueError("valid log-ratio exceeds the representable exponential range")
     ratio = log_ratio.exp()
     raw = ratio * advantage.unsqueeze(-1)
     clipped = ratio.clamp(1 - clip_low, 1 + clip_high) * advantage.unsqueeze(-1)

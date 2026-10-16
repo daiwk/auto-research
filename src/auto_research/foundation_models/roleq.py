@@ -17,13 +17,18 @@ def exact_ternary_fit(vectors: Tensor) -> tuple[Tensor, Tensor]:
         raise ValueError("finite nonempty floating vectors required")
     dtype = torch.float64 if vectors.dtype == torch.float64 else torch.float32
     w = vectors.to(dtype)
-    magnitudes, permutation = w.abs().sort(dim=-1, descending=True, stable=True)
+    # Support is invariant to a common positive scale. Normalize before the
+    # squared prefix objective so finite extreme/subnormal inputs cannot turn
+    # all gains into inf or zero and silently select the wrong support.
+    amplitude = w.abs().amax(-1, keepdim=True)
+    normalized = w / torch.where(amplitude > 0, amplitude, torch.ones_like(amplitude))
+    magnitudes, permutation = normalized.abs().sort(dim=-1, descending=True, stable=True)
     counts = torch.arange(1, w.shape[-1] + 1, device=w.device, dtype=dtype)
     sums = magnitudes.cumsum(-1)
     objective_gain = sums.square() / counts
     best = objective_gain.argmax(-1, keepdim=True)
     k = best + 1
-    scale = sums.gather(-1, best).squeeze(-1) / k.squeeze(-1)
+    scale = (sums.gather(-1, best).squeeze(-1) / k.squeeze(-1)) * amplitude.squeeze(-1)
     sorted_support = torch.arange(w.shape[-1], device=w.device) < k
     support = torch.zeros_like(sorted_support).scatter(-1, permutation, sorted_support)
     codes = (w.sign() * support).to(torch.int8)

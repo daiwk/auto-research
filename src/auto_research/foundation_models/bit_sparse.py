@@ -68,6 +68,9 @@ class _SparseActivationLinear(torch.autograd.Function):
         if (power not in (1, 2) or z.ndim != 2 or weight.ndim != 2 or
                 z.shape[-1] != weight.shape[-1] or z.device != weight.device or z.dtype != weight.dtype):
             raise ValueError("compatible 2D linear inputs and power 1/2 required")
+        if (not z.is_floating_point() or not bool(torch.isfinite(z).all()) or
+                not bool(torch.isfinite(weight).all())):
+            raise ValueError("finite floating inputs and weights required before sparsification")
         h = torch.where(z > 0, z, torch.zeros_like(z))
         packed = pack_activation(h, tile_size)
         ctx.save_for_backward(packed.mask_bytes, packed.values, packed.tile_prefix, weight)
