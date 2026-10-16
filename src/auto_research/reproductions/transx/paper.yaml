@@ -16,8 +16,8 @@
   ],
   "local_code": "src/auto_research/reproductions/transx",
   "documentation": "docs/reproductions/2607.28940-transx/README.md",
-  "fidelity": "core_mechanism",
-  "evaluation_tier": "l2_public_dataset",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
   "datasets": [
     "MovieLens 100K"
   ],
@@ -59,6 +59,7 @@
       "selection_exception": null
     },
     "omitted_core_components": [
+      "trainable behavioral encoder, learned memory pooler and candidate-conditioned network; the legacy adapter uses fixed NumPy scoring weights",
       "LinkedIn nearline Kafka pipeline",
       "distributed KV cache",
       "production candidate tower"

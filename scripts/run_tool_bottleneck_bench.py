@@ -20,6 +20,12 @@ def main():
                          f"--plan {args.plan} --rows {args.rows} --resamples {args.resamples} "
                          f"--seed {args.seed} --output {args.output}")
     result["manifest_ref"] = "agent-research:tool-bottleneck-bench"
+    result["dataset"] = {
+        "id": "ToolBottleneckBench/official-discovery-plan-and-scored-rows",
+        "revision": result["upstream_revision"],
+        "input_sha256": {row["file"]: row["sha256"] for row in result["inputs"]},
+        "split": "one released frozen discovery configuration; no new model run",
+    }
     result["seeds"] = [args.seed]
     result["evaluation_protocol"] = {
         "tier": "l0_interface", "seeds": [args.seed], "formal_comparison": False,

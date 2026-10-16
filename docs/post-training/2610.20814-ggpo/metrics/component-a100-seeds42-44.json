@@ -1,0 +1,247 @@
+{
+  "schema_version": 2,
+  "method": "ggpo",
+  "manifest_ref": "post-training:ggpo",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evolve_integrated": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "gutenberg:1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "byte_ranges": {
+      "train": [
+        0,
+        165516
+      ],
+      "validation": [
+        165516,
+        186205
+      ],
+      "test": [
+        186205,
+        206895
+      ]
+    },
+    "source_url": "https://www.gutenberg.org/ebooks/1524"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded operators/updates only, no paper benchmark or production lift"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.007353841587599194,
+      "std": 0.001023112636087675,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 4.944682916005452,
+      "std": 0.10589508104076427,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 4.944967428843181,
+      "std": 0.10596147330412573,
+      "n": 3
+    },
+    "final_test_nll": {
+      "mean": 4.910932381947835,
+      "std": 0.1199602603289933,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "parameter_delta_l2": 0.006309107653942426,
+      "baseline_validation_nll": 5.066959857940674,
+      "final_validation_nll": 5.067320823669434,
+      "final_test_nll": 5.049075603485107,
+      "generated_tokens": 128,
+      "natural_eos_rollouts": 0,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.07983069121837616,
+          "gradient_norm": 0.06349015980958939,
+          "retained_groups": 1,
+          "raw_gap": 0.2212332934141159,
+          "mean_length": 16.0,
+          "branch": "direct_autograd",
+          "reference_refreshed": false
+        },
+        {
+          "step": 1,
+          "loss": 0.2205917239189148,
+          "gradient_norm": 0.19672690331935883,
+          "retained_groups": 1,
+          "raw_gap": 0.6113216876983643,
+          "mean_length": 16.0,
+          "branch": "direct_autograd",
+          "reference_refreshed": true
+        }
+      ],
+      "reference_refreshes": 1,
+      "behavior_syncs": 1,
+      "behavior_is_reference": false,
+      "reward": "first sampled byte ID is even; verifier mechanism diagnostic, not text quality",
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 43,
+      "parameter_delta_l2": 0.007398549971314269,
+      "baseline_validation_nll": 4.883718490600586,
+      "final_validation_nll": 4.8840532302856445,
+      "final_test_nll": 4.850681304931641,
+      "generated_tokens": 119,
+      "natural_eos_rollouts": 1,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.15541179478168488,
+          "gradient_norm": 0.1105094850063324,
+          "retained_groups": 1,
+          "raw_gap": 0.43068981170654297,
+          "mean_length": 16.0,
+          "branch": "direct_autograd",
+          "reference_refreshed": false
+        },
+        {
+          "step": 1,
+          "loss": 0.2567116320133209,
+          "gradient_norm": 0.2200058102607727,
+          "retained_groups": 1,
+          "raw_gap": 0.6113767027854919,
+          "mean_length": 13.75,
+          "branch": "direct_autograd",
+          "reference_refreshed": true
+        }
+      ],
+      "reference_refreshes": 1,
+      "behavior_syncs": 1,
+      "behavior_is_reference": false,
+      "reward": "first sampled byte ID is even; verifier mechanism diagnostic, not text quality",
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 44,
+      "parameter_delta_l2": 0.008353867137540886,
+      "baseline_validation_nll": 4.883370399475098,
+      "final_validation_nll": 4.883528232574463,
+      "final_test_nll": 4.833040237426758,
+      "generated_tokens": 114,
+      "natural_eos_rollouts": 1,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.22061428427696228,
+          "gradient_norm": 0.24144324660301208,
+          "retained_groups": 1,
+          "raw_gap": 0.6113842129707336,
+          "mean_length": 16.0,
+          "branch": "direct_autograd",
+          "reference_refreshed": false
+        },
+        {
+          "step": 1,
+          "loss": 0.19888508319854736,
+          "gradient_norm": 0.1283433437347412,
+          "retained_groups": 1,
+          "raw_gap": 0.43059882521629333,
+          "mean_length": 12.5,
+          "branch": "direct_autograd",
+          "reference_refreshed": true
+        }
+      ],
+      "reference_refreshes": 1,
+      "behavior_syncs": 1,
+      "behavior_is_reference": false,
+      "reward": "first sampled byte ID is even; verifier mechanism diagnostic, not text quality",
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_policy_generation_and_parameter_change": true,
+    "teacher_self_generation_and_filtered_replay": false,
+    "frozen_teachers_unchanged": true,
+    "train_validation_test_bytes_separated": true,
+    "public_unlabeled_text_or_controlled_rule_reward_diagnostic": true,
+    "full_paper_benchmark": false,
+    "default_550_token_sif_training": false
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.20814-ggpo/metrics/component-a100-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/ggpo.py": "5c2870decb8446660f0f10391019f2b4c6f32213ef47e555163b7983cd4d4fbb",
+      "scripts/run_oct16_post_components.py": "d6c823f4b3f96984ae07b5d613b9d60eca0ac0e0f7a4dd2b4432d397e49c8995"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "command": [
+      "python",
+      "scripts/run_oct16_post_components.py",
+      "--corpus-path",
+      "public/hamlet.txt",
+      "--corpus-id",
+      "gutenberg:1524",
+      "--corpus-revision",
+      "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+      "--corpus-sha256",
+      "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+      "--device",
+      "cuda",
+      "--seeds",
+      "42,43,44",
+      "--output",
+      "runs/oct16-p0p1/post-training.json"
+    ],
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "dataset_fingerprint_scope": "public-corpus-bytes",
+    "raw_result_sha256": "5b2244ecbd0234e1245ff352b6600af585ff876b0e1f3b37f2118d346482c744",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

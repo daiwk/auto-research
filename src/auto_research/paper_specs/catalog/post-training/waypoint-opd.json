@@ -1,0 +1,31 @@
+{
+  "domain": "post-training",
+  "key": "waypoint-opd",
+  "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
+  "paper_url": "https://arxiv.org/abs/2610.21601v1",
+  "detail_path": "post-training/2610.21601-waypoint-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "后训练算法组件",
+    "WAYPOINT-OPD"
+  ],
+  "first_author": "Bingxi Hou",
+  "first_author_affiliation": "Alibaba Cloud Computing",
+  "published": "2026-10-15",
+  "published_at": "2026-10-15T09:47:19Z",
+  "code": "https://github.com/hhhbxloveai/WaypointOPD",
+  "code_status": "原作者公开仓库；未确认明确许可证，不vendor；从公式独立实现",
+  "adapter": null,
+  "local_operator": "auto_research.post_training.waypoint_opd.waypoint_ppo_loss",
+  "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods waypoint-opd --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/waypoint-opd-a100-20261016.json",
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "summary": "同一教师RL run有序三快照，在学生top-k上中心化early/late位移，以正cosine门、低范数回退、batch尺度校准和detached dense candidate credit执行dual-clipped PPO及sampled KL。微型byte-parity RL只是实际轨迹/梯度诊断，非数学代码能力证据。"
+}

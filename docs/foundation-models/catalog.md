@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| KV缓存 | [Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches](2610.21126-rope-relay/README.md) | National University of Defense Technology，2026-10-15 | 未找到已发布的方法仓库；原文附录A.1称将发布 | `rope-relay`：仅低成本组件，完整实验不复现 |
+| 字节级模型 | [Patch where the text is new: a compression view of where byte-level models should spend compute](2610.22100-novelty-patching/README.md) | Independent Researcher, Chile，2026-10-15 | [已开源](https://github.com/nicoveraz/segresearch) | `novelty-patching`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning](../reproductions/2610.20158-oob-regularization/README.md) | European Molecular Biology Laboratory (EMBL)，2026-10-14 | 未发现官方代码 | `oob-regularization`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon](../reproductions/2610.19844-smrc-pmrc/README.md) | Nanjing University / Alibaba Token Hub，2026-10-14 | 未发现官方代码 | `smrc-pmrc`：仅低成本组件，完整实验不复现 |
 | 多模态基础模型 | [One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models](2610.19375-jepa-prediction-planning/README.md) | 论文未列机构，2026-10-14 | 未发现官方代码 | `jepa-prediction-planning`：CPU 评测接口，不执行模型 |
@@ -25,6 +27,7 @@
 | 注意力与长上下文 | [Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers](../reproductions/2610.13735-orthros/README.md) | The Hong Kong Polytechnic University，2026-10-09 | 未发现官方代码 | `orthros` |
 | 推理与系统效率 | [ReplaySSM: Cache SSM Inputs, Not State](../reproductions/2610.13778-replayssm/README.md) | Princeton University，2026-10-09 | [已开源](https://github.com/Johnny-Liou/ReplaySSM) | `replayssm` |
 | 多模态基础模型 | [SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices](../reproductions/2610.13740-smolwam/README.md) | ML Collective，2026-10-09 | [已开源](https://github.com/iitimii/SmolWAM) | `smolwam` |
+| 连续推理 | [CoTS: Competitive Token Selection for Latent Reasoning in Large Language Models](2610.20642-cots/README.md) | Xiaomi AI Lab，2026-10-08 | [已开源](https://github.com/OkinoYu/CoTSReasoning) | `cots`：仅低成本组件，完整实验不复现 |
 | 生成模型 | [Few-Step Generation via Data-Space Iteration](2610.12102-data-space-iteration/README.md) | ByteDance Seed，2026-10-08 | [已开源](https://arxiv.org/html/2610.12102v1#A5) | `data-space-iteration` |
 | 多模态基础模型 | [LeWAM: End-to-End World and Action Modeling with JEPAs](../reproductions/2610.12818-lewam/README.md) | UC San Diego，2026-10-08 | [已开源](https://github.com/MinghaoFu/lewam) | `lewam` |
 | 训练优化与稳定性 | [Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization](2610.12444-adamw4bit/README.md) | University of California, Berkeley / Nubank，2026-10-08 | [已开源](https://github.com/nubank/adamw4bit) | `adamw4bit` |

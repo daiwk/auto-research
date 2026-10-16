@@ -1,0 +1,238 @@
+{
+  "schema_version": 2,
+  "method": "cce-opd",
+  "manifest_ref": "post-training:cce-opd",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evolve_integrated": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "gutenberg:1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "byte_ranges": {
+      "train": [
+        0,
+        165516
+      ],
+      "validation": [
+        165516,
+        186205
+      ],
+      "test": [
+        186205,
+        206895
+      ]
+    },
+    "source_url": "https://www.gutenberg.org/ebooks/1524"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded operators/updates only, no paper benchmark or production lift"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.02415196996943257,
+      "std": 0.0009732554047820106,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 4.944682916005452,
+      "std": 0.10589508104076427,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 4.938866933186849,
+      "std": 0.10608903464653835,
+      "n": 3
+    },
+    "final_test_nll": {
+      "mean": 4.904469966888428,
+      "std": 0.12066564219943418,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "parameter_delta_l2": 0.023107522152889144,
+      "baseline_validation_nll": 5.066959857940674,
+      "final_validation_nll": 5.061367988586426,
+      "final_test_nll": 5.043431282043457,
+      "generated_tokens": 118,
+      "natural_eos_rollouts": 1,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 2.1288182735443115,
+          "gradient_norm": 0.38509297370910645,
+          "opd_loss": 0.00843057781457901,
+          "auxiliary_loss": 2.1203877925872803,
+          "valid_tokens": 54,
+          "auxiliary_tokens": 54,
+          "max_union_size": 18
+        },
+        {
+          "step": 1,
+          "loss": 2.0842506885528564,
+          "gradient_norm": 0.3894962668418884,
+          "opd_loss": 0.00893508642911911,
+          "auxiliary_loss": 2.0753157138824463,
+          "valid_tokens": 64,
+          "auxiliary_tokens": 64,
+          "max_union_size": 18
+        }
+      ],
+      "condition_pair_source": "explicit controlled mathematical-premise fixture; removing evenness changes answer determinacy; no automatic semantic annotation",
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 43,
+      "parameter_delta_l2": 0.02503346070309406,
+      "baseline_validation_nll": 4.883718490600586,
+      "final_validation_nll": 4.877573490142822,
+      "final_test_nll": 4.8437933921813965,
+      "generated_tokens": 125,
+      "natural_eos_rollouts": 1,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 1.942016363143921,
+          "gradient_norm": 0.42634618282318115,
+          "opd_loss": -0.0198696106672287,
+          "auxiliary_loss": 1.961885929107666,
+          "valid_tokens": 64,
+          "auxiliary_tokens": 64,
+          "max_union_size": 17
+        },
+        {
+          "step": 1,
+          "loss": 2.006622314453125,
+          "gradient_norm": 0.4117753803730011,
+          "opd_loss": 0.03421466797590256,
+          "auxiliary_loss": 1.9724076986312866,
+          "valid_tokens": 61,
+          "auxiliary_tokens": 61,
+          "max_union_size": 17
+        }
+      ],
+      "condition_pair_source": "explicit controlled mathematical-premise fixture; removing evenness changes answer determinacy; no automatic semantic annotation",
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 44,
+      "parameter_delta_l2": 0.024314927052314507,
+      "baseline_validation_nll": 4.883370399475098,
+      "final_validation_nll": 4.877659320831299,
+      "final_test_nll": 4.82618522644043,
+      "generated_tokens": 108,
+      "natural_eos_rollouts": 2,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 2.0420289039611816,
+          "gradient_norm": 0.39848485589027405,
+          "opd_loss": 0.0008357500773854554,
+          "auxiliary_loss": 2.0411932468414307,
+          "valid_tokens": 59,
+          "auxiliary_tokens": 59,
+          "max_union_size": 17
+        },
+        {
+          "step": 1,
+          "loss": 1.9917939901351929,
+          "gradient_norm": 0.41653499007225037,
+          "opd_loss": -0.05967416614294052,
+          "auxiliary_loss": 2.0514681339263916,
+          "valid_tokens": 49,
+          "auxiliary_tokens": 49,
+          "max_union_size": 17
+        }
+      ],
+      "condition_pair_source": "explicit controlled mathematical-premise fixture; removing evenness changes answer determinacy; no automatic semantic annotation",
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_policy_generation_and_parameter_change": true,
+    "teacher_self_generation_and_filtered_replay": false,
+    "frozen_teachers_unchanged": true,
+    "train_validation_test_bytes_separated": true,
+    "public_unlabeled_text_or_controlled_rule_reward_diagnostic": true,
+    "full_paper_benchmark": false,
+    "default_550_token_sif_training": false
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.21195-cce-opd/metrics/component-a100-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/cce_opd.py": "263e67876ef532e9c4bb737918c8c4307b3bfc32b5eeca0c8d60a6a8e53920c6",
+      "scripts/run_oct16_post_components.py": "d6c823f4b3f96984ae07b5d613b9d60eca0ac0e0f7a4dd2b4432d397e49c8995"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "command": [
+      "python",
+      "scripts/run_oct16_post_components.py",
+      "--corpus-path",
+      "public/hamlet.txt",
+      "--corpus-id",
+      "gutenberg:1524",
+      "--corpus-revision",
+      "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+      "--corpus-sha256",
+      "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+      "--device",
+      "cuda",
+      "--seeds",
+      "42,43,44",
+      "--output",
+      "runs/oct16-p0p1/post-training.json"
+    ],
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "dataset_fingerprint_scope": "public-corpus-bytes",
+    "raw_result_sha256": "5b2244ecbd0234e1245ff352b6600af585ff876b0e1f3b37f2118d346482c744",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

@@ -1,0 +1,11 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.20814v1",
+  "source_url": "https://arxiv.org/html/2610.20814v1/figD_group_weight.svg",
+  "figure": "Figure 6",
+  "source_sha256": "37955d33e2a89e1d48eb21a88f1439f0ab89453e352a4012b48f050be76909c5",
+  "local_file": "paper-figure-01.png",
+  "local_sha256": "a43b3989fae2ffa4d54cafd0761fd434f294250d4fb075bd87f23167653353d1",
+  "processing": "rsvg-convert -w 1200; rasterization only, no content changes",
+  "attribution": "Copyright original authors; reproduced as a small attributed research illustration, not local experiment evidence",
+  "retrieved_date": "2026-10-16"
+}

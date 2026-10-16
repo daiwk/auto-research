@@ -1,0 +1,11 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.21601v1",
+  "source_url": "https://arxiv.org/html/2610.21601v1/waypoint_overview.svg",
+  "figure": "Figure 2",
+  "source_sha256": "8352b2507874a7e0e1ea1f16b1dca9fa790e5ccd5ff6ea890ed3561a05102198",
+  "local_file": "paper-figure-01.png",
+  "local_sha256": "1240dfa433185347fd85ba059954e42599b8a5b4bf77ecc6398a33df086c24b2",
+  "processing": "rsvg-convert -w 1200; rasterization only, no content changes",
+  "attribution": "Copyright original authors; reproduced as a small attributed research illustration, not local experiment evidence",
+  "retrieved_date": "2026-10-16"
+}

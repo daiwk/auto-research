@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "method": "novelty-patching",
+  "manifest_ref": "foundation-models:novelty-patching",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "measured_locally": true,
+  "evaluation_tier": "l1_mechanism",
+  "seeds": [],
+  "deterministic": true,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "claim_policy": "causal patch-table component only; no BLT training or capability comparison",
+    "seeds": []
+  },
+  "dataset": {
+    "id": "openai/grade-school-math",
+    "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+    "source_sha256": "6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3",
+    "split": "public official train; cached deterministic train partition",
+    "format": "question + newline + answer + newline, UTF-8",
+    "training_bytes": 262144,
+    "documents": 494,
+    "training_fingerprint": "5013c15d47f45f5995d01b099cce48f2844c16fa0487d68dcb94a42165658782",
+    "validation_used_for_threshold": false,
+    "test_read": false,
+    "checkpoint": null
+  },
+  "configuration": {
+    "window": 128,
+    "match_cap": 16,
+    "minimum_context_count": 20,
+    "target_patch_rate": 0.1,
+    "document_boundaries_reset_history": true,
+    "future_labels_online": false
+  },
+  "metrics": {
+    "training_patch_rate": 0.1002960205078125,
+    "target_rate_absolute_error": 0.00029602050781249445,
+    "threshold": -2.1822660098522166,
+    "global_mean_novelty": -2.9567642211914062,
+    "frequent_two_byte_contexts": 755,
+    "frequent_one_byte_contexts": 80,
+    "prefix_causal": true,
+    "calibration_rate_matches_execution": true
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.22100-novelty-patching/metrics/component-cpu.json",
+    "raw_result": "runs/oct16-foundation/novelty-cpu-frozen-781a8178.json",
+    "code_commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "implementation_sha256": "9659604a1f4fb8bb03523249a057e2367876590a04f2ad03b2d170219bb21b75",
+    "runner_sha256": "c6b023eaa90149f2643e7d8db83d16ca03145a5dc6192174bf2aa76f11f19bfc",
+    "source_url": "https://github.com/openai/grade-school-math/tree/3101c7d5072418e28b9008a6636bde82a006892c",
+    "command": "PYTHONPATH=src python scripts/run_oct16_foundation_components.py --papers novelty-patching --device cpu --seeds 42 --corpus-path .cache/oct12-public/gsm8k-holdout/train.jsonl --corpus-sha256 6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3 --corpus-id openai/grade-school-math --corpus-revision 3101c7d5072418e28b9008a6636bde82a006892c --corpus-format gsm8k-jsonl --corpus-max-bytes 262144 --output runs/oct16-foundation/novelty-cpu-frozen-781a8178.json",
+    "accelerator": "CPU",
+    "checkpoint": null,
+    "dataset_fingerprint": "5013c15d47f45f5995d01b099cce48f2844c16fa0487d68dcb94a42165658782"
+  },
+  "full_experiment": {
+    "status": "not_reproduced_high_cost",
+    "review_done": true
+  }
+}

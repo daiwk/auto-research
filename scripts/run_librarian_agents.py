@@ -18,6 +18,12 @@ def main():
     result["command"] = ("PYTHONPATH=src python scripts/run_librarian_agents.py --records "
                          f"{args.records} --resamples {args.resamples} --seed {args.seed} --output {args.output}")
     result["manifest_ref"] = "agent-research:librarian-agents"
+    result["dataset"] = {
+        "id": "LibrarianAgents/released-browsecomp-compact-records",
+        "revision": result["upstream_revision"],
+        "source_sha256": result["input_sha256"],
+        "split": "official 50-corpus compact records; no new builder/executor run",
+    }
     result["seeds"] = [args.seed]
     result["evaluation_protocol"] = {
         "tier": "l0_interface", "seeds": [args.seed], "formal_comparison": False,

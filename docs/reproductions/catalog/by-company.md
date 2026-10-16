@@ -121,6 +121,7 @@
 ## Google / YouTube
 - 2026-10 · [RPTune](../2610.00964-rptune/README.md)：用查询—商品联合打分裁剪目录，并把高优条目靠近提示词末端；没有量化线上 A/B，只作为学术/Evolve 机制诊断。
 - 2026-09 · [FLVM](../2609.32839-flvm/README.md)：将观看、参与和正负反馈分为三种潜在因子，以仅见混杂特征的基线隔离时长偏置，再用稀疏路由学习行为残差。
+- [Learned Cross-Task Relationships in Multi-Task Models](../../recommendation-components/2609.28776-cross-task-relationships/README.md)：在共享多任务网络中加入成对 cross-label 或缺失的无条件辅助头，显式估计联合概率与协方差。公开 KuaiRand 小切片对比原始边际头、真实联合标签和打乱联合标签控制；不混淆辅助训练收益与把新预测输入下游 RL 策略的生产收益。
 - 2026-09 · [Light Heads](../2609.25433-light-heads/README.md)：在共享排序塔上配置化注入无梯度浅头，并比较窗口重置和负迁移消融。
 - 2026-09 · [Google Music LLM Rationales](../2609.23877-music-rationales/README.md)：异步生成新艺人及理由，经公开目录和标签证据校验后在线从缓存读取；本地不具备原论文的私有评审和 A/B。
 - 2026-07 · [HA-MoE](../2607.27577-ha-moe/README.md)：依据内容异构性动态路由领域、转移、内容与新鲜度专家，在单一模型中统一开放网页排序。
@@ -132,6 +133,7 @@
 - 2026-05 · [Semantic-Native Long Sequence Modeling](../2606.07546-semantic-native-longseq/README.md)：以层级语义 ID、bigram、时间折叠和 global-local pooling 扩展视频长历史。
 - 2026-04 · [AgenticRecTune](../2604.26969-agentic-rec-tune/README.md)：以 Actor、Critic、Insight、Skill 和 Online agent 闭合推荐配置的多轮实验反馈。
 - 2026-03 · [Cross-domain KD](../2603.28994-cross-domain-kd/README.md)：把 YouTube 等源域 teacher 的知识蒸馏到目标域，实现面向音乐发现的零样本迁移。
+- [Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators](../../recommendation-components/2602.22647-static-constraint-decoding/README.md)：将合法 item-token 前缀树离线转换为 CSR 状态迁移，解码时用向量化候选抽取与早层 dense lookup 在设备内更新 beam。实现保留 log-softmax 后掩码和父 beam 状态重排；只验证有限公开 ID 约束，不把确定性 ID 编码称为学得的语义 ID，也不宣称线上收益。
 - 2026-02 · [Self-Evolving RecSys](../2602.10226-self-evolving-rec/README.md)：让 LLM Agent 根据历史实验提出、评估和迭代推荐策略，形成自动改进闭环。
 - 2025-10 · [PLUM](../2510.07784-plum/README.md)：对 LLM 进行推荐语料 CPT 与 SFT，并以 Semantic ID 生成物品序列。
 - 2023-05 · [TIGER](../2305.05065-tiger/README.md)：用 RQ-VAE 把物品量化为层级 Semantic ID，再通过自回归模型直接生成召回结果。

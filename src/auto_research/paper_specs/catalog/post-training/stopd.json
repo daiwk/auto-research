@@ -1,0 +1,32 @@
+{
+  "domain": "post-training",
+  "key": "stopd",
+  "title": "Does On-Policy Distillation Need to Complete Every Rollout?",
+  "paper_url": "https://arxiv.org/abs/2610.21337v1",
+  "detail_path": "post-training/2610.21337-stopd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "后训练算法组件",
+    "STOPD"
+  ],
+  "first_author": "Zhengxin Zhang",
+  "first_author_affiliation": "Cornell University",
+  "collaborating_organizations": ["Georgia Tech", "Alibaba Group"],
+  "published": "2026-10-15",
+  "published_at": "2026-10-15T06:22:08Z",
+  "code": null,
+  "code_status": "原文未找到或未确认已发布的方法代码仓库",
+  "adapter": null,
+  "local_operator": "auto_research.post_training.stopd.STOPDSchedule",
+  "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods stopd --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/stopd-a100-20261016.json",
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "summary": "生成前独立抽blockwise cutoff，保留自然EOS和每个retained token精确inclusion probability/IPW；先Vanilla warmup，再使用前一批weighted token-count normalizer。枚举anchors验证期望gradient sum并执行真实短策略更新，不把固定前缀截断当STOPD或声称16K训练加速。"
+}

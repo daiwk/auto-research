@@ -1,0 +1,120 @@
+{
+  "schema_version": 2,
+  "method": "rope-relay",
+  "manifest_ref": "foundation-models:rope-relay",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "measured_locally": true,
+  "evaluation_tier": "l1_mechanism",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "claim_policy": "synthetic fixed-cache phase/attention/gradient diagnostics; no model capability or service overhead evidence",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "dataset": {
+    "id": "synthetic-formula-tensors",
+    "revision": "oct16-component-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "configuration": {
+    "layers": 2,
+    "physical_kv_heads": 2,
+    "slots": 8,
+    "retained_counts": [
+      8,
+      6,
+      4,
+      2
+    ],
+    "key_dimension": 12,
+    "rotary_dimension": 8,
+    "amplitude": 1.3,
+    "question_length": 3
+  },
+  "metrics": {
+    "max_reference_absolute_error": {
+      "mean": 3.973642985026042e-07,
+      "std": 1.3765103082409519e-07,
+      "n": 3
+    },
+    "values_unchanged": true,
+    "nonrotary_tail_unchanged": true,
+    "heterogeneous_endpoints_aligned": true,
+    "query_and_answer_positions_synchronized": true,
+    "gradient_norm_keys": {
+      "mean": 0.20993147293726602,
+      "std": 0.11844432680806494,
+      "n": 3
+    },
+    "gradient_norm_values": {
+      "mean": 0.2719665914773941,
+      "std": 0.0668893738790301,
+      "n": 3
+    },
+    "gradient_norm_queries": {
+      "mean": 0.2520025571187337,
+      "std": 0.16201521894056567,
+      "n": 3
+    },
+    "unsynchronized_query_mean_logit_error": {
+      "mean": 5.900862216949463,
+      "std": 1.0084178871583511,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "max_reference_absolute_error": 4.76837158203125e-07,
+      "gradient_norm_keys": 0.34605732560157776,
+      "gradient_norm_values": 0.19504143297672272,
+      "gradient_norm_queries": 0.4390787184238434,
+      "unsynchronized_query_mean_logit_error": 4.736692905426025
+    },
+    {
+      "seed": 43,
+      "max_reference_absolute_error": 4.76837158203125e-07,
+      "gradient_norm_keys": 0.13040675222873688,
+      "gradient_norm_values": 0.31643569469451904,
+      "gradient_norm_queries": 0.1593664586544037,
+      "unsynchronized_query_mean_logit_error": 6.503899097442627
+    },
+    {
+      "seed": 44,
+      "max_reference_absolute_error": 2.384185791015625e-07,
+      "gradient_norm_keys": 0.15333034098148346,
+      "gradient_norm_values": 0.30442264676094055,
+      "gradient_norm_queries": 0.1575624942779541,
+      "unsynchronized_query_mean_logit_error": 6.461994647979736
+    }
+  ],
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.21126-rope-relay/metrics/component-cpu-seeds42-44.json",
+    "raw_result": "runs/oct16-foundation/components-cpu-source-export-seeds42-44.json",
+    "code_commit": "9c6e01ebd163df0da294875448c1e2c207b9a3b4",
+    "implementation_sha256": "6e585736b4aae1ada8d5b5fa185e22ba36b0109058adae15eaa0b40d6e06ba27",
+    "runner_sha256": "c6b023eaa90149f2643e7d8db83d16ca03145a5dc6192174bf2aa76f11f19bfc",
+    "command": "PYTHONPATH=src python scripts/run_oct16_foundation_components.py --papers novelty-patching,rope-relay,cots --device cpu --seeds 42,43,44 --corpus-path .cache/oct12-public/gsm8k-holdout/train.jsonl --corpus-sha256 6b8672439c8cf6f6b6e65bf5f0e515fbf4c497c9066eefb62a6a6a61ced158e3 --corpus-id openai/grade-school-math --corpus-revision 3101c7d5072418e28b9008a6636bde82a006892c --corpus-format gsm8k-jsonl --corpus-max-bytes 262144 --output runs/oct16-foundation/components-cpu-source-export-seeds42-44.json",
+    "accelerator": "CPU",
+    "checkpoint": null,
+    "dataset_fingerprint": "not recorded in historical artifact"
+  },
+  "full_experiment": {
+    "status": "not_reproduced_high_cost",
+    "review_done": true
+  }
+}

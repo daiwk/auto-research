@@ -52,6 +52,11 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+[两项 Google P0、十二项 P1 与 TransX 报告升级](docs/research-audits/oct16-components/README.md)
+提供约束解码、跨任务辅助头、精确多 cutoff memory、后训练目标和公共 Agent 评测接口。
+高成本完整实验标注“不复现（审查 DONE）”；本地小网络更新、算子诊断与官方结果复算分开呈现，
+不能将组件通过写成论文 benchmark 提升。旧 TransX 固定权重示例已纠正为 concept demo。
+
 [10 月 16 日八项 P1 组件与接口](docs/design/oct16-eight-p1.md)包含 OOB 全数据锚点正则、
 透明上下文压缩、FormCraft 类型组合库、散度路由 DrOPD、RAP-Walk 偏好信用、CTXGAP、
 Selective Reasoning 与 CLASHarness 评测接口。低成本算法实际执行、公开统计回放和接口

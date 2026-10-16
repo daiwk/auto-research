@@ -1,0 +1,136 @@
+{
+  "schema_version": 2,
+  "method": "cots",
+  "manifest_ref": "foundation-models:cots",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evolve_integrated": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "synthetic-formula-tensors",
+    "revision": "oct16-component-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded operators/updates only, no paper benchmark or production lift"
+  },
+  "metrics": {
+    "minimum_discrete_anchor_weight": {
+      "mean": 0.5324105421702067,
+      "std": 0.022785981975740062,
+      "n": 3
+    },
+    "alpha_minimum": {
+      "mean": 0.31164535880088806,
+      "std": 0.04150018981659857,
+      "n": 3
+    },
+    "alpha_maximum": {
+      "mean": 0.4887079397837321,
+      "std": 0.01428960057764422,
+      "n": 3
+    },
+    "maximum_half_drift_bound_excess": {
+      "mean": -0.034519314765930176,
+      "std": 0.04141086598831684,
+      "n": 3
+    },
+    "phase_lock_and_protection_correct": true,
+    "gradient_norm_logits": {
+      "mean": 0.12351024150848389,
+      "std": 0.01545624323435919,
+      "n": 3
+    },
+    "gradient_norm_embeddings": {
+      "mean": 0.088917076587677,
+      "std": 0.0111905063120557,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "minimum_discrete_anchor_weight": 0.5277365446090698,
+        "alpha_minimum": 0.33271926641464233,
+        "alpha_maximum": 0.4722634255886078,
+        "maximum_half_drift_bound_excess": -0.08204495906829834,
+        "phase_lock_and_protection_correct": true,
+        "gradient_norm_logits": 0.10835126787424088,
+        "gradient_norm_embeddings": 0.08312363177537918
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "minimum_discrete_anchor_weight": 0.557171106338501,
+        "alpha_minimum": 0.26383665204048157,
+        "alpha_maximum": 0.4957571029663086,
+        "maximum_half_drift_bound_excess": -0.015322089195251465,
+        "phase_lock_and_protection_correct": true,
+        "gradient_norm_logits": 0.12293193489313126,
+        "gradient_norm_embeddings": 0.10181652009487152
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "minimum_discrete_anchor_weight": 0.5123239755630493,
+        "alpha_minimum": 0.3383801579475403,
+        "alpha_maximum": 0.4981032907962799,
+        "maximum_half_drift_bound_excess": -0.006190896034240723,
+        "phase_lock_and_protection_correct": true,
+        "gradient_norm_logits": 0.13924752175807953,
+        "gradient_norm_embeddings": 0.0818110778927803
+      }
+    }
+  ],
+  "execution_checks": {
+    "real_cuda_formula_and_gradient_diagnostic": true,
+    "model_capability_evaluated": false
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.20642-cots/metrics/component-a100-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/cots.py": "9fef88e9e0c66abf05ed7cde3e30361cf9df50aad4bbfea505bad7f6e3466665",
+      "scripts/run_oct16_foundation_components.py": "c6b023eaa90149f2643e7d8db83d16ca03145a5dc6192174bf2aa76f11f19bfc"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "command": [
+      "python",
+      "scripts/run_oct16_foundation_components.py",
+      "--papers",
+      "rope-relay,cots",
+      "--device",
+      "cuda",
+      "--seeds",
+      "42,43,44",
+      "--code-commit",
+      "781a8178f12069c5c3691093b5f3ba79a48b5322",
+      "--output",
+      "runs/oct16-p0p1/foundation.json"
+    ],
+    "dataset_fingerprint": "cots:synthetic-formula-tensors@oct16-component-v1;seeds=42,43,44",
+    "dataset_fingerprint_scope": "seeded-fixture-protocol-id-not-tensor-byte-hash",
+    "raw_result_sha256": "2f6a2f254b6cbc4a11d074b979eac42305ee17b0a061e251f652b8f598fa504c",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

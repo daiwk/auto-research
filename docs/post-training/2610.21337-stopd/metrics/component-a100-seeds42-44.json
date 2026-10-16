@@ -1,0 +1,271 @@
+{
+  "schema_version": 2,
+  "method": "stopd",
+  "manifest_ref": "post-training:stopd",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evolve_integrated": false,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "gutenberg:1524",
+    "revision": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "source_sha256": "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "byte_ranges": {
+      "train": [
+        0,
+        165516
+      ],
+      "validation": [
+        165516,
+        186205
+      ],
+      "test": [
+        186205,
+        206895
+      ]
+    },
+    "source_url": "https://www.gutenberg.org/ebooks/1524"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded operators/updates only, no paper benchmark or production lift"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.0010912320384798958,
+      "std": 0.0003180310180236236,
+      "n": 3
+    },
+    "baseline_validation_nll": {
+      "mean": 4.944682916005452,
+      "std": 0.10589508104076427,
+      "n": 3
+    },
+    "final_validation_nll": {
+      "mean": 4.944408257802327,
+      "std": 0.1059551343267163,
+      "n": 3
+    },
+    "final_test_nll": {
+      "mean": 4.910389105478923,
+      "std": 0.11990731415122945,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "parameter_delta_l2": 0.0008752026983351706,
+      "baseline_validation_nll": 5.066959857940674,
+      "final_validation_nll": 5.066754341125488,
+      "final_test_nll": 5.048463821411133,
+      "generated_tokens": 84,
+      "natural_eos_rollouts": 2,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.009624919854104519,
+          "gradient_norm": 0.016188664361834526,
+          "warmup": true,
+          "denominator": 56.0,
+          "weighted_count_for_next_batch": 56.0,
+          "retained_tokens": 56,
+          "cutoffs": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "normalizer_source": "current_exact_warmup"
+        },
+        {
+          "step": 1,
+          "loss": 0.00864412635564804,
+          "gradient_norm": 0.014629954472184181,
+          "warmup": false,
+          "denominator": 56.0,
+          "weighted_count_for_next_batch": 34.666666666666664,
+          "retained_tokens": 28,
+          "cutoffs": [
+            8,
+            4,
+            16,
+            4
+          ],
+          "normalizer_source": "previous_batch"
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 43,
+      "parameter_delta_l2": 0.0009420654075744886,
+      "baseline_validation_nll": 4.883718490600586,
+      "final_validation_nll": 4.883494853973389,
+      "final_test_nll": 4.850256443023682,
+      "generated_tokens": 92,
+      "natural_eos_rollouts": 0,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.013288612477481365,
+          "gradient_norm": 0.019290529191493988,
+          "warmup": true,
+          "denominator": 64.0,
+          "weighted_count_for_next_batch": 64.0,
+          "retained_tokens": 64,
+          "cutoffs": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "normalizer_source": "current_exact_warmup"
+        },
+        {
+          "step": 1,
+          "loss": 0.008870644494891167,
+          "gradient_norm": 0.012996744364500046,
+          "warmup": false,
+          "denominator": 64.0,
+          "weighted_count_for_next_batch": 34.666666666666664,
+          "retained_tokens": 28,
+          "cutoffs": [
+            12,
+            4,
+            4,
+            8
+          ],
+          "normalizer_source": "previous_batch"
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "seed": 44,
+      "parameter_delta_l2": 0.0014564280095300285,
+      "baseline_validation_nll": 4.883370399475098,
+      "final_validation_nll": 4.8829755783081055,
+      "final_test_nll": 4.832447052001953,
+      "generated_tokens": 104,
+      "natural_eos_rollouts": 0,
+      "rejected_diagnostic_groups": 0,
+      "history": [
+        {
+          "step": 0,
+          "loss": 0.02005423791706562,
+          "gradient_norm": 0.028641842305660248,
+          "warmup": true,
+          "denominator": 64.0,
+          "weighted_count_for_next_batch": 64.0,
+          "retained_tokens": 64,
+          "cutoffs": [
+            16,
+            16,
+            16,
+            16
+          ],
+          "normalizer_source": "current_exact_warmup"
+        },
+        {
+          "step": 1,
+          "loss": 0.01452748104929924,
+          "gradient_norm": 0.02225182019174099,
+          "warmup": false,
+          "denominator": 64.0,
+          "weighted_count_for_next_batch": 53.33333333333333,
+          "retained_tokens": 40,
+          "cutoffs": [
+            12,
+            8,
+            12,
+            8
+          ],
+          "normalizer_source": "previous_batch"
+        }
+      ],
+      "frozen_teacher_parameter_deltas_l2": [
+        0.0,
+        0.0
+      ],
+      "frozen_rl_snapshot_parameter_deltas_l2": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_policy_generation_and_parameter_change": true,
+    "teacher_self_generation_and_filtered_replay": false,
+    "frozen_teachers_unchanged": true,
+    "train_validation_test_bytes_separated": true,
+    "public_unlabeled_text_or_controlled_rule_reward_diagnostic": true,
+    "full_paper_benchmark": false,
+    "default_550_token_sif_training": false
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.21337-stopd/metrics/component-a100-seeds42-44.json",
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/stopd.py": "2e43cde3fed4acca52e4c3b0066728ba650f2eeb4f28eec92d53f91f56cea134",
+      "scripts/run_oct16_post_components.py": "d6c823f4b3f96984ae07b5d613b9d60eca0ac0e0f7a4dd2b4432d397e49c8995"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "command": [
+      "python",
+      "scripts/run_oct16_post_components.py",
+      "--corpus-path",
+      "public/hamlet.txt",
+      "--corpus-id",
+      "gutenberg:1524",
+      "--corpus-revision",
+      "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+      "--corpus-sha256",
+      "31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+      "--device",
+      "cuda",
+      "--seeds",
+      "42,43,44",
+      "--output",
+      "runs/oct16-p0p1/post-training.json"
+    ],
+    "dataset_fingerprint": "sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784",
+    "dataset_fingerprint_scope": "public-corpus-bytes",
+    "raw_result_sha256": "5b2244ecbd0234e1245ff352b6600af585ff876b0e1f3b37f2118d346482c744",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

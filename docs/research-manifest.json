@@ -1599,6 +1599,37 @@
     },
     {
       "domain": "agent-research",
+      "key": "librarian-agents",
+      "title": "Librarian Agents: Training LLMs to Curate Long-Context Workspaces that Anticipate Future Queries",
+      "paper_url": "https://arxiv.org/abs/2610.22273",
+      "detail_path": "agent-research/2610.22273-librarian-agents/README.md",
+      "topic": [
+        "公共评测与协议",
+        "层级记忆与预见式工作区"
+      ],
+      "first_author": "Anikait Singh / Teresa Zhang / Yoonho Lee（共同一作）",
+      "first_author_affiliation": "Stanford University",
+      "published": "2026-10-15",
+      "published_timestamp_utc": "2026-10-15T17:35:17Z",
+      "code": "https://github.com/teresaz05/librarian-agents",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.agent_research.librarian_agents.recompute_records",
+      "local_command": "PYTHONPATH=src python scripts/run_librarian_agents.py --records docs/agent-research/2610.22273-librarian-agents/validation/upstream/browsecomp_per_corpus.jsonl --resamples 10000 --seed 19105 --output runs/librarian-agents/official-reuse-cpu.json",
+      "upstream_revision": "455ac88c81c639c10a8404464dabf71a7fbb563e",
+      "upstream_license": "MIT (code); CC-BY-4.0 (results/artifacts, paper A.11)",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "RL builder在看不到后续问题时组织层级文件系统，answerer沿provenance回退原文。本地提供真实文件系统合同并复算50 corpus/443题官方记录、配对聚类bootstrap及质量归一成本曲线；没有训练builder或调用模型。",
+      "fidelity_note": "仅文件系统/公开评测接口；拼接executor仅单测fixture，不替代RL。Qwen3.5-4B builder、35B-A3B executor、680 tasks和60k-token轨迹的完整训练/服务链路成本过高不复现（审查DONE），不以历史得分宣称新能力。"
+    },
+    {
+      "domain": "agent-research",
       "key": "loongreflect",
       "title": "LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation",
       "paper_url": "https://arxiv.org/abs/2608.11967",
@@ -2708,6 +2739,37 @@
     },
     {
       "domain": "agent-research",
+      "key": "scipivot",
+      "title": "SciPIvot: Benchmarking Principal-Investigator Judgment at Pivotal Moments of Scientific AutoResearch Agents",
+      "paper_url": "https://arxiv.org/abs/2610.21082",
+      "detail_path": "agent-research/2610.21082-scipivot/README.md",
+      "topic": [
+        "公共评测与协议",
+        "科学研究判断与纠偏"
+      ],
+      "first_author": "Youran Sun / Xingyu Ren（共同一作）",
+      "first_author_affiliation": "University of Maryland, College Park / The Chinese University of Hong Kong（PDF上标已核）",
+      "published": "2026-10-15",
+      "published_timestamp_utc": "2026-10-15T01:34:44Z",
+      "code": "https://github.com/AutoResearch-Factory/SciPIvot",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.agent_research.scipivot.audit_release",
+      "local_command": "PYTHONPATH=src python scripts/run_scipivot.py audit --questions docs/agent-research/2610.21082-scipivot/validation/upstream/questions.json --aggregates docs/agent-research/2610.21082-scipivot/validation/upstream/all_model_scores.csv --output runs/scipivot/official-options-audit-cpu.json",
+      "upstream_revision": "94a47d391893ea392fd9bb9883a65d2c8834e6f2",
+      "upstream_license": "CC-BY-4.0",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "248个真实人类研究纠偏case比较原Agent方案与纠正方案。本地仅已发布options-only：public/grader分离导出、双顺序完整失败分母、strict choice grader和case等权bootstrap；审计官方60行aggregate算术，不伪造逐题模型分数。",
+      "fidelity_note": "完整项目历史尚未发布，不提供project或reconsideration替身。本轮零API；五前沿模型×12条件×双顺序和人工baseline成本过高不复现（审查DONE），不将选择准确率解释为项目成功率。"
+    },
+    {
+      "domain": "agent-research",
       "key": "search-r1",
       "title": "Search-R1",
       "paper_url": "https://arxiv.org/abs/2503.09516",
@@ -3169,6 +3231,37 @@
       "published": "2026-07-30",
       "code": "未发现官方代码",
       "adapter": "tapo"
+    },
+    {
+      "domain": "agent-research",
+      "key": "tool-bottleneck-bench",
+      "title": "ToolBottleneckBench: Measuring Tool-Agent Performance under Controlled Pressures and Fixed Harness Budgets",
+      "paper_url": "https://arxiv.org/abs/2610.21098",
+      "detail_path": "agent-research/2610.21098-tool-bottleneck-bench/README.md",
+      "topic": [
+        "公共评测与协议",
+        "工具 Agent 与 harness 预算"
+      ],
+      "first_author": "Zichuan Xu",
+      "first_author_affiliation": "University of Osaka",
+      "published": "2026-10-15",
+      "published_timestamp_utc": "2026-10-15T01:59:58Z",
+      "code": "https://github.com/zichuanxu/tool-bottleneck-bench",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.agent_research.tool_bottleneck_bench.audit_discovery",
+      "local_command": "PYTHONPATH=src python scripts/run_tool_bottleneck_bench.py --plan docs/agent-research/2610.21098-tool-bottleneck-bench/validation/upstream/gemini-36-flash-primary-discovery.json --rows docs/agent-research/2610.21098-tool-bottleneck-bench/validation/upstream/gemini-36-flash-primary-discovery.jsonl --output runs/tool-bottleneck-bench/official-discovery-cpu.json",
+      "upstream_revision": "6f7fe7157c702c5c10937080f15bb3d48ce73d69",
+      "upstream_license": "MIT",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "固定任务语义，控制目录、菜单、工作流与返回状态四类压力；九义务与终止原因分别记录。本地实现有限只读任务compiler/状态sandbox/exact grader，复算官方单配置216条Discovery计划并保留工具不可用和失踪失败；不声称新Agent能力。",
+      "fidelity_note": "公共评测协议接口；非官方全36-family compiler，未实现请求写操作、原模型及全量retriever。原21配置26,576条件托管采集约$768.38，成本过高不复现（审查DONE），无evolve执行集成。"
     },
     {
       "domain": "agent-research",
@@ -4311,6 +4404,39 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "cots",
+      "title": "CoTS: Competitive Token Selection for Latent Reasoning in Large Language Models",
+      "paper_url": "https://arxiv.org/abs/2610.20642",
+      "detail_path": "foundation-models/2610.20642-cots/README.md",
+      "topic": [
+        "连续推理",
+        "概率竞争与离散锚点"
+      ],
+      "first_author": "Jie Yu",
+      "first_author_affiliation": "Xiaomi AI Lab",
+      "first_author_additional_affiliations": [
+        "Nanyang Technological University"
+      ],
+      "published": "2026-10-08",
+      "published_at": "2026-10-08T02:47:16Z",
+      "code": "https://github.com/OkinoYu/CoTSReasoning",
+      "code_license": "未识别明确许可证；公式独立实现，未vendor",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.cots.competitive_token_selection",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_foundation_components.py --papers cots --device cpu --seeds 42,43,44 --output <new-result.json>",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/cots-a100-20261016.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "从top2竞争计算soft权重，与top-k概率embedding及sampled-token离散锚点凸混合；结束推理当步锁定离散输出并支持格式保护和EOS状态。真实Torch梯度与机制诊断不是LLM推理能力证据；4B/9B/12B多基准8卡原研究成本过高，不复现（审查DONE）。"
     },
     {
       "domain": "foundation-models",
@@ -6858,6 +6984,35 @@
     },
     {
       "domain": "foundation-models",
+      "key": "novelty-patching",
+      "title": "Patch where the text is new: a compression view of where byte-level models should spend compute",
+      "paper_url": "https://arxiv.org/abs/2610.22100",
+      "detail_path": "foundation-models/2610.22100-novelty-patching/README.md",
+      "topic": [
+        "字节级模型",
+        "因果patch边界"
+      ],
+      "first_author": "Nicolás Vera Zúñiga",
+      "first_author_affiliation": "Independent Researcher, Chile",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T15:47:08Z",
+      "code": "https://github.com/nicoveraz/segresearch",
+      "code_license": "MIT",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.novelty_patching.fit_novelty_table",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_foundation_components.py --papers novelty-patching --device cpu --corpus-path <public-train> --corpus-sha256 <sha256> --corpus-id <id> --corpus-revision <revision> --output <new-result.json>",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "独立实现128-byte历史/16-byte匹配训练标签、两字节均值与低频回退，仅在公开训练字节上校阈值；在线只看过去字节。本地表拟合和因果诊断不是BLT训练或数学能力复现；完整1.9GB多模型多规则研究成本过高，不复现（审查DONE）。"
+    },
+    {
+      "domain": "foundation-models",
       "key": "oal",
       "title": "Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels",
       "paper_url": "https://arxiv.org/abs/2610.13674",
@@ -8127,6 +8282,35 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "rope-relay",
+      "title": "Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches",
+      "paper_url": "https://arxiv.org/abs/2610.21126",
+      "detail_path": "foundation-models/2610.21126-rope-relay/README.md",
+      "topic": [
+        "KV缓存",
+        "旋转位置重建"
+      ],
+      "first_author": "Wanyang Hong",
+      "first_author_affiliation": "National University of Defense Technology",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T02:30:27Z",
+      "code": "未找到已发布的方法仓库；原文附录A.1称将发布",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.rope_relay.relay_cache",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_foundation_components.py --papers rope-relay --device cpu --seeds 42,43,44 --output <new-result.json>",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/rope-relay-a100-20261016.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "固定selector输出，按时间稳定排序并将异长head右端点对齐，scaled/partial RoPE逆旋转和重旋转只改变K，V数值不变；问题及后续答案使用共同新坐标。Torch数值与真梯度诊断不是7B/8B长记忆能力或服务开销复现；完整多臂研究成本过高，不复现（审查DONE）。"
     },
     {
       "domain": "foundation-models",
@@ -9933,6 +10117,41 @@
     },
     {
       "domain": "post-training",
+      "key": "cce-opd",
+      "title": "Condition-Contrastive Extrapolation for On-Policy Distillation of Language Models",
+      "paper_url": "https://arxiv.org/abs/2610.21195v1",
+      "detail_path": "post-training/2610.21195-cce-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "后训练算法组件",
+        "CCE-OPD"
+      ],
+      "first_author": "Wenxuan Luo",
+      "first_author_affiliation": "The Chinese University of Hong Kong, Shenzhen",
+      "collaborating_organizations": [
+        "FNii-Shenzhen",
+        "ByteDance"
+      ],
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T03:55:34Z",
+      "code": null,
+      "code_status": "原文未找到或未确认已发布的方法代码仓库",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.cce_opd.cce_ppo_loss",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods cce-opd --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/cce-opd-a100-20261016.json",
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "同一学生prefix的完整/合法条件遮罩双教师view、top16去重union、clipped log contrast与full-vocabulary entropy门；辅助target仅support归一而student保留全词表，分母所有有效token，并合并原sampled PPO-OPD。仅提供外部reviewed span接口和数学前提fixture诊断，不伪造语义抽取或商业标注复现。"
+    },
+    {
+      "domain": "post-training",
       "key": "chord",
       "title": "CHORD",
       "paper_url": "https://arxiv.org/abs/2508.11408",
@@ -10487,6 +10706,37 @@
       "published": "2026-08-12",
       "code": "https://github.com/Icarus1411/GCPO",
       "adapter": "gcpo"
+    },
+    {
+      "domain": "post-training",
+      "key": "ggpo",
+      "title": "Gibbs-Gap Policy Optimization for Off-Policy RL with Verifiable Rewards",
+      "paper_url": "https://arxiv.org/abs/2610.20814v1",
+      "detail_path": "post-training/2610.20814-ggpo/README.md",
+      "topic": [
+        "离策略推理 RL",
+        "后训练算法组件",
+        "GGPO"
+      ],
+      "first_author": "Xuanchang Zhang",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign",
+      "published": "2026-10-14",
+      "published_at": "2026-10-14T18:59:29Z",
+      "code": "https://github.com/thunderous77/GGPO",
+      "code_status": "原作者公开Apache-2.0仓库；本地按公式独立实现",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.ggpo.ggpo_loss",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods ggpo --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/ggpo-a100-20261016.json",
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "KL-adjusted reward稳定log-mean-exp gap的直接autograd，严格分开冻结behavior/reference和周期reference refresh；可选clipped detached-coefficient surrogate单独提供，饱和token保留score gradient。本地真实小策略用规则verifier诊断，不声称数学能力或完整4GH200训练复现。"
     },
     {
       "domain": "post-training",
@@ -12403,6 +12653,44 @@
     },
     {
       "domain": "post-training",
+      "key": "sif",
+      "title": "Learning to Reason with Selective Internal Feedback",
+      "paper_url": "https://arxiv.org/abs/2610.21392v1",
+      "detail_path": "post-training/2610.21392-sif/README.md",
+      "topic": [
+        "自置信轨迹过滤",
+        "Self-certainty",
+        "选择性策略更新"
+      ],
+      "first_author": "Xun Lu",
+      "first_author_affiliation": "Institute of Automation, Chinese Academy of Sciences",
+      "first_author_affiliation_source": "https://arxiv.org/pdf/2610.21392v1#page=1",
+      "first_author_additional_affiliations": [
+        "University of Chinese Academy of Sciences"
+      ],
+      "collaborating_organizations": [
+        "Pengcheng Laboratory"
+      ],
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T07:08:46Z",
+      "code": null,
+      "code_status": "原文未找到或未确认已发布的方法代码仓库",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.sif.sif_ppo_loss",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods sif --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/sif-a100-20261016.json",
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "默认550token资格、降序self-certainty的10×100窗口、8窗胜/3⁄4peer双投票、同reward组过滤、sample-std group normalization及policy和KL双mask。短在线策略仅以显式缩窗diagnostic更新，同时记录原文默认资格拒绝；不以confidence当正确率或宣称多A100完整训练复现。"
+    },
+    {
+      "domain": "post-training",
       "key": "simpo",
       "title": "SimPO",
       "paper_url": "https://arxiv.org/abs/2405.14734",
@@ -12779,6 +13067,41 @@
     },
     {
       "domain": "post-training",
+      "key": "stopd",
+      "title": "Does On-Policy Distillation Need to Complete Every Rollout?",
+      "paper_url": "https://arxiv.org/abs/2610.21337v1",
+      "detail_path": "post-training/2610.21337-stopd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "后训练算法组件",
+        "STOPD"
+      ],
+      "first_author": "Zhengxin Zhang",
+      "first_author_affiliation": "Cornell University",
+      "collaborating_organizations": [
+        "Georgia Tech",
+        "Alibaba Group"
+      ],
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T06:22:08Z",
+      "code": null,
+      "code_status": "原文未找到或未确认已发布的方法代码仓库",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.stopd.STOPDSchedule",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods stopd --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/stopd-a100-20261016.json",
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "生成前独立抽blockwise cutoff，保留自然EOS和每个retained token精确inclusion probability/IPW；先Vanilla warmup，再使用前一批weighted token-count normalizer。枚举anchors验证期望gradient sum并执行真实短策略更新，不把固定前缀截断当STOPD或声称16K训练加速。"
+    },
+    {
+      "domain": "post-training",
       "key": "stride-opd",
       "title": "Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation",
       "paper_url": "https://arxiv.org/abs/2609.14636",
@@ -12974,6 +13297,41 @@
       "published": "2026-07-22",
       "code": "未发现官方代码",
       "adapter": "tcr"
+    },
+    {
+      "domain": "post-training",
+      "key": "tf-opd",
+      "title": "Training-Free On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.22236v1",
+      "detail_path": "post-training/2610.22236-tf-opd/README.md",
+      "topic": [
+        "多教师能力整合",
+        "后训练算法组件",
+        "TF-OPD"
+      ],
+      "first_author": "Bangji Yang",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign",
+      "first_author_affiliation_source": "https://arxiv.org/pdf/2610.22236v1#page=1",
+      "collaborating_organizations": [
+        "Tsinghua University"
+      ],
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T17:15:01Z",
+      "code": null,
+      "code_status": "原文未找到或未确认已发布的方法代码仓库",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.tf_opd.fuse_models",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods tf-opd --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/tf-opd-a100-20261016.json",
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "教师真实自生成、终止/DEFLATE循环筛选后回读的逐线性层token-normalized Gram，保留off-diagonal shrink、float64 solve和update unreproduced-share；本地为同base微型SFT教师的闭式融合诊断，不是7B RL专家/数学代码完整复现。"
     },
     {
       "domain": "post-training",
@@ -13240,6 +13598,37 @@
       "published": "2026-08-27",
       "code": null,
       "adapter": "video-opsd"
+    },
+    {
+      "domain": "post-training",
+      "key": "waypoint-opd",
+      "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.21601v1",
+      "detail_path": "post-training/2610.21601-waypoint-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "后训练算法组件",
+        "WAYPOINT-OPD"
+      ],
+      "first_author": "Bingxi Hou",
+      "first_author_affiliation": "Alibaba Cloud Computing",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T09:47:19Z",
+      "code": "https://github.com/hhhbxloveai/WaypointOPD",
+      "code_status": "原作者公开仓库；未确认明确许可证，不vendor；从公式独立实现",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.waypoint_opd.waypoint_ppo_loss",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods waypoint-opd --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/waypoint-opd-a100-20261016.json",
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "同一教师RL run有序三快照，在学生top-k上中心化early/late位移，以正cosine门、低范数回退、batch尺度校准和detached dense candidate credit执行dual-clipped PPO及sampled KL。微型byte-parity RL只是实际轨迹/梯度诊断，非数学代码能力证据。"
     },
     {
       "domain": "post-training",
@@ -16406,6 +16795,51 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "recommendation",
+      "key": "cross-task-relationships",
+      "title": "Learned Cross-Task Relationships in Multi-Task Models",
+      "paper_url": "https://arxiv.org/abs/2609.28776",
+      "detail_path": "recommendation-components/2609.28776-cross-task-relationships/README.md",
+      "topic": [
+        "多目标与多任务学习",
+        "联合标签与辅助头"
+      ],
+      "first_author": "Victor Zhang",
+      "first_author_affiliation": "Google",
+      "published": "2026-09-23",
+      "code": null,
+      "code_status": "原文未给出专属原作者方法仓库",
+      "adapter": null,
+      "priority": "P0",
+      "browse_company": "Google / YouTube",
+      "browse_topic": [
+        "训练目标与决策优化",
+        "多任务与联合标签"
+      ],
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.reproductions.cross_task_relationships.model.auxiliary_loss",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_recommendation_components.py --csv public/kuairand-prefix.csv --device cuda --seeds 42,43,44 --output runs/oct16-recommendation.json",
+      "evaluation_tier": "l2_public_dataset",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/cross-task-relationships-a100-20261016.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "online_ab": [
+        {
+          "product": "YouTube Watch Next",
+          "metric": "Valued Watch Time",
+          "lift_percent": 0.19,
+          "traffic": "production live A/B with tens of millions of users per arm",
+          "source_url": "https://arxiv.org/html/2609.28776v1",
+          "source_location": "Section 6 / Table 2",
+          "significance": "95% CI [0.15%, 0.23%]"
+        }
+      ],
+      "summary": "在共享多任务网络中加入成对 cross-label 或缺失的无条件辅助头，显式估计联合概率与协方差。公开 KuaiRand 小切片对比原始边际头、真实联合标签和打乱联合标签控制；不混淆辅助训练收益与把新预测输入下游 RL 策略的生产收益。"
     },
     {
       "domain": "recommendation",
@@ -33016,6 +33450,50 @@
     },
     {
       "domain": "recommendation",
+      "key": "static-constraint-decoding",
+      "title": "Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators",
+      "paper_url": "https://arxiv.org/abs/2602.22647",
+      "detail_path": "recommendation-components/2602.22647-static-constraint-decoding/README.md",
+      "topic": [
+        "生成式推荐",
+        "约束解码与服务效率"
+      ],
+      "first_author": "Zhengyang Su",
+      "first_author_affiliation": "Google",
+      "published": "2026-02-26",
+      "code": "https://github.com/youtube/static-constraint-decoding",
+      "upstream_revision": "ac18fa1870ac45e0a3559090a0ea9ec005226cf5",
+      "adapter": null,
+      "priority": "P0",
+      "browse_company": "Google / YouTube",
+      "browse_topic": [
+        "Serving 与研究基础设施",
+        "Serving / efficiency"
+      ],
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.reproductions.static_constraint_decoding.algorithm.beam_step",
+      "local_command": "PYTHONPATH=src python scripts/run_oct16_recommendation_components.py --csv public/kuairand-prefix.csv --device cuda --seeds 42,43,44 --output runs/oct16-recommendation.json",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/static-constraint-decoding-a100-20261016.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "online_ab": [
+        {
+          "product": "YouTube short-form Home Feed",
+          "metric": "CTR",
+          "lift_percent": 0.15,
+          "traffic": "production online A/B",
+          "source_url": "https://arxiv.org/html/2602.22647v3",
+          "source_location": "Section 5.4 / Table 2"
+        }
+      ],
+      "summary": "将合法 item-token 前缀树离线转换为 CSR 状态迁移，解码时用向量化候选抽取与早层 dense lookup 在设备内更新 beam。实现保留 log-softmax 后掩码和父 beam 状态重排；只验证有限公开 ID 约束，不把确定性 ID 编码称为学得的语义 ID，也不宣称线上收益。"
+    },
+    {
+      "domain": "recommendation",
       "key": "steps",
       "title": "A Self-Triggered Agentic Push Recommendation System",
       "paper_url": "https://arxiv.org/abs/2608.01949",
@@ -34125,8 +34603,8 @@
           "serving"
         ],
         "local_code_dir": "src/auto_research/reproductions/transx",
-        "fidelity": "core_mechanism",
-        "evaluation_tier": "l2_public_dataset",
+        "fidelity": "concept_demo",
+        "evaluation_tier": "l1_mechanism",
         "datasets": [
           "MovieLens 100K"
         ],
@@ -34165,7 +34643,26 @@
         "evolve_operators": [
           "context:transx-cross-stream"
         ]
-      }
+      },
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "evolve_integrated": false,
+      "local_operator": "auto_research.reproductions.transx.technical_report.multi_cutoff_memory",
+      "component_key": "transx-report-components",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/transx-report-components-a100-20261016.json",
+      "supplemental_papers": [
+        {
+          "paper_url": "https://arxiv.org/abs/2610.20913",
+          "published": "2026-10-14",
+          "first_author": "Da Xu",
+          "first_author_affiliation": "LinkedIn",
+          "title": "TransX Technical Report: Scaling Sequence Transduction for Recommendation",
+          "code_status": "原文未给出专属方法仓库"
+        }
+      ],
+      "summary": "将历史编码与候选预测解耦，本轮补充报告实现精确 local/global memory、跨事件原子分段复用和按逻辑步聚合的 row-wise Adagrad。旧 NumPy 固定权重 scorer 保留为 concept demo；新增张量算子只验证前向/梯度一致性，不重复注册模型或宣称完成生产训练。"
     },
     {
       "domain": "recommendation",

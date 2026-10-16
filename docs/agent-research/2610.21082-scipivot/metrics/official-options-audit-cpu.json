@@ -1,0 +1,85 @@
+{
+  "schema_version": 2,
+  "implementation_status": "evaluation_protocol_interface",
+  "evidence_kind": "official_release_dataset_and_aggregate_arithmetic_audit",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "new_model_evaluated": false,
+  "upstream_revision": "94a47d391893ea392fd9bb9883a65d2c8834e6f2",
+  "cases": 248,
+  "planned_options_only_runs": 496,
+  "aggregate_rows_validated": 60,
+  "official_medium_options_only": [
+    {
+      "model": "claude-opus-5",
+      "correct": 292,
+      "runs": 496,
+      "official_options_only_accuracy": 0.5887096774193549
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "correct": 232,
+      "runs": 496,
+      "official_options_only_accuracy": 0.46774193548387094
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "correct": 277,
+      "runs": 496,
+      "official_options_only_accuracy": 0.5584677419354839
+    },
+    {
+      "model": "gpt-6-astra",
+      "correct": 316,
+      "runs": 496,
+      "official_options_only_accuracy": 0.6370967741935484
+    },
+    {
+      "model": "grok-4.6",
+      "correct": 268,
+      "runs": 496,
+      "official_options_only_accuracy": 0.5403225806451613
+    }
+  ],
+  "grader_reference_counts": {
+    "B": 124,
+    "A": 124
+  },
+  "model_accuracy_recomputed_from_predictions": false,
+  "project_records_available": false,
+  "inputs": [
+    {
+      "file": "questions.json",
+      "sha256": "87a7b05115ce3438ba3b62b30a21dbe6f618c8657527442b094b79f5b664fd9f"
+    },
+    {
+      "file": "all_model_scores.csv",
+      "sha256": "e53e68a571ead46f9334bc899904b7a0e1f8c0dd3fb323e7d90f9c5ad05ec458"
+    }
+  ],
+  "manifest_ref": "agent-research:scipivot",
+  "seeds": [],
+  "deterministic": true,
+  "dataset": {
+    "id": "SciPIvot/released-options-only",
+    "revision": "94a47d391893ea392fd9bb9883a65d2c8834e6f2",
+    "split": "official 248-case options-only release; project histories not released",
+    "source_sha256": "87a7b05115ce3438ba3b62b30a21dbe6f618c8657527442b094b79f5b664fd9f",
+    "input_role": "official_questions",
+    "aggregate_sha256": "e53e68a571ead46f9334bc899904b7a0e1f8c0dd3fb323e7d90f9c5ad05ec458"
+  },
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [],
+    "formal_comparison": false,
+    "claim_policy": "Released options-only protocol/aggregate arithmetic audit, not new model capability."
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.21082-scipivot/metrics/official-options-audit-cpu.json",
+    "dataset_fingerprint": "87a7b05115ce3438ba3b62b30a21dbe6f618c8657527442b094b79f5b664fd9f",
+    "source_sha256": "0c0457f3ef5abd275fe68e04fe7591cad9da8b18033b21f1775c7fd071993a7b",
+    "implementation_sha256": "d3898e6350c1156431769c75eb1daf8c9457ddd9b85a58aa8dae4686c66cf26a",
+    "command": "PYTHONPATH=src python scripts/run_scipivot.py audit --questions docs/agent-research/2610.21082-scipivot/validation/upstream/questions.json --aggregates docs/agent-research/2610.21082-scipivot/validation/upstream/all_model_scores.csv --output docs/agent-research/2610.21082-scipivot/metrics/official-options-audit-cpu.json"
+  }
+}

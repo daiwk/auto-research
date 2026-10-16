@@ -59,6 +59,8 @@ def _protocol(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def _seed(row_seed: str, payload: dict[str, Any], path: str) -> str:
+    if payload.get("deterministic") is True and _protocol(payload).get("seeds") == []:
+        return "不适用（确定性审计）"
     if row_seed:
         return row_seed
     seeds = _protocol(payload).get("seeds")

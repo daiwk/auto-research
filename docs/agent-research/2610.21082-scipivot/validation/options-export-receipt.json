@@ -1,0 +1,24 @@
+{
+  "cases": 248,
+  "planned_runs": 496,
+  "condition": "options-only",
+  "public_sha256": "667869d4dec0f5c48eef9494caebfb7f4bd1537deca4429e03a6511cbff46b76",
+  "grader_sha256": "1d8315fb0cde7d001f2a13efc6576f1a24c49d2bc36738b23a3ba388df1298da",
+  "project_records_available": false,
+  "evaluator_executed": false,
+  "manifest_ref": "agent-research:scipivot",
+  "seeds": [],
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [],
+    "formal_comparison": false,
+    "claim_policy": "Released options-only protocol/aggregate arithmetic audit, not new model capability."
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.21082-scipivot/validation/options-export-receipt.json",
+    "dataset_fingerprint": "87a7b05115ce3438ba3b62b30a21dbe6f618c8657527442b094b79f5b664fd9f",
+    "source_sha256": "7c65b68ad71f48a0a842bb6c0aa7aead784cb2f7badb8f6e6bfd0c99665e79bf",
+    "implementation_sha256": "d3898e6350c1156431769c75eb1daf8c9457ddd9b85a58aa8dae4686c66cf26a",
+    "command": "PYTHONPATH=src python scripts/run_scipivot.py export --questions docs/agent-research/2610.21082-scipivot/validation/upstream/questions.json --public-dir .cache/oct16-scipivot-public-final --grader-dir .cache/oct16-scipivot-private-final --output docs/agent-research/2610.21082-scipivot/validation/options-export-receipt.json"
+  }
+}

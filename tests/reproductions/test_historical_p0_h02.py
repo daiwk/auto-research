@@ -166,7 +166,7 @@ def test_h02_genrec_operators_are_accepted_by_the_evaluator():
         assert _reward(data, _Sequences.train[0], 17, reward) > 0
 
 
-def test_h02_docs_have_original_figures_and_formal_three_seed_artifacts():
+def test_h02_docs_have_original_figures_and_honest_three_seed_artifacts():
     root = Path(__file__).resolve().parents[2]
     for key, arxiv_id in zip(KEYS, IDS):
         doc = root / "docs" / "reproductions" / f"{arxiv_id}-{key}"
@@ -176,7 +176,15 @@ def test_h02_docs_have_original_figures_and_formal_three_seed_artifacts():
         assert f"Adapter | `{key}`" in readme
         assert (doc / "assets" / "paper-figure-01.png").stat().st_size > 10_000
         payload = json.loads((doc / "metrics" / "public-seeds42-44.json").read_text())
-        assert payload["evaluation_protocol"]["formal_comparison"] is True
+        if key == "transx":
+            # Three seeds of a fixed NumPy scorer are not trained TransX
+            # capability evidence. Preserve its measurements, not the old claim.
+            assert payload["evaluation_protocol"]["formal_comparison"] is False
+            assert payload["diagnostic_only"] is True
+            assert payload["promotion_eligible"] is False
+            assert payload["manifest"]["fidelity"] == "concept_demo"
+        else:
+            assert payload["evaluation_protocol"]["formal_comparison"] is True
         assert payload["evaluation_protocol"]["seeds"] == [42, 43, 44]
         assert len(payload["seed_results"]) == 3
 

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "adapter_key": "transx-report-components",
+  "validated_at": "2026-10-16",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct16_recommendation_components.py",
+    "--csv",
+    "public/kuairand-prefix.csv",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--output",
+    "runs/oct16-p0p1/recommendation.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "explicit-multi-cutoff-memory-and-sparse-gradient-fixture",
+    "revision": "transx-appendix-a-equivalence-v1",
+    "capability_dataset": false
+  },
+  "checkpoint": {
+    "public_id": "none-independent-seeded-initialization",
+    "revision": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "maximum_forward_error": {
+      "mean": 6.661338147750939e-16,
+      "std": 2.220446049250313e-16,
+      "n": 3
+    },
+    "maximum_gradient_error": {
+      "mean": 5.329070518200751e-15,
+      "std": 0.0,
+      "n": 3
+    },
+    "embedding_delta_l2": {
+      "mean": 0.04898954307039579,
+      "std": 3.400097033444247e-07,
+      "n": 3
+    },
+    "untouched_row_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "exact_shared_vs_direct_forward_and_gradient": true,
+    "logical_step_duplicate_rows_coalesced": true,
+    "sparse_embedding_and_dense_parameter_updates": true,
+    "production_model_trained": false
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "executed_source_sha256": {
+    "src/auto_research/reproductions/transx/technical_report.py": "9f5315e96672041e0ab137a121a4a96117efd06a7b6d016efbb805f466eb9217",
+    "scripts/run_oct16_recommendation_components.py": "83c903fba74b40b4b8c087c46dcee2bf32d02b71bb60be70253cf0ab135e5547"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "command_path_policy": "public input and output paths relativized; source/data content hashes retained",
+  "provenance": {
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "artifact_path": "docs/gpu-validations/transx-report-components-a100-20261016.json",
+    "metric_artifact_path": "docs/reproductions/2607.28940-transx/metrics/report-components-a100-seeds42-44.json",
+    "dataset_fingerprint": "transx-report-components:explicit-multi-cutoff-memory-and-sparse-gradient-fixture@transx-appendix-a-equivalence-v1;seeds=42,43,44",
+    "dataset_fingerprint_scope": "seeded-fixture-protocol-id-not-tensor-byte-hash",
+    "raw_result_sha256": "f6b7fde172262f6eb16917db585dbeab3403b50c8ac8a0ba244c02673722042d",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  }
+}

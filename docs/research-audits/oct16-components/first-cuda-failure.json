@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "failed_not_acceptance_evidence",
+  "code_commit": "a6ac6598d7f3e67ab626a1c2f59645f35ae351a3",
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "seeds_planned": [42, 43, 44],
+  "completed_groups": ["recommendation-components", "foundation-components"],
+  "failed_group": "post-training-components",
+  "error": "RuntimeError: waypoint-opd has no actual policy gradient",
+  "acceptance": false,
+  "cause": "The diagnostic reward depends only on the first action, but the initial tiny teacher RL fixture multiplied that reward by all response-token log probabilities. Two independent groups of four rollouts produced noisy or opposed early/late shifts, allowing the unchanged Waypoint gate to reject every token.",
+  "correction_scope": "Use a fixed bounded first-action bandit RL trajectory with snapshots at fixed steps; retain the paper gate and the nonzero-gradient acceptance assertion. No selecting seeds, snapshots or heldout scores.",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "note": "Retained failure history. Only a subsequent real CUDA run with matching executed-source hashes may establish component acceptance."
+}

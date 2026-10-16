@@ -10,7 +10,13 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [Condition-Contrastive Extrapolation for On-Policy Distillation of Language Models](2610.21195-cce-opd/README.md) | The Chinese University of Hong Kong, Shenzhen，2026-10-15 | 未发现官方代码 | `cce-opd`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [Does On-Policy Distillation Need to Complete Every Rollout?](2610.21337-stopd/README.md) | Cornell University，2026-10-15 | 未发现官方代码 | `stopd`：仅低成本组件，完整实验不复现 |
+| 自置信轨迹过滤 | [Learning to Reason with Selective Internal Feedback](2610.21392-sif/README.md) | Institute of Automation, Chinese Academy of Sciences，2026-10-15 | 未发现官方代码 | `sif`：仅低成本组件，完整实验不复现 |
+| 多教师能力整合 | [Training-Free On-Policy Distillation](2610.22236-tf-opd/README.md) | University of Illinois Urbana-Champaign，2026-10-15 | 未发现官方代码 | `tf-opd`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation](2610.21601-waypoint-opd/README.md) | Alibaba Cloud Computing，2026-10-15 | [已开源](https://github.com/hhhbxloveai/WaypointOPD) | `waypoint-opd`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Divergence-Routed On-Policy Distillation for Language Models](2610.19572-divergence-routed-opd/README.md) | Peking University，2026-10-14 | 未发现官方代码 | `divergence-routed-opd`：仅低成本组件，完整实验不复现 |
+| 离策略推理 RL | [Gibbs-Gap Policy Optimization for Off-Policy RL with Verifiable Rewards](2610.20814-ggpo/README.md) | University of Illinois Urbana-Champaign，2026-10-14 | [已开源](https://github.com/thunderous77/GGPO) | `ggpo`：仅低成本组件，完整实验不复现 |
 | 偏好图信用分配 | [When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO](2610.20089-rap-walk/README.md) | 未确认（已读 arXiv HTML 未列机构），2026-10-14 | 未发现官方代码 | `rap-walk`：仅低成本组件，完整实验不复现 |
 | on-policy-self-distillation | [LoOPSD: On-Policy Self-Distillation with Looped Teachers](../reproductions/2610.18162-loopsd/README.md) | Anhui Province Key Laboratory of Digital Security，2026-10-13 | 未发现官方代码 | 计划键 `loopsd`：成本过高，暂不复现；待验收（仅研究资料） |
 | GRPO difficulty curriculum | [A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO](../reproductions/2610.13669-grpo-difficulty-curriculum/README.md) | Dalian Maritime University，2026-10-09 | [已开源](https://github.com/NHLling/GRPO-B) | `grpo-difficulty-curriculum` |

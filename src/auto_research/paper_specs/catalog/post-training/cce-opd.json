@@ -1,0 +1,32 @@
+{
+  "domain": "post-training",
+  "key": "cce-opd",
+  "title": "Condition-Contrastive Extrapolation for On-Policy Distillation of Language Models",
+  "paper_url": "https://arxiv.org/abs/2610.21195v1",
+  "detail_path": "post-training/2610.21195-cce-opd/README.md",
+  "topic": [
+    "On-policy distillation",
+    "后训练算法组件",
+    "CCE-OPD"
+  ],
+  "first_author": "Wenxuan Luo",
+  "first_author_affiliation": "The Chinese University of Hong Kong, Shenzhen",
+  "collaborating_organizations": ["FNii-Shenzhen", "ByteDance"],
+  "published": "2026-10-15",
+  "published_at": "2026-10-15T03:55:34Z",
+  "code": null,
+  "code_status": "原文未找到或未确认已发布的方法代码仓库",
+  "adapter": null,
+  "local_operator": "auto_research.post_training.cce_opd.cce_ppo_loss",
+  "local_command": "PYTHONPATH=src python scripts/run_oct16_post_components.py --methods cce-opd --corpus-path <hamlet.txt> --corpus-id gutenberg:1524 --corpus-revision sha256:31584c19795779431b5933499a45b9cecb03e8c246b6ea7e245a2b6d65e8e784 --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/cce-opd-a100-20261016.json",
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "summary": "同一学生prefix的完整/合法条件遮罩双教师view、top16去重union、clipped log contrast与full-vocabulary entropy门；辅助target仅support归一而student保留全词表，分母所有有效token，并合并原sampled PPO-OPD。仅提供外部reviewed span接口和数学前提fixture诊断，不伪造语义抽取或商业标注复现。"
+}

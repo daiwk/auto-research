@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "adapter_key": "rope-relay",
+  "validated_at": "2026-10-16",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct16_foundation_components.py",
+    "--papers",
+    "rope-relay,cots",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--code-commit",
+    "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "--output",
+    "runs/oct16-p0p1/foundation.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-formula-tensors",
+    "revision": "oct16-component-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-independent-seeded-initialization",
+    "revision": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "max_reference_absolute_error": {
+      "mean": 3.5762786865234375e-07,
+      "std": 1.1920928955078125e-07,
+      "n": 3
+    },
+    "values_unchanged": true,
+    "nonrotary_tail_unchanged": true,
+    "heterogeneous_endpoints_aligned": true,
+    "query_and_answer_positions_synchronized": true,
+    "gradient_norm_keys": {
+      "mean": 0.2911170969406764,
+      "std": 0.037762930953978535,
+      "n": 3
+    },
+    "gradient_norm_values": {
+      "mean": 0.2416467716296514,
+      "std": 0.05998280080665751,
+      "n": 3
+    },
+    "gradient_norm_queries": {
+      "mean": 0.31660516063372296,
+      "std": 0.08907842588265931,
+      "n": 3
+    },
+    "unsynchronized_query_mean_logit_error": {
+      "mean": 4.861961682637532,
+      "std": 0.5726657234750464,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "real_cuda_formula_and_gradient_diagnostic": true,
+    "model_capability_evaluated": false
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "executed_source_sha256": {
+    "src/auto_research/foundation_models/rope_relay.py": "6e585736b4aae1ada8d5b5fa185e22ba36b0109058adae15eaa0b40d6e06ba27",
+    "scripts/run_oct16_foundation_components.py": "c6b023eaa90149f2643e7d8db83d16ca03145a5dc6192174bf2aa76f11f19bfc"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "command_path_policy": "public input and output paths relativized; source/data content hashes retained",
+  "provenance": {
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "artifact_path": "docs/gpu-validations/rope-relay-a100-20261016.json",
+    "metric_artifact_path": "docs/foundation-models/2610.21126-rope-relay/metrics/component-a100-seeds42-44.json",
+    "dataset_fingerprint": "rope-relay:synthetic-formula-tensors@oct16-component-v1;seeds=42,43,44",
+    "dataset_fingerprint_scope": "seeded-fixture-protocol-id-not-tensor-byte-hash",
+    "raw_result_sha256": "2f6a2f254b6cbc4a11d074b979eac42305ee17b0a061e251f652b8f598fa504c",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  }
+}

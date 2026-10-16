@@ -49,8 +49,12 @@ def test_paper_metadata_source_hashes_and_noncapability_boundary(arxiv, key, mod
     assert len(metrics) == 1
     result = json.loads(metrics[0].read_text())
     assert result["schema_version"] == 2 and result["upstream_revision"] == revision
+    assert result["dataset"]["id"] and result["dataset"]["revision"] == revision
     assert not result["evaluation_protocol"]["formal_comparison"]
     assert result["diagnostic_only"] and not result["promotion_eligible"] and not result["evolve_integrated"]
+    provenance = result["provenance"]
+    assert hashlib.sha256((ROOT / "src/auto_research/agent_research" / f"{module}.py").read_bytes()).hexdigest() == provenance["implementation_sha256"]
+    assert hashlib.sha256((ROOT / "scripts" / f"run_{module}.py").read_bytes()).hexdigest() == provenance["source_sha256"]
     if "inputs" in result:
         for row in result["inputs"]:
             path = directory / "validation/upstream" / row["file"]
@@ -61,3 +65,27 @@ def test_paper_metadata_source_hashes_and_noncapability_boundary(arxiv, key, mod
         assert hashlib.sha256(path.read_bytes()).hexdigest() == result["input_sha256"]
         assert result["input_sha256"] in text
     assert (directory / "validation/upstream/LICENSE").is_file()
+
+
+def test_full_scipivot_options_export_was_executed_without_a_model():
+    receipt = json.loads((ROOT / "docs/agent-research/2610.21082-scipivot/validation/options-export-receipt.json").read_text())
+    assert receipt["cases"] == 248 and receipt["planned_runs"] == 496
+    assert not receipt["evaluator_executed"]
+    assert receipt["public_sha256"] == "667869d4dec0f5c48eef9494caebfb7f4bd1537deca4429e03a6511cbff46b76"
+    assert receipt["grader_sha256"] == "1d8315fb0cde7d001f2a13efc6576f1a24c49d2bc36738b23a3ba388df1298da"
+
+
+def test_scipivot_audit_declares_actual_seedless_dataset_identity():
+    path = ROOT / "docs/agent-research/2610.21082-scipivot/metrics/official-options-audit-cpu.json"
+    result = json.loads(path.read_text())
+    assert result["deterministic"] is True
+    assert result["seeds"] == result["evaluation_protocol"]["seeds"] == []
+    assert result["evaluation_protocol"]["formal_comparison"] is False
+    assert result["evaluation_protocol"]["claim_policy"]
+    assert result["dataset"] == {
+        "id": "SciPIvot/released-options-only",
+        "revision": "94a47d391893ea392fd9bb9883a65d2c8834e6f2",
+        "split": "official 248-case options-only release; project histories not released",
+        "source_sha256": "87a7b05115ce3438ba3b62b30a21dbe6f618c8657527442b094b79f5b664fd9f",
+        "input_role": "official_questions",
+        "aggregate_sha256": "e53e68a571ead46f9334bc899904b7a0e1f8c0dd3fb323e7d90f9c5ad05ec458"}

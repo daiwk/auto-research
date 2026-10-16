@@ -1,0 +1,181 @@
+{
+  "schema_version": 2,
+  "implementation_status": "evaluation_protocol_interface",
+  "evidence_kind": "official_compact_records_recomputation",
+  "new_model_evaluated": false,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "upstream_revision": "455ac88c81c639c10a8404464dabf71a7fbb563e",
+  "input_sha256": "3417da0c54a4b16e182ef148e79b70e2622689a9cc0c690c928e4ce0b3837cb4",
+  "corpora": 50,
+  "scores": {
+    "base": {
+      "questions": 443,
+      "correct": 107.0,
+      "accuracy": 0.24153498871331827,
+      "builder_tokens": 6300610,
+      "builder_tokens_per_corpus": 126012.2,
+      "answer_tokens_per_question": 1238.405756207675,
+      "correct_per_million_builder_tokens": 16.982482648505464,
+      "capped_failure_corpora": 14,
+      "accuracy_cluster_bootstrap_se": 0.03554456935683771
+    },
+    "rl": {
+      "questions": 443,
+      "correct": 282.0,
+      "accuracy": 0.636568848758465,
+      "builder_tokens": 7381685,
+      "builder_tokens_per_corpus": 147633.7,
+      "answer_tokens_per_question": 9381.206546275394,
+      "correct_per_million_builder_tokens": 38.20265969084294,
+      "capped_failure_corpora": 0,
+      "accuracy_cluster_bootstrap_se": 0.02945583881235749
+    }
+  },
+  "paired_statistics": {
+    "accuracy_difference": {
+      "estimate": 0.39503386004514673,
+      "ci95": [
+        0.3147321428571429,
+        0.47748000242394856
+      ]
+    },
+    "efficiency_ratio": {
+      "estimate": 2.2495332679880553,
+      "ci95": [
+        1.753012527966559,
+        3.010073811532093
+      ]
+    },
+    "ratio_at_10": {
+      "estimate": 0.6619572088466861,
+      "ci95": [
+        0.5040523396054453,
+        0.8363246499804015
+      ]
+    },
+    "crossover": {
+      "estimate": 31,
+      "ci95": [
+        18.0,
+        54.0
+      ]
+    }
+  },
+  "bootstrap": {
+    "unit": "paired_corpus",
+    "resamples": 10000,
+    "seed": 19105,
+    "zero_accuracy_draws": 0,
+    "no_crossover_draws": 0
+  },
+  "reuse": {
+    "1": {
+      "base": {
+        "tokens_per_query": 127250.60575620767,
+        "tokens_per_expected_correct": 526841.2929906542
+      },
+      "rl": {
+        "tokens_per_query": 157014.9065462754,
+        "tokens_per_expected_correct": 246658.16879432625
+      }
+    },
+    "2": {
+      "base": {
+        "tokens_per_query": 64244.505756207676,
+        "tokens_per_expected_correct": 265984.26214953273
+      },
+      "rl": {
+        "tokens_per_query": 83198.0565462754,
+        "tokens_per_expected_correct": 130697.65620567377
+      }
+    },
+    "5": {
+      "base": {
+        "tokens_per_query": 26440.845756207673,
+        "tokens_per_expected_correct": 109470.0436448598
+      },
+      "rl": {
+        "tokens_per_query": 38907.946546275394,
+        "tokens_per_expected_correct": 61121.34865248227
+      }
+    },
+    "10": {
+      "base": {
+        "tokens_per_query": 13839.625756207675,
+        "tokens_per_expected_correct": 57298.63747663552
+      },
+      "rl": {
+        "tokens_per_query": 24144.576546275395,
+        "tokens_per_expected_correct": 37929.246134751775
+      }
+    },
+    "20": {
+      "base": {
+        "tokens_per_query": 7539.015756207675,
+        "tokens_per_expected_correct": 31212.934392523366
+      },
+      "rl": {
+        "tokens_per_query": 16762.891546275394,
+        "tokens_per_expected_correct": 26333.194875886526
+      }
+    },
+    "25": {
+      "base": {
+        "tokens_per_query": 6278.893756207675,
+        "tokens_per_expected_correct": 25995.79377570094
+      },
+      "rl": {
+        "tokens_per_query": 15286.554546275394,
+        "tokens_per_expected_correct": 24013.984624113476
+      }
+    },
+    "50": {
+      "base": {
+        "tokens_per_query": 3758.649756207675,
+        "tokens_per_expected_correct": 15561.512542056076
+      },
+      "rl": {
+        "tokens_per_query": 12333.880546275395,
+        "tokens_per_expected_correct": 19375.56412056738
+      }
+    },
+    "100": {
+      "base": {
+        "tokens_per_query": 2498.5277562076753,
+        "tokens_per_expected_correct": 10344.371925233647
+      },
+      "rl": {
+        "tokens_per_query": 10857.543546275394,
+        "tokens_per_expected_correct": 17056.353868794326
+      }
+    }
+  },
+  "command": "PYTHONPATH=src python scripts/run_librarian_agents.py --records docs/agent-research/2610.22273-librarian-agents/validation/upstream/browsecomp_per_corpus.jsonl --resamples 10000 --seed 19105 --output .cache/oct16-librarian-dataset-metadata.json",
+  "manifest_ref": "agent-research:librarian-agents",
+  "dataset": {
+    "id": "LibrarianAgents/released-browsecomp-compact-records",
+    "revision": "455ac88c81c639c10a8404464dabf71a7fbb563e",
+    "source_sha256": "3417da0c54a4b16e182ef148e79b70e2622689a9cc0c690c928e4ce0b3837cb4",
+    "split": "official 50-corpus compact records; no new builder/executor run"
+  },
+  "seeds": [
+    19105
+  ],
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [
+      19105
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Official compact records recomputation; bootstrap seed is not a new trained model seed."
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.22273-librarian-agents/metrics/official-reuse-cpu.json",
+    "dataset_fingerprint": "3417da0c54a4b16e182ef148e79b70e2622689a9cc0c690c928e4ce0b3837cb4",
+    "command": "PYTHONPATH=src python scripts/run_librarian_agents.py --records docs/agent-research/2610.22273-librarian-agents/validation/upstream/browsecomp_per_corpus.jsonl --resamples 10000 --seed 19105 --output .cache/oct16-librarian-dataset-metadata.json",
+    "source_sha256": "c3e6f6fb70c2dbe893de4e8cca9b8cf26c6ac763640ac1875cc2d89cb124bead",
+    "implementation_sha256": "0c12ce469561c133e24d63aef1c50bc14b67e4c47ba95347d361bca4aced63b8"
+  }
+}

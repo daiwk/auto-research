@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "adapter_key": "static-constraint-decoding",
+  "validated_at": "2026-10-16",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct16_recommendation_components.py",
+    "--csv",
+    "public/kuairand-prefix.csv",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--output",
+    "runs/oct16-p0p1/recommendation.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "KuaiRand-Pure/official-standard-log-fixed-prefix",
+    "source_url": "https://zenodo.org/records/10439422",
+    "revision": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+    "selected_fields": [
+      "user_id",
+      "video_id",
+      "time_ms",
+      "duration_ms",
+      "hourmin",
+      "is_click",
+      "long_view"
+    ],
+    "rows": 4096,
+    "prefix_limit": 4096,
+    "split": "chronological 70/15/15 after fixed file-prefix selection",
+    "features": "pre-impression user/video identifiers, duration and hour only",
+    "selection_bias": "file-prefix diagnostic, not a representative production sample"
+  },
+  "checkpoint": {
+    "public_id": "none-independent-seeded-initialization",
+    "revision": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "validity": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "mean_extraction_ms": {
+      "mean": 0.057280504455169044,
+      "std": 0.001951801846895206,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "csr_and_dense_decode_executed": true,
+    "all_emitted_identifiers_in_public_constraint_set": true,
+    "trained_sid_or_retrieval_model": false,
+    "microbenchmark_not_end_to_end_latency": true
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "executed_source_sha256": {
+    "src/auto_research/reproductions/static_constraint_decoding/algorithm.py": "1729da82f9c487769a32a3f0454f429ddd08454a1f56c7910099f466f26bde5f",
+    "scripts/run_oct16_recommendation_components.py": "83c903fba74b40b4b8c087c46dcee2bf32d02b71bb60be70253cf0ab135e5547"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "command_path_policy": "public input and output paths relativized; source/data content hashes retained",
+  "provenance": {
+    "commit": "781a8178f12069c5c3691093b5f3ba79a48b5322",
+    "artifact_path": "docs/gpu-validations/static-constraint-decoding-a100-20261016.json",
+    "metric_artifact_path": "docs/recommendation-components/2602.22647-static-constraint-decoding/metrics/component-a100-seeds42-44.json",
+    "dataset_fingerprint": "sha256:c07b1719c6c024d67b45197d75dece9ea7a12dff86eb363968f8871e6c850cdb",
+    "dataset_fingerprint_scope": "public-selected-input-fields",
+    "raw_result_sha256": "f6b7fde172262f6eb16917db585dbeab3403b50c8ac8a0ba244c02673722042d",
+    "source_snapshot_sha256": "24898343d2c9c433d6f21283448669841f9c888b8a40a630c9f02ef6270b3c57"
+  }
+}
