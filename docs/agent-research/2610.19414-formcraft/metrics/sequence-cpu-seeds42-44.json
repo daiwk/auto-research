@@ -1,0 +1,90 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:formcraft",
+  "method": "formcraft",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "dataset": {
+    "id": "local-fixed-sequence-D01-D12-v1",
+    "revision": "v1",
+    "goals_per_seed": 12,
+    "holdouts_per_goal": 128
+  },
+  "per_seed_results": [
+    {
+      "seed": 42,
+      "goals_admitted": 12,
+      "library_records": 13,
+      "expanded_candidate_attempts": 9216,
+      "first_class_candidate_attempts": 89,
+      "all_paired_holdouts_pass": true,
+      "library_snapshot": {
+        "path": "../validation/persistent-cpu-v2/result.libraries/seed42.json",
+        "sha256": "8b38c345def913add87033fad377e89b1392461fc88ba5bb0912305d9017196a",
+        "cold_loaded": true,
+        "same_snapshot_for_both_views": true
+      }
+    },
+    {
+      "seed": 43,
+      "goals_admitted": 12,
+      "library_records": 13,
+      "expanded_candidate_attempts": 11096,
+      "first_class_candidate_attempts": 89,
+      "all_paired_holdouts_pass": true,
+      "library_snapshot": {
+        "path": "../validation/persistent-cpu-v2/result.libraries/seed43.json",
+        "sha256": "bd8d76976dc9470b4d1bee02594d0de8fe7eb05860a6cc6e547e110c76281f65",
+        "cold_loaded": true,
+        "same_snapshot_for_both_views": true
+      }
+    },
+    {
+      "seed": 44,
+      "goals_admitted": 12,
+      "library_records": 13,
+      "expanded_candidate_attempts": 12911,
+      "first_class_candidate_attempts": 90,
+      "all_paired_holdouts_pass": true,
+      "library_snapshot": {
+        "path": "../validation/persistent-cpu-v2/result.libraries/seed44.json",
+        "sha256": "165acad8a5598d934edbbdf5a925ef2a002ff14c136cb4a58bd0e7b41801bd7d",
+        "cold_loaded": true,
+        "same_snapshot_for_both_views": true
+      }
+    }
+  ],
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "persistence": "One exclusively created final library per seed; original object destroyed; both paired final-test views execute from the same cold-loaded snapshot.",
+    "claim_policy": "Independent local fixed sequence domain; real synthesis and execution, not author's exact D-goals, model accuracy or a formal Agent capability comparison."
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.19414-formcraft/metrics/sequence-cpu-seeds42-44.json",
+    "dataset_fingerprint": "local-fixed-sequence-D01-D12-v1:seeds42,43,44:holdout128:append-binary:depth12",
+    "raw_artifact_path": "docs/agent-research/2610.19414-formcraft/validation/persistent-cpu-v2/result.json",
+    "raw_artifact_sha256": "a557a55360f5ef59d6d0ca85913dfe581f7f96a725287e91dc0d78378203b6ae",
+    "command": "PYTHONPATH=src python scripts/run_formcraft.py --seeds 42,43,44 --output docs/agent-research/2610.19414-formcraft/validation/persistent-cpu-v2/result.json"
+  },
+  "elapsed_seconds": 1.2846792079508305,
+  "prior_protocol": {
+    "name": "in_memory_v1",
+    "persistence_claim_validated": false,
+    "counts_unchanged_in_persistent_v2": true,
+    "previous_documented_elapsed_seconds": 1.25,
+    "reason_for_supersession": "The previous experiment only used an in-memory library; save/load existed in unit tests but not in the study. Persisted cold-load evidence is supplied by the new raw artifact and snapshots without rewriting the old search counts."
+  },
+  "model_calls": 0,
+  "paper_exact_replication": false
+}

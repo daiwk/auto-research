@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [Divergence-Routed On-Policy Distillation for Language Models](2610.19572-divergence-routed-opd/README.md) | Peking University，2026-10-14 | 未发现官方代码 | `divergence-routed-opd`：仅低成本组件，完整实验不复现 |
+| 偏好图信用分配 | [When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO](2610.20089-rap-walk/README.md) | 未确认（已读 arXiv HTML 未列机构），2026-10-14 | 未发现官方代码 | `rap-walk`：仅低成本组件，完整实验不复现 |
 | on-policy-self-distillation | [LoOPSD: On-Policy Self-Distillation with Looped Teachers](../reproductions/2610.18162-loopsd/README.md) | Anhui Province Key Laboratory of Digital Security，2026-10-13 | 未发现官方代码 | 计划键 `loopsd`：成本过高，暂不复现；待验收（仅研究资料） |
 | GRPO difficulty curriculum | [A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO](../reproductions/2610.13669-grpo-difficulty-curriculum/README.md) | Dalian Maritime University，2026-10-09 | [已开源](https://github.com/NHLling/GRPO-B) | `grpo-difficulty-curriculum` |
 | Multi-teacher distillation | [Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation](../reproductions/2610.13521-road-mopd/README.md) | Nanjing University / JD.com，2026-10-09 | 未发现官方代码 | `road-mopd` |

@@ -16,6 +16,8 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    "divergence-routed-opd": "docs/gpu-validations/divergence-routed-opd-a100-20261016.json",
+    "rap-walk": "docs/gpu-validations/rap-walk-a100-20261016.json",
     "embedding-gemma2": "docs/gpu-validations/embedding-gemma2-a100-20261014.json",
     "jev-workflow-measurement": "docs/gpu-validations/oct12-jev-workflow-measurement-a100.json",
     "sguid": "docs/gpu-validations/sguid-a100-20261012.json",

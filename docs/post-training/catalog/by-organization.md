@@ -305,6 +305,7 @@
 
 ## Peking University
 
+- 2026-10-14 · 一作：Tiantian Peng · [Divergence-Routed On-Policy Distillation for Language Models](../2610.19572-divergence-routed-opd/README.md)（`divergence-routed-opd`）：DrOPD 在学生自己生成的轨迹上比较师生分布，以 JS 散度识别教师支持而学生严重欠覆盖的位置。它在所有位置保留 reverse-KL，并仅向高分歧位置增加 forward-KL 的纠正信号，通过候选级优势执行 PPO clipped 更新。
 - 2026-08-27 · 一作：Xingyu Shen · [Boosting LLM Exploration via Weak-Model Guidance in RLVR](../2608.27420-weak-guide-rlvr/README.md)（`weak-guide-rlvr`）：RLVR 容易熵坍缩。论文用更小弱模型生成部分推理前缀，迫使目标模型进入陌生轨迹，再以 entropy 截断和原生/前缀样本混训保持覆盖率。
 - 2026-08-27 · 一作：Ziyuan Liu · [Preserving General Capabilities during Domain Specialization with Uncertainty-Calibrated MOPD](../2608.26735-uc-mopd/README.md)（`uc-mopd`）：普通 MOPD 很少采到强正优势 token，也无法判断更新方向是否可靠。方法扩大温度覆盖，按轨迹正优势密度挑样本，再用熵校准 CLL 概率门控 token 更新。
 - 2026-08-26 · 一作：Lam So · [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](../2608.25583-grip/README.md)（`grip`）：在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。
@@ -569,6 +570,10 @@
 ## 原文首页未列第一作者机构
 
 - 2026-10-01 · 一作：Yifan Wang · [Token-Level Video Reinforcement Learning](../2610.01973-tvrl/README.md)（`tvrl`）：冻结 VLM 的视频输入梯度定位对 reward 最敏感的生成 token，再把同组 advantage 稠密重分配到 token。
+
+## 未确认（已读 arXiv HTML 未列机构）
+
+- 2026-10-14 · 一作：Xinrui Lin · [When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO](../2610.20089-rap-walk/README.md)（`rap-walk`）：RAP-Walk 不把成对视频偏好压成相互独立的胜率，而保留对手身份、循环关系和边清晰度。它在从输者到赢家的可靠随机游走中计算平稳偏好信用，经最低熵校准后修正原始胜率优势，最后仍交给同一 GRPO 更新。
 
 ## 论文未列机构
 

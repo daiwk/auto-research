@@ -1,0 +1,22 @@
+{
+  "domain": "post-training",
+  "key": "rap-walk",
+  "title": "When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO",
+  "paper_url": "https://arxiv.org/abs/2610.20089v1",
+  "detail_path": "post-training/2610.20089-rap-walk/README.md",
+  "topic": ["偏好图信用分配", "GRPO", "视频后训练"],
+  "first_author": "Xinrui Lin",
+  "first_author_affiliation": "未确认（已读 arXiv HTML 未列机构）",
+  "published": "2026-10-14",
+  "code": null,
+  "code_status": "原文及作者公开入口未找到方法代码仓库",
+  "adapter": null,
+  "local_operator": "auto_research.post_training.rap_walk.rap_walk_grpo_loss",
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/rap-walk-a100-20261016.json",
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "summary": "以边清晰度和三角循环不一致性控制从输者到赢家的偏好随机游走，经平稳信用、最低熵校准后修正 GRPO 优势。本地实现图算子与可微策略更新接口，不生成视频、不用小图诊断冒充 Wan 与大型 VLM 评审的效果。"
+}

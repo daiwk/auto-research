@@ -146,6 +146,11 @@ def build_payload() -> dict:
             rows = sorted(store.rows(), key=lambda row: (row.domain, row.method, row.path))
     experiments = []
     for row in rows:
+        # Raw validation/reference imports may contain numeric data without a
+        # local experiment protocol. Their reviewed summaries live in metrics/
+        # when appropriate; do not duplicate raw records as capability cards.
+        if "validation" in Path(row.path).parts:
+            continue
         # Boolean-only implementation contracts remain in the audit index, but
         # are not measured experiments and must not become empty result cards.
         if not row.metrics:

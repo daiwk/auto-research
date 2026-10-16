@@ -1,0 +1,78 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:transparent-compact",
+  "method": "transparent-compact",
+  "seeds": [],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "dataset": {
+    "id": "MaxDevv/real-pi-coding-agent-traces-sessions",
+    "revision": "8c59325",
+    "examples": 1
+  },
+  "metrics": {
+    "messages": 196,
+    "prose_blocks_retained": 54,
+    "prose_blocks_explicitly_dropped": 0,
+    "recovery_items": 145,
+    "input_characters": 1149805,
+    "output_characters": 138550,
+    "exact_recovery_verified": true,
+    "model_calls": 0
+  },
+  "metadata_checks": {
+    "tool_result_messages": 68,
+    "first_compaction_checked_fields": 208,
+    "recompaction_checked_fields": 208,
+    "all_preserved": true,
+    "recompaction_messages_equal": true,
+    "recovery_hashes_verified_each_compaction": 145,
+    "fields": [
+      "tool_call_id",
+      "toolCallId",
+      "toolName",
+      "isError",
+      "exitCode",
+      "cancelled",
+      "truncated",
+      "excludeFromContext"
+    ]
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [],
+    "formal_comparison": false,
+    "claim_policy": "Deterministic public-session transformation, exact archive recovery and execution-metadata preservation only; no model inference, capability accuracy, token estimate or total-storage reduction. Validation evidence is not a model-capability dashboard score."
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2610.20116-transparent-compact/validation/public-session-cpu.json",
+    "dataset_fingerprint": "sha256:ccc9199e0af18c80f15960f9239dcdc7873d619f06ae17197e624cb62f8d5990",
+    "normalized_session_sha256": "ad0dbc9aa0fc0a3ec672b5abd464c57989115cab26a338257098b763b9e0f690",
+    "source": "https://huggingface.co/datasets/MaxDevv/real-pi-coding-agent-traces-sessions/resolve/8c59325/thomasmustier-pi-extensions-sessions-2026-01-09T04-23-41-908Z_d587978d-2228-46c3-aac4-7950c2055680.jsonl",
+    "local_execution_artifact": "runs/oct16-components/transparent-metadata-fixed/public-session.json",
+    "local_execution_artifact_sha256": "d4ba83a99b5c57d82b27e05d28c9abf3d3e5e2f00b8313d32dac169d4de83fc7",
+    "executed_source_sha256": {
+      "src/auto_research/agent_research/transparent_compact.py": "051c600a21e21af20e895841d4dfaefb940eff1c437da1fd64aef93ee2a9b84a",
+      "scripts/run_transparent_compact.py": "7b6c898ea33e348cbb49fe34d794dc67692eca9b14b1f1a2320987d758e7c161"
+    },
+    "command": [
+      "python",
+      "scripts/run_transparent_compact.py",
+      "--input",
+      ".cache/oct16-components/public-pi-session.jsonl",
+      "--fetch-public-example",
+      "--output",
+      "runs/oct16-components/transparent-metadata-fixed/public-session.json"
+    ]
+  },
+  "before_fix_history": [
+    {
+      "artifact_path": "runs/oct16-components/transparent-public-session.json",
+      "artifact_sha256": "6a415e0e635bfe5343c7c124dacc825f113998d3f19578deedb69f738299dc06",
+      "output_characters": 129010,
+      "valid_for_final_acceptance": false,
+      "limitation": "The earlier active-message view omitted Pi top-level call-pairing and execution-status metadata; this smaller character count is retained only as a before-fix record."
+    }
+  ],
+  "full_experiment_status": "not_reproduced_high_cost"
+}

@@ -7,7 +7,7 @@ from auto_research.reproductions.reporting import write_reproduction_result
 
 def test_builtin_adapters_are_discoverable():
     assert {adapter.key for adapter in list_adapters()} == {
-        "casi", "pn-mix", "smrc-pmrc",
+        "casi", "pn-mix", "smrc-pmrc", "oob-regularization",
         "wegr",
         "uxsid", "state-opd", "gppo-framework", "tapo-trajectory",
         "cv-opd", "oal", "replayssm", "lewam", "smolwam", "near",

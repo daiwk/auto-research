@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "adapter_key": "oob-regularization",
+  "validated_at": "2026-10-16",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oob_regularization.py",
+    "--dataset-dir",
+    "public/cifar10",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--output",
+    "runs/oob-42.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "CIFAR-10",
+    "revision": "sha256:54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+    "source_url": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+    "source_md5": "c99cafc152244af753f735de768cd75f",
+    "split_revision": "6ba2882738809786a921455ef0f835759c1cd01d53976deb458fa9d694b1b23e",
+    "training_examples": 512,
+    "validation_examples": 128,
+    "official_test_read": false
+  },
+  "command_path_policy": "public input paths relativized; exact content revision retained",
+  "checkpoint": {
+    "public_id": "none-independent-seeded-initialization",
+    "revision": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "sigreg_in_batch_validation_knn5_accuracy": {
+      "mean": 0.20572916666666666,
+      "std": 0.06825699178167269,
+      "n": 3
+    },
+    "sigreg_oob_validation_knn5_accuracy": {
+      "mean": 0.2265625,
+      "std": 0.020669932117692115,
+      "n": 3
+    },
+    "simclr_validation_knn5_accuracy": {
+      "mean": 0.21354166666666666,
+      "std": 0.009021097956087902,
+      "n": 3
+    },
+    "contrastive_oob_validation_knn5_accuracy": {
+      "mean": 0.234375,
+      "std": 0.013531646934131853,
+      "n": 3
+    },
+    "sigreg_oob_minus_in_batch": {
+      "mean": 0.020833333333333332,
+      "std": 0.05083130545818525,
+      "n": 3
+    },
+    "contrastive_oob_minus_simclr": {
+      "mean": 0.020833333333333332,
+      "std": 0.022552744890219755,
+      "n": 3
+    }
+  },
+  "execution_checks": {
+    "four_actual_training_arms": true,
+    "matched_initialization_and_augmentation_streams": true,
+    "cpu_detached_sample_anchor_cache": true,
+    "four_refreshes_each_oob_arm": true,
+    "validation_not_used_for_selection": true,
+    "official_test_read": false,
+    "unified_cli_cuda_same_seed_agreement": true
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "executed_source_sha256": {
+    "src/auto_research/reproductions/oob_regularization/algorithm.py": "283c6b540b04b4bee6ebe7e879a25dc4804973f42c0ee66c9b652aea62f61ad9",
+    "src/auto_research/reproductions/oob_regularization/experiment.py": "7a03e24e8028025fd5623aeff39bafa50dcf4f2ad72ffe0b66dd9c414f966ae2",
+    "scripts/run_oob_regularization.py": "ac5678c554575608f5dc58d47efa498383c2408008c5c03c5f8dd9eb562c3a0a",
+    "src/auto_research/runtime.py": "0a924b7c06e0129f74e8b94ab98b56b05bf9d2e66d8c7d745fc24a66150670e3",
+    "src/auto_research/cli.py": "54bbbf251b797580d76022f6baa276415e9f50da6244d37ba157c751cbaa4aaa",
+    "src/auto_research/reproductions/reporting.py": "ccf2f6de0d3c2cb22d5c21151bc9feecd3769ff5a8f83fbd3aafec395233adb7"
+  },
+  "prior_failed_attempts": [
+    {
+      "commit": "d63fa6f67bb1d0e052cf0eabf8254e383697e6b7",
+      "error_type": "TypeError",
+      "reason": "unified CLI adapter used unsupported device_for keyword arguments",
+      "resolution": "shared runtime API and explicit CUDA index context; regression tests and real unified CLI rerun"
+    }
+  ],
+  "provenance": {
+    "commit": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "artifact_path": "docs/gpu-validations/oob-regularization-a100-20261016.json",
+    "metric_artifact_path": "docs/reproductions/2610.20158-oob-regularization/metrics/component-seeds42-44.json"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "additional_validated_commands": [
+    [
+      "python",
+      "-m",
+      "auto_research.cli",
+      "reproduce",
+      "--paper",
+      "oob-regularization",
+      "--device",
+      "cuda",
+      "--cpu-threads",
+      "1",
+      "--seeds",
+      "42",
+      "--budget",
+      "smoke",
+      "--dataset-dir",
+      "public/cifar10",
+      "--output-dir",
+      "runs/oob-cli"
+    ]
+  ]
+}

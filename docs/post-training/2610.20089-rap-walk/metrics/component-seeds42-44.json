@@ -1,0 +1,152 @@
+{
+  "schema_version": 2,
+  "method": "rap-walk",
+  "manifest_ref": "post-training:rap-walk",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l1_mechanism",
+  "dataset": {
+    "id": "explicit-transitive-and-cyclic-mechanism-fixtures",
+    "revision": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "capability_dataset": false
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component execution only; not full paper benchmark or capability improvement"
+  },
+  "metrics": {
+    "parameter_delta_l2": {
+      "mean": 0.004659698499987523,
+      "std": 0.00047621256913355176,
+      "n": 6
+    },
+    "maximum_stationary_residual": 9.311007520551584e-11
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "graphs": [
+        {
+          "id": "transitive-mechanism-fixture",
+          "advantages": [
+            1.155070866170814,
+            0.12911754687312177,
+            -1.2841884130439358
+          ],
+          "stationary_residual": 9.311007520551584e-11,
+          "normalized_entropy": 0.834146546536852,
+          "mixing_coefficient": 0.36238273887866473,
+          "parameter_delta_l2": 0.004911807831376791,
+          "loss": -1.9868215517249155e-08
+        },
+        {
+          "id": "cyclic-mechanism-fixture",
+          "advantages": [
+            0.9835224374223226,
+            0.3280702330222103,
+            0.36030301366138556,
+            -1.6718956841059183
+          ],
+          "stationary_residual": 4.756750549006483e-11,
+          "normalized_entropy": 0.9796041173217874,
+          "mixing_coefficient": 0.2256026372866567,
+          "parameter_delta_l2": 0.004191655199974775,
+          "loss": 2.9802322387695312e-08
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "graphs": [
+        {
+          "id": "transitive-mechanism-fixture",
+          "advantages": [
+            1.155070866170814,
+            0.12911754687312177,
+            -1.2841884130439358
+          ],
+          "stationary_residual": 9.311007520551584e-11,
+          "normalized_entropy": 0.834146546536852,
+          "mixing_coefficient": 0.36238273887866473,
+          "parameter_delta_l2": 0.005203887354582548,
+          "loss": -1.9868215517249155e-08
+        },
+        {
+          "id": "cyclic-mechanism-fixture",
+          "advantages": [
+            0.9835224374223226,
+            0.3280702330222103,
+            0.36030301366138556,
+            -1.6718956841059183
+          ],
+          "stationary_residual": 4.756750549006483e-11,
+          "normalized_entropy": 0.9796041173217874,
+          "mixing_coefficient": 0.2256026372866567,
+          "parameter_delta_l2": 0.00443814555183053,
+          "loss": 2.9802322387695312e-08
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "graphs": [
+        {
+          "id": "transitive-mechanism-fixture",
+          "advantages": [
+            1.155070866170814,
+            0.12911754687312177,
+            -1.2841884130439358
+          ],
+          "stationary_residual": 9.311007520551584e-11,
+          "normalized_entropy": 0.834146546536852,
+          "mixing_coefficient": 0.36238273887866473,
+          "parameter_delta_l2": 0.004106173291802406,
+          "loss": -1.9868215517249155e-08
+        },
+        {
+          "id": "cyclic-mechanism-fixture",
+          "advantages": [
+            0.9835224374223226,
+            0.3280702330222103,
+            0.36030301366138556,
+            -1.6718956841059183
+          ],
+          "stationary_residual": 4.756750549006483e-11,
+          "normalized_entropy": 0.9796041173217874,
+          "mixing_coefficient": 0.2256026372866567,
+          "parameter_delta_l2": 0.005106521770358086,
+          "loss": 2.9802322387695312e-08
+        }
+      ]
+    }
+  ],
+  "execution_checks": {
+    "actual_grpo_backward_and_update": true,
+    "explicit_fixture_not_video": true,
+    "video_generation_performed": false,
+    "judge_model_called": false
+  },
+  "provenance": {
+    "artifact_path": "docs/post-training/2610.20089-rap-walk/metrics/component-seeds42-44.json",
+    "dataset_fingerprint": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "commit": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/rap_walk.py": "6f879f3d78462b06890156c3f2e857693db6929828ca16b72f01ff1c714a21af",
+      "scripts/run_rap_walk.py": "a19bd88cf42bc20c07670086a068823e26f76afe7050088c1610a0e0872b31ca"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

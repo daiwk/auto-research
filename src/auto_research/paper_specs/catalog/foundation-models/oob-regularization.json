@@ -1,0 +1,15 @@
+{
+  "domain": "foundation-models",
+  "key": "oob-regularization",
+  "adapter": {"spec_key": "oob-regularization"},
+  "detail_path": "reproductions/2610.20158-oob-regularization/README.md",
+  "first_author": "Konstantinos Almpanakis",
+  "first_author_affiliation": "European Molecular Biology Laboratory (EMBL)",
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/oob-regularization-a100-20261016.json",
+  "summary": "定期对整个训练子集构建 Gaussian 分位数或 spherical 锚点，缓存在 CPU 并按样本索引读取，使小 batch 获得全数据抗坍塌正则。本地是有限 CIFAR 真图像训练对照，保留短预算负结果；不声称完成多数据集原研究。"
+}

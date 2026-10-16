@@ -1,0 +1,392 @@
+{
+  "schema_version": 2,
+  "method": "oob-regularization",
+  "manifest_ref": "reproduction:oob-regularization",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l2_public_dataset",
+  "dataset": {
+    "id": "CIFAR-10",
+    "revision": "sha256:54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+    "source_url": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+    "source_md5": "c99cafc152244af753f735de768cd75f",
+    "split_revision": "6ba2882738809786a921455ef0f835759c1cd01d53976deb458fa9d694b1b23e",
+    "training_examples": 512,
+    "validation_examples": 128,
+    "official_test_read": false
+  },
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component execution only; not full paper benchmark or capability improvement"
+  },
+  "metrics": {
+    "sigreg_in_batch_validation_knn5_accuracy": {
+      "mean": 0.20572916666666666,
+      "std": 0.06825699178167269,
+      "n": 3
+    },
+    "sigreg_oob_validation_knn5_accuracy": {
+      "mean": 0.2265625,
+      "std": 0.020669932117692115,
+      "n": 3
+    },
+    "simclr_validation_knn5_accuracy": {
+      "mean": 0.21354166666666666,
+      "std": 0.009021097956087902,
+      "n": 3
+    },
+    "contrastive_oob_validation_knn5_accuracy": {
+      "mean": 0.234375,
+      "std": 0.013531646934131853,
+      "n": 3
+    },
+    "sigreg_oob_minus_in_batch": {
+      "mean": 0.020833333333333332,
+      "std": 0.05083130545818525,
+      "n": 3
+    },
+    "contrastive_oob_minus_simclr": {
+      "mean": 0.020833333333333332,
+      "std": 0.022552744890219755,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "schema_version": 2,
+      "paper": "oob-regularization",
+      "seed": 42,
+      "evaluation_tier": "l2_public_dataset",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evidence_scope": "bounded public-image training comparison; not full paper capability reproduction",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "dataset": {
+        "id": "CIFAR-10",
+        "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        "source_file": "data_batch_1",
+        "source_md5": "c99cafc152244af753f735de768cd75f",
+        "source_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+        "split_revision": "6ba2882738809786a921455ef0f835759c1cd01d53976deb458fa9d694b1b23e",
+        "split_seed": 20261016,
+        "training_examples": 512,
+        "validation_examples": 128,
+        "official_test_read": false,
+        "validation_used_for_selection": false,
+        "labels_used_in_ssl_objective": false
+      },
+      "protocol_id": "oob-cifar10-train-only-bounded-v1",
+      "device": "cuda",
+      "accelerator": "NVIDIA A100-SXM4-80GB",
+      "configuration": {
+        "steps_per_arm": 40,
+        "arms": [
+          "sigreg_in_batch",
+          "sigreg_oob",
+          "simclr",
+          "contrastive_oob"
+        ],
+        "batch_size": 16,
+        "refresh_interval": 10,
+        "projection_count": 32,
+        "spherical_anchor_steps": 20,
+        "maximum_seconds": 120,
+        "encoder": "small CNN + 64-hidden MLP, 32-dimensional projection",
+        "selection": "fixed config; validation reported only, no test or search"
+      },
+      "metrics": {
+        "sigreg_in_batch": {
+          "validation_knn5_accuracy": 0.1875,
+          "last_training_loss": 0.7814967632293701,
+          "mean_training_loss": 0.6851599477231503,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 0,
+          "maximum_cache_age_steps": 0,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32828416
+        },
+        "sigreg_oob": {
+          "validation_knn5_accuracy": 0.2109375,
+          "last_training_loss": 0.4422455132007599,
+          "mean_training_loss": 0.8106866009533406,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 4,
+          "maximum_cache_age_steps": 9,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32828928
+        },
+        "simclr": {
+          "validation_knn5_accuracy": 0.21875,
+          "last_training_loss": 2.4332633018493652,
+          "mean_training_loss": 2.593200367689133,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 0,
+          "maximum_cache_age_steps": 0,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32977408
+        },
+        "contrastive_oob": {
+          "validation_knn5_accuracy": 0.2265625,
+          "last_training_loss": 0.8362321853637695,
+          "mean_training_loss": 0.9263119205832482,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 4,
+          "maximum_cache_age_steps": 9,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32977408
+        }
+      },
+      "paired_validation_differences": {
+        "sigreg_oob_minus_in_batch": 0.0234375,
+        "contrastive_oob_minus_simclr": 0.0078125
+      },
+      "elapsed_seconds": 3.373984307050705,
+      "implementation_sha256": "bfbaa7b0c3992d240b7084b3d7248f6e1cbf2dc00f7da3a3e6fa78ad179d71c1"
+    },
+    {
+      "schema_version": 2,
+      "paper": "oob-regularization",
+      "seed": 43,
+      "evaluation_tier": "l2_public_dataset",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evidence_scope": "bounded public-image training comparison; not full paper capability reproduction",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "dataset": {
+        "id": "CIFAR-10",
+        "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        "source_file": "data_batch_1",
+        "source_md5": "c99cafc152244af753f735de768cd75f",
+        "source_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+        "split_revision": "6ba2882738809786a921455ef0f835759c1cd01d53976deb458fa9d694b1b23e",
+        "split_seed": 20261016,
+        "training_examples": 512,
+        "validation_examples": 128,
+        "official_test_read": false,
+        "validation_used_for_selection": false,
+        "labels_used_in_ssl_objective": false
+      },
+      "protocol_id": "oob-cifar10-train-only-bounded-v1",
+      "device": "cuda",
+      "accelerator": "NVIDIA A100-SXM4-80GB",
+      "configuration": {
+        "steps_per_arm": 40,
+        "arms": [
+          "sigreg_in_batch",
+          "sigreg_oob",
+          "simclr",
+          "contrastive_oob"
+        ],
+        "batch_size": 16,
+        "refresh_interval": 10,
+        "projection_count": 32,
+        "spherical_anchor_steps": 20,
+        "maximum_seconds": 120,
+        "encoder": "small CNN + 64-hidden MLP, 32-dimensional projection",
+        "selection": "fixed config; validation reported only, no test or search"
+      },
+      "metrics": {
+        "sigreg_in_batch": {
+          "validation_knn5_accuracy": 0.28125,
+          "last_training_loss": 0.4400641918182373,
+          "mean_training_loss": 0.6616081915795803,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 0,
+          "maximum_cache_age_steps": 0,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32828416
+        },
+        "sigreg_oob": {
+          "validation_knn5_accuracy": 0.25,
+          "last_training_loss": 0.6140028238296509,
+          "mean_training_loss": 0.7629890285432339,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 4,
+          "maximum_cache_age_steps": 9,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32828928
+        },
+        "simclr": {
+          "validation_knn5_accuracy": 0.203125,
+          "last_training_loss": 2.204179286956787,
+          "mean_training_loss": 2.524121183156967,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 0,
+          "maximum_cache_age_steps": 0,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32977408
+        },
+        "contrastive_oob": {
+          "validation_knn5_accuracy": 0.25,
+          "last_training_loss": 0.7281335592269897,
+          "mean_training_loss": 0.8989151954650879,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 4,
+          "maximum_cache_age_steps": 9,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32977408
+        }
+      },
+      "paired_validation_differences": {
+        "sigreg_oob_minus_in_batch": -0.03125,
+        "contrastive_oob_minus_simclr": 0.046875
+      },
+      "elapsed_seconds": 3.3328743036836386,
+      "implementation_sha256": "bfbaa7b0c3992d240b7084b3d7248f6e1cbf2dc00f7da3a3e6fa78ad179d71c1"
+    },
+    {
+      "schema_version": 2,
+      "paper": "oob-regularization",
+      "seed": 44,
+      "evaluation_tier": "l2_public_dataset",
+      "fidelity": "core_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evidence_scope": "bounded public-image training comparison; not full paper capability reproduction",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "dataset": {
+        "id": "CIFAR-10",
+        "source": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        "source_file": "data_batch_1",
+        "source_md5": "c99cafc152244af753f735de768cd75f",
+        "source_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+        "split_revision": "6ba2882738809786a921455ef0f835759c1cd01d53976deb458fa9d694b1b23e",
+        "split_seed": 20261016,
+        "training_examples": 512,
+        "validation_examples": 128,
+        "official_test_read": false,
+        "validation_used_for_selection": false,
+        "labels_used_in_ssl_objective": false
+      },
+      "protocol_id": "oob-cifar10-train-only-bounded-v1",
+      "device": "cuda",
+      "accelerator": "NVIDIA A100-SXM4-80GB",
+      "configuration": {
+        "steps_per_arm": 40,
+        "arms": [
+          "sigreg_in_batch",
+          "sigreg_oob",
+          "simclr",
+          "contrastive_oob"
+        ],
+        "batch_size": 16,
+        "refresh_interval": 10,
+        "projection_count": 32,
+        "spherical_anchor_steps": 20,
+        "maximum_seconds": 120,
+        "encoder": "small CNN + 64-hidden MLP, 32-dimensional projection",
+        "selection": "fixed config; validation reported only, no test or search"
+      },
+      "metrics": {
+        "sigreg_in_batch": {
+          "validation_knn5_accuracy": 0.1484375,
+          "last_training_loss": 0.4508890211582184,
+          "mean_training_loss": 0.6404171995818615,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 0,
+          "maximum_cache_age_steps": 0,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32828416
+        },
+        "sigreg_oob": {
+          "validation_knn5_accuracy": 0.21875,
+          "last_training_loss": 0.4528316557407379,
+          "mean_training_loss": 0.7506322629749775,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 4,
+          "maximum_cache_age_steps": 9,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32828928
+        },
+        "simclr": {
+          "validation_knn5_accuracy": 0.21875,
+          "last_training_loss": 2.100548028945923,
+          "mean_training_loss": 2.569271594285965,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 0,
+          "maximum_cache_age_steps": 0,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32977408
+        },
+        "contrastive_oob": {
+          "validation_knn5_accuracy": 0.2265625,
+          "last_training_loss": 0.7321618795394897,
+          "mean_training_loss": 0.9031368106603622,
+          "optimizer_steps": 40,
+          "parameter_update_observed": true,
+          "refreshes": 4,
+          "maximum_cache_age_steps": 9,
+          "cache_cpu_resident": true,
+          "cached_targets_require_grad": false,
+          "process_peak_cuda_allocated_bytes": 32977408
+        }
+      },
+      "paired_validation_differences": {
+        "sigreg_oob_minus_in_batch": 0.0703125,
+        "contrastive_oob_minus_simclr": 0.0078125
+      },
+      "elapsed_seconds": 3.478993646800518,
+      "implementation_sha256": "bfbaa7b0c3992d240b7084b3d7248f6e1cbf2dc00f7da3a3e6fa78ad179d71c1"
+    }
+  ],
+  "execution_checks": {
+    "four_actual_training_arms": true,
+    "matched_initialization_and_augmentation_streams": true,
+    "cpu_detached_sample_anchor_cache": true,
+    "four_refreshes_each_oob_arm": true,
+    "validation_not_used_for_selection": true,
+    "official_test_read": false,
+    "unified_cli_cuda_same_seed_agreement": true
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.20158-oob-regularization/metrics/component-seeds42-44.json",
+    "dataset_fingerprint": "sha256:54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+    "commit": "63ca47dad9a19a302b31b1699267dd5c53692b9d",
+    "executed_source_sha256": {
+      "src/auto_research/reproductions/oob_regularization/algorithm.py": "283c6b540b04b4bee6ebe7e879a25dc4804973f42c0ee66c9b652aea62f61ad9",
+      "src/auto_research/reproductions/oob_regularization/experiment.py": "7a03e24e8028025fd5623aeff39bafa50dcf4f2ad72ffe0b66dd9c414f966ae2",
+      "scripts/run_oob_regularization.py": "ac5678c554575608f5dc58d47efa498383c2408008c5c03c5f8dd9eb562c3a0a",
+      "src/auto_research/runtime.py": "0a924b7c06e0129f74e8b94ab98b56b05bf9d2e66d8c7d745fc24a66150670e3",
+      "src/auto_research/cli.py": "54bbbf251b797580d76022f6baa276415e9f50da6244d37ba157c751cbaa4aaa",
+      "src/auto_research/reproductions/reporting.py": "ccf2f6de0d3c2cb22d5c21151bc9feecd3769ff5a8f83fbd3aafec395233adb7"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

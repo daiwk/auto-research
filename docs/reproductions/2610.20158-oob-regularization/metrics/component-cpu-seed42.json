@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "method": "oob-regularization-bounded-public-image-training",
+  "manifest_ref": "reproduction:oob-regularization",
+  "seed": 42,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evaluation_tier": "l2_public_dataset",
+  "evaluation_protocol": {
+    "tier": "l2_public_dataset",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "fixed-budget four-arm true-image training; single seed; not full-paper capability evidence"
+  },
+  "dataset": {
+    "id": "CIFAR-10-training-data_batch_1",
+    "revision": "sha256:54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+    "split_revision": "6ba2882738809786a921455ef0f835759c1cd01d53976deb458fa9d694b1b23e",
+    "training_examples": 512,
+    "validation_examples": 128,
+    "official_test_read": false,
+    "labels_used_in_ssl_objective": false
+  },
+  "provenance": {
+    "artifact_path": "docs/reproductions/2610.20158-oob-regularization/metrics/component-cpu-seed42.json",
+    "dataset_fingerprint": "sha256:54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+    "source_url": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+    "implementation_sha256": "8c39fe4bb54b372be4a95b7b60de138aad37c580c3da1ee787bf000f21cbde93",
+    "command": "PYTHONPATH=src python scripts/run_oob_regularization.py --dataset-dir <official-cifar-cache> --device cpu --seed 42 --output <new-result.json>",
+    "accelerator": "CPU",
+    "model": "small-image-CNN-with-32-dimensional-projector",
+    "pretrained": false
+  },
+  "protocol": {
+    "id": "oob-cifar10-train-only-bounded-v1",
+    "steps_per_arm": 40,
+    "batch_size": 16,
+    "refresh_interval": 10,
+    "projection_count": 32,
+    "spherical_anchor_steps": 20,
+    "maximum_seconds": 120,
+    "validation_selection_performed": false
+  },
+  "metrics": {
+    "sigreg_in_batch_validation_knn5_accuracy": 0.1953125,
+    "sigreg_oob_validation_knn5_accuracy": 0.15625,
+    "simclr_validation_knn5_accuracy": 0.25,
+    "contrastive_oob_validation_knn5_accuracy": 0.203125,
+    "sigreg_oob_minus_in_batch": -0.0390625,
+    "contrastive_oob_minus_simclr": -0.046875,
+    "optimizer_steps_each_arm": 40,
+    "refreshes_each_oob_arm": 4,
+    "maximum_cache_age_steps": 9,
+    "all_parameters_updated": true,
+    "cache_cpu_resident": true,
+    "cached_targets_require_grad": false
+  },
+  "full_experiment": {
+    "status": "not_reproduced_high_cost",
+    "review_done": true
+  }
+}

@@ -62,8 +62,9 @@ gold answer，也没有自回归输出 token。
 
 - [Jev 区域语言迁移](2610.14112-regional-transfer/README.md)：固定原作者公开预测，复算校准、风险覆盖和 validation 选定的置信度级联；不调用付费服务，不用 Jev 输出训练。
 - [检索请求独立性审计](2610.14631-request-audit/README.md)：分离问题集合、证据和候选集合干预，检查概率/决策是否发生非预期变化。当前可执行的是外部配对预测分析，不是七 checkpoint 完整实跑。
+- [Selective Reasoning](2610.19644-selective-reasoning/README.md)：固定官方小发布包复算九组统计，并提供何时启动、读取和停止的控制器接口；不把历史测量复算当作本地LLM能力，完整在线大模型实验成本过高不复现。
 
-两项均不登记成训练型 evolve 算子，不将原作者预测或协议单测混作本地新模型能力。
+以上接口均不登记成训练型 evolve 算子，不将原作者预测或协议单测混作本地新模型能力。
 
 知识、推理与多语言能力比较新增[13 任务能力评测入口](2610.11978-jev-capability/README.md)：支持官方数据 schema、固定 revision、语言宏平均和明确缺失覆盖。开放 NanoJev 已在 ARC-Challenge 全测试集实测；它与闭源 Jev 的结果分开记录，不混称官方复现。
 
