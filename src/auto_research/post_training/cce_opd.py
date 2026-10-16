@@ -100,9 +100,13 @@ def cce_ppo_loss(current_logits: Tensor, sampled_ids: Tensor, credit: CCECredit,
     """
     if not 0 < clip_epsilon < 1 or auxiliary_weight < 0:
         raise ValueError("invalid PPO configuration")
-    lp = current_logits.log_softmax(-1)
+    valid = credit.valid_mask
+    # Sanitize padding *before* exp/softmax; masked_fill after an overflow does
+    # not prevent NaN gradients through the discarded computation.
+    lp = current_logits.masked_fill(~valid.unsqueeze(-1), 0).log_softmax(-1)
     sampled = lp.gather(-1, sampled_ids.unsqueeze(-1)).squeeze(-1)
-    ratio = (sampled - credit.old_sample_logp.detach()).exp()
+    log_ratio = (sampled - credit.old_sample_logp.detach()).masked_fill(~valid, 0)
+    ratio = log_ratio.exp()
     advantage = credit.sampled_advantages.detach()
     surrogate = torch.minimum(ratio * advantage, ratio.clamp(1 - clip_epsilon, 1 + clip_epsilon) * advantage)
     fkl = (credit.target_probabilities.detach() * (credit.target_log_probabilities.detach() - lp)).sum(-1)

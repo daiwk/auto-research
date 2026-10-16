@@ -313,3 +313,83 @@ def test_ggpo_homogeneous_group_filter_and_clipped_unclipped_gradient_equivalenc
     a = torch.autograd.grad(direct, values, retain_graph=True)[0]
     b = torch.autograd.grad(surrogate, values)[0]
     torch.testing.assert_close(a, b)
+
+
+def test_waypoint_extreme_finite_padding_is_sanitized_before_kl_exp():
+    old = torch.zeros(1, 2, 3)
+    middle = torch.tensor([[[2., -1., 0.], [1., -2., 0.]]])
+    ids = torch.zeros(1, 2, dtype=torch.long)
+    credit = waypoint_opd.prepare_credit(old, old, middle, 2 * middle, ids,
+        torch.full((1, 2), -1.), torch.tensor([[True, False]]), top_k=3)
+    current = torch.zeros(1, 2, 3)
+    current[0, 1, 0] = -1000.
+    current.requires_grad_()
+    loss, _ = waypoint_opd.waypoint_ppo_loss(current, ids, credit, kl_coefficient=1.)
+    loss.backward()
+    assert torch.isfinite(loss) and torch.isfinite(current.grad).all()
+    assert not current.grad[0, 1].any()
+
+
+def test_cce_extreme_finite_padding_is_sanitized_before_ppo_exp():
+    old = torch.zeros(1, 2, 4)
+    old[0, 1, 0] = -1000.
+    full = torch.tensor([[[1., 0., -1., 0.], [1., 0., -1., 0.]]])
+    masked = full.flip(-1)
+    ids = torch.zeros(1, 2, dtype=torch.long)
+    credit = cce_opd.prepare_credit(old, full, masked, ids, torch.tensor([[True, False]]),
+        torch.tensor([True]), top_k=2)
+    current = torch.zeros_like(old, requires_grad=True)
+    loss, _ = cce_opd.cce_ppo_loss(current, ids, credit)
+    loss.backward()
+    assert torch.isfinite(loss) and torch.isfinite(current.grad).all()
+    assert not current.grad[0, 1].any()
+
+
+def test_sif_extreme_finite_padding_is_sanitized_before_policy_and_kl_exp():
+    configuration = sif.VotingConfig(windows=2, width=2, minimum_stride=1, window_wins=2)
+    certainty = torch.tensor([[[3., 3., 3., 0.], [2., 2., 2., 0.]]])
+    valid = torch.tensor([[[True, True, True, False], [True, True, True, False]]])
+    credit = sif.prepare_credit(certainty, valid, config=configuration)
+    current = torch.full_like(certainty, -1.)
+    current[~valid] = -1000.
+    current.requires_grad_()
+    old, reference = torch.full_like(current, -1.), torch.full_like(current, -1.)
+    loss, _ = sif.sif_ppo_loss(current, old, reference, credit, kl_coefficient=1.)
+    loss.backward()
+    assert torch.isfinite(loss) and torch.isfinite(current.grad).all()
+    assert not current.grad[~valid].any()
+
+
+def test_tf_fusion_rejects_tied_embedding_head_instead_of_silent_overwrite():
+    class TiedPolicy(nn.Module):
+        def __init__(self, value):
+            super().__init__()
+            self.embedding = nn.Embedding(3, 3)
+            self.head = nn.Linear(3, 3, bias=False)
+            self.head.weight = self.embedding.weight
+            with torch.no_grad():
+                self.embedding.weight.fill_(value)
+
+        def forward(self, ids):
+            return self.head(self.embedding(ids))
+
+    base, first, second = TiedPolicy(0.), TiedPolicy(1.), TiedPolicy(3.)
+    # Head Gram merge would be 2, embedding arithmetic 4. No load ordering
+    # may silently choose one of these conflicting contracts.
+    with pytest.raises(ValueError, match="explicit tie policy"):
+        tf_opd.fuse_models(base, [first, second], [{"head": torch.eye(3)}] * 2)
+    torch.testing.assert_close(base.embedding.weight, torch.zeros(3, 3))
+
+
+def test_tf_fusion_rejects_distinct_parameters_sharing_underlying_storage():
+    class SharedStorage(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.first = nn.Linear(2, 2, bias=False)
+            self.second = nn.Linear(2, 2, bias=False)
+            self.second.weight = nn.Parameter(self.first.weight.view_as(self.first.weight))
+
+    base = SharedStorage()
+    assert base.first.weight is not base.second.weight
+    with pytest.raises(ValueError, match="tied/shared parameter storage"):
+        tf_opd.fuse_models(base, [deepcopy(base)], [{"first": torch.eye(2), "second": torch.eye(2)}])

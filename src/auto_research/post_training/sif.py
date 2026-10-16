@@ -93,10 +93,15 @@ def sif_ppo_loss(current_logp: Tensor, old_logp: Tensor, reference_logp: Tensor,
     if not 0 < clip_epsilon < 1 or kl_coefficient < 0:
         raise ValueError("invalid PPO configuration")
     mask = credit.update_mask
-    ratio = (current_logp - old_logp.detach()).exp()
+    # Apply the combined eligibility/group/token mask before exponentiation.
+    # Post-exp masking cannot undo inf*0 in autograd at extreme padding scores.
+    current = current_logp.masked_fill(~mask, 0)
+    old = old_logp.detach().masked_fill(~mask, 0)
+    reference = reference_logp.detach().masked_fill(~mask, 0)
+    ratio = (current - old).exp()
     advantage = credit.advantages.detach().unsqueeze(-1)
     policy = -torch.minimum(ratio * advantage, ratio.clamp(1 - clip_epsilon, 1 + clip_epsilon) * advantage)
-    ref_ratio = reference_logp.detach() - current_logp
+    ref_ratio = reference - current
     kl = ref_ratio.exp() - ref_ratio - 1
     # Every excluded token is removed from both terms, including KL-only updates.
     lengths = mask.sum(-1).clamp_min(1)

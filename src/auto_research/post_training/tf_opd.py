@@ -156,6 +156,19 @@ def fuse_models(base: nn.Module, teachers: list[nn.Module], grams: list[dict], *
     """Fuse all supported linear weights; task-arithmetic all remaining tensors."""
     if not teachers or len(teachers) != len(grams):
         raise ValueError("one statistics dictionary per same-architecture teacher required")
+    # A tied embedding/head would otherwise receive two incompatible rules:
+    # task arithmetic for embedding and Gram solve for head, silently overwritten
+    # by load_state_dict. Reject all parameter-storage aliases until a dedicated
+    # tie policy exists, including distinct Parameter views sharing storage.
+    for model in [base, *teachers]:
+        owners = {}
+        for name, parameter in model.named_parameters(remove_duplicate=False):
+            if not parameter.numel():
+                continue
+            storage = (str(parameter.device), parameter.untyped_storage().data_ptr())
+            if storage in owners:
+                raise ValueError(f"tied/shared parameter storage is unsupported without an explicit tie policy: {owners[storage]}, {name}")
+            owners[storage] = name
     fused = deepcopy(base).float()
     base_state, teacher_states = base.state_dict(), [t.state_dict() for t in teachers]
     if any(set(s) != set(base_state) for s in teacher_states):

@@ -79,16 +79,19 @@ def waypoint_ppo_loss(current_logits: Tensor, sampled_ids: Tensor, credit: Waypo
     """
     if not 0 < clip_epsilon < 1 or dual_clip <= 1 or kl_coefficient < 0:
         raise ValueError("invalid PPO configuration")
-    logp = current_logits.log_softmax(-1)
+    valid = credit.valid_mask
+    # Remove padding before nonlinear operations. Masking an already-overflowed
+    # exp afterwards leaves inf*0/NaN in its backward graph.
+    logp = current_logits.masked_fill(~valid.unsqueeze(-1), 0).log_softmax(-1)
     candidate_lp = logp.gather(-1, credit.candidates)
-    ratio = (candidate_lp - credit.old_candidate_logp.detach()).exp()
+    candidate_log_ratio = (candidate_lp - credit.old_candidate_logp.detach()).masked_fill(~valid.unsqueeze(-1), 0)
+    ratio = candidate_log_ratio.exp()
     advantage = credit.advantages.detach()
     ordinary = torch.minimum(ratio * advantage, ratio.clamp(1 - clip_epsilon, 1 + clip_epsilon) * advantage)
     surrogate = torch.where(advantage < 0, torch.maximum(ordinary, dual_clip * advantage), ordinary)
     sampled_lp = logp.gather(-1, sampled_ids.unsqueeze(-1)).squeeze(-1)
-    log_ratio = credit.reference_sample_logp.detach() - sampled_lp
+    log_ratio = (credit.reference_sample_logp.detach() - sampled_lp).masked_fill(~valid, 0)
     kl = log_ratio.exp() - log_ratio - 1
-    valid = credit.valid_mask
     per_token = -surrogate.sum(-1) + kl_coefficient * kl
     loss = per_token.masked_fill(~valid, 0).sum() / valid.sum().clamp_min(1)
     return loss, {"mean_gate": float(credit.gate[valid].mean()) if valid.any() else 0.,
