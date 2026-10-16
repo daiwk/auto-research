@@ -28,11 +28,20 @@ def test_every_adapter_is_present_in_all_documentation_indexes():
             continue
         assert paper.get("adapter") is None
         assert paper["gpu_validation_passed"] is False
-        assert "成本过高，暂不复现" in paper["deferral_reason"]
-        archived = ROOT / paper["deferred_execution_spec"]
-        assert archived.is_file() and not archived.with_name("paper.yaml").exists()
         detail = ROOT / "docs" / paper["detail_path"]
-        assert "待验收" in detail.read_text(encoding="utf-8")
+        if paper.get("review_done") is True:
+            assert paper["review_resolution"] == "not_reproduced_high_cost"
+            assert paper["full_experiment_status"] == "not_reproduced_high_cost"
+            assert "不复现（审查 DONE）" in paper["deferral_reason"]
+            assert not paper.get("local_operator") and not paper.get("local_command")
+            assert not paper.get("gpu_validation_artifact")
+            assert not paper.get("deferred_execution_spec")
+            assert "不复现（审查 DONE）" in detail.read_text(encoding="utf-8")
+        else:
+            assert "成本过高，暂不复现" in paper["deferral_reason"]
+            archived = ROOT / paper["deferred_execution_spec"]
+            assert archived.is_file() and not archived.with_name("paper.yaml").exists()
+            assert "待验收" in detail.read_text(encoding="utf-8")
         if detail.parent.parent == DOCS:
             deferred.add(detail.parent.name)
     actual = {

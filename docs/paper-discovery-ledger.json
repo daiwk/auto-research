@@ -118383,6 +118383,622 @@
           "upstream_revision": "94a47d391893ea392fd9bb9883a65d2c8834e6f2"
         }
       ]
+    },
+    {
+      "batch": "2026-10-17-twelve-components-and-meta-system-reference",
+      "date": "2026-10-17",
+      "scope_kind": "selected-paper-implementation",
+      "window": "Twelve user-approved bounded components plus one Meta/AMD review-only system report; not a complete bulletin review.",
+      "required_tracks": [
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "review_watermark_advanced": false,
+      "coverage_complete": false,
+      "review_snapshot_modified": false,
+      "scope_artifact": "research-audits/oct17-components/README.md",
+      "accepted_scope_counts": {
+        "bounded_components": 12,
+        "review_only_system_report": 1
+      },
+      "component_validation_counts": {
+        "gpu_receipt_and_source_hashes_validated": 9,
+        "cpu_metrics_sources_validated": 3,
+        "review_only_not_reproduced": 1
+      },
+      "full_reproduction_policy": "Terminal not_reproduced_high_cost/review DONE; bounded diagnostics accepted separately, no automatic retry or capability promotion.",
+      "candidates": [
+        {
+          "id": "2610.22256",
+          "key": "bit-sparse",
+          "title": "BitSparse: Compact Activation Storage for ReLU Feed-Forward Networks",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文 RTX3090 步时乘3350步估算单臂约七小时；不是A100实测。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22256",
+            "basis": "原文 RTX3090 步时乘3350步估算单臂约七小时；不是A100实测。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22256-bit-sparse/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "以按tile打包的单bit mask、非零激活和32位prefix保存ReLU中间状态，实际autograd反向重建并核对dense梯度；支持BF16逐bit还原。仅Torch参考格式，不含sign-bit packing、FP8、异步buffer或Triton性能复现；完整3350步训练成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.bit_sparse.sparse_activation_linear",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_foundation_components.py --papers bit-sparse --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/bit-sparse-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22256"
+            }
+          ]
+        },
+        {
+          "id": "2610.21138",
+          "key": "clean-rm",
+          "title": "CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF",
+          "priority": "P1",
+          "track": "post-training",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。8–70B两阶段reward model、最多600epochs/早停30，另有策略RL与外部judge。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21138v1",
+            "basis": "8–70B两阶段reward model、最多600epochs/早停30，另有策略RL与外部judge。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "post-training/2610.21138-clean-rm/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "以少量干净校准反馈和 noisy features 构造语义+恢复偏好的 joint cost，通过真实等质量精确 OT 优化双向噪声估计器，再冻结估计率训练 signed noise-corrected reward loss；不使用已知噪声率偷渡核心估计。等长至多12点数值 batch 替代大模型表征与通用OT，完整 RM/RLHF 多模型实验不复现。",
+          "local_operator": "auto_research.post_training.clean_rm.noise_estimation_loss",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_post_components.py --methods clean-rm --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/clean-rm-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21138v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.22245",
+          "key": "disagreement-routing",
+          "title": "Disagreement-Guided Weak-to-Strong Routing",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。8B、多样本、多模型BFCL/WebShop训练和长rollout。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22245",
+            "basis": "8B、多样本、多模型BFCL/WebShop训练和长rollout。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22245-disagreement-routing/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "以弱强分歧减去强模型自身分歧估计升级收益，无需正确答案标签；本地实现排除自配对的目标估计、两个真实软BCE探针和validation预算校准，CPU合成表示仅验证机制，不声称LLM/Agent任务提升。",
+          "local_operator": "auto_research.agent_research.disagreement_routing.fit_router",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_agent_components.py --methods disagreement-routing --seeds 42,43,44 --output runs/oct17-agent/disagreement-cpu.json",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.22245-disagreement-routing/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22245"
+            }
+          ]
+        },
+        {
+          "id": "2610.22130",
+          "key": "drop-kv",
+          "title": "DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。7B/8B 多模型、4K–128K、多 KV 预算完整评测。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22130",
+            "basis": "7B/8B 多模型、4K–128K、多 KV 预算完整评测。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22130-drop-kv/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "按移除单个KV后的精确attention输出扰动累加评分，在GQA物理KV head内合并查询head，再执行池化和近期保护。独立Torch参考实现验证实际移除重算、有限梯度与attention-only负对照，不声称Triton吞吐或7B/8B长上下文能力；完整实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.drop_kv.drop_kv_scores",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_foundation_components.py --papers drop-kv --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/drop-kv-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22130"
+            }
+          ]
+        },
+        {
+          "id": "2610.22290",
+          "key": "elite-replay",
+          "title": "EliteReplay: Preserving Diverse Solutions in RL Post-Training via Quality-Diversity Search",
+          "priority": "P1",
+          "track": "post-training",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。4 A100-80GB、4B全参、长rollout、每题128次评测。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22290v1",
+            "basis": "4 A100-80GB、4B全参、长rollout、每题128次评测。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "post-training/2610.22290-elite-replay/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "按未覆盖 approach、尝试次数与全局覆盖选择目标，以冻结基模生成并验证候选，按实际 cell 插入或最短替换；固定 archive 后跨题与 cell 均衡采样，混合 GRPO 与逐解长度归一的 NLL。算术 grammar 替代语言 SQL 生成与 LLM labeler，故仅机制诊断，不声称复现 BIRD/Spider 能力。",
+          "local_operator": "auto_research.post_training.elite_replay.grpo_replay_loss",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_post_components.py --methods elite-replay --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/elite-replay-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22290v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.22230",
+          "key": "hardware-diversity",
+          "title": "Architecting for Hardware Diversity: Meta's End-to-End Co-Design for High-Performance AI Training on AMD GPUs",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。8–128 AMD MI350X/NVIDIA B200和私有生产推荐任务；当前单A100/A30硬件不匹配。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22230",
+            "basis": "8–128 AMD MI350X/NVIDIA B200和私有生产推荐任务；当前单A100/A30硬件不匹配。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22230-hardware-diversity/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "Meta/AMD 从硬件与模型协同、Origami 分析式 GEMM 选择、Agent 辅助 kernel 移植三层优化推荐训练。本条仅收录系统研究资料与生产训练证据，不提供算法入口或本地性能数值；完整实验成本过高且硬件不匹配，不复现（审查 DONE）。",
+          "local_operator": null,
+          "local_command": null,
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "review_only_not_reproduced"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22230"
+            }
+          ]
+        },
+        {
+          "id": "2610.22179",
+          "key": "lct",
+          "title": "LCT: Losslessly Compressed Tensors with GPU friendly execution for Training",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文 RTX3090 步时乘3400步估算单臂约8.5小时；完整fused kernel/optimizer另需工程验证。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22179",
+            "basis": "原文 RTX3090 步时乘3400步估算单臂约8.5小时；完整fused kernel/optimizer另需工程验证。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22179-lct/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "固定模型预计算Package-Merge有界Huffman码与escape，BF16指数经中心置换后循环映射到限额stream，超额部分保留原始指数尾；sign/mantissa字节不改。Torch位级参考保留所有指数/特殊值与真实linear反向接口，不含融合kernel或吞吐复现；完整训练成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.lct.compress_bf16",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_foundation_components.py --papers lct --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/lct-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22179"
+            }
+          ]
+        },
+        {
+          "id": "2610.22353",
+          "key": "mirror-moe",
+          "title": "Rethinking Routing Exploration in Modern Mixture-of-Experts",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。2–4 H100、4.4B–12.8B tokens、多模型预训练。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22353",
+            "basis": "2–4 H100、4.4B–12.8B tokens、多模型预训练。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22353-mirror-moe/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "正负router logits的softmax混合负责选专家，原正向概率负责聚合；保留共享专家、余弦退火与按原概率计算的负载均衡。小型可训练专家验证手工参考、错误混合权重负对照和真实更新；不实现分布式dispatch，完整多卡预训练成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.mirror_moe.mirror_routing",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_foundation_components.py --papers mirror-moe --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/mirror-moe-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22353"
+            }
+          ]
+        },
+        {
+          "id": "2610.22056",
+          "key": "progress-reward",
+          "title": "Progress Reward Model for Reinforcement Learning via Large Language Models",
+          "priority": "P1",
+          "track": "post-training",
+          "intake_class": "historical-work-new-arxiv",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。4 RTX3090、128CPU/256GB、五种子；原文模拟训练每任务约1–10小时。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22056v1",
+            "basis": "4 RTX3090、128CPU/256GB、五种子；原文模拟训练每任务约1–10小时。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "post-training/2610.22056-progress-reward/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "将经过审阅的子任务 completion predicates 映射为当前状态的 Psi，并拼接外部子任务 embedding；以 gamma*Phi(next)-Phi(current)+成功奖励实现 progress reward，显式区分真终止与时间截断。只验证状态机、势函数与小策略更新，未实现 LLM 规划或机器人环境，NeurIPS 2025 完整多种子实验成本过高不复现。",
+          "local_operator": "auto_research.post_training.progress_reward.progress_reward",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_post_components.py --methods progress-reward --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/progress-reward-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22056v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.21808",
+          "key": "roleq",
+          "title": "RoleQ: Role-Aligned Scales for Converting Language Models to Ternary",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文8B配置3–4 A100小时，二平面阶段不足十小时。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21808",
+            "basis": "原文8B配置3–4 A100小时，二平面阶段不足十小时。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.21808-roleq/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "按reader行/writer列放置scale，穷举有序前缀求精确单向量三值最优解，真实执行每字节5trits打包并计入scale/padding存储。以全部三值码穷举核对小向量，不实现旋转、GPTQ、蒸馏或Fisher二平面；完整8B转换实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.roleq.quantize_by_role",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_foundation_components.py --papers roleq --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/roleq-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21808"
+            }
+          ]
+        },
+        {
+          "id": "2610.22080",
+          "key": "shared-residual-distillation",
+          "title": "Learning from Unverified Peers via Shared Residual Distillation",
+          "priority": "P1",
+          "track": "post-training",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。1.7/4/8B、100步、每步32题×4rollouts、多冻结教师评分和20K/32K长度。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22080v1",
+            "basis": "1.7/4/8B、100步、每步32题×4rollouts、多冻结教师评分和20K/32K长度。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "post-training/2610.22080-shared-residual-distillation/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "以跨题 control 为参照，按 question-only q0 中心化同题 peer 的 log-prob 残差；只保留全体同号的最小幅度，再形成 detached teacher target，执行逐坐标 capped KL。保留同题 peer/target 隔离和跨题 control；微型真实采样与梯度更新仅为机制诊断，完整三模型数学训练成本过高不复现。",
+          "local_operator": "auto_research.post_training.shared_residual_distillation.clipped_distillation_loss",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_post_components.py --methods shared-residual-distillation --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/shared-residual-distillation-a100-20261017.json",
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22080v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.22243",
+          "key": "shortcut-sensitivity",
+          "title": "Shortcut Sensitivity in Agent-Safety Evaluations",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。只接受固定公开历史记录复算；完整新模型/守卫和干预采集预算未可靠确定，不启动探跑。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22243",
+            "basis": "只接受固定公开历史记录复算；完整新模型/守卫和干预采集预算未可靠确定，不启动探跑。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22243-shortcut-sensitivity/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "将标签可预测性、guard观测关联与配对决策敏感性分开；本地独立实现跨域工具名查表、interaction等权指标和安慰剂校正接口，重算1220条AgentDojo与731条AgentHarm冻结记录，不运行模型或工具。",
+          "local_operator": "auto_research.agent_research.shortcut_sensitivity.leave_one_domain_out",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_agent_components.py --methods shortcut-sensitivity --shortcut-cache .cache/oct17-agent-public/toolsafe --fetch-shortcut --seeds 42,43,44 --output runs/oct17-agent/shortcut-public.json",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.22243-shortcut-sensitivity/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22243"
+            }
+          ]
+        },
+        {
+          "id": "2610.21267",
+          "key": "tracer",
+          "title": "TRACER: Trajectory-Aware Tool Retrieval for LLM Agents",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。六环境×四模型×五折×多预算和自由rollout，原文未发布artifacts。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21267",
+            "basis": "六环境×四模型×五折×多预算和自由rollout，原文未发布artifacts。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.21267-tracer/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "按turn内完整调用前缀建trie，以边上历史上下文均值提供语义先验，并学习与经验频率的逐状态混合和温度；本地保留真实Adam训练、trajectory-held-out交叉拟合、未知前缀/低置信回退与可选高熵全局工具。",
+          "local_operator": "auto_research.agent_research.tracer.fit_tracer",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_agent_components.py --methods tracer --seeds 42,43,44 --output runs/oct17-agent/tracer-cpu.json",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.21267-tracer/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21267"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

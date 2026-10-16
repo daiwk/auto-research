@@ -1,0 +1,218 @@
+{
+  "schema_version": 2,
+  "method": "tracer",
+  "manifest_ref": "agent-research:tracer",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cpu",
+  "dataset": {
+    "id": "synthetic-tracer-mechanism-fixture",
+    "revision": "5cddd1f9ad9c2945cb7300a9091f4f0150252afc9b8a566415b32030658b3213",
+    "public_benchmark_evaluated": false
+  },
+  "metrics": {
+    "corrupted_context_recall_at_1": {
+      "mean": 0.6666666666666666,
+      "std": 0.0,
+      "n": 3
+    },
+    "epochs": {
+      "mean": 150,
+      "std": 0.0,
+      "n": 3
+    },
+    "final_crossfit_nll": {
+      "mean": 0.00066315482155001,
+      "std": 4.282294329574171e-05,
+      "n": 3
+    },
+    "fixture_held_out_next_tool_recall_at_1": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "held_out_fallback_fraction": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "initial_crossfit_nll": {
+      "mean": 0.10273301644233981,
+      "std": 0.003965549914130473,
+      "n": 3
+    },
+    "maximum_empirical_weight": {
+      "mean": 0.4581121593028892,
+      "std": 0.010009074646758005,
+      "n": 3
+    },
+    "minimum_empirical_weight": {
+      "mean": 0.1698208933900442,
+      "std": 0.004282346869657504,
+      "n": 3
+    },
+    "minimum_temperature": {
+      "mean": 0.10099693253684736,
+      "std": 0.006891163272179231,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 1.5410908753362225,
+      "std": 0.035028360665042384,
+      "n": 3
+    },
+    "planned_steps": {
+      "mean": 120,
+      "std": 0.0,
+      "n": 3
+    },
+    "retained_test_fraction": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "trainable_steps": {
+      "mean": 120,
+      "std": 0.0,
+      "n": 3
+    },
+    "trajectory_overlap": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "unseen_prefix_fallback_checked": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "unseen_prefix_or_child_steps": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "planned_steps": 120,
+        "trainable_steps": 120,
+        "unseen_prefix_or_child_steps": 0,
+        "trajectory_overlap": 0,
+        "initial_crossfit_nll": 0.09828002713916469,
+        "final_crossfit_nll": 0.0006146457788696724,
+        "parameter_delta_l2": 1.5008102116529956,
+        "epochs": 150,
+        "fixture_held_out_next_tool_recall_at_1": 1.0,
+        "corrupted_context_recall_at_1": 0.6666666666666666,
+        "held_out_fallback_fraction": 0.0,
+        "minimum_empirical_weight": 0.1741012999802196,
+        "maximum_empirical_weight": 0.4465705989558681,
+        "minimum_temperature": 0.10862998397639674,
+        "retained_test_fraction": 1.0,
+        "unseen_prefix_fallback_checked": 1.0
+      },
+      "fixture_sha256": "c47ba0c7c64a000fbdae996f7c8e660691d22b0a4e237584d5d4ce70d134271f",
+      "training_protocol": {
+        "train_trajectories": 40,
+        "test_trajectories": 20,
+        "inner_folds": 5,
+        "standardizer": "crossfit training examples only",
+        "context_encoder": "synthetic 3-vector, not text-embedding-3-small"
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "planned_steps": 120,
+        "trainable_steps": 120,
+        "unseen_prefix_or_child_steps": 0,
+        "trajectory_overlap": 0,
+        "initial_crossfit_nll": 0.10403552471912732,
+        "final_crossfit_nll": 0.0006791051839208312,
+        "parameter_delta_l2": 1.5580551796575897,
+        "epochs": 150,
+        "fixture_held_out_next_tool_recall_at_1": 1.0,
+        "corrupted_context_recall_at_1": 0.6666666666666666,
+        "held_out_fallback_fraction": 0.0,
+        "minimum_empirical_weight": 0.1698247713152354,
+        "maximum_empirical_weight": 0.4633577120481113,
+        "minimum_temperature": 0.09912733402031543,
+        "retained_test_fraction": 1.0,
+        "unseen_prefix_fallback_checked": 1.0
+      },
+      "fixture_sha256": "a92450b8f03cd977ae50195b86d29ab1804aef6ec013a29edc76f6ffabd7825f",
+      "training_protocol": {
+        "train_trajectories": 40,
+        "test_trajectories": 20,
+        "inner_folds": 5,
+        "standardizer": "crossfit training examples only",
+        "context_encoder": "synthetic 3-vector, not text-embedding-3-small"
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "planned_steps": 120,
+        "trainable_steps": 120,
+        "unseen_prefix_or_child_steps": 0,
+        "trajectory_overlap": 0,
+        "initial_crossfit_nll": 0.10588349746872742,
+        "final_crossfit_nll": 0.0006957135018595264,
+        "parameter_delta_l2": 1.5644072346980822,
+        "epochs": 150,
+        "fixture_held_out_next_tool_recall_at_1": 1.0,
+        "corrupted_context_recall_at_1": 0.6666666666666666,
+        "held_out_fallback_fraction": 0.0,
+        "minimum_empirical_weight": 0.16553660887467758,
+        "maximum_empirical_weight": 0.46440816690468817,
+        "minimum_temperature": 0.09523347961382989,
+        "retained_test_fraction": 1.0,
+        "unseen_prefix_fallback_checked": 1.0
+      },
+      "fixture_sha256": "e3e1eeddc3124e51474bb86433fb4c54621c32c17f5d39cdc348f2f694f4d1cc",
+      "training_protocol": {
+        "train_trajectories": 40,
+        "test_trajectories": 20,
+        "inner_folds": 5,
+        "standardizer": "crossfit training examples only",
+        "context_encoder": "synthetic 3-vector, not text-embedding-3-small"
+      }
+    }
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "claim_policy": "CPU audit/algorithm fixtures, not agent capability or original-paper reproduction",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/agent-research/2610.21267-tracer/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_oct17_agent_components.py": "49ea9e261586b00e093a5ba732c8bf22067171b03b7d979c7f6a6a4e61739174",
+      "src/auto_research/agent_research/tracer.py": "70fff3243ff8270e625f1a6ac34503cc4a0e0d8f8fb6f414aef27cbcf3c8a95a"
+    },
+    "raw_runner_artifact_sha256": "f70bbf5f8258f98409d1db8f82ac1bb2765281107ec218ac21134601a8ff3f30",
+    "dataset_fingerprint": "d318009cdd2f55d4126418cbc6ba3113a2f775e536789ef9efd0e5d50ae62ba0"
+  },
+  "isolation": {
+    "test_in_fit_or_calibration": false,
+    "formal_comparison": false,
+    "new_language_model_evaluated": false
+  }
+}

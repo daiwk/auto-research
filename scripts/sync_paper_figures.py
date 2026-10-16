@@ -76,6 +76,9 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.22230-hardware-diversity": "3",
+    "2610.22290-elite-replay": "2",
+    "2610.22353-mirror-moe": "4",
     "2610.13025-evo2": "2",
     "2610.13092-jev-workflow": "2",
     "2610.13194-janus": "2",
@@ -130,6 +133,20 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.21138-clean-rm": {
+        "pdf_url": "https://arxiv.org/pdf/2610.21138v1",
+        "page": 2,
+        "rect": (65, 55, 548, 187),
+        "label": "Figure 1",
+        "caption": "完整保留两侧案例：明确指令与模糊指令产生不同的样本级反馈噪声；不是本地模型输出。",
+    },
+    "2610.21267-tracer": {
+        "pdf_url": "https://arxiv.org/pdf/2610.21267v1",
+        "page": 3,
+        "rect": (40, 40, 555, 218),
+        "label": "Figure 2",
+        "caption": "完整执行前缀树示意：同一工具在不同完整前缀下拥有不同后继与转移频率；不是本地能力评测轨迹。",
+    },
     "2610.19844-smrc-pmrc": {
         "pdf_url": "https://arxiv.org/pdf/2610.19844v1",
         "page": 4,
@@ -582,6 +599,14 @@ def chinese_description(caption: str) -> str:
 def update_page(paper: Paper, result: FigureResult) -> None:
     text = paper.page.read_text(encoding="utf-8")
     description = chinese_description(result.original_caption)
+    reviewed_descriptions = {
+        "2610.22130-drop-kv": "RULER 准确率随序列长度与 KV cache 预算的变化；这是原论文评测曲线，不是架构图或本地测量。",
+        "2610.22245-disagreement-routing": "三个 benchmark 的准确率—路由预算曲线及其与最优路由的差距；这是原论文结果，不是本地合成探针能力。",
+        "2610.22353-mirror-moe": "训练中的专家抑制、有效专家数及最小混合比 ξ 的变化；这是原论文训练诊断，不是本地预训练结果。",
+    }
+    description = reviewed_descriptions.get(paper.page.parent.name, description)
+    if paper.page.parent.name in ("2610.21138-clean-rm", "2610.21267-tracer"):
+        description = str(SPECIAL_CROPS[paper.page.parent.name]["caption"])
     if paper.page.parent.name == "2610.12375-ontrack":
         description = str(SPECIAL_CROPS[paper.page.parent.name]["caption"])
     if paper.page.parent.name == "2610.12327-sparse-decoding":

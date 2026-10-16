@@ -1,0 +1,115 @@
+{
+  "schema_version": 2,
+  "method": "progress-reward",
+  "manifest_ref": "post-training:progress-reward",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "fixture:oct17-post-numeric-grammar-v1",
+    "revision": "sha256:d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "independent bounded operator diagnostic, not full paper or model capability"
+  },
+  "metrics": {
+    "gradient_norm_min": {
+      "mean": 0.19954497653000755,
+      "std": 0.036933074933323866,
+      "n": 3
+    },
+    "literal_equation_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "nonterminal_boundary_negative_control_gap": {
+      "mean": 0.7290000000000001,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.08668808635886605,
+      "std": 0.011369411402286166,
+      "n": 3
+    },
+    "subtask_embedding_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "terminal_telescoping_abs_error": {
+      "mean": 5.551115123125783e-17,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "parameter_delta_l2": 0.07360561850422288,
+        "gradient_norm_min": 0.15692916992064368,
+        "optimizer_updates": 4,
+        "literal_equation_max_abs_error": 0.0,
+        "terminal_telescoping_abs_error": 5.551115123125783e-17,
+        "nonterminal_boundary_negative_control_gap": 0.7290000000000001,
+        "subtask_embedding_max_abs_error": 0.0
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "parameter_delta_l2": 0.09417815734206499,
+        "gradient_norm_min": 0.21944867390054387,
+        "optimizer_updates": 4,
+        "literal_equation_max_abs_error": 0.0,
+        "terminal_telescoping_abs_error": 5.551115123125783e-17,
+        "nonterminal_boundary_negative_control_gap": 0.7290000000000001,
+        "subtask_embedding_max_abs_error": 0.0
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "parameter_delta_l2": 0.09228048323031025,
+        "gradient_norm_min": 0.2222570857688351,
+        "optimizer_updates": 4,
+        "literal_equation_max_abs_error": 0.0,
+        "terminal_telescoping_abs_error": 5.551115123125783e-17,
+        "nonterminal_boundary_negative_control_gap": 0.7290000000000001,
+        "subtask_embedding_max_abs_error": 0.0
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/post-training/2610.22056-progress-reward/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "fixture:oct17-post-numeric-grammar-v1@sha256:d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "5de338e14428cb5b314ee5c9da6124a7fae02249059c11f0567a028d8a16ac34",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/progress_reward.py": "91c578ae0c09578cfc9581b96eba31b0ffddc8f559954e5b4e8538ed88ded1be",
+      "scripts/run_oct17_post_components.py": "d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

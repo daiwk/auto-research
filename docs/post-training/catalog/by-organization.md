@@ -76,6 +76,10 @@
 - 2026-07-30 · 一作：Xingjian Wu · [Contrastive Reinforced Policy Optimization via Privileged Self-Distillation](../2607.28026-crpo/README.md)（`crpo`）：按预测熵区分反思探索正位置和 exposure-bias 负位置，对 privileged self-distillation 做组内对比。
 - 2026-07-29 · 一作：Jianze Wang · [SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning](../2607.26873-serpo/README.md)（`serpo`）：让 Good–Normal–Bad 响应档案、query-specific rubrics 和 actor 策略形成三方闭环自进化。
 
+## Beihang University
+
+- 2026-10-15 · 一作：Xiuhui Zhang · [Progress Reward Model for Reinforcement Learning via Large Language Models](../2610.22056-progress-reward/README.md)（`progress-reward`）：稀疏成功信号难以指导长程机器人控制。PRM4RL 让 LLM 给出子任务、当前子任务判定函数 $\Psi$ 与进度势函数 $\Phi$；将子任务语义作为状态先验，将相邻状态进度差作为低层 RL 的密集 reward。
+
 ## Beijing Institute of Technology
 
 - 2026-05-13 · 一作：Feng Zhang · [ConSPO](../2605.12969-conspo/README.md)（`conspo`）：将同组序列的优劣关系写成长度归一化 InfoNCE，避免 token 求和造成长度和组内尺度偏差。
@@ -375,6 +379,7 @@
 
 ## Shanghai Jiao Tong University
 
+- 2026-10-15 · 一作：Feiyang Chen · [Learning from Unverified Peers via Shared Residual Distillation](../2610.22080-shared-residual-distillation/README.md)（`shared-residual-distillation`）：没有标准答案或可验证 reward 时，整段错误解答也可能包含有用步骤。SRD 不投票选“正确答案”，而比较同题 peers 相对跨题 control 对 token 分布的改变，只接收多位 peer 共同支持的保守残差。
 - 2026-07-30 · 一作：Kangning Zhang · [VAD](../2607.28590-vad/README.md)（`vad`）：多模态 OPD 直接匹配 privileged-view teacher 时，教师修正同时混入视觉证据、语言先验和教师自身偏差。VAD 对同一冻结教师分别输入“相关视觉证据存在/移除”两种视图，以 centered log-probability 差构造带符号的视觉方向，再把原教师修正单侧投影到该方向，重建以学生当前分布为锚的 target；完整 privileged teacher 只保留为弱正则。
 
 ## Stanford University
@@ -400,6 +405,7 @@
 
 ## The Ohio State University
 
+- 2026-10-15 · 一作：Hanane Nour Moussa · [EliteReplay: Preserving Diverse Solutions in RL Post-Training via Quality-Diversity Search](../2610.22290-elite-replay/README.md)（`elite-replay`）：单纯提高正确率的 RL 可能压缩正确解法的覆盖范围。EliteReplay 先用冻结基模和 MAP-Elites 收集不同正确策略，训练时持续回放固定档案。
 - 2026-10-01 · 一作：Qijia He · [Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis](../2610.01896-gmc-grpo/README.md)（`gmc-grpo`）：异步 rollout 的重要性比在 group 级统一缩放，使总质量受帽约束；在共同二阶矩保证下减少 trajectory-wise clipping 的持续偏差。
 
 ## The University of Texas at Austin
@@ -568,6 +574,7 @@
 
 ## Zhejiang University
 
+- 2026-10-15 · 一作：Licheng Pan · [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../2610.21138-clean-rm/README.md)（`clean-rm`）：不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的**联合分布**作最优传输，而不是只匹配偏好直方图。
 - 2026-09-17 · 一作：ZJU-REAL team · [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](../2609.20784-retire-opd/README.md)（`retire-opd`）：给不同技能配置解耦教师；学生同时执行 RL 与 on-policy distillation，当成功率接近教师且分布差距不再收缩时自动退休教师。
 - 2026-08-27 · 一作：Aozhe Wang · [TTPO: Test-Time Policy Optimization](../2608.27448-ttpo/README.md)（`ttpo`）：多数票伪标签可能错误，但与多数票分歧的 rollout 通常仍是错的。TTPO 因而对同意分支做 OPSD，对分歧分支做 grouped RL，并分别过滤已收敛 token 与高置信错误。
 - 2026-07-28 · 一作：Haolei Xu · [Relay-OPD](../2607.26057-relay-opd/README.md)（`relay-opd`）：检测学生前缀失效后让教师短暂接管，再把轨迹交还学生；有限接力预算把监督集中到关键早期位置。

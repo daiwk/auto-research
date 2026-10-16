@@ -1,0 +1,105 @@
+{
+  "schema_version": 2,
+  "method": "mirror-moe",
+  "manifest_ref": "foundation-models:mirror-moe",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-formula-and-bit-patterns",
+    "revision": "oct17-foundation-components-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "independent bounded operator diagnostic, not full paper or model capability"
+  },
+  "metrics": {
+    "final_schedule_ratio": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "manual_aggregation_max_error": {
+      "mean": 1.1102230246251565e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "mixed_weight_negative_control_error": {
+      "mean": 0.10388900435241304,
+      "std": 0.02650369966358426,
+      "n": 3
+    },
+    "router_gradient_norm": {
+      "mean": 0.027759797123328222,
+      "std": 0.008785822545205425,
+      "n": 3
+    },
+    "router_update_norm": {
+      "mean": 0.0005551959424665602,
+      "std": 0.0001757164509041081,
+      "n": 3
+    },
+    "zero_ratio_recovers_topk": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "manual_aggregation_max_error": 1.1102230246251565e-16,
+        "mixed_weight_negative_control_error": 0.08780262362554528,
+        "router_gradient_norm": 0.028633070632183035,
+        "router_update_norm": 0.0005726614126436634,
+        "zero_ratio_recovers_topk": true,
+        "final_schedule_ratio": 0.0
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "manual_aggregation_max_error": 1.1102230246251565e-16,
+        "mixed_weight_negative_control_error": 0.08938519131871742,
+        "router_gradient_norm": 0.01856994822535664,
+        "router_update_norm": 0.0003713989645071259,
+        "zero_ratio_recovers_topk": true,
+        "final_schedule_ratio": 0.0
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "manual_aggregation_max_error": 1.1102230246251565e-16,
+        "mixed_weight_negative_control_error": 0.13447919811297643,
+        "router_gradient_norm": 0.03607637251244499,
+        "router_update_norm": 0.0007215274502488911,
+        "zero_ratio_recovers_topk": true,
+        "final_schedule_ratio": 0.0
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/foundation-models/2610.22353-mirror-moe/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-formula-and-bit-patterns@oct17-foundation-components-v1;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "3894c7fa3c5f3233a08ff08539497765a60d2a1dd34e33b51a48f68164f02744",
+    "executed_source_sha256": {
+      "scripts/run_oct17_foundation_components.py": "0d2fe8050317425375a2cfbf2821dd2aa9b21994437f058ef76fcc85ebbded84",
+      "src/auto_research/foundation_models/mirror_moe.py": "2a3fe6451051220ce1754016175a1c9503ba7743f43864a0c83cd25026e0b1a9"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
