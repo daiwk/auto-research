@@ -1,0 +1,166 @@
+{
+  "schema_version": 2,
+  "method": "muon-paired-budget",
+  "manifest_ref": "foundation-models:muon-paired-budget",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-agent-cards-and-validation-trajectories",
+    "revision": "oct17-supplement-protocols-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded independent mechanism/protocol diagnostic; not model capability"
+  },
+  "metrics": {
+    "actual_model_training_runs": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "analytic_piecewise_auc_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "common_time_horizon": {
+      "mean": 4.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "data_time_ranking_reversal_preserved": true,
+    "frozen_pool_candidates": {
+      "mean": 23,
+      "std": 0.0,
+      "n": 3
+    },
+    "full_budget_regret": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "invalid_input_rejection_cases": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "one_candidate_monte_carlo_expected_regret_error": {
+      "mean": 0.0018701846455443187,
+      "std": 0.0017872392306380693,
+      "n": 3
+    },
+    "paired_bootstrap_analytic_ratio_max_error": {
+      "mean": 1.295260195396016e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "permutations": {
+      "mean": 10000,
+      "std": 0.0,
+      "n": 3
+    },
+    "selection_uses_auc_not_final_loss": true,
+    "stable_crossover_budget": {
+      "mean": 3.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "synthetic_data_auc_gain": {
+      "mean": 0.16033858265817882,
+      "std": 0.0006454724135804233,
+      "n": 3
+    },
+    "synthetic_time_auc_gain": {
+      "mean": -0.18798316587510602,
+      "std": 0.0007567607607494979,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "analytic_piecewise_auc_max_error": 0.0,
+        "synthetic_data_auc_gain": 0.15974913936787916,
+        "synthetic_time_auc_gain": -0.18729209443130634,
+        "common_time_horizon": 4.0,
+        "data_time_ranking_reversal_preserved": true,
+        "selection_uses_auc_not_final_loss": true,
+        "stable_crossover_budget": 3.0,
+        "paired_bootstrap_analytic_ratio_max_error": 1.6653345369377348e-16,
+        "frozen_pool_candidates": 23,
+        "permutations": 10000,
+        "one_candidate_monte_carlo_expected_regret_error": 0.001318849700865543,
+        "full_budget_regret": 0.0,
+        "invalid_input_rejection_cases": 4,
+        "actual_model_training_runs": 0
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "analytic_piecewise_auc_max_error": 0.0,
+        "synthetic_data_auc_gain": 0.16102833859593357,
+        "synthetic_time_auc_gain": -0.1887918452504047,
+        "common_time_horizon": 4.0,
+        "data_time_ranking_reversal_preserved": true,
+        "selection_uses_auc_not_final_loss": true,
+        "stable_crossover_budget": 3.0,
+        "paired_bootstrap_analytic_ratio_max_error": 5.551115123125783e-17,
+        "frozen_pool_candidates": 23,
+        "permutations": 10000,
+        "one_candidate_monte_carlo_expected_regret_error": 0.00042357269757647975,
+        "full_budget_regret": 0.0,
+        "invalid_input_rejection_cases": 4,
+        "actual_model_training_runs": 0
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "analytic_piecewise_auc_max_error": 0.0,
+        "synthetic_data_auc_gain": 0.16023827001072377,
+        "synthetic_time_auc_gain": -0.18786555794360704,
+        "common_time_horizon": 4.0,
+        "data_time_ranking_reversal_preserved": true,
+        "selection_uses_auc_not_final_loss": true,
+        "stable_crossover_budget": 3.0,
+        "paired_bootstrap_analytic_ratio_max_error": 1.6653345369377348e-16,
+        "frozen_pool_candidates": 23,
+        "permutations": 10000,
+        "one_candidate_monte_carlo_expected_regret_error": 0.003868131538190933,
+        "full_budget_regret": 0.0,
+        "invalid_input_rejection_cases": 4,
+        "actual_model_training_runs": 0
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "c53ce680ef67b5a02563e24cdf0bd3162eaec48f",
+    "artifact_path": "docs/foundation-models/2610.21555-muon-paired-budget/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-agent-cards-and-validation-trajectories@oct17-supplement-protocols-v1;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "f11d071f30d3adbc5f308623ee0482f56502958ef81722a37fe35b6d2d961bcb",
+    "executed_source_sha256": {
+      "scripts/run_oct17_supplement_protocols.py": "a6283bbe102b84a6335eb2a3a3818eeb17d12bc37bf3675eb16222e9699eaa7b",
+      "src/auto_research/foundation_models/muon_paired_budget.py": "2a37de77bc11245a44f0ea58a641a10fd9fc5525d5dba9c88f923410c63d669c"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

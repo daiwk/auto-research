@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "method": "terminal-rsi",
+  "manifest_ref": "agent-research:terminal-rsi",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-terminal-rsi-contract-fixture",
+    "revision": "538bd35e39f4ba9102cdb2fa35240fe99a8d2aa24e300133f04b04b2e94e3f1a",
+    "public_benchmark_evaluated": false,
+    "initialization": "NumPy default_rng(seed), explicit inert fixture"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded independent mechanism/protocol diagnostic; not model capability"
+  },
+  "metrics": {
+    "exact_chunk_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "fdr_failed_rollout_reward": {
+      "mean": 2.1632158474263736,
+      "std": 0.05848665122544836,
+      "n": 3
+    },
+    "generated_positions": {
+      "mean": 20,
+      "std": 0.0,
+      "n": 3
+    },
+    "independent_expansion_max_error": {
+      "mean": 2.9605947323337506e-16,
+      "std": 1.2819751242557092e-16,
+      "n": 3
+    },
+    "observation_positions_tested": {
+      "mean": 40,
+      "std": 0.0,
+      "n": 3
+    },
+    "reset_trace_negative_control_max_error": {
+      "mean": 0.654703992083523,
+      "std": 0.11340356960962801,
+      "n": 3
+    },
+    "skipped_observation_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "spr_failed_rollout_reward": {
+      "mean": 0.683793985956464,
+      "std": 0.005844606517543774,
+      "n": 3
+    },
+    "spr_strict_success_reward": {
+      "mean": 1.6837939859564641,
+      "std": 0.005844606517543774,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "8bd69b87c35f85c962707d00a961c6262d04147c555a4395ff7f46865fcf5f10",
+      "metrics": {
+        "generated_positions": 20,
+        "observation_positions_tested": 40,
+        "independent_expansion_max_error": 4.440892098500626e-16,
+        "exact_chunk_max_error": 0.0,
+        "skipped_observation_max_error": 0.0,
+        "reset_trace_negative_control_max_error": 0.5400807682144135,
+        "fdr_failed_rollout_reward": 2.2222222222222223,
+        "spr_failed_rollout_reward": 0.6896551724137931,
+        "spr_strict_success_reward": 1.6896551724137931
+      },
+      "seed_role": "numeric value/calibration-count initialization; no PPO training"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "488092a7449c632b03ceabdb4feb8327e156a903b671f3ad85b97689c31c6fc2",
+      "metrics": {
+        "generated_positions": 20,
+        "observation_positions_tested": 40,
+        "independent_expansion_max_error": 2.220446049250313e-16,
+        "exact_chunk_max_error": 0.0,
+        "skipped_observation_max_error": 0.0,
+        "reset_trace_negative_control_max_error": 0.7668472282197623,
+        "fdr_failed_rollout_reward": 2.1621621621621623,
+        "spr_failed_rollout_reward": 0.6837606837606838,
+        "spr_strict_success_reward": 1.6837606837606838
+      },
+      "seed_role": "numeric value/calibration-count initialization; no PPO training"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "c9acb6cd1757717b5e376016fc46f19b90009bbffc68d1fbcc5203e9e24bda1c",
+      "metrics": {
+        "generated_positions": 20,
+        "observation_positions_tested": 40,
+        "independent_expansion_max_error": 2.220446049250313e-16,
+        "exact_chunk_max_error": 0.0,
+        "skipped_observation_max_error": 0.0,
+        "reset_trace_negative_control_max_error": 0.6571839798163933,
+        "fdr_failed_rollout_reward": 2.1052631578947367,
+        "spr_failed_rollout_reward": 0.6779661016949152,
+        "spr_strict_success_reward": 1.6779661016949152
+      },
+      "seed_role": "numeric value/calibration-count initialization; no PPO training"
+    }
+  ],
+  "provenance": {
+    "commit": "784f4eee02e2919d43cb1c9e2f62df8b694718df",
+    "artifact_path": "docs/agent-research/2610.22192-terminal-rsi/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-terminal-rsi-contract-fixture@538bd35e39f4ba9102cdb2fa35240fe99a8d2aa24e300133f04b04b2e94e3f1a;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "a711adcc0c3e2326588d0efc6d0072ea1ea39f7fdc5c57f8e9cb990772a98a00",
+    "executed_source_sha256": {
+      "scripts/run_oct17_supplement_agent.py": "3d9f2f970d11454f9cda983db77689cf010138ca7cc137ce404b619801e6c465",
+      "src/auto_research/agent_research/terminal_rsi.py": "7ae0ceefcb3d648938ea39d09bb224f6e7478caede742b6daf4ec095d3d7b423"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

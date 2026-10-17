@@ -877,6 +877,32 @@
         "fingerprint": "ff6ccb2c9317e41356471c76eab0842c660a5a0e90c5bd3e6a90b78eb60832f1"
       }
     ],
+    "src/auto_research/agent_research/leash.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "monitor",
+        "line": 205,
+        "qualified_name": "ShadowOversight.monitor",
+        "expression": "self.probes += 1",
+        "fingerprint": "34afee2a462b065565b3dac04722e9a02cc03be04f9a6203b8cc2926d1365e97"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "monitor",
+        "line": 212,
+        "qualified_name": "ShadowOversight.monitor",
+        "expression": "self.interventions += 1",
+        "fingerprint": "17f8e2d0ae33bb1a1952892887c2bb2b84745ef1b2d5d2caed37abeb761cde9e"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "monitor",
+        "line": 213,
+        "qualified_name": "ShadowOversight.monitor",
+        "expression": "self.changed_actions += int(changed)",
+        "fingerprint": "b577c2ff44f754eba5acb6bded1e1186c6440a3b90eb93c400053f8f13093358"
+      }
+    ],
     "src/auto_research/agent_research/lightning_policy.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -11901,6 +11927,16 @@
         "qualified_name": "run_proximal_checkpoint",
         "expression": "row['answer']",
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
+      }
+    ],
+    "src/auto_research/post_training/reminder_distillation.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "after_update",
+        "line": 202,
+        "qualified_name": "RefreshingTeacher.after_update",
+        "expression": "self.refresh_count += crossed",
+        "fingerprint": "458c844a45a7a2faa92b226058554d24ce743143d9b4edbb637323b9c29e507a"
       }
     ],
     "src/auto_research/post_training/rlvr_fusion_eval.py": [

@@ -10,6 +10,10 @@
 
 - [GLiClass](../../foundation-models/2508.07662-gliclass/README.md)（2025-08-11）：把输入文本和动态候选标签共同编码，以一次前向计算输出完整候选分布。
 
+## Nanyang Technological University
+
+- [Prism-1](../../foundation-models/2610.22066-prism-1/README.md)（2026-10-15）：通过隔离 option block 与共享位置保证独立选项分数；本地只有微型模型机制验证，完整模型实验不复现。
+
 ## Massachusetts Institute of Technology
 
 - [RLCR](../../post-training/2507.16806-rlcr/README.md)（2025-07-22）：用 proper scoring rule 联合优化正确性和置信度，提供结构化决策的校准训练轴。

@@ -1,0 +1,186 @@
+{
+  "schema_version": 2,
+  "method": "langdit",
+  "manifest_ref": "foundation-models:langdit",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-packed-options-and-noisy-tokens",
+    "revision": "oct17-supplement-foundation-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded independent mechanism/protocol diagnostic; not model capability"
+  },
+  "metrics": {
+    "bidirectional_attention_gradient_norm": {
+      "mean": 0.00021198568926509382,
+      "std": 5.475644265791974e-05,
+      "n": 3
+    },
+    "codebook_update_norm": {
+      "mean": 0.0010585382187219034,
+      "std": 5.407879368719576e-05,
+      "n": 3
+    },
+    "entropy_gated_bootstrap_max_error": {
+      "mean": 8.095376221225099e-17,
+      "std": 3.128920562105796e-17,
+      "n": 3
+    },
+    "explicit_shortcut_codebook_gradient_absent": true,
+    "extreme_codebook_scale_gradient_cases": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "first_fixture_training_loss": {
+      "mean": 2.8740707634104368,
+      "std": 0.038245219856881646,
+      "n": 3
+    },
+    "inference_posterior_mean_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "last_fixture_training_loss": {
+      "mean": 2.8376747193471807,
+      "std": 0.038243019725296035,
+      "n": 3
+    },
+    "learned_calibration_max": {
+      "mean": 1.0027996682925864,
+      "std": 0.011568991797840017,
+      "n": 3
+    },
+    "learned_calibration_min": {
+      "mean": 1.0027350980366352,
+      "std": 0.011611116467857677,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameters": {
+      "mean": 18257,
+      "std": 0.0,
+      "n": 3
+    },
+    "retained_codebook_input_gradient_norm": {
+      "mean": 2.146301073666662,
+      "std": 0.12644886297847788,
+      "n": 3
+    },
+    "shortcut_independent_reference_max_error": {
+      "mean": 1.1842378929335002e-15,
+      "std": 5.127900497022837e-16,
+      "n": 3
+    },
+    "shortcut_input_gradient_norm": {
+      "mean": 3.8271223308982094,
+      "std": 0.9303076852417513,
+      "n": 3
+    },
+    "unweighted_sampling_negative_control_difference": {
+      "mean": 0.7286157762556738,
+      "std": 0.21317571915484643,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "shortcut_independent_reference_max_error": 8.881784197001252e-16,
+        "extreme_codebook_scale_gradient_cases": 4,
+        "explicit_shortcut_codebook_gradient_absent": true,
+        "shortcut_input_gradient_norm": 3.4225370088722658,
+        "retained_codebook_input_gradient_norm": 2.0787506309148243,
+        "entropy_gated_bootstrap_max_error": 1.1102230246251565e-16,
+        "unweighted_sampling_negative_control_difference": 0.9661203367255842,
+        "inference_posterior_mean_max_error": 0.0,
+        "codebook_update_norm": 0.001061516876945855,
+        "learned_calibration_min": 0.9893565741705753,
+        "learned_calibration_max": 0.989468071144036,
+        "bidirectional_attention_gradient_norm": 0.00018452524797104894,
+        "first_fixture_training_loss": 2.905474371725005,
+        "last_fixture_training_loss": 2.8709855980190446,
+        "parameters": 18257,
+        "optimizer_steps": 3
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "shortcut_independent_reference_max_error": 1.7763568394002505e-15,
+        "extreme_codebook_scale_gradient_cases": 4,
+        "explicit_shortcut_codebook_gradient_absent": true,
+        "shortcut_input_gradient_norm": 4.891218581553704,
+        "retained_codebook_input_gradient_norm": 2.0679735822673186,
+        "entropy_gated_bootstrap_max_error": 8.326672684688674e-17,
+        "unweighted_sampling_negative_control_difference": 0.5538494348022892,
+        "inference_posterior_mean_max_error": 0.0,
+        "codebook_update_norm": 0.0011110661241101399,
+        "learned_calibration_min": 1.0101855104174136,
+        "learned_calibration_max": 1.0102023246007974,
+        "bidirectional_attention_gradient_norm": 0.00017639338832712136,
+        "first_fixture_training_loss": 2.8314792422498054,
+        "last_fixture_training_loss": 2.7959131536813935,
+        "parameters": 18257,
+        "optimizer_steps": 3
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "shortcut_independent_reference_max_error": 8.881784197001252e-16,
+        "extreme_codebook_scale_gradient_cases": 4,
+        "explicit_shortcut_codebook_gradient_absent": true,
+        "shortcut_input_gradient_norm": 3.1676114022686583,
+        "retained_codebook_input_gradient_norm": 2.292179007817843,
+        "entropy_gated_bootstrap_max_error": 4.85722573273506e-17,
+        "unweighted_sampling_negative_control_difference": 0.6658775572391478,
+        "inference_posterior_mean_max_error": 0.0,
+        "codebook_update_norm": 0.0010030316551097149,
+        "learned_calibration_min": 1.0086632095219163,
+        "learned_calibration_max": 1.008728609132926,
+        "bidirectional_attention_gradient_norm": 0.00027503843149711117,
+        "first_fixture_training_loss": 2.8852586762565,
+        "last_fixture_training_loss": 2.846125406341104,
+        "parameters": 18257,
+        "optimizer_steps": 3
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "77370818484275d2847608da7e14118b94562273",
+    "artifact_path": "docs/foundation-models/2610.22330-langdit/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-packed-options-and-noisy-tokens@oct17-supplement-foundation-v1;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "65299b2d8feb496ab9ddd10850c4dbca1ad49142556b21a1a2f95b2305e5e672",
+    "executed_source_sha256": {
+      "scripts/run_oct17_supplement_foundation.py": "d8aa12a567f41234e2117f4a7115bde911cb3b4b90a82d55502a714024bf3897",
+      "src/auto_research/foundation_models/langdit.py": "96a8df7eb84a166a7aeba862c03e92a578eda70b01dd7b8d8641808d065d71b3"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

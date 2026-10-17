@@ -12,6 +12,7 @@
 
 | 方向 | 方法 | 机构 | 日期 | 主要方法 | 本地入口 |
 |---|---|---|---|---|---|
+| 选项独立决策 | [Prism-1](../foundation-models/2610.22066-prism-1/README.md) | NTU | 2026-10-15 | block mask 与共享位置消除跨选项依赖，以 yes/no 对数赔率形成选择分布 | 独立小模型组件，A100三种子机制验证；完整实验不复现 |
 | 模拟前瞻 | [Code Owns the Simulation](../agent-research/2610.01834-jev-lookahead/README.md) | CUHK | 2026-10-01 | 代码逐动作克隆并模拟下一观察，把新可用动作交给 Jev 评分 | `choose_with_lookahead`；L1 协议诊断，未测真实 Jev |
 | 动态候选分类 | [GLiClass](../foundation-models/2508.07662-gliclass/README.md) | Knowledgator | 2025-08-11 | 联合编码输入与运行时候选标签，通过一次候选交互得到完整分类分布 | `system-one:bilinear-ce`、`system-one:rival-ce` |
 | 置信度训练 | [RLCR](../post-training/2507.16806-rlcr/README.md) | MIT | 2025-07-22 | 把 proper scoring rule 加入奖励，使正确性与诚实置信度共同进入优化目标 | `system-one:rival-brier`、`system-one:rival-hybrid` |

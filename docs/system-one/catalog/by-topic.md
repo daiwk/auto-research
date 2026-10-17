@@ -6,6 +6,7 @@
 
 ## 动态候选分类
 
+- [Prism-1](../../foundation-models/2610.22066-prism-1/README.md)：隔离选项 block 并共享位置，验证重排与新增无关项后的分数不变性；仅独立机制组件，不是 Jev checkpoint 复现。
 - [GLiClass](../../foundation-models/2508.07662-gliclass/README.md)：候选标签在运行时提供，文本与候选发生显式交互后统一归一化。
 - [Bespoke Nimble](https://github.com/bespokelabsai/nimble)：在 Qwen3.5-9B 上训练 typed-schema logits，公开 checkpoint、数据与配方。
 - [NanoJev](https://github.com/TianyuCodings/NanoJev)：在 Qwen3-0.6B 上训练 Choice、Boolean、Score 决策头。
