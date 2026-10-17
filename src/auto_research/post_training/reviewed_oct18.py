@@ -186,7 +186,10 @@ def route_teachers(student_logits: Tensor, teacher_logits: Tensor, mask: Tensor,
         weights = torch.nn.functional.one_hot(indices, len(teachers)).movedim(-1, 0).to(teachers)
     else:
         weights = (scores / temperature).softmax(0)
-    target = torch.logsumexp(teachers + weights.clamp_min(torch.finfo(weights.dtype).tiny).log()[..., None], 0)
+    # A hard-routed zero must remain exactly zero, especially in FP16 where
+    # finfo.tiny would inject ~6e-5 mass from every unselected teacher.
+    log_weights = weights.masked_fill(weights == 0, 1.).log().masked_fill(weights == 0, -torch.inf)
+    target = torch.logsumexp(teachers + log_weights[..., None], 0)
     return target.detach(), weights.detach()
 
 

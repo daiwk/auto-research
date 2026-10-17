@@ -269,3 +269,14 @@ def test_component_catalog_cannot_promote_diagnostics_or_full_experiments(key):
     text = (ROOT / "docs" / row["detail_path"]).read_text()
     for token in ("## 论文信息", "## 原始论文总结", "### 核心公式", "## 本地复现", "不复现", "DONE"):
         assert token in text
+@pytest.mark.parametrize("dtype", [torch.float16, torch.float32, torch.float64])
+def test_hard_teacher_routing_preserves_exact_zero_mass_at_extreme_logits(dtype):
+    from auto_research.post_training.reviewed_oct18 import route_teachers
+
+    student = torch.zeros(1, 1, 2, dtype=dtype)
+    teachers = torch.tensor([[[[100., -100.]]], [[[-100., 100.]]]], dtype=dtype)
+    mask = torch.ones(1, 1, dtype=torch.bool)
+    target, weights = route_teachers(student, teachers, mask, criterion="entropy", temperature=0)
+    assert torch.equal(weights[:, 0, 0], torch.tensor([1., 0.], dtype=dtype))
+    assert torch.equal(target, teachers[0].log_softmax(-1))
+
