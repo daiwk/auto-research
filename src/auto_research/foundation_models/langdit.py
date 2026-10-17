@@ -29,10 +29,14 @@ def normalized_codebook(raw: Tensor, scale: float = .1) -> Tensor:
     if raw.ndim != 2 or not raw.is_floating_point() or not math.isfinite(scale) or scale <= 0:
         raise ValueError("finite positive scale and a floating [vocabulary,width] table required")
     _finite(raw)
-    norms = raw.norm(dim=-1, keepdim=True)
-    if bool((norms == 0).any()):
+    maximum = raw.abs().amax(dim=-1, keepdim=True)
+    if bool((maximum == 0).any()):
         raise ValueError("zero codebook rows cannot be normalized")
-    return raw / norms * (scale * math.sqrt(raw.shape[-1]))
+    # Direct squared norms overflow at e.g. 1e20 in FP32 (or underflow at
+    # 1e-30), silently producing a zero table. Scaling first preserves both
+    # the spherical forward value and the ordinary differentiable norm path.
+    scaled = raw / maximum
+    return scaled / scaled.norm(dim=-1, keepdim=True) * (scale * math.sqrt(raw.shape[-1]))
 
 
 def corrupt_tokens(codebook: Tensor, tokens: Tensor, gamma: Tensor, noise: Tensor) -> Tensor:

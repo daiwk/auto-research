@@ -17,7 +17,7 @@ import torch
 
 from auto_research.foundation_models.langdit import (
     LangDiTDenoiser, corrupt_tokens, likelihood_shortcut, noise_coefficients,
-    posterior_mean, training_self_condition,
+    normalized_codebook, posterior_mean, training_self_condition,
 )
 from auto_research.foundation_models.prism_one import PrismOneScorer, choice_diagnostics, pack_options
 
@@ -71,6 +71,15 @@ def langdit_diagnostic(seed: int, device: str) -> dict:
     torch.manual_seed(seed)
     gen = torch.Generator(device=device).manual_seed(seed)
     dtype = torch.float64
+    extreme_cases = 0
+    for test_dtype, amplitude in ((torch.float32, 1e20), (torch.float32, 1e-30),
+                                   (torch.float64, 1e200), (torch.float64, 1e-200)):
+        raw = torch.full((2, 4), amplitude, device=device, dtype=test_dtype, requires_grad=True)
+        spherical = normalized_codebook(raw)
+        assert torch.allclose(spherical, torch.full_like(spherical, .1))
+        gradient = torch.autograd.grad(spherical[:, 0].sum(), raw)[0]
+        assert bool(torch.isfinite(gradient).all()) and int(torch.count_nonzero(gradient)) > 0
+        extreme_cases += 1
     c = torch.randn(7, 4, generator=gen, device=device, dtype=dtype, requires_grad=True)
     z = torch.randn(2, 3, 4, generator=gen, device=device, dtype=dtype, requires_grad=True)
     gamma = torch.tensor([-.5, .7], device=device, dtype=dtype)
@@ -124,6 +133,7 @@ def langdit_diagnostic(seed: int, device: str) -> dict:
     assert sampling_difference > 1e-4 and update > 0 and attention_gradient > 0
     assert .5 <= calibration_min <= calibration_max <= 2
     return {"shortcut_independent_reference_max_error": shortcut_error,
+            "extreme_codebook_scale_gradient_cases": extreme_cases,
             "explicit_shortcut_codebook_gradient_absent": direct_gradient_absent,
             "shortcut_input_gradient_norm": float(gz.norm()), "retained_codebook_input_gradient_norm": input_gradient,
             "entropy_gated_bootstrap_max_error": condition_error,
