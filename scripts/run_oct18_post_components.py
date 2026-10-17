@@ -251,7 +251,17 @@ def run_routing(device, steps):
         same, _ = ops.route_teachers(current, current.detach()[None], mask)
         negative.append(abs(float(ops.routed_opd_loss(current, same, labels, mask).detach())))
         norms.append(update(student, optimizer, loss))
+    hard_errors = []
+    for dtype in (torch.float16, torch.float32, torch.float64):
+        s = torch.zeros(1, 1, 2, device=device, dtype=dtype)
+        ts = torch.tensor([[[[100., -100.]]], [[[-100., 100.]]]], device=device, dtype=dtype)
+        selected, weights = ops.route_teachers(s, ts, torch.ones(1, 1, device=device, dtype=torch.bool),
+                                               criterion="entropy", temperature=0)
+        assert weights[0, 0, 0] == 1 and weights[1, 0, 0] == 0
+        hard_errors.append(float((selected - ts[0].log_softmax(-1)).abs().max()))
+    assert max(hard_errors) == 0
     return {**common(student, initial, norms, steps), "mixture_reference_max_abs_error": max(errors),
+            "hard_zero_weight_fp16_fp32_fp64_max_abs_error": max(hard_errors),
             "loss_reference_max_abs_error": max(losses), "identical_teacher_negative_control_abs_loss": max(negative),
             "teacher_delta_l2": max(delta(t, f) for t, f in zip(teachers, frozen, strict=True)),
             "teacher_gradient_count": sum(p.grad is not None for t in teachers for p in t.parameters()),
