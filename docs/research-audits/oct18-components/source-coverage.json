@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-18",
+  "kind": "selected_paper_overlap_scan_not_full_source_review",
+  "official_announcements": [
+    {
+      "announced_on": "2026-10-16",
+      "expected_entries": 453,
+      "parsed_entries": 453,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 132,
+          "expected": 132
+        },
+        {
+          "kind": "cross-list",
+          "shown": 154,
+          "expected": 154
+        },
+        {
+          "kind": "replacement",
+          "shown": 167,
+          "expected": 167
+        }
+      ],
+      "sha256": "f261c2b841f20d7db7c9624de8c8c329709f2c2a5f6fac73b72e2c70f1153ebb",
+      "parse_complete": true,
+      "category": "cs.AI",
+      "url": "https://arxiv.org/list/cs.AI/new?show=2000"
+    },
+    {
+      "announced_on": "2026-10-16",
+      "expected_entries": 267,
+      "parsed_entries": 267,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 105,
+          "expected": 105
+        },
+        {
+          "kind": "cross-list",
+          "shown": 72,
+          "expected": 72
+        },
+        {
+          "kind": "replacement",
+          "shown": 90,
+          "expected": 90
+        }
+      ],
+      "sha256": "d2c631d55c1f3efeb641724cbd34f3432f64e93a9874f37198fa5ea4ec21b8d3",
+      "parse_complete": true,
+      "category": "cs.CL",
+      "url": "https://arxiv.org/list/cs.CL/new?show=2000"
+    },
+    {
+      "announced_on": "2026-10-16",
+      "expected_entries": 26,
+      "parsed_entries": 26,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 8,
+          "expected": 8
+        },
+        {
+          "kind": "cross-list",
+          "shown": 6,
+          "expected": 6
+        },
+        {
+          "kind": "replacement",
+          "shown": 12,
+          "expected": 12
+        }
+      ],
+      "sha256": "d40ba8a9d9d713bfc158972819e180596b38c16daf2eecd28778bbdcfc84718a",
+      "parse_complete": true,
+      "category": "cs.IR",
+      "url": "https://arxiv.org/list/cs.IR/new?show=2000"
+    },
+    {
+      "announced_on": "2026-10-16",
+      "expected_entries": 467,
+      "parsed_entries": 467,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 166,
+          "expected": 166
+        },
+        {
+          "kind": "cross-list",
+          "shown": 140,
+          "expected": 140
+        },
+        {
+          "kind": "replacement",
+          "shown": 161,
+          "expected": 161
+        }
+      ],
+      "sha256": "4aff85627a8ea782e3ee9394a245bc4926aab1f5de66ffa94bd1a62e616d9f8c",
+      "parse_complete": true,
+      "category": "cs.LG",
+      "url": "https://arxiv.org/list/cs.LG/new?show=2000"
+    },
+    {
+      "announced_on": "2026-10-16",
+      "expected_entries": 253,
+      "parsed_entries": 253,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 135,
+          "expected": 135
+        },
+        {
+          "kind": "cross-list",
+          "shown": 30,
+          "expected": 30
+        },
+        {
+          "kind": "replacement",
+          "shown": 88,
+          "expected": 88
+        }
+      ],
+      "sha256": "e1d7f1e146c4da95bc97b5f7a91c8dd88dceffacb4796fb2a2a7289ffe2a9e19",
+      "parse_complete": true,
+      "category": "cs.CV",
+      "url": "https://arxiv.org/list/cs.CV/new?show=2000"
+    },
+    {
+      "announced_on": "2026-10-16",
+      "expected_entries": 149,
+      "parsed_entries": 149,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 89,
+          "expected": 89
+        },
+        {
+          "kind": "cross-list",
+          "shown": 13,
+          "expected": 13
+        },
+        {
+          "kind": "replacement",
+          "shown": 47,
+          "expected": 47
+        }
+      ],
+      "sha256": "e40992ccfd5a70d724482015be1c1189602703ea7c0964a72ff82cfed848f761",
+      "parse_complete": true,
+      "category": "cs.RO",
+      "url": "https://arxiv.org/list/cs.RO/new?show=2000"
+    }
+  ],
+  "unique_announcement_entries": 1153,
+  "official_directory_attempts": [
+    {
+      "organization": "Google",
+      "page": 1,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 2,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=2",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 3,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=3",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 4,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=4",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 5,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=5",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 6,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=6",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 7,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=7",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 8,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=8",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 9,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=9",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 10,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=10",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 11,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=11",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 12,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=12",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 13,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=13",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 14,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=14",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 15,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=15",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 16,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=16",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 17,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=17",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 18,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=18",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 19,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=19",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 20,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=20",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 21,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=21",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 22,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=22",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 23,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=23",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 24,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=24",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 25,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=25",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 26,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=26",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 27,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=27",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 28,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=28",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 29,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=29",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google",
+      "page": 30,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=30",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 1,
+      "url": "https://deepmind.google/research/publications/",
+      "count": 30
+    },
+    {
+      "organization": "Meta",
+      "page": 1,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Meta",
+      "page": 2,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Meta",
+      "page": 3,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Meta",
+      "page": 4,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Meta",
+      "page": 5,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+      "error": "<urlopen error timed out>"
+    },
+    {
+      "organization": "Meta",
+      "page": 6,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+      "error": "<urlopen error timed out>"
+    }
+  ],
+  "review_watermark_advanced": false,
+  "coverage_complete": false,
+  "notes": [
+    "Titles and abstracts screened; selected papers methods and budgets checked, not all unknown entries read in full.",
+    "Google/Meta terminal fetch timeouts are unresolved source coverage, not evidence of no new papers.",
+    "Official Meta first page and selected publication pages additionally read via browser; not a full directory closure.",
+    "No DeepXiv or third-party summaries substituted for primary evidence."
+  ]
+}

@@ -41,12 +41,14 @@
 
 ### on-policy / context 蒸馏
 
+- [Compatibility Matters: A Framework for Token-Level Teacher Selection in On-Policy Distillation](../2610.21234-token-teacher-selection/README.md)（`token-teacher-selection`）：一个教师未必适合学生整段推理：数学推导和代码生成可能需要不同专家，强教师与学生的分布差距也可能太大。论文把 OPD 的教师选择细化到每个学生实际访问的前缀。
 - [Condition-Contrastive Extrapolation for On-Policy Distillation of Language Models](../2610.21195-cce-opd/README.md)（`cce-opd`）：教师可能跟随学生错误 reasoning prefix，而忽略题目条件。CCE 在**完全相同的学生 response prefix**上，让同一冻结教师分别读取完整题目与遮蔽一个有效前提的题目，以 clipped log-prob contrast 调整辅助 target。
 - [Does On-Policy Distillation Need to Complete Every Rollout?](../2610.21337-stopd/README.md)（`stopd`）：每条响应在生成**之前**独立采样 anchor，向上取整到 block 末尾，学生只生成到该 cutoff 或自然 EOS。保留的每个 token 都接收教师监督，并按其精确 inclusion probability 加权；自然 EOS 也是普通有效 token。
 - [Learning from Unverified Peers via Shared Residual Distillation](../2610.22080-shared-residual-distillation/README.md)（`shared-residual-distillation`）：没有标准答案或可验证 reward 时，整段错误解答也可能包含有用步骤。SRD 不投票选“正确答案”，而比较同题 peers 相对跨题 control 对 token 分布的改变，只接收多位 peer 共同支持的保守残差。
 - [OPRD: On-Policy Reminder Distillation for Long-Horizon Coding Agents](../2610.21496-oprd-reminder/README.md)（`oprd-reminder`）：编码 Agent 的最终通过/失败不能指出哪一轮忽略了已有约束。OPRD 在学生自己生成的无提醒轨迹上训练：成功轨迹自模仿；失败轨迹由教师读取训练专用提醒，重新评分**同一学生前缀**，不是教师另生成一条答案。
 - [Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation](../2610.21601-waypoint-opd/README.md)（`waypoint-opd`）：仅 initial/final 的 log-probability 位移不能区分“前后两段同向”与“中途反转”。同一 RL run 的 waypoint 只提供一致性证据，不是新的模仿目标。
 - [Divergence-Routed On-Policy Distillation for Language Models](../2610.19572-divergence-routed-opd/README.md)（`divergence-routed-opd`）：DrOPD 在学生自己生成的轨迹上比较师生分布，以 JS 散度识别教师支持而学生严重欠覆盖的位置。它在所有位置保留 reverse-KL，并仅向高分歧位置增加 forward-KL 的纠正信号，通过候选级优势执行 PPO clipped 更新。
+- [Information-Gain Calibrated On-Policy Distillation for Deep Search Agents](../2610.20664-ig-opd/README.md)（`ig-opd`）：普通 OPD 在检索前按教师偏好评分 query，却不知道检索结果是否有用；又按 token 数量分配预算，容易让很长的最终回答压过短而关键的搜索调用。IG-OPD 用检索后的答案置信变化校正两点：ITC 重新分配回合预算，IQC 用有符号增益修正动作关键 token 的方向。
 - [LoOPSD: On-Policy Self-Distillation with Looped Teachers](../../reproductions/2610.18162-loopsd/README.md)（`loopsd`）：在线自蒸馏需要比学生更有用的教师，但更大外部模型或额外答案上下文并非唯一来源。LoOPSD在不改权重时搜索重复层区间来构造教师，用学生自产前缀进行蒸馏，再从更新后的学生重新搜索下一轮教师。 **成本过高，暂不复现；待验收，未注册可执行入口。**
 - [Branching On-Policy Distillation](../../reproductions/2610.13481-branch-opd/README.md)（`branch-opd`）：普通 OPD 每个前缀只看到一次后续。BranchOPD 用学生不确定性和师生分歧定位 fork，从同一冻结学生策略独立采样 suffix，前缀只计入一次；并用协议事件监督结束行为。
 - [State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents](../../reproductions/2610.13238-state-opd/README.md)（`state-opd`）：多轮OPD把旧reasoning和实际环境记录混在教师上下文中，可能继承错误推理。State-OPD只给教师已执行action/observation状态，学生仍保留完整history；在高完整词表熵状态扩采整段reasoning+action，额外action不执行。
@@ -178,6 +180,12 @@
 
 - [MAS-OPD: On-Policy Distillation for Multi-Agent Systems](../2609.34234-mas-opd/README.md)（`mas-opd`）：以目标角色与非目标角色 teacher 信号差构造 role advantage，并把协作冲突归因只提供给 teacher 形成 privileged coordination supervision。
 
+### RLHF / RLVR
+
+- [Each Reward to Its Relevant Tokens: Reward-Specific Token-Level Credit Assignment for Multi-Reward RL](../2610.21439-mrtpo/README.md)（`mrtpo`）：GDPO 虽然分别归一化多种奖励，但仍把每种奖励均摊到整条响应。SQL 可执行性、格式、执行结果可能只分别依赖少数 token。
+- [Multi-Reward Hacking: From Aggregation-Induced Drift to Trust-Anchored Defense](../2610.21404-tag-reward-gating/README.md)（`tag-reward-gating`）：正确性和简短、低时延等奖励相加时，容易获取的辅助奖励可能主导 GRPO：总奖励上涨，主要任务却变差。TAG 不是简单降低辅助权重，而是先从同一基线分别优化每个奖励，观察哪个探针对基线的分布漂移最小，再将该奖励选为 anchor。
+- [Failure Is the Mother of Success: Recovering Supervision with Grounding Hindsight](../2610.21018-rshd/README.md)（`rshd`）：一组 GRPO rollout 全部失败时，组内 advantage 全为0。RSHD 不把参考答案告诉模型，而让同一策略根据失败响应写纠错 note，再用 note 生成**新的** replay。
+
 ### DPO 偏好/优化尺度解耦
 
 - [Disentangling Optimization Scale from Preference Scale in DPO](../2608.27032-normalized-dpo/README.md)（`normalized-dpo`）：标准 DPO 的 $\beta$ 同时改变偏好噪声尺度与梯度幅度，导致有效学习率被隐式重缩放。论文用除以 $\beta$ 的 centered-softplus 保持相同 argmin，同时让梯度尺度在 $\beta\to0$ 时不消失。
@@ -198,6 +206,10 @@
 
 - [Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes](../2610.02117-where-opd/README.md)（`where-opd`）：程序化合成场景自动给出对象身份和空间坐标；teacher 接收文本化空间特权信息，student 只看图像与问题，在自己的 on-policy token 上蒸馏 teacher。
 - [OPD-Aha: From Linguistic Momentum to Visual Reflection in Multimodal On-Policy Distillation](../2609.16459-opd-aha/README.md)（`opd-aha`）：用真实视觉与空视觉教师分布之差重建视觉偏好目标，抑制错误语言前缀的惯性。
+
+### 扩散语言模型后训练
+
+- [On-Policy Residual Learning for Diffusion Language Models](../2610.20687-orl-diffusion/README.md)（`orl-diffusion`）：将上一步预测分布作为残差上下文不是简单后处理：训练时必须看到模型自己诱导的残差轨迹。ORL联合在线采集、状态传输、精确重放及熵收缩，减少训练与推理残差状态分布差异。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 强化学习
 

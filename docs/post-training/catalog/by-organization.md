@@ -335,6 +335,7 @@
 
 ## Princeton University
 
+- 2026-10-15 · 一作：Stanley Wei · [Compatibility Matters: A Framework for Token-Level Teacher Selection in On-Policy Distillation](../2610.21234-token-teacher-selection/README.md)（`token-teacher-selection`）：一个教师未必适合学生整段推理：数学推导和代码生成可能需要不同专家，强教师与学生的分布差距也可能太大。论文把 OPD 的教师选择细化到每个学生实际访问的前缀。
 - 2024-05-23 · 一作：Yu Meng · [SimPO](../2405.14734-simpo/README.md)（`simpo`）：DPO 训练需要常驻 reference model，而且 sequence 概率天然偏向短响应。SimPO 用平均 token log-probability 作为隐式 reward，去掉 reference model，并在 Bradley–Terry 目标中加入固定 margin。
 
 ## Reichman University
@@ -403,6 +404,7 @@
 ## The Chinese University of Hong Kong, Shenzhen
 
 - 2026-10-15 · 一作：Wenxuan Luo · [Condition-Contrastive Extrapolation for On-Policy Distillation of Language Models](../2610.21195-cce-opd/README.md)（`cce-opd`）：教师可能跟随学生错误 reasoning prefix，而忽略题目条件。CCE 在**完全相同的学生 response prefix**上，让同一冻结教师分别读取完整题目与遮蔽一个有效前提的题目，以 clipped log-prob contrast 调整辅助 target。
+- 2026-10-14 · 一作：Chenxi Li · [Information-Gain Calibrated On-Policy Distillation for Deep Search Agents](../2610.20664-ig-opd/README.md)（`ig-opd`）：普通 OPD 在检索前按教师偏好评分 query，却不知道检索结果是否有用；又按 token 数量分配预算，容易让很长的最终回答压过短而关键的搜索调用。IG-OPD 用检索后的答案置信变化校正两点：ITC 重新分配回合预算，IQC 用有符号增益修正动作关键 token 的方向。
 
 ## The Ohio State University
 
@@ -417,6 +419,10 @@
 
 - 2026-08-01 · 一作：Zhuowen Han · [Distill Where You Fail: Recovering Learning Signals of Negative RL-Groups from Adaptive Teacher Guidance](../2608.00782-rstg/README.md)（`rstg`）：只对负向零方差 group 启用教师，并在高熵或大 teacher-student gap token 上蒸馏，同时注入教师正确轨迹 SFT。
 - 2026-05-12 · 一作：Zhong Guan · [Missing Old Logits](../2605.12070-missing-old-logits/README.md)（`missing-old-logits`）：指出异步 RL 丢失历史训练侧 logits 后，训推校正与策略陈旧校正发生语义混叠；给出快照、old-logit model、中断同步和 PPO-EWMA 修复。
+
+## Together AI / University of Illinois Urbana-Champaign
+
+- 2026-10-14 · 一作：Yifan Yu · [On-Policy Residual Learning for Diffusion Language Models](../2610.20687-orl-diffusion/README.md)（`orl-diffusion`）：将上一步预测分布作为残差上下文不是简单后处理：训练时必须看到模型自己诱导的残差轨迹。ORL联合在线采集、状态传输、精确重放及熵收缩，减少训练与推理残差状态分布差异。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Trent AI Limited
 
@@ -447,6 +453,10 @@
 
 - 2026-10-08 · 一作：Siyan Zhao · [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](../2610.11291-semi-opd/README.md)（`semi-opd`）：初始学生先一次性生成响应，教师评分缓存后固定复用。每次优化仍重新计算当前学生概率和 token 优势，不能把旧优势也一起缓存。
 
+## University of British Columbia
+
+- 2026-10-15 · 一作：Yushu Li · [Multi-Reward Hacking: From Aggregation-Induced Drift to Trust-Anchored Defense](../2610.21404-tag-reward-gating/README.md)（`tag-reward-gating`）：正确性和简短、低时延等奖励相加时，容易获取的辅助奖励可能主导 GRPO：总奖励上涨，主要任务却变差。TAG 不是简单降低辅助权重，而是先从同一基线分别优化每个奖励，观察哪个探针对基线的分布漂移最小，再将该奖励选为 anchor。
+
 ## University of California, Berkeley
 
 - 2026-09-16 · 一作：Peter Chen · [A Zeroth-Order Paradigm for LLM Preference Alignment](../2609.19144-compo/README.md)（`compo`）：不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。
@@ -463,6 +473,7 @@
 
 ## University of California, San Diego
 
+- 2026-10-14 · 一作：Sheldon Yu · [Failure Is the Mother of Success: Recovering Supervision with Grounding Hindsight](../2610.21018-rshd/README.md)（`rshd`）：一组 GRPO rollout 全部失败时，组内 advantage 全为0。RSHD 不把参考答案告诉模型，而让同一策略根据失败响应写纠错 note，再用 note 生成**新的** replay。
 - 2026-08-06 · 一作：Yijiang Li · [U-OPSD](../2608.06296-u-opsd/README.md)（`u-opsd`）：U-OPSD 不使用答案、环境奖励或更大教师。模型多次采样后做多数投票，以最短一致解作为 privileged view，定点修复最长且高置信错误轨迹，是真正依赖内部一致性的自蒸馏。
 - 2025-08-05 · 一作：Feng Yao · [TIS](../web-2025-tis/README.md)（`tis`）：混合训练框架由 rollout 引擎采样、训练引擎重算 log-prob；即使权重相同，数值精度和 kernel 差异也会让行为分布与训练分布偏离。TIS 将训练侧与 rollout 引擎概率比乘入策略梯度，并只对过大的校正权重做单侧上截断，保留小权重样本而控制重尾方差。
 
@@ -491,6 +502,10 @@
 
 - 2026-08-26 · 一作：Kaishen Wang · [Where to Look Matters: On-Policy Self-Distillation for Long-Video Understanding](../2608.25356-clue-opsd/README.md)（`clue-opsd`）：学生仍看完整长视频，冻结教师在训练时只看问题相关 clue interval；学生自己的 rollout 上做 on-policy self-distillation，推理时不需要 clue、标签或外部教师。
 - 2026-07-30 · 一作：Jiawei Xu · [β-OPSD](../2607.28582-beta-opsd/README.md)（`beta-opsd`）：论文指出 vanilla OPSD 是 β=1 的 KL 正则策略优化特例。先推导 reference policy 与 privileged teacher 之间的最优几何插值，再把昂贵高方差的 RL 解转成 token-logit 蒸馏目标，并以 return-to-go 做长推理信用分配。
+
+## University of Minnesota
+
+- 2026-10-15 · 一作：Skylar Zhai · [Each Reward to Its Relevant Tokens: Reward-Specific Token-Level Credit Assignment for Multi-Reward RL](../2610.21439-mrtpo/README.md)（`mrtpo`）：GDPO 虽然分别归一化多种奖励，但仍把每种奖励均摊到整条响应。SQL 可执行性、格式、执行结果可能只分别依赖少数 token。
 
 ## University of North Carolina at Chapel Hill
 

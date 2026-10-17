@@ -1,0 +1,155 @@
+{
+  "schema_version": 2,
+  "method": "tag-reward-gating",
+  "manifest_ref": "post-training:tag-reward-gating",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "fixture:oct18-post-components-v1",
+    "revision": "sha256:892558620552098707845985bf97a045802b1776337d19e011599745d5539a11"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "anchor_channel": {
+      "mean": 0.3333333333333333,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "anchor_reference_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "auxiliary_only_negative_control_credit": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gate_reference_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gradient_norm_min": {
+      "mean": 0.2858940941529697,
+      "std": 0.0039298805198383704,
+      "n": 3
+    },
+    "joint_restart_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "loss_reference_max_abs_error": {
+      "mean": 2.6213599192538415e-17,
+      "std": 9.629639675777658e-18,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.03962901686441103,
+      "std": 0.00278450846197755,
+      "n": 3
+    },
+    "probe_gradient_norm_min": {
+      "mean": 0.2794242004924425,
+      "std": 0.00500614113527766,
+      "n": 3
+    },
+    "probe_optimizer_updates": {
+      "mean": 6,
+      "std": 0.0,
+      "n": 3
+    },
+    "probe_parameters_are_not_joint_initialization": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "status": "completed",
+      "metrics": {
+        "parameter_delta_l2": 0.04197936456779906,
+        "gradient_norm_min": 0.2826904209054527,
+        "optimizer_updates": 3,
+        "probe_gradient_norm_min": 0.280349766553344,
+        "probe_optimizer_updates": 6,
+        "joint_restart_delta_l2": 0.0,
+        "anchor_reference_max_abs_error": 0.0,
+        "gate_reference_max_abs_error": 0.0,
+        "loss_reference_max_abs_error": 2.3129646346357426e-17,
+        "auxiliary_only_negative_control_credit": 0.0,
+        "anchor_channel": 0,
+        "probe_parameters_are_not_joint_initialization": true
+      }
+    },
+    {
+      "seed": 43,
+      "status": "completed",
+      "metrics": {
+        "parameter_delta_l2": 0.03655374127078093,
+        "gradient_norm_min": 0.28471270976635854,
+        "optimizer_updates": 3,
+        "probe_gradient_norm_min": 0.27401986460216116,
+        "probe_optimizer_updates": 6,
+        "joint_restart_delta_l2": 0.0,
+        "anchor_reference_max_abs_error": 0.0,
+        "gate_reference_max_abs_error": 0.0,
+        "loss_reference_max_abs_error": 1.8503717077085944e-17,
+        "auxiliary_only_negative_control_credit": 0.0,
+        "anchor_channel": 0,
+        "probe_parameters_are_not_joint_initialization": true
+      }
+    },
+    {
+      "seed": 44,
+      "status": "completed",
+      "metrics": {
+        "parameter_delta_l2": 0.0403539447546531,
+        "gradient_norm_min": 0.29027915178709784,
+        "optimizer_updates": 3,
+        "probe_gradient_norm_min": 0.28390297032182227,
+        "probe_optimizer_updates": 6,
+        "joint_restart_delta_l2": 0.0,
+        "anchor_reference_max_abs_error": 0.0,
+        "gate_reference_max_abs_error": 0.0,
+        "loss_reference_max_abs_error": 3.7007434154171876e-17,
+        "auxiliary_only_negative_control_credit": 0.0,
+        "anchor_channel": 1,
+        "probe_parameters_are_not_joint_initialization": true
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "505dbfa7537fd3a325a1c4fc827a3a5629afd132",
+    "artifact_path": "docs/post-training/2610.21404-tag-reward-gating/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:0130680bf4328e47ee3154055fd641fc037d71f453780fda7271dfbab4d17cac",
+    "raw_runner_artifact_sha256": "1775d38861959f5891ab4a5c8748956a50ccd884a1b28cb9c401afe9b0e93d19",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/reviewed_oct18.py": "4f93007608a535b6012276dd628df80fdd39bce93f944d8e7a77a9c628d8d196",
+      "scripts/run_oct18_post_components.py": "892558620552098707845985bf97a045802b1776337d19e011599745d5539a11"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

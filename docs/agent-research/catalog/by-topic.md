@@ -25,6 +25,10 @@
 - [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](../2609.30001-agentx-model/README.md)（`agentx-model-replay`）：早期 AgentX 关注从研究构想到实现、评估的单次闭环；AgentX-Model 追问**一次实验之后如何决定下一次做什么**。Research Agent 负责跨论文和实验路径提出、独立审查研究问题；Model Agent 接收获批提案，在固定业务输入与预测任务下多轮改代码、训练、测量，并返回中间最佳实现、负结果和未解问题。
 - [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](../2606.26859-agentx/README.md)（`agentx`）：传统推荐迭代需要工程师串联假设、生产代码、上线 A/B 和归因，经验也难以跨实验积累。AgentX 将流程改造成四阶段闭环：Brainstorm Agent 从实验库、系统知识、数据分析和外部论文生成有证据的候选；Developing Agent 在仓库约束下实现并验证；Evaluation Agent 用护栏否决的线上 A/B 判断；最后以 SGPO 从成功与失败轨迹更新 Agent harness。
 
+### 多Agent协作
+
+- [ARIA: Runtime Inspection and Amendment for Multi-Agent Systems](../2610.20780-aria/README.md)（`aria`）：多 Agent 的早期错误会沿消息和工具结果传播。ARIA 不只在结束后解释失败，而是把执行验证过的修复转成训练数据，让模型在部分轨迹上决定何时干预、在哪里切断及如何续写。
+
 ### Coding Agent
 
 - [AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents](../2610.02163-autocompact/README.md)（`autocompact`）：judge 同时审查何时压缩、工作摘要写什么、压缩后下一步怎么做；纠错后的输出直接进入环境，随后以 SFT+结果 RL 联合学习。
@@ -54,6 +58,11 @@
 ### 轨迹精炼
 
 - [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](../2609.18417-dependency-refinement/README.md)（`dependency-refinement`）：把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。
+
+### 工具使用与可靠性
+
+- [Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure](../2610.21281-diviner/README.md)（`diviner`）：生产事故的症状可能跨推荐、排序、数据、配置和算力服务传播。LLM 能调用工具并不代表它能可靠诊断：超时不等于无异常，历史相似事故不证明本次根因，事后总结也不能作为事故发生时的证据。
+- [JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs](../2610.21412-jev-agent-harness/README.md)（`jev-agent-harness`）：Agent 不需要每一步都让昂贵 LLM 生成长文本，但离线多选题高准确率也不保证闭环不出错。JevAgentHarness 在 agent 自己访问的 shadow trajectories 上，分别校准工具、参数等决策的委派阈值，低置信交回 LLM，并报告成功／费用／关键路径延迟。
 
 ### Harness 自进化
 
@@ -170,6 +179,7 @@
 - [Athanor: An Agent-Native System for Autonomous Post-Training Research](../2610.21055-athanor/README.md)（`athanor`）：研究 Agent 选择数据、训练算法和阶段组合；独立服务执行异步任务、去污染、冻结评测并保存 checkpoint 谱系。团队共享实验记录与模型，组合 SFT、RL、模型合并及自蒸馏；外部教师调用被禁止。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent](../2610.21791-rsiflow/README.md)（`rsiflow`）：性能瓶颈可能来自模型参数、执行 Harness，也可能只是当前交付物。固定只改其中一项，或固定交替更新，未必对应当前失败。
 - [Terminal-RSI: Recursive Self-Improving Terminal Agents via Recursive Self-Rewrite and Policy-Refine](../2610.22192-terminal-rsi/README.md)（`terminal-rsi`）：终端 Agent 既要从验证成功的轨迹里学会可重现行为，也要把稀疏完成反馈传给很早的动作。Terminal-RSI 交替 RSR 轨迹改写和保留 critic 权重的 RPR，阶段开始时先校准 critic；提出 TB-GAE 用交互 turn 时钟而非 observation 文本长度衰减，并用 family 校准的 FDR 过渡到严格完成优先的 SPR。
+- [The World Won't Wait: Evaluating and Teaching Agents Under a Live Clock](../2610.20665-torsi/README.md)（`torsi`）：游戏在模型推理时继续前进，观测时正确的动作在执行时可能已失效。[原文 §3–4](https://arxiv.org/html/2610.20665v1)提出 RealtimeBench 的 paused／live／accelerated 时钟比较，及 Two-Timescale Offline Recursive Self-Improvement：快学生在实况中独立行动，慢教师只在两次尝试之间读失败轨迹、在 feedback 保存状态上离线练习，并改写可复用指导。
 - [RSI-Anything: Unlocking Recursive Self-Improvement with World Models](../../reproductions/2610.13912-rsi-anything/README.md)（`rsi-anything`）：候选先经世界模型预测，再向外部验证申请反馈；反馈更新持久 policy/workflow，可靠性不足且数据/预算足够时适配 predictor。只有组件检查和配对兼容性检查均通过的版本进入下一轮。
 - [Recursive Self-Improvement through Multi-Agent Self-Supervision](../2610.12176-mass/README.md)（`mass`）：同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。
 - [ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization](../2610.00906-active-saddler/README.md)（`active-saddler`）：把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。
@@ -236,6 +246,7 @@
 - [SciPIvot: Benchmarking Principal-Investigator Judgment at Pivotal Moments of Scientific AutoResearch Agents](../2610.21082-scipivot/README.md)（`scipivot`）：26 个跨六科学领域项目、六个月人类纠偏记录构成 248 个关键决策：一个选项是原 LLM 方案，另一个为人类纠正方案。评测器选择更适当的后续研究计划，不是预测项目最终成功。
 - [Shortcut Sensitivity in Agent-Safety Evaluations](../2610.22243-shortcut-sensitivity/README.md)（`shortcut-sensitivity`）：Agent 安全评测会把轨迹长度、工具名、来源标记和重复交互带入输入。高分有时来自这些构造特征，未必测到了真正的风险判断。
 - [ToolBottleneckBench: Measuring Tool-Agent Performance under Controlled Pressures and Fixed Harness Budgets](../2610.21098-tool-bottleneck-bench/README.md)（`tool-bottleneck-bench`）：工具 Agent 的失败不只取决于模型：工具目录、可见菜单、工作流和返回记录编码会与 token/call/turn 上限交互。论文固定请求、事实和决策，分别操纵注册目录 R、可见菜单 V、认证工作流 W、返回状态 D。
+- [Evolving Together, Failing Apart: The Skill-Policy Co-evolution Trap in Self-Improving Agents](../2610.20845-coda/README.md)（`coda`）：策略与技能库共同训练后的最高成绩可能依赖技能原有措辞，一旦部署后技能被改写就退化。CODA 不把 delivered bank 的峰值当唯一结果，而是在相同任务上评估 T1 意义保持改写、T2 内容缺失、T3 误导内容及 no-skill anchor。
 - [What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports](../2610.20003-ctxgap/README.md)（`ctxgap`）：编码 Agent 的最终报告可能“听起来完整”，却不足以让用户恢复真实任务状态。CTXGAP 不用任务完成率替代信息质量，而是从执行记录抽取原子事实，生成有参考答案的探针，在**同一问题**上比较只读累积报告的观察者 $U$、读取完整执行视图的观察者 $T_{full}$，以及直接询问执行 Agent 的条件。
 - [CLASHarness: Benchmarking Multi-Agent Conflict in Computer Use via a Controllable and Verifiable Generation Pipeline](../2610.19128-clasharness/README.md)（`clasharness`）：多个 Agent 共享文件、网页和任务上下文时，其他参与者可能给出错误事实、过期状态或矛盾指令。CLASHarness 要求被测 Agent 依据可见环境核对信息并完成任务，而不只是识别一段文字冲突。
 
@@ -347,6 +358,7 @@
 ### 主动 / 长期记忆
 
 - [Hy-Memory-30B-A3B: Attributed Reinforcement Learning for Long-Term Memory Writing](../2610.22196-hy-memory/README.md)（`hy-memory`）：先在学生自己写出的记忆状态上做 OPD，学习不同框架的写入协议；再冻结 reader 和 judge，单独优化 writer。逐块探针补足稀疏奖励，跨块事实归因定位贡献，存储增长惩罚防止“全部记住”。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [MemScope: Evolving Agent Memory Architectures through Localized Code Repair](../2610.21170-memscope/README.md)（`memscope`）：只给“分数下降”或压缩总结，很难知道长链 Agent 该改记忆写入、检索还是下游使用。MemScope 让 Patch Agent 联合检查原始执行轨迹、运行时记忆和当前 provider 代码，定位后做有界原位修改，保留 provider identity 与现有记忆兼容性；证据不足时可以明确 no-patch，而不是每轮都强行修改。
 - [Test-Time Memory Construction](../../reproductions/2610.13348-t2mem/README.md)（`t2mem`）：离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。
 - [Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents](../2610.12124-hippocam/README.md)（`hippocam`）：Janus 在推理前维护嵌套目的，Precip 在主响应后、工具结果前归纳闭合意图。Palim 递归整理早期前缀为叙事和知识，原消息保留为树形子节点；recall 每次返回一层，Agent 自行决定深入。
 - [Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval](../2610.02070-causal-memory-policy/README.md)（`causal-memory-policy`）：被检索到的记忆与任务难度天然相关，直接按任务成败删除记忆存在选择偏差。CMP 在固定候选池中预留均衡随机曝光槽位，使每条记忆都有可估计的处理/对照样本，再用带标准误的效用判断保护不确定的记忆。

@@ -26,6 +26,10 @@
 
 - 2026-08-19 · 一作：Yugu Li · [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](../2608.18682-rtpo/README.md)（`rtpo`）：把多轮 rollout 组织成稀疏反向树，按时间逆序更新 turn，令决策与下游 continuation 保持 on-policy。
 
+## Alibaba Token Hub, Alibaba Group
+
+- 2026-10-14 · 一作：Yujie Feng · [Evolving Together, Failing Apart: The Skill-Policy Co-evolution Trap in Self-Improving Agents](../2610.20845-coda/README.md)（`coda`）：策略与技能库共同训练后的最高成绩可能依赖技能原有措辞，一旦部署后技能被改写就退化。CODA 不把 delivered bank 的峰值当唯一结果，而是在相同任务上评估 T1 意义保持改写、T2 内容缺失、T3 误导内容及 no-skill anchor。
+
 ## All-Hands-AI
 
 - 2024-07-23 · 一作：Xingyao Wang · [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
@@ -131,6 +135,10 @@
 
 - 2026-03-27 · 一作：Karen Hambardzumyan · [AIRA2: Overcoming Bottlenecks in AI Research Agents](../2603.26499-aira2/README.md)（`aira2`）：以无同步屏障的 steady-state worker pool 提高实验吞吐；训练、搜索、最终选择使用固定的 80/10/10 隐藏切分，搜索只看 search score，结束后才用未参与爬山的 validation 选冠军。
 
+## Florida State University
+
+- 2026-10-14 · 一作：Bolin Shen · [ARIA: Runtime Inspection and Amendment for Multi-Agent Systems](../2610.20780-aria/README.md)（`aria`）：多 Agent 的早期错误会沿消息和工具结果传播。ARIA 不只在结束后解释失败，而是把执行验证过的修复转成训练数据，让模型在部分轨迹上决定何时干预、在哪里切断及如何续写。
+
 ## Fudan University
 
 - 2026-10-15 · 一作：Weiting Liu · [GACC-Bench: Benchmarking Goal-Adaptive Context Compression Ability across Large Language Models](../2610.21893-gacc-bench/README.md)（`gacc-bench`）：长期上下文压缩常在具体后续问题尚未知时执行，但用户可能已给出高层目标。GACC-Bench 按 context–goal 组织多道后续问题，压缩器只能看到来源、目标和预算；固定 reader 用同一压缩记忆逐题回答，再由固定 judge 对照原文和参考答案评分，检验是否保全整组目标证据。
@@ -212,6 +220,10 @@
 - 2026-10-09 · 一作：Mengdi Liu · [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../../reproductions/2610.13194-janus/README.md)（`janus`）：在研究图中先生成未执行提案，再预测价值提升、信息增益和探索收益；稀疏 pairwise tournament 拟合软 Bradley–Terry 分数。执行选中实验后，从成功/失败抽象 intra/cross-task 技能并更新预测、探索、协调协议。
 - 2026-08-27 · 一作：Hongru Song · [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../2608.26557-deeprepro/README.md)（`deeprepro`）：一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。
 
+## Institute of Computing Technology, Chinese Academy of Sciences / University of Chinese Academy of Sciences
+
+- 2026-10-15 · 一作：Miao Su · [MemScope: Evolving Agent Memory Architectures through Localized Code Repair](../2610.21170-memscope/README.md)（`memscope`）：只给“分数下降”或压缩总结，很难知道长链 Agent 该改记忆写入、检索还是下游使用。MemScope 让 Patch Agent 联合检查原始执行轨迹、运行时记忆和当前 provider 代码，定位后做有界原位修改，保留 provider identity 与现有记忆兼容性；证据不足时可以明确 no-patch，而不是每轮都强行修改。
+
 ## Institute of Information Engineering, Chinese Academy of Sciences
 
 - 2026-10-08 · 一作：Xiangyi Zeng · [Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents](../2610.12124-hippocam/README.md)（`hippocam`）：Janus 在推理前维护嵌套目的，Precip 在主响应后、工具结果前归纳闭合意图。Palim 递归整理早期前缀为叙事和知识，原消息保留为树形子节点；recall 每次返回一层，Agent 自行决定深入。
@@ -257,6 +269,10 @@
 ## Memento Team
 
 - 2026-03-19 · 一作：Huichi Zhou · [Memento-Skills](../2603.18743-memento-skills/README.md)（`memento-skills`）：从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。
+
+## Meta
+
+- 2026-10-15 · 一作：Pradipta Ghosh · [Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure](../2610.21281-diviner/README.md)（`diviner`）：生产事故的症状可能跨推荐、排序、数据、配置和算力服务传播。LLM 能调用工具并不代表它能可靠诊断：超时不等于无异常，历史相似事故不证明本次根因，事后总结也不能作为事故发生时的证据。
 
 ## Meta AI
 
@@ -351,6 +367,10 @@
 
 - 2026-07-30 · 一作：Cong Li · [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
 - 2026-07-29 · 一作：Yicheng Feng · [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：工具 router 只能给出相关性排序，不能回答“应该开放前几个工具”。CAM-DF 在任何工具执行前虚拟遍历排序前缀，以任务充分性减异构工具成本作为 payoff；停止当前前缀与最佳后续前缀的 payoff gap 决定标签，gap 绝对值决定错误的 regret 权重。
+
+## Peking University / Samsung Research
+
+- 2026-10-14 · 一作：Ningxin Pan · [The World Won't Wait: Evaluating and Teaching Agents Under a Live Clock](../2610.20665-torsi/README.md)（`torsi`）：游戏在模型推理时继续前进，观测时正确的动作在执行时可能已失效。[原文 §3–4](https://arxiv.org/html/2610.20665v1)提出 RealtimeBench 的 paused／live／accelerated 时钟比较，及 Two-Timescale Offline Recursive Self-Improvement：快学生在实况中独立行动，慢教师只在两次尝试之间读失败轨迹、在 feedback 保存状态上离线练习，并改写可复用指导。
 
 ## PhAI Labs / The Chinese University of Hong Kong
 
@@ -511,6 +531,7 @@
 
 ## University of Illinois Urbana-Champaign
 
+- 2026-10-15 · 一作：Kunlun Zhu · [JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs](../2610.21412-jev-agent-harness/README.md)（`jev-agent-harness`）：Agent 不需要每一步都让昂贵 LLM 生成长文本，但离线多选题高准确率也不保证闭环不出错。JevAgentHarness 在 agent 自己访问的 shadow trajectories 上，分别校准工具、参数等决策的委派阈值，低置信交回 LLM，并报告成功／费用／关键路径延迟。
 - 2025-04-16 · 一作：Cheng Qian · [ToolRL](../2504.13958-toolrl/README.md)（`toolrl`）：联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。
 - 2025-03-12 · 一作：Bowen Jin · [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
 - 2023-10-06 · 一作：Andy Zhou · [LATS](../2310.04406-lats/README.md)（`lats`）：ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。

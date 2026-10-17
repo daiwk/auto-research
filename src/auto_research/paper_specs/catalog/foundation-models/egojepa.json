@@ -1,0 +1,30 @@
+{
+  "domain": "foundation-models",
+  "key": "egojepa",
+  "title": "EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos",
+  "paper_url": "https://arxiv.org/abs/2610.20904",
+  "detail_path": "foundation-models/2610.20904-egojepa/README.md",
+  "topic": [
+    "JEPA与世界模型",
+    "具身多模态"
+  ],
+  "first_author": "Meng Cao",
+  "first_author_affiliation": "Mohamed bin Zayed University of Artificial Intelligence",
+  "published": "2026-10-14",
+  "published_at": "2026-10-14T20:34:18Z",
+  "priority": "P1",
+  "code": null,
+  "code_status": "未找到可核验的作者源代码仓库；项目页的 GitHub 按钮目前指向论文，不等同于代码发布",
+  "adapter": null,
+  "implementation_status": "deferred_high_cost",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "deferral_reason": "20.1k小时视频、32–64张GPU以及三种真实机器人；完整训练及跨具身实验超过单卡A100/A30和本地Mac预算。成本过高，不复现（审查 DONE）。",
+  "summary": "利用手部运动差分条件JEPA学到动作效果表示，再以联合flow matching建模未来视觉和潜动作，最后用机器人专属adapter落地；只收录方法和原文证据，不运行训练或机器人实验。成本过高，不复现（审查 DONE）。"
+}

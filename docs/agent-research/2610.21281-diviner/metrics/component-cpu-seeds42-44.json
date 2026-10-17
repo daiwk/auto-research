@@ -1,0 +1,124 @@
+{
+  "schema_version": 2,
+  "method": "diviner",
+  "manifest_ref": "agent-research:diviner",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-diviner-contract-fixture",
+    "revision": "9f5c8dad3548de56df831bfad59ee64710c53cc3ccaf2eec54c420e28273bc33",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert public CPU events/numbers"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "admitted_observations": {
+      "mean": 3.6666666666666665,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "blocked_agent_self_approvals": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "independent_admission_count_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "nonempty_is_evidence_negative_control_false_admissions": {
+      "mean": 20.333333333333332,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "observations": {
+      "mean": 24,
+      "std": 0.0,
+      "n": 3
+    },
+    "published_owner_approved_updates": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "rejected_observations": {
+      "mean": 20.333333333333332,
+      "std": 0.5773502691896257,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "336b27d41bec5117d2147d42f4e260473349bf37939ced39580754473abe17ea",
+      "metrics": {
+        "observations": 24,
+        "admitted_observations": 4,
+        "rejected_observations": 20,
+        "independent_admission_count_error": 0,
+        "nonempty_is_evidence_negative_control_false_admissions": 20,
+        "blocked_agent_self_approvals": 1,
+        "published_owner_approved_updates": 1
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "4ae5fa3cc318e30d4fb00ecd776018b6b7126d729d1c6ed57cb1e6f9f409b916",
+      "metrics": {
+        "observations": 24,
+        "admitted_observations": 3,
+        "rejected_observations": 21,
+        "independent_admission_count_error": 0,
+        "nonempty_is_evidence_negative_control_false_admissions": 21,
+        "blocked_agent_self_approvals": 1,
+        "published_owner_approved_updates": 1
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "93c4fdf6e3da0b3ea373919bc86947f9117839a1becdf8a49b4419c59fb0ee9e",
+      "metrics": {
+        "observations": 24,
+        "admitted_observations": 4,
+        "rejected_observations": 20,
+        "independent_admission_count_error": 0,
+        "nonempty_is_evidence_negative_control_false_admissions": 20,
+        "blocked_agent_self_approvals": 1,
+        "published_owner_approved_updates": 1
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    }
+  ],
+  "provenance": {
+    "commit": "0e07707c66eb1d1ce966f128b3871aa437020c4b",
+    "artifact_path": "docs/agent-research/2610.21281-diviner/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:6a69422695d9abec37e60cbbd1eb5e78f3c6f5cf6484752fc1ca0b18bf39fd33",
+    "raw_runner_artifact_sha256": "b5055979b988581032c93d4ea231d6e5c0f77c2a24af93d21f7e0c29662b1e59",
+    "executed_source_sha256": {
+      "scripts/run_oct18_agent_components.py": "a632f7c41337f5d77524106e229ec75c9146571a8497459699b5fdb43b86a571",
+      "src/auto_research/agent_research/diviner.py": "f05060f7a4112be279aa84ef84deee4630b99869ea34c82af76a8a5671adc67c"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

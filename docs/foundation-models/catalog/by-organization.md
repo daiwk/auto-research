@@ -64,6 +64,10 @@
 
 - 2026-10-14 · [Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning](../../reproductions/2610.20158-oob-regularization/README.md)（`oob-regularization`）：联合嵌入自监督学习一方面拉近同一图像的不同增强视图，另一方面用抗坍塌正则保持表示多样性。小 batch 对整个表示分布的估计可能很差；单纯增大 GPU batch 又受显存限制。
 
+## FAIR, Meta
+
+- 2026-10-14 · [Open-world AI: a Tale of Three Requirements](../../foundation-models/2610.20782-memory-mosaics-plus/README.md)（`memory-mosaics-plus`）：固定任务的 IID 泛化不等于在开放世界中学习新任务。论文提出推理时学习、丰富表示和预测性解耦三个要求。§3.2 的 Mosaics+ 用短期模块先处理近期依赖，再以 Gaussian-kernel 长期记忆检索预测关联；two-stage 版本分别估计当前任务与相关任务，避免一锅混池让不相关历史越多越有害。
+
 ## FITec Labs
 
 - 2026-09-15 · [Persistent Recurrent Memory Between Transformer Layers Improves Language Model Generalization](../../foundation-models/2609.17251-persistent-recurrent-memory/README.md)（`persistent-recurrent-memory`）：在 Transformer 上下半层之间插入 observe–GRU update–gated influence 的持久状态通路。
@@ -95,6 +99,7 @@
 
 ## Harvard University
 
+- 2026-10-15 · [AdaLoop: Thinking with the Vision Encoder](../../foundation-models/2610.21323-adaloop-vision/README.md)（`adaloop-vision`）：普通 VLM 对所有问题只编码图像一次。视觉 AdaLoop 保持预训练视觉权重冻结，以问题池化向量调制共享视觉块，再循环更新内部视觉状态。它将“看几次”与问题联系起来，而不是让语言模型独自承担全部推理。
 - 2026-10-15 · [RoleQ: Role-Aligned Scales for Converting Language Models to Ternary](../../foundation-models/2610.21808-roleq/README.md)（`roleq`）：按矩阵布局统一逐行放scale，会把写入残差流的不同功能单元混在一起。RoleQ按功能角色选轴：reader（Q/K/V与MLP输入）每输出单元一scale，writer（O与MLP输出）每输入单元一scale。完整RoleQ-T还需要旋转、GPTQ、蒸馏及可选Fisher二平面，不能以单个量化函数替代。
 
 ## Heinrich Heine University Düsseldorf
@@ -180,10 +185,18 @@
 
 - 2026-06-11 · [MiniMax Sparse Attention](../../reproductions/2606.13392-minimax-sparse-attention/README.md)（`minimax-sparse-attention`）：长上下文 dense attention 的二次复杂度成为主要瓶颈。MSA 为每个 GQA 组增加轻量 index branch，先选择少数历史 block，主分支再对命中 token 做精确 attention；训练和推理使用同一路径。
 
+## Mohamed bin Zayed University of Artificial Intelligence
+
+- 2026-10-14 · [EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos](../../foundation-models/2610.20904-egojepa/README.md)（`egojepa`）：人类第一视角视频中的手运动不需要经规则映射为每种机器人的动作。EgoJEPA先用手部运动差分条件JEPA预测未来视觉表示，再联合建模视觉与潜动作，最后仅适配目标机器人的输入输出动作接口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Moonshot AI
 
 - 2025-02-24 · [Muon is Scalable for LLM Training](../../reproductions/2502.16982-muon/README.md)（`muon`）：AdamW 把矩阵参数当作独立标量更新，Muon 则把隐藏层梯度视为矩阵，通过 momentum 与 Newton–Schulz 近似极分解得到正交化更新方向。论文为大规模训练补上 weight decay 和按参数形状缩放；非隐藏矩阵参数继续使用 AdamW。
 - 2025-02-18 · [MoBA: Mixture of Block Attention for Long-Context LLMs](../../reproductions/2502.13189-moba/README.md)（`moba`）：把序列切成 block，以可微 router 为每个 query 选择少量相关块，同时保留当前因果块。
+
+## Multiverse Computing
+
+- 2026-10-15 · [When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill](../../foundation-models/2610.21500-remote-kv-tiers/README.md)（`remote-kv-tiers`）：缓存命中不一定更快。该工作先计算加载与重算的盈亏平衡带宽和固定开销，再把MLA KV缓存按PCP rank分片，并使用rank独立远程实例和异步加载消除队首阻塞。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## NVIDIA
 
@@ -266,6 +279,10 @@
 
 - 2026-08-27 · [PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference](../../reproductions/2608.27206-pace-vlm/README.md)（`pace-vlm`）：VLM 的视觉 token 一方面在 prefill 阶段带来大量计算，另一方面在抽取阶段仍会保留大量与问题无关的内容。PACE 将两个阶段拆开处理：APC 用浅层 ViT preview 同时估计全局语义密度和局部细节，按图像难度自适应缩放；DDAE 再融合 LLM 与视觉编码器的注意力，以置信度决定两种证据各占多少权重，而不是固定只信一种注意力图。
 
+## Tel Aviv University
+
+- 2026-10-15 · [SoftCache: Adaptive Step Size Caching for Diffusion Transformers](../../foundation-models/2610.22369-softcache/README.md)（`softcache`）：动态缓存通常只决定“刷新/重用”，仍沿固定时间网格走。SoftCache 将累计陈旧度距离阈值的 headroom 转成连续步长：缓存越可靠就走得更远。它用两次新鲜残差作时间外推，并重新排布剩余节点，使跳过的节点不会又被访问。
+
 ## Tencent HY LLM Frontier
 
 - 2026-09-11 · [SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking](../../reproductions/2609.13141-sas-attention/README.md)（`sas-attention`）：硬 Top-K 只能改变被选中的索引，语言模型损失无法沿离散索引直接训练 selector。SAS 不再蒸馏 dense attention：selector 先给历史块连续打分，训练时保留 Top-K 块的连续 gate，并把 `log(gate)` 加到注意力 logits 内。
@@ -327,6 +344,10 @@
 
 - 2026-08-06 · [Hierarchical Latent Prediction for Language Models](../../reproductions/2608.05806-hilp/README.md)（`hilp`）：**主题：分层 latent 预训练。** NextLat 的逐步 latent rollout 会累积误差。
 
+## University of Tübingen
+
+- 2026-10-15 · [Retrofitting Recurrent Vision-Language Models from Pretrained Backbones](../../foundation-models/2610.22075-rr-vlm/README.md)（`rr-vlm`）：预训练 VLM 的语言层可以剪掉一段，再共享循环保留核心块；但直接手术会破坏语言能力及图文对齐。RR-VLM 用一个线性 adapter 融合 prelude 上下文与循环状态，并依次执行文本恢复、projector 对齐、全模型指令恢复；文本和最终阶段加入原始未剪模型蒸馏。
+
 ## University of Washington
 
 - 2021-08-27 · [Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation](../../reproductions/2108.12409-alibi/README.md)（`alibi`）：不学习位置向量，而是在每个 head 的注意力 logits 上加入线性距离惩罚，实现 train-short/test-long 外推。
@@ -366,6 +387,10 @@
 ## d-Matrix
 
 - 2026-10-09 · [DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs](../../reproductions/2610.13767-dualquant/README.md)（`dualquant`）：W+A量化中，权重与激活误差相互放大；仅最小化逐row动态范围不能消除跨row系统性column outlier。DualQuant只读取静态权重，以row/block尺度与column尺度共同最小化重建MSE。
+
+## 未注明（论文未列一作机构；公开发布主体为 MindLab）
+
+- 2026-10-15 · [MJev-Spatial: System One Spatial Intelligence via Native Attention Matching](../../foundation-models/2610.22276-mjev-spatial/README.md)（`mjev-spatial`）：空间问题往往只需选项、数值或二维点，却仍让 VLM 自回归生成并解析答案。MJev-Spatial 将三者统一为候选分类：decision marker 提供 query，candidate-end marker 提供 key，直接复用骨干最终注意力投影。连续量通过分桶或三级区域细化预测，不增加独立分类头。
 
 ## 论文未列一作机构
 

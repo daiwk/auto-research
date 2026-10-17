@@ -76,6 +76,15 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.22075-rr-vlm": "1",
+    "2610.21412-jev-agent-harness": "8",
+    "2610.20782-memory-mosaics-plus": "2",
+    "2610.21323-adaloop-vision": "1",
+    "2610.22369-softcache": "1",
+    "2610.20904-egojepa": "2",
+    "2610.21500-remote-kv-tiers": "1",
+    "2610.21018-rshd": "2",
+    "2610.21281-diviner": "3",
     "2610.21555-muon-paired-budget": "3",
     "2610.22124-probe": "1",
     "2610.22319-gemini-minecraft": "2",
@@ -138,6 +147,48 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.22075-rr-vlm": {
+        "pdf_url": "https://arxiv.org/pdf/2610.22075v1",
+        "page": 1,
+        "rect": (105, 79, 508, 303),
+        "label": "Figure 1",
+        "caption": "原始 VLM 与 prune-then-loop retrofit 架构对比，完整保留连续剪枝、prelude、adapter、共享循环核心、coda 和展开路径。",
+    },
+    "2610.21281-diviner": {
+        "pdf_url": "https://arxiv.org/pdf/2610.21281v1",
+        "page": 5,
+        "rect": (50, 318, 562, 539),
+        "label": "Figure 3",
+        "caption": "Diviner 的 Encode、Execute、Evaluate、Adapt 四阶段生命周期；保留证据关联、隔离工作者和回放后经负责人批准的更新。",
+    },
+    "2610.21412-jev-agent-harness": {
+        "pdf_url": "https://arxiv.org/pdf/2610.21412v1",
+        "page": 24,
+        "rect": (302, 227, 528, 468),
+        "label": "Figure 8",
+        "caption": "JEVAGENTHARNESS 的 typed decision 路由、System-1/System-2 分工与逐调用成本账本；图为原论文集成架构，不是本地官方框架验收。",
+    },
+    "2610.20782-memory-mosaics-plus": {
+        "pdf_url": "https://arxiv.org/pdf/2610.20782v1",
+        "page": 5,
+        "rect": (105, 500, 508, 662),
+        "label": "Figure 2",
+        "caption": "对比 basic、现代混合、Memory Mosaics+ 和 two-stage 架构；短期窗口、长期记忆与目标/相关任务分离为原论文结构。",
+    },
+    "2610.21323-adaloop-vision": {
+        "pdf_url": "https://arxiv.org/pdf/2610.21323v1",
+        "page": 1,
+        "rect": (105, 79, 507, 202),
+        "label": "Figure 1",
+        "caption": "普通 VLM 一次视觉编码与 AdaLoop 问题条件视觉循环的结构对比；完整保留左右两条路径。",
+    },
+    "2610.22369-softcache": {
+        "pdf_url": "https://arxiv.org/pdf/2610.22369v1",
+        "page": 1,
+        "rect": (303, 80, 507, 248),
+        "label": "Figure 1",
+        "caption": "固定网格上的 hard caching 与按缓存 headroom 跳步的 SoftCache 对比，保留 off-grid landing 放大示意；不是本地质量或速度结果。",
+    },
     "2610.21555-muon-paired-budget": {
         "pdf_url": "https://arxiv.org/pdf/2610.21555v1",
         "page": 5,
@@ -562,6 +613,12 @@ def choose_special_crop(
     if not spec:
         return None
     pdf_path = TMP / f"{slug}.pdf"
+    # Reuse a cached canonical arXiv PDF before downloading the same public
+    # document under its slug, especially for image-heavy papers.
+    identifier = re.match(r"^(\d{4}\.\d{4,5})(?:-|$)", slug)
+    canonical_pdf = TMP / f"{identifier.group(1)}.pdf" if identifier else None
+    if not pdf_path.exists() and canonical_pdf is not None and canonical_pdf.exists():
+        pdf_path = canonical_pdf
     if not pdf_path.exists():
         pdf_path.parent.mkdir(parents=True, exist_ok=True)
         pdf_path.write_bytes(fetch(str(spec["pdf_url"])))
@@ -624,7 +681,11 @@ def update_page(paper: Paper, result: FigureResult) -> None:
         "2610.22353-mirror-moe": "训练中的专家抑制、有效专家数及最小混合比 ξ 的变化；这是原论文训练诊断，不是本地预训练结果。",
     }
     description = reviewed_descriptions.get(paper.page.parent.name, description)
-    if paper.page.parent.name in ("2610.21138-clean-rm", "2610.21267-tracer"):
+    if paper.page.parent.name in (
+        "2610.21138-clean-rm", "2610.21267-tracer", "2610.21281-diviner",
+        "2610.21412-jev-agent-harness", "2610.20782-memory-mosaics-plus",
+        "2610.21323-adaloop-vision", "2610.22369-softcache", "2610.22075-rr-vlm",
+    ):
         description = str(SPECIAL_CROPS[paper.page.parent.name]["caption"])
     if paper.page.parent.name == "2610.12375-ontrack":
         description = str(SPECIAL_CROPS[paper.page.parent.name]["caption"])

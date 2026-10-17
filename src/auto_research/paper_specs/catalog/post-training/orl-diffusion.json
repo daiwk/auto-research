@@ -1,0 +1,30 @@
+{
+  "domain": "post-training",
+  "key": "orl-diffusion",
+  "title": "On-Policy Residual Learning for Diffusion Language Models",
+  "paper_url": "https://arxiv.org/abs/2610.20687",
+  "detail_path": "post-training/2610.20687-orl-diffusion/README.md",
+  "topic": [
+    "扩散语言模型后训练",
+    "On-policy学习与蒸馏"
+  ],
+  "first_author": "Yifan Yu",
+  "first_author_affiliation": "Together AI / University of Illinois Urbana-Champaign",
+  "published": "2026-10-14",
+  "published_at": "2026-10-14T17:13:17Z",
+  "priority": "P1",
+  "code": "https://github.com/Introspective-Diffusion/ORL",
+  "code_status": "已发布作者ORL代码；系统内核和完整实验仍需对应加速器、模型与训练预算",
+  "adapter": null,
+  "implementation_status": "deferred_high_cost",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "deferral_reason": "4B扩散模型训练包含36–60 H100-hours；论文另有B200/NVFP4及多卡推理实验，单卡A100/A30并不等同该配置。成本过高，不复现（审查 DONE）。",
+  "summary": "在线采集模型自身生成的残差分布轨迹，重放精确状态并以熵收缩约束逐步细化预测，配套专用block-diffusion注意力和推理引擎。仅收录；不以静态logits蒸馏冒充完整ORL。成本过高，不复现（审查 DONE）。"
+}
