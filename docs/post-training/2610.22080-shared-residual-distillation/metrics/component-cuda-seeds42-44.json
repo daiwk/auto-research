@@ -1,0 +1,139 @@
+{
+  "schema_version": 2,
+  "method": "shared-residual-distillation",
+  "manifest_ref": "post-training:shared-residual-distillation",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "fixture:oct17-post-numeric-grammar-v1",
+    "revision": "sha256:d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "independent bounded operator diagnostic, not full paper or model capability"
+  },
+  "metrics": {
+    "coordinate_cap": {
+      "mean": 1e-06,
+      "std": 0.0,
+      "n": 3
+    },
+    "final_signed_clipped_loss": {
+      "mean": -0.02570455071531544,
+      "std": 0.004869703751480771,
+      "n": 3
+    },
+    "gradient_norm_min": {
+      "mean": 0.1491243986534389,
+      "std": 0.030496906186207925,
+      "n": 3
+    },
+    "identical_peer_negative_control_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.055112567360989684,
+      "std": 0.011039081949725535,
+      "n": 3
+    },
+    "reference_max_abs_error": {
+      "mean": 1.1564823173178715e-16,
+      "std": 2.119867103594834e-17,
+      "n": 3
+    },
+    "shared_residual_mean_abs": {
+      "mean": 0.05096294349918937,
+      "std": 0.006378392746655743,
+      "n": 3
+    },
+    "teacher_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "training_target_count": {
+      "mean": 16,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "parameter_delta_l2": 0.0486807102336547,
+        "teacher_delta_l2": 0.0,
+        "reference_max_abs_error": 1.3877787807814457e-16,
+        "shared_residual_mean_abs": 0.04667663173548957,
+        "identical_peer_negative_control_error": 0.0,
+        "gradient_norm_min": 0.16029279675247465,
+        "optimizer_updates": 4,
+        "coordinate_cap": 1e-06,
+        "training_target_count": 16,
+        "final_signed_clipped_loss": -0.030700392879783087
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "parameter_delta_l2": 0.04879776978690047,
+        "teacher_delta_l2": 0.0,
+        "reference_max_abs_error": 9.71445146547012e-17,
+        "shared_residual_mean_abs": 0.058293058280902185,
+        "identical_peer_negative_control_error": 0.0,
+        "gradient_norm_min": 0.1146176919350404,
+        "optimizer_updates": 4,
+        "coordinate_cap": 1e-06,
+        "training_target_count": 16,
+        "final_signed_clipped_loss": -0.020971638485899752
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "parameter_delta_l2": 0.06785922206241388,
+        "teacher_delta_l2": 0.0,
+        "reference_max_abs_error": 1.1102230246251565e-16,
+        "shared_residual_mean_abs": 0.04791914048117635,
+        "identical_peer_negative_control_error": 0.0,
+        "gradient_norm_min": 0.17246270727280164,
+        "optimizer_updates": 4,
+        "coordinate_cap": 1e-06,
+        "training_target_count": 16,
+        "final_signed_clipped_loss": -0.025441620780263477
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/post-training/2610.22080-shared-residual-distillation/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "fixture:oct17-post-numeric-grammar-v1@sha256:d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "5de338e14428cb5b314ee5c9da6124a7fae02249059c11f0567a028d8a16ac34",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/shared_residual_distillation.py": "95d3f735e263c69a04e225cce4157e5ff5649a3673f788ff9e943714e28eafc5",
+      "scripts/run_oct17_post_components.py": "d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

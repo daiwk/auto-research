@@ -1,0 +1,121 @@
+{
+  "schema_version": 2,
+  "method": "bit-sparse",
+  "manifest_ref": "foundation-models:bit-sparse",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-formula-and-bit-patterns",
+    "revision": "oct17-foundation-components-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "independent bounded operator diagnostic, not full paper or model capability"
+  },
+  "metrics": {
+    "backward_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "bf16_bitwise_roundtrip": true,
+    "compact_activation_bytes_including_mask_prefix": {
+      "mean": 708,
+      "std": 26.457513110645905,
+      "n": 3
+    },
+    "dense_activation_bytes": {
+      "mean": 2442,
+      "std": 0.0,
+      "n": 3
+    },
+    "forward_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "nonfinite_input_rejection_cases": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "sparsity": {
+      "mean": 0.8329238295555115,
+      "std": 0.010834342683147357,
+      "n": 3
+    },
+    "storage_ratio_dense_over_compact": {
+      "mean": 3.4524265740093876,
+      "std": 0.1314276655715154,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "bf16_bitwise_roundtrip": true,
+        "forward_max_error": 0.0,
+        "nonfinite_input_rejection_cases": 3,
+        "backward_max_error": 0.0,
+        "dense_activation_bytes": 2442,
+        "compact_activation_bytes_including_mask_prefix": 718,
+        "storage_ratio_dense_over_compact": 3.401114206128134,
+        "sparsity": 0.8288288116455078
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "bf16_bitwise_roundtrip": true,
+        "forward_max_error": 0.0,
+        "nonfinite_input_rejection_cases": 3,
+        "backward_max_error": 0.0,
+        "dense_activation_bytes": 2442,
+        "compact_activation_bytes_including_mask_prefix": 678,
+        "storage_ratio_dense_over_compact": 3.601769911504425,
+        "sparsity": 0.8452088236808777
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "bf16_bitwise_roundtrip": true,
+        "forward_max_error": 0.0,
+        "nonfinite_input_rejection_cases": 3,
+        "backward_max_error": 0.0,
+        "dense_activation_bytes": 2442,
+        "compact_activation_bytes_including_mask_prefix": 728,
+        "storage_ratio_dense_over_compact": 3.3543956043956045,
+        "sparsity": 0.8247338533401489
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/foundation-models/2610.22256-bit-sparse/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-formula-and-bit-patterns@oct17-foundation-components-v1;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "3894c7fa3c5f3233a08ff08539497765a60d2a1dd34e33b51a48f68164f02744",
+    "executed_source_sha256": {
+      "scripts/run_oct17_foundation_components.py": "0d2fe8050317425375a2cfbf2821dd2aa9b21994437f058ef76fcc85ebbded84",
+      "src/auto_research/foundation_models/bit_sparse.py": "0fe51b3252301bdc46054cbc4cf70288967a7903b0edaa04f94b071ce0de7fc2"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

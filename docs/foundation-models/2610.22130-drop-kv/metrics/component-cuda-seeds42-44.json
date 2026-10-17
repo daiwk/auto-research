@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "method": "drop-kv",
+  "manifest_ref": "foundation-models:drop-kv",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-formula-and-bit-patterns",
+    "revision": "oct17-foundation-components-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "independent bounded operator diagnostic, not full paper or model capability"
+  },
+  "metrics": {
+    "attention_only_negative_control_difference": {
+      "mean": 0.1805846812332313,
+      "std": 0.08339740769617454,
+      "n": 3
+    },
+    "evicted_count_per_kv_head": {
+      "mean": 7,
+      "std": 0.0,
+      "n": 3
+    },
+    "key_gradient_norm": {
+      "mean": 0.07752343721699803,
+      "std": 0.03373514908942773,
+      "n": 3
+    },
+    "query_gradient_norm": {
+      "mean": 0.0763554237145721,
+      "std": 0.031141946631893562,
+      "n": 3
+    },
+    "recent_window_protected": true,
+    "singleton_removal_reference_max_error": {
+      "mean": 3.885780586188048e-16,
+      "std": 1.6653345369377348e-16,
+      "n": 3
+    },
+    "value_gradient_norm": {
+      "mean": 0.05857710374173881,
+      "std": 0.01304857654625178,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "singleton_removal_reference_max_error": 5.551115123125783e-16,
+        "recent_window_protected": true,
+        "attention_only_negative_control_difference": 0.262328929855557,
+        "query_gradient_norm": 0.11130069634659082,
+        "key_gradient_norm": 0.11174312085304089,
+        "value_gradient_norm": 0.07280021188138229,
+        "evicted_count_per_kv_head": 7
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "singleton_removal_reference_max_error": 3.885780586188048e-16,
+        "recent_window_protected": true,
+        "attention_only_negative_control_difference": 0.09562700403543102,
+        "query_gradient_norm": 0.051538280571748585,
+        "key_gradient_norm": 0.04429465551532507,
+        "value_gradient_norm": 0.047159420781672665,
+        "evicted_count_per_kv_head": 7
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "singleton_removal_reference_max_error": 2.220446049250313e-16,
+        "recent_window_protected": true,
+        "attention_only_negative_control_difference": 0.18379810980870587,
+        "query_gradient_norm": 0.06622729422537692,
+        "key_gradient_norm": 0.07653253528262813,
+        "value_gradient_norm": 0.05577167856216147,
+        "evicted_count_per_kv_head": 7
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/foundation-models/2610.22130-drop-kv/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-formula-and-bit-patterns@oct17-foundation-components-v1;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "3894c7fa3c5f3233a08ff08539497765a60d2a1dd34e33b51a48f68164f02744",
+    "executed_source_sha256": {
+      "scripts/run_oct17_foundation_components.py": "0d2fe8050317425375a2cfbf2821dd2aa9b21994437f058ef76fcc85ebbded84",
+      "src/auto_research/foundation_models/drop_kv.py": "1f0bd72c25f4c29804828499f4a68a629d9011dd2f39c7a245cc07b54ef8cd6f"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

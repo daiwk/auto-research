@@ -11597,6 +11597,16 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/post_training/elite_replay.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "sample_balanced",
+        "line": 86,
+        "qualified_name": "EliteArchive.sample_balanced",
+        "expression": "self._question_cursor += 1",
+        "fingerprint": "78031646e13aecf2df46ef7723520a92d19e30434d7f69e07db2ac913ba491f8"
+      }
+    ],
     "src/auto_research/post_training/generation.py": [
       {
         "kind": "label_access_requires_role_review",

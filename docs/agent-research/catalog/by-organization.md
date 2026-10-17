@@ -223,6 +223,10 @@
 - 2026-10-08 · 一作：Yanning Dai · [EvoAlloc: A Self-Evolving Resource Allocation Agent for Efficient Program Evolution](../2610.12086-evoalloc/README.md)（`evoalloc`）：模型选择 Full、Partial 或 Discard，得到 Partial 证据后再选择继续/停止。已观察案例更新固定语句经验并反思策略；影子策略共享同一证据，以漏掉新最佳的次数优先、再比较评测成本。
 - 2023-03-31 · 一作：Guohao Li · [CAMEL](../2303.17760-camel/README.md)（`camel`）：用 inception prompting 固定 user/assistant 的角色、目标和边界，通过轮流消息完成任务并生成可研究的多 Agent 社会轨迹。
 
+## Kontext
+
+- 2026-10-15 · 一作：Hasan Demirkiran · [Shortcut Sensitivity in Agent-Safety Evaluations](../2610.22243-shortcut-sensitivity/README.md)（`shortcut-sensitivity`）：Agent 安全评测会把轨迹长度、工具名、来源标记和重复交互带入输入。高分有时来自这些构造特征，未必测到了真正的风险判断。
+
 ## Kuaishou
 
 - 2026-09-24 · 一作：Shuang Yang · [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](../2609.30001-agentx-model/README.md)（`agentx-model-replay`）：早期 AgentX 关注从研究构想到实现、评估的单次闭环；AgentX-Model 追问**一次实验之后如何决定下一次做什么**。Research Agent 负责跨论文和实验路径提出、独立审查研究问题；Model Agent 接收获批提案，在固定业务输入与预测任务下多轮改代码、训练、测量，并返回中间最佳实现、负结果和未解问题。
@@ -266,6 +270,7 @@
 
 ## Microsoft
 
+- 2026-10-15 · 一作：Tanish Kher · [TRACER: Trajectory-Aware Tool Retrieval for LLM Agents](../2610.21267-tracer/README.md)（`tracer`）：把完整工具目录塞进 prompt 会占用大量上下文，纯工具描述相似度又忽略历史执行路径。TRACER 用 **turn 内完整调用前缀**索引执行 trie，候选是该前缀在训练中实际出现过的下一工具；边上记录频率和发生该转移时的完整 conversation context 均值。
 - 2026-09-09 · 一作：Susheel Suresh · [Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents](../2609.11060-grounded-memory/README.md)（`grounded-memory`）：给异步记忆 curator 最小权限只读工具，在写入前验证、限定作用域并刷新候选记忆。
 - 2023-05-19 · 一作：Zhibin Gou · [CRITIC](../2305.11738-critic/README.md)（`critic`）：仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。
 
@@ -515,6 +520,10 @@
 ## University of Osaka
 
 - 2026-10-15 · 一作：Zichuan Xu · [ToolBottleneckBench: Measuring Tool-Agent Performance under Controlled Pressures and Fixed Harness Budgets](../2610.21098-tool-bottleneck-bench/README.md)（`tool-bottleneck-bench`）：工具 Agent 的失败不只取决于模型：工具目录、可见菜单、工作流和返回记录编码会与 token/call/turn 上限交互。论文固定请求、事实和决策，分别操纵注册目录 R、可见菜单 V、认证工作流 W、返回状态 D。
+
+## University of Pennsylvania
+
+- 2026-10-15 · 一作：Sima Noorani（共同一作：Shayan Kiyani） · [Disagreement-Guided Weak-to-Strong Routing](../2610.22245-disagreement-routing/README.md)（`disagreement-routing`）：“弱模型可能答错”不等于“强模型能补救”。原文用弱强分歧减去强模型自身分歧，估计升级调用的增益。
 
 ## University of Science and Technology Beijing
 

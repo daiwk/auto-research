@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "adapter_key": "clean-rm",
+  "validated_at": "2026-10-17",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_oct17_post_components.py",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--code-commit",
+    "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "--output",
+    "runs/oct17-components/post.json"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "fixture:oct17-post-numeric-grammar-v1",
+    "revision": "sha256:d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-independent-mechanism-initialization",
+    "revision": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "pretrained": false,
+    "initialization_seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "result": "passed",
+  "metrics": {
+    "corrected_vs_naive_parameter_l2": {
+      "mean": 0.1060585270013943,
+      "std": 0.08721962641664437,
+      "n": 3
+    },
+    "exact_ot_reference_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "final_preupdate_joint_ot_loss": {
+      "mean": 0.09072645089438104,
+      "std": 0.03594983726351725,
+      "n": 3
+    },
+    "final_signed_corrected_loss": {
+      "mean": 1.0269822370954267,
+      "std": 0.19214129551355222,
+      "n": 3
+    },
+    "initial_joint_ot_loss": {
+      "mean": 0.13024739336832653,
+      "std": 0.039649647142012946,
+      "n": 3
+    },
+    "noise_estimator_delta_during_reward_phase_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "noise_estimator_delta_l2": {
+      "mean": 0.289685725534618,
+      "std": 0.059612214990035876,
+      "n": 3
+    },
+    "noise_gradient_norm_min": {
+      "mean": 0.44648211204743293,
+      "std": 0.2736761944537287,
+      "n": 3
+    },
+    "noise_optimizer_updates": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "nondegenerate_margin_min": {
+      "mean": 0.36053275853968064,
+      "std": 0.06957178579504297,
+      "n": 3
+    },
+    "reward_gradient_norm_min": {
+      "mean": 2.4255140524259042,
+      "std": 0.9195091837332527,
+      "n": 3
+    },
+    "reward_optimizer_updates": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "reward_parameter_delta_l2": {
+      "mean": 0.32828356605138026,
+      "std": 0.1378340556478753,
+      "n": 3
+    },
+    "transport_marginal_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "zero_noise_negative_control_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "src/auto_research/post_training/clean_rm.py": "465ca360bd7b0ae1d9448e3fd042e19cf7daf42bfb1101f7f2ec2c30d8f59de9",
+    "scripts/run_oct17_post_components.py": "d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+  },
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/gpu-validations/clean-rm-a100-20261017.json",
+    "dataset_fingerprint": "fixture:oct17-post-numeric-grammar-v1@sha256:d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "5de338e14428cb5b314ee5c9da6124a7fae02249059c11f0567a028d8a16ac34",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/clean_rm.py": "465ca360bd7b0ae1d9448e3fd042e19cf7daf42bfb1101f7f2ec2c30d8f59de9",
+      "scripts/run_oct17_post_components.py": "d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "metric_artifact_path": "docs/post-training/2610.21138-clean-rm/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

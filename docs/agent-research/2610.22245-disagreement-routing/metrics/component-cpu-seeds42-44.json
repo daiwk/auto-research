@@ -1,0 +1,192 @@
+{
+  "schema_version": 2,
+  "method": "disagreement-routing",
+  "manifest_ref": "agent-research:disagreement-routing",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cpu",
+  "dataset": {
+    "id": "synthetic-disagreement-routing-mechanism-fixture",
+    "revision": "ceb26b604867c7dd6148eb2981f239a0706e0d9b7db1cbad65e2ce0ec7886992",
+    "public_benchmark_evaluated": false
+  },
+  "metrics": {
+    "clean_prompt_probe_test_mae": {
+      "mean": 0.15300462604222642,
+      "std": 0.012898853739289014,
+      "n": 3
+    },
+    "held_out_score_mae": {
+      "mean": 0.27691078022576804,
+      "std": 0.008883276204304711,
+      "n": 3
+    },
+    "independent_target_max_absolute_error": {
+      "mean": 1.1102230246251565e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_response_l2": {
+      "mean": 0.7001852969168443,
+      "std": 0.17826522540236497,
+      "n": 3
+    },
+    "prompt_probe_bce_final": {
+      "mean": 0.6856911996419013,
+      "std": 0.007009524816857406,
+      "n": 3
+    },
+    "prompt_probe_bce_initial": {
+      "mean": 0.6934842778739767,
+      "std": 0.0004533463669152132,
+      "n": 3
+    },
+    "response_probe_bce_final": {
+      "mean": 0.6342772359828855,
+      "std": 0.027028734670167007,
+      "n": 3
+    },
+    "response_probe_bce_initial": {
+      "mean": 0.6934593231465979,
+      "std": 0.0005985183459542971,
+      "n": 3
+    },
+    "retained_test_fraction": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "shuffled_target_prompt_probe_test_mae": {
+      "mean": 0.16593742967146308,
+      "std": 0.017851534371247053,
+      "n": 3
+    },
+    "test_realized_routed_fraction": {
+      "mean": 0.3055555555555556,
+      "std": 0.1272937693043289,
+      "n": 3
+    },
+    "validation_routed_fraction": {
+      "mean": 0.25,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "aec36859a5c62a8634c06931ec195c0f4a3585f91380e0da50260dbcfefe2d8c",
+      "metrics": {
+        "response_probe_bce_initial": 0.6928018884634697,
+        "response_probe_bce_final": 0.6356321488650498,
+        "prompt_probe_bce_initial": 0.693188290706389,
+        "prompt_probe_bce_final": 0.6908523887350257,
+        "independent_target_max_absolute_error": 1.1102230246251565e-16,
+        "held_out_score_mae": 0.2737266513322787,
+        "validation_routed_fraction": 0.25,
+        "test_realized_routed_fraction": 0.4166666666666667,
+        "clean_prompt_probe_test_mae": 0.1678596689864962,
+        "shuffled_target_prompt_probe_test_mae": 0.17223234073074103,
+        "parameter_delta_response_l2": 0.7000394212966449,
+        "retained_test_fraction": 1.0
+      },
+      "calibration": {
+        "requested_budget": 0.25,
+        "threshold": 0.206055879251415,
+        "threshold_is_positive_infinity": false,
+        "split": "validation",
+        "train_prompts": 80,
+        "validation_prompts": 24,
+        "test_prompts": 24
+      }
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "22e063d8d739259aa858fc9fe56a56a020d75a93c7e3c12d898f07ef052ed59c",
+      "metrics": {
+        "response_probe_bce_initial": 0.6939725911275783,
+        "response_probe_bce_final": 0.6606030322381287,
+        "prompt_probe_bce_initial": 0.6940061920721565,
+        "prompt_probe_bce_final": 0.6885101452162103,
+        "independent_target_max_absolute_error": 1.1102230246251565e-16,
+        "held_out_score_mae": 0.2700584033935292,
+        "validation_routed_fraction": 0.25,
+        "test_realized_routed_fraction": 0.3333333333333333,
+        "clean_prompt_probe_test_mae": 0.14464104787816753,
+        "shuffled_target_prompt_probe_test_mae": 0.14579121387895053,
+        "parameter_delta_response_l2": 0.5219930540887061,
+        "retained_test_fraction": 1.0
+      },
+      "calibration": {
+        "requested_budget": 0.25,
+        "threshold": 0.14208619004474804,
+        "threshold_is_positive_infinity": false,
+        "split": "validation",
+        "train_prompts": 80,
+        "validation_prompts": 24,
+        "test_prompts": 24
+      }
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "60d88d787df3bd8802f4e4d692d87be1096312cc225820b5becaa67d43d68e58",
+      "metrics": {
+        "response_probe_bce_initial": 0.6936034898487458,
+        "response_probe_bce_final": 0.6065965268454782,
+        "prompt_probe_bce_initial": 0.6932583508433846,
+        "prompt_probe_bce_final": 0.6777110649744676,
+        "independent_target_max_absolute_error": 1.1102230246251565e-16,
+        "held_out_score_mae": 0.28694728595149627,
+        "validation_routed_fraction": 0.25,
+        "test_realized_routed_fraction": 0.16666666666666666,
+        "clean_prompt_probe_test_mae": 0.14651316126201555,
+        "shuffled_target_prompt_probe_test_mae": 0.1797887344046977,
+        "parameter_delta_response_l2": 0.8785234153651817,
+        "retained_test_fraction": 1.0
+      },
+      "calibration": {
+        "requested_budget": 0.25,
+        "threshold": 0.251946641178872,
+        "threshold_is_positive_infinity": false,
+        "split": "validation",
+        "train_prompts": 80,
+        "validation_prompts": 24,
+        "test_prompts": 24
+      }
+    }
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "claim_policy": "CPU audit/algorithm fixtures, not agent capability or original-paper reproduction",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/agent-research/2610.22245-disagreement-routing/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_oct17_agent_components.py": "49ea9e261586b00e093a5ba732c8bf22067171b03b7d979c7f6a6a4e61739174",
+      "src/auto_research/agent_research/disagreement_routing.py": "4fea6eefb8083ae6bae73fcba72cf77e076bd803a6669dd6484c1fcfa607896a"
+    },
+    "raw_runner_artifact_sha256": "f70bbf5f8258f98409d1db8f82ac1bb2765281107ec218ac21134601a8ff3f30",
+    "dataset_fingerprint": "4bf2a88e0ff64d8ae5c98ffafcd7061b896ca64de5afea6cae01e2de6eae702d"
+  },
+  "isolation": {
+    "test_in_fit_or_calibration": false,
+    "formal_comparison": false,
+    "new_language_model_evaluated": false
+  }
+}

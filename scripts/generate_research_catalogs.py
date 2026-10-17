@@ -303,6 +303,12 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "drop-kv": ("推理与系统效率", "推测解码与 KV cache"),
+    "mirror-moe": ("网络架构", "MoE 与动态路由"),
+    "bit-sparse": ("预训练与数据", "训练框架与可组合实验"),
+    "lct": ("预训练与数据", "训练框架与可组合实验"),
+    "roleq": ("推理与系统效率", "量化"),
+    "hardware-diversity": ("预训练与数据", "训练框架与可组合实验"),
     "oob-regularization": ("预训练与数据", "自监督表征与正则化"),
     "pn-mix": ("推理与系统效率", "量化"),
     "smrc-pmrc": ("预训练与数据", "优化器与训练稳定性"),
@@ -437,6 +443,14 @@ def read_method_summary(module: str, link: str) -> str:
     return summary
 
 
+def high_cost_notice(paper: dict) -> str:
+    if paper.get("implementation_status") != "deferred_high_cost":
+        return ""
+    if paper.get("review_done") is True:
+        return "成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。"
+    return "成本过高，暂不复现；待验收，未注册可执行入口。"
+
+
 def read_rows(module: str, domain: str | None = None) -> list[dict[str, str]]:
     manifest = json.loads(
         (DOCS / "research-manifest.json").read_text(encoding="utf-8")
@@ -486,6 +500,7 @@ def read_rows(module: str, domain: str | None = None) -> list[dict[str, str]]:
             "link": link,
             "info": f"{organization}，{date}",
             "code": paper.get("code") or "未发现官方代码",
+            "code_note": paper.get("code_status") or paper.get("code_license") or "",
             "key": paper["key"],
             "year": date[:4] if date != "未标注" else date,
             "date": date,
@@ -493,11 +508,11 @@ def read_rows(module: str, domain: str | None = None) -> list[dict[str, str]]:
             "first-author": author,
             "organization": organization,
             "summary": read_method_summary(module, link) + (
-                " **成本过高，暂不复现；待验收，未注册可执行入口。**"
+                f" **{high_cost_notice(paper)}**"
                 if paper.get("implementation_status") == "deferred_high_cost" else ""
             ),
             "execution_label": (
-                f"计划键 `{paper['key']}`：成本过高，暂不复现；待验收（仅研究资料）"
+                f"计划键 `{paper['key']}`：{high_cost_notice(paper)}"
                 if paper.get("implementation_status") == "deferred_high_cost"
                 else f"`{paper['key']}`：CPU 评测接口，不执行模型"
                 if paper.get("implementation_status") == "evaluation_protocol_interface"
@@ -569,7 +584,10 @@ def render_method_index(
     for row in _date_descending(read_rows(module, domain)):
         code = row["code"]
         if code.startswith("http"):
-            code = f"[已开源]({code})"
+            label = "原作者入口" if row["code_note"] else "已开源"
+            code = f"[{label}]({code})"
+            if row["code_note"]:
+                code += f"；{row['code_note']}"
         link = f"../{row['link']}" if module == "reproductions" else row["link"]
         lines.append(
             f"| {row['topic']} | [{row['title']}]({link}) | "
@@ -757,7 +775,7 @@ def manifest_domain_rows(domain: str, hierarchy: dict[str, tuple[str, str]]) -> 
             "organization": _normalize_affiliation(paper["first_author_affiliation"].split(" / ", 1)[0]),
             "date": paper["published"],
             "summary": detail_summary(paper["detail_path"]) + (
-                " **成本过高，暂不复现；待验收，未注册可执行入口。**"
+                f" **{high_cost_notice(paper)}**"
                 if paper.get("implementation_status") == "deferred_high_cost" else ""
             ),
             "domain": cluster[0], "cluster": cluster[1],
@@ -799,6 +817,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
+            "drop-kv", "mirror-moe", "bit-sparse", "lct", "roleq", "hardware-diversity",
+        )},
         "selective-reasoning": ("推理与系统效率", "结构化决策与自适应推理"),
         "jepa-prediction-planning": FOUNDATION_TOPIC_HIERARCHY["jepa-prediction-planning"],
         "ev-jepa": FOUNDATION_TOPIC_HIERARCHY["ev-jepa"],

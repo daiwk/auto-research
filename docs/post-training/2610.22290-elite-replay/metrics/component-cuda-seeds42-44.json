@@ -1,0 +1,183 @@
+{
+  "schema_version": 2,
+  "method": "elite-replay",
+  "manifest_ref": "post-training:elite-replay",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "fixture:oct17-post-numeric-grammar-v1",
+    "revision": "sha256:d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "independent bounded operator diagnostic, not full paper or model capability"
+  },
+  "metrics": {
+    "frozen_base_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gradient_norm_min": {
+      "mean": 0.1506850139988308,
+      "std": 0.06175321970041571,
+      "n": 3
+    },
+    "insertions_or_improvements": {
+      "mean": 5.666666666666667,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "mutation_attempts": {
+      "mean": 72,
+      "std": 0.0,
+      "n": 3
+    },
+    "new_cells_from_directed_search": {
+      "mean": 5.666666666666667,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "occupied_cells": {
+      "mean": 8.666666666666666,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.06921523112623128,
+      "std": 0.020060150978638516,
+      "n": 3
+    },
+    "question_sampling_count_gap": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "rejected_mutation_candidates": {
+      "mean": 31.333333333333332,
+      "std": 16.62327685305558,
+      "n": 3
+    },
+    "replay_mixture_weight": {
+      "mean": 0.05,
+      "std": 0.0,
+      "n": 3
+    },
+    "replay_reference_max_abs_error": {
+      "mean": 9.251858538542972e-17,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "seed_cells": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "unrepresentable_ratio_rejected": true,
+    "verified_archive_fraction": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "verified_candidates": {
+      "mean": 40.666666666666664,
+      "std": 16.62327685305558,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "mutation_attempts": 72,
+        "verified_candidates": 56,
+        "insertions_or_improvements": 6,
+        "occupied_cells": 9,
+        "parameter_delta_l2": 0.04644506276578942,
+        "frozen_base_delta_l2": 0.0,
+        "unrepresentable_ratio_rejected": true,
+        "gradient_norm_min": 0.08141839522480523,
+        "optimizer_updates": 4,
+        "replay_reference_max_abs_error": 5.551115123125783e-17,
+        "question_sampling_count_gap": 0,
+        "verified_archive_fraction": 1.0,
+        "rejected_mutation_candidates": 16,
+        "seed_cells": 3,
+        "new_cells_from_directed_search": 6,
+        "replay_mixture_weight": 0.05
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "mutation_attempts": 72,
+        "verified_candidates": 43,
+        "insertions_or_improvements": 5,
+        "occupied_cells": 8,
+        "parameter_delta_l2": 0.08428124343854351,
+        "frozen_base_delta_l2": 0.0,
+        "unrepresentable_ratio_rejected": true,
+        "gradient_norm_min": 0.1999833084208911,
+        "optimizer_updates": 4,
+        "replay_reference_max_abs_error": 1.6653345369377348e-16,
+        "question_sampling_count_gap": 0,
+        "verified_archive_fraction": 1.0,
+        "rejected_mutation_candidates": 29,
+        "seed_cells": 3,
+        "new_cells_from_directed_search": 5,
+        "replay_mixture_weight": 0.05
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "mutation_attempts": 72,
+        "verified_candidates": 23,
+        "insertions_or_improvements": 6,
+        "occupied_cells": 9,
+        "parameter_delta_l2": 0.0769193871743609,
+        "frozen_base_delta_l2": 0.0,
+        "unrepresentable_ratio_rejected": true,
+        "gradient_norm_min": 0.17065333835079607,
+        "optimizer_updates": 4,
+        "replay_reference_max_abs_error": 5.551115123125783e-17,
+        "question_sampling_count_gap": 0,
+        "verified_archive_fraction": 1.0,
+        "rejected_mutation_candidates": 49,
+        "seed_cells": 3,
+        "new_cells_from_directed_search": 6,
+        "replay_mixture_weight": 0.05
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/post-training/2610.22290-elite-replay/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "fixture:oct17-post-numeric-grammar-v1@sha256:d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "5de338e14428cb5b314ee5c9da6124a7fae02249059c11f0567a028d8a16ac34",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/elite_replay.py": "3aadc5f45356811932f437bd2e6d6ee71d9c2310bfd9dc529b6618422fbd04df",
+      "scripts/run_oct17_post_components.py": "d4f7445085414e990508248e802cd60cdefffc76d0833f19e8911d9b327f2cc0"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

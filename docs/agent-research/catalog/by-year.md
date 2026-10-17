@@ -4,9 +4,12 @@
 
 ## 2026
 
+- 2026-10 · [Disagreement-Guided Weak-to-Strong Routing](../2610.22245-disagreement-routing/README.md)（`disagreement-routing`）：“弱模型可能答错”不等于“强模型能补救”。原文用弱强分歧减去强模型自身分歧，估计升级调用的增益。
 - 2026-10 · [Librarian Agents: Training LLMs to Curate Long-Context Workspaces that Anticipate Future Queries](../2610.22273-librarian-agents/README.md)（`librarian-agents`）：常规 RAG 每次查询后才检索，重复探索跨文档关系。Librarian 在还未看到评测问题时，由可学习 builder 把原始语料组织成可复用层级文件系统；固定 answerer 后续导航，必要时沿 provenance 回退到 raw docs。
 - 2026-10 · [SciPIvot: Benchmarking Principal-Investigator Judgment at Pivotal Moments of Scientific AutoResearch Agents](../2610.21082-scipivot/README.md)（`scipivot`）：26 个跨六科学领域项目、六个月人类纠偏记录构成 248 个关键决策：一个选项是原 LLM 方案，另一个为人类纠正方案。评测器选择更适当的后续研究计划，不是预测项目最终成功。
+- 2026-10 · [Shortcut Sensitivity in Agent-Safety Evaluations](../2610.22243-shortcut-sensitivity/README.md)（`shortcut-sensitivity`）：Agent 安全评测会把轨迹长度、工具名、来源标记和重复交互带入输入。高分有时来自这些构造特征，未必测到了真正的风险判断。
 - 2026-10 · [ToolBottleneckBench: Measuring Tool-Agent Performance under Controlled Pressures and Fixed Harness Budgets](../2610.21098-tool-bottleneck-bench/README.md)（`tool-bottleneck-bench`）：工具 Agent 的失败不只取决于模型：工具目录、可见菜单、工作流和返回记录编码会与 token/call/turn 上限交互。论文固定请求、事实和决策，分别操纵注册目录 R、可见菜单 V、认证工作流 W、返回状态 D。
+- 2026-10 · [TRACER: Trajectory-Aware Tool Retrieval for LLM Agents](../2610.21267-tracer/README.md)（`tracer`）：把完整工具目录塞进 prompt 会占用大量上下文，纯工具描述相似度又忽略历史执行路径。TRACER 用 **turn 内完整调用前缀**索引执行 trie，候选是该前缀在训练中实际出现过的下一工具；边上记录频率和发生该转移时的完整 conversation context 均值。
 - 2026-10 · [Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents](../2610.20116-transparent-compact/README.md)（`transparent-compact`）：长会话压缩通常依赖模型重写摘要，可能丢失只在对话出现的承诺或悄悄改变其措辞。本方法保留用户与助手原话，将思考和工具输出移出活跃上下文，留下明确删减标记，并提供到完整原始会话的恢复路径。
 - 2026-10 · [Recursive Formation and First-Class Reuse of Compositional Capabilities](../2610.19414-formcraft/README.md)（`formcraft`）：一次合成出的能力不应只留下推导历史，而应成为可独立调用、继续组合、持久保存的一等操作。FormCraft 区分三个阶段：类型与接口相容的形成、独立验证后的持久准入、通过相同公开接口直接复用。
 - 2026-10 · [What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports](../2610.20003-ctxgap/README.md)（`ctxgap`）：编码 Agent 的最终报告可能“听起来完整”，却不足以让用户恢复真实任务状态。CTXGAP 不用任务完成率替代信息质量，而是从执行记录抽取原子事实，生成有参考答案的探针，在**同一问题**上比较只读累积报告的观察者 $U$、读取完整执行视图的观察者 $T_{full}$，以及直接询问执行 Agent 的条件。

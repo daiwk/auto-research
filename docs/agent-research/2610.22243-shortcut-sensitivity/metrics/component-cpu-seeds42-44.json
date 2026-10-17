@@ -1,0 +1,177 @@
+{
+  "schema_version": 2,
+  "method": "shortcut-sensitivity",
+  "manifest_ref": "agent-research:shortcut-sensitivity",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "device": "cpu",
+  "dataset": {
+    "id": "MurrayTom/ToolSafe-TS-Bench-public-audit",
+    "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+    "artifacts": [
+      {
+        "source_path": "TS-Bench/agentdojo-traj/banking.json",
+        "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+        "sha256": "eb4a314845c8236ba1bbcd9855973f59279a70368b6eb31d447a4cd243086029",
+        "bytes": 239239
+      },
+      {
+        "source_path": "TS-Bench/agentdojo-traj/slack.json",
+        "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+        "sha256": "08152de8cf9c39d01d58eb708f3a820a892f493841b975e09654ab904cf8a0d5",
+        "bytes": 361979
+      },
+      {
+        "source_path": "TS-Bench/agentdojo-traj/travel.json",
+        "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+        "sha256": "1935121585fb1a02662e8121fe80e78c6d89b77e0c6035ea2b75b593e3728a22",
+        "bytes": 1071254
+      },
+      {
+        "source_path": "TS-Bench/agentdojo-traj/workspace.json",
+        "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+        "sha256": "74b20a4fcd7df1c3e39a231e64860aeac8cd57ce3531728b329080abbcc862d0",
+        "bytes": 8959525
+      },
+      {
+        "source_path": "TS-Bench/agentharm-traj/benign_steps.json",
+        "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+        "sha256": "f44fce25b0ed795e3c11fadafb8d8c959d2ae4513e6e9f15e154fa4aba9bf020",
+        "bytes": 689251
+      },
+      {
+        "source_path": "TS-Bench/agentharm-traj/harmful_steps.json",
+        "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+        "sha256": "6046b4f4b2e5086c98780433bddf74be542eeec910e3260b4727bf22a9a3365b",
+        "bytes": 1764105
+      },
+      {
+        "source_path": "guardian_test_logs/agentharm/TS-Guard/labels.json",
+        "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+        "sha256": "51b127b836995f3780ed42885079a8ecce725709f46f89c860cd6c7a21d67cf5",
+        "bytes": 6581
+      },
+      {
+        "source_path": "guardian_test_logs/agentharm/TS-Guard/preds.json",
+        "revision": "46358fa424a927a895c6c8322f99032c4eb5155e",
+        "sha256": "fb21f86e34bc64f3c340c731980e07b05ebec48ea55058f34ea75ae826b00a32",
+        "bytes": 6581
+      }
+    ],
+    "raw_records_redistributed": false
+  },
+  "metrics": {
+    "cv_minus_domain_holdout_f1": {
+      "mean": 0.40539543122854926,
+      "std": 0.0,
+      "n": 3
+    },
+    "mixed_domain_grouped_cv_f1": {
+      "mean": 0.9008746355685131,
+      "std": 0.0,
+      "n": 3
+    },
+    "retained_row_fraction": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "rows": 1220,
+    "domains": 4,
+    "lodo_f1": 0.49547920433996384,
+    "lodo_balanced_accuracy": 0.6577359132802681,
+    "seen_tool_fraction": 0.17295081967213113,
+    "independent_reference_prediction_errors": 0,
+    "dropped_rows": 0,
+    "new_guard_calls": 0,
+    "agentharm_rows": 731,
+    "agentharm_interactions": 197,
+    "guard_row_f1": 0.9016829052258636,
+    "guard_equal_interaction_f1": 0.7193282690863428,
+    "guard_row_balanced_accuracy": 0.7541793804900601,
+    "guard_equal_interaction_balanced_accuracy": 0.7756858465608465
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "seed_role": "interaction_fold_shuffle_not_model_training",
+      "metrics": {
+        "mixed_domain_grouped_cv_f1": 0.9008746355685131,
+        "cv_minus_domain_holdout_f1": 0.40539543122854926,
+        "retained_row_fraction": 1.0
+      }
+    },
+    {
+      "seed": 43,
+      "seed_role": "interaction_fold_shuffle_not_model_training",
+      "metrics": {
+        "mixed_domain_grouped_cv_f1": 0.9008746355685131,
+        "cv_minus_domain_holdout_f1": 0.40539543122854926,
+        "retained_row_fraction": 1.0
+      }
+    },
+    {
+      "seed": 44,
+      "seed_role": "interaction_fold_shuffle_not_model_training",
+      "metrics": {
+        "mixed_domain_grouped_cv_f1": 0.9008746355685131,
+        "cv_minus_domain_holdout_f1": 0.40539543122854926,
+        "retained_row_fraction": 1.0
+      }
+    }
+  ],
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "formal_comparison": false,
+    "claim_policy": "CPU audit/algorithm fixtures, not agent capability or original-paper reproduction",
+    "seeds": [
+      42,
+      43,
+      44
+    ]
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "2b9c5f4dc5757c14692654f700d2c40d90ffbfa1",
+    "artifact_path": "docs/agent-research/2610.22243-shortcut-sensitivity/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_oct17_agent_components.py": "49ea9e261586b00e093a5ba732c8bf22067171b03b7d979c7f6a6a4e61739174",
+      "src/auto_research/agent_research/shortcut_sensitivity.py": "6dfd6b12c075262545e2b1e4ab0dc5ecc8fe6f06153f6045a9950a592eeefc1e"
+    },
+    "raw_runner_artifact_sha256": "f70bbf5f8258f98409d1db8f82ac1bb2765281107ec218ac21134601a8ff3f30",
+    "dataset_fingerprint": "0c2dfb428bd3a5d4d891e58201e20849cb3e42e9f40b97363a8f49a22ddf588e"
+  },
+  "deterministic": {
+    "metrics": {
+      "rows": 1220,
+      "domains": 4,
+      "lodo_f1": 0.49547920433996384,
+      "lodo_balanced_accuracy": 0.6577359132802681,
+      "seen_tool_fraction": 0.17295081967213113,
+      "independent_reference_prediction_errors": 0,
+      "dropped_rows": 0,
+      "new_guard_calls": 0,
+      "agentharm_rows": 731,
+      "agentharm_interactions": 197,
+      "guard_row_f1": 0.9016829052258636,
+      "guard_equal_interaction_f1": 0.7193282690863428,
+      "guard_row_balanced_accuracy": 0.7541793804900601,
+      "guard_equal_interaction_balanced_accuracy": 0.7756858465608465
+    },
+    "repetitions": 1,
+    "interpretation": "released-label lookup / frozen guard prediction audit, not new capability"
+  },
+  "isolation": {
+    "held_out_domain_labels_used_for_lookup_fit": false,
+    "lookup_label_access_is_diagnostic_only": true,
+    "no_tool_record_executed": true
+  }
+}

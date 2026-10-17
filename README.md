@@ -52,6 +52,11 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+[10 月 17 日十二个低成本组件与 Meta/AMD 系统资料](docs/research-audits/oct17-components/README.md)
+包含 KV 驱逐、MoE 路由、无损压缩、三值量化、蒸馏/奖励/replay 和 Agent 审计/路由/检索。
+九项 CUDA 组件在 A100 上完成三种子机制诊断，三项 Agent 组件完成 CPU 验证；
+完整高成本实验明确不复现（审查 DONE），不以组件结果宣称论文能力，也不自动进入 Evolve。
+
 [两项 Google P0、十二项 P1 与 TransX 报告升级](docs/research-audits/oct16-components/README.md)
 提供约束解码、跨任务辅助头、精确多 cutoff memory、后训练目标和公共 Agent 评测接口。
 高成本完整实验标注“不复现（审查 DONE）”；本地小网络更新、算子诊断与官方结果复算分开呈现，
