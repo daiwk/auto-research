@@ -1,0 +1,132 @@
+{
+  "schema_version": 2,
+  "method": "memscope",
+  "manifest_ref": "agent-research:memscope",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-memscope-contract-fixture",
+    "revision": "4dac14c864ed07252e4ba5f05d2ddf141df513062cb39ed561bb10ce389e3516",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert public CPU events/numbers"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "accepted_local_patches": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "change_ratio": {
+      "mean": 0.012232415902140636,
+      "std": 0.005296791460455315,
+      "n": 3
+    },
+    "failed_probe_rollbacks": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "independent_original_code_rollback_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "memory_records": {
+      "mean": 5,
+      "std": 1.0,
+      "n": 3
+    },
+    "persisted_probe_side_effects": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "rejected_interface_changes": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "unchecked_install_negative_control_incompatible_edits": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "836399b30b4a8d1780160554173f0332cebf181d79a827ff4bb4f88022b27249",
+      "metrics": {
+        "memory_records": 4,
+        "accepted_local_patches": 1,
+        "change_ratio": 0.01834862385321101,
+        "failed_probe_rollbacks": 1,
+        "rejected_interface_changes": 1,
+        "persisted_probe_side_effects": 0,
+        "independent_original_code_rollback_error": 0,
+        "unchecked_install_negative_control_incompatible_edits": 1
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "91b3b586bf6fc003b6f7e9371138962c562222c4ac2f4bbce94d457cb9426f63",
+      "metrics": {
+        "memory_records": 6,
+        "accepted_local_patches": 1,
+        "change_ratio": 0.00917431192660545,
+        "failed_probe_rollbacks": 1,
+        "rejected_interface_changes": 1,
+        "persisted_probe_side_effects": 0,
+        "independent_original_code_rollback_error": 0,
+        "unchecked_install_negative_control_incompatible_edits": 1
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "5c9047e979176de1483135d5d6c8b1a466e53199241e7bd46c22a40783efa904",
+      "metrics": {
+        "memory_records": 5,
+        "accepted_local_patches": 1,
+        "change_ratio": 0.00917431192660545,
+        "failed_probe_rollbacks": 1,
+        "rejected_interface_changes": 1,
+        "persisted_probe_side_effects": 0,
+        "independent_original_code_rollback_error": 0,
+        "unchecked_install_negative_control_incompatible_edits": 1
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    }
+  ],
+  "provenance": {
+    "commit": "0e07707c66eb1d1ce966f128b3871aa437020c4b",
+    "artifact_path": "docs/agent-research/2610.21170-memscope/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:1715753602849b95b7bd9ae44bc9868b5dcb417f6d7447a21be1f525f75a44b0",
+    "raw_runner_artifact_sha256": "b5055979b988581032c93d4ea231d6e5c0f77c2a24af93d21f7e0c29662b1e59",
+    "executed_source_sha256": {
+      "scripts/run_oct18_agent_components.py": "a632f7c41337f5d77524106e229ec75c9146571a8497459699b5fdb43b86a571",
+      "src/auto_research/agent_research/memscope.py": "6bfbff66d61eaabe4f16cbcc414feac0bbb3cb1baabda26f959a69809f5a2943"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

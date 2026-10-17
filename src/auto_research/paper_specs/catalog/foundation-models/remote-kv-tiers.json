@@ -1,0 +1,30 @@
+{
+  "domain": "foundation-models",
+  "key": "remote-kv-tiers",
+  "title": "When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill",
+  "paper_url": "https://arxiv.org/abs/2610.21500",
+  "detail_path": "foundation-models/2610.21500-remote-kv-tiers/README.md",
+  "topic": [
+    "推理与系统效率",
+    "KV缓存与分布式服务"
+  ],
+  "first_author": "Muhammad Ibrahim",
+  "first_author_affiliation": "Multiverse Computing",
+  "published": "2026-10-15",
+  "published_at": "2026-10-15T08:37:22Z",
+  "priority": "P1",
+  "code": "https://github.com/LMCache/LMCache",
+  "code_status": "相关实现以作者提交的LMCache上游PR公开；不将PR公开等同于全部已合入或完整集群复现实验可用",
+  "adapter": null,
+  "implementation_status": "deferred_high_cost",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "deferral_reason": "GLM-5.3 FP8 MoE、每节点8张B300，端到端4P+1D配置需5个节点；无法在现有单卡A100/A30上忠实验证分布式收益。成本过高，不复现（审查 DONE）。",
+  "summary": "以带宽和固定加载成本刻画远程KV命中是否优于重算，再按上下文并行rank分片、异步加载及修复客户端阻塞；完整分布式部署只收录不复现。成本过高，不复现（审查 DONE）。"
+}

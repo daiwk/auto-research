@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "method": "jev-agent-harness",
+  "manifest_ref": "agent-research:jev-agent-harness",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-jev-agent-harness-contract-fixture",
+    "revision": "4eb07a54a1ba923b876f5984fc319caab85394b690757b4d4329b1d72e642434",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert public CPU events/numbers"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "declared_total_cost": {
+      "mean": 1.32,
+      "std": 0.0,
+      "n": 3
+    },
+    "delegated_decisions": {
+      "mean": 6,
+      "std": 0.0,
+      "n": 3
+    },
+    "failed_model_fallbacks": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "fitted_tool_threshold": {
+      "mean": 0.8921069028988104,
+      "std": 0.03515608926218517,
+      "n": 3
+    },
+    "fixed_low_threshold_negative_control_wrong_delegations": {
+      "mean": 6,
+      "std": 0.0,
+      "n": 3
+    },
+    "gold_fields_exposed_to_runtime_callbacks": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "independent_cost_accounting_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "shadow_rows": {
+      "mean": 40,
+      "std": 0.0,
+      "n": 3
+    },
+    "strong_fallbacks": {
+      "mean": 6,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "9b975a063ec72696dff219439f6228e0c7f0101a435d745b23dba33c372798e6",
+      "metrics": {
+        "fitted_tool_threshold": 0.8525010755222666,
+        "shadow_rows": 40,
+        "delegated_decisions": 6,
+        "strong_fallbacks": 6,
+        "declared_total_cost": 1.32,
+        "independent_cost_accounting_error": 0.0,
+        "fixed_low_threshold_negative_control_wrong_delegations": 6,
+        "failed_model_fallbacks": 1,
+        "gold_fields_exposed_to_runtime_callbacks": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "b5bf7de87dcaee3f982150abe4f8e98fddfdc3e4f624ed8b29533ccca28eb367",
+      "metrics": {
+        "fitted_tool_threshold": 0.9196224322637052,
+        "shadow_rows": 40,
+        "delegated_decisions": 6,
+        "strong_fallbacks": 6,
+        "declared_total_cost": 1.32,
+        "independent_cost_accounting_error": 0.0,
+        "fixed_low_threshold_negative_control_wrong_delegations": 6,
+        "failed_model_fallbacks": 1,
+        "gold_fields_exposed_to_runtime_callbacks": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "65bfff45270ba9cec6e21c5edd10cf3176d64c61442478a58ebe2c5344864c91",
+      "metrics": {
+        "fitted_tool_threshold": 0.9041972009104596,
+        "shadow_rows": 40,
+        "delegated_decisions": 6,
+        "strong_fallbacks": 6,
+        "declared_total_cost": 1.32,
+        "independent_cost_accounting_error": 0.0,
+        "fixed_low_threshold_negative_control_wrong_delegations": 6,
+        "failed_model_fallbacks": 1,
+        "gold_fields_exposed_to_runtime_callbacks": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    }
+  ],
+  "provenance": {
+    "commit": "0e07707c66eb1d1ce966f128b3871aa437020c4b",
+    "artifact_path": "docs/agent-research/2610.21412-jev-agent-harness/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:a212e0752e629e4f847cb0116e7b0395a94fb21a5e2aff712256842dd5b32550",
+    "raw_runner_artifact_sha256": "b5055979b988581032c93d4ea231d6e5c0f77c2a24af93d21f7e0c29662b1e59",
+    "executed_source_sha256": {
+      "scripts/run_oct18_agent_components.py": "a632f7c41337f5d77524106e229ec75c9146571a8497459699b5fdb43b86a571",
+      "src/auto_research/agent_research/jev_agent_harness.py": "2adf1aa1d294173e7b747fc1b1a432a8578f87879022d9c492a6672e7e8bf6d0"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

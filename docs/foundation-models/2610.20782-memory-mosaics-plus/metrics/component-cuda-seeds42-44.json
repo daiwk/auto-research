@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "method": "memory-mosaics-plus",
+  "manifest_ref": "foundation-models:memory-mosaics-plus",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-memory-spatial-vision-recurrence-and-ode",
+    "revision": "oct18-foundation-mechanisms-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "future_perturbation_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "key_gradient_norm": {
+      "mean": 0.06860770752255169,
+      "std": 0.014894434148079285,
+      "n": 3
+    },
+    "key_update_norm": {
+      "mean": 0.0006860770752255192,
+      "std": 0.00014894434148078845,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "pooled_memory_negative_control_error": {
+      "mean": 0.893177886912064,
+      "std": 0.0627946545220859,
+      "n": 3
+    },
+    "separate_normalizer_reference_max_error": {
+      "mean": 2.220446049250313e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "training_loss": {
+      "mean": 1.1663078723030846,
+      "std": 0.09423652320240208,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "separate_normalizer_reference_max_error": 2.220446049250313e-16,
+        "pooled_memory_negative_control_error": 0.8868287921270684,
+        "future_perturbation_max_error": 0.0,
+        "key_gradient_norm": 0.06704740913065094,
+        "key_update_norm": 0.0006704740913065199,
+        "training_loss": 1.2276957737917256,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "separate_normalizer_reference_max_error": 2.220446049250313e-16,
+        "pooled_memory_negative_control_error": 0.8337989741036546,
+        "future_perturbation_max_error": 0.0,
+        "key_gradient_norm": 0.0545548438658263,
+        "key_update_norm": 0.000545548438658265,
+        "training_loss": 1.2134224459528984,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "separate_normalizer_reference_max_error": 2.220446049250313e-16,
+        "pooled_memory_negative_control_error": 0.9589058945054689,
+        "future_perturbation_max_error": 0.0,
+        "key_gradient_norm": 0.08422086957117782,
+        "key_update_norm": 0.0008422086957117726,
+        "training_loss": 1.0578053971646302,
+        "optimizer_steps": 1
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "1e163ea726a9af6717f10705f8db8e89f8dc49ba",
+    "artifact_path": "docs/foundation-models/2610.20782-memory-mosaics-plus/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:a9dfc7d639e99ee49b5ebd63e133a5ab2ac063a8f26bb7a74cd02d5a92e5620f",
+    "raw_runner_artifact_sha256": "a66b20ff60717423fe95f9d8dbf1e6a888d0668df4f70e27389734f4b1b92bc8",
+    "executed_source_sha256": {
+      "scripts/run_oct18_foundation_components.py": "a22ea15de5dba5b92428d69eb6f3e38fe87f46426ec5c844490cb72f723ec14b",
+      "src/auto_research/foundation_models/memory_mosaics_plus.py": "6879dd1b0f3235bab6ed107e55a2811530985081fb4abe3c7e2eb45e84992db3"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
