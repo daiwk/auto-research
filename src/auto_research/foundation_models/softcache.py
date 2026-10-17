@@ -20,6 +20,7 @@ class CacheTrace:
     fresh: bool
     accumulator: float
     probe_change: float
+    scheduled_step: float
 
 
 def residual_extrapolation(current: Tensor, previous: Tensor | None, time: float,
@@ -77,7 +78,7 @@ class SoftCacheSampler:
             x = x + step * readout(x, prediction, time)
             if not bool(torch.isfinite(x).all()):
                 raise ValueError("nonfinite sample")
-            trace.append(CacheTrace(time, step, fresh, accumulator, rho))
+            trace.append(CacheTrace(time, step, fresh, accumulator, rho, scheduled))
             previous_probe = current_probe
             landing = min(1., time + step)
             tail = [value for value in grid[1:] if value > landing + 1e-12]

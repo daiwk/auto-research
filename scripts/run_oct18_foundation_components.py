@@ -227,7 +227,8 @@ def softcache_diagnostic(seed: int, device: str) -> dict:
         extrapolated = residual_extrapolation(anchor, previous, .6, .4, .2, .5)
         extrapolation_error = float((extrapolated - (1.5 * anchor - .5 * previous)).abs().max())
     fresh = sum(row.fresh for row in trace)
-    jumps = sum(row.step > .0500000001 for row in trace)
+    jumps = sum(not row.fresh and row.step > row.scheduled_step * (1 + 1e-9) for row in trace)
+    assert jumps <= sum(not row.fresh for row in trace)
     negative = float((output - hard).abs().max())
     assert error < 1e-10 and extrapolation_error < 1e-10
     assert 1 < fresh < len(trace) < len(full_trace) and jumps > 0 and negative > 1e-6

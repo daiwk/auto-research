@@ -201,6 +201,11 @@ def test_softcache_no_cross_sample_cache_and_never_steps_past_endpoint():
     assert torch.allclose(result, torch.ones(1))
     assert all(row.time + row.step <= 1 + 1e-12 for row in trace)
     assert trace[0].fresh and calls == [0.]
+    # A re-spaced fresh schedule is not a cache jump merely because its step
+    # exceeds the initial grid spacing; compare each step with its own grid.
+    assert all(row.scheduled_step > 0 for row in trace)
+    jumps = [row for row in trace if not row.fresh and row.step > row.scheduled_step * (1 + 1e-9)]
+    assert len(jumps) <= sum(not row.fresh for row in trace)
     sampler.sample(torch.ones(1), [0., 1.], residual, lambda x, r, t: r, lambda x, t: x)
     assert calls == [0., 0.]
     with pytest.raises(ValueError):
