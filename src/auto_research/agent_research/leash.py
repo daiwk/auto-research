@@ -196,7 +196,7 @@ class ShadowOversight:
         if not isinstance(strong_step, int) or strong_step <= self.last_step:
             raise ValueError("strictly increasing strong-agent step required")
         self.last_step = strong_step
-        if (strong_step % self.every or self.interventions >= self.max_interventions
+        if ((strong_step - 1) % self.every or self.interventions >= self.max_interventions
                 or self.changed_actions >= self.max_changes):
             return False
         score = float(probe_score())

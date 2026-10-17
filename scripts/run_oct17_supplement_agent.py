@@ -119,7 +119,7 @@ def probe_diagnostic(seed):
     policies = probe.example_verifiers(required_fields={"search_flights": ("origin", "destination")},
                                        restricted_destinations=("ZZZ",))
     ids = [p.policy_id for p in policies]
-    episodes, total, reference_total = [], 0., 0.
+    episodes, total, reference_total, reference_hits = [], 0., 0., 0
     fixture = []
     for i in range(12):
         count = int(rng.integers(1, 5))
@@ -134,11 +134,15 @@ def probe_diagnostic(seed):
         episodes.append(events)
         total += probe.violation_reward(events, policies)["total"]
         hit_ids = set(events[0])
+        expected_hits_per_turn = 1 if i % 3 == 0 else 3 if i % 3 == 1 else 0
+        reference_hits += expected_hits_per_turn * count
         reference_total += sum(p.severity * (1. + (.5 if count > 1 else 0.))
                                for p in policies if p.policy_id in hit_ids)
         fixture.append([asdict(call), count])
     metric = probe.audit_metrics(episodes, declared_policy_ids=ids + ["unsupported-semantic-policy"],
                                  implemented_policy_ids=ids)
+    assert metric["verifier_hits"] == reference_hits
+    assert metric["violation_yield_per_100_episodes"] == 100 * reference_hits / 12
     seen = []
     def auditor(scenario, history):
         seen.append(history)
@@ -153,6 +157,7 @@ def probe_diagnostic(seed):
     return {"seed": seed, "fixture_sha256": fingerprint(fixture), "metrics": {
         **numeric, "violation_reward_total": total,
         "independent_first_repeat_reward_error": abs(total-reference_total),
+        "independent_raw_verifier_hit_count_error": abs(metric["verifier_hits"]-reference_hits),
         "auditor_callback_turns": result["turns"], "private_marker_exposures": 0,
         "new_trained_auditors": 0}, "unsupported_policies": metric["unsupported_policies"],
         "seed_role": "inert trace repetition-count initialization; not auditor training"}

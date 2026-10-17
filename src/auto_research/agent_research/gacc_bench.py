@@ -95,7 +95,7 @@ def evaluate(cases, *, compressor, reader, judge, codec: TokenCodec, retention_r
         source = _tokens(codec, case.context)
         if not source:
             raise ValueError("source context cannot be empty")
-        budget = max(1, math.floor(retention_ratio * len(source)))
+        budget = math.floor(retention_ratio * len(source))
         content_hash = hashlib.sha256((case.context + "\0" + case.goal).encode()).hexdigest()
         key = (case.context_id, case.goal_id, content_hash, budget, codec.name,
                codec.revision, compressor_revision)

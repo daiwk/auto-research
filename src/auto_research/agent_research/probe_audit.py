@@ -112,19 +112,26 @@ def audit_metrics(episode_events, *, declared_policy_ids, implemented_policy_ids
     declared, implemented = set(declared_policy_ids), set(implemented_policy_ids)
     if not episodes or not declared or not implemented <= declared:
         raise ValueError("episodes and explicit declared/implemented policy universe required")
-    covered, hit_episodes, distinct_violations = set(), 0, 0
+    covered, hit_episodes, distinct_violations, verifier_hits = set(), 0, 0, 0
     for events in episodes:
+        events = tuple(tuple(turn) for turn in events)
         hits = {policy for turn in events for policy in turn}
         if not hits <= implemented:
             raise ValueError("an unsupported policy cannot be reported as verified")
+        if any(len(set(turn)) != len(turn) for turn in events):
+            raise ValueError("one policy hit per verifier event required")
         covered |= hits
         hit_episodes += bool(hits)
         distinct_violations += len(hits)
+        verifier_hits += sum(len(turn) for turn in events)
     return {"episodes": len(episodes), "episodes_without_verified_hits": len(episodes) - hit_episodes,
             "declared_policies": len(declared), "implemented_policies": len(implemented),
             "unsupported_policies": sorted(declared - implemented), "covered_policies": len(covered),
             "policy_coverage": len(covered) / len(declared),
-            "violation_yield_per_100_episodes": 100 * distinct_violations / len(episodes),
+            "verifier_hits": verifier_hits,
+            "violation_yield_per_100_episodes": 100 * verifier_hits / len(episodes),
+            "distinct_episode_policy_hits": distinct_violations,
+            "distinct_episode_policy_yield_per_100_episodes": 100 * distinct_violations / len(episodes),
             "episode_hit_fraction": hit_episodes / len(episodes)}
 
 
