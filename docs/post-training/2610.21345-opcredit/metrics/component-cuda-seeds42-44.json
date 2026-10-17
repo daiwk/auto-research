@@ -1,0 +1,168 @@
+{
+  "schema_version": 2,
+  "method": "opcredit",
+  "manifest_ref": "post-training:opcredit",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "fixture:oct17-supplement-post-v1",
+    "revision": "sha256:7f9513cd1339f3a341317e44510d4d61cc3909cb2d38bae2d0fddf37815121b8"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded independent mechanism/protocol diagnostic; not model capability"
+  },
+  "metrics": {
+    "boc_reference_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "duplicate_support_negative_control_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "frozen_reference_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "ftc_reference_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gold_is_training_credit_only": true,
+    "gradient_norm_min": {
+      "mean": 0.237234909989883,
+      "std": 0.032480189513917866,
+      "n": 3
+    },
+    "last_fallback_decisions": {
+      "mean": 14,
+      "std": 3.4641016151377544,
+      "n": 3
+    },
+    "loss_reference_max_abs_error": {
+      "mean": 3.0646781408923594e-17,
+      "std": 1.9029318250670686e-17,
+      "n": 3
+    },
+    "nonzero_signed_ftc_observed": true,
+    "observation_tokens_per_trajectory_excluded": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.1192980269158464,
+      "std": 0.03807502418749023,
+      "n": 3
+    },
+    "rollouts_per_question": {
+      "mean": 6,
+      "std": 0.0,
+      "n": 3
+    },
+    "unavailable_frontier_is_ineligible": true,
+    "unavailable_frontier_negative_control_credit": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "parameter_delta_l2": 0.0784673597781659,
+        "gradient_norm_min": 0.21505145162448977,
+        "optimizer_updates": 4,
+        "frozen_reference_delta_l2": 0.0,
+        "boc_reference_max_abs_error": 0.0,
+        "ftc_reference_max_abs_error": 0.0,
+        "loss_reference_max_abs_error": 4.163336342344337e-17,
+        "duplicate_support_negative_control_max_abs_error": 0.0,
+        "unavailable_frontier_negative_control_credit": 0.0,
+        "unavailable_frontier_is_ineligible": true,
+        "nonzero_signed_ftc_observed": true,
+        "observation_tokens_per_trajectory_excluded": 2,
+        "rollouts_per_question": 6,
+        "last_fallback_decisions": 12,
+        "gold_is_training_credit_only": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "parameter_delta_l2": 0.1255942269171862,
+        "gradient_norm_min": 0.22213726457002048,
+        "optimizer_updates": 4,
+        "frozen_reference_delta_l2": 0.0,
+        "boc_reference_max_abs_error": 0.0,
+        "ftc_reference_max_abs_error": 0.0,
+        "loss_reference_max_abs_error": 4.163336342344337e-17,
+        "duplicate_support_negative_control_max_abs_error": 0.0,
+        "unavailable_frontier_negative_control_credit": 0.0,
+        "unavailable_frontier_is_ineligible": true,
+        "nonzero_signed_ftc_observed": true,
+        "observation_tokens_per_trajectory_excluded": 2,
+        "rollouts_per_question": 6,
+        "last_fallback_decisions": 18,
+        "gold_is_training_credit_only": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "parameter_delta_l2": 0.15383249405218713,
+        "gradient_norm_min": 0.27451601377513873,
+        "optimizer_updates": 4,
+        "frozen_reference_delta_l2": 0.0,
+        "boc_reference_max_abs_error": 0.0,
+        "ftc_reference_max_abs_error": 0.0,
+        "loss_reference_max_abs_error": 8.673617379884035e-18,
+        "duplicate_support_negative_control_max_abs_error": 0.0,
+        "unavailable_frontier_negative_control_credit": 0.0,
+        "unavailable_frontier_is_ineligible": true,
+        "nonzero_signed_ftc_observed": true,
+        "observation_tokens_per_trajectory_excluded": 2,
+        "rollouts_per_question": 6,
+        "last_fallback_decisions": 12,
+        "gold_is_training_credit_only": true
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "8cf26bc225051e8c26df20dabf66a2c87ee2af73",
+    "artifact_path": "docs/post-training/2610.21345-opcredit/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "fixture:oct17-supplement-post-v1@sha256:7f9513cd1339f3a341317e44510d4d61cc3909cb2d38bae2d0fddf37815121b8;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "0db08482789eb05757f47e608b3cae7dceaad606d040516768699b9e309efa15",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/operation_credit.py": "a608b898833c779efcedca311da383823363e8e0631df0e1e0cd148fbc810d29",
+      "scripts/run_oct17_supplement_post.py": "7f9513cd1339f3a341317e44510d4d61cc3909cb2d38bae2d0fddf37815121b8"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

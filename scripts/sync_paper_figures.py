@@ -76,6 +76,11 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.21555-muon-paired-budget": "3",
+    "2610.22124-probe": "1",
+    "2610.22319-gemini-minecraft": "2",
+    "2610.22196-hy-memory": "1",
+    "2610.21055-athanor": "2",
     "2610.22230-hardware-diversity": "3",
     "2610.22290-elite-replay": "2",
     "2610.22353-mirror-moe": "4",
@@ -133,6 +138,20 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.21555-muon-paired-budget": {
+        "pdf_url": "https://arxiv.org/pdf/2610.21555v1",
+        "page": 5,
+        "rect": (113, 88, 500, 340),
+        "label": "Figure 3",
+        "caption": "冻结23候选池的validation-AUC regret曲线及预算检查点；作者结果，不是本地新训练曲线。",
+    },
+    "2610.22330-langdit": {
+        "pdf_url": "https://arxiv.org/pdf/2610.22330v1",
+        "page": 5,
+        "rect": (65, 110, 525, 580),
+        "label": "Figure 3",
+        "caption": "完整保留 denoising Transformer、likelihood shortcut 和训练/推理 self-conditioning 两分支；原自动裁剪遗漏了上半部分。",
+    },
     "2610.21138-clean-rm": {
         "pdf_url": "https://arxiv.org/pdf/2610.21138v1",
         "page": 2,

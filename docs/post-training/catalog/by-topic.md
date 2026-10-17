@@ -44,6 +44,7 @@
 - [Condition-Contrastive Extrapolation for On-Policy Distillation of Language Models](../2610.21195-cce-opd/README.md)（`cce-opd`）：教师可能跟随学生错误 reasoning prefix，而忽略题目条件。CCE 在**完全相同的学生 response prefix**上，让同一冻结教师分别读取完整题目与遮蔽一个有效前提的题目，以 clipped log-prob contrast 调整辅助 target。
 - [Does On-Policy Distillation Need to Complete Every Rollout?](../2610.21337-stopd/README.md)（`stopd`）：每条响应在生成**之前**独立采样 anchor，向上取整到 block 末尾，学生只生成到该 cutoff 或自然 EOS。保留的每个 token 都接收教师监督，并按其精确 inclusion probability 加权；自然 EOS 也是普通有效 token。
 - [Learning from Unverified Peers via Shared Residual Distillation](../2610.22080-shared-residual-distillation/README.md)（`shared-residual-distillation`）：没有标准答案或可验证 reward 时，整段错误解答也可能包含有用步骤。SRD 不投票选“正确答案”，而比较同题 peers 相对跨题 control 对 token 分布的改变，只接收多位 peer 共同支持的保守残差。
+- [OPRD: On-Policy Reminder Distillation for Long-Horizon Coding Agents](../2610.21496-oprd-reminder/README.md)（`oprd-reminder`）：编码 Agent 的最终通过/失败不能指出哪一轮忽略了已有约束。OPRD 在学生自己生成的无提醒轨迹上训练：成功轨迹自模仿；失败轨迹由教师读取训练专用提醒，重新评分**同一学生前缀**，不是教师另生成一条答案。
 - [Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation](../2610.21601-waypoint-opd/README.md)（`waypoint-opd`）：仅 initial/final 的 log-probability 位移不能区分“前后两段同向”与“中途反转”。同一 RL run 的 waypoint 只提供一致性证据，不是新的模仿目标。
 - [Divergence-Routed On-Policy Distillation for Language Models](../2610.19572-divergence-routed-opd/README.md)（`divergence-routed-opd`）：DrOPD 在学生自己生成的轨迹上比较师生分布，以 JS 散度识别教师支持而学生严重欠覆盖的位置。它在所有位置保留 reverse-KL，并仅向高分歧位置增加 forward-KL 的纠正信号，通过候选级优势执行 PPO clipped 更新。
 - [LoOPSD: On-Policy Self-Distillation with Looped Teachers](../../reproductions/2610.18162-loopsd/README.md)（`loopsd`）：在线自蒸馏需要比学生更有用的教师，但更大外部模型或额外答案上下文并非唯一来源。LoOPSD在不改权重时搜索重复层区间来构造教师，用学生自产前缀进行蒸馏，再从更新后的学生重新搜索下一轮教师。 **成本过高，暂不复现；待验收，未注册可执行入口。**
@@ -300,6 +301,7 @@
 
 ### Agentic RL 与教师调度
 
+- [OpCredit: Operation-Aware Policy Learning for Agentic Knowledge Graph Question Answering](../2610.21345-opcredit/README.md)（`opcredit`）：整条轨迹失败不代表每一步都无用，成功轨迹也可能绕路。OpCredit 的 BOC 从普通 rollout 中复用分支结果：同题、同活动实体，再匹配访问集合、剩余预算和决策阶段；FTC 则衡量**该操作局部前沿**相对答案邻域的进退。
 - [SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents](../../reproductions/2610.13157-soar/README.md)（`soar`）：只按答案奖训练的search agent可能答对却伪造证据依赖。SOAR独立记录atomic query的internal recall和external retrieval，再要求显式声明source。
 - [Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT](../2610.03361-follow-the-winners/README.md)（`follow-the-winners`）：在有状态工具环境里，为同一提示重复生成一组等价 rollout 往往很贵；而 PPO 的 critic 又占用额外模型资源。FTW 不计算 value，也不要求 GRPO 式同题多轨迹。
 - [Dependency-Aware Reward Shaping for Agentic Reinforcement Learning](../2610.01207-dars/README.md)（`dars`）：把任务进度表示为带先决条件的 predicate 图；验证、失效和修复事件更新图状态，最近破损依赖按图距离衰减已完成工作的 credit，独立分支不受牵连。

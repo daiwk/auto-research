@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "method": "structural-signal-retriever",
+  "manifest_ref": "agent-research:structural-signal-retriever",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-agent-cards-and-validation-trajectories",
+    "revision": "oct17-supplement-protocols-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded independent mechanism/protocol diagnostic; not model capability"
+  },
+  "metrics": {
+    "fixture_api_failure": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_empty_pool": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_invalid_index": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_selected": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_total_attempts": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "fullscan_ranking_equivalence_queries": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    },
+    "fullscan_score_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "no_match_returns_empty": true,
+    "orchestrator_model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "registry_cards": {
+      "mean": 64,
+      "std": 0.0,
+      "n": 3
+    },
+    "signal_limit": {
+      "mean": 64,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "fullscan_ranking_equivalence_queries": 12,
+        "fullscan_score_max_error": 0.0,
+        "registry_cards": 64,
+        "signal_limit": 64,
+        "no_match_returns_empty": true,
+        "fixture_total_attempts": 4,
+        "fixture_selected": 1,
+        "fixture_empty_pool": 1,
+        "fixture_api_failure": 1,
+        "fixture_invalid_index": 1,
+        "orchestrator_model_calls": 0
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "fullscan_ranking_equivalence_queries": 12,
+        "fullscan_score_max_error": 0.0,
+        "registry_cards": 64,
+        "signal_limit": 64,
+        "no_match_returns_empty": true,
+        "fixture_total_attempts": 4,
+        "fixture_selected": 1,
+        "fixture_empty_pool": 1,
+        "fixture_api_failure": 1,
+        "fixture_invalid_index": 1,
+        "orchestrator_model_calls": 0
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "fullscan_ranking_equivalence_queries": 12,
+        "fullscan_score_max_error": 0.0,
+        "registry_cards": 64,
+        "signal_limit": 64,
+        "no_match_returns_empty": true,
+        "fixture_total_attempts": 4,
+        "fixture_selected": 1,
+        "fixture_empty_pool": 1,
+        "fixture_api_failure": 1,
+        "fixture_invalid_index": 1,
+        "orchestrator_model_calls": 0
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "c53ce680ef67b5a02563e24cdf0bd3162eaec48f",
+    "artifact_path": "docs/agent-research/2610.21113-structural-signal-retriever/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-agent-cards-and-validation-trajectories@oct17-supplement-protocols-v1;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "f11d071f30d3adbc5f308623ee0482f56502958ef81722a37fe35b6d2d961bcb",
+    "executed_source_sha256": {
+      "scripts/run_oct17_supplement_protocols.py": "a6283bbe102b84a6335eb2a3a3818eeb17d12bc37bf3675eb16222e9699eaa7b",
+      "src/auto_research/agent_research/structural_signal_retriever.py": "3d659939f0025cc2ede4e2ba30cbd1e619637861ebabd1009f0b5a2c195c1d79"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

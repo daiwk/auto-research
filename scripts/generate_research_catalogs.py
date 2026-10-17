@@ -168,6 +168,11 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "RSI": ("规划、搜索与反思", "Harness 与自我改进"),
+        "递归自改进": ("规划、搜索与反思", "Harness 与自我改进"),
+        "多 Agent 协作": ("规划、搜索与反思", "多 Agent 协作与通信"),
+        "长期记忆": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "工具使用与路由": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
         "公共评测与协议": ("工具调用与环境执行", "公共协议与状态审计"),
         "可验证能力组合": ("记忆、技能与持续学习", "技能图与跨任务积累"),
         "Agent记忆与上下文": ("记忆、技能与持续学习", "上下文压缩与精确恢复"),
@@ -303,6 +308,9 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "prism-1": ("推理与系统效率", "结构化决策与自适应推理"),
+    "langdit": ("网络架构", "扩散与生成式模型"),
+    "muon-paired-budget": ("预训练与数据", "优化器与训练稳定性"),
     "drop-kv": ("推理与系统效率", "推测解码与 KV cache"),
     "mirror-moe": ("网络架构", "MoE 与动态路由"),
     "bit-sparse": ("预训练与数据", "训练框架与可组合实验"),
@@ -818,6 +826,7 @@ def foundation_rows() -> list[dict[str, str]]:
         )
     extra = manifest_domain_rows("foundation-models", {
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
+            "prism-1", "langdit", "muon-paired-budget",
             "drop-kv", "mirror-moe", "bit-sparse", "lct", "roleq", "hardware-diversity",
         )},
         "selective-reasoning": ("推理与系统效率", "结构化决策与自适应推理"),

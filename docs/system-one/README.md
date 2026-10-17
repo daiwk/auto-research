@@ -60,6 +60,7 @@ gold answer，也没有自回归输出 token。
 
 ### 跨语言复算与请求独立性审计
 
+- [Prism-1](../foundation-models/2610.22066-prism-1/README.md)：独立 option block、共享位置与 yes/no 赔率读出；微型 Transformer 已在 A100 验证独立前向等价与无关选项不变性。仅 L1 机制组件，未训练8B/12B模型，不是 Jev 内部架构，也未接入 Evolve。
 - [Jev 区域语言迁移](2610.14112-regional-transfer/README.md)：固定原作者公开预测，复算校准、风险覆盖和 validation 选定的置信度级联；不调用付费服务，不用 Jev 输出训练。
 - [检索请求独立性审计](2610.14631-request-audit/README.md)：分离问题集合、证据和候选集合干预，检查概率/决策是否发生非预期变化。当前可执行的是外部配对预测分析，不是七 checkpoint 完整实跑。
 - [Selective Reasoning](2610.19644-selective-reasoning/README.md)：固定官方小发布包复算九组统计，并提供何时启动、读取和停止的控制器接口；不把历史测量复算当作本地LLM能力，完整在线大模型实验成本过高不复现。

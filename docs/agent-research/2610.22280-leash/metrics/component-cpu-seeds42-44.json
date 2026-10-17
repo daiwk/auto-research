@@ -1,0 +1,172 @@
+{
+  "schema_version": 2,
+  "method": "leash",
+  "manifest_ref": "agent-research:leash",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-leash-contract-fixture",
+    "revision": "49a07363c9e04701c241e45394cd4d70734bdfde78a48e1548d73afc8fa9042d",
+    "public_benchmark_evaluated": false,
+    "initialization": "NumPy default_rng(seed), explicit inert fixture"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded independent mechanism/protocol diagnostic; not model capability"
+  },
+  "metrics": {
+    "evaluation_tasks": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    },
+    "held_out_numeric_outcome_auroc": {
+      "mean": 0.9907407407407407,
+      "std": 0.016037507477489613,
+      "n": 3
+    },
+    "independent_quadratic_score_max_error": {
+      "mean": 3.552713678800501e-15,
+      "std": 0.0,
+      "n": 3
+    },
+    "initial_reference_routed_fraction": {
+      "mean": 0.23333333333333334,
+      "std": 0.0,
+      "n": 3
+    },
+    "overall_reference_routed_fraction": {
+      "mean": 0.4666666666666667,
+      "std": 0.0,
+      "n": 3
+    },
+    "query_oof_auroc": {
+      "mean": 0.9748148148148148,
+      "std": 0.04362202033877175,
+      "n": 3
+    },
+    "reference_action_vectors": {
+      "mean": 90,
+      "std": 0.0,
+      "n": 3
+    },
+    "reference_tasks": {
+      "mean": 30,
+      "std": 0.0,
+      "n": 3
+    },
+    "shadow_changed_actions": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "shadow_interventions": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "shadow_probes": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "shuffled_reference_outcome_auroc": {
+      "mean": 0.7962962962962963,
+      "std": 0.18495355884664982,
+      "n": 3
+    },
+    "test_tasks_in_reference": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "29c98421899e782fad4e26c69d2d515a68e5cdd87eb7c4a4f3ae15e64eed9f98",
+      "metrics": {
+        "reference_tasks": 30,
+        "reference_action_vectors": 90,
+        "evaluation_tasks": 12,
+        "query_oof_auroc": 0.9244444444444444,
+        "held_out_numeric_outcome_auroc": 1.0,
+        "shuffled_reference_outcome_auroc": 1.0,
+        "initial_reference_routed_fraction": 0.23333333333333334,
+        "overall_reference_routed_fraction": 0.4666666666666667,
+        "independent_quadratic_score_max_error": 3.552713678800501e-15,
+        "shadow_probes": 2,
+        "shadow_interventions": 2,
+        "shadow_changed_actions": 2,
+        "test_tasks_in_reference": 0
+      },
+      "seed_role": "synthetic representation initialization and grouped OOF assignments"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "96ef8ea37ba77538340fc0a91b61e7f704a7e071bd1334c03eb79c21d6a894a1",
+      "metrics": {
+        "reference_tasks": 30,
+        "reference_action_vectors": 90,
+        "evaluation_tasks": 12,
+        "query_oof_auroc": 1.0,
+        "held_out_numeric_outcome_auroc": 0.9722222222222222,
+        "shuffled_reference_outcome_auroc": 0.75,
+        "initial_reference_routed_fraction": 0.23333333333333334,
+        "overall_reference_routed_fraction": 0.4666666666666667,
+        "independent_quadratic_score_max_error": 3.552713678800501e-15,
+        "shadow_probes": 2,
+        "shadow_interventions": 2,
+        "shadow_changed_actions": 2,
+        "test_tasks_in_reference": 0
+      },
+      "seed_role": "synthetic representation initialization and grouped OOF assignments"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "dc1e74329398db1f7a3891995c3c9c5e252d4a5dbb7148b01c876e190357e35b",
+      "metrics": {
+        "reference_tasks": 30,
+        "reference_action_vectors": 90,
+        "evaluation_tasks": 12,
+        "query_oof_auroc": 1.0,
+        "held_out_numeric_outcome_auroc": 1.0,
+        "shuffled_reference_outcome_auroc": 0.6388888888888888,
+        "initial_reference_routed_fraction": 0.23333333333333334,
+        "overall_reference_routed_fraction": 0.4666666666666667,
+        "independent_quadratic_score_max_error": 3.552713678800501e-15,
+        "shadow_probes": 2,
+        "shadow_interventions": 2,
+        "shadow_changed_actions": 2,
+        "test_tasks_in_reference": 0
+      },
+      "seed_role": "synthetic representation initialization and grouped OOF assignments"
+    }
+  ],
+  "provenance": {
+    "commit": "784f4eee02e2919d43cb1c9e2f62df8b694718df",
+    "artifact_path": "docs/agent-research/2610.22280-leash/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-leash-contract-fixture@49a07363c9e04701c241e45394cd4d70734bdfde78a48e1548d73afc8fa9042d;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "a711adcc0c3e2326588d0efc6d0072ea1ea39f7fdc5c57f8e9cb990772a98a00",
+    "executed_source_sha256": {
+      "scripts/run_oct17_supplement_agent.py": "3d9f2f970d11454f9cda983db77689cf010138ca7cc137ce404b619801e6c465",
+      "src/auto_research/agent_research/leash.py": "c38603e3b1899744716575008af8c38a6161fe798b0535f5621a93d69f781975"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

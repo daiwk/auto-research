@@ -4,6 +4,7 @@
 
 ## 2026
 
+- **2026-10-15** — [Prism-1](../../foundation-models/2610.22066-prism-1/README.md)：选项隔离与共享位置下的单步赔率决策；A100三种子机制组件，非完整模型能力实验。
 - **2026-01-19** — [Calibration-Aware Reinforcement Learning](../../post-training/2601.13284-calibration-aware-rl/README.md)：直接约束决策概率，在保持任务正确率的同时改善 ECE。
 
 ## 2025

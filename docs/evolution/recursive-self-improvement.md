@@ -28,6 +28,9 @@ flowchart LR
 
 以下按“已实现的局部机制”和“待复核候选”区分，不把外部论文直接标为本地复现。
 
+- [RSIFlow](../agent-research/2610.21791-rsiflow/README.md)：可执行冻结父代、M/H/A回调干预、配对接纳和失败经验保留。当前验证固定 meta-program 的数值 fixture，不是自主训练大模型或统一 Evolve 集成。
+- [Terminal-RSI](../agent-research/2610.22192-terminal-rsi/README.md)：已实现跳过 observation 的 TB-GAE、分块续传及 FDR/SPR奖励组件；完整27B训练不复现，也不把主表收益归因于未确认进入该checkpoint的 TB-GAE。
+- [Athanor](../agent-research/2610.21055-athanor/README.md)：自主后训练研究系统的资料收录；原文32卡、104小时研究 campaign成本过高，**完整实验不复现（审查 DONE）**，不是已接入本地的研究执行器。
 - [Self-Refine](../agent-research/2303.17651-self-refine/README.md) 与 [Reflexion](../agent-research/2303.11366-reflexion/README.md)：单任务修正与跨 episode 语言记忆，是反馈循环的组件；是否改善后继版本要看隔离评测。
 - [Recursive Self-Improvement via On-Policy Distillation](../reproductions/2609.30652-recursive-opsd/README.md)：动态教师与学生共用更新后的权重，本地已有小预算 Qwen 诊断；三种子对照未测出收益，尚未完成原论文训练与评测协议。
 - [Video-RSI](../agent-research/2609.37950-video-rsi/README.md)：用主动视频调查诊断失败，再按准确率—视觉成本 Pareto 门槛接纳可继承 harness 修订；本地已实现接纳协议，完整视频环境仍未复现。

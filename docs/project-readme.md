@@ -54,6 +54,12 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+[10 月 17 日补审：九个组件、两个评测接口及三篇高成本资料](research-audits/oct17-supplement/README.md)
+补入 Prism-1、LangDiT、OPRD reminder、OpCredit、SSR、RSIFlow、LEASH、PROBE、Terminal-RSI，
+以及 GACC-Bench / Muon 配对预算接口。四项 CUDA 路径已在 A100 完成三种子机制验证；
+七项完成 CPU 诊断。Gemini Minecraft、Hy-Memory、Athanor 仅收录资料，完整高成本实验不复现。
+组件不等于完整模型能力，也未自动接入 Evolve；新 `oprd-reminder` 不覆盖旧 `oprd`。
+
 [10 月 17 日十二个低成本组件与 Meta/AMD 系统资料](research-audits/oct17-components/README.md)
 包含 KV 驱逐、MoE 路由、无损压缩、三值量化、蒸馏/奖励/replay 和 Agent 审计/路由/检索。
 九项 CUDA 组件在 A100 上完成三种子机制诊断，三项 Agent 组件完成 CPU 验证；

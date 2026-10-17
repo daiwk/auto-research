@@ -1,0 +1,164 @@
+{
+  "schema_version": 2,
+  "method": "oprd-reminder",
+  "manifest_ref": "post-training:oprd-reminder",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "fixture:oct17-supplement-post-v1",
+    "revision": "sha256:7f9513cd1339f3a341317e44510d4d61cc3909cb2d38bae2d0fddf37815121b8"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded independent mechanism/protocol diagnostic; not model capability"
+  },
+  "metrics": {
+    "gradient_norm_min": {
+      "mean": 0.35918436231508577,
+      "std": 0.037481029873965406,
+      "n": 3
+    },
+    "identical_teacher_negative_control_max_abs_kl": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "local_reminder_only_next_turn": true,
+    "optimizer_updates": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.06963572358014425,
+      "std": 0.005449509197753385,
+      "n": 3
+    },
+    "reference_max_abs_error": {
+      "mean": 8.881784197001252e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "sampled_failure_trajectories": {
+      "mean": 16.666666666666668,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "sampled_success_trajectories": {
+      "mean": 15.333333333333334,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "student_context_unchanged": true,
+    "teacher_delta_between_refresh_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_refresh_count": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "top_k": {
+      "mean": 100,
+      "std": 0.0,
+      "n": 3
+    },
+    "vocabulary_size": {
+      "mean": 128,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "parameter_delta_l2": 0.07211735738303038,
+        "gradient_norm_min": 0.3781321129159186,
+        "optimizer_updates": 4,
+        "reference_max_abs_error": 8.881784197001252e-16,
+        "teacher_delta_between_refresh_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "teacher_refresh_count": 4,
+        "sampled_success_trajectories": 15,
+        "sampled_failure_trajectories": 17,
+        "identical_teacher_negative_control_max_abs_kl": 0.0,
+        "student_context_unchanged": true,
+        "local_reminder_only_next_turn": true,
+        "top_k": 100,
+        "vocabulary_size": 128
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "parameter_delta_l2": 0.07340272763673059,
+        "gradient_norm_min": 0.3834086273311552,
+        "optimizer_updates": 4,
+        "reference_max_abs_error": 8.881784197001252e-16,
+        "teacher_delta_between_refresh_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "teacher_refresh_count": 4,
+        "sampled_success_trajectories": 13,
+        "sampled_failure_trajectories": 19,
+        "identical_teacher_negative_control_max_abs_kl": 0.0,
+        "student_context_unchanged": true,
+        "local_reminder_only_next_turn": true,
+        "top_k": 100,
+        "vocabulary_size": 128
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "parameter_delta_l2": 0.0633870857206718,
+        "gradient_norm_min": 0.31601234669818357,
+        "optimizer_updates": 4,
+        "reference_max_abs_error": 8.881784197001252e-16,
+        "teacher_delta_between_refresh_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "teacher_refresh_count": 4,
+        "sampled_success_trajectories": 18,
+        "sampled_failure_trajectories": 14,
+        "identical_teacher_negative_control_max_abs_kl": 0.0,
+        "student_context_unchanged": true,
+        "local_reminder_only_next_turn": true,
+        "top_k": 100,
+        "vocabulary_size": 128
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "8cf26bc225051e8c26df20dabf66a2c87ee2af73",
+    "artifact_path": "docs/post-training/2610.21496-oprd-reminder/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "fixture:oct17-supplement-post-v1@sha256:7f9513cd1339f3a341317e44510d4d61cc3909cb2d38bae2d0fddf37815121b8;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "0db08482789eb05757f47e608b3cae7dceaad606d040516768699b9e309efa15",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/reminder_distillation.py": "b2968680d7fe79068747de7a68060ef0612215e1a36708b423b3a2104ebfdc52",
+      "scripts/run_oct17_supplement_post.py": "7f9513cd1339f3a341317e44510d4d61cc3909cb2d38bae2d0fddf37815121b8"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

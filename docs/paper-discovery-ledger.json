@@ -118999,6 +118999,684 @@
           ]
         }
       ]
+    },
+    {
+      "batch": "2026-10-17-nine-components-two-interfaces-three-high-cost-references",
+      "date": "2026-10-17",
+      "scope_kind": "selected-paper-implementation",
+      "window": "Oct16 announcements/Oct15 v1 overlap supplement; not new Oct17 announcements or full-source closure.",
+      "required_tracks": [
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "review_watermark_advanced": false,
+      "coverage_complete": false,
+      "review_snapshot_modified": false,
+      "scope_artifact": "research-audits/oct17-supplement/README.md",
+      "accepted_scope_counts": {
+        "bounded_components": 9,
+        "evaluation_interfaces": 2,
+        "review_only_papers": 3
+      },
+      "component_validation_counts": {
+        "gpu_receipt_and_source_hashes_validated": 4,
+        "cpu_metrics_sources_validated": 7,
+        "review_only_not_reproduced": 3
+      },
+      "full_reproduction_policy": "High-cost complete experiments terminal/review DONE; bounded diagnostics admitted separately; no auto retry or capability promotion.",
+      "candidates": [
+        {
+          "id": "2610.21055",
+          "key": "athanor",
+          "title": "Athanor: An Agent-Native System for Autonomous Post-Training Research",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。四商业研究Agent各占八卡节点、104小时、作者合计费用约12000美元。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21055",
+            "basis": "四商业研究Agent各占八卡节点、104小时、作者合计费用约12000美元。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.21055-athanor/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "Athanor 将研究 Agent 与异步训练、冻结评测、数据去污染及持久谱系记录分离，让团队组合 SFT、RL、模型合并和自蒸馏。仅收录自主后训练系统与选优偏差边界；完整实验成本过高，不复现（审查 DONE）。",
+          "local_operator": null,
+          "local_command": null,
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "review_only_not_reproduced"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21055"
+            }
+          ]
+        },
+        {
+          "id": "2610.21893",
+          "key": "gacc-bench",
+          "title": "GACC-Bench: Benchmarking Goal-Adaptive Context Compression Ability across Large Language Models",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。十模型、多预算、281 contexts/500 goals/2571 questions的长上下文API扫评。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21893",
+            "basis": "十模型、多预算、281 contexts/500 goals/2571 questions的长上下文API扫评。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.21893-gacc-bench/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "evaluation_protocol_interface",
+          "bounded_implementation_scope": "压缩器只看来源、目标和预算，不看未来问题；固定reader与judge评估同一压缩记忆对一组问题的支持。接口实现压缩复用、预算截断、问题级micro与全问题目标级macro，固定token-ID fixture不冒充cl100k或官方LLM结果。",
+          "local_operator": "auto_research.agent_research.gacc_bench.evaluate",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_agent.py --methods gacc-bench --seeds 42,43,44 --device cpu --output runs/oct17-supplement-agent/gacc-bench.json",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.21893-gacc-bench/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "784f4eee02e2919d43cb1c9e2f62df8b694718df"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21893"
+            }
+          ]
+        },
+        {
+          "id": "2610.22319",
+          "key": "gemini-minecraft",
+          "title": "A team of Gemini 4 Argon agents beats Minecraft",
+          "priority": "P0",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。四执行Agent加Observer，单次约27小时和24000调用。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22319",
+            "basis": "四执行Agent加Observer，单次约27小时和24000调用。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22319-gemini-minecraft/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "Google DeepMind 用四个编写 Mineflayer 程序的执行 Agent 配合 Observer，共享聊天与持久笔记，在单次 Easy 世界中完成 Minecraft。仅收录协作和观测方法及单次案例边界；完整实验成本过高，不复现（审查 DONE）。",
+          "local_operator": null,
+          "local_command": null,
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "review_only_not_reproduced"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22319"
+            }
+          ]
+        },
+        {
+          "id": "2610.22196",
+          "key": "hy-memory",
+          "title": "Hy-Memory-30B-A3B: Attributed Reinforcement Learning for Long-Term Memory Writing",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。30B-A3B、128 H20，每批64 windows×8 rollouts。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22196",
+            "basis": "30B-A3B、128 H20，每批64 windows×8 rollouts。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22196-hy-memory/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "腾讯混元先以学生生成的记忆状态做 OPD，再用逐 chunk 探针、跨 chunk 事实归因和存储惩罚训练记忆写入策略。只收录两阶段方法及固定20%评测子集边界；完整实验成本过高，不复现（审查 DONE）。",
+          "local_operator": null,
+          "local_command": null,
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "review_only_not_reproduced"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22196"
+            }
+          ]
+        },
+        {
+          "id": "2610.22330",
+          "key": "langdit",
+          "title": "Designing Transformers for Continuous Diffusion Language Models",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。约334M、七组×250K更新，每步512×1024 tokens。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22330",
+            "basis": "约334M、七组×250K更新，每步512×1024 tokens。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22330-langdit/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "独立实现维度缩小的LangFlow式LangDiT：球面码本、噪声条件双向Transformer、RMS/QK归一、显式shortcut码本梯度切断和有界校准、仅训练期entropy-gated bootstrap；推理保持未加权后验均值。独立公式和梯度负对照仅验证机制，不实现学习调度器、完整采样器或OWT能力实验；完整实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.langdit.LangDiTDenoiser",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_foundation.py --papers langdit --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/langdit-supplement-a100-20261017.json",
+            "metrics": [
+              "docs/foundation-models/2610.22330-langdit/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "77370818484275d2847608da7e14118b94562273"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22330"
+            }
+          ]
+        },
+        {
+          "id": "2610.22280",
+          "key": "leash",
+          "title": "LEASH: Uncertainty-Aware Weak-to-Strong Escalation and Oversight for Computer-Use Agents",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。OSWorld 262任务、多弱模型/商业强模型、每任务最多50动作。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22280",
+            "basis": "OSWorld 262任务、多弱模型/商业强模型、每任务最多50动作。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22280-leash/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "以成功/失败参考表示的pooled-LDA距离差进行弱到强升级，并用弱模型Shadow探针监督handoff后执行；本地实现task-grouped OOF、任务最大分数的预算校准和干预上限，合成向量不是GUI能力结果。",
+          "local_operator": "auto_research.agent_research.leash.crossfit_reference",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_agent.py --methods leash --seeds 42,43,44 --device cpu --output runs/oct17-supplement-agent/leash.json",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.22280-leash/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "784f4eee02e2919d43cb1c9e2f62df8b694718df"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22280"
+            }
+          ]
+        },
+        {
+          "id": "2610.21555",
+          "key": "muon-paired-budget",
+          "title": "When Does Muon Actually Win? A Paired Data-, Time-, and Tuning-Budget Benchmark",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。四workloads、23候选、五匹配种子的完整LM/ViT训练。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21555",
+            "basis": "四workloads、23候选、五匹配种子的完整LM/ViT训练。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.21555-muon-paired-budget/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "evaluation_protocol_interface",
+          "bounded_implementation_scope": "实现固定validation轨迹上的等数据/等时间共同域归一AUC、开发seed选参、稳定交叉点、配对seed bootstrap和冻结候选池调参regret。用解析轨迹证明时间/数据排序可相反、禁止外推/非有限值/错配seed，不训练Muon或AdamW，也不宣称原文效果。完整23候选多任务多种子实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.muon_paired_budget.paired_budget_comparison",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_protocols.py --papers muon-paired-budget --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/foundation-models/2610.21555-muon-paired-budget/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "c53ce680ef67b5a02563e24cdf0bd3162eaec48f"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21555"
+            }
+          ]
+        },
+        {
+          "id": "2610.21345",
+          "key": "opcredit",
+          "title": "OpCredit: Operation-Aware Policy Learning for Agentic Knowledge Graph Question Answering",
+          "priority": "P1",
+          "track": "post-training",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。八张RTX5880、约2500 GPU小时和Freebase服务。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21345v1",
+            "basis": "八张RTX5880、约2500 GPU小时和Freebase服务。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "post-training/2610.21345-opcredit/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "BOC按同题、活动实体、访问集合、剩余预算和决策阶段匹配上下文，每条轨迹在支持集中只计一次；FTC计算操作局部前沿的答案邻域势差，两种信用对齐决策token并联合优化。答案只用于训练后信用计算；小图真实动作采样仅为机制诊断，完整2500 GPU小时实验不复现。",
+          "local_operator": "auto_research.post_training.operation_credit.operation_policy_loss",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_post.py --methods opcredit --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/opcredit-supplement-a100-20261017.json",
+            "metrics": [
+              "docs/post-training/2610.21345-opcredit/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "8cf26bc225051e8c26df20dabf66a2c87ee2af73"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21345v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.21496",
+          "key": "oprd-reminder",
+          "title": "OPRD: On-Policy Reminder Distillation for Long-Horizon Coding Agents",
+          "priority": "P1",
+          "track": "post-training",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。16 H20、131072 context、三epochs和在线仓库rollout。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21496v1",
+            "basis": "16 H20、131072 context、三epochs和在线仓库rollout。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "post-training/2610.21496-oprd-reminder/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "学生在无提醒轨迹上采样；成功分支做自模仿，失败分支由带全局/单步提醒的冻结教师评分相同学生前缀，以共享 Top-100 支持重新归一化后执行 reverse-KL。实现作用域隔离、分支目标与教师刷新；仅为小网络梯度诊断，完整16卡长上下文编码训练不复现。",
+          "local_operator": "auto_research.post_training.reminder_distillation.outcome_routed_loss",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_post.py --methods oprd --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/oprd-reminder-supplement-a100-20261017.json",
+            "metrics": [
+              "docs/post-training/2610.21496-oprd-reminder/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "8cf26bc225051e8c26df20dabf66a2c87ee2af73"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21496v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.22066",
+          "key": "prism-1",
+          "title": "Prism-1: Position- and Rival-Independent Scoring for System One Models",
+          "priority": "P1",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。8B/12B、多臂多种子；作者H100单次50–85分钟。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22066",
+            "basis": "8B/12B、多臂多种子；作者H100单次50–85分钟。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22066-prism-1/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "在一个真实微型因果Transformer前向中共享context、将各option置于互不可见的block并重置位置，以yes/no对数赔率形成Luce选择分布。验证与逐option独立因果前向等价、重排和新增无关项不变性及跨option泄漏负对照；不是8B/12B训练或JevBench能力复现。完整实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.prism_one.PrismOneScorer",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_foundation.py --papers prism-1 --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": true,
+            "gpu_validation_passed": true,
+            "status": "gpu_receipt_and_source_hashes_validated",
+            "gpu_validation_artifact": "docs/gpu-validations/prism-1-supplement-a100-20261017.json",
+            "metrics": [
+              "docs/foundation-models/2610.22066-prism-1/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "77370818484275d2847608da7e14118b94562273"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22066"
+            }
+          ]
+        },
+        {
+          "id": "2610.22124",
+          "key": "probe",
+          "title": "PROBE: Learning to Audit Policy Compliance in Tool-Using LLM Agents",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。4B auditor/30B target、双A100、多优化器多臂训练。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22124",
+            "basis": "4B auditor/30B target、双A100、多优化器多臂训练。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22124-probe/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "用多轮审计者寻找工具Agent的业务/隐私/操作策略违规，以可核验trace而非仅任务完成评分；本地提供私有评分器隔离、四个独立规则verifier、首/重复命中奖励及完整coverage分母，不声称训练了审计Agent。",
+          "local_operator": "auto_research.agent_research.probe_audit.deterministic_rescore",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_agent.py --methods probe --seeds 42,43,44 --device cpu --output runs/oct17-supplement-agent/probe.json",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.22124-probe/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "784f4eee02e2919d43cb1c9e2f62df8b694718df"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22124"
+            }
+          ]
+        },
+        {
+          "id": "2610.21791",
+          "key": "rsiflow",
+          "title": "RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。4B/8B分布式训练、多轮多候选、3000训练及744报告任务。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21791",
+            "basis": "4B/8B分布式训练、多轮多候选、3000训练及744报告任务。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.21791-rsiflow/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "在同一冻结父代上按反馈选择Model/Harness/Artifacts干预，以paired训练证据接受候选，并把失败记录为可复用经验；本地实现callback控制器、组件作用域与报告集隔离，不执行模型训练或任意元程序自改。",
+          "local_operator": "auto_research.agent_research.rsi_flow.evolve",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_agent.py --methods rsiflow --seeds 42,43,44 --device cpu --output runs/oct17-supplement-agent/rsiflow.json",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.21791-rsiflow/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "784f4eee02e2919d43cb1c9e2f62df8b694718df"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21791"
+            }
+          ]
+        },
+        {
+          "id": "2610.21113",
+          "key": "structural-signal-retriever",
+          "title": "SSR: Structural Signal Retriever for Scalable Agent Discovery in LLM-Orchestrated Multi-Agent Systems",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。全量8.84M passages、约124 GiB RAM和API编排。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.21113",
+            "basis": "全量8.84M passages、约124 GiB RAM和API编排。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.21113-structural-signal-retriever/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "从Agent Card能力字段提取至多64个二元unigram/bigram信号，通过正IDF重叠、倒排候选并集和确定性tie-break精确保留full-scan正分排名；不填零分候选。独立CPU验证检索等价和空池/API失败/非法索引记账；不模拟LLM选择或宣称公共Agent能力。完整MS MARCO与API评测成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.agent_research.structural_signal_retriever.StructuralSignalIndex",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_protocols.py --papers structural-signal-retriever --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.21113-structural-signal-retriever/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "c53ce680ef67b5a02563e24cdf0bd3162eaec48f"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21113"
+            }
+          ]
+        },
+        {
+          "id": "2610.22192",
+          "key": "terminal-rsi",
+          "title": "Terminal-RSI: Recursive Self-Improving Terminal Agents via Recursive Self-Rewrite and Policy-Refine",
+          "priority": "P1",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。27B、256K、多阶段分布式PPO、3000任务。",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.22192",
+            "basis": "27B、256K、多阶段分布式PPO、3000任务。",
+            "available_resource": "单张A100或A30，或本地Mac；不假设多卡/并发可用",
+            "cost_type": "published_configuration_or_budget_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22192-terminal-rsi/README.md",
+          "publication_date": "2026-10-15",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "递归交替验证轨迹改写与保留critic的策略训练，提出按turn而非观测文本长度衰减的TB-GAE及FDR/SPR；本地只执行NumPy优势递推、精确chunk续接和冻结family奖励，非终端Agent训练。",
+          "local_operator": "auto_research.agent_research.terminal_rsi.tb_gae",
+          "local_command": "PYTHONPATH=src python scripts/run_oct17_supplement_agent.py --methods terminal-rsi --seeds 42,43,44 --device cpu --output runs/oct17-supplement-agent/terminal-rsi.json",
+          "component_validation": {
+            "requires_gpu_validation": false,
+            "gpu_validation_passed": false,
+            "status": "cpu_metrics_sources_validated",
+            "metrics": [
+              "docs/agent-research/2610.22192-terminal-rsi/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "784f4eee02e2919d43cb1c9e2f62df8b694718df"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22192"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

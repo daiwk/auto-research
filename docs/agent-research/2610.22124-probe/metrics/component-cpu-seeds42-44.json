@@ -1,0 +1,213 @@
+{
+  "schema_version": 2,
+  "method": "probe",
+  "manifest_ref": "agent-research:probe",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-probe-contract-fixture",
+    "revision": "ec97a6b1696439a8697481ad5fd3c00777fdcfb88b6e3487d7a732a875812432",
+    "public_benchmark_evaluated": false,
+    "initialization": "NumPy default_rng(seed), explicit inert fixture"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded independent mechanism/protocol diagnostic; not model capability"
+  },
+  "metrics": {
+    "auditor_callback_turns": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "covered_policies": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "declared_policies": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    },
+    "distinct_episode_policy_hits": {
+      "mean": 16,
+      "std": 0.0,
+      "n": 3
+    },
+    "distinct_episode_policy_yield_per_100_episodes": {
+      "mean": 133.33333333333334,
+      "std": 0.0,
+      "n": 3
+    },
+    "episode_hit_fraction": {
+      "mean": 0.6666666666666666,
+      "std": 0.0,
+      "n": 3
+    },
+    "episodes": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    },
+    "episodes_without_verified_hits": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "implemented_policies": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "independent_first_repeat_reward_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "independent_raw_verifier_hit_count_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "new_trained_auditors": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "policy_coverage": {
+      "mean": 0.8,
+      "std": 0.0,
+      "n": 3
+    },
+    "private_marker_exposures": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "verifier_hits": {
+      "mean": 45,
+      "std": 5.291502622129181,
+      "n": 3
+    },
+    "violation_reward_total": {
+      "mean": 34.166666666666664,
+      "std": 1.5275252316519468,
+      "n": 3
+    },
+    "violation_yield_per_100_episodes": {
+      "mean": 375.0,
+      "std": 44.09585518440984,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "185d15d201d4e6cec8e330fd31e5e6b983ce87015c1a639ccab6c27e7c6e1f56",
+      "metrics": {
+        "episodes": 12,
+        "episodes_without_verified_hits": 4,
+        "declared_policies": 5,
+        "implemented_policies": 4,
+        "covered_policies": 4,
+        "policy_coverage": 0.8,
+        "verifier_hits": 41,
+        "violation_yield_per_100_episodes": 341.6666666666667,
+        "distinct_episode_policy_hits": 16,
+        "distinct_episode_policy_yield_per_100_episodes": 133.33333333333334,
+        "episode_hit_fraction": 0.6666666666666666,
+        "violation_reward_total": 34.5,
+        "independent_first_repeat_reward_error": 0.0,
+        "independent_raw_verifier_hit_count_error": 0,
+        "auditor_callback_turns": 3,
+        "private_marker_exposures": 0,
+        "new_trained_auditors": 0
+      },
+      "unsupported_policies": [
+        "unsupported-semantic-policy"
+      ],
+      "seed_role": "inert trace repetition-count initialization; not auditor training"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "36a39d50b6079826ccc383e2de21bb7241ec36e9864091e3448de6c8ea7a9206",
+      "metrics": {
+        "episodes": 12,
+        "episodes_without_verified_hits": 4,
+        "declared_policies": 5,
+        "implemented_policies": 4,
+        "covered_policies": 4,
+        "policy_coverage": 0.8,
+        "verifier_hits": 51,
+        "violation_yield_per_100_episodes": 425.0,
+        "distinct_episode_policy_hits": 16,
+        "distinct_episode_policy_yield_per_100_episodes": 133.33333333333334,
+        "episode_hit_fraction": 0.6666666666666666,
+        "violation_reward_total": 35.5,
+        "independent_first_repeat_reward_error": 0.0,
+        "independent_raw_verifier_hit_count_error": 0,
+        "auditor_callback_turns": 3,
+        "private_marker_exposures": 0,
+        "new_trained_auditors": 0
+      },
+      "unsupported_policies": [
+        "unsupported-semantic-policy"
+      ],
+      "seed_role": "inert trace repetition-count initialization; not auditor training"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "8d37c148842f74f5f8823f85af871bbba9e02d49b3f43bde78547fcb590e04a6",
+      "metrics": {
+        "episodes": 12,
+        "episodes_without_verified_hits": 4,
+        "declared_policies": 5,
+        "implemented_policies": 4,
+        "covered_policies": 4,
+        "policy_coverage": 0.8,
+        "verifier_hits": 43,
+        "violation_yield_per_100_episodes": 358.3333333333333,
+        "distinct_episode_policy_hits": 16,
+        "distinct_episode_policy_yield_per_100_episodes": 133.33333333333334,
+        "episode_hit_fraction": 0.6666666666666666,
+        "violation_reward_total": 32.5,
+        "independent_first_repeat_reward_error": 0.0,
+        "independent_raw_verifier_hit_count_error": 0,
+        "auditor_callback_turns": 3,
+        "private_marker_exposures": 0,
+        "new_trained_auditors": 0
+      },
+      "unsupported_policies": [
+        "unsupported-semantic-policy"
+      ],
+      "seed_role": "inert trace repetition-count initialization; not auditor training"
+    }
+  ],
+  "provenance": {
+    "commit": "784f4eee02e2919d43cb1c9e2f62df8b694718df",
+    "artifact_path": "docs/agent-research/2610.22124-probe/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "synthetic-probe-contract-fixture@ec97a6b1696439a8697481ad5fd3c00777fdcfb88b6e3487d7a732a875812432;seeds=42,43,44",
+    "raw_runner_artifact_sha256": "a711adcc0c3e2326588d0efc6d0072ea1ea39f7fdc5c57f8e9cb990772a98a00",
+    "executed_source_sha256": {
+      "scripts/run_oct17_supplement_agent.py": "3d9f2f970d11454f9cda983db77689cf010138ca7cc137ce404b619801e6c465",
+      "src/auto_research/agent_research/probe_audit.py": "e308dbf393cdf39437ef2b6049f41d7a860f9efc4d6d803404ed10467c154e0c"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
