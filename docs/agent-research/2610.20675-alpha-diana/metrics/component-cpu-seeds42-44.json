@@ -1,0 +1,1073 @@
+{
+  "schema_version": 2,
+  "method": "alpha-diana",
+  "manifest_ref": "agent-research:alpha-diana",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-alpha-diana-contract-fixture",
+    "revision": "24d06a74ca33f23989cceb52685166afa97c492fd72aad5c3de44d08584929e1",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert public arithmetic/session fixtures"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol fixtures; not capability or official benchmark evidence"
+  },
+  "metrics": {
+    "blocked_unsafe_shared_memory_policies": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "complete_output_tokens_per_correct": {
+      "mean": 11.096825396825396,
+      "std": 0.9737173472888248,
+      "n": 3
+    },
+    "correct_samples": {
+      "mean": 13,
+      "std": 2.6457513110645907,
+      "n": 3
+    },
+    "executed_attempts": {
+      "mean": 25.666666666666668,
+      "std": 4.163331998932265,
+      "n": 3
+    },
+    "execution_failed_samples": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gold_fields_exposed_to_actor": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "ignored_unscored_negative_control_inflation": {
+      "mean": 0.1301575330987096,
+      "std": 0.02656385485970108,
+      "n": 3
+    },
+    "independent_correct_count_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "known_output_tokens_all_attempts": {
+      "mean": 142.66666666666666,
+      "std": 19.604421270043485,
+      "n": 3
+    },
+    "latest_only_cost_negative_control_undercount": {
+      "mean": 29.666666666666668,
+      "std": 4.041451884327381,
+      "n": 3
+    },
+    "latest_samples": {
+      "mean": 17.666666666666668,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "missing_samples": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "requested_samples": {
+      "mean": 17.666666666666668,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "score_coverage": {
+      "mean": 0.85,
+      "std": 0.016666666666666663,
+      "n": 3
+    },
+    "scored_samples": {
+      "mean": 15,
+      "std": 2.0,
+      "n": 3
+    },
+    "success_rate_all_requested": {
+      "mean": 0.7314814814814815,
+      "std": 0.057824055540725935,
+      "n": 3
+    },
+    "token_recording_coverage": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "unsafe_retry_negative_control_duplicate_writes": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "unscored_samples": {
+      "mean": 2.6666666666666665,
+      "std": 0.5773502691896257,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "616196dbda66c8d60e358e121217e9c39e6c50989c41d772c1c2e715758d047f",
+      "metrics": {
+        "requested_samples": 20,
+        "executed_attempts": 29,
+        "latest_samples": 20,
+        "missing_samples": 0,
+        "scored_samples": 17,
+        "unscored_samples": 3,
+        "execution_failed_samples": 0,
+        "correct_samples": 15,
+        "success_rate_all_requested": 0.75,
+        "score_coverage": 0.85,
+        "known_output_tokens_all_attempts": 161,
+        "token_recording_coverage": 1.0,
+        "complete_output_tokens_per_correct": 10.733333333333333,
+        "independent_correct_count_error": 0,
+        "ignored_unscored_negative_control_inflation": 0.13235294117647056,
+        "latest_only_cost_negative_control_undercount": 34,
+        "blocked_unsafe_shared_memory_policies": 2,
+        "unsafe_retry_negative_control_duplicate_writes": 1,
+        "gold_fields_exposed_to_actor": 0
+      },
+      "protocol_records": [
+        {
+          "task_id": "task-0",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 1.9334256649017334e-05,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-0",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 1.491699367761612e-05,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-1",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 6,
+          "elapsed_seconds": 1.0750256478786469e-05,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-1",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 6,
+          "elapsed_seconds": 7.957685738801956e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-2",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 8.834060281515121e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-3",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 6.291083991527557e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-4",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.6247226893901825e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-5",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.125068128108978e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-6",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.083158612251282e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-7",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 4.875008016824722e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-8",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.582813173532486e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-8",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.667097866535187e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-9",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": false,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.3746625781059265e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-10",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 4.829186946153641e-05,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-11",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": false,
+          "output_tokens": 6,
+          "elapsed_seconds": 6.082933396100998e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-12",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.4156407713890076e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-13",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.207955837249756e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-14",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 5.2908435463905334e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-14",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.33275306224823e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-15",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 4.292000085115433e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-15",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.749985575675964e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-16",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.7499703466892242e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-16",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 4.916917532682419e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-17",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.7499703466892242e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-17",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 4.875008016824722e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-18",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.958120942115784e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-18",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.249865353107452e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-19",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.541819751262665e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-19",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 4.875008016824722e-06,
+          "failure_kind": null
+        }
+      ],
+      "seed_role": "randomized inert CPU protocol fixtures; no model/official benchmark evaluation"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "0a40ba85152aae0a19ad731654b7376be17cd1f656f2a0e2ff473aad5a7c2bd3",
+      "metrics": {
+        "requested_samples": 15,
+        "executed_attempts": 21,
+        "latest_samples": 15,
+        "missing_samples": 0,
+        "scored_samples": 13,
+        "unscored_samples": 2,
+        "execution_failed_samples": 0,
+        "correct_samples": 10,
+        "success_rate_all_requested": 0.6666666666666666,
+        "score_coverage": 0.8666666666666667,
+        "known_output_tokens_all_attempts": 122,
+        "token_recording_coverage": 1.0,
+        "complete_output_tokens_per_correct": 12.2,
+        "independent_correct_count_error": 0,
+        "ignored_unscored_negative_control_inflation": 0.10256410256410264,
+        "latest_only_cost_negative_control_undercount": 26,
+        "blocked_unsafe_shared_memory_policies": 2,
+        "unsafe_retry_negative_control_duplicate_writes": 1,
+        "gold_fields_exposed_to_actor": 0
+      },
+      "protocol_records": [
+        {
+          "task_id": "task-0",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 9.041279554367065e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-1",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 7,
+          "elapsed_seconds": 8.41636210680008e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-1",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 7,
+          "elapsed_seconds": 8.082948625087738e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-2",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": false,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.667097866535187e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-3",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.334150046110153e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-4",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 4.959292709827423e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-5",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 4.250090569257736e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-5",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.249865353107452e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-6",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.4580007195472717e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-6",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.041714757680893e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-7",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 4.875008016824722e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-8",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.291309207677841e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-8",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.5409036576747894e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-9",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.4999102354049683e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-9",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": false,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.083158612251282e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-10",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.042180418968201e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-11",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.042180418968201e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-12",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.541819751262665e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-12",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": false,
+          "output_tokens": 5,
+          "elapsed_seconds": 5.375128239393234e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-13",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.000270903110504e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-14",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 4.9173831939697266e-06,
+          "failure_kind": null
+        }
+      ],
+      "seed_role": "randomized inert CPU protocol fixtures; no model/official benchmark evaluation"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "179aad8455e88e2c0433de2c2ffeca3abfdf005cac5696063cc065448b51482a",
+      "metrics": {
+        "requested_samples": 18,
+        "executed_attempts": 27,
+        "latest_samples": 18,
+        "missing_samples": 0,
+        "scored_samples": 15,
+        "unscored_samples": 3,
+        "execution_failed_samples": 0,
+        "correct_samples": 14,
+        "success_rate_all_requested": 0.7777777777777778,
+        "score_coverage": 0.8333333333333334,
+        "known_output_tokens_all_attempts": 145,
+        "token_recording_coverage": 1.0,
+        "complete_output_tokens_per_correct": 10.357142857142858,
+        "independent_correct_count_error": 0,
+        "ignored_unscored_negative_control_inflation": 0.15555555555555556,
+        "latest_only_cost_negative_control_undercount": 29,
+        "blocked_unsafe_shared_memory_policies": 2,
+        "unsafe_retry_negative_control_duplicate_writes": 1,
+        "gold_fields_exposed_to_actor": 0
+      },
+      "protocol_records": [
+        {
+          "task_id": "task-0",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 6.542075425386429e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-0",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 6.666872650384903e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-1",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 4.125293344259262e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-1",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 6,
+          "elapsed_seconds": 6.166286766529083e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-2",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.458015948534012e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-3",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 4.875008016824722e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-4",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.500375896692276e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-4",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.417037755250931e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-5",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.458932042121887e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-5",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.000270903110504e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-6",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.4170225262641907e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-6",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": false,
+          "output_tokens": 6,
+          "elapsed_seconds": 5.207955837249756e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-7",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 4.833098500967026e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-8",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.375113010406494e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-8",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.291774868965149e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-9",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.33273783326149e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-9",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.041249096393585e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-10",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 5.2908435463905334e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-11",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 4.875008016824722e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-12",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "failed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 3,
+          "elapsed_seconds": 3.582797944545746e-06,
+          "failure_kind": "actor:ExecutionFailure"
+        },
+        {
+          "task_id": "task-12",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 4.915986210107803e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-13",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 4.832632839679718e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-14",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 4.834029823541641e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-15",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 5,
+          "elapsed_seconds": 5.291774868965149e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-15",
+          "sample_id": "sample-0",
+          "attempt": 1,
+          "execution_status": "completed",
+          "score_status": "unscored",
+          "correct": null,
+          "output_tokens": 5,
+          "elapsed_seconds": 5.2908435463905334e-06,
+          "failure_kind": "grader:RuntimeError"
+        },
+        {
+          "task_id": "task-16",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 6,
+          "elapsed_seconds": 4.875008016824722e-06,
+          "failure_kind": null
+        },
+        {
+          "task_id": "task-17",
+          "sample_id": "sample-0",
+          "attempt": 0,
+          "execution_status": "completed",
+          "score_status": "scored",
+          "correct": true,
+          "output_tokens": 7,
+          "elapsed_seconds": 4.9578957259655e-06,
+          "failure_kind": null
+        }
+      ],
+      "seed_role": "randomized inert CPU protocol fixtures; no model/official benchmark evaluation"
+    }
+  ],
+  "provenance": {
+    "commit": "39e912c1124c49b7d3a85957909fb143d8c9ba3c",
+    "artifact_path": "docs/agent-research/2610.20675-alpha-diana/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:7d6c61ff674a32fbf935effef7ec903f66e72d69a507ed5f9e8cb7b7b31231b5",
+    "raw_runner_artifact_sha256": "65e4d2c47ef4d1d220886d916f9a49459f99f8ee7b49604d4de2c3f88d6c838c",
+    "executed_source_sha256": {
+      "scripts/run_oct19_agent_components.py": "096f09ce25d2a6110c9ba3872027fe6d102db10c110001c0b993435f6a566304",
+      "src/auto_research/agent_research/alpha_diana.py": "2212cc67caf0aa34d0973e85b8c8348096affe4b509cf0e2b22edec4bfa8a967"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

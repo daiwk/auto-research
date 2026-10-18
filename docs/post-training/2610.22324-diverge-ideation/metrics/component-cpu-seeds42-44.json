@@ -1,0 +1,3125 @@
+{
+  "schema_version": 2,
+  "method": "diverge-ideation",
+  "manifest_ref": "post-training:diverge-ideation",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "protocol:oct19-explicit-judge-observations-v1",
+    "revision": "sha256:a1d7e454b7803b542d9d384c640cfa0641888e8b32f4e77ae3d8f3662bea5bee"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol fixtures; not capability or official benchmark evidence"
+  },
+  "metrics": {
+    "actual_model_or_api_judge_used": false,
+    "duplicate_negative_control_marginal_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_callback_calls": {
+      "mean": 108,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_instances": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    },
+    "generation_order_negative_control_abs_difference": {
+      "mean": 0.5800000000000001,
+      "std": 0.0,
+      "n": 3
+    },
+    "greedy_lower_bound_violation": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "invalid_schema_judge_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "invalid_schema_returns_no_observations": true,
+    "reward_and_exact_cu_reference_max_abs_error": {
+      "mean": 1.1102230246251565e-16,
+      "std": 1.1102230246251565e-16,
+      "n": 3
+    },
+    "scientific_quality_measured": false
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "status": "completed",
+      "metrics": {
+        "reward_and_exact_cu_reference_max_abs_error": 0.0,
+        "greedy_lower_bound_violation": 0.0,
+        "fixture_instances": 12,
+        "fixture_callback_calls": 108,
+        "duplicate_negative_control_marginal_error": 0.0,
+        "generation_order_negative_control_abs_difference": 0.5800000000000001,
+        "invalid_schema_judge_calls": 0,
+        "invalid_schema_returns_no_observations": true,
+        "actual_model_or_api_judge_used": false,
+        "scientific_quality_measured": false
+      },
+      "observation_audit": [
+        {
+          "instance": 0,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.7364712141640124,
+              0.6766994874229113,
+              0.8921795677048454
+            ],
+            "2,0": [
+              0.08693883262941615,
+              0.4219218196852704,
+              0.029797219438070344
+            ],
+            "2,1": [
+              0.21863797480360336,
+              0.5053552881033624,
+              0.026535969683863625
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.768450089763923,
+              0.17955262391758564
+            ],
+            [
+              0.768450089763923,
+              0.0,
+              0.2501764108636098
+            ],
+            [
+              0.17955262391758564,
+              0.2501764108636098,
+              0.0
+            ]
+          ],
+          "judged_token_length": 2128,
+          "reward": {
+            "reward": -0.6937749551180385,
+            "set_score": 0.3842250448819615,
+            "length_penalty": 1.1280000000000001,
+            "marginals": [
+              0.0,
+              0.3842250448819615,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.18450184501845018,
+          "greedy_order": [
+            1,
+            0,
+            2
+          ],
+          "exact_cu": 0.18450184501845018,
+          "exact_order": [
+            1,
+            0,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 1,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.6981393949882269,
+              0.3402505165179919,
+              0.15547949981178155
+            ],
+            "2,0": [
+              0.9572130722067812,
+              0.33659454511262676,
+              0.09274584338014791
+            ],
+            "2,1": [
+              0.09671637683346401,
+              0.8474943663474598,
+              0.6037260313668911
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            1.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.39795647043933347,
+              0.462184486899852
+            ],
+            [
+              0.39795647043933347,
+              0.0,
+              0.5159789248492715
+            ],
+            [
+              0.462184486899852,
+              0.5159789248492715,
+              0.0
+            ]
+          ],
+          "judged_token_length": 855,
+          "reward": {
+            "reward": 0.9479564704393335,
+            "set_score": 0.8979564704393335,
+            "length_penalty": 0.0,
+            "marginals": [
+              0.5,
+              0.39795647043933347,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.435085022766679,
+          "greedy_order": [
+            1,
+            0,
+            2
+          ],
+          "exact_cu": 0.435085022766679,
+          "exact_order": [
+            1,
+            0,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 2,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.577352145256762,
+              0.7045718362149235,
+              0.045824383655662215
+            ],
+            "2,0": [
+              0.22789827565154686,
+              0.28938796360210717,
+              0.0797919769236275
+            ],
+            "2,1": [
+              0.23279088636103018,
+              0.10100142940972912,
+              0.2779736031100921
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            1.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.4425827883757825,
+              0.19902607205909384
+            ],
+            [
+              0.4425827883757825,
+              0.0,
+              0.2039219729602838
+            ],
+            [
+              0.19902607205909384,
+              0.2039219729602838,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3488,
+          "reward": {
+            "reward": -1.5176825337530149,
+            "set_score": 0.9203174662469851,
+            "length_penalty": 2.488,
+            "marginals": [
+              0.5,
+              0.22129139418789126,
+              0.19902607205909384
+            ]
+          },
+          "greedy_cu_lower_bound": 0.4326090210391368,
+          "greedy_order": [
+            2,
+            1,
+            0
+          ],
+          "exact_cu": 0.4326090210391368,
+          "exact_order": [
+            2,
+            1,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 3,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.6091310056669882,
+              0.171138648198097,
+              0.7291267979503492
+            ],
+            "2,0": [
+              0.1634024937619284,
+              0.3794554417576478,
+              0.9895233506365952
+            ],
+            "2,1": [
+              0.6399997598540929,
+              0.5569497437746462,
+              0.6846142509898746
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.5031321506051448,
+              0.5107937620520572
+            ],
+            [
+              0.5031321506051448,
+              0.0,
+              0.6271879182062046
+            ],
+            [
+              0.5107937620520572,
+              0.6271879182062046,
+              0.0
+            ]
+          ],
+          "judged_token_length": 958,
+          "reward": {
+            "reward": 1.056962956328601,
+            "set_score": 1.0069629563286009,
+            "length_penalty": 0.0,
+            "marginals": [
+              0.5,
+              0.2515660753025724,
+              0.2553968810260286
+            ]
+          },
+          "greedy_cu_lower_bound": 0.34451133354926544,
+          "greedy_order": [
+            0,
+            2,
+            1
+          ],
+          "exact_cu": 0.3638387764530907,
+          "exact_order": [
+            1,
+            2,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 4,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              true,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.21098284358632646,
+              0.9429097143350544,
+              0.8763676264726689
+            ],
+            "2,0": [
+              0.3146778807984779,
+              0.65543866529488,
+              0.39563190106066426
+            ],
+            "2,1": [
+              0.9145475897405435,
+              0.4588518525873988,
+              0.26488016649805246
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            1.0,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.6767533947980165,
+              0.45524948238467405
+            ],
+            [
+              0.6767533947980165,
+              0.0,
+              0.5460932029419983
+            ],
+            [
+              0.45524948238467405,
+              0.5460932029419983,
+              0.0
+            ]
+          ],
+          "judged_token_length": 2520,
+          "reward": {
+            "reward": -0.5656218640096464,
+            "set_score": 0.9043781359903535,
+            "length_penalty": 1.52,
+            "marginals": [
+              0.0,
+              0.6767533947980165,
+              0.22762474119233703
+            ]
+          },
+          "greedy_cu_lower_bound": 0.45968337318225067,
+          "greedy_order": [
+            1,
+            2,
+            0
+          ],
+          "exact_cu": 0.45968337318225067,
+          "exact_order": [
+            1,
+            2,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 5,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              true
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.5095262936764645,
+              0.09090941217379389,
+              0.04711637542473457
+            ],
+            "2,0": [
+              0.10964913035065915,
+              0.62744604170309,
+              0.7920793643629641
+            ],
+            "2,1": [
+              0.42215996679968404,
+              0.06352770615195713,
+              0.38161928650653676
+            ]
+          },
+          "quality_observations": [
+            1.0,
+            1.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.215850693758331,
+              0.5097248454722377
+            ],
+            [
+              0.215850693758331,
+              0.0,
+              0.28910231981939266
+            ],
+            [
+              0.5097248454722377,
+              0.28910231981939266,
+              0.0
+            ]
+          ],
+          "judged_token_length": 4334,
+          "reward": {
+            "reward": -1.734149306241669,
+            "set_score": 1.2158506937583309,
+            "length_penalty": 3.0,
+            "marginals": [
+              1.0,
+              0.215850693758331,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.4406884222813645,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.4406884222813645,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 6,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.29350012864742614,
+              0.15815775434466972,
+              0.0032453161017292897
+            ],
+            "2,0": [
+              0.7220920613099108,
+              0.7196806688859242,
+              0.9718880988701143
+            ],
+            "2,1": [
+              0.7619621990520646,
+              0.5076816746043252,
+              0.10641082279770497
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.1516343996979417,
+              0.8045536096886498
+            ],
+            [
+              0.1516343996979417,
+              0.0,
+              0.4586848988180316
+            ],
+            [
+              0.8045536096886498,
+              0.4586848988180316,
+              0.0
+            ]
+          ],
+          "judged_token_length": 2944,
+          "reward": {
+            "reward": -1.0888403507420132,
+            "set_score": 0.8051596492579867,
+            "length_penalty": 1.944,
+            "marginals": [
+              0.5,
+              0.07581719984897085,
+              0.2293424494090158
+            ]
+          },
+          "greedy_cu_lower_bound": 0.34076053735703277,
+          "greedy_order": [
+            0,
+            2,
+            1
+          ],
+          "exact_cu": 0.34076053735703277,
+          "exact_order": [
+            0,
+            2,
+            1
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 7,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.48860570802894787,
+              0.11186772532089506,
+              0.36298076718093353
+            ],
+            "2,0": [
+              0.9853213789438122,
+              0.8067748047971287,
+              0.2394523103380588
+            ],
+            "2,1": [
+              0.2408715924472331,
+              0.56735694368891,
+              0.0787570482913661
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.3211514001769255,
+              0.6771828313596666
+            ],
+            [
+              0.3211514001769255,
+              0.0,
+              0.2956618614758364
+            ],
+            [
+              0.6771828313596666,
+              0.2956618614758364,
+              0.0
+            ]
+          ],
+          "judged_token_length": 4481,
+          "reward": {
+            "reward": -2.641593369173619,
+            "set_score": 0.308406630826381,
+            "length_penalty": 3.0,
+            "marginals": [
+              0.0,
+              0.16057570008846275,
+              0.1478309307379182
+            ]
+          },
+          "greedy_cu_lower_bound": 0.23359698806794332,
+          "greedy_order": [
+            1,
+            2,
+            0
+          ],
+          "exact_cu": 0.23359698806794332,
+          "exact_order": [
+            1,
+            2,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 8,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.527673787418254,
+              0.6065939174826289,
+              0.9643629060074552
+            ],
+            "2,0": [
+              0.9289134930021768,
+              0.7552651966358055,
+              0.6898676320996214
+            ],
+            "2,1": [
+              0.7129489728191218,
+              0.39899229999742913,
+              0.6716869596382831
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.699543536969446,
+              0.7913487739125346
+            ],
+            [
+              0.699543536969446,
+              0.0,
+              0.5945427441516113
+            ],
+            [
+              0.7913487739125346,
+              0.5945427441516113,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3559,
+          "reward": {
+            "reward": -1.8619568594394713,
+            "set_score": 0.6470431405605287,
+            "length_penalty": 2.559,
+            "marginals": [
+              0.0,
+              0.349771768484723,
+              0.2972713720758057
+            ]
+          },
+          "greedy_cu_lower_bound": 0.28322665493292437,
+          "greedy_order": [
+            1,
+            2,
+            0
+          ],
+          "exact_cu": 0.28322665493292437,
+          "exact_order": [
+            1,
+            2,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 9,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.33808556214745533,
+              0.5883087184572333,
+              0.230114732596577
+            ],
+            "2,0": [
+              0.22021738445155947,
+              0.07099308600903254,
+              0.6311029572700989
+            ],
+            "2,1": [
+              0.22894178381115438,
+              0.905420013006128,
+              0.8596354002537465
+            ]
+          },
+          "quality_observations": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.3855030044004219,
+              0.3074378092435636
+            ],
+            [
+              0.3855030044004219,
+              0.0,
+              0.6646657323570097
+            ],
+            [
+              0.3074378092435636,
+              0.6646657323570097,
+              0.0
+            ]
+          ],
+          "judged_token_length": 1080,
+          "reward": {
+            "reward": 0.97,
+            "set_score": 1.0,
+            "length_penalty": 0.08000000000000007,
+            "marginals": [
+              1.0,
+              0.0,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.36900369003690037,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.36900369003690037,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 10,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.2429972423957245,
+              0.4729729429445937,
+              0.4070599614859366
+            ],
+            "2,0": [
+              0.09432579649188222,
+              0.6589827495146631,
+              0.3542975665895538
+            ],
+            "2,1": [
+              0.41110227604973804,
+              0.8638367483696032,
+              0.054171187232170515
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.37434338227541825,
+              0.36920203753203307
+            ],
+            [
+              0.37434338227541825,
+              0.0,
+              0.44303673721717063
+            ],
+            [
+              0.36920203753203307,
+              0.44303673721717063,
+              0.0
+            ]
+          ],
+          "judged_token_length": 1306,
+          "reward": {
+            "reward": 0.6157727099037257,
+            "set_score": 0.8717727099037257,
+            "length_penalty": 0.30600000000000005,
+            "marginals": [
+              0.5,
+              0.18717169113770912,
+              0.18460101876601653
+            ]
+          },
+          "greedy_cu_lower_bound": 0.301838135507163,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.3132447811616975,
+          "exact_order": [
+            1,
+            2,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 11,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.1902089084408115,
+              0.4486135478331319,
+              0.4218816398344042
+            ],
+            "2,0": [
+              0.27854514466694047,
+              0.2498064478821005,
+              0.9232655992760128
+            ],
+            "2,1": [
+              0.44313074505345695,
+              0.8613491047618306,
+              0.5503253124498481
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.35356803203611586,
+              0.4838723972750179
+            ],
+            [
+              0.35356803203611586,
+              0.0,
+              0.6182683874217119
+            ],
+            [
+              0.4838723972750179,
+              0.6182683874217119,
+              0.0
+            ]
+          ],
+          "judged_token_length": 914,
+          "reward": {
+            "reward": 0.726784016018058,
+            "set_score": 0.6767840160180579,
+            "length_penalty": 0.0,
+            "marginals": [
+              0.5,
+              0.17678401601805793,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.2432124038436355,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.2432124038436355,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "status": "completed",
+      "metrics": {
+        "reward_and_exact_cu_reference_max_abs_error": 1.1102230246251565e-16,
+        "greedy_lower_bound_violation": 0.0,
+        "fixture_instances": 12,
+        "fixture_callback_calls": 108,
+        "duplicate_negative_control_marginal_error": 0.0,
+        "generation_order_negative_control_abs_difference": 0.5800000000000001,
+        "invalid_schema_judge_calls": 0,
+        "invalid_schema_returns_no_observations": true,
+        "actual_model_or_api_judge_used": false,
+        "scientific_quality_measured": false
+      },
+      "observation_audit": [
+        {
+          "instance": 0,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.45318922846621235,
+              0.4982722297980512,
+              0.01915710802434778
+            ],
+            "2,0": [
+              0.4323888389514402,
+              0.3723746808209262,
+              0.852288633190853
+            ],
+            "2,1": [
+              0.5469839042910056,
+              0.755316838254966,
+              0.43406813885223416
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.3235395220962038,
+              0.5523507176544065
+            ],
+            [
+              0.3235395220962038,
+              0.0,
+              0.5787896271327352
+            ],
+            [
+              0.5523507176544065,
+              0.5787896271327352,
+              0.0
+            ]
+          ],
+          "judged_token_length": 1943,
+          "reward": {
+            "reward": 0.04494511987530514,
+            "set_score": 0.9379451198753052,
+            "length_penalty": 0.9430000000000001,
+            "marginals": [
+              0.5,
+              0.1617697610481019,
+              0.27617535882720323
+            ]
+          },
+          "greedy_cu_lower_bound": 0.3245724462706441,
+          "greedy_order": [
+            0,
+            2,
+            1
+          ],
+          "exact_cu": 0.3289626710917688,
+          "exact_order": [
+            1,
+            2,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 1,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.1606156044634457,
+              0.8345086611507627,
+              0.12870427796468875
+            ],
+            "2,0": [
+              0.38685180691791254,
+              0.9782005139192641,
+              0.27193600367873105
+            ],
+            "2,1": [
+              0.1818396849701195,
+              0.06353162265509171,
+              0.5792678599149784
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.37460951452629904,
+              0.5456627748386359
+            ],
+            [
+              0.37460951452629904,
+              0.0,
+              0.27487972251339654
+            ],
+            [
+              0.5456627748386359,
+              0.27487972251339654,
+              0.0
+            ]
+          ],
+          "judged_token_length": 2028,
+          "reward": {
+            "reward": -0.7906952427368505,
+            "set_score": 0.18730475726314952,
+            "length_penalty": 1.028,
+            "marginals": [
+              0.0,
+              0.18730475726314952,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.18450184501845018,
+          "greedy_order": [
+            1,
+            0,
+            2
+          ],
+          "exact_cu": 0.18450184501845018,
+          "exact_order": [
+            1,
+            0,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 2,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.9882314343429207,
+              0.8135770826367814,
+              0.6539875189422611
+            ],
+            "2,0": [
+              0.6497514223996674,
+              0.06103923986925708,
+              0.8447952987458383
+            ],
+            "2,1": [
+              0.45742107769017015,
+              0.6471444509842488,
+              0.7233958418017252
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.8185986786406545,
+              0.5185286536715875
+            ],
+            [
+              0.8185986786406545,
+              0.0,
+              0.6093204568253814
+            ],
+            [
+              0.5185286536715875,
+              0.6093204568253814,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3204,
+          "reward": {
+            "reward": -1.3354013213593456,
+            "set_score": 0.8185986786406545,
+            "length_penalty": 2.204,
+            "marginals": [
+              0.0,
+              0.8185986786406545,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.36900369003690037,
+          "greedy_order": [
+            1,
+            0,
+            2
+          ],
+          "exact_cu": 0.36900369003690037,
+          "exact_order": [
+            1,
+            0,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 3,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              false
+            ],
+            [
+              true,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.876386408443811,
+              0.2681270418170997,
+              0.7282882942706941
+            ],
+            "2,0": [
+              0.6718818441367176,
+              0.07035111612956546,
+              0.9933475744125978
+            ],
+            "2,1": [
+              0.6626561963059147,
+              0.2970061190048464,
+              0.8993664739961356
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.0,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.6242672481772016,
+              0.5785268448929602
+            ],
+            [
+              0.6242672481772016,
+              0.0,
+              0.6196762631022988
+            ],
+            [
+              0.5785268448929602,
+              0.6196762631022988,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3461,
+          "reward": {
+            "reward": -1.6217365775535197,
+            "set_score": 0.7892634224464801,
+            "length_penalty": 2.461,
+            "marginals": [
+              0.5,
+              0.0,
+              0.2892634224464801
+            ]
+          },
+          "greedy_cu_lower_bound": 0.28056718826635874,
+          "greedy_order": [
+            0,
+            2,
+            1
+          ],
+          "exact_cu": 0.28056718826635874,
+          "exact_order": [
+            0,
+            2,
+            1
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 4,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.1271567318213358,
+              0.08622779602940023,
+              0.6648035699957479
+            ],
+            "2,0": [
+              0.15410452018745646,
+              0.807469124403023,
+              0.10894077040305772
+            ],
+            "2,1": [
+              0.5351887898500576,
+              0.44307665219263215,
+              0.037974015970284825
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            1.0,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.292729365948828,
+              0.356838138331179
+            ],
+            [
+              0.292729365948828,
+              0.0,
+              0.33874648600432483
+            ],
+            [
+              0.356838138331179,
+              0.33874648600432483,
+              0.0
+            ]
+          ],
+          "judged_token_length": 520,
+          "reward": {
+            "reward": 1.0121026089509904,
+            "set_score": 0.9621026089509904,
+            "length_penalty": 0.0,
+            "marginals": [
+              0.5,
+              0.292729365948828,
+              0.16937324300216242
+            ]
+          },
+          "greedy_cu_lower_bound": 0.4690004841000817,
+          "greedy_order": [
+            1,
+            2,
+            0
+          ],
+          "exact_cu": 0.4690004841000817,
+          "exact_order": [
+            1,
+            2,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 5,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              false
+            ],
+            [
+              true,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.7172790134872745,
+              0.4981113542540818,
+              0.9373442065286496
+            ],
+            "2,0": [
+              0.7030194435733146,
+              0.8436848472059624,
+              0.8572114404307897
+            ],
+            "2,1": [
+              0.38559491997321416,
+              0.712364264081486,
+              0.09295297203761099
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            0.0,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.7175781914233353,
+              0.8013052437366889
+            ],
+            [
+              0.7175781914233353,
+              0.0,
+              0.396970718697437
+            ],
+            [
+              0.8013052437366889,
+              0.396970718697437,
+              0.0
+            ]
+          ],
+          "judged_token_length": 2188,
+          "reward": {
+            "reward": -0.9395146406512817,
+            "set_score": 0.1984853593487185,
+            "length_penalty": 1.1880000000000002,
+            "marginals": [
+              0.0,
+              0.0,
+              0.1984853593487185
+            ]
+          },
+          "greedy_cu_lower_bound": 0.18450184501845018,
+          "greedy_order": [
+            2,
+            0,
+            1
+          ],
+          "exact_cu": 0.18450184501845018,
+          "exact_order": [
+            2,
+            0,
+            1
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 6,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              true,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.39791138728705744,
+              0.051841506256196324,
+              0.5375829352276807
+            ],
+            "2,0": [
+              0.7832401754510943,
+              0.18775314618804095,
+              0.737656630314872
+            ],
+            "2,1": [
+              0.05109739802518698,
+              0.23342546789958984,
+              0.2999151142085732
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            1.0,
+            1.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.3291119429236448,
+              0.569549983984669
+            ],
+            [
+              0.3291119429236448,
+              0.0,
+              0.19481266004445
+            ],
+            [
+              0.569549983984669,
+              0.19481266004445,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3329,
+          "reward": {
+            "reward": -1.2550753970319053,
+            "set_score": 1.0239246029680948,
+            "length_penalty": 2.329,
+            "marginals": [
+              0.5,
+              0.3291119429236448,
+              0.19481266004445
+            ]
+          },
+          "greedy_cu_lower_bound": 0.48288624757346166,
+          "greedy_order": [
+            1,
+            2,
+            0
+          ],
+          "exact_cu": 0.5218065488668286,
+          "exact_order": [
+            2,
+            0,
+            1
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 7,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.45831768588280397,
+              0.061220832884220866,
+              0.02720566856670137
+            ],
+            "2,0": [
+              0.5458124418625672,
+              0.6132491368566851,
+              0.5108368686435821
+            ],
+            "2,1": [
+              0.9146759175036817,
+              0.8609923459998556,
+              0.9511200942958647
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.1822480624445754,
+              0.5566328157876115
+            ],
+            [
+              0.1822480624445754,
+              0.0,
+              0.9089294525998007
+            ],
+            [
+              0.5566328157876115,
+              0.9089294525998007,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3330,
+          "reward": {
+            "reward": -2.0977519375554246,
+            "set_score": 0.1822480624445754,
+            "length_penalty": 2.33,
+            "marginals": [
+              0.0,
+              0.1822480624445754,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.36900369003690037,
+          "greedy_order": [
+            1,
+            0,
+            2
+          ],
+          "exact_cu": 0.36900369003690037,
+          "exact_order": [
+            1,
+            0,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 8,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.24919742350366458,
+              0.10840300246514178,
+              0.21953423414019568
+            ],
+            "2,0": [
+              0.5662407399896201,
+              0.4154951214865944,
+              0.3767333732925162
+            ],
+            "2,1": [
+              0.10550145070804084,
+              0.18684089464050369,
+              0.11639444029615442
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.192378220036334,
+              0.4528230782562435
+            ],
+            [
+              0.192378220036334,
+              0.0,
+              0.13624559521489965
+            ],
+            [
+              0.4528230782562435,
+              0.13624559521489965,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3060,
+          "reward": {
+            "reward": -1.3456880923743832,
+            "set_score": 0.6643119076256169,
+            "length_penalty": 2.06,
+            "marginals": [
+              0.5,
+              0.096189110018167,
+              0.06812279760744983
+            ]
+          },
+          "greedy_cu_lower_bound": 0.28005529567429666,
+          "greedy_order": [
+            0,
+            2,
+            1
+          ],
+          "exact_cu": 0.28005529567429666,
+          "exact_order": [
+            0,
+            2,
+            1
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 9,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.04384955831421544,
+              0.2682340106284232,
+              0.6993464003202482
+            ],
+            "2,0": [
+              0.2732815804869738,
+              0.6475151314909644,
+              0.07355571152078155
+            ],
+            "2,1": [
+              0.7033382604990259,
+              0.14221729576585485,
+              0.22328864045434615
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.337143323087629,
+              0.3314508078329066
+            ],
+            [
+              0.337143323087629,
+              0.0,
+              0.35628139890640903
+            ],
+            [
+              0.3314508078329066,
+              0.35628139890640903,
+              0.0
+            ]
+          ],
+          "judged_token_length": 2199,
+          "reward": {
+            "reward": -0.6489999999999998,
+            "set_score": 0.5,
+            "length_penalty": 1.1989999999999998,
+            "marginals": [
+              0.5,
+              0.0,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.18450184501845018,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.18450184501845018,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 10,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              true,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.9771358701888945,
+              0.30802091145686294,
+              0.9638129528777434
+            ],
+            "2,0": [
+              0.746644493553865,
+              0.4868331838054355,
+              0.5492364139114145
+            ],
+            "2,1": [
+              0.4277739131733924,
+              0.4336365052911514,
+              0.8152334807448053
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            1.0,
+            1.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.7496565781745003,
+              0.5942380304235716
+            ],
+            [
+              0.7496565781745003,
+              0.0,
+              0.5588812997364497
+            ],
+            [
+              0.5942380304235716,
+              0.5588812997364497,
+              0.0
+            ]
+          ],
+          "judged_token_length": 1077,
+          "reward": {
+            "reward": 1.78153787791095,
+            "set_score": 1.80853787791095,
+            "length_penalty": 0.07699999999999996,
+            "marginals": [
+              0.5,
+              0.7496565781745003,
+              0.5588812997364497
+            ]
+          },
+          "greedy_cu_lower_bound": 0.6434168162672883,
+          "greedy_order": [
+            1,
+            2,
+            0
+          ],
+          "exact_cu": 0.6605311117952212,
+          "exact_order": [
+            1,
+            0,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 11,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.18798489857588851,
+              0.19744264044382331,
+              0.7936770895871144
+            ],
+            "2,0": [
+              0.8100379967435386,
+              0.06031142366106723,
+              0.16987168405969877
+            ],
+            "2,1": [
+              0.9980330203627096,
+              0.4191558681221669,
+              0.06418297694485298
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.39303487620227545,
+              0.3467403681547682
+            ],
+            [
+              0.39303487620227545,
+              0.0,
+              0.4937906218099098
+            ],
+            [
+              0.3467403681547682,
+              0.4937906218099098,
+              0.0
+            ]
+          ],
+          "judged_token_length": 4255,
+          "reward": {
+            "reward": -2.95,
+            "set_score": 0.0,
+            "length_penalty": 3.0,
+            "marginals": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.0,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.0,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "status": "completed",
+      "metrics": {
+        "reward_and_exact_cu_reference_max_abs_error": 2.220446049250313e-16,
+        "greedy_lower_bound_violation": 0.0,
+        "fixture_instances": 12,
+        "fixture_callback_calls": 108,
+        "duplicate_negative_control_marginal_error": 0.0,
+        "generation_order_negative_control_abs_difference": 0.5800000000000001,
+        "invalid_schema_judge_calls": 0,
+        "invalid_schema_returns_no_observations": true,
+        "actual_model_or_api_judge_used": false,
+        "scientific_quality_measured": false
+      },
+      "observation_audit": [
+        {
+          "instance": 0,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.02909725326811108,
+              0.1166505334428638,
+              0.008805625887066904
+            ],
+            "2,0": [
+              0.15669033508336383,
+              0.5137132085026757,
+              0.989492910377551
+            ],
+            "2,1": [
+              0.6935102614314381,
+              0.37842657112328093,
+              0.4050477353192561
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.05151780419934726,
+              0.5532988179878635
+            ],
+            [
+              0.05151780419934726,
+              0.0,
+              0.4923281892913251
+            ],
+            [
+              0.5532988179878635,
+              0.4923281892913251,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3171,
+          "reward": {
+            "reward": -1.3490770032546635,
+            "set_score": 0.7719229967453362,
+            "length_penalty": 2.171,
+            "marginals": [
+              0.5,
+              0.02575890209967363,
+              0.24616409464566255
+            ]
+          },
+          "greedy_cu_lower_bound": 0.2840771877473337,
+          "greedy_order": [
+            0,
+            2,
+            1
+          ],
+          "exact_cu": 0.2840771877473337,
+          "exact_order": [
+            0,
+            2,
+            1
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 1,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.5110140671585998,
+              0.5886187783973481,
+              0.2700015452423933
+            ],
+            "2,0": [
+              0.31542846640733524,
+              0.9431179063418281,
+              0.8218267855761012
+            ],
+            "2,1": [
+              0.2897070797905573,
+              0.3445510594984803,
+              0.09581293521285772
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            1.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.45654479693278044,
+              0.6934577194417549
+            ],
+            [
+              0.45654479693278044,
+              0.0,
+              0.24335702483396512
+            ],
+            [
+              0.6934577194417549,
+              0.24335702483396512,
+              0.0
+            ]
+          ],
+          "judged_token_length": 4400,
+          "reward": {
+            "reward": -1.9934552030672195,
+            "set_score": 0.9565447969327805,
+            "length_penalty": 3.0,
+            "marginals": [
+              0.5,
+              0.45654479693278044,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.44481371166780487,
+          "greedy_order": [
+            1,
+            0,
+            2
+          ],
+          "exact_cu": 0.44481371166780487,
+          "exact_order": [
+            1,
+            0,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 2,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.04344481731740246,
+              0.9605715782694924,
+              0.679861124130823
+            ],
+            "2,0": [
+              0.7098617556529754,
+              0.7386048191307483,
+              0.6947171593982429
+            ],
+            "2,1": [
+              0.844455649356887,
+              0.8114980558205607,
+              0.3695141064411527
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.5612925065725726,
+              0.7143945780606554
+            ],
+            [
+              0.5612925065725726,
+              0.0,
+              0.6751559372062
+            ],
+            [
+              0.7143945780606554,
+              0.6751559372062,
+              0.0
+            ]
+          ],
+          "judged_token_length": 4357,
+          "reward": {
+            "reward": -2.6693537467137136,
+            "set_score": 0.2806462532862863,
+            "length_penalty": 3.0,
+            "marginals": [
+              0.0,
+              0.2806462532862863,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.18450184501845018,
+          "greedy_order": [
+            1,
+            0,
+            2
+          ],
+          "exact_cu": 0.18450184501845018,
+          "exact_order": [
+            1,
+            0,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 3,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.6162522943289127,
+              0.9733471336917295,
+              0.7376141998441754
+            ],
+            "2,0": [
+              0.2779695552384053,
+              0.009289907091457383,
+              0.883152209331009
+            ],
+            "2,1": [
+              0.580038091193551,
+              0.6038295823841571,
+              0.5559980611741668
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            1.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.7757378759549391,
+              0.3901372238869572
+            ],
+            [
+              0.7757378759549391,
+              0.0,
+              0.5799552449172917
+            ],
+            [
+              0.3901372238869572,
+              0.5799552449172917,
+              0.0
+            ]
+          ],
+          "judged_token_length": 2807,
+          "reward": {
+            "reward": -0.47899383813557317,
+            "set_score": 1.2780061618644267,
+            "length_penalty": 1.807,
+            "marginals": [
+              0.5,
+              0.3878689379774696,
+              0.3901372238869572
+            ]
+          },
+          "greedy_cu_lower_bound": 0.5236108619509221,
+          "greedy_order": [
+            2,
+            1,
+            0
+          ],
+          "exact_cu": 0.5236108619509221,
+          "exact_order": [
+            2,
+            1,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 4,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.11234070985061306,
+              0.22379504596238586,
+              0.7167035271173158
+            ],
+            "2,0": [
+              0.9989185216518808,
+              0.7607140172122542,
+              0.6758670853308426
+            ],
+            "2,1": [
+              0.4739453205651758,
+              0.1426824419158712,
+              0.9325108054462711
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            1.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.35094642764343825,
+              0.8118332080649925
+            ],
+            [
+              0.35094642764343825,
+              0.0,
+              0.5163795226424394
+            ],
+            [
+              0.8118332080649925,
+              0.5163795226424394,
+              0.0
+            ]
+          ],
+          "judged_token_length": 544,
+          "reward": {
+            "reward": 1.2418527364641585,
+            "set_score": 1.1918527364641585,
+            "length_penalty": 0.0,
+            "marginals": [
+              0.5,
+              0.17547321382171913,
+              0.5163795226424394
+            ]
+          },
+          "greedy_cu_lower_bound": 0.5562576556549222,
+          "greedy_order": [
+            2,
+            0,
+            1
+          ],
+          "exact_cu": 0.5562576556549222,
+          "exact_order": [
+            2,
+            0,
+            1
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 5,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.27391238643523974,
+              0.6882358232416252,
+              0.6264753094183797
+            ],
+            "2,0": [
+              0.19262877745964946,
+              0.8406243993270748,
+              0.8306745369790728
+            ],
+            "2,1": [
+              0.27937388035017974,
+              0.960930898622313,
+              0.26256418208465815
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.5295411730317482,
+              0.6213092379219324
+            ],
+            [
+              0.5295411730317482,
+              0.0,
+              0.5009563203523836
+            ],
+            [
+              0.6213092379219324,
+              0.5009563203523836,
+              0.0
+            ]
+          ],
+          "judged_token_length": 1031,
+          "reward": {
+            "reward": 1.034248746692066,
+            "set_score": 1.0152487466920659,
+            "length_penalty": 0.030999999999999917,
+            "marginals": [
+              0.5,
+              0.2647705865158741,
+              0.2504781601761918
+            ]
+          },
+          "greedy_cu_lower_bound": 0.3625374416264151,
+          "greedy_order": [
+            0,
+            2,
+            1
+          ],
+          "exact_cu": 0.3625374416264151,
+          "exact_order": [
+            0,
+            2,
+            1
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 6,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.40116188230429894,
+              0.3021458726160603,
+              0.8826388786945891
+            ],
+            "2,0": [
+              0.44978357905725586,
+              0.3173969630311988,
+              0.13171044694994938
+            ],
+            "2,1": [
+              0.13232709212081606,
+              0.13241161461442785,
+              0.9257536712409951
+            ]
+          },
+          "quality_observations": [
+            1.0,
+            0.5,
+            1.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.5286488778716495,
+              0.299630329679468
+            ],
+            [
+              0.5286488778716495,
+              0.0,
+              0.3968307926587464
+            ],
+            [
+              0.299630329679468,
+              0.3968307926587464,
+              0.0
+            ]
+          ],
+          "judged_token_length": 3743,
+          "reward": {
+            "reward": -1.129045231384707,
+            "set_score": 1.5639547686152928,
+            "length_penalty": 2.743,
+            "marginals": [
+              1.0,
+              0.26432443893582475,
+              0.299630329679468
+            ]
+          },
+          "greedy_cu_lower_bound": 0.5278168884643224,
+          "greedy_order": [
+            0,
+            2,
+            1
+          ],
+          "exact_cu": 0.5463441188496722,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 7,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.7457190568254431,
+              0.5031596707211883,
+              0.362001502835246
+            ],
+            "2,0": [
+              0.03466427103684733,
+              0.2342285183076288,
+              0.4877230679468074
+            ],
+            "2,1": [
+              0.5043806304910928,
+              0.8641884730193119,
+              0.6919407035377663
+            ]
+          },
+          "quality_observations": [
+            1.0,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.5369600767939592,
+              0.25220528576376117
+            ],
+            [
+              0.5369600767939592,
+              0.0,
+              0.6868366023493904
+            ],
+            [
+              0.25220528576376117,
+              0.6868366023493904,
+              0.0
+            ]
+          ],
+          "judged_token_length": 4207,
+          "reward": {
+            "reward": -1.5554173187211398,
+            "set_score": 1.3945826812788602,
+            "length_penalty": 3.0,
+            "marginals": [
+              1.0,
+              0.2684800383969796,
+              0.12610264288188058
+            ]
+          },
+          "greedy_cu_lower_bound": 0.49585799826258486,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.49585799826258486,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 8,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.9672698402809403,
+              0.9133346192280509,
+              0.14547602019647665
+            ],
+            "2,0": [
+              0.004789487115824165,
+              0.914832211375571,
+              0.4057223941236803
+            ],
+            "2,1": [
+              0.6349305859454827,
+              0.6898510888418649,
+              0.40248982892998975
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "distances": [
+            [
+              0.0,
+              0.6753601599018225,
+              0.4417813642050252
+            ],
+            [
+              0.6753601599018225,
+              0.0,
+              0.575757167905779
+            ],
+            [
+              0.4417813642050252,
+              0.575757167905779,
+              0.0
+            ]
+          ],
+          "judged_token_length": 4658,
+          "reward": {
+            "reward": -1.891429237946576,
+            "set_score": 1.058570762053424,
+            "length_penalty": 3.0,
+            "marginals": [
+              0.5,
+              0.33768007995091126,
+              0.2208906821025126
+            ]
+          },
+          "greedy_cu_lower_bound": 0.3626691972172898,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.3626691972172898,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 9,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              false
+            ],
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.3337565683665652,
+              0.013826292274080498,
+              0.6972033918788227
+            ],
+            "2,0": [
+              0.6078031594258366,
+              0.16655276110734707,
+              0.543627075967542
+            ],
+            "2,1": [
+              0.07721193969717266,
+              0.09501444839966422,
+              0.5335479788588973
+            ]
+          },
+          "quality_observations": [
+            0.5,
+            0.0,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.34826208417315613,
+              0.4393276655002419
+            ],
+            [
+              0.34826208417315613,
+              0.0,
+              0.23525812231857804
+            ],
+            [
+              0.4393276655002419,
+              0.23525812231857804,
+              0.0
+            ]
+          ],
+          "judged_token_length": 919,
+          "reward": {
+            "reward": 0.55,
+            "set_score": 0.5,
+            "length_penalty": 0.0,
+            "marginals": [
+              0.5,
+              0.0,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.18450184501845018,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.18450184501845018,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 10,
+          "explicit_fixture_impact_votes": [
+            [
+              true,
+              true
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              false,
+              false
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.32183068649396707,
+              0.5937140728316327,
+              0.31878661347814297
+            ],
+            "2,0": [
+              0.6528845252199496,
+              0.8178554720335863,
+              0.01630717541417237
+            ],
+            "2,1": [
+              0.7956809863864636,
+              0.11715214844662192,
+              0.016100974126273537
+            ]
+          },
+          "quality_observations": [
+            1.0,
+            0.5,
+            0.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.4114437909345809,
+              0.49568239088923605
+            ],
+            [
+              0.4114437909345809,
+              0.0,
+              0.309644702986453
+            ],
+            [
+              0.49568239088923605,
+              0.309644702986453,
+              0.0
+            ]
+          ],
+          "judged_token_length": 1116,
+          "reward": {
+            "reward": 1.1397218954672903,
+            "set_score": 1.2057218954672904,
+            "length_penalty": 0.1160000000000001,
+            "marginals": [
+              1.0,
+              0.20572189546729044,
+              0.0
+            ]
+          },
+          "greedy_cu_lower_bound": 0.43732461473083445,
+          "greedy_order": [
+            0,
+            1,
+            2
+          ],
+          "exact_cu": 0.43732461473083445,
+          "exact_order": [
+            0,
+            1,
+            2
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        },
+        {
+          "instance": 11,
+          "explicit_fixture_impact_votes": [
+            [
+              false,
+              false
+            ],
+            [
+              false,
+              true
+            ],
+            [
+              true,
+              true
+            ]
+          ],
+          "explicit_fixture_semantic_field_distances": {
+            "1,0": [
+              0.8262798665064421,
+              0.24827597726375272,
+              0.2746577483638396
+            ],
+            "2,0": [
+              0.14903803392923243,
+              0.26336742768505206,
+              0.4045923931025962
+            ],
+            "2,1": [
+              0.7968774077548143,
+              0.6599670644688285,
+              0.1719862407459145
+            ]
+          },
+          "quality_observations": [
+            0.0,
+            0.5,
+            1.0
+          ],
+          "distances": [
+            [
+              0.0,
+              0.44973786404467814,
+              0.2723326182389602
+            ],
+            [
+              0.44973786404467814,
+              0.0,
+              0.5429435709898525
+            ],
+            [
+              0.2723326182389602,
+              0.5429435709898525,
+              0.0
+            ]
+          ],
+          "judged_token_length": 1964,
+          "reward": {
+            "reward": -0.4167984497387006,
+            "set_score": 0.4972015502612993,
+            "length_penalty": 0.964,
+            "marginals": [
+              0.0,
+              0.22486893202233907,
+              0.2723326182389602
+            ]
+          },
+          "greedy_cu_lower_bound": 0.4591603715665807,
+          "greedy_order": [
+            2,
+            1,
+            0
+          ],
+          "exact_cu": 0.4591603715665807,
+          "exact_order": [
+            2,
+            1,
+            0
+          ],
+          "fixture_callback_counts": {
+            "quality": 6,
+            "distance": 3
+          }
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+    "artifact_path": "docs/post-training/2610.22324-diverge-ideation/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:dff8d751a92fd1b11348c9f1b24b58ed740c79a25010d3b1990c5ea69eb5cb8f",
+    "raw_runner_artifact_sha256": "00b228e2437fb97e2c6289fc1034496168b350e477df21856fdb24f309385114",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/reviewed_oct19.py": "dfb47e02a7acf9611eb76b1a366d8fcc457c04f085e4f1e210e279e8dbe839dc",
+      "scripts/run_oct19_post_components.py": "a1d7e454b7803b542d9d384c640cfa0641888e8b32f4e77ae3d8f3662bea5bee"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

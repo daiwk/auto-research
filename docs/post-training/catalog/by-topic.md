@@ -151,6 +151,13 @@
 - [A Zeroth-Order Paradigm for LLM Preference Alignment](../2609.19144-compo/README.md)（`compo`）：不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。
 - [Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data](../2609.16532-sd-dpo/README.md)（`sd-dpo`）：识别事实正确但风格不同的 rejected response，反转其偏好方向并按组比例加权以抵消风格梯度。
 
+### RLHF / RLVR
+
+- [Each Reward to Its Relevant Tokens: Reward-Specific Token-Level Credit Assignment for Multi-Reward RL](../2610.21439-mrtpo/README.md)（`mrtpo`）：GDPO 虽然分别归一化多种奖励，但仍把每种奖励均摊到整条响应。SQL 可执行性、格式、执行结果可能只分别依赖少数 token。
+- [Multi-Reward Hacking: From Aggregation-Induced Drift to Trust-Anchored Defense](../2610.21404-tag-reward-gating/README.md)（`tag-reward-gating`）：正确性和简短、低时延等奖励相加时，容易获取的辅助奖励可能主导 GRPO：总奖励上涨，主要任务却变差。TAG 不是简单降低辅助权重，而是先从同一基线分别优化每个奖励，观察哪个探针对基线的分布漂移最小，再将该奖励选为 anchor。
+- [Training Reasoning Models to Generate Diverse Scientific Ideas](../2610.22324-diverge-ideation/README.md)（`diverge-ideation`）：独立采样多个高分想法可能反复得到同一个方向。论文让模型在一次生成中写出整组想法，每个新想法都能看到前面写过的内容，再按整组质量和相互差异训练。
+- [Failure Is the Mother of Success: Recovering Supervision with Grounding Hindsight](../2610.21018-rshd/README.md)（`rshd`）：一组 GRPO rollout 全部失败时，组内 advantage 全为0。RSHD 不把参考答案告诉模型，而让同一策略根据失败响应写纠错 note，再用 note 生成**新的** replay。
+
 ### post-training
 
 - [Co-Evolving LLM Evaluators and Policies via DynamicRubric](../../reproductions/2607.20083-dynamic-rubric/README.md)（`dynamic-rubric`）：固定 judge 或固定 rubric 会在策略模型进步后失去区分力。DynamicRubric 根据当前 prompt 和一组候选回答动态生成评估维度与权重，用 discriminability 目标寻找能区分当代 hard negatives 的标准，用 anchor 目标限制评估器漂移，再让 evaluator 和 policy 多轮协同进化。
@@ -179,12 +186,6 @@
 ### 多 Agent
 
 - [MAS-OPD: On-Policy Distillation for Multi-Agent Systems](../2609.34234-mas-opd/README.md)（`mas-opd`）：以目标角色与非目标角色 teacher 信号差构造 role advantage，并把协作冲突归因只提供给 teacher 形成 privileged coordination supervision。
-
-### RLHF / RLVR
-
-- [Each Reward to Its Relevant Tokens: Reward-Specific Token-Level Credit Assignment for Multi-Reward RL](../2610.21439-mrtpo/README.md)（`mrtpo`）：GDPO 虽然分别归一化多种奖励，但仍把每种奖励均摊到整条响应。SQL 可执行性、格式、执行结果可能只分别依赖少数 token。
-- [Multi-Reward Hacking: From Aggregation-Induced Drift to Trust-Anchored Defense](../2610.21404-tag-reward-gating/README.md)（`tag-reward-gating`）：正确性和简短、低时延等奖励相加时，容易获取的辅助奖励可能主导 GRPO：总奖励上涨，主要任务却变差。TAG 不是简单降低辅助权重，而是先从同一基线分别优化每个奖励，观察哪个探针对基线的分布漂移最小，再将该奖励选为 anchor。
-- [Failure Is the Mother of Success: Recovering Supervision with Grounding Hindsight](../2610.21018-rshd/README.md)（`rshd`）：一组 GRPO rollout 全部失败时，组内 advantage 全为0。RSHD 不把参考答案告诉模型，而让同一策略根据失败响应写纠错 note，再用 note 生成**新的** replay。
 
 ### DPO 偏好/优化尺度解耦
 
@@ -313,6 +314,7 @@
 
 ### Agentic RL 与教师调度
 
+- [KnowGPO: Knowledge-Grouped Policy Optimization for Search Agents](../2610.22331-knowgpo/README.md)（`knowgpo`）：不同搜索轨迹即使读到了相同事实，也可能使用完全不同的 query、网页和表述，按表面观察匹配会把可比较的步骤拆散。KnowGPO 将问题所需事实拆为原子条件，训练 verifier 检查每步获得了哪些条件。
 - [OpCredit: Operation-Aware Policy Learning for Agentic Knowledge Graph Question Answering](../2610.21345-opcredit/README.md)（`opcredit`）：整条轨迹失败不代表每一步都无用，成功轨迹也可能绕路。OpCredit 的 BOC 从普通 rollout 中复用分支结果：同题、同活动实体，再匹配访问集合、剩余预算和决策阶段；FTC 则衡量**该操作局部前沿**相对答案邻域的进退。
 - [SOAR: Source-Aware Reinforcement Learning with Precise Credit Assignment for Search Agents](../../reproductions/2610.13157-soar/README.md)（`soar`）：只按答案奖训练的search agent可能答对却伪造证据依赖。SOAR独立记录atomic query的internal recall和external retrieval，再要求显式声明source。
 - [Follow the Winners: Conservative Policy Improvement with the Cross-Entropy Method for Critic-Free RFT](../2610.03361-follow-the-winners/README.md)（`follow-the-winners`）：在有状态工具环境里，为同一提示重复生成一组等价 rollout 往往很贵；而 PPO 的 critic 又占用额外模型资源。FTW 不计算 value，也不要求 GRPO 式同题多轨迹。

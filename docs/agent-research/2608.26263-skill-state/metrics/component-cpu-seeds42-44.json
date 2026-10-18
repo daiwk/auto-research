@@ -1,0 +1,144 @@
+{
+  "schema_version": 2,
+  "method": "skill-state",
+  "manifest_ref": "agent-research:skill-state",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-skill-state-public-counter",
+    "revision": "oct19-skill-state-contract-v1",
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol fixtures; not capability or official benchmark evidence"
+  },
+  "metrics": {
+    "append_only_fixture_negative_control_character_growth": {
+      "mean": 12919,
+      "std": 112.58774356030055,
+      "n": 3
+    },
+    "discarded_reasoning_replayed": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "executed_inert_actions": {
+      "mean": 200,
+      "std": 0.0,
+      "n": 3
+    },
+    "invalid_patch_retries": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "max_prompt_characters": {
+      "mean": 121.66666666666667,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "prompt_character_range": {
+      "mean": 2.6666666666666665,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "public_turns": {
+      "mean": 200,
+      "std": 0.0,
+      "n": 3
+    },
+    "recursive_deletion_reference_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "retry_public_context_drift": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "state_update_reference_max_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "f45792bcb4c64c69cb7fad24e279948b8a8e9bfcb3a03479d5d897587ff5ff49",
+      "metrics": {
+        "public_turns": 200,
+        "executed_inert_actions": 200,
+        "invalid_patch_retries": 1,
+        "state_update_reference_max_error": 0,
+        "recursive_deletion_reference_error": 0,
+        "discarded_reasoning_replayed": 0,
+        "retry_public_context_drift": 0,
+        "max_prompt_characters": 122,
+        "prompt_character_range": 3,
+        "append_only_fixture_negative_control_character_growth": 12985
+      }
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "6fce50bb81c75a9aa813af888799aa7e6d585e121e2a4cf5c626160c60e00bc5",
+      "metrics": {
+        "public_turns": 200,
+        "executed_inert_actions": 200,
+        "invalid_patch_retries": 1,
+        "state_update_reference_max_error": 0,
+        "recursive_deletion_reference_error": 0,
+        "discarded_reasoning_replayed": 0,
+        "retry_public_context_drift": 0,
+        "max_prompt_characters": 122,
+        "prompt_character_range": 3,
+        "append_only_fixture_negative_control_character_growth": 12789
+      }
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "927ccc0549ab23c67efa77377e8fdf90cf5e6f7a7d197551e412bb134700cc63",
+      "metrics": {
+        "public_turns": 200,
+        "executed_inert_actions": 200,
+        "invalid_patch_retries": 1,
+        "state_update_reference_max_error": 0,
+        "recursive_deletion_reference_error": 0,
+        "discarded_reasoning_replayed": 0,
+        "retry_public_context_drift": 0,
+        "max_prompt_characters": 121,
+        "prompt_character_range": 2,
+        "append_only_fixture_negative_control_character_growth": 12983
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+    "artifact_path": "docs/agent-research/2608.26263-skill-state/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:7d3e31b265901c7e970d4289271f67e9fcbe3032d63a7a50469b1c9b448b410c",
+    "raw_runner_artifact_sha256": "760064cde597a192be60ab2076576af1a97bb5994243e1ea4d81e703f53e1d92",
+    "executed_source_sha256": {
+      "scripts/run_oct19_skill_state.py": "390834ddc627a1c75cbc49d9efd8202bec765e023bf0c30dd642cd6c8ba473b0",
+      "src/auto_research/agent_research/skill_state.py": "21d1f12a09c1865c3e367f9246d94c93c19c2d6599f5d96b76a8b7db51cec6b1"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

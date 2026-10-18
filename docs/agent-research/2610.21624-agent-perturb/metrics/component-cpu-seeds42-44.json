@@ -1,0 +1,2442 @@
+{
+  "schema_version": 2,
+  "method": "agent-perturb",
+  "manifest_ref": "agent-research:agent-perturb",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-agent-perturb-contract-fixture",
+    "revision": "c7c2ae7ffe1207b082451fbea7a90f92ef2155521f477c5e2bc1a2b0c48de71c",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert public arithmetic/session fixtures"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol fixtures; not capability or official benchmark evidence"
+  },
+  "metrics": {
+    "clean_all_requested_lower_bound": {
+      "mean": 0.9541666666666666,
+      "std": 0.03307189138830739,
+      "n": 3
+    },
+    "clean_all_requested_upper_bound": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "clean_execution_failures": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "clean_native_mean_paired_observed": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "clean_unscored": {
+      "mean": 2,
+      "std": 1.0,
+      "n": 3
+    },
+    "complete_scored_pairs": {
+      "mean": 30,
+      "std": 8.54400374531753,
+      "n": 3
+    },
+    "drop_unscored_negative_control_coverage_overstatement": {
+      "mean": 0.37916666666666665,
+      "std": 0.03307189138830737,
+      "n": 3
+    },
+    "gold_or_condition_fields_exposed_to_actor": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "independent_complete_pair_count_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "known_recorded_tokens_all_episodes": {
+      "mean": 436.3333333333333,
+      "std": 116.24256248609342,
+      "n": 3
+    },
+    "missing_pair_records": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "pair_coverage": {
+      "mean": 0.6208333333333333,
+      "std": 0.03307189138830737,
+      "n": 3
+    },
+    "paired_drop_all_requested_lower_bound": {
+      "mean": 0.11157407407407408,
+      "std": 0.048914397806343296,
+      "n": 3
+    },
+    "paired_drop_all_requested_upper_bound": {
+      "mean": 0.5365740740740741,
+      "std": 0.017586499919650535,
+      "n": 3
+    },
+    "paired_drop_observed": {
+      "mean": 0.2531058829870375,
+      "std": 0.013246706060806242,
+      "n": 3
+    },
+    "perturbation_families": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    },
+    "perturbed_all_requested_lower_bound": {
+      "mean": 0.4634259259259259,
+      "std": 0.01758649991965056,
+      "n": 3
+    },
+    "perturbed_all_requested_upper_bound": {
+      "mean": 0.8425925925925927,
+      "std": 0.016037507477489613,
+      "n": 3
+    },
+    "perturbed_execution_failures": {
+      "mean": 16,
+      "std": 4.0,
+      "n": 3
+    },
+    "perturbed_native_mean_paired_observed": {
+      "mean": 0.7468941170129625,
+      "std": 0.013246706060806242,
+      "n": 3
+    },
+    "perturbed_unscored": {
+      "mean": 18,
+      "std": 3.605551275463989,
+      "n": 3
+    },
+    "rejected_changed_goals": {
+      "mean": 4,
+      "std": 1.0,
+      "n": 3
+    },
+    "relative_degradation_observed": {
+      "mean": 0.2531058829870375,
+      "std": 0.013246706060806242,
+      "n": 3
+    },
+    "requested_pairs": {
+      "mean": 48,
+      "std": 12.0,
+      "n": 3
+    },
+    "syntax_only_negative_control_bad_goal_admissions": {
+      "mean": 4,
+      "std": 1.0,
+      "n": 3
+    },
+    "token_capture_coverage": {
+      "mean": 0.8333333333333334,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "b8e9afec68c5cb0fa27f2b4c608ad511329fdc91abba43bff74fc6510774b32f",
+      "metrics": {
+        "requested_pairs": 60,
+        "complete_scored_pairs": 38,
+        "missing_pair_records": 0,
+        "pair_coverage": 0.6333333333333333,
+        "clean_unscored": 2,
+        "perturbed_unscored": 22,
+        "clean_execution_failures": 0,
+        "perturbed_execution_failures": 20,
+        "clean_native_mean_paired_observed": 1.0,
+        "perturbed_native_mean_paired_observed": 0.7368421052631579,
+        "paired_drop_observed": 0.26315789473684215,
+        "relative_degradation_observed": 0.26315789473684215,
+        "clean_all_requested_lower_bound": 0.9666666666666667,
+        "clean_all_requested_upper_bound": 1.0,
+        "perturbed_all_requested_lower_bound": 0.4666666666666667,
+        "perturbed_all_requested_upper_bound": 0.8333333333333334,
+        "paired_drop_all_requested_lower_bound": 0.13333333333333333,
+        "paired_drop_all_requested_upper_bound": 0.5333333333333333,
+        "known_recorded_tokens_all_episodes": 526,
+        "token_capture_coverage": 0.8333333333333334,
+        "perturbation_families": 12,
+        "rejected_changed_goals": 5,
+        "syntax_only_negative_control_bad_goal_admissions": 5,
+        "independent_complete_pair_count_error": 0,
+        "drop_unscored_negative_control_coverage_overstatement": 0.3666666666666667,
+        "gold_or_condition_fields_exposed_to_actor": 0
+      },
+      "protocol_records": [
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 7
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-4",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        }
+      ],
+      "seed_role": "randomized inert CPU protocol fixtures; no model/official benchmark evaluation"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "24bcf3346e114bfd2495d49dba7740996dfae24f3ff2d2d78f6d2b83a999369c",
+      "metrics": {
+        "requested_pairs": 36,
+        "complete_scored_pairs": 21,
+        "missing_pair_records": 0,
+        "pair_coverage": 0.5833333333333334,
+        "clean_unscored": 3,
+        "perturbed_unscored": 15,
+        "clean_execution_failures": 0,
+        "perturbed_execution_failures": 12,
+        "clean_native_mean_paired_observed": 1.0,
+        "perturbed_native_mean_paired_observed": 0.7619047619047619,
+        "paired_drop_observed": 0.23809523809523814,
+        "relative_degradation_observed": 0.23809523809523814,
+        "clean_all_requested_lower_bound": 0.9166666666666666,
+        "clean_all_requested_upper_bound": 1.0,
+        "perturbed_all_requested_lower_bound": 0.4444444444444444,
+        "perturbed_all_requested_upper_bound": 0.8611111111111112,
+        "paired_drop_all_requested_lower_bound": 0.05555555555555555,
+        "paired_drop_all_requested_upper_bound": 0.5555555555555556,
+        "known_recorded_tokens_all_episodes": 305,
+        "token_capture_coverage": 0.8333333333333334,
+        "perturbation_families": 12,
+        "rejected_changed_goals": 3,
+        "syntax_only_negative_control_bad_goal_admissions": 3,
+        "independent_complete_pair_count_error": 0,
+        "drop_unscored_negative_control_coverage_overstatement": 0.41666666666666663,
+        "gold_or_condition_fields_exposed_to_actor": 0
+      },
+      "protocol_records": [
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 5
+          }
+        }
+      ],
+      "seed_role": "randomized inert CPU protocol fixtures; no model/official benchmark evaluation"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "26b0ac4148926a5af39a0d24f69f7eee733923cd55d3ae4e5b3ea0b8744ac128",
+      "metrics": {
+        "requested_pairs": 48,
+        "complete_scored_pairs": 31,
+        "missing_pair_records": 0,
+        "pair_coverage": 0.6458333333333334,
+        "clean_unscored": 1,
+        "perturbed_unscored": 17,
+        "clean_execution_failures": 0,
+        "perturbed_execution_failures": 16,
+        "clean_native_mean_paired_observed": 1.0,
+        "perturbed_native_mean_paired_observed": 0.7419354838709677,
+        "paired_drop_observed": 0.25806451612903225,
+        "relative_degradation_observed": 0.25806451612903225,
+        "clean_all_requested_lower_bound": 0.9791666666666666,
+        "clean_all_requested_upper_bound": 1.0,
+        "perturbed_all_requested_lower_bound": 0.4791666666666667,
+        "perturbed_all_requested_upper_bound": 0.8333333333333334,
+        "paired_drop_all_requested_lower_bound": 0.14583333333333334,
+        "paired_drop_all_requested_upper_bound": 0.5208333333333334,
+        "known_recorded_tokens_all_episodes": 478,
+        "token_capture_coverage": 0.8333333333333334,
+        "perturbation_families": 12,
+        "rejected_changed_goals": 4,
+        "syntax_only_negative_control_bad_goal_admissions": 4,
+        "independent_complete_pair_count_error": 0,
+        "drop_unscored_negative_control_coverage_overstatement": 0.35416666666666663,
+        "gold_or_condition_fields_exposed_to_actor": 0
+      },
+      "protocol_records": [
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 7
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-0",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 7
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 4
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-1",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 7
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 4
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-2",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "U",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "U",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "U",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 7
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "P",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 5
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "P",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": null,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "P",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "C",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 0.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "C",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "C",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "T",
+          "kind": "incorrect",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "T",
+          "kind": "missing",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "failed",
+            "score": null,
+            "recorded_tokens": null
+          }
+        },
+        {
+          "task_id": "fixture-3",
+          "target": "T",
+          "kind": "redundant",
+          "clean": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          },
+          "perturbed": {
+            "execution_status": "completed",
+            "score": 1.0,
+            "recorded_tokens": 6
+          }
+        }
+      ],
+      "seed_role": "randomized inert CPU protocol fixtures; no model/official benchmark evaluation"
+    }
+  ],
+  "provenance": {
+    "commit": "39e912c1124c49b7d3a85957909fb143d8c9ba3c",
+    "artifact_path": "docs/agent-research/2610.21624-agent-perturb/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:9bc8b3ad79bc077a88d226ce326366236fce63a16f4503429103f326c2e355c4",
+    "raw_runner_artifact_sha256": "65e4d2c47ef4d1d220886d916f9a49459f99f8ee7b49604d4de2c3f88d6c838c",
+    "executed_source_sha256": {
+      "scripts/run_oct19_agent_components.py": "096f09ce25d2a6110c9ba3872027fe6d102db10c110001c0b993435f6a566304",
+      "src/auto_research/agent_research/agent_perturb.py": "b5fa0fe83ccf160d9187ecd580049e0a07a94eef0f99b95000326d45231c86f4"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
