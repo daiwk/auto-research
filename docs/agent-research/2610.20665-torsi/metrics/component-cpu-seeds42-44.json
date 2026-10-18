@@ -1,0 +1,132 @@
+{
+  "schema_version": 2,
+  "method": "torsi",
+  "manifest_ref": "agent-research:torsi",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-torsi-contract-fixture",
+    "revision": "dfe08a190e3fc96e2ada96c6293bccb0a3206a54d279405f8fbb031723bce18f",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert public CPU events/numbers"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "accepted_improvements": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "independent_validation_gain_error": {
+      "mean": 1.6422048905913775e-16,
+      "std": 9.623156004794872e-17,
+      "n": 3
+    },
+    "latency_only_negative_control_underestimate": {
+      "mean": 0.21851436264097643,
+      "std": 0.0477676106345412,
+      "n": 3
+    },
+    "mean_action_age": {
+      "mean": 1.1650642936380857,
+      "std": 0.10360918343770195,
+      "n": 3
+    },
+    "mean_response_latency": {
+      "mean": 0.9465499309971094,
+      "std": 0.13054295653519526,
+      "n": 3
+    },
+    "paired_validation_gain": {
+      "mean": 0.12587017748058635,
+      "std": 0.08079390322763749,
+      "n": 3
+    },
+    "rejected_ties_and_regressions": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "validation_or_test_tasks_to_teacher": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "e86f04153202ac1f1e9cbc148a6b0a2e555d1426d69a96992ffb74fc11497bf4",
+      "metrics": {
+        "mean_response_latency": 1.0971133069264474,
+        "mean_action_age": 1.2757634525515587,
+        "latency_only_negative_control_underestimate": 0.17865014562511128,
+        "paired_validation_gain": 0.033139673307852245,
+        "independent_validation_gain_error": 2.706168622523819e-16,
+        "accepted_improvements": 1,
+        "rejected_ties_and_regressions": 2,
+        "validation_or_test_tasks_to_teacher": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "bbb4306362539c13fb799deb8eaf975513a31eed611ca025db1cc76c92a260e1",
+      "metrics": {
+        "mean_response_latency": 0.8775504299542464,
+        "mean_action_age": 1.1490101980759986,
+        "latency_only_negative_control_underestimate": 0.2714597681217522,
+        "paired_validation_gain": 0.1633785116120574,
+        "independent_validation_gain_error": 8.326672684688674e-17,
+        "accepted_improvements": 1,
+        "rejected_ties_and_regressions": 2,
+        "validation_or_test_tasks_to_teacher": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "a36ad6a2faa1b92b7c537838372ced006ba60db5126b87c2ab871901d4d1b6af",
+      "metrics": {
+        "mean_response_latency": 0.8649860561106344,
+        "mean_action_age": 1.0704192302867002,
+        "latency_only_negative_control_underestimate": 0.20543317417606577,
+        "paired_validation_gain": 0.1810923475218494,
+        "independent_validation_gain_error": 1.3877787807814457e-16,
+        "accepted_improvements": 1,
+        "rejected_ties_and_regressions": 2,
+        "validation_or_test_tasks_to_teacher": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    }
+  ],
+  "provenance": {
+    "commit": "0e07707c66eb1d1ce966f128b3871aa437020c4b",
+    "artifact_path": "docs/agent-research/2610.20665-torsi/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:21131672617bc8154810dd81634173647395f39fadcda346381f1113705211eb",
+    "raw_runner_artifact_sha256": "b5055979b988581032c93d4ea231d6e5c0f77c2a24af93d21f7e0c29662b1e59",
+    "executed_source_sha256": {
+      "scripts/run_oct18_agent_components.py": "a632f7c41337f5d77524106e229ec75c9146571a8497459699b5fdb43b86a571",
+      "src/auto_research/agent_research/torsi.py": "e48222939859916b0174ec7bea9bbd9d47666fef1c984653a44c72bd28b4abb5"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

@@ -1,0 +1,156 @@
+{
+  "schema_version": 2,
+  "method": "coda",
+  "manifest_ref": "agent-research:coda",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-coda-contract-fixture",
+    "revision": "50e16bd39952ae53b3a79b274204e9844734629e108567e7de11c2f8989af5dc",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert public CPU events/numbers"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "conditional_denominator_negative_control_difference": {
+      "mean": 0.13755011113757243,
+      "std": 0.0514630272410814,
+      "n": 3
+    },
+    "consistency_rate": {
+      "mean": 0.7291666666666666,
+      "std": 0.047735163489123336,
+      "n": 3
+    },
+    "delivered_success_rate": {
+      "mean": 0.6354166666666666,
+      "std": 0.10045469542700995,
+      "n": 3
+    },
+    "independent_full_denominator_resistance_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "noise_floor_consistency": {
+      "mean": 0.9375,
+      "std": 0.05412658773652741,
+      "n": 3
+    },
+    "peak_to_worst_drop": {
+      "mean": 0.3020833333333333,
+      "std": 0.09547032697824667,
+      "n": 3
+    },
+    "resistance_incomplete": {
+      "mean": 0.15625,
+      "std": 0.08267972847076846,
+      "n": 3
+    },
+    "resistance_misleading": {
+      "mean": 0.16666666666666666,
+      "std": 0.09547032697824667,
+      "n": 3
+    },
+    "retrieval_field_mutations": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "tasks": {
+      "mean": 32,
+      "std": 0.0,
+      "n": 3
+    },
+    "worst_case_success_rate": {
+      "mean": 0.3333333333333333,
+      "std": 0.047735163489123336,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "10c71cfeedd9a1423251027cb3dc94f742e15370083a4874b790bdc0c86ee323",
+      "metrics": {
+        "tasks": 32,
+        "delivered_success_rate": 0.59375,
+        "worst_case_success_rate": 0.375,
+        "peak_to_worst_drop": 0.21875,
+        "consistency_rate": 0.71875,
+        "noise_floor_consistency": 0.96875,
+        "resistance_incomplete": 0.0625,
+        "resistance_misleading": 0.0625,
+        "independent_full_denominator_resistance_error": 0.0,
+        "conditional_denominator_negative_control_difference": 0.09134615384615385,
+        "retrieval_field_mutations": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "99c25cffc3354596a1e63d3b86030db50d61bf342822cca5d126599918dd95b1",
+      "metrics": {
+        "tasks": 32,
+        "delivered_success_rate": 0.75,
+        "worst_case_success_rate": 0.34375,
+        "peak_to_worst_drop": 0.40625,
+        "consistency_rate": 0.6875,
+        "noise_floor_consistency": 0.96875,
+        "resistance_incomplete": 0.1875,
+        "resistance_misleading": 0.25,
+        "independent_full_denominator_resistance_error": 0.0,
+        "conditional_denominator_negative_control_difference": 0.1282894736842105,
+        "retrieval_field_mutations": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "718b15d8c656f6f0022dc88084cdb87c9ea627053218646d75688ecbaa2e5032",
+      "metrics": {
+        "tasks": 32,
+        "delivered_success_rate": 0.5625,
+        "worst_case_success_rate": 0.28125,
+        "peak_to_worst_drop": 0.28125,
+        "consistency_rate": 0.78125,
+        "noise_floor_consistency": 0.875,
+        "resistance_incomplete": 0.21875,
+        "resistance_misleading": 0.1875,
+        "independent_full_denominator_resistance_error": 0.0,
+        "conditional_denominator_negative_control_difference": 0.19301470588235292,
+        "retrieval_field_mutations": 0
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    }
+  ],
+  "provenance": {
+    "commit": "0e07707c66eb1d1ce966f128b3871aa437020c4b",
+    "artifact_path": "docs/agent-research/2610.20845-coda/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:71158ec850a7b4cdc6e42f0bc036a7e3c2f2b146c3f7e062176f3945a1bb39f4",
+    "raw_runner_artifact_sha256": "b5055979b988581032c93d4ea231d6e5c0f77c2a24af93d21f7e0c29662b1e59",
+    "executed_source_sha256": {
+      "scripts/run_oct18_agent_components.py": "a632f7c41337f5d77524106e229ec75c9146571a8497459699b5fdb43b86a571",
+      "src/auto_research/agent_research/coda.py": "88d499e4742255b02c946df60dbc67df4993584e8ee300b74939eed583ae91ef"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

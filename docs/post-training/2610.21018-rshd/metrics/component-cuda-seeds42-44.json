@@ -1,0 +1,167 @@
+{
+  "schema_version": 2,
+  "method": "rshd",
+  "manifest_ref": "post-training:rshd",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "fixture:oct18-post-components-v1",
+    "revision": "sha256:892558620552098707845985bf97a045802b1776337d19e011599745d5539a11"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "accepted_notes": {
+      "mean": 37.666666666666664,
+      "std": 6.027713773341708,
+      "n": 3
+    },
+    "answer_leaking_notes_rejected": {
+      "mean": 6.333333333333333,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "aux_loss_reference_max_abs_error": {
+      "mean": 7.401486830834377e-17,
+      "std": 3.204937810639273e-17,
+      "n": 3
+    },
+    "empty_admission_negative_control_abs_loss": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "equal_replay_rate_is_rejected": true,
+    "frozen_behavior_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gradient_norm_min": {
+      "mean": 0.14256835246218777,
+      "std": 0.013612001223226724,
+      "n": 3
+    },
+    "leaking_note_is_rejected": true,
+    "note_writer_receives_reference_answer": false,
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.017942700198837865,
+      "std": 0.003436178848456275,
+      "n": 3
+    },
+    "positive_lift_tokens": {
+      "mean": 53,
+      "std": 11.135528725660043,
+      "n": 3
+    },
+    "rejected_notes": {
+      "mean": 56.666666666666664,
+      "std": 7.767453465154029,
+      "n": 3
+    },
+    "semantic_note_screen_implemented": false,
+    "teacher_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "status": "completed",
+      "metrics": {
+        "parameter_delta_l2": 0.021858145448461225,
+        "gradient_norm_min": 0.1510986453270409,
+        "optimizer_updates": 3,
+        "aux_loss_reference_max_abs_error": 1.1102230246251565e-16,
+        "accepted_notes": 37,
+        "rejected_notes": 59,
+        "answer_leaking_notes_rejected": 6,
+        "positive_lift_tokens": 55,
+        "empty_admission_negative_control_abs_loss": 0.0,
+        "equal_replay_rate_is_rejected": true,
+        "leaking_note_is_rejected": true,
+        "frozen_behavior_delta_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "note_writer_receives_reference_answer": false,
+        "semantic_note_screen_implemented": false
+      }
+    },
+    {
+      "seed": 43,
+      "status": "completed",
+      "metrics": {
+        "parameter_delta_l2": 0.015428837797099833,
+        "gradient_norm_min": 0.14973614769107493,
+        "optimizer_updates": 3,
+        "aux_loss_reference_max_abs_error": 5.551115123125783e-17,
+        "accepted_notes": 44,
+        "rejected_notes": 48,
+        "answer_leaking_notes_rejected": 6,
+        "positive_lift_tokens": 63,
+        "empty_admission_negative_control_abs_loss": 0.0,
+        "equal_replay_rate_is_rejected": true,
+        "leaking_note_is_rejected": true,
+        "frozen_behavior_delta_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "note_writer_receives_reference_answer": false,
+        "semantic_note_screen_implemented": false
+      }
+    },
+    {
+      "seed": 44,
+      "status": "completed",
+      "metrics": {
+        "parameter_delta_l2": 0.01654111735095254,
+        "gradient_norm_min": 0.1268702643684475,
+        "optimizer_updates": 3,
+        "aux_loss_reference_max_abs_error": 5.551115123125783e-17,
+        "accepted_notes": 32,
+        "rejected_notes": 63,
+        "answer_leaking_notes_rejected": 7,
+        "positive_lift_tokens": 41,
+        "empty_admission_negative_control_abs_loss": 0.0,
+        "equal_replay_rate_is_rejected": true,
+        "leaking_note_is_rejected": true,
+        "frozen_behavior_delta_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "note_writer_receives_reference_answer": false,
+        "semantic_note_screen_implemented": false
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "505dbfa7537fd3a325a1c4fc827a3a5629afd132",
+    "artifact_path": "docs/post-training/2610.21018-rshd/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:0130680bf4328e47ee3154055fd641fc037d71f453780fda7271dfbab4d17cac",
+    "raw_runner_artifact_sha256": "1775d38861959f5891ab4a5c8748956a50ccd884a1b28cb9c401afe9b0e93d19",
+    "executed_source_sha256": {
+      "src/auto_research/post_training/reviewed_oct18.py": "4f93007608a535b6012276dd628df80fdd39bce93f944d8e7a77a9c628d8d196",
+      "scripts/run_oct18_post_components.py": "892558620552098707845985bf97a045802b1776337d19e011599745d5539a11"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

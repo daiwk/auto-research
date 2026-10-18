@@ -1,0 +1,132 @@
+{
+  "schema_version": 2,
+  "method": "aria",
+  "manifest_ref": "agent-research:aria",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-aria-contract-fixture",
+    "revision": "a4e22b47f96c8ae816a668c500b1ff994d7293814f3cb0bb6be0ef2fcb7a087c",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert public CPU events/numbers"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "discarded_suffix_events": {
+      "mean": 7.666666666666667,
+      "std": 6.3508529610858835,
+      "n": 3
+    },
+    "independent_prefix_construction_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "invalid_patches_rejected": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "patch_pass_only_negative_control_false_positives": {
+      "mean": 6.333333333333333,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "replacement_events": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "retained_prefix_events": {
+      "mean": 5.666666666666667,
+      "std": 3.7859388972001824,
+      "n": 3
+    },
+    "source_events": {
+      "mean": 13.333333333333334,
+      "std": 5.033222956847166,
+      "n": 3
+    },
+    "verified_paired_fixture_repairs": {
+      "mean": 3,
+      "std": 2.6457513110645907,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "fixture_sha256": "6d6dfc8cda3565cf521effcfcb26f10e12ff65c38b33993b4de43803b07c07b0",
+      "metrics": {
+        "source_events": 18,
+        "retained_prefix_events": 3,
+        "discarded_suffix_events": 15,
+        "replacement_events": 1,
+        "invalid_patches_rejected": 3,
+        "independent_prefix_construction_error": 0,
+        "verified_paired_fixture_repairs": 1,
+        "patch_pass_only_negative_control_false_positives": 6
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 43,
+      "fixture_sha256": "6e5651d19737c2ff4f5801121844205a2c78b3bf46ad1395030bf7126e8f5a5a",
+      "metrics": {
+        "source_events": 8,
+        "retained_prefix_events": 4,
+        "discarded_suffix_events": 4,
+        "replacement_events": 1,
+        "invalid_patches_rejected": 3,
+        "independent_prefix_construction_error": 0,
+        "verified_paired_fixture_repairs": 2,
+        "patch_pass_only_negative_control_false_positives": 6
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    },
+    {
+      "seed": 44,
+      "fixture_sha256": "def3d997f116cba0e659553cf22156e195204ae540b6977aa0ec9801b8b2b6c7",
+      "metrics": {
+        "source_events": 14,
+        "retained_prefix_events": 10,
+        "discarded_suffix_events": 4,
+        "replacement_events": 1,
+        "invalid_patches_rejected": 3,
+        "independent_prefix_construction_error": 0,
+        "verified_paired_fixture_repairs": 6,
+        "patch_pass_only_negative_control_false_positives": 7
+      },
+      "seed_role": "randomized inert public contract fixture; no model training or capability evaluation"
+    }
+  ],
+  "provenance": {
+    "commit": "0e07707c66eb1d1ce966f128b3871aa437020c4b",
+    "artifact_path": "docs/agent-research/2610.20780-aria/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "sha256:23462135daea663dd9d83264b2be39b9ea9a460f19e0bd063dbbb7cc3bab7ddc",
+    "raw_runner_artifact_sha256": "b5055979b988581032c93d4ea231d6e5c0f77c2a24af93d21f7e0c29662b1e59",
+    "executed_source_sha256": {
+      "scripts/run_oct18_agent_components.py": "a632f7c41337f5d77524106e229ec75c9146571a8497459699b5fdb43b86a571",
+      "src/auto_research/agent_research/aria_repair.py": "f4ba03a5c95db08160381698bc9d53f995655ed54accedc25413cf5be6879935"
+    },
+    "accelerator": "CPU"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

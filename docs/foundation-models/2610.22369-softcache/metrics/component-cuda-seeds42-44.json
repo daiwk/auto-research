@@ -1,0 +1,150 @@
+{
+  "schema_version": 2,
+  "method": "softcache",
+  "manifest_ref": "foundation-models:softcache",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-memory-spatial-vision-recurrence-and-ode",
+    "revision": "oct18-foundation-mechanisms-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "cache_disabled_euler_reference_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "endpoint_error_to_full_euler": {
+      "mean": 0.026247908049816308,
+      "std": 0.011807232609094411,
+      "n": 3
+    },
+    "fresh_evaluations": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "full_euler_model_evaluations": {
+      "mean": 20,
+      "std": 0.0,
+      "n": 3
+    },
+    "hard_cache_negative_control_difference": {
+      "mean": 0.00493378116795927,
+      "std": 0.0026287618003326134,
+      "n": 3
+    },
+    "headroom_jumps": {
+      "mean": 6,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "residual_extrapolation_reference_max_error": {
+      "mean": 2.9605947323337506e-16,
+      "std": 1.2819751242557092e-16,
+      "n": 3
+    },
+    "residual_network_gradient_norm": {
+      "mean": 0.3208191845330295,
+      "std": 0.019816175798394436,
+      "n": 3
+    },
+    "residual_network_update_norm": {
+      "mean": 0.0032081918453302923,
+      "std": 0.00019816175798394016,
+      "n": 3
+    },
+    "visited_nodes": {
+      "mean": 11,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "cache_disabled_euler_reference_max_error": 0.0,
+        "residual_extrapolation_reference_max_error": 4.440892098500626e-16,
+        "hard_cache_negative_control_difference": 0.0035227448703088055,
+        "fresh_evaluations": 3,
+        "visited_nodes": 11,
+        "headroom_jumps": 6,
+        "full_euler_model_evaluations": 20,
+        "endpoint_error_to_full_euler": 0.023281878383638755,
+        "residual_network_gradient_norm": 0.34157463206453614,
+        "residual_network_update_norm": 0.0034157463206453543,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "cache_disabled_euler_reference_max_error": 0.0,
+        "residual_extrapolation_reference_max_error": 2.220446049250313e-16,
+        "hard_cache_negative_control_difference": 0.0033118283657471714,
+        "fresh_evaluations": 3,
+        "visited_nodes": 11,
+        "headroom_jumps": 6,
+        "full_euler_model_evaluations": 20,
+        "endpoint_error_to_full_euler": 0.016206481772821767,
+        "residual_network_gradient_norm": 0.3020994363368379,
+        "residual_network_update_norm": 0.00302099436336838,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "cache_disabled_euler_reference_max_error": 0.0,
+        "residual_extrapolation_reference_max_error": 2.220446049250313e-16,
+        "hard_cache_negative_control_difference": 0.007966770267821832,
+        "fresh_evaluations": 3,
+        "visited_nodes": 11,
+        "headroom_jumps": 6,
+        "full_euler_model_evaluations": 20,
+        "endpoint_error_to_full_euler": 0.0392553639929884,
+        "residual_network_gradient_norm": 0.3187834851977144,
+        "residual_network_update_norm": 0.003187834851977143,
+        "optimizer_steps": 1
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "1e163ea726a9af6717f10705f8db8e89f8dc49ba",
+    "artifact_path": "docs/foundation-models/2610.22369-softcache/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:3b64f5506f57c4ee9afe7f0de3601a40d6cd9a39381308973fa138c2ee2ac15b",
+    "raw_runner_artifact_sha256": "a66b20ff60717423fe95f9d8dbf1e6a888d0668df4f70e27389734f4b1b92bc8",
+    "executed_source_sha256": {
+      "scripts/run_oct18_foundation_components.py": "a22ea15de5dba5b92428d69eb6f3e38fe87f46426ec5c844490cb72f723ec14b",
+      "src/auto_research/foundation_models/softcache.py": "990bb19218e76ae723dcadb700f26f7b44167d6e48014177e2103a507e21c33e"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

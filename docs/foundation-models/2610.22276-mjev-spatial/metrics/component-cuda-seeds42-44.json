@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "method": "mjev-spatial",
+  "manifest_ref": "foundation-models:mjev-spatial",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-memory-spatial-vision-recurrence-and-ode",
+    "revision": "oct18-foundation-mechanisms-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded mechanism/protocol diagnostic, not capability evidence"
+  },
+  "metrics": {
+    "count_roundtrip_errors": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "native_gqa_reference_max_error": {
+      "mean": 9.251858538542972e-17,
+      "std": 3.204937810639273e-17,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "original_crop_checksum": {
+      "mean": 28242.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "query_gradient_norm": {
+      "mean": 1.4714563876355415,
+      "std": 0.117402913184647,
+      "n": 3
+    },
+    "query_update_norm": {
+      "mean": 0.014714563876355424,
+      "std": 0.0011740291318464702,
+      "n": 3
+    },
+    "question_normalized_loss_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "training_loss": {
+      "mean": 1.140775823446819,
+      "std": 0.040878335390651756,
+      "n": 3
+    },
+    "wrong_gqa_group_negative_control_error": {
+      "mean": 0.7684275687326859,
+      "std": 0.11424027508861276,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "native_gqa_reference_max_error": 5.551115123125783e-17,
+        "wrong_gqa_group_negative_control_error": 0.7441970591124342,
+        "question_normalized_loss_max_error": 0.0,
+        "count_roundtrip_errors": 0,
+        "original_crop_checksum": 28242.0,
+        "query_gradient_norm": 1.5690152052042279,
+        "query_update_norm": 0.015690152052042293,
+        "training_loss": 1.0964103080066354,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "native_gqa_reference_max_error": 1.1102230246251565e-16,
+        "wrong_gqa_group_negative_control_error": 0.6682463309218084,
+        "question_normalized_loss_max_error": 0.0,
+        "count_roundtrip_errors": 0,
+        "original_crop_checksum": 28242.0,
+        "query_gradient_norm": 1.5041947797304638,
+        "query_update_norm": 0.01504194779730464,
+        "training_loss": 1.1769161627663762,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "native_gqa_reference_max_error": 1.1102230246251565e-16,
+        "wrong_gqa_group_negative_control_error": 0.8928393161638153,
+        "question_normalized_loss_max_error": 0.0,
+        "count_roundtrip_errors": 0,
+        "original_crop_checksum": 28242.0,
+        "query_gradient_norm": 1.3411591779719327,
+        "query_update_norm": 0.013411591779719338,
+        "training_loss": 1.1490009995674453,
+        "optimizer_steps": 1
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "1e163ea726a9af6717f10705f8db8e89f8dc49ba",
+    "artifact_path": "docs/foundation-models/2610.22276-mjev-spatial/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:3324d2b4e544d5bccbf0a63ea9fe4cbdb7c9f34f79ee8e49bb63b22cff53db89",
+    "raw_runner_artifact_sha256": "a66b20ff60717423fe95f9d8dbf1e6a888d0668df4f70e27389734f4b1b92bc8",
+    "executed_source_sha256": {
+      "scripts/run_oct18_foundation_components.py": "a22ea15de5dba5b92428d69eb6f3e38fe87f46426ec5c844490cb72f723ec14b",
+      "src/auto_research/foundation_models/mjev_spatial.py": "df5b9d357a4deb4745a61f25e23c0dd8f0abd49c4ec1f1f0f13e6738c137d20e"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
