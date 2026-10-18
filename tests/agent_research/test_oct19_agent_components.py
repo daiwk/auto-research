@@ -111,6 +111,17 @@ def test_alpha_latest_not_best_and_requested_missing_denominator():
         diana.summarize(rows, requested_samples=[("other", "s")])
 
 
+def test_alpha_missing_requested_sample_prevents_complete_cost_claim():
+    rows = [_record(output_tokens=7)]
+    complete = diana.summarize(rows, requested_samples=[("t", "s")])
+    assert complete["complete_output_tokens_per_correct"] == 7
+    missing = diana.summarize(rows, requested_samples=[("t", "s"), ("not-recorded", "s")])
+    assert missing["correct_samples"] == 1 and missing["missing_samples"] == 1
+    assert missing["token_recording_coverage"] == 1
+    assert missing["known_output_tokens_all_attempts"] == 7
+    assert missing["complete_output_tokens_per_correct"] is None
+
+
 def test_alpha_grader_failure_retained_not_actor_failure():
     runner = diana.ProtocolRunner(diana.SessionPolicy())
 

@@ -208,4 +208,4 @@ explicit and prevents a falsely complete tokens/correct claim.
             "score_coverage": scored/len(requested), "known_output_tokens_all_attempts": known_tokens,
             "token_recording_coverage": captured/len(rows) if rows else 0.,
             "complete_output_tokens_per_correct": (known_tokens/correct
-                if correct and captured == len(rows) else None)}
+                if correct and captured == len(rows) and len(latest) == len(requested) else None)}
