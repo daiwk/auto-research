@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "method": "drago",
+  "manifest_ref": "agent-research:drago",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-drago-contract-fixture",
+    "revision": "cfa490eb46c5917c48c368fb71e4a224cc3e41749626b355729a451da3aec5fa",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert graph, paired-control and grounded STRIPS fixtures"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "fixture_tasks": 9,
+        "accepted_evidence_backed_repairs": 9,
+        "blocked_goal_weakening_repairs": 9,
+        "delete_relaxation_unreachable_findings": 9,
+        "joint_unsolvability_proofs": 9,
+        "budget_exhaustion_retained_as_unknown": 9,
+        "accept_any_negative_control_weakening_admissions": 9,
+        "gold_inputs_to_proposer": 0
+      },
+      "audit_sha256": "b9b06224315e86dd4a1413419c2723b925b594d67f47585006492f5a7f9e55a8",
+      "fixture_sha256": "5f70837516112c6b577cebd718a45392d9d0a8a2a34c33ef535c6ed4335ed9d5"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "fixture_tasks": 9,
+        "accepted_evidence_backed_repairs": 9,
+        "blocked_goal_weakening_repairs": 9,
+        "delete_relaxation_unreachable_findings": 9,
+        "joint_unsolvability_proofs": 9,
+        "budget_exhaustion_retained_as_unknown": 9,
+        "accept_any_negative_control_weakening_admissions": 9,
+        "gold_inputs_to_proposer": 0
+      },
+      "audit_sha256": "08480c82f95e0c6a6b18f699373705dd8ac8e177ff34c18ae586c4c16c66208a",
+      "fixture_sha256": "4755408ed9e1fabc60e4b8151fa7c327911484e9fe0e89a92293bdb9c7fe16bb"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "fixture_tasks": 12,
+        "accepted_evidence_backed_repairs": 12,
+        "blocked_goal_weakening_repairs": 12,
+        "delete_relaxation_unreachable_findings": 12,
+        "joint_unsolvability_proofs": 12,
+        "budget_exhaustion_retained_as_unknown": 12,
+        "accept_any_negative_control_weakening_admissions": 12,
+        "gold_inputs_to_proposer": 0
+      },
+      "audit_sha256": "443fcac95d6a23b4150d98c4034585f9c25fc5dc739851c78ea550cbc5346451",
+      "fixture_sha256": "87453aac67682f7fd164154a5f90e29f8f4bcf7b74685e59dc01e8a3675e1e04"
+    }
+  ],
+  "metrics": {
+    "accept_any_negative_control_weakening_admissions": {
+      "mean": 10,
+      "std": 1.7320508075688772,
+      "n": 3
+    },
+    "accepted_evidence_backed_repairs": {
+      "mean": 10,
+      "std": 1.7320508075688772,
+      "n": 3
+    },
+    "blocked_goal_weakening_repairs": {
+      "mean": 10,
+      "std": 1.7320508075688772,
+      "n": 3
+    },
+    "budget_exhaustion_retained_as_unknown": {
+      "mean": 10,
+      "std": 1.7320508075688772,
+      "n": 3
+    },
+    "delete_relaxation_unreachable_findings": {
+      "mean": 10,
+      "std": 1.7320508075688772,
+      "n": 3
+    },
+    "fixture_tasks": {
+      "mean": 10,
+      "std": 1.7320508075688772,
+      "n": 3
+    },
+    "gold_inputs_to_proposer": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "joint_unsolvability_proofs": {
+      "mean": 10,
+      "std": 1.7320508075688772,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/agent-research/2610.22568-drago/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "693af5d4ae0925789b58e41336cb028edc8b2aff1f94ec853eb9d022e3a74707",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_agent_components.py": "c5e0d165396f3a5aa44fe8fc2fb619c8cbb9539c9547cf8de7645011172e936f",
+      "src/auto_research/agent_research/proper_agent.py": "e4d2183c97f9e8d2147432ac12469af127ec75ee51f431b7ce9aa81abef3371f",
+      "src/auto_research/agent_research/harness_decomposition.py": "aa9a1c9dd39546a8cdabd3b22497337ae2333b7de86cedcd17267c4d36872122",
+      "src/auto_research/agent_research/drago.py": "e8413d7ac0edb5c7cb27732022c9c88983c1d28ccb852438513ee173d2847d6c"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:d8edd4d8d4f34fd39b611bec9bc77c6a93ce6ddea66ca49bea3e794b179d77cc"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

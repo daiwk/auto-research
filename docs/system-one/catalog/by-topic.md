@@ -1,5 +1,9 @@
 # 结构化决策：按主题
 
+## 检索判定与重排评测
+
+- [Jev 葡语 IR](../../foundation-models/2610.23346-jev-portuguese-ir/README.md)：Choice 保留原始有序 qrels，Noul 独立概率收齐所有批次后排序；提供线性 nDCG/MRR、κ 和 τ-b，fixture 不冒充模型能力。
+
 ## 类型化决策协议
 
 - [TypeSafe Jev](../implementations.md#official-jev)：Choice、Score、Noul 三类问题共享状态输入，返回机器可直接消费的概率化结果。

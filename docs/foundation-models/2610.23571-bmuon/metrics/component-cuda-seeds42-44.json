@@ -1,0 +1,147 @@
+{
+  "schema_version": 2,
+  "method": "bmuon",
+  "manifest_ref": "foundation-models:bmuon",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-role-decoder-mlp-attention",
+    "revision": "oct19-evening-foundation-mechanisms-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "loss": 11.936492359891925,
+        "gradient_norm": 17.10894362608396,
+        "parameter_update_norm": 0.02349626683999282,
+        "allocation_reference_max_error": 4.593547764386585e-15,
+        "parameter_update_reference_max_error": 3.470668197280702e-12,
+        "global_budget_absolute_error": 0.0,
+        "mm_objective_gain": 16.37808592619244,
+        "ordinary_muon_direction_difference_norm": 1.4661214563127216,
+        "allocation_min": 3.2764500847252174e-06,
+        "allocation_max": 1.0
+      },
+      "audit_sha256": "d13536640ed8c5a3e9f1717eabbcb42d9328844861fc85de766b83987c436ce8"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "loss": 2.738900082066437,
+        "gradient_norm": 1.1964472037856606,
+        "parameter_update_norm": 0.020690805187581027,
+        "allocation_reference_max_error": 8.881784197001252e-16,
+        "parameter_update_reference_max_error": 1.1796119636642288e-16,
+        "global_budget_absolute_error": 0.0,
+        "mm_objective_gain": 0.405831421814419,
+        "ordinary_muon_direction_difference_norm": 1.3948988182577542,
+        "allocation_min": 0.025886546017653583,
+        "allocation_max": 0.8483967931041714
+      },
+      "audit_sha256": "31bcc60f42bb9929632d3ac89a81a54a96b9cbecc55e26f8bb16db45640af7e3"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "loss": 9.436987177079638,
+        "gradient_norm": 12.882313373236821,
+        "parameter_update_norm": 0.02097676328763621,
+        "allocation_reference_max_error": 8.28503932126523e-15,
+        "parameter_update_reference_max_error": 2.7533531010703882e-14,
+        "global_budget_absolute_error": 0.0,
+        "mm_objective_gain": 10.079988521833197,
+        "ordinary_muon_direction_difference_norm": 1.574722754795576,
+        "allocation_min": 0.009919001886369572,
+        "allocation_max": 1.0
+      },
+      "audit_sha256": "95e74c6268419a8658962568031216ec3dfb9ed99bc201a48c75a7f22a8d76de"
+    }
+  ],
+  "metrics": {
+    "allocation_max": {
+      "mean": 0.9494655977013905,
+      "std": 0.08752815231131718,
+      "n": 3
+    },
+    "allocation_min": {
+      "mean": 0.011936274784702626,
+      "std": 0.013059018084703796,
+      "n": 3
+    },
+    "allocation_reference_max_error": {
+      "mean": 4.588921835117314e-15,
+      "std": 3.6984326205423615e-15,
+      "n": 3
+    },
+    "global_budget_absolute_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 10.39590140103548,
+      "std": 8.242485606238185,
+      "n": 3
+    },
+    "loss": {
+      "mean": 8.037459873012667,
+      "std": 4.755831518609599,
+      "n": 3
+    },
+    "mm_objective_gain": {
+      "mean": 8.954635289946685,
+      "std": 8.045374037951502,
+      "n": 3
+    },
+    "ordinary_muon_direction_difference_norm": {
+      "mean": 1.478581009788684,
+      "std": 0.09055712226327046,
+      "n": 3
+    },
+    "parameter_update_norm": {
+      "mean": 0.021721278438403352,
+      "std": 0.00154382022207239,
+      "n": 3
+    },
+    "parameter_update_reference_max_error": {
+      "mean": 1.1661065631625907e-12,
+      "std": 1.9958559936663557e-12,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/foundation-models/2610.23571-bmuon/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "39f5aad1928f8ec9e58db4529f6f9f8d40a0ab895023da466e4d490455ace199",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_foundation_components.py": "21f1d5f522e852df9e1c68597b0157858a94baf425a76e1fade6e7ca9159c4ce",
+      "src/auto_research/foundation_models/ego_p2c.py": "fc3170806bc42884273cef4409e2df6eea29e6bf0c4d69009f36521cffa9bd03",
+      "src/auto_research/foundation_models/bmuon.py": "9024bd9af8dbf65ef4bf6c1253190aad933fba13e02598bbeea32ffab934b0d5",
+      "src/auto_research/foundation_models/sink_sparse.py": "c21b383a5392d294793c98015dde2b49e6e9a7e5267caca847615dbfbec79308"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:7705801b492674ba20328e9479eda585fcbc89f97ba86b4c714559bf49cf0775"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

@@ -76,6 +76,20 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2609.11052-unirec": "3",
+    "2610.23346-jev-portuguese-ir": "1",
+    "2610.22671-proper-agent": "5",
+    "2610.22466-harness-decomposition": "2",
+    "2610.22568-drago": "2",
+    "2610.22681-ego-p2c": "2",
+    "2610.23571-bmuon": "1",
+    "2610.22975-sink-sparse": "4",
+    "2610.23795-ppmem": "2",
+    "2610.23181-treeopsd": "2",
+    "2610.23306-simopd": "2",
+    "2610.23042-gr-opd": "2",
+    "2610.23245-mge-po": "1",
+    "2610.23234-multiagent-opd": "1",
     "2608.26263-skill-state": "1",
     "2610.21257-fpot": "1",
     "2610.22182-lamp": "1",
@@ -156,6 +170,31 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.22975-sink-sparse": {
+        "pdf_url": "https://arxiv.org/pdf/2610.22975v1", "page": 5,
+        "rect": (70, 93, 542, 335), "label": "Figure 4",
+        "caption": "Sink-Sparse 的离线 block-mass 校准、静态 mask、在线稀疏注意力及 pooled-KV/LSE 融合。使用白底 PDF 原图，避免 HTML 透明图转 RGB 后黑字不可读。",
+    },
+    "2610.22671-proper-agent": {
+        "pdf_url": "https://arxiv.org/pdf/2610.22671v1", "page": 9,
+        "rect": (302, 142, 543, 419), "label": "Figure 5",
+        "caption": "ProPerAgent 的观察、情节/语义记忆检索、gate 与生成器闭环。PDF Figure 5 才是方法图；Figure 8 是数据构建流程，不混淆二者。",
+    },
+    "2610.22466-harness-decomposition": {
+        "pdf_url": "https://arxiv.org/pdf/2610.22466v1", "page": 2,
+        "rect": (105, 70, 507, 237), "label": "Figure 2",
+        "caption": "HDA 将观测收益拆成额外测试算力、检测到的过拟合与剩余可泛化上界；四臂位置和带符号区间均保留。",
+    },
+    "2610.23571-bmuon": {
+        "pdf_url": "https://arxiv.org/pdf/2610.23571v1", "page": 1,
+        "rect": (315, 214, 525, 426), "label": "Figure 1",
+        "caption": "ImageNet-1K 上原论文的全局 MLP 通道剪枝准确率曲线，比较 Muon 与 BMuon；这是作者结果，不是架构图或本地精度测量。",
+    },
+    "2610.23234-multiagent-opd": {
+        "pdf_url": "https://arxiv.org/pdf/2610.23234v1", "page": 1,
+        "rect": (70, 318, 542, 542), "label": "Figure 1",
+        "caption": "MultiAgent-OPD 的多波 Leader–Searcher–Answerer 工作流及冻结教师提供的角色局部 OPD 与结果 RL 两条信号。",
+    },
     "2610.21257-fpot": {
         "pdf_url": "https://arxiv.org/pdf/2610.21257v1",
         "page": 3,
@@ -713,6 +752,12 @@ def update_page(paper: Paper, result: FigureResult) -> None:
     text = paper.page.read_text(encoding="utf-8")
     description = chinese_description(result.original_caption)
     reviewed_descriptions = {
+        **{key: str(SPECIAL_CROPS[key]["caption"]) for key in (
+            "2610.22671-proper-agent", "2610.22466-harness-decomposition", "2610.23571-bmuon", "2610.23234-multiagent-opd", "2610.22975-sink-sparse",
+        )},
+        "2610.22568-drago": "DRAGO 在三种形式体系上的组件消融结果；是原文结果图，不是本地规划成功率。",
+        "2610.23346-jev-portuguese-ir": "NormasTCU 使用原始 qrels 与 Jev qrels 后的系统排名热力图；颜色和数字表示排名变化，不是本地模型评测。",
+        "2609.11052-unirec": "UniRec v3 的双阶段融合塔、共享 embedding、双轴偏好目标和 AGRR 组内 KL；不是旧 NumPy 固定融合评分器的结构。",
         "2608.26263-skill-state": str(SPECIAL_CROPS["2608.26263-skill-state"]["caption"]),
         "2610.21257-fpot": str(SPECIAL_CROPS["2610.21257-fpot"]["caption"]),
         "2610.22182-lamp": "全局及三层原生区域特征分别拟合支持标签残差，再在类别分数空间选择混合；图中示例为原文 CLIP 结果，不是本地随机特征诊断。",

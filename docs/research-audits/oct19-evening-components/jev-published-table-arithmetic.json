@@ -1,0 +1,35 @@
+{
+  "source_url": "https://arxiv.org/html/2610.23346v1",
+  "tables": {
+    "Quati": {
+      "judgments": 1933,
+      "exact_agreement": 0.5292291774443869,
+      "within_one_level": 0.9746508018623901,
+      "quadratic_weighted_kappa": 0.6796804488027177
+    },
+    "JurisTCU": {
+      "judgments": 2250,
+      "exact_agreement": 0.6426666666666667,
+      "within_one_level": 0.9533333333333334,
+      "quadratic_weighted_kappa": 0.8199843614403632
+    },
+    "NormasTCU": {
+      "judgments": 812,
+      "exact_agreement": 0.5480295566502463,
+      "within_one_level": 0.9445812807881774,
+      "quadratic_weighted_kappa": 0.5167778233521505
+    },
+    "Ulysses-RFCorpus": {
+      "judgments": 8205,
+      "exact_agreement": 0.6486288848263254,
+      "within_one_level": 0.9457647775746496,
+      "quadratic_weighted_kappa": 0.6494659019406489
+    }
+  },
+  "new_model_inference": false,
+  "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+  "provenance": {
+    "raw_runner_artifact_sha256": "c1b928b36173ac0ff4ec55cea6689de8dadf52380cfc8d4b582150bc9f7fe93c"
+  },
+  "evidence_kind": "recalculation_of_published_aggregate_tables_not_model_evaluation"
+}

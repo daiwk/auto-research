@@ -1,0 +1,147 @@
+{
+  "schema_version": 2,
+  "method": "sink-sparse",
+  "manifest_ref": "foundation-models:sink-sparse",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-role-decoder-mlp-attention",
+    "revision": "oct19-evening-foundation-mechanisms-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "loss": 1.1771239522830932,
+        "virtual_union_reference_max_error": 4.440892098500626e-16,
+        "gradient_reference_max_error": 8.673617379884035e-18,
+        "gradient_norm": 0.13057376496100948,
+        "parameter_update_norm": 0.001305737649610168,
+        "sink_block_density": 0.28125,
+        "heldout_dense_output_rmse": 0.11300584276314159,
+        "fixed_average_negative_max_difference": 0.05625229265314102,
+        "missing_pool_correction_negative_max_difference": 0.20181828040322503,
+        "calibration_mask_mutation_count": 0
+      },
+      "audit_sha256": "bd4d6ea060e08080efc5d3bf826e7b9b883a9a1eee07a75d72b522b4e3eb6fe1"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "loss": 1.2789750887576408,
+        "virtual_union_reference_max_error": 3.3306690738754696e-16,
+        "gradient_reference_max_error": 1.3877787807814457e-17,
+        "gradient_norm": 0.15924158532350083,
+        "parameter_update_norm": 0.0015924158532350013,
+        "sink_block_density": 0.25,
+        "heldout_dense_output_rmse": 0.10881636066995583,
+        "fixed_average_negative_max_difference": 0.10411338290488492,
+        "missing_pool_correction_negative_max_difference": 0.1964552337695551,
+        "calibration_mask_mutation_count": 0
+      },
+      "audit_sha256": "39164845297c206c9ffc4bcdee0020bc046c4dadcc4a43fc192a2d3763afb51f"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "loss": 1.4094966428778266,
+        "virtual_union_reference_max_error": 4.440892098500626e-16,
+        "gradient_reference_max_error": 2.7755575615628914e-17,
+        "gradient_norm": 0.21056216343482417,
+        "parameter_update_norm": 0.0021056216343482057,
+        "sink_block_density": 0.25,
+        "heldout_dense_output_rmse": 0.13545331486009746,
+        "fixed_average_negative_max_difference": 0.06020165985841075,
+        "missing_pool_correction_negative_max_difference": 0.2024344501874482,
+        "calibration_mask_mutation_count": 0
+      },
+      "audit_sha256": "8724b8197c4899c5d7e8fc12045c1459830bd675a61d5684b0555b610a90d66b"
+    }
+  ],
+  "metrics": {
+    "calibration_mask_mutation_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixed_average_negative_max_difference": {
+      "mean": 0.07352244513881223,
+      "std": 0.026566021162122005,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 0.16679250457311148,
+      "std": 0.040525279255509715,
+      "n": 3
+    },
+    "gradient_reference_max_error": {
+      "mean": 1.6768993601109134e-17,
+      "std": 9.864055237683104e-18,
+      "n": 3
+    },
+    "heldout_dense_output_rmse": {
+      "mean": 0.11909183943106495,
+      "std": 0.014323454496503513,
+      "n": 3
+    },
+    "loss": {
+      "mean": 1.2885318946395201,
+      "std": 0.11648075479475943,
+      "n": 3
+    },
+    "missing_pool_correction_negative_max_difference": {
+      "mean": 0.20023598812007612,
+      "std": 0.0032886918212239207,
+      "n": 3
+    },
+    "parameter_update_norm": {
+      "mean": 0.001667925045731125,
+      "std": 0.00040525279255504567,
+      "n": 3
+    },
+    "sink_block_density": {
+      "mean": 0.2604166666666667,
+      "std": 0.018042195912175804,
+      "n": 3
+    },
+    "virtual_union_reference_max_error": {
+      "mean": 4.070817756958907e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/foundation-models/2610.22975-sink-sparse/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "39f5aad1928f8ec9e58db4529f6f9f8d40a0ab895023da466e4d490455ace199",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_foundation_components.py": "21f1d5f522e852df9e1c68597b0157858a94baf425a76e1fade6e7ca9159c4ce",
+      "src/auto_research/foundation_models/ego_p2c.py": "fc3170806bc42884273cef4409e2df6eea29e6bf0c4d69009f36521cffa9bd03",
+      "src/auto_research/foundation_models/bmuon.py": "9024bd9af8dbf65ef4bf6c1253190aad933fba13e02598bbeea32ffab934b0d5",
+      "src/auto_research/foundation_models/sink_sparse.py": "c21b383a5392d294793c98015dde2b49e6e9a7e5267caca847615dbfbec79308"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:7705801b492674ba20328e9479eda585fcbc89f97ba86b4c714559bf49cf0775"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

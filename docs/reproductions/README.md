@@ -98,7 +98,7 @@ pytest tests/test_research_module_docs.py
 - `gese` · [GESE](2609.15094-gese/README.md)：集合级标题探索、忠实度约束与上下文个性化选择。
 - `lazformer` · [LazFormer](2609.14978-lazformer/README.md)：可迁移生成式预训练、排序残差适配与近密远疏注意力。
 - `sirf` · [SIRF](2609.11752-sirf/README.md)：将策略规范内化为可训练交互特征，并以独立的高分位误惩罚约束验证策略决策。
-- `unirec` · [UniRec](2609.11052-unirec/README.md)：统一预排/精排融合、纵向偏好对齐与组相对正则。
+- `unirec` · [UniRec](2609.11052-unirec/README.md)：原文联合预排/精排融合；旧固定 NumPy scorer 是概念演示，新增 v3 CPPA/CAPP 与 AGRR KL 为独立 A100 机制组件，不宣称完整复现。
 - `sequenceo1` · [SequenceO1](2609.08443-sequenceo1/README.md)：固定预算 Sketch Attention、近期分支与超长序列缓存设计。
 - `baff` · [BAFF](2609.08725-baff/README.md)：RTB 共享日志的广告排名/出价双轴干扰过滤。
 - `allecompanion` · [AlleCompanion](2609.05063-allecompanion/README.md)：类别约束双塔、ComCat 互补类别图与受控 Category Adapter。

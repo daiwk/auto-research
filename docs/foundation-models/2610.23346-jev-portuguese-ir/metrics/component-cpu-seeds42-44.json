@@ -1,0 +1,109 @@
+{
+  "schema_version": 2,
+  "method": "jev-portuguese-ir",
+  "manifest_ref": "foundation-models:jev-portuguese-ir",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-portuguese-ir-protocol-fixture",
+    "revision": "oct19-evening-portuguese-ir-v1",
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "batched_ranking_reference_errors": 0,
+        "invalid_response_negative_controls_rejected": 4,
+        "linear_ndcg_reference_max_error": 0.0,
+        "scored_candidates": 5,
+        "provider_has_gold_access": false,
+        "real_backend_used": false,
+        "language_model_evaluated": false
+      },
+      "audit_sha256": "39cb1e023a32a84e12d2ff2340ae6424baddfef0b1b38973e772cd5a48b6b9de"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "batched_ranking_reference_errors": 0,
+        "invalid_response_negative_controls_rejected": 4,
+        "linear_ndcg_reference_max_error": 0.0,
+        "scored_candidates": 5,
+        "provider_has_gold_access": false,
+        "real_backend_used": false,
+        "language_model_evaluated": false
+      },
+      "audit_sha256": "56a919d0786a6dced19c77dc5f1e32192bba8a1916dfd17941260b38ee8800a9"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "batched_ranking_reference_errors": 0,
+        "invalid_response_negative_controls_rejected": 4,
+        "linear_ndcg_reference_max_error": 0.0,
+        "scored_candidates": 5,
+        "provider_has_gold_access": false,
+        "real_backend_used": false,
+        "language_model_evaluated": false
+      },
+      "audit_sha256": "41ab25c238caacb31c594c992f427eaff1e3e53a55274371c3d7c3656b2aa41e"
+    }
+  ],
+  "metrics": {
+    "batched_ranking_reference_errors": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "invalid_response_negative_controls_rejected": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "language_model_evaluated": false,
+    "linear_ndcg_reference_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "provider_has_gold_access": false,
+    "real_backend_used": false,
+    "scored_candidates": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/foundation-models/2610.23346-jev-portuguese-ir/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "c1b928b36173ac0ff4ec55cea6689de8dadf52380cfc8d4b582150bc9f7fe93c",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_system_one.py": "8f1724fb99a7019ffa81f20b46aeb9956dde6f3e83d385bfab1acf0b14585893",
+      "src/auto_research/system_one/portuguese_ir.py": "d00dbceaf39c12549f81098be6be0e11294e58a4ea4c5480ae9a89a625bfd6a9",
+      "src/auto_research/system_one/contracts.py": "e3782b796ebdd91f1a7e7d9b9e8d4fe77eb857402f3c19d428ae234acb69d4f1"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:c07bf2dd66bdb3a1852a50aed5fe1a3421eed02aae371f7d091daf6c527cbad7"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

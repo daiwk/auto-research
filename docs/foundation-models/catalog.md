@@ -10,12 +10,17 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 预训练与数据 | [BMuon: Budgeting Muon's Spectral Geometry for Structured Compressibility](2610.23571-bmuon/README.md) | Inria，2026-10-16 | [原作者入口](https://github.com/RidaAssalouh/BMuon)；作者官方仓库存在，但本轮仅有README，明确Implementation and reproduction scripts will be released soon；尚未发布可运行实现，未核到代码许可证 | `bmuon`：仅低成本组件，完整实验不复现 |
+| System One / JEV | [Jev-as-a-Judge for Brazilian Portuguese Information Retrieval: Relevance Assessment and Reranking](2610.23346-jev-portuguese-ir/README.md) | Câmara dos Deputados，2026-10-16 | 未发现官方代码 | `jev-portuguese-ir`：CPU 评测接口，不执行模型 |
+| 多模态基础模型 | [Persistent Planar Memory for Video World Models](2610.23795-ppmem/README.md) | Tsinghua University，2026-10-16 | 未发现官方代码 | 计划键 `ppmem`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 推理与系统效率 | [Sink-Sparse Hybrid Attention for Efficient Inference in T2I/T2V Diffusion Transformers](2610.22975-sink-sparse/README.md) | Xi'an Jiaotong University，2026-10-16 | 未发现官方代码 | `sink-sparse`：仅低成本组件，完整实验不复现 |
 | 多模态基础模型 | [AdaLoop: Thinking with the Vision Encoder](2610.21323-adaloop-vision/README.md) | Harvard University，2026-10-15 | 未发现官方代码 | `adaloop-vision`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [Architecting for Hardware Diversity: Meta's End-to-End Co-Design for High-Performance AI Training on AMD GPUs](2610.22230-hardware-diversity/README.md) | Meta，2026-10-15 | 论文称改动已上游至 PyTorch、Triton、ROCm；未找到独立整套复现仓库 | 计划键 `hardware-diversity`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 预训练与数据 | [BitSparse: Compact Activation Storage for ReLU Feed-Forward Networks](2610.22256-bit-sparse/README.md) | University of Cambridge，2026-10-15 | [原作者入口](https://github.com/Maxzhu123/Bitmask_Sparsity)；公开实现，许可证未确认；本地独立实现，不复制上游代码 | `bit-sparse`：仅低成本组件，完整实验不复现 |
 | KV缓存 | [Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches](2610.21126-rope-relay/README.md) | National University of Defense Technology，2026-10-15 | 未找到已发布的方法仓库；原文附录A.1称将发布 | `rope-relay`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Designing Transformers for Continuous Diffusion Language Models](2610.22330-langdit/README.md) | Dots Studio, Xiaohongshu，2026-10-15 | 未发现官方代码 | `langdit`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction](2610.22130-drop-kv/README.md) | University at Albany, SUNY，2026-10-15 | [原作者入口](https://github.com/AozhongZhang/DropKV)；Apache-2.0 | `drop-kv`：仅低成本组件，完整实验不复现 |
+| 多模态基础模型 | [EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video](2610.22681-ego-p2c/README.md) | Arizona State University，2026-10-15 | 未发现官方代码 | `ego-p2c`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference](2610.21257-fpot/README.md) | Seoul National University，2026-10-15 | 未发现官方代码 | `fpot`：仅低成本组件，完整实验不复现 |
 | 多模态基础模型 | [Gen4P: Video Generators are 4D Perceivers](2610.22371-gen4p/README.md) | Nanyang Technological University，2026-10-15 | [原作者入口](https://github.com/yitongx/Gen4P)；官方仓库已存在，但本轮检查仅有README与assets，Installation和Usage均为WIP；未发布可运行训练/推理源代码，不能把项目占位等同于实现已开源 | 计划键 `gen4p`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 多模态基础模型 | [LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation](2610.22182-lamp/README.md) | Taizhou Institute of Science and Technology, Nanjing University of Science and Technology，2026-10-15 | 未发现官方代码 | `lamp`：仅低成本组件，完整实验不复现 |

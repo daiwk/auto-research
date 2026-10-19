@@ -1,0 +1,164 @@
+{
+  "schema_version": 2,
+  "method": "unirec-v3-components",
+  "manifest_ref": "recommendation:unirec",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-unirec-v3-objective-fixture",
+    "revision": "oct19-evening-unirec-v3-v1",
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "cppa_value_reference_max_error": 2.842170943040401e-14,
+        "cppa_gradient_reference_max_error": 1.7763568394002505e-15,
+        "no_pruning_equivalence_max_error": 0.0,
+        "capp_pair_reference_errors": 0,
+        "directed_pairs": 16,
+        "majority_collapse_negative_control_difference": 60.48408603149464,
+        "reward_reference_max_error": 1.1102230246251565e-16,
+        "agrr_kl_reference_max_error": 0.0,
+        "group_shift_invariance_max_error": 2.3314683517128287e-15,
+        "ranking_target_gradient_blocked": true,
+        "score_gradient_norm": 11.414879799205838,
+        "score_update_norm": 0.11414879799205838,
+        "optimizer_steps": 1
+      },
+      "audit_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "cppa_value_reference_max_error": 2.842170943040401e-14,
+        "cppa_gradient_reference_max_error": 1.7763568394002505e-15,
+        "no_pruning_equivalence_max_error": 0.0,
+        "capp_pair_reference_errors": 0,
+        "directed_pairs": 16,
+        "majority_collapse_negative_control_difference": 86.78983348553675,
+        "reward_reference_max_error": 5.551115123125783e-17,
+        "agrr_kl_reference_max_error": 0.0,
+        "group_shift_invariance_max_error": 0.0,
+        "ranking_target_gradient_blocked": true,
+        "score_gradient_norm": 8.782150650930081,
+        "score_update_norm": 0.08782150650930085,
+        "optimizer_steps": 1
+      },
+      "audit_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "cppa_value_reference_max_error": 2.842170943040401e-14,
+        "cppa_gradient_reference_max_error": 3.552713678800501e-15,
+        "no_pruning_equivalence_max_error": 0.0,
+        "capp_pair_reference_errors": 0,
+        "directed_pairs": 16,
+        "majority_collapse_negative_control_difference": 71.986992018629,
+        "reward_reference_max_error": 1.1102230246251565e-16,
+        "agrr_kl_reference_max_error": 1.1102230246251565e-16,
+        "group_shift_invariance_max_error": 1.1102230246251565e-15,
+        "ranking_target_gradient_blocked": true,
+        "score_gradient_norm": 11.60632999526177,
+        "score_update_norm": 0.11606329995261772,
+        "optimizer_steps": 1
+      },
+      "audit_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  ],
+  "metrics": {
+    "agrr_kl_reference_max_error": {
+      "mean": 3.700743415417188e-17,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "capp_pair_reference_errors": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "cppa_gradient_reference_max_error": {
+      "mean": 2.3684757858670005e-15,
+      "std": 1.0255800994045674e-15,
+      "n": 3
+    },
+    "cppa_value_reference_max_error": {
+      "mean": 2.842170943040401e-14,
+      "std": 0.0,
+      "n": 3
+    },
+    "directed_pairs": {
+      "mean": 16,
+      "std": 0.0,
+      "n": 3
+    },
+    "group_shift_invariance_max_error": {
+      "mean": 1.1472304587793285e-15,
+      "std": 1.1661746573290983e-15,
+      "n": 3
+    },
+    "majority_collapse_negative_control_difference": {
+      "mean": 73.08697051188679,
+      "std": 13.187325422282676,
+      "n": 3
+    },
+    "no_pruning_equivalence_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "ranking_target_gradient_blocked": true,
+    "reward_reference_max_error": {
+      "mean": 9.251858538542972e-17,
+      "std": 3.204937810639273e-17,
+      "n": 3
+    },
+    "score_gradient_norm": {
+      "mean": 10.601120148465897,
+      "std": 1.5781795902611138,
+      "n": 3
+    },
+    "score_update_norm": {
+      "mean": 0.10601120148465898,
+      "std": 0.01578179590261112,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/reproductions/2609.11052-unirec/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "0e431a3ccf053a6cb28b3dcf932232d731f4a43ba771dd6cb429b7289e14b0b9",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_unirec_components.py": "fdfcf0a7a277e38c82a8d62183d7a391028ce61d12ee04d006c1e1a9f3c7fbbb",
+      "src/auto_research/reproductions/unirec/v3_objectives.py": "6a276d236b6a0157c39e261456eaa580da1bec85b31f079ef283454cf4955386"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:40186f5e57b126bd0b4205a5376b33ad18a149bcbe91de8c79a20ae2bde091a4"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
