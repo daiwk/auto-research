@@ -1,0 +1,899 @@
+{
+  "schema_version": 1,
+  "review_as_of": "2026-10-19",
+  "review_timezone": "Asia/Shanghai",
+  "scope_kind": "selected_bounded_components_with_announcement_overlap_and_historical_backfill",
+  "all_sources_exhaustive": false,
+  "latest_observed_arxiv_announcement": "2026-10-16",
+  "review_watermark": {
+    "before": "2026-10-15",
+    "after": "2026-10-15",
+    "advanced": false,
+    "reason": "Selected nine-paper implementation batch, not a full-source/full-window review closure."
+  },
+  "counts": {
+    "selected_papers": 9,
+    "bounded_components_or_interfaces": 7,
+    "reference_only_high_cost": 2,
+    "google_historical_backfill": 1,
+    "oct16_announcement_overlap": 8,
+    "cpu_validated_components_or_interfaces": 4,
+    "gpu_validated_components": 3
+  },
+  "source_check_window_utc": {
+    "first_checked_at": "2026-10-18T19:34:14.229591+00:00",
+    "last_checked_at": "2026-10-18T19:36:45.590972+00:00",
+    "local_date": "2026-10-19",
+    "note": "checked_at copied from retrieval receipts; UTC previous evening equals next morning in Asia/Shanghai."
+  },
+  "capture_inputs": [
+    {
+      "artifact": "retrieval.json",
+      "sha256": "986f0b5e490aad3a51e6734f198d9a328e3b0530418c4e65185d238124a48bb0",
+      "committed": false
+    },
+    {
+      "artifact": "google-delta.json",
+      "sha256": "3ab46bbfee69bc500a31542d42a638e1f9f86db80def92dc4ed8e075f72667ff",
+      "committed": false
+    },
+    {
+      "artifact": "meta-delta.json",
+      "sha256": "f00aa5568f63bd7ac0ca8cd90c2a59e71a81bebf603c25415bf6b9b1f5e220f9",
+      "committed": false
+    },
+    {
+      "artifact": "google-deepmind-delta.json",
+      "sha256": "00c86b6daa0660dbadfda4dd5637637fdb0e93de6b5f60aa6325bf408ab0eab9",
+      "committed": false
+    }
+  ],
+  "receipt_hash_scope": "SHA256 of fetched UTF-8 directory/bulletin content, copied without change; hashes are capture receipts, not archival mirrors or proof of global source completeness.",
+  "arxiv_sources": [
+    {
+      "source": "cs.AI",
+      "latest_announced_on": "2026-10-16",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://arxiv.org/list/cs.AI/new?show=2000",
+          "checked_at": "2026-10-18T19:36:36.494934+00:00",
+          "status": "retrieved",
+          "sha256": "f261c2b841f20d7db7c9624de8c8c329709f2c2a5f6fac73b72e2c70f1153ebb",
+          "record_count": 453,
+          "announced_on": "2026-10-16",
+          "expected_entries": 453,
+          "parsed_entries": 453,
+          "parse_complete": true,
+          "entry_kinds": [
+            {
+              "kind": "cross-list",
+              "count": 154
+            },
+            {
+              "kind": "new",
+              "count": 132
+            },
+            {
+              "kind": "replacement",
+              "count": 167
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "cs.CL",
+      "latest_announced_on": "2026-10-16",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://arxiv.org/list/cs.CL/new?show=2000",
+          "checked_at": "2026-10-18T19:36:37.800606+00:00",
+          "status": "retrieved",
+          "sha256": "d2c631d55c1f3efeb641724cbd34f3432f64e93a9874f37198fa5ea4ec21b8d3",
+          "record_count": 267,
+          "announced_on": "2026-10-16",
+          "expected_entries": 267,
+          "parsed_entries": 267,
+          "parse_complete": true,
+          "entry_kinds": [
+            {
+              "kind": "cross-list",
+              "count": 72
+            },
+            {
+              "kind": "new",
+              "count": 105
+            },
+            {
+              "kind": "replacement",
+              "count": 90
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "cs.IR",
+      "latest_announced_on": "2026-10-16",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://arxiv.org/list/cs.IR/new?show=2000",
+          "checked_at": "2026-10-18T19:36:38.042350+00:00",
+          "status": "retrieved",
+          "sha256": "d40ba8a9d9d713bfc158972819e180596b38c16daf2eecd28778bbdcfc84718a",
+          "record_count": 26,
+          "announced_on": "2026-10-16",
+          "expected_entries": 26,
+          "parsed_entries": 26,
+          "parse_complete": true,
+          "entry_kinds": [
+            {
+              "kind": "cross-list",
+              "count": 6
+            },
+            {
+              "kind": "new",
+              "count": 8
+            },
+            {
+              "kind": "replacement",
+              "count": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "cs.LG",
+      "latest_announced_on": "2026-10-16",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://arxiv.org/list/cs.LG/new?show=2000",
+          "checked_at": "2026-10-18T19:36:39.301719+00:00",
+          "status": "retrieved",
+          "sha256": "4aff85627a8ea782e3ee9394a245bc4926aab1f5de66ffa94bd1a62e616d9f8c",
+          "record_count": 467,
+          "announced_on": "2026-10-16",
+          "expected_entries": 467,
+          "parsed_entries": 467,
+          "parse_complete": true,
+          "entry_kinds": [
+            {
+              "kind": "cross-list",
+              "count": 140
+            },
+            {
+              "kind": "new",
+              "count": 166
+            },
+            {
+              "kind": "replacement",
+              "count": 161
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "cs.CV",
+      "latest_announced_on": "2026-10-16",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://arxiv.org/list/cs.CV/new?show=2000",
+          "checked_at": "2026-10-18T19:36:42.575364+00:00",
+          "status": "retrieved",
+          "sha256": "e1d7f1e146c4da95bc97b5f7a91c8dd88dceffacb4796fb2a2a7289ffe2a9e19",
+          "record_count": 253,
+          "announced_on": "2026-10-16",
+          "expected_entries": 253,
+          "parsed_entries": 253,
+          "parse_complete": true,
+          "entry_kinds": [
+            {
+              "kind": "cross-list",
+              "count": 30
+            },
+            {
+              "kind": "new",
+              "count": 135
+            },
+            {
+              "kind": "replacement",
+              "count": 88
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "cs.RO",
+      "latest_announced_on": "2026-10-16",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://arxiv.org/list/cs.RO/new?show=2000",
+          "checked_at": "2026-10-18T19:36:45.590972+00:00",
+          "status": "retrieved",
+          "sha256": "e40992ccfd5a70d724482015be1c1189602703ea7c0964a72ff82cfed848f761",
+          "record_count": 149,
+          "announced_on": "2026-10-16",
+          "expected_entries": 149,
+          "parsed_entries": 149,
+          "parse_complete": true,
+          "entry_kinds": [
+            {
+              "kind": "cross-list",
+              "count": 13
+            },
+            {
+              "kind": "new",
+              "count": 89
+            },
+            {
+              "kind": "replacement",
+              "count": 47
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "official_sources": [
+    {
+      "source": "Google",
+      "attempted_pages": 28,
+      "retrieved_pages": 28,
+      "unique_records": 417,
+      "previous_review_records": 412,
+      "new_directory_urls": 5,
+      "previous_review": "../oct15-review-closure/google-source-review.json",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+          "checked_at": "2026-10-18T19:34:14.229591+00:00",
+          "status": "retrieved",
+          "sha256": "ba1a73b5634b0cb2dd52a43b26b21b96e3f7cedd1cccfadea8044385b4028277",
+          "record_count": 15
+        },
+        {
+          "page": 2,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=2",
+          "checked_at": "2026-10-18T19:34:14.230166+00:00",
+          "status": "retrieved",
+          "sha256": "d66998fc17f11f09c309da434e3fbc662212a1f0ed0761d2f53758a397da5e22",
+          "record_count": 15
+        },
+        {
+          "page": 3,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=3",
+          "checked_at": "2026-10-18T19:34:14.230251+00:00",
+          "status": "retrieved",
+          "sha256": "484494fbe2e70938f292e0723bfb99474f771ef698c9fab1a16c9e3fe3cf1394",
+          "record_count": 15
+        },
+        {
+          "page": 4,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=4",
+          "checked_at": "2026-10-18T19:34:14.230309+00:00",
+          "status": "retrieved",
+          "sha256": "c06d22436f48234dc828ff50360b726a5c414a0d35ba582b46de814a5a0c4cd0",
+          "record_count": 15
+        },
+        {
+          "page": 5,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=5",
+          "checked_at": "2026-10-18T19:34:14.230357+00:00",
+          "status": "retrieved",
+          "sha256": "4217a10a56203f095f17ba2b322d6156d8778093bcb1034aed4737b15234b30b",
+          "record_count": 15
+        },
+        {
+          "page": 6,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=6",
+          "checked_at": "2026-10-18T19:34:14.230402+00:00",
+          "status": "retrieved",
+          "sha256": "94eb793b45170dcd168cf300f49c1d1c58754540f29158e10577ef7feee8dd3a",
+          "record_count": 15
+        },
+        {
+          "page": 7,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=7",
+          "checked_at": "2026-10-18T19:34:14.230444+00:00",
+          "status": "retrieved",
+          "sha256": "27c7984b5dc439d7f7a18d0c3e78c9b5cec42aae99e3d74c2f790b4cc4da7ea0",
+          "record_count": 15
+        },
+        {
+          "page": 8,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=8",
+          "checked_at": "2026-10-18T19:34:14.230488+00:00",
+          "status": "retrieved",
+          "sha256": "82cdad6947651b3067e2d4cb0edea2d5daaf566ad2af9898efea4aaef3b952ff",
+          "record_count": 15
+        },
+        {
+          "page": 9,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=9",
+          "checked_at": "2026-10-18T19:34:32.542416+00:00",
+          "status": "retrieved",
+          "sha256": "20471081b4a6282178933eabd2aedbd24b9acffdf055383bfd9afa38b800b94c",
+          "record_count": 15
+        },
+        {
+          "page": 10,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=10",
+          "checked_at": "2026-10-18T19:34:34.189335+00:00",
+          "status": "retrieved",
+          "sha256": "ae98a9b3c60b1b822ee271506b376a25c01c924b8ebf3b618ec532d2a24d609a",
+          "record_count": 15
+        },
+        {
+          "page": 11,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=11",
+          "checked_at": "2026-10-18T19:34:34.206213+00:00",
+          "status": "retrieved",
+          "sha256": "be7040dcfda67c8544c23bdf30fe319dadf706257d3f2d818c020bcd22669bc4",
+          "record_count": 15
+        },
+        {
+          "page": 12,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=12",
+          "checked_at": "2026-10-18T19:34:34.221857+00:00",
+          "status": "retrieved",
+          "sha256": "7409beb890afc1f2df011c0fd28b55fb67bd84e396313ddd17910dd4fd468975",
+          "record_count": 15
+        },
+        {
+          "page": 13,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=13",
+          "checked_at": "2026-10-18T19:34:34.431897+00:00",
+          "status": "retrieved",
+          "sha256": "b26be48775f49d1ae455a53e993d5b02ebc4d0b71499b6ee8cbb6d98d3b3824a",
+          "record_count": 15
+        },
+        {
+          "page": 14,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=14",
+          "checked_at": "2026-10-18T19:34:34.471756+00:00",
+          "status": "retrieved",
+          "sha256": "2cda27f54c08d42c6abf5c7b908e5ea61698793cdab33eb0ff0311a0603297bc",
+          "record_count": 15
+        },
+        {
+          "page": 15,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=15",
+          "checked_at": "2026-10-18T19:34:34.500248+00:00",
+          "status": "retrieved",
+          "sha256": "eaa1e75c236c4080b362270e44b4bd7f153ac18c8285b092d95cccd8b5dd11a9",
+          "record_count": 15
+        },
+        {
+          "page": 16,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=16",
+          "checked_at": "2026-10-18T19:34:34.515622+00:00",
+          "status": "retrieved",
+          "sha256": "0490f5b56052b9a055356fd0dad599f78e6464802dea6c37771c58fde44fcdcc",
+          "record_count": 15
+        },
+        {
+          "page": 17,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=17",
+          "checked_at": "2026-10-18T19:34:52.712616+00:00",
+          "status": "retrieved",
+          "sha256": "b3ccb6b26b3dc203cb3e0ad2c249c9f86641e6c1f35928cde2c3afa947e0d6a2",
+          "record_count": 15
+        },
+        {
+          "page": 18,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=18",
+          "checked_at": "2026-10-18T19:34:53.439543+00:00",
+          "status": "retrieved",
+          "sha256": "da830c428b15dae7e6d3b741b8c6251c1ae159b05569cbf9df0764a6b19e8d34",
+          "record_count": 15
+        },
+        {
+          "page": 19,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=19",
+          "checked_at": "2026-10-18T19:34:53.931928+00:00",
+          "status": "retrieved",
+          "sha256": "3639ccfdcf1460861d84c82377b7dd65d03940002a98892845c15b22ff6a94d0",
+          "record_count": 15
+        },
+        {
+          "page": 20,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=20",
+          "checked_at": "2026-10-18T19:34:53.960930+00:00",
+          "status": "retrieved",
+          "sha256": "528d2ac8f109b80630a51956cc5b8c98110c3e695b89e1a8daa503ab4b5f121d",
+          "record_count": 15
+        },
+        {
+          "page": 21,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=21",
+          "checked_at": "2026-10-18T19:34:54.200507+00:00",
+          "status": "retrieved",
+          "sha256": "d55c14eb6ce84ed90f584ac105ddb2d0cb8ab416cb41aed39d21d48a944d76f3",
+          "record_count": 15
+        },
+        {
+          "page": 22,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=22",
+          "checked_at": "2026-10-18T19:34:54.215574+00:00",
+          "status": "retrieved",
+          "sha256": "4650642f2cef229248c6bfaee27f6dbd78fc5b7ce3f7b4749a1042947bc8e896",
+          "record_count": 15
+        },
+        {
+          "page": 23,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=23",
+          "checked_at": "2026-10-18T19:34:54.355699+00:00",
+          "status": "retrieved",
+          "sha256": "65bc61bf622eaf743775789ec3ca255cfe8ddb60d6e7b7dfd23e33c544472682",
+          "record_count": 15
+        },
+        {
+          "page": 24,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=24",
+          "checked_at": "2026-10-18T19:34:55.240439+00:00",
+          "status": "retrieved",
+          "sha256": "65575024c48dcd3b6b4b3e0958aec53923b2f202e60b3d0a3b7734c6cd1f4a26",
+          "record_count": 15
+        },
+        {
+          "page": 25,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=25",
+          "checked_at": "2026-10-18T19:35:12.957814+00:00",
+          "status": "retrieved",
+          "sha256": "973eebdd7493d04c8ff73d0d24b874ca5120fd58dda3635765b099b109859aed",
+          "record_count": 15
+        },
+        {
+          "page": 26,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=26",
+          "checked_at": "2026-10-18T19:35:13.223012+00:00",
+          "status": "retrieved",
+          "sha256": "862894d90c09775ca893e9bd73106b5780f4c3fef5c2e15ffdf7ceb20de188b4",
+          "record_count": 15
+        },
+        {
+          "page": 27,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=27",
+          "checked_at": "2026-10-18T19:35:13.596114+00:00",
+          "status": "retrieved",
+          "sha256": "cc73829f1c0f9ea877ed5b94e786b394475b40bd0d52ffd6e2d6377e00a2ec1e",
+          "record_count": 15
+        },
+        {
+          "page": 28,
+          "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=28",
+          "checked_at": "2026-10-18T19:35:13.682052+00:00",
+          "status": "retrieved",
+          "sha256": "02a5ba81485a50bf11a2d046f86e98725ca18e5a0ec8fe1be9613f7b2eb2d146",
+          "record_count": 12
+        }
+      ]
+    },
+    {
+      "source": "Meta",
+      "attempted_pages": 6,
+      "retrieved_pages": 6,
+      "unique_records": 144,
+      "previous_review_records": 144,
+      "new_directory_urls": 0,
+      "previous_review": "../oct15-review-closure/meta-source-review.json",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+          "checked_at": "2026-10-18T19:35:13.902640+00:00",
+          "status": "retrieved",
+          "sha256": "223a9e6a812e85a3ae74d0cf1bfe8d9d5aff0bd4032fa2812e4d275404851495",
+          "record_count": 24
+        },
+        {
+          "page": 2,
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+          "checked_at": "2026-10-18T19:35:14.040208+00:00",
+          "status": "retrieved",
+          "sha256": "bd5c8926a42ac799956a5689be54760741ec612e837b6baf601ceaf6d5fce965",
+          "record_count": 24
+        },
+        {
+          "page": 3,
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+          "checked_at": "2026-10-18T19:35:14.120390+00:00",
+          "status": "retrieved",
+          "sha256": "a7e37210982642e24b47444fda20827a38a41046fb72e555ec7506bd984bbbbf",
+          "record_count": 24
+        },
+        {
+          "page": 4,
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+          "checked_at": "2026-10-18T19:35:15.002365+00:00",
+          "status": "retrieved",
+          "sha256": "fb8bdd57cf364b52bfdbe21cea19b2264b4ac4f6ecb8d6025f552fc0e5a3b9d9",
+          "record_count": 24
+        },
+        {
+          "page": 5,
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+          "checked_at": "2026-10-18T19:35:32.592348+00:00",
+          "status": "retrieved",
+          "sha256": "6530028d55e250504e211171a0991bed128b1c9f6d98c653a30c9ad07cbfc49b",
+          "record_count": 24
+        },
+        {
+          "page": 6,
+          "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+          "checked_at": "2026-10-18T19:35:32.623414+00:00",
+          "status": "retrieved",
+          "sha256": "2f9086627658a17bfacebf54256f3975a9a23446e84691caaa87ca71c3b30eac",
+          "record_count": 24
+        }
+      ]
+    },
+    {
+      "source": "Google DeepMind",
+      "attempted_pages": 9,
+      "retrieved_pages": 9,
+      "unique_records": 265,
+      "previous_review_records": 265,
+      "new_directory_urls": 0,
+      "previous_review": "../oct15-review-closure/google-deepmind-source-review.json",
+      "page_receipts": [
+        {
+          "page": 1,
+          "url": "https://deepmind.google/research/publications/",
+          "checked_at": "2026-10-18T19:35:33.216092+00:00",
+          "status": "retrieved",
+          "sha256": "86ece918e49a1515ba3e88d31ce3bc7a8a9883dd0f66b2e5b614f883a14ee6e5",
+          "record_count": 30
+        },
+        {
+          "page": 2,
+          "url": "https://deepmind.google/research/publications/page/2/",
+          "checked_at": "2026-10-18T19:35:33.313413+00:00",
+          "status": "retrieved",
+          "sha256": "92b578e0368ec3308e23ada6af75c1e6749c494dd56ac36529e67c30107576fb",
+          "record_count": 30
+        },
+        {
+          "page": 3,
+          "url": "https://deepmind.google/research/publications/page/3/",
+          "checked_at": "2026-10-18T19:35:35.373703+00:00",
+          "status": "retrieved",
+          "sha256": "8cc1d2d1ae5c1a25845fa5da0ad9caced5a536dd9a30d57c76a8f226c0237e95",
+          "record_count": 30
+        },
+        {
+          "page": 4,
+          "url": "https://deepmind.google/research/publications/page/4/",
+          "checked_at": "2026-10-18T19:35:35.694338+00:00",
+          "status": "retrieved",
+          "sha256": "02c1b296b646946b74ad1361966b4ca1787620c95c0f725c1ee4248b3c274231",
+          "record_count": 30
+        },
+        {
+          "page": 5,
+          "url": "https://deepmind.google/research/publications/page/5/",
+          "checked_at": "2026-10-18T19:35:39.680931+00:00",
+          "status": "retrieved",
+          "sha256": "06f47bfb29fdcd90ce7aa32d6a40596662cf7a8881ddbbced5ca27b210357dfc",
+          "record_count": 30
+        },
+        {
+          "page": 6,
+          "url": "https://deepmind.google/research/publications/page/6/",
+          "checked_at": "2026-10-18T19:35:42.670226+00:00",
+          "status": "retrieved",
+          "sha256": "773888169dccb4e5f61c0675e61ad892e1fde4c33a72136adc5053c259b63bf6",
+          "record_count": 30
+        },
+        {
+          "page": 7,
+          "url": "https://deepmind.google/research/publications/page/7/",
+          "checked_at": "2026-10-18T19:35:53.474740+00:00",
+          "status": "retrieved",
+          "sha256": "12d42544029a2eb4408e865cfa81ea0cf9852867f4ca982441ea1776460f3201",
+          "record_count": 30
+        },
+        {
+          "page": 8,
+          "url": "https://deepmind.google/research/publications/page/8/",
+          "checked_at": "2026-10-18T19:35:53.659729+00:00",
+          "status": "retrieved",
+          "sha256": "904ab0e2a8d90a8a4dffe6f86e36848f13ebf6346294fd6c869a3260fa349331",
+          "record_count": 30
+        },
+        {
+          "page": 9,
+          "url": "https://deepmind.google/research/publications/page/9/",
+          "checked_at": "2026-10-18T19:36:36.207614+00:00",
+          "status": "retrieved",
+          "sha256": "ab18f5c0665c4df9e1f574ca20f2cd494999044fb5042644be608176f2e1ba73",
+          "record_count": 25
+        }
+      ]
+    }
+  ],
+  "google_url_delta_dispositions": [
+    {
+      "title": "SKILL.state: Scalable Long-Horizon Agent Skills",
+      "url": "https://research.google/pubs/skillstate-scalable-long-horizon-agent-skills/",
+      "resolution": "selected_historical_backfill",
+      "key": "skill-state",
+      "arxiv_id": "2608.26263",
+      "v1_date": "2026-08-26",
+      "priority": "P0",
+      "reason": "New to this directory comparison, not a newly published October paper; bounded explicit-state loop selected."
+    },
+    {
+      "title": "Differential Observability: Detecting Silent State Divergence in eBPF-based Cloud Networks",
+      "url": "https://research.google/pubs/differential-observability-detecting-silent-state-divergence-in-ebpf-based-cloud-networks-2/",
+      "resolution": "duplicate_directory_url",
+      "already_reviewed_url": "https://research.google/pubs/differential-observability-detecting-silent-state-divergence-in-ebpf-based-cloud-networks/",
+      "reason": "Same title already in October-15 review; -2 URL does not establish an independent new paper."
+    },
+    {
+      "title": "Regression Test Selection at Scale",
+      "url": "https://research.google/pubs/regression-test-selection-at-scale-4/",
+      "resolution": "duplicate_directory_url",
+      "already_reviewed_url": "https://research.google/pubs/regression-test-selection-at-scale-2/",
+      "reason": "Same title already in October-15 review; -4 URL does not establish an independent new paper."
+    },
+    {
+      "title": "The AI Divide: Bridging the Implementation Gap in State and Territorial Public Health Departments",
+      "url": "https://research.google/pubs/the-ai-divide-bridging-the-implementation-gap-in-state-and-territorial-public-health-departments-2/",
+      "resolution": "out_of_scope",
+      "reason": "Public-health implementation/policy study, not an independently executable ML/Agent algorithm in the current research-library domains."
+    },
+    {
+      "title": "Uniform Laws of Large Numbers in Product Spaces",
+      "url": "https://research.google/pubs/uniform-laws-of-large-numbers-in-product-spaces/",
+      "resolution": "out_of_scope",
+      "reason": "Probability/statistical learning theory; no in-scope model, training or Agent component selected for this bounded implementation batch."
+    }
+  ],
+  "selected_papers": [
+    {
+      "domain": "agent-research",
+      "key": "skill-state",
+      "title": "SKILL.state: Scalable Long-Horizon Agent Skills",
+      "paper_url": "https://arxiv.org/abs/2608.26263",
+      "published": "2026-08-26",
+      "published_at": "2026-08-26T18:00:06Z",
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "agent-research/2608.26263-skill-state/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/agent-research/skill-state.json",
+      "intake_class": "google_directory_historical_backfill",
+      "bounded_validation_status": "validated_bounded_diagnostic",
+      "bounded_execution_device": "cpu",
+      "component_validation": {
+        "metrics": ["docs/agent-research/2608.26263-skill-state/metrics/component-cpu-seeds42-44.json"],
+        "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+        "gpu_validation_passed": false
+      }
+    },
+    {
+      "domain": "agent-research",
+      "key": "alpha-diana",
+      "title": "AlphaDiana: A Measurement System for Agents in Verifiable Reasoning Tasks",
+      "paper_url": "https://arxiv.org/abs/2610.20675",
+      "published": "2026-10-14",
+      "published_at": "2026-10-14T14:04:48Z",
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "agent-research/2610.20675-alpha-diana/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/agent-research/alpha-diana.json",
+      "intake_class": "oct16_announcement_overlap",
+      "bounded_validation_status": "validated_bounded_diagnostic",
+      "bounded_execution_device": "cpu",
+      "component_validation": {
+        "metrics": ["docs/agent-research/2610.20675-alpha-diana/metrics/component-cpu-seeds42-44.json"],
+        "code_commit": "39e912c1124c49b7d3a85957909fb143d8c9ba3c",
+        "gpu_validation_passed": false
+      }
+    },
+    {
+      "domain": "agent-research",
+      "key": "agent-perturb",
+      "title": "AgentPerturb: Evaluating LLM Agent Robustness under Controlled Interaction Perturbations",
+      "paper_url": "https://arxiv.org/abs/2610.21624",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T10:05:54Z",
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "agent-research/2610.21624-agent-perturb/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/agent-research/agent-perturb.json",
+      "intake_class": "oct16_announcement_overlap",
+      "bounded_validation_status": "validated_bounded_diagnostic",
+      "bounded_execution_device": "cpu",
+      "component_validation": {
+        "metrics": ["docs/agent-research/2610.21624-agent-perturb/metrics/component-cpu-seeds42-44.json"],
+        "code_commit": "39e912c1124c49b7d3a85957909fb143d8c9ba3c",
+        "gpu_validation_passed": false
+      }
+    },
+    {
+      "domain": "agent-research",
+      "key": "auto-sft",
+      "title": "AutoSFT: An Agentic System for Automated Data Research in Supervised Fine-Tuning",
+      "paper_url": "https://arxiv.org/abs/2610.22194",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T16:44:34Z",
+      "priority": "P1",
+      "implementation_status": "deferred_high_cost",
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "agent-research/2610.22194-auto-sft/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/agent-research/auto-sft.json",
+      "intake_class": "oct16_announcement_overlap",
+      "bounded_validation_status": "not_applicable_reference_only",
+      "bounded_execution_device": null
+    },
+    {
+      "domain": "foundation-models",
+      "key": "fpot",
+      "title": "Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference",
+      "paper_url": "https://arxiv.org/abs/2610.21257",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T04:50:03Z",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "foundation-models/2610.21257-fpot/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/foundation-models/fpot.json",
+      "intake_class": "oct16_announcement_overlap",
+      "bounded_validation_status": "validated_bounded_diagnostic",
+      "bounded_execution_device": "cuda",
+      "component_validation": {
+        "metrics": ["docs/foundation-models/2610.21257-fpot/metrics/component-cuda-seeds42-44.json"],
+        "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+        "gpu_validation_passed": true,
+        "gpu_validation_artifact": "docs/gpu-validations/fpot-a100-20261019.json"
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "lamp",
+      "title": "LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation",
+      "paper_url": "https://arxiv.org/abs/2610.22182",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T16:35:40Z",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "foundation-models/2610.22182-lamp/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/foundation-models/lamp.json",
+      "intake_class": "oct16_announcement_overlap",
+      "bounded_validation_status": "validated_bounded_diagnostic",
+      "bounded_execution_device": "cuda",
+      "component_validation": {
+        "metrics": ["docs/foundation-models/2610.22182-lamp/metrics/component-cuda-seeds42-44.json"],
+        "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+        "gpu_validation_passed": true,
+        "gpu_validation_artifact": "docs/gpu-validations/lamp-a100-20261019.json"
+      }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "gen4p",
+      "title": "Gen4P: Video Generators are 4D Perceivers",
+      "paper_url": "https://arxiv.org/abs/2610.22371",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T17:59:48Z",
+      "priority": "P1",
+      "implementation_status": "deferred_high_cost",
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "foundation-models/2610.22371-gen4p/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/foundation-models/gen4p.json",
+      "intake_class": "oct16_announcement_overlap",
+      "bounded_validation_status": "not_applicable_reference_only",
+      "bounded_execution_device": null
+    },
+    {
+      "domain": "post-training",
+      "key": "diverge-ideation",
+      "title": "Training Reasoning Models to Generate Diverse Scientific Ideas",
+      "paper_url": "https://arxiv.org/abs/2610.22324v1",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T17:52:12Z",
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "post-training/2610.22324-diverge-ideation/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/post-training/diverge-ideation.json",
+      "intake_class": "oct16_announcement_overlap",
+      "bounded_validation_status": "validated_bounded_diagnostic",
+      "bounded_execution_device": "cpu",
+      "component_validation": {
+        "metrics": ["docs/post-training/2610.22324-diverge-ideation/metrics/component-cpu-seeds42-44.json"],
+        "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+        "gpu_validation_passed": false
+      }
+    },
+    {
+      "domain": "post-training",
+      "key": "knowgpo",
+      "title": "KnowGPO: Knowledge-Grouped Policy Optimization for Search Agents",
+      "paper_url": "https://arxiv.org/abs/2610.22331v1",
+      "published": "2026-10-15",
+      "published_at": "2026-10-15T17:52:33Z",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "detail_path": "post-training/2610.22331-knowgpo/README.md",
+      "catalog_path": "src/auto_research/paper_specs/catalog/post-training/knowgpo.json",
+      "intake_class": "oct16_announcement_overlap",
+      "bounded_validation_status": "validated_bounded_diagnostic",
+      "bounded_execution_device": "cuda",
+      "component_validation": {
+        "metrics": ["docs/post-training/2610.22331-knowgpo/metrics/component-cuda-seeds42-44.json"],
+        "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+        "gpu_validation_passed": true,
+        "gpu_validation_artifact": "docs/gpu-validations/knowgpo-a100-20261019.json"
+      }
+    }
+  ],
+  "dedup_inputs": [
+    "docs/research-manifest.json",
+    "docs/paper-discovery-ledger.json",
+    "docs/research-audits/oct15-review-closure/paper-register.json"
+  ],
+  "validation_policy": {
+    "status": "validated_bounded_diagnostics",
+    "source_commits": {
+      "initial_components_and_gpu": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+      "cpu_agent_cost_fix_rerun": "39e912c1124c49b7d3a85957909fb143d8c9ba3c"
+    },
+    "seeds": [42, 43, 44],
+    "cuda_accelerator": "NVIDIA A100-SXM4-80GB",
+    "frozen_source_proof": "docs/research-audits/oct19-components/frozen-sources.json",
+    "cpu_components": [
+      "skill-state",
+      "alpha-diana",
+      "agent-perturb",
+      "diverge-ideation"
+    ],
+    "cuda_components": [
+      "fpot",
+      "lamp",
+      "knowgpo"
+    ],
+    "reference_only": [
+      "auto-sft",
+      "gen4p"
+    ],
+    "full_experiments": "not_reproduced_high_cost",
+    "review_resolution": "Cost-gated full experiments are terminal DONE, not blocking TODO. Bounded implementation validation must be reported separately.",
+    "gpu_gate": "Three CUDA components executed on one NVIDIA A100, each with seeds 42/43/44; committed sanitized receipts and metric/source bindings accepted. Four CPU components/interfaces accepted with the same seeds.",
+    "claim_boundary": "Inert fixtures/operator tests only; no official benchmark capability score, production lift or evolve promotion."
+  },
+  "limitations": [
+    "This audit covers the selected nine-paper batch and the enumerated source snapshots only, not every paper in the six bulletins.",
+    "All fetched arXiv bulletin snapshots still announce October 16; no October 19 first-release claim is made.",
+    "new, cross-list and replacement entries are distinguished in receipts; a replacement is not automatically a newly discovered algorithm.",
+    "Google/Meta/DeepMind directory URL deltas do not prove full-text paper review or all sources exhausted.",
+    "Other institutions, author repositories, benchmark/model releases and sources outside the listed snapshots are not exhausted.",
+    "Directory timestamps missing from captured records are not inferred as first-publication dates.",
+    "The October-15 review watermark remains unchanged; selected implementation completion is not a substitute for coverage closure."
+  ]
+}

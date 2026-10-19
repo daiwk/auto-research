@@ -120575,6 +120575,441 @@
           ]
         }
       ]
+    },
+    {
+      "batch": "2026-10-19-overlap-and-official-delta-components",
+      "date": "2026-10-19",
+      "scope_kind": "selected-paper-implementation",
+      "window": "Oct16 announcements (Oct14–15 v1) plus one August Google directory late-index discovery; not Oct19 new papers",
+      "required_tracks": [
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "coverage_complete": false,
+      "review_watermark_advanced": false,
+      "review_snapshot_modified": false,
+      "scope_artifact": "research-audits/oct19-components/README.md",
+      "component_validation_counts": {
+        "gpu_validated_components": 3,
+        "cpu_validated_components_or_interfaces": 4,
+        "review_only": 2
+      },
+      "accepted_scope_counts": {
+        "bounded_components_and_interfaces": 7,
+        "review_only_papers": 2
+      },
+      "candidates": [
+        {
+          "id": "2610.21624",
+          "key": "agent-perturb",
+          "title": "AgentPerturb: Evaluating LLM Agent Robustness under Controlled Interaction Perturbations",
+          "priority": "P1",
+          "publication_date": "2026-10-15",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文多模型Toolathlon完整12类扰动、独立语义验证和原生执行环境。",
+          "cost_assessment": {
+            "basis": "原文多模型Toolathlon完整12类扰动、独立语义验证和原生执行环境。",
+            "source_url": "https://arxiv.org/abs/2610.21624",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.21624-agent-perturb/README.md",
+          "implementation_status": "evaluation_protocol_interface",
+          "bounded_implementation_scope": "将用户请求、过程规范、继承上下文与工具契约分别施加缺失、冗余、错误扰动，逐次只改一个目标。通过独立语义 verifier 四项门槛与原生 validator 才保留配对，原生 grader 独占 reference；显式报告失败、未评分、配对覆盖率及缺失评分的上下界。",
+          "local_operator": "auto_research.agent_research.agent_perturb.prepare_pair",
+          "local_command": "PYTHONPATH=src python scripts/run_oct19_agent_components.py --methods agent-perturb --seeds 42,43,44 --device cpu --output runs/oct19-agent/agent-perturb.json",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2610.21624-agent-perturb/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "39e912c1124c49b7d3a85957909fb143d8c9ba3c"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21624"
+            }
+          ]
+        },
+        {
+          "id": "2610.20675",
+          "key": "alpha-diana",
+          "title": "AlphaDiana: A Measurement System for Agents in Verifiable Reasoning Tasks",
+          "priority": "P1",
+          "publication_date": "2026-10-14",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文16张A100-80GB、多种27B/31B及远程模型完整矩阵。",
+          "cost_assessment": {
+            "basis": "原文16张A100-80GB、多种27B/31B及远程模型完整矩阵。",
+            "source_url": "https://arxiv.org/abs/2610.20675",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.20675-alpha-diana/README.md",
+          "implementation_status": "evaluation_protocol_interface",
+          "bounded_implementation_scope": "以稳定 task/sample 身份记录重试，分离执行失败、错误答案与未评分，保留所有尝试的已知成本；共享可写记忆必须串行且禁自动重试，文件重置与记忆保留单独控制。本地将 PublicTask 与评分 reference 彻底拆开，不照搬含 ground_truth 的 agent 输入对象。",
+          "local_operator": "auto_research.agent_research.alpha_diana.ProtocolRunner",
+          "local_command": "PYTHONPATH=src python scripts/run_oct19_agent_components.py --methods alpha-diana --seeds 42,43,44 --device cpu --output runs/oct19-agent/alpha-diana.json",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2610.20675-alpha-diana/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "39e912c1124c49b7d3a85957909fb143d8c9ba3c"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.20675"
+            }
+          ]
+        },
+        {
+          "id": "2610.22194",
+          "key": "auto-sft",
+          "title": "AutoSFT: An Agentic System for Automated Data Research in Supervised Fine-Tuning",
+          "priority": "P1",
+          "publication_date": "2026-10-15",
+          "track": "agent",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文8 H800、20轮约130 GPU-hours及约1900美元API。",
+          "cost_assessment": {
+            "basis": "原文8 H800、20轮约130 GPU-hours及约1900美元API。",
+            "source_url": "https://arxiv.org/abs/2610.22194",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22194-auto-sft/README.md",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "Meta Agent 分离执行与分析，综合训练数据、失败、训练信号和研究历史的提案，并按需合成数据；模型、训练器与预算固定，每轮从基座重训，只延续数据池与有版本研究记忆。这里只收录论文机制、成本和评测复用边界，无假adapter或evolve映射。",
+          "local_operator": null,
+          "local_command": null,
+          "component_validation": {
+            "status": "review_only_not_reproduced",
+            "gpu_validation_passed": false
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22194"
+            }
+          ]
+        },
+        {
+          "id": "2610.22324",
+          "key": "diverge-ideation",
+          "title": "Training Reasoning Models to Generate Diverse Scientific Ideas",
+          "priority": "P1",
+          "publication_date": "2026-10-15",
+          "track": "post-training",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文8 H200约10小时及大型judge/API；另有132个idea的限时付费执行。",
+          "cost_assessment": {
+            "basis": "原文8 H200约10小时及大型judge/API；另有132个idea的限时付费执行。",
+            "source_url": "https://arxiv.org/abs/2610.22324v1",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.22324-diverge-ideation/README.md",
+          "implementation_status": "evaluation_protocol_interface",
+          "bounded_implementation_scope": "一次生成整组想法，按生成顺序累加质量乘最近前驱语义距离，并保留 schema gate、格式奖励和仅对被评字段计算的长度惩罚。提供显式 judge 观测/回调及与训练目标区分的 CU 贪心下界和小规模枚举参考；不伪造 SciJudge 或语义距离，不训练创意模型，8H200 约10小时的完整实验不复现。",
+          "local_operator": "auto_research.post_training.reviewed_oct19.set_reward",
+          "local_command": "PYTHONPATH=src python scripts/run_oct19_post_components.py --methods diverge-ideation --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/post-training/2610.22324-diverge-ideation/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22324v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.21257",
+          "key": "fpot",
+          "title": "Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference",
+          "priority": "P1",
+          "publication_date": "2026-10-15",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文1.5B–14B、OSTQuant/GPTQ校准、多模型九任务和专用硬件评测；本地不声称内核加速。",
+          "cost_assessment": {
+            "basis": "原文1.5B–14B、OSTQuant/GPTQ校准、多模型九任务和专用硬件评测；本地不声称内核加速。",
+            "source_url": "https://arxiv.org/abs/2610.21257",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.21257-fpot/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "实现半八度精确/1.5近似权重网格、零阈值、逐通道clip与相位MSE搜索、STE及正确恢复e=m-1的有符号整数shift-add模拟。独立标量参考和错误码位/事后替换负对照验证算子；不包含OSTQuant/GPTQ、融合内核或硬件能耗测量。跨7模型和9项任务的完整实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.fpot.quantize_weights",
+          "local_command": "PYTHONPATH=src python scripts/run_oct19_foundation_components.py --papers fpot --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/foundation-models/2610.21257-fpot/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+            "gpu_validation_artifact": "docs/gpu-validations/fpot-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.21257"
+            }
+          ]
+        },
+        {
+          "id": "2610.22371",
+          "key": "gen4p",
+          "title": "Gen4P: Video Generators are 4D Perceivers",
+          "priority": "P1",
+          "publication_date": "2026-10-15",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文约20万视频、75K步、8张H200，约0.88B可训练参数。",
+          "cost_assessment": {
+            "basis": "原文约20万视频、75K步、8张H200，约0.88B可训练参数。",
+            "source_url": "https://arxiv.org/abs/2610.22371",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22371-gen4p/README.md",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "将Wan2.1-1.3B的视频生成先验转为干净潜变量上的单次前向4D感知，以连续时间查询解码位置、深度与运动，并冻结depth-LoRA叠加独立4D-LoRA。只收录方法、代码占位状态和成本证据；完整实验成本过高，不复现（审查DONE）。",
+          "local_operator": null,
+          "local_command": null,
+          "component_validation": {
+            "status": "review_only_not_reproduced",
+            "gpu_validation_passed": false
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22371"
+            }
+          ]
+        },
+        {
+          "id": "2610.22331",
+          "key": "knowgpo",
+          "title": "KnowGPO: Knowledge-Grouped Policy Optimization for Search Agents",
+          "priority": "P1",
+          "publication_date": "2026-10-15",
+          "track": "post-training",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文8 A100 SFT加64 H20 RL，32问题×16轨迹和外部verifier/搜索。",
+          "cost_assessment": {
+            "basis": "原文8 A100 SFT加64 H20 RL，32问题×16轨迹和外部verifier/搜索。",
+            "source_url": "https://arxiv.org/abs/2610.22331v1",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.22331-knowgpo/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "将训练 verifier 验证的原子知识条件单调累积，按同一问题的前态而非后态分组，归一化新增知识数并与回合终局 advantage 混合。实现 answer 排除、singleton 零信号、生成 token 广播及真实微型策略 PPO+KL 梯度诊断；64H20 完整搜索训练成本过高，不复现，不提供 LLM verifier 或能力声明。",
+          "local_operator": "auto_research.post_training.reviewed_oct19.knowledge_advantages",
+          "local_command": "PYTHONPATH=src python scripts/run_oct19_post_components.py --methods knowgpo --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/post-training/2610.22331-knowgpo/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+            "gpu_validation_artifact": "docs/gpu-validations/knowgpo-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22331v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.22182",
+          "key": "lamp",
+          "title": "LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation",
+          "priority": "P1",
+          "publication_date": "2026-10-15",
+          "track": "foundation-model",
+          "intake_class": "announcement-overlap-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文11个数据集、五种shot、三seed和多种冻结视觉骨干的完整协议；不是本地显存不足结论。",
+          "cost_assessment": {
+            "basis": "原文11个数据集、五种shot、三seed和多种冻结视觉骨干的完整协议；不是本地显存不足结论。",
+            "source_url": "https://arxiv.org/abs/2610.22182",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22182-lamp/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "实现ViT区域归一化池化和ResNet GeM、support-only区域核校准、各原生维度分支独立残差求解、validation选混合以及LAMP-F的原型更新/精确cached response。使用冻结小编码器的合成特征诊断，test标签只用于最终报告；不是CLIP公开数据能力实验。11数据集×5shot×3seed完整矩阵成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.lamp.LampPredictor",
+          "local_command": "PYTHONPATH=src python scripts/run_oct19_foundation_components.py --papers lamp --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/foundation-models/2610.22182-lamp/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+            "gpu_validation_artifact": "docs/gpu-validations/lamp-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22182"
+            }
+          ]
+        },
+        {
+          "id": "2608.26263",
+          "key": "skill-state",
+          "title": "SKILL.state: Scalable Long-Horizon Agent Skills",
+          "priority": "P0",
+          "publication_date": "2026-08-26",
+          "track": "agent",
+          "intake_class": "historical-official-directory-delta",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文多种Gemini/Gemma/Qwen、五seed和10–200轮长任务控制矩阵。",
+          "cost_assessment": {
+            "basis": "原文多种Gemini/Gemma/Qwen、五seed和10–200轮长任务控制矩阵。",
+            "source_url": "https://arxiv.org/abs/2608.26263",
+            "available_resource": "单张A100或A30，或本地Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2608.26263-skill-state/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "每步只向actor提供不可变技能说明、当前结构化状态和最新观察；验证递归状态patch后提交并执行动作，丢弃瞬时推理。实现null删除、无历史公共上下文与有界格式重试；仅CPU运行时诊断，不代表LLM长程能力，完整多模型多种子实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.agent_research.skill_state.SkillStateRuntime",
+          "local_command": "PYTHONPATH=src python scripts/run_oct19_skill_state.py --device cpu --seeds 42,43,44 --output <new-result.json>",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2608.26263-skill-state/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2608.26263"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

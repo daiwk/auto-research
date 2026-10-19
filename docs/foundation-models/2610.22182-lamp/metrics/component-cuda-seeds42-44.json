@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "method": "lamp",
+  "manifest_ref": "foundation-models:lamp",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-fpot-and-native-layer-kernel-features",
+    "revision": "oct19-foundation-mechanisms-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol fixtures; not capability or official benchmark evidence"
+  },
+  "metrics": {
+    "base_lamp_synthetic_test_accuracy": {
+      "mean": 0.33333333333333337,
+      "std": 0.11547005383792516,
+      "n": 3
+    },
+    "cached_response_reference_max_error": {
+      "mean": 5.828670879282072e-16,
+      "std": 1.545365047825326e-16,
+      "n": 3
+    },
+    "frozen_encoder_change": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "initialization_reference_max_error": {
+      "mean": 6.47630097698008e-17,
+      "std": 4.239734207189668e-17,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "prototype_gradient_norm": {
+      "mean": 74.13380327931938,
+      "std": 6.689950195712514,
+      "n": 3
+    },
+    "prototype_update_norm": {
+      "mean": 0.004242640555285359,
+      "std": 2.0476042505112998e-10,
+      "n": 3
+    },
+    "query_batch_invariance_max_error": {
+      "mean": 3.120651885050544e-14,
+      "std": 2.758192550376132e-14,
+      "n": 3
+    },
+    "regional_kernel_reference_max_error": {
+      "mean": 1.445649155940032e-13,
+      "std": 7.235922080667712e-14,
+      "n": 3
+    },
+    "residual_solve_reference_max_error": {
+      "mean": 5.1976941269534414e-14,
+      "std": 2.7480785932499255e-14,
+      "n": 3
+    },
+    "stale_support_residual_negative_control_difference": {
+      "mean": 0.0007682525259766482,
+      "std": 5.097904154841039e-05,
+      "n": 3
+    },
+    "synthetic_validation_accuracy": {
+      "mean": 0.3888888888888889,
+      "std": 0.09622504486493764,
+      "n": 3
+    },
+    "test_examples": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    },
+    "validation_selected_rho": {
+      "mean": 0.3333333333333333,
+      "std": 0.5773502691896257,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "regional_kernel_reference_max_error": 6.572520305780927e-14,
+        "residual_solve_reference_max_error": 4.8183679268731794e-14,
+        "initialization_reference_max_error": 5.551115123125783e-17,
+        "cached_response_reference_max_error": 4.440892098500626e-16,
+        "stale_support_residual_negative_control_difference": 0.0008206486816285385,
+        "query_batch_invariance_max_error": 6.189493362285248e-15,
+        "frozen_encoder_change": 0.0,
+        "prototype_gradient_norm": 74.23999891702182,
+        "prototype_update_norm": 0.004242640319008678,
+        "validation_selected_rho": 0.0,
+        "synthetic_validation_accuracy": 0.3333333333333333,
+        "base_lamp_synthetic_test_accuracy": 0.4,
+        "test_examples": 5,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "regional_kernel_reference_max_error": 2.0794477251229182e-13,
+        "residual_solve_reference_max_error": 2.65898414397725e-14,
+        "initialization_reference_max_error": 1.1102230246251565e-16,
+        "cached_response_reference_max_error": 5.551115123125783e-16,
+        "stale_support_residual_negative_control_difference": 0.0007188198869998719,
+        "query_batch_invariance_max_error": 6.078471059822732e-14,
+        "frozen_encoder_change": 0.0,
+        "prototype_gradient_norm": 67.39138744694738,
+        "prototype_update_norm": 0.004242640665885196,
+        "validation_selected_rho": 1.0,
+        "synthetic_validation_accuracy": 0.5,
+        "base_lamp_synthetic_test_accuracy": 0.4,
+        "test_examples": 5,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "regional_kernel_reference_max_error": 1.600247712119085e-13,
+        "residual_solve_reference_max_error": 8.115730310009894e-14,
+        "initialization_reference_max_error": 2.7755575615628914e-17,
+        "cached_response_reference_max_error": 7.494005416219807e-16,
+        "stale_support_residual_negative_control_difference": 0.0007652890093015341,
+        "query_batch_invariance_max_error": 2.6645352591003757e-14,
+        "frozen_encoder_change": 0.0,
+        "prototype_gradient_norm": 80.77002347398894,
+        "prototype_update_norm": 0.004242640680962204,
+        "validation_selected_rho": 0.0,
+        "synthetic_validation_accuracy": 0.3333333333333333,
+        "base_lamp_synthetic_test_accuracy": 0.2,
+        "test_examples": 5,
+        "optimizer_steps": 1
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+    "artifact_path": "docs/foundation-models/2610.22182-lamp/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:a82757ec1c8d49840c8c692cd66e029e1acd95394f66b6469bfab8fc33249a10",
+    "raw_runner_artifact_sha256": "41231de4da00cf186c488055e044d780f93ea010cccc3f2ed17251329b5cb2d7",
+    "executed_source_sha256": {
+      "scripts/run_oct19_foundation_components.py": "18460d279ef79bdb35cb2cc049323a3ea3ee18417e5eea85a5db9d142eb9db2d",
+      "src/auto_research/foundation_models/lamp.py": "7223904063b3fcfd6f27cc591b3f6d5976db954f33006cee73ab1e565d924d73"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

@@ -825,6 +825,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "fpot": ("推理与系统效率", "量化"),
+        "lamp": ("多模态基础模型", "视觉语言适配与表征"),
+        "gen4p": ("多模态基础模型", "世界模型与具身控制"),
         "memory-mosaics-plus": ("网络架构", "条件记忆与知识注入"),
         "mjev-spatial": ("多模态基础模型", "空间理解与结构化视觉推理"),
         "adaloop-vision": ("多模态基础模型", "循环视觉编码与自适应计算"),

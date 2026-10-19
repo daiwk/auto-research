@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "method": "fpot",
+  "manifest_ref": "foundation-models:fpot",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-fpot-and-native-layer-kernel-features",
+    "revision": "oct19-foundation-mechanisms-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol fixtures; not capability or official benchmark evidence"
+  },
+  "metrics": {
+    "approx_grid_mse_gain_over_posthoc": {
+      "mean": 0.0017407280006645303,
+      "std": 0.0009029955930942755,
+      "n": 3
+    },
+    "approximate_grid_reference_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "integer_shift_add_reference_max_error": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "magnitude_without_minus_one_negative_control_error": {
+      "mean": 66.66666666666667,
+      "std": 4.932882862316247,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "phase_search_mse_gain": {
+      "mean": 0.0017614173621702215,
+      "std": 0.0007571239892715363,
+      "n": 3
+    },
+    "posthoc_grid_negative_control_difference": {
+      "mean": 0.26624245306801664,
+      "std": 0.023339952111728644,
+      "n": 3
+    },
+    "ste_gradient_reference_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "weight_gradient_norm": {
+      "mean": 7.178079066183783,
+      "std": 0.7712080256043647,
+      "n": 3
+    },
+    "weight_update_norm": {
+      "mean": 0.07178079066183783,
+      "std": 0.0077120802560436096,
+      "n": 3
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "approximate_grid_reference_max_error": 0.0,
+        "integer_shift_add_reference_max_error": 0,
+        "magnitude_without_minus_one_negative_control_error": 69,
+        "posthoc_grid_negative_control_difference": 0.2931294061896822,
+        "approx_grid_mse_gain_over_posthoc": 0.0007102104526625387,
+        "phase_search_mse_gain": 0.0009082884067312565,
+        "ste_gradient_reference_max_error": 0.0,
+        "weight_gradient_norm": 7.685595499044959,
+        "weight_update_norm": 0.0768559549904496,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "approximate_grid_reference_max_error": 0.0,
+        "integer_shift_add_reference_max_error": 0,
+        "magnitude_without_minus_one_negative_control_error": 61,
+        "posthoc_grid_negative_control_difference": 0.25119517525615404,
+        "approx_grid_mse_gain_over_posthoc": 0.0023935594049109884,
+        "phase_search_mse_gain": 0.002353405460253184,
+        "ste_gradient_reference_max_error": 0.0,
+        "weight_gradient_norm": 6.290615775181054,
+        "weight_update_norm": 0.06290615775181059,
+        "optimizer_steps": 1
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "approximate_grid_reference_max_error": 0.0,
+        "integer_shift_add_reference_max_error": 0,
+        "magnitude_without_minus_one_negative_control_error": 70,
+        "posthoc_grid_negative_control_difference": 0.2544027777582136,
+        "approx_grid_mse_gain_over_posthoc": 0.0021184141444200635,
+        "phase_search_mse_gain": 0.0020225582195262243,
+        "ste_gradient_reference_max_error": 0.0,
+        "weight_gradient_norm": 7.558025924325337,
+        "weight_update_norm": 0.07558025924325332,
+        "optimizer_steps": 1
+      }
+    }
+  ],
+  "provenance": {
+    "commit": "8c963f810e45ce3886e43b1b5da39980e41c95c0",
+    "artifact_path": "docs/foundation-models/2610.21257-fpot/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:c9b04e1695ce470668032e0cb84044bb46566fffdf19bba6610eae3bb8765b25",
+    "raw_runner_artifact_sha256": "41231de4da00cf186c488055e044d780f93ea010cccc3f2ed17251329b5cb2d7",
+    "executed_source_sha256": {
+      "scripts/run_oct19_foundation_components.py": "18460d279ef79bdb35cb2cc049323a3ea3ee18417e5eea85a5db9d142eb9db2d",
+      "src/auto_research/foundation_models/fpot.py": "ebd83c98a7df15fe72bb34a9d68ff9c3caa9f9d1a12a7630746563fb0777fcd8"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

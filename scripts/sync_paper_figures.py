@@ -76,6 +76,15 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2608.26263-skill-state": "1",
+    "2610.21257-fpot": "1",
+    "2610.22182-lamp": "1",
+    "2610.22371-gen4p": "2",
+    "2610.22331-knowgpo": "2",
+    "2610.22324-diverge-ideation": "1",
+    "2610.20675-alpha-diana": "3",
+    "2610.21624-agent-perturb": "2",
+    "2610.22194-auto-sft": "1",
     "2610.22075-rr-vlm": "1",
     "2610.21412-jev-agent-harness": "8",
     "2610.20782-memory-mosaics-plus": "2",
@@ -147,6 +156,34 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.21257-fpot": {
+        "pdf_url": "https://arxiv.org/pdf/2610.21257v1",
+        "page": 3,
+        "rect": (104, 72, 509, 215),
+        "label": "Figure 1",
+        "caption": "INT4 乘法器、PoT 移位器与 FPoT 处理单元对比；完整保留奇数指数路径的一次加法近似。硬件成本为论文分析，不是本地 GPU 加速测量。",
+    },
+    "2610.20675-alpha-diana": {
+        "pdf_url": "https://arxiv.org/pdf/2610.20675v1",
+        "page": 2,
+        "rect": (55, 52, 541, 335),
+        "label": "Figure 3",
+        "caption": "AlphaDiana 的配置、运行器、会话管理、原生 Agent、推理端点和产物分析系统边界；完整保留评分状态及其与轨迹证据的关联，不代表本地已验收官方运行时。",
+    },
+    "2608.26263-skill-state": {
+        "pdf_url": "https://arxiv.org/pdf/2608.26263v3",
+        "page": 3,
+        "rect": (100, 75, 500, 438),
+        "label": "Figure 1",
+        "caption": "SKILL.state v3 的执行架构：只保留固定技能、当前状态和最新观察，验证更新后丢弃中间推理；完整保留左右对比与下方上下文增长示意。",
+    },
+    "2610.22324-diverge-ideation": {
+        "pdf_url": "https://arxiv.org/pdf/2610.22324v1",
+        "page": 1,
+        "rect": (103, 76, 508, 255),
+        "label": "Figure 1",
+        "caption": "DIVERGE 的整组想法生成与质量乘以前序最近距离的集合奖励流程；完整保留文档输入、共享推理、各项奖励及 RL 回路，图中数值不是本地科学质量评测。",
+    },
     "2610.22075-rr-vlm": {
         "pdf_url": "https://arxiv.org/pdf/2610.22075v1",
         "page": 1,
@@ -676,6 +713,15 @@ def update_page(paper: Paper, result: FigureResult) -> None:
     text = paper.page.read_text(encoding="utf-8")
     description = chinese_description(result.original_caption)
     reviewed_descriptions = {
+        "2608.26263-skill-state": str(SPECIAL_CROPS["2608.26263-skill-state"]["caption"]),
+        "2610.21257-fpot": str(SPECIAL_CROPS["2610.21257-fpot"]["caption"]),
+        "2610.22182-lamp": "全局及三层原生区域特征分别拟合支持标签残差，再在类别分数空间选择混合；图中示例为原文 CLIP 结果，不是本地随机特征诊断。",
+        "2610.22371-gen4p": "视频 VAE 与 DiT、可训练 4D-LoRA、连续时间查询和交叉注意力解码器的单次前向 4D 感知架构；这是高成本论文方法，未宣称本地复现。",
+        "2610.22331-knowgpo": "训练专属知识条件构造与前态分组信用分配；左侧答案和参考轨迹属于 verifier 侧数据，不是可供被评估 actor 读取的输入。",
+        "2610.22324-diverge-ideation": str(SPECIAL_CROPS["2610.22324-diverge-ideation"]["caption"]),
+        "2610.20675-alpha-diana": str(SPECIAL_CROPS["2610.20675-alpha-diana"]["caption"]),
+        "2610.21624-agent-perturb": "扰动构造的四阶段流程：选择单一目标及类型、示例驱动编辑、必要时适配评测注释，再由独立 verifier 检查目标保持、可解性和可执行性。",
+        "2610.22194-auto-sft": "AutoSFT 的 meta、executor、analysis 与 synthesis 角色，及共享数据池和技能库；每轮从固定基座重新训练，完整多 Agent 训练实验未在本地复现。",
         "2610.22130-drop-kv": "RULER 准确率随序列长度与 KV cache 预算的变化；这是原论文评测曲线，不是架构图或本地测量。",
         "2610.22245-disagreement-routing": "三个 benchmark 的准确率—路由预算曲线及其与最优路由的差距；这是原论文结果，不是本地合成探针能力。",
         "2610.22353-mirror-moe": "训练中的专家抑制、有效专家数及最小混合比 ξ 的变化；这是原论文训练诊断，不是本地预训练结果。",

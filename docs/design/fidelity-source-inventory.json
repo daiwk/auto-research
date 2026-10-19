@@ -3,6 +3,42 @@
   "status": "review_inventory_not_capability_evidence",
   "limitations": "AST attributes and literal-key access; dynamic keys and cross-function dataflow require behavioral tests",
   "files": {
+    "src/auto_research/agent_research/agent_perturb.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 124,
+        "qualified_name": "ActorOutput.__post_init__",
+        "expression": "self.answer",
+        "fingerprint": "4070f9569c410bb803e298005e93cc976f3411edac8addeb092261f5598ca867"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "episode",
+        "line": 181,
+        "qualified_name": "episode",
+        "expression": "output.answer",
+        "fingerprint": "3dbfa927dd7b6f5bfe8e1ae71a23c01a4c7211423a4928886edaa0c1cf48de0d"
+      }
+    ],
+    "src/auto_research/agent_research/alpha_diana.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 64,
+        "qualified_name": "AgentOutput.__post_init__",
+        "expression": "self.answer",
+        "fingerprint": "4070f9569c410bb803e298005e93cc976f3411edac8addeb092261f5598ca867"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "run_sample",
+        "line": 159,
+        "qualified_name": "ProtocolRunner.run_sample",
+        "expression": "output.answer",
+        "fingerprint": "3dbfa927dd7b6f5bfe8e1ae71a23c01a4c7211423a4928886edaa0c1cf48de0d"
+      }
+    ],
     "src/auto_research/agent_research/atomrec_checkpoint.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -10513,6 +10549,16 @@
         "qualified_name": "Sentry.observe",
         "expression": "self.clock += 1",
         "fingerprint": "8d987e0eb2340b18942ecc484482fdc4b0d23d1c6aeb395750ad2483af0d39d6"
+      }
+    ],
+    "src/auto_research/agent_research/skill_state.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 174,
+        "qualified_name": "SkillStateRuntime.step",
+        "expression": "self._version += 1",
+        "fingerprint": "1cb64483ac275c6c20495427f025e855bd44c29b624f96f63672d9e0cc8e75ad"
       }
     ],
     "src/auto_research/agent_research/t2spo.py": [
