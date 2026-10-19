@@ -317,7 +317,8 @@ def finalize():
                 validation["gpu_validation_artifact"] = row["gpu_validation_artifact"]
         candidates.append({"id": re.search(r"\d{4}\.\d{4,5}", row["paper_url"]).group(), "key": row["key"],
             "component_key": key if key != row["key"] else None, "title": row["title"], "priority": row.get("priority", "P1"),
-            "track": {"foundation-models": "foundation-model", "post-training": "post-training", "agent-research": "agent", "recommendation": "recommendation"}[row["domain"]],
+            "track": "system-one" if key == "jev-portuguese-ir" else {
+                "foundation-models": "foundation-model", "post-training": "post-training", "agent-research": "agent", "recommendation": "recommendation"}[row["domain"]],
             "publication_date": row["published"], "intake_class": "substantive-version-update-v3" if key == "unirec-v3-components" else "new-announcement-new-to-review",
             "status": "deferred", "status_scope": "full_paper_reproduction", "resolution": "not_reproduced_high_cost",
             "full_experiment_status": "not_reproduced_high_cost", "review_done": True, "terminal": True,

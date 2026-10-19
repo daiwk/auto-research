@@ -134,6 +134,8 @@ def test_batch_does_not_advance_watermark_or_requeue_high_cost_full_experiments(
     ledger = json.loads((ROOT / "docs/paper-discovery-ledger.json").read_text())
     batch = next(b for b in ledger["batches"] if b["batch"] == admission.BATCH)
     assert len(batch["candidates"]) == 14 and not batch["coverage_complete"] and not batch["review_watermark_advanced"]
+    assert set(batch["required_tracks"]) <= {row["track"] for row in batch["candidates"]}
+    assert next(row for row in batch["candidates"] if row["key"] == "jev-portuguese-ir")["track"] == "system-one"
     assert batch["component_validation_counts"] == {"gpu_validated_components": 7, "cpu_validated_components_or_interfaces": 4, "review_only": 3}
     for row in batch["candidates"]:
         assert row["review_done"] and row["terminal"] and row["status"] == "deferred"
