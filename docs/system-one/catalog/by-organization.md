@@ -2,6 +2,10 @@
 
 论文按第一作者所属机构聚合；产品和社区项目单独标明，避免把开源作者误写成论文机构。
 
+## Câmara dos Deputados
+
+- [Jev 葡语 IR](../../foundation-models/2610.23346-jev-portuguese-ir/README.md)（2026-10-16）：独立概率重排与有序相关性判定，明确完整候选覆盖和线性检索指标；本地为 CPU 协议接口，未运行商业模型。
+
 ## TypeSafe AI
 
 - [Jev](../implementations.md#official-jev)：官方托管 System One 模型，公开 Choice、Score、Noul 类型化决策协议；内部架构、训练集和权重尚未公开。

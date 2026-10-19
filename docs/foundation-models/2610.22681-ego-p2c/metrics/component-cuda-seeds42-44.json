@@ -1,0 +1,155 @@
+{
+  "schema_version": 2,
+  "method": "ego-p2c",
+  "manifest_ref": "foundation-models:ego-p2c",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-role-decoder-mlp-attention",
+    "revision": "oct19-evening-foundation-mechanisms-v1",
+    "checkpoint": null,
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "loss": -0.40088125454535173,
+        "loss_reference_max_error": 0.0,
+        "logit_gradient_reference_max_error": 2.7755575615628914e-17,
+        "rollout_rescore_max_error": 0.0,
+        "trainable_gradient_norm": 0.3375269823943636,
+        "parameter_update_norm": 0.006750539647887275,
+        "teacher_gradient_norm": 0.0,
+        "frozen_gradient_norm": 0.0,
+        "frozen_parameter_update_max": 0.0,
+        "perception_private_context_rejected": 1,
+        "wrong_teacher_loss_absolute_delta": 0.2832350013662898
+      },
+      "audit_sha256": "85b3d80267a5b85d673d374bef156a49d39b34adfeb768ac03938214233b2f5b"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "loss": -2.0310719836244466,
+        "loss_reference_max_error": 0.0,
+        "logit_gradient_reference_max_error": 6.938893903907228e-18,
+        "rollout_rescore_max_error": 0.0,
+        "trainable_gradient_norm": 0.32242655255344693,
+        "parameter_update_norm": 0.00644853105106894,
+        "teacher_gradient_norm": 0.0,
+        "frozen_gradient_norm": 0.0,
+        "frozen_parameter_update_max": 0.0,
+        "perception_private_context_rejected": 1,
+        "wrong_teacher_loss_absolute_delta": 3.22112529333307
+      },
+      "audit_sha256": "cde9b0946f2952ff9ad7d5c910051c7650c2c110e01e31a76af7f38bce0c85e3"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "loss": -0.4276475054598173,
+        "loss_reference_max_error": 1.6653345369377348e-16,
+        "logit_gradient_reference_max_error": 6.938893903907228e-18,
+        "rollout_rescore_max_error": 0.0,
+        "trainable_gradient_norm": 0.2168830210295594,
+        "parameter_update_norm": 0.00433766042059119,
+        "teacher_gradient_norm": 0.0,
+        "frozen_gradient_norm": 0.0,
+        "frozen_parameter_update_max": 0.0,
+        "perception_private_context_rejected": 1,
+        "wrong_teacher_loss_absolute_delta": 0.030763915041818746
+      },
+      "audit_sha256": "ca34a3dd78310fe7f19fd9e8c086c6d3a8fa09c52a39337db072b59f50adbea3"
+    }
+  ],
+  "metrics": {
+    "frozen_gradient_norm": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "frozen_parameter_update_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "logit_gradient_reference_max_error": {
+      "mean": 1.3877787807814457e-17,
+      "std": 1.2018516789897274e-17,
+      "n": 3
+    },
+    "loss": {
+      "mean": -0.9532002478765386,
+      "std": 0.9335602375262992,
+      "n": 3
+    },
+    "loss_reference_max_error": {
+      "mean": 5.551115123125783e-17,
+      "std": 9.614813431917819e-17,
+      "n": 3
+    },
+    "parameter_update_norm": {
+      "mean": 0.005845577039849135,
+      "std": 0.0013145956397743674,
+      "n": 3
+    },
+    "perception_private_context_rejected": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "rollout_rescore_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_gradient_norm": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "trainable_gradient_norm": {
+      "mean": 0.2922788519924566,
+      "std": 0.06572978198871834,
+      "n": 3
+    },
+    "wrong_teacher_loss_absolute_delta": {
+      "mean": 1.178374736580393,
+      "std": 1.7735720425718529,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/foundation-models/2610.22681-ego-p2c/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "39f5aad1928f8ec9e58db4529f6f9f8d40a0ab895023da466e4d490455ace199",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_foundation_components.py": "21f1d5f522e852df9e1c68597b0157858a94baf425a76e1fade6e7ca9159c4ce",
+      "src/auto_research/foundation_models/ego_p2c.py": "fc3170806bc42884273cef4409e2df6eea29e6bf0c4d69009f36521cffa9bd03",
+      "src/auto_research/foundation_models/bmuon.py": "9024bd9af8dbf65ef4bf6c1253190aad933fba13e02598bbeea32ffab934b0d5",
+      "src/auto_research/foundation_models/sink_sparse.py": "c21b383a5392d294793c98015dde2b49e6e9a7e5267caca847615dbfbec79308"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:7705801b492674ba20328e9479eda585fcbc89f97ba86b4c714559bf49cf0775"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

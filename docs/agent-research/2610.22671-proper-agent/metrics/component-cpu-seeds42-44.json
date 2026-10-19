@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "method": "proper-agent",
+  "manifest_ref": "agent-research:proper-agent",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-proper-agent-contract-fixture",
+    "revision": "77838ce6e566b5a13b55d89360896c1025ac1d72b15ead3b266ae1b7eaec5630",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert graph, paired-control and grounded STRIPS fixtures"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "fixture_clips": 15,
+        "timing_content_protocol_perfect_rate": 1.0,
+        "oracle_always_speak_negative_control_perfect_rate": 0.0,
+        "oracle_always_speak_negative_control_overtrigger_rate": 1.0,
+        "silent_clip_false_trigger_rate": 0.0,
+        "retained_unscored_clips": 15,
+        "rejected_nonretrieved_provenance": 15,
+        "future_memory_exposures": 0,
+        "gold_fields_in_actor_view": 0
+      },
+      "audit_sha256": "1ae781334b4e187eb0495a8db5f37b26e847b489d3a440cc61259d366d7b3c1b",
+      "fixture_sha256": "151107e014fd531aade883bce7e989bd00c5e5eaf8b0a756b83888a08ed820c5"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "fixture_clips": 10,
+        "timing_content_protocol_perfect_rate": 1.0,
+        "oracle_always_speak_negative_control_perfect_rate": 0.0,
+        "oracle_always_speak_negative_control_overtrigger_rate": 1.0,
+        "silent_clip_false_trigger_rate": 0.0,
+        "retained_unscored_clips": 10,
+        "rejected_nonretrieved_provenance": 10,
+        "future_memory_exposures": 0,
+        "gold_fields_in_actor_view": 0
+      },
+      "audit_sha256": "6bc684cdb335db4926829cd74d9db6b322d40b5ca7b4a3ed7570857edd696cbf",
+      "fixture_sha256": "e4d4abb99c2166d9f18f7ef9a66625f19f308facd5896706deb79a0cc9062d49"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "fixture_clips": 13,
+        "timing_content_protocol_perfect_rate": 1.0,
+        "oracle_always_speak_negative_control_perfect_rate": 0.0,
+        "oracle_always_speak_negative_control_overtrigger_rate": 1.0,
+        "silent_clip_false_trigger_rate": 0.0,
+        "retained_unscored_clips": 13,
+        "rejected_nonretrieved_provenance": 13,
+        "future_memory_exposures": 0,
+        "gold_fields_in_actor_view": 0
+      },
+      "audit_sha256": "46b83f5b448344f35a387ac3a8c6f3177e8115f4e56c27929512ae52ce5dd474",
+      "fixture_sha256": "6227ec8585e05bc89538984bd790b8958741598e6370ee0c669314088241b7d7"
+    }
+  ],
+  "metrics": {
+    "fixture_clips": {
+      "mean": 12.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "future_memory_exposures": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gold_fields_in_actor_view": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "oracle_always_speak_negative_control_overtrigger_rate": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "oracle_always_speak_negative_control_perfect_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "rejected_nonretrieved_provenance": {
+      "mean": 12.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "retained_unscored_clips": {
+      "mean": 12.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "silent_clip_false_trigger_rate": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "timing_content_protocol_perfect_rate": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/agent-research/2610.22671-proper-agent/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "693af5d4ae0925789b58e41336cb028edc8b2aff1f94ec853eb9d022e3a74707",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_agent_components.py": "c5e0d165396f3a5aa44fe8fc2fb619c8cbb9539c9547cf8de7645011172e936f",
+      "src/auto_research/agent_research/proper_agent.py": "e4d2183c97f9e8d2147432ac12469af127ec75ee51f431b7ce9aa81abef3371f",
+      "src/auto_research/agent_research/harness_decomposition.py": "aa9a1c9dd39546a8cdabd3b22497337ae2333b7de86cedcd17267c4d36872122",
+      "src/auto_research/agent_research/drago.py": "e8413d7ac0edb5c7cb27732022c9c88983c1d28ccb852438513ee173d2847d6c"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:4a16002a635e1f6381b2301fdc3a769a05fb52a147766990638c20eee0409e26"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

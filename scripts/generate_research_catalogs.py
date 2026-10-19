@@ -825,6 +825,11 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "ego-p2c": ("多模态基础模型", "角色协作与策略蒸馏"),
+        "bmuon": ("预训练与数据", "优化器与训练稳定性"),
+        "sink-sparse": ("注意力与长上下文", "稀疏注意力与视频生成"),
+        "ppmem": ("多模态基础模型", "世界模型与具身控制"),
+        "jev-portuguese-ir": ("推理与系统效率", "System One / JEV 检索评测协议"),
         "fpot": ("推理与系统效率", "量化"),
         "lamp": ("多模态基础模型", "视觉语言适配与表征"),
         "gen4p": ("多模态基础模型", "世界模型与具身控制"),

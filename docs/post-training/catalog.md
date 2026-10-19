@@ -10,6 +10,11 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [GR-OPD: Group-Relative Sequence Credit for On-Policy Distillation](2610.23042-gr-opd/README.md) | Shanghai Jiao Tong University，2026-10-16 | 未发现官方代码 | `gr-opd`：仅低成本组件，完整实验不复现 |
+| RLVR | [MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning](2610.23245-mge-po/README.md) | 论文未列机构（不据邮箱域名推断），2026-10-16 | 未发现官方代码 | 计划键 `mge-po`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| Agentic RL | [MultiAgent-OPD: End-to-End Training of Hierarchical Multi-Agent Systems with On-Policy Distillation](2610.23234-multiagent-opd/README.md) | Alibaba Group，2026-10-16 | 未发现官方代码 | 计划键 `multiagent-opd`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| On-policy distillation | [SimOPD: Relational Knowledge Transfer for On-Policy Distillation](2610.23306-simopd/README.md) | Zhejiang University，2026-10-16 | 未发现官方代码 | `simopd`：仅低成本组件，完整实验不复现 |
+| Agentic RL | [Tree-Aware Posterior Distillation for Long-Horizon Agentic Reinforcement Learning](2610.23181-treeopsd/README.md) | Tsinghua University，2026-10-16 | 未发现官方代码 | `treeopsd`：仅低成本组件，完整实验不复现 |
 | 二元反馈对齐 | [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](2610.21138-clean-rm/README.md) | Zhejiang University，2026-10-15 | [原作者入口](https://anonymous.4open.science/r/CAN-RM-46BB)；论文提供匿名代码入口，但本轮访问失败，未核验其内容、许可证或可运行性；本地按公式独立实现 | `clean-rm`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Compatibility Matters: A Framework for Token-Level Teacher Selection in On-Policy Distillation](2610.21234-token-teacher-selection/README.md) | Princeton University，2026-10-15 | 未发现官方代码 | `token-teacher-selection`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Condition-Contrastive Extrapolation for On-Policy Distillation of Language Models](2610.21195-cce-opd/README.md) | The Chinese University of Hong Kong, Shenzhen，2026-10-15 | 未发现官方代码 | `cce-opd`：仅低成本组件，完整实验不复现 |

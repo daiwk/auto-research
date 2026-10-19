@@ -64,6 +64,10 @@
 - [Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure](../2610.21281-diviner/README.md)（`diviner`）：生产事故的症状可能跨推荐、排序、数据、配置和算力服务传播。LLM 能调用工具并不代表它能可靠诊断：超时不等于无异常，历史相似事故不证明本次根因，事后总结也不能作为事故发生时的证据。
 - [JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs](../2610.21412-jev-agent-harness/README.md)（`jev-agent-harness`）：Agent 不需要每一步都让昂贵 LLM 生成长文本，但离线多选题高准确率也不保证闭环不出错。JevAgentHarness 在 agent 自己访问的 shadow trajectories 上，分别校准工具、参数等决策的委派阈值，低置信交回 LLM，并报告成功／费用／关键路径延迟。
 
+### 规划与搜索
+
+- [Repairing LLM-Generated Specifications with Deterministic Diagnosis](../2610.22568-drago/README.md)（`drago`）：形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。
+
 ### Harness 自进化
 
 - [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
@@ -135,6 +139,10 @@
 ### 训练服务优化
 
 - [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
+
+### 记忆与长期交互
+
+- [ProPerAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
 
 ### 红队技能进化
 
@@ -243,6 +251,7 @@
 
 - [AgentPerturb: Evaluating LLM Agent Robustness under Controlled Interaction Perturbations](../2610.21624-agent-perturb/README.md)（`agent-perturb`）：Agent 失败不一定来自模型推理：用户请求缺信息、技能规范过时、历史上下文出错和工具说明漂移都可能沿轨迹传播。AgentPerturb 交叉组织四个目标——用户请求 $U$、过程规范 $P$、继承上下文 $C$、工具契约 $T$——与缺失、冗余、错误三类扰动，得到12个家族。
 - [GACC-Bench: Benchmarking Goal-Adaptive Context Compression Ability across Large Language Models](../2610.21893-gacc-bench/README.md)（`gacc-bench`）：长期上下文压缩常在具体后续问题尚未知时执行，但用户可能已给出高层目标。GACC-Bench 按 context–goal 组织多道后续问题，压缩器只能看到来源、目标和预算；固定 reader 用同一压缩记忆逐题回答，再由固定 judge 对照原文和参考答案评分，检验是否保全整组目标证据。
+- [Harness-Delta Attribution: Dissecting Gains From Harness Evolution](../2610.22466-harness-decomposition/README.md)（`harness-decomposition`）：同一个冻结模型的 Harness 可以靠更多推理算力，也可以靠基准捷径涨分。甚至 held-out 数据也可能共享相同捷径。
 - [Librarian Agents: Training LLMs to Curate Long-Context Workspaces that Anticipate Future Queries](../2610.22273-librarian-agents/README.md)（`librarian-agents`）：常规 RAG 每次查询后才检索，重复探索跨文档关系。Librarian 在还未看到评测问题时，由可学习 builder 把原始语料组织成可复用层级文件系统；固定 answerer 后续导航，必要时沿 provenance 回退到 raw docs。
 - [PROBE: Learning to Audit Policy Compliance in Tool-Using LLM Agents](../2610.22124-probe/README.md)（`probe`）：任务完成并不等于按业务/隐私政策完成；只测试最终状态或有害文本也可能漏掉多轮工具调用中的违规。PROBE 训练扮演正常客户的 auditor，与冻结 target 交互，私有 verifier 从完整 trace 判断违规；奖励综合违规、可信客户行为、工具流程进展和策略多样性，比较 GRPO、DPO 和 GFlowNet。
 - [SciPIvot: Benchmarking Principal-Investigator Judgment at Pivotal Moments of Scientific AutoResearch Agents](../2610.21082-scipivot/README.md)（`scipivot`）：26 个跨六科学领域项目、六个月人类纠偏记录构成 248 个关键决策：一个选项是原 LLM 方案，另一个为人类纠正方案。评测器选择更适当的后续研究计划，不是预测项目最终成功。

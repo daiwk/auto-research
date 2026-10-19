@@ -121010,6 +121010,673 @@
           ]
         }
       ]
+    },
+    {
+      "batch": "2026-10-19-evening-new-announcements-and-unirec-v3",
+      "date": "2026-10-19",
+      "scope_kind": "selected-paper-implementation",
+      "coverage_complete": false,
+      "window": "Oct19 announcements: Oct15–16 first submissions plus UniRec v3; not fourteen papers first published today",
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent",
+        "system-one"
+      ],
+      "review_watermark_advanced": false,
+      "review_snapshot_modified": false,
+      "scope_artifact": "research-audits/oct19-evening-components/README.md",
+      "accepted_scope_counts": {
+        "bounded_components_and_interfaces": 11,
+        "review_only_papers": 3
+      },
+      "component_validation_counts": {
+        "gpu_validated_components": 7,
+        "cpu_validated_components_or_interfaces": 4,
+        "review_only": 3
+      },
+      "candidates": [
+        {
+          "id": "2610.22681",
+          "key": "ego-p2c",
+          "component_key": null,
+          "title": "EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video",
+          "priority": "P0",
+          "track": "foundation-model",
+          "publication_date": "2026-10-15",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。8B、8张H100、多阶段SFT/GRPO与600次MOPD更新。",
+          "cost_assessment": {
+            "basis": "8B、8张H100、多阶段SFT/GRPO与600次MOPD更新。",
+            "source_url": "https://arxiv.org/abs/2610.22681",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22681-ego-p2c/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "ASU与Meta将规划、感知、直接回答分为角色FFN与注意力LoRA，在学生采样片段上按角色分配冻结教师并执行长度归一化的局部reverse-KL代理。实现复制专家、公共前缀冻结、上下文白名单、真实段内采样及MOPD梯度；仅L1算子，不是视频空间推理能力。8B与8张H100的完整多阶段实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.ego_p2c.segment_mopd_loss",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/foundation-models/2610.22681-ego-p2c/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+            "gpu_validation_artifact": "docs/gpu-validations/ego-p2c-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22681"
+            }
+          ]
+        },
+        {
+          "id": "2610.23571",
+          "key": "bmuon",
+          "component_key": null,
+          "title": "BMuon: Budgeting Muon's Spectral Geometry for Structured Compressibility",
+          "priority": "P1",
+          "track": "foundation-model",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。1B、13.1B tokens、8张H100，每seed约8.4小时。",
+          "cost_assessment": {
+            "basis": "1B、13.1B tokens、8张H100，每seed约8.4小时。",
+            "source_url": "https://arxiv.org/abs/2610.23571",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.23571-bmuon/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "让全部MLP隐藏通道竞争同一预算，以MM代理和全局二分求解分配，再在输入行与输出列两侧执行加权polar更新。实现真实配对MLP优化器、Nesterov动量与精确SVD oracle，非普通Muon加剪枝；独立特征分解与标量KKT核验。1B/13.1B tokens和8张H100的完整训练剪枝实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.bmuon.BudgetMuon",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/foundation-models/2610.23571-bmuon/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+            "gpu_validation_artifact": "docs/gpu-validations/bmuon-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23571"
+            }
+          ]
+        },
+        {
+          "id": "2610.22975",
+          "key": "sink-sparse",
+          "component_key": null,
+          "title": "Sink-Sparse Hybrid Attention for Efficient Inference in T2I/T2V Diffusion Transformers",
+          "priority": "P1",
+          "track": "foundation-model",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。81帧视频、50步扩散、多prompt校准与生成质量/系统评测；不以小算子冒充内核加速。",
+          "cost_assessment": {
+            "basis": "81帧视频、50步扩散、多prompt校准与生成质量/系统评测；不以小算子冒充内核加速。",
+            "source_url": "https://arxiv.org/abs/2610.22975",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.22975-sink-sparse/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "离线精确统计每层每头的block概率质量，逐行保留达到覆盖率的最短高质量前缀；推理复用静态稀疏支持并用全局pooled-KV分支补偿，通过含log(pool gap)修正的LSE归一化融合。实现真实块选择与稀疏gather及梯度参考，不声称DiT加速；81帧视频与2048图像完整生成评测成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.sink_sparse.hybrid_attention",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/foundation-models/2610.22975-sink-sparse/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+            "gpu_validation_artifact": "docs/gpu-validations/sink-sparse-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22975"
+            }
+          ]
+        },
+        {
+          "id": "2610.23795",
+          "key": "ppmem",
+          "component_key": null,
+          "title": "Persistent Planar Memory for Video World Models",
+          "priority": "P1",
+          "track": "foundation-model",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。5B Wan、80K以上视频、约12K次两阶段训练，第二阶段仍377M可训练参数。",
+          "cost_assessment": {
+            "basis": "5B Wan、80K以上视频、约12K次两阶段训练，第二阶段仍377M可训练参数。",
+            "source_url": "https://arxiv.org/abs/2610.23795",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.23795-ppmem/README.md",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "视频DiT联合生成RGB和七参数平面几何，将跨chunk合并的持久plane pool光栅化为深度，再由Depth Token Fusion注入下一段生成；保留三维可解释记忆而非仅缓存帧。仅收录方法、原文结果与成本判断，不用玩具plane合并冒充已复现世界模型；完整实验成本过高，不复现（审查DONE）。",
+          "local_operator": null,
+          "component_validation": {
+            "status": "review_only_not_reproduced",
+            "gpu_validation_passed": false
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23795"
+            }
+          ]
+        },
+        {
+          "id": "2610.23181",
+          "key": "treeopsd",
+          "component_key": null,
+          "title": "Tree-Aware Posterior Distillation for Long-Horizon Agentic Reinforcement Learning",
+          "priority": "P1",
+          "track": "post-training",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。4B/30B-A3B、单节点8 GPU、100次策略更新与60/80回合深度研究轨迹。",
+          "cost_assessment": {
+            "basis": "4B/30B-A3B、单节点8 GPU、100次策略更新与60/80回合深度研究轨迹。",
+            "source_url": "https://arxiv.org/abs/2610.23181v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.23181-treeopsd/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "将共享前缀 rollout 树的终局奖励按完整行为 span 概率回传，再映射为冻结的有界 Bernoulli 教师，以 forward KL 约束连续更新的有限目标。实现真实微型因果策略分支、唯一 actor turn 计数和梯度诊断；8卡4B/30B长交互完整实验成本过高，不复现，不提供搜索能力或Evolve晋级。",
+          "local_operator": "auto_research.post_training.tree_opsd.posterior_loss",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/post-training/2610.23181-treeopsd/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+            "gpu_validation_artifact": "docs/gpu-validations/treeopsd-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23181v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.23306",
+          "key": "simopd",
+          "component_key": null,
+          "title": "SimOPD: Relational Knowledge Transfer for On-Policy Distillation",
+          "priority": "P1",
+          "track": "post-training",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。8张A100、每配置200步，每步87.2秒约4.84小时，尚未计完整评估。",
+          "cost_assessment": {
+            "basis": "8张A100、每配置200步，每步87.2秒约4.84小时，尚未计完整评估。",
+            "source_url": "https://arxiv.org/abs/2610.23306v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.23306-simopd/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "教师和学生对同一学生生成回答维护配对FIFO表征，匹配各自空间里的回答相似度分布，不做跨模型hidden-state投影。实现不同hidden dim的真实微型因果策略、冻结教师、预更新表示入队及错配负对照；8×A100完整训练成本过高，不复现，不声称大模型知识迁移效果。",
+          "local_operator": "auto_research.post_training.sim_opd.PairedMemoryBank",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/post-training/2610.23306-simopd/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+            "gpu_validation_artifact": "docs/gpu-validations/simopd-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23306v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.23042",
+          "key": "gr-opd",
+          "component_key": null,
+          "title": "GR-OPD: Group-Relative Sequence Credit for On-Policy Distillation",
+          "priority": "P1",
+          "track": "post-training",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。8张H20、64 prompt乘8 response、最长28672 tokens、221 rollout step与多模型配对。",
+          "cost_assessment": {
+            "basis": "8张H20、64 prompt乘8 response、最长28672 tokens、221 rollout step与多模型配对。",
+            "source_url": "https://arxiv.org/abs/2610.23042v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.23042-gr-opd/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "将冻结教师与旧学生的token反馈裁剪并聚合为归一化折扣序列分数，再用组内相对项和保留均值压力分配信用，按逐响应平均的PPO更新。实现真实微型策略和独立公式参考，不把实际裁剪估计器称为无偏；8×H20长rollout完整实验成本过高，不复现。",
+          "local_operator": "auto_research.post_training.gr_opd.sequence_credit",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/post-training/2610.23042-gr-opd/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+            "gpu_validation_artifact": "docs/gpu-validations/gr-opd-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23042v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.23245",
+          "key": "mge-po",
+          "component_key": null,
+          "title": "MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning",
+          "priority": "P1",
+          "track": "post-training",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。2张H200、约22.6小时完整RL与评估矩阵。",
+          "cost_assessment": {
+            "basis": "2张H200、约22.6小时完整RL与评估矩阵。",
+            "source_url": "https://arxiv.org/abs/2610.23245v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.23245-mge-po/README.md",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "用生成时熵和正确性构造四象限信用修正，配合在线题目熵课程及熵加权参考KL，使同奖励回答获得不同训练权重。仅收录方法、作者结果及成本；完整比较的KL系数差异与未明确的重复统计单独保留，不声称本地实现。成本过高，不复现（审查 DONE）。",
+          "local_operator": null,
+          "component_validation": {
+            "status": "review_only_not_reproduced",
+            "gpu_validation_passed": false
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23245v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.23234",
+          "key": "multiagent-opd",
+          "component_key": null,
+          "title": "MultiAgent-OPD: End-to-End Training of Hierarchical Multi-Agent Systems with On-Policy Distillation",
+          "priority": "P1",
+          "track": "post-training",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。约17万训练题、先教师后学生的两阶段多工作流搜索及长环境轨迹。",
+          "cost_assessment": {
+            "basis": "约17万训练题、先教师后学生的两阶段多工作流搜索及长环境轨迹。",
+            "source_url": "https://arxiv.org/abs/2610.23234v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.23234-multiagent-opd/README.md",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "先训练Searcher–Answerer教师，再从相同基础模型重启共享参数Leader–Searcher–Answerer学生，以冻结教师给Searcher局部OPD监督，Leader与Answerer保留各自结果RL。仅收录，不用随机教师、固定回答或单一log-ratio算子冒充完整多Agent系统。成本过高，不复现（审查 DONE）。",
+          "local_operator": null,
+          "component_validation": {
+            "status": "review_only_not_reproduced",
+            "gpu_validation_passed": false
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23234v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.22671",
+          "key": "proper-agent",
+          "component_key": null,
+          "title": "ProPerAgent: Toward Memory-Driven Proactive Assistance",
+          "priority": "P0",
+          "track": "agent",
+          "publication_date": "2026-10-15",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。27B GRPO、7张H100、14.6小时；ProPerMem数据和作者代码待发布。",
+          "cost_assessment": {
+            "basis": "27B GRPO、7张H100、14.6小时；ProPerMem数据和作者代码待发布。",
+            "source_url": "https://arxiv.org/abs/2610.22671",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22671-proper-agent/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "以物体实体检索带来源的情节/语义记忆，结合图传播和独立干预gate决定是否提供证据；同时评估内容、时机、重复发言和应保持静默的片段。CPU组件实际执行因果时间过滤、PPR、来源接纳与独立评分，oracle记忆和触发窗口只在评测端，不能进入actor。",
+          "local_operator": "auto_research.agent_research.proper_agent.MemoryGraph",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2610.22671-proper-agent/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22671"
+            }
+          ]
+        },
+        {
+          "id": "2610.22466",
+          "key": "harness-decomposition",
+          "component_key": null,
+          "title": "Harness-Delta Attribution: Dissecting Gains From Harness Evolution",
+          "priority": "P1",
+          "track": "agent",
+          "publication_date": "2026-10-15",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。原文11模型、3框架、4任务共25配置，包含大量演化、代码容器和重评估。",
+          "cost_assessment": {
+            "basis": "原文11模型、3框架、4任务共25配置，包含大量演化、代码容器和重评估。",
+            "source_url": "https://arxiv.org/abs/2610.22466",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22466-harness-decomposition/README.md",
+          "implementation_status": "evaluation_protocol_interface",
+          "bounded_implementation_scope": "把baseline、evolved、算力匹配baseline、去除已发现捷径的evolved四臂按同一item配对，先执行双侧paired bootstrap，再拆成额外推理算力、检测到的过拟合与剩余项。两类控制均需人审核准；保留带符号原值，剩余项只是可泛化增益上界，不能证明迁移。",
+          "local_operator": "auto_research.agent_research.harness_decomposition.attribute",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2610.22466-harness-decomposition/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22466"
+            }
+          ]
+        },
+        {
+          "id": "2610.22568",
+          "key": "drago",
+          "component_key": null,
+          "title": "Repairing LLM-Generated Specifications with Deterministic Diagnosis",
+          "priority": "P1",
+          "track": "agent",
+          "publication_date": "2026-10-15",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。4张A100、PDDL/SMT/MiniZinc完整多模型协议与规划环境。",
+          "cost_assessment": {
+            "basis": "4张A100、PDDL/SMT/MiniZinc完整多模型协议与规划环境。",
+            "source_url": "https://arxiv.org/abs/2610.22568",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.22568-drago/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "以确定性契约检查和求解器探针诊断可运行却语义错误的形式规格，只有阻塞诊断严格下降且不弱化目标/对象要求才接受LLM重写。CPU子集执行grounded STRIPS删除松弛可达性、不把预算耗尽当无解的完整状态搜索及保守回滚；reference只供最终评分。",
+          "local_operator": "auto_research.agent_research.drago.diagnose",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2610.22568-drago/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.22568"
+            }
+          ]
+        },
+        {
+          "id": "2609.11052",
+          "key": "unirec",
+          "component_key": "unirec-v3-components",
+          "title": "UniRec: Cross-Stage Multi-Task Fusion with Preference Optimization for Cascaded Recommender Systems",
+          "priority": "P0",
+          "track": "recommendation",
+          "publication_date": "2026-09-10",
+          "intake_class": "substantive-version-update-v3",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。RecFlow 1.9B阶段记录、七头DSSM/DIN预训再融合训练，另含百万请求私有日志与生产A/B。",
+          "cost_assessment": {
+            "basis": "RecFlow 1.9B阶段记录、七头DSSM/DIN预训再融合训练，另含百万请求私有日志与生产A/B。",
+            "source_url": "https://arxiv.org/abs/2609.11052",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "reproductions/2609.11052-unirec/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "v3 补充保留冲突证据的 CPPA、逐行 CAPP 剪枝、基于组内 KL 的 AGRR 及 stop-gradient 跨阶段偏好算子。旧 NumPy 固定融合保留为 concept demo，原公开任务负结果不改；新增真实梯度诊断不代表双塔/RecFlow/线上系统复现。完整实验成本过高，不复现（审查 DONE）。",
+          "local_operator": "auto_research.reproductions.unirec.v3_objectives.cppa_loss",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/reproductions/2609.11052-unirec/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+            "gpu_validation_artifact": "docs/gpu-validations/unirec-v3-components-a100-20261019.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2609.11052"
+            }
+          ]
+        },
+        {
+          "id": "2610.23346",
+          "key": "jev-portuguese-ir",
+          "component_key": null,
+          "title": "Jev-as-a-Judge for Brazilian Portuguese Information Retrieval: Relevance Assessment and Reranking",
+          "priority": "P1",
+          "track": "system-one",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。封闭Jev API的13200次相关性判断与50000重排对（5000个重排请求）；原文未给时间/费用。",
+          "cost_assessment": {
+            "basis": "封闭Jev API的13200次相关性判断与50000重排对（5000个重排请求）；原文未给时间/费用。",
+            "source_url": "https://arxiv.org/abs/2610.23346",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.23346-jev-portuguese-ir/README.md",
+          "implementation_status": "evaluation_protocol_interface",
+          "bounded_implementation_scope": "实现葡语有序相关性判定、独立 Noul 概率批量重排、完整候选覆盖与稳定排序、线性增益 nDCG/MRR、加权 κ 和系统排名 τ-b。离线仅验证协议并复算原文混淆矩阵，不调用或评测 Jev；13,200 判定和 50,000 重排对的完整 API 实验成本过高，不复现（审查 DONE）。",
+          "local_operator": "auto_research.system_one.portuguese_ir.rerank",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/foundation-models/2610.23346-jev-portuguese-ir/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23346"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

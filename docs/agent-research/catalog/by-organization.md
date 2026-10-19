@@ -34,6 +34,10 @@
 
 - 2024-07-23 · 一作：Xingyao Wang · [OpenHands](../2407.16741-openhands/README.md)（`openhands`）：OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。
 
+## Amazon
+
+- 2026-10-15 · 一作：Wenxuan Ding · [Harness-Delta Attribution: Dissecting Gains From Harness Evolution](../2610.22466-harness-decomposition/README.md)（`harness-decomposition`）：同一个冻结模型的 Harness 可以靠更多推理算力，也可以靠基准捷径涨分。甚至 held-out 数据也可能共享相同捷径。
+
 ## Apodex / University of Illinois Urbana-Champaign
 
 - 2026-09-29 · 一作：Cheng Qian · [Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI](../2609.38143-meta-skills/README.md)（`meta-skills`）：从开发任务的 harness 执行反馈中提炼包含 when、provide、use 的 meta-skill，再冻结技能库；测试任务只检索相关 meta-skill 来构建新 harness，不用测试结果反向修改技能库。
@@ -298,6 +302,10 @@
 ## Meta Superintelligence Labs / Rice University（工作完成于 Meta）
 
 - 2026-05-07 · 一作：Zeyu Yang · [Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval](../2605.06647-sira/README.md)（`sira`）：冻结 LLM 先生成相关证据可能使用、但原查询缺失的词汇，再用倒排索引中的文档频率过滤不存在或过于常见的词；原查询与验证后的扩展只执行一次加权 BM25。
+
+## Michigan State University
+
+- 2026-10-15 · 一作：Shenglai Zeng · [ProPerAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
 
 ## Microsoft
 
@@ -581,6 +589,10 @@
 ## University of Osaka
 
 - 2026-10-15 · 一作：Zichuan Xu · [ToolBottleneckBench: Measuring Tool-Agent Performance under Controlled Pressures and Fixed Harness Budgets](../2610.21098-tool-bottleneck-bench/README.md)（`tool-bottleneck-bench`）：工具 Agent 的失败不只取决于模型：工具目录、可见菜单、工作流和返回记录编码会与 token/call/turn 上限交互。论文固定请求、事实和决策，分别操纵注册目录 R、可见菜单 V、认证工作流 W、返回状态 D。
+
+## University of Oxford
+
+- 2026-10-15 · 一作：Giovanni Vaccarino · [Repairing LLM-Generated Specifications with Deterministic Diagnosis](../2610.22568-drago/README.md)（`drago`）：形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。
 
 ## University of Pennsylvania
 

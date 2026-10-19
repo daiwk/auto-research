@@ -2,11 +2,11 @@
   "schema_version": 2,
   "key": "unirec",
   "arxiv_id": "2609.11052",
-  "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
+  "title": "UniRec: Cross-Stage Multi-Task Fusion with Preference Optimization for Cascaded Recommender Systems",
   "paper_url": "https://arxiv.org/abs/2609.11052",
   "organization": "Kuaishou",
   "published": "2026-09-10",
-  "upstream_code": "否：未找到作者公开仓库（核查日期：2026-09-12）",
+  "upstream_code": "否：v3 全文未给出 UniRec 作者实现；RecFlow 链接是数据集而非方法代码（核查日期：2026-10-19）",
   "track": "recommendation",
   "topics": [
     "pre-ranking",
@@ -16,8 +16,8 @@
   ],
   "local_code": "src/auto_research/reproductions/unirec",
   "documentation": "docs/reproductions/2609.11052-unirec/README.md",
-  "fidelity": "core_mechanism",
-  "evaluation_tier": "l2_public_dataset",
+  "fidelity": "concept_demo",
+  "evaluation_tier": "l1_mechanism",
   "datasets": [
     "MovieLens 100K"
   ],
@@ -47,17 +47,18 @@
           "product": "Kuaishou live recommender",
           "metric": "app usage",
           "lift_percent": 0.616,
-          "traffic": "20% live traffic followed by full deployment",
-          "source_url": "https://arxiv.org/html/2609.11052",
-          "source_location": "Section 5.4, Table 5",
-          "experiment_duration": null,
+          "traffic": "5% randomly selected live traffic followed by full deployment",
+          "source_url": "https://arxiv.org/html/2609.11052v3",
+          "source_location": "Section 5.5, Table 2",
+          "experiment_duration": "nine weeks",
           "significance": null,
-          "retrieved_at": "2026-09-12"
+          "retrieved_at": "2026-10-19"
         }
       ],
       "selection_exception": null
     },
     "omitted_core_components": [
+      "legacy adapter uses fixed NumPy score fusion instead of joint gradient training, CPPA/CAPP and AGRR KL; standalone v3 objective diagnostics do not upgrade this adapter",
       "private Kuaishou logs and features",
       "production pre-ranking/ranking serving graph",
       "full-scale cascaded model"

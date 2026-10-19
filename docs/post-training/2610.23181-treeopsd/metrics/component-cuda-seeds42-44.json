@@ -1,0 +1,149 @@
+{
+  "schema_version": 2,
+  "method": "treeopsd",
+  "manifest_ref": "post-training:treeopsd",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct19-evening-treeopsd-v1",
+    "revision": "sha256:717f412e16960de8367716e6748fe3c00d5bffc10c78ade81a71351edc58350b"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "parameter_delta_l2": 0.025456572989483055,
+        "gradient_norm_min": 0.1574996845318859,
+        "optimizer_updates": 3,
+        "credit_reference_max_abs_error": 6.661338147750939e-16,
+        "loss_reference_max_abs_error": 3.3306690738754696e-16,
+        "shared_prefix_turn_savings_min": 4,
+        "target_gradient_max_abs_error": 0.0,
+        "overshoot_loss_gradient": 0.23166165696068458,
+        "behavior_parameter_delta_l2": 0.0,
+        "behavior_gradient_count": 0,
+        "real_search_or_task_capability_evaluated": false
+      },
+      "audit_sha256": "3b08da2ba2cfdb1d4b69c7679da5c55cc74c713c7cd39b530978059e9a4a8956"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "parameter_delta_l2": 0.031069218473790024,
+        "gradient_norm_min": 0.20952457966923604,
+        "optimizer_updates": 3,
+        "credit_reference_max_abs_error": 4.440892098500626e-16,
+        "loss_reference_max_abs_error": 4.440892098500626e-16,
+        "shared_prefix_turn_savings_min": 3,
+        "target_gradient_max_abs_error": 0.0,
+        "overshoot_loss_gradient": 0.23166165696068458,
+        "behavior_parameter_delta_l2": 0.0,
+        "behavior_gradient_count": 0,
+        "real_search_or_task_capability_evaluated": false
+      },
+      "audit_sha256": "984236d94e7dc90aa1ca51de50f48a82c1b5c1785cedf81dffd0c2c3bbac3b73"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "parameter_delta_l2": 0.0437833353307827,
+        "gradient_norm_min": 0.2637039137786876,
+        "optimizer_updates": 3,
+        "credit_reference_max_abs_error": 6.661338147750939e-16,
+        "loss_reference_max_abs_error": 6.38378239159465e-16,
+        "shared_prefix_turn_savings_min": 4,
+        "target_gradient_max_abs_error": 0.0,
+        "overshoot_loss_gradient": 0.23166165696068458,
+        "behavior_parameter_delta_l2": 0.0,
+        "behavior_gradient_count": 0,
+        "real_search_or_task_capability_evaluated": false
+      },
+      "audit_sha256": "a26657a615023ef6b9b1897b217664b016dfc3d5872490dd5e67371d9dcae693"
+    }
+  ],
+  "metrics": {
+    "behavior_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "behavior_parameter_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "credit_reference_max_abs_error": {
+      "mean": 5.921189464667501e-16,
+      "std": 1.2819751242557092e-16,
+      "n": 3
+    },
+    "gradient_norm_min": {
+      "mean": 0.21024272599326985,
+      "std": 0.05310575654374812,
+      "n": 3
+    },
+    "loss_reference_max_abs_error": {
+      "mean": 4.718447854656915e-16,
+      "std": 1.545365047825326e-16,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "overshoot_loss_gradient": {
+      "mean": 0.23166165696068458,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.03343637559801859,
+      "std": 0.009389895053551412,
+      "n": 3
+    },
+    "real_search_or_task_capability_evaluated": false,
+    "shared_prefix_turn_savings_min": {
+      "mean": 3.6666666666666665,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "target_gradient_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/post-training/2610.23181-treeopsd/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "dd5b3a7937f5d89576337410dcdff19041482c14928f630f2dd90b0cc1eb8de7",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_post_components.py": "717f412e16960de8367716e6748fe3c00d5bffc10c78ade81a71351edc58350b",
+      "src/auto_research/post_training/tree_opsd.py": "95fc11ea91065a953b92e6f545c114e836c29c3be5be4dd60b2bea1901f8487a",
+      "src/auto_research/post_training/sim_opd.py": "6718a7de15a9054cf37185145d39ab7f04b9a8875285acc98f33141b293c9cc6",
+      "src/auto_research/post_training/gr_opd.py": "a1e305c04ba3b1ff4f976c14b8a443aacc291418ce1c608e4940063388302864"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:dd75ca3aaf2ef8406cc5d3c73d2d4ec52f802f9793d5931ad0f65b75dc54db0a"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

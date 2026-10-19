@@ -4,6 +4,8 @@ Jev 是 TypeSafe AI 公布的第一个 **System One** 模型：输入一份 `sta
 
 这是与基础模型、后训练和 Agent 并列的独立研究域。它研究的不是如何生成自然语言，而是如何在动态候选、评分量表或布尔命题上给出类型安全、概率可校准、可直接执行的决策。Jev 是核心产品入口；GLiClass、校准学习与社区实现构成可公开验证的方法谱系。
 
+近期新增 [Jev 葡语检索评测接口](../foundation-models/2610.23346-jev-portuguese-ir/README.md)：区分有序 qrel 判定与独立 Noul 概率重排，保留批量精确覆盖、线性 nDCG/MRR 和 κ/τ-b。只做离线协议诊断及已发表混淆矩阵复算，未调用 Jev；完整 API 实验标注高成本不复现。
+
 | 层次 | 本仓库提供什么 | 证据边界 |
 |---|---|---|
 | 官方契约 | Choice、Score、Noul 数据结构与可选 TypeSafe HTTP provider | 只实现公开 API；TypeSafe 未公布 Jev 的权重、训练集或模型结构 |

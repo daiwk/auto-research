@@ -12,6 +12,7 @@
 
 | 方向 | 方法 | 机构 | 日期 | 主要方法 | 本地入口 |
 |---|---|---|---|---|---|
+| 检索判定与重排 | [Jev 葡语 IR](../foundation-models/2610.23346-jev-portuguese-ir/README.md) | Câmara dos Deputados | 2026-10-16 | Choice 有序 qrels 与独立 Noul 概率排序分离，线性 nDCG/MRR、加权 κ 与 τ-b | CPU 协议接口与原文表格算术复核；未评测 Jev，完整实验不复现 |
 | 选项独立决策 | [Prism-1](../foundation-models/2610.22066-prism-1/README.md) | NTU | 2026-10-15 | block mask 与共享位置消除跨选项依赖，以 yes/no 对数赔率形成选择分布 | 独立小模型组件，A100三种子机制验证；完整实验不复现 |
 | 模拟前瞻 | [Code Owns the Simulation](../agent-research/2610.01834-jev-lookahead/README.md) | CUHK | 2026-10-01 | 代码逐动作克隆并模拟下一观察，把新可用动作交给 Jev 评分 | `choose_with_lookahead`；L1 协议诊断，未测真实 Jev |
 | 动态候选分类 | [GLiClass](../foundation-models/2508.07662-gliclass/README.md) | Knowledgator | 2025-08-11 | 联合编码输入与运行时候选标签，通过一次候选交互得到完整分类分布 | `system-one:bilinear-ce`、`system-one:rival-ce` |

@@ -43,7 +43,7 @@
 | 生成、排序与冷启动 | [ChronicleRec: Pre-training Temporally Anchored Tokens for Lifelong User Modeling](../2609.12375-chronicle-rec/README.md) | Tencent，2026-09-11 | 未发现官方代码 | `chronicle-rec` |
 | 生成、排序与冷启动 | [MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment](../2609.12842-mima/README.md) | Alibaba International Digital Commerce Group，2026-09-11 | 未发现官方代码 | `mima` |
 | 内容理解、审核与风险控制 | [SIRF: A Spec-Internalized Risk Foundation Model for Industrial Content Risk Control](../2609.11752-sirf/README.md) | Xiaohongshu，2026-09-10 | 未发现官方代码 | `sirf` |
-| 多阶段排序与混排 | [UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems](../2609.11052-unirec/README.md) | Kuaishou，2026-09-10 | 未发现官方代码 | `unirec` |
+| 多阶段排序与混排 | [UniRec: Cross-Stage Multi-Task Fusion with Preference Optimization for Cascaded Recommender Systems](../2609.11052-unirec/README.md) | Kuaishou，2026-09-10 | 未发现官方代码 | `unirec`：仅低成本组件，完整实验不复现 |
 | Serving 与研究基础设施 | [BAFF: Bid-Aware Filter Family for Mitigating Training Data Interference in RTB A/B Tests](../2609.08725-baff/README.md) | Dable，2026-09-08 | 未发现官方代码 | `baff` |
 | 多阶段排序与混排 | [SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching](../2609.08443-sequenceo1/README.md) | ByteDance / Douyin，2026-09-08 | 未发现官方代码 | `sequenceo1` |
 | Serving 与研究基础设施 | [AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems](../2609.04871-autolr/README.md) | NetEase, Inc.，2026-09-04 | 未发现官方代码 | `autolr` |

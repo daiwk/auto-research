@@ -1,6 +1,9 @@
 {
   "schema_version": 2,
   "method": "unirec",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "fidelity_correction": "2026-10-19: retained historical measurements unchanged; fixed NumPy scorer does not implement UniRec joint training or AGRR KL. This is a concept demo, not a paper capability comparison.",
   "dataset": "MovieLens 100K",
   "seeds": [
     42,
@@ -195,8 +198,8 @@
       43,
       44
     ],
-    "formal_comparison": true,
-    "claim_policy": "public CPU mechanism comparison; not a production KPI reproduction"
+    "formal_comparison": false,
+    "claim_policy": "historical public-data concept demo; not UniRec algorithm, production KPI or capability evidence"
   },
   "provenance": {
     "commit": "1b978289e839bfc12398533268c21e68f0f7eef6",

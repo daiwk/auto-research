@@ -11,12 +11,12 @@ from auto_research.reproductions.industrial_2026 import render_standard
 PAPERS = {
     "unirec": {
         "arxiv_id": "2609.11052",
-        "title": "UniRec: Cross-stage Multi-Task Fusion with Preference Alignment for Cascaded Recommender Systems",
+        "title": "UniRec: Cross-Stage Multi-Task Fusion with Preference Optimization for Cascaded Recommender Systems",
         "organization": "Kuaishou",
         "published": "2026-09-10",
         "topics": ("pre-ranking", "ranking", "cross-stage-alignment", "industrial-recommendation"),
         "paper_results": {"app_usage_lift_percent": 0.616, "total_watch_time_lift_percent": 0.675, "video_watch_time_lift_percent": 0.755, "active_users_lift_percent": 0.189},
-        "evidence": ("Kuaishou live recommender", "app usage", 0.616, "20% live traffic followed by full deployment", "Section 5.4, Table 5"),
+        "evidence": ("Kuaishou live recommender", "app usage", 0.616, "5% randomly selected live traffic, nine weeks, followed by full deployment", "v3 Section 5.5, Table 2"),
         "omitted": ("private Kuaishou logs and features", "production pre-ranking/ranking serving graph", "full-scale cascaded model"),
     },
     "sequenceo1": {
@@ -174,6 +174,11 @@ def reproduce(key: str, dataset_dir: Path, seed: int = 42):
     )
     result["manifest_ref"] = f"reproduction:{key}"
     result["setup"]["seed"] = seed
+    if key == "unirec":
+        result["diagnostic_only"] = True
+        result["promotion_eligible"] = False
+        result["method"]["name"] = "unirec fixed-weight concept demo"
+        result["scope"] = "Fixed NumPy fusion only; no joint gradient training, CPPA/CAPP or AGRR KL. Standalone v3 objectives do not upgrade this adapter."
     return result
 
 def render_baff(result):

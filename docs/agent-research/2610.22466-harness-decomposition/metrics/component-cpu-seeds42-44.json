@@ -1,0 +1,206 @@
+{
+  "schema_version": 2,
+  "method": "harness-decomposition",
+  "manifest_ref": "agent-research:harness-decomposition",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-harness-decomposition-contract-fixture",
+    "revision": "465cecc006def7a66666ab596e0401b7b1a55fddf2d2c384464f9ff96d4e7a56",
+    "public_benchmark_evaluated": false,
+    "initialization": "Python random.Random(seed); inert graph, paired-control and grounded STRIPS fixtures"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "observed_gain": 0.2611011887983079,
+        "ci_low": 0.24835734025177608,
+        "ci_high": 0.27416367673786635,
+        "significant": true,
+        "attributed": true,
+        "n": 52,
+        "resamples": 10000,
+        "bootstrap_p_value": 0.0,
+        "test_time_scaling": 0.07719103327758006,
+        "detected_overfitting": 0.1199307318001619,
+        "residual_upper_bound": 0.06397942372056603,
+        "raw_identity_error": 8.326672684688674e-17,
+        "overfitting_share": 0.45932664018931163,
+        "scaling_share": 0.29563646811737654,
+        "residual_share": 0.24503689169331178,
+        "rejected_invalid_controls": 3,
+        "noise_control_attributed": 0,
+        "gain_only_negative_control_overstatement": 0.19712176507774187
+      },
+      "audit_sha256": "71e8e4398532f8fe12adc164a27f6e75743ee79ff5855e06de433d68cb667e5e",
+      "fixture_sha256": "979b60d50818619649bcb2df10502893ccbcdbe05f445c311cc9aaf20b53b03b"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "observed_gain": 0.2610755484317885,
+        "ci_low": 0.24353594676649035,
+        "ci_high": 0.2788463373753475,
+        "significant": true,
+        "attributed": true,
+        "n": 33,
+        "resamples": 10000,
+        "bootstrap_p_value": 0.0,
+        "test_time_scaling": 0.0793043438047355,
+        "detected_overfitting": 0.12084359146760837,
+        "residual_upper_bound": 0.060927613159444644,
+        "raw_identity_error": 2.7755575615628914e-17,
+        "overfitting_share": 0.462868285419618,
+        "scaling_share": 0.30376013487703324,
+        "residual_share": 0.23337157970334876,
+        "rejected_invalid_controls": 3,
+        "noise_control_attributed": 0,
+        "gain_only_negative_control_overstatement": 0.20014793527234384
+      },
+      "audit_sha256": "fef258304e61c3b25ee35c7919a669b123c5e70e41db74faf7b45bb6e2a8759c",
+      "fixture_sha256": "411621784c65b1a3e811f79351723201fa31cd76349f72eaa594c517a8d82d99"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "observed_gain": 0.2640627982211197,
+        "ci_low": 0.24663691706811103,
+        "ci_high": 0.28166099210271067,
+        "significant": true,
+        "attributed": true,
+        "n": 45,
+        "resamples": 10000,
+        "bootstrap_p_value": 0.0,
+        "test_time_scaling": 0.08156524329355308,
+        "detected_overfitting": 0.1241837777169324,
+        "residual_upper_bound": 0.058313777210634354,
+        "raw_identity_error": 1.1102230246251565e-16,
+        "overfitting_share": 0.47028123065235394,
+        "scaling_share": 0.3088857796063054,
+        "residual_share": 0.22083298974134064,
+        "rejected_invalid_controls": 3,
+        "noise_control_attributed": 0,
+        "gain_only_negative_control_overstatement": 0.20574902101048537
+      },
+      "audit_sha256": "dba063ee540b18234bcc9398ba6e7c6bdb1fea3cd53930aa719417833196e897",
+      "fixture_sha256": "bcaf246975450d592fc49363e8c5712fea944033971c69322f8dd59d19fc54e1"
+    }
+  ],
+  "metrics": {
+    "attributed": true,
+    "bootstrap_p_value": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "ci_high": {
+      "mean": 0.2782236687386415,
+      "std": 0.0037872445911685797,
+      "n": 3
+    },
+    "ci_low": {
+      "mean": 0.24617673469545914,
+      "std": 0.002443416593023704,
+      "n": 3
+    },
+    "detected_overfitting": {
+      "mean": 0.12165270032823422,
+      "std": 0.002238993692219121,
+      "n": 3
+    },
+    "gain_only_negative_control_overstatement": {
+      "mean": 0.2010062404535237,
+      "std": 0.00437720253932744,
+      "n": 3
+    },
+    "n": {
+      "mean": 43.333333333333336,
+      "std": 9.60902353693305,
+      "n": 3
+    },
+    "noise_control_attributed": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "observed_gain": {
+      "mean": 0.2620798451504054,
+      "std": 0.0017173355867710943,
+      "n": 3
+    },
+    "overfitting_share": {
+      "mean": 0.4641587187537612,
+      "std": 0.0055901410264541035,
+      "n": 3
+    },
+    "raw_identity_error": {
+      "mean": 7.401486830834377e-17,
+      "std": 4.239734207189668e-17,
+      "n": 3
+    },
+    "rejected_invalid_controls": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "resamples": {
+      "mean": 10000,
+      "std": 0.0,
+      "n": 3
+    },
+    "residual_share": {
+      "mean": 0.2330804870460004,
+      "std": 0.01210457635055972,
+      "n": 3
+    },
+    "residual_upper_bound": {
+      "mean": 0.061073604696881674,
+      "std": 0.002835643267519324,
+      "n": 3
+    },
+    "scaling_share": {
+      "mean": 0.3027607942002384,
+      "std": 0.006680948665712699,
+      "n": 3
+    },
+    "significant": true,
+    "test_time_scaling": {
+      "mean": 0.07935354012528954,
+      "std": 0.002187519948349434,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "73a1e8b818bdddcdc33be13902e4d4c335c8fa26",
+    "artifact_path": "docs/agent-research/2610.22466-harness-decomposition/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "693af5d4ae0925789b58e41336cb028edc8b2aff1f94ec853eb9d022e3a74707",
+    "executed_source_sha256": {
+      "scripts/run_oct19_evening_agent_components.py": "c5e0d165396f3a5aa44fe8fc2fb619c8cbb9539c9547cf8de7645011172e936f",
+      "src/auto_research/agent_research/proper_agent.py": "e4d2183c97f9e8d2147432ac12469af127ec75ee51f431b7ce9aa81abef3371f",
+      "src/auto_research/agent_research/harness_decomposition.py": "aa9a1c9dd39546a8cdabd3b22497337ae2333b7de86cedcd17267c4d36872122",
+      "src/auto_research/agent_research/drago.py": "e8413d7ac0edb5c7cb27732022c9c88983c1d28ccb852438513ee173d2847d6c"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:03b05e0d8284ed63a7d9ca2d4de49932e36d6448f8b14435faa541a0387708f6"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
