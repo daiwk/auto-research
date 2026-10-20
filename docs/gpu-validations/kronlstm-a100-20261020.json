@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "adapter_key": "kronlstm",
+  "validated_at": "2026-10-20",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python",
+    "scripts/run_oct20_foundation_components.py",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--code-commit",
+    "324217ed26fe2e297e25879ad092281eb0960b87",
+    "--output",
+    "results/foundation-cuda-v2.json"
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-kronlstm-v1",
+    "revision": "sha256:e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+    "checkpoint": null,
+    "capability_benchmark": false,
+    "recipe": "oct20-foundation-definition-synthetic-v1"
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "324217ed26fe2e297e25879ad092281eb0960b87",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "causal_prefix_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gate_gradient_norm": {
+      "mean": 0.17024993726264234,
+      "std": 0.02696163998318699,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 2.1581272472139856,
+      "std": 0.5729947628113572,
+      "n": 3
+    },
+    "gradient_reference_max_error": {
+      "mean": 1.1564823173178714e-17,
+      "std": 5.299667758987085e-18,
+      "n": 3
+    },
+    "key_norm_max_error": {
+      "mean": 1.8503717077085943e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "loss": {
+      "mean": 1.6603961224237191,
+      "std": 0.19237623208017515,
+      "n": 3
+    },
+    "parameter_update_norm": {
+      "mean": 0.021581272472139847,
+      "std": 0.0057299476281135716,
+      "n": 3
+    },
+    "recurrence_read_reference_max_error": {
+      "mean": 1.0177044392397268e-16,
+      "std": 1.6024689053196365e-17,
+      "n": 3
+    },
+    "recurrence_state_reference_max_error": {
+      "mean": 9.71445146547012e-17,
+      "std": 2.4037033579794548e-17,
+      "n": 3
+    },
+    "value_norm_max_error": {
+      "mean": 1.8503717077085943e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "vector_deltanet_negative_difference_norm": {
+      "mean": 0.28937994634609615,
+      "std": 0.1232003113477086,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct20_foundation_components.py": "e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+    "src/auto_research/foundation_models/t_muon.py": "d14e23dcec0b4e704ebad4ae096d0928bce213fcc6947acd0716160f3470067a",
+    "src/auto_research/foundation_models/time_jepa.py": "8d9b3cdf712ccfef1ed0ea308402c004a12f2d8089d4f90692ff087afd6f8c93",
+    "src/auto_research/foundation_models/kronlstm.py": "e9d44ac8772d87d934c411e1aa8a1544ca47c906b59ec8700f2efb9f35a3c123"
+  },
+  "provenance": {
+    "commit": "324217ed26fe2e297e25879ad092281eb0960b87",
+    "artifact_path": "docs/gpu-validations/kronlstm-a100-20261020.json",
+    "raw_runner_artifact_sha256": "cfe64cca22b01aac2396d2ed2c95ea20c93ccca0c89091a093aa51575021f417",
+    "executed_source_sha256": {
+      "scripts/run_oct20_foundation_components.py": "e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+      "src/auto_research/foundation_models/t_muon.py": "d14e23dcec0b4e704ebad4ae096d0928bce213fcc6947acd0716160f3470067a",
+      "src/auto_research/foundation_models/time_jepa.py": "8d9b3cdf712ccfef1ed0ea308402c004a12f2d8089d4f90692ff087afd6f8c93",
+      "src/auto_research/foundation_models/kronlstm.py": "e9d44ac8772d87d934c411e1aa8a1544ca47c906b59ec8700f2efb9f35a3c123"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:b819a4882fbbc44aca456ba7c2f0ba64b02f54a6d1495e93976a9fa75a0390b3",
+    "metric_artifact_path": "docs/foundation-models/2610.26834-kronlstm/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

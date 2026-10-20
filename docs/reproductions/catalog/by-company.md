@@ -45,6 +45,7 @@
 - 2026-09 · [MIMA](../2609.12842-mima/README.md)：将同请求物品组成多正例集合，以排他匹配监督互补兴趣，并用 activation routing 校准多通道分数。
 
 ## Alibaba
+- [Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search](../../recommendation-components/2610.26105-sid-topology/README.md)：冻结旧商品完整三层SID，只按新价值排名给新商品分配路径，允许新商品与原头部token碰撞，不通过移动旧路径强行去重。实现价值先验、HC桶、增量插入和映射漂移审计；语义前缀由调用方提供，不训练RQ-VAE或LLM，64卡生产完整实验成本过高不复现。
 - 2026-08 · [DCEO](../2608.25635-dceo/README.md)：以直接因果效应分离短期点击与长期用户价值，并用多目标策略权重优化电商搜索排序。
 - 2026-08 · [TransRetrieval](../2608.25528-transretrieval/README.md)：把 target token 压缩、多域归一化与大规模 Transformer 检索结合，在受控 serving 预算下扩展召回模型。
 - 2026-08 · [DREAM](../2608.09408-dream/README.md)：以 L0/L1/L2 意图、策略记忆和有界 typed compiler 控制现有推荐链路，再用离线探索与线上结论回流持续更新策略。
@@ -149,6 +150,7 @@
 - 2017-03 · [DeepFM](../1703.04247-deepfm/README.md)：用共享 embedding 联合 FM 二阶交互和 deep 高阶交互，减少手工特征交叉。
 
 ## Kuaishou
+- [MAPS: A Multi-Agent Personalized Script-Driven Video Advertising System Enhanced by Reinforcement Learning](../../recommendation-components/2610.25748-maps-creative/README.md)：以画像、脚本、导演和反思四Agent将广告创意从静态检索转为个性化生成，脚本SFT后用结构、偏好和商品事实的混合奖励优化，再按线上反馈路由最小修改。正文有快手场景量化A/B；仅收录方法与成本，不把奖励加权器包装为完整视频广告系统。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-09 · [UniRec](../2609.11052-unirec/README.md)：联合预排和精排融合，以纵向偏好对齐、紧凑 pairwise 聚合和组相对正则协调级联阶段。
 - 2026-08 · [HRPO](../2608.00750-hrpo/README.md)：按层级 Semantic ID 前缀构造 residual credit-to-go，让生成式推荐的策略更新同时优化局部 token 与整条推荐轨迹。
 - 2026-07 · [RecoReward](../2607.25901-reco-reward/README.md)：以目标/非目标推荐亲和力差作为多模态描述的训练奖励。

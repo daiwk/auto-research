@@ -46,6 +46,7 @@ DOC_ROOTS = (
     ROOT / "docs" / "foundation-models",
     ROOT / "docs" / "multimodal-models",
     ROOT / "docs" / "evolution",
+    ROOT / "docs" / "recommendation-components",
 )
 TMP = ROOT / "tmp" / "paper-figures"
 MANIFEST = ROOT / "docs" / "paper-figures-manifest.json"
@@ -76,6 +77,19 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.26105-sid-topology": "1",
+    "2610.25748-maps-creative": "2",
+    "2610.24628-muse-glimmer-30b": "3",
+    "2610.24061-world-of-swecraft": "1",
+    "2610.24938-t-muon": "1",
+    "2610.23982-time-jepa": "1",
+    "2610.26834-kronlstm": "3",
+    "2610.25034-spod": "9",
+    "2610.25973-apsd": "3",
+    "2610.24236-tar-adaptive-replay": "3",
+    "2610.24955-memprice": "1",
+    "2610.23128-scope-replay": "1",
+    "2610.26453-tokenworth": "1",
     "2609.11052-unirec": "3",
     "2610.23346-jev-portuguese-ir": "1",
     "2610.22671-proper-agent": "5",
@@ -170,6 +184,21 @@ CAPTION_OVERRIDES = {
 # preserve an important original passage (MRKL) or the official public abstract
 # when the proceedings full text cannot be fetched automatically (Pin-SCALE).
 SPECIAL_CROPS = {
+    "2610.23982-time-jepa": {
+        "pdf_url": "https://arxiv.org/pdf/2610.23982v1", "page": 3,
+        "rect": (106, 72, 506, 365), "label": "Figure 1",
+        "caption": "Time-JEPA 的物理序列对齐与tubelet池化、共享视频编码器上的掩码预测/完整视频辅助两路训练，以及只用视频的评测。物理态只作训练目标。",
+    },
+    "2610.24061-world-of-swecraft": {
+        "pdf_url": "https://arxiv.org/pdf/2610.24061v1", "page": 0,
+        "rect": (77, 264, 543, 478), "label": "Figure 1",
+        "caption": "Software World 的真实依赖库、维护者Agent协作和隐藏下游评测；右图是作者实验中协作/不协作的提速曲线，不是本地结果。",
+    },
+    "2610.25034-spod": {
+        "pdf_url": "https://arxiv.org/pdf/2610.25034v1", "page": 13,
+        "rect": (305, 69, 525, 158), "label": "Figure 9",
+        "caption": "SPOD 原文训练更新伪代码：当前学生rollout、训练episode成功反馈、重新计算门控、受保护action用软概率floor，其余用forward KL。不是架构图或本地能力成绩。",
+    },
     "2610.22975-sink-sparse": {
         "pdf_url": "https://arxiv.org/pdf/2610.22975v1", "page": 5,
         "rect": (70, 93, 542, 335), "label": "Figure 4",
@@ -752,6 +781,19 @@ def update_page(paper: Paper, result: FigureResult) -> None:
     text = paper.page.read_text(encoding="utf-8")
     description = chinese_description(result.original_caption)
     reviewed_descriptions = {
+        **{key: str(SPECIAL_CROPS[key]["caption"]) for key in (
+            "2610.23982-time-jepa", "2610.24061-world-of-swecraft", "2610.25034-spod",
+        )},
+        "2610.26105-sid-topology": "SID的两层语义前缀、业务价值第三层与动态更新分叉；绿色路径保留旧SID并warm-start，红色路径重映射或混合权重。",
+        "2610.25748-maps-creative": "Profile、Scripter、Director和Reflector四Agent广告创意闭环；这里是原文完整系统，本地未复现视频模型或线上反馈。",
+        "2610.24628-muse-glimmer-30b": "Muse Glimmer各量化策略的权重体积与验证损失权衡；是作者的量化结果图，不是架构图或本地测量。",
+        "2610.24938-t-muon": "t-Muon与Muon在LLaMA-1B FineWeb上的训练损失曲线，包括早期与末段放大；是原文结果，不是优化器架构图。",
+        "2610.26834-kronlstm": "KronLSTM块的投影、短卷积、L2归一化、Kronecker Delta记忆、独立门及RMSNorm；本地是小型循环实现，不是融合chunk内核。",
+        "2610.25973-apsd": "APSD由rollout正确性选择非对称PoE系数，反馈自教师stop-gradient，但目标内学生分支和归一化保持梯度。",
+        "2610.24236-tar-adaptive-replay": "原论文中被压制重放轨迹比例与门控SFT损失的关系；是方法机制分析散点，不是架构图或本地训练效果。",
+        "2610.24955-memprice": "MemPrice对每条记忆分配不同保真表示，并以动态价格和长期压力控制上下文；本地只实现背包分配与队列，不实现图中的LLM估值。",
+        "2610.23128-scope-replay": "SCOPE通过有状态重放保留API边界、引用别名和副作用，以诊断优化失败并生成实例内认证；本地仅覆盖明确支持的Python对象图。",
+        "2610.26453-tokenworth": "TokenWorth的资源受限记忆问题：长记忆、昂贵工具和模型输出共同竞争预算；这是动机图，不是本地能力成绩。",
         **{key: str(SPECIAL_CROPS[key]["caption"]) for key in (
             "2610.22671-proper-agent", "2610.22466-harness-decomposition", "2610.23571-bmuon", "2610.23234-multiagent-opd", "2610.22975-sink-sparse",
         )},

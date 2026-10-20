@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成式推荐 | [Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search](../../recommendation-components/2610.26105-sid-topology/README.md) | Alibaba / Taobao & Tmall Group，2026-10-19 | 未发现官方代码 | `sid-topology`：仅低成本组件，完整实验不复现 |
+| 展示层生成与个性化 | [MAPS: A Multi-Agent Personalized Script-Driven Video Advertising System Enhanced by Reinforcement Learning](../../recommendation-components/2610.25748-maps-creative/README.md) | Beihang University，2026-10-19 | 未发现官方代码 | 计划键 `maps-creative`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 训练目标与决策优化 | [CASI: Credit Assignment via Set Intervention for Agentic Retrieval](../2610.20293-casi/README.md) | Xiaohongshu，2026-10-14 | 未发现官方代码 | `casi`：仅低成本组件，完整实验不复现 |
 | 生成、排序与冷启动 | [UniSGR-V2: Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation](../2610.16132-unisgr-v2/README.md) | Alibaba International Digital Commerce Group，2026-10-12 | 未发现官方代码 | 计划键 `unisgr-v2`：成本过高，暂不复现；待验收，未注册可执行入口。 |
 | 生成、排序与冷启动 | [WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat](../2610.16979-wegr/README.md) | WeChat E-commerce Search team（正文未单列作者机构），2026-10-12 | 未发现官方代码 | `wegr` |

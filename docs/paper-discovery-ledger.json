@@ -121677,6 +121677,625 @@
           ]
         }
       ]
+    },
+    {
+      "batch": "2026-10-20-new-announcement-components",
+      "date": "2026-10-20",
+      "scope_kind": "selected-paper-implementation",
+      "coverage_complete": false,
+      "window": "Oct20 announcements: distinct v1 dates; not thirteen papers first published today",
+      "required_tracks": [
+        "recommendation",
+        "foundation-model",
+        "post-training",
+        "agent"
+      ],
+      "review_watermark_advanced": false,
+      "review_snapshot_modified": false,
+      "scope_artifact": "research-audits/oct20-components/README.md",
+      "accepted_scope_counts": {
+        "bounded_components_and_interfaces": 10,
+        "review_only_papers": 3
+      },
+      "component_validation_counts": {
+        "gpu_validated_components": 6,
+        "cpu_validated_components_or_interfaces": 4,
+        "review_only": 3
+      },
+      "candidates": [
+        {
+          "id": "2610.24938",
+          "key": "t-muon",
+          "component_key": null,
+          "title": "T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training",
+          "priority": "P1",
+          "track": "foundation-model",
+          "publication_date": "2026-10-18",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。最大1.3B模型与13.1B训练tokens的多优化器比较矩阵。",
+          "cost_assessment": {
+            "basis": "最大1.3B模型与13.1B训练tokens的多优化器比较矩阵。",
+            "source_url": "https://arxiv.org/abs/2610.24938",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.24938-t-muon/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "将关联Transformer梯度分组为三阶张量，在M变换域逐切片求polar后逆变换，配合Nesterov动量、decoupled decay和原矩阵fan比例更新；实现四种变换、head/head-stack及通用stack分组的精确低维算子，并以Gram特征分解核对。最大1.3B模型、13.1B tokens及多优化器对照的完整预训练成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.t_muon.TensorMuon",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/foundation-models/2610.24938-t-muon/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "324217ed26fe2e297e25879ad092281eb0960b87",
+            "gpu_validation_artifact": "docs/gpu-validations/t-muon-a100-20261020.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.24938"
+            }
+          ]
+        },
+        {
+          "id": "2610.23982",
+          "key": "time-jepa",
+          "component_key": null,
+          "title": "Time-JEPA: Grounding Video World Models with Physical Time Series",
+          "priority": "P1",
+          "track": "foundation-model",
+          "publication_date": "2026-10-14",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。ViT-g/16、8GPU、三个物理视频领域各20epoch及后续探针/外部评测。",
+          "cost_assessment": {
+            "basis": "ViT-g/16、8GPU、三个物理视频领域各20epoch及后续探针/外部评测。",
+            "source_url": "https://arxiv.org/abs/2610.23982",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.23982-time-jepa/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "以训练专用物理时序监督共享视频online encoder：masked潜变量预测与unmasked物理态回归分两路前向，使用valid tubelet池化、train-only归一化及masked Smooth-L1；物理态从不作为编码输入。实现真实tiny双路与EMA隔离诊断，不声称V-JEPA能力；ViT-g/16、8GPU三域20epoch及外部评测完整实验成本过高，不复现（审查DONE）。",
+          "local_operator": "auto_research.foundation_models.time_jepa.TinyTimeJEPA",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/foundation-models/2610.23982-time-jepa/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "324217ed26fe2e297e25879ad092281eb0960b87",
+            "gpu_validation_artifact": "docs/gpu-validations/time-jepa-a100-20261020.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23982"
+            }
+          ]
+        },
+        {
+          "id": "2610.26834",
+          "key": "kronlstm",
+          "component_key": null,
+          "title": "Kronecker Delta Rule for Long Context Linear Attention",
+          "priority": "P1",
+          "track": "foundation-model",
+          "publication_date": "2026-10-19",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。1.5B模型、100B tokens，16节点每节点4张GH200。",
+          "cost_assessment": {
+            "basis": "1.5B模型、100B tokens，16节点每节点4张GH200。",
+            "source_url": "https://arxiv.org/abs/2610.26834",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.26834-kronlstm/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "将DeltaNet的向量误差改为key-value标量关联误差，沿单个Kronecker方向修订记忆；实现key轴逐通道遗忘、分离erase/write门及含causal卷积/L2/输出门/RMSNorm的真实tiny mixer，并与显式vec记忆矩阵及梯度核对。1.5B/100B tokens、64张GH200完整预训练成本过高，不复现（审查DONE）；未实现高性能chunk内核或宣称长上下文能力。",
+          "local_operator": "auto_research.foundation_models.kronlstm.TinyKronLSTM",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/foundation-models/2610.26834-kronlstm/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "324217ed26fe2e297e25879ad092281eb0960b87",
+            "gpu_validation_artifact": "docs/gpu-validations/kronlstm-a100-20261020.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.26834"
+            }
+          ]
+        },
+        {
+          "id": "2610.25034",
+          "key": "spod",
+          "component_key": null,
+          "title": "Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation",
+          "priority": "P1",
+          "track": "post-training",
+          "publication_date": "2026-10-18",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。27B/31B教师与2B/E4B学生，双GPU、三环境、40–50更新与频繁评估。",
+          "cost_assessment": {
+            "basis": "27B/31B教师与2B/E4B学生，双GPU、三环境、40–50更新与频繁评估。",
+            "source_url": "https://arxiv.org/abs/2610.25034v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.25034-spod/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "对成功训练episode中教师完整action概率低于学生的decision，停止全词表forward-KL监督并改用序列软概率floor，按episode、state、token三级平均。实现真实微型因果rollout与冻结教师重放，不给actor读取结果，不把局部保护说成硬概率或任务成功保证；27B/31B教师的双GPU全套实验成本过高，不复现。",
+          "local_operator": "auto_research.post_training.spod.success_preserving_loss",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/post-training/2610.25034-spod/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+            "gpu_validation_artifact": "docs/gpu-validations/spod-a100-20261020.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.25034v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.25973",
+          "key": "apsd",
+          "component_key": null,
+          "title": "Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization",
+          "priority": "P1",
+          "track": "post-training",
+          "publication_date": "2026-10-19",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。4张H200，每run约5小时，7B/8B与长rollout；另有RLRF矩阵。",
+          "cost_assessment": {
+            "basis": "4张H200，每run约5小时，7B/8B与长rollout；另有RLRF矩阵。",
+            "source_url": "https://arxiv.org/abs/2610.25973v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.25973-apsd/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "同一策略在训练反馈条件下构成停止梯度的自教师，按正确性在学生和自教师之间插值或外推PoE target，最小化reverse KL并保留target中的学生梯度。实现实际微型自教师重放、解析与有限差分梯度和detach-target负对照；4×H200五小时及多规模代码反馈完整实验成本过高，不复现。",
+          "local_operator": "auto_research.post_training.apsd.asymmetric_self_distillation_loss",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/post-training/2610.25973-apsd/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+            "gpu_validation_artifact": "docs/gpu-validations/apsd-a100-20261020.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.25973v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.24236",
+          "key": "tar-adaptive-replay",
+          "component_key": null,
+          "title": "Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay",
+          "priority": "P1",
+          "track": "post-training",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。7500题每题128基础采样及BGE-M3；双A6000/A100完整训练每run不超过15小时。",
+          "cost_assessment": {
+            "basis": "7500题每题128基础采样及BGE-M3；双A6000/A100完整训练每run不超过15小时。",
+            "source_url": "https://arxiv.org/abs/2610.24236v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "post-training/2610.24236-tar-adaptive-replay/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "从基础策略实际生成并经训练verifier过滤的候选中用cosine FPS留原型，对相对base被压制的轨迹和token实施双重停止梯度软门重放。实现显式embedding的FPS及真实微型GRPO加重放更新，不用gold替记忆、不把随机初始隐状态称为语义encoder；双GPU最高15小时的完整实验成本过高，不复现。",
+          "local_operator": "auto_research.post_training.tar.adaptive_replay_loss",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": true,
+            "metrics": [
+              "docs/post-training/2610.24236-tar-adaptive-replay/metrics/component-cuda-seeds42-44.json"
+            ],
+            "code_commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+            "gpu_validation_artifact": "docs/gpu-validations/tar-adaptive-replay-a100-20261020.json"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.24236v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.24955",
+          "key": "memprice",
+          "component_key": null,
+          "title": "MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents",
+          "priority": "P1",
+          "track": "agent",
+          "publication_date": "2026-10-18",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。完整LLM估值、写记忆和多任务交互矩阵超出组件级预算。",
+          "cost_assessment": {
+            "basis": "完整LLM估值、写记忆和多任务交互矩阵超出组件级预算。",
+            "source_url": "https://arxiv.org/abs/2610.24955",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.24955-memprice/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "将每条记忆的raw/summary/abstraction/keywords/delete选择转为精确多重选择背包，并用随时间衰减的价格与持久虚拟队列约束平均占用；刷新不得重置全局压力。CPU执行整数DP、不可逆降保真和队列，外部估值不是已实现的LLM语义能力。",
+          "local_operator": "auto_research.agent_research.memprice.MemPrice",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2610.24955-memprice/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "d64baad694d0d84824915ea67c953981aa083cfc"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.24955"
+            }
+          ]
+        },
+        {
+          "id": "2610.23128",
+          "key": "scope-replay",
+          "component_key": null,
+          "title": "SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning",
+          "priority": "P1",
+          "track": "agent",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。完整机器人仿真与策略矩阵使用8张PRO6000和8张A100。",
+          "cost_assessment": {
+            "basis": "完整机器人仿真与策略矩阵使用8张PRO6000和8张A100。",
+            "source_url": "https://arxiv.org/abs/2610.23128",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.23128-scope-replay/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "对成功执行记录API请求、前后公共状态、返回值及异常；候选从入口完整重放，保留dict/list别名与副作用，仅为同一记录实例签发证据。分歧和不可重放不是环境失败，原生执行成功而非重放结果更新accepted program。",
+          "local_operator": "auto_research.agent_research.scope_replay.certify",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2610.23128-scope-replay/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "d64baad694d0d84824915ea67c953981aa083cfc"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.23128"
+            }
+          ]
+        },
+        {
+          "id": "2610.26453",
+          "key": "tokenworth",
+          "component_key": null,
+          "title": "Remembering Has a Price: Learning Memory Worth under Resource Constraints",
+          "priority": "P1",
+          "track": "agent",
+          "publication_date": "2026-10-19",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。Qwen2.5-14B、A800与外部DeepSeek调用，3环境9基线完整矩阵。",
+          "cost_assessment": {
+            "basis": "Qwen2.5-14B、A800与外部DeepSeek调用，3环境9基线完整矩阵。",
+            "source_url": "https://arxiv.org/abs/2610.26453",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.26453-tokenworth/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "用带先验正则的logistic基础评分、Laplacian核岭残差与慢速对角AGOP学习查询相关记忆价值，再用新颖性、探针平均价值和正分比例决定入库/替换。只给实际选中记忆施加任务结束反馈，不把成功标签当反事实因果贡献。",
+          "local_operator": "auto_research.agent_research.tokenworth.TokenWorth",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/agent-research/2610.26453-tokenworth/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "d64baad694d0d84824915ea67c953981aa083cfc"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.26453"
+            }
+          ]
+        },
+        {
+          "id": "2610.26105",
+          "key": "sid-topology",
+          "component_key": null,
+          "title": "Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search",
+          "priority": "P1",
+          "track": "recommendation",
+          "publication_date": "2026-10-19",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。64GPU、9000万/2000万私有日志、RQ-VAE与Qwen2.5-0.5B三阶段训练及生产A/B。",
+          "cost_assessment": {
+            "basis": "64GPU、9000万/2000万私有日志、RQ-VAE与Qwen2.5-0.5B三阶段训练及生产A/B。",
+            "source_url": "https://arxiv.org/abs/2610.26105v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "recommendation-components/2610.26105-sid-topology/README.md",
+          "implementation_status": "component_only",
+          "bounded_implementation_scope": "冻结旧商品完整三层SID，只按新价值排名给新商品分配路径，允许新商品与原头部token碰撞，不通过移动旧路径强行去重。实现价值先验、HC桶、增量插入和映射漂移审计；语义前缀由调用方提供，不训练RQ-VAE或LLM，64卡生产完整实验成本过高不复现。",
+          "local_operator": "auto_research.reproductions.sid_topology.insert_preserving",
+          "component_validation": {
+            "status": "validated_bounded_diagnostic",
+            "gpu_validation_passed": false,
+            "metrics": [
+              "docs/recommendation-components/2610.26105-sid-topology/metrics/component-cpu-seeds42-44.json"
+            ],
+            "code_commit": "2415e8713aac46346ddd72fc52fbf9c8f32f4a13"
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.26105v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.25748",
+          "key": "maps-creative",
+          "component_key": null,
+          "title": "MAPS: A Multi-Agent Personalized Script-Driven Video Advertising System Enhanced by Reinforcement Learning",
+          "priority": "P1",
+          "track": "recommendation",
+          "publication_date": "2026-10-19",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。Qwen3-VL-32B/8B、Kling-Omni，8H100、SFT20epoch再RL5000步及私有线上闭环。",
+          "cost_assessment": {
+            "basis": "Qwen3-VL-32B/8B、Kling-Omni，8H100、SFT20epoch再RL5000步及私有线上闭环。",
+            "source_url": "https://arxiv.org/abs/2610.25748v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "recommendation-components/2610.25748-maps-creative/README.md",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "以画像、脚本、导演和反思四Agent将广告创意从静态检索转为个性化生成，脚本SFT后用结构、偏好和商品事实的混合奖励优化，再按线上反馈路由最小修改。正文有快手场景量化A/B；仅收录方法与成本，不把奖励加权器包装为完整视频广告系统。",
+          "local_operator": null,
+          "component_validation": {
+            "status": "review_only_not_reproduced",
+            "gpu_validation_passed": false
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.25748v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.24628",
+          "key": "muse-glimmer-30b",
+          "component_key": null,
+          "title": "Muse Glimmer 30B: An On-Device Agentic Model",
+          "priority": "P0",
+          "track": "foundation-model",
+          "publication_date": "2026-10-17",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。约30B密集模型、Muse Spark教师、多阶段预训练/OPD/RL，128K长轨迹与多域评测。",
+          "cost_assessment": {
+            "basis": "约30B密集模型、Muse Spark教师、多阶段预训练/OPD/RL，128K长轨迹与多域评测。",
+            "source_url": "https://arxiv.org/abs/2610.24628v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "foundation-models/2610.24628-muse-glimmer-30b/README.md",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "Meta的约30B稠密多模态端侧Agent模型，以三局部一全局注意力和32:2 GQA控制KV，冻结感知编码器，经预训练蒸馏、SFT、OPD与多目标RL获得工具使用能力，并发布混合精度权重和DFlash头。仅收录架构、官方结果和发布边界，完整实验成本过高不复现。",
+          "local_operator": null,
+          "component_validation": {
+            "status": "review_only_not_reproduced",
+            "gpu_validation_passed": false
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.24628v1"
+            }
+          ]
+        },
+        {
+          "id": "2610.24061",
+          "key": "world-of-swecraft",
+          "component_key": null,
+          "title": "World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds",
+          "priority": "P1",
+          "track": "agent",
+          "publication_date": "2026-10-16",
+          "intake_class": "new-announcement-new-to-review",
+          "status": "deferred",
+          "status_scope": "full_paper_reproduction",
+          "resolution": "not_reproduced_high_cost",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "review_done": true,
+          "terminal": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "成本过高，不复现（审查 DONE）。8模型、55K会话、180B以上tokens、超过10000小时Agent工作及隔离软件世界。",
+          "cost_assessment": {
+            "basis": "8模型、55K会话、180B以上tokens、超过10000小时Agent工作及隔离软件世界。",
+            "source_url": "https://arxiv.org/abs/2610.24061v1",
+            "available_resource": "单张A100或A30，或Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "doc": "agent-research/2610.24061-world-of-swecraft/README.md",
+          "implementation_status": "deferred_high_cost",
+          "bounded_implementation_scope": "将真实互相依赖的Python库构成软件世界，让多个维护者Agent自主找任务、通信、发PR和迭代，以隐藏下游包的正确性及指令计数几何均值评估群体收益。仅收录SW-Env/SW-Eval协议和成本，不把算几何平均称为已复现协作系统。",
+          "local_operator": null,
+          "component_validation": {
+            "status": "review_only_not_reproduced",
+            "gpu_validation_passed": false
+          },
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "source_provenance": [
+            {
+              "source_kind": "original-paper",
+              "source_url": "https://arxiv.org/abs/2610.24061v1"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

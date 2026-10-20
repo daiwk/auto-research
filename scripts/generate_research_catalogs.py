@@ -825,6 +825,10 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "t-muon": ("预训练与数据", "优化器与训练稳定性"),
+        "time-jepa": ("多模态基础模型", "JEPA与物理态监督"),
+        "kronlstm": ("网络架构", "循环记忆与序列混合"),
+        "muse-glimmer-30b": ("网络架构", "端侧多模态Agent模型"),
         "ego-p2c": ("多模态基础模型", "角色协作与策略蒸馏"),
         "bmuon": ("预训练与数据", "优化器与训练稳定性"),
         "sink-sparse": ("注意力与长上下文", "稀疏注意力与视频生成"),
@@ -1113,7 +1117,8 @@ def sync_recommendation_component_browse() -> None:
     """
     papers = json.loads((DOCS / "research-manifest.json").read_text())["papers"]
     rows = [row for row in papers if row["domain"] == "recommendation" and row.get("adapter") is None
-            and row.get("implementation_status") in {"component_only", "evaluation_protocol_interface"}]
+            and (row.get("implementation_status") in {"component_only", "evaluation_protocol_interface"}
+                 or (row.get("implementation_status") == "deferred_high_cost" and row.get("summary")))]
 
     def section_end(lines, start, level):
         for index in range(start + 1, len(lines)):
@@ -1145,6 +1150,8 @@ def sync_recommendation_component_browse() -> None:
                 lower = found + 1
                 upper = section_end(lines, found, level)
             summary = row["summary"].strip()
+            if row.get("implementation_status") == "deferred_high_cost":
+                summary += " **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**"
             lines[lower:lower] = ["", f"- [{row['title']}]({link})：{summary}", ""]
         path.write_text("\n".join(lines).rstrip() + "\n")
 

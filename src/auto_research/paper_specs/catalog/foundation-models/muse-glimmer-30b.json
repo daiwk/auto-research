@@ -1,0 +1,30 @@
+{
+  "domain": "foundation-models",
+  "key": "muse-glimmer-30b",
+  "title": "Muse Glimmer 30B: An On-Device Agentic Model",
+  "paper_url": "https://arxiv.org/abs/2610.24628v1",
+  "detail_path": "foundation-models/2610.24628-muse-glimmer-30b/README.md",
+  "topic": [
+    "网络架构",
+    "端侧多模态Agent模型"
+  ],
+  "first_author": "Muse Glimmer team",
+  "first_author_affiliation": "Meta Superintelligence Labs",
+  "published": "2026-10-17",
+  "published_at": "2026-10-17T11:05:21Z",
+  "code": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+  "code_status": "官方已发布Apache-2.0权重、配置、tokenizer与chat template；发布物不等同完整预训练/OPD数据和训练源码，本轮未核到完整训练代码",
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "约29.6B总参数、多阶段Muse Spark蒸馏、128K Agent轨迹、混合精度量化与DFlash训练；BF16权重约55.7GB，完整多域长轨迹评测成本高。成本过高，不复现（审查 DONE），不因单卡能装载就启动大下载或长推理。",
+  "summary": "Meta的约30B稠密多模态端侧Agent模型，以三局部一全局注意力和32:2 GQA控制KV，冻结感知编码器，经预训练蒸馏、SFT、OPD与多目标RL获得工具使用能力，并发布混合精度权重和DFlash头。仅收录架构、官方结果和发布边界，完整实验成本过高不复现。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

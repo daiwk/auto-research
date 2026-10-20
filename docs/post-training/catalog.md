@@ -10,9 +10,12 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization](2610.25973-apsd/README.md) | Korea University，2026-10-19 | 未发现官方代码 | `apsd`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation](2610.25034-spod/README.md) | University of Southern California，2026-10-18 | [原作者入口](https://github.com/Jike338/SPOD)；作者官方仓库已发布configs、spod训练与sgate方法源码；不是仅占位README | `spod`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [GR-OPD: Group-Relative Sequence Credit for On-Policy Distillation](2610.23042-gr-opd/README.md) | Shanghai Jiao Tong University，2026-10-16 | 未发现官方代码 | `gr-opd`：仅低成本组件，完整实验不复现 |
 | RLVR | [MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning](2610.23245-mge-po/README.md) | 论文未列机构（不据邮箱域名推断），2026-10-16 | 未发现官方代码 | 计划键 `mge-po`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Agentic RL | [MultiAgent-OPD: End-to-End Training of Hierarchical Multi-Agent Systems with On-Policy Distillation](2610.23234-multiagent-opd/README.md) | Alibaba Group，2026-10-16 | 未发现官方代码 | 计划键 `multiagent-opd`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| RLVR | [Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay](2610.24236-tar-adaptive-replay/README.md) | Cornell University，2026-10-16 | [原作者入口](https://github.com/wenzhilics/tar)；作者官方仓库已发布基于verl的recipe/tar训练与memory-bank构建代码 | `tar-adaptive-replay`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [SimOPD: Relational Knowledge Transfer for On-Policy Distillation](2610.23306-simopd/README.md) | Zhejiang University，2026-10-16 | 未发现官方代码 | `simopd`：仅低成本组件，完整实验不复现 |
 | Agentic RL | [Tree-Aware Posterior Distillation for Long-Horizon Agentic Reinforcement Learning](2610.23181-treeopsd/README.md) | Tsinghua University，2026-10-16 | 未发现官方代码 | `treeopsd`：仅低成本组件，完整实验不复现 |
 | 二元反馈对齐 | [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](2610.21138-clean-rm/README.md) | Zhejiang University，2026-10-15 | [原作者入口](https://anonymous.4open.science/r/CAN-RM-46BB)；论文提供匿名代码入口，但本轮访问失败，未核验其内容、许可证或可运行性；本地按公式独立实现 | `clean-rm`：仅低成本组件，完整实验不复现 |

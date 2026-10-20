@@ -1,0 +1,148 @@
+{
+  "schema_version": 2,
+  "method": "t-muon",
+  "manifest_ref": "foundation-models:t-muon",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-t-muon-v1",
+    "revision": "sha256:e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+    "checkpoint": null,
+    "capability_benchmark": false,
+    "recipe": "oct20-foundation-definition-synthetic-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "gradient_reference_max_error": 2.7755575615628914e-17,
+        "transform_polar_reference_max_error": 6.855627177060342e-15,
+        "optimizer_update_reference_max_error": 1.1102230246251565e-16,
+        "momentum_reference_max_error": 0.0,
+        "gradient_norm": 0.38148545807604906,
+        "parameter_update_norm": 0.15683497177409322,
+        "unfolded_muon_negative_difference_norm": 2.731713611422062,
+        "zero_tensor_update_max": 0.0,
+        "optimizer_steps": 2,
+        "tested_transforms": 4
+      },
+      "audit_sha256": "99d26caecd1108f027671646c05a2caf5f10d6817561a4b493fd979943bb20bb"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "gradient_reference_max_error": 2.0816681711721685e-17,
+        "transform_polar_reference_max_error": 1.4988010832439613e-14,
+        "optimizer_update_reference_max_error": 1.8041124150158794e-16,
+        "momentum_reference_max_error": 0.0,
+        "gradient_norm": 0.34952269697368304,
+        "parameter_update_norm": 0.15661721365280257,
+        "unfolded_muon_negative_difference_norm": 2.7667856172913035,
+        "zero_tensor_update_max": 0.0,
+        "optimizer_steps": 2,
+        "tested_transforms": 4
+      },
+      "audit_sha256": "2b2ef59798d515ecd9f2f8cf29483bbeb6165cf1031d12994404aa80ad942a21"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "gradient_reference_max_error": 5.551115123125783e-17,
+        "transform_polar_reference_max_error": 1.74721348500384e-14,
+        "optimizer_update_reference_max_error": 1.1102230246251565e-16,
+        "momentum_reference_max_error": 0.0,
+        "gradient_norm": 0.603777981569211,
+        "parameter_update_norm": 0.1574238652411663,
+        "unfolded_muon_negative_difference_norm": 2.6629411698893684,
+        "zero_tensor_update_max": 0.0,
+        "optimizer_steps": 2,
+        "tested_transforms": 4
+      },
+      "audit_sha256": "2dd50d22ec6f008ac8469b0f5cf56b9d9cdce4477feb804f5b6738cc1685555d"
+    }
+  ],
+  "metrics": {
+    "gradient_norm": {
+      "mean": 0.44492871220631436,
+      "std": 0.13849267961580605,
+      "n": 3
+    },
+    "gradient_reference_max_error": {
+      "mean": 3.469446951953614e-17,
+      "std": 1.8358587643600646e-17,
+      "n": 3
+    },
+    "momentum_reference_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_update_reference_max_error": {
+      "mean": 1.3415194880887307e-16,
+      "std": 4.006172263299091e-17,
+      "n": 3
+    },
+    "parameter_update_norm": {
+      "mean": 0.1569586835560207,
+      "std": 0.0004173130120103958,
+      "n": 3
+    },
+    "tested_transforms": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "transform_polar_reference_max_error": {
+      "mean": 1.3105257619846119e-14,
+      "std": 5.55302877151279e-15,
+      "n": 3
+    },
+    "unfolded_muon_negative_difference_norm": {
+      "mean": 2.720480132867578,
+      "std": 0.05282575692196805,
+      "n": 3
+    },
+    "zero_tensor_update_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "324217ed26fe2e297e25879ad092281eb0960b87",
+    "artifact_path": "docs/foundation-models/2610.24938-t-muon/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "cfe64cca22b01aac2396d2ed2c95ea20c93ccca0c89091a093aa51575021f417",
+    "executed_source_sha256": {
+      "scripts/run_oct20_foundation_components.py": "e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+      "src/auto_research/foundation_models/t_muon.py": "d14e23dcec0b4e704ebad4ae096d0928bce213fcc6947acd0716160f3470067a",
+      "src/auto_research/foundation_models/time_jepa.py": "8d9b3cdf712ccfef1ed0ea308402c004a12f2d8089d4f90692ff087afd6f8c93",
+      "src/auto_research/foundation_models/kronlstm.py": "e9d44ac8772d87d934c411e1aa8a1544ca47c906b59ec8700f2efb9f35a3c123"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:c2a5e09a9874d8fd65c3c2e944d3e424d57ce4100fa0225945f6e18d79379e54"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

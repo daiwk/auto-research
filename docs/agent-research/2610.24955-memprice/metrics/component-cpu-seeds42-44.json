@@ -1,0 +1,130 @@
+{
+  "schema_version": 2,
+  "method": "memprice",
+  "manifest_ref": "agent-research:memprice",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-memprice-v1",
+    "revision": "sha256:8b15e7c3e34f0edbf97ae13e185be2f6d3e7857a41163b9f3011b0c0576696ca",
+    "capability_benchmark": false,
+    "initialization": "seeded synthetic integer options, trusted Python tape and numerical online learning fixtures"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "fixture_allocations": 17,
+        "maximum_objective_reference_error": 2.220446049250313e-16,
+        "hard_budget_violations": 0,
+        "greedy_negative_control_gap": 0.4999999999999999,
+        "pressure_induced_token_reduction": 30,
+        "persistent_queue_and_clock_after_refresh": true,
+        "rejected_invalid_allocations": 2,
+        "forbidden_query_or_gold_allocator_parameters": 0
+      },
+      "audit_sha256": "f367c0cf03d7e1c3d38199facb563bb3560af1df1e667a0229b9253d3b93a4ac",
+      "fixture_sha256": "92c3e34e0a168f6ec10c48838f5cdc9a98dd244ca2eb5e9c95c6bc5ad10cc75e"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "fixture_allocations": 12,
+        "maximum_objective_reference_error": 4.440892098500626e-16,
+        "hard_budget_violations": 0,
+        "greedy_negative_control_gap": 0.4999999999999999,
+        "pressure_induced_token_reduction": 16,
+        "persistent_queue_and_clock_after_refresh": true,
+        "rejected_invalid_allocations": 2,
+        "forbidden_query_or_gold_allocator_parameters": 0
+      },
+      "audit_sha256": "447a171e9494daea12c4dd9425d44e441f74008263853863e702b27b5b1a6188",
+      "fixture_sha256": "170e2be5e7279906470f652c890c9e116ec5d916a6d54a94169a6d905c354469"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "fixture_allocations": 15,
+        "maximum_objective_reference_error": 4.440892098500626e-16,
+        "hard_budget_violations": 0,
+        "greedy_negative_control_gap": 0.4999999999999999,
+        "pressure_induced_token_reduction": 28,
+        "persistent_queue_and_clock_after_refresh": true,
+        "rejected_invalid_allocations": 2,
+        "forbidden_query_or_gold_allocator_parameters": 0
+      },
+      "audit_sha256": "4e84159daae9757559af6193641bd29529e0fed14ddf5ccc72f73c90205dd584",
+      "fixture_sha256": "f5ec8fc2b6677e62ffac321fd0f7e3702032db93ca107b882f664e2ea222b93a"
+    }
+  ],
+  "metrics": {
+    "fixture_allocations": {
+      "mean": 14.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "forbidden_query_or_gold_allocator_parameters": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "greedy_negative_control_gap": {
+      "mean": 0.4999999999999999,
+      "std": 0.0,
+      "n": 3
+    },
+    "hard_budget_violations": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "maximum_objective_reference_error": {
+      "mean": 3.7007434154171886e-16,
+      "std": 1.2819751242557092e-16,
+      "n": 3
+    },
+    "persistent_queue_and_clock_after_refresh": true,
+    "pressure_induced_token_reduction": {
+      "mean": 24.666666666666668,
+      "std": 7.571877794400365,
+      "n": 3
+    },
+    "rejected_invalid_allocations": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+    "artifact_path": "docs/agent-research/2610.24955-memprice/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "f814f0f980808a2036fef8148f798255feea115b4b6fb6d3a850c67eefce7944",
+    "executed_source_sha256": {
+      "scripts/run_oct20_agent_components.py": "8b15e7c3e34f0edbf97ae13e185be2f6d3e7857a41163b9f3011b0c0576696ca",
+      "src/auto_research/agent_research/memprice.py": "c82f924d6d889572a408ec458b5ea17551711a6fa3a8e9b5b7415a7363685e50",
+      "src/auto_research/agent_research/scope_replay.py": "9bebcf791eb08325298b6ecb4c7c6fbfd9c3a1609acd59616dc8e4655243fa08",
+      "src/auto_research/agent_research/tokenworth.py": "ad54a9e6c6b5609166cbec5ea59daaf66e1950d160b8f4c867cd49e3deb43d50"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:6a3224ff6469dc557d52e2509b782c4dbc65d6368718b23169ea4a027de19014"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

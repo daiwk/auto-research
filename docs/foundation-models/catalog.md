@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 注意力与长上下文 | [Kronecker Delta Rule for Long Context Linear Attention](2610.26834-kronlstm/README.md) | Johannes Kepler University Linz，2026-10-19 | 未发现官方代码 | `kronlstm`：仅低成本组件，完整实验不复现 |
+| 预训练与数据 | [T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training](2610.24938-t-muon/README.md) | University of California, Santa Barbara，2026-10-18 | 未发现官方代码 | `t-muon`：仅低成本组件，完整实验不复现 |
+| 网络架构 | [Muse Glimmer 30B: An On-Device Agentic Model](2610.24628-muse-glimmer-30b/README.md) | Meta Superintelligence Labs，2026-10-17 | [原作者入口](https://huggingface.co/meta-models/Muse-Glimmer-30B)；官方已发布Apache-2.0权重、配置、tokenizer与chat template；发布物不等同完整预训练/OPD数据和训练源码，本轮未核到完整训练代码 | 计划键 `muse-glimmer-30b`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 预训练与数据 | [BMuon: Budgeting Muon's Spectral Geometry for Structured Compressibility](2610.23571-bmuon/README.md) | Inria，2026-10-16 | [原作者入口](https://github.com/RidaAssalouh/BMuon)；作者官方仓库存在，但本轮仅有README，明确Implementation and reproduction scripts will be released soon；尚未发布可运行实现，未核到代码许可证 | `bmuon`：仅低成本组件，完整实验不复现 |
 | System One / JEV | [Jev-as-a-Judge for Brazilian Portuguese Information Retrieval: Relevance Assessment and Reranking](2610.23346-jev-portuguese-ir/README.md) | Câmara dos Deputados，2026-10-16 | 未发现官方代码 | `jev-portuguese-ir`：CPU 评测接口，不执行模型 |
 | 多模态基础模型 | [Persistent Planar Memory for Video World Models](2610.23795-ppmem/README.md) | Tsinghua University，2026-10-16 | 未发现官方代码 | 计划键 `ppmem`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
@@ -41,6 +44,7 @@
 | 网络架构 | [Open-world AI: a Tale of Three Requirements](2610.20782-memory-mosaics-plus/README.md) | FAIR, Meta，2026-10-14 | [原作者入口](https://github.com/facebookresearch/MemoryMosaics)；官方仓库已发布 Memory Mosaics+ / two-stage 配置与代码；研究注明作者以个人身份完成 | `memory-mosaics-plus`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference](../reproductions/2610.19605-pn-mix/README.md) | Seoul National University，2026-10-14 | 未发现官方代码 | `pn-mix`：仅低成本组件，完整实验不复现 |
 | System One / JEV | [Selective Reasoning for Typed Decision Models: When to Start, Read, and Stop](../system-one/2610.19644-selective-reasoning/README.md) | University of Electronic Science and Technology of China，2026-10-14 | [已开源](https://github.com/binzheng-joey/selective-reasoning) | `selective-reasoning`：CPU 评测接口，不执行模型 |
+| JEPA与世界模型 | [Time-JEPA: Grounding Video World Models with Physical Time Series](2610.23982-time-jepa/README.md) | Harbin Institute of Technology，2026-10-14 | [原作者入口](https://github.com/Lishenyi2004/Time-JEPA)；作者官方仓库已公开，包含src/app/configs/tests和评测脚本；MIT及Apache-2.0许可证文件并存，本轮未下载或执行其完整视频训练 | `time-jepa`：仅低成本组件，完整实验不复现 |
 | System One / JEV | [The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval](../system-one/2610.14631-request-audit/README.md) | Tsinghua University，2026-10-10 | 未找到本论文 artifact 的公开下载地址（2026-10-14 核验） | `jev-request-audit` |
 | System One / JEV | [Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages](../system-one/2610.14112-regional-transfer/README.md) | Universitas Budi Luhur，2026-10-09 | [已开源](https://github.com/tnromy/evaluating-system-one-models-for-indonesian-regional-languages) | `jev-regional-transfer` |
 | 推理与系统效率 | [DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs](../reproductions/2610.13767-dualquant/README.md) | d-Matrix，2026-10-09 | [已开源](https://github.com/MahsaMoonlike/dualquant) | `dualquant` |

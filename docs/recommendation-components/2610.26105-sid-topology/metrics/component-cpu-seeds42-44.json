@@ -1,0 +1,124 @@
+{
+  "schema_version": 2,
+  "method": "sid-topology",
+  "manifest_ref": "recommendation:sid-topology",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic-sid-topology-mapping-fixture",
+    "revision": "oct20-sid-topology-v1",
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "old_sid_remapped_fraction": 0.0,
+        "full_remap_negative_control_fraction": 1.0,
+        "frozen_old_path_address_recovery": 1.0,
+        "full_remap_old_address_losses": 8,
+        "insertion_order_mismatches": 0,
+        "head_collision_members": 2,
+        "input_mapping_mutated": false,
+        "learned_retriever_evaluated": false,
+        "production_ab_reproduced": false
+      },
+      "audit_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "old_sid_remapped_fraction": 0.0,
+        "full_remap_negative_control_fraction": 1.0,
+        "frozen_old_path_address_recovery": 1.0,
+        "full_remap_old_address_losses": 8,
+        "insertion_order_mismatches": 0,
+        "head_collision_members": 1,
+        "input_mapping_mutated": false,
+        "learned_retriever_evaluated": false,
+        "production_ab_reproduced": false
+      },
+      "audit_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "old_sid_remapped_fraction": 0.0,
+        "full_remap_negative_control_fraction": 1.0,
+        "frozen_old_path_address_recovery": 1.0,
+        "full_remap_old_address_losses": 8,
+        "insertion_order_mismatches": 0,
+        "head_collision_members": 2,
+        "input_mapping_mutated": false,
+        "learned_retriever_evaluated": false,
+        "production_ab_reproduced": false
+      },
+      "audit_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  ],
+  "metrics": {
+    "frozen_old_path_address_recovery": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "full_remap_negative_control_fraction": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "full_remap_old_address_losses": {
+      "mean": 8,
+      "std": 0.0,
+      "n": 3
+    },
+    "head_collision_members": {
+      "mean": 1.6666666666666667,
+      "std": 0.5773502691896257,
+      "n": 3
+    },
+    "input_mapping_mutated": false,
+    "insertion_order_mismatches": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "learned_retriever_evaluated": false,
+    "old_sid_remapped_fraction": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "production_ab_reproduced": false
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "2415e8713aac46346ddd72fc52fbf9c8f32f4a13",
+    "artifact_path": "docs/recommendation-components/2610.26105-sid-topology/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "1fd06dfb24c96befec0de89e4278cf7f9c575f47beb23c59224d8c14999c3dfb",
+    "executed_source_sha256": {
+      "scripts/run_oct20_sid_topology.py": "3a9c615b2ff8c0ca62c00c6056018dad98bc48b8507e4d546d0375a3595d0a4f",
+      "src/auto_research/reproductions/sid_topology.py": "882dc15b56e0257b8f308f6309ba74652dfa3346a1408b87d9ef545afc3565ff"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:b12021872a07eda617018c736f01013bd0d00f5c41412fd5b7695d3d94413a04"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

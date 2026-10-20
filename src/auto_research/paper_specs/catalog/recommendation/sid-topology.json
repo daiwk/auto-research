@@ -1,0 +1,53 @@
+{
+  "domain": "recommendation",
+  "key": "sid-topology",
+  "title": "Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search",
+  "paper_url": "https://arxiv.org/abs/2610.26105v1",
+  "detail_path": "recommendation-components/2610.26105-sid-topology/README.md",
+  "topic": [
+    "生成式推荐",
+    "语义标识与增量更新"
+  ],
+  "browse_company": "Alibaba",
+  "browse_topic": [
+    "生成、排序与冷启动",
+    "语义标识与增量更新"
+  ],
+  "first_author": "Jianbo Zhu",
+  "first_author_affiliation": "Alibaba / Taobao & Tmall Group",
+  "published": "2026-10-19",
+  "published_at": "2026-10-19T10:01:25Z",
+  "code": null,
+  "code_status": "原文及arXiv未给出可核验作者代码仓库，本轮未找到；私有生产日志未公开",
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.reproductions.sid_topology.insert_preserving",
+  "local_command": "PYTHONPATH=src python scripts/run_oct20_sid_topology.py --device cpu --seeds 42,43,44 --output <fresh-result.json>",
+  "evaluation_tier": "l1_mechanism",
+  "requires_gpu_validation": false,
+  "online_ab": [
+    {
+      "product": "TmallAPP search",
+      "metric": "UCTCVR",
+      "lift_percent": 0.29,
+      "traffic": "20% live traffic, three weeks",
+      "source_url": "https://arxiv.org/pdf/2610.26105v1",
+      "source_location": "Section 4.7"
+    },
+    {
+      "product": "TmallAPP search",
+      "metric": "GMV",
+      "lift_percent": 1.16,
+      "traffic": "20% live traffic, three weeks",
+      "source_url": "https://arxiv.org/pdf/2610.26105v1",
+      "source_location": "Section 4.7"
+    }
+  ],
+  "summary": "冻结旧商品完整三层SID，只按新价值排名给新商品分配路径，允许新商品与原头部token碰撞，不通过移动旧路径强行去重。实现价值先验、HC桶、增量插入和映射漂移审计；语义前缀由调用方提供，不训练RQ-VAE或LLM，64卡生产完整实验成本过高不复现。",
+  "review_done": true,
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

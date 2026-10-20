@@ -1,0 +1,166 @@
+{
+  "schema_version": 2,
+  "method": "tar-adaptive-replay",
+  "manifest_ref": "post-training:tar-adaptive-replay",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-tar-adaptive-replay-v1",
+    "revision": "sha256:f2bf79e5fd71076a0bfb58aa595d2326bb67d2a0570a96781d8e4be34fe29dd6",
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "parameter_delta_l2": 0.06808293941038024,
+        "gradient_norm_min": 0.27454247403305343,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 0.0,
+        "replay_gradient_reference_max_abs_error": 1.0842021724855044e-19,
+        "replay_gradient_norm_max": 0.0024214896611846116,
+        "nonzero_replay_updates": 2,
+        "bank_trajectory_count": 4,
+        "ungated_sft_negative_control_difference_max": 2.7461171480414563,
+        "base_parameter_delta_l2": 0.0,
+        "base_gradient_count": 0,
+        "base_trajectories_replaced_with_gold": false,
+        "semantic_encoder_used": false,
+        "reasoning_diversity_benchmark_evaluated": false
+      },
+      "audit_sha256": "438fe6e1aaa371af956d6eafc9cf66508c7562c44b448c9df216dff5bee34c1f"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "parameter_delta_l2": 0.0892301214539956,
+        "gradient_norm_min": 0.2591095698972603,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 1.734723475976807e-18,
+        "replay_gradient_reference_max_abs_error": 2.168404344971009e-19,
+        "replay_gradient_norm_max": 0.002277857977693277,
+        "nonzero_replay_updates": 2,
+        "bank_trajectory_count": 6,
+        "ungated_sft_negative_control_difference_max": 2.8341168157937187,
+        "base_parameter_delta_l2": 0.0,
+        "base_gradient_count": 0,
+        "base_trajectories_replaced_with_gold": false,
+        "semantic_encoder_used": false,
+        "reasoning_diversity_benchmark_evaluated": false
+      },
+      "audit_sha256": "38d39ad4d0189b90085509bfed18909f90c919e8aa937c3400ecdaa12d0f629c"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "parameter_delta_l2": 0.07365487264006035,
+        "gradient_norm_min": 0.24673494800339188,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 1.734723475976807e-18,
+        "replay_gradient_reference_max_abs_error": 4.336808689942018e-19,
+        "replay_gradient_norm_max": 0.0022359876469220255,
+        "nonzero_replay_updates": 2,
+        "bank_trajectory_count": 6,
+        "ungated_sft_negative_control_difference_max": 2.7838919265529207,
+        "base_parameter_delta_l2": 0.0,
+        "base_gradient_count": 0,
+        "base_trajectories_replaced_with_gold": false,
+        "semantic_encoder_used": false,
+        "reasoning_diversity_benchmark_evaluated": false
+      },
+      "audit_sha256": "c9ed371a4d5d9e5c32e69caf6e5d42980f8c04cbc84dfb076501b92a5a352a04"
+    }
+  ],
+  "metrics": {
+    "bank_trajectory_count": {
+      "mean": 5.333333333333333,
+      "std": 1.1547005383792515,
+      "n": 3
+    },
+    "base_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "base_parameter_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "base_trajectories_replaced_with_gold": false,
+    "gradient_norm_min": {
+      "mean": 0.2601289973112352,
+      "std": 0.013931764072142796,
+      "n": 3
+    },
+    "loss_reference_max_abs_error": {
+      "mean": 1.1564823173178713e-18,
+      "std": 1.0015430658247728e-18,
+      "n": 3
+    },
+    "nonzero_replay_updates": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.07698931116814539,
+      "std": 0.010960825120383752,
+      "n": 3
+    },
+    "reasoning_diversity_benchmark_evaluated": false,
+    "replay_gradient_norm_max": {
+      "mean": 0.0023117784285999715,
+      "std": 9.72918139729868e-05,
+      "n": 3
+    },
+    "replay_gradient_reference_max_abs_error": {
+      "mean": 2.529805069132844e-19,
+      "std": 1.656146174683464e-19,
+      "n": 3
+    },
+    "semantic_encoder_used": false,
+    "ungated_sft_negative_control_difference_max": {
+      "mean": 2.7880419634626987,
+      "std": 0.0441463756823992,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+    "artifact_path": "docs/post-training/2610.24236-tar-adaptive-replay/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "3c05ef2c9459c07344fcf6908eca7997f2ab834cac24e2e85f736fc1a8ca1382",
+    "executed_source_sha256": {
+      "scripts/run_oct20_post_components.py": "f2bf79e5fd71076a0bfb58aa595d2326bb67d2a0570a96781d8e4be34fe29dd6",
+      "src/auto_research/post_training/spod.py": "3271ce12f130d35d21aec3e34c949fd32f712b57e91813a0cafee206bdeb5974",
+      "src/auto_research/post_training/apsd.py": "00490dbba7f802d6a5e90c4048c5daa3e74ccc63fc6a36f9c9b0a355af777566",
+      "src/auto_research/post_training/tar.py": "5fe989893c28ea07c54c0cb2678ea1bc6c1eee253cd695c003e238a47eee6f19"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:4f1dbf0747cc8d9d5eb0b60f773de6aace22ad39b87e4c5c04528abfc8e85034"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

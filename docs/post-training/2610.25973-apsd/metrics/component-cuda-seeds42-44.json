@@ -1,0 +1,150 @@
+{
+  "schema_version": 2,
+  "method": "apsd",
+  "manifest_ref": "post-training:apsd",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-apsd-v1",
+    "revision": "sha256:f2bf79e5fd71076a0bfb58aa595d2326bb67d2a0570a96781d8e4be34fe29dd6",
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "parameter_delta_l2": 0.013667711312919578,
+        "gradient_norm_min": 0.05886645270242648,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 4.787836793695988e-16,
+        "logit_gradient_reference_max_abs_error": 3.859759734048396e-17,
+        "finite_difference_max_abs_error": 4.9245164695198296e-12,
+        "detached_target_negative_control_gradient_difference_min": 0.007902528805984656,
+        "self_teacher_parameter_delta_during_update_max": 0.0,
+        "self_teacher_gradient_count": 0,
+        "self_teacher_is_current_policy_copy": true,
+        "feedback_in_actor_condition": false,
+        "formal_reasoning_or_code_benchmark_evaluated": false
+      },
+      "audit_sha256": "134340c99e465ebca7d88683ace1359a1783ab437abefa78c44a4a08caf0fb4c"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "parameter_delta_l2": 0.031907949336703226,
+        "gradient_norm_min": 0.07936844048437772,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 3.469446951953614e-16,
+        "logit_gradient_reference_max_abs_error": 3.5561831257524545e-17,
+        "finite_difference_max_abs_error": 5.3828285145191e-12,
+        "detached_target_negative_control_gradient_difference_min": 0.012542303792168747,
+        "self_teacher_parameter_delta_during_update_max": 0.0,
+        "self_teacher_gradient_count": 0,
+        "self_teacher_is_current_policy_copy": true,
+        "feedback_in_actor_condition": false,
+        "formal_reasoning_or_code_benchmark_evaluated": false
+      },
+      "audit_sha256": "cc5d5d229ebeb7c33a5c768d4213da215c31a78f33d9219b576af0fd39d47d98"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "parameter_delta_l2": 0.005357738001378681,
+        "gradient_norm_min": 0.013694071380174287,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 1.6046192152785466e-16,
+        "logit_gradient_reference_max_abs_error": 2.2551405187698492e-17,
+        "finite_difference_max_abs_error": 4.7858458410594005e-12,
+        "detached_target_negative_control_gradient_difference_min": 0.0038886965977766724,
+        "self_teacher_parameter_delta_during_update_max": 0.0,
+        "self_teacher_gradient_count": 0,
+        "self_teacher_is_current_policy_copy": true,
+        "feedback_in_actor_condition": false,
+        "formal_reasoning_or_code_benchmark_evaluated": false
+      },
+      "audit_sha256": "d039b01be5b680d73e832a8fe4eaa593bbdeb123f59b3470f12b88ae3fe9884e"
+    }
+  ],
+  "metrics": {
+    "detached_target_negative_control_gradient_difference_min": {
+      "mean": 0.008111176398643359,
+      "std": 0.004330574988630294,
+      "n": 3
+    },
+    "feedback_in_actor_condition": false,
+    "finite_difference_max_abs_error": {
+      "mean": 5.03106360836611e-12,
+      "std": 3.124280680412998e-13,
+      "n": 3
+    },
+    "formal_reasoning_or_code_benchmark_evaluated": false,
+    "gradient_norm_min": {
+      "mean": 0.05064298818899283,
+      "std": 0.033600591003158924,
+      "n": 3
+    },
+    "logit_gradient_reference_max_abs_error": {
+      "mean": 3.2236944595235663e-17,
+      "std": 8.524155332866027e-18,
+      "n": 3
+    },
+    "loss_reference_max_abs_error": {
+      "mean": 3.2873009869760494e-16,
+      "std": 1.5994065781734974e-16,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.01697779955033383,
+      "std": 0.013581087717565192,
+      "n": 3
+    },
+    "self_teacher_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "self_teacher_is_current_policy_copy": true,
+    "self_teacher_parameter_delta_during_update_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+    "artifact_path": "docs/post-training/2610.25973-apsd/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "3c05ef2c9459c07344fcf6908eca7997f2ab834cac24e2e85f736fc1a8ca1382",
+    "executed_source_sha256": {
+      "scripts/run_oct20_post_components.py": "f2bf79e5fd71076a0bfb58aa595d2326bb67d2a0570a96781d8e4be34fe29dd6",
+      "src/auto_research/post_training/spod.py": "3271ce12f130d35d21aec3e34c949fd32f712b57e91813a0cafee206bdeb5974",
+      "src/auto_research/post_training/apsd.py": "00490dbba7f802d6a5e90c4048c5daa3e74ccc63fc6a36f9c9b0a355af777566",
+      "src/auto_research/post_training/tar.py": "5fe989893c28ea07c54c0cb2678ea1bc6c1eee253cd695c003e238a47eee6f19"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:1ea2bd637e68891df31282f874e277df187a818ef0ddee218a39e64ce4d89a58"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

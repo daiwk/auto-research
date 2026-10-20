@@ -1,0 +1,156 @@
+{
+  "schema_version": 2,
+  "method": "kronlstm",
+  "manifest_ref": "foundation-models:kronlstm",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-kronlstm-v1",
+    "revision": "sha256:e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+    "checkpoint": null,
+    "capability_benchmark": false,
+    "recipe": "oct20-foundation-definition-synthetic-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "loss": 1.5438334118323191,
+        "recurrence_read_reference_max_error": 1.1102230246251565e-16,
+        "recurrence_state_reference_max_error": 6.938893903907228e-17,
+        "gradient_reference_max_error": 1.0408340855860843e-17,
+        "gradient_norm": 2.648924204361577,
+        "gate_gradient_norm": 0.17254274225215843,
+        "parameter_update_norm": 0.026489242043615763,
+        "vector_deltanet_negative_difference_norm": 0.20845858041216553,
+        "causal_prefix_max_error": 0.0,
+        "key_norm_max_error": 2.220446049250313e-16,
+        "value_norm_max_error": 1.1102230246251565e-16
+      },
+      "audit_sha256": "f4901647a37b1997d74efdd94d06553a5294df713713c5108386339dfa52ccfa"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "loss": 1.554914033861962,
+        "recurrence_read_reference_max_error": 8.326672684688674e-17,
+        "recurrence_state_reference_max_error": 1.1102230246251565e-16,
+        "gradient_reference_max_error": 6.938893903907228e-18,
+        "gradient_norm": 2.296996589762701,
+        "gate_gradient_norm": 0.1959919581977365,
+        "parameter_update_norm": 0.022969965897627,
+        "vector_deltanet_negative_difference_norm": 0.22851385043544936,
+        "causal_prefix_max_error": 0.0,
+        "key_norm_max_error": 1.1102230246251565e-16,
+        "value_norm_max_error": 2.220446049250313e-16
+      },
+      "audit_sha256": "a0ad3a19e0ea9b7a8af74bbe4372b6678872d76192efc878c74279e176d2b44f"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "loss": 1.8824409215768765,
+        "recurrence_read_reference_max_error": 1.1102230246251565e-16,
+        "recurrence_state_reference_max_error": 1.1102230246251565e-16,
+        "gradient_reference_max_error": 1.734723475976807e-17,
+        "gradient_norm": 1.5284609475176782,
+        "gate_gradient_norm": 0.14221511133803208,
+        "parameter_update_norm": 0.015284609475176776,
+        "vector_deltanet_negative_difference_norm": 0.4311674081906736,
+        "causal_prefix_max_error": 0.0,
+        "key_norm_max_error": 2.220446049250313e-16,
+        "value_norm_max_error": 2.220446049250313e-16
+      },
+      "audit_sha256": "77c0e6f488f304da9a2088351ada56b7a7bbd242705b1d3cef87c66aad580839"
+    }
+  ],
+  "metrics": {
+    "causal_prefix_max_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gate_gradient_norm": {
+      "mean": 0.17024993726264234,
+      "std": 0.02696163998318699,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 2.1581272472139856,
+      "std": 0.5729947628113572,
+      "n": 3
+    },
+    "gradient_reference_max_error": {
+      "mean": 1.1564823173178714e-17,
+      "std": 5.299667758987085e-18,
+      "n": 3
+    },
+    "key_norm_max_error": {
+      "mean": 1.8503717077085943e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "loss": {
+      "mean": 1.6603961224237191,
+      "std": 0.19237623208017515,
+      "n": 3
+    },
+    "parameter_update_norm": {
+      "mean": 0.021581272472139847,
+      "std": 0.0057299476281135716,
+      "n": 3
+    },
+    "recurrence_read_reference_max_error": {
+      "mean": 1.0177044392397268e-16,
+      "std": 1.6024689053196365e-17,
+      "n": 3
+    },
+    "recurrence_state_reference_max_error": {
+      "mean": 9.71445146547012e-17,
+      "std": 2.4037033579794548e-17,
+      "n": 3
+    },
+    "value_norm_max_error": {
+      "mean": 1.8503717077085943e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "vector_deltanet_negative_difference_norm": {
+      "mean": 0.28937994634609615,
+      "std": 0.1232003113477086,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "324217ed26fe2e297e25879ad092281eb0960b87",
+    "artifact_path": "docs/foundation-models/2610.26834-kronlstm/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "cfe64cca22b01aac2396d2ed2c95ea20c93ccca0c89091a093aa51575021f417",
+    "executed_source_sha256": {
+      "scripts/run_oct20_foundation_components.py": "e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+      "src/auto_research/foundation_models/t_muon.py": "d14e23dcec0b4e704ebad4ae096d0928bce213fcc6947acd0716160f3470067a",
+      "src/auto_research/foundation_models/time_jepa.py": "8d9b3cdf712ccfef1ed0ea308402c004a12f2d8089d4f90692ff087afd6f8c93",
+      "src/auto_research/foundation_models/kronlstm.py": "e9d44ac8772d87d934c411e1aa8a1544ca47c906b59ec8700f2efb9f35a3c123"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:b819a4882fbbc44aca456ba7c2f0ba64b02f54a6d1495e93976a9fa75a0390b3"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
