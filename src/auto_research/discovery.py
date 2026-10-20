@@ -18,7 +18,8 @@ from urllib.parse import urlparse
 from .models import Paper
 from .papers import ArxivClient, canonical_arxiv_id, paper_recency, paper_revision
 from .discovery_review import (
-    disposition_rank, metadata_only_disposition, priority_organizations,
+    disposition_rank, disposition_status, metadata_only_disposition, priority_organizations,
+    TERMINAL_EXCEPTION_RESOLUTIONS,
 )
 
 
@@ -137,17 +138,17 @@ PRIORITY_REVIEW_QUERY_NAMES: frozenset[str] = frozenset(
 )
 
 
-def repository_paper_statuses(
+def repository_paper_records(
     manifest_path: Path,
     ledger_path: Path,
-) -> dict[str, str]:
-    """Load catalogued or substantively reviewed canonical identities.
+) -> dict[str, dict]:
+    """Load independent review, catalog, and implementation observations.
 
     A date-only historical disposition never closes an unreviewed paper. Keep
     frozen ledger rows for audit, but do not let their presence suppress recall.
     A later real method/cost/exception decision still closes the same identity.
     """
-    statuses: dict[str, str] = {}
+    records: dict[str, dict] = {}
     ranks: dict[str, int] = {}
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     for paper in manifest.get("papers", []):
@@ -156,9 +157,30 @@ def repository_paper_statuses(
             continue  # Official model releases are not fabricated arXiv IDs.
         arxiv_id = paper_url.rstrip("/").split("/")[-1]
         if arxiv_id:
-            status = "reviewed" if str(paper.get("implementation_status", "")).startswith("deferred") else "implemented"
-            statuses[canonical_arxiv_id(arxiv_id)] = status
-            ranks[canonical_arxiv_id(arxiv_id)] = 4
+            identity = canonical_arxiv_id(arxiv_id)
+            implementation = paper.get("implementation_status", "catalogued_unspecified")
+            status = "reviewed" if str(implementation).startswith("deferred") else "catalogued"
+            existing = records.get(identity, {})
+            # One identity can have several domain entries. A reference-only
+            # duplicate must not erase an existing component catalog record.
+            if existing.get("repository_status") == "catalogued":
+                status = "catalogued"
+            records[identity] = {
+                "repository_status": status, "catalogued": True,
+                "implementation_status": existing.get("implementation_status", implementation),
+                "automatic_implementation_queue": False,
+            }
+            if existing:
+                records[identity]["catalog_implementation_statuses"] = sorted(set([
+                    *existing.get("catalog_implementation_statuses", [existing["implementation_status"]]),
+                    implementation,
+                ]))
+                if len(records[identity]["catalog_implementation_statuses"]) > 1:
+                    records[identity]["implementation_status"] = "mixed_catalog_entries"
+            full_resolution = paper.get("full_experiment_status") or existing.get("full_experiment_resolution")
+            if full_resolution:
+                records[identity]["full_experiment_resolution"] = full_resolution
+            ranks[identity] = 4
 
     ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
     for batch in ledger.get("batches", []):
@@ -167,11 +189,27 @@ def repository_paper_statuses(
             if not arxiv_id:
                 continue
             identity = canonical_arxiv_id(str(arxiv_id))
+            if candidate.get("full_experiment_resolution"):
+                records.setdefault(identity, {})["full_experiment_resolution"] = candidate["full_experiment_resolution"]
+            if candidate.get("resolution") in TERMINAL_EXCEPTION_RESOLUTIONS:
+                records.setdefault(identity, {})["full_experiment_resolution"] = candidate["resolution"]
             rank = disposition_rank(candidate)
             if rank and rank > ranks.get(identity, 0):
-                statuses[identity] = "implementation-pending" if rank == 2 else "reviewed"
+                records.setdefault(identity, {}).update({
+                    "repository_status": disposition_status(candidate),
+                    "catalogued": False,
+                    "implementation_status": candidate.get("implementation_status", "not_established"),
+                    # Review acceptance is not a user request to implement it.
+                    "automatic_implementation_queue": candidate.get("automatic_implementation_queue") is True,
+                })
                 ranks[identity] = rank
-    return statuses
+    return {identity: record for identity, record in records.items() if "repository_status" in record}
+
+
+def repository_paper_statuses(manifest_path: Path, ledger_path: Path) -> dict[str, str]:
+    """Compatibility view of records; catalog membership never means reproduced."""
+    return {identity: record["repository_status"] for identity, record in
+            repository_paper_records(manifest_path, ledger_path).items()}
 
 
 def triage_candidates(
@@ -207,7 +245,7 @@ def triage_candidates(
         # be reopened just because the older metadata baseline is unchanged.
         historical_review = status == "new" and metadata_only_disposition(baseline)
         review_required = status == "new" or revision_review or historical_review
-        implementation_pending = status == "implementation-pending"
+        implementation_pending = status in {"implementation-pending", "accepted-unimplemented"}
         item.update(
             {
                 "repository_status": status,
@@ -216,7 +254,9 @@ def triage_candidates(
                 "priority_source_matches": priority_sources,
                 "revision_review_required": revision_review,
                 "historical_review_required": historical_review,
-                "implementation_review_required": implementation_pending,
+                "accepted_unimplemented": implementation_pending,
+                "implementation_review_required": False,
+                "automatic_implementation_queue": False,
                 "review_required": review_required,
                 "revision_review_reason": (
                     "newer-version" if newer else "metadata-changed" if changed_metadata
@@ -239,7 +279,7 @@ def build_discovery_payload(
 ) -> dict:
     counts = {
         status: sum(candidate["repository_status"] == status for candidate in candidates)
-        for status in ("new", "implemented", "reviewed", "implementation-pending")
+        for status in ("new", "catalogued", "reviewed", "accepted-unimplemented", "review-deferred")
     }
     counts["google_meta_priority_review"] = sum(
         bool(candidate["priority_review_required"]) for candidate in candidates
@@ -269,15 +309,18 @@ def render_discovery_summary(payload: dict) -> str:
     unresolved_dates = [item for item in new_candidates if not item["published"]]
     backlog = [item for item in new_candidates if item["published"] and not requested_start <= item["published"][:10] <= end]
     revisions = [item for item in payload["candidates"] if item.get("revision_review_required")]
-    pending = [item for item in payload["candidates"] if item.get("implementation_review_required")]
+    pending = [item for item in payload["candidates"] if item.get("accepted_unimplemented")
+               or item.get("repository_status") in {"accepted-unimplemented", "implementation-pending"}]
+    deferred = [item for item in payload["candidates"] if item.get("repository_status") == "review-deferred"]
     lines = [
         f"# {payload['track']} 论文候选差分",
         "",
         f"扫描窗口：{payload['window']['start']} 至 {payload['window']['end']}",
         "",
-        "| 新候选 | 已实现 | 已审计 | Google / Meta 重点复核 |",
-        "| ---: | ---: | ---: | ---: |",
-        f"| {counts['new']} | {counts['implemented']} | {counts['reviewed']} | "
+        "| 未审候选 | 已收录（非复现完成） | 审查终态 | 已接受未实现 | 暂缓未接受 | Google / Meta 重点复核 |",
+        "| ---: | ---: | ---: | ---: | ---: | ---: |",
+        f"| {counts['new']} | {counts.get('catalogued', 0)} | {counts['reviewed']} | "
+        f"{counts.get('accepted-unimplemented', 0)} | {counts.get('review-deferred', 0)} | "
         f"{counts['google_meta_priority_review']} |",
         "",
         f"其中原始发布日期在本次请求窗口内的未审候选 {len(current)} 篇；"
@@ -285,7 +328,8 @@ def render_discovery_summary(payload: dict) -> str:
         "‘新候选’只表示仓库尚未审计，并不等于当天新发表；机构词命中也不等于作者单位。",
         f"已知论文待复核的版本更新 {len(revisions)} 篇，单独计数，不计入新 v1。",
         f"另有 {len(unresolved_dates)} 篇公告条目的原始日期待解析，不计为当天新发表或历史补漏。",
-        f"已通过方法审查但尚未交付/作出终态成本决定 {len(pending)} 篇；不计为已实现或已结束。",
+        f"已接受但未实现的机会项 {len(pending)} 篇；不是自动实现队列，不阻塞已完成的方法审查。",
+        f"暂缓但未接受 {len(deferred)} 篇；‘下一批/待实现’等文字不构成实现承诺。",
         "",
         "## Google / Meta 本窗口重点复核",
         "",
@@ -383,8 +427,10 @@ def render_discovery_summary(payload: dict) -> str:
     ))
     lines.extend(["", "## 已知论文版本更新", ""])
     lines.extend(_candidate_lines(revisions, empty="未发现需复核的已知论文版本更新。"))
-    lines.extend(["", "## 已审查但尚未交付", ""])
+    lines.extend(["", "## 已接受但未实现（非自动交付队列）", ""])
     lines.extend(_candidate_lines(pending, empty="本次未召回尚未交付的既有候选。"))
+    lines.extend(["", "## 暂缓但未接受", ""])
+    lines.extend(_candidate_lines(deferred, empty="本次未召回暂缓候选。"))
     lines.extend(["", "## 原始发布日期待解析", ""])
     lines.extend(_candidate_lines(unresolved_dates, empty="没有原始日期待解析的条目。"))
     lines.extend(["", "## 本窗口其他未审候选", ""])
@@ -404,8 +450,8 @@ def render_discovery_summary(payload: dict) -> str:
             "",
             "## 已处理候选",
             "",
-            f"已实现 {counts['implemented']} 篇，已审计但未实现 {counts['reviewed']} 篇；"
-            "详情保留在 JSON artifact。",
+            f"已收录 {counts.get('catalogued', 0)} 篇，审查终态 {counts['reviewed']} 篇；"
+            "收录不表示完整复现，组件、接口和完整实验边界须查看 manifest 与独立详情。",
             "",
         ]
     )

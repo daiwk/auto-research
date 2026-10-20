@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2603.06981",
+  "source_urls": [
+    "https://arxiv.org/html/2603.06981v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "09305364d1b95f1f79fc04c4e3429f03ea1bdadb4ee2de8901a6199f944ef2d9",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§1模型定义",
+      "§5.1-5.2配置及Table1"
+    ],
+    "browser_line_ranges": "L77-L81;L319-L354"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "DiffCon将reverse diffusion看作LS-MDP控制：f-divergence regularized PG/PPO与reward-weighted regression；冻结backbone+暴露中间输出的轻量side control score修正。",
+  "experiment_paraphrase_zh": "SD1.4，5种参数化×SFT/RWL/PPO；side12M，LoRA17M；SFT1000/RWL2000/PPO2400步；HPS/CLIP/PickScore及人工评测。"
+}

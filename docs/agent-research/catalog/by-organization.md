@@ -288,6 +288,10 @@
 
 - 2026-08-26 · 一作：Guibin Zhang · [JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution](../2608.25593-jit-agent/README.md)（`jit-agent`）：把 harness 形式化为 memory、planning、action protocol、tools/skills 四个可生成模块；模型按任务生成、失败后修复，并从历史配置 archive 蒸馏可迁移模式。
 
+## MATS
+
+- 2026-10-06 · 一作：Param Biyani · [SpecGuard: Proving a Task Is Broken Before the Agent Cheats](../2610.09159-specguard/README.md)（`specguard`）：当测试意外或恶意违背任务描述，coding agent 可能修改测试或硬编码结果，而不是报告任务不可满足。SpecGuard 在编码前拆开两个信息来源：SpecAgent 只看描述 $D$ 与源码 $C$、完全不看测试 $T$；TestAgent 独立翻译测试；Certifier 对齐两侧语义，由 Lean kernel 核验冲突证明。
+
 ## Manulife
 
 - 2026-09-09 · 一作：Syed Shariyar Murtaza · [When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents](../2609.10750-skill-retention/README.md)（`skill-retention`）：混合真实样本 replay 与 embedding anchor/LwF 类正则，防止合成技能数据微调破坏真实和 OOD 路由能力。

@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2607.13614",
+  "source_urls": [
+    "https://arxiv.org/html/2607.13614v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "81daccb2a655ad7d0de298c7cbbe9aa90a14b1137d550e91634137aeb954bba9",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§2数据设计摘要",
+      "§3.1-3.3",
+      "§4 annotations"
+    ],
+    "browser_line_ranges": "L44-L62;L94-L113"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "VIP-MINGLE是跨inperson/video conference受试者配对多模态语料，speech timing/language complexity/facial features统计与interaction annotation；非新的通用模型或Agent算法。",
+  "experiment_paraphrase_zh": "59h/32groups/105participants；7077个10秒片段、192annotators；mixed-effects/Wilcoxon比较环境domain shift。"
+}

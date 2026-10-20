@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2604.09803",
+  "source_urls": [
+    "https://arxiv.org/html/2604.09803v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "0afeb4ee32f6f29bd43f5881b34bc2a643b91fdb29bcaa6bc5b491c9939f8d7d",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "Appendix A模型/训练/推理",
+      "评测段定位"
+    ],
+    "browser_line_ranges": "L315-L343"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "MAGE Controlled Multimodal FluxFormer latent flow matching、audio-visual nexus时序对齐、乘性cross-gated modulation与dynamic modality masking；统一生成/mixture编辑。",
+  "experiment_paraphrase_zh": "MUSIC benchmark；AdamW1e-4，1K epochs且每epoch数据重复5次；70%mixture、20%zero-mixture、10%CFG fallback；Euler2eval与MixWavCodec。"
+}

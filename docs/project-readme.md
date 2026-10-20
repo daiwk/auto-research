@@ -54,6 +54,11 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+[Google/Meta历史线索收口（10月21日）](research-audits/google-meta-closeout-20261021/README.md)
+逐项审查39个Google官方源线索，补齐9项完整实验成本/来源终态；实现SpecGuard与Video Encoders的有界组件。
+审查接受、目录收录、L1组件和完整能力复现分开计数；原“521项待交付”不再作为自动实施承诺。
+高成本完整实验不复现，已接受但尚未实现的机会项单独列明，不因全文已读或目录存在而伪标完成。
+
 [Harness² 与 Google/Meta 历史补漏](research-audits/harness2-priority-repair/README.md)
 补上 Harness² 的低成本双层递归控制器，实际执行 96 次 CPU Python 探针；完整模型/API
 基准成本过高不复现。修正日期初筛和已接受待交付条目被误当成“已结束”的去重漏洞，

@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "id": "2601.21149",
+  "source_urls": [
+    "https://arxiv.org/html/2601.21149v1",
+    "https://arxiv.org/abs/2601.21149"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "a0d1323453538be224d3f721cac725f239d0df11332dffa7b0e1caad771b6c23",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3.3-3.6",
+      "§4.1",
+      "Appendix A.1.4-A.3"
+    ],
+    "browser_line_ranges": "L125-L177;L406-L418"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "visit Transformer与POI原型对比学习；多尺度Gaussian anchor分布迁移＋KL，anchor直接监督与text cosine alignment；冻结表示后轻量头。",
+  "experiment_paraphrase_zh": "Veraset LA一年/Houston20天私有移动数据；53.7M参数、4层8头d512；20 epoch预训练、100 epoch微调早停，V100 16GB；5项地图属性probe。"
+}

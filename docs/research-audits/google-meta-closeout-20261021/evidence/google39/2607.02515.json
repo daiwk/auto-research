@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2607.02515",
+  "source_urls": [
+    "https://arxiv.org/html/2607.02515v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "6e100b01b5a80160cdbbf0a6379a6acd306a92c289877f309ea92cd8463cb1cb",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3.2-3.3",
+      "Appendix训练成本Table6"
+    ],
+    "browser_line_ranges": "L137-L163;L455-L460"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "PointDiT从raw3D pointmap patch预测clean point map，frozenDINOv3四层features拼接条件；plainViT、velocity loss、sky球映射与rectified t0 sampling。",
+  "experiment_paraphrase_zh": "B223M/L771M/H1.807B；pretrain30epochs，16/16/64H100×12/21/22h；finetune64/64/128H100×2.5/7/5.5h。"
+}

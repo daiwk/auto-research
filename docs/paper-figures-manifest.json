@@ -12447,5 +12447,33 @@
     "error": "",
     "asset_sha256": "b5b1da95c43a2db812247069642813bd105f80001532996a5098c716a2c050be",
     "asset_bytes": 59946
+  },
+  {
+    "page": "docs/foundation-models/2610.06616-video-encoder-selection/README.md",
+    "paper_url": "https://arxiv.org/abs/2610.06616",
+    "arxiv_id": "2610.06616",
+    "figure": "Figure 3",
+    "original_caption": "Figure 3 | Selection before temporal refinement. Left: native encoding mixes neighboring frames before selection. Right: framewise candidates remain separate through budgeted selection, followed by sparse residual interaction. The displayed (𝐼𝐵+ 𝐴𝑆𝑆)Z𝑆uses selected-token context; the refiner may also read unselected neighbors. Matrix blocks indicate dependencies, not linearity.",
+    "source_url": "https://arxiv.org/pdf/2610.06616#page=6",
+    "extraction": "arxiv-pdf-crop",
+    "asset": "docs/foundation-models/2610.06616-video-encoder-selection/assets/paper-figure-01.png",
+    "width": 1310,
+    "height": 611,
+    "score": 4,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/2610.09159-specguard/README.md",
+    "paper_url": "https://arxiv.org/abs/2610.09159",
+    "arxiv_id": "2610.09159",
+    "figure": "Figure 3",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/html/2610.09159v1/pipeline.png",
+    "extraction": "existing",
+    "asset": "docs/agent-research/2610.09159-specguard/assets/paper-figure-01.png",
+    "width": 577,
+    "height": 335,
+    "score": 0,
+    "error": ""
   }
 ]

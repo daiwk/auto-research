@@ -48,10 +48,10 @@ def build_inventory(google: dict, meta: dict, ledger: dict, statuses: dict[str, 
              "current_repository_status": statuses.get(identity, "new"),
              "historical_metadata_observations": metadata.get(identity, []),
              "pending_delivery_observation": pending.get(identity)
-                 if statuses.get(identity) == "implementation-pending" else None}
+                 if statuses.get(identity) == "accepted-unimplemented" else None}
             for identity, signals in sorted(scoped.items())]
     return {
-        "schema_version": 1, "reviewed_on": "2026-10-20",
+        "schema_version": 2, "reviewed_on": "2026-10-21",
         "scope": "Recorded priority historical source inventory, not all papers or all sources",
         "all_sources_exhaustive": False, "review_watermark_advanced": False,
         "frozen_review_snapshots_modified": False,
@@ -60,13 +60,17 @@ def build_inventory(google: dict, meta: dict, ledger: dict, statuses: dict[str, 
             "scoped_identified_papers": len(rows),
             "scoped_current_statuses": dict(sorted(Counter(r["current_repository_status"] for r in rows).items())),
             "all_ledger_date_only_unique_identities": len(metadata),
-            "all_ledger_unclosed_pending_delivery_identities": sum(
-                status == "implementation-pending" for status in statuses.values()),
+            "all_ledger_accepted_unimplemented_identities": sum(
+                status == "accepted-unimplemented" for status in statuses.values()),
+            "all_ledger_review_deferred_identities": sum(
+                status == "review-deferred" for status in statuses.values()),
         },
         "papers": rows,
         "interpretation": [
             "new means no substantive terminal decision or current catalog, not newly published today.",
-            "implementation-pending is visible work, not an implementation or a terminal cost decision.",
+            "accepted-unimplemented means review acceptance, not an authorized delivery queue.",
+            "review-deferred and free-text next-batch suggestions are not acceptance.",
+            "catalogued means a catalog record, not full capability reproduction.",
             "reviewed high-cost papers remain terminal; no costly experiment is automatically retried.",
             "The historical ledger-wide pending count is exposed, not accepted as work to implement in this MR.",
             "Official organization signals do not replace first-author affiliation verification.",

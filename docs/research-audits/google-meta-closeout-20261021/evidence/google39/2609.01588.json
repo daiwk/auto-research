@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2609.01588",
+  "source_urls": [
+    "https://arxiv.org/html/2609.01588v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "a2472deb884f47f65347b1a36c02f79ef64c37231679a6d43b36f571e217abf0",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3设计目标",
+      "§4.5 implementation",
+      "§5 user study"
+    ],
+    "browser_line_ranges": "L114-L119;L189-L207"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "可配置role/timing的proactive writing thought partners，NextJS/BlockNote＋Gemini decision engine；核心贡献为technology probe交互design space。",
+  "experiment_paraphrase_zh": "16人一周diary/interview；FlashLite选择partner<1s，Flash suggestion约8s；作者明确此study不是产品efficacy评测。"
+}

@@ -62,7 +62,7 @@ def external_paper_in_window(
         return True
     identity = canonical_arxiv_id(paper.arxiv_id)
     if (repository_statuses is not None
-            and repository_statuses.get(identity, "new") in {"new", "implementation-pending"}
+            and repository_statuses.get(identity, "new") in {"new", "implementation-pending", "accepted-unimplemented", "review-deferred"}
             and priority_organizations({"source_provenance": provenance.get(identity, ())})):
         # The official source may reveal an older paper for the first time.
         # It belongs to historical backfill, not today's publication count, but

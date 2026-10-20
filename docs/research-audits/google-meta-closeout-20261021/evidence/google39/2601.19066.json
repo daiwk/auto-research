@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "id": "2601.19066",
+  "source_urls": [
+    "https://arxiv.org/html/2601.19066v1",
+    "https://arxiv.org/abs/2601.19066"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "8e9ae5f473a945c0780e42ebb52ab5514fea16aaaa6bf0bf61eee711fd2c2fb6",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§2.1 Our Agentic APR System",
+      "§3 Dynamic Cogeneration",
+      "§4.2配置",
+      "§5结果摘要"
+    ],
+    "browser_line_ranges": "L88-L139;L256;L329"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "Passerine中TDD/TLD/Freeform联合生成fix+BRT；BRT在原bug失败、修后通过验证；test-aware patch selection结合reviewer过滤、归一化分组及多数选择。",
+  "experiment_paraphrase_zh": "120个Google私有bug、六语言、5配置，每bug20条trajectory、每条25步，Gemini2.5 Pro；内部部署与人工代码审查被描述，但对照是离线重放，不是量化生产A/B。"
+}

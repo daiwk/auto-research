@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2603.29791",
+  "source_urls": [
+    "https://arxiv.org/html/2603.29791v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "d375df94344a0ff1333c2c547bef2fadb196d8736b1146b1f5abc22bbb3fc25e",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3 Experimental Setup",
+      "§3.2数据规模",
+      "Appendix E成本示例"
+    ],
+    "browser_line_ranges": "L133-L160;L674-L685"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "Simula seedless taxonomy构造、局部meta-prompt/complexification、全局层次节点采样、double critic rejection与calibrated complexity/Elo；需真实M3生成/批判。",
+  "experiment_paraphrase_zh": "Gemini2.5Flash；CTI/法律/GSM8K/GlobalMMLU多语言，每数据集512K唯一点、5系统版本；13gram/Jaccard decontamination；BS=N5评分。"
+}

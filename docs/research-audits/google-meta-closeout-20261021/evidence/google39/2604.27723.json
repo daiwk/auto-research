@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2604.27723",
+  "source_urls": [
+    "https://arxiv.org/html/2604.27723v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "5f64d901e1a59384b596792ee22bdbda7710258eeeb30dcf17d89bd318c8e7cb",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§5.3 Deferral loss",
+      "Appendix C.1/C.2"
+    ],
+    "browser_line_ranges": "L306-L326;L536-L572"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "mild把imbalanced expert deferral转为input-expert cost-sensitive分类，margin surrogate与一致性界；利用真实expert输出训练router，不能让inference读取标签。",
+  "experiment_paraphrase_zh": "CIFAR人为synthetic expert覆盖比例7/2/1等；真实LLM routing有Qwen2.5 0.5B/1.5B等；实验区别synthetic oracle专家与真实模型。"
+}

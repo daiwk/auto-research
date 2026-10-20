@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2603.28896",
+  "source_urls": [
+    "https://arxiv.org/html/2603.28896v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "78773a73fe6ebbd248640a88dba77d20d85b3f0d78e37c20f4debfdd371adfb7",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3 masked calibration",
+      "训练/评估/硬件配置"
+    ],
+    "browser_line_ranges": "L142-L149;L332-L347"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "冻结VGGT/pi3/MapAnything，用calibration tokens适配fisheye；camera-type linear classifier控制attention mask保持perspective兼容，支持SL/SSL。",
+  "experiment_paraphrase_zh": "ScanNet++/ADT/KITTI360多几何任务；每层K8 tokens、前12层除外；40K步AdamW，gradient checkpointing；4×RTX A6000 48GiB。"
+}

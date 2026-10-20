@@ -85,5 +85,5 @@ def test_artifact_records_policy_and_counts():
     }
     output = classify_artifact(artifact)
     assert output["schema_version"] == 3
-    assert output["classification_policy"] == "fail-closed-v1"
+    assert output["classification_policy"] == "review-delivery-separated-v2"
     assert output["classification_counts"] == {"p2-deferred-review": 1, "query-collision": 1}

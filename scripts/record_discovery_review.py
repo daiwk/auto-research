@@ -18,15 +18,17 @@ TERMINAL = {"implemented", "rejected", "deferred"}
 
 
 def build_batch(artifact: dict, decisions: dict, *, batch_name: str) -> dict:
-    pending = [
-        item for item in artifact.get("candidates", [])
-        if item.get("repository_status") == "new" or item.get("revision_review_required")
-        or item.get("historical_review_required") or item.get("implementation_review_required")
-    ]
     decision_map = {
         canonical_arxiv_id(str(item["id"])): item
         for item in decisions.get("decisions", [])
     }
+    pending = [
+        item for item in artifact.get("candidates", [])
+        if item.get("repository_status") == "new" or item.get("revision_review_required")
+        or item.get("historical_review_required") or item.get("implementation_review_required")
+        or (item.get("repository_status") in {"accepted-unimplemented", "review-deferred", "catalogued", "reviewed"}
+            and item.get("arxiv_id") in decision_map)
+    ]
     missing = [item["arxiv_id"] for item in pending if item["arxiv_id"] not in decision_map]
     if missing:
         raise ValueError(f"new candidates lack terminal decisions: {missing}")
@@ -38,8 +40,16 @@ def build_batch(artifact: dict, decisions: dict, *, batch_name: str) -> dict:
                 f"{candidate['arxiv_id']}: metadata-only identity/date triage cannot be a "
                 "terminal method/cost decision; retain it as a discovery observation"
             )
-        if pending_implementation_disposition(decision):
-            raise ValueError(f"{candidate['arxiv_id']}: implementation-pending is not a terminal disposition")
+        accepted_unimplemented = pending_implementation_disposition(decision)
+        if accepted_unimplemented and not (
+            decision.get("review_done") is True
+            and decision.get("automatic_implementation_queue") is False
+            and decision.get("implementation_status") in {
+                "not_implemented", "not_implemented_by_review", "not_implemented_in_this_review",
+            }
+        ):
+            raise ValueError(f"{candidate['arxiv_id']}: accepted-unimplemented requires completed review, "
+                             "explicit non-delivery and no automatic implementation queue")
         status = decision.get("status")
         if status not in TERMINAL:
             raise ValueError(f"{candidate['arxiv_id']}: non-terminal status {status!r}")
@@ -50,14 +60,21 @@ def build_batch(artifact: dict, decisions: dict, *, batch_name: str) -> dict:
             raise ValueError(f"{candidate['arxiv_id']}: {status} requires reason")
         priority_hit = priority_review_signal(candidate)
         review = decision.get("full_text_review", {})
-        if priority_hit and status != "implemented" and not (
-            isinstance(review, dict)
-            and review.get("scope") == "full-text"
-            and review.get("source_locations")
-        ):
+        exception = decision.get("source_exception", {})
+        archived_source = (
+            decision.get("resolution") in {"source_unavailable_archived", "source_exception_archived"}
+            and isinstance(exception, dict)
+            and all(exception.get(key) for key in ("source_url", "attempted_at", "error", "archive_reason"))
+        )
+        substantive = (isinstance(review, dict) and review.get("scope") == "full-text"
+                       and bool(review.get("source_locations")))
+        if (decision.get("resolution") in {"source_unavailable_archived", "source_exception_archived"}
+                and not archived_source):
+            raise ValueError(f"{candidate['arxiv_id']}: source exception requires actual source_exception attempt evidence")
+        if (priority_hit or accepted_unimplemented) and status != "implemented" and not archived_source and not substantive:
             raise ValueError(
-                f"{candidate['arxiv_id']}: Google/Meta rejection or deferral requires "
-                "full_text_review.scope=full-text and source_locations"
+                f"{candidate['arxiv_id']}: Google/Meta or acceptance requires "
+                "full_text_review.scope=full-text and source_locations (or a documented source exception)"
             )
         rows.append({
             **decision,
@@ -94,7 +111,7 @@ def main() -> int:
     temporary = args.ledger.with_suffix(args.ledger.suffix + ".tmp")
     temporary.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     temporary.replace(args.ledger)
-    print(f"recorded terminal discovery batch {args.batch}")
+    print(f"recorded review decisions {args.batch}; acceptance does not assert implementation")
     return 0
 
 

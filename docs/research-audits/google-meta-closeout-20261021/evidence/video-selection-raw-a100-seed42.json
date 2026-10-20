@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "adapter_key": "video-encoder-selection",
+  "protocol_id": "video-encoder-conditional-selection-smolvlm-l1-v1",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "seed": 42,
+  "created_at": "2026-10-20T19:03:45.878167+00:00",
+  "device": "cuda",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "checkpoint": {
+    "id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+    "content_sha256": "3904c6dcad55310389f5be500b480abd792972482faee54ad8dcca88fb9d0429",
+    "files_sha256": {
+      ".cache/huggingface/trees/7e3e67edbbed1bf9888184d9df282b700a323964.json": "c6322096f15562ea474317910754626f07fac6983ee61d0dc3a5fb6b9c9c7e8a",
+      "added_tokens.json": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a",
+      "chat_template.json": "a68ad1a42681ae44eacd109ff8dd56a840f761c03d72f4ff4c515d092f882168",
+      "config.json": "b70fb4bfde88df9eeebc9d8ff523733b8bf70d6c9b06c610325960e06ae9db52",
+      "generation_config.json": "067a2a54e5f87162ecac6e0e911cc4665fc8f7f3324794ecbac0f76badb56636",
+      "model.safetensors": "74dea5904032e5ae99a2e0eef5179e6ac0f1dedc3ab0c7c2a5d4d387c843203e",
+      "preprocessor_config.json": "6cb6e36d6fcb88ca1502c4a26750715dc3e7dedddc9a8f17b27d8d167d1457e7",
+      "processor_config.json": "e7bff42da73ae9eec9042ef20e066e11f1ee20f025358ff79131e3c0fb549b46",
+      "provenance.json": "754cf53370c8d6b2ea1808e5a70d3d9845e6beb02ab6ba342b1ece26e7dcbc5d",
+      "special_tokens_map.json": "aa0ff906077086dfa9734a7f97f68c825877a48f9468807be65504495cdeef09",
+      "tokenizer.json": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+      "tokenizer_config.json": "36c6fd44d07d10fd8180ee6b46dcccf69fb7c06753968ff0d7e17b8bfe17b777",
+      "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+    }
+  },
+  "code_revision": "a8063715e75bc48e731e71f64a6919dc2a939371",
+  "executed_source_sha256": {
+    "scripts/run_video_encoder_selection.py": "4a89b2ab9e1c58141d3b61a5241a850260f63532a2b2f946d163d51b2cb84235",
+    "src/auto_research/foundation_models/video_encoder_selection.py": "5dec83cf68b4273d6f3e7a7036497a77db61d20e9ae4582e38a31ade9d18444b"
+  },
+  "protocol": {
+    "frozen_real_image_encoder": true,
+    "independent_frame_encoding": true,
+    "question_input_embedding_mean": true,
+    "inference_gold_read": false,
+    "test_read": false,
+    "training_steps": 0,
+    "refiner_enabled": false,
+    "quota_source": "external_uniform_not_SITE",
+    "scene_statistic": "explicit_mean_pooled_visual_cosine_proxy",
+    "full_SITE_selection_reproduced": false,
+    "video_QA_capability_evaluated": false,
+    "frame_preprocessing": "single_square_bicubic_resize_model_native_image_size",
+    "budget": 32,
+    "frames": 4
+  },
+  "rows": [
+    {
+      "id": "vjepa-documentation-animation",
+      "status": "passed",
+      "video_sha256": "753f58d9792b6f8af0375111e4986211d6702af90287c923ce74ac66718946e8",
+      "source_frame_indices": [
+        0,
+        56,
+        113,
+        169
+      ],
+      "source_timestamps": [
+        0.0,
+        5.6,
+        11.3,
+        16.9
+      ],
+      "metrics": {
+        "candidate_tokens": 256,
+        "selected_tokens": 32,
+        "source_frames": 4,
+        "tokens_per_frame": 64,
+        "compression_ratio": 0.125,
+        "source_embedding_max_error": 0.0,
+        "source_position_max_error": 0.0,
+        "source_stream_max_error": 0.0,
+        "objective_trace_absolute_error": 0.0,
+        "correspondence_edges": 60,
+        "selected_correspondence_pairs": 11,
+        "pair_moves": 5,
+        "correspondence_ablation_mask_difference": 8,
+        "selected_question_relevance_mean": 0.03842360503612441,
+        "objective": 2.9600215184847105,
+        "selector_seconds": 0.912704948335886
+      },
+      "quotas": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "actual_quotas": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "selected_source_indices": [
+        0,
+        7,
+        17,
+        21,
+        35,
+        38,
+        43,
+        63,
+        64,
+        66,
+        71,
+        93,
+        99,
+        106,
+        110,
+        127,
+        128,
+        135,
+        137,
+        150,
+        155,
+        174,
+        184,
+        191,
+        194,
+        199,
+        202,
+        233,
+        235,
+        244,
+        245,
+        255
+      ],
+      "selected_source_positions": [
+        [
+          0.0,
+          0.0625,
+          0.0625
+        ],
+        [
+          0.0,
+          0.0625,
+          0.9375
+        ],
+        [
+          0.0,
+          0.3125,
+          0.1875
+        ],
+        [
+          0.0,
+          0.3125,
+          0.6875
+        ],
+        [
+          0.0,
+          0.5625,
+          0.4375
+        ],
+        [
+          0.0,
+          0.5625,
+          0.8125
+        ],
+        [
+          0.0,
+          0.6875,
+          0.4375
+        ],
+        [
+          0.0,
+          0.9375,
+          0.9375
+        ],
+        [
+          5.6,
+          0.0625,
+          0.0625
+        ],
+        [
+          5.6,
+          0.0625,
+          0.3125
+        ],
+        [
+          5.6,
+          0.0625,
+          0.9375
+        ],
+        [
+          5.6,
+          0.4375,
+          0.6875
+        ],
+        [
+          5.6,
+          0.5625,
+          0.4375
+        ],
+        [
+          5.6,
+          0.6875,
+          0.3125
+        ],
+        [
+          5.6,
+          0.6875,
+          0.8125
+        ],
+        [
+          5.6,
+          0.9375,
+          0.9375
+        ],
+        [
+          11.3,
+          0.0625,
+          0.0625
+        ],
+        [
+          11.3,
+          0.0625,
+          0.9375
+        ],
+        [
+          11.3,
+          0.1875,
+          0.1875
+        ],
+        [
+          11.3,
+          0.3125,
+          0.8125
+        ],
+        [
+          11.3,
+          0.4375,
+          0.4375
+        ],
+        [
+          11.3,
+          0.6875,
+          0.8125
+        ],
+        [
+          11.3,
+          0.9375,
+          0.0625
+        ],
+        [
+          11.3,
+          0.9375,
+          0.9375
+        ],
+        [
+          16.9,
+          0.0625,
+          0.3125
+        ],
+        [
+          16.9,
+          0.0625,
+          0.9375
+        ],
+        [
+          16.9,
+          0.1875,
+          0.3125
+        ],
+        [
+          16.9,
+          0.6875,
+          0.1875
+        ],
+        [
+          16.9,
+          0.6875,
+          0.4375
+        ],
+        [
+          16.9,
+          0.8125,
+          0.5625
+        ],
+        [
+          16.9,
+          0.8125,
+          0.6875
+        ],
+        [
+          16.9,
+          0.9375,
+          0.9375
+        ]
+      ],
+      "correspondence_disabled_indices": [
+        0,
+        2,
+        17,
+        21,
+        35,
+        38,
+        43,
+        63,
+        64,
+        66,
+        86,
+        93,
+        96,
+        99,
+        106,
+        127,
+        128,
+        135,
+        137,
+        150,
+        155,
+        174,
+        184,
+        191,
+        194,
+        200,
+        202,
+        233,
+        235,
+        244,
+        245,
+        255
+      ],
+      "scene_similarities": [
+        0.9804945500068274,
+        0.9746980768931847,
+        0.9831255486541652
+      ],
+      "trace": [
+        {
+          "indices": [
+            110,
+            150
+          ],
+          "score_per_token": 1.0501781876446212,
+          "best_singleton_score": 1.020954025445681
+        },
+        {
+          "indices": [
+            43
+          ],
+          "score_per_token": 1.020954025445681,
+          "best_singleton_score": 1.020954025445681
+        },
+        {
+          "indices": [
+            194
+          ],
+          "score_per_token": 0.8090138582315998,
+          "best_singleton_score": 0.8090138582315998
+        },
+        {
+          "indices": [
+            63
+          ],
+          "score_per_token": 0.67642405199522,
+          "best_singleton_score": 0.67642405199522
+        },
+        {
+          "indices": [
+            127,
+            191
+          ],
+          "score_per_token": 0.5214669074975578,
+          "best_singleton_score": 0.449803399593235
+        },
+        {
+          "indices": [
+            255
+          ],
+          "score_per_token": 0.5344350075239128,
+          "best_singleton_score": 0.5344350075239128
+        },
+        {
+          "indices": [
+            21
+          ],
+          "score_per_token": 0.35317708667604303,
+          "best_singleton_score": 0.35317708667604303
+        },
+        {
+          "indices": [
+            245
+          ],
+          "score_per_token": 0.28130278111287144,
+          "best_singleton_score": 0.28130278111287144
+        },
+        {
+          "indices": [
+            135
+          ],
+          "score_per_token": 0.2141495496372673,
+          "best_singleton_score": 0.2141495496372673
+        },
+        {
+          "indices": [
+            66
+          ],
+          "score_per_token": 0.17260156918279107,
+          "best_singleton_score": 0.17260156918279107
+        },
+        {
+          "indices": [
+            174
+          ],
+          "score_per_token": 0.16924727586863336,
+          "best_singleton_score": 0.16924727586863336
+        },
+        {
+          "indices": [
+            233
+          ],
+          "score_per_token": 0.015455510184864978,
+          "best_singleton_score": 0.015455510184864978
+        },
+        {
+          "indices": [
+            106
+          ],
+          "score_per_token": -0.03499246668278771,
+          "best_singleton_score": -0.03499246668278771
+        },
+        {
+          "indices": [
+            35,
+            99
+          ],
+          "score_per_token": -0.06095307111602637,
+          "best_singleton_score": -0.09505527719222706
+        },
+        {
+          "indices": [
+            137,
+            202
+          ],
+          "score_per_token": -0.06476773001231775,
+          "best_singleton_score": -0.0951505610171669
+        },
+        {
+          "indices": [
+            71
+          ],
+          "score_per_token": -0.0951505610171669,
+          "best_singleton_score": -0.0951505610171669
+        },
+        {
+          "indices": [
+            7
+          ],
+          "score_per_token": -0.11261267697583668,
+          "best_singleton_score": -0.11261267697583668
+        },
+        {
+          "indices": [
+            0,
+            64
+          ],
+          "score_per_token": -0.21510067583958725,
+          "best_singleton_score": -0.21741715415031998
+        },
+        {
+          "indices": [
+            199
+          ],
+          "score_per_token": -0.21741715415031998,
+          "best_singleton_score": -0.21741715415031998
+        },
+        {
+          "indices": [
+            155
+          ],
+          "score_per_token": -0.26502757218931955,
+          "best_singleton_score": -0.26502757218931955
+        },
+        {
+          "indices": [
+            38
+          ],
+          "score_per_token": -0.2920268002283499,
+          "best_singleton_score": -0.2920268002283499
+        },
+        {
+          "indices": [
+            184
+          ],
+          "score_per_token": -0.30756673117730937,
+          "best_singleton_score": -0.30756673117730937
+        },
+        {
+          "indices": [
+            235
+          ],
+          "score_per_token": -0.38118534286414874,
+          "best_singleton_score": -0.38118534286414874
+        },
+        {
+          "indices": [
+            17
+          ],
+          "score_per_token": -0.434774233817061,
+          "best_singleton_score": -0.434774233817061
+        },
+        {
+          "indices": [
+            93
+          ],
+          "score_per_token": -0.4398667216051807,
+          "best_singleton_score": -0.4398667216051807
+        },
+        {
+          "indices": [
+            244
+          ],
+          "score_per_token": -0.4452606892626113,
+          "best_singleton_score": -0.4452606892626113
+        },
+        {
+          "indices": [
+            128
+          ],
+          "score_per_token": -0.7225054837525772,
+          "best_singleton_score": -0.7225054837525772
+        }
+      ]
+    }
+  ],
+  "status": "passed",
+  "dataset": {
+    "id": "huggingface/documentation-images:transformers/model_doc/vjepa.gif",
+    "revision": "1bade87e4c4e41d80d5f72ba2d7b38ab3194f044",
+    "manifest_sha256": "44e6d8debe300cff8176c680ded800ea88838f785db2b2794efcc6f1c5591e4f",
+    "examples": 1
+  }
+}

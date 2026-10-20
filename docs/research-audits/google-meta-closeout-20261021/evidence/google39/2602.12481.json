@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2602.12481",
+  "source_urls": [
+    "https://arxiv.org/html/2602.12481v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "6f97ad40b46cdcf416c5b38b96cad0de95888194519e52ace1a94434a0ff922a",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§2.1-2.3",
+      "Algorithm简单slot选择",
+      "全文章节/experiment检索"
+    ],
+    "browser_line_ranges": "L178-L246;L308-L354"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "广告slot建模为metric points；nearest-neighbor外部性转grouped pseudo-disk、LP rounding得到18近似并论证truthful；另有简单log近似与2D PTAS。",
+  "experiment_paraphrase_zh": "理论算法与证明；正文目录至hardness/附录，无实验章，全文检索experiment无结果；不是生产广告实验。"
+}

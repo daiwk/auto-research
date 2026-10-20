@@ -47,7 +47,7 @@ def test_reviewed_cost_closures_and_component_delivery_are_separate():
 
 def test_fixed_google_date_only_omissions_now_have_honest_catalog_entries():
     statuses = repository_paper_statuses(ROOT / "docs/research-manifest.json", ROOT / "docs/paper-discovery-ledger.json")
-    assert statuses["2610.14224"] == "implemented"  # Component only; checked above.
+    assert statuses["2610.14224"] == "catalogued"  # Component only; checked above.
     assert statuses["2610.15150"] == statuses["2610.04109"] == "reviewed"  # Reference-only cost closures.
     for identity in ("2610.07338", "2610.05417", "2610.09015", "2610.09202", "2610.09440",
                      "2610.10990", "2610.11019", "2610.11316", "2610.13886"):
@@ -61,6 +61,6 @@ def test_priority_inventory_is_reproducible_and_does_not_hide_remaining_metadata
     assert read(AUDIT / "backfill-inventory.json") == expected
     assert expected["counts"]["all_ledger_date_only_unique_identities"] == 198
     assert expected["counts"]["scoped_current_statuses"]["new"] > 0
-    assert expected["counts"]["all_ledger_unclosed_pending_delivery_identities"] > 0
+    assert expected["counts"]["all_ledger_accepted_unimplemented_identities"] > 0
     assert expected["all_sources_exhaustive"] is expected["review_watermark_advanced"] is False
     assert expected["frozen_review_snapshots_modified"] is False

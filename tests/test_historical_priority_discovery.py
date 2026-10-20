@@ -49,7 +49,7 @@ def test_later_real_cost_closure_stays_terminal_and_catalog_is_authoritative(tmp
     ]
     assert _statuses(tmp_path, rows) == {"2610.14224": "reviewed"}
     assert _statuses(tmp_path, rows, [{"paper_url": "https://arxiv.org/abs/2610.14224"}]) == {
-        "2610.14224": "implemented",
+        "2610.14224": "catalogued",
     }
 
 
@@ -163,9 +163,9 @@ def test_accepted_pending_delivery_is_visible_but_real_cost_closure_wins(tmp_pat
     pending = {"id": "2610.07338", "status": "deferred", "review_decision": "accepted",
                "implementation_status": "not_implemented", "reason": "审查通过，待核心算法实现",
                "review_done": review_done}
-    assert _statuses(tmp_path, [pending]) == {"2610.07338": "implementation-pending"}
-    row = classify_candidate("foundation-model", _candidate(repository_status="implementation-pending"))
-    assert row["review_bucket"] == "implementation-pending"
+    assert _statuses(tmp_path, [pending]) == {"2610.07338": "accepted-unimplemented"}
+    row = classify_candidate("foundation-model", _candidate(repository_status="accepted-unimplemented"))
+    assert row["review_bucket"] == "accepted-unimplemented"
     assert row["full_text_review_required"] is False  # Already reviewed, not implemented.
     closed = {"id": "2610.07338", "status": "deferred", "review_done": True,
               "resolution": "not_reproduced_high_cost", "reason": "Cost reviewed; not reproduced"}
@@ -180,7 +180,7 @@ def test_recording_gate_does_not_claim_pending_delivery_as_terminal(review_done)
         "implementation_status": "not_implemented", "reason": "审查通过，待核心算法实现",
         "review_done": review_done,
     }]}
-    with pytest.raises(ValueError, match="implementation-pending"):
+    with pytest.raises(ValueError, match="accepted-unimplemented"):
         build_batch(artifact, decisions, batch_name="invalid-pending-closure")
 
 
@@ -205,7 +205,7 @@ def test_a_generic_known_resolution_cannot_hide_structured_pending_delivery(tmp_
         "id": "2610.07338", "status": "deferred", "review_decision": "accepted",
         "implementation_status": "not_implemented", "resolution": "known",
         "reason": "Accepted, pending implementation", "review_done": True,
-    }]) == {"2610.07338": "implementation-pending"}
+    }]) == {"2610.07338": "accepted-unimplemented"}
 
 
 @pytest.mark.parametrize("reverse", [False, True])
@@ -214,7 +214,7 @@ def test_generic_known_row_never_overrides_an_accepted_pending_row(tmp_path, rev
              "implementation_status": "not_implemented", "reason": "待核心算法实现"},
             {"id": "2610.07338", "status": "rejected", "resolution": "known", "review_done": True}]
     assert _statuses(tmp_path, rows[::-1] if reverse else rows) == {
-        "2610.07338": "implementation-pending",
+        "2610.07338": "accepted-unimplemented",
     }
 
 
@@ -233,10 +233,10 @@ def test_discovered_nonterminal_row_is_not_reviewed_and_legacy_cost_stays_closed
     }]) == {"2610.14224": "reviewed"}
 
 
-def test_legacy_next_batch_priority_is_visible_and_explicit_cost_is_not_retried(tmp_path):
+def test_legacy_next_batch_priority_is_not_acceptance_and_cost_is_not_retried(tmp_path):
     assert _statuses(tmp_path, [{
         "id": "2610.11316", "status": "deferred", "reason": "MetaEncoder 需真实checkpoint评测；保留下一批优先。",
-    }]) == {"2610.11316": "implementation-pending"}
+    }]) == {"2610.11316": "review-deferred"}
     assert _statuses(tmp_path, [{
         "id": "2610.11316", "status": "deferred", "reason": "成本过高，不复现；旧记录曾写待实现。",
     }]) == {"2610.11316": "reviewed"}

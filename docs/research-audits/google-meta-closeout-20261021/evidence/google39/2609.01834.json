@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2609.01834",
+  "source_urls": [
+    "https://arxiv.org/html/2609.01834v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "ba0074c89960cd7d477e33265b0a6010be107f35ce33bd71e226441c9a8cc2f4",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§2架构",
+      "§3 cache-aware context",
+      "结论及全文章节/Evaluation检索"
+    ],
+    "browser_line_ranges": "L53-L124;L127-L138"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "Hydration Proxy三层架构pattern：UI/secure gateway/relational ledger＋object storage；按stable prefix/full-history hydration设计context治理。",
+  "experiment_paraphrase_zh": "原文153行，§2架构、§3cache strategy/§4benefits后结论/参考；Evaluation检索无匹配。没有受控量化实验或具体待复现算法。"
+}

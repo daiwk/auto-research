@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2602.16938",
+  "source_urls": [
+    "https://arxiv.org/html/2602.16938v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "4d9ca84530b634b1899f927637b95cf90b1acc44ee0b677aecd669d99214cb0f",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§4-6",
+      "§6.1 discriminator配置",
+      "§6.2结果"
+    ],
+    "browser_line_ranges": "L120-L153;L169-L202"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "ConvApparel好/坏recommender采集数据，PLSA行为统计、训练discriminator的HLS与跨策略counterfactual validation；Prompt/ICL(k3)/SFT模拟器。",
+  "experiment_paraphrase_zh": "4,146真人对话＋3,549模拟对话训练Gemini2.5FlashLite discriminator；各simulator生成300好＋300坏对话；90年代Turing类比不是生产证据；KS/MWU检验及HLS显示realism gap。"
+}

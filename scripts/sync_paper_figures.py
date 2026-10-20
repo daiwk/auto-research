@@ -77,6 +77,8 @@ MANUAL_FIGURE_NUMBERS = {
     "recsys2020-ple-ple": "1",
 }
 FIGURE_OVERRIDES = {
+    "2610.06616-video-encoder-selection": "3",
+    "2610.09159-specguard": "3",
     "2610.26105-sid-topology": "1",
     "2610.25748-maps-creative": "2",
     "2610.24628-muse-glimmer-30b": "3",

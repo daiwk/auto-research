@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 from dataclasses import asdict
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -151,12 +152,49 @@ def curate(raw, kernel, raw_sha256):
             "model_calls": sum("response" in call for call in r["role_records"]),
             "semantic_audit": "not_established_by_kernel_manual_review_required"}
             for r in raw["per_seed"]],
+        "executed_model_roles": sorted({record["role"] for record in raw["model_records"]}),
+        "end_to_end_certificate_observed": bool(rechecks),
         "kernel_rechecks": rechecks,
         "provenance": {"executed_source_sha256": raw["source_sha256"],
-            "code_commit": raw["code_commit"], "raw_runner_artifact_sha256": raw_sha256},
-        "evaluation_protocol": {"formal_comparison": False, "test_isolated": False,
+            "code_commit": raw["code_commit"], "raw_runner_artifact_sha256": raw_sha256,
+            "dataset_fingerprint": raw["dataset"]["revision"],
+            "artifact_path": "docs/agent-research/2610.09159-specguard/metrics/component-a100-seed42.json"},
+        "evaluation_protocol": {"tier": "l1_mechanism", "seeds": raw["seeds"],
+            "formal_comparison": False, "test_isolated": False,
             "gold_access": False, "claim_policy": "self-authored micro-suite, not agent/benchmark accuracy",
             "semantic_boundary": "Lean proves only generated formalizations; independent semantic audit required"}}
+
+
+def gpu_receipt(curated, validated_at):
+    """Passing denotes completed CUDA execution, never successful formalization."""
+    from auto_research.gpu_validation import validate_gpu_receipt
+    if curated.get("device") != "cuda" or not re.search(r"NVIDIA.*(?:A100|A30)", curated.get("accelerator", "")):
+        raise ValueError("real A100/A30 curated runtime required")
+    receipt = {"schema_version": 1, "adapter_key": "specguard", "validated_at": validated_at,
+        "accelerator": {"vendor": "NVIDIA", "model": curated["accelerator"].removeprefix("NVIDIA ")},
+        "command": ["python", "scripts/run_specguard_component.py", "--checkpoint", "<cached-public-checkpoint>",
+            "--model-id", curated["model"]["id"], "--revision", curated["model"]["revision"],
+            "--source-commit", curated["provenance"]["code_commit"], "--lean-bin", "<lean-4.24.0-binary>",
+            "--device", "cuda", "--seeds", ",".join(map(str, curated["seeds"])),
+            "--max-attempts", str(curated["budget"]["max_attempts_per_role"]),
+            "--max-calls", str(curated["budget"]["max_calls"]),
+            "--max-new-tokens", str(curated["budget"]["max_new_tokens_per_call"]),
+            "--max-total-new-tokens", str(curated["budget"]["max_total_new_tokens"]),
+            "--wall-seconds", str(curated["budget"]["wall_seconds"]), "--output", "<new-raw-result>"],
+        "dataset": curated["dataset"], "checkpoint": curated["model"], "seeds": curated["seeds"],
+        "result": "passed", "result_meaning": "bounded_real_cuda_runtime_completed_not_task_or_semantic_success",
+        "metrics": curated["metrics"], "lean": curated["lean"], "diagnostic_only": True,
+        "executed_model_roles": curated["executed_model_roles"],
+        "end_to_end_certificate_observed": curated["end_to_end_certificate_observed"],
+        "promotion_eligible": False, "evolve_integrated": False, "evaluation_tier": "l1_mechanism",
+        "full_experiment_status": "not_reproduced_high_cost",
+        "provenance": {"commit": curated["provenance"]["code_commit"],
+            "artifact_path": "docs/gpu-validations/specguard-a100-20261021.json",
+            "executed_source_sha256": curated["provenance"]["executed_source_sha256"],
+            "raw_runner_artifact_sha256": curated["provenance"]["raw_runner_artifact_sha256"]}}
+    if errors := validate_gpu_receipt(receipt):
+        raise ValueError("; ".join(errors))
+    return receipt
 
 
 def main():
@@ -164,14 +202,21 @@ def main():
     parser.add_argument("--raw", type=Path, required=True)
     parser.add_argument("--lean-bin", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--gpu-receipt", type=Path)
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError("immutable curated output already exists")
+    if args.gpu_receipt and args.gpu_receipt.exists():
+        raise FileExistsError("immutable GPU receipt already exists")
     data = args.raw.read_bytes()
     output = curate(json.loads(data), LeanKernel(args.lean_bin), hashlib.sha256(data).hexdigest())
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(output, ensure_ascii=False, indent=2, allow_nan=False)+"\n",
                            encoding="utf-8")
+    if args.gpu_receipt:
+        receipt = gpu_receipt(output, datetime.now(timezone.utc).isoformat())
+        args.gpu_receipt.parent.mkdir(parents=True, exist_ok=True)
+        args.gpu_receipt.write_text(json.dumps(receipt, ensure_ascii=False, indent=2, allow_nan=False)+"\n")
     print(json.dumps(output["metrics"], ensure_ascii=False))
 
 

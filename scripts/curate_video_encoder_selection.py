@@ -135,11 +135,17 @@ def main() -> int:
     if errors:
         raise ValueError("; ".join(errors))
     args.output_dir.mkdir(parents=True, exist_ok=False)
-    summary = {"adapter_key": KEY, "evaluation_tier": "l1_mechanism", "diagnostic_only": True,
+    summary = {"schema_version": 2, "manifest_ref": "foundation-models:video-encoder-selection",
+               "adapter_key": KEY, "evaluation_tier": "l1_mechanism", "diagnostic_only": True,
                "promotion_eligible": False, "evolve_integrated": False, "seed": report["seed"],
                "dataset": dataset, "checkpoint": {name: report["checkpoint"][name] for name in ("id", "revision", "content_sha256")},
                "metrics": metrics, "protocol": report["protocol"], "code_revision": args.source_commit,
-               "gpu_validation_artifact": ARTIFACT}
+               "gpu_validation_artifact": ARTIFACT,
+               "evaluation_protocol": {"tier": "l1_mechanism", "seeds": [report["seed"]],
+                   "formal_comparison": False, "claim_policy": "fixed-budget real-feature runtime; not video QA capability"},
+               "provenance": {"artifact_path": "docs/foundation-models/2610.06616-video-encoder-selection/metrics/component-a100-seed42.json",
+                   "dataset_fingerprint": dataset["manifest_sha256"], "code_commit": args.source_commit,
+                   "raw_result_sha256": hashlib.sha256(args.input.read_bytes()).hexdigest()}}
     for name, payload in (("gpu-receipt.json", receipt), ("component-metrics.json", summary)):
         (args.output_dir / name).write_text(json.dumps(payload, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
     print(json.dumps({"status": "passed", "examples": metrics["examples"], "output_dir": str(args.output_dir)}))

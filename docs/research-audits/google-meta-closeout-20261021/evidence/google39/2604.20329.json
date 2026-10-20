@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2604.20329",
+  "source_urls": [
+    "https://arxiv.org/html/2604.20329v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "355340a947a223c202774f95e969adda4b873d7487d64ae1c4e1fdd97eb80d79",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§2 Method",
+      "Table1",
+      "§3.2 metric depth编码/训练协议"
+    ],
+    "browser_line_ranges": "L61-L85;L219-L244"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "Vision Banana对NanoBananaPro instruction-tuning，将segmentation/depth/normals编码为可逆/可解析RGB图像输出；保留原generation数据混合。",
+  "experiment_paraphrase_zh": "多2D/3D公开benchmark与生成editing benchmark；depth仅synthetic训练；基础NanoBananaPro原训练数据/可训练checkpoint非公开。"
+}

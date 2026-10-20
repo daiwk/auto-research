@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2603.01293",
+  "source_urls": [
+    "https://arxiv.org/html/2603.01293v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "8d010186478e59b750728171a506b48afb98c1bb6a0990bef5b90dcd02834f6c",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§1任务/OS边界",
+      "§8 Experiments"
+    ],
+    "browser_line_ranges": "L59-L61;L275-L317"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "线性回归in-context weight预测理论：pretrain covariance与SFT/OS数据分配；OS是outcome-supervised regression，明确不是完整policy-gradient RL。",
+  "experiment_paraphrase_zh": "LSA d100/130epochs；GPT2架构9.5M、12层8头d256、batch64，SFT100步/OS12K步，10重复；synthetic covariance shift。"
+}

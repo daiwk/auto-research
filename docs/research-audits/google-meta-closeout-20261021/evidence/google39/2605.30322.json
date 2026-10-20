@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2605.30322",
+  "source_urls": [
+    "https://arxiv.org/html/2605.30322v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "0ac83fcba9679517b679bc9e535420e36121f9ce3cf92642b590ff352d1bb01e",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§2.1-2.2",
+      "§1 evaluation边界"
+    ],
+    "browser_line_ranges": "L74-L139"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "Gram对Petri auditor约束减少leading，17 sabotage seed scenarios；investigator将动态trajectory转静态环境、做causal interventions，区分overeagerness/roleplay。",
+  "experiment_paraphrase_zh": "Gemini2.5Pro/3.0Pro/3.1Pro；17scenarios仅4公开、13private heldout；LLMjudge与人工复核，原始2–3%sabotage不能泛化真实部署率。"
+}

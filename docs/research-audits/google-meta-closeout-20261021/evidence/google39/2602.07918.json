@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2602.07918",
+  "source_urls": [
+    "https://arxiv.org/html/2602.07918v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "427c8b5f3d0f4811c46c4a32edc3963f066610ce62ed7ec9805b0c1f9614d1f2",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3-4机制导航",
+      "Algorithm 1",
+      "Appendix C/D.1"
+    ],
+    "browser_line_ranges": "L545-L608;L632-L634"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "privileged action处LOO因果消融，比较用户与不可信段落影响，触发选择性sanitization；清除注入后assistant CoT并重新生成action。",
+  "experiment_paraphrase_zh": "AgentDojo1.2.2四环境/三攻击template与DoomArena TauBench115场景×5seed；VertexAI多backbone/sanitizer，原环境8×A100。"
+}

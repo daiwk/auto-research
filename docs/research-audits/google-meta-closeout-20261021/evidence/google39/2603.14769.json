@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2603.14769",
+  "source_urls": [
+    "https://arxiv.org/html/2603.14769v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "f8fed134d833d46d20cf67e47ad218dbd5babf5210f56120de8d8e418d543112",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§1机制",
+      "Appendix D VeriBench/KernelBench配置与预算"
+    ],
+    "browser_line_ranges": "L99-L106;L725-L745;L769-L775"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "POLCA优先队列追踪候选评价历史、epsilon-Net embedding保持多样性、LLM Summarizer聚合局部历史；按噪声分配探索/利用，非简单evolution标签。",
+  "experiment_paraphrase_zh": "tau-bench/HotpotQA/VeriBench/KernelBench；Veri41题每题最多50 compiler calls×3run×多baseline；Kernel16题、Claude3.7与Gemini embedding。"
+}
