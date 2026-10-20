@@ -8,6 +8,9 @@
 ### 标题与展示内容优化
 - [GESE](../2609.15094-gese/README.md)：集合级生成探索后按请求上下文选择标题。
 
+### 个性化创意生成
+- [MAPS: A Multi-Agent Personalized Script-Driven Video Advertising System Enhanced by Reinforcement Learning](../../recommendation-components/2610.25748-maps-creative/README.md)：以画像、脚本、导演和反思四Agent将广告创意从静态检索转为个性化生成，脚本SFT后用结构、偏好和商品事实的混合奖励优化，再按线上反馈路由最小修改。正文有快手场景量化A/B；仅收录方法与成本，不把奖励加权器包装为完整视频广告系统。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## 排序与长序列建模
 - [HELIX](../2609.37183-helix/README.md)：交错扩展序列建模与候选特征交互，并以单向信息流保持用户序列状态可跨候选复用。
 
@@ -262,6 +265,9 @@
 - [Podcast MTL](../2601.02306-podcast-mtl/README.md)：共享 organic stream 与 ads/promotion 表征，把高资源任务知识迁移到冷启动 podcast。
 - [SaviorRec](../2508.01375-saviorrec/README.md)：用行为监督训练内容 encoder，生成 RQ Semantic ID，再通过多行为模块对齐冷启动物品。
 - [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，并针对冷启动物品进行序列预训练。
+
+### 语义标识与增量更新
+- [Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search](../../recommendation-components/2610.26105-sid-topology/README.md)：冻结旧商品完整三层SID，只按新价值排名给新商品分配路径，允许新商品与原头部token碰撞，不通过移动旧路径强行去重。实现价值先验、HC桶、增量插入和映射漂移审计；语义前缀由调用方提供，不训练RQ-VAE或LLM，64卡生产完整实验成本过高不复现。
 
 ## 训练目标与决策优化
 

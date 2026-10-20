@@ -1,0 +1,30 @@
+{
+  "domain": "agent-research",
+  "key": "world-of-swecraft",
+  "title": "World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds",
+  "paper_url": "https://arxiv.org/abs/2610.24061v1",
+  "detail_path": "agent-research/2610.24061-world-of-swecraft/README.md",
+  "topic": [
+    "多Agent协作",
+    "软件生态与自进化评测"
+  ],
+  "first_author": "Shannon Zejiang Shen",
+  "first_author_affiliation": "Massachusetts Institute of Technology",
+  "published": "2026-10-16",
+  "published_at": "2026-10-16T17:59:39Z",
+  "code": null,
+  "code_status": "原文宣称通过https://szj.io/sw发布框架和traces；本轮项目链接404，未核验实际代码仓库或许可证，不把发布声明等同已核到源码",
+  "priority": "P1",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "三种多仓库软件世界、8模型、55K会话、180B以上tokens、超过10000小时Agent工作，并含Forgejo/Harbor和隐藏依赖评测。成本过高，不复现（审查 DONE），不启动同规模环境。",
+  "summary": "将真实互相依赖的Python库构成软件世界，让多个维护者Agent自主找任务、通信、发PR和迭代，以隐藏下游包的正确性及指令计数几何均值评估群体收益。仅收录SW-Env/SW-Eval协议和成本，不把算几何平均称为已复现协作系统。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

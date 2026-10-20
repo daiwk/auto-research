@@ -41,6 +41,8 @@
 
 ### on-policy / context 蒸馏
 
+- [Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization](../2610.25973-apsd/README.md)（`apsd`）：反馈条件自教师可能破坏正确rollout里学生已经成功的偏好，却又对错误rollout纠正不足。APSD依据正确性调整蒸馏target：正确时在学生和自教师之间插值，错误时越过自教师外推。
+- [Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation](../2610.25034-spod/README.md)（`spod`）：多轮Agent蒸馏中，学生可能先超过教师，再随着持续模仿而退步。作者区分两个过程：教师修复学生的弱决策，同时也会侵蚀学生已经成功、但与教师偏好不同的行为。
 - [GR-OPD: Group-Relative Sequence Credit for On-Policy Distillation](../2610.23042-gr-opd/README.md)（`gr-opd`）：教师在每个 token 上更自信，不一定意味着整段推理更值得复制；教师与学生的推理模式不同还可能造成训练崩溃。GR-OPD 在学生轨迹上重放教师，把 log-prob 差聚合为序列分数，在同题回答之间分配相对信用；保留一部分组均值压力，以免纯中心化抹掉教师总体偏好，然后使用 clipped PPO 更新。
 - [SimOPD: Relational Knowledge Transfer for On-Policy Distillation](../2610.23306-simopd/README.md)（`simopd`）：概率蒸馏只利用输出分布，直接匹配隐状态又要求学生迁就教师的坐标和维数。SimOPD 改为比较回答之间的关系：两模型分别编码同一批学生回答，在自己的空间里计算“当前回答与历史回答有多像”，再匹配这两个相似度分布。
 - [Compatibility Matters: A Framework for Token-Level Teacher Selection in On-Policy Distillation](../2610.21234-token-teacher-selection/README.md)（`token-teacher-selection`）：一个教师未必适合学生整段推理：数学推导和代码生成可能需要不同专家，强教师与学生的分布差距也可能太大。论文把 OPD 的教师选择细化到每个学生实际访问的前缀。
@@ -129,6 +131,7 @@
 ### RLVR
 
 - [MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning](../2610.23245-mge-po/README.md)（`mge-po`）：GRPO会给同题、同正确性的回答相同 advantage，忽略生成的不确定性。MGE-PO 用生成时缓存的 token 熵区分回答，在成功／失败与高熵／低熵四象限上调整信用；再用在线题目熵统计安排课程，并以熵加权参考KL约束优化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay](../2610.24236-tar-adaptive-replay/README.md)（`tar-adaptive-replay`）：有限on-policy采样可能逐步压低同样正确但较少出现的推理模式；仅在当前rollout上重加权，难以恢复已经采不到的模式。TAR先从基础策略大量生成，过滤正确回答，再保留分散的原型轨迹。
 - [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](../2610.11854-grpo-dropout/README.md)（`grpo-dropout`）：从同一 prompt 的 GRPO 响应组中筛除部分高概率、正优势响应，并用旧策略概率重新中心化保留响应的优势。不是随机 dropout，也不改变生成预算。
 - [Residual Advantage: Student-Relative Teacher Guidance for RL with Verifiable Rewards](../2610.11519-residual-advantage/README.md)（`residual-advantage`）：把全词表师生概率残差变成相对学生的有界局部优势，再逐响应中心化，与验证器优势相加。Co-RA 在同一已评分学生批次上更新教师 LoRA，下一轮才使用新教师。
 - [CARM: Cancellation-Aware Response Masking for LLM Reinforcement Learning](../2610.02039-carm/README.md)（`carm`）：对每个 token 的 current/rollout log-ratio 先取绝对值再平均，避免正负漂移在序列级几何均值中抵消。

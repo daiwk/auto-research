@@ -108,6 +108,7 @@
 
 ## Cornell University
 
+- 2026-10-16 · 一作：Wen-Zhi Li · [Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay](../2610.24236-tar-adaptive-replay/README.md)（`tar-adaptive-replay`）：有限on-policy采样可能逐步压低同样正确但较少出现的推理模式；仅在当前rollout上重加权，难以恢复已经采不到的模式。TAR先从基础策略大量生成，过滤正确回答，再保留分散的原型轨迹。
 - 2026-10-15 · 一作：Zhengxin Zhang · [Does On-Policy Distillation Need to Complete Every Rollout?](../2610.21337-stopd/README.md)（`stopd`）：每条响应在生成**之前**独立采样 anchor，向上取整到 block 末尾，学生只生成到该 cutoff 或自然 EOS。保留的每个 token 都接收教师监督，并按其精确 inclusion probability 加权；自然 EOS 也是普通有效 token。
 
 ## Dalian Maritime University
@@ -207,6 +208,7 @@
 
 ## Korea University
 
+- 2026-10-19 · 一作：Suwan Yoon · [Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization](../2610.25973-apsd/README.md)（`apsd`）：反馈条件自教师可能破坏正确rollout里学生已经成功的偏好，却又对错误rollout纠正不足。APSD依据正确性调整蒸馏target：正确时在学生和自教师之间插值，错误时越过自教师外推。
 - 2026-08-12 · 一作：Byungoh Ko · [Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization](../2608.12158-c2-dpo/README.md)（`c2-dpo`）：普通 DPO 即使输入相关图像上下文，也可能主要依赖语言先验。论文先定义 CPG，度量加入上下文后 chosen/rejected preference margin 增加多少；C²-DPO 直接扩大该增益，同时保留原偏好顺序。
 
 ## LeapLab, Tsinghua University
@@ -540,6 +542,7 @@
 
 ## University of Southern California
 
+- 2026-10-18 · 一作：Jike Zhong · [Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation](../2610.25034-spod/README.md)（`spod`）：多轮Agent蒸馏中，学生可能先超过教师，再随着持续模仿而退步。作者区分两个过程：教师修复学生的弱决策，同时也会侵蚀学生已经成功、但与教师偏好不同的行为。
 - 2026-09-29 · 一作：Rishabh Agrawal · [AdviSD: Learning to Advise Frontier LLMs via Targeted Multi-Turn Self-Distillation](../2609.38142-advisd/README.md)（`advisd`）：冻结 executor，只训练 advisor；反思先提出修正，再对同一已记录 executor 响应分别计算有建议与无建议的平均 log-likelihood，只有影响幅度超过 donor-advice 校准阈值的决定才进入自蒸馏。
 - 2026-01-19 · 一作：Duygu Nur Yaldiz · [Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning](../2601.13284-calibration-aware-rl/README.md)（`calibration-aware-rl`）：论文指出 RLVR 虽能提高决策正确率，却可能让 decision token 极度过度自信；其方法直接调整决策 token 的概率，在保留准确率的同时降低 ECE。本仓库对应地把 accuracy 与 Brier/ECE 同时纳入报告，并只用 validation 拟合温度，禁止用 test 调参。
 

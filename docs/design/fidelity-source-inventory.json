@@ -5489,6 +5489,16 @@
         "fingerprint": "ee4e810718f0dc9c1bd8c8f8d895915e7e05f3dd76312565b3925939f0bed34e"
       }
     ],
+    "src/auto_research/agent_research/memprice.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 121,
+        "qualified_name": "MemPrice.step",
+        "expression": "self.round += 1",
+        "fingerprint": "3ba91c9bacbf0da7ace3307a96c02fb3a39165c4a3fc12f34b1e021c913e058f"
+      }
+    ],
     "src/auto_research/agent_research/method_families/memory.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10569,6 +10579,56 @@
         "qualified_name": "TrajectoryMemory.add_completed",
         "expression": "self.version += 1",
         "fingerprint": "b5afa4aed88228d06259fc36116c0815717075a6af15fb61454d31896a11bd7c"
+      }
+    ],
+    "src/auto_research/agent_research/tokenworth.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "fit",
+        "line": 127,
+        "qualified_name": "ResidualRFM.fit",
+        "expression": "self.fits += 1",
+        "fingerprint": "26cfc5e6792663b952a44e43739e90e2044186b25f8062136542f0ae908c3991"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "finish",
+        "line": 279,
+        "qualified_name": "TokenWorth.finish",
+        "expression": "self.feedback += 1",
+        "fingerprint": "41c892f2482be7eb772a90eed5477b96303646fafd11421289d5143f4e5b3244"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "finish",
+        "line": 291,
+        "qualified_name": "TokenWorth.finish",
+        "expression": "memory.hits += int(reward)",
+        "fingerprint": "ec2799b2a75108e6649de13ac5b1f9b356b70ecdbd815867fe81666c6f72f044"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "finish",
+        "line": 292,
+        "qualified_name": "TokenWorth.finish",
+        "expression": "memory.misses += int(not reward)",
+        "fingerprint": "cf352c79c5cd9720a29085f5c4e795473fa0dc3bc8403e3790870fada69fd63c"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "finish",
+        "line": 293,
+        "qualified_name": "TokenWorth.finish",
+        "expression": "memory.accesses += 1",
+        "fingerprint": "13fc7915cf3dc84df53db78efed65ab9e69effc894bba2f8ad90f38ddf7ffd2f"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "finish",
+        "line": 306,
+        "qualified_name": "TokenWorth.finish",
+        "expression": "self.t += 1",
+        "fingerprint": "0b42a68987e407cb725e1b48f83effea6ec2a743a6044f5daa4335dbd149211b"
       }
     ],
     "src/auto_research/agent_research/tool_bottleneck_bench.py": [

@@ -199,6 +199,10 @@
 
 - 2026-10-14 · 一作：Zhanke Zhou · [AlphaDiana: A Measurement System for Agents in Verifiable Reasoning Tasks](../2610.20675-alpha-diana/README.md)（`alpha-diana`）：同一模型装进不同 Harness 后，提示、工具、恢复策略和记忆都会影响结果。只报告成功任务或平均 token，容易把丢失评分、运行失败、反复重试的成本掩盖掉。
 
+## Hong Kong University of Science and Technology
+
+- 2026-10-18 · 一作：Yiming Zong · [MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents](../2610.24955-memprice/README.md)（`memprice`）：长交互里，过去某个细节会不会有用通常事先未知。单纯按相关性保留记忆会忽略各条信息对同一上下文容量的竞争。
+
 ## Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS
 
 - 2026-08-05 · 一作：Songxin Lei · [MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off](../2608.04843-memorycpt/README.md)（`memorycpt`）：**主题：端到端 Agent 记忆。** QAD 将离线记忆构建链蒸馏为紧凑模型；QAR 用 RRF 检索和 LoRA summarizer 生成查询相关上下文，并以成本感知 GRPO 优化 Quality per Cost。
@@ -271,6 +275,10 @@
 
 - 2026-09-09 · 一作：Syed Shariyar Murtaza · [When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents](../2609.10750-skill-retention/README.md)（`skill-retention`）：混合真实样本 replay 与 embedding anchor/LwF 类正则，防止合成技能数据微调破坏真实和 OOD 路由能力。
 
+## Massachusetts Institute of Technology
+
+- 2026-10-16 · 一作：Shannon Zejiang Shen · [World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds](../2610.24061-world-of-swecraft/README.md)（`world-of-swecraft`）：传统代码Agent评测通常分配一个预定义issue，难以衡量多个维护者如何自主找任务、分工和跨仓库改进。Software World由真实依赖库构成，让Agent用持久记忆、issue、PR和发布进行长期协作，以不可见的下游包检查群体产出是否真正有用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Meituan
 
 - 2025-08-26 · 一作：Weikang Zhao · [MUA-RL](../2508.18669-mua-rl/README.md)（`mua-rl`）：既有 tool-use RL 通常把用户请求视为固定输入，但真实用户会根据 Agent 回答不断修改需求。MUA-RL 将 LLM 模拟用户直接放入 rollout，Agent 在对话中澄清意图并调用真实 MCP/数据库工具；用户消息和工具结果不计入策略 loss，只用最终任务完成奖励鼓励探索。
@@ -334,6 +342,7 @@
 
 ## Nanjing University
 
+- 2026-10-19 · 一作：Guannan Lai · [Remembering Has a Price: Learning Memory Worth under Resource Constraints](../2610.26453-tokenworth/README.md)（`tokenworth`）：生成长度、交互次数和记忆容量同时受限时，相关记忆也可能浪费稀缺预算。TokenWorth 用四维可解释基础特征学习稳定规律，再用 Recursive Feature Machine（RFM）校正查询相关的非线性残差。
 - 2026-10-09 · 一作：Yuchen Ling · [When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows](../../reproductions/2610.13092-jev-workflow/README.md)（`jev-workflow`）：这是一篇评测研究，不是新的 self-improvement 算法。比较决策延迟/费用与端到端成功交付；failed recovery、premature completion 和失败开销计入资源每成功，而非只报告单步省时。
 - 2026-08-05 · 一作：Yi Yang · [OCSD](../2608.04788-ocsd/README.md)（`ocsd`）：直接重放未来 observation 时，token 分数变化同时来自观测信息和重放脚手架。OCSD 构造结构完全匹配的 Full 与 Observation-Ablated 两个 replay，仅以二者残差调制高不确定 step 的 GRPO 更新。
 
@@ -378,6 +387,7 @@
 
 ## Peking University
 
+- 2026-10-16 · 一作：Junyang Shu · [SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning](../2610.23128-scope-replay/README.md)（`scope-replay`）：修改机器人控制程序可能修好新场景却破坏旧场景。SCOPE 从开发执行证据建立失败前沿图，区分有证据支持、被反驳和未知检查，按局部修补、阶段重设或策略重生成继续搜索。
 - 2026-07-30 · 一作：Cong Li · [TAPO](../2607.27973-tapo/README.md)（`tapo`）：稀疏任务 reward 只告诉 Agent 最终成败，没有利用每次动作后的环境反馈。TAPO 复用同一 rollout，在共享 backbone 上交替训练策略目标与 $(s_t,a_t)\to s_{t+1}$ 的 next-observation 预测，不增加采样、专家数据或推理开销。
 - 2026-07-29 · 一作：Yicheng Feng · [CAM-DF](../2607.27083-cam-df/README.md)（`cam-df`）：工具 router 只能给出相关性排序，不能回答“应该开放前几个工具”。CAM-DF 在任何工具执行前虚拟遍历排序前缀，以任务充分性减异构工具成本作为 payoff；停止当前前缀与最佳后续前缀的 payoff gap 决定标签，gap 绝对值决定错误的 regret 权重。
 

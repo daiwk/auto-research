@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "method": "tokenworth",
+  "manifest_ref": "agent-research:tokenworth",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-tokenworth-v1",
+    "revision": "sha256:8b15e7c3e34f0edbf97ae13e185be2f6d3e7857a41163b9f3011b0c0576696ca",
+    "capability_benchmark": false,
+    "initialization": "seeded synthetic integer options, trusted Python tape and numerical online learning fixtures"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "maximum_kernel_reference_error": 1.1102230246251565e-16,
+        "gradient_finite_difference_error": 2.146278727660489e-11,
+        "agop_metric_shift": 0.3996205843929945,
+        "base_logistic_loss_reduction": 12.141315566885762,
+        "fixture_completed_tasks": 52,
+        "selected_pair_feedback": 51,
+        "fit_updates": 8,
+        "maximum_bank_capacity_violation": 0,
+        "chronology_violation_rejections": 1,
+        "admit_only_negative_control_bad_admissions": 1,
+        "private_gold_fields_in_actor_selection": 0,
+        "final_metric_mean_error": 2.220446049250313e-16,
+        "final_weights_change": 0.5527928667981236
+      },
+      "audit_sha256": "e2c351b452ff2e3f1b9ca8a898425f6f1613eafa72570d0049194b2eb2056199",
+      "fixture_sha256": "e95e990ab677eb0b01e711ef02f4f4acc45172c838d16ce1caa3b70279865017"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "maximum_kernel_reference_error": 1.1102230246251565e-16,
+        "gradient_finite_difference_error": 2.516875943769925e-11,
+        "agop_metric_shift": 0.06566328797887612,
+        "base_logistic_loss_reduction": 14.94102302232853,
+        "fixture_completed_tasks": 52,
+        "selected_pair_feedback": 51,
+        "fit_updates": 8,
+        "maximum_bank_capacity_violation": 0,
+        "chronology_violation_rejections": 1,
+        "admit_only_negative_control_bad_admissions": 1,
+        "private_gold_fields_in_actor_selection": 0,
+        "final_metric_mean_error": 0.0,
+        "final_weights_change": 0.5642046036666359
+      },
+      "audit_sha256": "3dd8d919cfe56a4502b80f3791c4a40c7c1c3f6feaf85f38478b8ee310ed8694",
+      "fixture_sha256": "b6018d4405158ec6dc653641b86568f0516faf607b7c2957471923652d5c7d2c"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "maximum_kernel_reference_error": 1.1102230246251565e-16,
+        "gradient_finite_difference_error": 4.763343885993976e-11,
+        "agop_metric_shift": 0.02817571882504361,
+        "base_logistic_loss_reduction": 12.93748875435325,
+        "fixture_completed_tasks": 52,
+        "selected_pair_feedback": 51,
+        "fit_updates": 8,
+        "maximum_bank_capacity_violation": 0,
+        "chronology_violation_rejections": 1,
+        "admit_only_negative_control_bad_admissions": 1,
+        "private_gold_fields_in_actor_selection": 0,
+        "final_metric_mean_error": 0.0,
+        "final_weights_change": 0.5934063033764818
+      },
+      "audit_sha256": "25d975802c1e351e1649ba284b999bc1539ceff4be3d1f056763a9dea71e616a",
+      "fixture_sha256": "d69a0f2b5500a066094c65b19942d010442d0d9773d5453653663965627547bc"
+    }
+  ],
+  "metrics": {
+    "admit_only_negative_control_bad_admissions": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "agop_metric_shift": {
+      "mean": 0.16448653039897143,
+      "std": 0.20449290200643633,
+      "n": 3
+    },
+    "base_logistic_loss_reduction": {
+      "mean": 13.339942447855847,
+      "std": 1.4425904445045608,
+      "n": 3
+    },
+    "chronology_violation_rejections": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "final_metric_mean_error": {
+      "mean": 7.401486830834377e-17,
+      "std": 1.2819751242557092e-16,
+      "n": 3
+    },
+    "final_weights_change": {
+      "mean": 0.5701345912804138,
+      "std": 0.02094603476796386,
+      "n": 3
+    },
+    "fit_updates": {
+      "mean": 8,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_completed_tasks": {
+      "mean": 52,
+      "std": 0.0,
+      "n": 3
+    },
+    "gradient_finite_difference_error": {
+      "mean": 3.14216618580813e-11,
+      "std": 1.4161562151937609e-11,
+      "n": 3
+    },
+    "maximum_bank_capacity_violation": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "maximum_kernel_reference_error": {
+      "mean": 1.1102230246251565e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "private_gold_fields_in_actor_selection": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "selected_pair_feedback": {
+      "mean": 51,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+    "artifact_path": "docs/agent-research/2610.26453-tokenworth/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "f814f0f980808a2036fef8148f798255feea115b4b6fb6d3a850c67eefce7944",
+    "executed_source_sha256": {
+      "scripts/run_oct20_agent_components.py": "8b15e7c3e34f0edbf97ae13e185be2f6d3e7857a41163b9f3011b0c0576696ca",
+      "src/auto_research/agent_research/memprice.py": "c82f924d6d889572a408ec458b5ea17551711a6fa3a8e9b5b7415a7363685e50",
+      "src/auto_research/agent_research/scope_replay.py": "9bebcf791eb08325298b6ecb4c7c6fbfd9c3a1609acd59616dc8e4655243fa08",
+      "src/auto_research/agent_research/tokenworth.py": "ad54a9e6c6b5609166cbec5ea59daaf66e1950d160b8f4c867cd49e3deb43d50"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:1852774bfb3b579fa9db5d8160ab44010df9748fe1183923fc8c85eed91bd7a2"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

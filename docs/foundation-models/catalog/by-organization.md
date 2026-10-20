@@ -105,6 +105,10 @@
 
 - 2026-09-04 · [BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference](../../reproductions/2609.04971-beaconkv/README.md)（`beaconkv`）：长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。
 
+## Harbin Institute of Technology
+
+- 2026-10-14 · [Time-JEPA: Grounding Video World Models with Physical Time Series](../../foundation-models/2610.23982-time-jepa/README.md)（`time-jepa`）：视频自监督目标不必保留精确的速度、关节角等物理状态。Time-JEPA 用同步传感器或标注作辅助目标，但它们**不是编码器输入**：训练时同一个 online encoder 分别处理 masked 上下文和 unmasked 视频，评测移除物理态 head，仍只输入视频。
+
 ## Harvard University
 
 - 2026-10-15 · [AdaLoop: Thinking with the Vision Encoder](../../foundation-models/2610.21323-adaloop-vision/README.md)（`adaloop-vision`）：普通 VLM 对所有问题只编码图像一次。视觉 AdaLoop 保持预训练视觉权重冻结，以问题池化向量调制共享视觉块，再循环更新内部视觉状态。它将“看几次”与问题联系起来，而不是让语言模型独自承担全部推理。
@@ -160,6 +164,10 @@
 - 2026-09-29 · [SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving](../../foundation-models/2609.37626-splash/README.md)（`splash`）：统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。
 - 2026-08-07 · [Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](../../reproductions/2608.06849-autonomy-heads/README.md)（`autonomy-heads`）：直接从冻结 QK 投影的谱有效秩区分 retrieval 与 streaming heads，无需校准数据或运行时门控。
 
+## Johannes Kepler University Linz
+
+- 2026-10-19 · [Kronecker Delta Rule for Long Context Linear Attention](../../foundation-models/2610.26834-kronlstm/README.md)（`kronlstm`）：标准 DeltaNet 用向量误差 $Sk-v$ 更新矩阵记忆，会干扰与当前 key 重叠的其他关联。Kronecker Delta Rule 修正的是**一个 key-value 对的标量关联** $v^TSk$；记忆修订沿 $v k^T$ 的单一矩阵方向进行。KronLSTM 再加入 key 轴逐通道遗忘和分离 erase/write 门。
+
 ## Johns Hopkins University
 
 - 2026-10-08 · [VFold: Symmetry-Aware Cross-Layer Value Cache Compression](../../foundation-models/2610.12338-vfold/README.md)（`vfold`）：相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。
@@ -192,6 +200,10 @@
 ## Meta Reality Labs Research
 
 - 2026-10-09 · [EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference](../../reproductions/2610.14324-ev-jepa/README.md)（`ev-jepa`）：固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 **成本过高，暂不复现；待验收，未注册可执行入口。**
+
+## Meta Superintelligence Labs
+
+- 2026-10-17 · [Muse Glimmer 30B: An On-Device Agentic Model](../../foundation-models/2610.24628-muse-glimmer-30b/README.md)（`muse-glimmer-30b`）：模型瞄准有32GB专用内存的端侧Agent：语言骨干用稠密Transformer而非MoE，在相同内存预算下用缩放实验选架构；约1.8B冻结视觉编码器支持图文交错输入。52层采用三层2048窗口局部注意力接一层全局注意力，32Q/2KV的GQA，局部层使用RoPE，全局层不再施加RoPE。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## MiniMax
 
@@ -339,6 +351,10 @@
 
 - 2026-10-08 · [LeWAM: End-to-End World and Action Modeling with JEPAs](../../reproductions/2610.12818-lewam/README.md)（`lewam`）：传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。
 - 2026-08-06 · [BaKron: Efficient Quantization with Kronecker-Factored Hessians](../../reproductions/2608.06291-bakron/README.md)（`bakron`）：**主题：二阶量化。** GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。
+
+## University of California, Santa Barbara
+
+- 2026-10-18 · [T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training](../../foundation-models/2610.24938-t-muon/README.md)（`t-muon`）：普通 Muon 逐矩阵求 polar。本文先把结构相关矩阵放进三阶张量，再在第三轴变换域分别求 polar；这不是把张量任意展平后运行普通 Muon。分组方式与变换方式是两个独立选择：论文比较相邻层、QKV、单矩阵的 head、QKV 的 head-stack。
 
 ## University of Cambridge
 

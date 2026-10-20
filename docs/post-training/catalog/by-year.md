@@ -4,9 +4,12 @@
 
 ## 2026
 
+- 2026-10 · [Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization](../2610.25973-apsd/README.md)（`apsd`）：反馈条件自教师可能破坏正确rollout里学生已经成功的偏好，却又对错误rollout纠正不足。APSD依据正确性调整蒸馏target：正确时在学生和自教师之间插值，错误时越过自教师外推。
+- 2026-10 · [Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation](../2610.25034-spod/README.md)（`spod`）：多轮Agent蒸馏中，学生可能先超过教师，再随着持续模仿而退步。作者区分两个过程：教师修复学生的弱决策，同时也会侵蚀学生已经成功、但与教师偏好不同的行为。
 - 2026-10 · [GR-OPD: Group-Relative Sequence Credit for On-Policy Distillation](../2610.23042-gr-opd/README.md)（`gr-opd`）：教师在每个 token 上更自信，不一定意味着整段推理更值得复制；教师与学生的推理模式不同还可能造成训练崩溃。GR-OPD 在学生轨迹上重放教师，把 log-prob 差聚合为序列分数，在同题回答之间分配相对信用；保留一部分组均值压力，以免纯中心化抹掉教师总体偏好，然后使用 clipped PPO 更新。
 - 2026-10 · [MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning](../2610.23245-mge-po/README.md)（`mge-po`）：GRPO会给同题、同正确性的回答相同 advantage，忽略生成的不确定性。MGE-PO 用生成时缓存的 token 熵区分回答，在成功／失败与高熵／低熵四象限上调整信用；再用在线题目熵统计安排课程，并以熵加权参考KL约束优化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10 · [MultiAgent-OPD: End-to-End Training of Hierarchical Multi-Agent Systems with On-Policy Distillation](../2610.23234-multiagent-opd/README.md)（`multiagent-opd`）：层级团队的最终答案能监督Leader，却难以判断Searcher的检索、总结是否真正有效。MultiAgent-OPD先在较简单的Searcher–Answerer流程训练教师，再从**相同的基础checkpoint重新开始**训练共享参数的Leader–Searcher–Answerer团队。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-10 · [Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay](../2610.24236-tar-adaptive-replay/README.md)（`tar-adaptive-replay`）：有限on-policy采样可能逐步压低同样正确但较少出现的推理模式；仅在当前rollout上重加权，难以恢复已经采不到的模式。TAR先从基础策略大量生成，过滤正确回答，再保留分散的原型轨迹。
 - 2026-10 · [SimOPD: Relational Knowledge Transfer for On-Policy Distillation](../2610.23306-simopd/README.md)（`simopd`）：概率蒸馏只利用输出分布，直接匹配隐状态又要求学生迁就教师的坐标和维数。SimOPD 改为比较回答之间的关系：两模型分别编码同一批学生回答，在自己的空间里计算“当前回答与历史回答有多像”，再匹配这两个相似度分布。
 - 2026-10 · [Tree-Aware Posterior Distillation for Long-Horizon Agentic Reinforcement Learning](../2610.23181-treeopsd/README.md)（`treeopsd`）：长轨迹仅有终局奖励时，同一轨迹的好坏动作容易一起获奖或受罚；同一批轨迹又会经历多次更新，旧信用不能告诉优化器何时停止。TreeOPSD 将续写分支整理成共享前缀树，把叶奖励按行为策略似然向上回传，再把每个 turn 的信用映射为一个冻结且有界的 Bernoulli 教师。
 - 2026-10 · [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../2610.21138-clean-rm/README.md)（`clean-rm`）：不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的**联合分布**作最优传输，而不是只匹配偏好直方图。

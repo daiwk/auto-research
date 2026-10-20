@@ -1,0 +1,216 @@
+{
+  "schema_version": 2,
+  "method": "time-jepa",
+  "manifest_ref": "foundation-models:time-jepa",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-time-jepa-v1",
+    "revision": "sha256:e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+    "checkpoint": null,
+    "capability_benchmark": false,
+    "recipe": "oct20-foundation-definition-synthetic-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "loss": 1.3423589739040747,
+        "time_loss": 0.7291404622310751,
+        "latent_loss": 0.8319606503423222,
+        "joint_loss_reference_absolute_error": 3.3306690738754696e-16,
+        "loss_gradient_reference_max_error": 6.938893903907228e-18,
+        "gradient_norm": 0.364961632096235,
+        "parameter_update_norm": 0.003649616320962338,
+        "auxiliary_online_gradient_norm": 0.10279636553069706,
+        "latent_online_gradient_norm": 0.055882843467851835,
+        "teacher_gradient_norm": 0.0,
+        "target_optimizer_update_max": 0.0,
+        "ema_reference_max_error": 1.1102230246251565e-16,
+        "state_target_gradient_norm": 0.0,
+        "masked_context_leak_max": 0.0,
+        "unmasked_auxiliary_sensitivity": 0.2654354323631117,
+        "shuffled_state_loss_absolute_delta": 0.006589071760984,
+        "normalizer_mutation_max": 0.0,
+        "validation_fit_rejected": true,
+        "valid_state_entries": 15
+      },
+      "audit_sha256": "fa0647c47b5c6c94669f8ae5bd80ea245b0a6d5833b17404b0318aa228e6e3a8"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "loss": 1.1413247000559923,
+        "time_loss": 0.39967646199342377,
+        "latent_loss": 0.8615511766605958,
+        "joint_loss_reference_absolute_error": 2.7755575615628914e-16,
+        "loss_gradient_reference_max_error": 3.469446951953614e-18,
+        "gradient_norm": 0.3088452425743537,
+        "parameter_update_norm": 0.0030884524257435296,
+        "auxiliary_online_gradient_norm": 0.10323247806207264,
+        "latent_online_gradient_norm": 0.07289138351760588,
+        "teacher_gradient_norm": 0.0,
+        "target_optimizer_update_max": 0.0,
+        "ema_reference_max_error": 1.1102230246251565e-16,
+        "state_target_gradient_norm": 0.0,
+        "masked_context_leak_max": 0.0,
+        "unmasked_auxiliary_sensitivity": 0.42487602688888493,
+        "shuffled_state_loss_absolute_delta": 0.0016181472686544462,
+        "normalizer_mutation_max": 0.0,
+        "validation_fit_rejected": true,
+        "valid_state_entries": 15
+      },
+      "audit_sha256": "6f3e5b2cada1e5425c47a9a40c42f62e3903d9657521da9f30cb0f5232298476"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "loss": 1.506315699034253,
+        "time_loss": 0.9147315993686987,
+        "latent_loss": 0.8660035794761638,
+        "joint_loss_reference_absolute_error": 1.1102230246251565e-16,
+        "loss_gradient_reference_max_error": 0.0,
+        "gradient_norm": 0.35128266338721276,
+        "parameter_update_norm": 0.0035128266338721272,
+        "auxiliary_online_gradient_norm": 0.1392396060321341,
+        "latent_online_gradient_norm": 0.053412981770755125,
+        "teacher_gradient_norm": 0.0,
+        "target_optimizer_update_max": 0.0,
+        "ema_reference_max_error": 2.220446049250313e-16,
+        "state_target_gradient_norm": 0.0,
+        "masked_context_leak_max": 0.0,
+        "unmasked_auxiliary_sensitivity": 0.1593174756242393,
+        "shuffled_state_loss_absolute_delta": 0.06474722438094671,
+        "normalizer_mutation_max": 0.0,
+        "validation_fit_rejected": true,
+        "valid_state_entries": 15
+      },
+      "audit_sha256": "09634b91e2b7b69fd48794f0d00308b8b277ea27603bfbbb7068515aafc1993b"
+    }
+  ],
+  "metrics": {
+    "auxiliary_online_gradient_norm": {
+      "mean": 0.11508948320830126,
+      "std": 0.020915756568665265,
+      "n": 3
+    },
+    "ema_reference_max_error": {
+      "mean": 1.4802973661668753e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 0.3416965126859338,
+      "std": 0.02926060503806441,
+      "n": 3
+    },
+    "joint_loss_reference_absolute_error": {
+      "mean": 2.4054832200211723e-16,
+      "std": 1.1555567610933196e-16,
+      "n": 3
+    },
+    "latent_loss": {
+      "mean": 0.8531718021596939,
+      "std": 0.01850380214368691,
+      "n": 3
+    },
+    "latent_online_gradient_norm": {
+      "mean": 0.06072906958540428,
+      "std": 0.010605020713782939,
+      "n": 3
+    },
+    "loss": {
+      "mean": 1.3299997909981067,
+      "std": 0.18280910640710588,
+      "n": 3
+    },
+    "loss_gradient_reference_max_error": {
+      "mean": 3.469446951953614e-18,
+      "std": 3.469446951953614e-18,
+      "n": 3
+    },
+    "masked_context_leak_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "normalizer_mutation_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_update_norm": {
+      "mean": 0.0034169651268593317,
+      "std": 0.0002926060503806434,
+      "n": 3
+    },
+    "shuffled_state_loss_absolute_delta": {
+      "mean": 0.024318147803528384,
+      "std": 0.03510071505331731,
+      "n": 3
+    },
+    "state_target_gradient_norm": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "target_optimizer_update_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_gradient_norm": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "time_loss": {
+      "mean": 0.6811828411977325,
+      "std": 0.26085512970909563,
+      "n": 3
+    },
+    "unmasked_auxiliary_sensitivity": {
+      "mean": 0.2832096449587453,
+      "std": 0.1336685378557364,
+      "n": 3
+    },
+    "valid_state_entries": {
+      "mean": 15,
+      "std": 0.0,
+      "n": 3
+    },
+    "validation_fit_rejected": true
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "324217ed26fe2e297e25879ad092281eb0960b87",
+    "artifact_path": "docs/foundation-models/2610.23982-time-jepa/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "cfe64cca22b01aac2396d2ed2c95ea20c93ccca0c89091a093aa51575021f417",
+    "executed_source_sha256": {
+      "scripts/run_oct20_foundation_components.py": "e5168547562e1411b093b9c98e852727a798a142dfd141aa0585d3d964ba8b6e",
+      "src/auto_research/foundation_models/t_muon.py": "d14e23dcec0b4e704ebad4ae096d0928bce213fcc6947acd0716160f3470067a",
+      "src/auto_research/foundation_models/time_jepa.py": "8d9b3cdf712ccfef1ed0ea308402c004a12f2d8089d4f90692ff087afd6f8c93",
+      "src/auto_research/foundation_models/kronlstm.py": "e9d44ac8772d87d934c411e1aa8a1544ca47c906b59ec8700f2efb9f35a3c123"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:4a439491811e217675774bd4616e5898dda9814fce5a605f4811daa7733ba08f"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

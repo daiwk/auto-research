@@ -1,0 +1,130 @@
+{
+  "schema_version": 2,
+  "method": "scope-replay",
+  "manifest_ref": "agent-research:scope-replay",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-scope-replay-v1",
+    "revision": "sha256:8b15e7c3e34f0edbf97ae13e185be2f6d3e7857a41163b9f3011b0c0576696ca",
+    "capability_benchmark": false,
+    "initialization": "seeded synthetic integer options, trusted Python tape and numerical online learning fixtures"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "fixture_witnesses": 14,
+        "full_stateful_certificates": 14,
+        "fault_injections": 70,
+        "false_certificates_under_faults": 0,
+        "broken_replay_negative_control_failures": 14,
+        "unsupported_graphs_retained_unavailable": 14,
+        "instance_transfer_certificates": 0,
+        "instance_mismatch_rejected": true
+      },
+      "audit_sha256": "fa7f4feb68bcf9895d4cf3138dd285d64a5de34c1a8c54cb10c89ec3298cc6d8",
+      "fixture_sha256": "4a5d9257105e69c152140b71edfcc58f6cb9422bde3881fe9be8d527019a13ea"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "fixture_witnesses": 9,
+        "full_stateful_certificates": 9,
+        "fault_injections": 45,
+        "false_certificates_under_faults": 0,
+        "broken_replay_negative_control_failures": 9,
+        "unsupported_graphs_retained_unavailable": 9,
+        "instance_transfer_certificates": 0,
+        "instance_mismatch_rejected": true
+      },
+      "audit_sha256": "82ef62c22dfc509ddff5272d2ac7bf336b166236e4da4b28c7423f2593e10649",
+      "fixture_sha256": "17c0de5824e585b82d72c58c85a7ad03af195546088f1fb955fc9562714fe080"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "fixture_witnesses": 12,
+        "full_stateful_certificates": 12,
+        "fault_injections": 60,
+        "false_certificates_under_faults": 0,
+        "broken_replay_negative_control_failures": 12,
+        "unsupported_graphs_retained_unavailable": 12,
+        "instance_transfer_certificates": 0,
+        "instance_mismatch_rejected": true
+      },
+      "audit_sha256": "808b9e12c4eb161fadac2930ee9e3d187122a7710748e16765cafca84e66d29a",
+      "fixture_sha256": "324f5b365b81aec40839c76d92fc5812ab4d0f603960ee04088eecdd205580f0"
+    }
+  ],
+  "metrics": {
+    "broken_replay_negative_control_failures": {
+      "mean": 11.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "false_certificates_under_faults": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "fault_injections": {
+      "mean": 58.333333333333336,
+      "std": 12.583057392117917,
+      "n": 3
+    },
+    "fixture_witnesses": {
+      "mean": 11.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "full_stateful_certificates": {
+      "mean": 11.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    },
+    "instance_mismatch_rejected": true,
+    "instance_transfer_certificates": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "unsupported_graphs_retained_unavailable": {
+      "mean": 11.666666666666666,
+      "std": 2.516611478423583,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+    "artifact_path": "docs/agent-research/2610.23128-scope-replay/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "f814f0f980808a2036fef8148f798255feea115b4b6fb6d3a850c67eefce7944",
+    "executed_source_sha256": {
+      "scripts/run_oct20_agent_components.py": "8b15e7c3e34f0edbf97ae13e185be2f6d3e7857a41163b9f3011b0c0576696ca",
+      "src/auto_research/agent_research/memprice.py": "c82f924d6d889572a408ec458b5ea17551711a6fa3a8e9b5b7415a7363685e50",
+      "src/auto_research/agent_research/scope_replay.py": "9bebcf791eb08325298b6ecb4c7c6fbfd9c3a1609acd59616dc8e4655243fa08",
+      "src/auto_research/agent_research/tokenworth.py": "ad54a9e6c6b5609166cbec5ea59daaf66e1950d160b8f4c867cd49e3deb43d50"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:3c7fe4fd6e462940a1d48c33d66bf00a82029e3732bbca6e9720f0ae6d3ebc58"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

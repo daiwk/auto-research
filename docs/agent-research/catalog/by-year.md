@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-10 · [Remembering Has a Price: Learning Memory Worth under Resource Constraints](../2610.26453-tokenworth/README.md)（`tokenworth`）：生成长度、交互次数和记忆容量同时受限时，相关记忆也可能浪费稀缺预算。TokenWorth 用四维可解释基础特征学习稳定规律，再用 Recursive Feature Machine（RFM）校正查询相关的非线性残差。
+- 2026-10 · [MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents](../2610.24955-memprice/README.md)（`memprice`）：长交互里，过去某个细节会不会有用通常事先未知。单纯按相关性保留记忆会忽略各条信息对同一上下文容量的竞争。
+- 2026-10 · [SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning](../2610.23128-scope-replay/README.md)（`scope-replay`）：修改机器人控制程序可能修好新场景却破坏旧场景。SCOPE 从开发执行证据建立失败前沿图，区分有证据支持、被反驳和未知检查，按局部修补、阶段重设或策略重生成继续搜索。
+- 2026-10 · [World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds](../2610.24061-world-of-swecraft/README.md)（`world-of-swecraft`）：传统代码Agent评测通常分配一个预定义issue，难以衡量多个维护者如何自主找任务、分工和跨仓库改进。Software World由真实依赖库构成，让Agent用持久记忆、issue、PR和发布进行长期协作，以不可见的下游包检查群体产出是否真正有用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10 · [A team of Gemini 4 Argon agents beats Minecraft](../2610.22319-gemini-minecraft/README.md)（`gemini-minecraft`）：四个执行 Agent 通过编写 JavaScript 程序操纵 Mineflayer 角色；Observer 汇总世界状态，聊天和笔记传递进度。研究重点是长期协作、程序化工具与持久状态，而不是新训练目标。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10 · [AgentPerturb: Evaluating LLM Agent Robustness under Controlled Interaction Perturbations](../2610.21624-agent-perturb/README.md)（`agent-perturb`）：Agent 失败不一定来自模型推理：用户请求缺信息、技能规范过时、历史上下文出错和工具说明漂移都可能沿轨迹传播。AgentPerturb 交叉组织四个目标——用户请求 $U$、过程规范 $P$、继承上下文 $C$、工具契约 $T$——与缺失、冗余、错误三类扰动，得到12个家族。
 - 2026-10 · [Athanor: An Agent-Native System for Autonomous Post-Training Research](../2610.21055-athanor/README.md)（`athanor`）：研究 Agent 选择数据、训练算法和阶段组合；独立服务执行异步任务、去污染、冻结评测并保存 checkpoint 谱系。团队共享实验记录与模型，组合 SFT、RL、模型合并及自蒸馏；外部教师调用被禁止。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

@@ -27,6 +27,7 @@
 
 ### 多Agent协作
 
+- [World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds](../2610.24061-world-of-swecraft/README.md)（`world-of-swecraft`）：传统代码Agent评测通常分配一个预定义issue，难以衡量多个维护者如何自主找任务、分工和跨仓库改进。Software World由真实依赖库构成，让Agent用持久记忆、issue、PR和发布进行长期协作，以不可见的下游包检查群体产出是否真正有用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [ARIA: Runtime Inspection and Amendment for Multi-Agent Systems](../2610.20780-aria/README.md)（`aria`）：多 Agent 的早期错误会沿消息和工具结果传播。ARIA 不只在结束后解释失败，而是把执行验证过的修复转成训练数据，让模型在部分轨迹上决定何时干预、在哪里切断及如何续写。
 
 ### Coding Agent
@@ -122,6 +123,12 @@
 
 - [Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks](../2610.11794-memento3/README.md)（`memento3`）：冻结 LLM 将黑盒交互证据写成可修改规则册，再编译为世界模型。新代码必须同时通过语义忠实性判断和全部历史逐格回放；规划失配会触发修复。
 
+### 记忆与长期交互
+
+- [Remembering Has a Price: Learning Memory Worth under Resource Constraints](../2610.26453-tokenworth/README.md)（`tokenworth`）：生成长度、交互次数和记忆容量同时受限时，相关记忆也可能浪费稀缺预算。TokenWorth 用四维可解释基础特征学习稳定规律，再用 Recursive Feature Machine（RFM）校正查询相关的非线性残差。
+- [MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents](../2610.24955-memprice/README.md)（`memprice`）：长交互里，过去某个细节会不会有用通常事先未知。单纯按相关性保留记忆会忽略各条信息对同一上下文容量的竞争。
+- [ProPerAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
+
 ### Agent 安全
 
 - [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。
@@ -140,10 +147,6 @@
 
 - [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
 
-### 记忆与长期交互
-
-- [ProPerAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
-
 ### 红队技能进化
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
@@ -159,6 +162,10 @@
 ### 科学 Agent
 
 - [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
+
+### 规划、推理与工具使用
+
+- [SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning](../2610.23128-scope-replay/README.md)（`scope-replay`）：修改机器人控制程序可能修好新场景却破坏旧场景。SCOPE 从开发执行证据建立失败前沿图，区分有证据支持、被反驳和未知检查，按局部修补、阶段重设或策略重生成继续搜索。
 
 ### 搜索 Agent
 

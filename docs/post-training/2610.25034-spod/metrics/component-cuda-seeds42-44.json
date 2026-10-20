@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "method": "spod",
+  "manifest_ref": "post-training:spod",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct20-spod-v1",
+    "revision": "sha256:f2bf79e5fd71076a0bfb58aa595d2326bb67d2a0570a96781d8e4be34fe29dd6",
+    "capability_benchmark": false
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "parameter_delta_l2": 0.028564133530036295,
+        "gradient_norm_min": 0.0990130683856108,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 2.220446049250313e-16,
+        "protected_decisions_total": 10,
+        "floor_without_mask_negative_control_difference_max": 0.027669514491633462,
+        "teacher_parameter_delta_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "raw_model_logits_used": true,
+        "evaluation_outcomes_used_by_gate": false,
+        "agent_benchmark_evaluated": false
+      },
+      "audit_sha256": "4e6f22c9d4f75a37a7a3c593b9e56c7944b61090ed07ddb82f22ffba3dc2006a"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "parameter_delta_l2": 0.021217192650628075,
+        "gradient_norm_min": 0.13504681986719558,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 2.220446049250313e-16,
+        "protected_decisions_total": 6,
+        "floor_without_mask_negative_control_difference_max": 0.03863835022166051,
+        "teacher_parameter_delta_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "raw_model_logits_used": true,
+        "evaluation_outcomes_used_by_gate": false,
+        "agent_benchmark_evaluated": false
+      },
+      "audit_sha256": "c1652f33f5021a96ab9e8da2104edb3c337ce8b574205fec24f446369879f2cf"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "parameter_delta_l2": 0.028973156408751536,
+        "gradient_norm_min": 0.11567241486772192,
+        "optimizer_updates": 3,
+        "loss_reference_max_abs_error": 2.220446049250313e-16,
+        "protected_decisions_total": 8,
+        "floor_without_mask_negative_control_difference_max": 0.04953622134797908,
+        "teacher_parameter_delta_l2": 0.0,
+        "teacher_gradient_count": 0,
+        "raw_model_logits_used": true,
+        "evaluation_outcomes_used_by_gate": false,
+        "agent_benchmark_evaluated": false
+      },
+      "audit_sha256": "fbe96cf5f674e6737d6638828fbf862a7ef0f5cd30354b685d04f7f72eca3ab5"
+    }
+  ],
+  "metrics": {
+    "agent_benchmark_evaluated": false,
+    "evaluation_outcomes_used_by_gate": false,
+    "floor_without_mask_negative_control_difference_max": {
+      "mean": 0.03861469535375769,
+      "std": 0.01093337262009851,
+      "n": 3
+    },
+    "gradient_norm_min": {
+      "mean": 0.11657743437350944,
+      "std": 0.018033915456398954,
+      "n": 3
+    },
+    "loss_reference_max_abs_error": {
+      "mean": 2.220446049250313e-16,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.026251494196471967,
+      "std": 0.004364627013811465,
+      "n": 3
+    },
+    "protected_decisions_total": {
+      "mean": 8,
+      "std": 2.0,
+      "n": 3
+    },
+    "raw_model_logits_used": true,
+    "teacher_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_parameter_delta_l2": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/protocol diagnostics only; not official model/Agent capability or end-to-end performance"
+  },
+  "provenance": {
+    "commit": "d64baad694d0d84824915ea67c953981aa083cfc",
+    "artifact_path": "docs/post-training/2610.25034-spod/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "3c05ef2c9459c07344fcf6908eca7997f2ab834cac24e2e85f736fc1a8ca1382",
+    "executed_source_sha256": {
+      "scripts/run_oct20_post_components.py": "f2bf79e5fd71076a0bfb58aa595d2326bb67d2a0570a96781d8e4be34fe29dd6",
+      "src/auto_research/post_training/spod.py": "3271ce12f130d35d21aec3e34c949fd32f712b57e91813a0cafee206bdeb5974",
+      "src/auto_research/post_training/apsd.py": "00490dbba7f802d6a5e90c4048c5daa3e74ccc63fc6a36f9c9b0a355af777566",
+      "src/auto_research/post_training/tar.py": "5fe989893c28ea07c54c0cb2678ea1bc6c1eee253cd695c003e238a47eee6f19"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:a3b5589557ee600de796a5be55e4d702e5d00bf0e3cfa4fb5b7c41a103a88197"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

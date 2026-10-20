@@ -4,6 +4,14 @@
 
 ## 网络架构
 
+### 循环记忆与序列混合
+
+- [Kronecker Delta Rule for Long Context Linear Attention](../../foundation-models/2610.26834-kronlstm/README.md)（`kronlstm`）：标准 DeltaNet 用向量误差 $Sk-v$ 更新矩阵记忆，会干扰与当前 key 重叠的其他关联。Kronecker Delta Rule 修正的是**一个 key-value 对的标量关联** $v^TSk$；记忆修订沿 $v k^T$ 的单一矩阵方向进行。KronLSTM 再加入 key 轴逐通道遗忘和分离 erase/write 门。
+
+### 端侧多模态Agent模型
+
+- [Muse Glimmer 30B: An On-Device Agentic Model](../../foundation-models/2610.24628-muse-glimmer-30b/README.md)（`muse-glimmer-30b`）：模型瞄准有32GB专用内存的端侧Agent：语言骨干用稠密Transformer而非MoE，在相同内存预算下用缩放实验选架构；约1.8B冻结视觉编码器支持图文交错输入。52层采用三层2048窗口局部注意力接一层全局注意力，32Q/2KV的GQA，局部层使用RoPE，全局层不再施加RoPE。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ### 扩散与生成式模型
 
 - [Designing Transformers for Continuous Diffusion Language Models](../../foundation-models/2610.22330-langdit/README.md)（`langdit`）：连续扩散语言模型要从带高斯噪声的 token 嵌入恢复离散分布。原文§3把架构改动分为三个位置：backbone 的 RMS/QK 归一与噪声条件容量；词表 likelihood shortcut 的显式码本梯度路由和有界校准；训练期 bootstrap self-conditioning 的置信度衰减。LangFlow 的表示、交叉熵和采样器保持不变；Plaid 适配只迁移兼容子集，不能把两套梯度规则混为一谈。
@@ -88,6 +96,7 @@
 
 ### 优化器与训练稳定性
 
+- [T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training](../../foundation-models/2610.24938-t-muon/README.md)（`t-muon`）：普通 Muon 逐矩阵求 polar。本文先把结构相关矩阵放进三阶张量，再在第三轴变换域分别求 polar；这不是把张量任意展平后运行普通 Muon。分组方式与变换方式是两个独立选择：论文比较相邻层、QKV、单矩阵的 head、QKV 的 head-stack。
 - [BMuon: Budgeting Muon's Spectral Geometry for Structured Compressibility](../../foundation-models/2610.23571-bmuon/README.md)（`bmuon`）：Muon的spectral-norm更新不一定产生容易按隐藏通道剪枝的权重。BMuon不在前向额外加gate，也不只是对训练好的Muon模型剪枝；它让**所有MLP块的隐藏通道共享同一分配预算**，并在每个通道的输入行/输出列两侧共同改变更新几何。
 - [When Does Muon Actually Win? A Paired Data-, Time-, and Tuning-Budget Benchmark](../../foundation-models/2610.21555-muon-paired-budget/README.md)（`muon-paired-budget`）：优化器每步效果更好不等于同时间更好，也不意味着更容易调参。论文在单A100上对齐初始化、数据顺序和开发候选数，分别比较数据、训练时间、冻结调参池三种预算。它不是新的Muon优化公式，主要贡献是谨慎分离比较口径。测试数据在选参和轨迹分析冻结后只评一次。
 - [Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon](../../reproductions/2610.19844-smrc-pmrc/README.md)（`smrc-pmrc`）：低秩优化器只存投影后的动量，能减少持久状态；但梯度主奇异方向可能被噪声占据，直接丢掉子空间外分量会遗漏有效下降方向。本文让低秩动量负责投影内更新，原始梯度的正交残差负责其余方向，不额外保存一个全尺寸残差状态。
@@ -160,6 +169,10 @@
 ### 空间理解与结构化视觉推理
 
 - [MJev-Spatial: System One Spatial Intelligence via Native Attention Matching](../../foundation-models/2610.22276-mjev-spatial/README.md)（`mjev-spatial`）：空间问题往往只需选项、数值或二维点，却仍让 VLM 自回归生成并解析答案。MJev-Spatial 将三者统一为候选分类：decision marker 提供 query，candidate-end marker 提供 key，直接复用骨干最终注意力投影。连续量通过分桶或三级区域细化预测，不增加独立分类头。
+
+### JEPA与物理态监督
+
+- [Time-JEPA: Grounding Video World Models with Physical Time Series](../../foundation-models/2610.23982-time-jepa/README.md)（`time-jepa`）：视频自监督目标不必保留精确的速度、关节角等物理状态。Time-JEPA 用同步传感器或标注作辅助目标，但它们**不是编码器输入**：训练时同一个 online encoder 分别处理 masked 上下文和 unmasked 视频，评测移除物理态 head，仍只输入视频。
 
 ### 视频表征与弹性跨设备推理
 

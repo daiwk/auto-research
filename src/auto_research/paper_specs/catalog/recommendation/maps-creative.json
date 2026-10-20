@@ -1,0 +1,61 @@
+{
+  "domain": "recommendation",
+  "key": "maps-creative",
+  "title": "MAPS: A Multi-Agent Personalized Script-Driven Video Advertising System Enhanced by Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2610.25748v1",
+  "detail_path": "recommendation-components/2610.25748-maps-creative/README.md",
+  "topic": [
+    "展示层生成与个性化",
+    "个性化创意生成"
+  ],
+  "browse_company": "Kuaishou",
+  "browse_topic": [
+    "展示层生成与个性化",
+    "个性化创意生成"
+  ],
+  "first_author": "Zhongyu Wang",
+  "first_author_affiliation": "Beihang University",
+  "published": "2026-10-19",
+  "published_at": "2026-10-19T04:00:27Z",
+  "code": null,
+  "code_status": "原文及arXiv未给出可核验作者源码仓库，本轮未找到；Kling-Omni视频生成是外部服务",
+  "priority": "P1",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "Qwen3-VL-32B画像与反思、8B脚本模型、Kling-Omni生成，SFT20epoch、RL5000步，8张H100及私有线上闭环。成本过高，不复现（审查 DONE），不下载资源或自动重试。",
+  "online_ab": [
+    {
+      "product": "Kuaishou advertising specific scenario",
+      "metric": "CTR",
+      "lift_percent": 2.87,
+      "traffic": "not specified; versus GRM",
+      "source_url": "https://arxiv.org/pdf/2610.25748v1",
+      "source_location": "Section 4.3 / Table 3"
+    },
+    {
+      "product": "Kuaishou advertising specific scenario",
+      "metric": "CVR",
+      "lift_percent": 2.74,
+      "traffic": "not specified; versus GRM",
+      "source_url": "https://arxiv.org/pdf/2610.25748v1",
+      "source_location": "Section 4.3 / Table 3"
+    },
+    {
+      "product": "Kuaishou advertising specific scenario",
+      "metric": "ARPU",
+      "lift_percent": 9.85,
+      "traffic": "not specified; versus GRM",
+      "source_url": "https://arxiv.org/pdf/2610.25748v1",
+      "source_location": "Section 4.3 / Table 3"
+    }
+  ],
+  "summary": "以画像、脚本、导演和反思四Agent将广告创意从静态检索转为个性化生成，脚本SFT后用结构、偏好和商品事实的混合奖励优化，再按线上反馈路由最小修改。正文有快手场景量化A/B；仅收录方法与成本，不把奖励加权器包装为完整视频广告系统。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}
