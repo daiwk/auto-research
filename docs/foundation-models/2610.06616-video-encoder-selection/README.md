@@ -135,6 +135,7 @@ CPU 单元测试核验最大 cosine、质量归一化、DPP 核、独立 determi
 
 独立curator已核对冻结源码提交、全部公开模型文件hash、视频hash、原始时间/网格位置和逐帧quota。
 [稳定指标](metrics/component-a100-seed42.json)、[CUDA回执](../../gpu-validations/video-encoder-selection-a100-20261021.json)、[原始运行](../../research-audits/google-meta-closeout-20261021/evidence/video-selection-raw-a100-seed42.json)均保留。
+实际使用的[无答案输入清单](../../research-audits/google-meta-closeout-20261021/evidence/video-source-manifest.json)也随仓库保存；将其`source_url`固定公开资源下载为同目录的`vjepa.gif`即可重建输入，清单包含原问题和片段，不含答案。
 这些数字只支持 L1 真实特征/固定预算运行，不是原论文13基准准确率、速度收益或 Evolve 晋级证据。
 
 ### 成本判断与未复现范围

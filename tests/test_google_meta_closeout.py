@@ -67,3 +67,7 @@ def test_actual_gpu_evidence_retains_specguard_negative_results():
     assert video["metrics"]["source_position_max_error_max"] == 0
     assert video["protocol"]["full_SITE_selection_reproduced"] is False
     assert video["protocol"]["video_QA_capability_evaluated"] is False
+    manifest = AUDIT / "evidence/video-source-manifest.json"
+    assert hashlib.sha256(manifest.read_bytes()).hexdigest() == video["dataset"]["manifest_sha256"]
+    assert set(read(manifest)) == {"dataset_id", "dataset_revision", "examples"}
+    assert not {"answer", "gold"}.intersection(read(manifest)["examples"][0])
