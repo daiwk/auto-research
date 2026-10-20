@@ -7,8 +7,8 @@
   "review_finalized_on": "2026-10-15",
   "policy": "observed-catalog-and-evidence-not-capability-v1",
   "counts": {
-    "catalogued": 103,
-    "not_catalogued": 3641
+    "catalogued": 108,
+    "not_catalogued": 3636
   },
   "accepted_counts": {
     "not_catalogued": 14
@@ -10243,8 +10243,19 @@
       "title": "Harness^2: Recursive Agent Harnessing for an Open World",
       "review_decision": "historical",
       "frozen_implementation_status": "not_implemented_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "agent-research",
+          "key": "harness2",
+          "detail_path": "agent-research/2610.14224-harness2/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.14214",
@@ -12605,8 +12616,19 @@
       "title": "MetaEncoder: Exploring the Limit of Bi-Encoders for Multimodal System One Decision Making with Natural Language Interface",
       "review_decision": "known",
       "frozen_implementation_status": "existing_evidence_not_upgraded_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "metaencoder",
+          "detail_path": "foundation-models/2610.11316-metaencoder/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.11315",
@@ -12912,8 +12934,19 @@
       "title": "Mid-Training Language Models on Raw Video",
       "review_decision": "known",
       "frozen_implementation_status": "existing_evidence_not_upgraded_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "multimodal-models",
+          "key": "raw-video-midtraining",
+          "detail_path": "multimodal-models/2610.11019-raw-video-midtraining/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.11015",
@@ -26442,8 +26475,19 @@
       "title": "Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses",
       "review_decision": "historical",
       "frozen_implementation_status": "not_implemented_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "agent-research",
+          "key": "harmony-harness",
+          "detail_path": "agent-research/2610.15150-harmony-harness/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.15137",
@@ -29676,8 +29720,19 @@
       "title": "SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting",
       "review_decision": "historical",
       "frozen_implementation_status": "not_implemented_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "agent-research",
+          "key": "seer-forecasting",
+          "detail_path": "agent-research/2610.04109-seer-forecasting/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.04083",

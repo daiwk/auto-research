@@ -1,0 +1,30 @@
+{
+  "domain": "foundation-models",
+  "key": "fuse-verifiers",
+  "title": "FUSE: Ensembling Verifiers with Zero Labeled Data",
+  "paper_url": "https://arxiv.org/abs/2604.18547v1",
+  "detail_path": "foundation-models/2604.18547-fuse-verifiers/README.md",
+  "topic": [
+    "推理与系统效率",
+    "无标签验证器集成"
+  ],
+  "first_author": "Joonhyuk Lee",
+  "first_author_affiliation": "Stanford University",
+  "published": "2026-04-20",
+  "published_at": "2026-04-20T17:40:33Z",
+  "code": null,
+  "code_status": "原文Appendix G发布原始HLE/IMO数据；所读版本称pipeline将开源，未确认作者完整pipeline；HazyResearch/scaling-verification为基线不是FUSE作者实现",
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "Appendix F 原始HLE/IMO生成/验证使用8×H100-80GB；离线分数集成本身论文明确无需GPU。因此只延期完整生成实验，不能用8H100否定低成本集成算法。 成本过高，不复现（审查 DONE）。",
+  "summary": "从候选的多验证器分数中估计查询条件下的敏感度、特异度和正确率，以自适应分数变换抑制相关性，再用估计后验训练集成器；不依赖真实正确标签。仅资料收录，完整生成实验不复现。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

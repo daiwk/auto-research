@@ -135,9 +135,17 @@
 
 - 未标注 · 一作：Charles Arnal / Ahmad Rammal（共同一作，随机排序） · [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](../autoformbench/README.md)（`autoformbench`）：AutoformBench 不只要求补一个孤立证明，而是让 Agent 在固定 Lean/Mathlib 上构造支撑高级数学命题的定义、辅助引理和证明。341 个任务来自 24 个数学来源，共有 1,155 个需要完成的证明义务；一个任务只有全部义务均通过可信验证才算成功。
 
+## FAIR at Meta / CERMICS, ENPC, Institut Polytechnique de Paris
+
+- 2026-05-28 · 一作：Ahmad Rammal · [Formalizing Mathematics at Scale](../2605.29955-autoformbot/README.md)（`autoformbot`）：先构建教材声明的依赖DAG，工作者在独立worktree写Lean，经并发审查和合并队列进入主库；失败轨迹生成技能，监督者在合并后核查目标并反馈重规划。[原文§3–4](https://arxiv.org/html/2605.29955v1) **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## FAIR at Meta / University College London
 
 - 2026-03-27 · 一作：Karen Hambardzumyan · [AIRA2: Overcoming Bottlenecks in AI Research Agents](../2603.26499-aira2/README.md)（`aira2`）：以无同步屏障的 steady-state worker pool 提高实验吞吐；训练、搜索、最终选择使用固定的 80/10/10 隐藏切分，搜索只看 search score，结束后才用未参与爬山的 validation 选冠军。
+
+## FAIR at Meta / University of Oxford
+
+- 2026-02-06 · 一作：Alisia Lupidi · [AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents](../2602.06855-airs-bench/README.md)（`airs-bench`）：以问题、数据集、指标和人工SOTA定义20个任务。Agent自行提出方法、实现训练、分析实验并修订，不提供基线解法；协议区分Agent、搜索scaffold与运行harness，比较顺序MLGym和树搜索AIRA-dojo。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Florida State University
 
@@ -166,6 +174,15 @@
 ## Google Cloud AI Research
 
 - 2026-10-01 · 一作：Caiqi Zhang · [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](../2610.00972-veriharness/README.md)（`veriharness`）：同一基础模型得到 workspace、证据工具和可复用验证技能；disagreement resolver 查证冲突 claim，consensus challenger 主动质疑共同 claim 和遗漏要求。
+- 2026-02-02 · 一作：Jiefeng Chen · [MARS: Modular Agent with Reflective Search for Automated AI Research](../2602.02660-mars-research/README.md)（`mars-research`）：自动研究不仅要生成正确代码，还需在有限训练时间内分辨改动价值。MARS 使用“设计—拆分—实现”生成模块化仓库，以预算感知 MCTS 选择新方案、改进或调试；比较新旧执行结果和代码差异，提炼解决方案经验与调试经验，供其他搜索分支复用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+## Google Cloud AI Research / Carnegie Mellon University
+
+- 2026-10-10 · 一作：Weichen Yu · [Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses](../2610.15150-harmony-harness/README.md)（`harmony-harness`）：单目标演化可能通过放松检查提高功能分数，同时损害安全。Harmony Harness 将功能与安全保持为两个独立目标：每个偏好向量维护一个框架，候选只替换邻域中更差的框架。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+## Google Cloud AI Research / University of Virginia
+
+- 2026-10-02 · 一作：Mingtian Tan · [SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting](../2610.04109-seer-forecasting/README.md)（`seer-forecasting`）：数值历史可能缺少外部事件信息，普通 RAG 又不会从预测错误中修订检索方法。SEER 保持预测模型权重不变，把上下文拆成检索记忆、筛选记忆和因果知识。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Google DeepMind
 
@@ -376,6 +393,10 @@
 ## Northwestern
 
 - 2025-04-24 · 一作：Zihan Wang · [RAGEN](../2504.20073-ragen/README.md)（`ragen`）：单轮数学 RL 的优化单位是一次回答，而 Agent 要在随机环境中跨多轮决策。RAGEN 提出 StarPO，把 state、thinking、action 和 reward 组织成完整轨迹。
+
+## Northwestern University
+
+- 2026-10-09 · 一作：Ruiyao Xu · [Harness²: Recursive Agent Harnessing for an Open World](../2610.14224-harness2/README.md)（`harness2`）：Harness 是模型外的提示、工具、记忆、技能、脚本、子代理和中间件。论文在不改模型权重的前提下，把“改进当前任务执行方式”和“积累以后如何改进的经验”连接起来。
 
 ## OpenAI
 

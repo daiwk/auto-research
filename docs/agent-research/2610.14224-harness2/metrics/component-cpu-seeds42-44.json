@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "method": "harness2",
+  "manifest_ref": "agent-research:harness2",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "protocol_id": "harness2-answer-free-controller-v1",
+  "dataset": {
+    "id": "generated-signed-ledger",
+    "revision": "signed-ledger-decimal-v1",
+    "public_benchmark": false
+  },
+  "device": "cpu",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "budget": {
+    "k": 2,
+    "modes": [
+      "parallel",
+      "sequential"
+    ],
+    "workers": 2
+  },
+  "upstream_commit": "1cfe254e8d25b15f37048c3730134686abe60335",
+  "provenance": {
+    "executed_source_sha256": {
+      "scripts/run_harness2_component.py": "3ebbeb2e846029ae76601d69d419406a0d8e8a8ab52edb903d54ba6661d5aaba",
+      "src/auto_research/agent_research/harness2.py": "bb065e60671785cff38971163648f4f4f26820a9918e3a218c1fc9240ef314b0"
+    },
+    "raw_runner_artifact_sha256": "73af386ad9fa6fb8b4d315bda6d978d352b41b11cfa6b0d1515352a99aefed8c",
+    "artifact_path": "docs/agent-research/2610.14224-harness2/metrics/component-cpu-seeds42-44.json",
+    "dataset_fingerprint": "e86276fa1339c860265be6841083ddbffe1af501b76347dc8f0b6b9eb7b421cb"
+  },
+  "per_seed_mode": [
+    {
+      "seed": 42,
+      "mode": "parallel",
+      "fixture_sha256": "15e2474ef9363034b73138cc825ec6bf34517087c153e96f8e01a87e9cc9e305",
+      "metrics": {
+        "tasks": 2,
+        "actual_python_rollouts": 16,
+        "improvement_stages": 12,
+        "rollout_budget_identity_checks": 2,
+        "stage_budget_identity_checks": 2,
+        "script_mechanism_post_run_checks": 2,
+        "second_task_prior_library_entries": 1,
+        "retained_evidence_lessons": 2,
+        "failed_rollouts": 0
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "sequential",
+      "fixture_sha256": "15e2474ef9363034b73138cc825ec6bf34517087c153e96f8e01a87e9cc9e305",
+      "metrics": {
+        "tasks": 2,
+        "actual_python_rollouts": 16,
+        "improvement_stages": 12,
+        "rollout_budget_identity_checks": 2,
+        "stage_budget_identity_checks": 2,
+        "script_mechanism_post_run_checks": 2,
+        "second_task_prior_library_entries": 1,
+        "retained_evidence_lessons": 2,
+        "failed_rollouts": 0
+      }
+    },
+    {
+      "seed": 43,
+      "mode": "parallel",
+      "fixture_sha256": "fcd8e7848106dd60f5b5b477f8cff7353410e84aaf919b00c00cf65ece1db9da",
+      "metrics": {
+        "tasks": 2,
+        "actual_python_rollouts": 16,
+        "improvement_stages": 12,
+        "rollout_budget_identity_checks": 2,
+        "stage_budget_identity_checks": 2,
+        "script_mechanism_post_run_checks": 2,
+        "second_task_prior_library_entries": 1,
+        "retained_evidence_lessons": 2,
+        "failed_rollouts": 0
+      }
+    },
+    {
+      "seed": 43,
+      "mode": "sequential",
+      "fixture_sha256": "fcd8e7848106dd60f5b5b477f8cff7353410e84aaf919b00c00cf65ece1db9da",
+      "metrics": {
+        "tasks": 2,
+        "actual_python_rollouts": 16,
+        "improvement_stages": 12,
+        "rollout_budget_identity_checks": 2,
+        "stage_budget_identity_checks": 2,
+        "script_mechanism_post_run_checks": 2,
+        "second_task_prior_library_entries": 1,
+        "retained_evidence_lessons": 2,
+        "failed_rollouts": 0
+      }
+    },
+    {
+      "seed": 44,
+      "mode": "parallel",
+      "fixture_sha256": "139719c5bd341c11748ff5c9966b5f796c853e5cfa6d3830a286ae73186b5e40",
+      "metrics": {
+        "tasks": 2,
+        "actual_python_rollouts": 16,
+        "improvement_stages": 12,
+        "rollout_budget_identity_checks": 2,
+        "stage_budget_identity_checks": 2,
+        "script_mechanism_post_run_checks": 2,
+        "second_task_prior_library_entries": 1,
+        "retained_evidence_lessons": 2,
+        "failed_rollouts": 0
+      }
+    },
+    {
+      "seed": 44,
+      "mode": "sequential",
+      "fixture_sha256": "139719c5bd341c11748ff5c9966b5f796c853e5cfa6d3830a286ae73186b5e40",
+      "metrics": {
+        "tasks": 2,
+        "actual_python_rollouts": 16,
+        "improvement_stages": 12,
+        "rollout_budget_identity_checks": 2,
+        "stage_budget_identity_checks": 2,
+        "script_mechanism_post_run_checks": 2,
+        "second_task_prior_library_entries": 1,
+        "retained_evidence_lessons": 2,
+        "failed_rollouts": 0
+      }
+    }
+  ],
+  "metrics": {
+    "actual_python_rollouts_total": 96,
+    "streamed_tasks_total": 12,
+    "improvement_stages_total": 72,
+    "retained_evidence_lessons_total": 12,
+    "script_mechanism_post_run_checks_total": 12,
+    "failed_rollouts_total": 0
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Three-seed CPU mechanism checks only; no stable capability improvement claim",
+    "actor": "trusted deterministic editor/selector fixture with actual Python subprocess executor",
+    "gold_access": false,
+    "test_isolated": false,
+    "interpretation": "mechanism assertions only; no held-out capability, transfer gain, model training or official benchmark"
+  }
+}

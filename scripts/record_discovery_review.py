@@ -9,6 +9,9 @@ import json
 from pathlib import Path
 
 from auto_research.papers import canonical_arxiv_id
+from auto_research.discovery_review import (
+    metadata_only_disposition, pending_implementation_disposition, priority_review_signal,
+)
 
 
 TERMINAL = {"implemented", "rejected", "deferred"}
@@ -17,7 +20,8 @@ TERMINAL = {"implemented", "rejected", "deferred"}
 def build_batch(artifact: dict, decisions: dict, *, batch_name: str) -> dict:
     pending = [
         item for item in artifact.get("candidates", [])
-        if item.get("repository_status") == "new"
+        if item.get("repository_status") == "new" or item.get("revision_review_required")
+        or item.get("historical_review_required") or item.get("implementation_review_required")
     ]
     decision_map = {
         canonical_arxiv_id(str(item["id"])): item
@@ -29,6 +33,13 @@ def build_batch(artifact: dict, decisions: dict, *, batch_name: str) -> dict:
     rows = []
     for candidate in pending:
         decision = dict(decision_map[candidate["arxiv_id"]])
+        if metadata_only_disposition(decision):
+            raise ValueError(
+                f"{candidate['arxiv_id']}: metadata-only identity/date triage cannot be a "
+                "terminal method/cost decision; retain it as a discovery observation"
+            )
+        if pending_implementation_disposition(decision):
+            raise ValueError(f"{candidate['arxiv_id']}: implementation-pending is not a terminal disposition")
         status = decision.get("status")
         if status not in TERMINAL:
             raise ValueError(f"{candidate['arxiv_id']}: non-terminal status {status!r}")
@@ -37,12 +48,7 @@ def build_batch(artifact: dict, decisions: dict, *, batch_name: str) -> dict:
             raise ValueError(f"{candidate['arxiv_id']}: invalid priority {priority!r}")
         if status != "implemented" and not decision.get("reason"):
             raise ValueError(f"{candidate['arxiv_id']}: {status} requires reason")
-        priority_hit = any(
-            str(query).startswith((
-                "priority-org-google", "priority-org-google-deepmind", "priority-org-meta"
-            ))
-            for query in candidate.get("matched_queries", [])
-        )
+        priority_hit = priority_review_signal(candidate)
         review = decision.get("full_text_review", {})
         if priority_hit and status != "implemented" and not (
             isinstance(review, dict)

@@ -17,6 +17,9 @@ from urllib.parse import urlparse
 
 from .models import Paper
 from .papers import ArxivClient, canonical_arxiv_id, paper_recency, paper_revision
+from .discovery_review import (
+    disposition_rank, metadata_only_disposition, priority_organizations,
+)
 
 
 @dataclass(frozen=True)
@@ -138,8 +141,14 @@ def repository_paper_statuses(
     manifest_path: Path,
     ledger_path: Path,
 ) -> dict[str, str]:
-    """Load canonical arXiv IDs already implemented or explicitly reviewed."""
+    """Load catalogued or substantively reviewed canonical identities.
+
+    A date-only historical disposition never closes an unreviewed paper. Keep
+    frozen ledger rows for audit, but do not let their presence suppress recall.
+    A later real method/cost/exception decision still closes the same identity.
+    """
     statuses: dict[str, str] = {}
+    ranks: dict[str, int] = {}
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     for paper in manifest.get("papers", []):
         paper_url = str(paper.get("paper_url", ""))
@@ -149,6 +158,7 @@ def repository_paper_statuses(
         if arxiv_id:
             status = "reviewed" if str(paper.get("implementation_status", "")).startswith("deferred") else "implemented"
             statuses[canonical_arxiv_id(arxiv_id)] = status
+            ranks[canonical_arxiv_id(arxiv_id)] = 4
 
     ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
     for batch in ledger.get("batches", []):
@@ -157,7 +167,10 @@ def repository_paper_statuses(
             if not arxiv_id:
                 continue
             identity = canonical_arxiv_id(str(arxiv_id))
-            statuses.setdefault(identity, "reviewed")
+            rank = disposition_rank(candidate)
+            if rank and rank > ranks.get(identity, 0):
+                statuses[identity] = "implementation-pending" if rank == 2 else "reviewed"
+                ranks[identity] = rank
     return statuses
 
 
@@ -188,18 +201,23 @@ def triage_candidates(
         baseline_missing = status != "new" and not baseline and replacement
         revision_review = status != "new" and (newer or changed_metadata or baseline_missing)
         priority_matches = sorted(PRIORITY_REVIEW_QUERY_NAMES.intersection(discovered.query_names))
-        priority_sources = sorted({
-            source["organization"] for source in discovered.source_provenance
-            if source.get("organization") in {"Google", "Google DeepMind", "Meta"}
-        })
+        priority_sources = list(priority_organizations(item))
+        # Statuses are derived from substantive ledger decisions, independently
+        # of this observed-version baseline. A later real cost closure must not
+        # be reopened just because the older metadata baseline is unchanged.
+        historical_review = status == "new" and metadata_only_disposition(baseline)
+        review_required = status == "new" or revision_review or historical_review
+        implementation_pending = status == "implementation-pending"
         item.update(
             {
                 "repository_status": status,
-                "priority_review_required": (status == "new" or revision_review) and bool(priority_matches or priority_sources),
+                "priority_review_required": (review_required or implementation_pending) and bool(priority_matches or priority_sources),
                 "priority_query_matches": priority_matches,
                 "priority_source_matches": priority_sources,
                 "revision_review_required": revision_review,
-                "review_required": status == "new" or revision_review,
+                "historical_review_required": historical_review,
+                "implementation_review_required": implementation_pending,
+                "review_required": review_required,
                 "revision_review_reason": (
                     "newer-version" if newer else "metadata-changed" if changed_metadata
                     else "replacement-without-reviewed-baseline" if baseline_missing else None
@@ -221,7 +239,7 @@ def build_discovery_payload(
 ) -> dict:
     counts = {
         status: sum(candidate["repository_status"] == status for candidate in candidates)
-        for status in ("new", "implemented", "reviewed")
+        for status in ("new", "implemented", "reviewed", "implementation-pending")
     }
     counts["google_meta_priority_review"] = sum(
         bool(candidate["priority_review_required"]) for candidate in candidates
@@ -251,6 +269,7 @@ def render_discovery_summary(payload: dict) -> str:
     unresolved_dates = [item for item in new_candidates if not item["published"]]
     backlog = [item for item in new_candidates if item["published"] and not requested_start <= item["published"][:10] <= end]
     revisions = [item for item in payload["candidates"] if item.get("revision_review_required")]
+    pending = [item for item in payload["candidates"] if item.get("implementation_review_required")]
     lines = [
         f"# {payload['track']} 论文候选差分",
         "",
@@ -266,6 +285,7 @@ def render_discovery_summary(payload: dict) -> str:
         "‘新候选’只表示仓库尚未审计，并不等于当天新发表；机构词命中也不等于作者单位。",
         f"已知论文待复核的版本更新 {len(revisions)} 篇，单独计数，不计入新 v1。",
         f"另有 {len(unresolved_dates)} 篇公告条目的原始日期待解析，不计为当天新发表或历史补漏。",
+        f"已通过方法审查但尚未交付/作出终态成本决定 {len(pending)} 篇；不计为已实现或已结束。",
         "",
         "## Google / Meta 本窗口重点复核",
         "",
@@ -363,6 +383,8 @@ def render_discovery_summary(payload: dict) -> str:
     ))
     lines.extend(["", "## 已知论文版本更新", ""])
     lines.extend(_candidate_lines(revisions, empty="未发现需复核的已知论文版本更新。"))
+    lines.extend(["", "## 已审查但尚未交付", ""])
+    lines.extend(_candidate_lines(pending, empty="本次未召回尚未交付的既有候选。"))
     lines.extend(["", "## 原始发布日期待解析", ""])
     lines.extend(_candidate_lines(unresolved_dates, empty="没有原始日期待解析的条目。"))
     lines.extend(["", "## 本窗口其他未审候选", ""])

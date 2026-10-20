@@ -122296,6 +122296,1029 @@
           ]
         }
       ]
+    },
+    {
+      "batch": "20261020-harness2-priority-historical-repair",
+      "date": "2026-10-20",
+      "scope_kind": "priority-historical-backfill-and-filter-repair",
+      "required_tracks": [
+        "agent",
+        "foundation-model",
+        "post-training"
+      ],
+      "review_watermark_advanced": false,
+      "all_sources_exhaustive": false,
+      "source_artifact": "research-audits/harness2-priority-repair/README.md",
+      "counts": {
+        "substantive_dispositions": 22,
+        "new_low_cost_components": 1,
+        "full_experiments_not_reproduced_high_cost": 22,
+        "new_cuda_implementations": 0
+      },
+      "candidates": [
+        {
+          "id": "2601.22101",
+          "title": "ECO: Quantized Training without Full-Precision Master Weights",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。§4.2 对30M-800M模型按100N tokens预训练（最低3B tokens），另Gemma3-1B、2.1B MoE预训练和DeepSeek-MoE-16B微调；整组训练远超短时单卡预算。",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named algorithm, quantization and experiment-scale passages.",
+            "source_locations": [
+              "arXiv abs Submission history v1",
+              "HTML authors",
+              "§3.2 Algorithms1-3",
+              "§4.2 C4 100N tokens",
+              "§4.3-4.5",
+              "https://research.google/pubs/eco-accurate-quantization-aware-training-without-master-weights/"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2601.22101v1",
+            "basis": "arXiv abs Submission history v1; HTML authors; §3.2 Algorithms1-3; §4.2 C4 100N tokens; §4.3-4.5; https://research.google/pubs/eco-accurate-quantization-aware-training-without-master-weights/",
+            "scale": "§4.2 对30M-800M模型按100N tokens预训练（最低3B tokens），另Gemma3-1B、2.1B MoE预训练和DeepSeek-MoE-16B微调；整组训练远超短时单卡预算。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/google-audit.json",
+          "catalog_key": "eco-optimizer",
+          "catalog_detail": "foundation-models/2601.22101-eco-optimizer/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Google",
+              "source_url": "https://arxiv.org/html/2601.22101v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2602.02660",
+          "title": "MARS: Modular Agent with Reflective Search for Automated AI Research",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。§5.1 MLE-Bench 75竞赛，每竞赛24小时单A100-40GB预算，三独立运行，另闭源LLM调用；明显多小时级，未尝试运行。",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, experiments, cost and author release passages; v1 method reviewed, current abs notes v3.",
+            "source_locations": [
+              "arXiv abs Submission history v1",
+              "HTML authors",
+              "§4.2-4.4 Eq.3-4",
+              "§5.1 Setup",
+              "official GitHub root release scope"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2602.02660v1",
+            "basis": "arXiv abs Submission history v1; HTML authors; §4.2-4.4 Eq.3-4; §5.1 Setup; official GitHub root release scope",
+            "scale": "§5.1 MLE-Bench 75竞赛，每竞赛24小时单A100-40GB预算，三独立运行，另闭源LLM调用；明显多小时级，未尝试运行。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/google-audit.json",
+          "catalog_key": "mars-research",
+          "catalog_detail": "agent-research/2602.02660-mars-research/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "agent",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Google",
+              "source_url": "https://arxiv.org/html/2602.02660v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2602.06855",
+          "title": "AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。20 tasks, each research run 24h on one H200; Appendix D gives 10-20 runs/task. A single original run already exceeds cheap budget; complete campaign not reproduced.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "https://arxiv.org/abs/2602.06855: version history",
+              "https://arxiv.org/html/2602.06855v1: sections 4.2-4.3 and 5.1; Appendix C Table7, Appendix D",
+              "https://github.com/facebookresearch/airs-bench: README task specification and CC BY-NC 4.0 license"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://ai.meta.com/research/publications/airs-bench-a-suite-of-tasks-for-frontier-ai-research-science-agents/",
+            "basis": "https://arxiv.org/abs/2602.06855: version history; https://arxiv.org/html/2602.06855v1: sections 4.2-4.3 and 5.1; Appendix C Table7, Appendix D; https://github.com/facebookresearch/airs-bench: README task specification and CC BY-NC 4.0 license",
+            "scale": "20 tasks, each research run 24h on one H200; Appendix D gives 10-20 runs/task. A single original run already exceeds cheap budget; complete campaign not reproduced.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": "airs-bench",
+          "catalog_detail": "agent-research/2602.06855-airs-bench/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "agent",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://ai.meta.com/research/publications/airs-bench-a-suite-of-tasks-for-frontier-ai-research-science-agents/",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2602.21103",
+          "title": "Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。§4 Gemini3Flash提取、Gemini3Pro规则合成/冲突修复、GeminiEmbedding；Gemma3-4B/Gemini2Flash在多个数据集多轮推理。闭源API全流程成本无法廉价固定，按预算门槛关闭完整实验，不下载大模型探成本。",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method/setup passages in v1, not all v2 contents.",
+            "source_locations": [
+              "arXiv abs Submission history v1; v2 2026-06-02 identity only",
+              "HTML authors",
+              "§3.1-3.4",
+              "§4.1 Setup",
+              "Appendix C clustering",
+              "https://research.google/pubs/prompt-level-distillation-a-non-parametric-alternative-to-model-fine-tuning-for-efficient-reasoning/"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2602.21103v1",
+            "basis": "arXiv abs Submission history v1; v2 2026-06-02 identity only; HTML authors; §3.1-3.4; §4.1 Setup; Appendix C clustering; https://research.google/pubs/prompt-level-distillation-a-non-parametric-alternative-to-model-fine-tuning-for-efficient-reasoning/",
+            "scale": "§4 Gemini3Flash提取、Gemini3Pro规则合成/冲突修复、GeminiEmbedding；Gemma3-4B/Gemini2Flash在多个数据集多轮推理。闭源API全流程成本无法廉价固定，按预算门槛关闭完整实验，不下载大模型探成本。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/google-audit.json",
+          "catalog_key": "prompt-level-distillation",
+          "catalog_detail": "post-training/2602.21103-prompt-level-distillation/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "post-training",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Google",
+              "source_url": "https://arxiv.org/html/2602.21103v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2604.18547",
+          "title": "FUSE: Ensembling Verifiers with Zero Labeled Data",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。Appendix F 原始HLE/IMO生成/验证使用8×H100-80GB；离线分数集成本身论文明确无需GPU。因此只延期完整生成实验，不能用8H100否定低成本集成算法。",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, assumptions, compute and release passages.",
+            "source_locations": [
+              "arXiv abs Submission history v1",
+              "HTML authors",
+              "§2.1-2.3",
+              "Appendix D",
+              "Appendix F Compute requirements",
+              "Appendix G Replicability",
+              "https://research.google/pubs/fuse-scaling-verification-with-zero-labeled-data/"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2604.18547v1",
+            "basis": "arXiv abs Submission history v1; HTML authors; §2.1-2.3; Appendix D; Appendix F Compute requirements; Appendix G Replicability; https://research.google/pubs/fuse-scaling-verification-with-zero-labeled-data/",
+            "scale": "Appendix F 原始HLE/IMO生成/验证使用8×H100-80GB；离线分数集成本身论文明确无需GPU。因此只延期完整生成实验，不能用8H100否定低成本集成算法。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/google-audit.json",
+          "catalog_key": "fuse-verifiers",
+          "catalog_detail": "foundation-models/2604.18547-fuse-verifiers/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Google",
+              "source_url": "https://arxiv.org/html/2604.18547v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2604.27733",
+          "title": "Mind the Gap: Structure-Aware Consistency in Preference Learning",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。§7/Appendix M 使用Llama3-8B LoRA，UltraFeedback20k、1200 steps、batch16，BGE-Large距离与多组基线/五次运行；整组对照估计多小时级，未启动实跑。",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named objective, evaluation and hyperparameter passages in v1; v3 body not independently reread.",
+            "source_locations": [
+              "arXiv abs Submission history v1; latest v3 2026-10-15 identity only",
+              "HTML authors",
+              "§5.3 Definition5.5 and SA-DPO objective",
+              "§7.1-7.3",
+              "Appendix M",
+              "https://research.google/pubs/mind-the-gap-structure-aware-consistency-in-preference-learning/"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2604.27733v1",
+            "basis": "arXiv abs Submission history v1; latest v3 2026-10-15 identity only; HTML authors; §5.3 Definition5.5 and SA-DPO objective; §7.1-7.3; Appendix M; https://research.google/pubs/mind-the-gap-structure-aware-consistency-in-preference-learning/",
+            "scale": "§7/Appendix M 使用Llama3-8B LoRA，UltraFeedback20k、1200 steps、batch16，BGE-Large距离与多组基线/五次运行；整组对照估计多小时级，未启动实跑。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/google-audit.json",
+          "catalog_key": "sa-dpo",
+          "catalog_detail": "post-training/2604.27733-sa-dpo/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "post-training",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Google",
+              "source_url": "https://arxiv.org/html/2604.27733v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2605.01188",
+          "title": "Compute Optimal Tokenization",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。Section 2.2: 988 latent-tokenized plus 320 subword models, 50M-6.7B parameters, 4B-1.1T bytes and 5e18-2e21 FLOPs budgets. Full scaling study not reproduced.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "https://arxiv.org/abs/2605.01188: v1/v2 history",
+              "https://arxiv.org/html/2605.01188v1: affiliation; sections 2.1-2.3 and 3; section2.2 resource grid"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://ai.meta.com/research/publications/compute-optimal-tokenization/",
+            "basis": "https://arxiv.org/abs/2605.01188: v1/v2 history; https://arxiv.org/html/2605.01188v1: affiliation; sections 2.1-2.3 and 3; section2.2 resource grid",
+            "scale": "Section 2.2: 988 latent-tokenized plus 320 subword models, 50M-6.7B parameters, 4B-1.1T bytes and 5e18-2e21 FLOPs budgets. Full scaling study not reproduced.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": null,
+          "catalog_detail": null,
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://ai.meta.com/research/publications/compute-optimal-tokenization/",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2605.29955",
+          "title": "AutoformBot: Formalizing Mathematics at Scale",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。26 textbooks, thousands of agents; approximately one week per book. Small 39-target ablations use 600M-1200M tokens and hours of runs; full campaign high cost.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "https://arxiv.org/abs/2605.29955: v1 history",
+              "https://arxiv.org/html/2605.29955v1: author affiliations; sections 3-4; section 5.1 week-per-book, 5.2 token-budget ablations",
+              "https://github.com/facebookresearch/autoform-bot: README requirements and MIT license"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://ai.meta.com/research/publications/autoformbot-formalizing-mathematics-at-scale/",
+            "basis": "https://arxiv.org/abs/2605.29955: v1 history; https://arxiv.org/html/2605.29955v1: author affiliations; sections 3-4; section 5.1 week-per-book, 5.2 token-budget ablations; https://github.com/facebookresearch/autoform-bot: README requirements and MIT license",
+            "scale": "26 textbooks, thousands of agents; approximately one week per book. Small 39-target ablations use 600M-1200M tokens and hours of runs; full campaign high cost.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": "autoformbot",
+          "catalog_detail": "agent-research/2605.29955-autoformbot/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "agent",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://ai.meta.com/research/publications/autoformbot-formalizing-mathematics-at-scale/",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2607.25970",
+          "title": "Reinforcement Learning for Code Optimization",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。Original section 4: each online RL run uses 8-32 GPU nodes for hours or days; Qwen2.5 7B/32B and CWM32B plus calibrated remote code execution. This is far above one A100/A30.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "docs/paper-audits/2026-historical-candidates.json: 2607.25970 P2/query-collision, full_text_review_required=false",
+              "https://arxiv.org/abs/2607.25970: v1/v2 history",
+              "https://arxiv.org/html/2607.25970v1: author affiliations; sections 3-5; Appendix C timing calibration, D reward composition, E offline simulator, F async GRPO"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://ai.meta.com/research/publications/reinforcement-learning-for-code-optimization/",
+            "basis": "docs/paper-audits/2026-historical-candidates.json: 2607.25970 P2/query-collision, full_text_review_required=false; https://arxiv.org/abs/2607.25970: v1/v2 history; https://arxiv.org/html/2607.25970v1: author affiliations; sections 3-5; Appendix C timing calibration, D reward composition, E offline simulator, F async GRPO",
+            "scale": "Original section 4: each online RL run uses 8-32 GPU nodes for hours or days; Qwen2.5 7B/32B and CWM32B plus calibrated remote code execution. This is far above one A100/A30.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": "code-optimization-rl",
+          "catalog_detail": "post-training/2607.25970-code-optimization-rl/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "post-training",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://ai.meta.com/research/publications/reinforcement-learning-for-code-optimization/",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2609.31644",
+          "title": "MaD-RL: Matching Distributions for Calibrating LLMs with Reinforcement Learning",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。Qwen3-4B: synthetic 6000 updates, G32, 48 runs; math/code 1200 updates, G16 across three datasets and three seeds. No new run proposed.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "https://arxiv.org/abs/2609.31644: Submission history v1",
+              "https://arxiv.org/html/2609.31644v1: author affiliations, sections 2.1-2.5, 3.2 and Appendix C",
+              "docs/experiments/mad-rl-mechanism.md: existing diagnostic and incorrect first-publication field",
+              "src/auto_research/post_training/mad_rl.py",
+              "docs/gpu-validations/mad-rl-qwen-choice-a100-20260929.json",
+              "docs/experiments/evidence/mad-rl-qwen-choice-seeds42-44.json"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/",
+            "basis": "https://arxiv.org/abs/2609.31644: Submission history v1; https://arxiv.org/html/2609.31644v1: author affiliations, sections 2.1-2.5, 3.2 and Appendix C; docs/experiments/mad-rl-mechanism.md: existing diagnostic and incorrect first-publication field; src/auto_research/post_training/mad_rl.py; docs/gpu-validations/mad-rl-qwen-choice-a100-20260929.json; docs/experiments/evidence/mad-rl-qwen-choice-seeds42-44.json",
+            "scale": "Qwen3-4B: synthetic 6000 updates, G32, 48 runs; math/code 1200 updates, G16 across three datasets and three seeds. No new run proposed.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": "mad-rl",
+          "catalog_detail": "post-training/2609.31644-mad-rl/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "post-training",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.04109",
+          "title": "SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。§4 六个领域、四种闭源大模型（Gemini3.1 Pro/Flash、Claude4.6 Sonnet/4.8 Opus），多轮网络检索、LEAF事实核验及时间序列回测。完整同协议成本在当前单卡/本机预算不可廉价核定；估计不是实测。",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, temporal isolation, setup and official release passages.",
+            "source_locations": [
+              "arXiv abs Submission history v1",
+              "HTML author affiliation block",
+              "§3.2 Eq.1-3",
+              "§3.3 Eq.4-6 and Backtesting Protocol",
+              "§4.1 Table1 and Implementation",
+              "https://github.com/BennyTMT/SEER root directory and README"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.04109v1",
+            "basis": "arXiv abs Submission history v1; HTML author affiliation block; §3.2 Eq.1-3; §3.3 Eq.4-6 and Backtesting Protocol; §4.1 Table1 and Implementation; https://github.com/BennyTMT/SEER root directory and README",
+            "scale": "§4 六个领域、四种闭源大模型（Gemini3.1 Pro/Flash、Claude4.6 Sonnet/4.8 Opus），多轮网络检索、LEAF事实核验及时间序列回测。完整同协议成本在当前单卡/本机预算不可廉价核定；估计不是实测。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/google-audit.json",
+          "catalog_key": "seer-forecasting",
+          "catalog_detail": "agent-research/2610.04109-seer-forecasting/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "agent",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Google",
+              "source_url": "https://arxiv.org/html/2610.04109v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.05417",
+          "title": "Render to Reason: Novel-View Semantic Prediction Improves Spatial Understanding in VLMs",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。AppendixA.1:8GH200;4B variants12h,InternVL8B30h,Qwen3VL8B96h per training configuration, plus ablations.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "docs/paper-discovery-ledger.json: exact id in old deferred record",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+              "https://arxiv.org/html/2610.05417v1: AppendixA.1 training configuration and wall clock"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.05417v1",
+            "basis": "docs/paper-discovery-ledger.json: exact id in old deferred record; docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations; https://arxiv.org/html/2610.05417v1: AppendixA.1 training configuration and wall clock",
+            "scale": "AppendixA.1:8GH200;4B variants12h,InternVL8B30h,Qwen3VL8B96h per training configuration, plus ablations.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": null,
+          "catalog_detail": null,
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.05417v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.07338",
+          "title": "Logbook: Extremely Long-form Audio Event Understanding",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。52 systems; Table1 test audio82.1h+240.6h+148.9h, full cascaded/LLM fact+entailment evaluation. Full campaign high cost.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "docs/paper-discovery-ledger.json: exact id in old deferred record",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+              "https://arxiv.org/html/2610.07338v1: sections2.2-2.4 Table1",
+              "https://arxiv.org/html/2610.07338v1: sections3-5 systems/evaluation"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.07338v1",
+            "basis": "docs/paper-discovery-ledger.json: exact id in old deferred record; docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations; https://arxiv.org/html/2610.07338v1: sections2.2-2.4 Table1; https://arxiv.org/html/2610.07338v1: sections3-5 systems/evaluation",
+            "scale": "52 systems; Table1 test audio82.1h+240.6h+148.9h, full cascaded/LLM fact+entailment evaluation. Full campaign high cost.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": null,
+          "catalog_detail": null,
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.07338v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.09015",
+          "title": "Personalize at Test Time: Learning User Preferences for Image Generation",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。50000 images annotated by72B VLM,36000 evaluator pairs;631users x10images/method,30 diffusion sampling steps x30 DNO updates plus GPT5.5judging.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "docs/paper-discovery-ledger.json: exact id in old deferred record",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+              "https://arxiv.org/html/2610.09015v1: section3.2 evaluator annotation/training",
+              "https://arxiv.org/html/2610.09015v1: section4.4 personalized generation",
+              "https://arxiv.org/html/2610.09015v1: AppendixD DNO"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.09015v1",
+            "basis": "docs/paper-discovery-ledger.json: exact id in old deferred record; docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations; https://arxiv.org/html/2610.09015v1: section3.2 evaluator annotation/training; https://arxiv.org/html/2610.09015v1: section4.4 personalized generation; https://arxiv.org/html/2610.09015v1: AppendixD DNO",
+            "scale": "50000 images annotated by72B VLM,36000 evaluator pairs;631users x10images/method,30 diffusion sampling steps x30 DNO updates plus GPT5.5judging.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": null,
+          "catalog_detail": null,
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.09015v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.09202",
+          "title": "Few Bits, One Law: Toward W2A4KV2",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。AppendixA.1:8H100/A10080GB,up to240000QATupdates/about31.5Btokens plus8K40KcontinuedQAT.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "docs/paper-discovery-ledger.json: exact id in old deferred record",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+              "https://arxiv.org/html/2610.09202v1: section5.1 evaluation setup",
+              "https://arxiv.org/html/2610.09202v1: AppendixA.1 optimization"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.09202v1",
+            "basis": "docs/paper-discovery-ledger.json: exact id in old deferred record; docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations; https://arxiv.org/html/2610.09202v1: section5.1 evaluation setup; https://arxiv.org/html/2610.09202v1: AppendixA.1 optimization",
+            "scale": "AppendixA.1:8H100/A10080GB,up to240000QATupdates/about31.5Btokens plus8K40KcontinuedQAT.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": null,
+          "catalog_detail": null,
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.09202v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.09440",
+          "title": "Mixture of Layers: Dynamic Layer Routing for Visual Reasoning",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。AppendixB:4H100NVL training,558K+665K LLaVA or2M Bunny data;13B/8B backbones and multiple routers/ablations.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "docs/paper-discovery-ledger.json: exact id in old deferred record",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+              "https://arxiv.org/html/2610.09440v1: AppendixB hardware and Table7 training recipes"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.09440v1",
+            "basis": "docs/paper-discovery-ledger.json: exact id in old deferred record; docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations; https://arxiv.org/html/2610.09440v1: AppendixB hardware and Table7 training recipes",
+            "scale": "AppendixB:4H100NVL training,558K+665K LLaVA or2M Bunny data;13B/8B backbones and multiple routers/ablations.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": null,
+          "catalog_detail": null,
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.09440v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.10990",
+          "title": "Omni-Diffusion-Distill: Few-Step Distillation of Unified Multimodal Diffusion Large Language Models",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。AppendixC.2 Table7:32A100,total110.8h/3546GPU-hours including teacher collection and2trainingstages.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "docs/paper-discovery-ledger.json: exact id in old deferred record",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+              "https://arxiv.org/html/2610.10990v1: AppendixC.2 Tables7-8"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.10990v1",
+            "basis": "docs/paper-discovery-ledger.json: exact id in old deferred record; docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations; https://arxiv.org/html/2610.10990v1: AppendixC.2 Tables7-8",
+            "scale": "AppendixC.2 Table7:32A100,total110.8h/3546GPU-hours including teacher collection and2trainingstages.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": null,
+          "catalog_detail": null,
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.10990v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.11019",
+          "title": "Mid-Training Language Models on Raw Video",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。Original section4.1.4: end-to-end27300updates over128H100, batch256,16kcontext, plus matched instruction tuning. No download or run.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "https://arxiv.org/abs/2610.11019: v1 history",
+              "https://arxiv.org/html/2610.11019v1: affiliations; section3 next-token objective; section4.1.4 training",
+              "https://jd730.github.io/projects/RawVideoMidTraining/: project source links",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: not_catalogued"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.11019v1",
+            "basis": "https://arxiv.org/abs/2610.11019: v1 history; https://arxiv.org/html/2610.11019v1: affiliations; section3 next-token objective; section4.1.4 training; https://jd730.github.io/projects/RawVideoMidTraining/: project source links; docs/research-audits/oct15-review-closure/implementation-status.json: not_catalogued",
+            "scale": "Original section4.1.4: end-to-end27300updates over128H100, batch256,16kcontext, plus matched instruction tuning. No download or run.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": "raw-video-midtraining",
+          "catalog_detail": "multimodal-models/2610.11019-raw-video-midtraining/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.11019v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.11316",
+          "title": "MetaEncoder: Exploring the Limit of Bi-Encoders for Multimodal System One Decision Making with Natural Language Interface",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。Official eval README: 30B model about62GB bf16 per GPU, intended8x80GB; several hundredGB MMEB-V2 data,190tasks. No download or run.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "https://arxiv.org/abs/2610.11316: v1 history",
+              "https://arxiv.org/html/2610.11316v1: author block; sections3.1-3.3 and4",
+              "https://github.com/facebook/meta-encoder-eval: README setup, resource and data requirements",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: not_catalogued"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.11316v1",
+            "basis": "https://arxiv.org/abs/2610.11316: v1 history; https://arxiv.org/html/2610.11316v1: author block; sections3.1-3.3 and4; https://github.com/facebook/meta-encoder-eval: README setup, resource and data requirements; docs/research-audits/oct15-review-closure/implementation-status.json: not_catalogued",
+            "scale": "Official eval README: 30B model about62GB bf16 per GPU, intended8x80GB; several hundredGB MMEB-V2 data,190tasks. No download or run.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": "metaencoder",
+          "catalog_detail": "foundation-models/2610.11316-metaencoder/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.11316v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.13886",
+          "title": "X-AgentRed: Red-Teaming Personal Agents in Evolving Multi-Service Ecosystems",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。4frontier target agents x250scenarios,30services914tools; Opus4.8simulator/redteam,dualjudge;22.10generationAPIcalls/scenario excludes execution/judging; costs multiply for baselines.",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, implementation and resource passages; not every article section.",
+            "source_locations": [
+              "docs/paper-discovery-ledger.json: exact id in old deferred record",
+              "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+              "https://arxiv.org/html/2610.13886v1: sections4.1 and4.6",
+              "https://arxiv.org/html/2610.13886v1: AppendixB.4 generation cost accounting"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.13886v1",
+            "basis": "docs/paper-discovery-ledger.json: exact id in old deferred record; docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations; https://arxiv.org/html/2610.13886v1: sections4.1 and4.6; https://arxiv.org/html/2610.13886v1: AppendixB.4 generation cost accounting",
+            "scale": "4frontier target agents x250scenarios,30services914tools; Opus4.8simulator/redteam,dualjudge;22.10generationAPIcalls/scenario excludes execution/judging; costs multiply for baselines.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/meta-audit.json",
+          "catalog_key": null,
+          "catalog_detail": null,
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "foundation-model",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Meta",
+              "source_url": "https://arxiv.org/html/2610.13886v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.15150",
+          "title": "Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses",
+          "priority": "P0",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。正文 §5 采用 Gemini 3.6 Flash proposer/solver；SecRepoBench 30/30/30 和 BaxBench 28/28/28，三次独立运行；Appendix G 展示5子问题×3代/6子问题×4代；Appendix I 明确 Docker build/exploit 主导耗时。费用为依据论文规模的估计，未启动实跑。",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "review_scope": "bounded_method_and_resource_review",
+          "full_article_read": false,
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named method, evaluation, implementation and cost passages; not every appendix proof or prompt.",
+            "source_locations": [
+              "arXiv abs Submission history v1",
+              "HTML author affiliation block",
+              "§3 Eq.3 selection on search split",
+              "§4.1 Eq.4-6",
+              "§4.2-4.3",
+              "§5 / Appendix C repeats",
+              "Appendix G",
+              "Appendix I Cost"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.15150v1",
+            "basis": "arXiv abs Submission history v1; HTML author affiliation block; §3 Eq.3 selection on search split; §4.1 Eq.4-6; §4.2-4.3; §5 / Appendix C repeats; Appendix G; Appendix I Cost",
+            "scale": "正文 §5 采用 Gemini 3.6 Flash proposer/solver；SecRepoBench 30/30/30 和 BaxBench 28/28/28，三次独立运行；Appendix G 展示5子问题×3代/6子问题×4代；Appendix I 明确 Docker build/exploit 主导耗时。费用为依据论文规模的估计，未启动实跑。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "review_artifact": "research-audits/harness2-priority-repair/google-audit.json",
+          "catalog_key": "harmony-harness",
+          "catalog_detail": "agent-research/2610.15150-harmony-harness/README.md",
+          "low_cost_component_implemented_in_this_mr": false,
+          "track": "agent",
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Google",
+              "source_url": "https://arxiv.org/html/2610.15150v1",
+              "source_kind": "primary-method-and-cost-review"
+            }
+          ]
+        },
+        {
+          "id": "2610.14224",
+          "title": "Harness²: Recursive Agent Harnessing for an Open World",
+          "track": "agent",
+          "priority": "P0",
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "resolution": "cpu_controller_component_only_full_experiment_not_reproduced_high_cost",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "Harness² CPU双层递归控制器和接口已实现；确定性editor/selector仅L1机制，非模型能力或Evolve集成。完整模型/API基准成本过高，不复现（审查 DONE）。",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_text_review": {
+            "scope": "full-text",
+            "source_locations": [
+              "https://arxiv.org/html/2610.14224v1: sections2.1-2.3,3.1,AppendixD",
+              "https://github.com/google-research/harness2/tree/1cfe254e8d25b15f37048c3730134686abe60335: recursion,selection,library"
+            ],
+            "full_article_read": false
+          },
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.14224v1",
+            "basis": "section3.1, AppendixB/D and official benchmark setup",
+            "scale": "Three benchmarks, four executor/harness configurations, multiple recursion budgets and three task-order runs; 4k rollouts/3k edits per task plus selection/reflection/judging and paid APIs",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "cost_type": "published_configuration_not_local_measurement"
+          },
+          "catalog_key": "harness2",
+          "key": "harness2",
+          "doc": "agent-research/2610.14224-harness2/README.md",
+          "catalog_detail": "agent-research/2610.14224-harness2/README.md",
+          "metrics_artifact": "agent-research/2610.14224-harness2/metrics/component-cpu-seeds42-44.json",
+          "requires_gpu_validation": false,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "matched_queries": [],
+          "source_provenance": [
+            {
+              "organization": "Google",
+              "source_url": "https://github.com/google-research/harness2",
+              "source_kind": "official-repository"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,30 @@
+{
+  "domain": "agent-research",
+  "key": "harmony-harness",
+  "title": "Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses",
+  "paper_url": "https://arxiv.org/abs/2610.15150v1",
+  "detail_path": "agent-research/2610.15150-harmony-harness/README.md",
+  "topic": [
+    "自进化与经验复用",
+    "多目标Harness演化"
+  ],
+  "first_author": "Weichen Yu",
+  "first_author_affiliation": "Google Cloud AI Research / Carnegie Mellon University",
+  "published": "2026-10-10",
+  "published_at": "2026-10-10T20:06:59Z",
+  "code": null,
+  "code_status": "未在所读论文/官方摘要中找到作者实现仓库；有匿名结果可视化，不等于开源算法代码",
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "正文 §5 采用 Gemini 3.6 Flash proposer/solver；SecRepoBench 30/30/30 和 BaxBench 28/28/28，三次独立运行；Appendix G 展示5子问题×3代/6子问题×4代；Appendix I 明确 Docker build/exploit 主导耗时。费用为依据论文规模的估计，未启动实跑。 成本过高，不复现（审查 DONE）。",
+  "summary": "将功能和安全作为独立目标，以MOEA/D分解搜索保留不同权衡；工具、技能、逻辑再按通用与环境范围演化，推理时动态组合，而非把安全折成单个奖励。仅资料收录，完整实验不复现。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

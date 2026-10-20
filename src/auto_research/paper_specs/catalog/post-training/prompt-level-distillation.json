@@ -1,0 +1,30 @@
+{
+  "domain": "post-training",
+  "key": "prompt-level-distillation",
+  "title": "Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning",
+  "paper_url": "https://arxiv.org/abs/2602.21103v1",
+  "detail_path": "post-training/2602.21103-prompt-level-distillation/README.md",
+  "topic": [
+    "Context distillation",
+    "提示级非参数蒸馏"
+  ],
+  "first_author": "Sanket Badhe",
+  "first_author_affiliation": "Google",
+  "published": "2026-02-24",
+  "published_at": "2026-02-24T17:03:21Z",
+  "code": null,
+  "code_status": "所读原文未找到作者实现仓库",
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "§4 Gemini3Flash提取、Gemini3Pro规则合成/冲突修复、GeminiEmbedding；Gemma3-4B/Gemini2Flash在多个数据集多轮推理。闭源API全流程成本无法廉价固定，按预算门槛关闭完整实验，不下载大模型探成本。 成本过高，不复现（审查 DONE）。",
+  "summary": "教师从带标签训练样本中抽象推理指令，经语义DBSCAN聚类与合成，利用训练错误修复规则冲突，最终把整套规则注入学生系统提示；不更新学生参数。仅资料收录，完整实验不复现。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

@@ -28,6 +28,7 @@ from auto_research.papers import ArxivClient, canonical_arxiv_id
 from auto_research.models import Paper
 from auto_research.discovery_checkpoint import atomic_json, coverage_summary
 from auto_research.discovery_watermark import partition_archived_official_reviews
+from auto_research.discovery_review import priority_organizations
 
 
 def effective_start_date(
@@ -53,8 +54,19 @@ def effective_start_date(
 def external_paper_in_window(
     paper: Paper, provenance: dict[str, list[dict]], *,
     start_date: dt.date, end_date: dt.date,
+    repository_statuses: dict[str, str] | None = None,
 ) -> bool:
+    if paper.published and dt.date.fromisoformat(paper.published[:10]) > end_date:
+        return False
     if paper_is_in_window(paper, start_date=start_date, end_date=end_date):
+        return True
+    identity = canonical_arxiv_id(paper.arxiv_id)
+    if (repository_statuses is not None
+            and repository_statuses.get(identity, "new") in {"new", "implementation-pending"}
+            and priority_organizations({"source_provenance": provenance.get(identity, ())})):
+        # The official source may reveal an older paper for the first time.
+        # It belongs to historical backfill, not today's publication count, but
+        # an absent substantive review cannot be manufactured by the date filter.
         return True
     return any(
         start_date <= dt.date.fromisoformat(item["source_published"]) <= end_date
@@ -136,6 +148,7 @@ def main() -> int:
         announcement_overlap_days=args.announcement_overlap_days,
     )
     queries = queries_for_track(args.track)
+    statuses = repository_paper_statuses(Path(args.manifest), Path(args.ledger))
     client = ArxivClient(
         minimum_interval_seconds=3.0,
         maximum_retries=5,
@@ -187,9 +200,9 @@ def main() -> int:
         )
         external = [paper for paper in external if external_paper_in_window(
             paper, provenance, start_date=start_date, end_date=args.end_date,
+            repository_statuses=statuses,
         )]
         papers = merge_external_candidates(papers, external, provenance)
-    statuses = repository_paper_statuses(Path(args.manifest), Path(args.ledger))
     candidates = triage_candidates(
         papers, statuses, repository_versions=repository_paper_versions(args.reviewed_versions),
     )

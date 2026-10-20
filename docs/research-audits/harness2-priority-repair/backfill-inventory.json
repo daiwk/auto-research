@@ -1,0 +1,803 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-20",
+  "scope": "Recorded priority historical source inventory, not all papers or all sources",
+  "all_sources_exhaustive": false,
+  "review_watermark_advanced": false,
+  "frozen_review_snapshots_modified": false,
+  "automatic_implementation_queue": false,
+  "counts": {
+    "scoped_identified_papers": 83,
+    "scoped_current_statuses": {
+      "implemented": 7,
+      "new": 54,
+      "reviewed": 22
+    },
+    "all_ledger_date_only_unique_identities": 198,
+    "all_ledger_unclosed_pending_delivery_identities": 521
+  },
+  "papers": [
+    {
+      "id": "2405.02699",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2507.23590",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2509.22963",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2510.03217",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2510.17670",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2511.02767",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2511.03782",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2511.10865",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2511.11552",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2601.00372",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2601.19066",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2601.21149",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2601.22101",
+      "priority_source_signals": [
+        "Google collaboration confirmed in author block",
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.02164",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.02660",
+      "priority_source_signals": [
+        "Google collaboration confirmed in author block"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.02690",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.06276",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.06855",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.07266",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.07918",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.12481",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.16173",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "implemented",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.16938",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.17554",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2602.21103",
+      "priority_source_signals": [
+        "Google collaboration confirmed in author block",
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.01293",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.06397",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "implemented",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.06981",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.10465",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.14609",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.14769",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.19461",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "implemented",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.24591",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.26499",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "implemented",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.28896",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.29470",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2603.29791",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2604.05364",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2604.09803",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2604.18547",
+      "priority_source_signals": [
+        "Google collaboration confirmed in author block",
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2604.20329",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2604.23099",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2604.27723",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2604.27733",
+      "priority_source_signals": [
+        "Google collaboration confirmed in author block",
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2605.01188",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2605.03767",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2605.06647",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "implemented",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2605.26340",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2605.29729",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2605.29955",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2605.30174",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2605.30322",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2606.00131",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2606.00369",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2606.03237",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2606.12683",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2607.02515",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2607.03906",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2607.13614",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2607.20268",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2607.25537",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2607.25970",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2608.05578",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2608.11367",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2608.25924",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2609.01588",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2609.01834",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2609.12464",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "new",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2609.28776",
+      "priority_source_signals": [
+        "Google/DeepMind official source"
+      ],
+      "current_repository_status": "implemented",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2609.31644",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.04109",
+      "priority_source_signals": [
+        "Google collaboration confirmed in author block"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [
+        {
+          "batch": "2026-10-15-review-closure-agent",
+          "id": "2610.04109",
+          "title": "SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting",
+          "track": "agent",
+          "review_artifact": "research-audits/oct15-review-closure/agent-reviews.json"
+        }
+      ],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.05417",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.07338",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.09015",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.09202",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.09440",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.10990",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.11019",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.11316",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.13886",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.14224",
+      "priority_source_signals": [
+        "Google official repository; first author Northwestern University"
+      ],
+      "current_repository_status": "implemented",
+      "historical_metadata_observations": [
+        {
+          "batch": "2026-10-15-review-closure-agent",
+          "id": "2610.14224",
+          "title": "Harness^2: Recursive Agent Harnessing for an Open World",
+          "track": "agent",
+          "review_artifact": "research-audits/oct15-review-closure/agent-reviews.json"
+        }
+      ],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.15150",
+      "priority_source_signals": [
+        "Google collaboration confirmed in author block"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [
+        {
+          "batch": "2026-10-15-review-closure-agent",
+          "id": "2610.15150",
+          "title": "Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses",
+          "track": "agent",
+          "review_artifact": "research-audits/oct15-review-closure/agent-reviews.json"
+        }
+      ],
+      "pending_delivery_observation": null
+    },
+    {
+      "id": "2610.24628",
+      "priority_source_signals": [
+        "Meta official source or named prior review"
+      ],
+      "current_repository_status": "reviewed",
+      "historical_metadata_observations": [],
+      "pending_delivery_observation": null
+    }
+  ],
+  "interpretation": [
+    "new means no substantive terminal decision or current catalog, not newly published today.",
+    "implementation-pending is visible work, not an implementation or a terminal cost decision.",
+    "reviewed high-cost papers remain terminal; no costly experiment is automatically retried.",
+    "The historical ledger-wide pending count is exposed, not accepted as work to implement in this MR.",
+    "Official organization signals do not replace first-author affiliation verification."
+  ]
+}

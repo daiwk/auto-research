@@ -11,7 +11,9 @@ authority for implementation and industrial online-evidence decisions.
 from __future__ import annotations
 
 from collections import Counter
+import re
 from typing import Iterable
+from urllib.parse import urlparse
 
 
 TRACK_ANCHORS: dict[str, tuple[str, ...]] = {
@@ -34,6 +36,122 @@ TRACK_ANCHORS: dict[str, tuple[str, ...]] = {
 }
 
 PRIORITY_QUERY_PREFIXES = ("priority-org-google", "priority-org-google-deepmind", "priority-org-meta")
+METADATA_ONLY_REVIEW_SCOPES = frozenset({
+    "historical_metadata_identity_date_scope_only", "identity_date_only", "metadata-only",
+})
+METADATA_ONLY_RESOLUTIONS = frozenset({"historical_first_publication", "historical_metadata_only"})
+TERMINAL_EXCEPTION_RESOLUTIONS = frozenset({
+    "not_reproduced_high_cost", "deferred_high_cost", "source_unavailable_archived",
+    "source_exception_archived", "archived_unconfirmed_not_blocking",
+})
+
+
+def metadata_only_disposition(candidate: dict) -> bool:
+    """An old publication date is bookkeeping, not a substantive rejection.
+
+    Frozen historical snapshots keep their original labels. Consumers must not
+    promote those labels to an algorithm/cost review merely because review_done
+    was set. Explicit cost and unavailable-source decisions are not date-only.
+    """
+    if candidate.get("resolution") in TERMINAL_EXCEPTION_RESOLUTIONS:
+        return False
+    return (
+        candidate.get("resolution") in METADATA_ONLY_RESOLUTIONS
+        or candidate.get("review_scope") in METADATA_ONLY_REVIEW_SCOPES
+        or candidate.get("review_level") == "historical_metadata_abstract_scope_triage"
+    )
+
+
+def pending_implementation_disposition(candidate: dict) -> bool:
+    """Retain accepted-but-undelivered legacy rows outside the closed queue.
+
+    Structured acceptance is authoritative. A narrow legacy phrase fallback
+    handles older rows that only recorded their next implementation step in the
+    reason. Explicit cost/source terminal resolutions always take precedence.
+    """
+    if candidate.get("resolution") in TERMINAL_EXCEPTION_RESOLUTIONS:
+        return False
+    if (candidate.get("review_decision") == "accepted"
+            and candidate.get("implementation_status") in {"not_implemented", "pending"}):
+        return True
+    return candidate.get("status") == "deferred" and bool(re.search(
+        r"待核心算法实现|待实现|下一批须|下一批优先|保留下一批|pending implementation|awaiting implementation",
+        str(candidate.get("reason", "")), re.I,
+    ))
+
+
+def disposition_rank(candidate: dict) -> int:
+    """Merge observations without allowing generic 'known' to close delivery.
+
+    0: discovery/date observation; 1: legacy generic terminal label;
+    2: accepted, delivery pending; 3: explicit substantive/cost/source closure.
+    Catalog entries are assigned rank 4 by the repository loader. A legacy cost
+    reason is retained, not silently reclassified into an expensive retry.
+    """
+    if candidate.get("status") not in {"implemented", "rejected", "deferred"}:
+        return 0
+    if candidate.get("resolution") in TERMINAL_EXCEPTION_RESOLUTIONS:
+        return 3
+    if metadata_only_disposition(candidate):
+        return 0
+    legacy_cost = bool(re.search(r"成本过高|not reproduced.{0,20}(?:cost|budget)|high[- ]cost",
+                                 str(candidate.get("reason", "")), re.I))
+    if legacy_cost:
+        return 3
+    if pending_implementation_disposition(candidate):
+        return 2
+    review = candidate.get("full_text_review", {})
+    substantive_review = (isinstance(review, dict) and review.get("scope") == "full-text"
+                          and bool(review.get("source_locations")))
+    if substantive_review:
+        return 3
+    return 1
+
+
+def priority_organizations(candidate: dict) -> tuple[str, ...]:
+    """Recall priority from provenance, not abstract mentions or one query name.
+
+    This is a review signal, never proof of authorship. Institution membership
+    and paper eligibility still need primary-source review. Parse URL hosts and
+    GitHub owners exactly, so lookalike domains cannot acquire priority.
+    """
+    found: set[str] = set()
+
+    def organization(value):
+        value = str(value or "")
+        if re.search(r"\b(?:google|deepmind|youtube)\b", value, re.I):
+            found.add("Google")
+        if re.search(r"\b(?:meta|facebook|instagram)\b", value, re.I):
+            found.add("Meta")
+
+    for query in candidate.get("matched_queries", ()):
+        for prefix in PRIORITY_QUERY_PREFIXES:
+            if query == prefix or query.startswith(prefix + "-"):
+                found.add("Meta" if prefix.endswith("meta") else "Google")
+    for field in ("organization", "first_author_affiliation"):
+        organization(candidate.get(field))
+    for source in candidate.get("source_provenance", ()):
+        organization(source.get("organization"))
+        for field in ("source_url", "url", "repository_url"):
+            parsed = urlparse(str(source.get(field, "")))
+            host = (parsed.hostname or "").lower()
+            if host in {"research.google", "deepmind.google", "research.google.com"}:
+                found.add("Google")
+            if host in {"ai.meta.com", "ai.facebook.com", "research.facebook.com", "research.meta.com"}:
+                found.add("Meta")
+            if host in {"github.com", "www.github.com"}:
+                owner = parsed.path.strip("/").split("/", 1)[0].lower()
+                if owner in {"google", "google-research", "google-deepmind", "deepmind"}:
+                    found.add("Google")
+                if owner in {"facebook", "facebookresearch", "meta-llama", "meta-recsys"}:
+                    found.add("Meta")
+    return tuple(sorted(found))
+
+
+def priority_review_signal(candidate: dict) -> bool:
+    return bool(candidate.get("priority_review_required") or priority_organizations(candidate))
+
+
 INDUSTRIAL_EVIDENCE_ANCHORS = (
     "online a/b", "online ab", "a/b test", "production a/b", "deployed in production",
     "fully deployed", "global traffic", "live traffic", "online experiment",
@@ -52,14 +170,16 @@ def classify_candidate(track: str, candidate: dict) -> dict:
     text = f"{candidate.get('title', '')}\n{candidate.get('abstract', '')}".lower()
     anchors = tuple(anchor for anchor in TRACK_ANCHORS[track] if anchor in text)
     industrial_evidence = tuple(anchor for anchor in INDUSTRIAL_EVIDENCE_ANCHORS if anchor in text)
-    priority = bool(candidate.get("priority_review_required")) or any(
-        query == prefix or query.startswith(prefix + "-")
-        for query in matched_queries
-        for prefix in PRIORITY_QUERY_PREFIXES
-    )
+    priority = priority_review_signal(candidate)
     if candidate.get("revision_review_required"):
         bucket = "revision-fulltext-review"
         reason = "known paper revision requires independent full-text review; not a new v1"
+    elif candidate.get("repository_status") == "implementation-pending":
+        bucket = "implementation-pending"
+        reason = "method review accepted but delivery is not closed; assess cost or implement separately"
+    elif candidate.get("historical_review_required"):
+        bucket = "priority-fulltext-review" if priority else "historical-fulltext-review"
+        reason = "historical identity/date triage is not a completed method or cost review"
     elif candidate.get("repository_status") != "new":
         bucket = "already-closed"
         reason = f"repository status is {candidate.get('repository_status')}"
@@ -86,7 +206,7 @@ def classify_candidate(track: str, candidate: dict) -> dict:
         "matched_industrial_evidence_anchors": list(industrial_evidence),
         "full_text_review_required": bucket in {
             "priority-fulltext-review", "industrial-fulltext-review", "manual-review",
-            "revision-fulltext-review"
+            "revision-fulltext-review", "historical-fulltext-review",
         },
     }
 
@@ -109,5 +229,6 @@ def unresolved_candidates(artifacts: Iterable[dict]) -> list[dict]:
         for row in artifact.get("candidates", [])
         if row.get("full_text_review_required") and (
             row.get("repository_status") == "new" or row.get("revision_review_required")
+            or row.get("historical_review_required")
         )
     ]
