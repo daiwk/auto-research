@@ -72,4 +72,15 @@ def test_new_october_entries_remain_date_descending_after_normal_sort(tmp_path):
     links = re.findall(r"\]\((\.\./[^)]+)\)", october)
     dates = [module._paper_date(link) for link in links]
     assert dates == sorted(dates, reverse=True)
-    assert dates[:4] == ["2026-10-14", "2026-10-12", "2026-10-12", "2026-10-10"]
+    # Freeze the Oct14 batch, not its global prefix position: later submissions
+    # must be allowed ahead of it while ALL current entries remain descending.
+    historical = {
+        "../2610.20293-casi/README.md": "2026-10-14",
+        "../2610.16132-unisgr-v2/README.md": "2026-10-12",
+        "../2610.16979-wegr/README.md": "2026-10-12",
+        "../2610.14550-snap-dpa-relevance/README.md": "2026-10-10",
+    }
+    assert all(links.count(link) == 1 for link in historical)
+    historical_dates = [module._paper_date(link) for link in links if link in historical]
+    assert historical_dates == ["2026-10-14", "2026-10-12", "2026-10-12", "2026-10-10"]
+    assert all(module._paper_date(link) == date for link, date in historical.items())
