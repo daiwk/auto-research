@@ -825,6 +825,45 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "video-encoder-selection": ("多模态基础模型", "视频理解与 token 压缩"),
+        "adamw4bit": ("预训练与数据", "优化器与训练稳定性"),
+        "af-muon": ("预训练与数据", "优化器与训练稳定性"),
+        "agentkv": ("推理与系统效率", "Agent 推理与 KV cache"),
+        "aspire": ("推理与系统效率", "推测解码与 KV cache"),
+        "chinese-jev": ("推理与系统效率", "System One / JEV 与结构化决策"),
+        "criticl": ("推理与系统效率", "上下文学习与自适应推理"),
+        "dqwen35": ("网络架构", "扩散与生成式模型"),
+        "eco-optimizer": ("预训练与数据", "优化器与训练稳定性"),
+        "frac-ssm": ("注意力与长上下文", "线性注意力与状态空间"),
+        "frames-on-demand": ("多模态基础模型", "视频理解与 token 压缩"),
+        "fuse-verifiers": ("推理与系统效率", "验证器与结果集成"),
+        "gemini-for-google": ("预训练与数据", "企业数据与领域适配"),
+        "gliclass": ("推理与系统效率", "System One / JEV 与结构化决策"),
+        "hawk": ("多模态基础模型", "视觉语言适配与高效推理"),
+        "irekogpt": ("推理与系统效率", "动态计算与模型压缩"),
+        "jev-regional-transfer": ("推理与系统效率", "System One / JEV 与结构化决策"),
+        "jev-request-audit": ("推理与系统效率", "System One / JEV 与结构化决策"),
+        "leapquant": ("推理与系统效率", "量化"),
+        "lift-feedback": ("网络架构", "循环与弹性深度"),
+        "llm2jev": ("推理与系统效率", "System One / JEV 与结构化决策"),
+        "loopspec": ("推理与系统效率", "推测解码与 KV cache"),
+        "metaencoder": ("多模态基础模型", "自然语言决策编码器"),
+        "ms-gla": ("注意力与长上下文", "线性注意力与状态空间"),
+        "musec": ("预训练与数据", "优化器与训练稳定性"),
+        "mwop": ("多模态基础模型", "视觉语言适配与高效推理"),
+        "oda": ("注意力与长上下文", "KV cache 与上下文压缩"),
+        "omni-embed-mini": ("多模态基础模型", "视觉 token 与跨模态检索"),
+        "omnikvquant": ("推理与系统效率", "量化"),
+        "r4t": ("推理与系统效率", "生成式检索与结构化决策"),
+        "rea": ("注意力与长上下文", "KV cache 与上下文压缩"),
+        "repeat-aware-moe": ("网络架构", "MoE 与动态路由"),
+        "sensenova-u1-5": ("多模态基础模型", "视觉生成与理解"),
+        "stepquant": ("推理与系统效率", "量化"),
+        "swrouter": ("推理与系统效率", "模型路由与动态计算"),
+        "taco-optimizer": ("预训练与数据", "优化器与训练稳定性"),
+        "telescopic-lm": ("网络架构", "循环与弹性深度"),
+        "triadic-linear-attention": ("注意力与长上下文", "线性注意力与状态空间"),
+        "veto": ("多模态基础模型", "视频理解与 token 压缩"),
         "t-muon": ("预训练与数据", "优化器与训练稳定性"),
         "time-jepa": ("多模态基础模型", "JEPA与物理态监督"),
         "kronlstm": ("网络架构", "循环记忆与序列混合"),
@@ -870,7 +909,13 @@ def foundation_rows() -> list[dict[str, str]]:
         "rope-relay": ("推理与系统效率", "推测解码与 KV cache"),
         "cots": ("推理与系统效率", "结构化决策与自适应推理"),
     })
-    return _date_descending(rows + extra)
+    combined = rows + extra
+    expected = {paper["key"] for paper in manifest["papers"] if paper["domain"] == "foundation-models"}
+    observed = {row["key"] for row in combined}
+    if expected != observed or len(combined) != len(observed):
+        raise ValueError(f"foundation browse coverage differs from manifest: missing={sorted(expected - observed)}, "
+                         f"extra={sorted(observed - expected)}; each key must occur once")
+    return _date_descending(combined)
 
 
 def foundation_first_author_affiliation(key: str, organization: str) -> str:

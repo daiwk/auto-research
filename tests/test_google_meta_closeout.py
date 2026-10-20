@@ -6,6 +6,7 @@ from pathlib import Path
 from auto_research.discovery import repository_paper_records
 from auto_research.gpu_validation import load_gpu_receipt
 from scripts.sync_google_meta_closeout import BATCH, build_batch
+from scripts.generate_research_catalogs import foundation_rows, render_foundation_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "docs/research-audits/google-meta-closeout-20261021"
@@ -71,3 +72,15 @@ def test_actual_gpu_evidence_retains_specguard_negative_results():
     assert hashlib.sha256(manifest.read_bytes()).hexdigest() == video["dataset"]["manifest_sha256"]
     assert set(read(manifest)) == {"dataset_id", "dataset_revision", "examples"}
     assert not {"answer", "gold"}.intersection(read(manifest)["examples"][0])
+
+
+def test_all_foundation_catalog_entries_have_every_browse_dimension_once():
+    expected = {paper["key"] for paper in read(ROOT / "docs/research-manifest.json")["papers"]
+                if paper["domain"] == "foundation-models"}
+    rows = foundation_rows()
+    assert len(rows) == len(expected) == len({row["key"] for row in rows})
+    assert {row["key"] for row in rows} == expected
+    for dimension in ("organization", "topic", "year"):
+        text = render_foundation_catalog(dimension)
+        for key in expected:
+            assert text.count(f"（`{key}`）") == 1, (dimension, key)
