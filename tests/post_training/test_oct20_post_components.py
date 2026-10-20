@@ -127,6 +127,29 @@ def test_tar_fps_filters_wrong_responses_and_selects_original_indices():
         tar.farthest_point_prototypes(torch.zeros(2, 3), torch.ones(2, dtype=torch.bool))
 
 
+def test_tar_fps_rejects_finite_vectors_with_overflowed_norms():
+    embeddings = torch.tensor([[1e308, 1e308], [1., 0.]], dtype=torch.float64)
+    assert embeddings.isfinite().all() and not embeddings[0].norm().isfinite()
+    with pytest.raises(ValueError, match="representable norms"):
+        tar.farthest_point_prototypes(embeddings, torch.ones(2, dtype=torch.bool), initial_index=0)
+    # Nonzero vectors with small but representable norms still normalize to unit length.
+    small = torch.tensor([[1e-10, 0.], [0., 1e-10], [-1e-10, 0.]], dtype=torch.float32)
+    assert tar.farthest_point_prototypes(small, torch.ones(3, dtype=torch.bool), initial_index=0) == [0, 2, 1]
+
+
+@pytest.mark.parametrize("current,base", [(1., 2.), (-1., .1), (.1, -1.)])
+def test_tar_replay_rejects_positive_active_log_probabilities(current, base):
+    current_logp = torch.tensor([[current, 10.]], dtype=torch.float64, requires_grad=True)
+    base_logp = torch.tensor([[base, 20.]], dtype=torch.float64)
+    with pytest.raises(ValueError, match="nonpositive"):
+        tar.adaptive_replay_loss(current_logp, base_logp, torch.tensor([[True, False]]))
+    # Padding is not a probability observation and is excluded by the actor mask.
+    valid_current = torch.tensor([[-abs(current), 10.]], dtype=torch.float64)
+    valid_base = torch.tensor([[-abs(base), 20.]], dtype=torch.float64)
+    value, _ = tar.adaptive_replay_loss(valid_current, valid_base, torch.tensor([[True, False]]))
+    assert value >= 0
+
+
 def test_tar_two_detached_soft_gates_weighted_denominator_and_all_trajectory_mean():
     current = torch.tensor([[-3., -1., float("nan")], [-.5, -1., -2.]], dtype=torch.float64, requires_grad=True)
     base = torch.tensor([[-1., -2., float("nan")], [-1., -2., -3.]], dtype=torch.float64, requires_grad=True)

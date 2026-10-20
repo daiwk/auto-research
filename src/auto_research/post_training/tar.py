@@ -9,7 +9,6 @@ import math
 
 import torch
 from torch import Tensor
-from torch.nn import functional as F
 
 
 def farthest_point_prototypes(embeddings: Tensor, correct: Tensor, *, limit: int = 3,
@@ -33,8 +32,9 @@ def farthest_point_prototypes(embeddings: Tensor, correct: Tensor, *, limit: int
             raise ValueError("seed prototype must be a correct response")
         return []
     rows = embeddings.detach()[eligible]
-    if not torch.isfinite(rows).all() or bool((rows.norm(dim=1) == 0).any()):
-        raise ValueError("finite nonzero correct-response embeddings required")
+    norms = rows.norm(dim=1)
+    if not torch.isfinite(rows).all() or not torch.isfinite(norms).all() or bool((norms == 0).any()):
+        raise ValueError("finite nonzero correct-response embeddings with representable norms required")
     if initial_index is None:
         first = int(torch.randint(len(eligible), (1,), device=eligible.device))
     else:
@@ -44,7 +44,7 @@ def farthest_point_prototypes(embeddings: Tensor, correct: Tensor, *, limit: int
         if len(matches) != 1:
             raise ValueError("seed prototype must be a correct response")
         first = int(matches[0])
-    normalized = F.normalize(rows, dim=1, eps=torch.finfo(rows.dtype).eps)
+    normalized = rows / norms[:, None]
     distance = (1 - normalized @ normalized.T).clamp(0, 2)
     selected = [first]
     while len(selected) < min(limit, len(eligible)):
@@ -65,6 +65,8 @@ def adaptive_replay_loss(current_logp: Tensor, base_logp: Tensor, actor_mask: Te
         raise ValueError("each replay trajectory needs a Boolean actor mask on one device")
     if not torch.isfinite(current_logp[actor_mask]).all() or not torch.isfinite(base_logp[actor_mask]).all():
         raise ValueError("finite active replay log probabilities required")
+    if bool((current_logp[actor_mask] > 0).any()) or bool((base_logp[actor_mask] > 0).any()):
+        raise ValueError("active replay log probabilities must be nonpositive")
     if not math.isfinite(epsilon) or epsilon <= 0:
         raise ValueError("positive finite denominator safeguard required")
     if current_logp.dtype in (torch.float16, torch.bfloat16):
