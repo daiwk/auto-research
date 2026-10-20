@@ -28,6 +28,9 @@ flowchart LR
 
 以下按“已实现的局部机制”和“待复核候选”区分，不把外部论文直接标为本地复现。
 
+- [Harness²](../agent-research/2610.14224-harness2/README.md)：固定模型、每个新任务重置到共同初始 Harness，在任务内执行 Propose–Probe–Compose，再持久保留有执行对照支撑的改进经验。本地已实现并行/顺序控制器、匿名既有产物选择与同域经验库，实跑 96 次 Python 探针；编辑器和选择器仍是确定性机制替身，不是模型支持的开放世界 RSI，也未接入 Evolve。完整模型/API 基准成本过高，不复现（审查 DONE）。
+- [Harmony Harness](../agent-research/2610.15150-harmony-harness/README.md)：用多目标分解保留功能与安全的不同权衡，并按通用/环境范围演化工具、技能和逻辑。本轮仅资料收录；完整多配置、反复容器构建与漏洞执行的模型实验成本过高，不复现，不是本地可执行 Evolve 算子。
+- [SEER](../agent-research/2610.04109-seer-forecasting/README.md)：对时间序列预测维护检索、筛选和因果经验，在训练回测中等待反馈成熟后更新，测试冻结记忆。本轮仅资料收录；闭源多模型、网络检索和回测完整实验不复现，不将时间隔离协议当作预测能力验证。
 - [RSIFlow](../agent-research/2610.21791-rsiflow/README.md)：可执行冻结父代、M/H/A回调干预、配对接纳和失败经验保留。当前验证固定 meta-program 的数值 fixture，不是自主训练大模型或统一 Evolve 集成。
 - [Terminal-RSI](../agent-research/2610.22192-terminal-rsi/README.md)：已实现跳过 observation 的 TB-GAE、分块续传及 FDR/SPR奖励组件；完整27B训练不复现，也不把主表收益归因于未确认进入该checkpoint的 TB-GAE。
 - [Athanor](../agent-research/2610.21055-athanor/README.md)：自主后训练研究系统的资料收录；原文32卡、104小时研究 campaign成本过高，**完整实验不复现（审查 DONE）**，不是已接入本地的研究执行器。

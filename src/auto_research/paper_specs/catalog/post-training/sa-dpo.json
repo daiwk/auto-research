@@ -1,0 +1,30 @@
+{
+  "domain": "post-training",
+  "key": "sa-dpo",
+  "title": "Mind the Gap: Structure-Aware Consistency in Preference Learning",
+  "paper_url": "https://arxiv.org/abs/2604.27733v1",
+  "detail_path": "post-training/2604.27733-sa-dpo/README.md",
+  "topic": [
+    "直接偏好优化",
+    "语义距离自适应间隔"
+  ],
+  "first_author": "Mehryar Mohri",
+  "first_author_affiliation": "Google Research / Courant Institute of Mathematical Sciences",
+  "published": "2026-04-30",
+  "published_at": "2026-04-30T11:24:04Z",
+  "code": null,
+  "code_status": "所读原文和 Google 官方详情未找到作者代码仓库",
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "§7/Appendix M 使用Llama3-8B LoRA，UltraFeedback20k、1200 steps、batch16，BGE-Large距离与多组基线/五次运行；整组对照估计多小时级，未启动实跑。 成本过高，不复现（审查 DONE）。",
+  "summary": "在DPO隐式奖励差中减去与回答语义距离成比例的margin：含义接近的偏好对不强求固定分离，差异明显的偏好对保留足够间隔，并分析有限容量下surrogate的一致性。仅资料收录，完整实验不复现。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

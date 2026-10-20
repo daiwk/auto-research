@@ -111,6 +111,7 @@
 | 多轮 Agent 对齐 | [Turn-level Multiscale Density Ratio Estimation for LLM Agents](2609.16760-tlm-dre/README.md) | Alibaba Group，2026-09-15 | 未发现官方代码 | `tlm-dre` |
 | On-policy distillation | [Know When to Stop, Where to Restart: Accelerating Multi-Turn Agentic On-Policy Distillation](2609.14636-stride-opd/README.md) | University of Science and Technology of China / Ant Group，2026-09-13 | 未发现官方代码 | `stride-opd` |
 | On-policy distillation | [Data-free On-policy Distillation](2609.14193-df-opd/README.md) | Institute of Automation, Chinese Academy of Sciences / Tencent，2026-09-12 | 未发现官方代码 | `df-opd` |
+| 在线强化学习 | [MaD-RL: Matching Distributions for Calibrating LLMs with Reinforcement Learning](2609.31644-mad-rl/README.md) | Meta Superintelligence Labs，2026-09-12 | 未发现官方代码 | 计划键 `mad-rl`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | On-policy distillation | [A Unified Per-Token Gating Family for On-Policy Distillation: FKL/RKL Mixing with Multi-Channel and Bias Coefficients](2609.11768-adaptive-opd-gate/README.md) | Xiaohongshu，2026-09-10 | 未发现官方代码 | `adaptive-opd-gate` |
 | 测试时适配 | [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](2609.11393-tasco/README.md) | Chongqing University，2026-09-10 | 未发现官方代码 | `tasco` |
 | 低秩后训练 | [LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation](2609.11739-locus/README.md) | University of Washington，2026-09-10 | 未发现官方代码 | `locus` |
@@ -162,6 +163,7 @@
 | 分布保持 RL | [ReCo](2607.26862-reco/README.md) | Seoul National University，2026-07-29 | 未发现官方代码 | `reco-grpo` |
 | Rubric RL | [SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning](2607.26873-serpo/README.md) | Authors did not disclose affiliation，2026-07-29 | 未发现官方代码 | `serpo` |
 | Token-level credit assignment | [CoRT](2607.25659-cort/README.md) | ByteDance internship，2026-07-28 | 未发现官方代码 | `cort` |
+| 在线强化学习 | [Reinforcement Learning for Code Optimization](2607.25970-code-optimization-rl/README.md) | FAIR at Meta / Inria，2026-07-28 | 未发现官方代码 | 计划键 `code-optimization-rl`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | On-policy distillation | [Relay-OPD](2607.26057-relay-opd/README.md) | Zhejiang University，2026-07-28 | [已开源](https://github.com/ZJU-REAL/Relay-OPD) | `relay-opd` |
 | post-training | [Co-Evolving LLM Evaluators and Policies via DynamicRubric](../reproductions/2607.20083-dynamic-rubric/README.md) | WeChat / Tencent，2026-07-22 | 未发现官方代码 | `dynamic-rubric` |
 | 过程奖励 | [TCR](2607.19824-tcr/README.md) | 论文未列机构，2026-07-22 | 未发现官方代码 | `tcr` |
@@ -180,7 +182,9 @@
 | 多目标 RL | [GPRL](2605.18721-gprl/README.md) | Stanford University，2026-05-18 | 未发现官方代码 | `gprl` |
 | 对比序列 RL | [ConSPO](2605.12969-conspo/README.md) | Beijing Institute of Technology，2026-05-13 | 未发现官方代码 | `conspo` |
 | 异步 off-policy | [Missing Old Logits](2605.12070-missing-old-logits/README.md) | Tianjin University，2026-05-12 | 未发现官方代码 | `missing-old-logits` |
+| 直接偏好优化 | [Mind the Gap: Structure-Aware Consistency in Preference Learning](2604.27733-sa-dpo/README.md) | Google Research / Courant Institute of Mathematical Sciences，2026-04-30 | 未发现官方代码 | 计划键 `sa-dpo`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | On-policy distillation | [Lightning OPD](2604.13010-lightning-opd/README.md) | MIT HAN Lab，2026-04-14 | [已开源](https://github.com/jet-ai-projects/Lightning-OPD) | `lightning-opd` |
+| Context distillation | [Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning](2602.21103-prompt-level-distillation/README.md) | Google，2026-02-24 | 未发现官方代码 | 计划键 `prompt-level-distillation`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Context distillation | [OPCD](2602.12275-opcd/README.md) | Microsoft Research，2026-02-12 | [已开源](https://github.com/microsoft/LMOps/tree/main/opcd) | `opcd` |
 | 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | Meituan，2026-02-05 | 未发现官方代码 | `luspo` |
 | On-policy self-distillation | [OPSD](2601.18734-opsd/README.md) | University of California, Los Angeles，2026-01-26 | [已开源](https://github.com/siyan-zhao/OPSD) | `opsd` |

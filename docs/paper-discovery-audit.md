@@ -6,6 +6,12 @@
 
 最新有界选题实现见[2026-10-20批次](research-audits/oct20-components/README.md)：10个低成本组件、3篇高成本资料，六项CUDA路径已做真实A100三种子验收。它与全窗口审查收口分开统计，不把公告条目数当成新论文数，不自行推进水位。
 
+后续发现并修复了历史筛选缺口，见 [Harness² 与 Google/Meta 补漏](research-audits/harness2-priority-repair/README.md)。
+**日期在当前窗口外、发现账本中出现过，不等于完成方法/成本审查。** 冻结记录保留，但
+`historical_first_publication` 等日期初筛不再用于“已审计”去重。已接受但尚未交付的条目
+单列 `implementation-pending`；明确高成本不复现与来源例外仍是终态，不自动重试。
+这次补漏不宣称历史全覆盖，也不自行推进审查水位。
+
 2026-10-01～10-07 的完整候选清单、逐篇审查与补查回执见
 [本批审查收口](research-audits/oct07-review-closure/README.md)。日期窗口查询和月份编号
 补查分别保存；Google 官方目录按页面声明的总页数读取，并报告是否超过配置预算。

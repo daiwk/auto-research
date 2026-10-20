@@ -52,6 +52,11 @@ topic 或当前系统检索证据、并行实验和多轮迭代。两条工作�
 
 ## 已审计的论文实现
 
+[Harness² 与 Google/Meta 历史补漏](docs/research-audits/harness2-priority-repair/README.md)
+补上 Harness² 的低成本双层递归控制器，实际执行 96 次 CPU Python 探针；完整模型/API
+基准成本过高不复现。修正日期初筛和已接受待交付条目被误当成“已结束”的去重漏洞，
+历史补漏与当天新首发分别记录；机制测试不等于模型能力，也未自动接入 Evolve。
+
 [10 月 17 日补审：九个组件、两个评测接口及三篇高成本资料](docs/research-audits/oct17-supplement/README.md)
 补入 Prism-1、LangDiT、OPRD reminder、OpCredit、SSR、RSIFlow、LEASH、PROBE、Terminal-RSI，
 以及 GACC-Bench / Muon 配对预算接口。四项 CUDA 路径已在 A100 完成三种子机制验证；

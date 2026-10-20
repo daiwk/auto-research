@@ -1,0 +1,30 @@
+{
+  "domain": "agent-research",
+  "key": "mars-research",
+  "title": "MARS: Modular Agent with Reflective Search for Automated AI Research",
+  "paper_url": "https://arxiv.org/abs/2602.02660v1",
+  "detail_path": "agent-research/2602.02660-mars-research/README.md",
+  "topic": [
+    "自进化与经验复用",
+    "预算感知自动研究"
+  ],
+  "first_author": "Jiefeng Chen",
+  "first_author_affiliation": "Google Cloud AI Research",
+  "published": "2026-02-02",
+  "published_at": "2026-02-02T19:00:03Z",
+  "code": "https://github.com/jfc43/MARS",
+  "code_status": "MIT 作者仓库存在，根目录为 exp-logs/figures/README/LICENSE；发布生成代码和轨迹，未确认完整 MARS controller",
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "§5.1 MLE-Bench 75竞赛，每竞赛24小时单A100-40GB预算，三独立运行，另闭源LLM调用；明显多小时级，未尝试运行。 成本过高，不复现（审查 DONE）。",
+  "summary": "把自动研究视为预算约束下的代码仓库搜索，以Design-Decompose-Implement生成模块，预算感知MCTS比较真实运行成本，并从代码差异和执行结果中提炼可复用经验。仅资料收录，完整实验不复现。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

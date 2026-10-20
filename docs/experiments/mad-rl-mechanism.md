@@ -1,17 +1,23 @@
 # MaD-RL：分布匹配奖励的轻量机制实验
 
-> 这是可运行的**机制诊断**，尚未进入正式论文复现目录。现在既有字符 GRU 多种子对照，也有 Qwen3-4B 真实 checkpoint 的单 token 诊断；两者均不使用原文数学／代码基准，不代表原论文成绩。
+> 这是可运行的**机制诊断**，已关联[统一论文资料页](../post-training/2609.31644-mad-rl/README.md)，但没有正式论文 adapter。现在既有字符 GRU 多种子对照，也有 Qwen3-4B 真实 checkpoint 的单 token 诊断；两者均不使用原文数学／代码基准，不代表原论文成绩。
 
 ## 论文信息
 
 | 字段 | 内容 |
 |---|---|
-| 论文链接 | [Meta 官方论文页](https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/) |
+| 论文链接 | [arXiv 2609.31644](https://arxiv.org/abs/2609.31644)；[Meta 官方论文页](https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/) |
 | 公司 / 机构 | Meta Superintelligence Labs |
-| 首次公开日期 | 2026-09-23（论文 PDF 落款）；Meta 官方论文页发布于 2026-09-24 |
+| 首次公开日期 | 2026-09-12 11:12:59 UTC（arXiv v1）；Meta官方目录09-24，PDF落款不替代首发时间 |
 | 原作者代码 | 截至 2026-09-29 未找到公开源码 |
 | 本地 adapter / CLI key | `mad-rl`（独立机制实验，非正式论文 adapter） |
 | 本地复现代码 | 奖励与字符策略：`src/auto_research/post_training/mad_rl.py`；Qwen3-4B CUDA 诊断：`scripts/mad_rl_qwen_choice.py` |
+
+## 完整实验成本决策与目录关联
+
+本页保留既有机制诊断及原始负结果；资料键`mad-rl`不等于GPU诊断键`mad-rl-qwen-choice`。后者的既有A100回执不改键、不重新绑定，也不声明新增CUDA交付。
+
+原文§3.2为Qwen3-4B：合成6000步、group32、48运行；数学/代码1200步、group16、多配方及三种子。[原始协议](https://arxiv.org/html/2609.31644v1#S3.SS2)。完整campaign**成本过高，不复现（审查 DONE）**，本次只关联目录并纠正日期，不自动重训。`adapter: null`表示没有正式论文adapter，不表示既有机制实验被删除或晋升为原文能力复现。
 
 原文提出在一组输出上估计类别频率，再用目标分布与经验分布的差构造逐样本奖励。这里实现了 L2、forward KL、reverse KL、Jensen–Shannon 四种奖励，并以纯正确性奖励作对照。五个选项均是有效回答；训练期间不会把目标选项作为单条答案提供给策略。无效输出计入频率分母并受固定惩罚。零概率目标类别在对数奖励中使用数值平滑。
 
@@ -78,7 +84,7 @@ PYTHONPATH=src python scripts/compare_mad_rl_qwen_choice.py \
   --directory runs/mad-paired --output runs/mad-paired-summary.json
 ```
 
-## 正式收录前还缺什么
+## 原始实验边界（本轮不启动）
 
-- 取得原论文 PDF 中的真实关键图，并按仓库统一论文页合同保存原图；当前 Meta 官方 PDF 下载在本地与 A100 环境均不可达，不能用自绘图冒充原图。
-- 使用公开、可核验的数据和语言模型 checkpoint 重做原文级别的数学／代码自由生成任务、目标分布及原文基线；不能把本页的单 token GRU 或 Qwen3-4B 诊断称为论文完整复现。
+- 原论文来源、关键图与精确日期现在统一在[论文资料页](../post-training/2609.31644-mad-rl/README.md)维护；本页保留旧诊断，不重复扩展图文。
+- 原文数学／代码自由生成任务、多目标分布和基线矩阵成本过高，不复现（审查 DONE）。本页单 token GRU 与 Qwen3-4B 诊断不能代替该完整实验，也不是自动重训 TODO。

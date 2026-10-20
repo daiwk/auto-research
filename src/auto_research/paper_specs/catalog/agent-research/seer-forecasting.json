@@ -1,0 +1,30 @@
+{
+  "domain": "agent-research",
+  "key": "seer-forecasting",
+  "title": "SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting",
+  "paper_url": "https://arxiv.org/abs/2610.04109v1",
+  "detail_path": "agent-research/2610.04109-seer-forecasting/README.md",
+  "topic": [
+    "自进化与经验复用",
+    "时间约束事件检索与预测"
+  ],
+  "first_author": "Mingtian Tan",
+  "first_author_affiliation": "Google Cloud AI Research / University of Virginia",
+  "published": "2026-10-02",
+  "published_at": "2026-10-02T22:30:10Z",
+  "code": "https://github.com/BennyTMT/SEER",
+  "code_status": "作者仓库存在，所读根目录仅 README、assets、paper 和 citation，未确认可执行核心代码",
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "§4 六个领域、四种闭源大模型（Gemini3.1 Pro/Flash、Claude4.6 Sonnet/4.8 Opus），多轮网络检索、LEAF事实核验及时间序列回测。完整同协议成本在当前单卡/本机预算不可廉价核定；估计不是实测。 成本过高，不复现（审查 DONE）。",
+  "summary": "冻结预测模型，以历史已成熟结果分别修订事件检索/筛选记忆和因果知识；测试时冻结记忆，仅检索预测截止时间之前的事件，避免把未来信息用于回测。仅资料收录，完整实验不复现。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

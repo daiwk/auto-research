@@ -197,6 +197,7 @@ def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):
         "new": 2,
         "implemented": 1,
         "reviewed": 1,
+        "implementation-pending": 0,
         "google_meta_priority_review": 1,
         "revision_review": 0,
     }

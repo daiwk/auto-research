@@ -1,0 +1,30 @@
+{
+  "domain": "foundation-models",
+  "key": "eco-optimizer",
+  "title": "ECO: Quantized Training without Full-Precision Master Weights",
+  "paper_url": "https://arxiv.org/abs/2601.22101v1",
+  "detail_path": "foundation-models/2601.22101-eco-optimizer/README.md",
+  "topic": [
+    "预训练与数据",
+    "优化器与训练稳定性"
+  ],
+  "first_author": "Mahdi Nikdan",
+  "first_author_affiliation": "Google Research / ISTA",
+  "published": "2026-01-29",
+  "published_at": "2026-01-29T18:35:01Z",
+  "code": null,
+  "code_status": "所读原文和 Google 官方详情未找到作者代码仓库",
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "deferral_reason": "§4.2 对30M-800M模型按100N tokens预训练（最低3B tokens），另Gemma3-1B、2.1B MoE预训练和DeepSeek-MoE-16B微调；整组训练远超短时单卡预算。 成本过高，不复现（审查 DONE）。",
+  "summary": "每步直接更新量化权重，将重新量化丢失的更新按优化器有效步长注入已有动量，避免保存高精度master weights和额外误差缓冲；SGDM与Adam分别推导。仅资料收录，完整实验不复现。",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "adapter": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

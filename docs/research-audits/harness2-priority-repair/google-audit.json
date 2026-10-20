@@ -1,0 +1,3830 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-20",
+  "repository_observation_semantics": "Per-record repository statuses describe the pre-delivery audit snapshot; use backfill-inventory.json for current post-delivery reconciliation.",
+  "scope": "Bounded Google/DeepMind historical omission audit; metadata reconciliation is not full-text review",
+  "coverage": {
+    "google_official_cached_records": 412,
+    "google_potential_in_scope_without_fulltext": 102,
+    "deepmind_official_cached_records": 265,
+    "deepmind_2026_listed_records": 27,
+    "date_only_ledger_records": 198,
+    "date_only_google_affiliation_confirmed": [
+      "2610.14224",
+      "2610.15150",
+      "2610.04109"
+    ],
+    "substantive_bounded_reviews_excluding_harness2": 7,
+    "global_review_watermark_advanced": false
+  },
+  "official_pool": [
+    {
+      "ids": [],
+      "title": "Towards conversational artificial intelligence for disease management",
+      "source": "https://research.google/pubs/towards-conversational-ai-for-disease-management/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/0",
+      "dates": [
+        "2026-06-17"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2510.17670"
+      ],
+      "title": "On-the-Fly OVD Adaptation with FLAME: Few-shot Localization via Active Marginal-Samples Exploration",
+      "source": "https://research.google/pubs/on-the-fly-ovd-adaptation-with-flame-few-shot-localization-via-active-marginal-samples-exploration/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/4",
+      "dates": [
+        "2025-10-20"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.07266"
+      ],
+      "title": "ADCanvas: Accessible and Conversational Audio Description Authoring for Blind and Low Vision Creators",
+      "source": "https://research.google/pubs/adcanvas-accessible-and-conversational-audio-description-authoring-for-blind-and-low-vision-creators/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/21",
+      "dates": [
+        "2026-02-06"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Type-Aware Ranking of Urban Similarity from Aerial Imagery",
+      "source": "https://research.google/pubs/type-aware-ranking-of-urban-similarity-from-aerial-imagery/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/34",
+      "dates": [
+        "2026-03-10"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Agentic Trend-to-Knowledge: A Methodology for Automating Case Deflection through Proactive Content Surfacing in Enterprise Employee Support",
+      "source": "https://research.google/pubs/agentic-trend-to-knowledge-a-methodology-for-automating-case-deflection-through-proactive-content-surfacing-in-enterprise-employee-support/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/38",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Multi-Agent System for Cognitive Work Automation Using an Adversarial Review Panel",
+      "source": "https://research.google/pubs/multi-agent-system-for-cognitive-work-automation-using-an-adversarial-review-panel/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/39",
+      "dates": [
+        "2026-01-07"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "The Glossary-Grounded Universal Queue: An Architecture for Enabling Follow-the-Sun Support in Global People Operations",
+      "source": "https://research.google/pubs/the-glossary-grounded-universal-queue-an-architecture-for-enabling-follow-the-sun-support-in-global-people-operations/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/41",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.21103"
+      ],
+      "title": "Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning",
+      "source": "https://research.google/pubs/prompt-level-distillation-a-non-parametric-alternative-to-model-fine-tuning-for-efficient-reasoning/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/42",
+      "dates": [
+        "2026-02-24"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Self-Evolving Systems: Moving Beyond Deterministic Interfaces to Adaptive Generative Interfaces",
+      "source": "https://research.google/pubs/self-evolving-systems-moving-beyond-deterministic-interfaces-to-adaptive-generative-interfaces/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/45",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "ALPS: Activation-Based Length Prediction for Intelligent LLM Inference Scheduling",
+      "source": "https://research.google/pubs/alps-activation-based-length-prediction-for-intelligent-llm-inference-scheduling-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/47",
+      "dates": [
+        "2026-03-18"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "KVCIS: Activation-Based Token Importance Prediction for Intelligent KV-Cache Compression",
+      "source": "https://research.google/pubs/kvcis-activation-based-token-importance-prediction-for-intelligent-kv-cache-compression-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/48",
+      "dates": [
+        "2026-03-18"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.29791"
+      ],
+      "title": "Reasoning-Driven Synthetic Data Generation and Evaluation",
+      "source": "https://research.google/pubs/reasoning-driven-synthetic-data-generation-and-evaluation/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/50",
+      "dates": [
+        "2026-03-31"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.24591"
+      ],
+      "title": "Vibe Coding XR: Accelerating AI + XR Prototyping with XR Blocks and Gemini",
+      "source": "https://research.google/pubs/vibe-coding-xr-accelerating-ai-xr-prototyping-with-xr-blocks-and-gemini/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/51",
+      "dates": [
+        "2026-03-25"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "AgentHands: Generating Interactive Hands Gestures for Spatially Grounded Agent Conversations in XR",
+      "source": "https://research.google/pubs/agenthands-generating-interactive-hands-gestures-for-spatially-grounded-agent-conversations-in-xr/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/53",
+      "dates": [
+        "2026-04-13"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "AASE: Activation-Based AI Safety Enforcement via Lightweight Probes",
+      "source": "https://research.google/pubs/aase-activation-based-ai-safety-enforcement-via-lightweight-probes/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/54",
+      "dates": [
+        "2026-03-24"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2511.03782"
+      ],
+      "title": "Expert evaluation of LLM world models: A high-Tc superconductivity case study",
+      "source": "https://research.google/pubs/expert-evaluation-of-llm-world-models-a-high-tc-superconductivity-case-study/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/58",
+      "dates": [
+        "2025-11-05"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "System for Validating Medical Software Algorithms With Closed-Loop Adversarial Persona Generation",
+      "source": "https://research.google/pubs/system-for-validating-medical-software-algorithms-with-closed-loop-adversarial-persona-generation/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/66",
+      "dates": [
+        "2026-01-08"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2608.11367"
+      ],
+      "title": "Gaze Target Estimation Anywhere with Concepts",
+      "source": "https://research.google/pubs/gaze-target-estimation-anywhere-with-concepts/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/74",
+      "dates": [
+        "2026-08-11"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "A Multi-Layered Framework for Behavioral Governance of Non-Deterministic AI Agents",
+      "source": "https://research.google/pubs/a-multi-layered-framework-for-behavioral-governance-of-non-deterministic-ai-agents/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/77",
+      "dates": [
+        "2026-03-24"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Probabilistic Governance and Telemetry Framework for Autonomous Agents",
+      "source": "https://research.google/pubs/probabilistic-governance-and-telemetry-framework-for-autonomous-agents/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/79",
+      "dates": [
+        "2026-03-24"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2608.05578"
+      ],
+      "title": "Detecting Safety Training Modification in Language Models via Activation Analysis",
+      "source": "https://research.google/pubs/ams-detecting-unsafe-and-tampered-language-models-via-activation-analysis/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/82",
+      "dates": [
+        "2026-08-06"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Framework for Multi-AI Orchestration via Task Arbitrage and Byzantine Consensus",
+      "source": "https://research.google/pubs/framework-for-multi-ai-orchestration-via-task-arbitrage-and-byzantine-consensus/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/98",
+      "dates": [
+        "2026-04-16"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.16938"
+      ],
+      "title": "ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders",
+      "source": "https://research.google/pubs/convapparel-a-benchmark-dataset-and-validation-framework-for-user-simulators-in-conversational-recommenders-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/99",
+      "dates": [
+        "2026-02-18"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Unified Management System for a Hybrid Workforce of Human and Computational Agents",
+      "source": "https://research.google/pubs/unified-management-system-for-a-hybrid-workforce-of-human-and-computational-agents/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/100",
+      "dates": [
+        "2026-03-24"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2507.23590"
+      ],
+      "title": "Identifying Hearing Difficulty Moments in Conversational Audio",
+      "source": "https://research.google/pubs/identifying-hearing-difficulty-moments-in-conversational-audio/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/101",
+      "dates": [
+        "2025-07-31"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "An AI system to help scientists write expert-level empirical software",
+      "source": "https://research.google/pubs/an-ai-system-to-help-scientists-write-expert-level-empirical-software/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/105",
+      "dates": [
+        "2026-05-19"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "XProf: An Open, Scalable and Extensible Profiling System for the Modern ML Stack",
+      "source": "https://research.google/pubs/xprof-an-open-scalable-and-extensible-profiling-system-for-the-modern-ml-stack/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/106",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Bi-level Hierarchical Neural Contextual Bandits for Online Recommendation",
+      "source": "https://research.google/pubs/bi-level-hierarchical-neural-contextual-bandits-for-online-recommendation/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/107",
+      "dates": [
+        "2026-01-31"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2609.01834"
+      ],
+      "title": "Architecting Conversational Data Systems for Stateless LLM APIs",
+      "source": "https://research.google/pubs/architecting-conversational-data-systems-for-stateless-llm-apis/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/108",
+      "dates": [
+        "2026-09-01"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.10465"
+      ],
+      "title": "MoXaRt: Audio-Visual Object-Guided Sound Interaction for XR",
+      "source": "https://research.google/pubs/moxart-audio-visual-object-guided-sound-interaction-for-xr-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/109",
+      "dates": [
+        "2026-03-11"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Securing Multi-Agent Systems: An Empirical Analysis of Security Prompt Hardening and Residual Risks",
+      "source": "https://research.google/pubs/securing-multi-agent-systems-an-empirical-analysis-of-security-prompt-hardening-and-residual-risks/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/114",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2609.12464"
+      ],
+      "title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration",
+      "source": "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/116",
+      "dates": [
+        "2026-09-11"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving",
+      "source": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/119",
+      "dates": [
+        "2026-05-18"
+      ],
+      "current_status": "already_catalogued",
+      "catalog_key": "prompts",
+      "later_ledger": [],
+      "inherited_review_status": "known",
+      "decision": "preserve_existing_disposition",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2606.00131"
+      ],
+      "title": "AI-PROPELLER: Warehouse-Scale Inter-Procedural Code Layout Optimization with AlphaEvolve",
+      "source": "https://research.google/pubs/ai-propeller-warehouse-scale-inter-procedural-code-layout-optimization-with-alphaevolve/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/134",
+      "dates": [
+        "2026-05-28"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2605.30174"
+      ],
+      "title": "LiveSVG: Zero-Shot SVG Animation via Video Generation",
+      "source": "https://research.google/pubs/livesvg-zero-shot-svg-animation-via-video-generation/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/136",
+      "dates": [
+        "2026-05-28"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "The Synthetic Gap: Automating Forensic Investigation of \"AI Slop\" with the Scaled Abuse Forensics Examiner (SAFE)",
+      "source": "https://research.google/pubs/the-synthetic-gap-automating-forensic-investigation-of-ai-slop-with-the-scaled-abuse-forensics-examiner-safe/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/137",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2601.00372"
+      ],
+      "title": "LLM-Powered Analysis of IoT User Reviews: Tracking and Ranking Security and Privacy Concerns",
+      "source": "https://research.google/pubs/llm-powered-analysis-of-iot-user-reviews-tracking-and-ranking-security-and-privacy-concerns/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/139",
+      "dates": [
+        "2026-01-01"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "MoGen: Detailed Neuronal Morphology Generation via Point Cloud Flow Matching",
+      "source": "https://research.google/pubs/mogen-detailed-neuronal-morphology-generation-via-point-cloud-flow-matching/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/142",
+      "dates": [
+        "2026-04-23"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.06981"
+      ],
+      "title": "Diffusion Controller: Framework, Algorithms and Parameterization",
+      "source": "https://research.google/pubs/diffusion-controller-framework-algorithms-and-parameterization/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/153",
+      "dates": [
+        "2026-03-07"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.06397"
+      ],
+      "title": "Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion",
+      "source": "https://research.google/pubs/efficient-property-aligned-fan-out-retrieval-via-rl-compiled-diffusion/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/154",
+      "dates": [
+        "2026-03-06"
+      ],
+      "current_status": "already_catalogued",
+      "catalog_key": "r4t",
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "preserve_existing_disposition",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Geo-Contextual AI Concierge: Minimizing Internal Support Friction Through Proactive Knowledge Synthesis",
+      "source": "https://research.google/pubs/geo-contextual-ai-concierge-minimizing-internal-support-friction-through-proactive-knowledge-synthesis/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/155",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2509.22963"
+      ],
+      "title": "Reinforcement Learning with Discrete Diffusion Policies for Combinatorial Action-Spaces",
+      "source": "https://research.google/pubs/reinforcement-learning-with-discrete-diffusion-policies-for-combinatorial-action-spaces/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/156",
+      "dates": [
+        "2025-09-26"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "What’s on My Network? Using Large Language Models to Identify Real-World IoT Devices at Scale",
+      "source": "https://research.google/pubs/whats-on-my-network-using-large-language-models-to-identify-real-world-iot-devices-at-scale/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/160",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "When Backdoors Go Beyond Triggers: Semantic Drift in Diffusion Models Under Encoder Attacks",
+      "source": "https://research.google/pubs/when-backdoors-go-beyond-triggers-semantic-drift-in-diffusion-models-under-encoder-attacks/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/167",
+      "dates": [
+        "2026-07"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.07918"
+      ],
+      "title": "Causal Armor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution",
+      "source": "https://research.google/pubs/causal-armor-efficient-indirect-prompt-injection-guardrails-via-causal-attribution/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/168",
+      "dates": [
+        "2026-02-08"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.02164"
+      ],
+      "title": "Co-RedTeam: Orchestrated Security Discovery and Exploitation with LLM Agents",
+      "source": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/169",
+      "dates": [
+        "2026-02-02"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.06397"
+      ],
+      "title": "Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion",
+      "source": "https://research.google/pubs/efficient-property-aligned-fan-out-retrieval-via-rl-compiled-diffusion-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/171",
+      "dates": [
+        "2026-03-06"
+      ],
+      "current_status": "already_catalogued",
+      "catalog_key": "r4t",
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "preserve_existing_disposition",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2511.10865"
+      ],
+      "title": "Towards A Human-in-the-Loop Framework for Reliable Patch Evaluation using an LLM-as-a-Judge",
+      "source": "https://research.google/pubs/towards-a-human-in-the-loop-framework-for-reliable-patch-evaluation-using-an-llm-as-a-judge/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/173",
+      "dates": [
+        "2025-11-14"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2510.03217"
+      ],
+      "title": "Abstain and Validate: A Dual-LLM Policy for Reducing Noise in Agentic Program Repair",
+      "source": "https://research.google/pubs/abstain-and-validate-a-dual-llm-policy-for-reducing-noise-in-agentic-program-repair/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/174",
+      "dates": [
+        "2025-10-03"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2601.19066"
+      ],
+      "title": "Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair",
+      "source": "https://research.google/pubs/dynamic-cogeneration-of-bug-reproduction-test-in-agentic-program-repair/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/175",
+      "dates": [
+        "2026-01-27"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2607.20268"
+      ],
+      "title": "PoTRE: Test-Time Reasoning inspired by Cognitive Heterogeneity",
+      "source": "https://research.google/pubs/potre-test-time-reasoning-inspired-by-cognitive-heterogeneity/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/177",
+      "dates": [
+        "2026-07-22"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "AIRS: Scaling Live Inference in Resource Constrained Environments",
+      "source": "https://research.google/pubs/airs-scaling-live-inference-in-resource-constrained-environments/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/178",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2605.26340"
+      ],
+      "title": "Scientist-One: Verifiable Autonomous Research via Chain-of-Evidence",
+      "source": "https://research.google/pubs/scientist-one-verifiable-autonomous-research-via-chain-of-evidence/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/179",
+      "dates": [
+        "2026-05-25"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Impact of User Tonalities on Coding AI Model Performance and Behavior",
+      "source": "https://research.google/pubs/impact-of-user-tonalities-on-coding-ai-model-performance-and-behavior/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/180",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+      "source": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/187",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2511.11552"
+      ],
+      "title": "DocLens: A Tool-Augmented Multi-Agent Framework for Long Visual Document Understanding",
+      "source": "https://research.google/pubs/doclens-a-tool-augmented-multi-agent-framework-for-long-visual-document-understanding/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/188",
+      "dates": [
+        "2025-11-14"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2604.27733"
+      ],
+      "title": "Mind the Gap: Structure-Aware Consistency in Preference Learning",
+      "source": "https://research.google/pubs/mind-the-gap-structure-aware-consistency-in-preference-learning/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/190",
+      "dates": [
+        "2026-04-30"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2604.27723"
+      ],
+      "title": "Optimized Deferral for Imbalanced Settings",
+      "source": "https://research.google/pubs/optimized-deferral-for-imbalanced-settings/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/191",
+      "dates": [
+        "2026-04-30"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2601.22101"
+      ],
+      "title": "ECO: Accurate Quantization-Aware Training Without Master Weights",
+      "source": "https://research.google/pubs/eco-accurate-quantization-aware-training-without-master-weights/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/195",
+      "dates": [
+        "2026-01-29"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.17554"
+      ],
+      "title": "A Theoretical Framework for Modular Learning of Robust Generative Models",
+      "source": "https://research.google/pubs/a-theoretical-framework-for-modular-learning-of-robust-generative-models/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/198",
+      "dates": [
+        "2026-02-19"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Mining Naturally Romanized Seed Corpora without Romanizations",
+      "source": "https://research.google/pubs/mining-informally-romanized-seed-corpora-without-romanizations/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/205",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.06276"
+      ],
+      "title": "Learning from Attribution Sets",
+      "source": "https://research.google/pubs/learning-from-attribution-sets/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/207",
+      "dates": [
+        "2026-02-06"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+      "source": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-3/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/210",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2405.02699"
+      ],
+      "title": "Platform Competition in the Autobidding World",
+      "source": "https://research.google/pubs/platform-competition-in-the-autobidding-world/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/216",
+      "dates": [
+        "2024-05-04"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.12481"
+      ],
+      "title": "Online Advertising with Spatial Interactions",
+      "source": "https://research.google/pubs/online-advertising-with-spatial-interactions/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/217",
+      "dates": [
+        "2026-02-12"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Scalable Detection of Adversarial Synthetic Slop and Coordinated Media Abuse: A LoRA-Enabled Multimodal Defense System",
+      "source": "https://research.google/pubs/scalable-detection-of-adversarial-synthetic-slop-and-coordinated-media-abuse-a-lora-enabled-multimodal-defense-system-4/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/222",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Meridian GeoX: An Open-Source Framework for Precision and Efficiency in Geo Experiments",
+      "source": "https://research.google/pubs/meridian-geox-an-open-source-framework-for-precision-and-efficiency-in-geo-experiments/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/228",
+      "dates": [
+        "2026-09-01"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Lessons learned from building an agent to convert the R Forecast Package into a JAX api",
+      "source": "https://research.google/pubs/lessons-learned-from-building-an-agent-to-convert-the-r-forecast-package-into-a-jax-api/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/231",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2609.12464"
+      ],
+      "title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration",
+      "source": "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/236",
+      "dates": [
+        "2026-09-11"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Inference Perf: A Benchmarking Tool for GenAI Inference",
+      "source": "https://research.google/pubs/inference-perf-a-benchmarking-tool-for-genai-inference/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/237",
+      "dates": [
+        "2026-08-27"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Conversational diagnostic artificial intelligence in ambulatory primary care: a prospective feasibility study",
+      "source": "https://research.google/pubs/a-prospective-clinical-feasibility-study-of-a-conversational-diagnostic-ai-in-an-ambulatory-primary-care-clinic/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/238",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2601.21149"
+      ],
+      "title": "Mobility-Embedded POIs: Learning What a Place Is and How It’s Used from Human Movement",
+      "source": "https://research.google/pubs/mobility-embedded-pois-learning-what-a-place-is-and-how-its-used-from-human-movement/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/239",
+      "dates": [
+        "2026-01-29"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "A large language model for complex cardiology care",
+      "source": "https://research.google/pubs/a-large-language-model-for-complex-cardiology-care/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/240",
+      "dates": [
+        "2026-02-06"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.28896"
+      ],
+      "title": "Fisheye3R: Adapting Unified 3D Feed-Forward Foundation Models to Fisheye Lenses",
+      "source": "https://research.google/pubs/fisheye3r-adapting-unified-3d-feed-forward-foundation-models-to-fisheye-lenses/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/241",
+      "dates": [
+        "2026-03-30"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2604.05364"
+      ],
+      "title": "TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems",
+      "source": "https://research.google/pubs/tfrbench-a-reasoning-benchmark-for-evaluating-forecasting-systems/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/246",
+      "dates": [
+        "2026-04-07"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "OpenClaw in the Wild: Security Analysis of Autonomous Agents",
+      "source": "https://research.google/pubs/openclaw-in-the-wild-security-analysis-of-autonomous-agents/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/247",
+      "dates": [
+        "2026-06-30"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.01293"
+      ],
+      "title": "Theoretical Perspectives on Data Quality and Synergistic Effects in Pre- and Post-Training Reasoning Models",
+      "source": "https://research.google/pubs/theoretical-perspectives-on-data-quality-and-synergistic-effects-in-pre-and-post-training-reasoning-models/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/253",
+      "dates": [
+        "2026-03-01"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2602.02690"
+      ],
+      "title": "Outrunning LLM Cutoffs: A Live Kernel Crash Resolution Benchmark for All,",
+      "source": "https://research.google/pubs/outrunning-llm-cutoffs-a-live-kernel-crash-resolution-benchmark-for-all/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/255",
+      "dates": [
+        "2026-02-02"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2609.28776"
+      ],
+      "title": "Learned Task Relationships in Multi-task Models",
+      "source": "https://research.google/pubs/learned-task-relationships-in-multi-task-models/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/259",
+      "dates": [
+        "2026-09-23"
+      ],
+      "current_status": "already_catalogued",
+      "catalog_key": "cross-task-relationships",
+      "later_ledger": [
+        {
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "review_artifact": null
+        }
+      ],
+      "inherited_review_status": "historical",
+      "decision": "preserve_existing_disposition",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "A Declarative Multi-Agent Framework for Reducing On-Call Operational Burden",
+      "source": "https://research.google/pubs/a-declarative-multi-agent-framework-for-reducing-on-call-operational-burden/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/263",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2604.09803"
+      ],
+      "title": "MAGE: Modality-Agnostic Music Generation and Editing",
+      "source": "https://research.google/pubs/mage-modality-agnostic-music-generation-and-editing/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/265",
+      "dates": [
+        "2026-04-10"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "QBAT: Model-based Query Budget Autotuner for Clustering-based Approximate Nearest Neighbor Search",
+      "source": "https://research.google/pubs/qbat-model-based-query-budget-autotuner-for-clustering-based-approximate-nearest-neighbor-search/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/268",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Holistic Latent Diffusion Acceleration: Unifying Spatial, Temporal, and Architectural Efficiency",
+      "source": "https://research.google/pubs/holistic-latent-diffusion-acceleration-unifying-spatial-temporal-and-architectural-efficiency/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/272",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Evaluating Contextual Illegality: AI Compliance in Corporate Law Scenarios",
+      "source": "https://research.google/pubs/evaluating-contextual-illegality-ai-compliance-in-corporate-law-scenarios/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/279",
+      "dates": [
+        "2026-07-31"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2607.02515"
+      ],
+      "title": "PointDiT: Pixel-Space Diffusion for Monocular Geometry Estimation",
+      "source": "https://research.google/pubs/pointdit-pixel-space-diffusion-for-monocular-geometry-estimation/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/284",
+      "dates": [
+        "2026-07-02"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.14609"
+      ],
+      "title": "GroundSet: A Cadastral-Grounded Dataset for Spatial Understanding with Vector Data",
+      "source": "https://research.google/pubs/groundset-a-cadastral-grounded-dataset-for-spatial-understanding-with-vector-data/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/285",
+      "dates": [
+        "2026-03-15"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Generative Manifold Distillation: Aligning Restoration Trajectories with Natural Image Prior",
+      "source": "https://research.google/pubs/generative-manifold-distillation-aligning-restoration-trajectories-with-natural-image-prior/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/298",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "A Theoretical Framework for Statistical Evaluability of Generative Models",
+      "source": "https://research.google/pubs/a-theoretical-framework-for-statistical-evaluability-of-generative-models-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/306",
+      "dates": [
+        "2026-07-08"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "When “Correct” Is Not Safe: Can We Trust Functionally Correct Patches Generated by Code Agents?",
+      "source": "https://research.google/pubs/when-correct-is-not-safe-can-we-trust-functionally-correct-patches-generated-by-code-agents-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/315",
+      "dates": [
+        "2026-07-31"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Cold Start Latency of Quantized Small Language Models on Serverless CPU Infrastructure",
+      "source": "https://research.google/pubs/cold-start-latency-of-quantized-small-language-models-on-serverless-cpu-infrastructure/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/324",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "A Unified Protocol Architecture for Agentic Interoperability: Quantitative Evaluation of Standardized Context Exchange in the N + M Economy",
+      "source": "https://research.google/pubs/a-unified-protocol-architecture-for-agentic-interoperability-quantitative-evaluation-of-standardized-context-exchange-in-the-n-m-economy/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/330",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2607.13614"
+      ],
+      "title": "VIP-MINGLE: A Corpus for Videoconference and In-Person Multimodal Interaction in Group Language Engagement",
+      "source": "https://research.google/pubs/vip-mingle-a-corpus-for-videoconference-and-in-person-multimodal-interaction-in-group-language-engagement/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/334",
+      "dates": [
+        "2026-07-15"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2604.18547"
+      ],
+      "title": "FUSE: Scaling Verification with Zero Labeled Data",
+      "source": "https://research.google/pubs/fuse-scaling-verification-with-zero-labeled-data/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/336",
+      "dates": [
+        "2026-04-20"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.14769"
+      ],
+      "title": "POLCA: Stochastic Generative Optimization with LLM",
+      "source": "https://research.google/pubs/polca-stochastic-generative-optimization-with-llm-2/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/340",
+      "dates": [
+        "2026-03-16"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Structural and Programmatic Prompting in Financial Artificial Intelligence",
+      "source": "https://research.google/pubs/structural-and-programmatic-prompting-in-financial-artificial-intelligence/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/342",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2603.29470"
+      ],
+      "title": "AI-Simulated Expert Panels for Socio-Technical Scenarios and Decision Guidance",
+      "source": "https://research.google/pubs/ai-simulated-expert-panels-for-socio-technical-scenarios-and-decision-guidance/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/343",
+      "dates": [
+        "2026-03-31"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "PIPE: Personalized Image-generation via Preference Encoding",
+      "source": "https://research.google/pubs/pipe-personalized-image-generation-via-preference-encoding/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/345",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "AI Driven Verification Architectures - Scaling Formal Sign-off of High Bandwidth Data Crossbars via Generative AI and Required-Proof-Depth (RPD) Synthesis",
+      "source": "https://research.google/pubs/ai-driven-verification-architectures-scaling-formal-sign-off-of-high-bandwidth-data-crossbars-via-generative-ai-and-required-proof-depth-rpd-synthesis/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/347",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Beyond Real or Fake: A Dual-Channel Authenticity and Reasoning Protocol for Photographic Assessment",
+      "source": "https://research.google/pubs/beyond-real-or-fake-a-dual-channel-authenticity-and-reasoning-protocol-for-photographic-assessment/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/350",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Dynamic Learning and Optimal Advertising Mechanism for LLM Platforms",
+      "source": "https://research.google/pubs/dynamic-learning-and-optimal-advertising-mechanism-for-llm-platforms/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/357",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "From Unfinished to Done: Bridging the MDE Implementation Gap with Constrained LLMs",
+      "source": "https://research.google/pubs/from-unfinished-to-done-bridging-the-mde-implementation-gap-with-constrained-llms/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/391",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "ContextFidelity-Bench: A Three-Paradigm Framework for Evaluating Multi-Turn Hallucination Behavior in Language Models",
+      "source": "https://research.google/pubs/contextfidelity-bench-a-three-paradigm-framework-for-evaluating-multi-turn-hallucination-behavior-in-language-models/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-source-review.json#/records/397",
+      "dates": [],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "explicit_exception",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Economic Policy for AGI",
+      "source": "https://deepmind.google/research/publications/260459/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/0",
+      "dates": [
+        "2026-09-16"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2609.01588"
+      ],
+      "title": "Designing Proactive Thought Partners for Writing",
+      "source": "https://deepmind.google/research/publications/265605/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/1",
+      "dates": [
+        "2026-09-01"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2608.25924"
+      ],
+      "title": "Visual General Intelligence: A White Paper",
+      "source": "https://deepmind.google/research/publications/270149/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/2",
+      "dates": [
+        "2026-08-26"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "A moral Turing test: How belief and source shape detection of and agreement with LLM judgments",
+      "source": "https://deepmind.google/research/publications/118955/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/3",
+      "dates": [
+        "2026-08-05"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2607.25537"
+      ],
+      "title": "Visual prompt engineering for video models",
+      "source": "https://deepmind.google/research/publications/264392/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/4",
+      "dates": [
+        "2026-07-28"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Evaluating frontier models for stealth and situational awareness",
+      "source": "https://deepmind.google/research/publications/157938/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/5",
+      "dates": [
+        "2026-07-15"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2606.00369"
+      ],
+      "title": "Quantifying the Salience of Geo-Cultural Values for Pluralistic Safety Alignment",
+      "source": "https://deepmind.google/research/publications/225819/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/6",
+      "dates": [
+        "2026-07-10"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2607.03906"
+      ],
+      "title": "The Case for Globally Beneficial Technology",
+      "source": "https://deepmind.google/research/publications/260960/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/7",
+      "dates": [
+        "2026-07-06"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Towards Structural Understanding of LLM Overthinking",
+      "source": "https://deepmind.google/research/publications/203490/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/8",
+      "dates": [
+        "2026-07-02"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Bridging the Scale Gap: Augmenting Human Red-Teaming to Uncover Latent Risks in T2I Models",
+      "source": "https://deepmind.google/research/publications/149262/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/9",
+      "dates": [
+        "2026-06-26"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Real-Time Group Dynamics with LLM Facilitation: Evidence from a Charity Allocation Task",
+      "source": "https://deepmind.google/research/publications/224297/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/10",
+      "dates": [
+        "2026-06-26"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Going PLACES: Participatory Localized Red Teaming forText-to-Image Safety in the Global South",
+      "source": "https://deepmind.google/research/publications/224397/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/11",
+      "dates": [
+        "2026-06-25"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Artificial Minds, Human Disagreement: The Politics of AI Consciousness",
+      "source": "https://deepmind.google/research/publications/248131/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/12",
+      "dates": [
+        "2026-06-15"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2606.12683"
+      ],
+      "title": "From AGI to ASI",
+      "source": "https://deepmind.google/research/publications/239142/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/13",
+      "dates": [
+        "2026-06-12"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2606.03237"
+      ],
+      "title": "Solipsistic superintelligence is unlikely to be cooperative",
+      "source": "https://deepmind.google/research/publications/231466/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/14",
+      "dates": [
+        "2026-06-04"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2605.29729"
+      ],
+      "title": "Realistic honeypot evaluations for scheming propensity",
+      "source": "https://deepmind.google/research/publications/253391/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/15",
+      "dates": [
+        "2026-05-28"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2605.30322"
+      ],
+      "title": "Gram: Assessing sabotage propensities via automated alignment auditing",
+      "source": "https://deepmind.google/research/publications/252981/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/16",
+      "dates": [
+        "2026-05-28"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2605.03767"
+      ],
+      "title": "Did US Worker Retraining Reduce Participant Automation Exposure?",
+      "source": "https://deepmind.google/research/publications/239849/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/17",
+      "dates": [
+        "2026-05-06"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2604.23099"
+      ],
+      "title": "ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation",
+      "source": "https://deepmind.google/research/publications/238239/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/18",
+      "dates": [
+        "2026-04-25"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2511.02767"
+      ],
+      "title": "Dynamic Reflections: Probing Video Representations with Text Alignment",
+      "source": "https://deepmind.google/research/publications/193694/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/19",
+      "dates": [
+        "2026-04-23"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [
+        "2604.20329"
+      ],
+      "title": "Image Generators are Generalist Vision Learners",
+      "source": "https://deepmind.google/research/publications/240658/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/20",
+      "dates": [
+        "2026-04-22"
+      ],
+      "current_status": "metadata_only_identity_known",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Strategic Tradeoffs Between Humans and AI in Multi-Agent Bargaining",
+      "source": "https://deepmind.google/research/publications/146950/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/21",
+      "dates": [
+        "2026-03-22"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "The Abstraction Fallacy: Why AI Can Simulate But Not Instantiate Consciousness",
+      "source": "https://deepmind.google/research/publications/231971/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/22",
+      "dates": [
+        "2026-03-10"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Simplicity and Complexity in Combinatorial Optimization",
+      "source": "https://deepmind.google/research/publications/225507/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/23",
+      "dates": [
+        "2026-02-15"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Decoding Safety Feedback from Diverse Raters: A Data-driven Lens on Responsiveness to Severity",
+      "source": "https://deepmind.google/research/publications/137741/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/24",
+      "dates": [
+        "2026-02-12"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "Hybrid neural–cognitive models reveal how memory shapes human reward learning",
+      "source": "https://deepmind.google/research/publications/94006/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/25",
+      "dates": [
+        "2026-02-05"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    },
+    {
+      "ids": [],
+      "title": "TRecViT: A Recurrent Video Transformer",
+      "source": "https://deepmind.google/research/publications/122591/",
+      "inherited_source_record": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json#/records/26",
+      "dates": [
+        "2026-01-09"
+      ],
+      "current_status": "metadata_only_identity_unconfirmed",
+      "catalog_key": null,
+      "later_ledger": [],
+      "inherited_review_status": "historical",
+      "decision": "archive_nonblocking_metadata_only_not_substantive_review",
+      "fulltext_review_completed_this_audit": false
+    }
+  ],
+  "date_only_ledger_inventory": [
+    {
+      "id": "2610.17363",
+      "title": "UMCR: Universal Medical Concept Recognition through Guideline Integration and Agentic Linking",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17118",
+      "title": "When LLM Agents See a Conflict but Still Proceed: Cross-Domain Dependencies in Network Slicing",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17039",
+      "title": "MENTOR: Procedural Shielding of Tool-Using LLM Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16859",
+      "title": "ANCHOR: Assessing Naturalistic Constraint Hierarchies and Ordering in Repository-Grounded Agentic Coding",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16460",
+      "title": "The interpreter as developer: An autoethnographic design study of building a computer-assisted interpreting tool through human-LLM co-creation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16343",
+      "title": "Efficient Multi-Agent Reasoning via Confidence-Guided Adaptive Debate",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16288",
+      "title": "REVEAL: Reverse Engineering Agentic Latents from Frontier-Model Traces",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16281",
+      "title": "RelLedger: Relational Information Governance for LLM Agent Organizations",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16165",
+      "title": "Think Before You Speak: Enabling Training-Free Latent Communication Between Language Models",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16146",
+      "title": "Unravel: Recovering an Interactive 3D Scene from a Single Image",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16141",
+      "title": "Phantom Merge: When Your Large Language Model Agents Pick One but Tell You About Another",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16129",
+      "title": "PID-Gated Continual Prompt Adaptation Under Noisy Feedback",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16120",
+      "title": "Scaling Multi-Agent Intelligence with Substrate-Centric Coordination",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16071",
+      "title": "Dream2Discern: Learning from Hard Latent Variants for Runtime Failure Prediction in Multi-Agent Systems",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16039",
+      "title": "When Agents Talk, Secrets Travel: Topology-Driven Leakage and Recipient-Conditioned Sanitization in Multi-Agent LLM Systems",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15912",
+      "title": "More Reasoning Is Not Always Better: Executing Clinical Guidelines with LLMs and Rules",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15788",
+      "title": "Agent Sociodrama: Social-Dynamics-Guided Persona Recasting for LLM Agent Teams",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15666",
+      "title": "A Persian Vision-Language-Action Dataset and Benchmark for Ambiguity- and Infeasibility-Aware Instruction-to-Plan Grounding",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15488",
+      "title": "AlphaPilot: Multi-Turn Tool-Using LLM Agents for Adaptive Alpha Mining with Reinforcement Learning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15093",
+      "title": "TurnCost: Turns, Not Observations: Cache-Aware Loop Engineering for Coding Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14958",
+      "title": "What Survives When Activation Steering Is Used as Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14431",
+      "title": "MemForm: Benchmarking Memory Formation Poisoning in LLM Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14224",
+      "title": "Harness^2: Recursive Agent Harnessing for an Open World",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": true
+    },
+    {
+      "id": "2610.11270",
+      "title": "Gated Memory: Admission-Controlled Memory Formation for Conversational AI",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14071",
+      "title": "Loose Lips: Understanding Privacy Leakage in Agentic Dialogue",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.09661",
+      "title": "Alice: A Large-Scale German Benchmark for Rubric-Based Multi-Dimensional Automatic Short Answer Scoring",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.08388",
+      "title": "Foresight-over-Graph: Reasoning Beyond Local Horizons for Knowledge Base Question Answering",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.06516",
+      "title": "Test-Time Adaptation of Reasoning Strategies with Bayesian Nonparametric Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.05732",
+      "title": "PACMI: Provenance-Aware Cascading Memory Invalidation for Long-Term LLM Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.06996",
+      "title": "Mask-Guided KV Cache Eviction in Block Diffusion Language Models",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.03027",
+      "title": "Tailoring the Quantization Space for 1-Bit KV Cache Compression",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.01118",
+      "title": "Madeleine: Learning Involuntary Recall for Conversational Memory from Simulated Lives",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14018",
+      "title": "RoboHarness: A Simple Harness Outperforms VLA and World Actions Models",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14006",
+      "title": "Coding LLMs Can Be Harnessed to Learn Interpretable Models from Data",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14005",
+      "title": "Artificiality's First Exam: An LLM-Referenced C-test for Supraintelligence",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17436",
+      "title": "SchemaWeaver: Accelerating On-Device Mobile Agentic AI via Schema-Guided Parallel LLM Decoding",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17418",
+      "title": "Why Agentic Workflows Fail: A Taxonomy Derived from Literature and Empirical Data",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17374",
+      "title": "VulnBump: A Benchmark for Fixing Vulnerable Dependencies in Real Projects While Keeping the Build and Tests Green",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17365",
+      "title": "When Goals Leak Across Relationships: How Cached Goal Representations Shape Cross-Client Decisions",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17310",
+      "title": "Beyond Successful Play: Diagnosing Opponent Modeling in Large Language Models",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17224",
+      "title": "CodeLift: Your Test Suite Is Secretly a Dense SWE Curriculum",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17206",
+      "title": "AutoMARS: Automatic and Scalable Multi-Agent Large Language Model Framework for Supply Chain Risk Assessment",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17197",
+      "title": "Deleting Code Without Losing Knowledge: Regenerative Software for Python Libraries",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17195",
+      "title": "Welcome to the Age of Agent Ads: Using On-Policy Attacks to Steer Agentic Decisions",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17183",
+      "title": "ChemExplain: A Multimodal Benchmark for Explanatory Chemical Reasoning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17130",
+      "title": "EvoQuantLab: Training-Free Dual-Loop Evolution for Auditable Quantitative Research",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17114",
+      "title": "D-World: An Explicit World-Language-Action Model with Recursive Self-Improvement under Dual Control",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17043",
+      "title": "Neos: Learning to Interleave Search and Visual Reasoning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.17020",
+      "title": "CWE-bench: Refocusing Agentic Security from Exploitation to Defense",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16998",
+      "title": "Glasseek: A Transparent Recipe for Training and Trustworthy Evaluation of DeepSearch Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16975",
+      "title": "MADDIE: Multi-Agent Drug Discovery Engine",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16946",
+      "title": "Social Priors: Descriptions of AI Users Shape How Language Models Trust and Cooperate",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16919",
+      "title": "ML Engineering Agents - A Data Management Perspective",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16911",
+      "title": "Audit tools of the trade: Automated Auditor Elicitation Can Be Sensitive to the Context the Auditor Is Given",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16895",
+      "title": "Observe, Share, or Predict? Disentangling Partner Information in Embodied Multi-Agent Collaboration",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16870",
+      "title": "SpecGuardBench: Can Coding Agents Construct Reliable Validation Harnesses from Natural Language Specifications?",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16838",
+      "title": "Same Operation, Different Permission: Evaluating Whether Guardrails Honor Authorization",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16725",
+      "title": "Trace-to-Architecture: Capability Bottleneck Diagnosis for Harness Revision",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16661",
+      "title": "Structural Baselines Matter for Agent Failure Detection and Attribution",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16632",
+      "title": "REEL: Learning to Retrieve, Evaluate, and Evolve Visual Memory for Any Long-Horizon Multi-Shot Video Generation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16625",
+      "title": "LATCH: LLM-Assisted Timing Closure Harness for Post-Route FPGA Optimisation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16498",
+      "title": "From Caricature to Collective Artifact: How Persona Construction Drives Polarization in Generative Social Simulations",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16450",
+      "title": "CivWorldBench: Evaluating Language World Models in Structured Multi-Agent Sandbox Worlds",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16426",
+      "title": "AuthGateBench: Benchmarking LLMs as Authorization Gate",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16412",
+      "title": "SLS-Bench: A Benchmark for Incident Log Summarization with Synthetic Observability Data",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16402",
+      "title": "EvoWeb: A Benchmark for Coding Agents on Evolving Web Applications",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16333",
+      "title": "TRAP: Tool-result Replay Attack for Probing Misbinding in LLM Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16315",
+      "title": "ReTAC: Residual Test-Time Agentic Computation for Video Spatial Reasoning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16297",
+      "title": "SLDBench v2: Active Scaling Law Discovery",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16251",
+      "title": "Avoiding What Your Teacher Already Knows: Entity Familiarity for Deep-Search Distillation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16231",
+      "title": "Learning to GUIDE the Group: Self-Learning LLM Facilitation Across Multi-Party Tasks",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16224",
+      "title": "Look Back to Move Forward: Learning to Revisit for Agentic Compositional Image Generation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16175",
+      "title": "ProCARE: Real-World Study Automation via Profile-Grounded Evidence Contracts",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16155",
+      "title": "Uncovering Robustness Weaknesses in LLM Agents via Persona Evolution with Task-Integrity Constraints",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16140",
+      "title": "Large Language Model Assisted Transportation Planning through a Differentiable User Equilibrium Layer",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16137",
+      "title": "Recall Begets Recall: Recurrent Memory Ranking for Personalized LLMs",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16117",
+      "title": "Beyond Perfect Teammates: Multi-Agent Collaboration with Unreliable Colleagues",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16078",
+      "title": "Heterogeneous Agentic Coevolution",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16070",
+      "title": "Understanding and Reducing Misalignment in Persuasion Optimization",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16067",
+      "title": "When Agent Evaluation Becomes Unreliable: An Empirical Study of Oracle Failures and Configuration-Dependent Measurement in an LLM Agent Benchmark",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16027",
+      "title": "Of Errors and Echoes: Responsibility-Aware Credit Assignment for Tool-Use Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.16015",
+      "title": "Computational Reflective Equilibrium for Agentic AI: A Rawlsian Alignment Scaffold for Governance",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15994",
+      "title": "Large language model-generated patterns for epidemiological modeling: a multi-benchmark evaluation framework",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15991",
+      "title": "Revocation Is Not Complete at Receipt: An Executable Outcome Contract for Distributed Agent-Tool Gateways",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15969",
+      "title": "PopGen: Generating Semantically Diverse Populations for Zero-Shot Coordination",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15964",
+      "title": "Small but Mighty: Test Suites as Improvement Signals for Self-Evolving Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15961",
+      "title": "Unfair and Unsafe: Everyday Bias Triggers Emergent Misalignment",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15910",
+      "title": "RIVO: Lightweight Adaptive Rerouting for Deep Research Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15882",
+      "title": "Engram Injection: A Study of Temporal Validity in Parametric Language-Model Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15766",
+      "title": "SurgiCLAW: An Interpretable Atomic-Skill Agent for Precision Robotic Micromanipulation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15765",
+      "title": "A Decade in a Day: Synthesizing Agent-Native Interfaces from Human-Oriented Software Evolution",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15738",
+      "title": "Visible but Not Avoided: State-Dependent Re-Proposal of Rejected Candidates in Catalog-Based LLM Optimization Loops",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15708",
+      "title": "SpecForge: Recursive Self-Improvement for Coding Agents via Behavioral Specifications",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15691",
+      "title": "FARL: A Fully Automated Pipeline of RL Interface and Solver Design",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15642",
+      "title": "Recall What Is Missing: Composing Evidence from Long-Term Agent Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15567",
+      "title": "Reviewing Beyond the Change: Repository Size and Existing Code Across Agent and Human Pull Requests",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15529",
+      "title": "Agent-Canary-Mas: End-to-End Evaluation of Protocol Risk in Long-Horizon Multi-Agent Systems",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15492",
+      "title": "When Skills Remain But Access Fails: Factorized Skill Memory for Continual Skill Internalization",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15481",
+      "title": "SkillFusion: Towards Reliable Multi-Skill Composition for LLM Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15459",
+      "title": "When Messages Go Wrong: Understanding Communication Faults in LLM-Based Multi-Agent Systems",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15415",
+      "title": "Sensitivity or Criterion? Measuring and Moving When Language Models Act",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15298",
+      "title": "CHEAR: Confusion-Hierarchy Evidence-Aware Reasoning for Cost-Efficient Human Activity Recognition",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15292",
+      "title": "OntoAR-HAR: Ontology-Guided Agentic RAG with Personalized Memory for Human Activity Recognition",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15246",
+      "title": "ObsSpec: Accelerating Agentic Reinforcement Learning with Observation Speculation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15228",
+      "title": "Words to World: Benchmarking LLMs in Interactive Physical Environments",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15208",
+      "title": "PANINI-DR: Controlled Deep Research through Generative Semantic Workspaces",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15150",
+      "title": "Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": true
+    },
+    {
+      "id": "2610.15137",
+      "title": "When the Approved File Is Unchanged: Authority-Set Integrity for Deployment and Coding-Agent Approvals",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.15084",
+      "title": "Self-Evolving Visual Agent via Margin Reward",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14966",
+      "title": "SkillHorizon: Constructing Long-Horizon Agent Tasks through Skill Composition",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14960",
+      "title": "Humans vs. Machines: A Comparison With AI Agents in Software Reverse Engineering",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14956",
+      "title": "MCPDisCo: Seesaw-Mitigated Tuning for MCP-Native Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14918",
+      "title": "SkillForgeBench: Evaluating Agent Reliability Grounded in Agent Skill Specifications",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14915",
+      "title": "WorkBorne: Discovering Agentic Tasks from Real-World Artifact Transitions",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14900",
+      "title": "TeachGrade: Training-Free Short Answer Scoring with Teacher Evidence",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14877",
+      "title": "Beyond Outcome Feedback: Trajectory-Quality-Guided Experience-based Learning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14855",
+      "title": "PEAM: On-device Communication Agent for Personalized, Efficient and Autonomous Mobile Network Configuration",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14852",
+      "title": "Getting Space Right: Agentic Rewards for Image Generation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14823",
+      "title": "AI-Native Product Management: A Vision",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14808",
+      "title": "Testuary: Agentic Test Generation with Zero-Shot Parallelism",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14790",
+      "title": "Counterfactual Regret for Reflective Agents with Lean-Verified Guarantees",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14777",
+      "title": "LYNX: Analytical Program Synthesis via Grounding and Closed-Loop Refinement",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14774",
+      "title": "ProgAgent: Learning Tool Orchestration through Programmatic Training",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14772",
+      "title": "How Should a Camera-First AI Agent Work?",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14768",
+      "title": "Do Modifications Made by Coding Agents Make Subsequent Software Maintenance Harder?",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14740",
+      "title": "TileCas: Cascading Kernel Development Across Programming Abstractions",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14736",
+      "title": "Think in Strategies, Act with Tools: Traceable Agentic Optimization for Combinatorial Problems",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14662",
+      "title": "Does Failure Feedback Direct Agent Self-Modification?",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14636",
+      "title": "PEARL: Process-Experience Aware Reinforcement Learning for Multi-Turn Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14629",
+      "title": "Executable but Unfaithful: Mock Object, Stub, and Assertion Generation by LLMs and Coding Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14615",
+      "title": "Limitations on Autoregressive Token Generation via Sequential Sampling",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14576",
+      "title": "Iterate on an LLM, Serve on an SLM",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14570",
+      "title": "PsyMemBehav: Psychology-Informed and Memory-Grounded Two-Level Identity-to-Action Reasoning for Social-Media Behavior Simulation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14547",
+      "title": "A Self-Defining Operator for Distributed Applications",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14538",
+      "title": "A Stateful Research Information Infrastructure for Scientific Discovery",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14523",
+      "title": "ScienceBuddy-PV: A Verifier-Governed Recursive Improvement Protocol for Panvascular Intervention Research",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14495",
+      "title": "Reels-RSI: Program-Level Self-Improvement for Code-Rendered Explainer Videos",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14477",
+      "title": "What Counts as the Same Task? Executable Contracts for Robustness Evaluation of Tool-Using Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14465",
+      "title": "Co-adaptive Rule Routing and Constraining for Structured Knowledge Retrieval",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14462",
+      "title": "Rethinking SZZ Search Strategies: Lessons from Claude Code",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14428",
+      "title": "Frustratingly Easy Agentic RAG via Portable Skills: A Case Study in Customer Support",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14382",
+      "title": "ANASSA: From High-Level Framework to Low-Level Architecture for Spatial Agentic AI",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14381",
+      "title": "ACED-Bench: Evaluating How LLM Agents Acquire and Act on Causal Evidence",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14216",
+      "title": "Cortex: Measurement-Gated Evolution and Pruning of Coding-Agent Skills and Rules",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14186",
+      "title": "Visualizing the World Model in an Agent's Value Function",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14161",
+      "title": "Agentic Evolution of SQL Test Generators",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14157",
+      "title": "OpenMobile-2: Building Versatile Mobile Agents with Scalable Environments and App-Native Tools",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14130",
+      "title": "Conserved amount, negotiable placement. Prompting perturbs one architecture, an AI reviewer both",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.13399",
+      "title": "RegulaTutor: A Theory-Informed Framework for Long-Term Personalized Learning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14096",
+      "title": "SWEeper-Bench: Can Agents Discover Bugs in Interactive Software?",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.12300",
+      "title": "Compact and Efficient Indexes for Learned Sparse Retrieval",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.12243",
+      "title": "NativeScope: Relation-Localized Retrieval over Native Topology with a Correct Anchor",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.12090",
+      "title": "Recompose and Refine Latent Reasoning Flows for Vision-Language-Action Models",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.11707",
+      "title": "DeltaReplay: Task-Relative Memory Reuse for Mobile GUI Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.11650",
+      "title": "SkillContrast: Difference-Guided Text Selection for Agent Skill Reranking",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.11617",
+      "title": "TAM: Task-Aware Memory Distillation for Efficient Spatiotemporal Prediction",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.11171",
+      "title": "VAMR: Multi-Question Agentic Reasoning for Efficient Long-Form Video Understanding",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.10538",
+      "title": "Never Look Back: Understanding Persistence in 3D Object Memory from Egocentric Videos",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.10164",
+      "title": "UniSkill: Learning Actor-Aligned Skill Proposals for an Evolving Policy",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.09146",
+      "title": "Frozen Models, Evolving Expertise: Model-Agnostic Learning from Deployment Experience for Multimodal Medical AI",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.08553",
+      "title": "DeltaTTT: Layerwise Optimization for Nonlinear Recurrent Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.08138",
+      "title": "Test-Time Agent Evolution for Long-Horizon Legal Reasoning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.07984",
+      "title": "Decide Before You Look: Learning Which Retrieved Memories Deserve Pixels",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.07725",
+      "title": "PERSIST: Who-What-When Memory Across Sessions for Full-Duplex Spoken Dialogue",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.07403",
+      "title": "Defense-in-Depth for LLMs: Evaluating Memory Gates Against Activation-Induced and Memory-Induced Sycophancy",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.07350",
+      "title": "Trajectory-Retrieval Speculative Decoding: When Does a Model's Own History Help?",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.07309",
+      "title": "The Right Memory in the Wrong Context: Verifying Retrieval Admissibility in Long-Term Agent Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.07184",
+      "title": "Learning Scientific Exploration from Human Research Decision Trajectories",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.06672",
+      "title": "VideoTapestry: Query-Adaptive Memory Refinement for Multi-Agent Long-Video Understanding",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.06361",
+      "title": "Capability-Driven Self-Evolution of Agent Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.07075",
+      "title": "CuratorMAS: Automating Dataset Curation via Multi-Agent Orchestration",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.05739",
+      "title": "HLA-WM: Hybrid Linear Attention for Long-Horizon Video World Models",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.05700",
+      "title": "Voltic: Distinguishing Volatility from Stochasticity in Recurrent Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.05526",
+      "title": "Have I Scene This Before? Spatially Grounded Conversational Memory for Complex Queries in Egocentric Assistants",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.05489",
+      "title": "SkillGATE: Gate-Aware Monte Carlo Tree Search for Skill Retrieval",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.05437",
+      "title": "TeleTune: Evolving Agent Skills From Offline Telemetry",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.05382",
+      "title": "Harness-Search: Guiding Long-Horizon Search through Multi-Agent Coordination",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.05348",
+      "title": "Search Engines Never Say No: How Frozen Agents React When the Retrieval Tool Refuses",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.04864",
+      "title": "Enhancing Long-Video VLM Embeddings with Query-Aware Streaming Latent Reasoning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.04838",
+      "title": "MemTrace: State-Consistent Memory for Long-Horizon Coding Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.04438",
+      "title": "RAGrasp: Geometry-Semantic Template Retrieval and Grasp Transfer",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.04262",
+      "title": "CADForge: Agentic Single-View CAD Reconstruction with Explicit Geometry Reasoning",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.04195",
+      "title": "MemLeak: Cross-User Semantic Leakage in Multi-Tenant AI Agent Memory",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.04109",
+      "title": "SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": true
+    },
+    {
+      "id": "2610.04012",
+      "title": "Beyond the Parameter Monolith: Reconstructive Memories, Executable Skills, and Residual Assembly for Language Models",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.03934",
+      "title": "SGAnalog: An End-to-End Circuit Benchmark from Open-Source Silicon Tapeouts",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.03651",
+      "title": "MRVQ: One Resident Index for Dimension- and Rate-Elastic Vector Search",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.03564",
+      "title": "Knowledge or Calculator? Decomposing the Skill Premium in Verifiable Financial Agent Workflows",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.03510",
+      "title": "Weave Forcing: Compositional Memory Routing for Interactive Long Video Generation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.02945",
+      "title": "Continual Graph Memory for Mathematical Research Agents",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.02867",
+      "title": "TACD: Distilling Efficient Text-to-Motion Models via Terminal Amplification Control",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.02387",
+      "title": "SOLO: Certified-Recall Metric Similarity Search with Scan-Only Sampled Inverted Lists",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.02200",
+      "title": "VISTA: A Visual Harness for Reasoning in an Interactive World",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.01058",
+      "title": "MOMAT: Mixture of Multiple Atlases for Low-Power Jailbreak Defense of Quantized LLMs",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.00366",
+      "title": "What Should an Agent Remember? Disentangling Retention from Retrieval in Bounded-Memory Evaluation",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.14021",
+      "title": "CoEvoke: Evoking Multi-Agent Collaboration for Trajectory Collection",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.03758",
+      "title": "Global Evaluation of AI and NWP Precipitation Forecasts During Atmospheric River Events",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    },
+    {
+      "id": "2610.12496",
+      "title": "An Input-Dependent Readout Phase for Resonant Sequence Models",
+      "track": "agent",
+      "catalog_key": null,
+      "inherited_review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "google_author_hint_rechecked": false
+    }
+  ],
+  "substantive_reviews": [
+    {
+      "id": "2610.15150",
+      "title": "Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses",
+      "source": "https://arxiv.org/html/2610.15150v1",
+      "affiliation": "First author Weichen Yu: Google Cloud AI Research / Carnegie Mellon University, verified from v1 PDF page1 superscripts1,2; Google DeepMind collaboration separately confirmed",
+      "date": "2026-10-10T20:06:59Z",
+      "current_status": "date_only_archived_not_catalogued",
+      "decision": "priority_historical_omission_confirmed",
+      "method": "用 MOEA/D 加权 Tchebycheff 子问题保留功能/安全权衡；工具、技能、逻辑按通用/环境范围分解演化，执行时动态组合。候选只用搜索集选最均衡子代，held-out 不参与选择。",
+      "code_status": "未在所读论文/官方摘要中找到作者实现仓库；有匿名结果可视化，不等于开源算法代码",
+      "code": null,
+      "low_cost_component_opportunity": "可独立验证 Tchebycheff 邻域替换与上限、范围受限算子计划、搜索集选优和冻结 held-out 的数据合同；不是完整自进化 agent",
+      "full_experiment_disposition": "成本过高，不复现（审查 DONE）",
+      "cost_basis": "正文 §5 采用 Gemini 3.6 Flash proposer/solver；SecRepoBench 30/30/30 和 BaxBench 28/28/28，三次独立运行；Appendix G 展示5子问题×3代/6子问题×4代；Appendix I 明确 Docker build/exploit 主导耗时。费用为依据论文规模的估计，未启动实跑。",
+      "evidence_locations": [
+        "arXiv abs Submission history v1",
+        "https://arxiv.org/pdf/2610.15150v1#page=1: first author superscripts1,2 and Student Researcher footnote",
+        "§3 Eq.3 selection on search split",
+        "§4.1 Eq.4-6",
+        "§4.2-4.3",
+        "§5 / Appendix C repeats",
+        "Appendix G",
+        "Appendix I Cost"
+      ],
+      "inherited_artifact": "docs/research-audits/oct15-review-closure/agent-reviews.json",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "read_scope": "Named method, evaluation, implementation and cost passages; not every appendix proof or prompt."
+    },
+    {
+      "id": "2610.04109",
+      "title": "SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting",
+      "source": "https://arxiv.org/html/2610.04109v1",
+      "affiliation": "First author Mingtian Tan: Google Cloud AI Research / University of Virginia; collaboration with Google Cloud AI Research",
+      "date": "2026-10-02T22:30:10Z",
+      "current_status": "date_only_archived_not_catalogued",
+      "decision": "priority_historical_omission_confirmed",
+      "method": "冻结预测器，分别维护检索/筛选记忆与因果知识；训练窗口内待真实结果可见后反思并压缩，测试窗口冻结所有记忆，只使用截止时间前的事件。",
+      "code_status": "作者仓库存在，所读根目录仅 README、assets、paper 和 citation，未确认可执行核心代码",
+      "code": "https://github.com/BennyTMT/SEER",
+      "low_cost_component_opportunity": "可验证事件可用时间过滤、反馈成熟后更新、Mret/Msel/K 分离、容量触发压缩协议和测试冻结；不能用人工规则声称验证 LLM 反思质量",
+      "full_experiment_disposition": "成本过高，不复现（审查 DONE）",
+      "cost_basis": "§4 六个领域、四种闭源大模型（Gemini3.1 Pro/Flash、Claude4.6 Sonnet/4.8 Opus），多轮网络检索、LEAF事实核验及时间序列回测。完整同协议成本在当前单卡/本机预算不可廉价核定；估计不是实测。",
+      "evidence_locations": [
+        "arXiv abs Submission history v1",
+        "HTML author affiliation block",
+        "§3.2 Eq.1-3",
+        "§3.3 Eq.4-6 and Backtesting Protocol",
+        "§4.1 Table1 and Implementation",
+        "https://github.com/BennyTMT/SEER root directory and README"
+      ],
+      "inherited_artifact": "docs/research-audits/oct15-review-closure/agent-reviews.json",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "read_scope": "Named method, temporal isolation, setup and official release passages."
+    },
+    {
+      "id": "2602.02660",
+      "title": "MARS: Modular Agent with Reflective Search for Automated AI Research",
+      "source": "https://arxiv.org/html/2602.02660v1",
+      "affiliation": "Google Cloud AI Research (all authors in read v1)",
+      "date": "2026-02-02T19:00:03Z",
+      "current_status": "official_historical_pool_not_catalogued",
+      "decision": "priority_historical_omission_confirmed",
+      "method": "预算约束 MCTS 结合 Design-Decompose-Implement 的模块化代码，使用执行差异形成解决方案/调试经验，按运行成本惩罚搜索收益。",
+      "code_status": "MIT 作者仓库存在，根目录为 exp-logs/figures/README/LICENSE；发布生成代码和轨迹，未确认完整 MARS controller",
+      "code": "https://github.com/jfc43/MARS",
+      "low_cost_component_opportunity": "可验证预算奖励、三类节点动作、调试预算与经验检索合同；必须保留实际代码执行，不能把固定分数 fixture 当研究能力",
+      "full_experiment_disposition": "成本过高，不复现（审查 DONE）",
+      "cost_basis": "§5.1 MLE-Bench 75竞赛，每竞赛24小时单A100-40GB预算，三独立运行，另闭源LLM调用；明显多小时级，未尝试运行。",
+      "evidence_locations": [
+        "arXiv abs Submission history v1",
+        "HTML authors",
+        "§4.2-4.4 Eq.3-4",
+        "§5.1 Setup",
+        "official GitHub root release scope"
+      ],
+      "inherited_artifact": "docs/research-audits/oct15-review-closure/google-source-review.json",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "read_scope": "Named method, experiments, cost and author release passages; v1 method reviewed, current abs notes v3."
+    },
+    {
+      "id": "2601.22101",
+      "title": "ECO: Quantized Training without Full-Precision Master Weights",
+      "source": "https://arxiv.org/html/2601.22101v1",
+      "affiliation": "First author Mahdi Nikdan: Google Research / ISTA; Google Research collaboration",
+      "date": "2026-01-29T18:35:01Z",
+      "current_status": "official_historical_pool_not_catalogued",
+      "decision": "priority_historical_omission_confirmed",
+      "method": "直接更新量化权重，把重重量化误差注入已有动量状态，消除高精度 master weights。SGDM 与 Adam 分别推导误差反馈修正。",
+      "code_status": "所读原文和 Google 官方详情未找到作者代码仓库",
+      "code": null,
+      "low_cost_component_opportunity": "可用小张量验证 SGDM/Adam 误差注入公式、无 master buffer 和量化轨迹；不能声称原生 FP8 kernel 性能或大模型训练复现",
+      "full_experiment_disposition": "成本过高，不复现（审查 DONE）",
+      "cost_basis": "§4.2 对30M-800M模型按100N tokens预训练（最低3B tokens），另Gemma3-1B、2.1B MoE预训练和DeepSeek-MoE-16B微调；整组训练远超短时单卡预算。",
+      "evidence_locations": [
+        "arXiv abs Submission history v1",
+        "HTML authors",
+        "§3.2 Algorithms1-3",
+        "§4.2 C4 100N tokens",
+        "§4.3-4.5",
+        "https://research.google/pubs/eco-accurate-quantization-aware-training-without-master-weights/"
+      ],
+      "inherited_artifact": "docs/research-audits/oct15-review-closure/google-source-review.json",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "read_scope": "Named algorithm, quantization and experiment-scale passages."
+    },
+    {
+      "id": "2604.27733",
+      "title": "Mind the Gap: Structure-Aware Consistency in Preference Learning",
+      "source": "https://arxiv.org/html/2604.27733v1",
+      "affiliation": "Mehryar Mohri: Google Research / Courant Institute; Yutao Zhong: Google Research",
+      "date": "2026-04-30T11:24:04Z",
+      "current_status": "official_historical_pool_not_catalogued",
+      "decision": "priority_historical_omission_confirmed",
+      "method": "SA-DPO 在偏好对数比差上减去与语义距离成比例的 margin，近义对放松约束，并分析重尾 surrogate 与容量限制。",
+      "code_status": "所读原文和 Google 官方详情未找到作者代码仓库",
+      "code": null,
+      "low_cost_component_opportunity": "可实现保留reference log-ratio及distance的真实loss/梯度，并验证零距离退化；不能用常数margin替代",
+      "full_experiment_disposition": "成本过高，不复现（审查 DONE）",
+      "cost_basis": "§7/Appendix M 使用Llama3-8B LoRA，UltraFeedback20k、1200 steps、batch16，BGE-Large距离与多组基线/五次运行；整组对照估计多小时级，未启动实跑。",
+      "evidence_locations": [
+        "arXiv abs Submission history v1; latest v3 2026-10-15 identity only",
+        "HTML authors",
+        "§5.3 Definition5.5 and SA-DPO objective",
+        "§7.1-7.3",
+        "Appendix M",
+        "https://research.google/pubs/mind-the-gap-structure-aware-consistency-in-preference-learning/"
+      ],
+      "inherited_artifact": "docs/research-audits/oct15-review-closure/google-source-review.json",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "read_scope": "Named objective, evaluation and hyperparameter passages in v1; v3 body not independently reread."
+    },
+    {
+      "id": "2604.18547",
+      "title": "FUSE: Ensembling Verifiers with Zero Labeled Data",
+      "source": "https://arxiv.org/html/2604.18547v1",
+      "affiliation": "First author Joonhyuk Lee: Stanford University; coauthor Regev Cohen: Google",
+      "date": "2026-04-20T17:40:33Z",
+      "current_status": "official_historical_pool_not_catalogued",
+      "decision": "priority_historical_omission_confirmed",
+      "method": "仅用 verifier 分数矩阵的二/三阶矩估计查询条件质量，以分数变换控制相关性，再集成选择候选；依赖多数优于随机和条件独立等假设。",
+      "code_status": "原文Appendix G发布原始HLE/IMO数据；所读版本称pipeline将开源，未确认作者完整pipeline；HazyResearch/scaling-verification为基线不是FUSE作者实现",
+      "code": null,
+      "public_data": "https://huggingface.co/FUSE-verifiers",
+      "low_cost_component_opportunity": "预生成分数上的无标签集成本身可CPU运行；应拒绝gold标签入估计器，检查条件独立/退化，不冒称新模型生成能力",
+      "full_experiment_disposition": "成本过高，不复现（审查 DONE）",
+      "cost_basis": "Appendix F 原始HLE/IMO生成/验证使用8×H100-80GB；离线分数集成本身论文明确无需GPU。因此只延期完整生成实验，不能用8H100否定低成本集成算法。",
+      "evidence_locations": [
+        "arXiv abs Submission history v1",
+        "HTML authors",
+        "§2.1-2.3",
+        "Appendix D",
+        "Appendix F Compute requirements",
+        "Appendix G Replicability",
+        "https://research.google/pubs/fuse-scaling-verification-with-zero-labeled-data/"
+      ],
+      "inherited_artifact": "docs/research-audits/oct15-review-closure/google-source-review.json",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "read_scope": "Named method, assumptions, compute and release passages."
+    },
+    {
+      "id": "2602.21103",
+      "title": "Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning",
+      "source": "https://arxiv.org/html/2602.21103v1",
+      "affiliation": "Google (both authors Sanket Badhe / Deep Shah)",
+      "date": "2026-02-24T17:03:21Z",
+      "current_status": "official_historical_pool_not_catalogued",
+      "decision": "priority_historical_omission_confirmed",
+      "method": "训练标签用于教师抽象指令，按语义向量DBSCAN去噪聚类、教师合成规则，再用训练误差做冲突修订；validation用于收敛，最终只向学生提供规则。",
+      "code_status": "所读原文未找到作者实现仓库",
+      "code": null,
+      "low_cost_component_opportunity": "DBSCAN和训练/验证/测试隔离的规则编译接口可低成本验证；真实教师抽象和冲突解决不可由手写规则替代",
+      "full_experiment_disposition": "成本过高，不复现（审查 DONE）",
+      "cost_basis": "§4 Gemini3Flash提取、Gemini3Pro规则合成/冲突修复、GeminiEmbedding；Gemma3-4B/Gemini2Flash在多个数据集多轮推理。闭源API全流程成本无法廉价固定，按预算门槛关闭完整实验，不下载大模型探成本。",
+      "evidence_locations": [
+        "arXiv abs Submission history v1; v2 2026-06-02 identity only",
+        "HTML authors",
+        "§3.1-3.4",
+        "§4.1 Setup",
+        "Appendix C clustering",
+        "https://research.google/pubs/prompt-level-distillation-a-non-parametric-alternative-to-model-fine-tuning-for-efficient-reasoning/"
+      ],
+      "inherited_artifact": "docs/research-audits/oct15-review-closure/google-source-review.json",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "read_scope": "Named method/setup passages in v1, not all v2 contents."
+    }
+  ],
+  "recent_official_reverse_checks": [
+    {
+      "url": "https://research.google/pubs/",
+      "checked_on": "2026-10-20",
+      "read_scope": "First rendered page (15 records), current directory count 421 for 2026; not all pages re-fetched",
+      "result": "SA-DPO and other historical publications still prominently listed; directory year ordering is not original publication order."
+    },
+    {
+      "url": "https://deepmind.google/research/publications/",
+      "checked_on": "2026-10-20",
+      "read_scope": "First page lists all 27 2026-dated records in the existing 265-record directory snapshot",
+      "result": "No later listing than 2026-09-16 on this rendered directory; this is not evidence there are no October DeepMind papers."
+    }
+  ],
+  "limitations": [
+    "102 Google and 27 DeepMind historical source rows were fully enumerated and reconciled, not all read in full text.",
+    "The three date-only Google affiliation confirmations use actual author blocks; author-name matches only helped recall and must not be used as final affiliation proof.",
+    "7 substantive reviews read named algorithm, evaluation, cost and release passages, not each complete article or every revision.",
+    "Unconfirmed entries remain nonblocking metadata-only archives, not substantive review DONE, implemented or automatically queued.",
+    "No global exhaustive Google/Meta claim and no review-watermark advance; Meta review belongs to the independent parent task."
+  ]
+}
