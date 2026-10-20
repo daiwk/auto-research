@@ -28,6 +28,12 @@ spec.loader.exec_module(runner)
 torch.set_num_threads(1)
 
 
+def test_summary_keeps_guard_boolean_and_rejects_partial_success():
+    result = runner.summarize([{"metrics": {"guard": value, "count": index}}
+                               for index, value in enumerate((True, True, False))])
+    assert result["guard"] is False and result["count"] == {"mean": 1, "std": 1., "n": 3}
+
+
 @pytest.mark.parametrize("kind", ["identity", "dct", "dst", "dft"])
 @pytest.mark.parametrize("size", [1, 3, 6])
 def test_orthonormal_transform_and_explicit_oracle(kind, size):

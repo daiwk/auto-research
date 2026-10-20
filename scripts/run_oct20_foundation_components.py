@@ -273,9 +273,12 @@ def kronlstm_diagnostic(seed: int, device: str) -> dict:
 
 
 def summarize(rows: list[dict]) -> dict:
-    return {key: {"mean": statistics.mean(values := [row["metrics"][key] for row in rows]),
-                  "std": statistics.stdev(values) if len(values) > 1 else 0., "n": len(values)}
-            for key in rows[0]["metrics"]}
+    result = {}
+    for key in rows[0]["metrics"]:
+        values = [row["metrics"][key] for row in rows]
+        result[key] = all(values) if all(type(value) is bool for value in values) else {
+            "mean": statistics.mean(values), "std": statistics.stdev(values) if len(values) > 1 else 0., "n": len(values)}
+    return result
 
 
 def main() -> int:
