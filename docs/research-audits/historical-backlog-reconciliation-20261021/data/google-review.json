@@ -1,0 +1,3479 @@
+{
+  "schema_version": 1,
+  "read_only_audit": true,
+  "workspace": ".",
+  "scope": "backfill-inventory.json中54个new Google/DeepMind官方源身份；不覆盖全部521、不是全网查新",
+  "summary": {
+    "original_new_count": 54,
+    "disposition_counts": {
+      "genuine_substantive_review_gap_not_accepted_implementation": 48,
+      "out_of_scope_labor_policy": 1,
+      "conceptual_position_no_direct_implementation_target": 1,
+      "conceptual_report_no_direct_implementation_target": 1,
+      "out_of_scope_normative_ethics": 1,
+      "already_triaged_p2_not_accepted_delivery": 1,
+      "conceptual_white_paper_no_direct_implementation_target": 1
+    },
+    "existing_implementation_found_count": 0,
+    "existing_substantive_terminal_found_count": 0,
+    "duplicate_identities_within_54": 0,
+    "accepted_implementation_commitments_established_this_audit": 0
+  },
+  "method": [
+    "读AGENTS.md及docs/architecture.md；禁止DeepXiv/Superpowers，未训练/下载/改仓库",
+    "完整读取ledger和manifest并做canonical ID与题名模糊映射；54 ID均无命中",
+    "docs/src/tests做54个精确题名与23个独特别名的全量文本搜索；排除历史审计材料后仅有发现测试fixture与不相关Flames图注",
+    "两条范围外和三条白皮书/观点判断基于已有官方缓存摘要的主题/文体初筛；不冒称全文审查或既有仓库终态"
+  ],
+  "full_file_checks": [
+    {
+      "path": "docs/paper-discovery-ledger.json",
+      "line_count": 123324,
+      "full_file_raw_identity_search_matches": []
+    },
+    {
+      "path": "docs/research-manifest.json",
+      "line_count": 39593,
+      "full_file_raw_identity_search_matches": []
+    }
+  ],
+  "important_semantics": [
+    "new表示没有current catalog或substantive terminal，不代表新发表、已接受或必须实现",
+    "54全部是Google/DeepMind官方源信号，并非54篇都已确认一作Google隶属",
+    "PoTRE已有P2范围初筛但没有实施承诺；已有P2不等于高成本/拒绝终态",
+    "官网URL重复已由54的canonical ID集合去重，没有新增可减掉的重复身份",
+    "2范围外和3非直接实施对象是本轮审计判断，未回写ledger；54现存标签仍然原样。"
+  ],
+  "papers": [
+    {
+      "id": "2405.02699",
+      "title": "Platform Competition in the Autobidding World",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/platform-competition-in-the-autobidding-world/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2024-05-04"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "分析自动出价广告平台竞争，相关于广告机制；原稿已于 2024 年公开，2026 会议年份不算首发。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 21,
+          "json_pointer": "/papers/0"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1010,
+          "json_pointer": "/official_pool/63"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 10114,
+          "json_pointer": "/records/216"
+        }
+      ]
+    },
+    {
+      "id": "2507.23590",
+      "title": "Identifying Hearing Difficulty Moments in Conversational Audio",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/identifying-hearing-difficulty-moments-in-conversational-audio/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2025-07-31"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "音频语言模型检测听力困难片段，属于多模态应用候选，需公开数据与真实模型验证。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 30,
+          "json_pointer": "/papers/1"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 397,
+          "json_pointer": "/official_pool/24"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 4572,
+          "json_pointer": "/records/101"
+        }
+      ]
+    },
+    {
+      "id": "2509.22963",
+      "title": "Reinforcement Learning with Discrete Diffusion Policies for Combinatorial Action-Spaces",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/reinforcement-learning-with-discrete-diffusion-policies-for-combinatorial-action-spaces/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2025-09-26"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "用强化学习优化离散扩散策略，具有后训练方法相关性；首发为 2025 年，不是 2026 年本窗口新文。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 39,
+          "json_pointer": "/papers/2"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 662,
+          "json_pointer": "/official_pool/41"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 7066,
+          "json_pointer": "/records/156"
+        }
+      ]
+    },
+    {
+      "id": "2510.03217",
+      "title": "Abstain and Validate: A Dual-LLM Policy for Reducing Noise in Agentic Program Repair",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/abstain-and-validate-a-dual-llm-policy-for-reducing-noise-in-agentic-program-repair/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2025-10-03"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "弃权和补丁验证双LLM策略，适合代码Agent历史候选；过滤成功率需报告保留率。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 48,
+          "json_pointer": "/papers/3"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 775,
+          "json_pointer": "/official_pool/48"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 7988,
+          "json_pointer": "/records/174"
+        }
+      ]
+    },
+    {
+      "id": "2510.17670",
+      "title": "On-the-Fly OVD Adaptation with FLAME: Few-shot Localization via Active Marginal-Samples Exploration",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/on-the-fly-ovd-adaptation-with-flame-few-shot-localization-via-active-marginal-samples-exploration/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2025-10-20"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "开放词汇检测适配的 FLAME；保留为历史多模态候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 57,
+          "json_pointer": "/papers/4"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 40,
+          "json_pointer": "/official_pool/1"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 142,
+          "json_pointer": "/records/4"
+        }
+      ]
+    },
+    {
+      "id": "2511.02767",
+      "title": "Dynamic Reflections: Probing Video Representations with Text Alignment",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/193694/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-04-23"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-04-23早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 66,
+          "json_pointer": "/papers/5"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1908,
+          "json_pointer": "/official_pool/121"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 623,
+          "json_pointer": "/records/19"
+        }
+      ]
+    },
+    {
+      "id": "2511.03782",
+      "title": "Expert evaluation of LLM world models: A high-Tc superconductivity case study",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/expert-evaluation-of-llm-world-models-a-high-tc-superconductivity-case-study/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2025-11-05"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "专家科学问答及多模态文献RAG评测可作Agent/多模态公共评测历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 75,
+          "json_pointer": "/papers/6"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 254,
+          "json_pointer": "/official_pool/15"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 2772,
+          "json_pointer": "/records/58"
+        }
+      ]
+    },
+    {
+      "id": "2511.10865",
+      "title": "Towards A Human-in-the-Loop Framework for Reliable Patch Evaluation using an LLM-as-a-Judge",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/towards-a-human-in-the-loop-framework-for-reliable-patch-evaluation-using-an-llm-as-a-judge/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2025-11-14"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "人类修订逐 bug 评分准则后用 LLM 判断补丁有效性，属于 Agent 评测；arXiv 原稿为 2025 年。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 84,
+          "json_pointer": "/papers/7"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 758,
+          "json_pointer": "/official_pool/47"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 7924,
+          "json_pointer": "/records/173"
+        }
+      ]
+    },
+    {
+      "id": "2511.11552",
+      "title": "DocLens: A Tool-Augmented Multi-Agent Framework for Long Visual Document Understanding",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/doclens-a-tool-augmented-multi-agent-framework-for-long-visual-document-understanding/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2025-11-14"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "DocLens 用视觉文档解析、证据镜头与裁决改进长文档 QA，属于多模态 Agent；2025 年首发。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 93,
+          "json_pointer": "/papers/8"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 882,
+          "json_pointer": "/official_pool/55"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 8709,
+          "json_pointer": "/records/188"
+        }
+      ]
+    },
+    {
+      "id": "2601.00372",
+      "title": "LLM-Powered Analysis of IoT User Reviews: Tracking and Ranking Security and Privacy Concerns",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/llm-powered-analysis-of-iot-user-reviews-tracking-and-ranking-security-and-privacy-concerns/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-01-01"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "微调 LLM 识别并聚类物联网评论中的安全隐私问题，相关于内容理解；1 月首发，不依据离线评论结果推定线上 A/B。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 102,
+          "json_pointer": "/papers/9"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 583,
+          "json_pointer": "/official_pool/36"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 6289,
+          "json_pointer": "/records/139"
+        }
+      ]
+    },
+    {
+      "id": "2601.19066",
+      "title": "Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/dynamic-cogeneration-of-bug-reproduction-test-in-agentic-program-repair/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-01-27"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "动态协同生成 bug 复现和修复测试；120 个内部 Google bug 不能充当本地公共评测。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 111,
+          "json_pointer": "/papers/10"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 792,
+          "json_pointer": "/official_pool/49"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 8063,
+          "json_pointer": "/records/175"
+        }
+      ]
+    },
+    {
+      "id": "2601.21149",
+      "title": "Mobility-Embedded POIs: Learning What a Place Is and How It’s Used from Human Movement",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/mobility-embedded-pois-learning-what-a-place-is-and-how-its-used-from-human-movement/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-01-29"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "POI文本表示与移动轨迹对比学习，适合基础模型/LLM应用历史候选；不能凭地图任务推断线上A/B。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 120,
+          "json_pointer": "/papers/11"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1130,
+          "json_pointer": "/official_pool/71"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 11219,
+          "json_pointer": "/records/239"
+        }
+      ]
+    },
+    {
+      "id": "2602.02164",
+      "title": "Co-RedTeam: Orchestrated Security Discovery and Exploitation with LLM Agents",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-02-02"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "CoRedTeam 执行反馈驱动的网络安全协作 Agent；历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 139,
+          "json_pointer": "/papers/13"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 724,
+          "json_pointer": "/official_pool/45"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 7682,
+          "json_pointer": "/records/169"
+        }
+      ]
+    },
+    {
+      "id": "2602.02690",
+      "title": "Outrunning LLM Cutoffs: A Live Kernel Crash Resolution Benchmark for All,",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/outrunning-llm-cutoffs-a-live-kernel-crash-resolution-benchmark-for-all/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-02-02"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "LivekBench 以实时 kernel crash resolution 降低截止时间污染，属于历史 Agent benchmark。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 157,
+          "json_pointer": "/papers/15"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1228,
+          "json_pointer": "/official_pool/77"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 12024,
+          "json_pointer": "/records/255"
+        }
+      ]
+    },
+    {
+      "id": "2602.06276",
+      "title": "Learning from Attribution Sets",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/learning-from-attribution-sets/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-02-06"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "利用归因集合进行统计估计，相关于广告转化建模；已确认 2 月原稿，工业线上证据仍需另审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 166,
+          "json_pointer": "/papers/16"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 980,
+          "json_pointer": "/official_pool/61"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 9655,
+          "json_pointer": "/records/207"
+        }
+      ]
+    },
+    {
+      "id": "2602.07266",
+      "title": "ADCanvas: Accessible and Conversational Audio Description Authoring for Blind and Low Vision Creators",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/adcanvas-accessible-and-conversational-audio-description-authoring-for-blind-and-low-vision-creators/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-02-06"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "对话式 VQA、脚本生成与无障碍音频描述 Agent；12 人用户研究不能替代能力 benchmark。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 184,
+          "json_pointer": "/papers/18"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 57,
+          "json_pointer": "/official_pool/2"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 893,
+          "json_pointer": "/records/21"
+        }
+      ]
+    },
+    {
+      "id": "2602.07918",
+      "title": "Causal Armor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/causal-armor-efficient-indirect-prompt-injection-guardrails-via-causal-attribution/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-02-08"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "因果消融归因触发选择性IPI净化和CoT遮蔽，适合Agent安全历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 193,
+          "json_pointer": "/papers/19"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 707,
+          "json_pointer": "/official_pool/44"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 7608,
+          "json_pointer": "/records/168"
+        }
+      ]
+    },
+    {
+      "id": "2602.12481",
+      "title": "Online Advertising with Spatial Interactions",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/online-advertising-with-spatial-interactions/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-02-12"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "广告空间外部性分配算法理论；保留历史相关项，未查到线上证据前不接受工业复现。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 202,
+          "json_pointer": "/papers/20"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1027,
+          "json_pointer": "/official_pool/64"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 10179,
+          "json_pointer": "/records/217"
+        }
+      ]
+    },
+    {
+      "id": "2602.16938",
+      "title": "ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/convapparel-a-benchmark-dataset-and-validation-framework-for-user-simulators-in-conversational-recommenders-2/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-02-18"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "ConvApparel 对话式用户模拟与评测；历史候选，需核对公开数据和可执行模拟器。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 220,
+          "json_pointer": "/papers/22"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 365,
+          "json_pointer": "/official_pool/22"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 4440,
+          "json_pointer": "/records/99"
+        }
+      ]
+    },
+    {
+      "id": "2602.17554",
+      "title": "A Theoretical Framework for Modular Learning of Robust Generative Models",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/a-theoretical-framework-for-modular-learning-of-robust-generative-models/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-02-19"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "以门控专家和鲁棒目标组织模块化生成模型，属于基础模型训练；2 月原稿而非本轮新文。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 229,
+          "json_pointer": "/papers/23"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 950,
+          "json_pointer": "/official_pool/59"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 9224,
+          "json_pointer": "/records/198"
+        }
+      ]
+    },
+    {
+      "id": "2603.01293",
+      "title": "Theoretical Perspectives on Data Quality and Synergistic Effects in Pre- and Post-Training Reasoning Models",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/theoretical-perspectives-on-data-quality-and-synergistic-effects-in-pre-and-post-training-reasoning-models/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-01"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "用理论模型解释预训练与后训练的数据质量协同，相关于基础模型/后训练；3 月首发。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 248,
+          "json_pointer": "/papers/25"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1211,
+          "json_pointer": "/official_pool/76"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 11903,
+          "json_pointer": "/records/253"
+        }
+      ]
+    },
+    {
+      "id": "2603.06981",
+      "title": "Diffusion Controller: Framework, Algorithms and Parameterization",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/diffusion-controller-framework-algorithms-and-parameterization/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-07"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "DiffCon 将扩散采样表述为控制问题，并提供 SFT/RLFT 控制器；属于多模态与后训练，3 月首发。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 266,
+          "json_pointer": "/papers/27"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 615,
+          "json_pointer": "/official_pool/38"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 6864,
+          "json_pointer": "/records/153"
+        }
+      ]
+    },
+    {
+      "id": "2603.10465",
+      "title": "MoXaRt: Audio-Visual Object-Guided Sound Interaction for XR",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/moxart-audio-visual-object-guided-sound-interaction-for-xr-2/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-11"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "视听对象引导声音交互与分离，属于多模态历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 275,
+          "json_pointer": "/papers/28"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 474,
+          "json_pointer": "/official_pool/29"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 3400,
+          "json_pointer": "/records/109"
+        }
+      ],
+      "dedup_note_zh": "继承Google记录71与109使用两个官网URL指同一论文；当前54中只有一个ID，已去重。"
+    },
+    {
+      "id": "2603.14609",
+      "title": "GroundSet: A Cadastral-Grounded Dataset for Spatial Understanding with Vector Data",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/groundset-a-cadastral-grounded-dataset-for-spatial-understanding-with-vector-data/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-15"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "GroundSet公开空间理解数据、模型与指令微调，适合多模态历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 284,
+          "json_pointer": "/papers/29"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1356,
+          "json_pointer": "/official_pool/85"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 13367,
+          "json_pointer": "/records/285"
+        }
+      ]
+    },
+    {
+      "id": "2603.14769",
+      "title": "POLCA: Stochastic Generative Optimization with LLM",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/polca-stochastic-generative-optimization-with-llm-2/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-16"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "POLCA随机反馈优先队列+多样性与历史摘要优化，适合RSI/Agent历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 293,
+          "json_pointer": "/papers/30"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1476,
+          "json_pointer": "/official_pool/93"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 15601,
+          "json_pointer": "/records/340"
+        }
+      ]
+    },
+    {
+      "id": "2603.24591",
+      "title": "Vibe Coding XR: Accelerating AI + XR Prototyping with XR Blocks and Gemini",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/vibe-coding-xr-accelerating-ai-xr-prototyping-with-xr-blocks-and-gemini/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-25"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "自然语言到WebXR程序的开源工作流与VCXR60试验，适合代码Agent历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 311,
+          "json_pointer": "/papers/32"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 207,
+          "json_pointer": "/official_pool/12"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 2418,
+          "json_pointer": "/records/51"
+        }
+      ]
+    },
+    {
+      "id": "2603.28896",
+      "title": "Fisheye3R: Adapting Unified 3D Feed-Forward Foundation Models to Fisheye Lenses",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/fisheye3r-adapting-unified-3d-feed-forward-foundation-models-to-fisheye-lenses/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-30"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "Fisheye3R 以适配 token 扩展三维基础模型到鱼眼成像，属于多模态；3 月原稿已经定位。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 329,
+          "json_pointer": "/papers/34"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1162,
+          "json_pointer": "/official_pool/73"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 11369,
+          "json_pointer": "/records/241"
+        }
+      ]
+    },
+    {
+      "id": "2603.29470",
+      "title": "AI-Simulated Expert Panels for Socio-Technical Scenarios and Decision Guidance",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/ai-simulated-expert-panels-for-socio-technical-scenarios-and-decision-guidance/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-31"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "LLM专家面板与交叉影响一致性情景生成，保留Agent历史候选，不能当真实专家真值。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 338,
+          "json_pointer": "/papers/35"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1506,
+          "json_pointer": "/official_pool/95"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 15773,
+          "json_pointer": "/records/343"
+        }
+      ]
+    },
+    {
+      "id": "2603.29791",
+      "title": "Reasoning-Driven Synthetic Data Generation and Evaluation",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/reasoning-driven-synthetic-data-generation-and-evaluation/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-03-31"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "Simula 用推理式 Agent 生成和评价无种子合成数据，属于基础模型数据与 Agent；已找到 3 月 arXiv 原稿。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 347,
+          "json_pointer": "/papers/36"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 190,
+          "json_pointer": "/official_pool/11"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 2354,
+          "json_pointer": "/records/50"
+        }
+      ]
+    },
+    {
+      "id": "2604.05364",
+      "title": "TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/tfrbench-a-reasoning-benchmark-for-evaluating-forecasting-systems/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-04-07"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "TFRBench多Agent生成可验证预测推理的公开基准，适合Agent/evolve评测历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 356,
+          "json_pointer": "/papers/37"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1179,
+          "json_pointer": "/official_pool/74"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 11584,
+          "json_pointer": "/records/246"
+        }
+      ]
+    },
+    {
+      "id": "2604.09803",
+      "title": "MAGE: Modality-Agnostic Music Generation and Editing",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/mage-modality-agnostic-music-generation-and-editing/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-04-10"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "流Transformer的多模态音乐生成/编辑及动态模态mask，适合多模态历史候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 365,
+          "json_pointer": "/papers/38"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1281,
+          "json_pointer": "/official_pool/80"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 12496,
+          "json_pointer": "/records/265"
+        }
+      ]
+    },
+    {
+      "id": "2604.20329",
+      "title": "Image Generators are Generalist Vision Learners",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/240658/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-04-22"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-04-22早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 384,
+          "json_pointer": "/papers/40"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1925,
+          "json_pointer": "/official_pool/122"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 656,
+          "json_pointer": "/records/20"
+        }
+      ]
+    },
+    {
+      "id": "2604.23099",
+      "title": "ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/238239/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-04-25"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-04-25早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 393,
+          "json_pointer": "/papers/41"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1891,
+          "json_pointer": "/official_pool/120"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 590,
+          "json_pointer": "/records/18"
+        }
+      ]
+    },
+    {
+      "id": "2604.27723",
+      "title": "Optimized Deferral for Imbalanced Settings",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/optimized-deferral-for-imbalanced-settings/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-04-30"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "MILD 面向不均衡任务优化 LLM 延迟/转交策略，保留为历史推理路由候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 402,
+          "json_pointer": "/papers/42"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 916,
+          "json_pointer": "/official_pool/57"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 8864,
+          "json_pointer": "/records/191"
+        }
+      ]
+    },
+    {
+      "id": "2605.03767",
+      "title": "Did US Worker Retraining Reduce Participant Automation Exposure?",
+      "original_status": "new",
+      "audit_disposition": "out_of_scope_labor_policy",
+      "judgement_zh": "范围外（社会政策实证研究）；不是本项目技术复现待办",
+      "basis_zh": "官方摘要研究2300万WIOA参与记录的职业再培训与自动化暴露，不是推荐/基础模型/后训练/Agent/多模态算法。此为主题初筛，不是阅读全文或实验复现。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/239849/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-05-06"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-05-06早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 430,
+          "json_pointer": "/papers/45"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1874,
+          "json_pointer": "/official_pool/119"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 557,
+          "json_pointer": "/records/17"
+        },
+        {
+          "path": ".cache/oct12-scan/official/8f7cf5eb35ea837ef078f09d64a0062c7abe678c1e64ebd15a7e742e2b638671.html",
+          "line": 1,
+          "source_url": "https://deepmind.google/research/publications/239849/",
+          "location": "official Abstract and ScholarlyArticle JSON-LD; cached primary source",
+          "note": "仅本轮主题/文体初筛；不是全文审查终态"
+        }
+      ]
+    },
+    {
+      "id": "2605.26340",
+      "title": "Scientist-One: Verifiable Autonomous Research via Chain-of-Evidence",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/scientist-one-verifiable-autonomous-research-via-chain-of-evidence/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-05-25"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "Scientist One 用证据链连接论文结果与代码；官方标题/作者别名匹配到该预印本。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 448,
+          "json_pointer": "/papers/47"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 839,
+          "json_pointer": "/official_pool/52"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 8281,
+          "json_pointer": "/records/179"
+        }
+      ]
+    },
+    {
+      "id": "2605.29729",
+      "title": "Realistic honeypot evaluations for scheming propensity",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/253391/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-05-28"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-05-28早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 457,
+          "json_pointer": "/papers/48"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1840,
+          "json_pointer": "/official_pool/117"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 491,
+          "json_pointer": "/records/15"
+        }
+      ]
+    },
+    {
+      "id": "2605.30174",
+      "title": "LiveSVG: Zero-Shot SVG Animation via Video Generation",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/livesvg-zero-shot-svg-animation-via-video-generation/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-05-28"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "用冻结视频生成模型产生目标视频，再以可微渲染拟合 SVG 动画，属于多模态生成；已确认 5 月首发。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 475,
+          "json_pointer": "/papers/50"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 553,
+          "json_pointer": "/official_pool/34"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 6124,
+          "json_pointer": "/records/136"
+        }
+      ]
+    },
+    {
+      "id": "2605.30322",
+      "title": "Gram: Assessing sabotage propensities via automated alignment auditing",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/252981/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-05-28"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-05-28早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 484,
+          "json_pointer": "/papers/51"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1857,
+          "json_pointer": "/official_pool/118"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 524,
+          "json_pointer": "/records/16"
+        }
+      ]
+    },
+    {
+      "id": "2606.00131",
+      "title": "AI-PROPELLER: Warehouse-Scale Inter-Procedural Code Layout Optimization with AlphaEvolve",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/ai-propeller-warehouse-scale-inter-procedural-code-layout-optimization-with-alphaevolve/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-05-28"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "AlphaEvolve演化编译布局策略并用硬件计数器奖励，适合RSI/Agent历史高优候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 493,
+          "json_pointer": "/papers/52"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 536,
+          "json_pointer": "/official_pool/33"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 6007,
+          "json_pointer": "/records/134"
+        }
+      ]
+    },
+    {
+      "id": "2606.00369",
+      "title": "Quantifying the Salience of Geo-Cultural Values for Pluralistic Safety Alignment",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/225819/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-07-10"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-07-10早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 502,
+          "json_pointer": "/papers/53"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1697,
+          "json_pointer": "/official_pool/108"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 204,
+          "json_pointer": "/records/6"
+        }
+      ]
+    },
+    {
+      "id": "2606.03237",
+      "title": "Solipsistic superintelligence is unlikely to be cooperative",
+      "original_status": "new",
+      "audit_disposition": "conceptual_position_no_direct_implementation_target",
+      "judgement_zh": "相关多Agent合作观点；不是一个明确算法实现欠账",
+      "basis_zh": "官方摘要呼吁将相互依存作为设计原则并构建动态评测平台，属于研究范式/观点。没有在本轮确认一个论文级可执行复现目标，不能等同于接受待实现。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/231466/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-06-04"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-06-04早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 511,
+          "json_pointer": "/papers/54"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1823,
+          "json_pointer": "/official_pool/116"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 458,
+          "json_pointer": "/records/14"
+        },
+        {
+          "path": ".cache/oct12-scan/official/a82ad022f39b97837c035ff1a7ebd8e6a95abc20c8a9c32884f2ec13ed7fd4bd.html",
+          "line": 1,
+          "source_url": "https://deepmind.google/research/publications/231466/",
+          "location": "official Abstract and ScholarlyArticle JSON-LD; cached primary source",
+          "note": "仅本轮主题/文体初筛；不是全文审查终态"
+        }
+      ]
+    },
+    {
+      "id": "2606.12683",
+      "title": "From AGI to ASI",
+      "original_status": "new",
+      "audit_disposition": "conceptual_report_no_direct_implementation_target",
+      "judgement_zh": "相关AGI/ASI路线报告；不是一个可直接交付的实现",
+      "basis_zh": "官方摘要研究AGI到ASI的四条可能路径与瓶颈，包含递归改进，但属于前瞻报告。可列研究资料，不应仅因无代码被算成实现TODO；未做全文审查。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/239142/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-06-12"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-06-12早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 520,
+          "json_pointer": "/papers/55"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1806,
+          "json_pointer": "/official_pool/115"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 425,
+          "json_pointer": "/records/13"
+        },
+        {
+          "path": ".cache/oct12-scan/official/4583ab7e6fd90b008be907196b912a74e50ec0f1eabba34eea47f2843d10f576.html",
+          "line": 1,
+          "source_url": "https://deepmind.google/research/publications/239142/",
+          "location": "official Abstract and ScholarlyArticle JSON-LD; cached primary source",
+          "note": "仅本轮主题/文体初筛；不是全文审查终态"
+        }
+      ]
+    },
+    {
+      "id": "2607.02515",
+      "title": "PointDiT: Pixel-Space Diffusion for Monocular Geometry Estimation",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/pointdit-pixel-space-diffusion-for-monocular-geometry-estimation/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-07-02"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "PointDiT 以像素空间扩散预测单目三维几何，属于多模态；7 月首发及官方代码已定位。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 529,
+          "json_pointer": "/papers/56"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1339,
+          "json_pointer": "/official_pool/84"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 13304,
+          "json_pointer": "/records/284"
+        }
+      ]
+    },
+    {
+      "id": "2607.03906",
+      "title": "The Case for Globally Beneficial Technology",
+      "original_status": "new",
+      "audit_disposition": "out_of_scope_normative_ethics",
+      "judgement_zh": "范围外（技术收益分配伦理论证）；不是技术复现待办",
+      "basis_zh": "官方摘要论述技术创新收益归属与五类道德理由，不提供本项目技术算法的实现对象。此为主题初筛，不是全文审查DONE。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/260960/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-07-06"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-07-06早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 538,
+          "json_pointer": "/papers/57"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1714,
+          "json_pointer": "/official_pool/109"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 237,
+          "json_pointer": "/records/7"
+        },
+        {
+          "path": ".cache/oct12-scan/official/6eeaaac11d2fd504daeb465524db27bdca4ce756e1acb94c7e32f45612cd6b45.html",
+          "line": 1,
+          "source_url": "https://deepmind.google/research/publications/260960/",
+          "location": "official Abstract and ScholarlyArticle JSON-LD; cached primary source",
+          "note": "仅本轮主题/文体初筛；不是全文审查终态"
+        }
+      ]
+    },
+    {
+      "id": "2607.13614",
+      "title": "VIP-MINGLE: A Corpus for Videoconference and In-Person Multimodal Interaction in Group Language Engagement",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/vip-mingle-a-corpus-for-videoconference-and-in-person-multimodal-interaction-in-group-language-engagement/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-07-15"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "跨场景音视频群体交互语料，适合多模态数据候选。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 547,
+          "json_pointer": "/papers/58"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1442,
+          "json_pointer": "/official_pool/91"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 15350,
+          "json_pointer": "/records/334"
+        }
+      ]
+    },
+    {
+      "id": "2607.20268",
+      "title": "PoTRE: Test-Time Reasoning inspired by Cognitive Heterogeneity",
+      "original_status": "new",
+      "audit_disposition": "already_triaged_p2_not_accepted_delivery",
+      "judgement_zh": "已有P2/query-collision初筛；并非已接受待交付",
+      "basis_zh": "独立历史候选表将PoTRE标为p2-deferred-review、p2-or-query-collision，full_text_review_required=false，implementation_batch=null。未发现实质全文终态或实现；若未来提升优先级需另审，不是新增实施承诺。",
+      "source_urls": [
+        "https://research.google/pubs/potre-test-time-reasoning-inspired-by-cognitive-heterogeneity/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-07-22"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "PoTRE 结合异质认知角色进行测试时推理，属于 Agent/推理；已确认 7 月首发。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 556,
+          "json_pointer": "/papers/59"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 809,
+          "json_pointer": "/official_pool/50"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 8159,
+          "json_pointer": "/records/177"
+        },
+        {
+          "path": "docs/paper-audits/2026-historical-candidates.json",
+          "line": 40535,
+          "note": "下方full_text_review_required=false、plan_status=p2-or-query-collision、implementation_batch=null"
+        }
+      ]
+    },
+    {
+      "id": "2607.25537",
+      "title": "Visual prompt engineering for video models",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/264392/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-07-28"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-07-28早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 565,
+          "json_pointer": "/papers/60"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1665,
+          "json_pointer": "/official_pool/106"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 140,
+          "json_pointer": "/records/4"
+        }
+      ]
+    },
+    {
+      "id": "2608.05578",
+      "title": "Detecting Safety Training Modification in Language Models via Activation Analysis",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/ams-detecting-unsafe-and-tampered-language-models-via-activation-analysis/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-08-06"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "激活空间检测安全训练修改，适合基础模型安全评测；行为微调盲区需保留。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 583,
+          "json_pointer": "/papers/62"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 333,
+          "json_pointer": "/official_pool/20"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 3808,
+          "json_pointer": "/records/82"
+        }
+      ]
+    },
+    {
+      "id": "2608.11367",
+      "title": "Gaze Target Estimation Anywhere with Concepts",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/gaze-target-estimation-anywhere-with-concepts/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-08-11"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "GazeAnywhere/官方 AnyGaze 概念条件凝视目标估计；已知 arXiv v1 早于窗口，最早会议版本日期另待核定。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 592,
+          "json_pointer": "/papers/63"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 286,
+          "json_pointer": "/official_pool/17"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 3457,
+          "json_pointer": "/records/74"
+        }
+      ]
+    },
+    {
+      "id": "2608.25924",
+      "title": "Visual General Intelligence: A White Paper",
+      "original_status": "new",
+      "audit_disposition": "conceptual_white_paper_no_direct_implementation_target",
+      "judgement_zh": "相关白皮书；可保留资料阅读，不应计入实施欠账",
+      "basis_zh": "官方摘要明确是视觉通用智能白皮书，讨论原则、模态、benchmark和学习范式，不提出一个单独可执行复现目标。全文尚未审，不据此声称已完成方法审查。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/270149/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-08-26"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-08-26早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 601,
+          "json_pointer": "/papers/64"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1633,
+          "json_pointer": "/official_pool/104"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 76,
+          "json_pointer": "/records/2"
+        },
+        {
+          "path": ".cache/oct12-scan/official/8fdda604a586b76e5214f1e0b8eb62e644e0105c7f29b65d8ebaa4e32b6f4570.html",
+          "line": 1,
+          "source_url": "https://deepmind.google/research/publications/270149/",
+          "location": "official Abstract and ScholarlyArticle JSON-LD; cached primary source",
+          "note": "仅本轮主题/文体初筛；不是全文审查终态"
+        }
+      ]
+    },
+    {
+      "id": "2609.01588",
+      "title": "Designing Proactive Thought Partners for Writing",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://deepmind.google/research/publications/265605/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-09-01"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "官方目录日期2026-09-01早于10月8日；本轮做时间范围核验，不把目录旧论文计为新发表或声称原稿全文重审。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 610,
+          "json_pointer": "/papers/65"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 1616,
+          "json_pointer": "/official_pool/103"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-deepmind-source-review.json",
+          "line": 43,
+          "json_pointer": "/records/1"
+        },
+        {
+          "path": "tests/test_discovery_sources.py",
+          "line": 216,
+          "note": "发现解析测试只用其标题/日期构造HTML fixture；不是论文方法实现"
+        }
+      ]
+    },
+    {
+      "id": "2609.01834",
+      "title": "Architecting Conversational Data Systems for Stateless LLM APIs",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/architecting-conversational-data-systems-for-stateless-llm-apis/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-09-01"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "将会话状态持久化与无状态 LLM API 解耦，属于 Agent 记忆架构；arXiv 首发在 9 月 1 日。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 619,
+          "json_pointer": "/papers/66"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 457,
+          "json_pointer": "/official_pool/28"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 4918,
+          "json_pointer": "/records/108"
+        }
+      ]
+    },
+    {
+      "id": "2609.12464",
+      "title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration",
+      "original_status": "new",
+      "audit_disposition": "genuine_substantive_review_gap_not_accepted_implementation",
+      "judgement_zh": "真正待实质审查；尚未接受实现",
+      "basis_zh": "Google审计仅做身份/日期/摘要范围归档；原记录fulltext_review_completed=false，没有已接受实施、拒绝或高成本终态。不能把缺实现自动翻译为实现TODO。",
+      "source_urls": [
+        "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration/",
+        "https://research.google/pubs/beyond-vector-similarity-hierarchical-context-aware-graph-rag-vs-standard-rag-in-enterprise-code-migration-2/"
+      ],
+      "original_publication_dates_in_prior_audit": [
+        "2026-09-11"
+      ],
+      "first_author_google_affiliation_independently_verified_this_audit": false,
+      "existing_implementation_found": false,
+      "existing_metrics_found": false,
+      "existing_substantive_terminal_decision_found": false,
+      "ledger_identity_present": false,
+      "manifest_identity_present": false,
+      "inherited_reason_zh": "AST图关系与上下文缓存辅助代码迁移，适合代码Agent历史候选；词面指标不能替代编译正确性。",
+      "inherited_fulltext_review_completed": false,
+      "evidence": [
+        {
+          "path": "docs/research-audits/harness2-priority-repair/backfill-inventory.json",
+          "line": 628,
+          "json_pointer": "/papers/67"
+        },
+        {
+          "path": "docs/research-audits/harness2-priority-repair/google-audit.json",
+          "line": 504,
+          "json_pointer": "/official_pool/31"
+        },
+        {
+          "path": "docs/research-audits/oct15-review-closure/google-source-review.json",
+          "line": 5322,
+          "json_pointer": "/records/116"
+        }
+      ],
+      "dedup_note_zh": "Google官方两个URL是同一论文（official_pool两行）；54清单已按canonical arXiv ID合并，不能再次从54扣除。"
+    }
+  ],
+  "cached_author_block_insurance": {
+    "population": 535,
+    "cached_header_covered_count": 45,
+    "cached_header_missing_count": 490,
+    "covered": [
+      {
+        "id": "2610.09027",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09027.json",
+            "line": 71,
+            "field": "affiliation",
+            "header": "David Dobre Leo Schwinn Gauthier Gidel Spandana Gella Perouz Taslakian Pierre-André Noël Affiliation: [ Affiliation: [ Affiliation: [ Affiliation: [ Affiliation: ["
+          }
+        ]
+      },
+      {
+        "id": "2610.09127",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09127.json",
+            "line": 63,
+            "field": "affiliation",
+            "header": "Gennadiy Savrasov Affiliation: Lomonosov Moscow State University; Maksim Elistratov Affiliation: Lomonosov Moscow State University; Nikita Gavrilov Affiliation: Lomonosov Moscow State University; Albert Garifullin Affiliation: Lomonosov Moscow State University; Oleg Pavlov Affiliation: Lomonosov Moscow State University; Soslan Kabisov Affiliation: Lomonosov Moscow State University; Vladimir Frolov Affiliation: Lomonosov Moscow State University; Anton Konushin Affiliation: Lomonosov Moscow State University; Andrey Kuznetsov Affiliation: Innopolis University; Affiliation: FusionBrain Lab Dmitrii Zhemchuzhnikov † † thanks: Corresponding author: zhemchuzhnikovds@my.msu.ru . Affiliation: Lomonosov Moscow State University;"
+          }
+        ]
+      },
+      {
+        "id": "2610.09159",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09159.json",
+            "line": 71,
+            "field": "affiliation",
+            "header": "Param Biyani MATS parambiyani8@gmail.com Krishnamurthy (Dj) Dvijotham Google DeepMind"
+          }
+        ]
+      },
+      {
+        "id": "2610.09252",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09252.json",
+            "line": 48,
+            "field": "affiliation",
+            "header": "Seyoung Jeong Jong Pil Yun Sang Jun Lee"
+          }
+        ]
+      },
+      {
+        "id": "2610.09430",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09430.json",
+            "line": 55,
+            "field": "affiliation",
+            "header": "Ling Li Affiliation: Tsinghua University Qiuyu Shen Affiliation: Northwestern Polytechnical University Zheng Jiang Affiliation: Tsinghua University Qinwei Ma Affiliation: Tsinghua University Yuxuan Liu Affiliation: Tsinghua University Zhidong Deng Affiliation: Tsinghua University"
+          }
+        ]
+      },
+      {
+        "id": "2610.09484",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09484.json",
+            "line": 64,
+            "field": "affiliation",
+            "header": "Hoang Phan Affiliation: Meta Superintelligence Labs Affiliation: New York University Work done at Meta Dat Huynh Affiliation: Meta Superintelligence Labs Andrey Zhmoginov Qi Zeng Affiliation: Meta Superintelligence Labs Wancen Mu Affiliation: Meta Superintelligence Labs Yue Cao Affiliation: Meta Superintelligence Labs Shengjie Bi Affiliation: Meta Superintelligence Labs Yun He Affiliation: Meta Superintelligence Labs Changdae Oh Affiliation: Meta Superintelligence Labs Affiliation: University of Wisconsin - Madison Work done at Meta Deren Lei Affiliation: Meta Superintelligence Labs"
+          }
+        ]
+      },
+      {
+        "id": "2610.09624",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09624.json",
+            "line": 77,
+            "field": "affiliation",
+            "header": "Xijie Gong Affiliation: Mohamed bin Zayed University of Artificial Intelligence Affiliation: University of Electronic Science and Technology of China Tingxu Han Affiliation: Mohamed bin Zayed University of Artificial Intelligence Affiliation: Nanjing University Jiahao Zhang Affiliation: Mohamed bin Zayed University of Artificial Intelligence Wei Song Affiliation: Griffith University Ziqi Ding Affiliation: University of New South Wales Hanqi Yan Affiliation: King’s College London Youcheng Sun Affiliation: Mohamed bin Zayed University of Artificial Intelligence Lijie Hu Affiliation: Mohamed bin Zayed University of Artificial Intelligence"
+          }
+        ]
+      },
+      {
+        "id": "2610.09761",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09761.json",
+            "line": 56,
+            "field": "affiliation",
+            "header": "Shengkai Ma Zhenyu Hou Weihua Cao"
+          }
+        ]
+      },
+      {
+        "id": "2610.09856",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09856.json",
+            "line": 52,
+            "field": "affiliation",
+            "header": "Wenjie Liao Affiliation: Waseda University jie3040@akane.waseda.jp Liangjie Zhao Affiliation: Adelaide University zhaoliangjie55@gmail.com , Jimmy.Cao@adelaide.edu.au Zehong Cao Affiliation: Adelaide University zhaoliangjie55@gmail.com , Jimmy.Cao@adelaide.edu.au"
+          }
+        ]
+      },
+      {
+        "id": "2610.09935",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09935.json",
+            "line": 67,
+            "field": "affiliation",
+            "header": "Zitong Yao Affiliation: Sun Yat-sen University , Guangzhou , China email: yaozt@mail2.sysu.edu.cn , Jiangrong Wu Note: Corresponding author. Affiliation: The Hong Kong University of Science and Technology , Hong Kong , China email: jiangrongwu@cse.ust.hk , Yixi Lin Affiliation: Sun Yat-sen University , Guangzhou , China email: linyx98@mail2.sysu.edu.cn , Anrui Huang Affiliation: Sun Yat-sen University , Guangzhou , China email: huanganr3@mail2.sysu.edu.cn , Luoyun Zhang Affiliation: Sun Yat-sen University , Guangzhou , China email: zhangk367@mail2.sysu.edu.cn and Yuhong Nan Affiliation: Sun Yat-sen University , Guangzhou , China email: nanhy@mail.sysu.edu.cn"
+          }
+        ]
+      },
+      {
+        "id": "2610.09952",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.09952.json",
+            "line": 62,
+            "field": "affiliation",
+            "header": "Artem Filippov Affiliation: Lomonosov Moscow State University , Moscow , Russia email: artyom.filippov@graphics.cs.msu.ru , Aleksandr Gushchin Affiliation: MSU Institute for Artificial Intelligence , Moscow , Russia email: alexander.gushchin@graphics.cs.msu.ru , Kirill Koltsov Affiliation: Lomonosov Moscow State University , Moscow , Russia email: kirill.e.koltsov@mail.ru , Dmitriy Vatolin Affiliation: MSU Institute for Artificial Intelligence , Moscow , Russia email: dmitriy@graphics.cs.msu.ru and Anastasia Antsiferova Affiliation: MSU Institute for Artificial Intelligence , Moscow , Russia email: aantsiferova@graphics.cs.msu.ru"
+          }
+        ]
+      },
+      {
+        "id": "2610.10062",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.10062.json",
+            "line": 59,
+            "field": "affiliation",
+            "header": "Obada Kraishan Affiliation: College of Media and Communication Texas Tech University Lubbock, TX, USA omareikr@ttu.edu"
+          }
+        ]
+      },
+      {
+        "id": "2610.10071",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.10071.json",
+            "line": 64,
+            "field": "affiliation",
+            "header": "Ran Zhou Affiliation: School of Intelligence Science and Technology, Nanjing University Xueming Han Affiliation: Jiutian Research Correspondence: renyuxiang@nju.edu.cn Jiaheng Liu Affiliation: School of Intelligence Science and Technology, Nanjing University Yuyao Zhang Affiliation: Jiutian Research Correspondence: renyuxiang@nju.edu.cn Fanyu Meng Affiliation: Jiutian Research Correspondence: renyuxiang@nju.edu.cn Junlan Feng Affiliation: Jiutian Research Correspondence: renyuxiang@nju.edu.cn Yuxiang Ren Affiliation: School of Intelligence Science and Technology, Nanjing University"
+          }
+        ]
+      },
+      {
+        "id": "2610.10120",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.10120.json",
+            "line": 60,
+            "field": "affiliation",
+            "header": "Hengbo XiaoYoolee.ai Boyao ZhangUniversity of Science and Technology of China Purui LiuPeking University Yuxuan ZhengPeking University Haoran YinTianjin University Haibo LiuYoolee.ai Fan ZhangYoolee.ai"
+          }
+        ]
+      },
+      {
+        "id": "2610.10305",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.10305.json",
+            "line": 65,
+            "field": "affiliation",
+            "header": "Eduardo Santos-Escriche † † thanks: Equal contribution Affiliation: Technical University of Munich Affiliation: Munich Center for Machine Learning Valerie Engelmayer 1 1 footnotemark: 1 Affiliation: Technical University of Munich Affiliation: Munich Center for Machine Learning Ya-Wei Eileen Lin Affiliation: Technical University of Munich Affiliation: Munich Center for Machine Learning Stefanie Jegelka Affiliation: Technical University of Munich Affiliation: Munich Center for Machine Learning Affiliation: Massachusetts Institute of Technology"
+          }
+        ]
+      },
+      {
+        "id": "2610.10786",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.10786.json",
+            "line": 63,
+            "field": "affiliation",
+            "header": "Syamantak Kumar Jiang Guo Hassan Hamad 2 2 footnotemark: 2 Hideo Kobayashi 2 2 footnotemark: 2 Yi Xiang 2 2 footnotemark: 2 Yezhou Yang 2 2 footnotemark: 2 Yanjun Qi 2 2 footnotemark: 2 Daniele Bonadiman 2 2 footnotemark: 2 Jiarong Jiang 2 2 footnotemark: 2 † † thanks: University of Texas at Austin. Correspondence: syamantak@utexas.edu . † † thanks: Amazon. Correspondence: gujiang@amazon.com ."
+          }
+        ]
+      },
+      {
+        "id": "2610.11008",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.11008.json",
+            "line": 74,
+            "field": "affiliation",
+            "header": "Yujiao Chen Affiliation: Massachusetts Institute of Technology Email: yujiaoch@mit.edu Affiliation: Primitive Labs Email: yujiao@primitivelabs.ai"
+          }
+        ]
+      },
+      {
+        "id": "2610.11123",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.11123.json",
+            "line": 71,
+            "field": "affiliation",
+            "header": "Xiaolong Li Xiaohan Xu Jinyang Li Xinnuo Xu Ge Qu Nan Huo Jack Williams Reynold Cheng The University of Hong Kong  Microsoft Research The BIRD Team {xia01ong,xxh24,jl0725}@connect.hku.hk https://github.com/bird-bench/GenUI-Agent"
+          }
+        ]
+      },
+      {
+        "id": "2610.11136",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.11136.json",
+            "line": 67,
+            "field": "affiliation",
+            "header": "Yuchen Miao Affiliation: Sydney Smart Technology College, Northeastern University, China Zijun Wang Affiliation: Sydney Smart Technology College, Northeastern University, China Chang Han Affiliation: Sydney Smart Technology College, Northeastern University, China Yurui Shi Affiliation: Taiyuan University of Technology Mingtai Zhang Affiliation: School of Resources, Environment and Materials, Guangxi University Siyang Xu Affiliation: School of Computer and Communication EngineeringNortheastern University at Qinhuangdao, China"
+          }
+        ]
+      },
+      {
+        "id": "2610.11226",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.11226.json",
+            "line": 62,
+            "field": "affiliation",
+            "header": "Yanlong Zhao † † thanks: Equal Contribution: Yanlong Zhao , Xiaoyuan Cheng and Huihang Liu . Affiliation: University of Science and Technology of China Xiaoyuan Cheng 1 1 footnotemark: 1 Affiliation: University College London Huihang Liu 1 1 footnotemark: 1 Affiliation: Shanghai University of Finance and Economics Baihua He Affiliation: University of Science and Technology of China Xinyu Zhang Affiliation: University of Science and Technology of China Affiliation: AMSS, Chinese Academy of Sciences Harrison Bo Hua Zhu Affiliation: University of Copenhagen Affiliation: Imperial College London Affiliation: Technical University of Denmark Wenlong Chen Affiliation: Imperial College London Li Zeng Affiliation: Shenzhen Research Institute of Big Data Zhuo Sun † † thanks: Correspondence Author. Correspondence to Zhuo Sun . Affiliation: Shanghai University of Finance and Economics Affiliation: Imperial College London"
+          }
+        ]
+      },
+      {
+        "id": "2610.11384",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.11384.json",
+            "line": 56,
+            "field": "affiliation",
+            "header": "Hangxi Guo Affiliation: The Chinese University of Hong Kong, Shenzhen Fengyuan Liu Affiliation: The Chinese University of Hong Kong, Shenzhen Yue Wang Affiliation: Shanghai AI Laboratory Affiliation: University of Science and Technology of China Yuhua Qi Affiliation: The Chinese University of Hong Kong, Shenzhen Haoyi Xiong Affiliation: Independent Fei Sun Affiliation: Institute of Computing Technology, CAS Mengnan Du Email: keepstudying931@gmail.com, mengnandu@cuhk.edu.cn * Equal contribution, † Corresponding author Affiliation: The Chinese University of Hong Kong, Shenzhen"
+          }
+        ]
+      },
+      {
+        "id": "2610.11573",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.11573.json",
+            "line": 66,
+            "field": "affiliation",
+            "header": "Yi Wen Affiliation: City University of Hong Kong Email: yiwen23-c@my.cityu.edu.hk Derong Xu Affiliation: City University of Hong Kong Email: wangyichao5@huawei.com Pengyue Jia Affiliation: City University of Hong Kong Email: xianzhao@cityu.edu.hk Yichao Wang Affiliation: Huawei Noah’s Ark Lab Yingyi Zhang Affiliation: City University of Hong Kong Maolin Wang Affiliation: City University of Hong Kong Junyi Li Affiliation: City University of Hong Kong Wenlin Zhang Affiliation: City University of Hong Kong Xiaopeng Li Affiliation: City University of Hong Kong Yong Liu Affiliation: Huawei Noah’s Ark Lab Xiangyu Zhao Affiliation: City University of Hong Kong"
+          }
+        ]
+      },
+      {
+        "id": "2610.11578",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.11578.json",
+            "line": 66,
+            "field": "affiliation",
+            "header": "Xin Yin Note: Equal contribution. Affiliation: Zhejiang University , China , Yiang Zhang Affiliation: Zhejiang University , China , Zhiyuan Peng Affiliation: Shanghai Jiao Tong University , China , Chao Ni Affiliation: Zhejiang University , China , Zhe Cui Affiliation: Hithink Research , China and Xiaohua Xin Affiliation: National Industrial Information Security Development Research Center , China"
+          }
+        ]
+      },
+      {
+        "id": "2610.11862",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.11862.json",
+            "line": 58,
+            "field": "affiliation",
+            "header": "Nihal Jain Shuangjie Yao Begum Cicekdag Zhuo Zhang Suman Jana Affiliation: Columbia University Affiliation: {nihal.jain, sy3437, bc2975, zz3474, sj2754}@columbia.edu"
+          }
+        ]
+      },
+      {
+        "id": "2610.12248",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.12248.json",
+            "line": 68,
+            "field": "affiliation",
+            "header": "Heeseung Kim Affiliation: Department of AI, University of Seoul Email: gmltmd789@uos.ac.kr"
+          }
+        ]
+      },
+      {
+        "id": "2610.12611",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.12611.json",
+            "line": 56,
+            "field": "affiliation",
+            "header": "Tian Jin 1,∗ Wenhao Wang 2,∗ Jing Kang 1 Haoting Shi 1 Rui Ye 1 Yijun Lu 1 Siheng Chen 1,† 1 Shanghai Jiaotong University 2 Zhejiang University * Equal contribution. † Corresponding author. Correspondence: sihengc@sjtu.edu.cn"
+          }
+        ]
+      },
+      {
+        "id": "2610.12655",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.12655.json",
+            "line": 60,
+            "field": "affiliation",
+            "header": "Jiatan Huang 1 Zheyuan Zhang 2 Ziming Li 1 Tianyi Ma 2 Mingchen Li 3 Yanfang Ye 2 Chuxu Zhang 1, † \\dagger Affiliation: 1 University of Connecticut 2 University of Notre Dame 3 University of Massachusetts, Amherst {jiatan.huang,chuxu.zhang}@uconn.edu † \\dagger Corresponding author"
+          }
+        ]
+      },
+      {
+        "id": "2610.12794",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.12794.json",
+            "line": 60,
+            "field": "affiliation",
+            "header": "Seung Won Wilson Yoo Affiliation: Snowflake Chang Zeng † † thanks: Work done during internship at Snowflake. Affiliation: UMass Amherst Aditi Somayajula Affiliation: Stanford Sahithi Ankireddy Affiliation: Stanford Rohan Kosalge Affiliation: UC Berkeley Avishree Khare Affiliation: UPenn John Mitchell Affiliation: Snowflake Affiliation: Stanford Aditya G. Parameswaran Affiliation: Snowflake Affiliation: UC Berkeley Rajhans Samdani Affiliation: Snowflake Anupam Datta Affiliation: Snowflake"
+          }
+        ]
+      },
+      {
+        "id": "2610.12957",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.12957.json",
+            "line": 67,
+            "field": "affiliation",
+            "header": "Gangyi Li LuYao Wang Jingfu Sun Jingyi Yuan Hang Liu Hao Zong Yujia Hu Tingting Gao Jianyong Wang Xu Yang Affiliation: JD.COM"
+          }
+        ]
+      },
+      {
+        "id": "2610.13144",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.13144.json",
+            "line": 54,
+            "field": "affiliation",
+            "header": "Songmiao Wang Yuchen Wang Chenglin Yu Hongxia Yang Ming Li † † thanks: Corresponding author: ming.li@polyu.edu.hk Affiliation: The Hong Kong Polytechnic University"
+          }
+        ]
+      },
+      {
+        "id": "2610.13166",
+        "batch": "20261012-four-track-review-and-frozen16",
+        "evidence": [
+          {
+            "path": ".cache/oct12-scan/fulltext/2610.13166.json",
+            "line": 62,
+            "field": "affiliation",
+            "header": "Shun Zou 1,2∗ Ziyu Ma 2∗ Yi Zou 1,2∗ Yong Wang 2†‡ Lin Chen 1 Zehui Chen 1 Guanhua Chen 3 Xiangxiang Chu 2 Feng Zhao 1‡ 1 University of Science and Technology of China 2 AMAP, Alibaba Group 3 Southern University of Science and Technology Porject Page Data & Model"
+          }
+        ]
+      },
+      {
+        "id": "2610.18157",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.18157.json",
+            "line": 6,
+            "field": "front",
+            "header": "Fan Out or Relay? Ownership-Aware Routing for LLM Agents Querying Siloed Tables Zhexi Feng Affiliation: Department of Electrical and Computer Engineering Affiliation: University of California San Diego Affiliation: La Jolla, CA 92093, USA Email: zhf023@ucsd.edu "
+          }
+        ]
+      },
+      {
+        "id": "2610.18684",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.18684.json",
+            "line": 6,
+            "field": "front",
+            "header": "Knowing the User Is Not Knowing What We Established: Grounding Awareness in Personal Agents Jiajun Chen † † thanks: Equal contribution. † † thanks: Work done while at NYU Shanghai. Affiliation: Carnegie Mellon University Xinyue Chen 1 1 footnotemark: 1 Affiliation: Carnegie Mellon University Yicheng Jiang 2 2 footnotemark: 2 Affiliation: New York University Hua Shen Affiliation: New York University Affiliation: NYU Shanghai "
+          }
+        ]
+      },
+      {
+        "id": "2610.18780",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.18780.json",
+            "line": 6,
+            "field": "front",
+            "header": "BLADE: Auditing Information Use for Failure Attribution in LLM Multi-Agent Systems Xiaoguang Guo Yaohao Long Chuxu Zhang † University of Connecticut {xiaoguang.guo, chuxu.zhang}@uconn.edu robinlong5678@gmail.com † Corresponding author "
+          }
+        ]
+      },
+      {
+        "id": "2610.19131",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.19131.json",
+            "line": 6,
+            "field": "front",
+            "header": "Plant Memory: Technical Language Processing and a Verified Maintenance Ontology for Agent-Accessible Failure Knowledge from SAP PM Work Orders Akash Raj Affiliation: M.Tech, School of Artificial Intelligence and Data Science Affiliation: Indian Institute of Technology Jodhpur Email: m25ai1116@iitj.ac.in Affiliation: ORCID: 0009-0005-5666-3967 October 2026 "
+          }
+        ]
+      },
+      {
+        "id": "2610.19139",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.19139.json",
+            "line": 6,
+            "field": "front",
+            "header": "Online Tokenization with Optimal Delay in Linear Time Mina Dalirrooyfard Affiliation: Morgan Stanley Email: minad@mit.edu Christopher Ye † † thanks: Supported by NSF HDR TRIPODS Phase II grant 2217058 (EnCORE Institute). This work was completed as part of an internship at Morgan Stanley Machine Learning Research. Affiliation: University of California San Diego Email: czye@ucsd.edu "
+          }
+        ]
+      },
+      {
+        "id": "2610.19316",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.19316.json",
+            "line": 6,
+            "field": "front",
+            "header": "Truthful and Expected-Payment-Optimal Model Routing in Graph-Based Agentic Workflows Jiayuan Liu 1,2 Mingyu Guo 3 Jiarui Gan 4 Vincent Conitzer 1,2 1 Carnegie Mellon University 2 Foundations of Cooperative AI Lab (FOCAL) 3 Adelaide University 4 University of Oxford jiayuan4@cs.cmu.edu mingyu.guo@adelaide.edu.au jiarui.gan@cs.ox.ac.uk conitzer@cs.cmu.edu "
+          }
+        ]
+      },
+      {
+        "id": "2610.19345",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.19345.json",
+            "line": 6,
+            "field": "front",
+            "header": "When Is Smaller Greener? Right-Sizing Language Models for Agentic AI Journal: JORS Sajid Siraj Email: s.siraj@leeds.ac.uk Address: Leeds University Business School, University of Leeds, Leeds, United Kingdom Address: Ca’Foscari University of Venice, Venice, Italy Maria Barbati Email: maria.barbati@unive.it Corresponding author: Corresponding author Address: Ca’Foscari University of Venice, Venice, Italy "
+          }
+        ]
+      },
+      {
+        "id": "2610.19474",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.19474.json",
+            "line": 6,
+            "field": "front",
+            "header": "Beyond Retrieval: Evidence Access and Event Aggregation in Agent Memory Zerui Yang † † thanks: Corresponding author Quan Xue Chaorui Zhang Xueyan Niu † † thanks: Corresponding author Xuanyu Zheng Affiliation: Xiyuan Wang , Haolin Ruan , Guangcheng Song , Weixi Zhang , Wei Han , Bo Bai Affiliation: Huawei Technologies Ltd. Affiliation: Correspondence: richard.yangpolyu@gmail.com , zhang.chaorui@huawei.com "
+          }
+        ]
+      },
+      {
+        "id": "2610.19659",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.19659.json",
+            "line": 6,
+            "field": "front",
+            "header": "Measuring and Reducing Unusable Replies of LLM Agents Yilin Jiang Affiliation: East China Normal University, Shanghai, China Affiliation: The Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China Email: ftan@mail.ecnu.edu.cn Fei Tan † † thanks: Corresponding author. Affiliation: East China Normal University, Shanghai, China Xuanyu Yin Affiliation: East China Normal University, Shanghai, China Guanchu Wang Affiliation: Shanghai Artificial Intelligence Laboratory, Shanghai, China Xia Hu Affiliation: Shanghai Artificial Intelligence Laboratory, Shanghai, China Yutao Yue Affiliation: The Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China Affiliation: Institute of Deep Perception Technology, JITRI, Wuxi, China "
+          }
+        ]
+      },
+      {
+        "id": "2610.19801",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.19801.json",
+            "line": 6,
+            "field": "front",
+            "header": "Delta Tokenizer: Reference-Identical Tokenization of Session Deltas and Segment-Parallelism for Long Prompts on Multicore CPUs Zhenyu Zhang Affiliation: Arizona State University Email: zzhan641@asu.edu Zhichao Cao Affiliation: Arizona State University Email: Zhichao.Cao@asu.edu "
+          }
+        ]
+      },
+      {
+        "id": "2610.19818",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.19818.json",
+            "line": 6,
+            "field": "front",
+            "header": "One Monitor Does Not Fit All: Formalism-Agnostic Runtime Verification for Agentic AI Angelo Ferrando Affiliation: University of Modena and Reggio Emilia, Modena, Italy Email: angelo.ferrando@unimore.it "
+          }
+        ]
+      },
+      {
+        "id": "2610.20067",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.20067.json",
+            "line": 6,
+            "field": "front",
+            "header": "Which Knowledge Should LLMs Trust? Uncovering a Generalizable Steering Direction Across Knowledge Conflicts Yibin Lou Affiliation: State Key Laboratory of Multimedia Information Processing, Peking University Affiliation: School of Computer Science, Peking University Affiliation: Southern University of Science and Technology Email: 12310513@mail.sustech.edu.cn Yi Hu Affiliation: Institute for Artificial Intelligence, Peking University Jianhui Chen Affiliation: School of Computer Science, Peking University Chenpeng Wang Affiliation: YiXin-AI Lab, YIXIN, Beijing, China Muhan Zhang Affiliation: Institute for Artificial Intelligence, Peking University Liangming Pan † † thanks: Corresponding author: liangmingpan@pku.edu.cn Affiliation: State Key Laboratory of Multimedia Information Processing, Peking University Affiliation: School of Computer Science, Peking University "
+          }
+        ]
+      },
+      {
+        "id": "2610.20303",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.20303.json",
+            "line": 6,
+            "field": "front",
+            "header": "SpectrumQuant: Spectrum Alignment for LLM Quantization Dwaipayan Haldar † † thanks: These authors contributed equally to this work. Affiliation: Indian Institute of Science Affiliation: Bengaluru-560012, Karnataka, India Email: dwaipayanh@iisc.ac.in Indranil Patra Note: Indian Institute of Science Affiliation: Bengaluru-560012, Karnataka, India Email: indranilp@iisc.ac.in Azhar Yousuf Note: Indian Institute of Science Affiliation: Bengaluru-560012, Karnataka, India Email: azharyousuf@iisc.ac.in Chandra Sekhar Seelamantula Affiliation: Indian Institute of Science Affiliation: Bengaluru-560012, Karnataka, India Email: css@iisc.ac.in "
+          }
+        ]
+      },
+      {
+        "id": "2610.20413",
+        "batch": "oct15-missed",
+        "evidence": [
+          {
+            "path": ".cache/oct15-review-closure/paper-slices/2610.20413.json",
+            "line": 6,
+            "field": "front",
+            "header": "When Does Momentum Help in Reinforcement Learning with Verifiable Rewards? Kaifei Wang † † thanks: Peking University. Email: {wkf5094,shanzikang}@stu.pku.edu.cn , wanglw@pku.edu.cn . Zikang Shan 1 1 footnotemark: 1 Liwei Wang 1 1 footnotemark: 1 Yinyu Ye † † thanks: Shanghai Jiao Tong University, SIMIS, and Stanford University. Email: yinyu-ye@stanford.edu . Han Zhong † † thanks: Shanghai Jiao Tong University. Email: han.zhong@sjtu.edu.cn . "
+          }
+        ]
+      }
+    ],
+    "missing_ids": [
+      "2510.15831",
+      "2602.16490",
+      "2610.00010",
+      "2610.00012",
+      "2610.00025",
+      "2610.00040",
+      "2610.00097",
+      "2610.00182",
+      "2610.00204",
+      "2610.00251",
+      "2610.00313",
+      "2610.00354",
+      "2610.00372",
+      "2610.00385",
+      "2610.00399",
+      "2610.00400",
+      "2610.00431",
+      "2610.00432",
+      "2610.00435",
+      "2610.00487",
+      "2610.00497",
+      "2610.00499",
+      "2610.00541",
+      "2610.00559",
+      "2610.00568",
+      "2610.00573",
+      "2610.00574",
+      "2610.00604",
+      "2610.00613",
+      "2610.00648",
+      "2610.00651",
+      "2610.00661",
+      "2610.00663",
+      "2610.00666",
+      "2610.00675",
+      "2610.00710",
+      "2610.00717",
+      "2610.00767",
+      "2610.00779",
+      "2610.00864",
+      "2610.00878",
+      "2610.00885",
+      "2610.00899",
+      "2610.00952",
+      "2610.00977",
+      "2610.00979",
+      "2610.00981",
+      "2610.00983",
+      "2610.01017",
+      "2610.01023",
+      "2610.01037",
+      "2610.01054",
+      "2610.01076",
+      "2610.01127",
+      "2610.01128",
+      "2610.01172",
+      "2610.01192",
+      "2610.01238",
+      "2610.01243",
+      "2610.01278",
+      "2610.01286",
+      "2610.01316",
+      "2610.01492",
+      "2610.01496",
+      "2610.01499",
+      "2610.01506",
+      "2610.01508",
+      "2610.01513",
+      "2610.01537",
+      "2610.01560",
+      "2610.01564",
+      "2610.01569",
+      "2610.01595",
+      "2610.01605",
+      "2610.01625",
+      "2610.01637",
+      "2610.01640",
+      "2610.01649",
+      "2610.01670",
+      "2610.01687",
+      "2610.01710",
+      "2610.01741",
+      "2610.01769",
+      "2610.01815",
+      "2610.01892",
+      "2610.01917",
+      "2610.01921",
+      "2610.01955",
+      "2610.01962",
+      "2610.02005",
+      "2610.02019",
+      "2610.02091",
+      "2610.02140",
+      "2610.02150",
+      "2610.02161",
+      "2610.02190",
+      "2610.02191",
+      "2610.02196",
+      "2610.02202",
+      "2610.02204",
+      "2610.02206",
+      "2610.02298",
+      "2610.02304",
+      "2610.02323",
+      "2610.02324",
+      "2610.02330",
+      "2610.02344",
+      "2610.02349",
+      "2610.02351",
+      "2610.02359",
+      "2610.02361",
+      "2610.02388",
+      "2610.02396",
+      "2610.02404",
+      "2610.02425",
+      "2610.02444",
+      "2610.02460",
+      "2610.02462",
+      "2610.02472",
+      "2610.02478",
+      "2610.02480",
+      "2610.02523",
+      "2610.02525",
+      "2610.02542",
+      "2610.02569",
+      "2610.02588",
+      "2610.02593",
+      "2610.02597",
+      "2610.02614",
+      "2610.02616",
+      "2610.02617",
+      "2610.02638",
+      "2610.02657",
+      "2610.02666",
+      "2610.02670",
+      "2610.02683",
+      "2610.02687",
+      "2610.02695",
+      "2610.02697",
+      "2610.02700",
+      "2610.02710",
+      "2610.02713",
+      "2610.02718",
+      "2610.02740",
+      "2610.02781",
+      "2610.02814",
+      "2610.02828",
+      "2610.02832",
+      "2610.02835",
+      "2610.02840",
+      "2610.02841",
+      "2610.02856",
+      "2610.02876",
+      "2610.02880",
+      "2610.02885",
+      "2610.02887",
+      "2610.02925",
+      "2610.02928",
+      "2610.02951",
+      "2610.02952",
+      "2610.02970",
+      "2610.02986",
+      "2610.03002",
+      "2610.03014",
+      "2610.03020",
+      "2610.03034",
+      "2610.03036",
+      "2610.03039",
+      "2610.03063",
+      "2610.03084",
+      "2610.03089",
+      "2610.03099",
+      "2610.03102",
+      "2610.03123",
+      "2610.03190",
+      "2610.03198",
+      "2610.03199",
+      "2610.03213",
+      "2610.03226",
+      "2610.03315",
+      "2610.03389",
+      "2610.03448",
+      "2610.03516",
+      "2610.03524",
+      "2610.03574",
+      "2610.03585",
+      "2610.03591",
+      "2610.03631",
+      "2610.03632",
+      "2610.03695",
+      "2610.03741",
+      "2610.03780",
+      "2610.03796",
+      "2610.03820",
+      "2610.03894",
+      "2610.03938",
+      "2610.03984",
+      "2610.03994",
+      "2610.04002",
+      "2610.04008",
+      "2610.04009",
+      "2610.04047",
+      "2610.04118",
+      "2610.04132",
+      "2610.04134",
+      "2610.04139",
+      "2610.04140",
+      "2610.04152",
+      "2610.04178",
+      "2610.04196",
+      "2610.04204",
+      "2610.04225",
+      "2610.04261",
+      "2610.04292",
+      "2610.04299",
+      "2610.04303",
+      "2610.04318",
+      "2610.04328",
+      "2610.04344",
+      "2610.04371",
+      "2610.04375",
+      "2610.04379",
+      "2610.04381",
+      "2610.04409",
+      "2610.04429",
+      "2610.04432",
+      "2610.04488",
+      "2610.04506",
+      "2610.04512",
+      "2610.04517",
+      "2610.04518",
+      "2610.04555",
+      "2610.04575",
+      "2610.04580",
+      "2610.04596",
+      "2610.04604",
+      "2610.04607",
+      "2610.04611",
+      "2610.04616",
+      "2610.04641",
+      "2610.04646",
+      "2610.04651",
+      "2610.04658",
+      "2610.04687",
+      "2610.04699",
+      "2610.04721",
+      "2610.04753",
+      "2610.04779",
+      "2610.04792",
+      "2610.04794",
+      "2610.04805",
+      "2610.04824",
+      "2610.04845",
+      "2610.04851",
+      "2610.04868",
+      "2610.04882",
+      "2610.04889",
+      "2610.04899",
+      "2610.04915",
+      "2610.04916",
+      "2610.04918",
+      "2610.04921",
+      "2610.04927",
+      "2610.04940",
+      "2610.04950",
+      "2610.04961",
+      "2610.04991",
+      "2610.05023",
+      "2610.05024",
+      "2610.05025",
+      "2610.05026",
+      "2610.05030",
+      "2610.05039",
+      "2610.05047",
+      "2610.05066",
+      "2610.05097",
+      "2610.05099",
+      "2610.05107",
+      "2610.05124",
+      "2610.05126",
+      "2610.05132",
+      "2610.05139",
+      "2610.05162",
+      "2610.05176",
+      "2610.05185",
+      "2610.05190",
+      "2610.05247",
+      "2610.05273",
+      "2610.05274",
+      "2610.05282",
+      "2610.05284",
+      "2610.05295",
+      "2610.05300",
+      "2610.05303",
+      "2610.05308",
+      "2610.05318",
+      "2610.05334",
+      "2610.05342",
+      "2610.05367",
+      "2610.05373",
+      "2610.05383",
+      "2610.05398",
+      "2610.05402",
+      "2610.05418",
+      "2610.05425",
+      "2610.05473",
+      "2610.05481",
+      "2610.05484",
+      "2610.05532",
+      "2610.05538",
+      "2610.05540",
+      "2610.05563",
+      "2610.05572",
+      "2610.05615",
+      "2610.05622",
+      "2610.05630",
+      "2610.05637",
+      "2610.05664",
+      "2610.05685",
+      "2610.05697",
+      "2610.05709",
+      "2610.05715",
+      "2610.05744",
+      "2610.05774",
+      "2610.05778",
+      "2610.05833",
+      "2610.05842",
+      "2610.05861",
+      "2610.05872",
+      "2610.05879",
+      "2610.05885",
+      "2610.05896",
+      "2610.05897",
+      "2610.05935",
+      "2610.05940",
+      "2610.05978",
+      "2610.05981",
+      "2610.05993",
+      "2610.05994",
+      "2610.06001",
+      "2610.06021",
+      "2610.06026",
+      "2610.06064",
+      "2610.06100",
+      "2610.06147",
+      "2610.06161",
+      "2610.06191",
+      "2610.06192",
+      "2610.06193",
+      "2610.06226",
+      "2610.06269",
+      "2610.06286",
+      "2610.06324",
+      "2610.06404",
+      "2610.06406",
+      "2610.06413",
+      "2610.06439",
+      "2610.06446",
+      "2610.06454",
+      "2610.06479",
+      "2610.06598",
+      "2610.06611",
+      "2610.06616",
+      "2610.06617",
+      "2610.06636",
+      "2610.06637",
+      "2610.06647",
+      "2610.06648",
+      "2610.06650",
+      "2610.06666",
+      "2610.06671",
+      "2610.06686",
+      "2610.06729",
+      "2610.06748",
+      "2610.06750",
+      "2610.06751",
+      "2610.06782",
+      "2610.06804",
+      "2610.06817",
+      "2610.06829",
+      "2610.06830",
+      "2610.06843",
+      "2610.06844",
+      "2610.06892",
+      "2610.06932",
+      "2610.06947",
+      "2610.06950",
+      "2610.06963",
+      "2610.06964",
+      "2610.06966",
+      "2610.06993",
+      "2610.07043",
+      "2610.07118",
+      "2610.07121",
+      "2610.07132",
+      "2610.07177",
+      "2610.07191",
+      "2610.07212",
+      "2610.07247",
+      "2610.07258",
+      "2610.07261",
+      "2610.07289",
+      "2610.07311",
+      "2610.07324",
+      "2610.07332",
+      "2610.07335",
+      "2610.07348",
+      "2610.07349",
+      "2610.07376",
+      "2610.07385",
+      "2610.07389",
+      "2610.07457",
+      "2610.07522",
+      "2610.07532",
+      "2610.07533",
+      "2610.07557",
+      "2610.07572",
+      "2610.07585",
+      "2610.07587",
+      "2610.07639",
+      "2610.07643",
+      "2610.07645",
+      "2610.07654",
+      "2610.07657",
+      "2610.07689",
+      "2610.07706",
+      "2610.07729",
+      "2610.07731",
+      "2610.07739",
+      "2610.07758",
+      "2610.07767",
+      "2610.07774",
+      "2610.07809",
+      "2610.07810",
+      "2610.07816",
+      "2610.07819",
+      "2610.07832",
+      "2610.07848",
+      "2610.07851",
+      "2610.07860",
+      "2610.07862",
+      "2610.07868",
+      "2610.07887",
+      "2610.07898",
+      "2610.07903",
+      "2610.07925",
+      "2610.07935",
+      "2610.07940",
+      "2610.07972",
+      "2610.07987",
+      "2610.07990",
+      "2610.08048",
+      "2610.08076",
+      "2610.08101",
+      "2610.08106",
+      "2610.08108",
+      "2610.08133",
+      "2610.08155",
+      "2610.08159",
+      "2610.08162",
+      "2610.08164",
+      "2610.08183",
+      "2610.08341",
+      "2610.08364",
+      "2610.08401",
+      "2610.08403",
+      "2610.08414",
+      "2610.08452",
+      "2610.08463",
+      "2610.08514",
+      "2610.08560",
+      "2610.08586",
+      "2610.08621",
+      "2610.08622",
+      "2610.08639",
+      "2610.08647",
+      "2610.08649",
+      "2610.08659",
+      "2610.08662",
+      "2610.08670",
+      "2610.08674",
+      "2610.08678",
+      "2610.08691",
+      "2610.08713",
+      "2610.08718",
+      "2610.08773",
+      "2610.08775",
+      "2610.08778",
+      "2610.08779",
+      "2610.08791"
+    ],
+    "google_meta_positive": [
+      {
+        "id": "2610.09159",
+        "title": "SpecGuard: Proving a Task Is Broken Before the Agent Cheats",
+        "evidence": {
+          "path": ".cache/oct12-scan/fulltext/2610.09159.json",
+          "line": 71,
+          "field": "affiliation",
+          "header": "Param Biyani MATS parambiyani8@gmail.com Krishnamurthy (Dj) Dvijotham Google DeepMind"
+        }
+      },
+      {
+        "id": "2610.09484",
+        "title": "MIMESIS: Learning User Simulators as Training Environments for Interactive Agents",
+        "evidence": {
+          "path": ".cache/oct12-scan/fulltext/2610.09484.json",
+          "line": 64,
+          "field": "affiliation",
+          "header": "Hoang Phan Affiliation: Meta Superintelligence Labs Affiliation: New York University Work done at Meta Dat Huynh Affiliation: Meta Superintelligence Labs Andrey Zhmoginov Qi Zeng Affiliation: Meta Superintelligence Labs Wancen Mu Affiliation: Meta Superintelligence Labs Yue Cao Affiliation: Meta Superintelligence Labs Shengjie Bi Affiliation: Meta Superintelligence Labs Yun He Affiliation: Meta Superintelligence Labs Changdae Oh Affiliation: Meta Superintelligence Labs Affiliation: University of Wisconsin - Madison Work done at Meta Deren Lei Affiliation: Meta Superintelligence Labs"
+        }
+      }
+    ],
+    "primary_web_supplemented_ids": [
+      "2610.07289",
+      "2610.06616",
+      "2610.00497",
+      "2602.16490",
+      "2510.15831"
+    ],
+    "total_raw_author_block_coverage_including_web": 50,
+    "remaining_no_raw_author_block": 485,
+    "warning": "oct07 490独立原文缓存缺失；不是535篇机构穷尽核验。使用模型不作为机构证据。"
+  },
+  "priority_pending_shortlist": [
+    {
+      "id": "2610.07289",
+      "title": "Catching Developers in the Flow: Low-Latency Agentic Program Repair at Google Scale",
+      "ledger_evidence": {
+        "path": "docs/paper-discovery-ledger.json",
+        "line": 19305
+      },
+      "review_evidence": {
+        "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+        "line": 8694
+      },
+      "repo_status": "implementation-pending",
+      "manifest_found": false,
+      "actual_implementation_or_metrics_found": false,
+      "source_batch": "oct07-fixed-window-review-closure",
+      "affiliation": "一作及全部作者均Google（New York）；官方HTML作者块。",
+      "upstream_code": "Data Availability明确无法公开reproduction package或数据；未发现作者源码。",
+      "low_cost_object": "可另定公开APR任务上的忠实有界核心：pre/post abstention过滤、真实LLM ReAct generate-and-validate、实际补丁应用/测试执行与时延记录。不能声称内部Google生产复现；尚未证明该独立小实验全部成本。",
+      "full_experiment_cost": "完整生产验证依赖私有源码、内部CI/开发工具、内部模型和数百万changes；公共复现不可得，应关闭完整原环境复现而不是无限实施欠账。",
+      "recommended_disposition": "保留已有accepted但明确分出公共核心范围再评估；完整Google生产实验不复现（私有资源），不是待GPU队列。",
+      "web_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.07289v1",
+          "locations": [
+            "作者块 line53",
+            "§3 filters/ReAct",
+            "Data Availability lines454-456"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2610.06616",
+      "title": "Video Encoders Built on Image Representations",
+      "ledger_evidence": {
+        "path": "docs/paper-discovery-ledger.json",
+        "line": 21553
+      },
+      "review_evidence": {
+        "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+        "line": 11663
+      },
+      "repo_status": "implementation-pending",
+      "manifest_found": false,
+      "actual_implementation_or_metrics_found": false,
+      "source_batch": "oct07-fixed-window-review-closure",
+      "affiliation": "一作Stanford；DeepMind共同作者仅advisory capacity，不能宣传Google一作论文。",
+      "upstream_code": "所读官方HTML未发现论文作者源码仓库；未据此宣称绝对未发布。",
+      "low_cost_object": "原文Appendix C.1明确training-free selection-only独立变体：对真实冻结图像encoder特征保留source position，执行question relevance/DPP diversity/cross-frame correspondence的固定token预算选择；不带learned refiner。可先做CPU算法恒等/预算/源位置诊断；真实7B/8B checkpoint小样本需另核资源与GPU门禁，不把随机特征当能力复现。",
+      "full_experiment_cost": "Appendix C.3：65K Video-ChatGPT子集、2epochs、8×A100×12h=96GPUh，仅refiner；另三backbone/13benchmark。完整实验成本过高，不复现（建议审查DONE）；低成本selection-only不能被96GPUh统一否定。",
+      "recommended_disposition": "关闭完整refiner/全表实验；将selection-only作为明确保真边界的可负担核心候选，未实现。",
+      "web_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.06616v1",
+          "locations": [
+            "作者块 lines61-62",
+            "Appendix C.1 lines333-355",
+            "Appendix C.3 lines369-372"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2610.00497",
+      "title": "Gumbel Straight Flow: Distilling Autoregressive Models into One-step Flow Maps",
+      "ledger_evidence": {
+        "path": "docs/paper-discovery-ledger.json",
+        "line": 40409
+      },
+      "review_evidence": {
+        "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+        "line": 37202
+      },
+      "repo_status": "implementation-pending",
+      "manifest_found": false,
+      "actual_implementation_or_metrics_found": false,
+      "source_batch": "oct07-fixed-window-review-closure",
+      "affiliation": "原文作者脚注：一作工作作为Google DeepMind Amsterdam Student Researcher完成。",
+      "upstream_code": "所读官方HTML无作者实现仓库链接；未作全网穷尽未发布断言。",
+      "low_cost_object": "可另定小词表/短序列真实AR teacher+flow-map student的L1：posterior Gumbel sampling、单调Gaussianization、diagonal CE与off-diagonal semigroup self-consistency、实际梯度和1-step sampling。必须两个真实训练模型且保留核心损失，不可仅直线插值fixture；该缩小实验仍未估算/实现。",
+      "full_experiment_cost": "Appendix C原文batch512，teacher/GSF-FM/GSF最高1M steps；主学生167.8M，另多数据/条件任务及teacher训练。完整公平campaign估计远超短时单A100/A30，成本过高不复现（建议审查DONE）。",
+      "recommended_disposition": "完整实验高成本关闭；廉价公式/训练机制仅为待定有界候选，不是现成GPU交付承诺。",
+      "web_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.00497v1",
+          "locations": [
+            "作者脚注 line65",
+            "Appendix C Algorithms1-2 lines546-593",
+            "Training details lines594-598",
+            "Table9 line617"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2602.16490",
+      "title": "From Growing to Looping: A Unified View of Iterative Computation in LLMs",
+      "ledger_evidence": {
+        "path": "docs/paper-discovery-ledger.json",
+        "line": 41715
+      },
+      "review_evidence": {
+        "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+        "line": 38978
+      },
+      "repo_status": "implementation-pending",
+      "manifest_found": false,
+      "actual_implementation_or_metrics_found": false,
+      "source_batch": "oct07-fixed-window-review-closure",
+      "affiliation": "TUM/Helmholtz AI/Google Paradigms of Intelligence合作；非可确认为Google单独主导。",
+      "upstream_code": "既有原审及本轮所读官方HTML未找到作者实现仓库。",
+      "low_cost_object": "可另定小Transformer真实训练机制：复制中间层及AdamW状态实现depth-growing，再在真实前向上复用该block做inference looping；记录参数/训练/推理预算，并只在validation选择loop配置。仅实现复制/loop不等于验证论文推理收益，完整缩小训练方案还需廉价成本核定。",
+      "full_experiment_cost": "正文§4.1：SmolLM360M/1.7B分别约200B/400B tokens；22benchmark、growing/looping配方与后续训练对照。完整训练明显超当前单卡/本机预算，成本过高不复现（建议审查DONE）。",
+      "recommended_disposition": "关闭原规模训练；有界真实小模型机制需单独验收，不把200B预训练留为实施欠账。",
+      "web_evidence": [
+        {
+          "url": "https://arxiv.org/html/2602.16490v1",
+          "locations": [
+            "作者/机构 lines52-53",
+            "§4.1 line130-131",
+            "§3.1-3.2/Table1",
+            "Appendix A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2510.15831",
+      "title": "VISTA: A Test-Time Self-Improving Video Generation Agent",
+      "ledger_evidence": {
+        "path": "docs/paper-discovery-ledger.json",
+        "line": 41744
+      },
+      "review_evidence": {
+        "path": "docs/research-audits/oct07-review-closure/paper-register.json",
+        "line": 39011
+      },
+      "repo_status": "implementation-pending",
+      "manifest_found": false,
+      "actual_implementation_or_metrics_found": false,
+      "source_batch": "oct07-fixed-window-review-closure",
+      "affiliation": "官方project：一作Google Student Researcher/NUS，其他Google作者。",
+      "upstream_code": "官方project只见论文、demo和prompts，未见作者源码入口；所读页面不是全网穷尽。",
+      "low_cost_object": "能廉价验证的只是tournament/champion/三维批评/DTPA提示修订编排合同；没有真实视频生成和多模态judge时只能L0/诊断，不是核心复现。定义性路径仍需每轮实际重生成视频，因此本轮不认为已存在可直接接单的低成本能力实现。",
+      "full_experiment_cost": "正文§4：100 MovieGen prompts+161内部prompts，Gemini2.5Flash+Veo3；§4.3每轮约0.7M tokens+28视频，视频生成token不包含。多轮、多baseline完整campaign高成本，且内部数据不可得；建议完整实验成本过高不复现（审查DONE）。",
+      "recommended_disposition": "完整VISTA复现高成本关闭；保留资料，不将固定视频/分数fixture当实现或evolve能力。",
+      "web_evidence": [
+        {
+          "url": "https://arxiv.org/html/2510.15831v1",
+          "locations": [
+            "§4 Experiments lines250-257",
+            "§4.3 Cost Analysis lines324-327"
+          ]
+        },
+        {
+          "url": "https://g-vista.github.io/",
+          "locations": [
+            "作者机构 lines2-5",
+            "项目公开范围"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2610.09159",
+      "title": "SpecGuard: Proving a Task Is Broken Before the Agent Cheats",
+      "ledger_evidence": {
+        "path": "docs/paper-discovery-ledger.json",
+        "line": 43318
+      },
+      "review_evidence": {
+        "path": "docs/research-audits/oct12-review-closure/agent-reviews.json",
+        "line": 10859
+      },
+      "repo_status": "implementation-pending",
+      "manifest_found": false,
+      "actual_implementation_or_metrics_found": false,
+      "source_batch": "20261012-four-track-review-and-frozen16",
+      "affiliation": "一作Param Biyani为MATS；合作者Krishnamurthy Dvijotham为Google DeepMind，非Google一作。",
+      "upstream_code": "作者真实公共Apache2.0仓库https://github.com/prmbiy/specguard，含src/conflict_certifier、configs、data、scripts、tests、RESULTS。",
+      "low_cost_object": "优先可落地的忠实小范围：真实模型从D+C但不读T生成spec.lean；独立TestAgent生成tests.lean；真实Certifier连接并交Lean kernel，保留conflict/no-conflict/inconclusive和语义忠实性审计。少量公开/自建任务可不训练模型；不得手写gold规范绕过autoformalization或把Lean通过等同原意正确。",
+      "full_experiment_cost": "§5同模型三Agent，SpecAgent120bash turns，各Agent10次Lean反馈，task timeout1h；349SWE任务+模型/重复/基线+187VERINA+95LiveCodeBench等。论文报告$0.26/task，仅349任务单臂估$90.74、三重复约$272.22（由论文均费推算，不是本地支出），完整campaign多小时应成本关闭；不能据此否定真实少量任务核心。",
+      "recommended_disposition": "保留小样本真实Lean核心作为最优先可负担候选，仍未实现；完整多模型全基准不承诺复现。",
+      "web_evidence": [
+        {
+          "url": "https://arxiv.org/html/2610.09159v1",
+          "locations": [
+            "作者块 line84",
+            "方法§4 lines164-181",
+            "实验limits lines195-200",
+            "费用 line217"
+          ]
+        },
+        {
+          "url": "https://github.com/prmbiy/specguard",
+          "locations": [
+            "root dirs lines187-203",
+            "README Pipeline lines218-225"
+          ]
+        }
+      ]
+    }
+  ],
+  "priority_pending_shortlist_boundary": "6项为现存证据中明确Google关联且当前未交付的短名单，不宣称535机构全覆盖；5项结构化oct07接受+1项oct12关键词推断。全文成本建议为本轮只读审计建议，仓库未回写终态。"
+}

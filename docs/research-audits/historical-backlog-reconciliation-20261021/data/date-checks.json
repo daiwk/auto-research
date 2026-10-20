@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-10-21",
+  "scope": "Only official arXiv abs Submission history [v1] metadata; no full-text method review, no downloads, no experiments.",
+  "frozen_audit_modified": false,
+  "counts": {
+    "checked": 9,
+    "pre_2026": 9,
+    "v1_year_2024": 1,
+    "v1_year_2025": 8,
+    "old_audit_v1_date_mismatches": 1
+  },
+  "interpretation": [
+    "这9项应从2026首发待审队列分开，作为历史候选保存；日期核验不是方法审查完成或拒绝的依据。",
+    "arXiv v1 日期是这里核实的首次 arXiv 公开日期；不据此证明没有更早的非 arXiv 公开版本。",
+    "Google/DeepMind目录日期、会议日期和后续arXiv修订日期不能替代v1首发日期。"
+  ],
+  "papers": [
+    {
+      "id": "2405.02699",
+      "title": "Platform Competition in the Autobidding World",
+      "primary_source_url": "https://arxiv.org/abs/2405.02699",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2024-05-04T15:41:53Z",
+      "original_arxiv_publication_date": "2024-05-04",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2024-05-04"
+      ],
+      "old_source_url": "https://research.google/pubs/platform-competition-in-the-autobidding-world/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/63",
+      "old_audit_date_matches_v1": true,
+      "correction_note": null
+    },
+    {
+      "id": "2507.23590",
+      "title": "Identifying Hearing Difficulty Moments in Conversational Audio",
+      "primary_source_url": "https://arxiv.org/abs/2507.23590",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2025-07-31T14:26:57Z",
+      "original_arxiv_publication_date": "2025-07-31",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2025-07-31"
+      ],
+      "old_source_url": "https://research.google/pubs/identifying-hearing-difficulty-moments-in-conversational-audio/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/24",
+      "old_audit_date_matches_v1": true,
+      "correction_note": null
+    },
+    {
+      "id": "2509.22963",
+      "title": "Reinforcement Learning with Discrete Diffusion Policies for Combinatorial Action Spaces",
+      "primary_source_url": "https://arxiv.org/abs/2509.22963",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2025-09-26T21:53:36Z",
+      "original_arxiv_publication_date": "2025-09-26",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2025-09-26"
+      ],
+      "old_source_url": "https://research.google/pubs/reinforcement-learning-with-discrete-diffusion-policies-for-combinatorial-action-spaces/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/41",
+      "old_audit_date_matches_v1": true,
+      "correction_note": null
+    },
+    {
+      "id": "2510.03217",
+      "title": "Abstain and Validate: A Dual-LLM Policy for Reducing Noise in Agentic Program Repair",
+      "primary_source_url": "https://arxiv.org/abs/2510.03217",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2025-10-03T17:53:28Z",
+      "original_arxiv_publication_date": "2025-10-03",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2025-10-03"
+      ],
+      "old_source_url": "https://research.google/pubs/abstain-and-validate-a-dual-llm-policy-for-reducing-noise-in-agentic-program-repair/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/48",
+      "old_audit_date_matches_v1": true,
+      "correction_note": null
+    },
+    {
+      "id": "2510.17670",
+      "title": "On-the-Fly OVD Adaptation with FLAME: Few-shot Localization via Active Marginal-Samples Exploration",
+      "primary_source_url": "https://arxiv.org/abs/2510.17670",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2025-10-20T15:41:55Z",
+      "original_arxiv_publication_date": "2025-10-20",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2025-10-20"
+      ],
+      "old_source_url": "https://research.google/pubs/on-the-fly-ovd-adaptation-with-flame-few-shot-localization-via-active-marginal-samples-exploration/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/1",
+      "old_audit_date_matches_v1": true,
+      "correction_note": null
+    },
+    {
+      "id": "2511.02767",
+      "title": "Dynamic Reflections: Probing Video Representations with Text Alignment",
+      "primary_source_url": "https://arxiv.org/abs/2511.02767",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2025-11-04T17:52:14Z",
+      "original_arxiv_publication_date": "2025-11-04",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2026-04-23"
+      ],
+      "old_source_url": "https://deepmind.google/research/publications/193694/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/121",
+      "old_audit_date_matches_v1": false,
+      "correction_note": "原快照 2026-04-23 不能用作 arXiv 首发日期；官方 abs 显示 v1 为 2025-11-04，v2 为 2026-01-29。此处只记录校正，不改冻结快照。"
+    },
+    {
+      "id": "2511.03782",
+      "title": "Expert Evaluation of LLM World Models: A High-Tc Superconductivity Case Study",
+      "primary_source_url": "https://arxiv.org/abs/2511.03782",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2025-11-05T19:00:01Z",
+      "original_arxiv_publication_date": "2025-11-05",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2025-11-05"
+      ],
+      "old_source_url": "https://research.google/pubs/expert-evaluation-of-llm-world-models-a-high-tc-superconductivity-case-study/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/15",
+      "old_audit_date_matches_v1": true,
+      "correction_note": null
+    },
+    {
+      "id": "2511.10865",
+      "title": "Towards a Human-in-the-Loop Framework for Reliable Patch Evaluation Using an LLM-as-a-Judge",
+      "primary_source_url": "https://arxiv.org/abs/2511.10865",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2025-11-14T00:22:04Z",
+      "original_arxiv_publication_date": "2025-11-14",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2025-11-14"
+      ],
+      "old_source_url": "https://research.google/pubs/towards-a-human-in-the-loop-framework-for-reliable-patch-evaluation-using-an-llm-as-a-judge/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/47",
+      "old_audit_date_matches_v1": true,
+      "correction_note": null
+    },
+    {
+      "id": "2511.11552",
+      "title": "DocLens: A Tool-Augmented Multi-Agent Framework for Long Visual Document Understanding",
+      "primary_source_url": "https://arxiv.org/abs/2511.11552",
+      "evidence_location": "Submission history [v1]",
+      "v1_submitted_utc": "2025-11-14T18:42:18Z",
+      "original_arxiv_publication_date": "2025-11-14",
+      "first_arxiv_publication_in_2026": false,
+      "backlog_partition": "pre_2026_historical_candidate_not_2026_first_publication",
+      "old_audit_dates": [
+        "2025-11-14"
+      ],
+      "old_source_url": "https://research.google/pubs/doclens-a-tool-augmented-multi-agent-framework-for-long-visual-document-understanding/",
+      "old_audit_pointer": "docs/research-audits/harness2-priority-repair/google-audit.json#/official_pool/55",
+      "old_audit_date_matches_v1": true,
+      "correction_note": null
+    }
+  ]
+}

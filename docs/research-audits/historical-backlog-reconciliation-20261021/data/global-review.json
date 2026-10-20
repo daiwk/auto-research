@@ -1,0 +1,5154 @@
+{
+  "scope": "Read-only local reconciliation; no implementation, training, source discovery, or claim of full capability reproduction.",
+  "root": ".",
+  "counts": {
+    "ledger_batches": 55,
+    "ledger_candidate_rows": 4943,
+    "ledger_unique_identities": 4821,
+    "ledger_repeated_identities": 113,
+    "manifest_rows": 930,
+    "manifest_arxiv_identities": 921,
+    "old_status_implementation_pending": 521,
+    "accepted_register_union": 534,
+    "accepted_catalogued": 26,
+    "accepted_non_catalogued_terminal": 4,
+    "accepted_non_catalogued_no_terminal": 504,
+    "accepted_unclosed_missed_by_old_pending": 14,
+    "legacy_deferred_promoted_to_pending": 31,
+    "pending_duplicate_ledger_ids": 0,
+    "pending_manifest_matches": 0
+  },
+  "accepted_origins": {
+    "oct07+oct12": 494,
+    "oct12": 26,
+    "oct15": 14
+  },
+  "accepted_unclosed_by_track": {
+    "foundation-model": 212,
+    "post-training": 85,
+    "agent": 206,
+    "recommendation": 1
+  },
+  "accepted_unclosed": [
+    {
+      "id": "2510.15831",
+      "title": "VISTA: A Test-Time Self-Improving Video Generation Agent",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2602.16490",
+      "title": "From Growing to Looping: A Unified View of Iterative Computation in LLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00010",
+      "title": "Heavy-Tailed Memory Traces in Long-Horizon Language Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00012",
+      "title": "When Do Causal World Models Help Modular LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00025",
+      "title": "Measuring the Microtask Eligibility Gap: When Is an Off-the-Shelf SLM Enough for an Agent Harness?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00040",
+      "title": "DSSR-3D: Decoupled Reasoning for View-Dependent Referring in 3D Gaussians",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00097",
+      "title": "DramaAgent: Agentic Storytelling Video Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00182",
+      "title": "Localizing Post-Wire Semantic Changes in MCP Agent Frameworks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00204",
+      "title": "Query Independent Variable Rate Visual Token Coding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00251",
+      "title": "The Null Is the Hard Part: Exact Tests for Memorization in Generative Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00313",
+      "title": "Rules to Tools: Executable Checks for LLM Agents in Scientific Computing",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00354",
+      "title": "Proof-Gated Signing: Solver-Checked Transaction Guards that Hold Under State Drift for Onchain AI Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00372",
+      "title": "When Harnesses Lose the Signal: Causal Evaluation of Recovery in LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00385",
+      "title": "FAER: Auditable Utility-Aligned Trajectory Replay for Language Model Post-Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00399",
+      "title": "Metacognitive Reasoning in Energy Based Models using Instance Based Learning Theory",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00400",
+      "title": "Representation Transitions Reveal Emerging Safety Risks in Multi-Turn LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00431",
+      "title": "ChainLoRA: Geometry-Preserving Task Vector Merging for Continual Learning in LLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00432",
+      "title": "XOR-Trellis: Ultra-Low-Complexity Dequantization and Curvature-Aware Hadamard-Free LLM Quantization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00435",
+      "title": "How AI Agents Discover Scientific Equations: From Hydrotope Rediscovery to New Water-Wave Amplitudes",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00487",
+      "title": "ScaffoldM3C: A Multimodal Sequential Monte Carlo Framework for Generative Stable Construction Planning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00497",
+      "title": "Gumbel Straight Flow: Distilling Autoregressive Models into One-step Flow Maps",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00499",
+      "title": "Denoising Surface: Modeling and Predicting Inference Cost for Diffusion LLM Serving",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00541",
+      "title": "Random Recursive Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00559",
+      "title": "PhysVista: Benchmarking Physical Intelligence in VLMs via a Perception-Reasoning-Assessment Loop",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00568",
+      "title": "Emergent Unfaithfulness: How Alignment Training Causes Language Models to Silently Override Task Faithfulness",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00573",
+      "title": "FORTE: Adaptive Scoring and Exact Keyframe Selection for Long-Video Question Answering",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00574",
+      "title": "Make Sparse Rewards Count: Density-Aware Reward Aggregation for Multi-Reward RL",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00604",
+      "title": "MIKASA-Robo-VLA: Benchmarking Memory in VLA Models for Long-Horizon Manipulation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00613",
+      "title": "Spatial Strategies, Not Actions: Vector-Quantized Geodesics as Tools for LLM-Driven Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00648",
+      "title": "Incident-Arena: Getting agents to the last nine of reliability",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00651",
+      "title": "Agent Evaluation Reliability: More Tasks Won't (Always) Fix An Agent Leaderboard",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00661",
+      "title": "Exploring More, Reasoning Better: Stepwise Risk-Sensitive GRPO for Diffusion Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00663",
+      "title": "Backdoor Containment via Expert Quarantine and Shutdown in LLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00666",
+      "title": "VisionQ: VLM-as-a-Judge Taxonomy, Dataset and Benchmark for Qualitative Analysis in Computer Vision",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00675",
+      "title": "LabBook: Harnessing Experimental History for Efficient LLM-Driven Discovery",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00710",
+      "title": "ReLiveGym: Evaluating Long-Lived Agents over Weeks of Replayed Reality",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00717",
+      "title": "Sequential Functional Structured Tucker Compression for Large Language Model Attentions",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00767",
+      "title": "Pre-training interventions, ex post facto: Grafting model beliefs across checkpoints",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00779",
+      "title": "Effective Synthetic Data Curation Requires Group-Level Signals",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00864",
+      "title": "Kinematic MeanFlow: One-Step Action Generation Policy for Robotic Foundation Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00878",
+      "title": "UniTrackPLA: Unified Panorama-Language-Action Model for Instruction-Guided Navigation and Dynamic Person Tracking",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00885",
+      "title": "FORALL-LEAN-AGENT for Auditable Reasoning in Formal Mathematics and Software Verification",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00899",
+      "title": "TOAST: Stochastic Robot Action Tokenization for Autoregressive Vision-Language-Action Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00952",
+      "title": "A Matched-Budget Audit Framework for Recaptioned Image-Text Supervision Distributions",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00977",
+      "title": "ABSENTIA: Detecting Broken Access Control Vulnerabilities in Web Applications",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00979",
+      "title": "RISED: RubrIcs for agentic multi-environment Selection and sElf-Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00981",
+      "title": "NarrativeFlow: Flow-Based Vision-Language-Action Model Using Robot Velocity Fields",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.00983",
+      "title": "The Devil Is in the Reconstruction Loss Scale: Rethinking Optimization in LLM Quantization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01017",
+      "title": "Pay for the Fault, Not the Flow: Label-Free In-Flow Multi-Agent Workflow Optimization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01023",
+      "title": "Groundability, Not Scale Alone: When Weak Reviewers Can Audit Strong Coding Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01037",
+      "title": "SLIM: Simplex-Lattice Interpolation Merging",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01054",
+      "title": "Capturing In-Context Learning Dynamics with Task Operators",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01076",
+      "title": "GLoC-EHR: Evidence-Cited Clinical Reasoning over Global Context and Local EHR Events",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01127",
+      "title": "Counting and Min-Cost Encoding for Tokenization in Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01128",
+      "title": "Grounding Large Language Models in DSGE Simulators for Policy Generation and Forecasting",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01172",
+      "title": "Learning Rate Transfer for Hybrid Transformer-SSM Architectures",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01192",
+      "title": "FlashBack: Knowing When to Remember in Streaming Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01238",
+      "title": "Mixture-Trained Merging for Unified Multi-Objective Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01243",
+      "title": "When the Judge Acts: Auditing VLM-Guided Image Selection on Culturally Situated Prompts",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01278",
+      "title": "SCOPE-AD: Sequential cost-aware ordinal-belief planning with energy-based models for diagnostic agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01286",
+      "title": "Dyna3: VLM-Guided Training-Free 4D Reconstruction via Depth Foundation Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01316",
+      "title": "What Wins a Vote? Formatting, Length, and Lexical Diversity in the French Compar:IA LLM Arena",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01492",
+      "title": "Q-SPT: Learnable Query-Based Compression for Low-Frame-Rate Speech Tokenization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01496",
+      "title": "SALD: Self-Referenced Advantage Learning for Diffusion Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01499",
+      "title": "VTR-Bench: A Systematic Benchmark for Evaluating Visual Text Rendering in Video Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01506",
+      "title": "MCRI: A Four-Dimensional Framework for Analyzing and Evaluating Agent Skills",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01508",
+      "title": "OverAct: Measuring and Mitigating Proactive Over-Authorization in LLM Tool-Calling Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01513",
+      "title": "Decision Titan: Test-Time Training for Long-Term Memory in Offline Reinforcement Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01537",
+      "title": "FedFit: Federated Fine-Tuning of LLMs via Vector-Bank Parameterization and Quantization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01560",
+      "title": "AURAL: Adaptive Latent Reasoning with Joint Chunk for Speech Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01564",
+      "title": "Chaining Skills to Hijack LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01569",
+      "title": "Managing Context and Communication in Distributed Agentic UAV Swarms",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01595",
+      "title": "Before It Fades: Reinforcing Temporal Representations at Inference Time in VideoLLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01605",
+      "title": "Hob-VL: A Benchmark for Visually Grounded Boolean Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01625",
+      "title": "Beyond Domain-Level Adaptation: Margin-Oriented Semantic-Appearance Interaction Correction for Personalized Federated Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01637",
+      "title": "Fusing Visual and Textual Representations via Multi-layer Fusing Transformers for Vietnamese Visual Question Answering",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01640",
+      "title": "Not All Error Yields to Scale: Where Scaling Stops in Vision-Language Inference",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01649",
+      "title": "CrossGMN: Graph Metanetworks for Cross-Architecture Weight-Space Transformations",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01670",
+      "title": "Do MLLM Judges Judge the Edit? Auditing Bias in Image Editing Evaluation with Verified Quality Preservation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01687",
+      "title": "Architectural Sampling: Test-Time Scaling via Computational Diversity in Frozen Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01710",
+      "title": "CoEvolve: Construct-to-Edit Visual Grounding with Bidirectional State Refinement",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01741",
+      "title": "ATI-VLA: Action-Centric Predictive Vision-Language-Action Models via Actionable Alignment Then Adaptive Injection",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01769",
+      "title": "CONTRA: Discovering and Qualifying Behavior-Changing Questions for Selective Clarification in LLM Code Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01815",
+      "title": "Debias Anything: Fairness with Diversity without Supervision in Diffusion Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01892",
+      "title": "Selection-Based Structured Reasoning: Toward Efficient Multimodal Search Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01917",
+      "title": "MoLE: Mixture of Latent Experts for Complementary Visual Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01921",
+      "title": "Cross-Lingual Alignment for Decoder-Only Models using MoE Routers",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01955",
+      "title": "Do Your Own Research: Learning to Forecast by Learning to Search",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.01962",
+      "title": "SIEVE: Selective attention-value Suppression for Vision-Language Models Unlearning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02005",
+      "title": "Counting Moves, Weighing Voices: Bayesian Dialectical Argumentation for Calibrated Multi-LLM Councils under Persistent Adversaries",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02019",
+      "title": "Controllable Multi-label Video Safety Detection via Adaptive Tversky Policy Optimization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02091",
+      "title": "GeoLatent: Geometry-Guided Latent Structuring with Routed Optimization for 3D Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02140",
+      "title": "Finetuning with Sampling: SFT Learns Better Than You Think",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02150",
+      "title": "From Knowledge Access to Source Learning: Developing Source-Specific Competence",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02161",
+      "title": "DuoMind: Enabling Distributed Multi-Robot Coordination with Semantic Communication",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02190",
+      "title": "Trust the Direction, Search the Step: Zero-and-First-Order Methods for LLM Fine-Tuning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02191",
+      "title": "The Missing Primitive: Diagnosing and Repairing Mathematical Reasoning in Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02196",
+      "title": "InterEvolve: Test-Time Evolution of Reward Programs for Humanoid Loco-Manipulation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02202",
+      "title": "ScholarCatalyst: A Benchmark for Retrieving Papers That Inspire New Research",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02204",
+      "title": "Reconstruct, Practice, Go Real: Guided Self-Improvement for Embodied Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02206",
+      "title": "KaliBench: A Fine-Grained Benchmark for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable Rewards",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02298",
+      "title": "EditHero: A Benchmark for Long-Horizon Part-Level 3D Editing and Vibe Modeling",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02304",
+      "title": "SimuVerity: Benchmarking Agents for Engineering-Grade Simulink Model Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02323",
+      "title": "World-Calibrated Proposal-to-Action Flow for Vision-Language-Action Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02324",
+      "title": "Slow-Fast Multi-Teacher On-Policy Distillation for Capability Preservation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02330",
+      "title": "Choosing Before Acting: Comparative Value Estimation for Long-Horizon Tool-Use Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02344",
+      "title": "Drive vs. Decay: On the Training Dynamics of Joint-Embedding Predictive Architectures",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02349",
+      "title": "MIRROR: Multipath Quorum Integrity for LLM Multi-Agent Communication",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02351",
+      "title": "DeReAct: Decomposed Reasoning and Acting for Reliable AI Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02359",
+      "title": "Lexicographic Multi-Objective On-Policy Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02361",
+      "title": "SEDIMA: Cross-Run Hierarchical Insight Memory for Evolutionary Search Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02388",
+      "title": "Octrees as an Explicit 3D Language",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02396",
+      "title": "Inherit-MAS: Test-Time Evolution of Multi-Agent Systems through Workflow and Execution Inheritance",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02404",
+      "title": "Trained Agentic Context Management",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02425",
+      "title": "Finding the Move Is Not Winning the Game: XiangqiBench for Closed-Loop Evaluation of LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02444",
+      "title": "Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation Hurts and Reinforcement Repairs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02460",
+      "title": "CUEing User Simulators: Calibrated User Embeddings for Multi-Turn Benchmarking",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02462",
+      "title": "Capability Scaling-Down Laws for LLM Compression",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02472",
+      "title": "APDMem: Agent-Controlled Progressive Disclosure for Query-Adaptive Long-Term Memory",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02478",
+      "title": "Tropical Reinforcement Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02480",
+      "title": "MEA: A Reward-Driven Multi-Agent System for Faithful Model Explanations",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02523",
+      "title": "Hypothesis-guided discovery of cognitive algorithms via program refinement",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02525",
+      "title": "Learning What to Investigate Next: Meta-Reasoning for Long-Horizon Research Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02542",
+      "title": "How To Train Your World Model: Fine-tuning vs RAG for LM-based World Modeling",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02569",
+      "title": "Pincer: Resource Authorization for Agents using a Digital Twin",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02588",
+      "title": "Open-Endedness Bench: Measuring Epistemic Process from Agent Records",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02593",
+      "title": "Fisher-Guided Submodular Data Selection for Continual Pre-Training of Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02597",
+      "title": "GRAFT: Growing Agglomerative Foundation Models via Continual Teacher Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02614",
+      "title": "What Is Lost in Post-Training? Default Collapse and the Loss of In-Context Steerability Across Diverse Perspectives",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02616",
+      "title": "VERSE: Verified Self-Evolving Optimizer for Agent Harnesses",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02617",
+      "title": "WebUIProof: Benchmarking WebUI Code Generators with UI-Agent Execution Harness",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02638",
+      "title": "Batched Speech Decisions Without Decoding: Single-Token Supervision Lets a Frozen LLM Hear Beyond the Transcript",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02657",
+      "title": "Context-Tower Conversion Preserves Generation While Freezing Retains Knowledge: Low-Budget AR-to-Diffusion Conversion of MoE LLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02666",
+      "title": "CHASE-VLA: Post-Training Quantization Framework for Vision-Language-Action Models with Chunk-Aware Scale Estimation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02670",
+      "title": "LEAP: Learning Efficient Action Proposals For LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02683",
+      "title": "RAOA: Alternating-Operator Neural Computation with Programmable Radio Propagation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02687",
+      "title": "Decoupling Memory from Context: Structured Memory for Token-Efficient Test-Time Continual Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02695",
+      "title": "Test-time Calibration Learning for Large Language Model Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02697",
+      "title": "GeoScaffold: Learning Compact Geometric Latents via Reconstruction for Efficient Vision-Language Navigation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02700",
+      "title": "Learning from Evolving Errors: Adaptive Iterative Repair for On-Policy Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02710",
+      "title": "Self-Supervised Scaling of Terminal Environments for Scientific Domains",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02713",
+      "title": "WakeKV: Reactive, Reversible KV Residency for Heads That Change Their Minds",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02718",
+      "title": "Revisiting Visual Representation Enhancement of VLMs via Kernel Canonical Correlation Analysis",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02740",
+      "title": "Prospective Hindsight: Self-Calibrating Reinforcement Learning via Prediction-Reality Gaps",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02781",
+      "title": "OPD Before RL: Warm-Starting Rubric-Based RL with On-Policy Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02814",
+      "title": "VeriPy Source-Preserving Verification and Compatibility Checking for Python Components",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02828",
+      "title": "FSPO: Policy-Consistent Risk and Pareto-Feasible Control for Budgeted LLM RL Post-Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02832",
+      "title": "FastOPD: On-Policy Distillation for Lightweight VLA Deployment",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02835",
+      "title": "All Work And No Play Makes Jack a Dull Boy: Understanding and Preventing Catastrophic Strategy Collapse in RLVR",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02840",
+      "title": "PointWAM: 3D World Action Modeling for Dexterous Robotic Manipulation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02841",
+      "title": "How Robust Is Multimodal Claim Verification to LLM Rewriting?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02856",
+      "title": "Adaptive Mutual Distillation for Balanced Multi-Task Post-Training of Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02876",
+      "title": "Seeing, Saying, but Not Using: From Reportable Spatial Facts to Usable States in Multimodal Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02880",
+      "title": "Found but Not Read: When Extracted Text Closes the Retrieval-Reading Gap in Document Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02885",
+      "title": "PsyEvo: A Personalized Counseling Agent That Self-Evolves at Test Time",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02887",
+      "title": "Revealing Epistemic Uncertainty in MLLMs via Causal-Invariant Masking",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02925",
+      "title": "Positive-Unlabeled Learning for Agent Safety False Alarm Auditing",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02928",
+      "title": "Discriminating Fixture Coverage in Agent-Infrastructure Verification Suites",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02951",
+      "title": "Dynamic Expert Pruning for Multi-Agent Systems",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02952",
+      "title": "GTDD: Generative Test-Driven Development for AI Coding Agents with Adversarial Testing",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02970",
+      "title": "A Guideline-Augmented Multi-Agent Framework for Schema-as-Code Biomedical Named Entity Recognition",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.02986",
+      "title": "OLMo-Detect: A Multi-Stage, Confounder-Controlled Benchmark for Membership Inference on Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03002",
+      "title": "Recursive Self-Improvement in Unified Multimodal Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03014",
+      "title": "Beyond Predefined Sinks: Security-Aware Dependency Analysis for LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03020",
+      "title": "DyadMem: A Long-Term Memory Benchmark of How Agents Work with Users",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03034",
+      "title": "Adaptive Second-Order Solvers for Fast Stochastic Diffusion Sampling",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03036",
+      "title": "WebFovea: When the Model Is Right but the Click Is Wrong -- Reliable Round Trips for Vision-Based Web Agents on Live Websites",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03039",
+      "title": "HyperThink: Text-to-Parameter Hypernetworks for Efficient Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03063",
+      "title": "HARPO: Hallucination-Aware Reinforcement Learning for Faithful and Creative Language Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03084",
+      "title": "NegT2IBench: When Negation Changes the Picture. A Polarity Benchmark for Text-to-Image Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03089",
+      "title": "Securing Computer-Use Agents Against Branch Steering Attacks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03099",
+      "title": "Beyond Single Videos: Benchmarking and Active Evidence Seeking for E-Commerce Cross-Video Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03102",
+      "title": "Ask, Relax, or Act? Evaluating Actionable Indeterminacy in LLM Preference Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03123",
+      "title": "Foresight: planning future perception in streaming VLMs without retraining",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03190",
+      "title": "Not Until the Evidence Says So: Teaching LLM Investigators When to Close a Case",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03198",
+      "title": "KV$^2$: A Self-Refining KV Cache",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03199",
+      "title": "Predicting and Repairing Merge Collapse in Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03213",
+      "title": "Toward SLM-based agentic task-tool intent matching",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03226",
+      "title": "D2K-Bench: Can LLM Agents Turn Expert Designs into Efficient GPU Kernels?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03315",
+      "title": "Lightweight, Rubric-Guided Trajectory Evaluation for Production AI Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03389",
+      "title": "From Patching to Pruning Visual Computation in Vision Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03448",
+      "title": "Passing the Test You Trained On: Re-evaluating Prompt-Injection Detectors for LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03516",
+      "title": "XGenAct: Geometry-Enhanced World Action Models through Cross-Task Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03524",
+      "title": "From Benchmarks to Production: A Text-to-SQL System for Complex Financial Data",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03574",
+      "title": "HyperBrowseComp: A Multilingual and Multimodal Stress Test for Web-Browsing Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03585",
+      "title": "Threat-Preserving Representation Sensitivity in Agent-Security Benchmarks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03591",
+      "title": "HazardWeaver: Scientific Route Selection for Hazard Analysis Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03631",
+      "title": "NeutronGym: Physics-Graded Neutron Instrument Design for LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03632",
+      "title": "World Embedding Benchmark",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03695",
+      "title": "Language Models that Play Chess and Explain Their Moves",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03741",
+      "title": "Logit-Aware MIMO AirComp for Distributed Mixture-of-Experts LLM Inference over Wireless Edge Networks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03780",
+      "title": "OceanMind: A multi-agent AI system for ocean diagnosis",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03796",
+      "title": "ProsaBuddy: Assisting Mechanized Real-Time Schedulability Analysis with LLM-based Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03820",
+      "title": "From Requirements to Attack Trees: Grounded LLM Agents for Design-Time Security Review",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03894",
+      "title": "Proxy Confidence: Auditing Black-Box LLM Agents with a Surrogate's Log-Probabilities",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03938",
+      "title": "MLLMs Fail to Refuse when Using Tools Agentically",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03984",
+      "title": "Teaching Agents to Code Reliably",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.03994",
+      "title": "Solving VeriContest with a Lean-Backed Rust Verifier",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04002",
+      "title": "Do Language Models Need a Trainable Input Embedding Table? Fixed Minimal Token Codes at 1.7B-Class Scale",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04008",
+      "title": "SkillScriptBench: Benchmarking Self-Evolution of Executable Agent Skill Packages Beyond Markdown",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04009",
+      "title": "SUAVE: Unified Video-Action Models via Masked Diffusion",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04047",
+      "title": "Periscope: Extending Frozen Language Models Beyond Their Context Window",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04118",
+      "title": "LongSocialBench: Do Long-Context LLMs Understand Online Discussion Threads?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04132",
+      "title": "PB-GRPO: Learning Socially Adaptive LLM Agents from Persona-Driven Simulation with Preference-Batched GRPO",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04134",
+      "title": "Agentic Resource Allocation for Batch Multi-Objective Bayesian Optimization in Autonomous Materials Discovery",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04139",
+      "title": "From Sight to Foresight: Predictive Spatial Reasoning in Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04140",
+      "title": "ExpertMuon-Compass: Alignment-Guided Step Sizes for Mixture-of-Experts Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04152",
+      "title": "Kepler4D: Controllable Future Video Generation via 4D Scene State Evolution",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04178",
+      "title": "SHarP: Saliency-based Pruning of Agent Harnesses",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04196",
+      "title": "Asynchronous Is Nearly Free for Evolution Strategies on Long-Horizon Agentic Tasks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04204",
+      "title": "Clean: Second-order LLM Training at Linear Memory Cost via Nyström Sketching",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04225",
+      "title": "FlashGaze: Training-Free Multi-Scale Patch Pruning For Efficient Video Understanding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04261",
+      "title": "Playing social deduction games with reinforcement fine-tuned large language models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04292",
+      "title": "LMBuild: Evaluating LLM Agents for Generating Buildable and Functional Structures",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04299",
+      "title": "Questioning the Questions: Sustaining Self-Evolution in Reasoning Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04303",
+      "title": "What to Preserve in Recursive Computation: A Local Predictive Sufficiency Principle",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04318",
+      "title": "Rethinking Long-Video Efficiency: A Joint Allocation Perspective on Frames, Pixels, and Front-End Latency",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04328",
+      "title": "Bidirectional Preference Synthesis: Learning Prompt-Conditioned Preferences from Boundary Failures",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04344",
+      "title": "Hierarchical Credit Assignment for RLVR on Fused Gromov-Wasserstein Geometry",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04371",
+      "title": "Functionally Equivalent or Not? Graph-Grounded Differential Surrogate Execution for Code Equivalence",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04375",
+      "title": "Do Tool Calls Execute as Intended? Measuring and Repairing Intent-Execution Correspondence in LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04379",
+      "title": "AgentPersonaBench: Benchmarking Persona-Driven User Simulation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04381",
+      "title": "Beyond Plausibility: Verifiable Fine-Grained Image Editing on Structured Assets",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04409",
+      "title": "Understanding and Mitigating Hallucination Escape in Tool-Using LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04429",
+      "title": "Asking Earns Nothing: Scoring the Decision to Act in BFCL Multi-Turn",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04432",
+      "title": "Video2World: Benchmarking Coding Agents for Interactive World Modeling from Embodied Videos",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04488",
+      "title": "Can LLM Agents Automate Reinforcement Learning for Text-to-Speech?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04506",
+      "title": "EgoExo-Next:Benchmarking Vision-Language Models on Visual-Option Next-State and Cross-View Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04512",
+      "title": "Correctness Is a Direction: Geometric Answer Selection in Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04517",
+      "title": "EvoCast: Reliable Autonomous Research Agents for Iterative Forecasting Architecture Evolution",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04518",
+      "title": "Length Generalization Needs Proper Regularization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04555",
+      "title": "$\\mathrm{TRIZ}^{a}$: Guiding Agent Evolution from Pattern Recognition to Solution Invention",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04575",
+      "title": "From Probe Scores to Alarm Policies: Operational Validity of Activation Monitors for Language-Model Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04580",
+      "title": "Strong Helps Weak: Directional Cross-Modal Alignment Transfer in Multi-modal LLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04596",
+      "title": "DiffGate: Difficulty-Gated Teacher Guidance for On-Policy Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04604",
+      "title": "Anticipating the Consequences of Curriculum Decisions with Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04607",
+      "title": "ForeAct3D: Policy-Grounded Future World Modeling for VLA Policies",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04611",
+      "title": "Practical Runtime Enforcement of First-Order Temporal Requirements",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04616",
+      "title": "PerturBot: Breaking Shortcut Priors in Vision-Language-Action Models with Perturbative Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04641",
+      "title": "Back to the Future: Regressing Readability Features from LLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04646",
+      "title": "SEIS: Self-Evolving Inference Systems",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04651",
+      "title": "GS-Codec: A Gaussian-Splatting Bottleneck for Neural Audio Coding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04658",
+      "title": "RETRACE: From Entangled Repair Histories to Reusable Experience for CI Repair",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04687",
+      "title": "Understanding Errors in LLM-Based Question Answering over Imperfect Tables",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04699",
+      "title": "Not Self-Decidable: LLMs Cannot Draw the Boundary of What an Agent Verifier Can Check",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04721",
+      "title": "Knossos and Ariadne: Benchmarking and Learning Complete Diagram Topology Extraction with Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04753",
+      "title": "More Value per Key: Asymmetric Sparse Attention for Faster LLM Decoding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04779",
+      "title": "Asymmetric Repository Lineage Modeling and Verifier-Guided Coordination in Concurrent AI Coding Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04792",
+      "title": "Do More Modalities Always Help? A Geometric Perspective on Missing-Modality Robustness",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04794",
+      "title": "Knowing the Store: What a Memory Backend Must Write Down Before an Agent Can Read It",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04805",
+      "title": "ExStereo: Lifting 2D Vision-Language-Action Models to 3D with Explicit Stereo Representations",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04824",
+      "title": "Agent Behavior as Code: Efficient and Robust LLM Agents with Programmatic Specifications",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04845",
+      "title": "Which Preferences to Train On? End-to-End Multi-Objective Alignment with an Adversarial Preference Distribution",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04851",
+      "title": "CURIO: Curiosity-Driven Test-Time Learning for Open-Ended Discovery",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04868",
+      "title": "From Memory to Guide: Spatio-Temporal Composer for Procedural Coding Memory",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04882",
+      "title": "ResOPD: Tail Residualization for Sparse On-Policy Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04889",
+      "title": "ForkPilot: Self-Evolving Policy for Retrospective Search in Long-Horizon Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04899",
+      "title": "Rewrite What Matters: Adaptive Multilingual Query Rewriting for Reasoning via Agentic Reinforcement Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04915",
+      "title": "Are We Measuring Scientific Intelligence? Rethinking the Evaluation of AI Scientists",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04916",
+      "title": "PreAct-Nav: Agentic Reasoning Before Action for Urban Navigation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04918",
+      "title": "Residual Visual Credit Optimization: Conserved Evidence Routing for Multimodal Reinforcement Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04921",
+      "title": "Complex Agents, Shallow Tests: Demystifying and Enhancing Test Adequacy of Agent Harness in the Wild",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04927",
+      "title": "Assembling Insights for Agentic Machine Learning Engineering Systems",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04940",
+      "title": "Software World Models: From Consequence Prediction to Decision Value",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04950",
+      "title": "How Should Teachers Be Prepared? RL on Student-Induced States for On-Policy Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04961",
+      "title": "Building LLM Agent Systems the Deep Learning Way: From Modular Design to Architecture Search",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.04991",
+      "title": "CIPO: Counterfactual Imagination Policy Optimization for Adaptive Tool Granularity Selection",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05023",
+      "title": "Look Where You Say You're Looking: Self-Grounded Attention for Visual Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05024",
+      "title": "LightVLN: Efficient Aerial Vision-and-Language Navigation with Compact Memory and History-Guided Local Aggregation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05025",
+      "title": "Triggering Generalist Reasoning via Predictive Uncertainty for Dual-System VLA",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05026",
+      "title": "GeoBridge-VLA: Geometry-Aware Residual Adaptation for Vision-Language-Action Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05030",
+      "title": "EVISKILL: Grounding Skill Evolution in Replayable Evidence",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05039",
+      "title": "Causal Improvement Graph for Agentic Harness Optimization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05047",
+      "title": "Beyond Task Completion: Measuring Interaction Cost in Terminal User Interfaces",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05066",
+      "title": "Salvation Lies Within: Eliciting Inherent Style Transfer in Step-Distilled Diffusion Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05097",
+      "title": "ReMAP: Restoring the Perceptual Cycle with Reasoning-Time Latent Visual Memory",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05099",
+      "title": "Small Agents with Semantic Search: Efficient Multilingual Code Localization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05107",
+      "title": "SearchJev: A Fast and Calibrated System-1 Model for Search Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05124",
+      "title": "Memory Canonicalization: A Framework and Benchmark for Cross-Model Drift in Persistent LLM Memory",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05126",
+      "title": "Selecting Repetition Counts Across Model Scales in Data-Constrained Pretraining",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05132",
+      "title": "SpecAgent: Empowering Program Verification with Agentic Synthesis of Formal Program Specifications",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05139",
+      "title": "Hidden in the Comments: A Context-Injection Attack Surface in Code LLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05162",
+      "title": "Memadapter: Counterfactual Adaptation Against Memory-induced Sycophancy",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05176",
+      "title": "AECG: Asymmetric Experience Consolidation and Governance In Multi-Agent Systems",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05185",
+      "title": "Recurrent Latent Visual Search for GUI Grounding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05190",
+      "title": "FORGE: Verification-Gated Behavioral Repair for Generative Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05247",
+      "title": "templar: agentic induction and evolution of standardized radiology reporting templates from large-scale clinical corpora",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05273",
+      "title": "When and What to Prune? Stage-Aware Visual Token Pruning for Efficient VLA",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05274",
+      "title": "Answer with Evidence: Consistency-Aware Grounded Visual Question Answering for Roadside Traffic Scenes",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05282",
+      "title": "Red-TTT: Test-Time Training for Automated Jailbreaking Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05284",
+      "title": "Fusion is the New Mutation: Bandit-Guided Evolution on Workflow Graphs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05295",
+      "title": "Readable Before Actionable: Causal Tracing of Indirect Prompt Injection",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05300",
+      "title": "MESH-Harness: Self-Improving Agent Harnesses via Bandit-Guided Compositional Evolution",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05303",
+      "title": "ASCENT: Online Test-Time Training of Long-Horizon Agents via Self-Distillation of Verified Experience",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05308",
+      "title": "RubricArmor: Adversarial Evolution Improves LLM-Based Rubric Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05318",
+      "title": "Robust Parameter-Efficient LLM Adaptation on Analog Hardware",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05334",
+      "title": "AgentDiscover: Autonomous Discovery with Minimal Search Scaffolding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05342",
+      "title": "IRSTD-Agent: Agentic Infrared Small Target Detection via Zoom-Guided Interaction Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05367",
+      "title": "AIProver: Agentic Auto-Formalization of Mathematical Research via Certificate-Driven Evolving Harness",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05373",
+      "title": "Towards Unbiased On-Policy Distillation for Block Diffusion Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05383",
+      "title": "Sibyl: An Efficient Small-large Model Collaboration Framework for Long-horizon Tasks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05398",
+      "title": "MMPostTrainBench: Benchmarking Autonomous Research for Multimodal Post-Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05402",
+      "title": "Task Vector Descent: Learning from Non-IID Batches",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05418",
+      "title": "EvoMem-VLA: State-Evolution Memory for Long-Horizon Robot Manipulation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05425",
+      "title": "Unmentioned Checklist Findings Change How Reinforcement Learning Appears to Improve Chest Radiograph Report Checking",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05473",
+      "title": "Hierarchical Reinforcement Learning with Stable Temporal Abstraction for Language Model Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05481",
+      "title": "CodeForge-MA: Execution-Verified Multi-Agent Learning with Language-Conditioned LoRA for Multilingual Code Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05484",
+      "title": "Universal Test-Time Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05532",
+      "title": "DelegationBench: Measuring When AI Agents Should Ask Before Acting",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05538",
+      "title": "LiFT: Loop Flow Transformers",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05540",
+      "title": "SALUS: Automated Auditing of NL-to-SQL Benchmarks through Weak Supervision of Multi-Agent Output",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05563",
+      "title": "G-CARB: Graph-Localized Conformal Agent Risk Budget for Compositional Harm",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05572",
+      "title": "Disentangling Task Difficulty from Run-Level Failure in Agent Failure Prediction",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05615",
+      "title": "DREAM: Dynamic Resolution Assignment For Multimodal Multi-agent Debate",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05622",
+      "title": "UndoBench: Separating Task Competence from Recovery Capability in Tool-Using AI Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05630",
+      "title": "Atomic Visual Entailment: Enhancing Zero-Shot Vision-Language Reasoning through Atomic Fact Decomposition and Learned Selection",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05637",
+      "title": "Visual Grounding Safety in Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05664",
+      "title": "StageVLN: Spatial and Trajectory Auxiliary Guidance for Efficient Vision-Language Navigation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05685",
+      "title": "Spend Bytes on Breadth: Precision-Count Trade-offs for Decode-Time KV Compression in Long Chain-of-Thought Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05697",
+      "title": "From Token-Max to Outcome-Max: How You Use AI Determines Its Productivity",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05709",
+      "title": "Nexus: An Execution Fabric for AI Agents Across Cloud, Edge, and Devices",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05715",
+      "title": "Rotated, but How Far? Diagnosing and Improving Object-Rotation Reasoning in VLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05744",
+      "title": "CIPHER-MoE: Balancing Efficiency and Routing Fidelity in Trillion-Scale MoE Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05774",
+      "title": "AdaSpark: Adaptive DSpark with Online Learning for Tree Verification and N-gram Fill",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05778",
+      "title": "MedicalHarness: A Controlled Evaluation of LLMs and Agent Harnesses on Medical Tasks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05833",
+      "title": "Request Order Matters: Cache-History Sensitivity in Selective KV-Cache Reuse for Rolling Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05842",
+      "title": "HLA: Expressive Hybrid Linear Attention via Chunk-Wise Dynamic Mixing",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05861",
+      "title": "Imagine to Act: High-Fidelity Data Synthesis via Image Editing World Model for Scalable GUI Agent Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05872",
+      "title": "Off-Policy Merging Beats On-Policy Self-Distillation for Continual Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05879",
+      "title": "Learning to Learn a Language",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05885",
+      "title": "The Optimization Landscape of Learning Compacted Context Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05896",
+      "title": "TasteRoute: Personalized Routing for Video Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05897",
+      "title": "Fitting Vision Adapters at Frontier Scales",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05935",
+      "title": "ThunderSyncRL: Lossless Acceleration of Agentic Reinforcement Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05940",
+      "title": "ReMem: Streaming Video Understanding With Long Context Retention",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05978",
+      "title": "Byte Language Models: Scaling, Emergent Abstractions, and Information Allocation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05981",
+      "title": "Mechanizing the User's Eye: Pre-Registered Deployment of a Sabotage-Validated Fail-Plausible Observer in a Production LLM Agent Runtime",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05993",
+      "title": "From Transformation to Target State: Rethinking Query Representation for Zero-Shot Composed Image Retrieval",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.05994",
+      "title": "How (and How Not) to Use Data Augmentation in VLA Post-Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06001",
+      "title": "AgentSpy: Making AI Agent Behavior Observable",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06021",
+      "title": "Scalable Minimal-Change Learning for Controllable Image Editing",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06026",
+      "title": "Differentiable Bit-Widths: Co-optimizing Pruning and Quantization via SVD for Ultra-Efficient LLM Compression",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06064",
+      "title": "TrustMI: Causally controlling how assistants trust their users",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06100",
+      "title": "From Traces to Agentic Worlds: Agentic Language World Models for Interactive Environment Simulation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06147",
+      "title": "Efficient Test-time Adaptation through Candidate Verification and Divergence Shifts",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06161",
+      "title": "Introducing Code-Switched Contexts to Cognitively-Inspired Bilingual Model Training",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06191",
+      "title": "Judged Useless, Queried Anyway: Tool-Using Agents Rarely Turn Their Own Evidence Judgments into Stopping Decisions",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06192",
+      "title": "Copies or Sources? Measuring How LLM Aggregators Count Restated Evidence in Multi-Agent Systems",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06193",
+      "title": "Correct Code, Broken Contributions? SWE-CC: Benchmarking Repository Policy Compliance for Coding Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06226",
+      "title": "LeAVJEPA: A Minimalist Architecture for Audio-Visual Self-Supervised Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06269",
+      "title": "Evolving in Thought Space: Training a Small Model at Test Time Unlocks Better Discoveries",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06286",
+      "title": "DeferKV: Rethinking Eviction Timing for One-Shot KV Cache Compression",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06324",
+      "title": "Readout Blindness: VLM Scores Miss the Spatial Direction Their Frozen Encoders Retain",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06404",
+      "title": "Quantifying the Stability of Multi-Step Reasoning via Error Amplification",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06406",
+      "title": "What Did the Agent Actually Do? Evidence-Grounded Oversight for Long-Horizon Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06413",
+      "title": "SpatialChain: A Benchmark for Auditing Spatial Reasoning Faithfulness in VLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06439",
+      "title": "Better Call Reward: Reward Hacking as Strategic Abstention in Legal Reasoning Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06446",
+      "title": "The Assistance Dilemma: Learning to Teach via Multi-Turn Reinforcement Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06454",
+      "title": "AgentPrivArena: Evaluating and Auditing Real-world AI Agent Privacy",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06479",
+      "title": "Behavior-Preserving KV Cache Compression",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06598",
+      "title": "SimForcing: Distilling Simulation Motion Priors into Real-Domain Robot World Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06611",
+      "title": "Lens3D: Target-Conditioned Visual Foveation for Fine-Grained 3D Understanding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06616",
+      "title": "Video Encoders Built on Image Representations",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06617",
+      "title": "RealtimeWAM: One-Step Asynchronous World Action Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06636",
+      "title": "Differentially Private Mixing of Public Datasets Improves Private Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06637",
+      "title": "Long-Horizon Textual World Modeling through Structured Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06647",
+      "title": "LoGRA: Scaling LLM Reinforcement Learning with Low-Rank Gradient Sketches",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06648",
+      "title": "Representation-Space MMD for Diffusion Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06650",
+      "title": "Wikidata Search Traces: A Dataset for Training Knowledge Graph Search Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06666",
+      "title": "What Matters for Latent Reasoning with Flow Matching",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06671",
+      "title": "Learning What to Imitate: Entropy-Aware Distribution Mixing",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06686",
+      "title": "OVAL: Output-Aware Local Page Bases for KV Cache Retrieval",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06729",
+      "title": "Improving Diversity in LLM Short Story Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06748",
+      "title": "BazaarBench: Delegation Safety in Decentralized C2C Marketplaces Run by LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06750",
+      "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06751",
+      "title": "MatrixFormer: A Foundation Model for Matrix Completion",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06782",
+      "title": "T-Search: An Open Agentic Retriever and Playground for Hard Multi-Step Search",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06804",
+      "title": "Sharpen Without Search: On-Policy Distillation of Sequence-Level Power Distribution",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06817",
+      "title": "Paradee: Distilling Kokoro-82M into an 8M-Parameter Single-Voice Text-to-Speech Model",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06829",
+      "title": "CLIFT: Conformal Self-Verification for Web Agent Training and Test-Time Scaling",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06830",
+      "title": "MemPilot: Orchestrating On-Demand Multimodal Memory Curation for LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06843",
+      "title": "Recursive Video In-Context Learning for Agentic Robot",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06844",
+      "title": "Learning to Read the Contextual Tokens in Diffusion Transformers",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06892",
+      "title": "Axiom Satisfiability of Linear Rewards in Alignment",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06932",
+      "title": "RADC: Risk-Aware Dual Caching for Vision-Language Test-Time Adaptation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06947",
+      "title": "FactorBench: A Portfolio-Aware Benchmark for Automated Factor Mining",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06950",
+      "title": "Learning to Decide, Not to Reason: Parameter-Efficient Decision Operators via Low-Rank Activation Steering",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06963",
+      "title": "WavePrune: One period is often enough for RoPE",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06964",
+      "title": "Principles that Guide, Actions that Inform: Agent Evolution via Knowledge Abstraction",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06966",
+      "title": "APEX: Active Protection at Execution Boundaries for LLM Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.06993",
+      "title": "DART-ES: Difficulty-Aware Reweighting and Targeted Replay for Fine-Tuning LLMs with Evolution Strategies",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07043",
+      "title": "TRIAGE: Direction-Aware Mismatch Stabilization of Native NVFP4 Reinforcement Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07118",
+      "title": "AMBER: Training Long-Horizon Web Agents through Append-Only Memory",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07121",
+      "title": "SoloQ: Calibration-Free Quantization for Diffusion Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07132",
+      "title": "CroissantMiner: Automated Extraction and Validation of Croissant Metadata for ML Datasets",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07177",
+      "title": "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07191",
+      "title": "Agentic Design Space Exploration for Joint Hardware Configuration Selection and Mapping of AI Inference Workloads on Heterogeneous Edge SoCs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07212",
+      "title": "Reward-Driven Learning under Prompt-Level Differential Privacy",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07247",
+      "title": "Learning What to Distill: Bilevel Top-K Token Selection for Self-Distillation in Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07258",
+      "title": "Lineage-Aware Memory Governance: A Derivation-Gated Framework for Privacy-Preserving Column-Level Access Control in Enterprise AI Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07261",
+      "title": "Verifying Coordination in Parallel Coding Agents: NP-Bench and a Scheduling Planner",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07289",
+      "title": "Catching Developers in the Flow: Low-Latency Agentic Program Repair at Google Scale",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07311",
+      "title": "Understanding and Mitigating Inference-Time Overreliance Using Agentic Memory",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07324",
+      "title": "Scale-Invariant Training for Time Series Foundation Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07332",
+      "title": "Structuring MoE Expert Selection for Agentic Reinforcement Learning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07335",
+      "title": "Selective Critique for Cost-Aware LLM Agents in Long-Horizon Decision Making",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07348",
+      "title": "Stepped MoE: Segment-Level Routing with Configurable Inference Complexity",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07349",
+      "title": "RELACE: retrospective likelihood-based action credit estimation for long-horizon language agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07376",
+      "title": "MemCo: Memory-Centric Collaboration for Generalizing LLM Agents to Unseen Environments",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07385",
+      "title": "Semantic Capability Acquisition and Specialization During Vision-Language Model Fine-Tuning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07389",
+      "title": "Inference and learning in sparse autoencoders as natural gradient flow",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07457",
+      "title": "AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07522",
+      "title": "Activation Denoising: A Robustness View on Parallel vs Sequential LLM Quantization",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07532",
+      "title": "Safeguarding LLMs via Model-Agnostic Latent Safety Signals from Dark Knowledge",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07533",
+      "title": "SkillFormer: Skill-Decomposed Adaptation for Audio Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07557",
+      "title": "CheckerBench: Can Long-Horizon Agents Synthesize Static-Analysis Checkers?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07572",
+      "title": "Two Vectors Replace In-Context Demos: Structured Task Adaptation via Embeddings",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07585",
+      "title": "REViT-v2: Hierarchical Windowed Roto-reflection Equivariant ViT for Equivariant Feature Extraction",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07587",
+      "title": "Large Language Model Orchestration under Heterogeneous Preferences via Explicit Persona Inference",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07639",
+      "title": "HarnessSecurity-Bench: Do Security Mechanisms Really Protect Coding Agent Harnesses?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07643",
+      "title": "Monte Carlo Estimation for KV Cache Eviction",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07645",
+      "title": "SkillPoison: Progressive Skill Poisoning via Successful Experiences",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07654",
+      "title": "Does On-Policy Distillation for Safety Pose Backdoor Risks?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07657",
+      "title": "Where Rules End and Judges Begin: Measuring the Judgment Boundary in Multi-Agent Systems Security",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07689",
+      "title": "Unlocking Fine-Grained Perception in CLIP via Structurally-Aware Latent Masked Modeling",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07706",
+      "title": "WASD: Wasserstein-based Knowledge Distillation for Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07729",
+      "title": "Foveated Compression: Selective High-Resolution Preservation for Token-Efficient VLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07731",
+      "title": "Learning to Retrieve via Reinforcement Learning in Embedding Space",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07739",
+      "title": "Cite What You Explore: Budget-Aware LLM Reasoning over Medical KGs with Verifiable Evidence",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07758",
+      "title": "Later Is Better: Token Reduction for ViTs Under Distribution Shift",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07767",
+      "title": "TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07774",
+      "title": "Reading, Not Manipulating: Leveraging Router Logits for Multimodal Safety in MoE Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07809",
+      "title": "MASKerade: Token-Routed Mask Experts for Dense-to-MoE Upcycling",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07810",
+      "title": "SIFT: Search Intent-to-Filter Transformer for Multi-Task Personalized Filter Ranking at Airbnb",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07816",
+      "title": "Do I Need the Cloud? Uncertainty-Aware Step-Level Handoff for Small Language Model Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07819",
+      "title": "$α$Transfer: Coefficient Transfer for Efficient Model Merging",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07832",
+      "title": "Harness Engineering for Software Engineering via Modular Executable Dev-Primitives",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07848",
+      "title": "Dynamic Positional Attention Modulation for Parameter-Efficient Fine-Tuning of Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07851",
+      "title": "RA-MoWE: Workflow-Affinity Embeddings for Query Clustering and Agentic Workflow Generation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07860",
+      "title": "WorkflowOps: Learning Agent Collaboration Priors for Multi-Agent Workflow Orchestration",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07862",
+      "title": "A self-learning scientific agent for X-ray diffraction",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07868",
+      "title": "CueRator: Agentic Search for Symbolic Rules to Adapt Frozen Multimodal Encoders",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07887",
+      "title": "Visual Abstention in Unified Multimodal Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07898",
+      "title": "FC-SWE: Failure-Conditioned RL for Long-Horizon Software Engineering Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07903",
+      "title": "Unsupervised Long-Tailed Adaptation of Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07925",
+      "title": "TF-PRVR: Training-Free Partially Relevant Video Retrieval",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07935",
+      "title": "SIGMA: Self-Improving Alignment Generalization from a Model Spec",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07940",
+      "title": "Hybrid Latent Attention for Looped Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07972",
+      "title": "Can Agents Work for Everyone? Cross-User Reliability for Mobile GUI Agents in Personalized User Interfaces",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07987",
+      "title": "VisionWeave: Weaving Elastic Visual Representations as a Native Capability of MLLMs",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.07990",
+      "title": "A Broader Look at Model Merging: Rethinking Implicit Regularization Induced by Task Arithmetic",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08048",
+      "title": "DAEDALUS: Bootstrapping Agent Memory from Self-Generated Tasks",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08076",
+      "title": "SpeedrunBench: Challenging LLM Agents with Video Game Speedrunning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08101",
+      "title": "Beyond Corrected Memory: Execution Consistency in Multi-Agent Systems",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08106",
+      "title": "ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08108",
+      "title": "Enhancing Diffusion Language Models with Autoregressive Post-Training Weights",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08133",
+      "title": "VLA-ACL: Action-Consistent Visual Token Pruning for Efficient Vision-Language-Action Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08155",
+      "title": "Token-Efficient Multi-Agent Collaboration via System One-Guided Computational Division of Labor",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08159",
+      "title": "Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08162",
+      "title": "The Failure Is in the Readout: Fine-Grained Emotion Recognition Benchmarks Measure Elicitation, Not Perception",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08164",
+      "title": "Align, Then Correct: Training-Free Two-Stage Low-Rank Compensation for Extremely Quantized Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08183",
+      "title": "Compact Robot Policies Need Fine-Grained Visual Representations",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08341",
+      "title": "DIPrune: Task-Aware Token Pruning with Dual Importance for Efficient Multimodal Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08364",
+      "title": "Transect: Retaining Observability for Long-Horizon LLM Agent Evaluations",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08401",
+      "title": "GeoPID: Decomposing and Steering Visual Information in Vision-Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08403",
+      "title": "SSR: Sparse Segment Reduction for Ternary GEMM Acceleration",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08414",
+      "title": "Image Bitstream Fine-grained Understanding for Privacy-Friendly AIoT",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08452",
+      "title": "Agentic AutoRAG: RAG Pipeline Optimization through Reasoning-Driven Agents",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08463",
+      "title": "UNREAL: Unifying Retrieval and Long-Context with a Single Model",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08514",
+      "title": "How Much Evidence Should a Coding Agent's Self-Correction Carry? Adaptive Dirichlet Evidence for Self-Distillation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08560",
+      "title": "Have I Seen Enough? Frozen Video-Language Models Encode Evidence Readiness",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08586",
+      "title": "MINDSET: Energy-based Schema Evolution for Long Conversational Agent Memory",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08621",
+      "title": "Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08622",
+      "title": "Agentic RCA for Internet-Scale Services Using Constrained Creativity",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08639",
+      "title": "Forensic Reserve: Eliciting Latent Knowledge for Image Forgery Detection",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08647",
+      "title": "SquidAgent: Parallelize Wisely, Coordinate Efficiently",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08649",
+      "title": "Stable Scores, Unstable Answers: Frame Phase and Option Order in Video Multiple-Choice Evaluation",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08659",
+      "title": "Selective Transfer of RL Updates for Visual Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08662",
+      "title": "ParanoiaEval: Benchmarking Unnecessary Defensive Work in Agentic Coding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08670",
+      "title": "Principled Under Pressure: Post-Training Decides Whether LLMs Act on Their Own Moral Judgment",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08674",
+      "title": "EC-RAG: Event Chain Retrieval-Augmented Generation for Long Video Understanding",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08678",
+      "title": "Secure Speculative Decoding for Large Language Models",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08691",
+      "title": "ScienceClaw: Benchmarking Continual Self-Evolution of AI-for-Science Agents Across the Natural and Social Sciences",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08713",
+      "title": "SpaTime: Streaming Vision-Language Models for Spatio-temporal Reasoning",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08718",
+      "title": "When Forgetting is not Catastrophic: On the Mechanics of Spurious Forgetting",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08773",
+      "title": "AdvSim2Real : Training Web Agents Against Adaptive Prompt Injection in a Web World Model",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08775",
+      "title": "Agent in a Bottle: Can LLM Agents Turn Their Capabilities Into Cheap, Scalable Artifacts?",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08778",
+      "title": "Sherpa: Teaching LLMs to Teach Adaptively",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08779",
+      "title": "ALIVE: Interaction-Aligned Object Insertion for First-Frame-Guided Video Editing",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.08791",
+      "title": "World Models' Last Exam in Physics",
+      "old_status": "implementation-pending",
+      "accepted_registers": [
+        "oct07",
+        "oct12"
+      ]
+    },
+    {
+      "id": "2610.18157",
+      "title": "Fan Out or Relay? Ownership-Aware Routing for LLM Agents Querying Siloed Tables",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.18684",
+      "title": "Knowing the User Is Not Knowing What We Established: Grounding Awareness in Personal Agents",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.18780",
+      "title": "BLADE: Auditing Information Use for Failure Attribution in LLM Multi-Agent Systems",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.19131",
+      "title": "Plant Memory: Technical Language Processing and a Verified Maintenance Ontology for Agent-Accessible Failure Knowledge from SAP PM Work Orders",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.19139",
+      "title": "Online Tokenization with Optimal Delay in Linear Time",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.19316",
+      "title": "Truthful and Expected-Payment-Optimal Model Routing in Graph-Based Agentic Workflows",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.19345",
+      "title": "When Is Smaller Greener? Right-Sizing Language Models for Agentic AI",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.19474",
+      "title": "Beyond Retrieval: Evidence Access and Event Aggregation in Agent Memory",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.19659",
+      "title": "Measuring and Reducing Unusable Replies of LLM Agents",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.19801",
+      "title": "Delta Tokenizer: Reference-Identical Tokenization of Session Deltas and Segment-Parallelism for Long Prompts on Multicore CPUs",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.19818",
+      "title": "One Monitor Does Not Fit All: Formalism-Agnostic Runtime Verification for Agentic AI",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.20067",
+      "title": "Which Knowledge Should LLMs Trust? Uncovering a Generalizable Steering Direction Across Knowledge Conflicts",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.20303",
+      "title": "SpectrumQuant: Spectrum Alignment for LLM Quantization",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    },
+    {
+      "id": "2610.20413",
+      "title": "When Does Momentum Help in Reinforcement Learning with Verifiable Rewards?",
+      "old_status": "reviewed",
+      "accepted_registers": [
+        "oct15"
+      ]
+    }
+  ],
+  "missed14_details": [
+    {
+      "id": "2610.18157",
+      "title": "Fan Out or Relay? Ownership-Aware Routing for LLM Agents Querying Siloed Tables",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "OAR 仅用公开schema生成一份草拟SQL并计算owner cover，在读任何私有行前决定fan-out或relay。核心可在小型真实数据库和实际SQL草拟模型上低成本检验；不能直接喂gold SQL/owner答案替代草拟，不声称13种设置已复现。"
+    },
+    {
+      "id": "2610.18684",
+      "title": "Knowing the User Is Not Knowing What We Established: Grounding Awareness in Personal Agents",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "Grounding Layer 明确分开用户事实与已接受、未确认、修订和限域约定；ledger、动作前gate及回查原始对话均保留。可低成本核验真实对话到状态提取及有限动作边界；不得直接喂入oracle +Status/+Policy或gold动作当实现。只接受机制候选，不声称全基准收益。"
+    },
+    {
+      "id": "2610.18780",
+      "title": "BLADE: Auditing Information Use for Failure Attribution in LLM Multi-Agent Systems",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "BLADE 审计来源到决策的使用关系，区分引入、传播和修复；原文明确不输入参考答案。全文片段报告1228轨迹的 Jev 推断估算约$1.9，属于廉价真实轨迹审查候选；仍需真实决策模型，不得用金标责任步骤做 fixture。"
+    },
+    {
+      "id": "2610.19131",
+      "title": "Plant Memory: Technical Language Processing and a Verified Maintenance Ontology for Agent-Accessible Failure Knowledge from SAP PM Work Orders",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "Plant Memory 的 rule-first TLP、带证据/审核状态的事实图及 SQLite 离线后端可低成本实现，LLM第二读者是可选项。接受规则/溯源核心候选；400条合成工单的数字只是受控机制证据，不能宣称真实工厂部署、通用Agent能力或自动evolve收益。"
+    },
+    {
+      "id": "2610.19139",
+      "title": "Online Tokenization with Optimal Delay in Linear Time",
+      "batch": "2026-10-15-review-closure-foundation-model",
+      "resolution": "affordable_candidate_not_implemented",
+      "reason": "在线tokenization以稳定输出前缀与delay形式化为基础，组合special-token、pretokenizer和BPE，并给出更低delay的联合算法与不可解边界；公开Morgan Stanley上游实现可做CPU级精确ID/流式等价性验收。接受为低成本算法候选，本轮不实现、不跑完整吞吐研究。"
+    },
+    {
+      "id": "2610.19316",
+      "title": "Truthful and Expected-Payment-Optimal Model Routing in Graph-Based Agentic Workflows",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "STAR 的分配目标、工作量单调性及积分支付可在小型真实合成图上用精确求解器执行，不需要调用 LLM。接受的是拍卖/路由核心机制候选，不把合成成本或激励保证当作真实 Agent 能力提升。"
+    },
+    {
+      "id": "2610.19345",
+      "title": "When Is Smaller Greener? Right-Sizing Language Models for Agentic AI",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "本文的贡献是按成功完成任务计量能耗/成本/时间的决策公式与Pareto筛选。接受CPU数值机制候选，可从公开参数算交叉长度；15模型GPU能耗pilot并非已复现，也不能将合成可靠率下的公式结果宣传为Agent能力。"
+    },
+    {
+      "id": "2610.19474",
+      "title": "Beyond Retrieval: Evidence Access and Event Aggregation in Agent Memory",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "TallyMem 保留原始轨迹、生成事件规格并实际执行聚合，不能以金标事件集代替规格生成。接受原始日志→事件ledger→真实编译/执行的廉价核心候选；$1.05仅属原文primary arm，不能外推全AMA/多reader成本。AMA混入开发轨迹，正式能力比较应采用25开发/99隔离仓库协议。"
+    },
+    {
+      "id": "2610.19659",
+      "title": "Measuring and Reducing Unusable Replies of LLM Agents",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "回复可用性把读者实际见过的信息作为边界，单次重写或追加明确回复要求无需训练。接受少量真实回复上的reader检查与实际重写机制候选；不能用金标可用回复替代重写器，480回复/8模型统计不视为本地结果。"
+    },
+    {
+      "id": "2610.19801",
+      "title": "Delta Tokenizer: Reference-Identical Tokenization of Session Deltas and Segment-Parallelism for Long Prompts on Multicore CPUs",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "Delta Tokenizer 的核心是由 tokenizer 拆分规则证明安全的增量接缝、精确分段及 chunk 调度，而不是简单拼接 token。CPU 核心可在本地 Mac 以真实 tokenizer 和原始文本核验一致性；不复跑 41.8B 文档或多服务器服务实验，不声称已测 TTFT。"
+    },
+    {
+      "id": "2610.19818",
+      "title": "One Monitor Does Not Fit All: Formalism-Agnostic Runtime Verification for Agentic AI",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "AgenticRV 的 canonical events、monitor-specific projection、统一 verdict 与 effect 前阻断是可执行的运行时机制。Python/受控工作流可在 Mac 保真核验；只接受该机制，不把立即返回的 monitor 微基准冒充语义监控效果或 Agent 能力。"
+    },
+    {
+      "id": "2610.20067",
+      "title": "Which Knowledge Should LLMs Trust? Uncovering a Generalizable Steering Direction Across Knowledge Conflicts",
+      "batch": "2026-10-15-review-closure-agent",
+      "resolution": "affordable_core_review_candidate",
+      "reason": "知识冲突偏好方向是残差空间的线性干预，原文采用7B–9B、单卡A100、仅推理。接受真实模型上独立开发冲突对提取方向与隔离测试的核心候选；不把先按clean正确筛出的条件准确率当无条件能力，也不把评测答案送入推理。"
+    },
+    {
+      "id": "2610.20303",
+      "title": "SpectrumQuant: Spectrum Alignment for LLM Quantization",
+      "batch": "2026-10-15-review-closure-post-training",
+      "resolution": "affordable_candidate_not_implemented",
+      "reason": "SpectrumQuant 用校准激活协方差构造闭式 alignment+mixing 正交旋转；原文7B校准约0.26 GPU小时、4.51 GiB，可保留128条真实校准样本的7B原算法路径；不承诺70B或全套多模型下游扫评；接受为低成本审查候选，本轮未实现、未实验，亦不自动进入执行/evolve。"
+    },
+    {
+      "id": "2610.20413",
+      "title": "When Does Momentum Help in Reinforcement Learning with Verifiable Rewards?",
+      "batch": "2026-10-15-review-closure-post-training",
+      "resolution": "affordable_candidate_not_implemented",
+      "reason": "只接收论文原始十臂 bandit 的 bias-corrected EMA/安全 η/(1−β) 机制和解析性质检验，可用 CPU 数值运算保留原目标；不接收4B/32B RLVR或50,000-replicate完整统计活动，不据此声称LLM提升；接受为低成本审查候选，本轮未实现、未实验，亦不自动进入执行/evolve。"
+    }
+  ],
+  "accepted_catalogued": [
+    {
+      "id": "2610.11167",
+      "key": "pivot",
+      "detail_path": "post-training/2610.11167-pivot/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.11247",
+      "key": "opd-learning-signals",
+      "detail_path": "post-training/2610.11247-opd-learning-signals/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.11251",
+      "key": "vcola",
+      "detail_path": "multimodal-models/2610.11251-vcola/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.11291",
+      "key": "semi-opd",
+      "detail_path": "post-training/2610.11291-semi-opd/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.11332",
+      "key": "recal",
+      "detail_path": "post-training/2610.11332-recal/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.11519",
+      "key": "residual-advantage",
+      "detail_path": "post-training/2610.11519-residual-advantage/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.11659",
+      "key": "dial-opd",
+      "detail_path": "post-training/2610.11659-dial-opd/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.11854",
+      "key": "grpo-dropout",
+      "detail_path": "post-training/2610.11854-grpo-dropout/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.12061",
+      "key": "race",
+      "detail_path": "agent-research/2610.12061-race/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.12367",
+      "key": "sguid",
+      "detail_path": "post-training/2610.12367-sguid/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "str",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.12417",
+      "key": "woven",
+      "detail_path": "reproductions/2610.12417-woven/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.12707",
+      "key": "umrm",
+      "detail_path": "reproductions/2610.12707-umrm/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13025",
+      "key": "evo2",
+      "detail_path": "reproductions/2610.13025-evo2/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13092",
+      "key": "jev-workflow",
+      "detail_path": "reproductions/2610.13092-jev-workflow/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13194",
+      "key": "janus",
+      "detail_path": "reproductions/2610.13194-janus/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13257",
+      "key": "cast-opd",
+      "detail_path": "reproductions/2610.13257-cast-opd/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13285",
+      "key": "boundary-evo",
+      "detail_path": "reproductions/2610.13285-boundary-evo/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13348",
+      "key": "t2mem",
+      "detail_path": "reproductions/2610.13348-t2mem/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13481",
+      "key": "branch-opd",
+      "detail_path": "reproductions/2610.13481-branch-opd/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13521",
+      "key": "road-mopd",
+      "detail_path": "reproductions/2610.13521-road-mopd/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13630",
+      "key": "msar",
+      "detail_path": "reproductions/2610.13630-msar/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13735",
+      "key": "orthros",
+      "detail_path": "reproductions/2610.13735-orthros/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13767",
+      "key": "dualquant",
+      "detail_path": "reproductions/2610.13767-dualquant/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13806",
+      "key": "forte",
+      "detail_path": "reproductions/2610.13806-forte/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13889",
+      "key": "rated",
+      "detail_path": "reproductions/2610.13889-rated/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    },
+    {
+      "id": "2610.13912",
+      "key": "rsi-anything",
+      "detail_path": "reproductions/2610.13912-rsi-anything/README.md",
+      "document_exists": true,
+      "adapter_contract_type": "dict",
+      "capability_completeness_verified": false
+    }
+  ],
+  "accepted_closed": [
+    {
+      "id": "2610.02626",
+      "title": "Imagine the Future, Internalize the Gist: Efficient VLA Reasoning via Internalized Spatiotemporal Imagination",
+      "terminal_observations": [
+        {
+          "batch": "2026-10-15-known-revisions",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "IG-VLA v3先学习未来SigLIP状态，再将时空reasoning内化为gist；不是仅重复当前帧。§4.1原文训练reasoning用8 H100、gist用4 A6000，LIBERO 100K步和VLABench61K步。成本高，不复现、审查 DONE，单卡推理延迟结果不替代训练验收。"
+        }
+      ]
+    },
+    {
+      "id": "2610.05417",
+      "title": "Render to Reason: Novel-View Semantic Prediction Improves Spatial Understanding in VLMs",
+      "terminal_observations": [
+        {
+          "batch": "20261020-harness2-priority-historical-repair",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。AppendixA.1:8GH200;4B variants12h,InternVL8B30h,Qwen3VL8B96h per training configuration, plus ablations."
+        }
+      ]
+    },
+    {
+      "id": "2610.07338",
+      "title": "Logbook: Extremely Long-form Audio Event Understanding",
+      "terminal_observations": [
+        {
+          "batch": "20261020-harness2-priority-historical-repair",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。52 systems; Table1 test audio82.1h+240.6h+148.9h, full cascaded/LLM fact+entailment evaluation. Full campaign high cost."
+        }
+      ]
+    },
+    {
+      "id": "2610.08077",
+      "title": "Self-Retrospection Distillation: Turning Post-hoc Experiences into Prior Foresight",
+      "terminal_observations": [
+        {
+          "batch": "2026-10-15-known-revisions",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "SRD v3用事后经验监督行动前不可见轨迹的foresight，推理无需生成foresight；训练时可用hindsight不等于评测agent可读未来。Appendix C.2为4B/9B thinking-on、8 H200、每步128轨迹及十种agent任务，成本高，不复现、审查 DONE。"
+        }
+      ]
+    }
+  ],
+  "legacy_deferred_reason_categories": {
+    "explicit_unimplemented": 6,
+    "implementation_or_execution_preconditions": 20,
+    "integrity_or_acceptance_audit_preconditions": 3,
+    "reference_only": 1,
+    "further_evidence_verification": 1
+  },
+  "legacy_deferred_not_structured_accepted": [
+    {
+      "id": "2610.09027",
+      "title": "Visual Memory Attacks Can Persist Through The KV Cache",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "explicit_unimplemented",
+      "reason": "P-VMI whitebox图像攻击移除后仍经后续KV影响，cache-swap/summarycompaction控制；真KV交互/梯度攻击待实现，onlysoftprompt是diagnostic。"
+    },
+    {
+      "id": "2610.09127",
+      "title": "CADFather: Autonomous CAD Reconstruction through Coordinated Tool Use",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读CADFather method/experiment：VLM看target/intermediate renders，协调pretrainedCADgeneration/numericalrefinement，真CadQueryDSLexecute feedback与bestvalidarchive，无新training。下一批须真实3D几何/多tool策略，注意testsubsetablation不能参与parameter选择。"
+    },
+    {
+      "id": "2610.09159",
+      "title": "SpecGuard: Proving a Task Is Broken Before the Agent Cheats",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "integrity_or_acceptance_audit_preconditions",
+      "reason": "Google DeepMind优先。已读SpecGuard方法、实验和限制：SpecAgent独立测试生成Lean specification，TestAgent分离，semantic connector与kernel证书只有在忠实autoformalization下保证。349 mutated SWE任务和手工60规范审计，不是线上A/B；下一批须防规范弱化/伪冲突。"
+    },
+    {
+      "id": "2610.09252",
+      "title": "Adaptive Visual Token Reduction for Accelerated Image Understanding",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "explicit_unimplemented",
+      "reason": "ReFIT multi-scale instructionwindowreshape+tokenrefine，只训reductionmodules；四VQA FLOPs非wallclock提升，真实feature模块待实现。"
+    },
+    {
+      "id": "2610.09430",
+      "title": "SkillCycle: Co-Evolving Agent Policies and Skill Banks",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "explicit_unimplemented",
+      "reason": "SkillCycle bank/router冻结policy学习后冻结policy修rules，rule/bank环境配对验证；ALFWorld/WebShop真实controller/distill待实现，no-skill部署不可带bank。"
+    },
+    {
+      "id": "2610.09484",
+      "title": "MIMESIS: Learning User Simulators as Training Environments for Interactive Agents",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "Meta优先。已读MIMESIS user simulator及agent posttraining：user-side midtrain、ThoughtTrace SFT、多域GRPO后冻结simulator，再agent GRPO+CSD token重加权；private thought仅retrospective teacher训练上下文。9 unseen user评测和8环境，下一批须真实双训练链而非fixed simulator。"
+    },
+    {
+      "id": "2610.09624",
+      "title": "How Do Agentic LLMs Decide to Call Tools? A Tool-Call Vector Shaped by Suppression",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读toolcall causalvector分析/跨model评测：500minimalverbpairs300discover200heldout，hiddenstateintervention/transcoder，7families与native tau2 generalization。下一批须真实activations causalnecessity/sufficiency，不用文字heuristic决定toolcall或按test筛vector。"
+    },
+    {
+      "id": "2610.09761",
+      "title": "PARC-Loc: Text-to-Point-Cloud Localization with Partial Assignment and Relational Consistency",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "explicit_unimplemented",
+      "reason": "PARCpartialassignment+pairwise spatial关系和neighborboundary扩充，KITTI360/CityLoc；真实text/pointcloud特征与coarse/fine权重待实现。"
+    },
+    {
+      "id": "2610.09856",
+      "title": "Self-Evolve With a Reference:Anchored Training of Tool-Integrated Agents",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读AnchorLoop方法/实验：历史Executor frozenanchor同时给cross-referenceadvantage和Curriculum一致性proxy，VeRL sandbox+交替真实训练；curriculum时anchor与executor同参数，不能冒称版本改善或correctness。下一批须保留dualagent训练和reference snapshot，不以selfconsistency当gold。"
+    },
+    {
+      "id": "2610.09935",
+      "title": "AgentTracer: Tracing Indirect Prompt Injection Attack through Fine-Grained Intention-Execution Alignment",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读AgentTracer graphdesign/evaluation：userintent authorization与operationKB、taskintent implicitdependency、从anomalouscall backwardprune追injectionsource；successattacklogs加背景noise。下一批须完整trace与无attackfalsepositive控制，不能已知injection位置当attributor输入。"
+    },
+    {
+      "id": "2610.09952",
+      "title": "MSU Team at the Explainable Deepfake Detection Challenge 2026: Grounded Artifact Evidence for Deepfake Detection",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "explicit_unimplemented",
+      "reason": "XPlainVerse DINO/Mesorchdetector、trainingartifactmask和patchcontrastive+QwenVL解释/GRPO简化；publictrainval/test可验，真多stage待实现。"
+    },
+    {
+      "id": "2610.10062",
+      "title": "Loud Failures, Quiet Failures: Fault Detection and Recovery in Tool-Using Language Model Agents",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读loud/quietfailure method/results：自有BFCL statefultool layer四typedfault控制注入，24task1920trial、faultfree nondeterminism基线与检测/改plan/recovery分开。下一批须真实tool状态execute，gold finalstate仅scorer，reasoning无recovery提升负结果保留。"
+    },
+    {
+      "id": "2610.10071",
+      "title": "HGP:An on-device personalized agent memory via hybrid graph storage",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读HGP方法/实验：confidence-driven LLMannotation在线训lightweightrouter、episode/semantic/proceduralgraphs+workingstate；LoCoMo/PAL选择与QA。下一批须真实router更新与图检索、on-device latency/资源实际测，不能只标签分类fixture。"
+    },
+    {
+      "id": "2610.10120",
+      "title": "RewardWeaver: Long-Horizon Interactive Learning for Language Agents via Self-Evolving Reward Adaptation",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读RewardWeaver method/experiment：admitted rubric语义固定，阶段训练后lowoutcome backwardattribution动态reward allocation，独立controlled expansion；社会/议价/sales。下一批须实际policy训练、validatedrubric稳定，不能追分随意重定义reward或测试goal泄漏。"
+    },
+    {
+      "id": "2610.10305",
+      "title": "How Do Transformers Learn to Represent Symmetries?",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "explicit_unimplemented",
+      "reason": "Transformerfiniteaugmentation学习pointcloud群不变性与equivariance，受控architecture/ablation；真实训练/OOD几何证据非fixture待实现。"
+    },
+    {
+      "id": "2610.10786",
+      "title": "Plan-and-Patch: Diffusion Language Models for Agentic Planning",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读Plan-and-Patch方法/实验：真实diffusion planner parallelunmask、region infill保prefix/suffix，与独立executor失败region选择，NaturalPlan/ALFWorld/TextCraft训练。下一批须dLLM与联合generation/repair训练，AR字符串编辑非定义机制。"
+    },
+    {
+      "id": "2610.11008",
+      "title": "Why LLM Agents Favor Their Group: Stakes, Observed Norms, and Reputation",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "reference_only",
+      "reason": "已读群体favoritism实验/结果：任意group、costless/stake、scripted history与个体reputation控制，4400模拟societies。属于agent社会行为测量，保留下一批参考；不能把合成群体pointallocation解释为现实组织因果。"
+    },
+    {
+      "id": "2610.11123",
+      "title": "When Interfaces Speak: Data-Aware Generative UI Harness for Active Interaction",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读GenUI task定义/实验：ToolAgent与GUICoder、DynamicUX实际sandbox交互reward、RewardAuditor meta-rubric，UI-TAU真实publicdatabase模拟任务与4B训练。下一批须真实UI/code执行和用户输入，judge reward hacking校验；rounds问卷不当生产A/B。"
+    },
+    {
+      "id": "2610.11136",
+      "title": "The \"10th Juror\": Open-Set Standpoint Screening for Bureaucratic Bias Detection",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "integrity_or_acceptance_audit_preconditions",
+      "reason": "已读MARS-Gov方法/实验：legal retrieval、open-set scout动态juror、conservative routing和rewrite语义verification，DGDB/LOCO评测。下一批须独立evidence与重写含义audit，法律背景检索不可视为法律建议/无偏性保证。"
+    },
+    {
+      "id": "2610.11226",
+      "title": "When Lower Reconstruction Loss Hurts: Distributionally Robust Refinement for Low-Bit LLM Quantization",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "DRQ固定quant grid只refine integer codes，worst-case activation distributions纠正calibration reconstruction泛化，六PTQ methods dense/MoE公开ppl/tasks；下一批须真实整数码/量化forward/uncertainty inner problem。"
+    },
+    {
+      "id": "2610.11384",
+      "title": "Environmental Feedback Modeling Matters: Rethinking Feedback Treatment in Agentic Hindsight Self-Distillation",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读SELF方法/实验：on-policy真实environment反馈建feedback-conditioned hindsight teacher，joint response modeling loss+selfdistillation；tau/AppWorld reward-free agent训练。下一批须真实双objective梯度，privileged未来feedback仅训练teacher不进部署policy。"
+    },
+    {
+      "id": "2610.11573",
+      "title": "Memory Type Varies: Empowering LLM Agents for Long-Term Memory with Diverse Strategies",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读MemoType/TriMEM方法和评测：learned router识别memory/query类型选择retrieval，Contriever统一backbone、LongMemEval/LoCoMo/PerLTQA。下一批须实际router训练与检索标签隔离，人工分类型heuristic不能称核心复现。"
+    },
+    {
+      "id": "2610.11578",
+      "title": "Chronos Enables Code Agents to Reason over Software Evolution",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读Chronos方法/设置：历史PR蒸馏experience cards+typed graph、semantic entry+multi-hop、双patch生成steward选择；6backboneSWE对比。下一批须截止目标issue前history防答案PR泄漏，真实patch执行而非检索静态gold。"
+    },
+    {
+      "id": "2610.11862",
+      "title": "LEVER: Adaptive Cost-Aware Proof Search Over AND/OR Graphs",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读LEVER AND/OR graph与实验：partial proof realized objective加open subgoal预测，programmable cost/length/impurity，Lean kernel保correct；matched model/version/price。下一批须真实Lean搜索、预测前评分与cost含失败，不能gold proof排序代替。"
+    },
+    {
+      "id": "2610.12248",
+      "title": "EgoVoice: Proactive Spoken Assistance from Egocentric Multimodal Streams",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "EgoVoice用HoloAssist source-separated/resynth audio和listen-or-speak SFT/DPO训练主动语音助手，170 sessions onset/content/end评测；多模态/语音后训练下一批须实际流式音视频与timing policy。"
+    },
+    {
+      "id": "2610.12611",
+      "title": "SoftwareGym: Scaling Computer-Use Agent Training with Diverse Synthesized Software Environments",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读SoftwareGym方法/实验：合成真实可执行GUI app、固定v1 GUI测试迭代repair，182app12类120task，Qwen3.5-9B multimodal SFT、out-of-domain OSWorld。下一批须VM实际GUI交互与合成环境自测隔离，不能用静态截图/固定动作fixture。"
+    },
+    {
+      "id": "2610.12655",
+      "title": "CLEAT: Learning Value-Guided Clarification for Interactive Agents",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读CLEAT摘要、intent alignment及实验：同history ask/proceed paired rollout估residual query value，controller与task policy co-train，新policy outcome更新labels；Qwen3-4B四bench十设置三seed。下一批须训练真实value predictor+policy，不能拿测试latent goal作agent输入。"
+    },
+    {
+      "id": "2610.12794",
+      "title": "Meta-Reflective Evolution Effectively Improves Production AI Systems",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "further_evidence_verification",
+      "reason": "已读CoCoEvolve方法与实验协议：archive parent、history检索、live target probing、自测mutation再external评分；train实例可见，validation仅score、test隔离。production AI目标及公开heldout基准不自动证明生产流量A/B，下一批须进一步核验live authority和真实evaluator，非registry标签。"
+    },
+    {
+      "id": "2610.12957",
+      "title": "JoyInside-VLM-Agent: Product-Conditioned Multimodal Policy Learning for Embodied Agents",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读JoyInside方法/实验：产品条件multimodal trajectory、SFT、多teacher OPD及DPER token-level privileged evidence路由；部署单student不读teacher reference。私有120k混合数据、领域skill及两机器人case限制公开复现，下一批须保留真实多阶段训练。"
+    },
+    {
+      "id": "2610.13144",
+      "title": "Competence-Aware Orchestration for LLM-Based Multi-Agent Systems",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "implementation_or_execution_preconditions",
+      "reason": "已读competence orchestration方法/实验：固定probe capability fingerprint加query-conditioned模型，learned role activation与communication graph；6 reasoning/codebench及unseen backbones。下一批须训练真实competence predictor，probe/test隔离而非gold推断能力。"
+    },
+    {
+      "id": "2610.13166",
+      "title": "Scaling Agentic Data for Long-Horizon Terminal Intelligence",
+      "frozen_review_decision": "reviewed_deferred",
+      "reason_category": "integrity_or_acceptance_audit_preconditions",
+      "reason": "已读TerminalHorizon方法/实验：独立execution发现合成环境预先完成的关键工作，再reconstruct并扩展同goal任务；1.5k环境、Qwen3.5-27B SFT与12bench。production settings是任务评测不证明线上A/B；下一批须隔离environment gold verifier与agent可见包。"
+    }
+  ],
+  "global_title_duplicate_ids": [
+    {
+      "normalized_title": "motif",
+      "ids": [
+        "2608.25381",
+        "2608.25392"
+      ]
+    }
+  ],
+  "caveats": [
+    "504 is explicit accepted/no catalog/no explicit terminal within the three frozen accepted registers, not all possible repository work.",
+    "31 are reviewed_deferred research leads, not automatic implementation commitments.",
+    "No current 521 identity duplicates, title aliases to manifest, or current delivery-path matches were found.",
+    "Catalog status is distinct from faithful algorithm, runtime validation, Evolve integration and measured capability.",
+    "priority_organizations returns empty for all old pending rows; reason-only organization signals are not recognized."
+  ]
+}
