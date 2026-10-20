@@ -1,0 +1,1430 @@
+{
+  "audit_scope": "Read-only Meta reconciliation of current bounded backfill and identified ledger pending records; no code edits/training/download/PR; official paper HTML used only for three targeted resource checks.",
+  "repository": ".",
+  "summary": {
+    "backfill_new_total": 54,
+    "backfill_new_meta": 0,
+    "backfill_new_google": 54,
+    "meta_identities_in_backfill": 19,
+    "meta_backfill_status_counts": {
+      "reviewed": 15,
+      "implemented": 4
+    },
+    "all_current_computed_implementation_pending": 521,
+    "identified_meta_related_pending": 3,
+    "meta_directory_total": 48,
+    "meta_directory_decision_counts": {
+      "preserve_existing_catalog": 6,
+      "preserve_prior_scope_exclusion": 16,
+      "preserve_existing_diagnostic_and_repair_source_date_linkage; full original experiment not reproduced high cost": 1,
+      "archive_metadata_only_unconfirmed_nonblocking": 21,
+      "recommend_reference_catalog_not_reproduced_high_cost": 3,
+      "recommend_reference_catalog_not_reproduced_high_cost; affordable task-metadata/result-import interface possible, not currently integrated": 1
+    },
+    "known_deferred_meta_cost_closed": 9
+  },
+  "critical_interpretations": [
+    "54 is a bounded source-ID status count, not all Google+Meta publications and not 54 approved implementations. All54 currently come from Google signals.",
+    "The48 Meta official-directory rows include21 unconfirmed metadata-only URL identities and16 scope exclusions. Null-ID rows are absent from the83-ID backfill count; do not call them fully reviewed or implementation TODOs.",
+    "The4 Meta implemented statuses are L1 diagnostics, with diagnostic_only true and formal_comparison false. PAHF aggregate seed_mean43 is not capability evidence.",
+    "The15 Meta reviewed IDs are terminal high-cost references or preserved diagnostic+cost closures. Do not revive them as reproduction TODOs.",
+    "The521 number is reproducible as repository_paper_statuses output, not established as521 real unimplemented affordable papers. Three identified Meta-related rows remain pending due old acceptance records; targeted primary checks expose missing cost disposition, not a new mandate to implement.",
+    "This is bounded reconciliation, not exhaustive identification of every Meta-authored paper among521; affiliation data are incomplete and broad query hits are not authorship proof."
+  ],
+  "status_algorithm_evidence": [
+    "scripts/audit_historical_priority_backfill.py:23",
+    "scripts/audit_historical_priority_backfill.py:63",
+    "src/auto_research/discovery.py:153",
+    "src/auto_research/discovery.py:159",
+    "src/auto_research/discovery_review.py:65",
+    "src/auto_research/discovery_review.py:83"
+  ],
+  "pending_rows": [
+    {
+      "id": "2610.06064",
+      "title": "TrustMI: Causally controlling how assistants trust their users",
+      "current_computed_status": "implementation-pending",
+      "judgment": "pending_implementation_exists_but_cost_gate_missing_not_authorized_implementation_queue",
+      "official_source": "https://arxiv.org/html/2610.06064v1",
+      "primary_resource_evidence": "Official original §4, Appendix C/D.2/D.4: six 7B-70B models; learned steering matrices trained 10 epochs, 120B judge on H100, multiple agent and capability benchmarks, mostly three repetitions. Full campaign should not be treated as an affordable automatic TODO; smaller faithful scope requires explicit cost assessment.",
+      "primary_locations": "§4; Appendix C; Appendix D.2-D.4 (web lines 164-170, 763-802)",
+      "evidence_paths": [
+        "docs/paper-discovery-ledger.json:22928",
+        "docs/paper-discovery-ledger.json:22943",
+        "docs/research-audits/oct07-review-closure/paper-register.json:13351",
+        "docs/research-audits/oct07-review-closure/paper-register.json:13357",
+        "docs/research-audits/oct07-review-closure/paper-register.json:13362",
+        "docs/research-audits/oct12-review-closure/paper-register.json:41893",
+        "docs/research-audits/oct12-review-closure/paper-register.json:41899",
+        "docs/research-audits/oct12-review-closure/paper-register.json:41904",
+        "docs/research-audits/oct15-review-closure/paper-register.json:70336"
+      ],
+      "manifest_match": null,
+      "implementation_search_result": "Exact ID/title/name search in docs/src/tests found review artifacts only, no reproduction directory, adapter, runnable paper implementation or local metrics for this identity.",
+      "fulltext_review_not_implementation": "Oct15 inherits known status, explicitly says existing_evidence_not_upgraded_by_review; this does not close previous accepted/not_implemented delivery."
+    },
+    {
+      "id": "2610.04721",
+      "title": "Knossos and Ariadne: Benchmarking and Learning Complete Diagram Topology Extraction with Vision-Language Models",
+      "current_computed_status": "implementation-pending",
+      "judgment": "stale_pending_original_resource_evidence_supports_high_cost_terminal_not_auto_TODO",
+      "official_source": "https://arxiv.org/html/2610.04721v1",
+      "primary_resource_evidence": "Official original Appendix E.1/Table10: NODE1125, EDGE5960, TRACE5801 steps for each 8B/9B backbone; 4 A100 GPUs, QLoRA. Full original reproduction exceeds single A100/A30 campaign budget; ledger has not recorded terminal cost closure.",
+      "primary_locations": "Appendix E.1 Table10 (web lines 681-693)",
+      "evidence_paths": [
+        "docs/paper-discovery-ledger.json:27797",
+        "docs/paper-discovery-ledger.json:27811",
+        "docs/research-audits/oct07-review-closure/paper-register.json:19671",
+        "docs/research-audits/oct07-review-closure/paper-register.json:19677",
+        "docs/research-audits/oct07-review-closure/paper-register.json:19689",
+        "docs/research-audits/oct07-review-closure/paper-register.json:19693",
+        "docs/research-audits/oct07-review-closure/paper-register.json:19697",
+        "docs/research-audits/oct07-review-closure/paper-register.json:19703",
+        "docs/research-audits/oct12-review-closure/paper-register.json:47902",
+        "docs/research-audits/oct12-review-closure/paper-register.json:47908",
+        "docs/research-audits/oct12-review-closure/paper-register.json:47920",
+        "docs/research-audits/oct12-review-closure/paper-register.json:47924",
+        "docs/research-audits/oct12-review-closure/paper-register.json:47928",
+        "docs/research-audits/oct12-review-closure/paper-register.json:47934",
+        "docs/research-audits/oct15-review-closure/paper-register.json:75420"
+      ],
+      "manifest_match": null,
+      "implementation_search_result": "Exact ID/title/name search in docs/src/tests found review artifacts only, no reproduction directory, adapter, runnable paper implementation or local metrics for this identity.",
+      "fulltext_review_not_implementation": "Oct15 inherits known status, explicitly says existing_evidence_not_upgraded_by_review; this does not close previous accepted/not_implemented delivery."
+    },
+    {
+      "id": "2610.09484",
+      "title": "MIMESIS: Learning User Simulators as Training Environments for Interactive Agents",
+      "current_computed_status": "implementation-pending",
+      "judgment": "stale_pending_original_resource_evidence_supports_high_cost_terminal_not_auto_TODO",
+      "official_source": "https://arxiv.org/html/2610.09484v1",
+      "primary_resource_evidence": "Official original A.1/Table4: mid-training32 A100 for about4.8days, 9.51B tokens; SFT8 A100; A.3/Table7 simulator RL16 A100/500steps/512rollouts; D.1/Table13 actor RL16 A100. No repository cost terminal is recorded.",
+      "primary_locations": "Appendix A.1 Table4, A.3 Table7, D.1 Table13 (web lines 304-328, 382-427, 658-678)",
+      "evidence_paths": [
+        "docs/paper-discovery-ledger.json:45040",
+        "docs/research-audits/oct12-review-closure/paper-register.json:27428",
+        "docs/research-audits/oct12-review-closure/paper-register.json:27433",
+        "docs/research-audits/oct12-review-closure/paper-register.json:27463",
+        "docs/research-audits/oct12-review-closure/paper-register.json:27469",
+        "docs/research-audits/oct15-review-closure/paper-register.json:116978"
+      ],
+      "manifest_match": null,
+      "implementation_search_result": "Exact ID/title/name search in docs/src/tests found review artifacts only, no reproduction directory, adapter, runnable paper implementation or local metrics for this identity.",
+      "fulltext_review_not_implementation": "Oct15 inherits known status, explicitly says existing_evidence_not_upgraded_by_review; this does not close previous accepted/not_implemented delivery."
+    }
+  ],
+  "meta_audit_rows": [
+    {
+      "id": "2610.24628",
+      "title": "Muse Glimmer 30B: An On-Device Agentic Model",
+      "source": "https://ai.meta.com/research/publications/muse-glimmer-30b-an-on-device-agentic-model/",
+      "recorded_decision": "preserve_existing_catalog",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "catalog_linkage_check",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:23",
+        "docs/paper-discovery-ledger.json:122215",
+        "docs/paper-discovery-ledger.json:122234",
+        "docs/paper-discovery-ledger.json:122238",
+        "docs/paper-discovery-ledger.json:122252",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:787",
+        "docs/research-manifest.json:8536",
+        "docs/research-manifest.json:8537",
+        "docs/foundation-models/2610.24628-muse-glimmer-30b/README.md:3",
+        "docs/foundation-models/2610.24628-muse-glimmer-30b/README.md:60"
+      ],
+      "recorded_primary_locations": [
+        "not in Oct15 Meta frozen source review",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ],
+      "catalog_key": "muse-glimmer-30b",
+      "detail_path": "docs/foundation-models/2610.24628-muse-glimmer-30b/README.md",
+      "catalog_implementation_status": "deferred_high_cost"
+    },
+    {
+      "id": null,
+      "title": "Human-Guided Agentic AI for End-to-End EHR Research: Sequential Antibody-Drug Conjugate Pathways in Breast Cancer",
+      "source": "https://ai.meta.com/research/publications/human-guided-agentic-ai-for-end-to-end-ehr-research-sequential-antibody-drug-conjugate-pathways-in-breast-cancer/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:47"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Pickleball injuries, search interest, and participation in the United States, 2014-2023: an ecological time series study",
+      "source": "https://ai.meta.com/research/publications/pickleball-injuries-search-interest-and-participation-in-the-united-states-2014-2023-an-ecological-time-series-study/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:70"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Outcomes in Methicillin-Susceptible and Methicillin-Resistant Staphylococcus aureus Infective Endocarditis Compared With Staphylococcus lugdunensis Infective Endocarditis",
+      "source": "https://ai.meta.com/research/publications/outcomes-in-methicillin-susceptible-and-methicillin-resistant-staphylococcus-aureus-infective-endocarditis-compared-with-staphylococcus-lugdunensis-infective-endocarditis/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:93"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Social Needs Z Codes and Subsequent Acute Care Across 21 U.S. Health Systems",
+      "source": "https://ai.meta.com/research/publications/social-needs-z-codes-and-subsequent-acute-care-across-21-u-s-health-systems/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:116"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Cladophialophora bantiana: a US clinical case series assisted by artificial intelligence",
+      "source": "https://ai.meta.com/research/publications/cladophialophora-bantiana-a-us-clinical-case-series-assisted-by-artificial-intelligence/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:139"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Trends in Emergency Department Visits for Electric Scooter and Electric Bicycle Injuries in the United States, 2014–2023: A Retrospective Observational Study",
+      "source": "https://ai.meta.com/research/publications/trends-in-emergency-department-visits-for-electric-scooter-and-electric-bicycle-injuries-in-the-united-states-2014-2023-a-retrospective-observational-study/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:162"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Documented Dental Disease in Patients With Staphylococcus aureus Bacteremia",
+      "source": "https://ai.meta.com/research/publications/documented-dental-disease-in-patients-with-staphylococcus-aureus-bacteremia/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:185"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Temporal Patterns of Arrhythmia and Conduction Disorder Diagnoses After Infective Endocarditis",
+      "source": "https://ai.meta.com/research/publications/temporal-patterns-of-arrhythmia-and-conduction-disorder-diagnoses-after-infective-endocarditis/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:208"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Remission of Type 2 Diabetes in Linked Health Records: Uncommon, Short-Lived, and More Often Ended by Treatment Restart Than by Rising HbA1c",
+      "source": "https://ai.meta.com/research/publications/remission-of-type-2-diabetes-in-linked-health-records-uncommon-short-lived-and-more-often-ended-by-treatment-restart-than-by-rising-hba1c/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:231"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Return Visits, Admission, and Mortality After Leaving Without Being Seen Among Emergency Department Patients With Behavioral Health Presentations",
+      "source": "https://ai.meta.com/research/publications/return-visits-admission-and-mortality-after-leaving-without-being-seen-among-emergency-department-patients-with-behavioral-health-presentations/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:254"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics",
+      "source": "https://ai.meta.com/research/publications/autoformbench-a-lean-formalization-benchmark-for-advanced-mathematics/",
+      "recorded_decision": "preserve_existing_catalog",
+      "current_computed_status": null,
+      "judgment": "existing_reference_catalog_high_cost_not_reproduced_identity_not_2603.29832",
+      "full_article_read": false,
+      "review_level": "catalog_linkage_check",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:277",
+        "docs/agent-research/autoformbench/README.md:148"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 1, checked 2026-10-20T06:08:16.356765+00:00"
+      ],
+      "catalog_key": "autoformbench",
+      "detail_path": "docs/agent-research/autoformbench/README.md",
+      "catalog_implementation_status": "evaluation_protocol_interface"
+    },
+    {
+      "id": null,
+      "title": "Tightness of the Cycle-Based Relaxation for Completed Length-Three Alpha-Cycles",
+      "source": "https://ai.meta.com/research/publications/tightness-of-the-cycle-based-relaxation-for-completed-length-three-alpha-cycles/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:300"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "On Solvable Evolution Algebras and a Conjecture by García-Martínez and Pérez-Rodríguez",
+      "source": "https://ai.meta.com/research/publications/on-solvable-evolution-algebras-and-a-conjecture-by-garcia-martinez-and-perez-rodriguez/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:323"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "String Two-Point Function = Height Function on a Curve",
+      "source": "https://ai.meta.com/research/publications/string-two-point-function-height-function-on-a-curve/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:346"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Semiabelian Groups Need Not Be Monomial",
+      "source": "https://ai.meta.com/research/publications/semiabelian-groups-need-not-be-monomial/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:369"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Finite-Time Blow-Up of Radial Negative-Energy Solutions for the Mass-Critical Biharmonic Nonlinear Schrödinger Equation",
+      "source": "https://ai.meta.com/research/publications/finite-time-blow-up-of-radial-negative-energy-solutions-for-the-mass-critical-biharmonic-nonlinear-schrodinger-equation/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:392"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "The Strict Threshold for Gaussian Ellipsoid Fitting",
+      "source": "https://ai.meta.com/research/publications/the-strict-threshold-for-gaussian-ellipsoid-fitting/",
+      "recorded_decision": "preserve_prior_scope_exclusion",
+      "current_computed_status": null,
+      "judgment": "scope_excluded_not_reproduction_TODO",
+      "full_article_read": false,
+      "review_level": "inherited_scope_evidence_not_new_fulltext_review",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:415"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": "2609.31644",
+      "title": "MaD-RL: Matching Distributions for Calibrating LLMs with Reinforcement Learning",
+      "source": "https://ai.meta.com/research/publications/mad-rl-matching-distributions-for-calibrating-llms-with-reinforcement-learning/",
+      "recorded_decision": "preserve_existing_diagnostic_and_repair_source_date_linkage; full original experiment not reproduced high cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_method_and_cost_check_plus_existing_evidence_linkage",
+      "cost_basis": "Qwen3-4B: synthetic 6000 updates, G32, 48 runs; math/code 1200 updates, G16 across three datasets and three seeds. No new run proposed.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:437",
+        "docs/paper-discovery-ledger.json:122730",
+        "docs/paper-discovery-ledger.json:122746",
+        "docs/paper-discovery-ledger.json:122747",
+        "docs/paper-discovery-ledger.json:122757",
+        "docs/paper-discovery-ledger.json:122764",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:646",
+        "docs/research-manifest.json:13598",
+        "docs/research-manifest.json:13599",
+        "docs/post-training/2609.31644-mad-rl/README.md:3",
+        "docs/post-training/2609.31644-mad-rl/README.md:54",
+        "docs/experiments/mad-rl-mechanism.md:78",
+        "src/auto_research/post_training/mad_rl.py:38",
+        "src/auto_research/post_training/mad_rl.py:47",
+        "src/auto_research/post_training/mad_rl.py:84",
+        "src/auto_research/post_training/mad_rl.py:90",
+        "src/auto_research/post_training/mad_rl.py:96",
+        "src/auto_research/post_training/mad_rl.py:103"
+      ],
+      "recorded_primary_locations": [
+        "https://arxiv.org/abs/2609.31644: Submission history v1",
+        "https://arxiv.org/html/2609.31644v1: author affiliations, sections 2.1-2.5, 3.2 and Appendix C",
+        "docs/experiments/mad-rl-mechanism.md: existing diagnostic and incorrect first-publication field",
+        "src/auto_research/post_training/mad_rl.py",
+        "docs/gpu-validations/mad-rl-qwen-choice-a100-20260929.json",
+        "docs/experiments/evidence/mad-rl-qwen-choice-seeds42-44.json"
+      ],
+      "catalog_key": "mad-rl",
+      "detail_path": "docs/post-training/2609.31644-mad-rl/README.md",
+      "catalog_implementation_status": "deferred_high_cost",
+      "local_evidence": "Already-linked independent GRU and A100 Qwen mechanism diagnostics; negative three-arm results retained; no formal paper adapter."
+    },
+    {
+      "id": null,
+      "title": "Repeat-After-Me: Black-Box Adaptive Visual Prompt Injection",
+      "source": "https://ai.meta.com/research/publications/repeat-after-me-black-box-adaptive-visual-prompt-injection/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:466"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Alignment-Free Text-Audiobox for Voice Dubbing and Full-Duplex Dialogue Synthesis",
+      "source": "https://ai.meta.com/research/publications/alignment-free-text-audiobox-for-voice-dubbing-and-full-duplex-dialogue-synthesis/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:489"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "WaiT for the Signal: Simple Frequency-Aware Flow-Matching",
+      "source": "https://ai.meta.com/research/publications/wait-for-the-signal-simple-frequency-aware-flow-matching/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:512"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": "2607.25970",
+      "title": "Reinforcement Learning for Code Optimization",
+      "source": "https://ai.meta.com/research/publications/reinforcement-learning-for-code-optimization/",
+      "recorded_decision": "recommend_reference_catalog_not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_method_evaluation_and_resource_review",
+      "cost_basis": "Original section 4: each online RL run uses 8-32 GPU nodes for hours or days; Qwen2.5 7B/32B and CWM32B plus calibrated remote code execution. This is far above one A100/A30.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:534",
+        "docs/paper-discovery-ledger.json:122686",
+        "docs/paper-discovery-ledger.json:122702",
+        "docs/paper-discovery-ledger.json:122703",
+        "docs/paper-discovery-ledger.json:122704",
+        "docs/paper-discovery-ledger.json:122710",
+        "docs/paper-discovery-ledger.json:122717",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:574",
+        "docs/research-manifest.json:12337",
+        "docs/research-manifest.json:12338",
+        "docs/post-training/2607.25970-code-optimization-rl/README.md:3",
+        "docs/post-training/2607.25970-code-optimization-rl/README.md:45"
+      ],
+      "recorded_primary_locations": [
+        "docs/paper-audits/2026-historical-candidates.json: 2607.25970 P2/query-collision, full_text_review_required=false",
+        "https://arxiv.org/abs/2607.25970: v1/v2 history",
+        "https://arxiv.org/html/2607.25970v1: author affiliations; sections 3-5; Appendix C timing calibration, D reward composition, E offline simulator, F async GRPO"
+      ],
+      "catalog_key": "code-optimization-rl",
+      "detail_path": "docs/post-training/2607.25970-code-optimization-rl/README.md",
+      "catalog_implementation_status": "deferred_high_cost"
+    },
+    {
+      "id": null,
+      "title": "Learning to Reason by Analogy via Retrieval-Augmented Reinforcement Fine-Tuning",
+      "source": "https://ai.meta.com/research/publications/learning-to-reason-by-analogy-via-retrieval-augmented-reinforcement-fine-tuning/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:560"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 2, checked 2026-10-20T06:08:54.282091+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "S-EMBER: A Large-Scale Benchmark for Streaming Egocentric Memory Retrieval",
+      "source": "https://ai.meta.com/research/publications/s-ember-a-large-scale-benchmark-for-streaming-egocentric-memory-retrieval/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:583"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Interpreting Physics in Video World Models",
+      "source": "https://ai.meta.com/research/publications/interpreting-physics-in-video-world-models/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:606"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Accurate Decoding of Natural Sentences from Non-Invasive Brain Recordings",
+      "source": "https://ai.meta.com/research/publications/accurate-decoding-of-natural-sentences-from-non-invasive-brain-recordings/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:629"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ]
+    },
+    {
+      "id": "2605.06647",
+      "title": "Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval",
+      "source": "https://ai.meta.com/research/publications/superintelligent-retrieval-agent-the-next-frontier-of-agentic-retrieval/",
+      "recorded_decision": "preserve_existing_catalog",
+      "current_computed_status": "implemented",
+      "judgment": "existing_L1_mechanism_diagnostic_not_full_paper_reproduction",
+      "full_article_read": false,
+      "review_level": "catalog_linkage_check",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:651",
+        "docs/paper-discovery-ledger.json:13867",
+        "docs/paper-discovery-ledger.json:13872",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:439",
+        "docs/research-manifest.json:3745",
+        "docs/research-manifest.json:3746",
+        "docs/agent-research/2605.06647-sira/README.md:3",
+        "src/auto_research/agent_research/official_meta_backfill_20261004.py:17"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ],
+      "catalog_key": "sira",
+      "detail_path": "docs/agent-research/2605.06647-sira/README.md",
+      "catalog_implementation_status": "absent",
+      "local_metric_file": "docs/agent-research/2605.06647-sira/metrics/mechanism-seeds42-44.json",
+      "local_aggregate_metrics": {
+        "seed_mean": 43,
+        "accepted_terms_mean": 2,
+        "top_document_mean": 1
+      },
+      "diagnostic_only": true,
+      "formal_comparison": false
+    },
+    {
+      "id": "2605.29955",
+      "title": "AutoformBot: Formalizing Mathematics at Scale",
+      "source": "https://ai.meta.com/research/publications/autoformbot-formalizing-mathematics-at-scale/",
+      "recorded_decision": "recommend_reference_catalog_not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_method_evaluation_and_resource_review",
+      "cost_basis": "26 textbooks, thousands of agents; approximately one week per book. Small 39-target ablations use 600M-1200M tokens and hours of runs; full campaign high cost.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:674",
+        "docs/paper-discovery-ledger.json:122642",
+        "docs/paper-discovery-ledger.json:122658",
+        "docs/paper-discovery-ledger.json:122659",
+        "docs/paper-discovery-ledger.json:122666",
+        "docs/paper-discovery-ledger.json:122673",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:466",
+        "docs/research-manifest.json:488",
+        "docs/research-manifest.json:489",
+        "docs/agent-research/2605.29955-autoformbot/README.md:3",
+        "docs/agent-research/2605.29955-autoformbot/README.md:47"
+      ],
+      "recorded_primary_locations": [
+        "https://arxiv.org/abs/2605.29955: v1 history",
+        "https://arxiv.org/html/2605.29955v1: author affiliations; sections 3-4; section 5.1 week-per-book, 5.2 token-budget ablations",
+        "https://github.com/facebookresearch/autoform-bot: README requirements and MIT license"
+      ],
+      "catalog_key": "autoformbot",
+      "detail_path": "docs/agent-research/2605.29955-autoformbot/README.md",
+      "catalog_implementation_status": "deferred_high_cost"
+    },
+    {
+      "id": null,
+      "title": "Misalignment Between Backpropagation and the Hierarchy of Brain Responses to Images",
+      "source": "https://ai.meta.com/research/publications/misalignment-between-backpropagation-and-the-hierarchy-of-brain-responses-to-images/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:700"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "EgoBabyVLM: Benchmarking Cross-Modal Learning from Naturalistic Egocentric Video Data",
+      "source": "https://ai.meta.com/research/publications/egobabyvlm-benchmarking-cross-modal-learning-from-naturalistic-egocentric-video-data/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:723"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "GIM: Evaluating models via tasks that integrate multiple cognitive domains",
+      "source": "https://ai.meta.com/research/publications/gim-evaluating-models-via-tasks-that-integrate-multiple-cognitive-domains/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:746"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "NeuralSet: A High-Performing Python Package for Neuro-AI",
+      "source": "https://ai.meta.com/research/publications/neuralset-a-high-performing-python-package-for-neuro-ai/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:769"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "NeuralBench: A Unifying Framework to Benchmark NeuroAI Models",
+      "source": "https://ai.meta.com/research/publications/neuralbench-a-unifying-framework-to-benchmark-neuroai-models/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:792"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ]
+    },
+    {
+      "id": "2605.01188",
+      "title": "Compute Optimal Tokenization",
+      "source": "https://ai.meta.com/research/publications/compute-optimal-tokenization/",
+      "recorded_decision": "recommend_reference_catalog_not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_method_and_resource_review",
+      "cost_basis": "Section 2.2: 988 latent-tokenized plus 320 subword models, 50M-6.7B parameters, 4B-1.1T bytes and 5e18-2e21 FLOPs budgets. Full scaling study not reproduced.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:814",
+        "docs/paper-discovery-ledger.json:122599",
+        "docs/paper-discovery-ledger.json:122615",
+        "docs/paper-discovery-ledger.json:122616",
+        "docs/paper-discovery-ledger.json:122622",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:421"
+      ],
+      "recorded_primary_locations": [
+        "https://arxiv.org/abs/2605.01188: v1/v2 history",
+        "https://arxiv.org/html/2605.01188v1: affiliation; sections 2.1-2.3 and 3; section2.2 resource grid"
+      ]
+    },
+    {
+      "id": "2603.26499",
+      "title": "AIRA₂: Overcoming Bottlenecks in AI Research Agents",
+      "source": "https://ai.meta.com/research/publications/aira-overcoming-bottlenecks-in-ai-research-agents/",
+      "recorded_decision": "preserve_existing_catalog",
+      "current_computed_status": "implemented",
+      "judgment": "existing_L1_mechanism_diagnostic_not_full_paper_reproduction",
+      "full_article_read": false,
+      "review_level": "catalog_linkage_check",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:838",
+        "docs/paper-discovery-ledger.json:13877",
+        "docs/paper-discovery-ledger.json:13882",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:320",
+        "docs/research-manifest.json:228",
+        "docs/research-manifest.json:229",
+        "docs/agent-research/2603.26499-aira2/README.md:3",
+        "src/auto_research/agent_research/official_meta_backfill_20261004.py:64"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 3, checked 2026-10-20T06:08:54.543795+00:00"
+      ],
+      "catalog_key": "aira2",
+      "detail_path": "docs/agent-research/2603.26499-aira2/README.md",
+      "catalog_implementation_status": "absent",
+      "local_metric_file": "docs/agent-research/2603.26499-aira2/metrics/mechanism-seeds42-44.json",
+      "local_aggregate_metrics": {
+        "seed_mean": 43,
+        "makespan_mean": 7
+      },
+      "diagnostic_only": true,
+      "formal_comparison": false
+    },
+    {
+      "id": null,
+      "title": "TransText: Transparency Aware Image-to-Video Typography Animation",
+      "source": "https://ai.meta.com/research/publications/transtext-transparency-aware-image-to-video-typography-animation/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:862"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Think in Strokes, Not Pixels: Process-Driven Image Generation via Interleaved Reasoning",
+      "source": "https://ai.meta.com/research/publications/think-in-strokes-not-pixels-process-driven-image-generation-via-interleaved-reasoning/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:885"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "A foundation model of vision, audition, and language for in-silico neuroscience",
+      "source": "https://ai.meta.com/research/publications/a-foundation-model-of-vision-audition-and-language-for-in-silico-neuroscience/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:908"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": "2603.19461",
+      "title": "HyperAgents",
+      "source": "https://ai.meta.com/research/publications/hyperagents/",
+      "recorded_decision": "preserve_existing_catalog",
+      "current_computed_status": "implemented",
+      "judgment": "existing_L1_mechanism_diagnostic_not_full_paper_reproduction",
+      "full_article_read": false,
+      "review_level": "catalog_linkage_check",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:930",
+        "docs/paper-discovery-ledger.json:13897",
+        "docs/paper-discovery-ledger.json:13902",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:302",
+        "docs/research-manifest.json:1887",
+        "docs/research-manifest.json:1888",
+        "docs/agent-research/2603.19461-hyperagents/README.md:3",
+        "src/auto_research/agent_research/official_meta_backfill_20261004.py:156"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ],
+      "catalog_key": "hyperagents",
+      "detail_path": "docs/agent-research/2603.19461-hyperagents/README.md",
+      "catalog_implementation_status": "absent",
+      "local_metric_file": "docs/agent-research/2603.19461-hyperagents/metrics/mechanism-seeds42-44.json",
+      "local_aggregate_metrics": {
+        "seed_mean": 43,
+        "probability_sum_mean": 1,
+        "archive_size_mean": 2
+      },
+      "diagnostic_only": true,
+      "formal_comparison": false
+    },
+    {
+      "id": null,
+      "title": "Omnilingual MT: Machine Translation for 1,600 Languages",
+      "source": "https://ai.meta.com/research/publications/omnilingual-mt-machine-translation-for-1600-languages/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:954"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Omnilingual SONAR: Cross-Lingual and Cross-Modal Sentence Embeddings Bridging Massively Multilingual Text and Speech",
+      "source": "https://ai.meta.com/research/publications/omnilingual-sonar-cross-lingual-and-cross-modal-sentence-embeddings-bridging-massively-multilingual-text-and-speech/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:977"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "Unified Vision–Language Modeling via Concept Space Alignment",
+      "source": "https://ai.meta.com/research/publications/unified-vision-language-modeling-via-concept-space-alignment/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1000"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": "2602.16173",
+      "title": "Learning Personalized Agents from Human Feedback",
+      "source": "https://ai.meta.com/research/publications/learning-personalized-agents-from-human-feedback/",
+      "recorded_decision": "preserve_existing_catalog",
+      "current_computed_status": "implemented",
+      "judgment": "existing_L1_mechanism_diagnostic_not_full_paper_reproduction",
+      "full_article_read": false,
+      "review_level": "catalog_linkage_check",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1022",
+        "docs/paper-discovery-ledger.json:13887",
+        "docs/paper-discovery-ledger.json:13892",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:211",
+        "docs/research-manifest.json:2862",
+        "docs/research-manifest.json:2863",
+        "docs/agent-research/2602.16173-pahf/README.md:3",
+        "src/auto_research/agent_research/official_meta_backfill_20261004.py:109"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ],
+      "catalog_key": "pahf",
+      "detail_path": "docs/agent-research/2602.16173-pahf/README.md",
+      "catalog_implementation_status": "absent",
+      "local_metric_file": "docs/agent-research/2602.16173-pahf/metrics/mechanism-seeds42-44.json",
+      "local_aggregate_metrics": {
+        "seed_mean": 43
+      },
+      "diagnostic_only": true,
+      "formal_comparison": false
+    },
+    {
+      "id": null,
+      "title": "FERRET: Framework for Expansion Reliant Red Teaming",
+      "source": "https://ai.meta.com/research/publications/ferret-framework-for-expansion-reliant-red-teaming/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1046"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": null,
+      "title": "UniT: Unified Multimodal Chain-of-Thought Test-time Scaling",
+      "source": "https://ai.meta.com/research/publications/unit-unified-multimodal-chain-of-thought-test-time-scaling/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1069"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": "2602.06855",
+      "title": "AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents",
+      "source": "https://ai.meta.com/research/publications/airs-bench-a-suite-of-tasks-for-frontier-ai-research-science-agents/",
+      "recorded_decision": "recommend_reference_catalog_not_reproduced_high_cost; affordable task-metadata/result-import interface possible, not currently integrated",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_protocol_and_resource_review",
+      "cost_basis": "20 tasks, each research run 24h on one H200; Appendix D gives 10-20 runs/task. A single original run already exceeds cheap budget; complete campaign not reproduced.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1091",
+        "docs/paper-discovery-ledger.json:122413",
+        "docs/paper-discovery-ledger.json:122429",
+        "docs/paper-discovery-ledger.json:122430",
+        "docs/paper-discovery-ledger.json:122437",
+        "docs/paper-discovery-ledger.json:122444",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:175",
+        "docs/research-manifest.json:246",
+        "docs/research-manifest.json:247",
+        "docs/agent-research/2602.06855-airs-bench/README.md:3",
+        "docs/agent-research/2602.06855-airs-bench/README.md:46"
+      ],
+      "recorded_primary_locations": [
+        "https://arxiv.org/abs/2602.06855: version history",
+        "https://arxiv.org/html/2602.06855v1: sections 4.2-4.3 and 5.1; Appendix C Table7, Appendix D",
+        "https://github.com/facebookresearch/airs-bench: README task specification and CC BY-NC 4.0 license"
+      ],
+      "catalog_key": "airs-bench",
+      "detail_path": "docs/agent-research/2602.06855-airs-bench/README.md",
+      "catalog_implementation_status": "deferred_high_cost"
+    },
+    {
+      "id": null,
+      "title": "PhyGDPO: Physics-Aware Groupwise Direct Preference Optimization for Physically Consistent Text-to-Video Generation",
+      "source": "https://ai.meta.com/research/publications/phygdpo-physics-aware-groupwise-direct-preference-optimization-for-physically-consistent-text-to-video-generation/",
+      "recorded_decision": "archive_metadata_only_unconfirmed_nonblocking",
+      "current_computed_status": null,
+      "judgment": "metadata_only_unresolved_identity_or_method_archived_nonblocking_not_implementation_TODO",
+      "full_article_read": false,
+      "review_level": "official_directory_and_frozen_history_identity_check_only",
+      "cost_basis": null,
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1117"
+      ],
+      "recorded_primary_locations": [
+        "docs/research-audits/oct15-review-closure/meta-source-review.json: exact URL record",
+        "/tmp/oct20-source-delta/retrieval.json: Meta page 4, checked 2026-10-20T06:08:55.650641+00:00"
+      ]
+    },
+    {
+      "id": "2610.07338",
+      "title": "Logbook: Extremely Long-form Audio Event Understanding",
+      "source": "https://arxiv.org/html/2610.07338v1",
+      "recorded_decision": "not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_resource_gate_check_with_prior_method_review_preserved",
+      "cost_basis": "52 systems; Table1 test audio82.1h+240.6h+148.9h, full cascaded/LLM fact+entailment evaluation. Full campaign high cost.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1141",
+        "docs/paper-discovery-ledger.json:19162",
+        "docs/paper-discovery-ledger.json:19176",
+        "docs/paper-discovery-ledger.json:122868",
+        "docs/paper-discovery-ledger.json:122886",
+        "docs/paper-discovery-ledger.json:122887",
+        "docs/paper-discovery-ledger.json:122892",
+        "docs/paper-discovery-ledger.json:122893",
+        "docs/paper-discovery-ledger.json:122907",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:681"
+      ],
+      "recorded_primary_locations": [
+        "docs/paper-discovery-ledger.json: exact id in old deferred record",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+        "https://arxiv.org/html/2610.07338v1: sections2.2-2.4 Table1",
+        "https://arxiv.org/html/2610.07338v1: sections3-5 systems/evaluation"
+      ]
+    },
+    {
+      "id": "2610.05417",
+      "title": "Render to Reason: Novel-View Semantic Prediction Improves Spatial Understanding in VLMs",
+      "source": "https://arxiv.org/html/2610.05417v1",
+      "recorded_decision": "not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_resource_gate_check_with_prior_method_review_preserved",
+      "cost_basis": "AppendixA.1:8GH200;4B variants12h,InternVL8B30h,Qwen3VL8B96h per training configuration, plus ablations.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1172",
+        "docs/paper-discovery-ledger.json:24895",
+        "docs/paper-discovery-ledger.json:24909",
+        "docs/paper-discovery-ledger.json:122824",
+        "docs/paper-discovery-ledger.json:122842",
+        "docs/paper-discovery-ledger.json:122847",
+        "docs/paper-discovery-ledger.json:122848",
+        "docs/paper-discovery-ledger.json:122862",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:672"
+      ],
+      "recorded_primary_locations": [
+        "docs/paper-discovery-ledger.json: exact id in old deferred record",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+        "https://arxiv.org/html/2610.05417v1: AppendixA.1 training configuration and wall clock"
+      ]
+    },
+    {
+      "id": "2610.09015",
+      "title": "Personalize at Test Time: Learning User Preferences for Image Generation",
+      "source": "https://arxiv.org/html/2610.09015v1",
+      "recorded_decision": "not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_resource_gate_check_with_prior_method_review_preserved",
+      "cost_basis": "50000 images annotated by72B VLM,36000 evaluator pairs;631users x10images/method,30 diffusion sampling steps x30 DNO updates plus GPT5.5judging.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1202",
+        "docs/paper-discovery-ledger.json:42646",
+        "docs/paper-discovery-ledger.json:42659",
+        "docs/paper-discovery-ledger.json:42669",
+        "docs/paper-discovery-ledger.json:122913",
+        "docs/paper-discovery-ledger.json:122931",
+        "docs/paper-discovery-ledger.json:122932",
+        "docs/paper-discovery-ledger.json:122933",
+        "docs/paper-discovery-ledger.json:122938",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:690"
+      ],
+      "recorded_primary_locations": [
+        "docs/paper-discovery-ledger.json: exact id in old deferred record",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+        "https://arxiv.org/html/2610.09015v1: section3.2 evaluator annotation/training",
+        "https://arxiv.org/html/2610.09015v1: section4.4 personalized generation",
+        "https://arxiv.org/html/2610.09015v1: AppendixD DNO"
+      ]
+    },
+    {
+      "id": "2610.09202",
+      "title": "Few Bits, One Law: Toward W2A4KV2",
+      "source": "https://arxiv.org/html/2610.09202v1",
+      "recorded_decision": "not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_resource_gate_check_with_prior_method_review_preserved",
+      "cost_basis": "AppendixA.1:8H100/A10080GB,up to240000QATupdates/about31.5Btokens plus8K40KcontinuedQAT.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1234",
+        "docs/paper-discovery-ledger.json:43517",
+        "docs/paper-discovery-ledger.json:43530",
+        "docs/paper-discovery-ledger.json:43540",
+        "docs/paper-discovery-ledger.json:122959",
+        "docs/paper-discovery-ledger.json:122977",
+        "docs/paper-discovery-ledger.json:122978",
+        "docs/paper-discovery-ledger.json:122983",
+        "docs/paper-discovery-ledger.json:122984",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:699"
+      ],
+      "recorded_primary_locations": [
+        "docs/paper-discovery-ledger.json: exact id in old deferred record",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+        "https://arxiv.org/html/2610.09202v1: section5.1 evaluation setup",
+        "https://arxiv.org/html/2610.09202v1: AppendixA.1 optimization"
+      ]
+    },
+    {
+      "id": "2610.09440",
+      "title": "Mixture of Layers: Dynamic Layer Routing for Visual Reasoning",
+      "source": "https://arxiv.org/html/2610.09440v1",
+      "recorded_decision": "not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_resource_gate_check_with_prior_method_review_preserved",
+      "cost_basis": "AppendixB:4H100NVL training,558K+665K LLaVA or2M Bunny data;13B/8B backbones and multiple routers/ablations.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1265",
+        "docs/paper-discovery-ledger.json:44717",
+        "docs/paper-discovery-ledger.json:44730",
+        "docs/paper-discovery-ledger.json:44740",
+        "docs/paper-discovery-ledger.json:123004",
+        "docs/paper-discovery-ledger.json:123022",
+        "docs/paper-discovery-ledger.json:123027",
+        "docs/paper-discovery-ledger.json:123028",
+        "docs/paper-discovery-ledger.json:123042",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:708"
+      ],
+      "recorded_primary_locations": [
+        "docs/paper-discovery-ledger.json: exact id in old deferred record",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+        "https://arxiv.org/html/2610.09440v1: AppendixB hardware and Table7 training recipes"
+      ]
+    },
+    {
+      "id": "2610.10990",
+      "title": "Omni-Diffusion-Distill: Few-Step Distillation of Unified Multimodal Diffusion Large Language Models",
+      "source": "https://arxiv.org/html/2610.10990v1",
+      "recorded_decision": "not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_resource_gate_check_with_prior_method_review_preserved",
+      "cost_basis": "AppendixC.2 Table7:32A100,total110.8h/3546GPU-hours including teacher collection and2trainingstages.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1295",
+        "docs/paper-discovery-ledger.json:51304",
+        "docs/paper-discovery-ledger.json:51317",
+        "docs/paper-discovery-ledger.json:51327",
+        "docs/paper-discovery-ledger.json:123048",
+        "docs/paper-discovery-ledger.json:123066",
+        "docs/paper-discovery-ledger.json:123071",
+        "docs/paper-discovery-ledger.json:123072",
+        "docs/paper-discovery-ledger.json:123086",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:717"
+      ],
+      "recorded_primary_locations": [
+        "docs/paper-discovery-ledger.json: exact id in old deferred record",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+        "https://arxiv.org/html/2610.10990v1: AppendixC.2 Tables7-8"
+      ]
+    },
+    {
+      "id": "2610.11019",
+      "title": "Mid-Training Language Models on Raw Video",
+      "source": "https://arxiv.org/html/2610.11019v1",
+      "recorded_decision": "recommend_reference_catalog_not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": null,
+      "cost_basis": "Original section4.1.4: end-to-end27300updates over128H100, batch256,16kcontext, plus matched instruction tuning. No download or run.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1325",
+        "docs/paper-discovery-ledger.json:51495",
+        "docs/paper-discovery-ledger.json:51508",
+        "docs/paper-discovery-ledger.json:51518",
+        "docs/paper-discovery-ledger.json:123092",
+        "docs/paper-discovery-ledger.json:123108",
+        "docs/paper-discovery-ledger.json:123109",
+        "docs/paper-discovery-ledger.json:123116",
+        "docs/paper-discovery-ledger.json:123117",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:726",
+        "docs/research-manifest.json:11611",
+        "docs/research-manifest.json:11612",
+        "docs/multimodal-models/2610.11019-raw-video-midtraining/README.md:3",
+        "docs/multimodal-models/2610.11019-raw-video-midtraining/README.md:48"
+      ],
+      "recorded_primary_locations": [
+        "https://arxiv.org/abs/2610.11019: v1 history",
+        "https://arxiv.org/html/2610.11019v1: affiliations; section3 next-token objective; section4.1.4 training",
+        "https://jd730.github.io/projects/RawVideoMidTraining/: project source links",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: not_catalogued"
+      ],
+      "catalog_key": "raw-video-midtraining",
+      "detail_path": "docs/multimodal-models/2610.11019-raw-video-midtraining/README.md",
+      "catalog_implementation_status": "deferred_high_cost"
+    },
+    {
+      "id": "2610.11316",
+      "title": "MetaEncoder: Exploring the Limit of Bi-Encoders for Multimodal System One Decision Making with Natural Language Interface",
+      "source": "https://arxiv.org/html/2610.11316v1",
+      "recorded_decision": "recommend_reference_catalog_not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": null,
+      "cost_basis": "Official eval README: 30B model about62GB bf16 per GPU, intended8x80GB; several hundredGB MMEB-V2 data,190tasks. No download or run.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1354",
+        "docs/paper-discovery-ledger.json:53026",
+        "docs/paper-discovery-ledger.json:53039",
+        "docs/paper-discovery-ledger.json:123137",
+        "docs/paper-discovery-ledger.json:123153",
+        "docs/paper-discovery-ledger.json:123154",
+        "docs/paper-discovery-ledger.json:123161",
+        "docs/paper-discovery-ledger.json:123162",
+        "docs/paper-discovery-ledger.json:123169",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:735",
+        "docs/research-manifest.json:7935",
+        "docs/research-manifest.json:7936",
+        "docs/foundation-models/2610.11316-metaencoder/README.md:3",
+        "docs/foundation-models/2610.11316-metaencoder/README.md:45"
+      ],
+      "recorded_primary_locations": [
+        "https://arxiv.org/abs/2610.11316: v1 history",
+        "https://arxiv.org/html/2610.11316v1: author block; sections3.1-3.3 and4",
+        "https://github.com/facebook/meta-encoder-eval: README setup, resource and data requirements",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: not_catalogued"
+      ],
+      "catalog_key": "metaencoder",
+      "detail_path": "docs/foundation-models/2610.11316-metaencoder/README.md",
+      "catalog_implementation_status": "deferred_high_cost"
+    },
+    {
+      "id": "2610.13886",
+      "title": "X-AgentRed: Red-Teaming Personal Agents in Evolving Multi-Service Ecosystems",
+      "source": "https://arxiv.org/html/2610.13886v1",
+      "recorded_decision": "not_reproduced_high_cost",
+      "current_computed_status": "reviewed",
+      "judgment": "terminal_high_cost_review_DONE_not_reproduced_no_automatic_retry",
+      "full_article_read": false,
+      "review_level": "bounded_original_resource_gate_check_with_prior_method_review_preserved",
+      "cost_basis": "4frontier target agents x250scenarios,30services914tools; Opus4.8simulator/redteam,dualjudge;22.10generationAPIcalls/scenario excludes execution/judging; costs multiply for baselines.",
+      "evidence_paths": [
+        "docs/research-audits/harness2-priority-repair/meta-audit.json:1383",
+        "docs/paper-discovery-ledger.json:62088",
+        "docs/paper-discovery-ledger.json:123182",
+        "docs/paper-discovery-ledger.json:123200",
+        "docs/paper-discovery-ledger.json:123201",
+        "docs/paper-discovery-ledger.json:123206",
+        "docs/paper-discovery-ledger.json:123207",
+        "docs/paper-discovery-ledger.json:123221",
+        "docs/research-audits/harness2-priority-repair/backfill-inventory.json:744"
+      ],
+      "recorded_primary_locations": [
+        "docs/paper-discovery-ledger.json: exact id in old deferred record",
+        "docs/research-audits/oct15-review-closure/implementation-status.json: review_decision known, current_status not_catalogued, empty observations",
+        "https://arxiv.org/html/2610.13886v1: sections4.1 and4.6",
+        "https://arxiv.org/html/2610.13886v1: AppendixB.4 generation cost accounting"
+      ]
+    }
+  ],
+  "new_original_checks": [
+    {
+      "id": "2610.06064",
+      "source": "https://arxiv.org/html/2610.06064v1",
+      "locations": "§4; Appendix C; Appendix D.2-D.4 (web lines 164-170, 763-802)"
+    },
+    {
+      "id": "2610.04721",
+      "source": "https://arxiv.org/html/2610.04721v1",
+      "locations": "Appendix E.1 Table10 (web lines 681-693)"
+    },
+    {
+      "id": "2610.09484",
+      "source": "https://arxiv.org/html/2610.09484v1",
+      "locations": "Appendix A.1 Table4, A.3 Table7, D.1 Table13 (web lines 304-328, 382-427, 658-678)"
+    }
+  ],
+  "no_repository_changes": true,
+  "no_tests_or_experiments_run": true
+}

@@ -1,0 +1,89 @@
+{
+  "reviewed_on": "2026-10-21",
+  "scope": "Full original experiments only; affordable component opportunities remain separate and unimplemented",
+  "ledger_modified": false,
+  "policy": "Existing mandatory cost gate: one A100 or A30, or local Mac; no costly trial merely to prove cost",
+  "decisions": [
+    {
+      "id": "2610.07289",
+      "resolution": "source_unavailable_archived",
+      "full_experiment": "私有生产环境不可公开复现，审查 DONE",
+      "basis": "Google private source, internal CI/model and production changes; Data Availability says no public reproduction package/data",
+      "source": "https://arxiv.org/html/2610.07289v1",
+      "location": "Data Availability; section 3",
+      "component": "公开APR核心另行界定范围与成本；尚未实现，不声称生产复现"
+    },
+    {
+      "id": "2610.06616",
+      "resolution": "not_reproduced_high_cost",
+      "full_experiment": "成本过高，不复现（审查 DONE）",
+      "basis": "Appendix C.3: learned refiner uses 65000 examples from the Video-ChatGPT training split, two epochs, 8 A100 for 12 hours (96 accelerator-hours), plus backbones and benchmarks; author-reported configuration, not a local measurement",
+      "source": "https://arxiv.org/html/2610.06616v1",
+      "location": "Appendix C.1 and C.3",
+      "component": "training-free selection-only 是独立的优先低成本候选，未实现；不得将其冒充refiner训练"
+    },
+    {
+      "id": "2610.00497",
+      "resolution": "not_reproduced_high_cost",
+      "full_experiment": "成本过高，不复现（审查 DONE）",
+      "basis": "Appendix C: batch 512, teacher and students up to one million steps, 167.8M main student, multiple datasets and conditions; full campaign exceeds a short single-device budget by scale-based estimate, no local timing claim",
+      "source": "https://arxiv.org/html/2610.00497v1",
+      "location": "Appendix C",
+      "component": "小词表真实teacher/student核心损失是可另行成本核定的候选，未实现"
+    },
+    {
+      "id": "2602.16490",
+      "resolution": "not_reproduced_high_cost",
+      "full_experiment": "成本过高，不复现（审查 DONE）",
+      "basis": "Section 4.1: 360M/1.7B SmolLM trained on roughly 200B/400B tokens with 22 benchmarks and recipe controls; scale-based assessment, no local timing claim",
+      "source": "https://arxiv.org/html/2602.16490v1",
+      "location": "Section 4.1",
+      "component": "真实depth-growing和inference-looping小模型训练可另行核定；未实现"
+    },
+    {
+      "id": "2510.15831",
+      "resolution": "not_reproduced_high_cost",
+      "full_experiment": "成本过高，不复现（审查 DONE）",
+      "basis": "Section 4: 100 public and 161 private prompts, Gemini/Veo; section 4.3 reports about 0.7M text tokens and 28 videos per iteration, video tokens excluded; full multi-round/control campaign expensive and partly private",
+      "source": "https://arxiv.org/html/2510.15831v1",
+      "location": "Sections 4 and 4.3",
+      "component": "纯编排诊断不构成定义性视频重生成机制；不自动进入实现队列"
+    },
+    {
+      "id": "2610.09159",
+      "resolution": "not_reproduced_high_cost",
+      "full_experiment": "成本过高，不复现（审查 DONE）",
+      "basis": "Full three-agent campaign: 349 SWE tasks plus 187 VERINA and 95 LiveCodeBench, repeated model/control runs, 120 bash turns and ten Lean-feedback rounds, one-hour task cap. Paper average $0.26/task implies about $90.74 for 349 tasks one arm, excluding repeats/additional suites; an estimate, not local spending",
+      "source": "https://arxiv.org/html/2610.09159v1",
+      "location": "Section 5",
+      "component": "少量任务的真实D+C到Lean规范、独立测试与kernel链路为优先低成本候选，未实现"
+    },
+    {
+      "id": "2610.06064",
+      "resolution": "not_reproduced_high_cost",
+      "full_experiment": "成本过高，不复现（审查 DONE）",
+      "basis": "Six 7B-70B models, ten-epoch steering training, 120B judge on H100, multi-task agent/capability evaluation and repetitions; full configuration exceeds the available single-device budget",
+      "source": "https://arxiv.org/html/2610.06064v1",
+      "location": "Section 4; Appendices C and D.2-D.4",
+      "component": "小型真实LM的steering目标与应用范围可另行核定；未实现，不能用固定trust标签替代"
+    },
+    {
+      "id": "2610.04721",
+      "resolution": "not_reproduced_high_cost",
+      "full_experiment": "成本过高，不复现（审查 DONE）",
+      "basis": "Appendix E.1/Table 10: four A100s, stages of 1125/5960/5801 steps for 8B/9B models; no original-scale run on the available single accelerator",
+      "source": "https://arxiv.org/html/2610.04721v1",
+      "location": "Appendix E.1/Table 10",
+      "component": "纯图结果导入/合并接口不能冒充训练和真实视觉拓扑提取；未接受新的接口实施任务"
+    },
+    {
+      "id": "2610.09484",
+      "resolution": "not_reproduced_high_cost",
+      "full_experiment": "成本过高，不复现（审查 DONE）",
+      "basis": "Appendix A.1/Table 4: mid-training on 32 A100s for about 4.8 days, SFT on eight A100s; simulator and agent RL use sixteen A100s with 512-rollout configuration",
+      "source": "https://arxiv.org/html/2610.09484v1",
+      "location": "Appendices A.1/A.3 and D.1/Table 13",
+      "component": "固定simulator不能代替双训练链；没有确认可忠实接单的低成本实现"
+    }
+  ]
+}
