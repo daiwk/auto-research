@@ -82,13 +82,23 @@ def echo(seed, device):
         student -= .05*student.grad
     identity = selector_losses(student, student.detach(), valid, keep=5, pairs=3,
                                temperature=2, mining_temperature=.5)
+    half_checks = []
+    for length, budget in ((2, 2), (70000, 5)):
+        half_student = torch.ones(1, length, device=device, dtype=torch.float16, requires_grad=True)
+        half_result = selector_losses(half_student, half_student.detach(),
+                                      torch.ones_like(half_student, dtype=torch.bool), keep=budget, pairs=3)
+        half_total = half_result["kd"]+half_result["auxiliary"]
+        half_total.backward()
+        half_checks.append(bool(torch.isfinite(half_total)) and half_result["auxiliary"].item() == 0
+                           and bool(torch.isfinite(half_student.grad).all()))
     checks = {"independent_ce_reference": error < 1e-12,
               "detached_teacher_has_no_gradient": teacher.grad is None,
               "student_actually_updated": not torch.equal(before, student.detach()),
               "padding_has_zero_gradient": bool((gradient[:, -2:] == 0).all()),
               "selection_excludes_padding": bool((result["selected_indices"] < 14).all()),
               "identical_order_negative_control_has_no_boundary_pairs": identity["active_pairs"] == 0,
-              "finite_losses_and_gradient": bool(torch.isfinite(gradient).all())}
+              "finite_losses_and_gradient": bool(torch.isfinite(gradient).all()),
+              "fp16_long_history_and_empty_pairs_finite": all(half_checks)}
     return {"seed": seed, "metrics": {"kd_loss": float(result["kd"].detach()),
             "boundary_loss": float(result["auxiliary"].detach()), "active_pairs": result["active_pairs"],
             "ce_reference_max_error": error, "student_update_norm": float((student.detach()-before).norm())},
