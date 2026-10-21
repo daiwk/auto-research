@@ -1,0 +1,18 @@
+{
+  "paper_url": "https://arxiv.org/pdf/2604.07988v1",
+  "paper_sha256": "046a461e1d2950d325f9141ce87156cd5924074702b64929c06513b2f97b0146",
+  "figure": "Figure 2",
+  "pdf_page": 4,
+  "crop_pdf_points": [
+    52,
+    76,
+    296,
+    337
+  ],
+  "render_scale": 3,
+  "image": "paper-figure-01.png",
+  "image_sha256": "4c32ae8de6cb38ac2b63879d13a5f9174938ebba3bdcc92dde917d18471f8a36",
+  "description": "Original state-machine figure and caption, no content redrawn",
+  "copyright": "Original paper authors; arXiv perpetual non-exclusive publication license, not a CC license",
+  "visually_verified": true
+}

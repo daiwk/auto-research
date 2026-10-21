@@ -112,6 +112,7 @@
 
 ## Google Research
 
+- 2026-10-19 · [DeepSEA: A Multilingual Evaluation Benchmark for Southeast Asia](../../foundation-models/2610.26155-deepsea/README.md)（`deepsea`）：现有多语言评测对东南亚低资源语言覆盖不足。DeepSEA 通过专业翻译与质量审核扩展五类公开任务，支持按语言资源层级比较推理、问答和生成表现；研究同时分析英语中转、错误类型及 tokenizer 效率。它是 benchmark，而非改变语言模型参数的训练算法。
 - 2026-04-30 · [Optimized Deferral for Imbalanced Settings](../../foundation-models/2604.27723-mild/README.md)（`mild`）：少数覆盖的专用专家容易被多数专家淹没。论文通过对不同专家设置不同margin约束来平衡学习。保留训练奖励而非以argmin成本生成单一硬标签；这是[v1 §5.3 mild目标、§4.2 margin建议](https://arxiv.org/html/2604.27723v1#S5.SS3)的低成本实现。
 - 2026-02-19 · [A Theoretical Framework for Modular Learning of Robust Generative Models](../../foundation-models/2602.17554-modular-robust-generative/README.md)（`modular-robust-generative`）：以冻结生成专家为基础，优化面对最差数据域的输入相关 gate。核心不是专家均值：逐输入 softmax **不保证整个生成分布积分为一**，必须额外约束全局质量。另将非因果教师采样轨迹蒸馏到只读前缀的因果 router。[§5.2、§6、§7.3](https://arxiv.org/html/2602.17554v1#S5.SS2) 给出实施过程。
 - 2026-01-29 · [ECO: Quantized Training without Full-Precision Master Weights](../../foundation-models/2601.22101-eco-optimizer/README.md)（`eco-optimizer`）：低精度训练通常仍保留高精度 master weights 累积微小更新。ECO 直接在量化权重上更新，将本次重量化误差注入已有动量，避免再保存主权重或持久误差缓冲；Adam 必须使用逐元素有效步长，不能把 SGDM 的标量系数照搬过去。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

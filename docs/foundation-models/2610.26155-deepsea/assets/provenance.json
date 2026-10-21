@@ -1,0 +1,14 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.26155v1",
+  "figure": "Figure 2",
+  "source_url": "https://arxiv.org/html/2610.26155v1/gemini_vs_gemma_fig2.svg",
+  "source_sha256": "36eb2afbac8b1f4b292916d43a27de483ea09f66aa42694e8ebb9fa2bf59fab2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "7f6ed2c2c4999c7b6a63dd58aa9f21ebf2d90e6f2812bc7814c513013b47ac11",
+  "render_scale": 3,
+  "width": 4453,
+  "height": 1168,
+  "description": "Original arXiv SVG rendered to PNG without scientific edits, no benchmark questions or gold answer text copied",
+  "copyright": "Original paper authors; arXiv v1 CC BY 4.0",
+  "visually_verified": true
+}

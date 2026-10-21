@@ -191,6 +191,7 @@
 - 2026-05 · [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
 - 2026-05 · [Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval](../2605.06647-sira/README.md)（`sira`）：冻结 LLM 先生成相关证据可能使用、但原查询缺失的词汇，再用倒排索引中的文档频率过滤不存在或过于常见的词；原查询与验证后的扩展只执行一次加权 BM25。
 - 2026-04 · [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
+- 2026-04 · [LogAct: Enabling Agentic Reliability via Shared Logs](../2604.07988-logact/README.md)（`logact`）：LogAct 将 Agent 拆成 Driver、Voter、Decider 和 Executor，用持久共享日志记录意图、独立投票、commit/abort和执行结果，只有达到批准条件的已提交动作才能执行。它将安全审查与动作执行解耦，并保留崩溃后的不确定状态；外部副作用恢复仍需要明确的幂等或事务契约，不能只凭对话记录盲目重放。
 - 2026-04 · [SEARL](../2604.07791-searl/README.md)（`searl`）：把工具和成功转移维护为图记忆；新 rollout 同时更新 policy 与图边权，形成经验池—检索—改进闭环。
 - 2026-04 · [TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems](../2604.05364-tfrbench/README.md)（`tfrbench`）：预测值接近真值不保证推理有根据，流畅推理也可能导致错误预测。论文联合 Search、Reason、Forecast、Verify、Summary 构建数值与推理同时合格的参考轨迹。
 - 2026-03 · [Reasoning-Driven Synthetic Data Generation and Evaluation](../2603.29791-simula/README.md)（`simula`）：单纯扩写种子容易遗漏概念或坍缩到相似样本。Simula 先按因素建立分类树，再控制全局节点组合与局部场景；独立批判过滤样本，并通过批内相对评分校准复杂度。

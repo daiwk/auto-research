@@ -129790,6 +129790,136 @@
           "reason": "低成本组件与接口已验证；完整实验成本过高，不复现（审查 DONE）。"
         }
       ]
+    },
+    {
+      "batch": "2026-10-22-priority-backfill",
+      "date": "2026-10-22",
+      "scope_kind": "bounded-priority-backfill",
+      "source_artifact": "research-audits/oct22-priority-backfill/README.md",
+      "counts": {
+        "component_only": 2,
+        "same_bulletin_backfill": 1,
+        "historical_backfill": 1,
+        "metadata_updates": 1,
+        "archived_nonblocking": 1,
+        "fresh_since_last_scan": 0,
+        "changed_version_identities": 0,
+        "unique_bulletin_identities": 1126
+      },
+      "review_watermark_advanced": false,
+      "all_sources_exhaustive": false,
+      "metadata_updates": [
+        {
+          "key": "proper-agent",
+          "change": "official author code availability/license/revision only; no new paper/version or upgraded fidelity",
+          "revision": "5bf57aed9a865bc3489e5daa8040e243ec50fa85"
+        }
+      ],
+      "archived_exceptions": [
+        {
+          "key": "swe-sweep",
+          "paper_url": "https://swesweep.com/paper",
+          "status": "archived_source_exception",
+          "review_done": true,
+          "blocking": false,
+          "exact_first_publication_date": null,
+          "report_header_date": "2026-10-01",
+          "code": "https://github.com/facebookresearch/swe-sweep",
+          "code_reused": false,
+          "upstream_revision": "5968c69a4f6407fc50d3c5e7e0601a46960c4e0d",
+          "license_url": "https://github.com/facebookresearch/swe-sweep/blob/5968c69a4f6407fc50d3c5e7e0601a46960c4e0d/LICENSE",
+          "reason": "Report header/website/git dates differ and do not prove exact first publication; fixed LICENSE is review-only, not a reusable open-source grant.",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "cost_assessment": {
+            "source_url": "https://swesweep.com/paper",
+            "physical_pdf_page": 39,
+            "scale": "100 repositories/4068 bugs/22 languages/7 LMs; Table24 median0.3-1.6h per repository, max5.5h in four displayed model campaigns."
+          }
+        }
+      ],
+      "candidates": [
+        {
+          "key": "deepsea",
+          "domain": "foundation-models",
+          "paper_url": "https://arxiv.org/abs/2610.26155v1",
+          "title": "DeepSEA: A Multilingual Evaluation Benchmark for Southeast Asia",
+          "priority": "P0",
+          "detail_path": "foundation-models/2610.26155-deepsea/README.md",
+          "published_at": "2026-10-19T10:43:30Z",
+          "implementation_status": "component_only",
+          "component_implemented": true,
+          "review_done": true,
+          "intake_class": "same-bulletin-recent-backfill",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.26155v1",
+            "scale": "13 languages, five tasks and the paper's full model/API evaluation matrix; MetricX-24 requires a separate learned evaluator. Only CPU scorer/schema contracts are run."
+          },
+          "id": "2610.26155",
+          "doc": "foundation-models/2610.26155-deepsea/README.md",
+          "catalog_key": "deepsea",
+          "catalog_detail": "foundation-models/2610.26155-deepsea/README.md",
+          "status": "implemented",
+          "track": "foundation-model",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, public code, cost and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.26155v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Google Research"
+            }
+          ],
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "CPU低成本接口/协议已验证；完整实验成本过高，不复现（审查DONE）。"
+        },
+        {
+          "key": "logact",
+          "domain": "agent-research",
+          "paper_url": "https://arxiv.org/abs/2604.07988v1",
+          "title": "LogAct: Enabling Agentic Reliability via Shared Logs",
+          "priority": "P0",
+          "detail_path": "agent-research/2604.07988-logact/README.md",
+          "published_at": "2026-04-09T08:58:23Z",
+          "implementation_status": "component_only",
+          "component_implemented": true,
+          "review_done": true,
+          "intake_class": "historical-backfill",
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2604.07988v1",
+            "scale": "Full semantic LLM voters, AgentDojo/swarm experiments and distributed backends require model calls and a larger campaign. Only local SQLite protocol contracts are run."
+          },
+          "id": "2604.07988",
+          "doc": "agent-research/2604.07988-logact/README.md",
+          "catalog_key": "logact",
+          "catalog_detail": "agent-research/2604.07988-logact/README.md",
+          "status": "implemented",
+          "track": "agent",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, public code, cost and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2604.07988v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Meta"
+            }
+          ],
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "CPU低成本接口/协议已验证；完整实验成本过高，不复现（审查DONE）。"
+        }
+      ]
     }
   ]
 }

@@ -337,6 +337,7 @@
 ## Meta
 
 - 2026-10-15 · 一作：Pradipta Ghosh · [Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure](../2610.21281-diviner/README.md)（`diviner`）：生产事故的症状可能跨推荐、排序、数据、配置和算力服务传播。LLM 能调用工具并不代表它能可靠诊断：超时不等于无异常，历史相似事故不证明本次根因，事后总结也不能作为事故发生时的证据。
+- 2026-04-09 · 一作：Mahesh Balakrishnan · [LogAct: Enabling Agentic Reliability via Shared Logs](../2604.07988-logact/README.md)（`logact`）：LogAct 将 Agent 拆成 Driver、Voter、Decider 和 Executor，用持久共享日志记录意图、独立投票、commit/abort和执行结果，只有达到批准条件的已提交动作才能执行。它将安全审查与动作执行解耦，并保留崩溃后的不确定状态；外部副作用恢复仍需要明确的幂等或事务契约，不能只凭对话记录盲目重放。
 
 ## Meta AI
 

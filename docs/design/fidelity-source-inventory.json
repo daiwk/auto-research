@@ -11215,6 +11215,24 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/foundation_models/deepsea.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "score_predictions",
+        "line": 186,
+        "qualified_name": "score_predictions",
+        "expression": "item['answer']",
+        "fingerprint": "1a857901a0a60415123d438453cf905981f4964fb425b87b98e1a3a3d1595ffc"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "score_predictions",
+        "line": 194,
+        "qualified_name": "score_predictions",
+        "expression": "item.get('answer', '')",
+        "fingerprint": "98d4e5502f5492aebfe3261d697e9b58b1febabdf5518bc06607d20d3404aab7"
+      }
+    ],
     "src/auto_research/foundation_models/replayssm.py": [
       {
         "kind": "state_update_not_execution_evidence",

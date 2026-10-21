@@ -9,7 +9,7 @@
 | 论文链接 | [ProPerAgent: Toward Memory-Driven Proactive Assistance](https://arxiv.org/abs/2610.22671) |
 | 公司/机构 | 一作 Shenglai Zeng；首列 Michigan State University，兼 Meta Reality Labs；团队包括 Meta Reality Labs、Meta Superintelligence Labs 等 |
 | 首次公开日期 | 2026-10-15 21:40:17 UTC，arXiv v1；出现在 10-19 官方公告，不是 10-19 首发 |
-| 原文开源代码 | 尚未找到已发布的官方实现；论文明确称将在正式发表时公开代码和 ProPerMem 评测集 |
+| 原文开源代码 | [Meta 官方作者仓库 Memo-Pro-Agent](https://github.com/facebookresearch/Memo-Pro-Agent) 已公开 GPM 推理 / 评测 harness 及 GRPO reward / launcher 入口；核对固定 commit `5bf57aed9a865bc3489e5daa8040e243ec50fa85`（2026-10-21 17:51:47 UTC）。[CC-BY-NC-4.0](https://github.com/facebookresearch/Memo-Pro-Agent/blob/5bf57aed9a865bc3489e5daa8040e243ec50fa85/LICENSE) 为非商用源码许可，不是 OSI 开源许可；不等于完整论文训练与评测资产均已公开 |
 | 本地 Adapter | 无（`adapter: null`）；组件 key：`proper-agent` |
 | 本地复现代码 | `src/auto_research/agent_research/proper_agent.py`；`scripts/run_oct19_evening_agent_components.py` |
 
@@ -53,7 +53,7 @@ $$
 
 ### 论文结果与负结果
 
-ProPerMem 包含 1,804 对视频—长期记忆，平均记忆约 618K token。窗口模式下，27B 模型的 RAG 基线 Perfect 为 7.0%，Harness 为 37.5%，加 GRPO 为 42.4%；Hit 并不意味着不会重复或提前提醒。论文的 oracle 内容/时机实验只是瓶颈分析上界，不是可部署能力。官方数据与代码未发布时，本地不拼装同名“官方评测”。[实验及完整表](https://arxiv.org/html/2610.22671v1#S6)
+ProPerMem 包含 1,804 对视频—长期记忆，平均记忆约 618K token。窗口模式下，27B 模型的 RAG 基线 Perfect 为 7.0%，Harness 为 37.5%，加 GRPO 为 42.4%；Hit 并不意味着不会重复或提前提醒。论文的 oracle 内容/时机实验只是瓶颈分析上界，不是可部署能力。作者现已公开推理 / 评测代码，但相关历史数据仍需授权，本地未运行该官方数据评测，不能把 CPU fixture 改称“官方评测”。[实验及完整表](https://arxiv.org/html/2610.22671v1#S6)
 
 ## 本地复现与边界
 
@@ -68,5 +68,13 @@ PYTHONPATH=src python scripts/run_oct19_evening_agent_components.py \
 独立 scorer 持有触发窗口与内容判定；actor 只拿当前观察、gate 证据和过去发言，不拿 gold 记忆、窗口或 judge 结果。包含未来记忆、伪造来源、未知 judge 结果，以及“总是说出 oracle 内容”的**评测端负对照**，说明即使内容正确也会因重复而 Perfect 失败；负对照不进入被测 actor。未评分保留为未知，不剔除。Python 回调是受信任集成，不是恶意代码沙箱。
 
 本地结果为三 seed 的合成机制诊断，不是正式多 seed 能力比较。输出含逐 seed 指标、fixture/source SHA256 与审计轨迹，拒绝覆盖；[归档指标](metrics/component-cpu-seeds42-44.json)由统一收口生成。
+
+### 作者源码发布范围更新（2026-10-22 核验）
+
+旧记录“尚未找到官方实现”已过时：Meta 的 [Memo-Pro-Agent 固定提交](https://github.com/facebookresearch/Memo-Pro-Agent/tree/5bf57aed9a865bc3489e5daa8040e243ec50fa85) 已公开 GPM 推理 / 评测 harness；README 作者名单与本论文一致，并说明软件从 `properagent` 更名为 `memoproagent`。arXiv v1 仍保留“将在正式发表时公开”的原始声明，没有直接补入仓库链接；这里通过 Meta 官方 namespace、作者名单与方法说明交叉确认，不把仓库发布误算为论文新版本。本地稳定键继续使用 `proper-agent`，不因此迁移目录。
+
+按该提交的 [README 数据与可复现性说明](https://github.com/facebookresearch/Memo-Pro-Agent/blob/5bf57aed9a865bc3489e5daa8040e243ec50fa85/README.md#data-and-reproducibility) 和 [数据指南](https://github.com/facebookresearch/Memo-Pro-Agent/blob/5bf57aed9a865bc3489e5daa8040e243ec50fa85/docs/data.md)，`facebook/MemProBench` 的800条 eval800 历史数据仍标注为 private、需要授权；Ego4D 源视频必须另行依其条款获取。公开 checkout 包含样本参考元数据，但不分发视频、完整历史文件或预构建图 / embedding 索引；索引需在具备授权数据和模型服务后构建，不能将参考答案直接当检索记忆。
+
+仓库确有 [`memoproagent/rl/train_grpo.py`](https://github.com/facebookresearch/Memo-Pro-Agent/blob/5bf57aed9a865bc3489e5daa8040e243ec50fa85/memoproagent/rl/train_grpo.py) 的 reward 插件和 MS-Swift 启动入口，不能写成“没有任何训练代码”。但这不等于公开了完整论文训练数据、后训练 checkpoint、基线实验矩阵或可直接重现论文数值的全套配方。作者 CPU Quick Start 也明确只用合成数据与 scripted backend 检查集成。此次只修正来源元数据与边界，**没有运行、移植或验证作者代码，也不改变本地实现、已有指标或 GPU 验收状态**。
 
 原文 27B GRPO 采用 **7×H100，14.6 小时**，且评测涉及长记忆、视频与 LLM gate。**完整实验成本过高，不复现（审查 DONE）**；不在单卡 A100/A30 或 Mac 上缩成玩具训练冒充结果。`diagnostic_only=true`、`promotion_eligible=false`、`evolve_integrated=false`。
