@@ -42,14 +42,16 @@ def baseline(seed):
 def spar(seed):
     from auto_research.reproductions.spar_prefix_balance import rebalance_prefixes
     rng = np.random.default_rng(seed)
-    residuals = rng.normal(size=(24, 3))
-    centers = rng.normal(size=(4, 3))
+    residuals = rng.normal(size=(24, 3)) * .2
+    centers = np.array([[0., 0., 0.], [6., 0., 0.], [0., 6., 0.], [0., 0., 6.]])
     original = centers.copy()
     weights = rng.integers(1, 8, 24).astype(float)
     z, reports = rebalance_prefixes(residuals, centers, np.zeros(24, dtype=int),
                                     weights, [(i//12,) for i in range(24)])
     moved = [m["item_index"] for r in reports for m in r["moves"]]
-    checks = {"all_prefix_bounds_satisfied": all(max(r["loads_after"]) <= r["bound"]+1e-9 for r in reports),
+    checks = {"initial_assignments_are_nearest_centers": bool(
+                  (((residuals[:, None]-centers[None])**2).sum(-1).argmin(-1) == 0).all()),
+              "all_prefix_bounds_satisfied": all(max(r["loads_after"]) <= r["bound"]+1e-9 for r in reports),
               "frozen_codebook_unchanged": bool(np.array_equal(centers, original)),
               "at_most_one_move_per_item": len(set(moved)) == len(moved),
               "no_repair_negative_control_is_overloaded": all(max(r["loads_before"]) > r["bound"] for r in reports),

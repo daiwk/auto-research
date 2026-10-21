@@ -43,7 +43,7 @@ def test_value_model_independent_weights_and_request_quantile():
 
 def test_prefix_local_minimum_distortion_and_empty_destination():
     # Source 0 is overloaded; item1 is the cheapest legal move (not largest weight).
-    residual = np.array([[0.], [1.5], [0.]])
+    residual = np.array([[0.], [.9], [0.]])
     center = np.array([[0.], [2.]])
     copy = center.copy()
     z, reports = rebalance_prefixes(residual, center, [0, 0, 0], [3, 1, 1], [(), (), ()])
