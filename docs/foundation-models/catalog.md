@@ -11,6 +11,8 @@
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | JEPA与世界模型 | [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](2610.28458-locale-jepa/README.md) | University of Pennsylvania，2026-10-20 | [原作者入口](https://github.com/alessioborgi/LocaLeJEPA)；已公开MIT代码；本地独立实现核对固定commit 771361c18d37e65df3dc188761ffb26751ce4e37，论文结果以arXiv v1表格为准，不混用README旧数值 | `locale-jepa`：仅低成本组件，完整实验不复现 |
+| 注意力与长上下文 | [RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies](2610.28385-race-rope-compression/README.md) | MIT CSAIL，2026-10-20 | 未发现官方代码 | `race-rope-compression`：仅低成本组件，完整实验不复现 |
+| 注意力与长上下文 | [Stratified Sparse Attention: Reducing the Sparse-to-Dense Gap at Extreme Sparsity](2610.28441-stratified-sparse-attention/README.md) | Rice University，2026-10-20 | [原作者入口](https://github.com/skylight-org/SSA-Paper-Code)；论文声明上述作者仓库开源；2026-10-21访问返回404，未取得可核验代码或revision。本地独立依据固定arXiv v1 Algorithm 1实现，不声称复现作者CUDA内核。 | `stratified-sparse-attention`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [Kronecker Delta Rule for Long Context Linear Attention](2610.26834-kronlstm/README.md) | Johannes Kepler University Linz，2026-10-19 | 未发现官方代码 | `kronlstm`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training](2610.24938-t-muon/README.md) | University of California, Santa Barbara，2026-10-18 | 未发现官方代码 | `t-muon`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Muse Glimmer 30B: An On-Device Agentic Model](2610.24628-muse-glimmer-30b/README.md) | Meta Superintelligence Labs，2026-10-17 | [原作者入口](https://huggingface.co/meta-models/Muse-Glimmer-30B)；官方已发布Apache-2.0权重、配置、tokenizer与chat template；发布物不等同完整预训练/OPD数据和训练源码，本轮未核到完整训练代码 | 计划键 `muse-glimmer-30b`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |

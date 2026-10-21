@@ -5,6 +5,7 @@
 ## 2026
 
 - 2026-10 · [Cache Engineering for Agents](../2610.28577-cache-engineering/README.md)（`cache-engineering`）：删改早期对话文本会使后续KV失效，重prefill又产生费用。作者保留逻辑文本，直接drop旧工具响应的KV，必要时repos重设保留键的位置；缓存状态取决于操作发生的历史，不能只根据最终token前缀判断是否可复用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-10 · [Evolving Agent Interfaces](../2610.28601-agent-s4/README.md)（`agent-s4`）：固定GUI、shell或浏览器接口决定Agent能观察和执行什么。重复点击、逐格编辑、冗长输出等低效行为，既可能来自模型，也可能来自接口设计。
 - 2026-10 · [Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design](../2610.28380-oo-harness/README.md)（`oo-harness`）：全任务共用一个harness可能互相干扰；为每类任务复制完整实现又难以复用。作者将专用harness写成父类的子类，只覆盖需要改变的prompt、工具或执行hook。
 - 2026-10 · [Remembering Has a Price: Learning Memory Worth under Resource Constraints](../2610.26453-tokenworth/README.md)（`tokenworth`）：生成长度、交互次数和记忆容量同时受限时，相关记忆也可能浪费稀缺预算。TokenWorth 用四维可解释基础特征学习稳定规律，再用 Recursive Feature Machine（RFM）校正查询相关的非线性残差。
 - 2026-10 · [MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents](../2610.24955-memprice/README.md)（`memprice`）：长交互里，过去某个细节会不会有用通常事先未知。单纯按相关性保留记忆会忽略各条信息对同一上下文容量的竞争。
@@ -154,6 +155,7 @@
 - 2026-08 · [Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks](../2608.10357-sinkflex-rl/README.md)（`sinkflex-rl`）：长程工具 Agent 的 on-policy rollout 同时受环境状态、长上下文和训练显存限制。SinkFlex-RL 把 Gymnasium 双控制环境、VERL 风格数据流、无 value model 的 GRPO 与 sink-aware FlexAttention 组合，causal / sliding-window mask 下仍保留模型特有 sink scaling。
 - 2026-08 · [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](../2608.09380-openloopevolve/README.md)（`openloopevolve`）：把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。
 - 2026-08 · [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](../2608.06811-pmcoder/README.md)（`pmcoder`）：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
+- 2026-08 · [ResidencyRL: Reinforcement Learning in Simulated Clinical Environments](../2608.07418-residency-rl/README.md)（`residency-rl`）：静态知识题不能覆盖主动询问、工具调用及长程决策。论文通过场景生成、带信息不对称的模拟环境、按维度隔离的裁判和GRPO组成完整训练链路；隐藏参考信息只属于环境/裁判，不能直接暴露给被评估策略。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-08 · [AgentOPSD](../2608.05987-agent-opsd/README.md)（`agent-opsd`）：轨迹奖励难定位少数关键决策。AgentOPSD 把 privileged replay 的 token teacher/student log-prob gap 聚合成 turn evidence，再在 log-odds 空间递归更新成功信念，以相邻信念修订量识别 pivotal turn。
 - 2026-08 · [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](../2608.05886-codegrep/README.md)（`codegrep`）：**主题：代码检索 Agent。** 以 GRPO 训练 14B 检索 Agent 并行发出 grep/glob/read，多轮缩小候选文件，再交给冻结 coding agent；优化的是下游修复收益而非孤立检索分数。
 - 2026-08 · [Contextual Information Policy Optimization for Search Agents](../2608.06128-cipo/README.md)（`cipo`）：**主题：搜索 Agent RL。** 只奖励最终答案会让检索退化成确认偏见。

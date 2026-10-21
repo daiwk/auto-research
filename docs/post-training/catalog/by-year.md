@@ -5,7 +5,9 @@
 ## 2026
 
 - 2026-10 · [Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation](../2610.28194-ap-opd/README.md)（`ap-opd`）：同样高的 OPD 惩罚可能是持续稳定的，也可能刚刚突增。AP-OPD 用相邻 token 块定位后一种情况，再把突增后整块监督按一个比率回拉；不增加教师 forward，不改变 token 系数的正负。
+- 2026-10 · [Ask to Distill: Learning to Synthesize Data for On-Policy Distillation](../2610.27450-ask-to-distill/README.md)（`ask-to-distill`）：问题决定学生会走到哪些前缀，因而决定教师能提供什么监督。A2D 冻结评分用的师生，训练独立的问题合成器；奖励同时要求“有差异”和“教师偏好的候选仍落在学生可达支持集”，然后筛选问题库，再从原始学生初始化执行 OPD。
 - 2026-10 · [On-Policy Transition Distillation](../2610.28048-optd/README.md)（`optd`）：最终层分布接近教师，不一定代表模型沿深度修正预测的方式接近教师。OPTD 保留最终层 OPD，再对选定浅到深 readout 的 log 概率增量施加监督。
+- 2026-10 · [Projected Distillation: On Learning to Solve Hard Problems from Close, Correct Targets](../2610.27467-projected-distillation/README.md)（`projected-distillation`）：困难问题的学生 rollout 可能全错，RL 得不到成功奖励；直接拟合外部完整答案又过于 off-policy。论文用 projector 最小改写学生的错误响应，经 verifier 接受后，只在变化片段做 DPO；学生自己答对的响应单独做 SFT，每轮重新采样和纠错。
 - 2026-10 · [Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization](../2610.25973-apsd/README.md)（`apsd`）：反馈条件自教师可能破坏正确rollout里学生已经成功的偏好，却又对错误rollout纠正不足。APSD依据正确性调整蒸馏target：正确时在学生和自教师之间插值，错误时越过自教师外推。
 - 2026-10 · [Reinforcement Learning with Visually Attributable On-Policy Self-Distillation](../2610.26856-vag/README.md)（`visually-attributable-opd`）：特权图像裁剪带来的 teacher 修正，可能混有语言先验或风格变化。VAG 让同一 EMA 教师对证据保留裁剪和随机遮挡裁剪重放相同学生前缀，只接纳与视觉对比方向一致的修正，再以有界项调制 verifier 的组归一化 advantage。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10 · [Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation](../2610.25034-spod/README.md)（`spod`）：多轮Agent蒸馏中，学生可能先超过教师，再随着持续模仿而退步。作者区分两个过程：教师修复学生的弱决策，同时也会侵蚀学生已经成功、但与教师偏好不同的行为。

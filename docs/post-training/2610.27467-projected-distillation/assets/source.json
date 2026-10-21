@@ -1,0 +1,12 @@
+{
+  "paper": "2610.27467v1",
+  "source_url": "https://arxiv.org/pdf/2610.27467v1",
+  "source_sha256": "952ec89e4aa8ca20f80cb12e0cbfe140d72efc472910a3ab59bd7911fbdf04e4",
+  "figure": "Figure 2",
+  "pdf_page_one_based": 4,
+  "pdf_crop_points": [200, 65, 410, 195],
+  "render_scale": 3,
+  "image": "paper-figure-01.png",
+  "image_sha256": "ff59410b017934b41a5e2e9c6e518d88fa6447a564aef20f4a12d5fb96db53fa",
+  "visual_inspection": "2026-10-21; full original loop diagram and labels retained without clipping; author rights retained"
+}

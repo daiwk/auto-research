@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "method": "projected-distillation",
+  "manifest_ref": "post-training:projected-distillation",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-followup-projected-distillation-v1",
+    "revision": "sha256:da80160562aa6a4eef989811a5effd153a44674d6e71dde6185d13e4dfb42c22",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "loss_reference_abs_error": 0.0,
+        "gradient_reference_max_abs_error": 0.0,
+        "full_sequence_negative_control_margin_difference": 0.9000000000000006,
+        "positive_logit_gradient_norm": 0.17351722223188373,
+        "negative_logit_gradient_norm": 0.20210539864690782,
+        "reference_gradient_count": 0,
+        "self_correct_gradient_abs_error": 0.0,
+        "changed_positive_tokens": 2,
+        "changed_negative_tokens": 2,
+        "self_correct_sft_loss": 6.0
+      },
+      "checks": {
+        "unchanged_gathered_token_gradient_zero": true,
+        "projector_not_executed": true,
+        "supplied_fixture_not_language_capability": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "loss_reference_abs_error": 0.0,
+        "gradient_reference_max_abs_error": 0.0,
+        "full_sequence_negative_control_margin_difference": 0.9000000000000008,
+        "positive_logit_gradient_norm": 0.19440597049293568,
+        "negative_logit_gradient_norm": 0.19483974907895024,
+        "reference_gradient_count": 0,
+        "self_correct_gradient_abs_error": 0.0,
+        "changed_positive_tokens": 2,
+        "changed_negative_tokens": 2,
+        "self_correct_sft_loss": 6.0
+      },
+      "checks": {
+        "unchanged_gathered_token_gradient_zero": true,
+        "projector_not_executed": true,
+        "supplied_fixture_not_language_capability": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "loss_reference_abs_error": 0.0,
+        "gradient_reference_max_abs_error": 0.0,
+        "full_sequence_negative_control_margin_difference": 0.9000000000000008,
+        "positive_logit_gradient_norm": 0.19846974526674302,
+        "negative_logit_gradient_norm": 0.20839282514686608,
+        "reference_gradient_count": 0,
+        "self_correct_gradient_abs_error": 0.0,
+        "changed_positive_tokens": 2,
+        "changed_negative_tokens": 2,
+        "self_correct_sft_loss": 6.0
+      },
+      "checks": {
+        "unchanged_gathered_token_gradient_zero": true,
+        "projector_not_executed": true,
+        "supplied_fixture_not_language_capability": true
+      }
+    }
+  ],
+  "metrics": {
+    "changed_negative_tokens": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "changed_positive_tokens": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "full_sequence_negative_control_margin_difference": {
+      "mean": 0.9000000000000007,
+      "std": 1.2819751242557092e-16,
+      "n": 3
+    },
+    "gradient_reference_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "loss_reference_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "negative_logit_gradient_norm": {
+      "mean": 0.20177932429090806,
+      "std": 0.006782419265270229,
+      "n": 3
+    },
+    "positive_logit_gradient_norm": {
+      "mean": 0.18879764599718749,
+      "std": 0.013388318758847311,
+      "n": 3
+    },
+    "reference_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "self_correct_gradient_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "self_correct_sft_loss": {
+      "mean": 6.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "f630daed189fe0b3d8d7412ff50719b931670e1a",
+    "artifact_path": "docs/post-training/2610.27467-projected-distillation/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "7ce0faacb920bcb5959d1b35c9756a2fad06bcb72ed5bc4c25cafefe9864a590",
+    "executed_source_sha256": {
+      "scripts/run_oct21_followup_post_components.py": "cf17793193af21ecf1796b869cfde3d2aa78f7affd5b52f393e890485ae76819",
+      "src/auto_research/post_training/oct21_followup_distillation.py": "de6b6263a442935d9eb5725167c90a593a91289611b5fdc938dc3e540278c6e5"
+    },
+    "dataset_fingerprint": "sha256:3c30dac838de6c48c1f952be5353cb01b0255b1fc2e5184338fbfabc2f3391d3",
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

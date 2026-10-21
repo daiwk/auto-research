@@ -1,0 +1,194 @@
+{
+  "schema_version": 2,
+  "method": "agent-s4",
+  "manifest_ref": "agent-research:agent-s4",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-followup-agent-s4-v1",
+    "revision": "sha256:8c2626371c6f2fb36cb60dff95292af921160921810030996fb598e03bff357a",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "evaluated_variants": 5,
+        "mutation_steps": 2,
+        "crossover_steps": 2,
+        "retained_reduced_fixture_variant": 1,
+        "parent_eligibility_pruned": 1,
+        "preserved_lineage_records": 5,
+        "denoised_variants": 3,
+        "denoise_validation_rollouts": 18,
+        "builder_validation_task_ids_exposed": 0,
+        "training_grader_calls": 0,
+        "actual_llm_calls": 0,
+        "actual_gui_calls": 0
+      },
+      "checks": {
+        "feedback_isolation": true,
+        "no_training_grader_calls": true,
+        "parent_arity": true,
+        "distinct_crossover_parents": true,
+        "lower_score_not_rejected": true,
+        "pruned_lineage_retained": true,
+        "validation_only_denoise": true
+      },
+      "selected_fixture_variant": "v1",
+      "fixture_sha256": "019dabb6e649c62e8c8aab4abf61bcf9c82b4bb82b19637853e014d1384920b5"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "evaluated_variants": 5,
+        "mutation_steps": 2,
+        "crossover_steps": 2,
+        "retained_reduced_fixture_variant": 1,
+        "parent_eligibility_pruned": 1,
+        "preserved_lineage_records": 5,
+        "denoised_variants": 3,
+        "denoise_validation_rollouts": 18,
+        "builder_validation_task_ids_exposed": 0,
+        "training_grader_calls": 0,
+        "actual_llm_calls": 0,
+        "actual_gui_calls": 0
+      },
+      "checks": {
+        "feedback_isolation": true,
+        "no_training_grader_calls": true,
+        "parent_arity": true,
+        "distinct_crossover_parents": true,
+        "lower_score_not_rejected": true,
+        "pruned_lineage_retained": true,
+        "validation_only_denoise": true
+      },
+      "selected_fixture_variant": "v1",
+      "fixture_sha256": "1a1924a407b63543726ba3b104bf104e62d0afd9c0bcf6df42e44d7a4edb1b19"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "evaluated_variants": 5,
+        "mutation_steps": 2,
+        "crossover_steps": 2,
+        "retained_reduced_fixture_variant": 1,
+        "parent_eligibility_pruned": 1,
+        "preserved_lineage_records": 5,
+        "denoised_variants": 3,
+        "denoise_validation_rollouts": 18,
+        "builder_validation_task_ids_exposed": 0,
+        "training_grader_calls": 0,
+        "actual_llm_calls": 0,
+        "actual_gui_calls": 0
+      },
+      "checks": {
+        "feedback_isolation": true,
+        "no_training_grader_calls": true,
+        "parent_arity": true,
+        "distinct_crossover_parents": true,
+        "lower_score_not_rejected": true,
+        "pruned_lineage_retained": true,
+        "validation_only_denoise": true
+      },
+      "selected_fixture_variant": "v1",
+      "fixture_sha256": "bc49626d282ee0623ffa78ff0e99de11ed2ffb894c5f28ed9e6a3ddd611c4d6e"
+    }
+  ],
+  "metrics": {
+    "actual_gui_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "actual_llm_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "builder_validation_task_ids_exposed": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "crossover_steps": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "denoise_validation_rollouts": {
+      "mean": 18,
+      "std": 0.0,
+      "n": 3
+    },
+    "denoised_variants": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "evaluated_variants": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    },
+    "mutation_steps": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "parent_eligibility_pruned": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "preserved_lineage_records": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    },
+    "retained_reduced_fixture_variant": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "training_grader_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "f630daed189fe0b3d8d7412ff50719b931670e1a",
+    "artifact_path": "docs/agent-research/2610.28601-agent-s4/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "3b4a8d291225ad674440da03fc1ae23063b6721cef8332a176e4817bbfe6e345",
+    "executed_source_sha256": {
+      "scripts/run_oct21_agent_s4.py": "646c21e21c94c25b293b96d8a391d2af78125ecfcb9ce8e03b92518aff431302",
+      "src/auto_research/agent_research/agent_s4.py": "fb496ed36ecdf1a84c035ee096b2c0f017e8a40e0583c17cc4ff86cf26649375"
+    },
+    "dataset_fingerprint": "sha256:52d2c008cdf3912a6d1a2b7e6417ffd8ba208cd2e21e8f9e3fffab92435c86e1",
+    "accelerator": "CPU"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

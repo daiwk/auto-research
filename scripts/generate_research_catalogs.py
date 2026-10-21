@@ -829,6 +829,8 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "stratified-sparse-attention": ("注意力与长上下文", "稀疏采样与估计"),
+        "race-rope-compression": ("注意力与长上下文", "RoPE 与原生维度压缩"),
         "locale-jepa": ("网络架构", "JEPA 与几何表征"),
         "esc": ("多模态基础模型", "几何一致新视角生成"),
         "me-pois": ("多模态基础模型", "移动轨迹与地点表征"),
