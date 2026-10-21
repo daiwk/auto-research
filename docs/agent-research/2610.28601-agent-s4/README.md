@@ -48,11 +48,15 @@ flowchart TD
 
 接口仓库包括可执行接口及其使用知识：
 
-$$R=(\mathcal I(R),K(R)).$$
+$$
+R=(\mathcal I(R),K(R)).
+$$
 
 私有验证分数为：
 
-$$F_{val}(R)=\frac{1}{|\mathcal T_{val}|}\sum_{x\in\mathcal T_{val}}V_x(\operatorname{Rollout}(A,R,C,x)).$$
+$$
+F_{val}(R)=\frac{1}{|\mathcal T_{val}|}\sum_{x\in\mathcal T_{val}}V_x(\operatorname{Rollout}(A,R,C,x)).
+$$
 
 每一步从种群均匀抽两个候选，取验证分数较高者；交叉选择第二父本时排除第一父本。后代加入`R_population ∪ {R_child}`，不是仅在严格提升时替换父本。OSWorld V2最终选择先比较完整成功率，再以平均部分得分打破平局；ScienceBoard使用成功率。搜索时锦标赛用平均部分得分，不混淆两种选择标准。
 
