@@ -169,6 +169,7 @@
 
 - 2026-09-08 · 一作：Yuxing Lu · [Procedural Graphs: Self-Evolving Execution Structures for LLM Agents](../2609.09153-procedural-graphs/README.md)（`procedural-graphs`）：方法把成功经验从自然语言片段提升为 procedure–relation–procedure 图。新经验先局部化为候选图编辑，再经过 held-out 验证门才写入长期结构，减少错误经验污染。
 - 2026-08-26 · 一作：Sanket Badhe · [SKILL.state: Scalable Long-Horizon Agent Skills](../2608.26263-skill-state/README.md)（`skill-state`）：普通Agent把旧观察、动作和推理反复塞回下一轮。SKILL.state把可持续的信息投影到当前执行状态，每步只传技能说明、状态和最新观察；不是在完整对话外再加一个状态块。
+- 2026-08-17 · 一作：Michele Tufano · [Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation](../2608.17177-spec-driven-tests/README.md)（`spec-driven-tests`）：直接让模型编写单元测试，可能遗漏输入边界或隐含的行为约定。本文先让Agent读取修复后的源码，写出每个代码单元的描述、前置条件、后置条件与测试建议；把条件标为已测试或未测试，保存为`.spec.md`，之后才允许生成测试。
 - 2026-02-18 · 一作：Ofer Meshi · [ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders](../2602.16938-convapparel/README.md)（`convapparel`）：模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。
 - 2026-01-27 · 一作：Runxiang Cheng · [Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair](../2601.19066-dynamic-brt/README.md)（`dynamic-brt`）：论文让修复和 BRT 留在同一条轨迹；TDD、TLD、Freeform 改变生成顺序。BRT 必须在原 bug 上失败、生成修复上通过。
 - 2025-08-06 · 一作：Zhongyi Zhou · [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](../2508.04086-toolgrad/README.md)（`toolgrad`）：先从目标答案反推工具轨迹，再使用 textual gradient 定位并修订失败调用，降低人工轨迹标注成本。

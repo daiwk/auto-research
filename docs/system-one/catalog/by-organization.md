@@ -2,6 +2,10 @@
 
 论文按第一作者所属机构聚合；产品和社区项目单独标明，避免把开源作者误写成论文机构。
 
+## Aalto University
+
+- [System One多模态重排](../../multimodal-models/2610.28435-system-one-rerank/README.md)（2026-10-20）：联合查询与图文候选单次前向，读取字母logits完成choice排序；A100小VLM组件诊断，不宣称复现27B完整结果。
+
 ## Câmara dos Deputados
 
 - [Jev 葡语 IR](../../foundation-models/2610.23346-jev-portuguese-ir/README.md)（2026-10-16）：独立概率重排与有序相关性判定，明确完整候选覆盖和线性检索指标；本地为 CPU 协议接口，未运行商业模型。

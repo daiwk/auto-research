@@ -2,6 +2,7 @@
 
 ## 检索判定与重排评测
 
+- [System One多模态重排](../../multimodal-models/2610.28435-system-one-rerank/README.md)：联合图文候选的首答案位置choice logits，单次真实VLM前向后稳定排序；仅小模型接口诊断，完整27B实验不复现。
 - [Jev 葡语 IR](../../foundation-models/2610.23346-jev-portuguese-ir/README.md)：Choice 保留原始有序 qrels，Noul 独立概率收齐所有批次后排序；提供线性 nDCG/MRR、κ 和 τ-b，fixture 不冒充模型能力。
 
 ## 类型化决策协议

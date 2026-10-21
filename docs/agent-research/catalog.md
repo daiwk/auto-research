@@ -155,6 +155,7 @@
 | Agentic RL | [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](2608.18682-rtpo/README.md) | Adelaide University，2026-08-19 | 未发现官方代码 | `rtpo` |
 | Agentic RL | [SPADE: Self-Play in Adaptive Synthetic Executable Environments](2608.19197-spade/README.md) | University of Washington，2026-08-19 | [已开源](https://github.com/spade-rl/spade) | `spade` |
 | Agentic RL | [PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs](2608.17289-planpo/README.md) | Xiamen University，2026-08-18 | 未发现官方代码 | `planpo` |
+| 工具使用 | [Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation](2608.17177-spec-driven-tests/README.md) | Google，2026-08-17 | 未发现官方代码 | `spec-driven-tests`：仅低成本组件，完整实验不复现 |
 | Agentic RL | [TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents](2608.16156-trca/README.md) | Authors did not disclose affiliation，2026-08-17 | 未发现官方代码 | `trca` |
 | 记忆 | [HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation](2608.15703-hymem/README.md) | Institute of Automation, Chinese Academy of Sciences，2026-08-16 | 未发现官方代码 | `hymem` |
 | 反思 | [LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation](2608.11967-loongreflect/README.md) | Authors did not disclose affiliation，2026-08-12 | 未发现官方代码 | `loongreflect` |
