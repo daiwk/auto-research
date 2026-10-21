@@ -11,7 +11,7 @@ import subprocess
 
 from auto_research.agent_research.google16_dynamic_brt import Patch, review_patch, select_patch
 from auto_research.agent_research.google16_hcrg import dependency_order, extract_python_graph, static_metrics
-from auto_research.agent_research.google16_polca import Candidate, Polca
+from auto_research.agent_research.google16_polca import Candidate, EvaluationResult, Polca
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_FILES = (
@@ -54,8 +54,9 @@ def run_polca(seed):
     proposal_count = [0]
 
     def evaluator(candidate, value):
-        score = -(float(candidate.parameter) - value) ** 2
-        return score, f"synthetic scalar fixture reward={score}"
+        output = float(candidate.parameter)
+        score = -(output - value) ** 2
+        return EvaluationResult(score, f"synthetic scalar fixture reward={score}", output)
 
     def summarizer(history):
         return json.dumps({h.candidate.key: {"mean": h.mean, "count": len(h.observations)}

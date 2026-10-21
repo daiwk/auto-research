@@ -97,12 +97,10 @@ def extract_python_graph(sources: Mapping[str, str]) -> CodeGraph:
                 signature = item.name if kind == "class" else ast.unparse(item.args)
                 nodes[key] = Node(key, kind, module, signature)
                 objects[key] = item
-    short_names: dict[str, list[str]] = {}
-    for key in nodes:
-        short_names.setdefault(key.rsplit(".", 1)[-1], []).append(key)
-
-    def resolve(module, name):
+    def resolve(module, name, shadow=frozenset()):
         head, _, tail = name.partition(".")
+        if head in shadow:
+            return None
         alias = aliases[module].get(head)
         rewritten = alias + ("." + tail if tail else "") if alias else name
         if rewritten in nodes:
@@ -110,12 +108,66 @@ def extract_python_graph(sources: Mapping[str, str]) -> CodeGraph:
         local = f"{module}.{rewritten}"
         if local in nodes:
             return local
-        matches = short_names.get(rewritten, [])
-        if len(matches) > 1:
-            raise ValueError("ambiguous dependency; qualify imports explicitly")
-        if matches:
-            return matches[0]
+        # Unimported global short names are not repository-wide symbols. Guessing
+        # here silently connects unrelated modules and corrupts dependency order.
         return None
+
+    def call_targets(item):
+        collected = []
+        references = []
+
+        def bindings(function):
+            names = {a.arg for a in (list(function.args.posonlyargs) + list(function.args.args)
+                                    + list(function.args.kwonlyargs))}
+            names.update(a.arg for a in (function.args.vararg, function.args.kwarg) if a)
+
+            class Bindings(ast.NodeVisitor):
+                def visit_Name(self, node):
+                    if isinstance(node.ctx, ast.Store):
+                        names.add(node.id)
+
+                def visit_FunctionDef(self, node):
+                    names.add(node.name)
+
+                visit_AsyncFunctionDef = visit_FunctionDef
+
+                def visit_ClassDef(self, node):
+                    names.add(node.name)
+
+                def visit_Import(self, node):
+                    names.update(a.asname or a.name.split(".")[0] for a in node.names)
+
+                def visit_ImportFrom(self, node):
+                    names.update(a.asname or a.name for a in node.names)
+
+            visitor = Bindings()
+            for statement in function.body:
+                visitor.visit(statement)
+            return names
+
+        class Calls(ast.NodeVisitor):
+            def __init__(self):
+                self.shadow = set()
+
+            def visit_FunctionDef(self, node):
+                previous = self.shadow
+                self.shadow = previous | bindings(node)
+                for statement in node.body:
+                    self.visit(statement)
+                self.shadow = previous
+
+            visit_AsyncFunctionDef = visit_FunctionDef
+
+            def visit_Call(self, node):
+                collected.append((node, frozenset(self.shadow)))
+                self.generic_visit(node)
+
+            def visit_Name(self, node):
+                if isinstance(node.ctx, ast.Load):
+                    references.append((node.id, frozenset(self.shadow)))
+
+        Calls().visit(item)
+        return collected, references
 
     edges: set[Edge] = set()
     unresolved: set[Edge] = set()
@@ -134,16 +186,16 @@ def extract_python_graph(sources: Mapping[str, str]) -> CodeGraph:
                     # Signatures are retained in the architecture skeleton, not executable bodies.
                     method_key = f"{key}.{member.name}"
                     nodes[method_key] = Node(method_key, "method", module, ast.unparse(member.args))
-        for statement in ast.walk(item):
-            if isinstance(statement, ast.Call):
-                identifier = _identifier(statement.func)
-                target = resolve(module, identifier) if identifier else None
-                if target:
-                    edges.add(Edge(key, target, "CALLS"))
-                else:
-                    unresolved.add(Edge(key, identifier or ast.unparse(statement.func), "CALLS"))
+        calls, references = call_targets(item)
+        for statement, shadow in calls:
+            identifier = _identifier(statement.func)
+            target = resolve(module, identifier, shadow) if identifier else None
+            if target:
+                edges.add(Edge(key, target, "CALLS"))
+            else:
+                unresolved.add(Edge(key, identifier or ast.unparse(statement.func), "CALLS"))
         for local_name, imported in aliases[module].items():
-            if any(isinstance(n, ast.Name) and n.id == local_name for n in ast.walk(item)):
+            if any(name == local_name and name not in shadow for name, shadow in references):
                 target = resolve(module, imported)
                 if target:
                     edges.add(Edge(key, target, "IMPORTS"))

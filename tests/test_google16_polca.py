@@ -2,7 +2,7 @@ import math
 
 import pytest
 
-from auto_research.agent_research.google16_polca import Candidate, Polca, epsilon_filter
+from auto_research.agent_research.google16_polca import Candidate, EvaluationResult, Polca, epsilon_filter
 
 
 def candidate(key, x):
@@ -25,14 +25,19 @@ def test_same_minibatch_history_summary_and_empirical_mean_not_best_score():
 
     def evaluate(c, value):
         events.append((c.key, value))
-        return value + (1 if c.key == "new" else 0), f"observed {value}"
+        output = value + (1 if c.key == "new" else 0)
+        return EvaluationResult(output, f"observed {value}", {"program_output": output})
 
     def summarize(history):
         assert len(history[0].observations) == 2
+        for observation in history[0].observations:
+            assert observation.output == {"program_output": observation.input}
         return "actual callback result, unit fixture only"
 
     def propose(history, summary):
         assert history[0].observations and summary.startswith("actual")
+        assert history[0].observations[0].input == events[0][1]
+        assert history[0].observations[0].output == {"program_output": events[0][1]}
         return [candidate("new", 2)]
 
     trace = controller.round([("v1", 0), ("v2", 4)], evaluator=evaluate,
@@ -46,7 +51,7 @@ def test_same_minibatch_history_summary_and_empirical_mean_not_best_score():
 def test_stochastic_feedback_averaged_and_variance_preserved_across_rounds():
     controller = Polca(candidate("base", 0), epsilon=.1)
     values = iter([10., -10.])
-    kwargs = dict(evaluator=lambda c, x: (next(values), "noisy"),
+    kwargs = dict(evaluator=lambda c, x: EvaluationResult(next(values), "noisy", "observed-output"),
                   summarizer=lambda h: "fixture", proposer=lambda h, s: [], batch_size=1)
     controller.round([("v", None)], **kwargs)
     controller.round([("v", None)], **kwargs)
@@ -57,7 +62,7 @@ def test_stochastic_feedback_averaged_and_variance_preserved_across_rounds():
 
 def test_budget_exhaustion_keeps_deferred_proposal_distinct_from_evaluated():
     controller = Polca(candidate("base", 0), epsilon=.1, max_metric_calls=2)
-    trace = controller.round([("v", 0)], evaluator=lambda c, x: (0., "fixture"),
+    trace = controller.round([("v", 0)], evaluator=lambda c, x: EvaluationResult(0., "fixture", "out"),
                              summarizer=lambda h: "fixture",
                              proposer=lambda h, s: [candidate("new", 5)], batch_size=2)
     assert trace.deferred_budget == ("new",) and trace.admitted == ()
@@ -74,3 +79,28 @@ def test_test_split_nonfinite_embeddings_and_duplicate_ids_rejected():
     controller = Polca(candidate("base", 0), epsilon=.1)
     with pytest.raises(ValueError):
         controller.round([("test", 0)], evaluator=None, summarizer=None, proposer=None, split="test")
+
+
+def test_input_output_rollouts_are_preserved_and_not_hidden_in_feedback():
+    original = {"prompt": "public validation request"}
+    controller = Polca(candidate("base", 0), epsilon=.1)
+    observed = []
+
+    def evaluator(c, value):
+        return EvaluationResult(.4, "concise feedback", {"answer": "actual program response"})
+
+    def summarizer(history):
+        observed.append(history[0].observations[0])
+        return "derived from complete rollout"
+
+    def proposer(history, summary):
+        observation = history[0].observations[0]
+        assert observation.input == original
+        assert observation.output == {"answer": "actual program response"}
+        assert observation.feedback == "concise feedback"
+        return []
+
+    controller.round([("v", original)], evaluator=evaluator, summarizer=summarizer,
+                     proposer=proposer, batch_size=1)
+    original["prompt"] = "later mutation"
+    assert observed[0].input == {"prompt": "public validation request"}

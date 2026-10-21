@@ -6,6 +6,7 @@ interfaces; unit fixtures are not evidence of model optimization capability.
 """
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
 import math
 import random
@@ -29,9 +30,18 @@ class Candidate:
 
 
 @dataclass(frozen=True)
+class EvaluationResult:
+    score: float
+    feedback: str
+    output: object
+
+
+@dataclass(frozen=True)
 class Observation:
     candidate_key: str
     item_id: str
+    input: object
+    output: object
     score: float
     feedback: str
     round_index: int
@@ -120,15 +130,18 @@ class Polca:
         for item_id, value in batch:
             # Count before invocation so failures never silently restore a spent call.
             self.calls += 1
-            score, feedback = evaluator(candidate, value)
-            if not math.isfinite(score) or not isinstance(feedback, str):
-                raise ValueError("finite evaluator score and textual feedback required")
-            observation = Observation(candidate.key, item_id, score, feedback, round_index)
+            observed_input = deepcopy(value)
+            result = evaluator(candidate, value)
+            if (not isinstance(result, EvaluationResult) or not math.isfinite(result.score)
+                    or not isinstance(result.feedback, str)):
+                raise ValueError("EvaluationResult with finite score, feedback and actual output required")
+            observation = Observation(candidate.key, item_id, observed_input,
+                                      deepcopy(result.output), result.score, result.feedback, round_index)
             old = History(candidate, old.observations + (observation,))
             self.memory[candidate.key] = old
 
     def round(self, validation: Sequence[tuple[str, object]], *,
-              evaluator: Callable[[Candidate, object], tuple[float, str]],
+              evaluator: Callable[[Candidate, object], EvaluationResult],
               summarizer: Callable[[tuple[History, ...]], str],
               proposer: Callable[[tuple[History, ...], str], Sequence[Candidate]],
               batch_size: int = 2, select_count: int = 1,

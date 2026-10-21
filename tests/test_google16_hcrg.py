@@ -57,9 +57,10 @@ def test_static_metrics_expose_partial_coverage_not_invented_seven_metric_score(
 
 
 def test_ambiguous_symbols_and_beyond_three_hops_rejected():
-    with pytest.raises(ValueError):
-        extract_python_graph({"a": "class Base: pass", "b": "class Base: pass",
-                              "c": "class Child(Base): pass"})
+    ambiguous = extract_python_graph({"a": "class Base: pass", "b": "class Base: pass",
+                                      "c": "class Child(Base): pass"})
+    assert not ambiguous.edges
+    assert [(e.source, e.target) for e in ambiguous.unresolved_dependencies] == [("c.Child", "Base")]
     graph = extract_python_graph({"m": "class C: pass"})
     with pytest.raises(ValueError):
         graph.retrieve("m.C", hops=4)
@@ -70,3 +71,24 @@ def test_unsupported_external_dependencies_remain_visible_not_dropped_as_resolve
     assert {(e.kind, e.target) for e in graph.unresolved_dependencies} == {
         ("INHERITS", "Unknown"), ("CALLS", "external")}
     assert graph.edges == ()
+
+
+def test_unimported_matching_name_in_another_module_is_not_a_dependency():
+    graph = extract_python_graph({"a": "def use(): return helper()",
+                                  "b": "def helper(): return 1"})
+    assert not graph.edges
+    assert [(e.source, e.target) for e in graph.unresolved_dependencies] == [("a.use", "helper")]
+
+
+def test_parameter_and_local_assignment_shadow_top_level_function():
+    graph = extract_python_graph({"m": (
+        "def helper(): return 1\n"
+        "def use(helper): return helper()\n"
+        "def local(other):\n    helper = other\n    return helper()\n"
+        "def genuine(): return helper()\n")})
+    assert [(e.source, e.target) for e in graph.edges] == [("m.genuine", "m.helper")]
+    assert {(e.source, e.target) for e in graph.unresolved_dependencies} == {
+        ("m.use", "helper"), ("m.local", "helper")}
+    imported = extract_python_graph({"external": "def helper(): return 1",
+                                    "m": "from external import helper\ndef use(helper): return helper()"})
+    assert not imported.edges
