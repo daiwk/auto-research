@@ -12,20 +12,38 @@ def test_inputwise_expert_softmax_does_not_imply_global_normalization():
     assert gated_mass(experts, logits).sum() == pytest.approx(1.8)
 
 
-def test_three_player_update_uses_kl_adversary_and_partition_dual():
+def test_three_player_practical_update_uses_nll_adversary_and_partition_dual():
     experts = torch.tensor([[.8, .2], [.1, .9]])
     domains = torch.tensor([[.7, .3], [.05, .95]])
     gate = torch.nn.Parameter(torch.tensor([[1., -1.], [-1., 1.]]))
     before = gate.detach().clone()
     mass = gated_mass(experts, gate).detach()
-    kl = (domains * (domains.log() - mass.log())).sum(-1)
-    expected_adversary = (.2 * kl).softmax(-1)
+    nll = -(domains * mass.log()).sum(-1)
+    expected_adversary = (.2 * nll).softmax(-1)
     expected_dual = .3 * (mass.sum() - 1)
     state = primal_dual_step(gate, experts, domains, torch.tensor([.5, .5]), torch.tensor(0.),
                             torch.optim.SGD([gate], lr=.01), adversary_lr=.2, dual_lr=.3)
     torch.testing.assert_close(state["adversary"], expected_adversary)
     torch.testing.assert_close(state["dual"], expected_dual)
     assert not torch.equal(before, gate) and gate.grad.norm() > 0
+
+
+def test_unequal_domain_entropies_distinguish_practice_nll_from_theory_kl():
+    experts = torch.tensor([[.5, .5], [.5, .5]])
+    domains = torch.tensor([[.5, .5], [.99, .01]])
+    outputs = {}
+    for objective in ("nll", "kl"):
+        gate = torch.nn.Parameter(torch.zeros(2, 2))
+        outputs[objective] = primal_dual_step(
+            gate, experts, domains, torch.tensor([.5, .5]), torch.tensor(0.),
+            torch.optim.SGD([gate], lr=.01), adversary_lr=1., adversary_objective=objective)
+    torch.testing.assert_close(outputs["nll"]["adversary"], torch.tensor([.5, .5]))
+    # KL(domain || uniform) is larger for the lower-entropy second domain.
+    assert outputs["kl"]["adversary"][1] > .65
+    assert not torch.allclose(outputs["nll"]["adversary"], outputs["kl"]["adversary"])
+    for state in outputs.values():
+        entropy = -(domains * domains.log()).sum(-1)
+        torch.testing.assert_close(state["domain_nll"] - state["domain_kl"], entropy)
 
 
 def test_cached_logits_objective_is_mixture_likelihood_not_expert_average_nll():

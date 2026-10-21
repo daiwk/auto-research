@@ -91,7 +91,8 @@ def robust_gate_diagnostic(device: str, steps: int, seed: int) -> dict:
     cached = torch.tensor([[[.7, .1], [.1, .6], [.4, .3]]], device=device).repeat(2, 1, 1).log()
     distillation = cached_router_nll(router, cached)
     distillation.backward()
-    return {"fixture_only": True, "trajectory": trajectory, "metrics": {
+    return {"fixture_only": True, "adversary_objective": "practical_domain_nll_not_theory_kl",
+            "normalization_estimator": "exact_finite_support_no_MC_or_EMA", "trajectory": trajectory, "metrics": {
         "steps": steps, "initial_partition": float(initial.sum()), "final_partition": float(final.sum()),
         "global_partition_residual": float(abs(final.sum() - 1)),
         "adversary_sum_error": float(abs(adversary.sum() - 1)), "dual": float(dual),

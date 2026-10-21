@@ -27,11 +27,14 @@ def gated_mass(experts: Tensor, gate_logits: Tensor) -> Tensor:
 
 def primal_dual_step(gate_logits: Tensor, experts: Tensor, domains: Tensor,
                      adversary: Tensor, dual: Tensor, optimizer: torch.optim.Optimizer,
-                     *, adversary_lr: float = .05, dual_lr: float = .1) -> dict[str, Tensor]:
-    """Algorithm 2 with exact support, EG adversary and scalar dual ascent.
+                     *, adversary_lr: float = .05, dual_lr: float = .1,
+                     adversary_objective: str = "nll") -> dict[str, Tensor]:
+    """Algorithm 2's practical NLL game with exact-support normalization.
 
-    Domain KL (rather than entropy-shifted NLL) drives the adversary, as in
-    Algorithm 1/Appendix D. Parameters update against the new adversary/dual.
+    §5.2/Appendix D Algorithm 6 use domain NLL for the adversary. The theory's
+    Algorithm 1 uses KL; they differ by each domain's entropy and are NOT the
+    same adversary game. Explicit objective="kl" supports that mathematical
+    comparison, not an undocumented replacement of the practical algorithm.
     """
     _distributions(domains, "domains")
     if domains.shape != experts.shape or adversary.shape != (len(domains),) or dual.numel() != 1:
@@ -40,16 +43,21 @@ def primal_dual_step(gate_logits: Tensor, experts: Tensor, domains: Tensor,
         raise ValueError("adversary must be positive and dual finite")
     if not torch.allclose(adversary.sum(), adversary.new_tensor(1.)) or min(adversary_lr, dual_lr) <= 0:
         raise ValueError("normalized adversary and positive learning rates required")
+    if adversary_objective not in ("nll", "kl"):
+        raise ValueError("adversary objective must be nll or kl")
     mass = gated_mass(experts, gate_logits)
+    domain_nll = -(domains * mass.log()[None]).sum(-1)
     domain_kl = (domains * (domains.log() - mass.log()[None])).sum(-1)
-    updated = (adversary.log() + adversary_lr * domain_kl.detach()).softmax(-1)
+    gains = domain_nll if adversary_objective == "nll" else domain_kl
+    updated = (adversary.log() + adversary_lr * gains.detach()).softmax(-1)
     new_dual = dual.detach() + dual_lr * (mass.sum().detach() - 1)
-    objective = (updated * domain_kl).sum() + new_dual * (mass.sum() - 1)
+    objective = (updated * gains).sum() + new_dual * (mass.sum() - 1)
     optimizer.zero_grad()
     objective.backward()
     optimizer.step()
     return {"adversary": updated.detach(), "dual": new_dual.detach(),
-            "domain_kl": domain_kl.detach(), "partition": mass.sum().detach(),
+            "domain_kl": domain_kl.detach(), "domain_nll": domain_nll.detach(),
+            "partition": mass.sum().detach(),
             "objective": objective.detach()}
 
 
