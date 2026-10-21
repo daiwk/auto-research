@@ -29,6 +29,23 @@ def test_actual_fusion_uses_ranks_not_backend_order_and_deduplicates_each_list()
         reciprocal_rank_fusion(((a,), (Document(a.identifier, "different"),)))
 
 
+def test_conflicting_ids_are_rejected_within_single_and_across_rankings():
+    original = DOCS[0]
+    conflict = Document(original.identifier, "contradictory public content")
+    with pytest.raises(ValueError, match="conflicting"):
+        dedup((original, conflict))
+    with pytest.raises(ValueError, match="conflicting"):
+        reciprocal_rank_fusion(((original, conflict), (DOCS[1],)))
+    with pytest.raises(ValueError, match="conflicting"):
+        reciprocal_rank_fusion(((original,), (conflict,)))
+    assert dedup((original, original)) == (original,)
+    backend = RetrievalSDK(lambda q, k: (original, conflict), lambda q, k: (original,), lambda q, d, k: d[:k])
+    with pytest.raises(ValueError, match="conflicting"):
+        execute(RetrievalProgram(("q",), "dense"), backend)
+    with pytest.raises(ValueError, match="conflicting"):
+        execute(RetrievalProgram(("q",), "fuse"), backend)
+
+
 def test_breadth_and_observation_are_decoupled_and_no_intermediate_docs_are_exposed():
     program = RetrievalProgram(("question A", "question B"), "fuse", 10, 3, 2)
     result = execute(program, sdk())

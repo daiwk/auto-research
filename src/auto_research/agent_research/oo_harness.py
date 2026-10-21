@@ -18,7 +18,7 @@ class PublicTask:
     instruction: str
 
     def __post_init__(self):
-        if any(not isinstance(value, str) or not value.strip()
+        if any(type(value) is not str or not value.strip()
                for value in (self.task_id, self.instruction)):
             raise ValueError("nonempty public task identifier and instruction required")
 
@@ -30,8 +30,8 @@ class ToolObservation:
     mutated: bool = False
 
     def __post_init__(self):
-        if (not isinstance(self.tool, str) or not self.tool
-                or not isinstance(self.content, str) or type(self.mutated) is not bool):
+        if (type(self.tool) is not str or not self.tool
+                or type(self.content) is not str or type(self.mutated) is not bool):
             raise ValueError("typed public tool observation required")
 
 
@@ -85,9 +85,12 @@ class Harness:
 
     def run(self, task: PublicTask, *, actor: Actor, tools: ToolExecutor,
             max_turns: int = 16) -> PublicRun:
-        if (not isinstance(task, PublicTask) or not callable(actor) or not callable(tools)
+        if (type(task) is not PublicTask or not callable(actor) or not callable(tools)
                 or type(max_turns) is not int or not 1 <= max_turns <= 256):
             raise ValueError("public task, callbacks and bounded turn budget required")
+        # Never forward a caller-owned object's dynamic attributes, even when
+        # someone bypassed the frozen dataclass with object.__setattr__.
+        task = PublicTask(task.task_id, task.instruction)
         names = self.tool_names()
         prompt = self.system_prompt(task)
         if (type(names) is not tuple or not names or len(set(names)) != len(names)
@@ -112,9 +115,9 @@ class Harness:
             if action.tool not in names:
                 raise ValueError("actor selected an unavailable tool")
             observation = tools(action.tool, action.payload)
-            if not isinstance(observation, ToolObservation) or observation.tool != action.tool:
+            if type(observation) is not ToolObservation or observation.tool != action.tool:
                 raise ValueError("tool callback returned an invalid public observation")
-            observations.append(observation)
+            observations.append(ToolObservation(observation.tool, observation.content, observation.mutated))
         return PublicRun(task.task_id, None, tuple(observations), max_turns, rejections)
 
 
@@ -265,8 +268,9 @@ class FrozenHarnessLibrary:
                router: Callable[[RoutingContext], str], max_turns: int = 16) -> DeploymentResult:
         if not callable(router) or not callable(tool_factory):
             raise ValueError("router and fresh task-environment factory required")
-        if not isinstance(task, PublicTask) or task.task_id not in self._heldout_ids:
+        if type(task) is not PublicTask or task.task_id not in self._heldout_ids:
             raise ValueError("deployment requires a predeclared held-out task")
+        task = PublicTask(task.task_id, task.instruction)
         if any(_fingerprint(cls) != fingerprint for _, cls, fingerprint in self._entries):
             raise ValueError("harness methods changed after freezing")
         types = {key: cls for key, cls, _ in self._entries}

@@ -1,4 +1,4 @@
-from dataclasses import FrozenInstanceError, asdict
+from dataclasses import FrozenInstanceError, asdict, dataclass
 import hashlib
 import json
 import runpy
@@ -138,6 +138,51 @@ def test_turn_limit_and_unavailable_tools_do_not_silently_succeed():
     assert result.final_answer is None and result.actor_calls == result.finish_rejections == 3
     with pytest.raises(ValueError, match="unavailable"):
         Harness().run(task, actor=lambda _: Action("tool", "payload", "shell"), tools=lambda *_: None)
+
+
+def test_task_subclass_cannot_carry_gold_to_actor_or_router():
+    @dataclass(frozen=True)
+    class GradedTask(PublicTask):
+        reference_answer: str = "hidden reference"
+    task = GradedTask("test", "public instruction")
+    actor_calls, router_calls = [], []
+    actor = lambda context: actor_calls.append(context) or Action("finish", "public")
+    router = lambda context: router_calls.append(context) or "base"
+    with pytest.raises(ValueError, match="public task"):
+        Harness().run(task, actor=actor, tools=lambda *_: None)
+    with pytest.raises(ValueError, match="held-out"):
+        discovery().freeze().deploy(task, actor=actor, tool_factory=lambda: lambda *_: None, router=router)
+    assert not actor_calls and not router_calls
+
+
+def test_exact_task_is_whitelist_copied_and_nested_observation_subclasses_are_rejected():
+    task = PublicTask("test", "public instruction")
+    # A caller deliberately bypassing frozen assignment still cannot get this
+    # undeclared attribute through the actor/router projection.
+    object.__setattr__(task, "reference_answer", "hidden reference")
+    actor_views, router_views = [], []
+    result = discovery().freeze().deploy(task,
+        actor=lambda context: actor_views.append(context) or Action("finish", "public"),
+        tool_factory=lambda: lambda *_: None,
+        router=lambda context: router_views.append(context) or "base")
+    assert result.base_reused
+    assert not hasattr(actor_views[0].task, "reference_answer")
+    assert not hasattr(router_views[0].task, "reference_answer")
+    assert actor_views[0].task is not task and router_views[0].task is not task
+    @dataclass(frozen=True)
+    class GradedObservation(ToolObservation):
+        reference_answer: str = "hidden reference"
+    with pytest.raises(ValueError, match="observation"):
+        Harness().run(PublicTask("test", "public"),
+            actor=lambda _: Action("tool", "data", "read"),
+            tools=lambda tool, _: GradedObservation(tool, "public result"))
+
+
+def test_task_string_subclass_is_not_a_nested_metadata_channel():
+    class HiddenText(str):
+        reference_answer = "hidden"
+    with pytest.raises(ValueError):
+        PublicTask("test", HiddenText("public instruction"))
 
 
 def test_runner_diagnostic_uses_actual_component_and_records_negative_control():

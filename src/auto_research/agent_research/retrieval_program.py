@@ -45,13 +45,16 @@ class RetrievalProgram:
 
 
 def dedup(documents: tuple[Document, ...]) -> tuple[Document, ...]:
-    result, seen = [], set()
+    result, seen = [], {}
     for document in documents:
         if not isinstance(document, Document):
             raise ValueError("typed documents required")
-        if document.identifier not in seen:
+        previous = seen.get(document.identifier)
+        if previous is not None and previous != document:
+            raise ValueError("the same document identifier has conflicting content")
+        if previous is None:
             result.append(document)
-            seen.add(document.identifier)
+            seen[document.identifier] = document
     return tuple(result)
 
 
