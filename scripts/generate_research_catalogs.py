@@ -294,6 +294,10 @@ TOPIC_HIERARCHY = {
         "上下文管理": ("记忆、技能与持续学习", "上下文、状态与分支管理"),
         "Harness 设计": ("规划、搜索与反思", "Harness 与自我改进"),
         "Harness 优化": ("规划、搜索与反思", "Harness 与自我改进"),
+        "自我进化": ("规划、搜索与反思", "Harness 与自我改进"),
+        "检索与工具": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
+        "Agent运行时": ("记忆、技能与持续学习", "上下文、状态与分支管理"),
+        "科学研究与实验闭环": ("规划、搜索与反思", "科学发现与实验闭环"),
     },
 }
 
@@ -825,6 +829,8 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "locale-jepa": ("网络架构", "JEPA 与几何表征"),
+        "esc": ("多模态基础模型", "几何一致新视角生成"),
         "me-pois": ("多模态基础模型", "移动轨迹与地点表征"),
         "modular-robust-generative": ("网络架构", "生成专家与鲁棒门控"),
         "data-quality-lsa": ("预训练与数据", "预训练与后训练协同"),

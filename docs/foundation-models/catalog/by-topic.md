@@ -4,6 +4,10 @@
 
 ## 网络架构
 
+### JEPA 与几何表征
+
+- [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](../../foundation-models/2610.28458-locale-jepa/README.md)（`locale-jepa`）：LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配**均匀球分布**。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。
+
 ### 循环记忆与序列混合
 
 - [Kronecker Delta Rule for Long Context Linear Attention](../../foundation-models/2610.26834-kronlstm/README.md)（`kronlstm`）：标准 DeltaNet 用向量误差 $Sk-v$ 更新矩阵记忆，会干扰与当前 key 重叠的其他关联。Kronecker Delta Rule 修正的是**一个 key-value 对的标量关联** $v^TSk$；记忆修订沿 $v k^T$ 的单一矩阵方向进行。KronLSTM 再加入 key 轴逐通道遗忘和分离 erase/write 门。
@@ -201,6 +205,10 @@
 ### 空间理解与结构化视觉推理
 
 - [MJev-Spatial: System One Spatial Intelligence via Native Attention Matching](../../foundation-models/2610.22276-mjev-spatial/README.md)（`mjev-spatial`）：空间问题往往只需选项、数值或二维点，却仍让 VLM 自回归生成并解析答案。MJev-Spatial 将三者统一为候选分类：decision marker 提供 query，candidate-end marker 提供 key，直接复用骨干最终注意力投影。连续量通过分桶或三级区域细化预测，不增加独立分类头。
+
+### 几何一致新视角生成
+
+- [ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis](../../foundation-models/2610.23732-esc/README.md)（`esc`）：单幅图像经扩散模型生成新视角时，2D视觉质量或相机姿态对齐不保证3D几何一致。ESC 联合生成 RGB 与逆深度，用 Plücker ray maps 条件化 Qwen MM-DiT，并以双向深度重投影约束 PCC 识别“物体消失”与“凭空出现”。推理时按 PCC 在多次随机生成中选优。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### JEPA与物理态监督
 

@@ -72,6 +72,10 @@
 
 - 2026-10-14 · [Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning](../../reproductions/2610.20158-oob-regularization/README.md)（`oob-regularization`）：联合嵌入自监督学习一方面拉近同一图像的不同增强视图，另一方面用抗坍塌正则保持表示多样性。小 batch 对整个表示分布的估计可能很差；单纯增大 GPU batch 又受显存限制。
 
+## FAIR at Meta
+
+- 2026-10-14 · [ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis](../../foundation-models/2610.23732-esc/README.md)（`esc`）：单幅图像经扩散模型生成新视角时，2D视觉质量或相机姿态对齐不保证3D几何一致。ESC 联合生成 RGB 与逆深度，用 Plücker ray maps 条件化 Qwen MM-DiT，并以双向深度重投影约束 PCC 识别“物体消失”与“凭空出现”。推理时按 PCC 在多次随机生成中选优。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## FAIR, Meta
 
 - 2026-10-14 · [Open-world AI: a Tale of Three Requirements](../../foundation-models/2610.20782-memory-mosaics-plus/README.md)（`memory-mosaics-plus`）：固定任务的 IID 泛化不等于在开放世界中学习新任务。论文提出推理时学习、丰富表示和预测性解耦三个要求。§3.2 的 Mosaics+ 用短期模块先处理近期依赖，再以 Gaussian-kernel 长期记忆检索预测关联；two-stage 版本分别估计当前任务与相关任务，避免一锅混池让不相关历史越多越有害。
@@ -463,6 +467,10 @@
 ## University of Modena and Reggio Emilia
 
 - 2026-10-01 · [IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs](../../foundation-models/2610.00426-irekogpt/README.md)（`irekogpt`）：保留 SliceGPT 投影矩阵而非直接丢弃，使同一 checkpoint 暴露嵌套宽度；再以多压缩率校准和 ridge 修正下游线性层。
+
+## University of Pennsylvania
+
+- 2026-10-20 · [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](../../foundation-models/2610.28458-locale-jepa/README.md)（`locale-jepa`）：LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配**均匀球分布**。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。
 
 ## University of Southern California
 

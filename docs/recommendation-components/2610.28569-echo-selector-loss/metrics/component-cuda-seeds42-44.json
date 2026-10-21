@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "method": "echo-selector-loss",
+  "manifest_ref": "recommendation:echo-selector-loss",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-echo-selector-loss-v1",
+    "revision": "sha256:3d38f6149a8358d4e4ea1228647aa9fabbf36c6f1605479033a4784deef8c8a2",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "kd_loss": 11.041438699157355,
+        "boundary_loss": 1.720901684134768,
+        "active_pairs": 9,
+        "ce_reference_max_error": 1.7763568394002505e-15,
+        "student_update_norm": 0.034716967329952504
+      },
+      "audit_sha256": "5b884f729bba79011872c40872506d775b130c3ac7a10229655349d2a5fa6573",
+      "checks": {
+        "independent_ce_reference": true,
+        "detached_teacher_has_no_gradient": true,
+        "student_actually_updated": true,
+        "padding_has_zero_gradient": true,
+        "selection_excludes_padding": true,
+        "identical_order_negative_control_has_no_boundary_pairs": true,
+        "finite_losses_and_gradient": true,
+        "fp16_long_history_and_empty_pairs_finite": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "kd_loss": 10.97681160243979,
+        "boundary_loss": 1.9522874809169095,
+        "active_pairs": 9,
+        "ce_reference_max_error": 0.0,
+        "student_update_norm": 0.03839032361850497
+      },
+      "audit_sha256": "9497c26dab10dd54d1b2c874b4048e8031c3a25e15275e9607c0c5bed24ee7b2",
+      "checks": {
+        "independent_ce_reference": true,
+        "detached_teacher_has_no_gradient": true,
+        "student_actually_updated": true,
+        "padding_has_zero_gradient": true,
+        "selection_excludes_padding": true,
+        "identical_order_negative_control_has_no_boundary_pairs": true,
+        "finite_losses_and_gradient": true,
+        "fp16_long_history_and_empty_pairs_finite": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "kd_loss": 11.530688404071329,
+        "boundary_loss": 2.4546320007283264,
+        "active_pairs": 9,
+        "ce_reference_max_error": 0.0,
+        "student_update_norm": 0.04523755152790849
+      },
+      "audit_sha256": "4f12888899a60f198e098ed0615f9a8dd5618e29ed72c95da3f51574c6d2dcd8",
+      "checks": {
+        "independent_ce_reference": true,
+        "detached_teacher_has_no_gradient": true,
+        "student_actually_updated": true,
+        "padding_has_zero_gradient": true,
+        "selection_excludes_padding": true,
+        "identical_order_negative_control_has_no_boundary_pairs": true,
+        "finite_losses_and_gradient": true,
+        "fp16_long_history_and_empty_pairs_finite": true
+      }
+    }
+  ],
+  "metrics": {
+    "active_pairs": {
+      "mean": 9,
+      "std": 0.0,
+      "n": 3
+    },
+    "boundary_loss": {
+      "mean": 2.0426070552600013,
+      "std": 0.3751110015772116,
+      "n": 3
+    },
+    "ce_reference_max_error": {
+      "mean": 5.921189464667501e-16,
+      "std": 1.0255800994045674e-15,
+      "n": 3
+    },
+    "kd_loss": {
+      "mean": 11.182979568556158,
+      "std": 0.30285349779889026,
+      "n": 3
+    },
+    "student_update_norm": {
+      "mean": 0.039448280825455324,
+      "std": 0.005339487621052598,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "23a7dbf43e7b9c501afa45b9d0ba4a9394220e10",
+    "artifact_path": "docs/recommendation-components/2610.28569-echo-selector-loss/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "5626d3390ae5b955c796d4383d1bf169daee2084104e4a34a5c4d3fe93752de7",
+    "executed_source_sha256": {
+      "scripts/run_oct21_ranking_components.py": "8d189db8dd4d309ccec4d978c57985f69418eae9d86bdfbab685bb5310346f63",
+      "src/auto_research/reproductions/baseline_incremental.py": "2ec95903c157073db9c013df8df710b36ee8b4f355fe64f6afa6e73ec92be385",
+      "src/auto_research/reproductions/spar_prefix_balance.py": "c894641bc82003a40f30414853a6d519c457ec584a0b41e0c061a637bae2f297",
+      "src/auto_research/reproductions/echo_distillation.py": "481c3aa677ff4cdc696e2d522984e54e8d15386618ebe0f805ff7c41ead83a6f"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:9acf6dc352f1cb52fc4c06ae619f17805ba731546507692caaf2af322a2e46a6"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

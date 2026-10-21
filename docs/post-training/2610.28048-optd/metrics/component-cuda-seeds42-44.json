@@ -1,0 +1,136 @@
+{
+  "schema_version": 2,
+  "method": "optd",
+  "manifest_ref": "post-training:optd",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-optd-v1",
+    "revision": "sha256:90efe1e08c94df91a98f844d3b20658bbbae4edaf658b80db8b435a8ab4d193b",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "optimizer_updates": 3,
+        "parameter_delta_l2": 0.07256527087010482,
+        "gradient_norm_min": 1.1258996846364304,
+        "loss_reference_max_abs_error": 1.1102230246251565e-15,
+        "logit_gradient_reference_max_abs_error": 1.1709383462843448e-17,
+        "negative_control_difference_max": 0.03153674798203517,
+        "teacher_parameter_delta_max": 0.0,
+        "teacher_gradient_count": 0,
+        "pretrained_or_public_benchmark_evaluated": false
+      },
+      "audit_sha256": "35f154541cbcb18b0fd5c8aa59ecad5e94b4d58e85457e0d9acdcfeb2c59b9ca"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "optimizer_updates": 3,
+        "parameter_delta_l2": 0.08939769630829375,
+        "gradient_norm_min": 1.2371831818926278,
+        "loss_reference_max_abs_error": 9.992007221626409e-16,
+        "logit_gradient_reference_max_abs_error": 1.474514954580286e-17,
+        "negative_control_difference_max": 0.03880972862260777,
+        "teacher_parameter_delta_max": 0.0,
+        "teacher_gradient_count": 0,
+        "pretrained_or_public_benchmark_evaluated": false
+      },
+      "audit_sha256": "476f35b7949d2251402fa41bebb51ace8b07b25c536a2ac86af763784f900717"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "optimizer_updates": 3,
+        "parameter_delta_l2": 0.07170932292197771,
+        "gradient_norm_min": 1.117961290878125,
+        "loss_reference_max_abs_error": 6.661338147750939e-16,
+        "logit_gradient_reference_max_abs_error": 1.0408340855860843e-17,
+        "negative_control_difference_max": 0.021268513461262798,
+        "teacher_parameter_delta_max": 0.0,
+        "teacher_gradient_count": 0,
+        "pretrained_or_public_benchmark_evaluated": false
+      },
+      "audit_sha256": "81854ba88a634723beaf884dc5c975c3eb31a83572f3e5a0104aced67c14b367"
+    }
+  ],
+  "metrics": {
+    "gradient_norm_min": {
+      "mean": 1.160348052469061,
+      "std": 0.06665945063543252,
+      "n": 3
+    },
+    "logit_gradient_reference_max_abs_error": {
+      "mean": 1.2287624621502383e-17,
+      "std": 2.2254773715912214e-18,
+      "n": 3
+    },
+    "loss_reference_max_abs_error": {
+      "mean": 9.251858538542972e-16,
+      "std": 2.3111135221866393e-16,
+      "n": 3
+    },
+    "negative_control_difference_max": {
+      "mean": 0.030538330021968582,
+      "std": 0.008813125787788766,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.0778907633667921,
+      "std": 0.009974481992195772,
+      "n": 3
+    },
+    "pretrained_or_public_benchmark_evaluated": false,
+    "teacher_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_parameter_delta_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "eb4cf6cab82d9e24a803debfa82868c54e49ce07",
+    "artifact_path": "docs/post-training/2610.28048-optd/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "bd4024a34e6f820a6a26b2719fb72a60b470dfb259cb4d94c48402df8b27189a",
+    "executed_source_sha256": {
+      "scripts/run_oct21_post_components.py": "d0120ae4c18b4914f8617d1ae218a379aa602a57ac9a6c04d04e16f05cb1aa63",
+      "src/auto_research/post_training/oct21_distillation.py": "4ff14e00ec26f90ed6713da9c2421a278c55949fe6c6312c03d0e433ea0d2091"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:4bc8cdb940dbf685ea4de5290b99c2cb1b2492fad0b11dbd3e10014a2e3e6c72"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

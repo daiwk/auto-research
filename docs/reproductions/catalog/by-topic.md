@@ -267,7 +267,11 @@
 - [PRECISE](../2412.06308-precise/README.md)：联合 LLM 语义 token 与协同 ID，并针对冷启动物品进行序列预训练。
 
 ### 语义标识与增量更新
+- [SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs](../../recommendation-components/2610.27898-spar-prefix-balance/README.md)：PATH按已生成SID前缀读取粗到细用户记忆，RQ-PIB在冻结残差码本后按历史交互负载修复兄弟分支；本地只实现含不可分商品权重上界的最小可行失真移动，不声称全局最优、不训练PATH/Qwen/DPO。
 - [Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search](../../recommendation-components/2610.26105-sid-topology/README.md)：冻结旧商品完整三层SID，只按新价值排名给新商品分配路径，允许新商品与原头部token碰撞，不通过移动旧路径强行去重。实现价值先验、HC桶、增量插入和映射漂移审计；语义前缀由调用方提供，不训练RQ-VAE或LLM，64卡生产完整实验成本过高不复现。
+
+### 长序列压缩与检索
+- [ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling](../../recommendation-components/2610.28569-echo-selector-loss/README.md)：用户侧DS保存原始历史记录，再由目标感知TFR读取；候选感知教师用逐目标软分布和选择边界成对监督训练DS。本地实现温度缩放CE、detached挖掘/权重与全batch归一边界损失，A100验证梯度隔离；不实现完整TWIN、实时双图或排名能力。
 
 ## 训练目标与决策优化
 
@@ -324,6 +328,9 @@
 
 ### 广告归因与弱监督
 - [Statistical Learning from Attribution Sets](../../recommendation-components/2602.06276-attribution-sets/README.md)：逐式实现归因集合风险估计、位置先验平方加权与固定分母ERM；有限样本常数函数校验发现v1印刷式不一致并保留反例，未宣称无偏性或推荐效果已验证。完整约7800次训练网格成本过高，不复现（审查DONE）。
+
+### 基线与增量去偏
+- [Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking](../../recommendation-components/2610.27423-baseline-incremental/README.md)：保留原始参与度预测，并为相对用户、商品或请求基线的增量项独立加权；实现logit/raw比较、sigmoid门、hinge及地板不消失的降权门。正文有全流量部署与四臂线上消融；本地仅L1评分机制，不复现私有排名系统或线上收益。
 
 ## 多阶段排序与混排
 

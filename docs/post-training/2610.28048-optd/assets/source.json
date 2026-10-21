@@ -1,0 +1,12 @@
+{
+  "paper": "2610.28048v1",
+  "source_url": "https://arxiv.org/pdf/2610.28048v1",
+  "source_sha256": "2334e7558966db0502d87b2c45185e0e5e6cf8d258f4cb5e4deadefdb6324b95",
+  "figure": "Figure 1",
+  "pdf_page_one_based": 1,
+  "pdf_crop_points": [58, 391, 553, 531],
+  "render_scale": 2.5,
+  "image": "paper-figure-01.png",
+  "image_sha256": "63e2dad24a852dcb083a60c7183394aa0d0e97ee17f731588bc116e94d23be73",
+  "visual_inspection": "2026-10-21; both OPD and transition panels retained without clipping; author rights retained"
+}

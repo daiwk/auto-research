@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| JEPA与世界模型 | [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](2610.28458-locale-jepa/README.md) | University of Pennsylvania，2026-10-20 | [原作者入口](https://github.com/alessioborgi/LocaLeJEPA)；已公开MIT代码；本地独立实现核对固定commit 771361c18d37e65df3dc188761ffb26751ce4e37，论文结果以arXiv v1表格为准，不混用README旧数值 | `locale-jepa`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [Kronecker Delta Rule for Long Context Linear Attention](2610.26834-kronlstm/README.md) | Johannes Kepler University Linz，2026-10-19 | 未发现官方代码 | `kronlstm`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training](2610.24938-t-muon/README.md) | University of California, Santa Barbara，2026-10-18 | 未发现官方代码 | `t-muon`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Muse Glimmer 30B: An On-Device Agentic Model](2610.24628-muse-glimmer-30b/README.md) | Meta Superintelligence Labs，2026-10-17 | [原作者入口](https://huggingface.co/meta-models/Muse-Glimmer-30B)；官方已发布Apache-2.0权重、配置、tokenizer与chat template；发布物不等同完整预训练/OPD数据和训练源码，本轮未核到完整训练代码 | 计划键 `muse-glimmer-30b`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
@@ -39,6 +40,7 @@
 | 推理与系统效率 | [When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill](2610.21500-remote-kv-tiers/README.md) | Multiverse Computing，2026-10-15 | [原作者入口](https://github.com/LMCache/LMCache)；相关实现以作者提交的LMCache上游PR公开；不将PR公开等同于全部已合入或完整集群复现实验可用 | 计划键 `remote-kv-tiers`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 预训练与数据 | [Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning](../reproductions/2610.20158-oob-regularization/README.md) | European Molecular Biology Laboratory (EMBL)，2026-10-14 | 未发现官方代码 | `oob-regularization`：仅低成本组件，完整实验不复现 |
 | JEPA与世界模型 | [EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos](2610.20904-egojepa/README.md) | Mohamed bin Zayed University of Artificial Intelligence，2026-10-14 | 未发现官方代码 | 计划键 `egojepa`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 多模态基础模型 | [ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis](2610.23732-esc/README.md) | FAIR at Meta / Mila - Québec AI Institute / Université de Montréal，2026-10-14 | 未发现官方代码 | 计划键 `esc`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 预训练与数据 | [Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon](../reproductions/2610.19844-smrc-pmrc/README.md) | Nanjing University / Alibaba Token Hub，2026-10-14 | 未发现官方代码 | `smrc-pmrc`：仅低成本组件，完整实验不复现 |
 | 多模态基础模型 | [One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models](2610.19375-jepa-prediction-planning/README.md) | 论文未列机构，2026-10-14 | 未发现官方代码 | `jepa-prediction-planning`：CPU 评测接口，不执行模型 |
 | 网络架构 | [Open-world AI: a Tale of Three Requirements](2610.20782-memory-mosaics-plus/README.md) | FAIR, Meta，2026-10-14 | [原作者入口](https://github.com/facebookresearch/MemoryMosaics)；官方仓库已发布 Memory Mosaics+ / two-stage 配置与代码；研究注明作者以个人身份完成 | `memory-mosaics-plus`：仅低成本组件，完整实验不复现 |

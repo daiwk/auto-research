@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 排序与决策优化 | [Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking](../../recommendation-components/2610.27423-baseline-incremental/README.md) | Meta，2026-10-20 | 未发现官方代码 | `baseline-incremental`：仅低成本组件，完整实验不复现 |
+| 长序列推荐 | [ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling](../../recommendation-components/2610.28569-echo-selector-loss/README.md) | Kuaishou Technology，2026-10-20 | 未发现官方代码 | `echo-selector-loss`：仅低成本组件，完整实验不复现 |
+| 生成式推荐 | [SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs](../../recommendation-components/2610.27898-spar-prefix-balance/README.md) | University of Electronic Science and Technology of China，2026-10-20 | 未发现官方代码 | `spar-prefix-balance`：仅低成本组件，完整实验不复现 |
 | 生成式推荐 | [Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search](../../recommendation-components/2610.26105-sid-topology/README.md) | Alibaba / Taobao & Tmall Group，2026-10-19 | 未发现官方代码 | `sid-topology`：仅低成本组件，完整实验不复现 |
 | 展示层生成与个性化 | [MAPS: A Multi-Agent Personalized Script-Driven Video Advertising System Enhanced by Reinforcement Learning](../../recommendation-components/2610.25748-maps-creative/README.md) | Beihang University，2026-10-19 | 未发现官方代码 | 计划键 `maps-creative`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 训练目标与决策优化 | [CASI: Credit Assignment via Set Intervention for Agentic Retrieval](../2610.20293-casi/README.md) | Xiaohongshu，2026-10-14 | 未发现官方代码 | `casi`：仅低成本组件，完整实验不复现 |

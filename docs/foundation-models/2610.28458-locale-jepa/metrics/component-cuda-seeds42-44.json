@@ -1,0 +1,132 @@
+{
+  "schema_version": 2,
+  "method": "locale-jepa",
+  "manifest_ref": "foundation-models:locale-jepa",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-locale-jepa-v1",
+    "revision": "sha256:0c12aaa41aa40043ea1c39c058e12d76702684c8f93777af04e8077f59f75287",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "final_loss": 0.6321746706962585,
+        "prediction_loss": 0.0023975607473403215,
+        "local_uniform_ball_regularizer": 6.300168514251709,
+        "projector_gradient_norm": 0.09157906472682953,
+        "collapsed_uniform_ball_penalty": 28.641002655029297,
+        "effective_clusters": 4.0,
+        "fallback": 0.0,
+        "steps": 8
+      },
+      "audit_sha256": "468049ded9aa9006aef590501b6097b287a0222279ceb3574598c53d0b2f5c88"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "final_loss": 0.6404990553855896,
+        "prediction_loss": 0.0015663827070966363,
+        "local_uniform_ball_regularizer": 6.390892505645752,
+        "projector_gradient_norm": 0.08453737944364548,
+        "collapsed_uniform_ball_penalty": 28.641002655029297,
+        "effective_clusters": 4.0,
+        "fallback": 0.0,
+        "steps": 8
+      },
+      "audit_sha256": "be39e1732c9f08cb7f26348abdd5b6aa9fcc7144eea8b97a8d00b07b7ee5b9b1"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "final_loss": 0.6416448354721069,
+        "prediction_loss": 0.0015687441918998957,
+        "local_uniform_ball_regularizer": 6.402329921722412,
+        "projector_gradient_norm": 0.08556756377220154,
+        "collapsed_uniform_ball_penalty": 28.641002655029297,
+        "effective_clusters": 4.0,
+        "fallback": 0.0,
+        "steps": 8
+      },
+      "audit_sha256": "80b61f844c6d6cb7ead52fd02b5b6484e6687291f142ca7f265be7509cd4f128"
+    }
+  ],
+  "metrics": {
+    "collapsed_uniform_ball_penalty": {
+      "mean": 28.641002655029297,
+      "std": 0.0,
+      "n": 3
+    },
+    "effective_clusters": {
+      "mean": 4.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "fallback": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "final_loss": {
+      "mean": 0.6381061871846517,
+      "std": 0.00516869121642266,
+      "n": 3
+    },
+    "local_uniform_ball_regularizer": {
+      "mean": 6.364463647206624,
+      "std": 0.055974116454798495,
+      "n": 3
+    },
+    "prediction_loss": {
+      "mean": 0.001844229215445618,
+      "std": 0.00047920061800286074,
+      "n": 3
+    },
+    "projector_gradient_norm": {
+      "mean": 0.08722800264755885,
+      "std": 0.003803173129237098,
+      "n": 3
+    },
+    "steps": {
+      "mean": 8,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "eb4cf6cab82d9e24a803debfa82868c54e49ce07",
+    "artifact_path": "docs/foundation-models/2610.28458-locale-jepa/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "4bfe74ac322f638c73855970233e4cd7829fc980ca2072653778d1dfb22cac78",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/locale_jepa.py": "a2c2adc296afe17e8e2883c0f04af44850d25e125a09f7173da6a321d38fadfd",
+      "scripts/run_oct21_locale_jepa.py": "7267582129b7ce4b34086207954d0ab5b9b07a1a17ef89e07b055bc45cd5a013"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:48ada84c350244f3206bc7968b0e41a2c91f3798875d003b9d2b9ac910fdd86a"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

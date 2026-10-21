@@ -1,0 +1,148 @@
+{
+  "schema_version": 2,
+  "method": "oo-harness",
+  "manifest_ref": "agent-research:oo-harness",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-oo-harness-v1",
+    "revision": "sha256:05111ba82d9bc1b64eb624339edcf31239a6e70be934b3e7a67f9489521a06ed",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "heldout_fixture_tasks": 8,
+        "observed_guarded_writes": 8,
+        "removed_guard_control_writes": 0,
+        "router_private_top_level_fields": 0,
+        "accepted_candidates": 1,
+        "equal_score_candidates_rejected": 1,
+        "base_reuse_environment_count": 1,
+        "base_reuse_actor_calls": 2,
+        "specialist_total_actor_calls": 48,
+        "actual_llm_calls": 0
+      },
+      "audit_sha256": "7aa842265538fa013b8d0f52688aa1d7e9a599e7c672f829ba1b132454b45fdb"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "heldout_fixture_tasks": 8,
+        "observed_guarded_writes": 8,
+        "removed_guard_control_writes": 0,
+        "router_private_top_level_fields": 0,
+        "accepted_candidates": 1,
+        "equal_score_candidates_rejected": 1,
+        "base_reuse_environment_count": 1,
+        "base_reuse_actor_calls": 2,
+        "specialist_total_actor_calls": 48,
+        "actual_llm_calls": 0
+      },
+      "audit_sha256": "9db7aa228fa7d43694e049514edf1066ca2eba4281421bcf2d4d21fe67f2ef52"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "heldout_fixture_tasks": 8,
+        "observed_guarded_writes": 8,
+        "removed_guard_control_writes": 0,
+        "router_private_top_level_fields": 0,
+        "accepted_candidates": 1,
+        "equal_score_candidates_rejected": 1,
+        "base_reuse_environment_count": 1,
+        "base_reuse_actor_calls": 2,
+        "specialist_total_actor_calls": 48,
+        "actual_llm_calls": 0
+      },
+      "audit_sha256": "b1be27d89bdcd83bff1eef3ea1af3fa445a1bbed60367ad70f45e07ebd4b9745"
+    }
+  ],
+  "metrics": {
+    "accepted_candidates": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "actual_llm_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "base_reuse_actor_calls": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "base_reuse_environment_count": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "equal_score_candidates_rejected": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "heldout_fixture_tasks": {
+      "mean": 8,
+      "std": 0.0,
+      "n": 3
+    },
+    "observed_guarded_writes": {
+      "mean": 8,
+      "std": 0.0,
+      "n": 3
+    },
+    "removed_guard_control_writes": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "router_private_top_level_fields": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "specialist_total_actor_calls": {
+      "mean": 48,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "d48061b4fe8350be131d8b9ecb4761c219873a09",
+    "artifact_path": "docs/agent-research/2610.28380-oo-harness/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "92f92aa97229a446f24529c6f14ec07123f058ec6e7f1920f7cc9b7b32f13332",
+    "executed_source_sha256": {
+      "scripts/run_oct21_oo_harness.py": "bd8c13d1cd6be448330d3c32d9d8b7c80f404e27323d6baf36b5eaec95502a9d",
+      "src/auto_research/agent_research/oo_harness.py": "9c96324230fbc04c32d8c20dc65f89492928f9f8adb3f04078e4ee39dd774933"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:be5f3e449c33d19490ac0a7fc22d87a9a83b31a61f22be3d420d8ba9fdd7f564"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

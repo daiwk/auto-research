@@ -1,0 +1,148 @@
+{
+  "schema_version": 2,
+  "method": "rpl",
+  "manifest_ref": "agent-research:rpl",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-rpl-v1",
+    "revision": "sha256:20716d6a49f8821026f20050025e7106a73c8a8bcfff8d6b8b55300a180ff067",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "baseline_fixture_support_covered": 0,
+        "selected_fixture_support_covered": 1,
+        "mutation_programs_executed": 1,
+        "selected_breadth": 5,
+        "wide_program_retrieved_candidates": 20,
+        "wide_program_printed_documents": 3,
+        "continuation_private_top_level_fields": 0,
+        "incorrect_answer_supervised": 0,
+        "verified_program_supervised": 1,
+        "actual_llm_calls": 0
+      },
+      "audit_sha256": "c93328f5256becc930ba56b11e6f2f29030c26517a225976905930490310090a"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "baseline_fixture_support_covered": 0,
+        "selected_fixture_support_covered": 1,
+        "mutation_programs_executed": 1,
+        "selected_breadth": 5,
+        "wide_program_retrieved_candidates": 20,
+        "wide_program_printed_documents": 3,
+        "continuation_private_top_level_fields": 0,
+        "incorrect_answer_supervised": 0,
+        "verified_program_supervised": 1,
+        "actual_llm_calls": 0
+      },
+      "audit_sha256": "6dfe251a4ed2e583a3026bafe49b2de23640caba5185566fa9804172df9858e3"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "baseline_fixture_support_covered": 0,
+        "selected_fixture_support_covered": 1,
+        "mutation_programs_executed": 1,
+        "selected_breadth": 5,
+        "wide_program_retrieved_candidates": 20,
+        "wide_program_printed_documents": 3,
+        "continuation_private_top_level_fields": 0,
+        "incorrect_answer_supervised": 0,
+        "verified_program_supervised": 1,
+        "actual_llm_calls": 0
+      },
+      "audit_sha256": "2cbdb528eaef83c6eec6d3b471fd15faa27bc8ca61fce189876289e30707488d"
+    }
+  ],
+  "metrics": {
+    "actual_llm_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "baseline_fixture_support_covered": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "continuation_private_top_level_fields": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "incorrect_answer_supervised": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "mutation_programs_executed": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "selected_breadth": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    },
+    "selected_fixture_support_covered": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "verified_program_supervised": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "wide_program_printed_documents": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "wide_program_retrieved_candidates": {
+      "mean": 20,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "d48061b4fe8350be131d8b9ecb4761c219873a09",
+    "artifact_path": "docs/agent-research/2610.24854-rpl/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "9725fca82b7165e2d29fa53876812e95e0b0de935b4b229f26fe09147c73e23d",
+    "executed_source_sha256": {
+      "scripts/run_oct21_rpl.py": "d8857dcca6e015d1482f21a9fccf26b9abd27e7699d011d2729233142c280bf4",
+      "src/auto_research/agent_research/retrieval_program.py": "8aefd5825f4dc50a04d0c0594ded9b83be66e1940abca033a696d7c6645fe43e"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:284fc9f64d2d1b6812ecdf64d3a653bf2ee61228ea887853c8bf1d0b69c77448"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

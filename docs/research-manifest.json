@@ -302,6 +302,44 @@
     },
     {
       "domain": "agent-research",
+      "key": "aptamer-lab-loop",
+      "title": "Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery",
+      "paper_url": "https://arxiv.org/abs/2610.24806v1",
+      "detail_path": "agent-research/2610.24806-aptamer-lab-loop/README.md",
+      "topic": [
+        "科学研究与实验闭环",
+        "物理实验反馈"
+      ],
+      "first_author": "Zachary Cutts",
+      "first_author_affiliation": "Google Research",
+      "published": "2026-10-17",
+      "published_at": "2026-10-17T18:21:50Z",
+      "code": null,
+      "code_status": "原论文列有第三方科学工具和补充实验资料，未找到完整作者Agent harness实现仓库；不能把依赖仓库当作者开源",
+      "priority": "P0",
+      "implementation_status": "deferred_high_cost",
+      "summary": "Google将Agent研究过程接入真实实验反馈，经过多轮设计—测量—修订；区别计算代理与物理验证。完整研究涉及约4400个构建体及每轮7–10天的实验平台，超出现有单卡/本地条件，成本过高不复现、审查DONE，不用合成打分冒充真实闭环。",
+      "adapter": null,
+      "review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "gpu_validation_passed": false,
+      "deferral_reason": "约4400个构建体、三轮各7–10天物理实验与测序，需要专业实验平台；现有单A100/A30或Mac不具备这些资源。成本过高，不复现（审查 DONE），不启动代理替代或自动重试。",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "requires_gpu_validation": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.24806v1",
+        "source_location": "Results R.1 and Figure 1",
+        "scale": "Three physical design-test cycles; approximately4400 constructs, each cycle7–10days; specialist lab and sequencing required",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac",
+        "cost_type": "published_configuration_not_local_measurement"
+      }
+    },
+    {
+      "domain": "agent-research",
       "key": "aria",
       "title": "ARIA: Runtime Inspection and Amendment for Multi-Agent Systems",
       "paper_url": "https://arxiv.org/abs/2610.20780",
@@ -639,6 +677,38 @@
       "code": null,
       "adapter": "branch-mixture",
       "priority": "P0"
+    },
+    {
+      "domain": "agent-research",
+      "key": "cache-engineering",
+      "title": "Cache Engineering for Agents",
+      "paper_url": "https://arxiv.org/abs/2610.28577",
+      "detail_path": "agent-research/2610.28577-cache-engineering/README.md",
+      "topic": [
+        "Agent运行时",
+        "KV缓存管理与推理效率"
+      ],
+      "first_author": "Tianyu Fu",
+      "first_author_affiliation": "Tsinghua University",
+      "published": "2026-10-20",
+      "published_at": "2026-10-20T17:32:24Z",
+      "reviewed_revision": "v1",
+      "code": "https://github.com/thu-nics/AKV",
+      "code_status": "作者正文链接的官方AKV实现已核验；本轮不安装或运行完整serving系统。",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "deferred_high_cost",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "gpu_validation_passed": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "deferral_reason": "原文serving使用8×NVIDIA A800-80GB（4张prefill、4张decode，TP4），包含GPT-OSS-120B/MiniMax-M2.7等模型及长程Agent/RSI评测。单A100/A30或Mac不承担完整矩阵；成本过高，不复现（审查 DONE），无自动重试。",
+      "summary": "不删改逻辑对话文本，而用drop直接移除活跃KV、repos重新旋转RoPE键位置；以操作历史而非仅token前缀识别缓存，避免错误复用。AKV协同管理版本、驱逐与恢复，本轮仅资料收录，不以张量fixture替代完整serving系统。"
     },
     {
       "domain": "agent-research",
@@ -2903,6 +2973,38 @@
     },
     {
       "domain": "agent-research",
+      "key": "oo-harness",
+      "title": "Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design",
+      "paper_url": "https://arxiv.org/abs/2610.28380",
+      "detail_path": "agent-research/2610.28380-oo-harness/README.md",
+      "topic": [
+        "自我进化",
+        "Harness搜索与继承"
+      ],
+      "first_author": "Gaotang Li",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign",
+      "authorship_note": "一作在Google Cloud AI Research实习期间完成；其余多位作者为Google Cloud AI Research，按一作论文署名机构聚合。",
+      "published": "2026-10-20",
+      "published_at": "2026-10-20T15:32:52Z",
+      "reviewed_revision": "v1",
+      "code": null,
+      "code_status": "核对v1正文、arXiv入口及标题检索，未找到作者发布的OO-Harness官方实现；论文引用的基准/对照仓库不等于作者代码。",
+      "adapter": null,
+      "priority": "P0",
+      "review_done": true,
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.oo_harness.HarnessDiscovery",
+      "local_command": "PYTHONPATH=src python scripts/run_oct21_oo_harness.py --device cpu --seeds 42,43,44 --output <new-result.json>",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "把专用harness写成可执行子类，通过继承复用父类hook；训练仅按目标发现任务簇严格提升接受，冻结类目录和routing lessons，路由只看公共任务与base轨迹。CPU实际验证继承、完成检查及隔离边界，未实现LLM代码进化或官方长程基准；完整多模型API实验成本过高，不复现（审查DONE）。"
+    },
+    {
+      "domain": "agent-research",
       "key": "openhands",
       "title": "OpenHands",
       "paper_url": "https://arxiv.org/abs/2407.16741",
@@ -3408,6 +3510,39 @@
       "published": "2023-05-29",
       "code": "https://github.com/billxbf/ReWOO",
       "adapter": "rewoo"
+    },
+    {
+      "domain": "agent-research",
+      "key": "rpl",
+      "title": "Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.24854",
+      "detail_path": "agent-research/2610.24854-rpl/README.md",
+      "topic": [
+        "检索与工具",
+        "可编程检索与结构变异"
+      ],
+      "first_author": "Kyuyoung Kim",
+      "first_author_affiliation": "KAIST AI / Meta Superintelligence Labs",
+      "authorship_note": "原文明确Work done at Meta；同时保留一作两项正式署名机构，不把合作作者机构替代一作机构。",
+      "published": "2026-10-17",
+      "published_at": "2026-10-17T20:03:09Z",
+      "reviewed_revision": "v1",
+      "code": null,
+      "code_status": "论文宣称发布训练/评测代码，但v1正文、arXiv页和一作官方主页本轮未找到可核验的RPL仓库链接；不得据此标为已验证开源。",
+      "adapter": null,
+      "priority": "P0",
+      "review_done": true,
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.retrieval_program.RetrievalProgram",
+      "local_command": "PYTHONPATH=src python scripts/run_oct21_rpl.py --device cpu --seeds 42,43,44 --output <new-result.json>",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "fidelity_note": "仅typed grammar子集、RRF/去重、受限SDK执行、query-preserving变异与核验/监督span合同；不执行任意Python，不实现神经检索器、Python跨轮局部状态、策略生成、GRPO或SFT。",
+      "summary": "把检索深度与返回上下文分离：组合稀疏/稠密检索、RRF、去重和重排，保持原query做结构变异，并只将核验通过的程序用于蒸馏；答案错误时屏蔽答案监督而保留程序监督。本地为无LLM的CPU接口诊断，原文8×H100训练加独立8×H100重排节点的完整实验成本过高，不复现（审查DONE）。"
     },
     {
       "domain": "agent-research",
@@ -6685,6 +6820,36 @@
     },
     {
       "domain": "foundation-models",
+      "key": "esc",
+      "title": "ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis",
+      "paper_url": "https://arxiv.org/abs/2610.23732v1",
+      "detail_path": "foundation-models/2610.23732-esc/README.md",
+      "topic": [
+        "多模态基础模型",
+        "几何一致新视角生成"
+      ],
+      "first_author": "Ge Ya (Olga) Luo",
+      "first_author_affiliation": "FAIR at Meta / Mila - Québec AI Institute / Université de Montréal",
+      "published": "2026-10-14",
+      "published_at": "2026-10-14T21:40:55Z",
+      "code": null,
+      "code_status": "arXiv v1正文未提供已核验的原作者实现仓库；论文提及配置已发布，但本轮未找到可确认的代码URL，不以基础模型仓库冒充作者实现",
+      "priority": "P0",
+      "adapter": null,
+      "implementation_status": "deferred_high_cost",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "deferral_reason": "完整模型约22B活跃参数，177K步、global batch128、约5.2e10 latent tokens及6.8e21 FLOPs（原文Appendix E.1）；还需DA3伪深度、Qwen-Image-Edit与多场景预处理和Best-of-N。超出单卡短时预算，成本过高，不复现（审查 DONE），不试跑、不加入自动训练队列。",
+      "summary": "Meta/Mila合作的10月14日历史补发现，非本轮新首发。联合RGB/逆深度生成，Plücker rays经Ray ControlNet条件化Qwen MM-DiT，以双向深度重投影PCC检查缺失/幻觉几何并做Best-of-N。仅资料收录；高成本完整实验明确不复现。"
+    },
+    {
+      "domain": "foundation-models",
       "key": "ev-jepa",
       "title": "EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference",
       "paper_url": "https://arxiv.org/abs/2610.14324",
@@ -7936,6 +8101,39 @@
           "memory:latent-ngram-gqa"
         ]
       }
+    },
+    {
+      "domain": "foundation-models",
+      "key": "locale-jepa",
+      "title": "LocaLeJEPA: Maximum Entropy Representations under Geometric Priors",
+      "paper_url": "https://arxiv.org/abs/2610.28458v1",
+      "detail_path": "foundation-models/2610.28458-locale-jepa/README.md",
+      "topic": [
+        "JEPA与世界模型",
+        "局部均匀球分布匹配"
+      ],
+      "first_author": "Kartik Tandon",
+      "first_author_affiliation": "University of Pennsylvania",
+      "published": "2026-10-20",
+      "published_at": "2026-10-20T16:15:06Z",
+      "code": "https://github.com/alessioborgi/LocaLeJEPA",
+      "code_status": "已公开MIT代码；本地独立实现核对固定commit 771361c18d37e65df3dc188761ffb26751ce4e37，论文结果以arXiv v1表格为准，不混用README旧数值",
+      "code_license": "MIT",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.locale_jepa.locale_jepa_loss",
+      "local_command": "PYTHONPATH=src python scripts/run_oct21_locale_jepa.py --device cpu --seeds 42,43,44 --steps 8 --output runs/locale-jepa-cpu.json",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/locale-jepa-a100-20261021.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "summary": "以跨view均值的detached cosine-kmeans形成局部簇，逐view重中心，再用随机投影Epps-Pulley统计匹配协方差为I的均匀球；保留簇样本数缩放、小簇过滤与全batch fallback。仅公式/梯度L1诊断；ImageNet多架构100epoch与8卡ViT-L完整实验高成本不复现（审查DONE）。"
     },
     {
       "domain": "foundation-models",
@@ -12401,6 +12599,38 @@
     },
     {
       "domain": "post-training",
+      "key": "ap-opd",
+      "review_done": true,
+      "title": "Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.28194v1",
+      "detail_path": "post-training/2610.28194-ap-opd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "蒸馏信号门控与训练稳定性"
+      ],
+      "first_author": "Guangyu Liu",
+      "first_author_affiliation": "Nanjing University",
+      "published": "2026-10-20",
+      "published_at": "2026-10-20T13:34:43Z",
+      "code": null,
+      "code_status": "截至本轮核查，原文HTML/PDF未找到原作者公开源码链接",
+      "code_license": "未找到原作者代码，许可不适用",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.oct21_distillation.adaptive_pullback_loss",
+      "local_command": "PYTHONPATH=src python scripts/run_oct21_post_components.py --methods ap-opd --device cuda --seeds 42,43,44 --output <fresh-result.json>",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/ap-opd-a100-20261021.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "根据相邻token块正log-ratio均值的上跳，用前块原始均值/后块原始均值统一缩放后块全部有符号OPD系数，保留符号和比例，不递归修改参考统计。已实现z-gate、top-alpha和token-mean损失及微型策略更新诊断；1.7B学生/8B教师、200步长响应与多套件完整实验成本过高，不复现（审查DONE）。"
+    },
+    {
+      "domain": "post-training",
       "key": "apsd",
       "review_done": true,
       "title": "Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization",
@@ -14742,6 +14972,38 @@
     },
     {
       "domain": "post-training",
+      "key": "optd",
+      "review_done": true,
+      "title": "On-Policy Transition Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.28048v1",
+      "detail_path": "post-training/2610.28048-optd/README.md",
+      "topic": [
+        "On-policy distillation",
+        "层间预测转移蒸馏"
+      ],
+      "first_author": "Runyang You",
+      "first_author_affiliation": "The Hong Kong Polytechnic University",
+      "published": "2026-10-20",
+      "published_at": "2026-10-20T11:37:31Z",
+      "code": "https://github.com/ModalityDance/optd",
+      "code_status": "原作者已发布源码；PDF首页链接已核对，仓库包含verl训练代码、配置与测试",
+      "code_license": "MIT，核对上游LICENSE；第三方组件另见THIRD_PARTY_NOTICES.md",
+      "adapter": null,
+      "local_operator": "auto_research.post_training.oct21_distillation.transition_distillation_loss",
+      "local_command": "PYTHONPATH=src python scripts/run_oct21_post_components.py --methods optd --device cuda --seeds 42,43,44 --output <fresh-result.json>",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/optd-a100-20261021.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "summary": "在最终层OPD之外，固定最终层学生top-k候选，按层间log概率增量差提供停止梯度的转移修正，并用目的层预测概率加权；梯度流过转移两端学生readout。实现论文附录实际surrogate与逐转移求和，不以hidden MSE或精确reverse transition KL替代。1.5B/4B/7B多教师、长rollout和代码沙箱完整实验成本过高，不复现（审查DONE）。"
+    },
+    {
+      "domain": "post-training",
       "key": "orl-diffusion",
       "title": "On-Policy Residual Learning for Diffusion Language Models",
       "paper_url": "https://arxiv.org/abs/2610.20687",
@@ -16987,6 +17249,36 @@
     },
     {
       "domain": "post-training",
+      "key": "visually-attributable-opd",
+      "title": "Reinforcement Learning with Visually Attributable On-Policy Self-Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.26856v1",
+      "detail_path": "post-training/2610.26856-vag/README.md",
+      "topic": [
+        "On-policy distillation",
+        "多模态RLVR与视觉归因"
+      ],
+      "first_author": "Shiao Xie",
+      "first_author_affiliation": "Baidu Inc.",
+      "published": "2026-10-19",
+      "published_at": "2026-10-19T17:59:56Z",
+      "code": null,
+      "code_status": "截至核查未找到原作者源码；已发布VAG-Qwen3.5-4B和9B checkpoint，checkpoint不等于训练源码",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "deferred_high_cost",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "deferral_reason": "原文§4.1：Qwen3.5-4B/9B，全参数训练一epoch，batch48，每题8条rollout，最长1024token，8×NVIDIA H800。另需证据裁剪、EMA双视图teacher和六套件评测；单A100/A30或Mac不承担该矩阵，成本过高，不复现（审查 DONE），不下载或试跑探成本。",
+      "summary": "以视觉保留/退化两教师视图的log概率差，验证privileged teacher修正方向；只有视觉对比与修正同号时才用有界修正调制verifier advantage，保留GRPO锚点。本轮仅资料收录，8×H800多模态全参完整实验成本过高，不复现（审查DONE）；不登记假接口，不接evolve。"
+    },
+    {
+      "domain": "post-training",
       "key": "waypoint-opd",
       "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
       "paper_url": "https://arxiv.org/abs/2610.21601v1",
@@ -18444,6 +18736,51 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "recommendation",
+      "key": "baseline-incremental",
+      "title": "Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking",
+      "paper_url": "https://arxiv.org/abs/2610.27423v1",
+      "detail_path": "recommendation-components/2610.27423-baseline-incremental/README.md",
+      "topic": [
+        "排序与决策优化",
+        "基线与增量去偏"
+      ],
+      "browse_company": "Meta",
+      "browse_topic": [
+        "训练目标与决策优化",
+        "基线与增量去偏"
+      ],
+      "first_author": "Hsin-Chiang Chen",
+      "first_author_affiliation": "Meta",
+      "published": "2026-10-20",
+      "published_at": "2026-10-20T00:20:04Z",
+      "code": null,
+      "code_status": "原论文及arXiv未发现作者发布的实现仓库；本地独立实现评分算子",
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "adapter": null,
+      "local_operator": "auto_research.reproductions.baseline_incremental.incremental_term",
+      "local_command": "PYTHONPATH=src python scripts/run_oct21_ranking_components.py --component baseline-incremental --device cpu --output <fresh.json>",
+      "evaluation_tier": "l1_mechanism",
+      "requires_gpu_validation": false,
+      "online_ab": [
+        {
+          "product": "Instagram Feed",
+          "metric": "feed time spent (p10s request term, both vs none)",
+          "lift_percent": 1.65,
+          "traffic": "3% per arm; common seven-day measurement window in 12-17 day experiments",
+          "source_url": "https://arxiv.org/pdf/2610.27423v1",
+          "source_location": "Section 6, Table 5"
+        }
+      ],
+      "summary": "保留原始参与度预测，并为相对用户、商品或请求基线的增量项独立加权；实现logit/raw比较、sigmoid门、hinge及地板不消失的降权门。正文有全流量部署与四臂线上消融；本地仅L1评分机制，不复现私有排名系统或线上收益。",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost"
     },
     {
       "domain": "recommendation",
@@ -22146,6 +22483,52 @@
           "context:questionnaire-alignment"
         ]
       }
+    },
+    {
+      "domain": "recommendation",
+      "key": "echo-selector-loss",
+      "title": "ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling",
+      "paper_url": "https://arxiv.org/abs/2610.28569v1",
+      "detail_path": "recommendation-components/2610.28569-echo-selector-loss/README.md",
+      "topic": [
+        "长序列推荐",
+        "蒸馏选择与边界监督"
+      ],
+      "browse_company": "Kuaishou",
+      "browse_topic": [
+        "生成、排序与冷启动",
+        "长序列压缩与检索"
+      ],
+      "first_author": "Wenhao Li",
+      "first_author_affiliation": "Kuaishou Technology",
+      "published": "2026-10-20",
+      "published_at": "2026-10-20T17:28:16Z",
+      "code": null,
+      "code_status": "原论文及arXiv未发现作者代码仓库；私有大规模日志和实时存储未公开",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "adapter": null,
+      "local_operator": "auto_research.reproductions.echo_distillation.selector_losses",
+      "local_command": "PYTHONPATH=src python scripts/run_oct21_ranking_components.py --component echo-selector-loss --device cuda --output <fresh.json>",
+      "evaluation_tier": "l1_mechanism",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/echo-selector-loss-a100-20261021.json",
+      "online_ab": [
+        {
+          "product": "Kuaishou short-video recommendation",
+          "metric": "Total App Usage Time",
+          "lift_percent": 0.613,
+          "traffic": "5% treatment traffic, seven days",
+          "source_url": "https://arxiv.org/pdf/2610.28569v1",
+          "source_location": "Section 4.6"
+        }
+      ],
+      "summary": "用户侧DS保存原始历史记录，再由目标感知TFR读取；候选感知教师用逐目标软分布和选择边界成对监督训练DS。本地实现温度缩放CE、detached挖掘/权重与全batch归一边界损失，A100验证梯度隔离；不实现完整TWIN、实时双图或排名能力。",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost"
     },
     {
       "domain": "recommendation",
@@ -36681,6 +37064,51 @@
         "selection_exception": null,
         "evolve_operators": []
       }
+    },
+    {
+      "domain": "recommendation",
+      "key": "spar-prefix-balance",
+      "title": "SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs",
+      "paper_url": "https://arxiv.org/abs/2610.27898v1",
+      "detail_path": "recommendation-components/2610.27898-spar-prefix-balance/README.md",
+      "topic": [
+        "生成式推荐",
+        "前缀负载平衡"
+      ],
+      "browse_company": "University of Electronic Science and Technology of China",
+      "browse_topic": [
+        "生成、排序与冷启动",
+        "语义标识与增量更新"
+      ],
+      "first_author": "Chunrui Zhang",
+      "first_author_affiliation": "University of Electronic Science and Technology of China",
+      "published": "2026-10-20",
+      "published_at": "2026-10-20T09:17:14Z",
+      "code": null,
+      "code_status": "原论文及arXiv未找到作者代码仓库；Youku生产数据未公开",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "adapter": null,
+      "local_operator": "auto_research.reproductions.spar_prefix_balance.rebalance_prefixes",
+      "local_command": "PYTHONPATH=src python scripts/run_oct21_ranking_components.py --component spar-prefix-balance --device cpu --output <fresh.json>",
+      "evaluation_tier": "l1_mechanism",
+      "requires_gpu_validation": false,
+      "online_ab": [
+        {
+          "product": "Youku homepage recommendation",
+          "metric": "watch time per user",
+          "lift_percent": 3.95,
+          "traffic": "10% production traffic, seven days",
+          "source_url": "https://arxiv.org/pdf/2610.27898v1",
+          "source_location": "Section 3.6"
+        }
+      ],
+      "summary": "PATH按已生成SID前缀读取粗到细用户记忆，RQ-PIB在冻结残差码本后按历史交互负载修复兄弟分支；本地只实现含不可分商品权重上界的最小可行失真移动，不声称全局最优、不训练PATH/Qwen/DPO。",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost"
     },
     {
       "domain": "recommendation",

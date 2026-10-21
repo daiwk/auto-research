@@ -10,8 +10,12 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Agent运行时 | [Cache Engineering for Agents](2610.28577-cache-engineering/README.md) | Tsinghua University，2026-10-20 | [原作者入口](https://github.com/thu-nics/AKV)；作者正文链接的官方AKV实现已核验；本轮不安装或运行完整serving系统。 | 计划键 `cache-engineering`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 自我进化 | [Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design](2610.28380-oo-harness/README.md) | University of Illinois Urbana-Champaign，2026-10-20 | 未发现官方代码 | `oo-harness`：仅低成本组件，完整实验不复现 |
 | 记忆与长期交互 | [Remembering Has a Price: Learning Memory Worth under Resource Constraints](2610.26453-tokenworth/README.md) | Nanjing University，2026-10-19 | [原作者入口](https://github.com/AIGNLAI/TokenWorth)；官方仓库已有tokenworth_core及三类环境实现；未据此声称本地执行了官方Agent评测 | `tokenworth`：仅低成本组件，完整实验不复现 |
 | 记忆与长期交互 | [MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents](2610.24955-memprice/README.md) | Hong Kong University of Science and Technology，2026-10-18 | [原作者入口](https://anonymous.4open.science/r/ICLR2027-MemPrice)；论文提供匿名开源地址，但2026-10-20无法访问核验内容；不声称已核实完整官方实现 | `memprice`：仅低成本组件，完整实验不复现 |
+| 科学研究与实验闭环 | [Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery](2610.24806-aptamer-lab-loop/README.md) | Google Research，2026-10-17 | 未发现官方代码 | 计划键 `aptamer-lab-loop`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 检索与工具 | [Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning](2610.24854-rpl/README.md) | KAIST AI / Meta Superintelligence Labs，2026-10-17 | 未发现官方代码 | `rpl`：仅低成本组件，完整实验不复现 |
 | 规划、推理与工具使用 | [SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning](2610.23128-scope-replay/README.md) | Peking University，2026-10-16 | [原作者入口](https://github.com/VDIGPKU/SCOPE)；官方仓库已有scope源码、脚本与Apache-2.0许可；单任务示例不等于全部论文实验可一键复现 | `scope-replay`：仅低成本组件，完整实验不复现 |
 | 多Agent协作 | [World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds](2610.24061-world-of-swecraft/README.md) | Massachusetts Institute of Technology，2026-10-16 | 未发现官方代码 | 计划键 `world-of-swecraft`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 多 Agent 协作 | [A team of Gemini 4 Argon agents beats Minecraft](2610.22319-gemini-minecraft/README.md) | Google DeepMind，2026-10-15 | 未发现官方代码 | 计划键 `gemini-minecraft`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |

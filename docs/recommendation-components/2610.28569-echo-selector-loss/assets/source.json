@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/pdf/2610.28569v1",
+  "pdf_sha256": "e1b7178da0e058aa03efbed2b06162460186b8482c3af6695e5271d1fbdf36a3",
+  "figure": "Figure 1",
+  "pdf_page": 3,
+  "clip_points": [
+    48,
+    79,
+    565,
+    282
+  ],
+  "copyright": "original authors"
+}
