@@ -91,3 +91,16 @@ def test_echo_no_missing_record_is_connected_zero_auxiliary():
     assert r["active_pairs"] == 0
     r["auxiliary"].backward()
     assert torch.equal(s.grad, torch.zeros_like(s))
+
+
+@pytest.mark.parametrize("length,keep", [(2, 2), (70000, 5)])
+def test_echo_half_precision_long_history_and_empty_pairs_stay_finite(length, keep):
+    torch = pytest.importorskip("torch")
+    from auto_research.reproductions.echo_distillation import selector_losses
+    s = torch.ones(1, length, dtype=torch.float16, requires_grad=True)
+    r = selector_losses(s, s.detach(), torch.ones_like(s, dtype=torch.bool), keep=keep, pairs=3)
+    assert r["kd"].dtype == torch.float32
+    assert r["kd"].item() == pytest.approx(math.log(length), rel=1e-5)
+    assert r["auxiliary"].item() == 0
+    (r["kd"]+r["auxiliary"]).backward()
+    assert torch.isfinite(s.grad).all()
