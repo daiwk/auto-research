@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "seed": 42,
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "created_at_utc": "2026-10-21T05:24:52.933274+00:00",
+  "code_commit": "41a21ada1da264795a7727d5766cbf23578d5db2",
+  "source_sha256": {
+    "scripts/run_google16_statistics.py": "3f084806dfd0a6286198c39551ca0328b3c63ae528732d18aca68979b13991b7",
+    "src/auto_research/reproductions/attribution_sets_components.py": "cb82dd0f91eb01d3643cd0eb7847d88fa2f4fc142ecdfcb3ee6e73e4c18f236d",
+    "src/auto_research/reproductions/spatial_ads_components.py": "113f8e6a60be6d53596b05e1467278ad0a852079f7cf16838aa57827c109ded9",
+    "src/auto_research/foundation_models/google16_mild.py": "b8ddad0e2b3179e69bfd910c5e4167afb796504e82bdbe5aada03848bd0620a8",
+    "src/auto_research/foundation_models/google16_proeval.py": "3ebe5ff93efc6be84b9a9df7b263ba07830d0343fa84d82aad8955709d8172ad"
+  },
+  "dataset": {
+    "id": "repository-authored-equation-fixtures",
+    "public_benchmark": false
+  },
+  "components": {
+    "attribution-sets": {
+      "printed_formula_expectation_constant_h": -0.13733504929560125,
+      "known_population_risk_constant_h": 0.22,
+      "finite_n_absolute_discrepancy": 0.3573350492956012,
+      "unbiasedness_confirmed": false
+    },
+    "spatial-ads": {
+      "lp_upper_bound": 3.0,
+      "rounding_trials": 256,
+      "infeasible_selections": 0,
+      "mean_selected_disk_weight": 0.38671875,
+      "ad_matching_or_payments_validated": false
+    },
+    "proeval": {
+      "initial_bq_variance": 0.007083333333333334,
+      "final_bq_variance": 4.6054420591626756e-05,
+      "queried_examples": 2,
+      "unique_queries": 2,
+      "prior_models": 4,
+      "real_model_evaluation": false
+    },
+    "mild": {
+      "training_initial_surrogate": 0.6931471805599453,
+      "training_final_surrogate": 0.15084970194136893,
+      "inference_examples": 4,
+      "real_experts_evaluated": false,
+      "inference_reads_labels_or_costs": false
+    }
+  },
+  "full_experiments_reproduced": false
+}

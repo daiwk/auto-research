@@ -1,0 +1,213 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:simula",
+  "adapter_key": "simula",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "formal_comparison": false,
+  "seed": 42,
+  "device": "cpu",
+  "dataset": {
+    "id": "self-authored-protocol-fixtures",
+    "public_benchmark": false,
+    "revision": "google16-evaluation-fixtures-v1"
+  },
+  "metrics": {
+    "fixture_accepted_samples": 3,
+    "callback_invocations": 28,
+    "complexity_pairs": 18
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol only, not paper capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2603.29791-simula/metrics/protocol-cpu-seed42.json",
+    "code_commit": "6873b033ffa97bee066d08436b16fac53bb42ccc",
+    "dataset_fingerprint": "bef370cfe12f2cebda1bc612b7b20cd679a4227b8d2e48e7cd7f3b050f2ba7fb",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-simula-final-seed42.json",
+    "raw_result_sha256": "601f9a4af323f178377c2fec81c5d8530ecba70730194308bab1325cfadd4803",
+    "source_binding": "curator_verified_frozen_files"
+  },
+  "fixture_demo": true,
+  "model_calls": 0,
+  "report": {
+    "status": "complete",
+    "samples": [
+      {
+        "strategy": "single-factor",
+        "mix": [
+          [
+            "number-range",
+            "positive"
+          ]
+        ],
+        "meta_prompt": "fixture-1-(('number-range', 'positive'),) add a boundary",
+        "complexified": true,
+        "sample": "authored-callback-output-0",
+        "accepted": true,
+        "duplicate": false,
+        "requirements_explanations": [
+          "authored fixture vote"
+        ],
+        "double_critic": [
+          {
+            "accepted": true,
+            "explanation": "authored fixture correctness vote"
+          },
+          {
+            "accepted": false,
+            "explanation": "authored independent incorrectness vote"
+          }
+        ]
+      },
+      {
+        "strategy": "single-factor",
+        "mix": [
+          [
+            "number-range",
+            "positive"
+          ]
+        ],
+        "meta_prompt": "fixture-0-(('number-range', 'positive'),)",
+        "complexified": false,
+        "sample": "authored-callback-output-1",
+        "accepted": true,
+        "duplicate": false,
+        "requirements_explanations": [
+          "authored fixture vote"
+        ],
+        "double_critic": [
+          {
+            "accepted": true,
+            "explanation": "authored fixture correctness vote"
+          },
+          {
+            "accepted": false,
+            "explanation": "authored independent incorrectness vote"
+          }
+        ]
+      },
+      {
+        "strategy": "single-factor",
+        "mix": [
+          [
+            "number-range",
+            "positive"
+          ]
+        ],
+        "meta_prompt": "fixture-0-(('number-range', 'positive'),) add a boundary",
+        "complexified": true,
+        "sample": "authored-callback-output-2",
+        "accepted": true,
+        "duplicate": false,
+        "requirements_explanations": [
+          "authored fixture vote"
+        ],
+        "double_critic": [
+          {
+            "accepted": true,
+            "explanation": "authored fixture correctness vote"
+          },
+          {
+            "accepted": false,
+            "explanation": "authored independent incorrectness vote"
+          }
+        ]
+      }
+    ],
+    "attempts": [
+      {
+        "strategy": "single-factor",
+        "mix": [
+          [
+            "number-range",
+            "positive"
+          ]
+        ],
+        "meta_prompt": "fixture-1-(('number-range', 'positive'),) add a boundary",
+        "complexified": true,
+        "sample": "authored-callback-output-0",
+        "accepted": true,
+        "duplicate": false,
+        "requirements_explanations": [
+          "authored fixture vote"
+        ],
+        "double_critic": [
+          {
+            "accepted": true,
+            "explanation": "authored fixture correctness vote"
+          },
+          {
+            "accepted": false,
+            "explanation": "authored independent incorrectness vote"
+          }
+        ]
+      },
+      {
+        "strategy": "single-factor",
+        "mix": [
+          [
+            "number-range",
+            "positive"
+          ]
+        ],
+        "meta_prompt": "fixture-0-(('number-range', 'positive'),)",
+        "complexified": false,
+        "sample": "authored-callback-output-1",
+        "accepted": true,
+        "duplicate": false,
+        "requirements_explanations": [
+          "authored fixture vote"
+        ],
+        "double_critic": [
+          {
+            "accepted": true,
+            "explanation": "authored fixture correctness vote"
+          },
+          {
+            "accepted": false,
+            "explanation": "authored independent incorrectness vote"
+          }
+        ]
+      },
+      {
+        "strategy": "single-factor",
+        "mix": [
+          [
+            "number-range",
+            "positive"
+          ]
+        ],
+        "meta_prompt": "fixture-0-(('number-range', 'positive'),) add a boundary",
+        "complexified": true,
+        "sample": "authored-callback-output-2",
+        "accepted": true,
+        "duplicate": false,
+        "requirements_explanations": [
+          "authored fixture vote"
+        ],
+        "double_critic": [
+          {
+            "accepted": true,
+            "explanation": "authored fixture correctness vote"
+          },
+          {
+            "accepted": false,
+            "explanation": "authored independent incorrectness vote"
+          }
+        ]
+      }
+    ],
+    "requested": 3,
+    "calls": 22
+  },
+  "status": "completed"
+}

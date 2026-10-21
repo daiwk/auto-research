@@ -3,7 +3,7 @@
   "key": "attribution-sets",
   "title": "Statistical Learning from Attribution Sets",
   "paper_url": "https://arxiv.org/abs/2602.06276",
-  "detail_path": "reproductions/2602.06276-attribution-sets/README.md",
+  "detail_path": "recommendation-components/2602.06276-attribution-sets/README.md",
   "topic": ["广告归因与弱监督", "风险估计"],
   "browse_topic": ["训练目标与决策优化", "广告归因与弱监督"],
   "first_author": "Lorne Applebaum",

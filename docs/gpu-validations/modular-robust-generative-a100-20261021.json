@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "adapter_key": "modular-robust-generative",
+  "validated_at": "2026-10-21",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_google16_neural.py",
+    "--device",
+    "cpu",
+    "--steps",
+    "16",
+    "--seed",
+    "42",
+    "--output",
+    "runs/google16-neural.json"
+  ],
+  "dataset": {
+    "id": "repository-authored-mathematical-or-protocol-fixtures",
+    "revision": "91bb61f0ba6ee3673a70207322651e7dac1f51e8",
+    "public_benchmark": false
+  },
+  "checkpoint": {
+    "id": "none-mathematical-fixtures",
+    "revision": "91bb61f0ba6ee3673a70207322651e7dac1f51e8"
+  },
+  "seed": 42,
+  "result": "passed",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_tier": "l1_mechanism",
+  "metrics": {
+    "steps": 16,
+    "initial_partition": 1.0,
+    "final_partition": 1.1097334623336792,
+    "global_partition_residual": 0.1097334623336792,
+    "adversary_sum_error": 0.0,
+    "dual": 0.08323532342910767,
+    "gate_change_l1": 0.1097334623336792,
+    "sir_samples": 32,
+    "sir_distinct_outcomes": 4,
+    "cached_router_nll": 1.130920171737671,
+    "router_gradient_norm": 0.150678813457489
+  },
+  "success_criterion": "bounded runtime/provenance/formulas, not paper capability",
+  "executed_source_sha256": {
+    "scripts/run_google16_neural.py": "5f1cff8734be158f405716d475a6258d492c72cc89d2dc20a0d67bd69c1e1d66",
+    "src/auto_research/foundation_models/google16_me_pois.py": "621b42e63c4bd773615be1f3d326ae2a87f9136ab975dbe74dee656840d09282",
+    "src/auto_research/foundation_models/google16_robust_gate.py": "73954246dde9a506e5058a71ee0fc71a537bc3878e63b68c02ad83c2439bad30",
+    "src/auto_research/foundation_models/google16_data_quality_lsa.py": "1ee63a1fca3eb927730660c05514ff756ca627d67c7267cafead1bdea991d497",
+    "src/auto_research/foundation_models/google16_ams.py": "a55a080f8332f1f9cd598676864fad466f7b8034c95a086fe168f216b1e24475"
+  },
+  "provenance": {
+    "commit": "91bb61f0ba6ee3673a70207322651e7dac1f51e8",
+    "artifact_path": "docs/gpu-validations/modular-robust-generative-a100-20261021.json",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-neural-final-a100-seed42.json",
+    "raw_result_sha256": "d3248b8369bb6d84827e90384f189be3595a129a01d2070a9cd16ec30e4f274e"
+  }
+}

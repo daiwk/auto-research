@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "method": "convapparel",
+  "manifest_ref": "agent-research:convapparel",
+  "protocol_id": "google16-convapparel-cpu-v1",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "seeds": [
+    42
+  ],
+  "device": "cpu",
+  "dataset": {
+    "id": "self-authored-protocol-fixtures",
+    "public_benchmark": false,
+    "revision": "google16-evaluation-fixtures-v1"
+  },
+  "fixture_demo": true,
+  "status": "completed",
+  "metrics": {
+    "conversations": 8,
+    "simulated_hls": 0.14582349109712062,
+    "human_hls": 0.8541765089028793,
+    "discriminator_accuracy": 1,
+    "brier_score": 0.021264490555752025
+  },
+  "report": {
+    "training_policy": "good",
+    "target_policy": "bad",
+    "simulator_training_provenance": "declared_manifest_not_independently_certified",
+    "plsa": {
+      "satisfaction": {
+        "human_mean": 0.6,
+        "simulated_mean": 0.8,
+        "ks": 1.0,
+        "ks_pvalue": 0.02857142857142857,
+        "mann_whitney_u": 0.0,
+        "mwu_pvalue": 0.02857142857142857,
+        "pvalue_method": "exact_permutation",
+        "permutations": 70
+      },
+      "turns_per_session": {
+        "human_mean": 1.0,
+        "simulated_mean": 1.0,
+        "ks": 0.0,
+        "ks_pvalue": 1.0,
+        "mann_whitney_u": 8.0,
+        "mwu_pvalue": 1.0,
+        "pvalue_method": "exact_permutation",
+        "permutations": 70
+      },
+      "words_per_user_turn": {
+        "human_mean": 4.0,
+        "simulated_mean": 4.0,
+        "ks": 0.0,
+        "ks_pvalue": 1.0,
+        "mann_whitney_u": 8.0,
+        "mwu_pvalue": 1.0,
+        "pvalue_method": "exact_permutation",
+        "permutations": 70
+      }
+    },
+    "hls": {
+      "conversations": 8,
+      "simulated_hls": 0.14582349109712062,
+      "human_hls": 0.8541765089028793,
+      "discriminator_accuracy": 1,
+      "brier_score": 0.021264490555752025
+    },
+    "diagnostic_only": true,
+    "discriminator_backend": "cpu_bag_of_words_logistic_not_paper_gemini"
+  },
+  "model_calls": 0,
+  "trained_model": "CPU logistic diagnostic, not the paper's Gemini discriminator"
+}

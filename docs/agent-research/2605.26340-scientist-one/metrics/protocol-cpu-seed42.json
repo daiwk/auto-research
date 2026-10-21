@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:scientist-one",
+  "adapter_key": "scientist-one",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "formal_comparison": false,
+  "seed": 42,
+  "device": "cpu",
+  "dataset": {
+    "id": "self-authored-protocol-fixtures",
+    "public_benchmark": false,
+    "revision": "google16-evaluation-fixtures-v1"
+  },
+  "metrics": {
+    "fixture_numerical_cpr": 1.0,
+    "canonical_evaluator_reruns": 5
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol only, not paper capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2605.26340-scientist-one/metrics/protocol-cpu-seed42.json",
+    "code_commit": "6873b033ffa97bee066d08436b16fac53bb42ccc",
+    "dataset_fingerprint": "bef370cfe12f2cebda1bc612b7b20cd679a4227b8d2e48e7cd7f3b050f2ba7fb",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-scientist-one-final-seed42.json",
+    "raw_result_sha256": "3cca66ce9733bfb9c0f25515ac3d0a8a8baa355334591498cc4643292207fad0",
+    "source_binding": "curator_verified_frozen_files"
+  },
+  "fixture_demo": true,
+  "model_calls": 0,
+  "report": {
+    "provenance": {
+      "quantitative_claims": 1,
+      "matched_claims": 1,
+      "cpr": 1.0,
+      "claims": {
+        "numeric": true
+      },
+      "semantic_support_verified": false
+    },
+    "score_audit": {
+      "status": "match",
+      "reruns": 5,
+      "canonical_mean": 0.7,
+      "canonical_population_std": 0.0,
+      "absolute_tolerance": 0.006999999999999999,
+      "relative_tolerance": 0.01,
+      "absolute_difference": 0.0,
+      "solution_sha256": "e5934ab24573fd9d6d87091db18b76304a21bd18d31166984ed8e02632af78d0",
+      "evaluator_sha256": "ab535c8264234407ab1a786599baf9f9eb75deb332d0711b28eec2332bd7293c"
+    },
+    "i2": {
+      "status": "unverified",
+      "reason": "no_external_judgments",
+      "votes": 0
+    },
+    "i3": {
+      "status": "unverified",
+      "reason": "resolver_or_disambiguator_unavailable"
+    },
+    "i4": {
+      "status": "unverified",
+      "reason": "no_external_judgments",
+      "votes": 0
+    }
+  },
+  "status": "completed"
+}

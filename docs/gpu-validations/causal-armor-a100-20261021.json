@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "adapter_key": "causal-armor",
+  "validated_at": "2026-10-21",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_google16_agent.py",
+    "--checkpoint",
+    "<existing-local-checkpoint>",
+    "--model-id",
+    "<public-model-id>",
+    "--revision",
+    "<40-char-public-revision>",
+    "--device",
+    "cuda",
+    "--seed",
+    "42",
+    "--output",
+    "runs/google16-agent/causal-armor.json"
+  ],
+  "dataset": {
+    "id": "repository-public-causalarmor-micro-context",
+    "revision": "9c872bc7da81d4d193b4137bb30adbbd85af102e",
+    "examples": 1,
+    "benchmark": false
+  },
+  "checkpoint": {
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+  },
+  "seed": 42,
+  "result": "passed",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_tier": "l1_mechanism",
+  "metrics": {
+    "forward_batches": 1,
+    "scoring_contexts": 3,
+    "action_tokens": 8,
+    "user_influence": -0.006182670593261719,
+    "tool_span_influence": 0.6775522232055664,
+    "flagged_spans": 1,
+    "security_accuracy_measured": false
+  },
+  "success_criterion": "bounded runtime/provenance/formulas, not paper capability",
+  "executed_source_sha256": {
+    "src/auto_research/agent_research/google16_causal_armor.py": "d80a25aed106b1a5f85485c18ede1662cdbadb6e40aa5b47cee394d6ba2ed62a",
+    "scripts/run_google16_agent.py": "0502ccfb2ee70961992905fed1b5f2414390320c842ed5259bda884278802d34"
+  },
+  "provenance": {
+    "commit": "9c872bc7da81d4d193b4137bb30adbbd85af102e",
+    "artifact_path": "docs/gpu-validations/causal-armor-a100-20261021.json",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-causal-raw-a100-seed42.json",
+    "raw_result_sha256": "d8c54c5da4455a59c8f0e1e08702f222048ed80edb815b3ed3540a3029fdc7c7"
+  }
+}

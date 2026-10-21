@@ -22,7 +22,7 @@
   "promotion_eligible": false,
   "evolve_integrated": false,
   "requires_gpu_validation": true,
-  "gpu_validation_artifact": "docs/gpu-validations/google16-agent-a100-20261021.json",
+  "gpu_validation_artifact": "docs/gpu-validations/causal-armor-a100-20261021.json",
   "review_done": true,
   "full_experiment_status": "not_reproduced_high_cost",
   "summary": "真实计算用户/不可信tool段的批量LOO动作log-likelihood，按动作token长度归一化并定位支配跨度。保留选择性sanitizer和首个命中后assistant遮蔽、重新提案接口；缺模型回调时扣留动作，诊断实跑不声称安全能力。",

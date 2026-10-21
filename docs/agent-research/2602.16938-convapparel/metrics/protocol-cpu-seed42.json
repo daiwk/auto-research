@@ -1,0 +1,90 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:convapparel",
+  "adapter_key": "convapparel",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "formal_comparison": false,
+  "seed": 42,
+  "device": "cpu",
+  "dataset": {
+    "id": "self-authored-protocol-fixtures",
+    "public_benchmark": false,
+    "revision": "google16-evaluation-fixtures-v1"
+  },
+  "metrics": {
+    "conversations": 8,
+    "simulated_hls": 0.14582349109712062,
+    "human_hls": 0.8541765089028793,
+    "discriminator_accuracy": 1,
+    "brier_score": 0.021264490555752025
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol only, not paper capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2602.16938-convapparel/metrics/protocol-cpu-seed42.json",
+    "code_commit": "6873b033ffa97bee066d08436b16fac53bb42ccc",
+    "dataset_fingerprint": "bef370cfe12f2cebda1bc612b7b20cd679a4227b8d2e48e7cd7f3b050f2ba7fb",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-convapparel-final-seed42.json",
+    "raw_result_sha256": "050f1cd36e29b33ea2eaa024bfb55047898ac353ef0595d14e37f400b2a064dc",
+    "source_binding": "curator_verified_frozen_files"
+  },
+  "fixture_demo": true,
+  "model_calls": 0,
+  "report": {
+    "training_policy": "good",
+    "target_policy": "bad",
+    "simulator_training_provenance": "declared_manifest_not_independently_certified",
+    "plsa": {
+      "satisfaction": {
+        "human_mean": 0.6,
+        "simulated_mean": 0.8,
+        "ks": 1.0,
+        "ks_pvalue": 0.02857142857142857,
+        "mann_whitney_u": 0.0,
+        "mwu_pvalue": 0.02857142857142857,
+        "pvalue_method": "exact_permutation",
+        "permutations": 70
+      },
+      "turns_per_session": {
+        "human_mean": 1.0,
+        "simulated_mean": 1.0,
+        "ks": 0.0,
+        "ks_pvalue": 1.0,
+        "mann_whitney_u": 8.0,
+        "mwu_pvalue": 1.0,
+        "pvalue_method": "exact_permutation",
+        "permutations": 70
+      },
+      "words_per_user_turn": {
+        "human_mean": 4.0,
+        "simulated_mean": 4.0,
+        "ks": 0.0,
+        "ks_pvalue": 1.0,
+        "mann_whitney_u": 8.0,
+        "mwu_pvalue": 1.0,
+        "pvalue_method": "exact_permutation",
+        "permutations": 70
+      }
+    },
+    "hls": {
+      "conversations": 8,
+      "simulated_hls": 0.14582349109712062,
+      "human_hls": 0.8541765089028793,
+      "discriminator_accuracy": 1,
+      "brier_score": 0.021264490555752025
+    },
+    "diagnostic_only": true,
+    "discriminator_backend": "cpu_bag_of_words_logistic_not_paper_gemini"
+  },
+  "status": "completed"
+}

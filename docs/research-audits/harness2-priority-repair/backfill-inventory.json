@@ -9,13 +9,12 @@
   "counts": {
     "scoped_identified_papers": 83,
     "scoped_current_statuses": {
-      "accepted-unimplemented": 16,
-      "catalogued": 7,
+      "catalogued": 23,
       "new": 15,
       "reviewed": 45
     },
     "all_ledger_date_only_unique_identities": 198,
-    "all_ledger_accepted_unimplemented_identities": 513,
+    "all_ledger_accepted_unimplemented_identities": 497,
     "all_ledger_review_deferred_identities": 745
   },
   "papers": [
@@ -114,30 +113,18 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2601.19066",
-        "title": "Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair",
-        "track": "agent",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2601.21149",
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2601.21149",
-        "title": "Mobility-Embedded POIs: Learning What a Place Is and How It’s Used from Human Movement",
-        "track": "foundation-model",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2601.22101",
@@ -181,15 +168,9 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2602.06276",
-        "title": "Statistical Learning from Attribution Sets",
-        "track": "recommendation",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2602.06855",
@@ -214,30 +195,18 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2602.07918",
-        "title": "Causal Armor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution",
-        "track": "agent",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2602.12481",
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2602.12481",
-        "title": "Online Advertising with Spatial Interactions",
-        "track": "industrial",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2602.16173",
@@ -253,30 +222,18 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2602.16938",
-        "title": "ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders",
-        "track": "agent",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2602.17554",
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2602.17554",
-        "title": "A Theoretical Framework for Modular Learning of Robust Generative Models",
-        "track": "foundation",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2602.21103",
@@ -293,15 +250,9 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2603.01293",
-        "title": "Theoretical Perspectives on Data Quality and Synergistic Effects in Pre- and Post-Training Reasoning Models",
-        "track": "foundation/post-training",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2603.06397",
@@ -344,15 +295,9 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2603.14769",
-        "title": "POLCA: Stochastic Generative Optimization with LLM",
-        "track": "agent",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2603.19461",
@@ -404,30 +349,18 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2603.29791",
-        "title": "Reasoning-Driven Synthetic Data Generation and Evaluation",
-        "track": "foundation/agent",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2604.05364",
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2604.05364",
-        "title": "TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems",
-        "track": "multimodal",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2604.09803",
@@ -462,30 +395,18 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2604.23099",
-        "title": "ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation",
-        "track": "cross-domain",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2604.27723",
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2604.27723",
-        "title": "Optimized Deferral for Imbalanced Settings",
-        "track": "foundation",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2604.27733",
@@ -529,15 +450,9 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2605.26340",
-        "title": "Scientist-One: Verifiable Autonomous Research via Chain-of-Evidence",
-        "track": "agent",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2605.29729",
@@ -670,15 +585,9 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2608.05578",
-        "title": "Detecting Safety Training Modification in Language Models via Activation Analysis",
-        "track": "foundation-model",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2608.11367",
@@ -721,15 +630,9 @@
       "priority_source_signals": [
         "Google/DeepMind official source"
       ],
-      "current_repository_status": "accepted-unimplemented",
+      "current_repository_status": "catalogued",
       "historical_metadata_observations": [],
-      "pending_delivery_observation": {
-        "batch": "20261021-google-meta-review-and-two-components",
-        "id": "2609.12464",
-        "title": "Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration",
-        "track": "agent",
-        "review_artifact": "research-audits/google-meta-closeout-20261021/google39-reviews.json"
-      }
+      "pending_delivery_observation": null
     },
     {
       "id": "2609.28776",

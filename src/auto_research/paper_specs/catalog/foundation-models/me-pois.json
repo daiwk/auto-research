@@ -21,7 +21,7 @@
   "promotion_eligible": false,
   "evolve_integrated": false,
   "requires_gpu_validation": true,
-  "gpu_validation_artifact": "docs/gpu-validations/google16-neural-a100-20261021.json",
+  "gpu_validation_artifact": "docs/gpu-validations/me-pois-a100-20261021.json",
   "full_experiment_status": "not_reproduced_resource_unavailable",
   "review_resolution": "not_reproduced_resource_unavailable",
   "review_done": true,

@@ -3,7 +3,7 @@
   "key": "spatial-ads",
   "title": "Online Advertising with Spatial Interactions",
   "paper_url": "https://arxiv.org/abs/2602.12481",
-  "detail_path": "reproductions/2602.12481-spatial-ads/README.md",
+  "detail_path": "recommendation-components/2602.12481-spatial-ads/README.md",
   "topic": ["空间外部性与广告分配", "LP随机舍入"],
   "browse_topic": ["广告与商业决策", "空间外部性与分配"],
   "first_author": "Gagan Aggarwal",

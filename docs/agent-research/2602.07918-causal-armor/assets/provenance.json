@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/abs/2602.07918",
+  "source_pdf_url": "https://arxiv.org/pdf/2602.07918v1",
+  "source_pdf_sha256": "7d821908e5cfce1152cdd6dcf8c426c81887e01b19e2e306064e8211d57f8dd5",
+  "figure": "Figure 1",
+  "source_pdf_page_1based": 2,
+  "crop_pdf_points": [60, 80, 535, 200],
+  "render_scale": 2.4,
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "9443573862b7f4d17d1a4e1dae16803adaf7bc3e0aa4dea414b589b927983f60",
+  "visual_inspection": "rendered crop checked, attribution and intervention branches readable",
+  "copyright": "Original paper authors; research explanation with source attribution"
+}

@@ -17,6 +17,10 @@ FORBIDDEN_FIELDS = (
 )
 STANDALONE_GPU_RECEIPTS = {
     **{key: f"docs/gpu-validations/{key}-a100-20261021.json" for key in (
+        "me-pois", "modular-robust-generative", "data-quality-lsa",
+        "activation-model-scanner", "causal-armor",
+    )},
+    **{key: f"docs/gpu-validations/{key}-a100-20261021.json" for key in (
         "specguard", "video-encoder-selection",
     )},
     **{key: f"docs/gpu-validations/{key}-a100-20261020.json" for key in (

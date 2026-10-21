@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:polca",
+  "adapter_key": "polca",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "formal_comparison": false,
+  "seed": 42,
+  "device": "cpu",
+  "dataset": {
+    "id": "repository-authored-mathematical-or-protocol-fixtures",
+    "revision": "e6f2a2bf7965697e21fbc28e2f697df13156a690",
+    "public_benchmark": false
+  },
+  "metrics": {
+    "controller_rounds": 3,
+    "metric_calls": 12,
+    "real_llm_calls": 0,
+    "history_items": 4
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol only, not paper capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2603.14769-polca/metrics/component-contract.json",
+    "code_commit": "e6f2a2bf7965697e21fbc28e2f697df13156a690",
+    "dataset_fingerprint": "5ed00a76e4e678618cc9b1550185161050663c4e8bcd3b2ff8d746003c5a0360",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-agent-cpu-final-seed42.json",
+    "raw_result_sha256": "3515f58fd56fda59be410ad2dbbccbad868f0caa9e699129deb3cadcac46270f",
+    "source_binding": "raw_captured_hashes"
+  }
+}

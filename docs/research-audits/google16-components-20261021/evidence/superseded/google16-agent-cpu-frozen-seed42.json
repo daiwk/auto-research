@@ -1,0 +1,450 @@
+{
+  "current_validation": false,
+  "superseded_reason": "superseded HCRG resolution and POLCA rollout representation",
+  "raw_run": {
+    "schema_version": 1,
+    "protocol": "google16-agent-cpu-components-v1",
+    "source_commit": "41a21ada1da264795a7727d5766cbf23578d5db2",
+    "seed": 42,
+    "device": "cpu",
+    "diagnostic_only": true,
+    "component_only": true,
+    "full_experiment_status": "not_reproduced_high_cost",
+    "source_sha256": {
+      "src/auto_research/agent_research/google16_dynamic_brt.py": "86b877ff484602467704ef011fb7b5d69e64ba998d859a7b67cee7ac0f210dbb",
+      "src/auto_research/agent_research/google16_polca.py": "0b9722c646ad3ecac0a4c21fcdfaa74a1677d5796ff3454753542700463a995c",
+      "src/auto_research/agent_research/google16_hcrg.py": "789d868914d2af429c3d15adf8f89638214595c73d4495c491535a0c5d998419",
+      "scripts/run_google16_agent_cpu.py": "d0658c1a08a89c571a42dbe8f18bb994976f38a88359ecf72b71e78d476bcf27"
+    },
+    "components": [
+      {
+        "method": "dynamic-brt",
+        "diagnostic_only": true,
+        "component_only": true,
+        "fixture_generated_by_model": false,
+        "semantic_reviewer_observed": false,
+        "public_inputs": {
+          "buggy": "def increment(x):\n    return x\n",
+          "fixed_fixture": "def increment(x):\n    return x + 1\n",
+          "brt_fixture": "assert increment(2) == 3\n",
+          "regression": "assert increment(-1) == 0\n"
+        },
+        "reviews": [
+          {
+            "patch": {
+              "key": "with-test",
+              "implementation": "def increment(x):\n    return x + 1\n",
+              "brt": "assert increment(2) == 3\n"
+            },
+            "accepted": true,
+            "candidate_brt": true,
+            "buggy_brt": {
+              "outcome": "assertion_failed",
+              "detail": "BRT assertion failed"
+            },
+            "patched_brt": {
+              "outcome": "passed",
+              "detail": "all assertions passed"
+            },
+            "regression": {
+              "outcome": "passed",
+              "detail": "all assertions passed"
+            },
+            "semantic_reviewer_observed": false,
+            "reason": "accepted_by_available_checks"
+          },
+          {
+            "patch": {
+              "key": "no-test-1",
+              "implementation": "def increment(x):\n    return x + 1\n",
+              "brt": null
+            },
+            "accepted": true,
+            "candidate_brt": false,
+            "buggy_brt": null,
+            "patched_brt": null,
+            "regression": {
+              "outcome": "passed",
+              "detail": "all assertions passed"
+            },
+            "semantic_reviewer_observed": false,
+            "reason": "accepted_by_available_checks"
+          },
+          {
+            "patch": {
+              "key": "no-test-2",
+              "implementation": "def increment(x):\n    return x + 1\n",
+              "brt": null
+            },
+            "accepted": true,
+            "candidate_brt": false,
+            "buggy_brt": null,
+            "patched_brt": null,
+            "regression": {
+              "outcome": "passed",
+              "detail": "all assertions passed"
+            },
+            "semantic_reviewer_observed": false,
+            "reason": "accepted_by_available_checks"
+          },
+          {
+            "patch": {
+              "key": "buggy",
+              "implementation": "def increment(x):\n    return x\n",
+              "brt": "assert increment(2) == 3\n"
+            },
+            "accepted": false,
+            "candidate_brt": false,
+            "buggy_brt": {
+              "outcome": "assertion_failed",
+              "detail": "BRT assertion failed"
+            },
+            "patched_brt": {
+              "outcome": "assertion_failed",
+              "detail": "BRT assertion failed"
+            },
+            "regression": {
+              "outcome": "assertion_failed",
+              "detail": "BRT assertion failed"
+            },
+            "semantic_reviewer_observed": false,
+            "reason": "validation_rejected"
+          },
+          {
+            "patch": {
+              "key": "trivial-test",
+              "implementation": "def increment(x):\n    return x + 1\n",
+              "brt": "assert 1 == 1"
+            },
+            "accepted": false,
+            "candidate_brt": false,
+            "buggy_brt": {
+              "outcome": "passed",
+              "detail": "all assertions passed"
+            },
+            "patched_brt": {
+              "outcome": "passed",
+              "detail": "all assertions passed"
+            },
+            "regression": {
+              "outcome": "passed",
+              "detail": "all assertions passed"
+            },
+            "semantic_reviewer_observed": false,
+            "reason": "validation_rejected"
+          }
+        ],
+        "ranked_selected": "with-test",
+        "dual_selected": "no-test-1",
+        "runtime_execution": "separate-real-Python-subprocess-per-source-test-pair"
+      },
+      {
+        "method": "polca",
+        "diagnostic_only": true,
+        "component_only": true,
+        "callback_fixture": true,
+        "real_llm_calls": 0,
+        "embedding_kind": "synthetic-scalar-coordinate-not-semantic-embedding",
+        "dataset": [
+          [
+            "validation-0",
+            1.0
+          ],
+          [
+            "validation-1",
+            2.0
+          ]
+        ],
+        "history": [
+          {
+            "candidate": {
+              "key": "base",
+              "parameter": "0",
+              "embedding": [
+                0.0
+              ]
+            },
+            "observations": [
+              {
+                "candidate_key": "base",
+                "item_id": "validation-0",
+                "score": -1.0,
+                "feedback": "synthetic scalar fixture reward=-1.0",
+                "round_index": 0
+              },
+              {
+                "candidate_key": "base",
+                "item_id": "validation-0",
+                "score": -1.0,
+                "feedback": "synthetic scalar fixture reward=-1.0",
+                "round_index": 0
+              }
+            ]
+          },
+          {
+            "candidate": {
+              "key": "proposal-1",
+              "parameter": "0.5",
+              "embedding": [
+                0.5
+              ]
+            },
+            "observations": [
+              {
+                "candidate_key": "proposal-1",
+                "item_id": "validation-0",
+                "score": -0.25,
+                "feedback": "synthetic scalar fixture reward=-0.25",
+                "round_index": 0
+              },
+              {
+                "candidate_key": "proposal-1",
+                "item_id": "validation-0",
+                "score": -0.25,
+                "feedback": "synthetic scalar fixture reward=-0.25",
+                "round_index": 0
+              },
+              {
+                "candidate_key": "proposal-1",
+                "item_id": "validation-1",
+                "score": -2.25,
+                "feedback": "synthetic scalar fixture reward=-2.25",
+                "round_index": 1
+              },
+              {
+                "candidate_key": "proposal-1",
+                "item_id": "validation-0",
+                "score": -0.25,
+                "feedback": "synthetic scalar fixture reward=-0.25",
+                "round_index": 1
+              }
+            ]
+          },
+          {
+            "candidate": {
+              "key": "proposal-2",
+              "parameter": "1.0",
+              "embedding": [
+                1.0
+              ]
+            },
+            "observations": [
+              {
+                "candidate_key": "proposal-2",
+                "item_id": "validation-1",
+                "score": -1.0,
+                "feedback": "synthetic scalar fixture reward=-1.0",
+                "round_index": 1
+              },
+              {
+                "candidate_key": "proposal-2",
+                "item_id": "validation-0",
+                "score": -0.0,
+                "feedback": "synthetic scalar fixture reward=-0.0",
+                "round_index": 1
+              },
+              {
+                "candidate_key": "proposal-2",
+                "item_id": "validation-0",
+                "score": -0.0,
+                "feedback": "synthetic scalar fixture reward=-0.0",
+                "round_index": 2
+              },
+              {
+                "candidate_key": "proposal-2",
+                "item_id": "validation-0",
+                "score": -0.0,
+                "feedback": "synthetic scalar fixture reward=-0.0",
+                "round_index": 2
+              }
+            ]
+          },
+          {
+            "candidate": {
+              "key": "proposal-3",
+              "parameter": "1.5",
+              "embedding": [
+                1.5
+              ]
+            },
+            "observations": [
+              {
+                "candidate_key": "proposal-3",
+                "item_id": "validation-0",
+                "score": -0.25,
+                "feedback": "synthetic scalar fixture reward=-0.25",
+                "round_index": 2
+              },
+              {
+                "candidate_key": "proposal-3",
+                "item_id": "validation-0",
+                "score": -0.25,
+                "feedback": "synthetic scalar fixture reward=-0.25",
+                "round_index": 2
+              }
+            ]
+          }
+        ],
+        "traces": [
+          {
+            "round_index": 0,
+            "minibatch_ids": [
+              "validation-0",
+              "validation-0"
+            ],
+            "selected": [
+              "base"
+            ],
+            "proposed": [
+              "proposal-1"
+            ],
+            "admitted": [
+              "proposal-1"
+            ],
+            "deferred_budget": [],
+            "summary": "{\"base\": {\"count\": 2, \"mean\": -1.0}}",
+            "metric_calls": 4
+          },
+          {
+            "round_index": 1,
+            "minibatch_ids": [
+              "validation-1",
+              "validation-0"
+            ],
+            "selected": [
+              "proposal-1"
+            ],
+            "proposed": [
+              "proposal-2"
+            ],
+            "admitted": [
+              "proposal-2"
+            ],
+            "deferred_budget": [],
+            "summary": "{\"base\": {\"count\": 2, \"mean\": -1.0}, \"proposal-1\": {\"count\": 4, \"mean\": -0.75}}",
+            "metric_calls": 8
+          },
+          {
+            "round_index": 2,
+            "minibatch_ids": [
+              "validation-0",
+              "validation-0"
+            ],
+            "selected": [
+              "proposal-2"
+            ],
+            "proposed": [
+              "proposal-3"
+            ],
+            "admitted": [
+              "proposal-3"
+            ],
+            "deferred_budget": [],
+            "summary": "{\"base\": {\"count\": 2, \"mean\": -1.0}, \"proposal-1\": {\"count\": 4, \"mean\": -0.75}, \"proposal-2\": {\"count\": 4, \"mean\": -0.25}}",
+            "metric_calls": 12
+          }
+        ],
+        "metric_calls": 12,
+        "fixture_best": {
+          "key": "proposal-2",
+          "mean": -0.25
+        },
+        "claim": "controller execution only, not LLM program optimization"
+      },
+      {
+        "method": "hcrg",
+        "diagnostic_only": true,
+        "component_only": true,
+        "parser": "python-stdlib-ast-not-tree-sitter",
+        "sources": {
+          "base": "class Base:\n    def save(self, value): return value\n",
+          "mid": "from base import Base\nclass Middle(Base): pass\n",
+          "child": "from mid import Middle\nclass Child(Middle): pass\n"
+        },
+        "source_sha256": "c625b9af79ff32f569ecce5ccd4a0256b8c8dc7d52709761b6dd531db838eebc",
+        "graph": {
+          "edges": [
+            {
+              "kind": "IMPORTS",
+              "source": "child.Child",
+              "target": "mid.Middle"
+            },
+            {
+              "kind": "INHERITS",
+              "source": "child.Child",
+              "target": "mid.Middle"
+            },
+            {
+              "kind": "IMPORTS",
+              "source": "mid.Middle",
+              "target": "base.Base"
+            },
+            {
+              "kind": "INHERITS",
+              "source": "mid.Middle",
+              "target": "base.Base"
+            }
+          ],
+          "nodes": [
+            {
+              "key": "base.Base",
+              "kind": "class",
+              "module": "base",
+              "signature": "Base"
+            },
+            {
+              "key": "base.Base.save",
+              "kind": "method",
+              "module": "base",
+              "signature": "self, value"
+            },
+            {
+              "key": "child.Child",
+              "kind": "class",
+              "module": "child",
+              "signature": "Child"
+            },
+            {
+              "key": "mid.Middle",
+              "kind": "class",
+              "module": "mid",
+              "signature": "Middle"
+            }
+          ],
+          "parser": "python-stdlib-ast-not-tree-sitter",
+          "source_sha256": "c625b9af79ff32f569ecce5ccd4a0256b8c8dc7d52709761b6dd531db838eebc",
+          "unresolved_dependencies": []
+        },
+        "dependency_order": [
+          [
+            "base.Base"
+          ],
+          [
+            "mid.Middle"
+          ],
+          [
+            "child.Child"
+          ]
+        ],
+        "three_hop_keys": [
+          "base.Base",
+          "child.Child",
+          "mid.Middle"
+        ],
+        "static_reference": "class Base: pass\nclass Child(Base):\n    def f(self,x): return x\n",
+        "static_target": "import os\nimport imaginary_package\nclass Base: pass\nclass Child:\n    def f(self,x:int)->int: return x\n",
+        "partial_static_metrics": {
+          "syntax_parse": true,
+          "pcc": 0.5,
+          "thc": 1.0,
+          "drq": 0.5,
+          "docstring_preservation": null
+        },
+        "llm_migration_calls": 0,
+        "java_ingestion_observed": false,
+        "claim": "Python AST-supported graph subsystem, not Java-to-Python migration"
+      }
+    ],
+    "content_sha256": "75ae3481dea33ea606a15793524ea0c42296bad66d0f1bfd71dce062d3c25f5d"
+  }
+}

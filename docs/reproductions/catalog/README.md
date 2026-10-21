@@ -232,6 +232,7 @@
 | 内容理解、审核与风险控制 | [RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction](../2602.12593-rq-gmm/README.md) | Tencent，2026-02-13 | 未发现官方代码 | `rq-gmm` |
 | 生成、排序与冷启动 | [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md) | LinkedIn，2026-02-12 | 未发现官方代码 | `linkedin-feed-sr` |
 | 生成、排序与冷启动 | [Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems](../2602.12041-mlcc/README.md) | Bilibili，2026-02-12 | 未发现官方代码 | `mlcc` |
+| 空间外部性与广告分配 | [Online Advertising with Spatial Interactions](../../recommendation-components/2602.12481-spatial-ads/README.md) | Google Research，2026-02-12 | 未发现官方代码 | `spatial-ads`：仅低成本组件，完整实验不复现 |
 | Serving 与研究基础设施 | [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md) | LinkedIn，2026-02-11 | 未发现官方代码 | `cadet` |
 | 生成、排序与冷启动 | [Compute Only Once: UG-Separation for Efficient Large Recommendation Models](../2602.10455-ug-sep/README.md) | ByteDance AML，2026-02-11 | 未发现官方代码 | `ug-sep` |
 | 生成、排序与冷启动 | [DiffuReason: Bridging Latent Reasoning and Generative Refinement for Sequential Recommendation](../2602.09744-diffureason/README.md) | Tencent，2026-02-10 | 未发现官方代码 | `diffureason` |
@@ -243,6 +244,7 @@
 | 生成、排序与冷启动 | [PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation](../2602.08530-pit/README.md) | Beijing University of Posts and Telecommunications，2026-02-09 | 未发现官方代码 | `pit` |
 | 生成、排序与冷启动 | [MDL: A Unified Multi-Distribution Learner in Large-scale Industrial Recommendation through Tokenization](../2602.07520-mdl/README.md) | ByteDance / Douyin，2026-02-07 | 未发现官方代码 | `mdl` |
 | 生成、排序与冷启动 | [MSN: A Memory-based Sparse Activation Scaling Framework for Large-scale Industrial Recommendation](../2602.07526-msn/README.md) | ByteDance / Douyin Search，2026-02-07 | 未发现官方代码 | `msn` |
+| 广告归因与弱监督 | [Statistical Learning from Attribution Sets](../../recommendation-components/2602.06276-attribution-sets/README.md) | Google Research，2026-02-06 | 未发现官方代码 | `attribution-sets`：仅低成本组件，完整实验不复现 |
 | 生成、排序与冷启动 | [TokenMixer-Large: Scaling Up Large Ranking Models in Industrial Recommenders](../2602.06563-tokenmixer-large/README.md) | ByteDance，2026-02-06 | 未发现官方代码 | `tokenmixer-large` |
 | 生成、排序与冷启动 | [DOS: Dual-Flow Orthogonal Semantic IDs for Recommendation in Meituan](../2602.04460-dos/README.md) | Meituan，2026-02-04 | 未发现官方代码 | `dos` |
 | 大模型能力与推荐融合 | [Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment](../2602.01023-rag-qac/README.md) | Apple，2026-02-01 | 未发现官方代码 | `rag-qac` |

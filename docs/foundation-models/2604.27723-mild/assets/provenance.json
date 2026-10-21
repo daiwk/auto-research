@@ -1,0 +1,25 @@
+{
+  "paper_id": "2604.27723",
+  "paper_version": "v1",
+  "figure_label": "Figure 1",
+  "source_url": "https://arxiv.org/pdf/2604.27723v1",
+  "source_kind": "official_arxiv_pdf_crop",
+  "image_path": "docs/foundation-models/2604.27723-mild/assets/paper-figure-01.png",
+  "image_sha256": "faf853ec53bdbd934b3c59dddc091899cd9bdf2e4b312c151e1670e25b70b0c9",
+  "dimensions": [
+    488,
+    266
+  ],
+  "bytes": 29971,
+  "visually_inspected": true,
+  "rights": "Original figure/algorithm copyright remains with the paper authors; reproduced for source-backed research documentation.",
+  "page": 2,
+  "crop_pdf_points": [
+    53,
+    557,
+    297,
+    690
+  ],
+  "render_scale": 2,
+  "source_pdf_sha256": "7b17a22ae5b0417c63297e68a3f2bd27ee96caf9c94ca9970820b7c0cf8737ec"
+}

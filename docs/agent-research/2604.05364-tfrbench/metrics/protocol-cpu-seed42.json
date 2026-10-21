@@ -1,0 +1,97 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "agent-research:tfrbench",
+  "adapter_key": "tfrbench",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "formal_comparison": false,
+  "seed": 42,
+  "device": "cpu",
+  "dataset": {
+    "id": "self-authored-protocol-fixtures",
+    "public_benchmark": false,
+    "revision": "google16-evaluation-fixtures-v1"
+  },
+  "metrics": {
+    "fixture_candidates": 2,
+    "fixture_selected_mase": 0.0,
+    "fixture_summary_mase": 0.0
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evaluation_protocol": {
+    "tier": "l0_interface",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol only, not paper capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/agent-research/2604.05364-tfrbench/metrics/protocol-cpu-seed42.json",
+    "code_commit": "6873b033ffa97bee066d08436b16fac53bb42ccc",
+    "dataset_fingerprint": "bef370cfe12f2cebda1bc612b7b20cd679a4227b8d2e48e7cd7f3b050f2ba7fb",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-tfrbench-final-seed42.json",
+    "raw_result_sha256": "756bbc1b34aeb8a70e36ca896e8c2e639caab72a8c749f4ee63e1d8527263731",
+    "source_binding": "curator_verified_frozen_files"
+  },
+  "fixture_demo": true,
+  "model_calls": 0,
+  "report": {
+    "protocol": "outcome_conditioned_benchmark_construction_not_heldout_evaluation",
+    "diagnostic_only": true,
+    "promotion_eligible": false,
+    "future_events_allowed_in_construction": true,
+    "candidates": [
+      {
+        "reasoning": "continue trend",
+        "forecast": [
+          [
+            5.0
+          ],
+          [
+            6.0
+          ]
+        ],
+        "consistency": 4,
+        "mase": 0.0,
+        "iteration": 1
+      },
+      {
+        "reasoning": "flat",
+        "forecast": [
+          [
+            4.0
+          ],
+          [
+            4.0
+          ]
+        ],
+        "consistency": 4,
+        "mase": 1.5,
+        "iteration": 1
+      }
+    ],
+    "selected": {
+      "reasoning": "continue trend",
+      "forecast": [
+        [
+          5.0
+        ],
+        [
+          6.0
+        ]
+      ],
+      "consistency": 4,
+      "mase": 0.0,
+      "iteration": 1
+    },
+    "reference_accepted": true,
+    "summary": "continue trend",
+    "summary_accepted": true,
+    "summary_mase": 0.0,
+    "selection_policy": "explicit_callback_paper_does_not_fix_composite_weights"
+  },
+  "status": "completed"
+}

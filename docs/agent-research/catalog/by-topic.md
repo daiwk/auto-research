@@ -43,11 +43,21 @@
 
 - [Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States](../2610.01415-belief-state-pos/README.md)（`belief-state-pos`）：把当前世界事实与尚未解决的任务要求显式维护为 belief；若连续动作没有减少 unresolved requirements，则识别 Belief Trapping 并触发针对性恢复。
 
+### Agent 安全
+
+- [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。
+- [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](../2610.12375-ontrack/README.md)（`ontrack`）：Agent 最终失败时，单个答案分数解释不了中间发生了什么。OnTrack 把事件组织成带依赖边的图，将当前执行前缀和成功参考轨迹作非平衡结构化对齐；无参考时则明确退化为循环、重试和信息停滞检测。
+- [SpecGuard: Proving a Task Is Broken Before the Agent Cheats](../2610.09159-specguard/README.md)（`specguard`）：当测试意外或恶意违背任务描述，coding agent 可能修改测试或硬编码结果，而不是报告任务不可满足。SpecGuard 在编码前拆开两个信息来源：SpecAgent 只看描述 $D$ 与源码 $C$、完全不看测试 $T$；TestAgent 独立翻译测试；Certifier 对齐两侧语义，由 Lean kernel 核验冲突证明。
+- [PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents](../2610.01349-pace-capability/README.md)（`pace-capability`）：在每次工具副作用发生前，根据认证请求编译出的 authority 与输入 provenance 同时检查 effect；入库时安全不代表执行时可信。
+- [CausalArmor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution](../2602.07918-causal-armor/README.md)（`causal-armor`）：在高权限动作前，分别去掉用户请求与不可信工具段，比较同一个动作的似然变化。工具段的归因高于用户时，只清洗命中段，再遮蔽首个命中点后的 assistant 内容并重新提案。
+
 ### Agent 评测
 
 - [UserProxyBench: Evaluating LLM User Simulators for Agent Benchmarks and Training](../2609.38043-userproxybench/README.md)（`user-proxy-bench`）：UFS 与 agent task reward 独立：每个 episode 的所有适用 user-contract criteria 必须全部通过，episode 才计 1。重点审计 premature disclosure，即用户模拟器在 agent 请求之前就泄露私有字段；这可能维持任务成功，却让 agent 少做本应评测的信息收集。
 - [Certified Selective Automation of LLM Agent Evaluation](../2609.34320-certified-selective-eval/README.md)（`certified-selective-eval`）：按任务簇而非轨迹独立假设做 bootstrap，给自动判断区域的错误率建立上置信界，只有证书低于预算才自动接管。
 - [Verifiable Social Reasoning for LLM Assistants](../2609.17496-fuse-evaluator/README.md)（`fuse-evaluator`）：用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。
+- [TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems](../2604.05364-tfrbench/README.md)（`tfrbench`）：预测值接近真值不保证推理有根据，流畅推理也可能导致错误预测。论文联合 Search、Reason、Forecast、Verify、Summary 构建数值与推理同时合格的参考轨迹。
+- [ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders](../2602.16938-convapparel/README.md)（`convapparel`）：模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。
 
 ### 技能进化
 
@@ -73,6 +83,12 @@
 ### 规划与搜索
 
 - [Repairing LLM-Generated Specifications with Deterministic Diagnosis](../2610.22568-drago/README.md)（`drago`）：形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。
+
+### 代码 Agent
+
+- [Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration](../2609.12464-hcrg/README.md)（`hcrg`）：HCRG 用 AST 提取 INHERITS/CALLS/IMPORTS，缓存全局架构骨架，按父依赖先后迁移，三跳取回结构上下文。原文对照是 800 字符/150 overlap/top-5 向量 RAG。
+- [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](../2608.06811-pmcoder/README.md)（`pmcoder`）：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
+- [Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair](../2601.19066-dynamic-brt/README.md)（`dynamic-brt`）：论文让修复和 BRT 留在同一条轨迹；TDD、TLD、Freeform 改变生成顺序。BRT 必须在原 bug 上失败、生成修复上通过。
 
 ### Harness 自进化
 
@@ -144,20 +160,13 @@
 - [MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents](../2610.24955-memprice/README.md)（`memprice`）：长交互里，过去某个细节会不会有用通常事先未知。单纯按相关性保留记忆会忽略各条信息对同一上下文容量的竞争。
 - [ProPerAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
 
-### Agent 安全
-
-- [One Word Opens the Gate: The Option-Channel Attack on Typed Decision Models as Agent Guardrails](../2610.12292-option-channel-attack/README.md)（`option-channel-attack`）：类型化模型对调用方给定的选项输出概率，但选项名字本身也进入模型输入。保持动作、可信策略定义不变，仅把允许选项换成误导性标签，就可能让本来正确的拒绝变成放行。
-- [OnTrack: Real-Time Monitoring and Intervention in LLM Agent Trajectories via Streaming Structure-Aware Optimal Transport](../2610.12375-ontrack/README.md)（`ontrack`）：Agent 最终失败时，单个答案分数解释不了中间发生了什么。OnTrack 把事件组织成带依赖边的图，将当前执行前缀和成功参考轨迹作非平衡结构化对齐；无参考时则明确退化为循环、重试和信息停滞检测。
-- [SpecGuard: Proving a Task Is Broken Before the Agent Cheats](../2610.09159-specguard/README.md)（`specguard`）：当测试意外或恶意违背任务描述，coding agent 可能修改测试或硬编码结果，而不是报告任务不可满足。SpecGuard 在编码前拆开两个信息来源：SpecAgent 只看描述 $D$ 与源码 $C$、完全不看测试 $T$；TestAgent 独立翻译测试；Certifier 对齐两侧语义，由 Lean kernel 核验冲突证明。
-- [PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents](../2610.01349-pace-capability/README.md)（`pace-capability`）：在每次工具副作用发生前，根据认证请求编译出的 authority 与输入 provenance 同时检查 effect；入库时安全不代表执行时可信。
-
 ### 自进化
 
 - [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](../2608.09380-openloopevolve/README.md)（`openloopevolve`）：把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。
 
-### 代码 Agent
+### Agent 自进化
 
-- [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](../2608.06811-pmcoder/README.md)（`pmcoder`）：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
+- [POLCA: Stochastic Generative Optimization with LLM](../2603.14769-polca/README.md)（`polca`）：随机 minibatch、程序与评估器都会产生噪声。POLCA 不仅保留一次最高分，而是持续更新候选评价历史；Summarizer 形成全局经验，Proposer 利用当前反馈提出参数，语义 epsilon-net 限制冗余候选。
 
 ### 训练服务优化
 
@@ -179,6 +188,10 @@
 
 - [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
 
+### 科学研究 Agent
+
+- [ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence](../2605.26340-scientist-one/README.md)（`scientist-one`）：研究产物看起来完整，仍可能引用虚构、分数无法复算或方法描述与代码不同。CoE 将主张连到可核验来源；独立 I1–I4 检查分数、规则、引用和方法/代码一致性。
+
 ### 规划、推理与工具使用
 
 - [SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning](../2610.23128-scope-replay/README.md)（`scope-replay`）：修改机器人控制程序可能修好新场景却破坏旧场景。SCOPE 从开发执行证据建立失败前沿图，区分有证据支持、被反驳和未知检查，按局部修补、阶段重设或策略重生成继续搜索。
@@ -190,6 +203,10 @@
 ### 失败恢复
 
 - [Sentry: Learning to Recover from LLM Agent Failures at Test Time](../2610.02994-sentry/README.md)（`sentry`）：Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当前行为失败，再按类别和标签检索相关恢复建议。外部验证器只看后续可观察进展、不看任务奖励，确认恢复后才把经验写入 playbook；动作格式错误走单独的硬修复路径。
+
+### Agent 数据合成
+
+- [Reasoning-Driven Synthetic Data Generation and Evaluation](../2603.29791-simula/README.md)（`simula`）：单纯扩写种子容易遗漏概念或坍缩到相似样本。Simula 先按因素建立分类树，再控制全局节点组合与局部场景；独立批判过滤样本，并通过批内相对评分校准复杂度。
 
 ### Agentic RL / efficient long context
 

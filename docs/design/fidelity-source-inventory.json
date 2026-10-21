@@ -235,6 +235,36 @@
         "fingerprint": "2381906de3d1aa158014899595bea75828fdb2af8cfc9bcc0b260a1fe6c1206d"
       }
     ],
+    "src/auto_research/agent_research/google16_causal_armor.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "score_batch",
+        "line": 165,
+        "qualified_name": "CachedLikelihoodScorer.score_batch",
+        "expression": "self.calls += 1",
+        "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
+      }
+    ],
+    "src/auto_research/agent_research/google16_polca.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "_record",
+        "line": 132,
+        "qualified_name": "Polca._record",
+        "expression": "self.calls += 1",
+        "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
+      }
+    ],
+    "src/auto_research/agent_research/google16_simula.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "build_taxonomies",
+        "line": 104,
+        "qualified_name": "build_taxonomies",
+        "expression": "models.plan",
+        "fingerprint": "78358b5bb4feb3c26eb530828a13d10bc04edcbcd93048e27af6a06c5ae28103"
+      }
+    ],
     "src/auto_research/agent_research/graft_public.py": [
       {
         "kind": "label_access_requires_role_review",

@@ -1,0 +1,25 @@
+{
+  "paper_id": "2602.12481",
+  "paper_version": "v1",
+  "figure_label": "Algorithm 1",
+  "source_url": "https://arxiv.org/pdf/2602.12481v1",
+  "source_kind": "official_arxiv_pdf_crop",
+  "image_path": "docs/recommendation-components/2602.12481-spatial-ads/assets/paper-figure-01.png",
+  "image_sha256": "2101e6a03d523e7857d396e87eeacae92664bf9a662b05518bce0993dd8a5e21",
+  "dimensions": [
+    936,
+    448
+  ],
+  "bytes": 61631,
+  "visually_inspected": true,
+  "rights": "Original figure/algorithm copyright remains with the paper authors; reproduced for source-backed research documentation.",
+  "page": 10,
+  "crop_pdf_points": [
+    72,
+    73,
+    540,
+    297
+  ],
+  "render_scale": 2,
+  "source_pdf_sha256": "a80920452d4e2f175f584942b73a6d782f5c88532d1ad635b3f76bee1173fe33"
+}
