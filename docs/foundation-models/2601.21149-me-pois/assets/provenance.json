@@ -1,0 +1,16 @@
+{
+  "paper_id": "2601.21149",
+  "paper_version": "v1",
+  "figure_label": "Figure 2",
+  "source_url": "https://arxiv.org/html/2601.21149v1/arch3.png",
+  "source_kind": "official_arxiv_html_image",
+  "image_path": "docs/foundation-models/2601.21149-me-pois/assets/paper-figure-01.png",
+  "image_sha256": "f28b5d769ba8303e9d22f714cc5450e3e99fd1197aa93f5d841d07ebc78eb18d",
+  "dimensions": [
+    945,
+    402
+  ],
+  "bytes": 119405,
+  "visually_inspected": true,
+  "rights": "Original figure/algorithm copyright remains with the paper authors; reproduced for source-backed research documentation."
+}

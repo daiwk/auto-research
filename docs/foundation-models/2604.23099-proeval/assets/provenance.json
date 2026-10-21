@@ -1,0 +1,16 @@
+{
+  "paper_id": "2604.23099",
+  "paper_version": "v1",
+  "figure_label": "Figure 2 StrategyQA subpanel",
+  "source_url": "https://arxiv.org/html/2604.23099v1/question_covariance_strategyqa.png",
+  "source_kind": "official_arxiv_html_image",
+  "image_path": "docs/foundation-models/2604.23099-proeval/assets/paper-figure-01.png",
+  "image_sha256": "261d7360b9eca205f92764960f61049456b43c2af4065a8bf54c30cffa2e6277",
+  "dimensions": [
+    451,
+    453
+  ],
+  "bytes": 24822,
+  "visually_inspected": true,
+  "rights": "Original figure/algorithm copyright remains with the paper authors; reproduced for source-backed research documentation."
+}

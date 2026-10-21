@@ -322,6 +322,9 @@
 ### 多任务与联合标签
 - [Learned Cross-Task Relationships in Multi-Task Models](../../recommendation-components/2609.28776-cross-task-relationships/README.md)：在共享多任务网络中加入成对 cross-label 或缺失的无条件辅助头，显式估计联合概率与协方差。公开 KuaiRand 小切片对比原始边际头、真实联合标签和打乱联合标签控制；不混淆辅助训练收益与把新预测输入下游 RL 策略的生产收益。
 
+### 广告归因与弱监督
+- [Statistical Learning from Attribution Sets](../../recommendation-components/2602.06276-attribution-sets/README.md)：逐式实现归因集合风险估计、位置先验平方加权与固定分母ERM；有限样本常数函数校验发现v1印刷式不一致并保留反例，未宣称无偏性或推荐效果已验证。完整约7800次训练网格成本过高，不复现（审查DONE）。
+
 ## 多阶段排序与混排
 
 ### 实时序列与 listwise 重排
@@ -447,3 +450,9 @@
 - [FLVM](../2609.32839-flvm/README.md)：以受限混杂基线、停止梯度和固定稀疏路由共同学习观看、点击、喜欢和讨厌，避免直接把单一行为当作用户价值。
 - [SMES: Towards Scalable Multi-Task Recommendation via Expert Sparsity](../2602.09386-smes/README.md)：用渐进式稀疏路由和去重执行，为不同任务动态分配专家容量。
 - [Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation](../2601.20215-easq/README.md)：用独立 LoRA 与多任务路径把稀疏问卷满意度接入持续在线学习。
+
+## 广告与商业决策
+
+
+### 空间外部性与分配
+- [Online Advertising with Spatial Interactions](../../recommendation-components/2602.12481-spatial-ads/README.md)：实现分组伪圆盘真实LP松弛、x/3独立采样和原式二次稀释，核验组互斥及中心不被覆盖。不包含全广告匹配约化、支付或PTAS，不冒称18近似端到端复现；理论论文没有完整训练实验，不伪造高成本理由。

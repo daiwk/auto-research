@@ -469,3 +469,7 @@
 
 ## Allegro.com
 - 2026-09 · [Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro](../2609.05063-allecompanion/README.md)：用 ComCat 互补类别图、类别约束双塔和 Category Adapter 过滤共购噪声。
+
+## Google Research
+- [Online Advertising with Spatial Interactions](../../recommendation-components/2602.12481-spatial-ads/README.md)：实现分组伪圆盘真实LP松弛、x/3独立采样和原式二次稀释，核验组互斥及中心不被覆盖。不包含全广告匹配约化、支付或PTAS，不冒称18近似端到端复现；理论论文没有完整训练实验，不伪造高成本理由。
+- [Statistical Learning from Attribution Sets](../../recommendation-components/2602.06276-attribution-sets/README.md)：逐式实现归因集合风险估计、位置先验平方加权与固定分母ERM；有限样本常数函数校验发现v1印刷式不一致并保留反例，未宣称无偏性或推荐效果已验证。完整约7800次训练网格成本过高，不复现（审查DONE）。

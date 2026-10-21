@@ -243,6 +243,7 @@
 - [RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction](../2602.12593-rq-gmm/README.md)：以残差高斯混合量化替代硬聚类，用概率语义 ID 增强多模态 CTR。
 - [An Industrial-Scale Sequential Recommender for LinkedIn Feed Ranking](../2602.12354-linkedin-feed-sr/README.md)：用工业长序列推荐器重写 LinkedIn Feed 排序与服务链路。
 - [Compress, Cross and Scale: Multi-Level Compression Cross Networks for Efficient Scaling in Recommender Systems](../2602.12041-mlcc/README.md)：分层压缩并交叉低维特征，在受控计算量下扩大推荐网络容量。
+- [Online Advertising with Spatial Interactions](../../recommendation-components/2602.12481-spatial-ads/README.md)：实现分组伪圆盘真实LP松弛、x/3独立采样和原式二次稀释，核验组互斥及中心不被覆盖。不包含全广告匹配约化、支付或PTAS，不冒称18近似端到端复现；理论论文没有完整训练实验，不伪造高成本理由。
 - [CADET: Context-Conditioned Ads CTR Prediction With a Decoder-Only Transformer](../2602.11410-cadet/README.md)：以候选后上下文条件化的 Decoder-only Transformer 统一广告 CTR。
 - [Compute Only Once: UG-Separation for Efficient Large Recommendation Models](../2602.10455-ug-sep/README.md)：拆分用户侧与通用计算，使大规模推荐模型复用只需计算一次的表示。
 - [S-GRec](../2602.10606-s-grec/README.md)：以 LLM 个性化语义 judge 产生偏好监督，再用 A2PO 蒸馏到轻量 SID 生成器。
@@ -255,6 +256,7 @@
 - [PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation](../2602.08530-pit/README.md)：按用户动态组合 item token，使生成式推荐的语义 ID 同时表达个体偏好。
 - [MDL](../2602.07520-mdl/README.md)：把 feature、scenario 和 task 统一 token 化，以 domain-feature attention 支持多分布推荐。
 - [MSN](../2602.07526-msn/README.md)：用 Product-Key Memory 增加容量，只读取 top-k 槽位并门控融合 dense 主干。
+- [Statistical Learning from Attribution Sets](../../recommendation-components/2602.06276-attribution-sets/README.md)：逐式实现归因集合风险估计、位置先验平方加权与固定分母ERM；有限样本常数函数校验发现v1印刷式不一致并保留反例，未宣称无偏性或推荐效果已验证。完整约7800次训练网格成本过高，不复现（审查DONE）。
 - [TokenMixer-Large](../2602.06563-tokenmixer-large/README.md)：以 token mixing/reverting、head/token SwiGLU、间隔残差和辅助监督扩展排序模型。
 - [DOS](../2602.04460-dos/README.md)：用协同/语义双流和正交 residual quantization 训练生成推荐 Semantic ID。
 - [Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment](../2602.01023-rag-qac/README.md)：以 RAG、SFT 和 DPO 同时优化补全相关性、安全与 groundedness。

@@ -825,6 +825,12 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "me-pois": ("多模态基础模型", "移动轨迹与地点表征"),
+        "modular-robust-generative": ("网络架构", "生成专家与鲁棒门控"),
+        "data-quality-lsa": ("预训练与数据", "预训练与后训练协同"),
+        "activation-model-scanner": ("推理与系统效率", "安全结构与激活诊断"),
+        "proeval": ("推理与系统效率", "主动评测与性能估计"),
+        "mild": ("推理与系统效率", "模型路由与动态计算"),
         "video-encoder-selection": ("多模态基础模型", "视频理解与 token 压缩"),
         "adamw4bit": ("预训练与数据", "优化器与训练稳定性"),
         "af-muon": ("预训练与数据", "优化器与训练稳定性"),

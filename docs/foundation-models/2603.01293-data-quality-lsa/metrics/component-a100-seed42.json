@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:data-quality-lsa",
+  "adapter_key": "data-quality-lsa",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "formal_comparison": false,
+  "seed": 42,
+  "device": "cuda",
+  "dataset": {
+    "id": "repository-authored-mathematical-or-protocol-fixtures",
+    "revision": "91bb61f0ba6ee3673a70207322651e7dac1f51e8",
+    "public_benchmark": false
+  },
+  "metrics": {
+    "sft_loss": 0.32403823733329773,
+    "os_regression_loss": 0.36589884757995605,
+    "value_gradient_norm": 3.1654841899871826,
+    "query_key_gradient_norm": 0.8749673962593079,
+    "rollout_steps": 3,
+    "closed_form_normal_equation_max_error": 5.21540641784668e-07
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol only, not paper capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2603.01293-data-quality-lsa/metrics/component-a100-seed42.json",
+    "code_commit": "91bb61f0ba6ee3673a70207322651e7dac1f51e8",
+    "dataset_fingerprint": "126ab15218a2698e23b4810c68eab6a95bd91edeafb18640046fbe2cd091c5b2",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-neural-final-a100-seed42.json",
+    "raw_result_sha256": "d3248b8369bb6d84827e90384f189be3595a129a01d2070a9cd16ec30e4f274e",
+    "source_binding": "raw_captured_hashes"
+  },
+  "gpu_validation_artifact": "docs/gpu-validations/data-quality-lsa-a100-20261021.json"
+}

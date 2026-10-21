@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "recommendation:attribution-sets",
+  "adapter_key": "attribution-sets",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "formal_comparison": false,
+  "seed": 42,
+  "device": "cpu",
+  "dataset": {
+    "id": "repository-authored-equation-fixtures",
+    "public_benchmark": false
+  },
+  "metrics": {
+    "printed_formula_expectation_constant_h": -0.13733504929560125,
+    "known_population_risk_constant_h": 0.22,
+    "finite_n_absolute_discrepancy": 0.3573350492956012,
+    "unbiasedness_confirmed": false
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol only, not paper capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/recommendation-components/2602.06276-attribution-sets/metrics/component-cpu-seed42.json",
+    "code_commit": "41a21ada1da264795a7727d5766cbf23578d5db2",
+    "dataset_fingerprint": "0c30885b92276b6ac62baea3e47f095f4160cc8184020ccd443e77455a25fa6c",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-statistics-frozen-seed42.json",
+    "raw_result_sha256": "16e17586c1c5e516d67ae97261b15a5f1ff81d103b873e460d2f047e8eafdd6c",
+    "source_binding": "raw_captured_hashes"
+  }
+}

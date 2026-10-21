@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "method": "scientist-one",
+  "manifest_ref": "agent-research:scientist-one",
+  "protocol_id": "google16-scientist-one-cpu-v1",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "seeds": [
+    42
+  ],
+  "device": "cpu",
+  "dataset": {
+    "id": "self-authored-protocol-fixtures",
+    "public_benchmark": false,
+    "revision": "google16-evaluation-fixtures-v1"
+  },
+  "fixture_demo": true,
+  "status": "completed",
+  "metrics": {
+    "fixture_numerical_cpr": 1.0,
+    "canonical_evaluator_reruns": 5
+  },
+  "report": {
+    "provenance": {
+      "quantitative_claims": 1,
+      "matched_claims": 1,
+      "cpr": 1.0,
+      "claims": {
+        "numeric": true
+      },
+      "semantic_support_verified": false
+    },
+    "score_audit": {
+      "status": "match",
+      "reruns": 5,
+      "canonical_mean": 0.7,
+      "canonical_population_std": 0.0,
+      "absolute_tolerance": 0.006999999999999999,
+      "relative_tolerance": 0.01,
+      "absolute_difference": 0.0,
+      "solution_sha256": "e5934ab24573fd9d6d87091db18b76304a21bd18d31166984ed8e02632af78d0",
+      "evaluator_sha256": "ab535c8264234407ab1a786599baf9f9eb75deb332d0711b28eec2332bd7293c"
+    },
+    "i2": {
+      "status": "unverified",
+      "reason": "no_external_judgments",
+      "votes": 0
+    },
+    "i3": {
+      "status": "unverified",
+      "reason": "resolver_or_disambiguator_unavailable"
+    },
+    "i4": {
+      "status": "unverified",
+      "reason": "no_external_judgments",
+      "votes": 0
+    }
+  },
+  "model_calls": 0
+}

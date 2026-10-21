@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "recommendation:spatial-ads",
+  "adapter_key": "spatial-ads",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "formal_comparison": false,
+  "seed": 42,
+  "device": "cpu",
+  "dataset": {
+    "id": "repository-authored-equation-fixtures",
+    "public_benchmark": false
+  },
+  "metrics": {
+    "lp_upper_bound": 3.0,
+    "rounding_trials": 256,
+    "infeasible_selections": 0,
+    "mean_selected_disk_weight": 0.38671875,
+    "ad_matching_or_payments_validated": false
+  },
+  "full_experiment_status": "not_applicable_theoretical_paper",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component/protocol only, not paper capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/recommendation-components/2602.12481-spatial-ads/metrics/component-cpu-seed42.json",
+    "code_commit": "41a21ada1da264795a7727d5766cbf23578d5db2",
+    "dataset_fingerprint": "0c30885b92276b6ac62baea3e47f095f4160cc8184020ccd443e77455a25fa6c",
+    "raw_result_path": "docs/research-audits/google16-components-20261021/evidence/google16-statistics-frozen-seed42.json",
+    "raw_result_sha256": "16e17586c1c5e516d67ae97261b15a5f1ff81d103b873e460d2f047e8eafdd6c",
+    "source_binding": "raw_captured_hashes"
+  }
+}
