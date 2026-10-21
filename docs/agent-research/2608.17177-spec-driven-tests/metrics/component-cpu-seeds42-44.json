@@ -1,0 +1,137 @@
+{
+  "schema_version": 2,
+  "method": "spec-driven-tests",
+  "manifest_ref": "agent-research:spec-driven-tests",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-priority-spec-driven-tests-v1",
+    "revision": "sha256:6c0914be83834a487668fe433c32b86313574d3f52675b077abf1e5cf3975f60",
+    "capability_benchmark": false,
+    "recipe": "source-frozen-generated-interface-inputs"
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "a760950abf6d02bbe43e845f32b23888650ea377",
+    "pretrained": false
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "protocol_cases": 3,
+        "dual_execution_calls": 2,
+        "actual_llm_calls": 0,
+        "buggy_fields_exposed": 0,
+        "build_errors_counted_as_detections": 0
+      },
+      "checks": {
+        "phase_order": true,
+        "public_view_only": true,
+        "same_suite_fixed_then_buggy": true,
+        "build_failure_not_detection": true,
+        "protected_modification_discarded": true,
+        "structured_spec_written": true,
+        "observed_k_aggregation": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "protocol_cases": 3,
+        "dual_execution_calls": 2,
+        "actual_llm_calls": 0,
+        "buggy_fields_exposed": 0,
+        "build_errors_counted_as_detections": 0
+      },
+      "checks": {
+        "phase_order": true,
+        "public_view_only": true,
+        "same_suite_fixed_then_buggy": true,
+        "build_failure_not_detection": true,
+        "protected_modification_discarded": true,
+        "structured_spec_written": true,
+        "observed_k_aggregation": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "protocol_cases": 3,
+        "dual_execution_calls": 2,
+        "actual_llm_calls": 0,
+        "buggy_fields_exposed": 0,
+        "build_errors_counted_as_detections": 0
+      },
+      "checks": {
+        "phase_order": true,
+        "public_view_only": true,
+        "same_suite_fixed_then_buggy": true,
+        "build_failure_not_detection": true,
+        "protected_modification_discarded": true,
+        "structured_spec_written": true,
+        "observed_k_aggregation": true
+      }
+    }
+  ],
+  "metrics": {
+    "actual_llm_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "buggy_fields_exposed": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "build_errors_counted_as_detections": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "dual_execution_calls": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "protocol_cases": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "a760950abf6d02bbe43e845f32b23888650ea377",
+    "artifact_path": "docs/agent-research/2608.17177-spec-driven-tests/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "bad1789f11403c8fe26843b5f86532f8fb0dfa4afc83e0d217a25cb682cb97f0",
+    "executed_source_sha256": {
+      "scripts/run_oct21_priority_backfill.py": "7a8d242f54e1b668d98cfe4f0d0e51ec87c44044903cd293b3c50a64c10d95de",
+      "src/auto_research/agent_research/spec_driven_tests.py": "583cb2dc02d6d6a3a6994bb49fedceb934f9cb0c91950e48352411aedbba161e"
+    },
+    "dataset_fingerprint": "sha256:c04251460560338edee817782f6c936141c35242d5b8ab00b338655a704a360a",
+    "accelerator": "CPU"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "component/interface diagnostics only; generated inputs are not public benchmark capability evidence"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "pretrained_model_calls": 0,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

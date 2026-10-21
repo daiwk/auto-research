@@ -1,0 +1,10 @@
+{
+  "paper_url": "https://arxiv.org/abs/2606.31278v1",
+  "figure": "Figure 3",
+  "source_url": "https://arxiv.org/html/2606.31278v1/bias_legend.png",
+  "image": "paper-figure-01.png",
+  "image_sha256": "5077bc38203df871c38b1032d0bff723499e4d8c8ff2ad9be628bced296d389e",
+  "description": "Original arXiv HTML figure, copied without crop or scientific edits; implementation follows the explicitly documented paper formula rather than claiming visual-diagram equivalence",
+  "copyright": "Original paper authors; arXiv v1 CC BY 4.0",
+  "visually_verified": true
+}

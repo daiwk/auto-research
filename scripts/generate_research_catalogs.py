@@ -829,6 +829,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "flint": ("推理与系统效率", "多向量检索与固定预算池化"),
         "stratified-sparse-attention": ("注意力与长上下文", "稀疏采样与估计"),
         "race-rope-compression": ("注意力与长上下文", "RoPE 与原生维度压缩"),
         "locale-jepa": ("网络架构", "JEPA 与几何表征"),
@@ -1009,6 +1010,8 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "mice": ("视觉生成与编辑", "多实例编辑与注意力隔离"),
+        "system-one-rerank": ("多模态检索", "单次前向结构化重排"),
         "cv-opd": ("多模态奖励与后训练", "视觉证据约束蒸馏"),
         "woven": ("视觉世界模型与时序推理", "视觉状态转移监督"),
         "umrm": ("多模态奖励与后训练", "冻结中间层探针与验证器自举"),

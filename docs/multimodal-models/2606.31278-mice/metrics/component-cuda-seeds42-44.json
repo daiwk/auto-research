@@ -1,0 +1,233 @@
+{
+  "schema_version": 2,
+  "method": "mice",
+  "manifest_ref": "multimodal-models:mice",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-priority-mice-v1",
+    "revision": "sha256:c0cee46cb09d25f29bed5531d7afe27781d065537cb3f68de7d9a1a5b09a5353",
+    "capability_benchmark": false,
+    "recipe": "source-frozen-generated-interface-inputs"
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "a760950abf6d02bbe43e845f32b23888650ea377",
+    "pretrained": false
+  },
+  "per_seed": [
+    {
+      "paper": "2606.31278v1",
+      "seed": 42,
+      "device": "cuda",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "pretrained_model_calls": 0,
+      "dataset": "generated-disjoint-mask-qkv-mini-suite",
+      "recipe": {
+        "instances": 2,
+        "raster": [
+          6,
+          8
+        ],
+        "heads": 2,
+        "head_dim": 8,
+        "kernel_size": 3,
+        "temperature": 8.0,
+        "epsilon": 1e-30,
+        "implementation_policy": "paper_v1",
+        "upstream_revision": "43b289de84dfd184c0ee1b551b0e1bea02f6e92d"
+      },
+      "checks": {
+        "independent_formula_match": true,
+        "finite_output_and_gradients": true,
+        "cross_prompt_hard_binding": true,
+        "remove_mask_changes_output": true,
+        "remove_log_bias_changes_output": true
+      },
+      "metrics": {
+        "output_mean_square": 0.03971937671303749,
+        "cross_prompt_probability_max": 0.0,
+        "removed_mask_mean_square_delta": 0.012023135088384151,
+        "removed_log_bias_mean_square_delta": 0.011757724918425083,
+        "q_gradient_norm": 0.004158977884799242,
+        "k_gradient_norm": 0.006355755962431431,
+        "v_gradient_norm": 0.00698441918939352,
+        "finite_output_and_gradients": 1.0,
+        "tokens": 101.0
+      }
+    },
+    {
+      "paper": "2606.31278v1",
+      "seed": 43,
+      "device": "cuda",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "pretrained_model_calls": 0,
+      "dataset": "generated-disjoint-mask-qkv-mini-suite",
+      "recipe": {
+        "instances": 2,
+        "raster": [
+          6,
+          8
+        ],
+        "heads": 2,
+        "head_dim": 8,
+        "kernel_size": 3,
+        "temperature": 8.0,
+        "epsilon": 1e-30,
+        "implementation_policy": "paper_v1",
+        "upstream_revision": "43b289de84dfd184c0ee1b551b0e1bea02f6e92d"
+      },
+      "checks": {
+        "independent_formula_match": true,
+        "finite_output_and_gradients": true,
+        "cross_prompt_hard_binding": true,
+        "remove_mask_changes_output": true,
+        "remove_log_bias_changes_output": true
+      },
+      "metrics": {
+        "output_mean_square": 0.03119182586669922,
+        "cross_prompt_probability_max": 0.0,
+        "removed_mask_mean_square_delta": 0.006996983662247658,
+        "removed_log_bias_mean_square_delta": 0.006667704787105322,
+        "q_gradient_norm": 0.006279744673520327,
+        "k_gradient_norm": 0.008126937784254551,
+        "v_gradient_norm": 0.005419897381216288,
+        "finite_output_and_gradients": 1.0,
+        "tokens": 101.0
+      }
+    },
+    {
+      "paper": "2606.31278v1",
+      "seed": 44,
+      "device": "cuda",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "pretrained_model_calls": 0,
+      "dataset": "generated-disjoint-mask-qkv-mini-suite",
+      "recipe": {
+        "instances": 2,
+        "raster": [
+          6,
+          8
+        ],
+        "heads": 2,
+        "head_dim": 8,
+        "kernel_size": 3,
+        "temperature": 8.0,
+        "epsilon": 1e-30,
+        "implementation_policy": "paper_v1",
+        "upstream_revision": "43b289de84dfd184c0ee1b551b0e1bea02f6e92d"
+      },
+      "checks": {
+        "independent_formula_match": true,
+        "finite_output_and_gradients": true,
+        "cross_prompt_hard_binding": true,
+        "remove_mask_changes_output": true,
+        "remove_log_bias_changes_output": true
+      },
+      "metrics": {
+        "output_mean_square": 0.04575711488723755,
+        "cross_prompt_probability_max": 0.0,
+        "removed_mask_mean_square_delta": 0.009653961285948753,
+        "removed_log_bias_mean_square_delta": 0.009458266198635101,
+        "q_gradient_norm": 0.006071633659303188,
+        "k_gradient_norm": 0.008461789228022099,
+        "v_gradient_norm": 0.010509158484637737,
+        "finite_output_and_gradients": 1.0,
+        "tokens": 101.0
+      }
+    }
+  ],
+  "metrics": {
+    "cross_prompt_probability_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "finite_output_and_gradients": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "k_gradient_norm": {
+      "mean": 0.00764816099156936,
+      "std": 0.001131708638234268,
+      "n": 3
+    },
+    "output_mean_square": {
+      "mean": 0.03888943915565809,
+      "std": 0.007318026258822476,
+      "n": 3
+    },
+    "q_gradient_norm": {
+      "mean": 0.005503452072540919,
+      "std": 0.0011689891700470765,
+      "n": 3
+    },
+    "removed_log_bias_mean_square_delta": {
+      "mean": 0.009294565301388502,
+      "std": 0.002548955613997548,
+      "n": 3
+    },
+    "removed_mask_mean_square_delta": {
+      "mean": 0.009558026678860188,
+      "std": 0.0025144486724213333,
+      "n": 3
+    },
+    "tokens": {
+      "mean": 101.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "v_gradient_norm": {
+      "mean": 0.007637825018415849,
+      "std": 0.0026067890263214424,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "a760950abf6d02bbe43e845f32b23888650ea377",
+    "artifact_path": "docs/multimodal-models/2606.31278-mice/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "ad3695d969b26d7219720a3351ddd17ef4f999f830bd4561889500b00e0d5ea0",
+    "executed_source_sha256": {
+      "scripts/run_oct21_priority_backfill.py": "7a8d242f54e1b668d98cfe4f0d0e51ec87c44044903cd293b3c50a64c10d95de",
+      "src/auto_research/multimodal/mice.py": "b2800171075d334c2d8d0adcf1349ef8d00a8ab5da141364ada107f813ce64f0",
+      "src/auto_research/foundation_models/flint.py": "7eb12bcd5e97d0aad3eb6ba9c0cbac402efb4f7e19b989aae7f5ae09b9a0ac14"
+    },
+    "dataset_fingerprint": "sha256:82974e095d689e8e3f6961d52599a5c25d5501a99ca0a443fb1550df3f84d550",
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "component/interface diagnostics only; generated inputs are not public benchmark capability evidence"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "pretrained_model_calls": 0,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

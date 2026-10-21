@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-21-priority-backfill",
+  "papers": [
+    {
+      "key": "spec-driven-tests",
+      "domain": "agent-research",
+      "title": "Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation",
+      "paper_url": "https://arxiv.org/abs/2608.17177v1",
+      "detail_path": "agent-research/2608.17177-spec-driven-tests/README.md",
+      "published_at": "2026-08-17T22:36:12Z",
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "review_done": true,
+      "component_implemented": true,
+      "intake_class": "historical-backfill",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/abs/2608.17177v1",
+        "scale": "90 Google-private defects, five runs per arm with Gemini3 Flash plus Gemini3.1 Pro judging and private build environments.",
+        "basis": "paper configuration, not measured full-run time"
+      }
+    },
+    {
+      "key": "mice",
+      "domain": "multimodal-models",
+      "title": "Editing Everything Everywhere All at Once",
+      "paper_url": "https://arxiv.org/abs/2606.31278v1",
+      "detail_path": "multimodal-models/2606.31278-mice/README.md",
+      "published_at": "2026-06-30T07:52:46Z",
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "review_done": true,
+      "component_implemented": true,
+      "intake_class": "historical-backfill",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/abs/2606.31278v1",
+        "scale": "4B/9B/12B/32B image-editor backbone matrix and full multi-instance editing evaluation; no complete generator/checkpoint experiment.",
+        "basis": "paper configuration, not measured full-run time"
+      }
+    },
+    {
+      "key": "flint",
+      "domain": "foundation-models",
+      "title": "FLINT: Fixed-budget Late Interaction",
+      "paper_url": "https://arxiv.org/abs/2610.27273v1",
+      "detail_path": "foundation-models/2610.27273-flint/README.md",
+      "published_at": "2026-10-19T20:46:01Z",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "review_done": true,
+      "component_implemented": true,
+      "intake_class": "same-bulletin-recent-backfill",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/abs/2610.27273v1",
+        "scale": "267K-step MS MARCO training, original four-GPU setup and million-document PLAID campaign; no trained retrieval benchmark.",
+        "basis": "paper configuration, not measured full-run time"
+      }
+    },
+    {
+      "key": "system-one-rerank",
+      "domain": "multimodal-models",
+      "title": "Multimodal Reranking Is a System One Decision",
+      "paper_url": "https://arxiv.org/abs/2610.28435v1",
+      "detail_path": "multimodal-models/2610.28435-system-one-rerank/README.md",
+      "published_at": "2026-10-20T16:00:45Z",
+      "priority": "P1",
+      "implementation_status": "component_only",
+      "review_done": true,
+      "component_implemented": true,
+      "intake_class": "same-bulletin-recent-backfill",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/abs/2610.28435v1",
+        "scale": "27B VLM, top16 multi-image context up to64K,14,419 choice requests on H200; no full benchmark or decision tuning.",
+        "basis": "paper configuration, not measured full-run time"
+      }
+    }
+  ]
+}
