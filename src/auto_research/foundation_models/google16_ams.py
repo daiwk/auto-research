@@ -47,10 +47,9 @@ def activation_direction(positive: Tensor, negative: Tensor) -> tuple[Tensor, Te
 def candidate_layers(number_of_layers: int) -> tuple[int, ...]:
     if number_of_layers < 2:
         raise ValueError("at least two transformer layers required")
-    # Hidden-state 0 is the input embedding. Return actual block output IDs.
-    first = max(1, int(number_of_layers * .4))
-    last = max(first, int(number_of_layers * .8))
-    return tuple(range(first, last + 1))
+    # Official extractor hooks zero-based blocks in an upper-exclusive range.
+    # These are block IDs, not HuggingFace hidden-state tuple indices.
+    return tuple(range(int(number_of_layers * .4), int(number_of_layers * .8)))
 
 
 def select_concept_layer(positive: Tensor, negative: Tensor, layer_ids: tuple[int, ...]) -> ConceptFingerprint:
@@ -94,5 +93,8 @@ def extract_last_token_activations(model, tokenizer, prompts: list[str], *, devi
             raise ValueError("prompt exceeds explicit token budget; no silent truncation")
         encoded = {key: value.to(device) for key, value in encoded.items()}
         result = model(**encoded, output_hidden_states=True, use_cache=False)
-        rows.append(torch.stack([result.hidden_states[layer][0, -1].float() for layer in layers]))
+        # hidden_states[0] is the input embedding; block i's output is i+1.
+        # The selected range excludes the final block, whose hidden-state tuple
+        # entry can additionally include the architecture's final layer norm.
+        rows.append(torch.stack([result.hidden_states[layer + 1][0, -1].float() for layer in layers]))
     return torch.stack(rows), layers

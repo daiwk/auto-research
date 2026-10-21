@@ -58,10 +58,38 @@ def test_checkpoint_extraction_is_last_real_token_no_generation_and_no_truncatio
             return SimpleNamespace(hidden_states=hidden)
 
     activations, layers = extract_last_token_activations(Model(), Tokenizer(), ["public prompt"], device="cpu")
-    assert layers == candidate_layers(5) == (2, 3, 4)
-    assert activations.tolist() == [[[6., 7.], [7., 8.], [8., 9.]]]
+    assert layers == candidate_layers(5) == (2, 3)
+    assert activations.tolist() == [[[7., 8.], [8., 9.]]]
     with pytest.raises(ValueError, match="token budget"):
         extract_last_token_activations(Model(), Tokenizer(), ["public prompt"], device="cpu", max_tokens=2)
+
+
+def test_hidden_state_mapping_matches_real_transformer_block_hooks_without_download():
+    transformers = pytest.importorskip("transformers")
+    model = transformers.GPT2LMHeadModel(transformers.GPT2Config(
+        vocab_size=12, n_positions=8, n_embd=8, n_layer=5, n_head=2,
+        resid_pdrop=0, embd_pdrop=0, attn_pdrop=0,
+    )).eval()
+
+    class Tokenizer:
+        def __call__(self, prompt, **kwargs):
+            return {"input_ids": torch.tensor([[1, 2, 3]])}
+
+    cached = {}
+    handles = []
+    for block_id in candidate_layers(5):
+        def hook(_module, _inputs, output, block_id=block_id):
+            hidden = output[0] if isinstance(output, tuple) else output
+            cached[block_id] = hidden[0, -1].detach()
+        handles.append(model.transformer.h[block_id].register_forward_hook(hook))
+    try:
+        actual, layers = extract_last_token_activations(model, Tokenizer(), ["prompt"], device="cpu")
+    finally:
+        for handle in handles:
+            handle.remove()
+    assert layers == (2, 3)
+    torch.testing.assert_close(actual[0], torch.stack([cached[layer] for layer in layers]))
+    assert candidate_layers(24) == tuple(range(9, 19))
 
 
 def test_bad_shapes_nonfinite_and_empty_concepts_rejected():
