@@ -128859,6 +128859,483 @@
           "requires_gpu_validation": false
         }
       ]
+    },
+    {
+      "batch": "2026-10-21-new-announcements-and-priority-delta-components",
+      "date": "2026-10-21",
+      "scope_kind": "selected-paper-implementation",
+      "source_artifact": "research-audits/oct21-components/README.md",
+      "all_sources_exhaustive": false,
+      "review_watermark_advanced": false,
+      "counts": {
+        "selected_papers": 12,
+        "new_to_repository_recent_papers": 11,
+        "historical_backfill": 1,
+        "components": 8,
+        "reference_only": 4,
+        "cuda_components_executed_on_a100": 4,
+        "category_entries_including_crosslists_and_replacements": 1619,
+        "unique_bulletin_identities": 1126,
+        "directory_new_urls_not_paper_count": 3
+      },
+      "candidates": [
+        {
+          "id": "2610.28194",
+          "key": "ap-opd",
+          "doc": "post-training/2610.28194-ap-opd/README.md",
+          "title": "Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation",
+          "priority": "P1",
+          "track": "post-training",
+          "status": "implemented",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "implementation_status": "component_only",
+          "catalog_key": "ap-opd",
+          "catalog_detail": "post-training/2610.28194-ap-opd/README.md",
+          "reason": "低成本组件已验收；完整实验成本过高不复现（审查DONE）。1.7B student/8B math teacher,17398 training problems,128prompts per batch,200updates,8192-token responses plus teacher GSPO and code/evaluation matrix.",
+          "original_published_at": "2026-10-20T13:34:43Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.28194v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "1.7B student/8B math teacher,17398 training problems,128prompts per batch,200updates,8192-token responses plus teacher GSPO and code/evaluation matrix.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28194v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Nanjing University"
+            }
+          ]
+        },
+        {
+          "id": "2610.24806",
+          "key": "aptamer-lab-loop",
+          "doc": "agent-research/2610.24806-aptamer-lab-loop/README.md",
+          "title": "Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery",
+          "priority": "P0",
+          "track": "agent",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "catalog_key": "aptamer-lab-loop",
+          "catalog_detail": "agent-research/2610.24806-aptamer-lab-loop/README.md",
+          "reason": "成本过高，不复现（审查DONE）。Specialist physical laboratory and sequencing; about4400 constructs and three7–10day feedback cycles.",
+          "original_published_at": "2026-10-17T18:21:50Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.24806v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "Specialist physical laboratory and sequencing; about4400 constructs and three7–10day feedback cycles.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.24806v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Google Research"
+            }
+          ]
+        },
+        {
+          "id": "2610.27423",
+          "key": "baseline-incremental",
+          "doc": "recommendation-components/2610.27423-baseline-incremental/README.md",
+          "title": "Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking",
+          "priority": "P0",
+          "track": "recommendation",
+          "status": "implemented",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "implementation_status": "component_only",
+          "catalog_key": "baseline-incremental",
+          "catalog_detail": "recommendation-components/2610.27423-baseline-incremental/README.md",
+          "reason": "低成本组件已验收；完整实验成本过高不复现（审查DONE）。Millions of private ranking logs, deployed predictions and user-randomized live-traffic four-arm experiments; no public production environment.",
+          "original_published_at": "2026-10-20T00:20:04Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.27423v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "Millions of private ranking logs, deployed predictions and user-randomized live-traffic four-arm experiments; no public production environment.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.27423v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Meta"
+            }
+          ]
+        },
+        {
+          "id": "2610.28577",
+          "key": "cache-engineering",
+          "doc": "agent-research/2610.28577-cache-engineering/README.md",
+          "title": "Cache Engineering for Agents",
+          "priority": "P1",
+          "track": "agent",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "catalog_key": "cache-engineering",
+          "catalog_detail": "agent-research/2610.28577-cache-engineering/README.md",
+          "reason": "成本过高，不复现（审查DONE）。Eight A800-80GB split prefill/decode with TP4, 120B/230B models and long-horizon serving evaluation.",
+          "original_published_at": "2026-10-20T17:32:24Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.28577",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "Eight A800-80GB split prefill/decode with TP4, 120B/230B models and long-horizon serving evaluation.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28577",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Tsinghua University"
+            }
+          ]
+        },
+        {
+          "id": "2610.28569",
+          "key": "echo-selector-loss",
+          "doc": "recommendation-components/2610.28569-echo-selector-loss/README.md",
+          "title": "ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling",
+          "priority": "P1",
+          "track": "recommendation",
+          "status": "implemented",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "implementation_status": "component_only",
+          "catalog_key": "echo-selector-loss",
+          "catalog_detail": "recommendation-components/2610.28569-echo-selector-loss/README.md",
+          "reason": "低成本组件已验收；完整实验成本过高不复现（审查DONE）。100K event histories, K10000/M100 retrieval, concurrent teacher/selector/ranking graphs, large industrial logs and live traffic.",
+          "original_published_at": "2026-10-20T17:28:16Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.28569v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "100K event histories, K10000/M100 retrieval, concurrent teacher/selector/ranking graphs, large industrial logs and live traffic.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28569v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Kuaishou Technology"
+            }
+          ]
+        },
+        {
+          "id": "2610.23732",
+          "key": "esc",
+          "doc": "foundation-models/2610.23732-esc/README.md",
+          "title": "ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis",
+          "priority": "P0",
+          "track": "foundation-model",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "catalog_key": "esc",
+          "catalog_detail": "foundation-models/2610.23732-esc/README.md",
+          "reason": "成本过高，不复现（审查DONE）。22B active parameters,177K steps,global batch128,6.8e21FLOPs and geometric preprocessing/Best-of-N.",
+          "original_published_at": "2026-10-14T21:40:55Z",
+          "intake_class": "historical-backfill",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.23732v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "22B active parameters,177K steps,global batch128,6.8e21FLOPs and geometric preprocessing/Best-of-N.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.23732v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "FAIR at Meta / Mila - Québec AI Institute / Université de Montréal"
+            }
+          ]
+        },
+        {
+          "id": "2610.28458",
+          "key": "locale-jepa",
+          "doc": "foundation-models/2610.28458-locale-jepa/README.md",
+          "title": "LocaLeJEPA: Maximum Entropy Representations under Geometric Priors",
+          "priority": "P1",
+          "track": "foundation-model",
+          "status": "implemented",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "implementation_status": "component_only",
+          "catalog_key": "locale-jepa",
+          "catalog_detail": "foundation-models/2610.28458-locale-jepa/README.md",
+          "reason": "低成本组件已验收；完整实验成本过高不复现（审查DONE）。ImageNet100epoch multiarchitecture grid, including eight-GPU ViT-L training.",
+          "original_published_at": "2026-10-20T16:15:06Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.28458v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "ImageNet100epoch multiarchitecture grid, including eight-GPU ViT-L training.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28458v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of Pennsylvania"
+            }
+          ]
+        },
+        {
+          "id": "2610.28380",
+          "key": "oo-harness",
+          "doc": "agent-research/2610.28380-oo-harness/README.md",
+          "title": "Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design",
+          "priority": "P0",
+          "track": "agent",
+          "status": "implemented",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "implementation_status": "component_only",
+          "catalog_key": "oo-harness",
+          "catalog_detail": "agent-research/2610.28380-oo-harness/README.md",
+          "reason": "低成本组件已验收；完整实验成本过高不复现（审查DONE）。Closed-source evolution/actor calls, forty evolution iterations per long-horizon benchmark and held-out benchmark campaign.",
+          "original_published_at": "2026-10-20T15:32:52Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.28380",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "Closed-source evolution/actor calls, forty evolution iterations per long-horizon benchmark and held-out benchmark campaign.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28380",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of Illinois Urbana-Champaign"
+            }
+          ]
+        },
+        {
+          "id": "2610.28048",
+          "key": "optd",
+          "doc": "post-training/2610.28048-optd/README.md",
+          "title": "On-Policy Transition Distillation",
+          "priority": "P1",
+          "track": "post-training",
+          "status": "implemented",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "implementation_status": "component_only",
+          "catalog_key": "optd",
+          "catalog_detail": "post-training/2610.28048-optd/README.md",
+          "reason": "低成本组件已验收；完整实验成本过高不复现（审查DONE）。1.5B/4B/7B students and domain teachers,50–150updates,up to16384-token training responses plus long multi-sample math/code evaluation.",
+          "original_published_at": "2026-10-20T11:37:31Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.28048v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "1.5B/4B/7B students and domain teachers,50–150updates,up to16384-token training responses plus long multi-sample math/code evaluation.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28048v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "The Hong Kong Polytechnic University"
+            }
+          ]
+        },
+        {
+          "id": "2610.24854",
+          "key": "rpl",
+          "doc": "agent-research/2610.24854-rpl/README.md",
+          "title": "Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning",
+          "priority": "P0",
+          "track": "agent",
+          "status": "implemented",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "implementation_status": "component_only",
+          "catalog_key": "rpl",
+          "catalog_detail": "agent-research/2610.24854-rpl/README.md",
+          "reason": "低成本组件已验收；完整实验成本过高不复现（审查DONE）。Eight H100 policy-training GPUs plus a separate eight-H100 reranking node, Wikipedia retrieval and full RL/mutation/SFT matrix.",
+          "original_published_at": "2026-10-17T20:03:09Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.24854",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "Eight H100 policy-training GPUs plus a separate eight-H100 reranking node, Wikipedia retrieval and full RL/mutation/SFT matrix.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.24854",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "KAIST AI / Meta Superintelligence Labs"
+            }
+          ]
+        },
+        {
+          "id": "2610.27898",
+          "key": "spar-prefix-balance",
+          "doc": "recommendation-components/2610.27898-spar-prefix-balance/README.md",
+          "title": "SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs",
+          "priority": "P1",
+          "track": "recommendation",
+          "status": "implemented",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "implementation_status": "component_only",
+          "catalog_key": "spar-prefix-balance",
+          "catalog_detail": "recommendation-components/2610.27898-spar-prefix-balance/README.md",
+          "reason": "低成本组件已验收；完整实验成本过高不复现（审查DONE）。Qwen3-0.6B/1.7B/4B, months of private Youku logs, daily SFT/DPO and seven-day live A/B.",
+          "original_published_at": "2026-10-20T09:17:14Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.27898v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "Qwen3-0.6B/1.7B/4B, months of private Youku logs, daily SFT/DPO and seven-day live A/B.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.27898v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of Electronic Science and Technology of China"
+            }
+          ]
+        },
+        {
+          "id": "2610.26856",
+          "key": "visually-attributable-opd",
+          "doc": "post-training/2610.26856-vag/README.md",
+          "title": "Reinforcement Learning with Visually Attributable On-Policy Self-Distillation",
+          "priority": "P1",
+          "track": "post-training",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "implementation_status": "deferred_high_cost",
+          "catalog_key": "visually-attributable-opd",
+          "catalog_detail": "post-training/2610.26856-vag/README.md",
+          "reason": "成本过高，不复现（审查DONE）。Eight H800, 4B/9B full-parameter post-training, group8 and batch48 with full benchmark matrix.",
+          "original_published_at": "2026-10-19T17:59:56Z",
+          "intake_class": "new-to-repository-recent-first-publication",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.26856v1",
+            "basis": "Named method/resource/deployment sections in fixed v1 and linked author source; not a local runtime estimate",
+            "scale": "Eight H800, 4B/9B full-parameter post-training, group8 and batch48 with full benchmark matrix.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "review_artifact": "research-audits/oct21-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Named defining method, experiment/resource and relevant deployment sections",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.26856v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Baidu Inc."
+            }
+          ]
+        }
+      ]
     }
   ]
 }

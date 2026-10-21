@@ -1,0 +1,12 @@
+{
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "3978f3d7f4f27d160b512a8462dcb9eac4f1dafd254b5a34b2de48e17daed065",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.24854v1",
+  "source_pdf_sha256": "ca231b44c6b5e58f7f9bdb8dde6be8cb572d6fec94e30c2e423f017f4ddf715c",
+  "page": 2,
+  "figure": "Figure 1",
+  "crop_pdf_points": [67, 65, 546, 358],
+  "render_scale": 2.5,
+  "visual_review": "程序结构、右侧训练/上下文图、图例和完整说明已目视核对",
+  "copyright": "Copyright belongs to the original authors."
+}

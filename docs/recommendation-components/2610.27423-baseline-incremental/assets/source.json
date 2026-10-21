@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/pdf/2610.27423v1",
+  "pdf_sha256": "2885a2e3d21d270dfbc711eded7f796d029230dbc8391d72f1541b73e993781f",
+  "figure": "Figure 1",
+  "pdf_page": 1,
+  "clip_points": [
+    48,
+    255,
+    565,
+    433
+  ],
+  "copyright": "original authors"
+}

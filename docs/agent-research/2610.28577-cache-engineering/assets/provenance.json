@@ -1,0 +1,12 @@
+{
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "178165f2a9bb9bab85052f9f18d6b6190d46483c51fac8c6afce4ba8ebd2ee7b",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.28577v1",
+  "source_pdf_sha256": "e4cc7d84bed9c9b0273f32c5d4fee7cb22b5480412f9e9802fe4eaf46ae832a4",
+  "page": 2,
+  "figure": "Figure 1",
+  "crop_pdf_points": [104, 75, 507, 264],
+  "render_scale": 2.5,
+  "visual_review": "逻辑文本、KV和计算三列，条件依赖标记与完整caption已目视核对",
+  "copyright": "Copyright belongs to the original authors."
+}

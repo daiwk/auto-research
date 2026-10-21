@@ -77,6 +77,10 @@
 - 2026-07-30 · 一作：Xingjian Wu · [Contrastive Reinforced Policy Optimization via Privileged Self-Distillation](../2607.28026-crpo/README.md)（`crpo`）：按预测熵区分反思探索正位置和 exposure-bias 负位置，对 privileged self-distillation 做组内对比。
 - 2026-07-29 · 一作：Jianze Wang · [SERPO: Self-Evolving Rubric Policy Optimization for Open-Ended Test-Time Reinforcement Learning](../2607.26873-serpo/README.md)（`serpo`）：让 Good–Normal–Bad 响应档案、query-specific rubrics 和 actor 策略形成三方闭环自进化。
 
+## Baidu Inc.
+
+- 2026-10-19 · 一作：Shiao Xie · [Reinforcement Learning with Visually Attributable On-Policy Self-Distillation](../2610.26856-vag/README.md)（`visually-attributable-opd`）：特权图像裁剪带来的 teacher 修正，可能混有语言先验或风格变化。VAG 让同一 EMA 教师对证据保留裁剪和随机遮挡裁剪重放相同学生前缀，只接纳与视觉对比方向一致的修正，再以有界项调制 verifier 的组归一化 advantage。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Beihang University
 
 - 2026-10-15 · 一作：Xiuhui Zhang · [Progress Reward Model for Reinforcement Learning via Large Language Models](../2610.22056-progress-reward/README.md)（`progress-reward`）：稀疏成功信号难以指导长程机器人控制。PRM4RL 让 LLM 给出子任务、当前子任务判定函数 $\Psi$ 与进度势函数 $\Phi$；将子任务语义作为状态先验，将相邻状态进度差作为低层 RL 的密集 reward。
@@ -282,6 +286,7 @@
 
 ## Nanjing University
 
+- 2026-10-20 · 一作：Guangyu Liu · [Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation](../2610.28194-ap-opd/README.md)（`ap-opd`）：同样高的 OPD 惩罚可能是持续稳定的，也可能刚刚突增。AP-OPD 用相邻 token 块定位后一种情况，再把突增后整块监督按一个比率回拉；不增加教师 forward，不改变 token 系数的正负。
 - 2026-10-15 · 一作：Yucheng Li · [OpCredit: Operation-Aware Policy Learning for Agentic Knowledge Graph Question Answering](../2610.21345-opcredit/README.md)（`opcredit`）：整条轨迹失败不代表每一步都无用，成功轨迹也可能绕路。OpCredit 的 BOC 从普通 rollout 中复用分支结果：同题、同活动实体，再匹配访问集合、剩余预算和决策阶段；FTC 则衡量**该操作局部前沿**相对答案邻域的进退。
 - 2026-09-30 · 一作：Bo-Wen Zhang · [T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning](../2610.00388-t2spo/README.md)（`t2spo`）：用历史成功轨迹中的剩余步数训练上下文内距离估计器，预测每个状态距离成功还多远；把相邻状态的距离改善转为步骤优势，与轨迹级奖励共同优化。冻结 TabPFN 避免额外训练 critic，失败轨迹不被误标成接近成功的正样本。
 - 2026-08-06 · 一作：Zhiyan Hou · [DASH](../2608.06243-dash/README.md)（`dash`）：普通 OPSD 对每个 token 独立匹配 privileged teacher，难把后续可靠推理对前面决策的信用传回去。DASH 由局部 teacher/student divergence 产生停止梯度 gate，再从后向前递推聚合权重；不增加 teacher forward pass，却获得自适应 distillation horizon。
@@ -426,6 +431,10 @@
 
 - 2026-10-15 · 一作：Wenxuan Luo · [Condition-Contrastive Extrapolation for On-Policy Distillation of Language Models](../2610.21195-cce-opd/README.md)（`cce-opd`）：教师可能跟随学生错误 reasoning prefix，而忽略题目条件。CCE 在**完全相同的学生 response prefix**上，让同一冻结教师分别读取完整题目与遮蔽一个有效前提的题目，以 clipped log-prob contrast 调整辅助 target。
 - 2026-10-14 · 一作：Chenxi Li · [Information-Gain Calibrated On-Policy Distillation for Deep Search Agents](../2610.20664-ig-opd/README.md)（`ig-opd`）：普通 OPD 在检索前按教师偏好评分 query，却不知道检索结果是否有用；又按 token 数量分配预算，容易让很长的最终回答压过短而关键的搜索调用。IG-OPD 用检索后的答案置信变化校正两点：ITC 重新分配回合预算，IQC 用有符号增益修正动作关键 token 的方向。
+
+## The Hong Kong Polytechnic University
+
+- 2026-10-20 · 一作：Runyang You · [On-Policy Transition Distillation](../2610.28048-optd/README.md)（`optd`）：最终层分布接近教师，不一定代表模型沿深度修正预测的方式接近教师。OPTD 保留最终层 OPD，再对选定浅到深 readout 的 log 概率增量施加监督。
 
 ## The Ohio State University
 

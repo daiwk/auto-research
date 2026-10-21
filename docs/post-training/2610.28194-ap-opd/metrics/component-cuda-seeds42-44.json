@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "method": "ap-opd",
+  "manifest_ref": "post-training:ap-opd",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-ap-opd-v1",
+    "revision": "sha256:90efe1e08c94df91a98f844d3b20658bbbae4edaf658b80db8b435a8ab4d193b",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "optimizer_updates": 3,
+        "parameter_delta_l2": 0.05080649672224768,
+        "gradient_norm_min": 0.7822023922988894,
+        "loss_reference_max_abs_error": 2.220446049250313e-16,
+        "logit_gradient_reference_max_abs_error": 6.938893903907228e-18,
+        "negative_control_difference_max": 0.27166746781749035,
+        "teacher_parameter_delta_max": 0.0,
+        "teacher_gradient_count": 0,
+        "pretrained_or_public_benchmark_evaluated": false,
+        "actual_sampled_selected_boundaries_total": 6,
+        "staircase_original_profile_reference_error": 0.0,
+        "staircase_recursive_profile_negative_control_difference": 0.39999999999999997
+      },
+      "audit_sha256": "7c69b0433625bf4208d878f9905002735f4bbf737544a4bb17f55912c87213a5"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "optimizer_updates": 3,
+        "parameter_delta_l2": 0.06556104608691078,
+        "gradient_norm_min": 1.2090923657486714,
+        "loss_reference_max_abs_error": 1.1102230246251565e-16,
+        "logit_gradient_reference_max_abs_error": 6.938893903907228e-18,
+        "negative_control_difference_max": 0.06463040555602262,
+        "teacher_parameter_delta_max": 0.0,
+        "teacher_gradient_count": 0,
+        "pretrained_or_public_benchmark_evaluated": false,
+        "actual_sampled_selected_boundaries_total": 1,
+        "staircase_original_profile_reference_error": 0.0,
+        "staircase_recursive_profile_negative_control_difference": 0.39999999999999997
+      },
+      "audit_sha256": "3fb1105fd7e7d471d02588ec73ad938e868e4f6405996feab2d8b737f5abe816"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "optimizer_updates": 3,
+        "parameter_delta_l2": 0.060632044037389296,
+        "gradient_norm_min": 0.9004897841483831,
+        "loss_reference_max_abs_error": 1.1102230246251565e-16,
+        "logit_gradient_reference_max_abs_error": 6.938893903907228e-18,
+        "negative_control_difference_max": 0.2581132817032483,
+        "teacher_parameter_delta_max": 0.0,
+        "teacher_gradient_count": 0,
+        "pretrained_or_public_benchmark_evaluated": false,
+        "actual_sampled_selected_boundaries_total": 5,
+        "staircase_original_profile_reference_error": 0.0,
+        "staircase_recursive_profile_negative_control_difference": 0.39999999999999997
+      },
+      "audit_sha256": "cef21938a37a0b44ed991bc281e8e8e5a93fa8f99e8914300b3fa821a3f35cc6"
+    }
+  ],
+  "metrics": {
+    "actual_sampled_selected_boundaries_total": {
+      "mean": 4,
+      "std": 2.6457513110645907,
+      "n": 3
+    },
+    "gradient_norm_min": {
+      "mean": 0.9639281807319813,
+      "std": 0.2204020983992945,
+      "n": 3
+    },
+    "logit_gradient_reference_max_abs_error": {
+      "mean": 6.938893903907228e-18,
+      "std": 0.0,
+      "n": 3
+    },
+    "loss_reference_max_abs_error": {
+      "mean": 1.4802973661668753e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "negative_control_difference_max": {
+      "mean": 0.19813705169225376,
+      "std": 0.11581859700502985,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.05899986228218258,
+      "std": 0.007511470874608538,
+      "n": 3
+    },
+    "pretrained_or_public_benchmark_evaluated": false,
+    "staircase_original_profile_reference_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "staircase_recursive_profile_negative_control_difference": {
+      "mean": 0.39999999999999997,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_parameter_delta_max": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "eb4cf6cab82d9e24a803debfa82868c54e49ce07",
+    "artifact_path": "docs/post-training/2610.28194-ap-opd/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "bd4024a34e6f820a6a26b2719fb72a60b470dfb259cb4d94c48402df8b27189a",
+    "executed_source_sha256": {
+      "scripts/run_oct21_post_components.py": "d0120ae4c18b4914f8617d1ae218a379aa602a57ac9a6c04d04e16f05cb1aa63",
+      "src/auto_research/post_training/oct21_distillation.py": "4ff14e00ec26f90ed6713da9c2421a278c55949fe6c6312c03d0e433ea0d2091"
+    },
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "dataset_fingerprint": "sha256:2531b6c27a2546d6c64a02eaa2b696929c286b1103604520d2b269a1dda16991"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

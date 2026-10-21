@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "method": "baseline-incremental",
+  "manifest_ref": "recommendation:baseline-incremental",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-baseline-incremental-v1",
+    "revision": "sha256:3d38f6149a8358d4e4ea1228647aa9fabbf36c6f1605479033a4784deef8c8a2",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "reference_max_error": 2.220446049250313e-16,
+        "floor_demotion": -0.999999
+      },
+      "audit_sha256": "43651c9afb0b0d32779978139f4bd356ab5d0d06d7c99f7db9420b844e673a1b",
+      "checks": {
+        "independent_logit_reference": true,
+        "hinge_is_positive_gap": true,
+        "demotion_does_not_vanish_at_floor": true,
+        "raw_only_negative_control_changes_ranking": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "reference_max_error": 2.220446049250313e-16,
+        "floor_demotion": -0.999999
+      },
+      "audit_sha256": "4803285e577f7be4ba2746bc7b146c9398747248950e888f53d1ae605864ea06",
+      "checks": {
+        "independent_logit_reference": true,
+        "hinge_is_positive_gap": true,
+        "demotion_does_not_vanish_at_floor": true,
+        "raw_only_negative_control_changes_ranking": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "reference_max_error": 2.220446049250313e-16,
+        "floor_demotion": -0.999999
+      },
+      "audit_sha256": "35553d1d13192f2f883682f5ba97e5b2d89b8fc045a2b2b2c81e253101dc72cc",
+      "checks": {
+        "independent_logit_reference": true,
+        "hinge_is_positive_gap": true,
+        "demotion_does_not_vanish_at_floor": true,
+        "raw_only_negative_control_changes_ranking": true
+      }
+    }
+  ],
+  "metrics": {
+    "floor_demotion": {
+      "mean": -0.999999,
+      "std": 0.0,
+      "n": 3
+    },
+    "reference_max_error": {
+      "mean": 2.220446049250313e-16,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "23a7dbf43e7b9c501afa45b9d0ba4a9394220e10",
+    "artifact_path": "docs/recommendation-components/2610.27423-baseline-incremental/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "638059b386f9eada045da280321cebbe08c109b9b56efbb35eb795c6bac694cc",
+    "executed_source_sha256": {
+      "scripts/run_oct21_ranking_components.py": "8d189db8dd4d309ccec4d978c57985f69418eae9d86bdfbab685bb5310346f63",
+      "src/auto_research/reproductions/baseline_incremental.py": "2ec95903c157073db9c013df8df710b36ee8b4f355fe64f6afa6e73ec92be385",
+      "src/auto_research/reproductions/spar_prefix_balance.py": "c894641bc82003a40f30414853a6d519c457ec584a0b41e0c061a637bae2f297",
+      "src/auto_research/reproductions/echo_distillation.py": "481c3aa677ff4cdc696e2d522984e54e8d15386618ebe0f805ff7c41ead83a6f"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:1e96f68d464a95f5a8daf73ba1ac102492ba9536e8877e5488b13e5a35aa66ae"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

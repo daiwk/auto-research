@@ -12,6 +12,7 @@
 - 2026-09 · [EvoSkillRec](../2609.34552-evoskillrec/README.md)：把推荐结构拆成带类型的可执行 skill genome，只将 validation 改善的组合晋级到可复用技能库。
 
 ## University of Electronic Science and Technology of China
+- [SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs](../../recommendation-components/2610.27898-spar-prefix-balance/README.md)：PATH按已生成SID前缀读取粗到细用户记忆，RQ-PIB在冻结残差码本后按历史交互负载修复兄弟分支；本地只实现含不可分商品权重上界的最小可行失真移动，不声称全局最优、不训练PATH/Qwen/DPO。
 - 2026-09 · [PromptShift](../2609.34229-promptshift/README.md)：比较身份提示与无身份参考列表的偏移，并按用户主流度混合相关分和逆群体流行度进行缓解。
 
 ## Baidu
@@ -150,6 +151,7 @@
 - 2017-03 · [DeepFM](../1703.04247-deepfm/README.md)：用共享 embedding 联合 FM 二阶交互和 deep 高阶交互，减少手工特征交叉。
 
 ## Kuaishou
+- [ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling](../../recommendation-components/2610.28569-echo-selector-loss/README.md)：用户侧DS保存原始历史记录，再由目标感知TFR读取；候选感知教师用逐目标软分布和选择边界成对监督训练DS。本地实现温度缩放CE、detached挖掘/权重与全batch归一边界损失，A100验证梯度隔离；不实现完整TWIN、实时双图或排名能力。
 - [MAPS: A Multi-Agent Personalized Script-Driven Video Advertising System Enhanced by Reinforcement Learning](../../recommendation-components/2610.25748-maps-creative/README.md)：以画像、脚本、导演和反思四Agent将广告创意从静态检索转为个性化生成，脚本SFT后用结构、偏好和商品事实的混合奖励优化，再按线上反馈路由最小修改。正文有快手场景量化A/B；仅收录方法与成本，不把奖励加权器包装为完整视频广告系统。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-09 · [UniRec](../2609.11052-unirec/README.md)：联合预排和精排融合，以纵向偏好对齐、紧凑 pairwise 聚合和组相对正则协调级联阶段。
 - 2026-08 · [HRPO](../2608.00750-hrpo/README.md)：按层级 Semantic ID 前缀构造 residual credit-to-go，让生成式推荐的策略更新同时优化局部 token 与整条推荐轨迹。
@@ -188,6 +190,7 @@
 - 2024-12 · [MSD](../2412.06860-msd/README.md)：把 teacher 的用户知识自回归蒸馏到小模型，再通过 LoRA 和缓存表征对齐 CTR 任务。
 
 ## Meta
+- [Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking](../../recommendation-components/2610.27423-baseline-incremental/README.md)：保留原始参与度预测，并为相对用户、商品或请求基线的增量项独立加权；实现logit/raw比较、sigmoid门、hinge及地板不消失的降权门。正文有全流量部署与四臂线上消融；本地仅L1评分机制，不复现私有排名系统或线上收益。
 - 2026-10 · [Optimizing Effective Training Time for Large-Scale Recommendation Systems](../2610.02057-effective-training-time/README.md)：把 wall time 拆为真正消费新数据的训练时间与初始化、编译、checkpoint、发布和恢复损耗，并按 owner 定位。
 - 2026-09 · [EvoPilot](../2609.21257-evopilot/README.md)：把匹配的 control/treatment 产物作为证据单元，以 fail-closed 校验和人工审核阻止不公平比较进入下一轮自动研究。
 - 2026-09 · [CORAL](../2609.02730-coral/README.md)：在预算与执行约束下让 LLM 连续提出推荐配置，并以最近实验记忆和生产反馈驱动下一轮优化。

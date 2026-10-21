@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/pdf/2610.28458v1",
+  "paper_sha256": "d32c74ce06883a8c1087d6c0724114600af602ec9b1266d1e36a0ee262a8186f",
+  "figure": "Figure 2",
+  "pdf_page": 3,
+  "crop_pdf_points": [104, 75, 507, 331],
+  "render_scale": 2.5,
+  "image": "paper-figure-01.png",
+  "image_sha256": "19b6c444bb876a73244f65a040db181ffc55e85314aee60bf3c4abfe92a959e8",
+  "description": "Original complete method diagram, caption is reproduced in Chinese in README; no scientific content edited",
+  "copyright": "Original paper authors; arXiv v1 CC BY 4.0",
+  "visually_verified": true
+}

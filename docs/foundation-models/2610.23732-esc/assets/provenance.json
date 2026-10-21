@@ -1,0 +1,10 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.23732v1",
+  "figure": "Figure 3",
+  "source_url": "https://arxiv.org/html/2610.23732v1/model_diagram.png",
+  "image": "paper-figure-01.png",
+  "image_sha256": "9cee24817e5517bea61c19dc9d2e9cd9e77a014d2e9e32261011d05847af1126",
+  "description": "Original architecture diagram, downloaded without editing",
+  "copyright": "Original paper authors; arXiv v1 CC BY 4.0",
+  "visually_verified": true
+}

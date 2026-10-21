@@ -1,0 +1,10 @@
+{
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "931edffcb517c14f207f0c353ec01f475ee672dacef00c10aaa4aa6d39b5e276",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.28380v1",
+  "source_image_url": "https://arxiv.org/html/2610.28380v1/figure2_method.png",
+  "figure": "Figure 3",
+  "extraction": "official arXiv HTML figure image, unchanged",
+  "visual_review": "完整训练、冻结与held-out路由四阶段，文字和箭头已目视核对",
+  "copyright": "Copyright belongs to the original authors."
+}

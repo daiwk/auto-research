@@ -1,5 +1,11 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-21 近期公告与优先机构增量
+
+[本轮固定交付与来源回执](research-audits/oct21-components/README.md)：8个低成本组件、4篇高成本资料。
+Meta的Baseline and Incremental/RPL、Google合作OO-Harness优先；四个CUDA组件已在真实A100完成三seed验证。
+完整实验全部明确不复现、审查DONE，不追加自动训练TODO；这不等于10月16–21全窗口已审结，统一审查水位仍见下节。
+
 ## 审查截至 2026-10-15：覆盖范围与归档例外
 
 当前审查水位与例外以[统一状态](paper-discovery-watermark.json)为准；

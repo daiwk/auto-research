@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "method": "spar-prefix-balance",
+  "manifest_ref": "recommendation:spar-prefix-balance",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-spar-prefix-balance-v1",
+    "revision": "sha256:3d38f6149a8358d4e4ea1228647aa9fabbf36c6f1605479033a4784deef8c8a2",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "repair_moves": 16,
+        "max_bound_violation": -0.75
+      },
+      "audit_sha256": "242f960e49df67c98431d837157d5600165058f575d79326ceb55d30072a47ab",
+      "checks": {
+        "initial_assignments_are_nearest_centers": true,
+        "all_prefix_bounds_satisfied": true,
+        "frozen_codebook_unchanged": true,
+        "at_most_one_move_per_item": true,
+        "no_repair_negative_control_is_overloaded": true,
+        "total_load_preserved": true,
+        "parent_memberships_unchanged": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "repair_moves": 16,
+        "max_bound_violation": 0.0
+      },
+      "audit_sha256": "855f48bb1a2048b8e69750c5c76f1888b2c62e43d19618ca0db2166c8fab8eae",
+      "checks": {
+        "initial_assignments_are_nearest_centers": true,
+        "all_prefix_bounds_satisfied": true,
+        "frozen_codebook_unchanged": true,
+        "at_most_one_move_per_item": true,
+        "no_repair_negative_control_is_overloaded": true,
+        "total_load_preserved": true,
+        "parent_memberships_unchanged": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "repair_moves": 14,
+        "max_bound_violation": 0.0
+      },
+      "audit_sha256": "eb69e3fe814c6d5528da647cdc2da726f962c5a4dc73a7ca3f1c1330e75ae85a",
+      "checks": {
+        "initial_assignments_are_nearest_centers": true,
+        "all_prefix_bounds_satisfied": true,
+        "frozen_codebook_unchanged": true,
+        "at_most_one_move_per_item": true,
+        "no_repair_negative_control_is_overloaded": true,
+        "total_load_preserved": true,
+        "parent_memberships_unchanged": true
+      }
+    }
+  ],
+  "metrics": {
+    "max_bound_violation": {
+      "mean": -0.25,
+      "std": 0.4330127018922193,
+      "n": 3
+    },
+    "repair_moves": {
+      "mean": 15.333333333333334,
+      "std": 1.1547005383792515,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "23a7dbf43e7b9c501afa45b9d0ba4a9394220e10",
+    "artifact_path": "docs/recommendation-components/2610.27898-spar-prefix-balance/metrics/component-cpu-seeds42-44.json",
+    "raw_runner_artifact_sha256": "26dd97bf54ecf63fbb2fe09a8c6a7a43382e5f9b5ad20230a3f130c9245488d5",
+    "executed_source_sha256": {
+      "scripts/run_oct21_ranking_components.py": "8d189db8dd4d309ccec4d978c57985f69418eae9d86bdfbab685bb5310346f63",
+      "src/auto_research/reproductions/baseline_incremental.py": "2ec95903c157073db9c013df8df710b36ee8b4f355fe64f6afa6e73ec92be385",
+      "src/auto_research/reproductions/spar_prefix_balance.py": "c894641bc82003a40f30414853a6d519c457ec584a0b41e0c061a637bae2f297",
+      "src/auto_research/reproductions/echo_distillation.py": "481c3aa677ff4cdc696e2d522984e54e8d15386618ebe0f805ff7c41ead83a6f"
+    },
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:6dea63b9fc4d13ba04bdef1c10b74773fc18c3101879e6f3368b088c7c02b957"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

@@ -3,6 +3,9 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-10
+- [Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking](../../recommendation-components/2610.27423-baseline-incremental/README.md)：保留原始参与度预测，并为相对用户、商品或请求基线的增量项独立加权；实现logit/raw比较、sigmoid门、hinge及地板不消失的降权门。正文有全流量部署与四臂线上消融；本地仅L1评分机制，不复现私有排名系统或线上收益。
+- [ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling](../../recommendation-components/2610.28569-echo-selector-loss/README.md)：用户侧DS保存原始历史记录，再由目标感知TFR读取；候选感知教师用逐目标软分布和选择边界成对监督训练DS。本地实现温度缩放CE、detached挖掘/权重与全batch归一边界损失，A100验证梯度隔离；不实现完整TWIN、实时双图或排名能力。
+- [SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs](../../recommendation-components/2610.27898-spar-prefix-balance/README.md)：PATH按已生成SID前缀读取粗到细用户记忆，RQ-PIB在冻结残差码本后按历史交互负载修复兄弟分支；本地只实现含不可分商品权重上界的最小可行失真移动，不声称全局最优、不训练PATH/Qwen/DPO。
 - [Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search](../../recommendation-components/2610.26105-sid-topology/README.md)：冻结旧商品完整三层SID，只按新价值排名给新商品分配路径，允许新商品与原头部token碰撞，不通过移动旧路径强行去重。实现价值先验、HC桶、增量插入和映射漂移审计；语义前缀由调用方提供，不训练RQ-VAE或LLM，64卡生产完整实验成本过高不复现。
 - [MAPS: A Multi-Agent Personalized Script-Driven Video Advertising System Enhanced by Reinforcement Learning](../../recommendation-components/2610.25748-maps-creative/README.md)：以画像、脚本、导演和反思四Agent将广告创意从静态检索转为个性化生成，脚本SFT后用结构、偏好和商品事实的混合奖励优化，再按线上反馈路由最小修改。正文有快手场景量化A/B；仅收录方法与成本，不把奖励加权器包装为完整视频广告系统。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [CASI](../2610.20293-casi/README.md)：冻结一次检索的候选快照，重组子集并以 Shapley 分配动作信用，再通过有界零和投影生成优势。本地只执行 CPU 信用组件，私有拍卖与 LLM 策略训练不复现。
