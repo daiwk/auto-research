@@ -15,7 +15,8 @@ license = {text = "MIT"}
 dependencies = ["numpy>=2.0"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.12,<1", "Pillow>=11,<13"]
+dev = ["pytest>=8", "ruff>=0.12,<1", "Pillow>=11,<13", "scipy>=1.14,<2"]
+research-components = ["scipy>=1.14,<2"]
 plum = ["torch>=2.7.0a0,<3", "transformers>=5.0,<6", "safetensors>=0.5"]
 neural-recs = ["torch>=2.7.0a0,<3"]
 llm-evolution = ["torch>=2.7.0a0,<3", "tokenizers>=0.21,<1"]
