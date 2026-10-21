@@ -72,6 +72,14 @@
 
 ## 注意力与长上下文
 
+### RoPE 与原生维度压缩
+
+- [RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies](../../foundation-models/2610.28385-race-rope-compression/README.md)（`race-rope-compression`）：把KV写成低秩形式却在注意力前还原，可能节省缓存但增加运算。RACE直接改变注意力head的宽度：Q和K共享选择，只保留完整RoPE旋转对；V通过校准激活的右奇异子空间投影；再将两种变换折叠到Q/K/V/O权重。保留原模型频率及原head维度缩放，避免把缩小维度当作新模型重新编码。
+
+### 稀疏采样与估计
+
+- [Stratified Sparse Attention: Reducing the Sparse-to-Dense Gap at Extreme Sparsity](../../foundation-models/2610.28441-stratified-sparse-attention/README.md)（`stratified-sparse-attention`）：只保留 top-k 会丢掉尾部质量；均匀抽样又浪费预算。SSA先确定保留高概率项，再按残差代理分布抽样。关键不是“top-k加采样”的外形，而是**有放回抽样后去重，按每个token至少出现一次的包含概率修正**。论文的自适应 Algorithm 1 与实际优化内核的固定 heavy fraction 版本不同；本地实现前者，不冒充后者的速度。
+
 ### 稀疏注意力与视频生成
 
 - [Sink-Sparse Hybrid Attention for Efficient Inference in T2I/T2V Diffusion Transformers](../../foundation-models/2610.22975-sink-sparse/README.md)（`sink-sparse`）：扩散Transformer在每个去噪步重复执行昂贵的attention。本文观察到某些层/头中的高概率block关系在不同提示和seed下较稳定，因此一次离线校准即可得到静态稀疏支持；另用低分辨率全局KV分支补回分散上下文，无需改权重或采样schedule。

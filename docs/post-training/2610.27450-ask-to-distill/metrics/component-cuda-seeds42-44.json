@@ -1,0 +1,160 @@
+{
+  "schema_version": 2,
+  "method": "ask-to-distill",
+  "manifest_ref": "post-training:ask-to-distill",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-followup-ask-to-distill-v1",
+    "revision": "sha256:da80160562aa6a4eef989811a5effd153a44674d6e71dde6185d13e4dfb42c22",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "discrepancy_reference_max_abs_error": 8.881784197001252e-16,
+        "compatibility_reference_max_abs_error": 5.551115123125783e-17,
+        "gradient_reference_max_abs_error": 1.734723475976807e-17,
+        "renormalized_teacher_mass_negative_control_difference": 0.4052934026079129,
+        "reward_mean": 0.09548387079804363,
+        "delta_ref": 1.5183809916036453,
+        "gradient_norm": 0.16169783872786173,
+        "parameter_delta_l2": 0.0016169783872785944,
+        "teacher_gradient_count": 0,
+        "old_policy_gradient_count": 0
+      },
+      "checks": {
+        "reward_detached": true,
+        "fixed_advantage_detached": true,
+        "padding_zero_gradient": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "discrepancy_reference_max_abs_error": 4.440892098500626e-16,
+        "compatibility_reference_max_abs_error": 1.1102230246251565e-16,
+        "gradient_reference_max_abs_error": 6.938893903907228e-18,
+        "renormalized_teacher_mass_negative_control_difference": 0.41163982082762596,
+        "reward_mean": 0.0797091838252747,
+        "delta_ref": 1.5072461912475894,
+        "gradient_norm": 0.17677127524636788,
+        "parameter_delta_l2": 0.0017677127524636897,
+        "teacher_gradient_count": 0,
+        "old_policy_gradient_count": 0
+      },
+      "checks": {
+        "reward_detached": true,
+        "fixed_advantage_detached": true,
+        "padding_zero_gradient": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "discrepancy_reference_max_abs_error": 4.440892098500626e-16,
+        "compatibility_reference_max_abs_error": 1.1102230246251565e-16,
+        "gradient_reference_max_abs_error": 1.214306433183765e-17,
+        "renormalized_teacher_mass_negative_control_difference": 0.36253457848774007,
+        "reward_mean": 0.09642229786074363,
+        "delta_ref": 1.7850698208863978,
+        "gradient_norm": 0.13231016689197145,
+        "parameter_delta_l2": 0.0013231016689197789,
+        "teacher_gradient_count": 0,
+        "old_policy_gradient_count": 0
+      },
+      "checks": {
+        "reward_detached": true,
+        "fixed_advantage_detached": true,
+        "padding_zero_gradient": true
+      }
+    }
+  ],
+  "metrics": {
+    "compatibility_reference_max_abs_error": {
+      "mean": 9.251858538542972e-17,
+      "std": 3.204937810639273e-17,
+      "n": 3
+    },
+    "delta_ref": {
+      "mean": 1.603565667912544,
+      "std": 0.15728577209909786,
+      "n": 3
+    },
+    "discrepancy_reference_max_abs_error": {
+      "mean": 5.921189464667501e-16,
+      "std": 2.5639502485114184e-16,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 0.15692642695540035,
+      "std": 0.022611331600596463,
+      "n": 3
+    },
+    "gradient_reference_max_abs_error": {
+      "mean": 1.214306433183765e-17,
+      "std": 5.204170427930421e-18,
+      "n": 3
+    },
+    "old_policy_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta_l2": {
+      "mean": 0.001569264269554021,
+      "std": 0.000226113316005932,
+      "n": 3
+    },
+    "renormalized_teacher_mass_negative_control_difference": {
+      "mean": 0.39315593397442633,
+      "std": 0.026708047755992646,
+      "n": 3
+    },
+    "reward_mean": {
+      "mean": 0.09053845082802066,
+      "std": 0.009390150648449348,
+      "n": 3
+    },
+    "teacher_gradient_count": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "f630daed189fe0b3d8d7412ff50719b931670e1a",
+    "artifact_path": "docs/post-training/2610.27450-ask-to-distill/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "7ce0faacb920bcb5959d1b35c9756a2fad06bcb72ed5bc4c25cafefe9864a590",
+    "executed_source_sha256": {
+      "scripts/run_oct21_followup_post_components.py": "cf17793193af21ecf1796b869cfde3d2aa78f7affd5b52f393e890485ae76819",
+      "src/auto_research/post_training/oct21_followup_distillation.py": "de6b6263a442935d9eb5725167c90a593a91289611b5fdc938dc3e540278c6e5"
+    },
+    "dataset_fingerprint": "sha256:8a7f1151dfcd18280992a118ca20aa5a3d5c5269f700521af9571762010e6ee7",
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

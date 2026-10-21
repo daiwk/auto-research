@@ -1,0 +1,10 @@
+{
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "cf90d09be17e9e0e982c85ecbf03a559030303a5eb6f41334679c99cb40e1580",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.28601v1",
+  "source_image_url": "https://arxiv.org/html/2610.28601v1/agent_s4_method.png",
+  "figure": "Figure 3",
+  "extraction": "official arXiv HTML figure image, unchanged",
+  "visual_review": "完整种群、二元选择、变异/交叉、训练与验证评估、保留后代及下一轮箭头已目视核对",
+  "copyright": "Copyright belongs to the original authors."
+}

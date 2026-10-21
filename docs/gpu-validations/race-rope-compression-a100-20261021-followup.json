@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "adapter_key": "race-rope-compression",
+  "validated_at": "2026-10-21",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python",
+    "scripts/run_oct21_followup_attention.py",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42,43,44",
+    "--output",
+    "results/followup-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-followup-race-rope-compression-v1",
+    "revision": "sha256:4aa561012428e5c68340503dc2746ca200cee876a408cec149c2b9e85a4a2dff",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "f630daed189fe0b3d8d7412ff50719b931670e1a",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "folded_explicit_max_abs_error": {
+      "mean": 1.502533753712972e-07,
+      "std": 7.745857126390285e-08,
+      "n": 3
+    },
+    "input_gradient_norm": {
+      "mean": 0.05406393172840277,
+      "std": 0.0520811082450496,
+      "n": 3
+    },
+    "original_qk_dimension": {
+      "mean": 8,
+      "std": 0.0,
+      "n": 3
+    },
+    "retained_qk_dimension": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "retained_value_dimension": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "rope_commutation_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "value_basis_orthogonality_max_error": {
+      "mean": 9.934107462565105e-08,
+      "std": 3.4412757706023796e-08,
+      "n": 3
+    },
+    "wrong_reduced_dim_scale_output_l2_gap": {
+      "mean": 0.49544138212998706,
+      "std": 0.4516974621625251,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "src/auto_research/foundation_models/oct21_followup_attention.py": "4085a5dd382f523753e6b79f3ef7f039f77bbed3cfe1680d5bc404a5b2fdb5d9",
+    "scripts/run_oct21_followup_attention.py": "854c78875246b2f97bc4ac6806b611a3fa86b5f7e065be263873cd225466c661"
+  },
+  "provenance": {
+    "commit": "f630daed189fe0b3d8d7412ff50719b931670e1a",
+    "artifact_path": "docs/gpu-validations/race-rope-compression-a100-20261021-followup.json",
+    "raw_runner_artifact_sha256": "5e8daec3a622d6728094b59288896605e6c315579a55a7c3d53509f0b2a827fd",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/oct21_followup_attention.py": "4085a5dd382f523753e6b79f3ef7f039f77bbed3cfe1680d5bc404a5b2fdb5d9",
+      "scripts/run_oct21_followup_attention.py": "854c78875246b2f97bc4ac6806b611a3fa86b5f7e065be263873cd225466c661"
+    },
+    "dataset_fingerprint": "sha256:a88900356e62ed4398136a5146c0e471e50a5f1aa69d00b6e34898e80318b6c9",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "metric_artifact_path": "docs/foundation-models/2610.28385-race-rope-compression/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

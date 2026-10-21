@@ -129336,6 +129336,278 @@
           ]
         }
       ]
+    },
+    {
+      "batch": "2026-10-21-same-bulletin-followup",
+      "date": "2026-10-21",
+      "scope_kind": "same-bulletin-followup",
+      "counts": {
+        "selected_papers": 6,
+        "component_only": 5,
+        "reference_only": 1,
+        "fresh_since_last_scan": 0,
+        "historical_backfill": 1,
+        "same_bulletin_recent_backfill": 5,
+        "unique_bulletin_identities": 1126,
+        "new_official_urls": 0
+      },
+      "source_artifact": "research-audits/oct21-followup/README.md",
+      "review_watermark_advanced": false,
+      "all_sources_exhaustive": false,
+      "candidates": [
+        {
+          "key": "agent-s4",
+          "domain": "agent-research",
+          "title": "Evolving Agent Interfaces",
+          "paper_url": "https://arxiv.org/abs/2610.28601",
+          "detail_path": "agent-research/2610.28601-agent-s4/README.md",
+          "published_at": "2026-10-20T17:47:37Z",
+          "priority": "P1",
+          "component_implemented": true,
+          "implementation_status": "component_only",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "intake_class": "same-bulletin-recent-backfill",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.28601",
+            "scale": "Qwen3.8-27B, 30 evolutionary generations, 30/48 training and15 validation tasks, long GUI rollouts and cloud VMs; no full OSWorld evaluation.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "basis": "paper configuration, not local runtime measurement"
+          },
+          "id": "2610.28601",
+          "doc": "agent-research/2610.28601-agent-s4/README.md",
+          "catalog_key": "agent-s4",
+          "catalog_detail": "agent-research/2610.28601-agent-s4/README.md",
+          "track": "agent",
+          "status": "implemented",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Defining method, experimental configuration, code availability and key figure; not the whole article",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28601",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of California, Santa Barbara"
+            }
+          ],
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "低成本公式/控制器组件已实跑；完整实验成本过高，不复现（审查 DONE）。"
+        },
+        {
+          "key": "ask-to-distill",
+          "domain": "post-training",
+          "title": "Ask to Distill: Learning to Synthesize Data for On-Policy Distillation",
+          "paper_url": "https://arxiv.org/abs/2610.27450v1",
+          "detail_path": "post-training/2610.27450-ask-to-distill/README.md",
+          "published_at": "2026-10-20T01:00:17Z",
+          "priority": "P1",
+          "component_implemented": true,
+          "implementation_status": "component_only",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "intake_class": "same-bulletin-recent-backfill",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.27450v1",
+            "scale": "Multi-model ask/answer/distill training and long on-policy generations; no teacher/student checkpoint or dataset downloaded for this component.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "basis": "paper configuration, not local runtime measurement"
+          },
+          "id": "2610.27450",
+          "doc": "post-training/2610.27450-ask-to-distill/README.md",
+          "catalog_key": "ask-to-distill",
+          "catalog_detail": "post-training/2610.27450-ask-to-distill/README.md",
+          "track": "post-training",
+          "status": "implemented",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Defining method, experimental configuration, code availability and key figure; not the whole article",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.27450v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of Illinois Urbana-Champaign"
+            }
+          ],
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "低成本公式/控制器组件已实跑；完整实验成本过高，不复现（审查 DONE）。"
+        },
+        {
+          "key": "projected-distillation",
+          "domain": "post-training",
+          "title": "Projected Distillation: On Learning to Solve Hard Problems from Close, Correct Targets",
+          "paper_url": "https://arxiv.org/abs/2610.27467v1",
+          "detail_path": "post-training/2610.27467-projected-distillation/README.md",
+          "published_at": "2026-10-20T01:38:01Z",
+          "priority": "P1",
+          "component_implemented": true,
+          "implementation_status": "component_only",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "intake_class": "same-bulletin-recent-backfill",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.27467v1",
+            "scale": "Original eight-A100 training and paid API projection/verifier matrix; no full checkpoint training or projector service.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "basis": "paper configuration, not local runtime measurement"
+          },
+          "id": "2610.27467",
+          "doc": "post-training/2610.27467-projected-distillation/README.md",
+          "catalog_key": "projected-distillation",
+          "catalog_detail": "post-training/2610.27467-projected-distillation/README.md",
+          "track": "post-training",
+          "status": "implemented",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Defining method, experimental configuration, code availability and key figure; not the whole article",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.27467v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of Massachusetts"
+            }
+          ],
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "低成本公式/控制器组件已实跑；完整实验成本过高，不复现（审查 DONE）。"
+        },
+        {
+          "key": "race-rope-compression",
+          "domain": "foundation-models",
+          "title": "RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies",
+          "paper_url": "https://arxiv.org/abs/2610.28385v1",
+          "detail_path": "foundation-models/2610.28385-race-rope-compression/README.md",
+          "published_at": "2026-10-20T15:34:02Z",
+          "priority": "P1",
+          "component_implemented": true,
+          "implementation_status": "component_only",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "intake_class": "same-bulletin-recent-backfill",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.28385v1",
+            "scale": "Original multi-billion-parameter model calibration, recovery training and long-context benchmark matrix; no complete checkpoint experiment. Native projection folding does not require a custom CUDA kernel.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "basis": "paper configuration, not local runtime measurement"
+          },
+          "id": "2610.28385",
+          "doc": "foundation-models/2610.28385-race-rope-compression/README.md",
+          "catalog_key": "race-rope-compression",
+          "catalog_detail": "foundation-models/2610.28385-race-rope-compression/README.md",
+          "track": "foundation-model",
+          "status": "implemented",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Defining method, experimental configuration, code availability and key figure; not the whole article",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28385v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "MIT CSAIL"
+            }
+          ],
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "低成本公式/控制器组件已实跑；完整实验成本过高，不复现（审查 DONE）。"
+        },
+        {
+          "key": "residency-rl",
+          "domain": "agent-research",
+          "title": "ResidencyRL: Reinforcement Learning in Simulated Clinical Environments",
+          "paper_url": "https://arxiv.org/abs/2608.07418v1",
+          "detail_path": "agent-research/2608.07418-residency-rl/README.md",
+          "published_at": "2026-08-07T17:04:41Z",
+          "priority": "P0",
+          "component_implemented": false,
+          "implementation_status": "deferred_high_cost",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "intake_class": "historical-backfill",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2608.07418v1",
+            "scale": "Internal Gemini3.5 Flash GRPO, Gemini3.1 Pro simulation/judging,57,453 scenarios and up to60 dialogue turns plus8 tool calls; author code explicitly not released.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "basis": "paper configuration, not local runtime measurement"
+          },
+          "id": "2608.07418",
+          "doc": "agent-research/2608.07418-residency-rl/README.md",
+          "catalog_key": "residency-rl",
+          "catalog_detail": "agent-research/2608.07418-residency-rl/README.md",
+          "track": "agent",
+          "status": "deferred",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Defining method, experimental configuration, code availability and key figure; not the whole article",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2608.07418v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Google DeepMind"
+            }
+          ],
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）。"
+        },
+        {
+          "key": "stratified-sparse-attention",
+          "domain": "foundation-models",
+          "title": "Stratified Sparse Attention: Reducing the Sparse-to-Dense Gap at Extreme Sparsity",
+          "paper_url": "https://arxiv.org/abs/2610.28441v1",
+          "detail_path": "foundation-models/2610.28441-stratified-sparse-attention/README.md",
+          "published_at": "2026-10-20T16:02:12Z",
+          "priority": "P1",
+          "component_implemented": true,
+          "implementation_status": "component_only",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "intake_class": "same-bulletin-recent-backfill",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/abs/2610.28441v1",
+            "scale": "Original multi-billion-parameter long-context model/kernel benchmark campaign; no checkpoint, throughput claim or serving system.",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "basis": "paper configuration, not local runtime measurement"
+          },
+          "id": "2610.28441",
+          "doc": "foundation-models/2610.28441-stratified-sparse-attention/README.md",
+          "catalog_key": "stratified-sparse-attention",
+          "catalog_detail": "foundation-models/2610.28441-stratified-sparse-attention/README.md",
+          "track": "foundation-model",
+          "status": "implemented",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "Defining method, experimental configuration, code availability and key figure; not the whole article",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28441v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Rice University"
+            }
+          ],
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "低成本公式/控制器组件已实跑；完整实验成本过高，不复现（审查 DONE）。"
+        }
+      ]
     }
   ]
 }

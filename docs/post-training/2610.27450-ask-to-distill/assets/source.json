@@ -1,0 +1,9 @@
+{
+  "paper": "2610.27450v1",
+  "source_url": "https://arxiv.org/html/2610.27450v1/ask_to_distill_method_v4.png",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "source_sha256": "372ce130101630ff96c1409874eb4eaad33a8ca5beb18747f2c778475e8788a8",
+  "image_sha256": "372ce130101630ff96c1409874eb4eaad33a8ca5beb18747f2c778475e8788a8",
+  "visual_inspection": "2026-10-21; direct original architecture image, both stages and formulas legible; author rights retained"
+}

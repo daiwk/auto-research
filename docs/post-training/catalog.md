@@ -11,7 +11,9 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | On-policy distillation | [Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation](2610.28194-ap-opd/README.md) | Nanjing University，2026-10-20 | 未发现官方代码 | `ap-opd`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [Ask to Distill: Learning to Synthesize Data for On-Policy Distillation](2610.27450-ask-to-distill/README.md) | University of Illinois Urbana-Champaign，2026-10-20 | [原作者入口](https://github.com/GasolSun36/Ask_to_Distill)；原作者公开代码、数据和模型；固定版本核验reward_worker与diversity接口 | `ask-to-distill`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [On-Policy Transition Distillation](2610.28048-optd/README.md) | The Hong Kong Polytechnic University，2026-10-20 | [原作者入口](https://github.com/ModalityDance/optd)；原作者已发布源码；PDF首页链接已核对，仓库包含verl训练代码、配置与测试 | `optd`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [Projected Distillation: On Learning to Solve Hard Problems from Close, Correct Targets](2610.27467-projected-distillation/README.md) | University of Massachusetts，2026-10-20 | 未发现官方代码 | `projected-distillation`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization](2610.25973-apsd/README.md) | Korea University，2026-10-19 | 未发现官方代码 | `apsd`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Reinforcement Learning with Visually Attributable On-Policy Self-Distillation](2610.26856-vag/README.md) | Baidu Inc.，2026-10-19 | 未发现官方代码 | 计划键 `visually-attributable-opd`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | On-policy distillation | [Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation](2610.25034-spod/README.md) | University of Southern California，2026-10-18 | [原作者入口](https://github.com/Jike338/SPOD)；作者官方仓库已发布configs、spod训练与sgate方法源码；不是仅占位README | `spod`：仅低成本组件，完整实验不复现 |

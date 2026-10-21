@@ -11,6 +11,7 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | Agent运行时 | [Cache Engineering for Agents](2610.28577-cache-engineering/README.md) | Tsinghua University，2026-10-20 | [原作者入口](https://github.com/thu-nics/AKV)；作者正文链接的官方AKV实现已核验；本轮不安装或运行完整serving系统。 | 计划键 `cache-engineering`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 自我进化 | [Evolving Agent Interfaces](2610.28601-agent-s4/README.md) | University of California, Santa Barbara，2026-10-20 | [原作者入口](https://github.com/simular-ai/Agent-S/tree/58187e364e3024076540892f5f69d1efc218b74f/agent_s4)；官方开源，Apache-2.0；固定核对58187e364e3024076540892f5f69d1efc218b74f，主要对照tournament.py、scoring.py及operators/。 | `agent-s4`：仅低成本组件，完整实验不复现 |
 | 自我进化 | [Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design](2610.28380-oo-harness/README.md) | University of Illinois Urbana-Champaign，2026-10-20 | 未发现官方代码 | `oo-harness`：仅低成本组件，完整实验不复现 |
 | 记忆与长期交互 | [Remembering Has a Price: Learning Memory Worth under Resource Constraints](2610.26453-tokenworth/README.md) | Nanjing University，2026-10-19 | [原作者入口](https://github.com/AIGNLAI/TokenWorth)；官方仓库已有tokenworth_core及三类环境实现；未据此声称本地执行了官方Agent评测 | `tokenworth`：仅低成本组件，完整实验不复现 |
 | 记忆与长期交互 | [MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents](2610.24955-memprice/README.md) | Hong Kong University of Science and Technology，2026-10-18 | [原作者入口](https://anonymous.4open.science/r/ICLR2027-MemPrice)；论文提供匿名开源地址，但2026-10-20无法访问核验内容；不声称已核实完整官方实现 | `memprice`：仅低成本组件，完整实验不复现 |
@@ -160,6 +161,7 @@
 | Agentic RL / efficient long context | [Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks](2608.10357-sinkflex-rl/README.md) | Capital One AI Foundations，2026-08-11 | 未发现官方代码 | `sinkflex-rl` |
 | 自进化 | [OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks](2608.09380-openloopevolve/README.md) | Tsinghua University，2026-08-10 | [已开源](https://github.com/yoyoshikc/OpenLoopEvolve) | `openloopevolve` |
 | 代码 Agent | [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](2608.06811-pmcoder/README.md) | Vanderbilt University，2026-08-07 | 未发现官方代码 | `pmcoder` |
+| 多轮 Agent RL | [ResidencyRL: Reinforcement Learning in Simulated Clinical Environments](2608.07418-residency-rl/README.md) | Google DeepMind，2026-08-07 | 未发现官方代码 | 计划键 `residency-rl`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 递归 turn 信用 | [AgentOPSD](2608.05987-agent-opsd/README.md) | Tsinghua University，2026-08-06 | [已开源](https://github.com/ZethWang/AgentOPSD) | `agent-opsd` |
 | 代码检索 Agent | [CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents](2608.05886-codegrep/README.md) | NetEase Guangzhou AI Lab，2026-08-06 | 未发现官方代码 | `codegrep` |
 | 搜索 Agent RL | [Contextual Information Policy Optimization for Search Agents](2608.06128-cipo/README.md) | Beihang University，2026-08-06 | 未发现官方代码 | `cipo` |

@@ -1,0 +1,209 @@
+{
+  "schema_version": 2,
+  "method": "stratified-sparse-attention",
+  "manifest_ref": "foundation-models:stratified-sparse-attention",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct21-followup-stratified-sparse-attention-v1",
+    "revision": "sha256:4aa561012428e5c68340503dc2746ca200cee876a408cec149c2b9e85a4a2dff",
+    "capability_benchmark": false,
+    "recipe": "fixed-source-generated-component-inputs-v1"
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "sparse_dense_l2_error": 0.49158626794815063,
+        "dense_budget_max_abs_error": 2.9802322387695312e-08,
+        "selected_keys": 15,
+        "heavy_keys": 3,
+        "residual_draws": 13,
+        "query_gradient_norm": 0.060632649809122086,
+        "value_gradient_norm": 0.0776304230093956,
+        "minimum_inclusion_probability": 0.0855652450210901,
+        "wrong_draw_probability_output_l2_gap": 0.28762370347976685
+      },
+      "checks": {
+        "finite_metrics": true,
+        "dense_budget_parity": true,
+        "positive_query_gradient": true,
+        "positive_value_gradient": true,
+        "budget_respected": true,
+        "wrong_probability_negative_control": true
+      },
+      "selected_indices": [
+        2,
+        3,
+        13,
+        16,
+        18,
+        21,
+        22,
+        26,
+        32,
+        37,
+        41,
+        48,
+        52,
+        59,
+        63
+      ],
+      "dataset_sha256": "f0d9c098bac435b672a1e14dab44cd1273bf7664ac4ee2c22712acfcaeebd907"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "sparse_dense_l2_error": 0.12049487978219986,
+        "dense_budget_max_abs_error": 2.9802322387695312e-08,
+        "selected_keys": 12,
+        "heavy_keys": 10,
+        "residual_draws": 6,
+        "query_gradient_norm": 0.047114480286836624,
+        "value_gradient_norm": 0.07650189101696014,
+        "minimum_inclusion_probability": 0.4379875344533633,
+        "wrong_draw_probability_output_l2_gap": 0.5792336463928223
+      },
+      "checks": {
+        "finite_metrics": true,
+        "dense_budget_parity": true,
+        "positive_query_gradient": true,
+        "positive_value_gradient": true,
+        "budget_respected": true,
+        "wrong_probability_negative_control": true
+      },
+      "selected_indices": [
+        2,
+        4,
+        8,
+        12,
+        14,
+        28,
+        44,
+        45,
+        48,
+        54,
+        57,
+        60
+      ],
+      "dataset_sha256": "e4683ae82eb67e7bc2ea4e14f5f14dcfb0622438febbbb5ec5c694cc5b8acb05"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "sparse_dense_l2_error": 0.6782180666923523,
+        "dense_budget_max_abs_error": 7.450580596923828e-09,
+        "selected_keys": 12,
+        "heavy_keys": 1,
+        "residual_draws": 15,
+        "query_gradient_norm": 0.08581991493701935,
+        "value_gradient_norm": 0.06902796030044556,
+        "minimum_inclusion_probability": 0.09459138260119962,
+        "wrong_draw_probability_output_l2_gap": 0.1535692662000656
+      },
+      "checks": {
+        "finite_metrics": true,
+        "dense_budget_parity": true,
+        "positive_query_gradient": true,
+        "positive_value_gradient": true,
+        "budget_respected": true,
+        "wrong_probability_negative_control": true
+      },
+      "selected_indices": [
+        11,
+        17,
+        21,
+        30,
+        34,
+        37,
+        42,
+        49,
+        51,
+        56,
+        57,
+        61
+      ],
+      "dataset_sha256": "ff7a0d1ac6a7752c65bb5d2f749762f694c261c951e2f24e66ae4c7af9ffbe28"
+    }
+  ],
+  "metrics": {
+    "dense_budget_max_abs_error": {
+      "mean": 2.2351741790771484e-08,
+      "std": 1.2904784139758924e-08,
+      "n": 3
+    },
+    "heavy_keys": {
+      "mean": 4.666666666666667,
+      "std": 4.725815626252609,
+      "n": 3
+    },
+    "minimum_inclusion_probability": {
+      "mean": 0.20604805402521767,
+      "std": 0.20091617586909816,
+      "n": 3
+    },
+    "query_gradient_norm": {
+      "mean": 0.06452234834432602,
+      "std": 0.019643700870405432,
+      "n": 3
+    },
+    "residual_draws": {
+      "mean": 11.333333333333334,
+      "std": 4.725815626252609,
+      "n": 3
+    },
+    "selected_keys": {
+      "mean": 13,
+      "std": 1.7320508075688772,
+      "n": 3
+    },
+    "sparse_dense_l2_error": {
+      "mean": 0.4300997381409009,
+      "std": 0.28390004106218014,
+      "n": 3
+    },
+    "value_gradient_norm": {
+      "mean": 0.07438675810893376,
+      "std": 0.00467503278904877,
+      "n": 3
+    },
+    "wrong_draw_probability_output_l2_gap": {
+      "mean": 0.3401422053575516,
+      "std": 0.21763774011148912,
+      "n": 3
+    }
+  },
+  "provenance": {
+    "commit": "f630daed189fe0b3d8d7412ff50719b931670e1a",
+    "artifact_path": "docs/foundation-models/2610.28441-stratified-sparse-attention/metrics/component-cuda-seeds42-44.json",
+    "raw_runner_artifact_sha256": "5e8daec3a622d6728094b59288896605e6c315579a55a7c3d53509f0b2a827fd",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/oct21_followup_attention.py": "4085a5dd382f523753e6b79f3ef7f039f77bbed3cfe1680d5bc404a5b2fdb5d9",
+      "scripts/run_oct21_followup_attention.py": "854c78875246b2f97bc4ac6806b611a3fa86b5f7e065be263873cd225466c661"
+    },
+    "dataset_fingerprint": "sha256:20b4a13395583fc28712e2ecca86b6cd16c7f9e6eba41dafc7877cfcdba99c70",
+    "accelerator": "NVIDIA A100-SXM4-80GB"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "synthetic mechanism/interface diagnostics; no pretrained model, official benchmark or production capability claims"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
