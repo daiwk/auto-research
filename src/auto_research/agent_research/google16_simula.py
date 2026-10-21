@@ -25,9 +25,14 @@ class CallBudget:
         if self.max_calls < 1 or len(self.trace) >= self.max_calls:
             raise RuntimeError("Simula model-call budget exhausted")
         digest = hashlib.sha256(json.dumps(args, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()
-        self.trace.append({"role": role, "input_sha256": digest, "status": "started"})
-        result = callback(*args)
-        self.trace[-1].update(status="completed", output_sha256=hashlib.sha256(json.dumps(result, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest())
+        record = {"role": role, "input_sha256": digest, "status": "started"}
+        self.trace.append(record)
+        try:
+            result = callback(*args)
+        except Exception as error:
+            record.update(status="failed", error_type=type(error).__name__)
+            raise
+        record.update(status="completed", output_sha256=hashlib.sha256(json.dumps(result, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest())
         return result
 
 

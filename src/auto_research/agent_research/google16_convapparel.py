@@ -11,6 +11,7 @@ import itertools
 import math
 import random
 import re
+from bisect import bisect_left, bisect_right
 from collections import Counter
 from dataclasses import dataclass
 from statistics import mean
@@ -71,16 +72,15 @@ def _finite(values: Sequence[float]) -> tuple[float, ...]:
 def ks_statistic(first: Sequence[float], second: Sequence[float]) -> float:
     """Two-sided empirical KS distance, with ties evaluated at each jump."""
     a, b = _finite(first), _finite(second)
-    return max(
-        abs(sum(x <= point for x in a) / len(a) - sum(x <= point for x in b) / len(b))
-        for point in sorted(set(a + b))
-    )
+    a, b = sorted(a), sorted(b)
+    return max(abs(bisect_right(a, point) / len(a) - bisect_right(b, point) / len(b)) for point in sorted(set(a + b)))
 
 
 def mann_whitney_u(first: Sequence[float], second: Sequence[float]) -> float:
     """U for the first sample; average ranks are equivalent to half credit on ties."""
     a, b = _finite(first), _finite(second)
-    return sum(float(x > y) + 0.5 * float(x == y) for x in a for y in b)
+    ordered = sorted(b)
+    return sum(bisect_left(ordered, x) + 0.5 * (bisect_right(ordered, x) - bisect_left(ordered, x)) for x in a)
 
 
 def alignment_test(
@@ -191,11 +191,15 @@ def train_logistic_discriminator(
     """CPU diagnostic BCE optimization. Only training labels enter this routine."""
     if not train or {c.is_human for c in train} != {True, False}:
         raise ValueError("both human and simulated training classes required")
-    if epochs < 1 or learning_rate <= 0 or l2 < 0:
+    if not 1 <= epochs <= 400 or not math.isfinite(learning_rate) or learning_rate <= 0 or not math.isfinite(l2) or l2 < 0:
         raise ValueError("invalid optimization budget")
+    if len(train) > 256 or any(sum(len(turn.split()) for turn in c.user_turns) > 4096 for c in train):
+        raise ValueError("CPU diagnostic training budget exceeds 256 conversations or 4096 words per conversation")
     if len({c.session_id for c in train}) != len(train):
         raise ValueError("duplicate training sessions")
     vocabulary = tuple(sorted({word for c in train for word in LogisticHumanDiscriminator.tokens(c)}))
+    if len(vocabulary) > 4096:
+        raise ValueError("CPU diagnostic vocabulary exceeds 4096 features; no automatic truncation")
     features = []
     for conversation in train:
         counts = LogisticHumanDiscriminator.tokens(conversation)

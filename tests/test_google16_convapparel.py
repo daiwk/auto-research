@@ -82,3 +82,13 @@ def test_session_participant_and_counterfactual_policy_leakage_rejected():
         counterfactual_validation([train[0]], [conversation(3), conversation(4, False)], model, training_policy="good", target_policy="bad")
     with pytest.raises(ValueError, match="human probability"):
         evaluate_hls([conversation(3), conversation(4, False)], lambda view: float("nan"))
+
+
+def test_cross_policy_validation_does_not_confuse_discriminator_and_simulator_training():
+    train = [conversation(1), conversation(2, False)]
+    model = train_logistic_discriminator(train)
+    heldout = [conversation(3, True, "bad"), conversation(4, False, "bad")]
+    with pytest.raises(ValueError, match="simulator training provenance"):
+        counterfactual_validation([train[0]], heldout, model, training_policy="good", target_policy="bad")
+    with pytest.raises(ValueError, match="human source-policy"):
+        counterfactual_validation(train, heldout, model, training_policy="good", target_policy="bad")

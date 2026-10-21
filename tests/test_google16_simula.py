@@ -91,3 +91,15 @@ def test_exact_decontamination_does_not_send_heldout_to_generator():
     sentence = "one two three four five six seven eight nine ten eleven twelve thirteen"
     assert contamination_overlap(sentence, ["prefix " + sentence])
     assert not contamination_overlap("short", ["short"])
+
+
+def test_callback_failure_is_recorded_without_a_fake_accepted_sample():
+    budget = CallBudget(2)
+
+    def fail(value):
+        raise ValueError("provider failed")
+
+    with pytest.raises(ValueError, match="provider failed"):
+        budget.call("model", fail, "request")
+    assert budget.trace[0]["status"] == "failed"
+    assert budget.trace[0]["error_type"] == "ValueError"
