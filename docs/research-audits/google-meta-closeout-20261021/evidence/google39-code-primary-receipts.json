@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "source_kind": "official_github_repositories_linked_by_authors",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:56:34Z",
+    "end": "2026-10-20T18:57:03Z"
+  },
+  "original_capture_sha256": "c0c6c8cef2fca6bfa045f958b64b069c1d650ab0570e806f02061f92c33e507d",
+  "original_capture_hash_scope": "complete original UTF-8 browser repository excerpt receipt archived only in local private temporary storage",
+  "full_repository_read": false,
+  "repository_code_executed": false,
+  "records": [
+    {
+      "id": "2603.14769",
+      "source_url": "https://github.com/rlx-lab/POLCA",
+      "paper_source_url": "https://arxiv.org/html/2603.14769v1",
+      "source_locations": [
+        "仓库公开可见性",
+        "根目录文件列表及 README 入口"
+      ],
+      "summary_zh": "作者论文给出的上游仓库可访问且标示为公开；本轮未下载、安装或运行仓库，不能据此断言完整复现可执行。"
+    },
+    {
+      "id": "2603.24591",
+      "source_url": "https://github.com/google/xrblocks",
+      "paper_source_url": "https://arxiv.org/html/2603.24591v1",
+      "source_locations": [
+        "仓库公开可见性",
+        "根目录文件列表及 README 入口"
+      ],
+      "summary_zh": "作者论文给出的上游仓库可访问且标示为公开；本轮未下载、安装或运行仓库，不能据此断言完整复现可执行。"
+    },
+    {
+      "id": "2604.23099",
+      "source_url": "https://github.com/google-deepmind/proeval",
+      "paper_source_url": "https://arxiv.org/html/2604.23099v1",
+      "source_locations": [
+        "仓库公开可见性",
+        "根目录文件列表及 README 入口"
+      ],
+      "summary_zh": "作者论文给出的上游仓库可访问且标示为公开；本轮未下载、安装或运行仓库，不能据此断言完整复现可执行。"
+    },
+    {
+      "id": "2608.05578",
+      "source_url": "https://github.com/GoogleCloudPlatform/activation-model-scanner",
+      "paper_source_url": "https://arxiv.org/html/2608.05578v1",
+      "source_locations": [
+        "仓库公开可见性",
+        "根目录文件列表及 README 入口"
+      ],
+      "summary_zh": "作者论文给出的上游仓库可访问且标示为公开；本轮未下载、安装或运行仓库，不能据此断言完整复现可执行。"
+    },
+    {
+      "id": "2608.11367",
+      "source_url": "https://github.com/IrohXu/GazeAnywhere",
+      "paper_source_url": "https://arxiv.org/html/2608.11367v1",
+      "source_locations": [
+        "仓库公开可见性",
+        "根目录文件列表及 README 入口"
+      ],
+      "summary_zh": "作者论文给出的上游仓库可访问且标示为公开；本轮未下载、安装或运行仓库，不能据此断言完整复现可执行。"
+    }
+  ]
+}

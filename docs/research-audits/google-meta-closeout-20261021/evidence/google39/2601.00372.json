@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "id": "2601.00372",
+  "source_urls": [
+    "https://arxiv.org/html/2601.00372v1",
+    "https://arxiv.org/abs/2601.00372"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "c12fd7008447e0dff827264972eb33e7c73a7868d8a6c41e3574c10fa58a60cf",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3 Methodology",
+      "§4 Results导航/摘要指标",
+      "正文作者/日期"
+    ],
+    "browser_line_ranges": "L119-L145"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "GPT-3.5-Turbo两阶段SFT：CRC分类/解释/低层分类，TM主题映射，动态few-shot；属于IoT评论安全隐私主题实证，不提出通用推荐/Agent/基础模型机制。",
+  "experiment_paraphrase_zh": "91,149条无标注Amazon评论；2,454条人工转换标签；SFT 3 epochs，Linux16GB RAM与RTX3070M用于BERT embedding；正文结果是离线分类/主题统计。"
+}

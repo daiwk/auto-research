@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "adapter_key": "specguard",
+  "validated_at": "2026-10-20T19:09:05.676624+00:00",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "A100-SXM4-80GB"
+  },
+  "command": [
+    "python",
+    "scripts/run_specguard_component.py",
+    "--checkpoint",
+    "<cached-public-checkpoint>",
+    "--model-id",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--revision",
+    "7ae557604adf67be50417f59c2c2f167def9a775",
+    "--source-commit",
+    "a8063715e75bc48e731e71f64a6919dc2a939371",
+    "--lean-bin",
+    "<lean-4.24.0-binary>",
+    "--device",
+    "cuda",
+    "--seeds",
+    "42",
+    "--max-attempts",
+    "2",
+    "--max-calls",
+    "18",
+    "--max-new-tokens",
+    "1024",
+    "--max-total-new-tokens",
+    "8000",
+    "--wall-seconds",
+    "600",
+    "--output",
+    "<new-raw-result>"
+  ],
+  "dataset": {
+    "id": "self-authored-increment-micro-suite",
+    "public_benchmark": false,
+    "revision": "18a3966acba2746dbb950bf5c05251733b0bf2ce674a849eadb4fbef5d5eb230"
+  },
+  "checkpoint": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "local_files_only": true
+  },
+  "seeds": [
+    42
+  ],
+  "result": "passed",
+  "result_meaning": "bounded_real_cuda_runtime_completed_not_task_or_semantic_success",
+  "metrics": {
+    "task_runs": 3,
+    "certified_conflicts": 0,
+    "formal_agreements": 0,
+    "inconclusive": 3,
+    "actual_model_calls": 6,
+    "actual_generated_tokens": 425,
+    "independent_kernel_rechecks": 0
+  },
+  "lean": {
+    "version": "4.24.0",
+    "binary_sha256": "8fadc3ed92cc9decb94c96ee9c0876e91e03a3a5e69138f32114f02789e2766c"
+  },
+  "diagnostic_only": true,
+  "executed_model_roles": [
+    "spec"
+  ],
+  "end_to_end_certificate_observed": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_tier": "l1_mechanism",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "provenance": {
+    "commit": "a8063715e75bc48e731e71f64a6919dc2a939371",
+    "artifact_path": "docs/gpu-validations/specguard-a100-20261021.json",
+    "executed_source_sha256": {
+      "src/auto_research/agent_research/specguard.py": "3620d9170d53444b8f5e89d2783578645ad8a34f77fdc202107ebfc0529ce40e",
+      "scripts/run_specguard_component.py": "88f1fc57e07bc6dc5763588f2fb5720d548ee2542611a614a4ef5bf2a0719f18"
+    },
+    "raw_runner_artifact_sha256": "016a3d6246c067aee653f96af9db01eebd7402b82d565459404ee050797fab48"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2603.24591",
+  "source_urls": [
+    "https://arxiv.org/html/2603.24591v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "8cf577ed584880a9fecb1ecb58fa641aba61e929d80a6d4d58d265394717a081",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§1/§3框架与workflow",
+      "§4 Preliminary Technical Evaluation定位"
+    ],
+    "browser_line_ranges": "L55-L85"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "XR Blocks将WebXR perception/interaction封装semantic primitives，Gemini系统prompt＋templates生成可运行XR脚本；重点是XR开发框架/交互工作流。",
+  "experiment_paraphrase_zh": "VCXR60 pilot技术评测，桌面模拟和Android XR headset场景；非通用agent学习/优化算法的受控能力比较。"
+}

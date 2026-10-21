@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "objective": "39项Google来源线索实质审查；9项已确认Google/Meta完整实验处置入账；SpecGuard和Video Encoders低成本组件；修正审查与交付口径；一个MR",
+  "review_scope_source": "docs/research-audits/historical-backlog-reconciliation-20261021/reconciliation.json#current_2026_google_review_leads",
+  "implementation_scope": [
+    {
+      "id": "2610.09159",
+      "key": "specguard",
+      "scope": "真实缓存LLM分别生成规范与测试、真实Lean内核核验、保留不确定及失败；自建3任务micro-suite，仅L1组件验证",
+      "excluded": "349 SWE +187 VERINA +95 LCB与多模型/重复完整矩阵；不复现",
+      "budget": "单A100；1 seed；最多18模型调用、总计8000新token、600秒；无训练、无新大模型下载",
+      "full_experiment_resolution": "not_reproduced_high_cost"
+    },
+    {
+      "id": "2610.06616",
+      "key": "video-encoder-selection",
+      "scope": "真实冻结视觉token与问题input embedding上的条件选择器Eq38–60；小公开视频；固定外部quota和显式scene proxy，仅L1组件验证",
+      "excluded": "学习型refiner、SITE完整allocator与原文多backbone/13基准矩阵；不复现",
+      "budget": "单A100；现有SmolVLM-256M-Instruct；4帧、预算32token；无训练、无LM解码、无新大模型下载",
+      "full_experiment_resolution": "not_reproduced_high_cost"
+    }
+  ],
+  "hardware": "one NVIDIA A100 or A30, not simultaneous multi-GPU",
+  "expensive_retries_allowed": false,
+  "review_watermark_advanced": false,
+  "all_sources_exhaustive": false,
+  "automatic_implementation_queue": false,
+  "untouched_scope": "其余497个旧接受候选并非本轮实现范围，不批量伪标为实现或高成本；原冻结快照保留"
+}

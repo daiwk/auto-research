@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2608.05578",
+  "source_urls": [
+    "https://arxiv.org/html/2608.05578v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "507e88fac3f841a6b67a172f5785459006178421a5024321026130de6cad17cb",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§IV-F algorithm",
+      "Resource requirements",
+      "Data availability/摘要统计"
+    ],
+    "browser_line_ranges": "L242-L277;L583-L602;L631-L646"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "AMS三个安全概念各16 contrastive pairs，扫40–80%深度activation取最大separation层，direction/sigma；Tier1阈值与Tier2 baseline cos/drift验证。",
+  "experiment_paraphrase_zh": "14model configs/4families；LOO threshold71%(10/14)、20JailbreakBench prompts/model；A10040GB扫描10–40秒但不含模型加载；bootstrap区间宽且部分跨PASS阈值。"
+}

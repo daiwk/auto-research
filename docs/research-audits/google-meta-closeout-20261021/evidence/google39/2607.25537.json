@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2607.25537",
+  "source_urls": [
+    "https://arxiv.org/html/2607.25537v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "2a29a954c747d5c62ed63321012c1efbd34524013c49d9a121a08c2ba22c87b0",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§4 automated VIPE配置",
+      "Appendix B预算",
+      "§5 test-time scaling"
+    ],
+    "browser_line_ranges": "L151-L162;L177-L180;L335-L337"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "VIPE ideator生成视觉改写idea，image editor修改任务图，可选filter保持语义；freeform open-loop或ACE edits，与video test-time scaling比较。",
+  "experiment_paraphrase_zh": "6视觉任务；20variants、每edit best5；单实验18,160个720p/8s视频，Veo3.1；论文API成本$3.20/video与约$0.40/VIPE。"
+}

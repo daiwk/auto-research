@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2609.12464",
+  "source_urls": [
+    "https://arxiv.org/html/2609.12464v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "2cdc153fc13b53e23b3f5f872d48212bf270364bafa6bc0a400e93ce67bea7f4",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§4.2实验参数",
+      "§5.2指标",
+      "§6结果"
+    ],
+    "browser_line_ranges": "L128-L175;L212-L225"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "HCRG tree-sitter AST入graph、architecture skeleton缓存、拓扑顺序迁移，3hop检索；对照800char/150overlap/top5向量RAG；AST+pyflakes七结构指标。",
+  "experiment_paraphrase_zh": "spring-petclinic Java→Python单repo；Gemini2.5Pro T0、Spanner/Vertex1h context cache；DRQ34.8→65.9%、PCC26.7→45.5%，但cyclomatic一致性下降。无多seed/多repo泛化证据。"
+}

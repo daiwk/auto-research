@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2602.02164",
+  "source_urls": [
+    "https://arxiv.org/html/2602.02164v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "4ba5c48a3412393e7e69cbd272754f333bd1c955c8af905c846468ba8a465d5c",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3.2-3.4",
+      "§4 Experiments",
+      "Appendix A.5/C"
+    ],
+    "browser_line_ranges": "L104-L131;L329-L370"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "多Agent漏洞发现与隔离Docker执行：Planner/Validation/Execution/Evaluation循环，三层pattern/strategy/technical memory；代码上下文与真实执行反馈。",
+  "experiment_paraphrase_zh": "CyBench/BountyBench/CyberGym多模型、多对照及迭代消融；Gemini系列与GPT5-mini/o4-mini/Claude4.5/open20B/32B；正文报告安全benchmark而非线上用户A/B。"
+}

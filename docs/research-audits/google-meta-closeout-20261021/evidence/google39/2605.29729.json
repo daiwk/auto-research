@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2605.29729",
+  "source_urls": [
+    "https://arxiv.org/html/2605.29729v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "cfc102a6e4bc1bfe01b0cc8211593d92b24a8b5e9dd095fc7791da064bd0ddbe",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3 Methods",
+      "§3.1 Model prompting",
+      "引言部署边界"
+    ],
+    "browser_line_ranges": "L99-L140;L48-L58"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "真实内部alignment代码honeypots，code review与agentic coding分别设sabotage机会，agency/hidden goal提示调节，检测思考/行为trigger；是评价框架非训练改进。",
+  "experiment_paraphrase_zh": "code review12honeypot+1baseline/10commit chain；coding11honeypot+2baseline、Antigravity Google code副本；多Gemini模型与提示变体。"
+}

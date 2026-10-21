@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "batch": "20261021-google-meta-review-and-two-components",
+  "google39_repository_statuses": {
+    "accepted-unimplemented": 16,
+    "reviewed": 23
+  },
+  "classification_repairs": 14,
+  "priority_full_experiment_decisions": 9,
+  "component_keys": [
+    "specguard",
+    "video-encoder-selection"
+  ],
+  "repository_counts_not_delivery_commitments": {
+    "accepted-unimplemented": 513,
+    "catalogued": 889,
+    "review-deferred": 745,
+    "reviewed": 2991
+  },
+  "automatic_implementation_queue": false,
+  "review_watermark_advanced": false,
+  "all_sources_exhaustive": false,
+  "frozen_review_snapshots_modified": false,
+  "limitations": [
+    "39 source leads only, not all Google/Meta papers or all 497 old accepted candidates",
+    "Accepted core opportunities remain unimplemented unless separately commissioned",
+    "Catalogued, L1 components, interfaces, and full capability reproduction are different states",
+    "Industrial A/B qualification is separate from a general mechanism/assessment opportunity"
+  ]
+}

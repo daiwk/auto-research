@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2602.06276",
+  "source_urls": [
+    "https://arxiv.org/html/2602.06276v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "8b3820deb18a2e82858c17586190a97a53a6c709149f643579e70d0775eb076e",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3-4章节导航",
+      "§5 Experiments"
+    ],
+    "browser_line_ranges": "L235-L253"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "由匿名attribution sets和先验构造无偏population-loss estimator，再ERM；与随机分配/最大先验伪标签baseline比较。",
+  "experiment_paraphrase_zh": "MNIST、CIFAR10、Higgs；MLP/CNN；k=2^0…2^8；10学习率×10重复，MNIST200epoch、其余100epoch。正文是初步离线模拟归因集合实验。"
+}

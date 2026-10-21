@@ -1,0 +1,102 @@
+{
+  "schema_version": 2,
+  "method": "specguard",
+  "manifest_ref": "agent-research:specguard",
+  "protocol_id": "specguard-independent-autoformalization-lean424-v1",
+  "upstream_commit": "15820b5018296f4b131b39788180b6ab370d9cfb",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "dataset": {
+    "id": "self-authored-increment-micro-suite",
+    "public_benchmark": false,
+    "revision": "18a3966acba2746dbb950bf5c05251733b0bf2ce674a849eadb4fbef5d5eb230"
+  },
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "local_files_only": true
+  },
+  "lean": {
+    "version": "4.24.0",
+    "binary_sha256": "8fadc3ed92cc9decb94c96ee9c0876e91e03a3a5e69138f32114f02789e2766c"
+  },
+  "device": "cuda",
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "seeds": [
+    42
+  ],
+  "budget": {
+    "max_attempts_per_role": 2,
+    "max_new_tokens_per_call": 1024,
+    "max_total_new_tokens": 8000,
+    "max_calls": 18,
+    "wall_seconds": 600
+  },
+  "metrics": {
+    "task_runs": 3,
+    "certified_conflicts": 0,
+    "formal_agreements": 0,
+    "inconclusive": 3,
+    "actual_model_calls": 6,
+    "actual_generated_tokens": 425,
+    "independent_kernel_rechecks": 0
+  },
+  "per_task": [
+    {
+      "seed": 42,
+      "task_id": "increment-conflicting-demand",
+      "task_sha256": "c7ed80171d414db5cd5b829a0863707a070e5175596df216139d9de7b6cba5b1",
+      "verdict": "inconclusive",
+      "evidence": null,
+      "model_calls": 2,
+      "semantic_audit": "not_established_by_kernel_manual_review_required"
+    },
+    {
+      "seed": 42,
+      "task_id": "signed-sum-buggy-context",
+      "task_sha256": "01975367b49072754423d08d66e6f6682c99f2b7a7930f9fcddb40a671d44533",
+      "verdict": "inconclusive",
+      "evidence": null,
+      "model_calls": 2,
+      "semantic_audit": "not_established_by_kernel_manual_review_required"
+    },
+    {
+      "seed": 42,
+      "task_id": "positive-count-off-issue-metadata",
+      "task_sha256": "b50bd34cb509edb1765fb019d99b8f2911a8bdac706b16bdb7b1dc2fd2dcca3a",
+      "verdict": "inconclusive",
+      "evidence": null,
+      "model_calls": 2,
+      "semantic_audit": "not_established_by_kernel_manual_review_required"
+    }
+  ],
+  "executed_model_roles": [
+    "spec"
+  ],
+  "end_to_end_certificate_observed": false,
+  "kernel_rechecks": [],
+  "provenance": {
+    "executed_source_sha256": {
+      "src/auto_research/agent_research/specguard.py": "3620d9170d53444b8f5e89d2783578645ad8a34f77fdc202107ebfc0529ce40e",
+      "scripts/run_specguard_component.py": "88f1fc57e07bc6dc5763588f2fb5720d548ee2542611a614a4ef5bf2a0719f18"
+    },
+    "code_commit": "a8063715e75bc48e731e71f64a6919dc2a939371",
+    "raw_runner_artifact_sha256": "016a3d6246c067aee653f96af9db01eebd7402b82d565459404ee050797fab48",
+    "dataset_fingerprint": "18a3966acba2746dbb950bf5c05251733b0bf2ce674a849eadb4fbef5d5eb230",
+    "artifact_path": "docs/agent-research/2610.09159-specguard/metrics/component-a100-seed42.json"
+  },
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "test_isolated": false,
+    "gold_access": false,
+    "claim_policy": "self-authored micro-suite, not agent/benchmark accuracy",
+    "semantic_boundary": "Lean proves only generated formalizations; independent semantic audit required"
+  }
+}

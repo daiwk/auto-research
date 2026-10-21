@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2606.00369",
+  "source_urls": [
+    "https://arxiv.org/html/2606.00369v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "d1af8745400e8ffb4c6fd51c07ffedc09969c244bbb733f024dd0f0d0d314d6e",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§4.1文化操作化",
+      "§4.2 mixed models",
+      "摘要实证范围"
+    ],
+    "browser_line_ranges": "L156-L181;L73-L88"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "对安全标注数据做meta-analysis，IW文化zone与demographics的multilevel logistic/linear mixed models；评价LLM rater surrogate/triage，非新的alignment训练或agent算法。",
+  "experiment_paraphrase_zh": "8安全数据集概览/6数据集显著性；item/rater随机效应与文化/人口固定效应；发现LLM不能可靠代替文化多样标注。"
+}

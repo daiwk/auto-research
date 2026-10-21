@@ -85,10 +85,10 @@ def test_known_revision_enters_review_without_becoming_new_v1():
     original = Paper("UxSID", "Semantics", ["A"], "2026-05-09", "url", "2605.09040v1")
     revised = replace(original, arxiv_id="2605.09040v4", updated="2026-10-09")
     rows = triage_candidates([DiscoveredPaper(revised, ("priority-org-google",))],
-                             {"2605.09040": "implemented"}, repository_versions={
+                             {"2605.09040": "catalogued"}, repository_versions={
         "2605.09040": {"revision": 1, "metadata_sha256": paper_metadata_sha256(original)},
     })
-    assert rows[0]["repository_status"] == "implemented"
+    assert rows[0]["repository_status"] == "catalogued"
     assert rows[0]["revision_review_required"]
     assert rows[0]["priority_review_required"]
     assert rows[0]["revision_review_reason"] == "newer-version"

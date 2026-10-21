@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2608.11367",
+  "source_urls": [
+    "https://arxiv.org/html/2608.11367v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "1c271c22067c37bcb0e6ab50b9c4e834c4c04588675f7a36c48021c7d6d8729e",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§5.1 implementation",
+      "Appendix数据与model细节"
+    ],
+    "browser_line_ranges": "L242-L246;L427-L473"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "PGE promptable subject识别与gaze统一；frozen图文encoders＋detector transformer同时localization/inframe/heatmap；120K Gaze-Co由MLLM概念生成与human verification。",
+  "experiment_paraphrase_zh": "119,525train samples/3公开test及私有临床OOD；25+5epochs、batch128、4×H100；L40S推理与DigiLens ARGO smartglass。"
+}

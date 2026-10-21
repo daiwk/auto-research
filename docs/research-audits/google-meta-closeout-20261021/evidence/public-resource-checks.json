@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "scope": "Only this round's public resources; no private data, credentials or whole workspace",
+  "public_model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "file": "model.safetensors",
+    "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+    "local_cached_provenance_matches": true,
+    "remote_recomputed_sha256_matches": true
+  },
+  "official_lean_release": {
+    "release_url": "https://github.com/leanprover/lean4/releases/tag/v4.24.0",
+    "asset": "lean-4.24.0-linux.tar.zst",
+    "bytes": 459625674,
+    "official_sha256": "b14f5e5159219dd1a1956c3b806813319f5e94ccd5bdfd56f54520609a5bb5ec",
+    "remote_recomputed_sha256_matches": true
+  },
+  "video_sample": {
+    "id": "huggingface/documentation-images:transformers/model_doc/vjepa.gif",
+    "revision": "1bade87e4c4e41d80d5f72ba2d7b38ab3194f044",
+    "sha256": "753f58d9792b6f8af0375111e4986211d6702af90287c923ce74ac66718946e8",
+    "benchmark_test_answers_used": false
+  },
+  "larger_new_checkpoint_downloaded": false,
+  "training_started": false
+}

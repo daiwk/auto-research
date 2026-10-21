@@ -17,12 +17,14 @@
 - [Designing Transformers for Continuous Diffusion Language Models](../../foundation-models/2610.22330-langdit/README.md)（`langdit`）：连续扩散语言模型要从带高斯噪声的 token 嵌入恢复离散分布。原文§3把架构改动分为三个位置：backbone 的 RMS/QK 归一与噪声条件容量；词表 likelihood shortcut 的显式码本梯度路由和有界校准；训练期 bootstrap self-conditioning 的置信度衰减。LangFlow 的表示、交叉熵和采样器保持不变；Plaid 适配只迁移兼容子集，不能把两套梯度规则混为一谈。
 - [On the Design Space of Continuous Diffusion Language Models](../../reproductions/2610.13834-doublecat-semicat/README.md)（`doublecat-semicat`）：One-hot continuous flow 在接近终点时训练几乎只看见低熵顶点，但推理跟随有熵 denoiser 概率，产生轨迹错配。DoubleCat 在高斯路径内部再插入 simplex prior 到 one-hot 的插值，把训练质量移到更像推理的 simplex 内部。
 - [Few-Step Generation via Data-Space Iteration](../../foundation-models/2610.12102-data-space-iteration/README.md)（`data-space-iteration`）：常规 few-step flow generator 需要预设时间离散化，每步在加噪/去噪轨迹上前进。Data-Space Iteration 改为固定同一份噪声，用共享网络反复改进数据预测；每步 index 只表示 refinement，不是 flow time。训练沿用 distribution matching distillation：真实冻结 teacher 与逐步拟合生成分布的 fake 给出方向，前缀 rollout 无梯度，仅当前 refinement 更新 generator。[正文方法与附录代码](https://arxiv.org/html/2610.12102v1#S2)。
+- [dQwen3.5: Adapting Hybrid Language Models into Bidirectional Diffusion Language Models](../../foundation-models/2609.20751-dqwen35/README.md)（`dqwen35`）：把 Qwen3.5 的注意力/RNN 混合骨干改成双向状态传播，再以掩码去噪目标训练为 diffusion language model。
 
 ### MoE 与动态路由
 
 - [Rethinking Routing Exploration in Modern Mixture-of-Experts](../../foundation-models/2610.22353-mirror-moe/README.md)（`mirror-moe`）：共享专家占据较多输出后，改变路由专家带来的表征差异减弱，而细粒度分割又扩大组合空间。MirrorMoE 不简单增噪，而是以镜像选择暂时抑制部分专家，随训练退火恢复普通路由。主源是 §3 的公式 3–6。
 - [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](../../foundation-models/2610.11575-elastic-expert-routing/README.md)（`elastic-expert-routing`）：固定 Top-k 会让排序边界外的专家长期缺少训练曝光。该方法训练时为每个 token、每层独立抽取邻近的专家预算，在不改变期望预算的情况下，让边界附近专家参与真实稀疏计算。部署时恢复固定 k。
 - [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](../../foundation-models/2609.37751-ce-guided-moe/README.md)（`ce-guided-moe`）：在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。
+- [Data Scarcity and Model Sparsity: Mixtures-of-Experts Overfit More to Repeated Data](../../foundation-models/2609.11917-repeat-aware-moe/README.md)（`repeat-aware-moe`）：研究重复数据下 MoE 比 Dense 更早过拟合的问题，并用更强 masking/dropout 抑制 expert 记忆化。
 
 ### 条件记忆与知识注入
 
@@ -43,6 +45,11 @@
 - [Hymba: A Hybrid-head Architecture for Small Language Models](../../reproductions/2411.13676-hymba/README.md)（`hymba`）：同一层并行执行 attention 与状态空间分支，再用输入相关 gate 融合局部精确检索和线性长程状态。
 - [Mamba: Linear-Time Sequence Modeling with Selective State Spaces](../../reproductions/2312.00752-mamba/README.md)（`mamba`）：Mamba 让 SSM 的步长、读写向量依赖当前 token，从而选择性保留信息，同时保持序列长度线性复杂度。
 - [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](../../reproductions/2101.03961-switch-transformer/README.md)（`switch-transformer`）：Switch 把 dense FFN 替换为每个 token 只激活一个专家的稀疏 MoE，在近似固定 FLOPs 下扩大参数容量。
+
+### 循环与弹性深度
+
+- [Pretraining Latent Information Feedback Transformers with Teacher Supervision](../../foundation-models/2609.38149-lift-feedback/README.md)（`lift-feedback`）：普通 Transformer 的深层信息只能通过下一个离散 token 回到浅层。LIFT 把 teacher 的下一 token top-k 分布预计算成连续状态；训练时 token 与 teacher state 并行输入，同时预测下一 token 和下一 state；推理时改用模型自己的 state。核心目标是 token CE 加 teacher top-k 分布的前向 KL。
+- [Telescopic Language Models](../../foundation-models/2609.35769-telescopic-lm/README.md)（`telescopic-lm`）：每步随机抽一个网络深度前缀做 next-token 监督，同时保留全深度 anchor，使同一 checkpoint 的每个深度都成为可用语言模型。
 
 ### 动态层路由与残差路径
 
@@ -81,7 +88,15 @@
 
 ### KV cache 与上下文压缩
 
+- [Role-aware Heuristic Episodic Attention for Conversational LLMs](../../foundation-models/2610.00958-rea/README.md)（`rea`）：把全局指令放入持久前缀，把多轮交互放入 episodic memory；检索时按角色决定保留原文、压缩表示或省略。
+- [On-Demand Attention: Efficient Long-Context Decoding with Learned Recall](../../foundation-models/2609.20734-oda/README.md)（`oda`）：默认只读局部 KV，由轻量 recall head 在全局注意力发生前预测其收益；仅高收益 token 触发全局读取，完整 KV 仍保留。
 - [TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy](../../reproductions/2608.27128-twinkv/README.md)（`twinkv`）：现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。
+
+### 线性注意力与状态空间
+
+- [Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling](../../foundation-models/2609.36529-triadic-linear-attention/README.md)（`triadic-linear-attention`）：普通线性注意力写入 $k\otimes v$ 的二维状态；Triadic 再加入第二 key，写入 $k\otimes k'\otimes v$，读取时用 $q,q'$ 收缩两个 key 轴。第二 key 维度为 $E$ 时，状态容量乘以 $E$，只新增两组 projection；$E=1$ 严格退化为普通线性注意力。
+- [Fractional State Space Transition for Long Sequence Modeling](../../foundation-models/2609.36314-frac-ssm/README.md)（`frac-ssm`）：以对数间隔的有限指数模态逼近分数阶动力学的幂律记忆，在有界递归状态下兼顾长尾记忆和并行训练。
+- [MS-GLA: Multi-Scale Gated Linear Attention for Addressing Representational Bottlenecks via Multi-Temporal Resolution](../../foundation-models/2609.35664-ms-gla/README.md)（`ms-gla`）：单一时间分辨率的线性注意力容易形成表征瓶颈。MS-GLA 把 head budget 分配给多个尺度：先做无重叠 masked average pooling，再分别执行 GLA，最后以因果 hold 方式恢复到 token 分辨率，并由输入相关 softmax 路由融合。
 
 ### 位置编码与 KV 压缩
 
@@ -100,6 +115,11 @@
 - [BMuon: Budgeting Muon's Spectral Geometry for Structured Compressibility](../../foundation-models/2610.23571-bmuon/README.md)（`bmuon`）：Muon的spectral-norm更新不一定产生容易按隐藏通道剪枝的权重。BMuon不在前向额外加gate，也不只是对训练好的Muon模型剪枝；它让**所有MLP块的隐藏通道共享同一分配预算**，并在每个通道的输入行/输出列两侧共同改变更新几何。
 - [When Does Muon Actually Win? A Paired Data-, Time-, and Tuning-Budget Benchmark](../../foundation-models/2610.21555-muon-paired-budget/README.md)（`muon-paired-budget`）：优化器每步效果更好不等于同时间更好，也不意味着更容易调参。论文在单A100上对齐初始化、数据顺序和开发候选数，分别比较数据、训练时间、冻结调参池三种预算。它不是新的Muon优化公式，主要贡献是谨慎分离比较口径。测试数据在选参和轨迹分析冻结后只评一次。
 - [Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon](../../reproductions/2610.19844-smrc-pmrc/README.md)（`smrc-pmrc`）：低秩优化器只存投影后的动量，能减少持久状态；但梯度主奇异方向可能被噪声占据，直接丢掉子空间外分量会遗漏有效下降方向。本文让低秩动量负责投影内更新，原始梯度的正交残差负责其余方向，不额外保存一个全尺寸残差状态。
+- [Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization](../../foundation-models/2610.12444-adamw4bit/README.md)（`adamw4bit`）：AdamW 的量化误差会进入后续矩递推。ZIP-SR 在预条件器空间随机舍入第二矩；ZE-EDEN 排除零码点并校准块尺度。两者使用 NF4 第一矩，训练末尾 10% 对 LM head 第一矩随机舍入。[原文](https://arxiv.org/html/2610.12444v1)
+- [AF-Muon: An AdamW-Free Muon Optimizer for Tied-Embedding Models](../../foundation-models/2610.01395-af-muon/README.md)（`af-muon`）：矩阵继续用 Muon 谱范数方向，稀疏输入查表与稠密输出分类器共享的词表采用 support-aware 有限帽 LMO，一维参数用 RMS 更新。
+- [TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning](../../foundation-models/2610.02199-taco-optimizer/README.md)（`taco-optimizer`）：每个二维权重列只保留绝对值最大的梯度分量及符号，形成 column-wise one-sparse steepest direction；低精度列状态替代逐参数 dense optimizer state。
+- [Musec: MomentUm SpEctral Clipping for Stable Muon-type Training](../../foundation-models/2609.11655-musec/README.md)（`musec`）：对 Muon momentum 的奇异值做平滑谱裁剪，避免硬截断不连续，同时限制不稳定大方向。
+- [ECO: Quantized Training without Full-Precision Master Weights](../../foundation-models/2601.22101-eco-optimizer/README.md)（`eco-optimizer`）：低精度训练通常仍保留高精度 master weights 累积微小更新。ECO 直接在量化权重上更新，将本次重量化误差注入已有动量，避免再保存主权重或持久误差缓冲；Adam 必须使用逐元素有效步长，不能把 SGDM 的标量系数照搬过去。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 训练框架与可组合实验
 
@@ -136,6 +156,10 @@
 - [PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning](../../reproductions/2607.18199-ppl-factory/README.md)（`ppl-factory`）：固定的“选最难/最容易”规则会随任务和数据预算失效。PPL-Factory 先用冻结基础模型计算任务相关 NLL：语言建模按 packed block，推理 SFT 只看 reasoning/answer response；再按预算切换策略，高预算偏 easy，较低预算选 middle，极低预算从 middle pool 随机抽样以保覆盖。
 - [Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance](../../reproductions/2403.16952-data-mixing-laws/README.md)（`data-mixing-laws`）：先训练多组小预算 domain mixture，拟合各评测域的混合缩放律，再搜索未训练过的最优配比。
 - [DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining](../../reproductions/2305.10429-doremi/README.md)（`doremi`）：用小型 proxy model 的 excess loss 做 group DRO，动态提升欠拟合域权重，再按所得配比训练目标模型。
+
+### 企业数据与领域适配
+
+- [Customizing an LLM for Enterprise Software Engineering](../../foundation-models/2605.16517-gemini-for-google/README.md)（`gemini-for-google`）：从企业开发历史中提取高价值代码与交互信号，经过去重、质量过滤和污染控制形成中训练数据；用通用数据回放抑制灾难性遗忘，再做面向内部工具的后训练和部署评测。
 
 ### 优化器与训练效率
 
@@ -178,13 +202,33 @@
 
 - [EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference](../../reproductions/2610.14324-ev-jepa/README.md)（`ev-jepa`）：固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 **成本过高，暂不复现；待验收，未注册可执行入口。**
 
+### 自然语言决策编码器
+
+- [MetaEncoder: Exploring the Limit of Bi-Encoders for Multimodal System One Decision Making with Natural Language Interface](../../foundation-models/2610.11316-metaencoder/README.md)（`metaencoder`）：将Muse-Glimmer30B变为共享双塔，请求和候选均可含自然语言及图像/视频；保留因果注意力，取归一化末token向量。候选独立编码可缓存；闭集允许将选项加入请求，训练时部分dropout选项，防止仅依赖文字匹配。[原文§3](https://arxiv.org/html/2610.11316v1#S3) **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+### 视频理解与 token 压缩
+
+- [Video Encoders Built on Image Representations](../../foundation-models/2610.06616-video-encoder-selection/README.md)（`video-encoder-selection`）：逐帧图像编码保留可寻址的单帧证据，却产生很长的视觉序列。论文先逐帧冻结编码，再结合问题相关性、帧内多样性和跨帧对应，在固定预算内选择原始 token；可选 learned refiner 在选择完成后读取额外邻帧上下文，只更新已保留的锚点，不增加输出长度。
+- [VETO: Video Efficient Token Optimization for Vision Language Models](../../foundation-models/2610.01785-veto/README.md)（`veto`）：先在帧内合并语义近邻 token，再对压缩后的 frame representation 做跨帧去冗余；空间先行显著降低全局时间匹配成本。
+- [Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding](../../foundation-models/2609.11899-frames-on-demand/README.md)（`frames-on-demand`）：视频只做一次 caption memory；visual-need router 判断文本证据不足时，才在固定预算内读取相关帧。
+
+### 视觉语言适配与高效推理
+
+- [MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs](../../foundation-models/2610.01434-mwop/README.md)（`mwop`）：在同一注意力头内分别剪 V2V/T2V/T2T 路径，并为视觉、文本执行选择不同 FFN 通道；注意力剪枝后重新估计 FFN 重要性。
+- [HAWK: Rethinking Multimodal Drafting for Speculative Decoding](../../foundation-models/2610.00623-hawk/README.md)（`hawk`）：从 target 多层隐藏状态学习混合，给浅层 drafter 提供压缩视觉表示，并用 drafter 自己提议后的 shifted trajectory 训练。
+
 ### 视觉 token 与跨模态检索
 
+- [Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation](../../foundation-models/2610.02148-omni-embed-mini/README.md)（`omni-embed-mini`）：冻结文本骨干，把每个媒体样本的稠密级联描述经同一文本骨干得到 teacher target，再训练轻量投影器和分阶段 LoRA 对齐六种模态。
 - [PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference](../../reproductions/2608.27206-pace-vlm/README.md)（`pace-vlm`）：VLM 的视觉 token 一方面在 prefill 阶段带来大量计算，另一方面在抽取阶段仍会保留大量与问题无关的内容。PACE 将两个阶段拆开处理：APC 用浅层 ViT preview 同时估计全局语义密度和局部细节，按图像难度自适应缩放；DDAE 再融合 LLM 与视觉编码器的注意力，以置信度决定两种证据各占多少权重，而不是固定只信一种注意力图。
 - [MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations](../../reproductions/2608.25575-mllmclip/README.md)（`mllmclip`）：MLLM 的丰富视觉语义难以直接迁移到轻量 CLIP。论文从 teacher 各层按 attention 自适应选 token，以 CKA 对齐 student 图像/文本特征，保留部署时的双塔效率。
 - [ReToken: One Token to Improve Vision–Language Models for Visual Retrieval](../../reproductions/2607.28627-retoken/README.md)（`retoken`）：常规 VLM 检索需要先用外部 retriever 找图，再把入选图重新编码，无法直接复用预填充的视觉 KV cache。ReToken 在输入中增加一个可学习 token，让它在最后一层 value projection 空间与每张图的平均 value 向量打分；只训练该 token 和一张投影矩阵，以 class-balanced BCE 监督相关/无关图，VLM 默认冻结。
 - [Visual Instruction Tuning](../../reproductions/2304.08485-llava/README.md)（`llava`）：冻结视觉 encoder，用可训练 projector 把视觉特征映射到 LLM token 空间，再在 GPT-4 生成的多模态指令数据上做端到端 instruction tuning。
 - [Learning Transferable Visual Models From Natural Language Supervision](../../reproductions/2103.00020-clip/README.md)（`clip`）：用独立图像/文本 encoder 将配对样本映射到同一单位球面，通过双向 batch contrastive objective 学习可迁移零样本表示。
+
+### 视觉生成与理解
+
+- [SenseNova-U1.5: Towards Native Unified Visual Intelligence](../../foundation-models/2609.11929-sensenova-u1-5/README.md)（`sensenova-u1-5`）：用空间 patch reconstruction 摆脱 tokenizer/VAE，并以多专家 OPD 统一视觉理解与生成后训练。
 
 ### 可验证视觉推理与评测
 
@@ -219,7 +263,9 @@
 - [Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches](../../foundation-models/2610.21126-rope-relay/README.md)（`rope-relay`）：selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。
 - [DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction](../../foundation-models/2610.22130-drop-kv/README.md)（`drop-kv`）：只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。
 - [VFold: Symmetry-Aware Cross-Layer Value Cache Compression](../../foundation-models/2610.12338-vfold/README.md)（`vfold`）：相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。
+- [ASPIRE: Asynchronous Batch Self-Speculative Decoding](../../foundation-models/2609.17943-aspire/README.md)（`aspire`）：每个请求依据在线接受率与当前 batch 成本独立选择 draft 长度，并周期性用全注意力 refresh layer 校正自推测状态。
 - [ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding](../../foundation-models/2609.17241-echo/README.md)（`echo`）：用早层高频探索与末层低频权威校验组成双循环；两侧 bonus logits 协同补树，并保留精确拒绝采样校正。
+- [LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers](../../foundation-models/2609.17184-loopspec/README.md)（`loopspec`）：利用循环深度的中间预测做自推测，并以流水线残差提案隐藏验证等待。
 - [BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference](../../reproductions/2609.04971-beaconkv/README.md)（`beaconkv`）：长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。
 - [KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU](../../reproductions/2609.04852-kvmem/README.md)（`kvmem`）：长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。
 - [Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning](../../reproductions/2609.03430-random-attention/README.md)（`random-attention`）：传统 KV 淘汰先计算 token 重要性，Random Attention 则始终保护 prompt，仅在已生成 token 中逐 head 独立随机保留固定预算；它省掉评分 pass，也避免所有 head 被同一排序规则约束。
@@ -237,6 +283,9 @@
 - [RoleQ: Role-Aligned Scales for Converting Language Models to Ternary](../../foundation-models/2610.21808-roleq/README.md)（`roleq`）：按矩阵布局统一逐行放scale，会把写入残差流的不同功能单元混在一起。RoleQ按功能角色选轴：reader（Q/K/V与MLP输入）每输出单元一scale，writer（O与MLP输出）每输入单元一scale。完整RoleQ-T还需要旋转、GPTQ、蒸馏及可选Fisher二平面，不能以单个量化函数替代。
 - [PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference](../../reproductions/2610.19605-pn-mix/README.md)（`pn-mix`）：长输出解码的 KV cache 随 token 数增长；一律把 K 降到低位宽，会放大 attention logit 的偏差。PN-Mix 的精度分配不是仅按 K 的幅度排序：它同时观察 prefill 的 Q 和 K，把实际 RoPE 旋转耦合的两个通道作为整体，以两侧平均范数乘积预测重要性。
 - [DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs](../../reproductions/2610.13767-dualquant/README.md)（`dualquant`）：W+A量化中，权重与激活误差相互放大；仅最小化逐row动态范围不能消除跨row系统性column outlier。DualQuant只读取静态权重，以row/block尺度与column尺度共同最小化重建MSE。
+- [LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization](../../foundation-models/2609.38166-leapquant/README.md)（`leapquant`）：逐 token 量化递归状态会不断重新舍入。LeapQuant 在一个窗口内保留低比特基态，并以高精度缓冲本窗口更新，窗口末才量化一次；同时把最大 outlier 分解成少量高精度 compensator tokens，对剩余状态平滑后再量化。
+- [STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization](../../foundation-models/2609.38169-stepquant/README.md)（`stepquant`）：Delta-rule 线性注意力的固定大小状态会被每个并发请求长期持有，统一低比特量化又会让误差随更新累积。STEPQuant 同时建模状态记忆的剩余寿命和不同 key row 对输出的影响：在固定平均 bit 预算下给重要块更高精度，再用 key-row / value-column 两组 scale 拟合状态分布。
+- [OmniKVQuant: KV Cache Quantization for Omni-LLMs](../../foundation-models/2609.11582-omnikvquant/README.md)（`omnikvquant`）：按短时间窗确定 key 量化范围，并按模态分别旋转 value，处理 temporal drift 与异构几何。
 - [BaKron: Efficient Quantization with Kronecker-Factored Hessians](../../reproductions/2608.06291-bakron/README.md)（`bakron`）：**主题：二阶量化。** GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。
 - [GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries](../../reproductions/2607.20757-gaugequant/README.md)（`gaugequant`）：LLM 内部通道存在保持函数不变的 gauge 对称性，但不同等价基的量化误差差异很大。GaugeQuant 在训练中在线学习量化友好正交基，以 LogSumExp 压制 activation outliers，不需要额外 calibration corpus。
 - [AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration](../../reproductions/2306.00978-awq/README.md)（`awq`）：利用 calibration activation 找到显著输入通道，通过等价通道缩放保护约 1% 关键权重，再执行硬件友好的统一低比特 weight-only 量化。
@@ -257,6 +306,14 @@
 - [When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill](../../foundation-models/2610.21500-remote-kv-tiers/README.md)（`remote-kv-tiers`）：缓存命中不一定更快。该工作先计算加载与重算的盈亏平衡带宽和固定开销，再把MLA KV缓存按PCP rank分片，并使用rank独立远程实例和异步加载消除队首阻塞。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving](../../foundation-models/2609.37626-splash/README.md)（`splash`）：统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。
 
+### System One / JEV 与结构化决策
+
+- [The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval](../../system-one/2610.14631-request-audit/README.md)（`jev-request-audit`）：合法结构化输出不能保证问题彼此独立。论文分离三种干预：增加请求问题时保持证据和目标命题不变；增加证据时保持原目标、候选资格不变；增加可选候选时保持全部显示证据不变。这样可以区分问题 schema 依赖、真实上下文改变和候选归一化效应。
+- [Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages](../../system-one/2610.14112-regional-transfer/README.md)（`jev-regional-transfer`）：“输出概率校准良好”不等于“能可靠排序自己的错误”。本文在 NusaX 的 12 种语言和 NusaTranslation 的 7 种平行语言上，分别研究准确率、校准、错误排序、翻译和所需人工标签量。英语/印尼语和区域语言共享句子 ID，因此跨语言比较需要以句子为聚类单位，而不是把语言版本当独立样本。
+- [LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them](../../foundation-models/2610.02076-llm2jev/README.md)（`llm2jev`）：直接从括号数字选项的 next-token 概率形成有限类别分布；微调时使用 listwise 决策损失，并以 KL 锚定基础模型辅助输出。
+- [Chinese-Jev: Bringing System One Model to Chinese-Language Tasks](../../foundation-models/2609.36965-chinese-jev/README.md)（`chinese-jev`）：Chinese-Jev 面向分类、路由、候选选择等封闭输出任务，用轻量 encoder 读取中文上下文和候选项，以各候选 marker 的隐藏状态直接评分。异构标注统一成候选概率分布，先做 1000 万条通用预训练，再按医疗、法律、金融分别微调。
+- [GLiClass: Generalist Lightweight Model for Sequence Classification Tasks](../../foundation-models/2508.07662-gliclass/README.md)（`gliclass`）：GLiClass 把文本和运行时给定的候选标签放进同一个分类接口，避免生成式 LLM 的解析不稳定，也避免 cross-encoder 对每个文本—标签对逐次推理。本仓库保留“候选内容参与打分”和“一次归一化得到全候选分布”这两个定义性机制。
+
 ### 状态缓存与低精度回放
 
 - [ReplaySSM: Cache SSM Inputs, Not State](../../reproductions/2610.13778-replayssm/README.md)（`replayssm`）：Mamba2/GDN 解码一般每 token 读写完整矩阵状态，常受显存带宽限制。ReplaySSM 把持久化状态与输出计算拆开：每 16 token 才刷新 checkpoint，其间只记录小型输入；输出由 checkpoint 与输入重放计算。
@@ -264,9 +321,30 @@
 ### 动态计算与模型压缩
 
 - [SparseDecoding: Decoding-Aware Pruning for Accurate and Efficient LLM Inference](../../foundation-models/2610.12327-sparse-decoding/README.md)（`sparse-decoding`）：固定文本的 teacher-forcing 激活不等于模型自回归生成时的激活。该方法让稠密模型先从任务问题生成回答，只保存逐 token 解码激活、排除 prefill，再用这些统计量执行剪枝。校准协议与剪枝后端分离：原文主要使用 SparseGPT，也报告 Wanda 消融。
+- [IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs](../../foundation-models/2610.00426-irekogpt/README.md)（`irekogpt`）：保留 SliceGPT 投影矩阵而非直接丢弃，使同一 checkpoint 暴露嵌套宽度；再以多压缩率校准和 ridge 修正下游线性层。
 - [WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning](../../reproductions/2607.28418-wide/README.md)（`wide`）：静态剪枝无法按 token 难度分配算力，动态深度又过于粗粒度。WIDE 对每个 token 分别路由 attention head group 和 FFN channel group，并将 mask reorder、block skip 与设备内跳过联合设计。
 - [Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs](../../reproductions/2607.21291-adadsf/README.md)（`adadsf`）：固定比例的 Mixture-of-Depths 会给每一层相同 token budget，但不同层对表示的改写强度并不相同。AdaDSF 先在 dense teacher 上测量各层输入/输出 cosine similarity，再把更多计算分给变化更大的层；每层 MLP router 只把 Top-K token 送入原 Transformer block，其他 token 走 residual bypass。
 
 ### 能力评测与推理协议
 
 - [Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks](../../system-one/2610.11978-jev-capability/README.md)（`jev-capability`）：论文用有限候选选择评估 Jev 的知识、推理和多语言能力。每题只提交问题与候选，运行一次；数学任务表现弱于知识任务。原文中的供应商分数与作者实测并非统一提示协议，本地实现因此分别记录，不混成可比排名。本文是评测研究，不提供新架构或训练目标。
+
+### Agent 推理与 KV cache
+
+- [AgentKV: Phase-Aware KV Eviction for Agentic LLMs](../../foundation-models/2609.14872-agentkv/README.md)（`agentkv`）：按 Agent 阶段保留代表性 query buffer，以跨阶段查询相关性决定 KV 淘汰。
+
+### 模型路由与动态计算
+
+- [SWRouter: Similarity-Contractive Window Routing for Multi-Turn Large Language Model Conversations](../../foundation-models/2609.11414-swrouter/README.md)（`swrouter`）：按相邻语义相似度收缩多轮窗口，再用对比路由器选模型，并分开评测上下文构造和路由正确性。
+
+### 上下文学习与自适应推理
+
+- [CritICL: Inference-Time Weak-to-Strong Generalization from Small Language Model Failure Modes](../../foundation-models/2608.27455-criticl/README.md)（`criticl`）：弱模型错误不是随机噪声，而会聚成可跨模型尺度迁移的失败模式。CritICL 离线归纳 CritBank；static 使用全局高频失败模式，dynamic 根据当前输入检索相关 critique，再让强模型只生成一次答案。
+
+### 验证器与结果集成
+
+- [FUSE: Ensembling Verifiers with Zero Labeled Data](../../foundation-models/2604.18547-fuse-verifiers/README.md)（`fuse-verifiers`）：多个验证器并不独立，直接平均可能让相关错误相互放大。FUSE 只读取候选分数矩阵，通过二、三阶矩估计查询条件下的验证器质量，选择能缓解相关性的分数变换，再构造正确后验并优化集成器；真实正确标签只用于独立评估。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+### 生成式检索与结构化决策
+
+- [Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion](../../foundation-models/2603.06397-r4t/README.md)（`r4t`）：先以集合级复合奖励产生对齐目标，再把目标编译到单次扩散式 fan-out 检索器。

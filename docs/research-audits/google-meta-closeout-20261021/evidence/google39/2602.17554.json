@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2602.17554",
+  "source_urls": [
+    "https://arxiv.org/html/2602.17554v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "3b9e529a76e8b8d3efb1fa54297b4784ae7d635b56e4a74b20b4172cc9563615",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§7.3 Algorithm5",
+      "§8.1-8.3"
+    ],
+    "browser_line_ranges": "L827-L915"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "normalized robust gate最小化最坏mixture KL；stochastic primal-dual训练，SIR/rejection sampling与cached-logit结构蒸馏causal router；不是普通expert均值。",
+  "experiment_paraphrase_zh": "synthetic vocab100/seq10、1层2头ff32、embedding6/8/16/20；expert/baseline/gate800步，5重复；结构蒸馏5K序列。已读部分可明确CPU小机制可行。"
+}

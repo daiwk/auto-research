@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2602.07266",
+  "source_urls": [
+    "https://arxiv.org/html/2602.07266v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "2573707e534f48efa609b55e6e257249461e67f50699f63ad9682412afc72dd7",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3.2 Design Rationale",
+      "§3.3技术实现定位",
+      "§4用户研究任务/流程"
+    ],
+    "browser_line_ranges": "L227-L247;L273;L316-L328"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "ADCanvas屏幕阅读器/键盘WebVTT编辑器，视频问答与音频描述脚本协作界面；贡献是无障碍交互设计与用户研究，不是独立可比较的Agent算法。",
+  "experiment_paraphrase_zh": "12名盲人/低视力创作者的形成性authoring study；三个视频任务，质性观察与可用性反馈。"
+}

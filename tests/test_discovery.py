@@ -179,7 +179,7 @@ def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):
     ]
     candidates = triage_candidates(papers, statuses)
     assert [item["repository_status"] for item in candidates] == [
-        "implemented",
+        "catalogued",
         "reviewed",
         "new",
         "new",
@@ -195,9 +195,10 @@ def test_triage_diffs_repository_and_only_prioritizes_google_meta(tmp_path):
     summary = render_discovery_summary(payload)
     assert payload["triage_counts"] == {
         "new": 2,
-        "implemented": 1,
+        "catalogued": 1,
         "reviewed": 1,
-        "implementation-pending": 0,
+        "accepted-unimplemented": 0,
+        "review-deferred": 0,
         "google_meta_priority_review": 1,
         "revision_review": 0,
     }

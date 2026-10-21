@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "manifest_ref": "foundation-models:video-encoder-selection",
+  "adapter_key": "video-encoder-selection",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "seed": 42,
+  "dataset": {
+    "id": "huggingface/documentation-images:transformers/model_doc/vjepa.gif",
+    "revision": "1bade87e4c4e41d80d5f72ba2d7b38ab3194f044",
+    "manifest_sha256": "44e6d8debe300cff8176c680ded800ea88838f785db2b2794efcc6f1c5591e4f",
+    "examples": 1,
+    "split": "public_unlabelled_runtime_sample_not_benchmark_test",
+    "video_sha256": {
+      "vjepa-documentation-animation": "753f58d9792b6f8af0375111e4986211d6702af90287c923ce74ac66718946e8"
+    }
+  },
+  "checkpoint": {
+    "id": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+    "content_sha256": "3904c6dcad55310389f5be500b480abd792972482faee54ad8dcca88fb9d0429"
+  },
+  "metrics": {
+    "examples": 1,
+    "candidate_tokens_mean": 256.0,
+    "compression_ratio_mean": 0.125,
+    "correspondence_ablation_mask_difference_mean": 8.0,
+    "correspondence_edges_mean": 60.0,
+    "objective_mean": 2.9600215184847105,
+    "objective_trace_absolute_error_max": 0.0,
+    "pair_moves_mean": 5.0,
+    "selected_correspondence_pairs_mean": 11.0,
+    "selected_question_relevance_mean_mean": 0.03842360503612441,
+    "selected_tokens_mean": 32.0,
+    "selector_seconds_mean": 0.912704948335886,
+    "source_embedding_max_error_max": 0.0,
+    "source_frames_mean": 4.0,
+    "source_position_max_error_max": 0.0,
+    "source_stream_max_error_max": 0.0,
+    "tokens_per_frame_mean": 64.0
+  },
+  "protocol": {
+    "frozen_real_image_encoder": true,
+    "independent_frame_encoding": true,
+    "question_input_embedding_mean": true,
+    "inference_gold_read": false,
+    "test_read": false,
+    "training_steps": 0,
+    "refiner_enabled": false,
+    "quota_source": "external_uniform_not_SITE",
+    "scene_statistic": "explicit_mean_pooled_visual_cosine_proxy",
+    "full_SITE_selection_reproduced": false,
+    "video_QA_capability_evaluated": false,
+    "frame_preprocessing": "single_square_bicubic_resize_model_native_image_size",
+    "budget": 32,
+    "frames": 4
+  },
+  "code_revision": "a8063715e75bc48e731e71f64a6919dc2a939371",
+  "gpu_validation_artifact": "docs/gpu-validations/video-encoder-selection-a100-20261021.json",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42
+    ],
+    "formal_comparison": false,
+    "claim_policy": "fixed-budget real-feature runtime; not video QA capability"
+  },
+  "provenance": {
+    "artifact_path": "docs/foundation-models/2610.06616-video-encoder-selection/metrics/component-a100-seed42.json",
+    "dataset_fingerprint": "44e6d8debe300cff8176c680ded800ea88838f785db2b2794efcc6f1c5591e4f",
+    "code_commit": "a8063715e75bc48e731e71f64a6919dc2a939371",
+    "raw_result_sha256": "b3fdfd1f47404e38ed7170510a6c840525f7045d1912193e0354599b620f3429"
+  }
+}

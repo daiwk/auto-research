@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2603.10465",
+  "source_urls": [
+    "https://arxiv.org/html/2603.10465v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "c3ee1863e3e158a2eb138f56722a5ea7083524a6b9e2944ac42819fbd49a090a",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3.2.1-3.2.4",
+      "§5/6技术与用户研究摘要"
+    ],
+    "browser_line_ranges": "L187-L228;L93-L95"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "MoXaRt XR音频：AudioScopeV2粗分离、视觉人脸/乐器anchors、分支refinement与teacher-student distillation；贡献偏XR声学交互系统。",
+  "experiment_paraphrase_zh": "30条一分钟混音录制与22人user study；视觉3.2M/33M、粗音6M、speech9M/music7M，约2秒交互时延。"
+}

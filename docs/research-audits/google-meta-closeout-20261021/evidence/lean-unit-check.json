@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "validated_on": "2026-10-21",
+  "status": "passed",
+  "kind": "real_lean_kernel_on_handwritten_unit_fixtures_not_model_or_capability_evidence",
+  "command": ["python", "-m", "pytest", "tests/test_specguard.py", "-k", "real_lean_kernel", "-q"],
+  "environment": {"SPECGUARD_LEAN_BIN": "<official-Lean4.24.0-binary>", "PYTHONPATH": "src"},
+  "lean_version": "4.24.0",
+  "source_commit": "a8063715e75bc48e731e71f64a6919dc2a939371",
+  "test_source_sha256": "3f2612c40eab555c641a000576433899609f3a6dbfe23aa04f91111c4c6b343a",
+  "pytest_test_functions_passed": 1,
+  "asserted_cases": ["formal_conflict", "formal_agreement", "unsupported_connector_inconclusive", "empty_tests_not_vacuous_proof", "broken_source_inconclusive"],
+  "stdout_sha256": "38cdfc99b6791c75d5939d4bf4c4e50992288c5570d9d8a782bc888c8dfb10bf",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "model_certificates_claimed": 0
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "validation_kind": "review_artifact_integrity_not_algorithm_or_gpu_validation",
+  "passed": true,
+  "frozen_id_order_exact_match": true,
+  "unique_ids": 39,
+  "source_receipt_sha256_checks_passed": 39,
+  "report_paper_sections": 39,
+  "local_report_links_valid": true,
+  "status_counts": {
+    "accepted": 16,
+    "deferred": 14,
+    "rejected_scope": 9
+  },
+  "all_implementation_status_not_implemented": true,
+  "all_automatic_implementation_queue_false": true,
+  "all_full_article_read_false": true,
+  "git_diff_check_exit_code": 0,
+  "source_hash_scope": "public_metadata_locations_and_chinese_paraphrase_receipts_not_raw_capture_or_article",
+  "no_training_or_model_download": true,
+  "disk_review": {
+    "public_paper_receipt_bytes_reduced": 949863,
+    "raw_captures_preserved_in_private_tmp": true,
+    "net_disk_bytes_reclaimed": 0,
+    "reason": "Original raw captures were preserved in local private temporary storage at the requested boundary; public repository receipts were minimized."
+  },
+  "validated_at_utc": "2026-10-20T19:02:56Z",
+  "public_evidence": {
+    "schema_version": 2,
+    "private_raw_capture_archived_not_committed": true,
+    "original_private_capture_sha256_checks_passed": 39,
+    "unchanged_review_dispositions": 39,
+    "internal_browser_references_or_verbatim_article_payloads": 0,
+    "public_paper_receipt_bytes_before": 998966,
+    "public_paper_receipt_bytes_after": 49103,
+    "repository_primary_receipts": 5,
+    "public_code_receipt_sha256": "8a94fed0f456daf4662e22269287a5d6008b6b9e869a8123e5cf8495664db01f",
+    "attribution_sets_title": "Statistical Learning from Attribution Sets",
+    "attribution_sets_google_short_title": "Learning from Attribution Sets"
+  }
+}

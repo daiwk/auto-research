@@ -1,0 +1,13 @@
+{
+  "dataset_id": "huggingface/documentation-images:transformers/model_doc/vjepa.gif",
+  "dataset_revision": "1bade87e4c4e41d80d5f72ba2d7b38ab3194f044",
+  "examples": [
+    {
+      "id": "vjepa-documentation-animation",
+      "video": "vjepa.gif",
+      "question": "What changes across the visible frames?",
+      "fragments": ["visible objects", "motion across frames"],
+      "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/1bade87e4c4e41d80d5f72ba2d7b38ab3194f044/transformers/model_doc/vjepa.gif"
+    }
+  ]
+}

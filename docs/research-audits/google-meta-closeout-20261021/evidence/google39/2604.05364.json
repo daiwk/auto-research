@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "id": "2604.05364",
+  "source_urls": [
+    "https://arxiv.org/html/2604.05364v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "9c6c944daeed049319dd0a9e0731743e92e2b8fe1b58b22779510cf928efca71",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§3 Algorithm1/6steps",
+      "§4结果表片段"
+    ],
+    "browser_line_ranges": "L165-L224;L616-L672"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "TFRBench reason/search/forecast/verify/summary多agent生成grounded traces，最多K3循环，按MASE与一致性选trace；这是有标签benchmark构建，不可把gold反馈循环当无泄露预测Agent。",
+  "experiment_paraphrase_zh": "10数据集/5领域，多Gemini/Claude预测和LLMjudge对比；候选生成验证访问未来ground truth，forecast本身不读；领域外部事件检索包含未来horizon。"
+}

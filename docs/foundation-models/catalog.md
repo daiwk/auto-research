@@ -64,6 +64,7 @@
 | 推理与系统效率 | [SparseDecoding: Decoding-Aware Pruning for Accurate and Efficient LLM Inference](2610.12327-sparse-decoding/README.md) | Westlake University，2026-10-08 | 尚未发布；项目页 Code (soon): https://wang-qitong.github.io/SparseDecoding/ | `sparse-decoding` |
 | System One / JEV | [Specialized Decision Models vs. General-Purpose LLMs: Benchmarking Jev Across Knowledge, Reasoning, and Multilingual Tasks](../system-one/2610.11978-jev-capability/README.md) | Dalian Maritime University，2026-10-08 | 未找到原作者公开代码（2026-10-10 核验） | `jev-capability` |
 | 推理与系统效率 | [VFold: Symmetry-Aware Cross-Layer Value Cache Compression](2610.12338-vfold/README.md) | Johns Hopkins University，2026-10-08 | [已开源](https://github.com/nverma1/vfold) | `vfold` |
+| 视频理解 | [Video Encoders Built on Image Representations](2610.06616-video-encoder-selection/README.md) | Stanford University，2026-10-05 | 未发现官方代码 | `video-encoder-selection`：仅低成本组件，完整实验不复现 |
 | 优化器 | [AF-Muon: An AdamW-Free Muon Optimizer for Tied-Embedding Models](2610.01395-af-muon/README.md) | 原文首页未列第一作者机构，2026-10-01 | 未发现官方代码 | `af-muon` |
 | 结构剪枝 | [IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs](2610.00426-irekogpt/README.md) | University of Modena and Reggio Emilia，2026-10-01 | [已开源](https://github.com/aimagelab/IrekoGPT) | `irekogpt` |
 | Jev | [LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them](2610.02076-llm2jev/README.md) | Microsoft（按作者邮箱），2026-10-01 | 未发现官方代码 | `llm2jev` |

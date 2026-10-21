@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2603.29470",
+  "source_urls": [
+    "https://arxiv.org/html/2603.29470v1",
+    "https://arxiv.org/abs/2603.29470"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "c675db6bfb5c45eb3623b55c1ebd898b407bf2acf15622f134a594e891d687ff",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§2 Methods",
+      "§3.1-3.3 Results"
+    ],
+    "browser_line_ranges": "L69-L77;L138-L170"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "单Gemini模拟能源专家，CIB cross-impact stochastic pathways＋MCDA stakeholder选择＋情景量化；德国能源转型proof-of-concept，不是agent能力benchmark。",
+  "experiment_paraphrase_zh": "5模拟专家、15×3 descriptor states；方法承认CIB一致性不能保证叙事合理；保留超过250K词讨论但缺真实专家对照能力实验。"
+}

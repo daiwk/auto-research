@@ -1,0 +1,228 @@
+{
+  "schema_version": 2,
+  "method": "specguard",
+  "protocol_id": "specguard-independent-autoformalization-lean424-v1",
+  "upstream_commit": "15820b5018296f4b131b39788180b6ab370d9cfb",
+  "code_commit": "a8063715e75bc48e731e71f64a6919dc2a939371",
+  "source_sha256": {
+    "src/auto_research/agent_research/specguard.py": "3620d9170d53444b8f5e89d2783578645ad8a34f77fdc202107ebfc0529ce40e",
+    "scripts/run_specguard_component.py": "88f1fc57e07bc6dc5763588f2fb5720d548ee2542611a614a4ef5bf2a0719f18"
+  },
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "dataset": {
+    "id": "self-authored-increment-micro-suite",
+    "public_benchmark": false,
+    "revision": "18a3966acba2746dbb950bf5c05251733b0bf2ce674a849eadb4fbef5d5eb230"
+  },
+  "tasks": [
+    {
+      "task_id": "increment-conflicting-demand",
+      "description": "Implement increment(n): for every nonnegative integer n, return n + 1.",
+      "codebase": "def increment(n):\n    return n  # implementation may be buggy\n",
+      "tests": "assert increment(2) == 4\n"
+    },
+    {
+      "task_id": "signed-sum-buggy-context",
+      "description": "Implement total(values): return the sum of every signed integer in the list; include negative and zero values. Return zero for an empty list.",
+      "codebase": "def total(values):\n    return sum(v for v in values if v > 0)\n",
+      "tests": "assert total([4, -3, 2]) == 3\n"
+    },
+    {
+      "task_id": "positive-count-off-issue-metadata",
+      "description": "Implement count_positive(values): return how many integers in the list are strictly greater than zero. No package-version behavior is specified.",
+      "codebase": "VERSION = \"1.0\"\n\ndef count_positive(values):\n    return len(values)\n",
+      "tests": "assert VERSION == \"2.0\"\n"
+    }
+  ],
+  "seeds": [
+    42
+  ],
+  "device": "cuda",
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "local_files_only": true
+  },
+  "lean": {
+    "version": "4.24.0",
+    "binary_sha256": "8fadc3ed92cc9decb94c96ee9c0876e91e03a3a5e69138f32114f02789e2766c"
+  },
+  "budget": {
+    "max_attempts_per_role": 2,
+    "max_new_tokens_per_call": 1024,
+    "max_total_new_tokens": 8000,
+    "max_calls": 18,
+    "wall_seconds": 600
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "task_id": "increment-conflicting-demand",
+      "task_sha256": "c7ed80171d414db5cd5b829a0863707a070e5175596df216139d9de7b6cba5b1",
+      "verdict": "inconclusive",
+      "evidence": null,
+      "certificate": "",
+      "reason": "spec exhausted bounded generation/Lean feedback",
+      "artifacts": {},
+      "role_records": [
+        {
+          "role": "spec",
+          "attempt": 1,
+          "input_sha256": "021625966888109b45ec1ea683959205c5cf4591e5906178d98394fe5fa23fa1",
+          "request_sha256": "f621ac145ec139352abaa596eecbca11a54f29290ec337b22ff236e1c5859fd0",
+          "response": "```lean\nnamespace Spec\n\n-- Define the input type\ninductive Input : Set := | Int (Int)\n\n-- Define the output type\ninductive Output : Set := | Int (Int)\n\n-- Define the run function\nfun run (input : Input) : Output := \n  match input with\n  | Int n => Int (n + 1)\n  \nend Spec\n```",
+          "error": "ValueError: Spec.run missing"
+        },
+        {
+          "role": "spec",
+          "attempt": 2,
+          "input_sha256": "021625966888109b45ec1ea683959205c5cf4591e5906178d98394fe5fa23fa1",
+          "request_sha256": "320806e567a87ae5678c94e65126eb73a68bd8b19302619ff537b069d0f60fc6",
+          "response": "```lean\nnamespace Spec\n\n-- Define the input type\ninductive Input : Set := | Int (Int)\n\n-- Define the output type\ninductive Output : Set := | Int (Int)\n\n-- Implement the increment function\ndef increment(n : Input) : Output := \n  match n with\n  | Int n' => Int (n' + 1)\n  \nend Spec\n```",
+          "error": "ValueError: Spec.run missing"
+        }
+      ],
+      "checks": []
+    },
+    {
+      "seed": 42,
+      "task_id": "signed-sum-buggy-context",
+      "task_sha256": "01975367b49072754423d08d66e6f6682c99f2b7a7930f9fcddb40a671d44533",
+      "verdict": "inconclusive",
+      "evidence": null,
+      "certificate": "",
+      "reason": "spec exhausted bounded generation/Lean feedback",
+      "artifacts": {},
+      "role_records": [
+        {
+          "role": "spec",
+          "attempt": 1,
+          "input_sha256": "fb1e0c5db57401df8b073ff30f18e4307fba9c5d67afbcdec039f36a7cf36ebf",
+          "request_sha256": "0a17e1bebb490ba888a7b97f4bbc8e9ee3a64dec70f3b66b63a0e21dec51db17",
+          "response": "```lean\nimport Data.List\n\nspec {\n  input: List Int,\n  output: Nat,\n  run: (List Int) → Nat\n}\n\nspec {\n  inputs = [1, -3, 5],\n  outputs = [6, 2, 0],\n  expected = 6 + 2 + 0 = 8\n}\n```",
+          "error": "ValueError: forbidden generated Lean capability or proof bypass"
+        },
+        {
+          "role": "spec",
+          "attempt": 2,
+          "input_sha256": "fb1e0c5db57401df8b073ff30f18e4307fba9c5d67afbcdec039f36a7cf36ebf",
+          "request_sha256": "18cc6f2b30c87b67a06b049b995996abd71f34361526463c9c67499bf8f9c6a4",
+          "response": "```lean\nimport Data.List\n\nspec {\n  input: List Int,\n  output: Nat,\n  run: (List Int) → Nat\n}\n\nspec {\n  inputs = [1, -3, 5],\n  outputs = [6, 2, 0],\n  expected = 6 + 2 + 0 = 8\n}\n```",
+          "error": "ValueError: forbidden generated Lean capability or proof bypass"
+        }
+      ],
+      "checks": []
+    },
+    {
+      "seed": 42,
+      "task_id": "positive-count-off-issue-metadata",
+      "task_sha256": "b50bd34cb509edb1765fb019d99b8f2911a8bdac706b16bdb7b1dc2fd2dcca3a",
+      "verdict": "inconclusive",
+      "evidence": null,
+      "certificate": "",
+      "reason": "spec exhausted bounded generation/Lean feedback",
+      "artifacts": {},
+      "role_records": [
+        {
+          "role": "spec",
+          "attempt": 1,
+          "input_sha256": "f9db572267b7facfe41ef8527b08578d8fd0279143eeb09997be00699db8ad23",
+          "request_sha256": "2035fe9be3f3d75d492989e801256d5dcd71afcaa6bfcae12416af19a37d9094",
+          "response": "```lean\nimport Data.List\n\nspec {\n  input: List Int,\n  output: Nat,\n  run: (List Int) → Nat\n}\n\nspec {\n  input: List Int,\n  output: Nat,\n  run: (List Int) → Nat\n}\n```",
+          "error": "ValueError: forbidden generated Lean capability or proof bypass"
+        },
+        {
+          "role": "spec",
+          "attempt": 2,
+          "input_sha256": "f9db572267b7facfe41ef8527b08578d8fd0279143eeb09997be00699db8ad23",
+          "request_sha256": "cfa2791376414b876eb0090251fe67871b85da558baca16528663e17e6c6f350",
+          "response": "```lean\nimport Data.List\n\nspec {\n  input: List Int,\n  output: Nat,\n  run: (List Int) → Nat\n}\n\nspec {\n  input: List Int,\n  output: Nat,\n  run: (List Int) → Nat\n}\n```",
+          "error": "ValueError: forbidden generated Lean capability or proof bypass"
+        }
+      ],
+      "checks": []
+    }
+  ],
+  "model_records": [
+    {
+      "role": "spec",
+      "attempt": 1,
+      "seed": 42,
+      "input_tokens": 221,
+      "generated_tokens": 80,
+      "seconds": 1.6825958080589771,
+      "actual_model_device": "cuda:0",
+      "request_sha256": "f621ac145ec139352abaa596eecbca11a54f29290ec337b22ff236e1c5859fd0",
+      "response_sha256": "78791ae89eb030cc3dac9692fc39a9724444369f63e64c4919b61d001d18ddb3"
+    },
+    {
+      "role": "spec",
+      "attempt": 2,
+      "seed": 42,
+      "input_tokens": 332,
+      "generated_tokens": 81,
+      "seconds": 1.1834788583219051,
+      "actual_model_device": "cuda:0",
+      "request_sha256": "320806e567a87ae5678c94e65126eb73a68bd8b19302619ff537b069d0f60fc6",
+      "response_sha256": "3dbc1d28297dd370568bc1f3676145b10bffd56b39f8e7708605babe8e783855"
+    },
+    {
+      "role": "spec",
+      "attempt": 1,
+      "seed": 42,
+      "input_tokens": 237,
+      "generated_tokens": 75,
+      "seconds": 1.0907707922160625,
+      "actual_model_device": "cuda:0",
+      "request_sha256": "0a17e1bebb490ba888a7b97f4bbc8e9ee3a64dec70f3b66b63a0e21dec51db17",
+      "response_sha256": "4e9f85d13fd5097303a3d9fa9090e4c46eafc11816dd47285b045da3d5750b86"
+    },
+    {
+      "role": "spec",
+      "attempt": 2,
+      "seed": 42,
+      "input_tokens": 347,
+      "generated_tokens": 75,
+      "seconds": 1.2134686186909676,
+      "actual_model_device": "cuda:0",
+      "request_sha256": "18cc6f2b30c87b67a06b049b995996abd71f34361526463c9c67499bf8f9c6a4",
+      "response_sha256": "4e9f85d13fd5097303a3d9fa9090e4c46eafc11816dd47285b045da3d5750b86"
+    },
+    {
+      "role": "spec",
+      "attempt": 1,
+      "seed": 42,
+      "input_tokens": 235,
+      "generated_tokens": 57,
+      "seconds": 0.8282055668532848,
+      "actual_model_device": "cuda:0",
+      "request_sha256": "2035fe9be3f3d75d492989e801256d5dcd71afcaa6bfcae12416af19a37d9094",
+      "response_sha256": "c3fbb663ab1cd52c006b1bb730328c5671004173edf45db633b8e237f11f58cb"
+    },
+    {
+      "role": "spec",
+      "attempt": 2,
+      "seed": 42,
+      "input_tokens": 327,
+      "generated_tokens": 57,
+      "seconds": 0.8354192078113556,
+      "actual_model_device": "cuda:0",
+      "request_sha256": "cfa2791376414b876eb0090251fe67871b85da558baca16528663e17e6c6f350",
+      "response_sha256": "c3fbb663ab1cd52c006b1bb730328c5671004173edf45db633b8e237f11f58cb"
+    }
+  ],
+  "semantic_faithfulness": "manual_audit_required_not_proved_by_Lean",
+  "actual_model_calls": 6,
+  "actual_generated_tokens": 425,
+  "metrics": {
+    "task_runs": 3,
+    "certified_conflicts": 0,
+    "formal_agreements": 0,
+    "inconclusive": 3
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2606.00131",
+  "source_urls": [
+    "https://arxiv.org/html/2606.00131v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "249d56934ed61afe04227be083adcf36adb42fad6edd7923a2186039f8f870bf",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§4方法",
+      "§5训练/评测",
+      "§5.4 Warehouse Scale"
+    ],
+    "browser_line_ranges": "L88-L115;L124-L156"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "AI-Propeller Magellan让AlphaEvolve修改Propeller interprocedural code-layout heuristic，再Vizier调compiler flags；每candidate实际编译/执行硬件counter而非静态代理。",
+  "experiment_paraphrase_zh": "Clang100 modules训练12AlphaEvolve迭代/1200Vizier trials/2.7天，每binary10次；48cores96GB受控Xeon；Clang/LevelDB/Redis/Search；Search单独重训。"
+}

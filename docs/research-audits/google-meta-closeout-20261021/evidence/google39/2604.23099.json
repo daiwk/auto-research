@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "id": "2604.23099",
+  "source_urls": [
+    "https://arxiv.org/html/2604.23099v1"
+  ],
+  "source_kind": "official_arxiv_html_or_abs",
+  "capture_window_utc": {
+    "start": "2026-10-20T18:48:00Z",
+    "end": "2026-10-20T18:56:04Z"
+  },
+  "original_capture_sha256": "395e92d90fcc6b0f0fed11f404f21ac7a76330544b5a6ff09485900a560b94c7",
+  "original_capture_hash_scope": "complete original UTF-8 browser excerpt receipt archived only in local private temporary storage; not the original HTTP response body",
+  "public_receipt_kind": "source_metadata_locations_and_chinese_paraphrase_without_verbatim_article_or_internal_browser_references",
+  "source_locations": {
+    "read_sections": [
+      "§2 Algorithm2",
+      "§3.1数据/模型/feature",
+      "Table5"
+    ],
+    "browser_line_ranges": "L274-L336;L452-L462"
+  },
+  "full_article_read": false,
+  "method_paraphrase_zh": "ProEval预训练GP surrogate，Bayesian quadrature估计总体性能与superlevel set failure采样；TPF/RPF/SF迁移；topic UCB1＋LLM failure pattern转置。",
+  "experiment_paraphrase_zh": "16LLM/VLM×reasoning/knowledge/safety/text/image多benchmark；failure discovery100迭代；GP使用历史外部模型score，目标test gold不能给evaluated agent。"
+}

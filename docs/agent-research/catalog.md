@@ -63,6 +63,7 @@
 | 递归自改进 | [Recursive Self-Improvement through Multi-Agent Self-Supervision](2610.12176-mass/README.md) | UC Berkeley，2026-10-08 | [已开源](https://github.com/SakanaAI/mass) | `mass` |
 | 长期记忆 | [Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents](2610.12124-hippocam/README.md) | Institute of Information Engineering, Chinese Academy of Sciences，2026-10-08 | 未发现官方代码 | `hippocam` |
 | Agentic RL | [When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation](2610.12061-race/README.md) | Renmin University of China，2026-10-08 | [已开源](https://github.com/HututuAI/RACE) | `race` |
+| Agent 安全 | [SpecGuard: Proving a Task Is Broken Before the Agent Cheats](2610.09159-specguard/README.md) | MATS，2026-10-06 | [原作者入口](https://github.com/prmbiy/specguard)；作者Apache-2.0源码；固定15820b5018296f4b131b39788180b6ab370d9cfb。MATS一作、Google DeepMind合作者，不归作Google一作 | `specguard`：仅低成本组件，完整实验不复现 |
 | Agentic RL | [AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning](2610.03223-adastep/README.md) | Tsinghua University，2026-10-02 | 未发现官方代码 | `adastep` |
 | Agentic RL | [Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents](2610.03634-depgpo/README.md) | Southeast University，2026-10-02 | 未发现官方代码 | `depgpo` |
 | 程序进化 | [FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution](2610.03675-frugalevo/README.md) | National University of Singapore，2026-10-02 | [已开源](https://github.com/chchenhui/frugalevo) | `frugalevo` |

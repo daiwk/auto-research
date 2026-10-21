@@ -7,8 +7,8 @@
   "review_finalized_on": "2026-10-15",
   "policy": "observed-catalog-and-evidence-not-capability-v1",
   "counts": {
-    "catalogued": 108,
-    "not_catalogued": 3636
+    "catalogued": 110,
+    "not_catalogued": 3634
   },
   "accepted_counts": {
     "not_catalogued": 14
@@ -16065,8 +16065,19 @@
       "title": "Video Encoders Built on Image Representations",
       "review_decision": "known",
       "frozen_implementation_status": "existing_evidence_not_upgraded_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "video-encoder-selection",
+          "detail_path": "foundation-models/2610.06616-video-encoder-selection/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": "docs/gpu-validations/video-encoder-selection-a100-20261021.json",
+          "gpu_receipt_valid": true,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.06611",
@@ -28152,8 +28163,19 @@
       "title": "SpecGuard: Proving a Task Is Broken Before the Agent Cheats",
       "review_decision": "known",
       "frozen_implementation_status": "existing_evidence_not_upgraded_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "agent-research",
+          "key": "specguard",
+          "detail_path": "agent-research/2610.09159-specguard/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": "docs/gpu-validations/specguard-a100-20261021.json",
+          "gpu_receipt_valid": true,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.09146",

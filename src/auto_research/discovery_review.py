@@ -43,6 +43,15 @@ METADATA_ONLY_RESOLUTIONS = frozenset({"historical_first_publication", "historic
 TERMINAL_EXCEPTION_RESOLUTIONS = frozenset({
     "not_reproduced_high_cost", "deferred_high_cost", "source_unavailable_archived",
     "source_exception_archived", "archived_unconfirmed_not_blocking",
+    "not_reproduced_resource_unavailable", "not_reproduced_private_data",
+})
+ACCEPTED_UNIMPLEMENTED_RESOLUTIONS = frozenset({
+    "affordable_candidate_not_implemented", "affordable_core_review_candidate",
+    "accepted_core_not_implemented_this_run",
+})
+UNIMPLEMENTED_STATUSES = frozenset({
+    "not_implemented", "pending", "not_implemented_by_review",
+    "not_implemented_in_this_review",
 })
 
 
@@ -63,21 +72,33 @@ def metadata_only_disposition(candidate: dict) -> bool:
 
 
 def pending_implementation_disposition(candidate: dict) -> bool:
-    """Retain accepted-but-undelivered legacy rows outside the closed queue.
+    """Recognize review acceptance, never infer implementation authorization.
 
-    Structured acceptance is authoritative. A narrow legacy phrase fallback
-    handles older rows that only recorded their next implementation step in the
-    reason. Explicit cost/source terminal resolutions always take precedence.
+    Older registers encoded acceptance in ``resolution`` rather than
+    ``review_decision``. Both structured forms remain visible. Free-text 'next
+    batch'/'待实现' is not acceptance and cannot manufacture a delivery queue.
     """
     if candidate.get("resolution") in TERMINAL_EXCEPTION_RESOLUTIONS:
         return False
-    if (candidate.get("review_decision") == "accepted"
-            and candidate.get("implementation_status") in {"not_implemented", "pending"}):
-        return True
-    return candidate.get("status") == "deferred" and bool(re.search(
-        r"待核心算法实现|待实现|下一批须|下一批优先|保留下一批|pending implementation|awaiting implementation",
-        str(candidate.get("reason", "")), re.I,
-    ))
+    return (
+        candidate.get("resolution") in ACCEPTED_UNIMPLEMENTED_RESOLUTIONS
+        or (candidate.get("review_decision") == "accepted"
+            and candidate.get("implementation_status") in UNIMPLEMENTED_STATUSES)
+    )
+
+
+def disposition_status(candidate: dict) -> str:
+    """Separate accepted opportunities from deferrals and terminal decisions."""
+    if pending_implementation_disposition(candidate):
+        return "accepted-unimplemented"
+    if candidate.get("resolution") in TERMINAL_EXCEPTION_RESOLUTIONS:
+        return "reviewed"
+    if re.search(r"成本过高|not reproduced.{0,20}(?:cost|budget)|high[- ]cost",
+                 str(candidate.get("reason", "")), re.I):
+        return "reviewed"
+    if candidate.get("status") == "deferred":
+        return "review-deferred"
+    return "reviewed"
 
 
 def disposition_rank(candidate: dict) -> int:
@@ -85,7 +106,7 @@ def disposition_rank(candidate: dict) -> int:
 
     0: discovery/date observation; 1: legacy generic terminal label;
     2: accepted, delivery pending; 3: explicit substantive/cost/source closure.
-    Catalog entries are assigned rank 4 by the repository loader. A legacy cost
+    Catalog entries are assigned rank 4, without implying implementation. A legacy cost
     reason is retained, not silently reclassified into an expensive retry.
     """
     if candidate.get("status") not in {"implemented", "rejected", "deferred"}:
@@ -103,7 +124,13 @@ def disposition_rank(candidate: dict) -> int:
     review = candidate.get("full_text_review", {})
     substantive_review = (isinstance(review, dict) and review.get("scope") == "full-text"
                           and bool(review.get("source_locations")))
-    if substantive_review:
+    # Reading Methods is evidence of review, not a structured rejection. A
+    # generic known row with reading locations must not outrank acceptance.
+    explicit_decision = (
+        candidate.get("review_decision") in {"rejected", "excluded", "out_of_scope"}
+        or candidate.get("resolution") not in {None, "", "known", "already_known", "catalogued"}
+    )
+    if substantive_review and explicit_decision:
         return 3
     return 1
 
@@ -174,9 +201,12 @@ def classify_candidate(track: str, candidate: dict) -> dict:
     if candidate.get("revision_review_required"):
         bucket = "revision-fulltext-review"
         reason = "known paper revision requires independent full-text review; not a new v1"
-    elif candidate.get("repository_status") == "implementation-pending":
-        bucket = "implementation-pending"
-        reason = "method review accepted but delivery is not closed; assess cost or implement separately"
+    elif candidate.get("repository_status") in {"implementation-pending", "accepted-unimplemented"}:
+        bucket = "accepted-unimplemented"
+        reason = "review accepted; no delivered implementation or automatic implementation authorization"
+    elif candidate.get("repository_status") == "review-deferred":
+        bucket = "review-deferred"
+        reason = "retained deferral, not accepted implementation work; inspect recorded reason separately"
     elif candidate.get("historical_review_required"):
         bucket = "priority-fulltext-review" if priority else "historical-fulltext-review"
         reason = "historical identity/date triage is not a completed method or cost review"
@@ -216,7 +246,7 @@ def classify_artifact(artifact: dict) -> dict:
     return {
         **artifact,
         "schema_version": max(int(artifact.get("schema_version", 1)), 3),
-        "classification_policy": "fail-closed-v1",
+        "classification_policy": "review-delivery-separated-v2",
         "classification_counts": dict(sorted(Counter(row["review_bucket"] for row in rows).items())),
         "candidates": rows,
     }
