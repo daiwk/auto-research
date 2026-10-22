@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "method": "logact",
+  "manifest_ref": "agent-research:logact",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct22-logact-contracts-v1",
+    "revision": "sha256:51b925f68ed2f7b1da3b5cc1ddb4667cb8b735b1e33637027c7be977ceb63fa9",
+    "recipe": "source-frozen-generated-contract-inputs",
+    "capability_benchmark": false
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "actual_llm_calls": 0,
+        "executor_invocations": 2,
+        "distinct_effects": 1,
+        "recovery_entries": 1,
+        "log_entries": 12
+      },
+      "checks": {
+        "uncommitted_blocked": true,
+        "incomplete_quorum_blocked": true,
+        "commit_before_real_effect": true,
+        "uncertain_effect_requires_explicit_recovery": true,
+        "idempotent_retry_and_cached_result": true,
+        "durable_reopen_result": true,
+        "rejected_action_never_executed": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "actual_llm_calls": 0,
+        "executor_invocations": 2,
+        "distinct_effects": 1,
+        "recovery_entries": 1,
+        "log_entries": 12
+      },
+      "checks": {
+        "uncommitted_blocked": true,
+        "incomplete_quorum_blocked": true,
+        "commit_before_real_effect": true,
+        "uncertain_effect_requires_explicit_recovery": true,
+        "idempotent_retry_and_cached_result": true,
+        "durable_reopen_result": true,
+        "rejected_action_never_executed": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "actual_llm_calls": 0,
+        "executor_invocations": 2,
+        "distinct_effects": 1,
+        "recovery_entries": 1,
+        "log_entries": 12
+      },
+      "checks": {
+        "uncommitted_blocked": true,
+        "incomplete_quorum_blocked": true,
+        "commit_before_real_effect": true,
+        "uncertain_effect_requires_explicit_recovery": true,
+        "idempotent_retry_and_cached_result": true,
+        "durable_reopen_result": true,
+        "rejected_action_never_executed": true
+      }
+    }
+  ],
+  "metrics": {
+    "actual_llm_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "distinct_effects": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "executor_invocations": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "log_entries": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    },
+    "recovery_entries": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "scorer/durability contracts, not model or agent capability results"
+  },
+  "provenance": {
+    "commit": "068e4b51b388ffd6a2da532e2e62acda29b66cf6",
+    "artifact_path": "docs/agent-research/2604.07988-logact/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct22_priority_components.py": "03ed32b041ab41453795930270ccd9422e921fa1ece5270551bd332d5f97806e",
+      "src/auto_research/foundation_models/deepsea.py": "43ed077984c861c315020d486ed8ef83d91ed097d0c246152a958c3ef10f2d35",
+      "src/auto_research/agent_research/logact.py": "3b510181adf2a370d14b923a980871be5e3b00cc5e04caa8040fd66041b8689e"
+    },
+    "raw_runner_artifact_sha256": "ae7d37e078b163e230f36503b6380fab2f9fa43c4c3bcb633dff8eab651ab1fd",
+    "official_schema_inspection_sha256": "36934707f343c8c8b7a20882bbfb53f558cc0a3d7b7469e736eb7af86548ed9c",
+    "dataset_fingerprint": "sha256:de3f54c5f99fa8661dfb92831b1aa6119d387f310a3a06f3804fafcee4f40964"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

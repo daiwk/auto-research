@@ -1,0 +1,23 @@
+{
+  "upstream_repository": "https://github.com/google-research/deep-sea",
+  "upstream_revision": "7c3abc06824c8cb634930ab6049176da30cfa0e7",
+  "archive_path": "data/mgsm.zip",
+  "archive_sha256": "d662677629e5105e60f3f360761500ca97e284163a9b8b726c054c43475e8a22",
+  "json_sha256": "9527f9693fbc2ba4e5b6ec4546f947888093c693f9231641016d6b8a52cdfb7d",
+  "json_bytes": 1954503,
+  "split": "test",
+  "test_rows": 3250,
+  "language_test_counts": {"en": 250, "th": 250, "id": 250, "vi": 250, "fil": 250, "ceb": 250, "ilo": 250, "jv": 250, "km": 250, "lo": 250, "ms": 250, "su": 250, "my": 250},
+  "projected_prefix_rows": 26,
+  "prefix_policy": "first two official test rows per language in fixed ALL_LANGS order",
+  "projected_prefix_sha256": "75d25cca098cf2d29d206f47ac98ddc15c86f0bf4beb2806f3cb131ae1948df8",
+  "public_field_names": ["question"],
+  "gold_fields_excluded": ["answer", "answer_with_cot"],
+  "validation_callable": "auto_research.foundation_models.deepsea.inspect_fixed_mgsm_archive",
+  "verified_by_actual_execution": true,
+  "upstream_script_executed": false,
+  "model_calls": 0,
+  "used_for_training_or_selection": false,
+  "benchmark_text_exported": false,
+  "diagnostic_only": true
+}

@@ -1,0 +1,15 @@
+{
+  "reference": "SacreBLEU",
+  "reference_version": "2.5.1",
+  "reference_source": "https://github.com/mjpost/sacrebleu/blob/v2.5.1/sacrebleu/metrics/chrf.py",
+  "reference_call": "CHRF(word_order=0).corpus_score(hypotheses, [references]).score",
+  "configuration": {"char_order": 6, "word_order": 0, "beta": 2, "whitespace": false, "lowercase": false, "eps_smoothing": false},
+  "case_count": 12,
+  "case_categories": ["empty_both", "empty_reference", "empty_hypothesis", "short_equal", "short_unequal", "unequal_lengths", "non_whitespace_unicode_languages", "case_and_punctuation", "corpus_not_sentence_mean", "mixed_empty_reference", "unicode_combining_mark", "mixed_whitespace"],
+  "maximum_absolute_error": 1.4210854715202004e-14,
+  "verified_by_actual_execution": true,
+  "synthetic_cases_only": true,
+  "benchmark_data_used": false,
+  "model_calls": 0,
+  "diagnostic_only": true
+}

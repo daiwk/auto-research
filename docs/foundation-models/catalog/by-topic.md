@@ -282,6 +282,10 @@
 
 ## 推理与系统效率
 
+### 多语言评测与评分协议
+
+- [DeepSEA: A Multilingual Evaluation Benchmark for Southeast Asia](../../foundation-models/2610.26155-deepsea/README.md)（`deepsea`）：现有多语言评测对东南亚低资源语言覆盖不足。DeepSEA 通过专业翻译与质量审核扩展五类公开任务，支持按语言资源层级比较推理、问答和生成表现；研究同时分析英语中转、错误类型及 tokenizer 效率。它是 benchmark，而非改变语言模型参数的训练算法。
+
 ### 多向量检索与固定预算池化
 
 - [FLINT: Fixed-budget Late Interaction](../../foundation-models/2610.27273-flint/README.md)（`flint`）：ColBERT 对每个 token 保留向量，文档越长索引越大，长查询也需要更多次向量检索。ConstBERT 固定了文档侧预算，但查询仍逐 token。FLINT 则在共享 backbone 后，用两套不同的可学习 latent 分别读取查询和文档 token；交叉注意力、FFN 参数共享，双方输出都固定为 $V$ 个向量。它不是截取前 $V$ 个 token，也不是简单平均池化。

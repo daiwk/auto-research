@@ -1,0 +1,144 @@
+{
+  "schema_version": 2,
+  "method": "deepsea",
+  "manifest_ref": "foundation-models:deepsea",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "dataset": {
+    "id": "synthetic:oct22-deepsea-contracts-v1",
+    "revision": "sha256:51b925f68ed2f7b1da3b5cc1ddb4667cb8b735b1e33637027c7be977ceb63fa9",
+    "recipe": "source-frozen-generated-contract-inputs",
+    "capability_benchmark": false
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "checks": {
+        "five_task_reference_scores": true,
+        "subject_macro_not_micro": true,
+        "first_qa_reference_not_oracle": true,
+        "prediction_coverage_rejected": true,
+        "public_input_excludes_gold": true,
+        "metricx_not_substituted": true,
+        "unicode_chrf_and_whitespace": true
+      },
+      "metrics": {
+        "scorer_contract_cases": 7.0,
+        "reference_score_error": 0.0,
+        "coverage_rejection_count": 3.0,
+        "model_calls": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "upstream_revision": "7c3abc06824c8cb634930ab6049176da30cfa0e7"
+    },
+    {
+      "seed": 43,
+      "checks": {
+        "five_task_reference_scores": true,
+        "subject_macro_not_micro": true,
+        "first_qa_reference_not_oracle": true,
+        "prediction_coverage_rejected": true,
+        "public_input_excludes_gold": true,
+        "metricx_not_substituted": true,
+        "unicode_chrf_and_whitespace": true
+      },
+      "metrics": {
+        "scorer_contract_cases": 7.0,
+        "reference_score_error": 0.0,
+        "coverage_rejection_count": 3.0,
+        "model_calls": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "upstream_revision": "7c3abc06824c8cb634930ab6049176da30cfa0e7"
+    },
+    {
+      "seed": 44,
+      "checks": {
+        "five_task_reference_scores": true,
+        "subject_macro_not_micro": true,
+        "first_qa_reference_not_oracle": true,
+        "prediction_coverage_rejected": true,
+        "public_input_excludes_gold": true,
+        "metricx_not_substituted": true,
+        "unicode_chrf_and_whitespace": true
+      },
+      "metrics": {
+        "scorer_contract_cases": 7.0,
+        "reference_score_error": 0.0,
+        "coverage_rejection_count": 3.0,
+        "model_calls": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "upstream_revision": "7c3abc06824c8cb634930ab6049176da30cfa0e7"
+    }
+  ],
+  "metrics": {
+    "coverage_rejection_count": {
+      "mean": 3.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "reference_score_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "scorer_contract_cases": {
+      "mean": 7.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "scorer/durability contracts, not model or agent capability results"
+  },
+  "provenance": {
+    "commit": "068e4b51b388ffd6a2da532e2e62acda29b66cf6",
+    "artifact_path": "docs/foundation-models/2610.26155-deepsea/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct22_priority_components.py": "03ed32b041ab41453795930270ccd9422e921fa1ece5270551bd332d5f97806e",
+      "src/auto_research/foundation_models/deepsea.py": "43ed077984c861c315020d486ed8ef83d91ed097d0c246152a958c3ef10f2d35",
+      "src/auto_research/agent_research/logact.py": "3b510181adf2a370d14b923a980871be5e3b00cc5e04caa8040fd66041b8689e"
+    },
+    "raw_runner_artifact_sha256": "ae7d37e078b163e230f36503b6380fab2f9fa43c4c3bcb633dff8eab651ab1fd",
+    "official_schema_inspection_sha256": "36934707f343c8c8b7a20882bbfb53f558cc0a3d7b7469e736eb7af86548ed9c",
+    "dataset_fingerprint": "sha256:08a75a39181406c06ad09efa48d0c80cdca0de573da28a882b14733a594a48ae"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}
