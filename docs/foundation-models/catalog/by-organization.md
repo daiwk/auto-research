@@ -160,6 +160,10 @@
 
 - 2025-04-07 · [SmolVLM: Redefining small and efficient multimodal models](../../reproductions/2504.05299-smolvlm/README.md)（`smolvlm`）：SmolVLM 重新分配小模型视觉/语言侧算力，以 pixel shuffle 将相邻空间 token 搬到 channel 维，再用 MLP 映射到 LM 空间；同时研究长上下文、图像切片、学习位置 token 和数据配比， 使 256M/500M/2.2B 模型在低显存下保持图像与视频能力。
 
+## Independent Researcher
+
+- 2026-10-21 · [When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models](../../system-one/2610.29217-jev-multicorrect/README.md)（`jev-multicorrect`）：当一个列表有多个正确选项时，模型可能把大部分概率分给其中一个正确项，另一个正确项虽高于所有干扰项，概率仍低于均匀基线。单选 top-1 或“正确项都排在干扰项之前”因此会掩盖完整集合恢复的失败。论文同时分析 JEV、Luna 和 Gemini，避免把所有现象都归因于某一种架构。
+
 ## Independent Researcher, Chile
 
 - 2026-10-15 · [Patch where the text is new: a compression view of where byte-level models should spend compute](../../foundation-models/2610.22100-novelty-patching/README.md)（`novelty-patching`）：Byte-level 模型按 patch 调用全局模型。本文用近期重复程度预测替代纯熵边界；离线计算匹配标签，在线只查前两字节。主源位置为 §3 方法、§4-7 结果及负结果、§8 限制和 Code and data。
@@ -447,6 +451,10 @@
 
 - 2026-10-18 · [T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training](../../foundation-models/2610.24938-t-muon/README.md)（`t-muon`）：普通 Muon 逐矩阵求 polar。本文先把结构相关矩阵放进三阶张量，再在第三轴变换域分别求 polar；这不是把张量任意展平后运行普通 Muon。分组方式与变换方式是两个独立选择：论文比较相邻层、QKV、单矩阵的 head、QKV 的 head-stack。
 
+## University of California, Santa Cruz
+
+- 2026-10-21 · [ALPS: Visual State Encoders for World Models](../../foundation-models/2610.30120-alps/README.md)（`alps`）：世界模型以视觉 token 为状态进行预测和规划，但一个编码器通常只擅长物理状态、语言对齐或像素重建中的一部分。ALPS 尝试让同一组 patch token 同时承担三种接口：机器人状态探针能读出位置，文字指令能对应图像，而未来 token 能被解码成图像以便检查。
+
 ## University of Cambridge
 
 - 2026-10-15 · [BitSparse: Compact Activation Storage for ReLU Feed-Forward Networks](../../foundation-models/2610.22256-bit-sparse/README.md)（`bit-sparse`）：ReLU 家族已有大量精确零；BitSparse 保存 bitmask、正值和 tile prefix，在反向时无损重建，避免靠有损量化或额外前向换空间。§3 定义格式，公式 1–2 与 Appendix C 定义 ReLU/ReLU² 线性层反向。
@@ -473,6 +481,10 @@
 ## University of Maryland
 
 - 2026-07-16 · [Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers](../../reproductions/2607.15456-looped-latent-attention/README.md)（`looped-latent-attention`）：Looped Transformer 重复使用同一组权重，但不同 loop 的 KV cache 仍重复占内存。LLA 学习跨 loop 共享的低秩 K/V latent，服务时按 loop 重建专用 K/V，从 recurrence 冗余中换取近无损压缩。
+
+## University of Michigan, Ann Arbor
+
+- 2026-10-21 · [Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories](../../foundation-models/2610.29378-right-on-q/README.md)（`right-on-q`）：低比特量化会改变模型生成的前缀。只在固定的全精度参考回答上蒸馏，不能覆盖量化学生真正遇到的错误和长推理状态。OnQ 从逐 block 校准开始，让量化学生自己生成回答，再由冻结的原始全精度教师在**相同学生前缀**上提供分布监督。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## University of Modena and Reggio Emilia
 

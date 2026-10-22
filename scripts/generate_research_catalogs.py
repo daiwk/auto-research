@@ -61,6 +61,7 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "知识蒸馏": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
         "自置信轨迹过滤": ("奖励、信用与课程", "课程与能力边界"),
         "偏好图信用分配": ("奖励、信用与课程", "奖励构造与排序信号"),
         "on-policy-self-distillation": ("蒸馏与训练闭环", "on-policy / context 蒸馏"),
@@ -168,6 +169,7 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "Agent 训练与策略优化": ("Agentic RL 与后训练", "在策略蒸馏与上下文探索"),
         "RSI": ("规划、搜索与反思", "Harness 与自我改进"),
         "递归自改进": ("规划、搜索与反思", "Harness 与自我改进"),
         "多 Agent 协作": ("规划、搜索与反思", "多 Agent 协作与通信"),
@@ -792,6 +794,7 @@ def manifest_domain_rows(domain: str, hierarchy: dict[str, tuple[str, str]]) -> 
                 if paper.get("implementation_status") == "deferred_high_cost" else ""
             ),
             "domain": cluster[0], "cluster": cluster[1],
+            "implementation_status": paper.get("implementation_status", ""),
         })
     return rows
 
@@ -830,6 +833,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "alps": ("网络架构", "JEPA 与几何表征"),
+        "right-on-q": ("推理与系统效率", "量化"),
+        "jev-multicorrect": ("推理与系统效率", "System One / JEV 检索评测协议"),
         "deepsea": ("推理与系统效率", "多语言评测与评分协议"),
         "flint": ("推理与系统效率", "多向量检索与固定预算池化"),
         "stratified-sparse-attention": ("注意力与长上下文", "稀疏采样与估计"),
@@ -1012,6 +1018,7 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "aw0": ("视觉世界模型与时序推理", "代码、视频与动作联合生成"),
         "mice": ("视觉生成与编辑", "多实例编辑与注意力隔离"),
         "system-one-rerank": ("多模态检索", "单次前向结构化重排"),
         "cv-opd": ("多模态奖励与后训练", "视觉证据约束蒸馏"),
@@ -1030,10 +1037,10 @@ def render_multimodal_method_index() -> str:
     lines = [
         "# 多模态大模型方法索引",
         "",
-        "本页汇总具有独立源码入口的论文；公开数据实跑与 GPU 验收状态请查各篇详情和回执。",
+        "本页汇总论文实现与高成本研究资料；收录不等于已实现。公开数据实跑与 GPU 验收状态请查各篇详情和回执。",
         "底座 connector 与论文 genome 的对应关系也在同一处维护。",
         "",
-        "## 已实现论文",
+        "## 论文实现与研究资料",
         "",
         '<div class="ar-method-index" markdown>',
         "",
@@ -1041,9 +1048,10 @@ def render_multimodal_method_index() -> str:
         "|---|---|---|---|",
     ]
     for row in multimodal_rows():
+        entry = "未复现（高成本资料）" if row.get("implementation_status") == "deferred_high_cost" else f"`{row['key']}`"
         lines.append(
             f"| {row['cluster']} | [{row['title']}]({row.get('index_href', row['link'].removeprefix('multimodal-models/'))}) | "
-            f"{row['organization']}，{row['date']} | `{row['key']}` |"
+            f"{row['organization']}，{row['date']} | {entry} |"
         )
     lines.extend([
         "",

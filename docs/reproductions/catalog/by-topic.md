@@ -18,6 +18,7 @@
 - [Light Heads](../2609.25433-light-heads/README.md)：给共享排序塔动态挂浅层新目标头，stop-gradient 防止其损伤原任务并支持窗口级重置。
 
 ### 预训练与参数高效迁移
+- [Progressive Learning from Content to Relevance to Personalization for CTR Prediction](../../recommendation-components/2610.29138-finesid/README.md)：把多尺度视觉和字段化文本离散token送入有序融合/HiFormer，先用教师软相关性训练整个共享预测器，再保留完整状态迁移到个性化CTR微调。正文有淘宝七天量化线上A/B；64H20与私有大数据成本过高，仅收录方法和证据，不提供伪替代运行。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [LazFormer](../2609.14978-lazformer/README.md)：可迁移生成式预训练与轻量排序残差适配。
 
 ### 用户状态与偏好修复

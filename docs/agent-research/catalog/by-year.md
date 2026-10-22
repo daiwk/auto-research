@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-10 · [Asymmetric On-Policy Distillation Learns In-Context Exploration](../2610.30105-asteroid/README.md)（`asteroid`）：部分可观测任务中，专家知道隐藏目标，因而总能直接成功；只模仿专家，学生看不到“失败后如何继续搜索”的上下文。ASTEROID 让**当前学生先探索**，再在同一个隐藏任务下收集专家的**完整成功轨迹**。
 - 2026-10 · [Cache Engineering for Agents](../2610.28577-cache-engineering/README.md)（`cache-engineering`）：删改早期对话文本会使后续KV失效，重prefill又产生费用。作者保留逻辑文本，直接drop旧工具响应的KV，必要时repos重设保留键的位置；缓存状态取决于操作发生的历史，不能只根据最终token前缀判断是否可复用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10 · [Evolving Agent Interfaces](../2610.28601-agent-s4/README.md)（`agent-s4`）：固定GUI、shell或浏览器接口决定Agent能观察和执行什么。重复点击、逐格编辑、冗长输出等低效行为，既可能来自模型，也可能来自接口设计。
 - 2026-10 · [Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design](../2610.28380-oo-harness/README.md)（`oo-harness`）：全任务共用一个harness可能互相干扰；为每类任务复制完整实现又难以复用。作者将专用harness写成父类的子类，只覆盖需要改变的prompt、工具或执行hook。
@@ -25,9 +26,9 @@
 - 2026-10 · [JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs](../2610.21412-jev-agent-harness/README.md)（`jev-agent-harness`）：Agent 不需要每一步都让昂贵 LLM 生成长文本，但离线多选题高准确率也不保证闭环不出错。JevAgentHarness 在 agent 自己访问的 shadow trajectories 上，分别校准工具、参数等决策的委派阈值，低置信交回 LLM，并报告成功／费用／关键路径延迟。
 - 2026-10 · [LEASH: Uncertainty-Aware Weak-to-Strong Escalation and Oversight for Computer-Use Agents](../2610.22280-leash/README.md)（`leash`）：小模型先执行、必要时交给强模型可降低成本，但“何时接管”和“强模型接管后是否走偏”是两个问题。LEASH 利用弱模型表示与历史成功/失败参考的距离，不额外训练一个监控网络；初始和运行时 gate 决定 handoff，之后定期用弱模型的未执行 Shadow 动作表示监督强模型，并在需要时要求其重新审视策略。
 - 2026-10 · [Librarian Agents: Training LLMs to Curate Long-Context Workspaces that Anticipate Future Queries](../2610.22273-librarian-agents/README.md)（`librarian-agents`）：常规 RAG 每次查询后才检索，重复探索跨文档关系。Librarian 在还未看到评测问题时，由可学习 builder 把原始语料组织成可复用层级文件系统；固定 answerer 后续导航，必要时沿 provenance 回退到 raw docs。
+- 2026-10 · [MemoProAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
 - 2026-10 · [MemScope: Evolving Agent Memory Architectures through Localized Code Repair](../2610.21170-memscope/README.md)（`memscope`）：只给“分数下降”或压缩总结，很难知道长链 Agent 该改记忆写入、检索还是下游使用。MemScope 让 Patch Agent 联合检查原始执行轨迹、运行时记忆和当前 provider 代码，定位后做有界原位修改，保留 provider identity 与现有记忆兼容性；证据不足时可以明确 no-patch，而不是每轮都强行修改。
 - 2026-10 · [PROBE: Learning to Audit Policy Compliance in Tool-Using LLM Agents](../2610.22124-probe/README.md)（`probe`）：任务完成并不等于按业务/隐私政策完成；只测试最终状态或有害文本也可能漏掉多轮工具调用中的违规。PROBE 训练扮演正常客户的 auditor，与冻结 target 交互，私有 verifier 从完整 trace 判断违规；奖励综合违规、可信客户行为、工具流程进展和策略多样性，比较 GRPO、DPO 和 GFlowNet。
-- 2026-10 · [ProPerAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
 - 2026-10 · [Repairing LLM-Generated Specifications with Deterministic Diagnosis](../2610.22568-drago/README.md)（`drago`）：形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。
 - 2026-10 · [RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent](../2610.21791-rsiflow/README.md)（`rsiflow`）：性能瓶颈可能来自模型参数、执行 Harness，也可能只是当前交付物。固定只改其中一项，或固定交替更新，未必对应当前失败。
 - 2026-10 · [SciPIvot: Benchmarking Principal-Investigator Judgment at Pivotal Moments of Scientific AutoResearch Agents](../2610.21082-scipivot/README.md)（`scipivot`）：26 个跨六科学领域项目、六个月人类纠偏记录构成 248 个关键决策：一个选项是原 LLM 方案，另一个为人类纠正方案。评测器选择更适当的后续研究计划，不是预测项目最终成功。

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "paper_id": "2610.29217",
+  "paper_url": "https://arxiv.org/abs/2610.29217v1",
+  "figures": [{
+    "path": "paper-figure-02.png",
+    "figure": "Figure 2",
+    "source_url": "https://raw.githubusercontent.com/Rushab1/gr-jev/7b161f96cd0ff1842845fc66f981d1471cc18151/paper/figures/exact_set.pdf",
+    "source_sha256": "00d697301e7ff73bcee4aacf8cb4acd4df1f3d5931dc6938e86cee056926fbce",
+    "sha256": "f050ef5ff42e7ffcdf8ced1f464c7654873ed5942f45950747cca5c7d92661be",
+    "transformation": "rendered author vector figure at 2x; no chart/data edits",
+    "visually_inspected": true,
+    "not_local_experiment": true
+  }]
+}

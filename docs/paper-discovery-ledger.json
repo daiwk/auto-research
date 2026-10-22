@@ -129920,6 +129920,569 @@
           "reason": "CPU低成本接口/协议已验证；完整实验成本过高，不复现（审查DONE）。"
         }
       ]
+    },
+    {
+      "batch": "2026-10-22-bulletin-components",
+      "date": "2026-10-22",
+      "scope_kind": "bounded-bulletin-selected-components",
+      "source_artifact": "research-audits/oct22-bulletin-components/README.md",
+      "counts": {
+        "selected_papers": 8,
+        "components_pending_gpu_and_integration": 0,
+        "reference_only_review_done": 3,
+        "metadata_updates": 1,
+        "category_entries_including_crosslists_and_replacements": 1378,
+        "unique_bulletin_identities": 964,
+        "snapshot_added_base_identities_not_new_paper_count": 934,
+        "snapshot_retained_base_identities": 30,
+        "snapshot_removed_base_identities": 1096,
+        "snapshot_added_version_strings_not_revision_count": 964,
+        "snapshot_removed_version_strings": 1126,
+        "new_section_unique_identities_not_exact_first_publication_count": 520,
+        "crosslist_unique_identities": 285,
+        "replacement_unique_identities": 349,
+        "selected_first_publication_after_baseline_capture": 2,
+        "section_entry_counts": {
+          "new": 520,
+          "cross-list": 343,
+          "replacement": 515
+        },
+        "components_accepted": 5,
+        "gpu_validated_components": 4,
+        "capability_reproductions_claimed": 0
+      },
+      "delivery_status": "bounded_scope_complete",
+      "all_sources_exhaustive": false,
+      "review_watermark_advanced": false,
+      "metadata_updates": [
+        {
+          "id": "2610.22671",
+          "key": "proper-agent",
+          "observed_title": "MemoProAgent: Toward Memory-Driven Proactive Assistance",
+          "observed_versions": [
+            "2610.22671v2"
+          ],
+          "new_paper": false,
+          "change": "existing proper-agent v2 title/source metadata update; no new runtime or evidence-tier upgrade"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "2610.30120",
+          "key": "alps",
+          "domain": "foundation-models",
+          "title": "ALPS: Visual State Encoders for World Models",
+          "paper_url": "https://arxiv.org/abs/2610.30120v1",
+          "detail_path": "foundation-models/2610.30120-alps/README.md",
+          "first_author": "Yanqing Liu",
+          "first_author_affiliation": "University of California, Santa Cruz",
+          "verified_coauthor_priority_organizations": [
+            "Google"
+          ],
+          "priority": "P0",
+          "original_published_at": "2026-10-21T17:57:11Z",
+          "announced_on": "2026-10-22",
+          "intake_class": "newly_announced",
+          "first_publication_after_baseline_capture": true,
+          "observed_versions": [
+            "2610.30120v1"
+          ],
+          "bulletin_categories": [
+            "cs.CV"
+          ],
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "delivery_status": "bounded_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "requires_gpu_validation": true,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.30120v1",
+            "basis": "paper method/resource sections and linked author release; not measured complete-run time",
+            "scale": "以语言对齐、像素重建与跨视图空间对应联合预训ViT，再用固定Stage1教师和几何query做跨视图自蒸馏，使同一patch表征支持状态、语言和像素接口。本地仅实现crop坐标/重叠mask、连续位置及尺度query、固定教师标准化和逐图MSE外部token接口；不含预训encoder/predictor，L1不得promotion；完整约138亿样本处理及15编码器/机器人矩阵高成本不复现（审查 DONE）。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "doc": "foundation-models/2610.30120-alps/README.md",
+          "catalog_key": "alps",
+          "catalog_detail": "foundation-models/2610.30120-alps/README.md",
+          "track": "foundation-model",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "L1组件通过冻结源码和三种子契约；CUDA组件真实A100验收。完整实验高成本不复现，不宣称能力效果。",
+          "review_artifact": "research-audits/oct22-bulletin-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, relevant resources/costs, author code and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.30120v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of California, Santa Cruz"
+            },
+            {
+              "source_url": "https://arxiv.org/html/2610.30120v1",
+              "source_kind": "verified-paper-coauthor-affiliation",
+              "organization": "Google"
+            }
+          ],
+          "component_evidence": "docs/foundation-models/2610.30120-alps/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/alps-a100-20261022.json"
+        },
+        {
+          "id": "2610.30105",
+          "key": "asteroid",
+          "domain": "agent-research",
+          "title": "Asymmetric On-Policy Distillation Learns In-Context Exploration",
+          "paper_url": "https://arxiv.org/abs/2610.30105v1",
+          "detail_path": "agent-research/2610.30105-asteroid/README.md",
+          "first_author": "Sriyash Poddar",
+          "first_author_affiliation": "University of Washington",
+          "verified_coauthor_priority_organizations": [
+            "Meta"
+          ],
+          "priority": "P0",
+          "original_published_at": "2026-10-21T17:50:31Z",
+          "announced_on": "2026-10-22",
+          "intake_class": "newly_announced",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [
+            "2610.30105v1"
+          ],
+          "bulletin_categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.RO"
+          ],
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "delivery_status": "bounded_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "requires_gpu_validation": true,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.30105v1",
+            "basis": "paper method/resource sections and linked author release; not measured complete-run time",
+            "scale": "当前history学生先在同一隐藏任务中采集完整episode上下文，再接完整成功教师轨迹，累积数据并仅对专家query动作做条件NLL训练。独立实现三门BAMDP、因果Transformer真实更新和不读latent的部署路径，仅L1诊断；多环境1-6小时训练、机器人专家和实体硬件成本过高，不复现（审查 DONE）。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "doc": "agent-research/2610.30105-asteroid/README.md",
+          "catalog_key": "asteroid",
+          "catalog_detail": "agent-research/2610.30105-asteroid/README.md",
+          "track": "agent",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "L1组件通过冻结源码和三种子契约；CUDA组件真实A100验收。完整实验高成本不复现，不宣称能力效果。",
+          "review_artifact": "research-audits/oct22-bulletin-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, relevant resources/costs, author code and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.30105v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of Washington"
+            },
+            {
+              "source_url": "https://arxiv.org/html/2610.30105v1",
+              "source_kind": "verified-paper-coauthor-affiliation",
+              "organization": "Meta"
+            }
+          ],
+          "component_evidence": "docs/agent-research/2610.30105-asteroid/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/asteroid-a100-20261022.json"
+        },
+        {
+          "id": "2610.29965",
+          "key": "cord",
+          "domain": "post-training",
+          "title": "CORD: Conflict-Aware Optimization for Joint RL and Distillation in Agents",
+          "paper_url": "https://arxiv.org/abs/2610.29965v1",
+          "detail_path": "post-training/2610.29965-cord/README.md",
+          "first_author": "Wenhao Yu",
+          "first_author_affiliation": "The Chinese University of Hong Kong",
+          "verified_coauthor_priority_organizations": [],
+          "priority": "P1",
+          "original_published_at": "2026-10-21T16:19:22Z",
+          "announced_on": "2026-10-22",
+          "intake_class": "newly_announced",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [
+            "2610.29965v1"
+          ],
+          "bulletin_categories": [
+            "cs.LG"
+          ],
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "delivery_status": "bounded_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "requires_gpu_validation": true,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.29965v1",
+            "basis": "paper method/resource sections and linked author release; not measured complete-run time",
+            "scale": "先按固定损失权重汇总整个optimizer minibatch的RL与蒸馏梯度，再保留指定protected方向，将另一方向做最近可行投影；区分冲突门控、always门控及交换保护方向。实现精确梯度算子、真实微型网络更新与独立参考，不冒称完整Agent训练或AdamW后的下降保证。原文8张A100、3B/7B多轮环境评测成本过高，不复现（审查 DONE）。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "doc": "post-training/2610.29965-cord/README.md",
+          "catalog_key": "cord",
+          "catalog_detail": "post-training/2610.29965-cord/README.md",
+          "track": "post-training",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "L1组件通过冻结源码和三种子契约；CUDA组件真实A100验收。完整实验高成本不复现，不宣称能力效果。",
+          "review_artifact": "research-audits/oct22-bulletin-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, relevant resources/costs, author code and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.29965v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "The Chinese University of Hong Kong"
+            }
+          ],
+          "component_evidence": "docs/post-training/2610.29965-cord/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/cord-a100-20261022.json"
+        },
+        {
+          "id": "2610.28895",
+          "key": "csd",
+          "domain": "post-training",
+          "title": "CSD: Common-Support Distillation for Cross-Tokenizer Knowledge Transfer",
+          "paper_url": "https://arxiv.org/abs/2610.28895v1",
+          "detail_path": "post-training/2610.28895-csd/README.md",
+          "first_author": "Mingyu Yang",
+          "first_author_affiliation": "NVIDIA",
+          "verified_coauthor_priority_organizations": [],
+          "priority": "P1",
+          "original_published_at": "2026-10-20T20:18:46Z",
+          "announced_on": "2026-10-22",
+          "intake_class": "newly_announced",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [
+            "2610.28895v1"
+          ],
+          "bulletin_categories": [
+            "cs.CL",
+            "cs.LG"
+          ],
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "delivery_status": "bounded_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "requires_gpu_validation": true,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.28895v1",
+            "basis": "paper method/resource sections and linked author release; not measured complete-run time",
+            "scale": "按相同原文字符区间对齐不同Tokenizer，用解码文本等价建立显式共同事件；分词不同时固定前缀、改变末token并用自回归链式概率计分，保留residual质量与统一JSD/KL。实现真实跨词表对齐、四类chunk、动态CE/KD及微型神经更新，不是same-vocab KL改名。原文256张H100、1B/8B学生与最高14B教师完整实验成本过高，不复现（审查 DONE）。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "doc": "post-training/2610.28895-csd/README.md",
+          "catalog_key": "csd",
+          "catalog_detail": "post-training/2610.28895-csd/README.md",
+          "track": "post-training",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "L1组件通过冻结源码和三种子契约；CUDA组件真实A100验收。完整实验高成本不复现，不宣称能力效果。",
+          "review_artifact": "research-audits/oct22-bulletin-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, relevant resources/costs, author code and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.28895v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "NVIDIA"
+            }
+          ],
+          "component_evidence": "docs/post-training/2610.28895-csd/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/csd-a100-20261022.json"
+        },
+        {
+          "id": "2610.29217",
+          "key": "jev-multicorrect",
+          "domain": "foundation-models",
+          "title": "When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models",
+          "paper_url": "https://arxiv.org/abs/2610.29217v1",
+          "detail_path": "system-one/2610.29217-jev-multicorrect/README.md",
+          "first_author": "Rushab Munot",
+          "first_author_affiliation": "Independent Researcher",
+          "verified_coauthor_priority_organizations": [],
+          "priority": "P1",
+          "original_published_at": "2026-10-21T05:18:35Z",
+          "announced_on": "2026-10-22",
+          "intake_class": "newly_announced",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [
+            "2610.29217v1"
+          ],
+          "bulletin_categories": [
+            "cs.AI"
+          ],
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "delivery_status": "bounded_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "requires_gpu_validation": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.29217v1",
+            "basis": "paper method/resource sections and linked author release; not measured complete-run time",
+            "scale": "审计多个正确选项间的概率不对称，将排序正确、集合恢复和独立二元校准分开。本地实现外部预测评分、五拷贝差距、ECE与验证阈值冻结/测试隔离；只运行L1契约，不声称复现原文付费模型结论；完整实验成本过高，不复现（审查 DONE）。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "doc": "system-one/2610.29217-jev-multicorrect/README.md",
+          "catalog_key": "jev-multicorrect",
+          "catalog_detail": "system-one/2610.29217-jev-multicorrect/README.md",
+          "track": "foundation-model",
+          "resolution": "bounded_component_implemented_full_experiment_not_reproduced_high_cost",
+          "reason": "L1组件通过冻结源码和三种子契约；CUDA组件真实A100验收。完整实验高成本不复现，不宣称能力效果。",
+          "review_artifact": "research-audits/oct22-bulletin-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, relevant resources/costs, author code and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.29217v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Independent Researcher"
+            }
+          ],
+          "component_evidence": "docs/system-one/2610.29217-jev-multicorrect/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "id": "2610.30136",
+          "key": "aw0",
+          "domain": "multimodal-models",
+          "title": "Agentic World Action Models",
+          "paper_url": "https://arxiv.org/abs/2610.30136v1",
+          "detail_path": "multimodal-models/2610.30136-aw0/README.md",
+          "first_author": "Zhuoyang Liu",
+          "first_author_affiliation": "UC Berkeley",
+          "verified_coauthor_priority_organizations": [],
+          "priority": "P1",
+          "original_published_at": "2026-10-21T17:59:56Z",
+          "announced_on": "2026-10-22",
+          "intake_class": "newly_announced",
+          "first_publication_after_baseline_capture": true,
+          "observed_versions": [
+            "2610.30136v1"
+          ],
+          "bulletin_categories": [
+            "cs.RO"
+          ],
+          "status": "deferred",
+          "implementation_status": "deferred_high_cost",
+          "delivery_status": "review_done_not_reproduced",
+          "component_implemented": false,
+          "component_accepted": false,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "requires_gpu_validation": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.30136v1",
+            "basis": "paper method/resource sections and linked author release; not measured complete-run time",
+            "scale": "原文六节点48张H100联合预训，248642条约2913.2小时机器人/人类演示，三种28层专家及大型冻结组件；RoboTwin另16GPU训练100000步，加真实双臂/灵巧手部署。单A100/A30或Mac完整成本过高，不复现（审查 DONE）；不以一个mask/flow loss函数代替核心MoT训练，不下载权重、数据或44MB PDF。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "doc": "multimodal-models/2610.30136-aw0/README.md",
+          "catalog_key": "aw0",
+          "catalog_detail": "multimodal-models/2610.30136-aw0/README.md",
+          "track": "multimodal",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）；只保留方法、原图和来源，不生成runtime或能力指标。",
+          "review_artifact": "research-audits/oct22-bulletin-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, relevant resources/costs, author code and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.30136v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "UC Berkeley"
+            }
+          ]
+        },
+        {
+          "id": "2610.29378",
+          "key": "right-on-q",
+          "domain": "foundation-models",
+          "title": "Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories",
+          "paper_url": "https://arxiv.org/abs/2610.29378v1",
+          "detail_path": "foundation-models/2610.29378-right-on-q/README.md",
+          "first_author": "Boyuan Zheng",
+          "first_author_affiliation": "University of Michigan, Ann Arbor",
+          "verified_coauthor_priority_organizations": [
+            "Meta"
+          ],
+          "priority": "P0",
+          "original_published_at": "2026-10-21T08:03:24Z",
+          "announced_on": "2026-10-22",
+          "intake_class": "newly_announced",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [
+            "2610.29378v1"
+          ],
+          "bulletin_categories": [
+            "cs.CL",
+            "cs.LG"
+          ],
+          "status": "deferred",
+          "implementation_status": "deferred_high_cost",
+          "delivery_status": "review_done_not_reproduced",
+          "component_implemented": false,
+          "component_accepted": false,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "requires_gpu_validation": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.29378v1",
+            "basis": "paper method/resource sections and linked author release; not measured complete-run time",
+            "scale": "原文§4/Appendix A.1-A.2使用1.7B/4B/8B、两三bit、4096×2048 token逐block两epoch校准；25,600 prompts、每步128在线rollout、300/400步、最高16,384训练response tokens，H100/H200+vLLM BF16教师及九任务评测。高成本完整实验不复现（审查 DONE），无本地runtime/metrics/GPU要求",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "doc": "foundation-models/2610.29378-right-on-q/README.md",
+          "catalog_key": "right-on-q",
+          "catalog_detail": "foundation-models/2610.29378-right-on-q/README.md",
+          "track": "foundation-model",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）；只保留方法、原图和来源，不生成runtime或能力指标。",
+          "review_artifact": "research-audits/oct22-bulletin-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, relevant resources/costs, author code and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.29378v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "University of Michigan, Ann Arbor"
+            },
+            {
+              "source_url": "https://arxiv.org/html/2610.29378v1",
+              "source_kind": "verified-paper-coauthor-affiliation",
+              "organization": "Meta"
+            }
+          ]
+        },
+        {
+          "id": "2610.29138",
+          "key": "finesid",
+          "domain": "recommendation",
+          "title": "Progressive Learning from Content to Relevance to Personalization for CTR Prediction",
+          "paper_url": "https://arxiv.org/abs/2610.29138v1",
+          "detail_path": "recommendation-components/2610.29138-finesid/README.md",
+          "first_author": "Zhiguang Yang",
+          "first_author_affiliation": "Alibaba Group",
+          "verified_coauthor_priority_organizations": [],
+          "priority": "P1",
+          "original_published_at": "2026-10-21T03:19:02Z",
+          "announced_on": "2026-10-22",
+          "intake_class": "newly_announced",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [
+            "2610.29138v1"
+          ],
+          "bulletin_categories": [
+            "cs.IR"
+          ],
+          "status": "deferred",
+          "implementation_status": "deferred_high_cost",
+          "delivery_status": "review_done_not_reproduced",
+          "component_implemented": false,
+          "component_accepted": false,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "requires_gpu_validation": false,
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.29138v1",
+            "basis": "paper method/resource sections and linked author release; not measured complete-run time",
+            "scale": "64张H20、512亿曝光与私有淘宝/教师标注数据，完整实验超出单卡预算。成本过高，不复现（审查 DONE）。",
+            "available_resource": "One NVIDIA A100 or A30, or local Mac"
+          },
+          "doc": "recommendation-components/2610.29138-finesid/README.md",
+          "catalog_key": "finesid",
+          "catalog_detail": "recommendation-components/2610.29138-finesid/README.md",
+          "track": "recommendation",
+          "resolution": "not_reproduced_high_cost",
+          "reason": "成本过高，不复现（审查 DONE）；只保留方法、原图和来源，不生成runtime或能力指标。",
+          "review_artifact": "research-audits/oct22-bulletin-components/task-scope.json",
+          "full_text_review": {
+            "scope": "full-text",
+            "read_scope": "defining method, relevant resources/costs, author code and key figure",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.29138v1",
+              "source_kind": "primary-method-and-cost-review",
+              "organization": "Alibaba Group"
+            }
+          ]
+        }
+      ],
+      "selected_scope_complete": true
     }
   ]
 }

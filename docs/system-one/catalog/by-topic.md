@@ -29,6 +29,7 @@
 
 ## 概率校准与置信度
 
+- [When Multiple Choices Are Correct](../2610.29217-jev-multicorrect/README.md)：分离候选份额与独立正确概率，用集合恢复、五拷贝差距及ECE审计；验证集拟合阈值、test不重选，未调用商业模型。
 - [RLCR](../../post-training/2507.16806-rlcr/README.md)：将 proper scoring rule 纳入训练奖励，抑制无差别过度自信。
 - [Calibration-Aware RL](../../post-training/2601.13284-calibration-aware-rl/README.md)：直接优化决策概率校准，并隔离 validation 与 test。
 

@@ -1,0 +1,19 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.30136v1",
+  "figure": "Figure 2",
+  "source_url": "https://arxiv.org/html/2610.30136v1/method_v6_0926.png",
+  "paper_anchor": "https://arxiv.org/html/2610.30136v1#S2.F2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "21ab4e483b478f732d86e433ec7d364f6f619637ad50883be97d37af87a96c03",
+  "image_dimensions": [2037, 1630],
+  "description": "Original arXiv HTML Figure 2, byte-for-byte copy without cropping, redrawing or scientific edits",
+  "copyright": "Original AW-0 authors; arXiv v1 CC BY 4.0",
+  "visually_verified": true,
+  "author_project_url": "https://agentic-wam.github.io/",
+  "upstream_code_url": "https://github.com/ZhuoyangLiu2005/agentic-wam",
+  "upstream_code_revision": "7ad228bebb897bf01705cc10171e1d88cf5e9b22",
+  "upstream_code_license": "BSD-2-Clause at repository top level; third-party component licenses apply",
+  "cost_sources": ["Paper Appendix A Tables 5 and 6", "Paper Appendix B.1 Table 7", "Paper Sections 3.1 and 3.2"],
+  "local_scope": "review-only documentation; no runtime implementation, model/dataset download, metrics or GPU claim",
+  "review_resolution": "not_reproduced_high_cost"
+}

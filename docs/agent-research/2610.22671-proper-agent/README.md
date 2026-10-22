@@ -1,4 +1,4 @@
-# ProPerAgent：记住什么，还要知道何时开口
+# MemoProAgent（原 ProPerAgent）：记住什么，还要知道何时开口
 
 > `component_only` / L1 CPU 机制诊断。不是已接入 ProPerMem 的视频 Agent，也不是完整 GRPO 复现。
 
@@ -6,10 +6,11 @@
 
 | 字段 | 内容 |
 | --- | --- |
-| 论文链接 | [ProPerAgent: Toward Memory-Driven Proactive Assistance](https://arxiv.org/abs/2610.22671) |
+| 论文链接 | [MemoProAgent: Toward Memory-Driven Proactive Assistance（v2）](https://arxiv.org/abs/2610.22671v2)；v1 原名 ProPerAgent |
 | 公司/机构 | 一作 Shenglai Zeng；首列 Michigan State University，兼 Meta Reality Labs；团队包括 Meta Reality Labs、Meta Superintelligence Labs 等 |
 | 首次公开日期 | 2026-10-15 21:40:17 UTC，arXiv v1；出现在 10-19 官方公告，不是 10-19 首发 |
-| 原文开源代码 | [Meta 官方作者仓库 Memo-Pro-Agent](https://github.com/facebookresearch/Memo-Pro-Agent) 已公开 GPM 推理 / 评测 harness 及 GRPO reward / launcher 入口；核对固定 commit `5bf57aed9a865bc3489e5daa8040e243ec50fa85`（2026-10-21 17:51:47 UTC）。[CC-BY-NC-4.0](https://github.com/facebookresearch/Memo-Pro-Agent/blob/5bf57aed9a865bc3489e5daa8040e243ec50fa85/LICENSE) 为非商用源码许可，不是 OSI 开源许可；不等于完整论文训练与评测资产均已公开 |
+| 当前论文版本 | v2，2026-10-21 05:59:44 UTC；更名 MemoProAgent / MemoProBench 并在首页直接列代码与数据链接，不是新论文首发 |
+| 原文开源代码 | [Meta 官方作者仓库 Memo-Pro-Agent](https://github.com/facebookresearch/Memo-Pro-Agent) 已公开 GPM 推理 / 评测 harness 及 GRPO reward / launcher 入口；核对固定 commit `8563e58d3106c8e0b3108bff64c04d00e1c8f095`（2026-10-22 00:48:15 UTC）。[CC-BY-NC-4.0](https://github.com/facebookresearch/Memo-Pro-Agent/blob/8563e58d3106c8e0b3108bff64c04d00e1c8f095/LICENSE) 为非商用源码许可，不是 OSI 开源许可；不等于完整论文训练与评测资产均已公开 |
 | 本地 Adapter | 无（`adapter: null`）；组件 key：`proper-agent` |
 | 本地复现代码 | `src/auto_research/agent_research/proper_agent.py`；`scripts/run_oct19_evening_agent_components.py` |
 
@@ -69,9 +70,11 @@ PYTHONPATH=src python scripts/run_oct19_evening_agent_components.py \
 
 本地结果为三 seed 的合成机制诊断，不是正式多 seed 能力比较。输出含逐 seed 指标、fixture/source SHA256 与审计轨迹，拒绝覆盖；[归档指标](metrics/component-cpu-seeds42-44.json)由统一收口生成。
 
-### 作者源码发布范围更新（2026-10-22 核验）
+### v2 与作者源码发布范围更新（2026-10-22 核验）
 
-旧记录“尚未找到官方实现”已过时：Meta 的 [Memo-Pro-Agent 固定提交](https://github.com/facebookresearch/Memo-Pro-Agent/tree/5bf57aed9a865bc3489e5daa8040e243ec50fa85) 已公开 GPM 推理 / 评测 harness；README 作者名单与本论文一致，并说明软件从 `properagent` 更名为 `memoproagent`。arXiv v1 仍保留“将在正式发表时公开”的原始声明，没有直接补入仓库链接；这里通过 Meta 官方 namespace、作者名单与方法说明交叉确认，不把仓库发布误算为论文新版本。本地稳定键继续使用 `proper-agent`，不因此迁移目录。
+旧记录“尚未找到官方实现”已过时：[arXiv 官方版本历史](https://arxiv.org/abs/2610.22671v2) 明确 v1 为 10 月 15 日 21:40:17 UTC，v2 为 10 月 21 日 05:59:44 UTC。v2 标题为 MemoProAgent、benchmark 名为 MemoProBench，且[首页已直接列出](https://arxiv.org/html/2610.22671v2) Meta 官方代码与数据链接。v1 的“将在正式发表时公开”是历史声明，不代表 v2 现状。**这是同一论文的版本事实更新，不是一次新首发或新算法交付。** 本地稳定键、代码和文档目录继续使用 `proper-agent`，首次公开日期保留 v1。
+
+Meta 的 [Memo-Pro-Agent 当前固定提交](https://github.com/facebookresearch/Memo-Pro-Agent/tree/8563e58d3106c8e0b3108bff64c04d00e1c8f095) 已公开 GPM 推理 / 评测 harness；README 作者名单与本论文一致，并说明软件从 `properagent` 更名为 `memoproagent`。与此前核对的 `5bf57aed9a865bc3489e5daa8040e243ec50fa85` [逐文件比较](https://github.com/facebookresearch/Memo-Pro-Agent/compare/5bf57aed9a865bc3489e5daa8040e243ec50fa85...8563e58d3106c8e0b3108bff64c04d00e1c8f095)，新增四次提交仅调整机构 banner、图片、README 和合规测试，没有新增算法、训练资产或开放数据。不能把这些维护更新再计为一个新实现。
 
 按该提交的 [README 数据与可复现性说明](https://github.com/facebookresearch/Memo-Pro-Agent/blob/5bf57aed9a865bc3489e5daa8040e243ec50fa85/README.md#data-and-reproducibility) 和 [数据指南](https://github.com/facebookresearch/Memo-Pro-Agent/blob/5bf57aed9a865bc3489e5daa8040e243ec50fa85/docs/data.md)，`facebook/MemProBench` 的800条 eval800 历史数据仍标注为 private、需要授权；Ego4D 源视频必须另行依其条款获取。公开 checkout 包含样本参考元数据，但不分发视频、完整历史文件或预构建图 / embedding 索引；索引需在具备授权数据和模型服务后构建，不能将参考答案直接当检索记忆。
 

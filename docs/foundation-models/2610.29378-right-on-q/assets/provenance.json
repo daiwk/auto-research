@@ -1,0 +1,14 @@
+{
+  "asset": "paper-figure-02.png",
+  "asset_sha256": "75dc9ccdc161eab4be576dac20366610148c03a163ca9eb19be75f9e58253801",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.29378v1",
+  "source_pdf_sha256": "52a7ece276fdbc2e2b2087b23d0db2fcdc6183aa2685be14d2e4d0322aec7c5b",
+  "physical_page": 3,
+  "figure": "Figure 2",
+  "crop_points": [110, 83, 503, 211],
+  "render_scale": 3,
+  "extraction": "original PDF vector figure cropped with PyMuPDF; no content edits",
+  "visual_review": "已目视核对左右面板、量化学生前缀、教师监督与Dynamic KL图例，内容完整清晰",
+  "license": "arXiv non-exclusive distribution (paper); no code license found",
+  "copyright": "Copyright belongs to the original authors."
+}

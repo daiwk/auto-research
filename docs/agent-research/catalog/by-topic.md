@@ -158,7 +158,7 @@
 
 - [Remembering Has a Price: Learning Memory Worth under Resource Constraints](../2610.26453-tokenworth/README.md)（`tokenworth`）：生成长度、交互次数和记忆容量同时受限时，相关记忆也可能浪费稀缺预算。TokenWorth 用四维可解释基础特征学习稳定规律，再用 Recursive Feature Machine（RFM）校正查询相关的非线性残差。
 - [MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents](../2610.24955-memprice/README.md)（`memprice`）：长交互里，过去某个细节会不会有用通常事先未知。单纯按相关性保留记忆会忽略各条信息对同一上下文容量的竞争。
-- [ProPerAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
+- [MemoProAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
 
 ### 自进化
 
@@ -371,6 +371,10 @@
 - [AHEAD: Agentic Hints for Effective Agent Development](../2608.24114-ahead/README.md)（`ahead`）：轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。
 - [EnvACE](../2608.06197-envace/README.md)（`envace`）：EnvACE 不另训 world model，而让同一个 agent policy 在真实 act 之间切换到 rehearsal role，自行预测下一 observation；训练时分别为 acting 与 rehearsal 轨迹计算 group-relative advantage，避免两种奖励尺度互相污染，测试时可用少量私有 rehearsal 扩展规划。
 - [State2State: Environment-Derived Mid-Training for LLM Agents](../2608.04934-state2state/README.md)（`state2state`）：**主题：环境派生中训练。** 从环境探索自动采样起点与目标状态，用规则化状态匹配做 verifier，形成无需人工任务与专家轨迹的可扩展 mid-training。
+
+### 在策略蒸馏与上下文探索
+
+- [Asymmetric On-Policy Distillation Learns In-Context Exploration](../2610.30105-asteroid/README.md)（`asteroid`）：部分可观测任务中，专家知道隐藏目标，因而总能直接成功；只模仿专家，学生看不到“失败后如何继续搜索”的上下文。ASTEROID 让**当前学生先探索**，再在同一个隐藏任务下收集专家的**完整成功轨迹**。
 
 ### Harness 与运行时策略
 

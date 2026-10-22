@@ -282,6 +282,7 @@
 
 ## NVIDIA
 
+- 2026-10-20 · 一作：Mingyu Yang · [CSD: Common-Support Distillation for Cross-Tokenizer Knowledge Transfer](../2610.28895-csd/README.md)（`csd`）：师生词表大小、token ID 与分词边界不一致，不能直接逐坐标 KL。CSD 先按原文字符区间对齐 chunk，再通过 **解码文本等价** 构造共同事件。
 - 2023-10-09 · 一作：Yi Dong · [SteerLM](../2310.05344-steerlm/README.md)（`steerlm`）：传统 RLHF 把多维偏好压成一个 reward，用户推理时也不能改变目标。SteerLM 先用 attribute prediction model 为回答标注 helpfulness、quality 等属性，再把属性和值拼入条件做普通 SFT，推理时由用户指定目标属性。
 
 ## Nanjing University
@@ -426,6 +427,10 @@
 ## Texas A&M University
 
 - 2026-06-04 · 一作：Xingyu Su · [OPDLM](../2606.06712-opd-lm/README.md)（`opd-lm`）：ARLM 改成双向注意力后既会遗忘原知识，也有随机 mask 训练与 confidence decoding 推理之间的偏移。OPDLM 让双向学生在自身推理轨迹上生成，冻结 AR 教师在同一轨迹给 target logits。
+
+## The Chinese University of Hong Kong
+
+- 2026-10-21 · 一作：Wenhao Yu · [CORD: Conflict-Aware Optimization for Joint RL and Distillation in Agents](../2610.29965-cord/README.md)（`cord`）：任务奖励和教师指导提供不同信号，直接相加会让相反的梯度互相抵消。CORD 不替换 GRPO 或 OPD 的目标，而是明确选择一个 **protected objective**，最小修改另一个梯度。
 
 ## The Chinese University of Hong Kong, Shenzhen
 

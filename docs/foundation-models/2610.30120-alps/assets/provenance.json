@@ -1,0 +1,26 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.30120v1",
+  "figure": "Figure 2",
+  "source_url": "https://arxiv.org/html/2610.30120v1/fig2_gemini_v5.png",
+  "paper_anchor": "https://arxiv.org/html/2610.30120v1#S2.F2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "45eae3b231ca5d1893c202ad0bc94fa6550351f9cbd10a86484f825eadcaadd0",
+  "image_dimensions": [1530, 730],
+  "description": "Original arXiv HTML Figure 2, copied byte-for-byte without cropping, redrawing, scientific edits or generative image processing",
+  "copyright": "The original ALPS paper authors; arXiv v1 perpetual non-exclusive distribution license, not an open redistribution claim for all paper assets",
+  "visually_verified": true,
+  "upstream_code_url": "https://github.com/UCSC-VLAA/ALPS",
+  "upstream_code_revision": "30ab44b9fcdf3253fc67f5a53e31ea5141eb45c1",
+  "upstream_code_license": "Apache-2.0",
+  "formula_sources": [
+    "train_torch/alps_torch/models/predictor.py:crossview_geometry,sincos_2d,CrossViewFusion.forward",
+    "train_torch/alps_torch/losses/stage2.py:teacher_targets,crossview_loss_from_pred",
+    "train_torch/configs/stage2.py"
+  ],
+  "core_boundaries": [
+    "Geometry and loss operate on external tokens; no encoder or four-layer predictor reproduction is claimed",
+    "Fixed Stage-1 teacher with fixed training-only channel statistics, not EMA",
+    "Mean across images after per-image overlap-patch averaging; half-open crop mask",
+    "Full pretraining and full evaluation matrix not_reproduced_high_cost; low-cost diagnostic L1 only"
+  ]
+}

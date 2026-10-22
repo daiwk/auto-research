@@ -1,0 +1,124 @@
+{
+  "schema_version": 2,
+  "method": "jev-multicorrect",
+  "manifest_ref": "foundation-models:jev-multicorrect",
+  "dataset": {
+    "id": "synthetic:oct22-bulletin-jev-multicorrect-v1",
+    "revision": "sha256:1dc0f401f242d6bea9435763cc2023d4f84d134164e3386e3f6ad8052696c716",
+    "recipe": "source-frozen-generated-mechanism-contract-inputs",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "checks": {
+        "ranking_not_set_recovery": true,
+        "low_mass_correct_choice_counted": true,
+        "test_does_not_refit_threshold": true,
+        "validation_test_overlap_rejected": true,
+        "refusal_not_empty_set_success": true,
+        "public_predictor_has_no_gold": true,
+        "identical_copy_reference": true,
+        "ece_excluding_low_bin_renormalizes": true
+      },
+      "metrics": {
+        "scorer_contract_cases": 8,
+        "validation_overlap_rejections": 1,
+        "model_calls": 0
+      }
+    },
+    {
+      "seed": 43,
+      "checks": {
+        "ranking_not_set_recovery": true,
+        "low_mass_correct_choice_counted": true,
+        "test_does_not_refit_threshold": true,
+        "validation_test_overlap_rejected": true,
+        "refusal_not_empty_set_success": true,
+        "public_predictor_has_no_gold": true,
+        "identical_copy_reference": true,
+        "ece_excluding_low_bin_renormalizes": true
+      },
+      "metrics": {
+        "scorer_contract_cases": 8,
+        "validation_overlap_rejections": 1,
+        "model_calls": 0
+      }
+    },
+    {
+      "seed": 44,
+      "checks": {
+        "ranking_not_set_recovery": true,
+        "low_mass_correct_choice_counted": true,
+        "test_does_not_refit_threshold": true,
+        "validation_test_overlap_rejected": true,
+        "refusal_not_empty_set_success": true,
+        "public_predictor_has_no_gold": true,
+        "identical_copy_reference": true,
+        "ece_excluding_low_bin_renormalizes": true
+      },
+      "metrics": {
+        "scorer_contract_cases": 8,
+        "validation_overlap_rejections": 1,
+        "model_calls": 0
+      }
+    }
+  ],
+  "metrics": {
+    "model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "scorer_contract_cases": {
+      "mean": 8,
+      "std": 0.0,
+      "n": 3
+    },
+    "validation_overlap_rejections": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "generated mechanism/scorer contracts, no pretrained capability or full-paper comparison"
+  },
+  "provenance": {
+    "commit": "d767be53ac5a8a79f2b02aa23db0fcf3773ae588",
+    "artifact_path": "docs/system-one/2610.29217-jev-multicorrect/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct22_bulletin_components.py": "0581649a3e872529905359709a0a7d21b44bbb5ce129b43cd4f65df75895b323",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/foundation_models/alps.py": "92f71f68fe01d5489327c5d7d89afca43b453722ae4b785336f43d3934830269",
+      "src/auto_research/agent_research/asteroid.py": "95fd728c6a80779d73f89e2d2ca9e96ad2ce2d6c94ac6994727df222452e4a5f",
+      "src/auto_research/post_training/cord.py": "2616a3a9ea93bdbd1402b12be6112f3eef7cd08dc9a61c672156ed03470e5984",
+      "src/auto_research/post_training/csd.py": "a4b08dc51e57cceec3a488cc0439de22b3212f8f3d0db21d79a381c047986739",
+      "src/auto_research/system_one/multicorrect.py": "a6169b61c950ef7b5b40825afefefc3e7a02e018da4e4fc3b6d2c23d880a1406"
+    },
+    "raw_runner_artifact_sha256": "44aa6ec82ef71fcaebe01b9f61bead99928d24d63e10f065da0d1ad21b1b932d",
+    "dataset_fingerprint": "sha256:7e11f92ac286546b5466005cc2bbbb394abd7182a1aa80c21a2ffb76dec8eb30"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

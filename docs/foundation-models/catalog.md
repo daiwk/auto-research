@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 视觉表征与世界模型 | [ALPS: Visual State Encoders for World Models](2610.30120-alps/README.md) | University of California, Santa Cruz，2026-10-21 | [原作者入口](https://github.com/UCSC-VLAA/ALPS)；作者官方Apache-2.0代码及checkpoint已发布；本地固定30ab44b9fcdf3253fc67f5a53e31ea5141eb45c1，不自动下载权重或执行上游脚本 | `alps`：仅低成本组件，完整实验不复现 |
+| 模型压缩与量化 | [Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories](2610.29378-right-on-q/README.md) | University of Michigan, Ann Arbor，2026-10-21 | 未发现官方代码 | 计划键 `right-on-q`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| System One / JEV | [When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models](../system-one/2610.29217-jev-multicorrect/README.md) | Independent Researcher，2026-10-21 | [原作者入口](https://github.com/Rushab1/gr-jev)；MIT作者代码已发布；arxiv-v1固定7b161f96cd0ff1842845fc66f981d1471cc18151；未公开模型响应 | `jev-multicorrect`：仅低成本组件，完整实验不复现 |
 | JEPA与世界模型 | [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](2610.28458-locale-jepa/README.md) | University of Pennsylvania，2026-10-20 | [原作者入口](https://github.com/alessioborgi/LocaLeJEPA)；已公开MIT代码；本地独立实现核对固定commit 771361c18d37e65df3dc188761ffb26751ce4e37，论文结果以arXiv v1表格为准，不混用README旧数值 | `locale-jepa`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies](2610.28385-race-rope-compression/README.md) | MIT CSAIL，2026-10-20 | 未发现官方代码 | `race-rope-compression`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [Stratified Sparse Attention: Reducing the Sparse-to-Dense Gap at Extreme Sparsity](2610.28441-stratified-sparse-attention/README.md) | Rice University，2026-10-20 | [原作者入口](https://github.com/skylight-org/SSA-Paper-Code)；论文声明上述作者仓库开源；2026-10-21访问返回404，未取得可核验代码或revision。本地独立依据固定arXiv v1 Algorithm 1实现，不声称复现作者CUDA内核。 | `stratified-sparse-attention`：仅低成本组件，完整实验不复现 |

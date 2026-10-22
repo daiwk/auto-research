@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 排序与长序列建模 | [Progressive Learning from Content to Relevance to Personalization for CTR Prediction](../../recommendation-components/2610.29138-finesid/README.md) | Alibaba Group，2026-10-21 | 未发现官方代码 | 计划键 `finesid`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 排序与决策优化 | [Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking](../../recommendation-components/2610.27423-baseline-incremental/README.md) | Meta，2026-10-20 | 未发现官方代码 | `baseline-incremental`：仅低成本组件，完整实验不复现 |
 | 长序列推荐 | [ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling](../../recommendation-components/2610.28569-echo-selector-loss/README.md) | Kuaishou Technology，2026-10-20 | 未发现官方代码 | `echo-selector-loss`：仅低成本组件，完整实验不复现 |
 | 生成式推荐 | [SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs](../../recommendation-components/2610.27898-spar-prefix-balance/README.md) | University of Electronic Science and Technology of China，2026-10-20 | 未发现官方代码 | `spar-prefix-balance`：仅低成本组件，完整实验不复现 |

@@ -361,7 +361,7 @@
 
 ## Michigan State University
 
-- 2026-10-15 · 一作：Shenglai Zeng · [ProPerAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
+- 2026-10-15 · 一作：Shenglai Zeng · [MemoProAgent: Toward Memory-Driven Proactive Assistance](../2610.22671-proper-agent/README.md)（`proper-agent`）：主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。
 
 ## Microsoft
 
@@ -688,6 +688,7 @@
 
 ## University of Washington
 
+- 2026-10-21 · 一作：Sriyash Poddar · [Asymmetric On-Policy Distillation Learns In-Context Exploration](../2610.30105-asteroid/README.md)（`asteroid`）：部分可观测任务中，专家知道隐藏目标，因而总能直接成功；只模仿专家，学生看不到“失败后如何继续搜索”的上下文。ASTEROID 让**当前学生先探索**，再在同一个隐藏任务下收集专家的**完整成功轨迹**。
 - 2026-08-19 · 一作：Bo Liu · [SPADE: Self-Play in Adaptive Synthetic Executable Environments](../2608.19197-spade/README.md)（`spade`）：同一 LLM 分饰环境设计者和推理 Agent，以有/无 privileged hint 的 regret 学习能力边界上的可执行环境。
 - 2023-03-16 · 一作：Bhargavi Paranjape · [ART](../2303.09014-art/README.md)（`art`）：既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。
 

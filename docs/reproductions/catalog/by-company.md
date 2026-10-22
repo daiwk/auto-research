@@ -46,6 +46,7 @@
 - 2026-09 · [MIMA](../2609.12842-mima/README.md)：将同请求物品组成多正例集合，以排他匹配监督互补兴趣，并用 activation routing 校准多通道分数。
 
 ## Alibaba
+- [Progressive Learning from Content to Relevance to Personalization for CTR Prediction](../../recommendation-components/2610.29138-finesid/README.md)：把多尺度视觉和字段化文本离散token送入有序融合/HiFormer，先用教师软相关性训练整个共享预测器，再保留完整状态迁移到个性化CTR微调。正文有淘宝七天量化线上A/B；64H20与私有大数据成本过高，仅收录方法和证据，不提供伪替代运行。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search](../../recommendation-components/2610.26105-sid-topology/README.md)：冻结旧商品完整三层SID，只按新价值排名给新商品分配路径，允许新商品与原头部token碰撞，不通过移动旧路径强行去重。实现价值先验、HC桶、增量插入和映射漂移审计；语义前缀由调用方提供，不训练RQ-VAE或LLM，64卡生产完整实验成本过高不复现。
 - 2026-08 · [DCEO](../2608.25635-dceo/README.md)：以直接因果效应分离短期点击与长期用户价值，并用多目标策略权重优化电商搜索排序。
 - 2026-08 · [TransRetrieval](../2608.25528-transretrieval/README.md)：把 target token 压缩、多域归一化与大规模 Transformer 检索结合，在受控 serving 预算下扩展召回模型。

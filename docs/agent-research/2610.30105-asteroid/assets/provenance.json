@@ -1,0 +1,11 @@
+{
+  "asset": "paper-figure-03.svg",
+  "asset_sha256": "f133d4f5eb089975b5fef3d6e8aaa3346309550671b16c1bdd20f6c10507ba6b",
+  "source_pdf_url": "https://arxiv.org/pdf/2610.30105v1",
+  "source_image_url": "https://arxiv.org/html/2610.30105v1/fig_aicd.svg",
+  "figure": "Figure 3",
+  "extraction": "official arXiv HTML original SVG, unchanged",
+  "visual_review": "已用PyMuPDF渲染并目视检查；学生在策略上下文、同latent下专家轨迹、条件监督三阶段公式与箭头完整清晰",
+  "license": "CC BY 4.0 (paper)",
+  "copyright": "Copyright belongs to the original authors."
+}
