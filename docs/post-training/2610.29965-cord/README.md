@@ -37,7 +37,7 @@ flowchart LR
 
 [![CORD 原论文 Figure 2：奖励与蒸馏梯度、投影及优化路径](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.29965v1#page=4)
 
-> 原论文 Figure 2，固定 v1 第 4 页裁剪，已视觉核对。图与版权归原作者所有；图中的完整 Agent 宿主不是本地已实现能力。
+> 图片来自[原论文](https://arxiv.org/pdf/2610.29965v1#page=4) Figure 2，固定 v1 第 4 页裁剪，已视觉核对。版权归原作者所有；图中的完整 Agent 宿主不是本地已实现能力。
 <!-- paper-figure:end -->
 
 ### 核心公式

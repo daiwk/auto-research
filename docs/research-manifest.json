@@ -13777,6 +13777,8 @@
       "gpu_validation_artifact": "docs/gpu-validations/cord-a100-20261022.json",
       "full_experiment_status": "not_reproduced_high_cost",
       "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
       "summary": "先按固定损失权重汇总整个optimizer minibatch的RL与蒸馏梯度，再保留指定protected方向，将另一方向做最近可行投影；区分冲突门控、always门控及交换保护方向。实现精确梯度算子、真实微型网络更新与独立参考，不冒称完整Agent训练或AdamW后的下降保证。原文8张A100、3B/7B多轮环境评测成本过高，不复现（审查 DONE）。"
     },
     {
@@ -13842,6 +13844,8 @@
       "gpu_validation_artifact": "docs/gpu-validations/csd-a100-20261022.json",
       "full_experiment_status": "not_reproduced_high_cost",
       "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
       "summary": "按相同原文字符区间对齐不同Tokenizer，用解码文本等价建立显式共同事件；分词不同时固定前缀、改变末token并用自回归链式概率计分，保留residual质量与统一JSD/KL。实现真实跨词表对齐、四类chunk、动态CE/KD及微型神经更新，不是same-vocab KL改名。原文256张H100、1B/8B学生与最高14B教师完整实验成本过高，不复现（审查 DONE）。"
     },
     {

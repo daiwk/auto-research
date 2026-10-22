@@ -49,6 +49,75 @@ def test_no_diagnostic_can_be_relabelled_as_capability(field, value):
         module()["validate_result"]("cord", row)
 
 
+@pytest.mark.parametrize("key", ["alps", "asteroid", "cord", "csd", "jev-multicorrect"])
+@pytest.mark.parametrize("field,value", [
+    ("adapter", {"spec_key": "unearned-adapter"}),
+    ("implementation_status", "full_pipeline"), ("evaluation_tier", "l3_pipeline"),
+    ("diagnostic_only", False), ("promotion_eligible", True), ("evolve_integrated", True),
+    ("full_experiment_status", "reproduced"), ("full_experiment_review_done", False),
+    ("review_done", False), ("automatic_retry", True), ("automatic_implementation_queue", True),
+])
+def test_component_catalog_cannot_upgrade_or_retry_l1_evidence(monkeypatch, key, field, value):
+    m = module()
+    catalog = deepcopy(m["records"]())
+    catalog[key][field] = value
+    monkeypatch.setitem(m["check"].__globals__, "records", lambda: catalog)
+    with pytest.raises(ValueError, match="component catalog contract"):
+        m["check"]()
+
+
+@pytest.mark.parametrize("key", ["alps", "asteroid", "cord", "csd", "jev-multicorrect"])
+def test_component_catalog_requires_exact_gpu_contract(monkeypatch, key):
+    m = module()
+    catalog = deepcopy(m["records"]())
+    catalog[key]["requires_gpu_validation"] = key not in m["CUDA_KEYS"]
+    monkeypatch.setitem(m["check"].__globals__, "records", lambda: catalog)
+    with pytest.raises(ValueError, match="component catalog GPU contract"):
+        m["check"]()
+
+
+@pytest.mark.parametrize("key", ["alps", "asteroid", "cord", "csd", "jev-multicorrect"])
+def test_component_catalog_cannot_redirect_gpu_receipt(monkeypatch, key):
+    m = module()
+    catalog = deepcopy(m["records"]())
+    catalog[key]["gpu_validation_artifact"] = "docs/gpu-validations/unrelated.json"
+    monkeypatch.setitem(m["check"].__globals__, "records", lambda: catalog)
+    with pytest.raises(ValueError, match="component catalog GPU contract"):
+        m["check"]()
+
+
+@pytest.mark.parametrize("key", ["aw0", "right-on-q", "finesid"])
+@pytest.mark.parametrize("field,value", [
+    ("adapter", {"spec_key": "unearned-adapter"}), ("implementation_status", "component_only"),
+    ("evaluation_tier", "l1_mechanism"), ("diagnostic_only", False),
+    ("promotion_eligible", True), ("evolve_integrated", True),
+    ("full_experiment_status", "reproduced"), ("review_done", False),
+    ("automatic_retry", True), ("automatic_implementation_queue", True),
+    ("requires_gpu_validation", True), ("gpu_validation_passed", True),
+    ("gpu_validation_artifact", "docs/gpu-validations/unearned.json"),
+    ("local_operator", "unearned.runtime"), ("local_command", "python unearned.py"),
+])
+def test_reference_catalog_remains_terminal_review_only(monkeypatch, key, field, value):
+    m = module()
+    catalog = deepcopy(m["records"]())
+    catalog[key][field] = value
+    monkeypatch.setitem(m["check"].__globals__, "records", lambda: catalog)
+    with pytest.raises(ValueError, match="high-cost terminal catalog contract"):
+        m["check"]()
+
+
+@pytest.mark.parametrize("key", ["alps", "asteroid", "cord", "csd", "jev-multicorrect", "aw0", "right-on-q", "finesid"])
+@pytest.mark.parametrize("field", ["diagnostic_only", "promotion_eligible", "evolve_integrated",
+    "automatic_retry", "automatic_implementation_queue", "requires_gpu_validation"])
+def test_catalog_safety_flags_must_be_explicit(monkeypatch, key, field):
+    m = module()
+    catalog = deepcopy(m["records"]())
+    catalog[key].pop(field, None)
+    monkeypatch.setitem(m["check"].__globals__, "records", lambda: catalog)
+    with pytest.raises(ValueError, match="catalog.*contract"):
+        m["check"]()
+
+
 @pytest.mark.parametrize("field", ["id", "revision", "recipe", "capability_benchmark"])
 def test_rehash_does_not_allow_false_dataset_identity(field):
     m, row = module(), result()

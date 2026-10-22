@@ -26,11 +26,13 @@
 
 这不是把金标放入 Agent prompt，也不是固定离线行为克隆，更不应简化成只在学生当前状态上打单步标签的普通 DAgger。论文区分两种采样：固定 latent 的 BAMDP 使用跨 episode 上下文；一般 POMDP 在学生到达的中间状态进行专家 takeover。
 
-### 原文流程图
+<!-- paper-figure:start -->
+### 原论文关键图
 
-![ASTEROID 原文 Figure 3：学生上下文、特权教师轨迹与条件监督学习](assets/paper-figure-03.svg)
+![ASTEROID 原文 Figure 3：学生上下文、特权教师轨迹与条件监督学习](assets/paper-figure-01.png)
 
-来源为 [arXiv v1 HTML Figure 3](https://arxiv.org/html/2610.30105v1#S5.F3)，原 SVG 未改写；已渲染目视核对公式、三阶段与箭头。版权归原作者，论文为 CC BY 4.0；资产来源和 SHA-256 见 `assets/provenance.json`。
+图片来自[原论文](https://arxiv.org/html/2610.30105v1#S5.F3) Figure 3，[原 SVG](assets/paper-figure-03.svg) 未改写，PNG为其2倍渲染；已目视核对公式、三阶段与箭头。版权归原作者所有，论文为 CC BY 4.0；资产来源和 SHA-256 见 `assets/provenance.json`。
+<!-- paper-figure:end -->
 
 ```mermaid
 flowchart TD

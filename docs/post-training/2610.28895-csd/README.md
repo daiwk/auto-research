@@ -39,7 +39,7 @@ flowchart LR
 
 [![CSD 原论文 Figure 1：共同 token、虚拟共同事件与 residual 分布](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.28895v1#page=3)
 
-> 原论文 Figure 1，固定 v1 第 3 页原图裁剪，已视觉核对。版权归 NVIDIA / 原作者所有；没有将示意概率条当作实验结果。
+> 图片来自[原论文](https://arxiv.org/pdf/2610.28895v1#page=3) Figure 1，固定 v1 第 3 页原图裁剪，已视觉核对。版权归原作者所有（NVIDIA）；没有将示意概率条当作实验结果。
 <!-- paper-figure:end -->
 
 ### 核心公式

@@ -52,6 +52,35 @@ def records():
     return {r["key"]: r for r in catalog_records()}
 
 
+def validate_catalog_contracts(catalog):
+    """Keep catalog/queue claims within the exact bound evidence contract."""
+    for key in MODULES:
+        row = catalog[key]
+        require(row.get("adapter") is None and row.get("implementation_status") == "component_only"
+            and row.get("evaluation_tier") == "l1_mechanism" and row.get("diagnostic_only") is True
+            and row.get("promotion_eligible") is False and row.get("evolve_integrated") is False
+            and row.get("review_done") is True and row.get("full_experiment_review_done") is True
+            and row.get("full_experiment_status") == "not_reproduced_high_cost"
+            and row.get("automatic_retry") is False and row.get("automatic_implementation_queue") is False,
+            f"{key}: component catalog contract")
+        expected_receipt = f"docs/gpu-validations/{key}-a100-20261022.json" if key in CUDA_KEYS else None
+        require(row.get("requires_gpu_validation") is (key in CUDA_KEYS)
+            and row.get("gpu_validation_artifact") == expected_receipt,
+            f"{key}: component catalog GPU contract")
+    for key in ("aw0", "right-on-q", "finesid"):
+        row = catalog[key]
+        require(row.get("implementation_status") == "deferred_high_cost" and row.get("adapter") is None
+            and row.get("evaluation_tier") is None and row.get("local_operator") is None
+            and row.get("local_command") is None and row.get("diagnostic_only") is True
+            and row.get("review_done") is True and row.get("full_experiment_status") == "not_reproduced_high_cost"
+            and row.get("review_resolution") == "not_reproduced_high_cost"
+            and row.get("promotion_eligible") is False and row.get("evolve_integrated") is False
+            and row.get("automatic_retry") is False and row.get("automatic_implementation_queue") is False
+            and row.get("requires_gpu_validation") is False and row.get("gpu_validation_passed") is False
+            and row.get("gpu_validation_artifact") is None,
+            f"{key}: high-cost terminal catalog contract")
+
+
 def metric_path(key):
     device = "cuda" if key in CUDA_KEYS else "cpu"
     return Path("docs")/Path(records()[key]["detail_path"]).parent/f"metrics/component-{device}-seeds42-44.json"
@@ -168,6 +197,7 @@ def validate_raw_binding(key, result, raw, raw_bytes):
 
 
 def ingest(cpu_path, cuda_path):
+    validate_catalog_contracts(records())
     raw_paths = {"cpu": cpu_path, "cuda": cuda_path}
     raw_bytes = {device: path.read_bytes() for device, path in raw_paths.items()}
     raw = {device: json.loads(data) for device, data in raw_bytes.items()}
@@ -210,6 +240,7 @@ def ingest(cpu_path, cuda_path):
 
 
 def check():
+    validate_catalog_contracts(records())
     frozen = json.loads((AUDIT/"frozen-sources.json").read_text())
     raw_bytes = {device: (AUDIT/f"raw-{device}.json").read_bytes() for device in ("cpu", "cuda")}
     raw = {device: json.loads(data) for device, data in raw_bytes.items()}
@@ -224,11 +255,6 @@ def check():
         if key in CUDA_KEYS:
             receipt = load_gpu_receipt(ROOT/records()[key]["gpu_validation_artifact"])
             require(digest(receipt) == digest(receipt_for(key, result)), "exact GPU receipt/run identity binding")
-    for key in ("aw0", "right-on-q", "finesid"):
-        row = records()[key]
-        require(row["implementation_status"] == "deferred_high_cost" and row["adapter"] is None
-            and row["review_done"] is True and row["full_experiment_status"] == "not_reproduced_high_cost"
-            and row["requires_gpu_validation"] is False, "high-cost terminal review decision")
     print("Oct22 bulletin: five L1 components and three terminal high-cost reviews passed")
 
 
@@ -277,7 +303,7 @@ def sync_figures():
 
     info = {
         "alps": ("paper-figure-01.png", "Figure 2", "https://arxiv.org/html/2610.30120v1/fig2_gemini_v5.png"),
-        "asteroid": ("paper-figure-03.svg", "Figure 3", "https://arxiv.org/html/2610.30105v1/fig_aicd.svg"),
+        "asteroid": ("paper-figure-01.png", "Figure 3", "https://arxiv.org/html/2610.30105v1/fig_aicd.svg"),
         "cord": ("paper-figure-01.png", "Figure 2", "https://arxiv.org/pdf/2610.29965v1#page=4"),
         "csd": ("paper-figure-01.png", "Figure 1", "https://arxiv.org/pdf/2610.28895v1#page=3"),
         "jev-multicorrect": ("paper-figure-02.png", "Figure 2", "https://raw.githubusercontent.com/Rushab1/gr-jev/7b161f96cd0ff1842845fc66f981d1471cc18151/paper/figures/exact_set.pdf"),

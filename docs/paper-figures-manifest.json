@@ -12756,12 +12756,12 @@
     "original_caption": "",
     "source_url": "https://arxiv.org/html/2610.30105v1/fig_aicd.svg",
     "extraction": "original-source-image-or-visually-reviewed-pdf-crop",
-    "asset": "docs/agent-research/2610.30105-asteroid/assets/paper-figure-03.svg",
-    "width": 903,
-    "height": 290,
+    "asset": "docs/agent-research/2610.30105-asteroid/assets/paper-figure-01.png",
+    "width": 1806,
+    "height": 580,
     "score": 0,
     "error": "",
-    "sha256": "f133d4f5eb089975b5fef3d6e8aaa3346309550671b16c1bdd20f6c10507ba6b",
+    "sha256": "7883bd7a035460c7d4f7af5726373e2312363fd572b87a895e8542f324d85fe1",
     "visually_inspected": true
   },
   {
