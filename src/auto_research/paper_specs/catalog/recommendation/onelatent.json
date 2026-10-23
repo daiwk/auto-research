@@ -1,0 +1,14 @@
+{
+  "domain": "recommendation", "key": "onelatent", "title": "OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models",
+  "paper_url": "https://arxiv.org/abs/2610.30675v1", "detail_path": "recommendation-components/2610.30675-onelatent/README.md",
+  "topic": ["大模型能力与推荐融合", "潜在推理与生成式推荐"], "first_author": "Hao Jiang", "first_author_affiliation": "Kuaishou Technology",
+  "published": "2026-10-22", "published_at": "2026-10-22T03:39:38Z", "code": null,
+  "code_status": "未找到OneLatent专属方法代码；OpenOneRec数据与OneReason基座不是该方法实现", "adapter": null,
+  "priority": "P1", "intake_class": "newly_announced", "implementation_status": "deferred_high_cost",
+  "local_operator": null, "local_command": null, "evaluation_tier": null, "diagnostic_only": true,
+  "promotion_eligible": false, "evolve_integrated": false, "requires_gpu_validation": false, "gpu_validation_passed": false,
+  "gpu_validation_artifact": null, "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": true,
+  "review_done": true, "review_resolution": "not_reproduced_high_cost", "automatic_retry": false, "automatic_implementation_queue": false,
+  "deferral_reason": "原文Appendix A.1为56GPU全参数训练、235B教师与工业语料，超单卡A100/A30/Mac低成本预算；成本过高，不复现（审查 DONE），不启动完整实验或自动重试。",
+  "summary": "用探索/评价/归因三视角监督、三阶段latent-token对齐和活跃度课程训练，将在线生成缩为三层SID；异步缓存避开请求关键路径。正文量化A/B与全流量部署符合工业证据门槛；完整实验成本过高，不复现（审查 DONE）。"
+}

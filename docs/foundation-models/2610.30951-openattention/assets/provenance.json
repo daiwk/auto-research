@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/pdf/2610.30951v1",
+  "paper_sha256": "060a0db96fd07d94a125036611a9d36bcc62eb5b74fa5d2c8434ca5f5394e4af",
+  "figure": "Figure 5",
+  "pdf_page": 5,
+  "source_image_url": "https://arxiv.org/html/2610.30951v1/figs/fig_iclr_overall_method.png",
+  "image": "paper-figure-01.png",
+  "image_sha256": "ed8fb043f40b4c512d9217840c1a5cc009c8e13425f8986048a17dbd80b8139b",
+  "pixel_dimensions": [1121, 459],
+  "description": "Original arXiv HTML method image, no crop or scientific-content edits",
+  "copyright": "Original paper authors; arXiv v1 CC BY 4.0",
+  "visually_verified": true
+}

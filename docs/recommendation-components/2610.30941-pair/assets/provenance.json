@@ -1,0 +1,17 @@
+{
+  "page": "docs/recommendation-components/2610.30941-pair/README.md",
+  "paper_url": "https://arxiv.org/abs/2610.30941v1",
+  "arxiv_id": "2610.30941",
+  "figure": "Figure 1",
+  "original_caption": "Preference-Aligned Intent Retrieval architecture.",
+  "source_url": "https://arxiv.org/html/2610.30941v1/figures/PAIR_Model.png",
+  "extraction": "original-html-image",
+  "asset": "docs/recommendation-components/2610.30941-pair/assets/paper-figure-01.png",
+  "width": 3096,
+  "height": 2138,
+  "sha256": "8600bd4196f8344dae96c12c79b29981c785cfcdabf52e415d5c8660ffb40cfc",
+  "visually_inspected": true,
+  "scientific_content_modified": false,
+  "score": 0,
+  "error": ""
+}

@@ -1,0 +1,12 @@
+{
+  "paper_id": "2610.31563v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2610.31563v1#S1.F1",
+  "source_url": "https://arxiv.org/html/2610.31563v1/intro_both2.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "08960b5d928d689dbff2d2e4f06166bb4dba3b44b3786cf7906f664898ec0d2b",
+  "license": "CC BY 4.0",
+  "transformation": "none",
+  "visual_review": "与原PDF第2页Figure1核对，保留三面板与图例，未修改算法或结果",
+  "checked_on": "2026-10-23"
+}

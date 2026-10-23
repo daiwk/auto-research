@@ -1,0 +1,150 @@
+{
+  "schema_version": 2,
+  "method": "gemma-priority-protocol",
+  "manifest_ref": "foundation-models:gemma-priority-protocol",
+  "dataset": {
+    "id": "synthetic:oct23-gemma-priority-protocol-v1",
+    "revision": "sha256:1c0a7607bba82f6aad7ca192db99c6b53f914c40b5d2bc4e78e9b027f3ad9580",
+    "recipe": "frozen-source-seeded-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "checks": {
+        "orthogonal_contrast_recovery": true,
+        "global_keep_set_shared": true,
+        "sensitivity_preserves_all_items": true,
+        "single_bad_condition_drops_globally": true,
+        "degenerate_tost_is_not_a_pass": true,
+        "half_effect_orientation": true
+      },
+      "metrics": {
+        "contract_cases": 6.0,
+        "algebra_max_error": 2.7755575615628914e-17,
+        "global_items_kept": 7.0,
+        "model_calls": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_run_scope_limited_protocol",
+      "upstream_revision": "fc468f2374540870042b20db1ec7e836ed205db7"
+    },
+    {
+      "seed": 43,
+      "checks": {
+        "orthogonal_contrast_recovery": true,
+        "global_keep_set_shared": true,
+        "sensitivity_preserves_all_items": true,
+        "single_bad_condition_drops_globally": true,
+        "degenerate_tost_is_not_a_pass": true,
+        "half_effect_orientation": true
+      },
+      "metrics": {
+        "contract_cases": 6.0,
+        "algebra_max_error": 2.7755575615628914e-17,
+        "global_items_kept": 7.0,
+        "model_calls": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_run_scope_limited_protocol",
+      "upstream_revision": "fc468f2374540870042b20db1ec7e836ed205db7"
+    },
+    {
+      "seed": 44,
+      "checks": {
+        "orthogonal_contrast_recovery": true,
+        "global_keep_set_shared": true,
+        "sensitivity_preserves_all_items": true,
+        "single_bad_condition_drops_globally": true,
+        "degenerate_tost_is_not_a_pass": true,
+        "half_effect_orientation": true
+      },
+      "metrics": {
+        "contract_cases": 6.0,
+        "algebra_max_error": 2.7755575615628914e-17,
+        "global_items_kept": 7.0,
+        "model_calls": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_run_scope_limited_protocol",
+      "upstream_revision": "fc468f2374540870042b20db1ec7e836ed205db7"
+    }
+  ],
+  "metrics": {
+    "algebra_max_error": {
+      "mean": 2.7755575615628914e-17,
+      "std": 0.0,
+      "n": 3
+    },
+    "contract_cases": {
+      "mean": 6.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "global_items_kept": {
+      "mean": 7.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "generated mechanism contracts; no pretrained capability or full-paper comparison"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_run_scope_limited_protocol",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "f3fbc6db4db084a2a6a4ee754f9a3d9e5b606ac7",
+    "artifact_path": "docs/foundation-models/2609.30716-gemma-priority-protocol/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct23_priority_components.py": "523fe3f25f4a6cb2a6f9ab9530f9f93f0fd5213ae29f6762272d83dfe6516026",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/foundation_models/gemma_priority_protocol.py": "6ddb7eb4daa67f268869d69865c0ce2e91caa2452e4b1b5287ad504c7a39334a",
+      "src/auto_research/foundation_models/rkl_policy_distillation.py": "3c03e572a5b28ba3bb2e89302eaa06653104e93e634aeaf1f0f738de56bd0c3c",
+      "src/auto_research/foundation_models/openattention.py": "76b34267c46a7b2ab8e139d5f8c2312646686847863520a5f2995d9800497678",
+      "src/auto_research/foundation_models/moezip.py": "3aca16279b163ebb09f5b66c4b8544bdb0373345cf1af1dd0a0fdeee2fabdbe3",
+      "src/auto_research/post_training/aopd.py": "c8c4cbc028cfee6e578599460b420a0c821fddd6a4f225bb2e26fa4aaf463a89",
+      "src/auto_research/post_training/gift.py": "a9ef99d6cca5a29994da58df1eec945cefe87fbdd70672746cab2bfefb7f68d4",
+      "src/auto_research/recommendation_components/pair.py": "2f4838260b0e4c83f3a2b0dda7db3a43f781cd679cf716412d8ed901a4063cb5",
+      "src/auto_research/system_one/jev_dlc.py": "e4f07315246f7e8e1a9e5178256bd1c5c30ba24b51722fba69b60cda7f268a20"
+    },
+    "raw_runner_artifact_sha256": "ddcb43a7201c094a03f30917196ef22ee21d6e32348ff7227a8a39f6af48b603",
+    "dataset_fingerprint": "sha256:0b85a11025ba51e9e2b8d8cb5c4df2d27c51bbd64a9ad0a5e0ec317bf323d45a"
+  }
+}

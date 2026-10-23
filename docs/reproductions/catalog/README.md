@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 大模型能力与推荐融合 | [OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models](../../recommendation-components/2610.30675-onelatent/README.md) | Kuaishou Technology，2026-10-22 | 未发现官方代码 | 计划键 `onelatent`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 召回与匹配 | [PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn](../../recommendation-components/2610.30941-pair/README.md) | LinkedIn，2026-10-22 | 未发现官方代码 | `pair`：仅低成本组件，完整实验不复现 |
 | 排序与长序列建模 | [Progressive Learning from Content to Relevance to Personalization for CTR Prediction](../../recommendation-components/2610.29138-finesid/README.md) | Alibaba Group，2026-10-21 | 未发现官方代码 | 计划键 `finesid`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 排序与决策优化 | [Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking](../../recommendation-components/2610.27423-baseline-incremental/README.md) | Meta，2026-10-20 | 未发现官方代码 | `baseline-incremental`：仅低成本组件，完整实验不复现 |
 | 长序列推荐 | [ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling](../../recommendation-components/2610.28569-echo-selector-loss/README.md) | Kuaishou Technology，2026-10-20 | 未发现官方代码 | `echo-selector-loss`：仅低成本组件，完整实验不复现 |

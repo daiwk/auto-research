@@ -1,0 +1,148 @@
+{
+  "schema_version": 2,
+  "method": "jev-dlc",
+  "manifest_ref": "foundation-models:jev-dlc",
+  "dataset": {
+    "id": "synthetic:oct23-jev-dlc-v1",
+    "revision": "sha256:1c0a7607bba82f6aad7ca192db99c6b53f914c40b5d2bc4e78e9b027f3ad9580",
+    "recipe": "frozen-source-seeded-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "pa_reference_error": 0.0,
+        "correction_state_norm": 0.8875384463015373,
+        "future_probability_delta": 0.5678626905566351,
+        "feedback_count": 2,
+        "masked_probability": 0.0,
+        "model_calls": 0
+      },
+      "checks": {
+        "pa_reference_matches": true,
+        "future_only_update": true,
+        "safe_mask_is_hard": true,
+        "stale_feedback_rejected": true,
+        "reset_restores_frozen_prediction": true,
+        "no_raw_history": true,
+        "zero_direction_passive": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "pa_reference_error": 0.0,
+        "correction_state_norm": 1.3138001392955072,
+        "future_probability_delta": 0.5661328639881595,
+        "feedback_count": 2,
+        "masked_probability": 0.0,
+        "model_calls": 0
+      },
+      "checks": {
+        "pa_reference_matches": true,
+        "future_only_update": true,
+        "safe_mask_is_hard": true,
+        "stale_feedback_rejected": true,
+        "reset_restores_frozen_prediction": true,
+        "no_raw_history": true,
+        "zero_direction_passive": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "pa_reference_error": 0.0,
+        "correction_state_norm": 0.7879116971389738,
+        "future_probability_delta": 0.47934958998045435,
+        "feedback_count": 2,
+        "masked_probability": 0.0,
+        "model_calls": 0
+      },
+      "checks": {
+        "pa_reference_matches": true,
+        "future_only_update": true,
+        "safe_mask_is_hard": true,
+        "stale_feedback_rejected": true,
+        "reset_restores_frozen_prediction": true,
+        "no_raw_history": true,
+        "zero_direction_passive": true
+      }
+    }
+  ],
+  "metrics": {
+    "correction_state_norm": {
+      "mean": 0.9964167609120061,
+      "std": 0.2793394511034354,
+      "n": 3
+    },
+    "feedback_count": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "future_probability_delta": {
+      "mean": 0.5377817148417496,
+      "std": 0.05061109549144095,
+      "n": 3
+    },
+    "masked_probability": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "pa_reference_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "generated mechanism contracts; no pretrained capability or full-paper comparison"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "f3fbc6db4db084a2a6a4ee754f9a3d9e5b606ac7",
+    "artifact_path": "docs/system-one/2610.31521-jev-dlc/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct23_priority_components.py": "523fe3f25f4a6cb2a6f9ab9530f9f93f0fd5213ae29f6762272d83dfe6516026",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/foundation_models/gemma_priority_protocol.py": "6ddb7eb4daa67f268869d69865c0ce2e91caa2452e4b1b5287ad504c7a39334a",
+      "src/auto_research/foundation_models/rkl_policy_distillation.py": "3c03e572a5b28ba3bb2e89302eaa06653104e93e634aeaf1f0f738de56bd0c3c",
+      "src/auto_research/foundation_models/openattention.py": "76b34267c46a7b2ab8e139d5f8c2312646686847863520a5f2995d9800497678",
+      "src/auto_research/foundation_models/moezip.py": "3aca16279b163ebb09f5b66c4b8544bdb0373345cf1af1dd0a0fdeee2fabdbe3",
+      "src/auto_research/post_training/aopd.py": "c8c4cbc028cfee6e578599460b420a0c821fddd6a4f225bb2e26fa4aaf463a89",
+      "src/auto_research/post_training/gift.py": "a9ef99d6cca5a29994da58df1eec945cefe87fbdd70672746cab2bfefb7f68d4",
+      "src/auto_research/recommendation_components/pair.py": "2f4838260b0e4c83f3a2b0dda7db3a43f781cd679cf716412d8ed901a4063cb5",
+      "src/auto_research/system_one/jev_dlc.py": "e4f07315246f7e8e1a9e5178256bd1c5c30ba24b51722fba69b60cda7f268a20"
+    },
+    "raw_runner_artifact_sha256": "ddcb43a7201c094a03f30917196ef22ee21d6e32348ff7227a8a39f6af48b603",
+    "dataset_fingerprint": "sha256:aa00539a6a8c54b6fee7198ec228b27881c88c42c5bcf6e59178a3e3442ad04b"
+  }
+}

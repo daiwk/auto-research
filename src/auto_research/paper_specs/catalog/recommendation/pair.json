@@ -1,0 +1,16 @@
+{
+  "domain": "recommendation", "key": "pair",
+  "title": "PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn",
+  "paper_url": "https://arxiv.org/abs/2610.30941v1", "detail_path": "recommendation-components/2610.30941-pair/README.md",
+  "topic": ["召回与匹配", "曝光偏好与历史意图"], "first_author": "Zhongkai Shangguan", "first_author_affiliation": "LinkedIn",
+  "published": "2026-10-22", "published_at": "2026-10-22T08:57:58Z", "code": null,
+  "code_status": "未在原文及官方链接找到PAIR方法代码发布；无可核固定revision/license", "adapter": null,
+  "priority": "P1", "intake_class": "newly_announced", "implementation_status": "component_only",
+  "local_operator": "auto_research.recommendation_components.pair.preference_loss",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.recommendation_components.pair import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism", "diagnostic_only": true, "promotion_eligible": false, "evolve_integrated": false,
+  "requires_gpu_validation": true, "gpu_validation_artifact": "docs/gpu-validations/pair-a100-20261023.json",
+  "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": true, "review_done": true,
+  "review_resolution": "not_reproduced_high_cost", "automatic_retry": false, "automatic_implementation_queue": false,
+  "summary": "通过曝光条件偏好对比目标、可学习位置历史注意力和归一化加性融合建模职业社交互补意图。本地仅实现可独立验证的向量/损失组件；原8GPU私有数据完整实验成本过高，不复现（审查 DONE）。"
+}

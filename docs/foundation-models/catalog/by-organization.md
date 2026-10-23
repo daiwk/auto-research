@@ -95,6 +95,7 @@
 
 ## Google
 
+- 2026-09-25 · [Words Speak Louder Than Order: A Behavioral Evaluation of Gemma 4](../../foundation-models/2609.30716-gemma-priority-protocol/README.md)（`gemma-priority-protocol`）：论文把双文档冲突中的词偏好、来源措辞和呈现顺序分别测量。方法与资源已核：四路交叉、十种提示条件、跨条件共同保留集，以及未筛选敏感性分析。研究范围是单模型、短上下文、英文单词选择；不是新的训练算法，也不是神经回路证据。
 - 2026-05-15 · [Customizing an LLM for Enterprise Software Engineering](../../foundation-models/2605.16517-gemini-for-google/README.md)（`gemini-for-google`）：从企业开发历史中提取高价值代码与交互信号，经过去重、质量过滤和污染控制形成中训练数据；用通用数据回放抑制灾难性遗忘，再做面向内部工具的后训练和部署评测。
 
 ## Google Brain
@@ -210,6 +211,10 @@
 ## Knowledgator
 
 - 2025-08-11 · [GLiClass: Generalist Lightweight Model for Sequence Classification Tasks](../../foundation-models/2508.07662-gliclass/README.md)（`gliclass`）：GLiClass 把文本和运行时给定的候选标签放进同一个分类接口，避免生成式 LLM 的解析不稳定，也避免 cross-encoder 对每个文本—标签对逐次推理。本仓库保留“候选内容参与打分”和“一次归一化得到全候选分布”这两个定义性机制。
+
+## Korea University
+
+- 2026-10-21 · [MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs](../../foundation-models/2610.30206-moezip/README.md)（`moezip`）：MoE 的 KV 删除会扰动 attention 输出，进而改变路由。MoEZip 用已观察 instruction token 的路由分布 Fisher trace 作为敏感性代理，经 attention 传播到 context 位置，预留全局 routing anchors；其余预算沿用调用者提供的 dense/MoE base compressor 分数。future answer 不可用于真实选择。
 
 ## MIT
 
@@ -367,6 +372,10 @@
 
 - 2026-09-04 · [KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU](../../reproductions/2609.04852-kvmem/README.md)（`kvmem`）：长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。
 
+## Sogang University
+
+- 2026-10-22 · [OpenAttention: One Percent Is Enough with Tail Proxies](../../foundation-models/2610.30951-openattention/README.md)（`openattention`）：低读取率稀疏注意力不只需要选出少量重要 KV，还需要处理未读取的尾部。OpenAttention 在 query 二阶矩定义的几何空间内聚类，以 ErrorGate 估计簇内代理误差并分配精确读取预算；每个簇的未读部分成为一个带计数的均值代理。它不是单纯的 top-k 截断或均值池化。
+
 ## Southern University of Science and Technology
 
 - 2026-09-17 · [On-Demand Attention: Efficient Long-Context Decoding with Learned Recall](../../foundation-models/2609.20734-oda/README.md)（`oda`）：默认只读局部 KV，由轻量 recall head 在全局注意力发生前预测其收益；仅高收益 token 触发全局读取，完整 KV 仍保留。
@@ -405,6 +414,7 @@
 
 ## The Hong Kong University of Science and Technology (Guangzhou)
 
+- 2026-10-22 · [Jev-DLC: Decision-Level Continual Learning from Typed Feedback](../../system-one/2610.31521-jev-dlc/README.md)（`jev-dlc`）：类型化决策能给出明确 accept 或 revoke(旧选择→新选择)。Jev-DLC 不把完整历史重新塞进模型，而是在冻结 scorer 上维护两个紧凑通道：保守通道记住重复动作的语义计数与局部方向；响应通道只存当前修正方向。反馈只能影响**之后**的请求，不能先看当前正确答案再报成功。
 - 2026-08-27 · [TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy](../../reproductions/2608.27128-twinkv/README.md)（`twinkv`）：现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。
 
 ## The Ohio State University
@@ -508,6 +518,10 @@
 ## University of Tübingen
 
 - 2026-10-15 · [Retrofitting Recurrent Vision-Language Models from Pretrained Backbones](../../foundation-models/2610.22075-rr-vlm/README.md)（`rr-vlm`）：预训练 VLM 的语言层可以剪掉一段，再共享循环保留核心块；但直接手术会破坏语言能力及图文对齐。RR-VLM 用一个线性 adapter 融合 prelude 上下文与循环状态，并依次执行文本恢复、projector 对齐、全模型指令恢复；文本和最终阶段加入原始未剪模型蒸馏。
+
+## University of Virginia
+
+- 2026-10-22 · [Reverse-KL Policy Distillation: Statistical Guarantees and Limits](../../foundation-models/2610.30844-rkl-policy-distillation/README.md)（`rkl-policy-distillation`）：反向 KL 的风险取决于候选策略自己的访问分布。仅在过往 rollout 状态上重新拟合 token KL，会把“候选自己很少到达的状态”算得过重。本文的在线 full-feedback Algorithm 1 同时截断累计 KL 和前缀重要性比，通过有界候选/rollout 比较更新策略空间中的指数权重。
 
 ## University of Washington
 

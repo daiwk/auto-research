@@ -1,0 +1,12 @@
+{
+  "paper_id": "2610.30796v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2610.30796v1#S3.F1",
+  "source_url": "https://raw.githubusercontent.com/lilifree/GIFT/5e9a9dfdb371b7368949abbdc3a846d23a546557/assets/gift_overview.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "8db794aa0ecab53f63e6d9ab4555b28a47bdea568e0e25b2704baf88664d4953",
+  "license": "CC BY 4.0",
+  "transformation": "none",
+  "visual_review": "采用作者固定版本1593x576同图原文件，与原PDF第4页Figure1核对梯度分解、分段分数和覆盖率退火；替代arXiv HTML的383x135缩略图，未做放大伪造细节",
+  "checked_on": "2026-10-23"
+}

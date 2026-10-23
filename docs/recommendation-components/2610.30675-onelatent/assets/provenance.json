@@ -1,0 +1,17 @@
+{
+  "page": "docs/recommendation-components/2610.30675-onelatent/README.md",
+  "paper_url": "https://arxiv.org/abs/2610.30675v1",
+  "arxiv_id": "2610.30675",
+  "figure": "Figure 2",
+  "original_caption": "Overview of OneLatent, comprising Multi-View Adaptive CoT, three stage latent-token alignment, and curriculum-based post-training.",
+  "source_url": "https://arxiv.org/html/2610.30675v1/fig/OneLatent.png",
+  "extraction": "original-html-image",
+  "asset": "docs/recommendation-components/2610.30675-onelatent/assets/paper-figure-01.png",
+  "width": 1974,
+  "height": 727,
+  "sha256": "c929e751c758cc30243957e643d9d338a7ca627242cc1acb6ef5f749d6060e56",
+  "visually_inspected": true,
+  "scientific_content_modified": false,
+  "score": 0,
+  "error": ""
+}

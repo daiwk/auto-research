@@ -12,6 +12,7 @@
 
 | 方向 | 方法 | 机构 | 日期 | 主要方法 | 本地入口 |
 |---|---|---|---|---|---|
+| 类型反馈持续适配 | [Jev-DLC](2610.31521-jev-dlc/README.md) | HKUST (Guangzhou) | 2026-10-22 | 冻结scorer上语义计数、双通道PA-I与fixed-share可靠性，严格先决策后反馈 | CPU状态组件与独立参考；不加载JEV，27B完整实验高成本不复现 |
 | 多正确项校准审计 | [When Multiple Choices Are Correct](2610.29217-jev-multicorrect/README.md) | Independent Researcher | 2026-10-21 | 分离概率排序、完整集合恢复与独立二元校准；验证阈值固定后再评测test | CPU评分/隔离契约，未调用JEV，完整API实验高成本不复现 |
 | 多模态choice重排 | [Multimodal Reranking Is a System One Decision](../multimodal-models/2610.28435-system-one-rerank/README.md) | Aalto University | 2026-10-20 | 同一图文上下文单前向读取候选字母logits，稳定重排并保留尾部 | SmolVLM-256M真实A100前向；仅L1接口，完整27B实验不复现 |
 | 检索判定与重排 | [Jev 葡语 IR](../foundation-models/2610.23346-jev-portuguese-ir/README.md) | Câmara dos Deputados | 2026-10-16 | Choice 有序 qrels 与独立 Noul 概率排序分离，线性 nDCG/MRR、加权 κ 与 τ-b | CPU 协议接口与原文表格算术复核；未评测 Jev，完整实验不复现 |
