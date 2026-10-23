@@ -141,5 +141,9 @@ def test_moer_metadata_figure_license_cost_and_nonpromotion_boundaries():
     for field in ("## 论文信息", "原始发布日期", "公司 / 作者机构", "原作者代码", "原作者代码许可", "本地 Adapter / key", "本地代码", "diagnostic only", "成本过高，不复现（审查 DONE）", "未报告", "evolve_integrated=false"):
         assert field in readme
     provenance = json.loads((folder / "assets/provenance.json").read_text())
-    assert provenance["license"] == "CC BY 4.0" and provenance["transformation"] == "none"
+    assert provenance["license"] == "CC BY 4.0" and provenance["transformation"] == "rasterization_only"
+    assert provenance["image"] == provenance["local_path"] == "paper-figure-01.png"
+    assert "assets/paper-figure-01.png" in readme
     assert hashlib.sha256((folder / "assets" / provenance["local_path"]).read_bytes()).hexdigest() == provenance["sha256"]
+    assert (folder / "assets" / provenance["local_path"]).read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+    assert hashlib.sha256((folder / "assets" / provenance["original_svg_path"]).read_bytes()).hexdigest() == provenance["original_svg_sha256"]

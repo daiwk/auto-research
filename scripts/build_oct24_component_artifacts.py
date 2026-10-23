@@ -66,6 +66,7 @@ def validate_catalog(catalog):
     for key, (domain, paper_id) in SELECTED.items():
         row = catalog[key]
         require(row['domain'] == domain and row['paper_url'] == f'https://arxiv.org/abs/{paper_id}v1'
+            and row['detail_path'] == f'{domain}/{paper_id}-{key}/README.md'
             and row.get('adapter') is None and row.get('implementation_status') == 'component_only'
             and row.get('evaluation_tier') == 'l1_mechanism' and row.get('diagnostic_only') is True
             and row.get('promotion_eligible') is False and row.get('evolve_integrated') is False
@@ -118,13 +119,24 @@ def validate_raw(raw):
         require(item['accelerator'] == 'CPU' if device == 'cpu' else any(n in item['accelerator'] for n in ('A100', 'A30')), 'raw device')
         require(set(item['source_sha256']) == set(SOURCES), 'source scope')
         for key, value in item['components'].items():
+            require(all(row.get('execution_device') == device and row.get('execution_accelerator') == item['accelerator']
+                for row in value['per_seed']), f'{key}: per-seed execution device binding')
             gates(key, value['per_seed'])
     require(raw['cpu']['code_commit'] == raw['cuda']['code_commit'] and raw['cpu']['source_sha256'] == raw['cuda']['source_sha256'], 'CPU/CUDA frozen identity')
 
 
-def validate_scope(scope, batch, catalog):
+def validate_scope(scope, batch, catalog, *, allow_pending=False):
     require(scope.get('batch') == batch.get('batch') == BATCH and set(scope['fixed_component_keys']) == set(MODULES)
         and scope['reference_only_keys'] == [], 'scope batch identity')
+    complete = scope.get('selected_scope_complete')
+    require(type(complete) is bool and batch.get('selected_scope_complete') is complete
+        and scope.get('delivery_status') == batch.get('delivery_status') == ('bounded_scope_complete' if complete else 'pending_component_verification')
+        and (complete or allow_pending), 'scope/ledger completion-state binding')
+    if complete:
+        require(scope.get('component_count') == 4 and scope.get('gpu_validated_component_count') == 3
+            and scope.get('capability_reproductions_claimed') == 0
+            and batch['counts'].get('components_accepted') == 4
+            and batch['counts'].get('components_pending_verification') == 0, 'scope/ledger completion counts')
     for rows in (scope['papers'], batch['candidates']):
         require(len(rows) == len(MODULES) and {r['key'] for r in rows} == set(MODULES), 'scope/ledger exact paper set')
         for row in rows:
@@ -138,10 +150,16 @@ def validate_scope(scope, batch, catalog):
                 and row['automatic_retry'] is False and row['automatic_implementation_queue'] is False
                 and row['promotion_eligible'] is False and row['evolve_integrated'] is False,
                 'scope/ledger identity or claim')
-            if scope.get('selected_scope_complete'):
+            if rows is batch['candidates']:
+                require(row.get('doc') == row.get('catalog_detail') == item['detail_path']
+                    and row.get('catalog_key') == row['key'], 'scope/ledger canonical alias binding')
+            if complete:
                 require(row['component_accepted'] is True and row['component_implemented'] is True and row['review_done'] is True
                     and row['implementation_status'] == 'component_only'
                     and row['component_evidence'] == metric_path(row['key']).as_posix(), 'scope/ledger acceptance')
+            else:
+                require(row['component_accepted'] is False and row['component_implemented'] is False
+                    and row['implementation_status'] == 'component_validation_pending', 'scope/ledger pending boundary')
 
 
 def result_for(key, raw, raw_bytes):
@@ -194,7 +212,7 @@ def ingest(cpu, cuda):
         (AUDIT/f'raw-{device}.json').write_bytes(data)
 
 
-def check():
+def check(*, allow_pending=False):
     catalog = records()
     validate_catalog(catalog)
     raw_bytes = {d: (AUDIT/f'raw-{d}.json').read_bytes() for d in ('cpu', 'cuda')}
@@ -211,11 +229,11 @@ def check():
     scope = json.loads((AUDIT/'task-scope.json').read_text())
     batches = [b for b in json.loads((ROOT/'docs/paper-discovery-ledger.json').read_text())['batches'] if b['batch'] == BATCH]
     require(len(batches) == 1, 'exactly one batch')
-    validate_scope(scope, batches[0], catalog)
+    validate_scope(scope, batches[0], catalog, allow_pending=allow_pending)
 
 
 def finalize():
-    check()
+    check(allow_pending=True)
     scope = json.loads((AUDIT/'task-scope.json').read_text())
     coverage = json.loads((AUDIT/'source-coverage.json').read_text())
     ledger_path = ROOT/'docs/paper-discovery-ledger.json'

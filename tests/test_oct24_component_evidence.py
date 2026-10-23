@@ -68,6 +68,14 @@ def test_cuda_device_and_frozen_source_cannot_be_substituted(field, value):
         c['validate_raw'](raw)
 
 
+def test_cpu_seed_rows_cannot_be_copied_into_cuda_header():
+    c, raw = curator(), raw_runs()
+    for key in c['CUDA_KEYS']:
+        raw['cuda']['components'][key] = deepcopy(raw['cpu']['components'][key])
+    with pytest.raises(ValueError, match='per-seed execution device'):
+        c['validate_raw'](raw)
+
+
 @pytest.mark.parametrize('key', ['physical-engineering-exam', 'ttr-compressor', 'userarena-optd', 'moer'])
 @pytest.mark.parametrize('field,value', [('promotion_eligible', True), ('evolve_integrated', True),
     ('evaluation_tier', 'l3_pipeline'), ('diagnostic_only', False), ('automatic_retry', True),
@@ -88,6 +96,31 @@ def test_catalog_exact_executed_entry_and_gpu_binding(field, value):
     catalog['userarena-optd'][field] = value
     with pytest.raises(ValueError, match='binding|GPU boundary'):
         c['validate_catalog'](catalog)
+
+
+@pytest.mark.parametrize('path', ['/tmp/evidence-redirect/README.md', '../outside/README.md', 'post-training/unrelated/README.md'])
+def test_catalog_cannot_redirect_evidence_paths(path):
+    c = curator()
+    catalog = deepcopy(c['records']())
+    catalog['userarena-optd']['detail_path'] = path
+    with pytest.raises(ValueError, match='catalog boundary'):
+        c['validate_catalog'](catalog)
+
+
+@pytest.mark.parametrize('mutation', ['completion_false', 'delivery_status', 'doc', 'catalog_detail', 'catalog_key'])
+def test_complete_state_and_all_ledger_aliases_are_bound(mutation):
+    c = curator()
+    scope = json.loads((AUDIT/'task-scope.json').read_text())
+    batch = next(b for b in json.loads((ROOT/'docs/paper-discovery-ledger.json').read_text())['batches'] if b['batch'] == c['BATCH'])
+    if mutation == 'completion_false':
+        scope['selected_scope_complete'] = False
+        batch['candidates'][0]['component_accepted'] = False
+    elif mutation == 'delivery_status':
+        scope['delivery_status'] = 'pending_component_verification'
+    else:
+        batch['candidates'][0][mutation] = 'unrelated'
+    with pytest.raises(ValueError, match='scope/ledger'):
+        c['validate_scope'](scope, batch, c['records']())
 
 
 @pytest.mark.parametrize('target', ['scope', 'ledger'])

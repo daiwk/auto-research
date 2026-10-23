@@ -61,6 +61,8 @@ def main():
                 raise RuntimeError(f'{key}: missing/failed defining contract')
             if not row.get('metrics') or not all(type(v) in (float, int, bool) and math.isfinite(v) for v in row['metrics'].values()):
                 raise RuntimeError(f'{key}: nonfinite/nonscalar metrics')
+            row['execution_device'] = args.device
+            row['execution_accelerator'] = accelerator
         components[key] = {'per_seed': rows}
     if args.device == 'cuda':
         torch.cuda.synchronize()
