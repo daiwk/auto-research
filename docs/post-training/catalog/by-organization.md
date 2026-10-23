@@ -102,6 +102,10 @@
 
 - 2026-09-10 · 一作：Bincheng Gu · [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](../2609.11393-tasco/README.md)（`tasco`）：冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。
 
+## City University of Hong Kong
+
+- 2026-10-22 · 一作：Xuyang Zhong · [MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback](../2610.30873-moer/README.md)（`moer`）：既有混合策略训练直接加入完整专家解法，可能削弱探索；专家前缀引导虽允许学生续写，却可能把错误续写继续作为监督。MOER 逐步缩短专家 CoT 前缀：成功则保留前缀加续写，失败则回滚到已有的完整、已验证专家轨迹。
+
 ## Cohere For AI
 
 - 2024-02-22 · 一作：Arash Ahmadian · [RLOO](../2402.14740-rloo/README.md)（`rloo`）：PPO 为一般长时域 RL 设计，价值网络、GAE 和多轮 clipping 给 LLM RLHF 带来较大显存与调参开销。RLOO 把一整段 response 视作一个 action；同一 prompt 采样多个 response，用其余样本的平均 reward 作为当前样本 baseline。
@@ -230,6 +234,10 @@
 ## LeapLab, Tsinghua University
 
 - 2026-08-25 · 一作：Wenze Lin · [OPDVR: On-Policy Distillation with Verifiable Rewards](../2608.24696-opdvr/README.md)（`opdvr`）：Sampled-token OPD 的隐式奖励由教师/学生概率比决定，可能给正确轨迹负奖励、给错误轨迹正奖励。OPDVR 不再额外混合一个 RL loss，而是直接用 verifier correctness 对该隐式奖励做单侧 ReLU：正确轨迹只保留非负教师信号，错误轨迹只保留非正信号。
+
+## Leiden University
+
+- 2026-10-22 · 一作：Jujia Zhao · [UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents](../2610.30932-userarena-optd/README.md)（`userarena-optd`）：逐步动作命中率不能说明用户模拟器能否保持跨会话偏好，更不能说明模拟出来的推荐政策差异是否接近真实生产A/B。UserArena把细粒度页面、动作和跨会话记录统一成13种动作环境，分Replay与Rollout评估五层保真度：可执行性、局部行为、轨迹动态、个体群体差异和最终结果。
 
 ## Ling / Ring Team
 

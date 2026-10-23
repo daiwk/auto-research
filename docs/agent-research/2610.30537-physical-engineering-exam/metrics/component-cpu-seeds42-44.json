@@ -1,0 +1,155 @@
+{
+  "schema_version": 2,
+  "method": "physical-engineering-exam",
+  "manifest_ref": "agent-research:physical-engineering-exam",
+  "dataset": {
+    "id": "synthetic:oct24-physical-engineering-exam-v1",
+    "revision": "sha256:d8d0355c7518e5eead4fb8ffd6e33f21b68b9116df97a4a4a02dc6a9c0612ce2",
+    "recipe": "seeded-frozen-source-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "checks": {
+        "declared_deliverable_usable": true,
+        "missing_task_not_usable": true,
+        "manifest_reward_not_a_grade": true,
+        "hard_constraint_gate_caps_score": true,
+        "full_task_denominator_and_three_runs": true,
+        "blob_provenance_consistent": true,
+        "strict_reproduction_threshold": true
+      },
+      "metrics": {
+        "contract_cases": 7.0,
+        "model_calls": 0.0,
+        "container_runs": 0.0,
+        "external_commands": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "upstream_revision": "70ed96281d87380926a0d7c08e21799fd5edee63",
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "checks": {
+        "declared_deliverable_usable": true,
+        "missing_task_not_usable": true,
+        "manifest_reward_not_a_grade": true,
+        "hard_constraint_gate_caps_score": true,
+        "full_task_denominator_and_three_runs": true,
+        "blob_provenance_consistent": true,
+        "strict_reproduction_threshold": true
+      },
+      "metrics": {
+        "contract_cases": 7.0,
+        "model_calls": 0.0,
+        "container_runs": 0.0,
+        "external_commands": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "upstream_revision": "70ed96281d87380926a0d7c08e21799fd5edee63",
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "checks": {
+        "declared_deliverable_usable": true,
+        "missing_task_not_usable": true,
+        "manifest_reward_not_a_grade": true,
+        "hard_constraint_gate_caps_score": true,
+        "full_task_denominator_and_three_runs": true,
+        "blob_provenance_consistent": true,
+        "strict_reproduction_threshold": true
+      },
+      "metrics": {
+        "contract_cases": 7.0,
+        "model_calls": 0.0,
+        "container_runs": 0.0,
+        "external_commands": 0.0
+      },
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "upstream_revision": "70ed96281d87380926a0d7c08e21799fd5edee63",
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "container_runs": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "contract_cases": {
+      "mean": 7.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "external_commands": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "mechanism/protocol diagnostics; not pretrained capability or full reproduction"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "7b78ce1dbfc4006fbc81fdb181c3ead45aeb2457",
+    "artifact_path": "docs/agent-research/2610.30537-physical-engineering-exam/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct24_overlap_components.py": "ae6fbb18c6697e02f1e8c0f0d613828fa3006603c46e58cd12a6208f17ca143e",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/agent_research/physical_engineering_exam.py": "5c979d63b51b954ec11575efff76d4b7cbd64bb1f43cba6d27a61742d4b22132",
+      "src/auto_research/foundation_models/ttr_compressor.py": "3d4b4dafc53fe0a5bc685a4fa236ae4d03b6449b969575f811fb79fbdf3cdd2d",
+      "src/auto_research/post_training/userarena_optd.py": "fac048b0d687007becc4acf4a270f5287812f80d523052243f0fdd7e5c52fa01",
+      "src/auto_research/post_training/moer.py": "d2d2dbfee1cc54207dc942b083eb1540c78fc735b3543446c1414e921fe09a1d"
+    },
+    "raw_runner_artifact_sha256": "02434765ba18e8e4a1a6e228e4306e0dcc744c2d5717b3bb1317b944a1c8e97d",
+    "dataset_fingerprint": "sha256:3dc2ce5f9a21ca5d7fbec0718f54b2420260378e77e4b369a6e34323cf84cef3"
+  }
+}

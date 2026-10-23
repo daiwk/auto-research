@@ -1,0 +1,14 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.30932v1",
+  "source_url": "https://arxiv.org/pdf/2610.30932v1#page=4",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "original_caption": "Supervision in SFT, GRPO, and OPTD. SFT learns from recorded responses, GRPO assigns a scalar reward to each generated response, and OPTD provides full-vocabulary teacher targets at every token of the student's own rollout.",
+  "extraction": "PDF page 4 crop including original Figure 2 and its caption; no redrawing",
+  "pdf_page": 4,
+  "pdf_crop_points": [104, 78, 508, 249],
+  "pdf_sha256": "8fbb1d04a63692f064a5f8363cd487c865e1cd3c76f949d844f20ebf0cd751f1",
+  "sha256": "54fa4a860ff57fc22cfb01fe143a7c7c9df189a480f1dd2413af46e126dd6c21",
+  "license": "arXiv perpetual non-exclusive license; figure copyright remains with original authors; upstream repository code/data license is separate",
+  "visually_inspected": true
+}

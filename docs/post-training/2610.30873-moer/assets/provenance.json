@@ -1,0 +1,16 @@
+{
+  "paper_id": "2610.30873v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2610.30873v1#S1.F1",
+  "source_url": "https://arxiv.org/html/2610.30873v1/overview.svg",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "d42fab57609028caf8865ef0f21d3fa568eed207dae07bf89a0f3432a27aa4aa",
+  "original_svg_path": "paper-figure-01.svg",
+  "original_svg_sha256": "0dabd448dcba1b4f3267f58620f27f798655590d7005b110461701955759cfe5",
+  "license": "CC BY 4.0",
+  "transformation": "rasterization_only",
+  "render_command": "rsvg-convert --keep-aspect-ratio --width 2192 --format png --output paper-figure-01.png paper-figure-01.svg",
+  "visual_review": "与原PDF第2页Figure1核对后，目视检查2192x663 PNG，保留专家轨迹、CoT前缀退火、LLM、选择性回滚、on/off目标所有节点和连线；原始SVG未修改，PNG仅栅格化",
+  "checked_on": "2026-10-24"
+}

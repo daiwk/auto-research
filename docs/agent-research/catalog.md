@@ -11,6 +11,7 @@
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
 | Agent 训练与策略优化 | [Asymmetric On-Policy Distillation Learns In-Context Exploration](2610.30105-asteroid/README.md) | University of Washington，2026-10-21 | [原作者入口](https://github.com/WEIRDLabUW/asteroid)；原作者源码可见；固定95eee5ee66488af3aaa0aa55a09ae163b1ca3778未找到LICENSE/COPYING，未确认开放许可。本地根据论文独立实现，不复制作者源码 | `asteroid`：仅低成本组件，完整实验不复现 |
+| 公开评测协议 | [PLE: Physical-Engineering's Last Exam](2610.30537-physical-engineering-exam/README.md) | Google Cloud AI Research，2026-10-21 | [原作者入口](https://github.com/google-research/ple)；官方代码已公开；固定70ed96281d87380926a0d7c08e21799fd5edee63为10月23日最终29dev/56hidden协议发布。仅离线配置/产物/外部评分协议，不执行作者runner、容器或模型。 | `physical-engineering-exam`：仅低成本组件，完整实验不复现 |
 | Agent运行时 | [Cache Engineering for Agents](2610.28577-cache-engineering/README.md) | Tsinghua University，2026-10-20 | [原作者入口](https://github.com/thu-nics/AKV)；作者正文链接的官方AKV实现已核验；本轮不安装或运行完整serving系统。 | 计划键 `cache-engineering`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 自我进化 | [Evolving Agent Interfaces](2610.28601-agent-s4/README.md) | University of California, Santa Barbara，2026-10-20 | [原作者入口](https://github.com/simular-ai/Agent-S/tree/58187e364e3024076540892f5f69d1efc218b74f/agent_s4)；官方开源，Apache-2.0；固定核对58187e364e3024076540892f5f69d1efc218b74f，主要对照tournament.py、scoring.py及operators/。 | `agent-s4`：仅低成本组件，完整实验不复现 |
 | 自我进化 | [Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design](2610.28380-oo-harness/README.md) | University of Illinois Urbana-Champaign，2026-10-20 | 未发现官方代码 | `oo-harness`：仅低成本组件，完整实验不复现 |
