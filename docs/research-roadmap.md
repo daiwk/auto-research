@@ -1,5 +1,9 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-23 优先机构与近期公告
+
+[本批限定范围与来源记录](research-audits/oct23-priority-components/README.md)：Google Gemma 行为协议历史补漏、含 Google 合作者的有限策略反向KL蒸馏算法，以及 OpenAttention、MoEZip、AOPD、GIFT、PAIR、Jev-DLC 八个低成本组件；OneLatent 完整实验高成本不复现。仅验收明确的 L1 公式/状态/协议，不声称端到端模型能力或统一 Evolve 接入。CUDA部分须真实A100回执通过后交付；全局审查水位仍为10月15日，10月23日公告与官方目录增量不等于全窗口全文闭环。
+
 ## 2026-10-21 同日公告补审
 
 [本轮六篇固定范围与来源差集](research-audits/oct21-followup/README.md)：5个低成本组件及Google ResidencyRL历史资料；四项CUDA组件已在真实A100三seed验证。相对上一批的官方新增URL/公告新增身份均为0，本轮是新入库补发现，不是六篇刚刚首发。完整高成本实验不复现、审查DONE；全域水位仍为2026-10-15。

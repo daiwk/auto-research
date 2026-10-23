@@ -1,0 +1,638 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-23-priority-components",
+  "delivery_status": "bounded_scope_complete",
+  "all_sources_exhaustive": false,
+  "review_watermark_advanced": false,
+  "papers": [
+    {
+      "id": "2609.30716",
+      "key": "gemma-priority-protocol",
+      "domain": "foundation-models",
+      "title": "Words Speak Louder Than Order: A Behavioral Evaluation of Gemma 4",
+      "paper_url": "https://arxiv.org/abs/2609.30716v1",
+      "detail_path": "foundation-models/2609.30716-gemma-priority-protocol/README.md",
+      "priority": "P0",
+      "first_author": "Amanda Fitch",
+      "first_author_affiliation": "Google",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "original_published_at": "2026-09-25T02:43:40Z",
+      "intake_class": "historical-backfill",
+      "first_publication_after_baseline_capture": false,
+      "observed_versions": [],
+      "bulletin_categories": [],
+      "bulletin_entry_kinds": [],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_run_scope_limited_protocol",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2609.30716v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "双文档冲突的四路正交对照、十条件共同保留集、逐项目contrast及BCa/TOST。CPU协议与固定作者log复算，不是新模型推理；退化和BCa失败不返回通过。784次FP32模型实跑未进入本轮scope，未下载checkpoint，也不无依据标为高成本。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "component_evidence": "docs/foundation-models/2609.30716-gemma-priority-protocol/metrics/component-cpu-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "冻结源码三种子L1组件验收；CUDA组件真实A100执行。完整实验状态逐篇保留，不宣称模型能力或完整论文复现。"
+    },
+    {
+      "id": "2610.30951",
+      "key": "openattention",
+      "domain": "foundation-models",
+      "title": "OpenAttention: One Percent Is Enough with Tail Proxies",
+      "paper_url": "https://arxiv.org/abs/2610.30951v1",
+      "detail_path": "foundation-models/2610.30951-openattention/README.md",
+      "priority": "P1",
+      "first_author": "Hyunwoo Yu",
+      "first_author_affiliation": "Sogang University",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T09:03:08Z",
+      "intake_class": "new-to-repository-recent-first-publication",
+      "first_publication_after_baseline_capture": true,
+      "observed_versions": [
+        "2610.30951v1"
+      ],
+      "bulletin_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "bulletin_entry_kinds": [
+        "cross-list",
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30951v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "单头参考保留QGC查询二阶矩几何聚类、int8 QGS、ErrorGate与water-filling精确token预算，以及剔除已读token后重算剩余计数/均值并加log(count)的softmax代理。仅生成张量机制诊断；不声称1%读取准确率或Triton加速。7B/8B多模型、16K至96K长上下文全基准成本过高，不复现（审查DONE）。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "component_evidence": "docs/foundation-models/2610.30951-openattention/metrics/component-cuda-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "冻结源码三种子L1组件验收；CUDA组件真实A100执行。完整实验状态逐篇保留，不宣称模型能力或完整论文复现。",
+      "gpu_validation_artifact": "docs/gpu-validations/openattention-a100-20261023.json"
+    },
+    {
+      "id": "2610.30206",
+      "key": "moezip",
+      "domain": "foundation-models",
+      "title": "MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs",
+      "paper_url": "https://arxiv.org/abs/2610.30206v1",
+      "detail_path": "foundation-models/2610.30206-moezip/README.md",
+      "priority": "P1",
+      "first_author": "Minsang Kim",
+      "first_author_affiliation": "Korea University",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-21T13:06:30Z",
+      "intake_class": "new-to-repository-recent-first-publication",
+      "first_publication_after_baseline_capture": false,
+      "observed_versions": [
+        "2610.30206v1"
+      ],
+      "bulletin_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "bulletin_entry_kinds": [
+        "cross-list",
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30206v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "保留softmax/sigmoid的logit坐标Fisher trace、instruction-to-context跨头max注意力传播、fragility自适应全局anchor预算及每层每头base无重叠补齐，并真实gather KV。只接收prefill统计，不接收答案或gold plan，不加载模型。论文每run两张A100-80GB、235B用八卡、总15000至16000 A100小时；完整实验成本过高，不复现（审查DONE）。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "component_evidence": "docs/foundation-models/2610.30206-moezip/metrics/component-cuda-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "冻结源码三种子L1组件验收；CUDA组件真实A100执行。完整实验状态逐篇保留，不宣称模型能力或完整论文复现。",
+      "gpu_validation_artifact": "docs/gpu-validations/moezip-a100-20261023.json"
+    },
+    {
+      "id": "2610.31563",
+      "key": "aopd",
+      "domain": "post-training",
+      "title": "When to Follow the Teacher: Advantage-Based On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.31563v1",
+      "detail_path": "post-training/2610.31563-aopd/README.md",
+      "priority": "P1",
+      "first_author": "Mahdi Sabbaghi",
+      "first_author_affiliation": "University of Pennsylvania",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T17:05:21Z",
+      "intake_class": "new-to-repository-recent-first-publication",
+      "first_publication_after_baseline_capture": true,
+      "observed_versions": [
+        "2610.31563v1"
+      ],
+      "bulletin_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "bulletin_entry_kinds": [
+        "cross-list",
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.31563v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "按学生优势加权教师动作，以原有student rollout、终局奖励、LOO baseline和教师重要性权重估计双项目标。实现Eq3.6/3.8全词表期望、双项同截断且不归一化、冻结rollout/teacher；穷举两步MDP独立rollout pairs检验期望与梯度，仅L1数值诊断，无LLM能力评测。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "component_evidence": "docs/post-training/2610.31563-aopd/metrics/component-cuda-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "冻结源码三种子L1组件验收；CUDA组件真实A100执行。完整实验状态逐篇保留，不宣称模型能力或完整论文复现。",
+      "gpu_validation_artifact": "docs/gpu-validations/aopd-a100-20261023.json"
+    },
+    {
+      "id": "2610.30796",
+      "key": "gift",
+      "domain": "post-training",
+      "title": "GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL",
+      "paper_url": "https://arxiv.org/abs/2610.30796v1",
+      "detail_path": "post-training/2610.30796-gift/README.md",
+      "priority": "P1",
+      "first_author": "Shijie Li",
+      "first_author_affiliation": "Shanghai Jiao Tong University",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T06:22:45Z",
+      "intake_class": "new-to-repository-recent-first-publication",
+      "first_publication_after_baseline_capture": true,
+      "observed_versions": [
+        "2610.30796v1"
+      ],
+      "bulletin_categories": [
+        "cs.LG"
+      ],
+      "bulletin_entry_kinds": [
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30796v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "在原词表logit空间分解教师KL与GRPO梯度，冲突按a排序、非冲突按正交幅度b排序，exact quota按全valid token预算退火，保留KL不投影且分母不变。实现sparse top-k+tail真实梯度与autograd核验，仅L1诊断；不是永久conflict-free或完整推理训练复现。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "component_evidence": "docs/post-training/2610.30796-gift/metrics/component-cuda-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "冻结源码三种子L1组件验收；CUDA组件真实A100执行。完整实验状态逐篇保留，不宣称模型能力或完整论文复现。",
+      "gpu_validation_artifact": "docs/gpu-validations/gift-a100-20261023.json"
+    },
+    {
+      "id": "2610.30941",
+      "key": "pair",
+      "domain": "recommendation",
+      "title": "PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn",
+      "paper_url": "https://arxiv.org/abs/2610.30941v1",
+      "detail_path": "recommendation-components/2610.30941-pair/README.md",
+      "priority": "P1",
+      "first_author": "Zhongkai Shangguan",
+      "first_author_affiliation": "LinkedIn",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T08:57:58Z",
+      "intake_class": "new-to-repository-recent-first-publication",
+      "first_publication_after_baseline_capture": true,
+      "observed_versions": [
+        "2610.30941v1"
+      ],
+      "bulletin_categories": [
+        "cs.IR",
+        "cs.LG"
+      ],
+      "bulletin_entry_kinds": [
+        "cross-list",
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30941v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "通过曝光条件偏好对比目标、可学习位置历史注意力和归一化加性融合建模职业社交互补意图。本地仅实现可独立验证的向量/损失组件；原8GPU私有数据完整实验成本过高，不复现（审查 DONE）。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "component_evidence": "docs/recommendation-components/2610.30941-pair/metrics/component-cuda-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "冻结源码三种子L1组件验收；CUDA组件真实A100执行。完整实验状态逐篇保留，不宣称模型能力或完整论文复现。",
+      "gpu_validation_artifact": "docs/gpu-validations/pair-a100-20261023.json"
+    },
+    {
+      "id": "2610.31521",
+      "key": "jev-dlc",
+      "domain": "foundation-models",
+      "title": "Jev-DLC: Decision-Level Continual Learning from Typed Feedback",
+      "paper_url": "https://arxiv.org/abs/2610.31521v1",
+      "detail_path": "system-one/2610.31521-jev-dlc/README.md",
+      "priority": "P1",
+      "first_author": "Yangyang Feng",
+      "first_author_affiliation": "The Hong Kong University of Science and Technology (Guangzhou)",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T16:33:30Z",
+      "intake_class": "new-to-repository-recent-first-publication",
+      "first_publication_after_baseline_capture": true,
+      "observed_versions": [
+        "2610.31521v1"
+      ],
+      "bulletin_categories": [
+        "cs.AI"
+      ],
+      "bulletin_entry_kinds": [
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.31521v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "在冻结scorer上结合语义计数、两路PA-I修正和fixed-share可靠性，以先提交决策后反馈的时序持续适配。本地为外部logits/表示的CPU状态组件，不加载JEV；27B完整实验成本过高，不复现（审查 DONE）。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "component_evidence": "docs/system-one/2610.31521-jev-dlc/metrics/component-cpu-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "冻结源码三种子L1组件验收；CUDA组件真实A100执行。完整实验状态逐篇保留，不宣称模型能力或完整论文复现。"
+    },
+    {
+      "id": "2610.30675",
+      "key": "onelatent",
+      "domain": "recommendation",
+      "title": "OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models",
+      "paper_url": "https://arxiv.org/abs/2610.30675v1",
+      "detail_path": "recommendation-components/2610.30675-onelatent/README.md",
+      "priority": "P1",
+      "first_author": "Hao Jiang",
+      "first_author_affiliation": "Kuaishou Technology",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T03:39:38Z",
+      "intake_class": "new-to-repository-recent-first-publication",
+      "first_publication_after_baseline_capture": true,
+      "observed_versions": [
+        "2610.30675v1"
+      ],
+      "bulletin_categories": [
+        "cs.IR"
+      ],
+      "bulletin_entry_kinds": [
+        "new"
+      ],
+      "status": "deferred",
+      "implementation_status": "deferred_high_cost",
+      "delivery_status": "review_done_not_reproduced",
+      "component_implemented": false,
+      "component_accepted": false,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30675v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "原文Appendix A.1为56GPU全参数训练、235B教师与工业语料，超单卡A100/A30/Mac低成本预算；不启动完整实验。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      }
+    },
+    {
+      "id": "2610.30844",
+      "key": "rkl-policy-distillation",
+      "domain": "foundation-models",
+      "title": "Reverse-KL Policy Distillation: Statistical Guarantees and Limits",
+      "paper_url": "https://arxiv.org/abs/2610.30844v1",
+      "detail_path": "foundation-models/2610.30844-rkl-policy-distillation/README.md",
+      "priority": "P0",
+      "first_author": "Haolin Liu",
+      "first_author_affiliation": "University of Virginia",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "original_published_at": "2026-10-22T07:19:49Z",
+      "intake_class": "new-to-repository-recent-first-publication",
+      "first_publication_after_baseline_capture": true,
+      "observed_versions": [
+        "2610.30844v1"
+      ],
+      "bulletin_categories": [
+        "cs.LG"
+      ],
+      "bulletin_entry_kinds": [
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_run_scope_limited_protocol",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30844v1",
+        "basis": "named method/resource passages and official author release; not measured complete-run time",
+        "scale": "Google Research/NTU合作者理论稿；完整保留有限策略class中Algorithm1的整episode采样、仅到访state full teacher反馈、累计KL clip增量、同一clipped prefix概率比作用于candidate/rollout差值、固定eta=1/256指数权更新与最小index破同分。精确有限MDP风险/relative-second-moment审计只在训练后进行；CPU L1诊断，不是LLM蒸馏优化器、无能力或样本复杂度实证宣称。",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "component_evidence": "docs/foundation-models/2610.30844-rkl-policy-distillation/metrics/component-cpu-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "冻结源码三种子L1组件验收；CUDA组件真实A100执行。完整实验状态逐篇保留，不宣称模型能力或完整论文复现。"
+    }
+  ],
+  "fixed_component_keys": [
+    "aopd",
+    "gemma-priority-protocol",
+    "gift",
+    "jev-dlc",
+    "moezip",
+    "openattention",
+    "pair",
+    "rkl-policy-distillation"
+  ],
+  "reference_only_keys": [
+    "onelatent"
+  ],
+  "selected_scope_complete": true,
+  "official_new_directory_dispositions": [
+    {
+      "title": "Regional Policies for Memory Tiering Systems",
+      "url": "https://research.google/pubs/regional-policies-for-memory-tiering-systems/",
+      "directory_date": null,
+      "decision": "outside_topic_scope",
+      "review_done": true,
+      "reason": "REGENT is virtual-address-space memory tiering, not an accepted LLM/recommendation/agent algorithm. Official DIMES program lists first author Hayden Coffey at UW-Madison. Exact first public timestamp not established; no Oct23-first-publication claim.",
+      "primary_source": "https://dimes.ws/program/",
+      "first_publication_date": null,
+      "directory_new_url_not_first_publication": true
+    },
+    {
+      "title": "π-Flux Tuning of Quantum Paramagnetism in the Triangular-Lattice Hubbard Model",
+      "url": "https://research.google/pubs/%CF%80-flux-tuning-of-quantum-paramagnetism-in-the-triangular-lattice-hubbard-model/",
+      "directory_date": null,
+      "decision": "outside_topic_scope",
+      "review_done": true,
+      "reason": "Quantum condensed-matter physics; not in the accepted research tracks.",
+      "first_publication_date": null,
+      "directory_new_url_not_first_publication": true
+    },
+    {
+      "title": "Stakes-Adaptive Verification and Origin-Traced Rollback in Autonomous Agent Workflows",
+      "url": "https://research.google/pubs/stakes-adaptive-verification-and-origin-traced-rollback-in-autonomous-agent-workflows/",
+      "directory_date": null,
+      "decision": "archived_source_exception",
+      "review_done": true,
+      "full_text_review_done": false,
+      "blocking": false,
+      "automatic_retry": false,
+      "reason": "Official TDC12058 metadata dates the defensive publication to Oct8. Linked full text returned403/HTML, not a valid PDF. Method and experimental claims are not declared fully reviewed and no implementation is invented.",
+      "primary_source": "https://www.tdcommons.org/dpubs_series/12058/",
+      "unavailable_full_text": "https://www.tdcommons.org/cgi/viewcontent.cgi?article=13422&context=dpubs_series",
+      "first_publication_date": "2026-10-08",
+      "exact_first_publication_timestamp": null,
+      "directory_new_url_not_first_publication": true
+    },
+    {
+      "title": "Words Speak Louder Than Order: A Behavioral Evaluation of Gemma 4",
+      "url": "https://research.google/pubs/words-speak-louder-than-order-a-behavioral-evaluation-of-gemma-4/",
+      "directory_date": null,
+      "decision": "selected_historical_backfill",
+      "key": "gemma-priority-protocol",
+      "review_done": true,
+      "first_publication_date": "2026-09-25",
+      "exact_first_publication_timestamp": "2026-09-25T02:43:40Z",
+      "primary_source": "https://arxiv.org/abs/2609.30716v1",
+      "reason": "Google author affiliation verified in full-text author block; bounded external-prediction protocol, not new model inference.",
+      "directory_new_url_not_first_publication": true
+    },
+    {
+      "title": "Nature of the bosonic edge phase in a double quantum spin Hall insulator",
+      "url": "https://research.google/pubs/nature-of-the-bosonic-edge-phase-in-a-double-quantum-spin-hall-insulator/",
+      "directory_date": null,
+      "decision": "outside_topic_scope",
+      "review_done": true,
+      "reason": "Quantum condensed-matter physics; not in the accepted research tracks.",
+      "first_publication_date": null,
+      "directory_new_url_not_first_publication": true
+    }
+  ],
+  "additional_dispositions": [
+    {
+      "id": "2610.30423",
+      "title": "When Agentic Retrieval Fails Silently: Framework and Production Evidence from a Creative AI Assistant",
+      "source_url": "https://arxiv.org/html/2610.30423v1",
+      "decision": "not_selected_under_industrial_evidence_gate",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "reason": "Adobe LARA is an observational production stratification/attribution framework. A controlled quantified online A/B result or qualifying full-traffic comparison was not established; production observation alone does not waive the industrial implementation gate."
+    },
+    {
+      "id": "2610.30154",
+      "title": "baseVultra: Compact Nonlinear Recurrence with Reallocated Capacity",
+      "source_url": "https://arxiv.org/abs/2610.30154v1",
+      "decision": "archived_identity_date_exception",
+      "review_done": true,
+      "full_text_review_done": false,
+      "blocking": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "reason": "Observed Oct23 bulletin ID conflicts with the linked v1 page reporting Aug23. Identity/date conflict is archived, not forced into today's first-publication count or a new implementation."
+    },
+    {
+      "id": "2610.30920",
+      "title": "DConstrain: Compiling Context-Parameterized Transitions for Diffusion Language Model Constrained Decoding",
+      "source_url": "https://arxiv.org/html/2610.30920v1",
+      "decision": "affiliation_unconfirmed",
+      "verified_priority_organizations": null,
+      "full_text_review_done": false,
+      "blocking": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "reason": "Targeted HTML author block unavailable. Google/Meta collaboration remains unknown, not a negative affiliation finding."
+    },
+    {
+      "id": "2610.30934",
+      "title": "Verbalizing Activation Differences with Natural Language Autoencoders",
+      "source_url": "https://arxiv.org/html/2610.30934v1",
+      "decision": "affiliation_unconfirmed",
+      "verified_priority_organizations": null,
+      "full_text_review_done": false,
+      "blocking": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "reason": "Targeted HTML returned author names but no explicit institution. Google/Meta collaboration remains unknown, not a negative affiliation finding."
+    },
+    {
+      "id": "2610.30880",
+      "title": "One Teacher, Many Views: Reducing Reference Sensitivity in On-Policy Self-Distillation",
+      "source_url": "https://arxiv.org/html/2610.30880v1",
+      "decision": "not_reproduced_high_cost",
+      "status": "deferred",
+      "review_done": true,
+      "original_published_at": "2026-10-22T07:59:48Z",
+      "first_author": "Khouloud Saadi",
+      "first_author_affiliation": "KAUST",
+      "code": null,
+      "code_status": "not_found_in_reviewed_primary_sources",
+      "code_license": null,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30880v1",
+        "section": "Computational Cost / Table6",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac",
+        "scale": "K=4 partial views; authors report4xA10080GB and1h36 for100steps",
+        "measurement_owner": "authors, not local run"
+      },
+      "reason": "MCPD probability-mean multiview distillation reviewed; full training exceeds the single-device affordable scope. Review DONE, not reproduced, no automatic retry."
+    },
+    {
+      "id": "2610.30351",
+      "title": "Route-and-Generate: KL-Regularized Router Improvement for Reasoning Routing in LLMs",
+      "source_url": "https://arxiv.org/html/2610.30351v1",
+      "decision": "not_selected_method_ambiguity",
+      "review_done": false,
+      "blocking": false,
+      "original_published_at": "2026-10-21T19:09:04Z",
+      "first_author_affiliation": "Hanoi University of Science and Technology",
+      "code": null,
+      "code_status": "not_found_in_reviewed_primary_sources",
+      "code_license": null,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "reason": "Router closed-form KL mechanism reviewed, but the format-conditioned mean is undefined for n_f=0 and author code was not found. Method ambiguity remains unresolved; no completed faithful reproduction claimed."
+    },
+    {
+      "id": "2610.30167",
+      "title": "IRAH: Hierarchical Agentic Tree Search for Retrieval Pipeline Optimization",
+      "source_url": "https://arxiv.org/html/2610.30167v1",
+      "decision": "deferred_not_selected",
+      "review_done": false,
+      "blocking": false,
+      "original_published_at": "2026-10-16T17:03:17Z",
+      "first_author_affiliation": "University of Virginia; work during Capital One internship",
+      "code": null,
+      "code_status": "not_verified",
+      "code_license": null,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "reason": "Defining method requires LLM reflection mutation, two-stage UCT and offline meta-learned warm start. No heuristic stand-in or unmeasured high-cost claim; not selected in this fixed batch."
+    },
+    {
+      "id": "2610.31401",
+      "title": "HERD: Harness-Evolving Recursive Distillation for Continual Learning",
+      "source_url": "https://arxiv.org/html/2610.31401v1",
+      "decision": "source_unresolved_not_selected",
+      "review_done": false,
+      "blocking": false,
+      "original_published_at": "2026-10-22T15:03:20Z",
+      "first_author_affiliation": "Monash University",
+      "code": "https://github.com/a1exsun/HERD",
+      "observed_main_revision_not_paper_revision": "3ff1cf03d7a34565bcdbd510fae09aed7971286a",
+      "paper_code_branch": "arr",
+      "paper_code_revision": null,
+      "code_license": null,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.31401v1",
+        "scale": "Qwen3.5-4B,25stages,32x32records per stage; authors report10723training seconds",
+        "measurement_owner": "authors, not local run",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac"
+      },
+      "reason": "Main README says paper code is on arr branch, which was not retrieved. Main commit is not relabelled the paper revision; no implementation or full-source closure claimed."
+    }
+  ],
+  "component_count": 8,
+  "gpu_validated_component_count": 5,
+  "capability_reproductions_claimed": 0
+}

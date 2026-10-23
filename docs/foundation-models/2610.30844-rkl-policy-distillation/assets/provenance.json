@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/pdf/2610.30844v1",
+  "paper_sha256": "c960cc2144bb3128ebc0f405f3592c5c7fff239246abb0456aaa8be41b6cf78d",
+  "figure": "Algorithm 1 (not a figure; the source has no Figure)",
+  "pdf_page": 7,
+  "crop_pdf_points": [60, 548, 545, 691],
+  "render_scale": 2.5,
+  "image": "paper-algorithm-01.png",
+  "image_sha256": "85b0f9b6caf4d226cee83f3eeb0243662f13dd0bf19ea4ccb19da5a21ba3a9f0",
+  "description": "Original Algorithm 1 excerpt for methodological source verification; no scientific content edited",
+  "copyright": "Original paper authors; arXiv perpetual non-exclusive license, not CC BY",
+  "visually_verified": true
+}

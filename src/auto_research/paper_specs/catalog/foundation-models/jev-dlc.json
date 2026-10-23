@@ -1,0 +1,15 @@
+{
+  "domain": "foundation-models", "key": "jev-dlc", "title": "Jev-DLC: Decision-Level Continual Learning from Typed Feedback",
+  "paper_url": "https://arxiv.org/abs/2610.31521v1", "detail_path": "system-one/2610.31521-jev-dlc/README.md",
+  "topic": ["System One / JEV", "类型反馈与持续适配"], "first_author": "Yangyang Feng",
+  "first_author_affiliation": "The Hong Kong University of Science and Technology (Guangzhou)",
+  "published": "2026-10-22", "published_at": "2026-10-22T16:33:30Z", "code": null,
+  "code_status": "未在论文及官方链接找到Jev-DLC方法仓库；原文artifact chain不是公开代码链接", "adapter": null,
+  "priority": "P1", "intake_class": "newly_announced", "implementation_status": "component_only",
+  "local_operator": "auto_research.system_one.jev_dlc.JevDLC",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.system_one.jev_dlc import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism", "diagnostic_only": true, "promotion_eligible": false, "evolve_integrated": false,
+  "requires_gpu_validation": false, "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": true,
+  "review_done": true, "review_resolution": "not_reproduced_high_cost", "automatic_retry": false, "automatic_implementation_queue": false,
+  "summary": "在冻结scorer上结合语义计数、两路PA-I修正和fixed-share可靠性，以先提交决策后反馈的时序持续适配。本地为外部logits/表示的CPU状态组件，不加载JEV；27B完整实验成本过高，不复现（审查 DONE）。"
+}

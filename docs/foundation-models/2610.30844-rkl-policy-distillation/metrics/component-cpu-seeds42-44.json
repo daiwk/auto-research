@@ -1,0 +1,180 @@
+{
+  "schema_version": 2,
+  "method": "rkl-policy-distillation",
+  "manifest_ref": "foundation-models:rkl-policy-distillation",
+  "dataset": {
+    "id": "synthetic:oct23-rkl-policy-distillation-v1",
+    "revision": "sha256:1c0a7607bba82f6aad7ca192db99c6b53f914c40b5d2bc4e78e9b027f3ad9580",
+    "recipe": "frozen-source-seeded-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "checks": {
+        "teacher_queries_only_visited_states": true,
+        "full_episode_budget": true,
+        "bounded_comparisons": true,
+        "rollout_self_comparison_zero": true,
+        "fixed_eta_exponential_weight_reference": true,
+        "final_argmax_not_risk_oracle": true,
+        "relative_second_moment_assumption": true
+      },
+      "metrics": {
+        "episodes": 256,
+        "horizon": 3,
+        "policy_count": 3,
+        "teacher_queries": 768,
+        "selected_index": 2,
+        "selected_trajectory_reverse_kl": 0.1501999859675886,
+        "best_in_class_risk_evaluation_only": 0.1501999859675886,
+        "relative_second_moment_B": 2.0970336570181187,
+        "exponential_weight_replay_max_abs_error": 1.887379141862766e-15,
+        "max_abs_comparison_loss": 0.8902335904114292
+      }
+    },
+    {
+      "seed": 43,
+      "checks": {
+        "teacher_queries_only_visited_states": true,
+        "full_episode_budget": true,
+        "bounded_comparisons": true,
+        "rollout_self_comparison_zero": true,
+        "fixed_eta_exponential_weight_reference": true,
+        "final_argmax_not_risk_oracle": true,
+        "relative_second_moment_assumption": true
+      },
+      "metrics": {
+        "episodes": 256,
+        "horizon": 3,
+        "policy_count": 3,
+        "teacher_queries": 768,
+        "selected_index": 2,
+        "selected_trajectory_reverse_kl": 0.1501999859675886,
+        "best_in_class_risk_evaluation_only": 0.1501999859675886,
+        "relative_second_moment_B": 2.0970336570181187,
+        "exponential_weight_replay_max_abs_error": 2.4424906541753444e-15,
+        "max_abs_comparison_loss": 0.8902335904114292
+      }
+    },
+    {
+      "seed": 44,
+      "checks": {
+        "teacher_queries_only_visited_states": true,
+        "full_episode_budget": true,
+        "bounded_comparisons": true,
+        "rollout_self_comparison_zero": true,
+        "fixed_eta_exponential_weight_reference": true,
+        "final_argmax_not_risk_oracle": true,
+        "relative_second_moment_assumption": true
+      },
+      "metrics": {
+        "episodes": 256,
+        "horizon": 3,
+        "policy_count": 3,
+        "teacher_queries": 768,
+        "selected_index": 2,
+        "selected_trajectory_reverse_kl": 0.1501999859675886,
+        "best_in_class_risk_evaluation_only": 0.1501999859675886,
+        "relative_second_moment_B": 2.0970336570181187,
+        "exponential_weight_replay_max_abs_error": 2.7200464103316335e-15,
+        "max_abs_comparison_loss": 0.8902335904114292
+      }
+    }
+  ],
+  "metrics": {
+    "best_in_class_risk_evaluation_only": {
+      "mean": 0.1501999859675886,
+      "std": 0.0,
+      "n": 3
+    },
+    "episodes": {
+      "mean": 256,
+      "std": 0.0,
+      "n": 3
+    },
+    "exponential_weight_replay_max_abs_error": {
+      "mean": 2.349972068789915e-15,
+      "std": 4.239734207189668e-16,
+      "n": 3
+    },
+    "horizon": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "max_abs_comparison_loss": {
+      "mean": 0.8902335904114292,
+      "std": 0.0,
+      "n": 3
+    },
+    "policy_count": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "relative_second_moment_B": {
+      "mean": 2.0970336570181187,
+      "std": 0.0,
+      "n": 3
+    },
+    "selected_index": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "selected_trajectory_reverse_kl": {
+      "mean": 0.1501999859675886,
+      "std": 0.0,
+      "n": 3
+    },
+    "teacher_queries": {
+      "mean": 768,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "generated mechanism contracts; no pretrained capability or full-paper comparison"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_run_scope_limited_protocol",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "f3fbc6db4db084a2a6a4ee754f9a3d9e5b606ac7",
+    "artifact_path": "docs/foundation-models/2610.30844-rkl-policy-distillation/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct23_priority_components.py": "523fe3f25f4a6cb2a6f9ab9530f9f93f0fd5213ae29f6762272d83dfe6516026",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/foundation_models/gemma_priority_protocol.py": "6ddb7eb4daa67f268869d69865c0ce2e91caa2452e4b1b5287ad504c7a39334a",
+      "src/auto_research/foundation_models/rkl_policy_distillation.py": "3c03e572a5b28ba3bb2e89302eaa06653104e93e634aeaf1f0f738de56bd0c3c",
+      "src/auto_research/foundation_models/openattention.py": "76b34267c46a7b2ab8e139d5f8c2312646686847863520a5f2995d9800497678",
+      "src/auto_research/foundation_models/moezip.py": "3aca16279b163ebb09f5b66c4b8544bdb0373345cf1af1dd0a0fdeee2fabdbe3",
+      "src/auto_research/post_training/aopd.py": "c8c4cbc028cfee6e578599460b420a0c821fddd6a4f225bb2e26fa4aaf463a89",
+      "src/auto_research/post_training/gift.py": "a9ef99d6cca5a29994da58df1eec945cefe87fbdd70672746cab2bfefb7f68d4",
+      "src/auto_research/recommendation_components/pair.py": "2f4838260b0e4c83f3a2b0dda7db3a43f781cd679cf716412d8ed901a4063cb5",
+      "src/auto_research/system_one/jev_dlc.py": "e4f07315246f7e8e1a9e5178256bd1c5c30ba24b51722fba69b60cda7f268a20"
+    },
+    "raw_runner_artifact_sha256": "ddcb43a7201c094a03f30917196ef22ee21d6e32348ff7227a8a39f6af48b603",
+    "dataset_fingerprint": "sha256:472908b0735745d77f31b78ed3c030a263cd1d06c00ae876d701c378b9576a90"
+  }
+}

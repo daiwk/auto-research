@@ -12733,6 +12733,24 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/system_one/jev_dlc.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "reset",
+        "line": 70,
+        "qualified_name": "JevDLC.reset",
+        "expression": "self.version += 1",
+        "fingerprint": "b5afa4aed88228d06259fc36116c0815717075a6af15fb61454d31896a11bd7c"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "feedback",
+        "line": 146,
+        "qualified_name": "JevDLC.feedback",
+        "expression": "self.version += 1",
+        "fingerprint": "b5afa4aed88228d06259fc36116c0815717075a6af15fb61454d31896a11bd7c"
+      }
+    ],
     "src/auto_research/system_one/local.py": [
       {
         "kind": "state_update_not_execution_evidence",

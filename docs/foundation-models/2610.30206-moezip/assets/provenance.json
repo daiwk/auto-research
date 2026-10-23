@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/pdf/2610.30206v1",
+  "paper_sha256": "5c2381a031e9a3e402ad65e602c8e8ae53e0bafba8a4a1624542b89204bb8a82",
+  "figure": "Figure 2",
+  "pdf_page": 4,
+  "source_image_url": "https://arxiv.org/html/2610.30206v1/moezip_method_overview.png",
+  "image": "paper-figure-01.png",
+  "image_sha256": "551c1ceadf8e64f293f3858dd492d064c45c35aef6a9309585ce9c179400cc2e",
+  "pixel_dimensions": [2038, 345],
+  "description": "Original arXiv HTML method image, no crop or scientific-content edits",
+  "copyright": "Original paper authors; arXiv v1 CC BY 4.0",
+  "visually_verified": true
+}

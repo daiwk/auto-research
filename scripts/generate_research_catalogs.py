@@ -833,6 +833,11 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "gemma-priority-protocol": ("推理与系统效率", "能力评测与推理协议"),
+        "rkl-policy-distillation": ("预训练与数据", "蒸馏理论与有限策略学习"),
+        "openattention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+        "moezip": ("推理与系统效率", "MoE路由与 KV cache"),
+        "jev-dlc": ("推理与系统效率", "System One / JEV 与结构化决策"),
         "alps": ("网络架构", "JEPA 与几何表征"),
         "right-on-q": ("推理与系统效率", "量化"),
         "jev-multicorrect": ("推理与系统效率", "System One / JEV 检索评测协议"),

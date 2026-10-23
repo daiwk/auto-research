@@ -407,6 +407,7 @@
 
 ## Shanghai Jiao Tong University
 
+- 2026-10-22 · 一作：Shijie Li · [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](../2610.30796-gift/README.md)（`gift`）：终局正确性驱动的 RL 梯度与教师模仿梯度可能相冲突。GIFT 在原始词表 logits 空间分解两者：先最少纳入冲突 token，再优先保留提供正交新方向的教师监督；训练逐步缩减被蒸馏的 token 数量，保留项的强度不稀释。
 - 2026-10-16 · 一作：Yushu Wang · [GR-OPD: Group-Relative Sequence Credit for On-Policy Distillation](../2610.23042-gr-opd/README.md)（`gr-opd`）：教师在每个 token 上更自信，不一定意味着整段推理更值得复制；教师与学生的推理模式不同还可能造成训练崩溃。GR-OPD 在学生轨迹上重放教师，把 log-prob 差聚合为序列分数，在同题回答之间分配相对信用；保留一部分组均值压力，以免纯中心化抹掉教师总体偏好，然后使用 clipped PPO 更新。
 - 2026-10-15 · 一作：Feiyang Chen · [Learning from Unverified Peers via Shared Residual Distillation](../2610.22080-shared-residual-distillation/README.md)（`shared-residual-distillation`）：没有标准答案或可验证 reward 时，整段错误解答也可能包含有用步骤。SRD 不投票选“正确答案”，而比较同题 peers 相对跨题 control 对 token 分布的改变，只接收多位 peer 共同支持的保守残差。
 - 2026-07-30 · 一作：Kangning Zhang · [VAD](../2607.28590-vad/README.md)（`vad`）：多模态 OPD 直接匹配 privileged-view teacher 时，教师修正同时混入视觉证据、语言先验和教师自身偏差。VAD 对同一冻结教师分别输入“相关视觉证据存在/移除”两种视图，以 centered log-probability 差构造带符号的视觉方向，再把原教师修正单侧投影到该方向，重建以学生当前分布为锚的 target；完整 privileged teacher 只保留为弱正则。
@@ -558,6 +559,7 @@
 
 ## University of Pennsylvania
 
+- 2026-10-22 · 一作：Mahdi Sabbaghi · [When to Follow the Teacher: Advantage-Based On-Policy Distillation](../2610.31563-aopd/README.md)（`aopd`）：普通 OPD 在学生实际访问的状态上模仿教师，但教师偏好的动作不一定能被当前学生继续完成。AOPD 用该动作对学生最终奖励的优势加权教师监督，通过学生原有 rollout、终局奖励及教师重要性比率估计，不额外生成反事实续写。
 - 2026-10-08 · 一作：Lei Zhao · [Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals](../2610.11247-opd-learning-signals/README.md)（`opd-learning-signals`）：OPD 的残余差异可能仍大，但梯度提供的学习信号已变弱。论文同时记录损失、截断前梯度、两折 occupancy 估计、参数位移和逐层表征 CKA；这些是相关性诊断，不是因果证明。
 - 2026-10-02 · 一作：Lyuxin David Zhang · [LESSER: Post-Training Data Selection with Output-Layer Gradients](../2610.03702-lesser/README.md)（`lesser`）：现有面向目标任务的数据选择常计算每个候选样本和少量目标任务 query 的全参数梯度，再按相似性选取训练子集；对大模型逐样本反传代价很高。LESSER 只替换**特征**：从一次前向得到的最后隐藏状态和词表概率解析地计算输出层梯度。
 

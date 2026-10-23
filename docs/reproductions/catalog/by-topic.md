@@ -464,3 +464,12 @@
 
 ### 空间外部性与分配
 - [Online Advertising with Spatial Interactions](../../recommendation-components/2602.12481-spatial-ads/README.md)：实现分组伪圆盘真实LP松弛、x/3独立采样和原式二次稀释，核验组互斥及中心不被覆盖。不包含全广告匹配约化、支付或PTAS，不冒称18近似端到端复现；理论论文没有完整训练实验，不伪造高成本理由。
+
+## 其他工业组件
+
+
+### 大模型能力与推荐融合
+- [OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models](../../recommendation-components/2610.30675-onelatent/README.md)：用探索/评价/归因三视角监督、三阶段latent-token对齐和活跃度课程训练，将在线生成缩为三层SID；异步缓存避开请求关键路径。正文量化A/B与全流量部署符合工业证据门槛；完整实验成本过高，不复现（审查 DONE）。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+### 召回与匹配
+- [PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn](../../recommendation-components/2610.30941-pair/README.md)：通过曝光条件偏好对比目标、可学习位置历史注意力和归一化加性融合建模职业社交互补意图。本地仅实现可独立验证的向量/损失组件；原8GPU私有数据完整实验成本过高，不复现（审查 DONE）。

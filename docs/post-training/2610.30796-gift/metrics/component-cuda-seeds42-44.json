@@ -1,0 +1,181 @@
+{
+  "schema_version": 2,
+  "method": "gift",
+  "manifest_ref": "post-training:gift",
+  "dataset": {
+    "id": "synthetic:oct23-gift-v1",
+    "revision": "sha256:1c0a7607bba82f6aad7ca192db99c6b53f914c40b5d2bc4e78e9b027f3ad9580",
+    "recipe": "frozen-source-seeded-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "component": "gradient_geometry_exact_quota_loss_kernel",
+      "metrics": {
+        "loss": 0.524018562021992,
+        "gradient_norm": 0.25424529451602035,
+        "parameter_delta": 0.00025424529451604214,
+        "selected_tokens": 6,
+        "valid_tokens": 12,
+        "retention": 0.5,
+        "formula_reference_error": 8.326672684688674e-17,
+        "optimizer_updates": 1,
+        "model_calls": 0
+      },
+      "checks": {
+        "finite_gradient": true,
+        "teacher_detached": true,
+        "old_policy_detached": true,
+        "advantages_detached": true,
+        "real_parameter_update": true,
+        "formula_reference_matches": true,
+        "exact_quota": true,
+        "selection_detached": true
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "component": "gradient_geometry_exact_quota_loss_kernel",
+      "metrics": {
+        "loss": 0.341316920578592,
+        "gradient_norm": 0.2512971593177066,
+        "parameter_delta": 0.0002512971593176955,
+        "selected_tokens": 6,
+        "valid_tokens": 12,
+        "retention": 0.5,
+        "formula_reference_error": 8.326672684688674e-17,
+        "optimizer_updates": 1,
+        "model_calls": 0
+      },
+      "checks": {
+        "finite_gradient": true,
+        "teacher_detached": true,
+        "old_policy_detached": true,
+        "advantages_detached": true,
+        "real_parameter_update": true,
+        "formula_reference_matches": true,
+        "exact_quota": true,
+        "selection_detached": true
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "component": "gradient_geometry_exact_quota_loss_kernel",
+      "metrics": {
+        "loss": 0.5235105462684041,
+        "gradient_norm": 0.2584846040723717,
+        "parameter_delta": 0.0002584846040723637,
+        "selected_tokens": 6,
+        "valid_tokens": 12,
+        "retention": 0.5,
+        "formula_reference_error": 1.1102230246251565e-16,
+        "optimizer_updates": 1,
+        "model_calls": 0
+      },
+      "checks": {
+        "finite_gradient": true,
+        "teacher_detached": true,
+        "old_policy_detached": true,
+        "advantages_detached": true,
+        "real_parameter_update": true,
+        "formula_reference_matches": true,
+        "exact_quota": true,
+        "selection_detached": true
+      }
+    }
+  ],
+  "metrics": {
+    "formula_reference_error": {
+      "mean": 9.251858538542972e-17,
+      "std": 1.6024689053196365e-17,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 0.25467568596869955,
+      "std": 0.0036129998792202283,
+      "n": 3
+    },
+    "loss": {
+      "mean": 0.4629486762896627,
+      "std": 0.10533649660976799,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta": {
+      "mean": 0.00025467568596870046,
+      "std": 3.6129998792198924e-06,
+      "n": 3
+    },
+    "retention": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    },
+    "selected_tokens": {
+      "mean": 6,
+      "std": 0.0,
+      "n": 3
+    },
+    "valid_tokens": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "generated mechanism contracts; no pretrained capability or full-paper comparison"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "f3fbc6db4db084a2a6a4ee754f9a3d9e5b606ac7",
+    "artifact_path": "docs/post-training/2610.30796-gift/metrics/component-cuda-seeds42-44.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct23_priority_components.py": "523fe3f25f4a6cb2a6f9ab9530f9f93f0fd5213ae29f6762272d83dfe6516026",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/foundation_models/gemma_priority_protocol.py": "6ddb7eb4daa67f268869d69865c0ce2e91caa2452e4b1b5287ad504c7a39334a",
+      "src/auto_research/foundation_models/rkl_policy_distillation.py": "3c03e572a5b28ba3bb2e89302eaa06653104e93e634aeaf1f0f738de56bd0c3c",
+      "src/auto_research/foundation_models/openattention.py": "76b34267c46a7b2ab8e139d5f8c2312646686847863520a5f2995d9800497678",
+      "src/auto_research/foundation_models/moezip.py": "3aca16279b163ebb09f5b66c4b8544bdb0373345cf1af1dd0a0fdeee2fabdbe3",
+      "src/auto_research/post_training/aopd.py": "c8c4cbc028cfee6e578599460b420a0c821fddd6a4f225bb2e26fa4aaf463a89",
+      "src/auto_research/post_training/gift.py": "a9ef99d6cca5a29994da58df1eec945cefe87fbdd70672746cab2bfefb7f68d4",
+      "src/auto_research/recommendation_components/pair.py": "2f4838260b0e4c83f3a2b0dda7db3a43f781cd679cf716412d8ed901a4063cb5",
+      "src/auto_research/system_one/jev_dlc.py": "e4f07315246f7e8e1a9e5178256bd1c5c30ba24b51722fba69b60cda7f268a20"
+    },
+    "raw_runner_artifact_sha256": "c7206d8c50db8fb46fabca7d2020f383f37504aa1a67de0c9b562d9a5e7b1b92",
+    "dataset_fingerprint": "sha256:64f8eb3c12b887ad10a40d2bb5e717fa9ffd24c1da7df358493475be1ed176e7"
+  }
+}

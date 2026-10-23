@@ -310,6 +310,7 @@
 - 2026-08 · [ConnectionMind](../2608.10187-connectionmind/README.md)：在时序异构社交图上用最短正路径 SFT 和规则奖励 GRPO 学习多步探索，再把路径教师蒸馏给 GNN student。
 
 ## Kuaishou Technology
+- [OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models](../../recommendation-components/2610.30675-onelatent/README.md)：用探索/评价/归因三视角监督、三阶段latent-token对齐和活跃度课程训练，将在线生成缩为三层SID；异步缓存避开请求关键路径。正文量化A/B与全流量部署符合工业证据门槛；完整实验成本过高，不复现（审查 DONE）。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-08 · [TAGR](../2608.24034-tagr/README.md)：用稳定两级语义/协同 ID、多尺度用户兴趣和行为价值门控，在直播广告中生成兼顾相关性与商业价值的候选。
 - 2026-08 · [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../2608.21012-dynamic-codebook/README.md)：用曝光加权动态大码本替代多级小码本，并保留独立碰撞码以缩短 SID 解码。
 - 2026-08 · [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md)：以统一语义-协同 ID 生成整张 slate，再用列表反馈做保守策略对齐。
@@ -386,6 +387,7 @@
 - 2026-02 · [RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems](../2602.12968-rgalign-rec/README.md)：用真实排序模型偏好指导潜在 query 的 SFT 与 DPO 对齐。
 
 ## LinkedIn
+- [PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn](../../recommendation-components/2610.30941-pair/README.md)：通过曝光条件偏好对比目标、可学习位置历史注意力和归一化加性融合建模职业社交互补意图。本地仅实现可独立验证的向量/损失组件；原8GPU私有数据完整实验成本过高，不复现（审查 DONE）。
 - 2026-08 · [From Prediction to Incrementality](../2608.10182-incrementality/README.md)：估计处理增量而非 treated outcome，并在不确定度约束下执行固定预算 targeting。
 - 2026-07 · [TransX](../2607.28940-transx/README.md)：分离可缓存行为流与在线服务流，以 cross-attention 避免逐请求重算长历史。
 - 2026-05 · [Policy-Grounded Dynamic Facet Suggestions](../2605.16479-policy-facet/README.md)：以离线 LLM taxonomy、在线关键词召回和策略约束排序生成动态职位搜索 facet。

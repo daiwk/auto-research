@@ -1,0 +1,17 @@
+{
+  "page": "docs/system-one/2610.31521-jev-dlc/README.md",
+  "paper_url": "https://arxiv.org/abs/2610.31521v1",
+  "arxiv_id": "2610.31521",
+  "figure": "Figure 2",
+  "original_caption": "Typed feedback becomes persistent state above a frozen scorer.",
+  "source_url": "https://arxiv.org/html/2610.31521v1/jev-dlc-method.drawio.png",
+  "extraction": "original-html-image",
+  "asset": "docs/system-one/2610.31521-jev-dlc/assets/paper-figure-01.png",
+  "width": 1793,
+  "height": 853,
+  "sha256": "3186d8142e5f9bc2679fbd7fb18cfcca77d6798e4dc7407b59c0b78a83db45a1",
+  "visually_inspected": true,
+  "scientific_content_modified": false,
+  "score": 0,
+  "error": ""
+}

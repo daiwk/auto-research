@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](2610.30796-gift/README.md) | Shanghai Jiao Tong University，2026-10-22 | [原作者入口](https://github.com/lilifree/GIFT)；原作者源码可见；固定5e9a9dfdb371b7368949abbdc3a846d23a546557未找到第一方LICENSE/COPYING，GitHub license=null；未确认开放许可，不复制作者源码。本地根据论文独立实现 | `gift`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [When to Follow the Teacher: Advantage-Based On-Policy Distillation](2610.31563-aopd/README.md) | University of Pennsylvania，2026-10-22 | [原作者入口](https://github.com/Helloworld10011/AOPD)；原作者代码已发布，固定3f205368f225bfc4ed4ad007ccbae7879d1b38f2，Apache-2.0；本地据论文独立实现Eq3.8，不混入上游sigmoid residual与all-wrong KL附加项 | `aopd`：仅低成本组件，完整实验不复现 |
 | Agentic RL | [CORD: Conflict-Aware Optimization for Joint RL and Distillation in Agents](2610.29965-cord/README.md) | The Chinese University of Hong Kong，2026-10-21 | [原作者入口](https://github.com/LvAoAo/CORD-release)；原论文首页链接原作者开源仓库；固定快照的cord_utils实现保护第一目标的冲突投影，论文另定义交换保护方向与always门控 | `cord`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation](2610.28194-ap-opd/README.md) | Nanjing University，2026-10-20 | 未发现官方代码 | `ap-opd`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Ask to Distill: Learning to Synthesize Data for On-Policy Distillation](2610.27450-ask-to-distill/README.md) | University of Illinois Urbana-Champaign，2026-10-20 | [原作者入口](https://github.com/GasolSun36/Ask_to_Distill)；原作者公开代码、数据和模型；固定版本核验reward_worker与diversity接口 | `ask-to-distill`：仅低成本组件，完整实验不复现 |
