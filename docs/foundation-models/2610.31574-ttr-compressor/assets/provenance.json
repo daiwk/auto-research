@@ -1,0 +1,14 @@
+{
+  "paper_url": "https://arxiv.org/pdf/2610.31574v1",
+  "paper_sha256": "234aa087b3fcb127d77891fe151b02b4b9caee83e100a404cff96813b02d4a55",
+  "figure": "Figure 2",
+  "pdf_page": 4,
+  "crop_pdf_points": [108, 68, 504, 245],
+  "render_scale": 3,
+  "image": "paper-figure-01.png",
+  "image_sha256": "3dbb9db4ff571551d7743851131a1e7c380002ba8fa05e57e20c8d6c5ff0dd8c",
+  "pixel_dimensions": [1188, 531],
+  "description": "Complete original Figure 2 diagram rendered from the fixed PDF; caption translated in README; no scientific content edited",
+  "copyright": "Original paper authors; arXiv perpetual non-exclusive license, not CC BY",
+  "visually_verified": true
+}

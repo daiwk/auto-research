@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "adapter_key": "ttr-compressor",
+  "validated_at": "2026-10-24",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python3",
+    "scripts/run_oct24_overlap_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "7b78ce1dbfc4006fbc81fdb181c3ead45aeb2457",
+    "--frozen-proof",
+    "oct24-frozen-proof.json",
+    "--output",
+    "results/components-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:oct24-ttr-compressor-v1",
+    "revision": "sha256:d8d0355c7518e5eead4fb8ffd6e33f21b68b9116df97a4a4a02dc6a9c0612ce2",
+    "recipe": "seeded-frozen-source-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "7b78ce1dbfc4006fbc81fdb181c3ead45aeb2457",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "a_gradient_max_abs_error": {
+      "mean": 1.3385070328405153e-06,
+      "std": 4.3091847627229947e-07,
+      "n": 3
+    },
+    "dimension": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    },
+    "global_scale_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "groups": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "normalized_target_negative_control_gap": {
+      "mean": 5.005152669058963,
+      "std": 2.2894373878492105,
+      "n": 3
+    },
+    "outer_fixture_loss_after": {
+      "mean": 5.301487763722737,
+      "std": 3.893011548474123,
+      "n": 3
+    },
+    "outer_fixture_loss_before": {
+      "mean": 5.319785992304484,
+      "std": 3.910067577749973,
+      "n": 3
+    },
+    "outer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "permutation_max_abs_error": {
+      "mean": 1.2715657552083333e-06,
+      "std": 7.283807905444845e-07,
+      "n": 3
+    },
+    "primal_dual_max_abs_error": {
+      "mean": 1.1280829053106345e-06,
+      "std": 4.899226365334327e-07,
+      "n": 3
+    },
+    "repeated_evidence_max_abs_error": {
+      "mean": 5.960464477539063e-08,
+      "std": 0.0,
+      "n": 3
+    },
+    "rho_gradient_max_abs_error": {
+      "mean": 1.0582412929653155e-06,
+      "std": 4.018643768796071e-07,
+      "n": 3
+    },
+    "token_gradient_norm": {
+      "mean": 17.044706026713055,
+      "std": 6.4313633694292935,
+      "n": 3
+    },
+    "tokens_per_group": {
+      "mean": 7,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct24_overlap_components.py": "ae6fbb18c6697e02f1e8c0f0d613828fa3006603c46e58cd12a6208f17ca143e",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/agent_research/physical_engineering_exam.py": "5c979d63b51b954ec11575efff76d4b7cbd64bb1f43cba6d27a61742d4b22132",
+    "src/auto_research/foundation_models/ttr_compressor.py": "3d4b4dafc53fe0a5bc685a4fa236ae4d03b6449b969575f811fb79fbdf3cdd2d",
+    "src/auto_research/post_training/userarena_optd.py": "fac048b0d687007becc4acf4a270f5287812f80d523052243f0fdd7e5c52fa01",
+    "src/auto_research/post_training/moer.py": "d2d2dbfee1cc54207dc942b083eb1540c78fc735b3543446c1414e921fe09a1d"
+  },
+  "provenance": {
+    "commit": "7b78ce1dbfc4006fbc81fdb181c3ead45aeb2457",
+    "artifact_path": "docs/gpu-validations/ttr-compressor-a100-20261024.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct24_overlap_components.py": "ae6fbb18c6697e02f1e8c0f0d613828fa3006603c46e58cd12a6208f17ca143e",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/agent_research/physical_engineering_exam.py": "5c979d63b51b954ec11575efff76d4b7cbd64bb1f43cba6d27a61742d4b22132",
+      "src/auto_research/foundation_models/ttr_compressor.py": "3d4b4dafc53fe0a5bc685a4fa236ae4d03b6449b969575f811fb79fbdf3cdd2d",
+      "src/auto_research/post_training/userarena_optd.py": "fac048b0d687007becc4acf4a270f5287812f80d523052243f0fdd7e5c52fa01",
+      "src/auto_research/post_training/moer.py": "d2d2dbfee1cc54207dc942b083eb1540c78fc735b3543446c1414e921fe09a1d"
+    },
+    "raw_runner_artifact_sha256": "81ae594100933e40a0a163ab56d744b16730cbc8b4b6c7f1cf419796c0b797ba",
+    "dataset_fingerprint": "sha256:a5c56dabd9b70822f16ab2839f234100cbf0dc9a9e6857d1beb070f697ad60b6",
+    "metric_artifact_path": "docs/foundation-models/2610.31574-ttr-compressor/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

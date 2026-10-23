@@ -1,5 +1,9 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-24 同公告补漏
+
+[本批四项限定交付与来源记录](research-audits/oct24-overlap-components/README.md)：Google PLE离线工程产物协议优先，另有TTR-Compressor、UserArena OPTD与MOER精确组件；三个CUDA组件已在真实A100三种子执行。八类arXiv仍是10月23日公告、各分类列表未变，因此四项均为补漏而非当日新首发。Google/Meta目录重取超时保留unknown，不当零新增；完整高成本实验不复现、审查DONE。全局审查水位仍为10月15日。
+
 ## 2026-10-23 优先机构与近期公告
 
 [本批限定范围与来源记录](research-audits/oct23-priority-components/README.md)：Google Gemma 行为协议历史补漏、含 Google 合作者的有限策略反向KL蒸馏算法，以及 OpenAttention、MoEZip、AOPD、GIFT、PAIR、Jev-DLC 八个低成本组件；OneLatent 完整实验高成本不复现。仅验收明确的 L1 公式/状态/协议，不声称端到端模型能力或统一 Evolve 接入。CUDA部分须真实A100回执通过后交付；全局审查水位仍为10月15日，10月23日公告与官方目录增量不等于全窗口全文闭环。

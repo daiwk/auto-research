@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "adapter_key": "moer",
+  "validated_at": "2026-10-24",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python3",
+    "scripts/run_oct24_overlap_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "7b78ce1dbfc4006fbc81fdb181c3ead45aeb2457",
+    "--frozen-proof",
+    "oct24-frozen-proof.json",
+    "--output",
+    "results/components-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:oct24-moer-v1",
+    "revision": "sha256:d8d0355c7518e5eead4fb8ffd6e33f21b68b9116df97a4a4a02dc6a9c0612ce2",
+    "recipe": "seeded-frozen-source-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "7b78ce1dbfc4006fbc81fdb181c3ead45aeb2457",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "formula_reference_error": {
+      "mean": 2.312964634635743e-17,
+      "std": 2.119867103594834e-17,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 0.06959818408593005,
+      "std": 0.008164853860959973,
+      "n": 3
+    },
+    "gradient_reference_error": {
+      "mean": 5.204170427930421e-18,
+      "std": 1.734723475976807e-18,
+      "n": 3
+    },
+    "loss_after": {
+      "mean": 0.10191352484472241,
+      "std": 1.1139486412147546e-05,
+      "n": 3
+    },
+    "loss_before": {
+      "mean": 0.10196078431372546,
+      "std": 0.0,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta": {
+      "mean": 0.0006959818408593,
+      "std": 8.164853860958621e-05,
+      "n": 3
+    },
+    "valid_tokens": {
+      "mean": 17,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct24_overlap_components.py": "ae6fbb18c6697e02f1e8c0f0d613828fa3006603c46e58cd12a6208f17ca143e",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/agent_research/physical_engineering_exam.py": "5c979d63b51b954ec11575efff76d4b7cbd64bb1f43cba6d27a61742d4b22132",
+    "src/auto_research/foundation_models/ttr_compressor.py": "3d4b4dafc53fe0a5bc685a4fa236ae4d03b6449b969575f811fb79fbdf3cdd2d",
+    "src/auto_research/post_training/userarena_optd.py": "fac048b0d687007becc4acf4a270f5287812f80d523052243f0fdd7e5c52fa01",
+    "src/auto_research/post_training/moer.py": "d2d2dbfee1cc54207dc942b083eb1540c78fc735b3543446c1414e921fe09a1d"
+  },
+  "provenance": {
+    "commit": "7b78ce1dbfc4006fbc81fdb181c3ead45aeb2457",
+    "artifact_path": "docs/gpu-validations/moer-a100-20261024.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct24_overlap_components.py": "ae6fbb18c6697e02f1e8c0f0d613828fa3006603c46e58cd12a6208f17ca143e",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/agent_research/physical_engineering_exam.py": "5c979d63b51b954ec11575efff76d4b7cbd64bb1f43cba6d27a61742d4b22132",
+      "src/auto_research/foundation_models/ttr_compressor.py": "3d4b4dafc53fe0a5bc685a4fa236ae4d03b6449b969575f811fb79fbdf3cdd2d",
+      "src/auto_research/post_training/userarena_optd.py": "fac048b0d687007becc4acf4a270f5287812f80d523052243f0fdd7e5c52fa01",
+      "src/auto_research/post_training/moer.py": "d2d2dbfee1cc54207dc942b083eb1540c78fc735b3543446c1414e921fe09a1d"
+    },
+    "raw_runner_artifact_sha256": "81ae594100933e40a0a163ab56d744b16730cbc8b4b6c7f1cf419796c0b797ba",
+    "dataset_fingerprint": "sha256:e24be936d05453ca61acfc32ef90d89f5e29d10816fc9ca1cc879c6a7a7b6072",
+    "metric_artifact_path": "docs/post-training/2610.30873-moer/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

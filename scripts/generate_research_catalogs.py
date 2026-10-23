@@ -833,6 +833,7 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "ttr-compressor": ("注意力与长上下文", "序列压缩与可微测试时回归"),
         "gemma-priority-protocol": ("推理与系统效率", "能力评测与推理协议"),
         "rkl-policy-distillation": ("预训练与数据", "蒸馏理论与有限策略学习"),
         "openattention": ("注意力与长上下文", "稀疏、门控与动态注意力"),

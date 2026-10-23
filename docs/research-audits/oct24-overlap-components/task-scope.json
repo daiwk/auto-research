@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-24-overlap-components",
+  "delivery_status": "bounded_scope_complete",
+  "all_sources_exhaustive": false,
+  "review_watermark_advanced": false,
+  "fixed_component_keys": [
+    "moer",
+    "physical-engineering-exam",
+    "ttr-compressor",
+    "userarena-optd"
+  ],
+  "reference_only_keys": [],
+  "selected_scope_complete": true,
+  "papers": [
+    {
+      "id": "2610.30537",
+      "key": "physical-engineering-exam",
+      "domain": "agent-research",
+      "title": "PLE: Physical-Engineering's Last Exam",
+      "paper_url": "https://arxiv.org/abs/2610.30537v1",
+      "detail_path": "agent-research/2610.30537-physical-engineering-exam/README.md",
+      "priority": "P0",
+      "first_author": "Rujun Han",
+      "first_author_affiliation": "Google Cloud AI Research",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "original_published_at": "2026-10-21T23:45:56Z",
+      "intake_class": "same-announcement-overlap-backfill",
+      "first_publication_after_baseline_capture": false,
+      "observed_versions": [
+        "2610.30537v1"
+      ],
+      "bulletin_categories": [
+        "cs.AI"
+      ],
+      "bulletin_entry_kinds": [
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30537v1#S5.SS3",
+        "scale": "85tasks, three runs per model/harness; authors report27Mtokens and63minutes per task;14models across seven harnesses, with specified sparse exceptions",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac",
+        "estimate": "One full85-task/3-run configuration at paper average:267.75 agent-hours and6.885billion tokens; not locally measured",
+        "public_protocol": "29public dev,56hidden test,6hour task limit; about17GB world images, external model and judge services",
+        "decision": "not_reproduced_high_cost",
+        "automatic_retry": false
+      },
+      "requires_gpu_validation": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "component_evidence": "docs/agent-research/2610.30537-physical-engineering-exam/metrics/component-cpu-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "四项冻源三种子L1验收，三个张量组件真实A100执行；高成本完整实验不复现，不宣称能力。"
+    },
+    {
+      "id": "2610.31574",
+      "key": "ttr-compressor",
+      "domain": "foundation-models",
+      "title": "Rethinking Sequence Compression with Test-time Regression",
+      "paper_url": "https://arxiv.org/abs/2610.31574v1",
+      "detail_path": "foundation-models/2610.31574-ttr-compressor/README.md",
+      "priority": "P1",
+      "first_author": "Sihan Yang",
+      "first_author_affiliation": "The Chinese University of Hong Kong",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T17:14:38Z",
+      "intake_class": "same-announcement-overlap-backfill",
+      "first_publication_after_baseline_capture": false,
+      "observed_versions": [
+        "2610.31574v1"
+      ],
+      "bulletin_categories": [
+        "cs.LG"
+      ],
+      "bulletin_entry_kinds": [
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source": "论文Sections5.1/5.2/5.3及AppendixD/E.1；官方仓库README训练配置",
+        "model_scale": "345M与1B语言预训练模型；Qwen3-VL视觉encoder和Qwen3-4B-Instruct语言骨干",
+        "data_scale": "FineWeb约30B tokens，扩展模型100B tokens；LLaVA-558K及1.3M多模态instruction样本",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "paper_configuration": "345M模型30000优化步、8K context、global batch128、8×H100；多模态两阶段分别训练merger及merger+语言骨干、16×H100；不编造总GPU小时数",
+        "estimated_cost_basis": "多卡全量预训练和4B多模态两阶段训练明显超出单卡短时组件验证预算；依据原文配置推断，不是本地测量，不启动试跑确认成本",
+        "decision": "成本过高，不复现（审查 DONE）；完整模型训练及多基准评测不下载、不执行、不自动重试。只保留独立公式、outer gradient及小张量L1诊断，不宣称预训练能力或服务加速"
+      },
+      "requires_gpu_validation": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "component_evidence": "docs/foundation-models/2610.31574-ttr-compressor/metrics/component-cuda-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "四项冻源三种子L1验收，三个张量组件真实A100执行；高成本完整实验不复现，不宣称能力。",
+      "gpu_validation_artifact": "docs/gpu-validations/ttr-compressor-a100-20261024.json"
+    },
+    {
+      "id": "2610.30932",
+      "key": "userarena-optd",
+      "domain": "post-training",
+      "title": "UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents",
+      "paper_url": "https://arxiv.org/abs/2610.30932v1",
+      "detail_path": "post-training/2610.30932-userarena-optd/README.md",
+      "priority": "P1",
+      "first_author": "Jujia Zhao",
+      "first_author_affiliation": "Leiden University",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T08:54:16Z",
+      "intake_class": "same-announcement-overlap-backfill",
+      "first_publication_after_baseline_capture": false,
+      "observed_versions": [
+        "2610.30932v1"
+      ],
+      "bulletin_categories": [
+        "cs.IR"
+      ],
+      "bulletin_entry_kinds": [
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source": "论文Section2/4、AppendixB.2/B.3与C.1",
+        "model_scale": "Qwen3.5-2B共享视觉语言基座、冻结教师和可训练学生；Qwen3.5-397B生成轨迹意图与rationale",
+        "data_scale": "11010用户、64729sessions、577670actions；32kcontext、535公开heldout单session不能代替全数据训练",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "paper_configuration": "SFT warmup后ROLL/vLLM/Megatron分布式BF16训练；原文未给总GPU时数，不编造估计；10k用户双臂完整模拟另含多基线、多次rollout",
+        "estimated_cost_basis": "需397B教师生成、双2B视觉模型与大规模长会话及多方法评测，明显不是单卡低成本组件验证",
+        "decision": "成本过高，不复现（审查 DONE）；不下载模型/数据、不调用API、不自动重试。只实现Eq5-10损失，不宣称接入官方benchmark"
+      },
+      "requires_gpu_validation": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "component_evidence": "docs/post-training/2610.30932-userarena-optd/metrics/component-cuda-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "四项冻源三种子L1验收，三个张量组件真实A100执行；高成本完整实验不复现，不宣称能力。",
+      "gpu_validation_artifact": "docs/gpu-validations/userarena-optd-a100-20261024.json"
+    },
+    {
+      "id": "2610.30873",
+      "key": "moer",
+      "domain": "post-training",
+      "title": "MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback",
+      "paper_url": "https://arxiv.org/abs/2610.30873v1",
+      "detail_path": "post-training/2610.30873-moer/README.md",
+      "priority": "P1",
+      "first_author": "Xuyang Zhong",
+      "first_author_affiliation": "City University of Hong Kong",
+      "verified_priority_organizations": [],
+      "original_published_at": "2026-10-22T07:54:45Z",
+      "intake_class": "same-announcement-overlap-backfill",
+      "first_publication_after_baseline_capture": false,
+      "observed_versions": [
+        "2610.30873v1"
+      ],
+      "bulletin_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "bulletin_entry_kinds": [
+        "cross-list",
+        "new"
+      ],
+      "status": "implemented",
+      "implementation_status": "component_only",
+      "delivery_status": "bounded_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source": "论文Sec.5.1与固定作者exp_scripts/train.sh、README主配置",
+        "model_scale": "Qwen2.5-Math-7B主模型，另有1.5B、7B-Instruct、14B-Instruct；DeepSeek-R1专家解法",
+        "data_scale": "OpenR1-Math-46k-8192，以及代码训练和数学/泛领域多基准；没有下载任何数据",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "paper_configuration": "作者launcher 1节点8GPU，30epochs，rollout batch128、group8、生成上限8192、update batch64；prefix horizon500不是训练step上限；论文entropy .01与launcher .001存在差异",
+        "estimated_cost_basis": "单个rollout batch配置生成token上限128*8*8192=8388608，非实测token量或耗时；完整7B多GPU长rollout、多方法与多模型评估超预算",
+        "decision": "成本过高，不复现（审查 DONE）；仅独立数值组件，不下载权重、不试跑证明昂贵、不自动重试"
+      },
+      "requires_gpu_validation": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "component_evidence": "docs/post-training/2610.30873-moer/metrics/component-cuda-seeds42-44.json",
+      "resolution": "bounded_l1_component_accepted",
+      "reason": "四项冻源三种子L1验收，三个张量组件真实A100执行；高成本完整实验不复现，不宣称能力。",
+      "gpu_validation_artifact": "docs/gpu-validations/moer-a100-20261024.json"
+    }
+  ],
+  "additional_dispositions": [
+    {
+      "id": "2610.30933",
+      "title": "ReflectPO",
+      "source_url": "https://arxiv.org/html/2610.30933v1",
+      "original_published_at": "2026-10-22T08:54:24Z",
+      "first_author": "Rumei Li",
+      "first_author_affiliation": "Meituan, China",
+      "decision": "not_reproduced_high_cost",
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "code": null,
+      "code_status": "not_found_in_reviewed_primary_sources",
+      "upstream_revision": null,
+      "code_license": null,
+      "read_scope": "defining algorithm and Appendix A.1 resources, not a full-method implementation approval",
+      "cost_assessment": {
+        "source": "Appendix A.1",
+        "scale": "8xH800141GB; Qwen3-4B/8B;3epochs;8original trajectories/up to128contrast and64recovery;24576response cap;DeepSeek-V4-Pro guide",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac",
+        "measurement_owner": "authors, not local run"
+      },
+      "reason": "完整实验成本过高，不复现（审查 DONE）。不能用普通奖励std替代canonical prefix-tree全局advantage std，不能只mask而不移除hint；zero-sigma边界未确认，不虚构组件。"
+    },
+    {
+      "id": "2610.31276",
+      "title": "RIPPLE",
+      "source_url": "https://arxiv.org/html/2610.31276v1",
+      "original_published_at": "2026-10-22T13:45:33Z",
+      "first_author": "Jingxuan Xu",
+      "first_author_affiliation": "National University of Singapore, Singapore",
+      "decision": "not_reproduced_high_cost",
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "code": null,
+      "code_status": "not_found_in_reviewed_primary_sources",
+      "upstream_revision": null,
+      "code_license": null,
+      "read_scope": "defining recovery/attribution algorithm and resource setup, not full capability reproduction",
+      "cost_assessment": {
+        "source": "paper experiment and method passages",
+        "scale": "Qwen3.5-27B actor;SFT/learned GRM recovery teacher;frozen semantic consistency/attribution judge;150tool turns;3seeds and4repository benchmarks;exactGPU count not disclosed",
+        "available_resource": "One NVIDIA A100 or A30, or local Mac",
+        "measurement_owner": "authors, not local run"
+      },
+      "reason": "完整实验成本过高，不复现（审查 DONE）。学习式恢复教师与语义归因不可替换成规则；stage-sign gate只路由已有优势，不能给平奖励零优势组伪造学习信号。"
+    }
+  ],
+  "component_count": 4,
+  "gpu_validated_component_count": 3,
+  "capability_reproductions_claimed": 0
+}
