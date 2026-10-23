@@ -2,6 +2,10 @@
 
 论文按第一作者所属机构聚合；产品和社区项目单独标明，避免把开源作者误写成论文机构。
 
+## Independent Researcher
+
+- [When Multiple Choices Are Correct](../2610.29217-jev-multicorrect/README.md)（2026-10-21，一作Rushab Munot）：审计多个正确项的概率不对称及阈值集合恢复；仅CPU评分/校准协议，不复现商业API完整实验。
+
 ## Aalto University
 
 - [System One多模态重排](../../multimodal-models/2610.28435-system-one-rerank/README.md)（2026-10-20）：联合查询与图文候选单次前向，读取字母logits完成choice排序；A100小VLM组件诊断，不宣称复现27B完整结果。

@@ -1,14 +1,15 @@
 # 多模态大模型方法索引
 
-本页汇总具有独立源码入口的论文；公开数据实跑与 GPU 验收状态请查各篇详情和回执。
+本页汇总论文实现与高成本研究资料；收录不等于已实现。公开数据实跑与 GPU 验收状态请查各篇详情和回执。
 底座 connector 与论文 genome 的对应关系也在同一处维护。
 
-## 已实现论文
+## 论文实现与研究资料
 
 <div class="ar-method-index" markdown>
 
 | 方法族 | 论文 / 官方模型 | 机构与日期 | Adapter / 独立组件 |
 |---|---|---|---|
+| 代码、视频与动作联合生成 | [Agentic World Action Models](../multimodal-models/2610.30136-aw0/README.md) | UC Berkeley，2026-10-21 | 未复现（高成本资料） |
 | 单次前向结构化重排 | [Multimodal Reranking Is a System One Decision](../multimodal-models/2610.28435-system-one-rerank/README.md) | Aalto University，2026-10-20 | `system-one-rerank` |
 | 视觉证据约束蒸馏 | [CV-OPD: Contrastive Vision On-policy Distillation](../reproductions/2610.13264-cv-opd/README.md) | Xiamen University，2026-10-09 | `cv-opd` |
 | 视觉 token 压缩与动态证据恢复 | [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](../multimodal-models/2610.12060-vimod/README.md) | City University of Hong Kong，2026-10-08 | `vimod` |

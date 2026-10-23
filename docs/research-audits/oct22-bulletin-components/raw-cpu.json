@@ -1,0 +1,454 @@
+{
+  "schema_version": 2,
+  "device": "cpu",
+  "accelerator": "CPU",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_commit": "d767be53ac5a8a79f2b02aa23db0fcf3773ae588",
+  "source_sha256": {
+    "scripts/run_oct22_bulletin_components.py": "0581649a3e872529905359709a0a7d21b44bbb5ce129b43cd4f65df75895b323",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/foundation_models/alps.py": "92f71f68fe01d5489327c5d7d89afca43b453722ae4b785336f43d3934830269",
+    "src/auto_research/agent_research/asteroid.py": "95fd728c6a80779d73f89e2d2ca9e96ad2ce2d6c94ac6994727df222452e4a5f",
+    "src/auto_research/post_training/cord.py": "2616a3a9ea93bdbd1402b12be6112f3eef7cd08dc9a61c672156ed03470e5984",
+    "src/auto_research/post_training/csd.py": "a4b08dc51e57cceec3a488cc0439de22b3212f8f3d0db21d79a381c047986739",
+    "src/auto_research/system_one/multicorrect.py": "a6169b61c950ef7b5b40825afefefc3e7a02e018da4e4fc3b6d2c23d880a1406"
+  },
+  "components": {
+    "alps": {
+      "per_seed": [
+        {
+          "paper": "2610.30120v1",
+          "seed": 42,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "pretrained_model_calls": 0,
+          "dataset": "generated-crop-query-token-contract-suite",
+          "upstream_revision": "30ab44b9fcdf3253fc67f5a53e31ea5141eb45c1",
+          "recipe": {
+            "batch": 2,
+            "grid": 4,
+            "query_width": 8,
+            "token_channels": 6,
+            "predictor": "test-only linear readout, not the ALPS transformer"
+          },
+          "checks": {
+            "independent_formula_match": true,
+            "finite_student_query_gradients": true,
+            "frozen_teacher_has_no_gradient": true,
+            "masked_patch_gradient_is_zero": true,
+            "remove_overlap_mask_changes_loss": true,
+            "remove_fixed_statistics_changes_loss": true,
+            "remove_geometry_changes_queries": true
+          },
+          "metrics": {
+            "formula_absolute_error": 0.0,
+            "overlap_patch_count": 13.0,
+            "removed_overlap_loss_delta": 0.8248319625854492,
+            "removed_standardization_loss_delta": 4.7322773933410645,
+            "removed_geometry_query_mse": 1.6427996158599854,
+            "masked_patch_gradient_max": 0.0,
+            "query_parameter_gradient_norm": 6.593062400817871,
+            "pretrained_model_calls": 0.0
+          }
+        },
+        {
+          "paper": "2610.30120v1",
+          "seed": 43,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "pretrained_model_calls": 0,
+          "dataset": "generated-crop-query-token-contract-suite",
+          "upstream_revision": "30ab44b9fcdf3253fc67f5a53e31ea5141eb45c1",
+          "recipe": {
+            "batch": 2,
+            "grid": 4,
+            "query_width": 8,
+            "token_channels": 6,
+            "predictor": "test-only linear readout, not the ALPS transformer"
+          },
+          "checks": {
+            "independent_formula_match": true,
+            "finite_student_query_gradients": true,
+            "frozen_teacher_has_no_gradient": true,
+            "masked_patch_gradient_is_zero": true,
+            "remove_overlap_mask_changes_loss": true,
+            "remove_fixed_statistics_changes_loss": true,
+            "remove_geometry_changes_queries": true
+          },
+          "metrics": {
+            "formula_absolute_error": 0.0,
+            "overlap_patch_count": 13.0,
+            "removed_overlap_loss_delta": 1.1692123413085938,
+            "removed_standardization_loss_delta": 12.183868408203125,
+            "removed_geometry_query_mse": 1.089174747467041,
+            "masked_patch_gradient_max": 0.0,
+            "query_parameter_gradient_norm": 23.80451774597168,
+            "pretrained_model_calls": 0.0
+          }
+        },
+        {
+          "paper": "2610.30120v1",
+          "seed": 44,
+          "device": "cpu",
+          "evaluation_tier": "l1_mechanism",
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "pretrained_model_calls": 0,
+          "dataset": "generated-crop-query-token-contract-suite",
+          "upstream_revision": "30ab44b9fcdf3253fc67f5a53e31ea5141eb45c1",
+          "recipe": {
+            "batch": 2,
+            "grid": 4,
+            "query_width": 8,
+            "token_channels": 6,
+            "predictor": "test-only linear readout, not the ALPS transformer"
+          },
+          "checks": {
+            "independent_formula_match": true,
+            "finite_student_query_gradients": true,
+            "frozen_teacher_has_no_gradient": true,
+            "masked_patch_gradient_is_zero": true,
+            "remove_overlap_mask_changes_loss": true,
+            "remove_fixed_statistics_changes_loss": true,
+            "remove_geometry_changes_queries": true
+          },
+          "metrics": {
+            "formula_absolute_error": 7.62939453125e-06,
+            "overlap_patch_count": 13.0,
+            "removed_overlap_loss_delta": 0.7109298706054688,
+            "removed_standardization_loss_delta": 1.9837875366210938,
+            "removed_geometry_query_mse": 2.088308811187744,
+            "masked_patch_gradient_max": 0.0,
+            "query_parameter_gradient_norm": 32.73790740966797,
+            "pretrained_model_calls": 0.0
+          }
+        }
+      ]
+    },
+    "asteroid": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "initial_context_free_nll": 1.1395612955093384,
+            "last_training_nll": 0.6258044838905334,
+            "accumulated_expert_nll": 0.6159164905548096,
+            "parameter_update_l2": 5.058658123016357,
+            "last_gradient_l2": 0.2943573296070099,
+            "optimizer_steps": 54.0,
+            "expert_query_count": 72.0,
+            "student_context_episodes": 72.0,
+            "nll_reference_abs_error": 0.0,
+            "same_public_history_logit_abs_error": 2.384185791015625e-07,
+            "history_reward_logit_effect": 3.303102970123291,
+            "masked_future_logit_abs_error": 0.0
+          },
+          "checks": {
+            "finite_metrics": true,
+            "real_parameter_update": true,
+            "real_finite_gradient": true,
+            "expert_only_nll_matches_reference": true,
+            "student_never_receives_latent_or_label": true,
+            "history_changes_learned_policy": true,
+            "causal_padding_isolation": true,
+            "curriculum_zero_one_two_episodes": true,
+            "successful_teacher_episodes_only": true
+          }
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "initial_context_free_nll": 1.1893736124038696,
+            "last_training_nll": 0.6569346189498901,
+            "accumulated_expert_nll": 0.6491920351982117,
+            "parameter_update_l2": 4.921875953674316,
+            "last_gradient_l2": 0.292868435382843,
+            "optimizer_steps": 54.0,
+            "expert_query_count": 72.0,
+            "student_context_episodes": 72.0,
+            "nll_reference_abs_error": 5.960464477539063e-08,
+            "same_public_history_logit_abs_error": 2.384185791015625e-07,
+            "history_reward_logit_effect": 4.655209541320801,
+            "masked_future_logit_abs_error": 0.0
+          },
+          "checks": {
+            "finite_metrics": true,
+            "real_parameter_update": true,
+            "real_finite_gradient": true,
+            "expert_only_nll_matches_reference": true,
+            "student_never_receives_latent_or_label": true,
+            "history_changes_learned_policy": true,
+            "causal_padding_isolation": true,
+            "curriculum_zero_one_two_episodes": true,
+            "successful_teacher_episodes_only": true
+          }
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "initial_context_free_nll": 1.3569434881210327,
+            "last_training_nll": 0.6213041543960571,
+            "accumulated_expert_nll": 0.616044819355011,
+            "parameter_update_l2": 5.14244270324707,
+            "last_gradient_l2": 0.2875896394252777,
+            "optimizer_steps": 54.0,
+            "expert_query_count": 72.0,
+            "student_context_episodes": 72.0,
+            "nll_reference_abs_error": 1.1920928955078125e-07,
+            "same_public_history_logit_abs_error": 0.0,
+            "history_reward_logit_effect": 4.750732421875,
+            "masked_future_logit_abs_error": 0.0
+          },
+          "checks": {
+            "finite_metrics": true,
+            "real_parameter_update": true,
+            "real_finite_gradient": true,
+            "expert_only_nll_matches_reference": true,
+            "student_never_receives_latent_or_label": true,
+            "history_changes_learned_policy": true,
+            "causal_padding_isolation": true,
+            "curriculum_zero_one_two_episodes": true,
+            "successful_teacher_episodes_only": true
+          }
+        }
+      ]
+    },
+    "cord": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "optimizer_updates": 3,
+            "micro_batches_per_update": 2,
+            "projection_count": 3,
+            "gradient_reference_error": 2.220446049250313e-16,
+            "protected_first_order_error": 2.220446049250313e-16,
+            "per_micro_projection_negative_gap": 0.5,
+            "always_vs_conflict_gate_gap": 2.23606797749979,
+            "student_parameter_delta": 0.09466902410184942,
+            "final_first_loss": 1.1170973722885744,
+            "final_second_loss": 1.3560377002183013
+          },
+          "checks": {
+            "three_real_updates": true,
+            "independent_gradient_reference": true,
+            "protected_first_order_identity": true,
+            "accumulate_before_project_negative_control": true,
+            "always_differs_on_aligned_gradients": true,
+            "no_optimizer_direction_guarantee_claim": true
+          }
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "optimizer_updates": 3,
+            "micro_batches_per_update": 2,
+            "projection_count": 3,
+            "gradient_reference_error": 1.1102230246251565e-16,
+            "protected_first_order_error": 0.0,
+            "per_micro_projection_negative_gap": 0.5,
+            "always_vs_conflict_gate_gap": 2.23606797749979,
+            "student_parameter_delta": 0.07221457978957563,
+            "final_first_loss": 1.282446380756478,
+            "final_second_loss": 0.8165002623979212
+          },
+          "checks": {
+            "three_real_updates": true,
+            "independent_gradient_reference": true,
+            "protected_first_order_identity": true,
+            "accumulate_before_project_negative_control": true,
+            "always_differs_on_aligned_gradients": true,
+            "no_optimizer_direction_guarantee_claim": true
+          }
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "optimizer_updates": 3,
+            "micro_batches_per_update": 2,
+            "projection_count": 3,
+            "gradient_reference_error": 1.1102230246251565e-16,
+            "protected_first_order_error": 2.220446049250313e-16,
+            "per_micro_projection_negative_gap": 0.5,
+            "always_vs_conflict_gate_gap": 2.23606797749979,
+            "student_parameter_delta": 0.09545484874049634,
+            "final_first_loss": 1.244770870524934,
+            "final_second_loss": 1.158445156589459
+          },
+          "checks": {
+            "three_real_updates": true,
+            "independent_gradient_reference": true,
+            "protected_first_order_identity": true,
+            "accumulate_before_project_negative_control": true,
+            "always_differs_on_aligned_gradients": true,
+            "no_optimizer_direction_guarantee_claim": true
+          }
+        }
+      ]
+    },
+    "csd": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "optimizer_updates": 3,
+            "accepted_chunks": 5,
+            "student_vocabulary": 10,
+            "teacher_vocabulary": 12,
+            "loss_reference_error": 8.881784197001252e-16,
+            "gradient_reference_error": 3.572142581731441e-14,
+            "normalization_error": 2.220446049250313e-16,
+            "no_chain_negative_gap": 0.06189398456595033,
+            "no_residual_negative_gap": 0.0883488037507694,
+            "student_parameter_delta": 0.3834679494954665,
+            "final_loss": 5.350531380249651,
+            "final_kd": 0.07805599946362278
+          },
+          "checks": {
+            "three_real_updates": true,
+            "frozen_teacher": true,
+            "all_four_chunk_shapes": true,
+            "value_reference_agrees": true,
+            "gradient_reference_agrees": true,
+            "normalized_with_rest": true,
+            "no_chain_negative_control": true,
+            "no_residual_negative_control": true
+          }
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "optimizer_updates": 3,
+            "accepted_chunks": 5,
+            "student_vocabulary": 10,
+            "teacher_vocabulary": 12,
+            "loss_reference_error": 8.881784197001252e-16,
+            "gradient_reference_error": 1.0375728054512479e-13,
+            "normalization_error": 2.220446049250313e-16,
+            "no_chain_negative_gap": 0.03457129307018293,
+            "no_residual_negative_gap": 0.05717321328523106,
+            "student_parameter_delta": 0.3187495960007468,
+            "final_loss": 5.555340360712984,
+            "final_kd": 0.08015853675433679
+          },
+          "checks": {
+            "three_real_updates": true,
+            "frozen_teacher": true,
+            "all_four_chunk_shapes": true,
+            "value_reference_agrees": true,
+            "gradient_reference_agrees": true,
+            "normalized_with_rest": true,
+            "no_chain_negative_control": true,
+            "no_residual_negative_control": true
+          }
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "optimizer_updates": 3,
+            "accepted_chunks": 5,
+            "student_vocabulary": 10,
+            "teacher_vocabulary": 12,
+            "loss_reference_error": 1.7763568394002505e-15,
+            "gradient_reference_error": 6.833422716567839e-14,
+            "normalization_error": 2.220446049250313e-16,
+            "no_chain_negative_gap": 0.07608032065313582,
+            "no_residual_negative_gap": 0.11126455233299687,
+            "student_parameter_delta": 0.32056715661878077,
+            "final_loss": 5.3704690509263475,
+            "final_kd": 0.09200652337751362
+          },
+          "checks": {
+            "three_real_updates": true,
+            "frozen_teacher": true,
+            "all_four_chunk_shapes": true,
+            "value_reference_agrees": true,
+            "gradient_reference_agrees": true,
+            "normalized_with_rest": true,
+            "no_chain_negative_control": true,
+            "no_residual_negative_control": true
+          }
+        }
+      ]
+    },
+    "jev-multicorrect": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "checks": {
+            "ranking_not_set_recovery": true,
+            "low_mass_correct_choice_counted": true,
+            "test_does_not_refit_threshold": true,
+            "validation_test_overlap_rejected": true,
+            "refusal_not_empty_set_success": true,
+            "public_predictor_has_no_gold": true,
+            "identical_copy_reference": true,
+            "ece_excluding_low_bin_renormalizes": true
+          },
+          "metrics": {
+            "scorer_contract_cases": 8,
+            "validation_overlap_rejections": 1,
+            "model_calls": 0
+          }
+        },
+        {
+          "seed": 43,
+          "checks": {
+            "ranking_not_set_recovery": true,
+            "low_mass_correct_choice_counted": true,
+            "test_does_not_refit_threshold": true,
+            "validation_test_overlap_rejected": true,
+            "refusal_not_empty_set_success": true,
+            "public_predictor_has_no_gold": true,
+            "identical_copy_reference": true,
+            "ece_excluding_low_bin_renormalizes": true
+          },
+          "metrics": {
+            "scorer_contract_cases": 8,
+            "validation_overlap_rejections": 1,
+            "model_calls": 0
+          }
+        },
+        {
+          "seed": 44,
+          "checks": {
+            "ranking_not_set_recovery": true,
+            "low_mass_correct_choice_counted": true,
+            "test_does_not_refit_threshold": true,
+            "validation_test_overlap_rejected": true,
+            "refusal_not_empty_set_success": true,
+            "public_predictor_has_no_gold": true,
+            "identical_copy_reference": true,
+            "ece_excluding_low_bin_renormalizes": true
+          },
+          "metrics": {
+            "scorer_contract_cases": 8,
+            "validation_overlap_rejections": 1,
+            "model_calls": 0
+          }
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 2.5281780418008566,
+  "diagnostic_only": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_reproduced_high_cost"
+}

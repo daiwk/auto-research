@@ -10,8 +10,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Agentic RL | [CORD: Conflict-Aware Optimization for Joint RL and Distillation in Agents](2610.29965-cord/README.md) | The Chinese University of Hong Kong，2026-10-21 | [原作者入口](https://github.com/LvAoAo/CORD-release)；原论文首页链接原作者开源仓库；固定快照的cord_utils实现保护第一目标的冲突投影，论文另定义交换保护方向与always门控 | `cord`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation](2610.28194-ap-opd/README.md) | Nanjing University，2026-10-20 | 未发现官方代码 | `ap-opd`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Ask to Distill: Learning to Synthesize Data for On-Policy Distillation](2610.27450-ask-to-distill/README.md) | University of Illinois Urbana-Champaign，2026-10-20 | [原作者入口](https://github.com/GasolSun36/Ask_to_Distill)；原作者公开代码、数据和模型；固定版本核验reward_worker与diversity接口 | `ask-to-distill`：仅低成本组件，完整实验不复现 |
+| 知识蒸馏 | [CSD: Common-Support Distillation for Cross-Tokenizer Knowledge Transfer](2610.28895-csd/README.md) | NVIDIA，2026-10-20 | [原作者入口](https://github.com/NVIDIA-NeMo/RL/pull/4680)；正文脚注链接原作者公开PR4680；固定head可读取CSD loss与sub-token工具，核对时PR仍open，不将其标成已合并发布或完整GPU qualification | `csd`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [On-Policy Transition Distillation](2610.28048-optd/README.md) | The Hong Kong Polytechnic University，2026-10-20 | [原作者入口](https://github.com/ModalityDance/optd)；原作者已发布源码；PDF首页链接已核对，仓库包含verl训练代码、配置与测试 | `optd`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Projected Distillation: On Learning to Solve Hard Problems from Close, Correct Targets](2610.27467-projected-distillation/README.md) | University of Massachusetts，2026-10-20 | 未发现官方代码 | `projected-distillation`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization](2610.25973-apsd/README.md) | Korea University，2026-10-19 | 未发现官方代码 | `apsd`：仅低成本组件，完整实验不复现 |

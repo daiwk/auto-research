@@ -12,6 +12,7 @@
 
 | 方向 | 方法 | 机构 | 日期 | 主要方法 | 本地入口 |
 |---|---|---|---|---|---|
+| 多正确项校准审计 | [When Multiple Choices Are Correct](2610.29217-jev-multicorrect/README.md) | Independent Researcher | 2026-10-21 | 分离概率排序、完整集合恢复与独立二元校准；验证阈值固定后再评测test | CPU评分/隔离契约，未调用JEV，完整API实验高成本不复现 |
 | 多模态choice重排 | [Multimodal Reranking Is a System One Decision](../multimodal-models/2610.28435-system-one-rerank/README.md) | Aalto University | 2026-10-20 | 同一图文上下文单前向读取候选字母logits，稳定重排并保留尾部 | SmolVLM-256M真实A100前向；仅L1接口，完整27B实验不复现 |
 | 检索判定与重排 | [Jev 葡语 IR](../foundation-models/2610.23346-jev-portuguese-ir/README.md) | Câmara dos Deputados | 2026-10-16 | Choice 有序 qrels 与独立 Noul 概率排序分离，线性 nDCG/MRR、加权 κ 与 τ-b | CPU 协议接口与原文表格算术复核；未评测 Jev，完整实验不复现 |
 | 选项独立决策 | [Prism-1](../foundation-models/2610.22066-prism-1/README.md) | NTU | 2026-10-15 | block mask 与共享位置消除跨选项依赖，以 yes/no 对数赔率形成选择分布 | 独立小模型组件，A100三种子机制验证；完整实验不复现 |

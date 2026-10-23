@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "method": "cord",
+  "manifest_ref": "post-training:cord",
+  "dataset": {
+    "id": "synthetic:oct22-bulletin-cord-v1",
+    "revision": "sha256:1dc0f401f242d6bea9435763cc2023d4f84d134164e3386e3f6ad8052696c716",
+    "recipe": "source-frozen-generated-mechanism-contract-inputs",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "optimizer_updates": 3,
+        "micro_batches_per_update": 2,
+        "projection_count": 3,
+        "gradient_reference_error": 2.220446049250313e-16,
+        "protected_first_order_error": 0.0,
+        "per_micro_projection_negative_gap": 0.5,
+        "always_vs_conflict_gate_gap": 2.23606797749979,
+        "student_parameter_delta": 0.09466902410184942,
+        "final_first_loss": 1.1170973722885746,
+        "final_second_loss": 1.3560377002183013
+      },
+      "checks": {
+        "three_real_updates": true,
+        "independent_gradient_reference": true,
+        "protected_first_order_identity": true,
+        "accumulate_before_project_negative_control": true,
+        "always_differs_on_aligned_gradients": true,
+        "no_optimizer_direction_guarantee_claim": true
+      }
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "optimizer_updates": 3,
+        "micro_batches_per_update": 2,
+        "projection_count": 3,
+        "gradient_reference_error": 1.1102230246251565e-16,
+        "protected_first_order_error": 2.220446049250313e-16,
+        "per_micro_projection_negative_gap": 0.5,
+        "always_vs_conflict_gate_gap": 2.23606797749979,
+        "student_parameter_delta": 0.07221457978957563,
+        "final_first_loss": 1.282446380756478,
+        "final_second_loss": 0.8165002623979212
+      },
+      "checks": {
+        "three_real_updates": true,
+        "independent_gradient_reference": true,
+        "protected_first_order_identity": true,
+        "accumulate_before_project_negative_control": true,
+        "always_differs_on_aligned_gradients": true,
+        "no_optimizer_direction_guarantee_claim": true
+      }
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "optimizer_updates": 3,
+        "micro_batches_per_update": 2,
+        "projection_count": 3,
+        "gradient_reference_error": 1.1102230246251565e-16,
+        "protected_first_order_error": 2.220446049250313e-16,
+        "per_micro_projection_negative_gap": 0.5,
+        "always_vs_conflict_gate_gap": 2.23606797749979,
+        "student_parameter_delta": 0.09545484874049634,
+        "final_first_loss": 1.244770870524934,
+        "final_second_loss": 1.158445156589459
+      },
+      "checks": {
+        "three_real_updates": true,
+        "independent_gradient_reference": true,
+        "protected_first_order_identity": true,
+        "accumulate_before_project_negative_control": true,
+        "always_differs_on_aligned_gradients": true,
+        "no_optimizer_direction_guarantee_claim": true
+      }
+    }
+  ],
+  "metrics": {
+    "always_vs_conflict_gate_gap": {
+      "mean": 2.23606797749979,
+      "std": 0.0,
+      "n": 3
+    },
+    "final_first_loss": {
+      "mean": 1.2147715411899955,
+      "std": 0.08666050698408864,
+      "n": 3
+    },
+    "final_second_loss": {
+      "mean": 1.1103277064018937,
+      "std": 0.27296818214191143,
+      "n": 3
+    },
+    "gradient_reference_error": {
+      "mean": 1.4802973661668753e-16,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "micro_batches_per_update": {
+      "mean": 2,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "per_micro_projection_negative_gap": {
+      "mean": 0.5,
+      "std": 0.0,
+      "n": 3
+    },
+    "projection_count": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "protected_first_order_error": {
+      "mean": 1.4802973661668753e-16,
+      "std": 1.2819751242557092e-16,
+      "n": 3
+    },
+    "student_parameter_delta": {
+      "mean": 0.08744615087730713,
+      "std": 0.013196777956802175,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "generated mechanism/scorer contracts, no pretrained capability or full-paper comparison"
+  },
+  "provenance": {
+    "commit": "d767be53ac5a8a79f2b02aa23db0fcf3773ae588",
+    "artifact_path": "docs/post-training/2610.29965-cord/metrics/component-cuda-seeds42-44.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct22_bulletin_components.py": "0581649a3e872529905359709a0a7d21b44bbb5ce129b43cd4f65df75895b323",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/foundation_models/alps.py": "92f71f68fe01d5489327c5d7d89afca43b453722ae4b785336f43d3934830269",
+      "src/auto_research/agent_research/asteroid.py": "95fd728c6a80779d73f89e2d2ca9e96ad2ce2d6c94ac6994727df222452e4a5f",
+      "src/auto_research/post_training/cord.py": "2616a3a9ea93bdbd1402b12be6112f3eef7cd08dc9a61c672156ed03470e5984",
+      "src/auto_research/post_training/csd.py": "a4b08dc51e57cceec3a488cc0439de22b3212f8f3d0db21d79a381c047986739",
+      "src/auto_research/system_one/multicorrect.py": "a6169b61c950ef7b5b40825afefefc3e7a02e018da4e4fc3b6d2c23d880a1406"
+    },
+    "raw_runner_artifact_sha256": "201500f7b1656614d340d30afc9892a1ebeb369e2865769c23cb7170457e1831",
+    "dataset_fingerprint": "sha256:cef46508a41e290d5539779f885f59863a402bf4f4d0353c5757b421578ca294"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "pretrained_model_calls": 0,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

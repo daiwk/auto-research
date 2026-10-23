@@ -3,6 +3,8 @@ import hashlib
 import json
 from pathlib import Path
 
+import pytest
+
 from auto_research.discovery import repository_paper_records
 from auto_research.gpu_validation import load_gpu_receipt
 from scripts.closeout_google16_components import AUDIT, BATCH, GPU_KEYS, KEYS, build
@@ -71,3 +73,35 @@ def test_checked_in_evidence_survives_squash_merge_without_old_git_refs(monkeypa
 
     monkeypatch.setattr(closeout.subprocess, "check_output", forbidden)
     assert closeout.build(check=True)["component_count"] == 16
+
+
+@pytest.mark.parametrize("corrupt_owned", [False, True])
+def test_historical_figure_check_preserves_later_rows_but_rejects_owned_changes(monkeypatch, corrupt_owned):
+    from copy import deepcopy
+    import scripts.closeout_google16_components as closeout
+
+    path = ROOT/"docs/paper-figures-manifest.json"
+    original_read, original_write = closeout.read, closeout.write
+    virtual = deepcopy(original_read(path))
+    future = {"page": "docs/future/README.md", "arxiv_id": "9999.99999", "sha256": "future-owned"}
+    virtual.append(future)
+    if corrupt_owned:
+        next(row for row in virtual if row.get("arxiv_id") in KEYS)["sha256"] = "wrong-owned-hash"
+
+    def read_with_future(target):
+        return deepcopy(virtual) if target == path else original_read(target)
+
+    def check_virtual(target, value, check):
+        if target == path:
+            assert check and value == virtual, "owned figure fields changed"
+            assert value[-1] == future
+        else:
+            original_write(target, value, check)
+
+    monkeypatch.setattr(closeout, "read", read_with_future)
+    monkeypatch.setattr(closeout, "write", check_virtual)
+    if corrupt_owned:
+        with pytest.raises(AssertionError, match="owned figure fields changed"):
+            closeout.build(check=True)
+    else:
+        assert closeout.build(check=True)["component_count"] == 16

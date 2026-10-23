@@ -307,7 +307,15 @@ def sync_figures(specs, check):
             "asset": str(image.relative_to(ROOT)), "width": width, "height": height,
             "score": 0, "error": "", "sha256": sha(image),
             "visually_inspected": True})
-    write(path, output, check)
+    # A historical batch owns its figure rows, not their position relative to
+    # later batches. Replace owned rows in place so adding a new paper does not
+    # make an unchanged historical closeout appear stale. All owned field
+    # values still pass through the same exact write/check comparison.
+    owned = {row["arxiv_id"]: row for row in output if row["arxiv_id"] in KEYS}
+    ordered = [owned[row["arxiv_id"]] if row.get("arxiv_id") in owned else row for row in manifest]
+    seen = {row.get("arxiv_id") for row in manifest}
+    ordered.extend(row for row in output if row["arxiv_id"] in owned and row["arxiv_id"] not in seen)
+    write(path, ordered, check)
 
 
 def main():

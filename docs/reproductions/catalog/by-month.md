@@ -3,6 +3,7 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-10
+- [Progressive Learning from Content to Relevance to Personalization for CTR Prediction](../../recommendation-components/2610.29138-finesid/README.md)：把多尺度视觉和字段化文本离散token送入有序融合/HiFormer，先用教师软相关性训练整个共享预测器，再保留完整状态迁移到个性化CTR微调。正文有淘宝七天量化线上A/B；64H20与私有大数据成本过高，仅收录方法和证据，不提供伪替代运行。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Baseline and Incremental: User, Item, and Request Debiasing in Instagram Feed Ranking](../../recommendation-components/2610.27423-baseline-incremental/README.md)：保留原始参与度预测，并为相对用户、商品或请求基线的增量项独立加权；实现logit/raw比较、sigmoid门、hinge及地板不消失的降权门。正文有全流量部署与四臂线上消融；本地仅L1评分机制，不复现私有排名系统或线上收益。
 - [ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling](../../recommendation-components/2610.28569-echo-selector-loss/README.md)：用户侧DS保存原始历史记录，再由目标感知TFR读取；候选感知教师用逐目标软分布和选择边界成对监督训练DS。本地实现温度缩放CE、detached挖掘/权重与全batch归一边界损失，A100验证梯度隔离；不实现完整TWIN、实时双图或排名能力。
 - [SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs](../../recommendation-components/2610.27898-spar-prefix-balance/README.md)：PATH按已生成SID前缀读取粗到细用户记忆，RQ-PIB在冻结残差码本后按历史交互负载修复兄弟分支；本地只实现含不可分商品权重上界的最小可行失真移动，不声称全局最优、不训练PATH/Qwen/DPO。
