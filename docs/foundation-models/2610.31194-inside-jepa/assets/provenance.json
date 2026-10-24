@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.31194v1",
+  "source_url": "https://arxiv.org/html/2610.31194v1/fig_arms.png",
+  "figure": "Figure 2",
+  "source_format": "original PNG embedded in fixed arXiv v1 HTML",
+  "image": "paper-figure-01.png",
+  "image_sha256": "2fd394d98eb613fbc7288ceb80b7574be2009ef5fb3826457bafc3e8c62cdf49",
+  "pixel_dimensions": [825, 282],
+  "description": "Original five-arm architecture and gradient routing diagram; saved without crop, redraw or scientific-content changes",
+  "copyright": "Hossein Resani and Javen Qinfeng Shi; paper licensed CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "visually_verified": true
+}

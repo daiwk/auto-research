@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 世界模型 | [Inside-JEPA: From Prediction to Relational Grounding in Latent World Models](2610.31194-inside-jepa/README.md) | Australian Institute for Machine Learning, Adelaide University，2026-10-22 | 未发现官方代码 | `inside-jepa`：仅低成本组件，完整实验不复现 |
 | System One / JEV | [Jev-DLC: Decision-Level Continual Learning from Typed Feedback](../system-one/2610.31521-jev-dlc/README.md) | The Hong Kong University of Science and Technology (Guangzhou)，2026-10-22 | 未发现官方代码 | `jev-dlc`：仅低成本组件，完整实验不复现 |
 | 高效注意力 | [OpenAttention: One Percent Is Enough with Tail Proxies](2610.30951-openattention/README.md) | Sogang University，2026-10-22 | [原作者入口](https://github.com/hyunwoo137/OpenAttention)；已公开Apache-2.0源码；核对固定commit 6e43d4fc8c0e95b26d17d198a4545c627b2d6931；本地独立实现单头张量参考，不移植Triton内核或宣称端到端加速 | `openattention`：仅低成本组件，完整实验不复现 |
 | 序列压缩 | [Rethinking Sequence Compression with Test-time Regression](2610.31574-ttr-compressor/README.md) | The Chinese University of Hong Kong，2026-10-22 | [原作者入口](https://github.com/Sphere-AI-Lab/ttr-compressor)；官方公开源码，固定commit 29f643f1348a4b3893f4740433b1fc8b8c39b2e7；未找到顶层或TTR核心文件的明确授权声明，仅第三方子项目带各自许可证；本地独立按论文公式重写，不复制上游核心代码 | `ttr-compressor`：仅低成本组件，完整实验不复现 |

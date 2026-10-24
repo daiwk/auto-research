@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "adapter_key": "inside-jepa",
+  "validated_at": "2026-10-25",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python3",
+    "scripts/run_oct25_priority_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "cc8126d359c51676920f8a072b5a46374254e13e",
+    "--frozen-proof",
+    "oct25-frozen-proof-final.json",
+    "--output",
+    "results/components-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:oct25-inside-jepa-v1",
+    "revision": "sha256:8e4b4bc1bceebc7e648dd17641b3eca6e38238036ddc74f2b13ccf85ebadb611",
+    "recipe": "seeded-frozen-source-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "cc8126d359c51676920f8a072b5a46374254e13e",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "batch": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "crop_feature_dimension": {
+      "mean": 512,
+      "std": 0.0,
+      "n": 3
+    },
+    "current_channel_inverse_gradient_norm": {
+      "mean": 0.18160361548264822,
+      "std": 0.0028080891031594243,
+      "n": 3
+    },
+    "ema_max_abs_error": {
+      "mean": 5.463759104410807e-08,
+      "std": 5.641488577723775e-08,
+      "n": 3
+    },
+    "entity_slots": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_loss_after": {
+      "mean": 108.28119405110677,
+      "std": 2.614756472866326,
+      "n": 3
+    },
+    "fixture_loss_before": {
+      "mean": 115.472412109375,
+      "std": 2.8917863524023897,
+      "n": 3
+    },
+    "forward_loss_before": {
+      "mean": 114.06467692057292,
+      "std": 2.880066543093873,
+      "n": 3
+    },
+    "future_channel_inverse_gradient_norm": {
+      "mean": 0.17820462584495544,
+      "std": 0.005365467107430531,
+      "n": 3
+    },
+    "inv_r_direct_channel_gradient_norm": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "inv_s_direct_channel_gradient_norm": {
+      "mean": 0.3639500637849172,
+      "std": 0.007187656554630923,
+      "n": 3
+    },
+    "inv_shuf_direct_channel_gradient_norm": {
+      "mean": 0.36017892758051556,
+      "std": 0.008675335305174108,
+      "n": 3
+    },
+    "inv_z_direct_channel_gradient_norm": {
+      "mean": 0.23697900275389353,
+      "std": 0.004384416270837994,
+      "n": 3
+    },
+    "inverse_loss_before": {
+      "mean": 1.4077358643213909,
+      "std": 0.012652707425836938,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "shuffled_forward_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "shuffled_inverse_loss_gap": {
+      "mean": 0.0037719408671061196,
+      "std": 0.0016378073720762331,
+      "n": 3
+    },
+    "state_dimension": {
+      "mean": 256,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct25_priority_components.py": "4f5a755db126ef07985f85ccdd8fcb28b0d78c92a9dcc2da43764f3b04eba1ef",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/post_training/minimal_edit_opd.py": "47f5174b996c890a4db0eb6a902b320d70bef9ca7b42d32e7fe63cbe01ac8ddf",
+    "src/auto_research/foundation_models/inside_jepa.py": "02e9826e4d865eff11999750f49bfe9aa70efa517d2af03fbb13d74bc754d489",
+    "src/auto_research/post_training/group_dpo.py": "db352c406e742482aa66742f9ae1faeb9a819d51e025eed63d39a5dd55239c48"
+  },
+  "provenance": {
+    "commit": "cc8126d359c51676920f8a072b5a46374254e13e",
+    "artifact_path": "docs/gpu-validations/inside-jepa-a100-20261025.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct25_priority_components.py": "4f5a755db126ef07985f85ccdd8fcb28b0d78c92a9dcc2da43764f3b04eba1ef",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/post_training/minimal_edit_opd.py": "47f5174b996c890a4db0eb6a902b320d70bef9ca7b42d32e7fe63cbe01ac8ddf",
+      "src/auto_research/foundation_models/inside_jepa.py": "02e9826e4d865eff11999750f49bfe9aa70efa517d2af03fbb13d74bc754d489",
+      "src/auto_research/post_training/group_dpo.py": "db352c406e742482aa66742f9ae1faeb9a819d51e025eed63d39a5dd55239c48"
+    },
+    "raw_runner_artifact_sha256": "ef1417286fa3367db470d3f40582593901137da868586f65f85ffe1b0d5f2ceb",
+    "dataset_fingerprint": "sha256:3fcc216be94f4dcb39387f3ac4f46bce4f359771bd78619084b61a6a58617cc7",
+    "metric_artifact_path": "docs/foundation-models/2610.31194-inside-jepa/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

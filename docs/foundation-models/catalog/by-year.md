@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-10 · [Inside-JEPA: From Prediction to Relational Grounding in Latent World Models](../../foundation-models/2610.31194-inside-jepa/README.md)（`inside-jepa`）：普通 JEPA 能预测潜在状态，但潜变量未必对应可解释关系。本文把每个有序实体对的关系通道直接拼入动态状态，并要求逆动态头根据前后关系通道恢复动作；预测损失的未来目标仍由 EMA 编码器提供，而逆动态的未来状态必须来自**可反传的 online 编码器**。仅预测、读全部状态、只读实体和打乱动作标签的对照用于区分信号来自哪里。[原文 §3](https://arxiv.org/html/2610.31194v1#S3)
 - 2026-10 · [Jev-DLC: Decision-Level Continual Learning from Typed Feedback](../../system-one/2610.31521-jev-dlc/README.md)（`jev-dlc`）：类型化决策能给出明确 accept 或 revoke(旧选择→新选择)。Jev-DLC 不把完整历史重新塞进模型，而是在冻结 scorer 上维护两个紧凑通道：保守通道记住重复动作的语义计数与局部方向；响应通道只存当前修正方向。反馈只能影响**之后**的请求，不能先看当前正确答案再报成功。
 - 2026-10 · [OpenAttention: One Percent Is Enough with Tail Proxies](../../foundation-models/2610.30951-openattention/README.md)（`openattention`）：低读取率稀疏注意力不只需要选出少量重要 KV，还需要处理未读取的尾部。OpenAttention 在 query 二阶矩定义的几何空间内聚类，以 ErrorGate 估计簇内代理误差并分配精确读取预算；每个簇的未读部分成为一个带计数的均值代理。它不是单纯的 top-k 截断或均值池化。
 - 2026-10 · [Rethinking Sequence Compression with Test-time Regression](../../foundation-models/2610.31574-ttr-compressor/README.md)（`ttr-compressor`）：固定池化或投影分别聚合 token，难以按当前输入的相关结构调整压缩。TTR 把一组 token 视作回归观测：由 token 方向构造 key，由保留模长的原始 token 生成可学习标量 target；每次前向精确求解 ridge 系数，直接把系数作为压缩表示。外层任务 loss 通过闭式求解训练 target 投影与正则。

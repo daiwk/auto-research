@@ -1,0 +1,13 @@
+{
+  "paper_id": "2610.30231v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2610.30231v1#S1.F1",
+  "source_url": "https://arxiv.org/html/2610.30231v1/minimal_edit_overview.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "380f77da6e5591e8c55aac2864b82c617a023bbdc67d84775446955577efc522",
+  "license": "CC BY 4.0",
+  "transformation": "none",
+  "visual_review": "已与原PDF第2页Figure1逐项目视核对：几何输入、学生rollout、rule-based verifier、正确GRPO/错误teacher两支、k符号、纠错mask与policy回路一致。原始PNG未裁剪、未重绘",
+  "checked_on": "2026-10-25"
+}

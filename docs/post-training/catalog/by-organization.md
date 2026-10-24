@@ -98,6 +98,10 @@
 
 - 2026-07-28 · 一作：Bo-Wen Zhang · [CoRT](../2607.25659-cort/README.md)（`cort`）：对同一响应分别在带 rubric 和去 criteria 的上下文中重放，用 token 似然差重分配 GRPO 的响应级 advantage。
 
+## Carnegie Mellon University
+
+- 2026-04-17 · 一作：Jixuan Leng · [GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization](../2604.15602-group-dpo/README.md)（`group-dpo`）：GroupDPO 先无梯度计算**所有响应在当前参数点的全组导数**，再固定这些系数逐响应微批次反传，保留完整组目标的一阶梯度。它支持一条提示的多个正负响应，避免为计算组目标而同时保留整组模型激活；不保证替身损失值或二阶导数等价。
+
 ## Chongqing University
 
 - 2026-09-10 · 一作：Bincheng Gu · [Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning](../2609.11393-tasco/README.md)（`tasco`）：冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。
@@ -266,6 +270,7 @@
 
 ## Meta Superintelligence Labs
 
+- 2026-10-21 · 一作：Wen Ye · [Edit, Don't Imitate: Minimal-Edit On-Policy Distillation for Multimodal Reasoning](../2610.30231-minimal-edit-opd/README.md)（`minimal-edit-opd`）：ME-OPD 用训练专属描述与参考解法，让教师为错误的学生回答打分，只纠正教师不支持的 token；正确回答只走任务奖励，避免整段模仿。它针对小型视觉语言模型误读斜边、标签或几何关系的问题，保留原回答中无需修改的推导与措辞。
 - 2026-09-12 · 一作：Sourabh Kulkarni · [MaD-RL: Matching Distributions for Calibrating LLMs with Reinforcement Learning](../2609.31644-mad-rl/README.md)（`mad-rl`）：逐条最大化正确性奖励可能令输出类别坍缩；MaD-RL为输出的类别频率拟合指定分布，而非仅提高token熵。它将组内频率与目标类别分布构造的L2、forward-KL、reverse-KL或JSD奖励，与任务正确性结合后用于GRPO。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Meta Superintelligence Labs / University of Wisconsin–Madison
