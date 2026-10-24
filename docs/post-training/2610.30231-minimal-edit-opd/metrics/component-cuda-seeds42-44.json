@@ -1,0 +1,205 @@
+{
+  "schema_version": 2,
+  "method": "minimal-edit-opd",
+  "manifest_ref": "post-training:minimal-edit-opd",
+  "dataset": {
+    "id": "synthetic:oct25-minimal-edit-opd-v1",
+    "revision": "sha256:8e4b4bc1bceebc7e648dd17641b3eca6e38238036ddc74f2b13ccf85ebadb611",
+    "recipe": "seeded-frozen-source-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "component": "minimal_edit_frozen_routing_selected_token_loss",
+      "metrics": {
+        "loss_before": -0.9382070415624643,
+        "loss_after": -0.9389771388627952,
+        "gradient_norm": 0.27744219533894515,
+        "parameter_delta": 0.0027744219533894516,
+        "formula_reference_error": 0.0,
+        "gradient_reference_error": 2.7755575615628914e-17,
+        "selected_tokens": 5,
+        "correct_rollouts": 3,
+        "optimizer_updates": 1,
+        "model_calls": 0
+      },
+      "checks": {
+        "formula_reference_matches": true,
+        "gradient_reference_matches": true,
+        "old_policy_detached": true,
+        "teacher_detached": true,
+        "rewards_detached": true,
+        "full_group_advantages": true,
+        "frozen_old_mask": true,
+        "strict_sign_and_failed_only": true,
+        "padding_zero_gradient": true,
+        "unselected_failed_zero_gradient": true,
+        "finite_gradient": true,
+        "real_parameter_update": true,
+        "fixed_objective_decreased": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "component": "minimal_edit_frozen_routing_selected_token_loss",
+      "metrics": {
+        "loss_before": -0.9382070415624643,
+        "loss_after": -0.9385905480484338,
+        "gradient_norm": 0.1958198773299128,
+        "parameter_delta": 0.0019581987732991586,
+        "formula_reference_error": 0.0,
+        "gradient_reference_error": 2.7755575615628914e-17,
+        "selected_tokens": 5,
+        "correct_rollouts": 3,
+        "optimizer_updates": 1,
+        "model_calls": 0
+      },
+      "checks": {
+        "formula_reference_matches": true,
+        "gradient_reference_matches": true,
+        "old_policy_detached": true,
+        "teacher_detached": true,
+        "rewards_detached": true,
+        "full_group_advantages": true,
+        "frozen_old_mask": true,
+        "strict_sign_and_failed_only": true,
+        "padding_zero_gradient": true,
+        "unselected_failed_zero_gradient": true,
+        "finite_gradient": true,
+        "real_parameter_update": true,
+        "fixed_objective_decreased": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "component": "minimal_edit_frozen_routing_selected_token_loss",
+      "metrics": {
+        "loss_before": -0.9382070415624643,
+        "loss_after": -0.938630160659242,
+        "gradient_norm": 0.2056733105929445,
+        "parameter_delta": 0.0020567331059295124,
+        "formula_reference_error": 3.3306690738754696e-16,
+        "gradient_reference_error": 4.163336342344337e-17,
+        "selected_tokens": 5,
+        "correct_rollouts": 3,
+        "optimizer_updates": 1,
+        "model_calls": 0
+      },
+      "checks": {
+        "formula_reference_matches": true,
+        "gradient_reference_matches": true,
+        "old_policy_detached": true,
+        "teacher_detached": true,
+        "rewards_detached": true,
+        "full_group_advantages": true,
+        "frozen_old_mask": true,
+        "strict_sign_and_failed_only": true,
+        "padding_zero_gradient": true,
+        "unselected_failed_zero_gradient": true,
+        "finite_gradient": true,
+        "real_parameter_update": true,
+        "fixed_objective_decreased": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "correct_rollouts": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "formula_reference_error": {
+      "mean": 1.1102230246251565e-16,
+      "std": 1.9229626863835638e-16,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 0.22631179442060081,
+      "std": 0.04455346182195302,
+      "n": 3
+    },
+    "gradient_reference_error": {
+      "mean": 3.23815048849004e-17,
+      "std": 8.012344526598183e-18,
+      "n": 3
+    },
+    "loss_after": {
+      "mean": -0.9387326158568237,
+      "std": 0.00021268736462419128,
+      "n": 3
+    },
+    "loss_before": {
+      "mean": -0.9382070415624643,
+      "std": 0.0,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_updates": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta": {
+      "mean": 0.002263117944206041,
+      "std": 0.00044553461821950416,
+      "n": 3
+    },
+    "selected_tokens": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "mechanism diagnostics; not pretrained capability or full reproduction"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "cc8126d359c51676920f8a072b5a46374254e13e",
+    "artifact_path": "docs/post-training/2610.30231-minimal-edit-opd/metrics/component-cuda-seeds42-44.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct25_priority_components.py": "4f5a755db126ef07985f85ccdd8fcb28b0d78c92a9dcc2da43764f3b04eba1ef",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/post_training/minimal_edit_opd.py": "47f5174b996c890a4db0eb6a902b320d70bef9ca7b42d32e7fe63cbe01ac8ddf",
+      "src/auto_research/foundation_models/inside_jepa.py": "02e9826e4d865eff11999750f49bfe9aa70efa517d2af03fbb13d74bc754d489",
+      "src/auto_research/post_training/group_dpo.py": "db352c406e742482aa66742f9ae1faeb9a819d51e025eed63d39a5dd55239c48"
+    },
+    "raw_runner_artifact_sha256": "ef1417286fa3367db470d3f40582593901137da868586f65f85ffe1b0d5f2ceb",
+    "dataset_fingerprint": "sha256:38ea2d9a0755a4f975c642799788f66eb7333e1b87e2b7aa27ff37688314e4c1"
+  }
+}

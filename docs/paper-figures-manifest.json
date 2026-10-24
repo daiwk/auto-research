@@ -13067,5 +13067,53 @@
     "error": "",
     "sha256": "d42fab57609028caf8865ef0f21d3fa568eed207dae07bf89a0f3432a27aa4aa",
     "visually_inspected": true
+  },
+  {
+    "page": "docs/post-training/2610.30231-minimal-edit-opd/README.md",
+    "paper_url": "https://arxiv.org/abs/2610.30231v1",
+    "arxiv_id": "2610.30231",
+    "figure": "1",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/html/2610.30231v1/minimal_edit_overview.png",
+    "extraction": "original-reviewed-paper-figure",
+    "asset": "docs/post-training/2610.30231-minimal-edit-opd/assets/paper-figure-01.png",
+    "width": 1529,
+    "height": 670,
+    "score": 0,
+    "error": "",
+    "sha256": "380f77da6e5591e8c55aac2864b82c617a023bbdc67d84775446955577efc522",
+    "visually_inspected": true
+  },
+  {
+    "page": "docs/foundation-models/2610.31194-inside-jepa/README.md",
+    "paper_url": "https://arxiv.org/abs/2610.31194v1",
+    "arxiv_id": "2610.31194",
+    "figure": "Figure 2",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/html/2610.31194v1/fig_arms.png",
+    "extraction": "original-reviewed-paper-figure",
+    "asset": "docs/foundation-models/2610.31194-inside-jepa/assets/paper-figure-01.png",
+    "width": 825,
+    "height": 282,
+    "score": 0,
+    "error": "",
+    "sha256": "2fd394d98eb613fbc7288ceb80b7574be2009ef5fb3826457bafc3e8c62cdf49",
+    "visually_inspected": true
+  },
+  {
+    "page": "docs/post-training/2604.15602-group-dpo/README.md",
+    "paper_url": "https://arxiv.org/abs/2604.15602v1",
+    "arxiv_id": "2604.15602",
+    "figure": "1",
+    "original_caption": "",
+    "source_url": "https://arxiv.org/html/2604.15602v2/figures/overview.png",
+    "extraction": "original-reviewed-paper-figure",
+    "asset": "docs/post-training/2604.15602-group-dpo/assets/paper-figure-01.png",
+    "width": 4000,
+    "height": 2112,
+    "score": 0,
+    "error": "",
+    "sha256": "07e7b9f623c04739e3be1fc912c414a903648212e33085f204f0b48c026ae159",
+    "visually_inspected": true
   }
 ]

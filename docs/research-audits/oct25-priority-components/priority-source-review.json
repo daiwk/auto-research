@@ -1,0 +1,48 @@
+{
+  "checked_at_utc": "2026-10-24T17:29:55Z",
+  "local_review_date": "2026-10-25",
+  "scope": "bounded Google/Meta priority source delta; not an exhaustive review of every conference-listed paper",
+  "google_event": {
+    "url": "https://research.google/conferences-and-events/google-at-emnlp-2026/",
+    "tool_read_success": true,
+    "observed": "Official Google event page states Oct24-29 Budapest and 31 accepted papers, and directly links GroupDPO arXiv2604.15602. 31 is accepted-paper page size, not newly published-paper count.",
+    "raw_curl_status": "failed: connection timed out after 60 seconds; no HTML hash claimed",
+    "page_first_published_timestamp": "not provided; retrieval time is not publication time",
+    "historical_backfill": "2604.15602"
+  },
+  "group_dpo": {
+    "paper_url": "https://arxiv.org/abs/2604.15602v1",
+    "v1_at": "2026-04-17T00:56:59Z",
+    "reviewed_version_url": "https://arxiv.org/html/2604.15602v2",
+    "v2_at": "2026-09-01T19:34:39Z",
+    "first_author": "Jixuan Leng",
+    "first_author_first_affiliation": "Carnegie Mellon University",
+    "priority_relation": "Paper header identifies work during Google internship; SiSi/VinodRaman GoogleDeepMind and HsiangFuYu/InderjitDhillon Google",
+    "official_publication_url": "https://research.google/pubs/groupdpo-memory-efficient-group-wise-direct-preference-optimization/",
+    "author_publication_url": "https://jixuanleng.com/publications/",
+    "upstream_code": "not found in paper, Google page or author publication page; same-name anonymous plotting repository has no verified author link or training-source provenance",
+    "cost": "Full Table7 experiment8/32H100 or8train+16rolloutH100; high cost DONE not reproduced. One faithful L1 component accepted by root."
+  },
+  "ambigui": {
+    "url": "https://github.com/facebookresearch/AmbiGUI",
+    "commit": "36625125c690573257b807c2a1028812a9a8d13d",
+    "committed_at": "2026-10-23T16:39:15Z",
+    "license": "CC-BY-NC-4.0",
+    "disposition": "release-only, no paper intake: official README says citation will be added when paper published and uses TBD author/year; no exact paper identity/v1 can be claimed"
+  },
+  "genia": {
+    "url": "https://github.com/facebookresearch/GenIA",
+    "default_branch": "release",
+    "commit": "6fbd691ac90248eedb16e1099f2c7bef6831c69c",
+    "committed_at": "2026-10-09T05:46:29Z",
+    "repo_pushed_at": "2026-10-24T10:12:38Z",
+    "paper_url": "https://arxiv.org/abs/2610.12388v1",
+    "v1_at": "2026-10-08T17:38:56Z",
+    "first_author": "Stefano Esposito",
+    "first_author_first_affiliation": "Tübingen AI Center, University of Tübingen",
+    "priority_relation": "Meta coauthors verified in official repository; first institution remains Tübingen",
+    "license": "CC-BY-NC-4.0, third-party licenses separate",
+    "cost_basis": "Frozen SAM3D Objects checkpoints plus MapAnything/MoGe/ActionMesh, CUDA12.8/gsplat/nvdiffrast render stack and test-time optimization; no large downloads or probes performed",
+    "disposition": "historical missing high-cost paper, review DONE not reproduced; Oct24 repo pushed timestamp does not show a new release because release HEAD is Oct9"
+  }
+}

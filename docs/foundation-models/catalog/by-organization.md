@@ -15,6 +15,10 @@
 
 - 2026-10-15 · [EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video](../../foundation-models/2610.22681-ego-p2c/README.md)（`ego-p2c`）：第一视角视频空间推理既要提问、采集证据，也要保证感知回答可靠。固定外部视觉工具无法随推理策略一起改进；把规划与感知压到同一组参数中又可能引入梯度冲突。
 
+## Australian Institute for Machine Learning, Adelaide University
+
+- 2026-10-22 · [Inside-JEPA: From Prediction to Relational Grounding in Latent World Models](../../foundation-models/2610.31194-inside-jepa/README.md)（`inside-jepa`）：普通 JEPA 能预测潜在状态，但潜变量未必对应可解释关系。本文把每个有序实体对的关系通道直接拼入动态状态，并要求逆动态头根据前后关系通道恢复动作；预测损失的未来目标仍由 EMA 编码器提供，而逆动态的未来状态必须来自**可反传的 online 编码器**。仅预测、读全部状态、只读实体和打乱动作标签的对照用于区分信号来自哪里。[原文 §3](https://arxiv.org/html/2610.31194v1#S3)
+
 ## Authors did not disclose affiliation
 
 - 2026-07-31 · [TransMem: Transforming Hidden States into Memory for Large Language Models](../../reproductions/2607.29032-transmem/README.md)（`transmem`）：将冻结骨干的稀疏历史 hidden states 变换成可复用参数记忆，并用 evidence-conditioned self-distillation 学门控。

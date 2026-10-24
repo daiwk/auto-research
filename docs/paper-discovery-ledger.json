@@ -131649,6 +131649,313 @@
           "gpu_validation_artifact": "docs/gpu-validations/moer-a100-20261024.json"
         }
       ]
+    },
+    {
+      "schema_version": 1,
+      "batch": "2026-10-25-priority-backfill-components",
+      "delivery_status": "bounded_scope_complete",
+      "all_sources_exhaustive": false,
+      "review_watermark_advanced": false,
+      "date": "2026-10-25",
+      "scope_kind": "priority-fulltext-and-conference-backfill",
+      "source_artifact": "research-audits/oct25-priority-components/README.md",
+      "selected_scope_complete": true,
+      "counts": {
+        "selected_papers": 3,
+        "components_pending_verification": 0,
+        "recent_overlap_backfills": 2,
+        "historical_official_source_backfills": 1,
+        "new_first_publications_after_previous_capture": 0,
+        "category_entries_including_crosslists_and_replacements": 1260,
+        "unique_bulletin_identities": 916,
+        "snapshot_added_base_identities_not_new_paper_count": 0,
+        "snapshot_added_version_strings_not_revision_count": 0,
+        "section_entry_counts": {
+          "new": 499,
+          "cross-list": 287,
+          "replacement": 474
+        },
+        "official_directory_delta_unknown": 2,
+        "components_accepted": 3,
+        "gpu_validated_components": 3,
+        "capability_reproductions_claimed": 0
+      },
+      "additional_dispositions": [
+        {
+          "id": "2610.30425",
+          "title": "Getting a GRIP on Graph-Based Search for Learned Sparse Retrieval",
+          "source_url": "https://arxiv.org/html/2610.30425v1",
+          "original_published_at": "2026-10-21T20:33:04Z",
+          "first_author": "Vihan Lakshman",
+          "first_author_affiliation": "MIT CSAIL",
+          "decision": "not_reproduced_high_cost",
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "code_status": "Method-specific author repository not verified; the kannolo base library is not treated as proof of a released GRIP implementation",
+          "cost_assessment": {
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "source_section": "Section4 resource setup and Tables1--2",
+            "scale": "Author engine uses30vCPU/222GB RAM, MS MARCOv1 8.8M orv2 138M passages; reported build47/54min or7.3h and8.8/12.3/140GB indexes",
+            "measurement_owner": "authors, not local run",
+            "decision": "成本过高，不复现（审查 DONE）"
+          },
+          "reason": "Full SparsePiPNN/HashPrune/RobustPrune, sparse sketches, term-seeded search and exact beam rescoring are not replaced by a seed-only heuristic. No large index, model or benchmark downloaded; no controlled online A/B established for industrial-model intake. Separate from existing unrelated post-training key grip."
+        },
+        {
+          "id": "2610.12388",
+          "title": "GenIA: Generative Reconstruction with Test-Time Input Alignment",
+          "source_url": "https://arxiv.org/abs/2610.12388v1",
+          "original_published_at": "2026-10-08T17:38:56Z",
+          "first_author": "Stefano Esposito",
+          "first_author_affiliation": "Tübingen AI Center, University of Tübingen",
+          "verified_priority_organizations": [
+            "Meta"
+          ],
+          "code": "https://github.com/facebookresearch/GenIA",
+          "upstream_revision": "6fbd691ac90248eedb16e1099f2c7bef6831c69c",
+          "code_license": "CC-BY-NC-4.0; third-party licenses separate",
+          "repository_pushed_at_not_new_release": "2026-10-24T10:12:38Z",
+          "observed_release_head_committed_at": "2026-10-09T05:46:29Z",
+          "intake_class": "historical_backfill_not_new_release",
+          "decision": "not_reproduced_high_cost",
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "cost_assessment": {
+            "available_resource": "One NVIDIA A100 or A30, or local Mac",
+            "source_url": "https://github.com/facebookresearch/GenIA/tree/6fbd691ac90248eedb16e1099f2c7bef6831c69c",
+            "scale": "SAM3D Objects checkpoints, MapAnything/MoGe/ActionMesh, CUDA/gsplat/nvdiffrast rendering stack and test-time optimization",
+            "measurement_owner": "author configuration, not local run",
+            "decision": "成本过高，不复现（审查 DONE）"
+          },
+          "reason": "Historical Meta collaboration verified through official source. Repository pushed timestamp does not prove a new paper/release because the release HEAD is Oct9. Full 3D reconstruction and test-time optimization exceed bounded component scope; no weights, render-stack installation or expensive probe."
+        },
+        {
+          "id": "official:facebookresearch/AmbiGUI",
+          "title": "AmbiGUI official repository release",
+          "source_url": "https://github.com/facebookresearch/AmbiGUI/tree/36625125c690573257b807c2a1028812a9a8d13d",
+          "upstream_revision": "36625125c690573257b807c2a1028812a9a8d13d",
+          "source_released_at": "2026-10-23T16:39:15Z",
+          "verified_priority_organizations": [
+            "Meta"
+          ],
+          "code_license": "CC-BY-NC-4.0",
+          "paper_url": null,
+          "original_published_at": null,
+          "decision": "source_release_only_no_published_paper_identity",
+          "review_done": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "reason": "Official README states citation will be added when the paper is published and uses TBD author/year. Keep a source-release observation, not a fabricated paper identity/date, benchmark capability integration or pending implementation claim."
+        }
+      ],
+      "candidates": [
+        {
+          "id": "2610.30231",
+          "key": "minimal-edit-opd",
+          "domain": "post-training",
+          "title": "Edit, Don't Imitate: Minimal-Edit On-Policy Distillation for Multimodal Reasoning",
+          "paper_url": "https://arxiv.org/abs/2610.30231v1",
+          "detail_path": "post-training/2610.30231-minimal-edit-opd/README.md",
+          "priority": "P0",
+          "first_author": "Wen Ye",
+          "first_author_affiliation": "Meta Superintelligence Labs",
+          "verified_priority_organizations": [
+            "Meta"
+          ],
+          "original_published_at": "2026-10-21T17:59:28Z",
+          "intake_class": "same-announcement-overlap-backfill",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [
+            "2610.30231v1"
+          ],
+          "bulletin_categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "bulletin_entry_kinds": [
+            "cross-list",
+            "new"
+          ],
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "delivery_status": "bounded_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "cost_assessment": {
+            "source": "原论文Sec.4 Training setup、Appendix A Algorithm 1、Appendix B Tables6-7",
+            "model_scale": "Qwen3-VL-2B/8B学生配8B/32B教师，Qwen2.5-VL-7B学生配32B教师，另有2B/8B self-teacher",
+            "data_scale": "Geometry3K每训练题离线最多32条参考解法筛选，约2.1K过滤为1.8K题；多模型多基线及外部几何/数学评测",
+            "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+            "paper_configuration": "每题K=8，response cap2048，optimization minibatch96 problems，最多30epochs，learning rate1e-6，lambda=.01，双向clip=.2；教师对错误rollout处理Pt+2R而非Pt+R",
+            "estimated_cost_basis": "单个96*8*2048配置生成上限1572864token，非实测token量或耗时；论文FLOP模型中8B/32B cost ratio=.929，2B/8B=1.133，不能一概宣称更便宜",
+            "decision": "成本过高，不复现（审查 DONE）；只做L1张量组件，不下载权重或数据、不试跑完整VLM训练、不自动重试"
+          },
+          "requires_gpu_validation": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "doc": "post-training/2610.30231-minimal-edit-opd/README.md",
+          "catalog_key": "minimal-edit-opd",
+          "catalog_detail": "post-training/2610.30231-minimal-edit-opd/README.md",
+          "track": "post-training",
+          "resolution": "bounded_l1_component_accepted",
+          "review_artifact": "research-audits/oct25-priority-components/task-scope.json",
+          "full_text_review": {
+            "scope": "defining-method-resource-and-affiliation-review",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.30231v1",
+              "source_kind": "primary-method-resource-affiliation-review",
+              "organization": "Meta Superintelligence Labs"
+            }
+          ],
+          "reason": "三项冻源三种子CPU/真实A100验收；高成本完整实验不复现，不宣称能力或全窗口收口。",
+          "component_evidence": "docs/post-training/2610.30231-minimal-edit-opd/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/minimal-edit-opd-a100-20261025.json"
+        },
+        {
+          "id": "2610.31194",
+          "key": "inside-jepa",
+          "domain": "foundation-models",
+          "title": "Inside-JEPA: From Prediction to Relational Grounding in Latent World Models",
+          "paper_url": "https://arxiv.org/abs/2610.31194v1",
+          "detail_path": "foundation-models/2610.31194-inside-jepa/README.md",
+          "priority": "P1",
+          "first_author": "Hossein Resani",
+          "first_author_affiliation": "Australian Institute for Machine Learning, Adelaide University",
+          "verified_priority_organizations": [],
+          "original_published_at": "2026-10-22T12:43:03Z",
+          "intake_class": "same-announcement-overlap-backfill",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [
+            "2610.31194v1"
+          ],
+          "bulletin_categories": [
+            "cs.CV",
+            "cs.LG",
+            "cs.RO"
+          ],
+          "bulletin_entry_kinds": [
+            "cross-list",
+            "new"
+          ],
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "delivery_status": "bounded_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "cost_assessment": {
+            "source": "固定v1 Sections3--5、AppendicesA/F/I",
+            "model_scale": "冻结ImageNet ResNet18的5-relation模型912632可训练参数；微调backbone为12241248；另有V-JEPA2 ViT-L扩展",
+            "data_scale": "SSv2/Something-Else主设13954训练和14975验证帧对；RH20T全部83chunks约91.7GB，98395训练和25104验证帧对",
+            "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+            "paper_configuration": "五臂相同AdamW、batch64、lambda_inv=1；40epochs或主设8720steps，额外120epochs及3--5seeds；RH20T、检测追踪和V-JEPA2扩展另行多组训练。原文未给GPU型号或总GPU小时，不编造",
+            "estimated_cost_basis": "完整多数据集五臂多种子矩阵和91.7GB机器人数据超出单卡短时预算；是依据论文配置的成本推断，不用长试跑确认",
+            "decision": "成本过高，不复现（审查 DONE）；不下载原始视频、机器人数据或backbone权重，不执行完整实验、不自动重试。仅验证外部冻结512d特征接口上的可训练关系状态、EMA目标、forward/inverse损失和五臂梯度路由"
+          },
+          "requires_gpu_validation": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "doc": "foundation-models/2610.31194-inside-jepa/README.md",
+          "catalog_key": "inside-jepa",
+          "catalog_detail": "foundation-models/2610.31194-inside-jepa/README.md",
+          "track": "foundation-model",
+          "resolution": "bounded_l1_component_accepted",
+          "review_artifact": "research-audits/oct25-priority-components/task-scope.json",
+          "full_text_review": {
+            "scope": "defining-method-resource-and-affiliation-review",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2610.31194v1",
+              "source_kind": "primary-method-resource-affiliation-review",
+              "organization": "Australian Institute for Machine Learning, Adelaide University"
+            }
+          ],
+          "reason": "三项冻源三种子CPU/真实A100验收；高成本完整实验不复现，不宣称能力或全窗口收口。",
+          "component_evidence": "docs/foundation-models/2610.31194-inside-jepa/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/inside-jepa-a100-20261025.json"
+        },
+        {
+          "id": "2604.15602",
+          "key": "group-dpo",
+          "domain": "post-training",
+          "title": "GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization",
+          "paper_url": "https://arxiv.org/abs/2604.15602v1",
+          "detail_path": "post-training/2604.15602-group-dpo/README.md",
+          "priority": "P1",
+          "first_author": "Jixuan Leng",
+          "first_author_affiliation": "Carnegie Mellon University",
+          "verified_priority_organizations": [
+            "Google",
+            "Google DeepMind"
+          ],
+          "original_published_at": "2026-04-17T00:56:59Z",
+          "intake_class": "historical-official-conference-backfill",
+          "first_publication_after_baseline_capture": false,
+          "observed_versions": [],
+          "bulletin_categories": [],
+          "bulletin_entry_kinds": [],
+          "status": "implemented",
+          "implementation_status": "component_only",
+          "delivery_status": "bounded_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "full_experiment_review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "cost_assessment": {
+            "source": "固定arXiv2604.15602v2 AppendixA.3 Table7及Section5.3",
+            "model_scale": "Gemma3-4B、OLMo3-7B、OLMo3.1-32B和在线Qwen3-4B；候选评分另用8B reward model",
+            "data_scale": "Dolci-Instruct-DPO离线多响应分组与DAPO-Math-17k在线采样，响应最长8192token",
+            "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+            "paper_configuration": "全部H10080GB；离线4B/7B使用8GPU、32B使用32GPU，1139步；在线8训练GPU加16rolloutGPU，100步；另有单H100显存/延迟分析",
+            "estimated_cost_basis": "多模型训练、奖励评分和在线rollout明显超出当前单卡低成本预算；未实测单卡整套耗时，不给伪精确小时数",
+            "decision": "成本过高，不复现（审查 DONE）；只实现四个精确目标、全组固定系数和真正逐microbatch backward，不下载权重或大数据、不自动重试"
+          },
+          "requires_gpu_validation": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "doc": "post-training/2604.15602-group-dpo/README.md",
+          "catalog_key": "group-dpo",
+          "catalog_detail": "post-training/2604.15602-group-dpo/README.md",
+          "track": "post-training",
+          "resolution": "bounded_l1_component_accepted",
+          "review_artifact": "research-audits/oct25-priority-components/task-scope.json",
+          "full_text_review": {
+            "scope": "defining-method-resource-and-affiliation-review",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_url": "https://arxiv.org/abs/2604.15602v1",
+              "source_kind": "primary-method-resource-affiliation-review",
+              "organization": "Carnegie Mellon University"
+            }
+          ],
+          "reason": "三项冻源三种子CPU/真实A100验收；高成本完整实验不复现，不宣称能力或全窗口收口。",
+          "component_evidence": "docs/post-training/2604.15602-group-dpo/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/group-dpo-a100-20261025.json"
+        }
+      ]
     }
   ]
 }

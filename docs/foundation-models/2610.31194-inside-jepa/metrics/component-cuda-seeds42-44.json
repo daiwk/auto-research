@@ -1,0 +1,254 @@
+{
+  "schema_version": 2,
+  "method": "inside-jepa",
+  "manifest_ref": "foundation-models:inside-jepa",
+  "dataset": {
+    "id": "synthetic:oct25-inside-jepa-v1",
+    "revision": "sha256:8e4b4bc1bceebc7e648dd17641b3eca6e38238036ddc74f2b13ccf85ebadb611",
+    "recipe": "seeded-frozen-source-mechanism-contracts",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "forward_loss_before": 113.07412719726562,
+        "inverse_loss_before": 1.4089760780334473,
+        "fixture_loss_before": 114.48310089111328,
+        "fixture_loss_after": 107.51212310791016,
+        "current_channel_inverse_gradient_norm": 0.17836299538612366,
+        "future_channel_inverse_gradient_norm": 0.18248818814754486,
+        "ema_max_abs_error": 2.9802322387695312e-08,
+        "inv_r_direct_channel_gradient_norm": 0,
+        "inv_s_direct_channel_gradient_norm": 0.35565324127674103,
+        "inv_z_direct_channel_gradient_norm": 0.2357410043478012,
+        "inv_shuf_direct_channel_gradient_norm": 0.3589255064725876,
+        "shuffled_forward_max_abs_error": 0.0,
+        "shuffled_inverse_loss_gap": 0.0047359466552734375,
+        "batch": 4,
+        "entity_slots": 4,
+        "crop_feature_dimension": 512,
+        "state_dimension": 256,
+        "optimizer_steps": 1
+      },
+      "checks": {
+        "online_current_and_future_inverse_gradients": true,
+        "ema_target_is_stop_gradient": true,
+        "ema_update_matches_0996": true,
+        "ordered_pair_padding_and_diagonal_constant": true,
+        "four_slot_state_dimension_256": true,
+        "inverse_r_no_direct_channel_gradient": true,
+        "s_z_shuf_have_channel_gradients": true,
+        "shuffled_inverse_keeps_true_prediction_action": true,
+        "actual_online_optimizer_update": true,
+        "finite_nonincreasing_fixture_loss": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "forward_loss_before": 117.30929565429688,
+        "inverse_loss_before": 1.4197227954864502,
+        "fixture_loss_before": 118.72901916503906,
+        "fixture_loss_after": 111.1942367553711,
+        "current_channel_inverse_gradient_norm": 0.1831282675266266,
+        "future_channel_inverse_gradient_norm": 0.17993925511837006,
+        "ema_max_abs_error": 1.4901161193847656e-08,
+        "inv_r_direct_channel_gradient_norm": 0,
+        "inv_s_direct_channel_gradient_norm": 0.3679128438234329,
+        "inv_z_direct_channel_gradient_norm": 0.24184931069612503,
+        "inv_shuf_direct_channel_gradient_norm": 0.3521984815597534,
+        "shuffled_forward_max_abs_error": 0.0,
+        "shuffled_inverse_loss_gap": 0.0018808841705322266,
+        "batch": 4,
+        "entity_slots": 4,
+        "crop_feature_dimension": 512,
+        "state_dimension": 256,
+        "optimizer_steps": 1
+      },
+      "checks": {
+        "online_current_and_future_inverse_gradients": true,
+        "ema_target_is_stop_gradient": true,
+        "ema_update_matches_0996": true,
+        "ordered_pair_padding_and_diagonal_constant": true,
+        "four_slot_state_dimension_256": true,
+        "inverse_r_no_direct_channel_gradient": true,
+        "s_z_shuf_have_channel_gradients": true,
+        "shuffled_inverse_keeps_true_prediction_action": true,
+        "actual_online_optimizer_update": true,
+        "finite_nonincreasing_fixture_loss": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "forward_loss_before": 111.81060791015625,
+        "inverse_loss_before": 1.394508719444275,
+        "fixture_loss_before": 113.20511627197266,
+        "fixture_loss_after": 106.13722229003906,
+        "current_channel_inverse_gradient_norm": 0.1833195835351944,
+        "future_channel_inverse_gradient_norm": 0.17218643426895142,
+        "ema_max_abs_error": 1.1920928955078125e-07,
+        "inv_r_direct_channel_gradient_norm": 0,
+        "inv_s_direct_channel_gradient_norm": 0.36828410625457764,
+        "inv_z_direct_channel_gradient_norm": 0.23334669321775436,
+        "inv_shuf_direct_channel_gradient_norm": 0.3694127947092056,
+        "shuffled_forward_max_abs_error": 0.0,
+        "shuffled_inverse_loss_gap": 0.004698991775512695,
+        "batch": 4,
+        "entity_slots": 4,
+        "crop_feature_dimension": 512,
+        "state_dimension": 256,
+        "optimizer_steps": 1
+      },
+      "checks": {
+        "online_current_and_future_inverse_gradients": true,
+        "ema_target_is_stop_gradient": true,
+        "ema_update_matches_0996": true,
+        "ordered_pair_padding_and_diagonal_constant": true,
+        "four_slot_state_dimension_256": true,
+        "inverse_r_no_direct_channel_gradient": true,
+        "s_z_shuf_have_channel_gradients": true,
+        "shuffled_inverse_keeps_true_prediction_action": true,
+        "actual_online_optimizer_update": true,
+        "finite_nonincreasing_fixture_loss": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "batch": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "crop_feature_dimension": {
+      "mean": 512,
+      "std": 0.0,
+      "n": 3
+    },
+    "current_channel_inverse_gradient_norm": {
+      "mean": 0.18160361548264822,
+      "std": 0.0028080891031594243,
+      "n": 3
+    },
+    "ema_max_abs_error": {
+      "mean": 5.463759104410807e-08,
+      "std": 5.641488577723775e-08,
+      "n": 3
+    },
+    "entity_slots": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "fixture_loss_after": {
+      "mean": 108.28119405110677,
+      "std": 2.614756472866326,
+      "n": 3
+    },
+    "fixture_loss_before": {
+      "mean": 115.472412109375,
+      "std": 2.8917863524023897,
+      "n": 3
+    },
+    "forward_loss_before": {
+      "mean": 114.06467692057292,
+      "std": 2.880066543093873,
+      "n": 3
+    },
+    "future_channel_inverse_gradient_norm": {
+      "mean": 0.17820462584495544,
+      "std": 0.005365467107430531,
+      "n": 3
+    },
+    "inv_r_direct_channel_gradient_norm": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "inv_s_direct_channel_gradient_norm": {
+      "mean": 0.3639500637849172,
+      "std": 0.007187656554630923,
+      "n": 3
+    },
+    "inv_shuf_direct_channel_gradient_norm": {
+      "mean": 0.36017892758051556,
+      "std": 0.008675335305174108,
+      "n": 3
+    },
+    "inv_z_direct_channel_gradient_norm": {
+      "mean": 0.23697900275389353,
+      "std": 0.004384416270837994,
+      "n": 3
+    },
+    "inverse_loss_before": {
+      "mean": 1.4077358643213909,
+      "std": 0.012652707425836938,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "shuffled_forward_max_abs_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "shuffled_inverse_loss_gap": {
+      "mean": 0.0037719408671061196,
+      "std": 0.0016378073720762331,
+      "n": 3
+    },
+    "state_dimension": {
+      "mean": 256,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "mechanism diagnostics; not pretrained capability or full reproduction"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "cc8126d359c51676920f8a072b5a46374254e13e",
+    "artifact_path": "docs/foundation-models/2610.31194-inside-jepa/metrics/component-cuda-seeds42-44.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct25_priority_components.py": "4f5a755db126ef07985f85ccdd8fcb28b0d78c92a9dcc2da43764f3b04eba1ef",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/post_training/minimal_edit_opd.py": "47f5174b996c890a4db0eb6a902b320d70bef9ca7b42d32e7fe63cbe01ac8ddf",
+      "src/auto_research/foundation_models/inside_jepa.py": "02e9826e4d865eff11999750f49bfe9aa70efa517d2af03fbb13d74bc754d489",
+      "src/auto_research/post_training/group_dpo.py": "db352c406e742482aa66742f9ae1faeb9a819d51e025eed63d39a5dd55239c48"
+    },
+    "raw_runner_artifact_sha256": "ef1417286fa3367db470d3f40582593901137da868586f65f85ffe1b0d5f2ceb",
+    "dataset_fingerprint": "sha256:3fcc216be94f4dcb39387f3ac4f46bce4f359771bd78619084b61a6a58617cc7"
+  }
+}

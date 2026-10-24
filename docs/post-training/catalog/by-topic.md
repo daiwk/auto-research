@@ -44,6 +44,7 @@
 - [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](../2610.30796-gift/README.md)（`gift`）：终局正确性驱动的 RL 梯度与教师模仿梯度可能相冲突。GIFT 在原始词表 logits 空间分解两者：先最少纳入冲突 token，再优先保留提供正交新方向的教师监督；训练逐步缩减被蒸馏的 token 数量，保留项的强度不稀释。
 - [UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents](../2610.30932-userarena-optd/README.md)（`userarena-optd`）：逐步动作命中率不能说明用户模拟器能否保持跨会话偏好，更不能说明模拟出来的推荐政策差异是否接近真实生产A/B。UserArena把细粒度页面、动作和跨会话记录统一成13种动作环境，分Replay与Rollout评估五层保真度：可执行性、局部行为、轨迹动态、个体群体差异和最终结果。
 - [When to Follow the Teacher: Advantage-Based On-Policy Distillation](../2610.31563-aopd/README.md)（`aopd`）：普通 OPD 在学生实际访问的状态上模仿教师，但教师偏好的动作不一定能被当前学生继续完成。AOPD 用该动作对学生最终奖励的优势加权教师监督，通过学生原有 rollout、终局奖励及教师重要性比率估计，不额外生成反事实续写。
+- [Edit, Don't Imitate: Minimal-Edit On-Policy Distillation for Multimodal Reasoning](../2610.30231-minimal-edit-opd/README.md)（`minimal-edit-opd`）：ME-OPD 用训练专属描述与参考解法，让教师为错误的学生回答打分，只纠正教师不支持的 token；正确回答只走任务奖励，避免整段模仿。它针对小型视觉语言模型误读斜边、标签或几何关系的问题，保留原回答中无需修改的推导与措辞。
 - [Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation](../2610.28194-ap-opd/README.md)（`ap-opd`）：同样高的 OPD 惩罚可能是持续稳定的，也可能刚刚突增。AP-OPD 用相邻 token 块定位后一种情况，再把突增后整块监督按一个比率回拉；不增加教师 forward，不改变 token 系数的正负。
 - [Ask to Distill: Learning to Synthesize Data for On-Policy Distillation](../2610.27450-ask-to-distill/README.md)（`ask-to-distill`）：问题决定学生会走到哪些前缀，因而决定教师能提供什么监督。A2D 冻结评分用的师生，训练独立的问题合成器；奖励同时要求“有差异”和“教师偏好的候选仍落在学生可达支持集”，然后筛选问题库，再从原始学生初始化执行 OPD。
 - [On-Policy Transition Distillation](../2610.28048-optd/README.md)（`optd`）：最终层分布接近教师，不一定代表模型沿深度修正预测的方式接近教师。OPTD 保留最终层 OPD，再对选定浅到深 readout 的 log 概率增量施加监督。
@@ -171,6 +172,7 @@
 - [GAW-PO: Preference Optimization with Gradient-Aligned Token Weights](../2610.01511-gaw-po/README.md)（`gaw-po`）：用拒绝 token 梯度与 preferred update direction 的对齐度调节负权重；越支持优选行为的 token 越少受罚。
 - [A Zeroth-Order Paradigm for LLM Preference Alignment](../2609.19144-compo/README.md)（`compo`）：不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。
 - [Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data](../2609.16532-sd-dpo/README.md)（`sd-dpo`）：识别事实正确但风格不同的 rejected response，反转其偏好方向并按组比例加权以抵消风格梯度。
+- [GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization](../2604.15602-group-dpo/README.md)（`group-dpo`）：GroupDPO 先无梯度计算**所有响应在当前参数点的全组导数**，再固定这些系数逐响应微批次反传，保留完整组目标的一阶梯度。它支持一条提示的多个正负响应，避免为计算组目标而同时保留整组模型激活；不保证替身损失值或二阶导数等价。
 
 ### RLHF / RLVR
 

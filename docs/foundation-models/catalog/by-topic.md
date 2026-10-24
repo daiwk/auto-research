@@ -4,6 +4,10 @@
 
 ## 网络架构
 
+### JEPA 与关系表征
+
+- [Inside-JEPA: From Prediction to Relational Grounding in Latent World Models](../../foundation-models/2610.31194-inside-jepa/README.md)（`inside-jepa`）：普通 JEPA 能预测潜在状态，但潜变量未必对应可解释关系。本文把每个有序实体对的关系通道直接拼入动态状态，并要求逆动态头根据前后关系通道恢复动作；预测损失的未来目标仍由 EMA 编码器提供，而逆动态的未来状态必须来自**可反传的 online 编码器**。仅预测、读全部状态、只读实体和打乱动作标签的对照用于区分信号来自哪里。[原文 §3](https://arxiv.org/html/2610.31194v1#S3)
+
 ### JEPA 与几何表征
 
 - [ALPS: Visual State Encoders for World Models](../../foundation-models/2610.30120-alps/README.md)（`alps`）：世界模型以视觉 token 为状态进行预测和规划，但一个编码器通常只擅长物理状态、语言对齐或像素重建中的一部分。ALPS 尝试让同一组 patch token 同时承担三种接口：机器人状态探针能读出位置，文字指令能对应图像，而未来 token 能被解码成图像以便检查。

@@ -1,5 +1,9 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-25 优先机构与历史补漏
+
+[本批三项限定交付与来源记录](research-audits/oct25-priority-components/README.md)：Meta最小编辑OPD优先，另有Inside-JEPA，以及Google/DeepMind合作的GroupDPO历史补漏；三个L1组件均在真实A100三种子执行。八类arXiv仍是10月23日公告，未出现新公告批次，不把会议收录列表当作当天新首发。GenIA与GRIP完整实验高成本不复现、审查DONE；AmbiGUI只记未附规范论文身份的官方源码发布。Google/Meta目录失败保留unknown；全局审查水位仍为10月15日，不声明全窗口全文闭环。
+
 ## 2026-10-24 同公告补漏
 
 [本批四项限定交付与来源记录](research-audits/oct24-overlap-components/README.md)：Google PLE离线工程产物协议优先，另有TTR-Compressor、UserArena OPTD与MOER精确组件；三个CUDA组件已在真实A100三种子执行。八类arXiv仍是10月23日公告、各分类列表未变，因此四项均为补漏而非当日新首发。Google/Meta目录重取超时保留unknown，不当零新增；完整高成本实验不复现、审查DONE。全局审查水位仍为10月15日。

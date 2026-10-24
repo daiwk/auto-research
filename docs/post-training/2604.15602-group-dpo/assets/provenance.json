@@ -1,0 +1,12 @@
+{
+  "paper_id": "2604.15602v2",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2604.15602v2#S1.F1",
+  "source_url": "https://arxiv.org/html/2604.15602v2/figures/overview.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "07e7b9f623c04739e3be1fc912c414a903648212e33085f204f0b48c026ae159",
+  "license": "arXiv.org perpetual non-exclusive license; copyright remains with the authors; no CC license inferred",
+  "transformation": "none",
+  "visual_review": "目视核对固定v2 Figure1原始4000x2112 PNG：单对DPO、组目标、整组反传OOM，以及no-grad全组系数后逐响应替身损失。未经重绘、裁剪或AI生成。图示系数用链式形式，正文Table1给出通用目标的准确导数。",
+  "checked_on": "2026-10-25"
+}
