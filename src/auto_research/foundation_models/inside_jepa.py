@@ -203,7 +203,10 @@ class InsideJEPA(nn.Module):
             inverse_loss = ((output - inverse_targets).square().sum(-1).mean()
                             if self.continuous_actions else F.cross_entropy(output, inverse_targets))
         # lambda_inv=1, shared across the five arms, as in the paper.
-        return {"loss": forward_loss + inverse_loss, "forward": forward_loss, "inverse": inverse_loss}
+        total_loss = forward_loss + inverse_loss
+        if not all(bool(torch.isfinite(value)) for value in (forward_loss, inverse_loss, total_loss)):
+            raise ValueError("nonfinite forward, inverse or total loss; no clamp or silent fallback")
+        return {"loss": total_loss, "forward": forward_loss, "inverse": inverse_loss}
 
     @torch.no_grad()
     def update_target(self) -> None:
