@@ -213,6 +213,7 @@
         "padding_and_excluded_zero_gradient",
         "raw_pooled_role_statistics",
         "real_shared_policy_update",
+        "zero_importance_branch_finite_zero_gradient",
         "zero_raw_variance_excluded"
       ],
       "metrics": [

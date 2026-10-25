@@ -103,9 +103,19 @@ def grpo_loss(logits: Tensor, actions: Tensor, old_logp: Tensor, sampled_logp: T
                              ratio_log.clamp_min(math.log1p(-clip_low)))
     correction_log = old - sampled
     correction = torch.where(correction_log >= math.log(.1), correction_log.clamp_max(0).exp(), 0.)
-    pg = correction * clipped_log.exp() * adv
-    delta = torch.where(mask, reference - current, 0.)
-    kl = torch.expm1(delta) - delta
+    # A truncated IS weight (or zero advantage) defines an exactly zero PG
+    # term. Mask BEFORE exponentiation: 0*exp(large) otherwise becomes NaN,
+    # including in backward. Do not clamp a genuinely active unbounded branch.
+    pg_active = mask & (correction > 0) & (adv != 0)
+    pg_log = torch.where(pg_active, clipped_log, 0.)
+    pg = torch.where(pg_active, correction * pg_log.exp() * adv, 0.)
+    if beta > 0:
+        delta = torch.where(mask, reference - current, 0.)
+        kl = torch.expm1(delta) - delta
+    else:
+        # beta=0 removes KL mathematically; don't evaluate an overflowing
+        # unused exp and then multiply its infinity by zero.
+        kl = torch.zeros_like(current)
     count = int(mask.sum())
     loss = torch.where(mask, -pg + beta * kl, 0.).sum() / max(count, 1)
     if not bool(torch.isfinite(loss)):
@@ -157,6 +167,18 @@ def diagnostic(seed: int, device: str = "cpu") -> dict:
     optimizer = torch.optim.SGD(policy.parameters(), lr=.01)
     optimizer.step()
     delta = float((torch.cat([p.detach().flatten() for p in policy.parameters()]) - before).norm())
+    # Execute the two formerly-overflowing but mathematically removed branches
+    # on the requested device too: huge negative-advantage ratio at token0,
+    # huge disabled-KL exponent at token1. IS is truncated to zero for both.
+    extreme = torch.tensor([[[[0., 0.], [-1000., 0.]]]], device=dev,
+                           dtype=torch.float64, requires_grad=True)
+    extreme_old = torch.full((1, 1, 2), -1000., device=dev, dtype=torch.float64)
+    extreme_loss, _ = grpo_loss(extreme, torch.zeros(1, 1, 2, device=dev, dtype=torch.long),
+        extreme_old, torch.full_like(extreme_old, -1.), torch.full_like(extreme_old, -.7),
+        torch.tensor([[-1.]], device=dev, dtype=torch.float64), torch.tensor([True], device=dev),
+        torch.ones(1, 1, 2, device=dev, dtype=torch.bool), beta=0.)
+    extreme_loss.backward()
+    extreme_ok = extreme_loss.item() == 0 and bool(extreme.grad.isfinite().all()) and not bool(extreme.grad.any())
     return {"seed": seed, "metrics": {"loss": float(loss.detach()), "gradient_reference_error": error,
         "formula_reference_error": float((loss - oracle).detach().abs()), "parameter_delta": delta,
         "valid_tokens": audit["valid_tokens"], "eligible_trajectories": int(eligible.sum()), "optimizer_steps": 1},
@@ -166,4 +188,5 @@ def diagnostic(seed: int, device: str = "cpu") -> dict:
             "gradient_matches_reference": error < 1e-10,
             "padding_and_excluded_zero_gradient": bool((actual_grad[~valid] == 0).all()),
             "frozen_rollout_reference_rewards": old.grad is None and sampled.grad is None and reference.grad is None and raw.grad is None,
-            "real_shared_policy_update": delta > 0}}
+            "real_shared_policy_update": delta > 0,
+            "zero_importance_branch_finite_zero_gradient": extreme_ok}}
