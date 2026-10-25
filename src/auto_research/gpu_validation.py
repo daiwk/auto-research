@@ -17,6 +17,10 @@ FORBIDDEN_FIELDS = (
 )
 STANDALONE_GPU_RECEIPTS = {
     **{key: f"docs/gpu-validations/{key}-a100-20261025.json" for key in (
+        "scar-shapley-credit", "probabilistic-autorater", "rm-memorization-protocol", "benchmark-self-bias",
+        "dmast", "cue2narrate-drl", "polaris-hri", "taskpress", "interpolated-null-calibration", "mechanistic-etm",
+    )},
+    **{key: f"docs/gpu-validations/{key}-a100-20261025.json" for key in (
         "minimal-edit-opd", "inside-jepa", "group-dpo",
     )},
     **{key: f"docs/gpu-validations/{key}-a100-20261024.json" for key in (

@@ -1,0 +1,23 @@
+{
+  "paper_url": "https://arxiv.org/html/2507.23220v3",
+  "source_url": "https://arxiv.org/pdf/2507.23220v3#page=2",
+  "figure": "Figure 1",
+  "image": "paper-figure-01.png",
+  "image_sha256": "11c3190a723bda0501c148d420027638a0098951d6553fbd5c18f110db00b0c8",
+  "pixel_dimensions": [
+    918,
+    622
+  ],
+  "copyright": "Original paper authors; attribution retained; consult fixed paper license",
+  "description": "Original PDF figure and caption cropped/rendered without redraw or scientific-content changes",
+  "visually_verified": true,
+  "pdf_page": 2,
+  "crop_pdf_points": [
+    70,
+    60,
+    529,
+    371
+  ],
+  "render_scale": 2,
+  "paper_sha256": "d631d7773b89fe796ba1c177fe4b034c816d5bb044928bfc3ae10541d7ab5186"
+}

@@ -1,0 +1,51 @@
+{
+  "domain": "post-training",
+  "key": "polaris-hri",
+  "title": "POLARIS: Guiding Small Models to Write Long Stories",
+  "paper_url": "https://arxiv.org/abs/2606.04095v1",
+  "reviewed_version_url": "https://arxiv.org/html/2606.04095v2",
+  "reviewed_version": "v2",
+  "version_note": "规范身份与首次日期保持原始v1；本轮方法和资源核对固定v2，未逐行声称其等同v1。",
+  "detail_path": "post-training/2606.04095-polaris-hri/README.md",
+  "topic": [
+    "RLVR与偏好优化",
+    "GRPO与参考轨迹注入"
+  ],
+  "first_author": "Rishanth Rajendhran",
+  "first_author_affiliation": "University of Maryland",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "published": "2026-06-02",
+  "published_at": "2026-06-02T18:00:07Z",
+  "code": "https://github.com/RishanthRajendhran/POLARIS",
+  "upstream_revision": "50177c1854d83ef9d93339ba7d87e95583e73340",
+  "code_status": "作者训练/奖励/评估代码公开，固定commit；HRI人类故事与推理因版权不发布、主checkpoint gated，不把no-HRI公开权重当主方法完整数据",
+  "code_license": "根目录MIT；vendored verl/修改代码由其Apache-2.0许可治理",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "historical_official_conference_backfill",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.post_training.polaris_hri.hri_grpo_loss",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.polaris_hri import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/polaris-hri-a100-20261025.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v2正文方法/实验及附录；https://arxiv.org/html/2606.04095v2",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "paper_configuration": "Qwen3.5-9B、1388 copyrighted prompt-story pairs、4×A10080GB FSDP、batch8、160steps，每run原文约48h并约60美元judge API。完整实验明确超单卡短时预算；人类故事不公开，不能用自造故事冒充原训练数据。",
+    "estimated_cost_basis": "依据原文配置和完整比较矩阵判断，不是本地完整实验测量；无需用长试跑确认成本。",
+    "decision": "成本过高，不复现（审查 DONE）；完整实验不下载、不试跑、不自动重试。仅独立低成本机制/协议诊断，不冒充完整模型或正式benchmark。"
+  },
+  "summary": "使用结构化Story Quality LLM judge为长篇写作提供软奖励，并加入一个teacher-forced人类参考轨迹；均值/样本标准差只看5个policy输出，参考advantage按15步warmup到0.4后使用相同clipped surrogate。这里只实现HRI/GRPO更新核心，不生成故事或评估写作能力。"
+}

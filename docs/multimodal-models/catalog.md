@@ -19,8 +19,11 @@
 | 视觉 token 与跨模态检索 | [EmbeddingGemma 2: Open Multimodal Embeddings](../multimodal-models/embeddinggemma2/README.md) | Google DeepMind，2026-10-06 | `embedding-gemma2` |
 | 视觉 token 与跨模态检索 | [StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection](../multimodal-models/2609.16841-stacktok/README.md) | Sichuan University，2026-09-15 | `stacktok` |
 | 视频理解与 token 压缩 | [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](../multimodal-models/2609.16722-videomm/README.md) | University of Science and Technology of China，2026-09-15 | `videomm` |
+| 音频描述与对比排序 | [From Visual Cues to Spoken Narration: Rethinking Audio Description](../multimodal-models/2609.01725-cue2narrate-drl/README.md) | TU Darmstadt & hessian.AI，2026-09-01 | `cue2narrate-drl` |
 | 生成辅助监督与理解增强 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | `gas` |
 | 多实例编辑与注意力隔离 | [Editing Everything Everywhere All at Once](../multimodal-models/2606.31278-mice/README.md) | University of Modena and Reggio Emilia，2026-06-30 | `mice` |
+| 视频嵌入统一评测 | [MVEB: Massive Video Embedding Benchmark](../multimodal-models/2606.14958-mveb/README.md) | Harvard University，2026-06-12 | 未复现（高成本资料） |
+| 低资源语音翻译评测 | [NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages](../multimodal-models/2604.16287-naijas2st/README.md) | Mila - Quebec AI Institute，2026-04-17 | 未复现（高成本资料） |
 | 高效视觉 token 压缩 | [SmolVLM: Redefining small and efficient multimodal models](../reproductions/2504.05299-smolvlm/README.md) | Hugging Face，2025-04-07 | `smolvlm` |
 | 对比预训练与自蒸馏 | [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../reproductions/2502.14786-siglip2/README.md) | Google DeepMind，2025-02-20 | `siglip2` |
 | 视觉 token 与跨模态检索 | [Visual Instruction Tuning](../reproductions/2304.08485-llava/README.md) | University of Wisconsin-Madison，2023-04-17 | `llava` |

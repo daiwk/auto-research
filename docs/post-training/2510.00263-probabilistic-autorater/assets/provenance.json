@@ -1,0 +1,14 @@
+{
+  "paper_id": "2510.00263v1",
+  "figure": "Figure 1",
+  "source_page": "https://arxiv.org/html/2510.00263v1#S1.F1",
+  "source_url": "https://arxiv.org/html/2510.00263v1/figs/overview_v5.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "3620367cd3f458fbaf276847c6923d5091973ed0921a295a2feefb0ac76beb3b",
+  "license": "arXiv.org perpetual non-exclusive license",
+  "transformation": "none",
+  "visually_verified": true,
+  "visual_review": "已目视核对固定v1 Figure 1，标签、公式/连线或图例可读；直接保存原始PNG未重绘",
+  "checked_on": "2026-10-25"
+}

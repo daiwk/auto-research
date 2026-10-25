@@ -1,0 +1,53 @@
+{
+  "domain": "multimodal-models",
+  "key": "mveb",
+  "title": "MVEB: Massive Video Embedding Benchmark",
+  "paper_url": "https://arxiv.org/abs/2606.14958v1",
+  "reviewed_version_url": "https://arxiv.org/html/2606.14958v1",
+  "reviewed_version": "v1",
+  "version_note": "本地核对固定v1。",
+  "detail_path": "multimodal-models/2606.14958-mveb/README.md",
+  "topic": [
+    "多模态表征",
+    "视频嵌入评测"
+  ],
+  "first_author": "Adnan El Assadi",
+  "first_author_affiliation": "Harvard University",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "published": "2026-06-12",
+  "published_at": "2026-06-12T21:06:12Z",
+  "code": "https://github.com/embeddings-benchmark/mteb",
+  "upstream_revision": "acbcb191eb24ad1929f1bbcf23b90e982e9da62e",
+  "code_status": "作者在MTEB生态公开视频任务实现，固定commit核验；不把仅配置/字段校验标记成已跑官方评测",
+  "code_license": "Apache-2.0；各上游数据集许可证独立",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "historical_official_conference_backfill",
+  "implementation_status": "deferred_high_cost",
+  "local_operator": null,
+  "local_command": null,
+  "evaluation_tier": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "gpu_validation_artifact": null,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v1正文方法/实验及附录；https://arxiv.org/html/2606.14958v1",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "paper_configuration": "33个公开checkpoint约200M–10.7B，23主任务及184池，多模型视频+音频/8方向矩阵；Table1单H100测LCO7B：MVEB31.9h、MVEB+302.7h。远超单A100/A30短时预算，不下载模型或视频、不构造假的通用指标代理。",
+    "estimated_cost_basis": "依据原文配置和完整比较矩阵判断，不是本地完整实验测量；无需用长试跑确认成本。",
+    "decision": "成本过高，不复现（审查 DONE）；完整实验不下载、不试跑、不自动重试。无本地指标或GPU收据，不以通用统计/字段校验冒充论文评测。"
+  },
+  "summary": "将分类、零样本分类、聚类、配对分类、八方向跨模态检索及视频QA纳入统一视频嵌入评测，按model声明的帧/音频预算运行并成对比较video-only与audio+video。33模型/184任务完整矩阵高成本，审查DONE不复现，不伪造已接入结果。",
+  "deferral_reason": "33个公开checkpoint约200M–10.7B，23主任务及184池，多模型视频+音频/8方向矩阵；Table1单H100测LCO7B：MVEB31.9h、MVEB+302.7h。远超单A100/A30短时预算，不下载模型或视频、不构造假的通用指标代理。成本过高，不复现（审查 DONE）。"
+}

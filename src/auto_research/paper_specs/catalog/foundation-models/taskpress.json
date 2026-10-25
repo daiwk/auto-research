@@ -1,0 +1,51 @@
+{
+  "domain": "foundation-models",
+  "key": "taskpress",
+  "title": "TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning",
+  "paper_url": "https://arxiv.org/abs/2608.03276v1",
+  "reviewed_version_url": "https://arxiv.org/html/2608.03276v2",
+  "reviewed_version": "v2",
+  "version_note": "规范身份与首次日期保持原始v1；本轮方法和资源核对固定v2，未逐行声称其等同v1。",
+  "detail_path": "foundation-models/2608.03276-taskpress/README.md",
+  "topic": [
+    "推理与系统效率",
+    "KV缓存压缩"
+  ],
+  "first_author": "Wonpyo Park",
+  "first_author_affiliation": "Google",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "published": "2026-08-04",
+  "published_at": "2026-08-04T07:51:37Z",
+  "code": null,
+  "upstream_revision": null,
+  "code_status": "正文只说明构建在kvpress之上；未提供TaskPress专属仓库，不把第三方kvpress仓库或许可证当作者方法开源",
+  "code_license": "未找到TaskPress专属方法源码或可核验源码许可证；论文arXiv non-exclusive license",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "historical_official_conference_backfill",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.foundation_models.taskpress.prune_taskpress",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.taskpress import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/taskpress-a100-20261025.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v2正文方法/实验及附录；https://arxiv.org/html/2608.03276v2",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "paper_configuration": "Llama3.1-8B/Qwen3-8B/32B，LongBench/RULER16K至64K上下文多压缩比例/方法矩阵；guide演化单A10040GB原文约25.2min加Gemini调用，完整多任务矩阵更大。只做算子，不跑全量加载/演化、无速度计时复现。",
+    "estimated_cost_basis": "依据原文配置和完整比较矩阵判断，不是本地完整实验测量；无需用长试跑确认成本。",
+    "decision": "成本过高，不复现（审查 DONE）；完整实验不下载、不试跑、不自动重试。仅独立低成本机制/协议诊断，不冒充完整模型或正式benchmark。"
+  },
+  "summary": "prefill时用task guide对context的注意力求和并局部均值池化，与每token量化value scale相乘，在各KV head独立top-k保留context；task guide随后丢弃。本地实际收集小K/V张量及原position IDs，不加载LLM或声称端到端速度收益。"
+}

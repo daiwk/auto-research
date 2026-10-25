@@ -1,0 +1,15 @@
+{
+  "paper_id": "2606.24579v1",
+  "figure": "Figure 1",
+  "source_page": "https://arxiv.org/pdf/2606.24579v1",
+  "source_url": "https://arxiv.org/pdf/2606.24579v1",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "76b890b51cd05c2d2d50a11b5f26a7c22cc5cfef822c2a1f0db92f66a353e7b3",
+  "license": "CC BY 4.0",
+  "transformation": "pdf_page_render",
+  "visually_verified": true,
+  "visual_review": "已目视核对固定v1 Figure 1，标签、公式/连线或图例可读；原PDF第1页完整渲染保留原图/表与上下文，未重绘科学内容",
+  "checked_on": "2026-10-25",
+  "pdf_page": 1
+}

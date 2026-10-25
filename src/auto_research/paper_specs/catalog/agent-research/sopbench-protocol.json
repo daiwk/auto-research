@@ -1,0 +1,18 @@
+{
+  "domain": "agent-research", "key": "sopbench-protocol",
+  "title": "SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints",
+  "paper_url": "https://arxiv.org/abs/2503.08669v1", "reviewed_version_url": "https://arxiv.org/html/2503.08669v2",
+  "detail_path": "agent-research/2503.08669-sopbench-protocol/README.md", "topic": ["工具使用与环境", "SOP约束与程序验收"],
+  "first_author": "Zekun Li", "first_author_affiliation": "University of California, Santa Barbara",
+  "published": "2025-03-11", "published_at": "2025-03-11T17:53:02Z",
+  "code": "https://github.com/Leezekun/SOPBench", "upstream_revision": "8790ed7406acbd22270f90bd1c4038de3fc5db8f", "code_license": "MIT",
+  "code_status": "作者发布七域环境、约束程序、903测试与轨迹；代码MIT、数据另有DATA_LICENSE，本地独立实现评测规则，不复制数据",
+  "priority": "P1", "intake_class": "historical_backfill", "adapter": null,
+  "implementation_status": "component_only", "local_operator": "auto_research.agent_research.sopbench_protocol.evaluate_trace",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.sopbench_protocol import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism", "diagnostic_only": true, "promotion_eligible": false, "evolve_integrated": false, "requires_gpu_validation": false,
+  "review_done": true, "review_resolution": "not_reproduced_high_cost", "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": true,
+  "automatic_retry": false, "automatic_implementation_queue": false,
+  "cost_assessment": {"source": "固定v2 Section2/3", "model_scale": "18个模型，含70B/72B和闭源reasoning模型", "data_scale": "七域167工具、903测试、完整多轮调用", "available_resource": "单张A100或A30，或Mac", "paper_configuration": "每例最多20turn、最多5次获取完整轨迹，full/oracle工具和jailbreak对照", "estimated_cost_basis": "整套多模型API/开放权重多轮评测超出低成本预算；纯约束协议无需模型", "decision": "完整实验成本过高，不复现（审查 DONE）；只实现确定性约束图和三项联合验收"},
+  "summary": "把Single/And/Or/Chain嵌套约束作为评测器侧规则，逐服务调用核对允许性、请求限定helper前缀和最终数据库，再联合三项结果。仅CPU协议诊断，不是七域环境或模型SOP能力复现。"
+}

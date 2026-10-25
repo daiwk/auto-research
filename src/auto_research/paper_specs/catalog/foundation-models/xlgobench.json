@@ -1,0 +1,51 @@
+{
+  "domain": "foundation-models",
+  "key": "xlgobench",
+  "title": "XLGoBench: Detecting cross-lingual skill gaps with algorithmic tasks",
+  "paper_url": "https://arxiv.org/abs/2605.30788v1",
+  "reviewed_version_url": "https://arxiv.org/pdf/2605.30788v1",
+  "reviewed_version": "v1",
+  "version_note": "本地核对固定v1。",
+  "detail_path": "foundation-models/2605.30788-xlgobench/README.md",
+  "topic": [
+    "跨语言评测",
+    "算法推理与评测隔离"
+  ],
+  "first_author": "Purvam Jain",
+  "first_author_affiliation": "Google DeepMind",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "published": "2026-05-29",
+  "published_at": "2026-05-29T03:25:32Z",
+  "code": "https://zenodo.org/records/20423110",
+  "upstream_revision": null,
+  "code_status": "作者补充材料v1公开：Zenodo20423110，文件MD5=1fd5dd56c216a407dd5a13f08b0f1065；无Git SHA，不伪造。只核正文与公开元数据，独立实现结构化scorer，不复制官方多语模板",
+  "code_license": "Zenodo页面未给清晰license，未下载82.2MB包核验内部许可证；论文arXiv non-exclusive license",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "historical_official_conference_backfill",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.evaluation.xlgobench.evaluate",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.evaluation.xlgobench import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_artifact": null,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v1正文方法/实验及附录；https://arxiv.org/pdf/2605.30788v1",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "paper_configuration": "原文4模型×5算法×7语言×20复杂度×每级50题，包含frontierAPI和Gemma31B，另有重复/置信区间拟合。完整矩阵和人工验证翻译不跑；本地仅5任务结构化诊断、没有代造已验证翻译或跨语言accuracy。",
+    "estimated_cost_basis": "依据原文配置和完整比较矩阵判断，不是本地完整实验测量；无需用长试跑确认成本。",
+    "decision": "成本过高，不复现（审查 DONE）；完整实验不下载、不试跑、不自动重试。仅独立低成本机制/协议诊断，不冒充完整模型或正式benchmark。"
+  },
+  "summary": "用同一个抽象算法实例在不同语言表述，扫描复杂度来暴露跨语言差距；本地保留SLT、DSA、概率DSA、唯一最短路和唯一锦标赛排序的结构化小题与exact JSON scorer。gold仅scorer计算，不发给model；未运行官方七语模板、LLM或SMD能力矩阵。"
+}

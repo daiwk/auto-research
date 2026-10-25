@@ -833,6 +833,12 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "taskpress": ("注意力与长上下文", "任务引导 KV cache 压缩"),
+        "combinatorial-watermark": ("推理与系统效率", "生成水印与编辑检测"),
+        "interpolated-null-calibration": ("推理与系统效率", "检索与重排序校准"),
+        "xlgobench": ("推理与系统效率", "多语言算法评测协议"),
+        "mechanistic-etm": ("网络架构", "机制解释与主题模型"),
+        "cross-lingual-exploration": ("推理与系统效率", "多语言知识探索"),
         "inside-jepa": ("网络架构", "JEPA 与关系表征"),
         "ttr-compressor": ("注意力与长上下文", "序列压缩与可微测试时回归"),
         "gemma-priority-protocol": ("推理与系统效率", "能力评测与推理协议"),
@@ -1025,6 +1031,9 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "cue2narrate-drl": ("多模态奖励与后训练", "音频描述与对比排序"),
+        "naijas2st": ("多模态基础模型", "低资源语音翻译评测"),
+        "mveb": ("多模态检索", "视频嵌入统一评测"),
         "aw0": ("视觉世界模型与时序推理", "代码、视频与动作联合生成"),
         "mice": ("视觉生成与编辑", "多实例编辑与注意力隔离"),
         "system-one-rerank": ("多模态检索", "单次前向结构化重排"),

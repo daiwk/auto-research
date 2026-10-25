@@ -1,0 +1,51 @@
+{
+  "domain": "foundation-models",
+  "key": "combinatorial-watermark",
+  "title": "Detecting Post-generation Edits to Watermarked LLM Outputs via Combinatorial Watermarking",
+  "paper_url": "https://arxiv.org/abs/2510.01637v1",
+  "reviewed_version_url": "https://arxiv.org/html/2510.01637v1",
+  "reviewed_version": "v1",
+  "version_note": "本地核对固定v1。",
+  "detail_path": "foundation-models/2510.01637-combinatorial-watermark/README.md",
+  "topic": [
+    "安全与可验证性",
+    "文本水印与编辑检测"
+  ],
+  "first_author": "Liyan Xie",
+  "first_author_affiliation": "University of Minnesota",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "published": "2025-10-02",
+  "published_at": "2025-10-02T03:33:12Z",
+  "code": null,
+  "upstream_revision": null,
+  "code_status": "固定论文/精确标题检索未找到原作者方法仓库，源码SHA和许可证不可核验；本地独立公式实现",
+  "code_license": "未找到作者源码；论文CC BY4.0",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "historical_official_conference_backfill",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.foundation_models.combinatorial_watermark.detect",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.combinatorial_watermark import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_artifact": null,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v1正文方法/实验及附录；https://arxiv.org/html/2510.01637v1",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "paper_configuration": "完整实验Llama2-7B/OPT1.3B，WikiText多水印强度/模式/1–6token编辑×三种编辑方式，1000条64token、阈值校准及PPL矩阵；原文RTX6000Ada48GB。完整模型数据构造与全矩阵不跑，不编造总耗时；只保留CPU公式和负控。",
+    "estimated_cost_basis": "依据原文配置和完整比较矩阵判断，不是本地完整实验测量；无需用长试跑确认成本。",
+    "decision": "成本过高，不复现（审查 DONE）；完整实验不下载、不试跑、不自动重试。仅独立低成本机制/协议诊断，不冒充完整模型或正式benchmark。"
+  },
+  "summary": "按周期性词表子集模式给下一token logits加偏置，全局统计任意循环相位的窗口匹配率；局部统计覆盖某token的全部完整窗口，定位可能编辑。CPU实现式2–5，不用固定绝对相位、边界补零或随机词表规则冒充论文定义。"
+}

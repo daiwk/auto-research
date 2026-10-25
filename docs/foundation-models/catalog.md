@@ -108,6 +108,7 @@
 | 注意力与长上下文 | [On-Demand Attention: Efficient Long-Context Decoding with Learned Recall](2609.20734-oda/README.md) | Southern University of Science and Technology，2026-09-17 | 未发现官方代码 | `oda` |
 | 推测解码 | [ASPIRE: Asynchronous Batch Self-Speculative Decoding](2609.17943-aspire/README.md) | University of Southern California，2026-09-16 | 未发现官方代码 | `aspire` |
 | 推测解码 | [ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding](2609.17241-echo/README.md) | Wuhan University，2026-09-15 | [已开源](https://github.com/whucs21Mzy/ECHO) | `echo` |
+| 基础模型检索与排序 | [How Calibration Content Shapes Attention-Based Reranking](2609.17764-interpolated-null-calibration/README.md) | UC San Diego，2026-09-15 | 未发现官方代码 | `interpolated-null-calibration`：仅低成本组件，完整实验不复现 |
 | 推测解码 | [LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers](2609.17184-loopspec/README.md) | Seoul National University / KAIST，2026-09-15 | 未发现官方代码 | `loopspec` |
 | 可复现训练 | [OPEN-1B: A Fully Auditable Training Run](2609.17380-open-1b-audit/README.md) | Gensyn，2026-09-15 | [已开源](https://github.com/gensyn-ai/open-transformers) | `open-1b-audit` |
 | 网络架构 | [Persistent Recurrent Memory Between Transformer Layers Improves Language Model Generalization](2609.17251-persistent-recurrent-memory/README.md) | FITec Labs / Ericsson São Paulo，2026-09-15 | 未发现官方代码 | `persistent-recurrent-memory` |
@@ -143,6 +144,7 @@
 | 推理与系统效率 | [DBLast: Dependent Block Drafting for Stochastic Speculative Decoding](../reproductions/2608.05448-dblast/README.md) | Huawei Technologies Canada，2026-08-05 | 未发现官方代码 | `dblast` |
 | 推理与系统效率 | [QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding](../reproductions/2608.05326-qevict/README.md) | Indian Institute of Technology Roorkee，2026-08-05 | 未发现官方代码 | `qevict` |
 | 多模态基础模型 | [Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes](../reproductions/2608.05000-physics-mm-pretraining/README.md) | Meta，2026-08-05 | 未发现官方代码 | `physics-mm-pretraining` |
+| 推理与系统效率 | [TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning](2608.03276-taskpress/README.md) | Google，2026-08-04 | 未发现官方代码 | `taskpress`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [DART: Decoded Attention over Recurrent States for Efficient Long-Context Sequence Modeling](../reproductions/2608.02032-dart/README.md) | Zhejiang University，2026-08-03 | 未发现官方代码 | `dart` |
 | 注意力与长上下文 | [Learning What to Remember: Test-Time Training via Context Distillation](../reproductions/2608.01672-ttcd/README.md) | Princeton University，2026-08-03 | [已开源](https://github.com/dangxingyu/ttcd) | `ttcd` |
 | 网络架构 | [Role-Decoupled Attention Residuals](../reproductions/2608.01075-rd-attnres/README.md) | Kehan Wang（论文未列机构），2026-08-03 | 未发现官方代码 | `rd-attnres` |
@@ -162,7 +164,9 @@
 | 预训练与数据 | [PPL-Factory: Task-Aware and Budget-Aware Data Selection from Language Modeling to Reasoning](../reproductions/2607.18199-ppl-factory/README.md) | McGill University，2026-07-20 | 未发现官方代码 | `ppl-factory` |
 | 预训练与数据 | [OpenLanguageModel: Readable and Composable Small-Language-Model Pretraining for Education and Research](../reproductions/2607.16669-open-language-model/README.md) | Indian Institute of Technology Madras，2026-07-18 | [已开源](https://github.com/openlanguagemodel/openlanguagemodel) | `open-language-model` |
 | 注意力与长上下文 | [Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers](../reproductions/2607.15456-looped-latent-attention/README.md) | University of Maryland / Meta AI，2026-07-16 | 未发现官方代码 | `looped-latent-attention` |
+| 多语言推理与评估 | [Cross-Lingual Exploration for Parametric Knowledge](2606.24579-cross-lingual-exploration/README.md) | The Hebrew University of Jerusalem，2026-06-23 | 未发现官方代码 | 计划键 `cross-lingual-exploration`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 注意力与长上下文 | [MiniMax Sparse Attention](../reproductions/2606.13392-minimax-sparse-attention/README.md) | MiniMax，2026-06-11 | [已开源](https://github.com/MiniMax-AI/MSA) | `minimax-sparse-attention` |
+| 跨语言评测 | [XLGoBench: Detecting cross-lingual skill gaps with algorithmic tasks](2605.30788-xlgobench/README.md) | Google DeepMind，2026-05-29 | [原作者入口](https://zenodo.org/records/20423110)；作者补充材料v1公开：Zenodo20423110，文件MD5=1fd5dd56c216a407dd5a13f08b0f1065；无Git SHA，不伪造。只核正文与公开元数据，独立实现结构化scorer，不复制官方多语模板 | `xlgobench`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory](../reproductions/2605.20948-memory-grafting/README.md) | Tsinghua University / Microsoft Research Asia，2026-05-20 | 未发现官方代码 | `memory-grafting` |
 | 企业 LLM | [Customizing an LLM for Enterprise Software Engineering](2605.16517-gemini-for-google/README.md) | Google，2026-05-15 | 未发现官方代码 | `gemini-for-google` |
 | 模型路由 | [Optimized Deferral for Imbalanced Settings](2604.27723-mild/README.md) | Google Research，2026-04-30 | 未发现官方代码 | `mild`：仅低成本组件，完整实验不复现 |
@@ -176,7 +180,9 @@
 | 预训练与数据 | [Mobility-Embedded POIs: Learning What A Place Is and How It Is Used from Human Movement](2601.21149-me-pois/README.md) | University of Southern California，2026-01-29 | 未发现官方代码 | `me-pois`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](../reproductions/2601.07372-engram/README.md) | DeepSeek，2026-01-12 | [已开源](https://github.com/deepseek-ai/Engram) | `engram` |
 | 网络架构 | [mHC: Manifold-Constrained Hyper-Connections](../reproductions/2512.24880-mhc/README.md) | DeepSeek-AI，2025-12-31 | 未发现官方代码 | `mhc` |
+| 安全与可验证性 | [Detecting Post-generation Edits to Watermarked LLM Outputs via Combinatorial Watermarking](2510.01637-combinatorial-watermark/README.md) | University of Minnesota，2025-10-02 | 未发现官方代码 | `combinatorial-watermark`：仅低成本组件，完整实验不复现 |
 | 动态候选分类 | [GLiClass: Generalist Lightweight Model for Sequence Classification Tasks](2508.07662-gliclass/README.md) | Knowledgator，2025-08-11 | [已开源](https://github.com/Knowledgator/GLiClass) | `gliclass` |
+| 可解释性 | [Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders](2507.23220-mechanistic-etm/README.md) | Columbia University，2025-07-31 | [原作者入口](https://github.com/blei-lab/mechanistic-topic-models)；作者方法代码公开，固定commit核验MIT；本地独立按固定v3公式实现mETM/steering子组件，不复制上游代码 | `mechanistic-etm`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free](../reproductions/2505.06708-gated-attention/README.md) | Qwen / Alibaba，2025-05-10 | [已开源](https://github.com/qiuzh20/gated_attention) | `gated-attention` |
 | 多模态基础模型 | [SmolVLM: Redefining small and efficient multimodal models](../reproductions/2504.05299-smolvlm/README.md) | Hugging Face，2025-04-07 | [已开源](https://github.com/huggingface/smollm) | `smolvlm` |
 | 预训练与数据 | [Muon is Scalable for LLM Training](../reproductions/2502.16982-muon/README.md) | Moonshot AI / UCLA，2025-02-24 | [已开源](https://github.com/MoonshotAI/Moonlight) | `muon` |

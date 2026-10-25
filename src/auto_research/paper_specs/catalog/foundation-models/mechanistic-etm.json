@@ -1,0 +1,51 @@
+{
+  "domain": "foundation-models",
+  "key": "mechanistic-etm",
+  "title": "Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders",
+  "paper_url": "https://arxiv.org/abs/2507.23220v1",
+  "reviewed_version_url": "https://arxiv.org/html/2507.23220v3",
+  "reviewed_version": "v3",
+  "version_note": "规范身份与首次日期保持原始v1；本轮方法和资源核对固定v3，未逐行声称其等同v1。",
+  "detail_path": "foundation-models/2507.23220-mechanistic-etm/README.md",
+  "topic": [
+    "可解释性",
+    "SAE主题模型与控制"
+  ],
+  "first_author": "Carolina Zheng",
+  "first_author_affiliation": "Columbia University",
+  "verified_priority_organizations": [
+    "Google Research"
+  ],
+  "published": "2025-07-31",
+  "published_at": "2025-07-31T03:17:43Z",
+  "code": "https://github.com/blei-lab/mechanistic-topic-models",
+  "upstream_revision": "2faface4bd07985f885935d62a11d5e4bf9c73bf",
+  "code_status": "作者方法代码公开，固定commit核验MIT；本地独立按固定v3公式实现mETM/steering子组件，不复制上游代码",
+  "code_license": "MIT",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "historical_official_conference_backfill",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.foundation_models.mechanistic_etm.MechanisticETM",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.mechanistic_etm import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/mechanistic-etm-a100-20261025.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v3正文方法/实验及附录；https://arxiv.org/html/2507.23220v3",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "paper_configuration": "Gemma2-9B、layer10的16K GemmaScope SAE、8数据集、LDA/ETM/BERTopic多变种及Bayesian优化，GPT4.1 topic judge每数据集2800成对比较和额外coherence/steering评测。完整矩阵超单卡短时预算；不下载LLM/SAE或调API，不编造未报告总GPU小时。",
+    "estimated_cost_basis": "依据原文配置和完整比较矩阵判断，不是本地完整实验测量；无需用长试跑确认成本。",
+    "decision": "成本过高，不复现（审查 DONE）；完整实验不下载、不试跑、不自动重试。仅独立低成本机制/协议诊断，不冒充完整模型或正式benchmark。"
+  },
+  "summary": "用SAE特征而非词袋表达主题，mETM以冻结SAE encoder计算sigmoid topic-feature概率和二项式计数似然训练logistic-normal主题比例；steering独立使用SAE decoder方向替换激活的parallel分量。本地严格区分外部encoder/decoder，仅验证ELBO与steering，不伪造SAE或完整topic评测。"
+}

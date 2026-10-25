@@ -1,0 +1,17 @@
+{
+  "paper_id": "2605.12483v5",
+  "figure": "Figure 2",
+  "source_page": "https://arxiv.org/html/2605.12483v5#S1.F2",
+  "source_url": "https://arxiv.org/html/2605.12483v5/allocation_routes_v2.svg",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "f8d9fdb477e31acf26e107c35f5937f9aacbf13004497c5bf7e9d9fa75b12754",
+  "license": "CC BY 4.0",
+  "transformation": "rasterization_white_background",
+  "visually_verified": true,
+  "visual_review": "已目视核对固定v5 Figure 2，标签、公式/连线或图例可读；保留原SVG，PNG只栅格化到1800px并加白色画布，避免透明底在深色主题隐藏黑色标签",
+  "checked_on": "2026-10-25",
+  "original_svg_path": "paper-figure-01.svg",
+  "original_svg_sha256": "34398a8725bf937932b6a303ac4e6cd9cf647f9c2aad8d9b2433c6585601c127",
+  "render_command": "rsvg-convert --background-color white --keep-aspect-ratio --width 1800 --format png --output paper-figure-01.png paper-figure-01.svg"
+}
