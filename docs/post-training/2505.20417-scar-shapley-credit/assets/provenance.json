@@ -1,0 +1,17 @@
+{
+  "paper_id": "2505.20417v1",
+  "figure": "Figure 4",
+  "source_page": "https://arxiv.org/html/2505.20417v1#S4.F4",
+  "source_url": "https://arxiv.org/html/2505.20417v1/time.svg",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "8701e72bd66d52ba27e1ca859d1c16e2f51ae02101d33e1b7307291a1c444d78",
+  "license": "arXiv.org perpetual non-exclusive license",
+  "transformation": "rasterization_white_background",
+  "visually_verified": true,
+  "visual_review": "已目视核对固定v1 Figure 4，标签、公式/连线或图例可读；保留原SVG，PNG只栅格化到1800px并加白色画布，避免透明底在深色主题隐藏黑色标签",
+  "checked_on": "2026-10-25",
+  "original_svg_path": "paper-figure-01.svg",
+  "original_svg_sha256": "dd4935065bd76e50ece8fc5a4df2a742f5cf6f56f037581cd73c0c9c1fd48434",
+  "render_command": "rsvg-convert --background-color white --keep-aspect-ratio --width 1800 --format png --output paper-figure-01.png paper-figure-01.svg"
+}

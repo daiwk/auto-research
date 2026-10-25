@@ -177,6 +177,7 @@
 | Token-level credit assignment | [CoRT](2607.25659-cort/README.md) | ByteDance internship，2026-07-28 | 未发现官方代码 | `cort` |
 | 在线强化学习 | [Reinforcement Learning for Code Optimization](2607.25970-code-optimization-rl/README.md) | FAIR at Meta / Inria，2026-07-28 | 未发现官方代码 | 计划键 `code-optimization-rl`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | On-policy distillation | [Relay-OPD](2607.26057-relay-opd/README.md) | Zhejiang University，2026-07-28 | [已开源](https://github.com/ZJU-REAL/Relay-OPD) | `relay-opd` |
+| 奖励建模与评估协议 | [What do Reward Models Memorize?](2607.24484-rm-memorization-protocol/README.md) | ILLC, University of Amsterdam，2026-07-27 | [原作者入口](https://github.com/ioverho/rm-shortcuts)；作者正文直接链接ioverho/rm-shortcuts，固定SHA已核验；根树无LICENSE，GitHub license=null，新增作者源码授权未确认。本地据公开论文独立重写，不复制作者代码。 | `rm-memorization-protocol`：仅低成本组件，完整实验不复现 |
 | post-training | [Co-Evolving LLM Evaluators and Policies via DynamicRubric](../reproductions/2607.20083-dynamic-rubric/README.md) | WeChat / Tencent，2026-07-22 | 未发现官方代码 | `dynamic-rubric` |
 | 过程奖励 | [TCR](2607.19824-tcr/README.md) | 论文未列机构，2026-07-22 | 未发现官方代码 | `tcr` |
 | RLVR | [ISO: An RLVR-Native Optimization Stack](2607.19331-iso-rlvr/README.md) | The University of Texas at Austin，2026-07-21 | [已开源](https://github.com/zhuhanqing/ISO) | `iso-rlvr` |
@@ -191,12 +192,15 @@
 | Entropy 稳定 | [STARE](2606.19236-stare/README.md) | Tsinghua University，2026-06-17 | [已开源](https://github.com/hp-luo/STARE) | `stare` |
 | 异步训推失配 | [KPop](2606.15079-kpop/README.md) | Ling / Ring Team，2026-06-13 | 未发现官方代码 | `kpop` |
 | AR-to-Diffusion 蒸馏 | [OPDLM](2606.06712-opd-lm/README.md) | Texas A&M University，2026-06-04 | 未发现官方代码 | `opd-lm` |
+| RLVR与偏好优化 | [POLARIS: Guiding Small Models to Write Long Stories](2606.04095-polaris-hri/README.md) | University of Maryland，2026-06-02 | [原作者入口](https://github.com/RishanthRajendhran/POLARIS)；作者训练/奖励/评估代码公开，固定commit；HRI人类故事与推理因版权不发布、主checkpoint gated，不把no-HRI公开权重当主方法完整数据 | `polaris-hri`：仅低成本组件，完整实验不复现 |
 | 多目标 RL | [GPRL](2605.18721-gprl/README.md) | Stanford University，2026-05-18 | 未发现官方代码 | `gprl` |
 | 对比序列 RL | [ConSPO](2605.12969-conspo/README.md) | Beijing Institute of Technology，2026-05-13 | 未发现官方代码 | `conspo` |
+| 训练流程与资源分配 | [Beyond GRPO and On-Policy Distillation: An Empirical Sparse-to-Dense Reward Principle for Language-Model Post-Training](2605.12483-sparse-to-dense-reward-principle/README.md) | LinkedIn，2026-05-12 | [原作者入口](https://github.com/HJSang/OPSD_OnPolicyDistillation)；v5正文直接链接HJSang/OPSD_OnPolicyDistillation，固定SHA已核验；根树只有README/scripts/src，未见根LICENSE，GitHub license=null。不能把该OPD子实现等同四阶段完整流程，本地不复制源码。 | 计划键 `sparse-to-dense-reward-principle`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 异步 off-policy | [Missing Old Logits](2605.12070-missing-old-logits/README.md) | Tianjin University，2026-05-12 | 未发现官方代码 | `missing-old-logits` |
 | 直接偏好优化 | [Mind the Gap: Structure-Aware Consistency in Preference Learning](2604.27733-sa-dpo/README.md) | Google Research / Courant Institute of Mathematical Sciences，2026-04-30 | 未发现官方代码 | 计划键 `sa-dpo`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 偏好优化 | [GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization](2604.15602-group-dpo/README.md) | Carnegie Mellon University，2026-04-17 | 未发现官方代码 | `group-dpo`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Lightning OPD](2604.13010-lightning-opd/README.md) | MIT HAN Lab，2026-04-14 | [已开源](https://github.com/jet-ai-projects/Lightning-OPD) | `lightning-opd` |
+| 多语言后训练 | [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](2603.17070-cross-script-knowledge-transfer/README.md) | Google Research，2026-03-17 | 未发现官方代码 | 计划键 `cross-script-knowledge-transfer`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Context distillation | [Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning](2602.21103-prompt-level-distillation/README.md) | Google，2026-02-24 | 未发现官方代码 | 计划键 `prompt-level-distillation`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Context distillation | [OPCD](2602.12275-opcd/README.md) | Microsoft Research，2026-02-12 | [已开源](https://github.com/microsoft/LMOps/tree/main/opcd) | `opcd` |
 | 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | Meituan，2026-02-05 | 未发现官方代码 | `luspo` |
@@ -205,6 +209,8 @@
 | 纯在线训推校正 | [Online IcePop](web-2025-online-icepop/README.md) | Ant Group，2025-12-16 | 未发现官方代码 | `online-icepop` |
 | 稳定 MoE RL | [Stabilizing RL with LLMs](2512.01374-minirl/README.md) | Alibaba Qwen Team，2025-12-01 | 未发现官方代码 | `minirl` |
 | MoE 训推失配 | [IcePop](2510.18855-icepop/README.md) | Ant Group，2025-10-21 | 未发现官方代码 | `icepop` |
+| 奖励建模与校准 | [Judging with Confidence: Calibrating Autoraters to Preference Distributions](2510.00263-probabilistic-autorater/README.md) | Google，2025-09-30 | 未发现官方代码 | `probabilistic-autorater`：仅低成本组件，完整实验不复现 |
+| LLM评估与校准 | [When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation](2509.26600-benchmark-self-bias/README.md) | Google，2025-09-30 | 未发现官方代码 | `benchmark-self-bias`：仅低成本组件，完整实验不复现 |
 | SFT-RL 动态混合 | [CHORD](2508.11408-chord/README.md) | Alibaba Group，2025-08-15 | [已开源](https://github.com/modelscope/Trinity-RFT/tree/main/examples/mix_chord) | `chord` |
 | 梯度保留 clip | [GPPO](2508.07629-gppo/README.md) | Alibaba Group，2025-08-11 | 未发现官方代码 | `gppo` |
 | 训推失配校正 | [TIS](web-2025-tis/README.md) | University of California, San Diego，2025-08-05 | 未发现官方代码 | `tis` |
@@ -213,6 +219,7 @@
 | 自博弈课程 | [SPIRAL](2506.24119-spiral/README.md) | Apple，2025-06-30 | [已开源](https://github.com/spiral-rl/spiral) | `spiral` |
 | 长上下文 RL | [CISPO / MiniMax-M1](2506.13585-cispo/README.md) | MiniMax，2025-06-16 | [已开源](https://github.com/MiniMax-AI/MiniMax-M1) | `cispo` |
 | 自置信奖励 | [INTUITOR](2505.19590-intuitor/README.md) | University of California, Berkeley，2025-05-26 | [已开源](https://github.com/sunblaze-ucb/Intuitor) | `intuitor` |
+| 奖励建模与信用分配 | [SCAR: Shapley Credit Assignment for More Efficient RLHF](2505.20417-scar-shapley-credit/README.md) | McGill University，2025-05-26 | 未发现官方代码 | `scar-shapley-credit`：仅低成本组件，完整实验不复现 |
 | 零数据自博弈 | [Absolute Zero](2505.03335-absolute-zero/README.md) | Tsinghua University，2025-05-06 | [已开源](https://github.com/LeapLabTHU/Absolute-Zero-Reasoner) | `absolute-zero` |
 | 测试时强化学习 | [TTRL](2504.16084-ttrl/README.md) | PRIME-RL author team，2025-04-22 | [已开源](https://github.com/PRIME-RL/TTRL) | `ttrl` |
 | 离策略推理 RL | [LUFFY](2504.14945-luffy/README.md) | University of Washington，2025-04-21 | [已开源](https://github.com/Simplified-Reasoning/LUFFY) | `luffy` |

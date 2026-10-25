@@ -1,0 +1,17 @@
+{
+  "paper_id": "2509.26600v3",
+  "figure": "Figure 1",
+  "source_page": "https://arxiv.org/html/2509.26600v3#S5.F1",
+  "source_url": "https://arxiv.org/html/2509.26600v3/ttr_by_models_xx_en_src_only_manual.svg",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "dce4b4e9a9828b6df0bb576cae74c1b7be9d2ebdb9ebc69f8fc05f8614182f3d",
+  "license": "CC BY 4.0",
+  "transformation": "rasterization_white_background",
+  "visually_verified": true,
+  "visual_review": "已目视核对固定v3 Figure 1，标签、公式/连线或图例可读；保留原SVG，PNG只栅格化到1800px并加白色画布，避免透明底在深色主题隐藏黑色标签",
+  "checked_on": "2026-10-25",
+  "original_svg_path": "paper-figure-01.svg",
+  "original_svg_sha256": "21957ef444d944a3d90607bbee57db325797e4b215c6f2cf036de2cd51032ccc",
+  "render_command": "rsvg-convert --background-color white --keep-aspect-ratio --width 1800 --format png --output paper-figure-01.png paper-figure-01.svg"
+}

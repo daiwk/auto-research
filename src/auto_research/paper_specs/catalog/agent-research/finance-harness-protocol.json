@@ -1,0 +1,17 @@
+{
+  "domain": "agent-research", "key": "finance-harness-protocol", "title": "FinanceHarness: Autonomous Financial Deep Research Framework",
+  "paper_url": "https://arxiv.org/abs/2607.27853v1", "reviewed_version_url": "https://arxiv.org/html/2607.27853v2",
+  "detail_path": "agent-research/2607.27853-finance-harness-protocol/README.md", "topic": ["评测与可验证Agent", "时点隔离与深度调研"],
+  "first_author": "Yijia Xiao", "first_author_affiliation": "Google Cloud AI Research",
+  "published": "2026-07-30", "published_at": "2026-07-30T08:32:04Z",
+  "code": "https://github.com/Yijia-Xiao/FinanceHarness", "upstream_revision": "1163c5e7a8f35ff6217c3a480f7b04562355e0cc", "code_license": "Apache-2.0",
+  "code_status": "作者发布harness；FinanceGym官方另在google-research/google-research/finance_harness（路径commit b24f2136e8ef405b900b5619760126304f190941）；原文说明底层corpus和私有rubric不公开，不写成完全公开可复测",
+  "priority": "P1", "intake_class": "historical_backfill", "adapter": null,
+  "implementation_status": "component_only", "local_operator": "auto_research.agent_research.finance_harness_protocol.outcome_score",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.finance_harness_protocol import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism", "diagnostic_only": true, "promotion_eligible": false, "evolve_integrated": false, "requires_gpu_validation": false,
+  "review_done": true, "review_resolution": "not_reproduced_high_cost", "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": true,
+  "automatic_retry": false, "automatic_implementation_queue": false,
+  "cost_assessment": {"source": "固定v2 Section3/5/6.2及release policy", "model_scale": "Qwen3.6-27B orchestrator与4B embedding、多个闭源模型", "data_scale": "100M+文档、4.37M实体边、400专家题/2464rubric", "available_resource": "单张A100或A30，或Mac", "paper_configuration": "500题多系统运行、私有PIT检索与LLM评分，另172题GRPO训练", "estimated_cost_basis": "网页级语料编码、27B长轨迹/多API评测昂贵且原始语料和评分rubric未公开；未下载或试跑", "decision": "完整实验成本过高，不复现（审查 DONE）；只交付PIT/逐题等权评分协议"},
+  "summary": "检索与读取同时强制发布日期不晚于题目截止日，未知日期拒绝；泄露使运行无效而非普通零分。评分采用每题rubric得分除以4倍该题条目数、再逐题平均，避免多rubric题主导。仅CPU接口，不生成投资建议或声称金融研究能力。"
+}

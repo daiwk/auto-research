@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "adapter_key": "probabilistic-autorater",
+  "validated_at": "2026-10-25",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python3",
+    "scripts/run_google_emnlp25_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "4cce1ab4d701df8daaed9a8abe8671f3eef9d168",
+    "--frozen-proof",
+    "google-emnlp25-frozen-proof.json",
+    "--output",
+    "results/components-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:google-emnlp25-probabilistic-autorater-v1",
+    "revision": "sha256:387d43080386aedace59b5253eaba89ec7ef96efea6be4e4ad6f98d02b17b292",
+    "recipe": "frozen-source-bounded-mechanism-or-offline-protocol",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "4cce1ab4d701df8daaed9a8abe8671f3eef9d168",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "analytic_loss_after": {
+      "mean": -0.6474705271201496,
+      "std": 0.03840532485541861,
+      "n": 3
+    },
+    "analytic_loss_before": {
+      "mean": -0.6469914412216616,
+      "std": 0.03844213545925993,
+      "n": 3
+    },
+    "formula_abs_error": {
+      "mean": 3.700743415417188e-17,
+      "std": 6.409875621278546e-17,
+      "n": 3
+    },
+    "gradient_max_abs_error": {
+      "mean": 6.938893903907228e-18,
+      "std": 3.469446951953614e-18,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+    "docs/research-audits/google-emnlp25-closure/execution-spec.json": "6fa9f60245d7bad1ff087b0fd387360c32597912c2a004f4d7adfee536a9f1bf",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/agent_research/dmast.py": "9bd1d38a133cac57e2cac822a5f8050b0208196c1a5dd011fe67e588823444d3",
+    "src/auto_research/agent_research/finance_harness_protocol.py": "4799418d649ce1793e763c2445366d19e3f909b6f924369d9a03804e51a25cb4",
+    "src/auto_research/agent_research/sopbench_protocol.py": "f8645a19302ba354354866f5bf7bf6342a3342bee38d8d69cfd1402826398a7d",
+    "src/auto_research/evaluation/xlgobench.py": "7ff09bf3d807f4c4d47728960b014f32161c9d5595ad2258edef25a48ec1bdb6",
+    "src/auto_research/foundation_models/combinatorial_watermark.py": "ee1ceba5cd67ad81d4dbee5b0746e00ac15596466fd0099ab1bf0661a8829668",
+    "src/auto_research/foundation_models/interpolated_null_calibration.py": "15da6e0c838ee16eec2ff13708b811699d82f5c6759d8e8da49f3c5561ce7452",
+    "src/auto_research/foundation_models/mechanistic_etm.py": "4a0a27f1aa28ed0ad5333324333c1db712ddb6bfdf522e470b0692a16502ac83",
+    "src/auto_research/foundation_models/taskpress.py": "8ac4db9204ccac1a29145e3c1fb57cae7fa02ece30b4325a76aa6e06750a65e9",
+    "src/auto_research/multimodal/cue2narrate_drl.py": "15f35e0ec9e88684aa93f07418459768e8d010755d6837f2cd3d5dd84e6f9e71",
+    "src/auto_research/post_training/benchmark_self_bias.py": "2f4aa1a0dde3c03a018344b286a897d328cf31b78e170ff463f15c9eee252282",
+    "src/auto_research/post_training/polaris_hri.py": "4b7f7c7e0537c3483646fb9ea8f68c3af3c859781d87427a307d90d88f9a163a",
+    "src/auto_research/post_training/probabilistic_autorater.py": "76ae4cbb9bdf55e54ae30528d24d81868f3e1b02eed1d62a814d883f55f5cabe",
+    "src/auto_research/post_training/rm_memorization_protocol.py": "a91fcc7b7d2c0a5773f1e1c53a8886e54426a2777588672f8212c7a2c961f5f8",
+    "src/auto_research/post_training/scar_shapley_credit.py": "363c7f0c6abeb59b5809b33031f82e4dd769c4c68face3abd738696958698850"
+  },
+  "provenance": {
+    "commit": "4cce1ab4d701df8daaed9a8abe8671f3eef9d168",
+    "artifact_path": "docs/gpu-validations/probabilistic-autorater-a100-20261025.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "docs/research-audits/google-emnlp25-closure/execution-spec.json": "6fa9f60245d7bad1ff087b0fd387360c32597912c2a004f4d7adfee536a9f1bf",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/agent_research/dmast.py": "9bd1d38a133cac57e2cac822a5f8050b0208196c1a5dd011fe67e588823444d3",
+      "src/auto_research/agent_research/finance_harness_protocol.py": "4799418d649ce1793e763c2445366d19e3f909b6f924369d9a03804e51a25cb4",
+      "src/auto_research/agent_research/sopbench_protocol.py": "f8645a19302ba354354866f5bf7bf6342a3342bee38d8d69cfd1402826398a7d",
+      "src/auto_research/evaluation/xlgobench.py": "7ff09bf3d807f4c4d47728960b014f32161c9d5595ad2258edef25a48ec1bdb6",
+      "src/auto_research/foundation_models/combinatorial_watermark.py": "ee1ceba5cd67ad81d4dbee5b0746e00ac15596466fd0099ab1bf0661a8829668",
+      "src/auto_research/foundation_models/interpolated_null_calibration.py": "15da6e0c838ee16eec2ff13708b811699d82f5c6759d8e8da49f3c5561ce7452",
+      "src/auto_research/foundation_models/mechanistic_etm.py": "4a0a27f1aa28ed0ad5333324333c1db712ddb6bfdf522e470b0692a16502ac83",
+      "src/auto_research/foundation_models/taskpress.py": "8ac4db9204ccac1a29145e3c1fb57cae7fa02ece30b4325a76aa6e06750a65e9",
+      "src/auto_research/multimodal/cue2narrate_drl.py": "15f35e0ec9e88684aa93f07418459768e8d010755d6837f2cd3d5dd84e6f9e71",
+      "src/auto_research/post_training/benchmark_self_bias.py": "2f4aa1a0dde3c03a018344b286a897d328cf31b78e170ff463f15c9eee252282",
+      "src/auto_research/post_training/polaris_hri.py": "4b7f7c7e0537c3483646fb9ea8f68c3af3c859781d87427a307d90d88f9a163a",
+      "src/auto_research/post_training/probabilistic_autorater.py": "76ae4cbb9bdf55e54ae30528d24d81868f3e1b02eed1d62a814d883f55f5cabe",
+      "src/auto_research/post_training/rm_memorization_protocol.py": "a91fcc7b7d2c0a5773f1e1c53a8886e54426a2777588672f8212c7a2c961f5f8",
+      "src/auto_research/post_training/scar_shapley_credit.py": "363c7f0c6abeb59b5809b33031f82e4dd769c4c68face3abd738696958698850"
+    },
+    "raw_runner_artifact_sha256": "9d12b822714793d21836777e52a568f879db7e708365303c34fd62f26d6ab546",
+    "dataset_fingerprint": "sha256:763b4c28216cd44e1cfb6d8a69fd831ff267b9e788484ce6ffa989520c13c75e",
+    "metric_artifact_path": "docs/post-training/2510.00263-probabilistic-autorater/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

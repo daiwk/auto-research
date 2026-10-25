@@ -1,0 +1,856 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-25-google-emnlp25-closure",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "components": [
+    {
+      "key": "scar-shapley-credit",
+      "id": "2505.20417",
+      "domain": "post-training",
+      "operator": "auto_research.post_training.scar_shapley_credit.exact_shapley",
+      "source": "src/auto_research/post_training/scar_shapley_credit.py",
+      "device": "cuda",
+      "checks": [
+        "alpha_zero_is_sparse_reward",
+        "dummy_player_zero",
+        "efficiency_preserves_undiscounted_return",
+        "exact_shapley_matches_independent_game",
+        "frozen_reward_model_table",
+        "signed_contributions_not_clamped",
+        "span_end_only_not_uniform_spread"
+      ],
+      "metrics": [
+        "coalitions",
+        "formula_max_abs_error",
+        "model_calls",
+        "players",
+        "return_preservation_error"
+      ],
+      "gates": [
+        {
+          "metric": "formula_max_abs_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "return_preservation_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "coalitions",
+          "op": "eq",
+          "value": 16
+        },
+        {
+          "metric": "players",
+          "op": "eq",
+          "value": 4
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "probabilistic-autorater",
+      "id": "2510.00263",
+      "domain": "post-training",
+      "operator": "auto_research.post_training.probabilistic_autorater.proper_rewards",
+      "source": "src/auto_research/post_training/probabilistic_autorater.py",
+      "device": "cuda",
+      "checks": [
+        "analytic_gradient_matches",
+        "analytic_optimizer_update_decreases_loss",
+        "invalid_probability_zero_gradient",
+        "overconfident_wrong_log_penalty",
+        "proper_reward_matches_expected_brier",
+        "strict_tag_parser_rejects_duplicates",
+        "unparseable_penalties_exact"
+      ],
+      "metrics": [
+        "analytic_loss_after",
+        "analytic_loss_before",
+        "formula_abs_error",
+        "gradient_max_abs_error",
+        "model_calls"
+      ],
+      "gates": [
+        {
+          "metric": "formula_abs_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "gradient_max_abs_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "analytic_loss_after",
+          "op": "lt",
+          "other_metric": "analytic_loss_before"
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "rm-memorization-protocol",
+      "id": "2607.24484",
+      "domain": "post-training",
+      "operator": "auto_research.post_training.rm_memorization_protocol.counterfactual_memorization",
+      "source": "src/auto_research/post_training/rm_memorization_protocol.py",
+      "device": "cuda",
+      "checks": [
+        "cm_is_tm_minus_tg",
+        "conditional_probability_means_match",
+        "frozen_external_model_scores",
+        "joint_run_permutation_invariant",
+        "user_level_leakage_rejected"
+      ],
+      "metrics": [
+        "formula_max_abs_error",
+        "mean_counterfactual_memorization",
+        "model_calls",
+        "observed_runs",
+        "pairs"
+      ],
+      "gates": [
+        {
+          "metric": "formula_max_abs_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "pairs",
+          "op": "eq",
+          "value": 4
+        },
+        {
+          "metric": "observed_runs",
+          "op": "eq",
+          "value": 25
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "benchmark-self-bias",
+      "id": "2509.26600",
+      "domain": "post-training",
+      "operator": "auto_research.post_training.benchmark_self_bias.self_bias",
+      "source": "src/auto_research/post_training/benchmark_self_bias.py",
+      "device": "cuda",
+      "checks": [
+        "explicit_average_ties",
+        "leave_self_out_formula_matches",
+        "metricx_direction_explicit",
+        "model_role_joint_permutation_equivariant",
+        "negative_means_self_preference",
+        "not_absolute_quality_estimate",
+        "positive_score_affine_invariant"
+      ],
+      "metrics": [
+        "formula_max_abs_error",
+        "mean_relative_self_bias",
+        "model_calls",
+        "models",
+        "segments"
+      ],
+      "gates": [
+        {
+          "metric": "formula_max_abs_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "mean_relative_self_bias",
+          "op": "lt",
+          "value": 0
+        },
+        {
+          "metric": "segments",
+          "op": "eq",
+          "value": 7
+        },
+        {
+          "metric": "models",
+          "op": "eq",
+          "value": 3
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "dmast",
+      "id": "2603.04364",
+      "domain": "agent-research",
+      "operator": "auto_research.agent_research.dmast.grpo_loss",
+      "source": "src/auto_research/agent_research/dmast.py",
+      "device": "cuda",
+      "checks": [
+        "clean_attack_modes_separated",
+        "frozen_rollout_reference_rewards",
+        "gradient_matches_reference",
+        "padding_and_excluded_zero_gradient",
+        "raw_pooled_role_statistics",
+        "real_shared_policy_update",
+        "zero_importance_branch_finite_zero_gradient",
+        "zero_raw_variance_excluded"
+      ],
+      "metrics": [
+        "eligible_trajectories",
+        "formula_reference_error",
+        "gradient_reference_error",
+        "loss",
+        "optimizer_steps",
+        "parameter_delta",
+        "valid_tokens"
+      ],
+      "gates": [
+        {
+          "metric": "formula_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "gradient_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "parameter_delta",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "valid_tokens",
+          "op": "eq",
+          "value": 35
+        },
+        {
+          "metric": "eligible_trajectories",
+          "op": "eq",
+          "value": 6
+        },
+        {
+          "metric": "optimizer_steps",
+          "op": "eq",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "key": "sopbench-protocol",
+      "id": "2503.08669",
+      "domain": "agent-research",
+      "operator": "auto_research.agent_research.sopbench_protocol.evaluate_trace",
+      "source": "src/auto_research/agent_research/sopbench_protocol.py",
+      "device": "cpu",
+      "checks": [
+        "chain_order_enforced",
+        "oracle_refutes_claimed_success",
+        "three_dimensions_conjoined",
+        "wrong_request_helper_rejected"
+      ],
+      "metrics": [
+        "false_accepts",
+        "fixture_cases",
+        "model_calls",
+        "observed_pass_cases"
+      ],
+      "gates": [
+        {
+          "metric": "fixture_cases",
+          "op": "eq",
+          "value": 4
+        },
+        {
+          "metric": "observed_pass_cases",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "false_accepts",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "finance-harness-protocol",
+      "id": "2607.27853",
+      "domain": "agent-research",
+      "operator": "auto_research.agent_research.finance_harness_protocol.outcome_score",
+      "source": "src/auto_research/agent_research/finance_harness_protocol.py",
+      "device": "cpu",
+      "checks": [
+        "live_web_audit_invalidates_submission",
+        "question_equal_not_item_equal",
+        "read_cannot_bypass_cutoff",
+        "search_cutoff_inclusive_fail_closed"
+      ],
+      "metrics": [
+        "documents",
+        "model_calls",
+        "pooled_item_negative_control",
+        "question_equal_score",
+        "visible_documents"
+      ],
+      "gates": [
+        {
+          "metric": "documents",
+          "op": "eq",
+          "value": 4
+        },
+        {
+          "metric": "visible_documents",
+          "op": "eq",
+          "value": 2
+        },
+        {
+          "metric": "question_equal_score",
+          "op": "eq",
+          "value": 0.5
+        },
+        {
+          "metric": "pooled_item_negative_control",
+          "op": "eq",
+          "value": 0.25
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "cue2narrate-drl",
+      "id": "2609.01725",
+      "domain": "multimodal-models",
+      "operator": "auto_research.multimodal.cue2narrate_drl.description_ranking_loss",
+      "source": "src/auto_research/multimodal/cue2narrate_drl.py",
+      "device": "cuda",
+      "checks": [
+        "both_current_policy_gradients_match",
+        "equations5_8_reference",
+        "prompt_padding_zero_gradient",
+        "real_optimizer_step_decreases_fixture"
+      ],
+      "metrics": [
+        "fixture_loss_after",
+        "fixture_loss_before",
+        "formula_error",
+        "gradient_error",
+        "negative_gradient_norm",
+        "negative_tokens",
+        "optimizer_steps",
+        "positive_tokens",
+        "pretrained_model_calls"
+      ],
+      "gates": [
+        {
+          "metric": "formula_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "gradient_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "negative_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "fixture_loss_after",
+          "op": "lt",
+          "other_metric": "fixture_loss_before"
+        },
+        {
+          "metric": "positive_tokens",
+          "op": "eq",
+          "value": 9
+        },
+        {
+          "metric": "negative_tokens",
+          "op": "eq",
+          "value": 18
+        },
+        {
+          "metric": "optimizer_steps",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "polaris-hri",
+      "id": "2606.04095",
+      "domain": "post-training",
+      "operator": "auto_research.post_training.polaris_hri.hri_grpo_loss",
+      "source": "src/auto_research/post_training/polaris_hri.py",
+      "device": "cuda",
+      "checks": [
+        "eq5_policy_only_sample_statistics",
+        "old_and_advantages_frozen",
+        "padding_zero_gradient",
+        "real_optimizer_step_decreases_fixture",
+        "reference_uses_same_clipped_surrogate",
+        "zero_step_reference_warmup"
+      ],
+      "metrics": [
+        "advantage_reference_error",
+        "fixture_loss_after",
+        "fixture_loss_before",
+        "loss_reference_error",
+        "optimizer_steps",
+        "policy_rollouts_per_group",
+        "pretrained_model_calls",
+        "reference_gradient_norm",
+        "references_per_group"
+      ],
+      "gates": [
+        {
+          "metric": "advantage_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "loss_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "reference_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "fixture_loss_after",
+          "op": "lt",
+          "other_metric": "fixture_loss_before"
+        },
+        {
+          "metric": "policy_rollouts_per_group",
+          "op": "eq",
+          "value": 5
+        },
+        {
+          "metric": "references_per_group",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "optimizer_steps",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "taskpress",
+      "id": "2608.03276",
+      "domain": "foundation-models",
+      "operator": "auto_research.foundation_models.taskpress.prune_taskpress",
+      "source": "src/auto_research/foundation_models/taskpress.py",
+      "device": "cuda",
+      "checks": [
+        "actual_kv_gather",
+        "eq1_3_independent_reference",
+        "guide_tokens_discarded",
+        "multiplicative_not_additive",
+        "per_head_topk_and_original_positions"
+      ],
+      "metrics": [
+        "additive_negative_control_gap",
+        "context_tokens",
+        "guide_tokens",
+        "kv_heads",
+        "original_tokens",
+        "pretrained_model_calls",
+        "retained_tokens_per_head",
+        "score_reference_error",
+        "value_scale_reference_error"
+      ],
+      "gates": [
+        {
+          "metric": "score_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "value_scale_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "additive_negative_control_gap",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "original_tokens",
+          "op": "eq",
+          "value": 11
+        },
+        {
+          "metric": "context_tokens",
+          "op": "eq",
+          "value": 8
+        },
+        {
+          "metric": "guide_tokens",
+          "op": "eq",
+          "value": 3
+        },
+        {
+          "metric": "retained_tokens_per_head",
+          "op": "eq",
+          "value": 4
+        },
+        {
+          "metric": "kv_heads",
+          "op": "eq",
+          "value": 2
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "combinatorial-watermark",
+      "id": "2510.01637",
+      "domain": "foundation-models",
+      "operator": "auto_research.foundation_models.combinatorial_watermark.detect",
+      "source": "src/auto_research/foundation_models/combinatorial_watermark.py",
+      "device": "cpu",
+      "checks": [
+        "clean_hard_pattern_no_interior_false_alarm",
+        "cyclic_phase_invariance",
+        "eq4_global_matches_phase_oracle",
+        "eq5_local_matches_covering_window_oracle",
+        "logit_shift_increases_target_tag_mass",
+        "single_edit_flags_its_interior_position"
+      ],
+      "metrics": [
+        "clean_global_score",
+        "edited_global_score",
+        "flagged_interior_positions",
+        "global_reference_error",
+        "local_reference_error",
+        "pattern_period",
+        "pretrained_model_calls",
+        "target_tag_mass_gain",
+        "tokens",
+        "window"
+      ],
+      "gates": [
+        {
+          "metric": "global_reference_error",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "local_reference_error",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "clean_global_score",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "edited_global_score",
+          "op": "lt",
+          "value": 1
+        },
+        {
+          "metric": "flagged_interior_positions",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "target_tag_mass_gain",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "tokens",
+          "op": "eq",
+          "value": 64
+        },
+        {
+          "metric": "window",
+          "op": "eq",
+          "value": 4
+        },
+        {
+          "metric": "pattern_period",
+          "op": "eq",
+          "value": 8
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "interpolated-null-calibration",
+      "id": "2609.17764",
+      "domain": "foundation-models",
+      "operator": "auto_research.foundation_models.interpolated_null_calibration.interpolated_null_calibration",
+      "source": "src/auto_research/foundation_models/interpolated_null_calibration.py",
+      "device": "cuda",
+      "checks": [
+        "eq6_eq7_decomposition",
+        "exact_three_pass_gradient",
+        "instruction_footprint_can_change_ranking",
+        "lambda0_is_not_no_calibration",
+        "zero_and_one_endpoints"
+      ],
+      "metrics": [
+        "bare_null_negative_control_gap",
+        "decomposition_error",
+        "documents_per_query",
+        "endpoint_error",
+        "gradient_error",
+        "passes",
+        "pretrained_model_calls",
+        "queries"
+      ],
+      "gates": [
+        {
+          "metric": "decomposition_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "gradient_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "endpoint_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "bare_null_negative_control_gap",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "queries",
+          "op": "eq",
+          "value": 3
+        },
+        {
+          "metric": "documents_per_query",
+          "op": "eq",
+          "value": 6
+        },
+        {
+          "metric": "passes",
+          "op": "eq",
+          "value": 3
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "xlgobench",
+      "id": "2605.30788",
+      "domain": "foundation-models",
+      "operator": "auto_research.evaluation.xlgobench.evaluate",
+      "source": "src/auto_research/evaluation/xlgobench.py",
+      "device": "cpu",
+      "checks": [
+        "all_five_exact_algorithmic_scorers",
+        "callback_cannot_mutate_scorer_case",
+        "no_gold_in_model_payload",
+        "probabilistic_top8_order_invariant",
+        "wrong_model_not_reported_success"
+      ],
+      "metrics": [
+        "blind_fixture_model_correct",
+        "human_validated_translation_templates_executed",
+        "model_payloads_without_gold",
+        "pretrained_model_calls",
+        "scorer_positive_controls",
+        "scorer_wrong_controls_accepted",
+        "task_families"
+      ],
+      "gates": [
+        {
+          "metric": "scorer_positive_controls",
+          "op": "eq",
+          "value": 5
+        },
+        {
+          "metric": "scorer_wrong_controls_accepted",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "blind_fixture_model_correct",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "model_payloads_without_gold",
+          "op": "eq",
+          "value": 5
+        },
+        {
+          "metric": "task_families",
+          "op": "eq",
+          "value": 5
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "human_validated_translation_templates_executed",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "mechanistic-etm",
+      "id": "2507.23220",
+      "domain": "foundation-models",
+      "operator": "auto_research.foundation_models.mechanistic_etm.MechanisticETM",
+      "source": "src/auto_research/foundation_models/mechanistic_etm.py",
+      "device": "cuda",
+      "checks": [
+        "eq11_uses_encoder_not_decoder",
+        "eq12_binomial_likelihood_reference",
+        "eq16_unit_topic_direction",
+        "eq19_replaces_parallel_preserves_perpendicular",
+        "frozen_sae_matrices",
+        "real_topic_and_variational_update"
+      ],
+      "metrics": [
+        "binomial_reference_error",
+        "documents",
+        "encoder_decoder_swap_negative_control_gap",
+        "fixture_loss_after",
+        "fixture_loss_before",
+        "optimizer_steps",
+        "pretrained_model_calls",
+        "sae_features",
+        "steering_perpendicular_error",
+        "steering_projection_error",
+        "topic_gradient_norm",
+        "topics"
+      ],
+      "gates": [
+        {
+          "metric": "binomial_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "topic_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "fixture_loss_after",
+          "op": "lt",
+          "other_metric": "fixture_loss_before"
+        },
+        {
+          "metric": "steering_projection_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "steering_perpendicular_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "encoder_decoder_swap_negative_control_gap",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "documents",
+          "op": "eq",
+          "value": 4
+        },
+        {
+          "metric": "sae_features",
+          "op": "eq",
+          "value": 7
+        },
+        {
+          "metric": "topics",
+          "op": "eq",
+          "value": 3
+        },
+        {
+          "metric": "optimizer_steps",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}

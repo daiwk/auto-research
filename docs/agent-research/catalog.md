@@ -181,6 +181,7 @@
 | 检索—记忆共进化 | [CoEvo-Mem](2608.01739-coevo-mem/README.md) | 论文未列机构，2026-08-03 | 未发现官方代码 | `coevo-mem` |
 | 搜索轨迹 hindsight | [HindSearch: Trajectory-Level Hindsight Critique for Search-Augmented Reinforcement Learning](2608.01597-hindsearch/README.md) | Santa Clara University，2026-08-03 | [已开源](https://anonymous.4open.science/r/hindsearch-anon-EBDC) | `hindsearch` |
 | 工具规划 | [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](2608.02650-hyperagent/README.md) | University of New South Wales，2026-07-31 | 未发现官方代码 | `hyperagent` |
+| 评测与可验证Agent | [FinanceHarness: Autonomous Financial Deep Research Framework](2607.27853-finance-harness-protocol/README.md) | Google Cloud AI Research，2026-07-30 | [原作者入口](https://github.com/Yijia-Xiao/FinanceHarness)；作者发布harness；FinanceGym官方另在google-research/google-research/finance_harness（路径commit b24f2136e8ef405b900b5619760126304f190941）；原文说明底层corpus和私有rubric不公开，不写成完全公开可复测 | `finance-harness-protocol`：仅低成本组件，完整实验不复现 |
 | Agent group credit | [Group-Reflective Self-Distillation](2607.28076-grsd/README.md) | Baidu Inc.，2026-07-30 | [已开源](https://github.com/BinbZheng1/GRSD) | `grsd` |
 | 多 Agent | [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](2607.28527-manta/README.md) | Cornell University，2026-07-30 | 未发现官方代码 | `manta` |
 | CUA Reward 评测 | [OSReward / OS-Shepherd](2607.28609-osreward/README.md) | The University of Hong Kong，2026-07-30 | [已开源](https://os-copilot.github.io/OSReward-Home/) | `os-shepherd` |
@@ -190,6 +191,7 @@
 | Agentic RL / turn-level credit | [CAST](2607.25308-cast/README.md) | University of Science and Technology of China，2026-07-28 | [已开源](https://github.com/Wloner0809/CAST) | `cast` |
 | Hierarchical skill memory | [HiSkill](2607.25853-hiskill/README.md) | Beijing University of Posts and Telecommunications，2026-07-28 | [已开源](https://github.com/BUPT-GAMMA/HiSkill) | `hiskill` |
 | Continual agent memory | [UniMem](2607.26017-unimem/README.md) | CASIA，2026-07-28 | 未发现官方代码 | `unimem` |
+| 自进化与经验复用 | [AgentDebugX: An Open-Source Toolkit for Failure Observability, Attribution, and Recovery in LLM Agents](2607.18754-agentdebugx/README.md) | University of Illinois Urbana-Champaign，2026-07-21 | [原作者入口](https://github.com/AgentDebugX/AgentDebugX)；原作者发布trace schema、DeepDebug多轮诊断、集成、console和评测；固定main源码已核实，不运行外部工具或模型 | 计划键 `agentdebugx`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Agentic RL / hindsight skill | [SEED](2607.14777-seed/README.md) | Tsinghua University，2026-07-16 | [已开源](https://github.com/jinyangwu/SEED) | `seed` |
 | 主动记忆 | [Memory as a Controlled Process: Learned Adaptive Memory Management for LLM Agents](2607.13591-memcon/README.md) | 未明确标注（正文 HTML 未显示一作机构映射），2026-07-15 | [已开源](https://github.com/ericjiang18/MemCon/) | `memcon` |
 | Agentic OPD / rollout budgeting | [TurnOPD](2607.05804-turn-opd/README.md) | Academic author team，2026-07-07 | 未发现官方代码 | `turn-opd` |
@@ -207,6 +209,7 @@
 | RSI | [HyperAgents](2603.19461-hyperagents/README.md) | University of British Columbia，2026-03-19 | [已开源](https://github.com/facebookresearch/hyperagents) | `hyperagents` |
 | 技能设计 | [Memento-Skills](2603.18743-memento-skills/README.md) | Memento Team，2026-03-19 | [已开源](https://github.com/Memento-Teams/Memento-Skills) | `memento-skills` |
 | Agent 自进化 | [POLCA: Stochastic Generative Optimization with LLM](2603.14769-polca/README.md) | University of Wisconsin-Madison，2026-03-16 | [原作者入口](https://github.com/rlx-lab/POLCA)；作者公开入口固定356d0177d034df8c70bf351f5f62c93dbb226b41；其setup脚本指向Trace experimental，核心核对4ee52f12f0bb328dfee2f16b6c1801232c6ccf46 | `polca`：仅低成本组件，完整实验不复现 |
+| Agentic RL | [Dual-Modality Multi-Stage Adversarial Safety Training: Robustifying Multimodal Web Agents Against Cross-Modal Attacks](2603.04364-dmast/README.md) | University of California, Berkeley，2026-03-04 | [原作者入口](https://github.com/huajianduzhuo-code/DMAST_official)；原作者发布三阶段训练与BrowserGym源码；固定SHA根目录未见LICENSE、GitHub许可为null；本地仅按论文独立实现Stage3数值目标，不复制作者代码 | `dmast`：仅低成本组件，完整实验不复现 |
 | 主动记忆 | [U-Mem](2602.22406-u-mem/README.md) | National University of Singapore，2026-02-25 | [已开源](https://anonymous.4open.science/r/code-release-456D/) | `u-mem` |
 | Agent 评测 | [ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders](2602.16938-convapparel/README.md) | Google，2026-02-18 | 未发现官方代码 | `convapparel`：CPU 评测接口，不执行模型 |
 | 个性化 Agent | [Learning Personalized Agents from Human Feedback](2602.16173-pahf/README.md) | Meta Superintelligence Labs / Princeton University（工作完成于 Meta），2026-02-18 | [已开源](https://github.com/facebookresearch/PAHF) | `pahf` |
@@ -216,6 +219,8 @@
 | 记忆技能 | [MemSkill](2602.02474-memskill/README.md) | Nanyang Technological University，2026-02-02 | [已开源](https://github.com/ViktorAxelsen/MemSkill) | `memskill` |
 | 规划强化学习 | [PEARL](2601.20439-pearl/README.md) | 中国科学院信息工程研究所，2026-01-28 | 未发现官方代码 | `pearl` |
 | 代码 Agent | [Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair](2601.19066-dynamic-brt/README.md) | Google，2026-01-27 | 未发现官方代码 | `dynamic-brt`：仅低成本组件，完整实验不复现 |
+| 评测与可验证Agent | [LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning](2601.13880-lifeagentbench/README.md) | University of California San Diego，2026-01-20 | [原作者入口](https://github.com/gdfwj/LifeAgentBench)；项目官方页直接链接作者仓库，已发布CP/SQL评测与数据构建；固定根目录未见LICENSE、GitHub许可null；论文AppendixF说明研究/非商业限制，不能推断MIT或开放再分发权利 | 计划键 `lifeagentbench`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| Agent评测与自进化 | [CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation](2601.12208-coreflect/README.md) | University of Illinois Urbana-Champaign，2026-01-18 | 未发现官方代码 | 计划键 `coreflect`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 技能库强化学习 | [SAGE](2512.17102-sage/README.md) | University of Wisconsin–Madison，2025-12-18 | 未发现官方代码 | `sage` |
 | 零数据多 Agent | [Agent0](2511.16043-agent0/README.md) | University of North Carolina at Chapel Hill，2025-11-20 | 未发现官方代码 | `agent0` |
 | Agentic RL 基础设施 | [Agent-R1](2511.14460-agent-r1/README.md) | University of Science and Technology of China，2025-11-18 | [已开源](https://github.com/AgentR1/Agent-R1) | `agent-r1` |
@@ -231,6 +236,7 @@
 | 推理中工具调用 | [ReTool](2504.11536-retool/README.md) | ByteDance Seed，2025-04-15 | 未发现官方代码 | `retool` |
 | 深度研究 RL | [DeepResearcher](2504.03160-deepresearcher/README.md) | HKU，2025-04-04 | [已开源](https://github.com/GAIR-NLP/DeepResearcher) | `deepresearcher` |
 | 搜索 Agent RL | [Search-R1](2503.09516-search-r1/README.md) | University of Illinois Urbana-Champaign，2025-03-12 | [已开源](https://github.com/PeterGriffinJin/Search-R1) | `search-r1` |
+| 工具使用与环境 | [SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints](2503.08669-sopbench-protocol/README.md) | University of California, Santa Barbara，2025-03-11 | [原作者入口](https://github.com/Leezekun/SOPBench)；作者发布七域环境、约束程序、903测试与轨迹；代码MIT、数据另有DATA_LICENSE，本地独立实现评测规则，不复制数据 | `sopbench-protocol`：仅低成本组件，完整实验不复现 |
 | 长时程 Agent RL | [LOOP](2502.01600-loop/README.md) | Apple，2025-02-03 | [已开源](https://github.com/apple/ml-loop) | `loop` |
 | 通用软件 Agent | [OpenHands](2407.16741-openhands/README.md) | All-Hands-AI，2024-07-23 | [已开源](https://github.com/All-Hands-AI/OpenHands) | `openhands` |
 | 软件工程 ACI | [SWE-agent](2405.15793-swe-agent/README.md) | Princeton University，2024-05-06 | [已开源](https://github.com/SWE-agent/SWE-agent) | `swe-agent` |

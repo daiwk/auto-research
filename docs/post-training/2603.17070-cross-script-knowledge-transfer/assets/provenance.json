@@ -1,0 +1,15 @@
+{
+  "paper_id": "2603.17070v2",
+  "figure": "Table 3",
+  "source_page": "https://arxiv.org/pdf/2603.17070v2#S5.T3",
+  "source_url": "https://arxiv.org/pdf/2603.17070v2",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "02567b05bdecba9e6939535332a87e3033abe9c81e388579b12af46f218041fc",
+  "license": "CC BY-SA 4.0",
+  "transformation": "pdf_page_render",
+  "visually_verified": true,
+  "visual_review": "已目视核对固定v2 Table 3，标签、公式/连线或图例可读；原PDF第4页完整渲染保留原图/表与上下文，未重绘科学内容",
+  "checked_on": "2026-10-25",
+  "pdf_page": 4
+}

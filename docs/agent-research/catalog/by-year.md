@@ -175,6 +175,7 @@
 - 2026-08 · [CoEvo-Mem](../2608.01739-coevo-mem/README.md)（`coevo-mem`）：只优化 query routing 或只更新 memory bank 会忽略二者反馈环。CoEvo-Mem 让冻结 LLM 生成 route-specific rewrite 和 prior，轻量 residual router 在线修正；任务结果更新路由，轨迹反馈更新 memory value 与 graph relation，并交替冻结一侧控制非平稳性。
 - 2026-08 · [HindSearch: Trajectory-Level Hindsight Critique for Search-Augmented Reinforcement Learning](../2608.01597-hindsearch/README.md)（`hindsearch`）：**主题：搜索轨迹 hindsight。** 冻结 judge 利用 gold answer 为失败搜索轨迹生成逐轨迹 critique，把只有成败的稀疏信号转成辅助 on-policy distillation 信号，并与 GRPO 联合。
 - 2026-07 · [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](../2608.02650-hyperagent/README.md)（`hyperagent`）：把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。
+- 2026-07 · [FinanceHarness: Autonomous Financial Deep Research Framework](../2607.27853-finance-harness-protocol/README.md)（`finance-harness-protocol`）：FinanceHarness 围绕时点限定的搜索环境组织金融工具、分层加载技能与报告证据；FinanceGym 再把评分分为截止日前可检索的证据和只能在截止日后核实的预测。Agent 只能看到问题与截止日，thesis、评分 rubric、未来证据留在提交后的评测器。
 - 2026-07 · [Group-Reflective Self-Distillation](../2607.28076-grsd/README.md)（`grsd`）：轨迹终局 reward 混合了真正有效行为、重复错误与偶然选择。GRSD 让当前 policy 对同题 on-policy group 中每条已验证轨迹反思，再由参数相同的 stop-gradient 快照对比成功/失败反思，形成只在训练期可见的 DO/AVOID guidance，并调制 turn-level advantage。
 - 2026-07 · [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](../2607.28527-manta/README.md)（`manta`）：根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。
 - 2026-07 · [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
@@ -184,6 +185,7 @@
 - 2026-07 · [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。
 - 2026-07 · [HiSkill](../2607.25853-hiskill/README.md)（`hiskill`）：用高层 skill、可执行 AtomicOp 和多类有向边组织经验，推理时只检索任务相关子图来落地动作。
 - 2026-07 · [UniMem](../2607.26017-unimem/README.md)（`unimem`）：新颖任务先进入 episodic buffer；反复出现且可靠的执行模式再被自路由控制器固化到可扩展 parametric memory。
+- 2026-07 · [AgentDebugX: An Open-Source Toolkit for Failure Observability, Attribution, and Recovery in LLM Agents](../2607.18754-agentdebugx/README.md)（`agentdebugx`）：AgentDebugX 在不可变原始轨迹外叠加 Detect、Attribute、Recover、Rerun 产物。DeepDebug 先全局读，再按单/多 Agent 结构独立定位；候选不一致时交叉质询，最终给出责任步骤、证据和具体建议。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-07 · [SEED](../2607.14777-seed/README.md)（`seed`）：从已完成轨迹中反思出可复用 hindsight skill，再用 skill 条件前后的动作概率变化形成稠密 on-policy 蒸馏信号。
 - 2026-07 · [Memory as a Controlled Process: Learned Adaptive Memory Management for LLM Agents](../2607.13591-memcon/README.md)（`memcon`）：MemCon 将记忆使用拆成一个独立的在线控制问题：根据任务进展、重复动作、记忆规模和已有成功计划，选择检索深度、计划注入、替换查询或记忆维护。控制器用轻量表格 UCB 探索，并从任务结束时的二元反馈及效率奖励学习，不为了选择记忆操作额外调用 LLM。
 - 2026-07 · [TurnOPD](../2607.05804-turn-opd/README.md)（`turn-opd`）：用 probe 统计自适应决定 rollout 深度，并逐步把 token KL 预算迁移为 turn-normalized 监督。
@@ -201,6 +203,7 @@
 - 2026-03 · [HyperAgents](../2603.19461-hyperagents/README.md)（`hyperagents`）：把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。
 - 2026-03 · [Memento-Skills](../2603.18743-memento-skills/README.md)（`memento-skills`）：从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。
 - 2026-03 · [POLCA: Stochastic Generative Optimization with LLM](../2603.14769-polca/README.md)（`polca`）：随机 minibatch、程序与评估器都会产生噪声。POLCA 不仅保留一次最高分，而是持续更新候选评价历史；Summarizer 形成全局经验，Proposer 利用当前反馈提出参数，语义 epsilon-net 限制冗余候选。
+- 2026-03 · [Dual-Modality Multi-Stage Adversarial Safety Training: Robustifying Multimodal Web Agents Against Cross-Modal Attacks](../2603.04364-dmast/README.md)（`dmast`）：DMAST 让防守 Agent 与攻击者共享同一 VLM 参数，以不同角色提示交互；先教师模仿，再用不改变目标动作的 oracle reasoning 做 SFT，最后进行共享策略自博弈 RL。改动不只是普通 GRPO：受攻击组中两个角色的原始终局奖励共同决定均值与方差，而成功样本的长度惩罚只进入优势分子。
 - 2026-02 · [U-Mem](../2602.22406-u-mem/README.md)（`u-mem`）：传统 Agent 记忆通常被动写入和检索，缺少“当前知识不够时主动去哪里找”的决策。U-Mem 将获取过程建模为成本递增的级联：先尝试 self/teacher，再做工具研究，最后请求 expert；检索结合语义相似度与 Thompson sampling，并在写回前验证和整理记忆。
 - 2026-02 · [ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders](../2602.16938-convapparel/README.md)（`convapparel`）：模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。
 - 2026-02 · [Learning Personalized Agents from Human Feedback](../2602.16173-pahf/README.md)（`pahf`）：Agent 在行动前从显式用户记忆检索偏好，未知或低置信时主动澄清；行动后无论当前记忆是否自信，都接收纠正并覆盖过期偏好，从而处理新用户、上下文差异和偏好漂移。
@@ -210,6 +213,8 @@
 - 2026-02 · [MemSkill](../2602.02474-memskill/README.md)（`memskill`）：controller 从历史 episode 选择记忆，designer 将重复成功模式编译为技能，并随新反馈升级技能版本。
 - 2026-01 · [PEARL](../2601.20439-pearl/README.md)（`pearl`）：多跳工具调用同时受工具幻觉、参数错误和长程规划薄弱影响。PEARL 的离线阶段用 trial-and-error 建立工具用法与失败条件；在线阶段把 Planner 与 Executor 解耦，用计划正确性、工具链与最终结果组成的密集 reward 进行 GRPO，而不是只依赖稀疏成功信号。
 - 2026-01 · [Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair](../2601.19066-dynamic-brt/README.md)（`dynamic-brt`）：论文让修复和 BRT 留在同一条轨迹；TDD、TLD、Freeform 改变生成顺序。BRT 必须在原 bug 上失败、生成修复上通过。
+- 2026-01 · [LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning](../2601.13880-lifeagentbench/README.md)（`lifeagentbench`）：LifeAgentBench 用可执行 SQL / 程序在饮食、睡眠、活动和情绪记录上生成确定性答案，覆盖长期窗口、跨维度与跨用户任务。LifeAgent 是另一个工具推理基线：先分解子问题，维护证据缓存与中间统计，再根据新证据修订计划并合成回答，不能把 benchmark scorer 当成该 Agent。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-01 · [CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation](../2601.12208-coreflect/README.md)（`coreflect`）：Sec.2.1–2.5 / Appendix G：953条通过真实LLM一致性检查的persona-scenario；planner/simulator/evaluator/analyzer是核心语义模型。只写JSON状态机、对给定数字求均值或手工替换rubric都不能复现其核心，因此不强建低成本heuristic adapter。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## 2025
 
@@ -228,6 +233,7 @@
 - 2025-04 · [ReTool](../2504.11536-retool/README.md)（`retool`）：策略在自然语言 reasoning 与工具执行之间交替，并由可执行反馈学习调用、纠错和停止。
 - 2025-04 · [DeepResearcher](../2504.03160-deepresearcher/README.md)（`deepresearcher`）：把 search、browse、证据收集和带引用回答作为一条轨迹，用答案与引用联合奖励训练研究策略。
 - 2025-03 · [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
+- 2025-03 · [SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints](../2503.08669-sopbench-protocol/README.md)（`sopbench-protocol`）：SOPBench 将服务规范写成有向约束图：Agent 必须先调用 helper 检验必要条件，再执行服务。它不仅核对最终数据库是否正确，还检查服务本身是否被允许、必要验证是否真正且按要求发生，防止“猜中结果”绕过流程。
 - 2025-02 · [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
 
 ## 2024

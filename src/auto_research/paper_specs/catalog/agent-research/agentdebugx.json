@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research", "key": "agentdebugx", "title": "AgentDebugX: An Open-Source Toolkit for Failure Observability, Attribution, and Recovery in LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2607.18754v1", "reviewed_version_url": "https://arxiv.org/html/2607.18754v1",
+  "detail_path": "agent-research/2607.18754-agentdebugx/README.md", "topic": ["自进化与经验复用", "轨迹调试与因果归因"],
+  "first_author": "Kunlun Zhu", "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2026-07-21", "published_at": "2026-07-21T06:21:13Z",
+  "code": "https://github.com/AgentDebugX/AgentDebugX", "upstream_revision": "2437c73c3183e6b6495259dfbb12464a7f07f6b8", "code_license": "MIT",
+  "code_status": "原作者发布trace schema、DeepDebug多轮诊断、集成、console和评测；固定main源码已核实，不运行外部工具或模型",
+  "priority": "P1", "intake_class": "historical_backfill", "adapter": null, "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false, "gpu_validation_passed": false, "diagnostic_only": true, "promotion_eligible": false, "evolve_integrated": false,
+  "review_done": true, "review_resolution": "not_reproduced_high_cost", "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": true,
+  "automatic_retry": false, "automatic_implementation_queue": false,
+  "deferral_reason": "DeepDebug多轮LLM诊断、9B/27B策略及GAIA搜索重跑超出低成本批次预算；Who&When with-ground-truth协议给诊断器任务reference answer，不能当作无答案的Agent能力评测。成本过高，不复现（审查 DONE）。",
+  "cost_assessment": {"source": "固定v1 Section3/4及AppendixC", "model_scale": "Qwen3.5-9B、Qwen3.6-27B与Gemini诊断/搜索模型", "data_scale": "184Who&When轨迹、165GAIA验证任务与73失败重跑", "available_resource": "单张A100或A30，或Mac", "paper_configuration": "DeepDebug约5次LLM调用；25条样本平均12.8Ktoken/诊断，多模型归因和四种修复对照", "estimated_cost_basis": "完整研究涉及长轨迹多API与真实搜索重跑；规则schema不能替代核心诊断Agent，故不为低成本伪造实现", "decision": "成本过高，不复现（审查 DONE），只资料收录"},
+  "summary": "用不修改原始轨迹的Detect/Attribute/Recover/Rerun闭环定位失败；DeepDebug结合全局读、结构化二读、候选交叉质询和证据化建议，修复仍经policy gate。完整模型和重跑实验不复现，未接入evolve。"
+}

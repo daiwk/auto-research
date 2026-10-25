@@ -19,6 +19,14 @@
 - [SPADE: Self-Play in Adaptive Synthetic Executable Environments](../2608.19197-spade/README.md)（`spade`）：同一 LLM 分饰环境设计者和推理 Agent，以有/无 privileged hint 的 regret 学习能力边界上的可执行环境。
 - [PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs](../2608.17289-planpo/README.md)（`planpo`）：在成功轨迹内同时比较 trajectory turn 数和单 turn response 长度，形成 coarse-to-fine planning advantages。
 - [TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents](../2608.16156-trca/README.md)（`trca`）：无需成功 anchor，从每个状态转移的 Evidence、Execution、Invalidity rubric 构造基础和 breakthrough reward。
+- [Dual-Modality Multi-Stage Adversarial Safety Training: Robustifying Multimodal Web Agents Against Cross-Modal Attacks](../2603.04364-dmast/README.md)（`dmast`）：DMAST 让防守 Agent 与攻击者共享同一 VLM 参数，以不同角色提示交互；先教师模仿，再用不改变目标动作的 oracle reasoning 做 SFT，最后进行共享策略自博弈 RL。改动不只是普通 GRPO：受攻击组中两个角色的原始终局奖励共同决定均值与方差，而成功样本的长度惩罚只进入优势分子。
+
+### 自进化与经验复用
+
+- [Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses](../2610.15150-harmony-harness/README.md)（`harmony-harness`）：单目标演化可能通过放松检查提高功能分数，同时损害安全。Harmony Harness 将功能与安全保持为两个独立目标：每个偏好向量维护一个框架，候选只替换邻域中更差的框架。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting](../2610.04109-seer-forecasting/README.md)（`seer-forecasting`）：数值历史可能缺少外部事件信息，普通 RAG 又不会从预测错误中修订检索方法。SEER 保持预测模型权重不变，把上下文拆成检索记忆、筛选记忆和因果知识。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [AgentDebugX: An Open-Source Toolkit for Failure Observability, Attribution, and Recovery in LLM Agents](../2607.18754-agentdebugx/README.md)（`agentdebugx`）：AgentDebugX 在不可变原始轨迹外叠加 Detect、Attribute、Recover、Rerun 产物。DeepDebug 先全局读，再按单/多 Agent 结构独立定位；候选不一致时交叉质询，最终给出责任步骤、证据和具体建议。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [MARS: Modular Agent with Reflective Search for Automated AI Research](../2602.02660-mars-research/README.md)（`mars-research`）：自动研究不仅要生成正确代码，还需在有限训练时间内分辨改动价值。MARS 使用“设计—拆分—实现”生成模块化仓库，以预算感知 MCTS 选择新方案、改进或调试；比较新旧执行结果和代码差异，提炼解决方案经验与调试经验，供其他搜索分支复用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 研究自动化
 
@@ -63,6 +71,10 @@
 
 - [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
 
+### Agent评测与自进化
+
+- [CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation](../2601.12208-coreflect/README.md)（`coreflect`）：Sec.2.1–2.5 / Appendix G：953条通过真实LLM一致性检查的persona-scenario；planner/simulator/evaluator/analyzer是核心语义模型。只写JSON状态机、对给定数字求均值或手工替换rubric都不能复现其核心，因此不强建低成本heuristic adapter。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ### 论文到代码状态子规划
 
 - [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../2608.26557-deeprepro/README.md)（`deeprepro`）：一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。
@@ -103,6 +115,11 @@
 
 - [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](../2609.17653-evoskill-gui/README.md)（`evoskill-gui`）：把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。
 
+### 评测与可验证Agent
+
+- [FinanceHarness: Autonomous Financial Deep Research Framework](../2607.27853-finance-harness-protocol/README.md)（`finance-harness-protocol`）：FinanceHarness 围绕时点限定的搜索环境组织金融工具、分层加载技能与报告证据；FinanceGym 再把评分分为截止日前可检索的证据和只能在截止日后核实的预测。Agent 只能看到问题与截止日，thesis、评分 rubric、未来证据留在提交后的评测器。
+- [LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning](../2601.13880-lifeagentbench/README.md)（`lifeagentbench`）：LifeAgentBench 用可执行 SQL / 程序在饮食、睡眠、活动和情绪记录上生成确定性答案，覆盖长期窗口、跨维度与跨用户任务。LifeAgent 是另一个工具推理基线：先分解子问题，维护证据缓存与中间统计，再根据新证据修订计划并合成回答，不能把 benchmark scorer 当成该 Agent。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ### 工作流进化
 
 - [It Takes Workflows to Evolve Better Workflows](../2610.01026-flowright/README.md)（`flowright`）：利用 workflow 拓扑把稀疏结果拆为层级、结构感知的 role credit，使单角色自进化、上下游协同或多 Agent co-evolution 可共用一个 harness。
@@ -113,12 +130,6 @@
 - [MemFit: Efficient Long-Term Agentic Memory](../2610.00872-memfit/README.md)（`memfit`）：原始 turn 追加写入不改写，只用 segment summary 建索引；读取融合 lexical、semantic 与 rerank 信号，避免昂贵 LLM 写入。
 - [UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval](../2609.36805-upliftmem/README.md)（`upliftmem`）：相关记忆不一定提升执行。UpliftMem 以同一冻结 executor 在“使用完整 memory set”和“不使用 memory”时的结果差作为 supervision，并在集合级建模互补、冗余和冲突。
 - [Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents](../2609.11060-grounded-memory/README.md)（`grounded-memory`）：给异步记忆 curator 最小权限只读工具，在写入前验证、限定作用域并刷新候选记忆。
-
-### 自进化与经验复用
-
-- [Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses](../2610.15150-harmony-harness/README.md)（`harmony-harness`）：单目标演化可能通过放松检查提高功能分数，同时损害安全。Harmony Harness 将功能与安全保持为两个独立目标：每个偏好向量维护一个框架，候选只替换邻域中更差的框架。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting](../2610.04109-seer-forecasting/README.md)（`seer-forecasting`）：数值历史可能缺少外部事件信息，普通 RAG 又不会从预测错误中修订检索方法。SEER 保持预测模型权重不变，把上下文拆成检索记忆、筛选记忆和因果知识。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [MARS: Modular Agent with Reflective Search for Automated AI Research](../2602.02660-mars-research/README.md)（`mars-research`）：自动研究不仅要生成正确代码，还需在有限训练时间内分辨改动价值。MARS 使用“设计—拆分—实现”生成模块化仓库，以预算感知 MCTS 选择新方案、改进或调试；比较新旧执行结果和代码差异，提炼解决方案经验与调试经验，供其他搜索分支复用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 编程 Agent
 
@@ -219,6 +230,10 @@
 ### 技能检索
 
 - [When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents](../2609.10750-skill-retention/README.md)（`skill-retention`）：混合真实样本 replay 与 embedding anchor/LwF 类正则，防止合成技能数据微调破坏真实和 OOD 路由能力。
+
+### 工具使用与环境
+
+- [SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints](../2503.08669-sopbench-protocol/README.md)（`sopbench-protocol`）：SOPBench 将服务规范写成有向约束图：Agent 必须先调用 helper 检验必要条件，再执行服务。它不仅核对最终数据库是否正确，还检查服务本身是否被允许、必要验证是否真正且按要求发生，防止“猜中结果”绕过流程。
 
 ### 工具使用
 

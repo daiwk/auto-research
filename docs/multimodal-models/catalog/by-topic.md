@@ -6,6 +6,10 @@
 
 - 2026-10-21 · [Agentic World Action Models](../../multimodal-models/2610.30136-aw0/README.md)（`aw0`）：世界动作模型能预测未来视觉和控制轨迹，但通常缺少可组合的技能结构；代码型机器人 Agent 能重用程序，却未必把计划与物理动态预测统一起来。AW-0 在 Mixture-of-Transformers 中组合三个专家：代码专家产生参数化程序片段，视频专家预测未来场景，动作专家产生连续控制。程序既能约束预测，也可在可选执行模式中调用技能库。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+## 低资源语音翻译评测
+
+- 2026-04-17 · [NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages](../../multimodal-models/2604.16287-naijas2st/README.md)（`naijas2st`）：核固定v3 Sections3–4及AppendixC：284说话人、约6K平行句、质控后约269h；5shot来自DEV，方向分开；Seamless不支持的Hausa映射Arabic、Naijá映射French仅为fine-tuned extension。S2TT SSA-COMET/ChrF++，S2ST先OmnilingualASR转写再SSA-COMET，不能用文本exactmatch替代。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## 冻结中间层探针与验证器自举
 
 - 2026-10-08 · [Unsupervised Multimodal Reward Modeling](../../reproductions/2610.12707-umrm/README.md)（`umrm`）：偏好pair昂贵，reward benchmark名次也不必代表部署选择效用。作者冻结Qwen3-VL，在中间language层只均值池化response tokens，再训练无bias线性reward head；公开caption为positive，同一caption的颜色/数量/尺寸/方位单span变化、tail splice、clause shuffle及cross-image caption为negative，不需人工偏好标注。
@@ -46,6 +50,10 @@
 
 - 2026-10-09 · [CV-OPD: Contrastive Vision On-policy Distillation](../../reproductions/2610.13264-cv-opd/README.md)（`cv-opd`）：原来的 crop-to-full-image OPD 可以教会模型答案分布，却不必然教会它依赖正确视觉区域。作者在移除答案相关区域后发现，Vision-OPD 仍取得明显高于随机的准确率。CV-OPD 用同图、同尺寸、低 IoU 的负区域构造第二个共享参数教师，把“接近正教师、远离负教师”的约束加入 JSD 蒸馏。
 
+## 视频嵌入统一评测
+
+- 2026-06-12 · [MVEB: Massive Video Embedding Benchmark](../../multimodal-models/2606.14958-mveb/README.md)（`mveb`）：固定v1 Section3：MVEB23任务从184任务池缩减；var-length fps2/cap64frames，固定帧模型遵循其训练配置，音频按model采样率/长度；无per-task finetune。分类8shot frozen logistic probe，retrieval cosine/nDCG10，VCQA候选池accuracy，视频/音频版本配对且只跑模型支持modality。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## 视频理解与 token 压缩
 
 - 2026-09-15 · [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](../../multimodal-models/2609.16722-videomm/README.md)（`videomm`）：先在低分辨率 Macro Proxy 上定位相关区域，仅在宏观共识不足时激活高保真 Micro Tokens。
@@ -53,6 +61,10 @@
 ## 跨模态连接器与冻结骨干
 
 - 2023-01-30 · [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
+
+## 音频描述与对比排序
+
+- 2026-09-01 · [From Visual Cues to Spoken Narration: Rethinking Audio Description](../../multimodal-models/2609.01725-cue2narrate-drl/README.md)（`cue2narrate-drl`）：固定v1 Section4.3 Eqs5–8：SFT按每个AD目标token求和；positive/negative评分均为同一当前模型和prompt上的token-mean logp，prompt/padding排除；DRL=-logsigmoid((s+−s−)/0.5)，全loss加0.2DRL。离线负caption生成冻结，但其当前模型likelihood仍反传。
 
 ## 高效视觉 token 压缩
 

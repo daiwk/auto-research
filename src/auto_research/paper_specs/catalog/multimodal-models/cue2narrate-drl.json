@@ -1,0 +1,51 @@
+{
+  "domain": "multimodal-models",
+  "key": "cue2narrate-drl",
+  "title": "From Visual Cues to Spoken Narration: Rethinking Audio Description",
+  "paper_url": "https://arxiv.org/abs/2609.01725v1",
+  "reviewed_version_url": "https://arxiv.org/html/2609.01725v1",
+  "reviewed_version": "v1",
+  "version_note": "本地核对固定v1。",
+  "detail_path": "multimodal-models/2609.01725-cue2narrate-drl/README.md",
+  "topic": [
+    "多模态生成",
+    "视频音频描述"
+  ],
+  "first_author": "Akshita Gupta",
+  "first_author_affiliation": "TU Darmstadt & hessian.AI",
+  "verified_priority_organizations": [
+    "Google Research"
+  ],
+  "published": "2026-09-01",
+  "published_at": "2026-09-01T18:00:50Z",
+  "code": "https://github.com/multimodal-ai-lab/Cue2Narrate",
+  "upstream_revision": "08c89ea63281b819a0fd73c060d8c954f9e696ef",
+  "code_status": "作者公开仓库固定commit仅含.gitignore、LICENSE和两行README，未发布方法源码；不把仓库存在当作完整实现已开源",
+  "code_license": "MIT（占位仓库）；论文CC BY-NC-SA 4.0",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "historical_official_conference_backfill",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.multimodal.cue2narrate_drl.description_ranking_loss",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.multimodal.cue2narrate_drl import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/cue2narrate-drl-a100-20261025.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v1正文方法/实验及附录；https://arxiv.org/html/2609.01725v1",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "paper_configuration": "6.64M双头定位器，Qwen2.5-VL-7B/Qwen3-VL-8B LoRA，训练32帧/推理64帧，多阶段长电影训练；LSMDC研究限制授权、MAD-Eval NDA。完整数据/定位+VLM训练超单卡短时预算，不下载视频或权重；本文未给总GPU小时，不编造。",
+    "estimated_cost_basis": "依据原文配置和完整比较矩阵判断，不是本地完整实验测量；无需用长试跑确认成本。",
+    "decision": "成本过高，不复现（审查 DONE）；完整实验不下载、不试跑、不自动重试。仅独立低成本机制/协议诊断，不冒充完整模型或正式benchmark。"
+  },
+  "summary": "先定位视觉线索与 spoken narration 两种不同时间窗，再对同一视觉证据的简洁AD和普通caption计算当前模型长度平均likelihood，以DRL抑制冗长caption先验。本地仅保留Stage2 masked SFT+DRL；不运行定位器、VLM或LongLSMDC能力评测。"
+}

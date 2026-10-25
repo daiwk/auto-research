@@ -1,0 +1,16 @@
+{
+  "domain": "agent-research", "key": "lifeagentbench", "title": "LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning",
+  "paper_url": "https://arxiv.org/abs/2601.13880v1", "reviewed_version_url": "https://arxiv.org/html/2601.13880v2",
+  "detail_path": "agent-research/2601.13880-lifeagentbench/README.md", "topic": ["评测与可验证Agent", "长期异构记录推理"],
+  "first_author": "Ye Tian", "first_author_affiliation": "University of California San Diego",
+  "published": "2026-01-20", "published_at": "2026-01-20T11:51:58Z",
+  "code": "https://github.com/gdfwj/LifeAgentBench", "upstream_revision": "cfc227736965f4cd42261ee780f41050ae44cc67", "code_license": "not_found",
+  "code_status": "项目官方页直接链接作者仓库，已发布CP/SQL评测与数据构建；固定根目录未见LICENSE、GitHub许可null；论文AppendixF说明研究/非商业限制，不能推断MIT或开放再分发权利",
+  "priority": "P1", "intake_class": "historical_backfill", "adapter": null, "implementation_status": "deferred_high_cost",
+  "requires_gpu_validation": false, "gpu_validation_passed": false, "diagnostic_only": true, "promotion_eligible": false, "evolve_integrated": false,
+  "review_done": true, "review_resolution": "not_reproduced_high_cost", "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": true,
+  "automatic_retry": false, "automatic_implementation_queue": false,
+  "deferral_reason": "正文AppendixE明确开放模型总推理300–500GPU小时，另含闭源API、70B多卡与22,573题；完整实验成本过高，不复现（审查 DONE）。",
+  "cost_assessment": {"source": "固定v2 Section4/5和AppendixE/F", "model_scale": "13个模型，含70B和闭源API", "data_scale": "22,573QA、100参与者四类生活记录", "available_resource": "单张A100或A30，或Mac", "paper_configuration": "CP/DP两种设置与LifeAgent多轮工具基线，4096上下文；大模型4A6000，公开推理估计300–500GPU小时", "estimated_cost_basis": "使用作者明确给出的整套推理成本，而非将一个小scorer标成低成本Agent复现；未下载记录或权重", "decision": "成本过高，不复现（审查 DONE），只收录方法和官方公共评测入口"},
+  "summary": "用可执行程序生成跨时间、跨生活维度与多用户问题，区分SQL有效性、完整证据召回与条件答案正确率；LifeAgent另以问题分解、证据缓存和确定性工具推理。非临床诊断系统；本地未实现或测量Agent能力。"
+}

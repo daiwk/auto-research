@@ -1,0 +1,764 @@
+{
+  "schema_version": 2,
+  "device": "cuda",
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_commit": "4cce1ab4d701df8daaed9a8abe8671f3eef9d168",
+  "source_sha256": {
+    "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+    "docs/research-audits/google-emnlp25-closure/execution-spec.json": "6fa9f60245d7bad1ff087b0fd387360c32597912c2a004f4d7adfee536a9f1bf",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/agent_research/dmast.py": "9bd1d38a133cac57e2cac822a5f8050b0208196c1a5dd011fe67e588823444d3",
+    "src/auto_research/agent_research/finance_harness_protocol.py": "4799418d649ce1793e763c2445366d19e3f909b6f924369d9a03804e51a25cb4",
+    "src/auto_research/agent_research/sopbench_protocol.py": "f8645a19302ba354354866f5bf7bf6342a3342bee38d8d69cfd1402826398a7d",
+    "src/auto_research/evaluation/xlgobench.py": "7ff09bf3d807f4c4d47728960b014f32161c9d5595ad2258edef25a48ec1bdb6",
+    "src/auto_research/foundation_models/combinatorial_watermark.py": "ee1ceba5cd67ad81d4dbee5b0746e00ac15596466fd0099ab1bf0661a8829668",
+    "src/auto_research/foundation_models/interpolated_null_calibration.py": "15da6e0c838ee16eec2ff13708b811699d82f5c6759d8e8da49f3c5561ce7452",
+    "src/auto_research/foundation_models/mechanistic_etm.py": "4a0a27f1aa28ed0ad5333324333c1db712ddb6bfdf522e470b0692a16502ac83",
+    "src/auto_research/foundation_models/taskpress.py": "8ac4db9204ccac1a29145e3c1fb57cae7fa02ece30b4325a76aa6e06750a65e9",
+    "src/auto_research/multimodal/cue2narrate_drl.py": "15f35e0ec9e88684aa93f07418459768e8d010755d6837f2cd3d5dd84e6f9e71",
+    "src/auto_research/post_training/benchmark_self_bias.py": "2f4aa1a0dde3c03a018344b286a897d328cf31b78e170ff463f15c9eee252282",
+    "src/auto_research/post_training/polaris_hri.py": "4b7f7c7e0537c3483646fb9ea8f68c3af3c859781d87427a307d90d88f9a163a",
+    "src/auto_research/post_training/probabilistic_autorater.py": "76ae4cbb9bdf55e54ae30528d24d81868f3e1b02eed1d62a814d883f55f5cabe",
+    "src/auto_research/post_training/rm_memorization_protocol.py": "a91fcc7b7d2c0a5773f1e1c53a8886e54426a2777588672f8212c7a2c961f5f8",
+    "src/auto_research/post_training/scar_shapley_credit.py": "363c7f0c6abeb59b5809b33031f82e4dd769c4c68face3abd738696958698850"
+  },
+  "components": {
+    "scar-shapley-credit": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 5.551115123125783e-17,
+            "return_preservation_error": 2.220446049250313e-16,
+            "coalitions": 16,
+            "players": 4,
+            "model_calls": 0
+          },
+          "checks": {
+            "exact_shapley_matches_independent_game": true,
+            "dummy_player_zero": true,
+            "signed_contributions_not_clamped": true,
+            "efficiency_preserves_undiscounted_return": true,
+            "span_end_only_not_uniform_spread": true,
+            "alpha_zero_is_sparse_reward": true,
+            "frozen_reward_model_table": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 5.551115123125783e-17,
+            "return_preservation_error": 0.0,
+            "coalitions": 16,
+            "players": 4,
+            "model_calls": 0
+          },
+          "checks": {
+            "exact_shapley_matches_independent_game": true,
+            "dummy_player_zero": true,
+            "signed_contributions_not_clamped": true,
+            "efficiency_preserves_undiscounted_return": true,
+            "span_end_only_not_uniform_spread": true,
+            "alpha_zero_is_sparse_reward": true,
+            "frozen_reward_model_table": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 5.551115123125783e-17,
+            "return_preservation_error": 2.220446049250313e-16,
+            "coalitions": 16,
+            "players": 4,
+            "model_calls": 0
+          },
+          "checks": {
+            "exact_shapley_matches_independent_game": true,
+            "dummy_player_zero": true,
+            "signed_contributions_not_clamped": true,
+            "efficiency_preserves_undiscounted_return": true,
+            "span_end_only_not_uniform_spread": true,
+            "alpha_zero_is_sparse_reward": true,
+            "frozen_reward_model_table": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "probabilistic-autorater": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "metrics": {
+            "analytic_loss_before": -0.6913278417916866,
+            "analytic_loss_after": -0.6917621731663721,
+            "formula_abs_error": 0.0,
+            "gradient_max_abs_error": 6.938893903907228e-18,
+            "model_calls": 0
+          },
+          "checks": {
+            "proper_reward_matches_expected_brier": true,
+            "analytic_gradient_matches": true,
+            "analytic_optimizer_update_decreases_loss": true,
+            "unparseable_penalties_exact": true,
+            "invalid_probability_zero_gradient": true,
+            "strict_tag_parser_rejects_duplicates": true,
+            "overconfident_wrong_log_penalty": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "metrics": {
+            "analytic_loss_before": -0.6266968649754592,
+            "analytic_loss_after": -0.6272369135880055,
+            "formula_abs_error": 0.0,
+            "gradient_max_abs_error": 3.469446951953614e-18,
+            "model_calls": 0
+          },
+          "checks": {
+            "proper_reward_matches_expected_brier": true,
+            "analytic_gradient_matches": true,
+            "analytic_optimizer_update_decreases_loss": true,
+            "unparseable_penalties_exact": true,
+            "invalid_probability_zero_gradient": true,
+            "strict_tag_parser_rejects_duplicates": true,
+            "overconfident_wrong_log_penalty": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "metrics": {
+            "analytic_loss_before": -0.6229496168978391,
+            "analytic_loss_after": -0.6234124946060714,
+            "formula_abs_error": 1.1102230246251565e-16,
+            "gradient_max_abs_error": 1.0408340855860843e-17,
+            "model_calls": 0
+          },
+          "checks": {
+            "proper_reward_matches_expected_brier": true,
+            "analytic_gradient_matches": true,
+            "analytic_optimizer_update_decreases_loss": true,
+            "unparseable_penalties_exact": true,
+            "invalid_probability_zero_gradient": true,
+            "strict_tag_parser_rejects_duplicates": true,
+            "overconfident_wrong_log_penalty": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "rm-memorization-protocol": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 1.1102230246251565e-16,
+            "pairs": 4,
+            "observed_runs": 25,
+            "mean_counterfactual_memorization": 0.07565079403014242,
+            "model_calls": 0
+          },
+          "checks": {
+            "conditional_probability_means_match": true,
+            "cm_is_tm_minus_tg": true,
+            "user_level_leakage_rejected": true,
+            "joint_run_permutation_invariant": true,
+            "frozen_external_model_scores": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 0.0,
+            "pairs": 4,
+            "observed_runs": 25,
+            "mean_counterfactual_memorization": -0.014608086271806917,
+            "model_calls": 0
+          },
+          "checks": {
+            "conditional_probability_means_match": true,
+            "cm_is_tm_minus_tg": true,
+            "user_level_leakage_rejected": true,
+            "joint_run_permutation_invariant": true,
+            "frozen_external_model_scores": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 1.1102230246251565e-16,
+            "pairs": 4,
+            "observed_runs": 25,
+            "mean_counterfactual_memorization": 0.05786663488676208,
+            "model_calls": 0
+          },
+          "checks": {
+            "conditional_probability_means_match": true,
+            "cm_is_tm_minus_tg": true,
+            "user_level_leakage_rejected": true,
+            "joint_run_permutation_invariant": true,
+            "frozen_external_model_scores": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "benchmark-self-bias": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 0.0,
+            "mean_relative_self_bias": -1.5,
+            "segments": 7,
+            "models": 3,
+            "model_calls": 0
+          },
+          "checks": {
+            "leave_self_out_formula_matches": true,
+            "negative_means_self_preference": true,
+            "model_role_joint_permutation_equivariant": true,
+            "positive_score_affine_invariant": true,
+            "explicit_average_ties": true,
+            "metricx_direction_explicit": true,
+            "not_absolute_quality_estimate": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 0.0,
+            "mean_relative_self_bias": -1.4999999999999996,
+            "segments": 7,
+            "models": 3,
+            "model_calls": 0
+          },
+          "checks": {
+            "leave_self_out_formula_matches": true,
+            "negative_means_self_preference": true,
+            "model_role_joint_permutation_equivariant": true,
+            "positive_score_affine_invariant": true,
+            "explicit_average_ties": true,
+            "metricx_direction_explicit": true,
+            "not_absolute_quality_estimate": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "metrics": {
+            "formula_max_abs_error": 0.0,
+            "mean_relative_self_bias": -1.4999999999999996,
+            "segments": 7,
+            "models": 3,
+            "model_calls": 0
+          },
+          "checks": {
+            "leave_self_out_formula_matches": true,
+            "negative_means_self_preference": true,
+            "model_role_joint_permutation_equivariant": true,
+            "positive_score_affine_invariant": true,
+            "explicit_average_ties": true,
+            "metricx_direction_explicit": true,
+            "not_absolute_quality_estimate": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "dmast": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "loss": 0.00532175750351147,
+            "gradient_reference_error": 3.469446951953614e-18,
+            "formula_reference_error": 2.5153490401663703e-17,
+            "parameter_delta": 0.002134917209973963,
+            "valid_tokens": 35,
+            "eligible_trajectories": 6,
+            "optimizer_steps": 1
+          },
+          "checks": {
+            "raw_pooled_role_statistics": true,
+            "zero_raw_variance_excluded": true,
+            "clean_attack_modes_separated": true,
+            "gradient_matches_reference": true,
+            "padding_and_excluded_zero_gradient": true,
+            "frozen_rollout_reference_rewards": true,
+            "real_shared_policy_update": true,
+            "zero_importance_branch_finite_zero_gradient": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "loss": 0.005321757503511495,
+            "gradient_reference_error": 3.469446951953614e-18,
+            "formula_reference_error": 0.0,
+            "parameter_delta": 0.0016445155749431023,
+            "valid_tokens": 35,
+            "eligible_trajectories": 6,
+            "optimizer_steps": 1
+          },
+          "checks": {
+            "raw_pooled_role_statistics": true,
+            "zero_raw_variance_excluded": true,
+            "clean_attack_modes_separated": true,
+            "gradient_matches_reference": true,
+            "padding_and_excluded_zero_gradient": true,
+            "frozen_rollout_reference_rewards": true,
+            "real_shared_policy_update": true,
+            "zero_importance_branch_finite_zero_gradient": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "loss": 0.00532175750351147,
+            "gradient_reference_error": 3.469446951953614e-18,
+            "formula_reference_error": 0.0,
+            "parameter_delta": 0.0026494624563745957,
+            "valid_tokens": 35,
+            "eligible_trajectories": 6,
+            "optimizer_steps": 1
+          },
+          "checks": {
+            "raw_pooled_role_statistics": true,
+            "zero_raw_variance_excluded": true,
+            "clean_attack_modes_separated": true,
+            "gradient_matches_reference": true,
+            "padding_and_excluded_zero_gradient": true,
+            "frozen_rollout_reference_rewards": true,
+            "real_shared_policy_update": true,
+            "zero_importance_branch_finite_zero_gradient": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "cue2narrate-drl": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "formula_error": 0.0,
+            "gradient_error": 5.551115123125783e-17,
+            "negative_gradient_norm": 0.053770414096534214,
+            "fixture_loss_before": 8.417816955794438,
+            "fixture_loss_after": 8.360152064189789,
+            "positive_tokens": 9,
+            "negative_tokens": 18,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "equations5_8_reference": true,
+            "both_current_policy_gradients_match": true,
+            "prompt_padding_zero_gradient": true,
+            "real_optimizer_step_decreases_fixture": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "formula_error": 0.0,
+            "gradient_error": 5.204170427930421e-18,
+            "negative_gradient_norm": 0.05527175152285902,
+            "fixture_loss_before": 8.057205303157154,
+            "fixture_loss_after": 7.993406402831664,
+            "positive_tokens": 9,
+            "negative_tokens": 18,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "equations5_8_reference": true,
+            "both_current_policy_gradients_match": true,
+            "prompt_padding_zero_gradient": true,
+            "real_optimizer_step_decreases_fixture": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "formula_error": 0.0,
+            "gradient_error": 5.551115123125783e-17,
+            "negative_gradient_norm": 0.04831273817334682,
+            "fixture_loss_before": 8.142121609153621,
+            "fixture_loss_after": 8.076697251395439,
+            "positive_tokens": 9,
+            "negative_tokens": 18,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "equations5_8_reference": true,
+            "both_current_policy_gradients_match": true,
+            "prompt_padding_zero_gradient": true,
+            "real_optimizer_step_decreases_fixture": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "polaris-hri": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "advantage_reference_error": 2.220446049250313e-16,
+            "loss_reference_error": 2.7755575615628914e-17,
+            "reference_gradient_norm": 0.06806273936204965,
+            "fixture_loss_before": -0.16187399733715993,
+            "fixture_loss_after": -0.16233589204051344,
+            "policy_rollouts_per_group": 5,
+            "references_per_group": 1,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq5_policy_only_sample_statistics": true,
+            "zero_step_reference_warmup": true,
+            "reference_uses_same_clipped_surrogate": true,
+            "old_and_advantages_frozen": true,
+            "padding_zero_gradient": true,
+            "real_optimizer_step_decreases_fixture": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "advantage_reference_error": 2.220446049250313e-16,
+            "loss_reference_error": 2.7755575615628914e-17,
+            "reference_gradient_norm": 0.06882973362061842,
+            "fixture_loss_before": -0.16816569236504963,
+            "fixture_loss_after": -0.16863263054236685,
+            "policy_rollouts_per_group": 5,
+            "references_per_group": 1,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq5_policy_only_sample_statistics": true,
+            "zero_step_reference_warmup": true,
+            "reference_uses_same_clipped_surrogate": true,
+            "old_and_advantages_frozen": true,
+            "padding_zero_gradient": true,
+            "real_optimizer_step_decreases_fixture": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "advantage_reference_error": 2.220446049250313e-16,
+            "loss_reference_error": 0.0,
+            "reference_gradient_norm": 0.06900545942856248,
+            "fixture_loss_before": -0.16469696996949487,
+            "fixture_loss_after": -0.16516515733290293,
+            "policy_rollouts_per_group": 5,
+            "references_per_group": 1,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq5_policy_only_sample_statistics": true,
+            "zero_step_reference_warmup": true,
+            "reference_uses_same_clipped_surrogate": true,
+            "old_and_advantages_frozen": true,
+            "padding_zero_gradient": true,
+            "real_optimizer_step_decreases_fixture": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "taskpress": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "score_reference_error": 5.551115123125783e-17,
+            "additive_negative_control_gap": 1.7727589812794076,
+            "original_tokens": 11,
+            "context_tokens": 8,
+            "guide_tokens": 3,
+            "retained_tokens_per_head": 4,
+            "kv_heads": 2,
+            "value_scale_reference_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq1_3_independent_reference": true,
+            "per_head_topk_and_original_positions": true,
+            "guide_tokens_discarded": true,
+            "actual_kv_gather": true,
+            "multiplicative_not_additive": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "score_reference_error": 1.6653345369377348e-16,
+            "additive_negative_control_gap": 1.931367423222151,
+            "original_tokens": 11,
+            "context_tokens": 8,
+            "guide_tokens": 3,
+            "retained_tokens_per_head": 4,
+            "kv_heads": 2,
+            "value_scale_reference_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq1_3_independent_reference": true,
+            "per_head_topk_and_original_positions": true,
+            "guide_tokens_discarded": true,
+            "actual_kv_gather": true,
+            "multiplicative_not_additive": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "score_reference_error": 1.1102230246251565e-16,
+            "additive_negative_control_gap": 1.7848261608513691,
+            "original_tokens": 11,
+            "context_tokens": 8,
+            "guide_tokens": 3,
+            "retained_tokens_per_head": 4,
+            "kv_heads": 2,
+            "value_scale_reference_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq1_3_independent_reference": true,
+            "per_head_topk_and_original_positions": true,
+            "guide_tokens_discarded": true,
+            "actual_kv_gather": true,
+            "multiplicative_not_additive": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "interpolated-null-calibration": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "decomposition_error": 1.1102230246251565e-16,
+            "gradient_error": 0.0,
+            "endpoint_error": 0.0,
+            "bare_null_negative_control_gap": 0.969609453968433,
+            "queries": 3,
+            "documents_per_query": 6,
+            "passes": 3,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq6_eq7_decomposition": true,
+            "exact_three_pass_gradient": true,
+            "zero_and_one_endpoints": true,
+            "lambda0_is_not_no_calibration": true,
+            "instruction_footprint_can_change_ranking": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "decomposition_error": 1.1102230246251565e-16,
+            "gradient_error": 0.0,
+            "endpoint_error": 0.0,
+            "bare_null_negative_control_gap": 0.9253884191774799,
+            "queries": 3,
+            "documents_per_query": 6,
+            "passes": 3,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq6_eq7_decomposition": true,
+            "exact_three_pass_gradient": true,
+            "zero_and_one_endpoints": true,
+            "lambda0_is_not_no_calibration": true,
+            "instruction_footprint_can_change_ranking": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "decomposition_error": 1.1102230246251565e-16,
+            "gradient_error": 0.0,
+            "endpoint_error": 0.0,
+            "bare_null_negative_control_gap": 0.9718358833820131,
+            "queries": 3,
+            "documents_per_query": 6,
+            "passes": 3,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq6_eq7_decomposition": true,
+            "exact_three_pass_gradient": true,
+            "zero_and_one_endpoints": true,
+            "lambda0_is_not_no_calibration": true,
+            "instruction_footprint_can_change_ranking": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    },
+    "mechanistic-etm": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "metrics": {
+            "binomial_reference_error": 0.0,
+            "topic_gradient_norm": 2.2096509824145447,
+            "fixture_loss_before": 17.390350715137565,
+            "fixture_loss_after": 17.351170353294435,
+            "steering_projection_error": 1.1102230246251565e-15,
+            "steering_perpendicular_error": 8.881784197001252e-16,
+            "encoder_decoder_swap_negative_control_gap": 0.04471435485370334,
+            "documents": 4,
+            "sae_features": 7,
+            "topics": 3,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq12_binomial_likelihood_reference": true,
+            "frozen_sae_matrices": true,
+            "eq11_uses_encoder_not_decoder": true,
+            "real_topic_and_variational_update": true,
+            "eq16_unit_topic_direction": true,
+            "eq19_replaces_parallel_preserves_perpendicular": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 43,
+          "metrics": {
+            "binomial_reference_error": 0.0,
+            "topic_gradient_norm": 5.05259887660088,
+            "fixture_loss_before": 17.52480873569502,
+            "fixture_loss_after": 17.505953970688083,
+            "steering_projection_error": 4.440892098500626e-16,
+            "steering_perpendicular_error": 2.220446049250313e-16,
+            "encoder_decoder_swap_negative_control_gap": 0.056820118141544085,
+            "documents": 4,
+            "sae_features": 7,
+            "topics": 3,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq12_binomial_likelihood_reference": true,
+            "frozen_sae_matrices": true,
+            "eq11_uses_encoder_not_decoder": true,
+            "real_topic_and_variational_update": true,
+            "eq16_unit_topic_direction": true,
+            "eq19_replaces_parallel_preserves_perpendicular": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        },
+        {
+          "seed": 44,
+          "metrics": {
+            "binomial_reference_error": 3.552713678800501e-15,
+            "topic_gradient_norm": 1.914762497935677,
+            "fixture_loss_before": 18.403423518899753,
+            "fixture_loss_after": 18.370904037177343,
+            "steering_projection_error": 2.220446049250313e-16,
+            "steering_perpendicular_error": 4.440892098500626e-16,
+            "encoder_decoder_swap_negative_control_gap": 0.0398654363578933,
+            "documents": 4,
+            "sae_features": 7,
+            "topics": 3,
+            "optimizer_steps": 1,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "eq12_binomial_likelihood_reference": true,
+            "frozen_sae_matrices": true,
+            "eq11_uses_encoder_not_decoder": true,
+            "real_topic_and_variational_update": true,
+            "eq16_unit_topic_direction": true,
+            "eq19_replaces_parallel_preserves_perpendicular": true
+          },
+          "execution_device": "cuda",
+          "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 1.6137825325131416,
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiments_executed": false
+}

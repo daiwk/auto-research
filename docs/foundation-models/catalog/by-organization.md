@@ -43,6 +43,10 @@
 
 - 2023-12-01 · [Mamba: Linear-Time Sequence Modeling with Selective State Spaces](../../reproductions/2312.00752-mamba/README.md)（`mamba`）：Mamba 让 SSM 的步长、读写向量依赖当前 token，从而选择性保留信息，同时保持序列长度线性复杂度。
 
+## Columbia University
+
+- 2025-07-31 · [Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders](../../foundation-models/2507.23220-mechanistic-etm/README.md)（`mechanistic-etm`）：固定v3 Section4.2.2 Eqs9–13：δ~N(0,I)、θ=softmaxδ、βk=sigmoid(W_in vk+b)，W_in为冻结SAE ENCODER，不是decoder；每个feature计数~Binomial(Ntokens,[θβ]i)。variational q拓扑与MC noise显式外传，优化NLL+analytic Gaussian KL。Eqs16–19仅steering才用独立SAE DECODER列方向加权单位化，再移除已有parallel分量、注入指定strength。以不同encoder/decoder的负控防隐式绑权。
+
 ## Câmara dos Deputados
 
 - 2026-10-16 · [Jev-as-a-Judge for Brazilian Portuguese Information Retrieval: Relevance Assessment and Reranking](../../foundation-models/2610.23346-jev-portuguese-ir/README.md)（`jev-portuguese-ir`）：检索中“给文档打离散相关性标签”和“给候选排序”并不是同一个任务。论文在四个巴西葡语检索集上，用 Choice 输出有序标签并比较人工/原始 qrels；另在 Quati 中把每个文档是否直接回答查询表示为独立 Noul 概率，收集全部批次再排序。候选不在单一 Choice 中竞争，也不与 BM25 分数混合，不训练校准模型。
@@ -100,6 +104,7 @@
 ## Google
 
 - 2026-09-25 · [Words Speak Louder Than Order: A Behavioral Evaluation of Gemma 4](../../foundation-models/2609.30716-gemma-priority-protocol/README.md)（`gemma-priority-protocol`）：论文把双文档冲突中的词偏好、来源措辞和呈现顺序分别测量。方法与资源已核：四路交叉、十种提示条件、跨条件共同保留集，以及未筛选敏感性分析。研究范围是单模型、短上下文、英文单词选择；不是新的训练算法，也不是神经回路证据。
+- 2026-08-04 · [TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning](../../foundation-models/2608.03276-taskpress/README.md)（`taskpress`）：固定v2 Section3 Eqs1–3：sum over guide→odd-K零padding平均池化；γ=max|v|/(2^(b−1)−1)，scores=keyimportance×γ，各head同budget独立topk。输入显式是task-to-context sliced attention，不看真实下游query；真实K/V按时间排序gather，guideKV不保留，原position不能重编号。K/GQA聚合由调用方显式给出，tie按低index为本地约定。
 - 2026-05-15 · [Customizing an LLM for Enterprise Software Engineering](../../foundation-models/2605.16517-gemini-for-google/README.md)（`gemini-for-google`）：从企业开发历史中提取高价值代码与交互信号，经过去重、质量过滤和污染控制形成中训练数据；用通用数据回放抑制灾难性遗忘，再做面向内部工具的后训练和部署评测。
 
 ## Google Brain
@@ -112,6 +117,7 @@
 
 ## Google DeepMind
 
+- 2026-05-29 · [XLGoBench: Detecting cross-lingual skill gaps with algorithmic tasks](../../foundation-models/2605.30788-xlgobench/README.md)（`xlgobench`）：固定v1 Section2+AppendixC：SLT财富/系数整数−9..9并jumbled chain；DSA状态/动作数相同；PrDSA15动作、传播完整状态概率、top8集合顺序无关；GraphSP唯一最短路（本地rho0 backbone+bypass固定例）；T-RankHamiltonian DAG+transitive edges、nodes:edges1:3。callback只收task/problem白名单深拷贝，score完整JSON，无LLMjudge。
 - 2026-04-25 · [ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation](../../foundation-models/2604.23099-proeval/README.md)（`proeval`）：昂贵模型或评审器不适合每次全量评分。ProEval复用历史模型之间逐题表现的相关性，形成目标模型的概率评分替身；目标分数只在对应题被选中后传入更新。主源：[v1 §2.1–2.4 Eq2、5、7、10、12](https://arxiv.org/html/2604.23099v1#S2)。
 - 2025-02-20 · [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../../reproductions/2502.14786-siglip2/README.md)（`siglip2`）：SigLIP 2 在 SigLIP 的 pairwise sigmoid loss 上组合 captioning pretraining、global-local self-distillation、masked prediction、在线数据筛选和 NaFlex 动态分辨率，改善语义、定位、 dense feature 与多语言公平性。
 
@@ -416,6 +422,10 @@
 
 - 2026-10-09 · [Not All Dimensions Are Equal: Outlier-Aware Attention Linearization with Grouped Quadratic Kernels](../../reproductions/2610.13674-oal/README.md)（`oal`）：预训练 attention 的 QK 各维度贡献不均匀，少量高贡献坐标包含较多 softmax 近似误差。OAL 先在 post-RoPE QK 上计算因果贡献，以 prompt bootstrap 识别高贡献尾部的稳定边界；随后学习共享组和组对系数的二次核。
 
+## The Hebrew University of Jerusalem
+
+- 2026-06-23 · [Cross-Lingual Exploration for Parametric Knowledge](../../foundation-models/2606.24579-cross-lingual-exploration/README.md)（`cross-lingual-exploration`）：Sec.3.1–4.4与Appendix C/E：完整提示保持原问题语言，majority/minority-aware实际使用语言模型提示聚合而非简单字符串计数，语义正确性和跨语言一致性也由Gemini判定。把counter或字符串翻译器当主模型会破坏核心；本轮不造heuristic组件。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## The Hong Kong Polytechnic University
 
 - 2026-10-09 · [Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers](../../reproductions/2610.13735-orthros/README.md)（`orthros`）：长 prompt、短回答的推理中，prefill 与 decode 的计算角色不同。Orthros 保留两个 token 流：base tokens 对所有位置执行固定窗口 SWA，并构建完整的逐层 KV；output-specific tokens 只在需预测输出的位置出现，用共享 KV 做全历史 causal cross-attention。
@@ -463,6 +473,7 @@
 ## University of California, San Diego
 
 - 2026-10-08 · [LeWAM: End-to-End World and Action Modeling with JEPAs](../../reproductions/2610.12818-lewam/README.md)（`lewam`）：传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。
+- 2026-09-15 · [How Calibration Content Shapes Attention-Based Reranking](../../foundation-models/2609.17764-interpolated-null-calibration/README.md)（`interpolated-null-calibration`）：固定v1 Section3 Eq4–7：ΔN=s(empty,I)−s(empty,empty)，Sλ=s(q,I)−[λs(empty,I)+(1−λ)s(empty,empty)]；λ1标准ICR、λ0bare-null。调用方真实三pass提分数并保证doc identity对齐；λ只能validation选。论文oracle λ对全数据查询调参，不能当独立test结果。
 - 2026-08-06 · [BaKron: Efficient Quantization with Kronecker-Factored Hessians](../../reproductions/2608.06291-bakron/README.md)（`bakron`）：**主题：二阶量化。** GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。
 
 ## University of California, Santa Barbara
@@ -503,6 +514,10 @@
 ## University of Michigan, Ann Arbor
 
 - 2026-10-21 · [Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories](../../foundation-models/2610.29378-right-on-q/README.md)（`right-on-q`）：低比特量化会改变模型生成的前缀。只在固定的全精度参考回答上蒸馏，不能覆盖量化学生真正遇到的错误和长推理状态。OnQ 从逐 block 校准开始，让量化学生自己生成回答，再由冻结的原始全精度教师在**相同学生前缀**上提供分布监督。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+## University of Minnesota
+
+- 2025-10-02 · [Detecting Post-generation Edits to Watermarked LLM Outputs via Combinatorial Watermarking](../../foundation-models/2510.01637-combinatorial-watermark/README.md)（`combinatorial-watermark`）：固定v1 Section3 Eqs2–5：调用方提供真实secret分区与base logits；bias δ到当前pattern tag后softmax。Iw(t)对所有cyclic phases检查，global mean；local在完整interior t=w−1..T−w平均w个covering windows。全局>=threshold、局部<threshold，阈值需在calibration控制TypeI。binary周期整周期删除可以不可检测，不能承诺完美定位。
 
 ## University of Modena and Reggio Emilia
 

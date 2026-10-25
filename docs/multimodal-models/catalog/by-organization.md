@@ -23,6 +23,10 @@
 - 2026-10-06 · [EmbeddingGemma 2: Open Multimodal Embeddings](../../multimodal-models/embeddinggemma2/README.md)（`embedding-gemma2`）：EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。
 - 2025-02-20 · [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../../reproductions/2502.14786-siglip2/README.md)（`siglip2`）：SigLIP 2 在 SigLIP 的 pairwise sigmoid loss 上组合 captioning pretraining、global-local self-distillation、masked prediction、在线数据筛选和 NaFlex 动态分辨率，改善语义、定位、 dense feature 与多语言公平性。
 
+## Harvard University
+
+- 2026-06-12 · [MVEB: Massive Video Embedding Benchmark](../../multimodal-models/2606.14958-mveb/README.md)（`mveb`）：固定v1 Section3：MVEB23任务从184任务池缩减；var-length fps2/cap64frames，固定帧模型遵循其训练配置，音频按model采样率/长度；无per-task finetune。分类8shot frozen logistic probe，retrieval cosine/nDCG10，VCQA候选池accuracy，视频/音频版本配对且只跑模型支持modality。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Hugging Face
 
 - 2025-04-07 · [SmolVLM: Redefining small and efficient multimodal models](../../reproductions/2504.05299-smolvlm/README.md)（`smolvlm`）：SmolVLM 重新分配小模型视觉/语言侧算力，以 pixel shuffle 将相邻空间 token 搬到 channel 维，再用 MLP 映射到 LM 空间；同时研究长上下文、图像切片、学习位置 token 和数据配比， 使 256M/500M/2.2B 模型在低显存下保持图像与视频能力。
@@ -30,6 +34,10 @@
 ## Massachusetts Institute of Technology
 
 - 2026-10-08 · [Unsupervised Multimodal Reward Modeling](../../reproductions/2610.12707-umrm/README.md)（`umrm`）：偏好pair昂贵，reward benchmark名次也不必代表部署选择效用。作者冻结Qwen3-VL，在中间language层只均值池化response tokens，再训练无bias线性reward head；公开caption为positive，同一caption的颜色/数量/尺寸/方位单span变化、tail splice、clause shuffle及cross-image caption为negative，不需人工偏好标注。
+
+## Mila - Quebec AI Institute
+
+- 2026-04-17 · [NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages](../../multimodal-models/2604.16287-naijas2st/README.md)（`naijas2st`）：核固定v3 Sections3–4及AppendixC：284说话人、约6K平行句、质控后约269h；5shot来自DEV，方向分开；Seamless不支持的Hausa映射Arabic、Naijá映射French仅为fine-tuned extension。S2TT SSA-COMET/ChrF++，S2ST先OmnilingualASR转写再SSA-COMET，不能用文本exactmatch替代。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Northwestern University
 
@@ -46,6 +54,10 @@
 ## Sichuan University
 
 - 2026-09-15 · [StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection](../../multimodal-models/2609.16841-stacktok/README.md)（`stacktok`）：把 query relevance 作为目标、coverage 作为随预算变化的支撑约束，逐步在两种选取准则间切换。
+
+## TU Darmstadt & hessian.AI
+
+- 2026-09-01 · [From Visual Cues to Spoken Narration: Rethinking Audio Description](../../multimodal-models/2609.01725-cue2narrate-drl/README.md)（`cue2narrate-drl`）：固定v1 Section4.3 Eqs5–8：SFT按每个AD目标token求和；positive/negative评分均为同一当前模型和prompt上的token-mean logp，prompt/padding排除；DRL=-logsigmoid((s+−s−)/0.5)，全loss加0.2DRL。离线负caption生成冻结，但其当前模型likelihood仍反传。
 
 ## UC Berkeley
 

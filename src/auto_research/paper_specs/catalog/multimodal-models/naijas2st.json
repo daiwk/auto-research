@@ -1,0 +1,53 @@
+{
+  "domain": "multimodal-models",
+  "key": "naijas2st",
+  "title": "NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages",
+  "paper_url": "https://arxiv.org/abs/2604.16287v1",
+  "reviewed_version_url": "https://arxiv.org/html/2604.16287v3",
+  "reviewed_version": "v3",
+  "version_note": "规范身份与首次日期保持原始v1；本轮方法和资源核对固定v3，未逐行声称其等同v1。",
+  "detail_path": "multimodal-models/2604.16287-naijas2st/README.md",
+  "topic": [
+    "语音多模态",
+    "低资源语音翻译评测"
+  ],
+  "first_author": "Marie Maltais",
+  "first_author_affiliation": "Mila - Quebec AI Institute",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "published": "2026-04-17",
+  "published_at": "2026-04-17T17:49:46Z",
+  "code": "https://github.com/McGill-NLP/naijas2st",
+  "upstream_revision": "02b60538e621d1afe33178a9ea60a86ed7e8f674",
+  "code_status": "作者公开语音训练/评估脚本，固定commit；仓库授权与论文CC-BY资源说明分开记录，不擅自指定源码SPDX",
+  "code_license": "论文AppendixC声称资源CC-BY；固定仓库未找到明确许可证文件，GitHub license=null",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "historical_official_conference_backfill",
+  "implementation_status": "deferred_high_cost",
+  "local_operator": null,
+  "local_command": null,
+  "evaluation_tier": null,
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "gpu_validation_artifact": null,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v3正文方法/实验及附录；https://arxiv.org/html/2604.16287v3",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "paper_configuration": "每语言40余小时语音，Omnilingual-ASR1B、NLLB3.3B/TinyAya3B、Seamless2.3B mono/multi多个方向3–10epochs，另有Gemini/GPT-Audio推理、TTS和人工评审。整套明显超单卡短时预算，不下载音频/模型、不调用付费API。",
+    "estimated_cost_basis": "依据原文配置和完整比较矩阵判断，不是本地完整实验测量；无需用长试跑确认成本。",
+    "decision": "成本过高，不复现（审查 DONE）；完整实验不下载、不试跑、不自动重试。无本地指标或GPU收据，不以通用统计/字段校验冒充论文评测。"
+  },
+  "summary": "构建Hausa、Igbo、Naijá、Yorùbá与英语平行、多口音语音，比较级联ASR→MT→TTS、Seamless端到端及AudioLLM。完整训练/语音与人工评测高成本，审查DONE不复现；不另造通用字段校验器冒充已接入官方benchmark。",
+  "deferral_reason": "每语言40余小时语音，Omnilingual-ASR1B、NLLB3.3B/TinyAya3B、Seamless2.3B mono/multi多个方向3–10epochs，另有Gemini/GPT-Audio推理、TTS和人工评审。整套明显超单卡短时预算，不下载音频/模型、不调用付费API。成本过高，不复现（审查 DONE）。"
+}

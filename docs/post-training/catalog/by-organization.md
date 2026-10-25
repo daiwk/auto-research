@@ -159,6 +159,8 @@
 ## Google
 
 - 2026-02-24 · 一作：Sanket Badhe · [Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning](../2602.21103-prompt-level-distillation/README.md)（`prompt-level-distillation`）：PLD 不微调学生参数，而把教师推理抽象为可审查的系统指令：先用带标签训练样本提取微规则，经语义向量 DBSCAN 去掉噪声、合成规则，再根据训练错误修订冲突。学生最终使用整理后的规则，不读取每个测试样本的答案。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2025-09-30 · 一作：Zhuohang Li · [Judging with Confidence: Calibrating Autoraters to Preference Distributions](../2510.00263-probabilistic-autorater/README.md)（`probabilistic-autorater`）：Sec.3 Eq.1–2 piecewise奖励和实验用epsilon=.001可精确实现。解析成功必须在[0,1]；失败Brier=0、Log=log(epsilon)。
+- 2025-09-30 · 一作：Wenda Xu · [When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation](../2509.26600-benchmark-self-bias/README.md)（`benchmark-self-bias`）：Sec.2 Eq.1使用[segment,target,benchmark-role]的逐segment排名，先按segment平均，再diag−leave-self-out peers。原始分数方向必须明确，MetricX-QE越低越好。
 
 ## Google DeepMind
 
@@ -168,6 +170,7 @@
 
 ## Google Research
 
+- 2026-03-17 · 一作：Lucas Bandarkar · [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](../2603.17070-cross-script-knowledge-transfer/README.md)（`cross-script-knowledge-transfer`）：Sec.4–6与Appendix A/H：观察性回归、训练专用entity提示干预和真实LoRA是定义性路径。不能把正则音译、手工插提示或小分类器当成其LLM知识检索机制。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2023-09-01 · 一作：Harrison Lee · [RLAIF](../2309.00267-rlaif/README.md)（`rlaif`）：AI labeler 对候选做顺序交换评判，去除位置偏差后训练 preference policy；本地落实双顺序标签与成对更新。
 
 ## Google Research / Courant Institute of Mathematical Sciences
@@ -189,6 +192,10 @@
 ## Huawei Noah’s Ark Lab
 
 - 2026-09-29 · 一作：Matthieu Zimmer · [The Weakest Link: Distilling LLM Reasoning with Worst-Case Constrained Reinforcement Learning](../2610.00332-weakest-link/README.md)（`weakest-link`）：把教师对学生采样 token 的负对数概率当作成本，约束每个生成前缀的平均成本。一旦某个前缀越界，后续进入吸收惩罚状态，防止“先生成坏推理、再靠容易 token 拉低平均成本”；同时把即时奖励的全词表期望精确求导，降低只采样当前动作的方差。
+
+## ILLC, University of Amsterdam
+
+- 2026-07-27 · 一作：Ivo Verhoeven · [What do Reward Models Memorize?](../2607.24484-rm-memorization-protocol/README.md)（`rm-memorization-protocol`）：Sec.3 Eq.1–2：对每个真实run的reward差先sigmoid，再分别对训练内20次和留出5次求均值，CM=TM−TG。必须按用户划分，不能同用户不同偏好对跨train/test。
 
 ## Independent Researcher
 
@@ -247,6 +254,10 @@
 
 - 2026-06-13 · 一作：Ang Li · [KPop](../2606.15079-kpop/README.md)（`kpop`）：异步 rollout 中的 serving 概率与训练侧概率失配，固定 ratio mask 会误删正常探索或保留错误梯度。KPop 将当前 token 与“其余词表”压缩为二元分布，只有正反两个方向的 binary KL 都低于阈值时才保留该 token 的更新。
 
+## LinkedIn
+
+- 2026-05-12 · 一作：Hejian Sang · [Beyond GRPO and On-Policy Distillation: An Empirical Sparse-to-Dense Reward Principle for Language-Model Post-Training](../2605.12483-sparse-to-dense-reward-principle/README.md)（`sparse-to-dense-reward-principle`）：Sec.2–3四阶段工作流和等标签预算经验对照是本论文核心；FKL在teacher occupancy、OPD在student occupancy，教师冻结且需共享tokenizer。库中已有GRPO/OPD/KL算子不等于本文完整流程；不重复包装通用KL或把四个状态标签称为复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## MIT HAN Lab
 
 - 2026-04-14 · 一作：Yecheng Wu · [Lightning OPD](../2604.13010-lightning-opd/README.md)（`lightning-opd`）：传统在线蒸馏在每一步训练都调用教师，吞吐和成本受教师推理限制。Lightning OPD 先让学生在 SFT 数据上产生 on-policy rollout，再由同一个教师一次性计算 token 分布并缓存。
@@ -254,6 +265,10 @@
 ## Massachusetts Institute of Technology
 
 - 2025-07-22 · 一作：Mehul Damani · [Beyond Binary Rewards: Training LMs to Reason About Their Uncertainty](../2507.16806-rlcr/README.md)（`rlcr`）：普通 binary reward 只奖励答对，容易鼓励模型无差别地自信。RLCR 让模型同时输出预测与置信度，并把 bounded proper scoring rule 加入奖励，使诚实概率具有最优激励。
+
+## McGill University
+
+- 2025-05-26 · 一作：Meng Cao · [SCAR: Shapley Credit Assignment for More Efficient RLHF](../2505.20417-scar-shapley-credit/README.md)（`scar-shapley-credit`）：原文Sec.3.2–3.4 Eq.3–6：外部冻结RM对原顺序、未入选位置填空格的文本coalition评分，v(empty)=0；Shapley必须保留负贡献，span credit只给该span末token。完整论文用自适应分段和SHAP/Owen近似。
 
 ## Meituan
 
@@ -548,6 +563,10 @@
 ## University of Luxembourg
 
 - 2026-09-29 · 一作：Hongyang Li · [Unlocking the Critic: Reward-Free Policy Optimization for LLM Post-Training](../2609.37119-rfpo/README.md)（`rfpo`）：冻结已校准 critic，把前缀成功概率同时作为 rollout reward、GAE baseline 和未完成轨迹预报，并在去长度偏置后二值化，降低策略利用 critic 偏差的风险。
+
+## University of Maryland
+
+- 2026-06-02 · 一作：Rishanth Rajendhran · [POLARIS: Guiding Small Models to Write Long Stories](../2606.04095-polaris-hri/README.md)（`polaris-hri`）：核固定v2 Section3.2 Eq5和作者fixed verl core：policy-only mean/sample-std，Aref=0.4 min(1,t/15)(rref−μ)/(σ+1e-6)，step0为0；K5+1，clip0.2、KL关闭，token-mean。相同external rubric给policy和ref评分。
 
 ## University of Maryland, College Park
 

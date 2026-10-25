@@ -1,0 +1,17 @@
+{
+  "paper_id": "2607.24484v2",
+  "figure": "Figure 1",
+  "source_page": "https://arxiv.org/html/2607.24484v2#S2.F1",
+  "source_url": "https://arxiv.org/html/2607.24484v2/cm_definition.svg",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "aa2d03324f74bf47f838070b4497f805aba0e98f748cab8d69fddd8af56029d1",
+  "license": "CC BY 4.0",
+  "transformation": "rasterization_white_background",
+  "visually_verified": true,
+  "visual_review": "已目视核对固定v2 Figure 1，标签、公式/连线或图例可读；保留原SVG，PNG只栅格化到1800px并加白色画布，避免透明底在深色主题隐藏黑色标签",
+  "checked_on": "2026-10-25",
+  "original_svg_path": "paper-figure-01.svg",
+  "original_svg_sha256": "a0cef734d36da81249d862a1191c646ce2869da244ca4f15d8dd8e6d81c7526f",
+  "render_command": "rsvg-convert --background-color white --keep-aspect-ratio --width 1800 --format png --output paper-figure-01.png paper-figure-01.svg"
+}
