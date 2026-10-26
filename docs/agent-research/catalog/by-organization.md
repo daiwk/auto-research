@@ -188,6 +188,7 @@
 - 2026-10-01 · 一作：Caiqi Zhang · [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](../2610.00972-veriharness/README.md)（`veriharness`）：同一基础模型得到 workspace、证据工具和可复用验证技能；disagreement resolver 查证冲突 claim，consensus challenger 主动质疑共同 claim 和遗漏要求。
 - 2026-07-30 · 一作：Yijia Xiao · [FinanceHarness: Autonomous Financial Deep Research Framework](../2607.27853-finance-harness-protocol/README.md)（`finance-harness-protocol`）：FinanceHarness 围绕时点限定的搜索环境组织金融工具、分层加载技能与报告证据；FinanceGym 再把评分分为截止日前可检索的证据和只能在截止日后核实的预测。Agent 只能看到问题与截止日，thesis、评分 rubric、未来证据留在提交后的评测器。
 - 2026-05-25 · 一作：Rui Meng · [ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence](../2605.26340-scientist-one/README.md)（`scientist-one`）：研究产物看起来完整，仍可能引用虚构、分数无法复算或方法描述与代码不同。CoE 将主张连到可核验来源；独立 I1–I4 检查分数、规则、引用和方法/代码一致性。
+- 2026-04-06 · 一作：Yiwen Song · [PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing](../2604.05018-paperorchestra/README.md)（`paperorchestra`）：PaperOrchestra 用 Outline、Plotting、Literature Review、Section Writing、Content Refinement 五个 Agent，把零散想法和实验日志转成含文献与图表的 LaTeX 稿件。大纲之后图示与文献检索并行，引用经过实体和时间截止核验，最终根据多维评价接受或回退修订；系统不负责替作者发明或执行新实验。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-02-08 · 一作：Minbeom Kim · [CausalArmor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution](../2602.07918-causal-armor/README.md)（`causal-armor`）：在高权限动作前，分别去掉用户请求与不可信工具段，比较同一个动作的似然变化。工具段的归因高于用户时，只清洗命中段，再遮蔽首个命中点后的 assistant 内容并重新提案。
 - 2026-02-02 · 一作：Jiefeng Chen · [MARS: Modular Agent with Reflective Search for Automated AI Research](../2602.02660-mars-research/README.md)（`mars-research`）：自动研究不仅要生成正确代码，还需在有限训练时间内分辨改动价值。MARS 使用“设计—拆分—实现”生成模块化仓库，以预算感知 MCTS 选择新方案、改进或调试；比较新旧执行结果和代码差异，提炼解决方案经验与调试经验，供其他搜索分支复用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
@@ -463,6 +464,10 @@
 - 2023-05-17 · 一作：Shunyu Yao · [Tree of Thoughts](../2305.10601-tree-of-thoughts/README.md)（`tree-of-thoughts`）：自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。
 - 2022-10-06 · 一作：Shunyu Yao · [ReAct](../2210.03629-react/README.md)（`react`）：纯 CoT 容易在封闭知识上幻觉，纯 action agent 又缺少计划与状态跟踪。ReAct 让模型交替生成自然语言推理和环境 action，再把 observation 放回下一步上下文，使推理可以纠错、行动可以获取外部事实。
 
+## Purdue University
+
+- 2026-10-23 · 一作：Binghang Lu · [RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training](../2610.32026-rsi-opt/README.md)（`rsi-opt`）：单次优化器 Agent 能根据当前训练调整程序，却不会自动把经验带到下一次训练。RSI-Opt 让代码 Agent 根据真实训练证据改写 updater，再将 prompt、自然语言 playbook、代码 library 与 cadence 作为可继承策略，通过外层训练评估递归演化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Qwen DianJin Team, Alibaba Cloud Computing
 
 - 2026-10-01 · 一作：Bo Deng · [DeFA: Dependency-Guided Failure Attribution for LLM Agents](../2610.01256-defa/README.md)（`defa`）：融合 protocol relation 和语义依赖构造 event dependency graph，再从违规事件逆向追踪 source 与下游影响，形成 failure propagation graph 并定位 decisive error。
@@ -565,6 +570,10 @@
 
 - 2026-10-15 · 一作：Yuanjian Xu · [AgentPerturb: Evaluating LLM Agent Robustness under Controlled Interaction Perturbations](../2610.21624-agent-perturb/README.md)（`agent-perturb`）：Agent 失败不一定来自模型推理：用户请求缺信息、技能规范过时、历史上下文出错和工具说明漂移都可能沿轨迹传播。AgentPerturb 交叉组织四个目标——用户请求 $U$、过程规范 $P$、继承上下文 $C$、工具契约 $T$——与缺失、冗余、错误三类扰动，得到12个家族。
 
+## The Ohio State University
+
+- 2025-10-06 · 一作：Chan Hee Song · [Watch and Learn: Learning to Use Computers from Online Videos](../2510.04673-watch-and-learn/README.md)（`watch-and-learn`）：W&L 把“视频里发生了什么操作”建模为逆动力学：输入前后两张屏幕图像，预测导致状态变化的动作。训练好的 IDM 再标注网络教程视频，结合任务检索形成轨迹，分别用于 CUA 的上下文示范和监督训练，而非直接让通用大模型猜动作或用规则恢复轨迹。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## The University of Hong Kong
 
 - 2026-07-30 · 一作：Qiushi Sun · [OSReward / OS-Shepherd](../2607.28609-osreward/README.md)（`os-shepherd`）：电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。
@@ -579,6 +588,8 @@
 
 ## Tsinghua University
 
+- 2026-10-23 · 一作：Zheng Jiang · [Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond](../2610.32802-frontier-opd/README.md)（`frontier-opd`）：同一个环境观测可能经不同历史反复到达，直接按访问次数或 token 数平均会让循环轨迹主导教师介入判断。Frontier-OPD 先在轨迹内、再在轨迹间聚合有符号师生分歧，对不同状态选原历史代表；教师桥与学生续跑须通过同长窗口比较后才接纳，状态共享不能替代真实历史或任务成功评测。
+- 2026-10-23 · 一作：Yuhua Jiang · [HarnessMM: Recursive Self-Improvement for Harness Token Efficiency](../2610.32813-harnessmm/README.md)（`harnessmm`）：Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-20 · 一作：Tianyu Fu · [Cache Engineering for Agents](../2610.28577-cache-engineering/README.md)（`cache-engineering`）：删改早期对话文本会使后续KV失效，重prefill又产生费用。作者保留逻辑文本，直接drop旧工具响应的KV，必要时repos重设保留键的位置；缓存状态取决于操作发生的历史，不能只根据最终token前缀判断是否可复用。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-15 · 一作：Bingxiang He · [AutoSFT: An Agentic System for Automated Data Research in Supervised Fine-Tuning](../2610.22194-auto-sft/README.md)（`auto-sft`）：自动后训练研究若让一个 Agent 同时读训练日志、分析失败、改数据、提交任务，可能在上下文中积累大量执行输出，最终只反复调整混合比例。AutoSFT 将 Meta Agent、执行子代理、四种分析视角与数据合成分开：执行侧只返回可追溯产物，分析侧从数据、失败、训练信号、研究历史提出不同方案，Meta Agent 决定下一轮的数据干预。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-02 · 一作：Xin Wang · [AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning](../2610.03223-adastep/README.md)（`adastep`）：Agent 长轨迹的终局奖励给每一步同样的全局优势，无法指出哪一步有用；GiGPO 等方法用相同锚状态的局部回报补充信用，但同一动作之后的随机路径也会改变回报。AdaStep 不另训 critic，而是看同组中**不同动作解释了多少回报方差**。
@@ -682,6 +693,7 @@
 
 ## University of Science and Technology of China
 
+- 2026-10-23 · 一作：Shuo Han · [ImageRSI: Verification-Driven Recursive Self-Improvement for Agentic Image Generation](../2610.32120-image-rsi/README.md)（`image-rsi`）：图像生成器即使输出好看，也可能遗漏数量、空间关系、特定文字或身份约束。ImageRSI 固定原始 requirements，以真实生成器产图、五维评审器提供缺陷证据并指导修复，再经独立配对与 holdout 接纳跨任务经验、离线升级 judge，不能靠删掉要求提高分数。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-08-26 · 一作：Hongqiu Ni · [TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving](../2608.25523-topas/README.md)（`topas`）：在共享 KV-cache 预算下，同时估算工作流最长剩余路径与下游 prefix reuse 收益，并纳入 prefix 移动、抢占和 aging，避免只优化局部命中率或单请求进度。
 - 2026-08-21 · 一作：Huizu Lin · [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](../2608.21292-auso/README.md)（`auso`）：外部技能检索有上下文开销，完全内化又失去按任务选择能力；按整条轨迹成功率硬切阶段还无法判断某一个动作是否真正受益。AUSO 先用 skill-conditioned teacher 内化通用技能，再进行 outcome-driven exploration，最后对每个动作比较有技能和无技能策略的 JSD，以有界权重调整 GRPO advantage。
 - 2026-07-28 · 一作：Yu Wang · [CAST](../2607.25308-cast/README.md)（`cast`）：把求解器状态价值的相邻差分变成 solver advantage，为稀疏结果奖励补充 turn 级 credit。

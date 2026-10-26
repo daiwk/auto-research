@@ -6,6 +6,8 @@ Jev 是 TypeSafe AI 公布的第一个 **System One** 模型：输入一份 `sta
 
 新增[Jev-DLC双通道持续适配](2610.31521-jev-dlc/README.md)：外部冻结scorer之上保留语义计数、PA-I修正及可靠性状态，严格先提交决策再接受反馈。本地为CPU状态组件与时序/独立公式验证，不加载JEV，也不声称复现27B完整实验；完整实验高成本不复现。
 
+10月26日公告新增[EditJev图像编辑路由](../foundation-models/2610.32635-editjev/README.md)：只执行偏好head、按请求归一的pairwise loss和速度路由，已在A100核验L1机制，不生成图片、不把测试质量交给router。[PathJev病理决策](../foundation-models/2610.32478-pathjev/README.md)仅资料收录，完整长时多种子训练成本过高，不复现（审查DONE）。它们是相关论文，不是TypeSafe Jev内部架构披露。
+
 近期新增 [Jev 葡语检索评测接口](../foundation-models/2610.23346-jev-portuguese-ir/README.md)：区分有序 qrel 判定与独立 Noul 概率重排，保留批量精确覆盖、线性 nDCG/MRR 和 κ/τ-b。只做离线协议诊断及已发表混淆矩阵复算，未调用 Jev；完整 API 实验标注高成本不复现。
 
 新增[System One多模态重排](../multimodal-models/2610.28435-system-one-rerank/README.md)：同一图文prompt中读取候选字母logits，一次真实VLM前向完成choice排序。小型公开VLM已在A100验证接口；不是TypeSafe Jev内部实现，也不是论文27B完整结果，完整评测成本过高不复现。

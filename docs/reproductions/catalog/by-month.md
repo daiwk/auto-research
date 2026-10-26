@@ -3,6 +3,7 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-10
+- [Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion](../../recommendation-components/2610.32420-hge/README.md)：先以商品自注意力编码竞争，再注入用户/门店/上下文；将门店GTV拆为转化概率乘条件商品购买概率、数量和价格之和，再用有符号残差与按样本门控融合通用回归。本地是Eqs2--11可微L1组件，不含DIN/DCN、论文完整Dice塔或生产训练，不能声称复现+1.42%线上收益。
 - [OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models](../../recommendation-components/2610.30675-onelatent/README.md)：用探索/评价/归因三视角监督、三阶段latent-token对齐和活跃度课程训练，将在线生成缩为三层SID；异步缓存避开请求关键路径。正文量化A/B与全流量部署符合工业证据门槛；完整实验成本过高，不复现（审查 DONE）。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn](../../recommendation-components/2610.30941-pair/README.md)：通过曝光条件偏好对比目标、可学习位置历史注意力和归一化加性融合建模职业社交互补意图。本地仅实现可独立验证的向量/损失组件；原8GPU私有数据完整实验成本过高，不复现（审查 DONE）。
 - [Progressive Learning from Content to Relevance to Personalization for CTR Prediction](../../recommendation-components/2610.29138-finesid/README.md)：把多尺度视觉和字段化文本离散token送入有序融合/HiFormer，先用教师软相关性训练整个共享预测器，再保留完整状态迁移到个性化CTR微调。正文有淘宝七天量化线上A/B；64H20与私有大数据成本过高，仅收录方法和证据，不提供伪替代运行。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

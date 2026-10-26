@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](2610.32770-opst/README.md) | Google，2026-10-23 | 未发现官方代码 | `opst`：仅低成本组件，完整实验不复现 |
+| 策略优化 | [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](2610.32431-mart-grpo/README.md) | The University of Hong Kong，2026-10-23 | 未发现官方代码 | `mart-grpo`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](2610.30796-gift/README.md) | Shanghai Jiao Tong University，2026-10-22 | [原作者入口](https://github.com/lilifree/GIFT)；原作者源码可见；固定5e9a9dfdb371b7368949abbdc3a846d23a546557未找到第一方LICENSE/COPYING，GitHub license=null；未确认开放许可，不复制作者源码。本地根据论文独立实现 | `gift`：仅低成本组件，完整实验不复现 |
 | 后训练算法组件 | [MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback](2610.30873-moer/README.md) | City University of Hong Kong，2026-10-22 | [原作者入口](https://github.com/CityU-MLO/MOER)；原作者已发布可见源码；固定7dafbe33118e61597a4f0186d538c1630430c0be，无根LICENSE，仅有嵌套上游许可，作者新增代码许可未确认；本地据论文独立重写，不复制上游代码 | `moer`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents](2610.30932-userarena-optd/README.md) | Leiden University，2026-10-22 | [原作者入口](https://github.com/RecGPT-Team/UserArena)；原作者发布环境、评测及OPTD源码，固定d37e3c062d30950f2a3744c66a18fda9aa72c1f7；非商业研究且禁止未经授权再分发，本地只据论文独立实现损失，不复制上游代码或数据 | `userarena-optd`：仅低成本组件，完整实验不复现 |

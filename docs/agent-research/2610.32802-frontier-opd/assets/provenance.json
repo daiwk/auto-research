@@ -1,0 +1,14 @@
+{
+  "paper_id": "2610.32802v1",
+  "figure": "2",
+  "source_page": "https://arxiv.org/html/2610.32802v1#S3.F2",
+  "source_url": "https://arxiv.org/html/2610.32802v1/figures/figure2_method_exact.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "8263537730e60602fe71a858fdcc216ccdd307c1562f73708ae5342744e4cd4a",
+  "license": "CC BY-NC-ND 4.0",
+  "transformation": "none",
+  "visual_review": "已目视核原始PNG四面板：学生轨迹、共享状态frontier、teacherbridge+studentcontinuation、接受桥的OPD更新；无重绘裁剪",
+  "visually_verified": true,
+  "checked_on": "2026-10-26"
+}

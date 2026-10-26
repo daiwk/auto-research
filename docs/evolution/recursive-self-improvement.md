@@ -28,6 +28,11 @@ flowchart LR
 
 以下按“已实现的局部机制”和“待复核候选”区分，不把外部论文直接标为本地复现。
 
+- [ImageRSI](../agent-research/2610.32120-image-rsi/README.md)：以真实图像生成、独立验证/修复和配对接纳扩展经验，再训练judge；本轮仅资料，完整生成/API/训练闭环成本过高，不复现（审查DONE），不以分数算术冒充judge。
+- [RSI-Opt](../agent-research/2610.32026-rsi-opt/README.md)：代码Agent修改优化器并通过真实多任务训练继承改进；仅资料收录，高成本搜索不复现，明确保留原文披露的held-out lineage与archive传播疑点。
+- [HarnessMM](../agent-research/2610.32813-harnessmm/README.md)：通过可审计的事件依赖图和callback边界证书减少重复调用；仅资料收录，完整原生harness矩阵不复现，不生成假的物理调用receipt。
+- [OPST](../post-training/2610.32770-opst/README.md)：模型自生成、验证与EMA教师构成多轮自训练。本地仅实现无歧义的门控/外部散度归约/EMA，原PDF散度权重矛盾未被静默修复；不宣称已实现完整自我改进或接入Evolve。
+
 - [Harness²](../agent-research/2610.14224-harness2/README.md)：固定模型、每个新任务重置到共同初始 Harness，在任务内执行 Propose–Probe–Compose，再持久保留有执行对照支撑的改进经验。本地已实现并行/顺序控制器、匿名既有产物选择与同域经验库，实跑 96 次 Python 探针；编辑器和选择器仍是确定性机制替身，不是模型支持的开放世界 RSI，也未接入 Evolve。完整模型/API 基准成本过高，不复现（审查 DONE）。
 - [Harmony Harness](../agent-research/2610.15150-harmony-harness/README.md)：用多目标分解保留功能与安全的不同权衡，并按通用/环境范围演化工具、技能和逻辑。本轮仅资料收录；完整多配置、反复容器构建与漏洞执行的模型实验成本过高，不复现，不是本地可执行 Evolve 算子。
 - [SEER](../agent-research/2610.04109-seer-forecasting/README.md)：对时间序列预测维护检索、筛选和因果经验，在训练回测中等待反馈成熟后更新，测试冻结记忆。本轮仅资料收录；闭源多模型、网络检索和回测完整实验不复现，不将时间隔离协议当作预测能力验证。

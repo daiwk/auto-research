@@ -1,0 +1,14 @@
+{
+  "paper_id": "2610.32813v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2610.32813v1#S0.F1",
+  "source_url": "https://arxiv.org/html/2610.32813v1/figures/harness_rsi_overview_user.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "f3fd5c2a0fc5f829396aaa8922ea2b38e4a6a861c1e22f6ab5155c9d78262606",
+  "license": "arXiv.org perpetual non-exclusive license;copyright remains with authors;attributed scholarly figure discussion",
+  "transformation": "none",
+  "visually_verified": true,
+  "visual_review": "目视核原始PNG：任务观察工具、harness执行图、RSI反馈、GDR与CCS前后示意及图例全保留，无裁剪重绘",
+  "checked_on": "2026-10-26"
+}

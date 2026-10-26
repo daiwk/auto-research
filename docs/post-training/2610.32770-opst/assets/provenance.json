@@ -1,0 +1,15 @@
+{
+  "paper_id": "2610.32770v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/pdf/2610.32770v1",
+  "source_url": "https://arxiv.org/pdf/2610.32770v1",
+  "pdf_page": 2,
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "2d19692f685019276332f36544da111efef6964348b6806d3e7b34a7f1ec97ec",
+  "license": "CC BY 4.0",
+  "transformation": "Direct PDF rasterization,2x,clip=[105,65,507,211] points;figure and complete caption retained,not redrawn",
+  "visual_review": "已核原PDF第2页Figure1：主题生成/LLM/质量难度filter/data pool/训练箭头全部保留，caption完整，无截断正文",
+  "visually_verified": true,
+  "checked_on": "2026-10-26"
+}

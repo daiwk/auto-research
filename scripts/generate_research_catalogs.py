@@ -61,6 +61,7 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "策略优化": ("在线强化学习与稳定性", "步骤奖励与信用分配"),
         "知识蒸馏": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
         "自置信轨迹过滤": ("奖励、信用与课程", "课程与能力边界"),
         "偏好图信用分配": ("奖励、信用与课程", "奖励构造与排序信号"),
@@ -169,6 +170,7 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "工具与环境交互": ("工具调用与环境执行", "电脑操作与 reward 评测"),
         "Agent 训练与策略优化": ("Agentic RL 与后训练", "在策略蒸馏与上下文探索"),
         "RSI": ("规划、搜索与反思", "Harness 与自我改进"),
         "递归自改进": ("规划、搜索与反思", "Harness 与自我改进"),
@@ -833,6 +835,11 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "detector-scope": ("推理与系统效率", "可审计检测与激活解释"),
+        "dt-jepa": ("网络架构", "JEPA 与决策表征"),
+        "editjev": ("推理与系统效率", "System One / JEV 与结构化决策"),
+        "lazyflash": ("注意力与长上下文", "注意力内核与反向传播"),
+        "pathjev": ("多模态基础模型", "医学图像与结构化视觉决策"),
         "taskpress": ("注意力与长上下文", "任务引导 KV cache 压缩"),
         "combinatorial-watermark": ("推理与系统效率", "生成水印与编辑检测"),
         "interpolated-null-calibration": ("推理与系统效率", "检索与重排序校准"),
@@ -1031,6 +1038,8 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "flexglue": ("多模态基础模型", "图像匹配与稀疏对应"),
+        "uniaction": ("视觉世界模型与时序推理", "统一动作表示与条件注意力"),
         "cue2narrate-drl": ("多模态奖励与后训练", "音频描述与对比排序"),
         "naijas2st": ("多模态基础模型", "低资源语音翻译评测"),
         "mveb": ("多模态检索", "视频嵌入统一评测"),

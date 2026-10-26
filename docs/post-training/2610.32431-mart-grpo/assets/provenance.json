@@ -1,0 +1,14 @@
+{
+  "paper_id": "2610.32431v1",
+  "figure": "3",
+  "source_page": "https://arxiv.org/html/2610.32431v1#S3.F3",
+  "source_url": "https://arxiv.org/html/2610.32431v1/figures/assets/mart_grpo_workflow_print.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "5b444932f8ec64e2d0e74d572cbe2a89df69d45278d54162f2d757cc6147a052",
+  "license": "arXiv.org perpetual non-exclusive license;copyright remains with authors;figure reproduced for attributed scholarly discussion",
+  "transformation": "none",
+  "visual_review": "已目视核原始PNG：rolloutgroups、LoRA事件VLM、三路观察、错误区间[1,2]映射B2、成功全保留和mask[1,1,1,0]，无裁剪重绘",
+  "visually_verified": true,
+  "checked_on": "2026-10-26"
+}

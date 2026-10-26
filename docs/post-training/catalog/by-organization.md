@@ -158,6 +158,7 @@
 
 ## Google
 
+- 2026-10-23 · 一作：Leon Sick · [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../2610.32770-opst/README.md)（`opst`）：通常的 on-policy self-distillation 仍需要人工问题集。OPST 按主题自生成问题和特权解题线索，经独立重答、改写与学生难度门过滤，再由额外看到线索的 EMA 教师在学生实际生成的前缀上提供分布监督，而不是要求学生直接模仿生成器表述。
 - 2026-02-24 · 一作：Sanket Badhe · [Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning](../2602.21103-prompt-level-distillation/README.md)（`prompt-level-distillation`）：PLD 不微调学生参数，而把教师推理抽象为可审查的系统指令：先用带标签训练样本提取微规则，经语义向量 DBSCAN 去掉噪声、合成规则，再根据训练错误修订冲突。学生最终使用整理后的规则，不读取每个测试样本的答案。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2025-09-30 · 一作：Zhuohang Li · [Judging with Confidence: Calibrating Autoraters to Preference Distributions](../2510.00263-probabilistic-autorater/README.md)（`probabilistic-autorater`）：Sec.3 Eq.1–2 piecewise奖励和实验用epsilon=.001可精确实现。解析成功必须在[0,1]；失败Brier=0、Log=log(epsilon)。
 - 2025-09-30 · 一作：Wenda Xu · [When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation](../2509.26600-benchmark-self-bias/README.md)（`benchmark-self-bias`）：Sec.2 Eq.1使用[segment,target,benchmark-role]的逐segment排名，先按segment平均，再diag−leave-self-out peers。原始分数方向必须明确，MetricX-QE越低越好。
@@ -474,6 +475,10 @@
 
 - 2026-10-15 · 一作：Hanane Nour Moussa · [EliteReplay: Preserving Diverse Solutions in RL Post-Training via Quality-Diversity Search](../2610.22290-elite-replay/README.md)（`elite-replay`）：单纯提高正确率的 RL 可能压缩正确解法的覆盖范围。EliteReplay 先用冻结基模和 MAP-Elites 收集不同正确策略，训练时持续回放固定档案。
 - 2026-10-01 · 一作：Qijia He · [Asynchronous LLM Post-Training: Group-Mass Capping and Convergence Analysis](../2610.01896-gmc-grpo/README.md)（`gmc-grpo`）：异步 rollout 的重要性比在 group 级统一缩放，使总质量受帽约束；在共同二阶矩保证下减少 trajectory-wise clipping 的持续偏差。
+
+## The University of Hong Kong
+
+- 2026-10-23 · 一作：Zongyao Zhao · [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](../2610.32431-mart-grpo/README.md)（`mart-grpo`）：一次机器人最终失败，不等于每个动作都导致失败；全轨迹负优势还会惩罚有价值的重抓和恢复尝试。MART-GRPO 用冻结事件 VLM 回看完整失败轨迹，定位最后一次未恢复错误，只保留截止该边界的失败反馈；成功轨迹、原组优势和原始 token 分母不变。
 
 ## The University of Texas at Austin
 

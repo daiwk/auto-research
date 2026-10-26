@@ -264,6 +264,10 @@
 
 - 2026-10-17 · [Muse Glimmer 30B: An On-Device Agentic Model](../../foundation-models/2610.24628-muse-glimmer-30b/README.md)（`muse-glimmer-30b`）：模型瞄准有32GB专用内存的端侧Agent：语言骨干用稠密Transformer而非MoE，在相同内存预算下用缩放实验选架构；约1.8B冻结视觉编码器支持图文交错输入。52层采用三层2048窗口局部注意力接一层全局注意力，32Q/2KV的GQA，局部层使用RoPE，全局层不再施加RoPE。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+## Microsoft
+
+- 2026-10-22 · [LazyFlash: Forward-Dense, Backward-Sparse Attention for Accelerated Long-Context Fine-Tuning](../../foundation-models/2610.31911-lazyflash/README.md)（`lazyflash`）：与稀疏前向attention不同，LazyFlash保留训练和部署前向完全dense。它按query block的dO Frobenius范数衡量梯度贡献，用gradient-mass budget约束预计丢弃量，并importance采样反向block。必须在tiled FlashAttention反向内部跳过内存访问/计算，才能兑现论文速度；用PyTorch dense backward后置零或toy mask不构成该方法的低成本完整实现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Microsoft（按作者邮箱）
 
 - 2026-10-01 · [LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them](../../foundation-models/2610.02076-llm2jev/README.md)（`llm2jev`）：直接从括号数字选项的 next-token 概率形成有限类别分布；微调时使用 listwise 决策损失，并以 KL 锚定基础模型辅助输出。
@@ -327,6 +331,7 @@
 
 ## Peking University
 
+- 2026-10-23 · [EditJev: System One Routing for Image Editing Models](../../foundation-models/2610.32635-editjev/README.md)（`editjev`）：固定使用一个图像编辑器会忽视样本级互补性。EditJev先离线让所有候选产生输出并由judge评分，再将可靠质量差转为pairwise监督；router不生成模型名称，而直接输出固定候选顺序的utility vector。推理无需先运行各编辑器，仅对utility加beta倍固定速度分后选一次argmax。
 - 2026-03-27 · [Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers](../../reproductions/2603.26380-switch-attention/README.md)（`switch-attention`）：静态 hybrid attention 对所有 token 使用固定模式。Switch Attention 学习细粒度 router，只让需要全局信息的 token 走 full attention。
 
 ## Pennsylvania State University
@@ -385,6 +390,10 @@
 ## Sogang University
 
 - 2026-10-22 · [OpenAttention: One Percent Is Enough with Tail Proxies](../../foundation-models/2610.30951-openattention/README.md)（`openattention`）：低读取率稀疏注意力不只需要选出少量重要 KV，还需要处理未读取的尾部。OpenAttention 在 query 二阶矩定义的几何空间内聚类，以 ErrorGate 估计簇内代理误差并分配精确读取预算；每个簇的未读部分成为一个带计数的均值代理。它不是单纯的 top-k 截断或均值池化。
+
+## Southeast University
+
+- 2026-10-23 · [DT-JEPA: Learning to Predict Future Representations for Decision-Making](../../foundation-models/2610.32657-dt-jepa/README.md)（`dt-jepa`）：传统DT用单个return-to-go条件，无法区分回报相同但未来动力学不同的轨迹。本方法将条件改成由历史预测的未来latent分布：历史encoder生成Gaussian参数，EMA target encoder只在训练期编码真实未来；重参数采样的预测未来通过独立gamma/beta MLP调制DT hidden。离线目标为BC加Gaussian NLL；在线通过双target critic的较小值构建多步target，并优化Q1指导的actor目标。
 
 ## Southern University of Science and Technology
 
@@ -523,8 +532,13 @@
 
 - 2026-10-01 · [IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs](../../foundation-models/2610.00426-irekogpt/README.md)（`irekogpt`）：保留 SliceGPT 投影矩阵而非直接丢弃，使同一 checkpoint 暴露嵌套宽度；再以多压缩率校准和 ridge 修正下游线性层。
 
+## University of Naples Federico II
+
+- 2026-10-23 · [PathJev: Decision-Native Vision–Language Modelling for Histopathology](../../foundation-models/2610.32478-pathjev/README.md)（`pathjev`）：模型一遍前向在question/candidate markers读取hidden，decision head混合candidate线性项、question-candidate交互和set attention，对runtime候选做softmax。head和两阶段训练继承已有OmniMed-Jev；PathJev的重要新增是病理40K states、专家标签到三种typed decisions、split/overlap审计、未见器官与generative readout对照。不能只实现一个普通softmax就声称复现病理泛化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## University of Pennsylvania
 
+- 2026-10-21 · [Building Auditable AI Text Detectors with Sparse Autoencoders](../../foundation-models/2610.30006-detector-scope/README.md)（`detector-scope`）：DetectorScope 把黑盒检测器的残差流转换为 SAE 稀疏特征，按 token 取最大值后跨层拼接，再用自动解释的验证分数筛掉不可靠概念。轻量 L1 线性头只使用保留特征，因此每个预测能分解成可置零核验的概念贡献，而不是在黑盒输出后补写理由。
 - 2026-10-20 · [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](../../foundation-models/2610.28458-locale-jepa/README.md)（`locale-jepa`）：LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配**均匀球分布**。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。
 
 ## University of Southern California

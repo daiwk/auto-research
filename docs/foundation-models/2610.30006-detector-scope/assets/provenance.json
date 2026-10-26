@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.30006v1",
+  "reviewed_version_url": "https://arxiv.org/html/2610.30006v1",
+  "source_url": "https://arxiv.org/html/2610.30006v1/fig2_new.png",
+  "image": "paper-figure-01.png",
+  "figure": "Figure 2",
+  "original_caption": "Our pipeline.",
+  "caption_summary_zh": "多层残差流经SAE编码、token最大池化和全局解释性mask，再输入稀疏线性分类头。",
+  "sha256": "80250c61d59e7e3bc26d50704688e037dde4b4934d06d7a4083407f74f3b54bb",
+  "width": 841,
+  "height": 358,
+  "extraction": "Original arXiv v1 HTML PNG downloaded unchanged; not redrawn.",
+  "visually_inspected": true,
+  "checked_on": "2026-10-26",
+  "copyright": "版权归原作者所有；用于学术介绍并链接原论文，不改变论文图片权属。"
+}

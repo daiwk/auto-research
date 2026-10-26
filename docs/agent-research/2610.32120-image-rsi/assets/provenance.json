@@ -1,0 +1,14 @@
+{
+  "paper_id": "2610.32120v1",
+  "figure": "2",
+  "source_page": "https://arxiv.org/html/2610.32120v1#S3.F2",
+  "source_url": "https://arxiv.org/html/2610.32120v1/ImageRSI.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "3c5135bd0f479edc7afbdded1173520087cb0648b63c748f09aba98381af3777",
+  "license": "CC BY-SA 4.0",
+  "transformation": "none",
+  "visually_verified": true,
+  "visual_review": "已目视核原始PNG三面板：在线图像生成验证修复、配对经验admission、离线SFT-GRPO judge升级；无裁剪重绘",
+  "checked_on": "2026-10-26"
+}
