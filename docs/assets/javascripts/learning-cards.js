@@ -24,11 +24,23 @@
         domain: card.dataset.domain || "",
         theme: card.dataset.theme || "",
         topic: card.dataset.topic || "",
+        identity: card.dataset.identity || "",
+        paperTitle: card.dataset.paperTitle || "",
+        pending: card.dataset.learningPending === "true",
         search: (card.dataset.search || card.textContent).toLowerCase(),
       }));
       const pageSize = Number(root.dataset.learningPageSize) || 24;
       let visible = pageSize;
       const params = new URLSearchParams(window.location.search);
+      let selectedPaper = params.get("paper") || "";
+      const paperFilter = document.createElement("p");
+      paperFilter.className = "ar-learning-paper-filter";
+      const paperName = document.createElement("span");
+      const clearPaper = document.createElement("button");
+      clearPaper.type = "button";
+      clearPaper.textContent = "清除论文筛选";
+      paperFilter.append(paperName, clearPaper);
+      root.querySelector('.ar-learning-controls').before(paperFilter);
       if (search) search.value = params.get("q") || "";
       if (theme && Array.from(theme.options).some((o) => o.value === params.get("theme"))) {
         theme.value = params.get("theme");
@@ -42,7 +54,7 @@
         empty = document.createElement("p");
         empty.className = "ar-learning-empty";
         empty.dataset.learningEmpty = "";
-        empty.textContent = "没有匹配的卡片。试试其他关键词，或选择全部主题。";
+        empty.textContent = "没有匹配的问题。试试其他关键词，或选择全部主题。";
         grid.before(empty);
       }
 
@@ -68,42 +80,60 @@
         const selectedTopic = topic?.value || "";
         let matched = 0;
         let shown = 0;
+        let matchedQuestions = 0;
+        let shownQuestions = 0;
+        let pending = 0;
+        const papers = new Set();
         cards.forEach((card) => {
           const matches = (!selectedDomain || selectedDomain === "all" || card.domain === selectedDomain)
             && (!selectedTheme || card.theme === selectedTheme)
             && (!selectedTopic || card.topic === selectedTopic)
+            && (!selectedPaper || card.identity === selectedPaper)
             && words.every((word) => card.search.includes(word));
-          if (matches) matched += 1;
+          if (matches) {
+            matched += 1;
+            papers.add(card.identity);
+            if (card.pending) pending += 1;
+            else matchedQuestions += 1;
+          }
           card.element.hidden = !matches || shown >= visible;
-          if (!card.element.hidden) shown += 1;
+          if (!card.element.hidden) {
+            shown += 1;
+            if (!card.pending) shownQuestions += 1;
+          }
         });
         empty.hidden = matched > 0;
-        if (status) status.textContent = `匹配 ${matched} 张，已显示 ${shown} 张。`;
+        root.dataset.paperFiltered = selectedPaper ? "true" : "false";
+        if (search) search.placeholder = selectedPaper ? "搜索本篇论文的问题" : "搜索问题、论文或机制";
+        paperFilter.hidden = !selectedPaper;
+        if (selectedPaper) paperName.textContent = '当前论文：' + (cards.find(card => card.identity === selectedPaper)?.paperTitle || selectedPaper);
+        if (status) status.textContent = `匹配 ${matchedQuestions} 问，涉及 ${papers.size} 篇，已显示 ${shownQuestions} 问。`
+          + (pending ? ` ${pending} 篇待补问答。` : "");
         if (more) {
           more.hidden = shown >= matched;
-          more.textContent = `再显示 ${Math.min(pageSize, matched - shown)} 张`;
+          more.textContent = `再显示 ${Math.min(pageSize, matched - shown)} ${pending ? "条记录" : "个问题"}`;
         }
       }
 
       function reset() {
         visible = pageSize;
         syncTopics();
-        if (theme || topic) {
-          const url = new URL(window.location.href);
-          [["q", search?.value.trim()], ["theme", theme?.value], ["topic", topic?.value]].forEach(([key, value]) => {
-            if (value) url.searchParams.set(key, value);
-            else url.searchParams.delete(key);
-          });
-          url.hash = "";
-          window.history.replaceState(null, "", url);
-        }
+        const url = new URL(window.location.href);
+        [["q", search?.value.trim()], ["theme", theme?.value], ["topic", topic?.value], ["paper", selectedPaper]].forEach(([key, value]) => {
+          if (value) url.searchParams.set(key, value);
+          else url.searchParams.delete(key);
+        });
+        url.hash = "";
+        window.history.replaceState(null, "", url);
         render();
       }
 
       search?.addEventListener("input", reset);
+      clearPaper.addEventListener("click", () => { selectedPaper = ""; reset(); });
       domain?.addEventListener("change", reset);
-      theme?.addEventListener("change", reset);
+      theme?.addEventListener("change", () => { selectedPaper = ""; reset(); });
       topic?.addEventListener("change", () => {
+        selectedPaper = "";
         if (topic.value && theme) theme.value = topic.value.split("/")[0];
         reset();
       });
@@ -121,15 +151,21 @@
       // Stable paper anchors from old bookmarks also reveal cards beyond page one.
       function revealAnchor() {
         const anchor = window.location.hash.slice(1);
-        const targetIndex = cards.findIndex((card) => card.element.querySelector("h2")?.id === anchor);
+        const target = document.getElementById(anchor);
+        const targetIndex = cards.findIndex((card) => target && card.element.contains(target));
         if (targetIndex < 0) return;
         if (search) search.value = "";
         if (theme) theme.value = "";
         if (topic) topic.value = "";
         if (domain) domain.value = "";
+        if (selectedPaper !== cards[targetIndex].identity) selectedPaper = "";
         syncTopics();
         visible = Math.max(pageSize, targetIndex + 1);
         render();
+        if (anchor.startsWith("qa-")) {
+          const answer = cards[targetIndex].element.querySelector('.ar-learning-answer');
+          if (answer) answer.open = true;
+        }
         cards[targetIndex].element.scrollIntoView({ block: "start" });
       }
       anchorReveals.set(root, revealAnchor);

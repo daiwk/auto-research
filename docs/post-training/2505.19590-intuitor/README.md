@@ -1,6 +1,6 @@
 # INTUITOR：以自置信度替代外部 verifier
 
-> **保真度：核心机制复现**。本页不把确定性 mini-suite 冒充原论文完整 benchmark。
+> **本地为候选分布机制诊断**。当前算子没有实现原文逐 token、全词表的 self-certainty；现有 mini-suite 不能作为该定义性奖励或原论文推理能力的验证。
 
 ## 论文信息
 
@@ -17,7 +17,7 @@
 
 ### 背景与主要改动
 
-把答案分布相对均匀分布的 KL 作为 intrinsic self-certainty reward，在没有答案和 verifier 时优化。
+以每个生成前缀下的全词表 next-token 分布计算 $D_{KL}(U\Vert\pi_\theta)$，再沿回答长度平均，作为 intrinsic self-certainty reward。方向是均匀分布到策略分布，并非策略的负熵；高置信度也不等于答案一定正确。
 
 ```mermaid
 flowchart LR
@@ -37,8 +37,13 @@ flowchart LR
 ### 核心公式
 
 $$
-r_{int}(y)=D_{KL}(\pi_\theta(\cdot|x,y_{<t})\Vert U),\quad\max_\theta\mathbb E[r_{int}].
+r_{int}(y)=\frac{1}{|y|}\sum_{t=1}^{|y|}
+D_{KL}(U\Vert\pi_\theta(\cdot|x,y_{<t}))
+=-\frac{1}{|y||\mathcal V|}\sum_{t=1}^{|y|}\sum_{j\in\mathcal V}
+\log\bigl(|\mathcal V|\pi_\theta(j|x,y_{<t})\bigr).
 $$
+
+依据：[原论文 v1 §3.3 Eq.4](https://arxiv.org/html/2505.19590v1#S3.SS3)。内在奖励用于组内优势估计；这里的 KL 与训练中约束策略漂移的 reference KL 也要分开。
 
 ### 论文离线与线上效果
 
@@ -46,7 +51,7 @@ $$
 
 ## 本地复现
 
-Arithmetic candidate suite、120 steps、256 examples、seed 42：accuracy 0.2344 → **0.2344（+0.00%）**；奖励、KL、长度和候选预算一致。
+历史 Arithmetic candidate suite、120 steps、256 examples、seed 42：accuracy 0.2344 → **0.2344（+0.00%）**。保留原始结果；这次对照只涉及现有候选算子，不能解释为原文 self-certainty 的实验结果。
 
 ```bash
 auto-research post-train --algorithm intuitor --dataset arithmetic-smoke --maximum-examples 256 --steps 120 --seed 42
@@ -57,4 +62,4 @@ auto-research evolve --model post-training --dataset arithmetic-smoke --directio
 
 ## 复现边界
 
-本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。
+当前 `p0_20260808.py` 的 `intuitor` 分支以采样候选的 `log p + log N` 作为奖励，诊断量 `intrinsic_kl_to_uniform` 则是 $D_{KL}(p\Vert U)$。它既没有原文的逐 token 全词表计算，也使用了相反方向的 KL，因此仅为候选奖励更新诊断，尚未复现 Intuitor 的定义性 self-certainty。未运行原文规模的模型训练，历史指标继续保留。

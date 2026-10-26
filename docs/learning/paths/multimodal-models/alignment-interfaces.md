@@ -7,7 +7,284 @@ hide:
 
 # 跨模态对齐：表征、连接器与监督
 
-[多模态](index.md) / 子主题导学 · 约 3 分钟 · 20 张论文卡
+[多模态](index.md) / 20 个问题 · 20 篇论文
+
+先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
+
+<div class="ar-learning-browser" data-learning-browser data-learning-page-size="12" data-learning-unit="问">
+<div class="ar-learning-controls">
+<label for="learning-search">搜索问题
+<input id="learning-search" type="search" data-learning-search placeholder="搜索问题、论文或机制"></label>
+</div>
+<p class="ar-learning-status" data-learning-status role="status">20 个问题 · 20 篇论文</p>
+<noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
+<div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:flexglue" data-paper-title="FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation" data-learning-pending="false" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation 多模态大模型 ETH Zurich 2026-10-23 稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。共视分支给每个token一个sigmoid vote，并在每层监督； 成本过高，不复现（审查 DONE）。原文第7页：冻结DINOv3 ConvNeXt-B、9层512维Transformer、8数据集、512×512图像，50epochs、每epoch150K样本，在4张H200上约4 GPU-days；gradient checkpointing后4张RTX4090约1.5天，另有10epoch消歧fine-tune与多数据集/重建评测。这里保持作者的GPU-days口径，不虚构单卡总时长。本轮没有operator、local command、metrics或GPU收据，gpu_validation_passed=false。保留作者仓库作为可查来源；  多模态表征 视觉匹配与几何 多模态 跨模态对齐：表征、连接器与监督 FlexGlue 为什么只在峰值附近的局部窗口读坐标，而不对全图坐标求期望？ 若相似建筑在两处形成峰值，全局期望可能落在二者中间的错误位置。局部窗口围绕最强候选计算坐标，减少多峰平均；随后细化位移，而共视投票与困难负例负责判断两图是否真的可匹配。高相似度本身不能替代共视验证。 例如左右两扇相同窗户都得高分，全图平均会落在墙上；围绕被选窗户做局部读取才有合理初始坐标。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-flexglue-0459516f" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-c8472fbb022dc303">FlexGlue 为什么只在峰值附近的局部窗口读坐标，而不对全图坐标求期望？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aflexglue">FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · ETH Zurich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>若相似建筑在两处形成峰值，全局期望可能落在二者中间的错误位置。局部窗口围绕最强候选计算坐标，减少多峰平均；随后细化位移，而共视投票与困难负例负责判断两图是否真的可匹配。高相似度本身不能替代共视验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如左右两扇相同窗户都得高分，全图平均会落在墙上；围绕被选窗户做局部读取才有合理初始坐标。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32976v1">原论文</a> · <a href="../../../../multimodal-models/2610.32976-flexglue/">实现解读</a> · <a href="#qa-c8472fbb022dc303">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lamp" data-paper-title="LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation 基础模型 Taizhou Institute of Science and Technology, Nanjing University of Science and Technology 2026-10-15 冻结视觉编码器的中间层包含不同粒度的信息，但维度和相似性结构不同。LAMP不将它们投影到统一特征维度，而是分别拟合支持标签相对CLIP先验的残差，再在类别分数空间混合。区域核只以support bank校准；LAMP-F适配文本原型时，同步更新残差预测，避免原型改变而支持残差仍陈旧。 完整实验成本过高，不复现（审查 DONE）。测试标签在所有选择与一次原型更新完成后才用于最终诊断报告。固定recipe synthetic-fpot-and-native-layer-kernel-features@oct19-foundation-mechanisms-v1，seeds42/43/44。冻结三层小MLP编码4×4合成patch；三层区域宽度分别为5/7/9，全局宽度6。支持12视图、验证6样本、测试5样本具有不重叠身份，彼此独立生成；不是CLIP或公开图像benchmark。  多模态基础模型 冻结特征与少样本适配 多模态 跨模态对齐：表征、连接器与监督 LAMP 为什么在类别分数空间混合多层预测，而不先把各层特征拼起来？ 各层特征的维度与相似性结构不一致，强行统一会引入额外投影假设。LAMP 让每个分支根据支持集拟合相对 CLIP 先验的残差，再在共同的类别分数空间加权；若文本原型变化，残差也需同步更新，否则适配的是过时的错误方向。 例如浅层分支擅长纹理、深层擅长语义，二者都先给猫犬打分，再混合两份分数而非生硬拼接向量。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-lamp-52f612c4" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-d272f3c9d6e7debd">LAMP 为什么在类别分数空间混合多层预测，而不先把各层特征拼起来？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alamp">LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Taizhou Institute of Science and Technology, Nanjing University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>各层特征的维度与相似性结构不一致，强行统一会引入额外投影假设。LAMP 让每个分支根据支持集拟合相对 CLIP 先验的残差，再在共同的类别分数空间加权；若文本原型变化，残差也需同步更新，否则适配的是过时的错误方向。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如浅层分支擅长纹理、深层擅长语义，二者都先给猫犬打分，再混合两份分数而非生硬拼接向量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22182">原论文</a> · <a href="../../../../foundation-models/2610.22182-lamp/">实现解读</a> · <a href="#qa-d272f3c9d6e7debd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:cv-opd" data-paper-title="CV-OPD: Contrastive Vision On-policy Distillation" data-learning-pending="false" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="CV-OPD: Contrastive Vision On-policy Distillation 多模态大模型 Xiamen University / Moxin Technology 2026-10-09 原来的 crop-to-full-image OPD 可以教会模型答案分布，却不必然教会它依赖正确视觉区域。作者在移除答案相关区域后发现，Vision-OPD 仍取得明显高于随机的准确率。CV-OPD 用同图、同尺寸、低 IoU 的负区域构造第二个共享参数教师，把“接近正教师、远离负教师”的约束加入 JSD 蒸馏。三个不可省略的约束是：正负教师只改变 crop、读取同一学生前缀；CDL 使用有界 JSD 的 margin； 当前实现为 core_mechanism / L1 核心机制诊断，真实 VLM 更新而非图像分类打分代理。cpu-contracts.json记录已重跑的 7 个行为测试：bbox 尺寸与 IoU、JSD/Top-K tail、样本与 token gate、教师停止梯度和零正确样本的零梯度，以及严格多类 verifier、标签隔离和图像来源/切分哈希。每项先固定 seed 42，专用 crop/gate 用例内部使用 seed 2；这些是单测用例，不是独立多 seed 能力实验。测试通过不代表视觉推理能力或 GPU 训练完成。  视觉证据对齐 On-policy distillation 多模态 跨模态对齐：表征、连接器与监督 CV-OPD 为什么要求正负教师看同一学生前缀，只改变视觉 crop？ 这样正负教师分布的差别才能主要归因于可见区域，而非文本历史变化。学生在自身 rollout 前缀上接近正确区域教师，同时通过有界 JSD margin 远离负区域教师；这补充了普通答案蒸馏可能只学语言先验、未学正确视觉依赖的问题。 例如问题问杯子颜色，正 crop 包含杯子，负 crop 是同尺寸背景；两位教师都接收学生已经生成的相同文字。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-cv-opd-6105b27e" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-be9768a40b798c69">CV-OPD 为什么要求正负教师看同一学生前缀，只改变视觉 crop？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Acv-opd">CV-OPD: Contrastive Vision On-policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Xiamen University / Moxin Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这样正负教师分布的差别才能主要归因于可见区域，而非文本历史变化。学生在自身 rollout 前缀上接近正确区域教师，同时通过有界 JSD margin 远离负区域教师；这补充了普通答案蒸馏可能只学语言先验、未学正确视觉依赖的问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如问题问杯子颜色，正 crop 包含杯子，负 crop 是同尺寸背景；两位教师都接收学生已经生成的相同文字。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13264">原论文</a> · <a href="../../../../reproductions/2610.13264-cv-opd/">实现解读</a> · <a href="#qa-be9768a40b798c69">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:umrm" data-paper-title="Unsupervised Multimodal Reward Modeling" data-learning-pending="false" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Unsupervised Multimodal Reward Modeling 多模态大模型 Massachusetts Institute of Technology 2026-10-08 偏好pair昂贵，reward benchmark名次也不必代表部署选择效用。作者冻结Qwen3-VL，在中间language层只均值池化response tokens，再训练无bias线性reward head；公开caption为positive，同一caption的颜色/数量/尺寸/方位单span变化、tail splice、clause shuffle及cross-image caption为negative，不需人工偏好标注。 bootstrap另与random own-candidate选择比较，相对原论文CHAIR不适用，小样本诊断不代表稳定能力提升。本地对照口径：零bias-free head的tie计半为pair基线，验证集选中的真实中间层head为实验组；bootstrap另与random own-candidate选择比较，相对原论文CHAIR不适用，小样本诊断不代表稳定能力提升。  multimodal-foundation-model reward-modeling frozen-layer-probe verifier-bootstrap 多模态 跨模态对齐：表征、连接器与监督 UMRM 为什么用全部 B² 正负组合，而不是只比较每个样本自己的正负对？ 批内每个正例与每个负例都参与排序，让奖励头学习跨样本的分数区分，而非只拟合孤立配对。表示只池化 response token，避免图像或提示淹没回答差异；合成负例定义了训练方向，并不保证已经识别真实策略产生的所有幻觉。 例如两条正描述与两条负描述应产生四次比较，而非仅两次原配比较；这扩大了批内排序约束但不创造真实偏好标签。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-umrm-4950018b" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-9c4a885e90ab44ef">UMRM 为什么用全部 B² 正负组合，而不是只比较每个样本自己的正负对？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aumrm">Unsupervised Multimodal Reward Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Massachusetts Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>批内每个正例与每个负例都参与排序，让奖励头学习跨样本的分数区分，而非只拟合孤立配对。表示只池化 response token，避免图像或提示淹没回答差异；合成负例定义了训练方向，并不保证已经识别真实策略产生的所有幻觉。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如两条正描述与两条负描述应产生四次比较，而非仅两次原配比较；这扩大了批内排序约束但不创造真实偏好标签。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12707">原论文</a> · <a href="../../../../reproductions/2610.12707-umrm/">实现解读</a> · <a href="#qa-9c4a885e90ab44ef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Open Multimodal Embeddings" data-learning-pending="false" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Open Multimodal Embeddings 多模态大模型 Google DeepMind 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。官方总参数约 740M，其中文本约 270M、视觉约 170M、音频约 300M。本地只实例化文本和视觉，约 440M，不使用随机小模型代替官方 checkpoint。 使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 Matryoshka 向量截断后为什么必须再次归一化？ 截断保留前若干维后，向量范数通常不再为一；直接点积会把保留能量差异混进相似度。重新归一化恢复余弦比较的尺度。它利用模型训练好的前缀表示，不等于任意 embedding 都能随意截断；池化时也必须排除 padding。 例如两条七百六十八维向量都截成一百二十八维，先各自归一化再检索，避免范数较大者平白占优。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-embedding-gemma2-1f83fce4" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-c1671088f314bae5">Matryoshka 向量截断后为什么必须再次归一化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Open Multimodal Embeddings</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>截断保留前若干维后，向量范数通常不再为一；直接点积会把保留能量差异混进相似度。重新归一化恢复余弦比较的尺度。它利用模型训练好的前缀表示，不等于任意 embedding 都能随意截断；池化时也必须排除 padding。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如两条七百六十八维向量都截成一百二十八维，先各自归一化再检索，避免范数较大者平白占优。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-c1671088f314bae5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:omni-embed-mini" data-paper-title="Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation 基础模型 原文首页未列第一作者机构 2026-10-01 冻结文本骨干，把每个媒体样本的稠密级联描述经同一文本骨干得到 teacher target，再训练轻量投影器和分阶段 LoRA 对齐六种模态。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行同几何空间的稠密描述蒸馏；未训练模态编码器或复现实测榜单。执行同几何空间的稠密描述蒸馏；未训练模态编码器或复现实测榜单。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  多模态嵌入 蒸馏 LoRA 多模态 跨模态对齐：表征、连接器与监督 用描述文本作蒸馏目标，为什么能减少媒体适配对文本骨干的干扰？ 冻结文本骨干提供稳定的语义坐标，媒体样本的稠密描述在该坐标中形成教师目标。投影器与受控 LoRA 学习把媒体映射过去，而不是让文本空间随每种模态任意漂移；教师目标停止梯度，仍需检验描述是否遗漏媒体中的关键信息。 例如同一视频的动作与场景被写入描述，视频表示向冻结文本目标靠近；若描述漏掉小字，蒸馏也不会凭空补全。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-omni-embed-mini-210068e5" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-4491baa96084cd11">用描述文本作蒸馏目标，为什么能减少媒体适配对文本骨干的干扰？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aomni-embed-mini">Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>冻结文本骨干提供稳定的语义坐标，媒体样本的稠密描述在该坐标中形成教师目标。投影器与受控 LoRA 学习把媒体映射过去，而不是让文本空间随每种模态任意漂移；教师目标停止梯度，仍需检验描述是否遗漏媒体中的关键信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如同一视频的动作与场景被写入描述，视频表示向冻结文本目标靠近；若描述漏掉小字，蒸馏也不会凭空补全。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02148">原论文</a> · <a href="../../../../foundation-models/2610.02148-omni-embed-mini/">实现解读</a> · <a href="#qa-4491baa96084cd11">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:sensenova-u1-5" data-paper-title="SenseNova-U1.5: Towards Native Unified Visual Intelligence" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="SenseNova-U1.5: Towards Native Unified Visual Intelligence 基础模型 SenseTime Research 2026-09-10 用空间 patch reconstruction 摆脱 tokenizer/VAE，并以多专家 OPD 统一视觉理解与生成后训练。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 masked patch target 与 expert OPD 融合；未复刻 8B 多阶段训练。本地执行 masked patch target 与 expert OPD 融合；未复刻 8B 多阶段训练。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  统一多模态 视觉生成与理解 多模态 跨模态对齐：表征、连接器与监督 直接做空间 patch reconstruction 与先预测离散图像码有什么区别？ 离散路线先依赖 tokenizer 或 VAE 把图像变成另一种码，再学习这些码的预测；空间 patch 重建直接以图像局部结构作为训练对象，减少对该中间接口的依赖。这改变了表示与监督路径，但不能据此断言没有信息瓶颈或生成成本必然更低。 例如同一张图片可先变成码本编号再预测，也可直接训练重建空间小块；两种路线的误差来源需要分开检查。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-sensenova-u1-5-44bbf8fb" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-48a83136d0677aa9">直接做空间 patch reconstruction 与先预测离散图像码有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asensenova-u1-5">SenseNova-U1.5: Towards Native Unified Visual Intelligence</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · SenseTime Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>离散路线先依赖 tokenizer 或 VAE 把图像变成另一种码，再学习这些码的预测；空间 patch 重建直接以图像局部结构作为训练对象，减少对该中间接口的依赖。这改变了表示与监督路径，但不能据此断言没有信息瓶颈或生成成本必然更低。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如同一张图片可先变成码本编号再预测，也可直接训练重建空间小块；两种路线的误差来源需要分开检查。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11929">原论文</a> · <a href="../../../../foundation-models/2609.11929-sensenova-u1-5/">实现解读</a> · <a href="#qa-48a83136d0677aa9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:cue2narrate-drl" data-paper-title="From Visual Cues to Spoken Narration: Rethinking Audio Description" data-learning-pending="false" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="From Visual Cues to Spoken Narration: Rethinking Audio Description 多模态大模型 TU Darmstadt &amp; hessian.AI 2026-09-01 固定v1 Section4.3 Eqs5–8：SFT按每个AD目标token求和；positive/negative评分均为同一当前模型和prompt上的token-mean logp，prompt/padding排除；DRL=-logsigmoid((s+−s−)/0.5)，全loss加0.2DRL。离线负caption生成冻结，但其当前模型likelihood仍反传。 成本过高，不复现（审查 DONE）。6.64M双头定位器，Qwen2.5-VL-7B/Qwen3-VL-8B LoRA，训练32帧/推理64帧，多阶段长电影训练；LSMDC研究限制授权、MAD-Eval NDA。完整数据/定位+VLM训练超单卡短时预算，不下载视频或权重；本文未给总GPU小时，不编造。输入是当前模型对AD与缓存negative caption的teacher-forced logits/labels，必须正确对齐并以-100排除prompt/padding；不包含Stage1、visual cue提取、character bank或负caption生成。  多模态生成 视频音频描述 多模态 跨模态对齐：表征、连接器与监督 负描述由冻结模型生成，为什么训练时还要对它的当前似然反向传播？ 冻结负描述生成器只固定负样本内容；当前模型对正负文本的评分仍应可训练。DRL 比较同一视觉输入下两段有效目标文本的平均对数似然，梯度同时提高正描述相对负描述的偏好；若把负评分也 detach，就改变了原本的对比优化方向。 例如同一画面正描述说人在走路、负描述说人在跑步；固定两句话后，当前模型仍须调整二者的相对评分。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-cue2narrate-drl-b44764fd" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-611aae51c5d5db99">负描述由冻结模型生成，为什么训练时还要对它的当前似然反向传播？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Acue2narrate-drl">From Visual Cues to Spoken Narration: Rethinking Audio Description</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · TU Darmstadt &amp; hessian.AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>冻结负描述生成器只固定负样本内容；当前模型对正负文本的评分仍应可训练。DRL 比较同一视觉输入下两段有效目标文本的平均对数似然，梯度同时提高正描述相对负描述的偏好；若把负评分也 detach，就改变了原本的对比优化方向。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如同一画面正描述说人在走路、负描述说人在跑步；固定两句话后，当前模型仍须调整二者的相对评分。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.01725v1">原论文</a> · <a href="../../../../multimodal-models/2609.01725-cue2narrate-drl/">实现解读</a> · <a href="#qa-611aae51c5d5db99">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mllmclip" data-paper-title="MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations 基础模型 KAIST / Sony AI 2026-08-26 MLLM 的丰富视觉语义难以直接迁移到轻量 CLIP。论文从 teacher 各层按 attention 自适应选 token，以 CKA 对齐 student 图像/文本特征，保留部署时的双塔效率。 Fidelity：公开 checkpoint 核心路径。主路径加载真实 SmolVLM teacher 与 CLIP student，在公开图像上训练 CKA projection；MovieLens/NumPy 路径仅保留为快速机制诊断。真实 checkpoint 路径使用公开图像和 SmolVLM 视觉 encoder feature，但仍未复刻论文完整 26-benchmark 训练规模、原始 teacher 配方与全量 CLIP 预训练。MovieLens proxy 仍为 diagnostic-only，不能与视觉 benchmark 混报。  multimodal-foundation-model feature-distillation compositionality cka 多模态 跨模态对齐：表征、连接器与监督 CKA 蒸馏为什么能在师生特征维度不同的情况下传递结构？ CKA 比较样本间表示关系的对齐程度，而不要求逐维一一相等。教师先按注意力选择有信息的 token，再用这种结构约束训练学生图文表示；学生仍保持轻量双塔部署，迁移的是特征关系，不是把大型教师的全部推理过程复制进去。 例如教师输出一千维、学生输出五百维，仍可约束两者把相似样本放近；无需把每个坐标硬配成同一含义。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-mllmclip-2c53372a" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-e4e11c01b301e672">CKA 蒸馏为什么能在师生特征维度不同的情况下传递结构？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amllmclip">MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · KAIST / Sony AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>CKA 比较样本间表示关系的对齐程度，而不要求逐维一一相等。教师先按注意力选择有信息的 token，再用这种结构约束训练学生图文表示；学生仍保持轻量双塔部署，迁移的是特征关系，不是把大型教师的全部推理过程复制进去。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如教师输出一千维、学生输出五百维，仍可约束两者把相似样本放近；无需把每个坐标硬配成同一含义。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25575">原论文</a> · <a href="../../../../reproductions/2608.25575-mllmclip/">实现解读</a> · <a href="#qa-e4e11c01b301e672">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:wemm-embedding" data-paper-title="WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report 基础模型 WeChat Vision, Tencent 2026-08-25 不同检索任务通常维护独立的文本、图像、视频或文档 encoder。WeMM 把任意交错多模态输入映射到同一空间：第一阶段用数亿 pair 做大规模 alignment；第二阶段加入精选 relevance、细粒度监督和跨尺度知识迁移，并用 Matryoshka 表征支持按成本选择输出维度。 Fidelity：核心机制复现。本地执行两阶段跨模态对齐、cross-scale teacher refinement 与 Matryoshka 截断评测；未冒充 2B/4B/9B checkpoint 训练。没有加载原始大 checkpoint 或私有多模态 pair；公开 MovieLens 的内容/协同视图只验证共享空间、两阶段 refinement 与截断维度机制，不代表 MMEB-v2 或微信业务结果复刻。本地对照口径：基线为第一阶段共享空间；实验组加入 relevance/cross-scale teacher refinement。  multimodal-foundation-model embedding retrieval matryoshka-representation 多模态 跨模态对齐：表征、连接器与监督 WeMM 为什么先做大规模 alignment，再引入精选 relevance 与跨尺度蒸馏？ 第一阶段先建立多模态共享空间，第二阶段再用更精细的相关性监督修正“内容相似但不满足查询”的情况。跨尺度蒸馏与 Matryoshka 表征让不同输出尺寸承接语义结构；两阶段承担不同角色，不能把向量相近直接解释为业务相关或答案正确。 例如一张红鞋图与“红色物品”很相似，但“适合雨天的鞋”还需要用途相关性；精选监督进一步约束这种差别。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-wemm-embedding-30d32b14" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-7d696f2db780b54a">WeMM 为什么先做大规模 alignment，再引入精选 relevance 与跨尺度蒸馏？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Awemm-embedding">WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · WeChat Vision, Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>第一阶段先建立多模态共享空间，第二阶段再用更精细的相关性监督修正“内容相似但不满足查询”的情况。跨尺度蒸馏与 Matryoshka 表征让不同输出尺寸承接语义结构；两阶段承担不同角色，不能把向量相近直接解释为业务相关或答案正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如一张红鞋图与“红色物品”很相似，但“适合雨天的鞋”还需要用途相关性；精选监督进一步约束这种差别。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24053">原论文</a> · <a href="../../../../reproductions/2608.24053-wemm-embedding/">实现解读</a> · <a href="#qa-7d696f2db780b54a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gas" data-paper-title="Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction 基础模型 ByteDance 2026-08-12 常规 MLLM 只用文本 next-token loss，视觉结构只能被语言间接监督；统一理解/生成模型又会把生成参数和开销留到部署阶段。GAS 把生成改成纯训练期辅助任务：理解分支与生成分支共享较低层视觉路径，上层 Transformer 参数解耦；生成分支在与 LLM 输入相同的连续视觉空间自回归预测目标图像 embedding。这样生成梯度能改善共享视觉表征，又不会直接改写理解上层，部署时可整条删除。 Fidelity：核心机制复现。本地真实训练共享视觉 trunk、独立 MoT 生成上层、连续 Next Embedding Prediction（NEP）与 EMA target；未复刻 2B/4B Qwen3-VL、10M 生成数据和 32-GPU 两阶段训练。本地用水平镜像后的同类目标图像构造高度相关的生成任务，并在连续 patch embedding 空间执行 shifted cosine NEP；保留 EMA、渐增、分支隔离与推理删除机制。结果只说明小规模公开数据上的机制可执行，不能与论文 10M 生成样本和 2B/4B benchmark 数字直接比较。  multimodal generation-guided-training next-embedding-prediction 多模态 跨模态对齐：表征、连接器与监督 GAS 的生成辅助监督为什么可以在部署时整条删除？ 辅助生成分支只在训练期预测连续视觉 embedding，与理解分支共享较低层视觉路径，因此它的梯度能改善共享表示。上层生成参数与理解上层解耦，推理输出不依赖该辅助分支；删除的是额外路径，而训练得到的共享参数仍被保留。 例如训练时同时要求理解图片并预测目标图像特征；上线只回答图像问题，保留被训练过的共享视觉部分。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-gas-1fb6a8b0" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-4f6e57e97260ca61">GAS 的生成辅助监督为什么可以在部署时整条删除？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agas">Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · ByteDance</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>辅助生成分支只在训练期预测连续视觉 embedding，与理解分支共享较低层视觉路径，因此它的梯度能改善共享表示。上层生成参数与理解上层解耦，推理输出不依赖该辅助分支；删除的是额外路径，而训练得到的共享参数仍被保留。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如训练时同时要求理解图片并预测目标图像特征；上线只回答图像问题，保留被训练过的共享视觉部分。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12209">原论文</a> · <a href="../../../../reproductions/2608.12209-gas/">实现解读</a> · <a href="#qa-4f6e57e97260ca61">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:physics-mm-pretraining" data-paper-title="Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes 基础模型 Meta 2026-08-05 用受控实验刻画模态知识流、协同/竞争、早期统一和共享 attention+norm/模态专属 FFN 配方。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 single-modality representation，实验组为 physics-mm-pretraining；单 seed 变化为 +0.00% 个百分点。  多模态基础模型 预训练与数据 多模态 跨模态对齐：表征、连接器与监督 共享 attention 与 norm、保留模态专属 FFN，分别在控制什么？ 共享部分让不同模态在相同交互路径上交换信息，专属 FFN 则保留各自变换与容量，缓解完全共享时的竞争。要判断知识协同而非资源变化，必须控制数据、目标权重和预算；联合训练的总分上升，并不说明每个模态都同样受益。 例如文字与图像共同参与注意力，但各走自己的 FFN；这像共享讨论渠道而保留各自加工方式，需分别测两类任务。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-physics-mm-pretraining-bcf29586" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-f2bb66ec4c595c03">共享 attention 与 norm、保留模态专属 FFN，分别在控制什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aphysics-mm-pretraining">Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>共享部分让不同模态在相同交互路径上交换信息，专属 FFN 则保留各自变换与容量，缓解完全共享时的竞争。要判断知识协同而非资源变化，必须控制数据、目标权重和预算；联合训练的总分上升，并不说明每个模态都同样受益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如文字与图像共同参与注意力，但各走自己的 FFN；这像共享讨论渠道而保留各自加工方式，需分别测两类任务。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05000">原论文</a> · <a href="../../../../reproductions/2608.05000-physics-mm-pretraining/">实现解读</a> · <a href="#qa-f2bb66ec4c595c03">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:retoken" data-paper-title="ReToken: One Token to Improve Vision–Language Models for Visual Retrieval" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="ReToken: One Token to Improve Vision–Language Models for Visual Retrieval 基础模型 UIUC / Microsoft Research / Google DeepMind 2026-07-30 常规 VLM 检索需要先用外部 retriever 找图，再把入选图重新编码，无法直接复用预填充的视觉 KV cache。ReToken 在输入中增加一个可学习 token，让它在最后一层 value projection 空间与每张图的平均 value 向量打分；只训练该 token 和一张投影矩阵，以 class-balanced BCE 监督相关/无关图，VLM 默认冻结。 Fidelity: 核心机制复现。实际训练单个 retrieval target、value-space projection 与稀疏 cache 选择，并接入 LLM evolve；本地文本实验不冒充完整 VLM。本地没有运行冻结大 VLM、MIRAGE 图文监督和两小时视频；文本 token cache 只复现论文决定性的“单 retrieval target + value-space 打分 + 稀疏选择”机制，不能与论文视觉 benchmark 数字直接比较。本地对照口径：基线为同预算 dense LLaMA，实验组为 ReToken value-cache Top-K；相对基线 PPL +3.70%（变差）。  vision-language-model visual-retrieval kv-cache sparse-attention 多模态 跨模态对齐：表征、连接器与监督 ReToken 为什么把检索分数算在最后一层 value 空间？ 预填充后的视觉 KV 已包含每张图的表示，在同一 value 空间读取相似度就有机会复用缓存，而无需重新运行外部检索器并重编码图片。可学习检索 token 与投影负责适配相关性，冻结 VLM 并不表示检索头无需监督或能直接泛化所有任务。 例如十张图已预填充到缓存，新增问题先用检索 token 与各图平均 value 打分，再选择相关图继续使用。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-retoken-1f7ac688" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-ac564f018c0c2564">ReToken 为什么把检索分数算在最后一层 value 空间？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aretoken">ReToken: One Token to Improve Vision–Language Models for Visual Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · UIUC / Microsoft Research / Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>预填充后的视觉 KV 已包含每张图的表示，在同一 value 空间读取相似度就有机会复用缓存，而无需重新运行外部检索器并重编码图片。可学习检索 token 与投影负责适配相关性，冻结 VLM 并不表示检索头无需监督或能直接泛化所有任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如十张图已预填充到缓存，新增问题先用检索 token 与各图平均 value 打分，再选择相关图继续使用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.28627">原论文</a> · <a href="../../../../reproductions/2607.28627-retoken/">实现解读</a> · <a href="#qa-ac564f018c0c2564">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:mveb" data-paper-title="MVEB: Massive Video Embedding Benchmark" data-learning-pending="false" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="MVEB: Massive Video Embedding Benchmark 多模态大模型 Harvard University 2026-06-12 固定v1 Section3：MVEB23任务从184任务池缩减；var-length fps2/cap64frames，固定帧模型遵循其训练配置，音频按model采样率/长度；无per-task finetune。分类8shot frozen logistic probe，retrieval cosine/nDCG10，VCQA候选池accuracy，视频/音频版本配对且只跑模型支持modality。 成本过高，不复现（审查 DONE）。33个公开checkpoint约200M–10.7B，23主任务及184池，多模型视频+音频/8方向矩阵；Table1单H100测LCO7B：MVEB31.9h、MVEB+302.7h。远超单A100/A30短时预算，不下载模型或视频、不构造假的通用指标代理。本轮仅核查论文身份、合作机构、方法/资源/许可证与成本，收录资料和原图。没有把通用聚合器或字段检查包装为官方benchmark接口；没有模型调用、训练或正式指标。  多模态表征 视频嵌入评测 多模态 跨模态对齐：表征、连接器与监督 MVEB 比较 video-only 与 audio+video 时，为什么必须使用同一组 clip？ 否则性能差可能来自样本难度变化，而非音轨是否提供信息。配对同一视频后才能隔离模态增量；编码器保持冻结，各任务使用规定的探针或检索指标，并按模型声明处理帧数和音频。给不支持音频的模型补一个虚构分数会破坏比较。 例如同一段敲门视频分别保留和移除声音；若换成另一段更简单的视频，就无法判断增益究竟来自哪里。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-mveb-9298f9f8" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-4086d8bd7c3aa807">MVEB 比较 video-only 与 audio+video 时，为什么必须使用同一组 clip？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Amveb">MVEB: Massive Video Embedding Benchmark</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>否则性能差可能来自样本难度变化，而非音轨是否提供信息。配对同一视频后才能隔离模态增量；编码器保持冻结，各任务使用规定的探针或检索指标，并按模型声明处理帧数和音频。给不支持音频的模型补一个虚构分数会破坏比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如同一段敲门视频分别保留和移除声音；若换成另一段更简单的视频，就无法判断增益究竟来自哪里。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.14958v1">原论文</a> · <a href="../../../../multimodal-models/2606.14958-mveb/">实现解读</a> · <a href="#qa-4086d8bd7c3aa807">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:naijas2st" data-paper-title="NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages" data-learning-pending="false" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages 多模态大模型 Mila - Quebec AI Institute 2026-04-17 核固定v3 Sections3–4及AppendixC：284说话人、约6K平行句、质控后约269h；5shot来自DEV，方向分开；Seamless不支持的Hausa映射Arabic、Naijá映射French仅为fine-tuned extension。S2TT SSA-COMET/ChrF++，S2ST先OmnilingualASR转写再SSA-COMET，不能用文本exactmatch替代。 成本过高，不复现（审查 DONE）。每语言40余小时语音，Omnilingual-ASR1B、NLLB3.3B/TinyAya3B、Seamless2.3B mono/multi多个方向3–10epochs，另有Gemini/GPT-Audio推理、TTS和人工评审。整套明显超单卡短时预算，不下载音频/模型、不调用付费API。本轮仅核查论文身份、合作机构、方法/资源/许可证与成本，收录资料和原图。没有把通用聚合器或字段检查包装为官方benchmark接口；没有模型调用、训练或正式指标。  语音多模态 低资源语音翻译评测 多模态 跨模态对齐：表征、连接器与监督 为什么语音到语音翻译不能用参考文本的 exact match 直接评价？ 模型输出的是音频，需要先通过真实 ASR 得到转写，再以规定的语义翻译指标比较；转写误差与翻译误差都影响结果。文本完全一致会忽略合理同义表达，也绕过声音输出链路。few-shot 示例应取开发集，不能把测试参考作为提示。 例如两段不同措辞的语音都正确表达“请明天来”，字面不一致并不必然是翻译错误，应保留语义和音频链路。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-naijas2st-20646330" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-dbd5bc66fec4aff6">为什么语音到语音翻译不能用参考文本的 exact match 直接评价？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Anaijas2st">NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Mila - Quebec AI Institute</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模型输出的是音频，需要先通过真实 ASR 得到转写，再以规定的语义翻译指标比较；转写误差与翻译误差都影响结果。文本完全一致会忽略合理同义表达，也绕过声音输出链路。few-shot 示例应取开发集，不能把测试参考作为提示。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如两段不同措辞的语音都正确表达“请明天来”，字面不一致并不必然是翻译错误，应保留语义和音频链路。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.16287v1">原论文</a> · <a href="../../../../multimodal-models/2604.16287-naijas2st/">实现解读</a> · <a href="#qa-dbd5bc66fec4aff6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smolvlm" data-paper-title="SmolVLM: Redefining small and efficient multimodal models" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="SmolVLM: Redefining small and efficient multimodal models 基础模型 Hugging Face 2025-04-07 SmolVLM 重新分配小模型视觉/语言侧算力，以 pixel shuffle 将相邻空间 token 搬到 channel 维，再用 MLP 映射到 LM 空间；同时研究长上下文、图像切片、学习位置 token 和数据配比，使 256M/500M/2.2B 模型在低显存下保持图像与视频能力。 保真度：核心机制复现。保真度：核心机制复现。本地执行论文中心的 pixel-shuffle 视觉 token 压缩与投影；未复刻 256M–2.2B decoder、视频和完整数据配方。使用 32×32 真实服饰图像和 2×2 space-to-depth；没有复刻高分辨率切片、视频采样、8k/16k context、学习位置 token 或 SmolLM decoder。本地对照口径：基线为线性 mean-pooling connector，实验组为 r=2 pixel shuffle + projector；  multimodal efficient-vlm visual-token-compression 多模态 跨模态对齐：表征、连接器与监督 pixel shuffle 减少视觉 token 时，原来的邻域信息被放到哪里？ 相邻空间 token 被拼到通道维，再通过 MLP 接到语言模型，所以序列缩短并非简单丢弃每隔几个 patch。它把注意力需要处理的长度换成更宽的局部表示与连接器加工；压缩后是否保留小字和空间关系，仍需按具体任务验证。 例如四个相邻 patch 合并成一个更宽向量，token 数变为四分之一，但语言侧看到的空间粒度也随之改变。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-smolvlm-5de2167d" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-14e67387d09772aa">pixel shuffle 减少视觉 token 时，原来的邻域信息被放到哪里？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asmolvlm">SmolVLM: Redefining small and efficient multimodal models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Hugging Face</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>相邻空间 token 被拼到通道维，再通过 MLP 接到语言模型，所以序列缩短并非简单丢弃每隔几个 patch。它把注意力需要处理的长度换成更宽的局部表示与连接器加工；压缩后是否保留小字和空间关系，仍需按具体任务验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如四个相邻 patch 合并成一个更宽向量，token 数变为四分之一，但语言侧看到的空间粒度也随之改变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2504.05299">原论文</a> · <a href="../../../../reproductions/2504.05299-smolvlm/">实现解读</a> · <a href="#qa-14e67387d09772aa">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:siglip2" data-paper-title="SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features 基础模型 Google DeepMind 2025-02-20 SigLIP 2 在 SigLIP 的 pairwise sigmoid loss 上组合 captioning pretraining、global-local self-distillation、masked prediction、在线数据筛选和 NaFlex 动态分辨率，改善语义、定位、dense feature 与多语言公平性。 保真度：核心机制复现。保真度：核心机制复现。本地执行 sigmoid 对比目标与遮盖视图自蒸馏；未复刻多语言 web 数据、caption decoder 和 dense localization。Fashion-MNIST 类别文本替代多语言 caption；实际训练 sigmoid pair loss 和中心遮盖视图的 student-teacher consistency，没有复刻 caption decoder、active curation、NaFlex 和定位头。  multimodal sigmoid-contrastive self-distillation 多模态 跨模态对齐：表征、连接器与监督 为什么 pairwise sigmoid 对齐还要加入局部自蒸馏与 masked prediction？ 全局图文匹配主要约束整张图与描述的兼容性，未必充分训练局部位置与稠密特征。局部自蒸馏及掩码预测补充空间细节监督，captioning 与数据筛选又改善语义来源；这些组件的贡献要通过对照区分，不能都归因于单一 sigmoid 损失。 例如整图描述只说“街上有车”，局部训练还能要求遮住的车轮附近表示可恢复，帮助保留更细的空间线索。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-siglip2-8c923237" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-1288afe0b0bfc12f">为什么 pairwise sigmoid 对齐还要加入局部自蒸馏与 masked prediction？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asiglip2">SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>全局图文匹配主要约束整张图与描述的兼容性，未必充分训练局部位置与稠密特征。局部自蒸馏及掩码预测补充空间细节监督，captioning 与数据筛选又改善语义来源；这些组件的贡献要通过对照区分，不能都归因于单一 sigmoid 损失。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如整图描述只说“街上有车”，局部训练还能要求遮住的车轮附近表示可恢复，帮助保留更细的空间线索。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.14786">原论文</a> · <a href="../../../../reproductions/2502.14786-siglip2/">实现解读</a> · <a href="#qa-1288afe0b0bfc12f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:llava" data-paper-title="Visual Instruction Tuning" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Visual Instruction Tuning 基础模型 University of Wisconsin-Madison / Microsoft Research / Columbia University 2023-04-17 冻结视觉 encoder，用可训练 projector 把视觉特征映射到 LLM token 空间，再在 GPT-4 生成的多模态指令数据上做端到端 instruction tuning。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。使用 Fashion-MNIST 真实像素、冻结的轻量 patch encoder、可训练 projector 与问答分类头；未调用 GPT-4，未执行多模态 instruction data generation，也未复刻 LLaVA-13B。单 seed 结果仅用于检验 projector 结构，不能外推到大模型指令微调。  multimodal instruction-tuning 多模态 跨模态对齐：表征、连接器与监督 把视觉特征投影到 LLM 的维度，为什么还不足以完成视觉指令跟随？ 维度相同只解决输入形状，不能保证视觉向量已具有语言模型需要的语义。连接器需要学习视觉到语言的接口，指令监督再训练模型根据图像与问题生成回应；只做投影而没有对应训练，不会自动获得读图、定位或多轮回答能力。 例如一张猫图经投影后可以作为向量输入，但模型仍需通过图像问答训练学会针对“它在哪里”组织答案。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-llava-9b58a1f9" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-0ba55b5e7a12c6c3">把视觉特征投影到 LLM 的维度，为什么还不足以完成视觉指令跟随？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Allava">Visual Instruction Tuning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Wisconsin-Madison / Microsoft Research / Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>维度相同只解决输入形状，不能保证视觉向量已具有语言模型需要的语义。连接器需要学习视觉到语言的接口，指令监督再训练模型根据图像与问题生成回应；只做投影而没有对应训练，不会自动获得读图、定位或多轮回答能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如一张猫图经投影后可以作为向量输入，但模型仍需通过图像问答训练学会针对“它在哪里”组织答案。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2304.08485">原论文</a> · <a href="../../../../reproductions/2304.08485-llava/">实现解读</a> · <a href="#qa-0ba55b5e7a12c6c3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:blip2" data-paper-title="BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models 基础模型 Salesforce Research 2023-01-30 BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。 保真度：核心机制复现。保真度：核心机制复现。本地执行 Q-Former 的可学习 query 与 cross-attention；论文两阶段大规模预训练和冻结大模型未复刻。使用 Fashion-MNIST 真实像素和四 query multi-head cross-attention；没有加载 ViT-g、OPT/FlanT5，也没有执行 ITC/ITM/ITG 两阶段 129M 图像预训练。本地对照口径：基线为相同预算的线性 mean-pooling connector，实验组为四 query Q-Former；  multimodal q-former frozen-encoders 多模态 跨模态对齐：表征、连接器与监督 为什么冻结视觉编码器和语言模型后，Q-Former 仍能学会把图像接给语言模型？ 梯度仍可经过冻结模块传到连接器；冻结的是参数更新，不是计算图。可学习 Query 通过交叉注意力从视觉特征中选取信息，再投影成语言模型能消费的软提示。两阶段训练分别处理图文表征对齐与语言生成接口，瓶颈也可能丢失细节。 例如把十六块图像特征压成四个 Query，语言模型仍能接收四个视觉提示，但小字可能需要更多容量。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-blip2-9ce69b95" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-49e7f356a5e01708">为什么冻结视觉编码器和语言模型后，Q-Former 仍能学会把图像接给语言模型？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ablip2">BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Salesforce Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>梯度仍可经过冻结模块传到连接器；冻结的是参数更新，不是计算图。可学习 Query 通过交叉注意力从视觉特征中选取信息，再投影成语言模型能消费的软提示。两阶段训练分别处理图文表征对齐与语言生成接口，瓶颈也可能丢失细节。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如把十六块图像特征压成四个 Query，语言模型仍能接收四个视觉提示，但小字可能需要更多容量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2301.12597">原论文</a> · <a href="../../../../reproductions/2301.12597-blip2/">实现解读</a> · <a href="#qa-49e7f356a5e01708">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:clip" data-paper-title="Learning Transferable Visual Models From Natural Language Supervision" data-learning-pending="false" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Learning Transferable Visual Models From Natural Language Supervision 基础模型 OpenAI 2021-02-26 用独立图像/文本 encoder 将配对样本映射到同一单位球面，通过双向 batch contrastive objective 学习可迁移零样本表示。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。使用 Fashion-MNIST 的真实像素与类别文本复现双塔、归一化和对称式对比目标；没有复刻 4 亿图文对、自然语言长尾语义或大规模视觉 encoder。单 seed 小预算结果只验证机制可执行，不等价于原论文 zero-shot 指标。本地对照口径：在真实 Fashion-MNIST 图像与类别文本构成的 10 类图文任务上，基线为均匀随机检索（10.0%），实验组为对称式图文对比学习双塔；测试准确率达到 72.0%（+62.0 个百分点），打乱图像后降至 10.3%，说明结果依赖视觉输入。  multimodal contrastive-pretraining 多模态 跨模态对齐：表征、连接器与监督 CLIP 为什么既做图到文、也做文到图的对比学习？ 同一批图文可形成两个分类问题：给每张图找到配对文本，给每段文本找到配对图像。两个方向共同约束共享相似度空间，避免只照顾一种检索方向；负例来自批内其他配对，但整体匹配分数并不等于细粒度事实正确率。 例如猫图与猫描述互为正例，犬图与犬描述互为另一正例；两个方向都要把对应配对排在前面。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-clip-b03c09f0" class="ar-learning-paper-anchor"></span>
+<h2 id="qa-48eaa29686fc2e90">CLIP 为什么既做图到文、也做文到图的对比学习？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aclip">Learning Transferable Visual Models From Natural Language Supervision</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · OpenAI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同一批图文可形成两个分类问题：给每张图找到配对文本，给每段文本找到配对图像。两个方向共同约束共享相似度空间，避免只照顾一种检索方向；负例来自批内其他配对，但整体匹配分数并不等于细粒度事实正确率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如猫图与猫描述互为正例，犬图与犬描述互为另一正例；两个方向都要把对应配对排在前面。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2103.00020">原论文</a> · <a href="../../../../reproductions/2103.00020-clip/">实现解读</a> · <a href="#qa-48eaa29686fc2e90">问题链接</a></p>
+</details>
+</article>
+</div>
+<button type="button" class="ar-learning-more" data-learning-more hidden>显示更多</button>
+</div>
+
+
+<details class="ar-learning-guide" markdown="1"><summary>主题导读与阅读路线</summary>
 
 ## 先想一个问题
 
@@ -40,201 +317,6 @@ CLIP 检索得分很高，能否直接断言模型可以读出图中所有文字
 
     不能。配对对比学习主要约束整体图文兼容性，细小文字读取需要足够视觉分辨率、局部表示与解码监督。应用应单独测 OCR 或对应细粒度任务，并验证结果随图像内容改变。
 
-## 这个子主题的论文卡片
+</details>
 
-导学提炼自上述代表论文及仓库解读。以下卡片摘录各自来源；是否复现、验证到哪一步，以卡内说明为准。
-
-<div class="ar-learning-browser" data-learning-browser data-learning-page-size="12">
-<div class="ar-learning-controls">
-<label for="learning-search">搜索卡片
-<input id="learning-search" type="search" data-learning-search placeholder="搜索论文、机制、机构或本地边界"></label>
-</div>
-<p class="ar-learning-status" data-learning-status role="status">共 20 张卡片</p>
-<noscript>已显示全部卡片；启用 JavaScript 后可搜索和筛选。</noscript>
-<div class="ar-learning-grid">
-<article class="ar-learning-card" data-learning-card data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation 多模态大模型 ETH Zurich 2026-10-23 稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。共视分支给每个token一个sigmoid vote，并在每层监督； 成本过高，不复现（审查 DONE）。原文第7页：冻结DINOv3 ConvNeXt-B、9层512维Transformer、8数据集、512×512图像，50epochs、每epoch150K样本，在4张H200上约4 GPU-days；gradient checkpointing后4张RTX4090约1.5天，另有10epoch消歧fine-tune与多数据集/重建评测。这里保持作者的GPU-days口径，不虚构单卡总时长。本轮没有operator、local command、metrics或GPU收据，gpu_validation_passed=false。保留作者仓库作为可查来源；  多模态表征 视觉匹配与几何 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-multimodal-models-flexglue-0459516f">FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation</h2>
-<p class="ar-learning-card__meta">ETH Zurich · 论文公开：2026-10-23</p>
-<p><strong>方法要点：</strong>稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。共视分支给每个token一个sigmoid vote，并在每层监督；</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界 · 成本过高，未复现</summary>
-<p>成本过高，不复现（审查 DONE）。原文第7页：冻结DINOv3 ConvNeXt-B、9层512维Transformer、8数据集、512×512图像，50epochs、每epoch150K样本，在4张H200上约4 GPU-days；gradient checkpointing后4张RTX4090约1.5天，另有10epoch消歧fine-tune与多数据集/重建评测。这里保持作者的GPU-days口径，不虚构单卡总时长。本轮没有operator、local command、metrics或GPU收据，gpu_validation_passed=false。保留作者仓库作为可查来源；</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32976v1">原论文</a> · <a href="../../../../multimodal-models/2610.32976-flexglue/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation 基础模型 Taizhou Institute of Science and Technology, Nanjing University of Science and Technology 2026-10-15 冻结视觉编码器的中间层包含不同粒度的信息，但维度和相似性结构不同。LAMP不将它们投影到统一特征维度，而是分别拟合支持标签相对CLIP先验的残差，再在类别分数空间混合。区域核只以support bank校准；LAMP-F适配文本原型时，同步更新残差预测，避免原型改变而支持残差仍陈旧。 完整实验成本过高，不复现（审查 DONE）。测试标签在所有选择与一次原型更新完成后才用于最终诊断报告。固定recipe synthetic-fpot-and-native-layer-kernel-features@oct19-foundation-mechanisms-v1，seeds42/43/44。冻结三层小MLP编码4×4合成patch；三层区域宽度分别为5/7/9，全局宽度6。支持12视图、验证6样本、测试5样本具有不重叠身份，彼此独立生成；不是CLIP或公开图像benchmark。  多模态基础模型 冻结特征与少样本适配 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-lamp-52f612c4">LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation</h2>
-<p class="ar-learning-card__meta">Taizhou Institute of Science and Technology, Nanjing University of Science and Technology · 论文公开：2026-10-15</p>
-<p><strong>方法要点：</strong>冻结视觉编码器的中间层包含不同粒度的信息，但维度和相似性结构不同。LAMP不将它们投影到统一特征维度，而是分别拟合支持标签相对CLIP先验的残差，再在类别分数空间混合。区域核只以support bank校准；LAMP-F适配文本原型时，同步更新残差预测，避免原型改变而支持残差仍陈旧。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界 · 成本过高，未复现</summary>
-<p>完整实验成本过高，不复现（审查 DONE）。测试标签在所有选择与一次原型更新完成后才用于最终诊断报告。固定recipe synthetic-fpot-and-native-layer-kernel-features@oct19-foundation-mechanisms-v1，seeds42/43/44。冻结三层小MLP编码4×4合成patch；三层区域宽度分别为5/7/9，全局宽度6。支持12视图、验证6样本、测试5样本具有不重叠身份，彼此独立生成；不是CLIP或公开图像benchmark。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22182">原论文</a> · <a href="../../../../foundation-models/2610.22182-lamp/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="CV-OPD: Contrastive Vision On-policy Distillation 多模态大模型 Xiamen University / Moxin Technology 2026-10-09 原来的 crop-to-full-image OPD 可以教会模型答案分布，却不必然教会它依赖正确视觉区域。作者在移除答案相关区域后发现，Vision-OPD 仍取得明显高于随机的准确率。CV-OPD 用同图、同尺寸、低 IoU 的负区域构造第二个共享参数教师，把“接近正教师、远离负教师”的约束加入 JSD 蒸馏。三个不可省略的约束是：正负教师只改变 crop、读取同一学生前缀；CDL 使用有界 JSD 的 margin； 当前实现为 core_mechanism / L1 核心机制诊断，真实 VLM 更新而非图像分类打分代理。cpu-contracts.json记录已重跑的 7 个行为测试：bbox 尺寸与 IoU、JSD/Top-K tail、样本与 token gate、教师停止梯度和零正确样本的零梯度，以及严格多类 verifier、标签隔离和图像来源/切分哈希。每项先固定 seed 42，专用 crop/gate 用例内部使用 seed 2；这些是单测用例，不是独立多 seed 能力实验。测试通过不代表视觉推理能力或 GPU 训练完成。  视觉证据对齐 On-policy distillation 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-multimodal-models-cv-opd-6105b27e">CV-OPD: Contrastive Vision On-policy Distillation</h2>
-<p class="ar-learning-card__meta">Xiamen University / Moxin Technology · 论文公开：2026-10-09</p>
-<p><strong>方法要点：</strong>原来的 crop-to-full-image OPD 可以教会模型答案分布，却不必然教会它依赖正确视觉区域。作者在移除答案相关区域后发现，Vision-OPD 仍取得明显高于随机的准确率。CV-OPD 用同图、同尺寸、低 IoU 的负区域构造第二个共享参数教师，把“接近正教师、远离负教师”的约束加入 JSD 蒸馏。三个不可省略的约束是：正负教师只改变 crop、读取同一学生前缀；CDL 使用有界 JSD 的 margin；</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界 · 机制诊断</summary>
-<p>当前实现为 core_mechanism / L1 核心机制诊断，真实 VLM 更新而非图像分类打分代理。cpu-contracts.json记录已重跑的 7 个行为测试：bbox 尺寸与 IoU、JSD/Top-K tail、样本与 token gate、教师停止梯度和零正确样本的零梯度，以及严格多类 verifier、标签隔离和图像来源/切分哈希。每项先固定 seed 42，专用 crop/gate 用例内部使用 seed 2；这些是单测用例，不是独立多 seed 能力实验。测试通过不代表视觉推理能力或 GPU 训练完成。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13264">原论文</a> · <a href="../../../../reproductions/2610.13264-cv-opd/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Unsupervised Multimodal Reward Modeling 多模态大模型 Massachusetts Institute of Technology 2026-10-08 偏好pair昂贵，reward benchmark名次也不必代表部署选择效用。作者冻结Qwen3-VL，在中间language层只均值池化response tokens，再训练无bias线性reward head；公开caption为positive，同一caption的颜色/数量/尺寸/方位单span变化、tail splice、clause shuffle及cross-image caption为negative，不需人工偏好标注。 bootstrap另与random own-candidate选择比较，相对原论文CHAIR不适用，小样本诊断不代表稳定能力提升。本地对照口径：零bias-free head的tie计半为pair基线，验证集选中的真实中间层head为实验组；bootstrap另与random own-candidate选择比较，相对原论文CHAIR不适用，小样本诊断不代表稳定能力提升。  multimodal-foundation-model reward-modeling frozen-layer-probe verifier-bootstrap 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-multimodal-models-umrm-4950018b">Unsupervised Multimodal Reward Modeling</h2>
-<p class="ar-learning-card__meta">Massachusetts Institute of Technology · 论文公开：2026-10-08</p>
-<p><strong>方法要点：</strong>偏好pair昂贵，reward benchmark名次也不必代表部署选择效用。作者冻结Qwen3-VL，在中间language层只均值池化response tokens，再训练无bias线性reward head；公开caption为positive，同一caption的颜色/数量/尺寸/方位单span变化、tail splice、clause shuffle及cross-image caption为negative，不需人工偏好标注。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>bootstrap另与random own-candidate选择比较，相对原论文CHAIR不适用，小样本诊断不代表稳定能力提升。本地对照口径：零bias-free head的tie计半为pair基线，验证集选中的真实中间层head为实验组；bootstrap另与random own-candidate选择比较，相对原论文CHAIR不适用，小样本诊断不代表稳定能力提升。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12707">原论文</a> · <a href="../../../../reproductions/2610.12707-umrm/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Open Multimodal Embeddings 多模态大模型 Google DeepMind 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。官方总参数约 740M，其中文本约 270M、视觉约 170M、音频约 300M。本地只实例化文本和视觉，约 440M，不使用随机小模型代替官方 checkpoint。 使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-multimodal-models-embedding-gemma2-1f83fce4">EmbeddingGemma 2: Open Multimodal Embeddings</h2>
-<p class="ar-learning-card__meta">Google DeepMind · 论文公开：2026-10-06</p>
-<p><strong>方法要点：</strong>EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。官方总参数约 740M，其中文本约 270M、视觉约 170M、音频约 300M。本地只实例化文本和视觉，约 440M，不使用随机小模型代替官方 checkpoint。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。</p></details>
-<p class="ar-learning-card__links"><a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation 基础模型 原文首页未列第一作者机构 2026-10-01 冻结文本骨干，把每个媒体样本的稠密级联描述经同一文本骨干得到 teacher target，再训练轻量投影器和分阶段 LoRA 对齐六种模态。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行同几何空间的稠密描述蒸馏；未训练模态编码器或复现实测榜单。执行同几何空间的稠密描述蒸馏；未训练模态编码器或复现实测榜单。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  多模态嵌入 蒸馏 LoRA 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-omni-embed-mini-210068e5">Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation</h2>
-<p class="ar-learning-card__meta">原文首页未列第一作者机构 · 论文公开：2026-10-01</p>
-<p><strong>方法要点：</strong>冻结文本骨干，把每个媒体样本的稠密级联描述经同一文本骨干得到 teacher target，再训练轻量投影器和分阶段 LoRA 对齐六种模态。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界 · 机制诊断</summary>
-<p>复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行同几何空间的稠密描述蒸馏；未训练模态编码器或复现实测榜单。执行同几何空间的稠密描述蒸馏；未训练模态编码器或复现实测榜单。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02148">原论文</a> · <a href="../../../../foundation-models/2610.02148-omni-embed-mini/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="SenseNova-U1.5: Towards Native Unified Visual Intelligence 基础模型 SenseTime Research 2026-09-10 用空间 patch reconstruction 摆脱 tokenizer/VAE，并以多专家 OPD 统一视觉理解与生成后训练。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 masked patch target 与 expert OPD 融合；未复刻 8B 多阶段训练。本地执行 masked patch target 与 expert OPD 融合；未复刻 8B 多阶段训练。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  统一多模态 视觉生成与理解 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-sensenova-u1-5-44bbf8fb">SenseNova-U1.5: Towards Native Unified Visual Intelligence</h2>
-<p class="ar-learning-card__meta">SenseTime Research · 论文公开：2026-09-10</p>
-<p><strong>方法要点：</strong>用空间 patch reconstruction 摆脱 tokenizer/VAE，并以多专家 OPD 统一视觉理解与生成后训练。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界 · 机制诊断</summary>
-<p>复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 masked patch target 与 expert OPD 融合；未复刻 8B 多阶段训练。本地执行 masked patch target 与 expert OPD 融合；未复刻 8B 多阶段训练。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11929">原论文</a> · <a href="../../../../foundation-models/2609.11929-sensenova-u1-5/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="From Visual Cues to Spoken Narration: Rethinking Audio Description 多模态大模型 TU Darmstadt &amp; hessian.AI 2026-09-01 固定v1 Section4.3 Eqs5–8：SFT按每个AD目标token求和；positive/negative评分均为同一当前模型和prompt上的token-mean logp，prompt/padding排除；DRL=-logsigmoid((s+−s−)/0.5)，全loss加0.2DRL。离线负caption生成冻结，但其当前模型likelihood仍反传。 成本过高，不复现（审查 DONE）。6.64M双头定位器，Qwen2.5-VL-7B/Qwen3-VL-8B LoRA，训练32帧/推理64帧，多阶段长电影训练；LSMDC研究限制授权、MAD-Eval NDA。完整数据/定位+VLM训练超单卡短时预算，不下载视频或权重；本文未给总GPU小时，不编造。输入是当前模型对AD与缓存negative caption的teacher-forced logits/labels，必须正确对齐并以-100排除prompt/padding；不包含Stage1、visual cue提取、character bank或负caption生成。  多模态生成 视频音频描述 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-multimodal-models-cue2narrate-drl-b44764fd">From Visual Cues to Spoken Narration: Rethinking Audio Description</h2>
-<p class="ar-learning-card__meta">TU Darmstadt &amp; hessian.AI · 论文公开：2026-09-01</p>
-<p><strong>方法要点：</strong>固定v1 Section4.3 Eqs5–8：SFT按每个AD目标token求和；positive/negative评分均为同一当前模型和prompt上的token-mean logp，prompt/padding排除；DRL=-logsigmoid((s+−s−)/0.5)，全loss加0.2DRL。离线负caption生成冻结，但其当前模型likelihood仍反传。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界 · 成本过高，未复现</summary>
-<p>成本过高，不复现（审查 DONE）。6.64M双头定位器，Qwen2.5-VL-7B/Qwen3-VL-8B LoRA，训练32帧/推理64帧，多阶段长电影训练；LSMDC研究限制授权、MAD-Eval NDA。完整数据/定位+VLM训练超单卡短时预算，不下载视频或权重；本文未给总GPU小时，不编造。输入是当前模型对AD与缓存negative caption的teacher-forced logits/labels，必须正确对齐并以-100排除prompt/padding；不包含Stage1、visual cue提取、character bank或负caption生成。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.01725v1">原论文</a> · <a href="../../../../multimodal-models/2609.01725-cue2narrate-drl/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations 基础模型 KAIST / Sony AI 2026-08-26 MLLM 的丰富视觉语义难以直接迁移到轻量 CLIP。论文从 teacher 各层按 attention 自适应选 token，以 CKA 对齐 student 图像/文本特征，保留部署时的双塔效率。 Fidelity：公开 checkpoint 核心路径。主路径加载真实 SmolVLM teacher 与 CLIP student，在公开图像上训练 CKA projection；MovieLens/NumPy 路径仅保留为快速机制诊断。真实 checkpoint 路径使用公开图像和 SmolVLM 视觉 encoder feature，但仍未复刻论文完整 26-benchmark 训练规模、原始 teacher 配方与全量 CLIP 预训练。MovieLens proxy 仍为 diagnostic-only，不能与视觉 benchmark 混报。  multimodal-foundation-model feature-distillation compositionality cka 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-mllmclip-2c53372a">MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations</h2>
-<p class="ar-learning-card__meta">KAIST / Sony AI · 论文公开：2026-08-26</p>
-<p><strong>方法要点：</strong>MLLM 的丰富视觉语义难以直接迁移到轻量 CLIP。论文从 teacher 各层按 attention 自适应选 token，以 CKA 对齐 student 图像/文本特征，保留部署时的双塔效率。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>Fidelity：公开 checkpoint 核心路径。主路径加载真实 SmolVLM teacher 与 CLIP student，在公开图像上训练 CKA projection；MovieLens/NumPy 路径仅保留为快速机制诊断。真实 checkpoint 路径使用公开图像和 SmolVLM 视觉 encoder feature，但仍未复刻论文完整 26-benchmark 训练规模、原始 teacher 配方与全量 CLIP 预训练。MovieLens proxy 仍为 diagnostic-only，不能与视觉 benchmark 混报。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25575">原论文</a> · <a href="../../../../reproductions/2608.25575-mllmclip/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report 基础模型 WeChat Vision, Tencent 2026-08-25 不同检索任务通常维护独立的文本、图像、视频或文档 encoder。WeMM 把任意交错多模态输入映射到同一空间：第一阶段用数亿 pair 做大规模 alignment；第二阶段加入精选 relevance、细粒度监督和跨尺度知识迁移，并用 Matryoshka 表征支持按成本选择输出维度。 Fidelity：核心机制复现。本地执行两阶段跨模态对齐、cross-scale teacher refinement 与 Matryoshka 截断评测；未冒充 2B/4B/9B checkpoint 训练。没有加载原始大 checkpoint 或私有多模态 pair；公开 MovieLens 的内容/协同视图只验证共享空间、两阶段 refinement 与截断维度机制，不代表 MMEB-v2 或微信业务结果复刻。本地对照口径：基线为第一阶段共享空间；实验组加入 relevance/cross-scale teacher refinement。  multimodal-foundation-model embedding retrieval matryoshka-representation 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-wemm-embedding-30d32b14">WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report</h2>
-<p class="ar-learning-card__meta">WeChat Vision, Tencent · 论文公开：2026-08-25</p>
-<p><strong>方法要点：</strong>不同检索任务通常维护独立的文本、图像、视频或文档 encoder。WeMM 把任意交错多模态输入映射到同一空间：第一阶段用数亿 pair 做大规模 alignment；第二阶段加入精选 relevance、细粒度监督和跨尺度知识迁移，并用 Matryoshka 表征支持按成本选择输出维度。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>Fidelity：核心机制复现。本地执行两阶段跨模态对齐、cross-scale teacher refinement 与 Matryoshka 截断评测；未冒充 2B/4B/9B checkpoint 训练。没有加载原始大 checkpoint 或私有多模态 pair；公开 MovieLens 的内容/协同视图只验证共享空间、两阶段 refinement 与截断维度机制，不代表 MMEB-v2 或微信业务结果复刻。本地对照口径：基线为第一阶段共享空间；实验组加入 relevance/cross-scale teacher refinement。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24053">原论文</a> · <a href="../../../../reproductions/2608.24053-wemm-embedding/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction 基础模型 ByteDance 2026-08-12 常规 MLLM 只用文本 next-token loss，视觉结构只能被语言间接监督；统一理解/生成模型又会把生成参数和开销留到部署阶段。GAS 把生成改成纯训练期辅助任务：理解分支与生成分支共享较低层视觉路径，上层 Transformer 参数解耦；生成分支在与 LLM 输入相同的连续视觉空间自回归预测目标图像 embedding。这样生成梯度能改善共享视觉表征，又不会直接改写理解上层，部署时可整条删除。 Fidelity：核心机制复现。本地真实训练共享视觉 trunk、独立 MoT 生成上层、连续 Next Embedding Prediction（NEP）与 EMA target；未复刻 2B/4B Qwen3-VL、10M 生成数据和 32-GPU 两阶段训练。本地用水平镜像后的同类目标图像构造高度相关的生成任务，并在连续 patch embedding 空间执行 shifted cosine NEP；保留 EMA、渐增、分支隔离与推理删除机制。结果只说明小规模公开数据上的机制可执行，不能与论文 10M 生成样本和 2B/4B benchmark 数字直接比较。  multimodal generation-guided-training next-embedding-prediction 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-gas-1fb6a8b0">Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction</h2>
-<p class="ar-learning-card__meta">ByteDance · 论文公开：2026-08-12</p>
-<p><strong>方法要点：</strong>常规 MLLM 只用文本 next-token loss，视觉结构只能被语言间接监督；统一理解/生成模型又会把生成参数和开销留到部署阶段。GAS 把生成改成纯训练期辅助任务：理解分支与生成分支共享较低层视觉路径，上层 Transformer 参数解耦；生成分支在与 LLM 输入相同的连续视觉空间自回归预测目标图像 embedding。这样生成梯度能改善共享视觉表征，又不会直接改写理解上层，部署时可整条删除。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>Fidelity：核心机制复现。本地真实训练共享视觉 trunk、独立 MoT 生成上层、连续 Next Embedding Prediction（NEP）与 EMA target；未复刻 2B/4B Qwen3-VL、10M 生成数据和 32-GPU 两阶段训练。本地用水平镜像后的同类目标图像构造高度相关的生成任务，并在连续 patch embedding 空间执行 shifted cosine NEP；保留 EMA、渐增、分支隔离与推理删除机制。结果只说明小规模公开数据上的机制可执行，不能与论文 10M 生成样本和 2B/4B benchmark 数字直接比较。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12209">原论文</a> · <a href="../../../../reproductions/2608.12209-gas/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes 基础模型 Meta 2026-08-05 用受控实验刻画模态知识流、协同/竞争、早期统一和共享 attention+norm/模态专属 FFN 配方。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 single-modality representation，实验组为 physics-mm-pretraining；单 seed 变化为 +0.00% 个百分点。  多模态基础模型 预训练与数据 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-physics-mm-pretraining-bcf29586">Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes</h2>
-<p class="ar-learning-card__meta">Meta · 论文公开：2026-08-05</p>
-<p><strong>方法要点：</strong>用受控实验刻画模态知识流、协同/竞争、早期统一和共享 attention+norm/模态专属 FFN 配方。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 single-modality representation，实验组为 physics-mm-pretraining；单 seed 变化为 +0.00% 个百分点。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05000">原论文</a> · <a href="../../../../reproductions/2608.05000-physics-mm-pretraining/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="ReToken: One Token to Improve Vision–Language Models for Visual Retrieval 基础模型 UIUC / Microsoft Research / Google DeepMind 2026-07-30 常规 VLM 检索需要先用外部 retriever 找图，再把入选图重新编码，无法直接复用预填充的视觉 KV cache。ReToken 在输入中增加一个可学习 token，让它在最后一层 value projection 空间与每张图的平均 value 向量打分；只训练该 token 和一张投影矩阵，以 class-balanced BCE 监督相关/无关图，VLM 默认冻结。 Fidelity: 核心机制复现。实际训练单个 retrieval target、value-space projection 与稀疏 cache 选择，并接入 LLM evolve；本地文本实验不冒充完整 VLM。本地没有运行冻结大 VLM、MIRAGE 图文监督和两小时视频；文本 token cache 只复现论文决定性的“单 retrieval target + value-space 打分 + 稀疏选择”机制，不能与论文视觉 benchmark 数字直接比较。本地对照口径：基线为同预算 dense LLaMA，实验组为 ReToken value-cache Top-K；相对基线 PPL +3.70%（变差）。  vision-language-model visual-retrieval kv-cache sparse-attention 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-retoken-1f7ac688">ReToken: One Token to Improve Vision–Language Models for Visual Retrieval</h2>
-<p class="ar-learning-card__meta">UIUC / Microsoft Research / Google DeepMind · 论文公开：2026-07-30</p>
-<p><strong>方法要点：</strong>常规 VLM 检索需要先用外部 retriever 找图，再把入选图重新编码，无法直接复用预填充的视觉 KV cache。ReToken 在输入中增加一个可学习 token，让它在最后一层 value projection 空间与每张图的平均 value 向量打分；只训练该 token 和一张投影矩阵，以 class-balanced BCE 监督相关/无关图，VLM 默认冻结。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>Fidelity: 核心机制复现。实际训练单个 retrieval target、value-space projection 与稀疏 cache 选择，并接入 LLM evolve；本地文本实验不冒充完整 VLM。本地没有运行冻结大 VLM、MIRAGE 图文监督和两小时视频；文本 token cache 只复现论文决定性的“单 retrieval target + value-space 打分 + 稀疏选择”机制，不能与论文视觉 benchmark 数字直接比较。本地对照口径：基线为同预算 dense LLaMA，实验组为 ReToken value-cache Top-K；相对基线 PPL +3.70%（变差）。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.28627">原论文</a> · <a href="../../../../reproductions/2607.28627-retoken/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="MVEB: Massive Video Embedding Benchmark 多模态大模型 Harvard University 2026-06-12 固定v1 Section3：MVEB23任务从184任务池缩减；var-length fps2/cap64frames，固定帧模型遵循其训练配置，音频按model采样率/长度；无per-task finetune。分类8shot frozen logistic probe，retrieval cosine/nDCG10，VCQA候选池accuracy，视频/音频版本配对且只跑模型支持modality。 成本过高，不复现（审查 DONE）。33个公开checkpoint约200M–10.7B，23主任务及184池，多模型视频+音频/8方向矩阵；Table1单H100测LCO7B：MVEB31.9h、MVEB+302.7h。远超单A100/A30短时预算，不下载模型或视频、不构造假的通用指标代理。本轮仅核查论文身份、合作机构、方法/资源/许可证与成本，收录资料和原图。没有把通用聚合器或字段检查包装为官方benchmark接口；没有模型调用、训练或正式指标。  多模态表征 视频嵌入评测 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-multimodal-models-mveb-9298f9f8">MVEB: Massive Video Embedding Benchmark</h2>
-<p class="ar-learning-card__meta">Harvard University · 论文公开：2026-06-12</p>
-<p><strong>方法要点：</strong>固定v1 Section3：MVEB23任务从184任务池缩减；var-length fps2/cap64frames，固定帧模型遵循其训练配置，音频按model采样率/长度；无per-task finetune。分类8shot frozen logistic probe，retrieval cosine/nDCG10，VCQA候选池accuracy，视频/音频版本配对且只跑模型支持modality。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界 · 成本过高，未复现</summary>
-<p>成本过高，不复现（审查 DONE）。33个公开checkpoint约200M–10.7B，23主任务及184池，多模型视频+音频/8方向矩阵；Table1单H100测LCO7B：MVEB31.9h、MVEB+302.7h。远超单A100/A30短时预算，不下载模型或视频、不构造假的通用指标代理。本轮仅核查论文身份、合作机构、方法/资源/许可证与成本，收录资料和原图。没有把通用聚合器或字段检查包装为官方benchmark接口；没有模型调用、训练或正式指标。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.14958v1">原论文</a> · <a href="../../../../multimodal-models/2606.14958-mveb/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages 多模态大模型 Mila - Quebec AI Institute 2026-04-17 核固定v3 Sections3–4及AppendixC：284说话人、约6K平行句、质控后约269h；5shot来自DEV，方向分开；Seamless不支持的Hausa映射Arabic、Naijá映射French仅为fine-tuned extension。S2TT SSA-COMET/ChrF++，S2ST先OmnilingualASR转写再SSA-COMET，不能用文本exactmatch替代。 成本过高，不复现（审查 DONE）。每语言40余小时语音，Omnilingual-ASR1B、NLLB3.3B/TinyAya3B、Seamless2.3B mono/multi多个方向3–10epochs，另有Gemini/GPT-Audio推理、TTS和人工评审。整套明显超单卡短时预算，不下载音频/模型、不调用付费API。本轮仅核查论文身份、合作机构、方法/资源/许可证与成本，收录资料和原图。没有把通用聚合器或字段检查包装为官方benchmark接口；没有模型调用、训练或正式指标。  语音多模态 低资源语音翻译评测 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-multimodal-models-naijas2st-20646330">NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages</h2>
-<p class="ar-learning-card__meta">Mila - Quebec AI Institute · 论文公开：2026-04-17</p>
-<p><strong>方法要点：</strong>核固定v3 Sections3–4及AppendixC：284说话人、约6K平行句、质控后约269h；5shot来自DEV，方向分开；Seamless不支持的Hausa映射Arabic、Naijá映射French仅为fine-tuned extension。S2TT SSA-COMET/ChrF++，S2ST先OmnilingualASR转写再SSA-COMET，不能用文本exactmatch替代。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界 · 成本过高，未复现</summary>
-<p>成本过高，不复现（审查 DONE）。每语言40余小时语音，Omnilingual-ASR1B、NLLB3.3B/TinyAya3B、Seamless2.3B mono/multi多个方向3–10epochs，另有Gemini/GPT-Audio推理、TTS和人工评审。整套明显超单卡短时预算，不下载音频/模型、不调用付费API。本轮仅核查论文身份、合作机构、方法/资源/许可证与成本，收录资料和原图。没有把通用聚合器或字段检查包装为官方benchmark接口；没有模型调用、训练或正式指标。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.16287v1">原论文</a> · <a href="../../../../multimodal-models/2604.16287-naijas2st/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="SmolVLM: Redefining small and efficient multimodal models 基础模型 Hugging Face 2025-04-07 SmolVLM 重新分配小模型视觉/语言侧算力，以 pixel shuffle 将相邻空间 token 搬到 channel 维，再用 MLP 映射到 LM 空间；同时研究长上下文、图像切片、学习位置 token 和数据配比，使 256M/500M/2.2B 模型在低显存下保持图像与视频能力。 保真度：核心机制复现。保真度：核心机制复现。本地执行论文中心的 pixel-shuffle 视觉 token 压缩与投影；未复刻 256M–2.2B decoder、视频和完整数据配方。使用 32×32 真实服饰图像和 2×2 space-to-depth；没有复刻高分辨率切片、视频采样、8k/16k context、学习位置 token 或 SmolLM decoder。本地对照口径：基线为线性 mean-pooling connector，实验组为 r=2 pixel shuffle + projector；  multimodal efficient-vlm visual-token-compression 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-smolvlm-5de2167d">SmolVLM: Redefining small and efficient multimodal models</h2>
-<p class="ar-learning-card__meta">Hugging Face · 论文公开：2025-04-07</p>
-<p><strong>方法要点：</strong>SmolVLM 重新分配小模型视觉/语言侧算力，以 pixel shuffle 将相邻空间 token 搬到 channel 维，再用 MLP 映射到 LM 空间；同时研究长上下文、图像切片、学习位置 token 和数据配比，使 256M/500M/2.2B 模型在低显存下保持图像与视频能力。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>保真度：核心机制复现。保真度：核心机制复现。本地执行论文中心的 pixel-shuffle 视觉 token 压缩与投影；未复刻 256M–2.2B decoder、视频和完整数据配方。使用 32×32 真实服饰图像和 2×2 space-to-depth；没有复刻高分辨率切片、视频采样、8k/16k context、学习位置 token 或 SmolLM decoder。本地对照口径：基线为线性 mean-pooling connector，实验组为 r=2 pixel shuffle + projector；</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2504.05299">原论文</a> · <a href="../../../../reproductions/2504.05299-smolvlm/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features 基础模型 Google DeepMind 2025-02-20 SigLIP 2 在 SigLIP 的 pairwise sigmoid loss 上组合 captioning pretraining、global-local self-distillation、masked prediction、在线数据筛选和 NaFlex 动态分辨率，改善语义、定位、dense feature 与多语言公平性。 保真度：核心机制复现。保真度：核心机制复现。本地执行 sigmoid 对比目标与遮盖视图自蒸馏；未复刻多语言 web 数据、caption decoder 和 dense localization。Fashion-MNIST 类别文本替代多语言 caption；实际训练 sigmoid pair loss 和中心遮盖视图的 student-teacher consistency，没有复刻 caption decoder、active curation、NaFlex 和定位头。  multimodal sigmoid-contrastive self-distillation 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-siglip2-8c923237">SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features</h2>
-<p class="ar-learning-card__meta">Google DeepMind · 论文公开：2025-02-20</p>
-<p><strong>方法要点：</strong>SigLIP 2 在 SigLIP 的 pairwise sigmoid loss 上组合 captioning pretraining、global-local self-distillation、masked prediction、在线数据筛选和 NaFlex 动态分辨率，改善语义、定位、dense feature 与多语言公平性。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>保真度：核心机制复现。保真度：核心机制复现。本地执行 sigmoid 对比目标与遮盖视图自蒸馏；未复刻多语言 web 数据、caption decoder 和 dense localization。Fashion-MNIST 类别文本替代多语言 caption；实际训练 sigmoid pair loss 和中心遮盖视图的 student-teacher consistency，没有复刻 caption decoder、active curation、NaFlex 和定位头。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.14786">原论文</a> · <a href="../../../../reproductions/2502.14786-siglip2/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Visual Instruction Tuning 基础模型 University of Wisconsin-Madison / Microsoft Research / Columbia University 2023-04-17 冻结视觉 encoder，用可训练 projector 把视觉特征映射到 LLM token 空间，再在 GPT-4 生成的多模态指令数据上做端到端 instruction tuning。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。使用 Fashion-MNIST 真实像素、冻结的轻量 patch encoder、可训练 projector 与问答分类头；未调用 GPT-4，未执行多模态 instruction data generation，也未复刻 LLaVA-13B。单 seed 结果仅用于检验 projector 结构，不能外推到大模型指令微调。  multimodal instruction-tuning 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-llava-9b58a1f9">Visual Instruction Tuning</h2>
-<p class="ar-learning-card__meta">University of Wisconsin-Madison / Microsoft Research / Columbia University · 论文公开：2023-04-17</p>
-<p><strong>方法要点：</strong>冻结视觉 encoder，用可训练 projector 把视觉特征映射到 LLM token 空间，再在 GPT-4 生成的多模态指令数据上做端到端 instruction tuning。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。使用 Fashion-MNIST 真实像素、冻结的轻量 patch encoder、可训练 projector 与问答分类头；未调用 GPT-4，未执行多模态 instruction data generation，也未复刻 LLaVA-13B。单 seed 结果仅用于检验 projector 结构，不能外推到大模型指令微调。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2304.08485">原论文</a> · <a href="../../../../reproductions/2304.08485-llava/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models 基础模型 Salesforce Research 2023-01-30 BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。 保真度：核心机制复现。保真度：核心机制复现。本地执行 Q-Former 的可学习 query 与 cross-attention；论文两阶段大规模预训练和冻结大模型未复刻。使用 Fashion-MNIST 真实像素和四 query multi-head cross-attention；没有加载 ViT-g、OPT/FlanT5，也没有执行 ITC/ITM/ITG 两阶段 129M 图像预训练。本地对照口径：基线为相同预算的线性 mean-pooling connector，实验组为四 query Q-Former；  multimodal q-former frozen-encoders 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-blip2-9ce69b95">BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models</h2>
-<p class="ar-learning-card__meta">Salesforce Research · 论文公开：2023-01-30</p>
-<p><strong>方法要点：</strong>BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>保真度：核心机制复现。保真度：核心机制复现。本地执行 Q-Former 的可学习 query 与 cross-attention；论文两阶段大规模预训练和冻结大模型未复刻。使用 Fashion-MNIST 真实像素和四 query multi-head cross-attention；没有加载 ViT-g、OPT/FlanT5，也没有执行 ITC/ITM/ITG 两阶段 129M 图像预训练。本地对照口径：基线为相同预算的线性 mean-pooling connector，实验组为四 query Q-Former；</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2301.12597">原论文</a> · <a href="../../../../reproductions/2301.12597-blip2/">实现解读</a></p>
-</article>
-<article class="ar-learning-card" data-learning-card data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Learning Transferable Visual Models From Natural Language Supervision 基础模型 OpenAI 2021-02-26 用独立图像/文本 encoder 将配对样本映射到同一单位球面，通过双向 batch contrastive objective 学习可迁移零样本表示。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。使用 Fashion-MNIST 的真实像素与类别文本复现双塔、归一化和对称式对比目标；没有复刻 4 亿图文对、自然语言长尾语义或大规模视觉 encoder。单 seed 小预算结果只验证机制可执行，不等价于原论文 zero-shot 指标。本地对照口径：在真实 Fashion-MNIST 图像与类别文本构成的 10 类图文任务上，基线为均匀随机检索（10.0%），实验组为对称式图文对比学习双塔；测试准确率达到 72.0%（+62.0 个百分点），打乱图像后降至 10.3%，说明结果依赖视觉输入。  multimodal contrastive-pretraining 多模态 跨模态对齐：表征、连接器与监督">
-<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
-<h2 id="paper-foundation-models-clip-b03c09f0">Learning Transferable Visual Models From Natural Language Supervision</h2>
-<p class="ar-learning-card__meta">OpenAI · 论文公开：2021-02-26</p>
-<p><strong>方法要点：</strong>用独立图像/文本 encoder 将配对样本映射到同一单位球面，通过双向 batch contrastive objective 学习可迁移零样本表示。</p>
-<details class="ar-learning-boundary"><summary>本地范围与边界</summary>
-<p>保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。使用 Fashion-MNIST 的真实像素与类别文本复现双塔、归一化和对称式对比目标；没有复刻 4 亿图文对、自然语言长尾语义或大规模视觉 encoder。单 seed 小预算结果只验证机制可执行，不等价于原论文 zero-shot 指标。本地对照口径：在真实 Fashion-MNIST 图像与类别文本构成的 10 类图文任务上，基线为均匀随机检索（10.0%），实验组为对称式图文对比学习双塔；测试准确率达到 72.0%（+62.0 个百分点），打乱图像后降至 10.3%，说明结果依赖视觉输入。</p></details>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2103.00020">原论文</a> · <a href="../../../../reproductions/2103.00020-clip/">实现解读</a></p>
-</article>
-</div>
-<button type="button" class="ar-learning-more" data-learning-more hidden>显示更多</button>
-</div>
-
-
-[跨主题搜索全部卡片](../../all.md)
+[跨主题搜索全部问答](../../all.md) · [最近新增](../../recent.md)

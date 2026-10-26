@@ -35,6 +35,12 @@
 - An absent upstream repository must be written explicitly as not found/not released; never omit the field.
 - New or updated reproductions must keep this metadata complete and covered by documentation tests.
 
+## Paper learning questions
+
+- Every newly collected or implemented paper must include at least one authored Chinese Q&A in `docs/learning/questions/*.json`, including review-only papers. Ask about that paper's defining mechanism or tradeoff, answer directly, add a concrete teaching example, and cite actual headings from its source README. Do not use a generic question plus a pasted abstract or implementation-status paragraph as a substitute.
+- A paper may accumulate multiple questions. Keep question IDs stable, record the actual date a question was added, assign its paper to a learning subtopic, and run `python scripts/generate_learning_cards.py --require-questions` plus the applicable documentation checks. The same questions must appear in the subtopic bank, all-paper bank and recent additions. Curated cross-paper readings are optional supplements, never the only update destination.
+- Explain paper mechanisms separately from local capability evidence. Teaching examples are illustrative, not measured paper results. Correct discovered source errors with primary evidence and preserve existing experimental records and unresolved implementation limitations.
+
 ## Research and evaluation integrity
 
 - Prioritize qualifying Google and Meta papers. Check full-text production experiments, tables, and deployment evidence; an abstract without A/B wording is not a rejection reason. Use the discovery ledger's last reviewed coverage and overlap policy, and record unresolved candidates rather than claiming exhaustive coverage.
