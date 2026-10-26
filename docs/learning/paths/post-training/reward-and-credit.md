@@ -29,7 +29,7 @@ hide:
 
 先读Process Supervision，区分逐步标签与终局标签；再读Math-Shepherd，看如何用续写构造步骤信号；最后读TACO，理解为什么正确回答内部也可能存在不该被强化的token。
 
-1. [Let's Verify Step by Step](../../../post-training/2305.20050-process-supervision/README.md) · [原论文](https://arxiv.org/abs/2305.20050)
+1. [Let&#x27;s Verify Step by Step](../../../post-training/2305.20050-process-supervision/README.md) · [原论文](https://arxiv.org/abs/2305.20050)
 2. [Math-Shepherd](../../../post-training/2312.08935-math-shepherd/README.md) · [原论文](https://arxiv.org/abs/2312.08935)
 3. [TACO](../../../post-training/2607.07976-taco/README.md) · [原论文](https://arxiv.org/abs/2607.07976)
 

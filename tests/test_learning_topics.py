@@ -97,6 +97,19 @@ def test_unassigned_new_paper_is_visible_in_inbox_and_all_search(topic_repo):
     assert 'data-theme="recommendation">长序列</option>' in all_cards
 
 
+def test_representative_metadata_cannot_inject_html_or_break_markdown(topic_repo):
+    root, _ = topic_repo
+    manifest = json.loads((root / "docs/research-manifest.json").read_text())
+    manifest["papers"][0]["title"] = '<img src=x onerror="bad"> [title]'
+    manifest["papers"][0]["paper_url"] = "https://example.org/paper?q=[x])"
+    _write(root, "docs/research-manifest.json", json.dumps(manifest))
+    generate(root)
+    page = (root / "docs/learning/paths/recommendation/sequence.md").read_text()
+    assert '<img src=x' not in page
+    assert r'\[title\]' in page
+    assert "https://example.org/paper?q=%5Bx%5D%29" in page
+
+
 @pytest.mark.parametrize("fault, message", [
     ("duplicate", "duplicate learning topic assignment"),
     ("unknown", "unknown learning paper"),

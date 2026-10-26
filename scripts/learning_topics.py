@@ -11,6 +11,7 @@ import json
 import posixpath
 import re
 from pathlib import Path, PurePosixPath
+from urllib.parse import quote
 
 
 THEME_ORDER = (
@@ -158,9 +159,11 @@ def guide_pages(themes: list[dict], cards: list[dict], browser, page_href) -> di
             ]
             for index, identity in enumerate(topic["start_here"], 1):
                 card = by_identity[identity]
+                title = html.escape(" ".join(card["title"].split())).replace("[", r"\[").replace("]", r"\]")
+                source_url = quote(card["paper_url"], safe=":/?&=%#@+,;~.-_")
                 lines.append(
-                    f"{index}. [{card['title']}]({doc_href(card['detail_path'], path)})"
-                    f" · [{card['source_label']}]({card['paper_url']})"
+                    f"{index}. [{title}]({doc_href(card['detail_path'], path)})"
+                    f" · [{card['source_label']}]({source_url})"
                 )
             lines += [
                 "", "## 自测一下", "", topic["self_test"]["question"], "",
