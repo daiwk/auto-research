@@ -6,15 +6,19 @@
 
 <div class="ar-learning-featured" markdown="1">
 
-### 长历史要不要每层都重新计算？
+### RankMixer 的特征怎么交互？
 
-HSTU、LONGER、SlimPer：把“还能读取历史”与“逐层更新历史表示”分开看。
+用四行看懂 TokenMix：固定重排让特征相遇，独立 FFN 学习如何组合。
 
-**约 5 分钟 · 长序列推荐 · 2026-10-26**
+**约 3 分钟 · 特征交互 · 2026-10-26**
 
-[阅读本期学习卡片 →](001-hstu-longer-slimper.md){ .md-button .md-button--primary }
+[阅读本期学习卡片 →](002-rankmixer-tokenmix.md){ .md-button .md-button--primary }
 
 </div>
+
+## 往期精选
+
+- [001：长历史要不要每层都重新计算？](001-hstu-longer-slimper.md) — HSTU、LONGER、SlimPer，约 5 分钟。
 
 ## 论文小卡片汇总
 

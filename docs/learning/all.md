@@ -7243,13 +7243,14 @@ hide:
 <p><strong>本地范围与边界：</strong>两种口径均未验证收益。Fidelity: 核心机制复现。matched Transformer 中实际执行 feedback-first、next-item-second 分解；未复刻十亿参数规模与私有音乐反馈。本地对照口径：统一跨模型基线是 DIN，ARGUS NDCG@10 相对 DIN -4.12%；内部 next-item-only 基线加入 feedback decomposition 后 -20.95%。两种口径均未验证收益。统一为 180 users/280 items 后，DIN（100 steps）Hit/NDCG 为 0.0481/0.02167；</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15994">原论文</a> · <a href="../../reproductions/2507.15994-argus/">实现解读</a></p>
 </article>
-<article class="ar-learning-card" data-learning-card data-domain="recommendation" data-search="RankMixer: Scaling Up Ranking Models in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-07-21 传统 ranking feature-cross 模块 MFU 低，扩大参数常同时推高延迟。RankMixer 把异构字段分为等宽 feature tokens，以无参数 head/token 重排代替 self-attention；每个输出 token 使用独立 FFN，防止高频字段支配共享参数。 Fidelity: 完整核心链路复现。本地模型实际训练 parameter-free multi-head token mixing、per-token FFN、ReLU-routed Sparse MoE 和 dense-training/sparse-inference；仅缩小字段、参数与 serving 工程规模。本地对照口径：基线是 Shared FFN；实验组分别是 Dense per-token RankMixer 与 Sparse MoE；Dense NDCG@10 约 +595.86%，Sparse +43.61%。这是 token-FFN 架构消融；  ">
+<article class="ar-learning-card" data-learning-card data-domain="recommendation" data-search="RankMixer: Scaling Up Ranking Models in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-07-21 RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。 本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。 TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？ ">
 <p class="ar-learning-card__domain">搜广推与 LLM 应用</p>
 <h2 id="paper-recommendation-rankmixer-298d1226">RankMixer: Scaling Up Ranking Models in Industrial Recommenders</h2>
 <p class="ar-learning-card__meta">ByteDance / Douyin · 论文公开：2025-07-21</p>
-<p><strong>方法要点：</strong>传统 ranking feature-cross 模块 MFU 低，扩大参数常同时推高延迟。RankMixer 把异构字段分为等宽 feature tokens，以无参数 head/token 重排代替 self-attention；每个输出 token 使用独立 FFN，防止高频字段支配共享参数。</p>
-<p><strong>本地范围与边界：</strong>Fidelity: 完整核心链路复现。本地模型实际训练 parameter-free multi-head token mixing、per-token FFN、ReLU-routed Sparse MoE 和 dense-training/sparse-inference；仅缩小字段、参数与 serving 工程规模。本地对照口径：基线是 Shared FFN；实验组分别是 Dense per-token RankMixer 与 Sparse MoE；Dense NDCG@10 约 +595.86%，Sparse +43.61%。这是 token-FFN 架构消融；</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../reproductions/2507.15551-rankmixer/">实现解读</a></p>
+<p><strong>方法要点：</strong>RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。</p>
+<p><strong>本地范围与边界：</strong>本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。</p>
+<p class="ar-learning-question"><strong>想一想：</strong>TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="../002-rankmixer-tokenmix/">阅读精选对比</a></p>
 </article>
 <article class="ar-learning-card" data-learning-card data-domain="recommendation" data-search="Click A, Buy B: Rethinking Conversion Attribution in E-Commerce Recommendations 搜广推与 LLM 应用 Pinterest 2025-07-20 Last-click attribution 默认点击和购买属于同一商品，忽略用户点 A 后买 B。论文将 Click-A-Buy-A 与 Click-A-Buy-B 分成多任务，并用商品 taxonomy 建模 A/B 的协同归因。 Fidelity: 核心机制复现。实际构造 CABA/CABB 双分支，并按公开 genre taxonomy 学习跨物品协同权重。连续观影不等价于购买；没有真实曝光、归因窗口、广告竞价和 Pinterest taxonomy。本地对照口径：相对 last-click 单物品归因基线，实验组 NDCG@10 +33.70%。  conversion-attribution multi-task-learning taxonomy ads-ranking">
 <p class="ar-learning-card__domain">搜广推与 LLM 应用</p>
