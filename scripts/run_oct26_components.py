@@ -38,8 +38,11 @@ def execution_spec():
 
 
 def sources(spec):
+    package_inits = ["src/auto_research/__init__.py", *[
+        f"src/auto_research/{package}/__init__.py" for package in (
+            "foundation_models", "system_one", "multimodal", "post_training", "agent_research", "reproductions")]]
     return [RUNNER, SPEC, "scripts/oct18_frozen_sources.py", "scripts/run_google_emnlp25_components.py",
-            *sorted({r["source"] for r in spec["components"]})]
+            *package_inits, *sorted({r["source"] for r in spec["components"]})]
 
 
 def main():
@@ -69,6 +72,8 @@ def main():
     components = {}
     for expected in spec["components"]:
         module = importlib.import_module(expected["source"].removeprefix("src/").removesuffix(".py").replace("/", "."))
+        if Path(module.__file__).resolve() != (ROOT / expected["source"]).resolve():
+            raise RuntimeError("imported module is not the frozen source; installed-package shadowing forbidden")
         rows = []
         for seed in SEEDS:
             row = module.diagnostic(seed, device=args.device)
