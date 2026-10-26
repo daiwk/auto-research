@@ -1,0 +1,122 @@
+{
+  "id": "multimodal-models",
+  "title": "多模态",
+  "intro": "围绕三件事学习：对齐不同模态、分配视觉证据预算、预测状态与动作的后果。",
+  "topics": [
+    {
+      "id": "alignment-interfaces",
+      "title": "跨模态对齐：表征、连接器与监督",
+      "question": "图像、语音和文字如何接上同一任务接口，学到的是相似度还是可生成的回答？",
+      "takeaway": "CLIP 用独立图像/文本编码器和配对对比目标学习共享表示，相似度可服务零样本分类与检索。BLIP-2 冻结视觉编码器和 LLM，通过少量 Query 的 Q-Former 提取视觉信息，分阶段连接图文表示与语言生成。指令微调、蒸馏、奖励建模和专门评测进一步改变监督与读出；应逐项追踪输入、训练目标和输出接口。",
+      "example": "“找与红色雨伞描述最匹配的图片”适合比较图文 embedding；“图里第二行小字是什么”需要细粒度视觉证据和能输出文本的接口。把图片接到 LLM 并不自动获得 OCR 能力，压缩后的视觉 Query 也可能丢掉细节。",
+      "pitfall": "检索相似度不是事实正确性的概率，词语匹配也不等于图像真正被使用。检查打乱图像等视觉依赖负控，并区分自然图文、语音口音和视频域。现有小图像实验、随机 fixture 与正式公开 benchmark 有不同证据等级，不能混用。",
+      "self_test": {
+        "question": "CLIP 检索得分很高，能否直接断言模型可以读出图中所有文字？",
+        "answer": "不能。配对对比学习主要约束整体图文兼容性，细小文字读取需要足够视觉分辨率、局部表示与解码监督。应用应单独测 OCR 或对应细粒度任务，并验证结果随图像内容改变。"
+      },
+      "start_here": [
+        "foundation-models:clip",
+        "foundation-models:blip2"
+      ],
+      "reading_order": "先读 CLIP 的双塔、归一化和对比目标；再读 BLIP-2 的 Q-Former 及两阶段连接，区分共享 embedding 与接入语言生成。之后按任务选择指令、蒸馏、奖励或跨模态评测。",
+      "papers": [
+        "foundation-models:blip2",
+        "foundation-models:clip",
+        "multimodal-models:cue2narrate-drl",
+        "multimodal-models:cv-opd",
+        "multimodal-models:embedding-gemma2",
+        "multimodal-models:flexglue",
+        "foundation-models:gas",
+        "foundation-models:lamp",
+        "foundation-models:llava",
+        "foundation-models:mllmclip",
+        "multimodal-models:mveb",
+        "multimodal-models:naijas2st",
+        "foundation-models:omni-embed-mini",
+        "foundation-models:physics-mm-pretraining",
+        "foundation-models:retoken",
+        "foundation-models:sensenova-u1-5",
+        "foundation-models:siglip2",
+        "foundation-models:smolvlm",
+        "multimodal-models:umrm",
+        "foundation-models:wemm-embedding"
+      ]
+    },
+    {
+      "id": "visual-evidence-budget",
+      "title": "视觉证据预算：选 Token、选帧与按需回看",
+      "question": "视觉输入太长时，哪些细节可以暂时不读，哪些必须保留恢复入口？",
+      "takeaway": "StackTok 把问题相关性作为目标、覆盖度作为随预算变化的约束，依据当前不足在两种选取准则之间切换。ViMoD 用 DART 形成持久粗粒度表示并保留到原始 Fine tokens 的映射，再由 TRACE 根据已生成前缀决定保持或替换活跃细节。前者主要在解码前选子集，后者为推理中途改变证据需求保留回看通道。",
+      "example": "先问“图里有哪些物体”需要覆盖整图，接着比较某件商品标签时需要放大局部。一次压缩若永久删掉标签 token，后续推理无法凭空找回；可恢复方案可以再取细节，但必须计入原始 Fine KV 的存储和取回成本。长视频同样要考虑关键帧与时间覆盖。",
+      "pitfall": "视觉 Token 减少比例不等于整机显存或延迟同比下降；视觉 encoder、文本解码、缓存和路由都要计费。可恢复细节也不是免费保留。StackTok 本地只有 reference selector，ViMoD 有真实 checkpoint 运行与梯度验证，但均不能把机制通过说成原文能力提升已复现。",
+      "self_test": {
+        "question": "保留可恢复 Fine KV 后，是否可以把总视觉存储记成只有 Coarse tokens？",
+        "answer": "不可以。Coarse 只是常驻的活跃上下文，Fine KV 及映射仍占存储，动态恢复还需带宽和路由计算。应分别报告活跃 attention 预算、总缓存存储和端到端时延。"
+      },
+      "start_here": [
+        "multimodal-models:stacktok",
+        "multimodal-models:vimod"
+      ],
+      "reading_order": "先读 StackTok 的相关性/覆盖度切换，理解一次性预算分配；再读 ViMoD 的 Coarse/Fine 与 HOLD/UPDATE，理解为什么多步推理可能需要重新取证。其余选帧、层宽剪枝和视觉缓存方法再按瓶颈进入。",
+      "papers": [
+        "foundation-models:adaloop-vision",
+        "foundation-models:frames-on-demand",
+        "foundation-models:hawk",
+        "foundation-models:muse-glimmer-30b",
+        "foundation-models:mwop",
+        "foundation-models:omnikvquant",
+        "foundation-models:pace-vlm",
+        "foundation-models:rr-vlm",
+        "foundation-models:sink-sparse",
+        "foundation-models:softcache",
+        "multimodal-models:stacktok",
+        "multimodal-models:vcola",
+        "foundation-models:veto",
+        "foundation-models:video-encoder-selection",
+        "multimodal-models:videomm",
+        "multimodal-models:vimod"
+      ]
+    },
+    {
+      "id": "world-state-actions",
+      "title": "视觉世界建模：状态、生成与动作条件",
+      "question": "模型是在识别画面，还是能判断动作将怎样改变状态？",
+      "takeaway": "把观察、动作和后续状态放在一起，才能学习可用于预测或控制的表示。LeWAM 联合学习未来潜状态预测与动作 flow matching，让视觉表征和策略相互塑造；规划时再用潜动力学评价动作候选。WOVEN 则把视频生成的视觉转移组织成场景、动作、推理类型受控的监督，训练模型理解结果、原因与反事实。",
+      "example": "同一桌面，把杯子向左推和向右推应产生不同结果；只认出“桌上有杯子”不足以控制机器人。表征预测可避免逐像素重建，但仍要检验动作条件是否有效、rollout 多步后是否漂移，以及选出的动作能否在闭环环境到达目标。",
+      "pitfall": "生成视频逼真、一步预测误差小或训练集问答分数高，都不自动证明规划有效。源场景与轨迹要分组隔离，反事实不能泄漏未来结果。本地 LeWAM 尚是非 holdout 闭环诊断，WOVEN 是小规模公开训练源实验；都不能替代原文完整泛化或机器人结论。",
+      "self_test": {
+        "question": "世界模型的一步 latent MSE 更低，是否必然能带来更高的长程控制成功率？",
+        "answer": "不必然。误差可能集中在与动作选择无关的方向，多步 rollout 还会累积偏差，策略搜索也可能利用模型漏洞。需要相同环境、目标和预算下的闭环控制对照，且不能用训练目标轨迹冒充 holdout。"
+      },
+      "start_here": [
+        "foundation-models:lewam",
+        "multimodal-models:woven"
+      ],
+      "reading_order": "先读 LeWAM 的潜状态/动作联合目标，理解预测怎样进入控制；再读 WOVEN 的视觉转移与受控监督，区分表征学习、生成数据、问答推理和闭环规划。之后按视觉几何、视频记忆或具身动作细分。",
+      "papers": [
+        "foundation-models:alps",
+        "multimodal-models:aw0",
+        "foundation-models:dt-jepa",
+        "foundation-models:ego-p2c",
+        "foundation-models:egojepa",
+        "foundation-models:esc",
+        "foundation-models:ev-jepa",
+        "foundation-models:gen4p",
+        "foundation-models:inside-jepa",
+        "foundation-models:jepa-prediction-planning",
+        "foundation-models:lewam",
+        "foundation-models:locale-jepa",
+        "multimodal-models:mice",
+        "foundation-models:oob-regularization",
+        "foundation-models:ppmem",
+        "multimodal-models:raw-video-midtraining",
+        "foundation-models:smolwam",
+        "foundation-models:time-jepa",
+        "multimodal-models:uniaction",
+        "foundation-models:vbvr-pro",
+        "foundation-models:vjepa-policy",
+        "multimodal-models:woven"
+      ]
+    }
+  ]
+}

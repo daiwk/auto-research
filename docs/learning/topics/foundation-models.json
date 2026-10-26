@@ -1,0 +1,263 @@
+{
+  "id": "foundation-models",
+  "title": "基础模型",
+  "intro": "理解模型怎样读取上下文、分配计算和训练预算，以及压缩、生成与能力评测的取舍。",
+  "topics": [
+    {
+      "id": "context-and-state",
+      "title": "长上下文：注意力、递归状态与记忆",
+      "question": "上下文变长时，模型保留的是可寻址的历史 token，还是压缩后的递归状态？",
+      "takeaway": "先分清位置关系、信息访问和状态容量。RoPE 对 Q/K 的二维子空间作位置相关旋转，让点积表达相对位移；它仍允许注意力访问窗口内历史。Mamba 则让状态更新的步长和读写参数依赖当前输入，把历史汇入递归状态。稀疏注意力和混合结构在两端之间选择：只读部分历史，或让部分层保留完整访问。",
+      "example": "假设文档开头定义变量 x，三万 token 后要找回定义。完整注意力可以直接查询对应位置；递归模型必须把所需信息持续保存在状态里。若只保留局部窗口，就要检查有没有全局层或额外记忆，而不能只看宣传的上下文长度。",
+      "pitfall": "线性复杂度不保证长距离精确检索，也不保证真实硬件更快。RoPE 不是无限长度外推保证；状态、窗口、训练长度和位置缩放都要一起核对。当前本地小模型结果不代表论文规模的能力。",
+      "self_test": {
+        "question": "两个模型都支持 32k 输入，是否说明它们能同样准确地找回首段的任意细节？",
+        "answer": "不能。输入长度只说明接口或运行范围；直接寻址、窗口裁剪、状态容量和训练分布不同，可能造成不同遗忘。应在同预算下用位置与干扰长度受控的检索任务验证。"
+      },
+      "start_here": [
+        "foundation-models:rope",
+        "foundation-models:mamba"
+      ],
+      "reading_order": "先读 RoFormer 的 Q/K 旋转，理解位置与相对关系；再读 Mamba 的输入相关状态更新，比较“直接读取历史”和“把历史写入状态”。之后按需要进入稀疏注意力、混合结构或外部记忆。",
+      "papers": [
+        "foundation-models:alibi",
+        "foundation-models:autonomy-heads",
+        "foundation-models:conv-llm",
+        "foundation-models:dart",
+        "foundation-models:frac-ssm",
+        "foundation-models:gated-attention",
+        "foundation-models:gzip-sparse-attention",
+        "foundation-models:hymba",
+        "foundation-models:kronlstm",
+        "foundation-models:mamba",
+        "foundation-models:memory-mosaics-plus",
+        "foundation-models:minimax-sparse-attention",
+        "foundation-models:moba",
+        "foundation-models:mobius-rope",
+        "foundation-models:ms-gla",
+        "foundation-models:naju",
+        "foundation-models:native-sparse-attention",
+        "foundation-models:oal",
+        "foundation-models:oda",
+        "foundation-models:olmpool-long-context",
+        "foundation-models:openattention",
+        "foundation-models:orthros",
+        "foundation-models:rea",
+        "foundation-models:rope",
+        "foundation-models:sas-attention",
+        "foundation-models:stratified-sparse-attention",
+        "foundation-models:switch-attention",
+        "foundation-models:transmem",
+        "foundation-models:triadic-linear-attention",
+        "foundation-models:ttcd",
+        "foundation-models:ttr-compressor"
+      ]
+    },
+    {
+      "id": "conditional-compute",
+      "title": "按需计算：专家、弹性深宽与查表记忆",
+      "question": "同一参数预算下，每个 token 应该激活哪些参数、运行多少步？",
+      "takeaway": "Switch Transformer 用 top-1 路由让 token 只进入一个专家，并以负载均衡损失防止少数专家拥塞；Engram 用 n-gram 哈希查表补充可学习记忆，减少局部模式反复由计算层重建。动态深度、宽度和循环方法进一步决定本次输入值得运行多少计算。共同问题是把总容量与单次激活成本分开。",
+      "example": "八个专家、每 token 选一个，可以增大总参数而不让每 token 都执行八个 FFN；但热门专家仍可能排队。常见短语若走哈希记忆表，又把一部分计算换成查表和带宽。这两种稀疏并不消除通信、寻址或参数驻留成本。",
+      "pitfall": "专家数增加不等于吞吐按比例提高；路由不均、容量溢出和 all-to-all 可能主导成本。查表存在碰撞与容量权衡，循环层也会增加时延。不要把随机路由诊断或新增 registry 标签当作能力或 evolve 集成证据。",
+      "self_test": {
+        "question": "一个 80B MoE 每 token 激活 8B 参数，是否就只需要存放 8B 参数？",
+        "answer": "不是。激活参数描述本次计算，所有可被路由到的专家仍需驻留或从其他存储加载；显存、通信和单步 FLOPs 是不同预算。应同时报告总参数、激活参数及实测运行成本。"
+      },
+      "start_here": [
+        "foundation-models:switch-transformer",
+        "foundation-models:engram"
+      ],
+      "reading_order": "先读 Switch 的 top-1 专家和均衡约束，再读 Engram 的确定性查表与门控融合，区分条件计算和条件记忆；随后按瓶颈选择动态深宽、循环或路由工作。",
+      "papers": [
+        "foundation-models:adadsf",
+        "foundation-models:blt",
+        "foundation-models:ce-guided-moe",
+        "foundation-models:cots",
+        "foundation-models:elastic-expert-routing",
+        "foundation-models:engram",
+        "foundation-models:lift-feedback",
+        "foundation-models:lngram-v2",
+        "foundation-models:looped-latent-attention",
+        "foundation-models:macro",
+        "foundation-models:memory-grafting",
+        "foundation-models:mhc",
+        "foundation-models:mild",
+        "foundation-models:mirror-moe",
+        "foundation-models:msar",
+        "foundation-models:novelty-patching",
+        "foundation-models:penelope",
+        "foundation-models:persistent-recurrent-memory",
+        "foundation-models:rare",
+        "foundation-models:rd-attnres",
+        "foundation-models:repeat-aware-moe",
+        "foundation-models:sparse-decoding",
+        "foundation-models:switch-transformer",
+        "foundation-models:swrouter",
+        "foundation-models:telescopic-lm",
+        "foundation-models:wide"
+      ]
+    },
+    {
+      "id": "training-budget",
+      "title": "训练预算：数据配比、目标与优化器",
+      "question": "有限训练预算应该先改数据、更新方向，还是模型规模？",
+      "takeaway": "DoReMi 用小代理模型相对参考模型的域级 excess loss 做 Group DRO，学习数据混合比例，再把配比用于目标模型训练。Muon 对隐藏矩阵的动量作近似正交化，并配合衰减和形状缩放；其余参数不能随意照搬同一种更新。两者分别改变“训练看什么”和“梯度怎样走”，应分轴检验。",
+      "example": "代码、网页、百科各占三分之一只是一个起点。DoReMi 的权重取决于相对参考模型的学习困难，不能简单把最高原始 loss 的域全加满。更换 Muon 后还要比较等 token、等时间或等 FLOPs 的曲线，不能只取相同步数的某一个点宣布节省预算。",
+      "pitfall": "小代理得到的配比不保证任意规模都最优，优化器收益也依赖学习率与预算。低精度状态、压缩激活和数据筛选可能影响不同资源。文档中的机制诊断、短预算负结果及高成本未复现都应保留原边界。",
+      "self_test": {
+        "question": "优化器 A 每步 loss 降得快、但一步耗时是 B 的两倍，能直接说 A 更省算力吗？",
+        "answer": "不能。先确定目标是达到同质量所需时间、FLOPs 还是 token 数，再比较对应成本曲线；训练数据和调参预算也要匹配。单步下降和端到端效率不是同一指标。"
+      },
+      "start_here": [
+        "foundation-models:doremi",
+        "foundation-models:muon"
+      ],
+      "reading_order": "先读 DoReMi，明确域权重为什么由 excess loss 而非原始 loss 决定；再读 Muon 的矩阵更新，理解优化方向与非矩阵参数边界。之后看数据选择、低精度状态和训练系统。",
+      "papers": [
+        "foundation-models:adamw4bit",
+        "foundation-models:af-muon",
+        "foundation-models:bit-sparse",
+        "foundation-models:bmuon",
+        "foundation-models:data-mixing-laws",
+        "foundation-models:data-orchestra",
+        "foundation-models:data-quality-lsa",
+        "foundation-models:doremi",
+        "foundation-models:eco-optimizer",
+        "foundation-models:gaugequant",
+        "foundation-models:gemini-for-google",
+        "foundation-models:hardware-diversity",
+        "foundation-models:hilp",
+        "foundation-models:lazyflash",
+        "foundation-models:lct",
+        "foundation-models:me-pois",
+        "foundation-models:modular-robust-generative",
+        "foundation-models:muon",
+        "foundation-models:muon-paired-budget",
+        "foundation-models:musec",
+        "foundation-models:open-1b-audit",
+        "foundation-models:open-language-model",
+        "foundation-models:ppl-factory",
+        "foundation-models:rkl-policy-distillation",
+        "foundation-models:smrc-pmrc",
+        "foundation-models:t-muon",
+        "foundation-models:taco-optimizer",
+        "foundation-models:tess"
+      ]
+    },
+    {
+      "id": "compression-and-cache",
+      "title": "推理压缩：权重、KV 缓存与服务带宽",
+      "question": "显存或时延不够时，真正占资源的是模型权重、历史状态，还是服务搬运？",
+      "takeaway": "AWQ 依据校准激活识别重要通道，以等价缩放降低低比特权重量化误差；GQA 则让多个 Query head 共享较少的 KV head，减少每个历史位置要存的状态。KV 驱逐、量化和分层存储又分别改变保留哪些 token、每个状态用多少位、状态放在哪里。这些机制针对不同资源，不能互相替代。",
+      "example": "把 prompt 从 1k 拉到 32k，模型权重大小基本不变，KV 随序列和并发增长。W4 可能先解决装载问题，却解决不了无限增长的缓存；减少 KV head、压缩状态或驱逐 token 可降低缓存成本，但后两者还要检验量化误差或证据丢失。",
+      "pitfall": "低比特文件变小不等于延迟成比例下降，解包 kernel、带宽和 batch 都有影响。缓存压缩也要检查恢复与重复使用条件。本地重建误差、解析元素数或 CPU 算子通过，不能代替 GPU 吞吐或长上下文能力测量。",
+      "self_test": {
+        "question": "AWQ 的权重量化与 KV 驱逐是否都属于“丢掉不重要的历史 token”？",
+        "answer": "不是。AWQ 改模型静态权重的数值表示；KV 驱逐删除推理中某些位置的缓存。前者主要影响参数存储和数值误差，后者改变可访问的历史证据，必须分别做质量与资源验证。"
+      },
+      "start_here": [
+        "foundation-models:awq",
+        "foundation-models:gqa"
+      ],
+      "reading_order": "先读 AWQ，定位激活感知缩放保护的对象；再读 GQA，画出 Query head 与 KV head 的共享关系。理解静态权重与动态缓存后，再选驱逐、缓存量化或远程存储路线。",
+      "papers": [
+        "foundation-models:agentkv",
+        "foundation-models:awq",
+        "foundation-models:bakron",
+        "foundation-models:beaconkv",
+        "foundation-models:c2kv",
+        "foundation-models:distillcache",
+        "foundation-models:drop-kv",
+        "foundation-models:dualquant",
+        "foundation-models:flint",
+        "foundation-models:fpot",
+        "foundation-models:gqa",
+        "foundation-models:irekogpt",
+        "foundation-models:kvmem",
+        "foundation-models:leapquant",
+        "foundation-models:moezip",
+        "foundation-models:pn-mix",
+        "foundation-models:qevict",
+        "foundation-models:race-rope-compression",
+        "foundation-models:random-attention",
+        "foundation-models:remote-kv-tiers",
+        "foundation-models:replayssm",
+        "foundation-models:right-on-q",
+        "foundation-models:roleq",
+        "foundation-models:rope-relay",
+        "foundation-models:splash",
+        "foundation-models:stepquant",
+        "foundation-models:taskpress",
+        "foundation-models:twinkv",
+        "foundation-models:vfold"
+      ]
+    },
+    {
+      "id": "generation-paths",
+      "title": "生成路径：草稿验证、并行去噪与少步迭代",
+      "question": "如何减少逐 token 串行生成的等待，同时说清输出分布是否改变？",
+      "takeaway": "推测解码先由便宜草稿提出多个 token，再让目标模型批量验证；正确的接受概率与拒绝残差采样可保持目标分布。扩散语言模型则把生成改成多位置去噪，例如 dQwen3.5 需把含递归层的因果骨干改为双向传播。少步生成与共享网络迭代又重新安排精炼轨迹；它们改变的不是同一个层面。",
+      "example": "草稿一次提四个 token，如果目标只接受前两个，后面需要校正和继续生成；加速取决于接受率和验证成本。扩散模型可以一轮更新多个位置，但可能要多轮反复去噪。应比较整段输出质量和总时延，不能只比较一次前向写出多少位置。",
+      "pitfall": "精确推测采样的分布保证依赖完整接受与校正算法，不自动适用于任何多头草稿。扩散或蒸馏后的新模型也不因此与原自回归目标等价。本地 Markov 草稿、参考 kernel 或调用次数不能冒充大型模型的真实加速。",
+      "self_test": {
+        "question": "“推测解码不改变分布”能否直接用来描述把 AR 骨干改成扩散模型？",
+        "answer": "不能。前者在既定目标分布下用接受/拒绝校正重排执行；后者改变模型传播方式、训练目标与解码过程。它需要独立质量评估，不能继承前者的等价采样保证。"
+      },
+      "start_here": [
+        "foundation-models:speculative-decoding",
+        "foundation-models:dqwen35"
+      ],
+      "reading_order": "先读 Fast Inference 的提出、验证与校正采样，明确保证条件；再读 dQwen3.5 的双向混合骨干与并行解码，区分“重排执行”与“训练新生成机制”。随后看自草稿、缓存和少步精炼。",
+      "papers": [
+        "foundation-models:aspire",
+        "foundation-models:data-space-iteration",
+        "foundation-models:dblast",
+        "foundation-models:doublecat-semicat",
+        "foundation-models:dqwen35",
+        "foundation-models:echo",
+        "foundation-models:langdit",
+        "foundation-models:loopspec",
+        "foundation-models:medusa",
+        "foundation-models:pumba",
+        "foundation-models:r4t",
+        "foundation-models:register-tokens-dllm",
+        "foundation-models:speculative-decoding",
+        "foundation-models:tadm",
+        "foundation-models:windowed-mtp"
+      ]
+    },
+    {
+      "id": "evaluation-and-evidence",
+      "title": "能力证据：评测采样、读出与可靠性",
+      "question": "怎样确认高分来自目标能力，而非语言、输入顺序、读出方式或统计偏差？",
+      "takeaway": "XLGoBench 用跨语言可比较的算法任务和客观答案控制任务本身，再改变语言与复杂度以观察能力缺口。ProEval 利用历史逐题评分训练概率替身，按不确定性选择更有信息的测试输入，节省昂贵评分。激活探针、重排校准和水印则审计不同观测通道；先定义想测的能力与可观察量，才能解释分数。",
+      "example": "同一张图最短路题可以换语言而不换正确路径；如果换语言后更差，需要检查翻译是否保留约束。若预算只够测 100 题，主动选题又会改变样本分布，不能直接把所选难题平均分当总体正确率；应使用方法规定的估计与不确定性。",
+      "pitfall": "检测器分数、算子契约通过率和模型能力不同。代理模型可用历史数据，不能提前读目标未测分数或 gold；跨语言差异也不是所有语言能力的完整结论。本地 ProEval 子核心和 XLGoBench scorer 诊断不代表完整论文复现。",
+      "self_test": {
+        "question": "主动挑选了一批疑似失败题，发现平均正确率低，能直接据此估计线上总体正确率吗？",
+        "answer": "不能。样本是按失败可能性筛选的，存在选择偏差；需要定义目标分布并使用相应估计器或另取代表样本。失败发现能力和总体性能估计要分别报告。"
+      },
+      "start_here": [
+        "foundation-models:xlgobench",
+        "foundation-models:proeval"
+      ],
+      "reading_order": "先读 XLGoBench，理解同底层任务、语言和难度受控的比较；再读 ProEval，理解 GP 替身、主动选题与总体分数估计。之后再看探针、校准、安全检测或在线实验。",
+      "papers": [
+        "foundation-models:activation-model-scanner",
+        "foundation-models:combinatorial-watermark",
+        "foundation-models:criticl",
+        "foundation-models:cross-lingual-exploration",
+        "foundation-models:deepsea",
+        "foundation-models:detector-scope",
+        "foundation-models:fuse-verifiers",
+        "foundation-models:gemma-priority-protocol",
+        "foundation-models:interpolated-null-calibration",
+        "foundation-models:mechanistic-etm",
+        "foundation-models:proeval",
+        "foundation-models:tcab",
+        "foundation-models:xlgobench"
+      ]
+    }
+  ]
+}
