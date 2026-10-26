@@ -1,0 +1,197 @@
+/* Keep the learning browser within Material's typography and theme palette. */
+.ar-learning-browser,
+.ar-learning-featured {
+  --ar-learning-line: var(--md-default-fg-color--lightest);
+  --ar-learning-link: var(--md-typeset-a-color);
+}
+
+.ar-learning-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.65rem;
+  margin: 1rem 0 0.45rem;
+}
+
+.ar-learning-controls label {
+  display: grid;
+  flex: 1 1 12rem;
+  gap: 0.25rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.72rem;
+}
+
+.ar-learning-controls label:has([data-learning-search]) {
+  flex-basis: 20rem;
+}
+
+.ar-learning-browser [data-learning-search],
+.ar-learning-browser [data-learning-domain] {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.3rem;
+  padding: 0.45rem 0.65rem;
+  border: 0.05rem solid var(--ar-learning-line);
+  border-radius: 0.35rem;
+  color: var(--md-default-fg-color);
+  background: var(--md-default-bg-color);
+  font: inherit;
+}
+
+.ar-learning-browser [data-learning-search]::placeholder {
+  color: var(--md-default-fg-color--light);
+  opacity: 1;
+}
+
+.ar-learning-browser [data-learning-status] {
+  margin: 0.55rem 0 0.9rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ar-learning-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 0.8rem;
+}
+
+.ar-learning-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem;
+  border: 0.05rem solid var(--ar-learning-line);
+  border-radius: 0.45rem;
+  background: var(--md-default-bg-color);
+}
+
+.md-typeset .ar-learning-card h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.5;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+
+.md-typeset .ar-learning-card p {
+  margin: 0;
+  font-size: 0.76rem;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.ar-learning-card__meta,
+.ar-learning-featured__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+  align-items: center;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.68rem;
+}
+
+.ar-learning-card__domain {
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.2rem;
+  color: var(--ar-learning-link);
+  background: var(--md-code-bg-color);
+}
+
+.ar-learning-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+  align-items: baseline;
+  margin-top: auto;
+  padding-top: 0.2rem;
+  font-size: 0.74rem;
+}
+
+.ar-learning-browser a,
+.ar-learning-featured a {
+  color: var(--ar-learning-link);
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.18em;
+}
+
+.ar-learning-browser a:hover,
+.ar-learning-featured a:hover {
+  text-decoration-line: underline;
+}
+
+.ar-learning-browser [data-learning-more] {
+  display: block;
+  min-height: 2.3rem;
+  margin: 1.1rem auto 0;
+  padding: 0.45rem 1rem;
+  border: 0.05rem solid var(--ar-learning-link);
+  border-radius: 0.35rem;
+  color: var(--ar-learning-link);
+  background: var(--md-default-bg-color);
+  font: inherit;
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+
+.ar-learning-browser [data-learning-more]:hover {
+  background: var(--md-code-bg-color);
+}
+
+.ar-learning-browser :is(a, input, select, button):focus-visible,
+.ar-learning-featured a:focus-visible {
+  outline: 0.12rem solid var(--ar-learning-link);
+  outline-offset: 0.16rem;
+}
+
+.ar-learning-browser .ar-learning-empty {
+  margin: 0.8rem 0;
+  padding: 0.85rem 1rem;
+  border-inline-start: 0.15rem solid var(--ar-learning-line);
+  color: var(--md-default-fg-color--light);
+  background: var(--md-code-bg-color);
+  font-size: 0.76rem;
+}
+
+.ar-learning-featured {
+  margin: 1rem 0 1.3rem;
+  padding: 1.1rem 1.2rem;
+  border: 0.05rem solid var(--ar-learning-line);
+  border-inline-start: 0.18rem solid var(--ar-learning-link);
+  border-radius: 0.45rem;
+  background: var(--md-code-bg-color);
+}
+
+.md-typeset .ar-learning-featured h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.1rem;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.md-typeset .ar-learning-featured p {
+  margin: 0.45rem 0;
+}
+
+/* Material or card layout rules must never override native hidden semantics. */
+.ar-learning-browser[hidden],
+.ar-learning-browser [hidden],
+.ar-learning-featured[hidden],
+.ar-learning-featured [hidden] {
+  display: none !important;
+}
+
+@media (max-width: 44rem) {
+  .ar-learning-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ar-learning-card,
+  .ar-learning-featured {
+    padding: 0.85rem;
+  }
+}
