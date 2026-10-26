@@ -80,6 +80,7 @@ nav:
   - 学习卡片:
       - 学习卡片汇总: learning/index.md
       - 全部论文小卡片: learning/all.md
+      - RankMixer 的特征怎么交互: learning/002-rankmixer-tokenmix.md
       - 长历史要不要每层都重新计算: learning/001-hstu-longer-slimper.md
   - 项目文档:
       - 项目 README: project-readme.md

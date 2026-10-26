@@ -11,6 +11,12 @@
     "question": "首层之后，模型还能否直接重新读取完整长 K/V？",
     "curated_path": "learning/001-hstu-longer-slimper.md"
   },
+  "recommendation:rankmixer": {
+    "summary": "RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。",
+    "local_scope": "本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。",
+    "question": "TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？",
+    "curated_path": "learning/002-rankmixer-tokenmix.md"
+  },
   "recommendation:slimper": {
     "summary": "SlimPer 每层用固定槽位的 user-item 知识库查询用户 token 池，执行 Select–Match–Refine。用户池保持可读，精炼层之间只传播小知识库；输入编码仍可带局部上下文。",
     "local_scope": "本地只在短历史 MovieLens 上验证缩小机制；NDCG@10 +1.29% 仅为 seed 42 的 smoke，未实测生产 QPS 或显存。ROO 共享用户编码，候选相关知识库仍逐候选更新。",
