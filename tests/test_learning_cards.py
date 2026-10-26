@@ -393,3 +393,44 @@ def test_all_paper_links_are_individually_present(repository):
     assert len(re.findall(r'>原论文</a>', content)) == 2
     assert len(re.findall(r'>实现解读</a>', content)) == 2
     assert 'href="../../reproductions/recommendation-other/"' in content
+
+
+def test_learning_assets_change_urls_only_when_their_content_changes(tmp_path, monkeypatch):
+    from scripts import learning_cards_hook as hook
+
+    monkeypatch.setattr(hook, "ROOT", tmp_path)
+    css = "assets/stylesheets/learning-cards.css"
+    js = "assets/javascripts/learning-cards.js"
+    _write(tmp_path, f"docs/{css}", "original style")
+    source = _write(tmp_path, f"docs/{js}", "original script")
+    config = {"extra_css": ["other.css", css], "extra_javascript": [js, "https://example.org/other.js"]}
+    hook._version_learning_assets(config)
+    first_css, first_js = config["extra_css"][1], config["extra_javascript"][0]
+    assert first_css.startswith(css + "?v=")
+    assert first_js.startswith(js + "?v=")
+    hook._version_learning_assets(config)
+    assert config["extra_css"][1] == first_css
+    assert config["extra_javascript"][0] == first_js
+    source.write_text("new script")
+    hook._version_learning_assets(config)
+    assert config["extra_javascript"][0] != first_js
+    assert config["extra_css"][1] == first_css
+    assert config["extra_css"][0] == "other.css"
+    assert config["extra_javascript"][1] == "https://example.org/other.js"
+
+
+def test_versioned_script_keeps_its_loading_options(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    from scripts import learning_cards_hook as hook
+
+    monkeypatch.setattr(hook, "ROOT", tmp_path)
+    js = "assets/javascripts/learning-cards.js"
+    _write(tmp_path, f"docs/{js}", "script")
+    script = SimpleNamespace(path=js + "?lang=zh&v=old#load", type="module", defer=True, async_=True)
+    config = {"docs_dir": tmp_path / "docs", "extra_javascript": [script]}
+    hook._version_learning_assets(config)
+    assert config["extra_javascript"][0] is script
+    assert script.path.startswith(js + "?lang=zh&v=")
+    assert script.path.endswith("#load")
+    assert "old" not in script.path
+    assert (script.type, script.defer, script.async_) == ("module", True, True)
