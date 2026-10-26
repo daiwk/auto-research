@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import importlib
+import importlib.util
 import json
 from pathlib import Path
 import subprocess
@@ -71,7 +71,15 @@ def main():
     started = time.monotonic()
     components = {}
     for expected in spec["components"]:
-        module = importlib.import_module(expected["source"].removeprefix("src/").removesuffix(".py").replace("/", "."))
+        # Execute the proven standalone file, not an installed package nor an
+        # eager parent __init__ that pulls unrelated runtimes into the export.
+        name = "_oct26_component_" + expected["key"].replace("-", "_")
+        module_spec = importlib.util.spec_from_file_location(name, ROOT / expected["source"])
+        if module_spec is None or module_spec.loader is None:
+            raise RuntimeError("frozen component cannot be loaded")
+        module = importlib.util.module_from_spec(module_spec)
+        sys.modules[name] = module
+        module_spec.loader.exec_module(module)
         if Path(module.__file__).resolve() != (ROOT / expected["source"]).resolve():
             raise RuntimeError("imported module is not the frozen source; installed-package shadowing forbidden")
         rows = []
