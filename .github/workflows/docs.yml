@@ -12,8 +12,10 @@ on:
       - "scripts/generate_public_experiment_dashboard.py"
       - "scripts/generate_learning_cards.py"
       - "scripts/learning_cards_hook.py"
+      - "scripts/learning_topics.py"
       - "tests/test_docs_math.py"
       - "tests/test_learning_cards.py"
+      - "tests/test_learning_topics.py"
       - ".github/workflows/docs.yml"
   push:
     branches: [main]
@@ -27,8 +29,10 @@ on:
       - "scripts/generate_public_experiment_dashboard.py"
       - "scripts/generate_learning_cards.py"
       - "scripts/learning_cards_hook.py"
+      - "scripts/learning_topics.py"
       - "tests/test_docs_math.py"
       - "tests/test_learning_cards.py"
+      - "tests/test_learning_topics.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 

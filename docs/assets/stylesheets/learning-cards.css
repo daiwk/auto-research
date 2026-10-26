@@ -1,6 +1,7 @@
 /* Keep the learning browser within Material's typography and theme palette. */
 .ar-learning-browser,
-.ar-learning-featured {
+.ar-learning-featured,
+.ar-learning-topics {
   --ar-learning-line: var(--md-default-fg-color--lightest);
   --ar-learning-link: var(--md-typeset-a-color);
 }
@@ -11,6 +12,16 @@
   align-items: end;
   gap: 0.65rem;
   margin: 1rem 0 0.45rem;
+}
+
+.ar-learning-actions > p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ar-learning-actions .md-button {
+  margin: 0;
 }
 
 .ar-learning-controls label {
@@ -26,7 +37,7 @@
 }
 
 .ar-learning-browser [data-learning-search],
-.ar-learning-browser [data-learning-domain] {
+.ar-learning-browser select {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
@@ -142,6 +153,77 @@
   background: var(--md-code-bg-color);
 }
 
+/* Theme shelves keep the landing page finite; paper lists live one level deeper. */
+.ar-learning-topics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 1rem 0 1.4rem;
+}
+
+.ar-learning-topic-tile {
+  min-width: 0;
+  padding: 1rem;
+  border: 0.05rem solid var(--ar-learning-line);
+  border-top: 0.15rem solid var(--ar-learning-link);
+  border-radius: 0.35rem;
+}
+
+.md-typeset .ar-learning-topic-tile h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.md-typeset .ar-learning-topic-tile p,
+.md-typeset .ar-learning-topic-tile li {
+  font-size: 0.76rem;
+}
+
+.md-typeset .ar-learning-topic-tile details {
+  margin-bottom: 0;
+  box-shadow: none;
+}
+
+.md-typeset .ar-learning-topic-tile ul {
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.md-typeset .ar-learning-topic-tile li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.4rem 0;
+  border-bottom: 0.05rem solid var(--ar-learning-line);
+}
+
+.ar-learning-topic-tile li span,
+.ar-learning-topic-meta {
+  color: var(--md-default-fg-color--light);
+  font-variant-numeric: tabular-nums;
+}
+
+.md-typeset .ar-learning-boundary {
+  margin: 0;
+  padding: 0 0.6rem;
+  border-color: var(--ar-learning-line);
+  box-shadow: none;
+}
+
+.ar-learning-topic-tile summary,
+.ar-learning-boundary summary {
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.ar-learning-topics :is(a, summary):focus-visible {
+  outline: 0.12rem solid var(--ar-learning-link);
+  outline-offset: 0.16rem;
+}
+
 .ar-learning-browser :is(a, input, select, button):focus-visible,
 .ar-learning-featured a:focus-visible {
   outline: 0.12rem solid var(--ar-learning-link);
@@ -186,7 +268,8 @@
 }
 
 @media (max-width: 44rem) {
-  .ar-learning-grid {
+  .ar-learning-grid,
+  .ar-learning-topics {
     grid-template-columns: minmax(0, 1fr);
   }
 

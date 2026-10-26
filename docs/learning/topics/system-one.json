@@ -1,0 +1,80 @@
+{
+  "id": "system-one",
+  "title": "结构化决策",
+  "intro": "把语言模型用于有限候选决策：先看如何读出分布，再检验不变性、推理预算与持续反馈。",
+  "topics": [
+    {
+      "id": "typed-readout",
+      "title": "类型化读出：从生成句子到候选分布",
+      "question": "任务只需从候选中选择时，怎样让模型直接输出可用的决策？",
+      "takeaway": "先明确状态、问题和候选，再选择读出路径。LLM-as-Jev 从模型的选项读出形成有限候选分布，并研究冻结模型与带 KL 锚定的微调；MetaEncoder 把请求和候选独立编码，用相似度做闭集决策或开放检索。前者可以让模型联合看选项，后者能缓存独立候选表示，两者的交互能力与复用成本不同。",
+      "example": "工具路由只有“搜索、计算、拒答”三个动作时，直接返回概率比解析一段自由文本更容易约束。候选多达百万时，双塔可以预编码工具/条目再检索；但需要比较两个候选细节的复杂推理，未必能由一个独立相似度充分表达。",
+      "pitfall": "输出合法 schema 不保证选对，也不保证校准、独立性或任意候选数量下性能稳定。双塔缓存要求候选编码不依赖当前请求。本地 LLM-as-Jev 仅有机制诊断；MetaEncoder 因训练评估成本过高未复现，不能当成本地现成能力。",
+      "self_test": {
+        "question": "候选独立编码并缓存，是否意味着请求也无需重新编码？",
+        "answer": "不是。候选可复用，但状态、问题或图像变化后仍要编码新请求，并计算或检索匹配。若把请求特有信息写进候选编码，原缓存也会失效；应按实际依赖关系划分复用边界。"
+      },
+      "start_here": [
+        "foundation-models:llm2jev",
+        "foundation-models:metaencoder"
+      ],
+      "reading_order": "先读 LLM-as-Jev 的有限候选读出，理解“输出分布而非长句”；再读 MetaEncoder 的共享双塔和独立候选缓存，比较联合选项交互与可检索性。两篇的本地能力状态仍以各自正文为准。",
+      "papers": [
+        "foundation-models:chinese-jev",
+        "foundation-models:editjev",
+        "foundation-models:gliclass",
+        "foundation-models:jev-portuguese-ir",
+        "foundation-models:llm2jev",
+        "foundation-models:metaencoder",
+        "foundation-models:mjev-spatial",
+        "foundation-models:pathjev",
+        "multimodal-models:system-one-rerank"
+      ]
+    },
+    {
+      "id": "candidate-invariance",
+      "title": "候选不变性：顺序、竞争者与概率校准",
+      "question": "只改选项顺序或加入无关候选，为什么原来的偏好可能改变？",
+      "takeaway": "Prism-1 从选择公理出发，让每个选项只读共享状态和自身内容，使用隔离 attention block 和相同起始位置，再对独立分数做 softmax。请求审计则把增加问题、增加证据和增加候选资格分开干预。这样才能区分模型依赖了其他题目、真正获得新证据，还是仅被归一化分母影响。",
+      "example": "原有 A、B 的指数分数是 2、1，加入分数为 5 的 C 后，A 的概率由 2/3 降到 2/8 是正常归一化；A 相对 B 的赔率仍应是 2。若旧二者排序互换，就要排查交叉选项注意力、位置变化或问题 schema 泄漏。",
+      "pitfall": "不变性不保证高准确率，也不禁止新候选 C 成为赢家。“以上皆非”等任务需要跨选项语义，不能机械套独立打分。严格翻转与恰好同分要分开，置信区间包含零也不能写成已证明没有影响；本地审计脚本不等于已生成论文模型预测。",
+      "self_test": {
+        "question": "加入 C 后 A 的绝对概率降低，就足以判定违反候选独立性吗？",
+        "answer": "不足。先比较旧候选的条件概率 A/(A+B) 或赔率 A/B，并保持共享证据不变；分母加入 C 会自然降低 A 的绝对概率。还要区分新增有效信息与单纯候选资格变化。"
+      },
+      "start_here": [
+        "foundation-models:prism-1",
+        "foundation-models:jev-request-audit"
+      ],
+      "reading_order": "先读 Prism-1 的独立选项分数、block mask 和位置编号，明确不变性条件；再读请求审计的三类配对干预，学习怎样测量而不把概率归一化误判为偏好翻转。",
+      "papers": [
+        "foundation-models:jev-multicorrect",
+        "foundation-models:jev-request-audit",
+        "foundation-models:prism-1"
+      ]
+    },
+    {
+      "id": "adaptive-decisions",
+      "title": "按需决策：选择性推理、迁移与持续反馈",
+      "question": "哪些请求值得追加推理，哪些反馈应该影响下一次选择？",
+      "takeaway": "Selective Reasoning 把是否启动推理、何时读取答案、何时接受并停止分成三个控制动作，以共享 reader 读取空前缀和推理中途的候选分布。Jev-DLC 在冻结 scorer 之上保留有界的动作记忆与修正方向，把 accept/revoke 反馈作用于之后的请求。迁移评测还要检验换语言和标签预算后是否仍成立。",
+      "example": "用户把上次的工具 A 改成 B，可作为后续相似请求的反馈，却不能在收到修正后回头把上次报成成功。另一个难题若需要推理，可中途读取候选分布并按预先确定的停止规则结束；“预算耗尽”应另记，不能冒充有把握的早停。",
+      "pitfall": "低熵只表示模型集中，并不等于答案正确，门控与阈值必须在评测前冻结。反馈序列要保持时间顺序；迁移和持续适配不能用未来标签。当前本地包含原测量统计复算或随机输入上的接口诊断，高成本完整模型链路未复现。",
+      "self_test": {
+        "question": "某题得到正确答案反馈后立刻更新并重答，能算持续学习带来的线上成功吗？",
+        "answer": "不能。它已观察当前目标，不再是该题独立预测。应先记录本次原始选择和反馈，再只用更新后的状态评价之后尚未揭晓的请求，并与无反馈或固定策略作同序列比较。"
+      },
+      "start_here": [
+        "foundation-models:selective-reasoning",
+        "foundation-models:jev-dlc"
+      ],
+      "reading_order": "先读 Selective Reasoning 的启动/读取/停止分工，理解单个请求内的预算；再读 Jev-DLC 的有界反馈状态与时间协议，理解请求之间的适配。然后看公共能力与跨语言迁移的边界。",
+      "papers": [
+        "foundation-models:jev-capability",
+        "foundation-models:jev-dlc",
+        "foundation-models:jev-regional-transfer",
+        "foundation-models:selective-reasoning"
+      ]
+    }
+  ]
+}
