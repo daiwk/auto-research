@@ -25,9 +25,15 @@ DOMAINS = {
     "agent-research": "Agent",
 }
 HEADING = re.compile(r"^\s{0,3}(#{1,6})\s+(.+?)\s*#*\s*$")
+TERMINAL_STATUS = re.compile(
+    r"成本过高|不复现|未复现|不执行复现|不提供(?:可执行)?复现|没有本地模型实现"
+)
+DIAGNOSTIC_STATUS = re.compile(
+    r"诊断|概念演示|concept_demo|未运行|未训练|未验证|未执行|复现级别|保真度"
+)
 
 
-def _prose_lines(text: str) -> list[str]:
+def _prose_lines(text: str, *, keep_tables: bool = False) -> list[str]:
     """Discard non-prose blocks before finding headings or paragraphs."""
     result = []
     fence = ""
@@ -69,7 +75,10 @@ def _prose_lines(text: str) -> list[str]:
                 equation = end
             result.append("")
             continue
-        if stripped.startswith(("|", "![", "<img", "<table", "</table")):
+        if stripped.startswith("|"):
+            result.append(line if keep_tables else "")
+            continue
+        if stripped.startswith(("![", "<img", "<table", "</table")):
             result.append("")
             continue
         result.append(line)
@@ -154,6 +163,51 @@ def _metadata(text: str, field: str) -> str:
     return _plain(match.group(1)) if match else ""
 
 
+def _declared_status(lines: list[str], text: str) -> list[str]:
+    """Keep explicit local evidence limits even outside the opening paragraph.
+
+    Source placement varies: a status may follow the metadata table, live in a
+    table cell, or conclude a cost discussion. Never infer it from adapter type.
+    """
+    quotes = _paragraphs([
+        line if line.strip().startswith(">") else "" for line in lines
+    ])
+    candidates = [
+        value for value in quotes
+        if TERMINAL_STATUS.search(value)
+        or re.match(r"^(?:本地|本页|本轮|复现|保真度|成本|完整实验|核心机制|机制|L[0-3])", value)
+    ]
+    for index, line in enumerate(lines):
+        heading = HEADING.match(line)
+        if not heading or not re.search(r"本地|成本|复现边界|验证", heading.group(2)):
+            continue
+        end = len(lines)
+        for following in range(index + 1, len(lines)):
+            next_heading = HEADING.match(lines[following])
+            if next_heading and len(next_heading.group(1)) <= len(heading.group(1)):
+                end = following
+                break
+        candidates.extend(_paragraphs(lines[index + 1:end]))
+        # A heading can itself carry the terminal decision.
+        if TERMINAL_STATUS.search(heading.group(2)):
+            candidates.append(_plain(heading.group(2)))
+    metadata_text = "\n".join(_prose_lines(text, keep_tables=True))
+    for match in re.finditer(r"^\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*$", metadata_text, re.MULTILINE):
+        if re.search(r"本地|成本|复现|实验", match.group(1)):
+            candidates.append(_plain(match.group(2)))
+    statements = [
+        sentence.strip()
+        for paragraph in candidates
+        for sentence in re.split(r"(?<=[。！？；])\s*", paragraph)
+        if sentence.strip()
+    ]
+    terminal = next((value for value in statements if "成本过高" in value and "不复现" in value), "")
+    terminal = terminal or next((value for value in statements if "成本过高" in value), "")
+    terminal = terminal or next((value for value in statements if TERMINAL_STATUS.search(value)), "")
+    diagnostic = next((value for value in statements if DIAGNOSTIC_STATUS.search(value)), "")
+    return list(dict.fromkeys(value for value in (terminal, diagnostic) if value))
+
+
 def _source_link(text: str) -> str:
     match = re.search(
         r"^\|\s*(?:论文|资料)链接\s*\|\s*\[[^\]]+\]\((https?://[^\s)]+)\)",
@@ -210,9 +264,11 @@ def _card(root: Path, paper: dict, overrides: dict) -> dict[str, str]:
             intro.append(line)
     boundary = _paragraphs(_section(lines, r"^(?:复现边界|.*本地.*边界)$"))
     local = _paragraphs(_section(lines, r"^(?:本地|成本)"))
-    local_scope = override.get("local_scope") or _excerpt(
-        _paragraphs(intro) + boundary[:1] + local[:1], 320
+    scope_prose = (
+        [override["local_scope"]] if override.get("local_scope")
+        else _paragraphs(intro) + boundary[:1] + local[:1]
     )
+    local_scope = _excerpt(_declared_status(lines, text) + scope_prose, 320)
     if not summary or not local_scope:
         raise ValueError(f"{identity} needs mechanism and local-scope prose: {path}")
     adapter = paper.get("adapter")

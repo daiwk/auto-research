@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.generate_learning_cards import generate, render
+from scripts.generate_learning_cards import ROOT, generate, render
 
 
 SOURCE = """# 测试方法
@@ -247,6 +247,121 @@ def test_review_only_source_keeps_not_reproduced_status(repository):
     _write(repository, "docs/reproductions/recommendation-example/README.md", source)
     content = render(repository)
     assert "成本过高，不复现（审查 DONE）；没有本地模型实现" in content
+
+
+def test_status_quote_after_paper_metadata_is_preserved(repository):
+    _manifest(repository, [_paper(adapter=None)])
+    source = SOURCE.replace(
+        "> **核心机制诊断。** 本地执行状态更新；没有运行完整模型。\n", ""
+    ).replace(
+        "## 原始论文总结",
+        "> **成本过高，不复现（审查 DONE）**。只收录研究方法。\n\n## 原始论文总结",
+    ).replace(
+        "只验证状态转换，不把诊断当作模型能力。",
+        "原配置依赖内部策略训练，以及独立模拟和裁判调用。",
+    )
+    _write(repository, "docs/reproductions/recommendation-example/README.md", source)
+    content = render(repository)
+    assert "成本过高，不复现（审查 DONE）" in content
+
+
+def test_later_cost_decision_and_metadata_status_take_priority_over_budget(repository):
+    _manifest(repository, [_paper(adapter=None)])
+    source = """# 内容到个性化学习
+
+## 论文信息
+
+| 字段 | 内容 |
+|---|---|
+| 完整实验状态 | 成本过高，不复现（审查 DONE）；不进入自动重试队列 |
+
+## 原始论文总结
+
+### 背景与主要改动
+
+先学习内容与相关性，再把共享预测器迁移到个性化排序。
+
+## 成本判定：不执行复现
+
+完整训练使用64张加速卡，数据包含数百亿曝光。
+
+因此本轮只收录研究方法，成本过高，不复现（审查 DONE）。没有伪造结果。
+"""
+    path = _write(repository, "docs/reproductions/recommendation-example/README.md", source)
+    assert "成本过高，不复现（审查 DONE）" in render(repository)
+    # The later paragraph must also work without a status table entry or a
+    # decision-bearing heading; selecting only the budget paragraph is unsafe.
+    path.write_text(source.replace(
+        "| 完整实验状态 | 成本过高，不复现（审查 DONE）；不进入自动重试队列 |\n", ""
+    ).replace(
+        "## 成本判定：不执行复现", "## 成本与本地状态\n\n本地诊断不复现原论文分数。"
+    ))
+    assert "因此本轮只收录研究方法，成本过高，不复现（审查 DONE）。" in render(repository)
+
+
+def test_later_diagnostic_scope_precedes_budget_and_figure_caption(repository):
+    _manifest(repository, [_paper(adapter=None)])
+    source = SOURCE.replace(
+        "> **核心机制诊断。** 本地执行状态更新；没有运行完整模型。\n", ""
+    ).replace(
+        "## 原始论文总结", "> 原论文 Figure 1，展示原作者的诊断任务。\n\n## 原始论文总结"
+    ).replace(
+        "本地仅在小数据上检查机制；未验证工业吞吐。",
+        "预算为一次短前向。\n\n当前仅为L1机制诊断，没有论文规模的能力验证。",
+    ).replace("只验证状态转换，不把诊断当作模型能力。", "保留逐步状态用于复核。")
+    _write(repository, "docs/reproductions/recommendation-example/README.md", source)
+    content = render(repository)
+    assert "当前仅为L1机制诊断，没有论文规模的能力验证" in content
+    assert "展示原作者的诊断任务" not in content
+
+
+def test_fenced_status_example_is_not_treated_as_current_decision(repository):
+    source = SOURCE.replace(
+        "SHOULD_NOT_APPEAR_FROM_FENCE",
+        "| 完整实验状态 | 成本过高，不复现（审查 DONE） |",
+    )
+    _write(repository, "docs/reproductions/recommendation-example/README.md", source)
+    content = render(repository)
+    assert "成本过高" not in content
+    assert "不复现" not in content
+
+
+def test_null_adapter_does_not_imply_not_reproduced(repository):
+    _manifest(repository, [_paper(adapter=None)])
+    content = render(repository)
+    assert "本地执行状态更新" in content
+    assert "成本过高" not in content
+    assert "不复现" not in content
+
+
+def test_declared_status_cannot_be_removed_by_scope_override(repository):
+    source = SOURCE.replace(
+        "**核心机制诊断。** 本地执行状态更新；没有运行完整模型。",
+        "成本过高，不复现（审查 DONE）；没有本地模型实现。",
+    )
+    _write(repository, "docs/reproductions/recommendation-example/README.md", source)
+    _write(repository, "docs/learning/card-overrides.json", json.dumps({
+        "recommendation:example": {"local_scope": "仅说明方法结构。"}
+    }))
+    assert "成本过高，不复现（审查 DONE）" in render(repository)
+
+
+def test_all_real_null_adapter_cost_decisions_remain_visible():
+    from scripts.generate_learning_cards import _card
+
+    payload = json.loads((ROOT / "docs/research-manifest.json").read_text())
+    overrides_path = ROOT / "docs/learning/card-overrides.json"
+    overrides = json.loads(overrides_path.read_text()) if overrides_path.exists() else {}
+    checked = 0
+    for paper in payload["papers"]:
+        if paper.get("adapter") is not None:
+            continue
+        source = (ROOT / "docs" / paper["detail_path"]).read_text()
+        if "成本过高" in source and "不复现" in source:
+            scope = _card(ROOT, paper, overrides)["local_scope"]
+            assert "成本过高" in scope and "不复现" in scope, paper["key"]
+            checked += 1
+    assert checked > 0
 
 
 def test_summary_does_not_read_omitted_mechanisms_from_paper_specs(repository):
