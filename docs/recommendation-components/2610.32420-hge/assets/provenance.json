@@ -1,0 +1,12 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.32420v1",
+  "source_url": "https://arxiv.org/html/2610.32420v1/pic_2.png",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "68530806d342151382b302f23c34432abb156f1db52a3e7367c3470d5b2c8999",
+  "pixel_dimensions": [839, 405],
+  "description": "Original HGE overall architecture, unchanged PNG from fixed arXiv v1 HTML; visually checked",
+  "copyright": "Zerong Lan et al.; CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "visually_verified": true
+}

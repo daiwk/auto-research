@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.32635v1",
+  "source_url": "https://arxiv.org/html/2610.32635v1/EditJEV_Method.png",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "192c9b303174e55bcf641ff47ff53f7cd305310b52e9d3463210f4e4bab8dd7f",
+  "pixel_dimensions": [
+    1314,
+    402
+  ],
+  "copyright": "Original paper authors; attribution retained; consult fixed paper license",
+  "description": "Original figure asset downloaded byte-for-byte from fixed arXiv v1 HTML; not redrawn or edited",
+  "visually_verified": true,
+  "source_asset_sha256": "192c9b303174e55bcf641ff47ff53f7cd305310b52e9d3463210f4e4bab8dd7f",
+  "method_html_sha256": "5217ea0080d6b21f49f2418d67bcadfa98f81541faef3f311a0a7876304f7da2"
+}

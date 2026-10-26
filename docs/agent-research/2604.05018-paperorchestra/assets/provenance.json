@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/abs/2604.05018v1",
+  "reviewed_version_url": "https://arxiv.org/html/2604.05018v1",
+  "source_url": "https://arxiv.org/html/2604.05018v1/content/figures/overview.png",
+  "image": "paper-figure-01.png",
+  "figure": "Figure 1",
+  "original_caption": "Overview of the PaperOrchestra framework.",
+  "caption_summary_zh": "五Agent从非结构化研究材料生成图文、文献、LaTeX稿件并按审稿分数迭代回退。",
+  "sha256": "06279a0778f88eb55a1484e3d94f2bebed3b0f826b1106d2b9d630fa5c9d7896",
+  "width": 2360,
+  "height": 1228,
+  "extraction": "Original arXiv v1 HTML PNG downloaded unchanged; not regenerated. Original paper attributes its diagram generation to PaperBanana.",
+  "visually_inspected": true,
+  "checked_on": "2026-10-26",
+  "copyright": "版权归原作者所有；原论文CC-BY-4.0，图片用于学术介绍并链接原论文。"
+}

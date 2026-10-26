@@ -4,6 +4,10 @@
 
 ## 网络架构
 
+### JEPA 与决策表征
+
+- [DT-JEPA: Learning to Predict Future Representations for Decision-Making](../../foundation-models/2610.32657-dt-jepa/README.md)（`dt-jepa`）：传统DT用单个return-to-go条件，无法区分回报相同但未来动力学不同的轨迹。本方法将条件改成由历史预测的未来latent分布：历史encoder生成Gaussian参数，EMA target encoder只在训练期编码真实未来；重参数采样的预测未来通过独立gamma/beta MLP调制DT hidden。离线目标为BC加Gaussian NLL；在线通过双target critic的较小值构建多步target，并优化Q1指导的actor目标。
+
 ### JEPA 与关系表征
 
 - [Inside-JEPA: From Prediction to Relational Grounding in Latent World Models](../../foundation-models/2610.31194-inside-jepa/README.md)（`inside-jepa`）：普通 JEPA 能预测潜在状态，但潜变量未必对应可解释关系。本文把每个有序实体对的关系通道直接拼入动态状态，并要求逆动态头根据前后关系通道恢复动作；预测损失的未来目标仍由 EMA 编码器提供，而逆动态的未来状态必须来自**可反传的 online 编码器**。仅预测、读全部状态、只读实体和打乱动作标签的对照用于区分信号来自哪里。[原文 §3](https://arxiv.org/html/2610.31194v1#S3)
@@ -80,6 +84,10 @@
 - [Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders](../../foundation-models/2507.23220-mechanistic-etm/README.md)（`mechanistic-etm`）：固定v3 Section4.2.2 Eqs9–13：δ~N(0,I)、θ=softmaxδ、βk=sigmoid(W_in vk+b)，W_in为冻结SAE ENCODER，不是decoder；每个feature计数~Binomial(Ntokens,[θβ]i)。variational q拓扑与MC noise显式外传，优化NLL+analytic Gaussian KL。Eqs16–19仅steering才用独立SAE DECODER列方向加权单位化，再移除已有parallel分量、注入指定strength。以不同encoder/decoder的负控防隐式绑权。
 
 ## 注意力与长上下文
+
+### 注意力内核与反向传播
+
+- [LazyFlash: Forward-Dense, Backward-Sparse Attention for Accelerated Long-Context Fine-Tuning](../../foundation-models/2610.31911-lazyflash/README.md)（`lazyflash`）：与稀疏前向attention不同，LazyFlash保留训练和部署前向完全dense。它按query block的dO Frobenius范数衡量梯度贡献，用gradient-mass budget约束预计丢弃量，并importance采样反向block。必须在tiled FlashAttention反向内部跳过内存访问/计算，才能兑现论文速度；用PyTorch dense backward后置零或toy mask不构成该方法的低成本完整实现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 稀疏、门控与动态注意力
 
@@ -209,6 +217,10 @@
 
 ## 多模态基础模型
 
+### 医学图像与结构化视觉决策
+
+- [PathJev: Decision-Native Vision–Language Modelling for Histopathology](../../foundation-models/2610.32478-pathjev/README.md)（`pathjev`）：模型一遍前向在question/candidate markers读取hidden，decision head混合candidate线性项、question-candidate交互和set attention，对runtime候选做softmax。head和两阶段训练继承已有OmniMed-Jev；PathJev的重要新增是病理40K states、专家标签到三种typed decisions、split/overlap审计、未见器官与generative readout对照。不能只实现一个普通softmax就声称复现病理泛化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ### 世界模型与具身控制
 
 - [Persistent Planar Memory for Video World Models](../../foundation-models/2610.23795-ppmem/README.md)（`ppmem`）：长视频生成若只保存少量历史帧，跨视角回访容易遗忘场景；持续保存全部像素点云又非常大。PPMem把场景记忆压成可光栅化的平面primitive，在视频生成过程中由同一骨干联合预测，再通过持久pool向后续chunk反馈深度。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -306,12 +318,17 @@
 
 ### System One / JEV 与结构化决策
 
+- [EditJev: System One Routing for Image Editing Models](../../foundation-models/2610.32635-editjev/README.md)（`editjev`）：固定使用一个图像编辑器会忽视样本级互补性。EditJev先离线让所有候选产生输出并由judge评分，再将可靠质量差转为pairwise监督；router不生成模型名称，而直接输出固定候选顺序的utility vector。推理无需先运行各编辑器，仅对utility加beta倍固定速度分后选一次argmax。
 - [Jev-DLC: Decision-Level Continual Learning from Typed Feedback](../../system-one/2610.31521-jev-dlc/README.md)（`jev-dlc`）：类型化决策能给出明确 accept 或 revoke(旧选择→新选择)。Jev-DLC 不把完整历史重新塞进模型，而是在冻结 scorer 上维护两个紧凑通道：保守通道记住重复动作的语义计数与局部方向；响应通道只存当前修正方向。反馈只能影响**之后**的请求，不能先看当前正确答案再报成功。
 - [The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval](../../system-one/2610.14631-request-audit/README.md)（`jev-request-audit`）：合法结构化输出不能保证问题彼此独立。论文分离三种干预：增加请求问题时保持证据和目标命题不变；增加证据时保持原目标、候选资格不变；增加可选候选时保持全部显示证据不变。这样可以区分问题 schema 依赖、真实上下文改变和候选归一化效应。
 - [Does System One Transfer? Calibrated Typed-Decision Models, Label Budgets, and Translation for Indonesian Regional Languages](../../system-one/2610.14112-regional-transfer/README.md)（`jev-regional-transfer`）：“输出概率校准良好”不等于“能可靠排序自己的错误”。本文在 NusaX 的 12 种语言和 NusaTranslation 的 7 种平行语言上，分别研究准确率、校准、错误排序、翻译和所需人工标签量。英语/印尼语和区域语言共享句子 ID，因此跨语言比较需要以句子为聚类单位，而不是把语言版本当独立样本。
 - [LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them](../../foundation-models/2610.02076-llm2jev/README.md)（`llm2jev`）：直接从括号数字选项的 next-token 概率形成有限类别分布；微调时使用 listwise 决策损失，并以 KL 锚定基础模型辅助输出。
 - [Chinese-Jev: Bringing System One Model to Chinese-Language Tasks](../../foundation-models/2609.36965-chinese-jev/README.md)（`chinese-jev`）：Chinese-Jev 面向分类、路由、候选选择等封闭输出任务，用轻量 encoder 读取中文上下文和候选项，以各候选 marker 的隐藏状态直接评分。异构标注统一成候选概率分布，先做 1000 万条通用预训练，再按医疗、法律、金融分别微调。
 - [GLiClass: Generalist Lightweight Model for Sequence Classification Tasks](../../foundation-models/2508.07662-gliclass/README.md)（`gliclass`）：GLiClass 把文本和运行时给定的候选标签放进同一个分类接口，避免生成式 LLM 的解析不稳定，也避免 cross-encoder 对每个文本—标签对逐次推理。本仓库保留“候选内容参与打分”和“一次归一化得到全候选分布”这两个定义性机制。
+
+### 可审计检测与激活解释
+
+- [Building Auditable AI Text Detectors with Sparse Autoencoders](../../foundation-models/2610.30006-detector-scope/README.md)（`detector-scope`）：DetectorScope 把黑盒检测器的残差流转换为 SAE 稀疏特征，按 token 取最大值后跨层拼接，再用自动解释的验证分数筛掉不可靠概念。轻量 L1 线性头只使用保留特征，因此每个预测能分解成可置零核验的概念贡献，而不是在黑盒输出后补写理由。
 
 ### MoE路由与 KV cache
 

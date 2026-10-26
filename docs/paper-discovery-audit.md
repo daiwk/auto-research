@@ -4,7 +4,7 @@
 新首发、历史补发现和修订版分别统计；高成本候选明确不复现、审查完成。
 当前日期、覆盖范围、截至时间和例外仍以[统一状态](paper-discovery-watermark.json)为准。
 
-最新有界选题实现见[2026-10-20批次](research-audits/oct20-components/README.md)：10个低成本组件、3篇高成本资料，六项CUDA路径已做真实A100三种子验收。它与全窗口审查收口分开统计，不把公告条目数当成新论文数，不自行推进水位。
+最新有界选题实现见[2026-10-26批次](research-audits/oct26-components/README.md)：8个低成本L1组件均已做CPU/真实A100同源三种子验收，另有8篇高成本资料明确不复现、审查DONE。Google/Meta优先核对；新公告、近期源码补漏和历史目录补漏分别统计。它与全窗口审查收口分开，不把公告条目数当新论文数，不自行推进水位。此前批次仍保留在[路线记录](research-roadmap.md)。
 
 后续发现并修复了历史筛选缺口，见 [Harness² 与 Google/Meta 补漏](research-audits/harness2-priority-repair/README.md)。
 **日期在当前窗口外、发现账本中出现过，不等于完成方法/成本审查。** 冻结记录保留，但

@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.32977v1",
+  "source_url": "https://arxiv.org/html/2610.32977v1/method.png",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "53e47b55af040cb5ba35e1a70488a1c8059ce17811f9cd5a1805b3d55c9bb2c5",
+  "pixel_dimensions": [
+    2040,
+    638
+  ],
+  "copyright": "Original paper authors; attribution retained; consult fixed paper license",
+  "description": "Original figure asset downloaded byte-for-byte from fixed arXiv v1 HTML; not redrawn or edited",
+  "visually_verified": true,
+  "source_asset_sha256": "53e47b55af040cb5ba35e1a70488a1c8059ce17811f9cd5a1805b3d55c9bb2c5",
+  "method_html_sha256": "290c5dbaf306b0e1772446e42105ad2f7bc37135d19f348ae869aefcd031dbcc"
+}

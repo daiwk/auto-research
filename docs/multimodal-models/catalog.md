@@ -9,6 +9,8 @@
 
 | 方法族 | 论文 / 官方模型 | 机构与日期 | Adapter / 独立组件 |
 |---|---|---|---|
+| 图像匹配与稀疏对应 | [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../multimodal-models/2610.32976-flexglue/README.md) | ETH Zurich，2026-10-23 | 未复现（高成本资料） |
+| 统一动作表示与条件注意力 | [UniAction: Unified Action Conditioning for World Models](../multimodal-models/2610.32977-uniaction/README.md) | Stanford University，2026-10-23 | `uniaction` |
 | 代码、视频与动作联合生成 | [Agentic World Action Models](../multimodal-models/2610.30136-aw0/README.md) | UC Berkeley，2026-10-21 | 未复现（高成本资料） |
 | 单次前向结构化重排 | [Multimodal Reranking Is a System One Decision](../multimodal-models/2610.28435-system-one-rerank/README.md) | Aalto University，2026-10-20 | `system-one-rerank` |
 | 视觉证据约束蒸馏 | [CV-OPD: Contrastive Vision On-policy Distillation](../reproductions/2610.13264-cv-opd/README.md) | Xiamen University，2026-10-09 | `cv-opd` |

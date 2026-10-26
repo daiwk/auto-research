@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "adapter_key": "mart-grpo",
+  "validated_at": "2026-10-26",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python3",
+    "scripts/run_oct26_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "fae525e8939a003d97452bef78b283389c718376",
+    "--frozen-proof",
+    "oct26-frozen-proof.json",
+    "--output",
+    "results/components-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:oct26-mart-grpo-v1",
+    "revision": "sha256:3c54cd44c34045f196f6ed5e2504ae98388df8276fc007c593e5694479f46783",
+    "recipe": "fixed-seeded-component-contracts",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "fae525e8939a003d97452bef78b283389c718376",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "gradient_norm": {
+      "mean": 0.2966798393726834,
+      "std": 0.03199816688254896,
+      "n": 3
+    },
+    "gradient_reference_error": {
+      "mean": 9.25185853854297e-18,
+      "std": 8.012344526598183e-18,
+      "n": 3
+    },
+    "masked_loss": {
+      "mean": -0.125,
+      "std": 0.0,
+      "n": 3
+    },
+    "reference_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "retained_failure_fraction": {
+      "mean": 0.75,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct26_components.py": "09142ff1234513d2708a633fb88631f4422987ed0d5e80198f02317b3998747c",
+    "docs/research-audits/oct26-components/execution-spec.json": "2c260307071ea1ac042fab05a862818795594278767f811568edd4528ffc19b8",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+    "src/auto_research/__init__.py": "ebea89760aafc6784a537e81317c59ccb75661b28340ddf3e788cd12f9ca43f7",
+    "src/auto_research/foundation_models/__init__.py": "a12e1b69e3ea2eed6e8c5a6551f7dc0b123c2fced9ed7d120d79132fb4806c03",
+    "src/auto_research/system_one/__init__.py": "12c22f97762c474284c5a59bb4616ccf210c274401a634f667f7dc4e0e70b092",
+    "src/auto_research/multimodal/__init__.py": "a784e1c821d5bd710f767bbe83d051478357c7da24804abcc0eacf4e1911615a",
+    "src/auto_research/post_training/__init__.py": "35cf722f6d202f5f8bf52059cc355bf18dbf14381fac6abf4720e467ce64a11c",
+    "src/auto_research/agent_research/__init__.py": "f69fbc30eab75bfe746f8735d5c34ec7e6afab5d47f04fcae0fd540846620eea",
+    "src/auto_research/reproductions/__init__.py": "34c58dc0680ea7168bd0e6c5fc813c9c1cd97eed723cc836cc206670a638382e",
+    "src/auto_research/agent_research/frontier_opd.py": "b4fe7c20f1838074a2bd1b8cb2788d02dc50e797e1827ca3e1703fc6a47359aa",
+    "src/auto_research/foundation_models/detector_scope.py": "7affd2136708a3c575161b944f27ed38eab7bdcf8464138bc114570995498374",
+    "src/auto_research/foundation_models/dt_jepa.py": "e309ab436a4502355d95cb2686e7d54ff7a7cf0ea3e146d80951e5fa5acc67ad",
+    "src/auto_research/multimodal/uniaction.py": "ccbd14b00c8c0c6243a5c58e220d91ecc8b2ad31394fb031119654d088956e8b",
+    "src/auto_research/post_training/mart_grpo.py": "7732d349815411649302b382a769eef46a8e90a8e1188e1e509ace2235fb1b36",
+    "src/auto_research/post_training/opst.py": "ce6c2cfde0ebe40943f6e67461c0188bfb478227b9bd5da6a82d68921c626d2a",
+    "src/auto_research/reproductions/hge.py": "2872191c3e6c363f3432970b9ca60f6e6b11c310a656b638b8d76a0c5fe424a6",
+    "src/auto_research/system_one/editjev.py": "c8c84b8e42959c29b3f2a897285bfdfacdbe24a57916da6e6f4889c4f0837b72"
+  },
+  "provenance": {
+    "commit": "fae525e8939a003d97452bef78b283389c718376",
+    "artifact_path": "docs/gpu-validations/mart-grpo-a100-20261026.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct26_components.py": "09142ff1234513d2708a633fb88631f4422987ed0d5e80198f02317b3998747c",
+      "docs/research-audits/oct26-components/execution-spec.json": "2c260307071ea1ac042fab05a862818795594278767f811568edd4528ffc19b8",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "src/auto_research/__init__.py": "ebea89760aafc6784a537e81317c59ccb75661b28340ddf3e788cd12f9ca43f7",
+      "src/auto_research/foundation_models/__init__.py": "a12e1b69e3ea2eed6e8c5a6551f7dc0b123c2fced9ed7d120d79132fb4806c03",
+      "src/auto_research/system_one/__init__.py": "12c22f97762c474284c5a59bb4616ccf210c274401a634f667f7dc4e0e70b092",
+      "src/auto_research/multimodal/__init__.py": "a784e1c821d5bd710f767bbe83d051478357c7da24804abcc0eacf4e1911615a",
+      "src/auto_research/post_training/__init__.py": "35cf722f6d202f5f8bf52059cc355bf18dbf14381fac6abf4720e467ce64a11c",
+      "src/auto_research/agent_research/__init__.py": "f69fbc30eab75bfe746f8735d5c34ec7e6afab5d47f04fcae0fd540846620eea",
+      "src/auto_research/reproductions/__init__.py": "34c58dc0680ea7168bd0e6c5fc813c9c1cd97eed723cc836cc206670a638382e",
+      "src/auto_research/agent_research/frontier_opd.py": "b4fe7c20f1838074a2bd1b8cb2788d02dc50e797e1827ca3e1703fc6a47359aa",
+      "src/auto_research/foundation_models/detector_scope.py": "7affd2136708a3c575161b944f27ed38eab7bdcf8464138bc114570995498374",
+      "src/auto_research/foundation_models/dt_jepa.py": "e309ab436a4502355d95cb2686e7d54ff7a7cf0ea3e146d80951e5fa5acc67ad",
+      "src/auto_research/multimodal/uniaction.py": "ccbd14b00c8c0c6243a5c58e220d91ecc8b2ad31394fb031119654d088956e8b",
+      "src/auto_research/post_training/mart_grpo.py": "7732d349815411649302b382a769eef46a8e90a8e1188e1e509ace2235fb1b36",
+      "src/auto_research/post_training/opst.py": "ce6c2cfde0ebe40943f6e67461c0188bfb478227b9bd5da6a82d68921c626d2a",
+      "src/auto_research/reproductions/hge.py": "2872191c3e6c363f3432970b9ca60f6e6b11c310a656b638b8d76a0c5fe424a6",
+      "src/auto_research/system_one/editjev.py": "c8c84b8e42959c29b3f2a897285bfdfacdbe24a57916da6e6f4889c4f0837b72"
+    },
+    "raw_runner_artifact_sha256": "1f337d341db11571d818641bc43b30ef563394d98bf79ddfb2feca811c6e56c4",
+    "dataset_fingerprint": "sha256:08c704a93a7fe082650692adf69af6e138d1dc8e368ec263004847c45c3956a8",
+    "metric_artifact_path": "docs/post-training/2610.32431-mart-grpo/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

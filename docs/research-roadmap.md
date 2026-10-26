@@ -4,6 +4,10 @@
 
 [本批完整25条结论与验收](research-audits/google-emnlp25-closure/README.md)：14项低成本L1组件、8篇高成本完整实验不复现（审查DONE）、3篇不接收。10项CUDA路径在真实A100三种子验收，另4项纯CPU；不提升为完整模型/能力或Evolve证据。原先的25条元数据线索有了逐篇方法/成本/来源处置，不再留为未读队列；原会议页另外4条来源例外不在本次批准范围。全局审查水位不变。
 
+## 2026-10-26 新公告与优先机构
+
+[本批固定范围与来源记录](research-audits/oct26-components/README.md)：Google OPST、DeepMind合作DetectorScope优先，另有HGE、Frontier-OPD、MART-GRPO、DT-JEPA、EditJev与UniAction的8个低成本L1组件，均完成冻结源码CPU/A100三种子核验。8项高成本完整实验仅资料收录、审查DONE，不自动重试。公告身份、源码触发补漏、两篇Google历史目录补漏分开统计；不把1180分类条目当新论文数，也不宣称835身份全部全文审完。全局审查水位仍为10月15日。
+
 ## 2026-10-25 优先机构与历史补漏
 
 [本批三项限定交付与来源记录](research-audits/oct25-priority-components/README.md)：Meta最小编辑OPD优先，另有Inside-JEPA，以及Google/DeepMind合作的GroupDPO历史补漏；三个L1组件均在真实A100三种子执行。八类arXiv仍是10月23日公告，未出现新公告批次，不把会议收录列表当作当天新首发。GenIA与GRIP完整实验高成本不复现、审查DONE；AmbiGUI只记未附规范论文身份的官方源码发布。Google/Meta目录失败保留unknown；全局审查水位仍为10月15日，不声明全窗口全文闭环。

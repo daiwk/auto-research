@@ -1,0 +1,222 @@
+{
+  "schema_version": 2,
+  "method": "detector-scope",
+  "manifest_ref": "foundation-models:detector-scope",
+  "dataset": {
+    "id": "synthetic:oct26-detector-scope-v1",
+    "revision": "sha256:3c54cd44c34045f196f6ed5e2504ae98388df8276fc007c593e5694479f46783",
+    "recipe": "fixed-seeded-component-contracts",
+    "capability_benchmark": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "fixture_bce_before": 0.6931471805599452,
+        "fixture_bce_after": 0.693102799087963,
+        "gradient_norm": 0.039255138794802455,
+        "raw_fold_error": 1.0842021724855044e-19,
+        "counterfactual_attribution_error": 1.0842021724855044e-19,
+        "padding_negative_control_gap": 9998.709503136077,
+        "rms_leakage_negative_control_gap": 389204.93751615856,
+        "retained_features": 5,
+        "nonzero_head_weights": 3,
+        "training_documents": 12,
+        "held_out_documents": 4,
+        "optimizer_steps": 1,
+        "pretrained_model_calls": 0
+      },
+      "checks": {
+        "max_pool_masks_padding_and_concatenates_layers": true,
+        "spearman_ties_and_global_mask": true,
+        "training_only_rms_no_centering": true,
+        "external_sae_and_validation_scores_frozen": true,
+        "actual_sgd_momentum_proximal_update": true,
+        "proximal_exact_zeros_bias_not_shrunk": true,
+        "folded_raw_weights_match_normalized_logits": true,
+        "zero_ablation_is_exact_logit_contribution": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "fixture_bce_before": 0.6931471805599452,
+        "fixture_bce_after": 0.693081349887864,
+        "gradient_norm": 0.04769396682915904,
+        "raw_fold_error": 2.168404344971009e-19,
+        "counterfactual_attribution_error": 2.168404344971009e-19,
+        "padding_negative_control_gap": 9998.899099584829,
+        "rms_leakage_negative_control_gap": 450334.4968289046,
+        "retained_features": 5,
+        "nonzero_head_weights": 3,
+        "training_documents": 12,
+        "held_out_documents": 4,
+        "optimizer_steps": 1,
+        "pretrained_model_calls": 0
+      },
+      "checks": {
+        "max_pool_masks_padding_and_concatenates_layers": true,
+        "spearman_ties_and_global_mask": true,
+        "training_only_rms_no_centering": true,
+        "external_sae_and_validation_scores_frozen": true,
+        "actual_sgd_momentum_proximal_update": true,
+        "proximal_exact_zeros_bias_not_shrunk": true,
+        "folded_raw_weights_match_normalized_logits": true,
+        "zero_ablation_is_exact_logit_contribution": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "fixture_bce_before": 0.6931471805599452,
+        "fixture_bce_after": 0.6930340228042609,
+        "gradient_norm": 0.06234810779010002,
+        "raw_fold_error": 0.0,
+        "counterfactual_attribution_error": 0.0,
+        "padding_negative_control_gap": 9998.83877193832,
+        "rms_leakage_negative_control_gap": 452428.71046976594,
+        "retained_features": 5,
+        "nonzero_head_weights": 3,
+        "training_documents": 12,
+        "held_out_documents": 4,
+        "optimizer_steps": 1,
+        "pretrained_model_calls": 0
+      },
+      "checks": {
+        "max_pool_masks_padding_and_concatenates_layers": true,
+        "spearman_ties_and_global_mask": true,
+        "training_only_rms_no_centering": true,
+        "external_sae_and_validation_scores_frozen": true,
+        "actual_sgd_momentum_proximal_update": true,
+        "proximal_exact_zeros_bias_not_shrunk": true,
+        "folded_raw_weights_match_normalized_logits": true,
+        "zero_ablation_is_exact_logit_contribution": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "counterfactual_attribution_error": {
+      "mean": 1.0842021724855044e-19,
+      "std": 1.0842021724855044e-19,
+      "n": 3
+    },
+    "fixture_bce_after": {
+      "mean": 0.6930727239266959,
+      "std": 3.5190193300468094e-05,
+      "n": 3
+    },
+    "fixture_bce_before": {
+      "mean": 0.6931471805599452,
+      "std": 0.0,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 0.04976573780468717,
+      "std": 0.011685053721987086,
+      "n": 3
+    },
+    "held_out_documents": {
+      "mean": 4,
+      "std": 0.0,
+      "n": 3
+    },
+    "nonzero_head_weights": {
+      "mean": 3,
+      "std": 0.0,
+      "n": 3
+    },
+    "optimizer_steps": {
+      "mean": 1,
+      "std": 0.0,
+      "n": 3
+    },
+    "padding_negative_control_gap": {
+      "mean": 9998.815791553076,
+      "std": 0.09686473519486809,
+      "n": 3
+    },
+    "pretrained_model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "raw_fold_error": {
+      "mean": 1.0842021724855044e-19,
+      "std": 1.0842021724855044e-19,
+      "n": 3
+    },
+    "retained_features": {
+      "mean": 5,
+      "std": 0.0,
+      "n": 3
+    },
+    "rms_leakage_negative_control_gap": {
+      "mean": 430656.0482716097,
+      "std": 35912.98330463372,
+      "n": 3
+    },
+    "training_documents": {
+      "mean": 12,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "L1 mechanism contracts, not pretrained capability or full paper reproduction"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "fae525e8939a003d97452bef78b283389c718376",
+    "artifact_path": "docs/foundation-models/2610.30006-detector-scope/metrics/component-cuda-seeds42-44.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct26_components.py": "09142ff1234513d2708a633fb88631f4422987ed0d5e80198f02317b3998747c",
+      "docs/research-audits/oct26-components/execution-spec.json": "2c260307071ea1ac042fab05a862818795594278767f811568edd4528ffc19b8",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "src/auto_research/__init__.py": "ebea89760aafc6784a537e81317c59ccb75661b28340ddf3e788cd12f9ca43f7",
+      "src/auto_research/foundation_models/__init__.py": "a12e1b69e3ea2eed6e8c5a6551f7dc0b123c2fced9ed7d120d79132fb4806c03",
+      "src/auto_research/system_one/__init__.py": "12c22f97762c474284c5a59bb4616ccf210c274401a634f667f7dc4e0e70b092",
+      "src/auto_research/multimodal/__init__.py": "a784e1c821d5bd710f767bbe83d051478357c7da24804abcc0eacf4e1911615a",
+      "src/auto_research/post_training/__init__.py": "35cf722f6d202f5f8bf52059cc355bf18dbf14381fac6abf4720e467ce64a11c",
+      "src/auto_research/agent_research/__init__.py": "f69fbc30eab75bfe746f8735d5c34ec7e6afab5d47f04fcae0fd540846620eea",
+      "src/auto_research/reproductions/__init__.py": "34c58dc0680ea7168bd0e6c5fc813c9c1cd97eed723cc836cc206670a638382e",
+      "src/auto_research/agent_research/frontier_opd.py": "b4fe7c20f1838074a2bd1b8cb2788d02dc50e797e1827ca3e1703fc6a47359aa",
+      "src/auto_research/foundation_models/detector_scope.py": "7affd2136708a3c575161b944f27ed38eab7bdcf8464138bc114570995498374",
+      "src/auto_research/foundation_models/dt_jepa.py": "e309ab436a4502355d95cb2686e7d54ff7a7cf0ea3e146d80951e5fa5acc67ad",
+      "src/auto_research/multimodal/uniaction.py": "ccbd14b00c8c0c6243a5c58e220d91ecc8b2ad31394fb031119654d088956e8b",
+      "src/auto_research/post_training/mart_grpo.py": "7732d349815411649302b382a769eef46a8e90a8e1188e1e509ace2235fb1b36",
+      "src/auto_research/post_training/opst.py": "ce6c2cfde0ebe40943f6e67461c0188bfb478227b9bd5da6a82d68921c626d2a",
+      "src/auto_research/reproductions/hge.py": "2872191c3e6c363f3432970b9ca60f6e6b11c310a656b638b8d76a0c5fe424a6",
+      "src/auto_research/system_one/editjev.py": "c8c84b8e42959c29b3f2a897285bfdfacdbe24a57916da6e6f4889c4f0837b72"
+    },
+    "raw_runner_artifact_sha256": "1f337d341db11571d818641bc43b30ef563394d98bf79ddfb2feca811c6e56c4",
+    "dataset_fingerprint": "sha256:eeaba82640d17a1d5b0c0c0ea0f8ea60a89b5771cf43f15a63c0c22f07a955a4"
+  }
+}

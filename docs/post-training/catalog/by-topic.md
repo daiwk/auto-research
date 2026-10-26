@@ -41,6 +41,7 @@
 
 ### on-policy / context 蒸馏
 
+- [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../2610.32770-opst/README.md)（`opst`）：通常的 on-policy self-distillation 仍需要人工问题集。OPST 按主题自生成问题和特权解题线索，经独立重答、改写与学生难度门过滤，再由额外看到线索的 EMA 教师在学生实际生成的前缀上提供分布监督，而不是要求学生直接模仿生成器表述。
 - [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](../2610.30796-gift/README.md)（`gift`）：终局正确性驱动的 RL 梯度与教师模仿梯度可能相冲突。GIFT 在原始词表 logits 空间分解两者：先最少纳入冲突 token，再优先保留提供正交新方向的教师监督；训练逐步缩减被蒸馏的 token 数量，保留项的强度不稀释。
 - [UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents](../2610.30932-userarena-optd/README.md)（`userarena-optd`）：逐步动作命中率不能说明用户模拟器能否保持跨会话偏好，更不能说明模拟出来的推荐政策差异是否接近真实生产A/B。UserArena把细粒度页面、动作和跨会话记录统一成13种动作环境，分Replay与Rollout评估五层保真度：可执行性、局部行为、轨迹动态、个体群体差异和最终结果。
 - [When to Follow the Teacher: Advantage-Based On-Policy Distillation](../2610.31563-aopd/README.md)（`aopd`）：普通 OPD 在学生实际访问的状态上模仿教师，但教师偏好的动作不一定能被当前学生继续完成。AOPD 用该动作对学生最终奖励的优势加权教师监督，通过学生原有 rollout、终局奖励及教师重要性比率估计，不额外生成反事实续写。
@@ -393,6 +394,7 @@
 
 ### 步骤奖励与信用分配
 
+- [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](../2610.32431-mart-grpo/README.md)（`mart-grpo`）：一次机器人最终失败，不等于每个动作都导致失败；全轨迹负优势还会惩罚有价值的重抓和恢复尝试。MART-GRPO 用冻结事件 VLM 回看完整失败轨迹，定位最后一次未恢复错误，只保留截止该边界的失败反馈；成功轨迹、原组优势和原始 token 分母不变。
 - [T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning](../2610.00388-t2spo/README.md)（`t2spo`）：用历史成功轨迹中的剩余步数训练上下文内距离估计器，预测每个状态距离成功还多远；把相邻状态的距离改善转为步骤优势，与轨迹级奖励共同优化。冻结 TabPFN 避免额外训练 critic，失败轨迹不被误标成接近成功的正样本。
 
 ## 偏好建模与监督

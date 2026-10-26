@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-10 · [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../2610.32770-opst/README.md)（`opst`）：通常的 on-policy self-distillation 仍需要人工问题集。OPST 按主题自生成问题和特权解题线索，经独立重答、改写与学生难度门过滤，再由额外看到线索的 EMA 教师在学生实际生成的前缀上提供分布监督，而不是要求学生直接模仿生成器表述。
+- 2026-10 · [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](../2610.32431-mart-grpo/README.md)（`mart-grpo`）：一次机器人最终失败，不等于每个动作都导致失败；全轨迹负优势还会惩罚有价值的重抓和恢复尝试。MART-GRPO 用冻结事件 VLM 回看完整失败轨迹，定位最后一次未恢复错误，只保留截止该边界的失败反馈；成功轨迹、原组优势和原始 token 分母不变。
 - 2026-10 · [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](../2610.30796-gift/README.md)（`gift`）：终局正确性驱动的 RL 梯度与教师模仿梯度可能相冲突。GIFT 在原始词表 logits 空间分解两者：先最少纳入冲突 token，再优先保留提供正交新方向的教师监督；训练逐步缩减被蒸馏的 token 数量，保留项的强度不稀释。
 - 2026-10 · [MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback](../2610.30873-moer/README.md)（`moer`）：既有混合策略训练直接加入完整专家解法，可能削弱探索；专家前缀引导虽允许学生续写，却可能把错误续写继续作为监督。MOER 逐步缩短专家 CoT 前缀：成功则保留前缀加续写，失败则回滚到已有的完整、已验证专家轨迹。
 - 2026-10 · [UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents](../2610.30932-userarena-optd/README.md)（`userarena-optd`）：逐步动作命中率不能说明用户模拟器能否保持跨会话偏好，更不能说明模拟出来的推荐政策差异是否接近真实生产A/B。UserArena把细粒度页面、动作和跨会话记录统一成13种动作环境，分Replay与Rollout评估五层保真度：可执行性、局部行为、轨迹动态、个体群体差异和最终结果。

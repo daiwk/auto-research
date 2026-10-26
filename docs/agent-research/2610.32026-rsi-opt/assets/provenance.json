@@ -1,0 +1,15 @@
+{
+  "paper_id": "2610.32026v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/pdf/2610.32026v1",
+  "source_url": "https://arxiv.org/pdf/2610.32026v1",
+  "pdf_page": 4,
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "abe339eebd17e3e6508d1875f8edaec9258524052e47a1e6ee6607f2ea8dde46",
+  "license": "CC BY 4.0",
+  "transformation": "Direct PDF rasterization,2x,clip=[70,75,545,475]points;original figure and complete caption retained,not redrawn",
+  "visually_verified": true,
+  "visual_review": "目视核原PDF第4页Figure1：archive/meta-agent/child policy、run内optimizer改写和完整caption均保留，无截断正文",
+  "checked_on": "2026-10-26"
+}

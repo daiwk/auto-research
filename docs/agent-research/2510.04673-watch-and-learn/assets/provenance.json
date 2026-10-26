@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/abs/2510.04673v1",
+  "reviewed_version_url": "https://arxiv.org/html/2510.04673v1",
+  "source_url": "https://arxiv.org/html/2510.04673v1/arxiv_google/figs/figure2.jpg",
+  "image": "paper-figure-01.png",
+  "figure": "Figure 2",
+  "original_caption": "Method overview.",
+  "caption_summary_zh": "从状态转移训练IDM，再检索和标注教程视频，用于CUA上下文示范与训练。",
+  "sha256": "d623fb31d31fe86c22bf270702b9ea75bffc47ab8d87b5c9ae87867aed787e41",
+  "width": 2400,
+  "height": 1216,
+  "extraction": "Original arXiv v1 HTML JPEG converted to PNG, proportionally resized to width2400; all panels preserved; not redrawn.",
+  "visually_inspected": true,
+  "checked_on": "2026-10-26",
+  "copyright": "版权归原作者所有；原论文CC-BY-4.0，图片用于学术介绍并链接原论文。"
+}

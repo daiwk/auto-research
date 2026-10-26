@@ -18,6 +18,10 @@
 
 - 2026-10-08 · [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](../../multimodal-models/2610.12060-vimod/README.md)（`vimod`）：一次性压缩图像可能丢掉后续推理需要的细节。DART 学习可变区域大小和成员，生成始终驻留的 Coarse KV；原始 Fine KV 仍保留。TRACE 根据已生成文本的因果隐状态决定保持或替换工作集，通过 Joint-KV 恢复原始细节。
 
+## ETH Zurich
+
+- 2026-10-23 · [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../../multimodal-models/2610.32976-flexglue/README.md)（`flexglue`）：稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Google DeepMind
 
 - 2026-10-06 · [EmbeddingGemma 2: Open Multimodal Embeddings](../../multimodal-models/embeddinggemma2/README.md)（`embedding-gemma2`）：EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。
@@ -54,6 +58,10 @@
 ## Sichuan University
 
 - 2026-09-15 · [StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection](../../multimodal-models/2609.16841-stacktok/README.md)（`stacktok`）：把 query relevance 作为目标、coverage 作为随预算变化的支撑约束，逐步在两种选取准则间切换。
+
+## Stanford University
+
+- 2026-10-23 · [UniAction: Unified Action Conditioning for World Models](../../multimodal-models/2610.32977-uniaction/README.md)（`uniaction`）：异质动作以不同粒度编码，token较多的动作在同一softmax中会仅因数量而占据更大attention mass。UniAction以共享semantic codebook编码元素身份，将(t,y,x)送入既有视频模型的native positional mechanism，再对action部分统一加一个基数bias，保持action内部相对logits不变，同时移除总mass对Na的线性依赖。
 
 ## TU Darmstadt & hessian.AI
 

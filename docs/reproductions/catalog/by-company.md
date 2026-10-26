@@ -182,6 +182,7 @@
 - 2024-03 · [LSVCR](../2403.13574-lsvcr/README.md)：用 LoRA 学习 LLM 偏好，通过 SSC/VCC 双序列目标对齐评论语义和用户行为。
 
 ## Meituan
+- [Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion](../../recommendation-components/2610.32420-hge/README.md)：先以商品自注意力编码竞争，再注入用户/门店/上下文；将门店GTV拆为转化概率乘条件商品购买概率、数量和价格之和，再用有符号残差与按样本门控融合通用回归。本地是Eqs2--11可微L1组件，不含DIN/DCN、论文完整Dice塔或生产训练，不能声称复现+1.42%线上收益。
 - 2026-07 · [CORE](../2607.24417-core-relevance/README.md)：把三级电商相关性拆成两道条件边界，以 step-GRPO 提供细粒度 credit，再将 PostCoT LLM 蒸馏到在线双头模型。
 - 2026-07 · [NONTP](../2607.12277-nontp/README.md)：在 NTP 上加入未来状态对比学习和跨域 hidden-state pooling，扩大生成式推荐的训练监督覆盖。
 - 2026-04 · [MBGR](../2604.02684-mbgr/README.md)：通过 business-aware SID、共享 MoE 和最近未来标签路由，同时学习多个业务域的生成目标。

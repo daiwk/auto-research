@@ -10,6 +10,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Agentic OPD / rollout budgeting | [Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond](2610.32802-frontier-opd/README.md) | Tsinghua University，2026-10-23 | [原作者入口](https://github.com/jiangz20/FrontierOPD)；原文声明仓库，但2026-10-26 git ls-remote返回Repository not found，raw LICENSE404；无法核验公开源码，不声明已确认开源 | `frontier-opd`：仅低成本组件，完整实验不复现 |
+| Agent评测与自进化 | [HarnessMM: Recursive Self-Improvement for Harness Token Efficiency](2610.32813-harnessmm/README.md) | Tsinghua University，2026-10-23 | 未发现官方代码 | 计划键 `harnessmm`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| Agent评测与自进化 | [ImageRSI: Verification-Driven Recursive Self-Improvement for Agentic Image Generation](2610.32120-image-rsi/README.md) | University of Science and Technology of China，2026-10-23 | 未发现官方代码 | 计划键 `image-rsi`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| Agent评测与自进化 | [RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training](2610.32026-rsi-opt/README.md) | Purdue University，2026-10-23 | 未发现官方代码 | 计划键 `rsi-opt`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Agent 训练与策略优化 | [Asymmetric On-Policy Distillation Learns In-Context Exploration](2610.30105-asteroid/README.md) | University of Washington，2026-10-21 | [原作者入口](https://github.com/WEIRDLabUW/asteroid)；原作者源码可见；固定95eee5ee66488af3aaa0aa55a09ae163b1ca3778未找到LICENSE/COPYING，未确认开放许可。本地根据论文独立实现，不复制作者源码 | `asteroid`：仅低成本组件，完整实验不复现 |
 | 公开评测协议 | [PLE: Physical-Engineering's Last Exam](2610.30537-physical-engineering-exam/README.md) | Google Cloud AI Research，2026-10-21 | [原作者入口](https://github.com/google-research/ple)；官方代码已公开；固定70ed96281d87380926a0d7c08e21799fd5edee63为10月23日最终29dev/56hidden协议发布。仅离线配置/产物/外部评分协议，不执行作者runner、容器或模型。 | `physical-engineering-exam`：仅低成本组件，完整实验不复现 |
 | Agent运行时 | [Cache Engineering for Agents](2610.28577-cache-engineering/README.md) | Tsinghua University，2026-10-20 | [原作者入口](https://github.com/thu-nics/AKV)；作者正文链接的官方AKV实现已核验；本轮不安装或运行完整serving系统。 | 计划键 `cache-engineering`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
@@ -204,6 +208,7 @@
 | 工具调用与环境执行 | [LogAct: Enabling Agentic Reliability via Shared Logs](2604.07988-logact/README.md) | Meta，2026-04-09 | [原作者入口](https://github.com/facebookresearch/logact)；原作者MIT仓库已公开；核对固定commit db395449fb2dbb534c8eec848900252ac8324ab2。本地独立实现有界单机SQLite协议，不安装作者插件或下载模型 | `logact`：仅低成本组件，完整实验不复现 |
 | 策略—工具图共进化 | [SEARL](2604.07791-searl/README.md) | Shanghai AI Laboratory，2026-04-09 | 未发现官方代码 | `searl` |
 | Agent 评测 | [TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems](2604.05364-tfrbench/README.md) | Google Cloud AI Research / University of Kentucky，2026-04-07 | 未发现官方代码 | `tfrbench`：CPU 评测接口，不执行模型 |
+| 多Agent协作 | [PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing](2604.05018-paperorchestra/README.md) | Google Cloud AI Research，2026-04-06 | 未发现官方代码 | 计划键 `paperorchestra`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Agent 数据合成 | [Reasoning-Driven Synthetic Data Generation and Evaluation](2603.29791-simula/README.md) | EPFL，2026-03-31 | 未发现官方代码 | `simula`：CPU 评测接口，不执行模型 |
 | AI 研究 Agent | [AIRA2: Overcoming Bottlenecks in AI Research Agents](2603.26499-aira2/README.md) | FAIR at Meta / University College London，2026-03-27 | 未发现官方代码 | `aira2` |
 | RSI | [HyperAgents](2603.19461-hyperagents/README.md) | University of British Columbia，2026-03-19 | [已开源](https://github.com/facebookresearch/hyperagents) | `hyperagents` |
@@ -225,6 +230,7 @@
 | 零数据多 Agent | [Agent0](2511.16043-agent0/README.md) | University of North Carolina at Chapel Hill，2025-11-20 | 未发现官方代码 | `agent0` |
 | Agentic RL 基础设施 | [Agent-R1](2511.14460-agent-r1/README.md) | University of Science and Technology of China，2025-11-18 | [已开源](https://github.com/AgentR1/Agent-R1) | `agent-r1` |
 | 过程记忆 | [LEGOMem](2510.04851-legomem/README.md) | Microsoft Research，2025-10-06 | 未发现官方代码 | `legomem` |
+| 工具与环境交互 | [Watch and Learn: Learning to Use Computers from Online Videos](2510.04673-watch-and-learn/README.md) | The Ohio State University，2025-10-06 | 未发现官方代码 | 计划键 `watch-and-learn`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 多轮用户 Agent RL | [MUA-RL](2508.18669-mua-rl/README.md) | Meituan，2025-08-26 | [已开源](https://github.com/zzwkk/MUA-RL) | `mua-rl` |
 | 工具学习 | [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](2508.04086-toolgrad/README.md) | Google，2025-08-06 | [已开源](https://github.com/zhongyi-zhou/toolgrad) | `toolgrad` |
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | Microsoft Research，2025-08-05 | [已开源](https://github.com/microsoft/agent-lightning) | `agent-lightning` |
