@@ -59,6 +59,14 @@ def topic_repo(tmp_path):
         }],
     }
     _write(tmp_path, "docs/learning/topics/recommendation.json", json.dumps(theme))
+    _write(tmp_path, "docs/learning/questions/recommendation.json", json.dumps({
+        "schema_version": 1, "papers": {"recommendation:first": {"questions": [{
+            "id": "mechanism", "question": "短查询为何仍需保留长历史？",
+            "answer": "查询是读取入口，历史保存可寻址证据，二者不能混为同一状态。",
+            "example": "教学例子：少量查询可按需读取多条旧记录。",
+            "source_sections": ["背景与主要改动"], "added": "2026-10-27",
+        }]}}
+    }))
     return tmp_path, theme
 
 
@@ -71,14 +79,15 @@ def test_topic_pages_have_guides_sources_and_correct_routes(topic_repo):
                   "../../../reproductions/first/README.md"]:
         # Markdown source links must keep .md; raw HTML links target deployed routes.
         assert value in page
-    assert '[跨主题搜索全部卡片](../../all.md)' in page
+    assert '[跨主题搜索全部问答](../../all.md)' in page
     assert 'href="../../../../reproductions/first/"' in page
-    assert '本地范围与边界 · 成本过高，未复现</summary>' in page
+    assert '短查询为何仍需保留长历史' in page
+    assert 'ar-learning-boundary' not in page
     assert 'data-learning-page-size="12"' in page
     hub = (root / "docs/learning/index.md").read_text()
     assert "保留人工精选和说明" in hub and "保留结尾" in hub
-    assert "1 个主题 · 1 张导学卡 · 1 张论文卡" in hub
-    assert '<details><summary>查看子主题与导学卡' in hub
+    assert "1 个主题 · 1 个子主题 · 1 个问题 / 1 篇论文" in hub
+    assert '<details><summary>展开子主题问题库' in hub
     assert 'href="paths/recommendation/sequence/"' in hub
 
 

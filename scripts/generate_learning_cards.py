@@ -47,6 +47,18 @@ def _topic_module():
     return sys.modules[name]
 
 
+def _question_module():
+    name = "_auto_research_learning_questions"
+    if name not in sys.modules:
+        spec = spec_from_file_location(name, Path(__file__).with_name("learning_questions.py"))
+        if spec is None or spec.loader is None:
+            raise RuntimeError("Cannot load learning question bank")
+        module = module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+    return sys.modules[name]
+
+
 def _prose_lines(text: str, *, keep_tables: bool = False) -> list[str]:
     """Discard non-prose blocks before finding headings or paragraphs."""
     result = []
@@ -348,6 +360,18 @@ def _collection(root: Path) -> tuple[list[dict], list[dict]]:
     topics = _topic_module()
     themes = topics.load_topics(root, set(identities))
     topics.assign_topics(cards, themes)
+    questions = _question_module()
+    bank = questions.load_questions(root, {
+        f"{paper['domain']}:{paper['key']}": paper for paper in payload["papers"]
+    })
+    for card in cards:
+        card["questions"] = bank.get(card["identity"], [])
+    for theme in themes:
+        theme["question_count"] = questions.question_count([card for card in cards if card["theme"] == theme["id"]])
+        for topic in theme["topics"]:
+            topic["question_count"] = questions.question_count([
+                card for card in cards if card["theme"] == theme["id"] and card["subtopic"] == topic["id"]
+            ])
     return cards, themes
 
 
@@ -355,11 +379,11 @@ def render_browser(cards: list[dict], themes: list[dict], *,
                    path: str = "learning/all.md", filters: bool = True) -> str:
     esc = html.escape
     lines = [
-        '<div class="ar-learning-browser" data-learning-browser data-learning-page-size="12">',
+        '<div class="ar-learning-browser" data-learning-browser data-learning-page-size="12" data-learning-unit="问">',
         '<div class="ar-learning-controls">',
-        '<label for="learning-search">搜索卡片',
+        '<label for="learning-search">搜索问题',
         '<input id="learning-search" type="search" data-learning-search '
-        'placeholder="搜索论文、机制、机构或本地边界"></label>',
+        'placeholder="搜索问题、论文或机制"></label>',
     ]
     if filters and themes:
         lines += [
@@ -389,41 +413,60 @@ def render_browser(cards: list[dict], themes: list[dict], *,
         ]
     lines += [
         "</div>",
-        f'<p class="ar-learning-status" data-learning-status role="status">共 {len(cards)} 张卡片</p>',
-        "<noscript>已显示全部卡片；启用 JavaScript 后可搜索和筛选。</noscript>",
+        f'<p class="ar-learning-status" data-learning-status role="status">{_question_module().question_count(cards)} 个问题 · {len({card["identity"] for card in cards})} 篇论文</p>',
+        "<noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>",
         '<div class="ar-learning-grid">',
     ]
     for card in cards:
         domain_label = DOMAINS.get(card["domain"], card["domain"])
-        search = " ".join([card["title"], domain_label, card["organization"], card["published"],
+        base_search = " ".join([card["title"], domain_label, card["organization"], card["published"],
                            card["summary"], card["local_scope"], card["question"], card["topics"],
                            card["theme_title"], card["subtopic_title"]])
         label = " / ".join(filter(None, (card["theme_title"], card["subtopic_title"])))
-        scope_label = "本地范围与边界"
-        if "成本过高" in card["local_scope"] and "不复现" in card["local_scope"]:
-            scope_label += " · 成本过高，未复现"
-        elif re.search(r"核心机制诊断|概念演示|concept_demo|仅为\s?L1", card["local_scope"]):
-            scope_label += " · 机制诊断"
-        lines += [
-            f'<article class="ar-learning-card" data-learning-card data-domain="{esc(card["domain"])}" '
-            f'data-theme="{card["theme"]}" data-topic="{card["theme"]}/{card["subtopic"]}" '
-            f'data-search="{esc(search)}">',
-            f'<p class="ar-learning-card__domain"><a href="{_page_href(card["topic_path"], path)}">{esc(label)}</a></p>',
-            f'<h2 id="{card["anchor"]}">{esc(card["title"])}</h2>',
-            f'<p class="ar-learning-card__meta">{esc(card["organization"])} · 论文公开：{esc(card["published"])}</p>',
-            f'<p><strong>方法要点：</strong>{esc(card["summary"])}</p>',
-            f'<details class="ar-learning-boundary"><summary>{scope_label}</summary>',
-            f'<p>{esc(card["local_scope"])}</p></details>',
-        ]
-        if card["question"]:
-            lines.append(f'<p class="ar-learning-question"><strong>想一想：</strong>{esc(card["question"])}</p>')
-        links = [
-            f'<a href="{esc(card["paper_url"])}">{card["source_label"]}</a>',
-            f'<a href="{_page_href(card["detail_path"], path)}">实现解读</a>',
-        ]
-        if card["curated_path"]:
-            links.append(f'<a href="{_page_href(card["curated_path"], path)}">阅读精选对比</a>')
-        lines += [f'<p class="ar-learning-card__links">{" · ".join(links)}</p>', "</article>"]
+        # Missing editorial work is explicit. It never becomes a generic fake Q&A.
+        entries = card["questions"] or [None]
+        for index, question in enumerate(entries):
+            search = base_search + " " + (" ".join([
+                question["question"], question["answer"], question["example"], question["added"],
+            ]) if question else "待补问答")
+            anchor = _question_module().question_anchor(card["identity"], question["id"]) if question else card["anchor"]
+            lines += [
+                f'<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="{esc(card["identity"])}" '
+                f'data-paper-title="{esc(card["title"])}" data-learning-pending="{"false" if question else "true"}" '
+                f'data-domain="{esc(card["domain"])}" data-theme="{card["theme"]}" '
+                f'data-topic="{card["theme"]}/{card["subtopic"]}" data-search="{esc(search)}">',
+                f'<p class="ar-learning-card__domain"><a href="{_page_href(card["topic_path"], path)}">{esc(label)}</a></p>',
+            ]
+            if question and index == 0 and not card.get("_omit_paper_anchor"):
+                lines.append(f'<span id="{card["anchor"]}" class="ar-learning-paper-anchor"></span>')
+            title = question["question"] if question else card["title"]
+            lines += [
+                f'<h2 id="{anchor}">{esc(title)}</h2>',
+                f'<p class="ar-learning-paper"><a href="{_page_href("learning/all.md", path)}?paper={quote(card["identity"], safe="")}">{esc(card["title"])}</a></p>' if question else '<p>待补逐篇问答。</p>',
+            ]
+            if question:
+                example = re.sub(r"^(?:教学例子|教学示意|示意场景|示意|示例)[：:]\s*", "", question["example"])
+                lines += [
+                    f'<p class="ar-learning-card__meta">问答新增：{question["added"]} · {esc(card["organization"])}</p>',
+                    '<details class="ar-learning-answer"><summary>展开答案与例子</summary>',
+                    f'<p><strong>答案：</strong>{esc(question["answer"])}</p>',
+                    f'<p class="ar-learning-example"><strong>教学例子：</strong>{esc(example)}</p>',
+                    f'<p class="ar-learning-sources">依据：{esc("、".join(question["source_sections"]))}；例子用于解释机制。</p>',
+                ]
+            else:
+                lines.append(f'<p class="ar-learning-card__meta">{esc(card["organization"])} · 论文公开：{esc(card["published"])}</p>')
+            links = [
+                f'<a href="{esc(card["paper_url"])}">{card["source_label"]}</a>',
+                f'<a href="{_page_href(card["detail_path"], path)}">实现解读</a>',
+            ]
+            if card["curated_path"]:
+                links.append(f'<a href="{_page_href(card["curated_path"], path)}">阅读精选对比</a>')
+            if question:
+                links.append(f'<a href="#{anchor}">问题链接</a>')
+            lines.append(f'<p class="ar-learning-card__links">{" · ".join(links)}</p>')
+            if question:
+                lines.append('</details>')
+            lines.append('</article>')
     lines += [
         "</div>",
         '<button type="button" class="ar-learning-more" data-learning-more hidden>显示更多</button>',
@@ -436,10 +479,9 @@ def _render_all(cards: list[dict], themes: list[dict]) -> str:
     lines = [
         "---", "hide:", "  - toc", "---", "",
         "<!-- Generated by scripts/generate_learning_cards.py; edit source pages or overrides. -->",
-        "# 全部论文学习卡片", "",
-        "每张卡片按已有论文解读摘录，帮助快速了解方法与本地验证边界；精选对比另行标注。",
-        "日期为论文公开日期。原论文结论、本地实验与未复现的部分请分别理解。", "",
-        "[按主题开始学习](index.md) · [查看待归类的新论文](inbox.md)", "",
+        "# 全部论文问答", "",
+        "先看问题，试着回答，再展开答案与教学例子。每篇论文可以积累多个问题，新增问答也会出现在对应子主题和最近新增中。", "",
+        "[按主题找问题](index.md) · [最近新增](recent.md)", "",
         render_browser(cards, themes),
     ]
     return "\n".join(lines)
@@ -449,16 +491,32 @@ def render(root: Path) -> str:
     return _render_all(*_collection(root))
 
 
+def _recent_cards(cards: list[dict]) -> list[dict]:
+    rows = [dict(card, questions=[question], _omit_paper_anchor=index != 0)
+            for card in cards for index, question in enumerate(card["questions"])]
+    return sorted(rows, key=lambda card: (
+        card["questions"][0]["added"], card["published"], card["identity"], card["questions"][0]["id"],
+    ), reverse=True)
+
+
 def _outputs(root: Path) -> dict[Path, str]:
     cards, themes = _collection(root)
     outputs = {OUTPUT: _render_all(cards, themes)}
     topic_module = _topic_module()
+    questions = _question_module()
     outputs.update(topic_module.guide_pages(themes, cards, render_browser, _page_href))
+    recent = _recent_cards(cards)
+    outputs[Path("docs/learning/recent.md")] = "\n".join([
+        "---", "hide:", "  - toc", "---", "", topic_module.GENERATED, "",
+        "# 最近新增问题", "",
+        "按问答加入日期排列；补充旧论文的新问题也会出现在这里。每个问题同时归入其主题的问题库。", "",
+        render_browser(recent, themes, path="learning/recent.md").rstrip(), "",
+    ])
     inbox = [card for card in cards if card["theme"] == "inbox"]
     outputs[Path("docs/learning/inbox.md")] = "\n".join([
         "---", "hide:", "  - toc", "---", "", topic_module.GENERATED, "",
         "# 待归类的新论文", "",
-        "新收录论文先自动出现在这里。完成主题判断后，纳入相应子主题和阅读路线。", "",
+        "新收录论文先完成逐篇问答，再归入对应主题；这里保留尚未分主题的记录，避免遗漏。", "",
         f"当前 {len(inbox)} 张。" if inbox else "当前全部论文均已归类。", "",
         render_browser(inbox, themes, path="learning/inbox.md", filters=False) if inbox else "",
         "[返回学习主题](index.md) · [搜索全部卡片](all.md)", "",
@@ -466,24 +524,45 @@ def _outputs(root: Path) -> dict[Path, str]:
     # Only the marked region is generated; the current featured card stays editorial.
     index = root / "docs/learning/index.md"
     text = index.read_text(encoding="utf-8") if index.exists() else ""
+    for region in ("topics", "recent"):
+        start, end = f"<!-- learning-{region}:start -->", f"<!-- learning-{region}:end -->"
+        if f"<!-- learning-{region}:" in text and (
+            text.count(start) != 1 or text.count(end) != 1
+            or text.index(start) > text.index(end)
+        ):
+            label = "topic" if region == "topics" else region
+            raise ValueError(f"learning index needs one ordered pair of {label} markers")
     if "<!-- learning-topics:" in text:
-        if text.count("<!-- learning-topics:start -->") != 1 or text.count(
-            "<!-- learning-topics:end -->"
-        ) != 1 or text.index("<!-- learning-topics:start -->") > text.index("<!-- learning-topics:end -->"):
-            raise ValueError("learning index needs one ordered pair of topic markers")
         tiles = topic_module.topic_tiles(themes, lambda path: _page_href(path, "learning/index.md"))
         block = (f"<!-- learning-topics:start -->\n\n{len(themes)} 个主题 · "
-                 f"{sum(len(theme['topics']) for theme in themes)} 张导学卡 · {len(cards)} 张论文卡\n\n"
+                 f"{sum(len(theme['topics']) for theme in themes)} 个子主题 · "
+                 f"{questions.question_count(cards)} 个问题 / {len(cards)} 篇论文\n\n"
                  f"{tiles}\n\n<!-- learning-topics:end -->")
         outputs[Path("docs/learning/index.md")] = re.sub(
             r"<!-- learning-topics:start -->.*?<!-- learning-topics:end -->", lambda _: block,
             text, flags=re.S,
         )
+    if "<!-- learning-recent:start -->" in text:
+        links = ['<div class="ar-learning-recent"><ul>']
+        for card in recent[:8]:
+            question = card["questions"][0]
+            anchor = questions.question_anchor(card["identity"], question["id"])
+            href = _page_href("learning/all.md", "learning/index.md") + "#" + anchor
+            links.append(f'<li><a href="{href}">{html.escape(question["question"])}</a>'
+                         f'<span>{question["added"]} · {html.escape(card["key"])}</span></li>')
+        links += ['</ul></div>']
+        recent_block = "<!-- learning-recent:start -->\n\n" + "\n".join(links) + "\n\n<!-- learning-recent:end -->"
+        outputs[Path("docs/learning/index.md")] = re.sub(
+            r"<!-- learning-recent:start -->.*?<!-- learning-recent:end -->", lambda _: recent_block,
+            outputs.get(Path("docs/learning/index.md"), text), flags=re.S,
+        )
     return outputs
 
 
-def generate(root: Path = ROOT, check: bool = False) -> Path:
+def generate(root: Path = ROOT, check: bool = False, require_questions: bool = False) -> Path:
     root = Path(root)
+    if require_questions:
+        _question_module().require_complete(_collection(root)[0])
     outputs = _outputs(root)
     stale = []
     for relative, expected in outputs.items():
@@ -509,9 +588,10 @@ def generate(root: Path = ROOT, check: bool = False) -> Path:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Fail if generated cards are stale.")
+    parser.add_argument("--require-questions", action="store_true", help="Require authored Q&A for every paper.")
     args = parser.parse_args()
     try:
-        target = generate(ROOT, check=args.check)
+        target = generate(ROOT, check=args.check, require_questions=args.require_questions)
     except (OSError, ValueError, KeyError) as error:
         print(error, file=sys.stderr)
         raise SystemExit(1) from error

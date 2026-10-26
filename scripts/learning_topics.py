@@ -109,14 +109,14 @@ def topic_tiles(themes: list[dict], href, *, expanded: bool = False) -> str:
             '<article class="ar-learning-topic-tile">',
             f'<h2><a href="{url}">{esc(theme["title"])}</a></h2>',
             f'<p>{esc(theme["intro"])}</p>',
-            f'<p class="ar-learning-topic-meta">{len(theme["topics"])} 个子主题 · {count} 张论文卡</p>',
-            f'<details{" open" if expanded else ""}><summary>查看子主题与导学卡</summary><ul>',
+            f'<p class="ar-learning-topic-meta">{len(theme["topics"])} 个子主题 · {theme.get("question_count", 0)} 问 / {count} 篇</p>',
+            f'<details{" open" if expanded else ""}><summary>展开子主题问题库</summary><ul>',
         ]
         for topic in theme["topics"]:
             path = f"learning/paths/{theme['id']}/{topic['id']}.md"
             lines.append(
                 f'<li><a href="{href(path)}">{esc(topic["title"])}</a>'
-                f'<span>{len(topic["papers"])}</span></li>'
+                f'<span>{topic.get("question_count", 0)} 问</span></li>'
             )
         lines += ['</ul></details>', '</article>']
     return "\n".join(lines + ['</div>'])
@@ -129,7 +129,7 @@ def guide_pages(themes: list[dict], cards: list[dict], browser, page_href) -> di
     for theme in themes:
         parent = f"learning/paths/{theme['id']}/index.md"
         overview = [GENERATED, "", f"# {theme['title']}", "", theme["intro"], "",
-                    "每次选一个问题，先读导学卡，再按阅读顺序看代表论文。", ""]
+                    "选择一个子主题，从具体论文问题开始。新论文和新增问题会继续加入对应问题库。", ""]
         overview.append('<div class="ar-learning-topics">')
         esc = html.escape
         for topic in theme["topics"]:
@@ -138,7 +138,7 @@ def guide_pages(themes: list[dict], cards: list[dict], browser, page_href) -> di
                 '<article class="ar-learning-topic-tile">',
                 f'<h2><a href="{url}">{esc(topic["title"])}</a></h2>',
                 f'<p>{esc(topic["question"])}</p>',
-                f'<p class="ar-learning-topic-meta">导学约 3 分钟 · {len(topic["papers"])} 张论文卡</p>',
+                f'<p class="ar-learning-topic-meta">{topic.get("question_count", 0)} 个问题 · {len(topic["papers"])} 篇论文</p>',
                 '</article>',
             ]
         overview.append('</div>')
@@ -150,7 +150,10 @@ def guide_pages(themes: list[dict], cards: list[dict], browser, page_href) -> di
             lines = [
                 "---", "hide:", "  - toc", "---", "", GENERATED, "",
                 f"# {topic['title']}", "",
-                f"[{theme['title']}](index.md) / 子主题导学 · 约 3 分钟 · {len(members)} 张论文卡", "",
+                f"[{theme['title']}](index.md) / {topic.get('question_count', 0)} 个问题 · {len(members)} 篇论文", "",
+                "先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。", "",
+                browser(members, themes, path=path, filters=False), "",
+                '<details class="ar-learning-guide" markdown="1"><summary>主题导读与阅读路线</summary>', "",
                 "## 先想一个问题", "", topic["question"], "",
                 "## 记住这一点", "", topic["takeaway"], "",
                 "## 一个例子", "", topic["example"], "",
@@ -169,10 +172,9 @@ def guide_pages(themes: list[dict], cards: list[dict], browser, page_href) -> di
                 "", "## 自测一下", "", topic["self_test"]["question"], "",
                 "??? note \"展开参考答案\"", "",
                 *[f"    {line}" if line else "" for line in topic["self_test"]["answer"].splitlines()],
-                "", "## 这个子主题的论文卡片", "",
-                "导学提炼自上述代表论文及仓库解读。以下卡片摘录各自来源；是否复现、验证到哪一步，以卡内说明为准。", "",
-                browser(members, themes, path=path, filters=False), "",
-                f"[跨主题搜索全部卡片]({doc_href('learning/all.md', path)})", "",
+                "", "</details>", "",
+                f"[跨主题搜索全部问答]({doc_href('learning/all.md', path)}) · "
+                f"[最近新增]({doc_href('learning/recent.md', path)})", "",
             ]
             output[Path("docs") / path] = "\n".join(lines)
     return output

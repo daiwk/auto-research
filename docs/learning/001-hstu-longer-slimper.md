@@ -2,6 +2,8 @@
 
 阅读预算：约 5 分钟。日期：2026-10-26。关联论文：HSTU、LONGER、SlimPer。
 
+<p>逐篇问题库：<a href="../all/?paper=recommendation%3Ahstu">HSTU 问答</a> · <a href="../all/?paper=recommendation%3Alonger">LONGER 问答</a> · <a href="../all/?paper=recommendation%3Aslimper">SlimPer 问答</a>。</p>
+
 ## 这期只记一件事
 
 **把“历史信息还能不能读取”和“历史表示会不会逐层更新”分开看。**

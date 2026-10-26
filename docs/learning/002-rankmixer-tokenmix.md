@@ -2,6 +2,8 @@
 
 阅读预算：约 3 分钟。日期：2026-10-26。关联论文：[RankMixer](https://arxiv.org/html/2507.15551v3)（ByteDance，首次公开于 2025-07-21；本卡依据 v3）。
 
+<p><a href="../all/?paper=recommendation%3Arankmixer">查看 RankMixer 的全部逐篇问答 →</a></p>
+
 ## 这期只记一件事
 
 **固定重排负责让特征相遇，每个 token 独立的 FFN 负责学习如何组合。**

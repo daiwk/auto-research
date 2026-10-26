@@ -13,9 +13,11 @@ on:
       - "scripts/generate_learning_cards.py"
       - "scripts/learning_cards_hook.py"
       - "scripts/learning_topics.py"
+      - "scripts/learning_questions.py"
       - "tests/test_docs_math.py"
       - "tests/test_learning_cards.py"
       - "tests/test_learning_topics.py"
+      - "tests/test_learning_questions.py"
       - ".github/workflows/docs.yml"
   push:
     branches: [main]
@@ -30,9 +32,11 @@ on:
       - "scripts/generate_learning_cards.py"
       - "scripts/learning_cards_hook.py"
       - "scripts/learning_topics.py"
+      - "scripts/learning_questions.py"
       - "tests/test_docs_math.py"
       - "tests/test_learning_cards.py"
       - "tests/test_learning_topics.py"
+      - "tests/test_learning_questions.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -59,7 +63,7 @@ jobs:
       - run: python scripts/sync_project_readme.py --check
       - run: python scripts/generate_public_experiment_dashboard.py
       - run: git diff --exit-code -- docs/assets/data/experiment-dashboard.json
-      - run: python scripts/generate_learning_cards.py
+      - run: python scripts/generate_learning_cards.py --require-questions
       - run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
