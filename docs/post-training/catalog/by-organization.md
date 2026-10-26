@@ -530,7 +530,7 @@
 ## University of California, Berkeley
 
 - 2026-09-16 · 一作：Peter Chen · [A Zeroth-Order Paradigm for LLM Preference Alignment](../2609.19144-compo/README.md)（`compo`）：不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。
-- 2025-05-26 · 一作：Xuandong Zhao · [INTUITOR](../2505.19590-intuitor/README.md)（`intuitor`）：把答案分布相对均匀分布的 KL 作为 intrinsic self-certainty reward，在没有答案和 verifier 时优化。
+- 2025-05-26 · 一作：Xuandong Zhao · [INTUITOR](../2505.19590-intuitor/README.md)（`intuitor`）：以每个生成前缀下的全词表 next-token 分布计算 $D_{KL}(U\Vert\pi_\theta)$，再沿回答长度平均，作为 intrinsic self-certainty reward。方向是均匀分布到策略分布，并非策略的负熵；高置信度也不等于答案一定正确。
 
 ## University of California, Los Angeles
 
