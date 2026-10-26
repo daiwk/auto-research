@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-26-priority-components",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_tier": "l1_mechanism",
+  "components": [
+    {
+      "key": "detector-scope",
+      "source": "src/auto_research/foundation_models/detector_scope.py",
+      "device": "cuda",
+      "checks": [
+        "actual_sgd_momentum_proximal_update",
+        "external_sae_and_validation_scores_frozen",
+        "folded_raw_weights_match_normalized_logits",
+        "max_pool_masks_padding_and_concatenates_layers",
+        "proximal_exact_zeros_bias_not_shrunk",
+        "spearman_ties_and_global_mask",
+        "training_only_rms_no_centering",
+        "zero_ablation_is_exact_logit_contribution"
+      ],
+      "metrics": [
+        "counterfactual_attribution_error",
+        "fixture_bce_after",
+        "fixture_bce_before",
+        "gradient_norm",
+        "held_out_documents",
+        "nonzero_head_weights",
+        "optimizer_steps",
+        "padding_negative_control_gap",
+        "pretrained_model_calls",
+        "raw_fold_error",
+        "retained_features",
+        "rms_leakage_negative_control_gap",
+        "training_documents"
+      ],
+      "gates": [
+        {
+          "metric": "fixture_bce_after",
+          "op": "lt",
+          "other_metric": "fixture_bce_before"
+        },
+        {
+          "metric": "raw_fold_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "counterfactual_attribution_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "padding_negative_control_gap",
+          "op": "gt",
+          "value": 1
+        },
+        {
+          "metric": "rms_leakage_negative_control_gap",
+          "op": "gt",
+          "value": 1
+        },
+        {
+          "metric": "optimizer_steps",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "dt-jepa",
+      "source": "src/auto_research/foundation_models/dt_jepa.py",
+      "device": "cuda",
+      "checks": [
+        "actor_q_gradient_not_detached",
+        "adaln_formula_reference",
+        "bc_sums_time_then_means_batch",
+        "ema_future_target_stop_gradient",
+        "ema_parameter_update_reference",
+        "gaussian_nll_independent_reference",
+        "inference_has_no_future_or_labels",
+        "multistep_twin_min_target_reference",
+        "reparameterized_predictor_receives_gradient"
+      ],
+      "metrics": [
+        "adaln_reference_error",
+        "bc_predictor_gradient_norm",
+        "behavior_cloning_loss",
+        "ema_reference_error",
+        "environment_interactions",
+        "jepa_nll",
+        "nll_reference_error",
+        "predictor_gradient_norm",
+        "pretraining_loss",
+        "td_reference_error"
+      ],
+      "gates": [
+        {
+          "metric": "nll_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "adaln_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "ema_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "td_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "predictor_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "bc_predictor_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "environment_interactions",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "editjev",
+      "source": "src/auto_research/system_one/editjev.py",
+      "device": "cuda",
+      "checks": [
+        "beta_zero_uses_only_predicted_utility",
+        "empty_pair_request_zero_gradient",
+        "four_rating_min_geometric_mean",
+        "last_nonpadding_hidden_linear_head",
+        "per_request_pair_mean_reference",
+        "positive_beta_prefers_faster_tied_utility",
+        "preference_head_has_actual_gradient",
+        "ranking_step_reduces_loss",
+        "routing_does_not_accept_quality_labels"
+      ],
+      "metrics": [
+        "candidate_editors",
+        "editor_model_calls",
+        "gradient_norm",
+        "head_gradient_norm",
+        "head_pooling_reference_error",
+        "loss",
+        "loss_after_step",
+        "ranking_reference_error",
+        "requests"
+      ],
+      "gates": [
+        {
+          "metric": "ranking_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "head_pooling_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "loss_after_step",
+          "op": "lt",
+          "other_metric": "loss"
+        },
+        {
+          "metric": "gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "head_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "editor_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "frontier-opd",
+      "source": "src/auto_research/agent_research/frontier_opd.py",
+      "device": "cuda",
+      "checks": [
+        "distinct_nodes_ranked",
+        "equal_turn_not_token_weighting",
+        "frozen_scores",
+        "invalid_replay_rejected",
+        "replay_representative_tie_order",
+        "signed_not_absolute_ranking",
+        "trajectory_balanced_not_visit_weighted",
+        "zero_margin_equality_accepted"
+      ],
+      "metrics": [
+        "agreement_reference_error",
+        "matched_window_gain",
+        "selected_nodes",
+        "signed_score_reference_error",
+        "trajectory_balanced_loop_score"
+      ],
+      "gates": [
+        {
+          "metric": "signed_score_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "agreement_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "trajectory_balanced_loop_score",
+          "op": "eq",
+          "value": 5
+        },
+        {
+          "metric": "selected_nodes",
+          "op": "eq",
+          "value": 2
+        },
+        {
+          "metric": "matched_window_gain",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "hge",
+      "source": "src/auto_research/reproductions/hge.py",
+      "device": "cuda",
+      "checks": [
+        "conditional_item_not_softmax",
+        "context_injected_after_item_attention",
+        "eq5_independent_reference",
+        "finite_nonzero_backward",
+        "fusion_endpoints",
+        "position_negative_control",
+        "price_negative_control",
+        "residual_negative_control"
+      ],
+      "metrics": [
+        "context_attention_error",
+        "examples",
+        "items_per_container",
+        "parameter_gradient_l1",
+        "pll_reference_error",
+        "position_negative_control_gap",
+        "pretrained_model_calls",
+        "price_negative_control_gap",
+        "residual_negative_control_gap"
+      ],
+      "gates": [
+        {
+          "metric": "pll_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "context_attention_error",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "position_negative_control_gap",
+          "op": "gt",
+          "value": 1e-8
+        },
+        {
+          "metric": "price_negative_control_gap",
+          "op": "gt",
+          "value": 1e-8
+        },
+        {
+          "metric": "residual_negative_control_gap",
+          "op": "gt",
+          "value": 1e-8
+        },
+        {
+          "metric": "parameter_gradient_l1",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "mart-grpo",
+      "source": "src/auto_research/post_training/mart_grpo.py",
+      "device": "cuda",
+      "checks": [
+        "failure_suffix_zero_gradient",
+        "gradient_matches_reference",
+        "inclusive_upper_event_boundary",
+        "old_policy_and_advantage_detached",
+        "original_denominator_reference",
+        "recovered_event_full_feedback",
+        "success_feedback_preserved"
+      ],
+      "metrics": [
+        "gradient_norm",
+        "gradient_reference_error",
+        "masked_loss",
+        "reference_error",
+        "retained_failure_fraction"
+      ],
+      "gates": [
+        {
+          "metric": "reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "gradient_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "retained_failure_fraction",
+          "op": "eq",
+          "value": 0.75
+        }
+      ]
+    },
+    {
+      "key": "opst",
+      "source": "src/auto_research/post_training/opst.py",
+      "device": "cuda",
+      "checks": [
+        "candidate_consensus_rejected",
+        "different_answer_consensus_retained",
+        "ema_detached",
+        "ema_new_student_weight",
+        "equal_response_weighting",
+        "failed_verification_rejected",
+        "gradient_matches_reference",
+        "padding_zero_gradient"
+      ],
+      "metrics": [
+        "ema_parameter_delta",
+        "external_divergence_loss",
+        "gradient_norm",
+        "gradient_reference_error",
+        "reference_error",
+        "retained_questions"
+      ],
+      "gates": [
+        {
+          "metric": "reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "gradient_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "retained_questions",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "ema_parameter_delta",
+          "op": "gt",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "uniaction",
+      "source": "src/auto_research/multimodal/uniaction.py",
+      "device": "cuda",
+      "checks": [
+        "actual_action_key_value_gradients",
+        "attention_mass_normalized",
+        "duplicated_action_cardinality_invariant",
+        "joint_softmax_formula_reference",
+        "native_position_interface_receives_coordinates",
+        "padding_excluded_from_cardinality_and_output",
+        "semantic_identity_reuses_codebook",
+        "uncalibrated_duplication_negative_control"
+      ],
+      "metrics": [
+        "action_key_gradient_norm",
+        "action_value_gradient_norm",
+        "attention_reference_error",
+        "duplication_invariance_error",
+        "pretrained_video_model_calls",
+        "semantic_codebook_gradient_norm",
+        "uncalibrated_duplication_gap"
+      ],
+      "gates": [
+        {
+          "metric": "attention_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "duplication_invariance_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "uncalibrated_duplication_gap",
+          "op": "gt",
+          "value": 0.000001
+        },
+        {
+          "metric": "action_key_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "action_value_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "semantic_codebook_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "pretrained_video_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}
