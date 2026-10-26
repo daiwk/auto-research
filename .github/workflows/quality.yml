@@ -59,6 +59,7 @@ jobs:
       - run: git diff --exit-code -- docs/assets/data/experiment-dashboard.json
       - run: python scripts/generate_research_manifest.py
       - run: python scripts/generate_research_catalogs.py
+      - run: python scripts/generate_learning_cards.py
       - run: python scripts/reconcile_discovery_implementation.py --check
       - run: git diff --exit-code -- docs/research-manifest.json docs/post-training docs/agent-research docs/foundation-models docs/reproductions/catalog
       - run: python scripts/migrate_metric_schema_v2.py

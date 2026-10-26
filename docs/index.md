@@ -16,6 +16,7 @@ hide:
 <div class="ar-actions">
   <a class="md-button md-button--primary" href="auto-research/">开始自动研究</a>
   <a class="md-button" href="research-library/">浏览论文实现</a>
+  <a class="md-button" href="learning/">阅读学习卡片</a>
 </div>
 
 </div>

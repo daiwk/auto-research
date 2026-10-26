@@ -77,6 +77,10 @@ nav:
           - L2.1 隔离能力评测与自动进化: agent-research/capability-benchmark.md
           - 可训练 policy 与真实 executor: agent-research/training-executor.md
           - 分层参与度评测协议: agent-research/layered-engagement-protocol.md
+  - 学习卡片:
+      - 学习卡片汇总: learning/index.md
+      - 全部论文小卡片: learning/all.md
+      - 长历史要不要每层都重新计算: learning/001-hstu-longer-slimper.md
   - 项目文档:
       - 项目 README: project-readme.md
       - GPT-6 Astra 协作指南: astra-collaboration.md
@@ -117,6 +121,9 @@ theme:
         icon: material/brightness-4
         name: 切换到浅色模式
 
+hooks:
+  - scripts/learning_cards_hook.py
+
 plugins:
   - search:
       lang:
@@ -144,6 +151,7 @@ markdown_extensions:
 
 extra_css:
   - assets/stylesheets/extra.css
+  - assets/stylesheets/learning-cards.css
 
 extra_javascript:
   - assets/javascripts/mathjax.js
@@ -151,5 +159,6 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js
   - assets/javascripts/mermaid.js
   - assets/javascripts/experiment-dashboard.js
+  - assets/javascripts/learning-cards.js
 
 strict: true
