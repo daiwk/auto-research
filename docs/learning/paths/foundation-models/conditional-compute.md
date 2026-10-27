@@ -239,16 +239,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20642">原论文</a> · <a href="../../../../foundation-models/2610.20642-cots/">实现解读</a> · <a href="#qa-70ae8db465d64ac8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:elastic-expert-routing" data-paper-title="Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts 基础模型 Shanghai AI Laboratory / Shanghai Jiao Tong University 2026-10-08 固定 Top-k 会让排序边界外的专家长期缺少训练曝光。该方法训练时为每个 token、每层独立抽取邻近的专家预算，在不改变期望预算的情况下，让边界附近专家参与真实稀疏计算。部署时恢复固定 k。 本地结果标为诊断。实现真实因果自回归 Transformer + 稀疏 MoE，包含 router、专家梯度、辅助均衡损失和固定 k 推理。不是把所有专家都计算一遍后乘零。相同参数形状、初始化、训练位置和预算对照 radius=0 与 radius=1。  稀疏专家与路由 网络架构 基础模型 按需计算：专家、弹性深宽与查表记忆 Elastic Expert Routing 为什么在训练时随机改变专家数量？ 固定top-k边界外的专家可能长期没有曝光。方法为每token、每层抽取邻近预算，使边界附近专家参与真实稀疏计算，同时保持期望预算不变；推理恢复固定k。 示意：通常用3个专家，训练时偶尔用2或4个，让第四名也获得学习机会。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:elastic-expert-routing" data-paper-title="Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts 基础模型 Shanghai AI Laboratory / Shanghai Jiao Tong University 2026-10-08 固定 Top-k 会让排序边界外的专家长期缺少训练曝光。该方法训练时为每个 token、每层独立抽取邻近的专家预算，在不改变期望预算的情况下，让边界附近专家参与真实稀疏计算。部署时恢复固定 k。 本地结果标为诊断。实现真实因果自回归 Transformer + 稀疏 MoE，包含 router、专家梯度、辅助均衡损失和固定 k 推理。不是把所有专家都计算一遍后乘零。相同参数形状、初始化、训练位置和预算对照 radius=0 与 radius=1。  稀疏专家与路由 网络架构 基础模型 按需计算：专家、弹性深宽与查表记忆 固定 Top-k MoE 的“边界专家缺少曝光”指什么？ 每个token通常只派给排名前k的专家，长期刚好落在边界外的专家较少获得该token的真实计算和训练机会。弹性预算让邻近排名也有参与机会，部署时仍恢复固定k。 示意：某专家经常排第三而k=2，它并非完全无用，却可能持续失去训练曝光。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
 <span id="paper-foundation-models-elastic-expert-routing-bd240699" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-982dc49332289795">Elastic Expert Routing 为什么在训练时随机改变专家数量？</h2>
+<h2 id="qa-982dc49332289795">固定 Top-k MoE 的“边界专家缺少曝光”指什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aelastic-expert-routing">Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai AI Laboratory / Shanghai Jiao Tong University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>固定top-k边界外的专家可能长期没有曝光。方法为每token、每层抽取邻近预算，使边界附近专家参与真实稀疏计算，同时保持期望预算不变；推理恢复固定k。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>通常用3个专家，训练时偶尔用2或4个，让第四名也获得学习机会。</p>
+<p><strong>答案：</strong>每个token通常只派给排名前k的专家，长期刚好落在边界外的专家较少获得该token的真实计算和训练机会。弹性预算让邻近排名也有参与机会，部署时仍恢复固定k。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某专家经常排第三而k=2，它并非完全无用，却可能持续失去训练曝光。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11575">原论文</a> · <a href="../../../../foundation-models/2610.11575-elastic-expert-routing/">实现解读</a> · <a href="#qa-982dc49332289795">问题链接</a></p>
 </details>
@@ -345,16 +345,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12327">原论文</a> · <a href="../../../../foundation-models/2610.12327-sparse-decoding/">实现解读</a> · <a href="#qa-5cba78153fef71c9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ce-guided-moe" data-paper-title="Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models 基础模型 Bar-Ilan University 2026-09-29 在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 error-aware routing 公式；未训练 Granite MoE。执行 error-aware routing 公式；未训练 Granite MoE。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  MoE 路由 Token error 基础模型 按需计算：专家、弹性深宽与查表记忆 CE-guided MoE 为什么在 affinity 之外还预测 expert 的错误？ 高路由亲和度不一定代表专家能正确预测该token。误差头估计各专家token错误，再在top-k前压低高预测错误专家的logit，为路由补充任务质量信号。 示意：两个专家原始分数接近，但其中一个预测错误很高，其选择优先级可被降低。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ce-guided-moe" data-paper-title="Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models 基础模型 Bar-Ilan University 2026-09-29 在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 error-aware routing 公式；未训练 Granite MoE。执行 error-aware routing 公式；未训练 Granite MoE。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  MoE 路由 Token error 基础模型 按需计算：专家、弹性深宽与查表记忆 CE-guided MoE 的 affinity 与 token-error 分别表达什么？ affinity是原路由的专家偏好，token-error是额外头预测该专家处理当前token的错误程度。前者高不保证后者低；方法将预测错误用于Top-K前的路由修正，并用真实next-token CE监督误差头。 示意：某专家与输入表示很相近，却可能在这一类token上预测不准，两个信号不能直接等同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
 <span id="paper-foundation-models-ce-guided-moe-5d9cde32" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1df0094107045dd3">CE-guided MoE 为什么在 affinity 之外还预测 expert 的错误？</h2>
+<h2 id="qa-1df0094107045dd3">CE-guided MoE 的 affinity 与 token-error 分别表达什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ace-guided-moe">Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Bar-Ilan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>高路由亲和度不一定代表专家能正确预测该token。误差头估计各专家token错误，再在top-k前压低高预测错误专家的logit，为路由补充任务质量信号。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>两个专家原始分数接近，但其中一个预测错误很高，其选择优先级可被降低。</p>
+<p><strong>答案：</strong>affinity是原路由的专家偏好，token-error是额外头预测该专家处理当前token的错误程度。前者高不保证后者低；方法将预测错误用于Top-K前的路由修正，并用真实next-token CE监督误差头。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某专家与输入表示很相近，却可能在这一类token上预测不准，两个信号不能直接等同。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37751">原论文</a> · <a href="../../../../foundation-models/2609.37751-ce-guided-moe/">实现解读</a> · <a href="#qa-1df0094107045dd3">问题链接</a></p>
 </details>
@@ -1034,17 +1034,17 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.21291">原论文</a> · <a href="../../../../reproductions/2607.21291-adadsf/">实现解读</a> · <a href="#qa-25065d84348e3527">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:looped-latent-attention" data-paper-title="Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers 基础模型 University of Maryland / Meta AI 2026-07-16 Looped Transformer 重复使用同一组权重，但不同 loop 的 KV cache 仍重复占内存。LLA 学习跨 loop 共享的低秩 K/V latent，服务时按 loop 重建专用 K/V，从 recurrence 冗余中换取近无损压缩。 Fidelity: 核心机制复现。训练权重共享的 looped block，并在共享 latent 中保存 K/V。本地从头训练 64d 模型，不是对大 checkpoint 训练 post-hoc codec，也没有 fused serving kernel。本地对照口径：基线是两层 llama_modern；实验组用一个权重共享 block 循环两次并采用 2× K/V latent，LM loss 5.7471→5.8012，相对 +0.94%（更差），参数 139584→80576。  llm-architecture kv-cache looped-transformer 基础模型 按需计算：专家、弹性深宽与查表记忆 Looped Transformer 已经共享权重，为什么还会有 KV 冗余？ 共享的是计算参数，不同loop产生的历史K/V仍可能分别缓存。LLA针对这部分冗余学习跨loop共享的低秩latent，再按loop重建需要的K/V。 示意：同一block运行两次不等于两次生成的缓存自动只存一份。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:looped-latent-attention" data-paper-title="Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers 基础模型 University of Maryland / Meta AI 2026-07-16 Looped Transformer 重复使用同一组权重，但不同 loop 的 KV cache 仍重复占内存。LLA 学习跨 loop 共享的低秩 K/V latent，服务时按 loop 重建专用 K/V，从 recurrence 冗余中换取近无损压缩。 Fidelity: 核心机制复现。训练权重共享的 looped block，并在共享 latent 中保存 K/V。本地从头训练 64d 模型，不是对大 checkpoint 训练 post-hoc codec，也没有 fused serving kernel。本地对照口径：基线是两层 llama_modern；实验组用一个权重共享 block 循环两次并采用 2× K/V latent，LM loss 5.7471→5.8012，相对 +0.94%（更差），参数 139584→80576。  llm-architecture kv-cache looped-transformer 基础模型 按需计算：专家、弹性深宽与查表记忆 Looped Transformer 中，共享模型权重与共享运行状态有什么区别？ 权重是重复调用的变换，KV则由各loop的实际隐藏状态产生，不能因变换相同就假定结果相同。LLA让跨loop共享低秩latent，再按loop重建专用K/V，保留这种角色区别。 示意：同一台机器重复加工不同中间材料，机器相同，不代表每一轮产物也完全相同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
 <span id="paper-foundation-models-looped-latent-attention-49effa17" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-48da7218fce331c6">Looped Transformer 已经共享权重，为什么还会有 KV 冗余？</h2>
+<h2 id="qa-48da7218fce331c6">Looped Transformer 中，共享模型权重与共享运行状态有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alooped-latent-attention">Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Maryland / Meta AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>共享的是计算参数，不同loop产生的历史K/V仍可能分别缓存。LLA针对这部分冗余学习跨loop共享的低秩latent，再按loop重建需要的K/V。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>同一block运行两次不等于两次生成的缓存自动只存一份。</p>
-<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p><strong>答案：</strong>权重是重复调用的变换，KV则由各loop的实际隐藏状态产生，不能因变换相同就假定结果相同。LLA让跨loop共享低秩latent，再按loop重建专用K/V，保留这种角色区别。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一台机器重复加工不同中间材料，机器相同，不代表每一轮产物也完全相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.15456">原论文</a> · <a href="../../../../reproductions/2607.15456-looped-latent-attention/">实现解读</a> · <a href="#qa-48da7218fce331c6">问题链接</a></p>
 </details>
 </article>
@@ -1087,17 +1087,17 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.15456">原论文</a> · <a href="../../../../reproductions/2607.15456-looped-latent-attention/">实现解读</a> · <a href="#qa-0bed63c0b7395852">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:memory-grafting" data-paper-title="Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory 基础模型 Tsinghua University / Microsoft Research Asia 2026-05-20 Engram 的大容量条件记忆需要随主模型从零训练。Memory Grafting 先统计高频 2/3/4-gram，用已经预训练的 grafting model 离线编码每个短语最后 token 的中间 hidden state并冻结；recipient 在线只做期望的最长后缀精确查询。未命中时回退到可训练 hash Engram，命中值经独立投影、上下文门控、短卷积后写回 residual stream。 结果说明完整 grafting 路径有效且优于无记忆模型，但当前 bank 太小，未验证相对 Engram 的增益。Fidelity: 核心机制复现。实际训练 grafting model 与 recipient，执行冻结 n-gram hidden bank、最长精确匹配、Engram fallback、query-key gate、短卷积和残差写入。64-d dense recipient、微型 teacher 与 192-entry bank 替代论文 0.92B/2.8B MoE、Qwen3.5/DeepSeek grafting model、50B/100B tokens 和 3M-entry bank；  llm-pretraining conditional-memory offline-knowledge-transfer 基础模型 按需计算：专家、弹性深宽与查表记忆 Memory Grafting 为什么先用已有模型离线编码常见短语？ 它复用预训练grafting model的hidden来构建冻结记忆表，使recipient能查询已有表征，而非必须把大容量记忆与主模型一起从零训练。在线主要做后缀匹配、投影和门控融合。 示意：常见三词短语的表示先离线计算，运行时命中后直接取回。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:memory-grafting" data-paper-title="Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory 基础模型 Tsinghua University / Microsoft Research Asia 2026-05-20 Engram 的大容量条件记忆需要随主模型从零训练。Memory Grafting 先统计高频 2/3/4-gram，用已经预训练的 grafting model 离线编码每个短语最后 token 的中间 hidden state并冻结；recipient 在线只做期望的最长后缀精确查询。未命中时回退到可训练 hash Engram，命中值经独立投影、上下文门控、短卷积后写回 residual stream。 结果说明完整 grafting 路径有效且优于无记忆模型，但当前 bank 太小，未验证相对 Engram 的增益。Fidelity: 核心机制复现。实际训练 grafting model 与 recipient，执行冻结 n-gram hidden bank、最长精确匹配、Engram fallback、query-key gate、短卷积和残差写入。64-d dense recipient、微型 teacher 与 192-entry bank 替代论文 0.92B/2.8B MoE、Qwen3.5/DeepSeek grafting model、50B/100B tokens 和 3M-entry bank；  llm-pretraining conditional-memory offline-knowledge-transfer 基础模型 按需计算：专家、弹性深宽与查表记忆 Memory Grafting 中，grafting model 与 recipient 分别扮演什么角色？ grafting model离线提供常见短语的中间hidden表示，recipient是在线使用这份冻结记忆的接收模型。两者职责不同，在线查表不等于每次又运行一次grafting model。 示意：离线教师先整理短语表，在线接收模型查表取值，不必为同一短语重复请教师编码。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
 <span id="paper-foundation-models-memory-grafting-16992e0e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ff481455d1eea76b">Memory Grafting 为什么先用已有模型离线编码常见短语？</h2>
+<h2 id="qa-ff481455d1eea76b">Memory Grafting 中，grafting model 与 recipient 分别扮演什么角色？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amemory-grafting">Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University / Microsoft Research Asia</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它复用预训练grafting model的hidden来构建冻结记忆表，使recipient能查询已有表征，而非必须把大容量记忆与主模型一起从零训练。在线主要做后缀匹配、投影和门控融合。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>常见三词短语的表示先离线计算，运行时命中后直接取回。</p>
-<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p><strong>答案：</strong>grafting model离线提供常见短语的中间hidden表示，recipient是在线使用这份冻结记忆的接收模型。两者职责不同，在线查表不等于每次又运行一次grafting model。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>离线教师先整理短语表，在线接收模型查表取值，不必为同一短语重复请教师编码。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.20948">原论文</a> · <a href="../../../../reproductions/2605.20948-memory-grafting/">实现解读</a> · <a href="#qa-ff481455d1eea76b">问题链接</a></p>
 </details>
 </article>

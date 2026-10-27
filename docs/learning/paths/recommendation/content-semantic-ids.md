@@ -849,15 +849,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25901">原论文</a> · <a href="../../../../reproductions/2607.25901-reco-reward/">实现解读</a> · <a href="#qa-e8f960e892ab7740">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reco-reward" data-paper-title="RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation 搜广推与 LLM 应用 Kuaishou / Nankai University / Chinese Academy of Sciences 2026-07-28 冻结双塔推荐器，以目标用户与非目标用户的亲和力差作为奖励训练内容描述；线上 serving 只消费描述，不依赖用户画像。 Fidelity: 核心机制复现。本地执行推荐奖励目标与公开数据对照，不声称复刻生产 reward pipeline。没有微调 Qwen3.5-9B，也没有直播视频和快手私有行为；本地结果只验证 RAS 奖励可执行。本地对照口径：基线为 content-only semantic recall，实验组为 RAS 选择；Hit@10 -16.00%、NDCG@10 -9.68%，head share -24.14%（负结果）。  llm-recommendation multimodal reinforcement-learning retrieval 搜广推 语义表征、用户知识与冷启动 目标减非目标奖励与最大化全部受众点击，相比可能产生怎样的专门化？ 差分鼓励突出能区分目标受众的属性，避免所有描述都变成通用赞美；但过度区分也可能牺牲广泛相关用户，或利用冻结模型漏洞。负目标抽样决定奖励含义，不代表真实非目标用户都不喜欢。来源本地质量为负，不能只报去头部。 示意：强调专业烘焙参数可吸引行家，却未必适合新手；如果把新手当所有非目标，奖励可能把文案变得过难，需检查真实使用。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reco-reward" data-paper-title="RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation 搜广推与 LLM 应用 Kuaishou / Nankai University / Chinese Academy of Sciences 2026-07-28 冻结双塔推荐器，以目标用户与非目标用户的亲和力差作为奖励训练内容描述；线上 serving 只消费描述，不依赖用户画像。 Fidelity: 核心机制复现。本地执行推荐奖励目标与公开数据对照，不声称复刻生产 reward pipeline。没有微调 Qwen3.5-9B，也没有直播视频和快手私有行为；本地结果只验证 RAS 奖励可执行。本地对照口径：基线为 content-only semantic recall，实验组为 RAS 选择；Hit@10 -16.00%、NDCG@10 -9.68%，head share -24.14%（负结果）。  llm-recommendation multimodal reinforcement-learning retrieval 搜广推 语义表征、用户知识与冷启动 Reco-Reward 的冻结模型奖励升高，与真实用户更喜欢描述，为什么不是同一证据？ RAS 由固定双塔估计目标与非目标亲和差，优化可以学会利用这把尺子的盲点；真实用户反应还受事实、表达与场景影响。冻结保证比较尺子不跟着动，却不保证尺子正确。应分别验证奖励、内容忠实和独立行为结果，不能用模型高分替代用户实验。 示意：反复堆目标人群关联词可能抬高双塔亲和，却让文案难读或夸大商品；模型奖励上升并不说明真实读者因此更愿意购买。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-874889432bfcaf0c">目标减非目标奖励与最大化全部受众点击，相比可能产生怎样的专门化？</h2>
+<h2 id="qa-874889432bfcaf0c">Reco-Reward 的冻结模型奖励升高，与真实用户更喜欢描述，为什么不是同一证据？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Areco-reward">RecoReward: Recommender-Guided Multimodal Description Generation for Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou / Nankai University / Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>差分鼓励突出能区分目标受众的属性，避免所有描述都变成通用赞美；但过度区分也可能牺牲广泛相关用户，或利用冻结模型漏洞。负目标抽样决定奖励含义，不代表真实非目标用户都不喜欢。来源本地质量为负，不能只报去头部。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>强调专业烘焙参数可吸引行家，却未必适合新手；如果把新手当所有非目标，奖励可能把文案变得过难，需检查真实使用。</p>
+<p><strong>答案：</strong>RAS 由固定双塔估计目标与非目标亲和差，优化可以学会利用这把尺子的盲点；真实用户反应还受事实、表达与场景影响。冻结保证比较尺子不跟着动，却不保证尺子正确。应分别验证奖励、内容忠实和独立行为结果，不能用模型高分替代用户实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>反复堆目标人群关联词可能抬高双塔亲和，却让文案难读或夸大商品；模型奖励上升并不说明真实读者因此更愿意购买。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25901">原论文</a> · <a href="../../../../reproductions/2607.25901-reco-reward/">实现解读</a> · <a href="#qa-874889432bfcaf0c">问题链接</a></p>
 </details>
@@ -1034,16 +1034,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://sigir2026.org/SIGIR2026_program.pdf">原论文</a> · <a href="../../../../reproductions/sigir2026-pin-scale-pin-scale/">实现解读</a> · <a href="#qa-c46a225e046b55e5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:recap" data-paper-title="RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation 搜广推与 LLM 应用 Kuaishou Technology / USTC 2026-07-17 传统 LLM 用户画像只追求“总结得像”，没有直接优化未来推荐。RECAP 把画像变成带容量约束的结构化流式状态：LLM 负责语义 update，确定性逻辑负责生命周期、合并与淘汰；再用 LLM judge 筛出标签一致的行为 pair，训练双塔 evaluator，把匹配分数作为 GRPO reward 闭环更新画像生成器。 Fidelity: 核心机制复现。真实训练 causal Transformer updater、双塔评价器和 clipped GRPO，并执行固定容量画像状态机。自然语言画像和工业 LLM 缩为 category-token causal Transformer；没有快手私有日志、生产 LLM judge 和在线闭环。核心 SFT→evaluator→GRPO→bounded state 链路实际执行，但不声称复现线上收益。本地对照口径：基线是 open-loop SFT 流式画像；实验组增加反馈 evaluator 与 GRPO，NDCG@10 相对 -6.77%。  llm-recommendation semantic-profile grpo 搜广推 语义表征、用户知识与冷启动 RECAP 为什么把用户画像视为有容量的流式状态？ 行为不断到来，画像需要合并、淘汰和生命周期管理，否则会无限增长并积累过时偏好。LLM 更新语义，确定逻辑维持状态约束，再以推荐 evaluator 检查效用。摘要语言自然不代表预测更有用，评价闭环也可能奖励错方向。 示意：去年旅游兴趣与本周育儿需求不能都无限追加；容量有限时应决定更新和过期，而非把每条行为永久粘成更长文本。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:recap" data-paper-title="RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation 搜广推与 LLM 应用 Kuaishou Technology / USTC 2026-07-17 传统 LLM 用户画像只追求“总结得像”，没有直接优化未来推荐。RECAP 把画像变成带容量约束的结构化流式状态：LLM 负责语义 update，确定性逻辑负责生命周期、合并与淘汰；再用 LLM judge 筛出标签一致的行为 pair，训练双塔 evaluator，把匹配分数作为 GRPO reward 闭环更新画像生成器。 Fidelity: 核心机制复现。真实训练 causal Transformer updater、双塔评价器和 clipped GRPO，并执行固定容量画像状态机。自然语言画像和工业 LLM 缩为 category-token causal Transformer；没有快手私有日志、生产 LLM judge 和在线闭环。核心 SFT→evaluator→GRPO→bounded state 链路实际执行，但不声称复现线上收益。本地对照口径：基线是 open-loop SFT 流式画像；实验组增加反馈 evaluator 与 GRPO，NDCG@10 相对 -6.77%。  llm-recommendation semantic-profile grpo 搜广推 语义表征、用户知识与冷启动 RECAP 的 LLM judge 与双塔 evaluator 是同一个角色吗？ 不是。LLM judge 用于筛出标签一致的行为 pair，为 evaluator 提供较可靠训练材料；双塔 evaluator 学习画像与行为匹配，并把分数作为画像更新的奖励。前者审数据，后者提供可学习评估接口，二者都可能有误，不能把任一输出当真实用户满意度。 示意：judge 先检查一对行为是否符合标签语义，双塔再学如何给画像匹配打分；让 judge 说一声“不错”不等于已训练出可部署的双塔奖励器。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <span id="paper-recommendation-recap-84f36c5b" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1e280fb604e68e0c">RECAP 为什么把用户画像视为有容量的流式状态？</h2>
+<h2 id="qa-1e280fb604e68e0c">RECAP 的 LLM judge 与双塔 evaluator 是同一个角色吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arecap">RECAP: Feedback-Driven Streaming Semantic User Profiles for Short-Video Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology / USTC</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>行为不断到来，画像需要合并、淘汰和生命周期管理，否则会无限增长并积累过时偏好。LLM 更新语义，确定逻辑维持状态约束，再以推荐 evaluator 检查效用。摘要语言自然不代表预测更有用，评价闭环也可能奖励错方向。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>去年旅游兴趣与本周育儿需求不能都无限追加；容量有限时应决定更新和过期，而非把每条行为永久粘成更长文本。</p>
+<p><strong>答案：</strong>不是。LLM judge 用于筛出标签一致的行为 pair，为 evaluator 提供较可靠训练材料；双塔 evaluator 学习画像与行为匹配，并把分数作为画像更新的奖励。前者审数据，后者提供可学习评估接口，二者都可能有误，不能把任一输出当真实用户满意度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>judge 先检查一对行为是否符合标签语义，双塔再学如何给画像匹配打分；让 judge 说一声“不错”不等于已训练出可部署的双塔奖励器。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.15730">原论文</a> · <a href="../../../../reproductions/2607.15730-recap/">实现解读</a> · <a href="#qa-1e280fb604e68e0c">问题链接</a></p>
 </details>
@@ -1114,15 +1114,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12246">原论文</a> · <a href="../../../../reproductions/2607.12246-proximity-features/">实现解读</a> · <a href="#qa-2b212bc7d176d0cc">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:proximity-features" data-paper-title="Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb 搜广推与 LLM 应用 Airbnb 2026-07-14 匿名用户没有 user ID。Airbnb 把 consented geo-IP population-center 坐标聚成约 1,000 用户的 proximity key：密集位置用 IP hash 细分，稀疏位置逐级降低地理精度合并；群体行为按稳定 key 每日聚合，线上无需持久个人标识。 Fidelity: 核心机制复现。dense hash refinement、sparse fine-to-coarse clustering、稳定 proximity key、群体聚合与冷启动 scoring 均实际执行。ZIP prefix 不是 geo-IP 坐标；阈值缩为 12，只验证算法，不构成论文约 1,000 用户的隐私保证。本地对照口径：基线是 global cold-start aggregate；实验组用 MovieLens ZIP 的 adaptive proximity aggregate，验证集选择 blend 1.0，相对基线 Hit@10 +16.67%、NDCG@10 +22.91%。  cold-start privacy features 搜广推 语义表征、用户知识与冷启动 自适应人群桶与固定邮编聚合，相比稀疏性怎样处理？ 固定区域人口差异大，小区可能样本少，大区又太粗；自适应按数量目标调精度，平衡统计稳定与局部性。人口阈值依真实口径，不能为追离线指标任意细分。来源本地 ZIP 只是可审计替代，并不等价 geo-IP 生产处理。 示意：市中心小格已有足够用户可保细节，郊区则合到更大范围；固定邮编可能让一边过粗、一边仍只有几个样本。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:proximity-features" data-paper-title="Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb 搜广推与 LLM 应用 Airbnb 2026-07-14 匿名用户没有 user ID。Airbnb 把 consented geo-IP population-center 坐标聚成约 1,000 用户的 proximity key：密集位置用 IP hash 细分，稀疏位置逐级降低地理精度合并；群体行为按稳定 key 每日聚合，线上无需持久个人标识。 Fidelity: 核心机制复现。dense hash refinement、sparse fine-to-coarse clustering、稳定 proximity key、群体聚合与冷启动 scoring 均实际执行。ZIP prefix 不是 geo-IP 坐标；阈值缩为 12，只验证算法，不构成论文约 1,000 用户的隐私保证。本地对照口径：基线是 global cold-start aggregate；实验组用 MovieLens ZIP 的 adaptive proximity aggregate，验证集选择 blend 1.0，相对基线 Hit@10 +16.67%、NDCG@10 +22.91%。  cold-start privacy features 搜广推 语义表征、用户知识与冷启动 Airbnb proximity aggregate 相比 global cold-start aggregate，多加入了什么条件信息？ global 聚合给所有匿名请求同一总体先验，proximity 聚合按人数足够的邻近群体读取统计，允许不同地区有不同需求。它提高局部性，也降低单桶样本量并可能放大地域偏差。来源 ZIP 代理比较检验这一局部信号，不能据此宣称恢复了个人偏好。 示意：整体用户常找热门城市，某邻近群体近期更多周末短途，局部聚合可反映差别；但同桶里准备跨国旅行的人仍可能不符合群体趋势。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-d24a218d06f62fb0">自适应人群桶与固定邮编聚合，相比稀疏性怎样处理？</h2>
+<h2 id="qa-d24a218d06f62fb0">Airbnb proximity aggregate 相比 global cold-start aggregate，多加入了什么条件信息？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aproximity-features">Proximity Features: Privacy-Compliant Cold-Start Personalization at Airbnb</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Airbnb</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>固定区域人口差异大，小区可能样本少，大区又太粗；自适应按数量目标调精度，平衡统计稳定与局部性。人口阈值依真实口径，不能为追离线指标任意细分。来源本地 ZIP 只是可审计替代，并不等价 geo-IP 生产处理。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>市中心小格已有足够用户可保细节，郊区则合到更大范围；固定邮编可能让一边过粗、一边仍只有几个样本。</p>
+<p><strong>答案：</strong>global 聚合给所有匿名请求同一总体先验，proximity 聚合按人数足够的邻近群体读取统计，允许不同地区有不同需求。它提高局部性，也降低单桶样本量并可能放大地域偏差。来源 ZIP 代理比较检验这一局部信号，不能据此宣称恢复了个人偏好。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>整体用户常找热门城市，某邻近群体近期更多周末短途，局部聚合可反映差别；但同桶里准备跨国旅行的人仍可能不符合群体趋势。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12246">原论文</a> · <a href="../../../../reproductions/2607.12246-proximity-features/">实现解读</a> · <a href="#qa-d24a218d06f62fb0">问题链接</a></p>
 </details>
@@ -1352,16 +1352,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.06970">原论文</a> · <a href="../../../../reproductions/2606.06970-ssrlive/">实现解读</a> · <a href="#qa-a690900cba37e414">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pinterest-ads-llm" data-paper-title="Fine-Tuned LLM as a Complementary Predictor Improving Ads System" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="Fine-Tuned LLM as a Complementary Predictor Improving Ads System 搜广推与 LLM 应用 Pinterest 2026-05-27 论文没有让 LLM 替换广告召回或排序，而是把它作为 ancillary predictor：输入用户画像、历史转化、搜索、URL、品类和品牌，预测下一批高转化意图 advertiser 与兴趣。预测结果一方面成为 advertiser 定向的补充召回通道，另一方面作为 ctcvr/vtcvr 特征进入后续排序。训练分三层：先用单一 next-advertiser 标签做 SFT；再用 GRPO 生成 20 个 advertiser 与 5 个兴趣，并用命中位置和严格输出长度计算 reward； 未运行 Pinterest 私有 PinCLIP SID 三阶段 CPT，也不声称本地 AUC/Recall 可外推 RoAS。Fidelity: 完整核心链路。本地实际执行开源 causal LLM 的 LoRA SFT、论文位置/格式 reward 驱动的 clipped GRPO、受约束 advertiser 解码、训练式 two-tower、validation 配额选择的补充召回，以及 LLM advertiser score 作为排序特征。Pinterest 私有广告与跨站转化数据由公开商品品牌和购买序列替换。使用真实预训练语言模型和可训练 LoRA，不是规则或 embedding 打分替代 SFT/GRPO。  advertising llm-sft grpo candidate-generation 搜广推 语义表征、用户知识与冷启动 Pinterest Ads LLM 的 advertiser 预测为什么是用户意图特征，而非直接生成可展示广告？ advertiser 是比单条广告更高层的商业兴趣，预测可作为补充召回过滤和转化率特征，实际广告仍由双塔与后续系统筛选。这样大模型提供先验而不接管实时投放，目录、资格与竞价仍需处理，预测品牌不等于用户已决定购买。 示意：预测用户关注露营品牌，可多召回该品牌合法广告；具体哪款商品、出价和库存，仍由实时链路判断，而非品牌一出现就展示。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pinterest-ads-llm" data-paper-title="Fine-Tuned LLM as a Complementary Predictor Improving Ads System" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="Fine-Tuned LLM as a Complementary Predictor Improving Ads System 搜广推与 LLM 应用 Pinterest 2026-05-27 论文没有让 LLM 替换广告召回或排序，而是把它作为 ancillary predictor：输入用户画像、历史转化、搜索、URL、品类和品牌，预测下一批高转化意图 advertiser 与兴趣。预测结果一方面成为 advertiser 定向的补充召回通道，另一方面作为 ctcvr/vtcvr 特征进入后续排序。训练分三层：先用单一 next-advertiser 标签做 SFT；再用 GRPO 生成 20 个 advertiser 与 5 个兴趣，并用命中位置和严格输出长度计算 reward； 未运行 Pinterest 私有 PinCLIP SID 三阶段 CPT，也不声称本地 AUC/Recall 可外推 RoAS。Fidelity: 完整核心链路。本地实际执行开源 causal LLM 的 LoRA SFT、论文位置/格式 reward 驱动的 clipped GRPO、受约束 advertiser 解码、训练式 two-tower、validation 配额选择的补充召回，以及 LLM advertiser score 作为排序特征。Pinterest 私有广告与跨站转化数据由公开商品品牌和购买序列替换。使用真实预训练语言模型和可训练 LoRA，不是规则或 embedding 打分替代 SFT/GRPO。  advertising llm-sft grpo candidate-generation 搜广推 语义表征、用户知识与冷启动 Pinterest Ads LLM 同时输出 advertiser 与兴趣，这两个粒度是不是一一对应？ 不是。advertiser 指向具体广告主，兴趣概括用户可能关心的主题，多个广告主可服务同一兴趣，一个广告主也可覆盖多种主题。两类输出能提供不同召回与特征线索，不能将兴趣名称直接当广告主 ID，更不能把任一预测当成已经发生的转化。 示意：露营兴趣可关联多个户外广告主，同一百货广告主又覆盖露营与家居；把“露营”替换成某一家品牌，会无端缩小可用候选。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <span id="paper-recommendation-pinterest-ads-llm-d99be125" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7200a906a9dc8325">Pinterest Ads LLM 的 advertiser 预测为什么是用户意图特征，而非直接生成可展示广告？</h2>
+<h2 id="qa-7200a906a9dc8325">Pinterest Ads LLM 同时输出 advertiser 与兴趣，这两个粒度是不是一一对应？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apinterest-ads-llm">Fine-Tuned LLM as a Complementary Predictor Improving Ads System</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Pinterest</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>advertiser 是比单条广告更高层的商业兴趣，预测可作为补充召回过滤和转化率特征，实际广告仍由双塔与后续系统筛选。这样大模型提供先验而不接管实时投放，目录、资格与竞价仍需处理，预测品牌不等于用户已决定购买。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>预测用户关注露营品牌，可多召回该品牌合法广告；具体哪款商品、出价和库存，仍由实时链路判断，而非品牌一出现就展示。</p>
+<p><strong>答案：</strong>不是。advertiser 指向具体广告主，兴趣概括用户可能关心的主题，多个广告主可服务同一兴趣，一个广告主也可覆盖多种主题。两类输出能提供不同召回与特征线索，不能将兴趣名称直接当广告主 ID，更不能把任一预测当成已经发生的转化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>露营兴趣可关联多个户外广告主，同一百货广告主又覆盖露营与家居；把“露营”替换成某一家品牌，会无端缩小可用候选。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.27856">原论文</a> · <a href="../../../../reproductions/2605.27856-pinterest-ads-llm/">实现解读</a> · <a href="#qa-7200a906a9dc8325">问题链接</a></p>
 </details>
@@ -1909,15 +1909,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.10471">原论文</a> · <a href="../../../../reproductions/2604.10471-sid-coord/">实现解读</a> · <a href="#qa-d6262c1fa258fc52">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sid-coord" data-paper-title="SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search 搜广推与 LLM 应用 Kuaishou Technology 2026-04-12 SID-Coord 不把语义信号仅作为普通稠密特征，而是构造多层离散 SID；再通过层级融合、目标感知 HID–SID 门控和历史兴趣对齐，在头部物品记忆与长尾泛化之间逐样本协调。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04970，相对变化 -7.97%。本地代理目标与论文生产任务不同，不能外推线上 lift。  short-video-search semantic-id long-tail-ranking 搜广推 语义表征、用户知识与冷启动 目标感知门控与固定HID/SID混合比例有什么区别？ 目标门使同一用户面对不同候选有不同取舍，固定比例对所有样本相同。灵活性增加不保证无过拟合，层级权重和对齐项仍需独立检验。 例如一条头部候选和一条冷启动候选不必得到同样的语义占比。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sid-coord" data-paper-title="SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search 搜广推与 LLM 应用 Kuaishou Technology 2026-04-12 SID-Coord 不把语义信号仅作为普通稠密特征，而是构造多层离散 SID；再通过层级融合、目标感知 HID–SID 门控和历史兴趣对齐，在头部物品记忆与长尾泛化之间逐样本协调。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04970，相对变化 -7.97%。本地代理目标与论文生产任务不同，不能外推线上 lift。  short-video-search semantic-id long-tail-ranking 搜广推 语义表征、用户知识与冷启动 SID-Coord的层级权重α与HID–SID样本gate，是同一个混合轴吗？ 不是。α在同一物品的多级SID之间分配贡献，gate在该样本的HID记忆与SID语义分支之间协调。把两者折成一个常数会同时抹掉层级与样本差异；它们虽都叫权重，却作用于不同信息来源和张量维度。 教学例子：先决定粗细两级语义怎样组合，再决定这份语义与HID记忆如何取舍，是两次不同的加权。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-24d82f6edd335d8c">目标感知门控与固定HID/SID混合比例有什么区别？</h2>
+<h2 id="qa-24d82f6edd335d8c">SID-Coord的层级权重α与HID–SID样本gate，是同一个混合轴吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asid-coord">SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>目标门使同一用户面对不同候选有不同取舍，固定比例对所有样本相同。灵活性增加不保证无过拟合，层级权重和对齐项仍需独立检验。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一条头部候选和一条冷启动候选不必得到同样的语义占比。</p>
+<p><strong>答案：</strong>不是。α在同一物品的多级SID之间分配贡献，gate在该样本的HID记忆与SID语义分支之间协调。把两者折成一个常数会同时抹掉层级与样本差异；它们虽都叫权重，却作用于不同信息来源和张量维度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先决定粗细两级语义怎样组合，再决定这份语义与HID记忆如何取舍，是两次不同的加权。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.10471">原论文</a> · <a href="../../../../reproductions/2604.10471-sid-coord/">实现解读</a> · <a href="#qa-24d82f6edd335d8c">问题链接</a></p>
 </details>
@@ -2200,16 +2200,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.01590">原论文</a> · <a href="../../../../reproductions/2603.01590-idproxy/">实现解读</a> · <a href="#qa-0fdf676b20910cb9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:quasid" data-paper-title="Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale 搜广推与 LLM 应用 University of Electronic Science and Technology of China / Kuaishou 2026-02-28 用业务资格信号决定碰撞对的 margin，而不是统一排斥；反馈稀疏或冷启动 item 得到更强的可辨识 SID。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 quasid 核心机制，相对 NDCG@10 -0.55%。  semantic-id collision-handling e-commerce 搜广推 语义表征、用户知识与冷启动 QuaSID 为什么让业务资格决定哪些语义码差异必须更可辨？ 相近码有共享价值，但可服务资格不同的物品若混淆，生成结果可能不满足请求。资格相关 margin 优先拉开重要碰撞，尤其反馈稀疏时补区分。资格不是用户喜好，距离更远也不能直接当作更高点击或因果收益。 示意：两件外观相同商品配送区域不同，需要在服务身份上区分；两件仅颜色略异且同资格，可共享更多粗语义。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:quasid" data-paper-title="Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale 搜广推与 LLM 应用 University of Electronic Science and Technology of China / Kuaishou 2026-02-28 用业务资格信号决定碰撞对的 margin，而不是统一排斥；反馈稀疏或冷启动 item 得到更强的可辨识 SID。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 quasid 核心机制，相对 NDCG@10 -0.55%。  semantic-id collision-handling e-commerce 搜广推 语义表征、用户知识与冷启动 QuaSID 中两个码相距更远，是否说明用户更喜欢其中一个物品？ 不能。距离和 margin 在此用于区分编码，资格权重说明哪些物品对需要可辨识，不给出用户偏好的方向。两物品可以被充分分开却都不相关，也可以都很适合当前用户。最终推荐仍需要用户条件评分，不能把可分性当作相关性或增量价值。 示意：两件配送资格不同的商品被拉开，只表示服务时更易区分；用户可能都不想买，码距变大并没有让任一件自动变成好推荐。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <span id="paper-recommendation-quasid-4adc5716" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b938437696f2b972">QuaSID 为什么让业务资格决定哪些语义码差异必须更可辨？</h2>
+<h2 id="qa-b938437696f2b972">QuaSID 中两个码相距更远，是否说明用户更喜欢其中一个物品？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aquasid">Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Electronic Science and Technology of China / Kuaishou</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>相近码有共享价值，但可服务资格不同的物品若混淆，生成结果可能不满足请求。资格相关 margin 优先拉开重要碰撞，尤其反馈稀疏时补区分。资格不是用户喜好，距离更远也不能直接当作更高点击或因果收益。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>两件外观相同商品配送区域不同，需要在服务身份上区分；两件仅颜色略异且同资格，可共享更多粗语义。</p>
+<p><strong>答案：</strong>不能。距离和 margin 在此用于区分编码，资格权重说明哪些物品对需要可辨识，不给出用户偏好的方向。两物品可以被充分分开却都不相关，也可以都很适合当前用户。最终推荐仍需要用户条件评分，不能把可分性当作相关性或增量价值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两件配送资格不同的商品被拉开，只表示服务时更易区分；用户可能都不想买，码距变大并没有让任一件自动变成好推荐。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.00632">原论文</a> · <a href="../../../../reproductions/2603.00632-quasid/">实现解读</a> · <a href="#qa-b938437696f2b972">问题链接</a></p>
 </details>
@@ -2280,15 +2280,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.12593">原论文</a> · <a href="../../../../reproductions/2602.12593-rq-gmm/">实现解读</a> · <a href="#qa-9e9e66d9a2ee6a73">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rq-gmm" data-paper-title="RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction 搜广推与 LLM 应用 Tencent 2026-02-13 把图文多模态 embedding 逐层做残差量化，每层以高斯混合后验进行软分配，避免硬聚类的 codebook 利用率不足；语义离散化与 CTR 偏好建模解耦训练。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04685，相对变化 -13.25%。本地代理目标与论文生产任务不同，不能外推线上 lift。  multimodal-recommendation semantic-tokenization ctr-prediction 搜广推 语义表征、用户知识与冷启动 GMM后验软重构与最近中心硬量化有什么区别？ 软重构按后验组合多个均值，硬量化只取一个中心；前者保留不确定混合，后者给明确码。解耦CTR训练不表示语义码必然最适合所有排序任务。 例如边界物品同时像两类，可在软重构中占两份权重。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rq-gmm" data-paper-title="RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction 搜广推与 LLM 应用 Tencent 2026-02-13 把图文多模态 embedding 逐层做残差量化，每层以高斯混合后验进行软分配，避免硬聚类的 codebook 利用率不足；语义离散化与 CTR 偏好建模解耦训练。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04685，相对变化 -13.25%。本地代理目标与论文生产任务不同，不能外推线上 lift。  multimodal-recommendation semantic-tokenization ctr-prediction 搜广推 语义表征、用户知识与冷启动 RQ-GMM先学习语义码再接CTR训练，与让CTR损失端到端改写码本有什么不同？ 前者把语义量化与CTR优化解耦，后者允许点击目标直接改变离散表示的学习方向。解耦便于保留通用语义结构，却不保证当前CTR任务最优；端到端也可能失去原语义稳定性。这里比较训练耦合关系，不编造两种路径的效果优劣。 教学例子：商品内容相近时先得到相近语义码；若CTR梯度也能改码本，热门度差异可能进一步改变这些码的分配。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-b688b0eaa9cebaca">GMM后验软重构与最近中心硬量化有什么区别？</h2>
+<h2 id="qa-b688b0eaa9cebaca">RQ-GMM先学习语义码再接CTR训练，与让CTR损失端到端改写码本有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arq-gmm">RQ-GMM: Residual Quantized Gaussian Mixture Model for Multimodal Semantic Discretization in CTR Prediction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tencent</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>软重构按后验组合多个均值，硬量化只取一个中心；前者保留不确定混合，后者给明确码。解耦CTR训练不表示语义码必然最适合所有排序任务。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如边界物品同时像两类，可在软重构中占两份权重。</p>
+<p><strong>答案：</strong>前者把语义量化与CTR优化解耦，后者允许点击目标直接改变离散表示的学习方向。解耦便于保留通用语义结构，却不保证当前CTR任务最优；端到端也可能失去原语义稳定性。这里比较训练耦合关系，不编造两种路径的效果优劣。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>商品内容相近时先得到相近语义码；若CTR梯度也能改码本，热门度差异可能进一步改变这些码的分配。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.12593">原论文</a> · <a href="../../../../reproductions/2602.12593-rq-gmm/">实现解读</a> · <a href="#qa-b688b0eaa9cebaca">问题链接</a></p>
 </details>
@@ -2306,16 +2306,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.12593">原论文</a> · <a href="../../../../reproductions/2602.12593-rq-gmm/">实现解读</a> · <a href="#qa-efde0c3f9921e8b5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sarm" data-paper-title="SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking 搜广推与 LLM 应用 Institute of Information Engineering, CAS / Kuaishou 2026-02-10 离线 MLLM 生成直播语义 anchor，轻量 SAE 将 anchor 注入端到端排序；非对称部署只在线更新排序器，避免 MLLM 时延。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 sarm 核心机制，相对 NDCG@10 +44.74%。  live-streaming semantic-anchor multimodal-recommendation 搜广推 语义表征、用户知识与冷启动 SARM的语义anchor为什么由离线MLLM产生？ 直播内容语义可补充ID行为，昂贵多模态解释先离线生成，轻量编码与在线排序利用它，减少实时MLLM时延。内容更新和anchor陈旧仍需处理。 例如主播风格先被总结成语义锚点，在线请求只读紧凑表示。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sarm" data-paper-title="SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking 搜广推与 LLM 应用 Institute of Information Engineering, CAS / Kuaishou 2026-02-10 离线 MLLM 生成直播语义 anchor，轻量 SAE 将 anchor 注入端到端排序；非对称部署只在线更新排序器，避免 MLLM 时延。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 sarm 核心机制，相对 NDCG@10 +44.74%。  live-streaming semantic-anchor multimodal-recommendation 搜广推 语义表征、用户知识与冷启动 SARM的semantic anchor是新的直播物品ID，还是内容理解产生的语义信息？ anchor承载离线多模态内容理解，随后经轻量语义模块接入排序；物品ID与行为信号仍是另一类输入。它不是替换目录身份的编号，也不是用户已点击的事实。先区分内容语义与交互身份，才能理解两者怎样补充而非互相冒充。 教学例子：同一直播间ID保持不变，语义anchor可描述当前内容主题；有该描述并不表示某用户已表现出兴趣。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <span id="paper-recommendation-sarm-37e57a11" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-fc8f3fee4fd06a2a">SARM的语义anchor为什么由离线MLLM产生？</h2>
+<h2 id="qa-fc8f3fee4fd06a2a">SARM的semantic anchor是新的直播物品ID，还是内容理解产生的语义信息？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asarm">SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Information Engineering, CAS / Kuaishou</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>直播内容语义可补充ID行为，昂贵多模态解释先离线生成，轻量编码与在线排序利用它，减少实时MLLM时延。内容更新和anchor陈旧仍需处理。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如主播风格先被总结成语义锚点，在线请求只读紧凑表示。</p>
+<p><strong>答案：</strong>anchor承载离线多模态内容理解，随后经轻量语义模块接入排序；物品ID与行为信号仍是另一类输入。它不是替换目录身份的编号，也不是用户已点击的事实。先区分内容语义与交互身份，才能理解两者怎样补充而非互相冒充。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一直播间ID保持不变，语义anchor可描述当前内容主题；有该描述并不表示某用户已表现出兴趣。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.09401">原论文</a> · <a href="../../../../reproductions/2602.09401-sarm/">实现解读</a> · <a href="#qa-fc8f3fee4fd06a2a">问题链接</a></p>
 </details>
@@ -2333,15 +2333,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.09401">原论文</a> · <a href="../../../../reproductions/2602.09401-sarm/">实现解读</a> · <a href="#qa-83d7cdb62eb6881b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sarm" data-paper-title="SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking 搜广推与 LLM 应用 Institute of Information Engineering, CAS / Kuaishou 2026-02-10 离线 MLLM 生成直播语义 anchor，轻量 SAE 将 anchor 注入端到端排序；非对称部署只在线更新排序器，避免 MLLM 时延。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 sarm 核心机制，相对 NDCG@10 +44.74%。  live-streaming semantic-anchor multimodal-recommendation 搜广推 语义表征、用户知识与冷启动 非对称部署与在线直接调用MLLM排序有何区别？ 前者在线主要更新轻量排序器，语义产物异步供给；后者每请求付大模型理解和生成成本。离线锚点并不自动跟上直播瞬时变化，二者覆盖取舍不同。 例如直播已换主题，旧anchor可能需要刷新，而非假定永远有效。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sarm" data-paper-title="SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking 搜广推与 LLM 应用 Institute of Information Engineering, CAS / Kuaishou 2026-02-10 离线 MLLM 生成直播语义 anchor，轻量 SAE 将 anchor 注入端到端排序；非对称部署只在线更新排序器，避免 MLLM 时延。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 sarm 核心机制，相对 NDCG@10 +44.74%。  live-streaming semantic-anchor multimodal-recommendation 搜广推 语义表征、用户知识与冷启动 SARM的内容语义anchor与在线ID行为特征，能提供相同的信息吗？ 不能。anchor主要提供内容含义，ID和用户行为特征提供平台内交互与匹配证据。相似内容不必让同一用户同样喜欢，行为反馈也未必解释内容在讲什么。异步语义与在线排序结合仍需处理新鲜度，不能只靠其中一类信号声称覆盖另一类。 教学例子：两个直播间都讲露营，但主播互动与用户偏好不同；相似anchor不能代替各自的点击或转化历史。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-ae58a8ca3d3c68d0">非对称部署与在线直接调用MLLM排序有何区别？</h2>
+<h2 id="qa-ae58a8ca3d3c68d0">SARM的内容语义anchor与在线ID行为特征，能提供相同的信息吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asarm">SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Information Engineering, CAS / Kuaishou</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者在线主要更新轻量排序器，语义产物异步供给；后者每请求付大模型理解和生成成本。离线锚点并不自动跟上直播瞬时变化，二者覆盖取舍不同。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如直播已换主题，旧anchor可能需要刷新，而非假定永远有效。</p>
+<p><strong>答案：</strong>不能。anchor主要提供内容含义，ID和用户行为特征提供平台内交互与匹配证据。相似内容不必让同一用户同样喜欢，行为反馈也未必解释内容在讲什么。异步语义与在线排序结合仍需处理新鲜度，不能只靠其中一类信号声称覆盖另一类。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个直播间都讲露营，但主播互动与用户偏好不同；相似anchor不能代替各自的点击或转化历史。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.09401">原论文</a> · <a href="../../../../reproductions/2602.09401-sarm/">实现解读</a> · <a href="#qa-ae58a8ca3d3c68d0">问题链接</a></p>
 </details>
@@ -2359,16 +2359,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.09401">原论文</a> · <a href="../../../../reproductions/2602.09401-sarm/">实现解读</a> · <a href="#qa-90e4815c43be3546">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pit" data-paper-title="PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation 搜广推与 LLM 应用 Beijing University of Posts and Telecommunications 2026-02-09 tokenizer 与生成推荐器共同训练，以用户引导的最小损失从多个候选 SID 中选出更契合当前偏好的编码；一对多 beam index 保留替代编码，减轻流式分布漂移。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05305，相对变化 -1.78%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation semantic-id dynamic-tokenizer 搜广推 语义表征、用户知识与冷启动 PIT 为什么将一个物品映到多条可选编码，而不是固定一条唯一语义路径？ 物品可从不同需求角度被理解，替代 SID 提供多种生成入口，用户引导损失选更契合当前偏好的一条。映射多样不代表多个真实物品，最终需要统一身份和去重。动态选择也提高索引维护与训练一致性要求。 示意：办公室拉伸视频既可经健身也可经久坐健康找到，两条码最终仍指向同一视频，不能在列表里当两项计覆盖。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pit" data-paper-title="PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation 搜广推与 LLM 应用 Beijing University of Posts and Telecommunications 2026-02-09 tokenizer 与生成推荐器共同训练，以用户引导的最小损失从多个候选 SID 中选出更契合当前偏好的编码；一对多 beam index 保留替代编码，减轻流式分布漂移。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05305，相对变化 -1.78%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation semantic-id dynamic-tokenizer 搜广推 语义表征、用户知识与冷启动 PIT 所针对的流式分布漂移，为什么会让原来好用的 SID 路径逐渐不合适？ 用户需求、新物品与交互频率会变化，固定编码与旧生成分布的匹配可能随时间减弱，即使商品文字没变也是如此。这里变化的是数据与偏好关系，不是每次生成随机噪声；诊断时应区分真实漂移、模型更新与地址改变，不能用一次波动证明需要重编码。 示意：同一件轻外套在春季通勤和秋季旅行中对应不同需求，内容未改，用户到达它的偏好路径却可能变；重复同一随机种子无法消除这种时间变化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <span id="paper-recommendation-pit-181d335d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8772b022688e6020">PIT 为什么将一个物品映到多条可选编码，而不是固定一条唯一语义路径？</h2>
+<h2 id="qa-8772b022688e6020">PIT 所针对的流式分布漂移，为什么会让原来好用的 SID 路径逐渐不合适？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apit">PIT: A Dynamic Personalized Item Tokenizer for End-to-End Generative Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beijing University of Posts and Telecommunications</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>物品可从不同需求角度被理解，替代 SID 提供多种生成入口，用户引导损失选更契合当前偏好的一条。映射多样不代表多个真实物品，最终需要统一身份和去重。动态选择也提高索引维护与训练一致性要求。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>办公室拉伸视频既可经健身也可经久坐健康找到，两条码最终仍指向同一视频，不能在列表里当两项计覆盖。</p>
+<p><strong>答案：</strong>用户需求、新物品与交互频率会变化，固定编码与旧生成分布的匹配可能随时间减弱，即使商品文字没变也是如此。这里变化的是数据与偏好关系，不是每次生成随机噪声；诊断时应区分真实漂移、模型更新与地址改变，不能用一次波动证明需要重编码。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一件轻外套在春季通勤和秋季旅行中对应不同需求，内容未改，用户到达它的偏好路径却可能变；重复同一随机种子无法消除这种时间变化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.08530">原论文</a> · <a href="../../../../reproductions/2602.08530-pit/">实现解读</a> · <a href="#qa-8772b022688e6020">问题链接</a></p>
 </details>
@@ -2465,16 +2465,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.04460">原论文</a> · <a href="../../../../reproductions/2602.04460-dos/">实现解读</a> · <a href="#qa-23e5ceb782b20c24">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:recgpt-v2" data-paper-title="RecGPT-V2 Technical Report" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="RecGPT-V2 Technical Report 搜广推与 LLM 应用 Alibaba / Taobao 2025-12-16 RecGPT-V1 的多条固定推理链重复且难泛化。V2 用层级多 Agent 拆解意图，混合压缩行为表示，动态生成 meta-prompt，再用多奖励约束 RL 和 Agent-as-a-Judge 对齐。 Fidelity: 核心机制复现。实际执行短期/长期/类目 agent、meta-router、混合表示与 KL 约束偏好更新。Agent 是公开数据上的可训练小型专家，不是淘宝私有 LLM；没有人工 Judge 标注、解释生成或线上资源测量。本地对照口径：相对 RecGPT-V1 单路兴趣基线，实验组 NDCG@10 +18.52%。  llm-recommendation multi-agent reinforcement-learning ranking 搜广推 语义表征、用户知识与冷启动 RecGPT-V2 的层级 agent 为什么要生成 meta-prompt 而不只是多次问同一问题？ 层级分工先提炼不同意图，压缩行为后按当前需求组织提示，使推理路径有针对性，避免固定链重复。多次采样同一 prompt 可能只换措辞而不增加证据。agent 角色需要实际工具和信息流，不能由命名就认定具备不同能力。 示意：旅行与摄影需求分别提炼后汇成轻便相机提示，比连续三次问“用户喜欢什么”更有结构；但仍需检查两路是否实际只复述热门度。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:recgpt-v2" data-paper-title="RecGPT-V2 Technical Report" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="RecGPT-V2 Technical Report 搜广推与 LLM 应用 Alibaba / Taobao 2025-12-16 RecGPT-V1 的多条固定推理链重复且难泛化。V2 用层级多 Agent 拆解意图，混合压缩行为表示，动态生成 meta-prompt，再用多奖励约束 RL 和 Agent-as-a-Judge 对齐。 Fidelity: 核心机制复现。实际执行短期/长期/类目 agent、meta-router、混合表示与 KL 约束偏好更新。Agent 是公开数据上的可训练小型专家，不是淘宝私有 LLM；没有人工 Judge 标注、解释生成或线上资源测量。本地对照口径：相对 RecGPT-V1 单路兴趣基线，实验组 NDCG@10 +18.52%。  llm-recommendation multi-agent reinforcement-learning ranking 搜广推 语义表征、用户知识与冷启动 RecGPT-V2 的压缩行为表示与 meta-prompt，分别是证据还是推理指令？ 压缩表示概括已观察行为，meta-prompt 指示系统当前怎样组织或利用这些证据，二者角色不同。换指令可改变关注点，却不能创造新消费事实；压缩也可能丢掉证据，指令写得再详细不能保证补回。层级 agent 应保持这种信息与控制的边界。 示意：同一旅行浏览摘要可配“优先探索”或“优先实用”的指令，结果取舍可变；但不能因指令要求推荐潜水，就声称用户已有潜水经历。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <span id="paper-recommendation-recgpt-v2-f68ee63c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-649ef68870c76939">RecGPT-V2 的层级 agent 为什么要生成 meta-prompt 而不只是多次问同一问题？</h2>
+<h2 id="qa-649ef68870c76939">RecGPT-V2 的压缩行为表示与 meta-prompt，分别是证据还是推理指令？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arecgpt-v2">RecGPT-V2 Technical Report</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba / Taobao</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>层级分工先提炼不同意图，压缩行为后按当前需求组织提示，使推理路径有针对性，避免固定链重复。多次采样同一 prompt 可能只换措辞而不增加证据。agent 角色需要实际工具和信息流，不能由命名就认定具备不同能力。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>旅行与摄影需求分别提炼后汇成轻便相机提示，比连续三次问“用户喜欢什么”更有结构；但仍需检查两路是否实际只复述热门度。</p>
+<p><strong>答案：</strong>压缩表示概括已观察行为，meta-prompt 指示系统当前怎样组织或利用这些证据，二者角色不同。换指令可改变关注点，却不能创造新消费事实；压缩也可能丢掉证据，指令写得再详细不能保证补回。层级 agent 应保持这种信息与控制的边界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一旅行浏览摘要可配“优先探索”或“优先实用”的指令，结果取舍可变；但不能因指令要求推荐潜水，就声称用户已有潜水经历。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.14503">原论文</a> · <a href="../../../../reproductions/2512.14503-recgpt-v2/">实现解读</a> · <a href="#qa-649ef68870c76939">问题链接</a></p>
 </details>
@@ -2545,15 +2545,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.01375">原论文</a> · <a href="../../../../reproductions/2508.01375-saviorrec/">实现解读</a> · <a href="#qa-4516138032e18f25">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:saviorrec" data-paper-title="SaviorRec: Semantic-Behavior Alignment for Cold-Start Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="SaviorRec: Semantic-Behavior Alignment for Cold-Start Recommendation 搜广推与 LLM 应用 Alibaba 2025-08-02 冷启动排序依赖内容语义，但通用多模态 encoder 的相似度不等于平台用户的共点/共购关系，而且行为分布持续变化。SaviorRec 先以真实交互监督训练 SaviorEnc，再用 RQ-VAE 把表示离散为 Semantic ID；线上排序阶段冻结 SID，同时用零初始化的 Modal-Behavior Alignment（MBA）码本学习相对当前行为空间的残差，并用 target 与历史双向注意力完成 CTR 预测。 Fidelity: 核心机制复现。真实执行行为监督内容编码、RQ Semantic ID、零初始化 MBA 残差码本、双向 target/history attention 和 CTR 训练；MovieLens genre 替代私有图文模型。本地对照口径：基线是等预算 Content Ranker；实验组是 SaviorRec；总体 AUC +1.56%、cold AUC +6.92%，但都只有 1/3 seeds 正向。这是语义—行为对齐模块消融，不是相对 DIN。  cold start semantic ID multimodal recommendation 搜广推 语义表征、用户知识与冷启动 冻结SID再学MBA残差，与每次重训练语义码有什么差别？ 冻结码维持稳定身份，零初始化残差随当前行为空间适配；重编码可能改变码分配及缓存。残差可补漂移但不保证总能修复语义错误。 例如新趋势兴起时改行为偏置，不必立即给所有物品换SID。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:saviorrec" data-paper-title="SaviorRec: Semantic-Behavior Alignment for Cold-Start Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="SaviorRec: Semantic-Behavior Alignment for Cold-Start Recommendation 搜广推与 LLM 应用 Alibaba 2025-08-02 冷启动排序依赖内容语义，但通用多模态 encoder 的相似度不等于平台用户的共点/共购关系，而且行为分布持续变化。SaviorRec 先以真实交互监督训练 SaviorEnc，再用 RQ-VAE 把表示离散为 Semantic ID；线上排序阶段冻结 SID，同时用零初始化的 Modal-Behavior Alignment（MBA）码本学习相对当前行为空间的残差，并用 target 与历史双向注意力完成 CTR 预测。 Fidelity: 核心机制复现。真实执行行为监督内容编码、RQ Semantic ID、零初始化 MBA 残差码本、双向 target/history attention 和 CTR 训练；MovieLens genre 替代私有图文模型。本地对照口径：基线是等预算 Content Ranker；实验组是 SaviorRec；总体 AUC +1.56%、cold AUC +6.92%，但都只有 1/3 seeds 正向。这是语义—行为对齐模块消融，不是相对 DIN。  cold start semantic ID multimodal recommendation 搜广推 语义表征、用户知识与冷启动 SaviorRec用行为正对训练内容encoder，与只按内容自身相似性组织表示有何不同？ 行为正对把平台交互关系作为监督，让内容空间朝推荐需求调整；纯内容相似可能只保留图文表面接近。监督来源不同，并不表示行为标签天然没有曝光偏差。该步骤发生在量化前，不能只增加一个下游残差就宣称已完成内容encoder的行为训练。 教学例子：外观不同但经常共同被用户选择的商品，行为正对可拉近其表示；只看图片相似未必建立这种联系。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-7c34a38d5a8bc34d">冻结SID再学MBA残差，与每次重训练语义码有什么差别？</h2>
+<h2 id="qa-7c34a38d5a8bc34d">SaviorRec用行为正对训练内容encoder，与只按内容自身相似性组织表示有何不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asaviorrec">SaviorRec: Semantic-Behavior Alignment for Cold-Start Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>冻结码维持稳定身份，零初始化残差随当前行为空间适配；重编码可能改变码分配及缓存。残差可补漂移但不保证总能修复语义错误。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如新趋势兴起时改行为偏置，不必立即给所有物品换SID。</p>
+<p><strong>答案：</strong>行为正对把平台交互关系作为监督，让内容空间朝推荐需求调整；纯内容相似可能只保留图文表面接近。监督来源不同，并不表示行为标签天然没有曝光偏差。该步骤发生在量化前，不能只增加一个下游残差就宣称已完成内容encoder的行为训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>外观不同但经常共同被用户选择的商品，行为正对可拉近其表示；只看图片相似未必建立这种联系。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.01375">原论文</a> · <a href="../../../../reproductions/2508.01375-saviorrec/">实现解读</a> · <a href="#qa-7c34a38d5a8bc34d">问题链接</a></p>
 </details>
@@ -2651,15 +2651,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.13539">原论文</a> · <a href="../../../../reproductions/2502.13539-seral/">实现解读</a> · <a href="#qa-2bad333c1ee91eaa">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:seral" data-paper-title="Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models 搜广推与 LLM 应用 Alibaba / Taobao 2025-02-19 惊喜推荐需同时相关且未见。SERAL 压缩超长历史为多层认知画像，以 LLM/人工 CDI 打破日志反馈环，用 IPO 对齐 SerenGPT，最后 nearline 生成并缓存候选。 内部消融中 IPO 相对纯 SFT 为 +8.59%，但 category-novelty 0.05542→0.05444，仍未复现惊喜度提升。Fidelity: 完整核心链路复现。静态/短期/长期 cognition profile、SFT、CDI 偏好对、IPO+SFT 与 nearline 全库缓存均执行；GPT-4/人工标注由公开内容和协同信号替代。本地对照口径：统一跨模型基线是 DIN，SERAL NDCG@10 相对 DIN +50.60%；内部基线是纯 SFT，增加 CDI+IPO 后 +8.59%，但 novelty 下降。排序收益与惊喜度结论分开报告。  llm-recommendation preference-alignment serendipity 搜广推 语义表征、用户知识与冷启动 CDI偏好对齐与仅从点击日志学习有什么不同？ 日志受既有曝光限制，LLM与人工对照提供日志外相关新意信号，IPO与SFT内化。额外判断仍有偏差，不能把LLM喜欢等同真实用户惊喜。 例如用户未被曝光过的题材，日志没有点击不代表其不感兴趣。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:seral" data-paper-title="Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/content-semantic-ids" data-search="Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models 搜广推与 LLM 应用 Alibaba / Taobao 2025-02-19 惊喜推荐需同时相关且未见。SERAL 压缩超长历史为多层认知画像，以 LLM/人工 CDI 打破日志反馈环，用 IPO 对齐 SerenGPT，最后 nearline 生成并缓存候选。 内部消融中 IPO 相对纯 SFT 为 +8.59%，但 category-novelty 0.05542→0.05444，仍未复现惊喜度提升。Fidelity: 完整核心链路复现。静态/短期/长期 cognition profile、SFT、CDI 偏好对、IPO+SFT 与 nearline 全库缓存均执行；GPT-4/人工标注由公开内容和协同信号替代。本地对照口径：统一跨模型基线是 DIN，SERAL NDCG@10 相对 DIN +50.60%；内部基线是纯 SFT，增加 CDI+IPO 后 +8.59%，但 novelty 下降。排序收益与惊喜度结论分开报告。  llm-recommendation preference-alignment serendipity 搜广推 语义表征、用户知识与冷启动 SERAL在本地命中提高但新颖度下降时，能称为惊喜推荐全面改善吗？ 不能。惊喜目标同时涉及相关性与未见性，历史命中只覆盖部分要求。若一种指标改善、另一种下降，应分别报告并讨论取舍，不能用单一排序分数替代整个目标；本地代理也不能外推真实用户惊喜或生产转化。 教学例子：推荐更多用户熟悉的热门内容可能更易命中，却更少带来未见内容；这两种变化应同时展示。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 语义表征、用户知识与冷启动</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-ec570df74922742c">CDI偏好对齐与仅从点击日志学习有什么不同？</h2>
+<h2 id="qa-ec570df74922742c">SERAL在本地命中提高但新颖度下降时，能称为惊喜推荐全面改善吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aseral">Bursting Filter Bubble: Enhancing Serendipity Recommendations with Aligned Large Language Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba / Taobao</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>日志受既有曝光限制，LLM与人工对照提供日志外相关新意信号，IPO与SFT内化。额外判断仍有偏差，不能把LLM喜欢等同真实用户惊喜。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户未被曝光过的题材，日志没有点击不代表其不感兴趣。</p>
+<p><strong>答案：</strong>不能。惊喜目标同时涉及相关性与未见性，历史命中只覆盖部分要求。若一种指标改善、另一种下降，应分别报告并讨论取舍，不能用单一排序分数替代整个目标；本地代理也不能外推真实用户惊喜或生产转化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>推荐更多用户熟悉的热门内容可能更易命中，却更少带来未见内容；这两种变化应同时展示。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.13539">原论文</a> · <a href="../../../../reproductions/2502.13539-seral/">实现解读</a> · <a href="#qa-ec570df74922742c">问题链接</a></p>
 </details>

@@ -743,16 +743,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20003">原论文</a> · <a href="../../../../agent-research/2610.20003-ctxgap/">实现解读</a> · <a href="#qa-823db16c649a2ab8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ctxgap" data-paper-title="What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports Agent Tencent 2026-10-14 编码 Agent 的最终报告可能“听起来完整”，却不足以让用户恢复真实任务状态。CTXGAP 不用任务完成率替代信息质量，而是从执行记录抽取原子事实，生成有参考答案的探针，在同一问题上比较只读累积报告的观察者、读取完整执行视图的观察者，以及直接询问执行 Agent 的条件。重要事实的类别权重防止“多生成简单问题”稀释遗漏。37 个主任务包含 148 个检查点、4,855 个探针，其中 4,799 个有效；公开文本探针及公开执行材料只是子集。 完整私有执行视图和大规模模型调用不在本轮复现范围：成本过高，不复现（审查 DONE）。本地完成的是官方冻结数值表的 CPU 复算与公开评测协议接口，不是新 Agent 的能力评测。完整私有执行视图和大规模模型调用不在本轮复现范围：成本过高，不复现（审查 DONE）。冻结统计复算：只下载五份固定数值表（约 1.65 MB），逐文件 SHA256 核验。按作者 reproduce_all.py 的统计口径独立组织复算；10,000 次聚类 bootstrap、固定 seed 0，结果与固定版本 data/reproduced_all.json 逐项相同。没有调用模型、没有下载完整轨迹。  公共评测与协议 任务状态可恢复性与报告审计 Agent 评测与可靠性：如何知道真的做对了 CTXGAP 的公开执行材料，为什么不能替代 T_full 复算完整差距？ 部分探针证据只存在于永久不公开的推理或记忆，公开视图T_public不等于T_full。公开子集可测公开条件，但不能把它改名完整视图后宣称复现原文私有信息差距。 示意：看不到一条私有执行事实，并不说明原文完整观察者也看不到它。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ctxgap" data-paper-title="What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports Agent Tencent 2026-10-14 编码 Agent 的最终报告可能“听起来完整”，却不足以让用户恢复真实任务状态。CTXGAP 不用任务完成率替代信息质量，而是从执行记录抽取原子事实，生成有参考答案的探针，在同一问题上比较只读累积报告的观察者、读取完整执行视图的观察者，以及直接询问执行 Agent 的条件。重要事实的类别权重防止“多生成简单问题”稀释遗漏。37 个主任务包含 148 个检查点、4,855 个探针，其中 4,799 个有效；公开文本探针及公开执行材料只是子集。 完整私有执行视图和大规模模型调用不在本轮复现范围：成本过高，不复现（审查 DONE）。本地完成的是官方冻结数值表的 CPU 复算与公开评测协议接口，不是新 Agent 的能力评测。完整私有执行视图和大规模模型调用不在本轮复现范围：成本过高，不复现（审查 DONE）。冻结统计复算：只下载五份固定数值表（约 1.65 MB），逐文件 SHA256 核验。按作者 reproduce_all.py 的统计口径独立组织复算；10,000 次聚类 bootstrap、固定 seed 0，结果与固定版本 data/reproduced_all.json 逐项相同。没有调用模型、没有下载完整轨迹。  公共评测与协议 任务状态可恢复性与报告审计 Agent 评测与可靠性：如何知道真的做对了 CTXGAP 的重要性加权准确率，与把所有探针等权平均有何区别？ 某类别探针越多，不应仅因此压过重要事实更集中的类别。权重以类别重要原子事实数除以探针数，先累加加权分数再归一化；等权平均容易被大量简单或相似问题稀释遗漏。 示意：为一条琐碎日志生成很多题，不应掩盖一个关键验收事实未被报告。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c679357bfb66ed89">CTXGAP 的公开执行材料，为什么不能替代 T_full 复算完整差距？</h2>
+<h2 id="qa-c679357bfb66ed89">CTXGAP 的重要性加权准确率，与把所有探针等权平均有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Actxgap">What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tencent</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>部分探针证据只存在于永久不公开的推理或记忆，公开视图T_public不等于T_full。公开子集可测公开条件，但不能把它改名完整视图后宣称复现原文私有信息差距。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>看不到一条私有执行事实，并不说明原文完整观察者也看不到它。</p>
-<p class="ar-learning-sources">依据：背景与主要改动、两条严格区分的路径；例子用于解释机制。</p>
+<p><strong>答案：</strong>某类别探针越多，不应仅因此压过重要事实更集中的类别。权重以类别重要原子事实数除以探针数，先累加加权分数再归一化；等权平均容易被大量简单或相似问题稀释遗漏。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>为一条琐碎日志生成很多题，不应掩盖一个关键验收事实未被报告。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式与统计单位；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20003">原论文</a> · <a href="../../../../agent-research/2610.20003-ctxgap/">实现解读</a> · <a href="#qa-c679357bfb66ed89">问题链接</a></p>
 </details>
 </article>
@@ -796,15 +796,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://github.com/facebookresearch/autoformbench/blob/af1aa38fd44e019e566bce0b5a168609a886d8e6/paper.pdf">原论文</a> · <a href="../../../../agent-research/autoformbench/">实现解读</a> · <a href="#qa-e4b095973d365cfd">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autoformbench" data-paper-title="AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics Agent FAIR at Meta 2026-10-13 AutoformBench 不只要求补一个孤立证明，而是让 Agent 在固定 Lean/Mathlib 上构造支撑高级数学命题的定义、辅助引理和证明。341 个任务来自 24 个数学来源，共有 1,155 个需要完成的证明义务；一个任务只有全部义务均通过可信验证才算成功。最容易混淆的是两个不同实验条件：论文排行榜向 Agent 提供非形式化原文（source-present）；公开仓库则发布不含教材摘录/参考证明的 source-free 工作区。 原研究的九类 frontier 模型、341 题长轨迹及教材/工具链准备超出单张 A100/A30 或本地 Mac 的低成本预算，成本过高，不复现（审查 DONE）。本轮真实读取官方任务清单和已有结果，未运行 Lean、Harbor、模型推理或付费 API；本页是 CPU 评测协议接口，不是模型/Agent 能力复现。本轮真实读取官方任务清单和已有结果，未运行 Lean、Harbor、模型推理或付费 API；不提供本地 source-free 成功率，不接入 Evolve 晋级。在项目根目录、已安装项目的 Python 环境中运行：  形式化数学 Agent 评测协议与结果导入 Agent 评测与可靠性：如何知道真的做对了 source-present与source-free为何相同task ID也不能直接比？ 前者提供非形式化原文，后者公开工作区不含教材摘录参考证明，信息条件不同。成本与能力曲线需保持来源访问、工具、scaffold和停止策略一致。 例如一边读教材证明一边从命题独立构造，难度并不相同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autoformbench" data-paper-title="AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics Agent FAIR at Meta 2026-10-13 AutoformBench 不只要求补一个孤立证明，而是让 Agent 在固定 Lean/Mathlib 上构造支撑高级数学命题的定义、辅助引理和证明。341 个任务来自 24 个数学来源，共有 1,155 个需要完成的证明义务；一个任务只有全部义务均通过可信验证才算成功。最容易混淆的是两个不同实验条件：论文排行榜向 Agent 提供非形式化原文（source-present）；公开仓库则发布不含教材摘录/参考证明的 source-free 工作区。 原研究的九类 frontier 模型、341 题长轨迹及教材/工具链准备超出单张 A100/A30 或本地 Mac 的低成本预算，成本过高，不复现（审查 DONE）。本轮真实读取官方任务清单和已有结果，未运行 Lean、Harbor、模型推理或付费 API；本页是 CPU 评测协议接口，不是模型/Agent 能力复现。本轮真实读取官方任务清单和已有结果，未运行 Lean、Harbor、模型推理或付费 API；不提供本地 source-free 成功率，不接入 Evolve 晋级。在项目根目录、已安装项目的 Python 环境中运行：  形式化数学 Agent 评测协议与结果导入 Agent 评测与可靠性：如何知道真的做对了 AutoformBench与给定全部定义后只补一个孤立Lean证明，有何任务范围区别？ 这里还要求构造支撑命题的定义与辅助引理，并完成任务内全部证明义务；孤立证明补全通常已固定更多形式化上下文。两者都可能通过Lean验证，但需要自主完成的形式化工作不同，不能只因同用验证器就合并成功率。 教学例子：若缺少一个适当定义，Agent需先形式化该定义并证明辅助引理；只填最后一个by证明块没有完成整项任务。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-9943b69a42b057f3">source-present与source-free为何相同task ID也不能直接比？</h2>
+<h2 id="qa-9943b69a42b057f3">AutoformBench与给定全部定义后只补一个孤立Lean证明，有何任务范围区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aautoformbench">AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · FAIR at Meta</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者提供非形式化原文，后者公开工作区不含教材摘录参考证明，信息条件不同。成本与能力曲线需保持来源访问、工具、scaffold和停止策略一致。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一边读教材证明一边从命题独立构造，难度并不相同。</p>
+<p><strong>答案：</strong>这里还要求构造支撑命题的定义与辅助引理，并完成任务内全部证明义务；孤立证明补全通常已固定更多形式化上下文。两者都可能通过Lean验证，但需要自主完成的形式化工作不同，不能只因同用验证器就合并成功率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若缺少一个适当定义，Agent需先形式化该定义并证明辅助引理；只填最后一个by证明块没有完成整项任务。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://github.com/facebookresearch/autoformbench/blob/af1aa38fd44e019e566bce0b5a168609a886d8e6/paper.pdf">原论文</a> · <a href="../../../../agent-research/autoformbench/">实现解读</a> · <a href="#qa-9943b69a42b057f3">问题链接</a></p>
 </details>
@@ -1326,15 +1326,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.34320">原论文</a> · <a href="../../../../agent-research/2609.34320-certified-selective-eval/">实现解读</a> · <a href="#qa-1a0d4910bf52da75">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:certified-selective-eval" data-paper-title="Certified Selective Automation of LLM Agent Evaluation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Certified Selective Automation of LLM Agent Evaluation Agent Independent Researcher 2026-09-28 按任务簇而非轨迹独立假设做 bootstrap，给自动判断区域的错误率建立上置信界，只有证书低于预算才自动接管。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 task-cluster bootstrap certificate；mini-suite 证书不代表论文语料覆盖率。执行 task-cluster bootstrap certificate；mini-suite 证书不代表论文语料覆盖率。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  Agent 评测 选择性自动化 统计证书 Agent 评测与可靠性：如何知道真的做对了 task-cluster bootstrap与把每条轨迹当独立样本有什么区别？ 同任务轨迹共享难度与上下文，独立抽轨迹会低估相关性。按任务簇重采样保留组内依赖，证书仍受数据代表性与统计协议限制，不是所有新域的安全保证。 例如一个难题产生很多相似失败，不应算成许多独立证据。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:certified-selective-eval" data-paper-title="Certified Selective Automation of LLM Agent Evaluation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Certified Selective Automation of LLM Agent Evaluation Agent Independent Researcher 2026-09-28 按任务簇而非轨迹独立假设做 bootstrap，给自动判断区域的错误率建立上置信界，只有证书低于预算才自动接管。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 task-cluster bootstrap certificate；mini-suite 证书不代表论文语料覆盖率。执行 task-cluster bootstrap certificate；mini-suite 证书不代表论文语料覆盖率。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  Agent 评测 选择性自动化 统计证书 Agent 评测与可靠性：如何知道真的做对了 选择性评测用错误率上置信界，比仅用自动区域的经验错误率多控制什么？ 经验错误率只总结已观察样本，上置信界还反映有限证据下的不确定性。只有界低于预算才自动接管，证据不足时即使暂时零错，也可能继续交人工。它控制的是选定自动区域的风险证据，不能承诺每条自动判断绝不出错。 教学例子：某小区域暂未发现错误，样本仍很少；经验值为零不代表错误上界已足够低，覆盖率不能据此随意扩大。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-a5b687bab96bef57">task-cluster bootstrap与把每条轨迹当独立样本有什么区别？</h2>
+<h2 id="qa-a5b687bab96bef57">选择性评测用错误率上置信界，比仅用自动区域的经验错误率多控制什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acertified-selective-eval">Certified Selective Automation of LLM Agent Evaluation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Independent Researcher</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同任务轨迹共享难度与上下文，独立抽轨迹会低估相关性。按任务簇重采样保留组内依赖，证书仍受数据代表性与统计协议限制，不是所有新域的安全保证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个难题产生很多相似失败，不应算成许多独立证据。</p>
+<p><strong>答案：</strong>经验错误率只总结已观察样本，上置信界还反映有限证据下的不确定性。只有界低于预算才自动接管，证据不足时即使暂时零错，也可能继续交人工。它控制的是选定自动区域的风险证据，不能承诺每条自动判断绝不出错。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某小区域暂未发现错误，样本仍很少；经验值为零不代表错误上界已足够低，覆盖率不能据此随意扩大。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.34320">原论文</a> · <a href="../../../../agent-research/2609.34320-certified-selective-eval/">实现解读</a> · <a href="#qa-a5b687bab96bef57">问题链接</a></p>
 </details>
@@ -1352,16 +1352,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.34320">原论文</a> · <a href="../../../../agent-research/2609.34320-certified-selective-eval/">实现解读</a> · <a href="#qa-20ce56f5e0218ac3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harness-design-study" data-paper-title="An Empirical Study of Harness Design for Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="An Empirical Study of Harness Design for Coding Agents Agent University of Massachusetts Amherst 2026-09-17 固定底层执行循环，分别控制 planning、action space 与 context management，隔离 coding-agent harness 中真正影响效果和成本的因素。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地实现可控 harness 因子，不把 mini-suite 当作 SWE-bench 或 Terminal-Bench 结果。本地实现可控 harness 因子，不把 mini-suite 当作 SWE-bench 或 Terminal-Bench 结果。  编程 Agent Harness 设计 Agent 评测与可靠性：如何知道真的做对了 Harness设计研究为什么固定底层执行循环？ 想隔离planning、action space与context management对效果和成本的作用，不能同时换模型和执行框架。固定循环让比较更接近所改因素，而非混合系统差异。 例如只改规划频率时，工具权限和重试规则应保持一致。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harness-design-study" data-paper-title="An Empirical Study of Harness Design for Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="An Empirical Study of Harness Design for Coding Agents Agent University of Massachusetts Amherst 2026-09-17 固定底层执行循环，分别控制 planning、action space 与 context management，隔离 coding-agent harness 中真正影响效果和成本的因素。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地实现可控 harness 因子，不把 mini-suite 当作 SWE-bench 或 Terminal-Bench 结果。本地实现可控 harness 因子，不把 mini-suite 当作 SWE-bench 或 Terminal-Bench 结果。  编程 Agent Harness 设计 Agent 评测与可靠性：如何知道真的做对了 Harness设计研究中的harness，具体包含模型之外的哪些决定？ 它组织模型怎样计划、能使用什么动作空间，以及怎样管理上下文，再通过底层循环执行任务。这些是模型外的工作流程选择，不是替换一套模型权重。先识别可改动的harness组件，才能理解为何同一模型也会因执行方式不同而表现变化。 教学例子：同一编码模型可以一次只看到文件片段，也可以获得压缩后的多文件上下文；这属于harness设置变化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-harness-design-study-2ead25c3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0cbb02b7c2b56112">Harness设计研究为什么固定底层执行循环？</h2>
+<h2 id="qa-0cbb02b7c2b56112">Harness设计研究中的harness，具体包含模型之外的哪些决定？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharness-design-study">An Empirical Study of Harness Design for Coding Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Massachusetts Amherst</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>想隔离planning、action space与context management对效果和成本的作用，不能同时换模型和执行框架。固定循环让比较更接近所改因素，而非混合系统差异。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如只改规划频率时，工具权限和重试规则应保持一致。</p>
+<p><strong>答案：</strong>它组织模型怎样计划、能使用什么动作空间，以及怎样管理上下文，再通过底层循环执行任务。这些是模型外的工作流程选择，不是替换一套模型权重。先识别可改动的harness组件，才能理解为何同一模型也会因执行方式不同而表现变化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一编码模型可以一次只看到文件片段，也可以获得压缩后的多文件上下文；这属于harness设置变化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.20804">原论文</a> · <a href="../../../../agent-research/2609.20804-harness-design-study/">实现解读</a> · <a href="#qa-0cbb02b7c2b56112">问题链接</a></p>
 </details>
@@ -1405,16 +1405,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.20804">原论文</a> · <a href="../../../../agent-research/2609.20804-harness-design-study/">实现解读</a> · <a href="#qa-fe97b28686a5cbea">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fuse-evaluator" data-paper-title="Verifiable Social Reasoning for LLM Assistants" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Verifiable Social Reasoning for LLM Assistants Agent Google Research / Hebrew University of Jerusalem / University of Cambridge 2026-09-15 用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只执行 observation-safe 评测状态机；没有调用 12 个外部 LLM。本地只执行 observation-safe 评测状态机；没有调用 12 个外部 LLM。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent 评测 社会推理 Agent 评测与可靠性：如何知道真的做对了 社会推理评测为什么要有可验证隐藏动机？ 仅凭用户转述很难知道真实意图，模拟环境保留隐藏状态供评分，测助手能否区分叙述框架与事实。隐藏动机是评测答案，不应直接给被测助手。 例如两人对同一行为解释不同，评测器知道角色真实目标，助手只见允许观察。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fuse-evaluator" data-paper-title="Verifiable Social Reasoning for LLM Assistants" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Verifiable Social Reasoning for LLM Assistants Agent Google Research / Hebrew University of Jerusalem / University of Cambridge 2026-09-15 用隐藏动机可验证的多 Agent 模拟评测用户转述、framing bias 与社会推理。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只执行 observation-safe 评测状态机；没有调用 12 个外部 LLM。本地只执行 observation-safe 评测状态机；没有调用 12 个外部 LLM。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent 评测 社会推理 Agent 评测与可靠性：如何知道真的做对了 FUSE是在训练一个社交Agent，还是在提供可核验的社会推理评测环境？ 这里讨论的是评测：在多Agent模拟中设置可验证的隐藏动机，观察助手如何理解用户转述和社会情境。隐藏状态为评分提供依据，并不是直接交给受测助手的答案。实现评测模拟或本地核，也不意味着已经训练出更好的社会推理模型。 教学例子：模拟里知道甲的真实意图，助手只读用户转述后作判断；评测器随后核对，而非先把意图告诉助手。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-fuse-evaluator-e12e2808" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-64902b38498f512a">社会推理评测为什么要有可验证隐藏动机？</h2>
+<h2 id="qa-64902b38498f512a">FUSE是在训练一个社交Agent，还是在提供可核验的社会推理评测环境？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afuse-evaluator">Verifiable Social Reasoning for LLM Assistants</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research / Hebrew University of Jerusalem / University of Cambridge</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>仅凭用户转述很难知道真实意图，模拟环境保留隐藏状态供评分，测助手能否区分叙述框架与事实。隐藏动机是评测答案，不应直接给被测助手。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两人对同一行为解释不同，评测器知道角色真实目标，助手只见允许观察。</p>
+<p><strong>答案：</strong>这里讨论的是评测：在多Agent模拟中设置可验证的隐藏动机，观察助手如何理解用户转述和社会情境。隐藏状态为评分提供依据，并不是直接交给受测助手的答案。实现评测模拟或本地核，也不意味着已经训练出更好的社会推理模型。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>模拟里知道甲的真实意图，助手只读用户转述后作判断；评测器随后核对，而非先把意图告诉助手。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17496">原论文</a> · <a href="../../../../agent-research/2609.17496-fuse-evaluator/">实现解读</a> · <a href="#qa-64902b38498f512a">问题链接</a></p>
 </details>
@@ -1458,16 +1458,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17496">原论文</a> · <a href="../../../../agent-research/2609.17496-fuse-evaluator/">实现解读</a> · <a href="#qa-e135e56517048e10">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:silr" data-paper-title="SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents Agent Institute of Science Tokyo 2026-09-03 系统已经违规时，安全门不能简单拒绝所有仍不安全的动作，而要允许逐步恢复。SiLR 先 shadow-execute 提案，再比较每个受约束分支的严重度；只有在乘积序上不恶化的动作可进入真实环境，同一结构信号还能作为 GRPO 过程奖励。 复现级别：CPU 准入算子。复现级别：CPU 准入算子。ShadowGate 在真实传入的 simulator 深拷贝上执行动作，比较逐分支严重度；legacy 文本 mini-suite 没有 simulator，不生成安全或过程奖励结论。本实现不替代真实系统 simulator；没有确定性、覆盖充分的 verifier 时不能据此宣称安全。旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；读取 answer、plan 或隐藏 required_tools 会在回归测试中报错。  Structure-preserving verifier and reward Agent 评测与可靠性：如何知道真的做对了 SiLR为什么不把所有仍不安全状态的动作全拒绝？ 系统已违规时需要允许逐步恢复，只要动作不使任何受约束分支更坏，就可能安全地改善。只接受立即完全合规会让系统卡在无恢复路径。 例如资源已超额，先减少部分占用虽未彻底恢复，也不应被一律拦截。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:silr" data-paper-title="SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents Agent Institute of Science Tokyo 2026-09-03 系统已经违规时，安全门不能简单拒绝所有仍不安全的动作，而要允许逐步恢复。SiLR 先 shadow-execute 提案，再比较每个受约束分支的严重度；只有在乘积序上不恶化的动作可进入真实环境，同一结构信号还能作为 GRPO 过程奖励。 复现级别：CPU 准入算子。复现级别：CPU 准入算子。ShadowGate 在真实传入的 simulator 深拷贝上执行动作，比较逐分支严重度；legacy 文本 mini-suite 没有 simulator，不生成安全或过程奖励结论。本实现不替代真实系统 simulator；没有确定性、覆盖充分的 verifier 时不能据此宣称安全。旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；读取 answer、plan 或隐藏 required_tools 会在回归测试中报错。  Structure-preserving verifier and reward Agent 评测与可靠性：如何知道真的做对了 SiLR的shadow-execute是在真实执行出错后撤销动作吗？ 不是。它先在影子执行路径评估提案造成的状态，再由安全门决定是否进入真实环境。提案评估与真实副作用必须分开；若先真正执行再检查，就无法据同一门控声称阻止了违规动作，尤其是不能撤销的副作用。 教学例子：先模拟一项配置修改会触及哪些约束，再决定是否提交；不是实际改坏配置后才检查并尝试回滚。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-silr-f498d510" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0f68f6731f7ec1f4">SiLR为什么不把所有仍不安全状态的动作全拒绝？</h2>
+<h2 id="qa-0f68f6731f7ec1f4">SiLR的shadow-execute是在真实执行出错后撤销动作吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asilr">SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Science Tokyo</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>系统已违规时需要允许逐步恢复，只要动作不使任何受约束分支更坏，就可能安全地改善。只接受立即完全合规会让系统卡在无恢复路径。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如资源已超额，先减少部分占用虽未彻底恢复，也不应被一律拦截。</p>
+<p><strong>答案：</strong>不是。它先在影子执行路径评估提案造成的状态，再由安全门决定是否进入真实环境。提案评估与真实副作用必须分开；若先真正执行再检查，就无法据同一门控声称阻止了违规动作，尤其是不能撤销的副作用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先模拟一项配置修改会触及哪些约束，再决定是否提交；不是实际改坏配置后才检查并尝试回滚。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04629">原论文</a> · <a href="../../../../agent-research/2609.04629-silr/">实现解读</a> · <a href="#qa-0f68f6731f7ec1f4">问题链接</a></p>
 </details>
@@ -1538,15 +1538,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27439">原论文</a> · <a href="../../../../agent-research/2608.27439-redevoagent/">实现解读</a> · <a href="#qa-f7faccca6551b9dd">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:redevoagent" data-paper-title="RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution Agent City University of Hong Kong 2026-08-27 RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。 复现级别：核心机制 + deterministic mini-suite。复现级别：核心机制 + deterministic mini-suite。实现工具效果画像、Deciding-Tool Attribution 和 held-out validation ratchet。未对真实产品 Agent 执行越权攻击；mini-suite 只验证安全的技能更新控制流。planbench-mini、120 episodes：joint success 1.0000、average cost 0.4300；关键价值是 validation ratchet/归因计数，而非简单任务的满分。  红队技能进化 Agent 评测与可靠性：如何知道真的做对了 留出晋级与在产生技能的同一案例上回测有何区别？ 同例回测可能只记住任务，留出比较新技能与incumbent更接近泛化。必须严格更好才替换，失败保留旧版本，不能因候选生成成功就晋级。 例如在刚看过的任务变好，不足以证明能帮助新的案例。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:redevoagent" data-paper-title="RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution Agent City University of Hong Kong 2026-08-27 RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。 复现级别：核心机制 + deterministic mini-suite。复现级别：核心机制 + deterministic mini-suite。实现工具效果画像、Deciding-Tool Attribution 和 held-out validation ratchet。未对真实产品 Agent 执行越权攻击；mini-suite 只验证安全的技能更新控制流。planbench-mini、120 episodes：joint success 1.0000、average cost 0.4300；关键价值是 validation ratchet/归因计数，而非简单任务的满分。  红队技能进化 Agent 评测与可靠性：如何知道真的做对了 RedEvoAgent只归因决定成败的工具，与给整条成功轨迹的所有工具记功有什么区别？ 整条轨迹成功不说明每次工具调用都有贡献，等额记功会把无关步骤也固化成技能。决定性归因尝试保留真正改变攻击结果的工具经验，减少技能库噪声。这里比较信用对象，不能把一次归因分数当成已识别的普遍因果规律。 教学例子：轨迹先查一份无关页面，后用关键工具触发结果；成功标签不应让前一次无关查询自动成为必需技能。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-e61370a89e35777a">留出晋级与在产生技能的同一案例上回测有何区别？</h2>
+<h2 id="qa-e61370a89e35777a">RedEvoAgent只归因决定成败的工具，与给整条成功轨迹的所有工具记功有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aredevoagent">RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · City University of Hong Kong</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同例回测可能只记住任务，留出比较新技能与incumbent更接近泛化。必须严格更好才替换，失败保留旧版本，不能因候选生成成功就晋级。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如在刚看过的任务变好，不足以证明能帮助新的案例。</p>
+<p><strong>答案：</strong>整条轨迹成功不说明每次工具调用都有贡献，等额记功会把无关步骤也固化成技能。决定性归因尝试保留真正改变攻击结果的工具经验，减少技能库噪声。这里比较信用对象，不能把一次归因分数当成已识别的普遍因果规律。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>轨迹先查一份无关页面，后用关键工具触发结果；成功标签不应让前一次无关查询自动成为必需技能。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27439">原论文</a> · <a href="../../../../agent-research/2608.27439-redevoagent/">实现解读</a> · <a href="#qa-e61370a89e35777a">问题链接</a></p>
 </details>
@@ -1564,16 +1564,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27439">原论文</a> · <a href="../../../../agent-research/2608.27439-redevoagent/">实现解读</a> · <a href="#qa-1e193e5815d941ea">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:spec-driven-tests" data-paper-title="Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation Agent Google 2026-08-17 直接让模型编写单元测试，可能遗漏输入边界或隐含的行为约定。本文先让Agent读取修复后的源码，写出每个代码单元的描述、前置条件、后置条件与测试建议；把条件标为已测试或未测试，保存为.spec.md，之后才允许生成测试。中间可由开发者修订规范；论文自动比较没有启用人工干预。 成本过高，不复现（审查 DONE）。L1协议诊断，不是代码Agent能力复现。三seed的确定性小整数fixture检查阶段顺序、公共字段隔离、相同测试双执行、非法源码修改拒绝、编译错误负控及按bug汇总。回调并非LLM，actual_llm_calls=0；其通过只是协议工作正常，不是Agent成功率。CPU诊断指标 Specification保存唯一代码单元及D/Pre/Post/Sug，输出Markdown；未测试条件须有建议。本地结构校验比论文提示约束更严格，但不把它当语义正确性证明。  工具使用 代码 Agent 与测试 Agent 评测与可靠性：如何知道真的做对了 规范驱动测试为什么先写Pre/Post再生成测试？ 直接测试容易漏隐含契约，先列代码单元描述、前后条件和建议，把未覆盖条件显式化，之后测试可逐项落实。规范非空不代表语义正确或覆盖已完成。 例如先写出空输入应返回什么，再生成针对空列表的断言。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:spec-driven-tests" data-paper-title="Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation Agent Google 2026-08-17 直接让模型编写单元测试，可能遗漏输入边界或隐含的行为约定。本文先让Agent读取修复后的源码，写出每个代码单元的描述、前置条件、后置条件与测试建议；把条件标为已测试或未测试，保存为.spec.md，之后才允许生成测试。中间可由开发者修订规范；论文自动比较没有启用人工干预。 成本过高，不复现（审查 DONE）。L1协议诊断，不是代码Agent能力复现。三seed的确定性小整数fixture检查阶段顺序、公共字段隔离、相同测试双执行、非法源码修改拒绝、编译错误负控及按bug汇总。回调并非LLM，actual_llm_calls=0；其通过只是协议工作正常，不是Agent成功率。CPU诊断指标 Specification保存唯一代码单元及D/Pre/Post/Sug，输出Markdown；未测试条件须有建议。本地结构校验比论文提示约束更严格，但不把它当语义正确性证明。  工具使用 代码 Agent 与测试 Agent 评测与可靠性：如何知道真的做对了 规范驱动测试里的Pre、Post和Sug分别是什么，测试建议能代替行为契约吗？ Pre约束调用前应满足的条件，Post描述满足前提后应得到的行为，Sug提示怎样验证这些条件。建议不是函数契约本身；先把合法输入与预期结果写清，再标出已测和未测部分，才能判断生成测试遗漏了什么。 教学例子：排序函数的Pre可限制输入可比较，Post要求结果有序且元素不变，Sug再建议检查重复值和空列表。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-spec-driven-tests-4c06eb29" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f1fb84391154bc6c">规范驱动测试为什么先写Pre/Post再生成测试？</h2>
+<h2 id="qa-f1fb84391154bc6c">规范驱动测试里的Pre、Post和Sug分别是什么，测试建议能代替行为契约吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aspec-driven-tests">Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>直接测试容易漏隐含契约，先列代码单元描述、前后条件和建议，把未覆盖条件显式化，之后测试可逐项落实。规范非空不代表语义正确或覆盖已完成。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先写出空输入应返回什么，再生成针对空列表的断言。</p>
+<p><strong>答案：</strong>Pre约束调用前应满足的条件，Post描述满足前提后应得到的行为，Sug提示怎样验证这些条件。建议不是函数契约本身；先把合法输入与预期结果写清，再标出已测和未测部分，才能判断生成测试遗漏了什么。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>排序函数的Pre可限制输入可比较，Post要求结果有序且元素不变，Sug再建议检查重复值和空列表。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.17177v1">原论文</a> · <a href="../../../../agent-research/2608.17177-spec-driven-tests/">实现解读</a> · <a href="#qa-f1fb84391154bc6c">问题链接</a></p>
 </details>
@@ -1617,16 +1617,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.17177v1">原论文</a> · <a href="../../../../agent-research/2608.17177-spec-driven-tests/">实现解读</a> · <a href="#qa-b7c7b70e668e862c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessopt-bench" data-paper-title="HarnessOpt-Bench: Evaluating LLMs at Harness Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="HarnessOpt-Bench: Evaluating LLMs at Harness Optimization Agent Scale AI 2026-08-06 主题：Harness 优化评测。在固定 target-evaluation 预算下，让优化器修改 prompt、工具、控制流和记忆；隐藏测试集与可信执行环境隔离搜索反馈，保留候选版本以供审计。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的 Harness 优化评测算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  Harness 优化评测 Agent 评测与可靠性：如何知道真的做对了 HarnessOpt-Bench评的是底层模型还是优化harness的能力？ 优化器在固定target-evaluation预算内改提示、工具、控制流和记忆，考查能否找到更好运行框架。底层任务成绩是结果，不能与无限试错成本混在一起。 例如同一执行模型换更好上下文管理，属于harness优化而非模型重训练。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessopt-bench" data-paper-title="HarnessOpt-Bench: Evaluating LLMs at Harness Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="HarnessOpt-Bench: Evaluating LLMs at Harness Optimization Agent Scale AI 2026-08-06 主题：Harness 优化评测。在固定 target-evaluation 预算下，让优化器修改 prompt、工具、控制流和记忆；隐藏测试集与可信执行环境隔离搜索反馈，保留候选版本以供审计。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的 Harness 优化评测算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  Harness 优化评测 Agent 评测与可靠性：如何知道真的做对了 HarnessOpt-Bench允许优化器改哪些东西，是重新训练底层模型吗？ 搜索对象是prompt、工具、控制流与记忆等harness组件，评测关注在规定目标评估预算内改进这些组件的能力。不能把任意底层模型重训、增加隐藏训练数据也默认为同一搜索空间；候选版本与允许改动范围都应留痕。 教学例子：优化器可试不同上下文压缩策略并评估；若偷偷换更强底座，收益便不能全归于harness优化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-harnessopt-bench-502f5ddb" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b32f7ffe5fc0c451">HarnessOpt-Bench评的是底层模型还是优化harness的能力？</h2>
+<h2 id="qa-b32f7ffe5fc0c451">HarnessOpt-Bench允许优化器改哪些东西，是重新训练底层模型吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharnessopt-bench">HarnessOpt-Bench: Evaluating LLMs at Harness Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Scale AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>优化器在固定target-evaluation预算内改提示、工具、控制流和记忆，考查能否找到更好运行框架。底层任务成绩是结果，不能与无限试错成本混在一起。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一执行模型换更好上下文管理，属于harness优化而非模型重训练。</p>
+<p><strong>答案：</strong>搜索对象是prompt、工具、控制流与记忆等harness组件，评测关注在规定目标评估预算内改进这些组件的能力。不能把任意底层模型重训、增加隐藏训练数据也默认为同一搜索空间；候选版本与允许改动范围都应留痕。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>优化器可试不同上下文压缩策略并评估；若偷偷换更强底座，收益便不能全归于harness优化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06301">原论文</a> · <a href="../../../../agent-research/2608.06301-harnessopt-bench/">实现解读</a> · <a href="#qa-b32f7ffe5fc0c451">问题链接</a></p>
 </details>
@@ -1670,16 +1670,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06301">原论文</a> · <a href="../../../../agent-research/2608.06301-harnessopt-bench/">实现解读</a> · <a href="#qa-b98c65c6671a3fc9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:finance-harness-protocol" data-paper-title="FinanceHarness: Autonomous Financial Deep Research Framework" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="FinanceHarness: Autonomous Financial Deep Research Framework Agent Google Cloud AI Research 2026-07-30 FinanceHarness 围绕时点限定的搜索环境组织金融工具、分层加载技能与报告证据；FinanceGym 再把评分分为截止日前可检索的证据和只能在截止日后核实的预测。Agent 只能看到问题与截止日，thesis、评分 rubric、未来证据留在提交后的评测器。 完整实验成本过高，不复现（审查 DONE）；诊断使用历史/当日/未来/未知日期构造负控，另验证 live-web 审计会使运行无效，以及 1 条/3 条 rubric 的两题应均分为 0.5 而非 0.25；L1 纯 CPU 协议组件，diagnostic only，不是金融调研 Agent 能力，不提供投资建议。完整实验成本过高，不复现（审查 DONE）；无能力 adapter、未接入 Evolve。PointInTimeStore 保留外部检索排名，但过滤未来/日期未知文档，read 再独立检查，防止跳过搜索直接读未来材料。提交检查记录 live-web 使用或未读引用；触发后不可评分。  评测与可验证Agent 时点隔离与深度调研 Agent 评测与可靠性：如何知道真的做对了 FinanceHarness为什么把截止日前证据与事后预测核实分开？ 研究代理只能用当时可知信息提出判断，未来结果用于提交后评分。否则真实预测会变成回溯答题，工具搜索环境也须按时点限制。 例如预测财报前表现时，不能读取财报发布后的报道。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:finance-harness-protocol" data-paper-title="FinanceHarness: Autonomous Financial Deep Research Framework" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="FinanceHarness: Autonomous Financial Deep Research Framework Agent Google Cloud AI Research 2026-07-30 FinanceHarness 围绕时点限定的搜索环境组织金融工具、分层加载技能与报告证据；FinanceGym 再把评分分为截止日前可检索的证据和只能在截止日后核实的预测。Agent 只能看到问题与截止日，thesis、评分 rubric、未来证据留在提交后的评测器。 完整实验成本过高，不复现（审查 DONE）；诊断使用历史/当日/未来/未知日期构造负控，另验证 live-web 审计会使运行无效，以及 1 条/3 条 rubric 的两题应均分为 0.5 而非 0.25；L1 纯 CPU 协议组件，diagnostic only，不是金融调研 Agent 能力，不提供投资建议。完整实验成本过高，不复现（审查 DONE）；无能力 adapter、未接入 Evolve。PointInTimeStore 保留外部检索排名，但过滤未来/日期未知文档，read 再独立检查，防止跳过搜索直接读未来材料。提交检查记录 live-web 使用或未读引用；触发后不可评分。  评测与可验证Agent 时点隔离与深度调研 Agent 评测与可靠性：如何知道真的做对了 FinanceGym的rubric分数3，是3%的成功率吗？ 不是。单个rubric采用0到4的五级评分，3只是该尺度上的等级。题内先按四分满分归一，才能与其他题共同平均；分数解释仍取决于具体rubric。不要把原始等级、题目归一分和整体Outcome当成同一个量。 教学例子：教学用一题两个rubric分别3分和1分，题内归一分是(3+1)/(4×2)=0.5，不是4%或两题命中率。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-finance-harness-protocol-8c1ac9fa" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-bbb3ce54beabf3be">FinanceHarness为什么把截止日前证据与事后预测核实分开？</h2>
+<h2 id="qa-bbb3ce54beabf3be">FinanceGym的rubric分数3，是3%的成功率吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afinance-harness-protocol">FinanceHarness: Autonomous Financial Deep Research Framework</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud AI Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>研究代理只能用当时可知信息提出判断，未来结果用于提交后评分。否则真实预测会变成回溯答题，工具搜索环境也须按时点限制。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如预测财报前表现时，不能读取财报发布后的报道。</p>
+<p><strong>答案：</strong>不是。单个rubric采用0到4的五级评分，3只是该尺度上的等级。题内先按四分满分归一，才能与其他题共同平均；分数解释仍取决于具体rubric。不要把原始等级、题目归一分和整体Outcome当成同一个量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学用一题两个rubric分别3分和1分，题内归一分是(3+1)/(4×2)=0.5，不是4%或两题命中率。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.27853v1">原论文</a> · <a href="../../../../agent-research/2607.27853-finance-harness-protocol/">实现解读</a> · <a href="#qa-bbb3ce54beabf3be">问题链接</a></p>
 </details>
@@ -1723,16 +1723,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.27853v1">原论文</a> · <a href="../../../../agent-research/2607.27853-finance-harness-protocol/">实现解读</a> · <a href="#qa-aebea6d3c661cc2f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:os-shepherd" data-paper-title="OSReward / OS-Shepherd" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="OSReward / OS-Shepherd Agent The University of Hong Kong 2026-07-30 电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。 本页实现论文的 success/fail 双类召回、balanced accuracy 与 leniency 审计协议；确定性 mini-suite 不冒充官方人工标注轨迹或 OS-Shepherd 模型训练。本地没有下载官方截图轨迹或训练 9B/35B VLM judge，只把论文最重要的评测契约变成可执行基础设施。结果不能与官方模型表直接比较。本地 osreward-mini 覆盖四个平台与四类任务，显式区分“界面有活动”“有完成证据”和“仍有未完成要求”。判分器不能只信 Agent 的成功声明；  CUA Reward 评测 Agent 评测与可靠性：如何知道真的做对了 OSReward为什么同时报告成功与失败recall？ 总accuracy可能掩盖全判成功的宽松偏差，失败recall衡量能否识别没完成，balanced accuracy让两类同权。跨平台和Hard/Multi还需分组看。 例如任务多半成功时，全说完成也能高准确，但失败识别为零。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:os-shepherd" data-paper-title="OSReward / OS-Shepherd" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="OSReward / OS-Shepherd Agent The University of Hong Kong 2026-07-30 电脑操作 Agent 需要 reward model 判断完整轨迹是否真的完成任务，但普通 accuracy 会掩盖“几乎全判成功”的宽松偏差。OSReward 汇集 Windows、macOS、Ubuntu、Android 的人工验证任务与轨迹，同时发布 Hard 和 Multi 子集；统一报告 success recall、fail recall 与两者均值 balanced accuracy，并用 OS-Shepherd-100K 训练开放 9B/35B judge。 本页实现论文的 success/fail 双类召回、balanced accuracy 与 leniency 审计协议；确定性 mini-suite 不冒充官方人工标注轨迹或 OS-Shepherd 模型训练。本地没有下载官方截图轨迹或训练 9B/35B VLM judge，只把论文最重要的评测契约变成可执行基础设施。结果不能与官方模型表直接比较。本地 osreward-mini 覆盖四个平台与四类任务，显式区分“界面有活动”“有完成证据”和“仍有未完成要求”。判分器不能只信 Agent 的成功声明；  CUA Reward 评测 Agent 评测与可靠性：如何知道真的做对了 OS-Shepherd在电脑任务里扮演操作Agent，还是判断轨迹成败的judge？ 它是评估完整电脑操作轨迹是否成功的judge；执行点击、输入等动作的是受评操作Agent。OSReward提供人工验证任务与轨迹，用于检查这类奖励模型。先区分执行者与评分者，才能避免把judge识别成功的能力误称作自行完成任务。 教学例子：操作Agent尝试保存文件，judge根据轨迹判断是否真的保存；judge判对并不代表它执行过保存动作。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-os-shepherd-3f53da9c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-08f584e8368a5348">OSReward为什么同时报告成功与失败recall？</h2>
+<h2 id="qa-08f584e8368a5348">OS-Shepherd在电脑任务里扮演操作Agent，还是判断轨迹成败的judge？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aos-shepherd">OSReward / OS-Shepherd</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · The University of Hong Kong</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>总accuracy可能掩盖全判成功的宽松偏差，失败recall衡量能否识别没完成，balanced accuracy让两类同权。跨平台和Hard/Multi还需分组看。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如任务多半成功时，全说完成也能高准确，但失败识别为零。</p>
+<p><strong>答案：</strong>它是评估完整电脑操作轨迹是否成功的judge；执行点击、输入等动作的是受评操作Agent。OSReward提供人工验证任务与轨迹，用于检查这类奖励模型。先区分执行者与评分者，才能避免把judge识别成功的能力误称作自行完成任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>操作Agent尝试保存文件，judge根据轨迹判断是否真的保存；judge判对并不代表它执行过保存动作。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.28609">原论文</a> · <a href="../../../../agent-research/2607.28609-osreward/">实现解读</a> · <a href="#qa-08f584e8368a5348">问题链接</a></p>
 </details>
@@ -1856,15 +1856,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.07988v1">原论文</a> · <a href="../../../../agent-research/2604.07988-logact/">实现解读</a> · <a href="#qa-219db6899dfab0c3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:logact" data-paper-title="LogAct: Enabling Agentic Reliability via Shared Logs" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="LogAct: Enabling Agentic Reliability via Shared Logs Agent Meta 2026-04-09 LogAct 将 Agent 拆成 Driver、Voter、Decider 和 Executor，用持久共享日志记录意图、独立投票、commit/abort和执行结果，只有达到批准条件的已提交动作才能执行。它将安全审查与动作执行解耦，并保留崩溃后的不确定状态；外部副作用恢复仍需要明确的幂等或事务契约，不能只凭对话记录盲目重放。 模型具体身份、内部系统和完整复现费用无法用本轮单 A100/A30 或 Mac 的短时预算确定，依成本门槛标为成本过高，不复现（审查 DONE），不探测付费接口、不展开多机或长轨迹实验。DurableLogAct 用单机 SQLite 的 WAL、synchronous=FULL 和事务，将意图/投票/决策/执行状态与追加日志共同落盘。策略和 bus identity 在创建时固定，重开数据库不能悄悄降低 quorum；同一个 intent ID 也不能绑定另一动作。每个逻辑 Agent 至多一个未完成意图，失败未决会阻止后续意图越过它。  工具调用与环境执行 动作投票、持久提交与故障恢复 Agent 评测与可靠性：如何知道真的做对了 持久Result与副作用exactly-once为什么不是一回事？ 外部动作和日志不在同一事务，执行成功但结果未写时会留下不确定窗口。仅记录一次返回无法证明只执行一次，恢复需幂等或事务去重及隔离旧执行器。 例如支付已成功但写日志前断电，盲重试可能重复扣款。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:logact" data-paper-title="LogAct: Enabling Agentic Reliability via Shared Logs" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="LogAct: Enabling Agentic Reliability via Shared Logs Agent Meta 2026-04-09 LogAct 将 Agent 拆成 Driver、Voter、Decider 和 Executor，用持久共享日志记录意图、独立投票、commit/abort和执行结果，只有达到批准条件的已提交动作才能执行。它将安全审查与动作执行解耦，并保留崩溃后的不确定状态；外部副作用恢复仍需要明确的幂等或事务契约，不能只凭对话记录盲目重放。 模型具体身份、内部系统和完整复现费用无法用本轮单 A100/A30 或 Mac 的短时预算确定，依成本门槛标为成本过高，不复现（审查 DONE），不探测付费接口、不展开多机或长轨迹实验。DurableLogAct 用单机 SQLite 的 WAL、synchronous=FULL 和事务，将意图/投票/决策/执行状态与追加日志共同落盘。策略和 bus identity 在创建时固定，重开数据库不能悄悄降低 quorum；同一个 intent ID 也不能绑定另一动作。每个逻辑 Agent 至多一个未完成意图，失败未决会阻止后续意图越过它。  工具调用与环境执行 动作投票、持久提交与故障恢复 Agent 评测与可靠性：如何知道真的做对了 LogAct的k-of-N批准，与必须等所有投票返回后才能决定有什么区别？ 本地固定批准条件允许达到k票即提交；若已批准数加未投票数仍不足k，则可提前拒绝。它不必等待无力改变结果的剩余票，且同一Voter不能重复计票。这是固定阈值下的决策性质，不代表已实现所有动态审批策略。 教学例子：三位Voter要求两票，前两票都批准即可提交；前两票都拒绝时，最后一票也无法凑足两票。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c65844ffb886b1c4">持久Result与副作用exactly-once为什么不是一回事？</h2>
+<h2 id="qa-c65844ffb886b1c4">LogAct的k-of-N批准，与必须等所有投票返回后才能决定有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alogact">LogAct: Enabling Agentic Reliability via Shared Logs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>外部动作和日志不在同一事务，执行成功但结果未写时会留下不确定窗口。仅记录一次返回无法证明只执行一次，恢复需幂等或事务去重及隔离旧执行器。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如支付已成功但写日志前断电，盲重试可能重复扣款。</p>
+<p><strong>答案：</strong>本地固定批准条件允许达到k票即提交；若已批准数加未投票数仍不足k，则可提前拒绝。它不必等待无力改变结果的剩余票，且同一Voter不能重复计票。这是固定阈值下的决策性质，不代表已实现所有动态审批策略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>三位Voter要求两票，前两票都批准即可提交；前两票都拒绝时，最后一票也无法凑足两票。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.07988v1">原论文</a> · <a href="../../../../agent-research/2604.07988-logact/">实现解读</a> · <a href="#qa-c65844ffb886b1c4">问题链接</a></p>
 </details>
@@ -1909,15 +1909,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.05364">原论文</a> · <a href="../../../../agent-research/2604.05364-tfrbench/">实现解读</a> · <a href="#qa-9748b5565a2ace11">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tfrbench" data-paper-title="TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems Agent Google Cloud AI Research / University of Kentucky 2026-04-07 预测值接近真值不保证推理有根据，流畅推理也可能导致错误预测。论文联合 Search、Reason、Forecast、Verify、Summary 构建数值与推理同时合格的参考轨迹。标签参与参考筛选与反馈，因此这个构建过程不能直接作为留出能力成绩。原文 Algorithm 1 完整实验成本过高，不复现（审查 DONE）。CPU 评分与参考构建协议，当前仅 L0 固定回调验证。有标签参考构建不是无泄露预测评测。完整实验成本过高，不复现（审查 DONE）。ForecastView 只含 history、reasoning、horizon、description，不包含未来 target。未来值由 OutcomeEvaluator 持有。Python 回调是受信任代码，不是安全沙箱，不能阻止外部 callback 自行读取文件或闭包中的目标值；接真实模型时还要审计提供方信息流。  Agent 评测 时间序列预测推理 Agent 评测与可靠性：如何知道真的做对了 摘要后的再预测为何不能继承原长轨迹通过标记？ 摘要可能丢关键条件或改变推理，因此需独立再次预测并过同门槛。压缩后的文字更短不等于保留相同预测依据，不能只比较文本通顺度。 例如长分析含季节修正，摘要漏掉后预测可能明显改变。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tfrbench" data-paper-title="TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems Agent Google Cloud AI Research / University of Kentucky 2026-04-07 预测值接近真值不保证推理有根据，流畅推理也可能导致错误预测。论文联合 Search、Reason、Forecast、Verify、Summary 构建数值与推理同时合格的参考轨迹。标签参与参考筛选与反馈，因此这个构建过程不能直接作为留出能力成绩。原文 Algorithm 1 完整实验成本过高，不复现（审查 DONE）。CPU 评分与参考构建协议，当前仅 L0 固定回调验证。有标签参考构建不是无泄露预测评测。完整实验成本过高，不复现（审查 DONE）。ForecastView 只含 history、reasoning、horizon、description，不包含未来 target。未来值由 OutcomeEvaluator 持有。Python 回调是受信任代码，不是安全沙箱，不能阻止外部 callback 自行读取文件或闭包中的目标值；接真实模型时还要审计提供方信息流。  Agent 评测 时间序列预测推理 Agent 评测与可靠性：如何知道真的做对了 TFRBench的MASE与直接比较不同序列的MAE，尺度解释有什么区别？ MASE用历史季节差分的平均绝对变化归一化预测误差，使门槛相对于该序列的历史尺度定义。原始MAE仍带各序列单位，不能直接跨量纲比较。MASE小于一是数值准入条件，还需独立的一致性门槛；历史尺度为零时公式未定义。 教学例子：同样差10，在高波动销量和近乎恒定温度里含义不同；先按各自历史季节变化归一，才有规定尺度。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-da5746f15012a652">摘要后的再预测为何不能继承原长轨迹通过标记？</h2>
+<h2 id="qa-da5746f15012a652">TFRBench的MASE与直接比较不同序列的MAE，尺度解释有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atfrbench">TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud AI Research / University of Kentucky</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>摘要可能丢关键条件或改变推理，因此需独立再次预测并过同门槛。压缩后的文字更短不等于保留相同预测依据，不能只比较文本通顺度。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如长分析含季节修正，摘要漏掉后预测可能明显改变。</p>
+<p><strong>答案：</strong>MASE用历史季节差分的平均绝对变化归一化预测误差，使门槛相对于该序列的历史尺度定义。原始MAE仍带各序列单位，不能直接跨量纲比较。MASE小于一是数值准入条件，还需独立的一致性门槛；历史尺度为零时公式未定义。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同样差10，在高波动销量和近乎恒定温度里含义不同；先按各自历史季节变化归一，才有规定尺度。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.05364">原论文</a> · <a href="../../../../agent-research/2604.05364-tfrbench/">实现解读</a> · <a href="#qa-da5746f15012a652">问题链接</a></p>
 </details>
@@ -1935,16 +1935,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.05364">原论文</a> · <a href="../../../../agent-research/2604.05364-tfrbench/">实现解读</a> · <a href="#qa-52b59b4d02f11ef2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:convapparel" data-paper-title="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders Agent Google 2026-02-18 模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。PLSA 的全称是 Population-Level Statistical Alignment，不是同名主题模型。原文 §4 完整实验成本过高，不复现（审查 DONE）。本地为 CPU evaluation_protocol_interface，不是完整模拟器复现。公开固定刺激只检验 L0 接口；完整实验成本过高，不复现（审查 DONE）。也可传 --input conversations.json 代替 --fixture-demo：JSON 顶层为 train 与 heldout 数组，每行有 session_id、participant_id、policy、user_turns、布尔 is_human、可选 annotations。  Agent 评测 用户模拟器与分布对齐 Agent 评测与可靠性：如何知道真的做对了 ConvApparel为什么说完成购物目标不等于模拟真人？ 任务成功可由过于理想或固定行为达成，真人还有分布、表达与策略响应差异。PLSA、真假判别和跨政策反事实分别提供互补保真证据。 例如总能迅速决定的模拟用户很高效，却可能不像真实犹豫顾客。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:convapparel" data-paper-title="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders Agent Google 2026-02-18 模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。PLSA 的全称是 Population-Level Statistical Alignment，不是同名主题模型。原文 §4 完整实验成本过高，不复现（审查 DONE）。本地为 CPU evaluation_protocol_interface，不是完整模拟器复现。公开固定刺激只检验 L0 接口；完整实验成本过高，不复现（审查 DONE）。也可传 --input conversations.json 代替 --fixture-demo：JSON 顶层为 train 与 heldout 数组，每行有 session_id、participant_id、policy、user_turns、布尔 is_human、可选 annotations。  Agent 评测 用户模拟器与分布对齐 Agent 评测与可靠性：如何知道真的做对了 ConvApparel的PLSA是在训练同名主题模型吗？ 不是。此处PLSA全称为Population-Level Statistical Alignment，检查模拟人群与真人的行为分布是否接近；本地统计核使用KS距离与带并列处理的MWU。它比较群体分布，不会逐条证明每段模拟对话都是真实的人类行为。 教学例子：比较真人与模拟者的对话轮数分布，是群体行为对齐检查，并非从购物文本学习若干隐含主题。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-convapparel-e8aab87b" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-bed15d23c527866b">ConvApparel为什么说完成购物目标不等于模拟真人？</h2>
+<h2 id="qa-bed15d23c527866b">ConvApparel的PLSA是在训练同名主题模型吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aconvapparel">ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>任务成功可由过于理想或固定行为达成，真人还有分布、表达与策略响应差异。PLSA、真假判别和跨政策反事实分别提供互补保真证据。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如总能迅速决定的模拟用户很高效，却可能不像真实犹豫顾客。</p>
+<p><strong>答案：</strong>不是。此处PLSA全称为Population-Level Statistical Alignment，检查模拟人群与真人的行为分布是否接近；本地统计核使用KS距离与带并列处理的MWU。它比较群体分布，不会逐条证明每段模拟对话都是真实的人类行为。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>比较真人与模拟者的对话轮数分布，是群体行为对齐检查，并非从购物文本学习若干隐含主题。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.16938">原论文</a> · <a href="../../../../agent-research/2602.16938-convapparel/">实现解读</a> · <a href="#qa-bed15d23c527866b">问题链接</a></p>
 </details>
@@ -1962,15 +1962,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.16938">原论文</a> · <a href="../../../../agent-research/2602.16938-convapparel/">实现解读</a> · <a href="#qa-cd3497205b271356">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:convapparel" data-paper-title="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders Agent Google 2026-02-18 模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。PLSA 的全称是 Population-Level Statistical Alignment，不是同名主题模型。原文 §4 完整实验成本过高，不复现（审查 DONE）。本地为 CPU evaluation_protocol_interface，不是完整模拟器复现。公开固定刺激只检验 L0 接口；完整实验成本过高，不复现（审查 DONE）。也可传 --input conversations.json 代替 --fixture-demo：JSON 顶层为 train 与 heldout 数组，每行有 session_id、participant_id、policy、user_turns、布尔 is_human、可选 annotations。  Agent 评测 用户模拟器与分布对齐 Agent 评测与可靠性：如何知道真的做对了 HLS真人概率与任务成功率有什么不同？ HLS来自训练判别器认为对话像真人的概率，不说明推荐任务完成。判别器盲点和分布外情况也会影响分数，不能把难以识别模拟当所有行为真实。 例如礼貌措辞逼真但选择偏好错误，仍可能骗过简单判别器。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:convapparel" data-paper-title="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders Agent Google 2026-02-18 模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。PLSA 的全称是 Population-Level Statistical Alignment，不是同名主题模型。原文 §4 完整实验成本过高，不复现（审查 DONE）。本地为 CPU evaluation_protocol_interface，不是完整模拟器复现。公开固定刺激只检验 L0 接口；完整实验成本过高，不复现（审查 DONE）。也可传 --input conversations.json 代替 --fixture-demo：JSON 顶层为 train 与 heldout 数组，每行有 session_id、participant_id、policy、user_turns、布尔 is_human、可选 annotations。  Agent 评测 用户模拟器与分布对齐 Agent 评测与可靠性：如何知道真的做对了 ConvApparel跨推荐策略验证，与在生成模拟数据的同一策略下验证有什么区别？ 同策略验证可能只说明模拟器适应了熟悉的交互环境；跨策略把在一种策略下训练的模拟器放到另一策略，观察行为规律能否迁移。它补充分布相似和真假判别证据，但仍不是对所有真实部署策略的泛化保证。 教学例子：只在偏热门的推荐器下训练模拟器，再放到偏探索的推荐器中，检查它是否仍呈现合理购物反应。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-bf4fa51f825f70b0">HLS真人概率与任务成功率有什么不同？</h2>
+<h2 id="qa-bf4fa51f825f70b0">ConvApparel跨推荐策略验证，与在生成模拟数据的同一策略下验证有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aconvapparel">ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>HLS来自训练判别器认为对话像真人的概率，不说明推荐任务完成。判别器盲点和分布外情况也会影响分数，不能把难以识别模拟当所有行为真实。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如礼貌措辞逼真但选择偏好错误，仍可能骗过简单判别器。</p>
+<p><strong>答案：</strong>同策略验证可能只说明模拟器适应了熟悉的交互环境；跨策略把在一种策略下训练的模拟器放到另一策略，观察行为规律能否迁移。它补充分布相似和真假判别证据，但仍不是对所有真实部署策略的泛化保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>只在偏热门的推荐器下训练模拟器，再放到偏探索的推荐器中，检查它是否仍呈现合理购物反应。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.16938">原论文</a> · <a href="../../../../agent-research/2602.16938-convapparel/">实现解读</a> · <a href="#qa-bf4fa51f825f70b0">问题链接</a></p>
 </details>
@@ -2015,15 +2015,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.07918">原论文</a> · <a href="../../../../agent-research/2602.07918-causal-armor/">实现解读</a> · <a href="#qa-58882c2ee223a900">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:causal-armor" data-paper-title="CausalArmor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="CausalArmor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution Agent Google Cloud AI Research 2026-02-08 在高权限动作前，分别去掉用户请求与不可信工具段，比较同一个动作的似然变化。工具段的归因高于用户时，只清洗命中段，再遮蔽首个命中点后的 assistant 内容并重新提案。§3–4、Algorithm 1 完整实验：成本过高，不复现（审查 DONE）。CPU 诊断记录 component_only / L1。真实似然算子与安全失败的干预接口，不是已验证的注入检测器。完整实验：成本过高，不复现（审查 DONE）。7 项 CPU 契约测试通过：LOO 分离、动作长度归一化、margin 严格边界、选择性清洗、历史遮蔽、缺回调扣留和非高权限跳过。固定 fixture 仅验证公式，不计算安全准确率。CPU 诊断记录  Agent 安全 提示注入防御 因果归因 Agent 评测与可靠性：如何知道真的做对了 LOO归因与因果安全证明有何区别？ 消融是操作性对照，移除文本改变上下文，不能据此完全识别真实意图或保证无注入。用户归因小本身也不证明攻击，阈值只是检测策略。 例如模型本就不依赖某段用户措辞，不代表一定受工具攻击。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:causal-armor" data-paper-title="CausalArmor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="CausalArmor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution Agent Google Cloud AI Research 2026-02-08 在高权限动作前，分别去掉用户请求与不可信工具段，比较同一个动作的似然变化。工具段的归因高于用户时，只清洗命中段，再遮蔽首个命中点后的 assistant 内容并重新提案。§3–4、Algorithm 1 完整实验：成本过高，不复现（审查 DONE）。CPU 诊断记录 component_only / L1。真实似然算子与安全失败的干预接口，不是已验证的注入检测器。完整实验：成本过高，不复现（审查 DONE）。7 项 CPU 契约测试通过：LOO 分离、动作长度归一化、margin 严格边界、选择性清洗、历史遮蔽、缺回调扣留和非高权限跳过。固定 fixture 仅验证公式，不计算安全准确率。CPU 诊断记录  Agent 安全 提示注入防御 因果归因 Agent 评测与可靠性：如何知道真的做对了 CausalArmor定点清洗命中工具段，与把全部工具结果删空有何不同？ 定点方案保留未命中的信息，只清洗被标记段，并遮蔽首个命中点之后可能已受影响的assistant内容再提案。全删会连合法证据一起丢失，改变可用上下文。清洗后仍需重新评估提案，不能认为删过文本就自动得到安全动作。 教学例子：检索结果一段夹带指令时，清洗该段并撤去之后受其影响的草稿；其余正常检索证据可继续保留。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-4f8a4f14c30948ed">LOO归因与因果安全证明有何区别？</h2>
+<h2 id="qa-4f8a4f14c30948ed">CausalArmor定点清洗命中工具段，与把全部工具结果删空有何不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acausal-armor">CausalArmor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud AI Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>消融是操作性对照，移除文本改变上下文，不能据此完全识别真实意图或保证无注入。用户归因小本身也不证明攻击，阈值只是检测策略。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型本就不依赖某段用户措辞，不代表一定受工具攻击。</p>
+<p><strong>答案：</strong>定点方案保留未命中的信息，只清洗被标记段，并遮蔽首个命中点之后可能已受影响的assistant内容再提案。全删会连合法证据一起丢失，改变可用上下文。清洗后仍需重新评估提案，不能认为删过文本就自动得到安全动作。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>检索结果一段夹带指令时，清洗该段并撤去之后受其影响的草稿；其余正常检索证据可继续保留。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.07918">原论文</a> · <a href="../../../../agent-research/2602.07918-causal-armor/">实现解读</a> · <a href="#qa-4f8a4f14c30948ed">问题链接</a></p>
 </details>
@@ -2041,16 +2041,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.07918">原论文</a> · <a href="../../../../agent-research/2602.07918-causal-armor/">实现解读</a> · <a href="#qa-581064307ea1ff67">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:airs-bench" data-paper-title="AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents Agent FAIR at Meta / University of Oxford 2026-02-06 以问题、数据集、指标和人工SOTA定义20个任务。Agent自行提出方法、实现训练、分析实验并修订，不提供基线解法；协议区分Agent、搜索scaffold与运行harness，比较顺序MLGym和树搜索AIRA-dojo。原文§3–5 成本过高，不复现（审查 DONE）；Google/Meta优先补漏资料。成本过高，不复现（审查 DONE）；任务规范收录不等于已接入benchmark。原文每次运行24小时、独占1张H200，20个任务；附录D还列每任务10至20次运行。单A100/A30或Mac下，成本过高，不复现（审查 DONE）。原文附录C–D  自动研究 研究Agent评测协议 Agent 评测与可靠性：如何知道真的做对了 AIRS-Bench为什么不给Agent现成基线解法？ 端到端研究任务要测提出方法、实现训练、分析再修订，而非仅运行基线脚本。问题数据指标可见，搜索scaffold与执行harness角色仍需分开。 例如代理需自己选择模型和实验，不只是照已有答案改一个超参。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:airs-bench" data-paper-title="AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents Agent FAIR at Meta / University of Oxford 2026-02-06 以问题、数据集、指标和人工SOTA定义20个任务。Agent自行提出方法、实现训练、分析实验并修订，不提供基线解法；协议区分Agent、搜索scaffold与运行harness，比较顺序MLGym和树搜索AIRA-dojo。原文§3–5 成本过高，不复现（审查 DONE）；Google/Meta优先补漏资料。成本过高，不复现（审查 DONE）；任务规范收录不等于已接入benchmark。原文每次运行24小时、独占1张H200，20个任务；附录D还列每任务10至20次运行。单A100/A30或Mac下，成本过高，不复现（审查 DONE）。原文附录C–D  自动研究 研究Agent评测协议 Agent 评测与可靠性：如何知道真的做对了 AIRS-Bench要求研究Agent交付一段方法建议就够了吗？ 不够。任务要求从问题、数据集与指标出发，提出方法、实现训练、分析实验并修订，考查端到端研究过程。Agent、搜索scaffold与执行harness是不同层，不能把一段听起来合理的研究计划当成已完成实验或任务结果。 教学例子：提出“换一种损失”只是起点；还需实际实现、运行并根据允许的实验反馈决定是否修订。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-airs-bench-3e226cbd" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7d73d79eb709b84b">AIRS-Bench为什么不给Agent现成基线解法？</h2>
+<h2 id="qa-7d73d79eb709b84b">AIRS-Bench要求研究Agent交付一段方法建议就够了吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aairs-bench">AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · FAIR at Meta / University of Oxford</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>端到端研究任务要测提出方法、实现训练、分析再修订，而非仅运行基线脚本。问题数据指标可见，搜索scaffold与执行harness角色仍需分开。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如代理需自己选择模型和实验，不只是照已有答案改一个超参。</p>
+<p><strong>答案：</strong>不够。任务要求从问题、数据集与指标出发，提出方法、实现训练、分析实验并修订，考查端到端研究过程。Agent、搜索scaffold与执行harness是不同层，不能把一段听起来合理的研究计划当成已完成实验或任务结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>提出“换一种损失”只是起点；还需实际实现、运行并根据允许的实验反馈决定是否修订。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.06855">原论文</a> · <a href="../../../../agent-research/2602.06855-airs-bench/">实现解读</a> · <a href="#qa-7d73d79eb709b84b">问题链接</a></p>
 </details>
@@ -2094,16 +2094,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.06855">原论文</a> · <a href="../../../../agent-research/2602.06855-airs-bench/">实现解读</a> · <a href="#qa-b06e8ae9651a392c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lifeagentbench" data-paper-title="LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning Agent University of California San Diego 2026-01-20 LifeAgentBench 用可执行 SQL / 程序在饮食、睡眠、活动和情绪记录上生成确定性答案，覆盖长期窗口、跨维度与跨用户任务。LifeAgent 是另一个工具推理基线：先分解子问题，维护证据缓存与中间统计，再根据新证据修订计划并合成回答，不能把 benchmark scorer 当成该 Agent。 完整实验成本过高，不复现（审查 DONE）。它不是临床诊断、治疗或医疗决策系统。仅研究资料，未实现 LifeAgent 或运行 benchmark。完整实验成本过高，不复现（审查 DONE）。它不是临床诊断、治疗或医疗决策系统。正文 Appendix E 明确开放模型推理约 300–500 GPU 小时；含 70B 的较大模型使用 4×A6000，另有闭源 API 和多轮工具基线。这不是单次小样本推理可以重现的整套比较。完整实验成本过高，不复现（审查 DONE）；不下载生活记录、权重或大数据，不运行推理，也不生成本地 metrics / GPU receipt。后续不会自动重试。  评测与可验证Agent 长期异构记录推理 Agent 评测与可靠性：如何知道真的做对了 LifeAgentBench为什么用SQL或程序生成金标？ 长期饮食睡眠等记录需要跨时间维度统计，执行式答案可减少主观评分歧义。benchmark负责确定性评测，LifeAgent工具推理基线是另一套模型流程。 例如近月平均睡眠可由数据库算出，不能把这个计算器当受测Agent。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lifeagentbench" data-paper-title="LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning Agent University of California San Diego 2026-01-20 LifeAgentBench 用可执行 SQL / 程序在饮食、睡眠、活动和情绪记录上生成确定性答案，覆盖长期窗口、跨维度与跨用户任务。LifeAgent 是另一个工具推理基线：先分解子问题，维护证据缓存与中间统计，再根据新证据修订计划并合成回答，不能把 benchmark scorer 当成该 Agent。 完整实验成本过高，不复现（审查 DONE）。它不是临床诊断、治疗或医疗决策系统。仅研究资料，未实现 LifeAgent 或运行 benchmark。完整实验成本过高，不复现（审查 DONE）。它不是临床诊断、治疗或医疗决策系统。正文 Appendix E 明确开放模型推理约 300–500 GPU 小时；含 70B 的较大模型使用 4×A6000，另有闭源 API 和多轮工具基线。这不是单次小样本推理可以重现的整套比较。完整实验成本过高，不复现（审查 DONE）；不下载生活记录、权重或大数据，不运行推理，也不生成本地 metrics / GPU receipt。后续不会自动重试。  评测与可验证Agent 长期异构记录推理 Agent 评测与可靠性：如何知道真的做对了 LifeAgentBench的长期生活记录，为什么不只是对一条事件做分类？ 任务在饮食、睡眠、活动和情绪等记录上提出跨时间窗口、跨维度或跨用户的问题，通常要先取齐有关证据再计算或比较。输入中的一条记录不足以代表整个问题，记录筛选与统计的范围就是答案条件的一部分。 教学例子：比较某周活动与睡眠的关系，需要同一用户该周两类记录；读到一天步数便直接答复会漏掉证据。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-lifeagentbench-23550dc3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d90e5f74c4f4986f">LifeAgentBench为什么用SQL或程序生成金标？</h2>
+<h2 id="qa-d90e5f74c4f4986f">LifeAgentBench的长期生活记录，为什么不只是对一条事件做分类？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alifeagentbench">LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California San Diego</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>长期饮食睡眠等记录需要跨时间维度统计，执行式答案可减少主观评分歧义。benchmark负责确定性评测，LifeAgent工具推理基线是另一套模型流程。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如近月平均睡眠可由数据库算出，不能把这个计算器当受测Agent。</p>
+<p><strong>答案：</strong>任务在饮食、睡眠、活动和情绪等记录上提出跨时间窗口、跨维度或跨用户的问题，通常要先取齐有关证据再计算或比较。输入中的一条记录不足以代表整个问题，记录筛选与统计的范围就是答案条件的一部分。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>比较某周活动与睡眠的关系，需要同一用户该周两类记录；读到一天步数便直接答复会漏掉证据。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.13880v1">原论文</a> · <a href="../../../../agent-research/2601.13880-lifeagentbench/">实现解读</a> · <a href="#qa-d90e5f74c4f4986f">问题链接</a></p>
 </details>
@@ -2147,16 +2147,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.13880v1">原论文</a> · <a href="../../../../agent-research/2601.13880-lifeagentbench/">实现解读</a> · <a href="#qa-d7e908d939e49c24">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coreflect" data-paper-title="CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation Agent University of Illinois Urbana-Champaign 2026-01-18 Sec.2.1–2.5 / Appendix G：953条通过真实LLM一致性检查的persona-scenario；planner/simulator/evaluator/analyzer是核心语义模型。只写JSON状态机、对给定数字求均值或手工替换rubric都不能复现其核心，因此不强建低成本heuristic adapter。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。状态：仅文献与成本收录，没有可执行能力adapter，不以heuristic冒充核心模型。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本轮不提供可运行模型、loss包装或伪测试。库里已有通用KL/RL/统计工具并不构成本文核心流程；原文语义模型、API多轮生成或大规模训练不能用手工规则替换。仅保存经过核验的方法、资源、源码状态与原图，终态为 not_reproduced_high_cost。后续不得自动移回待训练队列。  Agent评测与自进化 对话模拟与rubric共演化 Agent 评测与可靠性：如何知道真的做对了 CoReflect为什么让评估标准和模拟任务共同进化？ 固定任务和rubric可能跟不上评价器变化，analyzer从多角色互动结果提反馈，再更新规划和标准。核心依赖真实语义模型与一致性检查，不只是一个状态循环。 例如标准发现只会分语气、难分事实时，下一轮任务可更强调事实差异。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coreflect" data-paper-title="CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation Agent University of Illinois Urbana-Champaign 2026-01-18 Sec.2.1–2.5 / Appendix G：953条通过真实LLM一致性检查的persona-scenario；planner/simulator/evaluator/analyzer是核心语义模型。只写JSON状态机、对给定数字求均值或手工替换rubric都不能复现其核心，因此不强建低成本heuristic adapter。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。状态：仅文献与成本收录，没有可执行能力adapter，不以heuristic冒充核心模型。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本轮不提供可运行模型、loss包装或伪测试。库里已有通用KL/RL/统计工具并不构成本文核心流程；原文语义模型、API多轮生成或大规模训练不能用手工规则替换。仅保存经过核验的方法、资源、源码状态与原图，终态为 not_reproduced_high_cost。后续不得自动移回待训练队列。  Agent评测与自进化 对话模拟与rubric共演化 Agent 评测与可靠性：如何知道真的做对了 CoReflect里的planner、simulator、evaluator、analyzer分别产生什么？ planner组织模拟任务，simulator形成对话交互，evaluator按当前标准评价，analyzer从评价与反馈中提炼反思，再影响下一轮任务和标准。这些是语义模型职责，不是四个JSON字段；本地未用手写规则假冒这些核心模块。 教学例子：某轮对话暴露评判标准含糊，analyzer提炼问题，后续再调整rubric并规划能检验该问题的新情境。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-coreflect-7d1f277e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-73a0fa96c34acc53">CoReflect为什么让评估标准和模拟任务共同进化？</h2>
+<h2 id="qa-73a0fa96c34acc53">CoReflect里的planner、simulator、evaluator、analyzer分别产生什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoreflect">CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>固定任务和rubric可能跟不上评价器变化，analyzer从多角色互动结果提反馈，再更新规划和标准。核心依赖真实语义模型与一致性检查，不只是一个状态循环。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如标准发现只会分语气、难分事实时，下一轮任务可更强调事实差异。</p>
+<p><strong>答案：</strong>planner组织模拟任务，simulator形成对话交互，evaluator按当前标准评价，analyzer从评价与反馈中提炼反思，再影响下一轮任务和标准。这些是语义模型职责，不是四个JSON字段；本地未用手写规则假冒这些核心模块。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某轮对话暴露评判标准含糊，analyzer提炼问题，后续再调整rubric并规划能检验该问题的新情境。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.12208v1">原论文</a> · <a href="../../../../agent-research/2601.12208-coreflect/">实现解读</a> · <a href="#qa-73a0fa96c34acc53">问题链接</a></p>
 </details>
@@ -2174,15 +2174,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.12208v1">原论文</a> · <a href="../../../../agent-research/2601.12208-coreflect/">实现解读</a> · <a href="#qa-9336a21730fbc0d6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coreflect" data-paper-title="CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation Agent University of Illinois Urbana-Champaign 2026-01-18 Sec.2.1–2.5 / Appendix G：953条通过真实LLM一致性检查的persona-scenario；planner/simulator/evaluator/analyzer是核心语义模型。只写JSON状态机、对给定数字求均值或手工替换rubric都不能复现其核心，因此不强建低成本heuristic adapter。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。状态：仅文献与成本收录，没有可执行能力adapter，不以heuristic冒充核心模型。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本轮不提供可运行模型、loss包装或伪测试。库里已有通用KL/RL/统计工具并不构成本文核心流程；原文语义模型、API多轮生成或大规模训练不能用手工规则替换。仅保存经过核验的方法、资源、源码状态与原图，终态为 not_reproduced_high_cost。后续不得自动移回待训练队列。  Agent评测与自进化 对话模拟与rubric共演化 Agent 评测与可靠性：如何知道真的做对了 反思共同演化与人工手动换rubric有什么差别？ 前者包含planner、simulator、evaluator和analyzer的语义执行及反馈，手改只保留外形，缺少模型判断链。标准自变也有漂移风险，不能只看自评分提高。 例如把数组权重手动改大，并没有执行一次对话反思分析。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coreflect" data-paper-title="CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation Agent University of Illinois Urbana-Champaign 2026-01-18 Sec.2.1–2.5 / Appendix G：953条通过真实LLM一致性检查的persona-scenario；planner/simulator/evaluator/analyzer是核心语义模型。只写JSON状态机、对给定数字求均值或手工替换rubric都不能复现其核心，因此不强建低成本heuristic adapter。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。状态：仅文献与成本收录，没有可执行能力adapter，不以heuristic冒充核心模型。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本轮不提供可运行模型、loss包装或伪测试。库里已有通用KL/RL/统计工具并不构成本文核心流程；原文语义模型、API多轮生成或大规模训练不能用手工规则替换。仅保存经过核验的方法、资源、源码状态与原图，终态为 not_reproduced_high_cost。后续不得自动移回待训练队列。  Agent评测与自进化 对话模拟与rubric共演化 Agent 评测与可靠性：如何知道真的做对了 CoReflect的persona-scenario一致性检查，与仅保证样本JSON格式合法有什么区别？ 格式合法只保证字段可读，不能证明人物设定与情境在语义上相容。原文保留经过真实LLM一致性检查的persona-scenario；该筛选是任务质量的一部分。合法状态机或人为打分并不能补上缺失的语义检查与反思模型。 教学例子：字段齐全却把人物设为“无法上网”又要求其刚完成网络预约，JSON仍合法，语义一致性却需要核验。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-27514a4a3c2740e3">反思共同演化与人工手动换rubric有什么差别？</h2>
+<h2 id="qa-27514a4a3c2740e3">CoReflect的persona-scenario一致性检查，与仅保证样本JSON格式合法有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoreflect">CoReflect: A Reflective Co-Evolution Framework for Improving Conversational Evaluation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者包含planner、simulator、evaluator和analyzer的语义执行及反馈，手改只保留外形，缺少模型判断链。标准自变也有漂移风险，不能只看自评分提高。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如把数组权重手动改大，并没有执行一次对话反思分析。</p>
+<p><strong>答案：</strong>格式合法只保证字段可读，不能证明人物设定与情境在语义上相容。原文保留经过真实LLM一致性检查的persona-scenario；该筛选是任务质量的一部分。合法状态机或人为打分并不能补上缺失的语义检查与反思模型。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>字段齐全却把人物设为“无法上网”又要求其刚完成网络预约，JSON仍合法，语义一致性却需要核验。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.12208v1">原论文</a> · <a href="../../../../agent-research/2601.12208-coreflect/">实现解读</a> · <a href="#qa-27514a4a3c2740e3">问题链接</a></p>
 </details>
@@ -2200,16 +2200,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.12208v1">原论文</a> · <a href="../../../../agent-research/2601.12208-coreflect/">实现解读</a> · <a href="#qa-16d199a59b834d14">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sopbench-protocol" data-paper-title="SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints Agent University of California, Santa Barbara 2025-03-11 SOPBench 将服务规范写成有向约束图：Agent 必须先调用 helper 检验必要条件，再执行服务。它不仅核对最终数据库是否正确，还检查服务本身是否被允许、必要验证是否真正且按要求发生，防止“猜中结果”绕过流程。 完整实验成本过高，不复现（审查 DONE）；诊断只检查构造轨迹的顺序、错误用户、错误状态及 oracle 负控，报告 fixture 数，不报模型成功率。L1 纯 CPU 协议组件，diagnostic only，不是模型能力或七域环境复现。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。Rule 以嵌套表达式表示约束；evaluate_trace 对每一次服务调用只看其之前的 helper 前缀，并将三项检查联合。参考约束真值、oracle 最终状态都只由轨迹提交后的评测器使用，没有传给任何被测策略。拒绝服务可以通过，但必须与 oracle 的数据库结果一致；  工具使用与环境 SOP约束与程序验收 Agent 评测与可靠性：如何知道真的做对了 SOPBench为什么最终数据库正确仍可能失败？ 服务流程还要求动作被允许并真实完成必要验证，猜中或绕过helper即使写对结果也不合格。准入、状态与程序三项联合，不能只用最终任务成功。 例如正确退款但没核验资格，仍违反服务规范。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sopbench-protocol" data-paper-title="SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints Agent University of California, Santa Barbara 2025-03-11 SOPBench 将服务规范写成有向约束图：Agent 必须先调用 helper 检验必要条件，再执行服务。它不仅核对最终数据库是否正确，还检查服务本身是否被允许、必要验证是否真正且按要求发生，防止“猜中结果”绕过流程。 完整实验成本过高，不复现（审查 DONE）；诊断只检查构造轨迹的顺序、错误用户、错误状态及 oracle 负控，报告 fixture 数，不报模型成功率。L1 纯 CPU 协议组件，diagnostic only，不是模型能力或七域环境复现。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。Rule 以嵌套表达式表示约束；evaluate_trace 对每一次服务调用只看其之前的 helper 前缀，并将三项检查联合。参考约束真值、oracle 最终状态都只由轨迹提交后的评测器使用，没有传给任何被测策略。拒绝服务可以通过，但必须与 oracle 的数据库结果一致；  工具使用与环境 SOP约束与程序验收 Agent 评测与可靠性：如何知道真的做对了 SOPBench里的服务约束图，节点是在记录聊天步骤，还是规定服务前要验证什么？ 它把服务连接到约束，再把约束连接到可执行的helper验证；结构表达服务何时被允许以及需要哪些前置检查，不是按聊天轮数排列的摘要。先找到服务依赖的约束，才能知道Agent该验证什么，而非只看最后回复是否顺畅。 教学例子：某项服务要求先核验资格，图中应能沿服务找到资格约束和对应helper，而不是只出现一句“我已检查”。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-sopbench-protocol-97674f6a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8304d284c96dd917">SOPBench为什么最终数据库正确仍可能失败？</h2>
+<h2 id="qa-8304d284c96dd917">SOPBench里的服务约束图，节点是在记录聊天步骤，还是规定服务前要验证什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asopbench-protocol">SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, Santa Barbara</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>服务流程还要求动作被允许并真实完成必要验证，猜中或绕过helper即使写对结果也不合格。准入、状态与程序三项联合，不能只用最终任务成功。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如正确退款但没核验资格，仍违反服务规范。</p>
+<p><strong>答案：</strong>它把服务连接到约束，再把约束连接到可执行的helper验证；结构表达服务何时被允许以及需要哪些前置检查，不是按聊天轮数排列的摘要。先找到服务依赖的约束，才能知道Agent该验证什么，而非只看最后回复是否顺畅。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某项服务要求先核验资格，图中应能沿服务找到资格约束和对应helper，而不是只出现一句“我已检查”。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2503.08669v1">原论文</a> · <a href="../../../../agent-research/2503.08669-sopbench-protocol/">实现解读</a> · <a href="#qa-8304d284c96dd917">问题链接</a></p>
 </details>
@@ -2253,16 +2253,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2503.08669v1">原论文</a> · <a href="../../../../agent-research/2503.08669-sopbench-protocol/">实现解读</a> · <a href="#qa-cd44b09f931686f2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gaia" data-paper-title="GAIA" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="GAIA Agent Meta AI 2023-11-21 以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新或评测协议；没有复刻原论文大模型、多卡训练、私有环境或完整公开 benchmark，因而只报告机制验证。gaia-mini、120 episodes、seed 42：joint success 1.0000，average cost 1.4000。  通用 Agent 评测 Agent 评测与可靠性：如何知道真的做对了 GAIA为什么用精确短答案考查多工具任务？ 问题解答可需要浏览、多模态和工具协作，短结果让最终评分较明确。任务看似输出少，背后仍可能多步推理，不能按答案长度判断难度。 例如最后只需一个日期，但需读图片、查网页并核对来源。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gaia" data-paper-title="GAIA" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="GAIA Agent Meta AI 2023-11-21 以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新或评测协议；没有复刻原论文大模型、多卡训练、私有环境或完整公开 benchmark，因而只报告机制验证。gaia-mini、120 episodes、seed 42：joint success 1.0000，average cost 1.4000。  通用 Agent 评测 Agent 评测与可靠性：如何知道真的做对了 GAIA每题的提交对象是完整推理长文，还是可核对的最终短答案？ 评分对象是最终答案，经规定的规范化后与金标精确比较；完成题目仍可能需要浏览网页、读图与调用工具。先区分求解过程与提交格式，才能理解为什么写了很多合理步骤也未必获得最终命中，格式失败也不能掩盖为推理成功。 教学例子：题目要求一个人名时，提交应给可核对的人名；大段搜索过程里没有明确最终答案，不能自动算命中。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-gaia-62649810" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-802c89c175ab9d3e">GAIA为什么用精确短答案考查多工具任务？</h2>
+<h2 id="qa-802c89c175ab9d3e">GAIA每题的提交对象是完整推理长文，还是可核对的最终短答案？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agaia">GAIA</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>问题解答可需要浏览、多模态和工具协作，短结果让最终评分较明确。任务看似输出少，背后仍可能多步推理，不能按答案长度判断难度。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如最后只需一个日期，但需读图片、查网页并核对来源。</p>
+<p><strong>答案：</strong>评分对象是最终答案，经规定的规范化后与金标精确比较；完成题目仍可能需要浏览网页、读图与调用工具。先区分求解过程与提交格式，才能理解为什么写了很多合理步骤也未必获得最终命中，格式失败也不能掩盖为推理成功。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>题目要求一个人名时，提交应给可核对的人名；大段搜索过程里没有明确最终答案，不能自动算命中。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2311.12983">原论文</a> · <a href="../../../../agent-research/2311.12983-gaia/">实现解读</a> · <a href="#qa-802c89c175ab9d3e">问题链接</a></p>
 </details>
@@ -2280,15 +2280,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2311.12983">原论文</a> · <a href="../../../../agent-research/2311.12983-gaia/">实现解读</a> · <a href="#qa-7f1f7590b48a18a3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gaia" data-paper-title="GAIA" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="GAIA Agent Meta AI 2023-11-21 以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新或评测协议；没有复刻原论文大模型、多卡训练、私有环境或完整公开 benchmark，因而只报告机制验证。gaia-mini、120 episodes、seed 42：joint success 1.0000，average cost 1.4000。  通用 Agent 评测 Agent 评测与可靠性：如何知道真的做对了 最终exact match与工具过程正确是否相同？ exact match评价结果，可能遗漏错误过程或偶然猜中；过程审计需另加证据。三级难度也不是任意工具调用次数阈值，不能把本地简单任务映射成原466题结果。 例如猜对一个名字不证明搜索路线或引文可靠。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gaia" data-paper-title="GAIA" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="GAIA Agent Meta AI 2023-11-21 以 466 个真实问题联合考查推理、多模态、网页浏览与工具使用，采用精确短答案和三级难度。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新或评测协议；没有复刻原论文大模型、多卡训练、私有环境或完整公开 benchmark，因而只报告机制验证。gaia-mini、120 episodes、seed 42：joint success 1.0000，average cost 1.4000。  通用 Agent 评测 Agent 评测与可靠性：如何知道真的做对了 GAIA的规范化精确匹配，与让模型裁判按语义给分有何区别？ 前者按固定规范化后的答案相等关系计算命中，后者需要额外裁判判断表达是否等义。两种评分器的容错与偏差不同，不能未经说明用语义裁判放宽匹配后仍报告同一GAIA分数。规范化也应是预先固定规则，而非看到金标后临时改写预测。 教学例子：一种规则只处理允许的表面形式差异；若另请模型把一段模糊描述判为等义，就是更换了验收器。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-9451bc182cb840df">最终exact match与工具过程正确是否相同？</h2>
+<h2 id="qa-9451bc182cb840df">GAIA的规范化精确匹配，与让模型裁判按语义给分有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agaia">GAIA</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>exact match评价结果，可能遗漏错误过程或偶然猜中；过程审计需另加证据。三级难度也不是任意工具调用次数阈值，不能把本地简单任务映射成原466题结果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如猜对一个名字不证明搜索路线或引文可靠。</p>
+<p><strong>答案：</strong>前者按固定规范化后的答案相等关系计算命中，后者需要额外裁判判断表达是否等义。两种评分器的容错与偏差不同，不能未经说明用语义裁判放宽匹配后仍报告同一GAIA分数。规范化也应是预先固定规则，而非看到金标后临时改写预测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一种规则只处理允许的表面形式差异；若另请模型把一段模糊描述判为等义，就是更换了验收器。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2311.12983">原论文</a> · <a href="../../../../agent-research/2311.12983-gaia/">实现解读</a> · <a href="#qa-9451bc182cb840df">问题链接</a></p>
 </details>

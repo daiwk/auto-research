@@ -20,6 +20,7 @@ on:
       - "tests/test_learning_topics.py"
       - "tests/test_learning_questions.py"
       - "tests/test_project_readme_sync.py"
+      - "tests/test_site_tour.py"
       - ".github/workflows/docs.yml"
   push:
     branches: [main]
@@ -41,6 +42,7 @@ on:
       - "tests/test_learning_topics.py"
       - "tests/test_learning_questions.py"
       - "tests/test_project_readme_sync.py"
+      - "tests/test_site_tour.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -63,9 +65,9 @@ jobs:
           python-version: "3.11"
           cache: pip
           cache-dependency-path: requirements-docs.txt
-      - run: pip install -r requirements-docs.txt pytest
+      - run: pip install -r requirements-docs.txt pytest 'Pillow>=11,<13'
       - run: python scripts/sync_project_readme.py --check
-      - run: python -m pytest tests/test_project_readme_sync.py
+      - run: python -m pytest tests/test_project_readme_sync.py tests/test_site_tour.py
       - run: python scripts/generate_public_experiment_dashboard.py
       - run: git diff --exit-code -- docs/assets/data/experiment-dashboard.json
       - run: python scripts/generate_learning_cards.py --require-questions

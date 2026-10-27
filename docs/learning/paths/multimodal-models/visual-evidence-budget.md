@@ -54,16 +54,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24628v1">原论文</a> · <a href="../../../../foundation-models/2610.24628-muse-glimmer-30b/">实现解读</a> · <a href="#qa-1e53a66d94151563">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:muse-glimmer-30b" data-paper-title="Muse Glimmer 30B: An On-Device Agentic Model" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Muse Glimmer 30B: An On-Device Agentic Model 基础模型 Meta Superintelligence Labs 2026-10-17 模型瞄准有32GB专用内存的端侧Agent：语言骨干用稠密Transformer而非MoE，在相同内存预算下用缩放实验选架构；约1.8B冻结视觉编码器支持图文交错输入。52层采用三层2048窗口局部注意力接一层全局注意力，32Q/2KV的GQA，局部层使用RoPE，全局层不再施加RoPE。训练从Muse Spark logits蒸馏起步，预训练末段切CE处理top-k截断偏差，之后权重平均和两阶段mid-training，再SFT、学生前缀上的OPD与多目标RL。 成本过高，不复现（审查 DONE）；Google/Meta优先资料。成本过高，不复现（审查 DONE）；“单卡可装下”不等于本项目低成本可完成训练和完整评测。BF16权重约55.7GB，量化LM目标低于20GB仍需KV、视觉编码器和drafter空间；长Agent轨迹与多模型对照远非一次前向。完整过程依赖前沿教师、多阶段大规模蒸馏、128K上下文与多域Agent环境，成本过高，不复现（审查 DONE）。本轮只取论文与仓库元数据，不下载权重、不开长推理或训练，不提供本地能力分数、GPU回执或Evolve整合声明。  网络架构 端侧多模态Agent模型 多模态 视觉证据预算：选 Token、选帧与按需回看 三局部一全局注意力与全部全局层有何结构取舍？ 局部层在 2048 窗口内处理上下文，全局层周期性连接远处信息，以减少长上下文每层全局注意力的开销。它以传播路径和计算范围换成本，不代表远距关系与全局模型完全相同；还需与 GQA、量化及训练一起评估。 例如两条相隔很远的事件不会在每个局部层直接交互，需要经过周期性的全局层连接；这与全层全局访问不同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:muse-glimmer-30b" data-paper-title="Muse Glimmer 30B: An On-Device Agentic Model" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Muse Glimmer 30B: An On-Device Agentic Model 基础模型 Meta Superintelligence Labs 2026-10-17 模型瞄准有32GB专用内存的端侧Agent：语言骨干用稠密Transformer而非MoE，在相同内存预算下用缩放实验选架构；约1.8B冻结视觉编码器支持图文交错输入。52层采用三层2048窗口局部注意力接一层全局注意力，32Q/2KV的GQA，局部层使用RoPE，全局层不再施加RoPE。训练从Muse Spark logits蒸馏起步，预训练末段切CE处理top-k截断偏差，之后权重平均和两阶段mid-training，再SFT、学生前缀上的OPD与多目标RL。 成本过高，不复现（审查 DONE）；Google/Meta优先资料。成本过高，不复现（审查 DONE）；“单卡可装下”不等于本项目低成本可完成训练和完整评测。BF16权重约55.7GB，量化LM目标低于20GB仍需KV、视觉编码器和drafter空间；长Agent轨迹与多模型对照远非一次前向。完整过程依赖前沿教师、多阶段大规模蒸馏、128K上下文与多域Agent环境，成本过高，不复现（审查 DONE）。本轮只取论文与仓库元数据，不下载权重、不开长推理或训练，不提供本地能力分数、GPU回执或Evolve整合声明。  网络架构 端侧多模态Agent模型 多模态 视觉证据预算：选 Token、选帧与按需回看 Muse Glimmer预训练末段改用CE，与继续拟合截断的教师logits，监督信息有何区别？ 教师logit蒸馏利用教师预测，但top-k截断会丢失尾部信息；末段CE直接使用目标token监督，原文将切换与这类截断偏差联系。两者不是同一标签接口，也不能因为模型曾经蒸馏，就把整个训练都称为只拟合教师分布。 教学例子：目标token不在某次保存的教师top-k里时，截断logits未完整保留其分布信息，CE仍能直接使用该目标标签。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-228de77c3730310a">三局部一全局注意力与全部全局层有何结构取舍？</h2>
+<h2 id="qa-228de77c3730310a">Muse Glimmer预训练末段改用CE，与继续拟合截断的教师logits，监督信息有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amuse-glimmer-30b">Muse Glimmer 30B: An On-Device Agentic Model</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta Superintelligence Labs</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>局部层在 2048 窗口内处理上下文，全局层周期性连接远处信息，以减少长上下文每层全局注意力的开销。它以传播路径和计算范围换成本，不代表远距关系与全局模型完全相同；还需与 GQA、量化及训练一起评估。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两条相隔很远的事件不会在每个局部层直接交互，需要经过周期性的全局层连接；这与全层全局访问不同。</p>
-<p class="ar-learning-sources">依据：背景与主要改动、核心公式与结构；例子用于解释机制。</p>
+<p><strong>答案：</strong>教师logit蒸馏利用教师预测，但top-k截断会丢失尾部信息；末段CE直接使用目标token监督，原文将切换与这类截断偏差联系。两者不是同一标签接口，也不能因为模型曾经蒸馏，就把整个训练都称为只拟合教师分布。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>目标token不在某次保存的教师top-k里时，截断logits未完整保留其分布信息，CE仍能直接使用该目标标签。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24628v1">原论文</a> · <a href="../../../../foundation-models/2610.24628-muse-glimmer-30b/">实现解读</a> · <a href="#qa-228de77c3730310a">问题链接</a></p>
 </details>
 </article>
@@ -107,16 +107,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22975">原论文</a> · <a href="../../../../foundation-models/2610.22975-sink-sparse/">实现解读</a> · <a href="#qa-fa3282e27f8322fe">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:sink-sparse" data-paper-title="Sink-Sparse Hybrid Attention for Efficient Inference in T2I/T2V Diffusion Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Sink-Sparse Hybrid Attention for Efficient Inference in T2I/T2V Diffusion Transformers 基础模型 Xi&#x27;an Jiaotong University 2026-10-16 扩散Transformer在每个去噪步重复执行昂贵的attention。本文观察到某些层/头中的高概率block关系在不同提示和seed下较稳定，因此一次离线校准即可得到静态稀疏支持；另用低分辨率全局KV分支补回分散上下文，无需改权重或采样schedule。原文Figure 4是两阶段方法总览，见Section4。 成本过高，不复现（审查 DONE）。不下载视频checkpoint，不跑完整生成或宣称端到端加速，禁止Evolve基于本诊断晋级。本地执行真实精确概率质量校准、最短前缀、静态mask复用、选中block实际gather计算、全局均值池化及稳定sigmoid融合。Python循环仅用于正确性，不是FlashAttention/Triton生产kernel，不以稀疏比例换算实测加速。  推理与系统效率 扩散模型稀疏注意力 多模态 视觉证据预算：选 Token、选帧与按需回看 为什么补偿分支不能只池化未选中 token，或简单与稀疏输出平均？ 论文补偿分支池化全部 KV，包括 sink 块，两分支支持存在重叠；融合依据各自行 log-normalizer 并加入池化倍率修正。只池化遗漏部分改变支持定义，固定平均则忽略概率质量，因此都不是同一混合注意力。 例如稀疏分支占大部分归一化质量时，其权重应更高；固定各一半会让较弱补偿分支获得过大影响。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:sink-sparse" data-paper-title="Sink-Sparse Hybrid Attention for Efficient Inference in T2I/T2V Diffusion Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Sink-Sparse Hybrid Attention for Efficient Inference in T2I/T2V Diffusion Transformers 基础模型 Xi&#x27;an Jiaotong University 2026-10-16 扩散Transformer在每个去噪步重复执行昂贵的attention。本文观察到某些层/头中的高概率block关系在不同提示和seed下较稳定，因此一次离线校准即可得到静态稀疏支持；另用低分辨率全局KV分支补回分散上下文，无需改权重或采样schedule。原文Figure 4是两阶段方法总览，见Section4。 成本过高，不复现（审查 DONE）。不下载视频checkpoint，不跑完整生成或宣称端到端加速，禁止Evolve基于本诊断晋级。本地执行真实精确概率质量校准、最短前缀、静态mask复用、选中block实际gather计算、全局均值池化及稳定sigmoid融合。Python循环仅用于正确性，不是FlashAttention/Triton生产kernel，不以稀疏比例换算实测加速。  推理与系统效率 扩散模型稀疏注意力 多模态 视觉证据预算：选 Token、选帧与按需回看 Sink-Sparse只把稀疏mask设成全支持，就一定恢复dense attention吗？ 不一定，最终输出还混合全局补偿分支，池化后的分布可能不同于原dense结果。全支持且gap为1时，两分支都可退化为同一dense计算，是应检验的充分退化情形；一般设置只追求近似，不能把归一化融合当成严格等价证明。 教学例子：稀疏分支已经读取全部token，但补偿分支仍按多token均值池化时，混合结果不必与只运行dense分支相同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-d518dd72ce9680f3">为什么补偿分支不能只池化未选中 token，或简单与稀疏输出平均？</h2>
+<h2 id="qa-d518dd72ce9680f3">Sink-Sparse只把稀疏mask设成全支持，就一定恢复dense attention吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asink-sparse">Sink-Sparse Hybrid Attention for Efficient Inference in T2I/T2V Diffusion Transformers</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Xi&#x27;an Jiaotong University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>论文补偿分支池化全部 KV，包括 sink 块，两分支支持存在重叠；融合依据各自行 log-normalizer 并加入池化倍率修正。只池化遗漏部分改变支持定义，固定平均则忽略概率质量，因此都不是同一混合注意力。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如稀疏分支占大部分归一化质量时，其权重应更高；固定各一半会让较弱补偿分支获得过大影响。</p>
-<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p><strong>答案：</strong>不一定，最终输出还混合全局补偿分支，池化后的分布可能不同于原dense结果。全支持且gap为1时，两分支都可退化为同一dense计算，是应检验的充分退化情形；一般设置只追求近似，不能把归一化融合当成严格等价证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>稀疏分支已经读取全部token，但补偿分支仍按多token均值池化时，混合结果不必与只运行dense分支相同。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22975">原论文</a> · <a href="../../../../foundation-models/2610.22975-sink-sparse/">实现解读</a> · <a href="#qa-d518dd72ce9680f3">问题链接</a></p>
 </details>
 </article>
@@ -133,16 +133,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22975">原论文</a> · <a href="../../../../foundation-models/2610.22975-sink-sparse/">实现解读</a> · <a href="#qa-366fd7b1d91c36e5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adaloop-vision" data-paper-title="AdaLoop: Thinking with the Vision Encoder" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="AdaLoop: Thinking with the Vision Encoder 基础模型 Harvard University 2026-10-15 普通 VLM 对所有问题只编码图像一次。视觉 AdaLoop 保持预训练视觉权重冻结，以问题池化向量调制共享视觉块，再循环更新内部视觉状态。它将“看几次”与问题联系起来，而不是让语言模型独自承担全部推理。 单卡完整多臂成本过高，成本过高，不复现（审查 DONE）。临时线性分类器只供梯度诊断，不替代真实语言模型。seeds42/43/44；revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1。使用3条随机视觉/问题 token、16维、2层、3次循环；冻结 attention/MLP 与 normalization，只训练问题池化、调制器和 connector。临时线性分类器只供梯度诊断，不替代真实语言模型。  多模态基础模型 问题条件视觉循环 多模态 视觉证据预算：选 Token、选帧与按需回看 视觉 AdaLoop 的循环状态和冻结视觉权重有什么区别？ 权重是每次循环共享的变换规则，状态是经过变换后不断更新的视觉表示。模型可保持预训练注意力和 MLP 冻结，同时训练问题池化、调制器与 connector，让同一组视觉块按问题多次处理状态；冻结权重并不意味着表示每轮不变。 例如同一照片问数量和问位置，可以产生不同调制向量；每轮仍调用同一视觉块，但输入状态及关注信息会变化。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adaloop-vision" data-paper-title="AdaLoop: Thinking with the Vision Encoder" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="AdaLoop: Thinking with the Vision Encoder 基础模型 Harvard University 2026-10-15 普通 VLM 对所有问题只编码图像一次。视觉 AdaLoop 保持预训练视觉权重冻结，以问题池化向量调制共享视觉块，再循环更新内部视觉状态。它将“看几次”与问题联系起来，而不是让语言模型独自承担全部推理。 单卡完整多臂成本过高，成本过高，不复现（审查 DONE）。临时线性分类器只供梯度诊断，不替代真实语言模型。seeds42/43/44；revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1。使用3条随机视觉/问题 token、16维、2层、3次循环；冻结 attention/MLP 与 normalization，只训练问题池化、调制器和 connector。临时线性分类器只供梯度诊断，不替代真实语言模型。  多模态基础模型 问题条件视觉循环 多模态 视觉证据预算：选 Token、选帧与按需回看 视觉AdaLoop中，同一张图遇到不同问题，还应使用完全相同的问题调制信号吗？ 不应。问题池化向量用于生成视觉块的调制量，使图像表示的处理方向与当前问题有关。图片相同不代表取证需求相同；循环只是增加处理机会，能否找到所需细节还需评测，不能把不同问题共享图像误读成所有视觉计算也必须相同。 教学例子：同图问“有几个杯子”与“杯子上写什么”，关注点不同，可产生不同问题条件，而不是机械复用同一调制向量。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-adaloop-vision-ed1ee6f4" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b5b64a38a09f4bf8">视觉 AdaLoop 的循环状态和冻结视觉权重有什么区别？</h2>
+<h2 id="qa-b5b64a38a09f4bf8">视觉AdaLoop中，同一张图遇到不同问题，还应使用完全相同的问题调制信号吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadaloop-vision">AdaLoop: Thinking with the Vision Encoder</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Harvard University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>权重是每次循环共享的变换规则，状态是经过变换后不断更新的视觉表示。模型可保持预训练注意力和 MLP 冻结，同时训练问题池化、调制器与 connector，让同一组视觉块按问题多次处理状态；冻结权重并不意味着表示每轮不变。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一照片问数量和问位置，可以产生不同调制向量；每轮仍调用同一视觉块，但输入状态及关注信息会变化。</p>
+<p><strong>答案：</strong>不应。问题池化向量用于生成视觉块的调制量，使图像表示的处理方向与当前问题有关。图片相同不代表取证需求相同；循环只是增加处理机会，能否找到所需细节还需评测，不能把不同问题共享图像误读成所有视觉计算也必须相同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同图问“有几个杯子”与“杯子上写什么”，关注点不同，可产生不同问题条件，而不是机械复用同一调制向量。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21323">原论文</a> · <a href="../../../../foundation-models/2610.21323-adaloop-vision/">实现解读</a> · <a href="#qa-b5b64a38a09f4bf8">问题链接</a></p>
 </details>
@@ -186,16 +186,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21323">原论文</a> · <a href="../../../../foundation-models/2610.21323-adaloop-vision/">实现解读</a> · <a href="#qa-acf4971fdf9cd572">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rr-vlm" data-paper-title="Retrofitting Recurrent Vision-Language Models from Pretrained Backbones" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Retrofitting Recurrent Vision-Language Models from Pretrained Backbones 基础模型 University of Tübingen 2026-10-15 预训练 VLM 的语言层可以剪掉一段，再共享循环保留核心块；但直接手术会破坏语言能力及图文对齐。RR-VLM 用一个线性 adapter 融合 prelude 上下文与循环状态，并依次执行文本恢复、projector 对齐、全模型指令恢复；文本和最终阶段加入原始未剪模型蒸馏。 即使1.4B模型能放入单卡，完整恢复仍过重，成本过高，不复现（审查 DONE）。完整逐 seed 数据见诊断指标和GPU 回执。seeds42/43/44；revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1。随机6层、16维因果 Transformer，连续删除2层，保留1/2/1的 prelude/core/coda，核心循环3次。2条随机文本与视觉特征只检查结构和优化路径，不是模型能力数据。  多模态基础模型 剪枝与循环恢复 多模态 视觉证据预算：选 Token、选帧与按需回看 RR-VLM 的“循环深度”为什么不等于存储层数？ prelude 与 coda 各执行一次，核心块重复执行多轮但共享参数，所以展开深度是 p+rb+c，而不同层参数只存 p+b+c。循环可用较少参数承担更深计算，但每次重复仍有计算和状态成本，参数减少不能直接等价为推理 FLOPs 下降。 例如 prelude 一层、core 两层、coda 一层，循环三次时执行八层变换，却只存四层不同参数。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rr-vlm" data-paper-title="Retrofitting Recurrent Vision-Language Models from Pretrained Backbones" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Retrofitting Recurrent Vision-Language Models from Pretrained Backbones 基础模型 University of Tübingen 2026-10-15 预训练 VLM 的语言层可以剪掉一段，再共享循环保留核心块；但直接手术会破坏语言能力及图文对齐。RR-VLM 用一个线性 adapter 融合 prelude 上下文与循环状态，并依次执行文本恢复、projector 对齐、全模型指令恢复；文本和最终阶段加入原始未剪模型蒸馏。 即使1.4B模型能放入单卡，完整恢复仍过重，成本过高，不复现（审查 DONE）。完整逐 seed 数据见诊断指标和GPU 回执。seeds42/43/44；revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1。随机6层、16维因果 Transformer，连续删除2层，保留1/2/1的 prelude/core/coda，核心循环3次。2条随机文本与视觉特征只检查结构和优化路径，不是模型能力数据。  多模态基础模型 剪枝与循环恢复 多模态 视觉证据预算：选 Token、选帧与按需回看 RR-VLM的prelude、循环核心与coda各在流程的什么位置？ prelude先把输入变成上下文h，循环核心结合h与上轮状态反复更新s，coda再读取最终循环状态得到输出。它们是前段、共享中段和后段的职责划分，不是三份独立模型投票；h与动态状态也不能混为同一个每轮随意覆盖的变量。 教学例子：先得到固定上下文h，核心连续更新s₁、s₂，最后由coda读s₂；不需要每轮重新从输入创建一份prelude模型。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-rr-vlm-3b3af466" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e52481933a1636d3">RR-VLM 的“循环深度”为什么不等于存储层数？</h2>
+<h2 id="qa-e52481933a1636d3">RR-VLM的prelude、循环核心与coda各在流程的什么位置？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arr-vlm">Retrofitting Recurrent Vision-Language Models from Pretrained Backbones</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Tübingen</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>prelude 与 coda 各执行一次，核心块重复执行多轮但共享参数，所以展开深度是 p+rb+c，而不同层参数只存 p+b+c。循环可用较少参数承担更深计算，但每次重复仍有计算和状态成本，参数减少不能直接等价为推理 FLOPs 下降。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 prelude 一层、core 两层、coda 一层，循环三次时执行八层变换，却只存四层不同参数。</p>
+<p><strong>答案：</strong>prelude先把输入变成上下文h，循环核心结合h与上轮状态反复更新s，coda再读取最终循环状态得到输出。它们是前段、共享中段和后段的职责划分，不是三份独立模型投票；h与动态状态也不能混为同一个每轮随意覆盖的变量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先得到固定上下文h，核心连续更新s₁、s₂，最后由coda读s₂；不需要每轮重新从输入创建一份prelude模型。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22075">原论文</a> · <a href="../../../../foundation-models/2610.22075-rr-vlm/">实现解读</a> · <a href="#qa-e52481933a1636d3">问题链接</a></p>
 </details>
@@ -239,16 +239,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22075">原论文</a> · <a href="../../../../foundation-models/2610.22075-rr-vlm/">实现解读</a> · <a href="#qa-85813119e6b229df">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:softcache" data-paper-title="SoftCache: Adaptive Step Size Caching for Diffusion Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="SoftCache: Adaptive Step Size Caching for Diffusion Transformers 基础模型 Tel Aviv University 2026-10-15 动态缓存通常只决定“刷新/重用”，仍沿固定时间网格走。SoftCache 将累计陈旧度距离阈值的 headroom 转成连续步长：缓存越可靠就走得更远。它用两次新鲜残差作时间外推，并重新排布剩余节点，使跳过的节点不会又被访问。 完整实验不适合当前单卡，成本过高，不复现（审查 DONE）。完整逐 seed 数据见诊断指标和GPU 回执。固定 revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1、seeds42/43/44。不下载生成模型。8维小 MLP 先做一次真实梯度更新，再在同一初值和20步网格上比较 SoftCache、hard-cache 与全量 Euler；所有差异包括负结果保留。  推理与系统效率 扩散缓存与自适应采样 多模态 视觉证据预算：选 Token、选帧与按需回看 SoftCache 的 headroom 代表什么，而不是答案质量置信度？ headroom 是累计缓存陈旧度距离阈值的剩余空间，用便宜 probe 的相对变化估计。它决定本次缓存步长可扩大多少，不是生成内容正确或好看的概率；缓存可靠时走更远仍是数值近似，需要与未缓存输出和实际质量分别评估。 例如累计变化只用了阈值的一小部分，可允许更大时间步；这不表示当前图像有九成概率符合提示。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:softcache" data-paper-title="SoftCache: Adaptive Step Size Caching for Diffusion Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="SoftCache: Adaptive Step Size Caching for Diffusion Transformers 基础模型 Tel Aviv University 2026-10-15 动态缓存通常只决定“刷新/重用”，仍沿固定时间网格走。SoftCache 将累计陈旧度距离阈值的 headroom 转成连续步长：缓存越可靠就走得更远。它用两次新鲜残差作时间外推，并重新排布剩余节点，使跳过的节点不会又被访问。 完整实验不适合当前单卡，成本过高，不复现（审查 DONE）。完整逐 seed 数据见诊断指标和GPU 回执。固定 revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1、seeds42/43/44。不下载生成模型。8维小 MLP 先做一次真实梯度更新，再在同一初值和20步网格上比较 SoftCache、hard-cache 与全量 Euler；所有差异包括负结果保留。  推理与系统效率 扩散缓存与自适应采样 多模态 视觉证据预算：选 Token、选帧与按需回看 扩散模型采样为什么值得研究“少算哪些网络前向”，而不只缩小模型？ 扩散采样会沿时间反复调用同一网络，相邻状态可能有可复用计算，但无条件跳过也会积累误差。SoftCache 研究利用计算变化信号自适应安排缓存和采样进度，在保留原模型的同时减少重复工作。缓存可靠性只是一种控制依据，不能直接当成生成质量或答案正确率。 教学例：相邻去噪时刻变化很小，可尝试复用旧结果；遇到快速变化区域就需要新计算，不能对整段过程都采用相同跳过比例。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-softcache-596bc18d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-cd266037ebd633fe">SoftCache 的 headroom 代表什么，而不是答案质量置信度？</h2>
+<h2 id="qa-cd266037ebd633fe">扩散模型采样为什么值得研究“少算哪些网络前向”，而不只缩小模型？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asoftcache">SoftCache: Adaptive Step Size Caching for Diffusion Transformers</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tel Aviv University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>headroom 是累计缓存陈旧度距离阈值的剩余空间，用便宜 probe 的相对变化估计。它决定本次缓存步长可扩大多少，不是生成内容正确或好看的概率；缓存可靠时走更远仍是数值近似，需要与未缓存输出和实际质量分别评估。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如累计变化只用了阈值的一小部分，可允许更大时间步；这不表示当前图像有九成概率符合提示。</p>
+<p><strong>答案：</strong>扩散采样会沿时间反复调用同一网络，相邻状态可能有可复用计算，但无条件跳过也会积累误差。SoftCache 研究利用计算变化信号自适应安排缓存和采样进度，在保留原模型的同时减少重复工作。缓存可靠性只是一种控制依据，不能直接当成生成质量或答案正确率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相邻去噪时刻变化很小，可尝试复用旧结果；遇到快速变化区域就需要新计算，不能对整段过程都采用相同跳过比例。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22369">原论文</a> · <a href="../../../../foundation-models/2610.22369-softcache/">实现解读</a> · <a href="#qa-cd266037ebd633fe">问题链接</a></p>
 </details>
@@ -266,15 +266,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22369">原论文</a> · <a href="../../../../foundation-models/2610.22369-softcache/">实现解读</a> · <a href="#qa-8d790da7252145cc">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:softcache" data-paper-title="SoftCache: Adaptive Step Size Caching for Diffusion Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="SoftCache: Adaptive Step Size Caching for Diffusion Transformers 基础模型 Tel Aviv University 2026-10-15 动态缓存通常只决定“刷新/重用”，仍沿固定时间网格走。SoftCache 将累计陈旧度距离阈值的 headroom 转成连续步长：缓存越可靠就走得更远。它用两次新鲜残差作时间外推，并重新排布剩余节点，使跳过的节点不会又被访问。 完整实验不适合当前单卡，成本过高，不复现（审查 DONE）。完整逐 seed 数据见诊断指标和GPU 回执。固定 revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1、seeds42/43/44。不下载生成模型。8维小 MLP 先做一次真实梯度更新，再在同一初值和20步网格上比较 SoftCache、hard-cache 与全量 Euler；所有差异包括负结果保留。  推理与系统效率 扩散缓存与自适应采样 多模态 视觉证据预算：选 Token、选帧与按需回看 SoftCache 与固定网格上的刷新或复用，为什么不只是同一种缓存规则？ 固定网格 hard cache 只选择是否重新计算网络，仍访问原节点；SoftCache 还改变连续步长并重新排布剩余节点，真正跳过原节点。它同时近似残差与积分时间安排，因此调用减少要连同端点误差报告，不能只比较刷新次数。 例如从时间零点四直接走到零点六后，原来零点五的节点不应再访问，否则所谓跳步并未改变时间网格。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:softcache" data-paper-title="SoftCache: Adaptive Step Size Caching for Diffusion Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="SoftCache: Adaptive Step Size Caching for Diffusion Transformers 基础模型 Tel Aviv University 2026-10-15 动态缓存通常只决定“刷新/重用”，仍沿固定时间网格走。SoftCache 将累计陈旧度距离阈值的 headroom 转成连续步长：缓存越可靠就走得更远。它用两次新鲜残差作时间外推，并重新排布剩余节点，使跳过的节点不会又被访问。 完整实验不适合当前单卡，成本过高，不复现（审查 DONE）。完整逐 seed 数据见诊断指标和GPU 回执。固定 revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1、seeds42/43/44。不下载生成模型。8维小 MLP 先做一次真实梯度更新，再在同一初值和20步网格上比较 SoftCache、hard-cache 与全量 Euler；所有差异包括负结果保留。  推理与系统效率 扩散缓存与自适应采样 多模态 视觉证据预算：选 Token、选帧与按需回看 probe 的相对变化与残差外推，分别用于决定是否复用还是近似复用值？ 便宜 probe 的相对变化被累计为陈旧度，用于估计剩余 headroom 并控制刷新与步长；两次新鲜残差则提供时间趋势，外推出当前所需计算。前者是调度信号，后者是近似值，不能互换。只有一个锚点时也没有两点趋势可用，不能凭空套用线性外推。 教学例：probe 告诉系统这段变化尚小，但不直接给出当前残差；残差要由最近两次真实计算估计，二者需要不同记录。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-170562c8fa83951d">SoftCache 与固定网格上的刷新或复用，为什么不只是同一种缓存规则？</h2>
+<h2 id="qa-170562c8fa83951d">probe 的相对变化与残差外推，分别用于决定是否复用还是近似复用值？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asoftcache">SoftCache: Adaptive Step Size Caching for Diffusion Transformers</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tel Aviv University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>固定网格 hard cache 只选择是否重新计算网络，仍访问原节点；SoftCache 还改变连续步长并重新排布剩余节点，真正跳过原节点。它同时近似残差与积分时间安排，因此调用减少要连同端点误差报告，不能只比较刷新次数。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如从时间零点四直接走到零点六后，原来零点五的节点不应再访问，否则所谓跳步并未改变时间网格。</p>
+<p><strong>答案：</strong>便宜 probe 的相对变化被累计为陈旧度，用于估计剩余 headroom 并控制刷新与步长；两次新鲜残差则提供时间趋势，外推出当前所需计算。前者是调度信号，后者是近似值，不能互换。只有一个锚点时也没有两点趋势可用，不能凭空套用线性外推。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：probe 告诉系统这段变化尚小，但不直接给出当前残差；残差要由最近两次真实计算估计，二者需要不同记录。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22369">原论文</a> · <a href="../../../../foundation-models/2610.22369-softcache/">实现解读</a> · <a href="#qa-170562c8fa83951d">问题链接</a></p>
 </details>
@@ -292,16 +292,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22369">原论文</a> · <a href="../../../../foundation-models/2610.22369-softcache/">实现解读</a> · <a href="#qa-809bbd8b8fe862a3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:vcola" data-paper-title="V-CoLA: Vision Token Compression with Linear Attention" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="V-CoLA: Vision Token Compression with Linear Attention 多模态大模型 Alibaba Cloud Computing / Alibaba Group 2026-10-08 传统视觉 Token 筛选依赖 softmax attention 或特征相似度，不能直接迁移到包含 Gated DeltaNet 的混合 VLM。V-CoLA 用线性注意力最终状态的可回读程度衡量长期保留，再用更新前后状态对短窗口 query 的响应变化衡量独特性；按累计重要性划分连续块并加权合并，深层再退出视觉 Token。方法见官方正文第 3 节。原论文架构图为Figure 5，比较原始混合模型与压缩后的前向路径；图像及版权属于原作者。 本地定位：L1 核心机制诊断，非论文完整 benchmark 复现。本地定位：L1 核心机制诊断，非论文完整 benchmark 复现。原始 Qwen3.5-9B checkpoint 的视觉编码器和全部语言层已在真实 A100 执行；重要性不是随机分数、像素相似度或隐藏答案。仅 4 张公开训练留出图片，不代表完整 VLM 质量结论。本地对照口径：同一个冻结原始 Qwen3.5-9B，比较 dense、第一层保留 50% / 25% 且第 24 层后退出视觉的三条真实前向。固定公共 CIFAR-10 官方训练集尾部留出图像；不读取官方 test，不训练、不择优调参。  多模态推理效率 视觉 Token 压缩 多模态 视觉证据预算：选 Token、选帧与按需回看 线性注意力模型为什么不能直接读取完整 softmax 矩阵做视觉筛选？ Gated DeltaNet 将历史信息压入递推状态，没有相同形式的全 token softmax 注意力矩阵。V-CoLA 因而从真实状态读取长期保留程度，并检查单次更新对短期 query 响应的变化，重要性定义必须适应模型实际计算结构。 例如视觉 token 处理后只留下状态矩阵，不能假造一个标准 Transformer 的注意力行，再称其为原模型实际关注分布。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:vcola" data-paper-title="V-CoLA: Vision Token Compression with Linear Attention" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="V-CoLA: Vision Token Compression with Linear Attention 多模态大模型 Alibaba Cloud Computing / Alibaba Group 2026-10-08 传统视觉 Token 筛选依赖 softmax attention 或特征相似度，不能直接迁移到包含 Gated DeltaNet 的混合 VLM。V-CoLA 用线性注意力最终状态的可回读程度衡量长期保留，再用更新前后状态对短窗口 query 的响应变化衡量独特性；按累计重要性划分连续块并加权合并，深层再退出视觉 Token。方法见官方正文第 3 节。原论文架构图为Figure 5，比较原始混合模型与压缩后的前向路径；图像及版权属于原作者。 本地定位：L1 核心机制诊断，非论文完整 benchmark 复现。本地定位：L1 核心机制诊断，非论文完整 benchmark 复现。原始 Qwen3.5-9B checkpoint 的视觉编码器和全部语言层已在真实 A100 执行；重要性不是随机分数、像素相似度或隐藏答案。仅 4 张公开训练留出图片，不代表完整 VLM 质量结论。本地对照口径：同一个冻结原始 Qwen3.5-9B，比较 dense、第一层保留 50% / 25% 且第 24 层后退出视觉的三条真实前向。固定公共 CIFAR-10 官方训练集尾部留出图像；不读取官方 test，不训练、不择优调参。  多模态推理效率 视觉 Token 压缩 多模态 视觉证据预算：选 Token、选帧与按需回看 混合线性注意力 VLM 为什么也需要专门的视觉压缩方法？ 大量视觉 token 会占用语言层的计算与状态，但线性注意力保存信息的方式不同于普通 softmax 矩阵。V-CoLA 研究从真实状态递推判断哪些视觉信息值得保留，再合并或在深层退出。压缩改变后续可读证据，不能仅以 token 变少证明答案质量或真实推理成本改善。 教学例：一张高分辨率图有许多相似背景块，可尝试压缩；仍要保留问题涉及的细小标志，不能直接套另一类模型的注意力排名。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-multimodal-models-vcola-a4fb5eab" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-65f29f75fc6da94d">线性注意力模型为什么不能直接读取完整 softmax 矩阵做视觉筛选？</h2>
+<h2 id="qa-65f29f75fc6da94d">混合线性注意力 VLM 为什么也需要专门的视觉压缩方法？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Avcola">V-CoLA: Vision Token Compression with Linear Attention</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba Cloud Computing / Alibaba Group</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>Gated DeltaNet 将历史信息压入递推状态，没有相同形式的全 token softmax 注意力矩阵。V-CoLA 因而从真实状态读取长期保留程度，并检查单次更新对短期 query 响应的变化，重要性定义必须适应模型实际计算结构。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如视觉 token 处理后只留下状态矩阵，不能假造一个标准 Transformer 的注意力行，再称其为原模型实际关注分布。</p>
+<p><strong>答案：</strong>大量视觉 token 会占用语言层的计算与状态，但线性注意力保存信息的方式不同于普通 softmax 矩阵。V-CoLA 研究从真实状态递推判断哪些视觉信息值得保留，再合并或在深层退出。压缩改变后续可读证据，不能仅以 token 变少证明答案质量或真实推理成本改善。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一张高分辨率图有许多相似背景块，可尝试压缩；仍要保留问题涉及的细小标志，不能直接套另一类模型的注意力排名。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与实现选择；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11251">原论文</a> · <a href="../../../../multimodal-models/2610.11251-vcola/">实现解读</a> · <a href="#qa-65f29f75fc6da94d">问题链接</a></p>
 </details>
@@ -345,16 +345,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11251">原论文</a> · <a href="../../../../multimodal-models/2610.11251-vcola/">实现解读</a> · <a href="#qa-dc06a879fde2db3d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:vimod" data-paper-title="Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning 多模态大模型 City University of Hong Kong / Zhejiang University 2026-10-08 一次性压缩图像可能丢掉后续推理需要的细节。DART 学习可变区域大小和成员，生成始终驻留的 Coarse KV；原始 Fine KV 仍保留。TRACE 根据已生成文本的因果隐状态决定保持或替换工作集，通过 Joint-KV 恢复原始细节。 scripts/validate_vimod_cuda_runtime.py 另外在同一真实 checkpoint 上执行 TRACE 三阶段 CUDA 梯度诊断。已实现 DART 容量约束/隐式梯度、总量整数舍入、置信度硬分组、八轮 Sinkhorn、共享 residual Value 编码；TRACE 层融合、四尺度 SSM、区域边界、HOLD/UPDATE 与真实 Fine KV 恢复。checkpoint backend 支持 SmolVLM/Idefics3，而非声称兼容 Qwen3-VL 的多模态 RoPE。  视觉 Token 压缩 动态证据恢复 多模态 视觉证据预算：选 Token、选帧与按需回看 Coarse KV 常驻时，为什么还要保留 Fine KV？ Coarse 表示提供低成本概览，但一次压缩可能遗漏后续问题需要的局部细节。ViMoD 保存原始 Fine KV 及粗细成员映射，让 TRACE 随已生成文本按需恢复证据；节省的是活跃工作集读取，并不表示原始视觉信息存储成本完全消失。 例如粗表示知道桌上有标签，推理到需要读标签文字时，再恢复对应原始 Fine KV，而不必事先把所有细节都常驻读取。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:vimod" data-paper-title="Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning 多模态大模型 City University of Hong Kong / Zhejiang University 2026-10-08 一次性压缩图像可能丢掉后续推理需要的细节。DART 学习可变区域大小和成员，生成始终驻留的 Coarse KV；原始 Fine KV 仍保留。TRACE 根据已生成文本的因果隐状态决定保持或替换工作集，通过 Joint-KV 恢复原始细节。 scripts/validate_vimod_cuda_runtime.py 另外在同一真实 checkpoint 上执行 TRACE 三阶段 CUDA 梯度诊断。已实现 DART 容量约束/隐式梯度、总量整数舍入、置信度硬分组、八轮 Sinkhorn、共享 residual Value 编码；TRACE 层融合、四尺度 SSM、区域边界、HOLD/UPDATE 与真实 Fine KV 恢复。checkpoint backend 支持 SmolVLM/Idefics3，而非声称兼容 Qwen3-VL 的多模态 RoPE。  视觉 Token 压缩 动态证据恢复 多模态 视觉证据预算：选 Token、选帧与按需回看 ViMoD 为什么希望压缩图像后，仍能在推理中找回原始细节？ 生成答案的中途才可能发现需要读小字或检查局部，一次性不可恢复压缩容易提前丢掉这些证据。ViMoD 保留紧凑概览与原始细节缓存，让后续文本状态决定访问内容。保留外部细节不等于每步全部读取，恢复也有管理成本，需检查它是否提供真正必要的信息。 教学例：先概览收据判断类别，推理到税额时再找回对应原始区域；若只留永久摘要，小数字可能已经无法恢复。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-multimodal-models-vimod-74b5d3f4" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d872360a8c146634">Coarse KV 常驻时，为什么还要保留 Fine KV？</h2>
+<h2 id="qa-d872360a8c146634">ViMoD 为什么希望压缩图像后，仍能在推理中找回原始细节？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Avimod">Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · City University of Hong Kong / Zhejiang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>Coarse 表示提供低成本概览，但一次压缩可能遗漏后续问题需要的局部细节。ViMoD 保存原始 Fine KV 及粗细成员映射，让 TRACE 随已生成文本按需恢复证据；节省的是活跃工作集读取，并不表示原始视觉信息存储成本完全消失。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如粗表示知道桌上有标签，推理到需要读标签文字时，再恢复对应原始 Fine KV，而不必事先把所有细节都常驻读取。</p>
+<p><strong>答案：</strong>生成答案的中途才可能发现需要读小字或检查局部，一次性不可恢复压缩容易提前丢掉这些证据。ViMoD 保留紧凑概览与原始细节缓存，让后续文本状态决定访问内容。保留外部细节不等于每步全部读取，恢复也有管理成本，需检查它是否提供真正必要的信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先概览收据判断类别，推理到税额时再找回对应原始区域；若只留永久摘要，小数字可能已经无法恢复。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12060">原论文</a> · <a href="../../../../multimodal-models/2610.12060-vimod/">实现解读</a> · <a href="#qa-d872360a8c146634">问题链接</a></p>
 </details>
@@ -372,15 +372,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12060">原论文</a> · <a href="../../../../multimodal-models/2610.12060-vimod/">实现解读</a> · <a href="#qa-fc110d35d7abbcbf">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:vimod" data-paper-title="Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning 多模态大模型 City University of Hong Kong / Zhejiang University 2026-10-08 一次性压缩图像可能丢掉后续推理需要的细节。DART 学习可变区域大小和成员，生成始终驻留的 Coarse KV；原始 Fine KV 仍保留。TRACE 根据已生成文本的因果隐状态决定保持或替换工作集，通过 Joint-KV 恢复原始细节。 scripts/validate_vimod_cuda_runtime.py 另外在同一真实 checkpoint 上执行 TRACE 三阶段 CUDA 梯度诊断。已实现 DART 容量约束/隐式梯度、总量整数舍入、置信度硬分组、八轮 Sinkhorn、共享 residual Value 编码；TRACE 层融合、四尺度 SSM、区域边界、HOLD/UPDATE 与真实 Fine KV 恢复。checkpoint backend 支持 SmolVLM/Idefics3，而非声称兼容 Qwen3-VL 的多模态 RoPE。  视觉 Token 压缩 动态证据恢复 多模态 视觉证据预算：选 Token、选帧与按需回看 TRACE 的 UPDATE 与不断累加所有访问过的区域有什么差别？ UPDATE 用新选择的 Fine 区域替换原工作集，HOLD 则保持现状；不断累加会让工作集随推理增长，破坏固定预算。多时间尺度 SSM 从因果文本状态决定访问，因此不能提前读取未来文本或参考答案帮助选择区域。 例如先检查左侧物体再检查右侧时，替换可释放左侧工作集；若两者永远累积，长推理最终会退化为读取全量视觉。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:vimod" data-paper-title="Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning 多模态大模型 City University of Hong Kong / Zhejiang University 2026-10-08 一次性压缩图像可能丢掉后续推理需要的细节。DART 学习可变区域大小和成员，生成始终驻留的 Coarse KV；原始 Fine KV 仍保留。TRACE 根据已生成文本的因果隐状态决定保持或替换工作集，通过 Joint-KV 恢复原始细节。 scripts/validate_vimod_cuda_runtime.py 另外在同一真实 checkpoint 上执行 TRACE 三阶段 CUDA 梯度诊断。已实现 DART 容量约束/隐式梯度、总量整数舍入、置信度硬分组、八轮 Sinkhorn、共享 residual Value 编码；TRACE 层融合、四尺度 SSM、区域边界、HOLD/UPDATE 与真实 Fine KV 恢复。checkpoint backend 支持 SmolVLM/Idefics3，而非声称兼容 Qwen3-VL 的多模态 RoPE。  视觉 Token 压缩 动态证据恢复 多模态 视觉证据预算：选 Token、选帧与按需回看 DART 的可变容量分组与固定大小池化，对图像区域有什么不同假设？ 固定池化把相同数量的位置归到每组，默认各处需要相似分辨率；DART 学习区域大小和成员，同时约束容量总和等于原 token 数，用连续容量支持训练。它可表达不同区域不同需求，但最终分组仍有预算，不能从容量可学习推出所有重要细节都会被保留。 教学例：大片空白可占一个较大区域，密集文字区域可分得更细；固定等宽网格不会因为内容复杂而自动调整分组。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-bf5803f7913a539b">TRACE 的 UPDATE 与不断累加所有访问过的区域有什么差别？</h2>
+<h2 id="qa-bf5803f7913a539b">DART 的可变容量分组与固定大小池化，对图像区域有什么不同假设？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Avimod">Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · City University of Hong Kong / Zhejiang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>UPDATE 用新选择的 Fine 区域替换原工作集，HOLD 则保持现状；不断累加会让工作集随推理增长，破坏固定预算。多时间尺度 SSM 从因果文本状态决定访问，因此不能提前读取未来文本或参考答案帮助选择区域。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先检查左侧物体再检查右侧时，替换可释放左侧工作集；若两者永远累积，长推理最终会退化为读取全量视觉。</p>
+<p><strong>答案：</strong>固定池化把相同数量的位置归到每组，默认各处需要相似分辨率；DART 学习区域大小和成员，同时约束容量总和等于原 token 数，用连续容量支持训练。它可表达不同区域不同需求，但最终分组仍有预算，不能从容量可学习推出所有重要细节都会被保留。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：大片空白可占一个较大区域，密集文字区域可分得更细；固定等宽网格不会因为内容复杂而自动调整分组。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12060">原论文</a> · <a href="../../../../multimodal-models/2610.12060-vimod/">实现解读</a> · <a href="#qa-bf5803f7913a539b">问题链接</a></p>
 </details>
@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12060">原论文</a> · <a href="../../../../multimodal-models/2610.12060-vimod/">实现解读</a> · <a href="#qa-85c9904410c3762f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:video-encoder-selection" data-paper-title="Video Encoders Built on Image Representations" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Video Encoders Built on Image Representations 基础模型 Stanford University 2026-10-05 逐帧图像编码保留可寻址的单帧证据，却产生很长的视觉序列。论文先逐帧冻结编码，再结合问题相关性、帧内多样性和跨帧对应，在固定预算内选择原始 token；可选 learned refiner 在选择完成后读取额外邻帧上下文，只更新已保留的锚点，不增加输出长度。 单张A100/A30或Mac不适合该完整campaign，因此完整 refiner/全表实验成本过高，不复现（审查 DONE）。CPU 单元测试核验最大 cosine、质量归一化、DPP 核、独立 determinant ratio、Schur residual、对应边阈值、pair complementarity/平局、奇数/零/满预算、原始源位置与中间 stream 恒等，以及非法 quota、NaN、重复身份、无答案输入合同。人工张量只用于这些公式测试，不作为视觉能力证据。  视频理解 训练免费视觉token选择 多模态 视觉证据预算：选 Token、选帧与按需回看 这里的 training-free selection 为什么仍需要问题向量？ 视觉 encoder 冻结并逐帧编码，选择器用问题及选项片段的输入 embedding 判断相关性，再结合帧内多样性与跨帧对应。training-free 指选择阶段不额外训练，并非不读取问题；也不能把答案标签塞进问题向量来增强相关性。 例如问哪一帧出现钥匙时，可用“钥匙”的问题表示选择原始 patch；正确帧编号不能作为隐藏输入参与选择。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:video-encoder-selection" data-paper-title="Video Encoders Built on Image Representations" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Video Encoders Built on Image Representations 基础模型 Stanford University 2026-10-05 逐帧图像编码保留可寻址的单帧证据，却产生很长的视觉序列。论文先逐帧冻结编码，再结合问题相关性、帧内多样性和跨帧对应，在固定预算内选择原始 token；可选 learned refiner 在选择完成后读取额外邻帧上下文，只更新已保留的锚点，不增加输出长度。 单张A100/A30或Mac不适合该完整campaign，因此完整 refiner/全表实验成本过高，不复现（审查 DONE）。CPU 单元测试核验最大 cosine、质量归一化、DPP 核、独立 determinant ratio、Schur residual、对应边阈值、pair complementarity/平局、奇数/零/满预算、原始源位置与中间 stream 恒等，以及非法 quota、NaN、重复身份、无答案输入合同。人工张量只用于这些公式测试，不作为视觉能力证据。  视频理解 训练免费视觉token选择 多模态 视觉证据预算：选 Token、选帧与按需回看 逐帧编码的视频为什么还需要在送入语言模型前选择证据？ 独立图像编码保留单帧可定位信息，却会让长视频产生很大的视觉序列。该方法研究在固定预算内结合问题需求、帧内多样性和跨帧关系保留原始 token。选取不是生成新证据，也不能只追逐运动强度，需确认留下的内容足以支撑当前问题。 教学例：问题问先拿了哪件物品，需要保留相关物体及前后帧联系；单纯挑所有变化最大的背景位置可能并无帮助。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-video-encoder-selection-2d465377" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-79eabead0b3ea73d">这里的 training-free selection 为什么仍需要问题向量？</h2>
+<h2 id="qa-79eabead0b3ea73d">逐帧编码的视频为什么还需要在送入语言模型前选择证据？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avideo-encoder-selection">Video Encoders Built on Image Representations</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Stanford University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>视觉 encoder 冻结并逐帧编码，选择器用问题及选项片段的输入 embedding 判断相关性，再结合帧内多样性与跨帧对应。training-free 指选择阶段不额外训练，并非不读取问题；也不能把答案标签塞进问题向量来增强相关性。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如问哪一帧出现钥匙时，可用“钥匙”的问题表示选择原始 patch；正确帧编号不能作为隐藏输入参与选择。</p>
+<p><strong>答案：</strong>独立图像编码保留单帧可定位信息，却会让长视频产生很大的视觉序列。该方法研究在固定预算内结合问题需求、帧内多样性和跨帧关系保留原始 token。选取不是生成新证据，也不能只追逐运动强度，需确认留下的内容足以支撑当前问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：问题问先拿了哪件物品，需要保留相关物体及前后帧联系；单纯挑所有变化最大的背景位置可能并无帮助。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.06616">原论文</a> · <a href="../../../../foundation-models/2610.06616-video-encoder-selection/">实现解读</a> · <a href="#qa-79eabead0b3ea73d">问题链接</a></p>
 </details>
@@ -425,15 +425,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.06616">原论文</a> · <a href="../../../../foundation-models/2610.06616-video-encoder-selection/">实现解读</a> · <a href="#qa-4a106f0ffb777141">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:video-encoder-selection" data-paper-title="Video Encoders Built on Image Representations" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Video Encoders Built on Image Representations 基础模型 Stanford University 2026-10-05 逐帧图像编码保留可寻址的单帧证据，却产生很长的视觉序列。论文先逐帧冻结编码，再结合问题相关性、帧内多样性和跨帧对应，在固定预算内选择原始 token；可选 learned refiner 在选择完成后读取额外邻帧上下文，只更新已保留的锚点，不增加输出长度。 单张A100/A30或Mac不适合该完整campaign，因此完整 refiner/全表实验成本过高，不复现（审查 DONE）。CPU 单元测试核验最大 cosine、质量归一化、DPP 核、独立 determinant ratio、Schur residual、对应边阈值、pair complementarity/平局、奇数/零/满预算、原始源位置与中间 stream 恒等，以及非法 quota、NaN、重复身份、无答案输入合同。人工张量只用于这些公式测试，不作为视觉能力证据。  视频理解 训练免费视觉token选择 多模态 视觉证据预算：选 Token、选帧与按需回看 选择原始 token 与可选 learned refiner 的输出边界有什么不同？ selection-only 返回固定预算内的原始 token、位置及中间流的同一组索引，不平均或重设坐标。refiner 可再读邻帧上下文更新已选锚点，但不增加输出数量；因此训练免费选择器与含训练 refiner 的完整结果不能混为一项。 例如保留五十个源 token 后，refiner 可让这五十个吸收邻帧信息，却不能偷偷加回五十个新 token 再宣称相同预算。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:video-encoder-selection" data-paper-title="Video Encoders Built on Image Representations" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Video Encoders Built on Image Representations 基础模型 Stanford University 2026-10-05 逐帧图像编码保留可寻址的单帧证据，却产生很长的视觉序列。论文先逐帧冻结编码，再结合问题相关性、帧内多样性和跨帧对应，在固定预算内选择原始 token；可选 learned refiner 在选择完成后读取额外邻帧上下文，只更新已保留的锚点，不增加输出长度。 单张A100/A30或Mac不适合该完整campaign，因此完整 refiner/全表实验成本过高，不复现（审查 DONE）。CPU 单元测试核验最大 cosine、质量归一化、DPP 核、独立 determinant ratio、Schur residual、对应边阈值、pair complementarity/平局、奇数/零/满预算、原始源位置与中间 stream 恒等，以及非法 quota、NaN、重复身份、无答案输入合同。人工张量只用于这些公式测试，不作为视觉能力证据。  视频理解 训练免费视觉token选择 多模态 视觉证据预算：选 Token、选帧与按需回看 帧内 DPP 多样性与相邻帧对应奖励，各约束选中集合的什么关系？ 帧内核的 log-determinant 结合质量和差异，避免同一帧名额被近重复 token 占满；跨帧边则奖励满足匹配条件的相邻端点，保留可追踪关系。两者约束不同，不能用一个运动分数替代。对应边仍受相似度、margin 和空间门限制，不保证每条边都代表真实物体轨迹。 教学例：同帧可选杯子和手而非两个相似桌面块；跨帧再保留杯子的可靠对应，有助于观察它是否被移动。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-6879eb4eb04dbefb">选择原始 token 与可选 learned refiner 的输出边界有什么不同？</h2>
+<h2 id="qa-6879eb4eb04dbefb">帧内 DPP 多样性与相邻帧对应奖励，各约束选中集合的什么关系？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avideo-encoder-selection">Video Encoders Built on Image Representations</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Stanford University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>selection-only 返回固定预算内的原始 token、位置及中间流的同一组索引，不平均或重设坐标。refiner 可再读邻帧上下文更新已选锚点，但不增加输出数量；因此训练免费选择器与含训练 refiner 的完整结果不能混为一项。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如保留五十个源 token 后，refiner 可让这五十个吸收邻帧信息，却不能偷偷加回五十个新 token 再宣称相同预算。</p>
+<p><strong>答案：</strong>帧内核的 log-determinant 结合质量和差异，避免同一帧名额被近重复 token 占满；跨帧边则奖励满足匹配条件的相邻端点，保留可追踪关系。两者约束不同，不能用一个运动分数替代。对应边仍受相似度、margin 和空间门限制，不保证每条边都代表真实物体轨迹。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同帧可选杯子和手而非两个相似桌面块；跨帧再保留杯子的可靠对应，有助于观察它是否被移动。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.06616">原论文</a> · <a href="../../../../foundation-models/2610.06616-video-encoder-selection/">实现解读</a> · <a href="#qa-6879eb4eb04dbefb">问题链接</a></p>
 </details>
@@ -491,29 +491,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01434">原论文</a> · <a href="../../../../foundation-models/2610.01434-mwop/">实现解读</a> · <a href="#qa-5c9fc2d7d0b259f3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mwop" data-paper-title="MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs 基础模型 原文首页未列第一作者机构 2026-10-01 在同一注意力头内分别剪 V2V/T2V/T2T 路径，并为视觉、文本执行选择不同 FFN 通道；注意力剪枝后重新估计 FFN 重要性。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行独立路径/通道 mask；不声称 kernel 加速或模型级精度。执行独立路径/通道 mask；不声称 kernel 加速或模型级精度。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  多模态大模型 结构剪枝 推理效率 多模态 视觉证据预算：选 Token、选帧与按需回看 为什么注意力剪枝后需要重新估计 FFN 重要性？ 注意力改变 token 表示及后续梯度，旧 FFN 重要性可能已不适用于新网络。基于权重与损失梯度乘积幅值的估计应在修改后重算；本地只执行独立路径及通道 mask，没有模型级精度或定制 kernel 加速证据。 例如删掉一条视觉交互路径后，某 FFN 通道收到的信息改变，直接沿用原排名可能把现在关键的通道误删。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mwop" data-paper-title="MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs 基础模型 原文首页未列第一作者机构 2026-10-01 在同一注意力头内分别剪 V2V/T2V/T2T 路径，并为视觉、文本执行选择不同 FFN 通道；注意力剪枝后重新估计 FFN 重要性。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行独立路径/通道 mask；不声称 kernel 加速或模型级精度。执行独立路径/通道 mask；不声称 kernel 加速或模型级精度。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  多模态大模型 结构剪枝 推理效率 多模态 视觉证据预算：选 Token、选帧与按需回看 MWOP的|w·∂L/∂w|为什么不能直接替换为|w|来排序剪枝？ 权重与损失梯度的乘积同时考虑参数幅度和当前损失对它的敏感性，只看|w|会丢掉后一个量。取绝对值避免正负方向在重要性幅度上相互抵消。这是局部近似指标，仍需指定校准数据与模态路径，不能把小分数理解为删除后质量必然不变。 教学例子：两个权重大小相同，但一个位置的梯度更大，乘积指标会区分它们；只按权重幅度则给出并列排序。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-82b1ce006c57fdb6">为什么注意力剪枝后需要重新估计 FFN 重要性？</h2>
+<h2 id="qa-82b1ce006c57fdb6">MWOP的|w·∂L/∂w|为什么不能直接替换为|w|来排序剪枝？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amwop">MWOP: Modality-aware Width-wise Operation Pruning for Efficient MLLMs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>注意力改变 token 表示及后续梯度，旧 FFN 重要性可能已不适用于新网络。基于权重与损失梯度乘积幅值的估计应在修改后重算；本地只执行独立路径及通道 mask，没有模型级精度或定制 kernel 加速证据。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如删掉一条视觉交互路径后，某 FFN 通道收到的信息改变，直接沿用原排名可能把现在关键的通道误删。</p>
-<p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
+<p><strong>答案：</strong>权重与损失梯度的乘积同时考虑参数幅度和当前损失对它的敏感性，只看|w|会丢掉后一个量。取绝对值避免正负方向在重要性幅度上相互抵消。这是局部近似指标，仍需指定校准数据与模态路径，不能把小分数理解为删除后质量必然不变。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个权重大小相同，但一个位置的梯度更大，乘积指标会区分它们；只按权重幅度则给出并列排序。</p>
+<p class="ar-learning-sources">依据：核心公式、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01434">原论文</a> · <a href="../../../../foundation-models/2610.01434-mwop/">实现解读</a> · <a href="#qa-82b1ce006c57fdb6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:veto" data-paper-title="VETO: Video Efficient Token Optimization for Vision Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="VETO: Video Efficient Token Optimization for Vision Language Models 基础模型 National Taiwan University 2026-10-01 先在帧内合并语义近邻 token，再对压缩后的 frame representation 做跨帧去冗余；空间先行显著降低全局时间匹配成本。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 GPU 上空间先行、时间后继的双轴压缩；未加载 7B VLM、真实视频 benchmark 或复述论文吞吐为本地结果。执行 GPU 上空间先行、时间后继的双轴压缩；未加载 7B VLM、真实视频 benchmark 或复述论文吞吐为本地结果。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  视频 VLM Token 压缩 推理效率 多模态 视觉证据预算：选 Token、选帧与按需回看 VETO 的空间压缩和时间压缩分别作用于什么冗余？ 空间阶段在单帧内合并语义近邻 token，时间阶段再处理跨帧重复内容。先减少每帧表示长度可降低后续全局时间匹配的规模；这是有顺序的两轴操作，不能只把所有帧 token 混在一起随便挑一批就称为同一设计。 例如每帧都有大量相似墙面，先在帧内压缩墙面，再比较相邻帧的剩余表示，可少做许多重复跨帧匹配。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:veto" data-paper-title="VETO: Video Efficient Token Optimization for Vision Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="VETO: Video Efficient Token Optimization for Vision Language Models 基础模型 National Taiwan University 2026-10-01 先在帧内合并语义近邻 token，再对压缩后的 frame representation 做跨帧去冗余；空间先行显著降低全局时间匹配成本。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 GPU 上空间先行、时间后继的双轴压缩；未加载 7B VLM、真实视频 benchmark 或复述论文吞吐为本地结果。执行 GPU 上空间先行、时间后继的双轴压缩；未加载 7B VLM、真实视频 benchmark 或复述论文吞吐为本地结果。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  视频 VLM Token 压缩 推理效率 多模态 视觉证据预算：选 Token、选帧与按需回看 视频输入为什么同时存在帧内与跨帧两种冗余？ 一帧中的相邻区域可能描述相同背景，相邻帧又可能重复同一场景，二者都会延长视觉序列。VETO 希望从空间和时间两个轴减少重复信息，让后续模型面对更紧凑的视频证据。不同轴压缩会损失不同细节，不能只看总压缩率判断是否保留了任务所需运动和局部线索。 教学例：固定镜头下，墙面在单帧占很多 patch，多帧又几乎不变；但一只手的短暂动作既需要足够时间覆盖也需要空间细节。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-veto-75da8cb3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-893d97b86bd46781">VETO 的空间压缩和时间压缩分别作用于什么冗余？</h2>
+<h2 id="qa-893d97b86bd46781">视频输入为什么同时存在帧内与跨帧两种冗余？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aveto">VETO: Video Efficient Token Optimization for Vision Language Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · National Taiwan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>空间阶段在单帧内合并语义近邻 token，时间阶段再处理跨帧重复内容。先减少每帧表示长度可降低后续全局时间匹配的规模；这是有顺序的两轴操作，不能只把所有帧 token 混在一起随便挑一批就称为同一设计。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如每帧都有大量相似墙面，先在帧内压缩墙面，再比较相邻帧的剩余表示，可少做许多重复跨帧匹配。</p>
+<p><strong>答案：</strong>一帧中的相邻区域可能描述相同背景，相邻帧又可能重复同一场景，二者都会延长视觉序列。VETO 希望从空间和时间两个轴减少重复信息，让后续模型面对更紧凑的视频证据。不同轴压缩会损失不同细节，不能只看总压缩率判断是否保留了任务所需运动和局部线索。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定镜头下，墙面在单帧占很多 patch，多帧又几乎不变；但一只手的短暂动作既需要足够时间覆盖也需要空间细节。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01785">原论文</a> · <a href="../../../../foundation-models/2610.01785-veto/">实现解读</a> · <a href="#qa-893d97b86bd46781">问题链接</a></p>
 </details>
@@ -531,15 +531,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01785">原论文</a> · <a href="../../../../foundation-models/2610.01785-veto/">实现解读</a> · <a href="#qa-ffd7d671be8de7d4">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:veto" data-paper-title="VETO: Video Efficient Token Optimization for Vision Language Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="VETO: Video Efficient Token Optimization for Vision Language Models 基础模型 National Taiwan University 2026-10-01 先在帧内合并语义近邻 token，再对压缩后的 frame representation 做跨帧去冗余；空间先行显著降低全局时间匹配成本。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 GPU 上空间先行、时间后继的双轴压缩；未加载 7B VLM、真实视频 benchmark 或复述论文吞吐为本地结果。执行 GPU 上空间先行、时间后继的双轴压缩；未加载 7B VLM、真实视频 benchmark 或复述论文吞吐为本地结果。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  视频 VLM Token 压缩 推理效率 多模态 视觉证据预算：选 Token、选帧与按需回看 空间先行与先做全序列时间匹配，在计算负担上有何差别？ 全序列时间匹配先面对原始的大量 token，空间先行则先缩小候选集合再跨帧处理，重点是降低后段匹配规模。顺序也可能改变保留证据，因此只比较理论候选数不能证明质量不变，更不能代替真实视频时延。 例如十帧各一百个 token，先各压到二十个，时间阶段处理二百个而非一千个；但压掉的细节仍可能影响任务。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:veto" data-paper-title="VETO: Video Efficient Token Optimization for Vision Language Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="VETO: Video Efficient Token Optimization for Vision Language Models 基础模型 National Taiwan University 2026-10-01 先在帧内合并语义近邻 token，再对压缩后的 frame representation 做跨帧去冗余；空间先行显著降低全局时间匹配成本。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 GPU 上空间先行、时间后继的双轴压缩；未加载 7B VLM、真实视频 benchmark 或复述论文吞吐为本地结果。执行 GPU 上空间先行、时间后继的双轴压缩；未加载 7B VLM、真实视频 benchmark 或复述论文吞吐为本地结果。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  视频 VLM Token 压缩 推理效率 多模态 视觉证据预算：选 Token、选帧与按需回看 相同总 token 预算，保留更多帧或每帧更多位置，各偏向哪种信息？ 更多帧偏向时间覆盖，每帧更多位置偏向局部空间细节，总量相同并不意味着信息相同。本地输入为帧数、帧内 token 数、维度三轴，两个 keep 分别受原轴上限约束，输出保留两者乘积个位置。这是预算假设比较，不代表论文已验证某种分配对所有视频最优。 教学例：四帧各保留十六个位置，与十六帧各保留四个位置都用六十四 token，前者看得细，后者可能更容易覆盖短暂事件。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-29587d13df18756f">空间先行与先做全序列时间匹配，在计算负担上有何差别？</h2>
+<h2 id="qa-29587d13df18756f">相同总 token 预算，保留更多帧或每帧更多位置，各偏向哪种信息？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aveto">VETO: Video Efficient Token Optimization for Vision Language Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · National Taiwan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>全序列时间匹配先面对原始的大量 token，空间先行则先缩小候选集合再跨帧处理，重点是降低后段匹配规模。顺序也可能改变保留证据，因此只比较理论候选数不能证明质量不变，更不能代替真实视频时延。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如十帧各一百个 token，先各压到二十个，时间阶段处理二百个而非一千个；但压掉的细节仍可能影响任务。</p>
+<p><strong>答案：</strong>更多帧偏向时间覆盖，每帧更多位置偏向局部空间细节，总量相同并不意味着信息相同。本地输入为帧数、帧内 token 数、维度三轴，两个 keep 分别受原轴上限约束，输出保留两者乘积个位置。这是预算假设比较，不代表论文已验证某种分配对所有视频最优。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：四帧各保留十六个位置，与十六帧各保留四个位置都用六十四 token，前者看得细，后者可能更容易覆盖短暂事件。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01785">原论文</a> · <a href="../../../../foundation-models/2610.01785-veto/">实现解读</a> · <a href="#qa-29587d13df18756f">问题链接</a></p>
 </details>
@@ -584,15 +584,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00623">原论文</a> · <a href="../../../../foundation-models/2610.00623-hawk/">实现解读</a> · <a href="#qa-a6e2431346cfbada">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hawk" data-paper-title="HAWK: Rethinking Multimodal Drafting for Speculative Decoding" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="HAWK: Rethinking Multimodal Drafting for Speculative Decoding 基础模型 原文首页未列第一作者机构 2026-09-30 从 target 多层隐藏状态学习混合，给浅层 drafter 提供压缩视觉表示，并用 drafter 自己提议后的 shifted trajectory 训练。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行层混合与 shifted target 隔离；未实现专用解码 kernel。执行层混合与 shifted target 隔离；未实现专用解码 kernel。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  多模态推理 投机解码 蒸馏 多模态 视觉证据预算：选 Token、选帧与按需回看 训练自己提议后的 shifted trajectory 与只看 teacher 的标准前缀有何区别？ drafter 自身提议会改变后续访问的前缀，训练这些移位后的状态可缩小训练与真实草拟过程的分布差距。只在 teacher 标准轨迹上拟合，不一定覆盖草稿错误后的状态；这是监督分布差异，不能只用训练损失推断解码加速。 例如草稿先提出了一个不同形容词，后续预测应学习该实际前缀的 target 分布，而不是一直假装前文仍是教师原句。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hawk" data-paper-title="HAWK: Rethinking Multimodal Drafting for Speculative Decoding" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="HAWK: Rethinking Multimodal Drafting for Speculative Decoding 基础模型 原文首页未列第一作者机构 2026-09-30 从 target 多层隐藏状态学习混合，给浅层 drafter 提供压缩视觉表示，并用 drafter 自己提议后的 shifted trajectory 训练。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行层混合与 shifted target 隔离；未实现专用解码 kernel。执行层混合与 shifted target 隔离；未实现专用解码 kernel。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  多模态推理 投机解码 蒸馏 多模态 视觉证据预算：选 Token、选帧与按需回看 HAWK学习混合target多层状态，与固定只取最后一层给drafter，有何接口区别？ HAWK以softmax归一化的可学习层权重组合target各层隐藏状态，drafter接收的是这种混合表示；只取末层相当于固定选择一个来源。层权重总和为一并不等于每层贡献相同，也不能由混合存在就断言接受率或端到端速度已提高。 教学例子：某层权重较高说明该层状态在接口里占更大份额；这不是把所有层拼接成更长token序列。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-08951b88c5bc06ae">训练自己提议后的 shifted trajectory 与只看 teacher 的标准前缀有何区别？</h2>
+<h2 id="qa-08951b88c5bc06ae">HAWK学习混合target多层状态，与固定只取最后一层给drafter，有何接口区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahawk">HAWK: Rethinking Multimodal Drafting for Speculative Decoding</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>drafter 自身提议会改变后续访问的前缀，训练这些移位后的状态可缩小训练与真实草拟过程的分布差距。只在 teacher 标准轨迹上拟合，不一定覆盖草稿错误后的状态；这是监督分布差异，不能只用训练损失推断解码加速。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如草稿先提出了一个不同形容词，后续预测应学习该实际前缀的 target 分布，而不是一直假装前文仍是教师原句。</p>
+<p><strong>答案：</strong>HAWK以softmax归一化的可学习层权重组合target各层隐藏状态，drafter接收的是这种混合表示；只取末层相当于固定选择一个来源。层权重总和为一并不等于每层贡献相同，也不能由混合存在就断言接受率或端到端速度已提高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某层权重较高说明该层状态在接口里占更大份额；这不是把所有层拼接成更长token序列。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00623">原论文</a> · <a href="../../../../foundation-models/2610.00623-hawk/">实现解读</a> · <a href="#qa-08951b88c5bc06ae">问题链接</a></p>
 </details>
@@ -610,16 +610,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00623">原论文</a> · <a href="../../../../foundation-models/2610.00623-hawk/">实现解读</a> · <a href="#qa-1e1157c08ff9a8f8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:stacktok" data-paper-title="StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection 多模态大模型 Sichuan University 2026-09-15 把 query relevance 作为目标、coverage 作为随预算变化的支撑约束，逐步在两种选取准则间切换。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行单 crop 的 reference-gated selector；未加载五个论文 VLM。本地执行单 crop 的 reference-gated selector；未加载五个论文 VLM。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  视觉 Token 选择 推理效率 多模态 视觉证据预算：选 Token、选帧与按需回看 StackTok 为什么同时考虑问题相关性与视觉覆盖？ 只挑与问题相似的 token 可能重复保留同一局部，漏掉支撑判断的其他区域；只追覆盖又可能把预算花在无关背景。StackTok 将相关性作为目标、覆盖作为随预算变化的支撑约束，逐步选择时协调两者，而不是把两种分数随意相加。 例如问桌上有几种餐具，许多高相关 token 都来自同一只碗；保留一定区域覆盖可避免漏掉另一侧的叉子。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:stacktok" data-paper-title="StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection 多模态大模型 Sichuan University 2026-09-15 把 query relevance 作为目标、coverage 作为随预算变化的支撑约束，逐步在两种选取准则间切换。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行单 crop 的 reference-gated selector；未加载五个论文 VLM。本地执行单 crop 的 reference-gated selector；未加载五个论文 VLM。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  视觉 Token 选择 推理效率 多模态 视觉证据预算：选 Token、选帧与按需回看 固定视觉 token 预算下，StackTok 为什么不能只挑看起来最切题的几个位置？ 视觉问题可能需要多个对象或空间关系，只保留单一热点附近的高相关 token 会失去回答所需覆盖。StackTok 研究在问题相关性目标与视觉覆盖约束间分配有限名额。覆盖不是平均保留所有区域，也不意味着更多多样性必然更好，应让所选集合服务当前问题。 教学例：比较两辆车的位置时，只保留最显眼那辆车的多个 patch 很相关，却缺少另一辆车，无法完成关系判断。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-multimodal-models-stacktok-c22648c2" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1f465fb879831c02">StackTok 为什么同时考虑问题相关性与视觉覆盖？</h2>
+<h2 id="qa-1f465fb879831c02">固定视觉 token 预算下，StackTok 为什么不能只挑看起来最切题的几个位置？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Astacktok">StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Sichuan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>只挑与问题相似的 token 可能重复保留同一局部，漏掉支撑判断的其他区域；只追覆盖又可能把预算花在无关背景。StackTok 将相关性作为目标、覆盖作为随预算变化的支撑约束，逐步选择时协调两者，而不是把两种分数随意相加。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如问桌上有几种餐具，许多高相关 token 都来自同一只碗；保留一定区域覆盖可避免漏掉另一侧的叉子。</p>
+<p><strong>答案：</strong>视觉问题可能需要多个对象或空间关系，只保留单一热点附近的高相关 token 会失去回答所需覆盖。StackTok 研究在问题相关性目标与视觉覆盖约束间分配有限名额。覆盖不是平均保留所有区域，也不意味着更多多样性必然更好，应让所选集合服务当前问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：比较两辆车的位置时，只保留最显眼那辆车的多个 patch 很相关，却缺少另一辆车，无法完成关系判断。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与实现对应；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.16841">原论文</a> · <a href="../../../../multimodal-models/2609.16841-stacktok/">实现解读</a> · <a href="#qa-1f465fb879831c02">问题链接</a></p>
 </details>
@@ -663,16 +663,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.16841">原论文</a> · <a href="../../../../multimodal-models/2609.16841-stacktok/">实现解读</a> · <a href="#qa-eccf1fd02dc72752">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:videomm" data-paper-title="VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs 多模态大模型 University of Science and Technology of China 2026-09-15 先在低分辨率 Macro Proxy 上定位相关区域，仅在宏观共识不足时激活高保真 Micro Tokens。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 macro 选择和 micro 激活；不加载完整视频 MLLM，也不外推 LongVideoBench 效果。本地执行 macro 选择和 micro 激活；不加载完整视频 MLLM，也不外推 LongVideoBench 效果。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  视频理解 Token 压缩 多模态 视觉证据预算：选 Token、选帧与按需回看 VideoMM 的 Macro Proxy 为什么不是最终高保真视觉证据？ Macro Proxy 用低分辨率信息便宜地定位相关区域并形成宏观判断，细节不足时才激活 Micro Tokens。低分辨率内容可能足以判断场景，却无法可靠读取小字或细微动作，因此两级接口的价值在于按需要补充证据，而非把粗表示当完整视频。 例如宏观代理能定位到人物进门片段，但要看胸牌上的字，就应读取相应位置的高保真 token。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:videomm" data-paper-title="VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs 多模态大模型 University of Science and Technology of China 2026-09-15 先在低分辨率 Macro Proxy 上定位相关区域，仅在宏观共识不足时激活高保真 Micro Tokens。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 macro 选择和 micro 激活；不加载完整视频 MLLM，也不外推 LongVideoBench 效果。本地执行 macro 选择和 micro 激活；不加载完整视频 MLLM，也不外推 LongVideoBench 效果。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  视频理解 Token 压缩 多模态 视觉证据预算：选 Token、选帧与按需回看 VideoMM 为什么先粗看视频，再决定哪里值得花更高分辨率预算？ 长视频的高保真视觉输入成本大，但并非每一段或每个区域都与问题同样有关。VideoMM 用低分辨率 Macro Proxy 提供定位线索，再在宏观证据不足时获取细节。粗看节省输入也可能漏掉小目标，因此需要区分定位证据与真正支撑答案的高保真内容。 教学例：先找人物进入房间的大致时段，再查看手中物品细节；若一开始给整段视频相同高清预算，会在无关段落耗费很多 token。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-multimodal-models-videomm-bc3e057a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-581d21dad7641725">VideoMM 的 Macro Proxy 为什么不是最终高保真视觉证据？</h2>
+<h2 id="qa-581d21dad7641725">VideoMM 为什么先粗看视频，再决定哪里值得花更高分辨率预算？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Avideomm">VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Science and Technology of China</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>Macro Proxy 用低分辨率信息便宜地定位相关区域并形成宏观判断，细节不足时才激活 Micro Tokens。低分辨率内容可能足以判断场景，却无法可靠读取小字或细微动作，因此两级接口的价值在于按需要补充证据，而非把粗表示当完整视频。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如宏观代理能定位到人物进门片段，但要看胸牌上的字，就应读取相应位置的高保真 token。</p>
+<p><strong>答案：</strong>长视频的高保真视觉输入成本大，但并非每一段或每个区域都与问题同样有关。VideoMM 用低分辨率 Macro Proxy 提供定位线索，再在宏观证据不足时获取细节。粗看节省输入也可能漏掉小目标，因此需要区分定位证据与真正支撑答案的高保真内容。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先找人物进入房间的大致时段，再查看手中物品细节；若一开始给整段视频相同高清预算，会在无关段落耗费很多 token。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与实现对应；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.16722">原论文</a> · <a href="../../../../multimodal-models/2609.16722-videomm/">实现解读</a> · <a href="#qa-581d21dad7641725">问题链接</a></p>
 </details>
@@ -716,17 +716,17 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.16722">原论文</a> · <a href="../../../../multimodal-models/2609.16722-videomm/">实现解读</a> · <a href="#qa-c9eec1fc577aafde">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:frames-on-demand" data-paper-title="Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding 基础模型 Queen Mary University of London 2026-09-10 视频只做一次 caption memory；visual-need router 判断文本证据不足时，才在固定预算内读取相关帧。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 caption/query gate 与 top-k 帧选择；未运行长视频 VLM。本地执行 caption/query gate 与 top-k 帧选择；未运行长视频 VLM。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  长视频理解 视觉预算路由 多模态 视觉证据预算：选 Token、选帧与按需回看 一次 caption memory 与后续按需看帧分别保存什么信息？ caption memory 提供便宜、可复用的文字索引，后续问题先基于它判断证据是否充足；只有需要视觉细节时才消耗帧预算。文字记忆可能遗漏颜色、空间关系或瞬时动作，因此按需看帧是补充证据的路径，而非保证 caption 已无损保存视频。 例如字幕记忆写“有人走进房间”，问进入时间可查记忆，问手里拿什么可能需要回看对应帧。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:frames-on-demand" data-paper-title="Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding 基础模型 Queen Mary University of London 2026-09-10 视频只做一次 caption memory；visual-need router 判断文本证据不足时，才在固定预算内读取相关帧。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 caption/query gate 与 top-k 帧选择；未运行长视频 VLM。本地执行 caption/query gate 与 top-k 帧选择；未运行长视频 VLM。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  长视频理解 视觉预算路由 多模态 视觉证据预算：选 Token、选帧与按需回看 Frames-on-Demand的caption-once，是每来一个问题都重新写一次视频描述吗？ 不是。设计先为视频建立一次可复用的文字记忆，后续问题共享这笔预处理；逐问是否追加视觉读取则另由路由和帧预算决定。描述成本与每题新增取证成本要分开计算，不能省略前者，也不能把重复使用文字记忆说成每题完全不需要视觉计算。 教学例子：同一视频连续回答五个问题，可共用先前文字记忆；其中某题需细节时再花额外看帧成本，而不是默认重写五份描述。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-frames-on-demand-ec1c6746" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-2f9ed6ab63e2f74a">一次 caption memory 与后续按需看帧分别保存什么信息？</h2>
+<h2 id="qa-2f9ed6ab63e2f74a">Frames-on-Demand的caption-once，是每来一个问题都重新写一次视频描述吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aframes-on-demand">Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Queen Mary University of London</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>caption memory 提供便宜、可复用的文字索引，后续问题先基于它判断证据是否充足；只有需要视觉细节时才消耗帧预算。文字记忆可能遗漏颜色、空间关系或瞬时动作，因此按需看帧是补充证据的路径，而非保证 caption 已无损保存视频。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如字幕记忆写“有人走进房间”，问进入时间可查记忆，问手里拿什么可能需要回看对应帧。</p>
-<p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
+<p><strong>答案：</strong>不是。设计先为视频建立一次可复用的文字记忆，后续问题共享这笔预处理；逐问是否追加视觉读取则另由路由和帧预算决定。描述成本与每题新增取证成本要分开计算，不能省略前者，也不能把重复使用文字记忆说成每题完全不需要视觉计算。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一视频连续回答五个问题，可共用先前文字记忆；其中某题需细节时再花额外看帧成本，而不是默认重写五份描述。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11899">原论文</a> · <a href="../../../../foundation-models/2609.11899-frames-on-demand/">实现解读</a> · <a href="#qa-2f9ed6ab63e2f74a">问题链接</a></p>
 </details>
 </article>
@@ -769,17 +769,17 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11899">原论文</a> · <a href="../../../../foundation-models/2609.11899-frames-on-demand/">实现解读</a> · <a href="#qa-8d826d052ddc75b2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:omnikvquant" data-paper-title="OmniKVQuant: KV Cache Quantization for Omni-LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="OmniKVQuant: KV Cache Quantization for Omni-LLMs 基础模型 KAIST 2026-09-10 按短时间窗确定 key 量化范围，并按模态分别旋转 value，处理 temporal drift 与异构几何。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 2-bit 窗口量化和模态独立旋转的 NumPy reference；Triton kernel 另需 A100/A30 验证。本地执行 2-bit 窗口量化和模态独立旋转的 NumPy reference；Triton kernel 另需 A100/A30 验证。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  多模态推理 KV Cache 量化 多模态 视觉证据预算：选 Token、选帧与按需回看 OmniKVQuant 为什么分别处理 key 的时间漂移与 value 的模态几何？ key 的数值范围可随时间变化，短窗口量化让尺度更贴近当前片段；不同模态的 value 分布几何也可能不同，分别旋转旨在使低位量化更合适。两种操作针对不同张量特性，不能把它们简化成所有 cache 共用一个全局缩放值。 例如前半段音频与后半段图像 token 的分布不同，单一全序列范围可能被局部极值占据，使多数值分辨率很低。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:omnikvquant" data-paper-title="OmniKVQuant: KV Cache Quantization for Omni-LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="OmniKVQuant: KV Cache Quantization for Omni-LLMs 基础模型 KAIST 2026-09-10 按短时间窗确定 key 量化范围，并按模态分别旋转 value，处理 temporal drift 与异构几何。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 2-bit 窗口量化和模态独立旋转的 NumPy reference；Triton kernel 另需 A100/A30 验证。本地执行 2-bit 窗口量化和模态独立旋转的 NumPy reference；Triton kernel 另需 A100/A30 验证。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  多模态推理 KV Cache 量化 多模态 视觉证据预算：选 Token、选帧与按需回看 OmniKVQuant压缩的是模型权重，还是当前上下文留下的KV cache？ 它针对推理时保存的key与value状态，而不是把网络权重统一变成低位参数。cache随已处理上下文增长，还包含不同模态留下的表示；权重已量化也不意味着这部分内存消失。先区分固定模型参数与请求状态，才能理解KV量化的成本对象。 教学例子：同一个模型处理短文本和长音视频时权重数量不变，保存的KV状态却可不同；这里压缩的是后者。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-omnikvquant-a8e321c1" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f9bc9fa701552ac3">OmniKVQuant 为什么分别处理 key 的时间漂移与 value 的模态几何？</h2>
+<h2 id="qa-f9bc9fa701552ac3">OmniKVQuant压缩的是模型权重，还是当前上下文留下的KV cache？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aomnikvquant">OmniKVQuant: KV Cache Quantization for Omni-LLMs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · KAIST</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>key 的数值范围可随时间变化，短窗口量化让尺度更贴近当前片段；不同模态的 value 分布几何也可能不同，分别旋转旨在使低位量化更合适。两种操作针对不同张量特性，不能把它们简化成所有 cache 共用一个全局缩放值。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如前半段音频与后半段图像 token 的分布不同，单一全序列范围可能被局部极值占据，使多数值分辨率很低。</p>
-<p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
+<p><strong>答案：</strong>它针对推理时保存的key与value状态，而不是把网络权重统一变成低位参数。cache随已处理上下文增长，还包含不同模态留下的表示；权重已量化也不意味着这部分内存消失。先区分固定模型参数与请求状态，才能理解KV量化的成本对象。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一个模型处理短文本和长音视频时权重数量不变，保存的KV状态却可不同；这里压缩的是后者。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11582">原论文</a> · <a href="../../../../foundation-models/2609.11582-omnikvquant/">实现解读</a> · <a href="#qa-f9bc9fa701552ac3">问题链接</a></p>
 </details>
 </article>
@@ -822,16 +822,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11582">原论文</a> · <a href="../../../../foundation-models/2609.11582-omnikvquant/">实现解读</a> · <a href="#qa-4cd2907c3a53ebaf">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pace-vlm" data-paper-title="PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference 基础模型 Sun Yat-sen University 2026-08-27 VLM 的视觉 token 一方面在 prefill 阶段带来大量计算，另一方面在抽取阶段仍会保留大量与问题无关的内容。PACE 将两个阶段拆开处理：APC 用浅层 ViT preview 同时估计全局语义密度和局部细节，按图像难度自适应缩放；DDAE 再融合 LLM 与视觉编码器的注意力，以置信度决定两种证据各占多少权重，而不是固定只信一种注意力图。 复现级别：核心机制 + 真实 checkpoint 公开数据验证。复现级别：核心机制 + 真实 checkpoint 公开数据验证。APC、DDAE 公式和 Qwen2.5-VL 自适应分辨率路径均实际执行；没有把小样本结果冒充论文完整 benchmark。本地正式结果是小型 RealWorldQA checkpoint smoke，不覆盖论文完整 11 个 benchmark；当前 runner 实测 APC 主路径，DDAE 以独立公式和单测验证，尚未复制作者约 2,000 行的模型 fork 与定制 kernel。本地对照口径：基线是同一 Qwen2.5-VL checkpoint 的原始视觉分辨率；  multimodal-foundation-model visual-token-compression inference-serving 多模态 视觉证据预算：选 Token、选帧与按需回看 PACE 为什么把 condense 和 extract 分成两段？ 输入分辨率会影响视觉编码与 prefill 成本，而编码后保留哪些 token 又影响后续读取。APC 在完整编码前用浅层预览分配图像预算，DDAE 在提取阶段融合视觉与语言注意力。两个阶段控制不同开销，不能只做后段筛选就宣称避免了前段编码。 例如先把简单图像缩小可减少初始 token，之后再保留与问题相关部分；若先全分辨率编码再删 token，前段成本已付出。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pace-vlm" data-paper-title="PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference 基础模型 Sun Yat-sen University 2026-08-27 VLM 的视觉 token 一方面在 prefill 阶段带来大量计算，另一方面在抽取阶段仍会保留大量与问题无关的内容。PACE 将两个阶段拆开处理：APC 用浅层 ViT preview 同时估计全局语义密度和局部细节，按图像难度自适应缩放；DDAE 再融合 LLM 与视觉编码器的注意力，以置信度决定两种证据各占多少权重，而不是固定只信一种注意力图。 复现级别：核心机制 + 真实 checkpoint 公开数据验证。复现级别：核心机制 + 真实 checkpoint 公开数据验证。APC、DDAE 公式和 Qwen2.5-VL 自适应分辨率路径均实际执行；没有把小样本结果冒充论文完整 benchmark。本地正式结果是小型 RealWorldQA checkpoint smoke，不覆盖论文完整 11 个 benchmark；当前 runner 实测 APC 主路径，DDAE 以独立公式和单测验证，尚未复制作者约 2,000 行的模型 fork 与定制 kernel。本地对照口径：基线是同一 Qwen2.5-VL checkpoint 的原始视觉分辨率；  multimodal-foundation-model visual-token-compression inference-serving 多模态 视觉证据预算：选 Token、选帧与按需回看 PACE为何不能仅凭图片尺寸，就认定两张图需要相同视觉预算？ 同尺寸图像可能有不同全局语义密度和局部细节。APC从浅层特征分别计算非对角相似度与偏离背景的Top-K细节，再把它们用于预算估计；文件像素数不是这两种信息的替代品。该估计仍是方法信号，不是答案正确性的保证。 教学例子：同样分辨率的空白墙面与密集小字页面，像素数量相同，保留细节的需求却可能不同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-pace-vlm-f64143ef" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-73728e1c45489aa8">PACE 为什么把 condense 和 extract 分成两段？</h2>
+<h2 id="qa-73728e1c45489aa8">PACE为何不能仅凭图片尺寸，就认定两张图需要相同视觉预算？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apace-vlm">PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Sun Yat-sen University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>输入分辨率会影响视觉编码与 prefill 成本，而编码后保留哪些 token 又影响后续读取。APC 在完整编码前用浅层预览分配图像预算，DDAE 在提取阶段融合视觉与语言注意力。两个阶段控制不同开销，不能只做后段筛选就宣称避免了前段编码。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先把简单图像缩小可减少初始 token，之后再保留与问题相关部分；若先全分辨率编码再删 token，前段成本已付出。</p>
+<p><strong>答案：</strong>同尺寸图像可能有不同全局语义密度和局部细节。APC从浅层特征分别计算非对角相似度与偏离背景的Top-K细节，再把它们用于预算估计；文件像素数不是这两种信息的替代品。该估计仍是方法信号，不是答案正确性的保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同样分辨率的空白墙面与密集小字页面，像素数量相同，保留细节的需求却可能不同。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27206">原论文</a> · <a href="../../../../reproductions/2608.27206-pace-vlm/">实现解读</a> · <a href="#qa-73728e1c45489aa8">问题链接</a></p>
 </details>

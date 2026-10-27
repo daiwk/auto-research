@@ -80,16 +80,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32431v1">原论文</a> · <a href="../../../../post-training/2610.32431-mart-grpo/">实现解读</a> · <a href="#qa-9bd0021c9f561f87">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mge-po" data-paper-title="MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning LLM 后训练 论文未列机构（不据邮箱域名推断） 2026-10-16 GRPO会给同题、同正确性的回答相同 advantage，忽略生成的不确定性。MGE-PO 用生成时缓存的 token 熵区分回答，在成功／失败与高熵／低熵四象限上调整信用；再用在线题目熵统计安排课程，并以熵加权参考KL约束优化。原文 §4及附录B 原图建议：Figure 1 方法总览，不能把熵阈值示意图当成本地实验结果。 仅收录，成本过高，不复现（审查 DONE）。仅收录，成本过高，不复现（审查 DONE）。无本地实现、指标或能力比较，不进入 Evolve；该终态不阻塞审查水位。成本过高，不复现（审查 DONE）。原实验硬件为2×H200 141GB，完整单次MGE-PO记录约22.6小时，另有Math-7B-Instruct约22.8小时；该计时表的base setting没有单独checkpoint标识，不能强指为8B配置。8B训练另报告624次更新、8epochs、每题8条最长20,480 token回答；Qwen2.5系列使用17,398题和约12k生成上限。附录C与D.8  RLVR 熵与训练稳定性 过程奖励与信用分配 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 MGE-PO为什么在同正确性的回答间仍区分生成熵？ 终局正确性相同不代表生成过程同样确定，缓存熵为信用分配补充轨迹信息。它还用题目熵安排课程、熵权KL约束更新，不能只看单个奖励修正公式。 例如两条都失败，一条犹豫探索，另一条确信错误，训练可区别对待。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mge-po" data-paper-title="MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning LLM 后训练 论文未列机构（不据邮箱域名推断） 2026-10-16 GRPO会给同题、同正确性的回答相同 advantage，忽略生成的不确定性。MGE-PO 用生成时缓存的 token 熵区分回答，在成功／失败与高熵／低熵四象限上调整信用；再用在线题目熵统计安排课程，并以熵加权参考KL约束优化。原文 §4及附录B 原图建议：Figure 1 方法总览，不能把熵阈值示意图当成本地实验结果。 仅收录，成本过高，不复现（审查 DONE）。仅收录，成本过高，不复现（审查 DONE）。无本地实现、指标或能力比较，不进入 Evolve；该终态不阻塞审查水位。成本过高，不复现（审查 DONE）。原实验硬件为2×H200 141GB，完整单次MGE-PO记录约22.6小时，另有Math-7B-Instruct约22.8小时；该计时表的base setting没有单独checkpoint标识，不能强指为8B配置。8B训练另报告624次更新、8epochs、每题8条最长20,480 token回答；Qwen2.5系列使用17,398题和约12k生成上限。附录C与D.8  RLVR 熵与训练稳定性 过程奖励与信用分配 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 MGE-PO的“成功/失败”和“高熵/低熵”是同一个标签吗？ 不是。成功由可验证结果决定，熵描述生成策略在词元选择上的不确定程度。四种组合都可能存在，不能把低熵直接当作正确，也不能把高熵直接当作失败。先把结果与生成状态分成两轴，才能理解为何要进行四象限信用修正。 教学例子：模型可能很确定地算错，也可能犹豫后算对；两条轨迹的正确性和不确定性应分别记录。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-mge-po-5743f3b7" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-53cb1c4c12782d8b">MGE-PO为什么在同正确性的回答间仍区分生成熵？</h2>
+<h2 id="qa-53cb1c4c12782d8b">MGE-PO的“成功/失败”和“高熵/低熵”是同一个标签吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amge-po">MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 论文未列机构（不据邮箱域名推断）</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>终局正确性相同不代表生成过程同样确定，缓存熵为信用分配补充轨迹信息。它还用题目熵安排课程、熵权KL约束更新，不能只看单个奖励修正公式。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两条都失败，一条犹豫探索，另一条确信错误，训练可区别对待。</p>
+<p><strong>答案：</strong>不是。成功由可验证结果决定，熵描述生成策略在词元选择上的不确定程度。四种组合都可能存在，不能把低熵直接当作正确，也不能把高熵直接当作失败。先把结果与生成状态分成两轴，才能理解为何要进行四象限信用修正。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>模型可能很确定地算错，也可能犹豫后算对；两条轨迹的正确性和不确定性应分别记录。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.23245v1">原论文</a> · <a href="../../../../post-training/2610.23245-mge-po/">实现解读</a> · <a href="#qa-53cb1c4c12782d8b">问题链接</a></p>
 </details>
@@ -1140,16 +1140,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26550">原论文</a> · <a href="../../../../post-training/2608.26550-spear/">实现解读</a> · <a href="#qa-b3521e591526d2b8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:v-rubrics" data-paper-title="V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning LLM 后训练 S-Lab, Nanyang Technological University 2026-08-26 把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。本地对照口径：arithmetic-smoke 100 steps，accuracy 0.1250 → 0.2188（+75.00%）；只验证多维、prefix-localized candidate credit。  多模态 rubric RL LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 V-Rubrics为什么把视觉回答质量拆成VF、RC、IF？ 视觉忠实、推理一致与指令遵循可能分别出错，单个总分会掩盖局部问题。原子rubric让可定位证据对应前缀信用，维度分解仍需可靠标注或评价器。 例如图片对象说对但推理跳步，与完全看错图，是不同错误来源。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:v-rubrics" data-paper-title="V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning LLM 后训练 S-Lab, Nanyang Technological University 2026-08-26 把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。本地对照口径：arithmetic-smoke 100 steps，accuracy 0.1250 → 0.2188（+75.00%）；只验证多维、prefix-localized candidate credit。  多模态 rubric RL LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 V-Rubrics中的VF、RC、IF分别在检查回答的哪一部分？ VF关注陈述是否忠实于视觉证据，RC关注推理是否一致，IF关注是否遵守指令。这是三个检查维度，不是三个不同的候选答案，也不是按推理步骤先后编号。先识别错误属于哪一轴，再讨论奖励和前缀信用才有清楚含义。 教学例子：看图事实正确却没按要求列三点，主要触及IF；把图中不存在的物体写出来，则触及VF。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-v-rubrics-b3920a4a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-a0415fcdbddcdc16">V-Rubrics为什么把视觉回答质量拆成VF、RC、IF？</h2>
+<h2 id="qa-a0415fcdbddcdc16">V-Rubrics中的VF、RC、IF分别在检查回答的哪一部分？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Av-rubrics">V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · S-Lab, Nanyang Technological University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>视觉忠实、推理一致与指令遵循可能分别出错，单个总分会掩盖局部问题。原子rubric让可定位证据对应前缀信用，维度分解仍需可靠标注或评价器。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如图片对象说对但推理跳步，与完全看错图，是不同错误来源。</p>
+<p><strong>答案：</strong>VF关注陈述是否忠实于视觉证据，RC关注推理是否一致，IF关注是否遵守指令。这是三个检查维度，不是三个不同的候选答案，也不是按推理步骤先后编号。先识别错误属于哪一轴，再讨论奖励和前缀信用才有清楚含义。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>看图事实正确却没按要求列三点，主要触及IF；把图中不存在的物体写出来，则触及VF。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25580">原论文</a> · <a href="../../../../post-training/2608.25580-v-rubrics/">实现解读</a> · <a href="#qa-a0415fcdbddcdc16">问题链接</a></p>
 </details>
@@ -1167,15 +1167,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25580">原论文</a> · <a href="../../../../post-training/2608.25580-v-rubrics/">实现解读</a> · <a href="#qa-f0e27b68376395a6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:v-rubrics" data-paper-title="V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning LLM 后训练 S-Lab, Nanyang Technological University 2026-08-26 把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。本地对照口径：arithmetic-smoke 100 steps，accuracy 0.1250 → 0.2188（+75.00%）；只验证多维、prefix-localized candidate credit。  多模态 rubric RL LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 多维rubric与只看最终答案准确率有什么差别？ 前者允许区分证据、推理与格式，后者可能在答案碰巧正确时漏掉幻觉过程。多维不自动表示更公正，权重和rubric覆盖仍影响结果。 例如最终选项对了，但解释里凭空多出一个物体，结果奖可能看不出来。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:v-rubrics" data-paper-title="V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning LLM 后训练 S-Lab, Nanyang Technological University 2026-08-26 把参考回答拆成视觉忠实度（VF）、推理一致性（RC）和指令遵循（IF）原子 rubric，并把可定位证据的信用分配到前缀，避免终局标量奖励掩盖局部幻觉。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。本地对照口径：arithmetic-smoke 100 steps，accuracy 0.1250 → 0.2188（+75.00%）；只验证多维、prefix-localized candidate credit。  多模态 rubric RL LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 V-Rubrics的维度权重与rubric判据覆盖范围，能互相替代吗？ 不能。权重决定已被评价的维度怎样合成奖励，判据覆盖决定哪些错误会被观察。提高VF权重也无法惩罚未被任何VF判据识别的视觉错误。权重选择是目标取舍，可靠证据与评价器则是测量问题，需分别审查。 教学例子：若判据只检查物体种类、没检查数量，把VF权重调高仍可能漏掉“两个写成三个”。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-ccf69661c52bf587">多维rubric与只看最终答案准确率有什么差别？</h2>
+<h2 id="qa-ccf69661c52bf587">V-Rubrics的维度权重与rubric判据覆盖范围，能互相替代吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Av-rubrics">V-Rubrics: Visual Faithfulness via Rubric-Based Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · S-Lab, Nanyang Technological University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者允许区分证据、推理与格式，后者可能在答案碰巧正确时漏掉幻觉过程。多维不自动表示更公正，权重和rubric覆盖仍影响结果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如最终选项对了，但解释里凭空多出一个物体，结果奖可能看不出来。</p>
+<p><strong>答案：</strong>不能。权重决定已被评价的维度怎样合成奖励，判据覆盖决定哪些错误会被观察。提高VF权重也无法惩罚未被任何VF判据识别的视觉错误。权重选择是目标取舍，可靠证据与评价器则是测量问题，需分别审查。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若判据只检查物体种类、没检查数量，把VF权重调高仍可能漏掉“两个写成三个”。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25580">原论文</a> · <a href="../../../../post-training/2608.25580-v-rubrics/">实现解读</a> · <a href="#qa-ccf69661c52bf587">问题链接</a></p>
 </details>

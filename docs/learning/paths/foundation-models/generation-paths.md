@@ -557,16 +557,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.16372">原论文</a> · <a href="../../../../foundation-models/2609.16372-register-tokens-dllm/">实现解读</a> · <a href="#qa-ecf865b886448827">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dblast" data-paper-title="DBLast: Dependent Block Drafting for Stochastic Speculative Decoding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="DBLast: Dependent Block Drafting for Stochastic Speculative Decoding 基础模型 Huawei Technologies Canada 2026-08-05 主题：推测解码。并行 block drafter 常把位置条件独立化，在高熵采样时难以匹配联合分布。DBLast 用跨位置共享的低秩 latent mixture 建模依赖，并以期望验证长度为训练目标。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。用 32-token Markov target 比较 unigram 独立 proposal 与 rank-4 条件 proposal，并按精确 speculative acceptance 估计接受长度。  speculative-decoding inference-efficiency stochastic-decoding 基础模型 生成路径：草稿验证、并行去噪与少步迭代 DBLast 为什么在并行草稿块中引入跨位置共享 latent？ 各位置独立提案难表达高熵序列的联合依赖。共享latent让位置在给定latent后分别预测，但边缘联合分布仍有关联，以提高整个草稿块与目标分布的匹配。 示意：一句话选择了某种语境后，后面几个词的候选应彼此一致，而非各自随机拼接。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dblast" data-paper-title="DBLast: Dependent Block Drafting for Stochastic Speculative Decoding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="DBLast: Dependent Block Drafting for Stochastic Speculative Decoding 基础模型 Huawei Technologies Canada 2026-08-05 主题：推测解码。并行 block drafter 常把位置条件独立化，在高熵采样时难以匹配联合分布。DBLast 用跨位置共享的低秩 latent mixture 建模依赖，并以期望验证长度为训练目标。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。用 32-token Markov target 比较 unigram 独立 proposal 与 rank-4 条件 proposal，并按精确 speculative acceptance 估计接受长度。  speculative-decoding inference-efficiency stochastic-decoding 基础模型 生成路径：草稿验证、并行去噪与少步迭代 并行草稿中，每个位置边际上合理，为什么整段仍可能不协调？ 独立生成各位置会忽略它们之间的联合依赖。DBLast针对并行块的这个问题，用共享latent让位置在条件独立之外仍通过共同变量关联；不能只看单位置概率判断整段质量。 示意：颜色与物体分别看都常见，独立拼接却可能形成不协调组合，共享选择可让它们保持一致。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
 <span id="paper-foundation-models-dblast-5689bd49" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-dafbe6dd11decfb4">DBLast 为什么在并行草稿块中引入跨位置共享 latent？</h2>
+<h2 id="qa-dafbe6dd11decfb4">并行草稿中，每个位置边际上合理，为什么整段仍可能不协调？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adblast">DBLast: Dependent Block Drafting for Stochastic Speculative Decoding</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Huawei Technologies Canada</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>各位置独立提案难表达高熵序列的联合依赖。共享latent让位置在给定latent后分别预测，但边缘联合分布仍有关联，以提高整个草稿块与目标分布的匹配。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>一句话选择了某种语境后，后面几个词的候选应彼此一致，而非各自随机拼接。</p>
+<p><strong>答案：</strong>独立生成各位置会忽略它们之间的联合依赖。DBLast针对并行块的这个问题，用共享latent让位置在条件独立之外仍通过共同变量关联；不能只看单位置概率判断整段质量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>颜色与物体分别看都常见，独立拼接却可能形成不协调组合，共享选择可让它们保持一致。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05448">原论文</a> · <a href="../../../../reproductions/2608.05448-dblast/">实现解读</a> · <a href="#qa-dafbe6dd11decfb4">问题链接</a></p>
 </details>

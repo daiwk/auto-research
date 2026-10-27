@@ -54,15 +54,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21138v1">原论文</a> · <a href="../../../../post-training/2610.21138-clean-rm/">实现解读</a> · <a href="#qa-5aea70a8fd94cd32">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:clean-rm" data-paper-title="CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF LLM 后训练 Zhejiang University 2026-10-15 不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的联合分布作最优传输，而不是只匹配偏好直方图。随后固定估计器，用去偏 surrogate 训练 RM。 完整 RM/RLHF 实验成本过高，不复现（审查 DONE）。L1 小特征、真实 joint OT 与 signed corrected loss 组件。不用预知噪声率代替核心估计器；不把合成机制结果称为真实 RLHF 安全能力。完整 RM/RLHF 实验成本过高，不复现（审查 DONE）。NoiseEstimator 通过三路 softmax 保证两向噪声率非负、总和至多 .95。noise_estimation_loss 只读取 noisy features/观察反馈以及独立 clean calibration 子集，不接收已知真实噪声率。编码特征在组件中视为固定，未下载原文 LLM backbone。  二元反馈对齐 后训练算法组件 CleanRM LLM 后训练 偏好与对齐：先看反馈长什么样 CleanRM的联合最优传输比只匹配偏好标签直方图多约束了什么？ 直方图只约束正负比例，可能把不同语义样本错误配对。联合代价同时看语义特征距离和恢复偏好，使噪声估计与干净样本的条件结构一致；仍依赖校准子集具有代表性。 例如两类题正例都占一半，并不意味着能把数学样本与写作样本任意互换。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:clean-rm" data-paper-title="CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF LLM 后训练 Zhejiang University 2026-10-15 不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的联合分布作最优传输，而不是只匹配偏好直方图。随后固定估计器，用去偏 surrogate 训练 RM。 完整 RM/RLHF 实验成本过高，不复现（审查 DONE）。L1 小特征、真实 joint OT 与 signed corrected loss 组件。不用预知噪声率代替核心估计器；不把合成机制结果称为真实 RLHF 安全能力。完整 RM/RLHF 实验成本过高，不复现（审查 DONE）。NoiseEstimator 通过三路 softmax 保证两向噪声率非负、总和至多 .95。noise_estimation_loss 只读取 noisy features/观察反馈以及独立 clean calibration 子集，不接收已知真实噪声率。编码特征在组件中视为固定，未下载原文 LLM backbone。  二元反馈对齐 后训练算法组件 CleanRM LLM 后训练 偏好与对齐：先看反馈长什么样 CleanRM把噪声估计器冻结后训练RM，与两者一起追着当前损失更新有何区别？ 冻结后，奖励模型优化的是由一套既定噪声率定义的校正风险；若估计器同时随RM损失变化，校正系数也会移动，RM可能通过改变噪声解释降低损失。联合训练属于另一个优化问题，不能直接继承固定噪声估计下的风险校正解释。 教学例子：先估某类标签翻转率再训练RM；不能因为RM暂时分错，就把这条样本重新解释成更高噪声。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-b0ba45f5b5fa7573">CleanRM的联合最优传输比只匹配偏好标签直方图多约束了什么？</h2>
+<h2 id="qa-b0ba45f5b5fa7573">CleanRM把噪声估计器冻结后训练RM，与两者一起追着当前损失更新有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aclean-rm">CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Zhejiang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>直方图只约束正负比例，可能把不同语义样本错误配对。联合代价同时看语义特征距离和恢复偏好，使噪声估计与干净样本的条件结构一致；仍依赖校准子集具有代表性。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两类题正例都占一半，并不意味着能把数学样本与写作样本任意互换。</p>
+<p><strong>答案：</strong>冻结后，奖励模型优化的是由一套既定噪声率定义的校正风险；若估计器同时随RM损失变化，校正系数也会移动，RM可能通过改变噪声解释降低损失。联合训练属于另一个优化问题，不能直接继承固定噪声估计下的风险校正解释。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先估某类标签翻转率再训练RM；不能因为RM暂时分错，就把这条样本重新解释成更高噪声。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21138v1">原论文</a> · <a href="../../../../post-training/2610.21138-clean-rm/">实现解读</a> · <a href="#qa-b0ba45f5b5fa7573">问题链接</a></p>
 </details>
@@ -80,16 +80,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21138v1">原论文</a> · <a href="../../../../post-training/2610.21138-clean-rm/">实现解读</a> · <a href="#qa-4642fc40ad22ddae">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:gaw-po" data-paper-title="GAW-PO: Preference Optimization with Gradient-Aligned Token Weights" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GAW-PO: Preference Optimization with Gradient-Aligned Token Weights LLM 后训练 National University of Science and Technology POLITEHNICA Bucharest 2026-10-01 用拒绝 token 梯度与 preferred update direction 的对齐度调节负权重；越支持优选行为的 token 越少受罚。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行梯度对齐权重；未进行 LoRA/DPO 训练。执行梯度对齐权重；未进行 LoRA/DPO 训练。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  偏好优化 token credit DPO LLM 后训练 偏好与对齐：先看反馈长什么样 GAW-PO为何认为被拒回答中的某些词元不该受到同等惩罚？ 被拒回答可能只在局部出错，其余词元仍支持优选行为。方法观察各拒绝词元梯度与优选更新方向的对齐程度，减少误伤有用部分，而不是把整段文字视为同质负例。 例如答案算错了最后一步，前面的正确单位说明仍可能值得保留。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:gaw-po" data-paper-title="GAW-PO: Preference Optimization with Gradient-Aligned Token Weights" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GAW-PO: Preference Optimization with Gradient-Aligned Token Weights LLM 后训练 National University of Science and Technology POLITEHNICA Bucharest 2026-10-01 用拒绝 token 梯度与 preferred update direction 的对齐度调节负权重；越支持优选行为的 token 越少受罚。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行梯度对齐权重；未进行 LoRA/DPO 训练。执行梯度对齐权重；未进行 LoRA/DPO 训练。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  偏好优化 token credit DPO LLM 后训练 偏好与对齐：先看反馈长什么样 GAW-PO里的preferred与rejected是整条回答标签，还是每个词元的好坏标注？ 它们是同一提示下两条回答的相对偏好标签，并没有逐词标注。被拒回答仍可能含有正确步骤或共享措辞。因此输入的监督粒度与实际调整的词元粒度不同；梯度对齐是补充的信用分配信号，不能被解释成新增的人类逐词真值。 教学例子：两份解答都先写出正确公式，只在最后计算不同；整条拒绝标签并未把公共公式标成错误。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-gaw-po-bf9dde22" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7bb97a727465c23f">GAW-PO为何认为被拒回答中的某些词元不该受到同等惩罚？</h2>
+<h2 id="qa-7bb97a727465c23f">GAW-PO里的preferred与rejected是整条回答标签，还是每个词元的好坏标注？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agaw-po">GAW-PO: Preference Optimization with Gradient-Aligned Token Weights</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · National University of Science and Technology POLITEHNICA Bucharest</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>被拒回答可能只在局部出错，其余词元仍支持优选行为。方法观察各拒绝词元梯度与优选更新方向的对齐程度，减少误伤有用部分，而不是把整段文字视为同质负例。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如答案算错了最后一步，前面的正确单位说明仍可能值得保留。</p>
+<p><strong>答案：</strong>它们是同一提示下两条回答的相对偏好标签，并没有逐词标注。被拒回答仍可能含有正确步骤或共享措辞。因此输入的监督粒度与实际调整的词元粒度不同；梯度对齐是补充的信用分配信号，不能被解释成新增的人类逐词真值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两份解答都先写出正确公式，只在最后计算不同；整条拒绝标签并未把公共公式标成错误。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01511">原论文</a> · <a href="../../../../post-training/2610.01511-gaw-po/">实现解读</a> · <a href="#qa-7bb97a727465c23f">问题链接</a></p>
 </details>
@@ -133,16 +133,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01511">原论文</a> · <a href="../../../../post-training/2610.01511-gaw-po/">实现解读</a> · <a href="#qa-92390bc26a92b79e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:compo" data-paper-title="A Zeroth-Order Paradigm for LLM Preference Alignment" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="A Zeroth-Order Paradigm for LLM Preference Alignment LLM 后训练 University of California, Berkeley 2026-09-16 不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行一比特比较 oracle 与阈值化更新；mini-suite 不是大模型对齐结果。本地执行一比特比较 oracle 与阈值化更新；mini-suite 不是大模型对齐结果。  偏好优化 零阶优化 LLM 后训练 偏好与对齐：先看反馈长什么样 COMPO只比较参数扰动，为什么仍能给出一个更新方向？ 在同一随机方向上比较正负扰动的偏好目标，可判断沿该方向哪侧更好，并形成一比特方向信号。它放弃精确幅度信息，换取不求完整目标梯度的更新接口。 例如同样幅度向两侧试走，只记录左侧更好，随后依据这个方向信号更新。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:compo" data-paper-title="A Zeroth-Order Paradigm for LLM Preference Alignment" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="A Zeroth-Order Paradigm for LLM Preference Alignment LLM 后训练 University of California, Berkeley 2026-09-16 不求偏好目标梯度，只比较正负参数扰动的结果得到一比特方向，再以逐坐标阈值抑制噪声。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行一比特比较 oracle 与阈值化更新；mini-suite 不是大模型对齐结果。本地执行一比特比较 oracle 与阈值化更新；mini-suite 不是大模型对齐结果。  偏好优化 零阶优化 LLM 后训练 偏好与对齐：先看反馈长什么样 COMPO所说的黑盒优化，是只改提示词而不改模型参数吗？ 不是。黑盒指优化器不需要取得偏好目标的反向梯度，更新对象仍是模型参数。它能在参数附近提出扰动、调用目标比较接口，再产生下一参数点。只有一个只能接收提示词、不能部署参数扰动的远程接口，并不自动满足这个访问条件。 教学例子：能装载两份轻微改动的权重并比较结果，才有参数扰动接口；只修改聊天提示是另一种搜索。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-compo-257a1fd8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-65f82773739e80be">COMPO只比较参数扰动，为什么仍能给出一个更新方向？</h2>
+<h2 id="qa-65f82773739e80be">COMPO所说的黑盒优化，是只改提示词而不改模型参数吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acompo">A Zeroth-Order Paradigm for LLM Preference Alignment</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, Berkeley</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>在同一随机方向上比较正负扰动的偏好目标，可判断沿该方向哪侧更好，并形成一比特方向信号。它放弃精确幅度信息，换取不求完整目标梯度的更新接口。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同样幅度向两侧试走，只记录左侧更好，随后依据这个方向信号更新。</p>
+<p><strong>答案：</strong>不是。黑盒指优化器不需要取得偏好目标的反向梯度，更新对象仍是模型参数。它能在参数附近提出扰动、调用目标比较接口，再产生下一参数点。只有一个只能接收提示词、不能部署参数扰动的远程接口，并不自动满足这个访问条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>能装载两份轻微改动的权重并比较结果，才有参数扰动接口；只修改聊天提示是另一种搜索。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.19144">原论文</a> · <a href="../../../../post-training/2609.19144-compo/">实现解读</a> · <a href="#qa-65f82773739e80be">问题链接</a></p>
 </details>
@@ -186,16 +186,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.19144">原论文</a> · <a href="../../../../post-training/2609.19144-compo/">实现解读</a> · <a href="#qa-318c54c96ba1d744">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:sd-dpo" data-paper-title="Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data LLM 后训练 Waseda University 2026-09-15 识别事实正确但风格不同的 rejected response，反转其偏好方向并按组比例加权以抵消风格梯度。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行偏好反转和组平衡损失；事实分数由 fixture 提供，不冒充 judge LLM。本地执行偏好反转和组平衡损失；事实分数由 fixture 提供，不冒充 judge LLM。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  偏好优化 知识更新 LLM 后训练 偏好与对齐：先看反馈长什么样 Style-Debiased DPO为什么要检查被拒回答的事实正确性？ 偏好标签可能混合知识对错与风格喜好。若被拒回答事实正确，仅因表达不同被拒，直接负向学习会损伤知识；识别这类样本才能有针对性抵消风格梯度。 例如简短正确回答被花哨措辞压过，不能据偏好标签就教模型远离正确事实。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:sd-dpo" data-paper-title="Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data LLM 后训练 Waseda University 2026-09-15 识别事实正确但风格不同的 rejected response，反转其偏好方向并按组比例加权以抵消风格梯度。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行偏好反转和组平衡损失；事实分数由 fixture 提供，不冒充 judge LLM。本地执行偏好反转和组平衡损失；事实分数由 fixture 提供，不冒充 judge LLM。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  偏好优化 知识更新 LLM 后训练 偏好与对齐：先看反馈长什么样 Style-Debiased DPO想更新的是知识，还是让模型统一采用某种文风？ 它的任务是利用合成偏好更新知识，风格差异是需要排除的混杂因素。喜欢简洁或华丽表达，不能直接充当事实对错标签。先把知识正确性与表达形式分清，才能理解后续为何需要事实判断和组平衡，而不是把它当成风格个性化训练。 教学例子：同一新知识可以用短句或长段表达；目标是两种表达都保留正确知识，而非强制只输出短句。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-sd-dpo-8723680d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4cc0854feb5b0998">Style-Debiased DPO为什么要检查被拒回答的事实正确性？</h2>
+<h2 id="qa-4cc0854feb5b0998">Style-Debiased DPO想更新的是知识，还是让模型统一采用某种文风？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Asd-dpo">Style-Debiased DPO: Updating LLM Knowledge with Factuality-Aware Synthetic Preference Data</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Waseda University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>偏好标签可能混合知识对错与风格喜好。若被拒回答事实正确，仅因表达不同被拒，直接负向学习会损伤知识；识别这类样本才能有针对性抵消风格梯度。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如简短正确回答被花哨措辞压过，不能据偏好标签就教模型远离正确事实。</p>
+<p><strong>答案：</strong>它的任务是利用合成偏好更新知识，风格差异是需要排除的混杂因素。喜欢简洁或华丽表达，不能直接充当事实对错标签。先把知识正确性与表达形式分清，才能理解后续为何需要事实判断和组平衡，而不是把它当成风格个性化训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一新知识可以用短句或长段表达；目标是两种表达都保留正确知识，而非强制只输出短句。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与实现对应；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.16532">原论文</a> · <a href="../../../../post-training/2609.16532-sd-dpo/">实现解读</a> · <a href="#qa-4cc0854feb5b0998">问题链接</a></p>
 </details>
@@ -239,16 +239,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.16532">原论文</a> · <a href="../../../../post-training/2609.16532-sd-dpo/">实现解读</a> · <a href="#qa-b16448413bb6fd49">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:normalized-dpo" data-paper-title="Disentangling Optimization Scale from Preference Scale in DPO" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Disentangling Optimization Scale from Preference Scale in DPO LLM 后训练 Affiliation not listed in the paper 2026-08-27 标准 DPO 的同时改变偏好噪声尺度与梯度幅度，导致有效学习率被隐式重缩放。论文用除以的 centered-softplus 保持相同 argmin，同时让梯度尺度在时不消失。 复现级别：核心公式 mini-suite。复现级别：核心公式 mini-suite。实现 centered-softplus 归一化目标及连续的极限。本地为候选策略机制验证，不是语言模型偏好数据全量训练。arithmetic-smoke、100 steps：accuracy 0.1953 → 0.4766，并记录 preference margin、normalized loss 与梯度力。指标见 metrics/arithmetic-smoke-seed42.json。  DPO 偏好/优化尺度解耦 LLM 后训练 偏好与对齐：先看反馈长什么样 Normalized DPO为什么要把偏好尺度与梯度幅度分开？ 标准目标改变β时既改变偏好间隔的尺度，也改变梯度幅度，调参容易同时改变有效学习率。归一化目标保留相同最优点，却让尺度选择与更新幅度更容易分开理解。 例如只想调标签噪声假设，却发现学习突然几乎停止，可能混入了梯度缩放效应。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:normalized-dpo" data-paper-title="Disentangling Optimization Scale from Preference Scale in DPO" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Disentangling Optimization Scale from Preference Scale in DPO LLM 后训练 Affiliation not listed in the paper 2026-08-27 标准 DPO 的同时改变偏好噪声尺度与梯度幅度，导致有效学习率被隐式重缩放。论文用除以的 centered-softplus 保持相同 argmin，同时让梯度尺度在时不消失。 复现级别：核心公式 mini-suite。复现级别：核心公式 mini-suite。实现 centered-softplus 归一化目标及连续的极限。本地为候选策略机制验证，不是语言模型偏好数据全量训练。arithmetic-smoke、100 steps：accuracy 0.1953 → 0.4766，并记录 preference margin、normalized loss 与梯度力。指标见 metrics/arithmetic-smoke-seed42.json。  DPO 偏好/优化尺度解耦 LLM 后训练 偏好与对齐：先看反馈长什么样 Normalized DPO里的margin是人的评分差，还是模型对一对回答的相对偏好量？ 这里的margin是进入偏好损失的模型侧相对量，而不是直接读取两个人工分数相减。数据告诉模型哪条回答更受偏好，当前策略和参考策略的概率决定模型侧间隔；β再控制它进入偏好曲线的尺度。先区分标签与模型分数，才不会把归一化误读成改写标注。 教学例子：标注只给出回答甲胜过乙，没有说胜出三分；训练仍可从两条回答的概率算出当前间隔。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-normalized-dpo-59718764" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d8f5f2448d0d1fc9">Normalized DPO为什么要把偏好尺度与梯度幅度分开？</h2>
+<h2 id="qa-d8f5f2448d0d1fc9">Normalized DPO里的margin是人的评分差，还是模型对一对回答的相对偏好量？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Anormalized-dpo">Disentangling Optimization Scale from Preference Scale in DPO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Affiliation not listed in the paper</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>标准目标改变β时既改变偏好间隔的尺度，也改变梯度幅度，调参容易同时改变有效学习率。归一化目标保留相同最优点，却让尺度选择与更新幅度更容易分开理解。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如只想调标签噪声假设，却发现学习突然几乎停止，可能混入了梯度缩放效应。</p>
+<p><strong>答案：</strong>这里的margin是进入偏好损失的模型侧相对量，而不是直接读取两个人工分数相减。数据告诉模型哪条回答更受偏好，当前策略和参考策略的概率决定模型侧间隔；β再控制它进入偏好曲线的尺度。先区分标签与模型分数，才不会把归一化误读成改写标注。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>标注只给出回答甲胜过乙，没有说胜出三分；训练仍可从两条回答的概率算出当前间隔。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27032">原论文</a> · <a href="../../../../post-training/2608.27032-normalized-dpo/">实现解读</a> · <a href="#qa-d8f5f2448d0d1fc9">问题链接</a></p>
 </details>
@@ -292,16 +292,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27032">原论文</a> · <a href="../../../../post-training/2608.27032-normalized-dpo/">实现解读</a> · <a href="#qa-c8ea679e776c4425">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:grip" data-paper-title="GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning LLM 后训练 Peking University 2026-08-26 在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。本地对照口径：arithmetic-smoke 100 steps，accuracy 0.1250 → 0.2344（+87.50%）；本地在策略概率而非大模型权重上验证 reward-guided interpolation。  奖励引导参数插值 LLM 后训练 偏好与对齐：先看反馈长什么样 GRIP为什么在thinking与instruct权重之间学习细粒度插值？ 两种模型可能分别偏向长推理与直接指令，单个全局系数对所有层施加相同取舍。细粒度奖励引导不同位置的混合，希望在输出长度与任务准确性之间找到更合适组合。 例如某层保留推理模型较多，另一层偏向指令模型，不能要求所有参数都同样折中。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:grip" data-paper-title="GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning LLM 后训练 Peking University 2026-08-26 在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。本地对照口径：arithmetic-smoke 100 steps，accuracy 0.1250 → 0.2344（+87.50%）；本地在策略概率而非大模型权重上验证 reward-guided interpolation。  奖励引导参数插值 LLM 后训练 偏好与对齐：先看反馈长什么样 GRIP得到的是一个合并模型，还是每个请求都先运行thinking和instruct两套模型？ 原文操作对象是两套对齐权重之间的参数插值，产物是一套组合参数，再用它执行模型。它不是根据每次回答质量在线选择两位专家，也不需要先生成两份答案再投票。能否合理插值还取决于权重结构是否对应，不能把任意架构直接相加。 教学例子：先把同形状层的两份权重按系数组合，再做一次前向；并非先各生成一篇答案再挑短的一篇。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-grip-70305ebb" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-3564cca28d3e1319">GRIP为什么在thinking与instruct权重之间学习细粒度插值？</h2>
+<h2 id="qa-3564cca28d3e1319">GRIP得到的是一个合并模型，还是每个请求都先运行thinking和instruct两套模型？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agrip">GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Peking University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>两种模型可能分别偏向长推理与直接指令，单个全局系数对所有层施加相同取舍。细粒度奖励引导不同位置的混合，希望在输出长度与任务准确性之间找到更合适组合。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如某层保留推理模型较多，另一层偏向指令模型，不能要求所有参数都同样折中。</p>
+<p><strong>答案：</strong>原文操作对象是两套对齐权重之间的参数插值，产物是一套组合参数，再用它执行模型。它不是根据每次回答质量在线选择两位专家，也不需要先生成两份答案再投票。能否合理插值还取决于权重结构是否对应，不能把任意架构直接相加。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先把同形状层的两份权重按系数组合，再做一次前向；并非先各生成一篇答案再挑短的一篇。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25583">原论文</a> · <a href="../../../../post-training/2608.25583-grip/">实现解读</a> · <a href="#qa-3564cca28d3e1319">问题链接</a></p>
 </details>
@@ -319,15 +319,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25583">原论文</a> · <a href="../../../../post-training/2608.25583-grip/">实现解读</a> · <a href="#qa-043e5c5450e52cbc">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:grip" data-paper-title="GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning LLM 后训练 Peking University 2026-08-26 在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。本地对照口径：arithmetic-smoke 100 steps，accuracy 0.1250 → 0.2344（+87.50%）；本地在策略概率而非大模型权重上验证 reward-guided interpolation。  奖励引导参数插值 LLM 后训练 偏好与对齐：先看反馈长什么样 GRIP的参数插值与把两个模型回答投票有何不同？ 插值在模型参数层形成一个待执行策略，投票则先运行多个模型再合并结果。两者成本和交互方式不同；参数混合也可能破坏原有协同结构，不能用投票收益替它证明有效。 例如一次前向使用混合权重，与先生成两篇答案再选一篇，是两条不同执行路径。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:grip" data-paper-title="GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning LLM 后训练 Peking University 2026-08-26 在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。本地对照口径：arithmetic-smoke 100 steps，accuracy 0.1250 → 0.2344（+87.50%）；本地在策略概率而非大模型权重上验证 reward-guided interpolation。  奖励引导参数插值 LLM 后训练 偏好与对齐：先看反馈长什么样 GRIP改变参数与推理时降低采样温度，都能影响输出长度，作用位置相同吗？ 不同。参数插值改变各上下文下的模型分布；温度则对某次前向已有的logits重新缩放。较低温度可能改变采样多样性，却不等于学到thinking与instruct能力的参数组合。即使两者都让某例变短，也不能用长度相同证明机制等价。 教学例子：合并模型可能改变首选推理步骤；同一模型降温通常仍围绕原来更高的logit进行选择。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-b9c01e1412413fd6">GRIP的参数插值与把两个模型回答投票有何不同？</h2>
+<h2 id="qa-b9c01e1412413fd6">GRIP改变参数与推理时降低采样温度，都能影响输出长度，作用位置相同吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agrip">GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Peking University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>插值在模型参数层形成一个待执行策略，投票则先运行多个模型再合并结果。两者成本和交互方式不同；参数混合也可能破坏原有协同结构，不能用投票收益替它证明有效。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一次前向使用混合权重，与先生成两篇答案再选一篇，是两条不同执行路径。</p>
+<p><strong>答案：</strong>不同。参数插值改变各上下文下的模型分布；温度则对某次前向已有的logits重新缩放。较低温度可能改变采样多样性，却不等于学到thinking与instruct能力的参数组合。即使两者都让某例变短，也不能用长度相同证明机制等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>合并模型可能改变首选推理步骤；同一模型降温通常仍围绕原来更高的logit进行选择。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25583">原论文</a> · <a href="../../../../post-training/2608.25583-grip/">实现解读</a> · <a href="#qa-b9c01e1412413fd6">问题链接</a></p>
 </details>
@@ -345,16 +345,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25583">原论文</a> · <a href="../../../../post-training/2608.25583-grip/">实现解读</a> · <a href="#qa-1dad8a09f9c6a8fb">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:c2-dpo" data-paper-title="Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization LLM 后训练 Korea University 2026-08-12 普通 DPO 即使输入相关图像上下文，也可能主要依赖语言先验。论文先定义 CPG，度量加入上下文后 chosen/rejected preference margin 增加多少；C²-DPO 直接扩大该增益，同时保留原偏好顺序。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实际计算 full/degraded context 的 Contextual Preference Gain 并参与偏好更新；不把候选策略模型写成完整 MLLM 微调。尚未下载 Qwen2-VL、SENTINEL 与 Object HalBench 做完整微调；MR7 同时提供 checkpoint matrix / lmms-eval 基础设施，后续可把该目标接入真实 MLLM 训练。120 steps arithmetic mini-suite：accuracy 0.1953→0.6719；  多模态上下文偏好校准 LLM 后训练 偏好与对齐：先看反馈长什么样 C²-DPO为何同时计算完整与退化上下文下的偏好间隔？ 模型可能答对却几乎没利用图像证据。比较上下文加入前后的偏好增益，才能观察正确选择是否更依赖相关信息；只看完整输入中的chosen胜出不能区分证据与语言先验。 例如画面支持蓝杯，但模型无图时也总猜蓝色，仅完整图输入答对不足以证明看图。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:c2-dpo" data-paper-title="Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization LLM 后训练 Korea University 2026-08-12 普通 DPO 即使输入相关图像上下文，也可能主要依赖语言先验。论文先定义 CPG，度量加入上下文后 chosen/rejected preference margin 增加多少；C²-DPO 直接扩大该增益，同时保留原偏好顺序。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实际计算 full/degraded context 的 Contextual Preference Gain 并参与偏好更新；不把候选策略模型写成完整 MLLM 微调。尚未下载 Qwen2-VL、SENTINEL 与 Object HalBench 做完整微调；MR7 同时提供 checkpoint matrix / lmms-eval 基础设施，后续可把该目标接入真实 MLLM 训练。120 steps arithmetic mini-suite：accuracy 0.1953→0.6719；  多模态上下文偏好校准 LLM 后训练 偏好与对齐：先看反馈长什么样 C²-DPO的一条训练样本为何同时需要回答对和两种上下文？ 回答对给出同一问题下chosen与rejected的相对偏好；完整与退化上下文则提供两种证据条件。这是两个不同维度，不能把退化上下文误当另一条被拒回答。先固定回答内容、只改变证据，后续比较才是在观察上下文带来的偏好变化。 教学例子：仍比较“红车”和“蓝车”两条回答，分别让模型看原图与退化图，而不是换成另一道问题。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-c2-dpo-2993ea41" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-24a30e0257152972">C²-DPO为何同时计算完整与退化上下文下的偏好间隔？</h2>
+<h2 id="qa-24a30e0257152972">C²-DPO的一条训练样本为何同时需要回答对和两种上下文？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ac2-dpo">Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Korea University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>模型可能答对却几乎没利用图像证据。比较上下文加入前后的偏好增益，才能观察正确选择是否更依赖相关信息；只看完整输入中的chosen胜出不能区分证据与语言先验。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如画面支持蓝杯，但模型无图时也总猜蓝色，仅完整图输入答对不足以证明看图。</p>
+<p><strong>答案：</strong>回答对给出同一问题下chosen与rejected的相对偏好；完整与退化上下文则提供两种证据条件。这是两个不同维度，不能把退化上下文误当另一条被拒回答。先固定回答内容、只改变证据，后续比较才是在观察上下文带来的偏好变化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>仍比较“红车”和“蓝车”两条回答，分别让模型看原图与退化图，而不是换成另一道问题。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12158">原论文</a> · <a href="../../../../post-training/2608.12158-c2-dpo/">实现解读</a> · <a href="#qa-24a30e0257152972">问题链接</a></p>
 </details>
@@ -372,15 +372,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12158">原论文</a> · <a href="../../../../post-training/2608.12158-c2-dpo/">实现解读</a> · <a href="#qa-35469067fe68386f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:c2-dpo" data-paper-title="Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization LLM 后训练 Korea University 2026-08-12 普通 DPO 即使输入相关图像上下文，也可能主要依赖语言先验。论文先定义 CPG，度量加入上下文后 chosen/rejected preference margin 增加多少；C²-DPO 直接扩大该增益，同时保留原偏好顺序。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实际计算 full/degraded context 的 Contextual Preference Gain 并参与偏好更新；不把候选策略模型写成完整 MLLM 微调。尚未下载 Qwen2-VL、SENTINEL 与 Object HalBench 做完整微调；MR7 同时提供 checkpoint matrix / lmms-eval 基础设施，后续可把该目标接入真实 MLLM 训练。120 steps arithmetic mini-suite：accuracy 0.1953→0.6719；  多模态上下文偏好校准 LLM 后训练 偏好与对齐：先看反馈长什么样 C²-DPO比普通DPO多约束什么，能直接保证消除幻觉吗？ 普通DPO扩大优选与拒绝回答差距，额外目标鼓励完整上下文相对退化上下文增加这份差距。它鼓励使用证据，却仍依赖退化方式和偏好标签，不能保证所有视觉幻觉消失。 例如遮掉关键区域后模型偏好应减弱，但若遮挡同时改变其他信息，增益解释也会受影响。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:c2-dpo" data-paper-title="Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization LLM 后训练 Korea University 2026-08-12 普通 DPO 即使输入相关图像上下文，也可能主要依赖语言先验。论文先定义 CPG，度量加入上下文后 chosen/rejected preference margin 增加多少；C²-DPO 直接扩大该增益，同时保留原偏好顺序。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实际计算 full/degraded context 的 Contextual Preference Gain 并参与偏好更新；不把候选策略模型写成完整 MLLM 微调。尚未下载 Qwen2-VL、SENTINEL 与 Object HalBench 做完整微调；MR7 同时提供 checkpoint matrix / lmms-eval 基础设施，后续可把该目标接入真实 MLLM 训练。120 steps arithmetic mini-suite：accuracy 0.1953→0.6719；  多模态上下文偏好校准 LLM 后训练 偏好与对齐：先看反馈长什么样 CPG为正与chosen在完整上下文中胜出，是同一条件吗？ 不是。CPG比较两个上下文中的margin差，而chosen胜出要求完整上下文的margin本身为正。差值变好时，完整条件仍可能偏好错误回答。因此增加上下文增益与保持原偏好顺序是不同约束，不能只凭正CPG就宣布回答已正确。 教学例子：教学用margin从−3变成−1，增益为正但chosen仍未胜出；这些数字只说明两个判断条件不同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-bb62ba4316cf25a3">C²-DPO比普通DPO多约束什么，能直接保证消除幻觉吗？</h2>
+<h2 id="qa-bb62ba4316cf25a3">CPG为正与chosen在完整上下文中胜出，是同一条件吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ac2-dpo">Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Korea University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>普通DPO扩大优选与拒绝回答差距，额外目标鼓励完整上下文相对退化上下文增加这份差距。它鼓励使用证据，却仍依赖退化方式和偏好标签，不能保证所有视觉幻觉消失。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如遮掉关键区域后模型偏好应减弱，但若遮挡同时改变其他信息，增益解释也会受影响。</p>
+<p><strong>答案：</strong>不是。CPG比较两个上下文中的margin差，而chosen胜出要求完整上下文的margin本身为正。差值变好时，完整条件仍可能偏好错误回答。因此增加上下文增益与保持原偏好顺序是不同约束，不能只凭正CPG就宣布回答已正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学用margin从−3变成−1，增益为正但chosen仍未胜出；这些数字只说明两个判断条件不同。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12158">原论文</a> · <a href="../../../../post-training/2608.12158-c2-dpo/">实现解读</a> · <a href="#qa-bb62ba4316cf25a3">问题链接</a></p>
 </details>
@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12158">原论文</a> · <a href="../../../../post-training/2608.12158-c2-dpo/">实现解读</a> · <a href="#qa-86d4bee16225c912">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:pto" data-paper-title="Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations LLM 后训练 Reichman University 2026-08-12 逐轮偏好只判断当前回答，难以优化目标导向对话的长期结果。PTO 让 agent 和虚拟用户展开候选对话树，oracle 评价当前回答及未来延续，以偏好对迭代执行 DPO；更深 look-ahead 带来更稳定的长期策略。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实际构造 preference tree、oracle 排序与 look-ahead advantage；不冒充论文的心理咨询模型实验。未运行 Llama-2-7B、虚拟心理咨询患者或 LLM oracle；本地 deterministic reward 仅替代昂贵 evaluator，偏好树与前瞻信用路径实际执行。120 steps 的 arithmetic mini-suite 中，初始 accuracy 0.1953，PTO 路径为 0.4453；  前瞻偏好树 LLM 后训练 偏好与对齐：先看反馈长什么样 PTO为什么让虚拟用户继续对话后再判断当前回答？ 目标导向对话中，眼前讨喜的回答未必促进最终任务。把候选回复接入未来交互，能给当前动作加入长期后果，再构造偏好对训练，而不是只优化当轮文本评分。 例如立即给建议可能看似高效，但先澄清需求的回答可能让后续任务更顺利。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:pto" data-paper-title="Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations LLM 后训练 Reichman University 2026-08-12 逐轮偏好只判断当前回答，难以优化目标导向对话的长期结果。PTO 让 agent 和虚拟用户展开候选对话树，oracle 评价当前回答及未来延续，以偏好对迭代执行 DPO；更深 look-ahead 带来更稳定的长期策略。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实际构造 preference tree、oracle 排序与 look-ahead advantage；不冒充论文的心理咨询模型实验。未运行 Llama-2-7B、虚拟心理咨询患者或 LLM oracle；本地 deterministic reward 仅替代昂贵 evaluator，偏好树与前瞻信用路径实际执行。120 steps 的 arithmetic mini-suite 中，初始 accuracy 0.1953，PTO 路径为 0.4453；  前瞻偏好树 LLM 后训练 偏好与对齐：先看反馈长什么样 PTO里的对话策略、虚拟用户和oracle分别负责什么，最终更新谁？ 策略产生当前候选回复，虚拟用户负责续接可能的后续交互，oracle评价展开分支的结果。由这些比较构造当前状态的偏好对，再更新对话策略。模拟用户和评价器提供训练信号，并不因此等同真实用户，也不意味着三者都由同一损失更新。 教学例子：咨询策略提出两个问题，虚拟用户各自回答，评价器比较进展；被学习的是咨询策略的当前回复选择。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-pto-55a5beae" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ab711475e2acf5fb">PTO为什么让虚拟用户继续对话后再判断当前回答？</h2>
+<h2 id="qa-ab711475e2acf5fb">PTO里的对话策略、虚拟用户和oracle分别负责什么，最终更新谁？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Apto">Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Reichman University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>目标导向对话中，眼前讨喜的回答未必促进最终任务。把候选回复接入未来交互，能给当前动作加入长期后果，再构造偏好对训练，而不是只优化当轮文本评分。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如立即给建议可能看似高效，但先澄清需求的回答可能让后续任务更顺利。</p>
+<p><strong>答案：</strong>策略产生当前候选回复，虚拟用户负责续接可能的后续交互，oracle评价展开分支的结果。由这些比较构造当前状态的偏好对，再更新对话策略。模拟用户和评价器提供训练信号，并不因此等同真实用户，也不意味着三者都由同一损失更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>咨询策略提出两个问题，虚拟用户各自回答，评价器比较进展；被学习的是咨询策略的当前回复选择。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12062">原论文</a> · <a href="../../../../post-training/2608.12062-pto/">实现解读</a> · <a href="#qa-ab711475e2acf5fb">问题链接</a></p>
 </details>
@@ -425,15 +425,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12062">原论文</a> · <a href="../../../../post-training/2608.12062-pto/">实现解读</a> · <a href="#qa-ba4418ae346a8ba2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:pto" data-paper-title="Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations LLM 后训练 Reichman University 2026-08-12 逐轮偏好只判断当前回答，难以优化目标导向对话的长期结果。PTO 让 agent 和虚拟用户展开候选对话树，oracle 评价当前回答及未来延续，以偏好对迭代执行 DPO；更深 look-ahead 带来更稳定的长期策略。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实际构造 preference tree、oracle 排序与 look-ahead advantage；不冒充论文的心理咨询模型实验。未运行 Llama-2-7B、虚拟心理咨询患者或 LLM oracle；本地 deterministic reward 仅替代昂贵 evaluator，偏好树与前瞻信用路径实际执行。120 steps 的 arithmetic mini-suite 中，初始 accuracy 0.1953，PTO 路径为 0.4453；  前瞻偏好树 LLM 后训练 偏好与对齐：先看反馈长什么样 PTO前瞻偏好与普通单轮DPO的区别在损失还是偏好来源？ 更新仍可使用DPO，主要变化是偏好由候选对话树的未来结果决定，而不是只看当前回答。前瞻质量受虚拟用户和评价器影响，树更深也更昂贵，不应把模拟收益当作真实用户收益。 例如相同DPO代码可学习两套不同偏好，一套重视当前措辞，一套重视后续目标达成。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:pto" data-paper-title="Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations LLM 后训练 Reichman University 2026-08-12 逐轮偏好只判断当前回答，难以优化目标导向对话的长期结果。PTO 让 agent 和虚拟用户展开候选对话树，oracle 评价当前回答及未来延续，以偏好对迭代执行 DPO；更深 look-ahead 带来更稳定的长期策略。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实际构造 preference tree、oracle 排序与 look-ahead advantage；不冒充论文的心理咨询模型实验。未运行 Llama-2-7B、虚拟心理咨询患者或 LLM oracle；本地 deterministic reward 仅替代昂贵 evaluator，偏好树与前瞻信用路径实际执行。120 steps 的 arithmetic mini-suite 中，初始 accuracy 0.1953，PTO 路径为 0.4453；  前瞻偏好树 LLM 后训练 偏好与对齐：先看反馈长什么样 PTO增加候选分支数与增加前瞻深度，分别扩展了哪种搜索范围？ 更多候选主要扩大同一状态可比较的动作范围，更深前瞻主要延长对动作后果的观察范围。两者都会增加模拟与评价成本，却不能互相替代：许多短分支可能漏掉迟发后果，一条深分支也可能错过更好的起始动作。这里是搜索结构对比，不是效果排名。 教学例子：五种开场各模拟一轮，是增加宽度；只试一种开场但续聊多轮，是增加深度。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-ade76e34fb07aaaa">PTO前瞻偏好与普通单轮DPO的区别在损失还是偏好来源？</h2>
+<h2 id="qa-ade76e34fb07aaaa">PTO增加候选分支数与增加前瞻深度，分别扩展了哪种搜索范围？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Apto">Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Reichman University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>更新仍可使用DPO，主要变化是偏好由候选对话树的未来结果决定，而不是只看当前回答。前瞻质量受虚拟用户和评价器影响，树更深也更昂贵，不应把模拟收益当作真实用户收益。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如相同DPO代码可学习两套不同偏好，一套重视当前措辞，一套重视后续目标达成。</p>
+<p><strong>答案：</strong>更多候选主要扩大同一状态可比较的动作范围，更深前瞻主要延长对动作后果的观察范围。两者都会增加模拟与评价成本，却不能互相替代：许多短分支可能漏掉迟发后果，一条深分支也可能错过更好的起始动作。这里是搜索结构对比，不是效果排名。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>五种开场各模拟一轮，是增加宽度；只试一种开场但续聊多轮，是增加深度。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.12062">原论文</a> · <a href="../../../../post-training/2608.12062-pto/">实现解读</a> · <a href="#qa-ade76e34fb07aaaa">问题链接</a></p>
 </details>
@@ -491,29 +491,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.24484v1">原论文</a> · <a href="../../../../post-training/2607.24484-rm-memorization-protocol/">实现解读</a> · <a href="#qa-cb91206f6cb57754">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rm-memorization-protocol" data-paper-title="What do Reward Models Memorize?" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="What do Reward Models Memorize? LLM 后训练 ILLC, University of Amsterdam 2026-07-27 Sec.3 Eq.1–2：对每个真实run的reward差先sigmoid，再分别对训练内20次和留出5次求均值，CM=TM−TG。必须按用户划分，不能同用户不同偏好对跨train/test。组件只聚合调用方提供的真实run分数/manifest并检验用户一致；不制造25个RM、不实现描述不充分的cooccurrence搜索、不把sigmoid(mean margin)冒充mean(sigmoid margin)。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。seed42/43/44并不把合成诊断变成真实能力评测。状态：独立 L1 数值/协议组件，diagnostic only；不代表真实LLM能力、训练收益或完整论文复现。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本地仅执行 counterfactual_memorization 及配套数值协议。外部真实模型/数据观测是调用方前提，不由fixture伪造。  奖励建模与评估协议 Counterfactual memorization LLM 后训练 偏好与对齐：先看反馈长什么样 为什么必须先对每次reward差做sigmoid，再求TM与TG？ sigmoid非线性，先平均差值再转换通常不等于先转换再平均。每次训练包含关系必须来自真实manifest，负CM也应保留；本地组件只聚合输入记录，不制造训练运行。 例如一次很正一次很负的差值，平均概率与平均差值的概率并不普遍相同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rm-memorization-protocol" data-paper-title="What do Reward Models Memorize?" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="What do Reward Models Memorize? LLM 后训练 ILLC, University of Amsterdam 2026-07-27 Sec.3 Eq.1–2：对每个真实run的reward差先sigmoid，再分别对训练内20次和留出5次求均值，CM=TM−TG。必须按用户划分，不能同用户不同偏好对跨train/test。组件只聚合调用方提供的真实run分数/manifest并检验用户一致；不制造25个RM、不实现描述不充分的cooccurrence搜索、不把sigmoid(mean margin)冒充mean(sigmoid margin)。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。seed42/43/44并不把合成诊断变成真实能力评测。状态：独立 L1 数值/协议组件，diagnostic only；不代表真实LLM能力、训练收益或完整论文复现。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本地仅执行 counterfactual_memorization 及配套数值协议。外部真实模型/数据观测是调用方前提，不由fixture伪造。  奖励建模与评估协议 Counterfactual memorization LLM 后训练 偏好与对齐：先看反馈长什么样 同一偏好对跨run的训练包含关系，能根据奖励模型得分高低推断吗？ 不能。训练内或留出身份必须由每次真实划分的manifest给出，得分只是被统计的结果。用高分反推“训练见过”会把结论写进分组条件，制造循环解释。还需核对用户级隔离；本地聚合组件不生成论文所需的多次RM训练运行。 教学例子：某条留出回答得分很高，仍应归入该run的留出组；不能为了符合记忆假设把它移动到训练组。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-b6cbf37a01cc1dc1">为什么必须先对每次reward差做sigmoid，再求TM与TG？</h2>
+<h2 id="qa-b6cbf37a01cc1dc1">同一偏好对跨run的训练包含关系，能根据奖励模型得分高低推断吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arm-memorization-protocol">What do Reward Models Memorize?</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · ILLC, University of Amsterdam</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>sigmoid非线性，先平均差值再转换通常不等于先转换再平均。每次训练包含关系必须来自真实manifest，负CM也应保留；本地组件只聚合输入记录，不制造训练运行。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一次很正一次很负的差值，平均概率与平均差值的概率并不普遍相同。</p>
+<p><strong>答案：</strong>不能。训练内或留出身份必须由每次真实划分的manifest给出，得分只是被统计的结果。用高分反推“训练见过”会把结论写进分组条件，制造循环解释。还需核对用户级隔离；本地聚合组件不生成论文所需的多次RM训练运行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某条留出回答得分很高，仍应归入该run的留出组；不能为了符合记忆假设把它移动到训练组。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.24484v1">原论文</a> · <a href="../../../../post-training/2607.24484-rm-memorization-protocol/">实现解读</a> · <a href="#qa-b6cbf37a01cc1dc1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:sa-dpo" data-paper-title="Mind the Gap: Structure-Aware Consistency in Preference Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Mind the Gap: Structure-Aware Consistency in Preference Learning LLM 后训练 Google Research / Courant Institute of Mathematical Sciences 2026-04-30 对语义几乎相同的回答强求固定偏好间隔，会制造难以满足的约束。SA-DPO 将间隔改为回答距离的函数，保留相对参考策略的隐式奖励差；同时研究 margin、模型容量与 surrogate 尾部的一致性关系，而非单纯调整 DPO 的学习率。图依据原文 §5.3 重绘。原文 Figure 1 与目标函数。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。§7、附录 M 使用 Llama-3-8B LoRA；真实数据实验为 UltraFeedback 20k、1,200 步、batch 16，另需语义编码器、多基线和多次运行。完整比较估计为多小时级，成本过高，不复现（审查 DONE）；不是本地耗时实测。  直接偏好优化 语义距离自适应间隔 LLM 后训练 偏好与对齐：先看反馈长什么样 SA-DPO为什么让所需偏好间隔随语义距离变化？ 近乎同义的回答被要求保持很大分离，会制造过强甚至不合理的约束。让距离决定额外margin，能区分细微表达差异与内容显著不同的回答，同时保留相对参考策略的偏好信号。 例如两个仅换同义词的正确答案，不应被迫像正确与错误答案那样大幅分离。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:sa-dpo" data-paper-title="Mind the Gap: Structure-Aware Consistency in Preference Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Mind the Gap: Structure-Aware Consistency in Preference Learning LLM 后训练 Google Research / Courant Institute of Mathematical Sciences 2026-04-30 对语义几乎相同的回答强求固定偏好间隔，会制造难以满足的约束。SA-DPO 将间隔改为回答距离的函数，保留相对参考策略的隐式奖励差；同时研究 margin、模型容量与 surrogate 尾部的一致性关系，而非单纯调整 DPO 的学习率。图依据原文 §5.3 重绘。原文 Figure 1 与目标函数。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。§7、附录 M 使用 Llama-3-8B LoRA；真实数据实验为 UltraFeedback 20k、1,200 步、batch 16，另需语义编码器、多基线和多次运行。完整比较估计为多小时级，成本过高，不复现（审查 DONE）；不是本地耗时实测。  直接偏好优化 语义距离自适应间隔 LLM 后训练 偏好与对齐：先看反馈长什么样 SA-DPO中的语义距离量的是两条回答，还是两个提示之间的差异？ 距离作用于同一提示下的优选与非优选回答，描述两种候选内容有多接近。它不是按题目难度或提示长度分配margin。原文实验用冻结语义表示计算回答距离，因此距离编码器的判断与偏好标签是两种来源，不能把距离直接当正确性分数。 教学例子：同题的两条同义答复可距离很小；换了两个题目，即使提示文字很像，也不是这条margin的比较对象。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-sa-dpo-319b4acc" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5b5098de671ca213">SA-DPO为什么让所需偏好间隔随语义距离变化？</h2>
+<h2 id="qa-5b5098de671ca213">SA-DPO中的语义距离量的是两条回答，还是两个提示之间的差异？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Asa-dpo">Mind the Gap: Structure-Aware Consistency in Preference Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research / Courant Institute of Mathematical Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>近乎同义的回答被要求保持很大分离，会制造过强甚至不合理的约束。让距离决定额外margin，能区分细微表达差异与内容显著不同的回答，同时保留相对参考策略的偏好信号。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两个仅换同义词的正确答案，不应被迫像正确与错误答案那样大幅分离。</p>
+<p><strong>答案：</strong>距离作用于同一提示下的优选与非优选回答，描述两种候选内容有多接近。它不是按题目难度或提示长度分配margin。原文实验用冻结语义表示计算回答距离，因此距离编码器的判断与偏好标签是两种来源，不能把距离直接当正确性分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同题的两条同义答复可距离很小；换了两个题目，即使提示文字很像，也不是这条margin的比较对象。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.27733v1">原论文</a> · <a href="../../../../post-training/2604.27733-sa-dpo/">实现解读</a> · <a href="#qa-5b5098de671ca213">问题链接</a></p>
 </details>
@@ -557,16 +557,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.27733v1">原论文</a> · <a href="../../../../post-training/2604.27733-sa-dpo/">实现解读</a> · <a href="#qa-b5a27901e7c2d8b2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:group-dpo" data-paper-title="GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization LLM 后训练 Carnegie Mellon University 2026-04-17 GroupDPO 先无梯度计算所有响应在当前参数点的全组导数，再固定这些系数逐响应微批次反传，保留完整组目标的一阶梯度。它支持一条提示的多个正负响应，避免为计算组目标而同时保留整组模型激活；不保证替身损失值或二阶导数等价。本地核对 v1 / v2 的 §4、Algorithm 1 和 Table 1；所实现的四类目标及一阶替身机制未见实质变化。本实现以固定 v2 为准，包括对共享响应累计贡献、损失值不相等以及不保留二阶结构的边界。 完整实验：成本过高，不复现（审查 DONE）。诊断用小型真实线性神经模型，4 个组目标 × SGD / AdamW × 3 次参数更新，对照整组联合反传；L1 精确机制组件，diagnostic only，不是完整大模型能力复现，未接入 Evolve、不可晋级。完整实验：成本过高，不复现（审查 DONE）。本篇是 Google 官方会议页带出的历史补漏，不是 10 月 25 日新发表论文。backward_microbatched 先分块执行 no-grad 策略前向，将少量标量组成完整响应向量；全组系数和正样本 NLL 权重都在这一步固定。  偏好优化 组级目标与梯度等价微批次 LLM 后训练 偏好与对齐：先看反馈长什么样 GroupDPO为什么需要保留同提示的全部正负响应，而不任取一对？ 多响应组目标表达整个正负集合之间的关系，任取一对会丢掉其他响应贡献并改变目标。方法把全组一阶导数转成逐响应系数，让内存优化与目标定义分开。 例如一个提示有两个好解法和三个坏解法，只学最先一对无法代表全部组关系。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:group-dpo" data-paper-title="GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization LLM 后训练 Carnegie Mellon University 2026-04-17 GroupDPO 先无梯度计算所有响应在当前参数点的全组导数，再固定这些系数逐响应微批次反传，保留完整组目标的一阶梯度。它支持一条提示的多个正负响应，避免为计算组目标而同时保留整组模型激活；不保证替身损失值或二阶导数等价。本地核对 v1 / v2 的 §4、Algorithm 1 和 Table 1；所实现的四类目标及一阶替身机制未见实质变化。本实现以固定 v2 为准，包括对共享响应累计贡献、损失值不相等以及不保留二阶结构的边界。 完整实验：成本过高，不复现（审查 DONE）。诊断用小型真实线性神经模型，4 个组目标 × SGD / AdamW × 3 次参数更新，对照整组联合反传；L1 精确机制组件，diagnostic only，不是完整大模型能力复现，未接入 Evolve、不可晋级。完整实验：成本过高，不复现（审查 DONE）。本篇是 Google 官方会议页带出的历史补漏，不是 10 月 25 日新发表论文。backward_microbatched 先分块执行 no-grad 策略前向，将少量标量组成完整响应向量；全组系数和正样本 NLL 权重都在这一步固定。  偏好优化 组级目标与梯度等价微批次 LLM 后训练 偏好与对齐：先看反馈长什么样 GroupDPO的一组正负响应是多条独立候选，还是要拼成一条长回答？ 一组属于同一提示，内部是非空的正响应集合与负响应集合，各响应保留独立概率和身份。集合关系进入组目标，不需要把文本接成长序列。理解这个单位后，才能区分“整组目标”与“同时把整组激活放进显存”这两个问题。 教学例子：同一问题有甲乙两条正例、丙丁两条负例；四条回答各自编码，目标比较两个集合。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-group-dpo-93d61191" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b8740cc2992f39de">GroupDPO为什么需要保留同提示的全部正负响应，而不任取一对？</h2>
+<h2 id="qa-b8740cc2992f39de">GroupDPO的一组正负响应是多条独立候选，还是要拼成一条长回答？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agroup-dpo">GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Carnegie Mellon University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多响应组目标表达整个正负集合之间的关系，任取一对会丢掉其他响应贡献并改变目标。方法把全组一阶导数转成逐响应系数，让内存优化与目标定义分开。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个提示有两个好解法和三个坏解法，只学最先一对无法代表全部组关系。</p>
+<p><strong>答案：</strong>一组属于同一提示，内部是非空的正响应集合与负响应集合，各响应保留独立概率和身份。集合关系进入组目标，不需要把文本接成长序列。理解这个单位后，才能区分“整组目标”与“同时把整组激活放进显存”这两个问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一问题有甲乙两条正例、丙丁两条负例；四条回答各自编码，目标比较两个集合。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.15602v1">原论文</a> · <a href="../../../../post-training/2604.15602-group-dpo/">实现解读</a> · <a href="#qa-b8740cc2992f39de">问题链接</a></p>
 </details>
@@ -584,15 +584,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.15602v1">原论文</a> · <a href="../../../../post-training/2604.15602-group-dpo/">实现解读</a> · <a href="#qa-31c1d45cb19d9504">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:group-dpo" data-paper-title="GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization LLM 后训练 Carnegie Mellon University 2026-04-17 GroupDPO 先无梯度计算所有响应在当前参数点的全组导数，再固定这些系数逐响应微批次反传，保留完整组目标的一阶梯度。它支持一条提示的多个正负响应，避免为计算组目标而同时保留整组模型激活；不保证替身损失值或二阶导数等价。本地核对 v1 / v2 的 §4、Algorithm 1 和 Table 1；所实现的四类目标及一阶替身机制未见实质变化。本实现以固定 v2 为准，包括对共享响应累计贡献、损失值不相等以及不保留二阶结构的边界。 完整实验：成本过高，不复现（审查 DONE）。诊断用小型真实线性神经模型，4 个组目标 × SGD / AdamW × 3 次参数更新，对照整组联合反传；L1 精确机制组件，diagnostic only，不是完整大模型能力复现，未接入 Evolve、不可晋级。完整实验：成本过高，不复现（审查 DONE）。本篇是 Google 官方会议页带出的历史补漏，不是 10 月 25 日新发表论文。backward_microbatched 先分块执行 no-grad 策略前向，将少量标量组成完整响应向量；全组系数和正样本 NLL 权重都在这一步固定。  偏好优化 组级目标与梯度等价微批次 LLM 后训练 偏好与对齐：先看反馈长什么样 GroupDPO的逐响应反传为什么不等同普通微批次里各算各的组损失？ 系数必须在同一当前参数点从全组计算，再固定逐响应反传；每个微批自己估局部系数会改变全组梯度。它只保证该参数点的一阶梯度一致，不保证损失值或二阶结构相同。 例如共享响应在两组中出现，其全局贡献应先累加，而不是只看到当前微批那一组。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:group-dpo" data-paper-title="GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization LLM 后训练 Carnegie Mellon University 2026-04-17 GroupDPO 先无梯度计算所有响应在当前参数点的全组导数，再固定这些系数逐响应微批次反传，保留完整组目标的一阶梯度。它支持一条提示的多个正负响应，避免为计算组目标而同时保留整组模型激活；不保证替身损失值或二阶导数等价。本地核对 v1 / v2 的 §4、Algorithm 1 和 Table 1；所实现的四类目标及一阶替身机制未见实质变化。本实现以固定 v2 为准，包括对共享响应累计贡献、损失值不相等以及不保留二阶结构的边界。 完整实验：成本过高，不复现（审查 DONE）。诊断用小型真实线性神经模型，4 个组目标 × SGD / AdamW × 3 次参数更新，对照整组联合反传；L1 精确机制组件，diagnostic only，不是完整大模型能力复现，未接入 Evolve、不可晋级。完整实验：成本过高，不复现（审查 DONE）。本篇是 Google 官方会议页带出的历史补漏，不是 10 月 25 日新发表论文。backward_microbatched 先分块执行 no-grad 策略前向，将少量标量组成完整响应向量；全组系数和正样本 NLL 权重都在这一步固定。  偏好优化 组级目标与梯度等价微批次 LLM 后训练 偏好与对齐：先看反馈长什么样 GroupDPO支持Margin、MPO、Softmax、All-Pairs，意味着这四种组目标彼此等价吗？ 不意味着。它们定义不同的正负集合比较方式；共享的是从选定全组目标提取导数，再分开反传的内存处理办法。更换组目标会改变优化问题，而改变响应计算批次可在规定条件下保留该目标的一阶梯度，两种改动不能混称等价。 教学例子：比较所有正负配对与先汇总正集合再比较，可能给同一响应不同系数；省显存方法可分别服务二者。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-ee0899295d4a06f6">GroupDPO的逐响应反传为什么不等同普通微批次里各算各的组损失？</h2>
+<h2 id="qa-ee0899295d4a06f6">GroupDPO支持Margin、MPO、Softmax、All-Pairs，意味着这四种组目标彼此等价吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agroup-dpo">GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Carnegie Mellon University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>系数必须在同一当前参数点从全组计算，再固定逐响应反传；每个微批自己估局部系数会改变全组梯度。它只保证该参数点的一阶梯度一致，不保证损失值或二阶结构相同。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如共享响应在两组中出现，其全局贡献应先累加，而不是只看到当前微批那一组。</p>
+<p><strong>答案：</strong>不意味着。它们定义不同的正负集合比较方式；共享的是从选定全组目标提取导数，再分开反传的内存处理办法。更换组目标会改变优化问题，而改变响应计算批次可在规定条件下保留该目标的一阶梯度，两种改动不能混称等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>比较所有正负配对与先汇总正集合再比较，可能给同一响应不同系数；省显存方法可分别服务二者。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.15602v1">原论文</a> · <a href="../../../../post-training/2604.15602-group-dpo/">实现解读</a> · <a href="#qa-ee0899295d4a06f6">问题链接</a></p>
 </details>
@@ -610,16 +610,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.15602v1">原论文</a> · <a href="../../../../post-training/2604.15602-group-dpo/">实现解读</a> · <a href="#qa-c09b70ec0aa149ab">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:benchmark-self-bias" data-paper-title="When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation LLM 后训练 Google 2025-09-30 Sec.2 Eq.1使用[segment,target,benchmark-role]的逐segment排名，先按segment平均，再diag−leave-self-out peers。原始分数方向必须明确，MetricX-QE越低越好。论文未公开ties细节，本地平均tie是显式约定；不把peer consensus当绝对真值，不在合成表上宣称真实模型有偏。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。seed42/43/44并不把合成诊断变成真实能力评测。状态：独立 L1 数值/协议组件，diagnostic only；不代表真实LLM能力、训练收益或完整论文复现。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本地仅执行 self_bias 及配套数值协议。外部真实模型/数据观测是调用方前提，不由fixture伪造。  LLM评估与校准 自偏好与生成式benchmark LLM 后训练 偏好与对齐：先看反馈长什么样 自评偏差研究为什么看逐片段排名，而不直接比较不同裁判原始分数？ 不同裁判分数尺度与方向可能不同，逐片段排名提供相对比较，再观察各裁判对自身目标是否特别有利。它测的是相对自偏，不把同伴一致意见当绝对真值。 例如一个裁判习惯给高分，另一个习惯给低分，原始均值不能直接说明谁偏爱自己。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:benchmark-self-bias" data-paper-title="When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation LLM 后训练 Google 2025-09-30 Sec.2 Eq.1使用[segment,target,benchmark-role]的逐segment排名，先按segment平均，再diag−leave-self-out peers。原始分数方向必须明确，MetricX-QE越低越好。论文未公开ties细节，本地平均tie是显式约定；不把peer consensus当绝对真值，不在合成表上宣称真实模型有偏。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。seed42/43/44并不把合成诊断变成真实能力评测。状态：独立 L1 数值/协议组件，diagnostic only；不代表真实LLM能力、训练收益或完整论文复现。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本地仅执行 self_bias 及配套数值协议。外部真实模型/数据观测是调用方前提，不由fixture伪造。  LLM评估与校准 自偏好与生成式benchmark LLM 后训练 偏好与对齐：先看反馈长什么样 自评偏差表中的target与benchmark-role分别是谁，哪一格才算自评？ target是被评价的模型，benchmark-role是用于评价它的模型角色；两轴相同时才是自评的对角格。固定同一个target，再比较自身角色与其他角色，才是在观察评价者变化，不能把不同target的成绩差直接叫自评偏差。 教学例子：模型甲回答、模型乙评价是非对角格；甲回答并由甲评价才是对角格，二者的被测对象应保持甲。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-benchmark-self-bias-143e8f64" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7ea7ef39b1edfe7d">自评偏差研究为什么看逐片段排名，而不直接比较不同裁判原始分数？</h2>
+<h2 id="qa-7ea7ef39b1edfe7d">自评偏差表中的target与benchmark-role分别是谁，哪一格才算自评？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abenchmark-self-bias">When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不同裁判分数尺度与方向可能不同，逐片段排名提供相对比较，再观察各裁判对自身目标是否特别有利。它测的是相对自偏，不把同伴一致意见当绝对真值。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个裁判习惯给高分，另一个习惯给低分，原始均值不能直接说明谁偏爱自己。</p>
+<p><strong>答案：</strong>target是被评价的模型，benchmark-role是用于评价它的模型角色；两轴相同时才是自评的对角格。固定同一个target，再比较自身角色与其他角色，才是在观察评价者变化，不能把不同target的成绩差直接叫自评偏差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>模型甲回答、模型乙评价是非对角格；甲回答并由甲评价才是对角格，二者的被测对象应保持甲。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.26600v1">原论文</a> · <a href="../../../../post-training/2509.26600-benchmark-self-bias/">实现解读</a> · <a href="#qa-7ea7ef39b1edfe7d">问题链接</a></p>
 </details>
@@ -703,15 +703,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.00263v1">原论文</a> · <a href="../../../../post-training/2510.00263-probabilistic-autorater/">实现解读</a> · <a href="#qa-87f7465105cb6097">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:probabilistic-autorater" data-paper-title="Judging with Confidence: Calibrating Autoraters to Preference Distributions" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Judging with Confidence: Calibrating Autoraters to Preference Distributions LLM 后训练 Google 2025-09-30 Sec.3 Eq.1–2 piecewise奖励和实验用epsilon=.001可精确实现。解析成功必须在[0,1]；失败Brier=0、Log=log(epsilon)。本地严格tag parser是明确的本地约定，不是作者未公开parser；数学梯度诊断不代表可以对生成文本float解析反传，更不等于GRPO训练。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。seed42/43/44并不把合成诊断变成真实能力评测。状态：独立 L1 数值/协议组件，diagnostic only；不代表真实LLM能力、训练收益或完整论文复现。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本地仅执行 proper_rewards 及配套数值协议。外部真实模型/数据观测是调用方前提，不由fixture伪造。  奖励建模与校准 概率偏好与proper scoring rules LLM 后训练 偏好与对齐：先看反馈长什么样 概率裁判的文本解析器能像连续概率变量一样直接反传吗？ 不能把数值规则的梯度诊断当成文本生成训练。真实流程先采样文本、解析合法区间并冻结奖励，再走策略梯度；非法或NaN需先隔离，避免进入非线性运算污染结果。 例如输出非数字时走失败分支，而不是把解析异常替成任意概率再对它求导。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:probabilistic-autorater" data-paper-title="Judging with Confidence: Calibrating Autoraters to Preference Distributions" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Judging with Confidence: Calibrating Autoraters to Preference Distributions LLM 后训练 Google 2025-09-30 Sec.3 Eq.1–2 piecewise奖励和实验用epsilon=.001可精确实现。解析成功必须在[0,1]；失败Brier=0、Log=log(epsilon)。本地严格tag parser是明确的本地约定，不是作者未公开parser；数学梯度诊断不代表可以对生成文本float解析反传，更不等于GRPO训练。 完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。seed42/43/44并不把合成诊断变成真实能力评测。状态：独立 L1 数值/协议组件，diagnostic only；不代表真实LLM能力、训练收益或完整论文复现。完整实验：成本过高，不复现（审查 DONE），不下载权重/数据、不自动重试。此为用户指定的历史会议补漏，不是本日新发表。本地仅执行 proper_rewards 及配套数值协议。外部真实模型/数据观测是调用方前提，不由fixture伪造。  奖励建模与校准 概率偏好与proper scoring rules LLM 后训练 偏好与对齐：先看反馈长什么样 概率裁判生成NaN或区间外数字时，为什么不能先套评分公式再乘零掩码？ 非法值必须先分流，合法概率才进入平方或对数计算。NaN经过非线性后再乘零仍可污染损失，区间外数字也不具有偏好概率含义。原方法为解析失败单独规定奖励；本地严格标签解析器只是接口约定，不代表作者解析器或完整RL训练。 教学例子：文本解析成NaN时直接走invalid奖励分支，不能先算log(NaN)，再希望有效性mask把它擦掉。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-37c219be1787c9bd">概率裁判的文本解析器能像连续概率变量一样直接反传吗？</h2>
+<h2 id="qa-37c219be1787c9bd">概率裁判生成NaN或区间外数字时，为什么不能先套评分公式再乘零掩码？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aprobabilistic-autorater">Judging with Confidence: Calibrating Autoraters to Preference Distributions</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不能把数值规则的梯度诊断当成文本生成训练。真实流程先采样文本、解析合法区间并冻结奖励，再走策略梯度；非法或NaN需先隔离，避免进入非线性运算污染结果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如输出非数字时走失败分支，而不是把解析异常替成任意概率再对它求导。</p>
+<p><strong>答案：</strong>非法值必须先分流，合法概率才进入平方或对数计算。NaN经过非线性后再乘零仍可污染损失，区间外数字也不具有偏好概率含义。原方法为解析失败单独规定奖励；本地严格标签解析器只是接口约定，不代表作者解析器或完整RL训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>文本解析成NaN时直接走invalid奖励分支，不能先算log(NaN)，再希望有效性mask把它擦掉。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.00263v1">原论文</a> · <a href="../../../../post-training/2510.00263-probabilistic-autorater/">实现解读</a> · <a href="#qa-37c219be1787c9bd">问题链接</a></p>
 </details>
@@ -743,15 +743,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2405.14734">原论文</a> · <a href="../../../../post-training/2405.14734-simpo/">实现解读</a> · <a href="#qa-864ca18fd75dda04">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:simpo" data-paper-title="SimPO" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="SimPO LLM 后训练 Princeton University 2024-05-23 DPO 训练需要常驻 reference model，而且 sequence 概率天然偏向短响应。SimPO 用平均 token log-probability 作为隐式 reward，去掉 reference model，并在 Bradley–Terry 目标中加入固定 margin。 用长度归一化的 policy log-probability 直接作 reward，并用目标 margin 拉开偏好。核心 sequence normalization、reference-free reward 和 margin 已落到真实 token loss；未复刻 Mistral/Llama/Gemma 规模训练及 AlpacaEval judge。本地在自由生成 causal LM 上实现平均 token log-probability 和 margin，训练时不创建 reference model；用相同 warmup、数据、步数与 seed 和其他自由生成方法比较。  Reference-free 偏好 LLM 后训练 偏好与对齐：先看反馈长什么样 SimPO长度平均与标准序列概率相比改变了什么偏好？ 序列对数概率相加通常随长度变得更负，平均后比较每词元的典型概率，减少该长度尺度效应。固定margin仍控制分离要求；不能据此推断长短回答已没有任何偏好偏差。 例如两条回答每词元概率相似但长度不同，求和与平均会给出不同的分数差。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:simpo" data-paper-title="SimPO" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="SimPO LLM 后训练 Princeton University 2024-05-23 DPO 训练需要常驻 reference model，而且 sequence 概率天然偏向短响应。SimPO 用平均 token log-probability 作为隐式 reward，去掉 reference model，并在 Bradley–Terry 目标中加入固定 margin。 用长度归一化的 policy log-probability 直接作 reward，并用目标 margin 拉开偏好。核心 sequence normalization、reference-free reward 和 margin 已落到真实 token loss；未复刻 Mistral/Llama/Gemma 规模训练及 AlpacaEval judge。本地在自由生成 causal LM 上实现平均 token log-probability 和 margin，训练时不创建 reference model；用相同 warmup、数据、步数与 seed 和其他自由生成方法比较。  Reference-free 偏好 LLM 后训练 偏好与对齐：先看反馈长什么样 SimPO训练时的目标margin，与推理时降低温度是一种调节吗？ 不是。margin在偏好训练中规定两条回答的长度平均隐式奖励应拉开多少，直接影响参数梯度；温度在推理时重新缩放给定前缀的logits。二者可共同使用，却不等价，也不能把某个温度下回答更短当作目标margin有效的证据。 教学例子：训练比较完整回答甲乙的平均logp差；推理温度只作用于当前下一词分布，不读取这对训练回答。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-85c5fbdd0f8ee884">SimPO长度平均与标准序列概率相比改变了什么偏好？</h2>
+<h2 id="qa-85c5fbdd0f8ee884">SimPO训练时的目标margin，与推理时降低温度是一种调节吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Asimpo">SimPO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>序列对数概率相加通常随长度变得更负，平均后比较每词元的典型概率，减少该长度尺度效应。固定margin仍控制分离要求；不能据此推断长短回答已没有任何偏好偏差。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两条回答每词元概率相似但长度不同，求和与平均会给出不同的分数差。</p>
+<p><strong>答案：</strong>不是。margin在偏好训练中规定两条回答的长度平均隐式奖励应拉开多少，直接影响参数梯度；温度在推理时重新缩放给定前缀的logits。二者可共同使用，却不等价，也不能把某个温度下回答更短当作目标margin有效的证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>训练比较完整回答甲乙的平均logp差；推理温度只作用于当前下一词分布，不读取这对训练回答。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2405.14734">原论文</a> · <a href="../../../../post-training/2405.14734-simpo/">实现解读</a> · <a href="#qa-85c5fbdd0f8ee884">问题链接</a></p>
 </details>
@@ -769,16 +769,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2405.14734">原论文</a> · <a href="../../../../post-training/2405.14734-simpo/">实现解读</a> · <a href="#qa-cb729e6cab9ed41b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:orpo" data-paper-title="ORPO" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="ORPO LLM 后训练 KAIST 2024-03-12 常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。 本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。ORPO 用一个模型同时完成监督学习与偏好拉开，不需要冻结 reference model。实现了 chosen SFT 与 odds-ratio preference penalty 的单阶段更新；本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。最后一步 SFT NLL 为 0.0715、chosen/rejected log-odds margin 为 6.3502；  单阶段偏好 LLM 后训练 偏好与对齐：先看反馈长什么样 ORPO为什么同时需要chosen的SFT项与odds偏好项？ 偏好项强调chosen相对rejected的区别，SFT项持续提高优选文本本身的似然。两者放在同一训练目标中，实现监督与偏好协调，而不是先后两个独立阶段。 例如不只要求好答案比坏答案更像样，还通过NLL直接学习好答案的内容。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:orpo" data-paper-title="ORPO" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="ORPO LLM 后训练 KAIST 2024-03-12 常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。 本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。ORPO 用一个模型同时完成监督学习与偏好拉开，不需要冻结 reference model。实现了 chosen SFT 与 odds-ratio preference penalty 的单阶段更新；本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。最后一步 SFT NLL 为 0.0715、chosen/rejected log-odds margin 为 6.3502；  单阶段偏好 LLM 后训练 偏好与对齐：先看反馈长什么样 ORPO里的odds和概率有什么直观区别？ 概率p表示事件占全部可能结果的份额，odds=p/(1−p)则比较发生与不发生的相对量。odds不是另一个仍在零到一之间的概率；ORPO比较的是优选和拒绝回答的赔率关系，阅读目标前先分清这两个量，才能避免把数值大小直接当置信百分比。 教学例子：教学用p=1/2时odds为1，p=3/4时odds为3；odds为3并不是概率300%。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-orpo-e4a32db7" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-898ddc81df5c3d9b">ORPO为什么同时需要chosen的SFT项与odds偏好项？</h2>
+<h2 id="qa-898ddc81df5c3d9b">ORPO里的odds和概率有什么直观区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aorpo">ORPO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · KAIST</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>偏好项强调chosen相对rejected的区别，SFT项持续提高优选文本本身的似然。两者放在同一训练目标中，实现监督与偏好协调，而不是先后两个独立阶段。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如不只要求好答案比坏答案更像样，还通过NLL直接学习好答案的内容。</p>
+<p><strong>答案：</strong>概率p表示事件占全部可能结果的份额，odds=p/(1−p)则比较发生与不发生的相对量。odds不是另一个仍在零到一之间的概率；ORPO比较的是优选和拒绝回答的赔率关系，阅读目标前先分清这两个量，才能避免把数值大小直接当置信百分比。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学用p=1/2时odds为1，p=3/4时odds为3；odds为3并不是概率300%。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2403.07691">原论文</a> · <a href="../../../../post-training/2403.07691-orpo/">实现解读</a> · <a href="#qa-898ddc81df5c3d9b">问题链接</a></p>
 </details>
@@ -796,42 +796,42 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2403.07691">原论文</a> · <a href="../../../../post-training/2403.07691-orpo/">实现解读</a> · <a href="#qa-713377bce48ffbf5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:orpo" data-paper-title="ORPO" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="ORPO LLM 后训练 KAIST 2024-03-12 常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。 本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。ORPO 用一个模型同时完成监督学习与偏好拉开，不需要冻结 reference model。实现了 chosen SFT 与 odds-ratio preference penalty 的单阶段更新；本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。最后一步 SFT NLL 为 0.0715、chosen/rejected log-odds margin 为 6.3502；  单阶段偏好 LLM 后训练 偏好与对齐：先看反馈长什么样 ORPO的odds对比与直接比较两个概率有何不同？ odds为概率除以一减概率，接近边界时对变化更敏感；取对数比形成偏好信号。它不需要参考模型，但也要处理数值边界，不能把无参考模型理解为没有任何约束。 例如概率从很高再提高一点，odds变化可能很大，不能当作相同幅度的概率差。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:orpo" data-paper-title="ORPO" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="ORPO LLM 后训练 KAIST 2024-03-12 常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。 本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。ORPO 用一个模型同时完成监督学习与偏好拉开，不需要冻结 reference model。实现了 chosen SFT 与 odds-ratio preference penalty 的单阶段更新；本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。最后一步 SFT NLL 为 0.0715、chosen/rejected log-odds margin 为 6.3502；  单阶段偏好 LLM 后训练 偏好与对齐：先看反馈长什么样 ORPO的单阶段训练，与先SFT再开启独立偏好阶段在流程上有何不同？ ORPO在同一次策略训练中同时使用优选回答NLL和偏好赔率项，不需要为独立偏好阶段常驻冻结reference。两阶段流程则先得到SFT策略，再切换偏好目标与参照。阶段合并是训练组织方式的区别，不能据此推断任意初始化和数据下都更优。 教学例子：一批偏好数据同时产生NLL和赔率梯度，而不是先完成一轮只学chosen，再另开reference-relative训练。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-8b37223053c895c4">ORPO的odds对比与直接比较两个概率有何不同？</h2>
+<h2 id="qa-8b37223053c895c4">ORPO的单阶段训练，与先SFT再开启独立偏好阶段在流程上有何不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aorpo">ORPO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · KAIST</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>odds为概率除以一减概率，接近边界时对变化更敏感；取对数比形成偏好信号。它不需要参考模型，但也要处理数值边界，不能把无参考模型理解为没有任何约束。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如概率从很高再提高一点，odds变化可能很大，不能当作相同幅度的概率差。</p>
+<p><strong>答案：</strong>ORPO在同一次策略训练中同时使用优选回答NLL和偏好赔率项，不需要为独立偏好阶段常驻冻结reference。两阶段流程则先得到SFT策略，再切换偏好目标与参照。阶段合并是训练组织方式的区别，不能据此推断任意初始化和数据下都更优。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一批偏好数据同时产生NLL和赔率梯度，而不是先完成一轮只学chosen，再另开reference-relative训练。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2403.07691">原论文</a> · <a href="../../../../post-training/2403.07691-orpo/">实现解读</a> · <a href="#qa-8b37223053c895c4">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:orpo" data-paper-title="ORPO" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="ORPO LLM 后训练 KAIST 2024-03-12 常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。 本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。ORPO 用一个模型同时完成监督学习与偏好拉开，不需要冻结 reference model。实现了 chosen SFT 与 odds-ratio preference penalty 的单阶段更新；本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。最后一步 SFT NLL 为 0.0715、chosen/rejected log-odds margin 为 6.3502；  单阶段偏好 LLM 后训练 偏好与对齐：先看反馈长什么样 ORPO本地完整候选作为response action，与真实token生成训练差在哪里？ 本地以候选动作概率计算SFT和odds项，可验证单阶段更新。真实语言模型还涉及响应词元概率、掩码和序列聚合；统一报告的KL不属于此目标，不能误写成额外训练正则。 例如候选列表的一项概率不能直接冒充长回答逐词元概率链，二者动作空间不同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:orpo" data-paper-title="ORPO" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="ORPO LLM 后训练 KAIST 2024-03-12 常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。 本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。ORPO 用一个模型同时完成监督学习与偏好拉开，不需要冻结 reference model。实现了 chosen SFT 与 odds-ratio preference penalty 的单阶段更新；本地把完整候选视为 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。最后一步 SFT NLL 为 0.0715、chosen/rejected log-odds margin 为 6.3502；  单阶段偏好 LLM 后训练 偏好与对齐：先看反馈长什么样 ORPO 实现 log-odds margin 时，为什么要处理概率靠近 0 或 1 的数值边界？ 单个log-odds是log(p)减log(1−p)，两响应再相减。边界会触发log零或极大比值；本地候选内核给p与1−p项加1e−12，并用logaddexp计算偏好损失。这是本地数值保护，不能用普通概率差替换原目标，也不能把候选概率等同逐token响应概率。 示意：p从0.9升到0.99，概率只增0.09，odds却从9升到99；直接相减概率不是同一个训练信号。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-533c71e635c7676c">ORPO本地完整候选作为response action，与真实token生成训练差在哪里？</h2>
+<h2 id="qa-533c71e635c7676c">ORPO 实现 log-odds margin 时，为什么要处理概率靠近 0 或 1 的数值边界？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aorpo">ORPO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · KAIST</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>本地以候选动作概率计算SFT和odds项，可验证单阶段更新。真实语言模型还涉及响应词元概率、掩码和序列聚合；统一报告的KL不属于此目标，不能误写成额外训练正则。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如候选列表的一项概率不能直接冒充长回答逐词元概率链，二者动作空间不同。</p>
-<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p><strong>答案：</strong>单个log-odds是log(p)减log(1−p)，两响应再相减。边界会触发log零或极大比值；本地候选内核给p与1−p项加1e−12，并用logaddexp计算偏好损失。这是本地数值保护，不能用普通概率差替换原目标，也不能把候选概率等同逐token响应概率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>p从0.9升到0.99，概率只增0.09，odds却从9升到99；直接相减概率不是同一个训练信号。</p>
+<p class="ar-learning-sources">依据：核心公式、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2403.07691">原论文</a> · <a href="../../../../post-training/2403.07691-orpo/">实现解读</a> · <a href="#qa-533c71e635c7676c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:kto" data-paper-title="KTO" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="KTO LLM 后训练 Contextual AI 2024-02-02 DPO 需要成对偏好，而生产反馈常只有点赞、点踩或是否接受。KTO 将单样本反馈映射为 desirable / undesirable utility，并用 policy 与 reference 的 KL 期望作为“参照点”；两类样本可独立采集，也允许类别不平衡。 KTO 只需要单条回答的“满意 / 不满意”标签，以 reference KL 为参照构造前景理论效用，不要求同一 prompt 的 chosen/rejected 偏好对。实现了单样本二元反馈、reference log-ratio、KL 移动参照点与两类 utility；本地 policy 是六候选线性策略，不是论文中的 1B–30B 自由生成 LLM，也未复刻人类偏好数据规模。最后一步 desirable / undesirable utility 为 0.5030 / 0.4972，KL EMA 为 0.0074。  二元反馈对齐 LLM 后训练 偏好与对齐：先看反馈长什么样 KTO为什么允许只有单条点赞或点踩，而不要求配对回答？ 每条反馈独立标记满意或不满意，结合策略相对参考的对数比与KL参照点定义效用。这样适合无法为同题收集两条完整回答的反馈，也可分别控制两类样本的权重。 例如用户只拒绝一次建议，也能提供不满意信号，无需现场再写一个更好版本。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:kto" data-paper-title="KTO" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="KTO LLM 后训练 Contextual AI 2024-02-02 DPO 需要成对偏好，而生产反馈常只有点赞、点踩或是否接受。KTO 将单样本反馈映射为 desirable / undesirable utility，并用 policy 与 reference 的 KL 期望作为“参照点”；两类样本可独立采集，也允许类别不平衡。 KTO 只需要单条回答的“满意 / 不满意”标签，以 reference KL 为参照构造前景理论效用，不要求同一 prompt 的 chosen/rejected 偏好对。实现了单样本二元反馈、reference log-ratio、KL 移动参照点与两类 utility；本地 policy 是六候选线性策略，不是论文中的 1B–30B 自由生成 LLM，也未复刻人类偏好数据规模。最后一步 desirable / undesirable utility 为 0.5030 / 0.4972，KL EMA 为 0.0074。  二元反馈对齐 LLM 后训练 偏好与对齐：先看反馈长什么样 KTO里的满意类权重与不满意类权重，是反馈出现的概率吗？ 不是。两类标签描述单条回答被接受或拒绝，λ权重控制两类样本对训练效用的贡献。允许类别数量不平衡，并不表示频繁出现的标签自动更重要；样本数量与显式权重需要分开记录，不能把λ误读成模型预测的满意概率。 教学例子：点赞记录多、点踩少时，可以调整两类贡献；这没有把少量点踩伪造成与每条点赞同题的偏好对。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-kto-edf0a49a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ea3586d73fba657b">KTO为什么允许只有单条点赞或点踩，而不要求配对回答？</h2>
+<h2 id="qa-ea3586d73fba657b">KTO里的满意类权重与不满意类权重，是反馈出现的概率吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Akto">KTO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Contextual AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>每条反馈独立标记满意或不满意，结合策略相对参考的对数比与KL参照点定义效用。这样适合无法为同题收集两条完整回答的反馈，也可分别控制两类样本的权重。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户只拒绝一次建议，也能提供不满意信号，无需现场再写一个更好版本。</p>
+<p><strong>答案：</strong>不是。两类标签描述单条回答被接受或拒绝，λ权重控制两类样本对训练效用的贡献。允许类别数量不平衡，并不表示频繁出现的标签自动更重要；样本数量与显式权重需要分开记录，不能把λ误读成模型预测的满意概率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>点赞记录多、点踩少时，可以调整两类贡献；这没有把少量点踩伪造成与每条点赞同题的偏好对。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.01306">原论文</a> · <a href="../../../../post-training/2402.01306-kto/">实现解读</a> · <a href="#qa-ea3586d73fba657b">问题链接</a></p>
 </details>
@@ -875,16 +875,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.01306">原论文</a> · <a href="../../../../post-training/2402.01306-kto/">实现解读</a> · <a href="#qa-51338639a8b4c3b6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:self-rewarding" data-paper-title="Self-Rewarding LM" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Self-Rewarding LM LLM 后训练 Meta AI 2024-01-18 每轮由当前模型生成候选并以 LLM-as-a-Judge 打分，形成新的偏好对继续 DPO，构成自举闭环。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。Arithmetic candidate suite、120 steps、256 examples、seed 42：accuracy 0.2344 → 0.6250（+166.67%）；奖励、KL、长度和候选预算一致。  自奖励 LLM 后训练 偏好与对齐：先看反馈长什么样 Self-Rewarding LM里的自奖励是直接相信所有自生成回答吗？ 不是。当前模型同时生成候选并扮演裁判，按评分差构造优选与拒绝对，再更新下一轮策略。学习信号来自自评排序而非生成本身，裁判偏差也可能随循环被放大。 例如同题生成几种解释后再比较质量，不是把第一条输出直接追加成正确示范。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:self-rewarding" data-paper-title="Self-Rewarding LM" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="Self-Rewarding LM LLM 后训练 Meta AI 2024-01-18 每轮由当前模型生成候选并以 LLM-as-a-Judge 打分，形成新的偏好对继续 DPO，构成自举闭环。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。Arithmetic candidate suite、120 steps、256 examples、seed 42：accuracy 0.2344 → 0.6250（+166.67%）；奖励、KL、长度和候选预算一致。  自奖励 LLM 后训练 偏好与对齐：先看反馈长什么样 Self-Rewarding裁判给两条候选相同分数时，能据此断言哪条更受偏好吗？ 不能。同分没有提供严格的优劣关系，不能仅按展示顺序制造一对有方向的偏好。该循环依靠评分差选择优选与拒绝候选，因而生成候选数量和可区分的评价是不同条件。即便得分不同，也只是当前模型裁判的判断，不是新人工真值。 教学例子：两条候选均获同一评分时，不能把先显示的那条写成winner；需要有区分的比较信号才形成该胜负对。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-self-rewarding-38dd38b1" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b295099775e750b6">Self-Rewarding LM里的自奖励是直接相信所有自生成回答吗？</h2>
+<h2 id="qa-b295099775e750b6">Self-Rewarding裁判给两条候选相同分数时，能据此断言哪条更受偏好吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aself-rewarding">Self-Rewarding LM</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不是。当前模型同时生成候选并扮演裁判，按评分差构造优选与拒绝对，再更新下一轮策略。学习信号来自自评排序而非生成本身，裁判偏差也可能随循环被放大。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同题生成几种解释后再比较质量，不是把第一条输出直接追加成正确示范。</p>
+<p><strong>答案：</strong>不能。同分没有提供严格的优劣关系，不能仅按展示顺序制造一对有方向的偏好。该循环依靠评分差选择优选与拒绝候选，因而生成候选数量和可区分的评价是不同条件。即便得分不同，也只是当前模型裁判的判断，不是新人工真值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两条候选均获同一评分时，不能把先显示的那条写成winner；需要有区分的比较信号才形成该胜负对。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2401.10020">原论文</a> · <a href="../../../../post-training/2401.10020-self-rewarding/">实现解读</a> · <a href="#qa-b295099775e750b6">问题链接</a></p>
 </details>
@@ -955,15 +955,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2401.01335">原论文</a> · <a href="../../../../post-training/2401.01335-spin/">实现解读</a> · <a href="#qa-c0b13386310cfbca">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:spin" data-paper-title="SPIN" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="SPIN LLM 后训练 University of California, Los Angeles 2024-01-02 额外偏好标注昂贵。SPIN 从 SFT 模型出发，用上一轮模型为训练 prompt 生成回答，把人类示范视作正例、自生成回答视作负例，通过自博弈判别目标得到下一轮模型，循环提升而不引入新的人工偏好数据。 本页复现“上一轮策略生成负例、人与自生成回答对比、定期刷新对手”的迭代状态，不把 candidate sampling 写成完整 LLM rollout。实现冻结对手、self-play sampling、reference-relative 偏好损失与轮次刷新；没有真实文本生成、分布式训练或论文模型规模。上一轮 candidate policy 负责采样负例，每 16 次更新刷新一次对手。  自博弈微调 LLM 后训练 偏好与对齐：先看反馈长什么样 SPIN与Self-Rewarding怎样决定哪条回答是优选？ SPIN沿用人类示范相对上一轮生成的正负角色，自奖励则由模型裁判给候选排序。监督假设不同：前者可能压低其实很好的自生成回答，后者可能受到裁判偏差影响。 例如模型生成同样正确的新解法时，SPIN角色设定与裁判重新评优可能给出不同训练信号。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:spin" data-paper-title="SPIN" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="SPIN LLM 后训练 University of California, Los Angeles 2024-01-02 额外偏好标注昂贵。SPIN 从 SFT 模型出发，用上一轮模型为训练 prompt 生成回答，把人类示范视作正例、自生成回答视作负例，通过自博弈判别目标得到下一轮模型，循环提升而不引入新的人工偏好数据。 本页复现“上一轮策略生成负例、人与自生成回答对比、定期刷新对手”的迭代状态，不把 candidate sampling 写成完整 LLM rollout。实现冻结对手、self-play sampling、reference-relative 偏好损失与轮次刷新；没有真实文本生成、分布式训练或论文模型规模。上一轮 candidate policy 负责采样负例，每 16 次更新刷新一次对手。  自博弈微调 LLM 后训练 偏好与对齐：先看反馈长什么样 SPIN每轮刷新生成负例，与在同一批人工示范上反复做SFT有什么不同？ 重复SFT主要继续提高固定示范的似然；SPIN让上一轮模型在相同提示下生成新的对照分布，再学习区分示范与当前对手行为。变化的不只是训练轮数，还有负例来源和相对参照，因此不能用多跑几轮SFT代替自博弈迭代。 教学例子：第一轮常见的错误被修正后，下一轮对手会产生不同回答；固定SFT数据本身不会刷新这些对照。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-de51d109d380cea3">SPIN与Self-Rewarding怎样决定哪条回答是优选？</h2>
+<h2 id="qa-de51d109d380cea3">SPIN每轮刷新生成负例，与在同一批人工示范上反复做SFT有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspin">SPIN</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, Los Angeles</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>SPIN沿用人类示范相对上一轮生成的正负角色，自奖励则由模型裁判给候选排序。监督假设不同：前者可能压低其实很好的自生成回答，后者可能受到裁判偏差影响。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型生成同样正确的新解法时，SPIN角色设定与裁判重新评优可能给出不同训练信号。</p>
+<p><strong>答案：</strong>重复SFT主要继续提高固定示范的似然；SPIN让上一轮模型在相同提示下生成新的对照分布，再学习区分示范与当前对手行为。变化的不只是训练轮数，还有负例来源和相对参照，因此不能用多跑几轮SFT代替自博弈迭代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>第一轮常见的错误被修正后，下一轮对手会产生不同回答；固定SFT数据本身不会刷新这些对照。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2401.01335">原论文</a> · <a href="../../../../post-training/2401.01335-spin/">实现解读</a> · <a href="#qa-de51d109d380cea3">问题链接</a></p>
 </details>
@@ -981,16 +981,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2401.01335">原论文</a> · <a href="../../../../post-training/2401.01335-spin/">实现解读</a> · <a href="#qa-68b65f63205056ef">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ipo" data-paper-title="IPO" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="IPO LLM 后训练 Google DeepMind 2023-10-18 论文指出 RLHF 与 DPO 都依赖将成对偏好转成标量 reward 的假设，并提出直接在偏好概率上优化的 PO 框架。取恒等映射得到 IPO：拟合一个有限的目标间隔，而不是像 logistic loss 一样在训练集可分时持续放大 chosen/rejected 间隔。 用平方回归约束偏好 log-ratio，避免 DPO 在可分数据上把策略推向确定性极端。保留了 tokenizer 级序列概率、自由生成、reference policy 与 IPO 平方目标；本地模型和算术数据用于验证训练机制，不等同于论文的大模型偏好评测。本地用字符 tokenizer、GRU causal LM 和自由生成 numeric verifier。SFT warmup 后，正确 completion 为 chosen，当前 policy rollout 中最低 reward 响应为 rejected，按 token log-probability 实现 reference-relative IPO。  偏好正则 LLM 后训练 偏好与对齐：先看反馈长什么样 IPO为什么拟合有限间隔，而不让chosen与rejected差距无限增大？ 偏好数据可能可分但并非确定真理，持续扩大间隔容易过拟合。IPO用平方损失追踪由正则强度决定的有限目标，超过目标后梯度也会把差距拉回，而不再一味增大。 例如模型已十分偏向优选答案，继续把拒绝答案压到极低并不一定增加可靠性。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ipo" data-paper-title="IPO" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="IPO LLM 后训练 Google DeepMind 2023-10-18 论文指出 RLHF 与 DPO 都依赖将成对偏好转成标量 reward 的假设，并提出直接在偏好概率上优化的 PO 框架。取恒等映射得到 IPO：拟合一个有限的目标间隔，而不是像 logistic loss 一样在训练集可分时持续放大 chosen/rejected 间隔。 用平方回归约束偏好 log-ratio，避免 DPO 在可分数据上把策略推向确定性极端。保留了 tokenizer 级序列概率、自由生成、reference policy 与 IPO 平方目标；本地模型和算术数据用于验证训练机制，不等同于论文的大模型偏好评测。本地用字符 tokenizer、GRU causal LM 和自由生成 numeric verifier。SFT warmup 后，正确 completion 为 chosen，当前 policy rollout 中最低 reward 响应为 rejected，按 token log-probability 实现 reference-relative IPO。  偏好正则 LLM 后训练 偏好与对齐：先看反馈长什么样 IPO目标中的τ变大时，期望偏好间隔会变大还是变小？ 有限目标是1/(2τ)，所以正τ增大时，期望的相对间隔反而缩小。τ不是“优选程度越大”的标注分数，也不能与目标间隔同向理解。这里只说明公式中的控制关系，具体训练效果还取决于数据、策略与优化过程。 教学例子：教学用τ从1变成2，目标由1/2变成1/4；这是目标值演算，不是论文实验指标。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-ipo-127b83ec" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-3ab275343c2f6b76">IPO为什么拟合有限间隔，而不让chosen与rejected差距无限增大？</h2>
+<h2 id="qa-3ab275343c2f6b76">IPO目标中的τ变大时，期望偏好间隔会变大还是变小？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aipo">IPO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>偏好数据可能可分但并非确定真理，持续扩大间隔容易过拟合。IPO用平方损失追踪由正则强度决定的有限目标，超过目标后梯度也会把差距拉回，而不再一味增大。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型已十分偏向优选答案，继续把拒绝答案压到极低并不一定增加可靠性。</p>
+<p><strong>答案：</strong>有限目标是1/(2τ)，所以正τ增大时，期望的相对间隔反而缩小。τ不是“优选程度越大”的标注分数，也不能与目标间隔同向理解。这里只说明公式中的控制关系，具体训练效果还取决于数据、策略与优化过程。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学用τ从1变成2，目标由1/2变成1/4；这是目标值演算，不是论文实验指标。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.12036">原论文</a> · <a href="../../../../post-training/2310.12036-ipo/">实现解读</a> · <a href="#qa-3ab275343c2f6b76">问题链接</a></p>
 </details>
@@ -1008,15 +1008,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.12036">原论文</a> · <a href="../../../../post-training/2310.12036-ipo/">实现解读</a> · <a href="#qa-27d91eff39b627ea">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ipo" data-paper-title="IPO" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="IPO LLM 后训练 Google DeepMind 2023-10-18 论文指出 RLHF 与 DPO 都依赖将成对偏好转成标量 reward 的假设，并提出直接在偏好概率上优化的 PO 框架。取恒等映射得到 IPO：拟合一个有限的目标间隔，而不是像 logistic loss 一样在训练集可分时持续放大 chosen/rejected 间隔。 用平方回归约束偏好 log-ratio，避免 DPO 在可分数据上把策略推向确定性极端。保留了 tokenizer 级序列概率、自由生成、reference policy 与 IPO 平方目标；本地模型和算术数据用于验证训练机制，不等同于论文的大模型偏好评测。本地用字符 tokenizer、GRU causal LM 和自由生成 numeric verifier。SFT warmup 后，正确 completion 为 chosen，当前 policy rollout 中最低 reward 响应为 rejected，按 token log-probability 实现 reference-relative IPO。  偏好正则 LLM 后训练 偏好与对齐：先看反馈长什么样 IPO平方目标与DPO的logistic目标在大间隔处有何差别？ 平方目标围绕有限值对称惩罚偏离，间隔太大同样有损失；logistic偏好损失随正确间隔增大而趋近零。这是目标形状对比，不表示IPO在任意数据与预算下必然更好。 例如实际间隔越过目标后，IPO会回调；普通logistic仍会把更大正间隔视为更小损失。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ipo" data-paper-title="IPO" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="IPO LLM 后训练 Google DeepMind 2023-10-18 论文指出 RLHF 与 DPO 都依赖将成对偏好转成标量 reward 的假设，并提出直接在偏好概率上优化的 PO 框架。取恒等映射得到 IPO：拟合一个有限的目标间隔，而不是像 logistic loss 一样在训练集可分时持续放大 chosen/rejected 间隔。 用平方回归约束偏好 log-ratio，避免 DPO 在可分数据上把策略推向确定性极端。保留了 tokenizer 级序列概率、自由生成、reference policy 与 IPO 平方目标；本地模型和算术数据用于验证训练机制，不等同于论文的大模型偏好评测。本地用字符 tokenizer、GRU causal LM 和自由生成 numeric verifier。SFT warmup 后，正确 completion 为 chosen，当前 policy rollout 中最低 reward 响应为 rejected，按 token log-probability 实现 reference-relative IPO。  偏好正则 LLM 后训练 偏好与对齐：先看反馈长什么样 IPO拟合相对间隔，是否等于要求chosen自身的绝对概率一定上升？ 不等于。间隔比较的是chosen与rejected的策略相对reference对数比之差，可以通过提高chosen、降低rejected或二者共同变化来接近目标。单看chosen绝对概率无法判断目标改善，且完整分布的归一化也会影响其他回答。 教学例子：chosen概率不变而rejected下降，也可能扩大相对间隔；不能仅凭chosen未上升判定本次目标没有变化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c593b9604bc999a9">IPO平方目标与DPO的logistic目标在大间隔处有何差别？</h2>
+<h2 id="qa-c593b9604bc999a9">IPO拟合相对间隔，是否等于要求chosen自身的绝对概率一定上升？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aipo">IPO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>平方目标围绕有限值对称惩罚偏离，间隔太大同样有损失；logistic偏好损失随正确间隔增大而趋近零。这是目标形状对比，不表示IPO在任意数据与预算下必然更好。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如实际间隔越过目标后，IPO会回调；普通logistic仍会把更大正间隔视为更小损失。</p>
+<p><strong>答案：</strong>不等于。间隔比较的是chosen与rejected的策略相对reference对数比之差，可以通过提高chosen、降低rejected或二者共同变化来接近目标。单看chosen绝对概率无法判断目标改善，且完整分布的归一化也会影响其他回答。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>chosen概率不变而rejected下降，也可能扩大相对间隔；不能仅凭chosen未上升判定本次目标没有变化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.12036">原论文</a> · <a href="../../../../post-training/2310.12036-ipo/">实现解读</a> · <a href="#qa-c593b9604bc999a9">问题链接</a></p>
 </details>
@@ -1034,16 +1034,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.12036">原论文</a> · <a href="../../../../post-training/2310.12036-ipo/">实现解读</a> · <a href="#qa-90a4386f929b6180">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:steerlm" data-paper-title="SteerLM" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="SteerLM LLM 后训练 NVIDIA 2023-10-09 传统 RLHF 把多维偏好压成一个 reward，用户推理时也不能改变目标。SteerLM 先用 attribute prediction model 为回答标注 helpfulness、quality 等属性，再把属性和值拼入条件做普通 SFT，推理时由用户指定目标属性。 本页复现显式属性标注、目标属性条件选择与 SFT 更新，不把四维本地属性冒充 NVIDIA 43B 模型。保留多维 annotation 与条件 SFT；本地属性来自公开候选数据的确定性 reward axes，没有训练大属性预测器，也未实现真实文本 token 级条件生成。四个 reward axis 作为可审计属性标注，目标属性向量参与响应选择，再执行条件 SFT。  多属性可控 SFT LLM 后训练 偏好与对齐：先看反馈长什么样 SteerLM为什么把属性值作为生成条件，而不是压成单个奖励？ 多属性保留不同质量维度，让训练学习条件化回答，推理时用户可指定目标属性组合。单一奖励先把这些取舍固定下来；显式条件仍需模型见过可学的属性数据才可能控制。 例如用户可偏向简洁或解释充分，而不是每次都使用同一个固定加权总分。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:steerlm" data-paper-title="SteerLM" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="SteerLM LLM 后训练 NVIDIA 2023-10-09 传统 RLHF 把多维偏好压成一个 reward，用户推理时也不能改变目标。SteerLM 先用 attribute prediction model 为回答标注 helpfulness、quality 等属性，再把属性和值拼入条件做普通 SFT，推理时由用户指定目标属性。 本页复现显式属性标注、目标属性条件选择与 SFT 更新，不把四维本地属性冒充 NVIDIA 43B 模型。保留多维 annotation 与条件 SFT；本地属性来自公开候选数据的确定性 reward axes，没有训练大属性预测器，也未实现真实文本 token 级条件生成。四个 reward axis 作为可审计属性标注，目标属性向量参与响应选择，再执行条件 SFT。  多属性可控 SFT LLM 后训练 偏好与对齐：先看反馈长什么样 SteerLM的属性预测模型与属性条件生成模型，是同一个角色吗？ 两者职责不同：属性预测给已有回答标注helpfulness、quality等维度，生成模型学习在指定属性条件下输出回答。推理时用户提供目标属性，而不是先拿到一份未来答案让属性模型评分后再生成。区分标注器与条件策略，才能看清监督如何进入训练。 教学例子：先给训练回答标“较简洁、较有帮助”，再训练按这些条件生成；上线时输入目标条件并请求新回答。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <span id="paper-post-training-steerlm-863fe2af" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8618eab53654c787">SteerLM为什么把属性值作为生成条件，而不是压成单个奖励？</h2>
+<h2 id="qa-8618eab53654c787">SteerLM的属性预测模型与属性条件生成模型，是同一个角色吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Asteerlm">SteerLM</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · NVIDIA</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多属性保留不同质量维度，让训练学习条件化回答，推理时用户可指定目标属性组合。单一奖励先把这些取舍固定下来；显式条件仍需模型见过可学的属性数据才可能控制。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户可偏向简洁或解释充分，而不是每次都使用同一个固定加权总分。</p>
+<p><strong>答案：</strong>两者职责不同：属性预测给已有回答标注helpfulness、quality等维度，生成模型学习在指定属性条件下输出回答。推理时用户提供目标属性，而不是先拿到一份未来答案让属性模型评分后再生成。区分标注器与条件策略，才能看清监督如何进入训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先给训练回答标“较简洁、较有帮助”，再训练按这些条件生成；上线时输入目标条件并请求新回答。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.05344">原论文</a> · <a href="../../../../post-training/2310.05344-steerlm/">实现解读</a> · <a href="#qa-8618eab53654c787">问题链接</a></p>
 </details>
@@ -1114,15 +1114,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2309.00267">原论文</a> · <a href="../../../../post-training/2309.00267-rlaif/">实现解读</a> · <a href="#qa-dfd8d3776378be1d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlaif" data-paper-title="RLAIF" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="RLAIF LLM 后训练 Google Research 2023-09-01 AI labeler 对候选做顺序交换评判，去除位置偏差后训练 preference policy；本地落实双顺序标签与成对更新。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。Arithmetic candidate suite、120 steps、256 examples、seed 42：accuracy 0.2344 → 0.6406（+173.33%）；奖励、KL、长度和候选预算一致。  AI 反馈 LLM 后训练 偏好与对齐：先看反馈长什么样 交换回答顺序与只问一次AI裁判相比控制了什么？ 双顺序判断能减少固定位置偏好，把同一候选在不同位置的评价对应后再汇总。它不消除语义偏差，也不能把互相矛盾的两次判断直接当确定标签。 例如第一次A在前、第二次A在后，需先映射回A的身份再平均。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlaif" data-paper-title="RLAIF" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/preference-and-alignment" data-search="RLAIF LLM 后训练 Google Research 2023-09-01 AI labeler 对候选做顺序交换评判，去除位置偏差后训练 preference policy；本地落实双顺序标签与成对更新。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。Arithmetic candidate suite、120 steps、256 examples、seed 42：accuracy 0.2344 → 0.6406（+173.33%）；奖励、KL、长度和候选预算一致。  AI 反馈 LLM 后训练 偏好与对齐：先看反馈长什么样 RLAIF用AI偏好训练策略，与推理时让AI从候选中挑一个有什么不同？ 前者把AI判断转成训练数据并更新策略参数，后者只在当前请求上选择，未必产生任何参数学习。两者可能复用类似裁判，但成本发生位置和对后续请求的影响不同；一次候选选择成功不能证明策略已通过RLAIF学会该行为。 教学例子：今天用AI挑中一条回答，只改变今天的展示；将这对偏好用于训练，才可能改变明天的策略分布。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 偏好与对齐：先看反馈长什么样</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-0cc21caa8f68e6b2">交换回答顺序与只问一次AI裁判相比控制了什么？</h2>
+<h2 id="qa-0cc21caa8f68e6b2">RLAIF用AI偏好训练策略，与推理时让AI从候选中挑一个有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlaif">RLAIF</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>双顺序判断能减少固定位置偏好，把同一候选在不同位置的评价对应后再汇总。它不消除语义偏差，也不能把互相矛盾的两次判断直接当确定标签。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第一次A在前、第二次A在后，需先映射回A的身份再平均。</p>
+<p><strong>答案：</strong>前者把AI判断转成训练数据并更新策略参数，后者只在当前请求上选择，未必产生任何参数学习。两者可能复用类似裁判，但成本发生位置和对后续请求的影响不同；一次候选选择成功不能证明策略已通过RLAIF学会该行为。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>今天用AI挑中一条回答，只改变今天的展示；将这对偏好用于训练，才可能改变明天的策略分布。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2309.00267">原论文</a> · <a href="../../../../post-training/2309.00267-rlaif/">实现解读</a> · <a href="#qa-0cc21caa8f68e6b2">问题链接</a></p>
 </details>

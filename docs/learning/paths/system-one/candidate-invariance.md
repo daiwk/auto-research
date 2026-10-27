@@ -27,16 +27,16 @@ hide:
 <p class="ar-learning-status" data-learning-status role="status">12 个问题 · 3 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jev-multicorrect" data-paper-title="When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/candidate-invariance" data-search="When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models 基础模型 Independent Researcher 2026-10-21 当一个列表有多个正确选项时，模型可能把大部分概率分给其中一个正确项，另一个正确项虽高于所有干扰项，概率仍低于均匀基线。单选 top-1 或“正确项都排在干扰项之前”因此会掩盖完整集合恢复的失败。论文同时分析 JEV、Luna 和 Gemini，避免把所有现象都归因于某一种架构。特别要区分两种输出：一个候选列表内总和约为1的类别份额，以及对每个选项独立询问“是否正确”得到的二元概率。前者不能直接当作后者的校准置信度。 完整三模型、大规模候选列表实验：成本过高，不复现（审查 DONE）。原文的全量阈值曲线是同一数据上的回溯诊断。本地诊断只检查8项评分/隔离契约：排序与集合恢复的差别、低份额正确项计数、固定验证阈值、数据不重叠、拒答处理、公开回调无标签、五拷贝差距参考值、低概率箱排除的重新归一化。三种子不把固定评分夹具变成正式能力比较，不接入 evolve promotion。  System One / JEV 多正确选项与概率校准审计 结构化决策 候选不变性：顺序、竞争者与概率校准 多正确选项审计为什么不能只看top-1命中率？ top-1只要求一个正确项胜出，无法判断其余正确项是否获得足够质量。集合恢复还需观察各正确项概率差、阈值选择与精确集合指标，才能发现单一正确项垄断。 例如三项中两项正确，模型只稳定选对其中一项，top-1仍可能看起来很好。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jev-multicorrect" data-paper-title="When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/candidate-invariance" data-search="When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models 基础模型 Independent Researcher 2026-10-21 当一个列表有多个正确选项时，模型可能把大部分概率分给其中一个正确项，另一个正确项虽高于所有干扰项，概率仍低于均匀基线。单选 top-1 或“正确项都排在干扰项之前”因此会掩盖完整集合恢复的失败。论文同时分析 JEV、Luna 和 Gemini，避免把所有现象都归因于某一种架构。特别要区分两种输出：一个候选列表内总和约为1的类别份额，以及对每个选项独立询问“是否正确”得到的二元概率。前者不能直接当作后者的校准置信度。 完整三模型、大规模候选列表实验：成本过高，不复现（审查 DONE）。原文的全量阈值曲线是同一数据上的回溯诊断。本地诊断只检查8项评分/隔离契约：排序与集合恢复的差别、低份额正确项计数、固定验证阈值、数据不重叠、拒答处理、公开回调无标签、五拷贝差距参考值、低概率箱排除的重新归一化。三种子不把固定评分夹具变成正式能力比较，不接入 evolve promotion。  System One / JEV 多正确选项与概率校准审计 结构化决策 候选不变性：顺序、竞争者与概率校准 多正确选项任务要求返回一个答案，还是一个完整正确集合？ 目标是恢复所有正确候选组成的集合，集合大小可能超过一。返回一个正确项只满足单选式命中，仍可能漏选；返回所有项也可能误选干扰项。因此先把输出单位从“一个赢家”改成“一个集合”，再理解排序、阈值与exact-set指标。 教学例子：正确集合是{甲,乙}时，仅返回甲不算完整恢复；返回甲乙丙也因多出丙而不满足精确集合。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 候选不变性：顺序、竞争者与概率校准</a></p>
 <span id="paper-foundation-models-jev-multicorrect-937628d2" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b551d438465d2f51">多正确选项审计为什么不能只看top-1命中率？</h2>
+<h2 id="qa-b551d438465d2f51">多正确选项任务要求返回一个答案，还是一个完整正确集合？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ajev-multicorrect">When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Independent Researcher</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>top-1只要求一个正确项胜出，无法判断其余正确项是否获得足够质量。集合恢复还需观察各正确项概率差、阈值选择与精确集合指标，才能发现单一正确项垄断。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如三项中两项正确，模型只稳定选对其中一项，top-1仍可能看起来很好。</p>
+<p><strong>答案：</strong>目标是恢复所有正确候选组成的集合，集合大小可能超过一。返回一个正确项只满足单选式命中，仍可能漏选；返回所有项也可能误选干扰项。因此先把输出单位从“一个赢家”改成“一个集合”，再理解排序、阈值与exact-set指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>正确集合是{甲,乙}时，仅返回甲不算完整恢复；返回甲乙丙也因多出丙而不满足精确集合。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、方法与本地协议；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.29217v1">原论文</a> · <a href="../../../../system-one/2610.29217-jev-multicorrect/">实现解读</a> · <a href="#qa-b551d438465d2f51">问题链接</a></p>
 </details>
@@ -80,16 +80,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.29217v1">原论文</a> · <a href="../../../../system-one/2610.29217-jev-multicorrect/">实现解读</a> · <a href="#qa-8028e759e705e072">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:prism-1" data-paper-title="Prism-1: Position- and Rival-Independent Scoring for System One Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/candidate-invariance" data-search="Prism-1: Position- and Rival-Independent Scoring for System One Models 基础模型 Nanyang Technological University 2026-10-15 JEV/System One 选择模型希望在一次前向中选出工具、意图或界面元素。普通多选提示会让答案依赖选项顺序和无关选项。§2–4 由 Luce 选择公理推导：每个选项的分数只能看共享状态、问题和该选项本身；最后对独立分数做 softmax。只在输出层加 softmax、不隔离 attention 或不重置位置，都不能保证这一性质。 作者每模型/方法使用2–3种子，单次 H100 50–85分钟，完整多臂训练和评估超出本轮预算，成本过高，不复现（审查 DONE）。诊断指标与GPU回执保存实际设备、提交与执行源码哈希。不下载数据或权重。固定 revision synthetic-packed-options-and-noisy-tokens@oct17-supplement-foundation-v1；seeds42/43/44。真实微型 Transformer 用随机初始化、共享绝对位置嵌入、2层、24维、3 heads；三个不同长度的整数 token 选项。一次任意标签交叉熵更新只检查梯度，不是测试答案或任务能力评估。  JEV与单步决策 选项隔离与选择不变性 结构化决策 候选不变性：顺序、竞争者与概率校准 Prism-1的Luce选择性质约束了什么？ 每个选项先用只依赖共享状态、问题和自身的分数，再统一归一化，要求其他选项加入时原两项相对赔率保持。它限制无关选项干扰，并非所有任务都适合该假设。 例如新增一个工具可以分走份额，但不应无缘由改变原两个工具谁更合适。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:prism-1" data-paper-title="Prism-1: Position- and Rival-Independent Scoring for System One Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/candidate-invariance" data-search="Prism-1: Position- and Rival-Independent Scoring for System One Models 基础模型 Nanyang Technological University 2026-10-15 JEV/System One 选择模型希望在一次前向中选出工具、意图或界面元素。普通多选提示会让答案依赖选项顺序和无关选项。§2–4 由 Luce 选择公理推导：每个选项的分数只能看共享状态、问题和该选项本身；最后对独立分数做 softmax。只在输出层加 softmax、不隔离 attention 或不重置位置，都不能保证这一性质。 作者每模型/方法使用2–3种子，单次 H100 50–85分钟，完整多臂训练和评估超出本轮预算，成本过高，不复现（审查 DONE）。诊断指标与GPU回执保存实际设备、提交与执行源码哈希。不下载数据或权重。固定 revision synthetic-packed-options-and-noisy-tokens@oct17-supplement-foundation-v1；seeds42/43/44。真实微型 Transformer 用随机初始化、共享绝对位置嵌入、2层、24维、3 heads；三个不同长度的整数 token 选项。一次任意标签交叉熵更新只检查梯度，不是测试答案或任务能力评估。  JEV与单步决策 选项隔离与选择不变性 结构化决策 候选不变性：顺序、竞争者与概率校准 Prism-1加入第三个选项后，要求旧两项概率数值完全不变吗？ 不要求。新增项会加入softmax分母，旧项份额可以同时下降；要求保持的是旧两项之间的相对赔率与排序。新项也可以成为赢家。这是候选选择的一种一致性约束，不能误读成模型必须无视所有新增选项。 教学例子：甲乙原为2比1，加入丙后可变成0.4和0.2；份额变了，但甲乙仍为2比1。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 候选不变性：顺序、竞争者与概率校准</a></p>
 <span id="paper-foundation-models-prism-1-45b3ae20" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-746ef6fbeaffa986">Prism-1的Luce选择性质约束了什么？</h2>
+<h2 id="qa-746ef6fbeaffa986">Prism-1加入第三个选项后，要求旧两项概率数值完全不变吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aprism-1">Prism-1: Position- and Rival-Independent Scoring for System One Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Nanyang Technological University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>每个选项先用只依赖共享状态、问题和自身的分数，再统一归一化，要求其他选项加入时原两项相对赔率保持。它限制无关选项干扰，并非所有任务都适合该假设。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如新增一个工具可以分走份额，但不应无缘由改变原两个工具谁更合适。</p>
+<p><strong>答案：</strong>不要求。新增项会加入softmax分母，旧项份额可以同时下降；要求保持的是旧两项之间的相对赔率与排序。新项也可以成为赢家。这是候选选择的一种一致性约束，不能误读成模型必须无视所有新增选项。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>甲乙原为2比1，加入丙后可变成0.4和0.2；份额变了，但甲乙仍为2比1。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22066">原论文</a> · <a href="../../../../foundation-models/2610.22066-prism-1/">实现解读</a> · <a href="#qa-746ef6fbeaffa986">问题链接</a></p>
 </details>
@@ -107,15 +107,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22066">原论文</a> · <a href="../../../../foundation-models/2610.22066-prism-1/">实现解读</a> · <a href="#qa-f8589f6603d77f11">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:prism-1" data-paper-title="Prism-1: Position- and Rival-Independent Scoring for System One Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/candidate-invariance" data-search="Prism-1: Position- and Rival-Independent Scoring for System One Models 基础模型 Nanyang Technological University 2026-10-15 JEV/System One 选择模型希望在一次前向中选出工具、意图或界面元素。普通多选提示会让答案依赖选项顺序和无关选项。§2–4 由 Luce 选择公理推导：每个选项的分数只能看共享状态、问题和该选项本身；最后对独立分数做 softmax。只在输出层加 softmax、不隔离 attention 或不重置位置，都不能保证这一性质。 作者每模型/方法使用2–3种子，单次 H100 50–85分钟，完整多臂训练和评估超出本轮预算，成本过高，不复现（审查 DONE）。诊断指标与GPU回执保存实际设备、提交与执行源码哈希。不下载数据或权重。固定 revision synthetic-packed-options-and-noisy-tokens@oct17-supplement-foundation-v1；seeds42/43/44。真实微型 Transformer 用随机初始化、共享绝对位置嵌入、2层、24维、3 heads；三个不同长度的整数 token 选项。一次任意标签交叉熵更新只检查梯度，不是测试答案或任务能力评估。  JEV与单步决策 选项隔离与选择不变性 结构化决策 候选不变性：顺序、竞争者与概率校准 Prism-1与只在普通多选提示输出处加softmax有什么不同？ 普通提示的选项状态可能已互相注意、受位置影响，再加softmax无法消除这些依赖。Prism-1在内部隔离选项块并统一起始位置，从分数生成过程施加约束。 例如先让A读到B再归一化，A的分数已含B，分母处理不能把这种影响撤回。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:prism-1" data-paper-title="Prism-1: Position- and Rival-Independent Scoring for System One Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/candidate-invariance" data-search="Prism-1: Position- and Rival-Independent Scoring for System One Models 基础模型 Nanyang Technological University 2026-10-15 JEV/System One 选择模型希望在一次前向中选出工具、意图或界面元素。普通多选提示会让答案依赖选项顺序和无关选项。§2–4 由 Luce 选择公理推导：每个选项的分数只能看共享状态、问题和该选项本身；最后对独立分数做 softmax。只在输出层加 softmax、不隔离 attention 或不重置位置，都不能保证这一性质。 作者每模型/方法使用2–3种子，单次 H100 50–85分钟，完整多臂训练和评估超出本轮预算，成本过高，不复现（审查 DONE）。诊断指标与GPU回执保存实际设备、提交与执行源码哈希。不下载数据或权重。固定 revision synthetic-packed-options-and-noisy-tokens@oct17-supplement-foundation-v1；seeds42/43/44。真实微型 Transformer 用随机初始化、共享绝对位置嵌入、2层、24维、3 heads；三个不同长度的整数 token 选项。一次任意标签交叉熵更新只检查梯度，不是测试答案或任务能力评估。  JEV与单步决策 选项隔离与选择不变性 结构化决策 候选不变性：顺序、竞争者与概率校准 Prism-1的独立选项假设，与“以上皆非”这类候选为什么不相容？ 独立分数只看共享状态、问题和该选项自身；“以上皆非”的正确含义却取决于其他选项是否成立，需要跨选项信息。这样的任务不能直接要求相同Luce约束。它说明结构假设的适用边界，不是模型多加训练即可消除的普通误差。 教学例子：把一个正确答案加入候选后，“以上皆非”应变错；若该项根本不能读取其他候选，就无法表达这层依赖。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 候选不变性：顺序、竞争者与概率校准</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-48222e52dee00817">Prism-1与只在普通多选提示输出处加softmax有什么不同？</h2>
+<h2 id="qa-48222e52dee00817">Prism-1的独立选项假设，与“以上皆非”这类候选为什么不相容？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aprism-1">Prism-1: Position- and Rival-Independent Scoring for System One Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Nanyang Technological University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>普通提示的选项状态可能已互相注意、受位置影响，再加softmax无法消除这些依赖。Prism-1在内部隔离选项块并统一起始位置，从分数生成过程施加约束。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先让A读到B再归一化，A的分数已含B，分母处理不能把这种影响撤回。</p>
+<p><strong>答案：</strong>独立分数只看共享状态、问题和该选项自身；“以上皆非”的正确含义却取决于其他选项是否成立，需要跨选项信息。这样的任务不能直接要求相同Luce约束。它说明结构假设的适用边界，不是模型多加训练即可消除的普通误差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>把一个正确答案加入候选后，“以上皆非”应变错；若该项根本不能读取其他候选，就无法表达这层依赖。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22066">原论文</a> · <a href="../../../../foundation-models/2610.22066-prism-1/">实现解读</a> · <a href="#qa-48222e52dee00817">问题链接</a></p>
 </details>

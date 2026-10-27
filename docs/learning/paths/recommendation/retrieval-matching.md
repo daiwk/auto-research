@@ -133,16 +133,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.14550">原论文</a> · <a href="../../../../reproductions/2610.14550-snap-dpa-relevance/">实现解读</a> · <a href="#qa-ec1c2b80c0f2fa30">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rptune" data-paper-title="RPTune: Learned Context Curation for LLM Catalog Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="RPTune: Learned Context Curation for LLM Catalog Search 搜广推与 LLM 应用 Google 2026-10-01 用查询-商品编码器、可学习调整项和下游 LLM 反馈共同决定商品保留与摆放顺序；高优商品靠近提示词末端，再对编排后的目录做选择后训练。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。只执行 rank/prune/position 核心编排，不调用 Gemini/Gemma、商家目录或论文训练。只执行 rank/prune/position 核心编排，不调用 Gemini/Gemma、商家目录或论文训练。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  search llm-recommendation context-curation 搜广推 候选生成与搜索匹配 RPTune为什么既筛商品又调整提示中的摆放顺序？ 长目录会挤占上下文，LLM还受位置影响。学得分决定保留哪些商品，并把高优项靠近提示末端，让输入编排与下游选择反馈共同适配。 例如只保留相关家具后，把最适合的一款放在模型更易注意的位置。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rptune" data-paper-title="RPTune: Learned Context Curation for LLM Catalog Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="RPTune: Learned Context Curation for LLM Catalog Search 搜广推与 LLM 应用 Google 2026-10-01 用查询-商品编码器、可学习调整项和下游 LLM 反馈共同决定商品保留与摆放顺序；高优商品靠近提示词末端，再对编排后的目录做选择后训练。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。只执行 rank/prune/position 核心编排，不调用 Gemini/Gemma、商家目录或论文训练。只执行 rank/prune/position 核心编排，不调用 Gemini/Gemma、商家目录或论文训练。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  search llm-recommendation context-curation 搜广推 候选生成与搜索匹配 RPTune的prune与position分别决定商品是否出现，还是出现在哪里？ prune决定哪些目录商品保留进提示，position决定保留商品的摆放顺序。前者改变可供下游选择的集合，后者改变模型读取同一集合的上下文条件；两者是独立可观察的编排动作。没进入上下文的商品不能靠调整位置重新获得曝光。 教学例子：先从一千件中保留十件，再把这十件按规定重排；第二步不会把第一步删掉的商品重新找回。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-rptune-1e6a74b6" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-cfc59a331b753a91">RPTune为什么既筛商品又调整提示中的摆放顺序？</h2>
+<h2 id="qa-cfc59a331b753a91">RPTune的prune与position分别决定商品是否出现，还是出现在哪里？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arptune">RPTune: Learned Context Curation for LLM Catalog Search</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>长目录会挤占上下文，LLM还受位置影响。学得分决定保留哪些商品，并把高优项靠近提示末端，让输入编排与下游选择反馈共同适配。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如只保留相关家具后，把最适合的一款放在模型更易注意的位置。</p>
+<p><strong>答案：</strong>prune决定哪些目录商品保留进提示，position决定保留商品的摆放顺序。前者改变可供下游选择的集合，后者改变模型读取同一集合的上下文条件；两者是独立可观察的编排动作。没进入上下文的商品不能靠调整位置重新获得曝光。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先从一千件中保留十件，再把这十件按规定重排；第二步不会把第一步删掉的商品重新找回。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00964">原论文</a> · <a href="../../../../reproductions/2610.00964-rptune/">实现解读</a> · <a href="#qa-cfc59a331b753a91">问题链接</a></p>
 </details>
@@ -160,15 +160,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00964">原论文</a> · <a href="../../../../reproductions/2610.00964-rptune/">实现解读</a> · <a href="#qa-e2aa86945fffe4e8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rptune" data-paper-title="RPTune: Learned Context Curation for LLM Catalog Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="RPTune: Learned Context Curation for LLM Catalog Search 搜广推与 LLM 应用 Google 2026-10-01 用查询-商品编码器、可学习调整项和下游 LLM 反馈共同决定商品保留与摆放顺序；高优商品靠近提示词末端，再对编排后的目录做选择后训练。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。只执行 rank/prune/position 核心编排，不调用 Gemini/Gemma、商家目录或论文训练。只执行 rank/prune/position 核心编排，不调用 Gemini/Gemma、商家目录或论文训练。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  search llm-recommendation context-curation 搜广推 候选生成与搜索匹配 RPTune编排与只做向量top-k召回有何区别？ 除了语义点积还学query-item调整项，并控制进入LLM后的顺序；纯召回只决定集合。位置策略依模型上下文行为，不保证换模型仍同样有效。 例如两方案召回集合相同，提示排序不同仍可能改变LLM选择。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rptune" data-paper-title="RPTune: Learned Context Curation for LLM Catalog Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="RPTune: Learned Context Curation for LLM Catalog Search 搜广推与 LLM 应用 Google 2026-10-01 用查询-商品编码器、可学习调整项和下游 LLM 反馈共同决定商品保留与摆放顺序；高优商品靠近提示词末端，再对编排后的目录做选择后训练。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。只执行 rank/prune/position 核心编排，不调用 Gemini/Gemma、商家目录或论文训练。只执行 rank/prune/position 核心编排，不调用 Gemini/Gemma、商家目录或论文训练。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  search llm-recommendation context-curation 搜广推 候选生成与搜索匹配 RPTune的商品打分与后续提示排序，是否都等同于普通向量top-k？ 不等同。打分除语义点积外还有查询与商品的可学习调整项；保留top-k后还要执行规定的位置编排。纯向量top-k既不包含该调整项，也不规定输入LLM的顺序。应分别对照集合选择和位置策略，不能把二者的作用合并解释。 教学例子：两个方案可保留相同十件商品却顺序不同；也可顺序规则相同但因调整项选出不同集合。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-51d8e0ae47576123">RPTune编排与只做向量top-k召回有何区别？</h2>
+<h2 id="qa-51d8e0ae47576123">RPTune的商品打分与后续提示排序，是否都等同于普通向量top-k？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arptune">RPTune: Learned Context Curation for LLM Catalog Search</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>除了语义点积还学query-item调整项，并控制进入LLM后的顺序；纯召回只决定集合。位置策略依模型上下文行为，不保证换模型仍同样有效。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两方案召回集合相同，提示排序不同仍可能改变LLM选择。</p>
+<p><strong>答案：</strong>不等同。打分除语义点积外还有查询与商品的可学习调整项；保留top-k后还要执行规定的位置编排。纯向量top-k既不包含该调整项，也不规定输入LLM的顺序。应分别对照集合选择和位置策略，不能把二者的作用合并解释。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个方案可保留相同十件商品却顺序不同；也可顺序规则相同但因调整项选出不同集合。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00964">原论文</a> · <a href="../../../../reproductions/2610.00964-rptune/">实现解读</a> · <a href="#qa-51d8e0ae47576123">问题链接</a></p>
 </details>
@@ -345,16 +345,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.05063">原论文</a> · <a href="../../../../reproductions/2609.05063-allecompanion/">实现解读</a> · <a href="#qa-26fc233a12d9d993">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:setmir" data-paper-title="SetMIR: Multi-Interest Retrieval as Set Prediction" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="SetMIR: Multi-Interest Retrieval as Set Prediction 搜广推与 LLM 应用 Snap Inc. 2026-08-31 SetMIR 用 K 个可学习 query 解码无序兴趣集合，Hungarian matching 强制一对一分工以抑制兴趣坍缩；presence head 判断本次请求实际需要哪些兴趣，服务时再用 query-level NMS 删除重复 ANN 请求。 复现级别：核心机制 + 公开数据。复现级别：核心机制 + 公开数据。复现兴趣集合、presence 门控和 query-level NMS。未复刻私有 DPA 历史、生产 Transformer checkpoint 与 ANN dispatch；仅声明 CPU 公共数据路径。用公开类型簇代理兴趣 query，执行 presence 与相关性 NMS；NDCG@10 从 0.05401 到 0.05665。三 seed 产物见 metrics/public-seeds42-44.json。  multi-interest-retrieval set-prediction dynamic-dispatch 搜广推 候选生成与搜索匹配 SetMIR为什么把兴趣当无序集合？ 多兴趣没有天然第一个第二个，learnable query输出集合，一对一匹配分工减少多个query都追同一兴趣，presence再决定实际需多少兴趣。 例如用户同时喜欢烹饪和骑行，两个兴趣槽不必固定语义编号。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:setmir" data-paper-title="SetMIR: Multi-Interest Retrieval as Set Prediction" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="SetMIR: Multi-Interest Retrieval as Set Prediction 搜广推与 LLM 应用 Snap Inc. 2026-08-31 SetMIR 用 K 个可学习 query 解码无序兴趣集合，Hungarian matching 强制一对一分工以抑制兴趣坍缩；presence head 判断本次请求实际需要哪些兴趣，服务时再用 query-level NMS 删除重复 ANN 请求。 复现级别：核心机制 + 公开数据。复现级别：核心机制 + 公开数据。复现兴趣集合、presence 门控和 query-level NMS。未复刻私有 DPA 历史、生产 Transformer checkpoint 与 ANN dispatch；仅声明 CPU 公共数据路径。用公开类型簇代理兴趣 query，执行 presence 与相关性 NMS；NDCG@10 从 0.05401 到 0.05665。三 seed 产物见 metrics/public-seeds42-44.json。  multi-interest-retrieval set-prediction dynamic-dispatch 搜广推 候选生成与搜索匹配 SetMIR的query是用户手动输入的搜索词吗？ 不是。这里的query是模型产生的兴趣检索向量或槽位，用于向物品库发出ANN请求，不要求用户写出文本搜索词。多个槽位表达不同潜在兴趣，实际激活数还需由服务规则决定；向量名称相同不代表它与搜索业务中的自然语言query同义。 教学例子：用户只打开推荐页，模型仍可生成运动与摄影两个兴趣向量；这不表示用户刚输入过两个搜索词。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-setmir-231692c0" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1dbb7554298c2ace">SetMIR为什么把兴趣当无序集合？</h2>
+<h2 id="qa-1dbb7554298c2ace">SetMIR的query是用户手动输入的搜索词吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asetmir">SetMIR: Multi-Interest Retrieval as Set Prediction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Snap Inc.</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多兴趣没有天然第一个第二个，learnable query输出集合，一对一匹配分工减少多个query都追同一兴趣，presence再决定实际需多少兴趣。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户同时喜欢烹饪和骑行，两个兴趣槽不必固定语义编号。</p>
+<p><strong>答案：</strong>不是。这里的query是模型产生的兴趣检索向量或槽位，用于向物品库发出ANN请求，不要求用户写出文本搜索词。多个槽位表达不同潜在兴趣，实际激活数还需由服务规则决定；向量名称相同不代表它与搜索业务中的自然语言query同义。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>用户只打开推荐页，模型仍可生成运动与摄影两个兴趣向量；这不表示用户刚输入过两个搜索词。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.30251">原论文</a> · <a href="../../../../reproductions/2608.30251-setmir/">实现解读</a> · <a href="#qa-1dbb7554298c2ace">问题链接</a></p>
 </details>
@@ -372,15 +372,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.30251">原论文</a> · <a href="../../../../reproductions/2608.30251-setmir/">实现解读</a> · <a href="#qa-92167d9dee9cf98d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:setmir" data-paper-title="SetMIR: Multi-Interest Retrieval as Set Prediction" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="SetMIR: Multi-Interest Retrieval as Set Prediction 搜广推与 LLM 应用 Snap Inc. 2026-08-31 SetMIR 用 K 个可学习 query 解码无序兴趣集合，Hungarian matching 强制一对一分工以抑制兴趣坍缩；presence head 判断本次请求实际需要哪些兴趣，服务时再用 query-level NMS 删除重复 ANN 请求。 复现级别：核心机制 + 公开数据。复现级别：核心机制 + 公开数据。复现兴趣集合、presence 门控和 query-level NMS。未复刻私有 DPA 历史、生产 Transformer checkpoint 与 ANN dispatch；仅声明 CPU 公共数据路径。用公开类型簇代理兴趣 query，执行 presence 与相关性 NMS；NDCG@10 从 0.05401 到 0.05665。三 seed 产物见 metrics/public-seeds42-44.json。  multi-interest-retrieval set-prediction dynamic-dispatch 搜广推 候选生成与搜索匹配 Hungarian matching与服务query NMS各解决什么？ 匹配在训练中分配目标避免槽坍缩，NMS在服务中减少重复ANN请求。presence门另控制有效数量，不能只做NMS就声称训练集合分工已实现。 例如两个槽训练后仍近似相同，在线去重只是减少重复调用而非补回缺失兴趣。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:setmir" data-paper-title="SetMIR: Multi-Interest Retrieval as Set Prediction" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="SetMIR: Multi-Interest Retrieval as Set Prediction 搜广推与 LLM 应用 Snap Inc. 2026-08-31 SetMIR 用 K 个可学习 query 解码无序兴趣集合，Hungarian matching 强制一对一分工以抑制兴趣坍缩；presence head 判断本次请求实际需要哪些兴趣，服务时再用 query-level NMS 删除重复 ANN 请求。 复现级别：核心机制 + 公开数据。复现级别：核心机制 + 公开数据。复现兴趣集合、presence 门控和 query-level NMS。未复刻私有 DPA 历史、生产 Transformer checkpoint 与 ANN dispatch；仅声明 CPU 公共数据路径。用公开类型簇代理兴趣 query，执行 presence 与相关性 NMS；NDCG@10 从 0.05401 到 0.05665。三 seed 产物见 metrics/public-seeds42-44.json。  multi-interest-retrieval set-prediction dynamic-dispatch 搜广推 候选生成与搜索匹配 SetMIR的一对一集合匹配，与让每个兴趣槽独立挑同一个正例有什么不同？ 一对一匹配在整组槽位与目标之间分配对应关系，限制多个槽反复解释同一目标；独立挑选则可能所有槽都被同一容易正例吸引。它处理训练分工，仍需可靠目标集合，不能仅因匹配唯一就认定全部用户兴趣都已被发现。 教学例子：两个槽与运动、摄影两项目标应分配不同对应；若各自贪选最容易的运动项，摄影目标可能无人负责。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-37ab5a0653ba7420">Hungarian matching与服务query NMS各解决什么？</h2>
+<h2 id="qa-37ab5a0653ba7420">SetMIR的一对一集合匹配，与让每个兴趣槽独立挑同一个正例有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asetmir">SetMIR: Multi-Interest Retrieval as Set Prediction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Snap Inc.</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>匹配在训练中分配目标避免槽坍缩，NMS在服务中减少重复ANN请求。presence门另控制有效数量，不能只做NMS就声称训练集合分工已实现。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两个槽训练后仍近似相同，在线去重只是减少重复调用而非补回缺失兴趣。</p>
+<p><strong>答案：</strong>一对一匹配在整组槽位与目标之间分配对应关系，限制多个槽反复解释同一目标；独立挑选则可能所有槽都被同一容易正例吸引。它处理训练分工，仍需可靠目标集合，不能仅因匹配唯一就认定全部用户兴趣都已被发现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个槽与运动、摄影两项目标应分配不同对应；若各自贪选最容易的运动项，摄影目标可能无人负责。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.30251">原论文</a> · <a href="../../../../reproductions/2608.30251-setmir/">实现解读</a> · <a href="#qa-37ab5a0653ba7420">问题链接</a></p>
 </details>
@@ -1087,16 +1087,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.18379">原论文</a> · <a href="../../../../reproductions/2606.18379-rankgraph2/">实现解读</a> · <a href="#qa-e362d9fc430e281c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:toolrec" data-paper-title="ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants 搜广推与 LLM 应用 Huazhong University of Science and Technology 2026-06-07 在 KTO 式偏好目标上同时加入用户侧校准与工具频率驱动的动态系统侧校准，提升会触发工具的查询，同时约束上下文相关性下降。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04819，相对变化 -10.78%。本地代理目标与论文生产任务不同，不能外推线上 lift。  query-recommendation preference-alignment tool-use 搜广推 候选生成与搜索匹配 ToolRec为什么同时校准用户偏好和工具使用频率？ 推荐会触发工具的query需相关，但系统也需控制不同工具调用分布，单用户反馈无法覆盖系统负载或频率目标。双侧校准在偏好学习中加入这两种取舍。 例如既要推荐用户真需要的查询，也不能把全部流量挤到同一昂贵工具。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:toolrec" data-paper-title="ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants 搜广推与 LLM 应用 Huazhong University of Science and Technology 2026-06-07 在 KTO 式偏好目标上同时加入用户侧校准与工具频率驱动的动态系统侧校准，提升会触发工具的查询，同时约束上下文相关性下降。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04819，相对变化 -10.78%。本地代理目标与论文生产任务不同，不能外推线上 lift。  query-recommendation preference-alignment tool-use 搜广推 候选生成与搜索匹配 ToolRec的工具频率信号，表示工具调用越多就越好吗？ 不是。频率是系统侧校准信息，与用户请求是否适合触发某工具是不同轴。它用于调节供需或使用分布，不能替代上下文相关性，也不是每次调用成功的质量标签。先区分频率与效用，才能读懂双侧目标为什么不能只报触发率。 教学例子：某工具调用很少，增加频率也不能使无关问题适合它；调用率上升应与用户相关性一起检查。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-toolrec-2caef440" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-25a7db10326f0f87">ToolRec为什么同时校准用户偏好和工具使用频率？</h2>
+<h2 id="qa-25a7db10326f0f87">ToolRec的工具频率信号，表示工具调用越多就越好吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Atoolrec">ToolRec: Calibrated Preference Alignment for Query Recommendation in On-Device Assistants</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Huazhong University of Science and Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>推荐会触发工具的query需相关，但系统也需控制不同工具调用分布，单用户反馈无法覆盖系统负载或频率目标。双侧校准在偏好学习中加入这两种取舍。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如既要推荐用户真需要的查询，也不能把全部流量挤到同一昂贵工具。</p>
+<p><strong>答案：</strong>不是。频率是系统侧校准信息，与用户请求是否适合触发某工具是不同轴。它用于调节供需或使用分布，不能替代上下文相关性，也不是每次调用成功的质量标签。先区分频率与效用，才能读懂双侧目标为什么不能只报触发率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某工具调用很少，增加频率也不能使无关问题适合它；调用率上升应与用户相关性一起检查。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.08466">原论文</a> · <a href="../../../../reproductions/2606.08466-toolrec/">实现解读</a> · <a href="#qa-25a7db10326f0f87">问题链接</a></p>
 </details>
@@ -1299,16 +1299,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.19651">原论文</a> · <a href="../../../../reproductions/2605.19651-mdcns/">实现解读</a> · <a href="#qa-55b0814cd9fac24b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:policy-facet" data-paper-title="Policy-Grounded Dynamic Facet Suggestions for Job Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="Policy-Grounded Dynamic Facet Suggestions for Job Search 搜广推与 LLM 应用 LinkedIn 2026-05-15 先由人工与 LLM 维护符合产品策略的 facet taxonomy，再用 embedding SLM 召回候选，以生成式 SLM 做单 token 点式评分；前缀缓存和批处理满足实时延迟。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04713，相对变化 -12.73%。本地代理目标与论文生产任务不同，不能外推线上 lift。  job-search facet-retrieval policy-ranking 搜广推 候选生成与搜索匹配 Policy Facet 为什么先有人与 LLM 维护 taxonomy，再让模型挑分面？ 策略要求可追溯、可检查的候选边界，taxonomy 限定可选主题，模型再按用户和 query 选适合项。维护集合降低自由生成风险，也限制新主题覆盖。分类合法不保证与当前意图相关，仍需检索和评分。 示意：亲子旅行只能从审定活动主题选分面，避免临时编出不合产品策略的选项；但合法海岛活动对冬季滑雪查询仍可能无关。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:policy-facet" data-paper-title="Policy-Grounded Dynamic Facet Suggestions for Job Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="Policy-Grounded Dynamic Facet Suggestions for Job Search 搜广推与 LLM 应用 LinkedIn 2026-05-15 先由人工与 LLM 维护符合产品策略的 facet taxonomy，再用 embedding SLM 召回候选，以生成式 SLM 做单 token 点式评分；前缀缓存和批处理满足实时延迟。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04713，相对变化 -12.73%。本地代理目标与论文生产任务不同，不能外推线上 lift。  job-search facet-retrieval policy-ranking 搜广推 候选生成与搜索匹配 Policy Facet 的 facet 与最终商品或文档结果，是同一种候选吗？ 不是。facet 是帮助用户细化搜索的主题或属性选项，选中后可改变接下来的查询或浏览范围；item 是实际检索对象。分面先要符合 taxonomy 和当前需求，再判断它是否提供有用细化。不能因某商品得分高，就直接把商品标题当作合适分面。 示意：旅行搜索里的“亲子活动”是细化方向，具体博物馆门票是结果；前者帮助选择需求，后者满足需求，两者不应共用无说明的标签。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-policy-facet-10555aa9" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1d64a12b7237f3f1">Policy Facet 为什么先有人与 LLM 维护 taxonomy，再让模型挑分面？</h2>
+<h2 id="qa-1d64a12b7237f3f1">Policy Facet 的 facet 与最终商品或文档结果，是同一种候选吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apolicy-facet">Policy-Grounded Dynamic Facet Suggestions for Job Search</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · LinkedIn</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>策略要求可追溯、可检查的候选边界，taxonomy 限定可选主题，模型再按用户和 query 选适合项。维护集合降低自由生成风险，也限制新主题覆盖。分类合法不保证与当前意图相关，仍需检索和评分。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>亲子旅行只能从审定活动主题选分面，避免临时编出不合产品策略的选项；但合法海岛活动对冬季滑雪查询仍可能无关。</p>
+<p><strong>答案：</strong>不是。facet 是帮助用户细化搜索的主题或属性选项，选中后可改变接下来的查询或浏览范围；item 是实际检索对象。分面先要符合 taxonomy 和当前需求，再判断它是否提供有用细化。不能因某商品得分高，就直接把商品标题当作合适分面。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>旅行搜索里的“亲子活动”是细化方向，具体博物馆门票是结果；前者帮助选择需求，后者满足需求，两者不应共用无说明的标签。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.16479">原论文</a> · <a href="../../../../reproductions/2605.16479-policy-facet/">实现解读</a> · <a href="#qa-1d64a12b7237f3f1">问题链接</a></p>
 </details>

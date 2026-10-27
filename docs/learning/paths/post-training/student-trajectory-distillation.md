@@ -1299,16 +1299,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.08337">原论文</a> · <a href="../../../../post-training/2609.08337-route-opd/">实现解读</a> · <a href="#qa-a0675a60c2b363d9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:opd-search-plus" data-paper-title="OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning LLM 后训练 University of Chinese Academy of Sciences 2026-08-25 搜索 Agent 的多轮 SFT 数据昂贵，任务专用教师又需先训练。OPDSearch+ 直接冻结通用 instruct teacher，在学生自己的在线搜索轨迹上用 forward-KL 蒸馏 query、推理和答案 token；随后 RL 从更好的行为分布继续优化，突破教师与纯 RL 的局部最优。 复现级别：核心机制 candidate-policy。复现级别：核心机制 candidate-policy。实际执行 clipped forward-KL 与后续 verifier RL 两阶段目标；未训练 Qwen2.5-3B 搜索 Agent。本地用候选级 process signal 代替真实 query/reasoning/answer token 与搜索引擎反馈；未运行 3B/14B 模型、Wikipedia index 或七个 QA benchmark。arithmetic-smoke、100 steps、seed 42：accuracy 0.1953 → 0.6641。  搜索增强 OPD + RL LLM 后训练 在策略蒸馏：沿学生实际走过的前缀学习 OPDSearch+为什么先用通用教师而不先训练专用搜索教师？ 专用教师和多轮示范成本高，冻结通用instruct教师可直接在学生实时搜索状态提供指导，再由任务RL继续优化。是否超越教师仍需独立实验，不能只靠阶段设计推断。 例如通用教师先指导如何写query，学生随后用搜索任务反馈继续改进。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:opd-search-plus" data-paper-title="OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning LLM 后训练 University of Chinese Academy of Sciences 2026-08-25 搜索 Agent 的多轮 SFT 数据昂贵，任务专用教师又需先训练。OPDSearch+ 直接冻结通用 instruct teacher，在学生自己的在线搜索轨迹上用 forward-KL 蒸馏 query、推理和答案 token；随后 RL 从更好的行为分布继续优化，突破教师与纯 RL 的局部最优。 复现级别：核心机制 candidate-policy。复现级别：核心机制 candidate-policy。实际执行 clipped forward-KL 与后续 verifier RL 两阶段目标；未训练 Qwen2.5-3B 搜索 Agent。本地用候选级 process signal 代替真实 query/reasoning/answer token 与搜索引擎反馈；未运行 3B/14B 模型、Wikipedia index 或七个 QA benchmark。arithmetic-smoke、100 steps、seed 42：accuracy 0.1953 → 0.6641。  搜索增强 OPD + RL LLM 后训练 在策略蒸馏：沿学生实际走过的前缀学习 OPDSearch+中的搜索返回正文，也是学生要模仿生成的内容吗？ 不是。学生生成query、推理和答案，搜索环境返回的正文是后续决策的条件信息。教师在学生轨迹上给指导，并不把工具返回变成学生应输出的台词。先区分模型动作与环境观察，才能正确理解搜索Agent训练的数据单位。 教学例子：搜索工具返回一段网页，学生下一步可以据此生成新query或答案；训练不要求学生逐字“扮演”网页返回。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 在策略蒸馏：沿学生实际走过的前缀学习</a></p>
 <span id="paper-post-training-opd-search-plus-8653157e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8a83045bd25cf420">OPDSearch+为什么先用通用教师而不先训练专用搜索教师？</h2>
+<h2 id="qa-8a83045bd25cf420">OPDSearch+中的搜索返回正文，也是学生要模仿生成的内容吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aopd-search-plus">OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>专用教师和多轮示范成本高，冻结通用instruct教师可直接在学生实时搜索状态提供指导，再由任务RL继续优化。是否超越教师仍需独立实验，不能只靠阶段设计推断。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如通用教师先指导如何写query，学生随后用搜索任务反馈继续改进。</p>
+<p><strong>答案：</strong>不是。学生生成query、推理和答案，搜索环境返回的正文是后续决策的条件信息。教师在学生轨迹上给指导，并不把工具返回变成学生应输出的台词。先区分模型动作与环境观察，才能正确理解搜索Agent训练的数据单位。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>搜索工具返回一段网页，学生下一步可以据此生成新query或答案；训练不要求学生逐字“扮演”网页返回。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24310">原论文</a> · <a href="../../../../post-training/2608.24310-opd-search-plus/">实现解读</a> · <a href="#qa-8a83045bd25cf420">问题链接</a></p>
 </details>
@@ -1326,15 +1326,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24310">原论文</a> · <a href="../../../../post-training/2608.24310-opd-search-plus/">实现解读</a> · <a href="#qa-094d17fb80fe1ba6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:opd-search-plus" data-paper-title="OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning LLM 后训练 University of Chinese Academy of Sciences 2026-08-25 搜索 Agent 的多轮 SFT 数据昂贵，任务专用教师又需先训练。OPDSearch+ 直接冻结通用 instruct teacher，在学生自己的在线搜索轨迹上用 forward-KL 蒸馏 query、推理和答案 token；随后 RL 从更好的行为分布继续优化，突破教师与纯 RL 的局部最优。 复现级别：核心机制 candidate-policy。复现级别：核心机制 candidate-policy。实际执行 clipped forward-KL 与后续 verifier RL 两阶段目标；未训练 Qwen2.5-3B 搜索 Agent。本地用候选级 process signal 代替真实 query/reasoning/answer token 与搜索引擎反馈；未运行 3B/14B 模型、Wikipedia index 或七个 QA benchmark。arithmetic-smoke、100 steps、seed 42：accuracy 0.1953 → 0.6641。  搜索增强 OPD + RL LLM 后训练 在策略蒸馏：沿学生实际走过的前缀学习 先OPD后搜索RL与只做教师模仿的目标有何不同？ 模仿受教师行为分布限制，后续奖励训练允许向任务收益探索；但也可能漂移或利用奖励漏洞。阶段衔接不是保证突破局部最优，预算需把两阶段都计入。 例如教师会一种检索措辞，RL可能找到另一种有效查询，但需真实结果验证。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:opd-search-plus" data-paper-title="OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning LLM 后训练 University of Chinese Academy of Sciences 2026-08-25 搜索 Agent 的多轮 SFT 数据昂贵，任务专用教师又需先训练。OPDSearch+ 直接冻结通用 instruct teacher，在学生自己的在线搜索轨迹上用 forward-KL 蒸馏 query、推理和答案 token；随后 RL 从更好的行为分布继续优化，突破教师与纯 RL 的局部最优。 复现级别：核心机制 candidate-policy。复现级别：核心机制 candidate-policy。实际执行 clipped forward-KL 与后续 verifier RL 两阶段目标；未训练 Qwen2.5-3B 搜索 Agent。本地用候选级 process signal 代替真实 query/reasoning/answer token 与搜索引擎反馈；未运行 3B/14B 模型、Wikipedia index 或七个 QA benchmark。arithmetic-smoke、100 steps、seed 42：accuracy 0.1953 → 0.6641。  搜索增强 OPD + RL LLM 后训练 在策略蒸馏：沿学生实际走过的前缀学习 OPDSearch+沿学生搜索轨迹蒸馏，与离线照抄教师完整示范的前缀分布有何不同？ 沿学生轨迹时，教师面对学生实际造成的搜索状态和生成前缀；离线示范的后续监督则基于教师走过的状态。即使教师相同，两类训练暴露给学生的错误恢复场景也不同。这里比较状态分布，不据此断言任意预算下哪种训练更强。 教学例子：学生先搜错关键词后，在线教师评估该状态的下一步；离线正确示范可能从未出现这个错误前缀。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 在策略蒸馏：沿学生实际走过的前缀学习</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-a2e884e5827e1ca8">先OPD后搜索RL与只做教师模仿的目标有何不同？</h2>
+<h2 id="qa-a2e884e5827e1ca8">OPDSearch+沿学生搜索轨迹蒸馏，与离线照抄教师完整示范的前缀分布有何不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aopd-search-plus">OPDSearch+: Search-Enhanced On-Policy Distillation with Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>模仿受教师行为分布限制，后续奖励训练允许向任务收益探索；但也可能漂移或利用奖励漏洞。阶段衔接不是保证突破局部最优，预算需把两阶段都计入。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如教师会一种检索措辞，RL可能找到另一种有效查询，但需真实结果验证。</p>
+<p><strong>答案：</strong>沿学生轨迹时，教师面对学生实际造成的搜索状态和生成前缀；离线示范的后续监督则基于教师走过的状态。即使教师相同，两类训练暴露给学生的错误恢复场景也不同。这里比较状态分布，不据此断言任意预算下哪种训练更强。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>学生先搜错关键词后，在线教师评估该状态的下一步；离线正确示范可能从未出现这个错误前缀。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24310">原论文</a> · <a href="../../../../post-training/2608.24310-opd-search-plus/">实现解读</a> · <a href="#qa-a2e884e5827e1ca8">问题链接</a></p>
 </details>

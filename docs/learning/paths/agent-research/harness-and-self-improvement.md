@@ -27,16 +27,16 @@ hide:
 <p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessmm" data-paper-title="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency Agent Tsinghua University 2026-10-23 Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。不支持的观察、缺少依赖、需要新语义判断时回到原慢 actor。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。无 adapter、operator、运行命令、metrics 或 GPU receipt。本地不实现原生 harness 替代器，不制造 fake callback/receipt，不执行 LLM 生成动作或 shell，不用确定性 fixture 证明节省 token。仅保留规范文献及成本终态；promotion_eligible=false、evolve_integrated=false。既有 Agent tracing 框架不等于本论文已集成。  Agent评测与自进化 原生harness回调替代与成本审计 Agent 运行流程与自进化：改的是哪一层 EDG 为什么只允许复用先前已完成语义解析的动作？ 节省慢调用的前提是下一动作和完整字面参数已经确定，运行时只需依据真实回执检查依赖与 guard。需要新理解时必须 abstain 回慢 actor，不能靠参数语法闭合猜语义；否则所谓复用其实把新的决策藏进未计费启发式。 例如前轮明确“查询后若存在文件则读取此路径”，收到真实存在回执后可执行；若还需判断哪个文件相关，就应回到模型。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessmm" data-paper-title="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency Agent Tsinghua University 2026-10-23 Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。不支持的观察、缺少依赖、需要新语义判断时回到原慢 actor。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。无 adapter、operator、运行命令、metrics 或 GPU receipt。本地不实现原生 harness 替代器，不制造 fake callback/receipt，不执行 LLM 生成动作或 shell，不用确定性 fixture 证明节省 token。仅保留规范文献及成本终态；promotion_eligible=false、evolve_integrated=false。既有 Agent tracing 框架不等于本论文已集成。  Agent评测与自进化 原生harness回调替代与成本审计 Agent 运行流程与自进化：改的是哪一层 HarnessMM 为什么认为工具反馈后再调用一次模型，有时是在重复已经完成的判断？ Agent 可能已在上一轮确定某个后续命令，只是等待前置工具返回；条件满足后再让模型重新推理，未必增加新信息。HarnessMM 研究复用这种已确定决策来减少慢调用。需要新的语义理解时仍应交回模型，复用范围不能扩展成任意预测未来动作。 教学例：已明确“文件创建成功后运行指定测试”，成功回执到来时可检查条件并执行；若出现未知错误，则需要重新判断。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-harnessmm-efa1b75e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1f97e11482fc1d08">EDG 为什么只允许复用先前已完成语义解析的动作？</h2>
+<h2 id="qa-1f97e11482fc1d08">HarnessMM 为什么认为工具反馈后再调用一次模型，有时是在重复已经完成的判断？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharnessmm">HarnessMM: Recursive Self-Improvement for Harness Token Efficiency</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>节省慢调用的前提是下一动作和完整字面参数已经确定，运行时只需依据真实回执检查依赖与 guard。需要新理解时必须 abstain 回慢 actor，不能靠参数语法闭合猜语义；否则所谓复用其实把新的决策藏进未计费启发式。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如前轮明确“查询后若存在文件则读取此路径”，收到真实存在回执后可执行；若还需判断哪个文件相关，就应回到模型。</p>
+<p><strong>答案：</strong>Agent 可能已在上一轮确定某个后续命令，只是等待前置工具返回；条件满足后再让模型重新推理，未必增加新信息。HarnessMM 研究复用这种已确定决策来减少慢调用。需要新的语义理解时仍应交回模型，复用范围不能扩展成任意预测未来动作。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：已明确“文件创建成功后运行指定测试”，成功回执到来时可检查条件并执行；若出现未知错误，则需要重新判断。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32813v1">原论文</a> · <a href="../../../../agent-research/2610.32813-harnessmm/">实现解读</a> · <a href="#qa-1f97e11482fc1d08">问题链接</a></p>
 </details>
@@ -54,28 +54,28 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32813v1">原论文</a> · <a href="../../../../agent-research/2610.32813-harnessmm/">实现解读</a> · <a href="#qa-f0cd3e3e41dc248b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessmm" data-paper-title="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency Agent Tsinghua University 2026-10-23 Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。不支持的观察、缺少依赖、需要新语义判断时回到原慢 actor。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。无 adapter、operator、运行命令、metrics 或 GPU receipt。本地不实现原生 harness 替代器，不制造 fake callback/receipt，不执行 LLM 生成动作或 shell，不用确定性 fixture 证明节省 token。仅保留规范文献及成本终态；promotion_eligible=false、evolve_integrated=false。既有 Agent tracing 框架不等于本论文已集成。  Agent评测与自进化 原生harness回调替代与成本审计 Agent 运行流程与自进化：改的是哪一层 CCS 的真实 bypass 证书与理论“可省一次调用”有什么不同？ 证书绑定 graph、决策边界、前置回执、精确参数与真实工具结果，还要记录原慢 callback 实际未发生。理论 eligibility 只说明可选路径，不能证明原生 harness 真少调模型；开发、选择器、失败和 fallback 等物理成本都需计入。 例如代码判断可复用却仍调用了一次慢 actor，即使工具最终成功，也没有完成 callback 替代，不能记作节省。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessmm" data-paper-title="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency Agent Tsinghua University 2026-10-23 Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。不支持的观察、缺少依赖、需要新语义判断时回到原慢 actor。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。无 adapter、operator、运行命令、metrics 或 GPU receipt。本地不实现原生 harness 替代器，不制造 fake callback/receipt，不执行 LLM 生成动作或 shell，不用确定性 fixture 证明节省 token。仅保留规范文献及成本终态；promotion_eligible=false、evolve_integrated=false。既有 Agent tracing 框架不等于本论文已集成。  Agent评测与自进化 原生harness回调替代与成本审计 Agent 运行流程与自进化：改的是哪一层 复用已确定动作与让模型规划新动作，在线决策自由度有什么区别？ 复用只在先前完成语义解析、参数完整且条件满足的动作中选择，不能凭当前观察自由补参数或发明新步骤；规划则需要解释新信息并构造行动。前者可跳过重复推理，但受覆盖范围限制，不支持或需新判断时应 abstain，不能把结构条件通过当成语义正确。 教学例：已保存的精确测试命令可按成功回执触发；临时发现新的依赖冲突时，不能由复用器猜一个修复命令。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-8a00533c8b214ed6">CCS 的真实 bypass 证书与理论“可省一次调用”有什么不同？</h2>
+<h2 id="qa-8a00533c8b214ed6">复用已确定动作与让模型规划新动作，在线决策自由度有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharnessmm">HarnessMM: Recursive Self-Improvement for Harness Token Efficiency</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>证书绑定 graph、决策边界、前置回执、精确参数与真实工具结果，还要记录原慢 callback 实际未发生。理论 eligibility 只说明可选路径，不能证明原生 harness 真少调模型；开发、选择器、失败和 fallback 等物理成本都需计入。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如代码判断可复用却仍调用了一次慢 actor，即使工具最终成功，也没有完成 callback 替代，不能记作节省。</p>
+<p><strong>答案：</strong>复用只在先前完成语义解析、参数完整且条件满足的动作中选择，不能凭当前观察自由补参数或发明新步骤；规划则需要解释新信息并构造行动。前者可跳过重复推理，但受覆盖范围限制，不支持或需新判断时应 abstain，不能把结构条件通过当成语义正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：已保存的精确测试命令可按成功回执触发；临时发现新的依赖冲突时，不能由复用器猜一个修复命令。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32813v1">原论文</a> · <a href="../../../../agent-research/2610.32813-harnessmm/">实现解读</a> · <a href="#qa-8a00533c8b214ed6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessmm" data-paper-title="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency Agent Tsinghua University 2026-10-23 Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。不支持的观察、缺少依赖、需要新语义判断时回到原慢 actor。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。无 adapter、operator、运行命令、metrics 或 GPU receipt。本地不实现原生 harness 替代器，不制造 fake callback/receipt，不执行 LLM 生成动作或 shell，不用确定性 fixture 证明节省 token。仅保留规范文献及成本终态；promotion_eligible=false、evolve_integrated=false。既有 Agent tracing 框架不等于本论文已集成。  Agent评测与自进化 原生harness回调替代与成本审计 Agent 运行流程与自进化：改的是哪一层 当前本地是否可用一个 fake callback 计数器来验收 HarnessMM？ 不能。README 明确没有原生替代器、真实执行证书或本地 token savings，单计数器无法保真已确定决策与真实工具边界。完整任务成本覆盖所有物理调用，开发成本另摊销；token 降低也不证明时延或能耗，质量端点还需冻结 test。 例如人为把计数从十改成九没有执行精确动作和 receipt，不构成真实 bypass，更不能拿它推算端到端费用降低。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessmm" data-paper-title="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency Agent Tsinghua University 2026-10-23 Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。不支持的观察、缺少依赖、需要新语义判断时回到原慢 actor。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。无 adapter、operator、运行命令、metrics 或 GPU receipt。本地不实现原生 harness 替代器，不制造 fake callback/receipt，不执行 LLM 生成动作或 shell，不用确定性 fixture 证明节省 token。仅保留规范文献及成本终态；promotion_eligible=false、evolve_integrated=false。既有 Agent tracing 框架不等于本论文已集成。  Agent评测与自进化 原生harness回调替代与成本审计 Agent 运行流程与自进化：改的是哪一层 核算 HarnessMM 成本时，为什么连失败、fallback 和开发阶段都不能漏记？ 完整 episode 要累计所有实际调用的输入输出 token，包括生成复用结构、选择、额外上下文、失败恢复和最终整理，cached input 也属于账目。开发成本另记并按部署次数摊销。少一次慢调用只是局部证据，不能直接推出总 token、延迟或能耗都降低。 教学例：省去一次主模型调用，却新增两次选择与恢复调用，应全部计入；一次性建图成本还需按实际复用任务数摊销。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-403e05ae2ac0edb4">当前本地是否可用一个 fake callback 计数器来验收 HarnessMM？</h2>
+<h2 id="qa-403e05ae2ac0edb4">核算 HarnessMM 成本时，为什么连失败、fallback 和开发阶段都不能漏记？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharnessmm">HarnessMM: Recursive Self-Improvement for Harness Token Efficiency</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不能。README 明确没有原生替代器、真实执行证书或本地 token savings，单计数器无法保真已确定决策与真实工具边界。完整任务成本覆盖所有物理调用，开发成本另摊销；token 降低也不证明时延或能耗，质量端点还需冻结 test。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如人为把计数从十改成九没有执行精确动作和 receipt，不构成真实 bypass，更不能拿它推算端到端费用降低。</p>
+<p><strong>答案：</strong>完整 episode 要累计所有实际调用的输入输出 token，包括生成复用结构、选择、额外上下文、失败恢复和最终整理，cached input 也属于账目。开发成本另记并按部署次数摊销。少一次慢调用只是局部证据，不能直接推出总 token、延迟或能耗都降低。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：省去一次主模型调用，却新增两次选择与恢复调用，应全部计入；一次性建图成本还需按实际复用任务数摊销。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32813v1">原论文</a> · <a href="../../../../agent-research/2610.32813-harnessmm/">实现解读</a> · <a href="#qa-403e05ae2ac0edb4">问题链接</a></p>
 </details>
@@ -133,16 +133,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32120v1">原论文</a> · <a href="../../../../agent-research/2610.32120-image-rsi/">实现解读</a> · <a href="#qa-132ef279c0c873ba">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsi-opt" data-paper-title="RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training Agent Purdue University 2026-10-23 单次优化器 Agent 能根据当前训练调整程序，却不会自动把经验带到下一次训练。RSI-Opt 让代码 Agent 根据真实训练证据改写 updater，再将 prompt、自然语言 playbook、代码 library 与 cadence 作为可继承策略，通过外层训练评估递归演化。内层训练保持模型、数据顺序、loss、batch size 和更新步数固定，Agent 在 20 个预定机会读取训练损失/诊断；异常更新器经过短试验后回滚。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。没有可执行 adapter、operator、命令、metrics 或 GPU receipt。仅规范收录方法、风险、原图和成本；没有本地优化器 Agent 或跨run控制器，没有用父策略采样公式冒充整篇论文。promotion_eligible=false、evolve_integrated=false。不会把已有通用进化控制器的名字登记为“已集成”。  Agent评测与自进化 优化器程序与跨运行策略演化 Agent 运行流程与自进化：改的是哪一层 内层 updater 调整与外层策略进化为什么是两层问题？ 内层 Agent 在固定训练运行中读取预定诊断并修改 updater，外层再把 prompt、playbook、library 和 cadence 作为可继承策略跨 run 演化。前者优化一次训练，后者积累如何优化的经验；最终指标只给外层评分，不能回灌内层作为实时答案。 例如同样的数据顺序和步数下，内层选择更新规则，外层比较多次 run 后保留更有效的策略说明，而不是让训练越跑越久。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsi-opt" data-paper-title="RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training Agent Purdue University 2026-10-23 单次优化器 Agent 能根据当前训练调整程序，却不会自动把经验带到下一次训练。RSI-Opt 让代码 Agent 根据真实训练证据改写 updater，再将 prompt、自然语言 playbook、代码 library 与 cadence 作为可继承策略，通过外层训练评估递归演化。内层训练保持模型、数据顺序、loss、batch size 和更新步数固定，Agent 在 20 个预定机会读取训练损失/诊断；异常更新器经过短试验后回滚。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。没有可执行 adapter、operator、命令、metrics 或 GPU receipt。仅规范收录方法、风险、原图和成本；没有本地优化器 Agent 或跨run控制器，没有用父策略采样公式冒充整篇论文。promotion_eligible=false、evolve_integrated=false。不会把已有通用进化控制器的名字登记为“已集成”。  Agent评测与自进化 优化器程序与跨运行策略演化 Agent 运行流程与自进化：改的是哪一层 RSI-Opt 为什么研究“怎样改进优化方法”，而不只优化一个固定模型？ 某种优化更新在当前任务有效，不表示它适用于其他模型或训练阶段。RSI-Opt 把更新策略本身作为可改进对象，在受控任务执行后评价其作用，再决定保留哪些变化。它需要区分内层实际优化与外层方法选择，不能由候选描述或单次高分推导普遍收益。 教学例：先让一种更新规则训练小模型，再据同预算结果比较规则；研究目标是更新方法，而不是只记住某次训练的最好参数。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-rsi-opt-94e59e6e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-066ae36575676705">内层 updater 调整与外层策略进化为什么是两层问题？</h2>
+<h2 id="qa-066ae36575676705">RSI-Opt 为什么研究“怎样改进优化方法”，而不只优化一个固定模型？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsi-opt">RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Purdue University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>内层 Agent 在固定训练运行中读取预定诊断并修改 updater，外层再把 prompt、playbook、library 和 cadence 作为可继承策略跨 run 演化。前者优化一次训练，后者积累如何优化的经验；最终指标只给外层评分，不能回灌内层作为实时答案。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同样的数据顺序和步数下，内层选择更新规则，外层比较多次 run 后保留更有效的策略说明，而不是让训练越跑越久。</p>
+<p><strong>答案：</strong>某种优化更新在当前任务有效，不表示它适用于其他模型或训练阶段。RSI-Opt 把更新策略本身作为可改进对象，在受控任务执行后评价其作用，再决定保留哪些变化。它需要区分内层实际优化与外层方法选择，不能由候选描述或单次高分推导普遍收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先让一种更新规则训练小模型，再据同预算结果比较规则；研究目标是更新方法，而不是只记住某次训练的最好参数。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32026v1">原论文</a> · <a href="../../../../agent-research/2610.32026-rsi-opt/">实现解读</a> · <a href="#qa-066ae36575676705">问题链接</a></p>
 </details>
@@ -213,15 +213,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28601">原论文</a> · <a href="../../../../agent-research/2610.28601-agent-s4/">实现解读</a> · <a href="#qa-290fc521db43089d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-s4" data-paper-title="Evolving Agent Interfaces" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Evolving Agent Interfaces Agent University of California, Santa Barbara 2026-10-20 固定GUI、shell或浏览器接口决定Agent能观察和执行什么。重复点击、逐格编辑、冗长输出等低效行为，既可能来自模型，也可能来自接口设计。Agent S4把接口代码与使用经验一起保存为仓库，固定任务Agent的模型和Harness，由Meta-Agent依据训练轨迹修改仓库。不同于只积累由现有工具组成的技能，它允许改变操作和观察本身。搜索过程中，训练轨迹没有成功标签；验证任务、轨迹、诊断和分数不交给Meta-Agent。验证分数只决定下一步选哪个父仓库。变异修改一个父本，交叉整合两个不同父本； 成本过高，不复现（审查 DONE）。CPU诊断指标与上游工程的差异：本地依据论文保留被淘汰候选及其谱系作为审计记录，未复制上游多岛迁移、SQLite恢复、AWS启动或Landlock沙箱。Repository保存代码文本和使用知识；本模块不exec任意源代码。调用方提供可信的任务Agent、Builder和私有验证grader。这是API数据隔离，不是Python进程沙箱；闭包、回调或字符串本身若已经夹带gold，本模块无法自动识别。真正接入模型时仍须用进程/权限边界保护验证器。  自我进化 接口与Harness进化 Agent 运行流程与自进化：改的是哪一层 低分后代仍入种群，与每轮只接受严格赢家有什么不同？ 保留已评估低分后代允许后来从非最优分支变异或交叉，维持探索而非单调贪心。父本由验证部分分数锦标赛选择，最终 OSWorld 选择另按完整成功优先；两种标准和训练无标签轨迹都不能混入 Meta-Agent 输入。 例如一个暂时低分接口包含有价值操作，未来可与另一父本交叉；若只保留当轮赢家就失去这条探索路径。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-s4" data-paper-title="Evolving Agent Interfaces" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Evolving Agent Interfaces Agent University of California, Santa Barbara 2026-10-20 固定GUI、shell或浏览器接口决定Agent能观察和执行什么。重复点击、逐格编辑、冗长输出等低效行为，既可能来自模型，也可能来自接口设计。Agent S4把接口代码与使用经验一起保存为仓库，固定任务Agent的模型和Harness，由Meta-Agent依据训练轨迹修改仓库。不同于只积累由现有工具组成的技能，它允许改变操作和观察本身。搜索过程中，训练轨迹没有成功标签；验证任务、轨迹、诊断和分数不交给Meta-Agent。验证分数只决定下一步选哪个父仓库。变异修改一个父本，交叉整合两个不同父本； 成本过高，不复现（审查 DONE）。CPU诊断指标与上游工程的差异：本地依据论文保留被淘汰候选及其谱系作为审计记录，未复制上游多岛迁移、SQLite恢复、AWS启动或Landlock沙箱。Repository保存代码文本和使用知识；本模块不exec任意源代码。调用方提供可信的任务Agent、Builder和私有验证grader。这是API数据隔离，不是Python进程沙箱；闭包、回调或字符串本身若已经夹带gold，本模块无法自动识别。真正接入模型时仍须用进程/权限边界保护验证器。  自我进化 接口与Harness进化 Agent 运行流程与自进化：改的是哪一层 变异一个接口父仓库与交叉两个父仓库，探索的改动来源有什么不同？ 变异从单个父仓库出发修改接口及使用知识，交叉则综合两个不同父本的结构或经验。两者都由无标签训练轨迹支持构建，私有验证结果只用于种群选择，不能传给 Meta-Agent 当答案。交叉增加组合来源，也可能带来不兼容，仍要冻结后代再独立执行评价。 教学例：一个父本改善截图观察，另一个改善批量编辑；交叉可尝试结合二者，而单父变异只依据当前仓库继续修改。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-f4a95f794a9b3ec9">低分后代仍入种群，与每轮只接受严格赢家有什么不同？</h2>
+<h2 id="qa-f4a95f794a9b3ec9">变异一个接口父仓库与交叉两个父仓库，探索的改动来源有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-s4">Evolving Agent Interfaces</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, Santa Barbara</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>保留已评估低分后代允许后来从非最优分支变异或交叉，维持探索而非单调贪心。父本由验证部分分数锦标赛选择，最终 OSWorld 选择另按完整成功优先；两种标准和训练无标签轨迹都不能混入 Meta-Agent 输入。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个暂时低分接口包含有价值操作，未来可与另一父本交叉；若只保留当轮赢家就失去这条探索路径。</p>
+<p><strong>答案：</strong>变异从单个父仓库出发修改接口及使用知识，交叉则综合两个不同父本的结构或经验。两者都由无标签训练轨迹支持构建，私有验证结果只用于种群选择，不能传给 Meta-Agent 当答案。交叉增加组合来源，也可能带来不兼容，仍要冻结后代再独立执行评价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个父本改善截图观察，另一个改善批量编辑；交叉可尝试结合二者，而单父变异只依据当前仓库继续修改。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28601">原论文</a> · <a href="../../../../agent-research/2610.28601-agent-s4/">实现解读</a> · <a href="#qa-f4a95f794a9b3ec9">问题链接</a></p>
 </details>
@@ -239,16 +239,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28601">原论文</a> · <a href="../../../../agent-research/2610.28601-agent-s4/">实现解读</a> · <a href="#qa-e85d3ecb46446354">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:oo-harness" data-paper-title="Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design Agent University of Illinois Urbana-Champaign 2026-10-20 全任务共用一个harness可能互相干扰；为每类任务复制完整实现又难以复用。作者将专用harness写成父类的子类，只覆盖需要改变的prompt、工具或执行hook。发现阶段围绕任务簇改进，部署阶段冻结代码和经验，再用任务及可观察base轨迹选择完整类；父类方法在一个实例里执行，不是额外运行多个祖先Agent。§3 成本过高，不复现（审查 DONE），不下载模型、不试跑完整实验、不自动重试。HarnessDiscovery只接受可信的Python类，不从字符串exec候选。它保存发现阶段的接受和拒绝记录；freeze只复制当前可路由类描述、必要祖先类和路由经验，不传发现分数。发现/held-out ID必须不相交，任务簇只允许发现集ID，部署只接受预声明held-out任务。Actor和路由入口只接受exact PublicTask并按白名单重建对象，拒绝附带gold字段的子类；工具观察也拒绝子类并重建，不能借嵌套对象携带隐藏grader元数据。  自我进化 Harness搜索与继承 Agent 运行流程与自进化：改的是哪一层 子类 harness 与运行一群祖先 Agent 有什么不同？ 子类继承父类实现，只覆盖需要改变的 prompt、工具或执行 hook，父方法在同一实例内执行。祖先类用于代码复用而非额外模型角色，不能把继承链层数当并行 Agent 数或推理深度；部署选择的是冻结完整类。 例如专用类只覆盖完成检查，其余逻辑调用父方法，不代表父 Agent 先独立跑一遍再把答案交给子 Agent。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:oo-harness" data-paper-title="Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design Agent University of Illinois Urbana-Champaign 2026-10-20 全任务共用一个harness可能互相干扰；为每类任务复制完整实现又难以复用。作者将专用harness写成父类的子类，只覆盖需要改变的prompt、工具或执行hook。发现阶段围绕任务簇改进，部署阶段冻结代码和经验，再用任务及可观察base轨迹选择完整类；父类方法在一个实例里执行，不是额外运行多个祖先Agent。§3 成本过高，不复现（审查 DONE），不下载模型、不试跑完整实验、不自动重试。HarnessDiscovery只接受可信的Python类，不从字符串exec候选。它保存发现阶段的接受和拒绝记录；freeze只复制当前可路由类描述、必要祖先类和路由经验，不传发现分数。发现/held-out ID必须不相交，任务簇只允许发现集ID，部署只接受预声明held-out任务。Actor和路由入口只接受exact PublicTask并按白名单重建对象，拒绝附带gold字段的子类；工具观察也拒绝子类并重建，不能借嵌套对象携带隐藏grader元数据。  自我进化 Harness搜索与继承 Agent 运行流程与自进化：改的是哪一层 OO-Harness 为什么用可继承的 harness 类组织面向不同任务的专门化？ 单一通用流程未必适合所有任务，但为每类任务完全复制代码又难共享已验证逻辑。OO-Harness 用类和继承表达可复用部分与专门改动，再按任务选择适合的版本。继承关系是代码组织，不代表运行更多 Agent，也不保证专用版本在所有任务上优于基类。 教学例：浏览任务子类沿用基础恢复逻辑，只改搜索步骤；选择该子类后执行的是一套流程，并非父类与子类各跑一次。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-oo-harness-cd6587e9" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-001a95d0b85c9840">子类 harness 与运行一群祖先 Agent 有什么不同？</h2>
+<h2 id="qa-001a95d0b85c9840">OO-Harness 为什么用可继承的 harness 类组织面向不同任务的专门化？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aoo-harness">Object-Oriented Harness: Evolving Agent Harnesses through Object-Oriented Design</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>子类继承父类实现，只覆盖需要改变的 prompt、工具或执行 hook，父方法在同一实例内执行。祖先类用于代码复用而非额外模型角色，不能把继承链层数当并行 Agent 数或推理深度；部署选择的是冻结完整类。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如专用类只覆盖完成检查，其余逻辑调用父方法，不代表父 Agent 先独立跑一遍再把答案交给子 Agent。</p>
+<p><strong>答案：</strong>单一通用流程未必适合所有任务，但为每类任务完全复制代码又难共享已验证逻辑。OO-Harness 用类和继承表达可复用部分与专门改动，再按任务选择适合的版本。继承关系是代码组织，不代表运行更多 Agent，也不保证专用版本在所有任务上优于基类。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：浏览任务子类沿用基础恢复逻辑，只改搜索步骤；选择该子类后执行的是一套流程，并非父类与子类各跑一次。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28380">原论文</a> · <a href="../../../../agent-research/2610.28380-oo-harness/">实现解读</a> · <a href="#qa-001a95d0b85c9840">问题链接</a></p>
 </details>
@@ -292,16 +292,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28380">原论文</a> · <a href="../../../../agent-research/2610.28380-oo-harness/">实现解读</a> · <a href="#qa-c54046ce9413a3c7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:aptamer-lab-loop" data-paper-title="Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery Agent Google Research 2026-10-17 该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。这里仅讨论研究编排与证据边界，不提供生物实验操作流程。 完整实验成本过高，不复现（审查 DONE）。Google优先资料收录；完整实验成本过高，不复现（审查 DONE）。没有低成本代理被标成实现，不进入自动训练队列。完整研究需要专业实验室、物理测量与多轮7–10天反馈周期，无法在单A100/A30或本地Mac低成本完成。依据Results R.1/Figure1直接标记成本过高，不复现（审查 DONE），未启动模型下载、实验运行或无意义代理测试。  科学研究与实验闭环 物理实验反馈 Agent 运行流程与自进化：改的是哪一层 真实测量在 lab-in-the-loop 中为什么能否定计算代理高分？ 计算模型只估计某些性质，可能遗漏真实环境中的相互作用和误差；新实验提供独立物理反馈，决定候选是否有效。研究闭环关键是保留成功与失败并调整下一轮，而不是让同一个计算打分器反复给自己证明。 例如候选在软件预测中排名很高，但新测量不支持预期表现，应记录这个反例，而非把预测分数改称实验成功。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:aptamer-lab-loop" data-paper-title="Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery Agent Google Research 2026-10-17 该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。这里仅讨论研究编排与证据边界，不提供生物实验操作流程。 完整实验成本过高，不复现（审查 DONE）。Google优先资料收录；完整实验成本过高，不复现（审查 DONE）。没有低成本代理被标成实现，不进入自动训练队列。完整研究需要专业实验室、物理测量与多轮7–10天反馈周期，无法在单A100/A30或本地Mac低成本完成。依据Results R.1/Figure1直接标记成本过高，不复现（审查 DONE），未启动模型下载、实验运行或无意义代理测试。  科学研究与实验闭环 物理实验反馈 Agent 运行流程与自进化：改的是哪一层 适配体设计为什么需要反复连接计算提案与真实实验反馈？ 计算模型只能按已有数据估计候选性质，实际分子表现仍可能受未建模因素影响。该工作研究用真实测量检验提案并支持下一轮设计，使实验而非预测分数成为关键反馈。不同轮候选和筛选条件会变化，不能将闭环进展自动解读为固定测试集能力提升。 教学例：模型偏好的候选在实际测量中表现一般，下一轮应利用这个反例；重新调高预测分数并不会改变真实测量结果。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-aptamer-lab-loop-d80e05ef" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f037abf7dbe5b196">真实测量在 lab-in-the-loop 中为什么能否定计算代理高分？</h2>
+<h2 id="qa-f037abf7dbe5b196">适配体设计为什么需要反复连接计算提案与真实实验反馈？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aaptamer-lab-loop">Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>计算模型只估计某些性质，可能遗漏真实环境中的相互作用和误差；新实验提供独立物理反馈，决定候选是否有效。研究闭环关键是保留成功与失败并调整下一轮，而不是让同一个计算打分器反复给自己证明。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如候选在软件预测中排名很高，但新测量不支持预期表现，应记录这个反例，而非把预测分数改称实验成功。</p>
+<p><strong>答案：</strong>计算模型只能按已有数据估计候选性质，实际分子表现仍可能受未建模因素影响。该工作研究用真实测量检验提案并支持下一轮设计，使实验而非预测分数成为关键反馈。不同轮候选和筛选条件会变化，不能将闭环进展自动解读为固定测试集能力提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型偏好的候选在实际测量中表现一般，下一轮应利用这个反例；重新调高预测分数并不会改变真实测量结果。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24806v1">原论文</a> · <a href="../../../../agent-research/2610.24806-aptamer-lab-loop/">实现解读</a> · <a href="#qa-f037abf7dbe5b196">问题链接</a></p>
 </details>
@@ -319,15 +319,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24806v1">原论文</a> · <a href="../../../../agent-research/2610.24806-aptamer-lab-loop/">实现解读</a> · <a href="#qa-356a38d089051a53">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:aptamer-lab-loop" data-paper-title="Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery Agent Google Research 2026-10-17 该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。这里仅讨论研究编排与证据边界，不提供生物实验操作流程。 完整实验成本过高，不复现（审查 DONE）。Google优先资料收录；完整实验成本过高，不复现（审查 DONE）。没有低成本代理被标成实现，不进入自动训练队列。完整研究需要专业实验室、物理测量与多轮7–10天反馈周期，无法在单A100/A30或本地Mac低成本完成。依据Results R.1/Figure1直接标记成本过高，不复现（审查 DONE），未启动模型下载、实验运行或无意义代理测试。  科学研究与实验闭环 物理实验反馈 Agent 运行流程与自进化：改的是哪一层 不同轮命中比例上升与固定测试集模型提升有什么不同？ 每轮候选、策略和物理干预都改变，命中比例描述适应后的新实验结果，不是同一独立测试集上的配对机器学习差值。可讨论闭环研究进展，不能据此推断统一 Agent benchmark 成功率或独立因果效果。 例如第二轮主动选择更容易测量的候选，比例变化同时反映选择变化，不能直接当相同题库准确率增加。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:aptamer-lab-loop" data-paper-title="Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery Agent Google Research 2026-10-17 该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。这里仅讨论研究编排与证据边界，不提供生物实验操作流程。 完整实验成本过高，不复现（审查 DONE）。Google优先资料收录；完整实验成本过高，不复现（审查 DONE）。没有低成本代理被标成实现，不进入自动训练队列。完整研究需要专业实验室、物理测量与多轮7–10天反馈周期，无法在单A100/A30或本地Mac低成本完成。依据Results R.1/Figure1直接标记成本过高，不复现（审查 DONE），未启动模型下载、实验运行或无意义代理测试。  科学研究与实验闭环 物理实验反馈 Agent 运行流程与自进化：改的是哪一层 新增真实测量与反复重新评价已有实验记录，分别增加什么信息？ 重新评价已有记录可改进解释或候选选择，却没有产生新的物理观察；新增测量能检验尚未验证的候选，可能揭示模型遗漏。二者都可参与研究，但不能把再计算说成独立实验，也不能用模拟代理替代实验终点。跨轮比较还需保留候选和测量条件变化。 教学例：对十个旧结果重新排序，仍只有十次已发生测量；真正测试第十一个候选，才增加一个新的外部反馈。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c4f29aea97ea8cba">不同轮命中比例上升与固定测试集模型提升有什么不同？</h2>
+<h2 id="qa-c4f29aea97ea8cba">新增真实测量与反复重新评价已有实验记录，分别增加什么信息？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aaptamer-lab-loop">Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>每轮候选、策略和物理干预都改变，命中比例描述适应后的新实验结果，不是同一独立测试集上的配对机器学习差值。可讨论闭环研究进展，不能据此推断统一 Agent benchmark 成功率或独立因果效果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第二轮主动选择更容易测量的候选，比例变化同时反映选择变化，不能直接当相同题库准确率增加。</p>
+<p><strong>答案：</strong>重新评价已有记录可改进解释或候选选择，却没有产生新的物理观察；新增测量能检验尚未验证的候选，可能揭示模型遗漏。二者都可参与研究，但不能把再计算说成独立实验，也不能用模拟代理替代实验终点。跨轮比较还需保留候选和测量条件变化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：对十个旧结果重新排序，仍只有十次已发生测量；真正测试第十一个候选，才增加一个新的外部反馈。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24806v1">原论文</a> · <a href="../../../../agent-research/2610.24806-aptamer-lab-loop/">实现解读</a> · <a href="#qa-c4f29aea97ea8cba">问题链接</a></p>
 </details>
@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21055">原论文</a> · <a href="../../../../agent-research/2610.21055-athanor/">实现解读</a> · <a href="#qa-d66143f49b76710f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:auto-sft" data-paper-title="AutoSFT: An Agentic System for Automated Data Research in Supervised Fine-Tuning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AutoSFT: An Agentic System for Automated Data Research in Supervised Fine-Tuning Agent Tsinghua University 2026-10-15 自动后训练研究若让一个 Agent 同时读训练日志、分析失败、改数据、提交任务，可能在上下文中积累大量执行输出，最终只反复调整混合比例。AutoSFT 将 Meta Agent、执行子代理、四种分析视角与数据合成分开：执行侧只返回可追溯产物，分析侧从数据、失败、训练信号、研究历史提出不同方案，Meta Agent 决定下一轮的数据干预。原文 §2–4 干预不局限于筛行或生成：可以调类别比例、删除、修复、替换回答、定向合成和调整顺序。这六类是作者对实际动作的事后归类，不是给分析Agent预设的固定菜单。 完整实验成本过高，不复现（审查 DONE）；高成本资料收录。完整实验成本过高，不复现（审查 DONE）；没有本地模型实现、控制器fixture、假 Adapter 或 evolve 接入。原文配置 Qwen3-1.7B-Base、Megatron-LM、8×H800。一次20轮运行约 130 GPU小时；Agent与数据合成约 95美元/轮、1900美元/次。执行子代理、独立语义审查和每轮从基座训练都是定义机制的重要部分，不能删成几条规则后称为AutoSFT复现。原文 Appendix D  递归自改进 自动后训练与数据研究 Agent 运行流程与自进化：改的是哪一层 AutoSFT 跨轮继承的是模型权重还是数据研究状态？ 每轮从同一基座 M0 用固定训练器和预算重新 SFT，继承数据池、顺序、配方与研究历史，而非前轮模型参数。这样更便于把差异归到数据干预；若连续训练 M_(t-1)，就混入训练时长和权重路径，改变研究合同。 例如第三轮换一批回答后仍重置到初始模型，不能接着第二轮 checkpoint 再训并把变化全归因数据更好。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:auto-sft" data-paper-title="AutoSFT: An Agentic System for Automated Data Research in Supervised Fine-Tuning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AutoSFT: An Agentic System for Automated Data Research in Supervised Fine-Tuning Agent Tsinghua University 2026-10-15 自动后训练研究若让一个 Agent 同时读训练日志、分析失败、改数据、提交任务，可能在上下文中积累大量执行输出，最终只反复调整混合比例。AutoSFT 将 Meta Agent、执行子代理、四种分析视角与数据合成分开：执行侧只返回可追溯产物，分析侧从数据、失败、训练信号、研究历史提出不同方案，Meta Agent 决定下一轮的数据干预。原文 §2–4 干预不局限于筛行或生成：可以调类别比例、删除、修复、替换回答、定向合成和调整顺序。这六类是作者对实际动作的事后归类，不是给分析Agent预设的固定菜单。 完整实验成本过高，不复现（审查 DONE）；高成本资料收录。完整实验成本过高，不复现（审查 DONE）；没有本地模型实现、控制器fixture、假 Adapter 或 evolve 接入。原文配置 Qwen3-1.7B-Base、Megatron-LM、8×H800。一次20轮运行约 130 GPU小时；Agent与数据合成约 95美元/轮、1900美元/次。执行子代理、独立语义审查和每轮从基座训练都是定义机制的重要部分，不能删成几条规则后称为AutoSFT复现。原文 Appendix D  递归自改进 自动后训练与数据研究 Agent 运行流程与自进化：改的是哪一层 AutoSFT 为什么把训练数据的选择与组织作为自动研究对象？ 同一基座采用不同数据内容、质量与组合，可能学出不同能力，人工反复试配方成本很高。AutoSFT 让研究过程提出并检验数据假设，而不只调整一次训练参数。为了理解数据改动的作用，需要控制训练条件并隔离评测，不能从开发分持续上涨推导最终泛化。 教学例：怀疑某类格式错误来自示例不足，可增加对应数据再从相同基座比较；沿用上一轮权重会混入额外训练历史。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-auto-sft-e69c4a3b" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4d12282618b9c1d0">AutoSFT 跨轮继承的是模型权重还是数据研究状态？</h2>
+<h2 id="qa-4d12282618b9c1d0">AutoSFT 为什么把训练数据的选择与组织作为自动研究对象？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aauto-sft">AutoSFT: An Agentic System for Automated Data Research in Supervised Fine-Tuning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>每轮从同一基座 M0 用固定训练器和预算重新 SFT，继承数据池、顺序、配方与研究历史，而非前轮模型参数。这样更便于把差异归到数据干预；若连续训练 M_(t-1)，就混入训练时长和权重路径，改变研究合同。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第三轮换一批回答后仍重置到初始模型，不能接着第二轮 checkpoint 再训并把变化全归因数据更好。</p>
+<p><strong>答案：</strong>同一基座采用不同数据内容、质量与组合，可能学出不同能力，人工反复试配方成本很高。AutoSFT 让研究过程提出并检验数据假设，而不只调整一次训练参数。为了理解数据改动的作用，需要控制训练条件并隔离评测，不能从开发分持续上涨推导最终泛化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：怀疑某类格式错误来自示例不足，可增加对应数据再从相同基座比较；沿用上一轮权重会混入额外训练历史。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式：固定训练合同的形式化；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22194">原论文</a> · <a href="../../../../agent-research/2610.22194-auto-sft/">实现解读</a> · <a href="#qa-4d12282618b9c1d0">问题链接</a></p>
 </details>
@@ -451,16 +451,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22194">原论文</a> · <a href="../../../../agent-research/2610.22194-auto-sft/">实现解读</a> · <a href="#qa-a3c27f91439eca03">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsiflow" data-paper-title="RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent Agent Beihang University 2026-10-15 性能瓶颈可能来自模型参数、执行 Harness，也可能只是当前交付物。固定只改其中一项，或固定交替更新，未必对应当前失败。RSIFlow 的 Meta-Agent 用任务执行证据选择 Model / Harness / Artifacts 干预，比较同父代、同任务批的候选，并从成功和失败中维护技能。Meta 模型参数保持固定；本地遵循已发布的技能记忆变体，不把它扩写成任意自改代码系统。 原文五轮、每轮最多两个候选、4B/8B、SFT/GRPO、16K/32K 与 8 ranks，加上 Meta API 和真实工具执行，完整多臂评测对单 A100/A30 或 Mac 成本过高，成本过高，不复现（审查 DONE）。component_only / L1 CPU 机制诊断。实现固定 callback 控制器与技能经验记录，不训练语言模型，不执行任意元程序自改，不进入统一 Evolve 晋级。每 seed 初始化三批、每批四个数值 fixture 和五个独立报告任务；私有目标值仅由 evaluator 闭包持有。M/H/A proposer 只拿公共任务、父代标量分数及已有训练技能。  RSI 自我改进与工作流 Agent 运行流程与自进化：改的是哪一层 Model、Harness、Artifact 三种干预为什么要由当前证据选择？ 失败可能源于参数能力、执行流程或这次交付物，固定只改一种会错配瓶颈。Meta-Agent 根据执行证据选择作用域，模型参数本身固定并维护训练技能；这不是授权任意自改系统，也不能把所有效果都叫模型学习。 例如答案已正确但文件未交付，改 artifact 或完成检查可能更合适，未必需要再训练整个策略。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsiflow" data-paper-title="RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent Agent Beihang University 2026-10-15 性能瓶颈可能来自模型参数、执行 Harness，也可能只是当前交付物。固定只改其中一项，或固定交替更新，未必对应当前失败。RSIFlow 的 Meta-Agent 用任务执行证据选择 Model / Harness / Artifacts 干预，比较同父代、同任务批的候选，并从成功和失败中维护技能。Meta 模型参数保持固定；本地遵循已发布的技能记忆变体，不把它扩写成任意自改代码系统。 原文五轮、每轮最多两个候选、4B/8B、SFT/GRPO、16K/32K 与 8 ranks，加上 Meta API 和真实工具执行，完整多臂评测对单 A100/A30 或 Mac 成本过高，成本过高，不复现（审查 DONE）。component_only / L1 CPU 机制诊断。实现固定 callback 控制器与技能经验记录，不训练语言模型，不执行任意元程序自改，不进入统一 Evolve 晋级。每 seed 初始化三批、每批四个数值 fixture 和五个独立报告任务；私有目标值仅由 evaluator 闭包持有。M/H/A proposer 只拿公共任务、父代标量分数及已有训练技能。  RSI 自我改进与工作流 Agent 运行流程与自进化：改的是哪一层 自动研究失败时，RSIFlow 为什么先判断瓶颈来自哪一类对象？ 效果不足可能来自模型本身、执行流程，也可能只是当前产物存在缺陷，固定只改提示或一律重训会错配资源。RSIFlow 用执行证据选择干预对象，让改进与失败原因相联系。诊断和候选都需要实际验证，不能把选择了某个分支当成该类瓶颈已被解决。 教学例：结果文件格式错可修产物，工具流程总是漏验证可改 harness；二者并不都需要重新训练模型权重。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-rsiflow-bf0996bb" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e83fc8ef79fc5a35">Model、Harness、Artifact 三种干预为什么要由当前证据选择？</h2>
+<h2 id="qa-e83fc8ef79fc5a35">自动研究失败时，RSIFlow 为什么先判断瓶颈来自哪一类对象？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsiflow">RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beihang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>失败可能源于参数能力、执行流程或这次交付物，固定只改一种会错配瓶颈。Meta-Agent 根据执行证据选择作用域，模型参数本身固定并维护训练技能；这不是授权任意自改系统，也不能把所有效果都叫模型学习。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如答案已正确但文件未交付，改 artifact 或完成检查可能更合适，未必需要再训练整个策略。</p>
+<p><strong>答案：</strong>效果不足可能来自模型本身、执行流程，也可能只是当前产物存在缺陷，固定只改提示或一律重训会错配资源。RSIFlow 用执行证据选择干预对象，让改进与失败原因相联系。诊断和候选都需要实际验证，不能把选择了某个分支当成该类瓶颈已被解决。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：结果文件格式错可修产物，工具流程总是漏验证可改 harness；二者并不都需要重新训练模型权重。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21791">原论文</a> · <a href="../../../../agent-research/2610.21791-rsiflow/">实现解读</a> · <a href="#qa-e83fc8ef79fc5a35">问题链接</a></p>
 </details>
@@ -478,15 +478,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21791">原论文</a> · <a href="../../../../agent-research/2610.21791-rsiflow/">实现解读</a> · <a href="#qa-8c0705993316eab7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsiflow" data-paper-title="RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent Agent Beihang University 2026-10-15 性能瓶颈可能来自模型参数、执行 Harness，也可能只是当前交付物。固定只改其中一项，或固定交替更新，未必对应当前失败。RSIFlow 的 Meta-Agent 用任务执行证据选择 Model / Harness / Artifacts 干预，比较同父代、同任务批的候选，并从成功和失败中维护技能。Meta 模型参数保持固定；本地遵循已发布的技能记忆变体，不把它扩写成任意自改代码系统。 原文五轮、每轮最多两个候选、4B/8B、SFT/GRPO、16K/32K 与 8 ranks，加上 Meta API 和真实工具执行，完整多臂评测对单 A100/A30 或 Mac 成本过高，成本过高，不复现（审查 DONE）。component_only / L1 CPU 机制诊断。实现固定 callback 控制器与技能经验记录，不训练语言模型，不执行任意元程序自改，不进入统一 Evolve 晋级。每 seed 初始化三批、每批四个数值 fixture 和五个独立报告任务；私有目标值仅由 evaluator 闭包持有。M/H/A proposer 只拿公共任务、父代标量分数及已有训练技能。  RSI 自我改进与工作流 Agent 运行流程与自进化：改的是哪一层 同父代配对接受与把失败候选继续作为下一次父代有何不同？ 候选与同一冻结父代在同批任务比较，只有有效且严格涨分才接受；失败后重试仍从原父代开始，防止把无效改动累积成隐性基线。技能可记住失败证据，但报告集反馈不能参与维护或候选选择。 例如第一次补丁损坏接口后，第二次应从未损坏父本再提案，而不是在坏状态上修补后误算相对增益。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsiflow" data-paper-title="RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent Agent Beihang University 2026-10-15 性能瓶颈可能来自模型参数、执行 Harness，也可能只是当前交付物。固定只改其中一项，或固定交替更新，未必对应当前失败。RSIFlow 的 Meta-Agent 用任务执行证据选择 Model / Harness / Artifacts 干预，比较同父代、同任务批的候选，并从成功和失败中维护技能。Meta 模型参数保持固定；本地遵循已发布的技能记忆变体，不把它扩写成任意自改代码系统。 原文五轮、每轮最多两个候选、4B/8B、SFT/GRPO、16K/32K 与 8 ranks，加上 Meta API 和真实工具执行，完整多臂评测对单 A100/A30 或 Mac 成本过高，成本过高，不复现（审查 DONE）。component_only / L1 CPU 机制诊断。实现固定 callback 控制器与技能经验记录，不训练语言模型，不执行任意元程序自改，不进入统一 Evolve 晋级。每 seed 初始化三批、每批四个数值 fixture 和五个独立报告任务；私有目标值仅由 evaluator 闭包持有。M/H/A proposer 只拿公共任务、父代标量分数及已有训练技能。  RSI 自我改进与工作流 Agent 运行流程与自进化：改的是哪一层 Model、Harness 与 Artifacts 干预，各改变后续执行的哪一层？ Model 干预针对模型，Harness 改变执行组织，Artifacts 作用于交付物；它们的作用域和可继承状态不同。比较时要明确候选到底改了什么，不能把一次文件修正宣传为策略普遍学会，也不能让越界改动混入既定分支。当前本地是可信 callback 与技能记忆变体。 教学例：修一份输出报告只改变该产物；修改每次都执行的检查流程，才可能影响下一任务，但仍须验证其迁移效果。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-3635aa173e7ccab2">同父代配对接受与把失败候选继续作为下一次父代有何不同？</h2>
+<h2 id="qa-3635aa173e7ccab2">Model、Harness 与 Artifacts 干预，各改变后续执行的哪一层？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsiflow">RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beihang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>候选与同一冻结父代在同批任务比较，只有有效且严格涨分才接受；失败后重试仍从原父代开始，防止把无效改动累积成隐性基线。技能可记住失败证据，但报告集反馈不能参与维护或候选选择。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第一次补丁损坏接口后，第二次应从未损坏父本再提案，而不是在坏状态上修补后误算相对增益。</p>
+<p><strong>答案：</strong>Model 干预针对模型，Harness 改变执行组织，Artifacts 作用于交付物；它们的作用域和可继承状态不同。比较时要明确候选到底改了什么，不能把一次文件修正宣传为策略普遍学会，也不能让越界改动混入既定分支。当前本地是可信 callback 与技能记忆变体。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修一份输出报告只改变该产物；修改每次都执行的检查流程，才可能影响下一任务，但仍须验证其迁移效果。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21791">原论文</a> · <a href="../../../../agent-research/2610.21791-rsiflow/">实现解读</a> · <a href="#qa-3635aa173e7ccab2">问题链接</a></p>
 </details>
@@ -504,16 +504,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21791">原论文</a> · <a href="../../../../agent-research/2610.21791-rsiflow/">实现解读</a> · <a href="#qa-7df2699c3716bd8a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:terminal-rsi" data-paper-title="Terminal-RSI: Recursive Self-Improving Terminal Agents via Recursive Self-Rewrite and Policy-Refine" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Terminal-RSI: Recursive Self-Improving Terminal Agents via Recursive Self-Rewrite and Policy-Refine Agent Tencent Hy Frontier / National University of Singapore 2026-10-15 终端 Agent 既要从验证成功的轨迹里学会可重现行为，也要把稀疏完成反馈传给很早的动作。Terminal-RSI 交替 RSR 轨迹改写和保留 critic 权重的 RPR，阶段开始时先校准 critic；提出 TB-GAE 用交互 turn 时钟而非 observation 文本长度衰减，并用 family 校准的 FDR 过渡到严格完成优先的 SPR。 原文 Qwen3.8-27B、256K、多阶段分布式训练、3,000 任务及长终端环境，对单 A100/A30/Mac 成本过高，成本过高，不复现（审查 DONE）。component_only / L1 CPU 数值诊断。只执行 TB-GAE、精确 chunk 续接和 FDR/SPR，不执行 shell、终端 Agent 或 PPO 训练。原文 TB-GAE 的 checkpoint 实际使用情况有明确未核实边界。每 seed 初始化 20 个 generated-token value，五个 turn、一个终端奖励；再插入 40 个 observation，核对结果不变。  RSI Agent RL 长程终端任务 Agent 运行流程与自进化：改的是哪一层 TB-GAE 为什么按交互 turn 而不是 observation 文本长度衰减？ 工具观察长度反映环境输出，不代表策略做了更多决策。TB-GAE 仅在生成 token 上递推，同 turn 内不衰减，跨 turn 才用 γ 与 λ，把信用距离与真实交互联系起来；长日志不应仅因更长就削弱早期动作信用。 例如同一命令返回十行或一千行日志，只要生成动作与 turn 相同，优势不应因插入环境文本而变化。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:terminal-rsi" data-paper-title="Terminal-RSI: Recursive Self-Improving Terminal Agents via Recursive Self-Rewrite and Policy-Refine" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Terminal-RSI: Recursive Self-Improving Terminal Agents via Recursive Self-Rewrite and Policy-Refine Agent Tencent Hy Frontier / National University of Singapore 2026-10-15 终端 Agent 既要从验证成功的轨迹里学会可重现行为，也要把稀疏完成反馈传给很早的动作。Terminal-RSI 交替 RSR 轨迹改写和保留 critic 权重的 RPR，阶段开始时先校准 critic；提出 TB-GAE 用交互 turn 时钟而非 observation 文本长度衰减，并用 family 校准的 FDR 过渡到严格完成优先的 SPR。 原文 Qwen3.8-27B、256K、多阶段分布式训练、3,000 任务及长终端环境，对单 A100/A30/Mac 成本过高，成本过高，不复现（审查 DONE）。component_only / L1 CPU 数值诊断。只执行 TB-GAE、精确 chunk 续接和 FDR/SPR，不执行 shell、终端 Agent 或 PPO 训练。原文 TB-GAE 的 checkpoint 实际使用情况有明确未核实边界。每 seed 初始化 20 个 generated-token value，五个 turn、一个终端奖励；再插入 40 个 observation，核对结果不变。  RSI Agent RL 长程终端任务 Agent 运行流程与自进化：改的是哪一层 终端 Agent 的长任务为什么给强化学习带来比单轮回答更难的反馈问题？ 终端任务包含命令、长观察和多轮状态变化，成功往往到最后才确定，早期动作贡献难分配；失败也可能离完成只差一步。Terminal RSI 研究在这种交互结构中组织奖励和优势，支持持续训练。部分进展不等于完成，观察文本长度也不能直接代表真实交互时间。 教学例：Agent 已修好代码却未运行最后测试，终局只有失败会掩盖此前有效动作；训练需要利用进度，同时保持完成标准。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-terminal-rsi-d5ceabe6" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ee2baf6e22e38c51">TB-GAE 为什么按交互 turn 而不是 observation 文本长度衰减？</h2>
+<h2 id="qa-ee2baf6e22e38c51">终端 Agent 的长任务为什么给强化学习带来比单轮回答更难的反馈问题？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aterminal-rsi">Terminal-RSI: Recursive Self-Improving Terminal Agents via Recursive Self-Rewrite and Policy-Refine</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tencent Hy Frontier / National University of Singapore</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>工具观察长度反映环境输出，不代表策略做了更多决策。TB-GAE 仅在生成 token 上递推，同 turn 内不衰减，跨 turn 才用 γ 与 λ，把信用距离与真实交互联系起来；长日志不应仅因更长就削弱早期动作信用。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一命令返回十行或一千行日志，只要生成动作与 turn 相同，优势不应因插入环境文本而变化。</p>
+<p><strong>答案：</strong>终端任务包含命令、长观察和多轮状态变化，成功往往到最后才确定，早期动作贡献难分配；失败也可能离完成只差一步。Terminal RSI 研究在这种交互结构中组织奖励和优势，支持持续训练。部分进展不等于完成，观察文本长度也不能直接代表真实交互时间。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Agent 已修好代码却未运行最后测试，终局只有失败会掩盖此前有效动作；训练需要利用进度，同时保持完成标准。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22192">原论文</a> · <a href="../../../../agent-research/2610.22192-terminal-rsi/">实现解读</a> · <a href="#qa-ee2baf6e22e38c51">问题链接</a></p>
 </details>
@@ -557,16 +557,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22192">原论文</a> · <a href="../../../../agent-research/2610.22192-terminal-rsi/">实现解读</a> · <a href="#qa-888eaed3118a74ba">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:torsi" data-paper-title="The World Won&#x27;t Wait: Evaluating and Teaching Agents Under a Live Clock" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="The World Won&#x27;t Wait: Evaluating and Teaching Agents Under a Live Clock Agent Peking University / Samsung Research 2026-10-14 游戏在模型推理时继续前进，观测时正确的动作在执行时可能已失效。原文 §3–4提出 RealtimeBench 的 paused／live／accelerated 时钟比较，及 Two-Timescale Offline Recursive Self-Improvement：快学生在实况中独立行动，慢教师只在两次尝试之间读失败轨迹、在 feedback 保存状态上离线练习，并改写可复用指导。指导冻结后只由独立 validation 决定是否替换；test 不参与修订或选择。 成本过高，不复现（审查 DONE）。本地未运行 Mario/Snake 等引擎、Jev、教师或异步控制，不把数值 fixture 当实时能力评测；evaluation_protocol_interface / L1 CPU。只有时钟、反馈隔离与指导接受协议，没有实时游戏或模型能力复现。每 seed 随机生成 16 个计时事件和 12 个数值 validation 行；独立检查 action age 比只统计响应延迟多出的调度时间、严格增益、平局与下降拒绝。teacher 仅收到人工 feedback 轨迹。逐 seed 实测和来源 hash 见 CPU 产物，不代表游戏进展或 Jev 改善。  RSI 实时决策与离线指导进化 Agent 运行流程与自进化：改的是哪一层 响应延迟与动作年龄为什么不是同一个实时指标？ 响应延迟从观察到模型输出，动作年龄还包括调度与实际应用前等待；环境持续演进时，决定是否过期的是执行时距观察多久。只测生成速度可能漏掉队列和工具延迟，因此 paused 下的高分也不能直接推到 live 设置。 例如模型一秒生成动作，但排队五秒才执行，动作年龄六秒；游戏目标可能早已移动，不能只报一秒响应。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:torsi" data-paper-title="The World Won&#x27;t Wait: Evaluating and Teaching Agents Under a Live Clock" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="The World Won&#x27;t Wait: Evaluating and Teaching Agents Under a Live Clock Agent Peking University / Samsung Research 2026-10-14 游戏在模型推理时继续前进，观测时正确的动作在执行时可能已失效。原文 §3–4提出 RealtimeBench 的 paused／live／accelerated 时钟比较，及 Two-Timescale Offline Recursive Self-Improvement：快学生在实况中独立行动，慢教师只在两次尝试之间读失败轨迹、在 feedback 保存状态上离线练习，并改写可复用指导。指导冻结后只由独立 validation 决定是否替换；test 不参与修订或选择。 成本过高，不复现（审查 DONE）。本地未运行 Mario/Snake 等引擎、Jev、教师或异步控制，不把数值 fixture 当实时能力评测；evaluation_protocol_interface / L1 CPU。只有时钟、反馈隔离与指导接受协议，没有实时游戏或模型能力复现。每 seed 随机生成 16 个计时事件和 12 个数值 validation 行；独立检查 action age 比只统计响应延迟多出的调度时间、严格增益、平局与下降拒绝。teacher 仅收到人工 feedback 轨迹。逐 seed 实测和来源 hash 见 CPU 产物，不代表游戏进展或 Jev 改善。  RSI 实时决策与离线指导进化 Agent 运行流程与自进化：改的是哪一层 实时 Agent 为什么可能“想得更好”，却因为响应太慢而做错事？ 任务环境会在推理期间继续变化，基于旧观察生成的动作到执行时可能已经过期。TORSI 研究在实时约束下改进小型执行策略，让高质量指导不必都发生在在线关键路径。离线学习和在线响应要分别核算，静态任务准确率不能代替真实时间环境中的有效行动。 教学例：目标在移动，模型花很久算出对旧位置的正确动作，执行时仍会落空；需要同时关注响应速度和信息新鲜度。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-torsi-cd7ddf6f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-814a0e85a5594988">响应延迟与动作年龄为什么不是同一个实时指标？</h2>
+<h2 id="qa-814a0e85a5594988">实时 Agent 为什么可能“想得更好”，却因为响应太慢而做错事？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atorsi">The World Won&#x27;t Wait: Evaluating and Teaching Agents Under a Live Clock</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Peking University / Samsung Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>响应延迟从观察到模型输出，动作年龄还包括调度与实际应用前等待；环境持续演进时，决定是否过期的是执行时距观察多久。只测生成速度可能漏掉队列和工具延迟，因此 paused 下的高分也不能直接推到 live 设置。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型一秒生成动作，但排队五秒才执行，动作年龄六秒；游戏目标可能早已移动，不能只报一秒响应。</p>
+<p><strong>答案：</strong>任务环境会在推理期间继续变化，基于旧观察生成的动作到执行时可能已经过期。TORSI 研究在实时约束下改进小型执行策略，让高质量指导不必都发生在在线关键路径。离线学习和在线响应要分别核算，静态任务准确率不能代替真实时间环境中的有效行动。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：目标在移动，模型花很久算出对旧位置的正确动作，执行时仍会落空；需要同时关注响应速度和信息新鲜度。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20665">原论文</a> · <a href="../../../../agent-research/2610.20665-torsi/">实现解读</a> · <a href="#qa-814a0e85a5594988">问题链接</a></p>
 </details>
@@ -663,16 +663,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.15150v1">原论文</a> · <a href="../../../../agent-research/2610.15150-harmony-harness/">实现解读</a> · <a href="#qa-f4f53be87255685f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harness2" data-paper-title="Harness²: Recursive Agent Harnessing for an Open World" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Harness²: Recursive Agent Harnessing for an Open World Agent Northwestern University 2026-10-09 Harness 是模型外的提示、工具、记忆、技能、脚本、子代理和中间件。论文在不改模型权重的前提下，把“改进当前任务执行方式”和“积累以后如何改进的经验”连接起来。它不要求任务答案、评分细则或验证器：先观察执行，再提出通用候选与领域候选，执行二者，最后按行为差异组合，而不是把某个评分函数冒充正确性判定。论文 §2 高成本完整实验：成本过高，不复现（审查 DONE）。编辑器诊断脚本中的正数过滤，通用分支更新约束，领域分支删除不符合公开任务的过滤，组合分支合并实际执行过的修改。component_only / L1 CPU 控制器与接口。真实执行 Python 探针，但 editor、selector 是确定性机制测试替身；不是模型支持的 Agent 能力评测，也不是已接入 Evolve。只使用 Python 标准库，无模型下载、API 凭证或 GPU。产物存在时拒绝覆盖，重复执行请换输出路径。实际探针在临时目录运行可信 Python 脚本，单次 subprocess 超时 5 秒；  规划、搜索与反思 Harness 与自我改进 Agent 运行流程与自进化：改的是哪一层 为什么下一任务从 H0 开始，却能保留跨任务改进经验？ 跨任务库保存如何改进的证据与经验，当前任务执行 harness 不直接变成下题基线。这样区分可迁移研究知识与具体临时配置，避免任务特有改动持续累积；采用的 H* 也只代表选用，不代表有标准答案证明其最优。 例如某题需去掉正数过滤，可记为带条件的经验，下题仍从基础脚本开始判断，而不是无条件继承已改过滤器。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harness2" data-paper-title="Harness²: Recursive Agent Harnessing for an Open World" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Harness²: Recursive Agent Harnessing for an Open World Agent Northwestern University 2026-10-09 Harness 是模型外的提示、工具、记忆、技能、脚本、子代理和中间件。论文在不改模型权重的前提下，把“改进当前任务执行方式”和“积累以后如何改进的经验”连接起来。它不要求任务答案、评分细则或验证器：先观察执行，再提出通用候选与领域候选，执行二者，最后按行为差异组合，而不是把某个评分函数冒充正确性判定。论文 §2 高成本完整实验：成本过高，不复现（审查 DONE）。编辑器诊断脚本中的正数过滤，通用分支更新约束，领域分支删除不符合公开任务的过滤，组合分支合并实际执行过的修改。component_only / L1 CPU 控制器与接口。真实执行 Python 探针，但 editor、selector 是确定性机制测试替身；不是模型支持的 Agent 能力评测，也不是已接入 Evolve。只使用 Python 标准库，无模型下载、API 凭证或 GPU。产物存在时拒绝覆盖，重复执行请换输出路径。实际探针在临时目录运行可信 Python 脚本，单次 subprocess 超时 5 秒；  规划、搜索与反思 Harness 与自我改进 Agent 运行流程与自进化：改的是哪一层 Harness² 为什么研究在没有标准答案和评分细则时改进 Agent 的工作流程？ 很多真实任务只有交付要求，没有随时可调用的正确性 oracle，仍可能通过执行探测发现流程不足。Harness² 研究从提案、探测和组合中构造更合适的 harness。观察到改动或获得高自评分不代表答案正确，最终产物需要与生成流程分开的选择和检查。 教学例：整理一份开放研究报告，没有唯一标准答案；可先探测来源获取和组织流程，再检查匿名产物，而不是直接相信作者自评。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-harness2-5c8a24eb" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-56f8f0526251b9f6">为什么下一任务从 H0 开始，却能保留跨任务改进经验？</h2>
+<h2 id="qa-56f8f0526251b9f6">Harness² 为什么研究在没有标准答案和评分细则时改进 Agent 的工作流程？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharness2">Harness²: Recursive Agent Harnessing for an Open World</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Northwestern University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>跨任务库保存如何改进的证据与经验，当前任务执行 harness 不直接变成下题基线。这样区分可迁移研究知识与具体临时配置，避免任务特有改动持续累积；采用的 H* 也只代表选用，不代表有标准答案证明其最优。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如某题需去掉正数过滤，可记为带条件的经验，下题仍从基础脚本开始判断，而不是无条件继承已改过滤器。</p>
+<p><strong>答案：</strong>很多真实任务只有交付要求，没有随时可调用的正确性 oracle，仍可能通过执行探测发现流程不足。Harness² 研究从提案、探测和组合中构造更合适的 harness。观察到改动或获得高自评分不代表答案正确，最终产物需要与生成流程分开的选择和检查。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：整理一份开放研究报告，没有唯一标准答案；可先探测来源获取和组织流程，再检查匿名产物，而不是直接相信作者自评。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.14224">原论文</a> · <a href="../../../../agent-research/2610.14224-harness2/">实现解读</a> · <a href="#qa-56f8f0526251b9f6">问题链接</a></p>
 </details>
@@ -756,15 +756,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13912">原论文</a> · <a href="../../../../reproductions/2610.13912-rsi-anything/">实现解读</a> · <a href="#qa-38c1c449ff5f70c3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsi-anything" data-paper-title="RSI-Anything: Unlocking Recursive Self-Improvement with World Models" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSI-Anything: Unlocking Recursive Self-Improvement with World Models Agent PhAI Labs / The Chinese University of Hong Kong 2026-10-09 候选先经世界模型预测，再向外部验证申请反馈；反馈更新持久 policy/workflow，可靠性不足且数据/预算足够时适配 predictor。只有组件检查和配对兼容性检查均通过的版本进入下一轮。事实来源：原文全文。 保持 concept_demo / L1、diagnostic_only=true、capability_comparison=false、evolve_promotion_eligible=false，不进入 Evolve 晋级。当前是 concept_demo / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为初始 policy workflow 与初始 predictor 配对；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  recursive-self-improvement world-model compatibility-retention Agent 运行流程与自进化：改的是哪一层 Q_pair 失败时为何要同时回退 θ 和 φ？ policy 与 predictor 共同定义下一轮行为，分别通过组件检查不保证新组合兼容。配对失败应恢复此前完整配对，避免只留一个新组件造成隐性混搭；本地 Circle26 仍是同一任务的 gate，不是独立泛化验证，真实回执也不代表所有应用实现。 例如新预测器输出尺度变了，旧策略阈值失效；只回退策略而保留新预测器，仍未恢复原先已验配对。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsi-anything" data-paper-title="RSI-Anything: Unlocking Recursive Self-Improvement with World Models" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="RSI-Anything: Unlocking Recursive Self-Improvement with World Models Agent PhAI Labs / The Chinese University of Hong Kong 2026-10-09 候选先经世界模型预测，再向外部验证申请反馈；反馈更新持久 policy/workflow，可靠性不足且数据/预算足够时适配 predictor。只有组件检查和配对兼容性检查均通过的版本进入下一轮。事实来源：原文全文。 保持 concept_demo / L1、diagnostic_only=true、capability_comparison=false、evolve_promotion_eligible=false，不进入 Evolve 晋级。当前是 concept_demo / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为初始 policy workflow 与初始 predictor 配对；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  recursive-self-improvement world-model compatibility-retention Agent 运行流程与自进化：改的是哪一层 predictor 什么时候才允许适配，为什么不能每收到一次失败就更新？ 适配要求世界模型可靠性不足、有足够适配数据，并且更新预算能承担估计成本，三个条件共同成立才触发。失败未必来自预测器，样本不足时更新也可能追逐噪声。候选经外部验证后仍需版本归因和配对检查，本地短执行不证明长期自改进收益。 教学例：一次错误预测只满足不可靠线索，若适配数据不够或预算已耗尽，就不应强行训练，再把噪声更新当作学习。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-a9314caa9163bb27">Q_pair 失败时为何要同时回退 θ 和 φ？</h2>
+<h2 id="qa-a9314caa9163bb27">predictor 什么时候才允许适配，为什么不能每收到一次失败就更新？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsi-anything">RSI-Anything: Unlocking Recursive Self-Improvement with World Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · PhAI Labs / The Chinese University of Hong Kong</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>policy 与 predictor 共同定义下一轮行为，分别通过组件检查不保证新组合兼容。配对失败应恢复此前完整配对，避免只留一个新组件造成隐性混搭；本地 Circle26 仍是同一任务的 gate，不是独立泛化验证，真实回执也不代表所有应用实现。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如新预测器输出尺度变了，旧策略阈值失效；只回退策略而保留新预测器，仍未恢复原先已验配对。</p>
+<p><strong>答案：</strong>适配要求世界模型可靠性不足、有足够适配数据，并且更新预算能承担估计成本，三个条件共同成立才触发。失败未必来自预测器，样本不足时更新也可能追逐噪声。候选经外部验证后仍需版本归因和配对检查，本地短执行不证明长期自改进收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一次错误预测只满足不可靠线索，若适配数据不够或预算已耗尽，就不应强行训练，再把噪声更新当作学习。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、结果、验证与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13912">原论文</a> · <a href="../../../../reproductions/2610.13912-rsi-anything/">实现解读</a> · <a href="#qa-a9314caa9163bb27">问题链接</a></p>
 </details>
@@ -849,15 +849,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12176">原论文</a> · <a href="../../../../agent-research/2610.12176-mass/">实现解读</a> · <a href="#qa-f2ba8ed1f9334346">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mass" data-paper-title="Recursive Self-Improvement through Multi-Agent Self-Supervision" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Recursive Self-Improvement through Multi-Agent Self-Supervision Agent UC Berkeley 2026-10-08 同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。助手 token 的 SFT 更新权重后再重复。原文 Qwen3.6-27B 两轮在研究任务中提高单位输出 token 表现约 1.2–1.6 倍，未报告线上 A/B。 本地指标：L1 GPU 诊断。独立核心机制 API 与真实 checkpoint 接口。短运行是 L1 诊断，非论文 benchmark 复测；尚未接入统一 Evolve 晋级。真实共享 checkpoint 完成两轮搜索、裁判、轨迹采集与 LoRA SFT。本地为固定两工作者和一编排者的有界文本工作流族，可改变角色指令和传递内容；未接入任意工作流图、qwen-code 文件/终端工具，因此不是完整科研 coding-agent 复现。  递归自改进 工作流搜索 多智能体自监督 Agent 运行流程与自进化：改的是哪一层 移除编排者初始工作流提示与删除所有工作者分工有什么差别？ 训练想让编排策略内化工作流，不再依赖其初始显式说明，但工作者角色仍需保留。全删会改变系统组织和监督条件，不能称同一过程；助手 token 才参与 SFT，外部工具和观察不是策略生成目标。 例如编排者不再被告知完整流程，两个工作者仍各有职责；若连职责都去掉，就无法归因工作流内化的作用。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mass" data-paper-title="Recursive Self-Improvement through Multi-Agent Self-Supervision" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Recursive Self-Improvement through Multi-Agent Self-Supervision Agent UC Berkeley 2026-10-08 同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。助手 token 的 SFT 更新权重后再重复。原文 Qwen3.6-27B 两轮在研究任务中提高单位输出 token 表现约 1.2–1.6 倍，未报告线上 A/B。 本地指标：L1 GPU 诊断。独立核心机制 API 与真实 checkpoint 接口。短运行是 L1 诊断，非论文 benchmark 复测；尚未接入统一 Evolve 晋级。真实共享 checkpoint 完成两轮搜索、裁判、轨迹采集与 LoRA SFT。本地为固定两工作者和一编排者的有界文本工作流族，可改变角色指令和传递内容；未接入任意工作流图、qwen-code 文件/终端工具，因此不是完整科研 coding-agent 复现。  递归自改进 工作流搜索 多智能体自监督 Agent 运行流程与自进化：改的是哪一层 BT 排名中留出第 K 条轨迹验证，与把全部高分轨迹都用于 SFT，有何区别？ MASS 在固定权重搜索后独立采集轨迹，用成对比较形成 BT 排名，前 K−1 条训练，第 K 条用于验证。留出使训练与检查不完全使用同一批目标，但验证信号仍来自既定评价过程，不等于独立真实任务成功。不能将搜索时见过的全部好轨迹同时当训练和泛化证据。 教学例：排名前三条中取前两条训练、第三条验证；若第三条也参与梯度更新，验证损失就失去了原本的留出意义。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c73c85ee811935d7">移除编排者初始工作流提示与删除所有工作者分工有什么差别？</h2>
+<h2 id="qa-c73c85ee811935d7">BT 排名中留出第 K 条轨迹验证，与把全部高分轨迹都用于 SFT，有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amass">Recursive Self-Improvement through Multi-Agent Self-Supervision</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · UC Berkeley</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>训练想让编排策略内化工作流，不再依赖其初始显式说明，但工作者角色仍需保留。全删会改变系统组织和监督条件，不能称同一过程；助手 token 才参与 SFT，外部工具和观察不是策略生成目标。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如编排者不再被告知完整流程，两个工作者仍各有职责；若连职责都去掉，就无法归因工作流内化的作用。</p>
+<p><strong>答案：</strong>MASS 在固定权重搜索后独立采集轨迹，用成对比较形成 BT 排名，前 K−1 条训练，第 K 条用于验证。留出使训练与检查不完全使用同一批目标，但验证信号仍来自既定评价过程，不等于独立真实任务成功。不能将搜索时见过的全部好轨迹同时当训练和泛化证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：排名前三条中取前两条训练、第三条验证；若第三条也参与梯度更新，验证损失就失去了原本的留出意义。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12176">原论文</a> · <a href="../../../../agent-research/2610.12176-mass/">实现解读</a> · <a href="#qa-c73c85ee811935d7">问题链接</a></p>
 </details>
@@ -875,16 +875,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12176">原论文</a> · <a href="../../../../agent-research/2610.12176-mass/">实现解读</a> · <a href="#qa-3b165fac154d365c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memento3" data-paper-title="Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks Agent University College London 2026-10-08 冻结 LLM 将黑盒交互证据写成可修改规则册，再编译为世界模型。新代码必须同时通过语义忠实性判断和全部历史逐格回放；规划失配会触发修复。多个模型共享历史，按不同完整计划的等价类均匀抽样，而非按重复模型投票。论文第 2 节 当前实现为 L1 核心机制实验，不是原论文完整基准。已在 NVIDIA A100-SXM4-80GB 上实际运行冻结 Qwen2.5-7B；生成模型在第一次真实动作后被证伪，修复未成功，最终没有可用世界模型，任务也未完成。这是一条保留失败的机制执行记录，不是能力提升结果。  世界模型 反思与记忆 Agent 运行流程与自进化：改的是哪一层 规则册与可执行世界模型为什么都要验证？ 源码可能忠实实现错误规则，规则文字也可能正确但代码实现错。语义忠实性与全部历史连续回放分别检查对应关系和真实转移一致性；初始观察能通过并不说明动作动力学正确，必须允许后续观察证伪并撤销模型。 例如模型误以为填满格子就获胜，代码完全符合这条错规则，语义 judge 同意也不能替代真实动作后的状态对照。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memento3" data-paper-title="Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks Agent University College London 2026-10-08 冻结 LLM 将黑盒交互证据写成可修改规则册，再编译为世界模型。新代码必须同时通过语义忠实性判断和全部历史逐格回放；规划失配会触发修复。多个模型共享历史，按不同完整计划的等价类均匀抽样，而非按重复模型投票。论文第 2 节 当前实现为 L1 核心机制实验，不是原论文完整基准。已在 NVIDIA A100-SXM4-80GB 上实际运行冻结 Qwen2.5-7B；生成模型在第一次真实动作后被证伪，修复未成功，最终没有可用世界模型，任务也未完成。这是一条保留失败的机制执行记录，不是能力提升结果。  世界模型 反思与记忆 Agent 运行流程与自进化：改的是哪一层 Memento 3 为什么要从黑盒交互中学习可供规划的环境规则？ 新环境不一定公开转移规律，Agent 只看到动作及其后果，直接凭语言猜计划容易反复犯错。Memento 3 将观察整理成规则册并编译成可执行模型，用历史和新行动检验，以便先在模型中规划。学到的是可修订假设，历史一致不保证未见状态也正确。 教学例：按下按钮后物体方向改变，Agent 先提出旋转规则，再用其他已见转移检查；新观察不符时应修规则，而非忽略反例。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-memento3-dd7ada6c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ad1d7f6482680c52">规则册与可执行世界模型为什么都要验证？</h2>
+<h2 id="qa-ad1d7f6482680c52">Memento 3 为什么要从黑盒交互中学习可供规划的环境规则？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemento3">Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University College London</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>源码可能忠实实现错误规则，规则文字也可能正确但代码实现错。语义忠实性与全部历史连续回放分别检查对应关系和真实转移一致性；初始观察能通过并不说明动作动力学正确，必须允许后续观察证伪并撤销模型。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型误以为填满格子就获胜，代码完全符合这条错规则，语义 judge 同意也不能替代真实动作后的状态对照。</p>
+<p><strong>答案：</strong>新环境不一定公开转移规律，Agent 只看到动作及其后果，直接凭语言猜计划容易反复犯错。Memento 3 将观察整理成规则册并编译成可执行模型，用历史和新行动检验，以便先在模型中规划。学到的是可修订假设，历史一致不保证未见状态也正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：按下按钮后物体方向改变，Agent 先提出旋转规则，再用其他已见转移检查；新观察不符时应修规则，而非忽略反例。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11794">原论文</a> · <a href="../../../../agent-research/2610.11794-memento3/">实现解读</a> · <a href="#qa-ad1d7f6482680c52">问题链接</a></p>
 </details>
@@ -915,29 +915,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11794">原论文</a> · <a href="../../../../agent-research/2610.11794-memento3/">实现解读</a> · <a href="#qa-c135d3f3afc9d094">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memento3" data-paper-title="Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks Agent University College London 2026-10-08 冻结 LLM 将黑盒交互证据写成可修改规则册，再编译为世界模型。新代码必须同时通过语义忠实性判断和全部历史逐格回放；规划失配会触发修复。多个模型共享历史，按不同完整计划的等价类均匀抽样，而非按重复模型投票。论文第 2 节 当前实现为 L1 核心机制实验，不是原论文完整基准。已在 NVIDIA A100-SXM4-80GB 上实际运行冻结 Qwen2.5-7B；生成模型在第一次真实动作后被证伪，修复未成功，最终没有可用世界模型，任务也未完成。这是一条保留失败的机制执行记录，不是能力提升结果。  世界模型 反思与记忆 Agent 运行流程与自进化：改的是哪一层 历史 replay 为什么不能每步用真实下一帧重置，GPU passed 又代表什么？ 从轨迹初始观察只初始化一次再连续滚动，重置会掩盖累积动力学错误。本地真实 A100 运行在首动作被证伪且修复失败，最终无可用模型；receipt passed 仅证明推理、解释和拒绝链实际运行，capability 明确失败，不应宣传学会世界模型。 例如预测每步都错但每次偷偷重置到真值，局部检查可能看似正常；连续回放才能暴露内部状态漂移。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memento3" data-paper-title="Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks Agent University College London 2026-10-08 冻结 LLM 将黑盒交互证据写成可修改规则册，再编译为世界模型。新代码必须同时通过语义忠实性判断和全部历史逐格回放；规划失配会触发修复。多个模型共享历史，按不同完整计划的等价类均匀抽样，而非按重复模型投票。论文第 2 节 当前实现为 L1 核心机制实验，不是原论文完整基准。已在 NVIDIA A100-SXM4-80GB 上实际运行冻结 Qwen2.5-7B；生成模型在第一次真实动作后被证伪，修复未成功，最终没有可用世界模型，任务也未完成。这是一条保留失败的机制执行记录，不是能力提升结果。  世界模型 反思与记忆 Agent 运行流程与自进化：改的是哪一层 新世界模型代码为什么要同时过语义忠实性检查和历史执行检查？ 代码可能能拟合部分观察，却没有表达当前规则册，也可能忠实实现了一份本就错误的规则。语义检查约束编译结果与规则一致，历史回放检查它能否重现已见转移，两者分别约束表达和行为。新真实动作失配仍会触发修复，GPU 执行记录不等于规则已经普遍正确。 教学例：规则册写顺时针旋转，代码却硬编码一张结果图；即使碰巧通过一个样例，也不能认为忠实实现了这条规则。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-66d5b7038bccdd48">历史 replay 为什么不能每步用真实下一帧重置，GPU passed 又代表什么？</h2>
+<h2 id="qa-66d5b7038bccdd48">新世界模型代码为什么要同时过语义忠实性检查和历史执行检查？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemento3">Memento 3: Model-Based Recursive Self-Improvement through Reflective Rulebooks</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University College London</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>从轨迹初始观察只初始化一次再连续滚动，重置会掩盖累积动力学错误。本地真实 A100 运行在首动作被证伪且修复失败，最终无可用模型；receipt passed 仅证明推理、解释和拒绝链实际运行，capability 明确失败，不应宣传学会世界模型。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如预测每步都错但每次偷偷重置到真值，局部检查可能看似正常；连续回放才能暴露内部状态漂移。</p>
+<p><strong>答案：</strong>代码可能能拟合部分观察，却没有表达当前规则册，也可能忠实实现了一份本就错误的规则。语义检查约束编译结果与规则一致，历史回放检查它能否重现已见转移，两者分别约束表达和行为。新真实动作失配仍会触发修复，GPU 执行记录不等于规则已经普遍正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：规则册写顺时针旋转，代码却硬编码一张结果图；即使碰巧通过一个样例，也不能认为忠实实现了这条规则。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、结果与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11794">原论文</a> · <a href="../../../../agent-research/2610.11794-memento3/">实现解读</a> · <a href="#qa-66d5b7038bccdd48">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:frugalevo" data-paper-title="FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution Agent National University of Singapore 2026-10-02 FrugalEvo 把程序优化拆成高成本模型提出策略、低成本模型执行和改进代码，按预算内整条最佳成绩曲线评价搜索效率。先试跑多种策略再排序，失败时保留父程序追加反馈，取得改进后重新锚定，并用岛屿档案保存不同程序。 本地独立实现与公开任务小预算验证。不是原论文 API 模型、美元成本或完整 20 任务结果的复现；尚未接入统一 Evolve 控制器。共享前缀字节顺序已实现；当前 Transformers 后端没有跨请求 KV 前缀缓存，cached_input_tokens=0，不声称复现论文缓存加速。需要 Linux、可用的 bubblewrap/prlimit、CUDA 和预先下载的公开 checkpoint。生成程序在无网络、无工作区/凭据/模型缓存挂载的沙箱中运行；沙箱不能启动时拒绝执行，没有裸 exec 回退。  程序进化 成本约束 强弱模型协作 Agent 运行流程与自进化：改的是哪一层 BA-AUC 为什么不等于预算末尾的最佳分数？ 它积分累计成本下的最佳有效成绩曲线，较早找到好程序可在更长预算区间贡献收益。最终分相同的两条搜索路径，早到达者面积可能更高；无效候选也占成本，不能只保留赢家调用来画乐观曲线。 例如甲第一千 token 找到好解，乙第三万 token 才找到相同解，最终分一样，甲在固定预算内的面积更大。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:frugalevo" data-paper-title="FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution Agent National University of Singapore 2026-10-02 FrugalEvo 把程序优化拆成高成本模型提出策略、低成本模型执行和改进代码，按预算内整条最佳成绩曲线评价搜索效率。先试跑多种策略再排序，失败时保留父程序追加反馈，取得改进后重新锚定，并用岛屿档案保存不同程序。 本地独立实现与公开任务小预算验证。不是原论文 API 模型、美元成本或完整 20 任务结果的复现；尚未接入统一 Evolve 控制器。共享前缀字节顺序已实现；当前 Transformers 后端没有跨请求 KV 前缀缓存，cached_input_tokens=0，不声称复现论文缓存加速。需要 Linux、可用的 bubblewrap/prlimit、CUDA 和预先下载的公开 checkpoint。生成程序在无网络、无工作区/凭据/模型缓存挂载的沙箱中运行；沙箱不能启动时拒绝执行，没有裸 exec 回退。  程序进化 成本约束 强弱模型协作 Agent 运行流程与自进化：改的是哪一层 FrugalEvo 为什么希望强模型的研究想法能由便宜模型反复落实？ 持续用强模型生成并执行所有搜索步骤成本高，而弱模型可能缺少有效策略。FrugalEvo 将较强的策略提案与较便宜的反复实现连接起来，在有限预算下寻找有效程序。需要评估整段搜索的实际成本和质量变化，不能只看最后最好分数或某次便宜调用。 教学例：强模型提出一种改进方向，弱模型围绕它尝试多次代码变体；若反复失败仍消耗大量预算，分工就未必划算。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-frugalevo-468f3ba3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-68885a6d3cab967b">BA-AUC 为什么不等于预算末尾的最佳分数？</h2>
+<h2 id="qa-68885a6d3cab967b">FrugalEvo 为什么希望强模型的研究想法能由便宜模型反复落实？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afrugalevo">FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · National University of Singapore</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它积分累计成本下的最佳有效成绩曲线，较早找到好程序可在更长预算区间贡献收益。最终分相同的两条搜索路径，早到达者面积可能更高；无效候选也占成本，不能只保留赢家调用来画乐观曲线。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如甲第一千 token 找到好解，乙第三万 token 才找到相同解，最终分一样，甲在固定预算内的面积更大。</p>
+<p><strong>答案：</strong>持续用强模型生成并执行所有搜索步骤成本高，而弱模型可能缺少有效策略。FrugalEvo 将较强的策略提案与较便宜的反复实现连接起来，在有限预算下寻找有效程序。需要评估整段搜索的实际成本和质量变化，不能只看最后最好分数或某次便宜调用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：强模型提出一种改进方向，弱模型围绕它尝试多次代码变体；若反复失败仍消耗大量预算，分工就未必划算。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03675">原论文</a> · <a href="../../../../agent-research/2610.03675-frugalevo/">实现解读</a> · <a href="#qa-68885a6d3cab967b">问题链接</a></p>
 </details>
@@ -981,16 +981,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03675">原论文</a> · <a href="../../../../agent-research/2610.03675-frugalevo/">实现解读</a> · <a href="#qa-e1f4b7fda8831b85">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:seer-forecasting" data-paper-title="SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting Agent Google Cloud AI Research / University of Virginia 2026-10-02 数值历史可能缺少外部事件信息，普通 RAG 又不会从预测错误中修订检索方法。SEER 保持预测模型权重不变，把上下文拆成检索记忆、筛选记忆和因果知识。只有过去结果真正可见后，才从预测轨迹中分别更新两类记忆与知识；容量不足时压缩，而不是无限追加。图按原文 Figure 2 与 §3 重绘。原图及方法。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。完整协议涉及 Gemini 3.1 Pro/Flash、Claude 4.6 Sonnet/4.8 Opus，多轮搜索、LEAF 事实核验与顺序回测（§4.1）。闭源调用与六领域完整成本无法用廉价只读检查可靠固定；成本过高，不复现（审查 DONE）。  自进化与经验复用 时间约束事件检索与预测 Agent 运行流程与自进化：改的是哪一层 结果成熟后再更新事件记忆为什么是预测的关键时间边界？ 预测时不能知道尚未发生或尚未公布的真实结果，只有过去 outcome 可见后才能归因并更新检索、筛选记忆与因果知识。事件发生时间和材料可获得时间都需符合截止，不能用后来新闻解释过去预测而称在线可用证据。 例如周一预测周二用电量，周三才公布的事件总结不能进入周一上下文，后续学习也要等真实用电量可见。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:seer-forecasting" data-paper-title="SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting Agent Google Cloud AI Research / University of Virginia 2026-10-02 数值历史可能缺少外部事件信息，普通 RAG 又不会从预测错误中修订检索方法。SEER 保持预测模型权重不变，把上下文拆成检索记忆、筛选记忆和因果知识。只有过去结果真正可见后，才从预测轨迹中分别更新两类记忆与知识；容量不足时压缩，而不是无限追加。图按原文 Figure 2 与 §3 重绘。原图及方法。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。完整协议涉及 Gemini 3.1 Pro/Flash、Claude 4.6 Sonnet/4.8 Opus，多轮搜索、LEAF 事实核验与顺序回测（§4.1）。闭源调用与六领域完整成本无法用廉价只读检查可靠固定；成本过高，不复现（审查 DONE）。  自进化与经验复用 时间约束事件检索与预测 Agent 运行流程与自进化：改的是哪一层 SEER 为什么在数值时间序列之外，还要关注可获取的外部事件？ 价格、需求等序列可能受新闻或政策影响，仅看历史数值难解释这些外部变化。SEER 研究检索相关事件并从过去预测经验中改进筛选与知识，而保持预测模型权重固定。额外文本也会带来噪声和前视风险，必须核对预测时真正可获得的信息。 教学例：需求突变可能与已公布的节假日安排有关；事后才发布的销售总结不能回填给更早的预测，哪怕它解释得很清楚。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-seer-forecasting-fb9c59fb" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-9e21ec395e7e0fe8">结果成熟后再更新事件记忆为什么是预测的关键时间边界？</h2>
+<h2 id="qa-9e21ec395e7e0fe8">SEER 为什么在数值时间序列之外，还要关注可获取的外部事件？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aseer-forecasting">SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud AI Research / University of Virginia</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>预测时不能知道尚未发生或尚未公布的真实结果，只有过去 outcome 可见后才能归因并更新检索、筛选记忆与因果知识。事件发生时间和材料可获得时间都需符合截止，不能用后来新闻解释过去预测而称在线可用证据。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如周一预测周二用电量，周三才公布的事件总结不能进入周一上下文，后续学习也要等真实用电量可见。</p>
+<p><strong>答案：</strong>价格、需求等序列可能受新闻或政策影响，仅看历史数值难解释这些外部变化。SEER 研究检索相关事件并从过去预测经验中改进筛选与知识，而保持预测模型权重固定。额外文本也会带来噪声和前视风险，必须核对预测时真正可获得的信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：需求突变可能与已公布的节假日安排有关；事后才发布的销售总结不能回填给更早的预测，哪怕它解释得很清楚。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.04109v1">原论文</a> · <a href="../../../../agent-research/2610.04109-seer-forecasting/">实现解读</a> · <a href="#qa-9e21ec395e7e0fe8">问题链接</a></p>
 </details>
@@ -1021,29 +1021,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.04109v1">原论文</a> · <a href="../../../../agent-research/2610.04109-seer-forecasting/">实现解读</a> · <a href="#qa-4d45948e73d7437d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:seer-forecasting" data-paper-title="SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting Agent Google Cloud AI Research / University of Virginia 2026-10-02 数值历史可能缺少外部事件信息，普通 RAG 又不会从预测错误中修订检索方法。SEER 保持预测模型权重不变，把上下文拆成检索记忆、筛选记忆和因果知识。只有过去结果真正可见后，才从预测轨迹中分别更新两类记忆与知识；容量不足时压缩，而不是无限追加。图按原文 Figure 2 与 §3 重绘。原图及方法。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。完整协议涉及 Gemini 3.1 Pro/Flash、Claude 4.6 Sonnet/4.8 Opus，多轮搜索、LEAF 事实核验与顺序回测（§4.1）。闭源调用与六领域完整成本无法用廉价只读检查可靠固定；成本过高，不复现（审查 DONE）。  自进化与经验复用 时间约束事件检索与预测 Agent 运行流程与自进化：改的是哪一层 测试窗口冻结 M、K 后还能用 test 错误反思重报吗？ 不能。测试只评冻结记忆与知识，结果不得继续用于选择或改写；容量压缩与反馈更新留在学习窗口。本地未实现搜索、事实核验、顺序回测或真实模型，作者仓库有论文案例也不表示核心代码已公开，更不构成本地预测能力。 例如看到某 test 预测失败后新增一条对应事件规则再重算同 test，会把评价变成训练，不能仍称冻结结果。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:seer-forecasting" data-paper-title="SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting Agent Google Cloud AI Research / University of Virginia 2026-10-02 数值历史可能缺少外部事件信息，普通 RAG 又不会从预测错误中修订检索方法。SEER 保持预测模型权重不变，把上下文拆成检索记忆、筛选记忆和因果知识。只有过去结果真正可见后，才从预测轨迹中分别更新两类记忆与知识；容量不足时压缩，而不是无限追加。图按原文 Figure 2 与 §3 重绘。原图及方法。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。完整协议涉及 Gemini 3.1 Pro/Flash、Claude 4.6 Sonnet/4.8 Opus，多轮搜索、LEAF 事实核验与顺序回测（§4.1）。闭源调用与六领域完整成本无法用廉价只读检查可靠固定；成本过高，不复现（审查 DONE）。  自进化与经验复用 时间约束事件检索与预测 Agent 运行流程与自进化：改的是哪一层 事件发生时间与可获得时间，怎样共同限制预测侧可读的文本？ 一条事件可能早已发生，但相关报道或数据库记录到更晚才公开；预测输入必须同时符合目标时间与信息可获得边界。仅看新闻标注日期不够，还要核查当时能否取得其内容。记忆容量不足时可压缩，但压缩不能把未来结论混进过去上下文，测试阶段也不得继续反思。 教学例：周一发生的事件周三才披露，周二预测不应使用周三报道；把报道标题改成周一日期仍不能改变可获得时间。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-96a96332cee84000">测试窗口冻结 M、K 后还能用 test 错误反思重报吗？</h2>
+<h2 id="qa-96a96332cee84000">事件发生时间与可获得时间，怎样共同限制预测侧可读的文本？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aseer-forecasting">SEER: Self-Evolving Event Reasoning and Retrieval for Time Series Forecasting</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud AI Research / University of Virginia</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不能。测试只评冻结记忆与知识，结果不得继续用于选择或改写；容量压缩与反馈更新留在学习窗口。本地未实现搜索、事实核验、顺序回测或真实模型，作者仓库有论文案例也不表示核心代码已公开，更不构成本地预测能力。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如看到某 test 预测失败后新增一条对应事件规则再重算同 test，会把评价变成训练，不能仍称冻结结果。</p>
+<p><strong>答案：</strong>一条事件可能早已发生，但相关报道或数据库记录到更晚才公开；预测输入必须同时符合目标时间与信息可获得边界。仅看新闻标注日期不够，还要核查当时能否取得其内容。记忆容量不足时可压缩，但压缩不能把未来结论混进过去上下文，测试阶段也不得继续反思。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：周一发生的事件周三才披露，周二预测不应使用周三报道；把报道标题改成周一日期仍不能改变可获得时间。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现与成本判断；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.04109v1">原论文</a> · <a href="../../../../agent-research/2610.04109-seer-forecasting/">实现解读</a> · <a href="#qa-96a96332cee84000">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sentry" data-paper-title="Sentry: Learning to Recover from LLM Agent Failures at Test Time" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sentry: Learning to Recover from LLM Agent Failures at Test Time Agent Stanford University 2026-10-02 Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当前行为失败，再按类别和标签检索相关恢复建议。外部验证器只看后续可观察进展、不看任务奖励，确认恢复后才把经验写入 playbook；动作格式错误走单独的硬修复路径。 未复现原文四套环境，不宣称 WebShop、AppWorld、SWE-bench 或 Mind2Web 成绩。独立控制器与真实 checkpoint 的小预算工具任务验证；未复现原文四套环境，不宣称 WebShop、AppWorld、SWE-bench 或 Mind2Web 成绩。数据使用 HotpotQA 官方 Hugging Face 镜像的 validation parquet。脚本校验固定 SHA-256，并按题目 ID 哈希排序；前 4 题建立记忆，之后 16 题保留给接口开发，再后 8 题作隔离对照。它们均来自官方 dev，不是官方 test。  失败恢复 条件记忆 测试时学习 Agent 运行流程与自进化：改的是哪一层 为什么只在失败时检索恢复经验，而不让 playbook 常驻？ 常驻所有失败建议增加上下文并可能干扰正常执行，失败类型和标签触发检索让建议更针对当前问题。是否失败与是否恢复都需独立观察，不能因为模型说“已修复”就写经验；格式错误还走单独硬修复路径。 例如正常搜索时不必反复看“如何修 JSON”，只有解析失败才注入相应建议，恢复后才考虑长期记录。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sentry" data-paper-title="Sentry: Learning to Recover from LLM Agent Failures at Test Time" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sentry: Learning to Recover from LLM Agent Failures at Test Time Agent Stanford University 2026-10-02 Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当前行为失败，再按类别和标签检索相关恢复建议。外部验证器只看后续可观察进展、不看任务奖励，确认恢复后才把经验写入 playbook；动作格式错误走单独的硬修复路径。 未复现原文四套环境，不宣称 WebShop、AppWorld、SWE-bench 或 Mind2Web 成绩。独立控制器与真实 checkpoint 的小预算工具任务验证；未复现原文四套环境，不宣称 WebShop、AppWorld、SWE-bench 或 Mind2Web 成绩。数据使用 HotpotQA 官方 Hugging Face 镜像的 validation parquet。脚本校验固定 SHA-256，并按题目 ID 哈希排序；前 4 题建立记忆，之后 16 题保留给接口开发，再后 8 题作隔离对照。它们均来自官方 dev，不是官方 test。  失败恢复 条件记忆 测试时学习 Agent 运行流程与自进化：改的是哪一层 Sentry 为什么专门处理 Agent 运行中的卡住、重复与格式错误？ 长程 Agent 不一定因缺知识失败，也可能陷入循环、重复无效动作或发出不合法调用。Sentry 研究在运行时识别这些故障并给恢复支持，使已有经验服务当前阻塞。恢复只是局部继续行动，不能直接等同于最终答对；真实本地对照还出现了负结果。 教学例：Agent 连续重复同一无效搜索，检测后可尝试相关恢复建议；即使之后开始读新页面，也仍要检查最终答案。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-sentry-acd21bdd" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-495464cea2ff924e">为什么只在失败时检索恢复经验，而不让 playbook 常驻？</h2>
+<h2 id="qa-495464cea2ff924e">Sentry 为什么专门处理 Agent 运行中的卡住、重复与格式错误？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asentry">Sentry: Learning to Recover from LLM Agent Failures at Test Time</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Stanford University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>常驻所有失败建议增加上下文并可能干扰正常执行，失败类型和标签触发检索让建议更针对当前问题。是否失败与是否恢复都需独立观察，不能因为模型说“已修复”就写经验；格式错误还走单独硬修复路径。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如正常搜索时不必反复看“如何修 JSON”，只有解析失败才注入相应建议，恢复后才考虑长期记录。</p>
+<p><strong>答案：</strong>长程 Agent 不一定因缺知识失败，也可能陷入循环、重复无效动作或发出不合法调用。Sentry 研究在运行时识别这些故障并给恢复支持，使已有经验服务当前阻塞。恢复只是局部继续行动，不能直接等同于最终答对；真实本地对照还出现了负结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Agent 连续重复同一无效搜索，检测后可尝试相关恢复建议；即使之后开始读新页面，也仍要检查最终答案。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02994">原论文</a> · <a href="../../../../agent-research/2610.02994-sentry/">实现解读</a> · <a href="#qa-495464cea2ff924e">问题链接</a></p>
 </details>
@@ -1061,15 +1061,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02994">原论文</a> · <a href="../../../../agent-research/2610.02994-sentry/">实现解读</a> · <a href="#qa-2ae4b0a62a5f04d6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sentry" data-paper-title="Sentry: Learning to Recover from LLM Agent Failures at Test Time" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sentry: Learning to Recover from LLM Agent Failures at Test Time Agent Stanford University 2026-10-02 Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当前行为失败，再按类别和标签检索相关恢复建议。外部验证器只看后续可观察进展、不看任务奖励，确认恢复后才把经验写入 playbook；动作格式错误走单独的硬修复路径。 未复现原文四套环境，不宣称 WebShop、AppWorld、SWE-bench 或 Mind2Web 成绩。独立控制器与真实 checkpoint 的小预算工具任务验证；未复现原文四套环境，不宣称 WebShop、AppWorld、SWE-bench 或 Mind2Web 成绩。数据使用 HotpotQA 官方 Hugging Face 镜像的 validation parquet。脚本校验固定 SHA-256，并按题目 ID 哈希排序；前 4 题建立记忆，之后 16 题保留给接口开发，再后 8 题作隔离对照。它们均来自官方 dev，不是官方 test。  失败恢复 条件记忆 测试时学习 Agent 运行流程与自进化：改的是哪一层 后续可观察进展 verifier 与最终任务奖励在恢复确认上有何不同？ verifier 不读任务奖励，检查干预后窗口内是否出现可见改善，用来决定经验是否可信；最终 EM 等由外部评分器在轨迹结束后计算。局部恢复不保证答对，也可能误判，因此不能把 playbook 写入数量当能力指标。 例如重新成功打开文档说明工具循环恢复，但最终仍可能读错事实；这两种结果应分别记账。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sentry" data-paper-title="Sentry: Learning to Recover from LLM Agent Failures at Test Time" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Sentry: Learning to Recover from LLM Agent Failures at Test Time Agent Stanford University 2026-10-02 Sentry 不把所有失败经验长期塞进 Agent 上下文，而是先识别当前行为失败，再按类别和标签检索相关恢复建议。外部验证器只看后续可观察进展、不看任务奖励，确认恢复后才把经验写入 playbook；动作格式错误走单独的硬修复路径。 未复现原文四套环境，不宣称 WebShop、AppWorld、SWE-bench 或 Mind2Web 成绩。独立控制器与真实 checkpoint 的小预算工具任务验证；未复现原文四套环境，不宣称 WebShop、AppWorld、SWE-bench 或 Mind2Web 成绩。数据使用 HotpotQA 官方 Hugging Face 镜像的 validation parquet。脚本校验固定 SHA-256，并按题目 ID 哈希排序；前 4 题建立记忆，之后 16 题保留给接口开发，再后 8 题作隔离对照。它们均来自官方 dev，不是官方 test。  失败恢复 条件记忆 测试时学习 Agent 运行流程与自进化：改的是哪一层 按失败类别检索恢复建议，与把全部经验常驻上下文，有何信息取舍？ 条件检索只在检测到相应失败时提供相关类别和标签的经验，减少正常执行时的额外输入；常驻全部经验无需等待触发，却更容易加入无关建议。条件方式依赖检测和匹配是否可靠，漏检会错过帮助，误检也可能打断正常策略，不能由上下文减少直接推出成功提升。 教学例：网络超时后检索连接恢复经验，比每一步都携带所有格式与循环修复指南更聚焦；若把正常等待误判超时，干预仍会有害。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-f2eab53b675d142d">后续可观察进展 verifier 与最终任务奖励在恢复确认上有何不同？</h2>
+<h2 id="qa-f2eab53b675d142d">按失败类别检索恢复建议，与把全部经验常驻上下文，有何信息取舍？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asentry">Sentry: Learning to Recover from LLM Agent Failures at Test Time</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Stanford University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>verifier 不读任务奖励，检查干预后窗口内是否出现可见改善，用来决定经验是否可信；最终 EM 等由外部评分器在轨迹结束后计算。局部恢复不保证答对，也可能误判，因此不能把 playbook 写入数量当能力指标。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如重新成功打开文档说明工具循环恢复，但最终仍可能读错事实；这两种结果应分别记账。</p>
+<p><strong>答案：</strong>条件检索只在检测到相应失败时提供相关类别和标签的经验，减少正常执行时的额外输入；常驻全部经验无需等待触发，却更容易加入无关建议。条件方式依赖检测和匹配是否可靠，漏检会错过帮助，误检也可能打断正常策略，不能由上下文减少直接推出成功提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：网络超时后检索连接恢复经验，比每一步都携带所有格式与循环修复指南更聚焦；若把正常等待误判超时，干预仍会有害。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02994">原论文</a> · <a href="../../../../agent-research/2610.02994-sentry/">实现解读</a> · <a href="#qa-f2eab53b675d142d">问题链接</a></p>
 </details>
@@ -1087,16 +1087,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02994">原论文</a> · <a href="../../../../agent-research/2610.02994-sentry/">实现解读</a> · <a href="#qa-fc327101cfc3f1ce">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:active-saddler" data-paper-title="ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization Agent POSTECH 2026-10-01 把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行动态 failure arm 与探索/利用调度；不调用 AutoSaddler 或真实 GAIA2/Terminal-Bench 环境。执行动态 failure arm 与探索/利用调度；不调用 AutoSaddler 或真实 GAIA2/Terminal-Bench 环境。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  Harness 优化 主动课程 RSI Agent 运行流程与自进化：改的是哪一层 失败模式为什么是动态、非平稳的 bandit arm？ 新轨迹会暴露以前没有的弱点，harness 修复又会改变旧弱点的价值，所以 arm 集合和收益随时间变化。课程控制器在发现新场景与重访已知失败间分配预算，不能把每个模式当固定独立任务或认为历史高价值永远值得优先。 例如 JSON 格式问题修好后，继续大量抽同模式的收益下降；此时应探索可能新出现的工具权限或长程错误。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:active-saddler" data-paper-title="ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization Agent POSTECH 2026-10-01 把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行动态 failure arm 与探索/利用调度；不调用 AutoSaddler 或真实 GAIA2/Terminal-Bench 环境。执行动态 failure arm 与探索/利用调度；不调用 AutoSaddler 或真实 GAIA2/Terminal-Bench 环境。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  Harness 优化 主动课程 RSI Agent 运行流程与自进化：改的是哪一层 有限修复预算下，ActiveSaddler 为什么需要选择下一批该暴露哪类失败？ harness 不可能对所有场景同时做同等深入修复，反复只测熟悉问题又会漏掉新弱点。ActiveSaddler 把训练课程当作动态决策，利用已有失败和修复反馈安排后续任务。选中困难场景只提供学习机会，不表示修复已实现，也不能把调度计数当成真实能力增长。 教学例：文件编辑故障已多次修好，浏览恢复问题刚出现；课程需要决定继续验证旧问题还是拿预算探索这个新故障。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-active-saddler-9c3dd285" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-eb7aff962dad76a3">失败模式为什么是动态、非平稳的 bandit arm？</h2>
+<h2 id="qa-eb7aff962dad76a3">有限修复预算下，ActiveSaddler 为什么需要选择下一批该暴露哪类失败？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aactive-saddler">ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · POSTECH</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>新轨迹会暴露以前没有的弱点，harness 修复又会改变旧弱点的价值，所以 arm 集合和收益随时间变化。课程控制器在发现新场景与重访已知失败间分配预算，不能把每个模式当固定独立任务或认为历史高价值永远值得优先。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 JSON 格式问题修好后，继续大量抽同模式的收益下降；此时应探索可能新出现的工具权限或长程错误。</p>
+<p><strong>答案：</strong>harness 不可能对所有场景同时做同等深入修复，反复只测熟悉问题又会漏掉新弱点。ActiveSaddler 把训练课程当作动态决策，利用已有失败和修复反馈安排后续任务。选中困难场景只提供学习机会，不表示修复已实现，也不能把调度计数当成真实能力增长。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：文件编辑故障已多次修好，浏览恢复问题刚出现；课程需要决定继续验证旧问题还是拿预算探索这个新故障。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00906">原论文</a> · <a href="../../../../agent-research/2610.00906-active-saddler/">实现解读</a> · <a href="#qa-eb7aff962dad76a3">问题链接</a></p>
 </details>
@@ -1114,15 +1114,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00906">原论文</a> · <a href="../../../../agent-research/2610.00906-active-saddler/">实现解读</a> · <a href="#qa-bd6e14f5e934fc23">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:active-saddler" data-paper-title="ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization Agent POSTECH 2026-10-01 把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行动态 failure arm 与探索/利用调度；不调用 AutoSaddler 或真实 GAIA2/Terminal-Bench 环境。执行动态 failure arm 与探索/利用调度；不调用 AutoSaddler 或真实 GAIA2/Terminal-Bench 环境。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  Harness 优化 主动课程 RSI Agent 运行流程与自进化：改的是哪一层 周期 Draw 未见场景与只按 UCB 重访已有 arm 有何区别？ UCB 只在已存在 arm 中探索，无法自动发现尚未实例化的失败类型；周期 Draw 扩展课程覆盖。重访检查修复是否稳定，发现寻找新弱点，两者服务不同需求，不能因当前失败下降就停止收集新场景。 例如所有已知模式都修好后，UCB 仍只能选旧项；Draw 可带来之前从未观察的并发错误。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:active-saddler" data-paper-title="ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization Agent POSTECH 2026-10-01 把反复出现的失败模式动态实例化为非平稳 bandit arm；课程控制器在发现新场景和重访已知弱点之间选择，并随 harness 修复结果更新优先级。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行动态 failure arm 与探索/利用调度；不调用 AutoSaddler 或真实 GAIA2/Terminal-Bench 环境。执行动态 failure arm 与探索/利用调度；不调用 AutoSaddler 或真实 GAIA2/Terminal-Bench 环境。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  Harness 优化 主动课程 RSI Agent 运行流程与自进化：改的是哪一层 固定难题采样与修复后动态调整失败优先级，面对的回报是否平稳？ 固定采样通常沿用预先设定的难度或频率，而修复会改变旧失败模式的价值：曾经常错的场景可能不再值得反复投入，新缺陷又可能出现。动态调度要跟随这种非平稳反馈更新，不能把历史失败率永久当作当前收益，也不保证每次再访都有新信息。 教学例：解析器问题修好后，原难例已连续通过，继续占满课程会浪费预算；新发现的认证问题可能更值得安排。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-a4c5ad7e44c1c3e3">周期 Draw 未见场景与只按 UCB 重访已有 arm 有何区别？</h2>
+<h2 id="qa-a4c5ad7e44c1c3e3">固定难题采样与修复后动态调整失败优先级，面对的回报是否平稳？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aactive-saddler">ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · POSTECH</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>UCB 只在已存在 arm 中探索，无法自动发现尚未实例化的失败类型；周期 Draw 扩展课程覆盖。重访检查修复是否稳定，发现寻找新弱点，两者服务不同需求，不能因当前失败下降就停止收集新场景。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如所有已知模式都修好后，UCB 仍只能选旧项；Draw 可带来之前从未观察的并发错误。</p>
+<p><strong>答案：</strong>固定采样通常沿用预先设定的难度或频率，而修复会改变旧失败模式的价值：曾经常错的场景可能不再值得反复投入，新缺陷又可能出现。动态调度要跟随这种非平稳反馈更新，不能把历史失败率永久当作当前收益，也不保证每次再访都有新信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：解析器问题修好后，原难例已连续通过，继续占满课程会浪费预算；新发现的认证问题可能更值得安排。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00906">原论文</a> · <a href="../../../../agent-research/2610.00906-active-saddler/">实现解读</a> · <a href="#qa-a4c5ad7e44c1c3e3">问题链接</a></p>
 </details>
@@ -1140,16 +1140,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00906">原论文</a> · <a href="../../../../agent-research/2610.00906-active-saddler/">实现解读</a> · <a href="#qa-49be3a394da7a5ca">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:flowright" data-paper-title="It Takes Workflows to Evolve Better Workflows" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="It Takes Workflows to Evolve Better Workflows Agent William &amp; Mary 2026-10-01 利用 workflow 拓扑把稀疏结果拆为层级、结构感知的 role credit，使单角色自进化、上下游协同或多 Agent co-evolution 可共用一个 harness。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行结构 credit 守恒分配；不生成 workflow、不训练 Qwen3.5，也不运行 DataWright。执行结构 credit 守恒分配；不生成 workflow、不训练 Qwen3.5，也不运行 DataWright。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  工作流进化 多 Agent 层级奖励 Agent 运行流程与自进化：改的是哪一层 workflow 拓扑为什么会影响角色的结果信用？ 上游角色的输出可被多个下游使用，同一终局结果需要分配给不同责任位置。Flowright 依据有效性和子节点数形成结构权重，统一支持单角色、上下游与共同进化；这是拓扑启发式，不能直接称为每个角色的因果贡献。 例如资料角色服务三个写作节点，其结构影响范围大于孤立格式节点，但真正失败是否由它造成仍需另做干预验证。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:flowright" data-paper-title="It Takes Workflows to Evolve Better Workflows" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="It Takes Workflows to Evolve Better Workflows Agent William &amp; Mary 2026-10-01 利用 workflow 拓扑把稀疏结果拆为层级、结构感知的 role credit，使单角色自进化、上下游协同或多 Agent co-evolution 可共用一个 harness。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行结构 credit 守恒分配；不生成 workflow、不训练 Qwen3.5，也不运行 DataWright。执行结构 credit 守恒分配；不生成 workflow、不训练 Qwen3.5，也不运行 DataWright。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  工作流进化 多 Agent 层级奖励 Agent 运行流程与自进化：改的是哪一层 多 Agent 工作流只在末尾得到结果时，为什么很难知道该改进哪个角色？ 终局成败由多个角色及其依赖共同形成，把同一奖励发给所有人会掩盖谁真正推动或阻碍了流程。FlowRight 研究利用工作流结构组织角色信用，支持不同范围的协同改进。结构权重是一种归因规则，不是每个角色真实因果贡献的直接测量。 教学例：检索者找到证据，写作者却误读结论；若只给所有角色同一失败分数，后续更新可能连有效检索习惯也一起改坏。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-flowright-b0c3085e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-769d988dd4262bbd">workflow 拓扑为什么会影响角色的结果信用？</h2>
+<h2 id="qa-769d988dd4262bbd">多 Agent 工作流只在末尾得到结果时，为什么很难知道该改进哪个角色？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aflowright">It Takes Workflows to Evolve Better Workflows</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · William &amp; Mary</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>上游角色的输出可被多个下游使用，同一终局结果需要分配给不同责任位置。Flowright 依据有效性和子节点数形成结构权重，统一支持单角色、上下游与共同进化；这是拓扑启发式，不能直接称为每个角色的因果贡献。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如资料角色服务三个写作节点，其结构影响范围大于孤立格式节点，但真正失败是否由它造成仍需另做干预验证。</p>
+<p><strong>答案：</strong>终局成败由多个角色及其依赖共同形成，把同一奖励发给所有人会掩盖谁真正推动或阻碍了流程。FlowRight 研究利用工作流结构组织角色信用，支持不同范围的协同改进。结构权重是一种归因规则，不是每个角色真实因果贡献的直接测量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：检索者找到证据，写作者却误读结论；若只给所有角色同一失败分数，后续更新可能连有效检索习惯也一起改坏。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01026">原论文</a> · <a href="../../../../agent-research/2610.01026-flowright/">实现解读</a> · <a href="#qa-769d988dd4262bbd">问题链接</a></p>
 </details>
@@ -1167,15 +1167,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01026">原论文</a> · <a href="../../../../agent-research/2610.01026-flowright/">实现解读</a> · <a href="#qa-bff8ef395659ef30">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:flowright" data-paper-title="It Takes Workflows to Evolve Better Workflows" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="It Takes Workflows to Evolve Better Workflows Agent William &amp; Mary 2026-10-01 利用 workflow 拓扑把稀疏结果拆为层级、结构感知的 role credit，使单角色自进化、上下游协同或多 Agent co-evolution 可共用一个 harness。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行结构 credit 守恒分配；不生成 workflow、不训练 Qwen3.5，也不运行 DataWright。执行结构 credit 守恒分配；不生成 workflow、不训练 Qwen3.5，也不运行 DataWright。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  工作流进化 多 Agent 层级奖励 Agent 运行流程与自进化：改的是哪一层 结构信用与把同一结果奖励完整发给所有角色有什么不同？ 完整广播让每个角色获得相同信号，难区分层级责任且总信用随角色数增长；归一化结构权重保持分配总量等于结果奖励。拓扑分配更具体，也可能把孩子多但内容无用的节点权重放大，因此不能只凭守恒证明归因正确。 例如三角色总奖励一，平均或加权分配总和仍为一；各自都拿一则总量三，已改变更新尺度。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:flowright" data-paper-title="It Takes Workflows to Evolve Better Workflows" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="It Takes Workflows to Evolve Better Workflows Agent William &amp; Mary 2026-10-01 利用 workflow 拓扑把稀疏结果拆为层级、结构感知的 role credit，使单角色自进化、上下游协同或多 Agent co-evolution 可共用一个 harness。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行结构 credit 守恒分配；不生成 workflow、不训练 Qwen3.5，也不运行 DataWright。执行结构 credit 守恒分配；不生成 workflow、不训练 Qwen3.5，也不运行 DataWright。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  工作流进化 多 Agent 层级奖励 Agent 运行流程与自进化：改的是哪一层 单角色自进化、上下游协同与多角色共同进化，各改变哪些参与者？ 单角色更新把其他参与者固定，便于观察局部变化；上下游协同关注依赖接口，多个角色共同变化则可调整整体配合，但更难区分收益来源。FlowRight 用统一工作流和信用表达支持这些范围，不能把某一范围有效直接推为所有联合更新都有效。 教学例：只改写作者与同时改检索者和写作者，可能需要不同验证；后者也许适配了新证据格式，不能只归功于写作能力。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-1e685b943960b7cf">结构信用与把同一结果奖励完整发给所有角色有什么不同？</h2>
+<h2 id="qa-1e685b943960b7cf">单角色自进化、上下游协同与多角色共同进化，各改变哪些参与者？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aflowright">It Takes Workflows to Evolve Better Workflows</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · William &amp; Mary</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>完整广播让每个角色获得相同信号，难区分层级责任且总信用随角色数增长；归一化结构权重保持分配总量等于结果奖励。拓扑分配更具体，也可能把孩子多但内容无用的节点权重放大，因此不能只凭守恒证明归因正确。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如三角色总奖励一，平均或加权分配总和仍为一；各自都拿一则总量三，已改变更新尺度。</p>
+<p><strong>答案：</strong>单角色更新把其他参与者固定，便于观察局部变化；上下游协同关注依赖接口，多个角色共同变化则可调整整体配合，但更难区分收益来源。FlowRight 用统一工作流和信用表达支持这些范围，不能把某一范围有效直接推为所有联合更新都有效。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只改写作者与同时改检索者和写作者，可能需要不同验证；后者也许适配了新证据格式，不能只归功于写作能力。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01026">原论文</a> · <a href="../../../../agent-research/2610.01026-flowright/">实现解读</a> · <a href="#qa-1e685b943960b7cf">问题链接</a></p>
 </details>
@@ -1193,16 +1193,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01026">原论文</a> · <a href="../../../../agent-research/2610.01026-flowright/">实现解读</a> · <a href="#qa-d5eae1a0fd5db0e8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rule-evolve" data-paper-title="Self-Evolving Coding Rules for AI Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Self-Evolving Coding Rules for AI Coding Agents Agent 原文首页未列第一作者机构 2026-09-30 维护 coding rule 候选池，由 mutator 生成变体，再只用隔离 validation evaluator 选择并回写更优规则。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行候选变异后的 validation 选择；不调用 LLM mutator。执行候选变异后的 validation 选择；不调用 LLM mutator。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  RSI Coding Agent 规则进化 Agent 运行流程与自进化：改的是哪一层 coding rule 为什么作为候选池而不是每次覆盖唯一提示？ 候选池保留不同规则方向供变异和验证比较，避免一次修改失败就丢掉可用基线。规则目标是影响编码 Agent 行为，不是直接替它写参考 patch；候选语句看似合理仍需隔离评估，不能由 mutator 自己给高分就回写。 例如“编辑前读调用方”和“先复现测试”可形成不同候选组合，保留旧版便于发现新组合是否实际退化。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rule-evolve" data-paper-title="Self-Evolving Coding Rules for AI Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Self-Evolving Coding Rules for AI Coding Agents Agent 原文首页未列第一作者机构 2026-09-30 维护 coding rule 候选池，由 mutator 生成变体，再只用隔离 validation evaluator 选择并回写更优规则。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行候选变异后的 validation 选择；不调用 LLM mutator。执行候选变异后的 validation 选择；不调用 LLM mutator。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  RSI Coding Agent 规则进化 Agent 运行流程与自进化：改的是哪一层 RuleEvolve 为什么把 coding rule 当作可以检验和迭代的开发经验？ 编码 Agent 的工作规则会影响反复发生的定位、编辑和测试行为，手写一句建议未必适合当前任务分布。RuleEvolve 研究从规则变体中选择有实际证据的版本，使经验能持续修订。规则文字更详细不代表执行更好，选择还需隔离验证，不能依生成者自信直接回写。 教学例：新增“修改前先查调用点”的规则后，要看是否在相同开发任务上帮助修复，而不只评判这句话听起来是否合理。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-rule-evolve-f1ced1e2" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-846804b9a08fcd6a">coding rule 为什么作为候选池而不是每次覆盖唯一提示？</h2>
+<h2 id="qa-846804b9a08fcd6a">RuleEvolve 为什么把 coding rule 当作可以检验和迭代的开发经验？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arule-evolve">Self-Evolving Coding Rules for AI Coding Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>候选池保留不同规则方向供变异和验证比较，避免一次修改失败就丢掉可用基线。规则目标是影响编码 Agent 行为，不是直接替它写参考 patch；候选语句看似合理仍需隔离评估，不能由 mutator 自己给高分就回写。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“编辑前读调用方”和“先复现测试”可形成不同候选组合，保留旧版便于发现新组合是否实际退化。</p>
+<p><strong>答案：</strong>编码 Agent 的工作规则会影响反复发生的定位、编辑和测试行为，手写一句建议未必适合当前任务分布。RuleEvolve 研究从规则变体中选择有实际证据的版本，使经验能持续修订。规则文字更详细不代表执行更好，选择还需隔离验证，不能依生成者自信直接回写。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新增“修改前先查调用点”的规则后，要看是否在相同开发任务上帮助修复，而不只评判这句话听起来是否合理。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00650">原论文</a> · <a href="../../../../agent-research/2610.00650-rule-evolve/">实现解读</a> · <a href="#qa-846804b9a08fcd6a">问题链接</a></p>
 </details>
@@ -1220,15 +1220,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00650">原论文</a> · <a href="../../../../agent-research/2610.00650-rule-evolve/">实现解读</a> · <a href="#qa-e4060e8043015f09">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rule-evolve" data-paper-title="Self-Evolving Coding Rules for AI Coding Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Self-Evolving Coding Rules for AI Coding Agents Agent 原文首页未列第一作者机构 2026-09-30 维护 coding rule 候选池，由 mutator 生成变体，再只用隔离 validation evaluator 选择并回写更优规则。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行候选变异后的 validation 选择；不调用 LLM mutator。执行候选变异后的 validation 选择；不调用 LLM mutator。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  RSI Coding Agent 规则进化 Agent 运行流程与自进化：改的是哪一层 隔离 validation evaluator 与让规则生成器兼任裁判有什么差别？ 生成器可能偏好自己的措辞或把训练样例记入规则，隔离 evaluator 用实际验证结果选择，减少这种直接自证。validation 反复被优化仍可能过拟合，最终 test 应冻结；只看规则文本质量不能替代真实代码任务结果。 例如 mutator 认为新规则更严谨，但若它让 Agent 漏掉必要测试，执行验证应拒绝，而不是接受生成器赞语。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rule-evolve" data-paper-title="Self-Evolving Coding Rules for AI Coding Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Self-Evolving Coding Rules for AI Coding Agents Agent 原文首页未列第一作者机构 2026-09-30 维护 coding rule 候选池，由 mutator 生成变体，再只用隔离 validation evaluator 选择并回写更优规则。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行候选变异后的 validation 选择；不调用 LLM mutator。执行候选变异后的 validation 选择；不调用 LLM mutator。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  RSI Coding Agent 规则进化 Agent 运行流程与自进化：改的是哪一层 维护规则候选池与每次立刻覆盖唯一规则，在搜索和回退上有何区别？ 候选池让多个版本在相同评价口径下竞争，旧规则可作为比较和保留对象；立即覆盖把提案直接变成运行状态，失败后可能丢掉可用基线。候选池并不自动提供正确裁判，仍需隔离 evaluator，且不能用候选数量替代真实工具任务效果。 教学例：一条新规则更重视搜索、另一条更重视测试，可先保留两者比较；若每次生成即覆盖，就难区分是哪次修改造成退化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-5c0648898c9a12dc">隔离 validation evaluator 与让规则生成器兼任裁判有什么差别？</h2>
+<h2 id="qa-5c0648898c9a12dc">维护规则候选池与每次立刻覆盖唯一规则，在搜索和回退上有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arule-evolve">Self-Evolving Coding Rules for AI Coding Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>生成器可能偏好自己的措辞或把训练样例记入规则，隔离 evaluator 用实际验证结果选择，减少这种直接自证。validation 反复被优化仍可能过拟合，最终 test 应冻结；只看规则文本质量不能替代真实代码任务结果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 mutator 认为新规则更严谨，但若它让 Agent 漏掉必要测试，执行验证应拒绝，而不是接受生成器赞语。</p>
+<p><strong>答案：</strong>候选池让多个版本在相同评价口径下竞争，旧规则可作为比较和保留对象；立即覆盖把提案直接变成运行状态，失败后可能丢掉可用基线。候选池并不自动提供正确裁判，仍需隔离 evaluator，且不能用候选数量替代真实工具任务效果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条新规则更重视搜索、另一条更重视测试，可先保留两者比较；若每次生成即覆盖，就难区分是哪次修改造成退化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00650">原论文</a> · <a href="../../../../agent-research/2610.00650-rule-evolve/">实现解读</a> · <a href="#qa-5c0648898c9a12dc">问题链接</a></p>
 </details>
@@ -1273,15 +1273,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37834">原论文</a> · <a href="../../../../agent-research/2609.37834-branch-mixture/">实现解读</a> · <a href="#qa-aabf9fb0b40ae634">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:branch-mixture" data-paper-title="Mixture of Self-Improving Branches for Agent Harness Optimization" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Mixture of Self-Improving Branches for Agent Harness Optimization Agent 原文首页未列机构 2026-09-29 将 harness 搜索拆成多条分支，每条分支维护不同的开发子集和 proposal policy；全分支都解决的样本被移除，具有分支区分度的样本被保留，部署时由只看输入特征的 router 选择开发集冠军。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行分支子集分化和输入路由；没有 LLM 生成 harness，也不运行 SWE-bench。执行分支子集分化和输入路由；没有 LLM 生成 harness，也不运行 SWE-bench。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  Harness 优化 分支搜索 RSI Agent 运行流程与自进化：改的是哪一层 全分支都解决的样本移除，与保留全开发集有什么取舍？ 已普遍解决样本区分力低，移除可把预算集中在分支表现不同的难点，推动专长分化；保留全部更稳定却可能被简单样本主导。移除不代表这些能力永远不会回归，仍需独立验证与完整最终任务分母。 例如一百道都轻松答对的格式题不再帮助区分分支，少数各有胜负的检索题更能指导路由和搜索。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:branch-mixture" data-paper-title="Mixture of Self-Improving Branches for Agent Harness Optimization" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Mixture of Self-Improving Branches for Agent Harness Optimization Agent 原文首页未列机构 2026-09-29 将 harness 搜索拆成多条分支，每条分支维护不同的开发子集和 proposal policy；全分支都解决的样本被移除，具有分支区分度的样本被保留，部署时由只看输入特征的 router 选择开发集冠军。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行分支子集分化和输入路由；没有 LLM 生成 harness，也不运行 SWE-bench。执行分支子集分化和输入路由；没有 LLM 生成 harness，也不运行 SWE-bench。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  Harness 优化 分支搜索 RSI Agent 运行流程与自进化：改的是哪一层 输入路由多个专门分支，与始终运行一个全局冠军，有何假设差异？ 全局冠军假设同一 harness 能覆盖各类输入，分支混合则允许不同流程各擅长一部分任务，再由公开输入特征选择。专门化可能改善匹配，也引入路由错误与维护成本；路由只能用部署时可见信息，不能读当前测试真实分数再挑赢家。 教学例：代码题和浏览题分别有开发集冠军，router 可据任务特征选择；若先看两者在本题的金标得分才选择，就不是可部署路由。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-9a69ceef4c84d93f">全分支都解决的样本移除，与保留全开发集有什么取舍？</h2>
+<h2 id="qa-9a69ceef4c84d93f">输入路由多个专门分支，与始终运行一个全局冠军，有何假设差异？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abranch-mixture">Mixture of Self-Improving Branches for Agent Harness Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>已普遍解决样本区分力低，移除可把预算集中在分支表现不同的难点，推动专长分化；保留全部更稳定却可能被简单样本主导。移除不代表这些能力永远不会回归，仍需独立验证与完整最终任务分母。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一百道都轻松答对的格式题不再帮助区分分支，少数各有胜负的检索题更能指导路由和搜索。</p>
+<p><strong>答案：</strong>全局冠军假设同一 harness 能覆盖各类输入，分支混合则允许不同流程各擅长一部分任务，再由公开输入特征选择。专门化可能改善匹配，也引入路由错误与维护成本；路由只能用部署时可见信息，不能读当前测试真实分数再挑赢家。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：代码题和浏览题分别有开发集冠军，router 可据任务特征选择；若先看两者在本题的金标得分才选择，就不是可部署路由。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37834">原论文</a> · <a href="../../../../agent-research/2609.37834-branch-mixture/">实现解读</a> · <a href="#qa-9a69ceef4c84d93f">问题链接</a></p>
 </details>
@@ -1299,16 +1299,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37834">原论文</a> · <a href="../../../../agent-research/2609.37834-branch-mixture/">实现解读</a> · <a href="#qa-6112ff8a7f4f4deb">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:meta-skills" data-paper-title="Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI Agent Apodex / University of Illinois Urbana-Champaign 2026-09-29 从开发任务的 harness 执行反馈中提炼包含 when、provide、use 的 meta-skill，再冻结技能库；测试任务只检索相关 meta-skill 来构建新 harness，不用测试结果反向修改技能库。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行开发反馈 refine 与冻结后检索；fixture reward 不是 AI4AI benchmark。执行开发反馈 refine 与冻结后检索；fixture reward 不是 AI4AI benchmark。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  Harness 设计 Meta-skill RSI Agent 运行流程与自进化：改的是哪一层 when、provide、use 为什么比仅保存一条优化建议更完整？ when 说明适用情境，provide 说明应提供什么资源或组件，use 说明如何使用，使经验可以迁移到新 harness 设计。单句建议容易缺触发条件或执行方式，仍需证据支持；meta-skill 是设计知识，不是当前任务的标准答案。 例如“证据冲突时增加核查器，并在最终回答前调用”包含时机、组件和用法，比只写“多验证”更可执行。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:meta-skills" data-paper-title="Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI Agent Apodex / University of Illinois Urbana-Champaign 2026-09-29 从开发任务的 harness 执行反馈中提炼包含 when、provide、use 的 meta-skill，再冻结技能库；测试任务只检索相关 meta-skill 来构建新 harness，不用测试结果反向修改技能库。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行开发反馈 refine 与冻结后检索；fixture reward 不是 AI4AI benchmark。执行开发反馈 refine 与冻结后检索；fixture reward 不是 AI4AI benchmark。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  Harness 设计 Meta-skill RSI Agent 运行流程与自进化：改的是哪一层 Meta-Skills 为什么关注“怎样配置 Agent 工作方式”的可迁移经验？ 相似任务可能共享规划、取证或验证习惯，若每次只保留具体答案，下一任务仍需重新设计流程。Meta-Skills 把这种如何工作的经验作为可复用对象，让检索结果指导 harness 使用。经验必须有适用条件，不能将某题有效的提示无条件施加到所有任务。 教学例：处理多源数字比较时先建证据表是流程经验；具体表中的数字只属于原任务，不应一起作为新任务答案复用。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-meta-skills-2db3e168" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e92a721ec01e3781">when、provide、use 为什么比仅保存一条优化建议更完整？</h2>
+<h2 id="qa-e92a721ec01e3781">Meta-Skills 为什么关注“怎样配置 Agent 工作方式”的可迁移经验？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ameta-skills">Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Apodex / University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>when 说明适用情境，provide 说明应提供什么资源或组件，use 说明如何使用，使经验可以迁移到新 harness 设计。单句建议容易缺触发条件或执行方式，仍需证据支持；meta-skill 是设计知识，不是当前任务的标准答案。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“证据冲突时增加核查器，并在最终回答前调用”包含时机、组件和用法，比只写“多验证”更可执行。</p>
+<p><strong>答案：</strong>相似任务可能共享规划、取证或验证习惯，若每次只保留具体答案，下一任务仍需重新设计流程。Meta-Skills 把这种如何工作的经验作为可复用对象，让检索结果指导 harness 使用。经验必须有适用条件，不能将某题有效的提示无条件施加到所有任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：处理多源数字比较时先建证据表是流程经验；具体表中的数字只属于原任务，不应一起作为新任务答案复用。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38143">原论文</a> · <a href="../../../../agent-research/2609.38143-meta-skills/">实现解读</a> · <a href="#qa-e92a721ec01e3781">问题链接</a></p>
 </details>
@@ -1352,16 +1352,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38143">原论文</a> · <a href="../../../../agent-research/2609.38143-meta-skills/">实现解读</a> · <a href="#qa-e690a5adb56993a1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:video-rsi" data-paper-title="Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution Agent Tsinghua University 2026-09-29 视频 Agent 的执行 trace 只包含当前 harness 选择观察的证据，因此失败解释可能无法区分。Video-RSI 让模型回访原训练视频、主动收集额外观察，形成可检验诊断并改写 harness；候选只有在准确率提高且成本不恶化，或成本下降且准确率不恶化时才保留。 复现级别：L1 接纳规则。复现级别：L1 接纳规则。实现准确率—视觉成本双目标的 Pareto 接纳；未在视频 benchmark 上自动改写并执行完整 harness。未把训练视频私有答案或 example-level score 暴露给候选 harness；当前不含真实视频解码、代码改写 sandbox 和跨代停止条件，因而暂不登记为 Evolve 可执行 operator。  RSI Harness 演化 视频理解 Agent Agent 运行流程与自进化：改的是哪一层 失败 trace 为什么可能不足以诊断视频理解错误？ trace 只含现有 harness 选择看的帧或证据，未被访问的细节不可见，错误可能来自遗漏而非推理。回访原训练视频并补观察可区分诊断，再修改 harness；这不能扩展到读取测试视频答案或逐例隐藏评分来优化候选。 例如 trace 只看见开门前后，无法判断中间是否有人递物，回访相应训练片段才可能发现采样遗漏。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:video-rsi" data-paper-title="Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution Agent Tsinghua University 2026-09-29 视频 Agent 的执行 trace 只包含当前 harness 选择观察的证据，因此失败解释可能无法区分。Video-RSI 让模型回访原训练视频、主动收集额外观察，形成可检验诊断并改写 harness；候选只有在准确率提高且成本不恶化，或成本下降且准确率不恶化时才保留。 复现级别：L1 接纳规则。复现级别：L1 接纳规则。实现准确率—视觉成本双目标的 Pareto 接纳；未在视频 benchmark 上自动改写并执行完整 harness。未把训练视频私有答案或 example-level score 暴露给候选 harness；当前不含真实视频解码、代码改写 sandbox 和跨代停止条件，因而暂不登记为 Evolve 可执行 operator。  RSI Harness 演化 视频理解 Agent Agent 运行流程与自进化：改的是哪一层 视频 Agent 为什么可能需要改取证流程，而不只是换一个更强回答提示？ 长视频包含大量时刻和细节，错误可能发生在选帧、定位、读取或证据组织，而非最后一句回答。Video RSI 研究依据执行过程改进视频任务的 harness，让有限成本用在真正需要的证据上。观察到流程变化不等于理解能力已提高，需要同时检查准确性和真实成本。 教学例：问题问某人离开前做了什么，Agent 若只取开头和结尾，改写最终提示也看不到中间关键动作，需要先改取证。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-video-rsi-6a868dfd" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-852af1294a326d1e">失败 trace 为什么可能不足以诊断视频理解错误？</h2>
+<h2 id="qa-852af1294a326d1e">视频 Agent 为什么可能需要改取证流程，而不只是换一个更强回答提示？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Avideo-rsi">Video-RSI: Recursive Self-Improvement of Video Understanding Agents via Harness Evolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>trace 只含现有 harness 选择看的帧或证据，未被访问的细节不可见，错误可能来自遗漏而非推理。回访原训练视频并补观察可区分诊断，再修改 harness；这不能扩展到读取测试视频答案或逐例隐藏评分来优化候选。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 trace 只看见开门前后，无法判断中间是否有人递物，回访相应训练片段才可能发现采样遗漏。</p>
+<p><strong>答案：</strong>长视频包含大量时刻和细节，错误可能发生在选帧、定位、读取或证据组织，而非最后一句回答。Video RSI 研究依据执行过程改进视频任务的 harness，让有限成本用在真正需要的证据上。观察到流程变化不等于理解能力已提高，需要同时检查准确性和真实成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：问题问某人离开前做了什么，Agent 若只取开头和结尾，改写最终提示也看不到中间关键动作，需要先改取证。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37950">原论文</a> · <a href="../../../../agent-research/2609.37950-video-rsi/">实现解读</a> · <a href="#qa-852af1294a326d1e">问题链接</a></p>
 </details>
@@ -1405,16 +1405,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37950">原论文</a> · <a href="../../../../agent-research/2609.37950-video-rsi/">实现解读</a> · <a href="#qa-4c1480a393a3ca8e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harness-learning" data-paper-title="Harness Learning Enables Generalizable Test-Time Adaptation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Harness Learning Enables Generalizable Test-Time Adaptation Agent Johns Hopkins University 2026-09-28 论文把测试时适配的对象从模型参数转为可执行 harness：proposer 根据真实执行反馈修改验证、解释器、检索或重试组件；底层任务模型保持冻结，多轮执行后保留更有效的脚手架。 复现级别：L1 无 gold 机制诊断。复现级别：L1 无 gold 机制诊断。实现由执行反馈驱动的 harness revision policy 与多轮适配；冻结任务策略，不读取答案或计划。当前没有接入通用 Agent runner 或 Evolve，因为二者尚不能安全执行任意 harness 并完成隔离验证；本页不把规则化 mini-suite 的成功率宣称为 Agent 能力提升。HarnessProposer 与 adapt_harness 可接入外部真实执行 callback；汇总诊断见 ../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json。  Harness 学习 测试时适配 元学习 Agent 运行流程与自进化：改的是哪一层 测试时适配为什么可以冻结模型权重而修改可执行 harness？ 验证、解释器、检索和重试方式会改变模型可获得的证据与行动反馈，参数不变仍可改善执行。proposer 根据真实报告修订这些外部组件，不是给模型隐式喂参考解答；适配有效还需实际执行候选而非只生成一段新提示。 例如同一模型改用能返回具体错误位置的解释器，可能更容易纠错，收益来自反馈接口而非模型参数更新。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harness-learning" data-paper-title="Harness Learning Enables Generalizable Test-Time Adaptation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Harness Learning Enables Generalizable Test-Time Adaptation Agent Johns Hopkins University 2026-09-28 论文把测试时适配的对象从模型参数转为可执行 harness：proposer 根据真实执行反馈修改验证、解释器、检索或重试组件；底层任务模型保持冻结，多轮执行后保留更有效的脚手架。 复现级别：L1 无 gold 机制诊断。复现级别：L1 无 gold 机制诊断。实现由执行反馈驱动的 harness revision policy 与多轮适配；冻结任务策略，不读取答案或计划。当前没有接入通用 Agent runner 或 Evolve，因为二者尚不能安全执行任意 harness 并完成隔离验证；本页不把规则化 mini-suite 的成功率宣称为 Agent 能力提升。HarnessProposer 与 adapt_harness 可接入外部真实执行 callback；汇总诊断见 ../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json。  Harness 学习 测试时适配 元学习 Agent 运行流程与自进化：改的是哪一层 Harness Learning 为什么把工具协议、记忆和规划流程也视为可学习对象？ 模型权重相同，外部工作流程仍会影响它能看到什么、何时调用工具和怎样恢复错误。Harness Learning 研究根据任务反馈修订这些可执行组织方式，减少把所有缺陷都归因于底座。流程适配有独立作用域，不能将它描述成模型参数已学到新能力。 教学例：底座不变，只加入每次提交前的测试流程，也可能改变结果；这种变化来自执行组织，不能当成模型权重训练收益。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-harness-learning-a67122de" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ad3546d8176fcc6f">测试时适配为什么可以冻结模型权重而修改可执行 harness？</h2>
+<h2 id="qa-ad3546d8176fcc6f">Harness Learning 为什么把工具协议、记忆和规划流程也视为可学习对象？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharness-learning">Harness Learning Enables Generalizable Test-Time Adaptation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Johns Hopkins University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>验证、解释器、检索和重试方式会改变模型可获得的证据与行动反馈，参数不变仍可改善执行。proposer 根据真实报告修订这些外部组件，不是给模型隐式喂参考解答；适配有效还需实际执行候选而非只生成一段新提示。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一模型改用能返回具体错误位置的解释器，可能更容易纠错，收益来自反馈接口而非模型参数更新。</p>
+<p><strong>答案：</strong>模型权重相同，外部工作流程仍会影响它能看到什么、何时调用工具和怎样恢复错误。Harness Learning 研究根据任务反馈修订这些可执行组织方式，减少把所有缺陷都归因于底座。流程适配有独立作用域，不能将它描述成模型参数已学到新能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：底座不变，只加入每次提交前的测试流程，也可能改变结果；这种变化来自执行组织，不能当成模型权重训练收益。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.35738">原论文</a> · <a href="../../../../agent-research/2609.35738-harness-learning/">实现解读</a> · <a href="#qa-ad3546d8176fcc6f">问题链接</a></p>
 </details>
@@ -1458,16 +1458,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.35738">原论文</a> · <a href="../../../../agent-research/2609.35738-harness-learning/">实现解读</a> · <a href="#qa-6af322ce5a688d5e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentx-model-replay" data-paper-title="Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems Agent Kuaishou 2026-09-24 早期 AgentX 关注从研究构想到实现、评估的单次闭环；AgentX-Model 追问一次实验之后如何决定下一次做什么。Research Agent 负责跨论文和实验路径提出、独立审查研究问题；Model Agent 接收获批提案，在固定业务输入与预测任务下多轮改代码、训练、测量，并返回中间最佳实现、负结果和未解问题。两者通过提案而非共享完整工作日志衔接。 本地保真度：公开数据机制验证（concept demo）。本地保真度：公开数据机制验证（concept demo）。执行了双角色提案/审查/调查接口、四类动作和带依赖的结果盲回放；角色由确定性规则驱动，实验图由 MovieLens-1M 上实际训练的六个轻量模型节点组成。它不是论文的私有 473 节点历史图、LLM Agent 系统或线上 A/B 复现。本地两个“Agent”是有隔离接口的确定性执行角色，而非论文使用的 Pi/Claude Code/GLM、独立 LLM 审查或自动编程；模型变种也是预设可执行候选，非系统自主发明。六节点依赖图来自本仓库真实公开数据实验，不是作者 473 节点生产日志；  研究自动化 依赖约束历史回放 Agent 运行流程与自进化：改的是哪一层 Research 与 Model Agent 为什么通过提案交接而非共享完整日志？ Research 负责提出与独立审查问题，Model 负责在固定业务输入下多轮改代码训练测量，提案明确起点、改动和评价设计。分离减少研究决策被原始执行细节淹没，同时返回中间最佳、负结果和未解项，而不只报告最后一轮分数。 例如一项改动第十轮最好、第二十轮退化，Model 应交回最佳实现与退化证据，Research 不应只看到最后 checkpoint。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentx-model-replay" data-paper-title="Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems Agent Kuaishou 2026-09-24 早期 AgentX 关注从研究构想到实现、评估的单次闭环；AgentX-Model 追问一次实验之后如何决定下一次做什么。Research Agent 负责跨论文和实验路径提出、独立审查研究问题；Model Agent 接收获批提案，在固定业务输入与预测任务下多轮改代码、训练、测量，并返回中间最佳实现、负结果和未解问题。两者通过提案而非共享完整工作日志衔接。 本地保真度：公开数据机制验证（concept demo）。本地保真度：公开数据机制验证（concept demo）。执行了双角色提案/审查/调查接口、四类动作和带依赖的结果盲回放；角色由确定性规则驱动，实验图由 MovieLens-1M 上实际训练的六个轻量模型节点组成。它不是论文的私有 473 节点历史图、LLM Agent 系统或线上 A/B 复现。本地两个“Agent”是有隔离接口的确定性执行角色，而非论文使用的 Pi/Claude Code/GLM、独立 LLM 审查或自动编程；模型变种也是预设可执行候选，非系统自主发明。六节点依赖图来自本仓库真实公开数据实验，不是作者 473 节点生产日志；  研究自动化 依赖约束历史回放 Agent 运行流程与自进化：改的是哪一层 AgentX-Model 为什么需要把一次研究选择与后续真实实验串起来？ 自动研究要决定下一步试什么，再由实现和评测获得新证据，不能只持续生成方案文本。该工作通过研究与模型执行角色衔接提案，使搜索历史反映实际试过的候选。历史 replay 只能重放已有结果的揭示与选择，不能证明这些训练实验在本地重新发生。 教学例：研究者提出换损失函数，执行者训练后才返回结果；重放旧日志时也应等选中该候选后揭示分数，不能提前偷看未来。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-agentx-model-replay-82b929d4" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-026d2b5abf0f0211">Research 与 Model Agent 为什么通过提案交接而非共享完整日志？</h2>
+<h2 id="qa-026d2b5abf0f0211">AgentX-Model 为什么需要把一次研究选择与后续真实实验串起来？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagentx-model-replay">Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>Research 负责提出与独立审查问题，Model 负责在固定业务输入下多轮改代码训练测量，提案明确起点、改动和评价设计。分离减少研究决策被原始执行细节淹没，同时返回中间最佳、负结果和未解项，而不只报告最后一轮分数。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一项改动第十轮最好、第二十轮退化，Model 应交回最佳实现与退化证据，Research 不应只看到最后 checkpoint。</p>
+<p><strong>答案：</strong>自动研究要决定下一步试什么，再由实现和评测获得新证据，不能只持续生成方案文本。该工作通过研究与模型执行角色衔接提案，使搜索历史反映实际试过的候选。历史 replay 只能重放已有结果的揭示与选择，不能证明这些训练实验在本地重新发生。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：研究者提出换损失函数，执行者训练后才返回结果；重放旧日志时也应等选中该候选后揭示分数，不能提前偷看未来。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.30001">原论文</a> · <a href="../../../../agent-research/2609.30001-agentx-model/">实现解读</a> · <a href="#qa-026d2b5abf0f0211">问题链接</a></p>
 </details>
@@ -1511,16 +1511,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.30001">原论文</a> · <a href="../../../../agent-research/2609.30001-agentx-model/">实现解读</a> · <a href="#qa-9e537d66be10432b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sciencebuddy" data-paper-title="ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents Agent Gen-Verse research collaboration 2026-09-15 内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行双层状态更新；没有连接真实实验室环境。本地执行双层状态更新；没有连接真实实验室环境。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  科学 Agent 递归自进化 Agent 运行流程与自进化：改的是哪一层 内层 harness 演化与外层策略更新为什么不能混称同一种递归？ 内层改变交互流程与工具使用方式，外层用成功交互轨迹训练科学 Agent 参数，两者作用对象和证据不同。只改外部状态而无真实训练，或只训练模型而无交互优化，都缺少另一层；成功轨迹也要来自真实可验证环境。 例如先让工具反馈更清晰，再用真实成功交互训练策略，分别是流程改进和参数学习，不能只加一个循环计数就替代。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sciencebuddy" data-paper-title="ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents Agent Gen-Verse research collaboration 2026-09-15 内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行双层状态更新；没有连接真实实验室环境。本地执行双层状态更新；没有连接真实实验室环境。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  科学 Agent 递归自进化 Agent 运行流程与自进化：改的是哪一层 ScienceBuddy 为什么把科学任务中的工具交互和策略学习放在同一持续过程里？ 科学任务常需要提出动作、使用工具、解释观察并调整后续方案，固定一次提示难以覆盖不断出现的反馈。ScienceBuddy 研究工作流程与策略如何在这种交互中共同改进。两个层面的变化要分别追踪，模拟状态更新不能替代真实科学环境或模型训练证据。 教学例：检索发现原假设缺少证据后，流程可改为先核查来源；策略是否真正学会这种判断，还需要后续实际任务验证。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-sciencebuddy-cd9b47fe" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c3463aea1843b4ca">内层 harness 演化与外层策略更新为什么不能混称同一种递归？</h2>
+<h2 id="qa-c3463aea1843b4ca">ScienceBuddy 为什么把科学任务中的工具交互和策略学习放在同一持续过程里？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asciencebuddy">ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Gen-Verse research collaboration</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>内层改变交互流程与工具使用方式，外层用成功交互轨迹训练科学 Agent 参数，两者作用对象和证据不同。只改外部状态而无真实训练，或只训练模型而无交互优化，都缺少另一层；成功轨迹也要来自真实可验证环境。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先让工具反馈更清晰，再用真实成功交互训练策略，分别是流程改进和参数学习，不能只加一个循环计数就替代。</p>
+<p><strong>答案：</strong>科学任务常需要提出动作、使用工具、解释观察并调整后续方案，固定一次提示难以覆盖不断出现的反馈。ScienceBuddy 研究工作流程与策略如何在这种交互中共同改进。两个层面的变化要分别追踪，模拟状态更新不能替代真实科学环境或模型训练证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：检索发现原假设缺少证据后，流程可改为先核查来源；策略是否真正学会这种判断，还需要后续实际任务验证。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17523">原论文</a> · <a href="../../../../agent-research/2609.17523-sciencebuddy/">实现解读</a> · <a href="#qa-c3463aea1843b4ca">问题链接</a></p>
 </details>
@@ -1564,16 +1564,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17523">原论文</a> · <a href="../../../../agent-research/2609.17523-sciencebuddy/">实现解读</a> · <a href="#qa-04bf786ad243175c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cobra-skills" data-paper-title="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization Agent The Chinese University of Hong Kong, Shenzhen 2026-09-10 把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  技能进化 Contextual bandit Agent 运行流程与自进化：改的是哪一层 技能优化为什么属于动态候选空间的 bandit？ 执行反馈不断产生或修改技能，候选并非固定，当前上下文又影响哪个技能值得评估。bandit 在有限预算内权衡预期收益与信息价值，不能把未测技能的预测分当已实现回报，也不能假设新增技能自动比旧技能更好。 例如某次失败催生一个新恢复技能，它还无实际反馈，需要探索；旧技能虽常用，也可能在当前任务不适合。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cobra-skills" data-paper-title="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization Agent The Chinese University of Hong Kong, Shenzhen 2026-09-10 把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  技能进化 Contextual bandit Agent 运行流程与自进化：改的是哪一层 技能候选持续增长时，COBRA-Skills 为什么不能给每个候选同样多的试验机会？ 评估技能会消耗任务执行预算，候选数量与质量又会随演化变化，平均分配可能浪费在明显无用或重复的条目上。COBRA-Skills 研究结合当前上下文和已见反馈安排试验，使有限预算更有针对性。选择器只能利用已获得证据，不能把未执行候选的效果当成已知。 教学例：十份相似技能已有多次失败记录，新生成的一份可能仍值得少量探索；预算不够时，全部各跑百次并不可行。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-cobra-skills-f91c343f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1c56fd2f44841929">技能优化为什么属于动态候选空间的 bandit？</h2>
+<h2 id="qa-1c56fd2f44841929">技能候选持续增长时，COBRA-Skills 为什么不能给每个候选同样多的试验机会？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acobra-skills">COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · The Chinese University of Hong Kong, Shenzhen</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>执行反馈不断产生或修改技能，候选并非固定，当前上下文又影响哪个技能值得评估。bandit 在有限预算内权衡预期收益与信息价值，不能把未测技能的预测分当已实现回报，也不能假设新增技能自动比旧技能更好。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如某次失败催生一个新恢复技能，它还无实际反馈，需要探索；旧技能虽常用，也可能在当前任务不适合。</p>
+<p><strong>答案：</strong>评估技能会消耗任务执行预算，候选数量与质量又会随演化变化，平均分配可能浪费在明显无用或重复的条目上。COBRA-Skills 研究结合当前上下文和已见反馈安排试验，使有限预算更有针对性。选择器只能利用已获得证据，不能把未执行候选的效果当成已知。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：十份相似技能已有多次失败记录，新生成的一份可能仍值得少量探索；预算不够时，全部各跑百次并不可行。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11682">原论文</a> · <a href="../../../../agent-research/2609.11682-cobra-skills/">实现解读</a> · <a href="#qa-1c56fd2f44841929">问题链接</a></p>
 </details>
@@ -1591,15 +1591,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11682">原论文</a> · <a href="../../../../agent-research/2609.11682-cobra-skills/">实现解读</a> · <a href="#qa-0f97cc70d3ab4160">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cobra-skills" data-paper-title="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization Agent The Chinese University of Hong Kong, Shenzhen 2026-09-10 把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  技能进化 Contextual bandit Agent 运行流程与自进化：改的是哪一层 高收益利用与高信息探索为什么都需要？ 只评最高预测收益易困在熟悉技能，纯探索又浪费预算在明显无用项。contextual-UCB 将上下文和不确定性纳入选择，执行后再更新价值；不确定性奖励只支持探测决策，不是对技能质量的事实评价。 例如两技能均值接近，较少测试的一条值得试一次；但若它实际失败，应记录失败而非保留“高信息”作为成功。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cobra-skills" data-paper-title="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization Agent The Chinese University of Hong Kong, Shenzhen 2026-09-10 把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  技能进化 Contextual bandit Agent 运行流程与自进化：改的是哪一层 提出一个技能变体与获得它的执行收益，为什么应分成两个证据阶段？ 提案根据已有经验生成可能更好的行为描述，尚未说明它在当前任务有效；执行评估才产生可用于预算分配和后续演化的反馈。候选空间可动态扩展，但加入集合不等于获得正奖励。COBRA-Skills 的 bandit 选择需要区分已测收益和未测不确定性，不能用提案自评补齐结果。 教学例：新技能写得更详细，可先安排试验；只有任务真实执行后才知道它是否帮助，而不能直接把“预计改进”当作成功样本。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-dd3c458ed7ccbf9b">高收益利用与高信息探索为什么都需要？</h2>
+<h2 id="qa-dd3c458ed7ccbf9b">提出一个技能变体与获得它的执行收益，为什么应分成两个证据阶段？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acobra-skills">COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · The Chinese University of Hong Kong, Shenzhen</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>只评最高预测收益易困在熟悉技能，纯探索又浪费预算在明显无用项。contextual-UCB 将上下文和不确定性纳入选择，执行后再更新价值；不确定性奖励只支持探测决策，不是对技能质量的事实评价。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两技能均值接近，较少测试的一条值得试一次；但若它实际失败，应记录失败而非保留“高信息”作为成功。</p>
+<p><strong>答案：</strong>提案根据已有经验生成可能更好的行为描述，尚未说明它在当前任务有效；执行评估才产生可用于预算分配和后续演化的反馈。候选空间可动态扩展，但加入集合不等于获得正奖励。COBRA-Skills 的 bandit 选择需要区分已测收益和未测不确定性，不能用提案自评补齐结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新技能写得更详细，可先安排试验；只有任务真实执行后才知道它是否帮助，而不能直接把“预计改进”当作成功样本。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11682">原论文</a> · <a href="../../../../agent-research/2609.11682-cobra-skills/">实现解读</a> · <a href="#qa-dd3c458ed7ccbf9b">问题链接</a></p>
 </details>
@@ -1617,16 +1617,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11682">原论文</a> · <a href="../../../../agent-research/2609.11682-cobra-skills/">实现解读</a> · <a href="#qa-e657576f6a249149">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ecdysis" data-paper-title="Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents Agent Chengdu Institute of Computer Applications, Chinese Academy of Sciences 2026-09-10 聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只在公开 observation 上聚合失败签名和触发修复门；不生成或执行 harness 代码。本地只在公开 observation 上聚合失败签名和触发修复门；不生成或执行 harness 代码。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  Harness 自进化 失败诊断 Agent 运行流程与自进化：改的是哪一层 跨任务重复失败为什么比单次报错更适合定位 harness 系统缺陷？ 同一模式在不同任务反复出现，较可能关联共享接口或流程；单次错误可能只是模型偶发失误。Ecdysis 聚合失败后用多角色诊断形成修复规格，仍需验证原因，重复相关并不是因果证明，也不能把所有同词报错盲目归为一个缺陷。 例如多个任务都在解析工具 JSON 时失败可提示接口问题，但某一题单独算错数字未必需要修改整个 harness。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ecdysis" data-paper-title="Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents Agent Chengdu Institute of Computer Applications, Chinese Academy of Sciences 2026-09-10 聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只在公开 observation 上聚合失败签名和触发修复门；不生成或执行 harness 代码。本地只在公开 observation 上聚合失败签名和触发修复门；不生成或执行 harness 代码。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  Harness 自进化 失败诊断 Agent 运行流程与自进化：改的是哪一层 Ecdysis 为什么先问失败来自模型偶发行为，还是来自运行流程的共同缺陷？ 相同 Agent 在不同任务出错，既可能是具体理解错误，也可能是工具包装、上下文或恢复流程反复制造问题。Ecdysis 研究从多次执行中找到可系统修复的 harness 缺陷，使改进针对共享原因。重复现象只是诊断线索，不能未经修复执行和验证就宣称问题已解决。 教学例：多题都因工具结果被截断而漏证据，可能是共享接口问题；只有一道题误读内容，则不应马上改所有任务的流程。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-ecdysis-3d533dc6" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-a195b04da4575d0d">跨任务重复失败为什么比单次报错更适合定位 harness 系统缺陷？</h2>
+<h2 id="qa-a195b04da4575d0d">Ecdysis 为什么先问失败来自模型偶发行为，还是来自运行流程的共同缺陷？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aecdysis">Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Chengdu Institute of Computer Applications, Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同一模式在不同任务反复出现，较可能关联共享接口或流程；单次错误可能只是模型偶发失误。Ecdysis 聚合失败后用多角色诊断形成修复规格，仍需验证原因，重复相关并不是因果证明，也不能把所有同词报错盲目归为一个缺陷。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如多个任务都在解析工具 JSON 时失败可提示接口问题，但某一题单独算错数字未必需要修改整个 harness。</p>
+<p><strong>答案：</strong>相同 Agent 在不同任务出错，既可能是具体理解错误，也可能是工具包装、上下文或恢复流程反复制造问题。Ecdysis 研究从多次执行中找到可系统修复的 harness 缺陷，使改进针对共享原因。重复现象只是诊断线索，不能未经修复执行和验证就宣称问题已解决。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：多题都因工具结果被截断而漏证据，可能是共享接口问题；只有一道题误读内容，则不应马上改所有任务的流程。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11677">原论文</a> · <a href="../../../../agent-research/2609.11677-ecdysis/">实现解读</a> · <a href="#qa-a195b04da4575d0d">问题链接</a></p>
 </details>
@@ -1644,15 +1644,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11677">原论文</a> · <a href="../../../../agent-research/2609.11677-ecdysis/">实现解读</a> · <a href="#qa-bdf6583baffee7b9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ecdysis" data-paper-title="Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents Agent Chengdu Institute of Computer Applications, Chinese Academy of Sciences 2026-09-10 聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只在公开 observation 上聚合失败签名和触发修复门；不生成或执行 harness 代码。本地只在公开 observation 上聚合失败签名和触发修复门；不生成或执行 harness 代码。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  Harness 自进化 失败诊断 Agent 运行流程与自进化：改的是哪一层 失败签名聚合与逐题自由反思有什么取舍？ 聚合能复用跨任务证据，减少每题重复诊断，识别稳定薄弱环节；逐题反思保留细节但可能难以看见系统模式。签名过粗会合并不同原因，过细又失去共享信号，因此修复规格需回到真实轨迹而非只看频次。 例如“timeout”可能来自模型等待或服务网络，两者相同词却需不同修复，不能仅按出现次数合并。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ecdysis" data-paper-title="Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents Agent Chengdu Institute of Computer Applications, Chinese Academy of Sciences 2026-09-10 聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只在公开 observation 上聚合失败签名和触发修复门；不生成或执行 harness 代码。本地只在公开 observation 上聚合失败签名和触发修复门；不生成或执行 harness 代码。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  Harness 自进化 失败诊断 Agent 运行流程与自进化：改的是哪一层 形成修复规格与直接执行 harness 补丁，分别处在改进链的哪一步？ FDCR 的多角色诊断把失败证据组织成可讨论的修复规格，说明应该改哪里和为何改；真正执行还需生成具体补丁、接入运行并验证后果。诊断输出不能冒充已修改系统，触发门或修复建议数量也不说明任务成功提升，本地 reference 尤其要保持这个证据边界。 教学例：规格指出“保留工具返回的错误字段”，代码是否真的修改并在后续任务生效，需要另行检查补丁和运行记录。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-cd6fec7b3d5c110c">失败签名聚合与逐题自由反思有什么取舍？</h2>
+<h2 id="qa-cd6fec7b3d5c110c">形成修复规格与直接执行 harness 补丁，分别处在改进链的哪一步？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aecdysis">Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Chengdu Institute of Computer Applications, Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>聚合能复用跨任务证据，减少每题重复诊断，识别稳定薄弱环节；逐题反思保留细节但可能难以看见系统模式。签名过粗会合并不同原因，过细又失去共享信号，因此修复规格需回到真实轨迹而非只看频次。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“timeout”可能来自模型等待或服务网络，两者相同词却需不同修复，不能仅按出现次数合并。</p>
+<p><strong>答案：</strong>FDCR 的多角色诊断把失败证据组织成可讨论的修复规格，说明应该改哪里和为何改；真正执行还需生成具体补丁、接入运行并验证后果。诊断输出不能冒充已修改系统，触发门或修复建议数量也不说明任务成功提升，本地 reference 尤其要保持这个证据边界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：规格指出“保留工具返回的错误字段”，代码是否真的修改并在后续任务生效，需要另行检查补丁和运行记录。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11677">原论文</a> · <a href="../../../../agent-research/2609.11677-ecdysis/">实现解读</a> · <a href="#qa-cd6fec7b3d5c110c">问题链接</a></p>
 </details>
@@ -1670,16 +1670,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11677">原论文</a> · <a href="../../../../agent-research/2609.11677-ecdysis/">实现解读</a> · <a href="#qa-fb9a1324918e6565">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:maple" data-paper-title="MAPLE: Memory-Augmented Planning with Language and Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MAPLE: Memory-Augmented Planning with Language and Evolution Agent Harbin Institute of Technology, Shenzhen 2026-09-10 MAPLE 把自然语言优化知识变成可持续修改的程序状态：生成候选、检查可执行性、接纳更好的方案，并把已接受程序带到后续问题中继续进化，而不是每次从零提示。 复现级别：持久状态机制诊断。复现级别：持久状态机制诊断。实现候选方案接纳、跨任务复用和版本化状态，不执行论文的数学优化器或 LLM 代码生成。三种子结果见 metrics/mini-suite-seeds42-44.json。本地只接纳由非空命名操作构成的公开计划并验证后续复用；没有运行作者求解器、训练模型或外部工具，因此不把 mini-suite 成功率作为论文能力复现。  持久化优化规划 Agent 运行流程与自进化：改的是哪一层 为什么 MAPLE 把已接受程序作为持续状态，而不是每题从零提示？ 程序状态承接已经验证的优化知识，后续问题可在其上修改而不重建全部方法。自然语言知识需落到可执行候选并检查后才接纳，不能只积累文字建议；持续继承也可能把旧假设带到新任务，需要适用条件与回退证据。 例如上一题验证的搜索步骤可作为起点，新题修改目标相关部分，而不是重复生成同一基础逻辑。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:maple" data-paper-title="MAPLE: Memory-Augmented Planning with Language and Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MAPLE: Memory-Augmented Planning with Language and Evolution Agent Harbin Institute of Technology, Shenzhen 2026-09-10 MAPLE 把自然语言优化知识变成可持续修改的程序状态：生成候选、检查可执行性、接纳更好的方案，并把已接受程序带到后续问题中继续进化，而不是每次从零提示。 复现级别：持久状态机制诊断。复现级别：持久状态机制诊断。实现候选方案接纳、跨任务复用和版本化状态，不执行论文的数学优化器或 LLM 代码生成。三种子结果见 metrics/mini-suite-seeds42-44.json。本地只接纳由非空命名操作构成的公开计划并验证后续复用；没有运行作者求解器、训练模型或外部工具，因此不把 mini-suite 成功率作为论文能力复现。  持久化优化规划 Agent 运行流程与自进化：改的是哪一层 MAPLE 为什么希望优化知识能随着连续求解保留下来？ 连续问题常有共享结构，若每题从零提案，已验证的程序改进很难积累。MAPLE 把可执行解法作为持续研究状态，让下一问题从已接受程序继续探索。继承也可能带来旧假设偏差，必须重新验证新问题条件，不能把可执行或历史成功当成当前最优证明。 教学例：上一次排程程序已处理资源冲突，新问题可从该程序起步；但新增加的时间窗口约束仍需实现与测试。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-maple-2e42a8d7" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-bf5ce6d0765f08ca">为什么 MAPLE 把已接受程序作为持续状态，而不是每题从零提示？</h2>
+<h2 id="qa-bf5ce6d0765f08ca">MAPLE 为什么希望优化知识能随着连续求解保留下来？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amaple">MAPLE: Memory-Augmented Planning with Language and Evolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Harbin Institute of Technology, Shenzhen</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>程序状态承接已经验证的优化知识，后续问题可在其上修改而不重建全部方法。自然语言知识需落到可执行候选并检查后才接纳，不能只积累文字建议；持续继承也可能把旧假设带到新任务，需要适用条件与回退证据。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如上一题验证的搜索步骤可作为起点，新题修改目标相关部分，而不是重复生成同一基础逻辑。</p>
+<p><strong>答案：</strong>连续问题常有共享结构，若每题从零提案，已验证的程序改进很难积累。MAPLE 把可执行解法作为持续研究状态，让下一问题从已接受程序继续探索。继承也可能带来旧假设偏差，必须重新验证新问题条件，不能把可执行或历史成功当成当前最优证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：上一次排程程序已处理资源冲突，新问题可从该程序起步；但新增加的时间窗口约束仍需实现与测试。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11636">原论文</a> · <a href="../../../../agent-research/2609.11636-maple/">实现解读</a> · <a href="#qa-bf5ce6d0765f08ca">问题链接</a></p>
 </details>
@@ -1776,16 +1776,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.09153">原论文</a> · <a href="../../../../agent-research/2609.09153-procedural-graphs/">实现解读</a> · <a href="#qa-f6396bb67c386274">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnesslens" data-paper-title="Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification Agent Fudan University 2026-08-27 固定验证集浪费 rollout 且会用平均分掩盖局部回退。HarnessLens 从执行轨迹提出修改，只在受影响行为对应的任务上成对验证，并要求证据能归因到候选修改。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现行为任务选择、配对验证与可归因证据门。未运行论文四个完整 benchmark；本地执行冻结测试集和无 answer/guide 接口的真实工具反馈协议。ToolRoute-L2.1 三 seed：joint success 0.8194，plan F1 0.8372，平均成本 5.0419。  行为相关 Harness 验证 Agent 运行流程与自进化：改的是哪一层 为什么验证任务应对应候选实际影响的行为？ 全验证集可能把预算花在无关任务，平均分还可能掩盖局部回归。HarnessLens 根据执行轨迹定位受影响行为，在相同条件下配对比较该行为并要求可归因，关注修改是否真的解决目标问题，而非随意选容易涨分的子集。 例如修改参数重试逻辑，应重点验证参数错误和恢复任务，而不是只跑完全不触发该逻辑的简单成功题。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnesslens" data-paper-title="Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification Agent Fudan University 2026-08-27 固定验证集浪费 rollout 且会用平均分掩盖局部回退。HarnessLens 从执行轨迹提出修改，只在受影响行为对应的任务上成对验证，并要求证据能归因到候选修改。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现行为任务选择、配对验证与可归因证据门。未运行论文四个完整 benchmark；本地执行冻结测试集和无 answer/guide 接口的真实工具反馈协议。ToolRoute-L2.1 三 seed：joint success 0.8194，plan F1 0.8372，平均成本 5.0419。  行为相关 Harness 验证 Agent 运行流程与自进化：改的是哪一层 HarnessLens 为什么把验证成本本身当作 harness 搜索的瓶颈？ 每个候选都完整运行固定验证集会消耗大量 rollout，而整体平均值又可能掩盖少数受影响行为的退化。HarnessLens 研究让验证关注修改实际触及的行为，以有限预算获得更有针对性的证据。局部检查需说明覆盖边界，不能因节省评测就跳过归因或扩大质量结论。 教学例：只改浏览恢复逻辑，却把全部无关计算题重跑一遍可能浪费；应找到对应行为任务，但仍需承认其他行为未被新证据覆盖。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-harnesslens-7d46fb0d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1bd6146aa60c6f88">为什么验证任务应对应候选实际影响的行为？</h2>
+<h2 id="qa-1bd6146aa60c6f88">HarnessLens 为什么把验证成本本身当作 harness 搜索的瓶颈？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharnesslens">Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Fudan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>全验证集可能把预算花在无关任务，平均分还可能掩盖局部回归。HarnessLens 根据执行轨迹定位受影响行为，在相同条件下配对比较该行为并要求可归因，关注修改是否真的解决目标问题，而非随意选容易涨分的子集。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如修改参数重试逻辑，应重点验证参数错误和恢复任务，而不是只跑完全不触发该逻辑的简单成功题。</p>
+<p><strong>答案：</strong>每个候选都完整运行固定验证集会消耗大量 rollout，而整体平均值又可能掩盖少数受影响行为的退化。HarnessLens 研究让验证关注修改实际触及的行为，以有限预算获得更有针对性的证据。局部检查需说明覆盖边界，不能因节省评测就跳过归因或扩大质量结论。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只改浏览恢复逻辑，却把全部无关计算题重跑一遍可能浪费；应找到对应行为任务，但仍需承认其他行为未被新证据覆盖。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27311">原论文</a> · <a href="../../../../agent-research/2608.27311-harnesslens/">实现解读</a> · <a href="#qa-1bd6146aa60c6f88">问题链接</a></p>
 </details>
@@ -1803,15 +1803,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27311">原论文</a> · <a href="../../../../agent-research/2608.27311-harnesslens/">实现解读</a> · <a href="#qa-5970447fb917ddcb">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnesslens" data-paper-title="Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification Agent Fudan University 2026-08-27 固定验证集浪费 rollout 且会用平均分掩盖局部回退。HarnessLens 从执行轨迹提出修改，只在受影响行为对应的任务上成对验证，并要求证据能归因到候选修改。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现行为任务选择、配对验证与可归因证据门。未运行论文四个完整 benchmark；本地执行冻结测试集和无 answer/guide 接口的真实工具反馈协议。ToolRoute-L2.1 三 seed：joint success 0.8194，plan F1 0.8372，平均成本 5.0419。  行为相关 Harness 验证 Agent 运行流程与自进化：改的是哪一层 局部行为配对增益与全局平均涨分在接纳上有什么区别？ 配对控制任务差异，并把增益连到候选修改；全局均值可因无关项变化变好，而目标行为仍退化。局部证据也有覆盖边界，不能推成所有任务无回归，因此最终仍需冻结独立测试与明确影响范围。 例如总体多答对两题却让退款恢复全失败，平均涨分不能掩盖这次候选针对行为的退化。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnesslens" data-paper-title="Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification Agent Fudan University 2026-08-27 固定验证集浪费 rollout 且会用平均分掩盖局部回退。HarnessLens 从执行轨迹提出修改，只在受影响行为对应的任务上成对验证，并要求证据能归因到候选修改。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现行为任务选择、配对验证与可归因证据门。未运行论文四个完整 benchmark；本地执行冻结测试集和无 answer/guide 接口的真实工具反馈协议。ToolRoute-L2.1 三 seed：joint success 0.8194，plan F1 0.8372，平均成本 5.0419。  行为相关 Harness 验证 Agent 运行流程与自进化：改的是哪一层 通过局部行为接纳门，与证明整个 Agent 能力提升，证据范围有何差别？ 局部门要求目标行为的配对增益为正且可归因，回答这次改动在所选行为上是否值得接纳；整体能力还涉及未覆盖任务、其他行为及资源影响。Δ_b 与 A_b 不能自动外推到所有任务。应同时保留验证集合和修改作用域，而非把局部通过改名为全面能力验证。 教学例：恢复任务五个样例改善，能支持这类改动的有限接纳；不能直接声称代码生成、数学和所有浏览任务都变好了。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-1fec5db47abd72cf">局部行为配对增益与全局平均涨分在接纳上有什么区别？</h2>
+<h2 id="qa-1fec5db47abd72cf">通过局部行为接纳门，与证明整个 Agent 能力提升，证据范围有何差别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharnesslens">Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Fudan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>配对控制任务差异，并把增益连到候选修改；全局均值可因无关项变化变好，而目标行为仍退化。局部证据也有覆盖边界，不能推成所有任务无回归，因此最终仍需冻结独立测试与明确影响范围。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如总体多答对两题却让退款恢复全失败，平均涨分不能掩盖这次候选针对行为的退化。</p>
+<p><strong>答案：</strong>局部门要求目标行为的配对增益为正且可归因，回答这次改动在所选行为上是否值得接纳；整体能力还涉及未覆盖任务、其他行为及资源影响。Δ_b 与 A_b 不能自动外推到所有任务。应同时保留验证集合和修改作用域，而非把局部通过改名为全面能力验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：恢复任务五个样例改善，能支持这类改动的有限接纳；不能直接声称代码生成、数学和所有浏览任务都变好了。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27311">原论文</a> · <a href="../../../../agent-research/2608.27311-harnesslens/">实现解读</a> · <a href="#qa-1fec5db47abd72cf">问题链接</a></p>
 </details>
@@ -1829,16 +1829,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27311">原论文</a> · <a href="../../../../agent-research/2608.27311-harnesslens/">实现解读</a> · <a href="#qa-aad409452ebef205">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:jit-agent" data-paper-title="JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution Agent LV-NUS Lab 2026-08-26 把 harness 形式化为 memory、planning、action protocol、tools/skills 四个可生成模块；模型按任务生成、失败后修复，并从历史配置 archive 蒸馏可迁移模式。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。JIT harness 在训练任务上即时写入/修复可复用路由，在 validation/test 冻结后仅通过公开 observation、工具元数据和真实调用反馈执行；不存在 answer、guide 或 reference-plan 接口。  Harness 即时生成与进化 Agent 运行流程与自进化：改的是哪一层 即时生成的 harness 为什么分为 M、P、A、T 四个模块？ memory、planning、action protocol 与 tools/skills 分别控制保存信息、组织步骤、表达执行和可用能力。模块化让按任务生成与失败修复有明确对象，也便于归档可迁移模式；不是每个任务都需要重写所有模块，更不能因配置生成成功就算任务完成。 例如失败来自工具参数格式，应优先改 action protocol，不必同时替换记忆和规划组件增加混杂。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:jit-agent" data-paper-title="JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution Agent LV-NUS Lab 2026-08-26 把 harness 形式化为 memory、planning、action protocol、tools/skills 四个可生成模块；模型按任务生成、失败后修复，并从历史配置 archive 蒸馏可迁移模式。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。JIT harness 在训练任务上即时写入/修复可复用路由，在 validation/test 冻结后仅通过公开 observation、工具元数据和真实调用反馈执行；不存在 answer、guide 或 reference-plan 接口。  Harness 即时生成与进化 Agent 运行流程与自进化：改的是哪一层 Jit-Agent 为什么希望根据当前任务生成工作流程，而不只选择固定提示？ 任务对记忆、规划、动作协议和工具的需求不同，一套通用 harness 可能过重或缺少关键支持。Jit-Agent 研究在任务到来时组合相应工作方式，让外部组织更贴近需求。即时生成仍需要质量约束和冻结评测，不能因为模块齐全就认为所得 Agent 一定胜过固定流程。 教学例：单步计算不一定需要长期记忆，而多页资料整理可能需要取证与进度管理；任务特征应影响使用哪些模块。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-jit-agent-92c11b63" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-22c8f75c233ddfc6">即时生成的 harness 为什么分为 M、P、A、T 四个模块？</h2>
+<h2 id="qa-22c8f75c233ddfc6">Jit-Agent 为什么希望根据当前任务生成工作流程，而不只选择固定提示？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ajit-agent">JIT-Agent: Scaling Harness Intelligence via Just-in-Time Harness Evolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · LV-NUS Lab</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>memory、planning、action protocol 与 tools/skills 分别控制保存信息、组织步骤、表达执行和可用能力。模块化让按任务生成与失败修复有明确对象，也便于归档可迁移模式；不是每个任务都需要重写所有模块，更不能因配置生成成功就算任务完成。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如失败来自工具参数格式，应优先改 action protocol，不必同时替换记忆和规划组件增加混杂。</p>
+<p><strong>答案：</strong>任务对记忆、规划、动作协议和工具的需求不同，一套通用 harness 可能过重或缺少关键支持。Jit-Agent 研究在任务到来时组合相应工作方式，让外部组织更贴近需求。即时生成仍需要质量约束和冻结评测，不能因为模块齐全就认为所得 Agent 一定胜过固定流程。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：单步计算不一定需要长期记忆，而多页资料整理可能需要取证与进度管理；任务特征应影响使用哪些模块。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25593">原论文</a> · <a href="../../../../agent-research/2608.25593-jit-agent/">实现解读</a> · <a href="#qa-22c8f75c233ddfc6">问题链接</a></p>
 </details>
@@ -1962,15 +1962,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.26859">原论文</a> · <a href="../../../../agent-research/2606.26859-agentx/">实现解读</a> · <a href="#qa-5c6f98a0c4e7b3e7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentx" data-paper-title="AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems Agent Kuaishou 2026-06-26 传统推荐迭代需要工程师串联假设、生产代码、上线 A/B 和归因，经验也难以跨实验积累。AgentX 将流程改造成四阶段闭环：Brainstorm Agent 从实验库、系统知识、数据分析和外部论文生成有证据的候选；Developing Agent 在仓库约束下实现并验证；Evaluation Agent 用护栏否决的线上 A/B 判断；最后以 SGPO 从成功与失败轨迹更新 Agent harness。 复现级别：核心闭环 mini-suite。复现级别：核心闭环 mini-suite。本地实现 Brainstorm、Developing、Evaluation 与 Harness Evolution 四阶段控制流，并验证实验知识复用带来的执行成本下降。本地没有 Kuaishou 内部仓库、流量平台、线上用户或 SGPO 大模型训练，因此不能复现论文的业务增益。mini-suite 验证的是四阶段闭环、正负结果资产化、验证门槛与跨 episode 复用；average proxy cost 仅是控制流成本，不冒充人效、收入或线上时长。  研究自动化 工业推荐 Agent Agent 运行流程与自进化：改的是哪一层 主指标最大化与护栏否决的线上判定有什么区别？ 单指标优化可牺牲其他关键体验，AgentX 要求主指标显著改善后仍检查关键护栏，越界可否决发布。收益不是把多个数任意平均，生产因果证据需真实随机流量和平台合同，本地 verifier 不具备同等部署含义。 例如观看时长上涨但严重增加服务错误，即使主指标很好，也应由护栏阻止发布，而不是加权后仍接受。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentx" data-paper-title="AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems Agent Kuaishou 2026-06-26 传统推荐迭代需要工程师串联假设、生产代码、上线 A/B 和归因，经验也难以跨实验积累。AgentX 将流程改造成四阶段闭环：Brainstorm Agent 从实验库、系统知识、数据分析和外部论文生成有证据的候选；Developing Agent 在仓库约束下实现并验证；Evaluation Agent 用护栏否决的线上 A/B 判断；最后以 SGPO 从成功与失败轨迹更新 Agent harness。 复现级别：核心闭环 mini-suite。复现级别：核心闭环 mini-suite。本地实现 Brainstorm、Developing、Evaluation 与 Harness Evolution 四阶段控制流，并验证实验知识复用带来的执行成本下降。本地没有 Kuaishou 内部仓库、流量平台、线上用户或 SGPO 大模型训练，因此不能复现论文的业务增益。mini-suite 验证的是四阶段闭环、正负结果资产化、验证门槛与跨 episode 复用；average proxy cost 仅是控制流成本，不冒充人效、收入或线上时长。  研究自动化 工业推荐 Agent Agent 运行流程与自进化：改的是哪一层 离线实现验证与生产线上 A/B，在 AgentX 中分别支持什么结论？ 离线检查能发现代码、数据和运行合同问题，为进入安全流量提供准备；线上 A/B 才观察业务环境中主指标及护栏的变化。二者任务和风险口径不同，离线通过不能替代线上发布判定。作者生产证据也不能由本地小型 episode 或更新计数冒充。 教学例：推荐代码通过单元测试，仅说明实现可进入后续实验；是否改善用户行为且不损害延迟，还需对应流量下的对照。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-594ae560d1f3665d">主指标最大化与护栏否决的线上判定有什么区别？</h2>
+<h2 id="qa-594ae560d1f3665d">离线实现验证与生产线上 A/B，在 AgentX 中分别支持什么结论？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagentx">AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>单指标优化可牺牲其他关键体验，AgentX 要求主指标显著改善后仍检查关键护栏，越界可否决发布。收益不是把多个数任意平均，生产因果证据需真实随机流量和平台合同，本地 verifier 不具备同等部署含义。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如观看时长上涨但严重增加服务错误，即使主指标很好，也应由护栏阻止发布，而不是加权后仍接受。</p>
+<p><strong>答案：</strong>离线检查能发现代码、数据和运行合同问题，为进入安全流量提供准备；线上 A/B 才观察业务环境中主指标及护栏的变化。二者任务和风险口径不同，离线通过不能替代线上发布判定。作者生产证据也不能由本地小型 episode 或更新计数冒充。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：推荐代码通过单元测试，仅说明实现可进入后续实验；是否改善用户行为且不损害延迟，还需对应流量下的对照。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.26859">原论文</a> · <a href="../../../../agent-research/2606.26859-agentx/">实现解读</a> · <a href="#qa-594ae560d1f3665d">问题链接</a></p>
 </details>
@@ -1988,16 +1988,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.26859">原论文</a> · <a href="../../../../agent-research/2606.26859-agentx/">实现解读</a> · <a href="#qa-296e78851537b605">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:scientist-one" data-paper-title="ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence Agent Google Cloud AI Research 2026-05-25 研究产物看起来完整，仍可能引用虚构、分数无法复算或方法描述与代码不同。CoE 将主张连到可核验来源；独立 I1–I4 检查分数、规则、引用和方法/代码一致性。来源存在不等于主张被支持。原文 §3 与 §5 完整实验成本过高，不复现（审查 DONE）。本地实现低成本 CoE 机械核验内核与语义审计接口，不是完整自主科学家。固定刺激为 L0；完整实验成本过高，不复现（审查 DONE）。canonical evaluator 的可信性、日志是否由实际实验产生、语义判断是否正确仍由上层证据保障；哈希只能证明“相同字节”，不能证明“字节描述了真实实验”。本地不将任意 Python callback 当安全沙箱。  科学研究 Agent 证据链与完整性审计 Agent 运行流程与自进化：改的是哪一层 CoE 来源 DAG 为什么不能单独证明研究主张真实？ 图和 hash 能核对文件、引用关系及字节一致性，无法保证日志来自真实实验或来源语义支持主张。独立 I1–I4 分别查分数、规则、引用和方法代码一致性，缺证据应保留 unverified，而不是把结构连通当成科学验证通过。 例如一份伪造日志也可有正确 SHA256，图可准确连接到它，却不能因此证明日志里的准确率真实测得。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:scientist-one" data-paper-title="ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence Agent Google Cloud AI Research 2026-05-25 研究产物看起来完整，仍可能引用虚构、分数无法复算或方法描述与代码不同。CoE 将主张连到可核验来源；独立 I1–I4 检查分数、规则、引用和方法/代码一致性。来源存在不等于主张被支持。原文 §3 与 §5 完整实验成本过高，不复现（审查 DONE）。本地实现低成本 CoE 机械核验内核与语义审计接口，不是完整自主科学家。固定刺激为 L0；完整实验成本过高，不复现（审查 DONE）。canonical evaluator 的可信性、日志是否由实际实验产生、语义判断是否正确仍由上层证据保障；哈希只能证明“相同字节”，不能证明“字节描述了真实实验”。本地不将任意 Python callback 当安全沙箱。  科学研究 Agent 证据链与完整性审计 Agent 运行流程与自进化：改的是哪一层 Scientist-One 为什么要让研究主张能被独立追溯和重新核查？ 自动研究可生成许多代码、图表和结论，但报告中的数字可能缺少真实执行或与来源口径不一致。Scientist-One 研究把主张、证据与执行记录连接起来，使读者能检查结论从何而来。证据链存在只是审计入口，仍需核对内容、单位和实验阶段，不能用哈希代替真实性。 教学例：报告写准确率提升，应能追到对应数据划分与运行结果；找到一个有哈希的文件，并不能证明里面记录的是准确率。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-scientist-one-ba34af9f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0de4476b19cd6939">CoE 来源 DAG 为什么不能单独证明研究主张真实？</h2>
+<h2 id="qa-0de4476b19cd6939">Scientist-One 为什么要让研究主张能被独立追溯和重新核查？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ascientist-one">ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud AI Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>图和 hash 能核对文件、引用关系及字节一致性，无法保证日志来自真实实验或来源语义支持主张。独立 I1–I4 分别查分数、规则、引用和方法代码一致性，缺证据应保留 unverified，而不是把结构连通当成科学验证通过。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一份伪造日志也可有正确 SHA256，图可准确连接到它，却不能因此证明日志里的准确率真实测得。</p>
+<p><strong>答案：</strong>自动研究可生成许多代码、图表和结论，但报告中的数字可能缺少真实执行或与来源口径不一致。Scientist-One 研究把主张、证据与执行记录连接起来，使读者能检查结论从何而来。证据链存在只是审计入口，仍需核对内容、单位和实验阶段，不能用哈希代替真实性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：报告写准确率提升，应能追到对应数据划分与运行结果；找到一个有哈希的文件，并不能证明里面记录的是准确率。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.26340">原论文</a> · <a href="../../../../agent-research/2605.26340-scientist-one/">实现解读</a> · <a href="#qa-0de4476b19cd6939">问题链接</a></p>
 </details>
@@ -2041,16 +2041,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.26340">原论文</a> · <a href="../../../../agent-research/2605.26340-scientist-one/">实现解读</a> · <a href="#qa-79ed0d4a52806e10">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagents" data-paper-title="HyperAgents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HyperAgents Agent University of British Columbia 2026-03-19 把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。三种子诊断：metrics/mechanism-seeds42-44.json  RSI 开放式进化 元认知自修改 Agent 运行流程与自进化：改的是哪一层 task Agent 与 meta Agent 都可编辑，为什么属于改进机制的改进？ 程序同时包含完成任务与修改自身策略的逻辑，后代可以改变两者，开放档案保存变体供继续探索。它比只优化固定策略更广，也增加执行和评价风险；可编辑不等于无限授权任意代码，真实自指修改仍需独立执行验证。 例如后代不仅改解题提示，还改下一代如何分析失败的步骤；两项变化都要在实际任务反馈下检验。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagents" data-paper-title="HyperAgents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HyperAgents Agent University of British Columbia 2026-03-19 把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。三种子诊断：metrics/mechanism-seeds42-44.json  RSI 开放式进化 元认知自修改 Agent 运行流程与自进化：改的是哪一层 HyperAgents 为什么不仅改任务解法，还允许改“生成下一版解法”的程序？ 固定改进器会持续沿同一套提案和反思方式搜索，它自身的限制可能阻碍后续进步。HyperAgents 把任务程序与 meta 程序一起纳入可编辑对象，研究改进方法能否随经验演化。自改代码增加了验证难度，档案里出现新版本不等于真实性能或长期进步已得到证明。 教学例：某版本总提出相似改动，可以尝试修改提案器本身；之后仍要验证新提案器是否真的带来更有效候选。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-hyperagents-ae71283f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-42342c52c5c76f30">task Agent 与 meta Agent 都可编辑，为什么属于改进机制的改进？</h2>
+<h2 id="qa-42342c52c5c76f30">HyperAgents 为什么不仅改任务解法，还允许改“生成下一版解法”的程序？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahyperagents">HyperAgents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of British Columbia</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>程序同时包含完成任务与修改自身策略的逻辑，后代可以改变两者，开放档案保存变体供继续探索。它比只优化固定策略更广，也增加执行和评价风险；可编辑不等于无限授权任意代码，真实自指修改仍需独立执行验证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如后代不仅改解题提示，还改下一代如何分析失败的步骤；两项变化都要在实际任务反馈下检验。</p>
+<p><strong>答案：</strong>固定改进器会持续沿同一套提案和反思方式搜索，它自身的限制可能阻碍后续进步。HyperAgents 把任务程序与 meta 程序一起纳入可编辑对象，研究改进方法能否随经验演化。自改代码增加了验证难度，档案里出现新版本不等于真实性能或长期进步已得到证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某版本总提出相似改动，可以尝试修改提案器本身；之后仍要验证新提案器是否真的带来更有效候选。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19461">原论文</a> · <a href="../../../../agent-research/2603.19461-hyperagents/">实现解读</a> · <a href="#qa-42342c52c5c76f30">问题链接</a></p>
 </details>
@@ -2068,15 +2068,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19461">原论文</a> · <a href="../../../../agent-research/2603.19461-hyperagents/">实现解读</a> · <a href="#qa-1955136546ec1e42">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagents" data-paper-title="HyperAgents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HyperAgents Agent University of British Columbia 2026-03-19 把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。三种子诊断：metrics/mechanism-seeds42-44.json  RSI 开放式进化 元认知自修改 Agent 运行流程与自进化：改的是哪一层 父代性能项与少后代探索项为什么相乘？ sigmoid 性能项偏向较强个体，1/(1+n_i) 降低已经扩展很多次的分支概率，避免搜索只围绕单个冠军。乘积归一化形成抽样分布，不是确定选择最高分，也不保证低分新分支最终有价值。 例如两个父本同分，一个已有十个子代、另一个没有，后者有更高探索权重以增加分支覆盖。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagents" data-paper-title="HyperAgents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HyperAgents Agent University of British Columbia 2026-03-19 把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。三种子诊断：metrics/mechanism-seeds42-44.json  RSI 开放式进化 元认知自修改 Agent 运行流程与自进化：改的是哪一层 固定 meta Agent 的程序搜索，与允许 meta Agent 一起被编辑，有何搜索范围差异？ 固定改进器只在任务解法空间内生成变体，允许编辑 meta Agent 则还可改变候选生成和改进流程，扩大搜索对象。更大空间也带来失效与归因困难，需要分别执行和评价新程序。当前本地 archive 操作不生成或运行任意源码，不能用档案谱系冒充完整程序自修改。 教学例：只改排序函数属于任务层；把“如何选择待试函数”的策略也改写，才涉及 meta 层，但新增自由度未必自动有效。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-a6ebd187b8938135">父代性能项与少后代探索项为什么相乘？</h2>
+<h2 id="qa-a6ebd187b8938135">固定 meta Agent 的程序搜索，与允许 meta Agent 一起被编辑，有何搜索范围差异？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahyperagents">HyperAgents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of British Columbia</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>sigmoid 性能项偏向较强个体，1/(1+n_i) 降低已经扩展很多次的分支概率，避免搜索只围绕单个冠军。乘积归一化形成抽样分布，不是确定选择最高分，也不保证低分新分支最终有价值。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两个父本同分，一个已有十个子代、另一个没有，后者有更高探索权重以增加分支覆盖。</p>
+<p><strong>答案：</strong>固定改进器只在任务解法空间内生成变体，允许编辑 meta Agent 则还可改变候选生成和改进流程，扩大搜索对象。更大空间也带来失效与归因困难，需要分别执行和评价新程序。当前本地 archive 操作不生成或运行任意源码，不能用档案谱系冒充完整程序自修改。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只改排序函数属于任务层；把“如何选择待试函数”的策略也改写，才涉及 meta 层，但新增自由度未必自动有效。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19461">原论文</a> · <a href="../../../../agent-research/2603.19461-hyperagents/">实现解读</a> · <a href="#qa-a6ebd187b8938135">问题链接</a></p>
 </details>
@@ -2094,16 +2094,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19461">原论文</a> · <a href="../../../../agent-research/2603.19461-hyperagents/">实现解读</a> · <a href="#qa-ccc25faa1e3c6fce">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:polca" data-paper-title="POLCA: Stochastic Generative Optimization with LLM" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="POLCA: Stochastic Generative Optimization with LLM Agent University of Wisconsin-Madison 2026-03-16 随机 minibatch、程序与评估器都会产生噪声。POLCA 不仅保留一次最高分，而是持续更新候选评价历史；Summarizer 形成全局经验，Proposer 利用当前反馈提出参数，语义 epsilon-net 限制冗余候选。原文 §3 完整实验：成本过高，不复现（审查 DONE）。诊断记录 component_only / L0；优先队列和真实回调接口已实现，没有声称已运行 LLM 优化器或 benchmark 能力。完整实验：成本过高，不复现（审查 DONE）。6 项测试通过，覆盖严格 epsilon 边界、新候选互相过滤、同一有放回 minibatch、跨轮噪声均值/方差、完整输入/输出历史送入 Summarizer/Proposer、预算耗尽及拒绝 test split。诊断记录  Agent 自进化 随机优化 程序搜索 Agent 运行流程与自进化：改的是哪一层 为什么同一候选需要保留多次噪声观察，而非只存最高分？ minibatch、程序和 evaluator 都可能随机，一次峰值易高估候选。POLCA 累计真实输入输出、分数和反馈，用经验均值形成优先级与全局总结，让 proposer 看见变化；保留历史不消除偏差，但避免把偶然最大值当稳定性能。 例如同一程序三次得分一、零、零，均值三分之一比只记最高一更能反映当前证据，不能删掉两次失败。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:polca" data-paper-title="POLCA: Stochastic Generative Optimization with LLM" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="POLCA: Stochastic Generative Optimization with LLM Agent University of Wisconsin-Madison 2026-03-16 随机 minibatch、程序与评估器都会产生噪声。POLCA 不仅保留一次最高分，而是持续更新候选评价历史；Summarizer 形成全局经验，Proposer 利用当前反馈提出参数，语义 epsilon-net 限制冗余候选。原文 §3 完整实验：成本过高，不复现（审查 DONE）。诊断记录 component_only / L0；优先队列和真实回调接口已实现，没有声称已运行 LLM 优化器或 benchmark 能力。完整实验：成本过高，不复现（审查 DONE）。6 项测试通过，覆盖严格 epsilon 边界、新候选互相过滤、同一有放回 minibatch、跨轮噪声均值/方差、完整输入/输出历史送入 Summarizer/Proposer、预算耗尽及拒绝 test split。诊断记录  Agent 自进化 随机优化 程序搜索 Agent 运行流程与自进化：改的是哪一层 带噪声的优化任务为什么容易把一次偶然高分误当成好方案？ 随机批次、程序执行和评价器都会让同一候选的分数波动，只记最高观察会偏向运气好的候选。POLCA 研究让搜索利用评价历史和全局经验，并限制提案冗余。历史更多并不消除偏差，仍需相同评测条件与预算控制，不能用未测提案的预期替代真实观察。 教学例：配置甲偶然遇到容易批次得高分，配置乙在多批次较稳定；只看各自最高值可能选错，保留完整历史才能检查。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-polca-3e1ab10b" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0893e96060cf1920">为什么同一候选需要保留多次噪声观察，而非只存最高分？</h2>
+<h2 id="qa-0893e96060cf1920">带噪声的优化任务为什么容易把一次偶然高分误当成好方案？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apolca">POLCA: Stochastic Generative Optimization with LLM</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Wisconsin-Madison</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>minibatch、程序和 evaluator 都可能随机，一次峰值易高估候选。POLCA 累计真实输入输出、分数和反馈，用经验均值形成优先级与全局总结，让 proposer 看见变化；保留历史不消除偏差，但避免把偶然最大值当稳定性能。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一程序三次得分一、零、零，均值三分之一比只记最高一更能反映当前证据，不能删掉两次失败。</p>
+<p><strong>答案：</strong>随机批次、程序执行和评价器都会让同一候选的分数波动，只记最高观察会偏向运气好的候选。POLCA 研究让搜索利用评价历史和全局经验，并限制提案冗余。历史更多并不消除偏差，仍需相同评测条件与预算控制，不能用未测提案的预期替代真实观察。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：配置甲偶然遇到容易批次得高分，配置乙在多批次较稳定；只看各自最高值可能选错，保留完整历史才能检查。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.14769">原论文</a> · <a href="../../../../agent-research/2603.14769-polca/">实现解读</a> · <a href="#qa-0893e96060cf1920">问题链接</a></p>
 </details>
@@ -2121,15 +2121,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.14769">原论文</a> · <a href="../../../../agent-research/2603.14769-polca/">实现解读</a> · <a href="#qa-d412acefc26869b2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:polca" data-paper-title="POLCA: Stochastic Generative Optimization with LLM" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="POLCA: Stochastic Generative Optimization with LLM Agent University of Wisconsin-Madison 2026-03-16 随机 minibatch、程序与评估器都会产生噪声。POLCA 不仅保留一次最高分，而是持续更新候选评价历史；Summarizer 形成全局经验，Proposer 利用当前反馈提出参数，语义 epsilon-net 限制冗余候选。原文 §3 完整实验：成本过高，不复现（审查 DONE）。诊断记录 component_only / L0；优先队列和真实回调接口已实现，没有声称已运行 LLM 优化器或 benchmark 能力。完整实验：成本过高，不复现（审查 DONE）。6 项测试通过，覆盖严格 epsilon 边界、新候选互相过滤、同一有放回 minibatch、跨轮噪声均值/方差、完整输入/输出历史送入 Summarizer/Proposer、预算耗尽及拒绝 test split。诊断记录  Agent 自进化 随机优化 程序搜索 Agent 运行流程与自进化：改的是哪一层 semantic ε-net 与仅按字符串去重有什么不同？ 语义 embedding 距离试图区分行为或策略近似候选，而不只文本字面相同；按最远者先加入并重算距离避免新候选相互冗余。embedding 应与奖励独立，且经验均值优先级与理论 UCB 变体不可悄悄混用。 例如两段代码变量名不同但方法相近，字符串不同仍可能落在同一 ε 邻域，有限预算应避免全花在近重复方案。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:polca" data-paper-title="POLCA: Stochastic Generative Optimization with LLM" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="POLCA: Stochastic Generative Optimization with LLM Agent University of Wisconsin-Madison 2026-03-16 随机 minibatch、程序与评估器都会产生噪声。POLCA 不仅保留一次最高分，而是持续更新候选评价历史；Summarizer 形成全局经验，Proposer 利用当前反馈提出参数，语义 epsilon-net 限制冗余候选。原文 §3 完整实验：成本过高，不复现（审查 DONE）。诊断记录 component_only / L0；优先队列和真实回调接口已实现，没有声称已运行 LLM 优化器或 benchmark 能力。完整实验：成本过高，不复现（审查 DONE）。6 项测试通过，覆盖严格 epsilon 边界、新候选互相过滤、同一有放回 minibatch、跨轮噪声均值/方差、完整输入/输出历史送入 Summarizer/Proposer、预算耗尽及拒绝 test split。诊断记录  Agent 自进化 随机优化 程序搜索 Agent 运行流程与自进化：改的是哪一层 POLCA 正文的经验均值优先级与理论 UCB 版本，为什么不应混成同一更新规则？ 经验均值使用候选实际已有的平均回报排序，UCB 还会显式加入对不确定性的探索奖励。两者会给少评候选不同优先级，预算与选择轨迹也可能随之改变。正文实现和理论分析的规则需要分别说明，本地不能未经实现就把某一种规则的性质归给另一种。 教学例：新候选只评过一次，均值排序未必选它；UCB 可能因不确定度较大再给机会，这会形成不同的下一轮。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-72aa3981c593eb47">semantic ε-net 与仅按字符串去重有什么不同？</h2>
+<h2 id="qa-72aa3981c593eb47">POLCA 正文的经验均值优先级与理论 UCB 版本，为什么不应混成同一更新规则？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apolca">POLCA: Stochastic Generative Optimization with LLM</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Wisconsin-Madison</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>语义 embedding 距离试图区分行为或策略近似候选，而不只文本字面相同；按最远者先加入并重算距离避免新候选相互冗余。embedding 应与奖励独立，且经验均值优先级与理论 UCB 变体不可悄悄混用。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两段代码变量名不同但方法相近，字符串不同仍可能落在同一 ε 邻域，有限预算应避免全花在近重复方案。</p>
+<p><strong>答案：</strong>经验均值使用候选实际已有的平均回报排序，UCB 还会显式加入对不确定性的探索奖励。两者会给少评候选不同优先级，预算与选择轨迹也可能随之改变。正文实现和理论分析的规则需要分别说明，本地不能未经实现就把某一种规则的性质归给另一种。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新候选只评过一次，均值排序未必选它；UCB 可能因不确定度较大再给机会，这会形成不同的下一轮。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.14769">原论文</a> · <a href="../../../../agent-research/2603.14769-polca/">实现解读</a> · <a href="#qa-72aa3981c593eb47">问题链接</a></p>
 </details>
@@ -2174,15 +2174,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.02660v1">原论文</a> · <a href="../../../../agent-research/2602.02660-mars-research/">实现解读</a> · <a href="#qa-c36b6b4056dd27e5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mars-research" data-paper-title="MARS: Modular Agent with Reflective Search for Automated AI Research" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MARS: Modular Agent with Reflective Search for Automated AI Research Agent Google Cloud AI Research 2026-02-02 自动研究不仅要生成正确代码，还需在有限训练时间内分辨改动价值。MARS 使用“设计—拆分—实现”生成模块化仓库，以预算感知 MCTS 选择新方案、改进或调试；比较新旧执行结果和代码差异，提炼解决方案经验与调试经验，供其他搜索分支复用。图按原文 Figure 2 重绘。原文流程图。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。MLE-Bench 包含 75 个竞赛，每竞赛预算 24 小时单张 A100-40GB，另有大内存、存储和闭源 LLM 调用；完整多方法三次评测显然超出短时单卡预算（§5.1）。成本过高，不复现（审查 DONE），不启动下载与竞赛训练来验证成本。  自进化与经验复用 预算感知自动研究 Agent 运行流程与自进化：改的是哪一层 预算感知 MCTS 与只追当前最高指标有什么区别？ 归一化指标还乘训练时间相对预算的惩罚，兼顾有限时间内可完成的改进；新方案、改善和调试分支也有上限。纯最高分忽略慢候选占用，时间奖励也不能用预计分冒充真实测量，单卡与双卡 MARS+ 更不能混写。 例如两个方案同分，一个耗时更长，在剩余预算紧时应受惩罚；但未运行的方案不能只凭提案承诺获得高指标。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mars-research" data-paper-title="MARS: Modular Agent with Reflective Search for Automated AI Research" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MARS: Modular Agent with Reflective Search for Automated AI Research Agent Google Cloud AI Research 2026-02-02 自动研究不仅要生成正确代码，还需在有限训练时间内分辨改动价值。MARS 使用“设计—拆分—实现”生成模块化仓库，以预算感知 MCTS 选择新方案、改进或调试；比较新旧执行结果和代码差异，提炼解决方案经验与调试经验，供其他搜索分支复用。图按原文 Figure 2 重绘。原文流程图。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。MLE-Bench 包含 75 个竞赛，每竞赛预算 24 小时单张 A100-40GB，另有大内存、存储和闭源 LLM 调用；完整多方法三次评测显然超出短时单卡预算（§5.1）。成本过高，不复现（审查 DONE），不启动下载与竞赛训练来验证成本。  自进化与经验复用 预算感知自动研究 Agent 运行流程与自进化：改的是哪一层 新建、改进与调试三类搜索动作，各试图改变什么？ 新建探索不同研究方案，改进沿已有效节点提高性能，调试则修复尚不能有效执行的候选。三者产出的证据不同：报错减少不等于指标更好，已运行也不等于值得继续搜索。MARS 按执行状态和预算选择分支，并限制调试及子代数量，不能把失败候选的估计指标当实测。 教学例：导入错误先走调试，修好后才能测指标；指标有效但还有空间可做改进，完全换路线才属于新建。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-239f41d9330029f8">预算感知 MCTS 与只追当前最高指标有什么区别？</h2>
+<h2 id="qa-239f41d9330029f8">新建、改进与调试三类搜索动作，各试图改变什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amars-research">MARS: Modular Agent with Reflective Search for Automated AI Research</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud AI Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>归一化指标还乘训练时间相对预算的惩罚，兼顾有限时间内可完成的改进；新方案、改善和调试分支也有上限。纯最高分忽略慢候选占用，时间奖励也不能用预计分冒充真实测量，单卡与双卡 MARS+ 更不能混写。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两个方案同分，一个耗时更长，在剩余预算紧时应受惩罚；但未运行的方案不能只凭提案承诺获得高指标。</p>
+<p><strong>答案：</strong>新建探索不同研究方案，改进沿已有效节点提高性能，调试则修复尚不能有效执行的候选。三者产出的证据不同：报错减少不等于指标更好，已运行也不等于值得继续搜索。MARS 按执行状态和预算选择分支，并限制调试及子代数量，不能把失败候选的估计指标当实测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：导入错误先走调试，修好后才能测指标；指标有效但还有空间可做改进，完全换路线才属于新建。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.02660v1">原论文</a> · <a href="../../../../agent-research/2602.02660-mars-research/">实现解读</a> · <a href="#qa-239f41d9330029f8">问题链接</a></p>
 </details>
@@ -2200,16 +2200,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.02660v1">原论文</a> · <a href="../../../../agent-research/2602.02660-mars-research/">实现解读</a> · <a href="#qa-6074a7a5727628e7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:self-refine" data-paper-title="Self-Refine" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Self-Refine Agent Carnegie Mellon University 2023-03-30 一次生成很难同时满足所有约束。Self-Refine 让同一个 LLM 先生成初稿，再针对任务维度给出可执行反馈，最后据此改写；若反馈判断已满足要求则停止，不需要额外训练数据、人工反馈或外部 reward model。 Self-Refine 在不更新参数的情况下循环执行“生成—自反馈—改写”，把推理时计算用于发现并修正当前答案的问题。实现显式初稿、约束反馈、修订和停止链路；mini-suite 用确定性 critic 验证状态迁移，没有调用论文中的通用 LLM，也不能用 1.0 成功率替代七项原始 benchmark 结果。PlanBench mini 固定 120 episodes：joint success 1.0000、平均成本 2.0000，执行 120 次反馈和 120 次 refinement，共记录 240 个 reasoning steps。  自我迭代 Agent 运行流程与自进化：改的是哪一层 Self-Refine 的反馈为什么要具体到可执行任务维度？ 泛泛说“再好一点”难指导改写，反馈需指出约束遗漏、结构或内容问题，再由同一模型修改。流程不额外训练参数或依赖外部 reward model，但自评仍可能错，尤其事实性问题不能仅靠自己满意就视为验证完成。 例如要求一百字内却写了两百字，反馈应指出缩短并保留关键点，而不是只给一个“质量一般”的分数。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:self-refine" data-paper-title="Self-Refine" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Self-Refine Agent Carnegie Mellon University 2023-03-30 一次生成很难同时满足所有约束。Self-Refine 让同一个 LLM 先生成初稿，再针对任务维度给出可执行反馈，最后据此改写；若反馈判断已满足要求则停止，不需要额外训练数据、人工反馈或外部 reward model。 Self-Refine 在不更新参数的情况下循环执行“生成—自反馈—改写”，把推理时计算用于发现并修正当前答案的问题。实现显式初稿、约束反馈、修订和停止链路；mini-suite 用确定性 critic 验证状态迁移，没有调用论文中的通用 LLM，也不能用 1.0 成功率替代七项原始 benchmark 结果。PlanBench mini 固定 120 episodes：joint success 1.0000、平均成本 2.0000，执行 120 次反馈和 120 次 refinement，共记录 240 个 reasoning steps。  自我迭代 Agent 运行流程与自进化：改的是哪一层 Self-Refine 为什么把一次输出看成还能按具体要求改进的草稿？ 开放生成常同时要求正确、完整、清晰或符合风格，一次回答可能只满足其中部分。Self-Refine 让模型先生成，再明确检查不足并修订，不依赖额外参数训练。循环需要有可执行反馈，模型也可能误判或越改越差，因此改了多轮不等于质量已经提高。 教学例：初稿解释正确却缺少例子，反馈指出这一缺口后再补写；若反馈只有“再好一点”，下一轮未必知道该改哪里。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-self-refine-16be87c4" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f58bee1c1db1b73e">Self-Refine 的反馈为什么要具体到可执行任务维度？</h2>
+<h2 id="qa-f58bee1c1db1b73e">Self-Refine 为什么把一次输出看成还能按具体要求改进的草稿？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aself-refine">Self-Refine</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Carnegie Mellon University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>泛泛说“再好一点”难指导改写，反馈需指出约束遗漏、结构或内容问题，再由同一模型修改。流程不额外训练参数或依赖外部 reward model，但自评仍可能错，尤其事实性问题不能仅靠自己满意就视为验证完成。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如要求一百字内却写了两百字，反馈应指出缩短并保留关键点，而不是只给一个“质量一般”的分数。</p>
+<p><strong>答案：</strong>开放生成常同时要求正确、完整、清晰或符合风格，一次回答可能只满足其中部分。Self-Refine 让模型先生成，再明确检查不足并修订，不依赖额外参数训练。循环需要有可执行反馈，模型也可能误判或越改越差，因此改了多轮不等于质量已经提高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：初稿解释正确却缺少例子，反馈指出这一缺口后再补写；若反馈只有“再好一点”，下一轮未必知道该改哪里。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.17651">原论文</a> · <a href="../../../../agent-research/2303.17651-self-refine/">实现解读</a> · <a href="#qa-f58bee1c1db1b73e">问题链接</a></p>
 </details>
@@ -2253,16 +2253,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.17651">原论文</a> · <a href="../../../../agent-research/2303.17651-self-refine/">实现解读</a> · <a href="#qa-d41641b7b845502f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:reflexion" data-paper-title="Reflexion" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Reflexion Agent Northeastern University 2023-03-20 传统 RL 要大量采样与参数更新。Reflexion 把稀疏标量/二值反馈“放大”为可执行的自然语言经验，写入长期 episodic memory；Actor 在下一 trial 读取反思，Evaluator 继续判定成功与否。 本页实现失败反馈 → 语言反思 → 有界 episodic memory → 下一 trial 改进，全程不更新模型权重。实现跨 trial 的失败、语言经验与复用闭环，但反思模板和 evaluator 是确定性的；没有调用 GPT-4、ALFWorld、HotpotQA 或代码执行器。0.9 来自“每个新族首次失败”的可审计协议，不等同 HumanEval pass@1。PlanBench mini 有 12 个重复任务族。每族首次暴露计划错误，Evaluator 失败后生成一条可复用反思；后续 episode 读取当前上下文并执行完整计划。  自我反思 Agent 运行流程与自进化：改的是哪一层 verbal reinforcement 为什么能改变行为却不需要梯度下降？ 失败反馈被转成语言经验放入 episodic memory，下一 trial 的策略条件因上下文改变而变化，模型参数保持固定。它利用语言模型的条件学习，不等于权重优化；反思质量和可用空间决定是否帮助，错误总结也可能持续误导。 例如记下“先确认工具返回完整再提交”，下一次读到后改变步骤，但模型 checkpoint 字节并没有变化。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:reflexion" data-paper-title="Reflexion" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Reflexion Agent Northeastern University 2023-03-20 传统 RL 要大量采样与参数更新。Reflexion 把稀疏标量/二值反馈“放大”为可执行的自然语言经验，写入长期 episodic memory；Actor 在下一 trial 读取反思，Evaluator 继续判定成功与否。 本页实现失败反馈 → 语言反思 → 有界 episodic memory → 下一 trial 改进，全程不更新模型权重。实现跨 trial 的失败、语言经验与复用闭环，但反思模板和 evaluator 是确定性的；没有调用 GPT-4、ALFWorld、HotpotQA 或代码执行器。0.9 来自“每个新族首次失败”的可审计协议，不等同 HumanEval pass@1。PlanBench mini 有 12 个重复任务族。每族首次暴露计划错误，Evaluator 失败后生成一条可复用反思；后续 episode 读取当前上下文并执行完整计划。  自我反思 Agent 运行流程与自进化：改的是哪一层 Reflexion 为什么在多次尝试之间保存失败教训，而不只重新随机作答？ 同一任务反复尝试时，单纯重采样容易重复原来的错误。Reflexion 将执行评价转成可读经验，供后续尝试调整行为，使反馈跨 trial 保留。记下教训不等于它正确或可迁移，外部奖励与文字反思的作用应分开，模型参数也不会因此自动完成 RL 更新。 教学例：第一次搜索停在无效页面，反思可提醒下一次检查来源和扩大查询；只重新开始而不保留教训，可能再次走同一路。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-reflexion-b837a66e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-2a78cc6a61444ea4">verbal reinforcement 为什么能改变行为却不需要梯度下降？</h2>
+<h2 id="qa-2a78cc6a61444ea4">Reflexion 为什么在多次尝试之间保存失败教训，而不只重新随机作答？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Areflexion">Reflexion</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Northeastern University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>失败反馈被转成语言经验放入 episodic memory，下一 trial 的策略条件因上下文改变而变化，模型参数保持固定。它利用语言模型的条件学习，不等于权重优化；反思质量和可用空间决定是否帮助，错误总结也可能持续误导。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如记下“先确认工具返回完整再提交”，下一次读到后改变步骤，但模型 checkpoint 字节并没有变化。</p>
+<p><strong>答案：</strong>同一任务反复尝试时，单纯重采样容易重复原来的错误。Reflexion 将执行评价转成可读经验，供后续尝试调整行为，使反馈跨 trial 保留。记下教训不等于它正确或可迁移，外部奖励与文字反思的作用应分开，模型参数也不会因此自动完成 RL 更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一次搜索停在无效页面，反思可提醒下一次检查来源和扩大查询；只重新开始而不保留教训，可能再次走同一路。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.11366">原论文</a> · <a href="../../../../agent-research/2303.11366-reflexion/">实现解读</a> · <a href="#qa-2a78cc6a61444ea4">问题链接</a></p>
 </details>

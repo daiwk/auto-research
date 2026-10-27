@@ -663,16 +663,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.11015">原论文</a> · <a href="../../../../reproductions/2608.11015-sona/">实现解读</a> · <a href="#qa-d8da9beed55e2ba5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pushdualgen" data-paper-title="PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation 搜广推与 LLM 应用 Kuaishou Technology 2026-08-08 先生成可服务的 Semantic ID，再按需生成可跳过的解释 copy；在线侧融合 SID 与 copy 表示，同时保留解释一致性。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。本地实现执行了独立的模型状态和打分路径；它不是把论文名映射到同一个加权公式。未复刻项见 adapter 的 omitted_core_components，本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；  generative-recommendation semantic-id llm-recommendation push 搜广推 生成式召回与推理推荐 PushDualGen 为什么把可服务 SID 作为解释的前置条件？ 先确定真实推荐对象，再条件生成 copy，使理由围绕已选物品而非自由编造。文案可按需要跳过，推荐路径保持独立可用。合法 SID 不保证文案事实正确，解释一致性仍需检查，不应把说服力等同用户满意。 示意：先选定防水跑鞋码，再解释适合雨天训练；不能先写“保暖外套”文案，最后却配到跑鞋，二者各自流畅也不一致。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pushdualgen" data-paper-title="PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation 搜广推与 LLM 应用 Kuaishou Technology 2026-08-08 先生成可服务的 Semantic ID，再按需生成可跳过的解释 copy；在线侧融合 SID 与 copy 表示，同时保留解释一致性。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。本地实现执行了独立的模型状态和打分路径；它不是把论文名映射到同一个加权公式。未复刻项见 adapter 的 omitted_core_components，本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；  generative-recommendation semantic-id llm-recommendation push 搜广推 生成式召回与推理推荐 PushDualGen 的 SID 合法时，解释 copy 就一定正确吗？ 不一定。SID 合法只说明推荐对象能映射到可服务目录，copy 还需忠于该对象的事实、匹配用户证据且不夸大。身份正确和解释可信是不同判据，二者应分别校验；不能用目录命中替代文案一致性，也不能用动听理由掩盖选错商品。 示意：确实选中了普通跑鞋，但文案声称它能防火，目录校验仍可通过，事实校验却应拒绝；推荐身份与说明质量不能只测一个。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-pushdualgen-379bfcda" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8086dc0e4ed1344b">PushDualGen 为什么把可服务 SID 作为解释的前置条件？</h2>
+<h2 id="qa-8086dc0e4ed1344b">PushDualGen 的 SID 合法时，解释 copy 就一定正确吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apushdualgen">PushDualGen: Enabling LLMs to Generate Semantic IDs with Interpretable Copy for Industrial Push Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>先确定真实推荐对象，再条件生成 copy，使理由围绕已选物品而非自由编造。文案可按需要跳过，推荐路径保持独立可用。合法 SID 不保证文案事实正确，解释一致性仍需检查，不应把说服力等同用户满意。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>先选定防水跑鞋码，再解释适合雨天训练；不能先写“保暖外套”文案，最后却配到跑鞋，二者各自流畅也不一致。</p>
+<p><strong>答案：</strong>不一定。SID 合法只说明推荐对象能映射到可服务目录，copy 还需忠于该对象的事实、匹配用户证据且不夸大。身份正确和解释可信是不同判据，二者应分别校验；不能用目录命中替代文案一致性，也不能用动听理由掩盖选错商品。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>确实选中了普通跑鞋，但文案声称它能防火，目录校验仍可通过，事实校验却应拒绝；推荐身份与说明质量不能只测一个。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.07989">原论文</a> · <a href="../../../../reproductions/2608.07989-pushdualgen/">实现解读</a> · <a href="#qa-8086dc0e4ed1344b">问题链接</a></p>
 </details>
@@ -928,16 +928,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.28895">原论文</a> · <a href="../../../../reproductions/2607.28895-snaplgr/">实现解读</a> · <a href="#qa-6a48591353777092">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reward-guided-decoding" data-paper-title="Reward Guided Decoding for Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Reward Guided Decoding for Generative Recommendation 搜广推与 LLM 应用 Institute of Information Engineering, Chinese Academy of Sciences 2026-07-28 保持生成器概率作为先验，在解码时用独立 reward 进行指数倾斜；闭式策略在提升期望 reward 的同时用 KL 温度限制偏离，无需重新训练生成器。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；生产模型、私有日志与服务基础设施明确列为边界，不用普通基线冒充完整工业系统。本地使用公开 MovieLens 特征或由其构造的可审计代理任务，不能复现论文公司的私有用户日志、线上流量分配、生产模型规模和 serving 栈。因此本页只把本地结果解释为机制级验证；不将其外推为论文线上 lift，也不声称与原文绝对指标可直接比较。本地对照口径：基线按生成器似然解码，实验组用内容/新颖度 reward 做 KL 正则倾斜；seed 42 的 NDCG@10 为 0.02249，基线为 0.05401，负结果保留。  generative-recommendation decoding reward business-alignment 搜广推 生成式召回与推理推荐 奖励引导解码为什么是一种新分布而不只是给原结果附上 reward？ 指数倾斜重新分配候选概率，原模型先验与独立奖励共同决定被选结果；归一化使其成为可比较分布，权重无需重训。它只在搜索支持内起作用，零先验结果不会凭奖励自动获得质量，reward 也可能不可靠。 示意：同样两部片原概率六四，奖励可将比例改变；如果只在输出列表旁写两条奖励说明却仍按六四采样，就没有执行倾斜。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reward-guided-decoding" data-paper-title="Reward Guided Decoding for Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Reward Guided Decoding for Generative Recommendation 搜广推与 LLM 应用 Institute of Information Engineering, Chinese Academy of Sciences 2026-07-28 保持生成器概率作为先验，在解码时用独立 reward 进行指数倾斜；闭式策略在提升期望 reward 的同时用 KL 温度限制偏离，无需重新训练生成器。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；生产模型、私有日志与服务基础设施明确列为边界，不用普通基线冒充完整工业系统。本地使用公开 MovieLens 特征或由其构造的可审计代理任务，不能复现论文公司的私有用户日志、线上流量分配、生产模型规模和 serving 栈。因此本页只把本地结果解释为机制级验证；不将其外推为论文线上 lift，也不声称与原文绝对指标可直接比较。本地对照口径：基线按生成器似然解码，实验组用内容/新颖度 reward 做 KL 正则倾斜；seed 42 的 NDCG@10 为 0.02249，基线为 0.05401，负结果保留。  generative-recommendation decoding reward business-alignment 搜广推 生成式召回与推理推荐 奖励引导解码能给先验概率 P0=0 的序列分配正概率吗？ 按来源闭式公式不能。Q 与 P0 乘奖励指数成比例，先验严格为零时乘积仍为零，归一化也不会创造支持。奖励只重排已有支持内的质量；若额外平滑、扩展候选或修改生成器，需作为另外的算法步骤说明，不能归给指数倾斜本身。 示意：合法候选集合根本不包含某电影，给它再高新颖度也不会凭公式出现；必须先有可生成或可枚举的支持，奖励才能影响选择。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-reward-guided-decoding-a3100a32" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5f4bd9838c190a35">奖励引导解码为什么是一种新分布而不只是给原结果附上 reward？</h2>
+<h2 id="qa-5f4bd9838c190a35">奖励引导解码能给先验概率 P0=0 的序列分配正概率吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Areward-guided-decoding">Reward Guided Decoding for Generative Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Information Engineering, Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>指数倾斜重新分配候选概率，原模型先验与独立奖励共同决定被选结果；归一化使其成为可比较分布，权重无需重训。它只在搜索支持内起作用，零先验结果不会凭奖励自动获得质量，reward 也可能不可靠。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>同样两部片原概率六四，奖励可将比例改变；如果只在输出列表旁写两条奖励说明却仍按六四采样，就没有执行倾斜。</p>
+<p><strong>答案：</strong>按来源闭式公式不能。Q 与 P0 乘奖励指数成比例，先验严格为零时乘积仍为零，归一化也不会创造支持。奖励只重排已有支持内的质量；若额外平滑、扩展候选或修改生成器，需作为另外的算法步骤说明，不能归给指数倾斜本身。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>合法候选集合根本不包含某电影，给它再高新颖度也不会凭公式出现；必须先有可生成或可枚举的支持，奖励才能影响选择。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25344">原论文</a> · <a href="../../../../reproductions/2607.25344-reward-guided-decoding/">实现解读</a> · <a href="#qa-5f4bd9838c190a35">问题链接</a></p>
 </details>
@@ -1352,16 +1352,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.26073">原论文</a> · <a href="../../../../reproductions/2607.26073-guess-where-you-go/">实现解读</a> · <a href="#qa-6eb83c37777015f5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rag-generation" data-paper-title="Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale 搜广推与 LLM 应用 Kuaishou / Beihang University 2026-06-24 用解耦语义 ID 连接生成式推荐与兴趣条件视频生成，并以跨域 reward 协调候选选择和内容创建。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，不能复现论文公司的私有日志、线上分桶、生产模型规模和 serving 栈。因此本页只解释为核心机制级验证，不宣称复现原文绝对指标或线上增益。本地对照口径：同一全目录协议下，基线 NDCG@10 为 0.05401，实验组 RaG 为 0.04235，相对变化 -21.59%。仅验证 D-SID 接口，视频生成器未复刻；生产线上 lift 的外推不适用。  generative-recommendation semantic-id video-generation 搜广推 生成式召回与推理推荐 RaG 为什么把内容语义和创作因素分开编码？ 推荐需要判断主题是否匹配，视频生成还要控制表达方式，解耦表示让两者通过明确接口协作，避免一个码同时承担互相牵制的目标。因素不必完全统计独立，分开命名也不保证训练真解耦，需看实际条件路径。 示意：用户要露营教学，内容码确定主题，创作码决定镜头节奏；改变镜头不应让主题突然变美食，但这需要模型实际约束。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rag-generation" data-paper-title="Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale 搜广推与 LLM 应用 Kuaishou / Beihang University 2026-06-24 用解耦语义 ID 连接生成式推荐与兴趣条件视频生成，并以跨域 reward 协调候选选择和内容创建。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，不能复现论文公司的私有日志、线上分桶、生产模型规模和 serving 栈。因此本页只解释为核心机制级验证，不宣称复现原文绝对指标或线上增益。本地对照口径：同一全目录协议下，基线 NDCG@10 为 0.05401，实验组 RaG 为 0.04235，相对变化 -21.59%。仅验证 D-SID 接口，视频生成器未复刻；生产线上 lift 的外推不适用。  generative-recommendation semantic-id video-generation 搜广推 生成式召回与推理推荐 RaG 的检索命中率能否单独评价新生成视频的质量？ 不能。检索指标检查既有候选是否符合目标，视频质量还涉及生成结果的视觉、事实与兴趣一致性，两个输出空间不同。D-SID 只提供衔接接口，不把检索正确自动转成制作成功。来源本地未复刻视频生成器，不能用排序数字填补这项证据。 示意：系统选对“露营教学”主题，却生成违反物理常识的画面，检索可命中、视频仍失败；反过来画面精美也不代表内容适合用户。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-rag-generation-6f1ef070" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d0026c4f21594df2">RaG 为什么把内容语义和创作因素分开编码？</h2>
+<h2 id="qa-d0026c4f21594df2">RaG 的检索命中率能否单独评价新生成视频的质量？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arag-generation">Recommendation as Generation: Unifying Personalized Video Generation and Recommendation at Industrial Scale</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou / Beihang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>推荐需要判断主题是否匹配，视频生成还要控制表达方式，解耦表示让两者通过明确接口协作，避免一个码同时承担互相牵制的目标。因素不必完全统计独立，分开命名也不保证训练真解耦，需看实际条件路径。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>用户要露营教学，内容码确定主题，创作码决定镜头节奏；改变镜头不应让主题突然变美食，但这需要模型实际约束。</p>
+<p><strong>答案：</strong>不能。检索指标检查既有候选是否符合目标，视频质量还涉及生成结果的视觉、事实与兴趣一致性，两个输出空间不同。D-SID 只提供衔接接口，不把检索正确自动转成制作成功。来源本地未复刻视频生成器，不能用排序数字填补这项证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>系统选对“露营教学”主题，却生成违反物理常识的画面，检索可命中、视频仍失败；反过来画面精美也不代表内容适合用户。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.25496">原论文</a> · <a href="../../../../reproductions/2606.25496-rag-generation/">实现解读</a> · <a href="#qa-d0026c4f21594df2">问题链接</a></p>
 </details>
@@ -1405,16 +1405,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.25496">原论文</a> · <a href="../../../../reproductions/2606.25496-rag-generation/">实现解读</a> · <a href="#qa-c98a66fe78f4cef1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:qgs" data-paper-title="From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark 搜广推与 LLM 应用 University of Science and Technology of China / Alibaba 2026-05-25 将 query 与 item 共同序列化做生成式搜索，Linear HSTU 以线性复杂度编码历史，HFG-Attention 再融合稀疏交叉特征。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。本地实现执行了独立的模型状态和打分路径；它不是把论文名映射到同一个加权公式。未复刻项见 adapter 的 omitted_core_components，本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；  generative-search search-ranking long-sequence 搜广推 生成式召回与推理推荐 QGS 的 query-item 共同序列化为何适合生成式搜索？ 当前 query 为物品路径提供显式条件，历史帮助解释省略与偏好，生成目标直接在该上下文输出 item 表示，而非先得通用用户向量再独立匹配。查询与推荐历史不同，缺失 query 需要明确处理，不能拿目标标题假装真实请求。 示意：用户搜旅行相机，同样摄影历史应偏向轻便；换成专业棚拍，路径可以改变，而不是对所有查询都返回同一套摄影热门。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:qgs" data-paper-title="From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark 搜广推与 LLM 应用 University of Science and Technology of China / Alibaba 2026-05-25 将 query 与 item 共同序列化做生成式搜索，Linear HSTU 以线性复杂度编码历史，HFG-Attention 再融合稀疏交叉特征。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；公司私有特征、生产基础模型与在线流量不可公开，论文 A/B 数字仅作原文引用。本地实现执行了独立的模型状态和打分路径；它不是把论文名映射到同一个加权公式。未复刻项见 adapter 的 omitted_core_components，本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；  generative-search search-ranking long-sequence 搜广推 生成式召回与推理推荐 QGS 的条件概率连乘，为什么描述一条完整生成路径而不是每一步各选最高分就够了？ p(y|q,h) 将各步在已有前缀下的条件概率相乘，后一步依赖前面已选输出。局部最高不必构成最高联合概率路径，比较时通常累加 log 概率并遵循目录合法性。这个基础关系不等于 QGS 全套搜索已被本地代理实现。 示意：首步甲概率稍高，但其合法后继都很弱；首步乙略低却有强后继，完整路径乙可能更可信，逐步贪心会漏掉它。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-qgs-de75c3ea" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-3d9204e340d23d84">QGS 的 query-item 共同序列化为何适合生成式搜索？</h2>
+<h2 id="qa-3d9204e340d23d84">QGS 的条件概率连乘，为什么描述一条完整生成路径而不是每一步各选最高分就够了？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aqgs">From Item-Only to Query-Item: Query-Conditioned Generative Search with QGS in Quark</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Science and Technology of China / Alibaba</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>当前 query 为物品路径提供显式条件，历史帮助解释省略与偏好，生成目标直接在该上下文输出 item 表示，而非先得通用用户向量再独立匹配。查询与推荐历史不同，缺失 query 需要明确处理，不能拿目标标题假装真实请求。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>用户搜旅行相机，同样摄影历史应偏向轻便；换成专业棚拍，路径可以改变，而不是对所有查询都返回同一套摄影热门。</p>
+<p><strong>答案：</strong>p(y|q,h) 将各步在已有前缀下的条件概率相乘，后一步依赖前面已选输出。局部最高不必构成最高联合概率路径，比较时通常累加 log 概率并遵循目录合法性。这个基础关系不等于 QGS 全套搜索已被本地代理实现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>首步甲概率稍高，但其合法后继都很弱；首步乙略低却有强后继，完整路径乙可能更可信，逐步贪心会漏掉它。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.25514">原论文</a> · <a href="../../../../reproductions/2605.25514-qgs/">实现解读</a> · <a href="#qa-3d9204e340d23d84">问题链接</a></p>
 </details>
@@ -1564,16 +1564,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.14434">原论文</a> · <a href="../../../../reproductions/2605.14434-cq-sid/">实现解读</a> · <a href="#qa-11cee61cb6af22a3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:univa" data-paper-title="Unified Value Alignment for Generative Recommendation in Industrial Advertising" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Unified Value Alignment for Generative Recommendation in Industrial Advertising 搜广推与 LLM 应用 Tencent / WeChat Channels 2026-05-07 传统生成式推荐主要优化用户行为匹配，却没有直接表示广告主的出价、ROI、优化目标等商业价值；工业广告还要求生成路径合法、满足请求级库存约束。UniVA 将“用户偏好、商业价值、可投放性”放进同一套生成式模型：Commercial SID 在语义 token 后编码商业属性；Generation-as-Ranking 用生成头和价值头联合给路径打分；eCPM-aware RL 让策略直接偏向请求内相对高价值广告；个性化 trie 则保证 beam 只沿当前请求可投放的广告路径展开。论文的三项关键改动是： Commercial token 的机制诊断是正向的：以相同前两级语义前缀分组，组内 bid proxy 的平均标准差由 0.34956 降至 0.09773（-72.04%）。Fidelity: 完整核心链路。本地实际执行 Commercial SID、HSTU 用户编码、cross-attention → causal self-attention 解码、MoR、共享专家 + top-k Sparse MoE、generation/value 双头、监督学习与 PPO/value 交替训练，以及 value-guided 个性化 trie beam search。  generative-advertising commercial-sid ppo value-aware-serving 搜广推 生成式召回与推理推荐 UniVA为什么把商业属性放进SID？ 纯用户行为匹配缺少广告主目标、出价和ROI等信息，commercial token让价值进入生成路径，再与可投放性约束共同处理，而非只在最后加一分。 例如语义都相关的广告，还需区分商业目标和当前库存资格。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:univa" data-paper-title="Unified Value Alignment for Generative Recommendation in Industrial Advertising" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Unified Value Alignment for Generative Recommendation in Industrial Advertising 搜广推与 LLM 应用 Tencent / WeChat Channels 2026-05-07 传统生成式推荐主要优化用户行为匹配，却没有直接表示广告主的出价、ROI、优化目标等商业价值；工业广告还要求生成路径合法、满足请求级库存约束。UniVA 将“用户偏好、商业价值、可投放性”放进同一套生成式模型：Commercial SID 在语义 token 后编码商业属性；Generation-as-Ranking 用生成头和价值头联合给路径打分；eCPM-aware RL 让策略直接偏向请求内相对高价值广告；个性化 trie 则保证 beam 只沿当前请求可投放的广告路径展开。论文的三项关键改动是： Commercial token 的机制诊断是正向的：以相同前两级语义前缀分组，组内 bid proxy 的平均标准差由 0.34956 降至 0.09773（-72.04%）。Fidelity: 完整核心链路。本地实际执行 Commercial SID、HSTU 用户编码、cross-attention → causal self-attention 解码、MoR、共享专家 + top-k Sparse MoE、generation/value 双头、监督学习与 PPO/value 交替训练，以及 value-guided 个性化 trie beam search。  generative-advertising commercial-sid ppo value-aware-serving 搜广推 生成式召回与推理推荐 UniVA的商业SID最后一级，是再细分商品内容语义吗？ 不只是内容语义细化。它保留前两级语义码，末级引入商业属性组合与类内bid分桶，把广告目标和出价信息接到生成路径。末级的目录含义应由商业映射解释，不能直接按普通内容聚类标签读，也不能将代理bid视作真实收入。 教学例子：两条内容相近的广告可因商业属性或bid档不同落入不同末级码；差别不必来自画面或文本主题。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-univa-ad679aba" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0de51f7643d33b41">UniVA为什么把商业属性放进SID？</h2>
+<h2 id="qa-0de51f7643d33b41">UniVA的商业SID最后一级，是再细分商品内容语义吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Auniva">Unified Value Alignment for Generative Recommendation in Industrial Advertising</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tencent / WeChat Channels</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>纯用户行为匹配缺少广告主目标、出价和ROI等信息，commercial token让价值进入生成路径，再与可投放性约束共同处理，而非只在最后加一分。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如语义都相关的广告，还需区分商业目标和当前库存资格。</p>
+<p><strong>答案：</strong>不只是内容语义细化。它保留前两级语义码，末级引入商业属性组合与类内bid分桶，把广告目标和出价信息接到生成路径。末级的目录含义应由商业映射解释，不能直接按普通内容聚类标签读，也不能将代理bid视作真实收入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两条内容相近的广告可因商业属性或bid档不同落入不同末级码；差别不必来自画面或文本主题。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.05803">原论文</a> · <a href="../../../../reproductions/2605.05803-univa/">实现解读</a> · <a href="#qa-0de51f7643d33b41">问题链接</a></p>
 </details>
@@ -1776,16 +1776,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.02684">原论文</a> · <a href="../../../../reproductions/2604.02684-mbgr/">实现解读</a> · <a href="#qa-3a0f76153c4a63db">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rclrec" data-paper-title="RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-03-30 RCLRec 从行为历史里选择与转化相关的短子序列，并按逆时间顺序作为 decoder 前缀。联合生成目标提供逐样本的中间监督，质量感知损失抑制无信息课程，缓解转化标签稀疏。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04768，相对变化 -11.71%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation conversion-modeling curriculum-learning 搜广推 生成式召回与推理推荐 RCLRec 的课程为什么从与转化相关的短子序列构造？ 转化信号少，完整长史里大量行为与当前成交无关，相关子序列提供更集中的中间监督，逆序更强调接近目标的证据。相关选择也可能有偏，不能将训练后验相关直接当在线可知原因，更不能任意把所有历史倒序便称课程。 示意：搜索、比较、加购更像购买链条，偶然娱乐浏览不应等权加入；但若测试先知道买哪件才选片段，会泄漏最终目标。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rclrec" data-paper-title="RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-03-30 RCLRec 从行为历史里选择与转化相关的短子序列，并按逆时间顺序作为 decoder 前缀。联合生成目标提供逐样本的中间监督，质量感知损失抑制无信息课程，缓解转化标签稀疏。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04768，相对变化 -11.71%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation conversion-modeling curriculum-learning 搜广推 生成式召回与推理推荐 RCLRec 的课程质量权重为零，是否意味着主目标也停止学习？ 不意味着。来源将损失写成主目标加 λq(C) 倍课程项，q(C)=0 会使该课程项在总损失数值中消失，主目标项仍保留。质量控制针对辅助监督的贡献，不应误改成遮掉整个样本。讨论梯度时还需区分权重是否也是可训练量。 示意：一条购买样本的课程片段很差，可以不计该辅助目标，仍用真实购买标签训练主预测；直接丢掉整条样本会连有价值监督也删除。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-rclrec-bd92f42c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-80bc5b5c19f75b0a">RCLRec 的课程为什么从与转化相关的短子序列构造？</h2>
+<h2 id="qa-80bc5b5c19f75b0a">RCLRec 的课程质量权重为零，是否意味着主目标也停止学习？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arclrec">RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba International Digital Commerce Group</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>转化信号少，完整长史里大量行为与当前成交无关，相关子序列提供更集中的中间监督，逆序更强调接近目标的证据。相关选择也可能有偏，不能将训练后验相关直接当在线可知原因，更不能任意把所有历史倒序便称课程。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>搜索、比较、加购更像购买链条，偶然娱乐浏览不应等权加入；但若测试先知道买哪件才选片段，会泄漏最终目标。</p>
+<p><strong>答案：</strong>不意味着。来源将损失写成主目标加 λq(C) 倍课程项，q(C)=0 会使该课程项在总损失数值中消失，主目标项仍保留。质量控制针对辅助监督的贡献，不应误改成遮掉整个样本。讨论梯度时还需区分权重是否也是可训练量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一条购买样本的课程片段很差，可以不计该辅助目标，仍用真实购买标签训练主预测；直接丢掉整条样本会连有价值监督也删除。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.28124">原论文</a> · <a href="../../../../reproductions/2603.28124-rclrec/">实现解读</a> · <a href="#qa-80bc5b5c19f75b0a">问题链接</a></p>
 </details>
@@ -2253,16 +2253,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.13581">原论文</a> · <a href="../../../../reproductions/2602.13581-climber-pilot/">实现解读</a> · <a href="#qa-c107ef20782d3df8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rgalign-rec" data-paper-title="RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems 搜广推与 LLM 应用 Forth AI / Shopee / Singapore University of Technology and Design 2026-02-13 先让 LLM 从上下文生成潜在 query，再用真实排序模型的 item 偏好构建正负 query，通过 RG-SFT 与 DPO 对齐 top-rank 意图。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 rgalign-rec 核心机制，相对 NDCG@10 -14.03%。  llm-recommendation query-reasoning preference-alignment 搜广推 生成式召回与推理推荐 RGAlign-Rec为什么先从用户上下文生成潜在query？ 潜在query把未明说的意图转成语言条件，再由排序模型对候选物品的偏好判断它是否有帮助。目标不是写得流畅，而是让生成意图对齐最终top-rank需求。 例如用户只说想放松，模型生成轻松喜剧倾向，再看其是否帮助排出合适电影。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rgalign-rec" data-paper-title="RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems 搜广推与 LLM 应用 Forth AI / Shopee / Singapore University of Technology and Design 2026-02-13 先让 LLM 从上下文生成潜在 query，再用真实排序模型的 item 偏好构建正负 query，通过 RG-SFT 与 DPO 对齐 top-rank 意图。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 rgalign-rec 核心机制，相对 NDCG@10 -14.03%。  llm-recommendation query-reasoning preference-alignment 搜广推 生成式召回与推理推荐 RGAlign-Rec的潜在query是用户真的输入过的搜索词吗？ 不是。它是从用户上下文生成的语言化意图，用来连接下游物品召回与排序需求。生成得通顺并不意味着用户明确说过这些话，因而不能把query当成直接观测的用户真值。先分清真实行为与生成意图，才能理解后续排序引导监督的来源。 教学例子：用户看过几条露营内容，系统生成“轻量帐篷”作为潜在query；这不等于日志里记录了用户搜索过该词。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-rgalign-rec-56b59d1c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-bdd19e3b729ffb62">RGAlign-Rec为什么先从用户上下文生成潜在query？</h2>
+<h2 id="qa-bdd19e3b729ffb62">RGAlign-Rec的潜在query是用户真的输入过的搜索词吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Argalign-rec">RGAlign-Rec: Ranking-Guided Alignment for Latent Query Reasoning in Recommendation Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Forth AI / Shopee / Singapore University of Technology and Design</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>潜在query把未明说的意图转成语言条件，再由排序模型对候选物品的偏好判断它是否有帮助。目标不是写得流畅，而是让生成意图对齐最终top-rank需求。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户只说想放松，模型生成轻松喜剧倾向，再看其是否帮助排出合适电影。</p>
+<p><strong>答案：</strong>不是。它是从用户上下文生成的语言化意图，用来连接下游物品召回与排序需求。生成得通顺并不意味着用户明确说过这些话，因而不能把query当成直接观测的用户真值。先分清真实行为与生成意图，才能理解后续排序引导监督的来源。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>用户看过几条露营内容，系统生成“轻量帐篷”作为潜在query；这不等于日志里记录了用户搜索过该词。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.12968">原论文</a> · <a href="../../../../reproductions/2602.12968-rgalign-rec/">实现解读</a> · <a href="#qa-bdd19e3b729ffb62">问题链接</a></p>
 </details>
@@ -2306,16 +2306,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.12968">原论文</a> · <a href="../../../../reproductions/2602.12968-rgalign-rec/">实现解读</a> · <a href="#qa-a57676e168ae136a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rolegen" data-paper-title="Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning 搜广推与 LLM 应用 Beihang University 2026-02-13 RoleGen 让 LLM Reasoner 判断物品在转化轨迹中的功能角色，并通过反事实路径估计其工具性作用；候选再进入 SID 生成骨干，通过推理—执行—反馈—反思闭环迭代，降低休眠用户兴趣坍缩。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05605，相对变化 +3.78%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation counterfactual-reasoning dormant-users 搜广推 生成式召回与推理推荐 RoleGen为什么关心物品在转化路径中的功能角色？ 休眠用户日志稀少，单纯按旧兴趣可能坍缩；角色推理尝试判断物品是补充、触发还是工具性环节，再经执行反馈反思调整SID生成候选。 例如某商品不是最终目标，却可能帮助用户完成后续需要。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rolegen" data-paper-title="Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning 搜广推与 LLM 应用 Beihang University 2026-02-13 RoleGen 让 LLM Reasoner 判断物品在转化轨迹中的功能角色，并通过反事实路径估计其工具性作用；候选再进入 SID 生成骨干，通过推理—执行—反馈—反思闭环迭代，降低休眠用户兴趣坍缩。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05605，相对变化 +3.78%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation counterfactual-reasoning dormant-users 搜广推 生成式召回与推理推荐 RoleGen所说的role是用户画像身份，还是物品在转化路径中的功能？ 这里是物品在转化路径中承担的功能角色，不是给用户分配职业或人口属性。LLM Reasoner对轨迹中的物品作用作判断，再将候选交给SID生成骨干与反馈循环。角色是模型推断的解释，不能直接当成已经观测到的真实因果身份。 教学例子：同一商品可以在一次路径里帮助比较，在另一次路径里成为最终购买对象；这与用户是不是“学生”无关。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-rolegen-9ce78677" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5116f7e1f78cdcad">RoleGen为什么关心物品在转化路径中的功能角色？</h2>
+<h2 id="qa-5116f7e1f78cdcad">RoleGen所说的role是用户画像身份，还是物品在转化路径中的功能？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arolegen">Awakening Dormant Users: Generative Recommendation with Counterfactual Functional Role Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beihang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>休眠用户日志稀少，单纯按旧兴趣可能坍缩；角色推理尝试判断物品是补充、触发还是工具性环节，再经执行反馈反思调整SID生成候选。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如某商品不是最终目标，却可能帮助用户完成后续需要。</p>
+<p><strong>答案：</strong>这里是物品在转化路径中承担的功能角色，不是给用户分配职业或人口属性。LLM Reasoner对轨迹中的物品作用作判断，再将候选交给SID生成骨干与反馈循环。角色是模型推断的解释，不能直接当成已经观测到的真实因果身份。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一商品可以在一次路径里帮助比较，在另一次路径里成为最终购买对象；这与用户是不是“学生”无关。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.13134">原论文</a> · <a href="../../../../reproductions/2602.13134-rolegen/">实现解读</a> · <a href="#qa-5116f7e1f78cdcad">问题链接</a></p>
 </details>
@@ -2386,15 +2386,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10606">原论文</a> · <a href="../../../../reproductions/2602.10606-s-grec/">实现解读</a> · <a href="#qa-ef678d9523c7b0d4">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:s-grec" data-paper-title="S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage 搜广推与 LLM 应用 Tencent / WeChat Channels 2026-02-11 生成式推荐通常只从行为日志学习 next-item likelihood，难以理解用户为何偏好某个内容；直接把 LLM 放到在线链路又无法满足工业延迟。S-GRec 将 LLM 仅作为离线语义 judge：两阶段 Personalized Semantic Judge（PSJ）先输出可解释的方面证据，再学习每个用户的方面权重；轻量生成器线上只生成 Semantic ID，不依赖 LLM。论文的第二个问题是语义目标可能与收入目标冲突。 这是最大的数据保真度差异。Fidelity: 完整核心链路。本地实际执行 causal LLM LoRA judge、方面打分 SFT+GRPO、用户条件权重 pairwise GRPO、SID 自回归生成器、5% 稀疏 semantic sampling，以及从相同 SFT checkpoint 初始化的 Reward-Sum、Adv-Sum、A2PO。模型规模与数据规模缩小，腾讯私有人工广告标注和 eCPM 模型由公开 Office 行为与 Qwen embedding 构造的监督替代。Qwen3-4B PSJ 缩小为 SmolLM2-135M；  generative-recommendation llm-as-judge grpo a2po 搜广推 生成式召回与推理推荐 A2PO与业务语义reward直接加权求和有何区别？ 它先分别标准化优势，以业务为锚，只在同向时加入受幅度限制的语义项。异量纲直接加总可能让语义分压过收入目标，门控仍不是所有业务收益保证。 例如语义上新颖但业务优势为负，不让一个大语义数值强行翻转方向。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:s-grec" data-paper-title="S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage 搜广推与 LLM 应用 Tencent / WeChat Channels 2026-02-11 生成式推荐通常只从行为日志学习 next-item likelihood，难以理解用户为何偏好某个内容；直接把 LLM 放到在线链路又无法满足工业延迟。S-GRec 将 LLM 仅作为离线语义 judge：两阶段 Personalized Semantic Judge（PSJ）先输出可解释的方面证据，再学习每个用户的方面权重；轻量生成器线上只生成 Semantic ID，不依赖 LLM。论文的第二个问题是语义目标可能与收入目标冲突。 这是最大的数据保真度差异。Fidelity: 完整核心链路。本地实际执行 causal LLM LoRA judge、方面打分 SFT+GRPO、用户条件权重 pairwise GRPO、SID 自回归生成器、5% 稀疏 semantic sampling，以及从相同 SFT checkpoint 初始化的 Reward-Sum、Adv-Sum、A2PO。模型规模与数据规模缩小，腾讯私有人工广告标注和 eCPM 模型由公开 Office 行为与 Qwen embedding 构造的监督替代。Qwen3-4B PSJ 缩小为 SmolLM2-135M；  generative-recommendation llm-as-judge grpo a2po 搜广推 生成式召回与推理推荐 S-GRec的用户条件方面权重，与给所有用户固定一组语义权重有什么区别？ PSJ先给出多个方面分数，再由用户条件aggregator输出非负、归一的权重。固定权重对所有用户表达同一取舍，条件权重则允许相同内容因用户不同而得到不同语义总分。它仍依赖方面判断可靠，个性化权重本身不是真实满意度证明。 教学例子：两位用户面对同一内容，一位更重历史画像，一位更重探索新意；方面分可相同，聚合结果却不同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-8b5a787178e7a276">A2PO与业务语义reward直接加权求和有何区别？</h2>
+<h2 id="qa-8b5a787178e7a276">S-GRec的用户条件方面权重，与给所有用户固定一组语义权重有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3As-grec">S-GRec: Personalized Semantic-Aware Generative Recommendation with Asymmetric Advantage</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tencent / WeChat Channels</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它先分别标准化优势，以业务为锚，只在同向时加入受幅度限制的语义项。异量纲直接加总可能让语义分压过收入目标，门控仍不是所有业务收益保证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如语义上新颖但业务优势为负，不让一个大语义数值强行翻转方向。</p>
+<p><strong>答案：</strong>PSJ先给出多个方面分数，再由用户条件aggregator输出非负、归一的权重。固定权重对所有用户表达同一取舍，条件权重则允许相同内容因用户不同而得到不同语义总分。它仍依赖方面判断可靠，个性化权重本身不是真实满意度证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两位用户面对同一内容，一位更重历史画像，一位更重探索新意；方面分可相同，聚合结果却不同。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10606">原论文</a> · <a href="../../../../reproductions/2602.10606-s-grec/">实现解读</a> · <a href="#qa-8b5a787178e7a276">问题链接</a></p>
 </details>
@@ -2465,16 +2465,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.09744">原论文</a> · <a href="../../../../reproductions/2602.09744-diffureason/">实现解读</a> · <a href="#qa-9a5e8953cc6bda38">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rag-qac" data-paper-title="Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment 搜广推与 LLM 应用 Apple 2026-02-01 先从可搜索目录检索补全证据，再以 SFT 和 DPO 同时对齐相关性、安全、参与度、目录/上下文 groundedness 与多样性。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 rag-qac 核心机制，相对 NDCG@10 -4.48%。  query-auto-completion retrieval-augmented-generation preference-alignment 搜广推 生成式召回与推理推荐 RAG-QAC 为什么要求补全建议能在目录中找到依据？ 查询补全应带来可搜索内容，语言合理却目录不存在的建议会让用户进入空结果。检索证据先限定可落地表达，再由模型个性化组织。grounded 不等于必然安全或相关，多目标训练仍要分别衡量，目录过时也会使依据失效。 示意：输入“轻便露营”，目录确有帐篷与炊具可支持补全；不存在的型号即使句子漂亮，也不能当有效搜索入口。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rag-qac" data-paper-title="Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment 搜广推与 LLM 应用 Apple 2026-02-01 先从可搜索目录检索补全证据，再以 SFT 和 DPO 同时对齐相关性、安全、参与度、目录/上下文 groundedness 与多样性。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 rag-qac 核心机制，相对 NDCG@10 -4.48%。  query-auto-completion retrieval-augmented-generation preference-alignment 搜广推 生成式召回与推理推荐 RAG-QAC 的“目录 groundedness”和“上下文 groundedness”为什么要分别判断？ 目录依据要求建议能落到实际可搜索内容，上下文依据要求它与用户前缀和已知需求一致。存在的商品也可能偏题，贴题表达也可能目录没有。二者是不同必要检查，不能以其中一项通过代替另一项，更不能从中直接推出安全和参与度达标。 示意：用户搜儿童雨鞋，目录里确有成人登山鞋，目录检查通过但上下文不符；编造一个完美儿童型号则相反，不能只看是否听起来合需求。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-rag-qac-5e006d24" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-09bb8a1517beab22">RAG-QAC 为什么要求补全建议能在目录中找到依据？</h2>
+<h2 id="qa-09bb8a1517beab22">RAG-QAC 的“目录 groundedness”和“上下文 groundedness”为什么要分别判断？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arag-qac">Unifying Ranking and Generation in Query Auto-Completion via Retrieval-Augmented Generation and Multi-Objective Alignment</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Apple</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>查询补全应带来可搜索内容，语言合理却目录不存在的建议会让用户进入空结果。检索证据先限定可落地表达，再由模型个性化组织。grounded 不等于必然安全或相关，多目标训练仍要分别衡量，目录过时也会使依据失效。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>输入“轻便露营”，目录确有帐篷与炊具可支持补全；不存在的型号即使句子漂亮，也不能当有效搜索入口。</p>
+<p><strong>答案：</strong>目录依据要求建议能落到实际可搜索内容，上下文依据要求它与用户前缀和已知需求一致。存在的商品也可能偏题，贴题表达也可能目录没有。二者是不同必要检查，不能以其中一项通过代替另一项，更不能从中直接推出安全和参与度达标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>用户搜儿童雨鞋，目录里确有成人登山鞋，目录检查通过但上下文不符；编造一个完美儿童型号则相反，不能只看是否听起来合需求。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.01023">原论文</a> · <a href="../../../../reproductions/2602.01023-rag-qac/">实现解读</a> · <a href="#qa-09bb8a1517beab22">问题链接</a></p>
 </details>
@@ -2571,16 +2571,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.21770">原论文</a> · <a href="../../../../reproductions/2601.21770-onemall/">实现解读</a> · <a href="#qa-aaf4db271080494e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:s2gr" data-paper-title="S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation 搜广推与 LLM 应用 Kuaishou Technology 2026-01-26 在每一级 SID 生成前插入可解释 thinking token，并让它与真实 codebook 分布对比学习；协同共现图和负载均衡共同改善由粗到细的语义层级。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05463，相对变化 +1.15%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation latent-reasoning semantic-id 搜广推 生成式召回与推理推荐 S2GR为什么在每级SID前加入thinking token？ SID层级从粗到细，thinking状态为本级语义选择提供显式中间表征，并与codebook分布对比学习，不只机械预测下一个离散编号。 例如先表达对题材的中间判断，再决定更细内容码。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:s2gr" data-paper-title="S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation 搜广推与 LLM 应用 Kuaishou Technology 2026-01-26 在每一级 SID 生成前插入可解释 thinking token，并让它与真实 codebook 分布对比学习；协同共现图和负载均衡共同改善由粗到细的语义层级。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05463，相对变化 +1.15%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation latent-reasoning semantic-id 搜广推 生成式召回与推理推荐 S2GR的thinking token是自由生成的一大段自然语言思维链吗？ 这里的关键是每级SID前插入的中间状态，并把它与相应码本分布对齐；不能仅凭thinking这个名字就当成完整自然语言解释。SID仍是逐级生成的离散路径，理解这个输出结构比先把它类比聊天模型长思维链更直接。 教学例子：先出现本级中间状态，再选择本级语义码，然后进入下一级；这不要求先输出一篇可读的推理长文。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-s2gr-c72e2aca" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-870e580deebf4aef">S2GR为什么在每级SID前加入thinking token？</h2>
+<h2 id="qa-870e580deebf4aef">S2GR的thinking token是自由生成的一大段自然语言思维链吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3As2gr">S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>SID层级从粗到细，thinking状态为本级语义选择提供显式中间表征，并与codebook分布对比学习，不只机械预测下一个离散编号。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先表达对题材的中间判断，再决定更细内容码。</p>
+<p><strong>答案：</strong>这里的关键是每级SID前插入的中间状态，并把它与相应码本分布对齐；不能仅凭thinking这个名字就当成完整自然语言解释。SID仍是逐级生成的离散路径，理解这个输出结构比先把它类比聊天模型长思维链更直接。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先出现本级中间状态，再选择本级语义码，然后进入下一级；这不要求先输出一篇可读的推理长文。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.18664">原论文</a> · <a href="../../../../reproductions/2601.18664-s2gr/">实现解读</a> · <a href="#qa-870e580deebf4aef">问题链接</a></p>
 </details>
@@ -2598,15 +2598,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.18664">原论文</a> · <a href="../../../../reproductions/2601.18664-s2gr/">实现解读</a> · <a href="#qa-833b7b1f56656208">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:s2gr" data-paper-title="S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation 搜广推与 LLM 应用 Kuaishou Technology 2026-01-26 在每一级 SID 生成前插入可解释 thinking token，并让它与真实 codebook 分布对比学习；协同共现图和负载均衡共同改善由粗到细的语义层级。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05463，相对变化 +1.15%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation latent-reasoning semantic-id 搜广推 生成式召回与推理推荐 thinking监督与仅next-SID likelihood有什么区别？ 新增目标约束中间状态与真实码本语义关系，协同图和负载均衡另控制共现与码使用。多一损失并不保证推理可解释，更不能把任意特殊token都称思考。 例如一个空标记没有对应语义对比目标，就只是额外位置。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:s2gr" data-paper-title="S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation 搜广推与 LLM 应用 Kuaishou Technology 2026-01-26 在每一级 SID 生成前插入可解释 thinking token，并让它与真实 codebook 分布对比学习；协同共现图和负载均衡共同改善由粗到细的语义层级。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05463，相对变化 +1.15%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation latent-reasoning semantic-id 搜广推 生成式召回与推理推荐 S2GR的thinking对齐损失与码本负载均衡，分别约束什么？ 对齐损失把中间状态连接到本级码本语义，负载均衡关注不同码是否被过度集中使用。前者改善语义关联的监督，后者处理码使用分布；均匀使用并不保证语义正确，语义对齐也不自动避免所有码坍缩，不能把两项互相替代。 教学例子：所有样本都选同一码时负载可能失衡；把样本随机均分到各码虽更均匀，却未必保留了内容含义。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-30fd271baa0367d3">thinking监督与仅next-SID likelihood有什么区别？</h2>
+<h2 id="qa-30fd271baa0367d3">S2GR的thinking对齐损失与码本负载均衡，分别约束什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3As2gr">S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>新增目标约束中间状态与真实码本语义关系，协同图和负载均衡另控制共现与码使用。多一损失并不保证推理可解释，更不能把任意特殊token都称思考。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个空标记没有对应语义对比目标，就只是额外位置。</p>
+<p><strong>答案：</strong>对齐损失把中间状态连接到本级码本语义，负载均衡关注不同码是否被过度集中使用。前者改善语义关联的监督，后者处理码使用分布；均匀使用并不保证语义正确，语义对齐也不自动避免所有码坍缩，不能把两项互相替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>所有样本都选同一码时负载可能失衡；把样本随机均分到各码虽更均匀，却未必保留了内容含义。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.18664">原论文</a> · <a href="../../../../reproductions/2601.18664-s2gr/">实现解读</a> · <a href="#qa-30fd271baa0367d3">问题链接</a></p>
 </details>
@@ -2624,16 +2624,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.18664">原论文</a> · <a href="../../../../reproductions/2601.18664-s2gr/">实现解读</a> · <a href="#qa-ee90eadef5b0ee26">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:promise" data-paper-title="PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations 搜广推与 LLM 应用 Kuaishou Technology 2026-01-08 轻量 path-level PRM 在每个 SID 层级评价中间路径，训练时提供稠密反馈、推理时提前剪除已发生语义漂移的 beam；因此增加 beam width 能形成可控的 test-time scaling。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05929，相对变化 +9.79%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation process-reward test-time-scaling 搜广推 生成式召回与推理推荐 PROMISE 的 path-level PRM 为什么评价 SID 前缀而非只预测最终 reward？ 早期前缀决定后续可达区域，过程评价可及时发现语义漂移，为训练提供更密监督并在解码剪枝。它仍需学会前缀质量，不能从最终物品反馈直接推所有中间步正确。PRM 不准时会过早剪掉好路径。 示意：第一层已走进家居而用户找相机，越早发现越省后续生成；但如果用户其实在找相机收纳家具，错误 PRM 也可能误剪。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:promise" data-paper-title="PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations 搜广推与 LLM 应用 Kuaishou Technology 2026-01-08 轻量 path-level PRM 在每个 SID 层级评价中间路径，训练时提供稠密反馈、推理时提前剪除已发生语义漂移的 beam；因此增加 beam width 能形成可控的 test-time scaling。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.05929，相对变化 +9.79%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation process-reward test-time-scaling 搜广推 生成式召回与推理推荐 PROMISE 中 SID 前缀对应什么候选范围，为什么剪掉前缀会排除一整批物品？ 层级 SID 像目录地址，前缀确定共享该路径的物品子集，后续码只能在其后继续细分。因此 beam 上一个粗前缀不仅代表一条字符串，也代表一片可达候选；被剪后，其下所有未探索物品都失去本轮机会。这解释了过程评分错误为何可能造成大范围漏召。 示意：首层“摄影”下面有相机、镜头和配件；若首层被误剪，即使某个镜头非常适合用户，后层也不会再看到它。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-promise-c348f413" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e151a7faaadabf83">PROMISE 的 path-level PRM 为什么评价 SID 前缀而非只预测最终 reward？</h2>
+<h2 id="qa-e151a7faaadabf83">PROMISE 中 SID 前缀对应什么候选范围，为什么剪掉前缀会排除一整批物品？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apromise">PROMISE: Process Reward Models Unlock Test-Time Scaling Laws in Generative Recommendations</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>早期前缀决定后续可达区域，过程评价可及时发现语义漂移，为训练提供更密监督并在解码剪枝。它仍需学会前缀质量，不能从最终物品反馈直接推所有中间步正确。PRM 不准时会过早剪掉好路径。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>第一层已走进家居而用户找相机，越早发现越省后续生成；但如果用户其实在找相机收纳家具，错误 PRM 也可能误剪。</p>
+<p><strong>答案：</strong>层级 SID 像目录地址，前缀确定共享该路径的物品子集，后续码只能在其后继续细分。因此 beam 上一个粗前缀不仅代表一条字符串，也代表一片可达候选；被剪后，其下所有未探索物品都失去本轮机会。这解释了过程评分错误为何可能造成大范围漏召。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>首层“摄影”下面有相机、镜头和配件；若首层被误剪，即使某个镜头非常适合用户，后层也不会再看到它。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.04674">原论文</a> · <a href="../../../../reproductions/2601.04674-promise/">实现解读</a> · <a href="#qa-e151a7faaadabf83">问题链接</a></p>
 </details>
@@ -3048,16 +3048,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.18965">原论文</a> · <a href="../../../../reproductions/2502.18965-onerec/">实现解读</a> · <a href="#qa-a714ac3bdc5c99bd">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sessionrec" data-paper-title="SessionRec: Next Session Prediction Paradigm For Generative Sequential Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="SessionRec: Next Session Prediction Paradigm For Generative Sequential Recommendation 搜广推与 LLM 应用 Meituan 2025-02-14 逐物品 next-item 训练把同一消费意图中的多个物品硬排成先后标签，也无法把“下一次访问会同时消费的一组物品”作为多正例。SessionRec 先由 Item-based Session Encoder（ISE）把一次访问中的物品聚合为 session token，再由 Session-based Sequence Encoder（SSE）建模跨 session 兴趣迁移，最终让一个 query 同时召回下一 session 的所有正例。 Fidelity: 核心机制复现。真实执行 session 内聚合、session 间 Transformer、多正例 next-session retrieval，以及 session 内曝光负例排序损失；私有特征与 ANN 服务未复刻。本地对照口径：基线是等预算的扁平 Item Transformer；实验组是 SessionRec Transformer；NDCG@20 从 0.004718 降至 0.003678（-22.05%）。这是 session 建模消融；DIN 未在 KuaiRand session 任务中参与比较。  session recommendation generative retrieval 搜广推 生成式召回与推理推荐 SessionRec为什么把一次session作为多正例目标？ 同一消费意图内物品不必有严格因果顺序，下一访问可同时含多项需求。先聚合session再建模跨session迁移，让一个query覆盖下一组正例。 例如一次会话连续看同主题多视频，不必只把最后一条当唯一目标。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sessionrec" data-paper-title="SessionRec: Next Session Prediction Paradigm For Generative Sequential Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="SessionRec: Next Session Prediction Paradigm For Generative Sequential Recommendation 搜广推与 LLM 应用 Meituan 2025-02-14 逐物品 next-item 训练把同一消费意图中的多个物品硬排成先后标签，也无法把“下一次访问会同时消费的一组物品”作为多正例。SessionRec 先由 Item-based Session Encoder（ISE）把一次访问中的物品聚合为 session token，再由 Session-based Sequence Encoder（SSE）建模跨 session 兴趣迁移，最终让一个 query 同时召回下一 session 的所有正例。 Fidelity: 核心机制复现。真实执行 session 内聚合、session 间 Transformer、多正例 next-session retrieval，以及 session 内曝光负例排序损失；私有特征与 ANN 服务未复刻。本地对照口径：基线是等预算的扁平 Item Transformer；实验组是 SessionRec Transformer；NDCG@20 从 0.004718 降至 0.003678（-22.05%）。这是 session 建模消融；DIN 未在 KuaiRand session 任务中参与比较。  session recommendation generative retrieval 搜广推 生成式召回与推理推荐 SessionRec中的session token是一件商品，还是同次访问的一组物品表示？ 它由会话内多个物品经ISE聚合得到，代表一次访问，再交给SSE建模会话间迁移。下一session也可能包含多条正反馈，不是给每个token重新取一个商品ID。先分清物品级与会话级单位，才能读懂多正例目标。 教学例子：一次访问看了甲乙丙，可先聚成一个session表示；下一次访问的丁戊仍可以共同成为目标集合。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-sessionrec-2fd19641" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1fad52275cdd3908">SessionRec为什么把一次session作为多正例目标？</h2>
+<h2 id="qa-1fad52275cdd3908">SessionRec中的session token是一件商品，还是同次访问的一组物品表示？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asessionrec">SessionRec: Next Session Prediction Paradigm For Generative Sequential Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meituan</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同一消费意图内物品不必有严格因果顺序，下一访问可同时含多项需求。先聚合session再建模跨session迁移，让一个query覆盖下一组正例。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一次会话连续看同主题多视频，不必只把最后一条当唯一目标。</p>
+<p><strong>答案：</strong>它由会话内多个物品经ISE聚合得到，代表一次访问，再交给SSE建模会话间迁移。下一session也可能包含多条正反馈，不是给每个token重新取一个商品ID。先分清物品级与会话级单位，才能读懂多正例目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一次访问看了甲乙丙，可先聚成一个session表示；下一次访问的丁戊仍可以共同成为目标集合。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2502.10157">原论文</a> · <a href="../../../../reproductions/2502.10157-sessionrec/">实现解读</a> · <a href="#qa-1fad52275cdd3908">问题链接</a></p>
 </details>

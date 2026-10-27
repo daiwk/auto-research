@@ -110,7 +110,7 @@ hide:
 <li><a href="all/#qa-5741411042653d97">HGE为什么分别预测容器成交、内部商品购买概率和数量，而不只回归一个门店GMV？</a><span>2026-10-27 · hge</span></li>
 <li><a href="all/#qa-18f65c0f1ef11458">HGE 残差与融合 gate 为什么不能按真实成交标签硬切路？</a><span>2026-10-27 · hge</span></li>
 <li><a href="all/#qa-96dc7e4b12d4bae4">HGE 的商品购买 sigmoid 与互斥 softmax，为什么对应不同业务假设？</a><span>2026-10-27 · hge</span></li>
-<li><a href="all/#qa-c32f38715552fb0a">HGE 为什么把门店成交分为是否成交、商品概率和购买数量？</a><span>2026-10-27 · hge</span></li>
+<li><a href="all/#qa-c32f38715552fb0a">HGE 的 top-K 商品是要展示的 K 个推荐结果，还是同一容器内部的输入？</a><span>2026-10-27 · hge</span></li>
 <li><a href="all/#qa-36db4c81ae6babb0">OPST为什么只把学生全部匹配候选答案的题当作过易，全部一致但答成别的答案不能删？</a><span>2026-10-27 · opst</span></li>
 <li><a href="all/#qa-4d8e4b8770738e55">OPST的EMA β是旧教师动量还是新学生权重？</a><span>2026-10-27 · opst</span></li>
 <li><a href="all/#qa-789c0a70700a8a7a">OPST的过易过滤与简单学生共识过滤有什么差别？</a><span>2026-10-27 · opst</span></li>

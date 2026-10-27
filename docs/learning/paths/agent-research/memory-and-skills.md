@@ -27,16 +27,16 @@ hide:
 <p class="ar-learning-status" data-learning-status role="status">220 个问题 · 55 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cache-engineering" data-paper-title="Cache Engineering for Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Cache Engineering for Agents Agent Tsinghua University 2026-10-20 删改早期对话文本会使后续KV失效，重prefill又产生费用。作者保留逻辑文本，直接drop旧工具响应的KV，必要时repos重设保留键的位置；缓存状态取决于操作发生的历史，不能只根据最终token前缀判断是否可复用。AKV基于扩展radix结构管理位置版本、驱逐与恢复，并探索RSI生成缓存策略。§3–4 成本过高，不复现（审查 DONE）。本轮未实现、未运行、未下载模型。本轮未实现、未运行、未下载模型。不提供本地执行命令，不生成GPU收据或虚构指标；上游安装方式请看作者仓库。不能用少量RoPE张量运算冒充已接入AKV系统、真实推理或RSI。  Agent运行时 KV缓存管理与推理效率 Agent 记忆与技能：让经验可取回、可失效 逻辑对话完整保留时，drop KV 究竟删除了什么？ 它删除部分活跃注意力缓存，使后续 token 不再直接读取这些历史 KV，但逻辑文本仍保留用于记录或恢复。drop 不会自动改写保留项的位置或下一个追加位置，因此与文本摘要、删消息后重新 prefill 是不同状态操作。 例如旧工具响应仍能在对话记录中找到，但其 KV 已不在活跃集合，当前生成不能直接注意到那些缓存项。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cache-engineering" data-paper-title="Cache Engineering for Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Cache Engineering for Agents Agent Tsinghua University 2026-10-20 删改早期对话文本会使后续KV失效，重prefill又产生费用。作者保留逻辑文本，直接drop旧工具响应的KV，必要时repos重设保留键的位置；缓存状态取决于操作发生的历史，不能只根据最终token前缀判断是否可复用。AKV基于扩展radix结构管理位置版本、驱逐与恢复，并探索RSI生成缓存策略。§3–4 成本过高，不复现（审查 DONE）。本轮未实现、未运行、未下载模型。本轮未实现、未运行、未下载模型。不提供本地执行命令，不生成GPU收据或虚构指标；上游安装方式请看作者仓库。不能用少量RoPE张量运算冒充已接入AKV系统、真实推理或RSI。  Agent运行时 KV缓存管理与推理效率 Agent 记忆与技能：让经验可取回、可失效 长程 Agent 为什么会出现“聊天记录还在，推理缓存却放不下”的问题？ 逻辑对话保存文本，推理时的 KV cache 保存各层对历史 token 的中间表示，二者占用和用途不同。对话增长会让缓存内存与后续读取开销增加；Cache Engineering 研究直接管理这些状态，在保留逻辑记录的同时控制计算资源，但删缓存后的恢复仍有成本。 教学例：一万行工具日志仍保存在会话中，但暂时不再需要其 KV；以后重新用到日志时，系统可能必须重新计算表示。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-cache-engineering-55c07860" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0c6d6f970c0c9373">逻辑对话完整保留时，drop KV 究竟删除了什么？</h2>
+<h2 id="qa-0c6d6f970c0c9373">长程 Agent 为什么会出现“聊天记录还在，推理缓存却放不下”的问题？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acache-engineering">Cache Engineering for Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它删除部分活跃注意力缓存，使后续 token 不再直接读取这些历史 KV，但逻辑文本仍保留用于记录或恢复。drop 不会自动改写保留项的位置或下一个追加位置，因此与文本摘要、删消息后重新 prefill 是不同状态操作。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如旧工具响应仍能在对话记录中找到，但其 KV 已不在活跃集合，当前生成不能直接注意到那些缓存项。</p>
+<p><strong>答案：</strong>逻辑对话保存文本，推理时的 KV cache 保存各层对历史 token 的中间表示，二者占用和用途不同。对话增长会让缓存内存与后续读取开销增加；Cache Engineering 研究直接管理这些状态，在保留逻辑记录的同时控制计算资源，但删缓存后的恢复仍有成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一万行工具日志仍保存在会话中，但暂时不再需要其 KV；以后重新用到日志时，系统可能必须重新计算表示。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28577">原论文</a> · <a href="../../../../agent-research/2610.28577-cache-engineering/">实现解读</a> · <a href="#qa-0c6d6f970c0c9373">问题链接</a></p>
 </details>
@@ -80,16 +80,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28577">原论文</a> · <a href="../../../../agent-research/2610.28577-cache-engineering/">实现解读</a> · <a href="#qa-20470428e0e80972">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tokenworth" data-paper-title="Remembering Has a Price: Learning Memory Worth under Resource Constraints" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Remembering Has a Price: Learning Memory Worth under Resource Constraints Agent Nanjing University 2026-10-19 生成长度、交互次数和记忆容量同时受限时，相关记忆也可能浪费稀缺预算。TokenWorth 用四维可解释基础特征学习稳定规律，再用 Recursive Feature Machine（RFM）校正查询相关的非线性残差。快更新拟合残差价值，慢更新调整特征几何；同一个价值模型既用于检索，也用于有界记忆库的写入和淘汰。§4 与附录 B 原论文 Figure 2 展示完整价值学习和记忆生命周期框架；本页重绘与原图分开，原图由统一资源流程归档。 完整实验成本过高，不复现（审查 DONE）；默认使用论文 DB 调度（基础/KRR/AGOP 每 50/50/200 个反馈更新），诊断 runner 为缩短覆盖周期显式用 10/8/24，不能混作官方实验参数。component_only / L1 CPU 数学与时序诊断。学习的是选中记忆关联的执行结果，不是反事实因果贡献，也不是 Agent 能力验证。CPU 组件实际实现 512 维 token/字符 3–5 gram 哈希、Newton、Laplacian KRR、解析梯度与对角 AGOP、FIFO、检索及入库门。哈希函数 SHA256 和 Unicode 分词是明确的本地确定性选择，不声称与未指定细节位级相同。  记忆与长期交互 在线价值学习与有界记忆 Agent 记忆与技能：让经验可取回、可失效 TokenWorth 为什么把记忆相关性与实际效用分开建模？ 相似内容未必帮助完成当前任务，还会占用有限生成、交互与记忆预算。基础分结合相似度、效用、可靠性和近期性，再以非线性残差修正查询关系；效用来自已完成任务反馈，不能把高文本相似度直接当成成功贡献。 例如旧记忆与当前题词汇高度相似，却使用过期工具接口；低相似但说明新接口限制的记忆可能更值得保留。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tokenworth" data-paper-title="Remembering Has a Price: Learning Memory Worth under Resource Constraints" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Remembering Has a Price: Learning Memory Worth under Resource Constraints Agent Nanjing University 2026-10-19 生成长度、交互次数和记忆容量同时受限时，相关记忆也可能浪费稀缺预算。TokenWorth 用四维可解释基础特征学习稳定规律，再用 Recursive Feature Machine（RFM）校正查询相关的非线性残差。快更新拟合残差价值，慢更新调整特征几何；同一个价值模型既用于检索，也用于有界记忆库的写入和淘汰。§4 与附录 B 原论文 Figure 2 展示完整价值学习和记忆生命周期框架；本页重绘与原图分开，原图由统一资源流程归档。 完整实验成本过高，不复现（审查 DONE）；默认使用论文 DB 调度（基础/KRR/AGOP 每 50/50/200 个反馈更新），诊断 runner 为缩短覆盖周期显式用 10/8/24，不能混作官方实验参数。component_only / L1 CPU 数学与时序诊断。学习的是选中记忆关联的执行结果，不是反事实因果贡献，也不是 Agent 能力验证。CPU 组件实际实现 512 维 token/字符 3–5 gram 哈希、Newton、Laplacian KRR、解析梯度与对角 AGOP、FIFO、检索及入库门。哈希函数 SHA256 和 Unicode 分词是明确的本地确定性选择，不声称与未指定细节位级相同。  记忆与长期交互 在线价值学习与有界记忆 Agent 记忆与技能：让经验可取回、可失效 记忆越相关越应该保留吗，TokenWorth 面对的资源限制是什么？ Agent 的记忆容量、交互次数和生成长度都有限，一条看似相关的长经验也可能挤掉更有用的信息。TokenWorth 把保留与使用记忆看成价值分配问题，关注实际任务帮助与资源竞争，而不是单纯让库越来越大或只追相似度最高。 例如长指南重复当前已知步骤，另一条短记录写关键权限限制，后者即使用词不太像当前问题，也可能更值得占一个名额。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-tokenworth-16bf712f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f2c0104195a8c16b">TokenWorth 为什么把记忆相关性与实际效用分开建模？</h2>
+<h2 id="qa-f2c0104195a8c16b">记忆越相关越应该保留吗，TokenWorth 面对的资源限制是什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atokenworth">Remembering Has a Price: Learning Memory Worth under Resource Constraints</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Nanjing University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>相似内容未必帮助完成当前任务，还会占用有限生成、交互与记忆预算。基础分结合相似度、效用、可靠性和近期性，再以非线性残差修正查询关系；效用来自已完成任务反馈，不能把高文本相似度直接当成成功贡献。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如旧记忆与当前题词汇高度相似，却使用过期工具接口；低相似但说明新接口限制的记忆可能更值得保留。</p>
+<p><strong>答案：</strong>Agent 的记忆容量、交互次数和生成长度都有限，一条看似相关的长经验也可能挤掉更有用的信息。TokenWorth 把保留与使用记忆看成价值分配问题，关注实际任务帮助与资源竞争，而不是单纯让库越来越大或只追相似度最高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如长指南重复当前已知步骤，另一条短记录写关键权限限制，后者即使用词不太像当前问题，也可能更值得占一个名额。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.26453">原论文</a> · <a href="../../../../agent-research/2610.26453-tokenworth/">实现解读</a> · <a href="#qa-f2c0104195a8c16b">问题链接</a></p>
 </details>
@@ -173,29 +173,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24955">原论文</a> · <a href="../../../../agent-research/2610.24955-memprice/">实现解读</a> · <a href="#qa-cfac8a0fe4b552e0">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memprice" data-paper-title="MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents Agent Hong Kong University of Science and Technology 2026-10-18 长交互里，过去某个细节会不会有用通常事先未知。单纯按相关性保留记忆会忽略各条信息对同一上下文容量的竞争。MemPrice 给每项记忆提供 raw、summary、abstraction、keywords、delete 五级表示，联合分配有限 token；再用随占用累积的虚拟队列提高保留细节的价格。当前窗口中已经删掉的细节不能凭空恢复，只有刷新时从外部原始归档按固定流程重新提取。§3 与附录 G 原论文 Figure 2 展示记忆分配框架，Algorithm 1 明确刷新不重置队列和全局轮数。 完整实验成本过高，不复现（审查 DONE），不发起 API、模型下载或长轨迹试跑。component_only / L1 CPU 机制诊断。只验证分配和状态更新，不代表长记忆问答或 Agent 能力。CPU 组件真实运行稀疏整数动态规划、效用单调修复、降保真约束、压力更新和刷新跨界状态。token 大小与压缩内容由可信调用方给出，不能把字符数当真实 token。刷新只开放下一轮从归档重新形成的候选，不实现论文的 LLM 压缩/效用模型或 BM25 归档恢复。相同等级的文本是否确实由现有内容压缩而来，也需要上游保证；本地等级检查不能证明语义来源。  记忆与长期交互 多保真分配与资源定价 Agent 记忆与技能：让经验可取回、可失效 刷新归档后能否把队列和全局轮数一起重置？ 不能。刷新只允许从外部原始归档重新形成候选，队列压力和全局 t 要跨刷新保留。大小由 tokenizer 测得，分配用精确多重选择背包而非贪心；α=0.8 是平均占用目标，不允许单轮超过硬预算 B。 例如第十轮刷新后若把 t 设回一、Q 清零，就人为清除累积价格，改变算法对长期容量竞争的记忆。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memprice" data-paper-title="MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents Agent Hong Kong University of Science and Technology 2026-10-18 长交互里，过去某个细节会不会有用通常事先未知。单纯按相关性保留记忆会忽略各条信息对同一上下文容量的竞争。MemPrice 给每项记忆提供 raw、summary、abstraction、keywords、delete 五级表示，联合分配有限 token；再用随占用累积的虚拟队列提高保留细节的价格。当前窗口中已经删掉的细节不能凭空恢复，只有刷新时从外部原始归档按固定流程重新提取。§3 与附录 G 原论文 Figure 2 展示记忆分配框架，Algorithm 1 明确刷新不重置队列和全局轮数。 完整实验成本过高，不复现（审查 DONE），不发起 API、模型下载或长轨迹试跑。component_only / L1 CPU 机制诊断。只验证分配和状态更新，不代表长记忆问答或 Agent 能力。CPU 组件真实运行稀疏整数动态规划、效用单调修复、降保真约束、压力更新和刷新跨界状态。token 大小与压缩内容由可信调用方给出，不能把字符数当真实 token。刷新只开放下一轮从归档重新形成的候选，不实现论文的 LLM 压缩/效用模型或 BM25 归档恢复。相同等级的文本是否确实由现有内容压缩而来，也需要上游保证；本地等级检查不能证明语义来源。  记忆与长期交互 多保真分配与资源定价 Agent 记忆与技能：让经验可取回、可失效 MemPrice 怎样把每项记忆的多种表示装进一个硬 token 预算？ 对每项记忆枚举原文、摘要、抽象、关键词和删除等候选，使用 tokenizer 测量大小，再以每项最多选一种的多重选择背包联合分配。单轮总量必须不超过硬预算 B；长期平均占用目标只影响价格，不能允许当前窗口超限。归档刷新也不是从已删除文本里凭空恢复细节。 教学例：预算只剩百 token，两条记忆的原文各占八十，算法可分别选摘要；不能把二者各自最优的原文直接相加。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-7c7546f168cfded3">刷新归档后能否把队列和全局轮数一起重置？</h2>
+<h2 id="qa-7c7546f168cfded3">MemPrice 怎样把每项记忆的多种表示装进一个硬 token 预算？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemprice">MemPrice: Online Memory Allocation via Adaptive Pricing for Long-Horizon Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Hong Kong University of Science and Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不能。刷新只允许从外部原始归档重新形成候选，队列压力和全局 t 要跨刷新保留。大小由 tokenizer 测得，分配用精确多重选择背包而非贪心；α=0.8 是平均占用目标，不允许单轮超过硬预算 B。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第十轮刷新后若把 t 设回一、Q 清零，就人为清除累积价格，改变算法对长期容量竞争的记忆。</p>
+<p><strong>答案：</strong>对每项记忆枚举原文、摘要、抽象、关键词和删除等候选，使用 tokenizer 测量大小，再以每项最多选一种的多重选择背包联合分配。单轮总量必须不超过硬预算 B；长期平均占用目标只影响价格，不能允许当前窗口超限。归档刷新也不是从已删除文本里凭空恢复细节。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：预算只剩百 token，两条记忆的原文各占八十，算法可分别选摘要；不能把二者各自最优的原文直接相加。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24955">原论文</a> · <a href="../../../../agent-research/2610.24955-memprice/">实现解读</a> · <a href="#qa-7c7546f168cfded3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hy-memory" data-paper-title="Hy-Memory-30B-A3B: Attributed Reinforcement Learning for Long-Term Memory Writing" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Hy-Memory-30B-A3B: Attributed Reinforcement Learning for Long-Term Memory Writing Agent Tencent Hunyuan 2026-10-15 先在学生自己写出的记忆状态上做 OPD，学习不同框架的写入协议；再冻结 reader 和 judge，单独优化 writer。逐块探针补足稀疏奖励，跨块事实归因定位贡献，存储增长惩罚防止“全部记住”。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。模型和框架入口不代表本库完成了30B记忆训练。无可执行 adapter、训练分数或 Evolve 晋级；不把其他记忆算子当成本论文复现。范围见本批验收合同。只做资料收录。§7配置为30B-A3B、128 H20，每批64 windows×8 rollouts；不下载模型、不启动多框架 RL 或服务扫评。成本过高，不复现（审查 DONE）。  长期记忆 Agentic RL On-policy distillation Agent 记忆与技能：让经验可取回、可失效 为什么先学习写入协议，再冻结 reader 与 judge 优化 writer？ 写入格式首先要能被不同记忆框架正确解释，之后固定读取与评价组件才能把结果变化主要归于写入策略。若同时替换 reader、judge 和 writer，分数变化来源混杂；协议学习也要在学生实际写出的状态上进行，不能只看理想教师记忆。 例如 writer 把日期写进新字段，但 reader 不读取该字段，结果下降可能是接口问题；先对齐协议再固定 reader 才便于归因。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hy-memory" data-paper-title="Hy-Memory-30B-A3B: Attributed Reinforcement Learning for Long-Term Memory Writing" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Hy-Memory-30B-A3B: Attributed Reinforcement Learning for Long-Term Memory Writing Agent Tencent Hunyuan 2026-10-15 先在学生自己写出的记忆状态上做 OPD，学习不同框架的写入协议；再冻结 reader 和 judge，单独优化 writer。逐块探针补足稀疏奖励，跨块事实归因定位贡献，存储增长惩罚防止“全部记住”。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。模型和框架入口不代表本库完成了30B记忆训练。无可执行 adapter、训练分数或 Evolve 晋级；不把其他记忆算子当成本论文复现。范围见本批验收合同。只做资料收录。§7配置为30B-A3B、128 H20，每批64 windows×8 rollouts；不下载模型、不启动多框架 RL 或服务扫评。成本过高，不复现（审查 DONE）。  长期记忆 Agentic RL On-policy distillation Agent 记忆与技能：让经验可取回、可失效 为什么“把会话都存起来”与“为未来问题写好记忆”不是同一种任务？ 原始会话很多，未来读取模型只能在有限上下文里寻找答案，写入者需要留下可用事实和联系，同时控制存储增长。Hy-Memory 研究如何训练这个写入策略，而不是仅扩大原文归档；训练效果最终取决于之后能否依据所写内容回答。 例如一长段讨论多次改期，未来查询需要最终确认日期及其依据，机械保存所有重复消息未必能形成有效记忆。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-hy-memory-1a0f6bb8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4283a29efc1ef0b5">为什么先学习写入协议，再冻结 reader 与 judge 优化 writer？</h2>
+<h2 id="qa-4283a29efc1ef0b5">为什么“把会话都存起来”与“为未来问题写好记忆”不是同一种任务？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahy-memory">Hy-Memory-30B-A3B: Attributed Reinforcement Learning for Long-Term Memory Writing</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tencent Hunyuan</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>写入格式首先要能被不同记忆框架正确解释，之后固定读取与评价组件才能把结果变化主要归于写入策略。若同时替换 reader、judge 和 writer，分数变化来源混杂；协议学习也要在学生实际写出的状态上进行，不能只看理想教师记忆。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 writer 把日期写进新字段，但 reader 不读取该字段，结果下降可能是接口问题；先对齐协议再固定 reader 才便于归因。</p>
+<p><strong>答案：</strong>原始会话很多，未来读取模型只能在有限上下文里寻找答案，写入者需要留下可用事实和联系，同时控制存储增长。Hy-Memory 研究如何训练这个写入策略，而不是仅扩大原文归档；训练效果最终取决于之后能否依据所写内容回答。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如一长段讨论多次改期，未来查询需要最终确认日期及其依据，机械保存所有重复消息未必能形成有效记忆。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22196">原论文</a> · <a href="../../../../agent-research/2610.22196-hy-memory/">实现解读</a> · <a href="#qa-4283a29efc1ef0b5">问题链接</a></p>
 </details>
@@ -279,29 +279,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21170">原论文</a> · <a href="../../../../agent-research/2610.21170-memscope/">实现解读</a> · <a href="#qa-eb6033fa16a8e137">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memscope" data-paper-title="MemScope: Evolving Agent Memory Architectures through Localized Code Repair" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemScope: Evolving Agent Memory Architectures through Localized Code Repair Agent Institute of Computing Technology, Chinese Academy of Sciences / University of Chinese Academy of Sciences 2026-10-15 只给“分数下降”或压缩总结，很难知道长链 Agent 该改记忆写入、检索还是下游使用。MemScope 让 Patch Agent 联合检查原始执行轨迹、运行时记忆和当前 provider 代码，定位后做有界原位修改，保留 provider identity 与现有记忆兼容性；证据不足时可以明确 no-patch，而不是每轮都强行修改。原文 §3、附录 A–B 完整实验包含大量 API／工具执行，对现有单卡或 Mac 成本过高，不复现（审查 DONE）。component_only / L1 CPU。实现局部代码替换事务和失败回滚，没有语言模型 Patch Agent，也不执行任意代码。每 seed 随机化 provider 中阈值字符串及记忆记录，实际执行成功局部替换、故意失败的兼容性 probe 和签名改变；校验失败 code 回滚、既有 memory 保留及 probe 副作用不持久化。测量的是事务合同，不是阈值调参有效性；CPU 产物保留逐 seed 来源和负对照。  长期记忆 证据驱动的局部架构修复 Agent 记忆与技能：让经验可取回、可失效 AST 签名检查通过后，为何 probe 仍必须深拷贝记忆并能回滚？ 函数参数相同只证明接口形状一致，补丁可能破坏记录语义或产生副作用。probe 在深拷贝上执行，失败时保留旧代码与原记忆；replaceOnce 也须唯一命中。本地事务检查不是恶意代码 OS 沙箱，更不代表 Patch Agent 已智能进化 provider。 例如补丁保持 search(query) 签名却清空库，若直接在真实记忆上试 probe，失败后代码回滚也无法找回被删数据。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memscope" data-paper-title="MemScope: Evolving Agent Memory Architectures through Localized Code Repair" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemScope: Evolving Agent Memory Architectures through Localized Code Repair Agent Institute of Computing Technology, Chinese Academy of Sciences / University of Chinese Academy of Sciences 2026-10-15 只给“分数下降”或压缩总结，很难知道长链 Agent 该改记忆写入、检索还是下游使用。MemScope 让 Patch Agent 联合检查原始执行轨迹、运行时记忆和当前 provider 代码，定位后做有界原位修改，保留 provider identity 与现有记忆兼容性；证据不足时可以明确 no-patch，而不是每轮都强行修改。原文 §3、附录 A–B 完整实验包含大量 API／工具执行，对现有单卡或 Mac 成本过高，不复现（审查 DONE）。component_only / L1 CPU。实现局部代码替换事务和失败回滚，没有语言模型 Patch Agent，也不执行任意代码。每 seed 随机化 provider 中阈值字符串及记忆记录，实际执行成功局部替换、故意失败的兼容性 probe 和签名改变；校验失败 code 回滚、既有 memory 保留及 probe 副作用不持久化。测量的是事务合同，不是阈值调参有效性；CPU 产物保留逐 seed 来源和负对照。  长期记忆 证据驱动的局部架构修复 Agent 记忆与技能：让经验可取回、可失效 replaceOnce 为什么要求唯一命中，证据不足时为什么允许 no-patch？ 局部修补必须知道改的是哪一处逻辑，多处相同文本若随意替换，可能误改其他行为。replaceOnce 只接受唯一目标，并受接口身份、语法和改动预算等合同约束；定位或 probe 证据不足时应不提交补丁。通过这些工程检查只说明有界修补合法，不证明语义收益。 教学例：两处代码都含相同读字段语句，补丁只提供这段文本就无法区分目标，应返回不修，而不是默认改第一处。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-c63246984a392d8f">AST 签名检查通过后，为何 probe 仍必须深拷贝记忆并能回滚？</h2>
+<h2 id="qa-c63246984a392d8f">replaceOnce 为什么要求唯一命中，证据不足时为什么允许 no-patch？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemscope">MemScope: Evolving Agent Memory Architectures through Localized Code Repair</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Computing Technology, Chinese Academy of Sciences / University of Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>函数参数相同只证明接口形状一致，补丁可能破坏记录语义或产生副作用。probe 在深拷贝上执行，失败时保留旧代码与原记忆；replaceOnce 也须唯一命中。本地事务检查不是恶意代码 OS 沙箱，更不代表 Patch Agent 已智能进化 provider。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如补丁保持 search(query) 签名却清空库，若直接在真实记忆上试 probe，失败后代码回滚也无法找回被删数据。</p>
+<p><strong>答案：</strong>局部修补必须知道改的是哪一处逻辑，多处相同文本若随意替换，可能误改其他行为。replaceOnce 只接受唯一目标，并受接口身份、语法和改动预算等合同约束；定位或 probe 证据不足时应不提交补丁。通过这些工程检查只说明有界修补合法，不证明语义收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两处代码都含相同读字段语句，补丁只提供这段文本就无法区分目标，应返回不修，而不是默认改第一处。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、成本与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21170">原论文</a> · <a href="../../../../agent-research/2610.21170-memscope/">实现解读</a> · <a href="#qa-c63246984a392d8f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:proper-agent" data-paper-title="MemoProAgent: Toward Memory-Driven Proactive Assistance" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemoProAgent: Toward Memory-Driven Proactive Assistance Agent Michigan State University 2026-10-15 主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。ProPerAgent 用情节—语义图组织记忆，根据当前物体做实体匹配、单跳关联及 Personalized PageRank，再由独立 LLM gate 保留值得干预的证据；生成器结合当前画面与已说过的话，决定发言或静默。训练阶段只优化生成器产生的 token，工具注入的证据 token 不参与策略梯度。方法 §5、附录 I 完整实验成本过高，不复现（审查 DONE）；本地结果为三 seed 的合成机制诊断，不是正式多 seed 能力比较。component_only / L1 CPU 机制诊断。不是已接入 ProPerMem 的视频 Agent，也不是完整 GRPO 复现。本地真实执行事实来源检查、未来时间过滤、归一化实体 embedding、图边/PPR、gate 引用接纳、因果发言序列和联合评分。embedding、事实抽取、语义 gate 与 actor 必须由调用方提供；CPU fixture 的 one-hot 向量和确定性回调只检查接口，不代表任何视觉或语言能力。  记忆与长期交互 主动干预与内容时机联合评测 Agent 记忆与技能：让经验可取回、可失效 主动助理为什么既要会检索，又要决定保持静默？ 没有用户显式提问时，相关记忆只是潜在干预依据，当前情境未必需要打断。MemoProAgent 先从情节语义图检索，再由独立 gate 筛值得干预的证据，生成器结合画面与已说内容选择发言或静默；检索命中不等于干预成功。 例如看到药盒并想起用户习惯，不意味着每次经过药盒都提醒；只有符合当前触发条件且尚未提醒时才有意义。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:proper-agent" data-paper-title="MemoProAgent: Toward Memory-Driven Proactive Assistance" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemoProAgent: Toward Memory-Driven Proactive Assistance Agent Michigan State University 2026-10-15 主动助理没有用户提问：它必须从长期记忆找出干预的依据，并在正确时机只提醒一次。相关记忆不一定意味着应该打断用户。ProPerAgent 用情节—语义图组织记忆，根据当前物体做实体匹配、单跳关联及 Personalized PageRank，再由独立 LLM gate 保留值得干预的证据；生成器结合当前画面与已说过的话，决定发言或静默。训练阶段只优化生成器产生的 token，工具注入的证据 token 不参与策略梯度。方法 §5、附录 I 完整实验成本过高，不复现（审查 DONE）；本地结果为三 seed 的合成机制诊断，不是正式多 seed 能力比较。component_only / L1 CPU 机制诊断。不是已接入 ProPerMem 的视频 Agent，也不是完整 GRPO 复现。本地真实执行事实来源检查、未来时间过滤、归一化实体 embedding、图边/PPR、gate 引用接纳、因果发言序列和联合评分。embedding、事实抽取、语义 gate 与 actor 必须由调用方提供；CPU fixture 的 one-hot 向量和确定性回调只检查接口，不代表任何视觉或语言能力。  记忆与长期交互 主动干预与内容时机联合评测 Agent 记忆与技能：让经验可取回、可失效 没有用户主动提问时，MemoProAgent 的任务为什么比普通问答多了一步判断？ 普通问答已有明确请求，主动助理还要决定此刻是否值得打断、提醒什么以及是否已经说过。论文把长期经历与当前视觉情境结合，目标是适时帮助而非尽量多发消息；说对一件事但时机不对或反复提醒，也可能构成失败。 例如用户正准备出门时提醒带钥匙可能有用，已经拿好后连续说三次同一句话，就不是更好的帮助。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-proper-agent-67e59e1f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c6fb8b73132c6f21">主动助理为什么既要会检索，又要决定保持静默？</h2>
+<h2 id="qa-c6fb8b73132c6f21">没有用户主动提问时，MemoProAgent 的任务为什么比普通问答多了一步判断？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aproper-agent">MemoProAgent: Toward Memory-Driven Proactive Assistance</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Michigan State University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>没有用户显式提问时，相关记忆只是潜在干预依据，当前情境未必需要打断。MemoProAgent 先从情节语义图检索，再由独立 gate 筛值得干预的证据，生成器结合画面与已说内容选择发言或静默；检索命中不等于干预成功。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如看到药盒并想起用户习惯，不意味着每次经过药盒都提醒；只有符合当前触发条件且尚未提醒时才有意义。</p>
+<p><strong>答案：</strong>普通问答已有明确请求，主动助理还要决定此刻是否值得打断、提醒什么以及是否已经说过。论文把长期经历与当前视觉情境结合，目标是适时帮助而非尽量多发消息；说对一件事但时机不对或反复提醒，也可能构成失败。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如用户正准备出门时提醒带钥匙可能有用，已经拿好后连续说三次同一句话，就不是更好的帮助。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22671v2">原论文</a> · <a href="../../../../agent-research/2610.22671-proper-agent/">实现解读</a> · <a href="#qa-c6fb8b73132c6f21">问题链接</a></p>
 </details>
@@ -372,15 +372,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19414">原论文</a> · <a href="../../../../agent-research/2610.19414-formcraft/">实现解读</a> · <a href="#qa-3b8c5d9187005269">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:formcraft" data-paper-title="Recursive Formation and First-Class Reuse of Compositional Capabilities" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Recursive Formation and First-Class Reuse of Compositional Capabilities Agent not listed in paper 2026-10-14 一次合成出的能力不应只留下推导历史，而应成为可独立调用、继续组合、持久保存的一等操作。FormCraft 区分三个阶段：类型与接口相容的形成、独立验证后的持久准入、通过相同公开接口直接复用。已形成的复合操作可作为普通候选，后续搜索不用重走其历史形成链，运行时内部计算并未消失。 其 LLM 长轨迹扩展没有公开低成本可核配置，成本过高，不复现（审查 DONE），不以静态 registry label 声称接入 Evolve。本页是从论文独立实现的 CPU 序列域机制与本地固定任务实验，不复制未声明许可的上游源码。不声称复现原论文全部领域、原始目标或 LLM 能力，不进入 Evolve 晋级。本地 local-fixed-sequence-D01-D12-v1 与论文同名 D 编号仅表示深度 1–12，不是作者原始目标文件。原语为整数序列追加 0/1，种子冻结目标后缀。每目标有四个训练样例；Composer 根据样例枚举真实算子链，不能读取目标后缀或 holdout。  可验证能力组合 持久技能与递归复用 Agent 记忆与技能：让经验可取回、可失效 形成合法组合与持久准入为什么分成两步？ 类型相容和 DAG 合法只保证可调用，不保证实现目标功能；独立验证输入检查语义，通过后才准入持久库。若把训练样例匹配直接当准入，候选可能只记住少数例子；验证参考也必须留在 verifier，不能被 Composer 用来搜索。 例如两个算子接口匹配可形成链，但输出顺序仍可能错；要在独立输入上验证后才能供以后任务直接复用。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:formcraft" data-paper-title="Recursive Formation and First-Class Reuse of Compositional Capabilities" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Recursive Formation and First-Class Reuse of Compositional Capabilities Agent not listed in paper 2026-10-14 一次合成出的能力不应只留下推导历史，而应成为可独立调用、继续组合、持久保存的一等操作。FormCraft 区分三个阶段：类型与接口相容的形成、独立验证后的持久准入、通过相同公开接口直接复用。已形成的复合操作可作为普通候选，后续搜索不用重走其历史形成链，运行时内部计算并未消失。 其 LLM 长轨迹扩展没有公开低成本可核配置，成本过高，不复现（审查 DONE），不以静态 registry label 声称接入 Evolve。本页是从论文独立实现的 CPU 序列域机制与本地固定任务实验，不复制未声明许可的上游源码。不声称复现原论文全部领域、原始目标或 LLM 能力，不进入 Evolve 晋级。本地 local-fixed-sequence-D01-D12-v1 与论文同名 D 编号仅表示深度 1–12，不是作者原始目标文件。原语为整数序列追加 0/1，种子冻结目标后缀。每目标有四个训练样例；Composer 根据样例枚举真实算子链，不能读取目标后缀或 holdout。  可验证能力组合 持久技能与递归复用 Agent 记忆与技能：让经验可取回、可失效 直接调用已准入复合能力，与每次展开重新搜索，节省的是哪种工作？ 一等复合能力可作为有身份、有类型的操作再次参与组合，后续不必重做它的形成搜索；重新展开则要再次寻找父操作及组合关系。复用节省搜索和装配工作，执行内部子操作的真实计算仍要发生，因此调用次数、形成尝试数和底层执行成本应分别核算。 教学例：已学会“先筛选再排序”的组合，下次可直接选它；筛选和排序仍会执行，不能把省去重新拼装说成零计算。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c17b37b142fb2068">形成合法组合与持久准入为什么分成两步？</h2>
+<h2 id="qa-c17b37b142fb2068">直接调用已准入复合能力，与每次展开重新搜索，节省的是哪种工作？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aformcraft">Recursive Formation and First-Class Reuse of Compositional Capabilities</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · not listed in paper</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>类型相容和 DAG 合法只保证可调用，不保证实现目标功能；独立验证输入检查语义，通过后才准入持久库。若把训练样例匹配直接当准入，候选可能只记住少数例子；验证参考也必须留在 verifier，不能被 Composer 用来搜索。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两个算子接口匹配可形成链，但输出顺序仍可能错；要在独立输入上验证后才能供以后任务直接复用。</p>
+<p><strong>答案：</strong>一等复合能力可作为有身份、有类型的操作再次参与组合，后续不必重做它的形成搜索；重新展开则要再次寻找父操作及组合关系。复用节省搜索和装配工作，执行内部子操作的真实计算仍要发生，因此调用次数、形成尝试数和底层执行成本应分别核算。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：已学会“先筛选再排序”的组合，下次可直接选它；筛选和排序仍会执行，不能把省去重新拼装说成零计算。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19414">原论文</a> · <a href="../../../../agent-research/2610.19414-formcraft/">实现解读</a> · <a href="#qa-c17b37b142fb2068">问题链接</a></p>
 </details>
@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19414">原论文</a> · <a href="../../../../agent-research/2610.19414-formcraft/">实现解读</a> · <a href="#qa-22e0a1a33b08c7e5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transparent-compact" data-paper-title="Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents Agent Hokkaido University 2026-10-14 长会话压缩通常依赖模型重写摘要，可能丢失只在对话出现的承诺或悄悄改变其措辞。本方法保留用户与助手原话，将思考和工具输出移出活跃上下文，留下明确删减标记，并提供到完整原始会话的恢复路径。压缩不调用模型；论文的 context_lookup 则由模型子代理搜索历史，二者不能混成“零模型完整恢复能力”。 原论文 27B/长上下文（至少 128k）、多臂×多次推理及盲评完整实验超出本轮预算，成本过高，不复现（审查 DONE）。本地实现的是纯 CPU 确定性压缩组件和原始负载恢复索引，不是 Pi 插件逐字节复刻，不是模型记忆能力复现；未调用 LLM，不报告回答准确率，不进入 Evolve 晋级。支持标准消息 JSON 数组及 Pi JSONL。Pi 按 id/parentId 只读取选定叶节点的祖先分支，拒绝缺父、循环和重复 ID，不将兄弟分支混入上下文；不执行会话中的命令。正文保留 Unicode 和换行，未知/非文本块移入可恢复负载。  Agent记忆与上下文 透明压缩与恢复 Agent 记忆与技能：让经验可取回、可失效 透明压缩为什么保留原话而把思考与工具负载移出？ 用户和助手原话包含事实及承诺，生成摘要可能改写含义；移出较大思考和工具负载并留删减标记，可让活跃视图更短且知道哪些内容缺失。完整原始负载另存并可恢复，但这不等于模型已自动找到并正确使用所有历史。 例如用户说“只在周五发布”应原样保留，长测试日志可移出并标记；模型需要时再按恢复路径核对日志。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:transparent-compact" data-paper-title="Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents Agent Hokkaido University 2026-10-14 长会话压缩通常依赖模型重写摘要，可能丢失只在对话出现的承诺或悄悄改变其措辞。本方法保留用户与助手原话，将思考和工具输出移出活跃上下文，留下明确删减标记，并提供到完整原始会话的恢复路径。压缩不调用模型；论文的 context_lookup 则由模型子代理搜索历史，二者不能混成“零模型完整恢复能力”。 原论文 27B/长上下文（至少 128k）、多臂×多次推理及盲评完整实验超出本轮预算，成本过高，不复现（审查 DONE）。本地实现的是纯 CPU 确定性压缩组件和原始负载恢复索引，不是 Pi 插件逐字节复刻，不是模型记忆能力复现；未调用 LLM，不报告回答准确率，不进入 Evolve 晋级。支持标准消息 JSON 数组及 Pi JSONL。Pi 按 id/parentId 只读取选定叶节点的祖先分支，拒绝缺父、循环和重复 ID，不将兄弟分支混入上下文；不执行会话中的命令。正文保留 Unicode 和换行，未知/非文本块移入可恢复负载。  Agent记忆与上下文 透明压缩与恢复 Agent 记忆与技能：让经验可取回、可失效 长编码会话压缩后，为什么用户的承诺和限制特别容易被遗忘？ 大量工具日志与讨论争夺上下文，模型摘要可能省略细小却必须遵守的原话，或把原本有条件的要求改成绝对结论。透明压缩把保留与移出明确展示，并给出原始材料恢复路径，目标是让接续工作时知道哪些事实仍可见、哪些需要回查。 例如用户说“确认测试后才能提交”，若摘要只写“准备提交”，后续 Agent 就可能把一个附条件承诺误作已获完成授权。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-transparent-compact-55d09739" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-eba8a2358514944d">透明压缩为什么保留原话而把思考与工具负载移出？</h2>
+<h2 id="qa-eba8a2358514944d">长编码会话压缩后，为什么用户的承诺和限制特别容易被遗忘？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atransparent-compact">Maximising Transparency in Context Compaction Improves Retention of Facts and Commitments for Lightweight Coding Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Hokkaido University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>用户和助手原话包含事实及承诺，生成摘要可能改写含义；移出较大思考和工具负载并留删减标记，可让活跃视图更短且知道哪些内容缺失。完整原始负载另存并可恢复，但这不等于模型已自动找到并正确使用所有历史。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户说“只在周五发布”应原样保留，长测试日志可移出并标记；模型需要时再按恢复路径核对日志。</p>
+<p><strong>答案：</strong>大量工具日志与讨论争夺上下文，模型摘要可能省略细小却必须遵守的原话，或把原本有条件的要求改成绝对结论。透明压缩把保留与移出明确展示，并给出原始材料恢复路径，目标是让接续工作时知道哪些事实仍可见、哪些需要回查。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如用户说“确认测试后才能提交”，若摘要只写“准备提交”，后续 Agent 就可能把一个附条件承诺误作已获完成授权。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20116">原论文</a> · <a href="../../../../agent-research/2610.20116-transparent-compact/">实现解读</a> · <a href="#qa-eba8a2358514944d">问题链接</a></p>
 </details>
@@ -478,15 +478,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13277">原论文</a> · <a href="../../../../reproductions/2610.13277-beyond-final-embedding/">实现解读</a> · <a href="#qa-84ba9ade85040011">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:beyond-final-embedding" data-paper-title="Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence Agent Southeast University 2026-10-09 最终 pooled embedding 会丢掉局部事实线索，但冻结 embedding encoder 的最后层 token states 已经含有上下文证据。论文保留内容 token（排除 query prefix、special tokens 和 padding），离线给每条 token 绑定原 memory ID。在整个候选 bank 中做全局稀疏 token top-k，再按 ID 聚合回 memory 排名；不是对每条 memory 独立 MaxSim 后排序。 实际 GPU 诊断结果与负结果如下，不能以合同 fixture 代替真实测量。本地对照口径：基线为同冻结 MiniLM 的原生 pooled cosine，实验组为真实 sparse-token fusion 及 source训练的 queryadapter；原文规模相对效果不适用。  memory-retrieval token-level-evidence query-adaptation Agent 记忆与技能：让经验可取回、可失效 全局 token Top-K 与逐 memory 完整 MaxSim 为什么不是同一检索？ 全局搜索先在整个 bank 取少量 token 邻居，再按原 memory ID 聚合，未返回匹配使用 query 相关 floor；完整 MaxSim 对每条 memory 都找最佳 token。稀疏搜索更节省匹配量，也可能漏证据，因此 pooled 分支仍可把没有返回 token 的记忆带回。 例如一条记忆的所有 token 都未进全局 Top-K，它仍有 floor 分数并可凭 pooled 相似度入选，不是直接被删掉。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:beyond-final-embedding" data-paper-title="Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence Agent Southeast University 2026-10-09 最终 pooled embedding 会丢掉局部事实线索，但冻结 embedding encoder 的最后层 token states 已经含有上下文证据。论文保留内容 token（排除 query prefix、special tokens 和 padding），离线给每条 token 绑定原 memory ID。在整个候选 bank 中做全局稀疏 token top-k，再按 ID 聚合回 memory 排名；不是对每条 memory 独立 MaxSim 后排序。 实际 GPU 诊断结果与负结果如下，不能以合同 fixture 代替真实测量。本地对照口径：基线为同冻结 MiniLM 的原生 pooled cosine，实验组为真实 sparse-token fusion 及 source训练的 queryadapter；原文规模相对效果不适用。  memory-retrieval token-level-evidence query-adaptation Agent 记忆与技能：让经验可取回、可失效 训练 query-only adapter 与重新训练整个记忆编码器，分别改变哪一侧表示？ query-only 路线冻结 encoder 和 memory bank，只用低秩残差调整查询内容 token，让查询更适应既有记忆几何；重训编码器则可能改变两侧坐标，需要重新编码存量记忆并维护版本一致。前者更新范围较小，也受固定 bank 信息限制，不能补回编码时已经丢失的内容。 教学例：百万条记忆向量保持原样，只调整“谁在周二批准”的查询表示；如果改了共同编码器，旧向量可能需要全部重新计算。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-0cd43e87a4cab556">全局 token Top-K 与逐 memory 完整 MaxSim 为什么不是同一检索？</h2>
+<h2 id="qa-0cd43e87a4cab556">训练 query-only adapter 与重新训练整个记忆编码器，分别改变哪一侧表示？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abeyond-final-embedding">Beyond the Final Embedding: Retrieving Memories from Token-Level Evidence</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Southeast University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>全局搜索先在整个 bank 取少量 token 邻居，再按原 memory ID 聚合，未返回匹配使用 query 相关 floor；完整 MaxSim 对每条 memory 都找最佳 token。稀疏搜索更节省匹配量，也可能漏证据，因此 pooled 分支仍可把没有返回 token 的记忆带回。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一条记忆的所有 token 都未进全局 Top-K，它仍有 floor 分数并可凭 pooled 相似度入选，不是直接被删掉。</p>
+<p><strong>答案：</strong>query-only 路线冻结 encoder 和 memory bank，只用低秩残差调整查询内容 token，让查询更适应既有记忆几何；重训编码器则可能改变两侧坐标，需要重新编码存量记忆并维护版本一致。前者更新范围较小，也受固定 bank 信息限制，不能补回编码时已经丢失的内容。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：百万条记忆向量保持原样，只调整“谁在周二批准”的查询表示；如果改了共同编码器，旧向量可能需要全部重新计算。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13277">原论文</a> · <a href="../../../../reproductions/2610.13277-beyond-final-embedding/">实现解读</a> · <a href="#qa-0cd43e87a4cab556">问题链接</a></p>
 </details>
@@ -504,16 +504,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13277">原论文</a> · <a href="../../../../reproductions/2610.13277-beyond-final-embedding/">实现解读</a> · <a href="#qa-e579e1a374e3da19">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:near" data-paper-title="NEAR: Neighborhood-Aware Residuals for Memory Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="NEAR: Neighborhood-Aware Residuals for Memory Retrieval Agent Southeast University 2026-10-09 记忆记录往往共享人名、话题和事件。共享内容会让无关证据的整体 embedding 高于真正包含事实的记录。NEAR 将这些近邻从干扰源变成 reference：离线为每条 memory 找近邻均值方向，去掉沿该方向的投影；查询不先检索候选，而从预计算小表得到对应 reference。每层在归一化残差上重新计算邻域，保留原始向量与多层 scoring view。 该旧诊断原样保留。本地对照口径：基线为同冻结 MiniLM 的原生 masked-mean pooled cosine，实验组为 NEAR 邻域残差融合；已执行三 seed，但同一数据切分与相同排名不构成独立数据重复，稳定相对提升结论不适用。  memory-retrieval neighborhood-residual single-index-retrieval Agent 记忆与技能：让经验可取回、可失效 NEAR 为什么把相似记忆当 reference，而不只把它们当竞争候选？ 多个记录共享人物与主题时，共同方向可能掩盖真正区分事实的细节。NEAR 用邻域均值方向构造参考，去除沿该方向的投影，建立残差检索视图；它仍保留原始表示融合，避免把共享但有用的信息全部丢掉。 例如多条会议记忆都提同一项目，残差可突出其中唯一包含改期日期的记录，而不让项目名重复主导排名。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:near" data-paper-title="NEAR: Neighborhood-Aware Residuals for Memory Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="NEAR: Neighborhood-Aware Residuals for Memory Retrieval Agent Southeast University 2026-10-09 记忆记录往往共享人名、话题和事件。共享内容会让无关证据的整体 embedding 高于真正包含事实的记录。NEAR 将这些近邻从干扰源变成 reference：离线为每条 memory 找近邻均值方向，去掉沿该方向的投影；查询不先检索候选，而从预计算小表得到对应 reference。每层在归一化残差上重新计算邻域，保留原始向量与多层 scoring view。 该旧诊断原样保留。本地对照口径：基线为同冻结 MiniLM 的原生 masked-mean pooled cosine，实验组为 NEAR 邻域残差融合；已执行三 seed，但同一数据切分与相同排名不构成独立数据重复，稳定相对提升结论不适用。  memory-retrieval neighborhood-residual single-index-retrieval Agent 记忆与技能：让经验可取回、可失效 许多记忆都谈同一人物或项目时，为什么真正的答案线索反而难找？ 整段表示可能主要反映共同主题，频繁出现的人名与项目名让多条记录都很相似，少数独有日期或事件被淹没。NEAR 研究如何利用记忆之间的邻域关系突出区分线索，目标是找出含具体事实的记录，而不只是重复召回主题相关材料。 例如十条都谈项目甲，只有一条写了延期到周四；查询日期时需要的是这一个差异，不是更多提到项目名的记录。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-near-5f289457" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-6332ddad35451607">NEAR 为什么把相似记忆当 reference，而不只把它们当竞争候选？</h2>
+<h2 id="qa-6332ddad35451607">许多记忆都谈同一人物或项目时，为什么真正的答案线索反而难找？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Anear">NEAR: Neighborhood-Aware Residuals for Memory Retrieval</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Southeast University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多个记录共享人物与主题时，共同方向可能掩盖真正区分事实的细节。NEAR 用邻域均值方向构造参考，去除沿该方向的投影，建立残差检索视图；它仍保留原始表示融合，避免把共享但有用的信息全部丢掉。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如多条会议记忆都提同一项目，残差可突出其中唯一包含改期日期的记录，而不让项目名重复主导排名。</p>
+<p><strong>答案：</strong>整段表示可能主要反映共同主题，频繁出现的人名与项目名让多条记录都很相似，少数独有日期或事件被淹没。NEAR 研究如何利用记忆之间的邻域关系突出区分线索，目标是找出含具体事实的记录，而不只是重复召回主题相关材料。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如十条都谈项目甲，只有一条写了延期到周四；查询日期时需要的是这一个差异，不是更多提到项目名的记录。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13314">原论文</a> · <a href="../../../../reproductions/2610.13314-near/">实现解读</a> · <a href="#qa-6332ddad35451607">问题链接</a></p>
 </details>
@@ -597,15 +597,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13348">原论文</a> · <a href="../../../../reproductions/2610.13348-t2mem/">实现解读</a> · <a href="#qa-27318e8b4bfc56e5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:t2mem" data-paper-title="Test-Time Memory Construction" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Test-Time Memory Construction Agent Northeastern University 2026-10-09 离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。事实来源：原文全文。 当前是 core_mechanism / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为原文 Naive RAG/structured offline memory；本地未做稳定多seed对照；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  long-term-memory test-time-construction adaptive-retrieval Agent 记忆与技能：让经验可取回、可失效 ReadRaw 为什么必须拒绝尚未见过的 metadata ID？ metadata 是可公开发现的访问入口，限制原文读取到已观察 ID 可维护可追踪的证据获取过程，避免模型猜测或越过索引直接读取隐藏内容。检索排除 seen entries，gold 仅外部评分；本地真实 checkpoint 两题 F1 为零，运行通畅不能写成记忆答题成功。 例如模型猜出某个内部会话 ID 却未检索见到，读取应失败；先 SearchMeta 得到 ID 后才能合法 ReadRaw。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:t2mem" data-paper-title="Test-Time Memory Construction" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Test-Time Memory Construction Agent Northeastern University 2026-10-09 离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。事实来源：原文全文。 当前是 core_mechanism / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为原文 Naive RAG/structured offline memory；本地未做稳定多seed对照；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  long-term-memory test-time-construction adaptive-retrieval Agent 记忆与技能：让经验可取回、可失效 SearchMeta 排除 seen entries，与把新记忆追加进查询 cache，各管理哪一种状态？ seen entries 记录本次已见入口，避免重复搜索返回同一批 metadata；查询 cache 累积当前问题已取得的有用内容，供后续推理与回答。原始会话仍是可追溯外部来源，cache 不是用最终答案填好的摘要。两类状态分开，才能检查搜索是否有新信息及答案依据从何而来。 教学例：已见会议 A 的入口后，下次搜索应寻找其他事件；读到 A 的决议可留在 cache，不能因排除其入口就把已读证据一并删除。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-e80d57b9c393e851">ReadRaw 为什么必须拒绝尚未见过的 metadata ID？</h2>
+<h2 id="qa-e80d57b9c393e851">SearchMeta 排除 seen entries，与把新记忆追加进查询 cache，各管理哪一种状态？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3At2mem">Test-Time Memory Construction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Northeastern University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>metadata 是可公开发现的访问入口，限制原文读取到已观察 ID 可维护可追踪的证据获取过程，避免模型猜测或越过索引直接读取隐藏内容。检索排除 seen entries，gold 仅外部评分；本地真实 checkpoint 两题 F1 为零，运行通畅不能写成记忆答题成功。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型猜出某个内部会话 ID 却未检索见到，读取应失败；先 SearchMeta 得到 ID 后才能合法 ReadRaw。</p>
+<p><strong>答案：</strong>seen entries 记录本次已见入口，避免重复搜索返回同一批 metadata；查询 cache 累积当前问题已取得的有用内容，供后续推理与回答。原始会话仍是可追溯外部来源，cache 不是用最终答案填好的摘要。两类状态分开，才能检查搜索是否有新信息及答案依据从何而来。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：已见会议 A 的入口后，下次搜索应寻找其他事件；读到 A 的决议可留在 cache，不能因排除其入口就把已读证据一并删除。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、结果、验证与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13348">原论文</a> · <a href="../../../../reproductions/2610.13348-t2mem/">实现解读</a> · <a href="#qa-e80d57b9c393e851">问题链接</a></p>
 </details>
@@ -663,16 +663,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12124">原论文</a> · <a href="../../../../agent-research/2610.12124-hippocam/">实现解读</a> · <a href="#qa-d3449f814ee2415f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autocompact" data-paper-title="AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents Agent 原文首页未列第一作者机构 2026-10-01 judge 同时审查何时压缩、工作摘要写什么、压缩后下一步怎么做；纠错后的输出直接进入环境，随后以 SFT+结果 RL 联合学习。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行三字段原位纠错合同；未训练 Coding Agent 或运行 SWE 容器。执行三字段原位纠错合同；未训练 Coding Agent 或运行 SWE 容器。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  Coding Agent 上下文压缩 RL Agent 记忆与技能：让经验可取回、可失效 为什么压缩决策、工作摘要和下一动作要联合纠错？ 何时压缩决定丢弃风险，摘要决定留下哪些状态，下一动作检验这些状态能否支持继续工作。分开看可能得到单项合理却组合不一致的输出，AutoCompact 让 judge 同时检查三者，再把纠正结果送进环境，训练的是压缩后的实际行动链。 例如摘要保留了待修测试，但下一动作仍重复安装依赖，联合检查可发现这套压缩和继续计划不一致。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autocompact" data-paper-title="AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents Agent 原文首页未列第一作者机构 2026-10-01 judge 同时审查何时压缩、工作摘要写什么、压缩后下一步怎么做；纠错后的输出直接进入环境，随后以 SFT+结果 RL 联合学习。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行三字段原位纠错合同；未训练 Coding Agent 或运行 SWE 容器。执行三字段原位纠错合同；未训练 Coding Agent 或运行 SWE 容器。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  Coding Agent 上下文压缩 RL Agent 记忆与技能：让经验可取回、可失效 长程编码 Agent 为什么不能等到上下文彻底装满才考虑压缩？ 编码过程中还有未完成修改、测试反馈和待交付要求，压缩时机不当可能正好丢掉下一步需要的状态。AutoCompact 把何时压缩以及怎样继续工作作为可学习决策，目标是在上下文压力下保持任务连续性，而非仅让文本变短。 例如刚看到一份失败测试但尚未整理原因时就强制压缩，可能漏掉关键报错；合适时机要结合当前工作进度判断。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-autocompact-45b25080" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-caf61923d5bef656">为什么压缩决策、工作摘要和下一动作要联合纠错？</h2>
+<h2 id="qa-caf61923d5bef656">长程编码 Agent 为什么不能等到上下文彻底装满才考虑压缩？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aautocompact">AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>何时压缩决定丢弃风险，摘要决定留下哪些状态，下一动作检验这些状态能否支持继续工作。分开看可能得到单项合理却组合不一致的输出，AutoCompact 让 judge 同时检查三者，再把纠正结果送进环境，训练的是压缩后的实际行动链。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如摘要保留了待修测试，但下一动作仍重复安装依赖，联合检查可发现这套压缩和继续计划不一致。</p>
+<p><strong>答案：</strong>编码过程中还有未完成修改、测试反馈和待交付要求，压缩时机不当可能正好丢掉下一步需要的状态。AutoCompact 把何时压缩以及怎样继续工作作为可学习决策，目标是在上下文压力下保持任务连续性，而非仅让文本变短。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如刚看到一份失败测试但尚未整理原因时就强制压缩，可能漏掉关键报错；合适时机要结合当前工作进度判断。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02163">原论文</a> · <a href="../../../../agent-research/2610.02163-autocompact/">实现解读</a> · <a href="#qa-caf61923d5bef656">问题链接</a></p>
 </details>
@@ -769,16 +769,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01415">原论文</a> · <a href="../../../../agent-research/2610.01415-belief-state-pos/">实现解读</a> · <a href="#qa-de1c8d589bc7bfa8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:causal-memory-policy" data-paper-title="Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval Agent Illinois Institute of Technology 2026-10-01 被检索到的记忆与任务难度天然相关，直接按任务成败删除记忆存在选择偏差。CMP 在固定候选池中预留均衡随机曝光槽位，使每条记忆都有可估计的处理/对照样本，再用带标准误的效用判断保护不确定的记忆。 尚未运行真实 LLM 检索任务或跨 query 记忆删除实验；L1 因果测量协议：实现均衡随机曝光、Hájek 估计及不确定性感知单 query 决策。不把它夸大为已验证的长期记忆清理策略。尚未运行真实 LLM 检索任务或跨 query 记忆删除实验；合成效用恢复不是 Agent 答题准确率，不进入能力排行榜或 Evolve 晋级证据。PYTHONPATH=src python scripts/run_oct04_seven_papers.py：12 条记忆、600 次检索、每次 2 槽，三 seed 合成外部结果。每条记忆曝光恰好 100 次；产物保留正负效用、标准误及 forget 判断。  因果检索干预 记忆管理 Agent 记忆与技能：让经验可取回、可失效 为什么仅观察某记忆被检索后任务失败，不能认定该记忆有害？ 困难任务可能更常触发该记忆，失败与检索同时出现不一定由记忆造成。CMP 在固定候选池随机化均衡曝光，获得处理与对照结果，再带标准误判断净效用；它解决特定设计下的识别问题，不是从任意生产日志自动提取因果。 例如复杂题更常检索长指南且更常失败，直接删指南会把任务难度的影响错算给记忆。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:causal-memory-policy" data-paper-title="Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval Agent Illinois Institute of Technology 2026-10-01 被检索到的记忆与任务难度天然相关，直接按任务成败删除记忆存在选择偏差。CMP 在固定候选池中预留均衡随机曝光槽位，使每条记忆都有可估计的处理/对照样本，再用带标准误的效用判断保护不确定的记忆。 尚未运行真实 LLM 检索任务或跨 query 记忆删除实验；L1 因果测量协议：实现均衡随机曝光、Hájek 估计及不确定性感知单 query 决策。不把它夸大为已验证的长期记忆清理策略。尚未运行真实 LLM 检索任务或跨 query 记忆删除实验；合成效用恢复不是 Agent 答题准确率，不进入能力排行榜或 Evolve 晋级证据。PYTHONPATH=src python scripts/run_oct04_seven_papers.py：12 条记忆、600 次检索、每次 2 槽，三 seed 合成外部结果。每条记忆曝光恰好 100 次；产物保留正负效用、标准误及 forget 判断。  因果检索干预 记忆管理 Agent 记忆与技能：让经验可取回、可失效 清理记忆库之前，为什么需要知道一条记忆对执行究竟有何影响？ 记忆会占上下文，也可能提供帮助、干扰或只是无关，删除决策需要其对结果的效用证据。CMP 关注怎样通过检索曝光实验使这种效用可估计，并在证据不足时谨慎保留；它研究的是固定设计下的记忆干预，不是按出现频次整理档案。 例如两份旧指南都很常用，一份帮助恢复错误，另一份只是重复背景，只有使用结果对照才能支持不同的保留决策。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-causal-memory-policy-919f3b4b" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b097fb0b5356bc68">为什么仅观察某记忆被检索后任务失败，不能认定该记忆有害？</h2>
+<h2 id="qa-b097fb0b5356bc68">清理记忆库之前，为什么需要知道一条记忆对执行究竟有何影响？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acausal-memory-policy">Causal Memory Policy: Making Memory Utility Identifiable by Intervening on Retrieval</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Illinois Institute of Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>困难任务可能更常触发该记忆，失败与检索同时出现不一定由记忆造成。CMP 在固定候选池随机化均衡曝光，获得处理与对照结果，再带标准误判断净效用；它解决特定设计下的识别问题，不是从任意生产日志自动提取因果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如复杂题更常检索长指南且更常失败，直接删指南会把任务难度的影响错算给记忆。</p>
+<p><strong>答案：</strong>记忆会占上下文，也可能提供帮助、干扰或只是无关，删除决策需要其对结果的效用证据。CMP 关注怎样通过检索曝光实验使这种效用可估计，并在证据不足时谨慎保留；它研究的是固定设计下的记忆干预，不是按出现频次整理档案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如两份旧指南都很常用，一份帮助恢复错误，另一份只是重复背景，只有使用结果对照才能支持不同的保留决策。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02070">原论文</a> · <a href="../../../../agent-research/2610.02070-causal-memory-policy/">实现解读</a> · <a href="#qa-b097fb0b5356bc68">问题链接</a></p>
 </details>
@@ -849,15 +849,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02002">原论文</a> · <a href="../../../../agent-research/2610.02002-mem-plus-plus/">实现解读</a> · <a href="#qa-b68bb4b0178000af">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mem-plus-plus" data-paper-title="Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents Agent The University of Texas at Austin 2026-10-01 写入时完整保留文档、日期和作者，不调用生成模型做不可逆摘要；读取时先按问题时间过滤，再融合 lexical 与 semantic ranking。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行全量写入、as-of 过滤与混合检索；不运行 OrgMemBench 或外部 embedding 服务。执行全量写入、as-of 过滤与混合检索；不运行 OrgMemBench 或外部 embedding 服务。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  Agent 记忆 时间检索 组织知识 Agent 记忆与技能：让经验可取回、可失效 先按时间过滤再做混合排序，与只把时间加入相似度特征有何不同？ 硬过滤把查询时点之后的记录直接排除，防止未来信息参与答案；软特征即使惩罚未来记录，也可能因相关分太高而选中。词法与语义融合在合法候选内进行，不能以更高检索分为理由突破时间可见性。 例如问六月一日当时政策，六月十日的新通知应先排除，而不是给它减一点分后仍可能排第一。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mem-plus-plus" data-paper-title="Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents Agent The University of Texas at Austin 2026-10-01 写入时完整保留文档、日期和作者，不调用生成模型做不可逆摘要；读取时先按问题时间过滤，再融合 lexical 与 semantic ranking。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行全量写入、as-of 过滤与混合检索；不运行 OrgMemBench 或外部 embedding 服务。执行全量写入、as-of 过滤与混合检索；不运行 OrgMemBench 或外部 embedding 服务。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  Agent 记忆 时间检索 组织知识 Agent 记忆与技能：让经验可取回、可失效 Mem++ 为什么同时保留词法排名与语义排名，而不只依赖一种相似度？ 词法检索擅长精确名称、编号和原句，语义检索可覆盖改写或用词差异；融合排名让两类信号共同决定候选。它们都只在时间合格的原记录内工作，融合不能制造不存在的事实。不同排名可能返回重叠或冲突证据，最终回答仍须检查记录内容与来源。 教学例：查询含工单号时词法可直接命中；用户只说“上次数据库故障”时语义可能找到写作“存储服务中断”的记录。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-54c975b84b7d4d1c">先按时间过滤再做混合排序，与只把时间加入相似度特征有何不同？</h2>
+<h2 id="qa-54c975b84b7d4d1c">Mem++ 为什么同时保留词法排名与语义排名，而不只依赖一种相似度？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amem-plus-plus">Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · The University of Texas at Austin</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>硬过滤把查询时点之后的记录直接排除，防止未来信息参与答案；软特征即使惩罚未来记录，也可能因相关分太高而选中。词法与语义融合在合法候选内进行，不能以更高检索分为理由突破时间可见性。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如问六月一日当时政策，六月十日的新通知应先排除，而不是给它减一点分后仍可能排第一。</p>
+<p><strong>答案：</strong>词法检索擅长精确名称、编号和原句，语义检索可覆盖改写或用词差异；融合排名让两类信号共同决定候选。它们都只在时间合格的原记录内工作，融合不能制造不存在的事实。不同排名可能返回重叠或冲突证据，最终回答仍须检查记录内容与来源。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：查询含工单号时词法可直接命中；用户只说“上次数据库故障”时语义可能找到写作“存储服务中断”的记录。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02002">原论文</a> · <a href="../../../../agent-research/2610.02002-mem-plus-plus/">实现解读</a> · <a href="#qa-54c975b84b7d4d1c">问题链接</a></p>
 </details>
@@ -875,16 +875,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02002">原论文</a> · <a href="../../../../agent-research/2610.02002-mem-plus-plus/">实现解读</a> · <a href="#qa-5d808cecfe06482e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memfit" data-paper-title="MemFit: Efficient Long-Term Agentic Memory" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemFit: Efficient Long-Term Agentic Memory Agent 原文首页未列第一作者机构 2026-09-30 原始 turn 追加写入不改写，只用 segment summary 建索引；读取融合 lexical、semantic 与 rerank 信号，避免昂贵 LLM 写入。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行无损追加和混合检索 hook；不调用 embedding/cross-encoder。执行无损追加和混合检索 hook；不调用 embedding/cross-encoder。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  Agent 记忆 无损写入 混合检索 Agent 记忆与技能：让经验可取回、可失效 append-only 原始 turn 与 segment summary 各承担什么功能？ 原始 turn 作为不被重写的事实来源，segment summary 提供较紧凑的索引，读取时再结合词法、语义及重排信号找证据。索引摘要不是唯一真相，错漏可回到原文核查；无损追加也不意味着所有原文每轮都进入模型上下文。 例如摘要只写“讨论预算”，具体金额仍在原 turn；检索命中该段后应能回查金额，而不是从摘要猜数。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memfit" data-paper-title="MemFit: Efficient Long-Term Agentic Memory" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemFit: Efficient Long-Term Agentic Memory Agent 原文首页未列第一作者机构 2026-09-30 原始 turn 追加写入不改写，只用 segment summary 建索引；读取融合 lexical、semantic 与 rerank 信号，避免昂贵 LLM 写入。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行无损追加和混合检索 hook；不调用 embedding/cross-encoder。执行无损追加和混合检索 hook；不调用 embedding/cross-encoder。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  Agent 记忆 无损写入 混合检索 Agent 记忆与技能：让经验可取回、可失效 MemFit 为什么特别关注高频会话的记忆写入成本？ 长期助理持续接收新 turn，若每次都调用昂贵模型重写整份记忆，尚未发生读取就已经花掉大量费用并可能改丢细节。MemFit 希望让写入轻量、原文可追溯，把查询相关的筛选放到读取阶段，同时面对原记录规模增长的检索问题。 例如一天新增数百轮客服对话，很多内容此后不会被询问，逐轮做复杂语义重写可能比真正有用的查询还贵。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-memfit-d14853dc" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4b853f8ead5db496">append-only 原始 turn 与 segment summary 各承担什么功能？</h2>
+<h2 id="qa-4b853f8ead5db496">MemFit 为什么特别关注高频会话的记忆写入成本？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemfit">MemFit: Efficient Long-Term Agentic Memory</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>原始 turn 作为不被重写的事实来源，segment summary 提供较紧凑的索引，读取时再结合词法、语义及重排信号找证据。索引摘要不是唯一真相，错漏可回到原文核查；无损追加也不意味着所有原文每轮都进入模型上下文。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如摘要只写“讨论预算”，具体金额仍在原 turn；检索命中该段后应能回查金额，而不是从摘要猜数。</p>
+<p><strong>答案：</strong>长期助理持续接收新 turn，若每次都调用昂贵模型重写整份记忆，尚未发生读取就已经花掉大量费用并可能改丢细节。MemFit 希望让写入轻量、原文可追溯，把查询相关的筛选放到读取阶段，同时面对原记录规模增长的检索问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如一天新增数百轮客服对话，很多内容此后不会被询问，逐轮做复杂语义重写可能比真正有用的查询还贵。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00872">原论文</a> · <a href="../../../../agent-research/2610.00872-memfit/">实现解读</a> · <a href="#qa-4b853f8ead5db496">问题链接</a></p>
 </details>
@@ -981,16 +981,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37725">原论文</a> · <a href="../../../../agent-research/2609.37725-context-lm/">实现解读</a> · <a href="#qa-02bd02e85b8213dc">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:remem" data-paper-title="ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents Agent The Hong Kong Polytechnic University 2026-09-29 推荐 Agent 一方面要从异构商品页稳定提取信息，另一方面不能把完整用户历史无限塞进上下文。ReMem 用 OCR 驱动的多模态 item perception 生成紧凑语义表示，再以固定预算、随时间更新的 dynamic memory 保存偏好；Multi-Memory GRPO 让多个记忆视图共享策略更新。 复现级别：L1 记忆机制。复现级别：L1 记忆机制。实现固定预算的 time-evolving memory 和 multi-memory GRPO 目标；未接入真实购物网页与 OCR 模型。这里不是完整网页 Agent：未运行 OCR、浏览器、作者数据或真实 episode；固定小样本只用于验证信息流，不能宣传为推荐能力提升。  长期记忆 推荐 Agent 多模态感知 Agent 记忆与技能：让经验可取回、可失效 ReMem 为什么把商品感知和用户记忆视为两个问题？ 异构商品页需要从文本和图像中稳定提取 item 信息，长期用户历史则需要在固定预算内保留随时间变化的偏好。前者关注当前物品证据，后者关注偏好演化，不能把 OCR 提取准确率当成推荐效果，也不能只压缩历史而假定商品输入已可靠。 例如用户最近改偏好为轻便鞋，系统既要读出网页商品重量，也要更新旧的“偏好厚底”记忆，两个环节缺一不可。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:remem" data-paper-title="ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents Agent The Hong Kong Polytechnic University 2026-09-29 推荐 Agent 一方面要从异构商品页稳定提取信息，另一方面不能把完整用户历史无限塞进上下文。ReMem 用 OCR 驱动的多模态 item perception 生成紧凑语义表示，再以固定预算、随时间更新的 dynamic memory 保存偏好；Multi-Memory GRPO 让多个记忆视图共享策略更新。 复现级别：L1 记忆机制。复现级别：L1 记忆机制。实现固定预算的 time-evolving memory 和 multi-memory GRPO 目标；未接入真实购物网页与 OCR 模型。这里不是完整网页 Agent：未运行 OCR、浏览器、作者数据或真实 episode；固定小样本只用于验证信息流，不能宣传为推荐能力提升。  长期记忆 推荐 Agent 多模态感知 Agent 记忆与技能：让经验可取回、可失效 长上下文推荐 Agent 面对的输入困难为什么不仅是历史太长？ 它既要理解异构商品页面，也要从不断积累的用户行为中追踪偏好，任何一端信息不可靠都可能推荐错误。ReMem 把物品感知与时间演化记忆一起纳入研究，目标是在固定预算下获得足够决策依据，而不是简单多塞历史。 例如网页重量藏在图片里，用户近期又开始偏好轻便产品，只缩短聊天记录既读不到重量，也未必更新新偏好。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-remem-598e18f2" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8426a6e9fbacaf9f">ReMem 为什么把商品感知和用户记忆视为两个问题？</h2>
+<h2 id="qa-8426a6e9fbacaf9f">长上下文推荐 Agent 面对的输入困难为什么不仅是历史太长？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aremem">ReMem: Rethinking Perception and Memory in Long-Context Recommendation Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · The Hong Kong Polytechnic University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>异构商品页需要从文本和图像中稳定提取 item 信息，长期用户历史则需要在固定预算内保留随时间变化的偏好。前者关注当前物品证据，后者关注偏好演化，不能把 OCR 提取准确率当成推荐效果，也不能只压缩历史而假定商品输入已可靠。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户最近改偏好为轻便鞋，系统既要读出网页商品重量，也要更新旧的“偏好厚底”记忆，两个环节缺一不可。</p>
+<p><strong>答案：</strong>它既要理解异构商品页面，也要从不断积累的用户行为中追踪偏好，任何一端信息不可靠都可能推荐错误。ReMem 把物品感知与时间演化记忆一起纳入研究，目标是在固定预算下获得足够决策依据，而不是简单多塞历史。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如网页重量藏在图片里，用户近期又开始偏好轻便产品，只缩短聊天记录既读不到重量，也未必更新新偏好。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37311">原论文</a> · <a href="../../../../agent-research/2609.37311-remem/">实现解读</a> · <a href="#qa-8426a6e9fbacaf9f">问题链接</a></p>
 </details>
@@ -1034,16 +1034,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37311">原论文</a> · <a href="../../../../agent-research/2609.37311-remem/">实现解读</a> · <a href="#qa-4a97e3877c77acd7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:upliftmem" data-paper-title="UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval Agent Beihang University 2026-09-29 相关记忆不一定提升执行。UpliftMem 以同一冻结 executor 在“使用完整 memory set”和“不使用 memory”时的结果差作为 supervision，并在集合级建模互补、冗余和冲突。候选集合太多无法全跑时，用相关 Gaussian 后验下的 EVSI 把额外 rollout 分配给最可能改变局部检索决策的集合。 复现级别：L1 uplift 与 probe 机制。复现级别：L1 uplift 与 probe 机制。实现同 executor 的 paired uplift 和相关 Gaussian EVSI 选择。本地 set_level_uplift 强制 paired treatment/control；gaussian_evsi 在固定 posterior 上选 probe；三种子机制结果见 metrics/mechanism-seeds42-44.json。未实现完整 set constructor、共享 scorer、ALFWorld/WebShop/BigCodeBench 执行器，因此只作为机制与评测基础设施。  Agent 记忆 集合 uplift 主动探测 Agent 记忆与技能：让经验可取回、可失效 为什么 UpliftMem 直接估计整个 memory set 的收益？ 记忆之间可能互补、重复或冲突，单条相关性之和不能表达这些集合效应。它用同一冻结 executor 在完整集合与无记忆条件下的配对结果差作监督，目标是执行增益而非文本相似；收益也依赖该 executor 与任务分布，不能视为记忆固有常数。 例如甲说明工具参数、乙说明异常处理，两条一起才帮助完成任务；分别看每条可能都没有明显收益。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:upliftmem" data-paper-title="UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval Agent Beihang University 2026-09-29 相关记忆不一定提升执行。UpliftMem 以同一冻结 executor 在“使用完整 memory set”和“不使用 memory”时的结果差作为 supervision，并在集合级建模互补、冗余和冲突。候选集合太多无法全跑时，用相关 Gaussian 后验下的 EVSI 把额外 rollout 分配给最可能改变局部检索决策的集合。 复现级别：L1 uplift 与 probe 机制。复现级别：L1 uplift 与 probe 机制。实现同 executor 的 paired uplift 和相关 Gaussian EVSI 选择。本地 set_level_uplift 强制 paired treatment/control；gaussian_evsi 在固定 posterior 上选 probe；三种子机制结果见 metrics/mechanism-seeds42-44.json。未实现完整 set constructor、共享 scorer、ALFWorld/WebShop/BigCodeBench 执行器，因此只作为机制与评测基础设施。  Agent 记忆 集合 uplift 主动探测 Agent 记忆与技能：让经验可取回、可失效 UpliftMem 为什么把“检索得相关”与“帮 Agent 做成任务”分开？ 相似记忆可能重复当前已有信息，也可能与其他记录冲突，因此相关性分数不等于执行价值。UpliftMem 关注一整组被提供的记忆是否让固定执行器获得额外收益，以便将有限上下文留给真正改变结果的证据组合。 例如三条都讲正确接口名称却都缺认证步骤，检索相似度很高，提供它们后任务仍无法完成，不能据相关性认定有用。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-upliftmem-e7065d9f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8147d2ef26cbd835">为什么 UpliftMem 直接估计整个 memory set 的收益？</h2>
+<h2 id="qa-8147d2ef26cbd835">UpliftMem 为什么把“检索得相关”与“帮 Agent 做成任务”分开？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aupliftmem">UpliftMem: Learning Set-Level Uplift for Agent Memory Retrieval</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beihang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>记忆之间可能互补、重复或冲突，单条相关性之和不能表达这些集合效应。它用同一冻结 executor 在完整集合与无记忆条件下的配对结果差作监督，目标是执行增益而非文本相似；收益也依赖该 executor 与任务分布，不能视为记忆固有常数。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如甲说明工具参数、乙说明异常处理，两条一起才帮助完成任务；分别看每条可能都没有明显收益。</p>
+<p><strong>答案：</strong>相似记忆可能重复当前已有信息，也可能与其他记录冲突，因此相关性分数不等于执行价值。UpliftMem 关注一整组被提供的记忆是否让固定执行器获得额外收益，以便将有限上下文留给真正改变结果的证据组合。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如三条都讲正确接口名称却都缺认证步骤，检索相似度很高，提供它们后任务仍无法完成，不能据相关性认定有用。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36805">原论文</a> · <a href="../../../../agent-research/2609.36805-upliftmem/">实现解读</a> · <a href="#qa-8147d2ef26cbd835">问题链接</a></p>
 </details>
@@ -1087,16 +1087,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36805">原论文</a> · <a href="../../../../agent-research/2609.36805-upliftmem/">实现解读</a> · <a href="#qa-fb77451d166994c2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ccm" data-paper-title="Continuous Context Management" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Continuous Context Management Agent University of Miami 2026-09-28 每轮输出动作和更新后的有界 memory；下一轮只读原任务、memory 与最新 observation，并用完整历史只在训练侧提供 privileged distillation。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行逐轮有界上下文契约；未运行 TerminalBench 或 WebShop checkpoint。执行逐轮有界上下文契约；未运行 TerminalBench 或 WebShop checkpoint。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  上下文管理 Agent RL Agent 记忆与技能：让经验可取回、可失效 CCM 下一轮为什么只读任务、memory 和最新 observation？ 它要求每轮用有界 memory 承接过去的必要状态，避免完整历史不断增长。动作与新 memory 一起输出，形成持续状态更新；若实际仍把完整历史拼回下一轮，就绕过记忆压缩任务，也无法检验 memory 是否足够支持后续决策。 例如第一轮读到订单号后写入 memory，第二轮只看该 memory 与新工具结果，不能再从隐藏完整对话抄回遗漏编号。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ccm" data-paper-title="Continuous Context Management" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Continuous Context Management Agent University of Miami 2026-09-28 每轮输出动作和更新后的有界 memory；下一轮只读原任务、memory 与最新 observation，并用完整历史只在训练侧提供 privileged distillation。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行逐轮有界上下文契约；未运行 TerminalBench 或 WebShop checkpoint。执行逐轮有界上下文契约；未运行 TerminalBench 或 WebShop checkpoint。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  上下文管理 Agent RL Agent 记忆与技能：让经验可取回、可失效 连续执行很多轮任务时，CCM 想避免哪种上下文增长？ 把每轮观察、动作和思考全部重新发送，累计输入会越来越大，也容易让当前状态淹没在旧材料中。CCM 让 Agent 每轮维护可供下轮使用的有界记忆，同时继续行动，研究的是如何把过去压成足以决策的状态，而非让完整历史永久常驻。 例如执行到第九十步时，通常需要当前文件、已确认结果和待办，不一定需要前八十九步所有终端输出原文。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-ccm-d42ba3fe" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-6254981077290624">CCM 下一轮为什么只读任务、memory 和最新 observation？</h2>
+<h2 id="qa-6254981077290624">连续执行很多轮任务时，CCM 想避免哪种上下文增长？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Accm">Continuous Context Management</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Miami</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它要求每轮用有界 memory 承接过去的必要状态，避免完整历史不断增长。动作与新 memory 一起输出，形成持续状态更新；若实际仍把完整历史拼回下一轮，就绕过记忆压缩任务，也无法检验 memory 是否足够支持后续决策。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第一轮读到订单号后写入 memory，第二轮只看该 memory 与新工具结果，不能再从隐藏完整对话抄回遗漏编号。</p>
+<p><strong>答案：</strong>把每轮观察、动作和思考全部重新发送，累计输入会越来越大，也容易让当前状态淹没在旧材料中。CCM 让 Agent 每轮维护可供下轮使用的有界记忆，同时继续行动，研究的是如何把过去压成足以决策的状态，而非让完整历史永久常驻。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如执行到第九十步时，通常需要当前文件、已确认结果和待办，不一定需要前八十九步所有终端输出原文。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.35540">原论文</a> · <a href="../../../../agent-research/2609.35540-ccm/">实现解读</a> · <a href="#qa-6254981077290624">问题链接</a></p>
 </details>
@@ -1114,15 +1114,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.35540">原论文</a> · <a href="../../../../agent-research/2609.35540-ccm/">实现解读</a> · <a href="#qa-2ae6086f325e6ed3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ccm" data-paper-title="Continuous Context Management" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Continuous Context Management Agent University of Miami 2026-09-28 每轮输出动作和更新后的有界 memory；下一轮只读原任务、memory 与最新 observation，并用完整历史只在训练侧提供 privileged distillation。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行逐轮有界上下文契约；未运行 TerminalBench 或 WebShop checkpoint。执行逐轮有界上下文契约；未运行 TerminalBench 或 WebShop checkpoint。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  上下文管理 Agent RL Agent 记忆与技能：让经验可取回、可失效 privileged full-history teacher 与部署学生的可见信息为什么不同？ 教师可在训练侧用完整历史提供更可靠监督，学生则必须仅凭受限上下文学习行动和记忆更新。若把教师历史直接传给学生，会消除所需信息瓶颈；训练监督更强也不表示部署时获得同样信息，效果应在真实受限路径评估。 例如教师知道前十轮的全部细节，可指导学生保留关键事实，但测试学生仍只能读取自己维护的短 memory。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ccm" data-paper-title="Continuous Context Management" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Continuous Context Management Agent University of Miami 2026-09-28 每轮输出动作和更新后的有界 memory；下一轮只读原任务、memory 与最新 observation，并用完整历史只在训练侧提供 privileged distillation。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行逐轮有界上下文契约；未运行 TerminalBench 或 WebShop checkpoint。执行逐轮有界上下文契约；未运行 TerminalBench 或 WebShop checkpoint。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  上下文管理 Agent RL Agent 记忆与技能：让经验可取回、可失效 每轮维护有界状态，与只在回答前检索几条历史，在信息管理时机上有何区别？ CCM 把记忆更新纳入每轮行动，当前保留什么会影响下一轮可见状态；只在回答前检索则把主要选择放到查询时，并依赖外部历史索引。二者改变信息瓶颈出现的位置，可能互补。有限状态的遗漏不能指望隐含完整历史补救，检索路线也要核算索引和读取成本。 教学例：终端任务已切换目录，CCM 需要及时保留当前路径；事后只搜相关旧日志，可能找出命令却漏掉路径已经变化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-70af81e05a5b670f">privileged full-history teacher 与部署学生的可见信息为什么不同？</h2>
+<h2 id="qa-70af81e05a5b670f">每轮维护有界状态，与只在回答前检索几条历史，在信息管理时机上有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Accm">Continuous Context Management</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Miami</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>教师可在训练侧用完整历史提供更可靠监督，学生则必须仅凭受限上下文学习行动和记忆更新。若把教师历史直接传给学生，会消除所需信息瓶颈；训练监督更强也不表示部署时获得同样信息，效果应在真实受限路径评估。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如教师知道前十轮的全部细节，可指导学生保留关键事实，但测试学生仍只能读取自己维护的短 memory。</p>
+<p><strong>答案：</strong>CCM 把记忆更新纳入每轮行动，当前保留什么会影响下一轮可见状态；只在回答前检索则把主要选择放到查询时，并依赖外部历史索引。二者改变信息瓶颈出现的位置，可能互补。有限状态的遗漏不能指望隐含完整历史补救，检索路线也要核算索引和读取成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：终端任务已切换目录，CCM 需要及时保留当前路径；事后只搜相关旧日志，可能找出命令却漏掉路径已经变化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.35540">原论文</a> · <a href="../../../../agent-research/2609.35540-ccm/">实现解读</a> · <a href="#qa-70af81e05a5b670f">问题链接</a></p>
 </details>
@@ -1167,15 +1167,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36059">原论文</a> · <a href="../../../../agent-research/2609.36059-mnemon/">实现解读</a> · <a href="#qa-42c0610048928da3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mnemon" data-paper-title="Mnemon: Raw Records, Fast Judgments, Slow Thoughts" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Mnemon: Raw Records, Fast Judgments, Slow Thoughts Agent 原文未列机构 2026-09-28 保存原始带日期记录，由慢速规划生成搜索、快速 Jev 判断记录是否需要，再在预算内构造供原回答模型使用的小视图。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 raw-record 检索和有界 view；未加载 Jev checkpoint 或复述 LoCoMo 分数。执行 raw-record 检索和有界 view；未加载 Jev checkpoint 或复述 LoCoMo 分数。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  长期记忆 Jev System 1/2 Agent 记忆与技能：让经验可取回、可失效 慢规划与快速记录判断相比，用一个模型一步做完检索有什么取舍？ 分工让较昂贵推理决定搜索方向、较便宜判断筛候选，试图降低大量记录逐条处理成本。一阶段可更简单，却可能在搜索策略或细筛上花不均衡预算；实际优势取决于判断器可靠性与总调用成本，不能由快慢命名直接得出。 例如先规划“找三月会议改期”，再快速淘汰无关生日记录；若快判误删真正改期记录，慢规划也无法弥补。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mnemon" data-paper-title="Mnemon: Raw Records, Fast Judgments, Slow Thoughts" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Mnemon: Raw Records, Fast Judgments, Slow Thoughts Agent 原文未列机构 2026-09-28 保存原始带日期记录，由慢速规划生成搜索、快速 Jev 判断记录是否需要，再在预算内构造供原回答模型使用的小视图。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 raw-record 检索和有界 view；未加载 Jev checkpoint 或复述 LoCoMo 分数。执行 raw-record 检索和有界 view；未加载 Jev checkpoint 或复述 LoCoMo 分数。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  长期记忆 Jev System 1/2 Agent 记忆与技能：让经验可取回、可失效 保留原始带日期记录，与持续重写一份长期摘要，在可追溯性上有何取舍？ 原始记录保留具体措辞、时间和细节，可按不同问题重新筛选，但占存储且需要查询时阅读；持续摘要更紧凑，却可能在重写中抹去来源或少见细节。Mnemon 从原记录构造预算内视图，视图只是本次选择，不能视为对全部历史的永久无损替代。 教学例：摘要写“客户倾向方案甲”，原邮件却注明“仅本季度”；后续问下一季度时，需要回到带日期的原记录核对。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-1831a12ab0dad173">慢规划与快速记录判断相比，用一个模型一步做完检索有什么取舍？</h2>
+<h2 id="qa-1831a12ab0dad173">保留原始带日期记录，与持续重写一份长期摘要，在可追溯性上有何取舍？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amnemon">Mnemon: Raw Records, Fast Judgments, Slow Thoughts</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文未列机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>分工让较昂贵推理决定搜索方向、较便宜判断筛候选，试图降低大量记录逐条处理成本。一阶段可更简单，却可能在搜索策略或细筛上花不均衡预算；实际优势取决于判断器可靠性与总调用成本，不能由快慢命名直接得出。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先规划“找三月会议改期”，再快速淘汰无关生日记录；若快判误删真正改期记录，慢规划也无法弥补。</p>
+<p><strong>答案：</strong>原始记录保留具体措辞、时间和细节，可按不同问题重新筛选，但占存储且需要查询时阅读；持续摘要更紧凑，却可能在重写中抹去来源或少见细节。Mnemon 从原记录构造预算内视图，视图只是本次选择，不能视为对全部历史的永久无损替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：摘要写“客户倾向方案甲”，原邮件却注明“仅本季度”；后续问下一季度时，需要回到带日期的原记录核对。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36059">原论文</a> · <a href="../../../../agent-research/2609.36059-mnemon/">实现解读</a> · <a href="#qa-1831a12ab0dad173">问题链接</a></p>
 </details>
@@ -1193,16 +1193,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36059">原论文</a> · <a href="../../../../agent-research/2609.36059-mnemon/">实现解读</a> · <a href="#qa-421fc3dc6770c6a3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evoskill-gui" data-paper-title="Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents Agent Zhejiang University 2026-09-15 把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只从公开 observation 读证据并演示受限技能修订；未运行 MobileWorld/AndroidWorld/OSWorld。本地只从公开 observation 读证据并演示受限技能修订；未运行 MobileWorld/AndroidWorld/OSWorld。  GUI Agent 技能进化 Agent 记忆与技能：让经验可取回、可失效 GUI 技能为什么拆成可编辑组件，而不是一段不可分脚本？ 组件化让失败能定位到感知、条件、动作或验证等责任环节，修订时只改相关部分，降低无关步骤回归风险。完整技能仍需在实际 GUI 状态下验证，组件接口合法不表示屏幕定位或操作语义可靠，也不能把所有失败都归给最后一步动作。 例如登录失败来自按钮位置变化时，可改定位组件，不必把凭据处理和后续导航全部重写。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evoskill-gui" data-paper-title="Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents Agent Zhejiang University 2026-09-15 把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只从公开 observation 读证据并演示受限技能修订；未运行 MobileWorld/AndroidWorld/OSWorld。本地只从公开 observation 读证据并演示受限技能修订；未运行 MobileWorld/AndroidWorld/OSWorld。  GUI Agent 技能进化 Agent 记忆与技能：让经验可取回、可失效 GUI 技能为什么容易随界面和任务变化而失效？ 按钮位置、页面顺序和操作前提可能改变，一份曾成功的技能不保证在新状态下还能执行。EvoSkill-GUI 关注失败后怎样把经验变成可验证的技能改进，再复用于后续任务；训练免费也不意味着不需要真实观察和执行验证。 例如旧技能依赖右上角按钮，新界面把按钮移到菜单中，照搬轨迹会失败，需要依据当次屏幕修改相应经验。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-evoskill-gui-aeb4c952" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-37640d1b810cdf3f">GUI 技能为什么拆成可编辑组件，而不是一段不可分脚本？</h2>
+<h2 id="qa-37640d1b810cdf3f">GUI 技能为什么容易随界面和任务变化而失效？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aevoskill-gui">Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Zhejiang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>组件化让失败能定位到感知、条件、动作或验证等责任环节，修订时只改相关部分，降低无关步骤回归风险。完整技能仍需在实际 GUI 状态下验证，组件接口合法不表示屏幕定位或操作语义可靠，也不能把所有失败都归给最后一步动作。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如登录失败来自按钮位置变化时，可改定位组件，不必把凭据处理和后续导航全部重写。</p>
+<p><strong>答案：</strong>按钮位置、页面顺序和操作前提可能改变，一份曾成功的技能不保证在新状态下还能执行。EvoSkill-GUI 关注失败后怎样把经验变成可验证的技能改进，再复用于后续任务；训练免费也不意味着不需要真实观察和执行验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如旧技能依赖右上角按钮，新界面把按钮移到菜单中，照搬轨迹会失败，需要依据当次屏幕修改相应经验。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17653">原论文</a> · <a href="../../../../agent-research/2609.17653-evoskill-gui/">实现解读</a> · <a href="#qa-37640d1b810cdf3f">问题链接</a></p>
 </details>
@@ -1246,16 +1246,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17653">原论文</a> · <a href="../../../../agent-research/2609.17653-evoskill-gui/">实现解读</a> · <a href="#qa-8dc3dffbfabb507d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:interactive-memory" data-paper-title="Interactive Memory Learning for Long-Term Conversations" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Interactive Memory Learning for Long-Term Conversations Agent Harbin Institute of Technology, Shenzhen / Pengcheng Laboratory 2026-09-15 Planner 决定写入高价值记忆，Trigger 决定何时取回，两者通过跨会话延迟奖励共同演化。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 observation-safe Planner/Trigger 延迟奖励状态机；未训练论文规模对话 Agent。本地执行 observation-safe Planner/Trigger 延迟奖励状态机；未训练论文规模对话 Agent。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  长期记忆 多 Agent 强化学习 Agent 记忆与技能：让经验可取回、可失效 Planner 写入与 Trigger 取回为何需要共同学习？ 写入决定未来有哪些信息可用，触发决定何时把它带入当前对话，两者对最终回答共同负责。仅优化写入可能存了很多却从不取回，仅优化触发又可能找不到没保存的事实；跨会话延迟奖励将早期选择与后续用途联系起来。 例如用户第一天提到食物过敏，Planner 要保存，第三天点餐时 Trigger 要适时取回，任一环节失效都会影响回答。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:interactive-memory" data-paper-title="Interactive Memory Learning for Long-Term Conversations" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Interactive Memory Learning for Long-Term Conversations Agent Harbin Institute of Technology, Shenzhen / Pengcheng Laboratory 2026-09-15 Planner 决定写入高价值记忆，Trigger 决定何时取回，两者通过跨会话延迟奖励共同演化。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 observation-safe Planner/Trigger 延迟奖励状态机；未训练论文规模对话 Agent。本地执行 observation-safe Planner/Trigger 延迟奖励状态机；未训练论文规模对话 Agent。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  长期记忆 多 Agent 强化学习 Agent 记忆与技能：让经验可取回、可失效 跨会话助理为什么很难在第一天就知道哪些信息第三天才有用？ 未来请求尚未发生，当前写入者需要根据已见对话选择可能长期有价值的内容，之后读取者还要在合适情境取回。Interactive Memory 把这段长期交互视为学习问题，通过未来实际用途评价早期记忆决策，而不是提前给出未来问题。 例如第一天用户随口提到不吃花生，第三天才让助理安排餐食；这条短信息的重要性要在后续交互中体现。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-interactive-memory-e350b33d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-705ddd2a1311bf6e">Planner 写入与 Trigger 取回为何需要共同学习？</h2>
+<h2 id="qa-705ddd2a1311bf6e">跨会话助理为什么很难在第一天就知道哪些信息第三天才有用？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ainteractive-memory">Interactive Memory Learning for Long-Term Conversations</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Harbin Institute of Technology, Shenzhen / Pengcheng Laboratory</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>写入决定未来有哪些信息可用，触发决定何时把它带入当前对话，两者对最终回答共同负责。仅优化写入可能存了很多却从不取回，仅优化触发又可能找不到没保存的事实；跨会话延迟奖励将早期选择与后续用途联系起来。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户第一天提到食物过敏，Planner 要保存，第三天点餐时 Trigger 要适时取回，任一环节失效都会影响回答。</p>
+<p><strong>答案：</strong>未来请求尚未发生，当前写入者需要根据已见对话选择可能长期有价值的内容，之后读取者还要在合适情境取回。Interactive Memory 把这段长期交互视为学习问题，通过未来实际用途评价早期记忆决策，而不是提前给出未来问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如第一天用户随口提到不吃花生，第三天才让助理安排餐食；这条短信息的重要性要在后续交互中体现。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与实现对应；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17088">原论文</a> · <a href="../../../../agent-research/2609.17088-interactive-memory/">实现解读</a> · <a href="#qa-705ddd2a1311bf6e">问题链接</a></p>
 </details>
@@ -1299,16 +1299,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17088">原论文</a> · <a href="../../../../agent-research/2609.17088-interactive-memory/">实现解读</a> · <a href="#qa-210029a079c17858">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:grounded-memory" data-paper-title="Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents Agent Microsoft 2026-09-09 给异步记忆 curator 最小权限只读工具，在写入前验证、限定作用域并刷新候选记忆。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行重复探测、冲突拒绝和记忆准入；未连接 GitHub Copilot SDK。本地执行重复探测、冲突拒绝和记忆准入；未连接 GitHub Copilot SDK。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  Agent 记忆 环境探测 Agent 记忆与技能：让经验可取回、可失效 为什么记忆 curator 写入前也要探测当前环境？ 执行轨迹里的说法可能过时、不完整或只是一次偶然状态，直接写入会把错误长期固化。curator 用最小权限只读工具验证、限定作用域并刷新候选，使记忆带有环境证据；只读并不保证结论永久有效，仍需时间与适用范围。 例如曾经失败的 API 可能只是临时权限问题，写成“这个工具不可用”前应只读检查当前配置和作用域。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:grounded-memory" data-paper-title="Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents Agent Microsoft 2026-09-09 给异步记忆 curator 最小权限只读工具，在写入前验证、限定作用域并刷新候选记忆。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行重复探测、冲突拒绝和记忆准入；未连接 GitHub Copilot SDK。本地执行重复探测、冲突拒绝和记忆准入；未连接 GitHub Copilot SDK。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  Agent 记忆 环境探测 Agent 记忆与技能：让经验可取回、可失效 企业 Agent 为什么不能把一次执行后的猜测直接当长期知识？ 权限、配置和接口状态会变，一次失败也可能来自临时条件。Grounded Memory 希望持久经验有可追溯的环境依据和适用范围，避免把臆测传播给后续任务；记住内容只是第一步，还要知道它何时、在什么环境下成立。 例如某仓库暂时访问失败，直接记成“这个服务永远不可用”会误导未来工作，长期结论需要更明确的状态证据。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-grounded-memory-32bdf0be" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-987d0970e9c03a33">为什么记忆 curator 写入前也要探测当前环境？</h2>
+<h2 id="qa-987d0970e9c03a33">企业 Agent 为什么不能把一次执行后的猜测直接当长期知识？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agrounded-memory">Grounding Agent Memory: Environment-Probing Curation for Enterprise Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>执行轨迹里的说法可能过时、不完整或只是一次偶然状态，直接写入会把错误长期固化。curator 用最小权限只读工具验证、限定作用域并刷新候选，使记忆带有环境证据；只读并不保证结论永久有效，仍需时间与适用范围。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如曾经失败的 API 可能只是临时权限问题，写成“这个工具不可用”前应只读检查当前配置和作用域。</p>
+<p><strong>答案：</strong>权限、配置和接口状态会变，一次失败也可能来自临时条件。Grounded Memory 希望持久经验有可追溯的环境依据和适用范围，避免把臆测传播给后续任务；记住内容只是第一步，还要知道它何时、在什么环境下成立。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如某仓库暂时访问失败，直接记成“这个服务永远不可用”会误导未来工作，长期结论需要更明确的状态证据。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11060">原论文</a> · <a href="../../../../agent-research/2609.11060-grounded-memory/">实现解读</a> · <a href="#qa-987d0970e9c03a33">问题链接</a></p>
 </details>
@@ -1352,16 +1352,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11060">原论文</a> · <a href="../../../../agent-research/2609.11060-grounded-memory/">实现解读</a> · <a href="#qa-84beb1f3d4030a3e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:skill-retention" data-paper-title="When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents Agent Manulife 2026-09-09 混合真实样本 replay 与 embedding anchor/LwF 类正则，防止合成技能数据微调破坏真实和 OOD 路由能力。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行真实路线 anchor、冲突惩罚和 replay；未训练 34,396 技能的 0.6B 模型。本地执行真实路线 anchor、冲突惩罚和 replay；未训练 34,396 技能的 0.6B 模型。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  技能检索 灾难性遗忘 Agent 记忆与技能：让经验可取回、可失效 合成技能数据为什么可能让技能检索器遗忘真实路由？ 合成分布可能在措辞、任务结构和难度上偏离真实使用，微调若只优化它，会改变原来有用的表示或排序边界。训练损失下降因此不代表真实和 OOD 检索保留；研究把真实 replay 与旧表示约束结合，关注新旧能力的共同表现。 例如合成任务总用标准函数名，真实用户却用口语描述，检索器可能学会新模板却忘了口语到技能的对应。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:skill-retention" data-paper-title="When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents Agent Manulife 2026-09-09 混合真实样本 replay 与 embedding anchor/LwF 类正则，防止合成技能数据微调破坏真实和 OOD 路由能力。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行真实路线 anchor、冲突惩罚和 replay；未训练 34,396 技能的 0.6B 模型。本地执行真实路线 anchor、冲突惩罚和 replay；未训练 34,396 技能的 0.6B 模型。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  技能检索 灾难性遗忘 Agent 记忆与技能：让经验可取回、可失效 训练技能检索器时，为什么要同时看新增技能和原有用户需求？ 新增数据让模型适应新的技能目录，但实际服务仍会遇到原先熟悉的真实和域外请求。研究关注学习新内容时如何保留旧路由能力，而不只追求新训练集损失；模型在新增任务上变好并不能抵消把已有使用方式遗忘的代价。 例如合成样例都写标准函数名，新模型答得很好，但真实用户仍用口语描述需求，原有查询不能因此被当作过时。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-skill-retention-6ccb63cf" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c8463c103cf3df10">合成技能数据为什么可能让技能检索器遗忘真实路由？</h2>
+<h2 id="qa-c8463c103cf3df10">训练技能检索器时，为什么要同时看新增技能和原有用户需求？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Askill-retention">When Synthetic Data Hurts: On Catastrophic Forgetting in Skill Retrieval for LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Manulife</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>合成分布可能在措辞、任务结构和难度上偏离真实使用，微调若只优化它，会改变原来有用的表示或排序边界。训练损失下降因此不代表真实和 OOD 检索保留；研究把真实 replay 与旧表示约束结合，关注新旧能力的共同表现。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如合成任务总用标准函数名，真实用户却用口语描述，检索器可能学会新模板却忘了口语到技能的对应。</p>
+<p><strong>答案：</strong>新增数据让模型适应新的技能目录，但实际服务仍会遇到原先熟悉的真实和域外请求。研究关注学习新内容时如何保留旧路由能力，而不只追求新训练集损失；模型在新增任务上变好并不能抵消把已有使用方式遗忘的代价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如合成样例都写标准函数名，新模型答得很好，但真实用户仍用口语描述需求，原有查询不能因此被当作过时。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.10750">原论文</a> · <a href="../../../../agent-research/2609.10750-skill-retention/">实现解读</a> · <a href="#qa-c8463c103cf3df10">问题链接</a></p>
 </details>
@@ -1405,16 +1405,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.10750">原论文</a> · <a href="../../../../agent-research/2609.10750-skill-retention/">实现解读</a> · <a href="#qa-a1783c4ed93b7227">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memforest" data-paper-title="MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging Agent Shanghai Jiao Tong University 2026-09-08 MemForest 不把全部历史压进一条摘要，而是先按事件切分成多棵树，再在容量压力下渐进合并节点。查询从语义 anchor 出发向邻域传播，保留时间结构和跨事件关联。 复现级别：公开观察解析诊断。复现级别：公开观察解析诊断。实现事件分区、渐进合并与 anchor 邻域检索；语义相似度用词项重叠近似。三种子结果见 metrics/mini-suite-seeds42-44.json。本地 EventTree 是紧凑 CPU 数据结构，使用 token Jaccard 选择树并真实执行压缩；未运行作者 embedding、LLM 摘要器或长程 benchmark。  事件树记忆压缩 Agent 记忆与技能：让经验可取回、可失效 为什么按事件形成多棵树，而不把全部历史压成一条摘要？ 不同事件有各自时间与语义结构，多树可让局部容量压力在事件内渐进合并，保留跨事件关联而避免一次全局摘要抹平来源。它仍需选择合并层级和摘要，树形组织不是无损语义保证，过度合并可能丢失低频细节。 例如旅行计划和项目会议各成一棵树，查询改期时可以先进入相关事件，而不在一条混合总摘要中寻找。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memforest" data-paper-title="MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging Agent Shanghai Jiao Tong University 2026-09-08 MemForest 不把全部历史压进一条摘要，而是先按事件切分成多棵树，再在容量压力下渐进合并节点。查询从语义 anchor 出发向邻域传播，保留时间结构和跨事件关联。 复现级别：公开观察解析诊断。复现级别：公开观察解析诊断。实现事件分区、渐进合并与 anchor 邻域检索；语义相似度用词项重叠近似。三种子结果见 metrics/mini-suite-seeds42-44.json。本地 EventTree 是紧凑 CPU 数据结构，使用 token Jaccard 选择树并真实执行压缩；未运行作者 embedding、LLM 摘要器或长程 benchmark。  事件树记忆压缩 Agent 记忆与技能：让经验可取回、可失效 长期记忆为什么需要同时支持概览和回到具体事件？ 历史很长时只读原文成本高，只读总摘要又可能找不到某次决定的来源。MemForest 研究让事件保持局部组织，并在容量压力下逐级压缩，查询时仍能沿联系回到证据；目标是在可扩展性与可追踪细节之间取得平衡。 例如用户问上个月哪次会议改了计划，系统既需知道相关事件属于哪一组，也要能够追到那次确认消息。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-memforest-6306606d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7faeaf7a8b79a728">为什么按事件形成多棵树，而不把全部历史压成一条摘要？</h2>
+<h2 id="qa-7faeaf7a8b79a728">长期记忆为什么需要同时支持概览和回到具体事件？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemforest">MemForest: Efficient Agent Memory Management via EventTree Partitioning and Progressive Merging</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai Jiao Tong University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不同事件有各自时间与语义结构，多树可让局部容量压力在事件内渐进合并，保留跨事件关联而避免一次全局摘要抹平来源。它仍需选择合并层级和摘要，树形组织不是无损语义保证，过度合并可能丢失低频细节。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如旅行计划和项目会议各成一棵树，查询改期时可以先进入相关事件，而不在一条混合总摘要中寻找。</p>
+<p><strong>答案：</strong>历史很长时只读原文成本高，只读总摘要又可能找不到某次决定的来源。MemForest 研究让事件保持局部组织，并在容量压力下逐级压缩，查询时仍能沿联系回到证据；目标是在可扩展性与可追踪细节之间取得平衡。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如用户问上个月哪次会议改了计划，系统既需知道相关事件属于哪一组，也要能够追到那次确认消息。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.08273">原论文</a> · <a href="../../../../agent-research/2609.08273-memforest/">实现解读</a> · <a href="#qa-7faeaf7a8b79a728">问题链接</a></p>
 </details>
@@ -1458,16 +1458,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.08273">原论文</a> · <a href="../../../../agent-research/2609.08273-memforest/">实现解读</a> · <a href="#qa-ff77fee8acfdac1a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:atomrec" data-paper-title="AtomRec: Evolving Atomic Memory for Agentic Recommendation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="AtomRec: Evolving Atomic Memory for Agentic Recommendation Agent Xi&#x27;an Jiaotong-Liverpool University 2026-09-04 粗粒度用户摘要会在重写时覆盖旧偏好，单一协同边又难以解释推荐。AtomRec 将用户和物品历史拆成可独立演化的原子字段，建立语义协同链接，并以多跳路径取回“为什么推荐”的证据。 复现级别：真实 checkpoint 原子记忆实验。复现级别：真实 checkpoint 原子记忆实验。冻结 Qwen 生成字段、语义链接、历史更新与候选排序，以模型隐状态作本地 encoder；不是原论文线上系统或完整基准复现。未获得原作者代码、提示词和完整实验配置；Qwen 隐状态不是论文的 SentenceT5，Amazon Beauty 也不代表 Xiaohongshu 线上分布。本地不声称复刻原系统或线上实验。旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；读取 answer、plan 或隐藏 required_tools 会在回归测试中报错。  Agentic recommendation memory Agent 记忆与技能：让经验可取回、可失效 原子字段记忆为什么比整份用户画像重写更易控制更新范围？ 用户和物品历史拆成可独立演化的字段后，新证据只修改命中的原子，避免一次摘要重写覆盖无关旧偏好。语义协同链接还支持多跳取回解释证据；字段细不自动保证真实，需要保留时间、来源和合法链接范围。 例如用户新近偏好轻便鞋，只更新鞋类重量字段，不应顺手覆盖长期的预算或过敏材质限制。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:atomrec" data-paper-title="AtomRec: Evolving Atomic Memory for Agentic Recommendation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="AtomRec: Evolving Atomic Memory for Agentic Recommendation Agent Xi&#x27;an Jiaotong-Liverpool University 2026-09-04 粗粒度用户摘要会在重写时覆盖旧偏好，单一协同边又难以解释推荐。AtomRec 将用户和物品历史拆成可独立演化的原子字段，建立语义协同链接，并以多跳路径取回“为什么推荐”的证据。 复现级别：真实 checkpoint 原子记忆实验。复现级别：真实 checkpoint 原子记忆实验。冻结 Qwen 生成字段、语义链接、历史更新与候选排序，以模型隐状态作本地 encoder；不是原论文线上系统或完整基准复现。未获得原作者代码、提示词和完整实验配置；Qwen 隐状态不是论文的 SentenceT5，Amazon Beauty 也不代表 Xiaohongshu 线上分布。本地不声称复刻原系统或线上实验。旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；读取 answer、plan 或隐藏 required_tools 会在回归测试中报错。  Agentic recommendation memory Agent 记忆与技能：让经验可取回、可失效 推荐助理为什么需要能追踪变化与依据的用户记忆？ 用户行为包含长期偏好、短期意图和具体物品反馈，混成一个固定画像会难以更新或解释。AtomRec 希望让推荐依据可细粒度演化，并通过历史关系说明候选为何相关；一次点击不自动代表长期喜好，记忆仍须保留情境与来源。 例如用户为送礼购买香水，不应据一次购买认定本人长期偏爱该香型，后续推荐需要区分这次意图与稳定偏好。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-atomrec-2a7b7ab5" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-351629bdd8e2893b">原子字段记忆为什么比整份用户画像重写更易控制更新范围？</h2>
+<h2 id="qa-351629bdd8e2893b">推荐助理为什么需要能追踪变化与依据的用户记忆？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aatomrec">AtomRec: Evolving Atomic Memory for Agentic Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Xi&#x27;an Jiaotong-Liverpool University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>用户和物品历史拆成可独立演化的字段后，新证据只修改命中的原子，避免一次摘要重写覆盖无关旧偏好。语义协同链接还支持多跳取回解释证据；字段细不自动保证真实，需要保留时间、来源和合法链接范围。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如用户新近偏好轻便鞋，只更新鞋类重量字段，不应顺手覆盖长期的预算或过敏材质限制。</p>
+<p><strong>答案：</strong>用户行为包含长期偏好、短期意图和具体物品反馈，混成一个固定画像会难以更新或解释。AtomRec 希望让推荐依据可细粒度演化，并通过历史关系说明候选为何相关；一次点击不自动代表长期喜好，记忆仍须保留情境与来源。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如用户为送礼购买香水，不应据一次购买认定本人长期偏爱该香型，后续推荐需要区分这次意图与稳定偏好。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04882">原论文</a> · <a href="../../../../agent-research/2609.04882-atomrec/">实现解读</a> · <a href="#qa-351629bdd8e2893b">问题链接</a></p>
 </details>
@@ -1657,15 +1657,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26895">原论文</a> · <a href="../../../../agent-research/2608.26895-covemem/">实现解读</a> · <a href="#qa-78cbec70ede61b68">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:covemem" data-paper-title="When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems Agent Shenzhen Technology University 2026-08-27 文本记忆要反复调用 LLM 重写，且丢掉全目录协同几何。CoVeMem 用冻结 LightGCN 状态构造 bank，由当前候选集检索相关历史，投影成 soft token，并通过语义对齐和 masked listwise 联训让 LLM 真正读取记忆。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现候选集检索、向量记忆 bank 和 soft-token read 诊断。未训练 LightGCN/LoRA checkpoint；本地验证候选条件向量读取和零文本重写控制流。ToolRoute-L2.1 三 seed：joint success 0.7708，plan F1 0.8004，平均成本 4.5197。  可训练协同记忆 Agent 记忆与技能：让经验可取回、可失效 masked listwise 联训为什么不能只用向量相似度代替？ 相似度选历史只是检索步骤，语义对齐与 masked listwise 目标用于让 LLM 真正利用记忆完成候选排序；省略它们会变成另一条纯向量路线。本地未训练 LightGCN 或 LoRA checkpoint，只验证候选条件读取和无文本重写控制流。 例如检索到三条相关历史后，语言模型若从未学过 soft token 含义，不能仅因张量已拼接就认定它会用来正确排序。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:covemem" data-paper-title="When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems Agent Shenzhen Technology University 2026-08-27 文本记忆要反复调用 LLM 重写，且丢掉全目录协同几何。CoVeMem 用冻结 LightGCN 状态构造 bank，由当前候选集检索相关历史，投影成 soft token，并通过语义对齐和 masked listwise 联训让 LLM 真正读取记忆。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现候选集检索、向量记忆 bank 和 soft-token read 诊断。未训练 LightGCN/LoRA checkpoint；本地验证候选条件向量读取和零文本重写控制流。ToolRoute-L2.1 三 seed：joint success 0.7708，plan F1 0.8004，平均成本 4.5197。  可训练协同记忆 Agent 记忆与技能：让经验可取回、可失效 候选集平均向量怎样决定本次从用户历史里读取哪些协同记忆？ 先由当前候选项在冻结协同 bank 中的表示形成均值，再用它为用户历史项打分并选取相关部分，随后经投影提供给 LLM。候选变化会改变检索需求，即使用户历史不变也可能选出不同记忆。本地验证了这种条件读取，未训练原文 LightGCN、连接器或 LoRA。 教学例：同一用户的候选从相机变为登山鞋，候选均值改变，历史中更相关的摄影或户外交互项也可能随之变化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-276bc00150e629ff">masked listwise 联训为什么不能只用向量相似度代替？</h2>
+<h2 id="qa-276bc00150e629ff">候选集平均向量怎样决定本次从用户历史里读取哪些协同记忆？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acovemem">When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Shenzhen Technology University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>相似度选历史只是检索步骤，语义对齐与 masked listwise 目标用于让 LLM 真正利用记忆完成候选排序；省略它们会变成另一条纯向量路线。本地未训练 LightGCN 或 LoRA checkpoint，只验证候选条件读取和无文本重写控制流。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如检索到三条相关历史后，语言模型若从未学过 soft token 含义，不能仅因张量已拼接就认定它会用来正确排序。</p>
+<p><strong>答案：</strong>先由当前候选项在冻结协同 bank 中的表示形成均值，再用它为用户历史项打分并选取相关部分，随后经投影提供给 LLM。候选变化会改变检索需求，即使用户历史不变也可能选出不同记忆。本地验证了这种条件读取，未训练原文 LightGCN、连接器或 LoRA。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一用户的候选从相机变为登山鞋，候选均值改变，历史中更相关的摄影或户外交互项也可能随之变化。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26895">原论文</a> · <a href="../../../../agent-research/2608.26895-covemem/">实现解读</a> · <a href="#qa-276bc00150e629ff">问题链接</a></p>
 </details>
@@ -1710,29 +1710,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26563">原论文</a> · <a href="../../../../agent-research/2608.26563-spt/">实现解读</a> · <a href="#qa-a101e15d0ef1c12a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:spt" data-paper-title="SPT: Skills as Pre-Training Data for Agentic Language Models" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SPT: Skills as Pre-Training Data for Agentic Language Models Agent Beijing University of Posts and Telecommunications 2026-08-27 Agent 轨迹昂贵且只描述一次执行；skill package 则显式编码可复用工作流。SPT 在 post-training 前对 SkillCorpus 做 causal LM mid-training，并把被引用文件插到主说明的首次引用附近。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现 skill package、Reference Insert 和跨任务技能先验。未训练真实 LLM checkpoint；本地验证多文件引用装配和技能先验对无 oracle 工具路由的影响。ToolRoute-L2.1 三 seed：joint success 0.8056，plan F1 0.8340，平均成本 4.9439。  Agent 技能预训练 Agent 记忆与技能：让经验可取回、可失效 引用文件为什么插在主说明首次引用附近，而不统一附在末尾？ 邻近插入保留主说明与具体材料的局部关联，帮助 causal LM 在需要的位置读取后续内容；同时按 α 混合 skill 与通用语料控制训练分布。本地仅验证多文件引用装配与无 oracle 路由影响，未训练真实 LLM checkpoint。 例如正文首次说“见配置样例”时立即插入样例，比文档末尾散放多个文件更容易保持引用对象和步骤的对应。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:spt" data-paper-title="SPT: Skills as Pre-Training Data for Agentic Language Models" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SPT: Skills as Pre-Training Data for Agentic Language Models Agent Beijing University of Posts and Telecommunications 2026-08-27 Agent 轨迹昂贵且只描述一次执行；skill package 则显式编码可复用工作流。SPT 在 post-training 前对 SkillCorpus 做 causal LM mid-training，并把被引用文件插到主说明的首次引用附近。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现 skill package、Reference Insert 和跨任务技能先验。未训练真实 LLM checkpoint；本地验证多文件引用装配和技能先验对无 oracle 工具路由的影响。ToolRoute-L2.1 三 seed：joint success 0.8056，plan F1 0.8340，平均成本 4.9439。  Agent 技能预训练 Agent 记忆与技能：让经验可取回、可失效 把 skill 数据混入中期训练时，为什么还要保留通用语料并显式控制比例？ 训练样本不仅决定模型学什么，也改变它常见的文本分布。按 α 混合技能包与通用语料，可控制程序性材料所占份额，不能把全部训练流替成技能文档而假定其他能力不变。本地只检查引用装配和混合合同，尚不能据此声称真实模型已保持通用能力或学会执行。 教学例：一个批次既含技能操作说明也含一般文本；调大技能比例会改变学习重点，需要后续实训评估，而不是只检查文件数量。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-ca6f583af366bb98">引用文件为什么插在主说明首次引用附近，而不统一附在末尾？</h2>
+<h2 id="qa-ca6f583af366bb98">把 skill 数据混入中期训练时，为什么还要保留通用语料并显式控制比例？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aspt">SPT: Skills as Pre-Training Data for Agentic Language Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beijing University of Posts and Telecommunications</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>邻近插入保留主说明与具体材料的局部关联，帮助 causal LM 在需要的位置读取后续内容；同时按 α 混合 skill 与通用语料控制训练分布。本地仅验证多文件引用装配与无 oracle 路由影响，未训练真实 LLM checkpoint。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如正文首次说“见配置样例”时立即插入样例，比文档末尾散放多个文件更容易保持引用对象和步骤的对应。</p>
+<p><strong>答案：</strong>训练样本不仅决定模型学什么，也改变它常见的文本分布。按 α 混合技能包与通用语料，可控制程序性材料所占份额，不能把全部训练流替成技能文档而假定其他能力不变。本地只检查引用装配和混合合同，尚不能据此声称真实模型已保持通用能力或学会执行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个批次既含技能操作说明也含一般文本；调大技能比例会改变学习重点，需要后续实训评估，而不是只检查文件数量。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26563">原论文</a> · <a href="../../../../agent-research/2608.26563-spt/">实现解读</a> · <a href="#qa-ca6f583af366bb98">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:caskg" data-paper-title="CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval Agent Jilin University / Ant Group 2026-08-26 先从语义、词法、I/O 和结构证据建高召回有向图，再以 remove、substitute、reorder 三类文本反事实探针校准边，Bayesian smoothing 后只发布可靠关系。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。CaSKG 从训练 split 学习可复用 skill 路由，在隔离 test 上结合图式记忆与候选验证调用工具。ToolRoute-L2.1 三 seed 的 joint success 为 0.8000，plan step F1 为 0.8327，平均成本 5.0116。  反事实因果技能图 Agent 记忆与技能：让经验可取回、可失效 为什么先建高召回技能图，再做反事实校准？ 语义、词法、I/O 和结构证据可以提出可能依赖，但相似或接口相连不一定真有用。CaSKG 先保留候选关系，再通过删除、替换、重排探针观察影响并平滑边可靠性，避免把初始图中的所有连接都直接发布为可靠技能关系。 例如两技能经常共现不代表先后必要，重排或移除探针可帮助检验当前任务中这条依赖是否值得保留。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:caskg" data-paper-title="CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval Agent Jilin University / Ant Group 2026-08-26 先从语义、词法、I/O 和结构证据建高召回有向图，再以 remove、substitute、reorder 三类文本反事实探针校准边，Bayesian smoothing 后只发布可靠关系。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。CaSKG 从训练 split 学习可复用 skill 路由，在隔离 test 上结合图式记忆与候选验证调用工具。ToolRoute-L2.1 三 seed 的 joint success 为 0.8000，plan step F1 为 0.8327，平均成本 5.0116。  反事实因果技能图 Agent 记忆与技能：让经验可取回、可失效 技能库变大后，为什么“找到几份相似技能”还不足以组成可执行方案？ 技能之间可能有顺序、输入输出与替代关系，相似描述并不说明能正确组合。CaSKG 研究怎样检索带有可靠关系的技能证据，减少看似相关却不可衔接的候选；关系可信度来自额外校准，不能仅凭文本相近宣称依赖成立。 例如查询和修改技能都与订单相关，但若修改需要先确认支付状态，缺少该关系的组合仍可能执行错误。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-caskg-e0c69536" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f00340222eb367d2">为什么先建高召回技能图，再做反事实校准？</h2>
+<h2 id="qa-f00340222eb367d2">技能库变大后，为什么“找到几份相似技能”还不足以组成可执行方案？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acaskg">CaSKG: Counterfactual-Causal Skill Graphs for Scalable Agent Skill Retrieval</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Jilin University / Ant Group</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>语义、词法、I/O 和结构证据可以提出可能依赖，但相似或接口相连不一定真有用。CaSKG 先保留候选关系，再通过删除、替换、重排探针观察影响并平滑边可靠性，避免把初始图中的所有连接都直接发布为可靠技能关系。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两技能经常共现不代表先后必要，重排或移除探针可帮助检验当前任务中这条依赖是否值得保留。</p>
+<p><strong>答案：</strong>技能之间可能有顺序、输入输出与替代关系，相似描述并不说明能正确组合。CaSKG 研究怎样检索带有可靠关系的技能证据，减少看似相关却不可衔接的候选；关系可信度来自额外校准，不能仅凭文本相近宣称依赖成立。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如查询和修改技能都与订单相关，但若修改需要先确认支付状态，缺少该关系的组合仍可能执行错误。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25500">原论文</a> · <a href="../../../../agent-research/2608.25500-caskg/">实现解读</a> · <a href="#qa-f00340222eb367d2">问题链接</a></p>
 </details>
@@ -1776,16 +1776,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25500">原论文</a> · <a href="../../../../agent-research/2608.25500-caskg/">实现解读</a> · <a href="#qa-8d9c99d17e5d0f4b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:skill-state" data-paper-title="SKILL.state: Scalable Long-Horizon Agent Skills" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SKILL.state: Scalable Long-Horizon Agent Skills Agent Google 2026-08-26 普通Agent把旧观察、动作和推理反复塞回下一轮。SKILL.state把可持续的信息投影到当前执行状态，每步只传技能说明、状态和最新观察；不是在完整对话外再加一个状态块。模型生成结构化patch和动作，运行时验证后提交，瞬时推理不保留。定义性流程见§3与算法1。 成本过高，不复现（审查 DONE）；actor与执行器由调用方注入，本地诊断只做公开计数事件和惰性动作回调；运行时实际执行递归合并、null删除、schema拒绝、原状态保留及有界重试。传入actor的是只含三种公共信息的不可变字符串视图，不包含gold、grader、旧回答或旧观察。actor与执行器由调用方注入，本地诊断只做公开计数事件和惰性动作回调；不是语言模型。  Agent运行时 显式执行状态与上下文控制 Agent 记忆与技能：让经验可取回、可失效 SKILL.state 为什么不把完整历史和显式状态同时送给模型？ 目标是以足够的结构化状态承接过去信息，下一轮只读技能说明、状态和最新观察；若仍附完整历史，就绕过状态覆盖要求并恢复上下文增长。该设计依赖 schema 能表达必要信息，历史本身是审计对象或 schema 不充分时可能不适合。 例如已完成步骤和待办写入状态后，下一轮不再重放十轮思考；遗漏订单号会真实影响后续，不能再从隐藏历史补回。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:skill-state" data-paper-title="SKILL.state: Scalable Long-Horizon Agent Skills" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SKILL.state: Scalable Long-Horizon Agent Skills Agent Google 2026-08-26 普通Agent把旧观察、动作和推理反复塞回下一轮。SKILL.state把可持续的信息投影到当前执行状态，每步只传技能说明、状态和最新观察；不是在完整对话外再加一个状态块。模型生成结构化patch和动作，运行时验证后提交，瞬时推理不保留。定义性流程见§3与算法1。 成本过高，不复现（审查 DONE）；actor与执行器由调用方注入，本地诊断只做公开计数事件和惰性动作回调；运行时实际执行递归合并、null删除、schema拒绝、原状态保留及有界重试。传入actor的是只含三种公共信息的不可变字符串视图，不包含gold、grader、旧回答或旧观察。actor与执行器由调用方注入，本地诊断只做公开计数事件和惰性动作回调；不是语言模型。  Agent运行时 显式执行状态与上下文控制 Agent 记忆与技能：让经验可取回、可失效 为什么长任务的“当前进度”不能只依赖模型从全部聊天中自行回忆？ 历史会增长且充满试错，接续执行需要明确已完成事项、仍未满足要求与关键资源。SKILL.state 关注把这些持续信息作为受约束执行状态维护，让新动作依据当前事实，而不是每轮重新推断全部历史；状态能否充分表达任务是关键前提。 例如修改三个文件后还剩一个失败测试，下一轮应明确这个待办，不能只从几十轮聊天里猜哪些步骤真正完成。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-skill-state-4eba9d90" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-dda177944e00eb4a">SKILL.state 为什么不把完整历史和显式状态同时送给模型？</h2>
+<h2 id="qa-dda177944e00eb4a">为什么长任务的“当前进度”不能只依赖模型从全部聊天中自行回忆？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Askill-state">SKILL.state: Scalable Long-Horizon Agent Skills</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>目标是以足够的结构化状态承接过去信息，下一轮只读技能说明、状态和最新观察；若仍附完整历史，就绕过状态覆盖要求并恢复上下文增长。该设计依赖 schema 能表达必要信息，历史本身是审计对象或 schema 不充分时可能不适合。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如已完成步骤和待办写入状态后，下一轮不再重放十轮思考；遗漏订单号会真实影响后续，不能再从隐藏历史补回。</p>
+<p><strong>答案：</strong>历史会增长且充满试错，接续执行需要明确已完成事项、仍未满足要求与关键资源。SKILL.state 关注把这些持续信息作为受约束执行状态维护，让新动作依据当前事实，而不是每轮重新推断全部历史；状态能否充分表达任务是关键前提。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如修改三个文件后还剩一个失败测试，下一轮应明确这个待办，不能只从几十轮聊天里猜哪些步骤真正完成。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26263">原论文</a> · <a href="../../../../agent-research/2608.26263-skill-state/">实现解读</a> · <a href="#qa-dda177944e00eb4a">问题链接</a></p>
 </details>
@@ -1829,16 +1829,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26263">原论文</a> · <a href="../../../../agent-research/2608.26263-skill-state/">实现解读</a> · <a href="#qa-f3d7aef13f674cc1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:skillforge" data-paper-title="SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents Agent AMAP, Alibaba Group 2026-08-25 SkillRL 类方法从轨迹提取技能后只追加，错误和过时技能会永久污染库。SkillForge 让 policy 输出环境动作时显式选择技能，把调用决策纳入 RL；成功、失败和对比轨迹经多路径 induction 生成候选，环境证据再决定激活、修订或去重。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。技能被显式调用，并根据环境证据更新 posterior 与修订状态。本地用结构化 plan 作为技能内容，执行调用、验证、posterior 与修订控制流；未运行 LLM teacher induction、ALFWorld/WebShop/AppWorld 或 RL 训练。PlanBench-mini 120 episodes：创建 12 个技能、复用 108 次，joint success 1.0000，平均成本 0.6200。  可验证技能锻造 Agent 记忆与技能：让经验可取回、可失效 为什么技能库不能从轨迹提取后永远只追加？ 成功经验可能只适用于旧环境，失败总结也可能错误，永久追加会让过时内容继续被调用。SkillForge 让环境证据决定激活、修订或去重，并把技能选择和环境动作一起作为策略输出；库变大并非进步，技能使用和内容都需持续检验。 例如旧版工具要求某参数，新版已废弃，该技能若只追加不修订，会在后续任务重复制造相同调用错误。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:skillforge" data-paper-title="SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents Agent AMAP, Alibaba Group 2026-08-25 SkillRL 类方法从轨迹提取技能后只追加，错误和过时技能会永久污染库。SkillForge 让 policy 输出环境动作时显式选择技能，把调用决策纳入 RL；成功、失败和对比轨迹经多路径 induction 生成候选，环境证据再决定激活、修订或去重。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。技能被显式调用，并根据环境证据更新 posterior 与修订状态。本地用结构化 plan 作为技能内容，执行调用、验证、posterior 与修订控制流；未运行 LLM teacher induction、ALFWorld/WebShop/AppWorld 或 RL 训练。PlanBench-mini 120 episodes：创建 12 个技能、复用 108 次，joint success 1.0000，平均成本 0.6200。  可验证技能锻造 Agent 记忆与技能：让经验可取回、可失效 SkillForge 为什么让 Agent 学会选用技能，而不只拥有一份技能目录？ 目录中有程序性知识并不代表策略会在合适时机使用，技能可能被忽略、误用或与当前状态不匹配。SkillForge 把技能调用决策纳入行动学习，并从执行经历持续改善内容，关注知识与策略真正协作，而不是单纯增加文档数量。 例如已存“先校验输入再导入”技能，但 Agent 每次直接导入，库再完整也没有实际帮助，选择行为需要受到任务反馈。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-skillforge-0aa71f73" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-06b43e737dc5b20f">为什么技能库不能从轨迹提取后永远只追加？</h2>
+<h2 id="qa-06b43e737dc5b20f">SkillForge 为什么让 Agent 学会选用技能，而不只拥有一份技能目录？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Askillforge">SkillForge: Automated Skill Discovery and Refinement for Tool-Using Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · AMAP, Alibaba Group</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>成功经验可能只适用于旧环境，失败总结也可能错误，永久追加会让过时内容继续被调用。SkillForge 让环境证据决定激活、修订或去重，并把技能选择和环境动作一起作为策略输出；库变大并非进步，技能使用和内容都需持续检验。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如旧版工具要求某参数，新版已废弃，该技能若只追加不修订，会在后续任务重复制造相同调用错误。</p>
+<p><strong>答案：</strong>目录中有程序性知识并不代表策略会在合适时机使用，技能可能被忽略、误用或与当前状态不匹配。SkillForge 把技能调用决策纳入行动学习，并从执行经历持续改善内容，关注知识与策略真正协作，而不是单纯增加文档数量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如已存“先校验输入再导入”技能，但 Agent 每次直接导入，库再完整也没有实际帮助，选择行为需要受到任务反馈。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24747">原论文</a> · <a href="../../../../agent-research/2608.24747-skillforge/">实现解读</a> · <a href="#qa-06b43e737dc5b20f">问题链接</a></p>
 </details>
@@ -1882,16 +1882,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24747">原论文</a> · <a href="../../../../agent-research/2608.24747-skillforge/">实现解读</a> · <a href="#qa-06647be6cbb7bceb">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hymem" data-paper-title="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation Agent Institute of Automation, Chinese Academy of Sciences 2026-08-16 把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  记忆 长时序 Agent Agent 记忆与技能：让经验可取回、可失效 planning、execution 与 isolated reasoning 为什么分别维护上下文？ 规划关注全局目标，执行处理具体工具状态，隔离推理承接局部分析，分层可避免每轮把所有细节互相污染。结构化进展摘要在 refresh 时保留必要联系；隔离不是删除证据，层间仍需公开结果接口，否则规划可能失去实际执行状态。 例如执行层产生长测试日志，只将失败类型和文件位置回传规划层，局部分析另开上下文而不反复复制全部日志。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hymem" data-paper-title="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation Agent Institute of Automation, Chinese Academy of Sciences 2026-08-16 把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  记忆 长时序 Agent Agent 记忆与技能：让经验可取回、可失效 多阶段长任务为什么容易把无关局部细节带进全局决策？ 搜索、执行和推理产生的材料很多，若所有内容不断进入同一上下文，规划可能被旧日志或临时假设干扰。HyMem 研究怎样让不同工作阶段保留适合自己的信息，并通过进展记录接续，目标是让必要证据流动而不是一律共享全部文本。 例如一个编译错误的数百行日志对修复者有用，规划下一研究方向时可能只需失败原因和受影响模块。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-hymem-ebf0c9bb" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-6f117905da9d1b3c">planning、execution 与 isolated reasoning 为什么分别维护上下文？</h2>
+<h2 id="qa-6f117905da9d1b3c">多阶段长任务为什么容易把无关局部细节带进全局决策？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahymem">HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Automation, Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>规划关注全局目标，执行处理具体工具状态，隔离推理承接局部分析，分层可避免每轮把所有细节互相污染。结构化进展摘要在 refresh 时保留必要联系；隔离不是删除证据，层间仍需公开结果接口，否则规划可能失去实际执行状态。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如执行层产生长测试日志，只将失败类型和文件位置回传规划层，局部分析另开上下文而不反复复制全部日志。</p>
+<p><strong>答案：</strong>搜索、执行和推理产生的材料很多，若所有内容不断进入同一上下文，规划可能被旧日志或临时假设干扰。HyMem 研究怎样让不同工作阶段保留适合自己的信息，并通过进展记录接续，目标是让必要证据流动而不是一律共享全部文本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如一个编译错误的数百行日志对修复者有用，规划下一研究方向时可能只需失败原因和受影响模块。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15703">原论文</a> · <a href="../../../../agent-research/2608.15703-hymem/">实现解读</a> · <a href="#qa-6f117905da9d1b3c">问题链接</a></p>
 </details>
@@ -1909,15 +1909,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15703">原论文</a> · <a href="../../../../agent-research/2608.15703-hymem/">实现解读</a> · <a href="#qa-79c1cf512c450ba6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hymem" data-paper-title="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation Agent Institute of Automation, Chinese Academy of Sciences 2026-08-16 把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  记忆 长时序 Agent Agent 记忆与技能：让经验可取回、可失效 分层隔离与单一长历史相比，主要改变什么信息流？ 单一历史让所有角色持续读取同一增长序列，分层方式限制各层可见范围并用摘要交接。它可能降低重复输入，也依赖摘要足够保留事实，不能仅按短上下文推断更高成功率；需要把摘要遗漏和层间失配作为实际风险评估。 例如规划层只见“测试失败”却没见失败文件，就可能派错下一步；层级结构本身无法补上过于粗糙的摘要。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hymem" data-paper-title="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation Agent Institute of Automation, Chinese Academy of Sciences 2026-08-16 把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  记忆 长时序 Agent Agent 记忆与技能：让经验可取回、可失效 结构化进展摘要与转发原始执行日志，作为层间交接时分别保留什么？ 原始日志保留细节但夹杂大量局部尝试，接收层还需自行判断哪些影响目标；结构化进展摘要提炼已完成事项、当前状态和待办，让全局规划获得较稳定入口。压缩也可能漏掉关键限制，因此应检查交接信息是否足以接续，而不能只按日志缩短比例判断质量。 教学例：几十条安装日志可交接为“依赖已装，测试因缺凭据未跑”；若只写“安装成功”，规划层就可能误以为验证也完成。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-6af66bb3ebb4bbd4">分层隔离与单一长历史相比，主要改变什么信息流？</h2>
+<h2 id="qa-6af66bb3ebb4bbd4">结构化进展摘要与转发原始执行日志，作为层间交接时分别保留什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahymem">HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Automation, Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>单一历史让所有角色持续读取同一增长序列，分层方式限制各层可见范围并用摘要交接。它可能降低重复输入，也依赖摘要足够保留事实，不能仅按短上下文推断更高成功率；需要把摘要遗漏和层间失配作为实际风险评估。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如规划层只见“测试失败”却没见失败文件，就可能派错下一步；层级结构本身无法补上过于粗糙的摘要。</p>
+<p><strong>答案：</strong>原始日志保留细节但夹杂大量局部尝试，接收层还需自行判断哪些影响目标；结构化进展摘要提炼已完成事项、当前状态和待办，让全局规划获得较稳定入口。压缩也可能漏掉关键限制，因此应检查交接信息是否足以接续，而不能只按日志缩短比例判断质量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：几十条安装日志可交接为“依赖已装，测试因缺凭据未跑”；若只写“安装成功”，规划层就可能误以为验证也完成。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15703">原论文</a> · <a href="../../../../agent-research/2608.15703-hymem/">实现解读</a> · <a href="#qa-6af66bb3ebb4bbd4">问题链接</a></p>
 </details>
@@ -1962,15 +1962,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06153">原论文</a> · <a href="../../../../agent-research/2608.06153-gse/">实现解读</a> · <a href="#qa-08e42839803cd827">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gse" data-paper-title="Learning Globally Reusable Skills for Coding Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Learning Globally Reusable Skills for Coding Agents Agent Tianjin University 2026-08-06 主题：全局技能进化。GSE 用 Skill Relation Graph 显式维护技能关系，以聚类合并局部经验，并通过 replay verification 防止过拟合与行为回退。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的全局技能进化算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  全局技能进化 Agent 记忆与技能：让经验可取回、可失效 聚类合并后 replay verification 与只看新任务成功有何区别？ 新任务成功只说明候选适合当前情境，replay 重新检查已有行为，帮助发现抽象后回归。它约束全局复用的代价，仍受回放任务覆盖限制；不能因为少量旧 case 都通过就声称所有任务都不退化。 例如合并后的技能简化了安装步骤，在新仓库通过，却可能删掉旧仓库必要环境变量；旧轨迹回放可以暴露该问题。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gse" data-paper-title="Learning Globally Reusable Skills for Coding Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Learning Globally Reusable Skills for Coding Agents Agent Tianjin University 2026-08-06 主题：全局技能进化。GSE 用 Skill Relation Graph 显式维护技能关系，以聚类合并局部经验，并通过 replay verification 防止过拟合与行为回退。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的全局技能进化算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  全局技能进化 Agent 记忆与技能：让经验可取回、可失效 全局技能整合与独立追加每次任务经验，对技能库结构有什么不同影响？ 独立追加保留局部细节，却可能积累描述接近、前提不同或相互冲突的技能；全局整合利用关系图发现这些联系，再形成更可复用的抽象。合并不是只做文本去重，必须保留必要条件并验证旧行为；库更小或关系更紧凑都不能单独证明执行更好。 教学例：两次导出任务都涉及保存文件，但一种要求加密，另一种要求公开；全局整理要保留条件，而不是合成“全部公开”。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-a4e90ad057a46e13">聚类合并后 replay verification 与只看新任务成功有何区别？</h2>
+<h2 id="qa-a4e90ad057a46e13">全局技能整合与独立追加每次任务经验，对技能库结构有什么不同影响？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agse">Learning Globally Reusable Skills for Coding Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tianjin University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>新任务成功只说明候选适合当前情境，replay 重新检查已有行为，帮助发现抽象后回归。它约束全局复用的代价，仍受回放任务覆盖限制；不能因为少量旧 case 都通过就声称所有任务都不退化。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如合并后的技能简化了安装步骤，在新仓库通过，却可能删掉旧仓库必要环境变量；旧轨迹回放可以暴露该问题。</p>
+<p><strong>答案：</strong>独立追加保留局部细节，却可能积累描述接近、前提不同或相互冲突的技能；全局整合利用关系图发现这些联系，再形成更可复用的抽象。合并不是只做文本去重，必须保留必要条件并验证旧行为；库更小或关系更紧凑都不能单独证明执行更好。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两次导出任务都涉及保存文件，但一种要求加密，另一种要求公开；全局整理要保留条件，而不是合成“全部公开”。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06153">原论文</a> · <a href="../../../../agent-research/2608.06153-gse/">实现解读</a> · <a href="#qa-a4e90ad057a46e13">问题链接</a></p>
 </details>
@@ -1988,16 +1988,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06153">原论文</a> · <a href="../../../../agent-research/2608.06153-gse/">实现解读</a> · <a href="#qa-a3a2c16881999ef1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:vag" data-paper-title="When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents Agent 论文未列机构 2026-08-06 主题：技能进化安全。技能一旦进入上下文会污染后代，事后删除无法彻底回滚。VaG 在写入前依次做结构、行为无害性、语义一致性验证，再以边际收益选择可共同使用的 Hot 技能集合。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的技能进化安全算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  技能进化安全 Agent 记忆与技能：让经验可取回、可失效 技能污染为什么可能在删除原技能后继续存在？ 有害技能进入上下文后可能影响后续生成的技能与决策，污染已传播到后代，删除最初记录不等于回滚全部衍生影响。VaG 因而在写入前验证，试图阻止污染进入持久循环；它仍依赖验证覆盖，不能保证检测所有语义风险。 例如一份错误提交规则被总结进三份后续技能，只删原文件时，三个派生版本仍会继续传播同样错误。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:vag" data-paper-title="When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents Agent 论文未列机构 2026-08-06 主题：技能进化安全。技能一旦进入上下文会污染后代，事后删除无法彻底回滚。VaG 在写入前依次做结构、行为无害性、语义一致性验证，再以边际收益选择可共同使用的 Hot 技能集合。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的技能进化安全算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  技能进化安全 Agent 记忆与技能：让经验可取回、可失效 自进化技能库为什么需要把经验准入当作一个有风险的环节？ 候选经验会影响未来行动，还可能被再次概括进新的技能，一条错误建议因而不只伤害当前任务。VaG 关注在持续学习中控制这种传播，让长期库不会因每轮都“学到点东西”而逐渐失真；写入数量不是进步指标。 例如一次临时绕过检查的做法被总结成通用规则，后续多个任务再沿用它，短期成功可能变成长期污染。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-vag-dfb74800" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b7cc4ccf17a5ebda">技能污染为什么可能在删除原技能后继续存在？</h2>
+<h2 id="qa-b7cc4ccf17a5ebda">自进化技能库为什么需要把经验准入当作一个有风险的环节？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Avag">When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 论文未列机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>有害技能进入上下文后可能影响后续生成的技能与决策，污染已传播到后代，删除最初记录不等于回滚全部衍生影响。VaG 因而在写入前验证，试图阻止污染进入持久循环；它仍依赖验证覆盖，不能保证检测所有语义风险。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一份错误提交规则被总结进三份后续技能，只删原文件时，三个派生版本仍会继续传播同样错误。</p>
+<p><strong>答案：</strong>候选经验会影响未来行动，还可能被再次概括进新的技能，一条错误建议因而不只伤害当前任务。VaG 关注在持续学习中控制这种传播，让长期库不会因每轮都“学到点东西”而逐渐失真；写入数量不是进步指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如一次临时绕过检查的做法被总结成通用规则，后续多个任务再沿用它，短期成功可能变成长期污染。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05810">原论文</a> · <a href="../../../../agent-research/2608.05810-vag/">实现解读</a> · <a href="#qa-b7cc4ccf17a5ebda">问题链接</a></p>
 </details>
@@ -2015,15 +2015,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05810">原论文</a> · <a href="../../../../agent-research/2608.05810-vag/">实现解读</a> · <a href="#qa-203b6b4073c19e5f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:vag" data-paper-title="When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents Agent 论文未列机构 2026-08-06 主题：技能进化安全。技能一旦进入上下文会污染后代，事后删除无法彻底回滚。VaG 在写入前依次做结构、行为无害性、语义一致性验证，再以边际收益选择可共同使用的 Hot 技能集合。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的技能进化安全算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  技能进化安全 Agent 记忆与技能：让经验可取回、可失效 pre-commit gate 与任务失败后清理技能有什么取舍？ 前置 gate 在结构、行为无害性和语义一致性阶段阻止不合格候选进入库，后置清理则已允许它影响执行和后代。前置验证增加准入成本，也可能误拒有用技能；机制重点是控制传播时点，不能把 gate 通过视为绝对安全证明。 例如新技能建议跳过验证，写入前可被无害性检查拒绝；等它造成失败后删除，已经影响的动作无法因此撤销。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:vag" data-paper-title="When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents Agent 论文未列机构 2026-08-06 主题：技能进化安全。技能一旦进入上下文会污染后代，事后删除无法彻底回滚。VaG 在写入前依次做结构、行为无害性、语义一致性验证，再以边际收益选择可共同使用的 Hot 技能集合。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的技能进化安全算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  技能进化安全 Agent 记忆与技能：让经验可取回、可失效 结构合法、行为无害与语义一致三类 gate，为什么不能只留一个？ 结构检查回答格式和引用能否解析，行为检查关注技能是否破坏已有执行，语义检查关注内容是否符合预期含义。格式正确的技能仍可能建议错误操作，单次无害也可能只是未触发危险前提；不同 gate 提供互补证据，全部通过仍受验证案例覆盖限制。 教学例：一份技能格式完全正确，却把“先备份再修改”写反；解析检查会放行，语义或行为验证才可能发现问题。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-28954ff9e44b5448">pre-commit gate 与任务失败后清理技能有什么取舍？</h2>
+<h2 id="qa-28954ff9e44b5448">结构合法、行为无害与语义一致三类 gate，为什么不能只留一个？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Avag">When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 论文未列机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前置 gate 在结构、行为无害性和语义一致性阶段阻止不合格候选进入库，后置清理则已允许它影响执行和后代。前置验证增加准入成本，也可能误拒有用技能；机制重点是控制传播时点，不能把 gate 通过视为绝对安全证明。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如新技能建议跳过验证，写入前可被无害性检查拒绝；等它造成失败后删除，已经影响的动作无法因此撤销。</p>
+<p><strong>答案：</strong>结构检查回答格式和引用能否解析，行为检查关注技能是否破坏已有执行，语义检查关注内容是否符合预期含义。格式正确的技能仍可能建议错误操作，单次无害也可能只是未触发危险前提；不同 gate 提供互补证据，全部通过仍受验证案例覆盖限制。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一份技能格式完全正确，却把“先备份再修改”写反；解析检查会放行，语义或行为验证才可能发现问题。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05810">原论文</a> · <a href="../../../../agent-research/2608.05810-vag/">实现解读</a> · <a href="#qa-28954ff9e44b5448">问题链接</a></p>
 </details>
@@ -2041,16 +2041,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05810">原论文</a> · <a href="../../../../agent-research/2608.05810-vag/">实现解读</a> · <a href="#qa-341ae6021330275f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memorycpt" data-paper-title="MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off Agent Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS 2026-08-05 主题：端到端 Agent 记忆。QAD 将离线记忆构建链蒸馏为紧凑模型；QAR 用 RRF 检索和 LoRA summarizer 生成查询相关上下文，并以成本感知 GRPO 优化 Quality per Cost。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的端到端 Agent 记忆算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  端到端 Agent 记忆 Agent 记忆与技能：让经验可取回、可失效 QAD 与 QAR 为什么分别处理构建和查询阶段？ QAD 把离线记忆构建链蒸馏到紧凑模型，降低反复写入成本；QAR 在查询时融合检索并生成问题相关上下文，提高有限读取的用途。两者针对不同成本来源，省掉其中一段并不能声称完整端到端记忆配方已执行。 例如历史进入系统时由小模型整理，用户提问时再用检索与摘要挑相关内容，而不是每次从头运行完整大模型构建链。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memorycpt" data-paper-title="MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off Agent Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS 2026-08-05 主题：端到端 Agent 记忆。QAD 将离线记忆构建链蒸馏为紧凑模型；QAR 用 RRF 检索和 LoRA summarizer 生成查询相关上下文，并以成本感知 GRPO 优化 Quality per Cost。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的端到端 Agent 记忆算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  端到端 Agent 记忆 Agent 记忆与技能：让经验可取回、可失效 长期助理为什么需要分别核算存记忆与用记忆的成本？ 大量历史持续写入，用户查询又反复触发检索与摘要，二者频率和费用来源不同。MemoryCPT 研究端到端质量成本折中，既让构建更轻量，也让读取内容服务当前问题；不能只缩短一个摘要就认为整个记忆系统更高效。 例如每天写入数百条、只问五次，与每天只写五条却问数百次，会让构建和读取成为不同的主要开销。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-memorycpt-45f8aee7" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8ddb0c3f29f9f1b1">QAD 与 QAR 为什么分别处理构建和查询阶段？</h2>
+<h2 id="qa-8ddb0c3f29f9f1b1">长期助理为什么需要分别核算存记忆与用记忆的成本？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemorycpt">MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>QAD 把离线记忆构建链蒸馏到紧凑模型，降低反复写入成本；QAR 在查询时融合检索并生成问题相关上下文，提高有限读取的用途。两者针对不同成本来源，省掉其中一段并不能声称完整端到端记忆配方已执行。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如历史进入系统时由小模型整理，用户提问时再用检索与摘要挑相关内容，而不是每次从头运行完整大模型构建链。</p>
+<p><strong>答案：</strong>大量历史持续写入，用户查询又反复触发检索与摘要，二者频率和费用来源不同。MemoryCPT 研究端到端质量成本折中，既让构建更轻量，也让读取内容服务当前问题；不能只缩短一个摘要就认为整个记忆系统更高效。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如每天写入数百条、只问五次，与每天只写五条却问数百次，会让构建和读取成为不同的主要开销。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.04843">原论文</a> · <a href="../../../../agent-research/2608.04843-memorycpt/">实现解读</a> · <a href="#qa-8ddb0c3f29f9f1b1">问题链接</a></p>
 </details>
@@ -2068,15 +2068,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.04843">原论文</a> · <a href="../../../../agent-research/2608.04843-memorycpt/">实现解读</a> · <a href="#qa-e2c6e5282ef27147">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memorycpt" data-paper-title="MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off Agent Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS 2026-08-05 主题：端到端 Agent 记忆。QAD 将离线记忆构建链蒸馏为紧凑模型；QAR 用 RRF 检索和 LoRA summarizer 生成查询相关上下文，并以成本感知 GRPO 优化 Quality per Cost。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的端到端 Agent 记忆算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  端到端 Agent 记忆 Agent 记忆与技能：让经验可取回、可失效 Quality per Cost 与只最大化答案质量有什么取舍？ 只追质量可能无限增加检索和推理，QPC 将质量与推理成本一起考虑，偏好在合理代价下有效回答。比值也可能偏向极便宜但质量不足的方案，因此应同时报告原始质量和成本，不能只摘一个更高比值掩盖任务成功下降。 例如方案甲质量九成成本十，乙八成成本二，比值可偏向乙；用户是否接受八成质量仍需明确，而非由比值自动决定。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memorycpt" data-paper-title="MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off Agent Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS 2026-08-05 主题：端到端 Agent 记忆。QAD 将离线记忆构建链蒸馏为紧凑模型；QAR 用 RRF 检索和 LoRA summarizer 生成查询相关上下文，并以成本感知 GRPO 优化 Quality per Cost。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的端到端 Agent 记忆算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  端到端 Agent 记忆 Agent 记忆与技能：让经验可取回、可失效 降低记忆构建成本与降低每次查询成本，为什么应分开优化？ 构建处理持续进入的历史，读取则随用户查询反复发生，调用频率和有效信息需求不同。MemoryCPT 用离线链蒸馏减轻构建，读取侧再做排名融合与查询相关总结。某一侧便宜不等于总成本下降，应按实际写入与查询次数累计，同时检查答案质量。 教学例：一天写入上千轮却只查两次时，构建费用可能占主导；若同一历史被查上百次，读取侧的小额节省才会累积。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c04a3362054db9b8">Quality per Cost 与只最大化答案质量有什么取舍？</h2>
+<h2 id="qa-c04a3362054db9b8">降低记忆构建成本与降低每次查询成本，为什么应分开优化？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemorycpt">MemoryCPT: An End-to-End Agent Memory Framework for Cost-Performance Trade-off</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Hong Kong University of Science and Technology / Tencent LIGHTSPEED STUDIOS</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>只追质量可能无限增加检索和推理，QPC 将质量与推理成本一起考虑，偏好在合理代价下有效回答。比值也可能偏向极便宜但质量不足的方案，因此应同时报告原始质量和成本，不能只摘一个更高比值掩盖任务成功下降。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如方案甲质量九成成本十，乙八成成本二，比值可偏向乙；用户是否接受八成质量仍需明确，而非由比值自动决定。</p>
+<p><strong>答案：</strong>构建处理持续进入的历史，读取则随用户查询反复发生，调用频率和有效信息需求不同。MemoryCPT 用离线链蒸馏减轻构建，读取侧再做排名融合与查询相关总结。某一侧便宜不等于总成本下降，应按实际写入与查询次数累计，同时检查答案质量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一天写入上千轮却只查两次时，构建费用可能占主导；若同一历史被查上百次，读取侧的小额节省才会累积。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.04843">原论文</a> · <a href="../../../../agent-research/2608.04843-memorycpt/">实现解读</a> · <a href="#qa-c04a3362054db9b8">问题链接</a></p>
 </details>
@@ -2121,15 +2121,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03137">原论文</a> · <a href="../../../../agent-research/2608.03137-vermem/">实现解读</a> · <a href="#qa-b3def5f3a30eb45a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:vermem" data-paper-title="VerMem" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="VerMem Agent Sun Yat-sen University 2026-08-04 长期记忆、活动上下文与 episodic history 往往分开优化，轨迹奖励无法判断单次记忆操作是否正确。VerMem 用一个策略管理三类状态和七种原子操作，以 local verifier 审核状态转移、global verifier 审核证据一致性。 Fidelity：核心机制复现。本页把原论文结论、本地机制验证和未复刻部分分开陈述。本地使用确定性公共 mini-suite 验证核心状态更新和公平预算，不等同于原论文大模型、多卡 RL、私有环境或完整 benchmark；本地相对变化不得与原文提升混写。显式维护 LTM、active context、episodes，执行 retrieve/add/restore，并分别计数 local/global verifier。  可验证统一记忆 Agent 记忆与技能：让经验可取回、可失效 local verifier 与 global verifier 分别能发现什么？ local 检查某次操作前后状态是否合规则，global 检查完整轨迹和最终记忆证据是否一致。局部每步合法仍可能遗漏关键证据，最终结果好也不能证明每次记忆操作正确；二者与任务奖励、操作成本共同提供不同监督。 例如一次删除在格式上合法，却删掉最终回答唯一来源；局部检查可通过，全局证据一致性仍应发现问题。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:vermem" data-paper-title="VerMem" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="VerMem Agent Sun Yat-sen University 2026-08-04 长期记忆、活动上下文与 episodic history 往往分开优化，轨迹奖励无法判断单次记忆操作是否正确。VerMem 用一个策略管理三类状态和七种原子操作，以 local verifier 审核状态转移、global verifier 审核证据一致性。 Fidelity：核心机制复现。本页把原论文结论、本地机制验证和未复刻部分分开陈述。本地使用确定性公共 mini-suite 验证核心状态更新和公平预算，不等同于原论文大模型、多卡 RL、私有环境或完整 benchmark；本地相对变化不得与原文提升混写。显式维护 LTM、active context、episodes，执行 retrieve/add/restore，并分别计数 local/global verifier。  可验证统一记忆 Agent 记忆与技能：让经验可取回、可失效 最终任务奖励与记忆操作验证，为什么监督的对象不同？ 最终任务奖励说明整次任务结果，但难定位是检索、保存还是恢复操作出了问题；记忆验证针对状态转移及证据一致性，操作成本再约束资源使用。结果成功仍可能含冗余或不合法的状态步骤，步骤合法也可能没解决任务，所以训练需区分这些信号的职责。 教学例：碰巧答对不表示先前删除关键证据是好操作；一次合法检索也可能没有找到答案，两种反馈不应互相冒充。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c058bd626ac200eb">local verifier 与 global verifier 分别能发现什么？</h2>
+<h2 id="qa-c058bd626ac200eb">最终任务奖励与记忆操作验证，为什么监督的对象不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Avermem">VerMem</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Sun Yat-sen University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>local 检查某次操作前后状态是否合规则，global 检查完整轨迹和最终记忆证据是否一致。局部每步合法仍可能遗漏关键证据，最终结果好也不能证明每次记忆操作正确；二者与任务奖励、操作成本共同提供不同监督。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一次删除在格式上合法，却删掉最终回答唯一来源；局部检查可通过，全局证据一致性仍应发现问题。</p>
+<p><strong>答案：</strong>最终任务奖励说明整次任务结果，但难定位是检索、保存还是恢复操作出了问题；记忆验证针对状态转移及证据一致性，操作成本再约束资源使用。结果成功仍可能含冗余或不合法的状态步骤，步骤合法也可能没解决任务，所以训练需区分这些信号的职责。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：碰巧答对不表示先前删除关键证据是好操作；一次合法检索也可能没有找到答案，两种反馈不应互相冒充。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03137">原论文</a> · <a href="../../../../agent-research/2608.03137-vermem/">实现解读</a> · <a href="#qa-c058bd626ac200eb">问题链接</a></p>
 </details>
@@ -2174,15 +2174,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.01739">原论文</a> · <a href="../../../../agent-research/2608.01739-coevo-mem/">实现解读</a> · <a href="#qa-f09a664c62c12948">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coevo-mem" data-paper-title="CoEvo-Mem" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CoEvo-Mem Agent 论文未列机构 2026-08-03 只优化 query routing 或只更新 memory bank 会忽略二者反馈环。CoEvo-Mem 让冻结 LLM 生成 route-specific rewrite 和 prior，轻量 residual router 在线修正；任务结果更新路由，轨迹反馈更新 memory value 与 graph relation，并交替冻结一侧控制非平稳性。 Fidelity：核心机制复现。本页把原论文结论、本地机制验证和未复刻部分分开陈述。本地使用确定性公共 mini-suite 验证核心状态更新和公平预算，不等同于原论文大模型、多卡 RL、私有环境或完整 benchmark；本地相对变化不得与原文提升混写。实现 route rewrite、残差路由与 router/memory bank 交替更新；检索键包含任务轴和工具签名，防止跨任务误复用。  检索—记忆共进化 Agent 记忆与技能：让经验可取回、可失效 交替冻结一侧与路由、记忆同时不断变化相比有什么作用？ 更新路由时固定记忆，更新记忆时固定路由，提供较稳定的条件，降低两侧同时变化带来的非平稳归因困难。它不消除所有噪声，也不是保证收敛到全局最优；冻结 LLM 的 prior 与可训练残差 router 还需分别标明更新范围。 例如验证路由新参数时保持同一库，可减少“成绩变化究竟来自新路由还是新记录”的混淆。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coevo-mem" data-paper-title="CoEvo-Mem" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CoEvo-Mem Agent 论文未列机构 2026-08-03 只优化 query routing 或只更新 memory bank 会忽略二者反馈环。CoEvo-Mem 让冻结 LLM 生成 route-specific rewrite 和 prior，轻量 residual router 在线修正；任务结果更新路由，轨迹反馈更新 memory value 与 graph relation，并交替冻结一侧控制非平稳性。 Fidelity：核心机制复现。本页把原论文结论、本地机制验证和未复刻部分分开陈述。本地使用确定性公共 mini-suite 验证核心状态更新和公平预算，不等同于原论文大模型、多卡 RL、私有环境或完整 benchmark；本地相对变化不得与原文提升混写。实现 route rewrite、残差路由与 router/memory bank 交替更新；检索键包含任务轴和工具签名，防止跨任务误复用。  检索—记忆共进化 Agent 记忆与技能：让经验可取回、可失效 冻结 LLM 的路由先验与可更新的残差 router，各负责什么？ 基础 LLM 提供已有任务理解形成的路由先验，残差 router 根据实际交互反馈调整选择，而非每次重训整个 LLM。保留先验可限制更新范围，残差则适应当前记忆库；它只从已执行路线获得证据，不能把未尝试路径的收益当作已知，也不保证始终优于先验。 教学例：基础路由常选通用检索，残差可从当前工具任务反馈中逐渐偏向某类经验库；LLM 的全部语言参数并未因此更新。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-3b67e8e3d352fecb">交替冻结一侧与路由、记忆同时不断变化相比有什么作用？</h2>
+<h2 id="qa-3b67e8e3d352fecb">冻结 LLM 的路由先验与可更新的残差 router，各负责什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoevo-mem">CoEvo-Mem</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 论文未列机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>更新路由时固定记忆，更新记忆时固定路由，提供较稳定的条件，降低两侧同时变化带来的非平稳归因困难。它不消除所有噪声，也不是保证收敛到全局最优；冻结 LLM 的 prior 与可训练残差 router 还需分别标明更新范围。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如验证路由新参数时保持同一库，可减少“成绩变化究竟来自新路由还是新记录”的混淆。</p>
+<p><strong>答案：</strong>基础 LLM 提供已有任务理解形成的路由先验，残差 router 根据实际交互反馈调整选择，而非每次重训整个 LLM。保留先验可限制更新范围，残差则适应当前记忆库；它只从已执行路线获得证据，不能把未尝试路径的收益当作已知，也不保证始终优于先验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：基础路由常选通用检索，残差可从当前工具任务反馈中逐渐偏向某类经验库；LLM 的全部语言参数并未因此更新。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.01739">原论文</a> · <a href="../../../../agent-research/2608.01739-coevo-mem/">实现解读</a> · <a href="#qa-3b67e8e3d352fecb">问题链接</a></p>
 </details>
@@ -2227,15 +2227,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.26784">原论文</a> · <a href="../../../../agent-research/2607.26784-skillrise/">实现解读</a> · <a href="#qa-9386b52986589e13">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:skillrise" data-paper-title="SkillRise" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SkillRise Agent Zhejiang University 2026-07-29 标准 Agent RL 把任务视为独立 episode，外部 skill bank 又把抽取、检索和执行缠在一起。SkillRise 把相关但不同的任务排成由易到难的序列，让同一 policy 交替求解当前任务与整理一个直接传给下一任务的 skill document；求解阶段由当前结果监督，整理阶段由折扣后的下游任务结果监督。 本地验证状态演化与 credit 分离，不训练 Qwen3，也不运行 ALFWorld/WebShop/ScienceWorld；因此不能把 mini-suite 的 100% success 与论文 Pass@k 横向比较。PlanBench mini 按 task axis 组织相关任务；每个 episode 交替执行 solve 和 curate，成功轨迹更新 skill document，并单独记录跨任务复用与下游 credit。  跨任务技能进化 Agent 记忆与技能：让经验可取回、可失效 solve reward 与 curate reward 为什么不能共用当前任务结果？ solve 由当前结果监督，curate 的价值在下游任务中体现，应使用折扣后的后续回报。若整理也只看当前成功，会奖励对未来无用的漂亮总结；两阶段共享 policy，但优势只施加到各自生成 token，避免信用错配。 例如当前题已完成，写一份含当前答案的文档未必能帮下一题；后续任务表现才提供整理质量的反馈。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:skillrise" data-paper-title="SkillRise" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SkillRise Agent Zhejiang University 2026-07-29 标准 Agent RL 把任务视为独立 episode，外部 skill bank 又把抽取、检索和执行缠在一起。SkillRise 把相关但不同的任务排成由易到难的序列，让同一 policy 交替求解当前任务与整理一个直接传给下一任务的 skill document；求解阶段由当前结果监督，整理阶段由折扣后的下游任务结果监督。 本地验证状态演化与 credit 分离，不训练 Qwen3，也不运行 ALFWorld/WebShop/ScienceWorld；因此不能把 mini-suite 的 100% success 与论文 Pass@k 横向比较。PlanBench mini 按 task axis 组织相关任务；每个 episode 交替执行 solve 和 curate，成功轨迹更新 skill document，并单独记录跨任务复用与下游 credit。  跨任务技能进化 Agent 记忆与技能：让经验可取回、可失效 把相关任务组成连续课程，与把每个 episode 独立训练，在经验传递上有何区别？ 连续课程让前一任务整理出的 skill document 成为后一任务输入，使可迁移经验有机会被实际使用和评价；独立 episode 通常不会自然暴露这种传递关系。关联任务也可能让经验过拟合课程，因此需区分文档对后续任务的帮助和单次求解本身，不能由传递次数推断泛化。 教学例：先做简单表格整理再做带约束版本，上一题留下的检查步骤可在下一题验证；随机不相关题可能根本用不到它。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-e88f05c7ec0f5b77">solve reward 与 curate reward 为什么不能共用当前任务结果？</h2>
+<h2 id="qa-e88f05c7ec0f5b77">把相关任务组成连续课程，与把每个 episode 独立训练，在经验传递上有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Askillrise">SkillRise</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Zhejiang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>solve 由当前结果监督，curate 的价值在下游任务中体现，应使用折扣后的后续回报。若整理也只看当前成功，会奖励对未来无用的漂亮总结；两阶段共享 policy，但优势只施加到各自生成 token，避免信用错配。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如当前题已完成，写一份含当前答案的文档未必能帮下一题；后续任务表现才提供整理质量的反馈。</p>
+<p><strong>答案：</strong>连续课程让前一任务整理出的 skill document 成为后一任务输入，使可迁移经验有机会被实际使用和评价；独立 episode 通常不会自然暴露这种传递关系。关联任务也可能让经验过拟合课程，因此需区分文档对后续任务的帮助和单次求解本身，不能由传递次数推断泛化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先做简单表格整理再做带约束版本，上一题留下的检查步骤可在下一题验证；随机不相关题可能根本用不到它。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.26784">原论文</a> · <a href="../../../../agent-research/2607.26784-skillrise/">实现解读</a> · <a href="#qa-e88f05c7ec0f5b77">问题链接</a></p>
 </details>
@@ -2280,15 +2280,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25853">原论文</a> · <a href="../../../../agent-research/2607.25853-hiskill/">实现解读</a> · <a href="#qa-01a662c9411b2245">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hiskill" data-paper-title="HiSkill" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="HiSkill Agent Beijing University of Posts and Telecommunications 2026-07-28 用高层 skill、可执行 AtomicOp 和多类有向边组织经验，推理时只检索任务相关子图来落地动作。 保真度：实现论文可隔离的核心状态与更新机制，并在统一公开数据或确定性 mini-suite 上运行；保真度：实现论文可隔离的核心状态与更新机制，并在统一公开数据或确定性 mini-suite 上运行；不把轻量机制实验写成原规模大模型复现。图节点来自受控轨迹，不由在线 LLM 抽取；主要验证层次和关系是否改善复用。PlanBench mini-suite 构建高层 skill/AtomicOp 节点及 decomposition、transition、recovery 边，记录子图复用。  Hierarchical skill memory Agent 记忆与技能：让经验可取回、可失效 decomposition、temporal 与 recovery 边为什么不能合并成普通相关边？ 分解边说明组成，时间边说明先后，恢复边说明失败后的替代或补救，语义不同会改变执行策略。普通相似关系无法表达何时能调用和出错后怎么办；仅图连通也不能证明动作可执行，需要按边类型解释当前子图。 例如“先验证再删除”的时间边不能误读为任意顺序，“删除失败后查权限”的恢复边也不应在正常流程总执行。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hiskill" data-paper-title="HiSkill" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="HiSkill Agent Beijing University of Posts and Telecommunications 2026-07-28 用高层 skill、可执行 AtomicOp 和多类有向边组织经验，推理时只检索任务相关子图来落地动作。 保真度：实现论文可隔离的核心状态与更新机制，并在统一公开数据或确定性 mini-suite 上运行；保真度：实现论文可隔离的核心状态与更新机制，并在统一公开数据或确定性 mini-suite 上运行；不把轻量机制实验写成原规模大模型复现。图节点来自受控轨迹，不由在线 LLM 抽取；主要验证层次和关系是否改善复用。PlanBench mini-suite 构建高层 skill/AtomicOp 节点及 decomposition、transition、recovery 边，记录子图复用。  Hierarchical skill memory Agent 记忆与技能：让经验可取回、可失效 按任务检索相关技能子图，与把整张技能图都放进上下文，有什么取舍？ 相关子图限制当前要解释和落地的技能范围，让规划聚焦目标附近的组成、先后及恢复关系；整图保留更多潜在路径，却增加输入与选择负担。子图选择也会漏掉远处但必要的依赖，因此仍需按当前状态检查完整执行条件，不能把上下文更短等同于任务必然更好。 教学例：当前只需恢复一次失败上传，可先取上传及恢复邻域；若漏掉认证前提，即使子图很紧凑也无法合法执行。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-3a39ef5716fcd49d">decomposition、temporal 与 recovery 边为什么不能合并成普通相关边？</h2>
+<h2 id="qa-3a39ef5716fcd49d">按任务检索相关技能子图，与把整张技能图都放进上下文，有什么取舍？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahiskill">HiSkill</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beijing University of Posts and Telecommunications</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>分解边说明组成，时间边说明先后，恢复边说明失败后的替代或补救，语义不同会改变执行策略。普通相似关系无法表达何时能调用和出错后怎么办；仅图连通也不能证明动作可执行，需要按边类型解释当前子图。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“先验证再删除”的时间边不能误读为任意顺序，“删除失败后查权限”的恢复边也不应在正常流程总执行。</p>
+<p><strong>答案：</strong>相关子图限制当前要解释和落地的技能范围，让规划聚焦目标附近的组成、先后及恢复关系；整图保留更多潜在路径，却增加输入与选择负担。子图选择也会漏掉远处但必要的依赖，因此仍需按当前状态检查完整执行条件，不能把上下文更短等同于任务必然更好。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：当前只需恢复一次失败上传，可先取上传及恢复邻域；若漏掉认证前提，即使子图很紧凑也无法合法执行。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25853">原论文</a> · <a href="../../../../agent-research/2607.25853-hiskill/">实现解读</a> · <a href="#qa-3a39ef5716fcd49d">问题链接</a></p>
 </details>
@@ -2306,16 +2306,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25853">原论文</a> · <a href="../../../../agent-research/2607.25853-hiskill/">实现解读</a> · <a href="#qa-f9bf03107aa70202">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:unimem" data-paper-title="UniMem" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="UniMem Agent CASIA 2026-07-28 新颖任务先进入 episodic buffer；反复出现且可靠的执行模式再被自路由控制器固化到可扩展 parametric memory。 保真度：实现论文可隔离的核心状态与更新机制，并在统一公开数据或确定性 mini-suite 上运行；保真度：实现论文可隔离的核心状态与更新机制，并在统一公开数据或确定性 mini-suite 上运行；不把轻量机制实验写成原规模大模型复现。参数记忆是结构化模式表，不是扩展 LLM 权重块；验证稳定性/可塑性路由逻辑。EvoMem mini-suite 实现 episodic route、复现频次阈值、parametric route 和 consolidation 统计。  Continual agent memory Agent 记忆与技能：让经验可取回、可失效 新任务先进入 episodic buffer，重复模式再固化有什么作用？ 情景记忆快速保存新经验，反复出现且可靠的模式再进入参数记忆，试图平衡可塑性与稳定性。过早固化可能把偶然或错误经历变成长期偏置，始终只存情景又可能反复检索；自路由决定何时利用哪类记忆。 例如第一次遇到某工具报错先存情景，多次确认同一恢复步骤有效后再考虑固化，而不是一次失败就改写长期规则。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:unimem" data-paper-title="UniMem" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="UniMem Agent CASIA 2026-07-28 新颖任务先进入 episodic buffer；反复出现且可靠的执行模式再被自路由控制器固化到可扩展 parametric memory。 保真度：实现论文可隔离的核心状态与更新机制，并在统一公开数据或确定性 mini-suite 上运行；保真度：实现论文可隔离的核心状态与更新机制，并在统一公开数据或确定性 mini-suite 上运行；不把轻量机制实验写成原规模大模型复现。参数记忆是结构化模式表，不是扩展 LLM 权重块；验证稳定性/可塑性路由逻辑。EvoMem mini-suite 实现 episodic route、复现频次阈值、parametric route 和 consolidation 统计。  Continual agent memory Agent 记忆与技能：让经验可取回、可失效 流式任务不断到来时，UniMem 为什么不能只依赖固定模型参数或只堆原始经历？ 固定参数难及时吸收新情况，原始经历持续堆积又会带来检索和上下文负担。UniMem 研究让新近个例与稳定重复知识协作，在适应变化的同时保留可重复使用的经验。重点是处理知识的时效和稳定性，不能把出现次数多直接当成正确规律。 教学例：新服务刚改了一次接口，需要先记住具体事件；若之后持续沿用同一规则，才有理由考虑形成稳定的调用习惯。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-unimem-c304c78e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ceb2875337a2818b">新任务先进入 episodic buffer，重复模式再固化有什么作用？</h2>
+<h2 id="qa-ceb2875337a2818b">流式任务不断到来时，UniMem 为什么不能只依赖固定模型参数或只堆原始经历？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aunimem">UniMem</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · CASIA</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>情景记忆快速保存新经验，反复出现且可靠的模式再进入参数记忆，试图平衡可塑性与稳定性。过早固化可能把偶然或错误经历变成长期偏置，始终只存情景又可能反复检索；自路由决定何时利用哪类记忆。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第一次遇到某工具报错先存情景，多次确认同一恢复步骤有效后再考虑固化，而不是一次失败就改写长期规则。</p>
+<p><strong>答案：</strong>固定参数难及时吸收新情况，原始经历持续堆积又会带来检索和上下文负担。UniMem 研究让新近个例与稳定重复知识协作，在适应变化的同时保留可重复使用的经验。重点是处理知识的时效和稳定性，不能把出现次数多直接当成正确规律。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新服务刚改了一次接口，需要先记住具体事件；若之后持续沿用同一规则，才有理由考虑形成稳定的调用习惯。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.26017">原论文</a> · <a href="../../../../agent-research/2607.26017-unimem/">实现解读</a> · <a href="#qa-ceb2875337a2818b">问题链接</a></p>
 </details>
@@ -2412,16 +2412,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.13591">原论文</a> · <a href="../../../../agent-research/2607.13591-memcon/">实现解读</a> · <a href="#qa-67d5abfc2cadf284">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memento-skills" data-paper-title="Memento-Skills" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Memento-Skills Agent Memento Team 2026-03-19 从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 0.0500，average cost 0.2800；方法特有操作有非零 telemetry。  技能设计 Agent 记忆与技能：让经验可取回、可失效 从日志生成结构化技能为什么不等于保存整条轨迹？ 技能提炼可复用的前提、步骤与经验，轨迹包含一次具体执行的偶然细节；按任务检索并版本化合并，可以让后续任务读取方法而非重放旧输入。抽象也可能丢失必要条件，因此结构清晰不自动证明跨任务有效。 例如旧日志里的文件名和时间可去掉，但“先检查 schema 再转换”应保留成通用步骤，不能照搬上次输出当技能。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memento-skills" data-paper-title="Memento-Skills" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Memento-Skills Agent Memento Team 2026-03-19 从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 0.0500，average cost 0.2800；方法特有操作有非零 telemetry。  技能设计 Agent 记忆与技能：让经验可取回、可失效 多次做相似任务时，Memento-Skills 希望避免哪些重复劳动？ Agent 的一次执行会留下有效步骤、错误和环境条件，但原样保存日志会让下一次仍需从头理解。Memento-Skills 研究把这些经历整理成可检索、可更新的技能，使后续任务能复用经验。技能是否有用取决于适用条件和真实执行，保存得多或版本增加都不是能力提升证据。 教学例：第一次整理账单发现日期格式问题，下一次可调用带格式检查的技能，而不是重读整次失败日志再猜处理顺序。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-memento-skills-c4d49bbe" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e28f108866db2db6">从日志生成结构化技能为什么不等于保存整条轨迹？</h2>
+<h2 id="qa-e28f108866db2db6">多次做相似任务时，Memento-Skills 希望避免哪些重复劳动？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemento-skills">Memento-Skills</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Memento Team</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>技能提炼可复用的前提、步骤与经验，轨迹包含一次具体执行的偶然细节；按任务检索并版本化合并，可以让后续任务读取方法而非重放旧输入。抽象也可能丢失必要条件，因此结构清晰不自动证明跨任务有效。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如旧日志里的文件名和时间可去掉，但“先检查 schema 再转换”应保留成通用步骤，不能照搬上次输出当技能。</p>
+<p><strong>答案：</strong>Agent 的一次执行会留下有效步骤、错误和环境条件，但原样保存日志会让下一次仍需从头理解。Memento-Skills 研究把这些经历整理成可检索、可更新的技能，使后续任务能复用经验。技能是否有用取决于适用条件和真实执行，保存得多或版本增加都不是能力提升证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一次整理账单发现日期格式问题，下一次可调用带格式检查的技能，而不是重读整次失败日志再猜处理顺序。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.18743">原论文</a> · <a href="../../../../agent-research/2603.18743-memento-skills/">实现解读</a> · <a href="#qa-e28f108866db2db6">问题链接</a></p>
 </details>
@@ -2465,16 +2465,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.18743">原论文</a> · <a href="../../../../agent-research/2603.18743-memento-skills/">实现解读</a> · <a href="#qa-84e7bd0f8016135d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:u-mem" data-paper-title="U-Mem" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="U-Mem Agent National University of Singapore 2026-02-25 传统 Agent 记忆通常被动写入和检索，缺少“当前知识不够时主动去哪里找”的决策。U-Mem 将获取过程建模为成本递增的级联：先尝试 self/teacher，再做工具研究，最后请求 expert；检索结合语义相似度与 Thompson sampling，并在写回前验证和整理记忆。 保真度：本地实现成本感知的分级获取、语义检索、Thompson sampling 和记忆验证；保真度：本地实现成本感知的分级获取、语义检索、Thompson sampling 和记忆验证；当前 mini-suite 不包含论文使用的真实 LLM、HotpotQA 或 AIME 推理。mini-suite 的知识源、专家和验证器都是确定性的，不包含真实搜索 API、模型幻觉或 token 成本。因此这里验证的是主动获取状态机与成本记账，不是 HotpotQA/AIME 分数复刻。evomem-mini 覆盖 episode 内/跨 episode × knowledge/execution 四象限。  主动记忆 Agent 记忆与技能：让经验可取回、可失效 U-Mem 为什么把知识获取组织成成本递增级联？ 当前知识不足时先尝试自身或教师，再做工具研究，最后请求专家，避免一开始就付最高成本。每层应根据额外收益与代价决定升级，获取后还需验证整理才写回；级联不是永远保证低成本足够，也不意味着专家输出无需检查。 例如先查已存公式，仍无法确认边界条件才检索资料，再在确有必要时请求专家，而不是每道简单题都升级。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:u-mem" data-paper-title="U-Mem" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="U-Mem Agent National University of Singapore 2026-02-25 传统 Agent 记忆通常被动写入和检索，缺少“当前知识不够时主动去哪里找”的决策。U-Mem 将获取过程建模为成本递增的级联：先尝试 self/teacher，再做工具研究，最后请求 expert；检索结合语义相似度与 Thompson sampling，并在写回前验证和整理记忆。 保真度：本地实现成本感知的分级获取、语义检索、Thompson sampling 和记忆验证；保真度：本地实现成本感知的分级获取、语义检索、Thompson sampling 和记忆验证；当前 mini-suite 不包含论文使用的真实 LLM、HotpotQA 或 AIME 推理。mini-suite 的知识源、专家和验证器都是确定性的，不包含真实搜索 API、模型幻觉或 token 成本。因此这里验证的是主动获取状态机与成本记账，不是 HotpotQA/AIME 分数复刻。evomem-mini 覆盖 episode 内/跨 episode × knowledge/execution 四象限。  主动记忆 Agent 记忆与技能：让经验可取回、可失效 U-Mem 为什么把 Agent 不知道的知识当作需要主动补齐的缺口？ 相似记忆不一定覆盖当前任务需要的事实或方法，Agent 仅重复检索已有内容可能一直停在同一缺口。U-Mem 把知识获取也放入学习流程，按需要利用自身、工具研究或专家帮助，再考虑后续复用。新增知识仍需来源和反馈，不能把专家名义当成天然正确。 教学例：历史只记录旧接口调用，新版本参数始终查不到，Agent 应发现缺口并寻求新资料，而不是反复返回旧调用片段。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-u-mem-1e639ec3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-38a7caab07361558">U-Mem 为什么把知识获取组织成成本递增级联？</h2>
+<h2 id="qa-38a7caab07361558">U-Mem 为什么把 Agent 不知道的知识当作需要主动补齐的缺口？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Au-mem">U-Mem</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · National University of Singapore</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>当前知识不足时先尝试自身或教师，再做工具研究，最后请求专家，避免一开始就付最高成本。每层应根据额外收益与代价决定升级，获取后还需验证整理才写回；级联不是永远保证低成本足够，也不意味着专家输出无需检查。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先查已存公式，仍无法确认边界条件才检索资料，再在确有必要时请求专家，而不是每道简单题都升级。</p>
+<p><strong>答案：</strong>相似记忆不一定覆盖当前任务需要的事实或方法，Agent 仅重复检索已有内容可能一直停在同一缺口。U-Mem 把知识获取也放入学习流程，按需要利用自身、工具研究或专家帮助，再考虑后续复用。新增知识仍需来源和反馈，不能把专家名义当成天然正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史只记录旧接口调用，新版本参数始终查不到，Agent 应发现缺口并寻求新资料，而不是反复返回旧调用片段。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与算法；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.22406">原论文</a> · <a href="../../../../agent-research/2602.22406-u-mem/">实现解读</a> · <a href="#qa-38a7caab07361558">问题链接</a></p>
 </details>
@@ -2558,29 +2558,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.16173">原论文</a> · <a href="../../../../agent-research/2602.16173-pahf/">实现解读</a> · <a href="#qa-48e5888ea773945f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pahf" data-paper-title="Learning Personalized Agents from Human Feedback" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Learning Personalized Agents from Human Feedback Agent Meta Superintelligence Labs / Princeton University（工作完成于 Meta） 2026-02-18 Agent 在行动前从显式用户记忆检索偏好，未知或低置信时主动澄清；行动后无论当前记忆是否自信，都接收纠正并覆盖过期偏好，从而处理新用户、上下文差异和偏好漂移。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行显式记忆、澄清门和漂移覆盖，不读取隐藏 persona/gold action，不调用 GPT、机器人环境或论文购物模拟器。本地执行显式记忆、澄清门和漂移覆盖，不读取隐藏 persona/gold action，不调用 GPT、机器人环境或论文购物模拟器。三种子诊断：metrics/mechanism-seeds42-44.json  个性化 Agent 显式记忆 双通道反馈 Agent 记忆与技能：让经验可取回、可失效 漂移覆盖为何不能只在低置信时允许写入？ 高置信反映过去证据，不保证当前偏好仍成立，行动后明确纠正应能覆盖过期值并保留情境。当前本地验证记忆、澄清门与漂移更新，不调用机器人、购物模拟器或 GPT；组件通过不表示所有真实用户个性化质量已验证。 例如旧偏好被确认十次，用户今天说医生建议停用，系统仍应按新反馈更新，而不能因高置信拒绝。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pahf" data-paper-title="Learning Personalized Agents from Human Feedback" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Learning Personalized Agents from Human Feedback Agent Meta Superintelligence Labs / Princeton University（工作完成于 Meta） 2026-02-18 Agent 在行动前从显式用户记忆检索偏好，未知或低置信时主动澄清；行动后无论当前记忆是否自信，都接收纠正并覆盖过期偏好，从而处理新用户、上下文差异和偏好漂移。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行显式记忆、澄清门和漂移覆盖，不读取隐藏 persona/gold action，不调用 GPT、机器人环境或论文购物模拟器。本地执行显式记忆、澄清门和漂移覆盖，不读取隐藏 persona/gold action，不调用 GPT、机器人环境或论文购物模拟器。三种子诊断：metrics/mechanism-seeds42-44.json  个性化 Agent 显式记忆 双通道反馈 Agent 记忆与技能：让经验可取回、可失效 PAHF 的行动策略输入中，当前情境与已记偏好为什么应同时保留？ 策略按当前指令、观察、显式记忆及行动前反馈决定动作，偏好不是脱离场景的一条全局口令。更新时需要让新反馈与当前情境建立联系，避免把一处变化解释成所有任务的永久规则。本地执行了这些记忆和反馈合同，没有运行原论文机器人或购物模拟器。 教学例：用户今天为客人选择无糖饮品，不代表本人日常口味永久改变；行动输入保留当前场景，才能解释这次反馈的范围。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-b7a9fbb39023c495">漂移覆盖为何不能只在低置信时允许写入？</h2>
+<h2 id="qa-b7a9fbb39023c495">PAHF 的行动策略输入中，当前情境与已记偏好为什么应同时保留？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apahf">Learning Personalized Agents from Human Feedback</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta Superintelligence Labs / Princeton University（工作完成于 Meta）</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>高置信反映过去证据，不保证当前偏好仍成立，行动后明确纠正应能覆盖过期值并保留情境。当前本地验证记忆、澄清门与漂移更新，不调用机器人、购物模拟器或 GPT；组件通过不表示所有真实用户个性化质量已验证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如旧偏好被确认十次，用户今天说医生建议停用，系统仍应按新反馈更新，而不能因高置信拒绝。</p>
+<p><strong>答案：</strong>策略按当前指令、观察、显式记忆及行动前反馈决定动作，偏好不是脱离场景的一条全局口令。更新时需要让新反馈与当前情境建立联系，避免把一处变化解释成所有任务的永久规则。本地执行了这些记忆和反馈合同，没有运行原论文机器人或购物模拟器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用户今天为客人选择无糖饮品，不代表本人日常口味永久改变；行动输入保留当前场景，才能解释这次反馈的范围。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.16173">原论文</a> · <a href="../../../../agent-research/2602.16173-pahf/">实现解读</a> · <a href="#qa-b7a9fbb39023c495">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memskill" data-paper-title="MemSkill" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemSkill Agent Nanyang Technological University 2026-02-02 controller 从历史 episode 选择记忆，designer 将重复成功模式编译为技能，并随新反馈升级技能版本。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 1.0000，average cost 0.3200；方法特有操作有非零 telemetry。  记忆技能 Agent 记忆与技能：让经验可取回、可失效 controller 与 designer 在情景记忆到技能的过程中各做什么？ controller 为当前任务从历史 episode 选择相关经验，designer 将重复成功模式编译成可复用技能，再根据新反馈升级版本。前者解决用哪些证据，后者解决如何形成方法；只检索旧日志而不编译，或只写技能却不关联任务，都缺少一部分链路。 例如多个成功导入任务都有“先验证列名”，controller 找到这些经验，designer 才把共同行为整理成可调用技能。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memskill" data-paper-title="MemSkill" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemSkill Agent Nanyang Technological University 2026-02-02 controller 从历史 episode 选择记忆，designer 将重复成功模式编译为技能，并随新反馈升级技能版本。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 1.0000，average cost 0.3200；方法特有操作有非零 telemetry。  记忆技能 Agent 记忆与技能：让经验可取回、可失效 MemSkill 为什么要把一次性的任务经历变成可再次调用的操作经验？ 情景记忆保留某次发生了什么，但下一任务真正需要的可能是可重复的步骤、前提和失败处理。MemSkill 研究从经历中形成技能，并让执行侧选择合适记忆参与当前决策。抽象过度会丢失环境条件，重复成功也不保证所有场景适用，仍要检查迁移后的执行结果。 教学例：一次修表格经历包含许多对话，后续更需要“先核对列名再转换日期”的操作规则，以及它适用的表格条件。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-memskill-ffe2092a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-82b492a82fb86598">controller 与 designer 在情景记忆到技能的过程中各做什么？</h2>
+<h2 id="qa-82b492a82fb86598">MemSkill 为什么要把一次性的任务经历变成可再次调用的操作经验？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemskill">MemSkill</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Nanyang Technological University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>controller 为当前任务从历史 episode 选择相关经验，designer 将重复成功模式编译成可复用技能，再根据新反馈升级版本。前者解决用哪些证据，后者解决如何形成方法；只检索旧日志而不编译，或只写技能却不关联任务，都缺少一部分链路。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如多个成功导入任务都有“先验证列名”，controller 找到这些经验，designer 才把共同行为整理成可调用技能。</p>
+<p><strong>答案：</strong>情景记忆保留某次发生了什么，但下一任务真正需要的可能是可重复的步骤、前提和失败处理。MemSkill 研究从经历中形成技能，并让执行侧选择合适记忆参与当前决策。抽象过度会丢失环境条件，重复成功也不保证所有场景适用，仍要检查迁移后的执行结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一次修表格经历包含许多对话，后续更需要“先核对列名再转换日期”的操作规则，以及它适用的表格条件。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.02474">原论文</a> · <a href="../../../../agent-research/2602.02474-memskill/">实现解读</a> · <a href="#qa-82b492a82fb86598">问题链接</a></p>
 </details>
@@ -2624,16 +2624,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.02474">原论文</a> · <a href="../../../../agent-research/2602.02474-memskill/">实现解读</a> · <a href="#qa-69a2bd22598ec1e6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sage" data-paper-title="SAGE" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SAGE Agent University of Wisconsin–Madison 2025-12-18 从成功轨迹抽象技能，失败时修订或淘汰，并以任务回报学习技能检索与复用。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 1.0000，average cost 0.3000；方法特有操作有非零 telemetry。  技能库强化学习 Agent 记忆与技能：让经验可取回、可失效 SAGE 技能失败后为什么既可以修订也可以淘汰？ 失败可能表明步骤需局部修复，也可能说明技能过时或不适合当前分布。只追加成功摘要会保留错误，全部淘汰又浪费可修复知识；SAGE 根据任务回报更新技能及其检索复用策略，目的在于持续管理而非无限增长库。 例如参数名称变更可修订，某服务永久下线则可能应淘汰对应技能，不必用同一种处理所有失败。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sage" data-paper-title="SAGE" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="SAGE Agent University of Wisconsin–Madison 2025-12-18 从成功轨迹抽象技能，失败时修订或淘汰，并以任务回报学习技能检索与复用。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 1.0000，average cost 0.3000；方法特有操作有非零 telemetry。  技能库强化学习 Agent 记忆与技能：让经验可取回、可失效 SAGE 为什么把“会使用积累的技能”也作为 Agent 的学习目标？ 技能文档存在不代表策略能在合适时机找到并正确使用它，甚至可能因错误匹配干扰任务。SAGE 把经验形成的技能与检索使用联系起来，让后续执行反馈影响技能生命周期。研究对象是可持续利用经验的策略，不能只以库大小或成功轨迹数量判断是否学会。 教学例：库里有数据库迁移技能，但当前只是查一条记录；能分清何时不该调用这份技能，同样属于有效使用经验。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-sage-ae754679" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-52bc9ca93fa82930">SAGE 技能失败后为什么既可以修订也可以淘汰？</h2>
+<h2 id="qa-52bc9ca93fa82930">SAGE 为什么把“会使用积累的技能”也作为 Agent 的学习目标？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asage">SAGE</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Wisconsin–Madison</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>失败可能表明步骤需局部修复，也可能说明技能过时或不适合当前分布。只追加成功摘要会保留错误，全部淘汰又浪费可修复知识；SAGE 根据任务回报更新技能及其检索复用策略，目的在于持续管理而非无限增长库。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如参数名称变更可修订，某服务永久下线则可能应淘汰对应技能，不必用同一种处理所有失败。</p>
+<p><strong>答案：</strong>技能文档存在不代表策略能在合适时机找到并正确使用它，甚至可能因错误匹配干扰任务。SAGE 把经验形成的技能与检索使用联系起来，让后续执行反馈影响技能生命周期。研究对象是可持续利用经验的策略，不能只以库大小或成功轨迹数量判断是否学会。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：库里有数据库迁移技能，但当前只是查一条记录；能分清何时不该调用这份技能，同样属于有效使用经验。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.17102">原论文</a> · <a href="../../../../agent-research/2512.17102-sage/">实现解读</a> · <a href="#qa-52bc9ca93fa82930">问题链接</a></p>
 </details>
@@ -2677,16 +2677,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.17102">原论文</a> · <a href="../../../../agent-research/2512.17102-sage/">实现解读</a> · <a href="#qa-22f204cc4f69319a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:legomem" data-paper-title="LEGOMem" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="LEGOMem Agent Microsoft Research 2025-10-06 整段成功轨迹难以迁移到新任务，单一全局记忆又混合了任务分解和工具执行。LEGOMem 把经验拆成像积木一样的 procedural units：orchestrator memory 保存任务分解与委派，agent memory 保存具体动作模板，运行时按新任务重新组合。 保真度：本地实现编排器与执行层过程单元、成功轨迹提取和跨 episode 复用；保真度：本地实现编排器与执行层过程单元、成功轨迹提取和跨 episode 复用；当前 PlanBench mini 不替代论文的 OfficeBench 多 Agent 环境。当前没有真实 Office 应用、LLM 多 Agent 委派或错误恢复。实现证明过程单元能提取、验证和跨 episode 复用，但不构成 OfficeBench 原始结果的复刻。planbench-mini 使用可验证结构化计划。实现从成功计划提取 action/domain 单元，分别复用高层分解和细粒度动作，并记录 reused_plans。  过程记忆 Agent 记忆与技能：让经验可取回、可失效 orchestrator memory 与 agent memory 为什么分别存过程单元？ 编排器需要任务分解和委派经验，执行 Agent 需要具体动作模板，两者抽象层次不同。拆分后可在新任务组合高层流程与低层动作，而不搬整段旧轨迹；只有通过任务验证的单元才进入长期记忆，避免把未证实步骤长期复用。 例如“收集数据后交给分析者”属于编排经验，某表格工具如何读范围属于执行经验，可各自复用而不绑定同一旧任务。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:legomem" data-paper-title="LEGOMem" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="LEGOMem Agent Microsoft Research 2025-10-06 整段成功轨迹难以迁移到新任务，单一全局记忆又混合了任务分解和工具执行。LEGOMem 把经验拆成像积木一样的 procedural units：orchestrator memory 保存任务分解与委派，agent memory 保存具体动作模板，运行时按新任务重新组合。 保真度：本地实现编排器与执行层过程单元、成功轨迹提取和跨 episode 复用；保真度：本地实现编排器与执行层过程单元、成功轨迹提取和跨 episode 复用；当前 PlanBench mini 不替代论文的 OfficeBench 多 Agent 环境。当前没有真实 Office 应用、LLM 多 Agent 委派或错误恢复。实现证明过程单元能提取、验证和跨 episode 复用，但不构成 OfficeBench 原始结果的复刻。planbench-mini 使用可验证结构化计划。实现从成功计划提取 action/domain 单元，分别复用高层分解和细粒度动作，并记录 reused_plans。  过程记忆 Agent 记忆与技能：让经验可取回、可失效 LegoMem 为什么关注由多个步骤和角色组成的重复工作流？ 办公等任务常共享部分流程，但目标和参与角色会变。LegoMem 希望保存可重新组织的程序性经验，让新任务复用合适步骤，而不是只能照搬一次完整执行。拆分后的单元仍要保留依赖与上下文，否则看似可拼装的步骤可能缺少输入，无法实际完成工作。 教学例：周报和项目简报都需要收集数据与核对来源，但审批对象不同，可复用收集步骤，再为当前任务重新编排交接。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-legomem-3e37af3a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c4c27071fd8d1be5">orchestrator memory 与 agent memory 为什么分别存过程单元？</h2>
+<h2 id="qa-c4c27071fd8d1be5">LegoMem 为什么关注由多个步骤和角色组成的重复工作流？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alegomem">LEGOMem</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>编排器需要任务分解和委派经验，执行 Agent 需要具体动作模板，两者抽象层次不同。拆分后可在新任务组合高层流程与低层动作，而不搬整段旧轨迹；只有通过任务验证的单元才进入长期记忆，避免把未证实步骤长期复用。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“收集数据后交给分析者”属于编排经验，某表格工具如何读范围属于执行经验，可各自复用而不绑定同一旧任务。</p>
+<p><strong>答案：</strong>办公等任务常共享部分流程，但目标和参与角色会变。LegoMem 希望保存可重新组织的程序性经验，让新任务复用合适步骤，而不是只能照搬一次完整执行。拆分后的单元仍要保留依赖与上下文，否则看似可拼装的步骤可能缺少输入，无法实际完成工作。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：周报和项目简报都需要收集数据与核对来源，但审批对象不同，可复用收集步骤，再为当前任务重新编排交接。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与算法；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.04851">原论文</a> · <a href="../../../../agent-research/2510.04851-legomem/">实现解读</a> · <a href="#qa-c4c27071fd8d1be5">问题链接</a></p>
 </details>
@@ -2757,42 +2757,42 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.21428">原论文</a> · <a href="../../../../agent-research/2507.21428-memtool/">实现解读</a> · <a href="#qa-356e892465a4deff">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memtool" data-paper-title="MemTool" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemTool Agent PricewaterhouseCoopers Commercial Technology and Innovation Office 2025-07-29 大量 MCP 工具描述会迅速占满上下文，静态截断又可能删掉当前工作流需要的工具。MemTool 比较 autonomous、workflow 和 hybrid 管理方式；hybrid 策略保护当前工作流的必需工具，其余工具依据近期性和历史成功率动态淘汰。 保真度：本地实现 hybrid 工具记忆、工作流保护和动态淘汰；保真度：本地实现 hybrid 工具记忆、工作流保护和动态淘汰；ScaleMCP mini 只验证多轮工具集合管理，不包含 5,000 个真实 MCP server。工具是本地确定性描述，没有真实 MCP 网络延迟、权限失败或模型工具选择误差。结果支持受限上下文的淘汰逻辑与指标链路，不能直接对比论文的 5,000-server 实验。scalemcp-mini 生成连续工具需求，在固定 memory size 下更新保护集合、淘汰非必要工具，并统计 task success、上下文成本和 tool_evictions。  工具记忆 Agent 记忆与技能：让经验可取回、可失效 hybrid 与纯 recency 淘汰的关键区别是什么？ hybrid 先保护工作流必需工具，只有剩余集合才按近期性和历史成功率排名淘汰；纯 recency 可能误删即将用到但尚未调用的步骤。保护集也需正确识别，不能用隐藏 required_tools 真值直接给策略降低难度。 例如新流程最后一步才需要发票工具，它近期性为零但属于必需项，混合策略应先保护而非依排名删除。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memtool" data-paper-title="MemTool" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemTool Agent PricewaterhouseCoopers Commercial Technology and Innovation Office 2025-07-29 大量 MCP 工具描述会迅速占满上下文，静态截断又可能删掉当前工作流需要的工具。MemTool 比较 autonomous、workflow 和 hybrid 管理方式；hybrid 策略保护当前工作流的必需工具，其余工具依据近期性和历史成功率动态淘汰。 保真度：本地实现 hybrid 工具记忆、工作流保护和动态淘汰；保真度：本地实现 hybrid 工具记忆、工作流保护和动态淘汰；ScaleMCP mini 只验证多轮工具集合管理，不包含 5,000 个真实 MCP server。工具是本地确定性描述，没有真实 MCP 网络延迟、权限失败或模型工具选择误差。结果支持受限上下文的淘汰逻辑与指标链路，不能直接对比论文的 5,000-server 实验。scalemcp-mini 生成连续工具需求，在固定 memory size 下更新保护集合、淘汰非必要工具，并统计 task success、上下文成本和 tool_evictions。  工具记忆 Agent 记忆与技能：让经验可取回、可失效 autonomous、workflow 与 hybrid 管理工具描述，决策依据有什么不同？ autonomous 让 Agent 自主决定保留或移除，workflow 利用当前流程需要的工具，hybrid 将流程保护与其他工具的动态管理结合。它们区别在于决策自由度和结构约束，不能仅按移除率判断好坏；省下描述却丢失必需接口，任务仍会失败。 教学例：Agent 自主删掉很少用的支付接口，当前流程却即将付款；workflow 信息能指出它的必要性，hybrid 再处理其余工具。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-13511d15aa68dae4">hybrid 与纯 recency 淘汰的关键区别是什么？</h2>
+<h2 id="qa-13511d15aa68dae4">autonomous、workflow 与 hybrid 管理工具描述，决策依据有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemtool">MemTool</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · PricewaterhouseCoopers Commercial Technology and Innovation Office</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>hybrid 先保护工作流必需工具，只有剩余集合才按近期性和历史成功率排名淘汰；纯 recency 可能误删即将用到但尚未调用的步骤。保护集也需正确识别，不能用隐藏 required_tools 真值直接给策略降低难度。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如新流程最后一步才需要发票工具，它近期性为零但属于必需项，混合策略应先保护而非依排名删除。</p>
+<p><strong>答案：</strong>autonomous 让 Agent 自主决定保留或移除，workflow 利用当前流程需要的工具，hybrid 将流程保护与其他工具的动态管理结合。它们区别在于决策自由度和结构约束，不能仅按移除率判断好坏；省下描述却丢失必需接口，任务仍会失败。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Agent 自主删掉很少用的支付接口，当前流程却即将付款；workflow 信息能指出它的必要性，hybrid 再处理其余工具。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与算法；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.21428">原论文</a> · <a href="../../../../agent-research/2507.21428-memtool/">实现解读</a> · <a href="#qa-13511d15aa68dae4">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memtool" data-paper-title="MemTool" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemTool Agent PricewaterhouseCoopers Commercial Technology and Innovation Office 2025-07-29 大量 MCP 工具描述会迅速占满上下文，静态截断又可能删掉当前工作流需要的工具。MemTool 比较 autonomous、workflow 和 hybrid 管理方式；hybrid 策略保护当前工作流的必需工具，其余工具依据近期性和历史成功率动态淘汰。 保真度：本地实现 hybrid 工具记忆、工作流保护和动态淘汰；保真度：本地实现 hybrid 工具记忆、工作流保护和动态淘汰；ScaleMCP mini 只验证多轮工具集合管理，不包含 5,000 个真实 MCP server。工具是本地确定性描述，没有真实 MCP 网络延迟、权限失败或模型工具选择误差。结果支持受限上下文的淘汰逻辑与指标链路，不能直接对比论文的 5,000-server 实验。scalemcp-mini 生成连续工具需求，在固定 memory size 下更新保护集合、淘汰非必要工具，并统计 task success、上下文成本和 tool_evictions。  工具记忆 Agent 记忆与技能：让经验可取回、可失效 容量已满时可以为了满足上限强制淘汰 required 工具吗？ 不应。公式只在非保护集合中找最低分，必需集合优先于启发式；若容量无法容纳应显式处理不可行合同，不能静默破坏流程。当前本地工具为确定性描述，无真实网络、权限失败或模型误选，不能对标五千服务器实验。 例如所有槽都被当前必需工具占用，新描述到达时不能偷偷删一个必需接口，再把后续调用失败归因模型。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memtool" data-paper-title="MemTool" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemTool Agent PricewaterhouseCoopers Commercial Technology and Innovation Office 2025-07-29 大量 MCP 工具描述会迅速占满上下文，静态截断又可能删掉当前工作流需要的工具。MemTool 比较 autonomous、workflow 和 hybrid 管理方式；hybrid 策略保护当前工作流的必需工具，其余工具依据近期性和历史成功率动态淘汰。 保真度：本地实现 hybrid 工具记忆、工作流保护和动态淘汰；保真度：本地实现 hybrid 工具记忆、工作流保护和动态淘汰；ScaleMCP mini 只验证多轮工具集合管理，不包含 5,000 个真实 MCP server。工具是本地确定性描述，没有真实 MCP 网络延迟、权限失败或模型工具选择误差。结果支持受限上下文的淘汰逻辑与指标链路，不能直接对比论文的 5,000-server 实验。scalemcp-mini 生成连续工具需求，在固定 memory size 下更新保护集合、淘汰非必要工具，并统计 task success、上下文成本和 tool_evictions。  工具记忆 Agent 记忆与技能：让经验可取回、可失效 近期性与历史成功率的加权分数，应怎样参与非保护工具的淘汰？ 先限定候选为当前工作流保护集之外的工具，再按 λ 近期性加上一减 λ 的成功率计算保留分，淘汰其中最低者。权重调节近期需求与过往表现的取舍，不是重新定义保护集合。本地使用确定性工具描述，分数和淘汰计数不能换算成真实网络工具的完成率。 教学例：两个可淘汰工具中，一个刚用过但常失败，另一个较久未用但可靠；λ 决定偏向，当前流程必需工具不参加这次排名。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-c38703d1cf219e1f">容量已满时可以为了满足上限强制淘汰 required 工具吗？</h2>
+<h2 id="qa-c38703d1cf219e1f">近期性与历史成功率的加权分数，应怎样参与非保护工具的淘汰？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemtool">MemTool</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · PricewaterhouseCoopers Commercial Technology and Innovation Office</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不应。公式只在非保护集合中找最低分，必需集合优先于启发式；若容量无法容纳应显式处理不可行合同，不能静默破坏流程。当前本地工具为确定性描述，无真实网络、权限失败或模型误选，不能对标五千服务器实验。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如所有槽都被当前必需工具占用，新描述到达时不能偷偷删一个必需接口，再把后续调用失败归因模型。</p>
+<p><strong>答案：</strong>先限定候选为当前工作流保护集之外的工具，再按 λ 近期性加上一减 λ 的成功率计算保留分，淘汰其中最低者。权重调节近期需求与过往表现的取舍，不是重新定义保护集合。本地使用确定性工具描述，分数和淘汰计数不能换算成真实网络工具的完成率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个可淘汰工具中，一个刚用过但常失败，另一个较久未用但可靠；λ 决定偏向，当前流程必需工具不参加这次排名。</p>
 <p class="ar-learning-sources">依据：核心公式与算法、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.21428">原论文</a> · <a href="../../../../agent-research/2507.21428-memtool/">实现解读</a> · <a href="#qa-c38703d1cf219e1f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memgpt" data-paper-title="MemGPT" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemGPT Agent University of California, Berkeley 2023-10-12 有限 context window 使长文档和多轮会话不断遗忘。MemGPT 借鉴操作系统虚拟内存，把常驻核心信息、当前工作上下文和外部归档分层管理；模型通过函数调用移动数据，并以 interrupt/heartbeat 控制继续推理和与用户交互。 本页实现 core、working、archival 三层状态，工作上下文超预算时触发 interrupt、page-out，并在后续任务中 page-in。实现分层状态、换入换出和 interrupt 计数；归档检索使用确定性 key，不调用 embedding 服务或 LLM function calling。成本是统一代理成本，不是 token 或线上延迟。EvoMem mini 120 episodes、seed 42、memory size 24；working tier 使用一半容量，压力触发 page-out，重复任务从 archival tier page-in。  虚拟上下文 Agent 记忆与技能：让经验可取回、可失效 归档容量很大为什么不意味着模型每轮都能直接读到全部内容？ 外部归档只是可存储状态，当前上下文仍受窗口限制，模型需通过函数调用换入所需片段。核心信息、工作区和归档分层使长期保存可行，但检索与调度可能失败，不能把无限存储误写成无限同时可见上下文。 例如一年前的用户偏好在归档中，当前回答前仍需检索并 page-in；仅文件存在不会自动影响下一 token。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memgpt" data-paper-title="MemGPT" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="MemGPT Agent University of California, Berkeley 2023-10-12 有限 context window 使长文档和多轮会话不断遗忘。MemGPT 借鉴操作系统虚拟内存，把常驻核心信息、当前工作上下文和外部归档分层管理；模型通过函数调用移动数据，并以 interrupt/heartbeat 控制继续推理和与用户交互。 本页实现 core、working、archival 三层状态，工作上下文超预算时触发 interrupt、page-out，并在后续任务中 page-in。实现分层状态、换入换出和 interrupt 计数；归档检索使用确定性 key，不调用 embedding 服务或 LLM function calling。成本是统一代理成本，不是 token 或线上延迟。EvoMem mini 120 episodes、seed 42、memory size 24；working tier 使用一半容量，压力触发 page-out，重复任务从 archival tier page-in。  虚拟上下文 Agent 记忆与技能：让经验可取回、可失效 MemGPT 为什么把长文档和长对话问题类比成有限内存管理？ 模型每次能直接读取的上下文有限，而用户资料和历史可远大于这个窗口。MemGPT 研究让 Agent 主动在可见工作区与外部存储间调度信息，以接续长期任务。外部容量大不意味着当前知道全部内容，检索、换入与保存选择仍会影响答案并产生开销。 教学例：用户问半年前合同里的条款，模型需要找到并换入相关记录；文件一直存在硬盘中，不代表它已经在当前上下文里。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-memgpt-81032c11" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-21988cc15fb83697">归档容量很大为什么不意味着模型每轮都能直接读到全部内容？</h2>
+<h2 id="qa-21988cc15fb83697">MemGPT 为什么把长文档和长对话问题类比成有限内存管理？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amemgpt">MemGPT</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, Berkeley</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>外部归档只是可存储状态，当前上下文仍受窗口限制，模型需通过函数调用换入所需片段。核心信息、工作区和归档分层使长期保存可行，但检索与调度可能失败，不能把无限存储误写成无限同时可见上下文。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一年前的用户偏好在归档中，当前回答前仍需检索并 page-in；仅文件存在不会自动影响下一 token。</p>
+<p><strong>答案：</strong>模型每次能直接读取的上下文有限，而用户资料和历史可远大于这个窗口。MemGPT 研究让 Agent 主动在可见工作区与外部存储间调度信息，以接续长期任务。外部容量大不意味着当前知道全部内容，检索、换入与保存选择仍会影响答案并产生开销。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用户问半年前合同里的条款，模型需要找到并换入相关记录；文件一直存在硬盘中，不代表它已经在当前上下文里。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.08560">原论文</a> · <a href="../../../../agent-research/2310.08560-memgpt/">实现解读</a> · <a href="#qa-21988cc15fb83697">问题链接</a></p>
 </details>
@@ -2916,15 +2916,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2304.03442">原论文</a> · <a href="../../../../agent-research/2304.03442-generative-agents/">实现解读</a> · <a href="#qa-5c25df77a18e7bbd">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:generative-agents" data-paper-title="Generative Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Generative Agents Agent Stanford University 2023-04-07 只把完整历史塞给 LLM 无法支撑长期一致行为。论文把每次观察写入 memory stream，按 recency、importance、relevance 检索；累计重要事件达到阈值后生成更高层 reflection，再结合记忆与当前状态制定日程和行动计划。 本页实现 memory stream 的相关性/近期性/重要性检索、累计重要性触发反思，以及用检索记忆生成计划。复现记忆打分、反思触发和计划依赖；没有运行 25 个 LLM persona、Smallville 地图或人类可信度评测，因此这里只比较执行成功率、上下文代理成本和内部状态。EvoMem mini 120 episodes、seed 42、memory size 24，采用三项打分取 top-3，并按累计重要性合成 reflection。  记忆与反思 Agent 记忆与技能：让经验可取回、可失效 recency、importance、relevance 三项为何不能只留其中一项？ 近期性偏向新信息，重要性保留对长期行为影响大的事件，相关性根据当前问题筛选。只按近期性会遗忘旧承诺，只按重要性可能总提无关大事，只按相关性又可能忽视时间变化；三者组合也仍需权重与任务验证。 例如旧日答应参加聚会很重要，今天的地点变化很新，当前计划需同时检索两者，而非只取最新闲聊。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:generative-agents" data-paper-title="Generative Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Generative Agents Agent Stanford University 2023-04-07 只把完整历史塞给 LLM 无法支撑长期一致行为。论文把每次观察写入 memory stream，按 recency、importance、relevance 检索；累计重要事件达到阈值后生成更高层 reflection，再结合记忆与当前状态制定日程和行动计划。 本页实现 memory stream 的相关性/近期性/重要性检索、累计重要性触发反思，以及用检索记忆生成计划。复现记忆打分、反思触发和计划依赖；没有运行 25 个 LLM persona、Smallville 地图或人类可信度评测，因此这里只比较执行成功率、上下文代理成本和内部状态。EvoMem mini 120 episodes、seed 42、memory size 24，采用三项打分取 top-3，并按累计重要性合成 reflection。  记忆与反思 Agent 记忆与技能：让经验可取回、可失效 reflection 与 planning 在模拟日常行为时，分别回答什么问题？ reflection 从多段经历形成较高层理解，例如对关系或习惯的推断；planning 根据目标、记忆和当前时间安排接下来做什么。推断可影响计划，但推断不是已发生事实，计划也不是已执行结果。将两者分开才能追踪一个行为是依据什么认识，又是否真正发生。 教学例：多次互动让角色推断邻居喜欢园艺，这是 reflection；决定下午邀请邻居一起买种子，是基于该认识形成的计划。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-86aad2b622fd5b5f">recency、importance、relevance 三项为何不能只留其中一项？</h2>
+<h2 id="qa-86aad2b622fd5b5f">reflection 与 planning 在模拟日常行为时，分别回答什么问题？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agenerative-agents">Generative Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Stanford University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>近期性偏向新信息，重要性保留对长期行为影响大的事件，相关性根据当前问题筛选。只按近期性会遗忘旧承诺，只按重要性可能总提无关大事，只按相关性又可能忽视时间变化；三者组合也仍需权重与任务验证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如旧日答应参加聚会很重要，今天的地点变化很新，当前计划需同时检索两者，而非只取最新闲聊。</p>
+<p><strong>答案：</strong>reflection 从多段经历形成较高层理解，例如对关系或习惯的推断；planning 根据目标、记忆和当前时间安排接下来做什么。推断可影响计划，但推断不是已发生事实，计划也不是已执行结果。将两者分开才能追踪一个行为是依据什么认识，又是否真正发生。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：多次互动让角色推断邻居喜欢园艺，这是 reflection；决定下午邀请邻居一起买种子，是基于该认识形成的计划。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2304.03442">原论文</a> · <a href="../../../../agent-research/2304.03442-generative-agents/">实现解读</a> · <a href="#qa-86aad2b622fd5b5f">问题链接</a></p>
 </details>

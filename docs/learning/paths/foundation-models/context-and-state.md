@@ -120,16 +120,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.31574v1">原论文</a> · <a href="../../../../foundation-models/2610.31574-ttr-compressor/">实现解读</a> · <a href="#qa-9ee87e3a06c2bbc4">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ttr-compressor" data-paper-title="Rethinking Sequence Compression with Test-time Regression" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Rethinking Sequence Compression with Test-time Regression 基础模型 The Chinese University of Hong Kong 2026-10-22 固定池化或投影分别聚合 token，难以按当前输入的相关结构调整压缩。TTR 把一组 token 视作回归观测：由 token 方向构造 key，由保留模长的原始 token 生成可学习标量 target；每次前向精确求解 ridge 系数，直接把系数作为压缩表示。外层任务 loss 通过闭式求解训练 target 投影与正则。“test-time”指输入相关的回归系数在前向内重新拟合，不表示推理时更新模型参数。基础版本只有个可训练参数，不是另建一个 agent 或训练时读取正确压缩答案。 完整模型训练和多基准评估成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动重试或实现队列。三个 seed 不会把机制诊断升级成能力复现。ttr_compress 独立实现正对角 generalized ridge 与 dual Cholesky；TTRCompressor 将注册成可训练参数。diagnostic(seed, device=&#x27;cpu&#x27;) 生成4组、每组7个12维 token，执行外层反传和一次真实 SGD 更新，返回严格的 seed/metrics/checks。既不下载数据或权重，也不调用 pretrained 模型。  序列压缩 可微测试时回归 基础模型 长上下文：注意力、递归状态与记忆 TTR 为什么只归一化 key，却让 target 仍由原始 token 产生？ key使用方向，target保留原始模长投影，这是定义性的不对称。若target也改为aᵀk，静态a就可能平凡拟合；实现还需保留solve的梯度，用Cholesky解方程而非detach结果。 示意：方向相同、长度不同的两个token，应能贡献不同target，而不是被归一化后变得完全相同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ttr-compressor" data-paper-title="Rethinking Sequence Compression with Test-time Regression" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Rethinking Sequence Compression with Test-time Regression 基础模型 The Chinese University of Hong Kong 2026-10-22 固定池化或投影分别聚合 token，难以按当前输入的相关结构调整压缩。TTR 把一组 token 视作回归观测：由 token 方向构造 key，由保留模长的原始 token 生成可学习标量 target；每次前向精确求解 ridge 系数，直接把系数作为压缩表示。外层任务 loss 通过闭式求解训练 target 投影与正则。“test-time”指输入相关的回归系数在前向内重新拟合，不表示推理时更新模型参数。基础版本只有个可训练参数，不是另建一个 agent 或训练时读取正确压缩答案。 完整模型训练和多基准评估成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动重试或实现队列。三个 seed 不会把机制诊断升级成能力复现。ttr_compress 独立实现正对角 generalized ridge 与 dual Cholesky；TTRCompressor 将注册成可训练参数。diagnostic(seed, device=&#x27;cpu&#x27;) 生成4组、每组7个12维 token，执行外层反传和一次真实 SGD 更新，返回严格的 seed/metrics/checks。既不下载数据或权重，也不调用 pretrained 模型。  序列压缩 可微测试时回归 基础模型 长上下文：注意力、递归状态与记忆 TTR 的 dual solve 为什么在 token 轴形成 T×T 矩阵，且不能 detach？ 用K按D的逆平方根缩放后，解I_T加K_tilde K_tilde转置的Cholesky方程，再映射回d维系数。外层loss需要通过solve训练target投影和正则，detach会切断定义中的学习路径；复杂度也保留T的三次项。 示意：T远小于d时解token轴方程较合适，但不能据此把任意T规模都宣称为只需O(T²d)。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-70dfe34e2a284c5f">TTR 为什么只归一化 key，却让 target 仍由原始 token 产生？</h2>
+<h2 id="qa-70dfe34e2a284c5f">TTR 的 dual solve 为什么在 token 轴形成 T×T 矩阵，且不能 detach？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Attr-compressor">Rethinking Sequence Compression with Test-time Regression</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · The Chinese University of Hong Kong</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>key使用方向，target保留原始模长投影，这是定义性的不对称。若target也改为aᵀk，静态a就可能平凡拟合；实现还需保留solve的梯度，用Cholesky解方程而非detach结果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>方向相同、长度不同的两个token，应能贡献不同target，而不是被归一化后变得完全相同。</p>
-<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p><strong>答案：</strong>用K按D的逆平方根缩放后，解I_T加K_tilde K_tilde转置的Cholesky方程，再映射回d维系数。外层loss需要通过solve训练target投影和正则，detach会切断定义中的学习路径；复杂度也保留T的三次项。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>T远小于d时解token轴方程较合适，但不能据此把任意T规模都宣称为只需O(T²d)。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.31574v1">原论文</a> · <a href="../../../../foundation-models/2610.31574-ttr-compressor/">实现解读</a> · <a href="#qa-70dfe34e2a284c5f">问题链接</a></p>
 </details>
 </article>
@@ -451,16 +451,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00958">原论文</a> · <a href="../../../../foundation-models/2610.00958-rea/">实现解读</a> · <a href="#qa-155fe90c15fcfee8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:triadic-linear-attention" data-paper-title="Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling 基础模型 MIT / MIT-IBM Watson AI Lab 2026-09-29 普通线性注意力写入的二维状态；Triadic 再加入第二 key，写入，读取时用收缩两个 key 轴。第二 key 维度为时，状态容量乘以，只新增两组 projection；严格退化为普通线性注意力。 复现级别：L1 递推机制。复现级别：L1 递推机制。实现论文 Eq. (2)–(3) 的写入、双 query 收缩和按第二 key 轴衰减。triadic_linear_attention 是透明的 recurrent reference，测试对照显式求和、检查因果性、退化与梯度；三种子机制结果见 metrics/mechanism-seeds42-44.json。未实现论文 Triton chunkwise kernel、Gated DeltaNet upcycling 或长书语言建模，不能把小张量一致性当成论文效果复现。  网络架构 线性注意力 长上下文 基础模型 长上下文：注意力、递归状态与记忆 Triadic Linear Attention 为什么为记忆增加第二个 key？ 普通线性注意力用key与value构成二维状态；Triadic再加入另一key轴，允许两个查询共同选择关联，扩展可表达的记忆结构，而不是简单延长输入窗口。 示意：一个查询标识对象，另一个标识关系类型，两者共同读取相应value。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:triadic-linear-attention" data-paper-title="Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling 基础模型 MIT / MIT-IBM Watson AI Lab 2026-09-29 普通线性注意力写入的二维状态；Triadic 再加入第二 key，写入，读取时用收缩两个 key 轴。第二 key 维度为时，状态容量乘以，只新增两组 projection；严格退化为普通线性注意力。 复现级别：L1 递推机制。复现级别：L1 递推机制。实现论文 Eq. (2)–(3) 的写入、双 query 收缩和按第二 key 轴衰减。triadic_linear_attention 是透明的 recurrent reference，测试对照显式求和、检查因果性、退化与梯度；三种子机制结果见 metrics/mechanism-seeds42-44.json。未实现论文 Triton chunkwise kernel、Gated DeltaNet upcycling 或长书语言建模，不能把小张量一致性当成论文效果复现。  网络架构 线性注意力 长上下文 基础模型 长上下文：注意力、递归状态与记忆 线性注意力的“状态”是逐条历史列表，还是累积的关联记忆？ 普通线性注意力把key与value的外积写入累积二维状态，读取用query收缩，而不是逐条保留原始KV列表。Triadic在此基础上增加一个key轴，讨论的是关联状态容量与寻址条件。 示意：状态像把多次写入叠加到一张关联表；新增key轴相当于增加一种联合寻址条件。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-triadic-linear-attention-debbb585" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c44e1dc920136d0b">Triadic Linear Attention 为什么为记忆增加第二个 key？</h2>
+<h2 id="qa-c44e1dc920136d0b">线性注意力的“状态”是逐条历史列表，还是累积的关联记忆？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atriadic-linear-attention">Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT / MIT-IBM Watson AI Lab</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>普通线性注意力用key与value构成二维状态；Triadic再加入另一key轴，允许两个查询共同选择关联，扩展可表达的记忆结构，而不是简单延长输入窗口。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>一个查询标识对象，另一个标识关系类型，两者共同读取相应value。</p>
+<p><strong>答案：</strong>普通线性注意力把key与value的外积写入累积二维状态，读取用query收缩，而不是逐条保留原始KV列表。Triadic在此基础上增加一个key轴，讨论的是关联状态容量与寻址条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>状态像把多次写入叠加到一张关联表；新增key轴相当于增加一种联合寻址条件。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36529">原论文</a> · <a href="../../../../foundation-models/2609.36529-triadic-linear-attention/">实现解读</a> · <a href="#qa-c44e1dc920136d0b">问题链接</a></p>
 </details>
@@ -610,16 +610,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.35664">原论文</a> · <a href="../../../../foundation-models/2609.35664-ms-gla/">实现解读</a> · <a href="#qa-97483a5c9b1dce32">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:oda" data-paper-title="On-Demand Attention: Efficient Long-Context Decoding with Learned Recall" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="On-Demand Attention: Efficient Long-Context Decoding with Learned Recall 基础模型 Southern University of Science and Technology 2026-09-17 默认只读局部 KV，由轻量 recall head 在全局注意力发生前预测其收益；仅高收益 token 触发全局读取，完整 KV 仍保留。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 recall gate 和条件全局注意力；真实 A100 receipt 只证明 CUDA 路径，不外推 vLLM 吞吐。本地执行 recall gate 和条件全局注意力；真实 A100 receipt 只证明 CUDA 路径，不外推 vLLM 吞吐。  注意力与长上下文 推理效率 基础模型 长上下文：注意力、递归状态与记忆 On-Demand Attention 为什么默认只读取局部 KV？ 大多数token不一定需要全历史访问。ODA先用轻量recall head预测全局读取的收益，只对高收益token付出额外访问成本；完整历史KV仍保留，以便需要时找回。 示意：常规续写先读附近词，遇到要求回忆文首编号的token时再触发全局读取。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:oda" data-paper-title="On-Demand Attention: Efficient Long-Context Decoding with Learned Recall" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="On-Demand Attention: Efficient Long-Context Decoding with Learned Recall 基础模型 Southern University of Science and Technology 2026-09-17 默认只读局部 KV，由轻量 recall head 在全局注意力发生前预测其收益；仅高收益 token 触发全局读取，完整 KV 仍保留。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 recall gate 和条件全局注意力；真实 A100 receipt 只证明 CUDA 路径，不外推 vLLM 吞吐。本地执行 recall gate 和条件全局注意力；真实 A100 receipt 只证明 CUDA 路径，不外推 vLLM 吞吐。  注意力与长上下文 推理效率 基础模型 长上下文：注意力、递归状态与记忆 ODA 所说的局部历史与远程历史，是按信息重要性划分的吗？ 局部与远程首先是相对当前token的可读位置范围，不是重要与不重要的标签。重要证据可能在很久以前，近邻也可能无关；理解这一点，才能明白为什么局部读取之外仍需要按需全局访问。 示意：刚出现的几个词属于局部窗口，文章开头的人名可能已经在窗口外，却仍对当前问题很重要。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-oda-5fd8c6ed" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-edf84b3436ce3886">On-Demand Attention 为什么默认只读取局部 KV？</h2>
+<h2 id="qa-edf84b3436ce3886">ODA 所说的局部历史与远程历史，是按信息重要性划分的吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aoda">On-Demand Attention: Efficient Long-Context Decoding with Learned Recall</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Southern University of Science and Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>大多数token不一定需要全历史访问。ODA先用轻量recall head预测全局读取的收益，只对高收益token付出额外访问成本；完整历史KV仍保留，以便需要时找回。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>常规续写先读附近词，遇到要求回忆文首编号的token时再触发全局读取。</p>
+<p><strong>答案：</strong>局部与远程首先是相对当前token的可读位置范围，不是重要与不重要的标签。重要证据可能在很久以前，近邻也可能无关；理解这一点，才能明白为什么局部读取之外仍需要按需全局访问。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>刚出现的几个词属于局部窗口，文章开头的人名可能已经在窗口外，却仍对当前问题很重要。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.20734">原论文</a> · <a href="../../../../foundation-models/2609.20734-oda/">实现解读</a> · <a href="#qa-edf84b3436ce3886">问题链接</a></p>
 </details>
@@ -875,16 +875,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.02032">原论文</a> · <a href="../../../../reproductions/2608.02032-dart/">实现解读</a> · <a href="#qa-d8a5db2ce8d1be02">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ttcd" data-paper-title="Learning What to Remember: Test-Time Training via Context Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Learning What to Remember: Test-Time Training via Context Distillation 基础模型 Princeton University 2026-08-03 长窗口教师以隐藏状态差异监督短窗口学生的 fast weights，使有限记忆优先保留未来有用信息。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 ttcd；单 seed 变化为 +78.12% 个百分点。  注意力与长上下文 测试时训练 基础模型 长上下文：注意力、递归状态与记忆 TTCD 为什么让短窗口学生学习长窗口教师的 hidden state？ 短窗口看不到全部历史，有限fast weights需要选择保留有用信息。长窗口教师的隐藏表示为这个选择提供监督，使压缩状态朝保留长程证据的方向学习。 示意：教师能看到前面的人物设定，学生虽窗口较短，仍尝试把相关影响写入快速记忆。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ttcd" data-paper-title="Learning What to Remember: Test-Time Training via Context Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Learning What to Remember: Test-Time Training via Context Distillation 基础模型 Princeton University 2026-08-03 长窗口教师以隐藏状态差异监督短窗口学生的 fast weights，使有限记忆优先保留未来有用信息。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 ttcd；单 seed 变化为 +78.12% 个百分点。  注意力与长上下文 测试时训练 基础模型 长上下文：注意力、递归状态与记忆 TTCD 的长窗口教师与短窗口学生，最直接的信息条件差别是什么？ 教师能看到更长历史，学生受有限窗口或fast-weight记忆约束。教师hidden-state监督提供保留信息的目标，但不能据此假设部署学生也直接访问完整长历史。 示意：教师读过整段背景后给学习信号，学生运行时仍需依靠自己的有限记忆保留相关信息。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-ttcd-fe56ef12" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-9888956d6e16b230">TTCD 为什么让短窗口学生学习长窗口教师的 hidden state？</h2>
+<h2 id="qa-9888956d6e16b230">TTCD 的长窗口教师与短窗口学生，最直接的信息条件差别是什么？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Attcd">Learning What to Remember: Test-Time Training via Context Distillation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>短窗口看不到全部历史，有限fast weights需要选择保留有用信息。长窗口教师的隐藏表示为这个选择提供监督，使压缩状态朝保留长程证据的方向学习。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>教师能看到前面的人物设定，学生虽窗口较短，仍尝试把相关影响写入快速记忆。</p>
+<p><strong>答案：</strong>教师能看到更长历史，学生受有限窗口或fast-weight记忆约束。教师hidden-state监督提供保留信息的目标，但不能据此假设部署学生也直接访问完整长历史。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教师读过整段背景后给学习信号，学生运行时仍需依靠自己的有限记忆保留相关信息。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.01672">原论文</a> · <a href="../../../../reproductions/2608.01672-ttcd/">实现解读</a> · <a href="#qa-9888956d6e16b230">问题链接</a></p>
 </details>
@@ -928,17 +928,17 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.01672">原论文</a> · <a href="../../../../reproductions/2608.01672-ttcd/">实现解读</a> · <a href="#qa-7295b9f8ace3f89d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:transmem" data-paper-title="TransMem: Transforming Hidden States into Memory for Large Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="TransMem: Transforming Hidden States into Memory for Large Language Models 基础模型 Authors did not disclose affiliation 2026-07-31 将冻结骨干的稀疏历史 hidden states 变换成可复用参数记忆，并用 evidence-conditioned self-distillation 学门控。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 transmem；单 seed 变化为 +12.50% 个百分点。  注意力与长上下文 Agent 记忆 基础模型 长上下文：注意力、递归状态与记忆 TransMem 为什么把稀疏 hidden states 转换成可复用记忆？ 历史hidden states包含骨干已计算的表征。TransMem在冻结骨干的前提下，将部分历史变换为参数记忆，并学习何时把记忆信息加回当前表示，以便复用历史证据。 示意：不必每次把整段旧文本重新拼回输入，也可以学习利用先前抽取的稀疏表征。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:transmem" data-paper-title="TransMem: Transforming Hidden States into Memory for Large Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="TransMem: Transforming Hidden States into Memory for Large Language Models 基础模型 Authors did not disclose affiliation 2026-07-31 将冻结骨干的稀疏历史 hidden states 变换成可复用参数记忆，并用 evidence-conditioned self-distillation 学门控。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 transmem；单 seed 变化为 +12.50% 个百分点。  注意力与长上下文 Agent 记忆 基础模型 长上下文：注意力、递归状态与记忆 TransMem 的 frozen backbone 与可学习记忆门控，是否表示所有参数都不更新？ 冻结指骨干保持不变，记忆门控仍需学习。evidence-conditioned self-distillation用于学习怎样使用历史记忆，不能把冻结骨干写成整个系统没有学习，也不能把记忆状态变化误认成骨干权重更新。 示意：主模型不变，新增记忆支路仍可学习何时把历史信息加回当前状态。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-transmem-2625c67f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-27cc9d050984c6eb">TransMem 为什么把稀疏 hidden states 转换成可复用记忆？</h2>
+<h2 id="qa-27cc9d050984c6eb">TransMem 的 frozen backbone 与可学习记忆门控，是否表示所有参数都不更新？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atransmem">TransMem: Transforming Hidden States into Memory for Large Language Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Authors did not disclose affiliation</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>历史hidden states包含骨干已计算的表征。TransMem在冻结骨干的前提下，将部分历史变换为参数记忆，并学习何时把记忆信息加回当前表示，以便复用历史证据。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>不必每次把整段旧文本重新拼回输入，也可以学习利用先前抽取的稀疏表征。</p>
-<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p><strong>答案：</strong>冻结指骨干保持不变，记忆门控仍需学习。evidence-conditioned self-distillation用于学习怎样使用历史记忆，不能把冻结骨干写成整个系统没有学习，也不能把记忆状态变化误认成骨干权重更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>主模型不变，新增记忆支路仍可学习何时把历史信息加回当前状态。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.29032">原论文</a> · <a href="../../../../reproductions/2607.29032-transmem/">实现解读</a> · <a href="#qa-27cc9d050984c6eb">问题链接</a></p>
 </details>
 </article>
@@ -1193,16 +1193,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.18413">原论文</a> · <a href="../../../../reproductions/2607.18413-conv-llm/">实现解读</a> · <a href="#qa-779d00242b977804">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:minimax-sparse-attention" data-paper-title="MiniMax Sparse Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="MiniMax Sparse Attention 基础模型 MiniMax 2026-06-11 长上下文 dense attention 的二次复杂度成为主要瓶颈。MSA 为每个 GQA 组增加轻量 index branch，先选择少数历史 block，主分支再对命中 token 做精确 attention；训练和推理使用同一路径。 复现保真度：核心机制复现。复现保真度：核心机制复现。Index branch、每 GQA 组 top-k block 和精确 sparse attention 均真实训练；109B 预训练与 fused kernel 未复刻。WikiText-2 上训练同初始化/同预算的 tiny dense GQA 与 blockwise MSA，报告 PPL、训练时间和实际 attention pair ratio。  llm sparse-attention gqa long-context 基础模型 长上下文：注意力、递归状态与记忆 MiniMax Sparse Attention 为什么先选 block，再做精确 attention？ 长序列对所有历史位置计算attention开销很大。MSA用轻量索引分支先选择少量历史块，把主分支的精确匹配集中到命中token；选择并不替代块内的精确聚合。 示意：先选可能相关的几段历史，再逐词读取这几段，而非只输出每段一个摘要。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:minimax-sparse-attention" data-paper-title="MiniMax Sparse Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="MiniMax Sparse Attention 基础模型 MiniMax 2026-06-11 长上下文 dense attention 的二次复杂度成为主要瓶颈。MSA 为每个 GQA 组增加轻量 index branch，先选择少数历史 block，主分支再对命中 token 做精确 attention；训练和推理使用同一路径。 复现保真度：核心机制复现。复现保真度：核心机制复现。Index branch、每 GQA 组 top-k block 和精确 sparse attention 均真实训练；109B 预训练与 fused kernel 未复刻。WikiText-2 上训练同初始化/同预算的 tiny dense GQA 与 blockwise MSA，报告 PPL、训练时间和实际 attention pair ratio。  llm sparse-attention gqa long-context 基础模型 长上下文：注意力、递归状态与记忆 MSA 中的历史 block 是新的模型层，还是沿 token 轴组织的候选单元？ block用于把历史token组织成索引候选，轻量分支先选block，主分支再读取其中token；它不是额外Transformer层。理解两个粒度才能区分块选择成本与精确attention成本。 示意：先在目录选章节，再精读该章句子，章节与句子是不同读取粒度。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-minimax-sparse-attention-fdb70645" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7404b15170e7203f">MiniMax Sparse Attention 为什么先选 block，再做精确 attention？</h2>
+<h2 id="qa-7404b15170e7203f">MSA 中的历史 block 是新的模型层，还是沿 token 轴组织的候选单元？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aminimax-sparse-attention">MiniMax Sparse Attention</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · MiniMax</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>长序列对所有历史位置计算attention开销很大。MSA用轻量索引分支先选择少量历史块，把主分支的精确匹配集中到命中token；选择并不替代块内的精确聚合。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>先选可能相关的几段历史，再逐词读取这几段，而非只输出每段一个摘要。</p>
+<p><strong>答案：</strong>block用于把历史token组织成索引候选，轻量分支先选block，主分支再读取其中token；它不是额外Transformer层。理解两个粒度才能区分块选择成本与精确attention成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先在目录选章节，再精读该章句子，章节与句子是不同读取粒度。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.13392">原论文</a> · <a href="../../../../reproductions/2606.13392-minimax-sparse-attention/">实现解读</a> · <a href="#qa-7404b15170e7203f">问题链接</a></p>
 </details>
@@ -1246,17 +1246,17 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.13392">原论文</a> · <a href="../../../../reproductions/2606.13392-minimax-sparse-attention/">实现解读</a> · <a href="#qa-0ce248cccdc3b3a1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:switch-attention" data-paper-title="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers 基础模型 Peking University / Huawei Technologies 2026-03-27 静态 hybrid attention 对所有 token 使用固定模式。Switch Attention 学习细粒度 router，只让需要全局信息的 token 走 full attention。 Fidelity: 核心机制复现。实现逐 token 动态选择 full/local attention 的可学习 router。本地使用可微 soft router，未复刻论文 STE 硬路由、32K continual pretraining 和 branch-selective fused kernel。本地对照口径：基线是 full-attention tiny Transformer；实验组动态混合 full 与 16-token local attention；30-step perplexity 相对 +0.19%（近似持平但略差）。  llm-architecture efficient-attention long-context 基础模型 长上下文：注意力、递归状态与记忆 Switch Attention 为什么要按 token 决定是否读取全局历史？ 静态hybrid模式给所有token固定的读取方式，可能对简单位置花费过多全局计算。细粒度router希望仅让需要远程信息的token走full attention，其余使用局部窗口。 示意：普通短语续写走local，必须回忆文首事实的位置才需要global。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:switch-attention" data-paper-title="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers 基础模型 Peking University / Huawei Technologies 2026-03-27 静态 hybrid attention 对所有 token 使用固定模式。Switch Attention 学习细粒度 router，只让需要全局信息的 token 走 full attention。 Fidelity: 核心机制复现。实现逐 token 动态选择 full/local attention 的可学习 router。本地使用可微 soft router，未复刻论文 STE 硬路由、32K continual pretraining 和 branch-selective fused kernel。本地对照口径：基线是 full-attention tiny Transformer；实验组动态混合 full 与 16-token local attention；30-step perplexity 相对 +0.19%（近似持平但略差）。  llm-architecture efficient-attention long-context 基础模型 长上下文：注意力、递归状态与记忆 Switch Attention 的 local 与 full 两条路径，分别能读到哪些历史？ local只看限定窗口内的可见位置，full可读完整因果历史。二者首先是证据范围与读取成本的差别；router根据token决定路径，不是让full路径访问未来token。 示意：回答刚出现的局部词组可能只需近邻，关联很久以前的信息才可能需要更广历史。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-switch-attention-753b5e50" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-3235ac51ae30aba8">Switch Attention 为什么要按 token 决定是否读取全局历史？</h2>
+<h2 id="qa-3235ac51ae30aba8">Switch Attention 的 local 与 full 两条路径，分别能读到哪些历史？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aswitch-attention">Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Peking University / Huawei Technologies</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>静态hybrid模式给所有token固定的读取方式，可能对简单位置花费过多全局计算。细粒度router希望仅让需要远程信息的token走full attention，其余使用局部窗口。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>普通短语续写走local，必须回忆文首事实的位置才需要global。</p>
-<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p><strong>答案：</strong>local只看限定窗口内的可见位置，full可读完整因果历史。二者首先是证据范围与读取成本的差别；router根据token决定路径，不是让full路径访问未来token。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>回答刚出现的局部词组可能只需近邻，关联很久以前的信息才可能需要更广历史。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.26380">原论文</a> · <a href="../../../../reproductions/2603.26380-switch-attention/">实现解读</a> · <a href="#qa-3235ac51ae30aba8">问题链接</a></p>
 </details>
 </article>

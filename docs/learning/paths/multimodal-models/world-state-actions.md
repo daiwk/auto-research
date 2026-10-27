@@ -27,16 +27,16 @@ hide:
 <p class="ar-learning-status" data-learning-status role="status">88 个问题 · 22 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dt-jepa" data-paper-title="DT-JEPA: Learning to Predict Future Representations for Decision-Making" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="DT-JEPA: Learning to Predict Future Representations for Decision-Making 基础模型 Southeast University 2026-10-23 传统DT用单个return-to-go条件，无法区分回报相同但未来动力学不同的轨迹。本方法将条件改成由历史预测的未来latent分布：历史encoder生成Gaussian参数，EMA target encoder只在训练期编码真实未来；重参数采样的预测未来通过独立gamma/beta MLP调制DT hidden。离线目标为BC加Gaussian NLL；在线通过双target critic的较小值构建多步target，并优化Q1指导的actor目标。 成本过高，不复现（审查 DONE）。D4RL共19个locomotion/navigation数据配置、主表5种子、多个未见reward的在线适配及基线/消融；附录DT4层/4头/512hidden、batch256/context20。原文未给总GPU小时，不臆测。完整offline+online矩阵超单卡短时预算，不安装MuJoCo、不下载轨迹、不启动环境试跑。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  JEPA与世界模型 未来表征与离线决策 多模态 视觉世界建模：状态、生成与动作条件 DT-JEPA 的未来 latent 条件与 return-to-go 表达的信息有何不同？ return-to-go 是一个累计回报量，相同数值可对应不同未来动力学；预测未来 latent 则用历史生成分布，尝试描述可能到达的未来状态。部署只从可观察历史预测，并非读取真实未来；latent 也不保证天然包含任务所需全部信息。 例如绕障碍左走和右走可能回报相同，但未来位置不同；分布式未来条件可表达这种差别，而单个回报数难以区分。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dt-jepa" data-paper-title="DT-JEPA: Learning to Predict Future Representations for Decision-Making" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="DT-JEPA: Learning to Predict Future Representations for Decision-Making 基础模型 Southeast University 2026-10-23 传统DT用单个return-to-go条件，无法区分回报相同但未来动力学不同的轨迹。本方法将条件改成由历史预测的未来latent分布：历史encoder生成Gaussian参数，EMA target encoder只在训练期编码真实未来；重参数采样的预测未来通过独立gamma/beta MLP调制DT hidden。离线目标为BC加Gaussian NLL；在线通过双target critic的较小值构建多步target，并优化Q1指导的actor目标。 成本过高，不复现（审查 DONE）。D4RL共19个locomotion/navigation数据配置、主表5种子、多个未见reward的在线适配及基线/消融；附录DT4层/4头/512hidden、batch256/context20。原文未给总GPU小时，不臆测。完整offline+online矩阵超单卡短时预算，不安装MuJoCo、不下载轨迹、不启动环境试跑。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  JEPA与世界模型 未来表征与离线决策 多模态 视觉世界建模：状态、生成与动作条件 Decision Transformer 为什么可能需要比“期望回报是多少”更丰富的未来条件？ 不同轨迹可能获得相同总回报，却通向完全不同状态，单个 return-to-go 无法区分这些动力学。DT-JEPA 用从历史预测的未来表示分布作为条件，让动作选择获得更具体的未来信息。未来只是预测，不是部署时可读取的真实结果，仍要管理不确定性和训练信息隔离。 教学例：两条路线奖励相同，一条到充电区、另一条到出口；相同回报数字未说明当前该往哪走，未来状态特征提供另一类条件。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-dt-jepa-898e3cdc" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-656e6bff07c6b2fa">DT-JEPA 的未来 latent 条件与 return-to-go 表达的信息有何不同？</h2>
+<h2 id="qa-656e6bff07c6b2fa">Decision Transformer 为什么可能需要比“期望回报是多少”更丰富的未来条件？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adt-jepa">DT-JEPA: Learning to Predict Future Representations for Decision-Making</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Southeast University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>return-to-go 是一个累计回报量，相同数值可对应不同未来动力学；预测未来 latent 则用历史生成分布，尝试描述可能到达的未来状态。部署只从可观察历史预测，并非读取真实未来；latent 也不保证天然包含任务所需全部信息。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如绕障碍左走和右走可能回报相同，但未来位置不同；分布式未来条件可表达这种差别，而单个回报数难以区分。</p>
+<p><strong>答案：</strong>不同轨迹可能获得相同总回报，却通向完全不同状态，单个 return-to-go 无法区分这些动力学。DT-JEPA 用从历史预测的未来表示分布作为条件，让动作选择获得更具体的未来信息。未来只是预测，不是部署时可读取的真实结果，仍要管理不确定性和训练信息隔离。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条路线奖励相同，一条到充电区、另一条到出口；相同回报数字未说明当前该往哪走，未来状态特征提供另一类条件。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32657v1">原论文</a> · <a href="../../../../foundation-models/2610.32657-dt-jepa/">实现解读</a> · <a href="#qa-656e6bff07c6b2fa">问题链接</a></p>
 </details>
@@ -80,16 +80,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32657v1">原论文</a> · <a href="../../../../foundation-models/2610.32657-dt-jepa/">实现解读</a> · <a href="#qa-92f993e968b93b89">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:uniaction" data-paper-title="UniAction: Unified Action Conditioning for World Models" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="UniAction: Unified Action Conditioning for World Models 多模态大模型 Stanford University 2026-10-23 异质动作以不同粒度编码，token较多的动作在同一softmax中会仅因数量而占据更大attention mass。UniAction以共享semantic codebook编码元素身份，将(t,y,x)送入既有视频模型的native positional mechanism，再对action部分统一加一个基数bias，保持action内部相对logits不变，同时移除总mass对Na的线性依赖。 成本过高，不复现（审查 DONE）。诊断回调仅证明参数传递，不能当成真实视频backbone位置实现。Wan2.2-I2V-A14B high-noise expert LoRA，GoalForce/SolarWM/EgoDex/DROID各10K clips，共40K段81帧480×832；410反事实生成、多个motion/pose估计器、4个专家和100人评测。完整视频训练/生成显著超过单A100/A30短时资源，不下载14B权重或40K视频，不试跑成本。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  世界模型与动作条件 统一动作表示 多模态 视觉世界建模：状态、生成与动作条件 动作 token 数量为何会影响联合注意力，即使每个 token 相似度没变？ softmax 对所有视觉与动作 logits 一起归一化，同类动作 token 更多会增加它们的总指数权重，仅靠数量就改变总注意力。UniAction 给动作部分加入基数校正，试图去除这种线性数量效应，同时保留动作内部相对分数，而不是把所有动作平均成一个 token。 例如同一动作表示复制四次，未经校正时总权重会变大，模型可能因此比只放一次更偏向动作信息。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:uniaction" data-paper-title="UniAction: Unified Action Conditioning for World Models" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="UniAction: Unified Action Conditioning for World Models 多模态大模型 Stanford University 2026-10-23 异质动作以不同粒度编码，token较多的动作在同一softmax中会仅因数量而占据更大attention mass。UniAction以共享semantic codebook编码元素身份，将(t,y,x)送入既有视频模型的native positional mechanism，再对action部分统一加一个基数bias，保持action内部相对logits不变，同时移除总mass对Na的线性依赖。 成本过高，不复现（审查 DONE）。诊断回调仅证明参数传递，不能当成真实视频backbone位置实现。Wan2.2-I2V-A14B high-noise expert LoRA，GoalForce/SolarWM/EgoDex/DROID各10K clips，共40K段81帧480×832；410反事实生成、多个motion/pose估计器、4个专家和100人评测。完整视频训练/生成显著超过单A100/A30短时资源，不下载14B权重或40K视频，不试跑成本。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  世界模型与动作条件 统一动作表示 多模态 视觉世界建模：状态、生成与动作条件 统一建模不同动作格式时，为什么 token 数量不应直接代表动作的重要性？ 不同动作可按不同粒度离散成 token，同一语义可能因编码更细而占更多位置。UniAction 区分元素身份与时空位置，并处理这种表示数量差异对联合注意力的影响。它约束的是编码粒度带来的偏置，新增真实动作仍可改变内容，不能把所有 token 增加都当成无意义复制。 教学例：同一移动轨迹分成十段或二十段，语义重要性未必翻倍；但若新增一次真正的抓取动作，模型当然应感知到新信息。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-multimodal-models-uniaction-704ab058" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-22a1c4fa397b7c64">动作 token 数量为何会影响联合注意力，即使每个 token 相似度没变？</h2>
+<h2 id="qa-22a1c4fa397b7c64">统一建模不同动作格式时，为什么 token 数量不应直接代表动作的重要性？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Auniaction">UniAction: Unified Action Conditioning for World Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Stanford University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>softmax 对所有视觉与动作 logits 一起归一化，同类动作 token 更多会增加它们的总指数权重，仅靠数量就改变总注意力。UniAction 给动作部分加入基数校正，试图去除这种线性数量效应，同时保留动作内部相对分数，而不是把所有动作平均成一个 token。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一动作表示复制四次，未经校正时总权重会变大，模型可能因此比只放一次更偏向动作信息。</p>
+<p><strong>答案：</strong>不同动作可按不同粒度离散成 token，同一语义可能因编码更细而占更多位置。UniAction 区分元素身份与时空位置，并处理这种表示数量差异对联合注意力的影响。它约束的是编码粒度带来的偏置，新增真实动作仍可改变内容，不能把所有 token 增加都当成无意义复制。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一移动轨迹分成十段或二十段，语义重要性未必翻倍；但若新增一次真正的抓取动作，模型当然应感知到新信息。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32977v1">原论文</a> · <a href="../../../../multimodal-models/2610.32977-uniaction/">实现解读</a> · <a href="#qa-22a1c4fa397b7c64">问题链接</a></p>
 </details>
@@ -133,16 +133,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32977v1">原论文</a> · <a href="../../../../multimodal-models/2610.32977-uniaction/">实现解读</a> · <a href="#qa-0438a167c0dd745e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:inside-jepa" data-paper-title="Inside-JEPA: From Prediction to Relational Grounding in Latent World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Inside-JEPA: From Prediction to Relational Grounding in Latent World Models 基础模型 Australian Institute for Machine Learning, Adelaide University 2026-10-22 普通 JEPA 能预测潜在状态，但潜变量未必对应可解释关系。本文把每个有序实体对的关系通道直接拼入动态状态，并要求逆动态头根据前后关系通道恢复动作；预测损失的未来目标仍由 EMA 编码器提供，而逆动态的未来状态必须来自可反传的 online 编码器。仅预测、读全部状态、只读实体和打乱动作标签的对照用于区分信号来自哪里。原文 §3 该完整矩阵超出单 A100/A30/Mac 短时预算，成本过高，不复现（审查 DONE）；真实 crop、ResNet18、检测跟踪均由外部提供，当前未运行它们。RelationalStateEncoder 接收 [B,4,512] 冻结特征、[B,4,4] 归一化框、实体类型和共享实体 mask，本地组件每次调用最多64对帧；真实 crop、ResNet18、检测跟踪均由外部提供，当前未运行它们。InsideJEPA 实现预测器、可选离散/连续动作条件、五臂损失与显式 EMA 更新。  世界模型 JEPA 关系表示与逆动态 多模态 视觉世界建模：状态、生成与动作条件 为什么 Inside-JEPA 把有序实体对关系直接拼进动态状态？ 普通 latent 可能可预测却不易读出关系，显式关系通道让预测器与逆动态头能直接使用实体间结构。有序对区分 i 到 j 与 j 到 i，例如左于和右于不同；它提供关系归纳偏置，但二维框关系仍是几何代理，不等于理解三维接触或因果。 例如红块在蓝块左边与蓝块在红块左边不能共用同一方向关系值；有序对允许分别表示这两个命题。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:inside-jepa" data-paper-title="Inside-JEPA: From Prediction to Relational Grounding in Latent World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Inside-JEPA: From Prediction to Relational Grounding in Latent World Models 基础模型 Australian Institute for Machine Learning, Adelaide University 2026-10-22 普通 JEPA 能预测潜在状态，但潜变量未必对应可解释关系。本文把每个有序实体对的关系通道直接拼入动态状态，并要求逆动态头根据前后关系通道恢复动作；预测损失的未来目标仍由 EMA 编码器提供，而逆动态的未来状态必须来自可反传的 online 编码器。仅预测、读全部状态、只读实体和打乱动作标签的对照用于区分信号来自哪里。原文 §3 该完整矩阵超出单 A100/A30/Mac 短时预算，成本过高，不复现（审查 DONE）；真实 crop、ResNet18、检测跟踪均由外部提供，当前未运行它们。RelationalStateEncoder 接收 [B,4,512] 冻结特征、[B,4,4] 归一化框、实体类型和共享实体 mask，本地组件每次调用最多64对帧；真实 crop、ResNet18、检测跟踪均由外部提供，当前未运行它们。InsideJEPA 实现预测器、可选离散/连续动作条件、五臂损失与显式 EMA 更新。  世界模型 JEPA 关系表示与逆动态 多模态 视觉世界建模：状态、生成与动作条件 Inside-JEPA 为什么关注潜在状态能否表达“对象之间的关系”？ 世界模型可以预测向量变化，却未必把接触、相对位置等关系组织成可检查信息。Inside-JEPA 把实体与关系纳入状态，并研究动作监督如何塑造关系表示。可解释通道存在不等于语义已被学到，需要对照区分信号来源，不能用维度正确或预测 loss 低替代关系能力验证。 教学例：两个物体外观不变，但从分离变成接触，这种关系变化可能决定下一动作；仅识别物体类别并不足以描述。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-inside-jepa-840eadf0" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c81bf3ff739be368">为什么 Inside-JEPA 把有序实体对关系直接拼进动态状态？</h2>
+<h2 id="qa-c81bf3ff739be368">Inside-JEPA 为什么关注潜在状态能否表达“对象之间的关系”？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ainside-jepa">Inside-JEPA: From Prediction to Relational Grounding in Latent World Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Australian Institute for Machine Learning, Adelaide University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>普通 latent 可能可预测却不易读出关系，显式关系通道让预测器与逆动态头能直接使用实体间结构。有序对区分 i 到 j 与 j 到 i，例如左于和右于不同；它提供关系归纳偏置，但二维框关系仍是几何代理，不等于理解三维接触或因果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如红块在蓝块左边与蓝块在红块左边不能共用同一方向关系值；有序对允许分别表示这两个命题。</p>
+<p><strong>答案：</strong>世界模型可以预测向量变化，却未必把接触、相对位置等关系组织成可检查信息。Inside-JEPA 把实体与关系纳入状态，并研究动作监督如何塑造关系表示。可解释通道存在不等于语义已被学到，需要对照区分信号来源，不能用维度正确或预测 loss 低替代关系能力验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个物体外观不变，但从分离变成接触，这种关系变化可能决定下一动作；仅识别物体类别并不足以描述。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与五臂；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.31194v1">原论文</a> · <a href="../../../../foundation-models/2610.31194-inside-jepa/">实现解读</a> · <a href="#qa-c81bf3ff739be368">问题链接</a></p>
 </details>
@@ -186,16 +186,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.31194v1">原论文</a> · <a href="../../../../foundation-models/2610.31194-inside-jepa/">实现解读</a> · <a href="#qa-37cda28a2170cf1f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:alps" data-paper-title="ALPS: Visual State Encoders for World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="ALPS: Visual State Encoders for World Models 基础模型 University of California, Santa Cruz 2026-10-21 世界模型以视觉 token 为状态进行预测和规划，但一个编码器通常只擅长物理状态、语言对齐或像素重建中的一部分。ALPS 尝试让同一组 patch token 同时承担三种接口：机器人状态探针能读出位置，文字指令能对应图像，而未来 token 能被解码成图像以便检查。第一阶段从零训练 ViT-B/16：同一组未做最终 LayerNorm 的 patch token接受图文对比、caption、自重建和密集跨裁剪对应四种监督。第二阶段将第一阶段 encoder 同时用作学生初始化和固定教师； 完整预训练和实验成本过高，不复现（审查 DONE），not_reproduced_high_cost 为终态，不下载大模型/训练数据、不试探性跑完整训练、不自动重试。诊断使用两组裁剪、patch、8 维 query 和 6 维随机 token。输入会检查 shape、有限值、正尺度、裁剪范围和标准差；不静默修正无效数据。模块导入不要求 torch，执行时才加载；不联网、不自动安装依赖、不执行上游脚本或下载 checkpoint。正式评测必须将训练统计与测试轨迹隔离，验证集选参，测试集只用于最终报告。  视觉表征与世界模型 联合嵌入与自监督学习 多模态 视觉世界建模：状态、生成与动作条件 ALPS 为什么要求同一组 patch token 同时服务状态、语言和像素接口？ 世界模型既需从视觉状态预测物理变化，也需对应文字指令并能检查预测图像。若三种用途使用互不关联的表示，规划接口可能难以协调；ALPS 通过多任务监督训练同一组未做最终 LayerNorm 的 patch token，但这不自动赋予时序动作理解。 例如一个物体的位置要能被状态探针读出，同时对应“把红块推过去”的文字，并支持把未来表示解码成画面检查。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:alps" data-paper-title="ALPS: Visual State Encoders for World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="ALPS: Visual State Encoders for World Models 基础模型 University of California, Santa Cruz 2026-10-21 世界模型以视觉 token 为状态进行预测和规划，但一个编码器通常只擅长物理状态、语言对齐或像素重建中的一部分。ALPS 尝试让同一组 patch token 同时承担三种接口：机器人状态探针能读出位置，文字指令能对应图像，而未来 token 能被解码成图像以便检查。第一阶段从零训练 ViT-B/16：同一组未做最终 LayerNorm 的 patch token接受图文对比、caption、自重建和密集跨裁剪对应四种监督。第二阶段将第一阶段 encoder 同时用作学生初始化和固定教师； 完整预训练和实验成本过高，不复现（审查 DONE），not_reproduced_high_cost 为终态，不下载大模型/训练数据、不试探性跑完整训练、不自动重试。诊断使用两组裁剪、patch、8 维 query 和 6 维随机 token。输入会检查 shape、有限值、正尺度、裁剪范围和标准差；不静默修正无效数据。模块导入不要求 torch，执行时才加载；不联网、不自动安装依赖、不执行上游脚本或下载 checkpoint。正式评测必须将训练统计与测试轨迹隔离，验证集选参，测试集只用于最终报告。  视觉表征与世界模型 联合嵌入与自监督学习 多模态 视觉世界建模：状态、生成与动作条件 ALPS 为什么希望一个视觉表示同时适合语言理解、状态预测和图像检查？ 世界模型规划需要表示可预测，指令任务需要语言对齐，检查预测结果又需要能恢复可读图像，单一目标训练可能只满足一部分。ALPS 研究让同一组 patch token 兼顾这些接口。多接口可读性仍要各自验证，能重建像素不能自动证明可规划，语言对齐也不保证物理状态完整。 教学例：机器人既要理解“把杯子移到右边”，又要预测位置并检查未来画面；若每种用途都需完全不同表示，接口会难以衔接。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-alps-4489dea8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-3824083e7eb834df">ALPS 为什么要求同一组 patch token 同时服务状态、语言和像素接口？</h2>
+<h2 id="qa-3824083e7eb834df">ALPS 为什么希望一个视觉表示同时适合语言理解、状态预测和图像检查？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aalps">ALPS: Visual State Encoders for World Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, Santa Cruz</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>世界模型既需从视觉状态预测物理变化，也需对应文字指令并能检查预测图像。若三种用途使用互不关联的表示，规划接口可能难以协调；ALPS 通过多任务监督训练同一组未做最终 LayerNorm 的 patch token，但这不自动赋予时序动作理解。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个物体的位置要能被状态探针读出，同时对应“把红块推过去”的文字，并支持把未来表示解码成画面检查。</p>
+<p><strong>答案：</strong>世界模型规划需要表示可预测，指令任务需要语言对齐，检查预测结果又需要能恢复可读图像，单一目标训练可能只满足一部分。ALPS 研究让同一组 patch token 兼顾这些接口。多接口可读性仍要各自验证，能重建像素不能自动证明可规划，语言对齐也不保证物理状态完整。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：机器人既要理解“把杯子移到右边”，又要预测位置并检查未来画面；若每种用途都需完全不同表示，接口会难以衔接。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30120v1">原论文</a> · <a href="../../../../foundation-models/2610.30120-alps/">实现解读</a> · <a href="#qa-3824083e7eb834df">问题链接</a></p>
 </details>
@@ -239,16 +239,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30120v1">原论文</a> · <a href="../../../../foundation-models/2610.30120-alps/">实现解读</a> · <a href="#qa-8f9c95b863618d1a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:aw0" data-paper-title="Agentic World Action Models" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Agentic World Action Models 多模态大模型 UC Berkeley 2026-10-21 世界动作模型能预测未来视觉和控制轨迹，但通常缺少可组合的技能结构；代码型机器人 Agent 能重用程序，却未必把计划与物理动态预测统一起来。AW-0 在 Mixture-of-Transformers 中组合三个专家：代码专家产生参数化程序片段，视频专家预测未来场景，动作专家产生连续控制。程序既能约束预测，也可在可选执行模式中调用技能库。每个专家有独立投影、归一化与 FFN，通过每层联合注意力交换信息；专家内部双向、专家之间按代码→视频→动作分块因果。 原始训练与完整对照矩阵明显超出低成本预算，且真实硬件和未随 release 提供的语料无法由合成 fixture 替代，因此成本过高，不复现（审查 DONE）。本地未验证、未生成预测，也没有生产搜广推线上 A/B 证据。本页、原论文 Figure 2、完整作者/代码元数据、成本依据和终态 catalog 已收录。没有运行 adapter、低成本 proxy、benchmark 指标或 GPU 验证收据；也不把“找到开源代码”当作复现完成。promotion_eligible=false、evolve_integrated=false，不进入 Evolve 训练或自动选参。  视频理解与世界模型 具身技能与联合动作生成 多模态 视觉世界建模：状态、生成与动作条件 AW-0 默认生成代码后一定直接执行程序吗？ 不是。默认代码作为计划参与联合去噪，最终由动作 chunk 控制机器人；只有可选 hybrid 模式在代码通过有效性、前提和进展检查时才执行技能，否则回退动作。程序输出、预测视频与实际控制是相关但不同的接口，不能描述成任意 Python 自动执行。 例如模型生成“抓取后放置”的技能片段可帮助动作专家规划，但默认模式仍输出连续控制，而不直接运行该片段。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:aw0" data-paper-title="Agentic World Action Models" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Agentic World Action Models 多模态大模型 UC Berkeley 2026-10-21 世界动作模型能预测未来视觉和控制轨迹，但通常缺少可组合的技能结构；代码型机器人 Agent 能重用程序，却未必把计划与物理动态预测统一起来。AW-0 在 Mixture-of-Transformers 中组合三个专家：代码专家产生参数化程序片段，视频专家预测未来场景，动作专家产生连续控制。程序既能约束预测，也可在可选执行模式中调用技能库。每个专家有独立投影、归一化与 FFN，通过每层联合注意力交换信息；专家内部双向、专家之间按代码→视频→动作分块因果。 原始训练与完整对照矩阵明显超出低成本预算，且真实硬件和未随 release 提供的语料无法由合成 fixture 替代，因此成本过高，不复现（审查 DONE）。本地未验证、未生成预测，也没有生产搜广推线上 A/B 证据。本页、原论文 Figure 2、完整作者/代码元数据、成本依据和终态 catalog 已收录。没有运行 adapter、低成本 proxy、benchmark 指标或 GPU 验证收据；也不把“找到开源代码”当作复现完成。promotion_eligible=false、evolve_integrated=false，不进入 Evolve 训练或自动选参。  视频理解与世界模型 具身技能与联合动作生成 多模态 视觉世界建模：状态、生成与动作条件 AW-0 为什么试图把可组合程序、未来视觉和机器人动作放在一个模型里？ 程序能表达可复用步骤，视频预测提供未来场景，连续动作负责真实控制，分别建模未必能把计划与物理后果联系好。AW-0 用三个专家联合生成这些对象，默认代码提供计划而非直接执行。实际效果还受视觉预测、动作质量和执行模式限制，本地仅完成资料审查。 教学例：整理物品可有程序级“抓取再放置”，同时预测下一场景并生成控制；默认产生的代码不意味着系统会直接运行任意 Python。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-multimodal-models-aw0-c41ecc38" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-63a711c06d27630b">AW-0 默认生成代码后一定直接执行程序吗？</h2>
+<h2 id="qa-63a711c06d27630b">AW-0 为什么试图把可组合程序、未来视觉和机器人动作放在一个模型里？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aaw0">Agentic World Action Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · UC Berkeley</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不是。默认代码作为计划参与联合去噪，最终由动作 chunk 控制机器人；只有可选 hybrid 模式在代码通过有效性、前提和进展检查时才执行技能，否则回退动作。程序输出、预测视频与实际控制是相关但不同的接口，不能描述成任意 Python 自动执行。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型生成“抓取后放置”的技能片段可帮助动作专家规划，但默认模式仍输出连续控制，而不直接运行该片段。</p>
+<p><strong>答案：</strong>程序能表达可复用步骤，视频预测提供未来场景，连续动作负责真实控制，分别建模未必能把计划与物理后果联系好。AW-0 用三个专家联合生成这些对象，默认代码提供计划而非直接执行。实际效果还受视觉预测、动作质量和执行模式限制，本地仅完成资料审查。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：整理物品可有程序级“抓取再放置”，同时预测下一场景并生成控制；默认产生的代码不意味着系统会直接运行任意 Python。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30136v1">原论文</a> · <a href="../../../../multimodal-models/2610.30136-aw0/">实现解读</a> · <a href="#qa-63a711c06d27630b">问题链接</a></p>
 </details>
@@ -266,15 +266,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30136v1">原论文</a> · <a href="../../../../multimodal-models/2610.30136-aw0/">实现解读</a> · <a href="#qa-b0c5a8e2785d041b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:aw0" data-paper-title="Agentic World Action Models" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Agentic World Action Models 多模态大模型 UC Berkeley 2026-10-21 世界动作模型能预测未来视觉和控制轨迹，但通常缺少可组合的技能结构；代码型机器人 Agent 能重用程序，却未必把计划与物理动态预测统一起来。AW-0 在 Mixture-of-Transformers 中组合三个专家：代码专家产生参数化程序片段，视频专家预测未来场景，动作专家产生连续控制。程序既能约束预测，也可在可选执行模式中调用技能库。每个专家有独立投影、归一化与 FFN，通过每层联合注意力交换信息；专家内部双向、专家之间按代码→视频→动作分块因果。 原始训练与完整对照矩阵明显超出低成本预算，且真实硬件和未随 release 提供的语料无法由合成 fixture 替代，因此成本过高，不复现（审查 DONE）。本地未验证、未生成预测，也没有生产搜广推线上 A/B 证据。本页、原论文 Figure 2、完整作者/代码元数据、成本依据和终态 catalog 已收录。没有运行 adapter、低成本 proxy、benchmark 指标或 GPU 验证收据；也不把“找到开源代码”当作复现完成。promotion_eligible=false、evolve_integrated=false，不进入 Evolve 训练或自动选参。  视频理解与世界模型 具身技能与联合动作生成 多模态 视觉世界建模：状态、生成与动作条件 代码、视频与动作专家完全互相注意，与论文分块因果有何不同？ 论文允许专家内部双向交互，跨专家按代码到视频到动作分块因果：视频读代码，动作读二者，代码不反读未来视频或动作。完全互读会改变条件依赖甚至泄露训练目标信息；独立投影、norm 与 FFN 也不能简化为同一个共享专家。 例如代码计划应基于当前观察和指令，而不能提前读取干净动作答案再生成计划；这条边界由跨块 mask 保证。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:aw0" data-paper-title="Agentic World Action Models" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Agentic World Action Models 多模态大模型 UC Berkeley 2026-10-21 世界动作模型能预测未来视觉和控制轨迹，但通常缺少可组合的技能结构；代码型机器人 Agent 能重用程序，却未必把计划与物理动态预测统一起来。AW-0 在 Mixture-of-Transformers 中组合三个专家：代码专家产生参数化程序片段，视频专家预测未来场景，动作专家产生连续控制。程序既能约束预测，也可在可选执行模式中调用技能库。每个专家有独立投影、归一化与 FFN，通过每层联合注意力交换信息；专家内部双向、专家之间按代码→视频→动作分块因果。 原始训练与完整对照矩阵明显超出低成本预算，且真实硬件和未随 release 提供的语料无法由合成 fixture 替代，因此成本过高，不复现（审查 DONE）。本地未验证、未生成预测，也没有生产搜广推线上 A/B 证据。本页、原论文 Figure 2、完整作者/代码元数据、成本依据和终态 catalog 已收录。没有运行 adapter、低成本 proxy、benchmark 指标或 GPU 验证收据；也不把“找到开源代码”当作复现完成。promotion_eligible=false、evolve_integrated=false，不进入 Evolve 训练或自动选参。  视频理解与世界模型 具身技能与联合动作生成 多模态 视觉世界建模：状态、生成与动作条件 三专家各有投影、归一化与 FFN，与完全共用一套模态变换有什么区别？ 独立变换给代码、视频和动作各自的表示处理路径，联合注意力再按规定边界交换信息；完全共享则对不同模态使用同一套参数映射。前者表达了模态分工，也增加参数与接口管理，不能据结构推断必然更好。原文是专家内部双向、专家之间分块因果的具体组合。 教学例：离散程序 token 与连续动作可以各用自己的 FFN，但仍通过联合注意力衔接；这不等于三份模型完全隔绝或完全互读。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-80ec646f7634554a">代码、视频与动作专家完全互相注意，与论文分块因果有何不同？</h2>
+<h2 id="qa-80ec646f7634554a">三专家各有投影、归一化与 FFN，与完全共用一套模态变换有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aaw0">Agentic World Action Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · UC Berkeley</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>论文允许专家内部双向交互，跨专家按代码到视频到动作分块因果：视频读代码，动作读二者，代码不反读未来视频或动作。完全互读会改变条件依赖甚至泄露训练目标信息；独立投影、norm 与 FFN 也不能简化为同一个共享专家。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如代码计划应基于当前观察和指令，而不能提前读取干净动作答案再生成计划；这条边界由跨块 mask 保证。</p>
+<p><strong>答案：</strong>独立变换给代码、视频和动作各自的表示处理路径，联合注意力再按规定边界交换信息；完全共享则对不同模态使用同一套参数映射。前者表达了模态分工，也增加参数与接口管理，不能据结构推断必然更好。原文是专家内部双向、专家之间分块因果的具体组合。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：离散程序 token 与连续动作可以各用自己的 FFN，但仍通过联合注意力衔接；这不等于三份模型完全隔绝或完全互读。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30136v1">原论文</a> · <a href="../../../../multimodal-models/2610.30136-aw0/">实现解读</a> · <a href="#qa-80ec646f7634554a">问题链接</a></p>
 </details>
@@ -292,16 +292,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30136v1">原论文</a> · <a href="../../../../multimodal-models/2610.30136-aw0/">实现解读</a> · <a href="#qa-09ecab1ee5f08245">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:locale-jepa" data-paper-title="LocaLeJEPA: Maximum Entropy Representations under Geometric Priors" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="LocaLeJEPA: Maximum Entropy Representations under Geometric Priors 基础模型 University of Pennsylvania 2026-10-20 LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配均匀球分布。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。 完整实验标注成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动训练队列。3 seed 不改变 L1 诊断资格，无正式 capability comparison、无 Evolve 晋级。已实现 uniform_ball_cf、ballreg_loss、torch_kmeans_labels、local_ballreg_loss 和 locale_jepa_loss。前向真实计算局部均匀球统计并反向传播至投影；仅分簇赋值 detached，预测均值和重中心残差没有 stop-gradient。采用作者官方 pure-torch k-means 路径，不额外引入聚类依赖。  JEPA与世界模型 局部均匀球分布匹配 多模态 视觉世界建模：状态、生成与动作条件 局部均匀球约束为什么先对每簇表示重中心？ 局部分布正则约束簇内残差的形状，而不把所有簇中心拉到同一个原点，因此可以保留不同局部结构之间的位置关系。分簇使用 detached 多视图均值，各视图共享分组；重中心后的残差仍参与梯度，不能把整个局部目标都 detach。 例如两类物体表示位于相距很远的中心，正则可分别展开各自局部残差，而不要求两类中心重合。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:locale-jepa" data-paper-title="LocaLeJEPA: Maximum Entropy Representations under Geometric Priors" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="LocaLeJEPA: Maximum Entropy Representations under Geometric Priors 基础模型 University of Pennsylvania 2026-10-20 LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配均匀球分布。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。 完整实验标注成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动训练队列。3 seed 不改变 L1 诊断资格，无正式 capability comparison、无 Evolve 晋级。已实现 uniform_ball_cf、ballreg_loss、torch_kmeans_labels、local_ballreg_loss 和 locale_jepa_loss。前向真实计算局部均匀球统计并反向传播至投影；仅分簇赋值 detached，预测均值和重中心残差没有 stop-gradient。采用作者官方 pure-torch k-means 路径，不额外引入聚类依赖。  JEPA与世界模型 局部均匀球分布匹配 多模态 视觉世界建模：状态、生成与动作条件 同一图像的不同视图越相似，为什么还要防止所有图像都变成同一个表示？ 跨视图一致让模型忽略增强噪声，但如果所有输入都输出常量，也能轻易达到一致。LocaLeJEPA 同时关心表示多样性，并考虑数据可能具有局部几何结构。两项需求分别是同对象稳定与不同对象可区分，不能把一致性 loss 低直接当成表示已学到有用信息。 教学例：猫的两种裁剪应相近，但猫和汽车若也全部变成同一向量，检索和分类就没有可用差别，尽管跨视图误差很低。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-locale-jepa-ba12e8f4" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-3d704fc3d2d42061">局部均匀球约束为什么先对每簇表示重中心？</h2>
+<h2 id="qa-3d704fc3d2d42061">同一图像的不同视图越相似，为什么还要防止所有图像都变成同一个表示？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alocale-jepa">LocaLeJEPA: Maximum Entropy Representations under Geometric Priors</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Pennsylvania</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>局部分布正则约束簇内残差的形状，而不把所有簇中心拉到同一个原点，因此可以保留不同局部结构之间的位置关系。分簇使用 detached 多视图均值，各视图共享分组；重中心后的残差仍参与梯度，不能把整个局部目标都 detach。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两类物体表示位于相距很远的中心，正则可分别展开各自局部残差，而不要求两类中心重合。</p>
+<p><strong>答案：</strong>跨视图一致让模型忽略增强噪声，但如果所有输入都输出常量，也能轻易达到一致。LocaLeJEPA 同时关心表示多样性，并考虑数据可能具有局部几何结构。两项需求分别是同对象稳定与不同对象可区分，不能把一致性 loss 低直接当成表示已学到有用信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：猫的两种裁剪应相近，但猫和汽车若也全部变成同一向量，检索和分类就没有可用差别，尽管跨视图误差很低。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28458v1">原论文</a> · <a href="../../../../foundation-models/2610.28458-locale-jepa/">实现解读</a> · <a href="#qa-3d704fc3d2d42061">问题链接</a></p>
 </details>
@@ -345,16 +345,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28458v1">原论文</a> · <a href="../../../../foundation-models/2610.28458-locale-jepa/">实现解读</a> · <a href="#qa-5c22e52ed3c5a5bb">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ppmem" data-paper-title="Persistent Planar Memory for Video World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Persistent Planar Memory for Video World Models 基础模型 Tsinghua University 2026-10-16 长视频生成若只保存少量历史帧，跨视角回访容易遗忘场景；持续保存全部像素点云又非常大。PPMem把场景记忆压成可光栅化的平面primitive，在视频生成过程中由同一骨干联合预测，再通过持久pool向后续chunk反馈深度。每个局部平面用中心深度、两个矩形尺度和四元数共7个参数表示，变换到世界坐标后合并。pool按遮挡投票删除错误旧面，按观察质量去重，并依据已给定的下一段相机轨迹提前淘汰即将被更好观测替换的面；它不是读取未来真实视频。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。没有本地世界模型、训练结果或Evolve能力算子。本轮只核原文方法、元数据、结果归属及成本，不下载模型或视频，不制造小张量“世界模型能力”分数。没有GPU回执要求，因为没有接受执行CUDA实现。  多模态基础模型 世界模型与持久三维记忆 多模态 视觉世界建模：状态、生成与动作条件 PPMem 保存平面 primitive 而不是所有历史帧，保留了哪类信息？ 平面 pool 保存可渲染深度的持久几何状态，每个局部平面以中心深度、两个尺度和四元数共七参数表示，再变换到世界坐标。它主要支持跨视角几何记忆，不等于无损保存历史纹理、动态事件或所有像素，紧凑 pool 大小也不是整个模型显存。 例如再次转向先前墙面时，可从世界坐标平面渲染深度帮助一致生成，但不能仅靠七参数恢复墙上所有文字纹理。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ppmem" data-paper-title="Persistent Planar Memory for Video World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Persistent Planar Memory for Video World Models 基础模型 Tsinghua University 2026-10-16 长视频生成若只保存少量历史帧，跨视角回访容易遗忘场景；持续保存全部像素点云又非常大。PPMem把场景记忆压成可光栅化的平面primitive，在视频生成过程中由同一骨干联合预测，再通过持久pool向后续chunk反馈深度。每个局部平面用中心深度、两个矩形尺度和四元数共7个参数表示，变换到世界坐标后合并。pool按遮挡投票删除错误旧面，按观察质量去重，并依据已给定的下一段相机轨迹提前淘汰即将被更好观测替换的面；它不是读取未来真实视频。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。没有本地世界模型、训练结果或Evolve能力算子。本轮只核原文方法、元数据、结果归属及成本，不下载模型或视频，不制造小张量“世界模型能力”分数。没有GPU回执要求，因为没有接受执行CUDA实现。  多模态基础模型 世界模型与持久三维记忆 多模态 视觉世界建模：状态、生成与动作条件 长视频生成为什么在镜头回到旧位置时，容易忘记原来的场景布局？ 只条件化少量近期帧会丢掉更早看过的几何，保存全部像素或点云又成本很高。PPMem 研究用紧凑、可光栅化的平面场景记忆接续视频 chunk，使回访有可用空间依据。平面是近似表示，遮挡和错误几何仍需维护，不能从持久存储直接推断生成完全一致。 教学例：镜头先离开书桌再转回，书架不应无故换位置；近期帧看不到书架时，持久场景记忆可提供几何条件。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-ppmem-5417d641" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4111c1cac44a1ce5">PPMem 保存平面 primitive 而不是所有历史帧，保留了哪类信息？</h2>
+<h2 id="qa-4111c1cac44a1ce5">长视频生成为什么在镜头回到旧位置时，容易忘记原来的场景布局？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Appmem">Persistent Planar Memory for Video World Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>平面 pool 保存可渲染深度的持久几何状态，每个局部平面以中心深度、两个尺度和四元数共七参数表示，再变换到世界坐标。它主要支持跨视角几何记忆，不等于无损保存历史纹理、动态事件或所有像素，紧凑 pool 大小也不是整个模型显存。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如再次转向先前墙面时，可从世界坐标平面渲染深度帮助一致生成，但不能仅靠七参数恢复墙上所有文字纹理。</p>
+<p><strong>答案：</strong>只条件化少量近期帧会丢掉更早看过的几何，保存全部像素或点云又成本很高。PPMem 研究用紧凑、可光栅化的平面场景记忆接续视频 chunk，使回访有可用空间依据。平面是近似表示，遮挡和错误几何仍需维护，不能从持久存储直接推断生成完全一致。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：镜头先离开书桌再转回，书架不应无故换位置；近期帧看不到书架时，持久场景记忆可提供几何条件。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与流程；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.23795">原论文</a> · <a href="../../../../foundation-models/2610.23795-ppmem/">实现解读</a> · <a href="#qa-4111c1cac44a1ce5">问题链接</a></p>
 </details>
@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.23795">原论文</a> · <a href="../../../../foundation-models/2610.23795-ppmem/">实现解读</a> · <a href="#qa-873512f352f628c0">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ego-p2c" data-paper-title="EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video 基础模型 Arizona State University 2026-10-15 第一视角视频空间推理既要提问、采集证据，也要保证感知回答可靠。固定外部视觉工具无法随推理策略一起改进；把规划与感知压到同一组参数中又可能引入梯度冲突。EgoP²C先在冻结VLM上分别训练规划/组合（PC）与感知（V）的LoRA教师，再复制选定FFN形成PC、V、通用直接回答（G）专家。学生自己生成交互片段，由相应冻结教师实时评价同一批学生tokens，而非模仿教师另行生成的答案。公共视频前缀始终走冻结基础路径；角色私有文字、选项和历史不混入公共KV。 完整实验成本过高，不复现（审查 DONE）。本地保留真实角色FFN复制、q/k/v/o低秩残差、因果attention、公共前缀冻结、严格参数冻结、完整词表打分及上述损失。使用12维单层小型decoder和人工token ids，没有视觉编码器或真实视频。预设PLAN和DIRECT骨架，仅各片段内部由学生当前分布实时采样；没有训练过的空间教师、自由工具调用或学习到的路由器。  多模态基础模型 空间推理与分段多教师蒸馏 多模态 视觉世界建模：状态、生成与动作条件 PC、V、G 三种角色为什么需要不同可见信息？ PC 负责规划组合，V 负责自包含感知子问题，G 负责直接回答原问题。隔离私有上下文可避免感知教师被选项或规划文字诱导，并保持角色训练与推理一致；公共视频可共享基础前缀，但各角色的文字历史不能混进公共 KV。 例如 V 只应看视频与“左边物体是什么”的子问题，不应看到原题某选项被 PC 提前标成正确。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ego-p2c" data-paper-title="EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video 基础模型 Arizona State University 2026-10-15 第一视角视频空间推理既要提问、采集证据，也要保证感知回答可靠。固定外部视觉工具无法随推理策略一起改进；把规划与感知压到同一组参数中又可能引入梯度冲突。EgoP²C先在冻结VLM上分别训练规划/组合（PC）与感知（V）的LoRA教师，再复制选定FFN形成PC、V、通用直接回答（G）专家。学生自己生成交互片段，由相应冻结教师实时评价同一批学生tokens，而非模仿教师另行生成的答案。公共视频前缀始终走冻结基础路径；角色私有文字、选项和历史不混入公共KV。 完整实验成本过高，不复现（审查 DONE）。本地保留真实角色FFN复制、q/k/v/o低秩残差、因果attention、公共前缀冻结、严格参数冻结、完整词表打分及上述损失。使用12维单层小型decoder和人工token ids，没有视觉编码器或真实视频。预设PLAN和DIRECT骨架，仅各片段内部由学生当前分布实时采样；没有训练过的空间教师、自由工具调用或学习到的路由器。  多模态基础模型 空间推理与分段多教师蒸馏 多模态 视觉世界建模：状态、生成与动作条件 第一视角视频空间推理为什么需要同时改进提问规划和感知回答？ 复杂问题往往要先决定看哪里、问什么，再可靠读取局部证据，规划与感知任何一侧出错都会传给后续组合。EgoP²C 研究让这些角色能共同改进，同时保持各自信息范围。角色分离用于控制训练和交互，不代表感知结果天然可信，最终空间结论仍需验证。 教学例：问抽屉相对门的位置，规划者先选视角和子问题，感知者读具体位置；若读错左右，组合推理再流畅也会出错。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-ego-p2c-b2c2eae5" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-47077d41b441deb0">PC、V、G 三种角色为什么需要不同可见信息？</h2>
+<h2 id="qa-47077d41b441deb0">第一视角视频空间推理为什么需要同时改进提问规划和感知回答？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aego-p2c">EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Arizona State University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>PC 负责规划组合，V 负责自包含感知子问题，G 负责直接回答原问题。隔离私有上下文可避免感知教师被选项或规划文字诱导，并保持角色训练与推理一致；公共视频可共享基础前缀，但各角色的文字历史不能混进公共 KV。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 V 只应看视频与“左边物体是什么”的子问题，不应看到原题某选项被 PC 提前标成正确。</p>
+<p><strong>答案：</strong>复杂问题往往要先决定看哪里、问什么，再可靠读取局部证据，规划与感知任何一侧出错都会传给后续组合。EgoP²C 研究让这些角色能共同改进，同时保持各自信息范围。角色分离用于控制训练和交互，不代表感知结果天然可信，最终空间结论仍需验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：问抽屉相对门的位置，规划者先选视角和子问题，感知者读具体位置；若读错左右，组合推理再流畅也会出错。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与信息边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22681">原论文</a> · <a href="../../../../foundation-models/2610.22681-ego-p2c/">实现解读</a> · <a href="#qa-47077d41b441deb0">问题链接</a></p>
 </details>
@@ -425,15 +425,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22681">原论文</a> · <a href="../../../../foundation-models/2610.22681-ego-p2c/">实现解读</a> · <a href="#qa-c60c2b24dcf80f55">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ego-p2c" data-paper-title="EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video 基础模型 Arizona State University 2026-10-15 第一视角视频空间推理既要提问、采集证据，也要保证感知回答可靠。固定外部视觉工具无法随推理策略一起改进；把规划与感知压到同一组参数中又可能引入梯度冲突。EgoP²C先在冻结VLM上分别训练规划/组合（PC）与感知（V）的LoRA教师，再复制选定FFN形成PC、V、通用直接回答（G）专家。学生自己生成交互片段，由相应冻结教师实时评价同一批学生tokens，而非模仿教师另行生成的答案。公共视频前缀始终走冻结基础路径；角色私有文字、选项和历史不混入公共KV。 完整实验成本过高，不复现（审查 DONE）。本地保留真实角色FFN复制、q/k/v/o低秩残差、因果attention、公共前缀冻结、严格参数冻结、完整词表打分及上述损失。使用12维单层小型decoder和人工token ids，没有视觉编码器或真实视频。预设PLAN和DIRECT骨架，仅各片段内部由学生当前分布实时采样；没有训练过的空间教师、自由工具调用或学习到的路由器。  多模态基础模型 空间推理与分段多教师蒸馏 多模态 视觉世界建模：状态、生成与动作条件 学生前缀上的多教师 OPD 与模仿教师各自生成答案有什么区别？ OPD 对学生自己采样的同一批 token，由对应角色教师在同一可见前缀下评分，优化学生实际访问状态。模仿教师另生成的答案会换轨迹与上下文，不能直接代表相同 on-policy 信号；教师优势也应只作为训练监督而非部署 oracle。 例如学生先写出一个错误假设，教师需要评价该实际前缀上的下一 token，而不是另起一条完美推理覆盖它。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ego-p2c" data-paper-title="EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video 基础模型 Arizona State University 2026-10-15 第一视角视频空间推理既要提问、采集证据，也要保证感知回答可靠。固定外部视觉工具无法随推理策略一起改进；把规划与感知压到同一组参数中又可能引入梯度冲突。EgoP²C先在冻结VLM上分别训练规划/组合（PC）与感知（V）的LoRA教师，再复制选定FFN形成PC、V、通用直接回答（G）专家。学生自己生成交互片段，由相应冻结教师实时评价同一批学生tokens，而非模仿教师另行生成的答案。公共视频前缀始终走冻结基础路径；角色私有文字、选项和历史不混入公共KV。 完整实验成本过高，不复现（审查 DONE）。本地保留真实角色FFN复制、q/k/v/o低秩残差、因果attention、公共前缀冻结、严格参数冻结、完整词表打分及上述损失。使用12维单层小型decoder和人工token ids，没有视觉编码器或真实视频。预设PLAN和DIRECT骨架，仅各片段内部由学生当前分布实时采样；没有训练过的空间教师、自由工具调用或学习到的路由器。  多模态基础模型 空间推理与分段多教师蒸馏 多模态 视觉世界建模：状态、生成与动作条件 PC、V 与通用 G 专家的参数，是否都采用相同的训练边界？ 角色专家从基础 FFN 复制初始化，但 G 的 FFN 始终冻结，G 的 attention residual 到 MOPD 阶段才训练；PC、V 则承担规划与感知的可训练角色路径。不同参数边界维护通用直接回答能力与专门化分工，不能把它简化成三份全参数模型一起更新。 教学例：给 G 保留原 FFN 不是完全禁止它的一切适配；attention residual 后续可训练，而底层复制初始化也不等于所有角色共享更新。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-d2509c24f0c7580c">学生前缀上的多教师 OPD 与模仿教师各自生成答案有什么区别？</h2>
+<h2 id="qa-d2509c24f0c7580c">PC、V 与通用 G 专家的参数，是否都采用相同的训练边界？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aego-p2c">EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Arizona State University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>OPD 对学生自己采样的同一批 token，由对应角色教师在同一可见前缀下评分，优化学生实际访问状态。模仿教师另生成的答案会换轨迹与上下文，不能直接代表相同 on-policy 信号；教师优势也应只作为训练监督而非部署 oracle。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如学生先写出一个错误假设，教师需要评价该实际前缀上的下一 token，而不是另起一条完美推理覆盖它。</p>
+<p><strong>答案：</strong>角色专家从基础 FFN 复制初始化，但 G 的 FFN 始终冻结，G 的 attention residual 到 MOPD 阶段才训练；PC、V 则承担规划与感知的可训练角色路径。不同参数边界维护通用直接回答能力与专门化分工，不能把它简化成三份全参数模型一起更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给 G 保留原 FFN 不是完全禁止它的一切适配；attention residual 后续可训练，而底层复制初始化也不等于所有角色共享更新。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与信息边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22681">原论文</a> · <a href="../../../../foundation-models/2610.22681-ego-p2c/">实现解读</a> · <a href="#qa-d2509c24f0c7580c">问题链接</a></p>
 </details>
@@ -451,16 +451,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22681">原论文</a> · <a href="../../../../foundation-models/2610.22681-ego-p2c/">实现解读</a> · <a href="#qa-a6f0616beea54a27">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gen4p" data-paper-title="Gen4P: Video Generators are 4D Perceivers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Gen4P: Video Generators are 4D Perceivers 基础模型 Nanyang Technological University 2026-10-15 视频生成预训练包含运动与几何先验。Gen4P不通过多次去噪恢复几何，而是在干净视频潜变量上运行一次DiT编码，用按需cross-attention查询输出3D轨迹、点云、深度和相机参数。连续时间查询适配不同视频长度，冻结depth-LoRA提供额外几何先验，独立4D-LoRA学习新任务。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地训练、能力指标或Evolve算子。无本地adapter、GPU验收、训练指标或可执行Evolve映射。上游repo存在不等同代码已开源；未来若作者真正发布实现，只有出现新的独立证据或用户明确需求时再审查。本轮只完成方法、代码发布状态与资源配置核验；没有下载视频、checkpoint、运行训练或制造小模型“4D能力”分数。  多模态基础模型 视频生成与四维感知 多模态 视觉世界建模：状态、生成与动作条件 Gen4P 将视频生成器用于感知时，为什么不需要反复去噪？ 它把干净视频经 VAE 得到的潜变量送入一次 DiT 前向，提取共享场景 token，再用查询解码几何属性。这里使用的是生成预训练获得的表示先验，而非先生成一段视频再估计几何；输入也不需要人为加噪后运行多步采样。 例如给一段已拍摄视频，单次编码后查询某像素的三维轨迹，不必先执行五十轮扩散生成另一段视频。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gen4p" data-paper-title="Gen4P: Video Generators are 4D Perceivers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Gen4P: Video Generators are 4D Perceivers 基础模型 Nanyang Technological University 2026-10-15 视频生成预训练包含运动与几何先验。Gen4P不通过多次去噪恢复几何，而是在干净视频潜变量上运行一次DiT编码，用按需cross-attention查询输出3D轨迹、点云、深度和相机参数。连续时间查询适配不同视频长度，冻结depth-LoRA提供额外几何先验，独立4D-LoRA学习新任务。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地训练、能力指标或Evolve算子。无本地adapter、GPU验收、训练指标或可执行Evolve映射。上游repo存在不等同代码已开源；未来若作者真正发布实现，只有出现新的独立证据或用户明确需求时再审查。本轮只完成方法、代码发布状态与资源配置核验；没有下载视频、checkpoint、运行训练或制造小模型“4D能力”分数。  多模态基础模型 视频生成与四维感知 多模态 视觉世界建模：状态、生成与动作条件 Gen4P 为什么尝试把视频生成模型的知识用于三维和四维感知？ 视频生成预训练需要理解外观、运动和部分几何结构，这些先验可能帮助估计深度、轨迹和相机，而不必只服务像素生成。Gen4P 从干净视频提取场景表示，再按查询输出所需属性。利用生成器不等于必须生成整段视频，感知预测仍需对应几何真值或任务验证。 教学例：输入一段移动镜头视频，用户需要的是某点的三维轨迹而非一段新视频；模型应把已有运动先验转为可查询感知结果。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-gen4p-e9a640f8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e01e783591ec19da">Gen4P 将视频生成器用于感知时，为什么不需要反复去噪？</h2>
+<h2 id="qa-e01e783591ec19da">Gen4P 为什么尝试把视频生成模型的知识用于三维和四维感知？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agen4p">Gen4P: Video Generators are 4D Perceivers</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Nanyang Technological University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它把干净视频经 VAE 得到的潜变量送入一次 DiT 前向，提取共享场景 token，再用查询解码几何属性。这里使用的是生成预训练获得的表示先验，而非先生成一段视频再估计几何；输入也不需要人为加噪后运行多步采样。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如给一段已拍摄视频，单次编码后查询某像素的三维轨迹，不必先执行五十轮扩散生成另一段视频。</p>
+<p><strong>答案：</strong>视频生成预训练需要理解外观、运动和部分几何结构，这些先验可能帮助估计深度、轨迹和相机，而不必只服务像素生成。Gen4P 从干净视频提取场景表示，再按查询输出所需属性。利用生成器不等于必须生成整段视频，感知预测仍需对应几何真值或任务验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：输入一段移动镜头视频，用户需要的是某点的三维轨迹而非一段新视频；模型应把已有运动先验转为可查询感知结果。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22371">原论文</a> · <a href="../../../../foundation-models/2610.22371-gen4p/">实现解读</a> · <a href="#qa-e01e783591ec19da">问题链接</a></p>
 </details>
@@ -504,16 +504,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22371">原论文</a> · <a href="../../../../foundation-models/2610.22371-gen4p/">实现解读</a> · <a href="#qa-15ae281ad1d75986">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:egojepa" data-paper-title="EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos 基础模型 Mohamed bin Zayed University of Artificial Intelligence 2026-10-14 人类第一视角视频中的手运动不需要经规则映射为每种机器人的动作。EgoJEPA先用手部运动差分条件JEPA预测未来视觉表示，再联合建模视觉与潜动作，最后仅适配目标机器人的输入输出动作接口。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  JEPA与世界模型 具身多模态 多模态 视觉世界建模：状态、生成与动作条件 EgoJEPA 为什么用人手运动差分，而不是先把人手轨迹硬映射成机器人关节？ 手部差分作为动作条件帮助预测未来视觉表示，把可迁移的变化规律与具体机器人执行接口分开。后续再适配目标机器人的输入输出，因此不需要先为每种具身设计完整关节映射；这并不表示无需机器人数据或无需控制适配。 例如人类捏起物体的运动可提供状态变化线索，但五指机器人与双指夹爪仍须各自学习如何输出可执行控制。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:egojepa" data-paper-title="EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos 基础模型 Mohamed bin Zayed University of Artificial Intelligence 2026-10-14 人类第一视角视频中的手运动不需要经规则映射为每种机器人的动作。EgoJEPA先用手部运动差分条件JEPA预测未来视觉表示，再联合建模视觉与潜动作，最后仅适配目标机器人的输入输出动作接口。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  JEPA与世界模型 具身多模态 多模态 视觉世界建模：状态、生成与动作条件 EgoJEPA 为什么尝试从大量人类第一视角视频学习可迁移的动作经验？ 机器人示范昂贵且不同本体接口各异，人类视频则含丰富的视觉变化与行动关系，却没有直接可用的机器人控制量。EgoJEPA 研究先学习视觉与动作的潜在结构，再适配目标机器人接口。视频中的相关变化不是任意机器人的可执行命令，真实控制仍需适配与环境验证。 教学例：人类打开抽屉的视频可提供动作与场景变化经验；换成机械臂后，关节控制仍须通过目标机器人接口学习。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-egojepa-867ae28c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-eace4b99f19a0163">EgoJEPA 为什么用人手运动差分，而不是先把人手轨迹硬映射成机器人关节？</h2>
+<h2 id="qa-eace4b99f19a0163">EgoJEPA 为什么尝试从大量人类第一视角视频学习可迁移的动作经验？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aegojepa">EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Mohamed bin Zayed University of Artificial Intelligence</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>手部差分作为动作条件帮助预测未来视觉表示，把可迁移的变化规律与具体机器人执行接口分开。后续再适配目标机器人的输入输出，因此不需要先为每种具身设计完整关节映射；这并不表示无需机器人数据或无需控制适配。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如人类捏起物体的运动可提供状态变化线索，但五指机器人与双指夹爪仍须各自学习如何输出可执行控制。</p>
+<p><strong>答案：</strong>机器人示范昂贵且不同本体接口各异，人类视频则含丰富的视觉变化与行动关系，却没有直接可用的机器人控制量。EgoJEPA 研究先学习视觉与动作的潜在结构，再适配目标机器人接口。视频中的相关变化不是任意机器人的可执行命令，真实控制仍需适配与环境验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：人类打开抽屉的视频可提供动作与场景变化经验；换成机械臂后，关节控制仍须通过目标机器人接口学习。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20904">原论文</a> · <a href="../../../../foundation-models/2610.20904-egojepa/">实现解读</a> · <a href="#qa-eace4b99f19a0163">问题链接</a></p>
 </details>
@@ -531,15 +531,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20904">原论文</a> · <a href="../../../../foundation-models/2610.20904-egojepa/">实现解读</a> · <a href="#qa-245e1f402013e420">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:egojepa" data-paper-title="EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos 基础模型 Mohamed bin Zayed University of Artificial Intelligence 2026-10-14 人类第一视角视频中的手运动不需要经规则映射为每种机器人的动作。EgoJEPA先用手部运动差分条件JEPA预测未来视觉表示，再联合建模视觉与潜动作，最后仅适配目标机器人的输入输出动作接口。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  JEPA与世界模型 具身多模态 多模态 视觉世界建模：状态、生成与动作条件 潜动作迁移与规则 retargeting 的假设差别是什么？ retargeting 显式规定人类动作如何对应机器人动作，依赖几何或关节关系；潜动作路线从视觉变化学习较抽象的行为表示，再由机器人接口解码。它减少硬映射依赖，也将难点转到表示学习与适配质量，不能据此断言任意新机器人都能零样本控制。 例如同一个“抓取”视觉变化可对应夹爪闭合或多指协同，潜动作不必提前指定每个关节的一一关系。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:egojepa" data-paper-title="EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos 基础模型 Mohamed bin Zayed University of Artificial Intelligence 2026-10-14 人类第一视角视频中的手运动不需要经规则映射为每种机器人的动作。EgoJEPA先用手部运动差分条件JEPA预测未来视觉表示，再联合建模视觉与潜动作，最后仅适配目标机器人的输入输出动作接口。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  JEPA与世界模型 具身多模态 多模态 视觉世界建模：状态、生成与动作条件 动作条件 JEPA 与后续视觉—潜动作联合 Flow Matching，分别学习什么关系？ 前一阶段利用手部运动差分预测未来视觉表示，让潜动作与可观察变化建立联系；后续联合建模视觉和潜动作，再通过目标机器人输入输出接口适配控制。它们不是同一个损失换名字，预测未来的表示学习与联合生成承担不同职责，也不能据前者成功推出真实机器人控制已完成。 教学例：先学“某类手部变化对应怎样的视觉后果”，再学习视觉与潜动作的联合结构；目标机械臂仍需要自己的控制接口。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-9a0417ac0042303b">潜动作迁移与规则 retargeting 的假设差别是什么？</h2>
+<h2 id="qa-9a0417ac0042303b">动作条件 JEPA 与后续视觉—潜动作联合 Flow Matching，分别学习什么关系？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aegojepa">EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Mohamed bin Zayed University of Artificial Intelligence</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>retargeting 显式规定人类动作如何对应机器人动作，依赖几何或关节关系；潜动作路线从视觉变化学习较抽象的行为表示，再由机器人接口解码。它减少硬映射依赖，也将难点转到表示学习与适配质量，不能据此断言任意新机器人都能零样本控制。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一个“抓取”视觉变化可对应夹爪闭合或多指协同，潜动作不必提前指定每个关节的一一关系。</p>
+<p><strong>答案：</strong>前一阶段利用手部运动差分预测未来视觉表示，让潜动作与可观察变化建立联系；后续联合建模视觉和潜动作，再通过目标机器人输入输出接口适配控制。它们不是同一个损失换名字，预测未来的表示学习与联合生成承担不同职责，也不能据前者成功推出真实机器人控制已完成。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先学“某类手部变化对应怎样的视觉后果”，再学习视觉与潜动作的联合结构；目标机械臂仍需要自己的控制接口。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20904">原论文</a> · <a href="../../../../foundation-models/2610.20904-egojepa/">实现解读</a> · <a href="#qa-9a0417ac0042303b">问题链接</a></p>
 </details>
@@ -557,16 +557,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20904">原论文</a> · <a href="../../../../foundation-models/2610.20904-egojepa/">实现解读</a> · <a href="#qa-d9385b48d4f63672">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:esc" data-paper-title="ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis 基础模型 FAIR at Meta / Mila - Québec AI Institute / Université de Montréal 2026-10-14 单幅图像经扩散模型生成新视角时，2D视觉质量或相机姿态对齐不保证3D几何一致。ESC 联合生成 RGB 与逆深度，用 Plücker ray maps 条件化 Qwen MM-DiT，并以双向深度重投影约束 PCC 识别“物体消失”与“凭空出现”。推理时按 PCC 在多次随机生成中选优。 完整实验成本过高，不复现（审查 DONE）。未实现、未训练、未 GPU 验证。历史补发现，不是10月18日至21日的新首发。完整实验成本过高，不复现（审查 DONE）。本页没有可运行 adapter、没有本地效果指标，不进入自动训练或 Evolve 晋级队列。未实现、未训练、未 GPU 验证。本轮只有资料与算法边界收录，不提供伪 adapter、占位效果 JSON 或假 CUDA 回执。已核验固定 v1 正文、方法、架构图及 Appendix E.1 成本。  多模态基础模型 几何一致新视角生成 多模态 视觉世界建模：状态、生成与动作条件 新视角图像看起来真实，为什么仍可能不满足 ESC 关注的几何一致性？ 单张图像的视觉质量不保证它与源图共享同一三维场景，物体可能消失、重复或改变深度。ESC 联合生成 RGB 与逆深度，再用双向重投影检查几何，目的是把外观合理与跨视角一致分开；相机姿态对齐也不足以消除所有几何歧义。 例如新视角中的椅子纹理很逼真，却在应当可见的位置消失；只看图像美观或文本相似度可能察觉不到该问题。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:esc" data-paper-title="ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis 基础模型 FAIR at Meta / Mila - Québec AI Institute / Université de Montréal 2026-10-14 单幅图像经扩散模型生成新视角时，2D视觉质量或相机姿态对齐不保证3D几何一致。ESC 联合生成 RGB 与逆深度，用 Plücker ray maps 条件化 Qwen MM-DiT，并以双向深度重投影约束 PCC 识别“物体消失”与“凭空出现”。推理时按 PCC 在多次随机生成中选优。 完整实验成本过高，不复现（审查 DONE）。未实现、未训练、未 GPU 验证。历史补发现，不是10月18日至21日的新首发。完整实验成本过高，不复现（审查 DONE）。本页没有可运行 adapter、没有本地效果指标，不进入自动训练或 Evolve 晋级队列。未实现、未训练、未 GPU 验证。本轮只有资料与算法边界收录，不提供伪 adapter、占位效果 JSON 或假 CUDA 回执。已核验固定 v1 正文、方法、架构图及 Appendix E.1 成本。  多模态基础模型 几何一致新视角生成 多模态 视觉世界建模：状态、生成与动作条件 单图生成新视角时，ESC 为什么关心物体是否在三维场景中一致存在？ 图像生成器可能画出清晰、姿态看似正确的画面，却让物体凭空出现或在转视角后消失。ESC 研究把颜色与深度联系起来，用几何一致性检查这些错误。新视角与源图本来就不应逐像素相同，目标是可解释的空间变化，而非单纯追求更相似或更好看的图片。 教学例：镜头绕桌移动，杯子位置应随投影变化；若杯子在无遮挡处消失，画面再精致也不符合相同场景的几何关系。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-esc-e793a8c8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-9fcdef57f9d4db58">新视角图像看起来真实，为什么仍可能不满足 ESC 关注的几何一致性？</h2>
+<h2 id="qa-9fcdef57f9d4db58">单图生成新视角时，ESC 为什么关心物体是否在三维场景中一致存在？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aesc">ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · FAIR at Meta / Mila - Québec AI Institute / Université de Montréal</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>单张图像的视觉质量不保证它与源图共享同一三维场景，物体可能消失、重复或改变深度。ESC 联合生成 RGB 与逆深度，再用双向重投影检查几何，目的是把外观合理与跨视角一致分开；相机姿态对齐也不足以消除所有几何歧义。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如新视角中的椅子纹理很逼真，却在应当可见的位置消失；只看图像美观或文本相似度可能察觉不到该问题。</p>
+<p><strong>答案：</strong>图像生成器可能画出清晰、姿态看似正确的画面，却让物体凭空出现或在转视角后消失。ESC 研究把颜色与深度联系起来，用几何一致性检查这些错误。新视角与源图本来就不应逐像素相同，目标是可解释的空间变化，而非单纯追求更相似或更好看的图片。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：镜头绕桌移动，杯子位置应随投影变化；若杯子在无遮挡处消失，画面再精致也不符合相同场景的几何关系。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.23732v1">原论文</a> · <a href="../../../../foundation-models/2610.23732-esc/">实现解读</a> · <a href="#qa-9fcdef57f9d4db58">问题链接</a></p>
 </details>
@@ -610,16 +610,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.23732v1">原论文</a> · <a href="../../../../foundation-models/2610.23732-esc/">实现解读</a> · <a href="#qa-80733d2366c21114">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jepa-prediction-planning" data-paper-title="One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models 基础模型 论文未列机构 2026-10-14 JEPA 在自己的潜空间预测下一观察，较小的一步 loss 不一定表示更好的长程行动。论文固定一个只在真实观察编码上拟合的物理状态解码器，分别解码真实下一表征与预测下一表征，把编码器本身的可读性和预测器新增的误差拆开。规划仍用相同 checkpoint、相同任务和配对种子单独执行，不能由预测指标推导成功率。 原文三个环境的世界模型重训、每环境多训练/解码/规划种子和完整 MPC：成本过高，不复现（审查 DONE）。CPU 接口实测保存真实解码器拟合与受控输入的诊断指标，不代表世界模型能力。本地对照口径：共享状态规范与归一化、同一冻结解码器；输入必须来自相同 transition。世界模型预测与外部规划分别评价，不自动接入 Evolve 选择。  世界模型评测 冻结物理状态解码器 预测与规划配对比较 多模态 视觉世界建模：状态、生成与动作条件 为什么要先检查真实下一表征本身能否解码物理状态？ 预测 latent 的物理误差既包含编码器信息损失，也包含预测器新增偏差。用同一个只在真实观察表征上训练的冻结解码器，分别评真实与预测下一表征，才能拆开这两部分；否则编码器可读性变化可能被误认为动力学预测改善。 例如真实 latent 已经丢掉物体角度，即使预测器完全复制真实 latent，解码角度仍会错，不能把这全算预测器失败。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:jepa-prediction-planning" data-paper-title="One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models 基础模型 论文未列机构 2026-10-14 JEPA 在自己的潜空间预测下一观察，较小的一步 loss 不一定表示更好的长程行动。论文固定一个只在真实观察编码上拟合的物理状态解码器，分别解码真实下一表征与预测下一表征，把编码器本身的可读性和预测器新增的误差拆开。规划仍用相同 checkpoint、相同任务和配对种子单独执行，不能由预测指标推导成功率。 原文三个环境的世界模型重训、每环境多训练/解码/规划种子和完整 MPC：成本过高，不复现（审查 DONE）。CPU 接口实测保存真实解码器拟合与受控输入的诊断指标，不代表世界模型能力。本地对照口径：共享状态规范与归一化、同一冻结解码器；输入必须来自相同 transition。世界模型预测与外部规划分别评价，不自动接入 Evolve 选择。  世界模型评测 冻结物理状态解码器 预测与规划配对比较 多模态 视觉世界建模：状态、生成与动作条件 JEPA 的下一步 latent loss 很小，为什么还不足以判断它理解了物理运动？ latent 是编码器自己的坐标，距离小未必对应位置、角度或速度误差小，也未必帮助长程规划。该工作把物理状态解码与真实规划分开检查，并用共享训练尺度组织误差。研究目标是厘清预测指标代表什么，不能从某个内部 loss 的下降直接宣布物理理解或控制成功。 教学例：两个预测向量很接近，解码后却可能对应不同物体角度；还需检查物理量误差，以及同任务中实际规划是否成功。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-jepa-prediction-planning-96c625cf" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c84d7475eab03391">为什么要先检查真实下一表征本身能否解码物理状态？</h2>
+<h2 id="qa-c84d7475eab03391">JEPA 的下一步 latent loss 很小，为什么还不足以判断它理解了物理运动？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ajepa-prediction-planning">One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 论文未列机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>预测 latent 的物理误差既包含编码器信息损失，也包含预测器新增偏差。用同一个只在真实观察表征上训练的冻结解码器，分别评真实与预测下一表征，才能拆开这两部分；否则编码器可读性变化可能被误认为动力学预测改善。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如真实 latent 已经丢掉物体角度，即使预测器完全复制真实 latent，解码角度仍会错，不能把这全算预测器失败。</p>
+<p><strong>答案：</strong>latent 是编码器自己的坐标，距离小未必对应位置、角度或速度误差小，也未必帮助长程规划。该工作把物理状态解码与真实规划分开检查，并用共享训练尺度组织误差。研究目标是厘清预测指标代表什么，不能从某个内部 loss 的下降直接宣布物理理解或控制成功。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个预测向量很接近，解码后却可能对应不同物体角度；还需检查物理量误差，以及同任务中实际规划是否成功。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19375v1">原论文</a> · <a href="../../../../foundation-models/2610.19375-jepa-prediction-planning/">实现解读</a> · <a href="#qa-c84d7475eab03391">问题链接</a></p>
 </details>
@@ -663,16 +663,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19375v1">原论文</a> · <a href="../../../../foundation-models/2610.19375-jepa-prediction-planning/">实现解读</a> · <a href="#qa-cd7787052f6ef35f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:oob-regularization" data-paper-title="Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning 基础模型 European Molecular Biology Laboratory (EMBL) 2026-10-14 联合嵌入自监督学习一方面拉近同一图像的不同增强视图，另一方面用抗坍塌正则保持表示多样性。小 batch 对整个表示分布的估计可能很差；单纯增大 GPU batch 又受显存限制。OOB 把“统计范围”与“本次优化 batch”解耦：定期编码整个训练集，按全数据分布构建每个样本的固定目标，再存入 CPU。在线训练只读取当前样本对应的锚点，不在每一步重新估计全数据正则。Gaussian 变体沿随机单位方向投影，把每列样本排序后匹配标准正态分位数； 完整原研究为成本过高，不复现（审查 DONE）。先核验 MD5 c99cafc152244af753f735de768cd75f，再解析官方 pickle，拒绝任意未验证 pickle。本地实现两种真实锚点算法，并在有限的官方 CIFAR 图像上执行有对照的训练。它不是原论文多数据集、100 epochs 的完整研究；短预算的负结果照实保留，不进入 Evolve 自动晋级。完整原研究为成本过高，不复现（审查 DONE）。本地对照口径：基线为同投影 / 分位数口径的 in-batch Gaussian 及 SimCLR；  self-supervised-learning joint-embedding small-batch representation-learning 多模态 视觉世界建模：状态、生成与动作条件 OOB 中“全数据统计”和“当前优化 batch”为什么可以分开？ 周期性编码整个训练集后，按稳定样本索引构建并缓存固定锚点；每次梯度更新只读取当前样本的锚点。统计覆盖因此可以大于 GPU batch，但锚点会随编码器变化而陈旧，需要按刷新规则重建；训练集以外的标签或表示不能混入构建。 例如 GPU 一次只能处理八张图，仍可每隔一段训练遍历五百张训练图建锚点，再为每个八张 batch 查对应目标。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:oob-regularization" data-paper-title="Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning 基础模型 European Molecular Biology Laboratory (EMBL) 2026-10-14 联合嵌入自监督学习一方面拉近同一图像的不同增强视图，另一方面用抗坍塌正则保持表示多样性。小 batch 对整个表示分布的估计可能很差；单纯增大 GPU batch 又受显存限制。OOB 把“统计范围”与“本次优化 batch”解耦：定期编码整个训练集，按全数据分布构建每个样本的固定目标，再存入 CPU。在线训练只读取当前样本对应的锚点，不在每一步重新估计全数据正则。Gaussian 变体沿随机单位方向投影，把每列样本排序后匹配标准正态分位数； 完整原研究为成本过高，不复现（审查 DONE）。先核验 MD5 c99cafc152244af753f735de768cd75f，再解析官方 pickle，拒绝任意未验证 pickle。本地实现两种真实锚点算法，并在有限的官方 CIFAR 图像上执行有对照的训练。它不是原论文多数据集、100 epochs 的完整研究；短预算的负结果照实保留，不进入 Evolve 自动晋级。完整原研究为成本过高，不复现（审查 DONE）。本地对照口径：基线为同投影 / 分位数口径的 in-batch Gaussian 及 SimCLR；  self-supervised-learning joint-embedding small-batch representation-learning 多模态 视觉世界建模：状态、生成与动作条件 小 batch 自监督学习为什么可能让图像视图对齐，却仍学不到可区分的表示？ 把同一图像的增强视图拉近，只约束一致性，所有样本输出常量也可满足；抗坍塌还需判断整体表示是否足够分散。小 batch 对分布估计容易不足，OOB 研究在显存受限时取得更广统计支持。统计范围更大不自动保证下游能力，仍需匹配目标与独立评估。 教学例：一个 batch 的几张图片编码相近，无法判断是样本本就相似还是全模型坍塌；只检查两视图差小，容易漏掉后一种问题。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-oob-regularization-98328dd1" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-24c359d6bb05f722">OOB 中“全数据统计”和“当前优化 batch”为什么可以分开？</h2>
+<h2 id="qa-24c359d6bb05f722">小 batch 自监督学习为什么可能让图像视图对齐，却仍学不到可区分的表示？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aoob-regularization">Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · European Molecular Biology Laboratory (EMBL)</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>周期性编码整个训练集后，按稳定样本索引构建并缓存固定锚点；每次梯度更新只读取当前样本的锚点。统计覆盖因此可以大于 GPU batch，但锚点会随编码器变化而陈旧，需要按刷新规则重建；训练集以外的标签或表示不能混入构建。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 GPU 一次只能处理八张图，仍可每隔一段训练遍历五百张训练图建锚点，再为每个八张 batch 查对应目标。</p>
+<p><strong>答案：</strong>把同一图像的增强视图拉近，只约束一致性，所有样本输出常量也可满足；抗坍塌还需判断整体表示是否足够分散。小 batch 对分布估计容易不足，OOB 研究在显存受限时取得更广统计支持。统计范围更大不自动保证下游能力，仍需匹配目标与独立评估。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个 batch 的几张图片编码相近，无法判断是样本本就相似还是全模型坍塌；只检查两视图差小，容易漏掉后一种问题。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20158">原论文</a> · <a href="../../../../reproductions/2610.20158-oob-regularization/">实现解读</a> · <a href="#qa-24c359d6bb05f722">问题链接</a></p>
 </details>
@@ -716,16 +716,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20158">原论文</a> · <a href="../../../../reproductions/2610.20158-oob-regularization/">实现解读</a> · <a href="#qa-5fcebfd43f84ed2a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:time-jepa" data-paper-title="Time-JEPA: Grounding Video World Models with Physical Time Series" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Time-JEPA: Grounding Video World Models with Physical Time Series 基础模型 Harbin Institute of Technology 2026-10-14 视频自监督目标不必保留精确的速度、关节角等物理状态。Time-JEPA 用同步传感器或标注作辅助目标，但它们不是编码器输入：训练时同一个 online encoder 分别处理 masked 上下文和 unmasked 视频，评测移除物理态 head，仍只输入视频。 完整实验成本过高，不复现（审查 DONE）。CPU与真实单张A100的42/43/44三seed诊断已完成。实现不只封装 loss：包含时间戳 nearest 对齐、逐变量 valid tubelet 池化、训练独占统计、真正的上下文 self-attention encoder、masked latent predictor、unmasked 两层物理 head、冻结 target 和显式 EMA 更新。nearest 的距离阈值由调用方传入、平局取较早测量，是本地明确的对齐策略，不冒充所有原始数据集的具体解码流程。  JEPA与世界模型 物理时序监督 多模态 视觉世界建模：状态、生成与动作条件 Time-JEPA 在评测时为什么仍可只输入视频？ 传感器或物理时序是训练辅助目标，不是编码器输入。共享 online encoder 从 unmasked 视频特征预测物理变量，masked 分支同时做 JEPA；评测移除物理 head 后只保留视频路径，因此不能把方法描述为推理时额外获得真实速度或关节角。 例如训练用同步速度计监督车辆视频表示，部署看视频估计状态时不能再把速度计真值作为输入，否则已改变协议。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:time-jepa" data-paper-title="Time-JEPA: Grounding Video World Models with Physical Time Series" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Time-JEPA: Grounding Video World Models with Physical Time Series 基础模型 Harbin Institute of Technology 2026-10-14 视频自监督目标不必保留精确的速度、关节角等物理状态。Time-JEPA 用同步传感器或标注作辅助目标，但它们不是编码器输入：训练时同一个 online encoder 分别处理 masked 上下文和 unmasked 视频，评测移除物理态 head，仍只输入视频。 完整实验成本过高，不复现（审查 DONE）。CPU与真实单张A100的42/43/44三seed诊断已完成。实现不只封装 loss：包含时间戳 nearest 对齐、逐变量 valid tubelet 池化、训练独占统计、真正的上下文 self-attention encoder、masked latent predictor、unmasked 两层物理 head、冻结 target 和显式 EMA 更新。nearest 的距离阈值由调用方传入、平局取较早测量，是本地明确的对齐策略，不冒充所有原始数据集的具体解码流程。  JEPA与世界模型 物理时序监督 多模态 视觉世界建模：状态、生成与动作条件 理解视频里的动作类别，与保留精确速度和关节角，为什么是不同学习要求？ 语义分类可在很多姿态和速度变化下保持不变，控制或物理分析却可能需要这些连续量。Time-JEPA 研究让视频表示在自监督之外保留更细的时间物理信息。目标不是把传感器当作部署捷径，准确连续状态也不能仅由动作标签正确推断，需要针对数值量独立检查。 教学例：两段视频都叫“抬手”，但快慢和肘部角度不同；类别判断相同不表示表示里已经保留足够精度供机器人使用。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-time-jepa-c002ea0d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4391c33e37078638">Time-JEPA 在评测时为什么仍可只输入视频？</h2>
+<h2 id="qa-4391c33e37078638">理解视频里的动作类别，与保留精确速度和关节角，为什么是不同学习要求？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atime-jepa">Time-JEPA: Grounding Video World Models with Physical Time Series</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Harbin Institute of Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>传感器或物理时序是训练辅助目标，不是编码器输入。共享 online encoder 从 unmasked 视频特征预测物理变量，masked 分支同时做 JEPA；评测移除物理 head 后只保留视频路径，因此不能把方法描述为推理时额外获得真实速度或关节角。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如训练用同步速度计监督车辆视频表示，部署看视频估计状态时不能再把速度计真值作为输入，否则已改变协议。</p>
+<p><strong>答案：</strong>语义分类可在很多姿态和速度变化下保持不变，控制或物理分析却可能需要这些连续量。Time-JEPA 研究让视频表示在自监督之外保留更细的时间物理信息。目标不是把传感器当作部署捷径，准确连续状态也不能仅由动作标签正确推断，需要针对数值量独立检查。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两段视频都叫“抬手”，但快慢和肘部角度不同；类别判断相同不表示表示里已经保留足够精度供机器人使用。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与隔离要求；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.23982">原论文</a> · <a href="../../../../foundation-models/2610.23982-time-jepa/">实现解读</a> · <a href="#qa-4391c33e37078638">问题链接</a></p>
 </details>
@@ -769,16 +769,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.23982">原论文</a> · <a href="../../../../foundation-models/2610.23982-time-jepa/">实现解读</a> · <a href="#qa-4693c64708e6cbb5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ev-jepa" data-paper-title="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference 基础模型 Meta Reality Labs Research 2026-10-09 固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。  jepa video-representation elastic-inference 多模态 视觉世界建模：状态、生成与动作条件 嵌套宽度共享参数与分别训练多个尺寸模型有什么不同？ 窄路径使用宽模型通道的嵌套切片，多个宽度在同一训练中共享参数，可适配不同设备预算。独立训练模型没有天然的中间表示兼容性；共享本身也不保证兼容，因此 EV-JEPA 还显式训练窄转宽混合路径并对齐固定教师。 例如端侧先用窄通道计算，再把中间状态交给较宽服务器继续，接口需要在训练中见过这种切换。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ev-jepa" data-paper-title="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference 基础模型 Meta Reality Labs Research 2026-10-09 固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。  jepa video-representation elastic-inference 多模态 视觉世界建模：状态、生成与动作条件 同一视频模型为什么需要适应手机、服务器或跨设备分段执行的不同预算？ 固定尺寸模型未必适合所有设备，分别训练多个模型又可能让中间表示不兼容，难以把计算从一台设备接到另一台。EV-JEPA 研究共享参数的弹性宽度和兼容表示。可选择宽度并不表示任意切分都正确或免费，实际传输、压缩和任务质量仍需验证。 教学例：手机先运行较窄前半段，再把中间表示交给服务器继续；若两种宽度从未学习衔接，形状能对上也未必能接着推理。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-ev-jepa-12c252ce" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-fd62dd8be67749b5">嵌套宽度共享参数与分别训练多个尺寸模型有什么不同？</h2>
+<h2 id="qa-fd62dd8be67749b5">同一视频模型为什么需要适应手机、服务器或跨设备分段执行的不同预算？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aev-jepa">EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta Reality Labs Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>窄路径使用宽模型通道的嵌套切片，多个宽度在同一训练中共享参数，可适配不同设备预算。独立训练模型没有天然的中间表示兼容性；共享本身也不保证兼容，因此 EV-JEPA 还显式训练窄转宽混合路径并对齐固定教师。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如端侧先用窄通道计算，再把中间状态交给较宽服务器继续，接口需要在训练中见过这种切换。</p>
+<p><strong>答案：</strong>固定尺寸模型未必适合所有设备，分别训练多个模型又可能让中间表示不兼容，难以把计算从一台设备接到另一台。EV-JEPA 研究共享参数的弹性宽度和兼容表示。可选择宽度并不表示任意切分都正确或免费，实际传输、压缩和任务质量仍需验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：手机先运行较窄前半段，再把中间表示交给服务器继续；若两种宽度从未学习衔接，形状能对上也未必能接着推理。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.14324">原论文</a> · <a href="../../../../reproductions/2610.14324-ev-jepa/">实现解读</a> · <a href="#qa-fd62dd8be67749b5">问题链接</a></p>
 </details>
@@ -796,42 +796,42 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.14324">原论文</a> · <a href="../../../../reproductions/2610.14324-ev-jepa/">实现解读</a> · <a href="#qa-339f1d60618048c6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ev-jepa" data-paper-title="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference 基础模型 Meta Reality Labs Research 2026-10-09 固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。  jepa video-representation elastic-inference 多模态 视觉世界建模：状态、生成与动作条件 T3 的窄转宽路径与只同时训练窄、宽两条路径相比，多约束了什么？ 只训练两端可让各自完成任务，却未要求窄网络中间输出能接入宽网络后半段。混合路径在切分层通过可学习投影升宽，并接受同一教师监督，直接约束跨宽度衔接；这种路径兼容性不能靠裁剪参数或插零自动获得。 例如窄模型第三层状态经投影交给宽模型第四层，要有相应训练；两个完整模型各自分数高并不证明这样拼接有效。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ev-jepa" data-paper-title="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference 基础模型 Meta Reality Labs Research 2026-10-09 固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。  jepa video-representation elastic-inference 多模态 视觉世界建模：状态、生成与动作条件 训练压缩器的切分层重建目标，与直接删掉 token，要求恢复什么信息？ 普通裁剪只减少保留位置，删除内容可能无法供后段读取；压缩器额外学习切分层重建，使压缩传输后的表示尽量适配后续计算。二者都减少输入量，但兼容性训练的目标不同。重建损失较低也不能自动推出端到端任务无损，更不等于本地已完成跨设备部署。 教学例：直接丢掉一半空间 token 与编码成较少 token 后训练重建，不是同一操作；后者尝试保留可供后续网络恢复的结构。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-a740fcbaa2cbbe9d">T3 的窄转宽路径与只同时训练窄、宽两条路径相比，多约束了什么？</h2>
+<h2 id="qa-a740fcbaa2cbbe9d">训练压缩器的切分层重建目标，与直接删掉 token，要求恢复什么信息？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aev-jepa">EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta Reality Labs Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>只训练两端可让各自完成任务，却未要求窄网络中间输出能接入宽网络后半段。混合路径在切分层通过可学习投影升宽，并接受同一教师监督，直接约束跨宽度衔接；这种路径兼容性不能靠裁剪参数或插零自动获得。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如窄模型第三层状态经投影交给宽模型第四层，要有相应训练；两个完整模型各自分数高并不证明这样拼接有效。</p>
+<p><strong>答案：</strong>普通裁剪只减少保留位置，删除内容可能无法供后段读取；压缩器额外学习切分层重建，使压缩传输后的表示尽量适配后续计算。二者都减少输入量，但兼容性训练的目标不同。重建损失较低也不能自动推出端到端任务无损，更不等于本地已完成跨设备部署。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：直接丢掉一半空间 token 与编码成较少 token 后训练重建，不是同一操作；后者尝试保留可供后续网络恢复的结构。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.14324">原论文</a> · <a href="../../../../reproductions/2610.14324-ev-jepa/">实现解读</a> · <a href="#qa-a740fcbaa2cbbe9d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ev-jepa" data-paper-title="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference 基础模型 Meta Reality Labs Research 2026-10-09 固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。  jepa video-representation elastic-inference 多模态 视觉世界建模：状态、生成与动作条件 EV-JEPA 的教师是否跟随学生做 EMA，压缩器是否就是 token 裁剪？ 两者都不是。教师是冻结 V-JEPA2，T3 将窄、混合、宽三条 masked-token L1 相加；压缩器另在后训练阶段增加切分层重建目标。当前本地没有运行算法或 GPU 通过记录，不能将规格文档或普通裁剪标为完整弹性模型实现。 例如修改学生宽路径参数后，教师目标仍应不变；若教师随之指数更新，就改变了论文固定目标训练。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ev-jepa" data-paper-title="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference 基础模型 Meta Reality Labs Research 2026-10-09 固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文§4.1：128 GPU、300epochs，Kinetics-710/SSv2/HowTo100M视频，冻结V-JEPA2 ViT-G教师；每步同时训练窄、宽、混合三路径。压缩器另需100epochs×300iterations、全局batch4096。不是本地测速，原预算显著超出单卡A100/A30或Mac；不下载全视频或尝试多臂训练。  jepa video-representation elastic-inference 多模态 视觉世界建模：状态、生成与动作条件 EV-JEPA 的教师是固定视频模型，还是跟随弹性学生更新的 EMA 副本？ 教师采用冻结 V-JEPA 2，为窄、宽和混合路径提供共同目标，不随学生做 EMA。三条学生路径共享嵌套参数，并在同一目标空间接受 masked-token L1 监督。固定教师不代表学生无需训练，也不能把只实现通道切片称为完成这种联合训练或跨设备能力验证。 教学例：一次学生更新会改变可切片的共享参数，教师输出仍由同一个固定模型产生；不能再按学生权重滑动平均偷偷改掉目标。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-5a736aec4cf8931e">EV-JEPA 的教师是否跟随学生做 EMA，压缩器是否就是 token 裁剪？</h2>
+<h2 id="qa-5a736aec4cf8931e">EV-JEPA 的教师是固定视频模型，还是跟随弹性学生更新的 EMA 副本？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aev-jepa">EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta Reality Labs Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>两者都不是。教师是冻结 V-JEPA2，T3 将窄、混合、宽三条 masked-token L1 相加；压缩器另在后训练阶段增加切分层重建目标。当前本地没有运行算法或 GPU 通过记录，不能将规格文档或普通裁剪标为完整弹性模型实现。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如修改学生宽路径参数后，教师目标仍应不变；若教师随之指数更新，就改变了论文固定目标训练。</p>
+<p><strong>答案：</strong>教师采用冻结 V-JEPA 2，为窄、宽和混合路径提供共同目标，不随学生做 EMA。三条学生路径共享嵌套参数，并在同一目标空间接受 masked-token L1 监督。固定教师不代表学生无需训练，也不能把只实现通道切片称为完成这种联合训练或跨设备能力验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一次学生更新会改变可切片的共享参数，教师输出仍由同一个固定模型产生；不能再按学生权重滑动平均偷偷改掉目标。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、边界与后续触发条件；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.14324">原论文</a> · <a href="../../../../reproductions/2610.14324-ev-jepa/">实现解读</a> · <a href="#qa-5a736aec4cf8931e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smolwam" data-paper-title="SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices 基础模型 ML Collective 2026-10-09 Cosmos Policy 将机器人状态、两路相机、动作和未来状态编码为九个 latent frame，沿用视频生成接口：33 帧 VAE、T5-XXL、28-block 2B DiT、1764 tokens 和五步去噪。SmolWAM 并非只换一个轻量 action head，而是在保留预训练 trunk、token 原位置与 rectified-flow readout 的同时，逐项恢复接口改变造成的分布偏移。单帧 Wan VAE 配合 0.5M adapter，映射回原 clip latent 空间； 8 步仅是缩小训练机制诊断，不代表原68,830row/5000step效果。当前为 core_mechanism：真实 A100 已完成三 seed 缩放 teacher 蒸馏、两阶段布局课程与新 student LIBERO 闭环，不用 VQA/随机小网络替代。新 student 与 no-op 均无任务成功；原5000步蒸馏未重训，不能称 full_pipeline 或能力提升。本地对照口径：基线为同固定 LIBERO 初始状态实际执行的 no-op 策略，实验组为各 seed 新训练、validation-selected SmolWAM student；完整 teacher 保持率与相对提速不适用。  world-action-model robotics efficient-inference 多模态 视觉世界建模：状态、生成与动作条件 SmolWAM 为什么保留未来 latent 输出，而不只做轻量动作头？ 它希望压缩 Cosmos Policy 同时保留世界预测接口，单次 trunk 前向同时输出动作 chunk 与两路未来 latent。若只保留动作头，就失去论文的重要训练和读出对象；紧凑设计还要恢复 VAE、文本和布局改变造成的分布偏移，不能只删层后直接宣称等价。 例如机器人输出接下来十六步动作时，也预测执行后的相机 latent，用同一骨干承接动作与视觉未来，而非单独回归关节。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smolwam" data-paper-title="SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices 基础模型 ML Collective 2026-10-09 Cosmos Policy 将机器人状态、两路相机、动作和未来状态编码为九个 latent frame，沿用视频生成接口：33 帧 VAE、T5-XXL、28-block 2B DiT、1764 tokens 和五步去噪。SmolWAM 并非只换一个轻量 action head，而是在保留预训练 trunk、token 原位置与 rectified-flow readout 的同时，逐项恢复接口改变造成的分布偏移。单帧 Wan VAE 配合 0.5M adapter，映射回原 clip latent 空间； 8 步仅是缩小训练机制诊断，不代表原68,830row/5000step效果。当前为 core_mechanism：真实 A100 已完成三 seed 缩放 teacher 蒸馏、两阶段布局课程与新 student LIBERO 闭环，不用 VQA/随机小网络替代。新 student 与 no-op 均无任务成功；原5000步蒸馏未重训，不能称 full_pipeline 或能力提升。本地对照口径：基线为同固定 LIBERO 初始状态实际执行的 no-op 策略，实验组为各 seed 新训练、validation-selected SmolWAM student；完整 teacher 保持率与相对提速不适用。  world-action-model robotics efficient-inference 多模态 视觉世界建模：状态、生成与动作条件 SmolWAM 为什么把视频生成式机器人策略的整条接口都纳入轻量化？ 视频骨干、视觉编码、文字条件和动作表示都会影响推理成本，只缩小动作头仍可能留下大部分负担。SmolWAM 逐项改造这些接口，并恢复改变预训练分布造成的偏移。组件更小不等于原知识自动保留，既要检验前向等价和恢复训练，也要在真实控制协议下评估。 教学例：动作头很小，但仍运行大 VAE、长视觉序列和多步去噪，总成本未必低；轻量化需要看完整执行路径。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-smolwam-cc2de315" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0aa7cf4f31b523e5">SmolWAM 为什么保留未来 latent 输出，而不只做轻量动作头？</h2>
+<h2 id="qa-0aa7cf4f31b523e5">SmolWAM 为什么把视频生成式机器人策略的整条接口都纳入轻量化？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asmolwam">SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · ML Collective</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它希望压缩 Cosmos Policy 同时保留世界预测接口，单次 trunk 前向同时输出动作 chunk 与两路未来 latent。若只保留动作头，就失去论文的重要训练和读出对象；紧凑设计还要恢复 VAE、文本和布局改变造成的分布偏移，不能只删层后直接宣称等价。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如机器人输出接下来十六步动作时，也预测执行后的相机 latent，用同一骨干承接动作与视觉未来，而非单独回归关节。</p>
+<p><strong>答案：</strong>视频骨干、视觉编码、文字条件和动作表示都会影响推理成本，只缩小动作头仍可能留下大部分负担。SmolWAM 逐项改造这些接口，并恢复改变预训练分布造成的偏移。组件更小不等于原知识自动保留，既要检验前向等价和恢复训练，也要在真实控制协议下评估。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：动作头很小，但仍运行大 VAE、长视觉序列和多步去噪，总成本未必低；轻量化需要看完整执行路径。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13740">原论文</a> · <a href="../../../../reproductions/2610.13740-smolwam/">实现解读</a> · <a href="#qa-0aa7cf4f31b523e5">问题链接</a></p>
 </details>
@@ -875,16 +875,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13740">原论文</a> · <a href="../../../../reproductions/2610.13740-smolwam/">实现解读</a> · <a href="#qa-b896fba15c6b0841">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lewam" data-paper-title="LeWAM: End-to-End World and Action Modeling with JEPAs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="LeWAM: End-to-End World and Action Modeling with JEPAs 基础模型 UC San Diego 2026-10-08 传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。LeWAM 在同一训练阶段更新视觉编码器、潜在动力学和随机策略：既预测动作导致的未来 latent，又通过 flow matching 学习如何行动。视觉编码器由从零训练的 ResNet-18、空间 softmax 和两层投影 MLP 组成。模拟版本约 16.9M 参数，latent/MoT 宽度 192，4 层、4 头。 当前为 core_mechanism：真实 A100 已完成三 seed 缩放联合训练→新候选三臂闭环，证据绑定实际源码与权重哈希。目标来自训练轨迹，仍是非 holdout 诊断；未观测到规划相对 reactive 的优势，不宣称完整论文效果复现。本地对照口径：本轮真实测量用各 seed 的新训练、validation-selected checkpoint；基线为同一候选的 reactive policy，实验组为 best-of-K 与梯度规划。原目标来自训练轨迹，稳定能力相对提升不适用。发布模型入口仍保留，但未将其成绩冒充新候选成绩。  world-action-model jepa latent-planning 多模态 视觉世界建模：状态、生成与动作条件 LeWAM 为什么让视觉编码器同时接受世界预测与动作监督？ 两阶段路线先学给定动作的未来表示，再另学控制，动作目标难以反向塑造前期视觉表示。LeWAM 联合更新视觉编码器、潜在动力学和随机策略，使表示同时服务未来预测与行动；联合目标也需要防塌缩约束，不能只训练动作头便称端到端联合。 例如视觉表示若忽略可抓取边缘，动作损失可以在联合训练中推动编码器保留它，而冻结两阶段编码器做不到同样更新。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lewam" data-paper-title="LeWAM: End-to-End World and Action Modeling with JEPAs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="LeWAM: End-to-End World and Action Modeling with JEPAs 基础模型 UC San Diego 2026-10-08 传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。LeWAM 在同一训练阶段更新视觉编码器、潜在动力学和随机策略：既预测动作导致的未来 latent，又通过 flow matching 学习如何行动。视觉编码器由从零训练的 ResNet-18、空间 softmax 和两层投影 MLP 组成。模拟版本约 16.9M 参数，latent/MoT 宽度 192，4 层、4 头。 当前为 core_mechanism：真实 A100 已完成三 seed 缩放联合训练→新候选三臂闭环，证据绑定实际源码与权重哈希。目标来自训练轨迹，仍是非 holdout 诊断；未观测到规划相对 reactive 的优势，不宣称完整论文效果复现。本地对照口径：本轮真实测量用各 seed 的新训练、validation-selected checkpoint；基线为同一候选的 reactive policy，实验组为 best-of-K 与梯度规划。原目标来自训练轨迹，稳定能力相对提升不适用。发布模型入口仍保留，但未将其成绩冒充新候选成绩。  world-action-model jepa latent-planning 多模态 视觉世界建模：状态、生成与动作条件 LeWAM 为什么希望“预测动作后果”和“产生可用动作”在训练时互相联系？ 世界模型能预测给定动作的未来，却不一定高效找到达到目标的动作；另训策略又可能无法让控制需求塑造视觉表示。LeWAM 联合学习视觉状态、动力学和随机动作策略，使预测与控制共享训练信号。联合目标并不免除信息隔离或真实执行验证，模型规划也可能失准。 教学例：模型知道推一下物体会移动，却仍需决定往哪推、推多远；动作学习与未来预测相连，才能为具体目标产生候选。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-lewam-7895d3a3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-1a6959f95b4f9227">LeWAM 为什么让视觉编码器同时接受世界预测与动作监督？</h2>
+<h2 id="qa-1a6959f95b4f9227">LeWAM 为什么希望“预测动作后果”和“产生可用动作”在训练时互相联系？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alewam">LeWAM: End-to-End World and Action Modeling with JEPAs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · UC San Diego</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>两阶段路线先学给定动作的未来表示，再另学控制，动作目标难以反向塑造前期视觉表示。LeWAM 联合更新视觉编码器、潜在动力学和随机策略，使表示同时服务未来预测与行动；联合目标也需要防塌缩约束，不能只训练动作头便称端到端联合。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如视觉表示若忽略可抓取边缘，动作损失可以在联合训练中推动编码器保留它，而冻结两阶段编码器做不到同样更新。</p>
+<p><strong>答案：</strong>世界模型能预测给定动作的未来，却不一定高效找到达到目标的动作；另训策略又可能无法让控制需求塑造视觉表示。LeWAM 联合学习视觉状态、动力学和随机动作策略，使预测与控制共享训练信号。联合目标并不免除信息隔离或真实执行验证，模型规划也可能失准。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型知道推一下物体会移动，却仍需决定往哪推、推多远；动作学习与未来预测相连，才能为具体目标产生候选。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12818">原论文</a> · <a href="../../../../reproductions/2610.12818-lewam/">实现解读</a> · <a href="#qa-1a6959f95b4f9227">问题链接</a></p>
 </details>
@@ -915,29 +915,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12818">原论文</a> · <a href="../../../../reproductions/2610.12818-lewam/">实现解读</a> · <a href="#qa-7d7c630753bca65d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lewam" data-paper-title="LeWAM: End-to-End World and Action Modeling with JEPAs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="LeWAM: End-to-End World and Action Modeling with JEPAs 基础模型 UC San Diego 2026-10-08 传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。LeWAM 在同一训练阶段更新视觉编码器、潜在动力学和随机策略：既预测动作导致的未来 latent，又通过 flow matching 学习如何行动。视觉编码器由从零训练的 ResNet-18、空间 softmax 和两层投影 MLP 组成。模拟版本约 16.9M 参数，latent/MoT 宽度 192，4 层、4 头。 当前为 core_mechanism：真实 A100 已完成三 seed 缩放联合训练→新候选三臂闭环，证据绑定实际源码与权重哈希。目标来自训练轨迹，仍是非 holdout 诊断；未观测到规划相对 reactive 的优势，不宣称完整论文效果复现。本地对照口径：本轮真实测量用各 seed 的新训练、validation-selected checkpoint；基线为同一候选的 reactive policy，实验组为 best-of-K 与梯度规划。原目标来自训练轨迹，稳定能力相对提升不适用。发布模型入口仍保留，但未将其成绩冒充新候选成绩。  world-action-model jepa latent-planning 多模态 视觉世界建模：状态、生成与动作条件 噪声动作能通过状态 query 间接读取干净动作吗？ 不能。历史只读历史，状态 query 可读干净动作，但噪声动作不能读干净动作或携带其信息的 query。动作插值从噪声到数据，速度为 A-ε；视觉编码器在线联合训练而非 EMA，SIGReg 也不是只匹配均值方差的替代项。 例如第一层 query 看见正确动作后，第二层若噪声动作再读 query，就发生间接答案泄露，即使直接边已遮住。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lewam" data-paper-title="LeWAM: End-to-End World and Action Modeling with JEPAs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="LeWAM: End-to-End World and Action Modeling with JEPAs 基础模型 UC San Diego 2026-10-08 传统 JEPA 学习“给定动作会到什么状态”，之后另训逆动力学或在线搜索动作。两阶段会使控制监督无法塑造视觉表征，宽高斯动作搜索也较昂贵。LeWAM 在同一训练阶段更新视觉编码器、潜在动力学和随机策略：既预测动作导致的未来 latent，又通过 flow matching 学习如何行动。视觉编码器由从零训练的 ResNet-18、空间 softmax 和两层投影 MLP 组成。模拟版本约 16.9M 参数，latent/MoT 宽度 192，4 层、4 头。 当前为 core_mechanism：真实 A100 已完成三 seed 缩放联合训练→新候选三臂闭环，证据绑定实际源码与权重哈希。目标来自训练轨迹，仍是非 holdout 诊断；未观测到规划相对 reactive 的优势，不宣称完整论文效果复现。本地对照口径：本轮真实测量用各 seed 的新训练、validation-selected checkpoint；基线为同一候选的 reactive policy，实验组为 best-of-K 与梯度规划。原目标来自训练轨迹，稳定能力相对提升不适用。发布模型入口仍保留，但未将其成绩冒充新候选成绩。  world-action-model jepa latent-planning 多模态 视觉世界建模：状态、生成与动作条件 LeWAM 的动作精炼为什么用 proximity penalty 优化，却按原始 goal cost 选候选？ Adam 优化目标加入动作偏离采样计划的惩罚，限制精炼走得过远；最终选择则比较未加该项的 goal cost，让候选按到达目标的预测效果竞争。原始采样候选也保留，防止精炼退化。优化只更新动作，不把规划阶段误写成模型权重训练或真实任务成功保证。 教学例：精炼动作偏离原方案较多但更接近目标，最终应按目标误差比较；若精炼反而更差，仍可退回保留的原候选。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-c23e22f887512a09">噪声动作能通过状态 query 间接读取干净动作吗？</h2>
+<h2 id="qa-c23e22f887512a09">LeWAM 的动作精炼为什么用 proximity penalty 优化，却按原始 goal cost 选候选？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alewam">LeWAM: End-to-End World and Action Modeling with JEPAs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · UC San Diego</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不能。历史只读历史，状态 query 可读干净动作，但噪声动作不能读干净动作或携带其信息的 query。动作插值从噪声到数据，速度为 A-ε；视觉编码器在线联合训练而非 EMA，SIGReg 也不是只匹配均值方差的替代项。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第一层 query 看见正确动作后，第二层若噪声动作再读 query，就发生间接答案泄露，即使直接边已遮住。</p>
+<p><strong>答案：</strong>Adam 优化目标加入动作偏离采样计划的惩罚，限制精炼走得过远；最终选择则比较未加该项的 goal cost，让候选按到达目标的预测效果竞争。原始采样候选也保留，防止精炼退化。优化只更新动作，不把规划阶段误写成模型权重训练或真实任务成功保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：精炼动作偏离原方案较多但更接近目标，最终应按目标误差比较；若精炼反而更差，仍可退回保留的原候选。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、数据协议、结果与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12818">原论文</a> · <a href="../../../../reproductions/2610.12818-lewam/">实现解读</a> · <a href="#qa-c23e22f887512a09">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:raw-video-midtraining" data-paper-title="Mid-Training Language Models on Raw Video" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Mid-Training Language Models on Raw Video 多模态大模型 Meta AI / Massachusetts Institute of Technology 2026-10-08 将有序帧的patch编码为连续视觉token并按空间顺序序列化；因果LM预测下一视觉token，目标侧stop-gradient。中期训练没有字幕或文本损失；随后与对照使用相同图文指令调优，隔离视频阶段贡献。原文§3–4 成本过高，不复现（审查 DONE）；Google/Meta优先补漏。成本过高，不复现（审查 DONE）；不以MSE演示冒充视频中期训练。原文§4.1.4使用128张H100训练27300步，batch256、16K上下文，之后还有指令调优。原始资源配置  视频理解与世界模型 无字幕视频中期训练 多模态 视觉世界建模：状态、生成与动作条件 无字幕的视频中期训练，语言模型究竟预测什么？ 有序视频帧经视觉 tokenizer 转成连续 patch token，并按空间顺序序列化；因果语言模型和预测头回归下一个连续视觉 token。这个阶段没有字幕或文本损失，目标是从视觉序列学习结构，而不是将视频先自动写成描述再做文本续写。 例如当前输入某帧左上到右下的视觉 token，模型预测后继视觉向量，而不是输出“有人开门”这段字幕。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:raw-video-midtraining" data-paper-title="Mid-Training Language Models on Raw Video" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Mid-Training Language Models on Raw Video 多模态大模型 Meta AI / Massachusetts Institute of Technology 2026-10-08 将有序帧的patch编码为连续视觉token并按空间顺序序列化；因果LM预测下一视觉token，目标侧stop-gradient。中期训练没有字幕或文本损失；随后与对照使用相同图文指令调优，隔离视频阶段贡献。原文§3–4 成本过高，不复现（审查 DONE）；Google/Meta优先补漏。成本过高，不复现（审查 DONE）；不以MSE演示冒充视频中期训练。原文§4.1.4使用128张H100训练27300步，batch256、16K上下文，之后还有指令调优。原始资源配置  视频理解与世界模型 无字幕视频中期训练 多模态 视觉世界建模：状态、生成与动作条件 没有字幕的原始视频，为什么仍可能为语言模型提供有用的中期训练信号？ 视频的有序画面含有物体、运动和时空关联，不必全部先压成文字说明才能学习。该方法把帧 patch 编成连续视觉序列，让因果模型预测后续表示，利用原始视觉变化。预测视觉 token 并不等于生成字幕或掌握真实物理规律，后续能力还需匹配调优与评测。 教学例：杯子被拿起的连续帧包含运动关系，字幕可能只写“有人拿杯子”；直接视觉序列可提供文字未逐项标注的变化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-multimodal-models-raw-video-midtraining-db4472b0" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-176304cc6cc0aa4d">无字幕的视频中期训练，语言模型究竟预测什么？</h2>
+<h2 id="qa-176304cc6cc0aa4d">没有字幕的原始视频，为什么仍可能为语言模型提供有用的中期训练信号？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Araw-video-midtraining">Mid-Training Language Models on Raw Video</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI / Massachusetts Institute of Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>有序视频帧经视觉 tokenizer 转成连续 patch token，并按空间顺序序列化；因果语言模型和预测头回归下一个连续视觉 token。这个阶段没有字幕或文本损失，目标是从视觉序列学习结构，而不是将视频先自动写成描述再做文本续写。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如当前输入某帧左上到右下的视觉 token，模型预测后继视觉向量，而不是输出“有人开门”这段字幕。</p>
+<p><strong>答案：</strong>视频的有序画面含有物体、运动和时空关联，不必全部先压成文字说明才能学习。该方法把帧 patch 编成连续视觉序列，让因果模型预测后续表示，利用原始视觉变化。预测视觉 token 并不等于生成字幕或掌握真实物理规律，后续能力还需匹配调优与评测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：杯子被拿起的连续帧包含运动关系，字幕可能只写“有人拿杯子”；直接视觉序列可提供文字未逐项标注的变化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与原文效果；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11019">原论文</a> · <a href="../../../../multimodal-models/2610.11019-raw-video-midtraining/">实现解读</a> · <a href="#qa-176304cc6cc0aa4d">问题链接</a></p>
 </details>
@@ -968,15 +968,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11019">原论文</a> · <a href="../../../../multimodal-models/2610.11019-raw-video-midtraining/">实现解读</a> · <a href="#qa-1aa77b19c09a3bc6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:raw-video-midtraining" data-paper-title="Mid-Training Language Models on Raw Video" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Mid-Training Language Models on Raw Video 多模态大模型 Meta AI / Massachusetts Institute of Technology 2026-10-08 将有序帧的patch编码为连续视觉token并按空间顺序序列化；因果LM预测下一视觉token，目标侧stop-gradient。中期训练没有字幕或文本损失；随后与对照使用相同图文指令调优，隔离视频阶段贡献。原文§3–4 成本过高，不复现（审查 DONE）；Google/Meta优先补漏。成本过高，不复现（审查 DONE）；不以MSE演示冒充视频中期训练。原文§4.1.4使用128张H100训练27300步，batch256、16K上下文，之后还有指令调优。原始资源配置  视频理解与世界模型 无字幕视频中期训练 多模态 视觉世界建模：状态、生成与动作条件 目标 token stop-gradient 是否意味着视觉 tokenizer 冻结？ 不意味着。目标侧停止梯度避免预测目标被直接拉动，但同一 tokenizer 的输入路径仍接收预测损失，和语言模型、预测头一起端到端更新。当前本地没有运行该大规模训练；不能把 detach 目标的小张量测试称为视频中期训练已完成。 例如 v_(i+1) 作为标签不反传，但 v_1 到 v_i 作为上下文仍可把梯度传回视觉 tokenizer；两条路径要区分。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:raw-video-midtraining" data-paper-title="Mid-Training Language Models on Raw Video" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Mid-Training Language Models on Raw Video 多模态大模型 Meta AI / Massachusetts Institute of Technology 2026-10-08 将有序帧的patch编码为连续视觉token并按空间顺序序列化；因果LM预测下一视觉token，目标侧stop-gradient。中期训练没有字幕或文本损失；随后与对照使用相同图文指令调优，隔离视频阶段贡献。原文§3–4 成本过高，不复现（审查 DONE）；Google/Meta优先补漏。成本过高，不复现（审查 DONE）；不以MSE演示冒充视频中期训练。原文§4.1.4使用128张H100训练27300步，batch256、16K上下文，之后还有指令调优。原始资源配置  视频理解与世界模型 无字幕视频中期训练 多模态 视觉世界建模：状态、生成与动作条件 视频中期训练后的图文指令调优，为什么必须与对照使用同一口径？ 最终能力同时受视频阶段与后续指令调优影响，若两侧调优数据或流程不同，就难把差异归因于 raw-video 阶段。论文用匹配图文指令调优隔离其贡献，文本保真结论也限于这一协议。不能据此推广为任意无字幕视频训练都不遗忘，本地组件不代替完整对照训练。 教学例：视频组多做一轮优质指令训练而基线没有，最终图像问答涨分就混入额外监督；需要先对齐后续调优条件。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-9a155f198062cb83">目标 token stop-gradient 是否意味着视觉 tokenizer 冻结？</h2>
+<h2 id="qa-9a155f198062cb83">视频中期训练后的图文指令调优，为什么必须与对照使用同一口径？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Araw-video-midtraining">Mid-Training Language Models on Raw Video</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI / Massachusetts Institute of Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不意味着。目标侧停止梯度避免预测目标被直接拉动，但同一 tokenizer 的输入路径仍接收预测损失，和语言模型、预测头一起端到端更新。当前本地没有运行该大规模训练；不能把 detach 目标的小张量测试称为视频中期训练已完成。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 v_(i+1) 作为标签不反传，但 v_1 到 v_i 作为上下文仍可把梯度传回视觉 tokenizer；两条路径要区分。</p>
+<p><strong>答案：</strong>最终能力同时受视频阶段与后续指令调优影响，若两侧调优数据或流程不同，就难把差异归因于 raw-video 阶段。论文用匹配图文指令调优隔离其贡献，文本保真结论也限于这一协议。不能据此推广为任意无字幕视频训练都不遗忘，本地组件不代替完整对照训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：视频组多做一轮优质指令训练而基线没有，最终图像问答涨分就混入额外监督；需要先对齐后续调优条件。</p>
 <p class="ar-learning-sources">依据：核心公式与原文效果、本地复现与成本决策；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.11019">原论文</a> · <a href="../../../../multimodal-models/2610.11019-raw-video-midtraining/">实现解读</a> · <a href="#qa-9a155f198062cb83">问题链接</a></p>
 </details>
@@ -1034,16 +1034,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12417">原论文</a> · <a href="../../../../reproductions/2610.12417-woven/">实现解读</a> · <a href="#qa-def30335d1ff6136">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vjepa-policy" data-paper-title="V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents 基础模型 Tsinghua University 2026-09-29 冻结 V-JEPA 2.1 视觉编码器，在预测视觉潜空间中联合训练 instruction-conditioned future-latent predictor 和 flow-matching action expert；动作生成读取 predictor 的未来信息上下文。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 future-latent stop-gradient 与 action flow matching；未加载 V-JEPA 2.1 或机器人数据。执行 future-latent stop-gradient 与 action flow matching；未加载 V-JEPA 2.1 或机器人数据。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  世界动作模型 预测视觉潜变量 机器人 多模态 视觉世界建模：状态、生成与动作条件 future-latent predictor 为什么要接收文字指令？ 同一当前视觉状态在不同指令下应通向不同未来，指令条件让预测未来与任务目标联系起来。动作专家读取这个预测上下文来生成控制；训练真实未来提供目标，部署使用预测未来，不能将目标 latent 直接当作可观察状态。 例如同一桌面上“推红块”和“推蓝块”需要不同未来布局，指令条件应改变预测并进一步影响动作。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vjepa-policy" data-paper-title="V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents 基础模型 Tsinghua University 2026-09-29 冻结 V-JEPA 2.1 视觉编码器，在预测视觉潜空间中联合训练 instruction-conditioned future-latent predictor 和 flow-matching action expert；动作生成读取 predictor 的未来信息上下文。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 future-latent stop-gradient 与 action flow matching；未加载 V-JEPA 2.1 或机器人数据。执行 future-latent stop-gradient 与 action flow matching；未加载 V-JEPA 2.1 或机器人数据。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  世界动作模型 预测视觉潜变量 机器人 多模态 视觉世界建模：状态、生成与动作条件 机器人动作策略为什么会从“预测将看到什么”中获得额外条件？ 仅靠当前图像选择动作，可能缺少目标执行后场景如何变化的线索。V-JEPA Policy 将指令条件未来表示预测与动作学习联系起来，让动作专家读取预测上下文。未来信息必须来自模型预测，不能在控制时偷读真实后续视频；预测有误也会影响动作，因此仍需实际执行验证。 教学例：指令要求把杯子放入盒子，未来表示可帮助描述目标视觉状态；机器人尚未行动，不能直接读取任务结束后的真实画面。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-vjepa-policy-d720eedd" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5edd75f877906c0b">future-latent predictor 为什么要接收文字指令？</h2>
+<h2 id="qa-5edd75f877906c0b">机器人动作策略为什么会从“预测将看到什么”中获得额外条件？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avjepa-policy">V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同一当前视觉状态在不同指令下应通向不同未来，指令条件让预测未来与任务目标联系起来。动作专家读取这个预测上下文来生成控制；训练真实未来提供目标，部署使用预测未来，不能将目标 latent 直接当作可观察状态。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一桌面上“推红块”和“推蓝块”需要不同未来布局，指令条件应改变预测并进一步影响动作。</p>
+<p><strong>答案：</strong>仅靠当前图像选择动作，可能缺少目标执行后场景如何变化的线索。V-JEPA Policy 将指令条件未来表示预测与动作学习联系起来，让动作专家读取预测上下文。未来信息必须来自模型预测，不能在控制时偷读真实后续视频；预测有误也会影响动作，因此仍需实际执行验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：指令要求把杯子放入盒子，未来表示可帮助描述目标视觉状态；机器人尚未行动，不能直接读取任务结束后的真实画面。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37250">原论文</a> · <a href="../../../../foundation-models/2609.37250-vjepa-policy/">实现解读</a> · <a href="#qa-5edd75f877906c0b">问题链接</a></p>
 </details>
@@ -1087,16 +1087,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37250">原论文</a> · <a href="../../../../foundation-models/2609.37250-vjepa-policy/">实现解读</a> · <a href="#qa-44f9ff0a4f6450b9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vbvr-pro" data-paper-title="VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning 基础模型 Nanyang Technological University / VBVR Community 2026-08-26 通用 VLM judge 容易被流畅输出误导，难以逐实例核对时空状态。VBVR-Pro 为每种任务定义可执行 scorer，把中间状态、约束和最终状态都变成可验证奖励，并据此训练多模态生成模型。 Fidelity：核心机制的程序化验证。本地复刻 task-specific deterministic scorer 与标量 judge 对照，不训练视频生成大模型。该结果只验证 scorer 的确定性和可解释失败归因，不等同于论文七个外部 benchmark 或 14B/19B checkpoint 训练。本地对照口径：基线为带噪标量 VLM-judge analogue；实验组为三个确定性 task-specific verifier。300 个程序化任务 reward mean 0.5942 → 1.0000（+68.30%）。  multimodal-foundation-model native-visual-reasoning verifiable-reward benchmark 多模态 视觉世界建模：状态、生成与动作条件 可执行视觉 scorer 为什么要检查中间状态和约束，而不只看终图？ 终图可能看似合理却违反过程规则，例如物体穿越障碍或顺序错误。任务专属 scorer 把状态与约束变成可核验奖励，提供更可解释的失败定位；它依赖任务的可执行定义，不能把任意开放视觉推理都变成自动可验证。 例如最终球到了目标区，但轨迹穿过禁止墙面；只看终点会判成功，中间约束检查可以识别这条无效路径。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vbvr-pro" data-paper-title="VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning 基础模型 Nanyang Technological University / VBVR Community 2026-08-26 通用 VLM judge 容易被流畅输出误导，难以逐实例核对时空状态。VBVR-Pro 为每种任务定义可执行 scorer，把中间状态、约束和最终状态都变成可验证奖励，并据此训练多模态生成模型。 Fidelity：核心机制的程序化验证。本地复刻 task-specific deterministic scorer 与标量 judge 对照，不训练视频生成大模型。该结果只验证 scorer 的确定性和可解释失败归因，不等同于论文七个外部 benchmark 或 14B/19B checkpoint 训练。本地对照口径：基线为带噪标量 VLM-judge analogue；实验组为三个确定性 task-specific verifier。300 个程序化任务 reward mean 0.5942 → 1.0000（+68.30%）。  multimodal-foundation-model native-visual-reasoning verifiable-reward benchmark 多模态 视觉世界建模：状态、生成与动作条件 视觉推理生成了一个好看的终图，为什么还可能没有完成要求的任务？ 有些任务约束对象如何移动、何时经过某状态或是否避开禁区，终图正确也可能掩盖错误过程。VBVR-Pro 把这类任务规则变成可执行检查，为生成轨迹提供更具体反馈。程序化奖励覆盖已定义约束，不能自动衡量未定义的所有视觉质量，也不代表任意任务都有可靠 scorer。 教学例：物体最终到达目标点，但途中穿过禁止区域；只看终图会漏掉违反路径约束，过程检查才看得到。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-vbvr-pro-eb931970" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-a689a1bd0391b575">可执行视觉 scorer 为什么要检查中间状态和约束，而不只看终图？</h2>
+<h2 id="qa-a689a1bd0391b575">视觉推理生成了一个好看的终图，为什么还可能没有完成要求的任务？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avbvr-pro">VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Nanyang Technological University / VBVR Community</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>终图可能看似合理却违反过程规则，例如物体穿越障碍或顺序错误。任务专属 scorer 把状态与约束变成可核验奖励，提供更可解释的失败定位；它依赖任务的可执行定义，不能把任意开放视觉推理都变成自动可验证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如最终球到了目标区，但轨迹穿过禁止墙面；只看终点会判成功，中间约束检查可以识别这条无效路径。</p>
+<p><strong>答案：</strong>有些任务约束对象如何移动、何时经过某状态或是否避开禁区，终图正确也可能掩盖错误过程。VBVR-Pro 把这类任务规则变成可执行检查，为生成轨迹提供更具体反馈。程序化奖励覆盖已定义约束，不能自动衡量未定义的所有视觉质量，也不代表任意任务都有可靠 scorer。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：物体最终到达目标点，但途中穿过禁止区域；只看终图会漏掉违反路径约束，过程检查才看得到。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26105">原论文</a> · <a href="../../../../reproductions/2608.26105-vbvr-pro/">实现解读</a> · <a href="#qa-a689a1bd0391b575">问题链接</a></p>
 </details>
@@ -1114,15 +1114,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26105">原论文</a> · <a href="../../../../reproductions/2608.26105-vbvr-pro/">实现解读</a> · <a href="#qa-3c05a2d2ce10e7f4">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vbvr-pro" data-paper-title="VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning 基础模型 Nanyang Technological University / VBVR Community 2026-08-26 通用 VLM judge 容易被流畅输出误导，难以逐实例核对时空状态。VBVR-Pro 为每种任务定义可执行 scorer，把中间状态、约束和最终状态都变成可验证奖励，并据此训练多模态生成模型。 Fidelity：核心机制的程序化验证。本地复刻 task-specific deterministic scorer 与标量 judge 对照，不训练视频生成大模型。该结果只验证 scorer 的确定性和可解释失败归因，不等同于论文七个外部 benchmark 或 14B/19B checkpoint 训练。本地对照口径：基线为带噪标量 VLM-judge analogue；实验组为三个确定性 task-specific verifier。300 个程序化任务 reward mean 0.5942 → 1.0000（+68.30%）。  multimodal-foundation-model native-visual-reasoning verifiable-reward benchmark 多模态 视觉世界建模：状态、生成与动作条件 专属 verifier 与通用 VLM judge 在判断依据上有何不同？ verifier 根据明确状态和程序约束执行判断，通用 judge 以语义模型评价输出，可能受流畅叙述或视觉表面影响。前者更可复查但覆盖范围受限，后者较灵活却可能不稳定；不能用一个确定性 fixture 的满分推断模型视觉能力已提升。 例如几何任务可精确检查是否越界，但开放创意图的美感没有同样明确的布尔合同，不能照搬一个 scorer。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vbvr-pro" data-paper-title="VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning 基础模型 Nanyang Technological University / VBVR Community 2026-08-26 通用 VLM judge 容易被流畅输出误导，难以逐实例核对时空状态。VBVR-Pro 为每种任务定义可执行 scorer，把中间状态、约束和最终状态都变成可验证奖励，并据此训练多模态生成模型。 Fidelity：核心机制的程序化验证。本地复刻 task-specific deterministic scorer 与标量 judge 对照，不训练视频生成大模型。该结果只验证 scorer 的确定性和可解释失败归因，不等同于论文七个外部 benchmark 或 14B/19B checkpoint 训练。本地对照口径：基线为带噪标量 VLM-judge analogue；实验组为三个确定性 task-specific verifier。300 个程序化任务 reward mean 0.5942 → 1.0000（+68.30%）。  multimodal-foundation-model native-visual-reasoning verifiable-reward benchmark 多模态 视觉世界建模：状态、生成与动作条件 约束奖励加权求和，与要求全部约束硬性通过，是不是同一种任务合同？ 加权和让各项满足程度贡献分数，高权重项目可能补偿低权重项目的失败；全部硬性通过则把任一违反视为不可行。两种定义表达不同偏好，不能从总分较高推断所有约束都满足。这是对论文公式的假设比较，不是声称作者另外做过这两种方法的对照实验。 教学例：两项各半权重的条件只过一项可得半分；若要求安全条件必须满足，即使其他项全对也不能把安全失败补偿掉。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-f61addb2d17becd9">专属 verifier 与通用 VLM judge 在判断依据上有何不同？</h2>
+<h2 id="qa-f61addb2d17becd9">约束奖励加权求和，与要求全部约束硬性通过，是不是同一种任务合同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avbvr-pro">VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Nanyang Technological University / VBVR Community</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>verifier 根据明确状态和程序约束执行判断，通用 judge 以语义模型评价输出，可能受流畅叙述或视觉表面影响。前者更可复查但覆盖范围受限，后者较灵活却可能不稳定；不能用一个确定性 fixture 的满分推断模型视觉能力已提升。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如几何任务可精确检查是否越界，但开放创意图的美感没有同样明确的布尔合同，不能照搬一个 scorer。</p>
+<p><strong>答案：</strong>加权和让各项满足程度贡献分数，高权重项目可能补偿低权重项目的失败；全部硬性通过则把任一违反视为不可行。两种定义表达不同偏好，不能从总分较高推断所有约束都满足。这是对论文公式的假设比较，不是声称作者另外做过这两种方法的对照实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两项各半权重的条件只过一项可得半分；若要求安全条件必须满足，即使其他项全对也不能把安全失败补偿掉。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26105">原论文</a> · <a href="../../../../reproductions/2608.26105-vbvr-pro/">实现解读</a> · <a href="#qa-f61addb2d17becd9">问题链接</a></p>
 </details>
@@ -1140,16 +1140,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26105">原论文</a> · <a href="../../../../reproductions/2608.26105-vbvr-pro/">实现解读</a> · <a href="#qa-8bddbd7e921c7fde">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:mice" data-paper-title="Editing Everything Everywhere All at Once" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Editing Everything Everywhere All at Once 多模态大模型 University of Modena and Reggio Emilia 2026-06-30 多区域同时编辑容易把一处指令的属性传到另一处。MICE 在联合注意力中隔离不同文字组，并用实例掩码的平滑空间偏置控制视觉交互，以兼顾局部绑定与周围区域融合。方法不训练新的编辑模型。 以单张 A100/A30 或 Mac 的资源限制评估，完整矩阵需要大权重、长时间生成和外部服务，标注成本过高，不复现（审查 DONE）。诊断使用 2 个生成掩码、6×8 raster 和随机 Q/K/V，真实执行 attention 与反向传播。实现 instance_aware_masks、instance_log_bias、mice_joint_bias、mice_joint_attention 和统一 diagnostic(seed, device)。模块导入不加载 PyTorch，实际调用时才需要。输入必须是已经在同一网格上的、非空、互不重叠的二值 mask；  视觉生成与编辑 多实例编辑与注意力隔离 多模态 视觉世界建模：状态、生成与动作条件 MICE 的文字组隔离为什么对多实例编辑重要？ 多区域指令若完全互读，某实例的属性可能传播到另一实例。MICE 用组间隔离与实例空间偏置，把局部文字绑定到对应视觉区域，同时保留必要背景交互；这改变既有模型注意力，不需要训练新编辑模型，但仍依赖正确实例掩码。 例如“左杯变红、右杯变蓝”需要分别绑定两组文字；完全混合可能把两个杯子都涂成同一种颜色。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:mice" data-paper-title="Editing Everything Everywhere All at Once" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Editing Everything Everywhere All at Once 多模态大模型 University of Modena and Reggio Emilia 2026-06-30 多区域同时编辑容易把一处指令的属性传到另一处。MICE 在联合注意力中隔离不同文字组，并用实例掩码的平滑空间偏置控制视觉交互，以兼顾局部绑定与周围区域融合。方法不训练新的编辑模型。 以单张 A100/A30 或 Mac 的资源限制评估，完整矩阵需要大权重、长时间生成和外部服务，标注成本过高，不复现（审查 DONE）。诊断使用 2 个生成掩码、6×8 raster 和随机 Q/K/V，真实执行 attention 与反向传播。实现 instance_aware_masks、instance_log_bias、mice_joint_bias、mice_joint_attention 和统一 diagnostic(seed, device)。模块导入不加载 PyTorch，实际调用时才需要。输入必须是已经在同一网格上的、非空、互不重叠的二值 mask；  视觉生成与编辑 多实例编辑与注意力隔离 多模态 视觉世界建模：状态、生成与动作条件 同时编辑多个实例时，MICE 所说的属性串扰会怎样破坏用户指令？ 用户可能要求每个对象发生不同变化，若生成过程不能保持属性归属，一处颜色、形状或材质会传播到另一处。MICE 研究在无需新训练的编辑流程里维持局部绑定与周围融合。困难不是只生成更美图片，还要让每项变化落在指定实例，且不误改其他内容。 教学例：要求左杯变红、右杯变蓝，若两个杯子都变紫，就是不同编辑属性混在了一起；单一全局颜色描述难明确这种归属。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-multimodal-models-mice-b52a199b" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7fbd2b03fd6b9570">MICE 的文字组隔离为什么对多实例编辑重要？</h2>
+<h2 id="qa-7fbd2b03fd6b9570">同时编辑多个实例时，MICE 所说的属性串扰会怎样破坏用户指令？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Amice">Editing Everything Everywhere All at Once</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Modena and Reggio Emilia</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多区域指令若完全互读，某实例的属性可能传播到另一实例。MICE 用组间隔离与实例空间偏置，把局部文字绑定到对应视觉区域，同时保留必要背景交互；这改变既有模型注意力，不需要训练新编辑模型，但仍依赖正确实例掩码。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“左杯变红、右杯变蓝”需要分别绑定两组文字；完全混合可能把两个杯子都涂成同一种颜色。</p>
+<p><strong>答案：</strong>用户可能要求每个对象发生不同变化，若生成过程不能保持属性归属，一处颜色、形状或材质会传播到另一处。MICE 研究在无需新训练的编辑流程里维持局部绑定与周围融合。困难不是只生成更美图片，还要让每项变化落在指定实例，且不误改其他内容。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：要求左杯变红、右杯变蓝，若两个杯子都变紫，就是不同编辑属性混在了一起；单一全局颜色描述难明确这种归属。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.31278v1">原论文</a> · <a href="../../../../multimodal-models/2606.31278-mice/">实现解读</a> · <a href="#qa-7fbd2b03fd6b9570">问题链接</a></p>
 </details>

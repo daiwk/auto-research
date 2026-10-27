@@ -663,17 +663,17 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13778">原论文</a> · <a href="../../../../reproductions/2610.13778-replayssm/">实现解读</a> · <a href="#qa-e6a30bb586839092">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vfold" data-paper-title="VFold: Symmetry-Aware Cross-Layer Value Cache Compression" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="VFold: Symmetry-Aware Cross-Layer Value Cache Compression 基础模型 Johns Hopkins University 2026-10-08 相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。 已实现真实权重折叠和持久共享缓存；当前结果是 L1 运行诊断，不是 LongBench/RULER 能力复现或推理加速证明。使用 Qwen3-4B、A100、seed 42；32 个训练问题校准，4 个训练集派生的独立验证问题解码，最多生成 256 token。数据来源、安装及参数见运行说明。  推理与系统效率 KV 缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 VFold 为什么先对齐相邻层的 Value，再考虑共享缓存？ 相邻层value表示的坐标系和head对应未必相同，直接平均会混合不兼容方向。方法通过CCA及头匹配对齐，再把变换折叠到V/O投影，之后共享部分value历史。 示意：两层同一语义落在不同通道方向，先对齐再平均才有对应含义。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vfold" data-paper-title="VFold: Symmetry-Aware Cross-Layer Value Cache Compression" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="VFold: Symmetry-Aware Cross-Layer Value Cache Compression 基础模型 Johns Hopkins University 2026-10-08 相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。 已实现真实权重折叠和持久共享缓存；当前结果是 L1 运行诊断，不是 LongBench/RULER 能力复现或推理加速证明。使用 Qwen3-4B、A100、seed 42；32 个训练问题校准，4 个训练集派生的独立验证问题解码，最多生成 256 token。数据来源、安装及参数见运行说明。  推理与系统效率 KV 缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 VFold 中的 Key 与 Value 缓存分别保存什么，哪些被共享？ Key参与历史位置匹配，Value提供注意力读出的内容。VFold只合并匹配后的相邻层Value，Key不合并，首尾重要token另存；因此不能把它理解为把整份KV或整个历史都合成一层。 示意：两层可以共用经过处理的内容表示，但仍保留各自检索所需的Key。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-vfold-b54fea4f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4cb9c502c5690b78">VFold 为什么先对齐相邻层的 Value，再考虑共享缓存？</h2>
+<h2 id="qa-4cb9c502c5690b78">VFold 中的 Key 与 Value 缓存分别保存什么，哪些被共享？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avfold">VFold: Symmetry-Aware Cross-Layer Value Cache Compression</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Johns Hopkins University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>相邻层value表示的坐标系和head对应未必相同，直接平均会混合不兼容方向。方法通过CCA及头匹配对齐，再把变换折叠到V/O投影，之后共享部分value历史。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>两层同一语义落在不同通道方向，先对齐再平均才有对应含义。</p>
-<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p><strong>答案：</strong>Key参与历史位置匹配，Value提供注意力读出的内容。VFold只合并匹配后的相邻层Value，Key不合并，首尾重要token另存；因此不能把它理解为把整份KV或整个历史都合成一层。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两层可以共用经过处理的内容表示，但仍保留各自检索所需的Key。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12338">原论文</a> · <a href="../../../../foundation-models/2610.12338-vfold/">实现解读</a> · <a href="#qa-4cb9c502c5690b78">问题链接</a></p>
 </details>
 </article>
@@ -1246,16 +1246,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.08878">原论文</a> · <a href="../../../../reproductions/2608.08878-distillcache/">实现解读</a> · <a href="#qa-013b0bbdf970cea9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:bakron" data-paper-title="BaKron: Efficient Quantization with Kronecker-Factored Hessians" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BaKron: Efficient Quantization with Kronecker-Factored Hessians 基础模型 University of California, San Diego 2026-08-06 主题：二阶量化。GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。BaKron 以反对角并行和递归分治实现双侧自适应 rounding。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。对随机权重执行 Kronecker 加权 4-bit rounding 与逐行尺度搜索，和全局 GPTQ-style rounding 比较加权误差。  quantization hessian inference-efficiency 基础模型 推理压缩：权重、KV 缓存与服务带宽 BaKron 为什么在量化误差中加入两侧 Kronecker 曲率？ 输入侧信息不能完整描述权重误差在不同输出方向的代价。双侧Kronecker形式为误差提供更丰富的加权几何，再通过专门求解组织自适应rounding。 示意：同样的权重扰动落在不同输出方向时，代价可能不同，而非只看输入激活幅度。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:bakron" data-paper-title="BaKron: Efficient Quantization with Kronecker-Factored Hessians" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BaKron: Efficient Quantization with Kronecker-Factored Hessians 基础模型 University of California, San Diego 2026-08-06 主题：二阶量化。GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。BaKron 以反对角并行和递归分治实现双侧自适应 rounding。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。对随机权重执行 Kronecker 加权 4-bit rounding 与逐行尺度搜索，和全局 GPTQ-style rounding 比较加权误差。  quantization hessian inference-efficiency 基础模型 推理压缩：权重、KV 缓存与服务带宽 BaKron 中的 rounding 为什么不只是逐权重四舍五入？ 量化目标衡量的是权重误差经曲率加权后的影响，不是每个数字距离最近刻度即可。不同权重误差相互关联时，独立最小舍入误差未必最小化整体目标，BaKron据此组织自适应rounding。 示意：两个单独很小的误差若共同放大同一输出方向，整体影响可能比另一个略大但抵消的组合更高。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-bakron-8758065a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-123e76370ee763fb">BaKron 为什么在量化误差中加入两侧 Kronecker 曲率？</h2>
+<h2 id="qa-123e76370ee763fb">BaKron 中的 rounding 为什么不只是逐权重四舍五入？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abakron">BaKron: Efficient Quantization with Kronecker-Factored Hessians</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, San Diego</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>输入侧信息不能完整描述权重误差在不同输出方向的代价。双侧Kronecker形式为误差提供更丰富的加权几何，再通过专门求解组织自适应rounding。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>同样的权重扰动落在不同输出方向时，代价可能不同，而非只看输入激活幅度。</p>
+<p><strong>答案：</strong>量化目标衡量的是权重误差经曲率加权后的影响，不是每个数字距离最近刻度即可。不同权重误差相互关联时，独立最小舍入误差未必最小化整体目标，BaKron据此组织自适应rounding。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个单独很小的误差若共同放大同一输出方向，整体影响可能比另一个略大但抵消的组合更高。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06291">原论文</a> · <a href="../../../../reproductions/2608.06291-bakron/">实现解读</a> · <a href="#qa-123e76370ee763fb">问题链接</a></p>
 </details>

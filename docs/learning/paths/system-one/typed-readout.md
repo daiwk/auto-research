@@ -107,15 +107,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32478v1">原论文</a> · <a href="../../../../foundation-models/2610.32478-pathjev/">实现解读</a> · <a href="#qa-2dc91c86955e14a5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pathjev" data-paper-title="PathJev: Decision-Native Vision–Language Modelling for Histopathology" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="PathJev: Decision-Native Vision–Language Modelling for Histopathology 基础模型 University of Naples Federico II 2026-10-23 模型一遍前向在question/candidate markers读取hidden，decision head混合candidate线性项、question-candidate交互和set attention，对runtime候选做softmax。head和两阶段训练继承已有OmniMed-Jev；PathJev的重要新增是病理40K states、专家标签到三种typed decisions、split/overlap审计、未见器官与generative readout对照。 成本过高，不复现（审查 DONE）。MedGemma1.5-4B NF4、896×896图像、LoRA+head约39.6M参数、40Kstates；Table7单GPU每seed PathJev全程10.4–10.5h、Gen-SFT16.3–16.5h，另有超参选择/3seeds/多数据集推理、whole-slide。远超单卡短时预算，不下载公开权重来重复验证成本。无本地operator/metrics/GPUreceipt；原作者repo与分析计划可直接查阅。没有下载MedGemma、病理patch/whole-slide、没有用通用分类head或字段校验冒充完整病理方法。  System One / JEV 医疗多模态决策 结构化决策 类型化读出：从生成句子到候选分布 PathJev相对继承的OmniMed-Jev头新增的主要证据在哪？ 不仅在分类头，主要还包括病理状态数据、专家标签转换、数据重叠审计及未见器官与生成读出对照。复现继承头只覆盖结构的一部分，不能代替新增数据与泛化研究。 例如在通用图片上跑通同样头，不代表它在未见病理器官上也通过测试。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pathjev" data-paper-title="PathJev: Decision-Native Vision–Language Modelling for Histopathology" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="PathJev: Decision-Native Vision–Language Modelling for Histopathology 基础模型 University of Naples Federico II 2026-10-23 模型一遍前向在question/candidate markers读取hidden，decision head混合candidate线性项、question-candidate交互和set attention，对runtime候选做softmax。head和两阶段训练继承已有OmniMed-Jev；PathJev的重要新增是病理40K states、专家标签到三种typed decisions、split/overlap审计、未见器官与generative readout对照。 成本过高，不复现（审查 DONE）。MedGemma1.5-4B NF4、896×896图像、LoRA+head约39.6M参数、40Kstates；Table7单GPU每seed PathJev全程10.4–10.5h、Gen-SFT16.3–16.5h，另有超参选择/3seeds/多数据集推理、whole-slide。远超单卡短时预算，不下载公开权重来重复验证成本。无本地operator/metrics/GPUreceipt；原作者repo与分析计划可直接查阅。没有下载MedGemma、病理patch/whole-slide、没有用通用分类head或字段校验冒充完整病理方法。  System One / JEV 医疗多模态决策 结构化决策 类型化读出：从生成句子到候选分布 PathJev评测未见器官，与在训练中见过的器官上随机留出样本相比，检验什么不同？ 未见器官检验跨器官迁移，随机留出主要检验同类分布中的新样本。两者的泛化条件不同，还需做数据重叠审计，避免相近病理状态混入训练。继承的决策头即使相同，也不能让这两种测试自然成为同一难度或相同结论。 教学例子：训练覆盖器官甲但留出甲的新切片，与测试器官乙，是两种划分；不能把前者成绩写成后者的迁移证据。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-aa0099972fc799c5">PathJev相对继承的OmniMed-Jev头新增的主要证据在哪？</h2>
+<h2 id="qa-aa0099972fc799c5">PathJev评测未见器官，与在训练中见过的器官上随机留出样本相比，检验什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apathjev">PathJev: Decision-Native Vision–Language Modelling for Histopathology</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Naples Federico II</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不仅在分类头，主要还包括病理状态数据、专家标签转换、数据重叠审计及未见器官与生成读出对照。复现继承头只覆盖结构的一部分，不能代替新增数据与泛化研究。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如在通用图片上跑通同样头，不代表它在未见病理器官上也通过测试。</p>
+<p><strong>答案：</strong>未见器官检验跨器官迁移，随机留出主要检验同类分布中的新样本。两者的泛化条件不同，还需做数据重叠审计，避免相近病理状态混入训练。继承的决策头即使相同，也不能让这两种测试自然成为同一难度或相同结论。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>训练覆盖器官甲但留出甲的新切片，与测试器官乙，是两种划分；不能把前者成绩写成后者的迁移证据。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32478v1">原论文</a> · <a href="../../../../foundation-models/2610.32478-pathjev/">实现解读</a> · <a href="#qa-aa0099972fc799c5">问题链接</a></p>
 </details>
@@ -266,15 +266,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22276">原论文</a> · <a href="../../../../foundation-models/2610.22276-mjev-spatial/">实现解读</a> · <a href="#qa-8616ff0ec0b4fbe8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mjev-spatial" data-paper-title="MJev-Spatial: System One Spatial Intelligence via Native Attention Matching" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="MJev-Spatial: System One Spatial Intelligence via Native Attention Matching 基础模型 未注明（论文未列一作机构；公开发布主体为 MindLab） 2026-10-15 空间问题往往只需选项、数值或二维点，却仍让 VLM 自回归生成并解析答案。MJev-Spatial 将三者统一为候选分类：decision marker 提供 query，candidate-end marker 提供 key，直接复用骨干最终注意力投影。连续量通过分桶或三级区域细化预测，不增加独立分类头。 完整实验明显超过单卡预算，成本过高，不复现（审查 DONE）。随机分类标签只是梯度诊断，不是空间任务准确率。seeds42/43/44，固定程序化 revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1。随机16维因果 Transformer 产生候选/决策状态，最终层 Q/K、RMSNorm 和 headnorm 以同一模块对象注入读出器；不是加载或转换真实 Qwen checkpoint。  JEV与单步决策 原生注意力与空间候选 结构化决策 类型化读出：从生成句子到候选分布 原生Q/K候选读出与独立线性分类头有何机制区别？ 前者复用骨干已有注意力投影，决策状态与候选状态做匹配；后者另学习一组类别权重。复用不表示无需训练，也不证明任何任务都比额外头好。 例如候选文字可以临时改变，键状态随输入改变，而固定类别权重不直接读取这些文字。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mjev-spatial" data-paper-title="MJev-Spatial: System One Spatial Intelligence via Native Attention Matching" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="MJev-Spatial: System One Spatial Intelligence via Native Attention Matching 基础模型 未注明（论文未列一作机构；公开发布主体为 MindLab） 2026-10-15 空间问题往往只需选项、数值或二维点，却仍让 VLM 自回归生成并解析答案。MJev-Spatial 将三者统一为候选分类：decision marker 提供 query，candidate-end marker 提供 key，直接复用骨干最终注意力投影。连续量通过分桶或三级区域细化预测，不增加独立分类头。 完整实验明显超过单卡预算，成本过高，不复现（审查 DONE）。随机分类标签只是梯度诊断，不是空间任务准确率。seeds42/43/44，固定程序化 revision synthetic-memory-spatial-vision-recurrence-and-ode@oct18-foundation-mechanisms-v1。随机16维因果 Transformer 产生候选/决策状态，最终层 Q/K、RMSNorm 和 headnorm 以同一模块对象注入读出器；不是加载或转换真实 Qwen checkpoint。  JEV与单步决策 原生注意力与空间候选 结构化决策 类型化读出：从生成句子到候选分布 MJev-Spatial把计数分两级读出，与用一个类别表示每个整数有什么不同？ 分级读出用两个较小候选集合组合出计数，原协议是32a₁+a₂，覆盖0到1023；一个大分类头则直接为每个整数设类别。前者复用了有限候选接口，但前一级错误会影响最终数值，不能仅凭输出空间相同认定两者训练等价。 教学例子：教学用a₁=2、a₂=3表示67；这两个阶段必须按各自位值组合，不能把它们当两个独立计数相加。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-00f044551c2eb364">原生Q/K候选读出与独立线性分类头有何机制区别？</h2>
+<h2 id="qa-00f044551c2eb364">MJev-Spatial把计数分两级读出，与用一个类别表示每个整数有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amjev-spatial">MJev-Spatial: System One Spatial Intelligence via Native Attention Matching</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 未注明（论文未列一作机构；公开发布主体为 MindLab）</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者复用骨干已有注意力投影，决策状态与候选状态做匹配；后者另学习一组类别权重。复用不表示无需训练，也不证明任何任务都比额外头好。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如候选文字可以临时改变，键状态随输入改变，而固定类别权重不直接读取这些文字。</p>
+<p><strong>答案：</strong>分级读出用两个较小候选集合组合出计数，原协议是32a₁+a₂，覆盖0到1023；一个大分类头则直接为每个整数设类别。前者复用了有限候选接口，但前一级错误会影响最终数值，不能仅凭输出空间相同认定两者训练等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学用a₁=2、a₂=3表示67；这两个阶段必须按各自位值组合，不能把它们当两个独立计数相加。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22276">原论文</a> · <a href="../../../../foundation-models/2610.22276-mjev-spatial/">实现解读</a> · <a href="#qa-00f044551c2eb364">问题链接</a></p>
 </details>
@@ -425,15 +425,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36965">原论文</a> · <a href="../../../../foundation-models/2609.36965-chinese-jev/">实现解读</a> · <a href="#qa-5ae535374df8fc78">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:chinese-jev" data-paper-title="Chinese-Jev: Bringing System One Model to Chinese-Language Tasks" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Chinese-Jev: Bringing System One Model to Chinese-Language Tasks 基础模型 Fudan University 2026-09-29 Chinese-Jev 面向分类、路由、候选选择等封闭输出任务，用轻量 encoder 读取中文上下文和候选项，以各候选 marker 的隐藏状态直接评分。异构标注统一成候选概率分布，先做 1000 万条通用预训练，再按医疗、法律、金融分别微调。 复现级别：L1 目标函数与模型头。复现级别：L1 目标函数与模型头。实现候选 marker 表示、候选概率监督与 RLCD 风格校准项；未训练论文 1000 万样本模型。ChineseJevHead 可前后向并验证概率归一化和有限梯度；没有论文数据、完整 backbone、移动端 INT8 部署或论文级性能对照。  System One / JEV 中文理解 高效决策模型 结构化决策 类型化读出：从生成句子到候选分布 候选marker读出与自回归生成标签的主要差别是什么？ 前者在固定候选隐藏状态上直接评分，后者逐词生成标签并需解析。直接读出可减少格式失败，但仍依赖候选集合与表示质量，并不天然解决知识或推理错误。 例如生成模型写出列表外标签时需处理；候选读出只能在已有选项中决定。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:chinese-jev" data-paper-title="Chinese-Jev: Bringing System One Model to Chinese-Language Tasks" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="Chinese-Jev: Bringing System One Model to Chinese-Language Tasks 基础模型 Fudan University 2026-09-29 Chinese-Jev 面向分类、路由、候选选择等封闭输出任务，用轻量 encoder 读取中文上下文和候选项，以各候选 marker 的隐藏状态直接评分。异构标注统一成候选概率分布，先做 1000 万条通用预训练，再按医疗、法律、金融分别微调。 复现级别：L1 目标函数与模型头。复现级别：L1 目标函数与模型头。实现候选 marker 表示、候选概率监督与 RLCD 风格校准项；未训练论文 1000 万样本模型。ChineseJevHead 可前后向并验证概率归一化和有限梯度；没有论文数据、完整 backbone、移动端 INT8 部署或论文级性能对照。  System One / JEV 中文理解 高效决策模型 结构化决策 类型化读出：从生成句子到候选分布 Chinese-Jev用one-hot标签与软标签分布训练，向模型提供的信息一样吗？ 不一样。one-hot只保留一个目标候选，软标签还保留候选之间的概率质量分配，可表达犹豫或标注差异。二者都通过同一候选读出接口训练，但监督信息不同；软分布也需来源可靠，不能因为数值更细就把它当真实正确率。 教学例子：甲乙候选的标签为0.6与0.4，会保留接近的偏好；把它改成1与0便丢掉这种接近关系。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-6e9158c3ee856ba7">候选marker读出与自回归生成标签的主要差别是什么？</h2>
+<h2 id="qa-6e9158c3ee856ba7">Chinese-Jev用one-hot标签与软标签分布训练，向模型提供的信息一样吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Achinese-jev">Chinese-Jev: Bringing System One Model to Chinese-Language Tasks</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Fudan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者在固定候选隐藏状态上直接评分，后者逐词生成标签并需解析。直接读出可减少格式失败，但仍依赖候选集合与表示质量，并不天然解决知识或推理错误。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如生成模型写出列表外标签时需处理；候选读出只能在已有选项中决定。</p>
+<p><strong>答案：</strong>不一样。one-hot只保留一个目标候选，软标签还保留候选之间的概率质量分配，可表达犹豫或标注差异。二者都通过同一候选读出接口训练，但监督信息不同；软分布也需来源可靠，不能因为数值更细就把它当真实正确率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>甲乙候选的标签为0.6与0.4，会保留接近的偏好；把它改成1与0便丢掉这种接近关系。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36965">原论文</a> · <a href="../../../../foundation-models/2609.36965-chinese-jev/">实现解读</a> · <a href="#qa-6e9158c3ee856ba7">问题链接</a></p>
 </details>
@@ -451,16 +451,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.36965">原论文</a> · <a href="../../../../foundation-models/2609.36965-chinese-jev/">实现解读</a> · <a href="#qa-12cb8f15cb59c478">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gliclass" data-paper-title="GLiClass: Generalist Lightweight Model for Sequence Classification Tasks" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="GLiClass: Generalist Lightweight Model for Sequence Classification Tasks 基础模型 Knowledgator 2025-08-11 GLiClass 把文本和运行时给定的候选标签放进同一个分类接口，避免生成式 LLM 的解析不稳定，也避免 cross-encoder 对每个文本—标签对逐次推理。本仓库保留“候选内容参与打分”和“一次归一化得到全候选分布”这两个定义性机制。本地实现是 NumPy 机制基线，不加载 GLiClass 权重，不宣称复现论文的完整 Transformer、PPO 多标签训练或论文数值。它用于 System One 的 Banking77 统一协议和 Evolve operator。 只复现动态候选交互与一次归一化机制，不复现 GLiClass 完整权重、训练语料或 PPO 流程。  动态候选分类 System One 相邻方法 结构化决策 类型化读出：从生成句子到候选分布 GLiClass为何能把候选标签描述放进运行时输入？ 标签语义参与打分，使接口面对的是当前候选集合，而非训练时固定类别编号。这为动态分类提供基础，但新增标签是否理解正确仍需评测。 例如把售后类别换成风险类别，需提供新的标签描述，而非只改编号。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gliclass" data-paper-title="GLiClass: Generalist Lightweight Model for Sequence Classification Tasks" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="system-one" data-topic="system-one/typed-readout" data-search="GLiClass: Generalist Lightweight Model for Sequence Classification Tasks 基础模型 Knowledgator 2025-08-11 GLiClass 把文本和运行时给定的候选标签放进同一个分类接口，避免生成式 LLM 的解析不稳定，也避免 cross-encoder 对每个文本—标签对逐次推理。本仓库保留“候选内容参与打分”和“一次归一化得到全候选分布”这两个定义性机制。本地实现是 NumPy 机制基线，不加载 GLiClass 权重，不宣称复现论文的完整 Transformer、PPO 多标签训练或论文数值。它用于 System One 的 Banking77 统一协议和 Evolve operator。 只复现动态候选交互与一次归一化机制，不复现 GLiClass 完整权重、训练语料或 PPO 流程。  动态候选分类 System One 相邻方法 结构化决策 类型化读出：从生成句子到候选分布 GLiClass运行时提供的新标签，是新增一个分类器输出神经元吗？ 不是。标签作为输入文本参与当前请求的打分，变化的是本次候选描述与集合，而不是为每个标签手工扩展一套固定输出权重。因而标签身份应由内容承载；新增描述能否被理解仍需验证，接口允许换标签不等于自动具有任意领域知识。 教学例子：把候选“退款咨询”换为“物流催单”，应传入新的标签内容，而非只改一个永远固定含义的类别编号。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">结构化决策 / 类型化读出：从生成句子到候选分布</a></p>
 <span id="paper-foundation-models-gliclass-1a6b1ec2" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-493ab8fcdd5f5fb0">GLiClass为何能把候选标签描述放进运行时输入？</h2>
+<h2 id="qa-493ab8fcdd5f5fb0">GLiClass运行时提供的新标签，是新增一个分类器输出神经元吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agliclass">GLiClass: Generalist Lightweight Model for Sequence Classification Tasks</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Knowledgator</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>标签语义参与打分，使接口面对的是当前候选集合，而非训练时固定类别编号。这为动态分类提供基础，但新增标签是否理解正确仍需评测。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如把售后类别换成风险类别，需提供新的标签描述，而非只改编号。</p>
+<p><strong>答案：</strong>不是。标签作为输入文本参与当前请求的打分，变化的是本次候选描述与集合，而不是为每个标签手工扩展一套固定输出权重。因而标签身份应由内容承载；新增描述能否被理解仍需验证，接口允许换标签不等于自动具有任意领域知识。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>把候选“退款咨询”换为“物流催单”，应传入新的标签内容，而非只改一个永远固定含义的类别编号。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.07662">原论文</a> · <a href="../../../../foundation-models/2508.07662-gliclass/">实现解读</a> · <a href="#qa-493ab8fcdd5f5fb0">问题链接</a></p>
 </details>

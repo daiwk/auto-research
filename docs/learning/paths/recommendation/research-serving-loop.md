@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.29241">原论文</a> · <a href="../../../../reproductions/2607.29241-recharness/">实现解读</a> · <a href="#qa-853a202b59350215">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rocs" data-paper-title="ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation 搜广推与 LLM 应用 Meta AI 2026-07-30 一次推荐请求会评分大量候选，而用户侧特征完全相同。ROCS 通过 Generalized Layer Masking 保持候选隔离，用 Deep Cross Attention 延迟交互，再由 IKBO 在 GPU kernel 内广播 request 表示。 Fidelity: 核心机制复现。实现一次 request encoding、延迟 candidate interaction 和批量候选评分。未复刻生产 GLM、IKBO CUDA kernel、Meta 私有模型与集群。本地对照口径：基线为逐候选重复编码；实验组为 ROCS core，相对基线 NDCG@10 +8.19%。  retrieval ranking serving compute-sharing 搜广推 自动研究与高效上线 ROCS为什么把request侧表示共享一次？ 同一推荐请求会评大量候选，用户侧输入重复，提前共享编码可减少冗余计算；候选通过延迟交互获得各自分数。共享不是取消所有用户物品交互。 例如同一用户给上千视频打分，不必重复算上千遍完全一样的请求特征。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rocs" data-paper-title="ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation 搜广推与 LLM 应用 Meta AI 2026-07-30 一次推荐请求会评分大量候选，而用户侧特征完全相同。ROCS 通过 Generalized Layer Masking 保持候选隔离，用 Deep Cross Attention 延迟交互，再由 IKBO 在 GPU kernel 内广播 request 表示。 Fidelity: 核心机制复现。实现一次 request encoding、延迟 candidate interaction 和批量候选评分。未复刻生产 GLM、IKBO CUDA kernel、Meta 私有模型与集群。本地对照口径：基线为逐候选重复编码；实验组为 ROCS core，相对基线 NDCG@10 +8.19%。  retrieval ranking serving compute-sharing 搜广推 自动研究与高效上线 ROCS的一次request与其中多个candidate，是怎样的计算单位？ request包含本次用户侧上下文，candidate是同一次请求要分别评分的物品。它们共享用户输入，却各有候选信息与最终分数；候选数量增加不意味着出现更多独立用户请求。先分清这两个轴，才能判断哪些计算是重复的、哪些必须逐候选保留。 教学例子：一位用户打开推荐页要评一百件商品，是一次request含一百个candidate，而非一百位用户各发一次请求。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-rocs-28113d9d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-90441741441e8286">ROCS为什么把request侧表示共享一次？</h2>
+<h2 id="qa-90441741441e8286">ROCS的一次request与其中多个candidate，是怎样的计算单位？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arocs">ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同一推荐请求会评大量候选，用户侧输入重复，提前共享编码可减少冗余计算；候选通过延迟交互获得各自分数。共享不是取消所有用户物品交互。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一用户给上千视频打分，不必重复算上千遍完全一样的请求特征。</p>
+<p><strong>答案：</strong>request包含本次用户侧上下文，candidate是同一次请求要分别评分的物品。它们共享用户输入，却各有候选信息与最终分数；候选数量增加不意味着出现更多独立用户请求。先分清这两个轴，才能判断哪些计算是重复的、哪些必须逐候选保留。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一位用户打开推荐页要评一百件商品，是一次request含一百个candidate，而非一百位用户各发一次请求。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.27744">原论文</a> · <a href="../../../../reproductions/2607.27744-rocs/">实现解读</a> · <a href="#qa-90441741441e8286">问题链接</a></p>
 </details>
@@ -425,15 +425,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.27744">原论文</a> · <a href="../../../../reproductions/2607.27744-rocs/">实现解读</a> · <a href="#qa-a037f568e876e729">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rocs" data-paper-title="ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation 搜广推与 LLM 应用 Meta AI 2026-07-30 一次推荐请求会评分大量候选，而用户侧特征完全相同。ROCS 通过 Generalized Layer Masking 保持候选隔离，用 Deep Cross Attention 延迟交互，再由 IKBO 在 GPU kernel 内广播 request 表示。 Fidelity: 核心机制复现。实现一次 request encoding、延迟 candidate interaction 和批量候选评分。未复刻生产 GLM、IKBO CUDA kernel、Meta 私有模型与集群。本地对照口径：基线为逐候选重复编码；实验组为 ROCS core，相对基线 NDCG@10 +8.19%。  retrieval ranking serving compute-sharing 搜广推 自动研究与高效上线 ROCS候选隔离与把所有候选放同一自注意力有何不同？ 隔离防止一个候选读到其他候选导致分数互相依赖，同时允许读取共享请求。任意全交互会改变模型语义，不能只靠缓存用户向量声称实现原mask机制。 例如新增视频不应无意改掉原候选的内部表示。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rocs" data-paper-title="ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation 搜广推与 LLM 应用 Meta AI 2026-07-30 一次推荐请求会评分大量候选，而用户侧特征完全相同。ROCS 通过 Generalized Layer Masking 保持候选隔离，用 Deep Cross Attention 延迟交互，再由 IKBO 在 GPU kernel 内广播 request 表示。 Fidelity: 核心机制复现。实现一次 request encoding、延迟 candidate interaction 和批量候选评分。未复刻生产 GLM、IKBO CUDA kernel、Meta 私有模型与集群。本地对照口径：基线为逐候选重复编码；实验组为 ROCS core，相对基线 NDCG@10 +8.19%。  retrieval ranking serving compute-sharing 搜广推 自动研究与高效上线 ROCS模型层共享请求表示，与IKBO在设备内减少复制，是同一种优化吗？ 不是。模型的信息流约束使表示具备共享资格，设备内广播则处理合格共享表示怎样传给候选计算。缓存一份用户向量可验证计算分工，却不能证明专用广播kernel已经接入或达到生产吞吐；两层需要各自的实现与测量证据。 教学例子：先证明候选不会污染用户表示，才能讨论少复制几份张量；进程内缓存测速不能替代GPU广播kernel测试。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-a7629b435887d373">ROCS候选隔离与把所有候选放同一自注意力有何不同？</h2>
+<h2 id="qa-a7629b435887d373">ROCS模型层共享请求表示，与IKBO在设备内减少复制，是同一种优化吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arocs">ROCS: Request-Oriented Compute Sharing for Efficient Large-Scale Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>隔离防止一个候选读到其他候选导致分数互相依赖，同时允许读取共享请求。任意全交互会改变模型语义，不能只靠缓存用户向量声称实现原mask机制。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如新增视频不应无意改掉原候选的内部表示。</p>
+<p><strong>答案：</strong>不是。模型的信息流约束使表示具备共享资格，设备内广播则处理合格共享表示怎样传给候选计算。缓存一份用户向量可验证计算分工，却不能证明专用广播kernel已经接入或达到生产吞吐；两层需要各自的实现与测量证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先证明候选不会污染用户表示，才能讨论少复制几份张量；进程内缓存测速不能替代GPU广播kernel测试。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.27744">原论文</a> · <a href="../../../../reproductions/2607.27744-rocs/">实现解读</a> · <a href="#qa-a7629b435887d373">问题链接</a></p>
 </details>
@@ -504,16 +504,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25110">原论文</a> · <a href="../../../../reproductions/2607.25110-memory-layer/">实现解读</a> · <a href="#qa-e90d4036e6663eba">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:recevolve" data-paper-title="RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems 搜广推与 LLM 应用 Google 2026-07-20 RecEvolve 让研究 Agent 从实验知识库提出模型变体，以独立验证集选择冠军，并用版本化状态支持失败回滚。系统显式防止通过极端温度等方式“刷指标”，让上一轮结论成为下一轮可审计的研究知识。 复现级别：核心机制 + 公开数据。复现级别：核心机制 + 公开数据。实现提案、critic gate、隔离试验、冠军继承、回滚与 reward-hack 拒绝。未复刻 Google 私有日志、TPU 集群、生产 coding-agent 工具链和线上实验归因；该 adapter 作为推荐 Evolve 的统一多轮控制器算子。MovieLens 100K 上用固定候选空间执行完整研究控制流；三 seed 结果见 metrics/public-seeds42-44.json。本地指标用于比较同一公开协议下的控制策略，不复刻 Google 私有 Two-Tower 数值。  auto-research agent two-tower reward-hacking 搜广推 自动研究与高效上线 RecEvolve 为什么将研究知识库与冠军状态版本化？ 下一轮提案要知道过去真实试过什么，版本记录将候选、验证结果与约束绑定，失败可回滚而不污染长期冠军。知识不是随意摘要，缺配置与数据口径就难复用。固定候选流程成功也不证明开放式科研或真实生产晋级。 示意：上一轮修改门控失败，回滚旧冠军同时保留失败条件，下一轮避免重复；只保留最后目录而不记版本，会失去因果对照线索。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:recevolve" data-paper-title="RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems 搜广推与 LLM 应用 Google 2026-07-20 RecEvolve 让研究 Agent 从实验知识库提出模型变体，以独立验证集选择冠军，并用版本化状态支持失败回滚。系统显式防止通过极端温度等方式“刷指标”，让上一轮结论成为下一轮可审计的研究知识。 复现级别：核心机制 + 公开数据。复现级别：核心机制 + 公开数据。实现提案、critic gate、隔离试验、冠军继承、回滚与 reward-hack 拒绝。未复刻 Google 私有日志、TPU 集群、生产 coding-agent 工具链和线上实验归因；该 adapter 作为推荐 Evolve 的统一多轮控制器算子。MovieLens 100K 上用固定候选空间执行完整研究控制流；三 seed 结果见 metrics/public-seeds42-44.json。本地指标用于比较同一公开协议下的控制策略，不复刻 Google 私有 Two-Tower 数值。  auto-research agent two-tower reward-hacking 搜广推 自动研究与高效上线 RecEvolve 的研究知识库与可运行模型 artifact，为什么不能互相替代？ 知识库保存提案、验证协议、观察和失败条件，帮助下一轮选择；模型 artifact 保存实际参数与配置，供执行和复评。写下“某结构有效”不能代替一个可加载候选，保存 checkpoint 也不能说明它为何晋级。版本状态需要把证据与具体产物关联。 示意：一段笔记说内容分支最好，但没有对应配置就难重跑；反之只留下权重、不留验证口径，也无法审查它是否真的胜过旧冠军。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-recevolve-55072983" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5016e08e383200b4">RecEvolve 为什么将研究知识库与冠军状态版本化？</h2>
+<h2 id="qa-5016e08e383200b4">RecEvolve 的研究知识库与可运行模型 artifact，为什么不能互相替代？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arecevolve">RecEvolve: A Knowledge-Driven Autonomous Agent System for Recommender Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>下一轮提案要知道过去真实试过什么，版本记录将候选、验证结果与约束绑定，失败可回滚而不污染长期冠军。知识不是随意摘要，缺配置与数据口径就难复用。固定候选流程成功也不证明开放式科研或真实生产晋级。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>上一轮修改门控失败，回滚旧冠军同时保留失败条件，下一轮避免重复；只保留最后目录而不记版本，会失去因果对照线索。</p>
+<p><strong>答案：</strong>知识库保存提案、验证协议、观察和失败条件，帮助下一轮选择；模型 artifact 保存实际参数与配置，供执行和复评。写下“某结构有效”不能代替一个可加载候选，保存 checkpoint 也不能说明它为何晋级。版本状态需要把证据与具体产物关联。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一段笔记说内容分支最好，但没有对应配置就难重跑；反之只留下权重、不留验证口径，也无法审查它是否真的胜过旧冠军。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.01622">原论文</a> · <a href="../../../../reproductions/2609.01622-recevolve/">实现解读</a> · <a href="#qa-5016e08e383200b4">问题链接</a></p>
 </details>
@@ -875,16 +875,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.12110">原论文</a> · <a href="../../../../reproductions/2604.12110-solaris/">实现解读</a> · <a href="#qa-29504be389624dcd">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ug-sep" data-paper-title="Compute Only Once: UG-Separation for Efficient Large Recommendation Models" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Compute Only Once: UG-Separation for Efficient Large Recommendation Models 搜广推与 LLM 应用 ByteDance AML 2026-02-11 通过注意力/TokenMixer mask 阻断候选向用户 token 的反向信息流，使用户侧表示能在同一请求的多个候选间复用；Information Compensation 额外恢复被 mask 抑制的用户—候选交互。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04934，相对变化 -8.65%。本地代理目标与论文生产任务不同，不能外推线上 lift。  ranking-network inference-efficiency token-mixing 搜广推 自动研究与高效上线 UG-Sep为什么阻断候选回流到用户tokens？ 候选一旦影响用户状态，每个候选就需重算一份用户编码。单向信息流使同请求用户侧可共享，再以Information Compensation补回被隔离的交互，保持计算与表达取舍。 例如同一用户评千个商品，共享的历史状态不应因当前商品不同而变。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ug-sep" data-paper-title="Compute Only Once: UG-Separation for Efficient Large Recommendation Models" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Compute Only Once: UG-Separation for Efficient Large Recommendation Models 搜广推与 LLM 应用 ByteDance AML 2026-02-11 通过注意力/TokenMixer mask 阻断候选向用户 token 的反向信息流，使用户侧表示能在同一请求的多个候选间复用；Information Compensation 额外恢复被 mask 抑制的用户—候选交互。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04934，相对变化 -8.65%。本地代理目标与论文生产任务不同，不能外推线上 lift。  ranking-network inference-efficiency token-mixing 搜广推 自动研究与高效上线 UG-Sep里的用户token与候选token，是两位不同用户吗？ 不是。用户token承载当前请求的用户侧信息，候选token承载待评分物品的信息，两者属于同一次推荐计算。隔离规定哪一侧能读另一侧，不是把用户分成互不交流的群组。先看清这两个token块，才能正确理解共享表示与专属打分。 教学例子：同一位用户的历史块可被多件候选使用；每件物品各自的候选块并不代表另一个用户。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-ug-sep-25948e1e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f7cb92de7c9f342c">UG-Sep为什么阻断候选回流到用户tokens？</h2>
+<h2 id="qa-f7cb92de7c9f342c">UG-Sep里的用户token与候选token，是两位不同用户吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aug-sep">Compute Only Once: UG-Separation for Efficient Large Recommendation Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · ByteDance AML</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>候选一旦影响用户状态，每个候选就需重算一份用户编码。单向信息流使同请求用户侧可共享，再以Information Compensation补回被隔离的交互，保持计算与表达取舍。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一用户评千个商品，共享的历史状态不应因当前商品不同而变。</p>
+<p><strong>答案：</strong>不是。用户token承载当前请求的用户侧信息，候选token承载待评分物品的信息，两者属于同一次推荐计算。隔离规定哪一侧能读另一侧，不是把用户分成互不交流的群组。先看清这两个token块，才能正确理解共享表示与专属打分。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一位用户的历史块可被多件候选使用；每件物品各自的候选块并不代表另一个用户。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10455">原论文</a> · <a href="../../../../reproductions/2602.10455-ug-sep/">实现解读</a> · <a href="#qa-f7cb92de7c9f342c">问题链接</a></p>
 </details>
@@ -902,15 +902,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10455">原论文</a> · <a href="../../../../reproductions/2602.10455-ug-sep/">实现解读</a> · <a href="#qa-8145189206c730cf">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ug-sep" data-paper-title="Compute Only Once: UG-Separation for Efficient Large Recommendation Models" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Compute Only Once: UG-Separation for Efficient Large Recommendation Models 搜广推与 LLM 应用 ByteDance AML 2026-02-11 通过注意力/TokenMixer mask 阻断候选向用户 token 的反向信息流，使用户侧表示能在同一请求的多个候选间复用；Information Compensation 额外恢复被 mask 抑制的用户—候选交互。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04934，相对变化 -8.65%。本地代理目标与论文生产任务不同，不能外推线上 lift。  ranking-network inference-efficiency token-mixing 搜广推 自动研究与高效上线 用户计算共享与完全取消用户候选交互有什么区别？ 共享只限制用户端被候选改写，候选侧仍能读用户，补偿模块也建模相关交互。若直接双塔独立点积，可能丢掉原本保留的条件交互。 例如不让商品改用户缓存，不表示商品打分不能依用户偏好。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ug-sep" data-paper-title="Compute Only Once: UG-Separation for Efficient Large Recommendation Models" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Compute Only Once: UG-Separation for Efficient Large Recommendation Models 搜广推与 LLM 应用 ByteDance AML 2026-02-11 通过注意力/TokenMixer mask 阻断候选向用户 token 的反向信息流，使用户侧表示能在同一请求的多个候选间复用；Information Compensation 额外恢复被 mask 抑制的用户—候选交互。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens 100K 的固定公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04934，相对变化 -8.65%。本地代理目标与论文生产任务不同，不能外推线上 lift。  ranking-network inference-efficiency token-mixing 搜广推 自动研究与高效上线 UG-Sep的Information Compensation能让已看过候选的状态重新成为公共缓存吗？ 不能。补偿用于恢复候选专属评分中的交互表达，公共用户表示的复用资格仍要求它不依赖当前候选。若把混入候选的补偿结果缓存给其他候选，就重新引入信息污染。补偿与缓存分别服务表达和计算共享，不能把它们的输出任意互换。 教学例子：甲物品专属补偿后的分数状态，不能作为乙物品的通用用户状态；可共享的仍应是被隔离保护的用户块。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-ada9a9a1316edf1c">用户计算共享与完全取消用户候选交互有什么区别？</h2>
+<h2 id="qa-ada9a9a1316edf1c">UG-Sep的Information Compensation能让已看过候选的状态重新成为公共缓存吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aug-sep">Compute Only Once: UG-Separation for Efficient Large Recommendation Models</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · ByteDance AML</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>共享只限制用户端被候选改写，候选侧仍能读用户，补偿模块也建模相关交互。若直接双塔独立点积，可能丢掉原本保留的条件交互。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如不让商品改用户缓存，不表示商品打分不能依用户偏好。</p>
+<p><strong>答案：</strong>不能。补偿用于恢复候选专属评分中的交互表达，公共用户表示的复用资格仍要求它不依赖当前候选。若把混入候选的补偿结果缓存给其他候选，就重新引入信息污染。补偿与缓存分别服务表达和计算共享，不能把它们的输出任意互换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>甲物品专属补偿后的分数状态，不能作为乙物品的通用用户状态；可共享的仍应是被隔离保护的用户块。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10455">原论文</a> · <a href="../../../../reproductions/2602.10455-ug-sep/">实现解读</a> · <a href="#qa-ada9a9a1316edf1c">问题链接</a></p>
 </details>
@@ -928,16 +928,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10455">原论文</a> · <a href="../../../../reproductions/2602.10455-ug-sep/">实现解读</a> · <a href="#qa-da3bf12463f029c9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:self-evolving-rec" data-paper-title="Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents 搜广推与 LLM 应用 Google / YouTube 2026-02-10 推荐研发通常依赖人工提出假设、改代码、跑离线实验、申请线上 A/B，再把经验散落在文档里。论文将 Gemini 2.5 放入双层闭环：内层 agent 以 researcher personas、实验 journal、代码/训练工具探索 optimizer、网络结构和 reward；外层状态机负责安全检查、资源约束和真实 A/B promotion，再把线上结论写回记忆，驱动下一轮搜索。 Fidelity: 核心机制复现。本地 SmolLM2-135M-Instruct 实际读取 journal、给可执行配置打分、逐轮提出未尝试方案并接收 validation 反馈；未复刻 Google 生产 A/B 基础设施。本地对照口径：基线是 Human/Adagrad 配置；实验组是本地 LLM agent 经过四代 journal→提案→训练→validation 反馈后晋级的配置，NDCG@10 +2.57%。test 只在晋级完成后运行，不是单一模型相对 DIN。   搜广推 自动研究与高效上线 自演化推荐系统的贡献为什么不只是一个新网络？ 内层agent提出并执行结构、优化器或reward实验，外层状态机管理预算、安全与真实A/B，再把结果写回journal，形成持续学习研发闭环。 例如一次离线失败也记录原因，下一轮研究者据此避免重复尝试。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:self-evolving-rec" data-paper-title="Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents 搜广推与 LLM 应用 Google / YouTube 2026-02-10 推荐研发通常依赖人工提出假设、改代码、跑离线实验、申请线上 A/B，再把经验散落在文档里。论文将 Gemini 2.5 放入双层闭环：内层 agent 以 researcher personas、实验 journal、代码/训练工具探索 optimizer、网络结构和 reward；外层状态机负责安全检查、资源约束和真实 A/B promotion，再把线上结论写回记忆，驱动下一轮搜索。 Fidelity: 核心机制复现。本地 SmolLM2-135M-Instruct 实际读取 journal、给可执行配置打分、逐轮提出未尝试方案并接收 validation 反馈；未复刻 Google 生产 A/B 基础设施。本地对照口径：基线是 Human/Adagrad 配置；实验组是本地 LLM agent 经过四代 journal→提案→训练→validation 反馈后晋级的配置，NDCG@10 +2.57%。test 只在晋级完成后运行，不是单一模型相对 DIN。   搜广推 自动研究与高效上线 Self-Evolving Rec的长期journal是在保存模型参数，还是保存实验知识？ journal记录方案、执行与评估结果等可供后续研发使用的证据，不是把某次训练权重当作自然语言记忆。持续闭环需要能追溯哪项改动在何种协议下得到什么结论；只有计划文字，没有可运行候选和评估记录，不构成已完成实验。 教学例子：记录“某优化器在固定验证协议下未改善”供下一轮避免重复尝试，与保存一份checkpoint是不同产物。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-self-evolving-rec-3809fcbe" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4b4c2af3f199e061">自演化推荐系统的贡献为什么不只是一个新网络？</h2>
+<h2 id="qa-4b4c2af3f199e061">Self-Evolving Rec的长期journal是在保存模型参数，还是保存实验知识？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aself-evolving-rec">Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google / YouTube</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>内层agent提出并执行结构、优化器或reward实验，外层状态机管理预算、安全与真实A/B，再把结果写回journal，形成持续学习研发闭环。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一次离线失败也记录原因，下一轮研究者据此避免重复尝试。</p>
+<p><strong>答案：</strong>journal记录方案、执行与评估结果等可供后续研发使用的证据，不是把某次训练权重当作自然语言记忆。持续闭环需要能追溯哪项改动在何种协议下得到什么结论；只有计划文字，没有可运行候选和评估记录，不构成已完成实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>记录“某优化器在固定验证协议下未改善”供下一轮避免重复尝试，与保存一份checkpoint是不同产物。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10226">原论文</a> · <a href="../../../../reproductions/2602.10226-self-evolving-rec/">实现解读</a> · <a href="#qa-4b4c2af3f199e061">问题链接</a></p>
 </details>
@@ -955,15 +955,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10226">原论文</a> · <a href="../../../../reproductions/2602.10226-self-evolving-rec/">实现解读</a> · <a href="#qa-a0ff42610abe6dfe">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:self-evolving-rec" data-paper-title="Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents 搜广推与 LLM 应用 Google / YouTube 2026-02-10 推荐研发通常依赖人工提出假设、改代码、跑离线实验、申请线上 A/B，再把经验散落在文档里。论文将 Gemini 2.5 放入双层闭环：内层 agent 以 researcher personas、实验 journal、代码/训练工具探索 optimizer、网络结构和 reward；外层状态机负责安全检查、资源约束和真实 A/B promotion，再把线上结论写回记忆，驱动下一轮搜索。 Fidelity: 核心机制复现。本地 SmolLM2-135M-Instruct 实际读取 journal、给可执行配置打分、逐轮提出未尝试方案并接收 validation 反馈；未复刻 Google 生产 A/B 基础设施。本地对照口径：基线是 Human/Adagrad 配置；实验组是本地 LLM agent 经过四代 journal→提案→训练→validation 反馈后晋级的配置，NDCG@10 +2.57%。test 只在晋级完成后运行，不是单一模型相对 DIN。   搜广推 自动研究与高效上线 离线proxy通过与真实online promotion有什么区别？ 离线表现只是候选门，外层还要求线上实验、统计和guardrails。模型自己判断成功不能替代生产证据，结构登记也不等于工具能真实训练和评估。 例如离线命中提高，线上时延超预算仍不应自动发布。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:self-evolving-rec" data-paper-title="Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents 搜广推与 LLM 应用 Google / YouTube 2026-02-10 推荐研发通常依赖人工提出假设、改代码、跑离线实验、申请线上 A/B，再把经验散落在文档里。论文将 Gemini 2.5 放入双层闭环：内层 agent 以 researcher personas、实验 journal、代码/训练工具探索 optimizer、网络结构和 reward；外层状态机负责安全检查、资源约束和真实 A/B promotion，再把线上结论写回记忆，驱动下一轮搜索。 Fidelity: 核心机制复现。本地 SmolLM2-135M-Instruct 实际读取 journal、给可执行配置打分、逐轮提出未尝试方案并接收 validation 反馈；未复刻 Google 生产 A/B 基础设施。本地对照口径：基线是 Human/Adagrad 配置；实验组是本地 LLM agent 经过四代 journal→提案→训练→validation 反馈后晋级的配置，NDCG@10 +2.57%。test 只在晋级完成后运行，不是单一模型相对 DIN。   搜广推 自动研究与高效上线 Self-Evolving Rec的双层优化，与只自动搜索一组训练超参数有什么范围区别？ 双层结构把内层候选训练与外层线上目标、资源和安全约束分开，候选还可涉及架构、优化器或reward。常规超参数搜索可以成为内层工具，却不自动补上线上反馈、晋级状态与长期知识积累，因此不能以完成一次搜索代替整个闭环。 教学例子：自动试多个学习率只产生候选结果；是否值得占用线上流量、怎样留下失败经验，仍需外层流程。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-937788d1136b4b7b">离线proxy通过与真实online promotion有什么区别？</h2>
+<h2 id="qa-937788d1136b4b7b">Self-Evolving Rec的双层优化，与只自动搜索一组训练超参数有什么范围区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aself-evolving-rec">Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google / YouTube</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>离线表现只是候选门，外层还要求线上实验、统计和guardrails。模型自己判断成功不能替代生产证据，结构登记也不等于工具能真实训练和评估。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如离线命中提高，线上时延超预算仍不应自动发布。</p>
+<p><strong>答案：</strong>双层结构把内层候选训练与外层线上目标、资源和安全约束分开，候选还可涉及架构、优化器或reward。常规超参数搜索可以成为内层工具，却不自动补上线上反馈、晋级状态与长期知识积累，因此不能以完成一次搜索代替整个闭环。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>自动试多个学习率只产生候选结果；是否值得占用线上流量、怎样留下失败经验，仍需外层流程。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10226">原论文</a> · <a href="../../../../reproductions/2602.10226-self-evolving-rec/">实现解读</a> · <a href="#qa-937788d1136b4b7b">问题链接</a></p>
 </details>
@@ -981,16 +981,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.10226">原论文</a> · <a href="../../../../reproductions/2602.10226-self-evolving-rec/">实现解读</a> · <a href="#qa-6726a7bb82861a54">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:radar" data-paper-title="RADAR: Recall Augmentation through Deferred Asynchronous Retrieval" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="RADAR: Recall Augmentation through Deferred Asynchronous Retrieval 搜广推与 LLM 应用 Meta 2025-06-08 将完整排序模型在本次请求后异步运行，把高价值结果缓存为下一次请求的召回补充，再与实时召回合并。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。本地数值不等同于原论文大模型、私有数据、生产流量或专用 kernel；本地相对变化不得与原文提升混写。本地对照口径：基线为共享 transition + content scorer，实验组只加入 radar 核心机制；相对 NDCG@10 -2.78%。  retrieval asynchronous-serving ranking 搜广推 自动研究与高效上线 RADAR 为什么将强排序器输出作为召回候选，而不是只用于最终重排？ 强排序器可在请求后异步看更大目录，找到普通实时召回漏掉的高价值项，下次作为补充候选，提前提升覆盖。末端重排只能处理已有项。缓存依据旧历史会陈旧，实时通道仍负责新需求，不能当当前全库最优。 示意：后台发现一部用户可能爱看的冷门片，下次加入召回池；若只在最终排序使用强模型，该片从未召回就永远无机会。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:radar" data-paper-title="RADAR: Recall Augmentation through Deferred Asynchronous Retrieval" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="RADAR: Recall Augmentation through Deferred Asynchronous Retrieval 搜广推与 LLM 应用 Meta 2025-06-08 将完整排序模型在本次请求后异步运行，把高价值结果缓存为下一次请求的召回补充，再与实时召回合并。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 全库排序上实际执行论文核心状态、训练目标或推理路径；未使用公司私有特征、生产流量和在线服务，线上 A/B 数字只引用原文。本地数值不等同于原论文大模型、私有数据、生产流量或专用 kernel；本地相对变化不得与原文提升混写。本地对照口径：基线为共享 transition + content scorer，实验组只加入 radar 核心机制；相对 NDCG@10 -2.78%。  retrieval asynchronous-serving ranking 搜广推 自动研究与高效上线 RADAR 缓存的 Top-K 已经由强排序器筛过，为什么仍只是候选而非保证展示？ 它依据上一请求历史筛出供下次补充的对象，进入当前候选池后仍面对实时召回竞争、资格变化和当前需求。缓存高分不是展示承诺，更不是本次已观测点击。区分提名与最终曝光，才能正确计算覆盖、时效与实际下游价值。 示意：后台挑出一部电影，下次用户已转向儿童内容，或电影刚看完，缓存提名仍可被当前链路过滤，不能因进过 Top-K 就算一次成功展示。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-radar-206d8edd" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-bfe5d1773a5c7047">RADAR 为什么将强排序器输出作为召回候选，而不是只用于最终重排？</h2>
+<h2 id="qa-bfe5d1773a5c7047">RADAR 缓存的 Top-K 已经由强排序器筛过，为什么仍只是候选而非保证展示？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aradar">RADAR: Recall Augmentation through Deferred Asynchronous Retrieval</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>强排序器可在请求后异步看更大目录，找到普通实时召回漏掉的高价值项，下次作为补充候选，提前提升覆盖。末端重排只能处理已有项。缓存依据旧历史会陈旧，实时通道仍负责新需求，不能当当前全库最优。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>后台发现一部用户可能爱看的冷门片，下次加入召回池；若只在最终排序使用强模型，该片从未召回就永远无机会。</p>
+<p><strong>答案：</strong>它依据上一请求历史筛出供下次补充的对象，进入当前候选池后仍面对实时召回竞争、资格变化和当前需求。缓存高分不是展示承诺，更不是本次已观测点击。区分提名与最终曝光，才能正确计算覆盖、时效与实际下游价值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>后台挑出一部电影，下次用户已转向儿童内容，或电影刚看完，缓存提名仍可被当前链路过滤，不能因进过 Top-K 就算一次成功展示。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.07261">原论文</a> · <a href="../../../../reproductions/2506.07261-radar/">实现解读</a> · <a href="#qa-bfe5d1773a5c7047">问题链接</a></p>
 </details>

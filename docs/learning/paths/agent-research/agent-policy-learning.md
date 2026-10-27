@@ -27,16 +27,16 @@ hide:
 <p class="ar-learning-status" data-learning-status role="status">212 个问题 · 53 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:frontier-opd" data-paper-title="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond Agent Tsinghua University 2026-10-23 同一个环境观测可能经不同历史反复到达，直接按访问次数或 token 数平均会让循环轨迹主导教师介入判断。Frontier-OPD 先在轨迹内、再在轨迹间聚合有符号师生分歧，对不同状态选原历史代表；教师桥与学生续跑须通过同长窗口比较后才接纳，状态共享不能替代真实历史或任务成功评测。排名只寻找值得试验的节点。教师最多接管回合，再让学生继续回合。新窗口必须和原历史从同一位置开始的回合窗口比较；只有成功重放、非终止交接、完整有效续跑且师生 agreement 不下降，桥的教师响应才加入训练。 成本过高，不复现（审查 DONE）。本地排名和接纳诊断不复现上述分数。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  Agentic OPD / rollout budgeting 学习前沿与教师桥 Agent 交互策略学习：把轨迹反馈变成更新 为什么节点排名分歧要保留正负号，而桥验证使用绝对差？ 排名用学生 logp 减教师 logp 的有符号均值，寻找特定方向的学习前沿；验证用负平均绝对差衡量师生 agreement。两者目的不同，绝对化排名会交换某些节点次序，不能把任何大分歧都解释为同等值得教师接管。 例如一节点差为正三、另一为负五，绝对值选后者，有符号排名却选前者，两种规则不能悄悄互换。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:frontier-opd" data-paper-title="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond Agent Tsinghua University 2026-10-23 同一个环境观测可能经不同历史反复到达，直接按访问次数或 token 数平均会让循环轨迹主导教师介入判断。Frontier-OPD 先在轨迹内、再在轨迹间聚合有符号师生分歧，对不同状态选原历史代表；教师桥与学生续跑须通过同长窗口比较后才接纳，状态共享不能替代真实历史或任务成功评测。排名只寻找值得试验的节点。教师最多接管回合，再让学生继续回合。新窗口必须和原历史从同一位置开始的回合窗口比较；只有成功重放、非终止交接、完整有效续跑且师生 agreement 不下降，桥的教师响应才加入训练。 成本过高，不复现（审查 DONE）。本地排名和接纳诊断不复现上述分数。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  Agentic OPD / rollout budgeting 学习前沿与教师桥 Agent 交互策略学习：把轨迹反馈变成更新 Frontier-OPD 为什么只在部分状态请教师接管，而不让教师生成所有训练轨迹？ 强教师的完整交互昂贵，而且直接模仿其顺利轨迹未必覆盖学生会卡住的位置。Frontier-OPD 从学生自己到达的状态寻找值得尝试教学的前沿，让教师短暂搭桥后交回学生；节省预算的同时还需验证这段教学是否真的适合学生续跑。 例如学生反复卡在找钥匙后的开门步骤，可针对该位置试一小段教师帮助，而不是每道题都由教师从头完成。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-frontier-opd-63269744" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4da2b7b9e7379237">为什么节点排名分歧要保留正负号，而桥验证使用绝对差？</h2>
+<h2 id="qa-4da2b7b9e7379237">Frontier-OPD 为什么只在部分状态请教师接管，而不让教师生成所有训练轨迹？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afrontier-opd">Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>排名用学生 logp 减教师 logp 的有符号均值，寻找特定方向的学习前沿；验证用负平均绝对差衡量师生 agreement。两者目的不同，绝对化排名会交换某些节点次序，不能把任何大分歧都解释为同等值得教师接管。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一节点差为正三、另一为负五，绝对值选后者，有符号排名却选前者，两种规则不能悄悄互换。</p>
+<p><strong>答案：</strong>强教师的完整交互昂贵，而且直接模仿其顺利轨迹未必覆盖学生会卡住的位置。Frontier-OPD 从学生自己到达的状态寻找值得尝试教学的前沿，让教师短暂搭桥后交回学生；节省预算的同时还需验证这段教学是否真的适合学生续跑。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如学生反复卡在找钥匙后的开门步骤，可针对该位置试一小段教师帮助，而不是每道题都由教师从头完成。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32802v1">原论文</a> · <a href="../../../../agent-research/2610.32802-frontier-opd/">实现解读</a> · <a href="#qa-4da2b7b9e7379237">问题链接</a></p>
 </details>
@@ -54,15 +54,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32802v1">原论文</a> · <a href="../../../../agent-research/2610.32802-frontier-opd/">实现解读</a> · <a href="#qa-98ef87ac80ac6218">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:frontier-opd" data-paper-title="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond Agent Tsinghua University 2026-10-23 同一个环境观测可能经不同历史反复到达，直接按访问次数或 token 数平均会让循环轨迹主导教师介入判断。Frontier-OPD 先在轨迹内、再在轨迹间聚合有符号师生分歧，对不同状态选原历史代表；教师桥与学生续跑须通过同长窗口比较后才接纳，状态共享不能替代真实历史或任务成功评测。排名只寻找值得试验的节点。教师最多接管回合，再让学生继续回合。新窗口必须和原历史从同一位置开始的回合窗口比较；只有成功重放、非终止交接、完整有效续跑且师生 agreement 不下降，桥的教师响应才加入训练。 成本过高，不复现（审查 DONE）。本地排名和接纳诊断不复现上述分数。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  Agentic OPD / rollout budgeting 学习前沿与教师桥 Agent 交互策略学习：把轨迹反馈变成更新 先轨迹内再轨迹间平均，与所有访问直接平均有什么区别？ 直接平均会让循环多次到达同观测的轨迹支配节点分数，分层平均让每条轨迹先有一个代表均值再等权。状态相同仍要保留原历史，代表选最大有符号分歧而非随意重置；节点预算也不是轨迹预算。 例如一条轨迹三次十分，另一条一次零分，应得五分而非七点五，防止循环频率放大第一条证据。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:frontier-opd" data-paper-title="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond Agent Tsinghua University 2026-10-23 同一个环境观测可能经不同历史反复到达，直接按访问次数或 token 数平均会让循环轨迹主导教师介入判断。Frontier-OPD 先在轨迹内、再在轨迹间聚合有符号师生分歧，对不同状态选原历史代表；教师桥与学生续跑须通过同长窗口比较后才接纳，状态共享不能替代真实历史或任务成功评测。排名只寻找值得试验的节点。教师最多接管回合，再让学生继续回合。新窗口必须和原历史从同一位置开始的回合窗口比较；只有成功重放、非终止交接、完整有效续跑且师生 agreement 不下降，桥的教师响应才加入训练。 成本过高，不复现（审查 DONE）。本地排名和接纳诊断不复现上述分数。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  Agentic OPD / rollout budgeting 学习前沿与教师桥 Agent 交互策略学习：把轨迹反馈变成更新 高分前沿节点与有效教师桥为什么不能用同一个判据确认？ 节点排名决定先把有限教师预算花在哪里，依据有符号师生分歧；桥验证则比较真实接管加学生续跑与原历史的同长窗口，要求有效重放和 agreement 不下降。前者是试验优先级，后者是训练数据准入，排名靠前本身不证明教学有效。 例如某状态分歧很大，但教师接管后学生仍无法继续，该位置可被优先试验，却不能因此直接把失败桥加入训练。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-538f695379155fc1">先轨迹内再轨迹间平均，与所有访问直接平均有什么区别？</h2>
+<h2 id="qa-538f695379155fc1">高分前沿节点与有效教师桥为什么不能用同一个判据确认？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afrontier-opd">Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>直接平均会让循环多次到达同观测的轨迹支配节点分数，分层平均让每条轨迹先有一个代表均值再等权。状态相同仍要保留原历史，代表选最大有符号分歧而非随意重置；节点预算也不是轨迹预算。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一条轨迹三次十分，另一条一次零分，应得五分而非七点五，防止循环频率放大第一条证据。</p>
+<p><strong>答案：</strong>节点排名决定先把有限教师预算花在哪里，依据有符号师生分歧；桥验证则比较真实接管加学生续跑与原历史的同长窗口，要求有效重放和 agreement 不下降。前者是试验优先级，后者是训练数据准入，排名靠前本身不证明教学有效。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如某状态分歧很大，但教师接管后学生仍无法继续，该位置可被优先试验，却不能因此直接把失败桥加入训练。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32802v1">原论文</a> · <a href="../../../../agent-research/2610.32802-frontier-opd/">实现解读</a> · <a href="#qa-538f695379155fc1">问题链接</a></p>
 </details>
@@ -80,16 +80,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32802v1">原论文</a> · <a href="../../../../agent-research/2610.32802-frontier-opd/">实现解读</a> · <a href="#qa-c6a4f6a4fdc8378a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:asteroid" data-paper-title="Asymmetric On-Policy Distillation Learns In-Context Exploration" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Asymmetric On-Policy Distillation Learns In-Context Exploration Agent University of Washington 2026-10-21 部分可观测任务中，专家知道隐藏目标，因而总能直接成功；只模仿专家，学生看不到“失败后如何继续搜索”的上下文。ASTEROID 让当前学生先探索，再在同一个隐藏任务下收集专家的完整成功轨迹。学生用自己的观察、动作和奖励历史预测专家动作，迭代扩大可学习的上下文长度。这不是把金标放入 Agent prompt，也不是固定离线行为克隆，更不应简化成只在学生当前状态上打单步标签的普通 DAgger。论文区分两种采样：固定 latent 的 BAMDP 使用跨 episode 上下文； 完整多环境与机器人实验：成本过高，不复现（审查 DONE）；这是生成式机制诊断，没有公开 benchmark split，也没有 validation 选模、test 能力对比或 evolve 晋级。本地状态：L1 核心机制组件，diagnostic only。本地真实训练一个微型因果 Transformer，保留论文 Algorithm 1 的 episode 级在策略上下文与教师轨迹监督；不宣称复现论文的探索能力、样本效率或机器人效果。完整多环境与机器人实验：成本过高，不复现（审查 DONE）；不自动重试、不阻塞审查。  Agent 训练与策略优化 在策略上下文蒸馏与部分可观测探索 Agent 交互策略学习：把轨迹反馈变成更新 学生先探索为何能补上只看专家成功轨迹缺失的信息？ 专家知道隐藏任务可直接成功，纯模仿缺少学生失败后仍需探索的上下文。ASTEROID 用当前学生的观察动作奖励历史作为条件，再监督同一隐藏任务的完整专家成功轨迹，让学生学习如何利用自己实际收集的信息，而不把隐藏目标放进输入。 例如学生先试错一扇门，之后读自己的失败历史学习下一次选择；不是直接收到“正确门在右边”的特权提示。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:asteroid" data-paper-title="Asymmetric On-Policy Distillation Learns In-Context Exploration" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Asymmetric On-Policy Distillation Learns In-Context Exploration Agent University of Washington 2026-10-21 部分可观测任务中，专家知道隐藏目标，因而总能直接成功；只模仿专家，学生看不到“失败后如何继续搜索”的上下文。ASTEROID 让当前学生先探索，再在同一个隐藏任务下收集专家的完整成功轨迹。学生用自己的观察、动作和奖励历史预测专家动作，迭代扩大可学习的上下文长度。这不是把金标放入 Agent prompt，也不是固定离线行为克隆，更不应简化成只在学生当前状态上打单步标签的普通 DAgger。论文区分两种采样：固定 latent 的 BAMDP 使用跨 episode 上下文； 完整多环境与机器人实验：成本过高，不复现（审查 DONE）；这是生成式机制诊断，没有公开 benchmark split，也没有 validation 选模、test 能力对比或 evolve 晋级。本地状态：L1 核心机制组件，diagnostic only。本地真实训练一个微型因果 Transformer，保留论文 Algorithm 1 的 episode 级在策略上下文与教师轨迹监督；不宣称复现论文的探索能力、样本效率或机器人效果。完整多环境与机器人实验：成本过高，不复现（审查 DONE）；不自动重试、不阻塞审查。  Agent 训练与策略优化 在策略上下文蒸馏与部分可观测探索 Agent 交互策略学习：把轨迹反馈变成更新 隐藏任务环境中，为什么只模仿专家成功路线可能不够应对学生真正遇到的状态？ 学生会尝试不成熟动作，看到的信息和进入的状态未必出现在专家的顺利路线中。ASTEROID 研究让学生探索与专家成功经验结合，使学习覆盖实际遭遇的不确定情况。探索必须来自可见交互，专家信息用于训练的范围也需隔离，不能在评测时直接透露隐藏任务或解法。 教学例：专家一开始就走对路，学生却先探索错门；只学成功开局并未告诉学生如何利用自己已观察到的失败信息。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-asteroid-1bdda102" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-98484c774b0b30a3">学生先探索为何能补上只看专家成功轨迹缺失的信息？</h2>
+<h2 id="qa-98484c774b0b30a3">隐藏任务环境中，为什么只模仿专家成功路线可能不够应对学生真正遇到的状态？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aasteroid">Asymmetric On-Policy Distillation Learns In-Context Exploration</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Washington</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>专家知道隐藏任务可直接成功，纯模仿缺少学生失败后仍需探索的上下文。ASTEROID 用当前学生的观察动作奖励历史作为条件，再监督同一隐藏任务的完整专家成功轨迹，让学生学习如何利用自己实际收集的信息，而不把隐藏目标放进输入。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如学生先试错一扇门，之后读自己的失败历史学习下一次选择；不是直接收到“正确门在右边”的特权提示。</p>
+<p><strong>答案：</strong>学生会尝试不成熟动作，看到的信息和进入的状态未必出现在专家的顺利路线中。ASTEROID 研究让学生探索与专家成功经验结合，使学习覆盖实际遭遇的不确定情况。探索必须来自可见交互，专家信息用于训练的范围也需隔离，不能在评测时直接透露隐藏任务或解法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：专家一开始就走对路，学生却先探索错门；只学成功开局并未告诉学生如何利用自己已观察到的失败信息。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30105v1">原论文</a> · <a href="../../../../agent-research/2610.30105-asteroid/">实现解读</a> · <a href="#qa-98484c774b0b30a3">问题链接</a></p>
 </details>
@@ -133,16 +133,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30105v1">原论文</a> · <a href="../../../../agent-research/2610.30105-asteroid/">实现解读</a> · <a href="#qa-d1830851d2191bbd">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsipo" data-paper-title="RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution Agent Chinese University of Hong Kong 2026-10-11 静态或离线训练的技能库难以跟随策略进步，而技能增强教师也可能比学生更差。RSIPO从当前策略轨迹产生技能，以独立控制组与同初态重放测量技能收益，联合优化技能生成、RLVR和按经验贝叶斯可靠性加权的自蒸馏。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文Table2：Qwen2.5-3B/7B、Qwen3-1.7B，150训练steps；ALFWorld每step16任务×8rollouts，最长50turns，每任务另4次初态重放与4096token技能生成；搜索每step128任务×8rollouts。之前还要GLM-5.2标注的技能SFT。多轮环境训练与教师评分在单卡预计长时间，未作本地测速；不下载或启动。  agentic-rl on-policy-self-distillation recursive-self-improvement Agent 交互策略学习：把轨迹反馈变成更新 为什么技能增强教师也需要可靠性评估？ 由当前策略生成的技能可能错误、过时或只对少量任务有用，带技能教师不保证强于学生。RSIPO 用同初态重放与独立控制组测效用差，再对不确定收益收缩以调整蒸馏信任；技能生成和策略共同变，不能假设每条新技能都值得模仿。 例如技能提示节省步骤却导致失败，成功乘效率效用应下降，不应因“教师带了额外知识”就强制蒸馏。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsipo" data-paper-title="RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution Agent Chinese University of Hong Kong 2026-10-11 静态或离线训练的技能库难以跟随策略进步，而技能增强教师也可能比学生更差。RSIPO从当前策略轨迹产生技能，以独立控制组与同初态重放测量技能收益，联合优化技能生成、RLVR和按经验贝叶斯可靠性加权的自蒸馏。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文Table2：Qwen2.5-3B/7B、Qwen3-1.7B，150训练steps；ALFWorld每step16任务×8rollouts，最长50turns，每任务另4次初态重放与4096token技能生成；搜索每step128任务×8rollouts。之前还要GLM-5.2标注的技能SFT。多轮环境训练与教师评分在单卡预计长时间，未作本地测速；不下载或启动。  agentic-rl on-policy-self-distillation recursive-self-improvement Agent 交互策略学习：把轨迹反馈变成更新 策略不断变强时，RSIPO 为什么认为原有技能库也需要跟着更新？ 旧技能来自过去策略，可能已冗余、失效，甚至弱于当前学生的直接求解。RSIPO 研究让当前轨迹形成技能，再检验技能是否真的改善同初态执行，使技能与策略协同变化。技能辅助并非天然正收益，必须保留独立对照，也不能把原任务答案写进评测输入。 教学例：早期技能要求繁琐搜索，当前策略已能直接找到证据；继续强制使用旧技能可能更慢，需要重新测量而非盲目信任。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-rsipo-71b84017" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-28a01f8794a0c2d3">为什么技能增强教师也需要可靠性评估？</h2>
+<h2 id="qa-28a01f8794a0c2d3">策略不断变强时，RSIPO 为什么认为原有技能库也需要跟着更新？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsipo">RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Chinese University of Hong Kong</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>由当前策略生成的技能可能错误、过时或只对少量任务有用，带技能教师不保证强于学生。RSIPO 用同初态重放与独立控制组测效用差，再对不确定收益收缩以调整蒸馏信任；技能生成和策略共同变，不能假设每条新技能都值得模仿。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如技能提示节省步骤却导致失败，成功乘效率效用应下降，不应因“教师带了额外知识”就强制蒸馏。</p>
+<p><strong>答案：</strong>旧技能来自过去策略，可能已冗余、失效，甚至弱于当前学生的直接求解。RSIPO 研究让当前轨迹形成技能，再检验技能是否真的改善同初态执行，使技能与策略协同变化。技能辅助并非天然正收益，必须保留独立对照，也不能把原任务答案写进评测输入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：早期技能要求繁琐搜索，当前策略已能直接找到证据；继续强制使用旧技能可能更慢，需要重新测量而非盲目信任。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.15772">原论文</a> · <a href="../../../../reproductions/2610.15772-rsipo/">实现解读</a> · <a href="#qa-28a01f8794a0c2d3">问题链接</a></p>
 </details>
@@ -160,15 +160,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.15772">原论文</a> · <a href="../../../../reproductions/2610.15772-rsipo/">实现解读</a> · <a href="#qa-9728e8966646598d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsipo" data-paper-title="RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution Agent Chinese University of Hong Kong 2026-10-11 静态或离线训练的技能库难以跟随策略进步，而技能增强教师也可能比学生更差。RSIPO从当前策略轨迹产生技能，以独立控制组与同初态重放测量技能收益，联合优化技能生成、RLVR和按经验贝叶斯可靠性加权的自蒸馏。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文Table2：Qwen2.5-3B/7B、Qwen3-1.7B，150训练steps；ALFWorld每step16任务×8rollouts，最长50turns，每任务另4次初态重放与4096token技能生成；搜索每step128任务×8rollouts。之前还要GLM-5.2标注的技能SFT。多轮环境训练与教师评分在单卡预计长时间，未作本地测速；不下载或启动。  agentic-rl on-policy-self-distillation recursive-self-improvement Agent 交互策略学习：把轨迹反馈变成更新 原始技能奖励与经验贝叶斯收缩后的 OPSD 权重为何不同？ 未收缩收益相对组均值用于奖励技能生成，收缩收益混合任务估计与组先验，主要用于控制教师信任并裁剪权重。把两者混用会改变优化对象；同初态失效的 replay 也不能作为有效处理对照。 例如只有一次回放的正差可能被收缩得较小以谨慎蒸馏，但不应偷偷改写原始测得的技能效用记录。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsipo" data-paper-title="RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution Agent Chinese University of Hong Kong 2026-10-11 静态或离线训练的技能库难以跟随策略进步，而技能增强教师也可能比学生更差。RSIPO从当前策略轨迹产生技能，以独立控制组与同初态重放测量技能收益，联合优化技能生成、RLVR和按经验贝叶斯可靠性加权的自蒸馏。 成本过高，暂不复现；成本过高，暂不复现；待验收（仅研究资料）。本轮完成全文审查与延期登记，不下载模型或数据，不训练、不注册可执行Adapter、不接入evolve。下文论文数值不是本地实验结果。原文Table2：Qwen2.5-3B/7B、Qwen3-1.7B，150训练steps；ALFWorld每step16任务×8rollouts，最长50turns，每任务另4次初态重放与4096token技能生成；搜索每step128任务×8rollouts。之前还要GLM-5.2标注的技能SFT。多轮环境训练与教师评分在单卡预计长时间，未作本地测速；不下载或启动。  agentic-rl on-policy-self-distillation recursive-self-improvement Agent 交互策略学习：把轨迹反馈变成更新 动态技能—策略协同更新，与固定离线技能库，在经验时效上有什么不同？ 固定库让检索条件较稳定，但技能来源停留在旧策略和旧任务；协同更新从当前策略轨迹构建技能，再用独立控制与同初态重放检查收益，可跟随能力变化。它也增加非平稳性和评估开销，不能把技能条目更新数量当成有效收益或可靠教师的证据。 教学例：策略学会更短的证据路径后，新技能可反映这条路径；固定旧库仍可能反复推荐已经过时的长流程。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-f6ffb006746e4a09">原始技能奖励与经验贝叶斯收缩后的 OPSD 权重为何不同？</h2>
+<h2 id="qa-f6ffb006746e4a09">动态技能—策略协同更新，与固定离线技能库，在经验时效上有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsipo">RSIPO: Recursive Self-Improving Policy Optimization for Agentic Reinforcement Learning via Skill-Policy Co-Evolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Chinese University of Hong Kong</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>未收缩收益相对组均值用于奖励技能生成，收缩收益混合任务估计与组先验，主要用于控制教师信任并裁剪权重。把两者混用会改变优化对象；同初态失效的 replay 也不能作为有效处理对照。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如只有一次回放的正差可能被收缩得较小以谨慎蒸馏，但不应偷偷改写原始测得的技能效用记录。</p>
+<p><strong>答案：</strong>固定库让检索条件较稳定，但技能来源停留在旧策略和旧任务；协同更新从当前策略轨迹构建技能，再用独立控制与同初态重放检查收益，可跟随能力变化。它也增加非平稳性和评估开销，不能把技能条目更新数量当成有效收益或可靠教师的证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：策略学会更短的证据路径后，新技能可反映这条路径；固定旧库仍可能反复推荐已经过时的长流程。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.15772">原论文</a> · <a href="../../../../reproductions/2610.15772-rsipo/">实现解读</a> · <a href="#qa-f6ffb006746e4a09">问题链接</a></p>
 </details>
@@ -186,16 +186,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.15772">原论文</a> · <a href="../../../../reproductions/2610.15772-rsipo/">实现解读</a> · <a href="#qa-21d3144e7a542768">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evo2" data-paper-title="Evo2: Evolving the Evolver through Weight-Harness Co-Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Evo2: Evolving the Evolver through Weight-Harness Co-Evolution Agent University of Illinois Urbana-Champaign / Google DeepMind 2026-10-09 固定任务 executor，共享 Proposer/Reflector 编辑 harness；树搜索与跨分支 crossover 的执行反馈反过来训练 evolver。EvoTIDE 恢复有效编辑轨迹，先 SFT，再交错更新两个角色。事实来源：原文全文。 此处只是有边界的 GSM harness 机制诊断，非原 coding benchmark 复现或隔离 test 能力提升；当前是 concept_demo / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为固定 executor 与初始可执行 harness；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  agent-evolution weight-harness-co-evolution dual-role-grpo Agent 交互策略学习：把轨迹反馈变成更新 Evo2 为什么训练 evolver 而保持任务 executor 固定？ 任务执行器固定有助把行为变化归于提出和反思 harness 的能力，搜索树和交叉得到执行反馈，再训练共享 Proposer/Reflector。若同时更新 executor，会混入底层能力变化；编辑器权重学习与候选 harness 内容演化是两个不同对象。 例如改进后的提案模型更会修改验证流程，应在同一任务执行模型上检验，不能顺便换更强 coder 后归因提案学习。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evo2" data-paper-title="Evo2: Evolving the Evolver through Weight-Harness Co-Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Evo2: Evolving the Evolver through Weight-Harness Co-Evolution Agent University of Illinois Urbana-Champaign / Google DeepMind 2026-10-09 固定任务 executor，共享 Proposer/Reflector 编辑 harness；树搜索与跨分支 crossover 的执行反馈反过来训练 evolver。EvoTIDE 恢复有效编辑轨迹，先 SFT，再交错更新两个角色。事实来源：原文全文。 此处只是有边界的 GSM harness 机制诊断，非原 coding benchmark 复现或隔离 test 能力提升；当前是 concept_demo / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为固定 executor 与初始可执行 harness；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  agent-evolution weight-harness-co-evolution dual-role-grpo Agent 交互策略学习：把轨迹反馈变成更新 Evo2 为什么希望自动搜索的提案与反思能力能从经验中学习？ 固定 evolver 每次使用相同提案习惯，可能持续给出低价值或难执行的修改。Evo2 把生成与反思策略作为训练对象，让搜索经验影响后续改进方式，同时固定任务执行器以明确更新来源。搜索获得新版本不等于任务底座也训练了，收益仍需独立执行评价。 教学例：若提案器反复建议不可运行的结构，可训练它利用失败经验改变提案；负责执行任务的模型权重并不必同时变化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-evo2-2bf44b34" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e0e1fab4556cc465">Evo2 为什么训练 evolver 而保持任务 executor 固定？</h2>
+<h2 id="qa-e0e1fab4556cc465">Evo2 为什么希望自动搜索的提案与反思能力能从经验中学习？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aevo2">Evo2: Evolving the Evolver through Weight-Harness Co-Evolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign / Google DeepMind</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>任务执行器固定有助把行为变化归于提出和反思 harness 的能力，搜索树和交叉得到执行反馈，再训练共享 Proposer/Reflector。若同时更新 executor，会混入底层能力变化；编辑器权重学习与候选 harness 内容演化是两个不同对象。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如改进后的提案模型更会修改验证流程，应在同一任务执行模型上检验，不能顺便换更强 coder 后归因提案学习。</p>
+<p><strong>答案：</strong>固定 evolver 每次使用相同提案习惯，可能持续给出低价值或难执行的修改。Evo2 把生成与反思策略作为训练对象，让搜索经验影响后续改进方式，同时固定任务执行器以明确更新来源。搜索获得新版本不等于任务底座也训练了，收益仍需独立执行评价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：若提案器反复建议不可运行的结构，可训练它利用失败经验改变提案；负责执行任务的模型权重并不必同时变化。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13025">原论文</a> · <a href="../../../../reproductions/2610.13025-evo2/">实现解读</a> · <a href="#qa-e0e1fab4556cc465">问题链接</a></p>
 </details>
@@ -239,16 +239,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13025">原论文</a> · <a href="../../../../reproductions/2610.13025-evo2/">实现解读</a> · <a href="#qa-589b7fe7e2d4b7ca">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:race" data-paper-title="When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation Agent Renmin University of China 2026-10-08 LoGiC 从第二轮逐步删除推理，检查本轮及所有后续原动作的平均 token 对数似然变化，已接受删除继续影响后续上下文。成功轨迹压缩后用于 SFT；RL 屏蔽可删推理并监督提前闭合。原文四个 Agent 环境推理 token 分别减少 32.3%、80.2%、46.4%、62.0%，未报告线上 A/B。 本地指标：L1 GPU 诊断。独立核心机制 API 与真实 checkpoint 接口。短运行是 L1 诊断，非论文 benchmark 复测；尚未接入统一 Evolve 晋级。动作似然、成功轨迹 SFT 与 cover-aware actor 梯度接口已实现。真实输入必须提供公开环境、修订与 reason/action/observation 训练轨迹；不能把 QA 解题行伪装成工具轨迹。评估 Agent 不读取参考动作。论文四环境完整 on-policy RL 尚未复测；其端到端能力结果仍缺。  Agentic RL 推理效率 跨轮信用分配 Agent 交互策略学习：把轨迹反馈变成更新 为什么 LoGiC 删除本轮推理还要检查所有后续原动作似然？ 早期推理可能暂时不影响本轮动作，却保存后面需要的信息，只检查当前轮会误删长期依赖。LoGiC 从第二轮贪心删除，已接纳的删除继续影响后续上下文；动作似然只是压缩判据，不等于任务成功保证。 例如第二轮记下待验证路径，第五轮才使用，若只看第二轮动作不变就删掉，可能破坏后面执行。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:race" data-paper-title="When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation Agent Renmin University of China 2026-10-08 LoGiC 从第二轮逐步删除推理，检查本轮及所有后续原动作的平均 token 对数似然变化，已接受删除继续影响后续上下文。成功轨迹压缩后用于 SFT；RL 屏蔽可删推理并监督提前闭合。原文四个 Agent 环境推理 token 分别减少 32.3%、80.2%、46.4%、62.0%，未报告线上 A/B。 本地指标：L1 GPU 诊断。独立核心机制 API 与真实 checkpoint 接口。短运行是 L1 诊断，非论文 benchmark 复测；尚未接入统一 Evolve 晋级。动作似然、成功轨迹 SFT 与 cover-aware actor 梯度接口已实现。真实输入必须提供公开环境、修订与 reason/action/observation 训练轨迹；不能把 QA 解题行伪装成工具轨迹。评估 Agent 不读取参考动作。论文四环境完整 on-policy RL 尚未复测；其端到端能力结果仍缺。  Agentic RL 推理效率 跨轮信用分配 Agent 交互策略学习：把轨迹反馈变成更新 RACE 为什么研究删掉 Agent 轨迹里没有实际帮助的推理？ 长程 Agent 会生成大量思考文本，其中部分只是重复或不影响后续行动，却增加训练与推理负担。RACE 研究在保留行为依据的条件下减少冗余推理。短并非天然更好，删除可能让后续行动失去必要信息，因此压缩需要检查影响，不能只按字数决定哪些内容无用。 教学例：某轮反复复述目标却没有改变任何后续决定，可能是冗余；另一句记录了关键路径，虽短却不能随意删除。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-race-11c5fa7f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-126077c5cb720dd9">为什么 LoGiC 删除本轮推理还要检查所有后续原动作似然？</h2>
+<h2 id="qa-126077c5cb720dd9">RACE 为什么研究删掉 Agent 轨迹里没有实际帮助的推理？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arace">When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Renmin University of China</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>早期推理可能暂时不影响本轮动作，却保存后面需要的信息，只检查当前轮会误删长期依赖。LoGiC 从第二轮贪心删除，已接纳的删除继续影响后续上下文；动作似然只是压缩判据，不等于任务成功保证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第二轮记下待验证路径，第五轮才使用，若只看第二轮动作不变就删掉，可能破坏后面执行。</p>
+<p><strong>答案：</strong>长程 Agent 会生成大量思考文本，其中部分只是重复或不影响后续行动，却增加训练与推理负担。RACE 研究在保留行为依据的条件下减少冗余推理。短并非天然更好，删除可能让后续行动失去必要信息，因此压缩需要检查影响，不能只按字数决定哪些内容无用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某轮反复复述目标却没有改变任何后续决定，可能是冗余；另一句记录了关键路径，虽短却不能随意删除。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12061">原论文</a> · <a href="../../../../agent-research/2610.12061-race/">实现解读</a> · <a href="#qa-126077c5cb720dd9">问题链接</a></p>
 </details>
@@ -292,16 +292,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12061">原论文</a> · <a href="../../../../agent-research/2610.12061-race/">实现解读</a> · <a href="#qa-202711996a37bca1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:adastep" data-paper-title="AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning Agent Tsinghua University 2026-10-02 Agent 长轨迹的终局奖励给每一步同样的全局优势，无法指出哪一步有用；GiGPO 等方法用相同锚状态的局部回报补充信用，但同一动作之后的随机路径也会改变回报。AdaStep 不另训 critic，而是看同组中不同动作解释了多少回报方差。动作间差异主导时信任局部信用；同动作内部差异主导时将局部修正压低，保留全局优势。 L1 统计机制诊断。L1 统计机制诊断。实现论文 Eq. (17)–(18) 的同锚状态、按动作分组的方差分解、稀疏组回退和最终优势组合；没有宣称完成 Agent 策略训练或原文任务评测。输入只包含策略 rollout 的任务 ID、状态键、动作、折扣回报和全局优势；分组键为任务 ID 与 anchor state，避免不同任务的同名状态互相污染。不读取金标答案或计划。这里未运行环境交互、Qwen 策略更新、ALFWorld/WebShop/ScienceWorld，也没有同预算的 GiGPO 对照。  Agentic RL 步骤信用分配 方差可靠性 Agent 交互策略学习：把轨迹反馈变成更新 同一动作之后回报差异大，为什么会降低局部信用的可信度？ 若相同锚状态、相同动作仍有很大回报方差，差别更多来自后续随机路径，不能全归给当前动作。AdaStep 用动作间解释方差比例调整局部修正，保留全局优势，不另训练 critic；动作间差异主导时才更信任局部信号。 例如两种动作均可能因后续随机事件成功或失败，若每种内部都很乱，单次成功不足以证明当前动作更好。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:adastep" data-paper-title="AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning Agent Tsinghua University 2026-10-02 Agent 长轨迹的终局奖励给每一步同样的全局优势，无法指出哪一步有用；GiGPO 等方法用相同锚状态的局部回报补充信用，但同一动作之后的随机路径也会改变回报。AdaStep 不另训 critic，而是看同组中不同动作解释了多少回报方差。动作间差异主导时信任局部信用；同动作内部差异主导时将局部修正压低，保留全局优势。 L1 统计机制诊断。L1 统计机制诊断。实现论文 Eq. (17)–(18) 的同锚状态、按动作分组的方差分解、稀疏组回退和最终优势组合；没有宣称完成 Agent 策略训练或原文任务评测。输入只包含策略 rollout 的任务 ID、状态键、动作、折扣回报和全局优势；分组键为任务 ID 与 anchor state，避免不同任务的同名状态互相污染。不读取金标答案或计划。这里未运行环境交互、Qwen 策略更新、ALFWorld/WebShop/ScienceWorld，也没有同预算的 GiGPO 对照。  Agentic RL 步骤信用分配 方差可靠性 Agent 交互策略学习：把轨迹反馈变成更新 AdaStep 为什么要区分一个动作的作用与后续随机路径带来的运气？ 长任务相同中间状态下，一次动作后最终成败还受很多后续选择影响，直接把终局差异归给该动作会产生噪声。AdaStep 研究利用多条已观察轨迹判断局部信用有多可信，保留全局结果同时谨慎调整步骤信号。它不需要另训 critic，也不能凭少数样本证明动作真实因果效应。 教学例：相同查找动作后，有人后续答对、有人误写答案，这种差异不能全怪查找；需要看动作间差异是否超出各自后续波动。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-adastep-2ac090d9" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-926133c26eb20165">同一动作之后回报差异大，为什么会降低局部信用的可信度？</h2>
+<h2 id="qa-926133c26eb20165">AdaStep 为什么要区分一个动作的作用与后续随机路径带来的运气？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aadastep">AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>若相同锚状态、相同动作仍有很大回报方差，差别更多来自后续随机路径，不能全归给当前动作。AdaStep 用动作间解释方差比例调整局部修正，保留全局优势，不另训练 critic；动作间差异主导时才更信任局部信号。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两种动作均可能因后续随机事件成功或失败，若每种内部都很乱，单次成功不足以证明当前动作更好。</p>
+<p><strong>答案：</strong>长任务相同中间状态下，一次动作后最终成败还受很多后续选择影响，直接把终局差异归给该动作会产生噪声。AdaStep 研究利用多条已观察轨迹判断局部信用有多可信，保留全局结果同时谨慎调整步骤信号。它不需要另训 critic，也不能凭少数样本证明动作真实因果效应。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相同查找动作后，有人后续答对、有人误写答案，这种差异不能全怪查找；需要看动作间差异是否超出各自后续波动。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03223">原论文</a> · <a href="../../../../agent-research/2610.03223-adastep/">实现解读</a> · <a href="#qa-926133c26eb20165">问题链接</a></p>
 </details>
@@ -319,15 +319,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03223">原论文</a> · <a href="../../../../agent-research/2610.03223-adastep/">实现解读</a> · <a href="#qa-01ccc5b94842adc5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:adastep" data-paper-title="AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning Agent Tsinghua University 2026-10-02 Agent 长轨迹的终局奖励给每一步同样的全局优势，无法指出哪一步有用；GiGPO 等方法用相同锚状态的局部回报补充信用，但同一动作之后的随机路径也会改变回报。AdaStep 不另训 critic，而是看同组中不同动作解释了多少回报方差。动作间差异主导时信任局部信用；同动作内部差异主导时将局部修正压低，保留全局优势。 L1 统计机制诊断。L1 统计机制诊断。实现论文 Eq. (17)–(18) 的同锚状态、按动作分组的方差分解、稀疏组回退和最终优势组合；没有宣称完成 Agent 策略训练或原文任务评测。输入只包含策略 rollout 的任务 ID、状态键、动作、折扣回报和全局优势；分组键为任务 ID 与 anchor state，避免不同任务的同名状态互相污染。不读取金标答案或计划。这里未运行环境交互、Qwen 策略更新、ALFWorld/WebShop/ScienceWorld，也没有同预算的 GiGPO 对照。  Agentic RL 步骤信用分配 方差可靠性 Agent 交互策略学习：把轨迹反馈变成更新 AdaStep 与不加权局部优势相比，控制的是哪种噪声？ 不加权会把同状态回报差直接转成动作信用，可能放大后续随机性的偶然差。权重缩小这种不可靠局部项，但不消除全局奖励噪声，也依赖 anchor 对齐和足够重复样本，不能只因三 seed 权重方向正确就声称 Agent 更强。 例如一个状态的动作内方差远大于动作均值差，局部优势应接近关闭，而不是让一次好运主导更新。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:adastep" data-paper-title="AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning Agent Tsinghua University 2026-10-02 Agent 长轨迹的终局奖励给每一步同样的全局优势，无法指出哪一步有用；GiGPO 等方法用相同锚状态的局部回报补充信用，但同一动作之后的随机路径也会改变回报。AdaStep 不另训 critic，而是看同组中不同动作解释了多少回报方差。动作间差异主导时信任局部信用；同动作内部差异主导时将局部修正压低，保留全局优势。 L1 统计机制诊断。L1 统计机制诊断。实现论文 Eq. (17)–(18) 的同锚状态、按动作分组的方差分解、稀疏组回退和最终优势组合；没有宣称完成 Agent 策略训练或原文任务评测。输入只包含策略 rollout 的任务 ID、状态键、动作、折扣回报和全局优势；分组键为任务 ID 与 anchor state，避免不同任务的同名状态互相污染。不读取金标答案或计划。这里未运行环境交互、Qwen 策略更新、ALFWorld/WebShop/ScienceWorld，也没有同预算的 GiGPO 对照。  Agentic RL 步骤信用分配 方差可靠性 Agent 交互策略学习：把轨迹反馈变成更新 AdaStep 的回报统计路线与另训 critic 的步骤评价，在额外学习对象上有什么不同？ critic 路线要训练一个状态或动作价值估计器，再用其预测组织信用；AdaStep 直接从同锚状态多动作的经验回报统计估计局部修正可信度，不另训练 critic。它减少一个预测器，也受重复状态和样本覆盖限制，不能由无 critic 推出无噪声或普遍更准确。 教学例：同一网页状态有多次不同动作及后续结果，可直接统计波动；若只出现一次，就没有足够样本凭空获得可靠局部估计。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-064d790622e98c72">AdaStep 与不加权局部优势相比，控制的是哪种噪声？</h2>
+<h2 id="qa-064d790622e98c72">AdaStep 的回报统计路线与另训 critic 的步骤评价，在额外学习对象上有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aadastep">AdaStep: Adaptive Step Credit Weighting for Agentic Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不加权会把同状态回报差直接转成动作信用，可能放大后续随机性的偶然差。权重缩小这种不可靠局部项，但不消除全局奖励噪声，也依赖 anchor 对齐和足够重复样本，不能只因三 seed 权重方向正确就声称 Agent 更强。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个状态的动作内方差远大于动作均值差，局部优势应接近关闭，而不是让一次好运主导更新。</p>
+<p><strong>答案：</strong>critic 路线要训练一个状态或动作价值估计器，再用其预测组织信用；AdaStep 直接从同锚状态多动作的经验回报统计估计局部修正可信度，不另训练 critic。它减少一个预测器，也受重复状态和样本覆盖限制，不能由无 critic 推出无噪声或普遍更准确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一网页状态有多次不同动作及后续结果，可直接统计波动；若只出现一次，就没有足够样本凭空获得可靠局部估计。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03223">原论文</a> · <a href="../../../../agent-research/2610.03223-adastep/">实现解读</a> · <a href="#qa-064d790622e98c72">问题链接</a></p>
 </details>
@@ -345,16 +345,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03223">原论文</a> · <a href="../../../../agent-research/2610.03223-adastep/">实现解读</a> · <a href="#qa-f78bea596aecce94">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:depgpo" data-paper-title="Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents Agent Southeast University 2026-10-02 终端 Agent 通常只拿到任务结束后的 verifier 奖励。GRPO 把同一条轨迹的优势分给所有生成 token，无法区分真正生成答案的命令、为其提供数据的读取，以及后来被覆盖或无关的操作。DepGPO 从执行记录构造命令依赖图：文件读取连向该文件尚未覆盖的写入者，可信的 stdout 复用也形成边；再从 verifier 实际检查的文件、端口和进程向后追溯。 L1 机制诊断。L1 机制诊断。这里实现了论文的记录级读写依赖、相关写入与支持性读取信用，以及步级/令牌级优势归一化；尚未接入真实终端 tracer、verifier 执行或 Qwen 策略训练，不能把机制指标当成任务成功率。机制回执只包含四条手工结构化命令：支持读取、间接写入、最终写入、无关写入。测试还覆盖覆盖写不自动建立依赖、写入记录分母、最短路径、回退、负优势与 token 数不等时的均值守恒。这不是 Terminal-Bench、真实 Qwen 训练或多 seed 能力比较。  Agentic RL 终端命令依赖 步骤信用分配 Agent 交互策略学习：把轨迹反馈变成更新 命令依赖图为什么要连向文件当前有效写入者，而非所有历史写入？ 后来的覆盖可能让旧写入不再影响最终文件，若把所有历史写都连边，会给无关操作错误信用。DepGPO 从可信 tracer 的读写和 stdout 来源建图，再从 verifier 实查资源反向追溯，目标是定位实际贡献链而非命令文本相似。 例如甲写文件后被乙完全覆盖，最终检查乙内容，甲不能仅因也写过同路径就自动得到直接贡献。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:depgpo" data-paper-title="Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents Agent Southeast University 2026-10-02 终端 Agent 通常只拿到任务结束后的 verifier 奖励。GRPO 把同一条轨迹的优势分给所有生成 token，无法区分真正生成答案的命令、为其提供数据的读取，以及后来被覆盖或无关的操作。DepGPO 从执行记录构造命令依赖图：文件读取连向该文件尚未覆盖的写入者，可信的 stdout 复用也形成边；再从 verifier 实际检查的文件、端口和进程向后追溯。 L1 机制诊断。L1 机制诊断。这里实现了论文的记录级读写依赖、相关写入与支持性读取信用，以及步级/令牌级优势归一化；尚未接入真实终端 tracer、verifier 执行或 Qwen 策略训练，不能把机制指标当成任务成功率。机制回执只包含四条手工结构化命令：支持读取、间接写入、最终写入、无关写入。测试还覆盖覆盖写不自动建立依赖、写入记录分母、最短路径、回退、负优势与 token 数不等时的均值守恒。这不是 Terminal-Bench、真实 Qwen 训练或多 seed 能力比较。  Agentic RL 终端命令依赖 步骤信用分配 Agent 交互策略学习：把轨迹反馈变成更新 终端任务只有最后成功或失败时，DEPGPO 为什么要追踪命令之间的依赖？ 一条长轨迹含许多读写文件的动作，终局奖励无法直接指出哪些命令产生了最终结果。DEPGPO 用实际依赖把后续验证与前面有效工作联系起来，为信用分配提供结构。依赖只说明数据流关系，不是所有命令的真实因果贡献，缺失记录或验证器副作用都需明确边界。 教学例：最后测试读取某个源文件，可沿写入关系找到生成它的命令；无关目录浏览不应只因出现在同一轨迹就得到相同信用。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-depgpo-58f41b1f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5869340756f1992c">命令依赖图为什么要连向文件当前有效写入者，而非所有历史写入？</h2>
+<h2 id="qa-5869340756f1992c">终端任务只有最后成功或失败时，DEPGPO 为什么要追踪命令之间的依赖？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adepgpo">Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Southeast University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>后来的覆盖可能让旧写入不再影响最终文件，若把所有历史写都连边，会给无关操作错误信用。DepGPO 从可信 tracer 的读写和 stdout 来源建图，再从 verifier 实查资源反向追溯，目标是定位实际贡献链而非命令文本相似。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如甲写文件后被乙完全覆盖，最终检查乙内容，甲不能仅因也写过同路径就自动得到直接贡献。</p>
+<p><strong>答案：</strong>一条长轨迹含许多读写文件的动作，终局奖励无法直接指出哪些命令产生了最终结果。DEPGPO 用实际依赖把后续验证与前面有效工作联系起来，为信用分配提供结构。依赖只说明数据流关系，不是所有命令的真实因果贡献，缺失记录或验证器副作用都需明确边界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最后测试读取某个源文件，可沿写入关系找到生成它的命令；无关目录浏览不应只因出现在同一轨迹就得到相同信用。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03634">原论文</a> · <a href="../../../../agent-research/2610.03634-depgpo/">实现解读</a> · <a href="#qa-5869340756f1992c">问题链接</a></p>
 </details>
@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.03634">原论文</a> · <a href="../../../../agent-research/2610.03634-depgpo/">实现解读</a> · <a href="#qa-5469b9418d6e2fa5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dr-credit" data-paper-title="Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents Agent University of Chinese Academy of Sciences 2026-09-28 按 rubric 的历史已接受支持计算本次工具结果带来的新增或部分支持，再与最终结果优势结合，避免重复证据反复得分。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 rubric-history 增量支持；rubric 与证据分数来自 fixture，不读取 gold answer。执行 rubric-history 增量支持；rubric 与证据分数来自 fixture，不读取 gold answer。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  Agent RL 过程信用分配 Agent 交互策略学习：把轨迹反馈变成更新 为什么 Dr.Credit 要记录 rubric 已接受的历史支持？ 同一事实可被多个工具重复返回，若每次都给全额奖励，会鼓励重复搜索而非补证据。历史支持让当前结果只因新增或部分补足要求获得过程信用，再与终局优势结合；rubric 匹配仍需可信判断，不能单靠词重合当事实支持。 例如第一篇已证实发布日期，第二篇重复该日期不应再得一次全额奖励；新增地区信息才补上另一个要求。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dr-credit" data-paper-title="Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents Agent University of Chinese Academy of Sciences 2026-09-28 按 rubric 的历史已接受支持计算本次工具结果带来的新增或部分支持，再与最终结果优势结合，避免重复证据反复得分。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 rubric-history 增量支持；rubric 与证据分数来自 fixture，不读取 gold answer。执行 rubric-history 增量支持；rubric 与证据分数来自 fixture，不读取 gold answer。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  Agent RL 过程信用分配 Agent 交互策略学习：把轨迹反馈变成更新 Dr.Credit 为什么关注深度研究中每次检索有没有带来新的答案依据？ 研究 Agent 可以不断搜索并收集很多相似材料，却未必补齐问题所需事实。Dr.Credit 研究把过程反馈与评价标准的证据支持联系起来，鼓励真正推进回答的检索。奖励来自训练侧的支持判断，不是文档数量，判断器和 rubric 的可靠性仍会限制信用质量。 教学例：已有价格证据后再找三份同价转载，并未补上保修条件；下一次找到保修原文才可能填补新的回答要求。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-dr-credit-775af357" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-525c97d9167576c7">为什么 Dr.Credit 要记录 rubric 已接受的历史支持？</h2>
+<h2 id="qa-525c97d9167576c7">Dr.Credit 为什么关注深度研究中每次检索有没有带来新的答案依据？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adr-credit">Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同一事实可被多个工具重复返回，若每次都给全额奖励，会鼓励重复搜索而非补证据。历史支持让当前结果只因新增或部分补足要求获得过程信用，再与终局优势结合；rubric 匹配仍需可信判断，不能单靠词重合当事实支持。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如第一篇已证实发布日期，第二篇重复该日期不应再得一次全额奖励；新增地区信息才补上另一个要求。</p>
+<p><strong>答案：</strong>研究 Agent 可以不断搜索并收集很多相似材料，却未必补齐问题所需事实。Dr.Credit 研究把过程反馈与评价标准的证据支持联系起来，鼓励真正推进回答的检索。奖励来自训练侧的支持判断，不是文档数量，判断器和 rubric 的可靠性仍会限制信用质量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：已有价格证据后再找三份同价转载，并未补上保修条件；下一次找到保修原文才可能填补新的回答要求。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.34296">原论文</a> · <a href="../../../../agent-research/2609.34296-dr-credit/">实现解读</a> · <a href="#qa-525c97d9167576c7">问题链接</a></p>
 </details>
@@ -425,15 +425,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.34296">原论文</a> · <a href="../../../../agent-research/2609.34296-dr-credit/">实现解读</a> · <a href="#qa-2a21b47c32a7be2a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dr-credit" data-paper-title="Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents Agent University of Chinese Academy of Sciences 2026-09-28 按 rubric 的历史已接受支持计算本次工具结果带来的新增或部分支持，再与最终结果优势结合，避免重复证据反复得分。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 rubric-history 增量支持；rubric 与证据分数来自 fixture，不读取 gold answer。执行 rubric-history 增量支持；rubric 与证据分数来自 fixture，不读取 gold answer。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  Agent RL 过程信用分配 Agent 交互策略学习：把轨迹反馈变成更新 增量支持与按检索结果数量奖励有什么区别？ 结果数量只衡量行动产物，无法区分重复、无关或冲突；增量支持针对评价要求尚缺的证据，鼓励有效信息。它也可能奖励局部证据却未形成正确总答案，因此要保留最终结果项，而不是只追过程累积分。 例如搜索十次同一价格会让数量很大，但对“价格和可用性”仍只支持一项，不能替代未找到的地区证据。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dr-credit" data-paper-title="Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents Agent University of Chinese Academy of Sciences 2026-09-28 按 rubric 的历史已接受支持计算本次工具结果带来的新增或部分支持，再与最终结果优势结合，避免重复证据反复得分。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 rubric-history 增量支持；rubric 与证据分数来自 fixture，不读取 gold answer。执行 rubric-history 增量支持；rubric 与证据分数来自 fixture，不读取 gold answer。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  Agent RL 过程信用分配 Agent 交互策略学习：把轨迹反馈变成更新 按 rubric 给增量过程反馈，与只在最终答案打分，对监督时机有何不同？ 终局打分评价最终产物，却难区分此前哪些检索有效；增量支持沿过程检查各项要求何时获得新依据，把反馈连接到具体取证动作。过程支持不保证最后写对，最终答案也可能误用已找到材料，因此两种信号不能互相替代，更不能将训练 rubric 暴露给受评 actor。 教学例：检索已找到正确日期，过程可确认一项证据补齐；最终回答却抄错年份，终局评分仍应指出答案错误。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-db3655f96d65603f">增量支持与按检索结果数量奖励有什么区别？</h2>
+<h2 id="qa-db3655f96d65603f">按 rubric 给增量过程反馈，与只在最终答案打分，对监督时机有何不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adr-credit">Dr.Credit: Rubric-Grounded Process Credit Assignment for Deep Research Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>结果数量只衡量行动产物，无法区分重复、无关或冲突；增量支持针对评价要求尚缺的证据，鼓励有效信息。它也可能奖励局部证据却未形成正确总答案，因此要保留最终结果项，而不是只追过程累积分。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如搜索十次同一价格会让数量很大，但对“价格和可用性”仍只支持一项，不能替代未找到的地区证据。</p>
+<p><strong>答案：</strong>终局打分评价最终产物，却难区分此前哪些检索有效；增量支持沿过程检查各项要求何时获得新依据，把反馈连接到具体取证动作。过程支持不保证最后写对，最终答案也可能误用已找到材料，因此两种信号不能互相替代，更不能将训练 rubric 暴露给受评 actor。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：检索已找到正确日期，过程可确认一项证据补齐；最终回答却抄错年份，终局评分仍应指出答案错误。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.34296">原论文</a> · <a href="../../../../agent-research/2609.34296-dr-credit/">实现解读</a> · <a href="#qa-db3655f96d65603f">问题链接</a></p>
 </details>
@@ -451,16 +451,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.34296">原论文</a> · <a href="../../../../agent-research/2609.34296-dr-credit/">实现解读</a> · <a href="#qa-15d7ab33e8441f51">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:graphhca" data-paper-title="GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents Agent Beihang University 2026-09-28 稀疏终局奖励难以定位长轨迹中的关键动作。GraphHCA 把 rollout 合并为状态转移图，以成功/失败终态为边界解折扣固定点，再把相邻状态的对数势能差分配给每一步，并在同状态动作间标准化。 复现级别：L1 无 gold 核心机制。复现级别：L1 无 gold 核心机制。本地从采样轨迹图、动作和终局结果计算固定点势能与逐步优势；不读取参考答案或计划。当前未训练语言模型，也未把 GraphHCA 注册为 Evolve 算子。只有统一控制器能采样真实轨迹、执行该 estimator 并隔离验证策略更新后才算正式接入。graphhca_credit 只接受 Transition 和 success 布尔值；汇总实验见 ../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json。  Agentic RL 信用分配 轨迹图 Agent 交互策略学习：把轨迹反馈变成更新 状态转移图为什么能把终局成功反馈传给早期动作？ 多个 rollout 共享状态形成图，以成功终态一、失败终态零为边界求折扣势能，再用相邻状态对数势能差给步信用。它利用训练后见到的结果提供 hindsight 信号，不是部署时可读的成功 oracle，状态合并正确性也影响归因。 例如两条路线在同一走廊会合，之后成功信息可经图势能影响此前转移，但执行 Agent 当时仍不知道最终结果。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:graphhca" data-paper-title="GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents Agent Beihang University 2026-09-28 稀疏终局奖励难以定位长轨迹中的关键动作。GraphHCA 把 rollout 合并为状态转移图，以成功/失败终态为边界解折扣固定点，再把相邻状态的对数势能差分配给每一步，并在同状态动作间标准化。 复现级别：L1 无 gold 核心机制。复现级别：L1 无 gold 核心机制。本地从采样轨迹图、动作和终局结果计算固定点势能与逐步优势；不读取参考答案或计划。当前未训练语言模型，也未把 GraphHCA 注册为 Evolve 算子。只有统一控制器能采样真实轨迹、执行该 estimator 并隔离验证策略更新后才算正式接入。graphhca_credit 只接受 Transition 和 success 布尔值；汇总实验见 ../../experiments/sep30-p0-p1-mechanisms-seeds42-44.json。  Agentic RL 信用分配 轨迹图 Agent 交互策略学习：把轨迹反馈变成更新 GraphHCA 为什么希望长程动作在最终成功之前也能获得有结构的训练信号？ 终局反馈稀疏时，早期探索和关键转移常被同一个轨迹奖励淹没。GraphHCA 把已观察状态转移组织成图，再将成功信息传播到相连状态，用于估计动作进展。图只覆盖已有数据，图上的势能不是环境真值，也不能把训练侧成功标签提前给部署 actor。 教学例：多条路线都经某个关键开门状态才到终点，状态图可连接这些经验；未见过的门后状态仍不能凭图假定成功。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-graphhca-933790a0" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-78177d1580783057">状态转移图为什么能把终局成功反馈传给早期动作？</h2>
+<h2 id="qa-78177d1580783057">GraphHCA 为什么希望长程动作在最终成功之前也能获得有结构的训练信号？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agraphhca">GraphHCA: Closed-Form Hindsight Credit Assignment for Long-Horizon LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beihang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多个 rollout 共享状态形成图，以成功终态一、失败终态零为边界求折扣势能，再用相邻状态对数势能差给步信用。它利用训练后见到的结果提供 hindsight 信号，不是部署时可读的成功 oracle，状态合并正确性也影响归因。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两条路线在同一走廊会合，之后成功信息可经图势能影响此前转移，但执行 Agent 当时仍不知道最终结果。</p>
+<p><strong>答案：</strong>终局反馈稀疏时，早期探索和关键转移常被同一个轨迹奖励淹没。GraphHCA 把已观察状态转移组织成图，再将成功信息传播到相连状态，用于估计动作进展。图只覆盖已有数据，图上的势能不是环境真值，也不能把训练侧成功标签提前给部署 actor。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：多条路线都经某个关键开门状态才到终点，状态图可连接这些经验；未见过的门后状态仍不能凭图假定成功。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.35084">原论文</a> · <a href="../../../../agent-research/2609.35084-graphhca/">实现解读</a> · <a href="#qa-78177d1580783057">问题链接</a></p>
 </details>
@@ -504,16 +504,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.35084">原论文</a> · <a href="../../../../agent-research/2609.35084-graphhca/">实现解读</a> · <a href="#qa-b3bf6752fef4363f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dependency-refinement" data-paper-title="Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning Agent ShanghaiTech University 2026-09-16 把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行依赖裁剪与合并；DAG 来自可审计 fixture，不冒充 LLM 标注器。本地执行依赖裁剪与合并；DAG 来自可审计 fixture，不冒充 LLM 标注器。  轨迹精炼 Agent 微调 Agent 交互策略学习：把轨迹反馈变成更新 为什么轨迹压缩要保留最终答案依赖，而不只按长度删轮次？ 有些早期观察虽长却支撑后面关键动作，单纯删长消息会破坏条件链。方法将轮级关系建成 DAG，先裁无用叶节点，再按严格和宽松规则合并，目标是去冗余同时保留必要推理证据，不是压得越短越好。 例如一段错误日志被后续修复引用，即使很长也不能直接删；一个未被任何后续使用的旁支讨论更可能可裁。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dependency-refinement" data-paper-title="Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning Agent ShanghaiTech University 2026-09-16 把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行依赖裁剪与合并；DAG 来自可审计 fixture，不冒充 LLM 标注器。本地执行依赖裁剪与合并；DAG 来自可审计 fixture，不冒充 LLM 标注器。  轨迹精炼 Agent 微调 Agent 交互策略学习：把轨迹反馈变成更新 长多轮训练轨迹为什么不能只按长度截断来减少开销？ 工具轨迹包含观察、推理与动作的依赖，某段很早或很长的内容可能正是最终结论的依据，机械截断会让后文变得不可解释。Dependency Refinement 研究在减少轨迹负担时保留必要语义连接。依赖标注本身可能出错，压短不等于策略学会更多，也不证明被删内容永远无用。 教学例：最早一轮取得授权范围，最后动作依赖它；若只留最近消息，训练样本会像是在没有前提时突然执行操作。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-dependency-refinement-97ad396d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4a0523d8d2933e96">为什么轨迹压缩要保留最终答案依赖，而不只按长度删轮次？</h2>
+<h2 id="qa-4a0523d8d2933e96">长多轮训练轨迹为什么不能只按长度截断来减少开销？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adependency-refinement">Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · ShanghaiTech University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>有些早期观察虽长却支撑后面关键动作，单纯删长消息会破坏条件链。方法将轮级关系建成 DAG，先裁无用叶节点，再按严格和宽松规则合并，目标是去冗余同时保留必要推理证据，不是压得越短越好。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一段错误日志被后续修复引用，即使很长也不能直接删；一个未被任何后续使用的旁支讨论更可能可裁。</p>
+<p><strong>答案：</strong>工具轨迹包含观察、推理与动作的依赖，某段很早或很长的内容可能正是最终结论的依据，机械截断会让后文变得不可解释。Dependency Refinement 研究在减少轨迹负担时保留必要语义连接。依赖标注本身可能出错，压短不等于策略学会更多，也不证明被删内容永远无用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最早一轮取得授权范围，最后动作依赖它；若只留最近消息，训练样本会像是在没有前提时突然执行操作。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.18417">原论文</a> · <a href="../../../../agent-research/2609.18417-dependency-refinement/">实现解读</a> · <a href="#qa-4a0523d8d2933e96">问题链接</a></p>
 </details>
@@ -557,16 +557,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.18417">原论文</a> · <a href="../../../../agent-research/2609.18417-dependency-refinement/">实现解读</a> · <a href="#qa-453bfd86cb2878fc">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harness-bandit" data-paper-title="HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning Agent Harbin Institute of Technology / Alibaba Cloud 2026-09-12 联合 learnability、transferability 与探索 bonus 分配多 harness 训练预算。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行在线 harness 调度；没有进行大模型 RL。本地执行在线 harness 调度；没有进行大模型 RL。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent RL Harness 调度 Agent 交互策略学习：把轨迹反馈变成更新 learnability 与 transferability 为什么要分开衡量训练 harness？ 某 harness 当前容易获得学习进展，却可能只教会依赖专属工具的行为；另一 harness 难一些但能迁移到新接口。调度同时考虑可学性、迁移性和探索，避免只追训练回报，仍需真实策略更新和未见 harness 评价检验信号。 例如富提示环境很快成功，移除提示却失效；简约环境提升慢，但学到的验证步骤可能更能跨框架使用。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harness-bandit" data-paper-title="HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning Agent Harbin Institute of Technology / Alibaba Cloud 2026-09-12 联合 learnability、transferability 与探索 bonus 分配多 harness 训练预算。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行在线 harness 调度；没有进行大模型 RL。本地执行在线 harness 调度；没有进行大模型 RL。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent RL Harness 调度 Agent 交互策略学习：把轨迹反馈变成更新 在一种 harness 里练得更好，为什么未必能在其他接口下同样进步？ 工具协议、提示和执行流程会改变模型训练时遇到的状态与行为，有些经验只适配特定组织方式。Harness Bandit 研究如何在多个训练 harness 间分配预算，兼顾能否学到和能否迁移。训练内分数上升不等于跨接口泛化，必须把不同评测条件的结果分开。 教学例：模型习惯一种文件编辑命令，在另一框架参数格式不同；继续只练熟悉接口，可能提高本框架分数却不改善迁移。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-harness-bandit-ffd58529" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b961ccb8ddc0f357">learnability 与 transferability 为什么要分开衡量训练 harness？</h2>
+<h2 id="qa-b961ccb8ddc0f357">在一种 harness 里练得更好，为什么未必能在其他接口下同样进步？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aharness-bandit">HarnessBandit: Joint Learnability-Transferability Scheduling for Multi-Harness Agentic Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Harbin Institute of Technology / Alibaba Cloud</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>某 harness 当前容易获得学习进展，却可能只教会依赖专属工具的行为；另一 harness 难一些但能迁移到新接口。调度同时考虑可学性、迁移性和探索，避免只追训练回报，仍需真实策略更新和未见 harness 评价检验信号。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如富提示环境很快成功，移除提示却失效；简约环境提升慢，但学到的验证步骤可能更能跨框架使用。</p>
+<p><strong>答案：</strong>工具协议、提示和执行流程会改变模型训练时遇到的状态与行为，有些经验只适配特定组织方式。Harness Bandit 研究如何在多个训练 harness 间分配预算，兼顾能否学到和能否迁移。训练内分数上升不等于跨接口泛化，必须把不同评测条件的结果分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型习惯一种文件编辑命令，在另一框架参数格式不同；继续只练熟悉接口，可能提高本框架分数却不改善迁移。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.13739">原论文</a> · <a href="../../../../agent-research/2609.13739-harness-bandit/">实现解读</a> · <a href="#qa-b961ccb8ddc0f357">问题链接</a></p>
 </details>
@@ -610,16 +610,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.13739">原论文</a> · <a href="../../../../agent-research/2609.13739-harness-bandit/">实现解读</a> · <a href="#qa-2437ebba3b51eb5c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:t1-terminal-rl" data-paper-title="T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks Agent National University of Singapore / Tencent 2026-09-09 TITO 使用 rollout 实际采样 token id 训练，turn boundary repair 修正漂移，R3 重放 MoE 路由选择。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地审计 exact-token 和 route replay 状态；未训练 122B MoE 或运行 300+ turn 云沙箱。本地审计 exact-token 和 route replay 状态；未训练 122B MoE 或运行 300+ turn 云沙箱。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  Agent RL 长程终端任务 Agent 交互策略学习：把轨迹反馈变成更新 为什么 TITO 使用 rollout 实际采样 token ID，而不是重新 tokenize 文本？ 文本渲染和再编码可能改变空格、特殊 token 或边界，使训练序列与实际生成不一致，log-prob 和策略比率失配。直接保存采样 ID 保持行为证据，turn boundary repair 再处理边界漂移；字符串看起来相同不保证 token 序列相同。 例如工具调用分隔符在解码后被隐藏，再 tokenize 会少一个特殊 token，训练对齐位置因此错开。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:t1-terminal-rl" data-paper-title="T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks Agent National University of Singapore / Tencent 2026-09-09 TITO 使用 rollout 实际采样 token id 训练，turn boundary repair 修正漂移，R3 重放 MoE 路由选择。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地审计 exact-token 和 route replay 状态；未训练 122B MoE 或运行 300+ turn 云沙箱。本地审计 exact-token 和 route replay 状态；未训练 122B MoE 或运行 300+ turn 云沙箱。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  Agent RL 长程终端任务 Agent 交互策略学习：把轨迹反馈变成更新 训练大规模终端 Agent 时，为什么推理轨迹与优化器看到的样本必须一致？ 终端交互包含模型生成、工具观察和可能变化的模型执行路径，训练若重建出不同样本，就会优化并非真正采样的行为。T1 关注让长程 rollout 与后续更新保持可追踪一致，同时支撑大规模训练。记录一致只是训练正确性的条件，不代表任务能力或最终收益已经得到证明。 教学例：工具输出夹在模型回答之间，训练端若重新拼接后改变 token 边界，计算的概率就可能不再对应当时实际动作。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-t1-terminal-rl-406c9b27" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b5ce8bc476b1bbed">为什么 TITO 使用 rollout 实际采样 token ID，而不是重新 tokenize 文本？</h2>
+<h2 id="qa-b5ce8bc476b1bbed">训练大规模终端 Agent 时，为什么推理轨迹与优化器看到的样本必须一致？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3At1-terminal-rl">T1: Terminal Agent Reinforcement Learning for Long-Horizon Tasks</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · National University of Singapore / Tencent</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>文本渲染和再编码可能改变空格、特殊 token 或边界，使训练序列与实际生成不一致，log-prob 和策略比率失配。直接保存采样 ID 保持行为证据，turn boundary repair 再处理边界漂移；字符串看起来相同不保证 token 序列相同。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如工具调用分隔符在解码后被隐藏，再 tokenize 会少一个特殊 token，训练对齐位置因此错开。</p>
+<p><strong>答案：</strong>终端交互包含模型生成、工具观察和可能变化的模型执行路径，训练若重建出不同样本，就会优化并非真正采样的行为。T1 关注让长程 rollout 与后续更新保持可追踪一致，同时支撑大规模训练。记录一致只是训练正确性的条件，不代表任务能力或最终收益已经得到证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：工具输出夹在模型回答之间，训练端若重新拼接后改变 token 边界，计算的概率就可能不再对应当时实际动作。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11042">原论文</a> · <a href="../../../../agent-research/2609.11042-t1-terminal-rl/">实现解读</a> · <a href="#qa-b5ce8bc476b1bbed">问题链接</a></p>
 </details>
@@ -663,16 +663,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11042">原论文</a> · <a href="../../../../agent-research/2609.11042-t1-terminal-rl/">实现解读</a> · <a href="#qa-802e5687f7b00d55">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:multi-harness-rl" data-paper-title="What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents Agent New York University 2026-09-03 多 Harness RL 同时改变了执行环境多样性和 GRPO 的分组边界，难以判断增益来源。论文冻结相同 task-harness 轨迹，只比较组内和跨 harness advantage，并用训练中未见的最小 harness 审计能力是否真正迁移。 复现级别：CPU 分组信用与可微训练算子。复现级别：CPU 分组信用与可微训练算子。在相同 rollout 上计算 task×harness 与 task 两种标准化优势；尚不包含真实编码 Agent 的 held-out harness 迁移实验。真实 coding harness、Qwen3-8B RL 和 sealed oracle 均未在本地复刻；该实现用于防止未来 Evolve 实验把 harness 差异误报为模型能力。旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；  Multi-harness RL audit Agent 交互策略学习：把轨迹反馈变成更新 为什么固定相同轨迹后只改 advantage 分组边界？ 多 harness 同时改变环境与信用归一化，直接比整套训练无法区分收益来源。固定 task-harness rollout 后只比较 Within 与 Cross，使差别集中在同任务内如何形成基线，避免把更强工具或更简单环境误当策略学习效果。 例如相同代码轨迹在某 harness 反馈更丰富，若又换分组，就无法知道提升来自反馈还是 advantage 计算。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:multi-harness-rl" data-paper-title="What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents Agent New York University 2026-09-03 多 Harness RL 同时改变了执行环境多样性和 GRPO 的分组边界，难以判断增益来源。论文冻结相同 task-harness 轨迹，只比较组内和跨 harness advantage，并用训练中未见的最小 harness 审计能力是否真正迁移。 复现级别：CPU 分组信用与可微训练算子。复现级别：CPU 分组信用与可微训练算子。在相同 rollout 上计算 task×harness 与 task 两种标准化优势；尚不包含真实编码 Agent 的 held-out harness 迁移实验。真实 coding harness、Qwen3-8B RL 和 sealed oracle 均未在本地复刻；该实现用于防止未来 Evolve 实验把 harness 差异误报为模型能力。旧版直接返回评测标签，原准确率/计划成功率作废。入口现在只接收 task_id、intent、context；  Multi-harness RL audit Agent 交互策略学习：把轨迹反馈变成更新 多 harness 强化学习为什么需要区分底座能力与执行接口带来的差异？ 同一任务在不同提示、工具协议和流程下可能呈现不同成功率，训练奖励还会因分组方式改变含义。Multi-Harness RL 研究这种条件变化如何影响学习和迁移。若底座、任务或采样同时变化，就难判断收益来源，因此要控制轨迹与评价口径，而非把跨框架涨分都归为能力增长。 教学例：一种 harness 自动补全参数，另一种要求模型自己填写；成功率差异可能反映接口帮助，不能直接当成底座推理差距。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-multi-harness-rl-66c31df3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c9a85584b1ebed7b">为什么固定相同轨迹后只改 advantage 分组边界？</h2>
+<h2 id="qa-c9a85584b1ebed7b">多 harness 强化学习为什么需要区分底座能力与执行接口带来的差异？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amulti-harness-rl">What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · New York University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多 harness 同时改变环境与信用归一化，直接比整套训练无法区分收益来源。固定 task-harness rollout 后只比较 Within 与 Cross，使差别集中在同任务内如何形成基线，避免把更强工具或更简单环境误当策略学习效果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如相同代码轨迹在某 harness 反馈更丰富，若又换分组，就无法知道提升来自反馈还是 advantage 计算。</p>
+<p><strong>答案：</strong>同一任务在不同提示、工具协议和流程下可能呈现不同成功率，训练奖励还会因分组方式改变含义。Multi-Harness RL 研究这种条件变化如何影响学习和迁移。若底座、任务或采样同时变化，就难判断收益来源，因此要控制轨迹与评价口径，而非把跨框架涨分都归为能力增长。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一种 harness 自动补全参数，另一种要求模型自己填写；成功率差异可能反映接口帮助，不能直接当成底座推理差距。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04518">原论文</a> · <a href="../../../../agent-research/2609.04518-multi-harness-rl/">实现解读</a> · <a href="#qa-c9a85584b1ebed7b">问题链接</a></p>
 </details>
@@ -716,16 +716,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04518">原论文</a> · <a href="../../../../agent-research/2609.04518-multi-harness-rl/">实现解读</a> · <a href="#qa-f053cdb0bfd492e6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ace-data" data-paper-title="What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents Agent Huawei Technologies Co., Ltd 2026-08-27 论文把 Agent 数据统一表示为：环境、任务、交互轨迹与可选 verifier。Accuracy 先限定可信支持集，Complexity 相对指定学习者校准难度，Diversity 再控制环境、任务和行为覆盖。 复现级别：框架可执行化 mini-suite。复现级别：框架可执行化 mini-suite。论文是综述/统一框架；本地把三道约束实现为数据准入门。这是框架的可执行准入合同，不声称复刻某个训练模型或公开 benchmark SOTA。planbench-mini、120 episodes：joint success 1.0000、average cost 0.3700，另记录 accuracy gates、complexity calibration 和 diversity accept/reject。指标见 metrics/planbench-mini-seed42.json。  Agent 数据质量 Agent 交互策略学习：把轨迹反馈变成更新 Accuracy 为什么先于 Complexity 和 Diversity？ 不可信轨迹即使很难或很多样，也可能教给模型错误行为。ACE 先限定可验证支持集，再按指定学习者校准难度，最后控制环境、任务和行为覆盖；三维不是可随意平均互相抵消的分数，框架也不提出一个独立“ACE 模型”。 例如一条复杂但工具结果伪造的轨迹不应因稀有就收录；应先通过真实性与正确性检查。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ace-data" data-paper-title="What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents Agent Huawei Technologies Co., Ltd 2026-08-27 论文把 Agent 数据统一表示为：环境、任务、交互轨迹与可选 verifier。Accuracy 先限定可信支持集，Complexity 相对指定学习者校准难度，Diversity 再控制环境、任务和行为覆盖。 复现级别：框架可执行化 mini-suite。复现级别：框架可执行化 mini-suite。论文是综述/统一框架；本地把三道约束实现为数据准入门。这是框架的可执行准入合同，不声称复刻某个训练模型或公开 benchmark SOTA。planbench-mini、120 episodes：joint success 1.0000、average cost 0.3700，另记录 accuracy gates、complexity calibration 和 diversity accept/reject。指标见 metrics/planbench-mini-seed42.json。  Agent 数据质量 Agent 交互策略学习：把轨迹反馈变成更新 ACE 为什么认为更多 Agent 轨迹不一定意味着更好的训练数据？ 数据可能答案不准、对当前学习者过难或过于重复，数量增加会同时放大这些问题。ACE 从 Accuracy、Complexity、Diversity 三个角度检查 Agent 数据，让质量与学习适配性进入选择。三者需要真实定义和评测，不能仅凭步骤多、主题多就认定训练一定受益。 教学例：重复一千条错误调用并不会变成好数据；全是模型已熟练完成的简单题，也可能提供很有限的新学习信号。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-ace-data-9a8b6ddd" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5a5ac4e33413cea3">Accuracy 为什么先于 Complexity 和 Diversity？</h2>
+<h2 id="qa-5a5ac4e33413cea3">ACE 为什么认为更多 Agent 轨迹不一定意味着更好的训练数据？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aace-data">What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Huawei Technologies Co., Ltd</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不可信轨迹即使很难或很多样，也可能教给模型错误行为。ACE 先限定可验证支持集，再按指定学习者校准难度，最后控制环境、任务和行为覆盖；三维不是可随意平均互相抵消的分数，框架也不提出一个独立“ACE 模型”。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一条复杂但工具结果伪造的轨迹不应因稀有就收录；应先通过真实性与正确性检查。</p>
+<p><strong>答案：</strong>数据可能答案不准、对当前学习者过难或过于重复，数量增加会同时放大这些问题。ACE 从 Accuracy、Complexity、Diversity 三个角度检查 Agent 数据，让质量与学习适配性进入选择。三者需要真实定义和评测，不能仅凭步骤多、主题多就认定训练一定受益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：重复一千条错误调用并不会变成好数据；全是模型已熟练完成的简单题，也可能提供很有限的新学习信号。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27260">原论文</a> · <a href="../../../../agent-research/2608.27260-ace-data/">实现解读</a> · <a href="#qa-5a5ac4e33413cea3">问题链接</a></p>
 </details>
@@ -743,15 +743,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27260">原论文</a> · <a href="../../../../agent-research/2608.27260-ace-data/">实现解读</a> · <a href="#qa-c709cf44b82a6aa7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ace-data" data-paper-title="What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents Agent Huawei Technologies Co., Ltd 2026-08-27 论文把 Agent 数据统一表示为：环境、任务、交互轨迹与可选 verifier。Accuracy 先限定可信支持集，Complexity 相对指定学习者校准难度，Diversity 再控制环境、任务和行为覆盖。 复现级别：框架可执行化 mini-suite。复现级别：框架可执行化 mini-suite。论文是综述/统一框架；本地把三道约束实现为数据准入门。这是框架的可执行准入合同，不声称复刻某个训练模型或公开 benchmark SOTA。planbench-mini、120 episodes：joint success 1.0000、average cost 0.3700，另记录 accuracy gates、complexity calibration 和 diversity accept/reject。指标见 metrics/planbench-mini-seed42.json。  Agent 数据质量 Agent 交互策略学习：把轨迹反馈变成更新 learner-relative Complexity 与按步骤数判断难度有什么不同？ 相同步数对不同模型难度不同，学习者 loss 或相关表现可刻画是否在可学习区间，步骤长短只是代理。过易数据信息少，过难数据可能无法有效学习；多样性还需另看覆盖，不能把更长轨迹自动视为更高质量。 例如弱模型觉得三步 SQL 很难，强模型可能已掌握；相同步数不能决定两者都需要相同训练样本。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ace-data" data-paper-title="What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents Agent Huawei Technologies Co., Ltd 2026-08-27 论文把 Agent 数据统一表示为：环境、任务、交互轨迹与可选 verifier。Accuracy 先限定可信支持集，Complexity 相对指定学习者校准难度，Diversity 再控制环境、任务和行为覆盖。 复现级别：框架可执行化 mini-suite。复现级别：框架可执行化 mini-suite。论文是综述/统一框架；本地把三道约束实现为数据准入门。这是框架的可执行准入合同，不声称复刻某个训练模型或公开 benchmark SOTA。planbench-mini、120 episodes：joint success 1.0000、average cost 0.3700，另记录 accuracy gates、complexity calibration 和 diversity accept/reject。指标见 metrics/planbench-mini-seed42.json。  Agent 数据质量 Agent 交互策略学习：把轨迹反馈变成更新 Complexity 与 Diversity 分别描述学习挑战还是数据覆盖，为什么不能合并？ Complexity 关注样本对指定学习者的挑战程度，Diversity 关注样本之间和任务空间的覆盖差异。多样数据可以都很简单，困难数据也可以只是同一模式重复。二者还受 Accuracy 前提约束，错误但新奇的轨迹不能因此成为好监督，也不能从静态标签推导实际训练收益。 教学例：十种不同工具的单步调用可能很广但很易；十条同类高难故障题可能很难却覆盖窄，两种数据补足的缺口不同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-4ec1c6af15d90cb9">learner-relative Complexity 与按步骤数判断难度有什么不同？</h2>
+<h2 id="qa-4ec1c6af15d90cb9">Complexity 与 Diversity 分别描述学习挑战还是数据覆盖，为什么不能合并？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aace-data">What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Huawei Technologies Co., Ltd</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>相同步数对不同模型难度不同，学习者 loss 或相关表现可刻画是否在可学习区间，步骤长短只是代理。过易数据信息少，过难数据可能无法有效学习；多样性还需另看覆盖，不能把更长轨迹自动视为更高质量。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如弱模型觉得三步 SQL 很难，强模型可能已掌握；相同步数不能决定两者都需要相同训练样本。</p>
+<p><strong>答案：</strong>Complexity 关注样本对指定学习者的挑战程度，Diversity 关注样本之间和任务空间的覆盖差异。多样数据可以都很简单，困难数据也可以只是同一模式重复。二者还受 Accuracy 前提约束，错误但新奇的轨迹不能因此成为好监督，也不能从静态标签推导实际训练收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：十种不同工具的单步调用可能很广但很易；十条同类高难故障题可能很难却覆盖窄，两种数据补足的缺口不同。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27260">原论文</a> · <a href="../../../../agent-research/2608.27260-ace-data/">实现解读</a> · <a href="#qa-4ec1c6af15d90cb9">问题链接</a></p>
 </details>
@@ -769,16 +769,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27260">原论文</a> · <a href="../../../../agent-research/2608.27260-ace-data/">实现解读</a> · <a href="#qa-4855db385496d579">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahead" data-paper-title="AHEAD: Agentic Hints for Effective Agent Development" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AHEAD: Agentic Hints for Effective Agent Development Agent AWS AI Labs / Purdue University 2026-08-25 轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。普通步骤只用环境反馈，错误步骤再追加 corrective hint，并生成稠密信用。mini-suite 使用确定性错误位置验证 step-aware PI 分流；未运行 LLM analyzer、Qwen、真实 GRPO 或三个原始 benchmark。PlanBench-mini 120 episodes：24 个 error-step hint、360 个 dense-credit 更新，joint success 1.0000，平均成本 0.6160。  环境反馈提示训练 Agent 交互策略学习：把轨迹反馈变成更新 为什么只有关键错误步骤额外得到 corrective hint？ 普通步骤已有环境反馈，统一提供特权提示会浪费监督并模糊真正需纠错的位置。AHEAD 先分析失败轨迹，所有 teacher 读反馈，只有错误步再读提示，用受限 logp 差调节原 GRPO 优势；提示来自训练侧，不是测试解题通道。 例如十步里第六步误选工具，额外 hint 聚焦第六步，而非给前五步也塞入正确后续计划。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahead" data-paper-title="AHEAD: Agentic Hints for Effective Agent Development" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AHEAD: Agentic Hints for Effective Agent Development Agent AWS AI Labs / Purdue University 2026-08-25 轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。普通步骤只用环境反馈，错误步骤再追加 corrective hint，并生成稠密信用。mini-suite 使用确定性错误位置验证 step-aware PI 分流；未运行 LLM analyzer、Qwen、真实 GRPO 或三个原始 benchmark。PlanBench-mini 120 episodes：24 个 error-step hint、360 个 dense-credit 更新，joint success 1.0000，平均成本 0.6160。  环境反馈提示训练 Agent 交互策略学习：把轨迹反馈变成更新 AHEAD 为什么不满足于给长程 Agent 整条轨迹同一个成功或失败反馈？ 轨迹中可能只有少数关键错误决定终局，其他步骤则合理或只是受错误连累，统一信用难以说明应改哪里。AHEAD 研究用针对性的教师信号调整这些步骤的学习重点。更细信号也依赖错误定位可靠性，训练教师的额外信息不能被当成部署 Agent 已知答案。 教学例：多步检索只有第三次查询偏离目标，后续失败不应让所有正确取证步骤承担相同责任；需要识别真正关键的偏差。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-ahead-17c82764" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d7aa07df3793e0b8">为什么只有关键错误步骤额外得到 corrective hint？</h2>
+<h2 id="qa-d7aa07df3793e0b8">AHEAD 为什么不满足于给长程 Agent 整条轨迹同一个成功或失败反馈？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aahead">AHEAD: Agentic Hints for Effective Agent Development</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · AWS AI Labs / Purdue University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>普通步骤已有环境反馈，统一提供特权提示会浪费监督并模糊真正需纠错的位置。AHEAD 先分析失败轨迹，所有 teacher 读反馈，只有错误步再读提示，用受限 logp 差调节原 GRPO 优势；提示来自训练侧，不是测试解题通道。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如十步里第六步误选工具，额外 hint 聚焦第六步，而非给前五步也塞入正确后续计划。</p>
+<p><strong>答案：</strong>轨迹中可能只有少数关键错误决定终局，其他步骤则合理或只是受错误连累，统一信用难以说明应改哪里。AHEAD 研究用针对性的教师信号调整这些步骤的学习重点。更细信号也依赖错误定位可靠性，训练教师的额外信息不能被当成部署 Agent 已知答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：多步检索只有第三次查询偏离目标，后续失败不应让所有正确取证步骤承担相同责任；需要识别真正关键的偏差。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24114">原论文</a> · <a href="../../../../agent-research/2608.24114-ahead/">实现解读</a> · <a href="#qa-d7aa07df3793e0b8">问题链接</a></p>
 </details>
@@ -822,16 +822,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24114">原论文</a> · <a href="../../../../agent-research/2608.24114-ahead/">实现解读</a> · <a href="#qa-8331787f806cc0e1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:spo-plus-plus" data-paper-title="SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction Agent Renmin University of China 2026-08-25 SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。每次 dispatch 冻结 prompt value，并按 action-token measure 消费 advantage。确定性 mini-suite 验证事件时间状态与测度对齐；未运行异步 Qwen3.5、ALFWorld 或 Math-TIR 训练。PlanBench-mini 120 episodes：joint success 1.0000，平均成本 0.6400，执行 120 次冻结 value 与 360 个 action-token measure 更新。  异步单流 Agent RL Agent 交互策略学习：把轨迹反馈变成更新 为什么异步 baseline 要在 dispatch 时冻结，而不按完成顺序回填？ 慢快任务完成顺序与难度和策略版本相关，若等待结果后用最新历史计算 baseline，会把未来或其他版本反馈混进当前采样。dispatch 冻结 prompt value 使优势对应当时可用证据，之后再更新持久统计，避免时序污染。 例如一个难 rollout 很晚完成，它不应使用完成前刚收到的同版本未来成功结果来回算最初 baseline。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:spo-plus-plus" data-paper-title="SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction Agent Renmin University of China 2026-08-25 SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。每次 dispatch 冻结 prompt value，并按 action-token measure 消费 advantage。确定性 mini-suite 验证事件时间状态与测度对齐；未运行异步 Qwen3.5、ALFWorld 或 Math-TIR 训练。PlanBench-mini 120 episodes：joint success 1.0000，平均成本 0.6400，执行 120 次冻结 value 与 360 个 action-token measure 更新。  异步单流 Agent RL Agent 交互策略学习：把轨迹反馈变成更新 异步 Agent RL 为什么容易受到“哪个任务先完成”的影响？ 长任务耗时不同，异步训练希望先用已返回结果而不等全部同伴，但完成顺序与任务难度、策略版本相关。SPO++ 研究在保持吞吐的同时让优势基线和证据统计对应正确生成事件。快完成不表示更有代表性，训练记录必须追踪采样时的条件，而不是事后随结果回填。 教学例：简单任务先返回并改变历史值，较早发出的难任务晚到时不应被当成在新基线下采样，否则会混入时间顺序偏差。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-spo-plus-plus-c1491ed7" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-67629927643b2cac">为什么异步 baseline 要在 dispatch 时冻结，而不按完成顺序回填？</h2>
+<h2 id="qa-67629927643b2cac">异步 Agent RL 为什么容易受到“哪个任务先完成”的影响？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aspo-plus-plus">SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Renmin University of China</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>慢快任务完成顺序与难度和策略版本相关，若等待结果后用最新历史计算 baseline，会把未来或其他版本反馈混进当前采样。dispatch 冻结 prompt value 使优势对应当时可用证据，之后再更新持久统计，避免时序污染。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个难 rollout 很晚完成，它不应使用完成前刚收到的同版本未来成功结果来回算最初 baseline。</p>
+<p><strong>答案：</strong>长任务耗时不同，异步训练希望先用已返回结果而不等全部同伴，但完成顺序与任务难度、策略版本相关。SPO++ 研究在保持吞吐的同时让优势基线和证据统计对应正确生成事件。快完成不表示更有代表性，训练记录必须追踪采样时的条件，而不是事后随结果回填。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：简单任务先返回并改变历史值，较早发出的难任务晚到时不应被当成在新基线下采样，否则会混入时间顺序偏差。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24870">原论文</a> · <a href="../../../../agent-research/2608.24870-spo-plus-plus/">实现解读</a> · <a href="#qa-67629927643b2cac">问题链接</a></p>
 </details>
@@ -849,15 +849,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24870">原论文</a> · <a href="../../../../agent-research/2608.24870-spo-plus-plus/">实现解读</a> · <a href="#qa-12fbffeabf99f50b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:spo-plus-plus" data-paper-title="SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction Agent Renmin University of China 2026-08-25 SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。每次 dispatch 冻结 prompt value，并按 action-token measure 消费 advantage。确定性 mini-suite 验证事件时间状态与测度对齐；未运行异步 Qwen3.5、ALFWorld 或 Math-TIR 训练。PlanBench-mini 120 episodes：joint success 1.0000，平均成本 0.6400，执行 120 次冻结 value 与 360 个 action-token measure 更新。  异步单流 Agent RL Agent 交互策略学习：把轨迹反馈变成更新 token-weighted whitening 与每轨迹一票归一化有什么不同？ actor loss 按 token 平均时，长轨迹贡献更多 token，优势中心化和方差也应按动作 token 数加权以保持测度一致。轨迹等权会让标准化目标与实际损失权重不同；环境 observation 不应算策略 token 来改变权重。 例如一条一百 token、另一条十 token，loss 中前者权重大十倍，whitening 若各占一半就不匹配训练测度。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:spo-plus-plus" data-paper-title="SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction Agent Renmin University of China 2026-08-25 SPO 用单 rollout 和持久 prompt value 避免等待 sibling，但 completion 顺序会污染历史，而且 trajectory whitening 与 token-mean actor loss 的测度不一致。SPO++ 按生成策略事件组织证据、dispatch 时冻结 baseline，并用动作 token 数加权标准化 advantage。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。每次 dispatch 冻结 prompt value，并按 action-token measure 消费 advantage。确定性 mini-suite 验证事件时间状态与测度对齐；未运行异步 Qwen3.5、ALFWorld 或 Math-TIR 训练。PlanBench-mini 120 episodes：joint success 1.0000，平均成本 0.6400，执行 120 次冻结 value 与 360 个 action-token measure 更新。  异步单流 Agent RL Agent 交互策略学习：把轨迹反馈变成更新 按 dispatch 事件冻结 baseline，与按完成顺序取最新 baseline，会改变什么条件？ dispatch 冻结让每条 rollout 的优势对应其发出时可见的 prompt value；完成时取最新值会掺入后来才到达的其他结果，且耗时不同的轨迹受影响程度不同。SPO++ 将证据按生成策略事件组织，不能用事后历史覆盖已冻结条件；这与 token 加权标准化是另一项独立修正。 教学例：轨迹甲先发后到，乙后发先到；乙的结果可更新未来基线，但不能倒写进甲发出时本不存在的历史信息。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-3c83d8cdc2ba5e67">token-weighted whitening 与每轨迹一票归一化有什么不同？</h2>
+<h2 id="qa-3c83d8cdc2ba5e67">按 dispatch 事件冻结 baseline，与按完成顺序取最新 baseline，会改变什么条件？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aspo-plus-plus">SPO++: Stabilizing Asynchronous Agentic Reinforcement Learning via Measure-Theoretic Token Correction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Renmin University of China</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>actor loss 按 token 平均时，长轨迹贡献更多 token，优势中心化和方差也应按动作 token 数加权以保持测度一致。轨迹等权会让标准化目标与实际损失权重不同；环境 observation 不应算策略 token 来改变权重。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一条一百 token、另一条十 token，loss 中前者权重大十倍，whitening 若各占一半就不匹配训练测度。</p>
+<p><strong>答案：</strong>dispatch 冻结让每条 rollout 的优势对应其发出时可见的 prompt value；完成时取最新值会掺入后来才到达的其他结果，且耗时不同的轨迹受影响程度不同。SPO++ 将证据按生成策略事件组织，不能用事后历史覆盖已冻结条件；这与 token 加权标准化是另一项独立修正。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：轨迹甲先发后到，乙后发先到；乙的结果可更新未来基线，但不能倒写进甲发出时本不存在的历史信息。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24870">原论文</a> · <a href="../../../../agent-research/2608.24870-spo-plus-plus/">实现解读</a> · <a href="#qa-3c83d8cdc2ba5e67">问题链接</a></p>
 </details>
@@ -928,16 +928,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.23318">原论文</a> · <a href="../../../../agent-research/2608.23318-agent-g2/">实现解读</a> · <a href="#qa-e4661243a36cc425">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autosaddler" data-paper-title="AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces Agent Microsoft / POSTECH 2026-08-24 长任务中 prompt、tool configuration 和 middleware 的小错误会累积，而人工调 harness 成本高。AutoSaddler 把 harness 当代码：从 mini-batch 失败 trace 做深度诊断，生成有边界的结构化 patch，在同 batch 检查因果效果，再用 dev set 选更新并写入 EvoDAG，形成可持续版本。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实际执行深度失败诊断、结构化 patch、局部/held-out 验证和 durable harness 更新。没有运行 GAIA2、SWE-Bench Pro、Terminal-Bench 2.0 或论文的生产 harness；本地只验证优化循环、验证边界和 durable reuse。PlanBench-mini、120 episodes、seed 42：joint success 1.0000，12 次 failure diagnosis 与 durable update、108 次复用，平均成本 0.5440。  Harness 自动优化 Agent 交互策略学习：把轨迹反馈变成更新 为什么 AutoSaddler 把 harness 作为代码资产来修，而不只改一次 prompt？ 长程失败可能来自 prompt、工具配置或中间件的系统缺陷，结构化有界 patch 可持久修改并形成 EvoDAG 版本。深诊断先从失败 trace 解释瓶颈，再检验候选，不能把一次临时回答改好当可复用 harness 更新。 例如超时错误未反馈给模型，应改中间件状态处理；仅在当前回答里说“注意超时”不一定修复下一任务的同类问题。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autosaddler" data-paper-title="AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces Agent Microsoft / POSTECH 2026-08-24 长任务中 prompt、tool configuration 和 middleware 的小错误会累积，而人工调 harness 成本高。AutoSaddler 把 harness 当代码：从 mini-batch 失败 trace 做深度诊断，生成有边界的结构化 patch，在同 batch 检查因果效果，再用 dev set 选更新并写入 EvoDAG，形成可持续版本。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实际执行深度失败诊断、结构化 patch、局部/held-out 验证和 durable harness 更新。没有运行 GAIA2、SWE-Bench Pro、Terminal-Bench 2.0 或论文的生产 harness；本地只验证优化循环、验证边界和 durable reuse。PlanBench-mini、120 episodes、seed 42：joint success 1.0000，12 次 failure diagnosis 与 durable update、108 次复用，平均成本 0.5440。  Harness 自动优化 Agent 交互策略学习：把轨迹反馈变成更新 AutoSaddler 为什么希望一次任务的失败能转化为以后任务也可利用的流程改进？ 长任务中的提示、工具配置和中间件缺陷会反复造成相似失败，只修当前回答难以消除共享原因。AutoSaddler 从执行证据提出有边界的 harness 改动，并维护持续版本。候选补丁只是提案，只有实际验证和后续复用才能说明其作用，版本数不能代替能力证据。 教学例：多次漏掉提交前测试，可尝试修共享执行流程；手动补跑当前任务的测试只修了一次交付，并未保证以后不再遗漏。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <span id="paper-agent-research-autosaddler-3e805f29" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-311080cb265d3c16">为什么 AutoSaddler 把 harness 作为代码资产来修，而不只改一次 prompt？</h2>
+<h2 id="qa-311080cb265d3c16">AutoSaddler 为什么希望一次任务的失败能转化为以后任务也可利用的流程改进？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aautosaddler">AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft / POSTECH</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>长程失败可能来自 prompt、工具配置或中间件的系统缺陷，结构化有界 patch 可持久修改并形成 EvoDAG 版本。深诊断先从失败 trace 解释瓶颈，再检验候选，不能把一次临时回答改好当可复用 harness 更新。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如超时错误未反馈给模型，应改中间件状态处理；仅在当前回答里说“注意超时”不一定修复下一任务的同类问题。</p>
+<p><strong>答案：</strong>长任务中的提示、工具配置和中间件缺陷会反复造成相似失败，只修当前回答难以消除共享原因。AutoSaddler 从执行证据提出有边界的 harness 改动，并维护持续版本。候选补丁只是提案，只有实际验证和后续复用才能说明其作用，版本数不能代替能力证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：多次漏掉提交前测试，可尝试修共享执行流程；手动补跑当前任务的测试只修了一次交付，并未保证以后不再遗漏。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.23041">原论文</a> · <a href="../../../../agent-research/2608.23041-autosaddler/">实现解读</a> · <a href="#qa-311080cb265d3c16">问题链接</a></p>
 </details>
@@ -955,15 +955,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.23041">原论文</a> · <a href="../../../../agent-research/2608.23041-autosaddler/">实现解读</a> · <a href="#qa-829d316001b1c096">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autosaddler" data-paper-title="AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces Agent Microsoft / POSTECH 2026-08-24 长任务中 prompt、tool configuration 和 middleware 的小错误会累积，而人工调 harness 成本高。AutoSaddler 把 harness 当代码：从 mini-batch 失败 trace 做深度诊断，生成有边界的结构化 patch，在同 batch 检查因果效果，再用 dev set 选更新并写入 EvoDAG，形成可持续版本。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实际执行深度失败诊断、结构化 patch、局部/held-out 验证和 durable harness 更新。没有运行 GAIA2、SWE-Bench Pro、Terminal-Bench 2.0 或论文的生产 harness；本地只验证优化循环、验证边界和 durable reuse。PlanBench-mini、120 episodes、seed 42：joint success 1.0000，12 次 failure diagnosis 与 durable update、108 次复用，平均成本 0.5440。  Harness 自动优化 Agent 交互策略学习：把轨迹反馈变成更新 同 batch 检查效果与 dev set 选更新为什么是两个阶段？ 同批重跑帮助检查改动是否针对已观察失败发挥作用，独立 dev 再检验更广泛收益，减少只修原 case 的过拟合。两者都属于开发选择，最终 test 不可用于继续挑 patch；单次同批成功也不自动证明因果或泛化。 例如 patch 让本次缺字段调用成功，还需 dev 看是否伤害其他工具；不能只靠原失败变通过就永久发布。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autosaddler" data-paper-title="AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces Agent Microsoft / POSTECH 2026-08-24 长任务中 prompt、tool configuration 和 middleware 的小错误会累积，而人工调 harness 成本高。AutoSaddler 把 harness 当代码：从 mini-batch 失败 trace 做深度诊断，生成有边界的结构化 patch，在同 batch 检查因果效果，再用 dev set 选更新并写入 EvoDAG，形成可持续版本。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实际执行深度失败诊断、结构化 patch、局部/held-out 验证和 durable harness 更新。没有运行 GAIA2、SWE-Bench Pro、Terminal-Bench 2.0 或论文的生产 harness；本地只验证优化循环、验证边界和 durable reuse。PlanBench-mini、120 episodes、seed 42：joint success 1.0000，12 次 failure diagnosis 与 durable update、108 次复用，平均成本 0.5440。  Harness 自动优化 Agent 交互策略学习：把轨迹反馈变成更新 修改 harness 代码与更新底座模型权重，改变的是哪一种长期状态？ harness 修改影响提示、工具配置或中间件如何组织后续执行，底座权重更新则改变模型本身的行为分布。AutoSaddler 将前者作为可持续代码资产迭代，不需要把一次流程修复称为模型已经训练。两类改进可互补，但证据、版本与回退对象都应分别记录。 教学例：加入测试失败时的恢复分支是流程代码变化；若模型仍用原 checkpoint，就不能据此说它的参数学会了错误恢复。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-1064a26346ac437f">同 batch 检查效果与 dev set 选更新为什么是两个阶段？</h2>
+<h2 id="qa-1064a26346ac437f">修改 harness 代码与更新底座模型权重，改变的是哪一种长期状态？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aautosaddler">AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft / POSTECH</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同批重跑帮助检查改动是否针对已观察失败发挥作用，独立 dev 再检验更广泛收益，减少只修原 case 的过拟合。两者都属于开发选择，最终 test 不可用于继续挑 patch；单次同批成功也不自动证明因果或泛化。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 patch 让本次缺字段调用成功，还需 dev 看是否伤害其他工具；不能只靠原失败变通过就永久发布。</p>
+<p><strong>答案：</strong>harness 修改影响提示、工具配置或中间件如何组织后续执行，底座权重更新则改变模型本身的行为分布。AutoSaddler 将前者作为可持续代码资产迭代，不需要把一次流程修复称为模型已经训练。两类改进可互补，但证据、版本与回退对象都应分别记录。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：加入测试失败时的恢复分支是流程代码变化；若模型仍用原 checkpoint，就不能据此说它的参数学会了错误恢复。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.23041">原论文</a> · <a href="../../../../agent-research/2608.23041-autosaddler/">实现解读</a> · <a href="#qa-1064a26346ac437f">问题链接</a></p>
 </details>
@@ -1273,15 +1273,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.16156">原论文</a> · <a href="../../../../agent-research/2608.16156-trca/">实现解读</a> · <a href="#qa-92f4d424dd06d08a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:trca" data-paper-title="TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents Agent Authors did not disclose affiliation 2026-08-17 无需成功 anchor，从每个状态转移的 Evidence、Execution、Invalidity rubric 构造基础和 breakthrough reward。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  Agentic RL 过程奖励 Agent 交互策略学习：把轨迹反馈变成更新 Evidence、Execution、Invalidity 与单一“这一步好不好”分数有何区别？ 分项揭示贡献或失败来自信息、操作还是无效性，便于核对奖励方向和诊断。总分相同不表示过程问题相同，rubric本身仍需可靠的观测依据。 示意：证据充分但工具参数错，与没有证据却调用成功，可以有相同总分而需不同修复。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:trca" data-paper-title="TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents Agent Authors did not disclose affiliation 2026-08-17 无需成功 anchor，从每个状态转移的 Evidence、Execution、Invalidity rubric 构造基础和 breakthrough reward。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  Agentic RL 过程奖励 Agent 交互策略学习：把轨迹反馈变成更新 TRCA 无需成功 anchor，与依赖成功参照轨迹的反馈相比，前提有何不同？ 依赖成功参照的方案首先需要取得可比较的成功执行，TRCA则从实际状态转移的rubric构造基础和突破奖励，不要求先有成功anchor。这是反馈来源的前提差异，不能仅凭它宣称实际任务成功率更高。 示意：两条完整轨迹都失败时，其中一次转移仍可能收集有效证据，逐转移rubric仍可提供反馈。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-0b6075a31659322e">Evidence、Execution、Invalidity 与单一“这一步好不好”分数有何区别？</h2>
+<h2 id="qa-0b6075a31659322e">TRCA 无需成功 anchor，与依赖成功参照轨迹的反馈相比，前提有何不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atrca">TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Authors did not disclose affiliation</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>分项揭示贡献或失败来自信息、操作还是无效性，便于核对奖励方向和诊断。总分相同不表示过程问题相同，rubric本身仍需可靠的观测依据。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>证据充分但工具参数错，与没有证据却调用成功，可以有相同总分而需不同修复。</p>
+<p><strong>答案：</strong>依赖成功参照的方案首先需要取得可比较的成功执行，TRCA则从实际状态转移的rubric构造基础和突破奖励，不要求先有成功anchor。这是反馈来源的前提差异，不能仅凭它宣称实际任务成功率更高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两条完整轨迹都失败时，其中一次转移仍可能收集有效证据，逐转移rubric仍可提供反馈。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.16156">原论文</a> · <a href="../../../../agent-research/2608.16156-trca/">实现解读</a> · <a href="#qa-0b6075a31659322e">问题链接</a></p>
 </details>

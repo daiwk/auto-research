@@ -27,16 +27,16 @@ hide:
 <p class="ar-learning-status" data-learning-status role="status">140 个问题 · 35 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:hge" data-paper-title="Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion 搜广推与 LLM 应用 Meituan 2026-10-23 搜索广告排序的是门店、直播间等“容器”，成交却发生在内部商品上。单条成交金额既稀疏又高方差，简单把门店当成一个商品，容易忽略低价高频与高价低频商品的组合。HGE 先用 Hybrid Set-Aware Encoder 编码 top-K 商品的竞争关系，再在自注意力之后拼入用户、门店、上下文与查询。Proxy-Label Learning 分开预测门店是否成交、成交后每个商品的购买概率和数量； 论文私有日志训练和线上实验成本过高，不复现（审查 DONE）；实现范围为 HSAE、PLL、RCEF 的可微 L1 组件，不是完整广告模型。论文私有日志训练和线上实验成本过高，不复现（审查 DONE）；不据此宣称本地获得线上收益或接入 Evolve。HierarchicalGTV 接受外部商品 embedding、位置向量、上下文、价格和通用回归输出，不收答案/成交标签。以小尺寸可微模块验证：独立逐商品 Eq.5 参考、上下文不影响前置 MHSA、位置/价格/残差移除负控、融合两端点、商品概率之和可大于1、所有参数和输入的有限非零梯度。种子为42/43/44；指标只是合成机制误差和梯度，不是推荐准确率、收入或校准效果。  广告价值预估 层次化多任务学习 搜广推 学习信号、多任务与反馈偏差 HGE 为什么把门店成交分为是否成交、商品概率和购买数量？ 容器 GMV 同时受成交机会、内部组合和件数影响，单一金额监督稀疏且方差高。分解提供更密代理任务，再用价格重组成交易额，残差补 top-K 未覆盖部分。分解依赖标签定义，不表示这些概率可以任意独立相乘或已完成因果解释。 示意：门店常卖多件低价品与偶卖一件高价品可有相似总额，分开预测概率和件数才能表达两种结构，而不是只记同一个均值。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:hge" data-paper-title="Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion 搜广推与 LLM 应用 Meituan 2026-10-23 搜索广告排序的是门店、直播间等“容器”，成交却发生在内部商品上。单条成交金额既稀疏又高方差，简单把门店当成一个商品，容易忽略低价高频与高价低频商品的组合。HGE 先用 Hybrid Set-Aware Encoder 编码 top-K 商品的竞争关系，再在自注意力之后拼入用户、门店、上下文与查询。Proxy-Label Learning 分开预测门店是否成交、成交后每个商品的购买概率和数量； 论文私有日志训练和线上实验成本过高，不复现（审查 DONE）；实现范围为 HSAE、PLL、RCEF 的可微 L1 组件，不是完整广告模型。论文私有日志训练和线上实验成本过高，不复现（审查 DONE）；不据此宣称本地获得线上收益或接入 Evolve。HierarchicalGTV 接受外部商品 embedding、位置向量、上下文、价格和通用回归输出，不收答案/成交标签。以小尺寸可微模块验证：独立逐商品 Eq.5 参考、上下文不影响前置 MHSA、位置/价格/残差移除负控、融合两端点、商品概率之和可大于1、所有参数和输入的有限非零梯度。种子为42/43/44；指标只是合成机制误差和梯度，不是推荐准确率、收入或校准效果。  广告价值预估 层次化多任务学习 搜广推 学习信号、多任务与反馈偏差 HGE 的 top-K 商品是要展示的 K 个推荐结果，还是同一容器内部的输入？ 是同一候选门店或直播间内部的商品输入，模型最终估计的是容器价值。不同容器各有自己的商品集合，集合注意力先描述内部关系，再拼接用户、查询等上下文。top-K 只覆盖部分库存，不等于整店全部商品，更不是一次直接输出 K 家门店。 示意：两家店各输入三件商品，总共六件内部商品参与编码，最终仍得到两家店的价值分数；不能把这六件商品误当最终推荐列表。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-hge-0554c3a1" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c32f38715552fb0a">HGE 为什么把门店成交分为是否成交、商品概率和购买数量？</h2>
+<h2 id="qa-c32f38715552fb0a">HGE 的 top-K 商品是要展示的 K 个推荐结果，还是同一容器内部的输入？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Ahge">Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meituan</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>容器 GMV 同时受成交机会、内部组合和件数影响，单一金额监督稀疏且方差高。分解提供更密代理任务，再用价格重组成交易额，残差补 top-K 未覆盖部分。分解依赖标签定义，不表示这些概率可以任意独立相乘或已完成因果解释。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>门店常卖多件低价品与偶卖一件高价品可有相似总额，分开预测概率和件数才能表达两种结构，而不是只记同一个均值。</p>
+<p><strong>答案：</strong>是同一候选门店或直播间内部的商品输入，模型最终估计的是容器价值。不同容器各有自己的商品集合，集合注意力先描述内部关系，再拼接用户、查询等上下文。top-K 只覆盖部分库存，不等于整店全部商品，更不是一次直接输出 K 家门店。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两家店各输入三件商品，总共六件内部商品参与编码，最终仍得到两家店的价值分数；不能把这六件商品误当最终推荐列表。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.32420v1">原论文</a> · <a href="../../../../recommendation-components/2610.32420-hge/">实现解读</a> · <a href="#qa-c32f38715552fb0a">问题链接</a></p>
 </details>
@@ -186,16 +186,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20293">原论文</a> · <a href="../../../../reproductions/2610.20293-casi/">实现解读</a> · <a href="#qa-beb70d44bd05caec">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:promptshift" data-paper-title="Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems 搜广推与 LLM 应用 University of Electronic Science and Technology of China 2026-09-28 在行为历史不变时比较身份提示与无身份参考列表，用 Drift 与 SliceShift 量化身份线索偏移，再依据用户主流度自适应混合原分与逆群体流行度。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行列表指标与后处理 reranker；身份 slice 和相关性由公开 fixture 给出，不生成真实用户画像。执行列表指标与后处理 reranker；身份 slice 和相关性由公开 fixture 给出，不生成真实用户画像。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  llm-recommendation identity-cue-drift fairness 搜广推 学习信号、多任务与反馈偏差 PromptShift 为什么把 Drift 和 SliceShift 分成两个诊断量？ Drift 描述列表成员与次序变化，SliceShift 描述群体流行度方向，两者可能不同：列表换了却无群体方向，或少量替换就改变群体分布。固定历史只改身份提示有助隔离敏感性，但仍不足证明社会因果歧视。 示意：两个等流行电影互换会产生位次漂移，换成群体热门片则还可能有 SliceShift；不能只看列表不同就断言偏向某群体。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:promptshift" data-paper-title="Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems 搜广推与 LLM 应用 University of Electronic Science and Technology of China 2026-09-28 在行为历史不变时比较身份提示与无身份参考列表，用 Drift 与 SliceShift 量化身份线索偏移，再依据用户主流度自适应混合原分与逆群体流行度。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行列表指标与后处理 reranker；身份 slice 和相关性由公开 fixture 给出，不生成真实用户画像。执行列表指标与后处理 reranker；身份 slice 和相关性由公开 fixture 给出，不生成真实用户画像。三种子诊断见 metrics/mechanism-seeds42-44.json。其中 diagnostic_only=true，不能进入正式能力排名。  llm-recommendation identity-cue-drift fairness 搜广推 学习信号、多任务与反馈偏差 PromptShift 发现列表 Drift 很大，能直接断定推荐准确率下降吗？ 不能。Drift 描述相对参考列表改变多少，不含每个新旧物品是否更相关的完整判断。新列表可能更好、更差或只是不同；SliceShift 也只补群体流行度方向。若要讨论质量，需要独立相关性或用户反馈证据，不能把敏感性指标直接改名为准确率损失。 示意：两部同样适合用户的电影互换会增加位次漂移，却未必伤体验；换成无关热门片也会漂移，但要靠相关性评价才能分清。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-promptshift-7e539145" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-12d0a4e2ffd1606c">PromptShift 为什么把 Drift 和 SliceShift 分成两个诊断量？</h2>
+<h2 id="qa-12d0a4e2ffd1606c">PromptShift 发现列表 Drift 很大，能直接断定推荐准确率下降吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apromptshift">Measuring and Mitigating Identity-Cue Preference Drift in LLM-based Recommender Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Electronic Science and Technology of China</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>Drift 描述列表成员与次序变化，SliceShift 描述群体流行度方向，两者可能不同：列表换了却无群体方向，或少量替换就改变群体分布。固定历史只改身份提示有助隔离敏感性，但仍不足证明社会因果歧视。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>两个等流行电影互换会产生位次漂移，换成群体热门片则还可能有 SliceShift；不能只看列表不同就断言偏向某群体。</p>
+<p><strong>答案：</strong>不能。Drift 描述相对参考列表改变多少，不含每个新旧物品是否更相关的完整判断。新列表可能更好、更差或只是不同；SliceShift 也只补群体流行度方向。若要讨论质量，需要独立相关性或用户反馈证据，不能把敏感性指标直接改名为准确率损失。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两部同样适合用户的电影互换会增加位次漂移，却未必伤体验；换成无关热门片也会漂移，但要靠相关性评价才能分清。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.34229">原论文</a> · <a href="../../../../reproductions/2609.34229-promptshift/">实现解读</a> · <a href="#qa-12d0a4e2ffd1606c">问题链接</a></p>
 </details>
@@ -769,16 +769,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.22518">原论文</a> · <a href="../../../../reproductions/2607.22518-pinequalizer/">实现解读</a> · <a href="#qa-429c749e92f0ed36">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ramp" data-paper-title="RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways 搜广推与 LLM 应用 Huawei Ireland Research Center / University College Dublin 2026-07-20 隐私选择、权限或平台限制会让同一广告模型在部分流量上拿不到个性化字段。RAMP 不把缺失值简单填零，而是显式维护 personalized 与 non-personalized 两条路径，用可用性 mask 控制输出，并通过 prediction alignment 把富特征路径的知识蒸馏给受限路径。 复现保真度：核心机制复现。复现保真度：核心机制复现。真实训练 masked 双路径与 prediction alignment；私有工业 CVR 数据未复刻。MovieLens 行为向量代理受限个性化字段、类型特征代理公共广告字段；训练中实际执行双路径、输出 masking 和富特征 teacher 到受限路径的 KL 对齐，测试专门评估无个性化字段流量。  advertising privacy distillation missing-features 搜广推 学习信号、多任务与反馈偏差 RAMP 的 personalized 与 public 路径为什么不是同一输入的两套名字？ 前者可使用获准个性化字段，后者只依公共内容与上下文，输入权限不同。mask 根据字段可用性选择，prediction alignment 将训练知识迁到受限路径，但不能在线补读不可用个人数据。两路职责是访问边界而非仅模型容量。 示意：未授权用户只能用广告内容与场景，不能因为教师训练见过行为就实时再读取它；知识迁移和数据访问是两件事。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ramp" data-paper-title="RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways 搜广推与 LLM 应用 Huawei Ireland Research Center / University College Dublin 2026-07-20 隐私选择、权限或平台限制会让同一广告模型在部分流量上拿不到个性化字段。RAMP 不把缺失值简单填零，而是显式维护 personalized 与 non-personalized 两条路径，用可用性 mask 控制输出，并通过 prediction alignment 把富特征路径的知识蒸馏给受限路径。 复现保真度：核心机制复现。复现保真度：核心机制复现。真实训练 masked 双路径与 prediction alignment；私有工业 CVR 数据未复刻。MovieLens 行为向量代理受限个性化字段、类型特征代理公共广告字段；训练中实际执行双路径、输出 masking 和富特征 teacher 到受限路径的 KL 对齐，测试专门评估无个性化字段流量。  advertising privacy distillation missing-features 搜广推 学习信号、多任务与反馈偏差 RAMP 的 non-personalized 路径是否意味着给所有请求同一个预测？ 不是。它不使用受限个性化字段，仍能依据广告内容、公共属性和请求上下文产生不同结果。无个人历史不等于没有任何输入，完全常数预测反而丢掉合法可用证据。具体公共字段应遵守来源与权限定义，不能以 public 名称包装个人标识。 示意：同一匿名用户在雨天看雨具广告与晴天看食品广告，公共内容和场景不同，预测可以不同；这无需读取他的私人浏览史。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-ramp-9687450e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-917b7d6f5d4a1bc0">RAMP 的 personalized 与 public 路径为什么不是同一输入的两套名字？</h2>
+<h2 id="qa-917b7d6f5d4a1bc0">RAMP 的 non-personalized 路径是否意味着给所有请求同一个预测？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aramp">RAMP: Robust Ad Recommendation Under Limited Personalized-Feature Availability via Masking and Alignment Pathways</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Huawei Ireland Research Center / University College Dublin</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者可使用获准个性化字段，后者只依公共内容与上下文，输入权限不同。mask 根据字段可用性选择，prediction alignment 将训练知识迁到受限路径，但不能在线补读不可用个人数据。两路职责是访问边界而非仅模型容量。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>未授权用户只能用广告内容与场景，不能因为教师训练见过行为就实时再读取它；知识迁移和数据访问是两件事。</p>
+<p><strong>答案：</strong>不是。它不使用受限个性化字段，仍能依据广告内容、公共属性和请求上下文产生不同结果。无个人历史不等于没有任何输入，完全常数预测反而丢掉合法可用证据。具体公共字段应遵守来源与权限定义，不能以 public 名称包装个人标识。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一匿名用户在雨天看雨具广告与晴天看食品广告，公共内容和场景不同，预测可以不同；这无需读取他的私人浏览史。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.17473">原论文</a> · <a href="../../../../reproductions/2607.17473-ramp/">实现解读</a> · <a href="#qa-917b7d6f5d4a1bc0">问题链接</a></p>
 </details>
@@ -928,16 +928,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12578">原论文</a> · <a href="../../../../reproductions/2607.12578-danet/">实现解读</a> · <a href="#qa-55f9897e4488e735">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:scalr" data-paper-title="Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems 搜广推与 LLM 应用 Meta 2026-05-29 目标域 conversion 极稀疏，而同一用户在其他产品 surface 上有丰富行为。传统 cross-domain recommendation 把迁移逻辑耦合进模型参数；SCALR 先把 source event 翻译成目标域格式的 synthetic user-item event，再让任何下游模型像读取普通目标域数据一样训练。随机采样保留概率分布和 catalog 多样性，避免 top-k 反复生成少数头部 item。 Fidelity: 核心机制复现。本地从重叠用户估计跨域 item translation distribution，真实生成随机采样与 deterministic top-k 两套 synthetic events，再用相同下游协议比较。本地 genre 不是 Meta 的跨产品 surface，也没有 conversion label、隐私管线或多源生产生成服务。结果只验证概率翻译、随机生成和分布覆盖机制，不能外推论文线上 CVR。本地对照口径：基线为相同 source events、相同每事件生成预算的 deterministic top-k translation，实验组改为 SCALR 概率采样；  cross-domain synthetic-data sampling conversion data-augmentation 搜广推 学习信号、多任务与反馈偏差 SCALR为什么在数据层翻译跨域行为？ 目标转化稀疏而其他surface丰富，先生成目标格式的用户物品事件，让下游模型像读普通数据一样训练，迁移逻辑与具体排序结构解耦。 例如从另一产品的内容行为生成可用于目标产品训练的候选事件。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:scalr" data-paper-title="Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems 搜广推与 LLM 应用 Meta 2026-05-29 目标域 conversion 极稀疏，而同一用户在其他产品 surface 上有丰富行为。传统 cross-domain recommendation 把迁移逻辑耦合进模型参数；SCALR 先把 source event 翻译成目标域格式的 synthetic user-item event，再让任何下游模型像读取普通目标域数据一样训练。随机采样保留概率分布和 catalog 多样性，避免 top-k 反复生成少数头部 item。 Fidelity: 核心机制复现。本地从重叠用户估计跨域 item translation distribution，真实生成随机采样与 deterministic top-k 两套 synthetic events，再用相同下游协议比较。本地 genre 不是 Meta 的跨产品 surface，也没有 conversion label、隐私管线或多源生产生成服务。结果只验证概率翻译、随机生成和分布覆盖机制，不能外推论文线上 CVR。本地对照口径：基线为相同 source events、相同每事件生成预算的 deterministic top-k translation，实验组改为 SCALR 概率采样；  cross-domain synthetic-data sampling conversion data-augmentation 搜广推 学习信号、多任务与反馈偏差 SCALR翻译出的target事件，表示用户真的在目标域发生过该行为吗？ 不表示。它根据源域事件与条件分布采样出合成目标域训练记录，目的是让下游模型获得可使用的迁移数据。必须保留合成身份与权重，不能把这些记录混写成真实曝光、点击或转化日志；统计迁移不等于观测事实。 教学例子：源域看过甲后，系统合成目标域乙的训练事件；这不是在审计日志中声称该用户真的点击过乙。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-scalr-f567c58a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c660befc3863b6da">SCALR为什么在数据层翻译跨域行为？</h2>
+<h2 id="qa-c660befc3863b6da">SCALR翻译出的target事件，表示用户真的在目标域发生过该行为吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Ascalr">Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>目标转化稀疏而其他surface丰富，先生成目标格式的用户物品事件，让下游模型像读普通数据一样训练，迁移逻辑与具体排序结构解耦。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如从另一产品的内容行为生成可用于目标产品训练的候选事件。</p>
+<p><strong>答案：</strong>不表示。它根据源域事件与条件分布采样出合成目标域训练记录，目的是让下游模型获得可使用的迁移数据。必须保留合成身份与权重，不能把这些记录混写成真实曝光、点击或转化日志；统计迁移不等于观测事实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>源域看过甲后，系统合成目标域乙的训练事件；这不是在审计日志中声称该用户真的点击过乙。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.00282">原论文</a> · <a href="../../../../reproductions/2606.00282-scalr/">实现解读</a> · <a href="#qa-c660befc3863b6da">问题链接</a></p>
 </details>
@@ -955,15 +955,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.00282">原论文</a> · <a href="../../../../reproductions/2606.00282-scalr/">实现解读</a> · <a href="#qa-9e2a137aa9d4e7ec">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:scalr" data-paper-title="Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems 搜广推与 LLM 应用 Meta 2026-05-29 目标域 conversion 极稀疏，而同一用户在其他产品 surface 上有丰富行为。传统 cross-domain recommendation 把迁移逻辑耦合进模型参数；SCALR 先把 source event 翻译成目标域格式的 synthetic user-item event，再让任何下游模型像读取普通目标域数据一样训练。随机采样保留概率分布和 catalog 多样性，避免 top-k 反复生成少数头部 item。 Fidelity: 核心机制复现。本地从重叠用户估计跨域 item translation distribution，真实生成随机采样与 deterministic top-k 两套 synthetic events，再用相同下游协议比较。本地 genre 不是 Meta 的跨产品 surface，也没有 conversion label、隐私管线或多源生产生成服务。结果只验证概率翻译、随机生成和分布覆盖机制，不能外推论文线上 CVR。本地对照口径：基线为相同 source events、相同每事件生成预算的 deterministic top-k translation，实验组改为 SCALR 概率采样；  cross-domain synthetic-data sampling conversion data-augmentation 搜广推 学习信号、多任务与反馈偏差 概率采样翻译与每源事件固定取argmax有什么区别？ 随机采样保留条件质量与目录覆盖，argmax容易反复只产少数头部物品。多样性并不保证事件真实，合成权重与真实数据需明示。 例如源意图可能对应多类目标商品，不必所有用户都映到同一个头部款。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:scalr" data-paper-title="Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems 搜广推与 LLM 应用 Meta 2026-05-29 目标域 conversion 极稀疏，而同一用户在其他产品 surface 上有丰富行为。传统 cross-domain recommendation 把迁移逻辑耦合进模型参数；SCALR 先把 source event 翻译成目标域格式的 synthetic user-item event，再让任何下游模型像读取普通目标域数据一样训练。随机采样保留概率分布和 catalog 多样性，避免 top-k 反复生成少数头部 item。 Fidelity: 核心机制复现。本地从重叠用户估计跨域 item translation distribution，真实生成随机采样与 deterministic top-k 两套 synthetic events，再用相同下游协议比较。本地 genre 不是 Meta 的跨产品 surface，也没有 conversion label、隐私管线或多源生产生成服务。结果只验证概率翻译、随机生成和分布覆盖机制，不能外推论文线上 CVR。本地对照口径：基线为相同 source events、相同每事件生成预算的 deterministic top-k translation，实验组改为 SCALR 概率采样；  cross-domain synthetic-data sampling conversion data-augmentation 搜广推 学习信号、多任务与反馈偏差 SCALR的数据层迁移，与为每个下游模型分别加跨域网络模块有什么不同？ 数据层方案先把迁移结果写成目标格式事件，下游可沿普通数据接口训练；模型层方案把跨域逻辑绑定到特定结构。前者便于复用，却仍受合成分布质量限制，不能因接口统一就认定对所有排序器效果相同。 教学例子：同一批合成事件可交给不同目标模型；若迁移只存在于某种专用注意力层，换模型就需重新接入。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-87ad21447ca81b7c">概率采样翻译与每源事件固定取argmax有什么区别？</h2>
+<h2 id="qa-87ad21447ca81b7c">SCALR的数据层迁移，与为每个下游模型分别加跨域网络模块有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Ascalr">Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>随机采样保留条件质量与目录覆盖，argmax容易反复只产少数头部物品。多样性并不保证事件真实，合成权重与真实数据需明示。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如源意图可能对应多类目标商品，不必所有用户都映到同一个头部款。</p>
+<p><strong>答案：</strong>数据层方案先把迁移结果写成目标格式事件，下游可沿普通数据接口训练；模型层方案把跨域逻辑绑定到特定结构。前者便于复用，却仍受合成分布质量限制，不能因接口统一就认定对所有排序器效果相同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一批合成事件可交给不同目标模型；若迁移只存在于某种专用注意力层，换模型就需重新接入。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.00282">原论文</a> · <a href="../../../../reproductions/2606.00282-scalr/">实现解读</a> · <a href="#qa-87ad21447ca81b7c">问题链接</a></p>
 </details>
@@ -1511,16 +1511,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.20215">原论文</a> · <a href="../../../../reproductions/2601.20215-easq/">实现解读</a> · <a href="#qa-09ba941e97be607b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:podcast-mtl" data-paper-title="Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify 搜广推与 LLM 应用 Spotify 2026-01-05 新 podcast 缺少广告点击与播放数据。论文联合训练 ads 和 organic promotions，共享 user/content/context 表征，从数据丰富任务迁移到冷启动任务，并以不平衡处理和梯度平衡抑制 negative transfer。 Fidelity: 核心机制复现。执行 shared low-rank multi-task representation 和冷物品分桶。MovieLens 电影与 genre 代理 podcast/ad 特征，没有 Spotify impression、bid 和曝光校准日志。本地对照口径：基线是 single-task popularity/content ranker；实验组联合 organic/promotion 两任务，NDCG@10 0.03540→0.02810，相对 -20.63%，本地出现 negative transfer。  cold-start multi-task ads 搜广推 学习信号、多任务与反馈偏差 Podcast MTL 为什么把广告与自然推广作为相关但不同任务？ 两者共享用户、内容和场景线索，可从数据丰富任务帮助缺反馈新播客，但曝光动机与用户反应不同，必须保留任务头和权重。相关性不是同义标签，负迁移可能出现，来源公开代理就是负结果而非自动成功迁移。 示意：用户愿意自然播放某节目不代表愿点其广告；共享声音风格和主题知识有用，两个点击概率却不应直接强制相同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:podcast-mtl" data-paper-title="Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify 搜广推与 LLM 应用 Spotify 2026-01-05 新 podcast 缺少广告点击与播放数据。论文联合训练 ads 和 organic promotions，共享 user/content/context 表征，从数据丰富任务迁移到冷启动任务，并以不平衡处理和梯度平衡抑制 negative transfer。 Fidelity: 核心机制复现。执行 shared low-rank multi-task representation 和冷物品分桶。MovieLens 电影与 genre 代理 podcast/ad 特征，没有 Spotify impression、bid 和曝光校准日志。本地对照口径：基线是 single-task popularity/content ranker；实验组联合 organic/promotion 两任务，NDCG@10 0.03540→0.02810，相对 -20.63%，本地出现 negative transfer。  cold-start multi-task ads 搜广推 学习信号、多任务与反馈偏差 Podcast MTL 中“冷启动”是完全没有内容信息，还是缺少目标任务反馈？ 这里关键是新播客缺少广告点击和播放反馈，不表示标题、主题等内容也为空。共享的 user、content、context 可提供已有线索，但不能把这些线索当成已观测广告效果。区分信息缺口，才能知道迁移补的是训练信号，而非凭空生成一份真实点击日志。 示意：新节目已有介绍和主持人信息，却还没有广告曝光；模型能使用内容判断相近受众，但不能说它已经验证了这批人会点击该广告。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-podcast-mtl-fc67da12" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ce83c5c320e4d33e">Podcast MTL 为什么把广告与自然推广作为相关但不同任务？</h2>
+<h2 id="qa-ce83c5c320e4d33e">Podcast MTL 中“冷启动”是完全没有内容信息，还是缺少目标任务反馈？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apodcast-mtl">Cold-Starting Podcast Ads and Promotions with Multi-Task Learning on Spotify</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Spotify</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>两者共享用户、内容和场景线索，可从数据丰富任务帮助缺反馈新播客，但曝光动机与用户反应不同，必须保留任务头和权重。相关性不是同义标签，负迁移可能出现，来源公开代理就是负结果而非自动成功迁移。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>用户愿意自然播放某节目不代表愿点其广告；共享声音风格和主题知识有用，两个点击概率却不应直接强制相同。</p>
+<p><strong>答案：</strong>这里关键是新播客缺少广告点击和播放反馈，不表示标题、主题等内容也为空。共享的 user、content、context 可提供已有线索，但不能把这些线索当成已观测广告效果。区分信息缺口，才能知道迁移补的是训练信号，而非凭空生成一份真实点击日志。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>新节目已有介绍和主持人信息，却还没有广告曝光；模型能使用内容判断相近受众，但不能说它已经验证了这批人会点击该广告。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.02306">原论文</a> · <a href="../../../../reproductions/2601.02306-podcast-mtl/">实现解读</a> · <a href="#qa-ce83c5c320e4d33e">问题链接</a></p>
 </details>
@@ -1723,16 +1723,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2406.07932">原论文</a> · <a href="../../../../reproductions/2406.07932-cwm/">实现解读</a> · <a href="#qa-1a473e83d1d8b5a0">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ple" data-paper-title="Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations 搜广推与 LLM 应用 Tencent 2020-09-22 MMoE 仍让所有 experts 在所有任务间共享，任务冲突强时难以同时保留共性与个性。PLE 将 experts 分成共享组和任务专属组，通过 CGC 门控逐层提取共享与特定信息，减少跷跷板现象。 复现级别：核心机制复现。复现级别：核心机制复现。实际训练共享/任务专属 experts、CGC gates 和独立 heads；腾讯视频生产规模未复刻。本地对照口径：基线为 MMoE，实验组为共享与任务专属 experts 的 CGC/PLE；平均任务 AUC 相对 +1.34%，见 metrics/movielens-100k-seeds42-44.json。  ranking classic multi-task mixture-of-experts 搜广推 学习信号、多任务与反馈偏差 PLE 的 shared expert 和 task-specific expert 分别承载什么共享假设？ 共享组学习任务共性，专属组保留目标特有信息，CGC gate 逐层抽取合适组合，使多任务不必都改同一专家。分组是结构先验，不保证专家真的语义可解释；共享仍有梯度冲突，专属容量也需足够数据训练。 示意：点击与购买共享品类偏好，购买专属组学价格承受，点击专属组学新鲜感；但名字叫价格专家并不自动证明它学到了价格。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ple" data-paper-title="Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations 搜广推与 LLM 应用 Tencent 2020-09-22 MMoE 仍让所有 experts 在所有任务间共享，任务冲突强时难以同时保留共性与个性。PLE 将 experts 分成共享组和任务专属组，通过 CGC 门控逐层提取共享与特定信息，减少跷跷板现象。 复现级别：核心机制复现。复现级别：核心机制复现。实际训练共享/任务专属 experts、CGC gates 和独立 heads；腾讯视频生产规模未复刻。本地对照口径：基线为 MMoE，实验组为共享与任务专属 experts 的 CGC/PLE；平均任务 AUC 相对 +1.34%，见 metrics/movielens-100k-seeds42-44.json。  ranking classic multi-task mixture-of-experts 搜广推 学习信号、多任务与反馈偏差 PLE 所说的“跷跷板现象”，为什么可能被平均任务 AUC 掩盖？ 它指多任务训练中一个目标改善、另一个退化的取舍，平均值会把两者抵消，看不出受损目标。应保留每任务指标及其共同训练条件，再判断共享是否合适。它与一次测量噪声不同，也不意味着所有目标必须取得完全相同的改善幅度。 示意：示意性地，点击 AUC 加两个点、购买减一个点，平均仍会上升；只看平均会遗漏购买目标退化，不能因此宣布两个任务都获益。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-ple-a2bf42a4" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0451f6496f52aa1f">PLE 的 shared expert 和 task-specific expert 分别承载什么共享假设？</h2>
+<h2 id="qa-0451f6496f52aa1f">PLE 所说的“跷跷板现象”，为什么可能被平均任务 AUC 掩盖？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aple">Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tencent</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>共享组学习任务共性，专属组保留目标特有信息，CGC gate 逐层抽取合适组合，使多任务不必都改同一专家。分组是结构先验，不保证专家真的语义可解释；共享仍有梯度冲突，专属容量也需足够数据训练。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>点击与购买共享品类偏好，购买专属组学价格承受，点击专属组学新鲜感；但名字叫价格专家并不自动证明它学到了价格。</p>
+<p><strong>答案：</strong>它指多任务训练中一个目标改善、另一个退化的取舍，平均值会把两者抵消，看不出受损目标。应保留每任务指标及其共同训练条件，再判断共享是否合适。它与一次测量噪声不同，也不意味着所有目标必须取得完全相同的改善幅度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>示意性地，点击 AUC 加两个点、购买减一个点，平均仍会上升；只看平均会遗漏购买目标退化，不能因此宣布两个任务都获益。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://doi.org/10.1145/3383313.3412236">原论文</a> · <a href="../../../../reproductions/recsys2020-ple-ple/">实现解读</a> · <a href="#qa-0451f6496f52aa1f">问题链接</a></p>
 </details>

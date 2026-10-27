@@ -67,29 +67,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24854">原论文</a> · <a href="../../../../agent-research/2610.24854-rpl/">实现解读</a> · <a href="#qa-82a8516fcb0b64ae">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rpl" data-paper-title="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning Agent KAIST AI / Meta Superintelligence Labs 2026-10-17 固定检索pipeline把召回数量、融合和返回上下文绑在一起。RPL让策略生成短程序组合稀疏/稠密召回、RRF、去重和重排，只将显式打印的证据交回模型。为解决稀疏奖励难探索的问题，保留策略已有query，对最后一次检索程序做受语法约束的结构变异；执行核验通过后生成续写轨迹，再穿插蒸馏与RL。§3及附录B 成本过高，不复现（审查 DONE）；RetrievalProgram最多4个不同query，宽度取论文阶梯，最多20篇显式输出；execute只解释数据类并调用注入的SDK，不解析或执行Python源码。多路检索实际执行RRF，单路、列表内部或跨路遇到相同ID不同内容时统一拒绝，只有内容完全一致的重复才去重；重排不得注入召回外文档。RRF常数60是明确的本地惯例；输出是文档数上限，不是假装实现了论文2048-token观测限制。  检索与工具 可编程检索与结构变异 Agent 工具与协作执行：把计划变成可检查的动作 程序核验通过但最终答案错误时，监督该保留哪部分？ 可保留验证过的程序监督，但屏蔽错误答案 span，环境观察始终不作为生成监督。verifier 的 gold 不能传给程序或续写 actor；本地只解释 typed grammar 和注入 SDK，不执行任意 Python，也未实现完整 token mask 与 SFT 训练器。 例如扩大召回确实找到了支持文档，但模型仍答错，程序部分可用于学习，错误答案文字不能继续作为正确示范。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rpl" data-paper-title="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning Agent KAIST AI / Meta Superintelligence Labs 2026-10-17 固定检索pipeline把召回数量、融合和返回上下文绑在一起。RPL让策略生成短程序组合稀疏/稠密召回、RRF、去重和重排，只将显式打印的证据交回模型。为解决稀疏奖励难探索的问题，保留策略已有query，对最后一次检索程序做受语法约束的结构变异；执行核验通过后生成续写轨迹，再穿插蒸馏与RL。§3及附录B 成本过高，不复现（审查 DONE）；RetrievalProgram最多4个不同query，宽度取论文阶梯，最多20篇显式输出；execute只解释数据类并调用注入的SDK，不解析或执行Python源码。多路检索实际执行RRF，单路、列表内部或跨路遇到相同ID不同内容时统一拒绝，只有内容完全一致的重复才去重；重排不得注入召回外文档。RRF常数60是明确的本地惯例；输出是文档数上限，不是假装实现了论文2048-token观测限制。  检索与工具 可编程检索与结构变异 Agent 工具与协作执行：把计划变成可检查的动作 本地 RPL 的受限程序怎样控制召回规模、融合和最终输出？ 程序最多使用四个不同 query，召回与重排宽度取规定阶梯，多路召回要实际融合，并限制显式打印的文档数量。同 ID 异内容统一拒绝，重排不能注入召回外文档。本地只解释数据类和注入 SDK，文档数预算也不等于原文 token 限制或任意 Python 执行能力。 教学例：召回二十条再打印三条是合法的计算与观察分离；若重排偷偷补入一条未召回文档，就破坏了证据来源合同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-a5e7b293a86bb7f2">程序核验通过但最终答案错误时，监督该保留哪部分？</h2>
+<h2 id="qa-a5e7b293a86bb7f2">本地 RPL 的受限程序怎样控制召回规模、融合和最终输出？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arpl">Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · KAIST AI / Meta Superintelligence Labs</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>可保留验证过的程序监督，但屏蔽错误答案 span，环境观察始终不作为生成监督。verifier 的 gold 不能传给程序或续写 actor；本地只解释 typed grammar 和注入 SDK，不执行任意 Python，也未实现完整 token mask 与 SFT 训练器。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如扩大召回确实找到了支持文档，但模型仍答错，程序部分可用于学习，错误答案文字不能继续作为正确示范。</p>
+<p><strong>答案：</strong>程序最多使用四个不同 query，召回与重排宽度取规定阶梯，多路召回要实际融合，并限制显式打印的文档数量。同 ID 异内容统一拒绝，重排不能注入召回外文档。本地只解释数据类和注入 SDK，文档数预算也不等于原文 token 限制或任意 Python 执行能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：召回二十条再打印三条是合法的计算与观察分离；若重排偷偷补入一条未召回文档，就破坏了证据来源合同。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、成本与复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24854">原论文</a> · <a href="../../../../agent-research/2610.24854-rpl/">实现解读</a> · <a href="#qa-a5e7b293a86bb7f2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:world-of-swecraft" data-paper-title="World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds Agent Massachusetts Institute of Technology 2026-10-16 传统代码Agent评测通常分配一个预定义issue，难以衡量多个维护者如何自主找任务、分工和跨仓库改进。Software World由真实依赖库构成，让Agent用持久记忆、issue、PR和发布进行长期协作，以不可见的下游包检查群体产出是否真正有用。SW-Env用Harbor会话和Forgejo模拟软件维护环境，通信权限、仓库所有权与会话预算可独立控制；SW-Eval在隐藏依赖包上安装冻结版本，测正确性与指令计数，避免只优化自己看到的微基准。多会话持久状态不是无限增长的单条对话。 仅研究资料，成本过高，不复现（审查 DONE）。仅研究资料，成本过高，不复现（审查 DONE）。没有本地软件世界、Agent实验或能力指标。完整复现需要多仓库构建、隔离部署、代码执行沙箱、真实模型会话及大量隐藏下游评测；原论文规模已明显超过单卡A100/A30与Mac低成本预算。成本过高，不复现（审查 DONE）。不克隆和执行未知项目脚本、不伪造本地Agent成绩、不保留自动运行队列，也不宣称Evolve已接入。  多Agent协作 软件生态与自进化评测 Agent 工具与协作执行：把计划变成可检查的动作 隐藏下游包为什么比维护者自己可见的微基准更能检验协作产出？ 维护者可能只优化看见的用例，而真实依赖者会组合库接口、暴露行为回归。SW-Eval 用冻结隐藏下游检查正确性和指令计数，评估跨仓库改动是否有用；隐藏测试仍只覆盖规定包和任务，不能证明所有用户场景都改善。 例如数组库把一个公开微基准加速，却破坏依赖库边界行为，隐藏下游安装与测试会暴露这种局部优化代价。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:world-of-swecraft" data-paper-title="World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds Agent Massachusetts Institute of Technology 2026-10-16 传统代码Agent评测通常分配一个预定义issue，难以衡量多个维护者如何自主找任务、分工和跨仓库改进。Software World由真实依赖库构成，让Agent用持久记忆、issue、PR和发布进行长期协作，以不可见的下游包检查群体产出是否真正有用。SW-Env用Harbor会话和Forgejo模拟软件维护环境，通信权限、仓库所有权与会话预算可独立控制；SW-Eval在隐藏依赖包上安装冻结版本，测正确性与指令计数，避免只优化自己看到的微基准。多会话持久状态不是无限增长的单条对话。 仅研究资料，成本过高，不复现（审查 DONE）。仅研究资料，成本过高，不复现（审查 DONE）。没有本地软件世界、Agent实验或能力指标。完整复现需要多仓库构建、隔离部署、代码执行沙箱、真实模型会话及大量隐藏下游评测；原论文规模已明显超过单卡A100/A30与Mac低成本预算。成本过高，不复现（审查 DONE）。不克隆和执行未知项目脚本、不伪造本地Agent成绩、不保留自动运行队列，也不宣称Evolve已接入。  多Agent协作 软件生态与自进化评测 Agent 工具与协作执行：把计划变成可检查的动作 World of SWEcraft 为什么把软件任务扩展成多个维护者共同演进的包生态？ 单个 Agent 修一个已给定 issue，不能完整反映跨项目依赖与多人维护的长期影响。World of SWEcraft 让维护者持续改变各自软件包，改动会影响下游使用者，因而需要兼顾本地进展和协作交付。群体活动多不代表生态更好，应由实际下游功能与资源结果检验。 教学例：一个包升级函数签名后，自己的测试通过，下游两个包却无法导入；这类跨维护者后果正是单 issue 测试不易覆盖的。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-world-of-swecraft-5a1942f1" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-10201c0f398592ac">隐藏下游包为什么比维护者自己可见的微基准更能检验协作产出？</h2>
+<h2 id="qa-10201c0f398592ac">World of SWEcraft 为什么把软件任务扩展成多个维护者共同演进的包生态？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aworld-of-swecraft">World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Massachusetts Institute of Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>维护者可能只优化看见的用例，而真实依赖者会组合库接口、暴露行为回归。SW-Eval 用冻结隐藏下游检查正确性和指令计数，评估跨仓库改动是否有用；隐藏测试仍只覆盖规定包和任务，不能证明所有用户场景都改善。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如数组库把一个公开微基准加速，却破坏依赖库边界行为，隐藏下游安装与测试会暴露这种局部优化代价。</p>
+<p><strong>答案：</strong>单个 Agent 修一个已给定 issue，不能完整反映跨项目依赖与多人维护的长期影响。World of SWEcraft 让维护者持续改变各自软件包，改动会影响下游使用者，因而需要兼顾本地进展和协作交付。群体活动多不代表生态更好，应由实际下游功能与资源结果检验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个包升级函数签名后，自己的测试通过，下游两个包却无法导入；这类跨维护者后果正是单 issue 测试不易覆盖的。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24061v1">原论文</a> · <a href="../../../../agent-research/2610.24061-world-of-swecraft/">实现解读</a> · <a href="#qa-10201c0f398592ac">问题链接</a></p>
 </details>
@@ -173,29 +173,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21281">原论文</a> · <a href="../../../../agent-research/2610.21281-diviner/">实现解读</a> · <a href="#qa-1ac48fe99644b2db">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:diviner" data-paper-title="Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure Agent Meta 2026-10-15 生产事故的症状可能跨推荐、排序、数据、配置和算力服务传播。LLM 能调用工具并不代表它能可靠诊断：超时不等于无异常，历史相似事故不证明本次根因，事后总结也不能作为事故发生时的证据。原文 §4–5用 Encode／Execute／Evaluate／Adapt 四阶段闭环组织领域知识、Lead–worker 调查、事后审查和 owner 批准的知识更新。运行中只调整本次调查计划，不能自行发布新的共享工作流或执行缓解操作。 成本过高，不复现（审查 DONE），亦不伪造公开事故替代结论。这些是合同诊断，不是 RCA 成功率。component_only / L1 CPU 协议组件。实现证据接纳、假设状态与人工批准合同，不运行生产 RCA Agent，不进入 Evolve 晋级。每 seed 产生 24 个有来源的人工事件，随机化工具状态、可获得时间和数值。独立参考条件重算可接纳数；负对照把任何非空工具响应都当证据，从而保留错误接纳计数。另测未批准发布被拒和 owner 批准后版本前进。接口不接真实事故，也不生成根因答案。  工具使用与可靠性 生产事故诊断与证据治理 Agent 工具与协作执行：把计划变成可检查的动作 timeout 与 valid_empty 对假设支持分别意味着什么？ timeout、partial、denied 不能支持或反驳假设，表示未知；valid_empty 是成功查询后的有效缺失，可用于相应反证，但不能证明正向发现。本地只验证时间、状态和 owner gate，不生成根因答案，人工事件通过不能称生产 RCA 成功。 例如查不到错误日志若因超时不能说服务正常；只有查询确实完成且窗口覆盖正确时，空结果才可作为有限反证。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:diviner" data-paper-title="Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure Agent Meta 2026-10-15 生产事故的症状可能跨推荐、排序、数据、配置和算力服务传播。LLM 能调用工具并不代表它能可靠诊断：超时不等于无异常，历史相似事故不证明本次根因，事后总结也不能作为事故发生时的证据。原文 §4–5用 Encode／Execute／Evaluate／Adapt 四阶段闭环组织领域知识、Lead–worker 调查、事后审查和 owner 批准的知识更新。运行中只调整本次调查计划，不能自行发布新的共享工作流或执行缓解操作。 成本过高，不复现（审查 DONE），亦不伪造公开事故替代结论。这些是合同诊断，不是 RCA 成功率。component_only / L1 CPU 协议组件。实现证据接纳、假设状态与人工批准合同，不运行生产 RCA Agent，不进入 Evolve 晋级。每 seed 产生 24 个有来源的人工事件，随机化工具状态、可获得时间和数值。独立参考条件重算可接纳数；负对照把任何非空工具响应都当证据，从而保留错误接纳计数。另测未批准发布被拒和 owner 批准后版本前进。接口不接真实事故，也不生成根因答案。  工具使用与可靠性 生产事故诊断与证据治理 Agent 工具与协作执行：把计划变成可检查的动作 事故证据进入 EvidenceLedger 前，需要绑定哪些身份和时间边界？ 记录需要对应当前事故、目标、调查时间窗口，并区分事件何时发生与证据何时可获得；可获得时间不得晚于本次 as-of。缺少这些约束，其他服务日志或事后总结都可能被误当成当时证据。本地只校验这些来源合同和治理 gate，不据此生成或证明真实根因。 教学例：凌晨的异常日志直到早上才汇总，不能用于声称凌晨调查已经掌握它；另一事故的同名报错也不能直接混入。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-f0e7a7715b53924c">timeout 与 valid_empty 对假设支持分别意味着什么？</h2>
+<h2 id="qa-f0e7a7715b53924c">事故证据进入 EvidenceLedger 前，需要绑定哪些身份和时间边界？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adiviner">Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>timeout、partial、denied 不能支持或反驳假设，表示未知；valid_empty 是成功查询后的有效缺失，可用于相应反证，但不能证明正向发现。本地只验证时间、状态和 owner gate，不生成根因答案，人工事件通过不能称生产 RCA 成功。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如查不到错误日志若因超时不能说服务正常；只有查询确实完成且窗口覆盖正确时，空结果才可作为有限反证。</p>
+<p><strong>答案：</strong>记录需要对应当前事故、目标、调查时间窗口，并区分事件何时发生与证据何时可获得；可获得时间不得晚于本次 as-of。缺少这些约束，其他服务日志或事后总结都可能被误当成当时证据。本地只校验这些来源合同和治理 gate，不据此生成或证明真实根因。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：凌晨的异常日志直到早上才汇总，不能用于声称凌晨调查已经掌握它；另一事故的同名报错也不能直接混入。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、成本与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21281">原论文</a> · <a href="../../../../agent-research/2610.21281-diviner/">实现解读</a> · <a href="#qa-f0e7a7715b53924c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gemini-minecraft" data-paper-title="A team of Gemini 4 Argon agents beats Minecraft" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="A team of Gemini 4 Argon agents beats Minecraft Agent Google DeepMind 2026-10-15 四个执行 Agent 通过编写 JavaScript 程序操纵 Mineflayer 角色；Observer 汇总世界状态，聊天和笔记传递进度。研究重点是长期协作、程序化工具与持久状态，而不是新训练目标。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。没有本地执行 Agent、游戏成功率或 GPU 验证，不接入 Evolve。无本地 capability 指标、训练结果或 Evolve 算子；不创建虚构成功回执。范围见本批验收合同。只完成资料、原图和成本审查，不调用商业模型或运行游戏。原文长时交互超过本轮单卡/本地预算，完整实验标注成本过高，不复现（审查 DONE）。  多 Agent 协作 长期规划与工具使用 Agent 工具与协作执行：把计划变成可检查的动作 Observer 和共享笔记为什么不能取代各角色真实环境反馈？ Observer 汇总世界状态、聊天笔记传递进展，帮助四个 JavaScript/Mineflayer 执行角色协调，但记录可能延迟或不完整。动作后仍需实际观察验证，不能因为同伴写“已采集”就当库存真实增加；研究重点是协作与持久状态而非新训练损失。 例如一名角色笔记说桥已完成，另一角色过桥前仍要面对真实地形；若桥被破坏，旧笔记不能覆盖当前观察。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:gemini-minecraft" data-paper-title="A team of Gemini 4 Argon agents beats Minecraft" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="A team of Gemini 4 Argon agents beats Minecraft Agent Google DeepMind 2026-10-15 四个执行 Agent 通过编写 JavaScript 程序操纵 Mineflayer 角色；Observer 汇总世界状态，聊天和笔记传递进度。研究重点是长期协作、程序化工具与持久状态，而不是新训练目标。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。没有本地执行 Agent、游戏成功率或 GPU 验证，不接入 Evolve。无本地 capability 指标、训练结果或 Evolve 算子；不创建虚构成功回执。范围见本批验收合同。只完成资料、原图和成本审查，不调用商业模型或运行游戏。原文长时交互超过本轮单卡/本地预算，完整实验标注成本过高，不复现（审查 DONE）。  多 Agent 协作 长期规划与工具使用 Agent 工具与协作执行：把计划变成可检查的动作 Minecraft 长程通关为什么适合研究团队协作，而不只是单次指令跟随？ 通关涉及探索、资源收集、制作与战斗，多个目标在时间和资源上相互依赖，执行还会不断遇到新状态。该工作研究多 Agent 分工、观察与共享信息如何支撑长期推进。一次完整通关可展示系统能做什么，但不能由单次记录推导成功概率或单独模块的因果收益。 教学例：一名角色采矿、另一名收集食物，进展必须协调；若采矿者实际未拿到材料，共享笔记写“已完成”也不能完成制作。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-gemini-minecraft-c1e2611e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e601316159b12b01">Observer 和共享笔记为什么不能取代各角色真实环境反馈？</h2>
+<h2 id="qa-e601316159b12b01">Minecraft 长程通关为什么适合研究团队协作，而不只是单次指令跟随？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Agemini-minecraft">A team of Gemini 4 Argon agents beats Minecraft</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>Observer 汇总世界状态、聊天笔记传递进展，帮助四个 JavaScript/Mineflayer 执行角色协调，但记录可能延迟或不完整。动作后仍需实际观察验证，不能因为同伴写“已采集”就当库存真实增加；研究重点是协作与持久状态而非新训练损失。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一名角色笔记说桥已完成，另一角色过桥前仍要面对真实地形；若桥被破坏，旧笔记不能覆盖当前观察。</p>
+<p><strong>答案：</strong>通关涉及探索、资源收集、制作与战斗，多个目标在时间和资源上相互依赖，执行还会不断遇到新状态。该工作研究多 Agent 分工、观察与共享信息如何支撑长期推进。一次完整通关可展示系统能做什么，但不能由单次记录推导成功概率或单独模块的因果收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一名角色采矿、另一名收集食物，进展必须协调；若采矿者实际未拿到材料，共享笔记写“已完成”也不能完成制作。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22319">原论文</a> · <a href="../../../../agent-research/2610.22319-gemini-minecraft/">实现解读</a> · <a href="#qa-e601316159b12b01">问题链接</a></p>
 </details>
@@ -239,16 +239,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22319">原论文</a> · <a href="../../../../agent-research/2610.22319-gemini-minecraft/">实现解读</a> · <a href="#qa-e5f10c30d9efc8b8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:jev-agent-harness" data-paper-title="JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs Agent University of Illinois Urbana-Champaign 2026-10-15 Agent 不需要每一步都让昂贵 LLM 生成长文本，但离线多选题高准确率也不保证闭环不出错。JevAgentHarness 在 agent 自己访问的 shadow trajectories 上，分别校准工具、参数等决策的委派阈值，低置信交回 LLM，并报告成功／费用／关键路径延迟。AgentDecision-4B 另用到达过的错误后状态训练，避免只模仿成功轨迹。原文 §2–4、附录 A/D 对单 A100/A30 或 Mac 的本轮预算，完整训练、真实工具任务和多臂评测成本过高，不复现（审查 DONE）。component_only / L1 CPU。实现按决策类别拟合阈值、低置信回退及声明成本会计；没有 Jev／LLM 调用、AgentDecision-4B 训练或统一 Evolve 接入。每 seed 的低／高置信值随机化，40 行 shadow 数值 fixture 拟合不同阈值，在 12 个独立公共请求上实际调用概率 callback 或强模型 callback。负对照把阈值压低到 0.5，保留错误委派；NaN 输出触发回退；  工具使用与可靠性 System One/JEV置信委派与回退 Agent 工具与协作执行：把计划变成可检查的动作 为什么委派阈值要在 Agent 自己访问的 shadow trajectory 上校准？ 离线多选题分布不一定覆盖闭环执行中的错误后状态，校准应看到实际策略会到达的决策。不同工具或参数类别的价值与强模型代价也不同，因此阈值按类别和效用估计，而不是把一个准确率数字直接变成通用置信门。 例如工具选择在常见状态很准，但一次参数错误后会进入罕见页面，shadow 轨迹才能暴露这类部署状态。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:jev-agent-harness" data-paper-title="JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs Agent University of Illinois Urbana-Champaign 2026-10-15 Agent 不需要每一步都让昂贵 LLM 生成长文本，但离线多选题高准确率也不保证闭环不出错。JevAgentHarness 在 agent 自己访问的 shadow trajectories 上，分别校准工具、参数等决策的委派阈值，低置信交回 LLM，并报告成功／费用／关键路径延迟。AgentDecision-4B 另用到达过的错误后状态训练，避免只模仿成功轨迹。原文 §2–4、附录 A/D 对单 A100/A30 或 Mac 的本轮预算，完整训练、真实工具任务和多臂评测成本过高，不复现（审查 DONE）。component_only / L1 CPU。实现按决策类别拟合阈值、低置信回退及声明成本会计；没有 Jev／LLM 调用、AgentDecision-4B 训练或统一 Evolve 接入。每 seed 的低／高置信值随机化，40 行 shadow 数值 fixture 拟合不同阈值，在 12 个独立公共请求上实际调用概率 callback 或强模型 callback。负对照把阈值压低到 0.5，保留错误委派；NaN 输出触发回退；  工具使用与可靠性 System One/JEV置信委派与回退 Agent 工具与协作执行：把计划变成可检查的动作 Jev Agent Harness 为什么不把 Agent 的每次小判断都交给同样昂贵的推理？ 工具流程包含大量范围有限的判断，有些适合廉价决策器，有些需要继续推理。该研究关注如何在明确的决策接口中委派并保留回退，让节省调用与错误代价共同决定使用范围。便宜判断器并不自动适合开放任务，必须在它实际遇到的状态上检查可靠性。 教学例：是否保留一条候选记录可尝试廉价判断；涉及缺失证据的开放解释则可能仍需主模型，不能因两者都能输出是非就混用。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-jev-agent-harness-91c2ebf3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-6c94f465af04e5cf">为什么委派阈值要在 Agent 自己访问的 shadow trajectory 上校准？</h2>
+<h2 id="qa-6c94f465af04e5cf">Jev Agent Harness 为什么不把 Agent 的每次小判断都交给同样昂贵的推理？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ajev-agent-harness">JevAgentHarness: Benchmarking, Deploying and Training Decision Models That Share Control with LLMs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>离线多选题分布不一定覆盖闭环执行中的错误后状态，校准应看到实际策略会到达的决策。不同工具或参数类别的价值与强模型代价也不同，因此阈值按类别和效用估计，而不是把一个准确率数字直接变成通用置信门。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如工具选择在常见状态很准，但一次参数错误后会进入罕见页面，shadow 轨迹才能暴露这类部署状态。</p>
+<p><strong>答案：</strong>工具流程包含大量范围有限的判断，有些适合廉价决策器，有些需要继续推理。该研究关注如何在明确的决策接口中委派并保留回退，让节省调用与错误代价共同决定使用范围。便宜判断器并不自动适合开放任务，必须在它实际遇到的状态上检查可靠性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：是否保留一条候选记录可尝试廉价判断；涉及缺失证据的开放解释则可能仍需主模型，不能因两者都能输出是非就混用。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21412">原论文</a> · <a href="../../../../agent-research/2610.21412-jev-agent-harness/">实现解读</a> · <a href="#qa-6c94f465af04e5cf">问题链接</a></p>
 </details>
@@ -292,16 +292,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21412">原论文</a> · <a href="../../../../agent-research/2610.21412-jev-agent-harness/">实现解读</a> · <a href="#qa-92de0166e9d9fec7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:leash" data-paper-title="LEASH: Uncertainty-Aware Weak-to-Strong Escalation and Oversight for Computer-Use Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LEASH: Uncertainty-Aware Weak-to-Strong Escalation and Oversight for Computer-Use Agents Agent Simular 2026-10-15 小模型先执行、必要时交给强模型可降低成本，但“何时接管”和“强模型接管后是否走偏”是两个问题。LEASH 利用弱模型表示与历史成功/失败参考的距离，不额外训练一个监控网络；初始和运行时 gate 决定 handoff，之后定期用弱模型的未执行 Shadow 动作表示监督强模型，并在需要时要求其重新审视策略。 完整多模型多配置实验成本高且需要 GUI/远程接口，成本过高，不复现（审查 DONE）。Shadow 高分回调在两次改变强动作后停止，未执行探针动作。component_only / L1 CPU 机制诊断。输入是明确生成的合成向量，不是模型 hidden states；统计校准和 Shadow callback 不等于完成 OSWorld 或真实 GUI Agent。每 seed 使用 30 个合成 reference task、90 action 向量及 12 个隔离 evaluation task；  专家模型编排 公共评测与协议 Agent 工具与协作执行：把计划变成可检查的动作 弱到强 handoff 与接管后 Shadow 监督为什么是两个问题？ handoff 判断弱模型何时需要帮助，Shadow 在强模型执行后继续检查其路线是否接近失败参考。强模型能力较高也可能走偏，因此第一次接管不等于监督结束；Shadow 动作仅作表示探针，不能真实执行改变环境。 例如弱模型不确定如何操作设置而交给强模型，后者若开始修改无关选项，弱模型可用未执行探针提醒重新审视。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:leash" data-paper-title="LEASH: Uncertainty-Aware Weak-to-Strong Escalation and Oversight for Computer-Use Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="LEASH: Uncertainty-Aware Weak-to-Strong Escalation and Oversight for Computer-Use Agents Agent Simular 2026-10-15 小模型先执行、必要时交给强模型可降低成本，但“何时接管”和“强模型接管后是否走偏”是两个问题。LEASH 利用弱模型表示与历史成功/失败参考的距离，不额外训练一个监控网络；初始和运行时 gate 决定 handoff，之后定期用弱模型的未执行 Shadow 动作表示监督强模型，并在需要时要求其重新审视策略。 完整多模型多配置实验成本高且需要 GUI/远程接口，成本过高，不复现（审查 DONE）。Shadow 高分回调在两次改变强动作后停止，未执行探针动作。component_only / L1 CPU 机制诊断。输入是明确生成的合成向量，不是模型 hidden states；统计校准和 Shadow callback 不等于完成 OSWorld 或真实 GUI Agent。每 seed 使用 30 个合成 reference task、90 action 向量及 12 个隔离 evaluation task；  专家模型编排 公共评测与协议 Agent 工具与协作执行：把计划变成可检查的动作 LEASH 为什么研究让弱模型工作、在风险较高时再交给强模型？ 一直调用强模型成本较高，始终依赖弱模型又可能在关键状态失败。LEASH 研究由弱模型先执行，并用风险信号决定何时接管，试图在任务结果与调用资源之间折中。接管并非免费，风险分数也不是天然校准的概率，效果需要按实际完整任务核算。 教学例：小模型能处理常规文件搜索，面对罕见的恢复状态时交给强模型；是否划算，要看接管次数以及最终是否真正交付。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-leash-edca97db" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d41c3c5dadc1bc88">弱到强 handoff 与接管后 Shadow 监督为什么是两个问题？</h2>
+<h2 id="qa-d41c3c5dadc1bc88">LEASH 为什么研究让弱模型工作、在风险较高时再交给强模型？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aleash">LEASH: Uncertainty-Aware Weak-to-Strong Escalation and Oversight for Computer-Use Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Simular</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>handoff 判断弱模型何时需要帮助，Shadow 在强模型执行后继续检查其路线是否接近失败参考。强模型能力较高也可能走偏，因此第一次接管不等于监督结束；Shadow 动作仅作表示探针，不能真实执行改变环境。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如弱模型不确定如何操作设置而交给强模型，后者若开始修改无关选项，弱模型可用未执行探针提醒重新审视。</p>
+<p><strong>答案：</strong>一直调用强模型成本较高，始终依赖弱模型又可能在关键状态失败。LEASH 研究由弱模型先执行，并用风险信号决定何时接管，试图在任务结果与调用资源之间折中。接管并非免费，风险分数也不是天然校准的概率，效果需要按实际完整任务核算。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小模型能处理常规文件搜索，面对罕见的恢复状态时交给强模型；是否划算，要看接管次数以及最终是否真正交付。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22280">原论文</a> · <a href="../../../../agent-research/2610.22280-leash/">实现解读</a> · <a href="#qa-d41c3c5dadc1bc88">问题链接</a></p>
 </details>
@@ -345,16 +345,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22280">原论文</a> · <a href="../../../../agent-research/2610.22280-leash/">实现解读</a> · <a href="#qa-18c5ccd7b7190180">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:structural-signal-retriever" data-paper-title="SSR: Structural Signal Retriever for Scalable Agent Discovery in LLM-Orchestrated Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SSR: Structural Signal Retriever for Scalable Agent Discovery in LLM-Orchestrated Multi-Agent Systems Agent State University of Campinas 2026-10-15 多 Agent 注册表扩大后，把全部 Agent Card 塞给 LLM 会增加输入和选择成本。SSR §III 不训练额外模型，而是从明确的能力字段提取可解释词法信号，以倒排表预先缩小候选池。这里 structural 指来源于 name、description、skills、tags、examples、tools 的字段，不是句法图或隐向量。核心词法机制是已有IDF检索的特定集成，不应包装为新语义模型。 完整实验成本过高，不复现（审查 DONE）。本地CPU诊断记录保存可审计逐seed数据。无数据下载、LLM调用或GPU需求。固定 revision synthetic-agent-cards-and-validation-trajectories@oct17-supplement-protocols-v1；seeds42/43/44各生成64张合成能力card及12个查询，检索器只接收能力文本，接口没有gold answer或目标card参数。  工具使用与路由 Agent发现与词法检索 Agent 工具与协作执行：把计划变成可检查的动作 SSR 的 structural signal 为什么不是句法图或语义向量？ 信号来自 Agent Card 的 name、description、skills、tags、examples、tools 等明确字段，经词法处理形成 unigram 和相邻 bigram，再用 IDF 倒排检索。structural 指字段来源组织，不能据名称把它包装为理解语义结构的新模型。 例如 card 写“pdf extract text”会产生词项与相邻组合，查询同词可匹配；语义相近但无共同词不一定能命中。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:structural-signal-retriever" data-paper-title="SSR: Structural Signal Retriever for Scalable Agent Discovery in LLM-Orchestrated Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SSR: Structural Signal Retriever for Scalable Agent Discovery in LLM-Orchestrated Multi-Agent Systems Agent State University of Campinas 2026-10-15 多 Agent 注册表扩大后，把全部 Agent Card 塞给 LLM 会增加输入和选择成本。SSR §III 不训练额外模型，而是从明确的能力字段提取可解释词法信号，以倒排表预先缩小候选池。这里 structural 指来源于 name、description、skills、tags、examples、tools 的字段，不是句法图或隐向量。核心词法机制是已有IDF检索的特定集成，不应包装为新语义模型。 完整实验成本过高，不复现（审查 DONE）。本地CPU诊断记录保存可审计逐seed数据。无数据下载、LLM调用或GPU需求。固定 revision synthetic-agent-cards-and-validation-trajectories@oct17-supplement-protocols-v1；seeds42/43/44各生成64张合成能力card及12个查询，检索器只接收能力文本，接口没有gold answer或目标card参数。  工具使用与路由 Agent发现与词法检索 Agent 工具与协作执行：把计划变成可检查的动作 SSR 为什么要先解决大目录里“该找哪个 Agent”的发现问题？ 多个 Agent 各有能力描述，若每次全部送入模型会增加选择成本。SSR 用公开描述中的离散词信号构造倒排检索，先形成候选池再交给后续决策。它提供可解释的字面匹配，不能理解没有共同信号的改写，因此无命中时应承认空池，而非伪称语义召回。 教学例：任务含“发票”，能力描述也出现该信号时可建立候选；目录只写另一种无重叠术语时，SSR 可能确实找不到。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-structural-signal-retriever-c1b3c953" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-164006635fc0f00e">SSR 的 structural signal 为什么不是句法图或语义向量？</h2>
+<h2 id="qa-164006635fc0f00e">SSR 为什么要先解决大目录里“该找哪个 Agent”的发现问题？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astructural-signal-retriever">SSR: Structural Signal Retriever for Scalable Agent Discovery in LLM-Orchestrated Multi-Agent Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · State University of Campinas</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>信号来自 Agent Card 的 name、description、skills、tags、examples、tools 等明确字段，经词法处理形成 unigram 和相邻 bigram，再用 IDF 倒排检索。structural 指字段来源组织，不能据名称把它包装为理解语义结构的新模型。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 card 写“pdf extract text”会产生词项与相邻组合，查询同词可匹配；语义相近但无共同词不一定能命中。</p>
+<p><strong>答案：</strong>多个 Agent 各有能力描述，若每次全部送入模型会增加选择成本。SSR 用公开描述中的离散词信号构造倒排检索，先形成候选池再交给后续决策。它提供可解释的字面匹配，不能理解没有共同信号的改写，因此无命中时应承认空池，而非伪称语义召回。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：任务含“发票”，能力描述也出现该信号时可建立候选；目录只写另一种无重叠术语时，SSR 可能确实找不到。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21113">原论文</a> · <a href="../../../../agent-research/2610.21113-structural-signal-retriever/">实现解读</a> · <a href="#qa-164006635fc0f00e">问题链接</a></p>
 </details>
@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21113">原论文</a> · <a href="../../../../agent-research/2610.21113-structural-signal-retriever/">实现解读</a> · <a href="#qa-b24b4dfd98b871d6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tracer" data-paper-title="TRACER: Trajectory-Aware Tool Retrieval for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="TRACER: Trajectory-Aware Tool Retrieval for LLM Agents Agent Microsoft 2026-10-15 把完整工具目录塞进 prompt 会占用大量上下文，纯工具描述相似度又忽略历史执行路径。TRACER 用 turn 内完整调用前缀索引执行 trie，候选是该前缀在训练中实际出现过的下一工具；边上记录频率和发生该转移时的完整 conversation context 均值。训练两个五维线性 head，逐状态决定经验频率/上下文先验的权重和温度；未知前缀或低置信时回到全目录向量检索。原图出处：原文 Figure 6：完整 TRACER 架构。 以单 A100/A30/Mac 的预算，成本过高，不复现（审查 DONE）；本地仅 component_only / CPU 算子诊断。本地仅 component_only / CPU 算子诊断。真正优化的是可学习混合与温度；使用合成三维表示而非原始语义 encoder，也没有 LLM 选择或执行工具。高 fixture recall 不是 Agent 能力，promotion_eligible: false。每 seed 使用 40 train trajectories / 20 held-out trajectories，每条三步，120 个训练步和 60 个测试步。  tool-retrieval Agent 工具与协作执行：把计划变成可检查的动作 为什么 trie 索引要用 turn 内完整工具前缀，而不只用上一工具？ 完整前缀区分相同最后一步但处于不同工作流的状态，下一工具候选来自该前缀在训练中真实出现的转移。只看上一工具会混合不同任务路径；未知前缀或低置信还需全目录回退，不能强行选择图里没有支持的工具。 例如两个流程都最后调用搜索，一个已完成消歧、另一个尚未完成，完整前缀可帮助区分下一步该读详情还是继续查询。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tracer" data-paper-title="TRACER: Trajectory-Aware Tool Retrieval for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="TRACER: Trajectory-Aware Tool Retrieval for LLM Agents Agent Microsoft 2026-10-15 把完整工具目录塞进 prompt 会占用大量上下文，纯工具描述相似度又忽略历史执行路径。TRACER 用 turn 内完整调用前缀索引执行 trie，候选是该前缀在训练中实际出现过的下一工具；边上记录频率和发生该转移时的完整 conversation context 均值。训练两个五维线性 head，逐状态决定经验频率/上下文先验的权重和温度；未知前缀或低置信时回到全目录向量检索。原图出处：原文 Figure 6：完整 TRACER 架构。 以单 A100/A30/Mac 的预算，成本过高，不复现（审查 DONE）；本地仅 component_only / CPU 算子诊断。本地仅 component_only / CPU 算子诊断。真正优化的是可学习混合与温度；使用合成三维表示而非原始语义 encoder，也没有 LLM 选择或执行工具。高 fixture recall 不是 Agent 能力，promotion_eligible: false。每 seed 使用 40 train trajectories / 20 held-out trajectories，每条三步，120 个训练步和 60 个测试步。  tool-retrieval Agent 工具与协作执行：把计划变成可检查的动作 大型工具目录为什么会让 Agent 花很多上下文，却仍选不到正确的下一步？ 把所有工具说明常驻上下文会带来输入成本，静态 Top-K 又可能遗漏当前流程接下来需要的接口。TRACER 关注从已发生的调用经验与当前上下文中预测可用工具子集，让工具发现适应执行进程。预测只是候选支持，不能替代参数验证或真实调用成功。 教学例：完成身份查询后更可能需要读取账户记录，而不是再看整套上千工具目录；若用户转而取消任务，当前上下文也应改变推荐。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-tracer-f2f8d03e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e1efe2d57b68e50f">为什么 trie 索引要用 turn 内完整工具前缀，而不只用上一工具？</h2>
+<h2 id="qa-e1efe2d57b68e50f">大型工具目录为什么会让 Agent 花很多上下文，却仍选不到正确的下一步？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atracer">TRACER: Trajectory-Aware Tool Retrieval for LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>完整前缀区分相同最后一步但处于不同工作流的状态，下一工具候选来自该前缀在训练中真实出现的转移。只看上一工具会混合不同任务路径；未知前缀或低置信还需全目录回退，不能强行选择图里没有支持的工具。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两个流程都最后调用搜索，一个已完成消歧、另一个尚未完成，完整前缀可帮助区分下一步该读详情还是继续查询。</p>
+<p><strong>答案：</strong>把所有工具说明常驻上下文会带来输入成本，静态 Top-K 又可能遗漏当前流程接下来需要的接口。TRACER 关注从已发生的调用经验与当前上下文中预测可用工具子集，让工具发现适应执行进程。预测只是候选支持，不能替代参数验证或真实调用成功。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：完成身份查询后更可能需要读取账户记录，而不是再看整套上千工具目录；若用户转而取消任务，当前上下文也应改变推荐。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21267">原论文</a> · <a href="../../../../agent-research/2610.21267-tracer/">实现解读</a> · <a href="#qa-e1efe2d57b68e50f">问题链接</a></p>
 </details>
@@ -504,16 +504,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.20780">原论文</a> · <a href="../../../../agent-research/2610.20780-aria/">实现解读</a> · <a href="#qa-7108f55dcf61f947">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:jev-workflow" data-paper-title="When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows Agent Nanjing University 2026-10-09 这是一篇评测研究，不是新的 self-improvement 算法。比较决策延迟/费用与端到端成功交付；failed recovery、premature completion 和失败开销计入资源每成功，而非只报告单步省时。事实来源：原文全文。 当前是 core_mechanism / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为同task/run的原配置与替换decision配置；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  agent-evaluation delivered-outcome latency-cost-recovery Agent 工具与协作执行：把计划变成可检查的动作 为何单步决策更快仍可能使每成功交付成本更高？ 更快决策若带来更多错误、恢复或过早完成，成功数会下降，失败尝试也消耗资源。研究以全部尝试成本除实际成功数评价交付效率，提醒局部省时与端到端有效性不同；这是一项评测分析，不是新的自改进算法。 例如原系统十次成功八次花八十元，新系统十次花六十元却只成功四次，每成功成本从十元变成十五元。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:jev-workflow" data-paper-title="When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows Agent Nanjing University 2026-10-09 这是一篇评测研究，不是新的 self-improvement 算法。比较决策延迟/费用与端到端成功交付；failed recovery、premature completion 和失败开销计入资源每成功，而非只报告单步省时。事实来源：原文全文。 当前是 core_mechanism / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为同task/run的原配置与替换decision配置；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  agent-evaluation delivered-outcome latency-cost-recovery Agent 工具与协作执行：把计划变成可检查的动作 评估廉价决策替代时，为什么要把“完成一次交付”而非一次调用当作单位？ Agent 是由多步决策、工具和重试组成的工作流，局部省资源可能增加后续失败与重跑。Jev Workflow 关注完整交付所需的总资源，使采用廉价判断的收益与它造成的额外尝试放在同一口径。不同成功集合应分别报告，不能只摘一项局部延迟说明系统更高效。 教学例：每次判断省半秒，却多失败三次才完成任务，用户真正支付的是所有尝试；需要按最后交付累计计算。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-jev-workflow-32efeb08" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e21801a615beb116">为何单步决策更快仍可能使每成功交付成本更高？</h2>
+<h2 id="qa-e21801a615beb116">评估廉价决策替代时，为什么要把“完成一次交付”而非一次调用当作单位？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ajev-workflow">When Faster Decisions Do Not Make Better Agents: An Empirical Study of Jev in Agent Workflows</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Nanjing University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>更快决策若带来更多错误、恢复或过早完成，成功数会下降，失败尝试也消耗资源。研究以全部尝试成本除实际成功数评价交付效率，提醒局部省时与端到端有效性不同；这是一项评测分析，不是新的自改进算法。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如原系统十次成功八次花八十元，新系统十次花六十元却只成功四次，每成功成本从十元变成十五元。</p>
+<p><strong>答案：</strong>Agent 是由多步决策、工具和重试组成的工作流，局部省资源可能增加后续失败与重跑。Jev Workflow 关注完整交付所需的总资源，使采用廉价判断的收益与它造成的额外尝试放在同一口径。不同成功集合应分别报告，不能只摘一项局部延迟说明系统更高效。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：每次判断省半秒，却多失败三次才完成任务，用户真正支付的是所有尝试；需要按最后交付累计计算。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13092">原论文</a> · <a href="../../../../reproductions/2610.13092-jev-workflow/">实现解读</a> · <a href="#qa-e21801a615beb116">问题链接</a></p>
 </details>
@@ -597,29 +597,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13889">原论文</a> · <a href="../../../../reproductions/2610.13889-rated/">实现解读</a> · <a href="#qa-34d38c6c74c040d3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rated" data-paper-title="RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics Agent Texas Tech University 2026-10-09 独立 query/tool encoder 做 CLS 归一化与 contrastive InfoNCE 训练。部署时 encoder 冻结，先语义 top-K，再融合 metadata prior 与逐工具 discounted LinUCB；只从实际选中工具的执行成功、错误或超时更新对应 arm。事实来源：原文全文。 当前是 core_mechanism / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为冻结语义dual encoder；线上反馈重排实验组；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  tool-retrieval execution-reliability contextual-bandit Agent 工具与协作执行：把计划变成可检查的动作 未选中工具可以按本次任务成功一起更新吗？ 不可以。只从实际选中工具的成功、错误或超时更新对应 arm 的 A 与 b，其他工具没有本次可观察结果。对角矩阵与统计做折扣，反馈必须来自授权真实绑定；metadata prior 或 gold 标签不能伪装成所有工具的在线执行结果。 例如选了甲且任务成功，不能据此给乙也加一次成功；否则会把未执行的反事实当已测可靠性。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rated" data-paper-title="RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics Agent Texas Tech University 2026-10-09 独立 query/tool encoder 做 CLS 归一化与 contrastive InfoNCE 训练。部署时 encoder 冻结，先语义 top-K，再融合 metadata prior 与逐工具 discounted LinUCB；只从实际选中工具的执行成功、错误或超时更新对应 arm。事实来源：原文全文。 当前是 core_mechanism / L1 机制诊断接口；未声称完成原论文能力复测，未接入 Evolve 晋级。本地对照口径：基线为冻结语义dual encoder；线上反馈重排实验组；实验组由当前真实实现执行；稳定相对提升不适用，尚无正式能力对照。  tool-retrieval execution-reliability contextual-bandit Agent 工具与协作执行：把计划变成可检查的动作 discounted LinUCB 的 γ 怎样影响选中工具的历史统计？ 选中 arm 的对角 A 与 b 先按 γ 衰减，再累加当前特征平方和执行反馈，使较旧证据的相对影响降低。A 同时影响探索不确定度，不能只把折扣理解为改一个成功率。本地语义编码器确有短训练，但授权工具绑定返回失败，不能将 bandit 更新本身当成工具能力成功。 教学例：某工具曾长期可靠但最近持续超时，折扣让新失败逐渐改变统计；如果只永久累计旧成功，变化会被长期历史淹没。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-f0e3acf45069aec6">未选中工具可以按本次任务成功一起更新吗？</h2>
+<h2 id="qa-f0e3acf45069aec6">discounted LinUCB 的 γ 怎样影响选中工具的历史统计？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arated">RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Texas Tech University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不可以。只从实际选中工具的成功、错误或超时更新对应 arm 的 A 与 b，其他工具没有本次可观察结果。对角矩阵与统计做折扣，反馈必须来自授权真实绑定；metadata prior 或 gold 标签不能伪装成所有工具的在线执行结果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如选了甲且任务成功，不能据此给乙也加一次成功；否则会把未执行的反事实当已测可靠性。</p>
+<p><strong>答案：</strong>选中 arm 的对角 A 与 b 先按 γ 衰减，再累加当前特征平方和执行反馈，使较旧证据的相对影响降低。A 同时影响探索不确定度，不能只把折扣理解为改一个成功率。本地语义编码器确有短训练，但授权工具绑定返回失败，不能将 bandit 更新本身当成工具能力成功。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某工具曾长期可靠但最近持续超时，折扣让新失败逐渐改变统计；如果只永久累计旧成功，变化会被长期历史淹没。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、结果、验证与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13889">原论文</a> · <a href="../../../../reproductions/2610.13889-rated/">实现解读</a> · <a href="#qa-f0e3acf45069aec6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mingbird" data-paper-title="Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks Agent University of Science and Technology Beijing 2026-10-01 通过 domain 路由和扁平 schema 降低小模型工具调用负担；当模型宣称完成时重新注入原任务与计划并检查产物，发现重复调用或无输出循环时提醒修正，同时为常见 JSON 格式错误提供有限救援。改进的是推理运行框架，不需要把它解释为新的基础模型结构。 L1 可移植运行框架诊断：实际执行工具、检查产物和阻止假完成；L1 可移植运行框架诊断：实际执行工具、检查产物和阻止假完成；使用显式脚本策略，不冒充真实小模型任务成功率。未实现整个 Windows GUI/语音产品、未跑 LRAB/τ²、未接入真实本地 LLM。注册工具仍继承调用方权限，此模块不是隔离沙箱，不应直接注册任意 shell。外部验收不能读取策略未获授权的私密信息并反馈给策略。PYTHONPATH=src python scripts/run_oct04_seven_papers.py 在临时目录中真实写入文件：第一次 finish 因文件不存在被拒绝，随后执行写入，最后重新检查通过。  本地 Agent 运行框架 工具使用 Agent 工具与协作执行：把计划变成可检查的动作 模型说“完成”后为什么还要重新注入任务与检查产物？ 小模型可能把计划或一次工具调用误认为交付，重新给出原任务与计划并由外部 callback 验收，可发现文件不存在或要求未满足。自然语言完成声明不是证据；验收仍只反馈授权范围的结果，不能借检查向策略泄露私密数据。 例如模型说已生成报表，运行时检查目标文件不存在，应拒绝 finish 并继续修正，而非把声明计成功。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mingbird" data-paper-title="Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks Agent University of Science and Technology Beijing 2026-10-01 通过 domain 路由和扁平 schema 降低小模型工具调用负担；当模型宣称完成时重新注入原任务与计划并检查产物，发现重复调用或无输出循环时提醒修正，同时为常见 JSON 格式错误提供有限救援。改进的是推理运行框架，不需要把它解释为新的基础模型结构。 L1 可移植运行框架诊断：实际执行工具、检查产物和阻止假完成；L1 可移植运行框架诊断：实际执行工具、检查产物和阻止假完成；使用显式脚本策略，不冒充真实小模型任务成功率。未实现整个 Windows GUI/语音产品、未跑 LRAB/τ²、未接入真实本地 LLM。注册工具仍继承调用方权限，此模块不是隔离沙箱，不应直接注册任意 shell。外部验收不能读取策略未获授权的私密信息并反馈给策略。PYTHONPATH=src python scripts/run_oct04_seven_papers.py 在临时目录中真实写入文件：第一次 finish 因文件不存在被拒绝，随后执行写入，最后重新检查通过。  本地 Agent 运行框架 工具使用 Agent 工具与协作执行：把计划变成可检查的动作 MingBird 为什么专门关注小模型完成多工具长任务的困难？ 小模型的上下文、工具理解与错误恢复能力都有限，把全部接口和长历史一并输入容易增加负担。MingBird 将工具组织、执行循环和完成检查纳入系统设计，帮助策略在受限资源下推进任务。流程组件存在并不表示小模型已能可靠完成任意长程工作，仍需真实产物核验。 教学例：任务横跨文件和数据库，小模型先面对相关工具域，再逐步执行并检查交付文件，而不是一次读完整目录后宣布完成。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-mingbird-bbd1f960" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ce08018ff6229f8e">模型说“完成”后为什么还要重新注入任务与检查产物？</h2>
+<h2 id="qa-ce08018ff6229f8e">MingBird 为什么专门关注小模型完成多工具长任务的困难？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amingbird">Mingbird: A Local-First Agent Harness Enabling Small Open Models to Complete Real Tasks</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Science and Technology Beijing</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>小模型可能把计划或一次工具调用误认为交付，重新给出原任务与计划并由外部 callback 验收，可发现文件不存在或要求未满足。自然语言完成声明不是证据；验收仍只反馈授权范围的结果，不能借检查向策略泄露私密数据。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型说已生成报表，运行时检查目标文件不存在，应拒绝 finish 并继续修正，而非把声明计成功。</p>
+<p><strong>答案：</strong>小模型的上下文、工具理解与错误恢复能力都有限，把全部接口和长历史一并输入容易增加负担。MingBird 将工具组织、执行循环和完成检查纳入系统设计，帮助策略在受限资源下推进任务。流程组件存在并不表示小模型已能可靠完成任意长程工作，仍需真实产物核验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：任务横跨文件和数据库，小模型先面对相关工具域，再逐步执行并检查交付文件，而不是一次读完整目录后宣布完成。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02001">原论文</a> · <a href="../../../../agent-research/2610.02001-mingbird/">实现解读</a> · <a href="#qa-ce08018ff6229f8e">问题链接</a></p>
 </details>
@@ -663,16 +663,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.02001">原论文</a> · <a href="../../../../agent-research/2610.02001-mingbird/">实现解读</a> · <a href="#qa-797790e34afbed84">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cera-moa" data-paper-title="CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents Agent IIIS, Tsinghua University 2026-09-16 用中层隐藏状态估计 Agent 对样本的熟悉度，以累计阈值自适应选专家，并把训练样本定向分配给相应专家。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行熟悉度路由与定向更新；未训练论文规模专家策略。本地执行熟悉度路由与定向更新；未训练论文规模专家策略。  多 Agent 路由与协同进化 Agent 工具与协作执行：把计划变成可检查的动作 中层熟悉度路由为什么不只是看最终答案自信？ 中层状态用于估计各 Agent 对当前样本的熟悉程度，在生成完整答案前选择专家，试图把计算分配给更适合的路径。熟悉度是表示信号，不是校准正确概率；熟悉一个分布也可能熟悉错误模式，仍需真实任务回报检验。 例如数学样本可能更接近某专家训练表示，而不是等所有专家各生成一份长答案后再按措辞自信选择。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cera-moa" data-paper-title="CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents Agent IIIS, Tsinghua University 2026-09-16 用中层隐藏状态估计 Agent 对样本的熟悉度，以累计阈值自适应选专家，并把训练样本定向分配给相应专家。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行熟悉度路由与定向更新；未训练论文规模专家策略。本地执行熟悉度路由与定向更新；未训练论文规模专家策略。  多 Agent 路由与协同进化 Agent 工具与协作执行：把计划变成可检查的动作 CERA-MoA 为什么希望不同专家分担自己更熟悉的样本？ 多专家系统若对所有问题都调用同样数量的相同模型，可能浪费资源，也难形成分工。CERA-MoA 根据样本与专家的熟悉程度组织选择，并让训练分配支持这种差异。熟悉度是用于路由的信号，不等于答案已经正确，最终仍需核验任务结果和总计算开销。 教学例：一个专家更熟悉代码，另一个更熟悉数学，可对不同样本分配不同参与集合；不能仅看角色名称就认定分工有效。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-cera-moa-0d23f31e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-a2b4d20645f640f0">中层熟悉度路由为什么不只是看最终答案自信？</h2>
+<h2 id="qa-a2b4d20645f640f0">CERA-MoA 为什么希望不同专家分担自己更熟悉的样本？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acera-moa">CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · IIIS, Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>中层状态用于估计各 Agent 对当前样本的熟悉程度，在生成完整答案前选择专家，试图把计算分配给更适合的路径。熟悉度是表示信号，不是校准正确概率；熟悉一个分布也可能熟悉错误模式，仍需真实任务回报检验。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如数学样本可能更接近某专家训练表示，而不是等所有专家各生成一份长答案后再按措辞自信选择。</p>
+<p><strong>答案：</strong>多专家系统若对所有问题都调用同样数量的相同模型，可能浪费资源，也难形成分工。CERA-MoA 根据样本与专家的熟悉程度组织选择，并让训练分配支持这种差异。熟悉度是用于路由的信号，不等于答案已经正确，最终仍需核验任务结果和总计算开销。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个专家更熟悉代码，另一个更熟悉数学，可对不同样本分配不同参与集合；不能仅看角色名称就认定分工有效。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.18779">原论文</a> · <a href="../../../../agent-research/2609.18779-cera-moa/">实现解读</a> · <a href="#qa-a2b4d20645f640f0">问题链接</a></p>
 </details>
@@ -716,16 +716,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.18779">原论文</a> · <a href="../../../../agent-research/2609.18779-cera-moa/">实现解读</a> · <a href="#qa-64e00323a4a519f4">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:repoatlas" data-paper-title="RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views Agent Beihang University 2026-09-15 在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只使用公开 observation 构造有界文本视图；未宣称接入真实 SWE-bench 浏览器环境。本地只使用公开 observation 构造有界文本视图；未宣称接入真实 SWE-bench 浏览器环境。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  编程 Agent 多模态仓库视图 Agent 工具与协作执行：把计划变成可检查的动作 视觉拓扑与精确文本索引为什么需要同步投影？ 拓扑帮助理解任务相关模块和关系，精确文本索引支持定位真实符号及代码片段，两者应来自同一选中子图和仓库状态。只画好看的图而文本位置过期，会误导修改；固定预算下 select、project、refresh 要共同维护证据一致性。 例如图中节点指向旧函数名，但文本索引已指新函数，会让 Agent 在不存在接口上写代码，刷新必须同步两种视图。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:repoatlas" data-paper-title="RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views Agent Beihang University 2026-09-15 在固定预算下执行 select–project–refresh，把任务相关代码子图同步投影为视觉拓扑与精确文本索引。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只使用公开 observation 构造有界文本视图；未宣称接入真实 SWE-bench 浏览器环境。本地只使用公开 observation 构造有界文本视图；未宣称接入真实 SWE-bench 浏览器环境。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不能进入正式能力排名。  编程 Agent 多模态仓库视图 Agent 工具与协作执行：把计划变成可检查的动作 面对陌生大仓库时，RepoAtlas 希望 Agent 先建立怎样的地图？ 只逐文件阅读容易迷失全局，只有仓库概览又难定位具体符号和依赖。RepoAtlas 研究把结构拓扑与精确文本入口结合，让 Agent 知道模块如何联系，也能回到实际代码检查。地图服务导航，不能替代源代码证据；代码变化后旧结构也可能误导后续修改。 教学例：修登录问题时先看认证模块与 API 的联系，再跳到具体校验函数；只读模块名无法判断真正的条件分支。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-repoatlas-e75f59d2" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-8c0ccc4c019a0e9e">视觉拓扑与精确文本索引为什么需要同步投影？</h2>
+<h2 id="qa-8c0ccc4c019a0e9e">面对陌生大仓库时，RepoAtlas 希望 Agent 先建立怎样的地图？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arepoatlas">RepoAtlas: Guiding Coding Agents via Evolving Multimodal Repository Views</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Beihang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>拓扑帮助理解任务相关模块和关系，精确文本索引支持定位真实符号及代码片段，两者应来自同一选中子图和仓库状态。只画好看的图而文本位置过期，会误导修改；固定预算下 select、project、refresh 要共同维护证据一致性。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如图中节点指向旧函数名，但文本索引已指新函数，会让 Agent 在不存在接口上写代码，刷新必须同步两种视图。</p>
+<p><strong>答案：</strong>只逐文件阅读容易迷失全局，只有仓库概览又难定位具体符号和依赖。RepoAtlas 研究把结构拓扑与精确文本入口结合，让 Agent 知道模块如何联系，也能回到实际代码检查。地图服务导航，不能替代源代码证据；代码变化后旧结构也可能误导后续修改。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修登录问题时先看认证模块与 API 的联系，再跳到具体校验函数；只读模块名无法判断真正的条件分支。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式与实现对应；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.16936">原论文</a> · <a href="../../../../agent-research/2609.16936-repoatlas/">实现解读</a> · <a href="#qa-8c0ccc4c019a0e9e">问题链接</a></p>
 </details>
@@ -809,29 +809,29 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.12464">原论文</a> · <a href="../../../../agent-research/2609.12464-hcrg/">实现解读</a> · <a href="#qa-61a331bb82962207">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hcrg" data-paper-title="Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration Agent Google Cloud 2026-09-11 HCRG 用 AST 提取 INHERITS/CALLS/IMPORTS，缓存全局架构骨架，按父依赖先后迁移，三跳取回结构上下文。原文对照是 800 字符/150 overlap/top-5 向量 RAG。§3–4 完整实验：成本过高，不复现（审查 DONE）。诊断记录 component_only / L0，仅 Python AST 支持的 graph 子系统。不是 Java tree-sitter 管线或真实 LLM 跨语言迁移复现。完整实验：成本过高，不复现（审查 DONE）。8 项 Python 自建源码机制测试通过：跨模块继承、三跳边界、签名骨架、父依赖顺序、显式循环组、缓存与部分静态指标，以及未导入跨模块同名、参数/局部变量shadow、歧义和外部依赖保留。诊断记录  代码 Agent 图检索 代码迁移 Agent 工具与协作执行：把计划变成可检查的动作 遇到循环依赖或局部变量 shadow 时，为什么不能猜一个拓扑顺序或同名全局边？ 环内不存在普通拓扑序，应返回 SCC 分组；局部 shadow 的名称未必指全局函数，未解析依赖要显式保留。当前本地只支持限定 Python AST，不执行输入代码，也不含 Java、云缓存和 LLM 迁移，本地内容哈希 cache 不是 Vertex 服务。 例如函数参数也叫 parse，调用 parse() 不能仅凭全仓库有同名函数就连边，否则会制造不存在的依赖顺序。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hcrg" data-paper-title="Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration Agent Google Cloud 2026-09-11 HCRG 用 AST 提取 INHERITS/CALLS/IMPORTS，缓存全局架构骨架，按父依赖先后迁移，三跳取回结构上下文。原文对照是 800 字符/150 overlap/top-5 向量 RAG。§3–4 完整实验：成本过高，不复现（审查 DONE）。诊断记录 component_only / L0，仅 Python AST 支持的 graph 子系统。不是 Java tree-sitter 管线或真实 LLM 跨语言迁移复现。完整实验：成本过高，不复现（审查 DONE）。8 项 Python 自建源码机制测试通过：跨模块继承、三跳边界、签名骨架、父依赖顺序、显式循环组、缓存与部分静态指标，以及未导入跨模块同名、参数/局部变量shadow、歧义和外部依赖保留。诊断记录  代码 Agent 图检索 代码迁移 Agent 工具与协作执行：把计划变成可检查的动作 静态建图遇到局部变量 shadow 或未解析符号时，应怎样避免造出错误依赖？ 同名不代表同一个定义，局部绑定会遮蔽全局名字，无法解析的调用也不能直接连到仓库里任意同名节点。实现应保留作用域边界和未解析信息，再在可确定的结构上取上下文。本地只支持受限 Python AST，不覆盖所有动态调用或原文其他语言的迁移环境。 教学例：函数内部把全局工具名赋成局部对象，后续调用应按局部绑定解释；不能因仓库有同名函数就连成全局调用边。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">实现细节</p>
-<h2 id="qa-febd84dd63974652">遇到循环依赖或局部变量 shadow 时，为什么不能猜一个拓扑顺序或同名全局边？</h2>
+<h2 id="qa-febd84dd63974652">静态建图遇到局部变量 shadow 或未解析符号时，应怎样避免造出错误依赖？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahcrg">Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>环内不存在普通拓扑序，应返回 SCC 分组；局部 shadow 的名称未必指全局函数，未解析依赖要显式保留。当前本地只支持限定 Python AST，不执行输入代码，也不含 Java、云缓存和 LLM 迁移，本地内容哈希 cache 不是 Vertex 服务。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如函数参数也叫 parse，调用 parse() 不能仅凭全仓库有同名函数就连边，否则会制造不存在的依赖顺序。</p>
+<p><strong>答案：</strong>同名不代表同一个定义，局部绑定会遮蔽全局名字，无法解析的调用也不能直接连到仓库里任意同名节点。实现应保留作用域边界和未解析信息，再在可确定的结构上取上下文。本地只支持受限 Python AST，不覆盖所有动态调用或原文其他语言的迁移环境。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：函数内部把全局工具名赋成局部对象，后续调用应按局部绑定解释；不能因仓库有同名函数就连成全局调用边。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、代码映射与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.12464">原论文</a> · <a href="../../../../agent-research/2609.12464-hcrg/">实现解读</a> · <a href="#qa-febd84dd63974652">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:feedback-scaffold" data-paper-title="Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks Agent Fudan University 2026-09-08 论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。 复现级别：公开观察解析诊断。复现级别：公开观察解析诊断。实现早期公开动作引导、后期观察增强的阶段切换；不读取 gold plan。三种子结果见 metrics/mini-suite-seeds42-44.json。第一步只可采用公开 observation 中明确给出的 workflow；后续仅加入状态摘要，隐藏 AgentTask.plan 从不进入策略。当前未训练 LLM，也没有真实环境 rollout。  环境反馈脚手架 Agent 工具与协作执行：把计划变成可检查的动作 早期 action guidance 与后期 observation enrichment 为什么分阶段使用？ 能力不足时直接指导动作可降低探索难度，后期丰富观察让 Agent 自己选择，避免长期依赖答案式示范。两种反馈分别改变行动自由度与可见证据，阶段切换旨在逐渐移除支架，不是永久向策略提供正确下一步。 例如初学阶段提示先打开配置，后期只给配置状态和错误日志，让 Agent 自己决定是否修改，而非继续逐步喂动作。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:feedback-scaffold" data-paper-title="Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks Agent Fudan University 2026-09-08 论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。 复现级别：公开观察解析诊断。复现级别：公开观察解析诊断。实现早期公开动作引导、后期观察增强的阶段切换；不读取 gold plan。三种子结果见 metrics/mini-suite-seeds42-44.json。第一步只可采用公开 observation 中明确给出的 workflow；后续仅加入状态摘要，隐藏 AgentTask.plan 从不进入策略。当前未训练 LLM，也没有真实环境 rollout。  环境反馈脚手架 Agent 工具与协作执行：把计划变成可检查的动作 训练较弱的长程 Agent 时，为什么“完全放手探索”和“始终告诉答案”都有困难？ 完全放手可能让策略很少得到可学习的成功经验，始终给正确动作又可能让它只学会依赖外部帮助。Feedback Scaffold 研究在训练中逐步调整支持方式，让早期更容易起步，后期仍需自己决策。评价目标应是撤去相应支架后的能力，不能把受指导完成当成自主解决。 教学例：新手起初需要示范下一步，熟悉后只给检查结果让其判断；若测试时继续替它选动作，就测不到独立处理能力。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-feedback-scaffold-b914bba8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-86b6f2fda9fa582b">早期 action guidance 与后期 observation enrichment 为什么分阶段使用？</h2>
+<h2 id="qa-86b6f2fda9fa582b">训练较弱的长程 Agent 时，为什么“完全放手探索”和“始终告诉答案”都有困难？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afeedback-scaffold">Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Fudan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>能力不足时直接指导动作可降低探索难度，后期丰富观察让 Agent 自己选择，避免长期依赖答案式示范。两种反馈分别改变行动自由度与可见证据，阶段切换旨在逐渐移除支架，不是永久向策略提供正确下一步。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如初学阶段提示先打开配置，后期只给配置状态和错误日志，让 Agent 自己决定是否修改，而非继续逐步喂动作。</p>
+<p><strong>答案：</strong>完全放手可能让策略很少得到可学习的成功经验，始终给正确动作又可能让它只学会依赖外部帮助。Feedback Scaffold 研究在训练中逐步调整支持方式，让早期更容易起步，后期仍需自己决策。评价目标应是撤去相应支架后的能力，不能把受指导完成当成自主解决。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新手起初需要示范下一步，熟悉后只给检查结果让其判断；若测试时继续替它选动作，就测不到独立处理能力。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.08404">原论文</a> · <a href="../../../../agent-research/2609.08404-feedback-scaffold/">实现解读</a> · <a href="#qa-86b6f2fda9fa582b">问题链接</a></p>
 </details>
@@ -849,15 +849,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.08404">原论文</a> · <a href="../../../../agent-research/2609.08404-feedback-scaffold/">实现解读</a> · <a href="#qa-32e4e27887fc3581">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:feedback-scaffold" data-paper-title="Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks Agent Fudan University 2026-09-08 论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。 复现级别：公开观察解析诊断。复现级别：公开观察解析诊断。实现早期公开动作引导、后期观察增强的阶段切换；不读取 gold plan。三种子结果见 metrics/mini-suite-seeds42-44.json。第一步只可采用公开 observation 中明确给出的 workflow；后续仅加入状态摘要，隐藏 AgentTask.plan 从不进入策略。当前未训练 LLM，也没有真实环境 rollout。  环境反馈脚手架 Agent 工具与协作执行：把计划变成可检查的动作 统一一直给 action guidance 与后期转向观察有何学习取舍？ 持续指导容易提高当前轨迹成功，却可能让策略未学会自主决策；观察增强保留选择责任，但对弱策略更难。应在无同等指导的真实测试看迁移，不能把被示范带着完成的成功率直接当自主能力。 例如每轮都告诉模型正确按钮能让任务通过，但测试去掉提示后它可能根本不会定位；观察支架更需检验自主选择。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:feedback-scaffold" data-paper-title="Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks Agent Fudan University 2026-09-08 论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。 复现级别：公开观察解析诊断。复现级别：公开观察解析诊断。实现早期公开动作引导、后期观察增强的阶段切换；不读取 gold plan。三种子结果见 metrics/mini-suite-seeds42-44.json。第一步只可采用公开 observation 中明确给出的 workflow；后续仅加入状态摘要，隐藏 AgentTask.plan 从不进入策略。当前未训练 LLM，也没有真实环境 rollout。  环境反馈脚手架 Agent 工具与协作执行：把计划变成可检查的动作 带脚手架完成任务与撤去脚手架后的自主完成，为什么需要分开评价？ 脚手架可能直接减少动作选择难度或补充额外证据，成功既反映策略也反映外部支持。撤去后才可观察训练是否留下可迁移的决策能力。比较时要说明哪些帮助仍然可见，不能把不同信息条件的分数混用；本地阶段调度诊断尤其不能替代真实训练迁移实验。 教学例：训练时提示“先读配置”，测试若仍给同一正确提示，只能说明会跟随；自主测试则需要模型自己发现应查配置。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-c298fb923271d9a8">统一一直给 action guidance 与后期转向观察有何学习取舍？</h2>
+<h2 id="qa-c298fb923271d9a8">带脚手架完成任务与撤去脚手架后的自主完成，为什么需要分开评价？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afeedback-scaffold">Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Fudan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>持续指导容易提高当前轨迹成功，却可能让策略未学会自主决策；观察增强保留选择责任，但对弱策略更难。应在无同等指导的真实测试看迁移，不能把被示范带着完成的成功率直接当自主能力。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如每轮都告诉模型正确按钮能让任务通过，但测试去掉提示后它可能根本不会定位；观察支架更需检验自主选择。</p>
+<p><strong>答案：</strong>脚手架可能直接减少动作选择难度或补充额外证据，成功既反映策略也反映外部支持。撤去后才可观察训练是否留下可迁移的决策能力。比较时要说明哪些帮助仍然可见，不能把不同信息条件的分数混用；本地阶段调度诊断尤其不能替代真实训练迁移实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练时提示“先读配置”，测试若仍给同一正确提示，只能说明会跟随；自主测试则需要模型自己发现应查配置。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.08404">原论文</a> · <a href="../../../../agent-research/2609.08404-feedback-scaffold/">实现解读</a> · <a href="#qa-c298fb923271d9a8">问题链接</a></p>
 </details>
@@ -902,15 +902,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27449">原论文</a> · <a href="../../../../agent-research/2608.27449-swe-prime/">实现解读</a> · <a href="#qa-09148f0475ab00b9">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:swe-prime" data-paper-title="SWE-Prime: Fewer Trajectories, Better Performance" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SWE-Prime: Fewer Trajectories, Better Performance Agent Sun Yat-sen University 2026-08-27 成功轨迹仍可能冗余、危险或不可学习。SWE-Prime 先按过程、结果和代表性选轨迹，再按贡献、可学习性和风险选语义段；上下文完整保留，但只对选中段计算 SFT loss。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现轨迹筛选、语义段筛选和 loss mask。未训练代码 LLM，也未运行官方 SWE-Bench；本地只比较相同 observation/tool 接口下的筛选策略。ToolRoute-L2.1 三 seed：joint success 0.7708，plan F1 0.8004，平均成本 4.5497。  软件轨迹筛选 Agent 工具与协作执行：把计划变成可检查的动作 只保留选中段上下文与保留全上下文、只遮 loss 有何区别？ 前者改变后续 token 的条件历史，可能让被选步骤缺少必要依据；后者保留完整轨迹供理解，但只对选中语义段监督。mask 控制学习目标而非可见信息，不能把删 token 简称为同一种数据筛选。 例如修复步骤引用先前失败日志，若删掉日志模型看不懂依据；保留日志但不给其生成 loss 可保留条件关系。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:swe-prime" data-paper-title="SWE-Prime: Fewer Trajectories, Better Performance" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SWE-Prime: Fewer Trajectories, Better Performance Agent Sun Yat-sen University 2026-08-27 成功轨迹仍可能冗余、危险或不可学习。SWE-Prime 先按过程、结果和代表性选轨迹，再按贡献、可学习性和风险选语义段；上下文完整保留，但只对选中段计算 SFT loss。 复现级别：核心机制 + L2.1 无 oracle 评测。复现级别：核心机制 + L2.1 无 oracle 评测。实现轨迹筛选、语义段筛选和 loss mask。未训练代码 LLM，也未运行官方 SWE-Bench；本地只比较相同 observation/tool 接口下的筛选策略。ToolRoute-L2.1 三 seed：joint success 0.7708，plan F1 0.8004，平均成本 4.5497。  软件轨迹筛选 Agent 工具与协作执行：把计划变成可检查的动作 整条轨迹筛选与轨迹内部语义段筛选，各解决哪一层数据质量问题？ 轨迹级筛选关注结果、过程和代表性，先决定哪些完整经历值得保留；段级筛选再检查其中行为的贡献、可学习性和风险。优质轨迹仍可能含局部冗余，优秀片段也可能出自缺乏有效全局结果的记录。分层处理区分样本选择与监督目标，不是简单只留成功答案。 教学例：一次修复总体通过测试，但中途有无关依赖安装；可保留完整执行作为上下文，同时不把那段行为设为模仿目标。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-fe246fc75fa9c390">只保留选中段上下文与保留全上下文、只遮 loss 有何区别？</h2>
+<h2 id="qa-fe246fc75fa9c390">整条轨迹筛选与轨迹内部语义段筛选，各解决哪一层数据质量问题？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aswe-prime">SWE-Prime: Fewer Trajectories, Better Performance</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Sun Yat-sen University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者改变后续 token 的条件历史，可能让被选步骤缺少必要依据；后者保留完整轨迹供理解，但只对选中语义段监督。mask 控制学习目标而非可见信息，不能把删 token 简称为同一种数据筛选。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如修复步骤引用先前失败日志，若删掉日志模型看不懂依据；保留日志但不给其生成 loss 可保留条件关系。</p>
+<p><strong>答案：</strong>轨迹级筛选关注结果、过程和代表性，先决定哪些完整经历值得保留；段级筛选再检查其中行为的贡献、可学习性和风险。优质轨迹仍可能含局部冗余，优秀片段也可能出自缺乏有效全局结果的记录。分层处理区分样本选择与监督目标，不是简单只留成功答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一次修复总体通过测试，但中途有无关依赖安装；可保留完整执行作为上下文，同时不把那段行为设为模仿目标。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27449">原论文</a> · <a href="../../../../agent-research/2608.27449-swe-prime/">实现解读</a> · <a href="#qa-fe246fc75fa9c390">问题链接</a></p>
 </details>
@@ -981,16 +981,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25559">原论文</a> · <a href="../../../../agent-research/2608.25559-adavdr/">实现解读</a> · <a href="#qa-bebf5ef6d4303580">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:progrouter" data-paper-title="ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs Agent Aston University 2026-08-26 用多视角 scorer 衡量子任务完成度、进展趋势和状态质量，再由双路径 predictor 估计候选模型的边际进展，以 meta-gate 在质量、时间和长期成本预算间逐步决策。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。ProgRouter 把验证后的工具选择压缩为可复用程序路由，validation/test 冻结路由后再执行。ToolRoute-L2.1 三 seed的 joint success 为 0.7778，plan step F1 为 0.8037，平均成本 4.6324。  在线进展成本路由 Agent 工具与协作执行：把计划变成可检查的动作 为什么路由器要估计边际进展，而不只估计模型最终准确率？ 同一工作流阶段需要不同能力，某模型总体准确率高却未必对当前缺口最有帮助。边际进展关注再花一次调用能推进多少，结合完成度、趋势和状态质量决定下一模型；预测进展仍不是已实现进展，要由实际结果更新或检验。 例如任务只剩核对引用，强代码模型的整体分数很高也未必值得调用，专注证据核查的路径可能更推进当前状态。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:progrouter" data-paper-title="ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs Agent Aston University 2026-08-26 用多视角 scorer 衡量子任务完成度、进展趋势和状态质量，再由双路径 predictor 估计候选模型的边际进展，以 meta-gate 在质量、时间和长期成本预算间逐步决策。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。ProgRouter 把验证后的工具选择压缩为可复用程序路由，validation/test 冻结路由后再执行。ToolRoute-L2.1 三 seed的 joint success 为 0.7778，plan step F1 为 0.8037，平均成本 4.6324。  在线进展成本路由 Agent 工具与协作执行：把计划变成可检查的动作 ProgRouter 为什么关注同一任务执行过程中不断变化的模型需求？ 复杂任务不同阶段需要的推理强度不同，固定一直用强模型成本高，一直用弱模型又可能卡住。ProgRouter 研究按当前进展选择下一次调用哪个模型，使路由服务于继续推进任务。模型的静态平均准确率不足以说明此刻能带来多少帮助，实际收益还受时间和调用预算限制。 教学例：常规文件定位可交给便宜模型，定位后遇到复杂推断再换模型；不能因为某模型总体排名高就让每一步都调用它。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-progrouter-c8bea01c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0b2e86e619f312c8">为什么路由器要估计边际进展，而不只估计模型最终准确率？</h2>
+<h2 id="qa-0b2e86e619f312c8">ProgRouter 为什么关注同一任务执行过程中不断变化的模型需求？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aprogrouter">ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Aston University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同一工作流阶段需要不同能力，某模型总体准确率高却未必对当前缺口最有帮助。边际进展关注再花一次调用能推进多少，结合完成度、趋势和状态质量决定下一模型；预测进展仍不是已实现进展，要由实际结果更新或检验。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如任务只剩核对引用，强代码模型的整体分数很高也未必值得调用，专注证据核查的路径可能更推进当前状态。</p>
+<p><strong>答案：</strong>复杂任务不同阶段需要的推理强度不同，固定一直用强模型成本高，一直用弱模型又可能卡住。ProgRouter 研究按当前进展选择下一次调用哪个模型，使路由服务于继续推进任务。模型的静态平均准确率不足以说明此刻能带来多少帮助，实际收益还受时间和调用预算限制。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：常规文件定位可交给便宜模型，定位后遇到复杂推断再换模型；不能因为某模型总体排名高就让每一步都调用它。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25992">原论文</a> · <a href="../../../../agent-research/2608.25992-progrouter/">实现解读</a> · <a href="#qa-0b2e86e619f312c8">问题链接</a></p>
 </details>
@@ -1061,15 +1061,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25523">原论文</a> · <a href="../../../../agent-research/2608.25523-topas/">实现解读</a> · <a href="#qa-844b8a90e779e693">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:topas" data-paper-title="TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving Agent University of Science and Technology of China 2026-08-26 在共享 KV-cache 预算下，同时估算工作流最长剩余路径与下游 prefix reuse 收益，并纳入 prefix 移动、抢占和 aging，避免只优化局部命中率或单请求进度。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。TOPAS 在状态化工具环境里先做安全排序与候选压缩，再根据调用反馈恢复。ToolRoute-L2.1 三 seed 的 joint success 为 0.7556，plan step F1 为 0.7887，平均成本 4.5571。  工作流 Prefix-State 调度 Agent 工具与协作执行：把计划变成可检查的动作 下游 prefix reuse 与只按当前 cache hit 排序有什么不同？ 当前命中只看眼前是否省 prefill，下游复用估计考虑此状态是否还会帮助后续请求；移动、抢占代价和 aging 又防止为复用长期饿死其他工作。更高 hit rate 不必带来更低 JCT，应按真实工作流资源记录验证。 例如保持某共享前缀可惠及多个即将就绪分支，但若一直等待这些分支而饿死独立任务，整体尾延迟可能变差。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:topas" data-paper-title="TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving Agent University of Science and Technology of China 2026-08-26 在共享 KV-cache 预算下，同时估算工作流最长剩余路径与下游 prefix reuse 收益，并纳入 prefix 移动、抢占和 aging，避免只优化局部命中率或单请求进度。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。TOPAS 在状态化工具环境里先做安全排序与候选压缩，再根据调用反馈恢复。ToolRoute-L2.1 三 seed 的 joint success 为 0.7556，plan step F1 为 0.7887，平均成本 4.5571。  工作流 Prefix-State 调度 Agent 工具与协作执行：把计划变成可检查的动作 关键路径优先与 aging 分别处理整体延迟的哪一种风险？ 关键路径优先关注哪些请求会阻塞工作流完成，aging 则随等待增长提升长期未获资源请求的优先级，防止调度持续偏向其他路线。二者解决依赖瓶颈和公平等待的不同问题，需要与缓存复用及移动成本共同权衡；任何单项优先级都不保证所有任务同时最快。 教学例：短链请求因一直没有缓存命中而反复被跳过，aging 可逐渐提升其机会；另一长链上的阻塞节点仍有关键路径价值。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-b3ba7f4b88395eaa">下游 prefix reuse 与只按当前 cache hit 排序有什么不同？</h2>
+<h2 id="qa-b3ba7f4b88395eaa">关键路径优先与 aging 分别处理整体延迟的哪一种风险？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atopas">TOPAS: Workflow-Aware Prefix-State Scheduling for Multi-Agent LLM Serving</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Science and Technology of China</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>当前命中只看眼前是否省 prefill，下游复用估计考虑此状态是否还会帮助后续请求；移动、抢占代价和 aging 又防止为复用长期饿死其他工作。更高 hit rate 不必带来更低 JCT，应按真实工作流资源记录验证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如保持某共享前缀可惠及多个即将就绪分支，但若一直等待这些分支而饿死独立任务，整体尾延迟可能变差。</p>
+<p><strong>答案：</strong>关键路径优先关注哪些请求会阻塞工作流完成，aging 则随等待增长提升长期未获资源请求的优先级，防止调度持续偏向其他路线。二者解决依赖瓶颈和公平等待的不同问题，需要与缓存复用及移动成本共同权衡；任何单项优先级都不保证所有任务同时最快。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：短链请求因一直没有缓存命中而反复被跳过，aging 可逐渐提升其机会；另一长链上的阻塞节点仍有关键路径价值。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25523">原论文</a> · <a href="../../../../agent-research/2608.25523-topas/">实现解读</a> · <a href="#qa-b3ba7f4b88395eaa">问题链接</a></p>
 </details>
@@ -1087,16 +1087,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25523">原论文</a> · <a href="../../../../agent-research/2608.25523-topas/">实现解读</a> · <a href="#qa-53eb77d8871172b0">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:traceml" data-paper-title="TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development Agent Carnegie Mellon University 2026-08-26 统一记录每个代码版本、得分、动作意图、编辑规模和效果，比较 4465 条人类轨迹与 Agent 轨迹；把人类会交替阶段、回开旧方案的规律蒸馏成 planning prior。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。TraceML 策略从训练 split 的失败轨迹写入反思先验，validation/test 只读取先验并通过真实工具反馈推进，不读取隐藏 route 或答案。  ML 开发轨迹规划 Agent 工具与协作执行：把计划变成可检查的动作 为什么轨迹要同时记录版本、意图、编辑规模和得分变化？ 单看最终分数无法区分一次大改、局部修复或回开旧方案的作用，版本与意图使开发过程可分析。TraceML 以人类轨迹模式形成规划先验，但观察到相关规律不等于证明某个编辑动作因果最优，不能直接把高分人类路径当金标准计划。 例如某次得分上升紧跟数据清洗和模型更换，版本记录可展示二者同时发生，却不能单独归因于换模型。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:traceml" data-paper-title="TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development Agent Carnegie Mellon University 2026-08-26 统一记录每个代码版本、得分、动作意图、编辑规模和效果，比较 4465 条人类轨迹与 Agent 轨迹；把人类会交替阶段、回开旧方案的规律蒸馏成 planning prior。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。真实执行论文特有的控制流/目标；未把确定性任务成功率当作论文 benchmark 复现。本地 mini-suite 用公开、确定性的候选/计划任务隔离机制差异；论文 checkpoint、私有训练数据、外部服务和完整 benchmark 均未声称已复刻。TraceML 策略从训练 split 的失败轨迹写入反思先验，validation/test 只读取先验并通过真实工具反馈推进，不读取隐藏 route 或答案。  ML 开发轨迹规划 Agent 工具与协作执行：把计划变成可检查的动作 TraceML 为什么研究人类开发 ML 方案的全过程，而不只收集最后一个高分模型？ 最终代码和分数看不到开发者如何探索、放弃、回到旧方案或分配实验预算。TraceML 记录决策与版本变化，试图把这些过程变成可研究的规划经验。观察到人类行为规律不等于证明它是最优策略，模型利用这些数据后的能力也需在独立任务验证。 教学例：最终方案用了较小模型，但开发中曾试过大模型并发现瓶颈；只保存最终文件会丢掉为什么转向的关键信息。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-traceml-cea4f922" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-9262e749f8e77b96">为什么轨迹要同时记录版本、意图、编辑规模和得分变化？</h2>
+<h2 id="qa-9262e749f8e77b96">TraceML 为什么研究人类开发 ML 方案的全过程，而不只收集最后一个高分模型？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atraceml">TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Carnegie Mellon University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>单看最终分数无法区分一次大改、局部修复或回开旧方案的作用，版本与意图使开发过程可分析。TraceML 以人类轨迹模式形成规划先验，但观察到相关规律不等于证明某个编辑动作因果最优，不能直接把高分人类路径当金标准计划。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如某次得分上升紧跟数据清洗和模型更换，版本记录可展示二者同时发生，却不能单独归因于换模型。</p>
+<p><strong>答案：</strong>最终代码和分数看不到开发者如何探索、放弃、回到旧方案或分配实验预算。TraceML 记录决策与版本变化，试图把这些过程变成可研究的规划经验。观察到人类行为规律不等于证明它是最优策略，模型利用这些数据后的能力也需在独立任务验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最终方案用了较小模型，但开发中曾试过大模型并发现瓶颈；只保存最终文件会丢掉为什么转向的关键信息。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26086">原论文</a> · <a href="../../../../agent-research/2608.26086-traceml/">实现解读</a> · <a href="#qa-9262e749f8e77b96">问题链接</a></p>
 </details>
@@ -1140,16 +1140,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26086">原论文</a> · <a href="../../../../agent-research/2608.26086-traceml/">实现解读</a> · <a href="#qa-e992817dbacafea4">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:smith" data-paper-title="SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification Agent Appier AI Research / National Taiwan University 2026-08-25 现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。同一 Agent 交替 build/use，并独立执行 schema、代码和 outcome 三类 verifier。本地工具为结构化 plan，并真实分开 build/use 状态和三轴 verifier；未运行 Qwen3-4B、可执行 Python sandbox、Reasoning-Gym、TabMWP 或 GQA。PlanBench-mini 120 episodes：生成 12 个工具、复用 108 次，执行 360 个分轴 verifier，joint success 1.0000、平均成本 0.4550。  多维验证工具自进化 Agent 工具与协作执行：把计划变成可检查的动作 build task 与 use task 为什么需要在同一 policy 中混合？ 创建工具要生成可用 schema 与 backend，使用工具要在未见问题里正确调用；只优化创建语法不保证工具能帮助任务，只优化使用又无法改善工具本身。混合两类任务让最终用途反馈影响可复用抽象，但 held-out 使用条件不能泄露给创建者。 例如工具能算某一固定样例却不接受其他输入，schema 检查可通过，未见问题的 use task 才能暴露它只是硬编码答案。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:smith" data-paper-title="SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification Agent Appier AI Research / National Taiwan University 2026-08-25 现有工具创建通常在推理时让冻结模型写代码，创建者与使用者没有联合信号。SMITH 在同一 policy 中混合 build task（从样例写 schema/backend）和 use task（在 held-out 问题调用池中工具），分别给 schema 合法性、代码执行和最终答案奖励，并用更难问题鼓励可复用抽象。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。同一 Agent 交替 build/use，并独立执行 schema、代码和 outcome 三类 verifier。本地工具为结构化 plan，并真实分开 build/use 状态和三轴 verifier；未运行 Qwen3-4B、可执行 Python sandbox、Reasoning-Gym、TabMWP 或 GQA。PlanBench-mini 120 episodes：生成 12 个工具、复用 108 次，执行 360 个分轴 verifier，joint success 1.0000、平均成本 0.4550。  多维验证工具自进化 Agent 工具与协作执行：把计划变成可检查的动作 SMITH 为什么让 Agent 不只使用现成工具，还学习创建可再用的工具？ 固定工具集未必覆盖新任务需要的处理方式，反复临时写代码又会重复劳动。SMITH 把工具构建与后续使用作为相互关联的任务，使生成的接口和实现接受真实使用检验。能产出代码不代表工具有用，格式、执行结果和下游答案各自都可能失败。 教学例：多次遇到相同数据清洗需求，可以创建专用处理工具；它是否值得保留，要看后来能否正确调用并完成实际清洗。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-smith-3e4d7833" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-aaa53cee12cd56e6">build task 与 use task 为什么需要在同一 policy 中混合？</h2>
+<h2 id="qa-aaa53cee12cd56e6">SMITH 为什么让 Agent 不只使用现成工具，还学习创建可再用的工具？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asmith">SMITH: Self-Improving Tool-Using Agents through Multi-Aspect Verification</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Appier AI Research / National Taiwan University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>创建工具要生成可用 schema 与 backend，使用工具要在未见问题里正确调用；只优化创建语法不保证工具能帮助任务，只优化使用又无法改善工具本身。混合两类任务让最终用途反馈影响可复用抽象，但 held-out 使用条件不能泄露给创建者。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如工具能算某一固定样例却不接受其他输入，schema 检查可通过，未见问题的 use task 才能暴露它只是硬编码答案。</p>
+<p><strong>答案：</strong>固定工具集未必覆盖新任务需要的处理方式，反复临时写代码又会重复劳动。SMITH 把工具构建与后续使用作为相互关联的任务，使生成的接口和实现接受真实使用检验。能产出代码不代表工具有用，格式、执行结果和下游答案各自都可能失败。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：多次遇到相同数据清洗需求，可以创建专用处理工具；它是否值得保留，要看后来能否正确调用并完成实际清洗。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24571">原论文</a> · <a href="../../../../agent-research/2608.24571-smith/">实现解读</a> · <a href="#qa-aaa53cee12cd56e6">问题链接</a></p>
 </details>
@@ -1193,16 +1193,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.24571">原论文</a> · <a href="../../../../agent-research/2608.24571-smith/">实现解读</a> · <a href="#qa-83a7dab631c78030">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pmcoder" data-paper-title="Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution Agent Vanderbilt University 2026-08-07 用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  代码 Agent 记忆与规划 Agent 工具与协作执行：把计划变成可检查的动作 phase planner 为什么影响 episodic retrieval？ 不同开发阶段需要不同经验：定位问题、设计修改、实现和验证各有适用记忆。按 phase 条件检索可减少把执行细节过早用于诊断，或在测试阶段继续读无关规划；阶段本身仍需随真实状态更新，不能固定轮数机械切换。 例如测试失败时优先检索类似错误的验证经验，而不是继续读取最初如何理解 issue 的背景笔记。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pmcoder" data-paper-title="Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution Agent Vanderbilt University 2026-08-07 用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  代码 Agent 记忆与规划 Agent 工具与协作执行：把计划变成可检查的动作 软件 issue 要经过定位、修改和测试时，PMCoder 希望记住哪些可继续利用的经验？ 长修复任务会产生定位线索、失败尝试和测试结论，若每轮从原 issue 重新出发，容易重复查找或重犯错误。PMCoder 用过程阶段组织计划与经验读取，让当前步骤利用恰当的历史。记忆只是执行支持，仍需当前代码和测试确认，不能把记住旧解法等同于修复新问题。 教学例：定位阶段发现问题在解析器，测试阶段确认某边界输入失败；下一轮应利用这些结论，而不是再次全仓库搜索。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-pmcoder-088b3672" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-69e13b18b74254a0">phase planner 为什么影响 episodic retrieval？</h2>
+<h2 id="qa-69e13b18b74254a0">软件 issue 要经过定位、修改和测试时，PMCoder 希望记住哪些可继续利用的经验？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apmcoder">Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Vanderbilt University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不同开发阶段需要不同经验：定位问题、设计修改、实现和验证各有适用记忆。按 phase 条件检索可减少把执行细节过早用于诊断，或在测试阶段继续读无关规划；阶段本身仍需随真实状态更新，不能固定轮数机械切换。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如测试失败时优先检索类似错误的验证经验，而不是继续读取最初如何理解 issue 的背景笔记。</p>
+<p><strong>答案：</strong>长修复任务会产生定位线索、失败尝试和测试结论，若每轮从原 issue 重新出发，容易重复查找或重犯错误。PMCoder 用过程阶段组织计划与经验读取，让当前步骤利用恰当的历史。记忆只是执行支持，仍需当前代码和测试确认，不能把记住旧解法等同于修复新问题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：定位阶段发现问题在解析器，测试阶段确认某边界输入失败；下一轮应利用这些结论，而不是再次全仓库搜索。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06811">原论文</a> · <a href="../../../../agent-research/2608.06811-pmcoder/">实现解读</a> · <a href="#qa-69e13b18b74254a0">问题链接</a></p>
 </details>
@@ -1246,16 +1246,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06811">原论文</a> · <a href="../../../../agent-research/2608.06811-pmcoder/">实现解读</a> · <a href="#qa-6d42348ca21f71f7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:codegrep" data-paper-title="CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents Agent NetEase Guangzhou AI Lab 2026-08-06 主题：代码检索 Agent。以 GRPO 训练 14B 检索 Agent 并行发出 grep/glob/read，多轮缩小候选文件，再交给冻结 coding agent；优化的是下游修复收益而非孤立检索分数。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的代码检索 Agent 算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  代码检索 Agent Agent 工具与协作执行：把计划变成可检查的动作 CodeGrep 为什么由下游修复收益监督，而不只看检索 recall？ 检索目的在于帮助冻结 coding agent 解决 issue，更多相关文件也可能塞入噪声或挤占上下文。奖励结合实际 resolve 与 token、轮数成本，使检索学会提供可用证据；孤立高召回不能保证下游成功，也不能省略修复器执行。 例如返回二十个略相关文件可能比三个关键函数更妨碍修复，即使传统 recall 看起来更高。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:codegrep" data-paper-title="CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents Agent NetEase Guangzhou AI Lab 2026-08-06 主题：代码检索 Agent。以 GRPO 训练 14B 检索 Agent 并行发出 grep/glob/read，多轮缩小候选文件，再交给冻结 coding agent；优化的是下游修复收益而非孤立检索分数。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地实现执行论文特有的代码检索 Agent 算子；不把确定性小型评测写成论文完整复现。复现论文特有的状态、信用或选择算子，而非只改方法名。稳定指标保存在本论文目录的 metrics/planbench-mini-seed42.json，不提交 checkpoint 或原始运行目录。  代码检索 Agent Agent 工具与协作执行：把计划变成可检查的动作 CodeGrep 为什么把大仓库中的证据获取看作需要学习的多步工作？ 修复 issue 前往往不知道相关文件、符号和调用关系，单次检索可能只找到文字相近片段。CodeGrep 让 Agent 逐步搜索、读代码并根据新线索继续查找，使证据获取服务后续修复。找到文件并非终点，读到的信息是否真的帮助解决问题仍需下游执行检验。 教学例：报错提到配置，第一次 grep 找到入口，读代码后发现真正默认值在另一个模块，需要继续追踪而非就地猜补丁。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-codegrep-29277303" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-237d4d1814ad8cbe">CodeGrep 为什么由下游修复收益监督，而不只看检索 recall？</h2>
+<h2 id="qa-237d4d1814ad8cbe">CodeGrep 为什么把大仓库中的证据获取看作需要学习的多步工作？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acodegrep">CodeGrep: An RL-Trained Retrieval Agent for LLM Coding Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · NetEase Guangzhou AI Lab</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>检索目的在于帮助冻结 coding agent 解决 issue，更多相关文件也可能塞入噪声或挤占上下文。奖励结合实际 resolve 与 token、轮数成本，使检索学会提供可用证据；孤立高召回不能保证下游成功，也不能省略修复器执行。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如返回二十个略相关文件可能比三个关键函数更妨碍修复，即使传统 recall 看起来更高。</p>
+<p><strong>答案：</strong>修复 issue 前往往不知道相关文件、符号和调用关系，单次检索可能只找到文字相近片段。CodeGrep 让 Agent 逐步搜索、读代码并根据新线索继续查找，使证据获取服务后续修复。找到文件并非终点，读到的信息是否真的帮助解决问题仍需下游执行检验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：报错提到配置，第一次 grep 找到入口，读代码后发现真正默认值在另一个模块，需要继续追踪而非就地猜补丁。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05886">原论文</a> · <a href="../../../../agent-research/2608.05886-codegrep/">实现解读</a> · <a href="#qa-237d4d1814ad8cbe">问题链接</a></p>
 </details>
@@ -1299,16 +1299,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05886">原论文</a> · <a href="../../../../agent-research/2608.05886-codegrep/">实现解读</a> · <a href="#qa-28aaa8a73f03f573">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:manta" data-paper-title="MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems Agent Cornell University 2026-07-30 根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  多 Agent 自进化 Agent 工具与协作执行：把计划变成可检查的动作 通信拓扑为什么不仅是一组固定 Agent 名单？ 角色间哪些边可通信、执行顺序、可见信息与验证路径都会影响协作。MANTA 先按任务先验建图，再从 trace 有界调整这些元素，目标是让结构适应任务；增加角色数量不自动带来有效协作，还可能造成重复和错误传播。 例如两个 worker 都依赖同一数据核验者，若缺少回传边，核验结果无法影响计划，即使三个角色名字都存在。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:manta" data-paper-title="MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems Agent Cornell University 2026-07-30 根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  多 Agent 自进化 Agent 工具与协作执行：把计划变成可检查的动作 多 Agent 团队为什么可能因沟通安排不当而浪费协作机会？ 角色再多，若消息传给不需要的人、关键结果未到达依赖者或交流顺序错误，工作仍会停滞。MANTA 研究让通信结构随执行反馈适应任务，而不把团队配置视为固定名单。改变拓扑也会增加协调成本，效果需看信息可见性、任务结果和资源开销。 教学例：验证者发现约束错误，却只回复无关角色，执行者继续沿旧计划行动；需要调整的是信息流，而不一定是再加一个 Agent。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-manta-a024f561" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-6c9e155972b09a66">通信拓扑为什么不仅是一组固定 Agent 名单？</h2>
+<h2 id="qa-6c9e155972b09a66">多 Agent 团队为什么可能因沟通安排不当而浪费协作机会？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amanta">MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Cornell University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>角色间哪些边可通信、执行顺序、可见信息与验证路径都会影响协作。MANTA 先按任务先验建图，再从 trace 有界调整这些元素，目标是让结构适应任务；增加角色数量不自动带来有效协作，还可能造成重复和错误传播。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两个 worker 都依赖同一数据核验者，若缺少回传边，核验结果无法影响计划，即使三个角色名字都存在。</p>
+<p><strong>答案：</strong>角色再多，若消息传给不需要的人、关键结果未到达依赖者或交流顺序错误，工作仍会停滞。MANTA 研究让通信结构随执行反馈适应任务，而不把团队配置视为固定名单。改变拓扑也会增加协调成本，效果需看信息可见性、任务结果和资源开销。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：验证者发现约束错误，却只回复无关角色，执行者继续沿旧计划行动；需要调整的是信息流，而不一定是再加一个 Agent。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.28527">原论文</a> · <a href="../../../../agent-research/2607.28527-manta/">实现解读</a> · <a href="#qa-6c9e155972b09a66">问题链接</a></p>
 </details>
@@ -1405,16 +1405,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.27083">原论文</a> · <a href="../../../../agent-research/2607.27083-cam-df/">实现解读</a> · <a href="#qa-c90b30ce9f21e6a3">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autoformbot" data-paper-title="Formalizing Mathematics at Scale" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Formalizing Mathematics at Scale Agent FAIR at Meta / CERMICS, ENPC, Institut Polytechnique de Paris 2026-05-28 先构建教材声明的依赖DAG，工作者在独立worktree写Lean，经并发审查和合并队列进入主库；失败轨迹生成技能，监督者在合并后核查目标并反馈重规划。原文§3–4 成本过高，不复现（审查 DONE）；Google/Meta优先补漏。成本过高，不复现（审查 DONE）；开源框架不等于本地已运行。每书约一周；39目标的小书消融仍使用600M至1200M tokens，持续数小时。成本过高，不复现（审查 DONE），不调用付费模型、不启动Lean多Agent任务。保留源码和协议，无本地分数、GPU回执或evolve可执行映射，不重新排入自动队列。  多Agent协作 形式化验证与依赖调度 Agent 工具与协作执行：把计划变成可检查的动作 教材声明依赖 DAG 为什么影响 Lean 多 Agent 分工？ 后续定理依赖前面的定义与引理，DAG 可决定哪些目标可并行、哪些要等接口稳定。独立 worktree 与合并队列隔离并发修改，监督者在合并后核查全局目标；局部编译通过不保证整本教材依赖与题意仍忠实。 例如两个定理共享一个尚未合并定义，各自假定不同类型会在合并时冲突；依赖调度可先稳定该定义。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autoformbot" data-paper-title="Formalizing Mathematics at Scale" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Formalizing Mathematics at Scale Agent FAIR at Meta / CERMICS, ENPC, Institut Polytechnique de Paris 2026-05-28 先构建教材声明的依赖DAG，工作者在独立worktree写Lean，经并发审查和合并队列进入主库；失败轨迹生成技能，监督者在合并后核查目标并反馈重规划。原文§3–4 成本过高，不复现（审查 DONE）；Google/Meta优先补漏。成本过高，不复现（审查 DONE）；开源框架不等于本地已运行。每书约一周；39目标的小书消融仍使用600M至1200M tokens，持续数小时。成本过高，不复现（审查 DONE），不调用付费模型、不启动Lean多Agent任务。保留源码和协议，无本地分数、GPU回执或evolve可执行映射，不重新排入自动队列。  多Agent协作 形式化验证与依赖调度 Agent 工具与协作执行：把计划变成可检查的动作 把整本教材的数学声明形式化，为什么不等于逐条独立翻译成 Lean？ 后续定理依赖先前定义和引理，翻译时还要维护共享仓库、编译状态和原意一致性。AutoFormBot 研究多个工作者如何在这种依赖网络中持续推进，并让局部产物能合并成全局目标。编译通过只说明形式系统接受，仍需检查是否忠实表达教材命题。 教学例：一个工作者改了基础定义，其他人的证明可能全部失效；即使各自分支曾编译通过，也必须合并后重新核对。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-autoformbot-6fe44000" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-edd356cace2c3e7c">教材声明依赖 DAG 为什么影响 Lean 多 Agent 分工？</h2>
+<h2 id="qa-edd356cace2c3e7c">把整本教材的数学声明形式化，为什么不等于逐条独立翻译成 Lean？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aautoformbot">Formalizing Mathematics at Scale</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · FAIR at Meta / CERMICS, ENPC, Institut Polytechnique de Paris</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>后续定理依赖前面的定义与引理，DAG 可决定哪些目标可并行、哪些要等接口稳定。独立 worktree 与合并队列隔离并发修改，监督者在合并后核查全局目标；局部编译通过不保证整本教材依赖与题意仍忠实。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如两个定理共享一个尚未合并定义，各自假定不同类型会在合并时冲突；依赖调度可先稳定该定义。</p>
+<p><strong>答案：</strong>后续定理依赖先前定义和引理，翻译时还要维护共享仓库、编译状态和原意一致性。AutoFormBot 研究多个工作者如何在这种依赖网络中持续推进，并让局部产物能合并成全局目标。编译通过只说明形式系统接受，仍需检查是否忠实表达教材命题。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个工作者改了基础定义，其他人的证明可能全部失效；即使各自分支曾编译通过，也必须合并后重新核对。</p>
 <p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.29955">原论文</a> · <a href="../../../../agent-research/2605.29955-autoformbot/">实现解读</a> · <a href="#qa-edd356cace2c3e7c">问题链接</a></p>
 </details>
@@ -1458,16 +1458,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.29955">原论文</a> · <a href="../../../../agent-research/2605.29955-autoformbot/">实现解读</a> · <a href="#qa-3bee4ada3ee0e2fa">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:prompts" data-paper-title="PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving Agent University of Maryland / Google 2026-05-18 Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 profiler 证据排序和受限配置提案；未接入 Google TPU profiler/GSPMD。本地执行 profiler 证据排序和受限配置提案；未接入 Google TPU profiler/GSPMD。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  训练服务优化 多 Agent 性能诊断 Agent 工具与协作执行：把计划变成可检查的动作 profiler 证据为什么比仅凭模型结构猜 sharding 更关键？ 同一模型在不同设备、批量和通信配置下瓶颈可能不同，profiler 给出实际计算、访存与通信迹象。PROMPTS 的多个角色联合知识库诊断再提出候选，意图是让配置有可解释依据；候选看似合理仍需实跑，不能用推理描述替代性能测量。 例如注意力耗时高可能来自计算，也可能来自跨设备通信，若不看 profile 就换分片方式，可能反而增加通信。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:prompts" data-paper-title="PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving Agent University of Maryland / Google 2026-05-18 Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 profiler 证据排序和受限配置提案；未接入 Google TPU profiler/GSPMD。本地执行 profiler 证据排序和受限配置提案；未接入 Google TPU profiler/GSPMD。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  训练服务优化 多 Agent 性能诊断 Agent 工具与协作执行：把计划变成可检查的动作 PROMPTS 为什么把大模型的并行切分配置当成需要反复观测的优化任务？ 模型训练的瓶颈可能来自计算、内存或通信，并随硬件和配置改变。PROMPTS 让 Agent 利用实际 profiler 证据提出并行切分方案，再观察效果，而非只套用常见配置。配置建议不等于已经加速，必须在目标训练系统测量时间、资源和可行性。 教学例：增加切分本想减内存，却让跨设备通信变慢；只有真实 profile 才能辨别当前受内存还是通信限制。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-prompts-61564db7" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-6c5e1155db8327b8">profiler 证据为什么比仅凭模型结构猜 sharding 更关键？</h2>
+<h2 id="qa-6c5e1155db8327b8">PROMPTS 为什么把大模型的并行切分配置当成需要反复观测的优化任务？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aprompts">PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Maryland / Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同一模型在不同设备、批量和通信配置下瓶颈可能不同，profiler 给出实际计算、访存与通信迹象。PROMPTS 的多个角色联合知识库诊断再提出候选，意图是让配置有可解释依据；候选看似合理仍需实跑，不能用推理描述替代性能测量。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如注意力耗时高可能来自计算，也可能来自跨设备通信，若不看 profile 就换分片方式，可能反而增加通信。</p>
+<p><strong>答案：</strong>模型训练的瓶颈可能来自计算、内存或通信，并随硬件和配置改变。PROMPTS 让 Agent 利用实际 profiler 证据提出并行切分方案，再观察效果，而非只套用常见配置。配置建议不等于已经加速，必须在目标训练系统测量时间、资源和可行性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：增加切分本想减内存，却让跨设备通信变慢；只有真实 profile 才能辨别当前受内存还是通信限制。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/">原论文</a> · <a href="../../../../agent-research/mlsys2026-prompts/">实现解读</a> · <a href="#qa-6c5e1155db8327b8">问题链接</a></p>
 </details>
@@ -1511,16 +1511,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/">原论文</a> · <a href="../../../../agent-research/mlsys2026-prompts/">实现解读</a> · <a href="#qa-a73f467c2768d482">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:paperorchestra" data-paper-title="PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing Agent Google Cloud AI Research 2026-04-06 PaperOrchestra 用 Outline、Plotting、Literature Review、Section Writing、Content Refinement 五个 Agent，把零散想法和实验日志转成含文献与图表的 LaTeX 稿件。大纲之后图示与文献检索并行，引用经过实体和时间截止核验，最终根据多维评价接受或回退修订；系统不负责替作者发明或执行新实验。 历史目录补漏：成本过高，不复现（审查 DONE）。历史目录补漏：成本过高，不复现（审查 DONE）。无可执行 adapter、生成能力指标或 GPU 通过声明，不进入自动实现/重试队列。成本过高，不复现（审查 DONE）。原文附录 B 在 10 篇计时子集报告每文约 60–70 次 LLM 调用、39.6 分钟裁尾均值；完整 200 篇、多基线、多 judge 和人工评测成本远不止单次运行。写作需 Gemini3.1Pro，检索为 Gemini3Flash＋联网搜索，另有图像生成和多轮审稿。以上为作者报告和配置判断，不是本地测量，也不假设外部 API 免费或无限。  多Agent协作 研究与论文写作 Agent 工具与协作执行：把计划变成可检查的动作 PaperOrchestra 的写作材料为什么必须来自已有想法与实验日志？ 框架负责组织大纲、图示、文献、章节和修订，不替作者发明或执行新实验。现有日志是结果证据，生成的流畅叙述不能补出缺失测量；大纲后图示与文献可并行，最终稿仍需事实与引用核查。 例如日志只跑过两个 seed，写作 Agent 可以解释这两个结果，不能为了论文完整性自动补写第三个 seed 的数值。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:paperorchestra" data-paper-title="PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing Agent Google Cloud AI Research 2026-04-06 PaperOrchestra 用 Outline、Plotting、Literature Review、Section Writing、Content Refinement 五个 Agent，把零散想法和实验日志转成含文献与图表的 LaTeX 稿件。大纲之后图示与文献检索并行，引用经过实体和时间截止核验，最终根据多维评价接受或回退修订；系统不负责替作者发明或执行新实验。 历史目录补漏：成本过高，不复现（审查 DONE）。历史目录补漏：成本过高，不复现（审查 DONE）。无可执行 adapter、生成能力指标或 GPU 通过声明，不进入自动实现/重试队列。成本过高，不复现（审查 DONE）。原文附录 B 在 10 篇计时子集报告每文约 60–70 次 LLM 调用、39.6 分钟裁尾均值；完整 200 篇、多基线、多 judge 和人工评测成本远不止单次运行。写作需 Gemini3.1Pro，检索为 Gemini3Flash＋联网搜索，另有图像生成和多轮审稿。以上为作者报告和配置判断，不是本地测量，也不假设外部 API 免费或无限。  多Agent协作 研究与论文写作 Agent 工具与协作执行：把计划变成可检查的动作 PaperOrchestra 为什么需要把已有实验材料组织成论证，而不只生成流畅论文段落？ 研究写作要把问题、方法、证据与引用连接起来，流畅文本可能掩盖缺失实验或不受支持的结论。PaperOrchestra 研究多角色如何围绕已有想法和日志协作写作、核查与修订。写作自动化不补足未做的科学验证，引用存在也不表示它支持当前主张。 教学例：日志只有两个数据集，就应围绕这两项解释证据；把语言改得更肯定，不能创造第三个实验或泛化结论。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-paperorchestra-986964dd" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-99583ab8b60fcb1e">PaperOrchestra 的写作材料为什么必须来自已有想法与实验日志？</h2>
+<h2 id="qa-99583ab8b60fcb1e">PaperOrchestra 为什么需要把已有实验材料组织成论证，而不只生成流畅论文段落？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apaperorchestra">PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Cloud AI Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>框架负责组织大纲、图示、文献、章节和修订，不替作者发明或执行新实验。现有日志是结果证据，生成的流畅叙述不能补出缺失测量；大纲后图示与文献可并行，最终稿仍需事实与引用核查。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如日志只跑过两个 seed，写作 Agent 可以解释这两个结果，不能为了论文完整性自动补写第三个 seed 的数值。</p>
+<p><strong>答案：</strong>研究写作要把问题、方法、证据与引用连接起来，流畅文本可能掩盖缺失实验或不受支持的结论。PaperOrchestra 研究多角色如何围绕已有想法和日志协作写作、核查与修订。写作自动化不补足未做的科学验证，引用存在也不表示它支持当前主张。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：日志只有两个数据集，就应围绕这两项解释证据；把语言改得更肯定，不能创造第三个实验或泛化结论。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.05018v1">原论文</a> · <a href="../../../../agent-research/2604.05018-paperorchestra/">实现解读</a> · <a href="#qa-99583ab8b60fcb1e">问题链接</a></p>
 </details>
@@ -1564,16 +1564,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.05018v1">原论文</a> · <a href="../../../../agent-research/2604.05018-paperorchestra/">实现解读</a> · <a href="#qa-ac6886826864233b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:aira2" data-paper-title="AIRA2: Overcoming Bottlenecks in AI Research Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="AIRA2: Overcoming Bottlenecks in AI Research Agents Agent FAIR at Meta / University College London 2026-03-27 以无同步屏障的 steady-state worker pool 提高实验吞吐；训练、搜索、最终选择使用固定的 80/10/10 隐藏切分，搜索只看 search score，结束后才用未参与爬山的 validation 选冠军。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只执行异步调度与 HCE 信号隔离；未复刻 8×H200、Apptainer、Gemini ReAct operator 或论文长时训练，因此不是多 GPU 性能复现。本地只执行异步调度与 HCE 信号隔离；未复刻 8×H200、Apptainer、Gemini ReAct operator 或论文长时训练，因此不是多 GPU 性能复现。三种子诊断：metrics/mechanism-seeds42-44.json  AI 研究 Agent 异步进化 隐藏一致评测 Agent 工具与协作执行：把计划变成可检查的动作 steady-state worker pool 为什么不等待整代实验全部完成？ 同步批次会被最慢实验拖住，steady-state 在某 worker 完成后即可释放资源并启动下一候选，提高异长实验的吞吐。它改变调度而非自动提高模型质量，仍需相同资源账与搜索预算，失败和慢实验成本也不能从结果中删除。 例如四个实验中一个训练很慢，其他三个完成后可继续探索，不必一直空闲等第四个结束再开始新一代。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:aira2" data-paper-title="AIRA2: Overcoming Bottlenecks in AI Research Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="AIRA2: Overcoming Bottlenecks in AI Research Agents Agent FAIR at Meta / University College London 2026-03-27 以无同步屏障的 steady-state worker pool 提高实验吞吐；训练、搜索、最终选择使用固定的 80/10/10 隐藏切分，搜索只看 search score，结束后才用未参与爬山的 validation 选冠军。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地只执行异步调度与 HCE 信号隔离；未复刻 8×H200、Apptainer、Gemini ReAct operator 或论文长时训练，因此不是多 GPU 性能复现。本地只执行异步调度与 HCE 信号隔离；未复刻 8×H200、Apptainer、Gemini ReAct operator 或论文长时训练，因此不是多 GPU 性能复现。三种子诊断：metrics/mechanism-seeds42-44.json  AI 研究 Agent 异步进化 隐藏一致评测 Agent 工具与协作执行：把计划变成可检查的动作 AIR-A2 为什么把自动 ML 研究看成实验资源调度问题，而不只是多提几个点子？ 研究 Agent 可不断产生候选，但训练实验耗时不同，设备和评测预算有限，提案质量与执行吞吐会共同影响搜索进展。AIR-A2 关注让实验管线持续工作并管理候选反馈。忙碌程度不等于研究收益，最终仍要在隔离评测中核验选中方案。 教学例：一个实验跑两小时，另一个只跑十分钟；若整代都等最长任务，空闲设备就无法及时试新的候选。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-aira2-3f4a88e8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-4269c39e84e5ecd2">steady-state worker pool 为什么不等待整代实验全部完成？</h2>
+<h2 id="qa-4269c39e84e5ecd2">AIR-A2 为什么把自动 ML 研究看成实验资源调度问题，而不只是多提几个点子？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aaira2">AIRA2: Overcoming Bottlenecks in AI Research Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · FAIR at Meta / University College London</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>同步批次会被最慢实验拖住，steady-state 在某 worker 完成后即可释放资源并启动下一候选，提高异长实验的吞吐。它改变调度而非自动提高模型质量，仍需相同资源账与搜索预算，失败和慢实验成本也不能从结果中删除。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如四个实验中一个训练很慢，其他三个完成后可继续探索，不必一直空闲等第四个结束再开始新一代。</p>
+<p><strong>答案：</strong>研究 Agent 可不断产生候选，但训练实验耗时不同，设备和评测预算有限，提案质量与执行吞吐会共同影响搜索进展。AIR-A2 关注让实验管线持续工作并管理候选反馈。忙碌程度不等于研究收益，最终仍要在隔离评测中核验选中方案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个实验跑两小时，另一个只跑十分钟；若整代都等最长任务，空闲设备就无法及时试新的候选。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.26499">原论文</a> · <a href="../../../../agent-research/2603.26499-aira2/">实现解读</a> · <a href="#qa-4269c39e84e5ecd2">问题链接</a></p>
 </details>
@@ -1617,16 +1617,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.26499">原论文</a> · <a href="../../../../agent-research/2603.26499-aira2/">实现解读</a> · <a href="#qa-c3a6743a353f8dfc">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dynamic-brt" data-paper-title="Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair Agent Google 2026-01-27 论文让修复和 BRT 留在同一条轨迹；TDD、TLD、Freeform 改变生成顺序。BRT 必须在原 bug 上失败、生成修复上通过。选择器按非测试修复归组，避免不同测试拆散同一修复的票数；ranked 在多数修复组内优先保留测试。原文 §3 完整实验：成本过高，不复现（审查 DONE）。component_only / L1 机制诊断。component_only / L1 机制诊断。实现测试验证及选择器，没有实现或宣称 Passerine 生成 Agent 的能力。完整实验：成本过高，不复现（审查 DONE）。11 项单元测试已通过。自建 increment 算术实例真实启动独立 Python 子进程，观察 assertion_failed → passed；恒真测试、异常而非断言失败、未通过回归的修复均不接纳。ranked 与 dual 的不同选项已通过多数分组实例验证。诊断指标  代码 Agent 程序修复 测试与验证 Agent 工具与协作执行：把计划变成可检查的动作 BRT 为什么要求在原 bug 失败、生成修复上通过？ 前者说明测试确实暴露原故障，后者说明它与候选修复一致，二者共同筛掉恒真或无关测试。但候选和自生成测试可以共同犯错，所以这只是 candidateBRT，不是对隔离正确修复验证过的 plausibleBRT。 例如修复错误地把加一改成加二，测试也期待加二，会满足前后失败通过，却未忠实实现原需求。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:dynamic-brt" data-paper-title="Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair Agent Google 2026-01-27 论文让修复和 BRT 留在同一条轨迹；TDD、TLD、Freeform 改变生成顺序。BRT 必须在原 bug 上失败、生成修复上通过。选择器按非测试修复归组，避免不同测试拆散同一修复的票数；ranked 在多数修复组内优先保留测试。原文 §3 完整实验：成本过高，不复现（审查 DONE）。component_only / L1 机制诊断。component_only / L1 机制诊断。实现测试验证及选择器，没有实现或宣称 Passerine 生成 Agent 的能力。完整实验：成本过高，不复现（审查 DONE）。11 项单元测试已通过。自建 increment 算术实例真实启动独立 Python 子进程，观察 assertion_failed → passed；恒真测试、异常而非断言失败、未通过回归的修复均不接纳。ranked 与 dual 的不同选项已通过多数分组实例验证。诊断指标  代码 Agent 程序修复 测试与验证 Agent 工具与协作执行：把计划变成可检查的动作 自动修 bug 时，为什么先得到能复现问题的测试很有价值？ 文字 issue 往往不够精确，复现测试把失败条件变成可执行观察，帮助区分补丁是否改变目标行为。Dynamic BRT 研究在候选修复过程中生成和选择这类测试。它们提供局部证据，覆盖不足或为错误补丁量身定制的测试仍可能误导，不能代替完整正确性验证。 教学例：报告说空列表会崩溃，复现测试固定这个输入并检查异常；补丁通过该测试后，其他输入仍需要独立检查。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-dynamic-brt-f3fe2d3c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-21b0ad9ec1ec3a10">BRT 为什么要求在原 bug 失败、生成修复上通过？</h2>
+<h2 id="qa-21b0ad9ec1ec3a10">自动修 bug 时，为什么先得到能复现问题的测试很有价值？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adynamic-brt">Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>前者说明测试确实暴露原故障，后者说明它与候选修复一致，二者共同筛掉恒真或无关测试。但候选和自生成测试可以共同犯错，所以这只是 candidateBRT，不是对隔离正确修复验证过的 plausibleBRT。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如修复错误地把加一改成加二，测试也期待加二，会满足前后失败通过，却未忠实实现原需求。</p>
+<p><strong>答案：</strong>文字 issue 往往不够精确，复现测试把失败条件变成可执行观察，帮助区分补丁是否改变目标行为。Dynamic BRT 研究在候选修复过程中生成和选择这类测试。它们提供局部证据，覆盖不足或为错误补丁量身定制的测试仍可能误导，不能代替完整正确性验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：报告说空列表会崩溃，复现测试固定这个输入并检查异常；补丁通过该测试后，其他输入仍需要独立检查。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.19066">原论文</a> · <a href="../../../../agent-research/2601.19066-dynamic-brt/">实现解读</a> · <a href="#qa-21b0ad9ec1ec3a10">问题链接</a></p>
 </details>
@@ -1670,16 +1670,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.19066">原论文</a> · <a href="../../../../agent-research/2601.19066-dynamic-brt/">实现解读</a> · <a href="#qa-d498db4f0ce1da26">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:watch-and-learn" data-paper-title="Watch and Learn: Learning to Use Computers from Online Videos" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Watch and Learn: Learning to Use Computers from Online Videos Agent The Ohio State University 2025-10-06 W&amp;L 把“视频里发生了什么操作”建模为逆动力学：输入前后两张屏幕图像，预测导致状态变化的动作。训练好的 IDM 再标注网络教程视频，结合任务检索形成轨迹，分别用于 CUA 的上下文示范和监督训练，而非直接让通用大模型猜动作或用规则恢复轨迹。 历史目录补漏：成本过高，不复现（审查 DONE）。历史目录补漏：成本过高，不复现（审查 DONE）。本页没有可执行 adapter、组件指标或 GPU 通过声明，不进入自动实现/重试队列。成本过高，不复现（审查 DONE）。固定 v1 §3.1/附录 D.3 使用超过 630k 状态转移，IDM 训练为 8×A100 80GB、15 epochs；另有 53,125 个视频轨迹、7B CUA SFT、联网检索/API 和真实 OSWorld 桌面评测。该配置明显超过单张 A100/A30 或本地 Mac 的短时预算；这是作者配置形成的成本判断，不是本地计时。  工具与环境交互 计算机使用与视频示范 Agent 工具与协作执行：把计划变成可检查的动作 逆动力学 IDM 如何把教程视频转成操作训练材料？ IDM 从前后两张屏幕预测导致变化的动作，再将训练好的模型用于标注网络教程视频，串成状态动作轨迹供检索示范或 CUA SFT。它学习观察间的动作关系，不是通用模型直接猜操作，也不保证所有视频剪辑都能唯一确定动作。 例如前图输入框空白、后图出现文字，IDM 可推断键入动作；若视频省略中间步骤，仍可能有多个解释。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:watch-and-learn" data-paper-title="Watch and Learn: Learning to Use Computers from Online Videos" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Watch and Learn: Learning to Use Computers from Online Videos Agent The Ohio State University 2025-10-06 W&amp;L 把“视频里发生了什么操作”建模为逆动力学：输入前后两张屏幕图像，预测导致状态变化的动作。训练好的 IDM 再标注网络教程视频，结合任务检索形成轨迹，分别用于 CUA 的上下文示范和监督训练，而非直接让通用大模型猜动作或用规则恢复轨迹。 历史目录补漏：成本过高，不复现（审查 DONE）。历史目录补漏：成本过高，不复现（审查 DONE）。本页没有可执行 adapter、组件指标或 GPU 通过声明，不进入自动实现/重试队列。成本过高，不复现（审查 DONE）。固定 v1 §3.1/附录 D.3 使用超过 630k 状态转移，IDM 训练为 8×A100 80GB、15 epochs；另有 53,125 个视频轨迹、7B CUA SFT、联网检索/API 和真实 OSWorld 桌面评测。该配置明显超过单张 A100/A30 或本地 Mac 的短时预算；这是作者配置形成的成本判断，不是本地计时。  工具与环境交互 计算机使用与视频示范 Agent 工具与协作执行：把计划变成可检查的动作 Watch and Learn 为什么尝试利用网上教程视频，而不只依赖昂贵的操作轨迹标注？ 教程视频含有真实软件操作过程，但通常没有机器可直接学习的点击坐标、按键和动作序列。该工作研究把可见演示转成计算机使用训练材料，扩大数据来源。画面本身不是动作真值，遮挡、录制剪辑和输入文本缺失都会影响转化质量与后续执行。 教学例：教程显示文件从一个窗口移到另一个，训练前仍要辨别发生了拖动还是复制命令，不能只凭截图差异编一个点击。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-watch-and-learn-e9cf239b" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-78e1133fbfd419f4">逆动力学 IDM 如何把教程视频转成操作训练材料？</h2>
+<h2 id="qa-78e1133fbfd419f4">Watch and Learn 为什么尝试利用网上教程视频，而不只依赖昂贵的操作轨迹标注？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Awatch-and-learn">Watch and Learn: Learning to Use Computers from Online Videos</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · The Ohio State University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>IDM 从前后两张屏幕预测导致变化的动作，再将训练好的模型用于标注网络教程视频，串成状态动作轨迹供检索示范或 CUA SFT。它学习观察间的动作关系，不是通用模型直接猜操作，也不保证所有视频剪辑都能唯一确定动作。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如前图输入框空白、后图出现文字，IDM 可推断键入动作；若视频省略中间步骤，仍可能有多个解释。</p>
+<p><strong>答案：</strong>教程视频含有真实软件操作过程，但通常没有机器可直接学习的点击坐标、按键和动作序列。该工作研究把可见演示转成计算机使用训练材料，扩大数据来源。画面本身不是动作真值，遮挡、录制剪辑和输入文本缺失都会影响转化质量与后续执行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：教程显示文件从一个窗口移到另一个，训练前仍要辨别发生了拖动还是复制命令，不能只凭截图差异编一个点击。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.04673v1">原论文</a> · <a href="../../../../agent-research/2510.04673-watch-and-learn/">实现解读</a> · <a href="#qa-78e1133fbfd419f4">问题链接</a></p>
 </details>
@@ -1723,16 +1723,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.04673v1">原论文</a> · <a href="../../../../agent-research/2510.04673-watch-and-learn/">实现解读</a> · <a href="#qa-30274243761e3d5f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolgrad" data-paper-title="ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients Agent Google 2025-08-06 先从目标答案反推工具轨迹，再使用 textual gradient 定位并修订失败调用，降低人工轨迹标注成本。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 answer-first 路线与去重 textual edit；未训练 12B 模型或运行 BFCL。本地执行 answer-first 路线与去重 textual edit；未训练 12B 模型或运行 BFCL。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  工具学习 数据生成 Agent 工具与协作执行：把计划变成可检查的动作 答案反推轨迹为何属于训练数据生成，而不是部署时的工具策略？ 已知目标答案可帮助构造达到它的工具路线，再用失败反馈修订训练样本，目的是减少标注成本。部署任务的正确答案本来未知，不能继续把 gold 提供给工具 Agent；否则反推成功只是利用特权标签，不是实际求解能力。 例如训练构造器知道最终数值，能检查计算工具链；测试模型只能看题目和工具反馈，不能先拿该数值再生成路线。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolgrad" data-paper-title="ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients Agent Google 2025-08-06 先从目标答案反推工具轨迹，再使用 textual gradient 定位并修订失败调用，降低人工轨迹标注成本。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 answer-first 路线与去重 textual edit；未训练 12B 模型或运行 BFCL。本地执行 answer-first 路线与去重 textual edit；未训练 12B 模型或运行 BFCL。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  工具学习 数据生成 Agent 工具与协作执行：把计划变成可检查的动作 ToolGrad 为什么关注生成高质量工具调用训练轨迹的成本？ 多步工具任务需要正确接口、参数和结果衔接，人工示范昂贵，模型直接生成又可能积累调用错误。ToolGrad 研究在数据构建侧利用目标反馈修订轨迹，为后续学习提供可执行样本。训练构造时可见的目标不能偷渡给评测 Agent，否则不再是在未知答案下使用工具。 教学例：构造数据时可检查查询是否通向预定结果并修订参数；测试时 Agent 应自己获得证据，不能先读标准答案再挑查询。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-toolgrad-568745ef" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-a8c8872eb7a3514e">答案反推轨迹为何属于训练数据生成，而不是部署时的工具策略？</h2>
+<h2 id="qa-a8c8872eb7a3514e">ToolGrad 为什么关注生成高质量工具调用训练轨迹的成本？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atoolgrad">ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>已知目标答案可帮助构造达到它的工具路线，再用失败反馈修订训练样本，目的是减少标注成本。部署任务的正确答案本来未知，不能继续把 gold 提供给工具 Agent；否则反推成功只是利用特权标签，不是实际求解能力。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如训练构造器知道最终数值，能检查计算工具链；测试模型只能看题目和工具反馈，不能先拿该数值再生成路线。</p>
+<p><strong>答案：</strong>多步工具任务需要正确接口、参数和结果衔接，人工示范昂贵，模型直接生成又可能积累调用错误。ToolGrad 研究在数据构建侧利用目标反馈修订轨迹，为后续学习提供可执行样本。训练构造时可见的目标不能偷渡给评测 Agent，否则不再是在未知答案下使用工具。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：构造数据时可检查查询是否通向预定结果并修订参数；测试时 Agent 应自己获得证据，不能先读标准答案再挑查询。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.04086">原论文</a> · <a href="../../../../agent-research/2508.04086-toolgrad/">实现解读</a> · <a href="#qa-a8c8872eb7a3514e">问题链接</a></p>
 </details>
@@ -1776,16 +1776,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.04086">原论文</a> · <a href="../../../../agent-research/2508.04086-toolgrad/">实现解读</a> · <a href="#qa-b381ff66f4e2605b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolrl" data-paper-title="ToolRL" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ToolRL Agent University of Illinois Urbana-Champaign 2025-04-16 联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 1.0000，average cost 1.1250；方法特有操作有非零 telemetry。  工具强化学习 Agent 工具与协作执行：把计划变成可检查的动作 工具选择、参数、执行和答案奖励为什么需要分别观察？ 选对工具仍可能传错参数，参数合法也可能执行失败，工具成功也未必形成正确答案。分轴奖励提供更具体的学习信号，防止单一终局分数掩盖故障来源；它们仍需真实外部验证，不能把工具响应文字中的“成功”无条件视为成功。 例如查询工具选对但日期格式错，应反映参数问题；工具查到数据后回答抄错金额，则是答案轴问题。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolrl" data-paper-title="ToolRL" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ToolRL Agent University of Illinois Urbana-Champaign 2025-04-16 联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 1.0000，average cost 1.1250；方法特有操作有非零 telemetry。  工具强化学习 Agent 工具与协作执行：把计划变成可检查的动作 ToolRL 为什么不能只检查最后一句答案对不对，就认为工具策略已经学好？ 最终结果把选工具、填参数、执行和利用返回值混在一起，难判断失败来自哪一步。ToolRL 研究用更细的工具反馈训练策略，使行为本身也接受约束。多项奖励仍需合理校准，不能用格式正确或执行成功掩盖答案错误，也不能把本地奖励计算当成大模型 RL 完成。 教学例：选对天气工具却传错城市，返回值格式仍正常；只给最终答案一个分数，很难定位应改的是参数还是工具选择。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-toolrl-7e3d5cc8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7dbdad52ce7f9b4a">工具选择、参数、执行和答案奖励为什么需要分别观察？</h2>
+<h2 id="qa-7dbdad52ce7f9b4a">ToolRL 为什么不能只检查最后一句答案对不对，就认为工具策略已经学好？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atoolrl">ToolRL</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>选对工具仍可能传错参数，参数合法也可能执行失败，工具成功也未必形成正确答案。分轴奖励提供更具体的学习信号，防止单一终局分数掩盖故障来源；它们仍需真实外部验证，不能把工具响应文字中的“成功”无条件视为成功。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如查询工具选对但日期格式错，应反映参数问题；工具查到数据后回答抄错金额，则是答案轴问题。</p>
+<p><strong>答案：</strong>最终结果把选工具、填参数、执行和利用返回值混在一起，难判断失败来自哪一步。ToolRL 研究用更细的工具反馈训练策略，使行为本身也接受约束。多项奖励仍需合理校准，不能用格式正确或执行成功掩盖答案错误，也不能把本地奖励计算当成大模型 RL 完成。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：选对天气工具却传错城市，返回值格式仍正常；只给最终答案一个分数，很难定位应改的是参数还是工具选择。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2504.13958">原论文</a> · <a href="../../../../agent-research/2504.13958-toolrl/">实现解读</a> · <a href="#qa-7dbdad52ce7f9b4a">问题链接</a></p>
 </details>
@@ -1803,15 +1803,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2504.13958">原论文</a> · <a href="../../../../agent-research/2504.13958-toolrl/">实现解读</a> · <a href="#qa-39b3cc929256b458">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolrl" data-paper-title="ToolRL" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ToolRL Agent University of Illinois Urbana-Champaign 2025-04-16 联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 1.0000，average cost 1.1250；方法特有操作有非零 telemetry。  工具强化学习 Agent 工具与协作执行：把计划变成可检查的动作 per-tool reward scaling 与一个全局奖励均值有什么差别？ 不同工具任务难度和奖励尺度不同，全局归一化可能让容易工具或大数值奖励主导更新；按工具统计调整使相对表现更可比。它不消除数据分布差异，也不能将归一化后高优势解释为绝对更重要任务。 例如简单计算器大多成功、数据库查询常失败，直接混组可能总奖励计算器轨迹，按工具标准化可减少这种偏置。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolrl" data-paper-title="ToolRL" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ToolRL Agent University of Illinois Urbana-Champaign 2025-04-16 联合优化工具选择、参数生成和执行结果；动态 reward scaling 让不同工具难度进入同一 RL batch。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 1.0000，average cost 1.1250；方法特有操作有非零 telemetry。  工具强化学习 Agent 工具与协作执行：把计划变成可检查的动作 工具选择奖励与执行、答案奖励，为什么不能互相替代？ 选择奖励检查接口是否匹配任务，执行奖励检查调用能否实际运行，答案奖励评价是否完成最终目标。正确选择可能因参数错误而执行失败，成功执行也可能返回与问题无关的信息。分开监督能暴露这些不同错误，不能把任一环节高分直接当作端到端能力。 教学例：数据库工具选对且查询成功，但时间范围写错，得到另一月份的结果；前两项通过并不意味着最终答案应获奖励。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-119474e77ea679ab">per-tool reward scaling 与一个全局奖励均值有什么差别？</h2>
+<h2 id="qa-119474e77ea679ab">工具选择奖励与执行、答案奖励，为什么不能互相替代？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atoolrl">ToolRL</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>不同工具任务难度和奖励尺度不同，全局归一化可能让容易工具或大数值奖励主导更新；按工具统计调整使相对表现更可比。它不消除数据分布差异，也不能将归一化后高优势解释为绝对更重要任务。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如简单计算器大多成功、数据库查询常失败，直接混组可能总奖励计算器轨迹，按工具标准化可减少这种偏置。</p>
+<p><strong>答案：</strong>选择奖励检查接口是否匹配任务，执行奖励检查调用能否实际运行，答案奖励评价是否完成最终目标。正确选择可能因参数错误而执行失败，成功执行也可能返回与问题无关的信息。分开监督能暴露这些不同错误，不能把任一环节高分直接当作端到端能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：数据库工具选对且查询成功，但时间范围写错，得到另一月份的结果；前两项通过并不意味着最终答案应获奖励。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2504.13958">原论文</a> · <a href="../../../../agent-research/2504.13958-toolrl/">实现解读</a> · <a href="#qa-119474e77ea679ab">问题链接</a></p>
 </details>
@@ -1882,16 +1882,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2504.11536">原论文</a> · <a href="../../../../agent-research/2504.11536-retool/">实现解读</a> · <a href="#qa-888b668a9e5c1718">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:openhands" data-paper-title="OpenHands" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="OpenHands Agent All-Hands-AI 2024-07-23 OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。 浏览器动作目前只保留接口语义，尚未连接网页交互环境，也未运行完整 OpenHands controller 与官方 SWE-bench 容器。用编辑器、终端和可观测事件流驱动通用软件开发 Agent。已实现编辑器/终端事件和真实代码 sandbox；浏览器动作目前只保留接口语义，尚未连接网页交互环境，也未运行完整 OpenHands controller 与官方 SWE-bench 容器。本地将 file-editor 与 terminal 动作写入 event stream；terminal 在独立临时目录执行固定回归测试，最终报告动作、编辑 hash、命令输出和 success。  通用软件 Agent Agent 工具与协作执行：把计划变成可检查的动作 统一 event stream 为什么有助软件 Agent 审计和继续执行？ 终端、编辑器、浏览器动作及观察以同一事件序列记录，控制器可按当前目标和已发生结果继续，便于追踪哪次修改导致测试变化。事件统一不保证工具安全或任务正确，sandbox 与权限仍须由实际运行环境提供。 例如一次文件编辑后运行测试，事件流应能对应编辑 hash、命令输出和退出状态，而不只保存最终“修好了”。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:openhands" data-paper-title="OpenHands" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="OpenHands Agent All-Hands-AI 2024-07-23 OpenHands 提供开放的软件 Agent 平台，把终端、编辑器、浏览器等动作统一到 event stream，并以 sandbox 隔离执行，覆盖修 bug、写代码和仓库维护。 浏览器动作目前只保留接口语义，尚未连接网页交互环境，也未运行完整 OpenHands controller 与官方 SWE-bench 容器。用编辑器、终端和可观测事件流驱动通用软件开发 Agent。已实现编辑器/终端事件和真实代码 sandbox；浏览器动作目前只保留接口语义，尚未连接网页交互环境，也未运行完整 OpenHands controller 与官方 SWE-bench 容器。本地将 file-editor 与 terminal 动作写入 event stream；terminal 在独立临时目录执行固定回归测试，最终报告动作、编辑 hash、命令输出和 success。  通用软件 Agent Agent 工具与协作执行：把计划变成可检查的动作 OpenHands 为什么把软件 Agent 做成能编辑、执行和浏览的工作平台？ 真实软件任务不止生成代码，还需要查看文件、运行命令、检查页面和接续长过程。OpenHands 提供把这些操作与反馈连接起来的基础设施，让控制策略有一致的工作环境。平台支持接口与具体 Agent 能否完成任务是两层证据，接通工具也不等于所有控制策略可靠。 教学例：修改前端后需启动服务并看页面，再根据报错回到代码；只有代码生成接口无法覆盖这条完整工作链。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-openhands-e21fcd2c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-718d5bd7d13021cc">统一 event stream 为什么有助软件 Agent 审计和继续执行？</h2>
+<h2 id="qa-718d5bd7d13021cc">OpenHands 为什么把软件 Agent 做成能编辑、执行和浏览的工作平台？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aopenhands">OpenHands</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · All-Hands-AI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>终端、编辑器、浏览器动作及观察以同一事件序列记录，控制器可按当前目标和已发生结果继续，便于追踪哪次修改导致测试变化。事件统一不保证工具安全或任务正确，sandbox 与权限仍须由实际运行环境提供。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一次文件编辑后运行测试，事件流应能对应编辑 hash、命令输出和退出状态，而不只保存最终“修好了”。</p>
+<p><strong>答案：</strong>真实软件任务不止生成代码，还需要查看文件、运行命令、检查页面和接续长过程。OpenHands 提供把这些操作与反馈连接起来的基础设施，让控制策略有一致的工作环境。平台支持接口与具体 Agent 能否完成任务是两层证据，接通工具也不等于所有控制策略可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修改前端后需启动服务并看页面，再根据报错回到代码；只有代码生成接口无法覆盖这条完整工作链。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2407.16741">原论文</a> · <a href="../../../../agent-research/2407.16741-openhands/">实现解读</a> · <a href="#qa-718d5bd7d13021cc">问题链接</a></p>
 </details>
@@ -1935,16 +1935,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2407.16741">原论文</a> · <a href="../../../../agent-research/2407.16741-openhands/">实现解读</a> · <a href="#qa-56484f867d35a859">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:swe-agent" data-paper-title="SWE-agent" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SWE-agent Agent Princeton University 2024-05-06 通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。 为软件工程 Agent 设计面向仓库浏览、编辑和测试的 Agent-Computer Interface。这是可执行的 SWE-style micro benchmark，不是官方 SWE-bench Lite 数据与 Docker 镜像。名称 swebench-local 明确保留该区别，不能将本地 success 当作论文 resolved rate。本地 ACI 只暴露读文件、写 solution.py 和固定 unittest 命令；每题初始仓库必须先真实失败，Agent 定位、编辑并以退出码验证。  软件工程 ACI Agent 工具与协作执行：把计划变成可检查的动作 专用 ACI 为什么限制文件查看、搜索和编辑的输出形态？ 通用 shell 动作太宽、输出容易冗长，专用接口给模型更明确的可行动作和局部反馈，降低格式与定位负担。接口设计帮助围绕 issue 修复，但不能替代代码语义理解，也不意味着越少工具越一定好，范围须覆盖必要任务。 例如只返回匹配行附近代码比整仓库 dump 更易定位，但若截断隐藏了关键调用者，模型仍可能做错修改。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:swe-agent" data-paper-title="SWE-agent" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SWE-agent Agent Princeton University 2024-05-06 通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。 为软件工程 Agent 设计面向仓库浏览、编辑和测试的 Agent-Computer Interface。这是可执行的 SWE-style micro benchmark，不是官方 SWE-bench Lite 数据与 Docker 镜像。名称 swebench-local 明确保留该区别，不能将本地 success 当作论文 resolved rate。本地 ACI 只暴露读文件、写 solution.py 和固定 unittest 命令；每题初始仓库必须先真实失败，Agent 定位、编辑并以退出码验证。  软件工程 ACI Agent 工具与协作执行：把计划变成可检查的动作 修复 GitHub issue 的 Agent 为什么需要一个便于反复查看和修改仓库的接口？ 模型要在未知仓库里定位问题、读取必要上下文、做小改动并验证，原始终端输出可能过长或难以稳定操作。SWE-agent 研究面向这类流程的交互界面，使行动和反馈更适合模型。界面降低操作负担，不替代任务理解与测试，也不能凭命令执行成功认定 issue 已解决。 教学例：查看命中文件后定位相关行再修改，比一次打印整仓库更容易保持上下文；但修改后仍必须检查目标测试。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-swe-agent-79904a33" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-260212a2f996528e">专用 ACI 为什么限制文件查看、搜索和编辑的输出形态？</h2>
+<h2 id="qa-260212a2f996528e">修复 GitHub issue 的 Agent 为什么需要一个便于反复查看和修改仓库的接口？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aswe-agent">SWE-agent</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>通用 shell 动作太宽、输出容易冗长，专用接口给模型更明确的可行动作和局部反馈，降低格式与定位负担。接口设计帮助围绕 issue 修复，但不能替代代码语义理解，也不意味着越少工具越一定好，范围须覆盖必要任务。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如只返回匹配行附近代码比整仓库 dump 更易定位，但若截断隐藏了关键调用者，模型仍可能做错修改。</p>
+<p><strong>答案：</strong>模型要在未知仓库里定位问题、读取必要上下文、做小改动并验证，原始终端输出可能过长或难以稳定操作。SWE-agent 研究面向这类流程的交互界面，使行动和反馈更适合模型。界面降低操作负担，不替代任务理解与测试，也不能凭命令执行成功认定 issue 已解决。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：查看命中文件后定位相关行再修改，比一次打印整仓库更容易保持上下文；但修改后仍必须检查目标测试。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2405.15793">原论文</a> · <a href="../../../../agent-research/2405.15793-swe-agent/">实现解读</a> · <a href="#qa-260212a2f996528e">问题链接</a></p>
 </details>
@@ -1988,16 +1988,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2405.15793">原论文</a> · <a href="../../../../agent-research/2405.15793-swe-agent/">实现解读</a> · <a href="#qa-52983128b5e50c57">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autogen" data-paper-title="AutoGen" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="AutoGen Agent Microsoft Research 2023-08-16 复杂应用常需要多个模型、工具和人类协作，手写控制流难复用。AutoGen 提供 ConversableAgent 与 conversation programming：每个角色声明能力、回复策略和终止条件，通过群聊或嵌套会话组合成工作流。 AutoGen 把 Agent 抽象为可对话、可配置的角色，用消息路由和终止条件编排 planner、executor、critic、人类或工具。实现 planner/executor/critic 的消息协议、角色交接与显式终止；未嵌入完整 AutoGen 运行时、容器代码执行或真实 LLM 群聊，1.0 是确定性控制流测试而非论文应用得分。PlanBench mini 固定 120 episodes：joint success 1.0000、平均成本 3.0000，记录 120 份 plan、360 条跨角色消息和 120 次 critic round。  多 Agent Agent 工具与协作执行：把计划变成可检查的动作 ConversableAgent 为什么要声明回复策略和终止条件，而不只设角色名？ 多 Agent 对话需要知道收到什么消息时由谁回复、可调用哪些工具、何时停止，否则角色名只改变措辞而无可执行协作。conversation programming 将这些规则组合成群聊或嵌套流程，仍需处理循环、失败和人类介入边界。 例如 critic 发回失败消息后应交给 executor 修复，测试通过后才终止；只把两个模型命名为“工程师”和“审核员”不会自动建立这套逻辑。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:autogen" data-paper-title="AutoGen" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="AutoGen Agent Microsoft Research 2023-08-16 复杂应用常需要多个模型、工具和人类协作，手写控制流难复用。AutoGen 提供 ConversableAgent 与 conversation programming：每个角色声明能力、回复策略和终止条件，通过群聊或嵌套会话组合成工作流。 AutoGen 把 Agent 抽象为可对话、可配置的角色，用消息路由和终止条件编排 planner、executor、critic、人类或工具。实现 planner/executor/critic 的消息协议、角色交接与显式终止；未嵌入完整 AutoGen 运行时、容器代码执行或真实 LLM 群聊，1.0 是确定性控制流测试而非论文应用得分。PlanBench mini 固定 120 episodes：joint success 1.0000、平均成本 3.0000，记录 120 份 plan、360 条跨角色消息和 120 次 critic round。  多 Agent Agent 工具与协作执行：把计划变成可检查的动作 AutoGen 为什么把多 Agent 应用组织成可编程对话？ 复杂任务可能需要模型、代码执行器和人协作，固定一轮问答难以表达反馈后的继续工作。AutoGen 用可配置角色和消息交互组织这些参与者，使工具结果或回复触发后续步骤。角色名称不等于协作能力，还要定义谁回复、何时转交和何时停止，并核验实际产物。 教学例：助手提出代码，执行器返回报错，助手据此修改；这个交互应由明确协议控制，而不是让两个人设无限闲聊。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-autogen-60994f2d" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-520344c861492850">ConversableAgent 为什么要声明回复策略和终止条件，而不只设角色名？</h2>
+<h2 id="qa-520344c861492850">AutoGen 为什么把多 Agent 应用组织成可编程对话？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aautogen">AutoGen</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多 Agent 对话需要知道收到什么消息时由谁回复、可调用哪些工具、何时停止，否则角色名只改变措辞而无可执行协作。conversation programming 将这些规则组合成群聊或嵌套流程，仍需处理循环、失败和人类介入边界。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 critic 发回失败消息后应交给 executor 修复，测试通过后才终止；只把两个模型命名为“工程师”和“审核员”不会自动建立这套逻辑。</p>
+<p><strong>答案：</strong>复杂任务可能需要模型、代码执行器和人协作，固定一轮问答难以表达反馈后的继续工作。AutoGen 用可配置角色和消息交互组织这些参与者，使工具结果或回复触发后续步骤。角色名称不等于协作能力，还要定义谁回复、何时转交和何时停止，并核验实际产物。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：助手提出代码，执行器返回报错，助手据此修改；这个交互应由明确协议控制，而不是让两个人设无限闲聊。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2308.08155">原论文</a> · <a href="../../../../agent-research/2308.08155-autogen/">实现解读</a> · <a href="#qa-520344c861492850">问题链接</a></p>
 </details>
@@ -2041,16 +2041,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2308.08155">原论文</a> · <a href="../../../../agent-research/2308.08155-autogen/">实现解读</a> · <a href="#qa-9d058576a8a28231">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:metagpt" data-paper-title="MetaGPT" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="MetaGPT Agent DeepWisdom 2023-08-01 简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。 用标准作业流程（SOP）把软件需求依次交给产品、架构、工程和测试角色。保留 SOP、角色交付物、真实编辑与测试；本地不是完整 MetaGPT LLM 对话，也不是官方 SWE-bench Lite，fixture 仅验证执行链路和可审计 trace。每个 episode 创建真实临时 Python 仓库；四个角色留下结构化 artifact，工程角色修改文件，QA 角色通过固定 python -m unittest -q 执行回归测试。  多 Agent 软件工程 Agent 工具与协作执行：把计划变成可检查的动作 SOP 的结构化中间物为什么能减少聊天式幻觉级联？ 每个角色应生产明确交付物，下游据合同消费与验证，错误较易在接口处暴露，而不是依赖含混聊天继续推演。SOP 仍可能把错误需求系统化传播，因此结构完整不等于内容正确，需要具体产物和外部测试约束。 例如架构角色输出接口说明，工程角色按其实现，QA 对照需求测试；若仅自由聊天，接口变化可能没有一致记录。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:metagpt" data-paper-title="MetaGPT" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="MetaGPT Agent DeepWisdom 2023-08-01 简单串联多个聊天 Agent 容易让幻觉级联。MetaGPT 把人类软件团队的 SOP 编码成角色化消息流程，每个角色生产结构化中间物，由下游角色消费和验证。 用标准作业流程（SOP）把软件需求依次交给产品、架构、工程和测试角色。保留 SOP、角色交付物、真实编辑与测试；本地不是完整 MetaGPT LLM 对话，也不是官方 SWE-bench Lite，fixture 仅验证执行链路和可审计 trace。每个 episode 创建真实临时 Python 仓库；四个角色留下结构化 artifact，工程角色修改文件，QA 角色通过固定 python -m unittest -q 执行回归测试。  多 Agent 软件工程 Agent 工具与协作执行：把计划变成可检查的动作 MetaGPT 为什么借用软件团队的角色和交付物来组织多 Agent 工作？ 软件开发包含需求、设计、实现和测试，相互依赖的信息若只靠自由聊天传递容易失真。MetaGPT 把流程职责和中间交付物显式化，让下一角色有可检查输入。分工有助于组织工作，但文档齐全不等于代码正确，最终仍需执行与验证。 教学例：架构师给出接口定义，工程师据此实现，测试者检查约定；若接口只散在聊天里，不同角色可能各自理解成不同参数。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-metagpt-ffaa73e8" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-843bb845fe7721da">SOP 的结构化中间物为什么能减少聊天式幻觉级联？</h2>
+<h2 id="qa-843bb845fe7721da">MetaGPT 为什么借用软件团队的角色和交付物来组织多 Agent 工作？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ametagpt">MetaGPT</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · DeepWisdom</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>每个角色应生产明确交付物，下游据合同消费与验证，错误较易在接口处暴露，而不是依赖含混聊天继续推演。SOP 仍可能把错误需求系统化传播，因此结构完整不等于内容正确，需要具体产物和外部测试约束。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如架构角色输出接口说明，工程角色按其实现，QA 对照需求测试；若仅自由聊天，接口变化可能没有一致记录。</p>
+<p><strong>答案：</strong>软件开发包含需求、设计、实现和测试，相互依赖的信息若只靠自由聊天传递容易失真。MetaGPT 把流程职责和中间交付物显式化，让下一角色有可检查输入。分工有助于组织工作，但文档齐全不等于代码正确，最终仍需执行与验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：架构师给出接口定义，工程师据此实现，测试者检查约定；若接口只散在聊天里，不同角色可能各自理解成不同参数。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2308.00352">原论文</a> · <a href="../../../../agent-research/2308.00352-metagpt/">实现解读</a> · <a href="#qa-843bb845fe7721da">问题链接</a></p>
 </details>
@@ -2094,16 +2094,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2308.00352">原论文</a> · <a href="../../../../agent-research/2308.00352-metagpt/">实现解读</a> · <a href="#qa-ad3ab6d711ba69e5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolbench" data-paper-title="ToolBench" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ToolBench Agent Tsinghua University 2023-05-25 分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新或评测协议；没有复刻原论文大模型、多卡训练、私有环境或完整公开 benchmark，因而只报告机制验证。planbench-mini、120 episodes、seed 42：joint success 1.0000，average cost 0.8400。  工具指令与评测 Agent 工具与协作执行：把计划变成可检查的动作 程序化工具样例与生成格式约束为什么解决不同失败？ 样例展示怎样把任务映射到实际调用，格式约束保证输出可被解析和执行；模型可能懂步骤却写错 JSON，也可能格式完全正确却选错工具。配合 system prompt 与示例检索可分别降低这些错误，仍需真实执行判断结果，不能只看语法通过。 例如正确函数需要 date 字段，样例帮助理解日期含义，格式约束防漏引号；两者都不能自动确认查询日期满足用户要求。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolbench" data-paper-title="ToolBench" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ToolBench Agent Tsinghua University 2023-05-25 分析开源 LLM 工具失败后，组合程序化使用样例、system prompt、in-context demonstration retriever 与生成格式约束。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新或评测协议；没有复刻原论文大模型、多卡训练、私有环境或完整公开 benchmark，因而只报告机制验证。planbench-mini、120 episodes、seed 42：joint success 1.0000，average cost 0.8400。  工具指令与评测 Agent 工具与协作执行：把计划变成可检查的动作 ToolBench 为什么研究让语言模型学习多种工具，而不是为每个任务单独手写调用程序？ 真实工具目录包含不同接口和参数，模型需要理解任务、找到相关示例并产出可执行调用。ToolBench 研究数据、示例使用与调用约束如何支持这种通用工具使用。学会输出格式只是一个环节，接口行为、执行返回和最终答案都要验证，不能把合成样例通过当成真实 API 能力。 教学例：同样是查资料，天气和地图接口要求不同字段；模型应根据工具说明组织参数，而不是把一个固定模板套到全部服务。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-toolbench-89c52f4b" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-2a0f6c07e30bff56">程序化工具样例与生成格式约束为什么解决不同失败？</h2>
+<h2 id="qa-2a0f6c07e30bff56">ToolBench 为什么研究让语言模型学习多种工具，而不是为每个任务单独手写调用程序？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atoolbench">ToolBench</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tsinghua University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>样例展示怎样把任务映射到实际调用，格式约束保证输出可被解析和执行；模型可能懂步骤却写错 JSON，也可能格式完全正确却选错工具。配合 system prompt 与示例检索可分别降低这些错误，仍需真实执行判断结果，不能只看语法通过。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如正确函数需要 date 字段，样例帮助理解日期含义，格式约束防漏引号；两者都不能自动确认查询日期满足用户要求。</p>
+<p><strong>答案：</strong>真实工具目录包含不同接口和参数，模型需要理解任务、找到相关示例并产出可执行调用。ToolBench 研究数据、示例使用与调用约束如何支持这种通用工具使用。学会输出格式只是一个环节，接口行为、执行返回和最终答案都要验证，不能把合成样例通过当成真实 API 能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同样是查资料，天气和地图接口要求不同字段；模型应根据工具说明组织参数，而不是把一个固定模板套到全部服务。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.16504">原论文</a> · <a href="../../../../agent-research/2305.16504-toolbench/">实现解读</a> · <a href="#qa-2a0f6c07e30bff56">问题链接</a></p>
 </details>
@@ -2147,16 +2147,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.16504">原论文</a> · <a href="../../../../agent-research/2305.16504-toolbench/">实现解读</a> · <a href="#qa-9b063717d0acaa6b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:critic" data-paper-title="CRITIC" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CRITIC Agent Microsoft 2023-05-19 仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。 让 Agent 用外部工具验证初稿，再依据真实反馈自我修正。外部反馈和迭代改码是真实执行的；反馈源仅为受控代码测试，没有搜索引擎、toxicity classifier 或通用 LLM critic。Agent 先写入一个有缺陷 patch，真实运行 unittest 获取 traceback，再根据反馈写入正确 patch 并复测；报告记录每轮编辑、命令、退出码和输出。  工具反馈 Agent 工具与协作执行：把计划变成可检查的动作 CRITIC 的 critique 为什么要基于外部工具结果？ 模型只读自己的答案再反思，可能重复相同错误；搜索或代码解释器提供独立可观察反馈，帮助定位事实或执行问题。外部反馈不是天然无误，仍需识别工具失败与适用范围，但至少不应由模型自己编造“验证已通过”。 例如一段计算代码运行得到 traceback，比模型口头说“公式看起来正确”更能指出参数类型或索引问题。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:critic" data-paper-title="CRITIC" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CRITIC Agent Microsoft 2023-05-19 仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。 让 Agent 用外部工具验证初稿，再依据真实反馈自我修正。外部反馈和迭代改码是真实执行的；反馈源仅为受控代码测试，没有搜索引擎、toxicity classifier 或通用 LLM critic。Agent 先写入一个有缺陷 patch，真实运行 unittest 获取 traceback，再根据反馈写入正确 patch 并复测；报告记录每轮编辑、命令、退出码和输出。  工具反馈 Agent 工具与协作执行：把计划变成可检查的动作 CRITIC 为什么关心模型已经写完答案后，仍能发现并修正错误？ 初稿可能在事实、推理或代码上出错，模型对自身输出的信心又不一定可靠。CRITIC 研究让模型主动借助外部工具获取检查信号，再据此批评和修订。它把可观察证据引入改稿过程，但检查工具覆盖有限，迭代也可能引入新错，需要分别评估检查与最终结果。 教学例：模型写出一段计算代码后，运行发现边界输入异常，再修改逻辑；仅重读自己“应该正确”的解释不提供同等观察。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-critic-11dab3d3" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-bafd7c35b893a5b8">CRITIC 的 critique 为什么要基于外部工具结果？</h2>
+<h2 id="qa-bafd7c35b893a5b8">CRITIC 为什么关心模型已经写完答案后，仍能发现并修正错误？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acritic">CRITIC</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>模型只读自己的答案再反思，可能重复相同错误；搜索或代码解释器提供独立可观察反馈，帮助定位事实或执行问题。外部反馈不是天然无误，仍需识别工具失败与适用范围，但至少不应由模型自己编造“验证已通过”。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一段计算代码运行得到 traceback，比模型口头说“公式看起来正确”更能指出参数类型或索引问题。</p>
+<p><strong>答案：</strong>初稿可能在事实、推理或代码上出错，模型对自身输出的信心又不一定可靠。CRITIC 研究让模型主动借助外部工具获取检查信号，再据此批评和修订。它把可观察证据引入改稿过程，但检查工具覆盖有限，迭代也可能引入新错，需要分别评估检查与最终结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型写出一段计算代码后，运行发现边界输入异常，再修改逻辑；仅重读自己“应该正确”的解释不提供同等观察。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.11738">原论文</a> · <a href="../../../../agent-research/2305.11738-critic/">实现解读</a> · <a href="#qa-bafd7c35b893a5b8">问题链接</a></p>
 </details>
@@ -2174,15 +2174,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.11738">原论文</a> · <a href="../../../../agent-research/2305.11738-critic/">实现解读</a> · <a href="#qa-1766e55c41f638fd">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:critic" data-paper-title="CRITIC" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CRITIC Agent Microsoft 2023-05-19 仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。 让 Agent 用外部工具验证初稿，再依据真实反馈自我修正。外部反馈和迭代改码是真实执行的；反馈源仅为受控代码测试，没有搜索引擎、toxicity classifier 或通用 LLM critic。Agent 先写入一个有缺陷 patch，真实运行 unittest 获取 traceback，再根据反馈写入正确 patch 并复测；报告记录每轮编辑、命令、退出码和输出。  工具反馈 Agent 工具与协作执行：把计划变成可检查的动作 工具反馈修订与纯 self-correction 的证据边界有何不同？ 纯自纠依赖模型原有知识和推理，外部修订增加可检查的执行或来源证据。收益需在相同初始答案与预算下比较，不能把工具验证范围外的结论也视为证实；代码测试通过并不证明开放问答和毒性判断都可靠。 例如 unittest 可证实给定输入下数值输出，却无法直接验证一段历史陈述的出处，后者需要搜索等不同工具。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:critic" data-paper-title="CRITIC" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CRITIC Agent Microsoft 2023-05-19 仅让 LLM 反思自己的文本可能重复同一错误。CRITIC 调用搜索、代码解释器等外部工具，把可观测反馈带回修订循环，使 critique 有环境证据。 让 Agent 用外部工具验证初稿，再依据真实反馈自我修正。外部反馈和迭代改码是真实执行的；反馈源仅为受控代码测试，没有搜索引擎、toxicity classifier 或通用 LLM critic。Agent 先写入一个有缺陷 patch，真实运行 unittest 获取 traceback，再根据反馈写入正确 patch 并复测；报告记录每轮编辑、命令、退出码和输出。  工具反馈 Agent 工具与协作执行：把计划变成可检查的动作 代码执行反馈与网页检索反馈，对 critique 提供的证据有什么不同？ 执行可直接暴露某个输入下的输出或异常，约束的是该次运行行为；网页检索提供外部文本，需要再检查来源与结论是否相符。两者都扩展了模型自评，但可信边界不同：测试未覆盖的代码仍可能有错，检索命中也不等于网页内容必然支持当前答案。 教学例：除零异常能直接指出一次运行失败；搜到同主题网页则还要读具体段落，不能仅靠搜索标题判定原回答正确。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-4d28a5a81f959747">工具反馈修订与纯 self-correction 的证据边界有何不同？</h2>
+<h2 id="qa-4d28a5a81f959747">代码执行反馈与网页检索反馈，对 critique 提供的证据有什么不同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acritic">CRITIC</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>纯自纠依赖模型原有知识和推理，外部修订增加可检查的执行或来源证据。收益需在相同初始答案与预算下比较，不能把工具验证范围外的结论也视为证实；代码测试通过并不证明开放问答和毒性判断都可靠。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如 unittest 可证实给定输入下数值输出，却无法直接验证一段历史陈述的出处，后者需要搜索等不同工具。</p>
+<p><strong>答案：</strong>执行可直接暴露某个输入下的输出或异常，约束的是该次运行行为；网页检索提供外部文本，需要再检查来源与结论是否相符。两者都扩展了模型自评，但可信边界不同：测试未覆盖的代码仍可能有错，检索命中也不等于网页内容必然支持当前答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：除零异常能直接指出一次运行失败；搜到同主题网页则还要读具体段落，不能仅靠搜索标题判定原回答正确。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.11738">原论文</a> · <a href="../../../../agent-research/2305.11738-critic/">实现解读</a> · <a href="#qa-4d28a5a81f959747">问题链接</a></p>
 </details>
@@ -2200,16 +2200,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.11738">原论文</a> · <a href="../../../../agent-research/2305.11738-critic/">实现解读</a> · <a href="#qa-72d92522b177ffce">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:camel" data-paper-title="CAMEL" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAMEL Agent King Abdullah University of Science and Technology 2023-03-31 用 inception prompting 固定 user/assistant 的角色、目标和边界，通过轮流消息完成任务并生成可研究的多 Agent 社会轨迹。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新或评测协议；没有复刻原论文大模型、多卡训练、私有环境或完整公开 benchmark，因而只报告机制验证。planbench-mini、120 episodes、seed 42：joint success 1.0000，average cost 1.3500。  多 Agent 协作 Agent 工具与协作执行：把计划变成可检查的动作 inception prompting 为什么除了角色还要指定共同目标与边界？ 角色名只提供身份提示，共同目标决定协作方向，边界约束谁提出需求、谁执行以及消息如何推进。CAMEL 用轮流消息形成可研究的合作轨迹，若目标含混或边界冲突，两个 Agent 可能偏题、互相迎合或无限继续。 例如一个角色负责提出数据分析需求、另一个实现，双方需共享明确交付物，不能只设“专家”和“助手”就期待自动合作。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:camel" data-paper-title="CAMEL" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CAMEL Agent King Abdullah University of Science and Technology 2023-03-31 用 inception prompting 固定 user/assistant 的角色、目标和边界，通过轮流消息完成任务并生成可研究的多 Agent 社会轨迹。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新或评测协议；没有复刻原论文大模型、多卡训练、私有环境或完整公开 benchmark，因而只报告机制验证。planbench-mini、120 episodes、seed 42：joint success 1.0000，average cost 1.3500。  多 Agent 协作 Agent 工具与协作执行：把计划变成可检查的动作 CAMEL 为什么用角色合作研究任务完成，而不只研究单模型的一次回答？ 一些任务需要持续提出要求、执行和反馈，两个角色的交互可形成比单次输出更长的协作过程。CAMEL 用明确任务和角色约束研究这种合作及其生成数据。对话长度或角色分工本身不证明解决质量，角色也可能误解目标、重复交流或偏离任务，因此仍需检查结果。 教学例：一个角色提出数据分析需求，另一个逐步实现并接受反馈；若二者都只复述需求，多轮交流并没有真正完成分析。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-camel-640cbec7" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-707d4c87b3c8e6c6">inception prompting 为什么除了角色还要指定共同目标与边界？</h2>
+<h2 id="qa-707d4c87b3c8e6c6">CAMEL 为什么用角色合作研究任务完成，而不只研究单模型的一次回答？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acamel">CAMEL</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · King Abdullah University of Science and Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>角色名只提供身份提示，共同目标决定协作方向，边界约束谁提出需求、谁执行以及消息如何推进。CAMEL 用轮流消息形成可研究的合作轨迹，若目标含混或边界冲突，两个 Agent 可能偏题、互相迎合或无限继续。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个角色负责提出数据分析需求、另一个实现，双方需共享明确交付物，不能只设“专家”和“助手”就期待自动合作。</p>
+<p><strong>答案：</strong>一些任务需要持续提出要求、执行和反馈，两个角色的交互可形成比单次输出更长的协作过程。CAMEL 用明确任务和角色约束研究这种合作及其生成数据。对话长度或角色分工本身不证明解决质量，角色也可能误解目标、重复交流或偏离任务，因此仍需检查结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个角色提出数据分析需求，另一个逐步实现并接受反馈；若二者都只复述需求，多轮交流并没有真正完成分析。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.17760">原论文</a> · <a href="../../../../agent-research/2303.17760-camel/">实现解读</a> · <a href="#qa-707d4c87b3c8e6c6">问题链接</a></p>
 </details>
@@ -2280,15 +2280,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.17580">原论文</a> · <a href="../../../../agent-research/2303.17580-hugginggpt/">实现解读</a> · <a href="#qa-a9a80e3694f3511f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hugginggpt" data-paper-title="HuggingGPT" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="HuggingGPT Agent Zhejiang University 2023-03-30 单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。 本页实现 task planning、按能力描述选择模型、依赖图执行和最终汇总四阶段。复现控制流、能力匹配和依赖执行；没有下载数百个 Hugging Face 模型，也未调用 ChatGPT。mini-suite 的 1.0 表示编排一致，不代表论文跨模态能力。PlanBench mini 120 episodes、seed 42；工具描述充当本地模型 capability registry，每个子任务保留 dependency edge 后执行。  专家模型编排 Agent 工具与协作执行：把计划变成可检查的动作 带依赖 DAG 与无序列出专家调用有什么区别？ 某子任务依赖其他模型输出，DAG 决定哪些可并行、哪些必须等父节点完成；无序调用可能参数尚不存在或消费错误类型。模型结果最后还要整合回答，专家各自运行成功也不等于整体请求已满足。 例如先从图像识别物体，再根据物体描述生成语音，第二步不能在第一步真实结果到达前猜一个对象。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hugginggpt" data-paper-title="HuggingGPT" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="HuggingGPT Agent Zhejiang University 2023-03-30 单个 LLM 难以覆盖视觉、语音和其他专业任务，而模型社区已有大量专家。HuggingGPT 让 ChatGPT 充当控制器：先把请求拆成带依赖的子任务，再按 Hugging Face 模型描述匹配专家，按拓扑顺序执行，最后把多模型输出组织为用户答案。 本页实现 task planning、按能力描述选择模型、依赖图执行和最终汇总四阶段。复现控制流、能力匹配和依赖执行；没有下载数百个 Hugging Face 模型，也未调用 ChatGPT。mini-suite 的 1.0 表示编排一致，不代表论文跨模态能力。PlanBench mini 120 episodes、seed 42；工具描述充当本地模型 capability registry，每个子任务保留 dependency edge 后执行。  专家模型编排 Agent 工具与协作执行：把计划变成可检查的动作 语言控制器与专用多模态模型，分别承担理解编排还是具体计算？ 控制器解析用户需求、选择专家并组织子任务，专用模型实际处理视觉、语音等输入，结果再由控制器整合。编排正确不代表专家预测正确，专家单项成功也不保证最终综合回答符合任务。应分别核查选择、输入输出衔接和结果解释，不能把专家能力都归到语言控制器本身。 教学例：控制器决定先识图再生成语音，图像模型负责检测内容，语音模型负责合成；控制器并未因此自己获得同样的视觉参数。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-070cfaf4dcda6378">带依赖 DAG 与无序列出专家调用有什么区别？</h2>
+<h2 id="qa-070cfaf4dcda6378">语言控制器与专用多模态模型，分别承担理解编排还是具体计算？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahugginggpt">HuggingGPT</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Zhejiang University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>某子任务依赖其他模型输出，DAG 决定哪些可并行、哪些必须等父节点完成；无序调用可能参数尚不存在或消费错误类型。模型结果最后还要整合回答，专家各自运行成功也不等于整体请求已满足。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先从图像识别物体，再根据物体描述生成语音，第二步不能在第一步真实结果到达前猜一个对象。</p>
+<p><strong>答案：</strong>控制器解析用户需求、选择专家并组织子任务，专用模型实际处理视觉、语音等输入，结果再由控制器整合。编排正确不代表专家预测正确，专家单项成功也不保证最终综合回答符合任务。应分别核查选择、输入输出衔接和结果解释，不能把专家能力都归到语言控制器本身。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：控制器决定先识图再生成语音，图像模型负责检测内容，语音模型负责合成；控制器并未因此自己获得同样的视觉参数。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.17580">原论文</a> · <a href="../../../../agent-research/2303.17580-hugginggpt/">实现解读</a> · <a href="#qa-070cfaf4dcda6378">问题链接</a></p>
 </details>
@@ -2306,16 +2306,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.17580">原论文</a> · <a href="../../../../agent-research/2303.17580-hugginggpt/">实现解读</a> · <a href="#qa-974376ffc686eefe">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:art" data-paper-title="ART" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ART Agent University of Washington 2023-03-16 既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。人可以用少量修订扩展任务库。 本页复现任务库检索、程序式多步推理、工具调用处暂停/恢复和成功示例写回，不把 mini-suite 写成完整 BIG-Bench/MMLU。保留自动示例检索、程序生成控制流、工具暂停和库更新；本地任务库很小，不调用冻结大模型，也未复刻 BIG-Bench/MMLU 原始分数。PlanBench mini 120 episodes、seed 42；按工具签名组织任务库，并逐工具暂停/恢复。  自动工具推理 Agent 工具与协作执行：把计划变成可检查的动作 ART 运行器为什么在遇到工具标记时暂停语言生成？ 工具返回必须先实际执行再注入上下文，模型才能继续基于结果推理；若不停下，后续文本可能自行编造观察。示例检索帮助冻结模型生成合适程序，但执行控制负责保持环境证据与模型生成的边界。 例如模型写到计算器调用后先等待真实数值，再续写结论，不能一口气把调用、假结果和最终答案都生成完。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:art" data-paper-title="ART" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ART Agent University of Washington 2023-03-16 既有 tool-use prompting 常需为每个任务手写示例和调用顺序。ART 根据新任务自动检索相近的推理/工具示例，让冻结 LLM 生成程序；运行器遇到工具标记就暂停生成，执行工具并注入结果后继续。人可以用少量修订扩展任务库。 本页复现任务库检索、程序式多步推理、工具调用处暂停/恢复和成功示例写回，不把 mini-suite 写成完整 BIG-Bench/MMLU。保留自动示例检索、程序生成控制流、工具暂停和库更新；本地任务库很小，不调用冻结大模型，也未复刻 BIG-Bench/MMLU 原始分数。PlanBench mini 120 episodes、seed 42；按工具签名组织任务库，并逐工具暂停/恢复。  自动工具推理 Agent 工具与协作执行：把计划变成可检查的动作 ART 为什么希望新任务能复用已有的推理与工具示范？ 为每个任务手写完整 CoT 和工具流程成本高，已有任务示范可能包含可迁移的解题结构。ART 检索相关示例并生成带工具使用的过程，让外部计算参与解决新问题。示例复用仍需当前输入和工具返回校验，不是把旧答案照搬，也不保证任务换域后依旧适用。 教学例：见过用计算器比较成本的示范，遇到新的费用问题可复用分解方式；数字和工具返回必须针对本题重新获取。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-art-62b00229" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d8434f90df5880a2">ART 运行器为什么在遇到工具标记时暂停语言生成？</h2>
+<h2 id="qa-d8434f90df5880a2">ART 为什么希望新任务能复用已有的推理与工具示范？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aart">ART</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Washington</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>工具返回必须先实际执行再注入上下文，模型才能继续基于结果推理；若不停下，后续文本可能自行编造观察。示例检索帮助冻结模型生成合适程序，但执行控制负责保持环境证据与模型生成的边界。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型写到计算器调用后先等待真实数值，再续写结论，不能一口气把调用、假结果和最终答案都生成完。</p>
+<p><strong>答案：</strong>为每个任务手写完整 CoT 和工具流程成本高，已有任务示范可能包含可迁移的解题结构。ART 检索相关示例并生成带工具使用的过程，让外部计算参与解决新问题。示例复用仍需当前输入和工具返回校验，不是把旧答案照搬，也不保证任务换域后依旧适用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：见过用计算器比较成本的示范，遇到新的费用问题可复用分解方式；数字和工具返回必须针对本题重新获取。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.09014">原论文</a> · <a href="../../../../agent-research/2303.09014-art/">实现解读</a> · <a href="#qa-d8434f90df5880a2">问题链接</a></p>
 </details>
@@ -2359,16 +2359,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2303.09014">原论文</a> · <a href="../../../../agent-research/2303.09014-art/">实现解读</a> · <a href="#qa-9e15636c7c6d5f1c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolformer" data-paper-title="Toolformer" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Toolformer Agent Meta AI Research 2023-02-09 手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。 本页实现候选 API call 生成、no-call/masked-call loss 对照和自监督过滤，只保留能降低预测 loss 的工具调用。实现自监督候选过滤的核心判据，但 loss 来自确定性 tool utility，不是 GPT-J token loss；未进行 6.7B continued training，也未复刻论文五类真实 API。ScaleMCP mini 对 required 和 distractor tools 都生成候选，只有相对 no-call 降低 loss 的调用被接受。  工具学习 Agent 工具与协作执行：把计划变成可检查的动作 Toolformer 的工具调用为什么是筛过才进入训练语料？ 少量示范采样出的调用可能无用或错误，执行真实 API 后比较其对后续 token 预测损失的帮助，只有足够改善的候选才保留。自监督信号来自语言建模效用，不等于工具结果绝对正确，也不保证最终开放任务必然受益。 例如计算器结果让后续数字更容易预测可保留；一个无关天气查询即使格式合法，也可能对后续文本没有帮助。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolformer" data-paper-title="Toolformer" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Toolformer Agent Meta AI Research 2023-02-09 手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。 本页实现候选 API call 生成、no-call/masked-call loss 对照和自监督过滤，只保留能降低预测 loss 的工具调用。实现自监督候选过滤的核心判据，但 loss 来自确定性 tool utility，不是 GPT-J token loss；未进行 6.7B continued training，也未复刻论文五类真实 API。ScaleMCP mini 对 required 和 distractor tools 都生成候选，只有相对 no-call 降低 loss 的调用被接受。  工具学习 Agent 工具与协作执行：把计划变成可检查的动作 Toolformer 为什么希望模型从文本训练中学会何时借助外部工具？ 语言模型可生成流畅文本，却不总擅长计算、查新事实或可靠检索。Toolformer 研究把有帮助的 API 调用融入训练语料，让模型学习调用的时机、参数及返回值利用。数据筛选只提供学习信号，工具存在也不保证每次调用有用，更不能把本地筛选流程当作模型已训练。 教学例：写到具体乘法时调用计算器，再接着完成句子；是否插入调用应取决于它能否帮助后续预测，而不是逢数字必调。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-toolformer-dc9c6efa" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-941bf8191f60f91a">Toolformer 的工具调用为什么是筛过才进入训练语料？</h2>
+<h2 id="qa-941bf8191f60f91a">Toolformer 为什么希望模型从文本训练中学会何时借助外部工具？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atoolformer">Toolformer</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>少量示范采样出的调用可能无用或错误，执行真实 API 后比较其对后续 token 预测损失的帮助，只有足够改善的候选才保留。自监督信号来自语言建模效用，不等于工具结果绝对正确，也不保证最终开放任务必然受益。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如计算器结果让后续数字更容易预测可保留；一个无关天气查询即使格式合法，也可能对后续文本没有帮助。</p>
+<p><strong>答案：</strong>语言模型可生成流畅文本，却不总擅长计算、查新事实或可靠检索。Toolformer 研究把有帮助的 API 调用融入训练语料，让模型学习调用的时机、参数及返回值利用。数据筛选只提供学习信号，工具存在也不保证每次调用有用，更不能把本地筛选流程当作模型已训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：写到具体乘法时调用计算器，再接着完成句子；是否插入调用应取决于它能否帮助后续预测，而不是逢数字必调。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2302.04761">原论文</a> · <a href="../../../../agent-research/2302.04761-toolformer/">实现解读</a> · <a href="#qa-941bf8191f60f91a">问题链接</a></p>
 </details>
@@ -2386,15 +2386,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2302.04761">原论文</a> · <a href="../../../../agent-research/2302.04761-toolformer/">实现解读</a> · <a href="#qa-bf11c35f247b81e0">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolformer" data-paper-title="Toolformer" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Toolformer Agent Meta AI Research 2023-02-09 手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。 本页实现候选 API call 生成、no-call/masked-call loss 对照和自监督过滤，只保留能降低预测 loss 的工具调用。实现自监督候选过滤的核心判据，但 loss 来自确定性 tool utility，不是 GPT-J token loss；未进行 6.7B continued training，也未复刻论文五类真实 API。ScaleMCP mini 对 required 和 distractor tools 都生成候选，只有相对 no-call 降低 loss 的调用被接受。  工具学习 Agent 工具与协作执行：把计划变成可检查的动作 真实返回值与隐藏返回值、无调用条件的比较为什么有意义？ 它试图区分收益来自实际工具信息，还是仅来自调用文本或额外上下文模式。只比较调用前后可能把格式提示作用也算进工具效用；对照仍依赖相同文本位置与模型损失，不能用预设 required 标签替代真实 token loss 后宣称等价。 例如写上“计算器”三个字本身可能提示算术类型，隐藏结果对照可检查真正数值是否另外带来预测改善。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toolformer" data-paper-title="Toolformer" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Toolformer Agent Meta AI Research 2023-02-09 手工标注工具调用昂贵，纯 prompting 又难以让较小模型稳定决定何时调用。Toolformer 先用少量 demonstration 采样 API call，再比较插入真实返回值、隐藏返回值和完全不调用时的后续 token loss，只保留确实有用的调用并继续语言模型训练。 本页实现候选 API call 生成、no-call/masked-call loss 对照和自监督过滤，只保留能降低预测 loss 的工具调用。实现自监督候选过滤的核心判据，但 loss 来自确定性 tool utility，不是 GPT-J token loss；未进行 6.7B continued training，也未复刻论文五类真实 API。ScaleMCP mini 对 required 和 distractor tools 都生成候选，只有相对 no-call 降低 loss 的调用被接受。  工具学习 Agent 工具与协作执行：把计划变成可检查的动作 Toolformer 的调用数据构建与人工逐条标注工具轨迹，监督来源有何区别？ 人工轨迹直接示范动作序列，Toolformer 则从少量示范出发采样候选调用，用返回值对后续文本预测的帮助筛选样本，再用于语言模型训练。它减少逐条人工标注需求，但仍依赖已有工具和筛选信号，不能据此声称无需任何示范或已经验证任意开放任务。 教学例：人工不必为每句话标出计算器调用，而是由候选生成与 loss 检查挑选部分调用；错误候选仍可能需要过滤。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-50aa9ed63c22b586">真实返回值与隐藏返回值、无调用条件的比较为什么有意义？</h2>
+<h2 id="qa-50aa9ed63c22b586">Toolformer 的调用数据构建与人工逐条标注工具轨迹，监督来源有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atoolformer">Toolformer</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta AI Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它试图区分收益来自实际工具信息，还是仅来自调用文本或额外上下文模式。只比较调用前后可能把格式提示作用也算进工具效用；对照仍依赖相同文本位置与模型损失，不能用预设 required 标签替代真实 token loss 后宣称等价。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如写上“计算器”三个字本身可能提示算术类型，隐藏结果对照可检查真正数值是否另外带来预测改善。</p>
+<p><strong>答案：</strong>人工轨迹直接示范动作序列，Toolformer 则从少量示范出发采样候选调用，用返回值对后续文本预测的帮助筛选样本，再用于语言模型训练。它减少逐条人工标注需求，但仍依赖已有工具和筛选信号，不能据此声称无需任何示范或已经验证任意开放任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：人工不必为每句话标出计算器调用，而是由候选生成与 loss 检查挑选部分调用；错误候选仍可能需要过滤。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2302.04761">原论文</a> · <a href="../../../../agent-research/2302.04761-toolformer/">实现解读</a> · <a href="#qa-50aa9ed63c22b586">问题链接</a></p>
 </details>
@@ -2412,16 +2412,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2302.04761">原论文</a> · <a href="../../../../agent-research/2302.04761-toolformer/">实现解读</a> · <a href="#qa-8a4db4174ad5d40b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pal" data-paper-title="PAL" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="PAL Agent Carnegie Mellon University 2022-11-18 LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。 本页复现“语言模型生成程序、符号 runtime 执行、返回解释器答案”的系统边界，不把结构化 task program 写成 Codex 生成代码。保留神经程序生成与符号执行的职责分离；本地使用受控中间表示而非任意 Python，不调用 Codex，也未复刻原论文 GSM8K。ScaleMCP mini 120 episodes、seed 42；每题实际构建 CALL/RETURN 程序并由本地解释器执行。  程序推理 Agent 工具与协作执行：把计划变成可检查的动作 确定性解释器为什么不能保证 PAL 的最终答案总正确？ 解释器可精确执行给定程序，却不知道模型是否正确理解题意和写出对应算法。职责分离把算术或符号执行交给 runtime，保留了建模错误、变量绑定和边界条件风险；程序不报错不等于解法满足自然语言要求。 例如题目要计算剩余数量，模型误写成总数量，Python 会准确算出错误建模的结果，不会自动纠正题意。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pal" data-paper-title="PAL" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="PAL Agent Carnegie Mellon University 2022-11-18 LLM 擅长把问题分解成步骤，却会在算术和符号执行阶段出错。PAL 让 LLM 输出带变量和控制流的程序，最终计算完全交给 Python 等确定性 runtime；模型只承担自然语言理解和程序合成。 本页复现“语言模型生成程序、符号 runtime 执行、返回解释器答案”的系统边界，不把结构化 task program 写成 Codex 生成代码。保留神经程序生成与符号执行的职责分离；本地使用受控中间表示而非任意 Python，不调用 Codex，也未复刻原论文 GSM8K。ScaleMCP mini 120 episodes、seed 42；每题实际构建 CALL/RETURN 程序并由本地解释器执行。  程序推理 Agent 工具与协作执行：把计划变成可检查的动作 PAL 为什么让语言模型写程序，再把具体计算交给解释器？ 自然语言问题往往既需要理解关系，又需要精确执行运算。PAL 让模型把理解转成可运行程序，由解释器完成计算，减少语言模型逐步手算的负担。关键前提是程序确实表达题意，解释器只执行代码，不会发现遗漏条件或错误建模。 教学例：模型把人数和单价写成变量交给程序求总价；若忘了儿童半价，计算器算得再准确也只是执行了错误公式。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-pal-f0f14e4c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7e1c7b8a77c3e843">确定性解释器为什么不能保证 PAL 的最终答案总正确？</h2>
+<h2 id="qa-7e1c7b8a77c3e843">PAL 为什么让语言模型写程序，再把具体计算交给解释器？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apal">PAL</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Carnegie Mellon University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>解释器可精确执行给定程序，却不知道模型是否正确理解题意和写出对应算法。职责分离把算术或符号执行交给 runtime，保留了建模错误、变量绑定和边界条件风险；程序不报错不等于解法满足自然语言要求。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如题目要计算剩余数量，模型误写成总数量，Python 会准确算出错误建模的结果，不会自动纠正题意。</p>
+<p><strong>答案：</strong>自然语言问题往往既需要理解关系，又需要精确执行运算。PAL 让模型把理解转成可运行程序，由解释器完成计算，减少语言模型逐步手算的负担。关键前提是程序确实表达题意，解释器只执行代码，不会发现遗漏条件或错误建模。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型把人数和单价写成变量交给程序求总价；若忘了儿童半价，计算器算得再准确也只是执行了错误公式。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2211.10435">原论文</a> · <a href="../../../../agent-research/2211.10435-pal/">实现解读</a> · <a href="#qa-7e1c7b8a77c3e843">问题链接</a></p>
 </details>
@@ -2465,16 +2465,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2211.10435">原论文</a> · <a href="../../../../agent-research/2211.10435-pal/">实现解读</a> · <a href="#qa-8bc0289c64e50fec">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mrkl" data-paper-title="MRKL" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="MRKL Agent AI21 Labs 2022-05-01 单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。 本页实现显式 router、神经/离散专家注册表和结果汇总；不是让一个通用 prompt 直接返回正确工具链。保留 router 和可区分的专家执行计数；本地专家是确定性 mini-suite 工具，不调用 Jurassic-X、真实搜索服务或私有知识库，成本是统一代理成本而非线上延迟。ScaleMCP mini 120 episodes、seed 42；每个工具动作都先经 router，计算器、日历、地图、天气、数据库和表格进入离散专家。  神经符号路由 Agent 工具与协作执行：把计划变成可检查的动作 MRKL router 为什么是系统正确性的重要边界？ 模块可提供精确计算或知识查询，但只有任务被路由到合适模块、参数表达正确时才有用。router 负责选择语言模型、计算器等专家，模块内部确定性不能补救误分任务或题意误解；核心是分工和接口，不是一个新语言建模损失。 例如问汇率的任务误送纯计算器，计算再精确也拿不到时效数据；需要正确选择知识或查询模块。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mrkl" data-paper-title="MRKL" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="MRKL Agent AI21 Labs 2022-05-01 单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。 本页实现显式 router、神经/离散专家注册表和结果汇总；不是让一个通用 prompt 直接返回正确工具链。保留 router 和可区分的专家执行计数；本地专家是确定性 mini-suite 工具，不调用 Jurassic-X、真实搜索服务或私有知识库，成本是统一代理成本而非线上延迟。ScaleMCP mini 120 episodes、seed 42；每个工具动作都先经 router，计算器、日历、地图、天气、数据库和表格进入离散专家。  神经符号路由 Agent 工具与协作执行：把计划变成可检查的动作 MRKL 为什么把语言模型与不同的外部专家模块组合起来？ 开放问题既可能需要语言理解，也可能需要精确计算、数据库查询或其他专用能力。MRKL 让语言模型组织任务并路由到适合的模块，再整合结果。模块化把能力来源分开，也增加路由和接口衔接的错误点，不能从某个模块可靠推出整个系统可靠。 教学例：问账户余额变化，可让数据库取数、计算模块求差，再用语言解释；若路由查询了错误账户，正确计算也无济于事。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-mrkl-816ab670" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-c7fbb257a95880c3">MRKL router 为什么是系统正确性的重要边界？</h2>
+<h2 id="qa-c7fbb257a95880c3">MRKL 为什么把语言模型与不同的外部专家模块组合起来？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amrkl">MRKL</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · AI21 Labs</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>模块可提供精确计算或知识查询，但只有任务被路由到合适模块、参数表达正确时才有用。router 负责选择语言模型、计算器等专家，模块内部确定性不能补救误分任务或题意误解；核心是分工和接口，不是一个新语言建模损失。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如问汇率的任务误送纯计算器，计算再精确也拿不到时效数据；需要正确选择知识或查询模块。</p>
+<p><strong>答案：</strong>开放问题既可能需要语言理解，也可能需要精确计算、数据库查询或其他专用能力。MRKL 让语言模型组织任务并路由到适合的模块，再整合结果。模块化把能力来源分开，也增加路由和接口衔接的错误点，不能从某个模块可靠推出整个系统可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：问账户余额变化，可让数据库取数、计算模块求差，再用语言解释；若路由查询了错误账户，正确计算也无济于事。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2205.00445">原论文</a> · <a href="../../../../agent-research/2205.00445-mrkl/">实现解读</a> · <a href="#qa-c7fbb257a95880c3">问题链接</a></p>
 </details>
@@ -2518,16 +2518,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2205.00445">原论文</a> · <a href="../../../../agent-research/2205.00445-mrkl/">实现解读</a> · <a href="#qa-559b994dc46c150a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:saycan" data-paper-title="SayCan" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SayCan Agent Robotics at Google 2022-04-04 LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。 本页复现逐步技能枚举及“语言分数 × affordance”决策，不把确定性工具 mini-suite 冒充真实移动机械臂。保留双分数逐步规划与不可行技能过滤；affordance 是确定性本地可执行性，不含视觉、机器人控制策略或真实 value-function 训练。PlanBench mini 120 episodes、seed 42；每一步同时打分必要技能和干扰技能。  具身规划 Agent 工具与协作执行：把计划变成可检查的动作 语言相关性与 affordance 为什么要一起决定技能？ 语言分数衡量技能是否符合指令和历史，affordance 衡量当前环境下能否成功。只看语言会选眼前不可做动作，只看可执行性可能做与目标无关的事；乘积结合两者，但仍限于已有预训练技能和价值函数适用范围。 例如“拿杯子”很符合请求，但杯子够不到时 affordance 低；“走到桌边”虽间接，却可能更可执行并推进目标。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:saycan" data-paper-title="SayCan" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="SayCan Agent Robotics at Google 2022-04-04 LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。 本页复现逐步技能枚举及“语言分数 × affordance”决策，不把确定性工具 mini-suite 冒充真实移动机械臂。保留双分数逐步规划与不可行技能过滤；affordance 是确定性本地可执行性，不含视觉、机器人控制策略或真实 value-function 训练。PlanBench mini 120 episodes、seed 42；每一步同时打分必要技能和干扰技能。  具身规划 Agent 工具与协作执行：把计划变成可检查的动作 机器人为什么不能把语言模型生成的合理计划直接当成可执行动作？ 语言模型擅长判断语义上该做什么，却未必知道机器人当前位置、技能范围和物理条件。SayCan 研究把语言任务理解与实际技能可行性联系起来，选择既相关又有机会执行的下一步。可行性估计仍可能失准，模拟计划和真实完成要分别报告。 教学例：用户要饮料，语言上“拿杯子”合理；如果杯子不在可达范围，机器人需要先选择自己当前能完成的操作。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-saycan-7674e520" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-a29c0976bcc5a61c">语言相关性与 affordance 为什么要一起决定技能？</h2>
+<h2 id="qa-a29c0976bcc5a61c">机器人为什么不能把语言模型生成的合理计划直接当成可执行动作？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asaycan">SayCan</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Robotics at Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>语言分数衡量技能是否符合指令和历史，affordance 衡量当前环境下能否成功。只看语言会选眼前不可做动作，只看可执行性可能做与目标无关的事；乘积结合两者，但仍限于已有预训练技能和价值函数适用范围。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“拿杯子”很符合请求，但杯子够不到时 affordance 低；“走到桌边”虽间接，却可能更可执行并推进目标。</p>
+<p><strong>答案：</strong>语言模型擅长判断语义上该做什么，却未必知道机器人当前位置、技能范围和物理条件。SayCan 研究把语言任务理解与实际技能可行性联系起来，选择既相关又有机会执行的下一步。可行性估计仍可能失准，模拟计划和真实完成要分别报告。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用户要饮料，语言上“拿杯子”合理；如果杯子不在可达范围，机器人需要先选择自己当前能完成的操作。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2204.01691">原论文</a> · <a href="../../../../agent-research/2204.01691-saycan/">实现解读</a> · <a href="#qa-a29c0976bcc5a61c">问题链接</a></p>
 </details>
@@ -2571,16 +2571,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2204.01691">原论文</a> · <a href="../../../../agent-research/2204.01691-saycan/">实现解读</a> · <a href="#qa-449b830f70953589">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:webgpt" data-paper-title="WebGPT" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="WebGPT Agent OpenAI 2021-12-17 长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。 本页复现文本浏览轨迹、证据引用和 reward-model 拒绝采样；本地确定性工具环境不是实时互联网浏览。保留 browser-action、citation constraint 和 trajectory rejection sampling；不访问实时网页、不训练 GPT-3/reward model，也不复刻 ELI5 人评。ScaleMCP mini 120 episodes、seed 42；每题生成两条工具轨迹，按证据覆盖选择。  浏览问答 Agent 工具与协作执行：把计划变成可检查的动作 回答带链接为什么仍不等于来源支持了结论？ 链接只说明引用位置存在，内容可能无关、过期或未蕴含回答中的具体断言。WebGPT 把浏览动作与引用收集纳入轨迹，提升可核查性，但最终仍需评价来源支持与事实，不可用引用数量替代真实可靠性。 例如回答写“当地已开售”并附产品主页，若页面只介绍功能没有地区销售说明，这个链接仍不能支持该断言。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:webgpt" data-paper-title="WebGPT" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="WebGPT Agent OpenAI 2021-12-17 长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。 本页复现文本浏览轨迹、证据引用和 reward-model 拒绝采样；本地确定性工具环境不是实时互联网浏览。保留 browser-action、citation constraint 和 trajectory rejection sampling；不访问实时网页、不训练 GPT-3/reward model，也不复刻 ELI5 人评。ScaleMCP mini 120 episodes、seed 42；每题生成两条工具轨迹，按证据覆盖选择。  浏览问答 Agent 工具与协作执行：把计划变成可检查的动作 WebGPT 为什么把浏览和来源支持纳入长篇问答，而不只让模型凭记忆作答？ 开放问题常需要新信息或多个来源，纯参数回答可能缺少可核查依据。WebGPT 让模型通过浏览收集证据，再形成带引用的回答，并利用人类反馈评价质量。浏览获得的文本仍需正确理解，链接数量不能代替来源对具体结论的支持，也不保证覆盖所有重要事实。 教学例：比较两项政策需要分别找到原始说明，再解释差异；只在段末附一个相关网站，不能证明其中每个数字都有依据。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-webgpt-13267288" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-cc127a045c60084f">回答带链接为什么仍不等于来源支持了结论？</h2>
+<h2 id="qa-cc127a045c60084f">WebGPT 为什么把浏览和来源支持纳入长篇问答，而不只让模型凭记忆作答？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Awebgpt">WebGPT</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · OpenAI</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>链接只说明引用位置存在，内容可能无关、过期或未蕴含回答中的具体断言。WebGPT 把浏览动作与引用收集纳入轨迹，提升可核查性，但最终仍需评价来源支持与事实，不可用引用数量替代真实可靠性。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如回答写“当地已开售”并附产品主页，若页面只介绍功能没有地区销售说明，这个链接仍不能支持该断言。</p>
+<p><strong>答案：</strong>开放问题常需要新信息或多个来源，纯参数回答可能缺少可核查依据。WebGPT 让模型通过浏览收集证据，再形成带引用的回答，并利用人类反馈评价质量。浏览获得的文本仍需正确理解，链接数量不能代替来源对具体结论的支持，也不保证覆盖所有重要事实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：比较两项政策需要分别找到原始说明，再解释差异；只在段末附一个相关网站，不能证明其中每个数字都有依据。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2112.09332">原论文</a> · <a href="../../../../agent-research/2112.09332-webgpt/">实现解读</a> · <a href="#qa-cc127a045c60084f">问题链接</a></p>
 </details>

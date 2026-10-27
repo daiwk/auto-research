@@ -80,16 +80,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28569v1">原论文</a> · <a href="../../../../recommendation-components/2610.28569-echo-selector-loss/">实现解读</a> · <a href="#qa-bb9a81762fca55db">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:repair-state" data-paper-title="Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders 搜广推与 LLM 应用 原文首页未列第一作者机构 2026-10-01 冻结 encoder 与原 task head，从已有 forward cache 中比较各 timestep 表征和当前 preference state，选择长程、近期或局部 burst 的纠正证据并做 residual repair。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 frozen-cache evidence selection 与 residual correction；用户批准为学术/Evolve 例外，无线上 A/B。收录例外：用户于 2026-10-02 明确批准的学术/Evolve 机制例外；论文没有量化线上 A/B，不进入工业证据结论。执行 frozen-cache evidence selection 与 residual correction；用户批准为学术/Evolve 例外，无线上 A/B。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。  personalization state-repair sequential-recommendation 搜广推 用户历史与排序骨干 Repair-State 为什么用 ht−z 的差分，而不是把选中历史直接再加一遍？ 差分表达该时间状态相对当前偏好的缺失或偏移，残差修补有机会补特定方向，直接累加易重复放大已存在信息。Top-K 选择依据当前 query，仍可能选到过时或噪声片段。冻结主干保成本，不保证修复总有益。 示意：当前已充分表示摄影，再加摄影历史可能只加重复；若近期育儿状态与当前差异大，差分更有机会补新的方向。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:repair-state" data-paper-title="Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders 搜广推与 LLM 应用 原文首页未列第一作者机构 2026-10-01 冻结 encoder 与原 task head，从已有 forward cache 中比较各 timestep 表征和当前 preference state，选择长程、近期或局部 burst 的纠正证据并做 residual repair。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 frozen-cache evidence selection 与 residual correction；用户批准为学术/Evolve 例外，无线上 A/B。收录例外：用户于 2026-10-02 明确批准的学术/Evolve 机制例外；论文没有量化线上 A/B，不进入工业证据结论。执行 frozen-cache evidence selection 与 residual correction；用户批准为学术/Evolve 例外，无线上 A/B。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。  personalization state-repair sequential-recommendation 搜广推 用户历史与排序骨干 Repair-State 中 ht 与当前偏好 z 都是向量，为什么不能随便互换？ ht 是某个时间位置的上下文化状态，z 是当前供任务头使用的偏好汇总，两者维度相同但覆盖与时点不同。单个旧状态可能只反映当时局部需求，不能直接代表现在全部兴趣。修补需要选择相关证据并保留当前状态，而非见到同形张量就直接覆盖。 示意：去年的相机比较状态包含当时需求，当前用户已准备露营；直接用旧 ht 替换 z 会丢掉近期信息，同为 d 维并不让它们语义相同。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-repair-state-eec04848" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-834d6a05b8e38552">Repair-State 为什么用 ht−z 的差分，而不是把选中历史直接再加一遍？</h2>
+<h2 id="qa-834d6a05b8e38552">Repair-State 中 ht 与当前偏好 z 都是向量，为什么不能随便互换？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arepair-state">Not All Is Lost: Repairing Lossy User Preference States of Personalization Encoders</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>差分表达该时间状态相对当前偏好的缺失或偏移，残差修补有机会补特定方向，直接累加易重复放大已存在信息。Top-K 选择依据当前 query，仍可能选到过时或噪声片段。冻结主干保成本，不保证修复总有益。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>当前已充分表示摄影，再加摄影历史可能只加重复；若近期育儿状态与当前差异大，差分更有机会补新的方向。</p>
+<p><strong>答案：</strong>ht 是某个时间位置的上下文化状态，z 是当前供任务头使用的偏好汇总，两者维度相同但覆盖与时点不同。单个旧状态可能只反映当时局部需求，不能直接代表现在全部兴趣。修补需要选择相关证据并保留当前状态，而非见到同形张量就直接覆盖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>去年的相机比较状态包含当时需求，当前用户已准备露营；直接用旧 ht 替换 z 会丢掉近期信息，同为 d 维并不让它们语义相同。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01270">原论文</a> · <a href="../../../../reproductions/2610.01270-repair-state/">实现解读</a> · <a href="#qa-834d6a05b8e38552">问题链接</a></p>
 </details>
@@ -186,16 +186,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37183">原论文</a> · <a href="../../../../reproductions/2609.37183-helix/">实现解读</a> · <a href="#qa-d081140a6218cc83">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:recap-ctr" data-paper-title="Beyond Interaction Capacity: Estimator Scaling with Recursive Models for CTR Prediction" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Beyond Interaction Capacity: Estimator Scaling with Recursive Models for CTR Prediction 搜广推与 LLM 应用 Georgia Institute of Technology / Google Research 2026-09-29 不再只增加单个 CTR predictor 的交互容量，而是扩展相关 estimator；RECAP 在共享参数的递归 backbone 上形成多条 route，并结合独立模型蒸馏、训练轨迹 EMA 与推理 route 平均。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行共享递归、route 平均、trajectory EMA 和可运行 RankMixer Evolve block；未做 benchmark 训练或独立模型蒸馏。执行共享递归、route 平均、trajectory EMA 和可运行 RankMixer Evolve block；未做 benchmark 训练或独立模型蒸馏。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  ctr estimator-scaling recursive-network 搜广推 用户历史与排序骨干 RECAP-CTR 为什么扩展多个相关 estimator，而非仅把单网变宽？ 共享递归 backbone 提供多条 route 形成不同预测，再用蒸馏、轨迹 EMA 和平均减少单估计波动。参数复用控制规模，但 route 可能高度相关，不能按数量当独立 ensemble。名称相同也别与流式画像 RECAP 混淆，两篇目标完全不同。 示意：同一块递归路径深浅不同得到几份 logit，平均像多角度估计；并不是生成多份用户画像，也没有给每条 route 独立全模型预算。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:recap-ctr" data-paper-title="Beyond Interaction Capacity: Estimator Scaling with Recursive Models for CTR Prediction" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Beyond Interaction Capacity: Estimator Scaling with Recursive Models for CTR Prediction 搜广推与 LLM 应用 Georgia Institute of Technology / Google Research 2026-09-29 不再只增加单个 CTR predictor 的交互容量，而是扩展相关 estimator；RECAP 在共享参数的递归 backbone 上形成多条 route，并结合独立模型蒸馏、训练轨迹 EMA 与推理 route 平均。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行共享递归、route 平均、trajectory EMA 和可运行 RankMixer Evolve block；未做 benchmark 训练或独立模型蒸馏。执行共享递归、route 平均、trajectory EMA 和可运行 RankMixer Evolve block；未做 benchmark 训练或独立模型蒸馏。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  ctr estimator-scaling recursive-network 搜广推 用户历史与排序骨干 RECAP-CTR 平均 route 的 logit，与平均各 route 的点击概率是同一件事吗？ 不是。sigmoid 是非线性，先平均 logit 再变成概率，通常不同于先逐路变概率再平均。来源用 route logit 的均值，不能无说明替换运算顺序；这只是聚合定义，也不代表多个共享 route 是相互独立的完整模型。 示意：两路 logit 为零和四，先平均再 sigmoid 约零点八八；各自 sigmoid 后平均约零点七四，顺序变化会实质改变预测。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-recap-ctr-8a9efe0a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5aaae777d05508db">RECAP-CTR 为什么扩展多个相关 estimator，而非仅把单网变宽？</h2>
+<h2 id="qa-5aaae777d05508db">RECAP-CTR 平均 route 的 logit，与平均各 route 的点击概率是同一件事吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arecap-ctr">Beyond Interaction Capacity: Estimator Scaling with Recursive Models for CTR Prediction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Georgia Institute of Technology / Google Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>共享递归 backbone 提供多条 route 形成不同预测，再用蒸馏、轨迹 EMA 和平均减少单估计波动。参数复用控制规模，但 route 可能高度相关，不能按数量当独立 ensemble。名称相同也别与流式画像 RECAP 混淆，两篇目标完全不同。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>同一块递归路径深浅不同得到几份 logit，平均像多角度估计；并不是生成多份用户画像，也没有给每条 route 独立全模型预算。</p>
+<p><strong>答案：</strong>不是。sigmoid 是非线性，先平均 logit 再变成概率，通常不同于先逐路变概率再平均。来源用 route logit 的均值，不能无说明替换运算顺序；这只是聚合定义，也不代表多个共享 route 是相互独立的完整模型。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两路 logit 为零和四，先平均再 sigmoid 约零点八八；各自 sigmoid 后平均约零点七四，顺序变化会实质改变预测。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37905">原论文</a> · <a href="../../../../reproductions/2609.37905-recap-ctr/">实现解读</a> · <a href="#qa-5aaae777d05508db">问题链接</a></p>
 </details>
@@ -451,16 +451,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11052">原论文</a> · <a href="../../../../reproductions/2609.11052-unirec/">实现解读</a> · <a href="#qa-7061b74a6ba3a598">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sequenceo1" data-paper-title="SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching 搜广推与 LLM 应用 ByteDance / Douyin 2026-09-08 直接注意全部历史难以服务 100K 级用户行为。SequenceO1 用 Sketch Attention 把远期历史压缩为固定数量原型，并保留近期行为分支；STCA 让 sketch 与 recent 信息并行交互，控制成本同时保留长期兴趣。 复现级别：公开数据核心机制。复现级别：公开数据核心机制。执行固定预算 prototype sketch 与 recent 双分支；MovieLens 不具备论文的 100K 事件历史。MovieLens 100K 三种子结果见 metrics/movielens-100k-seeds42-44.json。原型由训练历史 farthest-first 初始化并做一次 assignment/update，固定为 4 个；未实现 MRLB、FlashSA 或线上 cache，且暂不登记不可执行的 evolve 标签。  long-sequence sketch-attention prototype-compression industrial-recommendation 搜广推 用户历史与排序骨干 SequenceO1为什么把远期历史变成固定原型？ 十万级行为逐项注意成本高，sketch用有限预算概括长期兴趣，同时近期分支保留更细状态；成本受原型数约束，但细节可能丢失。 例如多年兴趣压成几个代表，最近几次点击仍单独保留。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sequenceo1" data-paper-title="SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching 搜广推与 LLM 应用 ByteDance / Douyin 2026-09-08 直接注意全部历史难以服务 100K 级用户行为。SequenceO1 用 Sketch Attention 把远期历史压缩为固定数量原型，并保留近期行为分支；STCA 让 sketch 与 recent 信息并行交互，控制成本同时保留长期兴趣。 复现级别：公开数据核心机制。复现级别：公开数据核心机制。执行固定预算 prototype sketch 与 recent 双分支；MovieLens 不具备论文的 100K 事件历史。MovieLens 100K 三种子结果见 metrics/movielens-100k-seeds42-44.json。原型由训练历史 farthest-first 初始化并做一次 assignment/update，固定为 4 个；未实现 MRLB、FlashSA 或线上 cache，且暂不登记不可执行的 evolve 标签。  long-sequence sketch-attention prototype-compression industrial-recommendation 搜广推 用户历史与排序骨干 SequenceO1的sketch是原样保留的一段旧历史吗？ 不是。远期历史被压成固定预算的原型表示，近期分支另保留较细行为。原型概括长期模式，并非可逐条还原的完整事件副本；固定的是表示预算，不是原始历史长度。先分清摘要表示与原始记录，才能判断信息可能在哪里损失。 教学例子：几千次远期行为可被若干兴趣原型概括；看到一个原型不能反推出所有事件的准确时间和顺序。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-sequenceo1-53b97674" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-9ce0f15f4b39cfbb">SequenceO1为什么把远期历史变成固定原型？</h2>
+<h2 id="qa-9ce0f15f4b39cfbb">SequenceO1的sketch是原样保留的一段旧历史吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asequenceo1">SequenceO1: End-to-End Ultra-Long (100K) Sequence Modeling in Recommendation with Low-Rank Caching</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · ByteDance / Douyin</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>十万级行为逐项注意成本高，sketch用有限预算概括长期兴趣，同时近期分支保留更细状态；成本受原型数约束，但细节可能丢失。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如多年兴趣压成几个代表，最近几次点击仍单独保留。</p>
+<p><strong>答案：</strong>不是。远期历史被压成固定预算的原型表示，近期分支另保留较细行为。原型概括长期模式，并非可逐条还原的完整事件副本；固定的是表示预算，不是原始历史长度。先分清摘要表示与原始记录，才能判断信息可能在哪里损失。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>几千次远期行为可被若干兴趣原型概括；看到一个原型不能反推出所有事件的准确时间和顺序。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.08443">原论文</a> · <a href="../../../../reproductions/2609.08443-sequenceo1/">实现解读</a> · <a href="#qa-9ce0f15f4b39cfbb">问题链接</a></p>
 </details>
@@ -1246,16 +1246,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12277">原论文</a> · <a href="../../../../reproductions/2607.12277-nontp/">实现解读</a> · <a href="#qa-e76a922081830518">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sam" data-paper-title="Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy 搜广推与 LLM 应用 Alibaba Group 2026-07-14 购买完成的是一簇意图，继续放大购买前点击会制造重复推荐。SAM 用 pointwise cross-attention 定位要压制的历史节点，并从长期购买序列预测补货节奏；ASGU 在刚购买时强抑制、接近周期时逐渐恢复，再以 log-mask 修改注意力 logits。 Fidelity: 核心机制复现。双路径 intent/rhythm、ASGU、log-mask intervention 与 TTNP 周期监督均实际执行。没有真实补货型商品和 censored purchase log；只验证机制和失败边界。本地对照口径：基线是 DIN-like interest score；实验组 SAM 加入按 genre 学习的周期与 ASGU，相对基线 Hit@10 -12.50%、NDCG@10 -6.60%。  ranking long-sequence satiation 搜广推 用户历史与排序骨干 SAM为什么购买后先压制、过段时间再恢复同簇兴趣？ 购买可能满足一簇需求，继续推相似商品会重复；但补货型需求会回来。意图定位与个性恢复周期让抑制随时间变化，而非永久删除历史兴趣。 例如刚买纸巾暂少推，接近耗尽周期再恢复相关候选。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sam" data-paper-title="Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy 搜广推与 LLM 应用 Alibaba Group 2026-07-14 购买完成的是一簇意图，继续放大购买前点击会制造重复推荐。SAM 用 pointwise cross-attention 定位要压制的历史节点，并从长期购买序列预测补货节奏；ASGU 在刚购买时强抑制、接近周期时逐渐恢复，再以 log-mask 修改注意力 logits。 Fidelity: 核心机制复现。双路径 intent/rhythm、ASGU、log-mask intervention 与 TTNP 周期监督均实际执行。没有真实补货型商品和 censored purchase log；只验证机制和失败边界。本地对照口径：基线是 DIN-like interest score；实验组 SAM 加入按 genre 学习的周期与 ASGU，相对基线 Hit@10 -12.50%、NDCG@10 -6.60%。  ranking long-sequence satiation 搜广推 用户历史与排序骨干 SAM的购买后抑制，是把同类商品直接加入不可推荐黑名单吗？ 不是。定义性操作是降低相关历史节点在注意力中的权重，并随时间逐渐恢复；它改变证据利用强度，不是给所有同类候选设置永久禁用规则。先区分软注意力抑制与硬过滤，才能理解为何模型仍可根据其他信号推荐相关商品。 教学例子：买过洗发水后降低那段旧浏览历史的影响，不等于规定任何洗护商品都绝不能再次进入候选。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-sam-b9df9dfc" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f667ebf89a92beef">SAM为什么购买后先压制、过段时间再恢复同簇兴趣？</h2>
+<h2 id="qa-f667ebf89a92beef">SAM的购买后抑制，是把同类商品直接加入不可推荐黑名单吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asam">Learning to Forget: Satiation-Aware Long-Sequence Transducers for Mitigating Post-Purchase Redundancy</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba Group</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>购买可能满足一簇需求，继续推相似商品会重复；但补货型需求会回来。意图定位与个性恢复周期让抑制随时间变化，而非永久删除历史兴趣。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如刚买纸巾暂少推，接近耗尽周期再恢复相关候选。</p>
+<p><strong>答案：</strong>不是。定义性操作是降低相关历史节点在注意力中的权重，并随时间逐渐恢复；它改变证据利用强度，不是给所有同类候选设置永久禁用规则。先区分软注意力抑制与硬过滤，才能理解为何模型仍可根据其他信号推荐相关商品。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>买过洗发水后降低那段旧浏览历史的影响，不等于规定任何洗护商品都绝不能再次进入候选。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12714">原论文</a> · <a href="../../../../reproductions/2607.12714-sam/">实现解读</a> · <a href="#qa-f667ebf89a92beef">问题链接</a></p>
 </details>
@@ -1365,16 +1365,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-8b4dfeda1146dd5b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:poem" data-paper-title="POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation 搜广推与 LLM 应用 Kuaishou 2026-06-29 把当前请求多个排序目标产生的相对次序转成偏序信号，动态构造比纯时间序更贴近实时兴趣的训练序列。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，不能复现论文公司的私有日志、线上分桶、生产模型规模和 serving 栈。因此本页只解释为核心机制级验证，不宣称复现原文绝对指标或线上增益。本地对照口径：同一全目录协议下，基线 NDCG@10 为 0.05401，实验组 POEM 为 0.05009，相对变化 -7.25%。这是公开代理任务的负结果，生产线上 lift 的外推不适用。  sequential-recommendation partial-order real-time 搜广推 用户历史与排序骨干 POEM 的偏序为什么可能比时间先后更接近当前排序需求？ 时间描述事件发生顺序，多目标排序描述候选在当前请求的相对优劣。POEM 从后者构造训练关系，帮助编码器关注实时兴趣而非仅复制日志顺序。已有目标也会有偏，偏序不是用户真实因果偏好的直接观测。 示意：先浏览便宜相机再浏览专业机，不代表后者一定更喜欢；当前多个目标判断可提供另一种次序，但也需承认这些判断来自旧模型。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:poem" data-paper-title="POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation 搜广推与 LLM 应用 Kuaishou 2026-06-29 把当前请求多个排序目标产生的相对次序转成偏序信号，动态构造比纯时间序更贴近实时兴趣的训练序列。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，不能复现论文公司的私有日志、线上分桶、生产模型规模和 serving 栈。因此本页只解释为核心机制级验证，不宣称复现原文绝对指标或线上增益。本地对照口径：同一全目录协议下，基线 NDCG@10 为 0.05401，实验组 POEM 为 0.05009，相对变化 -7.25%。这是公开代理任务的负结果，生产线上 lift 的外推不适用。  sequential-recommendation partial-order real-time 搜广推 用户历史与排序骨干 POEM 使用的“名次”与 CTR、GMV 原始数值有何区别？ 名次保留同一目标内谁排前谁排后，不保留原始量纲和差距大小，因此可将不同目标的相对顺序转成比较证据。它也会丢失价值幅度：一元和百元的差别不能仅由先后表示。理解这个信息损失，才不会把偏序信号当作所有目标数值的等价替身。 示意：甲点击率只略高于乙，却交易额低很多，两项名次各提供一个方向；名次本身没有告诉模型“略高”与“低很多”的幅度差异。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-poem-c8eda543" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-ed49350b97afd6ab">POEM 的偏序为什么可能比时间先后更接近当前排序需求？</h2>
+<h2 id="qa-ed49350b97afd6ab">POEM 使用的“名次”与 CTR、GMV 原始数值有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apoem">POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>时间描述事件发生顺序，多目标排序描述候选在当前请求的相对优劣。POEM 从后者构造训练关系，帮助编码器关注实时兴趣而非仅复制日志顺序。已有目标也会有偏，偏序不是用户真实因果偏好的直接观测。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>先浏览便宜相机再浏览专业机，不代表后者一定更喜欢；当前多个目标判断可提供另一种次序，但也需承认这些判断来自旧模型。</p>
+<p><strong>答案：</strong>名次保留同一目标内谁排前谁排后，不保留原始量纲和差距大小，因此可将不同目标的相对顺序转成比较证据。它也会丢失价值幅度：一元和百元的差别不能仅由先后表示。理解这个信息损失，才不会把偏序信号当作所有目标数值的等价替身。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>甲点击率只略高于乙，却交易额低很多，两项名次各提供一个方向；名次本身没有告诉模型“略高”与“低很多”的幅度差异。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.29946">原论文</a> · <a href="../../../../reproductions/2606.29946-poem/">实现解读</a> · <a href="#qa-ed49350b97afd6ab">问题链接</a></p>
 </details>
@@ -1789,16 +1789,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.09040">原论文</a> · <a href="../../../../reproductions/2605.09040-uxsid/">实现解读</a> · <a href="#qa-3502ab9fa810ccda">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:semantic-native-longseq" data-paper-title="Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling 搜广推与 LLM 应用 Google 2026-05-04 原子 Video ID 只能记忆内容，embedding table 随 corpus 无界增长，新视频也没有可迁移语义；完整 attention 又让千级历史成本呈平方增长。论文先用 RQ-VAE 产生 coarse-to-fine SID，并截断为 bounded bigram vocabulary；再把相邻个事件无参数折叠为 super-token，同时加入统一 global query，使模型在保留全局兴趣的情况下处理更长历史。 本地未训练 Google RQ-VAE，没有 billion-user 私有流量、2,000-event 服务序列、异步长历史模块或定制 HBM kernel。Fidelity: 核心机制复现。本地实际构建 residual-quantized Semantic ID，执行 depth-truncated bigram、parameter-free temporal folding、global query attention 和 global-local pooling。MovieLens feature 只代理多模态视频表征；  long-sequence semantic-id rq-vae efficient-transformer cold-start 搜广推 用户历史与排序骨干 Semantic-Native长序列为什么同时改ID和历史压缩？ 原子视频ID难泛化且表随目录增长，分层SID提供可迁移语义；时间折叠再缩短注意力长度，global query保存全局兴趣。两部分解决不同成本。 例如新视频可共享语义码，用户长历史又不必每事件都保持独立注意力位置。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:semantic-native-longseq" data-paper-title="Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling 搜广推与 LLM 应用 Google 2026-05-04 原子 Video ID 只能记忆内容，embedding table 随 corpus 无界增长，新视频也没有可迁移语义；完整 attention 又让千级历史成本呈平方增长。论文先用 RQ-VAE 产生 coarse-to-fine SID，并截断为 bounded bigram vocabulary；再把相邻个事件无参数折叠为 super-token，同时加入统一 global query，使模型在保留全局兴趣的情况下处理更长历史。 本地未训练 Google RQ-VAE，没有 billion-user 私有流量、2,000-event 服务序列、异步长历史模块或定制 HBM kernel。Fidelity: 核心机制复现。本地实际构建 residual-quantized Semantic ID，执行 depth-truncated bigram、parameter-free temporal folding、global query attention 和 global-local pooling。MovieLens feature 只代理多模态视频表征；  long-sequence semantic-id rq-vae efficient-transformer cold-start 搜广推 用户历史与排序骨干 Semantic-Native的层级SID前缀相同，是否代表两条视频就是同一物品？ 不必然。层级语义码共享前缀表示粗粒度语义相近，具体物品身份仍需完整路径与目录映射。它与为每个视频分配互不相关的原子ID不同，目的在于共享表示；不能把粗粒度语义相同当成交互日志中的同一条视频。 教学例子：两条不同露营视频可共享粗级语义前缀，却有各自内容与行为记录；合并前缀不等于合并物品身份。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-semantic-native-longseq-dee361e1" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-707a5bb5919e2395">Semantic-Native长序列为什么同时改ID和历史压缩？</h2>
+<h2 id="qa-707a5bb5919e2395">Semantic-Native的层级SID前缀相同，是否代表两条视频就是同一物品？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asemantic-native-longseq">Beyond Item IDs: Scaling Short-Form-Video Recommendation via Semantic-Native Long Sequence Modeling</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>原子视频ID难泛化且表随目录增长，分层SID提供可迁移语义；时间折叠再缩短注意力长度，global query保存全局兴趣。两部分解决不同成本。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如新视频可共享语义码，用户长历史又不必每事件都保持独立注意力位置。</p>
+<p><strong>答案：</strong>不必然。层级语义码共享前缀表示粗粒度语义相近，具体物品身份仍需完整路径与目录映射。它与为每个视频分配互不相关的原子ID不同，目的在于共享表示；不能把粗粒度语义相同当成交互日志中的同一条视频。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两条不同露营视频可共享粗级语义前缀，却有各自内容与行为记录；合并前缀不等于合并物品身份。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.07546">原论文</a> · <a href="../../../../reproductions/2606.07546-semantic-native-longseq/">实现解读</a> · <a href="#qa-707a5bb5919e2395">问题链接</a></p>
 </details>
@@ -1842,16 +1842,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.07546">原论文</a> · <a href="../../../../reproductions/2606.07546-semantic-native-longseq/">实现解读</a> · <a href="#qa-7ff6d57f3d2e041c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rankup" data-paper-title="RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems 搜广推与 LLM 应用 Tencent 2026-04-20 RankUp 针对深层推荐网络的表征坍缩，组合随机置换分组、多套 embedding、全局 token、交叉预训练 embedding 注入和任务 token 解耦，让随模型规模增长的参数真正转化为更高秩的表达空间。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04702，相对变化 -12.94%。本地代理目标与论文生产任务不同，不能外推线上 lift。  advertising representation-collapse feature-interaction 搜广推 用户历史与排序骨干 RankUp 为什么把表示秩而非仅参数量当扩展关注点？ 很多新增参数可能反复编码同一主方向，深层 token 趋同后有效信息维度不足。多 embedding、置换分组与全局通道试图形成更多互补关系。高秩也可能含噪声，不等于推荐更好，因此需要同时看谱、分组与任务结果。 示意：一百个向量都只表示热门程度，参数再多也近似一维；增加独立主题方向有机会更丰富，但随机噪声同样能抬秩，不能只看数值。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rankup" data-paper-title="RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems 搜广推与 LLM 应用 Tencent 2026-04-20 RankUp 针对深层推荐网络的表征坍缩，组合随机置换分组、多套 embedding、全局 token、交叉预训练 embedding 注入和任务 token 解耦，让随模型规模增长的参数真正转化为更高秩的表达空间。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.04702，相对变化 -12.94%。本地代理目标与论文生产任务不同，不能外推线上 lift。  advertising representation-collapse feature-interaction 搜广推 用户历史与排序骨干 RankUp 所追求的较高表示秩，为什么不能单独证明学到了更有用的兴趣？ 秩描述向量变化包含多少独立方向，不衡量这些方向是否对应目标信息。随机噪声也可增加秩，甚至分散原本有用结构。因此要把谱与任务指标、真实信号分组一起检查，不能只因深层 token 不再相同就宣布推荐质量或泛化已改善。 示意：给每位用户加随机正交噪声可让矩阵更满秩，却没有增加任何偏好知识；只有新方向携带能预测行为的线索，才可能帮助推荐。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-rankup-a9399758" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-94f1626a3266cd89">RankUp 为什么把表示秩而非仅参数量当扩展关注点？</h2>
+<h2 id="qa-94f1626a3266cd89">RankUp 所追求的较高表示秩，为什么不能单独证明学到了更有用的兴趣？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Arankup">RankUp: Towards High-rank Representations for Large Scale Advertising Recommender Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Tencent</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>很多新增参数可能反复编码同一主方向，深层 token 趋同后有效信息维度不足。多 embedding、置换分组与全局通道试图形成更多互补关系。高秩也可能含噪声，不等于推荐更好，因此需要同时看谱、分组与任务结果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>一百个向量都只表示热门程度，参数再多也近似一维；增加独立主题方向有机会更丰富，但随机噪声同样能抬秩，不能只看数值。</p>
+<p><strong>答案：</strong>秩描述向量变化包含多少独立方向，不衡量这些方向是否对应目标信息。随机噪声也可增加秩，甚至分散原本有用结构。因此要把谱与任务指标、真实信号分组一起检查，不能只因深层 token 不再相同就宣布推荐质量或泛化已改善。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>给每位用户加随机正交噪声可让矩阵更满秩，却没有增加任何偏好知识；只有新方向携带能预测行为的线索，才可能帮助推荐。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.17878">原论文</a> · <a href="../../../../reproductions/2604.17878-rankup/">实现解读</a> · <a href="#qa-94f1626a3266cd89">问题链接</a></p>
 </details>
@@ -3775,16 +3775,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/1809.03672">原论文</a> · <a href="../../../../reproductions/1809.03672-dien/">实现解读</a> · <a href="#qa-fcaef89988ef9b8e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sasrec" data-paper-title="Self-Attentive Sequential Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Self-Attentive Sequential Recommendation 搜广推与 LLM 应用 UC San Diego 2018-08-20 Markov Chain 偏重最近行为，RNN 又需要逐步计算。SASRec 用因果自注意力直接选择序列中与下一物品相关的行为，在稀疏与稠密数据之间取得更灵活的感受野，并成为序列推荐常用基线。 保真度：完整核心链路复现。保真度：完整核心链路复现。模型、原论文 pairwise BCE 训练目标与序列推理均实际执行；仅把公开数据从 MovieLens-1M 缩到 MovieLens-100K，并采用更严格的全库评估。本地对照口径：基线是 popularity 排序；实验组是 SASRec；主指标 NDCG@10 从 0.02969 降至 0.02933（-1.24%）。这是跨模型基线比较，不是 SASRec 模块消融。   搜广推 用户历史与排序骨干 SASRec为什么用因果self-attention预测下一物品？ 可并行读取历史并选择相关行为，因果mask确保每个训练位置只看过去，避免用未来点击作弊。相较固定短Markov或串行RNN，感受野更灵活。 例如预测第四次点击时可以关注第一或第三次，但不能读取第五次。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sasrec" data-paper-title="Self-Attentive Sequential Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Self-Attentive Sequential Recommendation 搜广推与 LLM 应用 UC San Diego 2018-08-20 Markov Chain 偏重最近行为，RNN 又需要逐步计算。SASRec 用因果自注意力直接选择序列中与下一物品相关的行为，在稀疏与稠密数据之间取得更灵活的感受野，并成为序列推荐常用基线。 保真度：完整核心链路复现。保真度：完整核心链路复现。模型、原论文 pairwise BCE 训练目标与序列推理均实际执行；仅把公开数据从 MovieLens-1M 缩到 MovieLens-100K，并采用更严格的全库评估。本地对照口径：基线是 popularity 排序；实验组是 SASRec；主指标 NDCG@10 从 0.02969 降至 0.02933（-1.24%）。这是跨模型基线比较，不是 SASRec 模块消融。   搜广推 用户历史与排序骨干 SASRec训练时，每个历史位置的输入与要预测的下一物品怎样错开？ 位置i只能读取截至该位置的历史，目标是紧接其后的物品，未来事件作为监督而不是额外输入。一个用户序列因此可产生多个前缀预测任务；padding位置还需排除。先理解这种位移，才能判断实现是否不小心把目标物品喂回了当前表示。 教学例子：历史为甲、乙、丙时，可用甲预测乙、用甲乙预测丙；预测乙的表示不能提前读取丙。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <span id="paper-recommendation-sasrec-6f67bc6e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-7d35ae6cc7ed04c8">SASRec为什么用因果self-attention预测下一物品？</h2>
+<h2 id="qa-7d35ae6cc7ed04c8">SASRec训练时，每个历史位置的输入与要预测的下一物品怎样错开？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asasrec">Self-Attentive Sequential Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · UC San Diego</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>可并行读取历史并选择相关行为，因果mask确保每个训练位置只看过去，避免用未来点击作弊。相较固定短Markov或串行RNN，感受野更灵活。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如预测第四次点击时可以关注第一或第三次，但不能读取第五次。</p>
+<p><strong>答案：</strong>位置i只能读取截至该位置的历史，目标是紧接其后的物品，未来事件作为监督而不是额外输入。一个用户序列因此可产生多个前缀预测任务；padding位置还需排除。先理解这种位移，才能判断实现是否不小心把目标物品喂回了当前表示。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>历史为甲、乙、丙时，可用甲预测乙、用甲乙预测丙；预测乙的表示不能提前读取丙。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/1808.09781">原论文</a> · <a href="../../../../reproductions/1808.09781-sasrec/">实现解读</a> · <a href="#qa-7d35ae6cc7ed04c8">问题链接</a></p>
 </details>
@@ -3802,15 +3802,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/1808.09781">原论文</a> · <a href="../../../../reproductions/1808.09781-sasrec/">实现解读</a> · <a href="#qa-9e5caa204add37ff">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sasrec" data-paper-title="Self-Attentive Sequential Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Self-Attentive Sequential Recommendation 搜广推与 LLM 应用 UC San Diego 2018-08-20 Markov Chain 偏重最近行为，RNN 又需要逐步计算。SASRec 用因果自注意力直接选择序列中与下一物品相关的行为，在稀疏与稠密数据之间取得更灵活的感受野，并成为序列推荐常用基线。 保真度：完整核心链路复现。保真度：完整核心链路复现。模型、原论文 pairwise BCE 训练目标与序列推理均实际执行；仅把公开数据从 MovieLens-1M 缩到 MovieLens-100K，并采用更严格的全库评估。本地对照口径：基线是 popularity 排序；实验组是 SASRec；主指标 NDCG@10 从 0.02969 降至 0.02933（-1.24%）。这是跨模型基线比较，不是 SASRec 模块消融。   搜广推 用户历史与排序骨干 SASRec与只取最近物品表示有什么区别？ 注意力可按上下文利用较远兴趣，最近物品基线仅保留短期信号。长历史也可能有噪声，不能由结构更丰富就推断任何稀疏数据都更好。 例如突然一次偶然点击，不一定应覆盖此前多次稳定兴趣。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sasrec" data-paper-title="Self-Attentive Sequential Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Self-Attentive Sequential Recommendation 搜广推与 LLM 应用 UC San Diego 2018-08-20 Markov Chain 偏重最近行为，RNN 又需要逐步计算。SASRec 用因果自注意力直接选择序列中与下一物品相关的行为，在稀疏与稠密数据之间取得更灵活的感受野，并成为序列推荐常用基线。 保真度：完整核心链路复现。保真度：完整核心链路复现。模型、原论文 pairwise BCE 训练目标与序列推理均实际执行；仅把公开数据从 MovieLens-1M 缩到 MovieLens-100K，并采用更严格的全库评估。本地对照口径：基线是 popularity 排序；实验组是 SASRec；主指标 NDCG@10 从 0.02969 降至 0.02933（-1.24%）。这是跨模型基线比较，不是 SASRec 模块消融。   搜广推 用户历史与排序骨干 SASRec的因果下一物品训练，与允许左右邻居的掩码物品恢复有何区别？ 前者只能利用过去，目标对应未来下一项；后者可把某个中间项遮住并利用两侧信息恢复。两者读取条件与任务目标不同。双向上下文在恢复任务中可能合法，却不能直接放入SASRec下一步预测并沿用同一无泄露解释。 教学例子：恢复甲、[MASK]、丙里的乙可看丙；在只观察到甲的时间点预测乙，则丙仍属于不可见未来。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 用户历史与排序骨干</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-128c509fca314590">SASRec与只取最近物品表示有什么区别？</h2>
+<h2 id="qa-128c509fca314590">SASRec的因果下一物品训练，与允许左右邻居的掩码物品恢复有何区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asasrec">Self-Attentive Sequential Recommendation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · UC San Diego</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>注意力可按上下文利用较远兴趣，最近物品基线仅保留短期信号。长历史也可能有噪声，不能由结构更丰富就推断任何稀疏数据都更好。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如突然一次偶然点击，不一定应覆盖此前多次稳定兴趣。</p>
+<p><strong>答案：</strong>前者只能利用过去，目标对应未来下一项；后者可把某个中间项遮住并利用两侧信息恢复。两者读取条件与任务目标不同。双向上下文在恢复任务中可能合法，却不能直接放入SASRec下一步预测并沿用同一无泄露解释。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>恢复甲、[MASK]、丙里的乙可看丙；在只观察到甲的时间点预测乙，则丙仍属于不可见未来。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/1808.09781">原论文</a> · <a href="../../../../reproductions/1808.09781-sasrec/">实现解读</a> · <a href="#qa-128c509fca314590">问题链接</a></p>
 </details>

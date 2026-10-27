@@ -557,16 +557,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.26418">原论文</a> · <a href="../../../../reproductions/2607.26418-director/">实现解读</a> · <a href="#qa-adf26f4d49897225">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:psg" data-paper-title="PSG: Pair-Space Generation for Efficient Generative Reranking" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="PSG: Pair-Space Generation for Efficient Generative Reranking 搜广推与 LLM 应用 Kuaishou Technology 2026-07-29 把相邻两个 item 编成一个请求内 pair token，在 pair 空间生成半长度序列，再无损展开为 item slate；pair scorer 显式保留顺序，重复约束保证展开结果可用。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；生产模型、私有日志与服务基础设施明确列为边界，不用普通基线冒充完整工业系统。本地使用公开 MovieLens 特征或由其构造的可审计代理任务，不能复现论文公司的私有用户日志、线上流量分配、生产模型规模和 serving 栈。因此本页只把本地结果解释为机制级验证；不将其外推为论文线上 lift，也不声称与原文绝对指标可直接比较。本地对照口径：基线为六步 item-space 生成，实验组为三步 pair-space 生成与展开；seed 42 的 NDCG@10 为 0.04826，基线为 0.05401，负结果保留。  reranking generative-recommendation pair-token serving 搜广推 重排、展示与长期价值 PSG 为什么把请求内两个位置定义为有序 pair？ pair 同时覆盖两个展示位，减少自回归步数但保留谁先谁后，下一 pair 还依赖此前组合。有序打包能无损展开给定列表，却不意味着选择算法无损或配对空间无成本。奇数长度和重复也需要明确规则。 示意：基础教程在前、实操在后与反过来体验不同，两者应是不同 pair；把它们当无序集合会丢掉展示顺序信息。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:psg" data-paper-title="PSG: Pair-Space Generation for Efficient Generative Reranking" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="PSG: Pair-Space Generation for Efficient Generative Reranking 搜广推与 LLM 应用 Kuaishou Technology 2026-07-29 把相邻两个 item 编成一个请求内 pair token，在 pair 空间生成半长度序列，再无损展开为 item slate；pair scorer 显式保留顺序，重复约束保证展开结果可用。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；生产模型、私有日志与服务基础设施明确列为边界，不用普通基线冒充完整工业系统。本地使用公开 MovieLens 特征或由其构造的可审计代理任务，不能复现论文公司的私有用户日志、线上流量分配、生产模型规模和 serving 栈。因此本页只把本地结果解释为机制级验证；不将其外推为论文线上 lift，也不声称与原文绝对指标可直接比较。本地对照口径：基线为六步 item-space 生成，实验组为三步 pair-space 生成与展开；seed 42 的 NDCG@10 为 0.04826，基线为 0.05401，负结果保留。  reranking generative-recommendation pair-token serving 搜广推 重排、展示与长期价值 PSG 的 pair 能“无损展开”，是否意味着 pair 模型与原 item 模型概率完全相同？ 不是。无损指给定有序二元组能还原对应两件物品及顺序，是表示映射的性质；pair scorer 与 item 逐步模型学习的概率及搜索路径可以不同。少一半解码步也不意味着训练误差、候选覆盖或端到端质量无损，这些需要另外比较。 示意：把列表甲乙丙丁打包成甲乙、丙丁再展开，内容没有丢；但新模型可能更爱选择另一组 pair，所以生成的列表分布仍可变。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 重排、展示与长期价值</a></p>
 <span id="paper-recommendation-psg-c3e023ce" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-bd4316b465920770">PSG 为什么把请求内两个位置定义为有序 pair？</h2>
+<h2 id="qa-bd4316b465920770">PSG 的 pair 能“无损展开”，是否意味着 pair 模型与原 item 模型概率完全相同？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apsg">PSG: Pair-Space Generation for Efficient Generative Reranking</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>pair 同时覆盖两个展示位，减少自回归步数但保留谁先谁后，下一 pair 还依赖此前组合。有序打包能无损展开给定列表，却不意味着选择算法无损或配对空间无成本。奇数长度和重复也需要明确规则。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>基础教程在前、实操在后与反过来体验不同，两者应是不同 pair；把它们当无序集合会丢掉展示顺序信息。</p>
+<p><strong>答案：</strong>不是。无损指给定有序二元组能还原对应两件物品及顺序，是表示映射的性质；pair scorer 与 item 逐步模型学习的概率及搜索路径可以不同。少一半解码步也不意味着训练误差、候选覆盖或端到端质量无损，这些需要另外比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>把列表甲乙丙丁打包成甲乙、丙丁再展开，内容没有丢；但新模型可能更爱选择另一组 pair，所以生成的列表分布仍可变。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.26427">原论文</a> · <a href="../../../../reproductions/2607.26427-psg/">实现解读</a> · <a href="#qa-bd4316b465920770">问题链接</a></p>
 </details>
@@ -610,16 +610,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.26427">原论文</a> · <a href="../../../../reproductions/2607.26427-psg/">实现解读</a> · <a href="#qa-e93e622c0c622dc8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:swag-bid" data-paper-title="Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness 搜广推与 LLM 应用 Alibaba International Digital Commerce / Dalian University of Technology 2026-07-28 用 masked future plan 建模跨 episode 的七日滑窗目标，并以 per-step gate 将长期 guidance 注入当前 bid 决策。 Fidelity: 核心机制复现。本地执行论文的窗口感知出价目标与约束代理，不把公开离线实验写成生产广告系统。不是生产 Decision Transformer checkpoint，且公开数据没有 bid、budget、GMV，结果仅是结构消融。本地对照口径：基线为 single-episode Decision Transformer proxy，实验组为 sliding-window planner；同一小数据候选排序下 Hit@10 与 NDCG@10 均为 +0.00%。  advertising generative-model decision-transformer long-horizon 搜广推 重排、展示与长期价值 SWAG为什么看跨episode七日滑窗而不只单次出价？ 广告目标常在滑动周期内结算，单步或单episode最优可能破坏窗口累计目标。masked future plan提供长期条件，再由当前state gate调节其对bid的作用。 例如今天节省过多预算可能错过窗口内机会，单日局部最优不等于七日最优。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:swag-bid" data-paper-title="Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness 搜广推与 LLM 应用 Alibaba International Digital Commerce / Dalian University of Technology 2026-07-28 用 masked future plan 建模跨 episode 的七日滑窗目标，并以 per-step gate 将长期 guidance 注入当前 bid 决策。 Fidelity: 核心机制复现。本地执行论文的窗口感知出价目标与约束代理，不把公开离线实验写成生产广告系统。不是生产 Decision Transformer checkpoint，且公开数据没有 bid、budget、GMV，结果仅是结构消融。本地对照口径：基线为 single-episode Decision Transformer proxy，实验组为 sliding-window planner；同一小数据候选排序下 Hit@10 与 NDCG@10 均为 +0.00%。  advertising generative-model decision-transformer long-horizon 搜广推 重排、展示与长期价值 SWAG-Bid的episode边界与七日滑窗，是同一段时间吗？ 不是。单个episode提供局部交互边界，七日滑窗可以跨episode携带更长周期的状态与目标。窗口并不是七个固定动作，也不能因进入新episode就清空所有长期条件。先识别两种时间范围，才能理解跨天约束为何需要额外表示。 教学例子：一天的竞价交互结束后，七日窗口仍包含此前几天信息；换一个episode不意味着七日目标重新开始。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 重排、展示与长期价值</a></p>
 <span id="paper-recommendation-swag-bid-1ae52cbb" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-e8e31735a2ad749a">SWAG为什么看跨episode七日滑窗而不只单次出价？</h2>
+<h2 id="qa-e8e31735a2ad749a">SWAG-Bid的episode边界与七日滑窗，是同一段时间吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aswag-bid">Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba International Digital Commerce / Dalian University of Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>广告目标常在滑动周期内结算，单步或单episode最优可能破坏窗口累计目标。masked future plan提供长期条件，再由当前state gate调节其对bid的作用。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如今天节省过多预算可能错过窗口内机会，单日局部最优不等于七日最优。</p>
+<p><strong>答案：</strong>不是。单个episode提供局部交互边界，七日滑窗可以跨episode携带更长周期的状态与目标。窗口并不是七个固定动作，也不能因进入新episode就清空所有长期条件。先识别两种时间范围，才能理解跨天约束为何需要额外表示。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一天的竞价交互结束后，七日窗口仍包含此前几天信息；换一个episode不意味着七日目标重新开始。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25233">原论文</a> · <a href="../../../../reproductions/2607.25233-swag-bid/">实现解读</a> · <a href="#qa-e8e31735a2ad749a">问题链接</a></p>
 </details>
@@ -637,15 +637,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25233">原论文</a> · <a href="../../../../reproductions/2607.25233-swag-bid/">实现解读</a> · <a href="#qa-7d8d241ec0fb2ef2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:swag-bid" data-paper-title="Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness 搜广推与 LLM 应用 Alibaba International Digital Commerce / Dalian University of Technology 2026-07-28 用 masked future plan 建模跨 episode 的七日滑窗目标，并以 per-step gate 将长期 guidance 注入当前 bid 决策。 Fidelity: 核心机制复现。本地执行论文的窗口感知出价目标与约束代理，不把公开离线实验写成生产广告系统。不是生产 Decision Transformer checkpoint，且公开数据没有 bid、budget、GMV，结果仅是结构消融。本地对照口径：基线为 single-episode Decision Transformer proxy，实验组为 sliding-window planner；同一小数据候选排序下 Hit@10 与 NDCG@10 均为 +0.00%。  advertising generative-model decision-transformer long-horizon 搜广推 重排、展示与长期价值 每步gate与把同一长期计划强行喂给所有状态有什么差别？ gate允许当前市场和预算状态决定长期guidance使用程度，固定注入不作条件区分。长期计划仍是估计，不可把未来真实GMV或成本直接送进当前决策。 例如临近窗口末尾与刚开始时，对同一预算计划的依赖可不同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:swag-bid" data-paper-title="Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness 搜广推与 LLM 应用 Alibaba International Digital Commerce / Dalian University of Technology 2026-07-28 用 masked future plan 建模跨 episode 的七日滑窗目标，并以 per-step gate 将长期 guidance 注入当前 bid 决策。 Fidelity: 核心机制复现。本地执行论文的窗口感知出价目标与约束代理，不把公开离线实验写成生产广告系统。不是生产 Decision Transformer checkpoint，且公开数据没有 bid、budget、GMV，结果仅是结构消融。本地对照口径：基线为 single-episode Decision Transformer proxy，实验组为 sliding-window planner；同一小数据候选排序下 Hit@10 与 NDCG@10 均为 +0.00%。  advertising generative-model decision-transformer long-horizon 搜广推 重排、展示与长期价值 SWAG-Bid训练中的masked future plan，与部署时可读取的真实未来有什么区别？ 训练可利用按协议构造并遮蔽的未来计划信号来学习条件化行为，执行时却只能使用当时允许的状态和估计，不能把事后真实GMV或成本补进输入。两类信息的可见性必须分开，否则得到的是未来信息诊断，而非可部署出价能力。 教学例子：历史数据能回看明天结果用于构造训练监督；今天出价时，不能直接读取明天实际花费来填计划。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 重排、展示与长期价值</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-6f09b12303391e18">每步gate与把同一长期计划强行喂给所有状态有什么差别？</h2>
+<h2 id="qa-6f09b12303391e18">SWAG-Bid训练中的masked future plan，与部署时可读取的真实未来有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aswag-bid">Beyond Single-Episode Optimization: Sliding-Window Aware Generative Auto-Bidding for Long-Term Advertising Effectiveness</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba International Digital Commerce / Dalian University of Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>gate允许当前市场和预算状态决定长期guidance使用程度，固定注入不作条件区分。长期计划仍是估计，不可把未来真实GMV或成本直接送进当前决策。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如临近窗口末尾与刚开始时，对同一预算计划的依赖可不同。</p>
+<p><strong>答案：</strong>训练可利用按协议构造并遮蔽的未来计划信号来学习条件化行为，执行时却只能使用当时允许的状态和估计，不能把事后真实GMV或成本补进输入。两类信息的可见性必须分开，否则得到的是未来信息诊断，而非可部署出价能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>历史数据能回看明天结果用于构造训练监督；今天出价时，不能直接读取明天实际花费来填计划。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.25233">原论文</a> · <a href="../../../../reproductions/2607.25233-swag-bid/">实现解读</a> · <a href="#qa-6f09b12303391e18">问题链接</a></p>
 </details>
@@ -1167,15 +1167,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.19357">原论文</a> · <a href="../../../../reproductions/2607.19357-primal-dual-decoding/">实现解读</a> · <a href="#qa-1804a3b129c4958e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:primal-dual-decoding" data-paper-title="Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems 搜广推与 LLM 应用 Spotify 2026-05-26 不重训生成式推荐模型，在逐位置解码时把相关性 logits 与辅助目标贡献相加，并根据剩余约束松弛量以镜像下降动态更新拉格朗日乘子。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.02109，相对变化 -60.95%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation multiobjective constrained-decoding 搜广推 重排、展示与长期价值 动态对偶乘子与固定多样性权重，相比何时会放松或加紧约束？ 固定权重不看已选前缀是否达标，对偶更新依据当前贡献与目标进度改变强度，让余下位置补不足或减少过度补偿。它是局部在线取舍，未必满足不可行硬约束，也可能牺牲相关性，不能称无损改进。 示意：前四条已含足够新作者，最后一条可回归相关性；如果仍缺配额则继续加大辅助贡献，固定加分无法表达两种状态。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:primal-dual-decoding" data-paper-title="Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems 搜广推与 LLM 应用 Spotify 2026-05-26 不重训生成式推荐模型，在逐位置解码时把相关性 logits 与辅助目标贡献相加，并根据剩余约束松弛量以镜像下降动态更新拉格朗日乘子。 不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，只验证中心计算机制；不复现原论文的私有日志、生产基础模型、线上分桶和 serving 栈。因此本页不宣称复现原文绝对指标或线上增益。本地对照口径：同一 MovieLens 全目录协议下，基线 NDCG@10 为 0.05401，实验组为 0.02109，相对变化 -60.95%。本地代理目标与论文生产任务不同，不能外推线上 lift。  generative-recommendation multiobjective constrained-decoding 搜广推 重排、展示与长期价值 原始—对偶解码的软目标与硬合法性约束，能否互相替代？ 不能。乘子调整使某类贡献更受偏好，但非法库存或目录外对象需要明确排除；若可行候选本来不足，增大乘子也无法创造合法结果。软优化负责取舍，硬约束定义能选什么。来源未提供任意约束必达保证，不能把较高加权分写成严格满足。 示意：希望多推荐新作者可用软目标；已经下架的物品则应屏蔽，不能仅给它扣分后仍允许胜出，声称对偶更新已保证合法。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 重排、展示与长期价值</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-0779bc4cfc3e4265">动态对偶乘子与固定多样性权重，相比何时会放松或加紧约束？</h2>
+<h2 id="qa-0779bc4cfc3e4265">原始—对偶解码的软目标与硬合法性约束，能否互相替代？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aprimal-dual-decoding">Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Spotify</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>固定权重不看已选前缀是否达标，对偶更新依据当前贡献与目标进度改变强度，让余下位置补不足或减少过度补偿。它是局部在线取舍，未必满足不可行硬约束，也可能牺牲相关性，不能称无损改进。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>前四条已含足够新作者，最后一条可回归相关性；如果仍缺配额则继续加大辅助贡献，固定加分无法表达两种状态。</p>
+<p><strong>答案：</strong>不能。乘子调整使某类贡献更受偏好，但非法库存或目录外对象需要明确排除；若可行候选本来不足，增大乘子也无法创造合法结果。软优化负责取舍，硬约束定义能选什么。来源未提供任意约束必达保证，不能把较高加权分写成严格满足。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>希望多推荐新作者可用软目标；已经下架的物品则应屏蔽，不能仅给它扣分后仍允许胜出，声称对偶更新已保证合法。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.19357">原论文</a> · <a href="../../../../reproductions/2607.19357-primal-dual-decoding/">实现解读</a> · <a href="#qa-0779bc4cfc3e4265">问题链接</a></p>
 </details>
@@ -1246,16 +1246,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.25749">原论文</a> · <a href="../../../../reproductions/2605.25749-degre/">实现解读</a> · <a href="#qa-64f10e3b26c58fd2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:prl-puts" data-paper-title="A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems 搜广推与 LLM 应用 Pinterest 2026-05-08 双头 Q 网络分别估计 Repin 与 P2P utility，再通过 Pareto sweeping 离线筛选不劣策略；线上仅切换可治理的权重策略，不更换模型。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 prl-puts 核心机制，相对 NDCG@10 +39.64%。  reinforcement-learning multi-objective-ranking homefeed 搜广推 重排、展示与长期价值 PRL-PUTS 为什么分别估计 Repin 与 P2P 两个 Q 值？ 两个效用体现不同业务结果，分头估计让线上可以改变权重策略而不重新训练全部价值函数，再通过离线 Pareto 扫描选可治理取舍。Q 的估计误差会影响前沿，双头并不表示两个目标一定能同时提高。 示意：一个动作更易收藏，一个更易后续深度互动，双头保留各自价值；合成单奖励后若想调整取舍，就可能需要重训。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:prl-puts" data-paper-title="A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems 搜广推与 LLM 应用 Pinterest 2026-05-08 双头 Q 网络分别估计 Repin 与 P2P utility，再通过 Pareto sweeping 离线筛选不劣策略；线上仅切换可治理的权重策略，不更换模型。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 prl-puts 核心机制，相对 NDCG@10 +39.64%。  reinforcement-learning multi-objective-ranking homefeed 搜广推 重排、展示与长期价值 PRL-PUTS 中的 Pareto“不劣”，是否要求一项策略同时改善所有目标？ 不要求。若没有其他策略在所有目标都不差且至少一项更好，这个策略就可能留在不劣集合；它可在 Repin 与 P2P 间作不同取舍。前沿内各点不代表同样适合业务，更不表示相对旧系统全部提升，还要看估计误差与实际约束。 示意：示意性地，甲两项目标为八和三，乙为六和五，两者互有取舍；丙为五和二则被甲支配，可剔除，但不能只凭前沿宣布甲乙都比线上好。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 重排、展示与长期价值</a></p>
 <span id="paper-recommendation-prl-puts-9d4fc321" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-cfcea21c081d6ffb">PRL-PUTS 为什么分别估计 Repin 与 P2P 两个 Q 值？</h2>
+<h2 id="qa-cfcea21c081d6ffb">PRL-PUTS 中的 Pareto“不劣”，是否要求一项策略同时改善所有目标？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aprl-puts">A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Pinterest</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>两个效用体现不同业务结果，分头估计让线上可以改变权重策略而不重新训练全部价值函数，再通过离线 Pareto 扫描选可治理取舍。Q 的估计误差会影响前沿，双头并不表示两个目标一定能同时提高。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>一个动作更易收藏，一个更易后续深度互动，双头保留各自价值；合成单奖励后若想调整取舍，就可能需要重训。</p>
+<p><strong>答案：</strong>不要求。若没有其他策略在所有目标都不差且至少一项更好，这个策略就可能留在不劣集合；它可在 Repin 与 P2P 间作不同取舍。前沿内各点不代表同样适合业务，更不表示相对旧系统全部提升，还要看估计误差与实际约束。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>示意性地，甲两项目标为八和三，乙为六和五，两者互有取舍；丙为五和二则被甲支配，可剔除，但不能只凭前沿宣布甲乙都比线上好。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.16344">原论文</a> · <a href="../../../../reproductions/2605.16344-prl-puts/">实现解读</a> · <a href="#qa-cfcea21c081d6ffb">问题链接</a></p>
 </details>
@@ -1405,16 +1405,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.07420">原论文</a> · <a href="../../../../reproductions/2604.07420-dual-rerank/">实现解读</a> · <a href="#qa-843d902d26c1e784">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:safro" data-paper-title="SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search 搜广推与 LLM 应用 Kuaishou Technology 2026-03-20 满意度 reward 同时建模即时互动与长期留存，Dual-Relative PO 在组内和任务间归一化优势，关系门控融合多搜索目标。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 safro 核心机制，相对 NDCG@10 +81.86%。  search-ranking reinforcement-learning multi-task-learning 搜广推 重排、展示与长期价值 SaFRO为什么把满意度连接即时互动与长期留存？ 单次点击不代表后续满意，综合奖励希望让多目标搜索融合兼顾当下与长期。观测定义和延迟反馈很重要，代理奖励不能直接当真实留存因果效果。 例如视频引起点击却让用户马上离开，与看后持续回访的价值不同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:safro" data-paper-title="SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search 搜广推与 LLM 应用 Kuaishou Technology 2026-03-20 满意度 reward 同时建模即时互动与长期留存，Dual-Relative PO 在组内和任务间归一化优势，关系门控融合多搜索目标。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 safro 核心机制，相对 NDCG@10 +81.86%。  search-ranking reinforcement-learning multi-task-learning 搜广推 重排、展示与长期价值 SaFRO中一次候选rollout只有一个反馈，还是在多个任务轴上各有reward？ 它把候选放在多个目标或任务轴下评价，rᵢ,ₜ中的i指候选、t指任务。同一个候选可能即时互动较好、长期信号较差，不能先把这些记录混成没有任务身份的单列分数。先保留这张奖励表，才有组内与任务间比较的基础。 教学例子：同一候选分别记录互动和留存代理，不要把两个数误记成两条不同候选的同一种反馈。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 重排、展示与长期价值</a></p>
 <span id="paper-recommendation-safro-95b49eda" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-926f0f190e18ffa3">SaFRO为什么把满意度连接即时互动与长期留存？</h2>
+<h2 id="qa-926f0f190e18ffa3">SaFRO中一次候选rollout只有一个反馈，还是在多个任务轴上各有reward？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asafro">SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>单次点击不代表后续满意，综合奖励希望让多目标搜索融合兼顾当下与长期。观测定义和延迟反馈很重要，代理奖励不能直接当真实留存因果效果。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如视频引起点击却让用户马上离开，与看后持续回访的价值不同。</p>
+<p><strong>答案：</strong>它把候选放在多个目标或任务轴下评价，rᵢ,ₜ中的i指候选、t指任务。同一个候选可能即时互动较好、长期信号较差，不能先把这些记录混成没有任务身份的单列分数。先保留这张奖励表，才有组内与任务间比较的基础。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一候选分别记录互动和留存代理，不要把两个数误记成两条不同候选的同一种反馈。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19585">原论文</a> · <a href="../../../../reproductions/2603.19585-safro/">实现解读</a> · <a href="#qa-926f0f190e18ffa3">问题链接</a></p>
 </details>
@@ -1432,15 +1432,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19585">原论文</a> · <a href="../../../../reproductions/2603.19585-safro/">实现解读</a> · <a href="#qa-20b5c57f1b03818c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:safro" data-paper-title="SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search 搜广推与 LLM 应用 Kuaishou Technology 2026-03-20 满意度 reward 同时建模即时互动与长期留存，Dual-Relative PO 在组内和任务间归一化优势，关系门控融合多搜索目标。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 safro 核心机制，相对 NDCG@10 +81.86%。  search-ranking reinforcement-learning multi-task-learning 搜广推 重排、展示与长期价值 Dual-Relative优势与只在同题组标准化有何区别？ 它同时使用组内与任务间相对信息，关系门控再处理不同目标融合。两个统计轴不能混成单一全局均值，避免把任务难度与回答质量变化混淆。 例如某类任务整体奖励低，不能只因量纲差就被长期忽视。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:safro" data-paper-title="SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search 搜广推与 LLM 应用 Kuaishou Technology 2026-03-20 满意度 reward 同时建模即时互动与长期留存，Dual-Relative PO 在组内和任务间归一化优势，关系门控融合多搜索目标。 保真度：核心机制复现。保真度：核心机制复现。原文线上结论、本地公开数据实验和未复刻部分分开陈述。在 MovieLens-100K 固定全库候选、相同切分和 seed 上执行论文核心机制；私有特征、生产基础模型和在线流量不可公开，论文 A/B 数字只作原文引用。本地实现拥有独立模型状态和打分路径；负结果同样保留，且本地相对变化不得与原文 A/B 提升混写。本地对照口径：基线为共享 transition + content scorer；实验组在同一用户、物品、全库候选和 seed 上只加入 safro 核心机制，相对 NDCG@10 +81.86%。  search-ranking reinforcement-learning multi-task-learning 搜广推 重排、展示与长期价值 SaFRO把reward标准化后，是否就自动确定了即时互动与长期留存谁更重要？ 不会。相对归一化处理尺度和比较基准，不能单独定义业务目标的价值取舍；关系门控负责组织目标融合，也不使代理反馈自动成为长期因果价值。需要分别说明奖励定义、统计轴与融合规则，而不是把“可比”解释成“同等重要”。 教学例子：把两种考试成绩都变成标准分，并不能决定毕业时各占多少权重；推荐多目标也要另说明取舍。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 重排、展示与长期价值</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-467e8fa083cd8a30">Dual-Relative优势与只在同题组标准化有何区别？</h2>
+<h2 id="qa-467e8fa083cd8a30">SaFRO把reward标准化后，是否就自动确定了即时互动与长期留存谁更重要？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asafro">SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Kuaishou Technology</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它同时使用组内与任务间相对信息，关系门控再处理不同目标融合。两个统计轴不能混成单一全局均值，避免把任务难度与回答质量变化混淆。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如某类任务整体奖励低，不能只因量纲差就被长期忽视。</p>
+<p><strong>答案：</strong>不会。相对归一化处理尺度和比较基准，不能单独定义业务目标的价值取舍；关系门控负责组织目标融合，也不使代理反馈自动成为长期因果价值。需要分别说明奖励定义、统计轴与融合规则，而不是把“可比”解释成“同等重要”。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>把两种考试成绩都变成标准分，并不能决定毕业时各占多少权重；推荐多目标也要另说明取舍。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19585">原论文</a> · <a href="../../../../reproductions/2603.19585-safro/">实现解读</a> · <a href="#qa-467e8fa083cd8a30">问题链接</a></p>
 </details>
@@ -1829,16 +1829,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.05292">原论文</a> · <a href="../../../../reproductions/2509.05292-drl-put/">实现解读</a> · <a href="#qa-96e89b6778bf510d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sort-gen" data-paper-title="A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao 搜广推与 LLM 应用 Alibaba / Taobao &amp; Tmall 2025-05-12 传统公式或 LTR 在 item level 优化 CTR、CVR、GMV，无法建模已选前缀对后续 item 的影响。SORT-Gen 用 causal Transformer 输入 item、user、position 和上游 CTR/CVR score，在每个前缀位置预测“累计行为数是否至少达到第档”的 ordered-regression 概率，从而估计加入 item 后的列表边际价值。推理先建立 CLICK、PAY、GMV 等目标队列，把搜索空间从全部候选降到队首。 Fidelity: 核心机制复现。实际训练 causal Transformer ordered regression，并执行多目标队列、mask-driven 单次批量评分和 MMR；私有曝光与线上 kernel 缩小。MovieLens rating/genre/popularity 分别代理点击、交易、商品内容和上游 score；没有淘宝真实曝光、CVR/GMV、用户商业特征和多模态 embedding。单次调用是 PyTorch 批量路径，不等价于论文生产 19 ms kernel；本地 proxy 指标不能和线上百分比直接比较。  reranking multi-objective ordered-regression diversity 搜广推 重排、展示与长期价值 SORT-Gen为什么把列表前缀价值而非独立item分优化？ 已选内容影响下一项边际收益，独立CTR无法表达列表相互作用。模型在前缀上预测累计行为档位，选择能增加当前列表价值的候选。 例如前面已有两条相似商品，再加第三条可能不如补充另一需求。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:sort-gen" data-paper-title="A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao 搜广推与 LLM 应用 Alibaba / Taobao &amp; Tmall 2025-05-12 传统公式或 LTR 在 item level 优化 CTR、CVR、GMV，无法建模已选前缀对后续 item 的影响。SORT-Gen 用 causal Transformer 输入 item、user、position 和上游 CTR/CVR score，在每个前缀位置预测“累计行为数是否至少达到第档”的 ordered-regression 概率，从而估计加入 item 后的列表边际价值。推理先建立 CLICK、PAY、GMV 等目标队列，把搜索空间从全部候选降到队首。 Fidelity: 核心机制复现。实际训练 causal Transformer ordered regression，并执行多目标队列、mask-driven 单次批量评分和 MMR；私有曝光与线上 kernel 缩小。MovieLens rating/genre/popularity 分别代理点击、交易、商品内容和上游 score；没有淘宝真实曝光、CVR/GMV、用户商业特征和多模态 embedding。单次调用是 PyTorch 批量路径，不等价于论文生产 19 ms kernel；本地 proxy 指标不能和线上百分比直接比较。  reranking multi-objective ordered-regression diversity 搜广推 重排、展示与长期价值 SORT-Gen的ordered regression预测的是下一件商品ID，还是前缀累计行为达到各档的概率？ 它为列表前缀预测累计点击或支付数是否达到各档，再从这些结果估计前缀价值；不是直接把档位当物品编号。档位轴与列表长度轴都有各自含义。先分清预测对象，才能理解为何加入一个候选后需要重新评价整个前缀。 教学例子：长度为三的列表可预测累计点击是否至少一次、至少两次；这两个输出并不是推荐商品一和商品二。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 重排、展示与长期价值</a></p>
 <span id="paper-recommendation-sort-gen-b1c957ea" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0ae30452731af4a0">SORT-Gen为什么把列表前缀价值而非独立item分优化？</h2>
+<h2 id="qa-0ae30452731af4a0">SORT-Gen的ordered regression预测的是下一件商品ID，还是前缀累计行为达到各档的概率？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Asort-gen">A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Alibaba / Taobao &amp; Tmall</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>已选内容影响下一项边际收益，独立CTR无法表达列表相互作用。模型在前缀上预测累计行为档位，选择能增加当前列表价值的候选。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如前面已有两条相似商品，再加第三条可能不如补充另一需求。</p>
+<p><strong>答案：</strong>它为列表前缀预测累计点击或支付数是否达到各档，再从这些结果估计前缀价值；不是直接把档位当物品编号。档位轴与列表长度轴都有各自含义。先分清预测对象，才能理解为何加入一个候选后需要重新评价整个前缀。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>长度为三的列表可预测累计点击是否至少一次、至少两次；这两个输出并不是推荐商品一和商品二。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.07197">原论文</a> · <a href="../../../../reproductions/2505.07197-sort-gen/">实现解读</a> · <a href="#qa-0ae30452731af4a0">问题链接</a></p>
 </details>

@@ -292,16 +292,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.26856v1">原论文</a> · <a href="../../../../post-training/2610.26856-vag/">实现解读</a> · <a href="#qa-f3aece6b9cdc6db6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:spod" data-paper-title="Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation LLM 后训练 University of Southern California 2026-10-18 多轮Agent蒸馏中，学生可能先超过教师，再随着持续模仿而退步。作者区分两个过程：教师修复学生的弱决策，同时也会侵蚀学生已经成功、但与教师偏好不同的行为。SPOD只在成功训练episode内保护教师整action概率更低的decision，取消该处蒸馏压力，并用软概率floor抵消来自其他状态更新的间接侵蚀；其余decision继续正常蒸馏。原文§3–4 原图建议：附录Figure 9的训练流程；Figure 1展示overshoot与修复／侵蚀现象，可作为辅助结果图。原图不是本地运行结果。 完整实验成本过高，不复现（审查 DONE）；L1 定义性组件／梯度诊断，不是Agent能力复现。L1 定义性组件／梯度诊断，不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不可晋级，未接Evolve。随机初始化16词表、8维因果GRU，实际采样多state episode；教师独立随机初始化后冻结，对同一学生action重放评分。显式合成环境在episode结束后返回训练成功位，actor输入只有公开历史、自己的action及公开观察ID；不读取成功位、gold或评估结果。固定长度预算的合成action不是ALFWorld/WebShop/ScienceWorld语言动作。  On-policy distillation Agentic RL 后训练算法组件 LLM 后训练 教师与纠错：额外信息何时能帮到学生 SPOD为什么保护成功但教师不支持的decision？ 学生可能已经学会教师未偏好的有效行为，持续模仿会侵蚀它。只在成功episode中发现教师整action概率更低时取消该处蒸馏，并以软floor抵抗间接退化。 例如学生成功使用另一工具路线，教师偏好旧路线不该自动压掉它。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:spod" data-paper-title="Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation LLM 后训练 University of Southern California 2026-10-18 多轮Agent蒸馏中，学生可能先超过教师，再随着持续模仿而退步。作者区分两个过程：教师修复学生的弱决策，同时也会侵蚀学生已经成功、但与教师偏好不同的行为。SPOD只在成功训练episode内保护教师整action概率更低的decision，取消该处蒸馏压力，并用软概率floor抵消来自其他状态更新的间接侵蚀；其余decision继续正常蒸馏。原文§3–4 原图建议：附录Figure 9的训练流程；Figure 1展示overshoot与修复／侵蚀现象，可作为辅助结果图。原图不是本地运行结果。 完整实验成本过高，不复现（审查 DONE）；L1 定义性组件／梯度诊断，不是Agent能力复现。L1 定义性组件／梯度诊断，不是Agent能力复现。完整实验成本过高，不复现（审查 DONE）；不可晋级，未接Evolve。随机初始化16词表、8维因果GRU，实际采样多state episode；教师独立随机初始化后冻结，对同一学生action重放评分。显式合成环境在episode结束后返回训练成功位，actor输入只有公开历史、自己的action及公开观察ID；不读取成功位、gold或评估结果。固定长度预算的合成action不是ALFWorld/WebShop/ScienceWorld语言动作。  On-policy distillation Agentic RL 后训练算法组件 LLM 后训练 教师与纠错：额外信息何时能帮到学生 SPOD里的一个decision是一枚词元，还是一次可能含多个词元的action？ 保护对象是某个状态下的完整action，包括多个词元及原生结束符；不是单枚词元，也不是整个episode。成功标签在episode级给出，保护判断却定位到其中具体decision。先分清这三个层级，才能避免把成功轨迹全部当成不再学习。 教学例子：一次工具调用包含工具名、参数和结束符，可组成一个action；同一成功episode中还可能有别的action。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <span id="paper-post-training-spod-93843af2" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-a42d125f58769f2d">SPOD为什么保护成功但教师不支持的decision？</h2>
+<h2 id="qa-a42d125f58769f2d">SPOD里的一个decision是一枚词元，还是一次可能含多个词元的action？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspod">Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Southern California</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>学生可能已经学会教师未偏好的有效行为，持续模仿会侵蚀它。只在成功episode中发现教师整action概率更低时取消该处蒸馏，并以软floor抵抗间接退化。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如学生成功使用另一工具路线，教师偏好旧路线不该自动压掉它。</p>
+<p><strong>答案：</strong>保护对象是某个状态下的完整action，包括多个词元及原生结束符；不是单枚词元，也不是整个episode。成功标签在episode级给出，保护判断却定位到其中具体decision。先分清这三个层级，才能避免把成功轨迹全部当成不再学习。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一次工具调用包含工具名、参数和结束符，可组成一个action；同一成功episode中还可能有别的action。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.25034v1">原论文</a> · <a href="../../../../post-training/2610.25034-spod/">实现解读</a> · <a href="#qa-a42d125f58769f2d">问题链接</a></p>
 </details>
@@ -1246,16 +1246,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38142">原论文</a> · <a href="../../../../post-training/2609.38142-advisd/">实现解读</a> · <a href="#qa-6f3d700f9d4b64e0">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lego-opd" data-paper-title="LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation LLM 后训练 KAIST 2026-09-29 把语言专家作为 token prior，把 grounding 专家只作为视觉 likelihood，以乘积专家形式组成 OPD teacher，避免连同 VLM 语言偏差一起蒸馏。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 factorized teacher composition；未加载 LLM/VLM teacher。执行 factorized teacher composition；未加载 LLM/VLM teacher。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  OPD 多模态后训练 teacher composition LLM 后训练 教师与纠错：额外信息何时能帮到学生 LEGO-OPD为什么把教师拆成语言与grounding两种角色？ 多模态教师可能同时带有语言和视觉偏差，分解后语言模型负责先验，grounding只提供视觉似然修正，让监督来源更清楚。它仍需可靠的视觉专家。 例如句子该怎样表达与杯子实际是什么颜色，来自不同信息。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lego-opd" data-paper-title="LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation LLM 后训练 KAIST 2026-09-29 把语言专家作为 token prior，把 grounding 专家只作为视觉 likelihood，以乘积专家形式组成 OPD teacher，避免连同 VLM 语言偏差一起蒸馏。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 factorized teacher composition；未加载 LLM/VLM teacher。执行 factorized teacher composition；未加载 LLM/VLM teacher。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  OPD 多模态后训练 teacher composition LLM 后训练 教师与纠错：额外信息何时能帮到学生 LEGO-OPD里的grounding likelihood可以直接当最终答案概率使用吗？ 它在分解中承担视觉证据因子的角色，最终教师目标还要结合语言先验并归一化。不能因为它也是一个分数，就把它解释成完整语言回答的后验置信度。先分清先验、证据因子与最终分布，才能正确读取两位专家的责任。 教学例子：视觉因子支持“红色”，语言先验约束当前句子可接什么词；只有组合并归一后才是最终词元分布。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <span id="paper-post-training-lego-opd-93f05fa7" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d289372d6af6441f">LEGO-OPD为什么把教师拆成语言与grounding两种角色？</h2>
+<h2 id="qa-d289372d6af6441f">LEGO-OPD里的grounding likelihood可以直接当最终答案概率使用吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Alego-opd">LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · KAIST</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>多模态教师可能同时带有语言和视觉偏差，分解后语言模型负责先验，grounding只提供视觉似然修正，让监督来源更清楚。它仍需可靠的视觉专家。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如句子该怎样表达与杯子实际是什么颜色，来自不同信息。</p>
+<p><strong>答案：</strong>它在分解中承担视觉证据因子的角色，最终教师目标还要结合语言先验并归一化。不能因为它也是一个分数，就把它解释成完整语言回答的后验置信度。先分清先验、证据因子与最终分布，才能正确读取两位专家的责任。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>视觉因子支持“红色”，语言先验约束当前句子可接什么词；只有组合并归一后才是最终词元分布。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00333">原论文</a> · <a href="../../../../post-training/2610.00333-lego-opd/">实现解读</a> · <a href="#qa-d289372d6af6441f">问题链接</a></p>
 </details>
@@ -1273,15 +1273,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00333">原论文</a> · <a href="../../../../post-training/2610.00333-lego-opd/">实现解读</a> · <a href="#qa-0be0a85b3520122d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lego-opd" data-paper-title="LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation LLM 后训练 KAIST 2026-09-29 把语言专家作为 token prior，把 grounding 专家只作为视觉 likelihood，以乘积专家形式组成 OPD teacher，避免连同 VLM 语言偏差一起蒸馏。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 factorized teacher composition；未加载 LLM/VLM teacher。执行 factorized teacher composition；未加载 LLM/VLM teacher。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  OPD 多模态后训练 teacher composition LLM 后训练 教师与纠错：额外信息何时能帮到学生 专家乘积与两个教师概率平均有何不同？ 乘积强调两因素共同支持并在log空间相加，平均则混合两套完整预测。若把grounding完整语言输出平均进去，可能重新引入想避免的语言偏差。 例如视觉只修正颜色证据，不应同时决定所有连接词的写法。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lego-opd" data-paper-title="LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation LLM 后训练 KAIST 2026-09-29 把语言专家作为 token prior，把 grounding 专家只作为视觉 likelihood，以乘积专家形式组成 OPD teacher，避免连同 VLM 语言偏差一起蒸馏。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行 factorized teacher composition；未加载 LLM/VLM teacher。执行 factorized teacher composition；未加载 LLM/VLM teacher。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  OPD 多模态后训练 teacher composition LLM 后训练 教师与纠错：额外信息何时能帮到学生 LEGO-OPD把grounding权重α设为零，与只用视觉专家有什么区别？ 当α为零且概率计算有效时，视觉因子不再影响归一化结果，教师退化为语言先验，而不是视觉独占。只用视觉专家则移除了语言先验，是另一种目标。α控制证据因子的影响强度，不能被读成两个完整教师的投票比例。 教学例子：将视觉项的log贡献乘零后，剩下的是语言专家分数；并不会因为“零语言占比”而变成纯视觉。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-16ed41f70e40a9e1">专家乘积与两个教师概率平均有何不同？</h2>
+<h2 id="qa-16ed41f70e40a9e1">LEGO-OPD把grounding权重α设为零，与只用视觉专家有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Alego-opd">LEGO-OPD: Factorized Teacher Composition for Multimodal On-Policy Distillation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · KAIST</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>乘积强调两因素共同支持并在log空间相加，平均则混合两套完整预测。若把grounding完整语言输出平均进去，可能重新引入想避免的语言偏差。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如视觉只修正颜色证据，不应同时决定所有连接词的写法。</p>
+<p><strong>答案：</strong>当α为零且概率计算有效时，视觉因子不再影响归一化结果，教师退化为语言先验，而不是视觉独占。只用视觉专家则移除了语言先验，是另一种目标。α控制证据因子的影响强度，不能被读成两个完整教师的投票比例。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>将视觉项的log贡献乘零后，剩下的是语言专家分数；并不会因为“零语言占比”而变成纯视觉。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00333">原论文</a> · <a href="../../../../post-training/2610.00333-lego-opd/">实现解读</a> · <a href="#qa-16ed41f70e40a9e1">问题链接</a></p>
 </details>

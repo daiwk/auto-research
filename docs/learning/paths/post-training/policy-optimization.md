@@ -822,16 +822,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.31644">原论文</a> · <a href="../../../../post-training/2609.31644-mad-rl/">实现解读</a> · <a href="#qa-aabb50423710ae5d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tasco" data-paper-title="Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning LLM 后训练 Chongqing University 2026-09-10 冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行随机邻域扰动和稳定性惩罚；没有加载冻结 LLM prefix。本地执行随机邻域扰动和稳定性惩罚；没有加载冻结 LLM prefix。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  测试时适配 稳定性优化 LLM 后训练 策略优化：谁在采样，谁在被更新 TASCO为什么在测试时只优化轻量prefix？ 冻结主模型可把临时适配限制在小量可训练条件上，利用当前任务信号调整行为。它仍属于参数适配，而非单纯多采样；prefix是否学到正确线索取决于无标签目标。 例如同一道题调整一小段连续前缀，不必重新训练全部模型权重。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tasco" data-paper-title="Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning LLM 后训练 Chongqing University 2026-09-10 冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行随机邻域扰动和稳定性惩罚；没有加载冻结 LLM prefix。本地执行随机邻域扰动和稳定性惩罚；没有加载冻结 LLM prefix。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  测试时适配 稳定性优化 LLM 后训练 策略优化：谁在采样，谁在被更新 TASCO在测试时适配的是主模型权重，还是额外的轻量prefix？ 主模型冻结，适配对象是附加的轻量prefix。测试时优化因此仍会改变模型的条件输入表示，但不是重新训练全部骨干，也不是仅靠多采样选答案。它使用当前任务的无标签信号，不能把测试金标当成prefix优化目标。 教学例子：保持语言模型各层权重不动，只更新前缀向量，再重新读取该题分布；题目答案不参与更新。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-tasco-a3638c7c" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-6ae37dc4a87906c6">TASCO为什么在测试时只优化轻量prefix？</h2>
+<h2 id="qa-6ae37dc4a87906c6">TASCO在测试时适配的是主模型权重，还是额外的轻量prefix？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atasco">Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Chongqing University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>冻结主模型可把临时适配限制在小量可训练条件上，利用当前任务信号调整行为。它仍属于参数适配，而非单纯多采样；prefix是否学到正确线索取决于无标签目标。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如同一道题调整一小段连续前缀，不必重新训练全部模型权重。</p>
+<p><strong>答案：</strong>主模型冻结，适配对象是附加的轻量prefix。测试时优化因此仍会改变模型的条件输入表示，但不是重新训练全部骨干，也不是仅靠多采样选答案。它使用当前任务的无标签信号，不能把测试金标当成prefix优化目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>保持语言模型各层权重不动，只更新前缀向量，再重新读取该题分布；题目答案不参与更新。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11393">原论文</a> · <a href="../../../../post-training/2609.11393-tasco/">实现解读</a> · <a href="#qa-6ae37dc4a87906c6">问题链接</a></p>
 </details>
@@ -849,15 +849,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11393">原论文</a> · <a href="../../../../post-training/2609.11393-tasco/">实现解读</a> · <a href="#qa-3bf3e360a7863e6c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tasco" data-paper-title="Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning LLM 后训练 Chongqing University 2026-09-10 冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行随机邻域扰动和稳定性惩罚；没有加载冻结 LLM prefix。本地执行随机邻域扰动和稳定性惩罚；没有加载冻结 LLM prefix。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  测试时适配 稳定性优化 LLM 后训练 策略优化：谁在采样，谁在被更新 稳定性约束与只最大化答案置信度有什么差别？ 高置信可能来自错误捷径；邻域扰动后的稳定性提供另一信号，惩罚对细小变化敏感的轨迹。但稳定也可能稳定地错，不能当作正确性证明。 例如轻微改变表示就改答案的自信轨迹，比始终一致的轨迹更值得审查。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:tasco" data-paper-title="Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning LLM 后训练 Chongqing University 2026-09-10 冻结主模型，优化轻量 prefix；除置信度外还惩罚邻域扰动下的不稳定，从而避免自信但错误的轨迹。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行随机邻域扰动和稳定性惩罚；没有加载冻结 LLM prefix。本地执行随机邻域扰动和稳定性惩罚；没有加载冻结 LLM prefix。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  测试时适配 稳定性优化 LLM 后训练 策略优化：谁在采样，谁在被更新 TASCO更新prefix与增加best-of-N采样，额外计算主要花在哪里？ prefix适配把计算用于优化可训练条件，再让冻结模型据此预测；best-of-N主要生成更多候选并依赖选择规则。二者的可训练状态和预算构成都不同，比较时需要计入优化前向、反向及候选生成，不能把相同候选数当相同成本。 教学例子：一种做几次prefix梯度更新后答题，另一种直接生成多份答案再筛选；次数相同也不是同一种工作量。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-7138500cadc224d7">稳定性约束与只最大化答案置信度有什么差别？</h2>
+<h2 id="qa-7138500cadc224d7">TASCO更新prefix与增加best-of-N采样，额外计算主要花在哪里？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atasco">Beyond Confidence: Stability-Aware Test-Time Adaptation for LLM Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Chongqing University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>高置信可能来自错误捷径；邻域扰动后的稳定性提供另一信号，惩罚对细小变化敏感的轨迹。但稳定也可能稳定地错，不能当作正确性证明。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如轻微改变表示就改答案的自信轨迹，比始终一致的轨迹更值得审查。</p>
+<p><strong>答案：</strong>prefix适配把计算用于优化可训练条件，再让冻结模型据此预测；best-of-N主要生成更多候选并依赖选择规则。二者的可训练状态和预算构成都不同，比较时需要计入优化前向、反向及候选生成，不能把相同候选数当相同成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一种做几次prefix梯度更新后答题，另一种直接生成多份答案再筛选；次数相同也不是同一种工作量。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式或操作；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.11393">原论文</a> · <a href="../../../../post-training/2609.11393-tasco/">实现解读</a> · <a href="#qa-7138500cadc224d7">问题链接</a></p>
 </details>
@@ -1882,16 +1882,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.05261">原论文</a> · <a href="../../../../post-training/2602.05261-luspo/">实现解读</a> · <a href="#qa-6d27849877ca4fb1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:calibration-aware-rl" data-paper-title="Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning LLM 后训练 University of Southern California 2026-01-19 论文指出 RLVR 虽能提高决策正确率，却可能让 decision token 极度过度自信；其方法直接调整决策 token 的概率，在保留准确率的同时降低 ECE。本仓库对应地把 accuracy 与 Brier/ECE 同时纳入报告，并只用 validation 拟合温度，禁止用 test 调参。本地实现不复刻论文的完整 RLVR 流程，属于决策概率校准机制与评测协议实现。 未复现完整 RLVR 训练，只实现决策概率校准轴、数据隔离与统一报告。  校准强化学习 决策 token LLM 后训练 策略优化：谁在采样，谁在被更新 校准感知RL为什么把准确率和概率质量分开？ 答对多少与预测有多可信是不同问题，RLVR可能提高命中却变得过度自信。联合报告Brier、ECE等指标，才能审查概率是否与实际频率相符。 例如九成置信的题若只对一半，选择可能不错，概率却不可靠。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:calibration-aware-rl" data-paper-title="Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning LLM 后训练 University of Southern California 2026-01-19 论文指出 RLVR 虽能提高决策正确率，却可能让 decision token 极度过度自信；其方法直接调整决策 token 的概率，在保留准确率的同时降低 ECE。本仓库对应地把 accuracy 与 Brier/ECE 同时纳入报告，并只用 validation 拟合温度，禁止用 test 调参。本地实现不复刻论文的完整 RLVR 流程，属于决策概率校准机制与评测协议实现。 未复现完整 RLVR 训练，只实现决策概率校准轴、数据隔离与统一报告。  校准强化学习 决策 token LLM 后训练 策略优化：谁在采样，谁在被更新 校准感知RL中的decision token，是整段解释都正确的评分吗？ 不是。它关注承载最终决策的词元概率及其校准，不能用该概率直接评价整段推理的事实忠实性。候选决策正确与概率可信也要分别测；一个答案词元获得高概率，并不证明前面每一步解释都可靠。 教学例子：最终选项A的概率很高，只描述这次选择的信心，不能据此给此前一段可能含错误的解释全判正确。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-calibration-aware-rl-6e3cb1f1" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-b4f067719b7ff0b1">校准感知RL为什么把准确率和概率质量分开？</h2>
+<h2 id="qa-b4f067719b7ff0b1">校准感知RL中的decision token，是整段解释都正确的评分吗？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acalibration-aware-rl">Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Southern California</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>答对多少与预测有多可信是不同问题，RLVR可能提高命中却变得过度自信。联合报告Brier、ECE等指标，才能审查概率是否与实际频率相符。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如九成置信的题若只对一半，选择可能不错，概率却不可靠。</p>
+<p><strong>答案：</strong>不是。它关注承载最终决策的词元概率及其校准，不能用该概率直接评价整段推理的事实忠实性。候选决策正确与概率可信也要分别测；一个答案词元获得高概率，并不证明前面每一步解释都可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>最终选项A的概率很高，只描述这次选择的信心，不能据此给此前一段可能含错误的解释全判正确。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.13284">原论文</a> · <a href="../../../../post-training/2601.13284-calibration-aware-rl/">实现解读</a> · <a href="#qa-b4f067719b7ff0b1">问题链接</a></p>
 </details>

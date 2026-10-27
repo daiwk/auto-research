@@ -27,16 +27,16 @@ hide:
 <p class="ar-learning-status" data-learning-status role="status">64 个问题 · 16 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:drago" data-paper-title="Repairing LLM-Generated Specifications with Deterministic Diagnosis" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Repairing LLM-Generated Specifications with Deterministic Diagnosis Agent University of Oxford 2026-10-15 形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。候选必须保留语法/词表/输出合同，严格降低阻塞诊断，并满足防退化条件；参考形式化和最终标签只用于最后评分。方法 §3、附录 A.2 原图建议：原论文 Figure 2 为诊断/接纳消融；Figure 3 为 Planetarium 输入渲染缺陷。它们分别解释算法贡献和评测风险。 原文用 4×A100 服务30B/31B模型，跨5个 benchmark 多seed、多臂重评估，完整实验成本过高，不复现（审查 DONE）。实现 grounded STRIPS/PDDL 方向的诊断算子子集；component_only / L1 CPU。实现 grounded STRIPS/PDDL 方向的诊断算子子集；不冒充完整三形式化语言框架。CPU fixture 随机化走廊规模，实际执行无前提路径、联合目标冲突、预算耗尽、证据支持的初态修复，以及“删掉目标就算修好”的负对照。proposal 回调只拿公开 Problem 和 Diagnosis，不拿金标准。  规划与搜索 形式规格诊断与保守修复 Agent 规划与搜索：下一步该做什么 DRAGO 的阻塞诊断为什么不是最终答案评分？ 诊断检查当前形式规格的合同、可达性和公开题意一致性，用来约束修复方向；最终参考形式化与标签只在独立评分阶段使用。两者可用信息不同，诊断变少意味着已检查问题减少，不能直接等同于规格语义正确，更不能让修复器读取参考答案。 例如求解器发现目标冲突可以提示修复，但正确目标集合由公开题意决定，不能从隐藏 reference 抄回规格。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:drago" data-paper-title="Repairing LLM-Generated Specifications with Deterministic Diagnosis" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Repairing LLM-Generated Specifications with Deterministic Diagnosis Agent University of Oxford 2026-10-15 形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。候选必须保留语法/词表/输出合同，严格降低阻塞诊断，并满足防退化条件；参考形式化和最终标签只用于最后评分。方法 §3、附录 A.2 原图建议：原论文 Figure 2 为诊断/接纳消融；Figure 3 为 Planetarium 输入渲染缺陷。它们分别解释算法贡献和评测风险。 原文用 4×A100 服务30B/31B模型，跨5个 benchmark 多seed、多臂重评估，完整实验成本过高，不复现（审查 DONE）。实现 grounded STRIPS/PDDL 方向的诊断算子子集；component_only / L1 CPU。实现 grounded STRIPS/PDDL 方向的诊断算子子集；不冒充完整三形式化语言框架。CPU fixture 随机化走廊规模，实际执行无前提路径、联合目标冲突、预算耗尽、证据支持的初态修复，以及“删掉目标就算修好”的负对照。proposal 回调只拿公开 Problem 和 Diagnosis，不拿金标准。  规划与搜索 形式规格诊断与保守修复 Agent 规划与搜索：下一步该做什么 让 LLM 把自然语言题目写成形式规格时，DRAGO 要防哪类“看似成功”？ 模型可能生成能解析、能求解，却遗漏要求的规格，后续求解器只会忠实解决这个错误版本。DRAGO 关注自然语言到形式系统的转换可靠性，用可定位诊断约束修复，而不是把拿到一个解当作原题已解决；规格和求解是两个需要分开检查的环节。 例如题目要求两人都被安排，规格漏写一人后排班更容易有解，但这个“成功”恰好暴露了形式化阶段的遗漏。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-drago-838b0a34" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-58adcfc64a04a3e1">DRAGO 的阻塞诊断为什么不是最终答案评分？</h2>
+<h2 id="qa-58adcfc64a04a3e1">让 LLM 把自然语言题目写成形式规格时，DRAGO 要防哪类“看似成功”？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adrago">Repairing LLM-Generated Specifications with Deterministic Diagnosis</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Oxford</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>诊断检查当前形式规格的合同、可达性和公开题意一致性，用来约束修复方向；最终参考形式化与标签只在独立评分阶段使用。两者可用信息不同，诊断变少意味着已检查问题减少，不能直接等同于规格语义正确，更不能让修复器读取参考答案。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如求解器发现目标冲突可以提示修复，但正确目标集合由公开题意决定，不能从隐藏 reference 抄回规格。</p>
+<p><strong>答案：</strong>模型可能生成能解析、能求解，却遗漏要求的规格，后续求解器只会忠实解决这个错误版本。DRAGO 关注自然语言到形式系统的转换可靠性，用可定位诊断约束修复，而不是把拿到一个解当作原题已解决；规格和求解是两个需要分开检查的环节。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如题目要求两人都被安排，规格漏写一人后排班更容易有解，但这个“成功”恰好暴露了形式化阶段的遗漏。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22568">原论文</a> · <a href="../../../../agent-research/2610.22568-drago/">实现解读</a> · <a href="#qa-58adcfc64a04a3e1">问题链接</a></p>
 </details>
@@ -186,16 +186,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.01834">原论文</a> · <a href="../../../../agent-research/2610.01834-jev-lookahead/">实现解读</a> · <a href="#qa-f3aefdd9ad5723f6">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:jev-spawn" data-paper-title="JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces Agent 原文首页未列第一作者机构 2026-09-30 先从自然语言任务构造有限 compositional action space，以 Jev 分布并行保留多个分支；反馈更新后验并保留备选以支持恢复。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行有限动作 posterior 和 top-branch retention；不调用 Jev checkpoint。执行有限动作 posterior 和 top-branch retention；不调用 Jev checkpoint。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  Jev Agent 推理 分支搜索 Agent 规划与搜索：下一步该做什么 组合动作空间为什么先需要有限候选集合？ 有限组合把自然语言任务的可选行动变成可评分、可保留的分支集合，便于分配并行预算和依据反馈恢复。它不是列举世界中所有可能动作，遗漏的关键组合仍无法由后验更新凭空产生，因此候选构造本身也是方法边界。 例如把搜索对象、检索策略与检查方式组成若干候选工作流，分支预算只在这些候选内分配，未列出的策略不会自动出现。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:jev-spawn" data-paper-title="JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces Agent 原文首页未列第一作者机构 2026-09-30 先从自然语言任务构造有限 compositional action space，以 Jev 分布并行保留多个分支；反馈更新后验并保留备选以支持恢复。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行有限动作 posterior 和 top-branch retention；不调用 Jev checkpoint。执行有限动作 posterior 和 top-branch retention；不调用 Jev checkpoint。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  Jev Agent 推理 分支搜索 Agent 规划与搜索：下一步该做什么 Agent 一条执行路线走不通时，JevSpawn 希望保留怎样的选择余地？ 长任务的早期判断可能不准，若过早把预算押在唯一行动，遇到反证就得重新寻找方案。JevSpawn 关注自适应推理分配：把任务的可选行动组织成可保留的组合分支，再根据执行反馈调整投入；保留的是备选机会，不是保证穷尽所有路线。 例如先检查本地资料或先联网搜索都可能合理，第一条路受阻后还应能接续另一条已准备路线，而不从空白计划重来。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-jev-spawn-dc827975" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-5a841ad22d666429">组合动作空间为什么先需要有限候选集合？</h2>
+<h2 id="qa-5a841ad22d666429">Agent 一条执行路线走不通时，JevSpawn 希望保留怎样的选择余地？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ajev-spawn">JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · 原文首页未列第一作者机构</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>有限组合把自然语言任务的可选行动变成可评分、可保留的分支集合，便于分配并行预算和依据反馈恢复。它不是列举世界中所有可能动作，遗漏的关键组合仍无法由后验更新凭空产生，因此候选构造本身也是方法边界。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如把搜索对象、检索策略与检查方式组成若干候选工作流，分支预算只在这些候选内分配，未列出的策略不会自动出现。</p>
+<p><strong>答案：</strong>长任务的早期判断可能不准，若过早把预算押在唯一行动，遇到反证就得重新寻找方案。JevSpawn 关注自适应推理分配：把任务的可选行动组织成可保留的组合分支，再根据执行反馈调整投入；保留的是备选机会，不是保证穷尽所有路线。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如先检查本地资料或先联网搜索都可能合理，第一条路受阻后还应能接续另一条已准备路线，而不从空白计划重来。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00437">原论文</a> · <a href="../../../../agent-research/2610.00437-jev-spawn/">实现解读</a> · <a href="#qa-5a841ad22d666429">问题链接</a></p>
 </details>
@@ -398,16 +398,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.10901">原论文</a> · <a href="../../../../agent-research/2609.10901-searchatlas/">实现解读</a> · <a href="#qa-2deaaf979c81c85e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:deeprepro" data-paper-title="DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories Agent Institute of Computing Technology, Chinese Academy of Sciences 2026-08-27 一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实现 repository snapshot、state-aware subplan 与 runtime-feedback repair。未运行官方 PaperBench Code-Dev，也未把 deterministic plan/answer 满分包装成论文结果；本地验证的是状态驱动重规划路径。planbench-mini、120 episodes：joint success 1.0000、average cost 0.4300，并记录 state snapshots、subplan revisions 与 repairs。  论文到代码状态子规划 Agent 规划与搜索：下一步该做什么 论文复现中为什么 repository state 必须进入下一轮子计划？ 已创建文件、接口变更、依赖和测试反馈会改变可行下一步，初始计划的假设可能失效。DeepRepro 让当前仓库状态与反馈共同决定细粒度 subplan，目标是保持计划与实际实现同步，而不是每轮只重述论文原始步骤。 例如原计划调用的类已在上一轮改名，下一轮应读取当前接口更新计划，而不能继续按旧名称写调用代码。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:deeprepro" data-paper-title="DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories Agent Institute of Computing Technology, Chinese Academy of Sciences 2026-08-27 一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实现 repository snapshot、state-aware subplan 与 runtime-feedback repair。未运行官方 PaperBench Code-Dev，也未把 deterministic plan/answer 满分包装成论文结果；本地验证的是状态驱动重规划路径。planbench-mini、120 episodes：joint success 1.0000、average cost 0.4300，并记录 state snapshots、subplan revisions 与 repairs。  论文到代码状态子规划 Agent 规划与搜索：下一步该做什么 论文复现为什么是一项持续变化的软件工程任务，而不只是翻译算法公式？ 公式只是部分规格，真实复现还会遇到依赖、数据格式、接口和测试约束。前一步实现会改变下一步可做的工作，DeepRepro 因而研究如何在不断演进的仓库中推进实现与验证，重点是维持论文目标和实际工程状态的联系，而非一次写出长计划就完成。 例如网络结构已经写好，数据加载却暴露新轴顺序要求，后续训练代码需适配真实接口，不能只照论文段落顺序继续补文件。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-deeprepro-1ec5a199" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-6b5488f16f6f2b49">论文复现中为什么 repository state 必须进入下一轮子计划？</h2>
+<h2 id="qa-6b5488f16f6f2b49">论文复现为什么是一项持续变化的软件工程任务，而不只是翻译算法公式？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adeeprepro">DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Computing Technology, Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>已创建文件、接口变更、依赖和测试反馈会改变可行下一步，初始计划的假设可能失效。DeepRepro 让当前仓库状态与反馈共同决定细粒度 subplan，目标是保持计划与实际实现同步，而不是每轮只重述论文原始步骤。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如原计划调用的类已在上一轮改名，下一轮应读取当前接口更新计划，而不能继续按旧名称写调用代码。</p>
+<p><strong>答案：</strong>公式只是部分规格，真实复现还会遇到依赖、数据格式、接口和测试约束。前一步实现会改变下一步可做的工作，DeepRepro 因而研究如何在不断演进的仓库中推进实现与验证，重点是维持论文目标和实际工程状态的联系，而非一次写出长计划就完成。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如网络结构已经写好，数据加载却暴露新轴顺序要求，后续训练代码需适配真实接口，不能只照论文段落顺序继续补文件。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26557">原论文</a> · <a href="../../../../agent-research/2608.26557-deeprepro/">实现解读</a> · <a href="#qa-6b5488f16f6f2b49">问题链接</a></p>
 </details>
@@ -425,15 +425,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26557">原论文</a> · <a href="../../../../agent-research/2608.26557-deeprepro/">实现解读</a> · <a href="#qa-07944eab0463db0d">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:deeprepro" data-paper-title="DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories Agent Institute of Computing Technology, Chinese Academy of Sciences 2026-08-27 一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实现 repository snapshot、state-aware subplan 与 runtime-feedback repair。未运行官方 PaperBench Code-Dev，也未把 deterministic plan/answer 满分包装成论文结果；本地验证的是状态驱动重规划路径。planbench-mini、120 episodes：joint success 1.0000、average cost 0.4300，并记录 state snapshots、subplan revisions 与 repairs。  论文到代码状态子规划 Agent 规划与搜索：下一步该做什么 状态感知重规划与一次性长计划在错误修复上有何区别？ 长计划执行中可能累积过时依赖，局部失败后仍沿错误假设推进；状态感知方式可据新测试和文件调整后续步骤。它增加读取与规划成本，也依赖状态摘要准确，不能把重规划次数更多直接解释为复现质量更高。 例如测试表明数据轴顺序不符，应优先修数据契约而非继续训练；原静态计划可能尚不知道这一失败。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:deeprepro" data-paper-title="DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories Agent Institute of Computing Technology, Chinese Academy of Sciences 2026-08-27 一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。实现 repository snapshot、state-aware subplan 与 runtime-feedback repair。未运行官方 PaperBench Code-Dev，也未把 deterministic plan/answer 满分包装成论文结果；本地验证的是状态驱动重规划路径。planbench-mini、120 episodes：joint success 1.0000、average cost 0.4300，并记录 state snapshots、subplan revisions 与 repairs。  论文到代码状态子规划 Agent 规划与搜索：下一步该做什么 检查已有产物与重新执行复现流程，分别能回答什么问题？ 产物检查能核对代码、日志和测试记录是否对应指定论文与版本，适合审计已有执行；重新执行还要实际安装依赖、调用模型和运行测试，才能观察当前环境能否重现结果。两者证据范围不同，DeepRepro 本地 replay 的一致性不能代替一次完整 Code-Dev 执行。 教学例：日志里有测试通过记录，可检查它对应哪个提交；换到干净环境能否再次通过，仍需真实安装与运行。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-2b3ad56805903811">状态感知重规划与一次性长计划在错误修复上有何区别？</h2>
+<h2 id="qa-2b3ad56805903811">检查已有产物与重新执行复现流程，分别能回答什么问题？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adeeprepro">DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Computing Technology, Chinese Academy of Sciences</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>长计划执行中可能累积过时依赖，局部失败后仍沿错误假设推进；状态感知方式可据新测试和文件调整后续步骤。它增加读取与规划成本，也依赖状态摘要准确，不能把重规划次数更多直接解释为复现质量更高。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如测试表明数据轴顺序不符，应优先修数据契约而非继续训练；原静态计划可能尚不知道这一失败。</p>
+<p><strong>答案：</strong>产物检查能核对代码、日志和测试记录是否对应指定论文与版本，适合审计已有执行；重新执行还要实际安装依赖、调用模型和运行测试，才能观察当前环境能否重现结果。两者证据范围不同，DeepRepro 本地 replay 的一致性不能代替一次完整 Code-Dev 执行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：日志里有测试通过记录，可检查它对应哪个提交；换到干净环境能否再次通过，仍需真实安装与运行。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26557">原论文</a> · <a href="../../../../agent-research/2608.26557-deeprepro/">实现解读</a> · <a href="#qa-2b3ad56805903811">问题链接</a></p>
 </details>
@@ -451,16 +451,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26557">原论文</a> · <a href="../../../../agent-research/2608.26557-deeprepro/">实现解读</a> · <a href="#qa-c8ddcad1b744e2a8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:loongreflect" data-paper-title="LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation Agent Authors did not disclose affiliation 2026-08-12 把 reflect/backtrack 视为可逆轨迹树的 memory-control actions，以 privileged teacher 快通道和 outcome GRPO 慢通道协调训练。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  反思 Agentic RL Agent 规划与搜索：下一步该做什么 reflect 与 backtrack 为什么在这里属于 memory-control action？ 它们改变后续推理可见的轨迹状态：反思提炼失败信息，回溯回到可恢复分支，而非只追加一段情绪化评价。可逆轨迹树提供这些状态操作的对象；回溯也不意味着现实工具副作用可自动撤销，需要区分推理树与外部世界。 例如搜索走进死路后恢复先前证据节点，并保留“该路缺少来源”的反思；已发送的真实请求不会因树回退而消失。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:loongreflect" data-paper-title="LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation Agent Authors did not disclose affiliation 2026-08-12 把 reflect/backtrack 视为可逆轨迹树的 memory-control actions，以 privileged teacher 快通道和 outcome GRPO 慢通道协调训练。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  反思 Agentic RL Agent 规划与搜索：下一步该做什么 长程搜索 Agent 为什么需要能恢复路线的反思，而不只在结尾解释失败？ 搜索常包含多跳取证与尝试，早期选错方向可能让后续步骤都围绕错误证据展开。LoongReflect 希望反思能改变当前信息状态和继续路径，让 Agent 在任务结束前恢复；结尾总结即使写得合理，也已经无法改善这次执行的后续取证。 例如一路搜索只找到同一报道的转载，Agent 应及时回到先前分叉换来源，而不是最终答案写完后才承认证据单一。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-loongreflect-7debd709" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-29d2ec8bb15b0afd">reflect 与 backtrack 为什么在这里属于 memory-control action？</h2>
+<h2 id="qa-29d2ec8bb15b0afd">长程搜索 Agent 为什么需要能恢复路线的反思，而不只在结尾解释失败？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aloongreflect">LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Authors did not disclose affiliation</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它们改变后续推理可见的轨迹状态：反思提炼失败信息，回溯回到可恢复分支，而非只追加一段情绪化评价。可逆轨迹树提供这些状态操作的对象；回溯也不意味着现实工具副作用可自动撤销，需要区分推理树与外部世界。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如搜索走进死路后恢复先前证据节点，并保留“该路缺少来源”的反思；已发送的真实请求不会因树回退而消失。</p>
+<p><strong>答案：</strong>搜索常包含多跳取证与尝试，早期选错方向可能让后续步骤都围绕错误证据展开。LoongReflect 希望反思能改变当前信息状态和继续路径，让 Agent 在任务结束前恢复；结尾总结即使写得合理，也已经无法改善这次执行的后续取证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如一路搜索只找到同一报道的转载，Agent 应及时回到先前分叉换来源，而不是最终答案写完后才承认证据单一。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.11967">原论文</a> · <a href="../../../../agent-research/2608.11967-loongreflect/">实现解读</a> · <a href="#qa-29d2ec8bb15b0afd">问题链接</a></p>
 </details>
@@ -504,16 +504,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.11967">原论文</a> · <a href="../../../../agent-research/2608.11967-loongreflect/">实现解读</a> · <a href="#qa-d989382ef608ad22">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toollift" data-paper-title="ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning Agent Authors did not disclose affiliation 2026-08-04 把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  工具规划 图结构 Agent 规划与搜索：下一步该做什么 function-level graph 为什么有机会跨工具集合复用？ 它把历史中的具体 API 名称提升为所完成的功能与依赖，例如查找对象、读取详情、修改状态，再在当前工具集中选择可实现该功能的工具。复用对象是功能工作流而非原调用字符串，仍需当前工具 schema 和权限满足要求。 例如旧轨迹用某服务的 find_user，新服务用 search_contact，功能相同可复用查人步骤，但参数和返回字段需要重新绑定。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toollift" data-paper-title="ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning Agent Authors did not disclose affiliation 2026-08-04 把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  工具规划 图结构 Agent 规划与搜索：下一步该做什么 工具集合经常更换时，ToolLIFT 希望迁移的是哪一部分经验？ 不同服务的 API 名、参数和返回格式会变，但任务常有稳定的功能步骤，例如先查身份再读取记录。ToolLIFT 关注保留这些程序性经验，再在当前工具目录里寻找实现方式，避免旧轨迹一换服务就报废；具体接口仍必须重新核对。 例如从甲系统迁到乙系统后，查客户再查订单的需求仍在，但原先两个函数名和字段不能直接复制到新系统。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-toollift-dbb897af" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-aa0bc3a2fde6af6b">function-level graph 为什么有机会跨工具集合复用？</h2>
+<h2 id="qa-aa0bc3a2fde6af6b">工具集合经常更换时，ToolLIFT 希望迁移的是哪一部分经验？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atoollift">ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Authors did not disclose affiliation</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>它把历史中的具体 API 名称提升为所完成的功能与依赖，例如查找对象、读取详情、修改状态，再在当前工具集中选择可实现该功能的工具。复用对象是功能工作流而非原调用字符串，仍需当前工具 schema 和权限满足要求。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如旧轨迹用某服务的 find_user，新服务用 search_contact，功能相同可复用查人步骤，但参数和返回字段需要重新绑定。</p>
+<p><strong>答案：</strong>不同服务的 API 名、参数和返回格式会变，但任务常有稳定的功能步骤，例如先查身份再读取记录。ToolLIFT 关注保留这些程序性经验，再在当前工具目录里寻找实现方式，避免旧轨迹一换服务就报废；具体接口仍必须重新核对。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如从甲系统迁到乙系统后，查客户再查订单的需求仍在，但原先两个函数名和字段不能直接复制到新系统。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03468">原论文</a> · <a href="../../../../agent-research/2608.03468-toollift/">实现解读</a> · <a href="#qa-aa0bc3a2fde6af6b">问题链接</a></p>
 </details>
@@ -531,15 +531,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03468">原论文</a> · <a href="../../../../agent-research/2608.03468-toollift/">实现解读</a> · <a href="#qa-830b9099c62167a8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toollift" data-paper-title="ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning Agent Authors did not disclose affiliation 2026-08-04 把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  工具规划 图结构 Agent 规划与搜索：下一步该做什么 先规划功能再选工具，与直接按旧 API 轨迹模仿有何区别？ 直接模仿容易绑定特定服务名称与参数形式，换工具集后失败；功能规划把“做什么”和“用哪一个接口做”分开。抽象过粗也可能遗漏工具特有约束，因此迁移不等于任意 API 可互换，仍要验证功能实现与状态依赖。 例如“发送通知”可能由邮件或消息工具实现，但用户要求邮件时不能因抽象相同就改用群聊通知。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:toollift" data-paper-title="ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning Agent Authors did not disclose affiliation 2026-08-04 把工具级历史轨迹提升为可跨工具集迁移的 function workflow graph，再解耦 workflow planning 与 tool selection。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  工具规划 图结构 Agent 规划与搜索：下一步该做什么 功能 workflow graph 与可直接执行的工具调用计划，分别需要哪些信息？ 功能图描述目标操作与状态依赖，可跨工具目录保留程序性结构；可执行计划还必须把每个节点绑定到当前 API、参数和实际可用对象。前者提供迁移用的抽象，后者承担接口落地，缺少任一层都不能保证执行：图合理不等于参数合法，调用合法也不等于功能完整。 教学例：功能图写“查客户→查订单”；落地时仍要确认新服务返回 customer_id 还是 account_id，以及订单接口接受哪个字段。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-9cee31815ddb00c9">先规划功能再选工具，与直接按旧 API 轨迹模仿有何区别？</h2>
+<h2 id="qa-9cee31815ddb00c9">功能 workflow graph 与可直接执行的工具调用计划，分别需要哪些信息？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atoollift">ToolLIFT: Lifting Tool-Specific Trajectories into Function-Level Graphs for Generalizable Tool Planning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Authors did not disclose affiliation</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>直接模仿容易绑定特定服务名称与参数形式，换工具集后失败；功能规划把“做什么”和“用哪一个接口做”分开。抽象过粗也可能遗漏工具特有约束，因此迁移不等于任意 API 可互换，仍要验证功能实现与状态依赖。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“发送通知”可能由邮件或消息工具实现，但用户要求邮件时不能因抽象相同就改用群聊通知。</p>
+<p><strong>答案：</strong>功能图描述目标操作与状态依赖，可跨工具目录保留程序性结构；可执行计划还必须把每个节点绑定到当前 API、参数和实际可用对象。前者提供迁移用的抽象，后者承担接口落地，缺少任一层都不能保证执行：图合理不等于参数合法，调用合法也不等于功能完整。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：功能图写“查客户→查订单”；落地时仍要确认新服务返回 customer_id 还是 account_id，以及订单接口接受哪个字段。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03468">原论文</a> · <a href="../../../../agent-research/2608.03468-toollift/">实现解读</a> · <a href="#qa-9cee31815ddb00c9">问题链接</a></p>
 </details>
@@ -557,16 +557,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03468">原论文</a> · <a href="../../../../agent-research/2608.03468-toollift/">实现解读</a> · <a href="#qa-c8419e689fae8c59">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagent" data-paper-title="HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents Agent University of New South Wales 2026-07-31 把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  工具规划 超图 Agent 规划与搜索：下一步该做什么 工具为何表示为 input-schema 到 output-schema 的超边？ 一个工具通常同时需要多项输入并产生多项输出，超边可以表达集合到集合的依赖，普通单边容易遗漏联合前提。规划先构造 Task DAG，再为当前状态缺口寻找能产生所需字段的工具，但 schema 匹配只说明接口可能兼容，不保证业务语义正确。 例如创建发票同时需要客户 ID 和订单 ID，返回发票 ID 与金额；只画“订单到发票”一条普通边会漏掉客户前提。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagent" data-paper-title="HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents Agent University of New South Wales 2026-07-31 把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  工具规划 超图 Agent 规划与搜索：下一步该做什么 为什么找到一个名称相关的工具，还不足以完成多步工具任务？ 工具能不能调用取决于输入是否已经取得，输出又可能是后一步必需的资源。HyperAgent 研究如何把任务要求与这些生产依赖联系起来，补齐当前状态缺口，而不只挑文字最相似的接口；完整流程需要多个合法转移共同形成。 例如检索到“退款”工具仍不能直接退款，可能还需订单标识和付款记录，任务首先缺的是产生这些输入的步骤。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-hyperagent-a4e2dd7a" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0427e40b15649248">工具为何表示为 input-schema 到 output-schema 的超边？</h2>
+<h2 id="qa-0427e40b15649248">为什么找到一个名称相关的工具，还不足以完成多步工具任务？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahyperagent">HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of New South Wales</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>一个工具通常同时需要多项输入并产生多项输出，超边可以表达集合到集合的依赖，普通单边容易遗漏联合前提。规划先构造 Task DAG，再为当前状态缺口寻找能产生所需字段的工具，但 schema 匹配只说明接口可能兼容，不保证业务语义正确。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如创建发票同时需要客户 ID 和订单 ID，返回发票 ID 与金额；只画“订单到发票”一条普通边会漏掉客户前提。</p>
+<p><strong>答案：</strong>工具能不能调用取决于输入是否已经取得，输出又可能是后一步必需的资源。HyperAgent 研究如何把任务要求与这些生产依赖联系起来，补齐当前状态缺口，而不只挑文字最相似的接口；完整流程需要多个合法转移共同形成。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如检索到“退款”工具仍不能直接退款，可能还需订单标识和付款记录，任务首先缺的是产生这些输入的步骤。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.02650">原论文</a> · <a href="../../../../agent-research/2608.02650-hyperagent/">实现解读</a> · <a href="#qa-0427e40b15649248">问题链接</a></p>
 </details>
@@ -584,15 +584,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.02650">原论文</a> · <a href="../../../../agent-research/2608.02650-hyperagent/">实现解读</a> · <a href="#qa-032d0f4e9ed49d5e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagent" data-paper-title="HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents Agent University of New South Wales 2026-07-31 把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  工具规划 超图 Agent 规划与搜索：下一步该做什么 producer support graph 与按工具描述相似度选 Top-K 有何区别？ 相似度召回偏重任务文字相关，support graph 从缺失状态反向寻找能生成所需输入的生产者，可发现文字不直接相关却不可缺少的前置工具。它增加结构约束，也受 schema 质量影响，不能把图连通当作任务一定可完成。 例如“付款”需要先取支付 token，取 token 的工具描述未必与付款问题最相似，却是合法调用的必要前置步骤。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagent" data-paper-title="HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents Agent University of New South Wales 2026-07-31 把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  工具规划 超图 Agent 规划与搜索：下一步该做什么 任务 DAG 与 producer support graph 分别描述需求还是供给？ 任务 DAG 表达目标状态之间的依赖，说明完成后续子任务还缺哪些输入；producer support graph 从工具 schema 描述谁能生产这些输入，以及生产者自身还需要什么。两张结构配合才能把需求连成可执行工具链；工具有生产能力并不表示该输出已经存在。 教学例：任务要求给订单退款，DAG 暴露订单号缺口；support graph 找到查订单工具，再检查它需要的用户标识能否先取得。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-f1e6035a16e9d1f6">producer support graph 与按工具描述相似度选 Top-K 有何区别？</h2>
+<h2 id="qa-f1e6035a16e9d1f6">任务 DAG 与 producer support graph 分别描述需求还是供给？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ahyperagent">HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of New South Wales</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>相似度召回偏重任务文字相关，support graph 从缺失状态反向寻找能生成所需输入的生产者，可发现文字不直接相关却不可缺少的前置工具。它增加结构约束，也受 schema 质量影响，不能把图连通当作任务一定可完成。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如“付款”需要先取支付 token，取 token 的工具描述未必与付款问题最相似，却是合法调用的必要前置步骤。</p>
+<p><strong>答案：</strong>任务 DAG 表达目标状态之间的依赖，说明完成后续子任务还缺哪些输入；producer support graph 从工具 schema 描述谁能生产这些输入，以及生产者自身还需要什么。两张结构配合才能把需求连成可执行工具链；工具有生产能力并不表示该输出已经存在。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：任务要求给订单退款，DAG 暴露订单号缺口；support graph 找到查订单工具，再检查它需要的用户标识能否先取得。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.02650">原论文</a> · <a href="../../../../agent-research/2608.02650-hyperagent/">实现解读</a> · <a href="#qa-f1e6035a16e9d1f6">问题链接</a></p>
 </details>
@@ -610,16 +610,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.02650">原论文</a> · <a href="../../../../agent-research/2608.02650-hyperagent/">实现解读</a> · <a href="#qa-24ccc7bcfe4e43ea">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sira" data-paper-title="Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval Agent Meta Superintelligence Labs / Rice University（工作完成于 Meta） 2026-05-07 冻结 LLM 先生成相关证据可能使用、但原查询缺失的词汇，再用倒排索引中的文档频率过滤不存在或过于常见的词；原查询与验证后的扩展只执行一次加权 BM25。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 DF gate 与加权单次检索组合，不调用论文 LLM、不重建 2558 万文档索引，也不把公开离线结果写成线上 A/B。本地执行 DF gate 与加权单次检索组合，不调用论文 LLM、不重建 2558 万文档索引，也不把公开离线结果写成线上 A/B。三种子诊断：metrics/mechanism-seeds42-44.json  Agent 检索 语料感知查询扩展 BM25 Agent 规划与搜索：下一步该做什么 SIRA 的扩展词为什么要查倒排索引的文档频率？ 语言模型可能提出不存在于语料的词，或过于常见、缺乏区分力的词。DF gate 只保留语料中出现且频率不超过阈值的项，使扩展与当前检索库绑定；它不是语义真实性验证，也不能保证保留下来的词一定有助于目标问题。 例如模型建议某个不存在的专业缩写，DF 为零应删掉；“系统”遍布大多数文档，也可能因太常见被过滤。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sira" data-paper-title="Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval Agent Meta Superintelligence Labs / Rice University（工作完成于 Meta） 2026-05-07 冻结 LLM 先生成相关证据可能使用、但原查询缺失的词汇，再用倒排索引中的文档频率过滤不存在或过于常见的词；原查询与验证后的扩展只执行一次加权 BM25。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 DF gate 与加权单次检索组合，不调用论文 LLM、不重建 2558 万文档索引，也不把公开离线结果写成线上 A/B。本地执行 DF gate 与加权单次检索组合，不调用论文 LLM、不重建 2558 万文档索引，也不把公开离线结果写成线上 A/B。三种子诊断：metrics/mechanism-seeds42-44.json  Agent 检索 语料感知查询扩展 BM25 Agent 规划与搜索：下一步该做什么 SIRA 为什么关注“用户问法与证据用词不同”的检索困难？ 倒排检索依赖词项重合，用户可能描述一个现象，文档却使用专业术语或另一种表达，相关证据因此排不到前面。SIRA 利用冻结 LLM 补充可能的证据词汇，再以当前语料约束扩展，目标是改善查询与文档之间的词汇桥接，而非训练新的答案生成器。 例如用户问“程序越跑越占内存”，技术文档可能写 memory leak；补上该术语有机会召回原问句未命中的材料。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-sira-e870822f" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-d078f361bd045793">SIRA 的扩展词为什么要查倒排索引的文档频率？</h2>
+<h2 id="qa-d078f361bd045793">SIRA 为什么关注“用户问法与证据用词不同”的检索困难？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Asira">Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Meta Superintelligence Labs / Rice University（工作完成于 Meta）</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>语言模型可能提出不存在于语料的词，或过于常见、缺乏区分力的词。DF gate 只保留语料中出现且频率不超过阈值的项，使扩展与当前检索库绑定；它不是语义真实性验证，也不能保证保留下来的词一定有助于目标问题。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型建议某个不存在的专业缩写，DF 为零应删掉；“系统”遍布大多数文档，也可能因太常见被过滤。</p>
+<p><strong>答案：</strong>倒排检索依赖词项重合，用户可能描述一个现象，文档却使用专业术语或另一种表达，相关证据因此排不到前面。SIRA 利用冻结 LLM 补充可能的证据词汇，再以当前语料约束扩展，目标是改善查询与文档之间的词汇桥接，而非训练新的答案生成器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如用户问“程序越跑越占内存”，技术文档可能写 memory leak；补上该术语有机会召回原问句未命中的材料。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.06647">原论文</a> · <a href="../../../../agent-research/2605.06647-sira/">实现解读</a> · <a href="#qa-d078f361bd045793">问题链接</a></p>
 </details>
@@ -663,16 +663,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.06647">原论文</a> · <a href="../../../../agent-research/2605.06647-sira/">实现解读</a> · <a href="#qa-fc6b1d788aba3b86">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lats" data-paper-title="LATS" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LATS Agent University of Illinois Urbana-Champaign 2023-10-06 ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。 本页实现 UCT 式树搜索、完整 trajectory rollout、环境 reward、反思与回溯。保留 MCTS statistics、环境反馈、reflection 与回溯；本地树以完整计划为叶节点，未调用 LM value model、HumanEval executor 或 WebShop，搜索规模远小于论文。每个 PlanBench episode 搜索四条完整计划轨迹；环境返回 exact plan reward，失败轨迹产生 reflection/backtrack，再按累计 value 选最终路径。  Agent 搜索 Agent 规划与搜索：下一步该做什么 LATS 中的树节点与真实环境反馈如何结合？ 模型提出行动或推理候选，搜索执行 rollout 获取环境结果，再更新树上的价值和访问次数，失败轨迹生成反思供后续选择。环境反馈为搜索提供外部约束，但价值模型与反思仍可能有误，树搜索不意味着每个候选都可靠。 例如一个网页导航分支实际到错页面，失败反馈应回到树上降低该路线价值，而不是让模型口头声称已成功。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lats" data-paper-title="LATS" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LATS Agent University of Illinois Urbana-Champaign 2023-10-06 ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。 本页实现 UCT 式树搜索、完整 trajectory rollout、环境 reward、反思与回溯。保留 MCTS statistics、环境反馈、reflection 与回溯；本地树以完整计划为叶节点，未调用 LM value model、HumanEval executor 或 WebShop，搜索规模远小于论文。每个 PlanBench episode 搜索四条完整计划轨迹；环境返回 exact plan reward，失败轨迹产生 reflection/backtrack，再按累计 value 选最终路径。  Agent 搜索 Agent 规划与搜索：下一步该做什么 为什么在工具任务中生成一条看似合理的推理链，还不足以完成 LATS 要处理的问题？ 工具或环境可能返回与预想不同的结果，单一路线失败后也未必能继续。LATS 把推理和行动放进可探索的搜索树，让候选通过执行反馈接受检验，并利用失败反思尝试其他路线。目标是把语言提案与环境结果连接起来，搜索预算和判断错误仍会限制效果。 教学例：网页搜索第一条结果没有所需价格，Agent 可以回到先前搜索节点改关键词，而不是沿错误页面继续编答案。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-lats-45a406fd" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-a4512e5b0943abd6">LATS 中的树节点与真实环境反馈如何结合？</h2>
+<h2 id="qa-a4512e5b0943abd6">为什么在工具任务中生成一条看似合理的推理链，还不足以完成 LATS 要处理的问题？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alats">LATS</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>模型提出行动或推理候选，搜索执行 rollout 获取环境结果，再更新树上的价值和访问次数，失败轨迹生成反思供后续选择。环境反馈为搜索提供外部约束，但价值模型与反思仍可能有误，树搜索不意味着每个候选都可靠。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如一个网页导航分支实际到错页面，失败反馈应回到树上降低该路线价值，而不是让模型口头声称已成功。</p>
+<p><strong>答案：</strong>工具或环境可能返回与预想不同的结果，单一路线失败后也未必能继续。LATS 把推理和行动放进可探索的搜索树，让候选通过执行反馈接受检验，并利用失败反思尝试其他路线。目标是把语言提案与环境结果连接起来，搜索预算和判断错误仍会限制效果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：网页搜索第一条结果没有所需价格，Agent 可以回到先前搜索节点改关键词，而不是沿错误页面继续编答案。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.04406">原论文</a> · <a href="../../../../agent-research/2310.04406-lats/">实现解读</a> · <a href="#qa-a4512e5b0943abd6">问题链接</a></p>
 </details>
@@ -690,15 +690,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.04406">原论文</a> · <a href="../../../../agent-research/2310.04406-lats/">实现解读</a> · <a href="#qa-f04ceb7a00b1ae2c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lats" data-paper-title="LATS" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LATS Agent University of Illinois Urbana-Champaign 2023-10-06 ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。 本页实现 UCT 式树搜索、完整 trajectory rollout、环境 reward、反思与回溯。保留 MCTS statistics、环境反馈、reflection 与回溯；本地树以完整计划为叶节点，未调用 LM value model、HumanEval executor 或 WebShop，搜索规模远小于论文。每个 PlanBench episode 搜索四条完整计划轨迹；环境返回 exact plan reward，失败轨迹产生 reflection/backtrack，再按累计 value 选最终路径。  Agent 搜索 Agent 规划与搜索：下一步该做什么 UCT 相比始终选择当前最高 Q，为什么还包含访问次数项？ Q 反映已有回报估计，探索项给较少访问的动作机会，避免早期偶然高分锁死路线。父节点访问增加会提升未充分探索分支的相对吸引力；探索也消耗 rollout 预算，不是免费获得更优计划的保证。 例如甲只试一次成功、乙尚未试，纯 Q 会一直选甲；UCT 可拨出预算检验乙是否更可靠或更低成本。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lats" data-paper-title="LATS" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LATS Agent University of Illinois Urbana-Champaign 2023-10-06 ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。 本页实现 UCT 式树搜索、完整 trajectory rollout、环境 reward、反思与回溯。保留 MCTS statistics、环境反馈、reflection 与回溯；本地树以完整计划为叶节点，未调用 LM value model、HumanEval executor 或 WebShop，搜索规模远小于论文。每个 PlanBench episode 搜索四条完整计划轨迹；环境返回 exact plan reward，失败轨迹产生 reflection/backtrack，再按累计 value 选最终路径。  Agent 搜索 Agent 规划与搜索：下一步该做什么 LATS 的 MCTS 与按层保留若干 thought 的搜索，在预算分配上有什么区别？ MCTS 沿已有树反复选择分支、执行 rollout，再回传回报与访问统计，可把后续预算投向值得重访的路径；按层保留 thought 的方法通常在同一深度比较并裁剪前沿。两者都依赖候选与评价质量，区别是搜索组织和反馈利用方式，不能据此断言某类任务必然更优。 教学例：深度二的一条路线曾接近成功，MCTS 可再深入它；固定层宽搜索则可能在该层只按当前评价保留若干候选。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-ffb7fa4c1fedb88d">UCT 相比始终选择当前最高 Q，为什么还包含访问次数项？</h2>
+<h2 id="qa-ffb7fa4c1fedb88d">LATS 的 MCTS 与按层保留若干 thought 的搜索，在预算分配上有什么区别？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alats">LATS</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>Q 反映已有回报估计，探索项给较少访问的动作机会，避免早期偶然高分锁死路线。父节点访问增加会提升未充分探索分支的相对吸引力；探索也消耗 rollout 预算，不是免费获得更优计划的保证。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如甲只试一次成功、乙尚未试，纯 Q 会一直选甲；UCT 可拨出预算检验乙是否更可靠或更低成本。</p>
+<p><strong>答案：</strong>MCTS 沿已有树反复选择分支、执行 rollout，再回传回报与访问统计，可把后续预算投向值得重访的路径；按层保留 thought 的方法通常在同一深度比较并裁剪前沿。两者都依赖候选与评价质量，区别是搜索组织和反馈利用方式，不能据此断言某类任务必然更优。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：深度二的一条路线曾接近成功，MCTS 可再深入它；固定层宽搜索则可能在该层只按当前评价保留若干候选。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.04406">原论文</a> · <a href="../../../../agent-research/2310.04406-lats/">实现解读</a> · <a href="#qa-ffb7fa4c1fedb88d">问题链接</a></p>
 </details>
@@ -716,16 +716,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2310.04406">原论文</a> · <a href="../../../../agent-research/2310.04406-lats/">实现解读</a> · <a href="#qa-9671962608dc8011">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rewoo" data-paper-title="ReWOO" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="ReWOO Agent Microsoft Research 2023-05-29 ReAct 在每次工具返回后重新调用 LLM，token 和推理成本随轨迹增长。ReWOO 的 Planner 用变量引用写出完整多步计划，Worker 只负责填入工具证据，Solver 最后读取计划与证据生成答案，因此 Planner 不被中间观察反复打断。 ReWOO 先一次性生成带依赖的完整计划，再由 Worker 执行工具，最后由 Solver 汇总；避免 ReAct 每一步都把不断增长的 observation 送回 Planner。实现 Planner/Worker/Solver 解耦、显式依赖与证据汇总；本地没有真实搜索 API 和多尺寸 LLM，因此只验证控制流与调用计数，不复刻 HotpotQA 的语言生成分数。PlanBench mini 固定 120 episodes：joint success 1.0000、平均成本 3.5000，生成 120 份完整计划并执行 360 次 worker/tool action。  解耦规划 Agent 规划与搜索：下一步该做什么 ReWOO 中 E_i 变量为什么能够连接多步工具调用？ Planner 先写出工具调用及证据变量引用，Worker 按依赖填入真实结果，后续参数再从已获得变量构造，最后 Solver 汇总。变量表示待填证据而不是预知答案，因此规划可以不被每次观察打断，同时仍允许后续调用使用先前实际输出。 例如先查作者得到 E1，再用 E1 查询其任职机构；计划写引用，Worker 运行后才把真实姓名填入第二步。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rewoo" data-paper-title="ReWOO" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="ReWOO Agent Microsoft Research 2023-05-29 ReAct 在每次工具返回后重新调用 LLM，token 和推理成本随轨迹增长。ReWOO 的 Planner 用变量引用写出完整多步计划，Worker 只负责填入工具证据，Solver 最后读取计划与证据生成答案，因此 Planner 不被中间观察反复打断。 ReWOO 先一次性生成带依赖的完整计划，再由 Worker 执行工具，最后由 Solver 汇总；避免 ReAct 每一步都把不断增长的 observation 送回 Planner。实现 Planner/Worker/Solver 解耦、显式依赖与证据汇总；本地没有真实搜索 API 和多尺寸 LLM，因此只验证控制流与调用计数，不复刻 HotpotQA 的语言生成分数。PlanBench mini 固定 120 episodes：joint success 1.0000、平均成本 3.5000，生成 120 份完整计划并执行 360 次 worker/tool action。  解耦规划 Agent 规划与搜索：下一步该做什么 多步工具任务为什么可能把大量费用花在重复阅读既有内容上？ 若每次工具返回都重新让规划模型读取任务、旧计划和全部证据，输入会随流程增长，即使下一步只是填入一个已知结果。ReWOO 研究将规划、工具执行和最后综合分工，减少重复的规划工作；它适合可预先表达依赖的流程，意外情况仍需恢复设计。 例如先找作者再查出生地，两步结构已清楚，不必每拿到一个字符串都重新生成整份计划和重读之前所有证据。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-rewoo-abc51544" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-f60bde583743c4b5">ReWOO 中 E_i 变量为什么能够连接多步工具调用？</h2>
+<h2 id="qa-f60bde583743c4b5">多步工具任务为什么可能把大量费用花在重复阅读既有内容上？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arewoo">ReWOO</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Microsoft Research</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>Planner 先写出工具调用及证据变量引用，Worker 按依赖填入真实结果，后续参数再从已获得变量构造，最后 Solver 汇总。变量表示待填证据而不是预知答案，因此规划可以不被每次观察打断，同时仍允许后续调用使用先前实际输出。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先查作者得到 E1，再用 E1 查询其任职机构；计划写引用，Worker 运行后才把真实姓名填入第二步。</p>
+<p><strong>答案：</strong>若每次工具返回都重新让规划模型读取任务、旧计划和全部证据，输入会随流程增长，即使下一步只是填入一个已知结果。ReWOO 研究将规划、工具执行和最后综合分工，减少重复的规划工作；它适合可预先表达依赖的流程，意外情况仍需恢复设计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>例如先找作者再查出生地，两步结构已清楚，不必每拿到一个字符串都重新生成整份计划和重读之前所有证据。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.18323">原论文</a> · <a href="../../../../agent-research/2305.18323-rewoo/">实现解读</a> · <a href="#qa-f60bde583743c4b5">问题链接</a></p>
 </details>
@@ -769,16 +769,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.18323">原论文</a> · <a href="../../../../agent-research/2305.18323-rewoo/">实现解读</a> · <a href="#qa-124386a640c92e78">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tree-of-thoughts" data-paper-title="Tree of Thoughts" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Tree of Thoughts Agent Princeton University 2023-05-17 自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。 value 是确定性 workflow coherence，未调用 GPT-4 自评，也未运行 Game of 24，因此 1.0 只验证搜索机制。本页实现 thought 单元的分支扩展、BFS beam 选择、value evaluation 与回溯，不是单条 Chain-of-Thought。实现 thought tree、BFS、value pruning 和回溯；value 是确定性 workflow coherence，未调用 GPT-4 自评，也未运行 Game of 24，因此 1.0 只验证搜索机制。  推理搜索 Agent 规划与搜索：下一步该做什么 thought 为什么需要是可独立评价的中间状态？ 树搜索要在完成整份答案前比较并剪枝，因此 thought 必须表达可继续扩展、可判断进展的局部状态。它不只是把长 CoT 按字数切段；若中间片段没有可评价含义，value 分数和回溯就难以指导搜索。 例如二十四点中“先算 8-4 得到 4”形成剩余数字状态，可判断可行性；任意一句“我再想想”不提供同样状态。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tree-of-thoughts" data-paper-title="Tree of Thoughts" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Tree of Thoughts Agent Princeton University 2023-05-17 自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。 value 是确定性 workflow coherence，未调用 GPT-4 自评，也未运行 Game of 24，因此 1.0 只验证搜索机制。本页实现 thought 单元的分支扩展、BFS beam 选择、value evaluation 与回溯，不是单条 Chain-of-Thought。实现 thought tree、BFS、value pruning 和回溯；value 是确定性 workflow coherence，未调用 GPT-4 自评，也未运行 Game of 24，因此 1.0 只验证搜索机制。  推理搜索 Agent 规划与搜索：下一步该做什么 ToT 为什么适合需要试探、发现死路再回退的推理任务？ 这类任务的局部选择会影响后续可行性，一次从头写到底容易把错误决定带到结尾。ToT 将过程表示成可继续展开的中间状态，允许保留多个方向、判断进展和回退；前提是中间状态确实可评价，搜索本身不会自动提供可靠的判断标准。 教学例：算式拼到一半已无法得到目标数时，可以换前一步的组合，而不必把整道题的完整解释再生成一遍。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-tree-of-thoughts-32a1f51e" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-0e3e4144da090e88">thought 为什么需要是可独立评价的中间状态？</h2>
+<h2 id="qa-0e3e4144da090e88">ToT 为什么适合需要试探、发现死路再回退的推理任务？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atree-of-thoughts">Tree of Thoughts</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>树搜索要在完成整份答案前比较并剪枝，因此 thought 必须表达可继续扩展、可判断进展的局部状态。它不只是把长 CoT 按字数切段；若中间片段没有可评价含义，value 分数和回溯就难以指导搜索。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如二十四点中“先算 8-4 得到 4”形成剩余数字状态，可判断可行性；任意一句“我再想想”不提供同样状态。</p>
+<p><strong>答案：</strong>这类任务的局部选择会影响后续可行性，一次从头写到底容易把错误决定带到结尾。ToT 将过程表示成可继续展开的中间状态，允许保留多个方向、判断进展和回退；前提是中间状态确实可评价，搜索本身不会自动提供可靠的判断标准。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：算式拼到一半已无法得到目标数时，可以换前一步的组合，而不必把整道题的完整解释再生成一遍。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.10601">原论文</a> · <a href="../../../../agent-research/2305.10601-tree-of-thoughts/">实现解读</a> · <a href="#qa-0e3e4144da090e88">问题链接</a></p>
 </details>
@@ -796,15 +796,15 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.10601">原论文</a> · <a href="../../../../agent-research/2305.10601-tree-of-thoughts/">实现解读</a> · <a href="#qa-8b8a8b99244ced83">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tree-of-thoughts" data-paper-title="Tree of Thoughts" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Tree of Thoughts Agent Princeton University 2023-05-17 自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。 value 是确定性 workflow coherence，未调用 GPT-4 自评，也未运行 Game of 24，因此 1.0 只验证搜索机制。本页实现 thought 单元的分支扩展、BFS beam 选择、value evaluation 与回溯，不是单条 Chain-of-Thought。实现 thought tree、BFS、value pruning 和回溯；value 是确定性 workflow coherence，未调用 GPT-4 自评，也未运行 Game of 24，因此 1.0 只验证搜索机制。  推理搜索 Agent 规划与搜索：下一步该做什么 ToT 与对完整答案做多次采样有什么不同？ 完整重采样通常到末尾才比较，早期错误会反复消耗后续生成；ToT 在中间层生成候选、选择 frontier，并可回溯重新展开。它可更早重分配预算，但价值评价同样会花成本，也可能错误剪掉最终可行路径。 例如先排除明显无法凑出目标数的中间运算，可少生成完整解；但错误 value 也可能删掉一个不直观的正确开头。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:tree-of-thoughts" data-paper-title="Tree of Thoughts" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Tree of Thoughts Agent Princeton University 2023-05-17 自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。 value 是确定性 workflow coherence，未调用 GPT-4 自评，也未运行 Game of 24，因此 1.0 只验证搜索机制。本页实现 thought 单元的分支扩展、BFS beam 选择、value evaluation 与回溯，不是单条 Chain-of-Thought。实现 thought tree、BFS、value pruning 和回溯；value 是确定性 workflow coherence，未调用 GPT-4 自评，也未运行 Game of 24，因此 1.0 只验证搜索机制。  推理搜索 Agent 规划与搜索：下一步该做什么 ToT 的 BFS 与 DFS 各怎样安排有限的搜索预算？ BFS 同时维护一层的多个状态，便于在相近进度上比较方向，但需要保存并评价较宽前沿；DFS 先沿一条路径深入，遇到不合适状态再回退，前沿较窄却可能在坏分支耗费深度。选择宽度、深度和剪枝阈值时，仍要考虑具体任务的评价可靠性。 教学例：有三种开局，BFS 各走一步后比较；DFS 可能先把第一种走到尽头，再决定是否回头试第二种。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <p class="ar-learning-level">方法对比</p>
-<h2 id="qa-f19cba5da4346653">ToT 与对完整答案做多次采样有什么不同？</h2>
+<h2 id="qa-f19cba5da4346653">ToT 的 BFS 与 DFS 各怎样安排有限的搜索预算？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Atree-of-thoughts">Tree of Thoughts</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>完整重采样通常到末尾才比较，早期错误会反复消耗后续生成；ToT 在中间层生成候选、选择 frontier，并可回溯重新展开。它可更早重分配预算，但价值评价同样会花成本，也可能错误剪掉最终可行路径。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如先排除明显无法凑出目标数的中间运算，可少生成完整解；但错误 value 也可能删掉一个不直观的正确开头。</p>
+<p><strong>答案：</strong>BFS 同时维护一层的多个状态，便于在相近进度上比较方向，但需要保存并评价较宽前沿；DFS 先沿一条路径深入，遇到不合适状态再回退，前沿较窄却可能在坏分支耗费深度。选择宽度、深度和剪枝阈值时，仍要考虑具体任务的评价可靠性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：有三种开局，BFS 各走一步后比较；DFS 可能先把第一种走到尽头，再决定是否回头试第二种。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.10601">原论文</a> · <a href="../../../../agent-research/2305.10601-tree-of-thoughts/">实现解读</a> · <a href="#qa-f19cba5da4346653">问题链接</a></p>
 </details>
@@ -822,16 +822,16 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.10601">原论文</a> · <a href="../../../../agent-research/2305.10601-tree-of-thoughts/">实现解读</a> · <a href="#qa-2f4d0f638f26d58e">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:react" data-paper-title="ReAct" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="ReAct Agent Princeton University 2022-10-06 纯 CoT 容易在封闭知识上幻觉，纯 action agent 又缺少计划与状态跟踪。ReAct 让模型交替生成自然语言推理和环境 action，再把 observation 放回下一步上下文，使推理可以纠错、行动可以获取外部事实。 本页实现 Thought → Action → Observation 的交替循环，并记录实际 reasoning/action 次数；不是把直接返回答案包装成 ReAct。保留交替 trace 和工具动作计数，但 observation 来自确定性 mini-suite；未调用 Wikipedia、WebShop 或付费 LLM，因此本地 1.0 只说明执行循环正确，不能对标论文。ScaleMCP mini 固定 120 episodes、seed 42；每个 required tool 前执行一次 reasoning，随后记录 action/observation。  推理与行动 Agent 规划与搜索：下一步该做什么 ReAct 的 observation 为什么必须来自真实工具或环境？ 推理负责更新假设，动作负责取得新信息，真实 observation 把下一轮推理与外部世界连接。若让模型自行编造工具返回，闭环就失去纠错来源；ReAct 的关键是轨迹组织方式，而不是仅在提示中交替写 Thought 和 Action 标签。 例如模型搜索后必须读取实际返回页面；自己续写“搜索结果证明答案正确”并不是一次有效工具观察。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:react" data-paper-title="ReAct" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="ReAct Agent Princeton University 2022-10-06 纯 CoT 容易在封闭知识上幻觉，纯 action agent 又缺少计划与状态跟踪。ReAct 让模型交替生成自然语言推理和环境 action，再把 observation 放回下一步上下文，使推理可以纠错、行动可以获取外部事实。 本页实现 Thought → Action → Observation 的交替循环，并记录实际 reasoning/action 次数；不是把直接返回答案包装成 ReAct。保留交替 trace 和工具动作计数，但 observation 来自确定性 mini-suite；未调用 Wikipedia、WebShop 或付费 LLM，因此本地 1.0 只说明执行循环正确，不能对标论文。ScaleMCP mini 固定 120 episodes、seed 42；每个 required tool 前执行一次 reasoning，随后记录 action/observation。  推理与行动 Agent 规划与搜索：下一步该做什么 ReAct 为什么把回答问题和与外部世界交互放在同一个循环里？ 仅凭模型内部知识，Agent 可能缺少最新事实，也无法知道动作是否真的成功。ReAct 让模型一边推理一边调用工具或环境，并把返回结果用于后续决定，适用于信息获取与行动交织的任务。真实观察增加纠错机会，但工具错误和错误解释观察仍可能导致失败。 教学例：查某商品是否有货，Agent 先查询库存，再根据返回结果决定继续下单还是找替代品，不能只凭常识猜库存。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
 <span id="paper-agent-research-react-96535df9" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-546c38878e07ca4b">ReAct 的 observation 为什么必须来自真实工具或环境？</h2>
+<h2 id="qa-546c38878e07ca4b">ReAct 为什么把回答问题和与外部世界交互放在同一个循环里？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Areact">ReAct</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>推理负责更新假设，动作负责取得新信息，真实 observation 把下一轮推理与外部世界连接。若让模型自行编造工具返回，闭环就失去纠错来源；ReAct 的关键是轨迹组织方式，而不是仅在提示中交替写 Thought 和 Action 标签。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>例如模型搜索后必须读取实际返回页面；自己续写“搜索结果证明答案正确”并不是一次有效工具观察。</p>
+<p><strong>答案：</strong>仅凭模型内部知识，Agent 可能缺少最新事实，也无法知道动作是否真的成功。ReAct 让模型一边推理一边调用工具或环境，并把返回结果用于后续决定，适用于信息获取与行动交织的任务。真实观察增加纠错机会，但工具错误和错误解释观察仍可能导致失败。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：查某商品是否有货，Agent 先查询库存，再根据返回结果决定继续下单还是找替代品，不能只凭常识猜库存。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2210.03629">原论文</a> · <a href="../../../../agent-research/2210.03629-react/">实现解读</a> · <a href="#qa-546c38878e07ca4b">问题链接</a></p>
 </details>

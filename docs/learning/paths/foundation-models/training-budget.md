@@ -928,17 +928,17 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.24717">原论文</a> · <a href="../../../../reproductions/2607.24717-data-orchestra/">实现解读</a> · <a href="#qa-aa1ba5f78ac0bb62">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gaugequant" data-paper-title="GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries 基础模型 University of Cambridge 2026-07-22 LLM 内部通道存在保持函数不变的 gauge 对称性，但不同等价基的量化误差差异很大。GaugeQuant 在训练中在线学习量化友好正交基，以 LogSumExp 压制 activation outliers，不需要额外 calibration corpus。 未训练 LLaMA-2 7B，也没有 int4 kernel；Fidelity: 核心机制复现。真实学习正交 gauge、优化 outlier，并走 W4A4 STE 路径。未训练 LLaMA-2 7B，也没有 int4 kernel；STE fake quant 用于验证在线 gauge 学习机制，不代表实际吞吐。本地对照口径：基线是浮点 llama_modern；实验组训练 Householder 正交 gauge 并执行 W4A4 STE，LM loss 5.7471→5.7313，相对 -0.27%，PPL 313.27→308.38（-1.56%）。  llm-training quantization w4a4 基础模型 训练预算：数据配比、目标与优化器 GaugeQuant 为什么先寻找量化友好的内部坐标基？ 浮点函数相同的等价坐标基，数值离群程度可能不同，量化误差也会不同。方法在线学习正交gauge并抑制activation outliers，改变的是量化前的内部数值分布。 示意：同一信息分散到更多通道后，可能不再由少数极大值支配量化尺度。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gaugequant" data-paper-title="GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries 基础模型 University of Cambridge 2026-07-22 LLM 内部通道存在保持函数不变的 gauge 对称性，但不同等价基的量化误差差异很大。GaugeQuant 在训练中在线学习量化友好正交基，以 LogSumExp 压制 activation outliers，不需要额外 calibration corpus。 未训练 LLaMA-2 7B，也没有 int4 kernel；Fidelity: 核心机制复现。真实学习正交 gauge、优化 outlier，并走 W4A4 STE 路径。未训练 LLaMA-2 7B，也没有 int4 kernel；STE fake quant 用于验证在线 gauge 学习机制，不代表实际吞吐。本地对照口径：基线是浮点 llama_modern；实验组训练 Householder 正交 gauge 并执行 W4A4 STE，LM loss 5.7471→5.7313，相对 -0.27%，PPL 313.27→308.38（-1.56%）。  llm-training quantization w4a4 基础模型 训练预算：数据配比、目标与优化器 量化里的 activation outlier 为什么会让大多数普通数值也受影响？ 有限位宽要覆盖一组数的动态范围，少数大幅度通道会让表示普通值的间隔变粗。GaugeQuant学习内部正交基，用outlier目标寻找更利于量化的表示；浮点等价不代表量化误差相同。 示意：用很少刻度同时表示1、2和1000时，普通小数值之间的差异可能更难保留。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-gaugequant-8dce1822" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
-<h2 id="qa-3208d7926b6e1850">GaugeQuant 为什么先寻找量化友好的内部坐标基？</h2>
+<h2 id="qa-3208d7926b6e1850">量化里的 activation outlier 为什么会让大多数普通数值也受影响？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agaugequant">GaugeQuant: Online Learning of Quantization-Optimal Bases from LLM Symmetries</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Cambridge</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
-<p><strong>答案：</strong>浮点函数相同的等价坐标基，数值离群程度可能不同，量化误差也会不同。方法在线学习正交gauge并抑制activation outliers，改变的是量化前的内部数值分布。</p>
-<p class="ar-learning-example"><strong>教学例子：</strong>同一信息分散到更多通道后，可能不再由少数极大值支配量化尺度。</p>
-<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p><strong>答案：</strong>有限位宽要覆盖一组数的动态范围，少数大幅度通道会让表示普通值的间隔变粗。GaugeQuant学习内部正交基，用outlier目标寻找更利于量化的表示；浮点等价不代表量化误差相同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>用很少刻度同时表示1、2和1000时，普通小数值之间的差异可能更难保留。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.20757">原论文</a> · <a href="../../../../reproductions/2607.20757-gaugequant/">实现解读</a> · <a href="#qa-3208d7926b6e1850">问题链接</a></p>
 </details>
 </article>

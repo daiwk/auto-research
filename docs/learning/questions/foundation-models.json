@@ -577,9 +577,9 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "MiniMax Sparse Attention 为什么先选 block，再做精确 attention？",
-          "answer": "长序列对所有历史位置计算attention开销很大。MSA用轻量索引分支先选择少量历史块，把主分支的精确匹配集中到命中token；选择并不替代块内的精确聚合。",
-          "example": "示意：先选可能相关的几段历史，再逐词读取这几段，而非只输出每段一个摘要。",
+          "question": "MSA 中的历史 block 是新的模型层，还是沿 token 轴组织的候选单元？",
+          "answer": "block用于把历史token组织成索引候选，轻量分支先选block，主分支再读取其中token；它不是额外Transformer层。理解两个粒度才能区分块选择成本与精确attention成本。",
+          "example": "示意：先在目录选章节，再精读该章句子，章节与句子是不同读取粒度。",
           "source_sections": [
             "背景与主要改动",
             "核心公式"
@@ -934,9 +934,9 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "On-Demand Attention 为什么默认只读取局部 KV？",
-          "answer": "大多数token不一定需要全历史访问。ODA先用轻量recall head预测全局读取的收益，只对高收益token付出额外访问成本；完整历史KV仍保留，以便需要时找回。",
-          "example": "示意：常规续写先读附近词，遇到要求回忆文首编号的token时再触发全局读取。",
+          "question": "ODA 所说的局部历史与远程历史，是按信息重要性划分的吗？",
+          "answer": "局部与远程首先是相对当前token的可读位置范围，不是重要与不重要的标签。重要证据可能在很久以前，近邻也可能无关；理解这一点，才能明白为什么局部读取之外仍需要按需全局访问。",
+          "example": "示意：刚出现的几个词属于局部窗口，文章开头的人名可能已经在窗口外，却仍对当前问题很重要。",
           "source_sections": [
             "背景与主要改动"
           ],
@@ -1340,11 +1340,12 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "Switch Attention 为什么要按 token 决定是否读取全局历史？",
-          "answer": "静态hybrid模式给所有token固定的读取方式，可能对简单位置花费过多全局计算。细粒度router希望仅让需要远程信息的token走full attention，其余使用局部窗口。",
-          "example": "示意：普通短语续写走local，必须回忆文首事实的位置才需要global。",
+          "question": "Switch Attention 的 local 与 full 两条路径，分别能读到哪些历史？",
+          "answer": "local只看限定窗口内的可见位置，full可读完整因果历史。二者首先是证据范围与读取成本的差别；router根据token决定路径，不是让full路径访问未来token。",
+          "example": "示意：回答刚出现的局部词组可能只需近邻，关联很久以前的信息才可能需要更广历史。",
           "source_sections": [
-            "背景与主要改动"
+            "背景与主要改动",
+            "核心公式"
           ],
           "added": "2026-10-27"
         },
@@ -1390,11 +1391,12 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "TransMem 为什么把稀疏 hidden states 转换成可复用记忆？",
-          "answer": "历史hidden states包含骨干已计算的表征。TransMem在冻结骨干的前提下，将部分历史变换为参数记忆，并学习何时把记忆信息加回当前表示，以便复用历史证据。",
-          "example": "示意：不必每次把整段旧文本重新拼回输入，也可以学习利用先前抽取的稀疏表征。",
+          "question": "TransMem 的 frozen backbone 与可学习记忆门控，是否表示所有参数都不更新？",
+          "answer": "冻结指骨干保持不变，记忆门控仍需学习。evidence-conditioned self-distillation用于学习怎样使用历史记忆，不能把冻结骨干写成整个系统没有学习，也不能把记忆状态变化误认成骨干权重更新。",
+          "example": "示意：主模型不变，新增记忆支路仍可学习何时把历史信息加回当前状态。",
           "source_sections": [
-            "背景与主要改动"
+            "背景与主要改动",
+            "核心公式"
           ],
           "added": "2026-10-27"
         },
@@ -1440,9 +1442,9 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "Triadic Linear Attention 为什么为记忆增加第二个 key？",
-          "answer": "普通线性注意力用key与value构成二维状态；Triadic再加入另一key轴，允许两个查询共同选择关联，扩展可表达的记忆结构，而不是简单延长输入窗口。",
-          "example": "示意：一个查询标识对象，另一个标识关系类型，两者共同读取相应value。",
+          "question": "线性注意力的“状态”是逐条历史列表，还是累积的关联记忆？",
+          "answer": "普通线性注意力把key与value的外积写入累积二维状态，读取用query收缩，而不是逐条保留原始KV列表。Triadic在此基础上增加一个key轴，讨论的是关联状态容量与寻址条件。",
+          "example": "示意：状态像把多次写入叠加到一张关联表；新增key轴相当于增加一种联合寻址条件。",
           "source_sections": [
             "背景与主要改动"
           ],
@@ -1490,9 +1492,9 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "TTCD 为什么让短窗口学生学习长窗口教师的 hidden state？",
-          "answer": "短窗口看不到全部历史，有限fast weights需要选择保留有用信息。长窗口教师的隐藏表示为这个选择提供监督，使压缩状态朝保留长程证据的方向学习。",
-          "example": "示意：教师能看到前面的人物设定，学生虽窗口较短，仍尝试把相关影响写入快速记忆。",
+          "question": "TTCD 的长窗口教师与短窗口学生，最直接的信息条件差别是什么？",
+          "answer": "教师能看到更长历史，学生受有限窗口或fast-weight记忆约束。教师hidden-state监督提供保留信息的目标，但不能据此假设部署学生也直接访问完整长历史。",
+          "example": "示意：教师读过整段背景后给学习信号，学生运行时仍需依靠自己的有限记忆保留相关信息。",
           "source_sections": [
             "背景与主要改动",
             "核心公式"
@@ -1565,12 +1567,11 @@
         {
           "id": "implementation",
           "level": "implementation",
-          "question": "TTR 为什么只归一化 key，却让 target 仍由原始 token 产生？",
-          "answer": "key使用方向，target保留原始模长投影，这是定义性的不对称。若target也改为aᵀk，静态a就可能平凡拟合；实现还需保留solve的梯度，用Cholesky解方程而非detach结果。",
-          "example": "示意：方向相同、长度不同的两个token，应能贡献不同target，而不是被归一化后变得完全相同。",
+          "question": "TTR 的 dual solve 为什么在 token 轴形成 T×T 矩阵，且不能 detach？",
+          "answer": "用K按D的逆平方根缩放后，解I_T加K_tilde K_tilde转置的Cholesky方程，再映射回d维系数。外层loss需要通过solve训练target投影和正则，detach会切断定义中的学习路径；复杂度也保留T的三次项。",
+          "example": "示意：T远小于d时解token轴方程较合适，但不能据此把任意T规模都宣称为只需O(T²d)。",
           "source_sections": [
-            "核心公式",
-            "本地复现"
+            "核心公式"
           ],
           "added": "2026-10-27"
         }
@@ -1695,9 +1696,9 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "CE-guided MoE 为什么在 affinity 之外还预测 expert 的错误？",
-          "answer": "高路由亲和度不一定代表专家能正确预测该token。误差头估计各专家token错误，再在top-k前压低高预测错误专家的logit，为路由补充任务质量信号。",
-          "example": "示意：两个专家原始分数接近，但其中一个预测错误很高，其选择优先级可被降低。",
+          "question": "CE-guided MoE 的 affinity 与 token-error 分别表达什么？",
+          "answer": "affinity是原路由的专家偏好，token-error是额外头预测该专家处理当前token的错误程度。前者高不保证后者低；方法将预测错误用于Top-K前的路由修正，并用真实next-token CE监督误差头。",
+          "example": "示意：某专家与输入表示很相近，却可能在这一类token上预测不准，两个信号不能直接等同。",
           "source_sections": [
             "背景与主要改动"
           ],
@@ -1797,9 +1798,9 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "Elastic Expert Routing 为什么在训练时随机改变专家数量？",
-          "answer": "固定top-k边界外的专家可能长期没有曝光。方法为每token、每层抽取邻近预算，使边界附近专家参与真实稀疏计算，同时保持期望预算不变；推理恢复固定k。",
-          "example": "示意：通常用3个专家，训练时偶尔用2或4个，让第四名也获得学习机会。",
+          "question": "固定 Top-k MoE 的“边界专家缺少曝光”指什么？",
+          "answer": "每个token通常只派给排名前k的专家，长期刚好落在边界外的专家较少获得该token的真实计算和训练机会。弹性预算让邻近排名也有参与机会，部署时仍恢复固定k。",
+          "example": "示意：某专家经常排第三而k=2，它并非完全无用，却可能持续失去训练曝光。",
           "source_sections": [
             "背景与主要改动"
           ],
@@ -2001,11 +2002,12 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "Looped Transformer 已经共享权重，为什么还会有 KV 冗余？",
-          "answer": "共享的是计算参数，不同loop产生的历史K/V仍可能分别缓存。LLA针对这部分冗余学习跨loop共享的低秩latent，再按loop重建需要的K/V。",
-          "example": "示意：同一block运行两次不等于两次生成的缓存自动只存一份。",
+          "question": "Looped Transformer 中，共享模型权重与共享运行状态有什么区别？",
+          "answer": "权重是重复调用的变换，KV则由各loop的实际隐藏状态产生，不能因变换相同就假定结果相同。LLA让跨loop共享低秩latent，再按loop重建专用K/V，保留这种角色区别。",
+          "example": "示意：同一台机器重复加工不同中间材料，机器相同，不代表每一轮产物也完全相同。",
           "source_sections": [
-            "背景与主要改动"
+            "背景与主要改动",
+            "核心公式"
           ],
           "added": "2026-10-27"
         },
@@ -2103,11 +2105,12 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "Memory Grafting 为什么先用已有模型离线编码常见短语？",
-          "answer": "它复用预训练grafting model的hidden来构建冻结记忆表，使recipient能查询已有表征，而非必须把大容量记忆与主模型一起从零训练。在线主要做后缀匹配、投影和门控融合。",
-          "example": "示意：常见三词短语的表示先离线计算，运行时命中后直接取回。",
+          "question": "Memory Grafting 中，grafting model 与 recipient 分别扮演什么角色？",
+          "answer": "grafting model离线提供常见短语的中间hidden表示，recipient是在线使用这份冻结记忆的接收模型。两者职责不同，在线查表不等于每次又运行一次grafting model。",
+          "example": "示意：离线教师先整理短语表，在线接收模型查表取值，不必为同一短语重复请教师编码。",
           "source_sections": [
-            "背景与主要改动"
+            "背景与主要改动",
+            "核心公式"
           ],
           "added": "2026-10-27"
         },
@@ -3370,11 +3373,12 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "GaugeQuant 为什么先寻找量化友好的内部坐标基？",
-          "answer": "浮点函数相同的等价坐标基，数值离群程度可能不同，量化误差也会不同。方法在线学习正交gauge并抑制activation outliers，改变的是量化前的内部数值分布。",
-          "example": "示意：同一信息分散到更多通道后，可能不再由少数极大值支配量化尺度。",
+          "question": "量化里的 activation outlier 为什么会让大多数普通数值也受影响？",
+          "answer": "有限位宽要覆盖一组数的动态范围，少数大幅度通道会让表示普通值的间隔变粗。GaugeQuant学习内部正交基，用outlier目标寻找更利于量化的表示；浮点等价不代表量化误差相同。",
+          "example": "示意：用很少刻度同时表示1、2和1000时，普通小数值之间的差异可能更难保留。",
           "source_sections": [
-            "背景与主要改动"
+            "背景与主要改动",
+            "核心公式"
           ],
           "added": "2026-10-27"
         },
@@ -4434,9 +4438,9 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "BaKron 为什么在量化误差中加入两侧 Kronecker 曲率？",
-          "answer": "输入侧信息不能完整描述权重误差在不同输出方向的代价。双侧Kronecker形式为误差提供更丰富的加权几何，再通过专门求解组织自适应rounding。",
-          "example": "示意：同样的权重扰动落在不同输出方向时，代价可能不同，而非只看输入激活幅度。",
+          "question": "BaKron 中的 rounding 为什么不只是逐权重四舍五入？",
+          "answer": "量化目标衡量的是权重误差经曲率加权后的影响，不是每个数字距离最近刻度即可。不同权重误差相互关联时，独立最小舍入误差未必最小化整体目标，BaKron据此组织自适应rounding。",
+          "example": "示意：两个单独很小的误差若共同放大同一输出方向，整体影响可能比另一个略大但抵消的组合更高。",
           "source_sections": [
             "背景与主要改动",
             "核心公式"
@@ -5761,12 +5765,11 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "VFold 为什么先对齐相邻层的 Value，再考虑共享缓存？",
-          "answer": "相邻层value表示的坐标系和head对应未必相同，直接平均会混合不兼容方向。方法通过CCA及头匹配对齐，再把变换折叠到V/O投影，之后共享部分value历史。",
-          "example": "示意：两层同一语义落在不同通道方向，先对齐再平均才有对应含义。",
+          "question": "VFold 中的 Key 与 Value 缓存分别保存什么，哪些被共享？",
+          "answer": "Key参与历史位置匹配，Value提供注意力读出的内容。VFold只合并匹配后的相邻层Value，Key不合并，首尾重要token另存；因此不能把它理解为把整份KV或整个历史都合成一层。",
+          "example": "示意：两层可以共用经过处理的内容表示，但仍保留各自检索所需的Key。",
           "source_sections": [
-            "背景与主要改动",
-            "核心公式"
+            "背景与主要改动"
           ],
           "added": "2026-10-27"
         },
@@ -5912,9 +5915,9 @@
         {
           "id": "basics",
           "level": "basics",
-          "question": "DBLast 为什么在并行草稿块中引入跨位置共享 latent？",
-          "answer": "各位置独立提案难表达高熵序列的联合依赖。共享latent让位置在给定latent后分别预测，但边缘联合分布仍有关联，以提高整个草稿块与目标分布的匹配。",
-          "example": "示意：一句话选择了某种语境后，后面几个词的候选应彼此一致，而非各自随机拼接。",
+          "question": "并行草稿中，每个位置边际上合理，为什么整段仍可能不协调？",
+          "answer": "独立生成各位置会忽略它们之间的联合依赖。DBLast针对并行块的这个问题，用共享latent让位置在条件独立之外仍通过共同变量关联；不能只看单位置概率判断整段质量。",
+          "example": "示意：颜色与物体分别看都常见，独立拼接却可能形成不协调组合，共享选择可让它们保持一致。",
           "source_sections": [
             "背景与主要改动",
             "核心公式"
