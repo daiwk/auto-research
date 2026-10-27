@@ -11,6 +11,8 @@ hide:
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
+[阅读本主题精读卡片：多篇论文对比、分析与问答](../../deep-dives/recommendation/generative-retrieval-reasoning.md)
+
 <div class="ar-learning-browser" data-learning-browser data-learning-page-size="12" data-learning-unit="问">
 <div class="ar-learning-controls">
 <label for="learning-search">搜索问题

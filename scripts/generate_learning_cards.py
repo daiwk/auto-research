@@ -59,6 +59,18 @@ def _question_module():
     return sys.modules[name]
 
 
+def _deep_dive_module():
+    name = "_auto_research_learning_deep_dives"
+    if name not in sys.modules:
+        spec = spec_from_file_location(name, Path(__file__).with_name("learning_deep_dives.py"))
+        if spec is None or spec.loader is None:
+            raise RuntimeError("Cannot load learning deep dives")
+        module = module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+    return sys.modules[name]
+
+
 def _prose_lines(text: str, *, keep_tables: bool = False) -> list[str]:
     """Discard non-prose blocks before finding headings or paragraphs."""
     result = []
@@ -508,12 +520,21 @@ def _recent_cards(cards: list[dict]) -> list[dict]:
     ), reverse=True)
 
 
-def _outputs(root: Path) -> dict[Path, str]:
+def _outputs(root: Path, *, require_deep_dives: bool = False) -> dict[Path, str]:
     cards, themes = _collection(root)
+    deep_dives = _deep_dive_module()
+    bank = deep_dives.load_deep_dives(
+        root, themes, cards, _question_module().source_headings, required=require_deep_dives,
+    )
+    if bank:
+        for theme in themes:
+            for topic in theme["topics"]:
+                topic["deep_dive_path"] = deep_dives.page_path(theme["id"], topic["id"])
     outputs = {OUTPUT: _render_all(cards, themes)}
     topic_module = _topic_module()
     questions = _question_module()
     outputs.update(topic_module.guide_pages(themes, cards, render_browser, _page_href))
+    outputs.update(deep_dives.render_pages(themes, cards, bank, _page_href))
     recent = _recent_cards(cards)
     outputs[Path("docs/learning/recent.md")] = "\n".join([
         "---", "hide:", "  - toc", "---", "", topic_module.GENERATED, "",
@@ -530,7 +551,7 @@ def _outputs(root: Path) -> dict[Path, str]:
         render_browser(inbox, themes, path="learning/inbox.md", filters=False) if inbox else "",
         "[返回学习主题](index.md) · [搜索全部卡片](all.md)", "",
     ])
-    # Only the marked region is generated; the current featured card stays editorial.
+    # Only marked regions are generated; the introduction stays editorial.
     index = root / "docs/learning/index.md"
     text = index.read_text(encoding="utf-8") if index.exists() else ""
     for region in ("topics", "recent"):
@@ -568,11 +589,12 @@ def _outputs(root: Path) -> dict[Path, str]:
     return outputs
 
 
-def generate(root: Path = ROOT, check: bool = False, require_questions: bool = False) -> Path:
+def generate(root: Path = ROOT, check: bool = False, require_questions: bool = False,
+             require_deep_dives: bool = False) -> Path:
     root = Path(root)
     if require_questions:
         _question_module().require_complete(_collection(root)[0])
-    outputs = _outputs(root)
+    outputs = _outputs(root, require_deep_dives=require_deep_dives)
     stale = []
     for relative, expected in outputs.items():
         target = root / relative
@@ -583,6 +605,9 @@ def generate(root: Path = ROOT, check: bool = False, require_questions: bool = F
     obsolete = [path for path in (root / "docs/learning/paths").rglob("*.md")
                 if path.relative_to(root) not in outputs
                 and _topic_module().GENERATED in path.read_text(encoding="utf-8")[:180]]
+    obsolete += [path for path in (root / "docs/learning/deep-dives").rglob("*.md")
+                 if path.relative_to(root) not in outputs
+                 and _deep_dive_module().GENERATED in path.read_text(encoding="utf-8")[:180]]
     if check and (stale or obsolete):
         raise ValueError("learning cards are stale; run scripts/generate_learning_cards.py: "
                          + ", ".join(str(path) for path, _ in stale) + str(obsolete or ""))
@@ -598,9 +623,22 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Fail if generated cards are stale.")
     parser.add_argument("--require-questions", action="store_true", help="Require authored Q&A for every paper.")
+    parser.add_argument("--require-deep-dives", action="store_true", help="Require an updated authored reading for every topic.")
+    parser.add_argument("--show-deep-dive-sources", metavar="THEME/TOPIC",
+                        help="Print current README fingerprints for a reviewed topic; write nothing.")
     args = parser.parse_args()
     try:
-        target = generate(ROOT, check=args.check, require_questions=args.require_questions)
+        if args.show_deep_dive_sources:
+            cards, themes = _collection(ROOT)
+            members = next((topic["papers"] for theme in themes for topic in theme["topics"]
+                            if f"{theme['id']}/{topic['id']}" == args.show_deep_dive_sources), None)
+            if members is None:
+                raise ValueError(f"unknown learning topic: {args.show_deep_dive_sources}")
+            print(json.dumps(_deep_dive_module().source_revisions(ROOT, cards, members),
+                             ensure_ascii=False, indent=2))
+            return
+        target = generate(ROOT, check=args.check, require_questions=args.require_questions,
+                          require_deep_dives=args.require_deep_dives)
     except (OSError, ValueError, KeyError) as error:
         print(error, file=sys.stderr)
         raise SystemExit(1) from error

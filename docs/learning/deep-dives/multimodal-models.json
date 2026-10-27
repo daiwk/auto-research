@@ -1,0 +1,599 @@
+{
+  "schema_version": 1,
+  "theme": "multimodal-models",
+  "topics": {
+    "alignment-interfaces": {
+      "title": "多模态对齐到底对齐什么：向量、视觉接口还是证据依赖",
+      "thesis": "CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:blip2",
+        "foundation-models:clip",
+        "multimodal-models:cue2narrate-drl",
+        "multimodal-models:cv-opd",
+        "multimodal-models:embedding-gemma2",
+        "multimodal-models:flexglue",
+        "foundation-models:gas",
+        "foundation-models:lamp",
+        "foundation-models:llava",
+        "foundation-models:mllmclip",
+        "multimodal-models:mveb",
+        "multimodal-models:naijas2st",
+        "foundation-models:omni-embed-mini",
+        "foundation-models:physics-mm-pretraining",
+        "foundation-models:retoken",
+        "foundation-models:sensenova-u1-5",
+        "foundation-models:siglip2",
+        "foundation-models:smolvlm",
+        "multimodal-models:umrm",
+        "foundation-models:wemm-embedding"
+      ],
+      "axes": [
+        "输出对象：检索向量、视觉token、生成回答、reward",
+        "训练部件：双塔、连接器、策略分布、冻结表征上的头",
+        "证据约束：配对相似、指令监督、视图对照、扰动偏好",
+        "成本位置：视觉token长度、embedding维度、教师与评分器"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:clip",
+          "position": "独立图文encoder映射到单位球面，用对称批内对比目标学习相似度。",
+          "tradeoff": "类别文本可作零样本原型，但相似度不是开放回答；本地服饰图像双塔不代表四亿图文预训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:blip2",
+          "position": "固定数量learnable query经Q-Former交叉注意力提取视觉信息，接给冻结LLM。",
+          "tradeoff": "可训练瓶颈控制视觉接口长度，也可能遗漏细节；本地四query未复刻两阶段大模型训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:llava",
+          "position": "projector将视觉特征接入语言token空间，再用多模态指令监督学习条件回答。",
+          "tradeoff": "形状对齐不能代替语义与指令训练；本地轻量问答头未执行GPT-4指令数据生成或LLaVA-13B。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:embedding-gemma2",
+          "position": "独立模态塔输出统一768维向量，MRL支持规定前缀截断后再归一化。",
+          "tradeoff": "缩短向量与压缩视觉输入是不同预算；本地使用官方checkpoint仅验证文本、图像，未接全四模态。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:cv-opd",
+          "position": "学生读全图，正负教师只改crop且共享学生前缀，用JSD和CDL约束正确视觉依赖。",
+          "tradeoff": "负crop构造、样本门与token门都影响监督；本地有真实VLM L1更新及A100诊断，非完整视觉能力复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地结果与边界",
+            "2026-10-14 A100 实测"
+          ]
+        },
+        {
+          "paper": "multimodal-models:umrm",
+          "position": "冻结VLM中间层，只池化response并训练无bias奖励头，以caption扰动构造偏好。",
+          "tradeoff": "无人工偏好不等于全流程无标签；development选层和bootstrap verifier仍使用监督，局部奖励准度不保证真实policy选择效用。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与verifier边界",
+            "本地结果与验证状态"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "统一空间与语言输入空间，不能只因维度相同就互换",
+          "body": "CLIP和EmbeddingGemma 2要求向量在任务相似度下可比较，后者还允许规定维度的MRL读取。BLIP-2的query输出与LLaVA的视觉投影则是LLM条件输入，需要语言生成训练接纳这些信号。一个检索向量语义相近，不等于它已经是能被任意LLM直接读取的视觉软提示。",
+          "papers": [
+            "foundation-models:clip",
+            "multimodal-models:embedding-gemma2",
+            "foundation-models:blip2",
+            "foundation-models:llava"
+          ]
+        },
+        {
+          "title": "回答看起来好，与回答确实利用图像是两个问题",
+          "body": "UMRM从caption扰动学习reward，进一步检验policy自产候选的选择效用，避免只在人工负例上自证。CV-OPD则在相同学生前缀上改变教师视觉证据，直接约束正负视图的分布关系。前者是评价器与负样本分布，后者是策略蒸馏关系；它们可以互补，却不能用一个reward benchmark证明完整视觉归因。",
+          "papers": [
+            "multimodal-models:umrm",
+            "multimodal-models:cv-opd",
+            "foundation-models:llava"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "embedding-versus-answer",
+          "question": "CLIP或EmbeddingGemma 2把图片检索对了，为什么不能直接算作LLaVA已经会回答图像问题？",
+          "answer": "检索要求在候选表示间找到匹配，LLaVA要求根据图像、问题与历史生成回答token。前者没有自动提供生成接口或指令监督；EmbeddingGemma 2的统一空间也不改变这一点。要比较，应先固定同一种输出任务，而不是把相似度命中与回答正确合并成一列。",
+          "example": "教学例子：找到“桌上有杯子”的图片，不等于能按用户要求回答杯子数量、说明依据并遵守输出格式。",
+          "papers": [
+            "foundation-models:clip",
+            "multimodal-models:embedding-gemma2",
+            "foundation-models:llava"
+          ]
+        },
+        {
+          "id": "two-compression-axes",
+          "question": "BLIP-2减少query数量，与EmbeddingGemma 2缩短embedding维度，节约的是同一类开销吗？",
+          "answer": "不是。Q-Former query数影响送给语言侧的视觉序列长度，MRL维度影响最终检索向量的存储与相似度计算。两者都可能损失信息，但压缩位置不同；MRL还要求使用训练规定前缀并重新归一化，不能用删向量坐标代替视觉token聚合。",
+          "example": "教学例子：送给LLM的32个视觉token与每条检索向量256维，是序列长度和向量宽度两个数字，不可直接比较大小。",
+          "papers": [
+            "foundation-models:blip2",
+            "multimodal-models:embedding-gemma2"
+          ]
+        },
+        {
+          "id": "reward-versus-visual-dependence",
+          "question": "UMRM能分辨caption颜色扰动，就足以证明CV-OPD学生依赖了正确图像区域吗？",
+          "answer": "不够。UMRM测试奖励头在某类负样本上如何排序，真实policy错误分布可能不同；CV-OPD要比较同前缀下正负crop教师与学生的分布关系。奖励头判对、学生获得该信号、学生实际改为使用证据，是不同环节，需要各自验证。",
+          "example": "教学例子：裁判能发现“红”被改成“蓝”，不表示学生训练后已停止只凭常见物体颜色猜答案。",
+          "papers": [
+            "multimodal-models:umrm",
+            "multimodal-models:cv-opd"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较CLIP/EmbeddingGemma 2检索空间、BLIP-2/LLaVA视觉接口、CV-OPD证据依赖与UMRM奖励；已阅20篇摘要，精读6篇。",
+          "papers": [
+            "foundation-models:blip2",
+            "foundation-models:clip",
+            "multimodal-models:cue2narrate-drl",
+            "multimodal-models:cv-opd",
+            "multimodal-models:embedding-gemma2",
+            "multimodal-models:flexglue",
+            "foundation-models:gas",
+            "foundation-models:lamp",
+            "foundation-models:llava",
+            "foundation-models:mllmclip",
+            "multimodal-models:mveb",
+            "multimodal-models:naijas2st",
+            "foundation-models:omni-embed-mini",
+            "foundation-models:physics-mm-pretraining",
+            "foundation-models:retoken",
+            "foundation-models:sensenova-u1-5",
+            "foundation-models:siglip2",
+            "foundation-models:smolvlm",
+            "multimodal-models:umrm",
+            "foundation-models:wemm-embedding"
+          ],
+          "source_revisions": {
+            "foundation-models:blip2": "cb8635dd08c94c0b835306c1c9ae9019e5f28f793e04e781417cfcb2611333ad",
+            "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1",
+            "multimodal-models:cue2narrate-drl": "56e766ad3abf12a42086dced76ef2a18fc25d93530015dd72ba094f3995ae54d",
+            "multimodal-models:cv-opd": "7b091b054ee977ece744cb4a511fc1288438b9aeee17d5625925fe961ee71e79",
+            "multimodal-models:embedding-gemma2": "91c0f1fb84c918da08990e734257ac0047268b5a30d1ebdfa35adbd7a852a4cd",
+            "multimodal-models:flexglue": "beff09b467412079d54c8dd08e8feace7070054b2d2c750d96ca23ebc0618416",
+            "foundation-models:gas": "b6242dace8e24fa13c5f0b877c215ff3c5ba5b6cc8fd5e2995f0312349cb354a",
+            "foundation-models:lamp": "d1e744c8473f5a0b2c99dad659fb9d9ca3c51011ba9ee5fb97503eeb1f2a4ae5",
+            "foundation-models:llava": "8ff92bf3f10caa2c246ccbb054c2f1a29c5e792ce61ec1495f3dabc44a9bd71f",
+            "foundation-models:mllmclip": "c5a16eedd520f7d48d08c947326f2d41e4173a009c740dd559be27686809b9a1",
+            "multimodal-models:mveb": "737e70ed9c7132c0719ea36d30fb85e7c3997d3b019a5ab324df65e20bfb9d46",
+            "multimodal-models:naijas2st": "d0752a40d4b526bf212002291aa1da2c7ef0ff4de4554648b0b73d9a9fd12771",
+            "foundation-models:omni-embed-mini": "ec1120aa41f9a5220e1c81153293a81793cfdbd0f9865bf3763acde7f5dffe7e",
+            "foundation-models:physics-mm-pretraining": "4a302071c73810466e685f84238489595f1b29198f239eb45a68ca2c62386c4a",
+            "foundation-models:retoken": "d13c7d1db4ccb61718b1cee46c13214092a3973c555613b92e51114d8e5a1d0f",
+            "foundation-models:sensenova-u1-5": "c7e1833bd5a0bbda0c56fddfb603ae449967376c3570d470325c4c80ce7a45bd",
+            "foundation-models:siglip2": "0559ef269b8459c8c2751365d13ebabda90d2e984ba2d78ca0b429afe059cbea",
+            "foundation-models:smolvlm": "1ed215d62a47b1fb810b58f77ce1c172d7bd6489664c3cf7f90f7dbd82a5a7b3",
+            "multimodal-models:umrm": "c1112e24c9522e3a549429a2c9a85f5fa0c71a14782a201d6b2e5ab64c80d3a1",
+            "foundation-models:wemm-embedding": "64247d3de8d741f2f2438c87d75880429f8a2486ffaa3121bdf32f79851adeb4"
+          }
+        }
+      ]
+    },
+    "visual-evidence-budget": {
+      "title": "少看、晚看还是再看：把视觉预算放到正确阶段",
+      "thesis": "视觉预算不只有token数。StackTok选择已编码证据，PACE提前分配输入分辨率，ViMoD保留可恢复细节，Frames-on-Demand按需取帧，AdaLoop多算已有视觉状态，OmniKVQuant减少每份cache的位宽。必须同时追踪信息是否还在、哪段成本已支付。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:adaloop-vision",
+        "foundation-models:frames-on-demand",
+        "foundation-models:hawk",
+        "foundation-models:muse-glimmer-30b",
+        "foundation-models:mwop",
+        "foundation-models:omnikvquant",
+        "foundation-models:pace-vlm",
+        "foundation-models:rr-vlm",
+        "foundation-models:sink-sparse",
+        "foundation-models:softcache",
+        "multimodal-models:stacktok",
+        "multimodal-models:vcola",
+        "foundation-models:veto",
+        "foundation-models:video-encoder-selection",
+        "multimodal-models:videomm",
+        "multimodal-models:vimod"
+      ],
+      "axes": [
+        "介入阶段：输入编码前、编码后、生成中、cache存储",
+        "信息去向：丢弃、聚合、外存保留、重新读取",
+        "适应条件：问题相关性、覆盖、已生成文本、稳定停止",
+        "预算对象：token数、峰值存储、视觉循环、低位表示"
+      ],
+      "comparisons": [
+        {
+          "paper": "multimodal-models:stacktok",
+          "position": "以query relevance为目标，按预算调节coverage约束，在选择准则之间切换。",
+          "tradeoff": "相关性与覆盖不能只留一项；本地是单crop reference selector，未加载论文五个VLM，不能进入能力排名。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式与实现对应",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:pace-vlm",
+          "position": "PACE的APC用浅层preview自适应缩放图像，DDAE再按置信融合语言与视觉注意力做抽取。",
+          "tradeoff": "编码前缩放与编码后选token节省不同环节；真实checkpoint smoke主要跑APC，DDAE仍为独立公式/单测证据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:vimod",
+          "position": "DART保留Coarse KV与原始Fine KV，TRACE按因果文本状态HOLD或替换细节工作集。",
+          "tradeoff": "可恢复不等于Fine KV不占内存；已有真实checkpoint及CUDA梯度诊断，但适配模型范围需按README限定。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与结果",
+            "代码映射与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:frames-on-demand",
+          "position": "先建立一次caption memory，仅在文字证据不足时用固定预算回看相关视频帧。",
+          "tradeoff": "文字索引可能遗漏细节，门控错误会漏看；本地确定性caption/query gate未运行长视频VLM或学得路由器。",
+          "sections": [
+            "背景与主要改动",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:adaloop-vision",
+          "position": "以问题向量调制共享冻结视觉块，循环更新视觉状态，将额外计算投入视觉侧。",
+          "tradeoff": "循环增加处理机会而非新增原始证据；完整多臂训练成本过高未复现，当前随机token梯度诊断。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果与独立对照"
+          ]
+        },
+        {
+          "paper": "foundation-models:omnikvquant",
+          "position": "key按短时间窗设量化范围，value按模态独立旋转，降低KV表示位宽。",
+          "tradeoff": "压缩cache数值与减少cache条目不同；本地2-bit NumPy reference无真实GPU kernel加速证据。",
+          "sections": [
+            "背景与主要改动",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "token变少时，先问原始细节还在哪里",
+          "body": "PACE在编码前缩放可能已改变可见细节，StackTok从编码结果中按问题和覆盖选取；ViMoD则明确保留Fine KV，并在生成中恢复所需工作集。Frames-on-Demand保留的是可回看的视频与文字索引。它们的“少看”并不等价：能否恢复，取决于是否还保存原证据以及有没有可执行的回读路径。",
+          "papers": [
+            "foundation-models:pace-vlm",
+            "multimodal-models:stacktok",
+            "multimodal-models:vimod",
+            "foundation-models:frames-on-demand"
+          ]
+        },
+        {
+          "title": "活动工作集、峰值内存与额外计算应分开记账",
+          "body": "ViMoD较小的活动细节集不自动意味着原始Fine KV已从存储中消失；OmniKVQuant处理的是每份KV的数值位宽与误差。AdaLoop再从另一轴增加视觉循环，以计算换更有问题针对性的表示。若只报token减少率，会同时漏掉存储、回读和循环开销，无法判断实际设备预算是否满足。",
+          "papers": [
+            "multimodal-models:vimod",
+            "foundation-models:omnikvquant",
+            "foundation-models:adaloop-vision"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "active-versus-resident-cache",
+          "question": "ViMoD只激活少量Fine KV，就一定比KV量化更省峰值内存吗？",
+          "answer": "不能这样推出。ViMoD仍保留原Fine KV以便恢复，活动工作集小与全部驻留状态小不同；OmniKVQuant降低每份cache的位宽，又有旋转、量化和解包代价。比较要测同输入下的存储位置、峰值内存及端到端延迟，不能将工作集比例与bit数直接相乘当结果。",
+          "example": "教学例子：桌面只摆一本书不代表仓库其余书已消失；把每本书压缩存储则是另一种节省，取书也有成本。",
+          "papers": [
+            "multimodal-models:vimod",
+            "foundation-models:omnikvquant"
+          ]
+        },
+        {
+          "id": "shrink-before-encode-versus-recover",
+          "question": "PACE把图像先缩小，与StackTok选择token、ViMoD按需回读细节，信息损失发生在同一位置吗？",
+          "answer": "不同。PACE的APC可在完整编码前改变图像预算，StackTok面对已编码token，ViMoD明确保留原Fine KV供后续读取。已在低分辨率输入中消失的信息，不能只靠末端选择规则恢复。不同阶段的压缩既影响质量，也决定哪些编码成本已经支付。",
+          "example": "教学例子：小字在缩图后不可辨，与高分辨率已编码但暂未激活，是两种状态；后者才可能沿已有细节cache回读。",
+          "papers": [
+            "foundation-models:pace-vlm",
+            "multimodal-models:stacktok",
+            "multimodal-models:vimod"
+          ]
+        },
+        {
+          "id": "more-processing-versus-more-evidence",
+          "question": "AdaLoop多循环一次，是否就等于Frames-on-Demand多读取一帧？",
+          "answer": "不是。AdaLoop用共享视觉块继续处理已有状态，问题调制可改变表示；Frames-on-Demand在需要时取得额外帧证据。多计算不必带来新观测，多观测也不保证被正确利用。不能把循环次数、帧数和答案稳定性混成同一种“看得更多”，更不能用gold决定部署停止。",
+          "example": "教学例子：反复分析一张模糊截图，与取回视频中另一张更清晰的帧，增加的信息条件并不相同。",
+          "papers": [
+            "foundation-models:adaloop-vision",
+            "foundation-models:frames-on-demand",
+            "multimodal-models:vimod"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较StackTok选择、PACE输入预算、ViMoD可恢复KV、按需帧读取、视觉循环与KV量化；已阅16篇摘要，精读6篇。",
+          "papers": [
+            "foundation-models:adaloop-vision",
+            "foundation-models:frames-on-demand",
+            "foundation-models:hawk",
+            "foundation-models:muse-glimmer-30b",
+            "foundation-models:mwop",
+            "foundation-models:omnikvquant",
+            "foundation-models:pace-vlm",
+            "foundation-models:rr-vlm",
+            "foundation-models:sink-sparse",
+            "foundation-models:softcache",
+            "multimodal-models:stacktok",
+            "multimodal-models:vcola",
+            "foundation-models:veto",
+            "foundation-models:video-encoder-selection",
+            "multimodal-models:videomm",
+            "multimodal-models:vimod"
+          ],
+          "source_revisions": {
+            "foundation-models:adaloop-vision": "89ae8f64704875e311d05167d9f04a1cbcb5b18fac681839f595d6b1100df3ec",
+            "foundation-models:frames-on-demand": "f04bfbf87539f470b4e7c1e54846bc0a22dea142183c9e76a85a456c51680ec5",
+            "foundation-models:hawk": "83a3b33b59d4755694688f2de690a928f5be7a0005300eed0a350b8d6dfe37b4",
+            "foundation-models:muse-glimmer-30b": "f53e704e7a09df238c1334d6681250c73d856378401fd4ba529a1202f4b54630",
+            "foundation-models:mwop": "7a540f19b80471cf19cba211a9375e34a6ba42dd06a09f5ba1ab817078f1b529",
+            "foundation-models:omnikvquant": "282e448cbc145db17f5786ef7f50bfb00e977fd6a476e3eec13ff211239bac3f",
+            "foundation-models:pace-vlm": "fd2e2272771705b80eb746235aaf240f909b80d0b503331bbc2951b9f8c3edc9",
+            "foundation-models:rr-vlm": "0f3ece4656f4e84850beb70e4a3f9daf49619738cec5f8a44fc9e475c3d0339b",
+            "foundation-models:sink-sparse": "fc1ff073b03c88e8fdd92a380029e4fe9742b81cc4242f5e5b942b9a9809fb6d",
+            "foundation-models:softcache": "ccdf272fc618a62f640a1893e12e1c0b5afe2dba0a01ca5c2190a47dd9c73f16",
+            "multimodal-models:stacktok": "e72db89e1dd8d098b8adba1e19114ac7fe86e298dc21d43daac0eff7da3c4b91",
+            "multimodal-models:vcola": "c372ad23e30ef3f09e0b38c14e8fb65eee73f4582ef965efbeb40885166fe9ca",
+            "foundation-models:veto": "07aa12ded3b703ee7041559a195bc6fddc34458d3b536f8672e51ba0ee33c473",
+            "foundation-models:video-encoder-selection": "ad0de2da03e97ede85d0c299a56ab5a2eb9438a870496eb886ba39652061d1fb",
+            "multimodal-models:videomm": "c1c3018e8f2d1f1d21c50ea64c5e820aef137e52937dca5fe3b21218fe3af5d1",
+            "multimodal-models:vimod": "bc6d1c67e26524c64b7aaf5b12d3e6ab643bfb82ff2d38571d61c914fefc1309"
+          }
+        }
+      ]
+    },
+    "world-state-actions": {
+      "title": "会预测下一幕，还不等于会行动或保持同一个世界",
+      "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:alps",
+        "multimodal-models:aw0",
+        "foundation-models:dt-jepa",
+        "foundation-models:ego-p2c",
+        "foundation-models:egojepa",
+        "foundation-models:esc",
+        "foundation-models:ev-jepa",
+        "foundation-models:gen4p",
+        "foundation-models:inside-jepa",
+        "foundation-models:jepa-prediction-planning",
+        "foundation-models:lewam",
+        "foundation-models:locale-jepa",
+        "multimodal-models:mice",
+        "foundation-models:oob-regularization",
+        "foundation-models:ppmem",
+        "multimodal-models:raw-video-midtraining",
+        "foundation-models:smolwam",
+        "foundation-models:time-jepa",
+        "multimodal-models:uniaction",
+        "foundation-models:vbvr-pro",
+        "foundation-models:vjepa-policy",
+        "multimodal-models:woven"
+      ],
+      "axes": [
+        "学习对象：未来latent、动作分布、视觉转移、持久几何",
+        "控制连接：联合塑造encoder或冻结视觉表征",
+        "误差接口：latent loss、物理状态误差、实际规划成功",
+        "证据生成与验收：生成候选、程序约束、跨视角一致性"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:lewam",
+          "position": "同阶段联合学习视觉encoder、动作条件latent动力学与flow-matching策略，并可精炼候选动作计划。",
+          "tradeoff": "控制监督可塑造表示，但训练目标与规划仍需分别验收；A100缩放闭环是非holdout诊断，未观察到规划优势。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议、结果与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:vjepa-policy",
+          "position": "冻结V-JEPA 2.1视觉encoder，联合训练未来latent predictor与读取未来上下文的action expert。",
+          "tradeoff": "复用预训练视觉空间，控制不能任意改写encoder；本地仅L1 stop-gradient与flow核，未加载原模型和机器人数据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:jepa-prediction-planning",
+          "position": "同一冻结物理decoder分别读取真实与预测latent，拆分表示误差、预测误差及excess，再独立评规划。",
+          "tradeoff": "一步误差不替代长程成功；完整多环境重训/MPC成本过高未复现，CPU指标仅接口诊断。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "预算与实现差异",
+            "聚合、结果与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:woven",
+          "position": "以(s,a,s′)组织真实生成视频rollout，构造前向、反向与反事实视觉转移监督进入MLLM训练。",
+          "tradeoff": "生成转移的可信度与OOD任务须另验；本地有小样本真实transition SFT，未运行后续GRPO。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议、公开资源与结果"
+          ]
+        },
+        {
+          "paper": "foundation-models:ppmem",
+          "position": "将局部平面primitive合并到世界坐标持久pool，光栅化深度反馈后续视频chunk。",
+          "tradeoff": "压缩几何要处理遮挡、去重和相机条件；当前仅研究资料，完整视频/几何训练成本过高未复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式与流程",
+            "本地复现与成本判断"
+          ]
+        },
+        {
+          "paper": "foundation-models:vbvr-pro",
+          "position": "以任务专用可执行scorer核对中间状态、约束和最终状态，为生成模型提供奖励。",
+          "tradeoff": "确定性判据只覆盖明确定义任务；本地程序scorer不等同已训练14B/19B视频模型。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "表征能读、未来能预测、行动能成功是三次不同验收",
+          "body": "LeWAM让控制与预测共同训练视觉表示，V-JEPA Policy则固定encoder后学习未来与动作。无论选哪条路径，都需要知道物理状态是否已在表示中、预测器额外引入多少误差、规划是否真正成功。预测—规划评测用同一物理decoder拆前两项，再单独运行规划，防止用较小latent loss包办全部结论。",
+          "papers": [
+            "foundation-models:lewam",
+            "foundation-models:vjepa-policy",
+            "foundation-models:jepa-prediction-planning"
+          ]
+        },
+        {
+          "title": "生成合理候选与验证世界一致性需要不同接口",
+          "body": "WOVEN用生成的视频转移提供训练材料，关键是视觉变化实际进入监督，而不是提示先写结果。PPMem另解决跨chunk与跨视角的几何持久性，给定下一相机轨迹不等于知道未来真实帧。VBVR-Pro把可执行约束变成验收，但scorer实现不自动带来强生成器；这三项分别对应数据、记忆与验证。",
+          "papers": [
+            "multimodal-models:woven",
+            "foundation-models:ppmem",
+            "foundation-models:vbvr-pro"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "frozen-versus-joint-encoder",
+          "question": "LeWAM与V-JEPA Policy都有未来latent和action expert，是否只是换了视觉backbone？",
+          "answer": "不只是。LeWAM联合更新视觉encoder、动力学和策略，原文使用online target；V-JEPA Policy冻结预训练encoder并对未来目标stop-gradient。控制梯度能否塑造视觉空间、未来目标是否移动，都是训练合同。不能只把两者画成同一框图，就忽略这些差异。",
+          "example": "教学例子：某位置特征不利于抓取时，一条路径可让控制监督调整encoder，另一条主要在固定表征上调整predictor和动作模块。",
+          "papers": [
+            "foundation-models:lewam",
+            "foundation-models:vjepa-policy"
+          ]
+        },
+        {
+          "id": "low-prediction-loss-not-planning",
+          "question": "JEPA预测误差更低，能直接认定LeWAM的候选规划比reactive policy强吗？",
+          "answer": "不能。预测误差混合表征本身是否可读与预测器新增偏差，且长程计划还受动作候选、累积误差和目标分布影响。预测—规划评测要求同decoder拆项并独立测规划。LeWAM当前本地闭环未观察到规划优势，也属非holdout诊断，不能从loss补写成功结论。",
+          "example": "教学例子：模型准确预测不动时的画面，仍可能选不出能到目标的动作；预测容易不等于控制有效。",
+          "papers": [
+            "foundation-models:jepa-prediction-planning",
+            "foundation-models:lewam"
+          ]
+        },
+        {
+          "id": "rollout-memory-verifier",
+          "question": "WOVEN的反事实视频、PPMem的平面记忆与VBVR-Pro程序评分，谁提供正确性保证？",
+          "answer": "三者承担不同职责：WOVEN产生动作条件视觉转移材料，PPMem维持几何记忆，VBVR-Pro在已定义任务上执行约束检查。生成逼真不保证转移正确，记忆存在不保证几何无误，程序验收也只覆盖其判据。需把数据来源、状态维护和评分覆盖逐项核对，不能互相背书。",
+          "example": "教学例子：回到旧视角时物体位置一致可由几何记忆帮助，但是否满足任务中的数量或顺序要求，仍需相应验证规则。",
+          "papers": [
+            "multimodal-models:woven",
+            "foundation-models:ppmem",
+            "foundation-models:vbvr-pro"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较联合或冻结视觉编码的动作模型、预测与规划验收、WOVEN转移监督、PPMem几何记忆与VBVR程序评分；已阅22篇摘要，精读6篇。",
+          "papers": [
+            "foundation-models:alps",
+            "multimodal-models:aw0",
+            "foundation-models:dt-jepa",
+            "foundation-models:ego-p2c",
+            "foundation-models:egojepa",
+            "foundation-models:esc",
+            "foundation-models:ev-jepa",
+            "foundation-models:gen4p",
+            "foundation-models:inside-jepa",
+            "foundation-models:jepa-prediction-planning",
+            "foundation-models:lewam",
+            "foundation-models:locale-jepa",
+            "multimodal-models:mice",
+            "foundation-models:oob-regularization",
+            "foundation-models:ppmem",
+            "multimodal-models:raw-video-midtraining",
+            "foundation-models:smolwam",
+            "foundation-models:time-jepa",
+            "multimodal-models:uniaction",
+            "foundation-models:vbvr-pro",
+            "foundation-models:vjepa-policy",
+            "multimodal-models:woven"
+          ],
+          "source_revisions": {
+            "foundation-models:alps": "2453d13d5d981530325ba6c217ab99635fcc7c865f9ca3d257c6af9c3c7d08c7",
+            "multimodal-models:aw0": "41630e37ba0dd9a951f79d8e80f3ebf93f8d0814449af07b5e5c0dcb4f6b0886",
+            "foundation-models:dt-jepa": "2cc1cbec19b52dcb4ffd65b921cc4a011a2089ef2bb6de30987366c2d893e240",
+            "foundation-models:ego-p2c": "32ed4ec948c5aecbb3efc0cb41377df77da64aeb68f80c51ac760bebfb3a10f2",
+            "foundation-models:egojepa": "f07af70d6f125bdc0b5d34d4fea57c7b3c54fc8618ffca42441b2757f9364d45",
+            "foundation-models:esc": "137a12c88e2ad07fc039c06a7bbe3ddb8b6cd11b8ea51a548061484d9c56a9b4",
+            "foundation-models:ev-jepa": "c3e5af8c40ed6660492c92b108a2774df29921540a9f76ce0542fd4ae60034cd",
+            "foundation-models:gen4p": "ea8316aee5f979fd7b8b6d4dda0a27164f354fc8a2c3853cb445060d0d28547e",
+            "foundation-models:inside-jepa": "70473cf5d51a75f514c9a3be54d20a36703a7f89165a332191e6053409c8190a",
+            "foundation-models:jepa-prediction-planning": "754eb348792674a6a8916439d927bc1f9895d8166a55b1cc9da92c1b44248778",
+            "foundation-models:lewam": "5e991ab90d6400d319dbccbf83e7ff06f2749baa45a5e10a79ea26b235f1ed45",
+            "foundation-models:locale-jepa": "21a4dec2a77ba8a17e4c6ce5868741b85c87ecccb5a9f0038d78fe77ccaa1afa",
+            "multimodal-models:mice": "d0aa758204b8782951762c6b752b28d485cf6020cc3a5baa9288a1a17c21ef41",
+            "foundation-models:oob-regularization": "1cff866ccbf41250cba1aa8ff9b346f8e7bb8c4a41254d143ea768ef089fb6ff",
+            "foundation-models:ppmem": "eb30c4bd44d3a1509609b2f0f6a188b358ffb333c67c69190456ae0fdb25811d",
+            "multimodal-models:raw-video-midtraining": "aef77e8365f9a9c9aa56b934dddf055c86ff2015ee9c83d249db14739c3fc59b",
+            "foundation-models:smolwam": "87f5d92344399570014f4e936502156ca06a9c2d393c9bf3351adb69c4369b2a",
+            "foundation-models:time-jepa": "5296b20ff5697af84daff8219ef1698640500e3b84af2b471f75c6078f336b3d",
+            "multimodal-models:uniaction": "13375d6963a871291124f1de9f369626e87aa294c61754eb2a2d6e796171c029",
+            "foundation-models:vbvr-pro": "9aefb2969c3d50aca759472a0843832c43c3283daf5c507f559dd63d15f6d784",
+            "foundation-models:vjepa-policy": "bd556faa4f657cac639e6662804d80e39267f07b903ea87423fe32239a6e1905",
+            "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
+          }
+        }
+      ]
+    }
+  }
+}

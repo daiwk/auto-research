@@ -15,10 +15,12 @@ on:
       - "scripts/learning_cards_hook.py"
       - "scripts/learning_topics.py"
       - "scripts/learning_questions.py"
+      - "scripts/learning_deep_dives.py"
       - "tests/test_docs_math.py"
       - "tests/test_learning_cards.py"
       - "tests/test_learning_topics.py"
       - "tests/test_learning_questions.py"
+      - "tests/test_learning_deep_dives.py"
       - "tests/test_project_readme_sync.py"
       - "tests/test_site_tour.py"
       - ".github/workflows/docs.yml"
@@ -37,10 +39,12 @@ on:
       - "scripts/learning_cards_hook.py"
       - "scripts/learning_topics.py"
       - "scripts/learning_questions.py"
+      - "scripts/learning_deep_dives.py"
       - "tests/test_docs_math.py"
       - "tests/test_learning_cards.py"
       - "tests/test_learning_topics.py"
       - "tests/test_learning_questions.py"
+      - "tests/test_learning_deep_dives.py"
       - "tests/test_project_readme_sync.py"
       - "tests/test_site_tour.py"
       - ".github/workflows/docs.yml"
@@ -67,10 +71,10 @@ jobs:
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt pytest 'Pillow>=11,<13'
       - run: python scripts/sync_project_readme.py --check
-      - run: python -m pytest tests/test_project_readme_sync.py tests/test_site_tour.py
+      - run: python -m pytest tests/test_project_readme_sync.py tests/test_site_tour.py tests/test_learning_deep_dives.py
       - run: python scripts/generate_public_experiment_dashboard.py
       - run: git diff --exit-code -- docs/assets/data/experiment-dashboard.json
-      - run: python scripts/generate_learning_cards.py --require-questions
+      - run: python scripts/generate_learning_cards.py --require-questions --require-deep-dives
       - run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

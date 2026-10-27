@@ -79,9 +79,8 @@ nav:
           - 分层参与度评测协议: agent-research/layered-engagement-protocol.md
   - 学习卡片:
       - 学习卡片汇总: learning/index.md
-      - 全部论文小卡片: learning/all.md
-      - RankMixer 的特征怎么交互: learning/002-rankmixer-tokenmix.md
-      - 长历史要不要每层都重新计算: learning/001-hstu-longer-slimper.md
+      - 全部论文问答: learning/all.md
+      - 专题精读: learning/deep-dives/index.md
   - 项目文档:
       - 项目 README: project-readme.md
       - 安装与 Demo: readme_setup.md

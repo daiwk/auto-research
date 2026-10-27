@@ -26,6 +26,7 @@
 |---|---|---|
 | 找到相关论文 | [论文实现与评测](https://daiwk.github.io/auto-research/research-library/) | 按领域、机构、主题和时间浏览，查看中文解读、公式与代码 |
 | 分层读懂一篇 | [学习卡片](https://daiwk.github.io/auto-research/learning/) | 基础理解 → 核心机制 → 方法对比 → 实现细节；答案、例子和来源按需展开 |
+| 比较一个主题的多篇论文 | [专题精读](https://daiwk.github.io/auto-research/learning/deep-dives/) | 机制对照、取舍分析与跨论文问答；新论文加入后增量更新对应卡片 |
 | 接着上次读 | [最近新增问题](https://daiwk.github.io/auto-research/learning/recent/) | 新论文和旧论文补充的问题统一汇总，可筛选主题与学习层次 |
 | 判断实验说明了什么 | [公开实验看板](https://daiwk.github.io/auto-research/public-experiment-dashboard/) | 对照数据、基线、指标、seed 和验证层级，保留负结果及未复现边界 |
 | 亲自运行研究 | [自动研究与进化](auto-research.md) | 执行已实现的论文组件，用 validation 选择候选，再运行隔离 test |
@@ -63,7 +64,7 @@ auto-research list
 
 欢迎提交问题、修正文档或新增论文组件：[Issues](https://github.com/daiwk/auto-research/issues) · [提交历史](https://github.com/daiwk/auto-research/commits/main/)。使用编码助手时先读 [AGENTS.md](https://github.com/daiwk/auto-research/blob/main/AGENTS.md)。
 
-Python 契约与文档构建由 CI 检查；新论文需要同步信息、源码/成本边界及四层问答。实验保留命令、版本、指标和失败记录；需要 CUDA 的新实现还必须提供实际 GPU 验证证据。
+Python 契约与文档构建由 CI 检查；新论文需要同步信息、源码/成本边界、四层问答及对应专题精读的增量更新。实验保留命令、版本、指标和失败记录；需要 CUDA 的新实现还必须提供实际 GPU 验证证据。
 
 <details>
 <summary>Star History</summary>

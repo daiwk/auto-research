@@ -11,6 +11,8 @@ hide:
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
+[阅读本主题精读卡片：多篇论文对比、分析与问答](../../deep-dives/recommendation/history-ranking-backbones.md)
+
 <div class="ar-learning-browser" data-learning-browser data-learning-page-size="12" data-learning-unit="问">
 <div class="ar-learning-controls">
 <label for="learning-search">搜索问题
@@ -1310,7 +1312,7 @@ hide:
 <p><strong>答案：</strong>不是。原文§2.5在事件 token 化时加入局部上下文编码，可用卷积或滑窗注意力融合邻近行为；后续层才反复读取这些用户 token 并更新固定知识库。因此它减少的是深层全量两两历史交互，而非禁止任何历史关系。固定知识槽也只是中间状态预算，原始输入存储与每层读取仍随历史长度增长。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>连续搜索、比较、加购可先编码成带局部背景的事件，再由多层知识槽按候选读取。虽然每层不重写整条历史，这些事件也不必被当成彼此孤立的点击。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-c31fdda2ede9afd6">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="#qa-c31fdda2ede9afd6">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:slimper" data-paper-title="SlimPer: Make Personalization Model Slim and Smart" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="SlimPer: Make Personalization Model Slim and Smart 搜广推与 LLM 应用 Meta Platforms, Inc. 2026-07-14 SlimPer 每层用固定槽位的 user-item 知识库查询用户 token 池，执行 Select–Match–Refine。用户池保持可读，精炼层之间只传播小知识库；输入编码仍可带局部上下文。 本地只在短历史 MovieLens 上验证缩小机制；NDCG@10 +1.29% 仅为 seed 42 的 smoke，未实测生产 QPS 或显存。ROO 共享用户编码，候选相关知识库仍逐候选更新。 为什么用户 tokens 能共享，但 knowledge base 的更新结果不能全部共享？ ranking long-sequence serving-efficiency 搜广推 用户历史与排序骨干 SlimPer每层都读取长历史，为什么还能只保留固定大小的knowledge base？ 被反复更新的是少量候选相关知识槽，而原始用户token作为只读证据被重新访问。Select取出相关证据，Match与知识模板显式比较，Refine再更新槽位；层间无需传播全部历史隐藏状态。共享的是用户编码，候选相关knowledge base仍分别演化，并不是所有候选共用一个最终兴趣向量。 示意：同一份购买记录可供鞋和相机两个候选共读，但两组小知识槽分别整理尺寸需求和摄影兴趣，不能把鞋候选更新过的槽直接给相机。 2026-10-27">
@@ -1323,7 +1325,7 @@ hide:
 <p><strong>答案：</strong>被反复更新的是少量候选相关知识槽，而原始用户token作为只读证据被重新访问。Select取出相关证据，Match与知识模板显式比较，Refine再更新槽位；层间无需传播全部历史隐藏状态。共享的是用户编码，候选相关knowledge base仍分别演化，并不是所有候选共用一个最终兴趣向量。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>同一份购买记录可供鞋和相机两个候选共读，但两组小知识槽分别整理尺寸需求和摄影兴趣，不能把鞋候选更新过的槽直接给相机。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-4a13e5753d9c783b">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="#qa-4a13e5753d9c783b">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:slimper" data-paper-title="SlimPer: Make Personalization Model Slim and Smart" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="SlimPer: Make Personalization Model Slim and Smart 搜广推与 LLM 应用 Meta Platforms, Inc. 2026-07-14 SlimPer 每层用固定槽位的 user-item 知识库查询用户 token 池，执行 Select–Match–Refine。用户池保持可读，精炼层之间只传播小知识库；输入编码仍可带局部上下文。 本地只在短历史 MovieLens 上验证缩小机制；NDCG@10 +1.29% 仅为 seed 42 的 smoke，未实测生产 QPS 或显存。ROO 共享用户编码，候选相关知识库仍逐候选更新。 为什么用户 tokens 能共享，但 knowledge base 的更新结果不能全部共享？ ranking long-sequence serving-efficiency 搜广推 用户历史与排序骨干 SlimPer 已经用 attention 选取证据，为什么还要与 knowledge templates 显式点积匹配？ Select 用当前知识库生成查询，得到少量被聚合的用户证据，回答“该取哪些信息”；Match 再把这些证据与同一知识库生成的多个模板比较，形成查询数乘模板数的相关性矩阵。Refine 利用这些显式关系更新知识，而非把聚合向量直接当最终兴趣。两步把证据检索与多方面相关性判断分开。 示意：面对跑鞋候选，Select 找到用户跑步距离与尺码相关行为；Match 再分别比较舒适度、用途等模板，更新知识槽。找到证据不等于已经判断它支持候选的哪个方面。 2026-10-27">
@@ -1336,7 +1338,7 @@ hide:
 <p><strong>答案：</strong>Select 用当前知识库生成查询，得到少量被聚合的用户证据，回答“该取哪些信息”；Match 再把这些证据与同一知识库生成的多个模板比较，形成查询数乘模板数的相关性矩阵。Refine 利用这些显式关系更新知识，而非把聚合向量直接当最终兴趣。两步把证据检索与多方面相关性判断分开。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>面对跑鞋候选，Select 找到用户跑步距离与尺码相关行为；Match 再分别比较舒适度、用途等模板，更新知识槽。找到证据不等于已经判断它支持候选的哪个方面。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-c8469615c85e200f">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="#qa-c8469615c85e200f">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:slimper" data-paper-title="SlimPer: Make Personalization Model Slim and Smart" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="SlimPer: Make Personalization Model Slim and Smart 搜广推与 LLM 应用 Meta Platforms, Inc. 2026-07-14 SlimPer 每层用固定槽位的 user-item 知识库查询用户 token 池，执行 Select–Match–Refine。用户池保持可读，精炼层之间只传播小知识库；输入编码仍可带局部上下文。 本地只在短历史 MovieLens 上验证缩小机制；NDCG@10 +1.29% 仅为 seed 42 的 smoke，未实测生产 QPS 或显存。ROO 共享用户编码，候选相关知识库仍逐候选更新。 为什么用户 tokens 能共享，但 knowledge base 的更新结果不能全部共享？ ranking long-sequence serving-efficiency 搜广推 用户历史与排序骨干 SlimPer与HSTU或LONGER比较时，为什么不能只把它当序列encoder？ SlimPer面向user-item relevance，KB还接收item与cross特征，每层Select–Match–Refine直接形成个性化排序状态。比较需包含候选交互与任务头，不能只拿一个用户序列向量排同协议胜负。 例如同一长历史面对两个候选可有不同知识库，不能只与候选无关encoder输出硬比。 2026-10-27">
@@ -1349,7 +1351,7 @@ hide:
 <p><strong>答案：</strong>SlimPer面向user-item relevance，KB还接收item与cross特征，每层Select–Match–Refine直接形成个性化排序状态。比较需包含候选交互与任务头，不能只拿一个用户序列向量排同协议胜负。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>例如同一长历史面对两个候选可有不同知识库，不能只与候选无关encoder输出硬比。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-85f55baa2ea8d44b">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="#qa-85f55baa2ea8d44b">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:slimper" data-paper-title="SlimPer: Make Personalization Model Slim and Smart" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="SlimPer: Make Personalization Model Slim and Smart 搜广推与 LLM 应用 Meta Platforms, Inc. 2026-07-14 SlimPer 每层用固定槽位的 user-item 知识库查询用户 token 池，执行 Select–Match–Refine。用户池保持可读，精炼层之间只传播小知识库；输入编码仍可带局部上下文。 本地只在短历史 MovieLens 上验证缩小机制；NDCG@10 +1.29% 仅为 seed 42 的 smoke，未实测生产 QPS 或显存。ROO 共享用户编码，候选相关知识库仍逐候选更新。 为什么用户 tokens 能共享，但 knowledge base 的更新结果不能全部共享？ ranking long-sequence serving-efficiency 搜广推 用户历史与排序骨干 SlimPer固定KB后是否可以每层不再读取长历史？ 不可以，每层仍查询共享原始tokens；省的是逐层更新N个历史状态，计算仍有KN访问。当前短MovieLens、AdamW和解析元素统计不代表生产长序列QPS或Shampoo实验。 例如KB只有少量槽，也必须再次看原证据，不能把它误写为一次压缩后彻底丢历史。 2026-10-27">
@@ -1362,7 +1364,7 @@ hide:
 <p><strong>答案：</strong>不可以，每层仍查询共享原始tokens；省的是逐层更新N个历史状态，计算仍有KN访问。当前短MovieLens、AdamW和解析元素统计不代表生产长序列QPS或Shampoo实验。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>例如KB只有少量槽，也必须再次看原证据，不能把它误写为一次压缩后彻底丢历史。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-8b4dfeda1146dd5b">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.12281">原论文</a> · <a href="../../../../reproductions/2607.12281-slimper/">实现解读</a> · <a href="#qa-8b4dfeda1146dd5b">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:poem" data-paper-title="POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation 搜广推与 LLM 应用 Kuaishou 2026-06-29 把当前请求多个排序目标产生的相对次序转成偏序信号，动态构造比纯时间序更贴近实时兴趣的训练序列。 Fidelity: 核心机制复现。本地代码执行论文最有辨识度、可由公开数据验证的机制；私有数据、生产模型与服务栈明确列为边界。本地使用 MovieLens-1M 的公开子集及可审计代理目标，不能复现论文公司的私有日志、线上分桶、生产模型规模和 serving 栈。因此本页只解释为核心机制级验证，不宣称复现原文绝对指标或线上增益。本地对照口径：同一全目录协议下，基线 NDCG@10 为 0.05401，实验组 POEM 为 0.05009，相对变化 -7.25%。这是公开代理任务的负结果，生产线上 lift 的外推不适用。  sequential-recommendation partial-order real-time 搜广推 用户历史与排序骨干 POEM 使用的“名次”与 CTR、GMV 原始数值有何区别？ 名次保留同一目标内谁排前谁排后，不保留原始量纲和差距大小，因此可将不同目标的相对顺序转成比较证据。它也会丢失价值幅度：一元和百元的差别不能仅由先后表示。理解这个信息损失，才不会把偏序信号当作所有目标数值的等价替身。 示意：甲点击率只略高于乙，却交易额低很多，两项名次各提供一个方向；名次本身没有告诉模型“略高”与“低很多”的幅度差异。 2026-10-27">
@@ -3019,7 +3021,7 @@ hide:
 <p><strong>答案：</strong>替换的是异构字段 feature interaction，输入的行为序列可先经独立序列模块处理，该模块不必去掉 attention。TokenMix 将字段通道重排后交给独立 FFN 学关系。将论文称为整个系统完全无注意力会忽略前置序列建模和特征来源。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>历史先用序列注意力提取摄影兴趣，再与价格、候选字段进入 RankMixer；字段交叉无 QK 注意力，不代表第一步也被禁止。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="../../../002-rankmixer-tokenmix/">阅读精选对比</a> · <a href="#qa-558c5d17470ec022">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="#qa-558c5d17470ec022">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rankmixer" data-paper-title="RankMixer: Scaling Up Ranking Models in Industrial Recommenders" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="RankMixer: Scaling Up Ranking Models in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-07-21 RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。 本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。 TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？  搜广推 用户历史与排序骨干 固定TokenMix没有学习权重，为什么后面的独立FFN仍能学到跨字段交互？ TokenMix先按head切开每个输入token，再把各输入的同号片段拼成新token，让不同字段的信号进入同一个非线性FFN。学习发生在混合后的专属变换中，而非动态相似度权重；原文取head数等于token数并要求维度可整除。它替换字段交互，不意味着序列模块也应取消attention。 示意：用户、商品和场景各拆三块，同号块被送到一起；FFN可联合判断其中的年龄、品类和时段关系，固定搬运本身不需要先计算相似度。 2026-10-27">
@@ -3032,7 +3034,7 @@ hide:
 <p><strong>答案：</strong>TokenMix先按head切开每个输入token，再把各输入的同号片段拼成新token，让不同字段的信号进入同一个非线性FFN。学习发生在混合后的专属变换中，而非动态相似度权重；原文取head数等于token数并要求维度可整除。它替换字段交互，不意味着序列模块也应取消attention。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>用户、商品和场景各拆三块，同号块被送到一起；FFN可联合判断其中的年龄、品类和时段关系，固定搬运本身不需要先计算相似度。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="../../../002-rankmixer-tokenmix/">阅读精选对比</a> · <a href="#qa-a18a983529fe37d7">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="#qa-a18a983529fe37d7">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rankmixer" data-paper-title="RankMixer: Scaling Up Ranking Models in Industrial Recommenders" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="RankMixer: Scaling Up Ranking Models in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-07-21 RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。 本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。 TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？  搜广推 用户历史与排序骨干 RankMixer 的 ReLU 路由和双路由 DTSI 分别解决什么问题，为什么只做稀疏 top-k 不够？ ReLU 加稀疏正则允许不同 token 激活不同数量专家，处理固定 top-k 分配预算过于僵硬的问题。DTSI 另设训练与推理路由，稀疏正则只加在推理路由上，使专家训练不因稀疏选择长期饥饿。两者分别控制动态激活和专家训练覆盖；本地稀疏路径尚不能视作原文双路由方案的等价验证。 示意：信息复杂的 token 可用更多专家，简单 token 少用；训练时仍给较少被选专家足够学习机会。若从头只更新固定少数专家，其余专家即使参数很多也可能一直没有学好。 2026-10-27">
@@ -3045,7 +3047,7 @@ hide:
 <p><strong>答案：</strong>ReLU 加稀疏正则允许不同 token 激活不同数量专家，处理固定 top-k 分配预算过于僵硬的问题。DTSI 另设训练与推理路由，稀疏正则只加在推理路由上，使专家训练不因稀疏选择长期饥饿。两者分别控制动态激活和专家训练覆盖；本地稀疏路径尚不能视作原文双路由方案的等价验证。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>信息复杂的 token 可用更多专家，简单 token 少用；训练时仍给较少被选专家足够学习机会。若从头只更新固定少数专家，其余专家即使参数很多也可能一直没有学好。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="../../../002-rankmixer-tokenmix/">阅读精选对比</a> · <a href="#qa-473b102f64b8ecd6">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="#qa-473b102f64b8ecd6">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rankmixer" data-paper-title="RankMixer: Scaling Up Ranking Models in Industrial Recommenders" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="RankMixer: Scaling Up Ranking Models in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-07-21 RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。 本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。 TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？  搜广推 用户历史与排序骨干 RankMixer 本地 Dense 对 Shared FFN 的大提升，为什么不能全归无参数 TokenMix？ 两组本来都执行 TokenMix，主要差异含共享与混合 token 专属 FFN，并且参数量明显不同。比较支持该缩比配置变化，不能隔离重排本身；稀疏组又未追平 dense。公平结论应同时说明预算、头部偏置与 sparse 差距。 示意：两辆车都有同样传动器，换更大独立引擎后提速，不能全说传动器发明有效；本地数值也不能替原文 MFU 与生产 A/B。 2026-10-27">
@@ -3058,7 +3060,7 @@ hide:
 <p><strong>答案：</strong>两组本来都执行 TokenMix，主要差异含共享与混合 token 专属 FFN，并且参数量明显不同。比较支持该缩比配置变化，不能隔离重排本身；稀疏组又未追平 dense。公平结论应同时说明预算、头部偏置与 sparse 差距。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>两辆车都有同样传动器，换更大独立引擎后提速，不能全说传动器发明有效；本地数值也不能替原文 MFU 与生产 A/B。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="../../../002-rankmixer-tokenmix/">阅读精选对比</a> · <a href="#qa-603d4772b072a0eb">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="#qa-603d4772b072a0eb">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rankmixer" data-paper-title="RankMixer: Scaling Up Ranking Models in Industrial Recommenders" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="RankMixer: Scaling Up Ranking Models in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-07-21 RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。 本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。 TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？  搜广推 用户历史与排序骨干 RankMixer 为什么设置 head 数 H 等于 token 数 T，并要求隐藏维度可整除？ 每个输入 token 被等分为 H 个长度 D/H 的片段，混合后得到 H 个长度 TD/H 的新 token。取 H=T 才恢复 T×D 形状，能与原输入直接做残差相加；D 也必须能被 H 整除。这里是张量布局条件，不是注意力头的语义约束，随意换 token 数却保留原 reshape 会改变或破坏结构。 示意：四个64维 token 各拆四份，每份16维；同号四份拼接后仍是四个64维 token。若改成三个 head，64无法等分，原样重排和残差就不成立。 2026-10-27">
@@ -3071,7 +3073,7 @@ hide:
 <p><strong>答案：</strong>每个输入 token 被等分为 H 个长度 D/H 的片段，混合后得到 H 个长度 TD/H 的新 token。取 H=T 才恢复 T×D 形状，能与原输入直接做残差相加；D 也必须能被 H 整除。这里是张量布局条件，不是注意力头的语义约束，随意换 token 数却保留原 reshape 会改变或破坏结构。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>四个64维 token 各拆四份，每份16维；同号四份拼接后仍是四个64维 token。若改成三个 head，64无法等分，原样重排和残差就不成立。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="../../../002-rankmixer-tokenmix/">阅读精选对比</a> · <a href="#qa-67c000ac06ff074b">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="#qa-67c000ac06ff074b">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:rankmixer" data-paper-title="RankMixer: Scaling Up Ranking Models in Industrial Recommenders" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="RankMixer: Scaling Up Ranking Models in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-07-21 RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。 本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。 TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？  搜广推 用户历史与排序骨干 RankMixer 的 per-token FFN 参数是对应原字段还是 TokenMix 后的位置？ FFN 接收的是重排后 token，每个位置含所有原 token 的同号 head，因此专属参数服务混合子空间，而非永远一套只管年龄、一套只管价格。输入字段 token、head 和输出位置需正确对应；旧字段名称不能直接解释所有深层专家语义。 示意：四字段各取第一片拼成新 token，一号 FFN同时看四字段片段；说它只处理第一个原字段，就误读了真正信息流。 2026-10-27">
@@ -3084,7 +3086,7 @@ hide:
 <p><strong>答案：</strong>FFN 接收的是重排后 token，每个位置含所有原 token 的同号 head，因此专属参数服务混合子空间，而非永远一套只管年龄、一套只管价格。输入字段 token、head 和输出位置需正确对应；旧字段名称不能直接解释所有深层专家语义。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>四字段各取第一片拼成新 token，一号 FFN同时看四字段片段；说它只处理第一个原字段，就误读了真正信息流。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="../../../002-rankmixer-tokenmix/">阅读精选对比</a> · <a href="#qa-ad1e554a4b682966">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2507.15551">原论文</a> · <a href="../../../../reproductions/2507.15551-rankmixer/">实现解读</a> · <a href="#qa-ad1e554a4b682966">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pinfm" data-paper-title="PinFM: Foundation Model for User Activity Sequences at a Billion-scale Visual Discovery Platform" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="PinFM: Foundation Model for User Activity Sequences at a Billion-scale Visual Discovery Platform 搜广推与 LLM 应用 Pinterest 2025-07-17 PinFM 把“先在跨场景用户行为上预训练，再接入各排序模型微调”的 Foundation Model 范式带到工业推荐。decoder-only backbone 学习 next/multi/future token；下游把候选追加到用户序列做 early fusion。DCAT 利用同一请求的候选共享用户历史，把 context self-attention 只算一次，然后让候选对缓存的 context KV 做 cross-attention。 保真度：核心机制复现。保真度：核心机制复现。NTL/MTL/FTL 对比预训练、预训练后下游微调、candidate early fusion、Candidate ID Randomization、backbone 低学习率和 DCAT 均实际执行；省略 Pinterest 多 action/surface 语料、fresh-item age dropout、分布式 20B embedding、int4 与 Triton kernel。本地对照口径：基线是 scratch DCAT；实验组是预训练后微调的 PinFM；   搜广推 用户历史与排序骨干 PinFM 的 next、multi、future token 目标为什么共同用于用户基础表征？ 紧邻下一项、未来窗口与从指定位置看后续分别提供不同时间粒度监督，减少只记最近行为的局限，再迁到各排序任务。辅助未来属于训练目标，不可提前输入。跨场景预训也可能负迁移，不能由基础模型称谓预设所有场景改善。 示意：下一次点击教即时意图，窗口多个内容教并存兴趣，较远目标补长期方向；三类标签都只用于训练，线上仍只读已发生行为。 2026-10-27">
@@ -3257,7 +3259,7 @@ hide:
 <p><strong>答案：</strong>global 是可汇聚全局信息的角色，可包含 CLS、用户及目标相关字段，是否公共取决于依赖。首层短查询读取长 K/V 后输出随查询长度传播，目标相关 global 仍会逐候选变化。不能因名称里有 global 就把所有状态共享。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>用户 ID token 可公共，商品价格形成的 global token 则属于当前候选；两者都能参与全局读取，却不能一概放入同一跨候选缓存。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-5b0338092be4725e">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="#qa-5b0338092be4725e">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:longer" data-paper-title="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-05-07 LONGER 先以 Token Merge 合并相邻行为，首层用少量 Query 读取长 K/V，后续沿短序列继续 self-attention。学习重点是区分合并输入和压缩查询这两步。 当前本地 encode 拼接 global/merged/recent 后做单层 self-attention，尚缺论文的首层短 Q/长 K/V hybrid attention 路径和 causal mask。历史实验不作为该核心路径或生产缓存的验证。 首层之后，模型还能否直接重新读取完整长 K/V？  搜广推 用户历史与排序骨干 LONGER把长历史留给K/V后，后续层还要重复更新整段历史吗？ 论文首层用global与近期token组成较短Q，读取合并后的长历史K/V；输出长度跟Q走，后续层只在这组短状态上做self-attention。压缩因此发生在层间传播状态，而非先完全截掉远期证据。本地同名实现尚未完整保留这条首层路径，历史指标不能证明它已被验证。 示意：长历史像一本资料册，首层让几张近期问题卡查阅全册；后续只反复整理这些问题卡，而不是每层重新改写整本资料册。 2026-10-27">
@@ -3270,7 +3272,7 @@ hide:
 <p><strong>答案：</strong>论文首层用global与近期token组成较短Q，读取合并后的长历史K/V；输出长度跟Q走，后续层只在这组短状态上做self-attention。压缩因此发生在层间传播状态，而非先完全截掉远期证据。本地同名实现尚未完整保留这条首层路径，历史指标不能证明它已被验证。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>长历史像一本资料册，首层让几张近期问题卡查阅全册；后续只反复整理这些问题卡，而不是每层重新改写整本资料册。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-b94e636f79ea884b">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="#qa-b94e636f79ea884b">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:longer" data-paper-title="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-05-07 LONGER 先以 Token Merge 合并相邻行为，首层用少量 Query 读取长 K/V，后续沿短序列继续 self-attention。学习重点是区分合并输入和压缩查询这两步。 当前本地 encode 拼接 global/merged/recent 后做单层 self-attention，尚缺论文的首层短 Q/长 K/V hybrid attention 路径和 causal mask。历史实验不作为该核心路径或生产缓存的验证。 首层之后，模型还能否直接重新读取完整长 K/V？  搜广推 用户历史与排序骨干 LONGER 与先按候选取 Top-K 历史再精编，相比在哪一步压缩信息？ 两阶段检索先删未选事件，后续无法再读；LONGER 首层让短 query 访问合并后的长 K/V，再只传播短输出，保留更广一次取证机会。合并本身仍有信息取舍，不是原始全史完全无损。来源本地首层路径未完整保真，历史指标不能证明该区别已验证。 示意：Top-K 先把资料册撕到十页再读，LONGER 更像几张问题卡先翻阅较完整合并资料，再把答案卡交后层；合并资料也可能缺细节。 2026-10-27">
@@ -3283,7 +3285,7 @@ hide:
 <p><strong>答案：</strong>两阶段检索先删未选事件，后续无法再读；LONGER 首层让短 query 访问合并后的长 K/V，再只传播短输出，保留更广一次取证机会。合并本身仍有信息取舍，不是原始全史完全无损。来源本地首层路径未完整保真，历史指标不能证明该区别已验证。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>Top-K 先把资料册撕到十页再读，LONGER 更像几张问题卡先翻阅较完整合并资料，再把答案卡交后层；合并资料也可能缺细节。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-5e49e56233e457f1">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="#qa-5e49e56233e457f1">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:longer" data-paper-title="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-05-07 LONGER 先以 Token Merge 合并相邻行为，首层用少量 Query 读取长 K/V，后续沿短序列继续 self-attention。学习重点是区分合并输入和压缩查询这两步。 当前本地 encode 拼接 global/merged/recent 后做单层 self-attention，尚缺论文的首层短 Q/长 K/V hybrid attention 路径和 causal mask。历史实验不作为该核心路径或生产缓存的验证。 首层之后，模型还能否直接重新读取完整长 K/V？  搜广推 用户历史与排序骨干 LONGER 每 K 个 token 合并一次，为什么 K 更大不一定更省总 FLOPs？ 原文§3.4同时缩短序列并增宽合并表示：总 FLOPs 比例含随 K 增长的投影项和随 K 下降的注意力项。因此合并减少位置数，却会提高通道变换与参数成本，存在平衡点。InnerTrans 还用于补足组内交互；不能把这套设计等同于固定维度均值池化，也不能断言压缩越强效果越好。 示意：四条行为拼成一个更宽 token，位置更少但后续矩阵更大；再合并到八条可能让投影成本反弹。像减少箱子数量，却把每箱变得更大更难搬。 2026-10-27">
@@ -3296,7 +3298,7 @@ hide:
 <p><strong>答案：</strong>原文§3.4同时缩短序列并增宽合并表示：总 FLOPs 比例含随 K 增长的投影项和随 K 下降的注意力项。因此合并减少位置数，却会提高通道变换与参数成本，存在平衡点。InnerTrans 还用于补足组内交互；不能把这套设计等同于固定维度均值池化，也不能断言压缩越强效果越好。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>四条行为拼成一个更宽 token，位置更少但后续矩阵更大；再合并到八条可能让投影成本反弹。像减少箱子数量，却把每箱变得更大更难搬。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-f90aa5aa39428720">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="#qa-f90aa5aa39428720">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:longer" data-paper-title="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-05-07 LONGER 先以 Token Merge 合并相邻行为，首层用少量 Query 读取长 K/V，后续沿短序列继续 self-attention。学习重点是区分合并输入和压缩查询这两步。 当前本地 encode 拼接 global/merged/recent 后做单层 self-attention，尚缺论文的首层短 Q/长 K/V hybrid attention 路径和 causal mask。历史实验不作为该核心路径或生产缓存的验证。 首层之后，模型还能否直接重新读取完整长 K/V？  搜广推 用户历史与排序骨干 LONGER 的 global token 可含候选信息，为什么仍能使用用户 KV cache？ 原文§3.5.2与§3.6.3用掩码确保用户序列不读取候选特有 global token，用户 K/V 才能先计算并跨候选复用。候选 global token 再与缓存历史交互，相关输出仍逐候选生成。global 代表可汇聚全局信息的角色，不代表所有 global token 都候选无关；缓存资格取决于实际依赖路径。 示意：两件商品共用用户浏览序列 K/V，但各有自己的候选 global token 查询历史。若先让用户序列吸收了商品甲信息，再给商品乙复用，就破坏了共享条件。 2026-10-27">
@@ -3309,7 +3311,7 @@ hide:
 <p><strong>答案：</strong>原文§3.5.2与§3.6.3用掩码确保用户序列不读取候选特有 global token，用户 K/V 才能先计算并跨候选复用。候选 global token 再与缓存历史交互，相关输出仍逐候选生成。global 代表可汇聚全局信息的角色，不代表所有 global token 都候选无关；缓存资格取决于实际依赖路径。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>两件商品共用用户浏览序列 K/V，但各有自己的候选 global token 查询历史。若先让用户序列吸收了商品甲信息，再给商品乙复用，就破坏了共享条件。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-906a6ef0a4addaf4">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="#qa-906a6ef0a4addaf4">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:longer" data-paper-title="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="LONGER: Scaling Up Long Sequence Modeling in Industrial Recommenders 搜广推与 LLM 应用 ByteDance / Douyin 2025-05-07 LONGER 先以 Token Merge 合并相邻行为，首层用少量 Query 读取长 K/V，后续沿短序列继续 self-attention。学习重点是区分合并输入和压缩查询这两步。 当前本地 encode 拼接 global/merged/recent 后做单层 self-attention，尚缺论文的首层短 Q/长 K/V hybrid attention 路径和 causal mask。历史实验不作为该核心路径或生产缓存的验证。 首层之后，模型还能否直接重新读取完整长 K/V？  搜广推 用户历史与排序骨干 LONGER 代码验收为什么要同时检查第一层 Q 长度与后续层状态长度？ 定义性结构是首层 global/recent 短 Q 对长 K/V，输出长度随 Q，后层 self-attention 只接这份短状态。若把 merged、global、recent 全部拼接后每层自注意力，虽名字相同却是另一信息流。应先检查真实张量与掩码，再解释指标，不用旧 README 声称代替代码事实。 示意：长 K/V 五百位置、Q 一百位置，首层输出应一百；若第二层仍接六百多位置，就没有执行预期的短查询传播，成本结论也随之改变。 2026-10-27">
@@ -3322,7 +3324,7 @@ hide:
 <p><strong>答案：</strong>定义性结构是首层 global/recent 短 Q 对长 K/V，输出长度随 Q，后层 self-attention 只接这份短状态。若把 merged、global、recent 全部拼接后每层自注意力，虽名字相同却是另一信息流。应先检查真实张量与掩码，再解释指标，不用旧 README 声称代替代码事实。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>长 K/V 五百位置、Q 一百位置，首层输出应一百；若第二层仍接六百多位置，就没有执行预期的短查询传播，成本结论也随之改变。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-1fb09578a44894ee">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2505.04421">原论文</a> · <a href="../../../../reproductions/2505.04421-longer/">实现解读</a> · <a href="#qa-1fb09578a44894ee">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:fuxi-alpha" data-paper-title="FuXi-α: Scaling Recommendation Model with Feature Interaction Enhanced Transformer" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="FuXi-α: Scaling Recommendation Model with Feature Interaction Enhanced Transformer 搜广推与 LLM 应用 Huawei / USTC 2025-02-05 常规推荐 Transformer 扩参时容易受浅层特征交互限制。FuXi-α 用多个自适应交互通道建模不同关系，再以 multi-stage FFN 逐级融合。 Fidelity: 核心机制复现。实际执行时间、语义和流行度多通道注意力及分阶段交互门控。本地是小型数值通道实现，不包含论文十亿级 scaling、华为音乐私有连续特征与分布式训练。本地对照口径：相对单通道注意力基线，实验组 NDCG@10 -4.25%。  ranking transformer feature-interaction scaling 搜广推 用户历史与排序骨干 FuXi-α 为什么认为特征交互通道需要分工？ 异构字段之间包含多种关系，单一交互空间可能只学到最强模式，扩宽未必让弱关系出现。多个自适应通道分别建模，再由多阶段 FFN 融合，让网络有机会保留不同结构。通道数量不是语义多样性的保证，仍可能学成重复表示。 示意：用户与商品匹配、场景与价格关系可走不同通道；如果三个通道最后都只看热门度，增加通道也没有得到互补知识。 2026-10-27">
@@ -3495,7 +3497,7 @@ hide:
 <p><strong>答案：</strong>会。HSTU 在有效输入窗口内逐层更新 token 状态，每个位置可聚合此前可见历史；较晚行为因而能结合更早上下文形成新表示。排序时目标 token 再读取这些状态，保留目标相关交互。因果掩码限制的是可见方向，不是禁止历史之间建模；窗口外未输入的事件也不会自动进入计算。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>先浏览相机再看镜头，镜头位置的状态可结合相机背景；候选三脚架读取的是这类已带上下文的历史状态，而不只是互不交流的原始物品向量。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-6d826e4c63d0f978">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="#qa-6d826e4c63d0f978">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:hstu" data-paper-title="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations 搜广推与 LLM 应用 Meta 2024-02-27 HSTU 在输入窗口内逐层更新历史 token，用因果交互建模行为之间的依赖。学习重点是把历史首算成本与 M-FALCON 缓存后的多候选增量成本分开。 保真度：核心机制复现。本地为核心层与 all-position 训练的缩小实现，未复刻异构 action/time、Stochastic Length 或 M-FALCON。MovieLens-100K 的三 seed 结果仅适用于匹配 SASRec 的本地协议，不能外推到工业系统。 有 M-FALCON 缓存后，哪些历史计算可以共享，哪些候选路径仍要重算？  搜广推 用户历史与排序骨干 HSTU 在 ranking 与 retrieval 中预测的对象为什么不同？ 检索预测下一相关物品，排序则需要给定目标后预测动作；原文将 item 与 action 交错，使候选能及早读取历史并输出反馈概率。两者可共用 transduction 思想，却不能把 next-item 全库指标当作完整多任务 ranking 验证。 示意：先猜用户会看哪部电影是检索，已给电影后猜点击或长看是排序；后一任务需要候选参与，不能只缓存一个最终物品分布便完成。 2026-10-27">
@@ -3508,7 +3510,7 @@ hide:
 <p><strong>答案：</strong>检索预测下一相关物品，排序则需要给定目标后预测动作；原文将 item 与 action 交错，使候选能及早读取历史并输出反馈概率。两者可共用 transduction 思想，却不能把 next-item 全库指标当作完整多任务 ranking 验证。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>先猜用户会看哪部电影是检索，已给电影后猜点击或长看是排序；后一任务需要候选参与，不能只缓存一个最终物品分布便完成。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-defbb4068319dd08">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="#qa-defbb4068319dd08">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:hstu" data-paper-title="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations 搜广推与 LLM 应用 Meta 2024-02-27 HSTU 在输入窗口内逐层更新历史 token，用因果交互建模行为之间的依赖。学习重点是把历史首算成本与 M-FALCON 缓存后的多候选增量成本分开。 保真度：核心机制复现。本地为核心层与 all-position 训练的缩小实现，未复刻异构 action/time、Stochastic Length 或 M-FALCON。MovieLens-100K 的三 seed 结果仅适用于匹配 SASRec 的本地协议，不能外推到工业系统。 有 M-FALCON 缓存后，哪些历史计算可以共享，哪些候选路径仍要重算？  搜广推 用户历史与排序骨干 HSTU为什么去掉softmax，却还要在聚合后归一化并加U-gate？ softmax把历史权重归一成总和固定的分布，容易弱化相关行为数量携带的偏好强度。HSTU用逐点SiLU聚合保留这种变化，再靠聚合后归一化稳定数值；U分支按当前token调制聚合结果。它仍在输入窗口内做因果历史交互，并没有因此变成线性复杂度模型。 示意：两位用户分别出现一次和十次同类行为，归一化平均可能看起来相似；逐点聚合允许区分强度，再由门控决定向下一层传多少信息。 2026-10-27">
@@ -3521,7 +3523,7 @@ hide:
 <p><strong>答案：</strong>softmax把历史权重归一成总和固定的分布，容易弱化相关行为数量携带的偏好强度。HSTU用逐点SiLU聚合保留这种变化，再靠聚合后归一化稳定数值；U分支按当前token调制聚合结果。它仍在输入窗口内做因果历史交互，并没有因此变成线性复杂度模型。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>两位用户分别出现一次和十次同类行为，归一化平均可能看起来相似；逐点聚合允许区分强度，再由门控决定向下一层传多少信息。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-d1b7f594100aaa20">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="#qa-d1b7f594100aaa20">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:hstu" data-paper-title="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations 搜广推与 LLM 应用 Meta 2024-02-27 HSTU 在输入窗口内逐层更新历史 token，用因果交互建模行为之间的依赖。学习重点是把历史首算成本与 M-FALCON 缓存后的多候选增量成本分开。 保真度：核心机制复现。本地为核心层与 all-position 训练的缩小实现，未复刻异构 action/time、Stochastic Length 或 M-FALCON。MovieLens-100K 的三 seed 结果仅适用于匹配 SASRec 的本地协议，不能外推到工业系统。 有 M-FALCON 缓存后，哪些历史计算可以共享，哪些候选路径仍要重算？  搜广推 用户历史与排序骨干 HSTU 与匹配预算 SASRec 的本地负结果，为什么不能解释为工业场景的最终优劣？ 同维度、层数、损失和步数的对照能比较本地 core，但 MovieLens 只有单类评分事件和较短序列，缺少原文异构动作、时间与工业规模。负结果应保留，也不能据它否定论文生产证据；相反生产收益也不能覆盖本地退化。 示意：在短电影序列上 HSTU 不如匹配 SASRec，说明这个预算与数据下未见收益；不能因此断言十万动作排序一定失败，或反用线上数值假装本地成功。 2026-10-27">
@@ -3534,7 +3536,7 @@ hide:
 <p><strong>答案：</strong>同维度、层数、损失和步数的对照能比较本地 core，但 MovieLens 只有单类评分事件和较短序列，缺少原文异构动作、时间与工业规模。负结果应保留，也不能据它否定论文生产证据；相反生产收益也不能覆盖本地退化。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>在短电影序列上 HSTU 不如匹配 SASRec，说明这个预算与数据下未见收益；不能因此断言十万动作排序一定失败，或反用线上数值假装本地成功。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-3b88d0c3b149bbc6">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="#qa-3b88d0c3b149bbc6">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:hstu" data-paper-title="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations 搜广推与 LLM 应用 Meta 2024-02-27 HSTU 在输入窗口内逐层更新历史 token，用因果交互建模行为之间的依赖。学习重点是把历史首算成本与 M-FALCON 缓存后的多候选增量成本分开。 保真度：核心机制复现。本地为核心层与 all-position 训练的缩小实现，未复刻异构 action/time、Stochastic Length 或 M-FALCON。MovieLens-100K 的三 seed 结果仅适用于匹配 SASRec 的本地协议，不能外推到工业系统。 有 M-FALCON 缓存后，哪些历史计算可以共享，哪些候选路径仍要重算？  搜广推 用户历史与排序骨干 M-FALCON 缓存了哪些用户计算，为什么不能把整个 ranking 分数缓存给所有候选？ 原文§3.4与附录H把候选放入隔离的微批，复用各层候选无关历史 K/V；候选之间不互读，各自仍计算投影、目标到历史的交互和输出。缓存摊销历史编码，并未取消目标依赖。跨请求复用还要求历史、特征与模型版本等条件适用；本地 HSTU 没有实现该服务优化。 示意：一千个候选可分批读取同一份历史记忆，但相机和跑鞋各自的查询与分数仍不同。历史新增购买或模型更新后，也不能直接沿用旧缓存假装用户状态未变。 2026-10-27">
@@ -3547,7 +3549,7 @@ hide:
 <p><strong>答案：</strong>原文§3.4与附录H把候选放入隔离的微批，复用各层候选无关历史 K/V；候选之间不互读，各自仍计算投影、目标到历史的交互和输出。缓存摊销历史编码，并未取消目标依赖。跨请求复用还要求历史、特征与模型版本等条件适用；本地 HSTU 没有实现该服务优化。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>一千个候选可分批读取同一份历史记忆，但相机和跑鞋各自的查询与分数仍不同。历史新增购买或模型更新后，也不能直接沿用旧缓存假装用户状态未变。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、本地复现；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-a6dfb7484be36691">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="#qa-a6dfb7484be36691">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:hstu" data-paper-title="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations 搜广推与 LLM 应用 Meta 2024-02-27 HSTU 在输入窗口内逐层更新历史 token，用因果交互建模行为之间的依赖。学习重点是把历史首算成本与 M-FALCON 缓存后的多候选增量成本分开。 保真度：核心机制复现。本地为核心层与 all-position 训练的缩小实现，未复刻异构 action/time、Stochastic Length 或 M-FALCON。MovieLens-100K 的三 seed 结果仅适用于匹配 SASRec 的本地协议，不能外推到工业系统。 有 M-FALCON 缓存后，哪些历史计算可以共享，哪些候选路径仍要重算？  搜广推 用户历史与排序骨干 HSTU 的 all-position 训练如何同时利用多个目标又保持因果性？ 每个有效位置只读取其可见前缀，下一物品作监督，padding 与无效目标不进入 loss；这样一次编码服务多个位置目标而非逐条重算历史。候选 ranking 的动作交错是另一输入契约，本地 next-item 路径不能自动声称已实现所有异构动作任务。 示意：序列甲乙丙可在甲位置预测乙、乙位置预测丙，但甲状态不能读取乙丙；若整条无掩码先编码再预测，多目标训练会泄漏答案。 2026-10-27">
@@ -3560,7 +3562,7 @@ hide:
 <p><strong>答案：</strong>每个有效位置只读取其可见前缀，下一物品作监督，padding 与无效目标不进入 loss；这样一次编码服务多个位置目标而非逐条重算历史。候选 ranking 的动作交错是另一输入契约，本地 next-item 路径不能自动声称已实现所有异构动作任务。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>序列甲乙丙可在甲位置预测乙、乙位置预测丙，但甲状态不能读取乙丙；若整条无掩码先编码再预测，多目标训练会泄漏答案。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="../../../001-hstu-longer-slimper/">阅读精选对比</a> · <a href="#qa-e74368e779e676f8">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2402.17152">原论文</a> · <a href="../../../../reproductions/2402.17152-hstu/">实现解读</a> · <a href="#qa-e74368e779e676f8">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:dcn-v2" data-paper-title="DCN V2: Improved Deep &amp; Cross Network and Practical Lessons for Web-scale Learning to Rank Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/history-ranking-backbones" data-search="DCN V2: Improved Deep &amp; Cross Network and Practical Lessons for Web-scale Learning to Rank Systems 搜广推与 LLM 应用 Google 2020-08-19 DCN-V2 显式构造有界阶数的特征交互，并用低秩矩阵与专家混合降低 web-scale ranking 的参数和计算成本。 Fidelity: 核心机制复现。实现低秩 cross experts、输入相关 gate 与 deep tower。未使用 Google 私有数据和生产级专家规模；结果只验证显式交叉在公开数据上的作用。本地对照口径：基线是 deep-only；实验组是两层低秩 cross experts 与 gate；三 seed NDCG@10 相对 +22.87%。  ranking classic feature-interaction 搜广推 用户历史与排序骨干 DCN-V2 的显式交叉为什么说阶数受层数控制？ 每层把原输入与当前线性变换逐元素相乘，逐层形成更高阶组合，再以残差保留已有阶数。它提供结构可追踪的多项式交互路径，不同于只靠一般 MLP 隐式拟合关系；但实际表达还受矩阵秩、宽度和训练约束。 示意：第一层可产生用户年龄与品类组合，下一层继续乘原特征形成更高阶条件；残差使低阶信号不必在加深后消失。 2026-10-27">
@@ -4012,7 +4014,7 @@ hide:
 
 ## 先读这几篇
 
-先读DIN辨认候选条件化兴趣，再读HSTU理解历史状态如何逐层变化，最后读RankMixer区分字段交互；再看[长历史对比](../../001-hstu-longer-slimper.md)和[RankMixer四行例子](../../002-rankmixer-tokenmix.md)比较信息流，本地结果以各自数据与保真度为限。
+先读 DIN 辨认候选条件化兴趣，再读 HSTU 理解历史状态如何逐层变化，最后读 RankMixer 区分字段交互；再看[本主题精读对比](../../deep-dives/recommendation/history-ranking-backbones.md)，比较 LONGER 的短查询路径与 SlimPer 的固定用户池。本地结果以各自数据与保真度为限。
 
 1. [Deep Interest Network for Click-Through Rate Prediction](../../../reproductions/1706.06978-din/README.md) · [原论文](https://arxiv.org/abs/1706.06978)
 2. [Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations](../../../reproductions/2402.17152-hstu/README.md) · [原论文](https://arxiv.org/abs/2402.17152)

@@ -1,0 +1,1842 @@
+{
+  "schema_version": 1,
+  "theme": "recommendation",
+  "topics": {
+    "retrieval-matching": {
+      "title": "召回覆盖从哪里来：用户表示、正例组织与负例难度",
+      "thesis": "候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。",
+      "updated": "2026-10-27",
+      "axes": [
+        "召回接口：单向量还是多兴趣通道",
+        "正例来自下一行为、旅程还是同请求集合",
+        "负例难度与教师监督如何改变梯度",
+        "固定候选预算及库存/数据替代边界"
+      ],
+      "comparisons": [
+        {
+          "paper": "recommendation:youtube-dnn",
+          "position": "聚合观看历史和上下文，经DNN形成用户向量，以下一视频大规模分类训练，服务时按与视频向量的点积近邻检索。",
+          "tradeoff": "独立物品向量便于索引，单个用户向量需承载多种兴趣；召回阶段仍需与精排分工。本地公开小数据不等于百万级生产索引。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:airbnb-ebr",
+          "position": "仍使用query/item内积双塔，但按搜索、浏览、预订旅程构造正例与hard negatives，并用流量replay对齐首阶段召回。",
+          "tradeoff": "训练标签更贴近市场旅程，实际覆盖还受地理过滤、库存更新和索引影响；本地MovieLens代理不能验证住宿库存约束或线上收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:mima",
+          "position": "causal decoder产生多个兴趣，同请求多正例用一对一最优匹配监督，再以兴趣激活概率校准多通道分数。",
+          "tradeoff": "排他分配抑制所有正例挤到同一兴趣，但依赖真实多正例集合及路由校准；本地相邻行为组替代同请求成交，不能直接证明生产兴趣分解。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:mdcns",
+          "position": "Self、Peer、Teacher多视角在候选池上评分，以模型分歧修正难负例排序，再把Teacher整池软分布蒸馏回Self。",
+          "tradeoff": "比单一高分负例提供更多监督，但难负例仍可能是假负例，分歧也不等于标签真错；需要对齐候选池、采样预算和训练成本。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先判断瓶颈在覆盖、监督还是兴趣坍缩",
+          "body": "YouTube DNN把历史压到一个用户向量，Airbnb EBR保留类似检索接口而重新组织旅程监督；这两者不能仅凭双塔外形判成同一训练问题。MIMA的关键也不只是多输出几个向量，而是同请求多正例的一对一分配，否则多个兴趣仍可能追同一个正例。比较必须固定最终返回预算，才能分清表示改进和检索更多的收益。",
+          "papers": [
+            "recommendation:youtube-dnn",
+            "recommendation:airbnb-ebr",
+            "recommendation:mima"
+          ]
+        },
+        {
+          "title": "难负例与多正例承担不同职责",
+          "body": "MDCNS从未交互候选中寻找模型认为困难且有分歧的负例，让Self接收整池教师信号；MIMA则从真实正例集合学习兴趣分工。把未点击候选一律当负例，或把时间相邻行为自动当同请求互补正例，都会改变监督含义。Airbnb EBR的旅程定义提醒我们：先记录行为阶段和曝光条件，再解释损失变小意味着什么。",
+          "papers": [
+            "recommendation:mdcns",
+            "recommendation:mima",
+            "recommendation:airbnb-ebr"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "more-interests-not-more-budget",
+          "question": "MIMA返回多个兴趣后Recall上升，怎样区分兴趣互补与单纯多取候选？",
+          "answer": "把多个通道合并去重后的总K固定，再与单向量召回比较；检查不同兴趣的正例分配和命中是否互补。MIMA的一对一监督与激活校准才是机制，YouTube DNN的单向量接口是比较起点。若每个兴趣都额外拿K个候选，覆盖上升不能单独归功于兴趣建模。",
+          "example": "示意：跑步与摄影两个通道各取50条，合并后固定100条；应与单通道100条比较，不能与单通道50条比较后宣称兴趣翻倍有效。",
+          "papers": [
+            "recommendation:mima",
+            "recommendation:youtube-dnn"
+          ]
+        },
+        {
+          "id": "hard-negative-is-not-ground-truth",
+          "question": "为什么Airbnb EBR和MDCNS都强调负例，却不能直接把模型最高分的未点击项当最好的负例？",
+          "answer": "Airbnb的难负例要放在搜索旅程和行为阶段中解释，MDCNS再用多视角分歧避免只追Self偏好。未点击可能来自未充分曝光、替代关系或标注缺失；最高分只表示当前模型认为相近，不保证它确实无关。应同时控制假负例、多样性及采样预算。",
+          "example": "示意：用户只预订了一家房，另两家同样合适但已满房。把这两家当绝对无关负例，会把库存结果错误写成语义偏好。",
+          "papers": [
+            "recommendation:airbnb-ebr",
+            "recommendation:mdcns"
+          ]
+        },
+        {
+          "id": "recall-versus-ranking-boundary",
+          "question": "精排更强为什么仍补不回召回漏掉的兴趣，换训练目标又能改变哪一步？",
+          "answer": "精排只在已有候选中排序，无法创造未入池物品。YouTube DNN明确分开召回与精排，MIMA用多正例分工改变哪些兴趣能提出候选，MDCNS改变检索表征接收的负例梯度。三者应分别检查候选覆盖、固定K质量和后续排序，不能只看最终点击就定位瓶颈。",
+          "example": "示意：100个候选全是跑鞋时，精排无法展示相机；多兴趣召回先提名相机，精排才有机会比较它与跑鞋的当前价值。",
+          "papers": [
+            "recommendation:youtube-dnn",
+            "recommendation:mima",
+            "recommendation:mdcns"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "recommendation:airbnb-ebr",
+        "recommendation:allecompanion",
+        "recommendation:asarl",
+        "recommendation:beque",
+        "recommendation:capts",
+        "recommendation:cluster-goobs",
+        "recommendation:core-relevance",
+        "recommendation:crsd",
+        "recommendation:cs3",
+        "recommendation:elise",
+        "recommendation:friend-gnn",
+        "recommendation:genfacet",
+        "recommendation:hap",
+        "recommendation:harness-lm",
+        "recommendation:hill-index",
+        "recommendation:llm-ad-retrieval",
+        "recommendation:mdcns",
+        "recommendation:melo",
+        "recommendation:mesh",
+        "recommendation:mfli",
+        "recommendation:mima",
+        "recommendation:mpformer",
+        "recommendation:muser",
+        "recommendation:next-vlm",
+        "recommendation:oneshot-index",
+        "recommendation:pair",
+        "recommendation:policy-facet",
+        "recommendation:rankgraph2",
+        "recommendation:rptune",
+        "recommendation:setmir",
+        "recommendation:snap-dpa-relevance",
+        "recommendation:spear",
+        "recommendation:toolrec",
+        "recommendation:transretrieval",
+        "recommendation:youtube-dnn",
+        "recommendation:zorro"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较youtube-dnn、airbnb-ebr、mima、mdcns，围绕召回接口：单向量还是多兴趣通道与正例来自下一行为、旅程还是同请求集合建立分析和跨论文问答。",
+          "papers": [
+            "recommendation:airbnb-ebr",
+            "recommendation:allecompanion",
+            "recommendation:asarl",
+            "recommendation:beque",
+            "recommendation:capts",
+            "recommendation:cluster-goobs",
+            "recommendation:core-relevance",
+            "recommendation:crsd",
+            "recommendation:cs3",
+            "recommendation:elise",
+            "recommendation:friend-gnn",
+            "recommendation:genfacet",
+            "recommendation:hap",
+            "recommendation:harness-lm",
+            "recommendation:hill-index",
+            "recommendation:llm-ad-retrieval",
+            "recommendation:mdcns",
+            "recommendation:melo",
+            "recommendation:mesh",
+            "recommendation:mfli",
+            "recommendation:mima",
+            "recommendation:mpformer",
+            "recommendation:muser",
+            "recommendation:next-vlm",
+            "recommendation:oneshot-index",
+            "recommendation:pair",
+            "recommendation:policy-facet",
+            "recommendation:rankgraph2",
+            "recommendation:rptune",
+            "recommendation:setmir",
+            "recommendation:snap-dpa-relevance",
+            "recommendation:spear",
+            "recommendation:toolrec",
+            "recommendation:transretrieval",
+            "recommendation:youtube-dnn",
+            "recommendation:zorro"
+          ],
+          "source_revisions": {
+            "recommendation:airbnb-ebr": "6866a1a66ecb6a16e5a7abb04027dcdea7177e25498bc0e4020b3baaa4c639eb",
+            "recommendation:allecompanion": "5ab00e411b1d23b56bcf5ba51338e1b8edb7e141a1bf7421343814b3738cfd2a",
+            "recommendation:asarl": "fe35b57b72eece05c66d2f295188c96f401adc19fd6a740967b3bb076f7c0151",
+            "recommendation:beque": "12d7b6f1ec21b9e7b0c618c76a05b13f67f7ed8757ca84ad30418a5bbee190fe",
+            "recommendation:capts": "78d2c171e4effebdcec93bfda1b1bf29424b64de27484bb9dccb2c33ad85b9ac",
+            "recommendation:cluster-goobs": "45adef3dc3e7cd7c266632cfef02091f69058c56a232284ecd1af562aadb8a23",
+            "recommendation:core-relevance": "b58ce63f8a5ca1ba459a9c3204caad009071e6b0e77b150bf7cc6347d12abb1f",
+            "recommendation:crsd": "c90a11801ab74fa7759db411c35fa8344a268bf11ef7df7c63c78b242ad481ab",
+            "recommendation:cs3": "3dac867a82e63419c5c8259e26cbf551488d9263873508ebe7d0a33b4544e2f9",
+            "recommendation:elise": "ec459cd30a83a0ac510efa5d748d80951ba3ead30f7437468004533ddd3c4865",
+            "recommendation:friend-gnn": "f50088440252dc943688f6f5b286e12ec53e7572f0c54138641bae7ac7b701ba",
+            "recommendation:genfacet": "9fba5f218ea628c2b429726ce03fd812e1efb09b14becdb2ec2bbf600e71b40a",
+            "recommendation:hap": "4ec750359dc4d37bf5dc48f1a8ecf2aad377bc6d7150fe162eb0c6daeccf4e16",
+            "recommendation:harness-lm": "85223f598b26f4f1cdcf15d9f78919672eb2e8aa00315706029db0394454c281",
+            "recommendation:hill-index": "5bd1536f8df578feb94c2da8ea95057fbef1c1423ab33a475464e92232dda39f",
+            "recommendation:llm-ad-retrieval": "eb25652cba8763e34f620c39e0ca59a4695624e1dd1cb18ee27906b36c6f1f45",
+            "recommendation:mdcns": "a6f5ac3952c80bab7dc3194842f94fd470b1c7b226856ddf16c5df9785cec4e7",
+            "recommendation:melo": "d330d8f5faac74a74748f7a00b328d671a65fee4186aa825637f4cf51d2d3fb5",
+            "recommendation:mesh": "f07420170270d6ebb41f9a1fc23cfcb70c9e0a635202baa05cdd04f4cc53d5cf",
+            "recommendation:mfli": "243b6145bef9e2110f3204de4d45d00c9d6b94d1d91f005b406e5b7b05f1f397",
+            "recommendation:mima": "620b4ce75675c1f267f1b8831632887134916faad549d7095f3b9ee18424c963",
+            "recommendation:mpformer": "6962a5e6c4a969615e7b40f8f75e51ee79b38df20095ab42dbb933aecacf35ed",
+            "recommendation:muser": "6b73d6f1b1132735b434c181db62fb17597029f3a58fcc196633da263a724143",
+            "recommendation:next-vlm": "7ade278bf2de314d5cbe6105509d20c689efd9c23672050765f5acac4c17a8bf",
+            "recommendation:oneshot-index": "28af0cb47aec24e227c8eeb07c71f70a3901cd412d755a18b437d3a5e87cd05a",
+            "recommendation:pair": "6bde51d7b2d54959b9f6342f392e7538de835bf6fb6ee91b1666bc019391fba0",
+            "recommendation:policy-facet": "d8fdae73f2656404b054283d905d9b68b4d797ede07e1d8615ee137d964bf0de",
+            "recommendation:rankgraph2": "5d0e4f13427f15aa7a52978920676e2b8f51a8a123e8f633000f44e1c01f6a18",
+            "recommendation:rptune": "28921b9f8ec97d56b37ce075b29c35b698affa749e9d20863d0e6c7664760c27",
+            "recommendation:setmir": "94fb1f1b39a0bc0a1623ba8fc93af4c680790f0845e78cdfc8586f66bb6fc69f",
+            "recommendation:snap-dpa-relevance": "454d741f9beb3cbc795e5869d151dc68e17f96eb4eb471a865ddb0dfa5dfc82f",
+            "recommendation:spear": "17fced9702b964eb4c5ed24c67c469ca0545cd5aeba1c2ae96a1d69245dfcfd7",
+            "recommendation:toolrec": "4b196e9012a89c2a39e5be587231a350455420c810f71011b4e58c4136b3d1a4",
+            "recommendation:transretrieval": "c4e21e56d78c153b71d44a5b03573aca08fc268363a1e8c5aa12cd4163286902",
+            "recommendation:youtube-dnn": "6fdbc162f51c3c282c0b19893ca9138b7b299fb5c34e21b118524d0311332dc2",
+            "recommendation:zorro": "8a0d47cc26dbfea76c6038b056e5db2d7930234af560e789a8d1ee285e8491ba"
+          }
+        }
+      ]
+    },
+    "content-semantic-ids": {
+      "title": "知识、协同向量与语义码：相同内容怎样进入不同推荐接口？",
+      "thesis": "KAR生成外部知识后适配既有推荐器，NoteLLM用共读监督训练可检索压缩状态，Dual-purpose SID让短码兼顾身份与内容重建，FineSID则保留细粒度token和完整交互骨干做阶段迁移。它们不只是“都用LLM或SID”：对齐信号、压缩对象与下游继承内容各不相同。",
+      "updated": "2026-10-27",
+      "axes": [
+        "输入知识来自生成常识、内容还是交互关系",
+        "传递对象是向量、短码还是完整预测器状态",
+        "内容重建与个性化目标如何共同约束",
+        "离线缓存、冷启动与完整复现边界"
+      ],
+      "comparisons": [
+        {
+          "paper": "recommendation:kar",
+          "position": "分别生成用户偏好推理知识和物品事实知识，以hybrid-expert adapter压缩，再与原ID表示一起送入推荐模型。",
+          "tradeoff": "可预生成知识以移出在线自回归成本，但生成描述不是真实偏好标签，缓存也有刷新与事实核验成本；并非LLM直接在线做全部推荐。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:notellm",
+          "position": "compression prompt把内容压到特殊token状态，GCL用共读关系学习检索空间，CSFT从同一状态生成hashtag/category。",
+          "tradeoff": "协同对比与生成监督共同塑造表示，仍需处理共读关系的曝光偏差；内容相似和行为互补并非天然相同，生成能力也不能只凭检索分数推断。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:dual-sid",
+          "position": "层次SID承载协同身份，并通过SiDec从各层离散码重建内容embedding，供召回、排序和低I/O重建使用。",
+          "tradeoff": "短码与重建降低内容传输需求，也引入量化碰撞和信息瓶颈；重建MSE与最终推荐必须分测。本地genre替代多模态内容，未复刻生产码本与在线重建。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:finesid",
+          "position": "保留多尺度视觉/字段文本token，先训练完整query-item相关性预测器，再保留共享dense、embedding与归一化状态并切换CTR头。",
+          "tradeoff": "迁移对象比单个embedding丰富，但要求阶段一致的骨干和状态管理；不等于只接SID lookup。本库仅方法及线上证据收录，成本过高未实现完整训练。",
+          "sections": [
+            "背景与主要改动",
+            "三阶段结构",
+            "成本判定：不执行复现"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先问传过去的是什么",
+          "body": "KAR传递的是生成知识经adapter得到的特征，NoteLLM传递协同训练过的压缩向量，Dual-purpose SID传递可重建内容的离散身份，FineSID则连交互预测器的共享参数与归一化状态一起迁移。若只给既有CTR模型加一张随机码表，既没有KAR的知识来源，也没有FineSID的阶段继承，不能凭接口同为token就视作等价。",
+          "papers": [
+            "recommendation:kar",
+            "recommendation:notellm",
+            "recommendation:dual-sid",
+            "recommendation:finesid"
+          ]
+        },
+        {
+          "title": "内容保真与推荐相关性需要两把尺",
+          "body": "Dual-purpose SID的内容重建项检验码里能还原多少embedding，NoteLLM的GCL则用共读关系调整哪些内容应相近；二者约束的几何不同。FineSID再用相关性软目标和个性化CTR分阶段训练同一骨干。更低重建误差不自动带来更好的点击排序，LLM说得更像也不等于用户更喜欢。",
+          "papers": [
+            "recommendation:dual-sid",
+            "recommendation:notellm",
+            "recommendation:finesid"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "same-token-different-transfer",
+          "question": "Dual-purpose SID和FineSID都用离散token，为什么不能用同一个SID lookup实验同时证明两篇？",
+          "answer": "Dual-purpose SID要求短码同时服务协同身份与内容重建；FineSID还要求细粒度、多尺度位置保留，并把相关性阶段的完整共享预测器迁移到CTR。单个lookup只能覆盖接口的一小部分，缺少各自重建目标或阶段继承，就没有验证其定义性机制。",
+          "example": "示意：给鞋图分配三个码后能还原大致内容，是一个压缩问题；先学query—鞋图相关性，再继承整套交互网络预测某用户点击，是另一条训练链路。",
+          "papers": [
+            "recommendation:dual-sid",
+            "recommendation:finesid"
+          ]
+        },
+        {
+          "id": "generated-knowledge-not-click-label",
+          "question": "KAR生成的偏好描述为什么不能替代NoteLLM使用的共读监督？",
+          "answer": "KAR提供常识和偏好推理的候选知识，是否有用还要由推荐目标学习；NoteLLM的共读pair来自行为关系，直接约束检索空间。前者可能补足日志没有的语义，也可能生成错误解释；后者有真实交互依据，却受曝光和流行度影响。两种信号可互补，不能互当真值。",
+          "example": "示意：LLM说露营者可能喜欢登山鞋，只是一条知识假设；用户实际常把某双鞋与防水袜一起阅读，则是平台行为关系，二者证据性质不同。",
+          "papers": [
+            "recommendation:kar",
+            "recommendation:notellm"
+          ]
+        },
+        {
+          "id": "reconstruction-versus-preference",
+          "question": "SID重建更准确、文本生成更流畅，为什么推荐NDCG仍可能下降？",
+          "answer": "重建保留内容，CSFT保留生成接口，但排序还需要用户—物品的协同区分。Dual-purpose SID码本可能更偏重内容而牺牲偏好，NoteLLM要靠GCL补充行为几何，FineSID则继续训练个性化CTR。应分别看重建、碰撞、相关性和隔离测试排序，不能把某一辅助目标当最终效果。",
+          "example": "示意：两件外观近似的外套被重建得很准，但一个适合骑行、一个适合通勤；若码没有保留用户群差异，视觉保真并不能保证点击次序正确。",
+          "papers": [
+            "recommendation:dual-sid",
+            "recommendation:notellm",
+            "recommendation:finesid"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "recommendation:adasid",
+        "recommendation:agent-web-rec",
+        "recommendation:akt-rec",
+        "recommendation:atomic-intent",
+        "recommendation:bahe",
+        "recommendation:camie",
+        "recommendation:connectionmind",
+        "recommendation:cross-domain-kd",
+        "recommendation:dme",
+        "recommendation:dos",
+        "recommendation:dual-sid",
+        "recommendation:dynamic-codebook",
+        "recommendation:filterllm",
+        "recommendation:finesid",
+        "recommendation:fluid",
+        "recommendation:g2rec",
+        "recommendation:gala",
+        "recommendation:gatesid",
+        "recommendation:gris",
+        "recommendation:idproxy",
+        "recommendation:kar",
+        "recommendation:kgd",
+        "recommendation:kuafu",
+        "recommendation:l2rec",
+        "recommendation:learn",
+        "recommendation:lsvcr",
+        "recommendation:lum",
+        "recommendation:lwgr",
+        "recommendation:m6rec",
+        "recommendation:marc",
+        "recommendation:mim",
+        "recommendation:mm-llm",
+        "recommendation:mosaic",
+        "recommendation:msd",
+        "recommendation:muchator",
+        "recommendation:music-rationales",
+        "recommendation:netflix-mediafm",
+        "recommendation:notellm",
+        "recommendation:open-web-ufm",
+        "recommendation:pin-scale",
+        "recommendation:pinclip",
+        "recommendation:pinterest-ads-llm",
+        "recommendation:pit",
+        "recommendation:precise",
+        "recommendation:proximity-features",
+        "recommendation:quasid",
+        "recommendation:recap",
+        "recommendation:recgpt-mobile",
+        "recommendation:recgpt-v2",
+        "recommendation:reco-reward",
+        "recommendation:rq-gmm",
+        "recommendation:sarm",
+        "recommendation:saviorrec",
+        "recommendation:seral",
+        "recommendation:sid-coord",
+        "recommendation:sid-topology",
+        "recommendation:sirf",
+        "recommendation:ssrlive",
+        "recommendation:tagllm",
+        "recommendation:tokenminds"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较kar、notellm、dual-sid、finesid，围绕输入知识来自生成常识、内容还是交互关系与传递对象是向量、短码还是完整预测器状态建立分析和跨论文问答。",
+          "papers": [
+            "recommendation:adasid",
+            "recommendation:agent-web-rec",
+            "recommendation:akt-rec",
+            "recommendation:atomic-intent",
+            "recommendation:bahe",
+            "recommendation:camie",
+            "recommendation:connectionmind",
+            "recommendation:cross-domain-kd",
+            "recommendation:dme",
+            "recommendation:dos",
+            "recommendation:dual-sid",
+            "recommendation:dynamic-codebook",
+            "recommendation:filterllm",
+            "recommendation:finesid",
+            "recommendation:fluid",
+            "recommendation:g2rec",
+            "recommendation:gala",
+            "recommendation:gatesid",
+            "recommendation:gris",
+            "recommendation:idproxy",
+            "recommendation:kar",
+            "recommendation:kgd",
+            "recommendation:kuafu",
+            "recommendation:l2rec",
+            "recommendation:learn",
+            "recommendation:lsvcr",
+            "recommendation:lum",
+            "recommendation:lwgr",
+            "recommendation:m6rec",
+            "recommendation:marc",
+            "recommendation:mim",
+            "recommendation:mm-llm",
+            "recommendation:mosaic",
+            "recommendation:msd",
+            "recommendation:muchator",
+            "recommendation:music-rationales",
+            "recommendation:netflix-mediafm",
+            "recommendation:notellm",
+            "recommendation:open-web-ufm",
+            "recommendation:pin-scale",
+            "recommendation:pinclip",
+            "recommendation:pinterest-ads-llm",
+            "recommendation:pit",
+            "recommendation:precise",
+            "recommendation:proximity-features",
+            "recommendation:quasid",
+            "recommendation:recap",
+            "recommendation:recgpt-mobile",
+            "recommendation:recgpt-v2",
+            "recommendation:reco-reward",
+            "recommendation:rq-gmm",
+            "recommendation:sarm",
+            "recommendation:saviorrec",
+            "recommendation:seral",
+            "recommendation:sid-coord",
+            "recommendation:sid-topology",
+            "recommendation:sirf",
+            "recommendation:ssrlive",
+            "recommendation:tagllm",
+            "recommendation:tokenminds"
+          ],
+          "source_revisions": {
+            "recommendation:adasid": "d147d26af5b5918b8b8cdc314404667c1c9cb130bdfa9f9e8a1aa20f9e3a989f",
+            "recommendation:agent-web-rec": "c4a44ce06cea9f8d55ed3c816d8dbd64c37ac897344f47e42b31591afe627bd6",
+            "recommendation:akt-rec": "8c7485cf2b530b205a48fb3e0abf931a51072b6ec453e6fa2a054ac331aa2d5d",
+            "recommendation:atomic-intent": "91bec531538ee394255a2d91e1781f12a0eb34afa5cc0a57b7002c27b0905f00",
+            "recommendation:bahe": "a2ecf8a6abd102e4abb108ab165ade42c1d2e8d854307ccec2e0eff8071ad734",
+            "recommendation:camie": "2fbe32c811c71bdce6fc97e75772b43f22bf46ef5527462cf1202871fde6ca7f",
+            "recommendation:connectionmind": "0ab8986076ce4e923163216aac6f95ec7cd0287f6670fce1d64ac12c6cf84817",
+            "recommendation:cross-domain-kd": "fd46ff46322e31135596fe8157b57ff74e170562bbfd7120a20ca07aafc8b350",
+            "recommendation:dme": "2846e6a0d6d2ee1cb56918274dbcc3ac6f3d62c0e9ed1512ce7d095797bc9080",
+            "recommendation:dos": "956781297d29eede8e0514ac368424dfa6cb21429ace668cad240d709a6cc402",
+            "recommendation:dual-sid": "da33e5c858186dfe70e1066fb1a001ec39ece825ddc149e4a60a82f059e5f8ce",
+            "recommendation:dynamic-codebook": "d20213a9f5051fa745ae3267f5bb9cc713311e233d6ac6e923f0ad6c84d5b509",
+            "recommendation:filterllm": "e8fe9275754a844245633b81657346684c4ab8c898b2dcdc47e788b4b14ec571",
+            "recommendation:finesid": "460c2027ffbfbec96f129cd54baef8f43f58ddf6f4db61b10ccc29cd6922a21f",
+            "recommendation:fluid": "53a96f6710072403d66ff694cbb50dd4942f1cebeaa062344adc898ba7235dc3",
+            "recommendation:g2rec": "22568d8bc30a2964306b4979b4ed6c498084bf72d73bd41b4884f118374b2210",
+            "recommendation:gala": "064aff6769ecb6e61fb1e41b0c4103102cf15cb3af8f4bbc6f97ecf0c9e179c4",
+            "recommendation:gatesid": "d38a5d7bffe2c47d2a4df6b31da3e87b2df0afe53dac5ac1f41b3057f32b0da7",
+            "recommendation:gris": "935a3b852282dfcd0c4937935a654647784551de67f551eefd7a826a6c5f9cbf",
+            "recommendation:idproxy": "49e3db479066d6d4a373377a38b07d967de79e7c6023137a0268290bbc9ce2d7",
+            "recommendation:kar": "83c75b56d5a9bd06804ebd420e37e3edb53f63791e7751891ce334641cdc569b",
+            "recommendation:kgd": "6bb72890c35cb5f9e6f545f6b540230e81411f23296e9112ec32d6d64a2467af",
+            "recommendation:kuafu": "373a3f57bc813915807080ce48f0da97e77ab415ca0a77ee670f744eecd7de78",
+            "recommendation:l2rec": "937562b0910bfe66a63a532735a9d7f8b4d977a89e8b5fbe1c56435eda015c7f",
+            "recommendation:learn": "999b6a2e3a6c9002c410b5cda3350fc5be44ea23d7176595911fed209859d568",
+            "recommendation:lsvcr": "180c4eba64afa2e5ea1784cddd962d91c25a72e50dc6b7be069985c8b9c46c92",
+            "recommendation:lum": "edebdcf24f9d8cd085d6eb35242959a1098cb6d1136de3b8f2c26932afb7abba",
+            "recommendation:lwgr": "cebdaa48c2d30fe490d2e82e88a488bebbc6d24e6b76d5754eee76c749f6c3ca",
+            "recommendation:m6rec": "61681de0d65ab22f81e6689e3b59526984d11a02b25587e6124265fb6926fdd1",
+            "recommendation:marc": "ca84e5876b12f0f23c43bf7c9939cbd38e3d00dad168b5ca6be78772e0b1f25a",
+            "recommendation:mim": "8641ac4e75356a8a46f7a44f44a74d7a20aede7fde83c75739fc83b53d7d4380",
+            "recommendation:mm-llm": "cb7e586cb7011d9acaafbf46081713eb9a49741db197be21ca3d834e7a1ad6c0",
+            "recommendation:mosaic": "ae51ea1aef0a795e9b5f7c98d24f1e74e5fdbb6dd6171670da4256d306e952d7",
+            "recommendation:msd": "77d47b7a177ffda0ce09e9a38ada5ceb82db8365ef539633a09bd87965be44a0",
+            "recommendation:muchator": "3abab53d923556eabae799eabcf02e4789306ac00559846bf8e3f991adc2e1f6",
+            "recommendation:music-rationales": "b6244448f447f533aa18e54d849877f17092931e5df27408e8538150b858f389",
+            "recommendation:netflix-mediafm": "8dd59278a851ac846cbb60929fdb512d5790e6f965078970814c5ac4c15a6886",
+            "recommendation:notellm": "4aa86108212bb05ce6539e77fdc171b5a10719def46d15daf08761524e1a394e",
+            "recommendation:open-web-ufm": "45348c841ab0e0c5f9d69aacb47c3108b27adcb6c890456dfcd145d794a146aa",
+            "recommendation:pin-scale": "65bd178b5e9c3ed3ca3300296bca7e1cc6dca59b048ca25d20fcadba090079c5",
+            "recommendation:pinclip": "26fcfade3c9f0225e54d0a492214b33c03b10ed6b0041b67f17c5383593a0575",
+            "recommendation:pinterest-ads-llm": "00c6fd0377101400013c209b3cf18e188c287b920f41319643b2dc3b675e7643",
+            "recommendation:pit": "a7e77cf62182def754a318a8606c0853789e7068579bd11626df6bb2e74d1e08",
+            "recommendation:precise": "7f6e217ceca5bfe51234ffd2175896e44678b1bcc1b33ebb202820f94690e6e7",
+            "recommendation:proximity-features": "2b27d736d73f727b59cfacc3ca77b6597a86bf8f3df88c86ca099d758565fa5b",
+            "recommendation:quasid": "977beaa669a3d636e09b93c11313942db3ad3cc49e0c533c0a06d6fa50af69d5",
+            "recommendation:recap": "5ab8da9461cf7b4c7acb4ad5d9baca8fe82f51dbd9c8d57ee742b18b4d869a6b",
+            "recommendation:recgpt-mobile": "b91dac0f7b235155d3f0ea19dbb318892f756ee9ffd90251982a40d5e5a50fe3",
+            "recommendation:recgpt-v2": "b63a832305f3a285fe0f4db1db3040546852da3efa16bc07592c20eee5295570",
+            "recommendation:reco-reward": "0bb176f6cfdab5499eff93e8bd1599ce0f90d90b94f4755d2f0283232f6fb40e",
+            "recommendation:rq-gmm": "cef5e2dfc02f8ef2aaf275cf459d3a5b3c685c569a82977fd16c24fd5e26ce48",
+            "recommendation:sarm": "ebe521812e110cfac9987a3763214e7393d172c7939e4459a2b0b068a3cd4f69",
+            "recommendation:saviorrec": "1bc2993d1521b4c34564554d0c7a6e9187b979c61e6d8330dd3185930333d80d",
+            "recommendation:seral": "4f39738a21993deab9f63b24bd99305cda7a84be6f5bd4be9679f8a7300608c7",
+            "recommendation:sid-coord": "acdb6f5b1db67ff6d674bd9f9fe1c7766bd9f423ffccba858a9d40ae8226c8bd",
+            "recommendation:sid-topology": "9b65aff140fc3923c77886367d80da5ac3c882fbe7e1a3abcc139e18da793e13",
+            "recommendation:sirf": "6854e99090a7e88a45f811594599636fb4a86f68787c0abe0c680557ed9e325d",
+            "recommendation:ssrlive": "8650fd3ac89dec449989e378fd00fc94785158380e2172867d6d7be2d29cfaf4",
+            "recommendation:tagllm": "d3d1b2a413c146c841340eec2c9d9d48a3288f06f644333eac127c3e68dc2682",
+            "recommendation:tokenminds": "587ed1772c65f28d3ac68d2be0492b3a9615be25b43503bf5aacecda0d92ff8d"
+          }
+        }
+      ]
+    },
+    "history-ranking-backbones": {
+      "title": "DIN、HSTU、LONGER、SlimPer、RankMixer：究竟让谁与谁交互？",
+      "thesis": "比较排序骨干前先画三条边：历史到历史、候选到历史、字段到字段。DIN按候选激活历史，HSTU在输入窗口内逐层改写历史状态，LONGER先合并再以短查询读长KV，SlimPer反复读取用户池但只传播小知识库，RankMixer则更换异构字段交互。它们可处于同一流水线的不同位置，不能按一个长度变量或一张本地结果表排总名次。",
+      "updated": "2026-10-27",
+      "axes": [
+        "交互对象：历史内部、目标读取还是字段混合",
+        "每层传播的状态及原始历史是否持续可读",
+        "候选依赖如何限制用户缓存共享",
+        "复杂度变量与本地/生产证据的适用范围"
+      ],
+      "comparisons": [
+        {
+          "paper": "recommendation:din",
+          "position": "候选q与每条历史行为计算local activation，再池化出目标相关兴趣；不是先构造一个对全部候选相同的最终用户兴趣。",
+          "tradeoff": "目标相关性直接，但每个候选需要自己的激活/聚合；当前所述主路径不建立HSTU式逐层历史—历史交互。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
+        },
+        {
+          "paper": "recommendation:hstu",
+          "position": "输入窗口内历史token经因果pointwise聚合、post-pooling normalization和U gate逐层更新，保留历史内部依赖。",
+          "tradeoff": "去softmax不使全配对交互自动变线性。原论文M-FALCON可复用候选无关历史KV，但目标侧查询/输出仍相关；本地尚未实现M-FALCON，不能把这种复用当作已实测能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:longer",
+          "position": "相邻行为先Token Merge；首层少量global/recent queries读长KV，输出长度跟随query，后续只在短输出上继续self-attention。",
+          "tradeoff": "合并与短query压缩是两步，可能牺牲细粒度地址；合并还增加宽度/投影成本，收益有条件。本地当前仅实现InnerTrans/聚合后的普通self-attention，未实现论文首层短Q/长KV cross-causal attention及causal mask；旧指标不能验证该核心路径或缓存吞吐。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:slimper",
+          "position": "候选相关的固定槽位知识库逐层Select–Match–Refine，每层重新读取共享用户token池，层间传播小KB而非全历史隐状态。",
+          "tradeoff": "用户池仍随历史长度增长，初始编码可有局部上下文交互；共享的是候选无关用户编码，不是不同候选的最终KB。本地短历史没有验证生产长序列QPS。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:rankmixer",
+          "position": "异构feature tokens按head/token做固定重排，输出位置各有独立FFN；用不同分量相遇后学习组合，替代字段交互中的attention。",
+          "tradeoff": "token数与head/宽度约束必须匹配；这不禁止上游历史模块使用attention，也不自动处理超长行为压缩。Sparse路由和本地实现状态需另看，不能泛化全模型无attention。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先比层间状态，再比算量",
+          "body": "HSTU沿输入窗口逐层更新历史，LONGER首层之后沿短query输出继续，SlimPer则让原始用户池一直可读但只传递小KB。三者节省或保留的对象不同：没有全长层间状态不代表没有全历史读取，没有softmax也不代表没有历史两两配对。DIN的目标聚合和RankMixer的字段混合更不应直接塞进同一张N²对N表。",
+          "papers": [
+            "recommendation:hstu",
+            "recommendation:longer",
+            "recommendation:slimper",
+            "recommendation:din",
+            "recommendation:rankmixer"
+          ]
+        },
+        {
+          "title": "“用户侧”这个名字不能保证跨候选复用",
+          "body": "DIN的兴趣池化已读取候选；SlimPer的KB从item/cross信息出发，不能把候选A精炼后的KB交给B。HSTU的M-FALCON和LONGER的用户KV复用则要求共享路径尚未混入目标依赖。RankMixer常在后段混合候选、序列摘要和字段，其最终状态同样不是天然可复用的用户缓存。依赖方向比模块命名更可靠。",
+          "papers": [
+            "recommendation:din",
+            "recommendation:slimper",
+            "recommendation:hstu",
+            "recommendation:longer",
+            "recommendation:rankmixer"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "which-history-remains-readable",
+          "question": "LONGER和SlimPer都压缩状态，为什么“压完一次后再也不看长历史”只符合其中部分路径？",
+          "answer": "LONGER首层用短query读长KV，之后主要沿该短输出继续；SlimPer每层的小KB都重新查询用户token池，原始证据并未在第一层后退出。HSTU则逐层更新窗口内历史。比较应问各层还能访问什么，而不是把三者都叫短序列压缩。",
+          "example": "示意：第一层没注意到三年前的园艺行为，SlimPer后层仍可再次查询用户池；LONGER后续短序列里若没保留这条证据，就不能把它当全长历史重新读取。",
+          "papers": [
+            "recommendation:longer",
+            "recommendation:slimper",
+            "recommendation:hstu"
+          ]
+        },
+        {
+          "id": "candidate-dependent-cache",
+          "question": "同一个用户评分100个候选时，DIN的兴趣、SlimPer的KB和HSTU历史KV能否一起缓存一次？",
+          "answer": "不能一概而论。DIN兴趣依赖候选，SlimPer最终KB也依赖候选；可共享的是它们尚未读目标的基础编码。HSTU在M-FALCON约束下能复用候选无关历史KV，但每个目标仍需自身查询与输出。缓存条件是依赖不变，不能用同一用户作充分条件。",
+          "example": "示意：猫粮候选使KB聚焦养猫记录，园艺工具候选应读种花记录；把猫粮KB原样复用给园艺工具，会把一次目标选择当成用户的通用状态。",
+          "papers": [
+            "recommendation:din",
+            "recommendation:slimper",
+            "recommendation:hstu"
+          ]
+        },
+        {
+          "id": "field-mixing-not-history-replacement",
+          "question": "RankMixer不用attention做交互，为什么仍能和LONGER或HSTU放在同一模型里？",
+          "answer": "RankMixer处理的是异构字段token之间的交互；LONGER和HSTU重点处理行为历史及其状态。历史模块可以先产出摘要/状态，再作为字段交给TokenMix与PFFN。字段数T和历史长度N不是同一变量，替换字段attention不能直接推出全模型成本或长序列能力。",
+          "example": "示意：历史模块输出近期兴趣和长期兴趣两个向量，再与价格、设备、候选类别一起组成五个字段token；后段TokenMix不会倒过来替代前面的历史检索与编码。",
+          "papers": [
+            "recommendation:rankmixer",
+            "recommendation:longer",
+            "recommendation:hstu"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "recommendation:adaf2m2",
+        "recommendation:argus",
+        "recommendation:bst",
+        "recommendation:cadet",
+        "recommendation:ccformer",
+        "recommendation:chronicle-rec",
+        "recommendation:clockrope",
+        "recommendation:cmsl",
+        "recommendation:dcn-v2",
+        "recommendation:deepfm",
+        "recommendation:dien",
+        "recommendation:din",
+        "recommendation:echo-selector-loss",
+        "recommendation:fuxi-alpha",
+        "recommendation:genrank",
+        "recommendation:genrec-netflix",
+        "recommendation:ha-moe",
+        "recommendation:helix",
+        "recommendation:hisac",
+        "recommendation:hpgr",
+        "recommendation:hstu",
+        "recommendation:hyformer",
+        "recommendation:inthq",
+        "recommendation:journeyformer",
+        "recommendation:kunlun",
+        "recommendation:lazformer",
+        "recommendation:linkedin-feed-sr",
+        "recommendation:llatte",
+        "recommendation:long-history-transformer",
+        "recommendation:longer",
+        "recommendation:mdl",
+        "recommendation:memento",
+        "recommendation:mixformer",
+        "recommendation:ml-dcn",
+        "recommendation:mlcc",
+        "recommendation:msn",
+        "recommendation:nontp",
+        "recommendation:onemodel",
+        "recommendation:onepiece",
+        "recommendation:onerank",
+        "recommendation:onetrans",
+        "recommendation:onetrans-v2",
+        "recommendation:pinfm",
+        "recommendation:poem",
+        "recommendation:rankmixer",
+        "recommendation:rankup",
+        "recommendation:recap-ctr",
+        "recommendation:repair-state",
+        "recommendation:rest",
+        "recommendation:sam",
+        "recommendation:sasrec",
+        "recommendation:semantic-native-longseq",
+        "recommendation:sequenceo1",
+        "recommendation:sim",
+        "recommendation:slimper",
+        "recommendation:sort-ranking",
+        "recommendation:sparsectr",
+        "recommendation:specformer",
+        "recommendation:tm20k",
+        "recommendation:tmallgs",
+        "recommendation:tokenmixer-large",
+        "recommendation:transact-v2",
+        "recommendation:transx",
+        "recommendation:tubifm",
+        "recommendation:twin-v2",
+        "recommendation:ultra-hstu",
+        "recommendation:uniformer",
+        "recommendation:unirec",
+        "recommendation:uniscale",
+        "recommendation:uxsid",
+        "recommendation:whale",
+        "recommendation:wide-deep",
+        "recommendation:zenith"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较din、hstu、longer、slimper、rankmixer，围绕交互对象：历史内部、目标读取还是字段混合与每层传播的状态及原始历史是否持续可读建立分析和跨论文问答。",
+          "papers": [
+            "recommendation:adaf2m2",
+            "recommendation:argus",
+            "recommendation:bst",
+            "recommendation:cadet",
+            "recommendation:ccformer",
+            "recommendation:chronicle-rec",
+            "recommendation:clockrope",
+            "recommendation:cmsl",
+            "recommendation:dcn-v2",
+            "recommendation:deepfm",
+            "recommendation:dien",
+            "recommendation:din",
+            "recommendation:echo-selector-loss",
+            "recommendation:fuxi-alpha",
+            "recommendation:genrank",
+            "recommendation:genrec-netflix",
+            "recommendation:ha-moe",
+            "recommendation:helix",
+            "recommendation:hisac",
+            "recommendation:hpgr",
+            "recommendation:hstu",
+            "recommendation:hyformer",
+            "recommendation:inthq",
+            "recommendation:journeyformer",
+            "recommendation:kunlun",
+            "recommendation:lazformer",
+            "recommendation:linkedin-feed-sr",
+            "recommendation:llatte",
+            "recommendation:long-history-transformer",
+            "recommendation:longer",
+            "recommendation:mdl",
+            "recommendation:memento",
+            "recommendation:mixformer",
+            "recommendation:ml-dcn",
+            "recommendation:mlcc",
+            "recommendation:msn",
+            "recommendation:nontp",
+            "recommendation:onemodel",
+            "recommendation:onepiece",
+            "recommendation:onerank",
+            "recommendation:onetrans",
+            "recommendation:onetrans-v2",
+            "recommendation:pinfm",
+            "recommendation:poem",
+            "recommendation:rankmixer",
+            "recommendation:rankup",
+            "recommendation:recap-ctr",
+            "recommendation:repair-state",
+            "recommendation:rest",
+            "recommendation:sam",
+            "recommendation:sasrec",
+            "recommendation:semantic-native-longseq",
+            "recommendation:sequenceo1",
+            "recommendation:sim",
+            "recommendation:slimper",
+            "recommendation:sort-ranking",
+            "recommendation:sparsectr",
+            "recommendation:specformer",
+            "recommendation:tm20k",
+            "recommendation:tmallgs",
+            "recommendation:tokenmixer-large",
+            "recommendation:transact-v2",
+            "recommendation:transx",
+            "recommendation:tubifm",
+            "recommendation:twin-v2",
+            "recommendation:ultra-hstu",
+            "recommendation:uniformer",
+            "recommendation:unirec",
+            "recommendation:uniscale",
+            "recommendation:uxsid",
+            "recommendation:whale",
+            "recommendation:wide-deep",
+            "recommendation:zenith"
+          ],
+          "source_revisions": {
+            "recommendation:adaf2m2": "2d991784e26c11b977e0aa4f831dde83416c56e8a10597fbeef5eb8655249caa",
+            "recommendation:argus": "a8e69376692095761a43eae09f99dc06519c68209e297b83758fbb0c4d7754e5",
+            "recommendation:bst": "80febd631fd73ce894e36b968f79494d7294c81aa7245d9323717303b8e570e6",
+            "recommendation:cadet": "42158ee7687fe60a2cd795f77cafa62434f10d1f4d32bbad56635fbddd41b1fb",
+            "recommendation:ccformer": "f6021378d29a8a96021d343f8628b68d4d1ff9ff9fde765bd2025e4921802213",
+            "recommendation:chronicle-rec": "998d48685d87fe8c2d0ecac08a5b4199443ed74d4148399fff7e5d81b589f764",
+            "recommendation:clockrope": "765fc983805a3b381e46dd9d04b5c979c4d70d691c0ed7846149b224a996b809",
+            "recommendation:cmsl": "35718da4c1bc5b26f9925b580d22fa77a5dc627f4afbc9648851831210abb876",
+            "recommendation:dcn-v2": "6a72e8d77b8209eb60b9ae6233b29fb493aa5309d09ccab61ae74b1292f5c64b",
+            "recommendation:deepfm": "4859d2a24b115d6915e25462c48c4ea2de22afe45a4711354e08e767b70e92f1",
+            "recommendation:dien": "e9d7d8ac69a39dd3084cdd51bee1934223f505c40d9ada943bb5e6866455f989",
+            "recommendation:din": "53e62c18b6597a7e1d63e1dcb58bcee8d03a12a6c71119bf882195e7df3a1f05",
+            "recommendation:echo-selector-loss": "84371f3b8148cdea47cd190b42b0bfa2ce261d5bdb8c7e2687c92c5cda4ad8dd",
+            "recommendation:fuxi-alpha": "a6ce722df64116c75fb8dca11aefd7defe8a889f799bf0418a6ac01364ea828a",
+            "recommendation:genrank": "21dc01ea1d9e56846d9a092360885c4b0ac70109eb1416798270727b64a897ff",
+            "recommendation:genrec-netflix": "4d8aba80ad205574933b38eeb560856a400b0a0f888c775bd1747509c09755ab",
+            "recommendation:ha-moe": "8634f42a0441a3b6a9d84fd3d7b51ae0a461b04b5a3ecee3f84e8db3ae7f59d9",
+            "recommendation:helix": "79c75db3cdf8d2b9c647055e3de469901e64c8dec0bf2ba27b470a8e370dc75b",
+            "recommendation:hisac": "aaa3ff607d0f0af51516a4e44d8af9d44f9089565dfeb7ad3934bddaf4cb4dbe",
+            "recommendation:hpgr": "f3830a2b527f296dca599a8a40d618b56e859d9bda7e4077ce4796f27f2626f7",
+            "recommendation:hstu": "c10252fe4742f3c575f8e4fce8fdf117de8dd164519c0976ad72c4f40fe3c359",
+            "recommendation:hyformer": "67aae22b6fae0760740c9ab92eabad98670b0b16fa6a249e12a2c4ee77e38eb9",
+            "recommendation:inthq": "8d06ba409b0ed933d6d3f38c2b8e1f1056ab7549e9bd68d6c03645669bf9f837",
+            "recommendation:journeyformer": "0c8ceac49034112024ff30ddd4425e6171cb19ef92276b5246b63ed7e53a8867",
+            "recommendation:kunlun": "f79a3e84e3f76812c7471e57e486add538e36cd5b0a93907ccd907d478417592",
+            "recommendation:lazformer": "ce8aae1ac67432a8e5e3857df42efcec71504419a6c7de099335ea2bbcb3d407",
+            "recommendation:linkedin-feed-sr": "baddef533e464c40809c722c7ca414b00cd8d45780bdd109fa0a58a9e9b06ba1",
+            "recommendation:llatte": "11783491e94d289e084dc7bd3a508aa9af2d152afac4ee0ccc6a4fbd94242b41",
+            "recommendation:long-history-transformer": "d03752cc71fedfab7176e922e7092c3a0ebd39c12e5595c885ecf65cd5cd97b6",
+            "recommendation:longer": "e3c1167c41d992644a63b143c4d2b067a56b3e9329f4c49d07790cc45152ac4d",
+            "recommendation:mdl": "c5ba0eaea8a8d891d080f44097238cf36323920d11ed825f939214090f932cfd",
+            "recommendation:memento": "72e2cbbf5e5782027bee26109391fab5ed2f1229f6272c7266d251fc9111a40a",
+            "recommendation:mixformer": "625137690726bc6a921de532d6d3827c3de886b968baf493c5038600a8dbd3fd",
+            "recommendation:ml-dcn": "ed00e55584024a71b36b3bfd33795fac8ec276a98a8670f651e2395af8a29ef0",
+            "recommendation:mlcc": "90299550cb4cd62d637e3f2a089e1dd29d3273a1eb577720f68a0b1b4640fcf0",
+            "recommendation:msn": "80348f664a8b01aef56b22dfa8c75e659bb3faf79aaeb0bc9145d0e0d2db49cd",
+            "recommendation:nontp": "cabecbfcdd0ba985ef1d645aa713ed1ca4abb5eab520040186d35adff4bb0ace",
+            "recommendation:onemodel": "5fdbb2ea67fd35502a86f7abaafee55eb9b02e6416c7309ebd78c13fdf27f9ab",
+            "recommendation:onepiece": "52b4c28411ef5a4ad4b067023fc649ab59f6c33dd76690da3c2ef8c9aaa92e3c",
+            "recommendation:onerank": "5a5acb4aba8e37461cf04a1dcf4ad9981405eeded6cf06dc1c7ad70e509c0fd0",
+            "recommendation:onetrans": "190630d280daef94d9670e235ee65c62a78ae093fbf3adaae016986b309b53e2",
+            "recommendation:onetrans-v2": "92e6c9f6f31c4d398bc8b963728618f17f0887dab50b5c6d6752d455b382ac4c",
+            "recommendation:pinfm": "1571dc6b29d21e3a71c3fdea34b383f03880748f186b759b415acaa48878273d",
+            "recommendation:poem": "2fddd03d65999e00c6c408ca00e6541c1622b4e664a8d182854caec4e2b824f1",
+            "recommendation:rankmixer": "2ca7eabf43a432f34229ef9203891ead3c7274bf2a1c8487411e85bb49872fe9",
+            "recommendation:rankup": "1a3c2f544a9e6449ec3fe0f8f51f87fbde75a12d3c6d2e1e80bf2516292f1f17",
+            "recommendation:recap-ctr": "618fc50609675182037636e07166963f851839276c4918fdb2b8003f19b46077",
+            "recommendation:repair-state": "cbc97a85b5aa3dc217bd71e1de09b1c811fe918cbcd26c418a05c8c1f9251d89",
+            "recommendation:rest": "325b64d7bd175fd61a72797140d7d0af56fbc484a69877a32582115e2446d854",
+            "recommendation:sam": "fe91de0e5bf8921386b31d0d6e59b66bc2fa6e5927a0ae317407281aa1877946",
+            "recommendation:sasrec": "c49e5b307f0255420d1281b299c2908d4a2086410ea8238ce32ddcc64fc9fca2",
+            "recommendation:semantic-native-longseq": "b33f5676f8eb6c71aa0ca325da8e21b0a5df56dff8df2ac5ae67600f5359144d",
+            "recommendation:sequenceo1": "719887001033357307155bb2f619e504b31986432cc61a8be43b4b3f78ec21fc",
+            "recommendation:sim": "6902232492ce98b370c4fab0927d2b88b480b07922db65110e00b5ef31562170",
+            "recommendation:slimper": "c305aaa3be95e1e769d647a4476f8aa40fc52b8be7772c5495f02508deefd8e2",
+            "recommendation:sort-ranking": "b9aa6346827644ea4b96a7a4e2c0f00c2262ebe6a2e7e258e708af82ff94ff74",
+            "recommendation:sparsectr": "c2582e3db342d8b94ea8b9cd9c39b53c32af886c041d542722282de6a4bbb961",
+            "recommendation:specformer": "ddeb84aeae4ca4ea7e2801a9979b85a75d0deb3e1d0e202796ca613f342251c0",
+            "recommendation:tm20k": "49a5f4e0fa3630d9d2438bcb4b745355bdcbdcc21956460d1a0181d92fc343ff",
+            "recommendation:tmallgs": "e1a28df22fae88f1a2fcbf46c5c0b9770d62a45967ddeafec9f83c2010a68f3c",
+            "recommendation:tokenmixer-large": "81c61f47eec75eefb1d2f148ce27b89eb793a71b6c7ab72c27366b47537907e3",
+            "recommendation:transact-v2": "1730abc050bdb1eed30824786ba0c4504cefc058cb759e4986e1c1b67a805ba6",
+            "recommendation:transx": "10747c75f77d27a9a3ea82f97c80323c81072e69ed4143a9ff4ad2d89abec857",
+            "recommendation:tubifm": "6bea81cd62e8944f2c59b7e647944fb3aae8cc2056d36efd5a77ec135936cda2",
+            "recommendation:twin-v2": "5aeb6be1772b4057b1b49a680a4bf8062e23a534a4d013bfc0480b24a0eab3cc",
+            "recommendation:ultra-hstu": "74eae9c53bde49ade63703ddc5cf09719f07a5736fdb792ac225a78c4ea9dd7c",
+            "recommendation:uniformer": "2d68a9ea101deb77c77cc4188e5ca420631cf4fe9cad5ab2d6911150d9f99ff1",
+            "recommendation:unirec": "32a5a002039ae41aaa953489d84d7edcf0a5635062bacf7e396af72c5dfbb3c2",
+            "recommendation:uniscale": "367a69ace49a06d9575fb134cc113bf80aa2eefd98a7d98e3a8db6639a48dfa4",
+            "recommendation:uxsid": "c4673e0c711a711b5521fb174dfff8bb08a8e1ce8ea8ca786baacd5536628fa8",
+            "recommendation:whale": "1b14d300547e596cf5c3eb2628b50ca8ebba2fefdb8785aa7ff8edcbea29fec6",
+            "recommendation:wide-deep": "ce3072148a53f5c5d0b37429ed96404ac3fe1452571bf9d9d41ee59c20686ab5",
+            "recommendation:zenith": "e607e79b7d2e793b0aa19dec231a77b628036fe9cc4cdcacacd67451fac84b91"
+          }
+        }
+      ]
+    },
+    "generative-retrieval-reasoning": {
+      "title": "生成一个物品，先后跨过码本、模型分布与合法目录三道关",
+      "thesis": "TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。",
+      "updated": "2026-10-27",
+      "axes": [
+        "物品表示：离散码、稀疏—稠密级联与LLM继续预训练",
+        "学习分布与推理搜索分别改变什么",
+        "合法目录约束与业务reward的区别",
+        "先验支持、beam预算和本地缩比证据"
+      ],
+      "comparisons": [
+        {
+          "paper": "recommendation:tiger",
+          "position": "RQ-VAE逐层量化内容残差，加碰撞消解token形成物品SID，encoder-decoder自回归预测下一物品码序列。",
+          "tradeoff": "共享语义前缀便于参数共享，但码本碰撞和早期路径错误会影响可达性。本地按有效物品ID累加token log-prob评分，不能将其等同生产beam吞吐。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:cobra",
+          "position": "先生成稀疏code，再以该code和历史为条件生成dense query，beam code分数与dense相似度级联召回。",
+          "tradeoff": "为量化丢失的细节增加区分通道，也引入稠密索引、融合权重和两阶段预算；若目标code根本未进入beam，后段dense通常无从补回。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:plum",
+          "position": "从已有MoE LLM初始化，以行为和视频元数据CPT对齐，再做next-SID召回；SID-v2同时约束重建、量化和共现。",
+          "tradeoff": "容量从大型ID表转向可扩展主干，但依赖CPT配方和预训练资源。线上生成SID不用点积索引，不代表没有SID映射、目录维护与解码成本。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地结果"
+          ]
+        },
+        {
+          "paper": "recommendation:static-constraint-decoding",
+          "position": "将合法token路径编成加速器内CSR迁移，先全词表log-softmax，再非法项置负无穷，并同步维护beam前缀和node状态。",
+          "tradeoff": "改变约束执行的成本与合法性，不会创造模型未学到的偏好；不能在每个合法子集重新归一化后还声称保持同一条原模型路径分数。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果与边界"
+          ]
+        },
+        {
+          "paper": "recommendation:reward-guided-decoding",
+          "position": "固定生成先验P0，用exp(R/β)倾斜得到Q，以KL温度限制偏离，不重新训练生成器。",
+          "tradeoff": "reward可重排既有支持，却不能令P0为零的路径凭空出现；代理reward和线上价值不同，本地MovieLens构造任务不等于生产收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先看物品能否到达，再看排名是否正确",
+          "body": "TIGER和PLUM先决定物品怎样映射到SID以及每步码的概率；COBRA再在已提名的稀疏区域内补细节。若码碰撞没有消解、前缀被错误排除或合法目录缺失，单纯扩大reward权重无法恢复目标。应把token预测、有效物品覆盖和最终排序分别测量，beam变宽也不能证明码本更好。",
+          "papers": [
+            "recommendation:tiger",
+            "recommendation:plum",
+            "recommendation:cobra",
+            "recommendation:reward-guided-decoding"
+          ]
+        },
+        {
+          "title": "合法性与偏好不是同一个分数",
+          "body": "STATIC回答某前缀下哪些token能通向合法目录，Reward Guided Decoding回答在允许的分布中怎样偏向reward。前者的非法负无穷是可行域，后者的指数倾斜是软偏好；把库存违规只当有限惩罚，仍可能选出高reward的非法项。约束编译、原模型概率和业务价值应保留各自语义。",
+          "papers": [
+            "recommendation:static-constraint-decoding",
+            "recommendation:reward-guided-decoding"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "dense-cannot-recover-pruned-code",
+          "question": "COBRA多了dense向量后，为什么仍不能保证找回TIGER式早期码路径里漏掉的物品？",
+          "answer": "COBRA的dense query以稀疏code为条件，通常在beam已提名的区域内细排；目标code若未进入搜索，后段并不自动遍历全部遗漏区域。它补的是量化后同区域的细粒度区分，不能把级联后段当成无条件召回修复器。",
+          "example": "示意：第一层beam只保留跑鞋类，摄影类整支被剪掉；即使跑鞋类的dense排序完美，也不会突然召回相机。",
+          "papers": [
+            "recommendation:cobra",
+            "recommendation:tiger"
+          ]
+        },
+        {
+          "id": "legal-mask-and-reward-tilt",
+          "question": "STATIC的合法路径掩码和Reward Guided Decoding的高reward，冲突时应该怎样理解？",
+          "answer": "合法掩码先定义哪些结果允许出现，reward只在可行结果间表达偏好。指数倾斜仍乘原先验，先验或掩码给零支持的结果不能因reward高而复活。若把约束改成有限扣分，就变成了另一个允许违规被补偿的优化问题。",
+          "example": "示意：库存为零的商品本来预测收益很高，仍应被合法目录排除；不能靠把它的收益减一点就假定永远不会被选中。",
+          "papers": [
+            "recommendation:static-constraint-decoding",
+            "recommendation:reward-guided-decoding"
+          ]
+        },
+        {
+          "id": "same-sid-not-same-training",
+          "question": "TIGER和PLUM都预测SID，为什么不能只比较同一个next-token loss就判断训练路线相同？",
+          "answer": "TIGER从内容量化与序列生成建立链路；PLUM还继承LLM并通过行为、文本/ASR等混合CPT对齐语言与协同空间，SID-v2本身也加入共现和渐进深度重建。相同目标接口不代表初始化、数据与表示训练相同，比较效果需固定评估目录和预算。",
+          "example": "示意：两模型都预测三层码，一个只学行为序列，另一个先看元数据与行为混合语料；最后一层交叉熵的名称相同，并没有抹去前面的训练差异。",
+          "papers": [
+            "recommendation:tiger",
+            "recommendation:plum"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "recommendation:aigq",
+        "recommendation:angle",
+        "recommendation:barge",
+        "recommendation:climber-pilot",
+        "recommendation:cobra",
+        "recommendation:cq-sid",
+        "recommendation:diffureason",
+        "recommendation:dualgr",
+        "recommendation:egr",
+        "recommendation:feedback-policy",
+        "recommendation:gear",
+        "recommendation:genrec",
+        "recommendation:glide",
+        "recommendation:gr4ad",
+        "recommendation:grc",
+        "recommendation:growthgr",
+        "recommendation:grp",
+        "recommendation:gryphon-v2",
+        "recommendation:guess-where-you-go",
+        "recommendation:hrpo",
+        "recommendation:intsr",
+        "recommendation:leadre",
+        "recommendation:mbgr",
+        "recommendation:onelatent",
+        "recommendation:onemall",
+        "recommendation:oneranker",
+        "recommendation:onerec",
+        "recommendation:onerec-v2",
+        "recommendation:oxygenrec-v2",
+        "recommendation:pinrec",
+        "recommendation:plum",
+        "recommendation:promise",
+        "recommendation:pushdualgen",
+        "recommendation:qgs",
+        "recommendation:rag-generation",
+        "recommendation:rag-qac",
+        "recommendation:rclrec",
+        "recommendation:recgpt-v3",
+        "recommendation:reward-guided-decoding",
+        "recommendation:rgalign-rec",
+        "recommendation:rolegen",
+        "recommendation:s-grec",
+        "recommendation:s2gr",
+        "recommendation:sessionrec",
+        "recommendation:sigma",
+        "recommendation:snaplgr",
+        "recommendation:sona",
+        "recommendation:spar-prefix-balance",
+        "recommendation:static-constraint-decoding",
+        "recommendation:tagr",
+        "recommendation:tgr",
+        "recommendation:tiger",
+        "recommendation:tsgr",
+        "recommendation:unique",
+        "recommendation:unir2",
+        "recommendation:unirec-coa",
+        "recommendation:unisgr-v2",
+        "recommendation:univa",
+        "recommendation:wegr",
+        "recommendation:xrec"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较tiger、cobra、plum、static-constraint-decoding、reward-guided-decoding，围绕物品表示：离散码、稀疏—稠密级联与LLM继续预训练与学习分布与推理搜索分别改变什么建立分析和跨论文问答。",
+          "papers": [
+            "recommendation:aigq",
+            "recommendation:angle",
+            "recommendation:barge",
+            "recommendation:climber-pilot",
+            "recommendation:cobra",
+            "recommendation:cq-sid",
+            "recommendation:diffureason",
+            "recommendation:dualgr",
+            "recommendation:egr",
+            "recommendation:feedback-policy",
+            "recommendation:gear",
+            "recommendation:genrec",
+            "recommendation:glide",
+            "recommendation:gr4ad",
+            "recommendation:grc",
+            "recommendation:growthgr",
+            "recommendation:grp",
+            "recommendation:gryphon-v2",
+            "recommendation:guess-where-you-go",
+            "recommendation:hrpo",
+            "recommendation:intsr",
+            "recommendation:leadre",
+            "recommendation:mbgr",
+            "recommendation:onelatent",
+            "recommendation:onemall",
+            "recommendation:oneranker",
+            "recommendation:onerec",
+            "recommendation:onerec-v2",
+            "recommendation:oxygenrec-v2",
+            "recommendation:pinrec",
+            "recommendation:plum",
+            "recommendation:promise",
+            "recommendation:pushdualgen",
+            "recommendation:qgs",
+            "recommendation:rag-generation",
+            "recommendation:rag-qac",
+            "recommendation:rclrec",
+            "recommendation:recgpt-v3",
+            "recommendation:reward-guided-decoding",
+            "recommendation:rgalign-rec",
+            "recommendation:rolegen",
+            "recommendation:s-grec",
+            "recommendation:s2gr",
+            "recommendation:sessionrec",
+            "recommendation:sigma",
+            "recommendation:snaplgr",
+            "recommendation:sona",
+            "recommendation:spar-prefix-balance",
+            "recommendation:static-constraint-decoding",
+            "recommendation:tagr",
+            "recommendation:tgr",
+            "recommendation:tiger",
+            "recommendation:tsgr",
+            "recommendation:unique",
+            "recommendation:unir2",
+            "recommendation:unirec-coa",
+            "recommendation:unisgr-v2",
+            "recommendation:univa",
+            "recommendation:wegr",
+            "recommendation:xrec"
+          ],
+          "source_revisions": {
+            "recommendation:aigq": "ebb0ef9879fa1cc3ea62511afe500584b8bbfe218634ab8d2c458802a6b642f6",
+            "recommendation:angle": "96c120054a49eec148d1b1482c20ea1a3bd2a17d13923866b0922facc99f3f4a",
+            "recommendation:barge": "3c3f0c2b28c1ffa085a83af531d6c09dd67d1f2e0e25ed02d9bff99395cb324d",
+            "recommendation:climber-pilot": "385455832e32d45c69645e2e33b6c59ee3cdbdb8d25d911ab80416eca7638e55",
+            "recommendation:cobra": "930489811cd8b1dbbc5238be02e581ed862721a9a8b124b815ec3343d0e25f7c",
+            "recommendation:cq-sid": "a1cb1e6da0527e5ffd500a02550aa8e95d84870f5162cd8a9180f4b7fb32feee",
+            "recommendation:diffureason": "96418137398969292da6baa6c6c6759c6a916d6609608a4f5cab496c9241bc30",
+            "recommendation:dualgr": "43d4c0eb7e6c7c538f8bfd7c26839cf3d1a682c41bcc40a261ee2ed4f7ae1925",
+            "recommendation:egr": "7f94902dd3769b73bb0f977937acfdf5e0b523cabd0261d16392bc7ad60d0880",
+            "recommendation:feedback-policy": "dc58300b5bbac5f7c243ece4d49baf2dc09ffc448c6cf119014d0cd548f7fca5",
+            "recommendation:gear": "443295f066b19a53714631b89fc28e1f675a703722329485f54f663d474ccf42",
+            "recommendation:genrec": "79c7e65cb2d5d4580e0151d9c2f7548385b8e1b305c6de7e171554b48abce380",
+            "recommendation:glide": "7376120cf0ac6dccb75273ab29ca84ac864648b02cacdd1a0f8e402831f58f72",
+            "recommendation:gr4ad": "efdc95f432bf46e72a3eba41fda9fc6002eef8cf09d1eba05574cd8dbb91f472",
+            "recommendation:grc": "695239b6696ff0dae13606cb91a491f17c9ac43500716f31bbc198c3987fb7d8",
+            "recommendation:growthgr": "a5675b9cfec794dea99b6efad379ee2a50b4b826ddb2080287d521236f98249d",
+            "recommendation:grp": "8ef75d82181ab9ea6509b47ddc6d2c41b173acd5730f5c7a6c592af0636bfc99",
+            "recommendation:gryphon-v2": "226efcd85fb7f7087f7ea6149a98c41600be07295c3eee2ea571c5b3c96fb14e",
+            "recommendation:guess-where-you-go": "ae58ade1d5b514f30dbf271bac0ae9ab4fe9d469c8e1009a6b99edc8b066483c",
+            "recommendation:hrpo": "2c5b0611a6461a0b90e9597c9069ddb42194150386fbe5baf0fc81437daf3f0a",
+            "recommendation:intsr": "328790c19bd660ec836002451243ca165ff09ab2690b3f5e46b3f17a30423555",
+            "recommendation:leadre": "f10d32704fce67b43325ba175f0538ad94c5ec0685733b2b56e6680bc037ae05",
+            "recommendation:mbgr": "87c7f9840185cbf6865cdcf6def8690ad89e44ed4088d867ba6385f2475acdc4",
+            "recommendation:onelatent": "11b3a11ab11574a335c70742cb762ea59f8cedd787c6ac0ffc96fe9fc6606488",
+            "recommendation:onemall": "87ee089aa688db506c5911531dab2da1b6d190c8339739a8aa63357caeea67d2",
+            "recommendation:oneranker": "1a4f51517cd72ba2a34201355c96753b2b67d1bc5cc5320d341d9feeaf0dffbf",
+            "recommendation:onerec": "83301159e4c5ecec138aa37c91753995d468affebf51c32739cadb286feeb293",
+            "recommendation:onerec-v2": "b05b43f1da164d07e635f87a76fa99d95a232a1dbb1a2c1ad8e01b069b6ceb6c",
+            "recommendation:oxygenrec-v2": "a86b4356ddfee3b2e10be59ba08df9af3206e6553da57ac1d450014b7038a111",
+            "recommendation:pinrec": "5d7701ca7b7b55e8893b7e4aea32c02ecbeb37a6651b6fc01d56d288b9a3ceb1",
+            "recommendation:plum": "de259821d86608e733121f2600883623a95018edea0410ab4f1418c19cad4aed",
+            "recommendation:promise": "96a112021838f799f8b9b900dc44f563bbdebf8c8c5f658e032ed7ea51178573",
+            "recommendation:pushdualgen": "58a246a19b32ee68512ce9a9c8fb09f1df2ad134f0cb4452c0011c5c591d5588",
+            "recommendation:qgs": "f398f9ccd5fd436bfe96d470fef4fb61e73b9405de7cf42d16ad62390fa545e1",
+            "recommendation:rag-generation": "148b8e4d9936a8abd4056e4cfc1a0307a231abb9b138649766f0f2a7e106b953",
+            "recommendation:rag-qac": "3ba58c729fb5f3903663c27583cff0b8645c6f0c06db1f31b6bec33022805b52",
+            "recommendation:rclrec": "1b4a0b3f2bb3e3f80c84031f6e6e01a630f7b058ad52726d0149a6c513a65ab0",
+            "recommendation:recgpt-v3": "cd223db758c2d1ef0b2628b8bd66761a6bb1e288d58fd19e98ac42fd3d98f457",
+            "recommendation:reward-guided-decoding": "4f74d558149d43dbb756e137493f8b812af96f032dde0348a253b45526972b62",
+            "recommendation:rgalign-rec": "fc47fdacdbbe53f8d9dc3caceb0315fc90b9ef0ef6855075fa11693021bafdc6",
+            "recommendation:rolegen": "6934d9efbc6b35f01dd885344e1ceb18d8cc302016c25878385b512e5555b4cf",
+            "recommendation:s-grec": "386d315588fa4ccc96a2c89e0ece244af44197393b4fc3b9fb8a3a31bb029391",
+            "recommendation:s2gr": "2f5fa0a3424802ac8bdec8131ad645ccc62336c5a06a9deb901b5abd7576c140",
+            "recommendation:sessionrec": "9a594a2318841b676a86213f8bfb32ac3e8e3456d41e996646df24b99d27743e",
+            "recommendation:sigma": "2c46dd0013972a90df6273827665c00cc29a334b55535b229fb9821932d96a0d",
+            "recommendation:snaplgr": "0fe48b3012052f37874657aea8e6ca0667a43adf04da0d08a992ba507fd32d86",
+            "recommendation:sona": "6ab819226351da36737f3446302bacd6925133bf3963bffe885f3d5916a80662",
+            "recommendation:spar-prefix-balance": "9152875f77b8e234fe8dc94e8533da432c39fd341c475ef79de4ca4a66e8b0bb",
+            "recommendation:static-constraint-decoding": "8012c5264811bd13cf9092c6cfefaf8a1e896c207922e2715a879af06aa992bc",
+            "recommendation:tagr": "4ad4986852ac9702d395edf74e8572dbad3e1f84ef7ef2057cc925bc308ad0ff",
+            "recommendation:tgr": "85a209a0dddc45805e57b6d91ab957acfa470b5a57ec55b6d8a6176f868ba3bb",
+            "recommendation:tiger": "8baf748cca80fb5364e9dd7280b98de93249f38e0f8f6930149c1c64afee63d5",
+            "recommendation:tsgr": "accdf6b5cdc9385e2b529a43da3d68ee3c68b578523f2d50cb930aa2a6280045",
+            "recommendation:unique": "7fad4a3c81f0a159b002fcae6cf3d4b0f7924da5365a793591aab834497d5fad",
+            "recommendation:unir2": "70479cf7cf2158bbfc8315682a4ebd128136744a865976dbd6ca1b414ce97eed",
+            "recommendation:unirec-coa": "d1478a0e805e7e5a437bf8c24a4d7a365710fed834d23a9ee8fa6f2d89cdc83b",
+            "recommendation:unisgr-v2": "b059085567b3c0031c44f47853b82ad7403a4196dfd5b577a035b265814f341b",
+            "recommendation:univa": "ab6127edaec6c9c2a2951964e09d1e51f73d6fa79802f75d6d36ca350ef10b34",
+            "recommendation:wegr": "f8c5d8e9ee1c664597e122a5e7755065082ae8f2d56a094cf576fa43cdebec48",
+            "recommendation:xrec": "fc193c7fbf4c036059eb59c19c36a832d003b26e8b2b850fbc45aa677f0c83cf"
+          }
+        }
+      ]
+    },
+    "feedback-multitask-causality": {
+      "title": "从CTR到满意度与uplift：先定义监督对象，再决定怎样共享",
+      "thesis": "ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。",
+      "updated": "2026-10-27",
+      "axes": [
+        "标签是条件事件、反馈测量还是潜在结果差",
+        "任务共享发生在哪些参数和路由上",
+        "观测缺失、混杂与反事实假设",
+        "局部机制正确与真实策略增量的证据差别"
+      ],
+      "comparisons": [
+        {
+          "paper": "recommendation:esmm",
+          "position": "全曝光空间监督CTR和CTCVR，用p(click&conversion)=pCTR·pCVR连接条件转化塔。",
+          "tradeoff": "借漏斗关系缓解只在点击样本训练的选择问题和稀疏性，但未点击不是CVR条件负例；概率关系本身不证明随机干预下的增量。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:mmoe",
+          "position": "一组共享experts供所有任务使用，每个任务有独立softmax gate，按样本组合专家。",
+          "tradeoff": "提供灵活共享而非全独立模型，但专家仍共同承接任务梯度；门控存在不代表任务冲突或曝光偏差已经消除。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
+        },
+        {
+          "paper": "recommendation:ple",
+          "position": "将共享专家与任务专属专家分组，CGC逐层抽取共同信息和任务特定信息。",
+          "tradeoff": "专属路径有助于表达冲突任务，但增加容量与路由复杂度；是否缓解跷跷板须分任务看，不能由总体均值判定全部改善。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
+        },
+        {
+          "paper": "recommendation:flvm",
+          "position": "三维潜因子表达消费、主动参与、正负方向；反馈头按固定稀疏语义路由，叠加停止梯度的受限基线。",
+          "tradeoff": "把时长等测量因素与偏好通道分开，但该结构不自动识别真实因果偏好；原文mask未公开，本地路由是明确的可检验选择，缺失反馈也不能补零标签。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:incrementality",
+          "position": "估计处理/不处理的潜在结果差，再按uplift及不确定度在固定触达预算下分配动作。",
+          "tradeoff": "目标是动作带来的额外价值，不是高响应人群本来的结果；需要可信处理对照和识别条件，本地代理任务不能证明真实用户增量。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "共享机制不替代标签语义",
+          "body": "ESMM先把CTR、条件CVR和联合CTCVR说清，MMoE与PLE再决定这些或其他任务怎样共享参数。即便换成PLE，如果把未点击一律写成条件CVR负例，训练含义仍然错误；反过来，概率链正确也不表示任务梯度不会冲突。标签定义、可观测性和网络共享必须分别审计。",
+          "papers": [
+            "recommendation:esmm",
+            "recommendation:mmoe",
+            "recommendation:ple"
+          ]
+        },
+        {
+          "title": "分离测量因素不等于证明策略增量",
+          "body": "FLVM用受限基线和三因子路由区分观看、主动参与与正负方向，试图避免把长视频观看直接当喜欢。Incrementality要求比较同一动作有无干预时的潜在结果。前者是观测反馈的表示/测量设计，后者是反事实决策目标；更准的满意度代理仍不能替代可信对照。",
+          "papers": [
+            "recommendation:flvm",
+            "recommendation:incrementality",
+            "recommendation:esmm"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "probability-chain-versus-expert-sharing",
+          "question": "把ESMM的两塔换成MMoE或PLE，是否就可以不再区分CVR与CTCVR？",
+          "answer": "不能。MMoE/PLE改变参数共享路径，ESMM的条件概率定义仍成立：CVR以已点击为条件，CTCVR是曝光后点击且转化的联合事件。网络再灵活也不能把两种标签混用，更不能把无点击样本直接当成条件CVR的负例。",
+          "example": "示意：1000次曝光有100次点击、20次转化，CTR为10%、条件CVR为20%、CTCVR为2%；换专家门控不会把这三个分母变成同一个。",
+          "papers": [
+            "recommendation:esmm",
+            "recommendation:mmoe",
+            "recommendation:ple"
+          ]
+        },
+        {
+          "id": "gates-versus-private-paths",
+          "question": "MMoE已经每任务独立gate，PLE为什么还要增加任务专属专家？",
+          "answer": "MMoE的gate不同，但被组合的专家仍供所有任务共享，任务梯度可能在同一组参数里冲突。PLE再划出专属专家，给任务保留不必与其他任务共用的变换路径，同时维持共享部分。这是共享边界的改变，不是保证每个任务指标都更好。",
+          "example": "示意：点击喜欢吸睛标题，满意度可能惩罚标题党；两个gate若仍反复调用同一专家会争改参数，专属路径允许各自保留一部分处理方式。",
+          "papers": [
+            "recommendation:mmoe",
+            "recommendation:ple"
+          ]
+        },
+        {
+          "id": "engagement-not-incrementality",
+          "question": "FLVM预测某用户很喜欢内容，为什么Incrementality仍可能决定不额外触达他？",
+          "answer": "FLVM估计的是反馈背后的潜在价值方向；触达决策还要比较用户不受干预时是否本来也会消费。Incrementality在预算下看潜在结果差及不确定度，高自然偏好人群的额外收益可能很低。观测预测和因果增量对应不同问题。",
+          "example": "示意：用户本来有90%概率回访，触达后92%；另一人从10%到20%。前者绝对回访率高，后者的触达增量更大；数字仅为教学算例。",
+          "papers": [
+            "recommendation:flvm",
+            "recommendation:incrementality"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "recommendation:attribution-sets",
+        "recommendation:baff",
+        "recommendation:baseline-incremental",
+        "recommendation:casi",
+        "recommendation:causal-representation",
+        "recommendation:causal-retrieval",
+        "recommendation:click-a-buy-b",
+        "recommendation:cross-task-relationships",
+        "recommendation:cwm",
+        "recommendation:dadf",
+        "recommendation:danet",
+        "recommendation:dceo",
+        "recommendation:easq",
+        "recommendation:ektm",
+        "recommendation:esmm",
+        "recommendation:flvm",
+        "recommendation:gpl-prerank",
+        "recommendation:hge",
+        "recommendation:incrementality",
+        "recommendation:light-heads",
+        "recommendation:llm-ts-prior",
+        "recommendation:mgoe",
+        "recommendation:mmoe",
+        "recommendation:pa-bridge",
+        "recommendation:pearl-percentile",
+        "recommendation:pinequalizer",
+        "recommendation:ple",
+        "recommendation:podcast-mtl",
+        "recommendation:promptshift",
+        "recommendation:ramp",
+        "recommendation:scalr",
+        "recommendation:smes",
+        "recommendation:twice",
+        "recommendation:twitch-mor",
+        "recommendation:unimvt"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较esmm、mmoe、ple、flvm、incrementality，围绕标签是条件事件、反馈测量还是潜在结果差与任务共享发生在哪些参数和路由上建立分析和跨论文问答。",
+          "papers": [
+            "recommendation:attribution-sets",
+            "recommendation:baff",
+            "recommendation:baseline-incremental",
+            "recommendation:casi",
+            "recommendation:causal-representation",
+            "recommendation:causal-retrieval",
+            "recommendation:click-a-buy-b",
+            "recommendation:cross-task-relationships",
+            "recommendation:cwm",
+            "recommendation:dadf",
+            "recommendation:danet",
+            "recommendation:dceo",
+            "recommendation:easq",
+            "recommendation:ektm",
+            "recommendation:esmm",
+            "recommendation:flvm",
+            "recommendation:gpl-prerank",
+            "recommendation:hge",
+            "recommendation:incrementality",
+            "recommendation:light-heads",
+            "recommendation:llm-ts-prior",
+            "recommendation:mgoe",
+            "recommendation:mmoe",
+            "recommendation:pa-bridge",
+            "recommendation:pearl-percentile",
+            "recommendation:pinequalizer",
+            "recommendation:ple",
+            "recommendation:podcast-mtl",
+            "recommendation:promptshift",
+            "recommendation:ramp",
+            "recommendation:scalr",
+            "recommendation:smes",
+            "recommendation:twice",
+            "recommendation:twitch-mor",
+            "recommendation:unimvt"
+          ],
+          "source_revisions": {
+            "recommendation:attribution-sets": "b020a92f838766a459d615402f2f755c78c9dab69d5a4f4e96f2c4a5e2151219",
+            "recommendation:baff": "83a73ccc9f890343e96da156362142298f47f0df4ae60892216503bfc311343f",
+            "recommendation:baseline-incremental": "ec3dc148bab020ffc7ac171992f8fb172b9fe0f5344677c3c0b2664ce36b079d",
+            "recommendation:casi": "c2b57ed9ccdf956e91778bff0550035e32203f23cd7157311a8cc18227b11cc6",
+            "recommendation:causal-representation": "502b84abed1875dcaae615f4dd46f4eca5c82d64c05f25139f13e67e6c71fc30",
+            "recommendation:causal-retrieval": "5b44584b6bc488dd14ead4ac82a96d1fa2d61804dfa80b55fe6ddf2085b97be0",
+            "recommendation:click-a-buy-b": "68bd4118c3f64ac38ec7c9dd8878927b87884d96c92b3b5c7fdbab22381a8262",
+            "recommendation:cross-task-relationships": "c31f52c07dc2d10e5946c003d800237558f703ee396c33a2cdfd278f379c171f",
+            "recommendation:cwm": "862b0557ad3702c0fb9195b5cd25e940e285ec0c02d7af4c5cf4381ff3c49104",
+            "recommendation:dadf": "bdcbb5ce200437d0ac81765fba61a9f9bec5fda70ae901ef4ab9872e993fe910",
+            "recommendation:danet": "ce7e4967d4b7869bba48f451961f37f4b09c4d68d3d0cc5dd908f7f97f141501",
+            "recommendation:dceo": "6baeaee2455a2bf91fb055e93382bf988f82e7740d2f05fdcc8321410f91790d",
+            "recommendation:easq": "8f33cdaa4d73e2eb22f05bbf89581af73c19eb30261ff27cf0d8587726d69fa2",
+            "recommendation:ektm": "6d6355c9443b1b6bdf16f7208dea6e961eef7dfc11f5c26899504ec17130dfbc",
+            "recommendation:esmm": "554c12e66b1c6801ab110d14b5b83f2559bb3ce2810225670e9c2ecb49650219",
+            "recommendation:flvm": "1a909aab098b1df7a11e89f2b86986c63a19c0c60493560455f2d4214452e4dd",
+            "recommendation:gpl-prerank": "f08d297f47fb7caa922336e618d26e4857a911b75977752f86c33744f994479f",
+            "recommendation:hge": "097d0e4bd298402af98e7bd61a3d7fb78a89a6a7dd6188184d0b3353f1e1f01d",
+            "recommendation:incrementality": "f91be3c0ae04f78d857078cd33f484923eb32ed3ec856b7399650f8bae26ff5b",
+            "recommendation:light-heads": "804cfec3d5246e770799e02ab2b8543659cba82ed611df861e9a361d8ae78cf8",
+            "recommendation:llm-ts-prior": "bd9bc52313ff1bbd774afce47c689a00ee91bee429812f6f34f9713ccdb2af1f",
+            "recommendation:mgoe": "b10b55d78d5f4f23edcaf66beb54aa4acc56eee61076d441ce36614868a29205",
+            "recommendation:mmoe": "f2d1cf4015ce2210470ee7ec24eae9cd6eb3875193cbfc405bdf572b3e6d20b1",
+            "recommendation:pa-bridge": "e645b2434fda683711dccc82b7d0d9b35223644cabf7efb9abe5d495b8c7730e",
+            "recommendation:pearl-percentile": "44eeaf4cd6d7cb175941e9efa051abc0939d3b14c4c2ad7be6fd2ffadac040ae",
+            "recommendation:pinequalizer": "c8ad2e564668e9e9969b49180dbd2cfcde2e0603821eb071e7d2a03d6afe3745",
+            "recommendation:ple": "eab8131455b798e7c5e22ee907a207da513bc1535b061ea939f47874b8cc4af0",
+            "recommendation:podcast-mtl": "ea838c6cfbe0c3c842f86e510642d7da5ea7fa0e667b3e85807184aaa9ebe1ad",
+            "recommendation:promptshift": "8c6464bbc284b90cc1ba735a7223b2b0590ecfd543b277b3ffe76ac1623dffc7",
+            "recommendation:ramp": "8a2ff087e95f405bfca678d8177d83d50345470f1d68863c3f0c8387896afb6f",
+            "recommendation:scalr": "1a3d95492e12bbf9a41b64a10d2d869c48abca37df92ad7cd9c9b61009426ca0",
+            "recommendation:smes": "21e240e5aec57fa97e5f99d3d151ac8c399d512f953dbddc611cc33eba326d1c",
+            "recommendation:twice": "6787db993d6620b2a2f2a8d804061a07d8c089f91fc25f0cf73f92dcf66b5821",
+            "recommendation:twitch-mor": "7356130726ad3a788b6ba5085b025c267af884443b465a05eaa57bcdd206bcbf",
+            "recommendation:unimvt": "45e4d2384cdce6dad2c542b71abc064929e55e2c36b9e4186698660a5a4ef1ab"
+          }
+        }
+      ]
+    },
+    "slates-business-value": {
+      "title": "好物品怎样组成好列表：边际价值、策略权重与约束",
+      "thesis": "CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。",
+      "updated": "2026-10-27",
+      "axes": [
+        "价值属于单物品、已选前缀还是整套策略",
+        "训练期蒸馏与推理期搜索的分工",
+        "固定权重、Pareto筛选与动态乘子",
+        "软目标与硬可行性及代理收入边界"
+      ],
+      "comparisons": [
+        {
+          "paper": "recommendation:cdm",
+          "position": "用MMR教师在相关性分数上减已选物品的最大相似度，生成上下文边际监督，再训练学生低延迟模仿。",
+          "tradeoff": "把列表去冗余压入可服务模型，但学生继承教师目标与相似度定义；更不相似不保证更满意，公开数据结果也非生产收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:sort-gen",
+          "position": "causal Transformer按前缀预测CLICK/PAY累计计数的ordered-regression概率，估计追加物品的边际价值；多目标队列与mask缩小搜索。",
+          "tradeoff": "显式处理前缀效应，也引入队列候选范围和批量搜索近似；本地点击/交易/GMV是公开数据代理，单次PyTorch调用不等价生产kernel延迟。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:prl-puts",
+          "position": "双头Q分别估计Repin和P2P utility，对不同权重策略作Pareto sweeping，再在线选择可治理策略。",
+          "tradeoff": "Pareto不劣只表示没有另一候选同时不差且至少一项更好，并不保证两项都超过原策略；策略权重选择与列表内逐项边际估计不同。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:primal-dual-decoding",
+          "position": "不重训生成器，在逐位置选择中加入辅助贡献，并用剩余约束松弛量以镜像下降更新乘子。",
+          "tradeoff": "乘子可随已选前缀改变压力，但软惩罚不是硬可行性证明；若剩余候选无法满足约束，权重再大也不能制造可行解。本地只验证代理机制。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "同一个分数需要回答不同层级的问题",
+          "body": "CDM的MMR教师认为与已选内容重复会降低新增价值；SORT-Gen把列表前缀放进预测器，让点击和交易预期随前缀变化。PRL-PUTS则在Q估计之上挑不同目标权重的策略，不等于每个物品有一个永远正确的固定分。应分别比较效用估计、候选搜索和策略治理，不把预测器变化与权重调节混为一谈。",
+          "papers": [
+            "recommendation:cdm",
+            "recommendation:sort-gen",
+            "recommendation:prl-puts"
+          ]
+        },
+        {
+          "title": "多目标偏好不能替代合法性检查",
+          "body": "PRL-PUTS用Pareto扫描保留值得权衡的策略，Primal-Dual Decoding用动态乘子调整解码压力；二者都在表达目标取舍。SORT-Gen里的已选mask则阻止重复选择，属于另一种可行性条件。有限权重允许目标相互补偿，所以广告量、库存或去重的硬要求仍应独立验证，不能仅看总reward达标。",
+          "papers": [
+            "recommendation:prl-puts",
+            "recommendation:primal-dual-decoding",
+            "recommendation:sort-gen"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "prefix-changes-marginal-value",
+          "question": "CDM和SORT-Gen为什么都不应把物品的独立CTR当成列表里永远不变的价值？",
+          "answer": "已选前缀会改变新增物品的贡献。CDM用与前缀的最大相似度扣除重复性，SORT-Gen则条件于前缀预测累计行为并估计边际价值；两者建模方式不同，但都否定固定点分数足以描述整页收益。是否值得牺牲即时分数仍需按目标评估。",
+          "example": "示意：前三个高分视频是同一段滑雪镜头，露营视频独立分略低；当前缀已含滑雪时，露营的新增信息可能更大，但这不是未经测量的CTR提升结论。",
+          "papers": [
+            "recommendation:cdm",
+            "recommendation:sort-gen"
+          ]
+        },
+        {
+          "id": "pareto-is-not-universal-win",
+          "question": "PRL-PUTS保留一条Pareto策略，是否表示它在Repin、P2P和列表质量上都更好？",
+          "answer": "不表示。Pareto筛选相对给定候选策略和估计目标定义，只排除被同时支配的点；一个策略可以提高Repin却降低P2P。SORT-Gen或CDM的列表上下文目标又是不同层级，不能把双目标不劣直接推广成所有列表指标改善。",
+          "example": "示意：策略A的两项效用为(10,6)，B为(8,9)，二者互不支配；保留B不是证明它全面优于A，更没有说明两者的重复曝光率。",
+          "papers": [
+            "recommendation:prl-puts",
+            "recommendation:sort-gen",
+            "recommendation:cdm"
+          ]
+        },
+        {
+          "id": "adaptive-weights-not-hard-guarantees",
+          "question": "Primal-Dual Decoding动态增大约束乘子后，为什么仍要单独检查列表可行性？",
+          "answer": "乘子调整的是软选择压力，不改变剩余候选是否存在可行组合。若必须覆盖的类别已被早期选择排除，后续加权无法补回。SORT-Gen的去重mask体现硬排除与价值评分的区别，PRL-PUTS的权重扫描也不能自动承担所有业务硬规则。",
+          "example": "示意：最后只剩一个位置，却还要求覆盖两个互斥类别，任何乘子都无法满足；系统应报告不可行或采用预先约定的回退，而非只显示更高总分。",
+          "papers": [
+            "recommendation:primal-dual-decoding",
+            "recommendation:sort-gen",
+            "recommendation:prl-puts"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "recommendation:adaptive-ad-load",
+        "recommendation:cdm",
+        "recommendation:cgr",
+        "recommendation:cohortmix-ts",
+        "recommendation:degr",
+        "recommendation:degre",
+        "recommendation:director",
+        "recommendation:downstream-rewards",
+        "recommendation:dream",
+        "recommendation:drem",
+        "recommendation:drl-put",
+        "recommendation:dual-rerank",
+        "recommendation:genpage",
+        "recommendation:gese",
+        "recommendation:glorank",
+        "recommendation:harmonrank",
+        "recommendation:hcub",
+        "recommendation:higr",
+        "recommendation:ltv-video-ranking",
+        "recommendation:maps-creative",
+        "recommendation:metastrategy",
+        "recommendation:ogr",
+        "recommendation:piano",
+        "recommendation:pindco",
+        "recommendation:primal-dual-decoding",
+        "recommendation:prl-puts",
+        "recommendation:psg",
+        "recommendation:real-estate-rerank",
+        "recommendation:safro",
+        "recommendation:sort-gen",
+        "recommendation:spatial-ads",
+        "recommendation:steps",
+        "recommendation:swag-bid",
+        "recommendation:taiji",
+        "recommendation:uame",
+        "recommendation:youtube-freshness"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较cdm、sort-gen、prl-puts、primal-dual-decoding，围绕价值属于单物品、已选前缀还是整套策略与训练期蒸馏与推理期搜索的分工建立分析和跨论文问答。",
+          "papers": [
+            "recommendation:adaptive-ad-load",
+            "recommendation:cdm",
+            "recommendation:cgr",
+            "recommendation:cohortmix-ts",
+            "recommendation:degr",
+            "recommendation:degre",
+            "recommendation:director",
+            "recommendation:downstream-rewards",
+            "recommendation:dream",
+            "recommendation:drem",
+            "recommendation:drl-put",
+            "recommendation:dual-rerank",
+            "recommendation:genpage",
+            "recommendation:gese",
+            "recommendation:glorank",
+            "recommendation:harmonrank",
+            "recommendation:hcub",
+            "recommendation:higr",
+            "recommendation:ltv-video-ranking",
+            "recommendation:maps-creative",
+            "recommendation:metastrategy",
+            "recommendation:ogr",
+            "recommendation:piano",
+            "recommendation:pindco",
+            "recommendation:primal-dual-decoding",
+            "recommendation:prl-puts",
+            "recommendation:psg",
+            "recommendation:real-estate-rerank",
+            "recommendation:safro",
+            "recommendation:sort-gen",
+            "recommendation:spatial-ads",
+            "recommendation:steps",
+            "recommendation:swag-bid",
+            "recommendation:taiji",
+            "recommendation:uame",
+            "recommendation:youtube-freshness"
+          ],
+          "source_revisions": {
+            "recommendation:adaptive-ad-load": "6f5b60896eb17718b810df722d64937a14dddcb4f6a0996a3c156bbe1686e3f0",
+            "recommendation:cdm": "884477285fff2fd44b4116d22b7b1acd5fc3c26e4b0581f580dfc31a066df185",
+            "recommendation:cgr": "e42bfa4686c88594fa72728b6c2c431fb27b3f6516b7b67cbb51872aab25eb45",
+            "recommendation:cohortmix-ts": "9289be82b4f0feb456084ded0dd00ff1d798789e5f5ab8ab5ab5cf228e22beff",
+            "recommendation:degr": "dfce795c8ba5e1f7c0c1c49e8093da1bbfc7aabc3ae88051f28abbb77fdad707",
+            "recommendation:degre": "807aa26492aa647305a292922a86893b9450df638c30eea7ba76a6d96ae80de8",
+            "recommendation:director": "8227225f2926a0174db64679f6173e421bc6780176b88abe1740c03fe900f5a0",
+            "recommendation:downstream-rewards": "66a9e7c1507d0e03041592282691a394b1c11f009c0bb23c1ab81854100d8c67",
+            "recommendation:dream": "14dd1011946964430a10d3dd8d7f72d5ec5def8cf4a584dfa31235ba0ed17239",
+            "recommendation:drem": "317c376f37ed619128b082b67bcd71975c123343475a1968bca2335da04b75de",
+            "recommendation:drl-put": "db3a5e07580d4a802619930ba3bbeb49a460f534ff273d08eba86960cb03a26c",
+            "recommendation:dual-rerank": "d3fbca24a9c4b3d462486378c1c4da5c6cf0563007a8f97b1b85a6d0598d0d5a",
+            "recommendation:genpage": "5426889516b97cc2320c5173385c8c550453d2840d822be77e723052fb4b69db",
+            "recommendation:gese": "17a292cd7cd5cb6b8214ef94f0c73d2e06080c0b6428755a683c64ef101e57ea",
+            "recommendation:glorank": "6a7f72904546cbccaabe7789958ebcaa4b3d364cc47a80739dd36a61ee25634a",
+            "recommendation:harmonrank": "b8f281c2e714ba4f374aaec918468aaf39c0ce28524e9d71f5f864ee0815da76",
+            "recommendation:hcub": "38f22a70607cef9005ccb838db5d5ae6cfd87043538506da35235854912efdb6",
+            "recommendation:higr": "22c973f018faaa7dd2460e5cbb664b7a00fc26a9c37520ff82c2d5708bdae67d",
+            "recommendation:ltv-video-ranking": "d229a8cf428bdcae6a19e602659e23f43088aca7fa7eb7930196ac737e152779",
+            "recommendation:maps-creative": "1f8f592330a2045072c76511614cfe29f7a04c10ed6898c8fee3516061181597",
+            "recommendation:metastrategy": "88f941079dbbb49d544c9edd270a0d07ea4f7b3ecaa9e7e853b129698c627164",
+            "recommendation:ogr": "f3e863a92f248a1a138b9ca4d98e98108afd69d047724083865391bfe854d5e9",
+            "recommendation:piano": "4619ef31637f42188b3cf95773f0f452f115018b1f335e2083d33b1c1fc6be09",
+            "recommendation:pindco": "db2a112418cb67e5b29a7b20d4a7562f60be0f3bb5343cbd48b8958333e4d76c",
+            "recommendation:primal-dual-decoding": "7cd976d8da6e8e0502793eaba5cfb218e64b75c15c9b9be0973dd450174d922e",
+            "recommendation:prl-puts": "66c54c2b0cfb4be2a7d8a46183d8f3700173366ee91ea6e27404daad8d368a61",
+            "recommendation:psg": "bf5f61d267b9b22943ce69d374eccb9cb61172949b006e3058fea1d694577a31",
+            "recommendation:real-estate-rerank": "049a3271b57a7acca2c290f4858498f723fb6c399ae6cd40dd67e5f6f9ea0860",
+            "recommendation:safro": "1d30d423ae7a65fc612486b6877c316330bf757bb62687200337dce5772ba40c",
+            "recommendation:sort-gen": "995cb655764c84cc0860e0851c53c4941f8c0929cbe94fac18684659705377dd",
+            "recommendation:spatial-ads": "54c05721e6200bbb8e7dfdf4270d366c3043f741770d0a9e71a82ed9c02672eb",
+            "recommendation:steps": "69df8bc6e2ac8c787aa5512c3d3fbf3351c39a8cdd9b7a0bb5735e89d861d949",
+            "recommendation:swag-bid": "cec96589e05b43884eba90862583363a1cd8d9a99e6c23028bad7bac02a82993",
+            "recommendation:taiji": "cd370dc1dabe123dacbbe431a1f42e28f4b29999cacb8d4b4c3f2734494f180d",
+            "recommendation:uame": "a4e044005755b2e95e3d9ae553ff6f5ecd1c5f894b837d77253334721144738c",
+            "recommendation:youtube-freshness": "1684254a676cd5108f2de90d964fea6413530e8b7d1ed1a00ded77cb0f1dea38"
+          }
+        }
+      ]
+    },
+    "research-serving-loop": {
+      "title": "从更便宜的一次前向，到可验证的长期研究闭环",
+      "thesis": "ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。",
+      "updated": "2026-10-27",
+      "axes": [
+        "成本属于训练、请求内推理还是长期研发生命周期",
+        "复用与删除要求哪些依赖/消费者保持一致",
+        "离线门槛、重训和真实线上反馈如何衔接",
+        "负结果与未通过门槛如何进入后续决策"
+      ],
+      "comparisons": [
+        {
+          "paper": "recommendation:rocs",
+          "position": "保持候选隔离，用户请求编码一次，以延迟DCA交互评分候选；生产IKBO在kernel内广播request表示。",
+          "tradeoff": "共享收益以用户表示不依赖具体候选为条件；本地未复刻GLM/IKBO CUDA kernel及生产集群，解析复用不能换算成真实吞吐。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:rec-distill",
+          "position": "teacher自身前向物化raw logits，学生侧作采样校正；main tower只收真标签并服务，aux tower承担task+distill并共享backbone。",
+          "tradeoff": "训练期多付教师/辅助塔成本以降低部署负担，但教师更强不等于学生必受益；teacher/student概率空间要先对齐，需与同预算学生比较。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "recommendation:effective-training-time",
+          "position": "以消费新数据的训练时间除端到端wall time，按初始化、编译、checkpoint、发布和恢复等阶段归因损耗。",
+          "tradeoff": "提高ETT不等于提升模型准确率，也不同于GPU忙碌率；本地是生命周期分解与owner归因组件，不是推荐模型能力实验。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:forte",
+          "position": "冻结模型扰动依赖，经所有头/时间窗筛选，再联合消融、真实重训、线上实验与所有消费者血缘审计逐级退役特征。",
+          "tradeoff": "单特征弱依赖不能相加推导联合安全；本地A100三种子没有候选通过全部门槛，最终保留基线，流程完成不等于删除带来收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "recommendation:self-evolving-rec",
+          "position": "内层研究agent提出optimizer/结构/reward并运行工具，外层状态机控制约束、离线门槛和真实A/B promotion，结论写回journal。",
+          "tradeoff": "可执行试验与独立评价是闭环必要条件，提案或注册名称不是能力；原文生产反馈不能用本地小实验替代，也不能因agent主动探索跳过门槛。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先给成本记上正确的账",
+          "body": "ROCS把同请求多候选共享编码，节省在线重复工作；Rec-Distill把大模型影响移入训练再部署轻main tower，可能增加训练工作。ETT统计训练端到端真正推进新数据的比例，既不测请求时延，也不等同设备利用率。三种指标可同时改善或互相权衡，必须记录优化发生在哪个阶段。",
+          "papers": [
+            "recommendation:rocs",
+            "recommendation:rec-distill",
+            "recommendation:effective-training-time"
+          ]
+        },
+        {
+          "title": "自动研究必须学会接受“不改”",
+          "body": "FORTE把成本节省的提案放进多道质量与血缘门槛，本地无候选通过后保留原模型是有效结论。Self-Evolving RecSys的外层状态机同样不能把内层成功跑完当成可上线；ETT也提醒把失败恢复和重复开销算进生命周期。长期记忆应保存失败原因、预算和消费者边界，而非只积累宣称成功的方案名。",
+          "papers": [
+            "recommendation:forte",
+            "recommendation:self-evolving-rec",
+            "recommendation:effective-training-time"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "sharing-versus-distillation",
+          "question": "ROCS与Rec-Distill都降低在线成本，为什么二者节省的计算不能直接相加估算？",
+          "answer": "ROCS减少同一请求内可共享用户编码的重复，Rec-Distill改变部署模型并把教师/辅助塔留在训练。蒸馏后的结构可能改变原来能共享的比例，kernel和带宽也会影响时延。需要测组合后的实际链路，而非把两个独立加速数字相乘或相加。",
+          "example": "示意：学生已把用户编码缩得很轻，ROCS能省掉的重复部分就可能变小；反之teacher训练耗时增加，也不会体现在单次请求延迟里。",
+          "papers": [
+            "recommendation:rocs",
+            "recommendation:rec-distill"
+          ]
+        },
+        {
+          "id": "effective-time-versus-busy-time",
+          "question": "GPU一直忙、ROCS单请求也更快，为什么训练的Effective Training Time仍可能很低？",
+          "answer": "ETT的分子是真正消费新数据的训练时间，分母含初始化、编译、checkpoint、发布和恢复。设备可能忙于这些阶段，ROCS又优化在线请求而非训练生命周期。要按阶段和owner定位损耗，不能用设备忙碌或推理时延替代ETT。",
+          "example": "示意：10小时wall time中8小时训练新数据、2小时编译与恢复，ETT为80%；即使那2小时GPU也满载，分子仍不是10小时。",
+          "papers": [
+            "recommendation:effective-training-time",
+            "recommendation:rocs"
+          ]
+        },
+        {
+          "id": "joint-removal-needs-new-evidence",
+          "question": "FORTE发现两个特征单独扰动都几乎无损，自动研究agent为什么不能直接一起删除？",
+          "answer": "两个特征可能互为备份，单独破坏时另一条仍提供信号；联合删除会暴露非加性损失。FORTE因此还要联合消融、重训和所有消费者审计。Self-Evolving RecSys应把此提案送入实际门槛，用失败证据更新journal，而不是按两个单项结果推断安全。",
+          "example": "示意：品牌ID与文本品牌词都能识别品牌，单删任一个变化很小，同时删掉可能损伤某个稀疏任务；教学例子不代表论文某次实测。",
+          "papers": [
+            "recommendation:forte",
+            "recommendation:self-evolving-rec"
+          ]
+        },
+        {
+          "id": "research-memory-is-not-promotion",
+          "question": "Rec-Distill学生的离线分数略高，研究agent把方案记进journal后就算完成上线闭环吗？",
+          "answer": "不算。先核对学生采样校正、main/aux职责及同预算对照，确保提升不是协议变化；随后还需按Self-Evolving RecSys外层约束完成独立验证和适用的线上门槛。journal保存的是可复核试验与结论，不能替代执行证据或直接授予promotion。",
+          "example": "示意：学生换了负采样率后AUC变化，若教师logits仍在旧概率空间，先修协议再比较；记录一个“蒸馏成功”标题不能解决这个差异。",
+          "papers": [
+            "recommendation:rec-distill",
+            "recommendation:self-evolving-rec"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "recommendation:agentic-rec-tune",
+        "recommendation:autolr",
+        "recommendation:coral",
+        "recommendation:effective-training-time",
+        "recommendation:evopilot",
+        "recommendation:evorec",
+        "recommendation:evoskillrec",
+        "recommendation:forte",
+        "recommendation:memory-layer",
+        "recommendation:nova",
+        "recommendation:prompt-generation",
+        "recommendation:radar",
+        "recommendation:rec-distill",
+        "recommendation:recevolve",
+        "recommendation:recharness",
+        "recommendation:rocs",
+        "recommendation:self-evolving-rec",
+        "recommendation:solaris",
+        "recommendation:ug-sep"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较rocs、rec-distill、effective-training-time、forte、self-evolving-rec，围绕成本属于训练、请求内推理还是长期研发生命周期与复用与删除要求哪些依赖/消费者保持一致建立分析和跨论文问答。",
+          "papers": [
+            "recommendation:agentic-rec-tune",
+            "recommendation:autolr",
+            "recommendation:coral",
+            "recommendation:effective-training-time",
+            "recommendation:evopilot",
+            "recommendation:evorec",
+            "recommendation:evoskillrec",
+            "recommendation:forte",
+            "recommendation:memory-layer",
+            "recommendation:nova",
+            "recommendation:prompt-generation",
+            "recommendation:radar",
+            "recommendation:rec-distill",
+            "recommendation:recevolve",
+            "recommendation:recharness",
+            "recommendation:rocs",
+            "recommendation:self-evolving-rec",
+            "recommendation:solaris",
+            "recommendation:ug-sep"
+          ],
+          "source_revisions": {
+            "recommendation:agentic-rec-tune": "577f19e686b62b5cff25150df3488cbb65835a454142de3a037fe66277fa7eae",
+            "recommendation:autolr": "171131b7a42cb45847e06f0e9cb72240a34dd7af9ad1eccc63fc48fa936364a3",
+            "recommendation:coral": "3a706c3a0377f2b17d418a3dcbed22763a9d71285ca83b8e66f8a52cf0a85c2b",
+            "recommendation:effective-training-time": "aa493874ee746e481930fd7f7d89b15afd90cd0bcf0d87021a60d0aff4730cfe",
+            "recommendation:evopilot": "461d4284afa1aa1a754016383d87aca09361b2b6abf0f9dfca423a3b156fdbae",
+            "recommendation:evorec": "dbaf8082488e162a00d70e57a0702605b53197bc066153cb877869761c327630",
+            "recommendation:evoskillrec": "45e89370cd05c739dfea0d299386fad0ce0c25407151345d5b3fec7f418ad033",
+            "recommendation:forte": "23be922581f48bde86d0e80b07d2bee47357b13895770c2f0b3afdec80b24555",
+            "recommendation:memory-layer": "8dec7948e5bdeb38194e87767b197d06c1546397bde19cab64e12be2c4c870f7",
+            "recommendation:nova": "52dd1495964d1c94f4964f01d2bb31e781ccc8b129bb3a512adf2d0b0abd9bf9",
+            "recommendation:prompt-generation": "22d582380c8a28a7017bcfdeeac8e7ae11ccf3e0582b6d6ec9f3123c75b83f8a",
+            "recommendation:radar": "e9dc35958ed9e1a43508851981fda451ee2a2a08df131adccd953b9efa402df5",
+            "recommendation:rec-distill": "cadfa26d75086d221a3a61eb04351cc999ca4fb908453a5911fc8141cd394c67",
+            "recommendation:recevolve": "93b5de6ce91e08fc6555af7a59441f102032212fc1a602c4211672954d5e7743",
+            "recommendation:recharness": "735add87130439b41f5cb159dfb1b319aaeeb08e03641f795e4fb2973fbc8a2a",
+            "recommendation:rocs": "ff126275bbb65549bcc5efead4f225028a5e2be196e9dcf59fc39210d635b61a",
+            "recommendation:self-evolving-rec": "34a4cf09ed06281af60e3c1a887adfb4ce9e69a3ee7f016d17c8b8b6fa1c8dbd",
+            "recommendation:solaris": "f41b4a786874021a0b15f8e77949d8c3425410e9ac4e5d66fab55db24537ddda",
+            "recommendation:ug-sep": "881e103296aaaab594e01b83a8079093fbb08244d2834742b307574c3943042e"
+          }
+        }
+      ]
+    }
+  }
+}
