@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "README.md"
+      - "readme_*.md"
       - "docs/**"
       - "mkdocs.yml"
       - "requirements-docs.txt"
@@ -18,11 +19,13 @@ on:
       - "tests/test_learning_cards.py"
       - "tests/test_learning_topics.py"
       - "tests/test_learning_questions.py"
+      - "tests/test_project_readme_sync.py"
       - ".github/workflows/docs.yml"
   push:
     branches: [main]
     paths:
       - "README.md"
+      - "readme_*.md"
       - "docs/**"
       - "mkdocs.yml"
       - "requirements-docs.txt"
@@ -37,6 +40,7 @@ on:
       - "tests/test_learning_cards.py"
       - "tests/test_learning_topics.py"
       - "tests/test_learning_questions.py"
+      - "tests/test_project_readme_sync.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -59,8 +63,9 @@ jobs:
           python-version: "3.11"
           cache: pip
           cache-dependency-path: requirements-docs.txt
-      - run: pip install -r requirements-docs.txt
+      - run: pip install -r requirements-docs.txt pytest
       - run: python scripts/sync_project_readme.py --check
+      - run: python -m pytest tests/test_project_readme_sync.py
       - run: python scripts/generate_public_experiment_dashboard.py
       - run: git diff --exit-code -- docs/assets/data/experiment-dashboard.json
       - run: python scripts/generate_learning_cards.py --require-questions

@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 29 个问题 · 29 篇论文
+[基础模型](index.md) / 116 个问题 · 29 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -16,12 +16,34 @@ hide:
 <label for="learning-search">搜索问题
 <input id="learning-search" type="search" data-learning-search placeholder="搜索问题、论文或机制"></label>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">29 个问题 · 29 篇论文</p>
+<div class="ar-learning-levels" role="group" aria-label="学习层次">
+<span>学习层次</span>
+<button type="button" data-learning-level="" aria-pressed="true">全部</button>
+<button type="button" data-learning-level="basics" aria-pressed="false">基础理解</button>
+<button type="button" data-learning-level="mechanism" aria-pressed="false">核心机制</button>
+<button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
+<button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
+</div>
+<p class="ar-learning-status" data-learning-status role="status">116 个问题 · 29 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:moezip" data-paper-title="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs 基础模型 Korea University 2026-10-21 MoE 的 KV 删除会扰动 attention 输出，进而改变路由。MoEZip 用已观察 instruction token 的路由分布 Fisher trace 作为敏感性代理，经 attention 传播到 context 位置，预留全局 routing anchors；其余预算沿用调用者提供的 dense/MoE base compressor 分数。future answer 不可用于真实选择。 完整实验成本过高，不复现（审查 DONE）；3 seeds 仍只是 L1 机制诊断，不构成 MoE 能力或质量提升证据。fisher_trace、select_cache、compress_cache 保留两种 gate、跨头 max、全局 anchors、App C 默认预算边界、base 排除重复补齐及真实 KV gather。输出原 context 索引并维持升序，调用者必须据此保留 position IDs。base 分数是显式接口，不伪装成已实现 KVZip。  MoE路由 KV缓存与稀疏推理 基础模型 推理压缩：权重、KV 缓存与服务带宽 MoEZip为什么要在普通KV压缩预算中预留路由锚点？ 删除KV不仅改变注意力输出，还可能改变后续专家路由。方法把已观察指令位置的路由Fisher敏感性经注意力传播到上下文，先保留全局锚点，其余沿用基础压缩器预算。该敏感性不是路由翻转的充分条件，未来答案和离线金标诊断不得进入真实选择器。 例如一段旧证据对答案词元注意力不高，却影响调用哪个专家，可被锚点保护；不能偷看将来的标准答案再倒选该保留哪段历史。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:moezip" data-paper-title="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs 基础模型 Korea University 2026-10-21 MoE 的 KV 删除会扰动 attention 输出，进而改变路由。MoEZip 用已观察 instruction token 的路由分布 Fisher trace 作为敏感性代理，经 attention 传播到 context 位置，预留全局 routing anchors；其余预算沿用调用者提供的 dense/MoE base compressor 分数。future answer 不可用于真实选择。 完整实验成本过高，不复现（审查 DONE）；3 seeds 仍只是 L1 机制诊断，不构成 MoE 能力或质量提升证据。fisher_trace、select_cache、compress_cache 保留两种 gate、跨头 max、全局 anchors、App C 默认预算边界、base 排除重复补齐及真实 KV gather。输出原 context 索引并维持升序，调用者必须据此保留 position IDs。base 分数是显式接口，不伪装成已实现 KVZip。  MoE路由 KV缓存与稀疏推理 基础模型 推理压缩：权重、KV 缓存与服务带宽 MoEZip 为什么把 KV 误差与专家路由联系起来？ 删除KV会改变attention输出，进而影响MoE router。普通压缩若只看attention质量，可能忽略路由敏感位置，因此方法从已观察instruction的gate与attention中估计全局routing anchors。 示意：一条KV虽不占最大attention，扰动它后却可能让token跨过专家选择边界。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-moezip-03b66820" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ed92465526edc741">MoEZip 为什么把 KV 误差与专家路由联系起来？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amoezip">MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Korea University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>删除KV会改变attention输出，进而影响MoE router。普通压缩若只看attention质量，可能忽略路由敏感位置，因此方法从已观察instruction的gate与attention中估计全局routing anchors。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一条KV虽不占最大attention，扰动它后却可能让token跨过专家选择边界。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30206v1">原论文</a> · <a href="../../../../foundation-models/2610.30206-moezip/">实现解读</a> · <a href="#qa-ed92465526edc741">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:moezip" data-paper-title="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs 基础模型 Korea University 2026-10-21 MoE 的 KV 删除会扰动 attention 输出，进而改变路由。MoEZip 用已观察 instruction token 的路由分布 Fisher trace 作为敏感性代理，经 attention 传播到 context 位置，预留全局 routing anchors；其余预算沿用调用者提供的 dense/MoE base compressor 分数。future answer 不可用于真实选择。 完整实验成本过高，不复现（审查 DONE）；3 seeds 仍只是 L1 机制诊断，不构成 MoE 能力或质量提升证据。fisher_trace、select_cache、compress_cache 保留两种 gate、跨头 max、全局 anchors、App C 默认预算边界、base 排除重复补齐及真实 KV gather。输出原 context 索引并维持升序，调用者必须据此保留 position IDs。base 分数是显式接口，不伪装成已实现 KVZip。  MoE路由 KV缓存与稀疏推理 基础模型 推理压缩：权重、KV 缓存与服务带宽 MoEZip为什么要在普通KV压缩预算中预留路由锚点？ 删除KV不仅改变注意力输出，还可能改变后续专家路由。方法把已观察指令位置的路由Fisher敏感性经注意力传播到上下文，先保留全局锚点，其余沿用基础压缩器预算。该敏感性不是路由翻转的充分条件，未来答案和离线金标诊断不得进入真实选择器。 例如一段旧证据对答案词元注意力不高，却影响调用哪个专家，可被锚点保护；不能偷看将来的标准答案再倒选该保留哪段历史。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-88eb9936565008cf">MoEZip为什么要在普通KV压缩预算中预留路由锚点？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amoezip">MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Korea University</p>
@@ -32,9 +54,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30206v1">原论文</a> · <a href="../../../../foundation-models/2610.30206-moezip/">实现解读</a> · <a href="#qa-88eb9936565008cf">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:right-on-q" data-paper-title="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories 基础模型 University of Michigan, Ann Arbor 2026-10-21 低比特量化会改变模型生成的前缀。只在固定的全精度参考回答上蒸馏，不能覆盖量化学生真正遇到的错误和长推理状态。OnQ 从逐 block 校准开始，让量化学生自己生成回答，再由冻结的原始全精度教师在相同学生前缀上提供分布监督。第二个问题是同一前缀中不同候选 token 的偏差方向不同：学生既可能低估某些 token，也可能高估另一些 token。论文采用候选级 Dynamic KL，用教师与学生概率的比值调整 forward / reverse KL 的权重，而不是整句共用一个混合系数。 收录状态：高成本研究资料，完整实验不复现（审查 DONE）。后续若单独批准实现，至少需同时保留逐 block 初始化、学生真实量化前向 / rollout、冻结同前缀教师监督、候选级 stop-gradient 权重与残差概率类别，才可讨论对应保真度。收录状态：高成本研究资料，完整实验不复现（审查 DONE）。未实现 runtime、量化训练、教师服务或 benchmark；没有本地指标，没有 GPU 验证要求，也不进入 evolve 晋级。不能把本页的公式解读标成模型复现。正文 §4 与 Appendix A.1-A.2 给出完整训练预算：  模型压缩与量化 量化学生在策略蒸馏 基础模型 推理压缩：权重、KV 缓存与服务带宽 OnQ为什么在量化学生自己的前缀上蒸馏，并对同位置不同候选使用不同KL混合权重？ 量化改变生成路径，全精度教师标准轨迹未必覆盖学生实际错误状态。教师因此沿学生前缀评分，再按每个候选的师生概率比平衡正反KL，以分别处理低估和高估。混合系数停止梯度，近似词表还保留剩余质量桶，不能只归一化少数候选掩盖误差。 例如学生在一个前缀低估正确数字却高估某个连接词，两种偏差不应共用整句权重；教师也不能换回自己的理想前缀来评分。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:moezip" data-paper-title="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs 基础模型 Korea University 2026-10-21 MoE 的 KV 删除会扰动 attention 输出，进而改变路由。MoEZip 用已观察 instruction token 的路由分布 Fisher trace 作为敏感性代理，经 attention 传播到 context 位置，预留全局 routing anchors；其余预算沿用调用者提供的 dense/MoE base compressor 分数。future answer 不可用于真实选择。 完整实验成本过高，不复现（审查 DONE）；3 seeds 仍只是 L1 机制诊断，不构成 MoE 能力或质量提升证据。fisher_trace、select_cache、compress_cache 保留两种 gate、跨头 max、全局 anchors、App C 默认预算边界、base 排除重复补齐及真实 KV gather。输出原 context 索引并维持升序，调用者必须据此保留 position IDs。base 分数是显式接口，不伪装成已实现 KVZip。  MoE路由 KV缓存与稀疏推理 基础模型 推理压缩：权重、KV 缓存与服务带宽 MoEZip 的 Fisher trace，是 router top-k 翻转的精确判据吗？ 不是。它是分布曲率的方向平均代理，不含router对hidden的Jacobian，也不是翻转的充分必要条件。anchor评分需按该代理理解，不能把高trace直接写成必然换专家。 示意：两个位置trace相同，hidden扰动方向不同，实际路由变化仍可能不同。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e1475de3e0254894">MoEZip 的 Fisher trace，是 router top-k 翻转的精确判据吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amoezip">MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Korea University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它是分布曲率的方向平均代理，不含router对hidden的Jacobian，也不是翻转的充分必要条件。anchor评分需按该代理理解，不能把高trace直接写成必然换专家。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个位置trace相同，hidden扰动方向不同，实际路由变化仍可能不同。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30206v1">原论文</a> · <a href="../../../../foundation-models/2610.30206-moezip/">实现解读</a> · <a href="#qa-e1475de3e0254894">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:moezip" data-paper-title="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs 基础模型 Korea University 2026-10-21 MoE 的 KV 删除会扰动 attention 输出，进而改变路由。MoEZip 用已观察 instruction token 的路由分布 Fisher trace 作为敏感性代理，经 attention 传播到 context 位置，预留全局 routing anchors；其余预算沿用调用者提供的 dense/MoE base compressor 分数。future answer 不可用于真实选择。 完整实验成本过高，不复现（审查 DONE）；3 seeds 仍只是 L1 机制诊断，不构成 MoE 能力或质量提升证据。fisher_trace、select_cache、compress_cache 保留两种 gate、跨头 max、全局 anchors、App C 默认预算边界、base 排除重复补齐及真实 KV gather。输出原 context 索引并维持升序，调用者必须据此保留 position IDs。base 分数是显式接口，不伪装成已实现 KVZip。  MoE路由 KV缓存与稀疏推理 基础模型 推理压缩：权重、KV 缓存与服务带宽 MoEZip 预留 anchors 后，base compressor 补预算时能再选同一批 anchors 吗？ 应排除已选anchors并补足剩余预算，最终gather真实KV且保持原时间索引。选择输入只能来自prefill可用instruction，不能用未来gold answer的离线路由翻转统计。 示意：总预算64、anchors16时，base需要补48个不同位置，而不是重复选16个anchor占名额。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-86fa47a3c2433cb6">MoEZip 预留 anchors 后，base compressor 补预算时能再选同一批 anchors 吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amoezip">MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Korea University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>应排除已选anchors并补足剩余预算，最终gather真实KV且保持原时间索引。选择输入只能来自prefill可用instruction，不能用未来gold answer的离线路由翻转统计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>总预算64、anchors16时，base需要补48个不同位置，而不是重复选16个anchor占名额。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.30206v1">原论文</a> · <a href="../../../../foundation-models/2610.30206-moezip/">实现解读</a> · <a href="#qa-86fa47a3c2433cb6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:right-on-q" data-paper-title="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories 基础模型 University of Michigan, Ann Arbor 2026-10-21 低比特量化会改变模型生成的前缀。只在固定的全精度参考回答上蒸馏，不能覆盖量化学生真正遇到的错误和长推理状态。OnQ 从逐 block 校准开始，让量化学生自己生成回答，再由冻结的原始全精度教师在相同学生前缀上提供分布监督。第二个问题是同一前缀中不同候选 token 的偏差方向不同：学生既可能低估某些 token，也可能高估另一些 token。论文采用候选级 Dynamic KL，用教师与学生概率的比值调整 forward / reverse KL 的权重，而不是整句共用一个混合系数。 收录状态：高成本研究资料，完整实验不复现（审查 DONE）。后续若单独批准实现，至少需同时保留逐 block 初始化、学生真实量化前向 / rollout、冻结同前缀教师监督、候选级 stop-gradient 权重与残差概率类别，才可讨论对应保真度。收录状态：高成本研究资料，完整实验不复现（审查 DONE）。未实现 runtime、量化训练、教师服务或 benchmark；没有本地指标，没有 GPU 验证要求，也不进入 evolve 晋级。不能把本页的公式解读标成模型复现。正文 §4 与 Appendix A.1-A.2 给出完整训练预算：  模型压缩与量化 量化学生在策略蒸馏 基础模型 推理压缩：权重、KV 缓存与服务带宽 Right On Q 为什么让量化学生自己生成训练前缀？ 量化会改变模型真正走到的推理状态，固定全精度答案可能覆盖不到这些偏差。OnQ在学生前缀上查询冻结教师，让监督更贴近量化学生自身分布。 示意：学生前面走错一步后，教师仍在同一个错误前缀上给分布反馈，而非只展示另一条理想轨迹。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-right-on-q-5ed3d308" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-015ce5e8dc05282d">Right On Q 为什么让量化学生自己生成训练前缀？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aright-on-q">Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Michigan, Ann Arbor</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>量化会改变模型真正走到的推理状态，固定全精度答案可能覆盖不到这些偏差。OnQ在学生前缀上查询冻结教师，让监督更贴近量化学生自身分布。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>学生前面走错一步后，教师仍在同一个错误前缀上给分布反馈，而非只展示另一条理想轨迹。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.29378v1">原论文</a> · <a href="../../../../foundation-models/2610.29378-right-on-q/">实现解读</a> · <a href="#qa-015ce5e8dc05282d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:right-on-q" data-paper-title="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories 基础模型 University of Michigan, Ann Arbor 2026-10-21 低比特量化会改变模型生成的前缀。只在固定的全精度参考回答上蒸馏，不能覆盖量化学生真正遇到的错误和长推理状态。OnQ 从逐 block 校准开始，让量化学生自己生成回答，再由冻结的原始全精度教师在相同学生前缀上提供分布监督。第二个问题是同一前缀中不同候选 token 的偏差方向不同：学生既可能低估某些 token，也可能高估另一些 token。论文采用候选级 Dynamic KL，用教师与学生概率的比值调整 forward / reverse KL 的权重，而不是整句共用一个混合系数。 收录状态：高成本研究资料，完整实验不复现（审查 DONE）。后续若单独批准实现，至少需同时保留逐 block 初始化、学生真实量化前向 / rollout、冻结同前缀教师监督、候选级 stop-gradient 权重与残差概率类别，才可讨论对应保真度。收录状态：高成本研究资料，完整实验不复现（审查 DONE）。未实现 runtime、量化训练、教师服务或 benchmark；没有本地指标，没有 GPU 验证要求，也不进入 evolve 晋级。不能把本页的公式解读标成模型复现。正文 §4 与 Appendix A.1-A.2 给出完整训练预算：  模型压缩与量化 量化学生在策略蒸馏 基础模型 推理压缩：权重、KV 缓存与服务带宽 OnQ为什么在量化学生自己的前缀上蒸馏，并对同位置不同候选使用不同KL混合权重？ 量化改变生成路径，全精度教师标准轨迹未必覆盖学生实际错误状态。教师因此沿学生前缀评分，再按每个候选的师生概率比平衡正反KL，以分别处理低估和高估。混合系数停止梯度，近似词表还保留剩余质量桶，不能只归一化少数候选掩盖误差。 例如学生在一个前缀低估正确数字却高估某个连接词，两种偏差不应共用整句权重；教师也不能换回自己的理想前缀来评分。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-fbeed3269c200615">OnQ为什么在量化学生自己的前缀上蒸馏，并对同位置不同候选使用不同KL混合权重？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aright-on-q">Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Michigan, Ann Arbor</p>
@@ -45,9 +107,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.29378v1">原论文</a> · <a href="../../../../foundation-models/2610.29378-right-on-q/">实现解读</a> · <a href="#qa-fbeed3269c200615">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:race-rope-compression" data-paper-title="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies 基础模型 MIT CSAIL 2026-10-20 把KV写成低秩形式却在注意力前还原，可能节省缓存但增加运算。RACE直接改变注意力head的宽度：Q和K共享选择，只保留完整RoPE旋转对；V通过校准激活的右奇异子空间投影；再将两种变换折叠到Q/K/V/O权重。保留原模型频率及原head维度缩放，避免把缩小维度当作新模型重新编码。 整套矩阵超出本轮单A100/A30短时预算，成本过高，不复现（审查 DONE），不下载、不试跑、不进入重试队列。校准与该小向量诊断不是validation/test能力评测；race_pair_selection支持split-half和interleaved两种物理旋转布局；calibrate_race得到detached QK选择与V子空间；fold_race_weights真实生成缩小后的四个投影；native_race_attention仅在保留维度执行因果注意力，不还原完整Q/K/V。当前是单头、全RoPE参考算子，不是HuggingFace整模型转换器，也未实现GQA/partial-RoPE部署。  注意力与长上下文 KV缓存与原生维度压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 RACE压窄注意力后为什么仍保留原RoPE频率和原head缩放？ 压缩是原模型上的子空间变换，不是重新定义一套更窄模型。Q/K共同保留完整旋转对，频率不重编号，缩放仍按原维度；V子空间变换再折叠进输入输出权重，直接在低维计算。联合能量仅优化校准上界，不保证全局最小语言模型损失。 例如保留原来的第二和第五个旋转平面，应继续使用它们原频率；若把它们改编成第一、第二频率，就同时改变了位置编码含义。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:right-on-q" data-paper-title="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories 基础模型 University of Michigan, Ann Arbor 2026-10-21 低比特量化会改变模型生成的前缀。只在固定的全精度参考回答上蒸馏，不能覆盖量化学生真正遇到的错误和长推理状态。OnQ 从逐 block 校准开始，让量化学生自己生成回答，再由冻结的原始全精度教师在相同学生前缀上提供分布监督。第二个问题是同一前缀中不同候选 token 的偏差方向不同：学生既可能低估某些 token，也可能高估另一些 token。论文采用候选级 Dynamic KL，用教师与学生概率的比值调整 forward / reverse KL 的权重，而不是整句共用一个混合系数。 收录状态：高成本研究资料，完整实验不复现（审查 DONE）。后续若单独批准实现，至少需同时保留逐 block 初始化、学生真实量化前向 / rollout、冻结同前缀教师监督、候选级 stop-gradient 权重与残差概率类别，才可讨论对应保真度。收录状态：高成本研究资料，完整实验不复现（审查 DONE）。未实现 runtime、量化训练、教师服务或 benchmark；没有本地指标，没有 GPU 验证要求，也不进入 evolve 晋级。不能把本页的公式解读标成模型复现。正文 §4 与 Appendix A.1-A.2 给出完整训练预算：  模型压缩与量化 量化学生在策略蒸馏 基础模型 推理压缩：权重、KV 缓存与服务带宽 OnQ 候选级 Dynamic KL，与整句固定 forward/reverse 混合有何差别？ 同一前缀内有的token被学生低估、有的被高估，候选级α_v根据p_v与q_v变化；整句一个系数不能表达这种局部差异。α还需stop-gradient，避免权重本身变成被优化捷径。 示意：一个候选需要更强teacher覆盖，另一个需要抑制学生过高概率，二者不必用相同比例。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-dcd2b6d622a04412">OnQ 候选级 Dynamic KL，与整句固定 forward/reverse 混合有何差别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aright-on-q">Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Michigan, Ann Arbor</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同一前缀内有的token被学生低估、有的被高估，候选级α_v根据p_v与q_v变化；整句一个系数不能表达这种局部差异。α还需stop-gradient，避免权重本身变成被优化捷径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个候选需要更强teacher覆盖，另一个需要抑制学生过高概率，二者不必用相同比例。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.29378v1">原论文</a> · <a href="../../../../foundation-models/2610.29378-right-on-q/">实现解读</a> · <a href="#qa-dcd2b6d622a04412">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:right-on-q" data-paper-title="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories 基础模型 University of Michigan, Ann Arbor 2026-10-21 低比特量化会改变模型生成的前缀。只在固定的全精度参考回答上蒸馏，不能覆盖量化学生真正遇到的错误和长推理状态。OnQ 从逐 block 校准开始，让量化学生自己生成回答，再由冻结的原始全精度教师在相同学生前缀上提供分布监督。第二个问题是同一前缀中不同候选 token 的偏差方向不同：学生既可能低估某些 token，也可能高估另一些 token。论文采用候选级 Dynamic KL，用教师与学生概率的比值调整 forward / reverse KL 的权重，而不是整句共用一个混合系数。 收录状态：高成本研究资料，完整实验不复现（审查 DONE）。后续若单独批准实现，至少需同时保留逐 block 初始化、学生真实量化前向 / rollout、冻结同前缀教师监督、候选级 stop-gradient 权重与残差概率类别，才可讨论对应保真度。收录状态：高成本研究资料，完整实验不复现（审查 DONE）。未实现 runtime、量化训练、教师服务或 benchmark；没有本地指标，没有 GPU 验证要求，也不进入 evolve 晋级。不能把本页的公式解读标成模型复现。正文 §4 与 Appendix A.1-A.2 给出完整训练预算：  模型压缩与量化 量化学生在策略蒸馏 基础模型 推理压缩：权重、KV 缓存与服务带宽 用 teacher/student top-20 并集近似 OnQ 时，能只在并集内重新归一化吗？ 文档近似保留额外“其余质量”类别，并保留学生残差质量梯度、平滑教师类别。直接截断再归一化会抹掉尾部差异。OPD更新latent权重与scale，zero point在该阶段固定。 示意：并集只覆盖90%概率时，剩余10%仍需作为一类参与目标，而非被默认为0。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-68065f2c5d2ee242">用 teacher/student top-20 并集近似 OnQ 时，能只在并集内重新归一化吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aright-on-q">Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Michigan, Ann Arbor</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档近似保留额外“其余质量”类别，并保留学生残差质量梯度、平滑教师类别。直接截断再归一化会抹掉尾部差异。OPD更新latent权重与scale，zero point在该阶段固定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>并集只覆盖90%概率时，剩余10%仍需作为一类参与目标，而非被默认为0。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.29378v1">原论文</a> · <a href="../../../../foundation-models/2610.29378-right-on-q/">实现解读</a> · <a href="#qa-68065f2c5d2ee242">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:race-rope-compression" data-paper-title="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies 基础模型 MIT CSAIL 2026-10-20 把KV写成低秩形式却在注意力前还原，可能节省缓存但增加运算。RACE直接改变注意力head的宽度：Q和K共享选择，只保留完整RoPE旋转对；V通过校准激活的右奇异子空间投影；再将两种变换折叠到Q/K/V/O权重。保留原模型频率及原head维度缩放，避免把缩小维度当作新模型重新编码。 整套矩阵超出本轮单A100/A30短时预算，成本过高，不复现（审查 DONE），不下载、不试跑、不进入重试队列。校准与该小向量诊断不是validation/test能力评测；race_pair_selection支持split-half和interleaved两种物理旋转布局；calibrate_race得到detached QK选择与V子空间；fold_race_weights真实生成缩小后的四个投影；native_race_attention仅在保留维度执行因果注意力，不还原完整Q/K/V。当前是单头、全RoPE参考算子，不是HuggingFace整模型转换器，也未实现GQA/partial-RoPE部署。  注意力与长上下文 KV缓存与原生维度压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 RACE 为什么直接缩小 attention 的原生 head 宽度？ 仅把KV存成低秩而在attention前还原，可能省存储却增加重建。RACE将QK选择与V子空间折叠进投影权重，让attention本身在保留维度上执行，而不重建完整Q/K/V。 示意：读出4维表示后直接在4维计算，而不是先还原成8维再做原运算。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-race-rope-compression-5eb673ad" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-12c085821e363300">RACE 为什么直接缩小 attention 的原生 head 宽度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arace-rope-compression">RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT CSAIL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>仅把KV存成低秩而在attention前还原，可能省存储却增加重建。RACE将QK选择与V子空间折叠进投影权重，让attention本身在保留维度上执行，而不重建完整Q/K/V。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>读出4维表示后直接在4维计算，而不是先还原成8维再做原运算。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28385v1">原论文</a> · <a href="../../../../foundation-models/2610.28385-race-rope-compression/">实现解读</a> · <a href="#qa-12c085821e363300">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:race-rope-compression" data-paper-title="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies 基础模型 MIT CSAIL 2026-10-20 把KV写成低秩形式却在注意力前还原，可能节省缓存但增加运算。RACE直接改变注意力head的宽度：Q和K共享选择，只保留完整RoPE旋转对；V通过校准激活的右奇异子空间投影；再将两种变换折叠到Q/K/V/O权重。保留原模型频率及原head维度缩放，避免把缩小维度当作新模型重新编码。 整套矩阵超出本轮单A100/A30短时预算，成本过高，不复现（审查 DONE），不下载、不试跑、不进入重试队列。校准与该小向量诊断不是validation/test能力评测；race_pair_selection支持split-half和interleaved两种物理旋转布局；calibrate_race得到detached QK选择与V子空间；fold_race_weights真实生成缩小后的四个投影；native_race_attention仅在保留维度执行因果注意力，不还原完整Q/K/V。当前是单头、全RoPE参考算子，不是HuggingFace整模型转换器，也未实现GQA/partial-RoPE部署。  注意力与长上下文 KV缓存与原生维度压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 RACE压窄注意力后为什么仍保留原RoPE频率和原head缩放？ 压缩是原模型上的子空间变换，不是重新定义一套更窄模型。Q/K共同保留完整旋转对，频率不重编号，缩放仍按原维度；V子空间变换再折叠进输入输出权重，直接在低维计算。联合能量仅优化校准上界，不保证全局最小语言模型损失。 例如保留原来的第二和第五个旋转平面，应继续使用它们原频率；若把它们改编成第一、第二频率，就同时改变了位置编码含义。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-0fa836509cee57ad">RACE压窄注意力后为什么仍保留原RoPE频率和原head缩放？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arace-rope-compression">RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT CSAIL</p>
@@ -58,9 +160,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28385v1">原论文</a> · <a href="../../../../foundation-models/2610.28385-race-rope-compression/">实现解读</a> · <a href="#qa-0fa836509cee57ad">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:flint" data-paper-title="FLINT: Fixed-budget Late Interaction" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FLINT: Fixed-budget Late Interaction 基础模型 University of Illinois Urbana-Champaign 2026-10-19 ColBERT 对每个 token 保留向量，文档越长索引越大，长查询也需要更多次向量检索。ConstBERT 固定了文档侧预算，但查询仍逐 token。FLINT 则在共享 backbone 后，用两套不同的可学习 latent 分别读取查询和文档 token；交叉注意力、FFN 参数共享，双方输出都固定为个向量。它不是截取前个 token，也不是简单平均池化。 这些完整训练/索引/多基准实验明显超过单 A100/A30 的本轮短预算，标注成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动重试队列。FlintLatentPool 实现共享多头 cross-attention、两套 latent、pre-LN、残差及 GELU FFN；FlintFixedBudgetRetrieval 接收已经编码的 token 张量，执行投影、归一化和 aligned-batch MaxSim。它不包含 tokenizer、BERT/ModernBERT backbone、教师蒸馏、训练数据或 PLAID 索引，因此不是可直接用于文本检索的完整模型。  推理与系统效率 多向量检索与固定预算池化 基础模型 推理压缩：权重、KV 缓存与服务带宽 FLINT把查询与文档都压成固定V个向量后，为什么评分仍不是对称平均相似度？ 两侧分别由可学习latent读取token，得到固定预算的多向量表示；后续对每个查询向量取文档侧最大匹配，再沿查询求和。两侧编码预算固定不意味着池化随意，也不意味着交换查询和文档后分数一样。关键在于查询各部分分别寻找最合适的文档证据。 教学例子：查询有“地点”和“时间”两个latent，每个各找文档中的最佳匹配再相加；若反过来要求文档所有latent都找查询匹配，求和对象变了，数值通常不同。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:race-rope-compression" data-paper-title="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies 基础模型 MIT CSAIL 2026-10-20 把KV写成低秩形式却在注意力前还原，可能节省缓存但增加运算。RACE直接改变注意力head的宽度：Q和K共享选择，只保留完整RoPE旋转对；V通过校准激活的右奇异子空间投影；再将两种变换折叠到Q/K/V/O权重。保留原模型频率及原head维度缩放，避免把缩小维度当作新模型重新编码。 整套矩阵超出本轮单A100/A30短时预算，成本过高，不复现（审查 DONE），不下载、不试跑、不进入重试队列。校准与该小向量诊断不是validation/test能力评测；race_pair_selection支持split-half和interleaved两种物理旋转布局；calibrate_race得到detached QK选择与V子空间；fold_race_weights真实生成缩小后的四个投影；native_race_attention仅在保留维度执行因果注意力，不还原完整Q/K/V。当前是单头、全RoPE参考算子，不是HuggingFace整模型转换器，也未实现GQA/partial-RoPE部署。  注意力与长上下文 KV缓存与原生维度压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 RACE 的 Q/K 成对选择与 V 的 SVD 子空间，为什么使用不同压缩方式？ QK需保持共同RoPE旋转平面及匹配几何，V主要承载被聚合内容，可用校准右奇异子空间投影。对三者任意使用同一通道裁剪规则，会改变原方法的角色分工。 示意：保留一个Q旋转对时K也要保留对应对，V则不必沿同样两维选择。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-1418a84b5cb87943">RACE 的 Q/K 成对选择与 V 的 SVD 子空间，为什么使用不同压缩方式？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arace-rope-compression">RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT CSAIL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>QK需保持共同RoPE旋转平面及匹配几何，V主要承载被聚合内容，可用校准右奇异子空间投影。对三者任意使用同一通道裁剪规则，会改变原方法的角色分工。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>保留一个Q旋转对时K也要保留对应对，V则不必沿同样两维选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28385v1">原论文</a> · <a href="../../../../foundation-models/2610.28385-race-rope-compression/">实现解读</a> · <a href="#qa-1418a84b5cb87943">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:race-rope-compression" data-paper-title="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies 基础模型 MIT CSAIL 2026-10-20 把KV写成低秩形式却在注意力前还原，可能节省缓存但增加运算。RACE直接改变注意力head的宽度：Q和K共享选择，只保留完整RoPE旋转对；V通过校准激活的右奇异子空间投影；再将两种变换折叠到Q/K/V/O权重。保留原模型频率及原head维度缩放，避免把缩小维度当作新模型重新编码。 整套矩阵超出本轮单A100/A30短时预算，成本过高，不复现（审查 DONE），不下载、不试跑、不进入重试队列。校准与该小向量诊断不是validation/test能力评测；race_pair_selection支持split-half和interleaved两种物理旋转布局；calibrate_race得到detached QK选择与V子空间；fold_race_weights真实生成缩小后的四个投影；native_race_attention仅在保留维度执行因果注意力，不还原完整Q/K/V。当前是单头、全RoPE参考算子，不是HuggingFace整模型转换器，也未实现GQA/partial-RoPE部署。  注意力与长上下文 KV缓存与原生维度压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 压缩 V 后，为什么还要同步折叠输出投影 W_O？ 文档W_V′=W_VP_V、W_O′=P_VᵀW_O，二者共同形成对应子空间路径；只改V会造成维度或函数关系错配。校准选择/SVD被detach，折叠前向仍保留输入和权重梯度。 示意：V从8维降4维后，输出投影也要接收这4维的相应表示，而不是仍按原8维解释。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a4b009a69b7540d9">压缩 V 后，为什么还要同步折叠输出投影 W_O？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arace-rope-compression">RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT CSAIL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档W_V′=W_VP_V、W_O′=P_VᵀW_O，二者共同形成对应子空间路径；只改V会造成维度或函数关系错配。校准选择/SVD被detach，折叠前向仍保留输入和权重梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>V从8维降4维后，输出投影也要接收这4维的相应表示，而不是仍按原8维解释。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.28385v1">原论文</a> · <a href="../../../../foundation-models/2610.28385-race-rope-compression/">实现解读</a> · <a href="#qa-a4b009a69b7540d9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:flint" data-paper-title="FLINT: Fixed-budget Late Interaction" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FLINT: Fixed-budget Late Interaction 基础模型 University of Illinois Urbana-Champaign 2026-10-19 ColBERT 对每个 token 保留向量，文档越长索引越大，长查询也需要更多次向量检索。ConstBERT 固定了文档侧预算，但查询仍逐 token。FLINT 则在共享 backbone 后，用两套不同的可学习 latent 分别读取查询和文档 token；交叉注意力、FFN 参数共享，双方输出都固定为个向量。它不是截取前个 token，也不是简单平均池化。 这些完整训练/索引/多基准实验明显超过单 A100/A30 的本轮短预算，标注成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动重试队列。FlintLatentPool 实现共享多头 cross-attention、两套 latent、pre-LN、残差及 GELU FFN；FlintFixedBudgetRetrieval 接收已经编码的 token 张量，执行投影、归一化和 aligned-batch MaxSim。它不包含 tokenizer、BERT/ModernBERT backbone、教师蒸馏、训练数据或 PLAID 索引，因此不是可直接用于文本检索的完整模型。  推理与系统效率 多向量检索与固定预算池化 基础模型 推理压缩：权重、KV 缓存与服务带宽 FLINT 为什么把查询和文档都压成固定数量的向量？ 逐token多向量检索的索引与查询成本随长度增长。FLINT用两套可学习latent读取两侧token，使双方都输出固定V个向量，以显式预算控制表征和检索规模。 示意：长短不同的文档都形成4个向量，长查询也不再必须逐token发起同样多次检索。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-flint-b6635740" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3cb4a3672d01e33f">FLINT 为什么把查询和文档都压成固定数量的向量？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aflint">FLINT: Fixed-budget Late Interaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>逐token多向量检索的索引与查询成本随长度增长。FLINT用两套可学习latent读取两侧token，使双方都输出固定V个向量，以显式预算控制表征和检索规模。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>长短不同的文档都形成4个向量，长查询也不再必须逐token发起同样多次检索。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.27273v1">原论文</a> · <a href="../../../../foundation-models/2610.27273-flint/">实现解读</a> · <a href="#qa-3cb4a3672d01e33f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:flint" data-paper-title="FLINT: Fixed-budget Late Interaction" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FLINT: Fixed-budget Late Interaction 基础模型 University of Illinois Urbana-Champaign 2026-10-19 ColBERT 对每个 token 保留向量，文档越长索引越大，长查询也需要更多次向量检索。ConstBERT 固定了文档侧预算，但查询仍逐 token。FLINT 则在共享 backbone 后，用两套不同的可学习 latent 分别读取查询和文档 token；交叉注意力、FFN 参数共享，双方输出都固定为个向量。它不是截取前个 token，也不是简单平均池化。 这些完整训练/索引/多基准实验明显超过单 A100/A30 的本轮短预算，标注成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动重试队列。FlintLatentPool 实现共享多头 cross-attention、两套 latent、pre-LN、残差及 GELU FFN；FlintFixedBudgetRetrieval 接收已经编码的 token 张量，执行投影、归一化和 aligned-batch MaxSim。它不包含 tokenizer、BERT/ModernBERT backbone、教师蒸馏、训练数据或 PLAID 索引，因此不是可直接用于文本检索的完整模型。  推理与系统效率 多向量检索与固定预算池化 基础模型 推理压缩：权重、KV 缓存与服务带宽 FLINT把查询与文档都压成固定V个向量后，为什么评分仍不是对称平均相似度？ 两侧分别由可学习latent读取token，得到固定预算的多向量表示；后续对每个查询向量取文档侧最大匹配，再沿查询求和。两侧编码预算固定不意味着池化随意，也不意味着交换查询和文档后分数一样。关键在于查询各部分分别寻找最合适的文档证据。 教学例子：查询有“地点”和“时间”两个latent，每个各找文档中的最佳匹配再相加；若反过来要求文档所有latent都找查询匹配，求和对象变了，数值通常不同。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-10237052848a4d0f">FLINT把查询与文档都压成固定V个向量后，为什么评分仍不是对称平均相似度？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aflint">FLINT: Fixed-budget Late Interaction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
@@ -71,9 +213,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.27273v1">原论文</a> · <a href="../../../../foundation-models/2610.27273-flint/">实现解读</a> · <a href="#qa-10237052848a4d0f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:drop-kv" data-paper-title="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction 基础模型 University at Albany, SUNY 2026-10-15 只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。 完整 7B/8B 多模型、4K–128K、多预算、多基准评估超出本轮单 A100/A30 的低成本范围，成本过高，不复现（审查 DONE）。CUDA 诊断记录与真实GPU回执保存设备、种子及源码身份。无数据集/模型下载。输入为固定种子 42/43/44 的合成 Q/K/V，revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，不是能力 benchmark。每 seed：1 batch、4 query heads、2 KV heads、19 历史槽、3 query、8 维，驱逐 7 项；不接触训练/验证/测试答案。  KV缓存 输出扰动驱逐 基础模型 推理压缩：权重、KV 缓存与服务带宽 DropKV为什么不只按attention权重低就淘汰，还要考虑value与当前输出的差？ 删除一项会同时移除它的value贡献并重新归一化其他权重，影响取决于p除以一减p，以及当前聚合输出与该value的差。高权重项若内容与输出接近，未必造成最大扰动；低权重但value特殊也可能重要。方法据单项扰动近似累计决策，近似保证有条件。 教学例子：两个token权重同为0.1，一个value几乎等于当前输出，另一个携带截然不同的信息；删去后者的输出变化可以大得多，权重本身分辨不出。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:flint" data-paper-title="FLINT: Fixed-budget Late Interaction" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FLINT: Fixed-budget Late Interaction 基础模型 University of Illinois Urbana-Champaign 2026-10-19 ColBERT 对每个 token 保留向量，文档越长索引越大，长查询也需要更多次向量检索。ConstBERT 固定了文档侧预算，但查询仍逐 token。FLINT 则在共享 backbone 后，用两套不同的可学习 latent 分别读取查询和文档 token；交叉注意力、FFN 参数共享，双方输出都固定为个向量。它不是截取前个 token，也不是简单平均池化。 这些完整训练/索引/多基准实验明显超过单 A100/A30 的本轮短预算，标注成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动重试队列。FlintLatentPool 实现共享多头 cross-attention、两套 latent、pre-LN、残差及 GELU FFN；FlintFixedBudgetRetrieval 接收已经编码的 token 张量，执行投影、归一化和 aligned-batch MaxSim。它不包含 tokenizer、BERT/ModernBERT backbone、教师蒸馏、训练数据或 PLAID 索引，因此不是可直接用于文本检索的完整模型。  推理与系统效率 多向量检索与固定预算池化 基础模型 推理压缩：权重、KV 缓存与服务带宽 FLINT 的可学习 latent pooling，与截取前 V 个 token 或平均池化有何不同？ latent经cross-attention从全部有效token读取，再经过残差和FFN，能形成任务相关固定预算表示。截断会丢掉尾部，平均池化则使用另一种聚合规则，不是该模块的等价替代。 示意：文末关键证据仍可被latent读到，而直接保留前4个token无法看到它。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-34f7e79c24287723">FLINT 的可学习 latent pooling，与截取前 V 个 token 或平均池化有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aflint">FLINT: Fixed-budget Late Interaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>latent经cross-attention从全部有效token读取，再经过残差和FFN，能形成任务相关固定预算表示。截断会丢掉尾部，平均池化则使用另一种聚合规则，不是该模块的等价替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>文末关键证据仍可被latent读到，而直接保留前4个token无法看到它。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.27273v1">原论文</a> · <a href="../../../../foundation-models/2610.27273-flint/">实现解读</a> · <a href="#qa-34f7e79c24287723">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:flint" data-paper-title="FLINT: Fixed-budget Late Interaction" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="FLINT: Fixed-budget Late Interaction 基础模型 University of Illinois Urbana-Champaign 2026-10-19 ColBERT 对每个 token 保留向量，文档越长索引越大，长查询也需要更多次向量检索。ConstBERT 固定了文档侧预算，但查询仍逐 token。FLINT 则在共享 backbone 后，用两套不同的可学习 latent 分别读取查询和文档 token；交叉注意力、FFN 参数共享，双方输出都固定为个向量。它不是截取前个 token，也不是简单平均池化。 这些完整训练/索引/多基准实验明显超过单 A100/A30 的本轮短预算，标注成本过高，不复现（审查 DONE），不下载、不试跑、不进入自动重试队列。FlintLatentPool 实现共享多头 cross-attention、两套 latent、pre-LN、残差及 GELU FFN；FlintFixedBudgetRetrieval 接收已经编码的 token 张量，执行投影、归一化和 aligned-batch MaxSim。它不包含 tokenizer、BERT/ModernBERT backbone、教师蒸馏、训练数据或 PLAID 索引，因此不是可直接用于文本检索的完整模型。  推理与系统效率 多向量检索与固定预算池化 基础模型 推理压缩：权重、KV 缓存与服务带宽 FLINT 的 padding mask 与全 masked 输入，为什么需要明确接口约定？ padding不能参与cross-attention；文档本地mask中True表示有效token，整行全部masked时报错。还需保留pre-LN及两段残差，而非只用一个裸attention产生固定V输出。 示意：批次padding占一半时，这些补位不应影响latent读取结果。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e80b8d317da141cf">FLINT 的 padding mask 与全 masked 输入，为什么需要明确接口约定？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aflint">FLINT: Fixed-budget Late Interaction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>padding不能参与cross-attention；文档本地mask中True表示有效token，整行全部masked时报错。还需保留pre-LN及两段残差，而非只用一个裸attention产生固定V输出。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>批次padding占一半时，这些补位不应影响latent读取结果。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.27273v1">原论文</a> · <a href="../../../../foundation-models/2610.27273-flint/">实现解读</a> · <a href="#qa-e80b8d317da141cf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:drop-kv" data-paper-title="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction 基础模型 University at Albany, SUNY 2026-10-15 只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。 完整 7B/8B 多模型、4K–128K、多预算、多基准评估超出本轮单 A100/A30 的低成本范围，成本过高，不复现（审查 DONE）。CUDA 诊断记录与真实GPU回执保存设备、种子及源码身份。无数据集/模型下载。输入为固定种子 42/43/44 的合成 Q/K/V，revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，不是能力 benchmark。每 seed：1 batch、4 query heads、2 KV heads、19 历史槽、3 query、8 维，驱逐 7 项；不接触训练/验证/测试答案。  KV缓存 输出扰动驱逐 基础模型 推理压缩：权重、KV 缓存与服务带宽 DropKV 为什么把淘汰问题转换成输出扰动评分？ 某项attention权重大小不足以说明删除它后输出怎样改变，还取决于value与当前输出的差。方法估算逐项移除扰动，并跨观察query累计，作为有限预算驱逐依据。 示意：一个权重不小的value若与当前输出很接近，删除影响仍可能较小。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-drop-kv-30cd8cec" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a600aaa84c0b9885">DropKV 为什么把淘汰问题转换成输出扰动评分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adrop-kv">DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University at Albany, SUNY</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>某项attention权重大小不足以说明删除它后输出怎样改变，还取决于value与当前输出的差。方法估算逐项移除扰动，并跨观察query累计，作为有限预算驱逐依据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个权重不小的value若与当前输出很接近，删除影响仍可能较小。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22130">原论文</a> · <a href="../../../../foundation-models/2610.22130-drop-kv/">实现解读</a> · <a href="#qa-a600aaa84c0b9885">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:drop-kv" data-paper-title="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction 基础模型 University at Albany, SUNY 2026-10-15 只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。 完整 7B/8B 多模型、4K–128K、多预算、多基准评估超出本轮单 A100/A30 的低成本范围，成本过高，不复现（审查 DONE）。CUDA 诊断记录与真实GPU回执保存设备、种子及源码身份。无数据集/模型下载。输入为固定种子 42/43/44 的合成 Q/K/V，revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，不是能力 benchmark。每 seed：1 batch、4 query heads、2 KV heads、19 历史槽、3 query、8 维，驱逐 7 项；不接触训练/验证/测试答案。  KV缓存 输出扰动驱逐 基础模型 推理压缩：权重、KV 缓存与服务带宽 DropKV为什么不只按attention权重低就淘汰，还要考虑value与当前输出的差？ 删除一项会同时移除它的value贡献并重新归一化其他权重，影响取决于p除以一减p，以及当前聚合输出与该value的差。高权重项若内容与输出接近，未必造成最大扰动；低权重但value特殊也可能重要。方法据单项扰动近似累计决策，近似保证有条件。 教学例子：两个token权重同为0.1，一个value几乎等于当前输出，另一个携带截然不同的信息；删去后者的输出变化可以大得多，权重本身分辨不出。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-ec49fca15913baed">DropKV为什么不只按attention权重低就淘汰，还要考虑value与当前输出的差？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adrop-kv">DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University at Albany, SUNY</p>
@@ -84,9 +266,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22130">原论文</a> · <a href="../../../../foundation-models/2610.22130-drop-kv/">实现解读</a> · <a href="#qa-ec49fca15913baed">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fpot" data-paper-title="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference 基础模型 Seoul National University 2026-10-15 传统power-of-two权重网格较粗。FPoT将相邻指数间隔减半，兼顾4-bit量化误差与移位加法实现；对奇指数的平方根2系数使用1.5近似，并让校准直接适配这一实际网格，避免“先精确量化、部署时再替换系数”的额外误差。 这一实验矩阵成本过高，不复现（审查 DONE）。完整数据见实际A100逐seed诊断指标与真实GPU验收回执。固定公开合成recipe synthetic-fpot-and-native-layer-kernel-features@oct19-foundation-mechanisms-v1、seeds42/43/44。生成6×16权重与8×16整数激活；不下载模型或数据。每次只写新的不可变产物路径：  推理与系统效率 低比特量化与整数计算 基础模型 推理压缩：权重、KV 缓存与服务带宽 FPoT部署用1.5近似平方根2，为什么校准阶段也要使用这份实际网格？ 若先按精确半指数网格量化，部署再换近似系数，会引入校准未优化的额外误差。FPoT让尺度与相位选择适配真实移位加法网格，奇指数项由移位与加法实现。整数右移还有舍入细节，不能把它与实数乘1.5处处视为精确相同；激活与KV格式也有独立约定。 教学例子：一个权重被精确网格选到平方根2倍尺度，执行时却变成1.5倍；如果校准早知道会用1.5，就可重新选择尺度或码点，减少这次后置替换造成的偏差。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:drop-kv" data-paper-title="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction 基础模型 University at Albany, SUNY 2026-10-15 只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。 完整 7B/8B 多模型、4K–128K、多预算、多基准评估超出本轮单 A100/A30 的低成本范围，成本过高，不复现（审查 DONE）。CUDA 诊断记录与真实GPU回执保存设备、种子及源码身份。无数据集/模型下载。输入为固定种子 42/43/44 的合成 Q/K/V，revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，不是能力 benchmark。每 seed：1 batch、4 query heads、2 KV heads、19 历史槽、3 query、8 维，驱逐 7 项；不接触训练/验证/测试答案。  KV缓存 输出扰动驱逐 基础模型 推理压缩：权重、KV 缓存与服务带宽 精确单项移除公式，能直接保证同时删多项的全局最优吗？ 不能。单项扰动是相对当前完整分布计算，多项同时删除会重新归一化并相互作用。文档将组合驱逐近似为逐项评分，理论近似保证也有条件，不可无条件外推。 示意：两个可互相补偿的value，单删各自影响小，同时删除却可能改变输出很多。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9915fdbd0fe30af8">精确单项移除公式，能直接保证同时删多项的全局最优吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adrop-kv">DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University at Albany, SUNY</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。单项扰动是相对当前完整分布计算，多项同时删除会重新归一化并相互作用。文档将组合驱逐近似为逐项评分，理论近似保证也有条件，不可无条件外推。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个可互相补偿的value，单删各自影响小，同时删除却可能改变输出很多。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22130">原论文</a> · <a href="../../../../foundation-models/2610.22130-drop-kv/">实现解读</a> · <a href="#qa-9915fdbd0fe30af8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:drop-kv" data-paper-title="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction 基础模型 University at Albany, SUNY 2026-10-15 只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。 完整 7B/8B 多模型、4K–128K、多预算、多基准评估超出本轮单 A100/A30 的低成本范围，成本过高，不复现（审查 DONE）。CUDA 诊断记录与真实GPU回执保存设备、种子及源码身份。无数据集/模型下载。输入为固定种子 42/43/44 的合成 Q/K/V，revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，不是能力 benchmark。每 seed：1 batch、4 query heads、2 KV heads、19 历史槽、3 query、8 维，驱逐 7 项；不接触训练/验证/测试答案。  KV缓存 输出扰动驱逐 基础模型 推理压缩：权重、KV 缓存与服务带宽 DropKV 的 p_j 舍入成1时，直接在分母加 epsilon 可以保留原公式吗？ 不可以宣称等价。p_j/(1-p_j)此时奇异，本地明确拒绝，避免用ε悄悄改变定义。还需核对近期窗口无穷保护、MaxPool以及GQA到物理KV head的评分均值口径。 示意：分母真实为0时用任意ε得到的有限值，只是另一项近似，不是精确单项移除结果。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2b8cc24761f32313">DropKV 的 p_j 舍入成1时，直接在分母加 epsilon 可以保留原公式吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adrop-kv">DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University at Albany, SUNY</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以宣称等价。p_j/(1-p_j)此时奇异，本地明确拒绝，避免用ε悄悄改变定义。还需核对近期窗口无穷保护、MaxPool以及GQA到物理KV head的评分均值口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>分母真实为0时用任意ε得到的有限值，只是另一项近似，不是精确单项移除结果。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22130">原论文</a> · <a href="../../../../foundation-models/2610.22130-drop-kv/">实现解读</a> · <a href="#qa-2b8cc24761f32313">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fpot" data-paper-title="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference 基础模型 Seoul National University 2026-10-15 传统power-of-two权重网格较粗。FPoT将相邻指数间隔减半，兼顾4-bit量化误差与移位加法实现；对奇指数的平方根2系数使用1.5近似，并让校准直接适配这一实际网格，避免“先精确量化、部署时再替换系数”的额外误差。 这一实验矩阵成本过高，不复现（审查 DONE）。完整数据见实际A100逐seed诊断指标与真实GPU验收回执。固定公开合成recipe synthetic-fpot-and-native-layer-kernel-features@oct19-foundation-mechanisms-v1、seeds42/43/44。生成6×16权重与8×16整数激活；不下载模型或数据。每次只写新的不可变产物路径：  推理与系统效率 低比特量化与整数计算 基础模型 推理压缩：权重、KV 缓存与服务带宽 FPoT 为什么在 power-of-two 网格之间再插入半八度？ 纯2的幂网格较粗；半指数间隔提高4-bit权重的取值密度，同时以奇指数1.5近似支持移位加法。它在误差与硬件执行之间折中，而非采用任意浮点网格。 示意：在1与2之间增加近似1.5这一档，可比只在1和2中选择更细。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-fpot-d99f8a99" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e35f6580ad32c97e">FPoT 为什么在 power-of-two 网格之间再插入半八度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afpot">Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>纯2的幂网格较粗；半指数间隔提高4-bit权重的取值密度，同时以奇指数1.5近似支持移位加法。它在误差与硬件执行之间折中，而非采用任意浮点网格。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>在1与2之间增加近似1.5这一档，可比只在1和2中选择更细。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21257">原论文</a> · <a href="../../../../foundation-models/2610.21257-fpot/">实现解读</a> · <a href="#qa-e35f6580ad32c97e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fpot" data-paper-title="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference 基础模型 Seoul National University 2026-10-15 传统power-of-two权重网格较粗。FPoT将相邻指数间隔减半，兼顾4-bit量化误差与移位加法实现；对奇指数的平方根2系数使用1.5近似，并让校准直接适配这一实际网格，避免“先精确量化、部署时再替换系数”的额外误差。 这一实验矩阵成本过高，不复现（审查 DONE）。完整数据见实际A100逐seed诊断指标与真实GPU验收回执。固定公开合成recipe synthetic-fpot-and-native-layer-kernel-features@oct19-foundation-mechanisms-v1、seeds42/43/44。生成6×16权重与8×16整数激活；不下载模型或数据。每次只写新的不可变产物路径：  推理与系统效率 低比特量化与整数计算 基础模型 推理压缩：权重、KV 缓存与服务带宽 FPoT部署用1.5近似平方根2，为什么校准阶段也要使用这份实际网格？ 若先按精确半指数网格量化，部署再换近似系数，会引入校准未优化的额外误差。FPoT让尺度与相位选择适配真实移位加法网格，奇指数项由移位与加法实现。整数右移还有舍入细节，不能把它与实数乘1.5处处视为精确相同；激活与KV格式也有独立约定。 教学例子：一个权重被精确网格选到平方根2倍尺度，执行时却变成1.5倍；如果校准早知道会用1.5，就可重新选择尺度或码点，减少这次后置替换造成的偏差。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-81d4a22b9952e7e2">FPoT部署用1.5近似平方根2，为什么校准阶段也要使用这份实际网格？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afpot">Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Seoul National University</p>
@@ -97,9 +319,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21257">原论文</a> · <a href="../../../../foundation-models/2610.21257-fpot/">实现解读</a> · <a href="#qa-81d4a22b9952e7e2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:remote-kv-tiers" data-paper-title="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill 基础模型 Multiverse Computing 2026-10-15 缓存命中不一定更快。该工作先计算加载与重算的盈亏平衡带宽和固定开销，再把MLA KV缓存按PCP rank分片，并使用rank独立远程实例和异步加载消除队首阻塞。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  推理与系统效率 KV缓存与分布式服务 基础模型 推理压缩：权重、KV 缓存与服务带宽 远程KV命中为什么有时比直接重新prefill更慢？ 加载需要固定请求开销与随KV体积增长的传输时间，重算则由模型预填充吞吐决定。只有带宽与长度越过盈亏平衡，命中才划算；分片实例和异步加载还要避免队首阻塞。缓存命中率不是延迟收益，本地仅文献收录，没有远程系统适配器或GPU结果。 例如一个很短前缀的KV虽已缓存，但远程连接等待超过本地重算时间；把命中次数提高，并不能保证用户首词延迟下降。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fpot" data-paper-title="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference 基础模型 Seoul National University 2026-10-15 传统power-of-two权重网格较粗。FPoT将相邻指数间隔减半，兼顾4-bit量化误差与移位加法实现；对奇指数的平方根2系数使用1.5近似，并让校准直接适配这一实际网格，避免“先精确量化、部署时再替换系数”的额外误差。 这一实验矩阵成本过高，不复现（审查 DONE）。完整数据见实际A100逐seed诊断指标与真实GPU验收回执。固定公开合成recipe synthetic-fpot-and-native-layer-kernel-features@oct19-foundation-mechanisms-v1、seeds42/43/44。生成6×16权重与8×16整数激活；不下载模型或数据。每次只写新的不可变产物路径：  推理与系统效率 低比特量化与整数计算 基础模型 推理压缩：权重、KV 缓存与服务带宽 FPoT 的权重网格，与其激活和 KV 量化使用同一种格式吗？ 不是。文档权重采用半八度网格，激活与KV仍用uniform INT；不同对象的格式和执行代价需分别记录。不能把整个模型都标成FPoT网格后跳过激活处理。 示意：权重可用移位加法表达，但输入激活的整数缩放仍有自己的规则。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-bd311de36dfea355">FPoT 的权重网格，与其激活和 KV 量化使用同一种格式吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afpot">Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。文档权重采用半八度网格，激活与KV仍用uniform INT；不同对象的格式和执行代价需分别记录。不能把整个模型都标成FPoT网格后跳过激活处理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>权重可用移位加法表达，但输入激活的整数缩放仍有自己的规则。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21257">原论文</a> · <a href="../../../../foundation-models/2610.21257-fpot/">实现解读</a> · <a href="#qa-bd311de36dfea355">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fpot" data-paper-title="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference 基础模型 Seoul National University 2026-10-15 传统power-of-two权重网格较粗。FPoT将相邻指数间隔减半，兼顾4-bit量化误差与移位加法实现；对奇指数的平方根2系数使用1.5近似，并让校准直接适配这一实际网格，避免“先精确量化、部署时再替换系数”的额外误差。 这一实验矩阵成本过高，不复现（审查 DONE）。完整数据见实际A100逐seed诊断指标与真实GPU验收回执。固定公开合成recipe synthetic-fpot-and-native-layer-kernel-features@oct19-foundation-mechanisms-v1、seeds42/43/44。生成6×16权重与8×16整数激活；不下载模型或数据。每次只写新的不可变产物路径：  推理与系统效率 低比特量化与整数计算 基础模型 推理压缩：权重、KV 缓存与服务带宽 FPoT 非零幅值码 m 为什么必须先减1再提取奇偶和移位？ 零码单独保留，非零码定义m=e+1；执行端需恢复e=m-1。漏掉这一步会整体改变指数和奇偶分支；奇数有符号整数的右移还含舍入，不能无条件等同实数乘1.5。 示意：幅值码1对应e=0，应表示基本档，而不是直接按奇指数档执行。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-24533125688bda58">FPoT 非零幅值码 m 为什么必须先减1再提取奇偶和移位？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afpot">Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>零码单独保留，非零码定义m=e+1；执行端需恢复e=m-1。漏掉这一步会整体改变指数和奇偶分支；奇数有符号整数的右移还含舍入，不能无条件等同实数乘1.5。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>幅值码1对应e=0，应表示基本档，而不是直接按奇指数档执行。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21257">原论文</a> · <a href="../../../../foundation-models/2610.21257-fpot/">实现解读</a> · <a href="#qa-24533125688bda58">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:remote-kv-tiers" data-paper-title="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill 基础模型 Multiverse Computing 2026-10-15 缓存命中不一定更快。该工作先计算加载与重算的盈亏平衡带宽和固定开销，再把MLA KV缓存按PCP rank分片，并使用rank独立远程实例和异步加载消除队首阻塞。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  推理与系统效率 KV缓存与分布式服务 基础模型 推理压缩：权重、KV 缓存与服务带宽 远程 KV tier 为什么先分析加载与重新 prefill 的盈亏平衡？ 缓存命中仍需固定请求开销与数据传输，GPU重算速度也可能很高。先估计两条路径的耗时，才能判断何种长度和带宽下值得加载，而不是只追求命中率。 示意：一个很短prefix从远程取回，可能比在GPU重新算出KV更慢。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-remote-kv-tiers-30f3c03e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3e527c1e282435f7">远程 KV tier 为什么先分析加载与重新 prefill 的盈亏平衡？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aremote-kv-tiers">When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Multiverse Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缓存命中仍需固定请求开销与数据传输，GPU重算速度也可能很高。先估计两条路径的耗时，才能判断何种长度和带宽下值得加载，而不是只追求命中率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个很短prefix从远程取回，可能比在GPU重新算出KV更慢。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21500">原论文</a> · <a href="../../../../foundation-models/2610.21500-remote-kv-tiers/">实现解读</a> · <a href="#qa-3e527c1e282435f7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:remote-kv-tiers" data-paper-title="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill 基础模型 Multiverse Computing 2026-10-15 缓存命中不一定更快。该工作先计算加载与重算的盈亏平衡带宽和固定开销，再把MLA KV缓存按PCP rank分片，并使用rank独立远程实例和异步加载消除队首阻塞。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  推理与系统效率 KV缓存与分布式服务 基础模型 推理压缩：权重、KV 缓存与服务带宽 远程KV命中为什么有时比直接重新prefill更慢？ 加载需要固定请求开销与随KV体积增长的传输时间，重算则由模型预填充吞吐决定。只有带宽与长度越过盈亏平衡，命中才划算；分片实例和异步加载还要避免队首阻塞。缓存命中率不是延迟收益，本地仅文献收录，没有远程系统适配器或GPU结果。 例如一个很短前缀的KV虽已缓存，但远程连接等待超过本地重算时间；把命中次数提高，并不能保证用户首词延迟下降。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-a402f43cbcb16963">远程KV命中为什么有时比直接重新prefill更慢？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aremote-kv-tiers">When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Multiverse Computing</p>
@@ -110,9 +372,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21500">原论文</a> · <a href="../../../../foundation-models/2610.21500-remote-kv-tiers/">实现解读</a> · <a href="#qa-a402f43cbcb16963">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:roleq" data-paper-title="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary 基础模型 Harvard University 2026-10-15 按矩阵布局统一逐行放scale，会把写入残差流的不同功能单元混在一起。RoleQ按功能角色选轴：reader（Q/K/V与MLP输入）每输出单元一scale，writer（O与MLP输出）每输入单元一scale。完整RoleQ-T还需要旋转、GPTQ、蒸馏及可选Fisher二平面，不能以单个量化函数替代。 原文8B转换3–4 A100小时、二平面阶段不足10小时，完整实验成本过高，不复现（审查 DONE）。CUDA诊断记录与真实GPU回执保存设备、种子、真实测量与源码身份。固定seeds42/43/44；合成公式revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，无预训练模型或能力数据。runner用长度4向量全部81种三值码独立穷举全局最优；单测长度5、243码。7×11矩阵用于角色轴与pack/unpack。  量化与压缩 角色对齐三值量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoleQ为什么给reader按输出单元放scale，却给writer按输入单元放scale？ reader各输出单元读取信息，writer各输入单元向残差流写入贡献，功能方向不同，统一按矩阵行量化会混合这些单元。三值单向量解对所声明轴的未加权目标可精确求得，但不等于整模型量化全局最优；完整流程还需旋转、误差补偿及蒸馏。 例如输出投影的一列代表某输入特征写向多个残差维度，应作为功能向量处理；不能仅因权重存储为行就机械逐行给scale。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:remote-kv-tiers" data-paper-title="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill 基础模型 Multiverse Computing 2026-10-15 缓存命中不一定更快。该工作先计算加载与重算的盈亏平衡带宽和固定开销，再把MLA KV缓存按PCP rank分片，并使用rank独立远程实例和异步加载消除队首阻塞。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  推理与系统效率 KV缓存与分布式服务 基础模型 推理压缩：权重、KV 缓存与服务带宽 带固定开销 T0 时，B&gt;sR 是否就保证任意长度加载都更快？ 不能。B&gt;sR只提供渐近带宽优势，有限长度仍要支付T0；应比较T0+sn/B与n/R。文本越短，固定开销越可能主导，不能只凭带宽阈值宣布所有请求受益。 示意：即使远程每token传输较快，首包固定延迟仍可能让短请求输给重算。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b9793c53dde08a50">带固定开销 T0 时，B&gt;sR 是否就保证任意长度加载都更快？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aremote-kv-tiers">When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Multiverse Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。B&gt;sR只提供渐近带宽优势，有限长度仍要支付T0；应比较T0+sn/B与n/R。文本越短，固定开销越可能主导，不能只凭带宽阈值宣布所有请求受益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>即使远程每token传输较快，首包固定延迟仍可能让短请求输给重算。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21500">原论文</a> · <a href="../../../../foundation-models/2610.21500-remote-kv-tiers/">实现解读</a> · <a href="#qa-b9793c53dde08a50">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:remote-kv-tiers" data-paper-title="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill 基础模型 Multiverse Computing 2026-10-15 缓存命中不一定更快。该工作先计算加载与重算的盈亏平衡带宽和固定开销，再把MLA KV缓存按PCP rank分片，并使用rank独立远程实例和异步加载消除队首阻塞。 成本过高，不复现（审查 DONE）。仅研究资料；成本过高，不复现（审查 DONE）。无本地能力指标、训练结果或可执行 Evolve 算子。无本地adapter、指标文件或GPU回执，也不登记可执行Evolve算子。原论文结果仅作为阅读资料。范围见本轮实现与审查合同。本轮只完成方法、资源需求、公开代码状态及原图收录，没有运行完整实验、下载checkpoint或制造模拟能力分数。  推理与系统效率 KV缓存与分布式服务 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么原报告采用 PCP rank 独立远程实例和异步加载？ 它把MLA缓存按PCP rank分片，并用独立实例及异步加载减少队首阻塞。真实验证需要相应多节点服务和负载；当前单A100/A30仅做成本审查，没有用单机fixture冒充分布式收益。 示意：一个rank的大请求不应让另一个rank可立即加载的小请求一起排队等待。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4f0347ac1da13fce">为什么原报告采用 PCP rank 独立远程实例和异步加载？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aremote-kv-tiers">When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Multiverse Computing</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它把MLA缓存按PCP rank分片，并用独立实例及异步加载减少队首阻塞。真实验证需要相应多节点服务和负载；当前单A100/A30仅做成本审查，没有用单机fixture冒充分布式收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个rank的大请求不应让另一个rank可立即加载的小请求一起排队等待。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、成本判断；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21500">原论文</a> · <a href="../../../../foundation-models/2610.21500-remote-kv-tiers/">实现解读</a> · <a href="#qa-4f0347ac1da13fce">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:roleq" data-paper-title="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary 基础模型 Harvard University 2026-10-15 按矩阵布局统一逐行放scale，会把写入残差流的不同功能单元混在一起。RoleQ按功能角色选轴：reader（Q/K/V与MLP输入）每输出单元一scale，writer（O与MLP输出）每输入单元一scale。完整RoleQ-T还需要旋转、GPTQ、蒸馏及可选Fisher二平面，不能以单个量化函数替代。 原文8B转换3–4 A100小时、二平面阶段不足10小时，完整实验成本过高，不复现（审查 DONE）。CUDA诊断记录与真实GPU回执保存设备、种子、真实测量与源码身份。固定seeds42/43/44；合成公式revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，无预训练模型或能力数据。runner用长度4向量全部81种三值码独立穷举全局最优；单测长度5、243码。7×11矩阵用于角色轴与pack/unpack。  量化与压缩 角色对齐三值量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoleQ 为什么按 reader/writer 功能，而不按矩阵存储行列统一分 scale？ 不同权重在残差流里承担读取或写入角色，功能单元的轴不总与同一存储轴对应。方法按角色选择独立量化向量，避免把不同写入单元混在同一尺度里。 示意：MLP输入的输出单元，与MLP输出的输入单元分别对应各自隐藏功能通道。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-roleq-9df6d043" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7153f53110d125bc">RoleQ 为什么按 reader/writer 功能，而不按矩阵存储行列统一分 scale？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aroleq">RoleQ: Role-Aligned Scales for Converting Language Models to Ternary</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同权重在残差流里承担读取或写入角色，功能单元的轴不总与同一存储轴对应。方法按角色选择独立量化向量，避免把不同写入单元混在同一尺度里。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>MLP输入的输出单元，与MLP输出的输入单元分别对应各自隐藏功能通道。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21808">原论文</a> · <a href="../../../../foundation-models/2610.21808-roleq/">实现解读</a> · <a href="#qa-7153f53110d125bc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:roleq" data-paper-title="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary 基础模型 Harvard University 2026-10-15 按矩阵布局统一逐行放scale，会把写入残差流的不同功能单元混在一起。RoleQ按功能角色选轴：reader（Q/K/V与MLP输入）每输出单元一scale，writer（O与MLP输出）每输入单元一scale。完整RoleQ-T还需要旋转、GPTQ、蒸馏及可选Fisher二平面，不能以单个量化函数替代。 原文8B转换3–4 A100小时、二平面阶段不足10小时，完整实验成本过高，不复现（审查 DONE）。CUDA诊断记录与真实GPU回执保存设备、种子、真实测量与源码身份。固定seeds42/43/44；合成公式revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，无预训练模型或能力数据。runner用长度4向量全部81种三值码独立穷举全局最优；单测长度5、243码。7×11矩阵用于角色轴与pack/unpack。  量化与压缩 角色对齐三值量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoleQ为什么给reader按输出单元放scale，却给writer按输入单元放scale？ reader各输出单元读取信息，writer各输入单元向残差流写入贡献，功能方向不同，统一按矩阵行量化会混合这些单元。三值单向量解对所声明轴的未加权目标可精确求得，但不等于整模型量化全局最优；完整流程还需旋转、误差补偿及蒸馏。 例如输出投影的一列代表某输入特征写向多个残差维度，应作为功能向量处理；不能仅因权重存储为行就机械逐行给scale。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-cf8caf43e45c624a">RoleQ为什么给reader按输出单元放scale，却给writer按输入单元放scale？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aroleq">RoleQ: Role-Aligned Scales for Converting Language Models to Ternary</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Harvard University</p>
@@ -123,9 +425,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21808">原论文</a> · <a href="../../../../foundation-models/2610.21808-roleq/">实现解读</a> · <a href="#qa-cf8caf43e45c624a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rope-relay" data-paper-title="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches 基础模型 National University of Defense Technology 2026-10-15 selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。 按该公开配置，完整多臂长上下文评测超出本轮单 A100/A30/Mac 的低成本预算，成本过高，不复现（审查 DONE），不下载权重或大数据。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。保留实数 Torch 梯度的 cache 算子，支持 scaled/partial RoPE、split-half/interleaved 两种布局、异长 mask、共同 continuation anchor。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。  KV缓存 旋转位置重建 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoPERelay压紧稀疏KV坐标时，为什么只重旋转K而不对V做同样旋转？ 选择后的键仍带原位置相位，需要先逆去旧旋转再施加紧凑新坐标；值只同步排序，不承载该键位置旋转。各头长度不同时还需共享右端锚点，并同步问题和后续生成位置。它修复坐标而不重选证据，缩放旋转的逆也不能误写为单位旋转转置。 例如保留历史第十和第一百个位置后，将它们搬到连续槽位，K要重建相位，V只搬位置；问题也要从新锚点开始，不能沿旧编号。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:roleq" data-paper-title="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary 基础模型 Harvard University 2026-10-15 按矩阵布局统一逐行放scale，会把写入残差流的不同功能单元混在一起。RoleQ按功能角色选轴：reader（Q/K/V与MLP输入）每输出单元一scale，writer（O与MLP输出）每输入单元一scale。完整RoleQ-T还需要旋转、GPTQ、蒸馏及可选Fisher二平面，不能以单个量化函数替代。 原文8B转换3–4 A100小时、二平面阶段不足10小时，完整实验成本过高，不复现（审查 DONE）。CUDA诊断记录与真实GPU回执保存设备、种子、真实测量与源码身份。固定seeds42/43/44；合成公式revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，无预训练模型或能力数据。runner用长度4向量全部81种三值码独立穷举全局最优；单测长度5、243码。7×11矩阵用于角色轴与pack/unpack。  量化与压缩 角色对齐三值量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoleQ 的精确单向量三值解，与固定阈值三值化有什么证据差别？ 精确solver遍历按绝对值排序的全部非空前缀，寻找未加权向量目标最优support与scale；固定阈值只试一种选择。这个局部精确性也不能外推为整个量化模型全局最优。 示意：固定0.7倍均值阈值漏掉的support，前缀全搜索仍会纳入比较。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-673a1b11a2492b07">RoleQ 的精确单向量三值解，与固定阈值三值化有什么证据差别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aroleq">RoleQ: Role-Aligned Scales for Converting Language Models to Ternary</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>精确solver遍历按绝对值排序的全部非空前缀，寻找未加权向量目标最优support与scale；固定阈值只试一种选择。这个局部精确性也不能外推为整个量化模型全局最优。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>固定0.7倍均值阈值漏掉的support，前缀全搜索仍会纳入比较。</p>
+<p class="ar-learning-sources">依据：核心公式、结果与独立对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21808">原论文</a> · <a href="../../../../foundation-models/2610.21808-roleq/">实现解读</a> · <a href="#qa-673a1b11a2492b07">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:roleq" data-paper-title="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RoleQ: Role-Aligned Scales for Converting Language Models to Ternary 基础模型 Harvard University 2026-10-15 按矩阵布局统一逐行放scale，会把写入残差流的不同功能单元混在一起。RoleQ按功能角色选轴：reader（Q/K/V与MLP输入）每输出单元一scale，writer（O与MLP输出）每输入单元一scale。完整RoleQ-T还需要旋转、GPTQ、蒸馏及可选Fisher二平面，不能以单个量化函数替代。 原文8B转换3–4 A100小时、二平面阶段不足10小时，完整实验成本过高，不复现（审查 DONE）。CUDA诊断记录与真实GPU回执保存设备、种子、真实测量与源码身份。固定seeds42/43/44；合成公式revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1，无预训练模型或能力数据。runner用长度4向量全部81种三值码独立穷举全局最优；单测长度5、243码。7×11矩阵用于角色轴与pack/unpack。  量化与压缩 角色对齐三值量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoleQ 报告 ternary 存储时，为什么还要实际 pack/unpack 并计算 scales？ 三值理论位宽不等于真实格式字节。文档每byte打包5个trit，还需算scale和padding；全零向量应输出零scale/零码。只统计非零权重数不能证明存储节省。 示意：77个权重的打包尾部与每功能单元scale都要计入，而不是简单乘log₂3。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-37dc423488b4064f">RoleQ 报告 ternary 存储时，为什么还要实际 pack/unpack 并计算 scales？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aroleq">RoleQ: Role-Aligned Scales for Converting Language Models to Ternary</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Harvard University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>三值理论位宽不等于真实格式字节。文档每byte打包5个trit，还需算scale和padding；全零向量应输出零scale/零码。只统计非零权重数不能证明存储节省。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>77个权重的打包尾部与每功能单元scale都要计入，而不是简单乘log₂3。</p>
+<p class="ar-learning-sources">依据：核心公式、结果与独立对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21808">原论文</a> · <a href="../../../../foundation-models/2610.21808-roleq/">实现解读</a> · <a href="#qa-37dc423488b4064f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rope-relay" data-paper-title="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches 基础模型 National University of Defense Technology 2026-10-15 selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。 按该公开配置，完整多臂长上下文评测超出本轮单 A100/A30/Mac 的低成本预算，成本过高，不复现（审查 DONE），不下载权重或大数据。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。保留实数 Torch 梯度的 cache 算子，支持 scaled/partial RoPE、split-half/interleaved 两种布局、异长 mask、共同 continuation anchor。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。  KV缓存 旋转位置重建 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoPERelay 在固定稀疏 KV 之后，还想修正什么问题？ 被选中的K仍带原始稀疏坐标相位。方法不再选择内容，而是按时间排序、压紧保留坐标，并让问题和生成位置与新锚点一致，构造可继续解码的位置体系。 示意：保留位置0、100、500后，需明确它们的新坐标以及后续问题从哪里开始。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-rope-relay-6493fdc7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-bbbbfb21d08ee885">RoPERelay 在固定稀疏 KV 之后，还想修正什么问题？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arope-relay">Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · National University of Defense Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>被选中的K仍带原始稀疏坐标相位。方法不再选择内容，而是按时间排序、压紧保留坐标，并让问题和生成位置与新锚点一致，构造可继续解码的位置体系。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>保留位置0、100、500后，需明确它们的新坐标以及后续问题从哪里开始。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21126">原论文</a> · <a href="../../../../foundation-models/2610.21126-rope-relay/">实现解读</a> · <a href="#qa-bbbbfb21d08ee885">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rope-relay" data-paper-title="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches 基础模型 National University of Defense Technology 2026-10-15 selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。 按该公开配置，完整多臂长上下文评测超出本轮单 A100/A30/Mac 的低成本预算，成本过高，不复现（审查 DONE），不下载权重或大数据。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。保留实数 Torch 梯度的 cache 算子，支持 scaled/partial RoPE、split-half/interleaved 两种布局、异长 mask、共同 continuation anchor。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。  KV缓存 旋转位置重建 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoPERelay压紧稀疏KV坐标时，为什么只重旋转K而不对V做同样旋转？ 选择后的键仍带原位置相位，需要先逆去旧旋转再施加紧凑新坐标；值只同步排序，不承载该键位置旋转。各头长度不同时还需共享右端锚点，并同步问题和后续生成位置。它修复坐标而不重选证据，缩放旋转的逆也不能误写为单位旋转转置。 例如保留历史第十和第一百个位置后，将它们搬到连续槽位，K要重建相位，V只搬位置；问题也要从新锚点开始，不能沿旧编号。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-f27fcf57090c69bc">RoPERelay压紧稀疏KV坐标时，为什么只重旋转K而不对V做同样旋转？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arope-relay">Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · National University of Defense Technology</p>
@@ -136,9 +478,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21126">原论文</a> · <a href="../../../../foundation-models/2610.21126-rope-relay/">实现解读</a> · <a href="#qa-f27fcf57090c69bc">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pn-mix" data-paper-title="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference 基础模型 Seoul National University 2026-10-14 长输出解码的 KV cache 随 token 数增长；一律把 K 降到低位宽，会放大 attention logit 的偏差。PN-Mix 的精度分配不是仅按 K 的幅度排序：它同时观察 prefill 的 Q 和 K，把实际 RoPE 旋转耦合的两个通道作为整体，以两侧平均范数乘积预测重要性。每个 KV head 选择一次高精度通道对，后续所有量化页复用这份选择，不读取未来解码状态重选。 完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；本地是 L1 可执行组件诊断，不是完整论文效果复现。本地是 L1 可执行组件诊断，不是完整论文效果复现。已实现 prefill 的 query–key 通道对评分、H3/L1 真正打包、1-bit 中点校正、sink/residual 缓存与量化后 attention 消费。完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；不进入自动 Evolve 晋级。本地对照口径：基线与实验组使用同一 Q/K/V、因果位置与输入网络；  kv-cache quantization inference-serving long-context 基础模型 推理压缩：权重、KV 缓存与服务带宽 PN-Mix为什么按真实RoPE通道对的Q/K范数乘积分配精度，而不只看K幅度？ 注意力误差由查询与键共同决定，只看键大小会忽视查询是否使用该方向。把同一旋转平面的两维整体评分，才能保留RoPE耦合结构；每个共享KV头在预填充阶段选定高精度对并复用，不能读取未来解码状态重选。存储布局相邻也未必是实际旋转配对。 例如某键方向很大但查询几乎不用，未必最值得高精度；Llama前后半维配对时，把内存相邻两维当一对会保护错误方向。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rope-relay" data-paper-title="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches 基础模型 National University of Defense Technology 2026-10-15 selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。 按该公开配置，完整多臂长上下文评测超出本轮单 A100/A30/Mac 的低成本预算，成本过高，不复现（审查 DONE），不下载权重或大数据。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。保留实数 Torch 梯度的 cache 算子，支持 scaled/partial RoPE、split-half/interleaved 两种布局、异长 mask、共同 continuation anchor。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。  KV缓存 旋转位置重建 基础模型 推理压缩：权重、KV 缓存与服务带宽 RoPERelay 的位置重建，与重新 prefill 选中文本有什么区别？ 位置重建直接对既有K执行逆旋转再重旋转，V仅同步排列，不重新运行历史文本主干。重新prefill会重新计算整条表示；两者不能仅因最后都得到KV就当同一成本路径。 示意：已有K可按新相位变换，而不是把三个片段拼成文本再从第一层算一遍。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-45411844548681f1">RoPERelay 的位置重建，与重新 prefill 选中文本有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arope-relay">Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · National University of Defense Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>位置重建直接对既有K执行逆旋转再重旋转，V仅同步排列，不重新运行历史文本主干。重新prefill会重新计算整条表示；两者不能仅因最后都得到KV就当同一成本路径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>已有K可按新相位变换，而不是把三个片段拼成文本再从第一层算一遍。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21126">原论文</a> · <a href="../../../../foundation-models/2610.21126-rope-relay/">实现解读</a> · <a href="#qa-45411844548681f1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rope-relay" data-paper-title="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches 基础模型 National University of Defense Technology 2026-10-15 selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。 按该公开配置，完整多臂长上下文评测超出本轮单 A100/A30/Mac 的低成本预算，成本过高，不复现（审查 DONE），不下载权重或大数据。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。保留实数 Torch 梯度的 cache 算子，支持 scaled/partial RoPE、split-half/interleaved 两种布局、异长 mask、共同 continuation anchor。用合成固定 K/V 进行独立 complex 参考与 attention/梯度诊断，未加载模型或长记忆数据。  KV缓存 旋转位置重建 基础模型 推理压缩：权重、KV 缓存与服务带宽 异长 head 的 continuation anchor 为什么取共同 M，而不是各自保留数？ 文档M是各层/head最大保留数，各head右端点对齐，问题从M起，答案输入从M+Q继续。各自独立起点会让共享问题/生成坐标不一致；scaled RoPE逆变换也不能误当单位旋转。 示意：保留8项与4项的两头都在共同位置8接问题，短的一头先按右端对齐安放4项。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-18d9a4d630ca46ca">异长 head 的 continuation anchor 为什么取共同 M，而不是各自保留数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arope-relay">Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · National University of Defense Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档M是各层/head最大保留数，各head右端点对齐，问题从M起，答案输入从M+Q继续。各自独立起点会让共享问题/生成坐标不一致；scaled RoPE逆变换也不能误当单位旋转。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>保留8项与4项的两头都在共同位置8接问题，短的一头先按右端对齐安放4项。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.21126">原论文</a> · <a href="../../../../foundation-models/2610.21126-rope-relay/">实现解读</a> · <a href="#qa-18d9a4d630ca46ca">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pn-mix" data-paper-title="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference 基础模型 Seoul National University 2026-10-14 长输出解码的 KV cache 随 token 数增长；一律把 K 降到低位宽，会放大 attention logit 的偏差。PN-Mix 的精度分配不是仅按 K 的幅度排序：它同时观察 prefill 的 Q 和 K，把实际 RoPE 旋转耦合的两个通道作为整体，以两侧平均范数乘积预测重要性。每个 KV head 选择一次高精度通道对，后续所有量化页复用这份选择，不读取未来解码状态重选。 完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；本地是 L1 可执行组件诊断，不是完整论文效果复现。本地是 L1 可执行组件诊断，不是完整论文效果复现。已实现 prefill 的 query–key 通道对评分、H3/L1 真正打包、1-bit 中点校正、sink/residual 缓存与量化后 attention 消费。完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；不进入自动 Evolve 晋级。本地对照口径：基线与实验组使用同一 Q/K/V、因果位置与输入网络；  kv-cache quantization inference-serving long-context 基础模型 推理压缩：权重、KV 缓存与服务带宽 PN-Mix 为什么给一部分 RoPE 通道对较高精度？ 不同旋转平面对QK匹配的影响不同。方法用prefill Q/K两侧平均范数乘积判断重要性，按KV head固定高精度pair选择，在缓存位宽与attention误差间做折中。 示意：对匹配影响较大的二维旋转对，两维一起分配更高位宽。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-pn-mix-d9cac8c7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ab7c9ef4cdc52767">PN-Mix 为什么给一部分 RoPE 通道对较高精度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apn-mix">PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同旋转平面对QK匹配的影响不同。方法用prefill Q/K两侧平均范数乘积判断重要性，按KV head固定高精度pair选择，在缓存位宽与attention误差间做折中。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>对匹配影响较大的二维旋转对，两维一起分配更高位宽。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19605">原论文</a> · <a href="../../../../reproductions/2610.19605-pn-mix/">实现解读</a> · <a href="#qa-ab7c9ef4cdc52767">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pn-mix" data-paper-title="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference 基础模型 Seoul National University 2026-10-14 长输出解码的 KV cache 随 token 数增长；一律把 K 降到低位宽，会放大 attention logit 的偏差。PN-Mix 的精度分配不是仅按 K 的幅度排序：它同时观察 prefill 的 Q 和 K，把实际 RoPE 旋转耦合的两个通道作为整体，以两侧平均范数乘积预测重要性。每个 KV head 选择一次高精度通道对，后续所有量化页复用这份选择，不读取未来解码状态重选。 完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；本地是 L1 可执行组件诊断，不是完整论文效果复现。本地是 L1 可执行组件诊断，不是完整论文效果复现。已实现 prefill 的 query–key 通道对评分、H3/L1 真正打包、1-bit 中点校正、sink/residual 缓存与量化后 attention 消费。完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；不进入自动 Evolve 晋级。本地对照口径：基线与实验组使用同一 Q/K/V、因果位置与输入网络；  kv-cache quantization inference-serving long-context 基础模型 推理压缩：权重、KV 缓存与服务带宽 PN-Mix为什么按真实RoPE通道对的Q/K范数乘积分配精度，而不只看K幅度？ 注意力误差由查询与键共同决定，只看键大小会忽视查询是否使用该方向。把同一旋转平面的两维整体评分，才能保留RoPE耦合结构；每个共享KV头在预填充阶段选定高精度对并复用，不能读取未来解码状态重选。存储布局相邻也未必是实际旋转配对。 例如某键方向很大但查询几乎不用，未必最值得高精度；Llama前后半维配对时，把内存相邻两维当一对会保护错误方向。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-1d6512262c17fb80">PN-Mix为什么按真实RoPE通道对的Q/K范数乘积分配精度，而不只看K幅度？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apn-mix">PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Seoul National University</p>
@@ -149,9 +531,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19605">原论文</a> · <a href="../../../../reproductions/2610.19605-pn-mix/">实现解读</a> · <a href="#qa-1d6512262c17fb80">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dualquant" data-paper-title="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs 基础模型 d-Matrix 2026-10-09 W+A量化中，权重与激活误差相互放大；仅最小化逐row动态范围不能消除跨row系统性column outlier。DualQuant只读取静态权重，以row/block尺度与column尺度共同最小化重建MSE。column尺度同时变成推理时的激活重缩放，不需要校准样本、激活统计或Hessian。 默认量化公开SmolLM2-135M的前四个decoder nn.Linear，每row tile128、column group32，属于部分checkpoint机制诊断；本地对照口径：相同公开checkpoint中相同线性层的single-scale INT4 W+A为基线，dual-scale为实验组；相对吞吐和内存不适用，software simulation只报告重建MSE与隔离test NLL。  quantization calibration-free weight-activation-quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 DualQuant不看校准激活，为什么仍要同时求row尺度与column尺度？ 只平衡每行范围无法消除跨行共用的异常列；方法以静态权重重构误差联合求两侧尺度，列尺度再成为推理时的激活重缩放。固定codes时解一维最小二乘，并投影到格式合法尺度，再重新量化迭代。它不是简单搜索几个经验指数，也不保证codes变化期间误差无条件单调。 教学例子：同一列在许多行都特别大，只做逐行缩放仍会留下系统性列不平衡；列尺度可共同处理它，但必须同步调整输入并使用硬件可表示的尺度。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pn-mix" data-paper-title="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference 基础模型 Seoul National University 2026-10-14 长输出解码的 KV cache 随 token 数增长；一律把 K 降到低位宽，会放大 attention logit 的偏差。PN-Mix 的精度分配不是仅按 K 的幅度排序：它同时观察 prefill 的 Q 和 K，把实际 RoPE 旋转耦合的两个通道作为整体，以两侧平均范数乘积预测重要性。每个 KV head 选择一次高精度通道对，后续所有量化页复用这份选择，不读取未来解码状态重选。 完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；本地是 L1 可执行组件诊断，不是完整论文效果复现。本地是 L1 可执行组件诊断，不是完整论文效果复现。已实现 prefill 的 query–key 通道对评分、H3/L1 真正打包、1-bit 中点校正、sink/residual 缓存与量化后 attention 消费。完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；不进入自动 Evolve 晋级。本地对照口径：基线与实验组使用同一 Q/K/V、因果位置与输入网络；  kv-cache quantization inference-serving long-context 基础模型 推理压缩：权重、KV 缓存与服务带宽 PN-Mix 的 1-bit correction 与 FP16 residual buffer，是同一份误差补偿吗？ 不是。前者调整1-bit重构bin的数值位置，不另存残差码；后者暂存尚未量化的新token。两者影响不同存储与数值环节，不能合并记账或互相省略。 示意：一个已量化组使用修正网格，仍与一批保持原精度的新token并存。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3e3767a853121441">PN-Mix 的 1-bit correction 与 FP16 residual buffer，是同一份误差补偿吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apn-mix">PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。前者调整1-bit重构bin的数值位置，不另存残差码；后者暂存尚未量化的新token。两者影响不同存储与数值环节，不能合并记账或互相省略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个已量化组使用修正网格，仍与一批保持原精度的新token并存。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19605">原论文</a> · <a href="../../../../reproductions/2610.19605-pn-mix/">实现解读</a> · <a href="#qa-3e3767a853121441">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pn-mix" data-paper-title="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference 基础模型 Seoul National University 2026-10-14 长输出解码的 KV cache 随 token 数增长；一律把 K 降到低位宽，会放大 attention logit 的偏差。PN-Mix 的精度分配不是仅按 K 的幅度排序：它同时观察 prefill 的 Q 和 K，把实际 RoPE 旋转耦合的两个通道作为整体，以两侧平均范数乘积预测重要性。每个 KV head 选择一次高精度通道对，后续所有量化页复用这份选择，不读取未来解码状态重选。 完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；本地是 L1 可执行组件诊断，不是完整论文效果复现。本地是 L1 可执行组件诊断，不是完整论文效果复现。已实现 prefill 的 query–key 通道对评分、H3/L1 真正打包、1-bit 中点校正、sink/residual 缓存与量化后 attention 消费。完整 8B–32B、32K 输出、多任务与吞吐研究为成本过高，不复现（审查 DONE）；不进入自动 Evolve 晋级。本地对照口径：基线与实验组使用同一 Q/K/V、因果位置与输入网络；  kv-cache quantization inference-serving long-context 基础模型 推理压缩：权重、KV 缓存与服务带宽 Llama/SmolLM2 的 RoPE pair 能按相邻两维直接配对吗？ 文档区分split-half与interleaved布局，Llama前后半维配成旋转对，不能按存储相邻误分。高精度pair mask由prefill确定并跨页复用，不能读取未来decode状态重选。 示意：前半维第i项与后半维第i项是一对，不一定是数组里的i与i+1。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7968bfc3fd2d22c7">Llama/SmolLM2 的 RoPE pair 能按相邻两维直接配对吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apn-mix">PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档区分split-half与interleaved布局，Llama前后半维配成旋转对，不能按存储相邻误分。高精度pair mask由prefill确定并跨页复用，不能读取未来decode状态重选。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>前半维第i项与后半维第i项是一对，不一定是数组里的i与i+1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.19605">原论文</a> · <a href="../../../../reproductions/2610.19605-pn-mix/">实现解读</a> · <a href="#qa-7968bfc3fd2d22c7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dualquant" data-paper-title="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs 基础模型 d-Matrix 2026-10-09 W+A量化中，权重与激活误差相互放大；仅最小化逐row动态范围不能消除跨row系统性column outlier。DualQuant只读取静态权重，以row/block尺度与column尺度共同最小化重建MSE。column尺度同时变成推理时的激活重缩放，不需要校准样本、激活统计或Hessian。 默认量化公开SmolLM2-135M的前四个decoder nn.Linear，每row tile128、column group32，属于部分checkpoint机制诊断；本地对照口径：相同公开checkpoint中相同线性层的single-scale INT4 W+A为基线，dual-scale为实验组；相对吞吐和内存不适用，software simulation只报告重建MSE与隔离test NLL。  quantization calibration-free weight-activation-quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 DualQuant 为什么无需激活校准，也能为推理激活确定重缩放？ 它只从静态权重求row/block与column两类尺度，column尺度随后用于推理输入的对应重缩放。训练solver不读取X，并不意味着推理路径不处理X。 示意：离线从W得到一组列尺度，线上对输入的相应通道按该尺度逆变换后再量化。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-dualquant-6a91d161" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8048975d5ad6a4a1">DualQuant 为什么无需激活校准，也能为推理激活确定重缩放？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adualquant">DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · d-Matrix</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它只从静态权重求row/block与column两类尺度，column尺度随后用于推理输入的对应重缩放。训练solver不读取X，并不意味着推理路径不处理X。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>离线从W得到一组列尺度，线上对输入的相应通道按该尺度逆变换后再量化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13767">原论文</a> · <a href="../../../../reproductions/2610.13767-dualquant/">实现解读</a> · <a href="#qa-8048975d5ad6a4a1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dualquant" data-paper-title="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs 基础模型 d-Matrix 2026-10-09 W+A量化中，权重与激活误差相互放大；仅最小化逐row动态范围不能消除跨row系统性column outlier。DualQuant只读取静态权重，以row/block尺度与column尺度共同最小化重建MSE。column尺度同时变成推理时的激活重缩放，不需要校准样本、激活统计或Hessian。 默认量化公开SmolLM2-135M的前四个decoder nn.Linear，每row tile128、column group32，属于部分checkpoint机制诊断；本地对照口径：相同公开checkpoint中相同线性层的single-scale INT4 W+A为基线，dual-scale为实验组；相对吞吐和内存不适用，software simulation只报告重建MSE与隔离test NLL。  quantization calibration-free weight-activation-quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 DualQuant不看校准激活，为什么仍要同时求row尺度与column尺度？ 只平衡每行范围无法消除跨行共用的异常列；方法以静态权重重构误差联合求两侧尺度，列尺度再成为推理时的激活重缩放。固定codes时解一维最小二乘，并投影到格式合法尺度，再重新量化迭代。它不是简单搜索几个经验指数，也不保证codes变化期间误差无条件单调。 教学例子：同一列在许多行都特别大，只做逐行缩放仍会留下系统性列不平衡；列尺度可共同处理它，但必须同步调整输入并使用硬件可表示的尺度。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-446916bce4be2de7">DualQuant不看校准激活，为什么仍要同时求row尺度与column尺度？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adualquant">DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · d-Matrix</p>
@@ -162,9 +584,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13767">原论文</a> · <a href="../../../../reproductions/2610.13767-dualquant/">实现解读</a> · <a href="#qa-446916bce4be2de7">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:replayssm" data-paper-title="ReplaySSM: Cache SSM Inputs, Not State" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ReplaySSM: Cache SSM Inputs, Not State 基础模型 Princeton University 2026-10-09 Mamba2/GDN 解码一般每 token 读写完整矩阵状态，常受显存带宽限制。ReplaySSM 把持久化状态与输出计算拆开：每 16 token 才刷新 checkpoint，其间只记录小型输入；输出由 checkpoint 与输入重放计算。投机验证使用 output-only 形式，避免为每个 draft 物化完整状态。接受长度只推进已提交输入指针；被拒 draft 不进入 recurrence。 不签失败为 passed，也不把新证据重绑定到未执行的新源码。cpu-contracts.json记录 seed 42 独立参考：最大输出误差 1.1920928955078125e-7、接受 12 个 token、刷新 3 次；4 个行为测试覆盖公式、GDN、pending/rollback 和低精度 read 不进入 recurrence。core_mechanism / L1 分成两条证据：独立 PyTorch 参考执行 checkpoint、accept/rollback、output-only、GDN 三角解与双精度刷新；  推理与系统效率 SSM 缓存与回滚 基础模型 推理压缩：权重、KV 缓存与服务带宽 ReplaySSM为什么只提交被接受的输入，并让高精度递归锚点独立于低精度读出副本？ 输出可从检查点和短输入记录重放，减少每词元完整状态写回；投机拒绝的草稿不能进入已提交递归。低精度副本只用于读取，更新须从高精度锚点与原始记录重建，避免舍入误差逐轮反馈。输出重括号计算也不等于省略递归依赖。 例如提议四个草稿仅接受两个，状态指针只推进两步；刷新时从真实接受输入重算，不能把被拒后缀或已舍入读出当成新锚点。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dualquant" data-paper-title="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs 基础模型 d-Matrix 2026-10-09 W+A量化中，权重与激活误差相互放大；仅最小化逐row动态范围不能消除跨row系统性column outlier。DualQuant只读取静态权重，以row/block尺度与column尺度共同最小化重建MSE。column尺度同时变成推理时的激活重缩放，不需要校准样本、激活统计或Hessian。 默认量化公开SmolLM2-135M的前四个decoder nn.Linear，每row tile128、column group32，属于部分checkpoint机制诊断；本地对照口径：相同公开checkpoint中相同线性层的single-scale INT4 W+A为基线，dual-scale为实验组；相对吞吐和内存不适用，software simulation只报告重建MSE与隔离test NLL。  quantization calibration-free weight-activation-quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 DualQuant 的闭式尺度交替求解，与试几个启发式指数有什么差别？ 它通过variable splitting区分grid assignment与重建尺度，固定codes时解一维最小二乘，再投影到合法格式并重新量化。启发式指数搜索不自动实现同一优化过程，也不能借用其条件下降结论。 示意：在固定codes下解最佳尺度后，codes一旦改变，就需重新核对下一步目标。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b8a760545553a980">DualQuant 的闭式尺度交替求解，与试几个启发式指数有什么差别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adualquant">DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · d-Matrix</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它通过variable splitting区分grid assignment与重建尺度，固定codes时解一维最小二乘，再投影到合法格式并重新量化。启发式指数搜索不自动实现同一优化过程，也不能借用其条件下降结论。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>在固定codes下解最佳尺度后，codes一旦改变，就需重新核对下一步目标。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13767">原论文</a> · <a href="../../../../reproductions/2610.13767-dualquant/">实现解读</a> · <a href="#qa-b8a760545553a980">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dualquant" data-paper-title="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs 基础模型 d-Matrix 2026-10-09 W+A量化中，权重与激活误差相互放大；仅最小化逐row动态范围不能消除跨row系统性column outlier。DualQuant只读取静态权重，以row/block尺度与column尺度共同最小化重建MSE。column尺度同时变成推理时的激活重缩放，不需要校准样本、激活统计或Hessian。 默认量化公开SmolLM2-135M的前四个decoder nn.Linear，每row tile128、column group32，属于部分checkpoint机制诊断；本地对照口径：相同公开checkpoint中相同线性层的single-scale INT4 W+A为基线，dual-scale为实验组；相对吞吐和内存不适用，software simulation只报告重建MSE与隔离test NLL。  quantization calibration-free weight-activation-quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 DualQuant 更新 row inverse-scale 后，能直接用旧 codes 更新 column 吗？ 文档要求投影合法inverse-scale、同步inner copies并重新量化，再解column并再次量化。漏掉同步会让两步优化针对不同状态；实际支持的INT4子集也不能改标签冒充MXFP4。 示意：row尺度变了但仍沿用旧codes计算column闭式解，会偏离规定的交替过程。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e4b9bed84b4d505b">DualQuant 更新 row inverse-scale 后，能直接用旧 codes 更新 column 吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adualquant">DualQuant: Dual-scale Calibration-free Weight-and-Activation Quantization for LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · d-Matrix</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档要求投影合法inverse-scale、同步inner copies并重新量化，再解column并再次量化。漏掉同步会让两步优化针对不同状态；实际支持的INT4子集也不能改标签冒充MXFP4。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>row尺度变了但仍沿用旧codes计算column闭式解，会偏离规定的交替过程。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13767">原论文</a> · <a href="../../../../reproductions/2610.13767-dualquant/">实现解读</a> · <a href="#qa-e4b9bed84b4d505b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:replayssm" data-paper-title="ReplaySSM: Cache SSM Inputs, Not State" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ReplaySSM: Cache SSM Inputs, Not State 基础模型 Princeton University 2026-10-09 Mamba2/GDN 解码一般每 token 读写完整矩阵状态，常受显存带宽限制。ReplaySSM 把持久化状态与输出计算拆开：每 16 token 才刷新 checkpoint，其间只记录小型输入；输出由 checkpoint 与输入重放计算。投机验证使用 output-only 形式，避免为每个 draft 物化完整状态。接受长度只推进已提交输入指针；被拒 draft 不进入 recurrence。 不签失败为 passed，也不把新证据重绑定到未执行的新源码。cpu-contracts.json记录 seed 42 独立参考：最大输出误差 1.1920928955078125e-7、接受 12 个 token、刷新 3 次；4 个行为测试覆盖公式、GDN、pending/rollback 和低精度 read 不进入 recurrence。core_mechanism / L1 分成两条证据：独立 PyTorch 参考执行 checkpoint、accept/rollback、output-only、GDN 三角解与双精度刷新；  推理与系统效率 SSM 缓存与回滚 基础模型 推理压缩：权重、KV 缓存与服务带宽 ReplaySSM 为什么缓存小型输入，而不每 token 写回完整矩阵状态？ 递归矩阵状态读写可能受带宽限制。方法隔若干token刷新checkpoint，中间记录输入并通过重括号计算读出，减少每步物化完整状态的工作，尤其适合output-only投机验证。 示意：保存一个状态锚点与接下来几步的小输入，按需重放，而非每步都保存一整张矩阵。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-replayssm-704fd9a0" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4c13270329afc187">ReplaySSM 为什么缓存小型输入，而不每 token 写回完整矩阵状态？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Areplayssm">ReplaySSM: Cache SSM Inputs, Not State</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>递归矩阵状态读写可能受带宽限制。方法隔若干token刷新checkpoint，中间记录输入并通过重括号计算读出，减少每步物化完整状态的工作，尤其适合output-only投机验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>保存一个状态锚点与接下来几步的小输入，按需重放，而非每步都保存一整张矩阵。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13778">原论文</a> · <a href="../../../../reproductions/2610.13778-replayssm/">实现解读</a> · <a href="#qa-4c13270329afc187">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:replayssm" data-paper-title="ReplaySSM: Cache SSM Inputs, Not State" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ReplaySSM: Cache SSM Inputs, Not State 基础模型 Princeton University 2026-10-09 Mamba2/GDN 解码一般每 token 读写完整矩阵状态，常受显存带宽限制。ReplaySSM 把持久化状态与输出计算拆开：每 16 token 才刷新 checkpoint，其间只记录小型输入；输出由 checkpoint 与输入重放计算。投机验证使用 output-only 形式，避免为每个 draft 物化完整状态。接受长度只推进已提交输入指针；被拒 draft 不进入 recurrence。 不签失败为 passed，也不把新证据重绑定到未执行的新源码。cpu-contracts.json记录 seed 42 独立参考：最大输出误差 1.1920928955078125e-7、接受 12 个 token、刷新 3 次；4 个行为测试覆盖公式、GDN、pending/rollback 和低精度 read 不进入 recurrence。core_mechanism / L1 分成两条证据：独立 PyTorch 参考执行 checkpoint、accept/rollback、output-only、GDN 三角解与双精度刷新；  推理与系统效率 SSM 缓存与回滚 基础模型 推理压缩：权重、KV 缓存与服务带宽 ReplaySSM为什么只提交被接受的输入，并让高精度递归锚点独立于低精度读出副本？ 输出可从检查点和短输入记录重放，减少每词元完整状态写回；投机拒绝的草稿不能进入已提交递归。低精度副本只用于读取，更新须从高精度锚点与原始记录重建，避免舍入误差逐轮反馈。输出重括号计算也不等于省略递归依赖。 例如提议四个草稿仅接受两个，状态指针只推进两步；刷新时从真实接受输入重算，不能把被拒后缀或已舍入读出当成新锚点。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-e28927a2b0831632">ReplaySSM为什么只提交被接受的输入，并让高精度递归锚点独立于低精度读出副本？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Areplayssm">ReplaySSM: Cache SSM Inputs, Not State</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
@@ -175,9 +637,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13778">原论文</a> · <a href="../../../../reproductions/2610.13778-replayssm/">实现解读</a> · <a href="#qa-e28927a2b0831632">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vfold" data-paper-title="VFold: Symmetry-Aware Cross-Layer Value Cache Compression" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="VFold: Symmetry-Aware Cross-Layer Value Cache Compression 基础模型 Johns Hopkins University 2026-10-08 相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。 已实现真实权重折叠和持久共享缓存；当前结果是 L1 运行诊断，不是 LongBench/RULER 能力复现或推理加速证明。使用 Qwen3-4B、A100、seed 42；32 个训练问题校准，4 个训练集派生的独立验证问题解码，最多生成 256 token。数据来源、安装及参数见运行说明。  推理与系统效率 KV 缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 VFold为什么先对齐相邻层的Value坐标，再共享缓存，而且当前词元先用完整Value？ 不同层的值空间未必可直接平均，CCA与头匹配先建立可比较坐标，并把变换折进值与输出投影。当前词元先完成完整注意力，再进入跨层共享，限制即时扰动；键和重要首尾词元保持独立。可逆变换的等价性不表示后续平均也完全无损。 例如两层各用不同坐标表示同一特征，直接平均会抵消信息；先对齐再共享较合理，但仍须评估平均近似的影响，不能称为严格无损。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:replayssm" data-paper-title="ReplaySSM: Cache SSM Inputs, Not State" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ReplaySSM: Cache SSM Inputs, Not State 基础模型 Princeton University 2026-10-09 Mamba2/GDN 解码一般每 token 读写完整矩阵状态，常受显存带宽限制。ReplaySSM 把持久化状态与输出计算拆开：每 16 token 才刷新 checkpoint，其间只记录小型输入；输出由 checkpoint 与输入重放计算。投机验证使用 output-only 形式，避免为每个 draft 物化完整状态。接受长度只推进已提交输入指针；被拒 draft 不进入 recurrence。 不签失败为 passed，也不把新证据重绑定到未执行的新源码。cpu-contracts.json记录 seed 42 独立参考：最大输出误差 1.1920928955078125e-7、接受 12 个 token、刷新 3 次；4 个行为测试覆盖公式、GDN、pending/rollback 和低精度 read 不进入 recurrence。core_mechanism / L1 分成两条证据：独立 PyTorch 参考执行 checkpoint、accept/rollback、output-only、GDN 三角解与双精度刷新；  推理与系统效率 SSM 缓存与回滚 基础模型 推理压缩：权重、KV 缓存与服务带宽 output-only 重放与常规逐步 recurrence，在输出和持久状态上应如何对应？ 重放可用等价计算获得当前读出，而不生成每步完整中间状态；持久状态只由已提交输入在刷新时更新。它改变计算/写回组织，不应改变被接受序列对应的参考递推。 示意：同一组已接受token，重放读出应对照常规递推，而拒绝draft不应写入两者的状态。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4172e0c34881090a">output-only 重放与常规逐步 recurrence，在输出和持久状态上应如何对应？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Areplayssm">ReplaySSM: Cache SSM Inputs, Not State</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>重放可用等价计算获得当前读出，而不生成每步完整中间状态；持久状态只由已提交输入在刷新时更新。它改变计算/写回组织，不应改变被接受序列对应的参考递推。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一组已接受token，重放读出应对照常规递推，而拒绝draft不应写入两者的状态。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13778">原论文</a> · <a href="../../../../reproductions/2610.13778-replayssm/">实现解读</a> · <a href="#qa-4172e0c34881090a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:replayssm" data-paper-title="ReplaySSM: Cache SSM Inputs, Not State" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ReplaySSM: Cache SSM Inputs, Not State 基础模型 Princeton University 2026-10-09 Mamba2/GDN 解码一般每 token 读写完整矩阵状态，常受显存带宽限制。ReplaySSM 把持久化状态与输出计算拆开：每 16 token 才刷新 checkpoint，其间只记录小型输入；输出由 checkpoint 与输入重放计算。投机验证使用 output-only 形式，避免为每个 draft 物化完整状态。接受长度只推进已提交输入指针；被拒 draft 不进入 recurrence。 不签失败为 passed，也不把新证据重绑定到未执行的新源码。cpu-contracts.json记录 seed 42 独立参考：最大输出误差 1.1920928955078125e-7、接受 12 个 token、刷新 3 次；4 个行为测试覆盖公式、GDN、pending/rollback 和低精度 read 不进入 recurrence。core_mechanism / L1 分成两条证据：独立 PyTorch 参考执行 checkpoint、accept/rollback、output-only、GDN 三角解与双精度刷新；  推理与系统效率 SSM 缓存与回滚 基础模型 推理压缩：权重、KV 缓存与服务带宽 GDN 刷新 checkpoint 时，为什么必须保留原始 value 并重算 residual？ residual依赖高精度anchor，沿用低精度读出或旧residual会把误差反馈进recurrence。文档从committed原始记录刷新，再独立形成高低精度副本；零接受时anchor应保持不变。 示意：draft全部被拒绝时，不应因为曾计算过其输出就改变已提交的递归状态。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e6a30bb586839092">GDN 刷新 checkpoint 时，为什么必须保留原始 value 并重算 residual？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Areplayssm">ReplaySSM: Cache SSM Inputs, Not State</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>residual依赖高精度anchor，沿用低精度读出或旧residual会把误差反馈进recurrence。文档从committed原始记录刷新，再独立形成高低精度副本；零接受时anchor应保持不变。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>draft全部被拒绝时，不应因为曾计算过其输出就改变已提交的递归状态。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.13778">原论文</a> · <a href="../../../../reproductions/2610.13778-replayssm/">实现解读</a> · <a href="#qa-e6a30bb586839092">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vfold" data-paper-title="VFold: Symmetry-Aware Cross-Layer Value Cache Compression" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="VFold: Symmetry-Aware Cross-Layer Value Cache Compression 基础模型 Johns Hopkins University 2026-10-08 相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。 已实现真实权重折叠和持久共享缓存；当前结果是 L1 运行诊断，不是 LongBench/RULER 能力复现或推理加速证明。使用 Qwen3-4B、A100、seed 42；32 个训练问题校准，4 个训练集派生的独立验证问题解码，最多生成 256 token。数据来源、安装及参数见运行说明。  推理与系统效率 KV 缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 VFold 为什么先对齐相邻层的 Value，再考虑共享缓存？ 相邻层value表示的坐标系和head对应未必相同，直接平均会混合不兼容方向。方法通过CCA及头匹配对齐，再把变换折叠到V/O投影，之后共享部分value历史。 示意：两层同一语义落在不同通道方向，先对齐再平均才有对应含义。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-vfold-b54fea4f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4cb9c502c5690b78">VFold 为什么先对齐相邻层的 Value，再考虑共享缓存？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avfold">VFold: Symmetry-Aware Cross-Layer Value Cache Compression</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Johns Hopkins University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>相邻层value表示的坐标系和head对应未必相同，直接平均会混合不兼容方向。方法通过CCA及头匹配对齐，再把变换折叠到V/O投影，之后共享部分value历史。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两层同一语义落在不同通道方向，先对齐再平均才有对应含义。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12338">原论文</a> · <a href="../../../../foundation-models/2610.12338-vfold/">实现解读</a> · <a href="#qa-4cb9c502c5690b78">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vfold" data-paper-title="VFold: Symmetry-Aware Cross-Layer Value Cache Compression" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="VFold: Symmetry-Aware Cross-Layer Value Cache Compression 基础模型 Johns Hopkins University 2026-10-08 相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。 已实现真实权重折叠和持久共享缓存；当前结果是 L1 运行诊断，不是 LongBench/RULER 能力复现或推理加速证明。使用 Qwen3-4B、A100、seed 42；32 个训练问题校准，4 个训练集派生的独立验证问题解码，最多生成 256 token。数据来源、安装及参数见运行说明。  推理与系统效率 KV 缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 VFold为什么先对齐相邻层的Value坐标，再共享缓存，而且当前词元先用完整Value？ 不同层的值空间未必可直接平均，CCA与头匹配先建立可比较坐标，并把变换折进值与输出投影。当前词元先完成完整注意力，再进入跨层共享，限制即时扰动；键和重要首尾词元保持独立。可逆变换的等价性不表示后续平均也完全无损。 例如两层各用不同坐标表示同一特征，直接平均会抵消信息；先对齐再共享较合理，但仍须评估平均近似的影响，不能称为严格无损。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-5e1e272ca0060eaa">VFold为什么先对齐相邻层的Value坐标，再共享缓存，而且当前词元先用完整Value？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avfold">VFold: Symmetry-Aware Cross-Layer Value Cache Compression</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Johns Hopkins University</p>
@@ -188,9 +690,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12338">原论文</a> · <a href="../../../../foundation-models/2610.12338-vfold/">实现解读</a> · <a href="#qa-5e1e272ca0060eaa">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:irekogpt" data-paper-title="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs 基础模型 University of Modena and Reggio Emilia 2026-10-01 保留 SliceGPT 投影矩阵而非直接丢弃，使同一 checkpoint 暴露嵌套宽度；再以多压缩率校准和 ridge 修正下游线性层。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行嵌套子网合同；未加载原模型或复现吞吐。执行嵌套子网合同；未加载原模型或复现吞吐。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  结构剪枝 可伸缩模型 推理效率 基础模型 推理压缩：权重、KV 缓存与服务带宽 IrekoGPT为什么保留投影基，才能让一个检查点支持多种嵌套宽度？ 结构化剪枝若直接丢弃被裁方向，就固定了模型宽度。保留有序投影基后，不同宽度可取同一基的不同前缀，再用多压缩率校准与下游线性修正减轻切换误差。共享嵌套结构不保证所有宽度质量相同，本地只验证子网合同，未测原模型吞吐。 例如同一检查点临时取较窄子网处理简单请求，再恢复较宽子网；若之前把其余投影永久删除，就无法靠切换参数恢复这些方向。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vfold" data-paper-title="VFold: Symmetry-Aware Cross-Layer Value Cache Compression" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="VFold: Symmetry-Aware Cross-Layer Value Cache Compression 基础模型 Johns Hopkins University 2026-10-08 相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。 已实现真实权重折叠和持久共享缓存；当前结果是 L1 运行诊断，不是 LongBench/RULER 能力复现或推理加速证明。使用 Qwen3-4B、A100、seed 42；32 个训练问题校准，4 个训练集派生的独立验证问题解码，最多生成 256 token。数据来源、安装及参数见运行说明。  推理与系统效率 KV 缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 VFold 共享 Value 与同时合并 Key，会改变什么不同对象？ 文档不合并Key，仍保留各层匹配位置所需的key；共享的是对齐后的value内容。把Key也平均会进一步改变attention匹配，不是原方法中同一项缓存节省。 示意：两层仍能给历史位置不同权重，只是部分被读取内容采用共享value。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-38bf50d5f36558a5">VFold 共享 Value 与同时合并 Key，会改变什么不同对象？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avfold">VFold: Symmetry-Aware Cross-Layer Value Cache Compression</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Johns Hopkins University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档不合并Key，仍保留各层匹配位置所需的key；共享的是对齐后的value内容。把Key也平均会进一步改变attention匹配，不是原方法中同一项缓存节省。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两层仍能给历史位置不同权重，只是部分被读取内容采用共享value。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12338">原论文</a> · <a href="../../../../foundation-models/2610.12338-vfold/">实现解读</a> · <a href="#qa-38bf50d5f36558a5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:vfold" data-paper-title="VFold: Symmetry-Aware Cross-Layer Value Cache Compression" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="VFold: Symmetry-Aware Cross-Layer Value Cache Compression 基础模型 Johns Hopkins University 2026-10-08 相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。 已实现真实权重折叠和持久共享缓存；当前结果是 L1 运行诊断，不是 LongBench/RULER 能力复现或推理加速证明。使用 Qwen3-4B、A100、seed 42；32 个训练问题校准，4 个训练集派生的独立验证问题解码，最多生成 256 token。数据来源、安装及参数见运行说明。  推理与系统效率 KV 缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 VFold 在 GQA 下折叠逆变换，为什么不能只改一个 query 输出段？ 一个物理KV head被多个query head共享，逆变换需覆盖这些query对应的全部输出段，才能对应等价关系。当前token先用完整V，之后才共享；短序列还受首尾保护开销影响。 示意：两组query都读取同一个KV头，仅修正其中一组输出会留下另一组坐标不一致。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b09ec1e40fd85a6f">VFold 在 GQA 下折叠逆变换，为什么不能只改一个 query 输出段？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Avfold">VFold: Symmetry-Aware Cross-Layer Value Cache Compression</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Johns Hopkins University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一个物理KV head被多个query head共享，逆变换需覆盖这些query对应的全部输出段，才能对应等价关系。当前token先用完整V，之后才共享；短序列还受首尾保护开销影响。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两组query都读取同一个KV头，仅修正其中一组输出会留下另一组坐标不一致。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与结果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12338">原论文</a> · <a href="../../../../foundation-models/2610.12338-vfold/">实现解读</a> · <a href="#qa-b09ec1e40fd85a6f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:irekogpt" data-paper-title="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs 基础模型 University of Modena and Reggio Emilia 2026-10-01 保留 SliceGPT 投影矩阵而非直接丢弃，使同一 checkpoint 暴露嵌套宽度；再以多压缩率校准和 ridge 修正下游线性层。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行嵌套子网合同；未加载原模型或复现吞吐。执行嵌套子网合同；未加载原模型或复现吞吐。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  结构剪枝 可伸缩模型 推理效率 基础模型 推理压缩：权重、KV 缓存与服务带宽 IrekoGPT 为什么想让一个 checkpoint 暴露多种嵌套宽度？ 不同推理预算可使用不同宽度，而不必分别维护完全独立的剪枝模型。保留投影基后，不同k选择同一基的前k维，再通过多压缩率校准适配这些子网。 示意：同一模型可使用较窄前缀或较宽前缀，两者共享一套有序投影基。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-irekogpt-3d6c018e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8bdca470c192c241">IrekoGPT 为什么想让一个 checkpoint 暴露多种嵌套宽度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Airekogpt">IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Modena and Reggio Emilia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同推理预算可使用不同宽度，而不必分别维护完全独立的剪枝模型。保留投影基后，不同k选择同一基的前k维，再通过多压缩率校准适配这些子网。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一模型可使用较窄前缀或较宽前缀，两者共享一套有序投影基。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00426">原论文</a> · <a href="../../../../foundation-models/2610.00426-irekogpt/">实现解读</a> · <a href="#qa-8bdca470c192c241">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:irekogpt" data-paper-title="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs 基础模型 University of Modena and Reggio Emilia 2026-10-01 保留 SliceGPT 投影矩阵而非直接丢弃，使同一 checkpoint 暴露嵌套宽度；再以多压缩率校准和 ridge 修正下游线性层。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行嵌套子网合同；未加载原模型或复现吞吐。执行嵌套子网合同；未加载原模型或复现吞吐。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  结构剪枝 可伸缩模型 推理效率 基础模型 推理压缩：权重、KV 缓存与服务带宽 IrekoGPT为什么保留投影基，才能让一个检查点支持多种嵌套宽度？ 结构化剪枝若直接丢弃被裁方向，就固定了模型宽度。保留有序投影基后，不同宽度可取同一基的不同前缀，再用多压缩率校准与下游线性修正减轻切换误差。共享嵌套结构不保证所有宽度质量相同，本地只验证子网合同，未测原模型吞吐。 例如同一检查点临时取较窄子网处理简单请求，再恢复较宽子网；若之前把其余投影永久删除，就无法靠切换参数恢复这些方向。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-7a064a673ce4212b">IrekoGPT为什么保留投影基，才能让一个检查点支持多种嵌套宽度？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Airekogpt">IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Modena and Reggio Emilia</p>
@@ -201,9 +743,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00426">原论文</a> · <a href="../../../../foundation-models/2610.00426-irekogpt/">实现解读</a> · <a href="#qa-7a064a673ce4212b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:leapquant" data-paper-title="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization 基础模型 UC Berkeley 2026-09-29 逐 token 量化递归状态会不断重新舍入。LeapQuant 在一个窗口内保留低比特基态，并以高精度缓冲本窗口更新，窗口末才量化一次；同时把最大 outlier 分解成少量高精度 compensator tokens，对剩余状态平滑后再量化。 复现级别：L1 机制实现。复现级别：L1 机制实现。保留 per-window state quantization、低秩补偿 token 与 residual smoothing；未复刻论文 CUDA kernel 和完整模型吞吐。机制诊断覆盖窗口边界、补偿 rank、状态误差及 CUDA 执行；未实现作者专用 kernel。A100 脱敏记录见 ../../gpu-validations/leapquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 LeapQuant为什么把窗口内更新保留高精度，而不在每个递归步骤重新量化？ 递归状态被反复舍入时，误差会反馈到后续更新。窗口内以低比特基态加高精度增量表示，只在边界重量化，可减少重复舍入；补偿项另保护显著异常方向。窗口缓冲与补偿也有存储成本，本地截断SVD是诊断构造，未实现作者专用内核或复现吞吐。 例如一段连续的小更新先积累后再舍入，避免每次都被低位宽抹掉；强异常方向单独补回，并非把所有状态都偷偷保留全精度。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:irekogpt" data-paper-title="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs 基础模型 University of Modena and Reggio Emilia 2026-10-01 保留 SliceGPT 投影矩阵而非直接丢弃，使同一 checkpoint 暴露嵌套宽度；再以多压缩率校准和 ridge 修正下游线性层。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行嵌套子网合同；未加载原模型或复现吞吐。执行嵌套子网合同；未加载原模型或复现吞吐。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  结构剪枝 可伸缩模型 推理效率 基础模型 推理压缩：权重、KV 缓存与服务带宽 可伸缩嵌套宽度与针对单一比例剪枝，部署选择上有什么区别？ 单比例剪枝只保留一种宽度；嵌套方案保存基和多比例校准，使运行时可选择不同k。多宽度共享不代表每种宽度都未经校准就保持同样质量，也不等于已经测得吞吐提升。 示意：只验证k=64，不能直接宣称同checkpoint的k=32也同样有效。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8226754023f92bc6">可伸缩嵌套宽度与针对单一比例剪枝，部署选择上有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Airekogpt">IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Modena and Reggio Emilia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单比例剪枝只保留一种宽度；嵌套方案保存基和多比例校准，使运行时可选择不同k。多宽度共享不代表每种宽度都未经校准就保持同样质量，也不等于已经测得吞吐提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>只验证k=64，不能直接宣称同checkpoint的k=32也同样有效。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00426">原论文</a> · <a href="../../../../foundation-models/2610.00426-irekogpt/">实现解读</a> · <a href="#qa-8226754023f92bc6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:irekogpt" data-paper-title="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs 基础模型 University of Modena and Reggio Emilia 2026-10-01 保留 SliceGPT 投影矩阵而非直接丢弃，使同一 checkpoint 暴露嵌套宽度；再以多压缩率校准和 ridge 修正下游线性层。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行嵌套子网合同；未加载原模型或复现吞吐。执行嵌套子网合同；未加载原模型或复现吞吐。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  结构剪枝 可伸缩模型 推理效率 基础模型 推理压缩：权重、KV 缓存与服务带宽 IrekoGPT 的不同宽度为什么不能各自使用任意独立投影基？ 文档W_k=P_:kᵀWP_:k要求不同k共享同一嵌套基的前缀；若每个k独立选基，便失去这一共享合同。还需保留后续线性层的校准/ridge修正，本地仅执行嵌套子网诊断。 示意：较窄的前32维应是较宽64维基的同一前缀，不是重新抽一套32维方向。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-5aef5e230352417b">IrekoGPT 的不同宽度为什么不能各自使用任意独立投影基？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Airekogpt">IrekoGPT: Turning Structured Pruning into Post-Hoc Slimmable LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Modena and Reggio Emilia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档W_k=P_:kᵀWP_:k要求不同k共享同一嵌套基的前缀；若每个k独立选基，便失去这一共享合同。还需保留后续线性层的校准/ridge修正，本地仅执行嵌套子网诊断。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>较窄的前32维应是较宽64维基的同一前缀，不是重新抽一套32维方向。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.00426">原论文</a> · <a href="../../../../foundation-models/2610.00426-irekogpt/">实现解读</a> · <a href="#qa-5aef5e230352417b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:leapquant" data-paper-title="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization 基础模型 UC Berkeley 2026-09-29 逐 token 量化递归状态会不断重新舍入。LeapQuant 在一个窗口内保留低比特基态，并以高精度缓冲本窗口更新，窗口末才量化一次；同时把最大 outlier 分解成少量高精度 compensator tokens，对剩余状态平滑后再量化。 复现级别：L1 机制实现。复现级别：L1 机制实现。保留 per-window state quantization、低秩补偿 token 与 residual smoothing；未复刻论文 CUDA kernel 和完整模型吞吐。机制诊断覆盖窗口边界、补偿 rank、状态误差及 CUDA 执行；未实现作者专用 kernel。A100 脱敏记录见 ../../gpu-validations/leapquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 LeapQuant 为什么同时处理时间上的重复舍入与状态里的 outlier？ 递归状态反复量化会累积误差，少数离群方向又可能主导量化尺度。它用窗口高精度更新缓冲减少舍入频次，并把少量大方向分成高精度补偿项后再量化剩余状态。 示意：不必每读一个token就重新压缩整份状态，也不让一个大方向挤占全部低比特范围。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-leapquant-7df56645" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a08ab17fa09ca660">LeapQuant 为什么同时处理时间上的重复舍入与状态里的 outlier？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aleapquant">LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>递归状态反复量化会累积误差，少数离群方向又可能主导量化尺度。它用窗口高精度更新缓冲减少舍入频次，并把少量大方向分成高精度补偿项后再量化剩余状态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>不必每读一个token就重新压缩整份状态，也不让一个大方向挤占全部低比特范围。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38166">原论文</a> · <a href="../../../../foundation-models/2609.38166-leapquant/">实现解读</a> · <a href="#qa-a08ab17fa09ca660">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:leapquant" data-paper-title="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization 基础模型 UC Berkeley 2026-09-29 逐 token 量化递归状态会不断重新舍入。LeapQuant 在一个窗口内保留低比特基态，并以高精度缓冲本窗口更新，窗口末才量化一次；同时把最大 outlier 分解成少量高精度 compensator tokens，对剩余状态平滑后再量化。 复现级别：L1 机制实现。复现级别：L1 机制实现。保留 per-window state quantization、低秩补偿 token 与 residual smoothing；未复刻论文 CUDA kernel 和完整模型吞吐。机制诊断覆盖窗口边界、补偿 rank、状态误差及 CUDA 执行；未实现作者专用 kernel。A100 脱敏记录见 ../../gpu-validations/leapquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 LeapQuant为什么把窗口内更新保留高精度，而不在每个递归步骤重新量化？ 递归状态被反复舍入时，误差会反馈到后续更新。窗口内以低比特基态加高精度增量表示，只在边界重量化，可减少重复舍入；补偿项另保护显著异常方向。窗口缓冲与补偿也有存储成本，本地截断SVD是诊断构造，未实现作者专用内核或复现吞吐。 例如一段连续的小更新先积累后再舍入，避免每次都被低位宽抹掉；强异常方向单独补回，并非把所有状态都偷偷保留全精度。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-7d05f7382a4bdff1">LeapQuant为什么把窗口内更新保留高精度，而不在每个递归步骤重新量化？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aleapquant">LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · UC Berkeley</p>
@@ -214,9 +796,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38166">原论文</a> · <a href="../../../../foundation-models/2609.38166-leapquant/">实现解读</a> · <a href="#qa-7d05f7382a4bdff1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:splash" data-paper-title="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving 基础模型 Institute of Computing Technology, Chinese Academy of Sciences 2026-09-29 统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  推理系统 并行布局 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 SPLASH为什么要把布局切换成本摊到剩余生成步数，而不能只选当前最快布局？ 不同并行布局分配注意力权重与KV所有权的方式不同，切换会引入搬运和交接成本。剩余步骤足够多时，后续收益才可能覆盖一次转换；只看单步速度会频繁切换而更慢。内存可行性也需同时满足，本地只有规划器，没有真实CUDA交接与服务吞吐证据。 例如请求只剩少量词元，搬一次缓存可能比继续旧布局更贵；长请求则可能值得转换，不能让两者仅按相同单步耗时决策。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:leapquant" data-paper-title="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization 基础模型 UC Berkeley 2026-09-29 逐 token 量化递归状态会不断重新舍入。LeapQuant 在一个窗口内保留低比特基态，并以高精度缓冲本窗口更新，窗口末才量化一次；同时把最大 outlier 分解成少量高精度 compensator tokens，对剩余状态平滑后再量化。 复现级别：L1 机制实现。复现级别：L1 机制实现。保留 per-window state quantization、低秩补偿 token 与 residual smoothing；未复刻论文 CUDA kernel 和完整模型吞吐。机制诊断覆盖窗口边界、补偿 rank、状态误差及 CUDA 执行；未实现作者专用 kernel。A100 脱敏记录见 ../../gpu-validations/leapquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 LeapQuant 的窗口缓冲，与每步都对整个递归状态低比特写回有什么取舍？ 窗口缓冲增加暂存更新的高精度开销，换取较少的整状态重量化；逐步写回则更频繁地累积舍入。比较需统计基态、窗口更新与补偿项总存储，不能只报低比特基态大小。 示意：窗口内保留8次小更新，边界才合并量化，与连续8次整状态量化不同。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-513d646d0a8721ad">LeapQuant 的窗口缓冲，与每步都对整个递归状态低比特写回有什么取舍？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aleapquant">LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>窗口缓冲增加暂存更新的高精度开销，换取较少的整状态重量化；逐步写回则更频繁地累积舍入。比较需统计基态、窗口更新与补偿项总存储，不能只报低比特基态大小。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>窗口内保留8次小更新，边界才合并量化，与连续8次整状态量化不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38166">原论文</a> · <a href="../../../../foundation-models/2609.38166-leapquant/">实现解读</a> · <a href="#qa-513d646d0a8721ad">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:leapquant" data-paper-title="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization 基础模型 UC Berkeley 2026-09-29 逐 token 量化递归状态会不断重新舍入。LeapQuant 在一个窗口内保留低比特基态，并以高精度缓冲本窗口更新，窗口末才量化一次；同时把最大 outlier 分解成少量高精度 compensator tokens，对剩余状态平滑后再量化。 复现级别：L1 机制实现。复现级别：L1 机制实现。保留 per-window state quantization、低秩补偿 token 与 residual smoothing；未复刻论文 CUDA kernel 和完整模型吞吐。机制诊断覆盖窗口边界、补偿 rank、状态误差及 CUDA 执行；未实现作者专用 kernel。A100 脱敏记录见 ../../gpu-validations/leapquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 LeapQuant 的补偿项 C 加回后，低比特部分应量化 S 还是 S-C？ 文档先由截断SVD构造低秩C，再对剩余S-C量化，读出时加回C。若仍量化完整S再加C，会重复计入补偿方向；窗口边界也需按原规则合并未量化更新。 示意：大方向已由高精度C保存，低比特残余不应再完整保存一次同样方向。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-eb3cdbcefb0ee551">LeapQuant 的补偿项 C 加回后，低比特部分应量化 S 还是 S-C？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aleapquant">LeapQuant: Efficient Linear Attention with Accurate Recurrent State Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档先由截断SVD构造低秩C，再对剩余S-C量化，读出时加回C。若仍量化完整S再加C，会重复计入补偿方向；窗口边界也需按原规则合并未量化更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>大方向已由高精度C保存，低比特残余不应再完整保存一次同样方向。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38166">原论文</a> · <a href="../../../../foundation-models/2609.38166-leapquant/">实现解读</a> · <a href="#qa-eb3cdbcefb0ee551">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:splash" data-paper-title="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving 基础模型 Institute of Computing Technology, Chinese Academy of Sciences 2026-09-29 统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  推理系统 并行布局 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 SPLASH 为什么把 attention 权重和 KV 的所有权一起纳入布局模型？ 不同并行布局对权重、请求与KV的分配不同，会随batch和序列长度改变内存与通信成本。统一所有权描述后，调度器才能比较TP/DP/CP/DOP及切换代价。 示意：同样四张设备，KV是否按请求独占或分片，会改变每设备内存需求。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-splash-7002fc08" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3e900eeae9381c2c">SPLASH 为什么把 attention 权重和 KV 的所有权一起纳入布局模型？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asplash">SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Computing Technology, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同并行布局对权重、请求与KV的分配不同，会随batch和序列长度改变内存与通信成本。统一所有权描述后，调度器才能比较TP/DP/CP/DOP及切换代价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同样四张设备，KV是否按请求独占或分片，会改变每设备内存需求。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37626">原论文</a> · <a href="../../../../foundation-models/2609.37626-splash/">实现解读</a> · <a href="#qa-3e900eeae9381c2c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:splash" data-paper-title="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving 基础模型 Institute of Computing Technology, Chinese Academy of Sciences 2026-09-29 统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  推理系统 并行布局 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 SPLASH为什么要把布局切换成本摊到剩余生成步数，而不能只选当前最快布局？ 不同并行布局分配注意力权重与KV所有权的方式不同，切换会引入搬运和交接成本。剩余步骤足够多时，后续收益才可能覆盖一次转换；只看单步速度会频繁切换而更慢。内存可行性也需同时满足，本地只有规划器，没有真实CUDA交接与服务吞吐证据。 例如请求只剩少量词元，搬一次缓存可能比继续旧布局更贵；长请求则可能值得转换，不能让两者仅按相同单步耗时决策。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-6e69fab0b2bf646b">SPLASH为什么要把布局切换成本摊到剩余生成步数，而不能只选当前最快布局？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asplash">SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Computing Technology, Chinese Academy of Sciences</p>
@@ -227,9 +849,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37626">原论文</a> · <a href="../../../../foundation-models/2609.37626-splash/">实现解读</a> · <a href="#qa-6e69fab0b2bf646b">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stepquant" data-paper-title="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization 基础模型 Zhejiang University 2026-09-29 Delta-rule 线性注意力的固定大小状态会被每个并发请求长期持有，统一低比特量化又会让误差随更新累积。STEPQuant 同时建模状态记忆的剩余寿命和不同 key row 对输出的影响：在固定平均 bit 预算下给重要块更高精度，再用 key-row / value-column 两组 scale 拟合状态分布。 复现级别：L1 机制实现。复现级别：L1 机制实现。本地实现寿命感知 bit 分配与行/列双轴 scale 拟合；未复刻 SGLang kernel、Qwen3.8/Kimi-Linear 全模型吞吐。本地验证 bit 预算、有限 scale、递归状态 MSE 和 CUDA 前后向；不声称复现论文吞吐或精度。A100 脱敏记录见 ../../gpu-validations/stepquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 STEPQuant为什么同时看状态的剩余寿命和key行影响，再分配bit预算？ 递归状态误差能持续传播，而不同方向对输出的影响也不相同；只按当前幅度分配精度会漏掉时间与空间两类重要性。方法在平均bit约束下分配块精度，并用行列两轴scale拟合状态。本地预算与误差诊断未复现论文吞吐，也不是统一INT8改名。 例如一个不大的状态方向会影响许多后续步，可能比即将被遗忘的大值更值得保留精度；预算有限时需要比较累计风险。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:splash" data-paper-title="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving 基础模型 Institute of Computing Technology, Chinese Academy of Sciences 2026-09-29 统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  推理系统 并行布局 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 DOP 与 TP 的简化内存式，KV 项上有哪些不同？ 文档TP为W_A/T+Bks，DOP为W_A/T+Bks/T：两者权重都分片，KV分配不同。该式只是模型口径，还需考虑实际handoff与执行，不能仅由容量公式推导实测吞吐。 示意：当KV项远大于权重项时，两种分配的内存差异会更突出。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b271031d58e21d00">DOP 与 TP 的简化内存式，KV 项上有哪些不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asplash">SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Computing Technology, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档TP为W_A/T+Bks，DOP为W_A/T+Bks/T：两者权重都分片，KV分配不同。该式只是模型口径，还需考虑实际handoff与执行，不能仅由容量公式推导实测吞吐。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>当KV项远大于权重项时，两种分配的内存差异会更突出。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37626">原论文</a> · <a href="../../../../foundation-models/2609.37626-splash/">实现解读</a> · <a href="#qa-b271031d58e21d00">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:splash" data-paper-title="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving 基础模型 Institute of Computing Technology, Chinese Academy of Sciences 2026-09-29 统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。执行内存模型和 transition-aware layout planner；未实现 CUDA handoff，也不声称经过 B200/H200 性能验证。本地对照口径：基线为论文机制关闭或默认状态，实验组为开启对应核心算子；本批只验证不变量和状态转换，跨模型相对变化不适用。  推理系统 并行布局 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 SPLASH 本地 transition-aware planner 应怎样与真实布局切换区分？ planner计算内存与含切换成本的布局决策；真实系统还需搬运权重/KV并保持请求状态一致。当前未实现CUDA handoff或B200/H200性能验证，决策日志不等于服务切换已执行。 示意：输出“切到DOP”的计划，不证明缓存已被实际迁移到新的所有者。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2ca02d5f9707c3f6">SPLASH 本地 transition-aware planner 应怎样与真实布局切换区分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asplash">SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Institute of Computing Technology, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>planner计算内存与含切换成本的布局决策；真实系统还需搬运权重/KV并保持请求状态一致。当前未实现CUDA handoff或B200/H200性能验证，决策日志不等于服务切换已执行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>输出“切到DOP”的计划，不证明缓存已被实际迁移到新的所有者。</p>
+<p class="ar-learning-sources">依据：本地复现、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.37626">原论文</a> · <a href="../../../../foundation-models/2609.37626-splash/">实现解读</a> · <a href="#qa-2ca02d5f9707c3f6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stepquant" data-paper-title="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization 基础模型 Zhejiang University 2026-09-29 Delta-rule 线性注意力的固定大小状态会被每个并发请求长期持有，统一低比特量化又会让误差随更新累积。STEPQuant 同时建模状态记忆的剩余寿命和不同 key row 对输出的影响：在固定平均 bit 预算下给重要块更高精度，再用 key-row / value-column 两组 scale 拟合状态分布。 复现级别：L1 机制实现。复现级别：L1 机制实现。本地实现寿命感知 bit 分配与行/列双轴 scale 拟合；未复刻 SGLang kernel、Qwen3.8/Kimi-Linear 全模型吞吐。本地验证 bit 预算、有限 scale、递归状态 MSE 和 CUDA 前后向；不声称复现论文吞吐或精度。A100 脱敏记录见 ../../gpu-validations/stepquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 STEPQuant 为什么研究固定大小递归状态的量化，而不是只压缩增长的 KV？ 线性注意力状态虽不随序列无限增长，但会被每个并发请求长期持有，并在递推中反复更新。量化误差可沿时间传播，所以需同时关注状态剩余寿命和不同空间块的影响。 示意：一个小状态乘上很多并发请求仍占显存，早期误差也可能持续影响后续输出。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-stepquant-3ce3e159" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-cd98bc9cbbbe9a31">STEPQuant 为什么研究固定大小递归状态的量化，而不是只压缩增长的 KV？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astepquant">STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>线性注意力状态虽不随序列无限增长，但会被每个并发请求长期持有，并在递推中反复更新。量化误差可沿时间传播，所以需同时关注状态剩余寿命和不同空间块的影响。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个小状态乘上很多并发请求仍占显存，早期误差也可能持续影响后续输出。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38169">原论文</a> · <a href="../../../../foundation-models/2609.38169-stepquant/">实现解读</a> · <a href="#qa-cd98bc9cbbbe9a31">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stepquant" data-paper-title="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization 基础模型 Zhejiang University 2026-09-29 Delta-rule 线性注意力的固定大小状态会被每个并发请求长期持有，统一低比特量化又会让误差随更新累积。STEPQuant 同时建模状态记忆的剩余寿命和不同 key row 对输出的影响：在固定平均 bit 预算下给重要块更高精度，再用 key-row / value-column 两组 scale 拟合状态分布。 复现级别：L1 机制实现。复现级别：L1 机制实现。本地实现寿命感知 bit 分配与行/列双轴 scale 拟合；未复刻 SGLang kernel、Qwen3.8/Kimi-Linear 全模型吞吐。本地验证 bit 预算、有限 scale、递归状态 MSE 和 CUDA 前后向；不声称复现论文吞吐或精度。A100 脱敏记录见 ../../gpu-validations/stepquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 STEPQuant为什么同时看状态的剩余寿命和key行影响，再分配bit预算？ 递归状态误差能持续传播，而不同方向对输出的影响也不相同；只按当前幅度分配精度会漏掉时间与空间两类重要性。方法在平均bit约束下分配块精度，并用行列两轴scale拟合状态。本地预算与误差诊断未复现论文吞吐，也不是统一INT8改名。 例如一个不大的状态方向会影响许多后续步，可能比即将被遗忘的大值更值得保留精度；预算有限时需要比较累计风险。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-fdaae29f29c743af">STEPQuant为什么同时看状态的剩余寿命和key行影响，再分配bit预算？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astepquant">STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Zhejiang University</p>
@@ -240,9 +902,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38169">原论文</a> · <a href="../../../../foundation-models/2609.38169-stepquant/">实现解读</a> · <a href="#qa-fdaae29f29c743af">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:agentkv" data-paper-title="AgentKV: Phase-Aware KV Eviction for Agentic LLMs" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AgentKV: Phase-Aware KV Eviction for Agentic LLMs 基础模型 University of Cambridge 2026-09-14 按 Agent 阶段保留代表性 query buffer，以跨阶段查询相关性决定 KV 淘汰。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent 推理 KV Cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 AgentKV为何保留跨阶段代表query，而不只用最近几步决定淘汰哪些KV？ Agent任务会在规划、工具使用和总结等阶段切换；最近query只代表当前阶段，可能低估稍后会重新需要的证据。代表query buffer让缓存重要性兼顾多个阶段的读取需求。它改变淘汰依据，不会让被删除的KV自动可恢复，阶段代表性本身也需要验证。 教学例子：工具执行阶段反复关注命令参数，但最终总结还要回看最初的任务要求；只按最近命令查询淘汰，可能把最后仍需要的要求删掉。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stepquant" data-paper-title="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization 基础模型 Zhejiang University 2026-09-29 Delta-rule 线性注意力的固定大小状态会被每个并发请求长期持有，统一低比特量化又会让误差随更新累积。STEPQuant 同时建模状态记忆的剩余寿命和不同 key row 对输出的影响：在固定平均 bit 预算下给重要块更高精度，再用 key-row / value-column 两组 scale 拟合状态分布。 复现级别：L1 机制实现。复现级别：L1 机制实现。本地实现寿命感知 bit 分配与行/列双轴 scale 拟合；未复刻 SGLang kernel、Qwen3.8/Kimi-Linear 全模型吞吐。本地验证 bit 预算、有限 scale、递归状态 MSE 和 CUDA 前后向；不声称复现论文吞吐或精度。A100 脱敏记录见 ../../gpu-validations/stepquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 STEPQuant 的时空 bit 分配，与对所有状态统一 INT8 有何不同？ 统一INT8忽略不同时间和位置的重要性；STEPQuant在固定平均bit预算下为高风险块分配更高精度，再用key-row/value-column双轴scale拟合。它改变精度分配，不只是换一个位宽标签。 示意：剩余寿命长且读出影响大的块，可比很快遗忘的块获得更多bits。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7824bc993aefd296">STEPQuant 的时空 bit 分配，与对所有状态统一 INT8 有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astepquant">STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>统一INT8忽略不同时间和位置的重要性；STEPQuant在固定平均bit预算下为高风险块分配更高精度，再用key-row/value-column双轴scale拟合。它改变精度分配，不只是换一个位宽标签。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>剩余寿命长且读出影响大的块，可比很快遗忘的块获得更多bits。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38169">原论文</a> · <a href="../../../../foundation-models/2609.38169-stepquant/">实现解读</a> · <a href="#qa-7824bc993aefd296">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stepquant" data-paper-title="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization 基础模型 Zhejiang University 2026-09-29 Delta-rule 线性注意力的固定大小状态会被每个并发请求长期持有，统一低比特量化又会让误差随更新累积。STEPQuant 同时建模状态记忆的剩余寿命和不同 key row 对输出的影响：在固定平均 bit 预算下给重要块更高精度，再用 key-row / value-column 两组 scale 拟合状态分布。 复现级别：L1 机制实现。复现级别：L1 机制实现。本地实现寿命感知 bit 分配与行/列双轴 scale 拟合；未复刻 SGLang kernel、Qwen3.8/Kimi-Linear 全模型吞吐。本地验证 bit 预算、有限 scale、递归状态 MSE 和 CUDA 前后向；不声称复现论文吞吐或精度。A100 脱敏记录见 ../../gpu-validations/stepquant-a100-20260930.json。  推理与系统效率 线性注意力 状态量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 STEPQuant 的预算优化，为什么要核对实际平均 bit 而不是只看高精度块比例？ 不同候选bit与块大小共同决定预算，目标是在给定平均bit约束下最小化加权误差。还需区分key-row与value-column尺度，不可把两轴广播位置交换后只因shape可运行就通过。 示意：4-bit和8-bit块混合时，需按实际元素数加权计算平均位宽。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-dd17ed955bdd5449">STEPQuant 的预算优化，为什么要核对实际平均 bit 而不是只看高精度块比例？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astepquant">STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同候选bit与块大小共同决定预算，目标是在给定平均bit约束下最小化加权误差。还需区分key-row与value-column尺度，不可把两轴广播位置交换后只因shape可运行就通过。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>4-bit和8-bit块混合时，需按实际元素数加权计算平均位宽。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.38169">原论文</a> · <a href="../../../../foundation-models/2609.38169-stepquant/">实现解读</a> · <a href="#qa-dd17ed955bdd5449">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:agentkv" data-paper-title="AgentKV: Phase-Aware KV Eviction for Agentic LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AgentKV: Phase-Aware KV Eviction for Agentic LLMs 基础模型 University of Cambridge 2026-09-14 按 Agent 阶段保留代表性 query buffer，以跨阶段查询相关性决定 KV 淘汰。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent 推理 KV Cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 AgentKV 为什么把 Agent 阶段作为 KV 淘汰的上下文？ 规划、工具执行和汇总等阶段可能关注不同历史。保留各阶段代表query，有助于判断某条KV是否仍可能被后续阶段需要，而非只依据当前几步的访问。 示意：早期计划在工具调用期间不常被读，最终汇总时却可能再次重要。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-agentkv-c25693b7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-564e95e5f10725e6">AgentKV 为什么把 Agent 阶段作为 KV 淘汰的上下文？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aagentkv">AgentKV: Phase-Aware KV Eviction for Agentic LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Cambridge</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>规划、工具执行和汇总等阶段可能关注不同历史。保留各阶段代表query，有助于判断某条KV是否仍可能被后续阶段需要，而非只依据当前几步的访问。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>早期计划在工具调用期间不常被读，最终汇总时却可能再次重要。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.14872">原论文</a> · <a href="../../../../foundation-models/2609.14872-agentkv/">实现解读</a> · <a href="#qa-564e95e5f10725e6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:agentkv" data-paper-title="AgentKV: Phase-Aware KV Eviction for Agentic LLMs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AgentKV: Phase-Aware KV Eviction for Agentic LLMs 基础模型 University of Cambridge 2026-09-14 按 Agent 阶段保留代表性 query buffer，以跨阶段查询相关性决定 KV 淘汰。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent 推理 KV Cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 AgentKV为何保留跨阶段代表query，而不只用最近几步决定淘汰哪些KV？ Agent任务会在规划、工具使用和总结等阶段切换；最近query只代表当前阶段，可能低估稍后会重新需要的证据。代表query buffer让缓存重要性兼顾多个阶段的读取需求。它改变淘汰依据，不会让被删除的KV自动可恢复，阶段代表性本身也需要验证。 教学例子：工具执行阶段反复关注命令参数，但最终总结还要回看最初的任务要求；只按最近命令查询淘汰，可能把最后仍需要的要求删掉。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-df79f24c8c97731f">AgentKV为何保留跨阶段代表query，而不只用最近几步决定淘汰哪些KV？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aagentkv">AgentKV: Phase-Aware KV Eviction for Agentic LLMs</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Cambridge</p>
@@ -253,9 +955,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.14872">原论文</a> · <a href="../../../../foundation-models/2609.14872-agentkv/">实现解读</a> · <a href="#qa-df79f24c8c97731f">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beaconkv" data-paper-title="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference 基础模型 Hanyang University 2026-09-04 长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。 复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。保留近期 token，并用最远点采样维护能代表历史查询簇的 beacon。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  kv-cache long-context reasoning inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 BeaconKV怎样避免“只看近期query”删掉长推理稍后还会重访的计划？ 它对历史query保持少量具有代表性的beacon，用这些代表查询为KV重要性提供跨阶段依据，并保护近期窗口。这样淘汰不完全受最近一步支配，适合推理中回看早期思路的情况。代表查询只能近似未来需求，不能保证固定预算内所有远程证据都保存。 教学例子：中间十步都在计算局部数字，最后却要检查最初的计划约束；早期beacon可让相关KV继续获得重要性，而不因十步未被关注就立刻淘汰。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:agentkv" data-paper-title="AgentKV: Phase-Aware KV Eviction for Agentic LLMs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AgentKV: Phase-Aware KV Eviction for Agentic LLMs 基础模型 University of Cambridge 2026-09-14 按 Agent 阶段保留代表性 query buffer，以跨阶段查询相关性决定 KV 淘汰。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent 推理 KV Cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 phase-aware query buffer 与固定 recent-window，保留证据的标准有什么不同？ recent-window按时间保留最近KV；phase-aware评分利用多个阶段查询与历史KV的相关性。它可保护较旧证据，但仍受预算与代表性限制，不能把被淘汰内容视作必然无用。 示意：阶段切换后关注点变化，当前窗口外的一条计划也可能因代表query而继续保留。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a76e1843a80ebe6c">phase-aware query buffer 与固定 recent-window，保留证据的标准有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aagentkv">AgentKV: Phase-Aware KV Eviction for Agentic LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Cambridge</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>recent-window按时间保留最近KV；phase-aware评分利用多个阶段查询与历史KV的相关性。它可保护较旧证据，但仍受预算与代表性限制，不能把被淘汰内容视作必然无用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>阶段切换后关注点变化，当前窗口外的一条计划也可能因代表query而继续保留。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.14872">原论文</a> · <a href="../../../../foundation-models/2609.14872-agentkv/">实现解读</a> · <a href="#qa-a76e1843a80ebe6c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:agentkv" data-paper-title="AgentKV: Phase-Aware KV Eviction for Agentic LLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AgentKV: Phase-Aware KV Eviction for Agentic LLMs 基础模型 University of Cambridge 2026-09-14 按 Agent 阶段保留代表性 query buffer，以跨阶段查询相关性决定 KV 淘汰。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。本地执行 phase-aware scoring；未修改 SGLang 或运行 CUDA kernel。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  Agent 推理 KV Cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 本地 phase-aware scoring 已经改造真实 SGLang KV 管理了吗？ 没有。文档只执行评分reference并输出阶段/缓存统计，未修改SGLang或运行CUDA kernel。接入服务还需真实缓存淘汰、索引与执行验证，不能由评分可运行推导服务性能。 示意：返回一组要保留的KV索引，并不等于服务引擎已按该索引释放和读取显存。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f9b532269229b1e0">本地 phase-aware scoring 已经改造真实 SGLang KV 管理了吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aagentkv">AgentKV: Phase-Aware KV Eviction for Agentic LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of Cambridge</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。文档只执行评分reference并输出阶段/缓存统计，未修改SGLang或运行CUDA kernel。接入服务还需真实缓存淘汰、索引与执行验证，不能由评分可运行推导服务性能。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>返回一组要保留的KV索引，并不等于服务引擎已按该索引释放和读取显存。</p>
+<p class="ar-learning-sources">依据：本地复现、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.14872">原论文</a> · <a href="../../../../foundation-models/2609.14872-agentkv/">实现解读</a> · <a href="#qa-f9b532269229b1e0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beaconkv" data-paper-title="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference 基础模型 Hanyang University 2026-09-04 长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。 复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。保留近期 token，并用最远点采样维护能代表历史查询簇的 beacon。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  kv-cache long-context reasoning inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 BeaconKV 为什么保留少量代表 query，而不只保留近期查询？ 长推理可能重访早期计划。历史代表query覆盖不同关注方向，用来为KV保留投票，使有限缓存兼顾近期信息和稍后可能重访的证据。 示意：推理到最后需要回看开头的约束，最近几步的query未必能代表这项需求。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-beaconkv-c9b2fe88" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-cfdbd7560ad2b7ec">BeaconKV 为什么保留少量代表 query，而不只保留近期查询？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abeaconkv">BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Hanyang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>长推理可能重访早期计划。历史代表query覆盖不同关注方向，用来为KV保留投票，使有限缓存兼顾近期信息和稍后可能重访的证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>推理到最后需要回看开头的约束，最近几步的query未必能代表这项需求。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04971">原论文</a> · <a href="../../../../reproductions/2609.04971-beaconkv/">实现解读</a> · <a href="#qa-cfdbd7560ad2b7ec">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beaconkv" data-paper-title="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference 基础模型 Hanyang University 2026-09-04 长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。 复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。保留近期 token，并用最远点采样维护能代表历史查询簇的 beacon。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  kv-cache long-context reasoning inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 BeaconKV怎样避免“只看近期query”删掉长推理稍后还会重访的计划？ 它对历史query保持少量具有代表性的beacon，用这些代表查询为KV重要性提供跨阶段依据，并保护近期窗口。这样淘汰不完全受最近一步支配，适合推理中回看早期思路的情况。代表查询只能近似未来需求，不能保证固定预算内所有远程证据都保存。 教学例子：中间十步都在计算局部数字，最后却要检查最初的计划约束；早期beacon可让相关KV继续获得重要性，而不因十步未被关注就立刻淘汰。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-8c86ea72842083a1">BeaconKV怎样避免“只看近期query”删掉长推理稍后还会重访的计划？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abeaconkv">BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Hanyang University</p>
@@ -266,9 +1008,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04971">原论文</a> · <a href="../../../../reproductions/2609.04971-beaconkv/">实现解读</a> · <a href="#qa-8c86ea72842083a1">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kvmem" data-paper-title="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU 基础模型 Shanghai University of Finance and Economics 2026-09-04 长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。 复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。实现固定显存预算下的 query-conditioned KV 工作视图。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  agent-memory kv-cache long-context inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 KVMEM把历史地址空间与执行窗口分开，为什么不等于模型一次注意全部历史？ 历史KV分块存放在不同存储层，当前查询在注意力空间检索相关块，再物化成原生窗口内的执行视图。地址可以很大，单步注意的内容仍有界，未命中证据可能被遗漏。本地参考路径还保留完整后备缓存，未实现完整异步分层系统，不能据此宣称显存节省或加速。 例如长会话有许多旧文件，当前只把检索命中的几块KV搬入窗口；这避免重复处理全文，但没有让窗口外全部证据同时参与注意。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beaconkv" data-paper-title="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference 基础模型 Hanyang University 2026-09-04 长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。 复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。保留近期 token，并用最远点采样维护能代表历史查询簇的 beacon。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  kv-cache long-context reasoning inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 BeaconKV 的代表查询评分，与按 KV 年龄淘汰有什么不同？ 按年龄只假设新信息更有用；代表查询评分依据query空间覆盖与key匹配决定历史价值，并额外保护近期窗口。代表性不足仍会漏证据，不能把它当成知道未来查询的oracle。 示意：一条很旧但与某个历史计划query高度相关的KV，可优先于无关旧项保留。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-5b76b212b862402f">BeaconKV 的代表查询评分，与按 KV 年龄淘汰有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abeaconkv">BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Hanyang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>按年龄只假设新信息更有用；代表查询评分依据query空间覆盖与key匹配决定历史价值，并额外保护近期窗口。代表性不足仍会漏证据，不能把它当成知道未来查询的oracle。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一条很旧但与某个历史计划query高度相关的KV，可优先于无关旧项保留。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04971">原论文</a> · <a href="../../../../reproductions/2609.04971-beaconkv/">实现解读</a> · <a href="#qa-5b76b212b862402f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beaconkv" data-paper-title="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference 基础模型 Hanyang University 2026-09-04 长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。 复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。复现级别：核心选择算法 + 真实 checkpoint CUDA smoke。保留近期 token，并用最远点采样维护能代表历史查询簇的 beacon。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  kv-cache long-context reasoning inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 BeaconKV 的 Python 选择器，为什么必须计入总耗时和 backing cache 占用？ 评分和索引本身可能昂贵，保留完整backing cache也不等于真实释放显存。文档公开checkpoint任务曾出现选择器更慢与质量退化，需把任务质量、工作集和总系统成本分别报告。 示意：只把attention工作集缩到512项，但另存全部KV并花时间逐项选择，峰值显存未必下降。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-dccffec6bb5d9e58">BeaconKV 的 Python 选择器，为什么必须计入总耗时和 backing cache 占用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abeaconkv">BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Hanyang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>评分和索引本身可能昂贵，保留完整backing cache也不等于真实释放显存。文档公开checkpoint任务曾出现选择器更慢与质量退化，需把任务质量、工作集和总系统成本分别报告。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>只把attention工作集缩到512项，但另存全部KV并花时间逐项选择，峰值显存未必下降。</p>
+<p class="ar-learning-sources">依据：本地复现、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04971">原论文</a> · <a href="../../../../reproductions/2609.04971-beaconkv/">实现解读</a> · <a href="#qa-dccffec6bb5d9e58">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kvmem" data-paper-title="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU 基础模型 Shanghai University of Finance and Economics 2026-09-04 长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。 复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。实现固定显存预算下的 query-conditioned KV 工作视图。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  agent-memory kv-cache long-context inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 KVMEM 为什么把长期 Agent 历史组织成分页 KV？ 历史可能同时超过显存与原生窗口，摘要又可能丢证据。KVMEM把已算KV放在分层存储，用注意力空间索引选相关block，再构造不超过原生窗口的执行视图。 示意：工作区可存很多历史页，当前一次模型执行只加载其中几页。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-kvmem-cf5b3efc" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d95f4ff4a7e079ef">KVMEM 为什么把长期 Agent 历史组织成分页 KV？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Akvmem">KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai University of Finance and Economics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>历史可能同时超过显存与原生窗口，摘要又可能丢证据。KVMEM把已算KV放在分层存储，用注意力空间索引选相关block，再构造不超过原生窗口的执行视图。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>工作区可存很多历史页，当前一次模型执行只加载其中几页。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04852">原论文</a> · <a href="../../../../reproductions/2609.04852-kvmem/">实现解读</a> · <a href="#qa-d95f4ff4a7e079ef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kvmem" data-paper-title="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU 基础模型 Shanghai University of Finance and Economics 2026-09-04 长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。 复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。实现固定显存预算下的 query-conditioned KV 工作视图。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  agent-memory kv-cache long-context inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 KVMEM把历史地址空间与执行窗口分开，为什么不等于模型一次注意全部历史？ 历史KV分块存放在不同存储层，当前查询在注意力空间检索相关块，再物化成原生窗口内的执行视图。地址可以很大，单步注意的内容仍有界，未命中证据可能被遗漏。本地参考路径还保留完整后备缓存，未实现完整异步分层系统，不能据此宣称显存节省或加速。 例如长会话有许多旧文件，当前只把检索命中的几块KV搬入窗口；这避免重复处理全文，但没有让窗口外全部证据同时参与注意。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-d8a15b1ab7d92db2">KVMEM把历史地址空间与执行窗口分开，为什么不等于模型一次注意全部历史？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Akvmem">KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai University of Finance and Economics</p>
@@ -279,9 +1061,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04852">原论文</a> · <a href="../../../../reproductions/2609.04852-kvmem/">实现解读</a> · <a href="#qa-d8a15b1ab7d92db2">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:random-attention" data-paper-title="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning 基础模型 Salesforce AI Research / University of Illinois Urbana-Champaign 2026-09-03 传统 KV 淘汰先计算 token 重要性，Random Attention 则始终保护 prompt，仅在已生成 token 中逐 head 独立随机保留固定预算；它省掉评分 pass，也避免所有 head 被同一排序规则约束。 复现级别：核心机制 + 真实 checkpoint GPU 验证。复现级别：核心机制 + 真实 checkpoint GPU 验证。保留完整 prompt，并对生成 trace 按 attention head 独立均匀随机采样。未声称复刻论文六任务矩阵和官方 vLLM kernel 吞吐；本地 GPU 路径验证真实 KV 张量上的选择与 attention 重建，并可作为 LLM Evolve attention 算子。CPU 三 seed 机制结果见 metrics/public-seeds42-44.json；  kv-cache reasoning inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 Random Attention为什么保护完整prompt，却在生成轨迹中逐头独立随机保留？ 任务说明与原始证据留在prompt中，保护它们避免随机删除改变任务条件；生成轨迹按头独立采样，省去重要性评分并让各头拥有不同覆盖。预算必须容纳受保护部分，随机策略仍可能漏掉关键中间步骤；本地GPU重建验证不代表完整任务矩阵与内核吞吐。 例如几个注意力头保留不同的中间推理片段，仍都能读取原问题；若把题干也随意删去，就不再是在同一输入条件下比较淘汰策略。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kvmem" data-paper-title="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU 基础模型 Shanghai University of Finance and Economics 2026-09-04 长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。 复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。实现固定显存预算下的 query-conditioned KV 工作视图。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  agent-memory kv-cache long-context inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 分页 KV 复用与先检索原始文本再 prefill，复用的计算对象有什么不同？ 分页方式保存已计算的K/V，命中后物化执行视图；文本检索取回token后通常还需重新prefill。两者的存储、位置与缓存一致性合同不同，不能只按检索条数比较成本。 示意：取回一段旧KV，和取回同一段文本再计算KV，不是相同的数据通路。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-dc417fdf357b8f1d">分页 KV 复用与先检索原始文本再 prefill，复用的计算对象有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Akvmem">KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai University of Finance and Economics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>分页方式保存已计算的K/V，命中后物化执行视图；文本检索取回token后通常还需重新prefill。两者的存储、位置与缓存一致性合同不同，不能只按检索条数比较成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>取回一段旧KV，和取回同一段文本再计算KV，不是相同的数据通路。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04852">原论文</a> · <a href="../../../../reproductions/2609.04852-kvmem/">实现解读</a> · <a href="#qa-dc417fdf357b8f1d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:kvmem" data-paper-title="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU 基础模型 Shanghai University of Finance and Economics 2026-09-04 长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。 复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。复现级别：查询相关 block 选择 + 真实 checkpoint CUDA smoke。实现固定显存预算下的 query-conditioned KV 工作视图。旧版 checkpoint 验证漏掉 query normalization 与 RoPE，并在 softmax 前平均 GQA query head，旧相似度作废。  agent-memory kv-cache long-context inference-serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 KVMEM 本地保留完整 backing cache 时，为什么不能报告峰值显存下降？ 有界工作集不等于完整存储已卸载。文档当前Python路径仍保留backing cache，任务级验证也未显示生产内核性能；应分别记录工作集、总驻留、数据搬运与端到端耗时。 示意：每次只读512槽，但全部2048槽仍驻留GPU，不能只用512计算总缓存占用。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e6cfc8c9db5b4d6e">KVMEM 本地保留完整 backing cache 时，为什么不能报告峰值显存下降？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Akvmem">KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai University of Finance and Economics</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>有界工作集不等于完整存储已卸载。文档当前Python路径仍保留backing cache，任务级验证也未显示生产内核性能；应分别记录工作集、总驻留、数据搬运与端到端耗时。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>每次只读512槽，但全部2048槽仍驻留GPU，不能只用512计算总缓存占用。</p>
+<p class="ar-learning-sources">依据：本地复现、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.04852">原论文</a> · <a href="../../../../reproductions/2609.04852-kvmem/">实现解读</a> · <a href="#qa-e6cfc8c9db5b4d6e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:random-attention" data-paper-title="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning 基础模型 Salesforce AI Research / University of Illinois Urbana-Champaign 2026-09-03 传统 KV 淘汰先计算 token 重要性，Random Attention 则始终保护 prompt，仅在已生成 token 中逐 head 独立随机保留固定预算；它省掉评分 pass，也避免所有 head 被同一排序规则约束。 复现级别：核心机制 + 真实 checkpoint GPU 验证。复现级别：核心机制 + 真实 checkpoint GPU 验证。保留完整 prompt，并对生成 trace 按 attention head 独立均匀随机采样。未声称复刻论文六任务矩阵和官方 vLLM kernel 吞吐；本地 GPU 路径验证真实 KV 张量上的选择与 attention 重建，并可作为 LLM Evolve attention 算子。CPU 三 seed 机制结果见 metrics/public-seeds42-44.json；  kv-cache reasoning inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 Random Attention 为什么尝试省去 KV 重要性打分？ 重要性评分本身也占计算，并可能让所有head受同一排名约束。方法完整保留prompt，只在生成轨迹中逐head均匀随机保留预算，用更简单的选择机制研究缓存取舍。 示意：每个head独立留一部分生成历史，而不先运行一次全历史重要性扫描。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-random-attention-6364631b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-cd62a3fce54a9f29">Random Attention 为什么尝试省去 KV 重要性打分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arandom-attention">Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Salesforce AI Research / University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>重要性评分本身也占计算，并可能让所有head受同一排名约束。方法完整保留prompt，只在生成轨迹中逐head均匀随机保留预算，用更简单的选择机制研究缓存取舍。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>每个head独立留一部分生成历史，而不先运行一次全历史重要性扫描。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.03430">原论文</a> · <a href="../../../../reproductions/2609.03430-random-attention/">实现解读</a> · <a href="#qa-cd62a3fce54a9f29">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:random-attention" data-paper-title="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning 基础模型 Salesforce AI Research / University of Illinois Urbana-Champaign 2026-09-03 传统 KV 淘汰先计算 token 重要性，Random Attention 则始终保护 prompt，仅在已生成 token 中逐 head 独立随机保留固定预算；它省掉评分 pass，也避免所有 head 被同一排序规则约束。 复现级别：核心机制 + 真实 checkpoint GPU 验证。复现级别：核心机制 + 真实 checkpoint GPU 验证。保留完整 prompt，并对生成 trace 按 attention head 独立均匀随机采样。未声称复刻论文六任务矩阵和官方 vLLM kernel 吞吐；本地 GPU 路径验证真实 KV 张量上的选择与 attention 重建，并可作为 LLM Evolve attention 算子。CPU 三 seed 机制结果见 metrics/public-seeds42-44.json；  kv-cache reasoning inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 Random Attention为什么保护完整prompt，却在生成轨迹中逐头独立随机保留？ 任务说明与原始证据留在prompt中，保护它们避免随机删除改变任务条件；生成轨迹按头独立采样，省去重要性评分并让各头拥有不同覆盖。预算必须容纳受保护部分，随机策略仍可能漏掉关键中间步骤；本地GPU重建验证不代表完整任务矩阵与内核吞吐。 例如几个注意力头保留不同的中间推理片段，仍都能读取原问题；若把题干也随意删去，就不再是在同一输入条件下比较淘汰策略。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-11ce14334bb11855">Random Attention为什么保护完整prompt，却在生成轨迹中逐头独立随机保留？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arandom-attention">Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Salesforce AI Research / University of Illinois Urbana-Champaign</p>
@@ -292,9 +1114,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.03430">原论文</a> · <a href="../../../../reproductions/2609.03430-random-attention/">实现解读</a> · <a href="#qa-11ce14334bb11855">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:twinkv" data-paper-title="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy 基础模型 The Hong Kong University of Science and Technology (Guangzhou) 2026-08-27 现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。 复现级别：核心机制 + 真实 checkpoint KV 验证。复现级别：核心机制 + 真实 checkpoint KV 验证。Equation 4、等预算 swap 与 Qwen3 实际 KV tensor 均执行；没有把 attention reconstruction 指标写成完整 LongBench 分数。正式 GPU smoke 使用 Qwen3 的真实 K/V 和公开 WikiText-2 长上下文，评测三个代表层的 attention reconstruction；它不是完整 LongBench generation。  kv-cache long-context inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 TwinKV为什么交换冗余donor与缺少替代者的orphan，而不直接扩大KV预算？ 基础淘汰可能留下多个相似键，却删掉唯一证据。修复先识别被删且无相似保留项的孤立项，再用有远处相似副本的冗余保留项交换，预算保持不变；受保护的起始与近期项不能作供体。键相似也不保证语义等价，本地重建评测不代表完整生成结果。 例如缓存保留两段近似重复说明，却漏掉唯一日期，可拿冗余项换回日期；不能一边加回孤立项一边不删除任何项，再声称相同预算。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:random-attention" data-paper-title="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning 基础模型 Salesforce AI Research / University of Illinois Urbana-Champaign 2026-09-03 传统 KV 淘汰先计算 token 重要性，Random Attention 则始终保护 prompt，仅在已生成 token 中逐 head 独立随机保留固定预算；它省掉评分 pass，也避免所有 head 被同一排序规则约束。 复现级别：核心机制 + 真实 checkpoint GPU 验证。复现级别：核心机制 + 真实 checkpoint GPU 验证。保留完整 prompt，并对生成 trace 按 attention head 独立均匀随机采样。未声称复刻论文六任务矩阵和官方 vLLM kernel 吞吐；本地 GPU 路径验证真实 KV 张量上的选择与 attention 重建，并可作为 LLM Evolve attention 算子。CPU 三 seed 机制结果见 metrics/public-seeds42-44.json；  kv-cache reasoning inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 逐 head 独立随机保留，与所有 head 共用同一个随机集合有什么不同？ 独立采样允许不同head保留不同生成位置，形成不同访问子集；共享集合会把同一选择限制施加到所有head。二者平均预算相同，覆盖与误差相关性仍可能不同。 示意：一个head保留位置5，另一个保留位置8，不必两者都只剩同样几个位置。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-bda7ea99e557586e">逐 head 独立随机保留，与所有 head 共用同一个随机集合有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arandom-attention">Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Salesforce AI Research / University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>独立采样允许不同head保留不同生成位置，形成不同访问子集；共享集合会把同一选择限制施加到所有head。二者平均预算相同，覆盖与误差相关性仍可能不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个head保留位置5，另一个保留位置8，不必两者都只剩同样几个位置。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.03430">原论文</a> · <a href="../../../../reproductions/2609.03430-random-attention/">实现解读</a> · <a href="#qa-bda7ea99e557586e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:random-attention" data-paper-title="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning 基础模型 Salesforce AI Research / University of Illinois Urbana-Champaign 2026-09-03 传统 KV 淘汰先计算 token 重要性，Random Attention 则始终保护 prompt，仅在已生成 token 中逐 head 独立随机保留固定预算；它省掉评分 pass，也避免所有 head 被同一排序规则约束。 复现级别：核心机制 + 真实 checkpoint GPU 验证。复现级别：核心机制 + 真实 checkpoint GPU 验证。保留完整 prompt，并对生成 trace 按 attention head 独立均匀随机采样。未声称复刻论文六任务矩阵和官方 vLLM kernel 吞吐；本地 GPU 路径验证真实 KV 张量上的选择与 attention 重建，并可作为 LLM Evolve attention 算子。CPU 三 seed 机制结果见 metrics/public-seeds42-44.json；  kv-cache reasoning inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 随机预算 B 比完整 prompt 长度还小时，能偷偷从 prompt 里再删一些吗？ 这会违反完整prompt保护合同。B-|P|必须是合法的生成轨迹采样预算；不足时应显式调整预算或报告不可行，不能把负数当合法抽样量，也不能改规则后沿用同一方法名。 示意：prompt已有100项而总预算只有80项，就无法同时满足这两个条件。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2e7ddbb5a54699df">随机预算 B 比完整 prompt 长度还小时，能偷偷从 prompt 里再删一些吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arandom-attention">Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Salesforce AI Research / University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这会违反完整prompt保护合同。B-|P|必须是合法的生成轨迹采样预算；不足时应显式调整预算或报告不可行，不能把负数当合法抽样量，也不能改规则后沿用同一方法名。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>prompt已有100项而总预算只有80项，就无法同时满足这两个条件。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.03430">原论文</a> · <a href="../../../../reproductions/2609.03430-random-attention/">实现解读</a> · <a href="#qa-2e7ddbb5a54699df">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:twinkv" data-paper-title="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy 基础模型 The Hong Kong University of Science and Technology (Guangzhou) 2026-08-27 现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。 复现级别：核心机制 + 真实 checkpoint KV 验证。复现级别：核心机制 + 真实 checkpoint KV 验证。Equation 4、等预算 swap 与 Qwen3 实际 KV tensor 均执行；没有把 attention reconstruction 指标写成完整 LongBench 分数。正式 GPU smoke 使用 Qwen3 的真实 K/V 和公开 WikiText-2 长上下文，评测三个代表层的 attention reconstruction；它不是完整 LongBench generation。  kv-cache long-context inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 TwinKV 为什么把固定缓存预算花在“修复保留集合”上？ 基础淘汰策略可能同时留多个相似key，却删掉没有替代者的旧项。TwinKV检查这些冗余与空缺，在不增加缓存项数的前提下交换donor与orphan，修复已有策略的选择。 示意：保留集里两个近重复key，可拿出其中一个换回一条独特旧证据。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-twinkv-b8f534bd" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d1d65d81060d202f">TwinKV 为什么把固定缓存预算花在“修复保留集合”上？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atwinkv">TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>基础淘汰策略可能同时留多个相似key，却删掉没有替代者的旧项。TwinKV检查这些冗余与空缺，在不增加缓存项数的前提下交换donor与orphan，修复已有策略的选择。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>保留集里两个近重复key，可拿出其中一个换回一条独特旧证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27128">原论文</a> · <a href="../../../../reproductions/2608.27128-twinkv/">实现解读</a> · <a href="#qa-d1d65d81060d202f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:twinkv" data-paper-title="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy 基础模型 The Hong Kong University of Science and Technology (Guangzhou) 2026-08-27 现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。 复现级别：核心机制 + 真实 checkpoint KV 验证。复现级别：核心机制 + 真实 checkpoint KV 验证。Equation 4、等预算 swap 与 Qwen3 实际 KV tensor 均执行；没有把 attention reconstruction 指标写成完整 LongBench 分数。正式 GPU smoke 使用 Qwen3 的真实 K/V 和公开 WikiText-2 长上下文，评测三个代表层的 attention reconstruction；它不是完整 LongBench generation。  kv-cache long-context inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 TwinKV为什么交换冗余donor与缺少替代者的orphan，而不直接扩大KV预算？ 基础淘汰可能留下多个相似键，却删掉唯一证据。修复先识别被删且无相似保留项的孤立项，再用有远处相似副本的冗余保留项交换，预算保持不变；受保护的起始与近期项不能作供体。键相似也不保证语义等价，本地重建评测不代表完整生成结果。 例如缓存保留两段近似重复说明，却漏掉唯一日期，可拿冗余项换回日期；不能一边加回孤立项一边不删除任何项，再声称相同预算。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-3a498fa6937cd63c">TwinKV为什么交换冗余donor与缺少替代者的orphan，而不直接扩大KV预算？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atwinkv">TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · The Hong Kong University of Science and Technology (Guangzhou)</p>
@@ -305,9 +1167,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27128">原论文</a> · <a href="../../../../reproductions/2608.27128-twinkv/">实现解读</a> · <a href="#qa-3a498fa6937cd63c">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:distillcache" data-paper-title="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference 基础模型 Oklahoma State University 2026-08-09 把 KV 淘汰视为序列决策，以逐步 KL 奖励训练轻量策略保留未来预测分布。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 distillcache；单 seed 变化为 +92.19% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 DistillCache为什么用完整缓存与淘汰缓存的预测KL作奖励，而不直接奖励多删token？ 缓存目标是保留后续预测所需信息，多删token只是资源动作。逐步比较完整缓存与淘汰后的分布，让策略看到某次淘汰损伤了多少行为，并在预算下学习取舍。训练用完整路径作参照，不代表部署每步都能免费运行它；低KL也不自动等于所有下游任务都无损。 教学例子：删去格式填充和删去关键编号都省一个KV，但后者可能显著改变下一步分布；分布奖励能区分这两种动作，而简单计数奖励会同样鼓励它们。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:twinkv" data-paper-title="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy 基础模型 The Hong Kong University of Science and Technology (Guangzhou) 2026-08-27 现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。 复现级别：核心机制 + 真实 checkpoint KV 验证。复现级别：核心机制 + 真实 checkpoint KV 验证。Equation 4、等预算 swap 与 Qwen3 实际 KV tensor 均执行；没有把 attention reconstruction 指标写成完整 LongBench 分数。正式 GPU smoke 使用 Qwen3 的真实 K/V 和公开 WikiText-2 长上下文，评测三个代表层的 attention reconstruction；它不是完整 LongBench generation。  kv-cache long-context inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 TwinKV 与直接替换 StreamingLLM/H2O 的基础评分，有什么组合关系？ 它是wrapped policy之后的repair pass，不重新定义全部基础策略。公平比较应在相同初始策略、相同KV预算下开关repair，否则无法区分来自基础选择还是交换修复。 示意：StreamingLLM与StreamingLLM+TwinKV保留同样数量KV，只比较第二遍交换的作用。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-eccc5ae1290fa1c0">TwinKV 与直接替换 StreamingLLM/H2O 的基础评分，有什么组合关系？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atwinkv">TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它是wrapped policy之后的repair pass，不重新定义全部基础策略。公平比较应在相同初始策略、相同KV预算下开关repair，否则无法区分来自基础选择还是交换修复。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>StreamingLLM与StreamingLLM+TwinKV保留同样数量KV，只比较第二遍交换的作用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27128">原论文</a> · <a href="../../../../reproductions/2608.27128-twinkv/">实现解读</a> · <a href="#qa-eccc5ae1290fa1c0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:twinkv" data-paper-title="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy 基础模型 The Hong Kong University of Science and Technology (Guangzhou) 2026-08-27 现有 KV eviction 常按 token 重要性选择缓存，但可能同时保留多个几乎重复的 key，并删掉没有替代者的 orphan。TwinKV 不替代 StreamingLLM、H2O 等基础策略，而是一个可组合 repair pass：在完全不增加 KV budget 的前提下，找出“被删且没有相似保留项”的 orphan，与“已保留但有高度相似 twin”的 donor 成对交换。 复现级别：核心机制 + 真实 checkpoint KV 验证。复现级别：核心机制 + 真实 checkpoint KV 验证。Equation 4、等预算 swap 与 Qwen3 实际 KV tensor 均执行；没有把 attention reconstruction 指标写成完整 LongBench 分数。正式 GPU smoke 使用 Qwen3 的真实 K/V 和公开 WikiText-2 长上下文，评测三个代表层的 attention reconstruction；它不是完整 LongBench generation。  kv-cache long-context inference-serving compression 基础模型 推理压缩：权重、KV 缓存与服务带宽 寻找 TwinKV donor 时，为什么要排除局部 twin 及 sink/recent 保护项？ 公式只在超出局部窗口的保留项中寻找相似twin，donor也不能破坏sink/recent保护。交换数取两集合可配对最小数，并保持|R′|=|R|，不能多补orphan而悄悄扩大预算。 示意：两条相邻key很像，不应未经局部排除就当成可安全牺牲的远程冗余。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-42e6987ceebe0802">寻找 TwinKV donor 时，为什么要排除局部 twin 及 sink/recent 保护项？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Atwinkv">TwinKV: A Composable Repair Pass for KV Cache Eviction via Pairwise Key Redundancy</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · The Hong Kong University of Science and Technology (Guangzhou)</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>公式只在超出局部窗口的保留项中寻找相似twin，donor也不能破坏sink/recent保护。交换数取两集合可配对最小数，并保持|R′|=|R|，不能多补orphan而悄悄扩大预算。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两条相邻key很像，不应未经局部排除就当成可安全牺牲的远程冗余。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27128">原论文</a> · <a href="../../../../reproductions/2608.27128-twinkv/">实现解读</a> · <a href="#qa-42e6987ceebe0802">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:distillcache" data-paper-title="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference 基础模型 Oklahoma State University 2026-08-09 把 KV 淘汰视为序列决策，以逐步 KL 奖励训练轻量策略保留未来预测分布。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 distillcache；单 seed 变化为 +92.19% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 DistillCache 为什么把 KV 淘汰看成连续多步决策？ 当前删除会影响后续能访问的历史，单步局部重要性未必反映长期预测损失。方法以full与evict预测分布的逐步KL作为反馈，学习更适应未来预测的轻量策略。 示意：这一刻无用的KV可能在几步后成为答案证据，淘汰后未必还能恢复。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-distillcache-374f7173" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1e565b459c75c1f5">DistillCache 为什么把 KV 淘汰看成连续多步决策？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adistillcache">DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Oklahoma State University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当前删除会影响后续能访问的历史，单步局部重要性未必反映长期预测损失。方法以full与evict预测分布的逐步KL作为反馈，学习更适应未来预测的轻量策略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>这一刻无用的KV可能在几步后成为答案证据，淘汰后未必还能恢复。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.08878">原论文</a> · <a href="../../../../reproductions/2608.08878-distillcache/">实现解读</a> · <a href="#qa-1e565b459c75c1f5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:distillcache" data-paper-title="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference 基础模型 Oklahoma State University 2026-08-09 把 KV 淘汰视为序列决策，以逐步 KL 奖励训练轻量策略保留未来预测分布。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 distillcache；单 seed 变化为 +92.19% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 DistillCache为什么用完整缓存与淘汰缓存的预测KL作奖励，而不直接奖励多删token？ 缓存目标是保留后续预测所需信息，多删token只是资源动作。逐步比较完整缓存与淘汰后的分布，让策略看到某次淘汰损伤了多少行为，并在预算下学习取舍。训练用完整路径作参照，不代表部署每步都能免费运行它；低KL也不自动等于所有下游任务都无损。 教学例子：删去格式填充和删去关键编号都省一个KV，但后者可能显著改变下一步分布；分布奖励能区分这两种动作，而简单计数奖励会同样鼓励它们。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-58b3581acbd44eb8">DistillCache为什么用完整缓存与淘汰缓存的预测KL作奖励，而不直接奖励多删token？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adistillcache">DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Oklahoma State University</p>
@@ -318,9 +1220,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.08878">原论文</a> · <a href="../../../../reproductions/2608.08878-distillcache/">实现解读</a> · <a href="#qa-58b3581acbd44eb8">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:bakron" data-paper-title="BaKron: Efficient Quantization with Kronecker-Factored Hessians" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BaKron: Efficient Quantization with Kronecker-Factored Hessians 基础模型 University of California, San Diego 2026-08-06 主题：二阶量化。GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。BaKron 以反对角并行和递归分治实现双侧自适应 rounding。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。对随机权重执行 Kronecker 加权 4-bit rounding 与逐行尺度搜索，和全局 GPTQ-style rounding 比较加权误差。  quantization hessian inference-efficiency 基础模型 推理压缩：权重、KV 缓存与服务带宽 BaKron为何引入双侧Kronecker曲率，而不只考虑输入激活侧误差？ 权重量化误差不仅受输入方向影响，也受输出侧的曲率结构影响；Kronecker近似把两侧关联纳入同一二次目标。直接展开完整大Hessian代价高，因此方法用结构化的并行与分治组织舍入。更丰富的误差模型不代表可以忽略近似假设或把每个权重独立round当作同一算法。 教学例子：两个输入方向误差相同，但输出方向对最终loss的敏感程度不同；只看输入侧可能把它们视为等价，双侧曲率则能区分这种影响。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:distillcache" data-paper-title="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference 基础模型 Oklahoma State University 2026-08-09 把 KV 淘汰视为序列决策，以逐步 KL 奖励训练轻量策略保留未来预测分布。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 distillcache；单 seed 变化为 +92.19% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 KL-guided 淘汰与单纯奖励更低缓存占用，会偏好同样的策略吗？ 缓存奖励主要鼓励多删，KL反馈关注删除后预测分布相对full的偏离。二者目标不同，需要在固定预算或明确质量约束下比较，不能把最小缓存自动等同于最佳策略。 示意：删除全部KV很省空间，却可能令后续预测与full模型差别很大。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-2c79858649dfff33">KL-guided 淘汰与单纯奖励更低缓存占用，会偏好同样的策略吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adistillcache">DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Oklahoma State University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>缓存奖励主要鼓励多删，KL反馈关注删除后预测分布相对full的偏离。二者目标不同，需要在固定预算或明确质量约束下比较，不能把最小缓存自动等同于最佳策略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>删除全部KV很省空间，却可能令后续预测与full模型差别很大。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.08878">原论文</a> · <a href="../../../../reproductions/2608.08878-distillcache/">实现解读</a> · <a href="#qa-2c79858649dfff33">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:distillcache" data-paper-title="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference 基础模型 Oklahoma State University 2026-08-09 把 KV 淘汰视为序列决策，以逐步 KL 奖励训练轻量策略保留未来预测分布。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 distillcache；单 seed 变化为 +92.19% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 DistillCache 的负 KL 奖励方向怎样用一个简单边界检查？ 当两分布相同时KL为0、奖励为0；偏离越大，负KL越低。文档方向为KL(p_full||p_evict)，写反或漏负号会改变训练信号。当前mini-suite不证明完整策略训练与部署收益。 示意：把evict分布逐渐改得远离full，奖励不应反而升高。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-013b0bbdf970cea9">DistillCache 的负 KL 奖励方向怎样用一个简单边界检查？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adistillcache">DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Oklahoma State University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当两分布相同时KL为0、奖励为0；偏离越大，负KL越低。文档方向为KL(p_full||p_evict)，写反或漏负号会改变训练信号。当前mini-suite不证明完整策略训练与部署收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>把evict分布逐渐改得远离full，奖励不应反而升高。</p>
+<p class="ar-learning-sources">依据：核心公式、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.08878">原论文</a> · <a href="../../../../reproductions/2608.08878-distillcache/">实现解读</a> · <a href="#qa-013b0bbdf970cea9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:bakron" data-paper-title="BaKron: Efficient Quantization with Kronecker-Factored Hessians" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BaKron: Efficient Quantization with Kronecker-Factored Hessians 基础模型 University of California, San Diego 2026-08-06 主题：二阶量化。GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。BaKron 以反对角并行和递归分治实现双侧自适应 rounding。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。对随机权重执行 Kronecker 加权 4-bit rounding 与逐行尺度搜索，和全局 GPTQ-style rounding 比较加权误差。  quantization hessian inference-efficiency 基础模型 推理压缩：权重、KV 缓存与服务带宽 BaKron 为什么在量化误差中加入两侧 Kronecker 曲率？ 输入侧信息不能完整描述权重误差在不同输出方向的代价。双侧Kronecker形式为误差提供更丰富的加权几何，再通过专门求解组织自适应rounding。 示意：同样的权重扰动落在不同输出方向时，代价可能不同，而非只看输入激活幅度。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-bakron-8758065a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-123e76370ee763fb">BaKron 为什么在量化误差中加入两侧 Kronecker 曲率？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abakron">BaKron: Efficient Quantization with Kronecker-Factored Hessians</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, San Diego</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>输入侧信息不能完整描述权重误差在不同输出方向的代价。双侧Kronecker形式为误差提供更丰富的加权几何，再通过专门求解组织自适应rounding。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同样的权重扰动落在不同输出方向时，代价可能不同，而非只看输入激活幅度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06291">原论文</a> · <a href="../../../../reproductions/2608.06291-bakron/">实现解读</a> · <a href="#qa-123e76370ee763fb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:bakron" data-paper-title="BaKron: Efficient Quantization with Kronecker-Factored Hessians" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BaKron: Efficient Quantization with Kronecker-Factored Hessians 基础模型 University of California, San Diego 2026-08-06 主题：二阶量化。GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。BaKron 以反对角并行和递归分治实现双侧自适应 rounding。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。对随机权重执行 Kronecker 加权 4-bit rounding 与逐行尺度搜索，和全局 GPTQ-style rounding 比较加权误差。  quantization hessian inference-efficiency 基础模型 推理压缩：权重、KV 缓存与服务带宽 BaKron为何引入双侧Kronecker曲率，而不只考虑输入激活侧误差？ 权重量化误差不仅受输入方向影响，也受输出侧的曲率结构影响；Kronecker近似把两侧关联纳入同一二次目标。直接展开完整大Hessian代价高，因此方法用结构化的并行与分治组织舍入。更丰富的误差模型不代表可以忽略近似假设或把每个权重独立round当作同一算法。 教学例子：两个输入方向误差相同，但输出方向对最终loss的敏感程度不同；只看输入侧可能把它们视为等价，双侧曲率则能区分这种影响。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-cb4b0da0ce3093eb">BaKron为何引入双侧Kronecker曲率，而不只考虑输入激活侧误差？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abakron">BaKron: Efficient Quantization with Kronecker-Factored Hessians</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, San Diego</p>
@@ -331,9 +1273,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06291">原论文</a> · <a href="../../../../reproductions/2608.06291-bakron/">实现解读</a> · <a href="#qa-cb4b0da0ce3093eb">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qevict" data-paper-title="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding 基础模型 Indian Institute of Technology Roorkee 2026-08-05 主题：长上下文 KV cache。二元保留/删除无法应对注意力漂移：今天不重要的窗口可能稍后重新活跃。QEvict 设置全精度、量化可恢复、删除三层，累计注意力变化时可将窗口解量化晋升。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。在固定槽位预算的向量 attention 流上执行三层缓存、量化恢复与晋升，比较不可恢复 eviction recall。  long-context kv-cache quantization serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 QEvict为什么在全精度与删除之间增加可恢复量化层？ 长生成中注意力会漂移，当前不重要的窗口以后可能重新相关。量化层用较小存储保留可恢复内容，累计注意力升高时可解量化晋升；彻底删除则失去这种机会。恢复只能挽回保留近似信息，不能消除既有量化误差，本地状态验证不等于完整服务性能复现。 例如前文人物线索暂时不用，先降到量化层；后续再次提问时可恢复参与注意，若先彻底删除，就只能另行重算或检索。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:bakron" data-paper-title="BaKron: Efficient Quantization with Kronecker-Factored Hessians" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BaKron: Efficient Quantization with Kronecker-Factored Hessians 基础模型 University of California, San Diego 2026-08-06 主题：二阶量化。GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。BaKron 以反对角并行和递归分治实现双侧自适应 rounding。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。对随机权重执行 Kronecker 加权 4-bit rounding 与逐行尺度搜索，和全局 GPTQ-style rounding 比较加权误差。  quantization hessian inference-efficiency 基础模型 推理压缩：权重、KV 缓存与服务带宽 BaKron 相对只考虑输入侧的 GPTQ-style rounding，多出了什么约束？ 目标用A⊗B对向量化权重误差加权，包含两侧曲率结构，而不只一种输入侧度量。求解也需对应双侧目标；换成普通逐行舍入不能仅凭名字称为双侧自适应rounding。 示意：一个候选rounding的普通MSE较小，双侧加权代价仍可能更大。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-372536e06264d80f">BaKron 相对只考虑输入侧的 GPTQ-style rounding，多出了什么约束？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abakron">BaKron: Efficient Quantization with Kronecker-Factored Hessians</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, San Diego</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>目标用A⊗B对向量化权重误差加权，包含两侧曲率结构，而不只一种输入侧度量。求解也需对应双侧目标；换成普通逐行舍入不能仅凭名字称为双侧自适应rounding。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个候选rounding的普通MSE较小，双侧加权代价仍可能更大。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06291">原论文</a> · <a href="../../../../reproductions/2608.06291-bakron/">实现解读</a> · <a href="#qa-372536e06264d80f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:bakron" data-paper-title="BaKron: Efficient Quantization with Kronecker-Factored Hessians" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="BaKron: Efficient Quantization with Kronecker-Factored Hessians 基础模型 University of California, San Diego 2026-08-06 主题：二阶量化。GPTQ 通常只利用输入侧曲率；双侧 Kronecker Hessian 更丰富但直接向量化求解昂贵。BaKron 以反对角并行和递归分治实现双侧自适应 rounding。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。对随机权重执行 Kronecker 加权 4-bit rounding 与逐行尺度搜索，和全局 GPTQ-style rounding 比较加权误差。  quantization hessian inference-efficiency 基础模型 推理压缩：权重、KV 缓存与服务带宽 检验 BaKron 的小矩阵实现时，为什么要同时核对 vec 顺序与 Kronecker 因子？ 向量化顺序决定A⊗B与矩阵两侧作用的对应关系，轴放反会优化另一项加权误差。应以独立显式向量化目标核对；当前随机权重诊断不代表论文规模checkpoint收益。 示意：按行和按列展开同一W，不能在不调整因子约定时混用同一Kronecker矩阵。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-5c531490304feada">检验 BaKron 的小矩阵实现时，为什么要同时核对 vec 顺序与 Kronecker 因子？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abakron">BaKron: Efficient Quantization with Kronecker-Factored Hessians</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · University of California, San Diego</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>向量化顺序决定A⊗B与矩阵两侧作用的对应关系，轴放反会优化另一项加权误差。应以独立显式向量化目标核对；当前随机权重诊断不代表论文规模checkpoint收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>按行和按列展开同一W，不能在不调整因子约定时混用同一Kronecker矩阵。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.06291">原论文</a> · <a href="../../../../reproductions/2608.06291-bakron/">实现解读</a> · <a href="#qa-5c531490304feada">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qevict" data-paper-title="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding 基础模型 Indian Institute of Technology Roorkee 2026-08-05 主题：长上下文 KV cache。二元保留/删除无法应对注意力漂移：今天不重要的窗口可能稍后重新活跃。QEvict 设置全精度、量化可恢复、删除三层，累计注意力变化时可将窗口解量化晋升。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。在固定槽位预算的向量 attention 流上执行三层缓存、量化恢复与晋升，比较不可恢复 eviction recall。  long-context kv-cache quantization serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 QEvict 为什么需要全精度、量化可恢复和删除三种状态？ 注意力会漂移，当前不重要的历史可能再次被需要。中间量化层以较低存储保留部分可访问内容，允许后续按累积关注晋升，而删除是另一种不可恢复状态。 示意：一个旧窗口暂时降到量化层，后来又相关时可重新进入高优先级读取。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-qevict-bcd29a04" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-cc8c66a9a9ec4980">QEvict 为什么需要全精度、量化可恢复和删除三种状态？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aqevict">QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Indian Institute of Technology Roorkee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>注意力会漂移，当前不重要的历史可能再次被需要。中间量化层以较低存储保留部分可访问内容，允许后续按累积关注晋升，而删除是另一种不可恢复状态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个旧窗口暂时降到量化层，后来又相关时可重新进入高优先级读取。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05326">原论文</a> · <a href="../../../../reproductions/2608.05326-qevict/">实现解读</a> · <a href="#qa-cc8c66a9a9ec4980">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qevict" data-paper-title="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding 基础模型 Indian Institute of Technology Roorkee 2026-08-05 主题：长上下文 KV cache。二元保留/删除无法应对注意力漂移：今天不重要的窗口可能稍后重新活跃。QEvict 设置全精度、量化可恢复、删除三层，累计注意力变化时可将窗口解量化晋升。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。在固定槽位预算的向量 attention 流上执行三层缓存、量化恢复与晋升，比较不可恢复 eviction recall。  long-context kv-cache quantization serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 QEvict为什么在全精度与删除之间增加可恢复量化层？ 长生成中注意力会漂移，当前不重要的窗口以后可能重新相关。量化层用较小存储保留可恢复内容，累计注意力升高时可解量化晋升；彻底删除则失去这种机会。恢复只能挽回保留近似信息，不能消除既有量化误差，本地状态验证不等于完整服务性能复现。 例如前文人物线索暂时不用，先降到量化层；后续再次提问时可恢复参与注意，若先彻底删除，就只能另行重算或检索。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-6e5f2217749ab819">QEvict为什么在全精度与删除之间增加可恢复量化层？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aqevict">QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Indian Institute of Technology Roorkee</p>
@@ -344,9 +1326,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05326">原论文</a> · <a href="../../../../reproductions/2608.05326-qevict/">实现解读</a> · <a href="#qa-6e5f2217749ab819">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:taskpress" data-paper-title="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning 基础模型 Google 2026-08-04 固定v2 Section3 Eqs1–3：sum over guide→odd-K零padding平均池化；γ=max|v|/(2^(b−1)−1)，scores=keyimportance×γ，各head同budget独立topk。输入显式是task-to-context sliced attention，不看真实下游query；真实K/V按时间排序gather，guideKV不保留，原position不能重编号。K/GQA聚合由调用方显式给出，tie按低index为本地约定。 成本过高，不复现（审查 DONE）。Llama3.1-8B/Qwen3-8B/32B，LongBench/RULER16K至64K上下文多压缩比例/方法矩阵；guide演化单A10040GB原文约25.2min加Gemini调用，完整多任务矩阵更大。只做算子，不跑全量加载/演化、无速度计时复现。taskpress_scores消费task-to-context attention与既有per-token value_scale；symmetric_value_scale是显式浮点数值参考，不是假装已运行int4 kernel。  推理与系统效率 KV缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 TaskPress宣称不看下游query，为什么仍需要task guide对context的注意力？ 任务级引导提供可复用的压缩偏好，选择器只读引导到上下文的注意力并结合值的量化尺度，不能借实际未来查询定制缓存。引导自身KV随后丢弃，保留历史的位置编号。真实引导生成与多任务效果不由小张量选择核证明，完整配置本地因成本过高未复现。 例如同一摘要任务可用通用引导压缩多段材料，未来具体提问尚未给出；若先读真实问题再挑证据，就不再是查询无关压缩。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qevict" data-paper-title="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding 基础模型 Indian Institute of Technology Roorkee 2026-08-05 主题：长上下文 KV cache。二元保留/删除无法应对注意力漂移：今天不重要的窗口可能稍后重新活跃。QEvict 设置全精度、量化可恢复、删除三层，累计注意力变化时可将窗口解量化晋升。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。在固定槽位预算的向量 attention 流上执行三层缓存、量化恢复与晋升，比较不可恢复 eviction recall。  long-context kv-cache quantization serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 从量化层晋升，与从从未量化的全精度层直接读取，信息完全相同吗？ 不一定。解量化恢复可访问表示，不代表找回量化已丢失的全部数值精度。它改善的是“可再次读取”相对永久删除的取舍，仍要单独测量量化误差。 示意：低比特向量可升回浮点存储，但不能凭空还原所有原始小数位。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4ec63ac32bc80f3b">从量化层晋升，与从从未量化的全精度层直接读取，信息完全相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aqevict">QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Indian Institute of Technology Roorkee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。解量化恢复可访问表示，不代表找回量化已丢失的全部数值精度。它改善的是“可再次读取”相对永久删除的取舍，仍要单独测量量化误差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>低比特向量可升回浮点存储，但不能凭空还原所有原始小数位。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05326">原论文</a> · <a href="../../../../reproductions/2608.05326-qevict/">实现解读</a> · <a href="#qa-4ec63ac32bc80f3b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qevict" data-paper-title="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding 基础模型 Indian Institute of Technology Roorkee 2026-08-05 主题：长上下文 KV cache。二元保留/删除无法应对注意力漂移：今天不重要的窗口可能稍后重新活跃。QEvict 设置全精度、量化可恢复、删除三层，累计注意力变化时可将窗口解量化晋升。 复现级别：核心机制复现。复现级别：核心机制复现。论文的中心算子在本地真实执行；生产私有数据、大模型权重或专用服务未复刻，论文结果与本地结果严格分开。本地结果用于验证机制能执行和比较方向，不等价于原论文规模复现。在固定槽位预算的向量 attention 流上执行三层缓存、量化恢复与晋升，比较不可恢复 eviction recall。  long-context kv-cache quantization serving 基础模型 推理压缩：权重、KV 缓存与服务带宽 QEvict 的累积评分若更新了，缓存状态转移也应同步检查什么？ 需核对衰减γ、当前attention增量、晋升阈值及固定槽位预算，并保证量化内容确实存在可恢复副本。只把日志标签由quantized改成full，不等于发生真实解量化与迁移。 示意：窗口评分超过τ时，应有对应向量从量化表示恢复，而不是仅增加晋升计数。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3f1c01ec5ec98bd8">QEvict 的累积评分若更新了，缓存状态转移也应同步检查什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aqevict">QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Indian Institute of Technology Roorkee</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>需核对衰减γ、当前attention增量、晋升阈值及固定槽位预算，并保证量化内容确实存在可恢复副本。只把日志标签由quantized改成full，不等于发生真实解量化与迁移。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>窗口评分超过τ时，应有对应向量从量化表示恢复，而不是仅增加晋升计数。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.05326">原论文</a> · <a href="../../../../reproductions/2608.05326-qevict/">实现解读</a> · <a href="#qa-3f1c01ec5ec98bd8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:taskpress" data-paper-title="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning 基础模型 Google 2026-08-04 固定v2 Section3 Eqs1–3：sum over guide→odd-K零padding平均池化；γ=max|v|/(2^(b−1)−1)，scores=keyimportance×γ，各head同budget独立topk。输入显式是task-to-context sliced attention，不看真实下游query；真实K/V按时间排序gather，guideKV不保留，原position不能重编号。K/GQA聚合由调用方显式给出，tie按低index为本地约定。 成本过高，不复现（审查 DONE）。Llama3.1-8B/Qwen3-8B/32B，LongBench/RULER16K至64K上下文多压缩比例/方法矩阵；guide演化单A10040GB原文约25.2min加Gemini调用，完整多任务矩阵更大。只做算子，不跑全量加载/演化、无速度计时复现。taskpress_scores消费task-to-context attention与既有per-token value_scale；symmetric_value_scale是显式浮点数值参考，不是假装已运行int4 kernel。  推理与系统效率 KV缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 TaskPress 的 query-agnostic，是否意味着完全不使用任务信息？ 不是。它不读取真实下游query，而使用task guide对context的注意力指导裁剪。任务信息与具体查询是两类输入，不能把“不看query”解释成纯随机或纯位置压缩。 示意：先知道任务是摘要，可构造task guide，但并不提前知道未来用户的具体问题。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-taskpress-8d6c3897" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-edec647efb03c0f0">TaskPress 的 query-agnostic，是否意味着完全不使用任务信息？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ataskpress">TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它不读取真实下游query，而使用task guide对context的注意力指导裁剪。任务信息与具体查询是两类输入，不能把“不看query”解释成纯随机或纯位置压缩。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先知道任务是摘要，可构造task guide，但并不提前知道未来用户的具体问题。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03276v1">原论文</a> · <a href="../../../../foundation-models/2608.03276-taskpress/">实现解读</a> · <a href="#qa-edec647efb03c0f0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:taskpress" data-paper-title="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning 基础模型 Google 2026-08-04 固定v2 Section3 Eqs1–3：sum over guide→odd-K零padding平均池化；γ=max|v|/(2^(b−1)−1)，scores=keyimportance×γ，各head同budget独立topk。输入显式是task-to-context sliced attention，不看真实下游query；真实K/V按时间排序gather，guideKV不保留，原position不能重编号。K/GQA聚合由调用方显式给出，tie按低index为本地约定。 成本过高，不复现（审查 DONE）。Llama3.1-8B/Qwen3-8B/32B，LongBench/RULER16K至64K上下文多压缩比例/方法矩阵；guide演化单A10040GB原文约25.2min加Gemini调用，完整多任务矩阵更大。只做算子，不跑全量加载/演化、无速度计时复现。taskpress_scores消费task-to-context attention与既有per-token value_scale；symmetric_value_scale是显式浮点数值参考，不是假装已运行int4 kernel。  推理与系统效率 KV缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 TaskPress宣称不看下游query，为什么仍需要task guide对context的注意力？ 任务级引导提供可复用的压缩偏好，选择器只读引导到上下文的注意力并结合值的量化尺度，不能借实际未来查询定制缓存。引导自身KV随后丢弃，保留历史的位置编号。真实引导生成与多任务效果不由小张量选择核证明，完整配置本地因成本过高未复现。 例如同一摘要任务可用通用引导压缩多段材料，未来具体提问尚未给出；若先读真实问题再挑证据，就不再是查询无关压缩。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-e794d7481f5d8483">TaskPress宣称不看下游query，为什么仍需要task guide对context的注意力？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ataskpress">TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
@@ -357,9 +1379,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03276v1">原论文</a> · <a href="../../../../foundation-models/2608.03276-taskpress/">实现解读</a> · <a href="#qa-e794d7481f5d8483">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:c2kv" data-paper-title="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference 基础模型 Shanghai Jiao Tong University 2026-07-20 以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 c2kv；单 seed 变化为 +76.56% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 C²KV为何同时学习压缩与拼接复用，而不是先压短缓存再任意组合？ 独立压缩后的KV可能依赖原位置和原上下文，拼起来未必仍能被模型正确读取。方法通过compression tokens及结构化attention学习更可组合的压缩表示，让多个片段的复用也进入训练目标。压缩表示仍有信息损失与接口条件，不能把任意摘要都视为位置无关的可拼接缓存。 教学例子：分别压缩两份文档后，要在同一请求中一起使用；训练需让模型理解两个压缩片段如何共同提供证据，而不只保证各片段单独重构时看起来合理。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:taskpress" data-paper-title="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning 基础模型 Google 2026-08-04 固定v2 Section3 Eqs1–3：sum over guide→odd-K零padding平均池化；γ=max|v|/(2^(b−1)−1)，scores=keyimportance×γ，各head同budget独立topk。输入显式是task-to-context sliced attention，不看真实下游query；真实K/V按时间排序gather，guideKV不保留，原position不能重编号。K/GQA聚合由调用方显式给出，tie按低index为本地约定。 成本过高，不复现（审查 DONE）。Llama3.1-8B/Qwen3-8B/32B，LongBench/RULER16K至64K上下文多压缩比例/方法矩阵；guide演化单A10040GB原文约25.2min加Gemini调用，完整多任务矩阵更大。只做算子，不跑全量加载/演化、无速度计时复现。taskpress_scores消费task-to-context attention与既有per-token value_scale；symmetric_value_scale是显式浮点数值参考，不是假装已运行int4 kernel。  推理与系统效率 KV缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 TaskPress 的 key importance 与 value scale，为何要相乘而非只看 attention？ guide注意力反映被读取程度，value scale反映量化相关幅度；结合后评分同时考虑匹配与内容尺度。仅保留其中一项会改变原式，不能把任意attention top-k当作TaskPress。 示意：两项key importance相同，value幅度不同，最终score也可不同。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-63404cd4ee43e665">TaskPress 的 key importance 与 value scale，为何要相乘而非只看 attention？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ataskpress">TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>guide注意力反映被读取程度，value scale反映量化相关幅度；结合后评分同时考虑匹配与内容尺度。仅保留其中一项会改变原式，不能把任意attention top-k当作TaskPress。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两项key importance相同，value幅度不同，最终score也可不同。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03276v1">原论文</a> · <a href="../../../../foundation-models/2608.03276-taskpress/">实现解读</a> · <a href="#qa-63404cd4ee43e665">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:taskpress" data-paper-title="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning 基础模型 Google 2026-08-04 固定v2 Section3 Eqs1–3：sum over guide→odd-K零padding平均池化；γ=max|v|/(2^(b−1)−1)，scores=keyimportance×γ，各head同budget独立topk。输入显式是task-to-context sliced attention，不看真实下游query；真实K/V按时间排序gather，guideKV不保留，原position不能重编号。K/GQA聚合由调用方显式给出，tie按低index为本地约定。 成本过高，不复现（审查 DONE）。Llama3.1-8B/Qwen3-8B/32B，LongBench/RULER16K至64K上下文多压缩比例/方法矩阵；guide演化单A10040GB原文约25.2min加Gemini调用，完整多任务矩阵更大。只做算子，不跑全量加载/演化、无速度计时复现。taskpress_scores消费task-to-context attention与既有per-token value_scale；symmetric_value_scale是显式浮点数值参考，不是假装已运行int4 kernel。  推理与系统效率 KV缓存压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 TaskPress 平均池化边缘时，能按实际有效邻居数重新除吗？ 文档要求奇数K、零padding并始终除固定K；按边缘邻居数重新归一化会改变评分。gather后保留原position IDs，guide KV不保留；低index tie-break是本地约定而非作者结论。 示意：窗口K=3在context第一个位置缺一个邻居，也仍按3归一化而非改除2。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-78c797341146a290">TaskPress 平均池化边缘时，能按实际有效邻居数重新除吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ataskpress">TaskPress: Query-Agnostic KV Cache Compression via Task-Guided Pruning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>文档要求奇数K、零padding并始终除固定K；按边缘邻居数重新归一化会改变评分。gather后保留原position IDs，guide KV不保留；低index tie-break是本地约定而非作者结论。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>窗口K=3在context第一个位置缺一个邻居，也仍按3归一化而非改除2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03276v1">原论文</a> · <a href="../../../../foundation-models/2608.03276-taskpress/">实现解读</a> · <a href="#qa-78c797341146a290">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:c2kv" data-paper-title="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference 基础模型 Shanghai Jiao Tong University 2026-07-20 以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 c2kv；单 seed 变化为 +76.56% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 C²KV 为什么希望压缩后的 KV 既短又可拼接复用？ 单段缓存压缩并不保证多段组合后仍可用。方法以compression tokens和结构化attention联合学习压缩与复用，使多个压缩表示能作为后续模型的共同输入。 示意：几个文档片段分别压缩后，希望在新的组合查询中复用，而不是每次全部重新prefill。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-c2kv-5a6eab64" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-056757cd116bea34">C²KV 为什么希望压缩后的 KV 既短又可拼接复用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ac2kv">C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单段缓存压缩并不保证多段组合后仍可用。方法以compression tokens和结构化attention联合学习压缩与复用，使多个压缩表示能作为后续模型的共同输入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>几个文档片段分别压缩后，希望在新的组合查询中复用，而不是每次全部重新prefill。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.17715">原论文</a> · <a href="../../../../reproductions/2607.17715-c2kv/">实现解读</a> · <a href="#qa-056757cd116bea34">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:c2kv" data-paper-title="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference 基础模型 Shanghai Jiao Tong University 2026-07-20 以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 c2kv；单 seed 变化为 +76.56% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 C²KV为何同时学习压缩与拼接复用，而不是先压短缓存再任意组合？ 独立压缩后的KV可能依赖原位置和原上下文，拼起来未必仍能被模型正确读取。方法通过compression tokens及结构化attention学习更可组合的压缩表示，让多个片段的复用也进入训练目标。压缩表示仍有信息损失与接口条件，不能把任意摘要都视为位置无关的可拼接缓存。 教学例子：分别压缩两份文档后，要在同一请求中一起使用；训练需让模型理解两个压缩片段如何共同提供证据，而不只保证各片段单独重构时看起来合理。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-325fef9068a4285a">C²KV为何同时学习压缩与拼接复用，而不是先压短缓存再任意组合？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ac2kv">C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai Jiao Tong University</p>
@@ -370,9 +1432,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.17715">原论文</a> · <a href="../../../../reproductions/2607.17715-c2kv/">实现解读</a> · <a href="#qa-325fef9068a4285a">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:awq" data-paper-title="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration 基础模型 MIT / NVIDIA / Harvard / SJTU 2023-06-01 利用 calibration activation 找到显著输入通道，通过等价通道缩放保护约 1% 关键权重，再执行硬件友好的统一低比特 weight-only 量化。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。用 WikiText-2 激活统计搜索 AWQ 等价缩放并真实执行 W4 量化；未使用 TinyChat CUDA kernel，MSE 不代表端到端吞吐。本地相对变化不得与原文指标混写。本地对照口径：基线为 round-to-nearest W4，实验组为 activation-aware equivalent scaling W4，只改变论文核心机制；output_mse 0.0054 → 0.0052，相对基线 -4.22%。  inference-serving quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 AWQ保护关键通道时，为何先做等价缩放，而不是给少量权重单独存更高精度？ 校准激活帮助识别对输出更敏感的输入通道，再对输入和权重作相互抵消的通道缩放，使关键权重在统一低比特码本中更易保真。浮点函数保持等价，量化误差却随缩放改变。保护对象由激活重要性指引，并不意味着所有大权重天然重要，也不自动解决动态KV缓存增长。 教学例子：两个权重数值相近，但一条输入通道经常幅度很大，它的误差对输出更显著；合法缩放可优先降低这条通道的量化影响，同时仍使用统一低比特格式。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:c2kv" data-paper-title="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference 基础模型 Shanghai Jiao Tong University 2026-07-20 以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 c2kv；单 seed 变化为 +76.56% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 C²KV 的联合压缩/复用训练，与独立压短各段后任意拼接有何差异？ 联合训练让压缩表示适应位置无关与组合消费的约束；独立压缩只优化单段表示，可能丢掉组合后需要的信息。压缩比例相同不能证明拼接行为等价。 示意：两段各自能回答局部问题，不代表其压缩表示拼起来就能回答跨段关系。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-24bcb420d94c7597">C²KV 的联合压缩/复用训练，与独立压短各段后任意拼接有何差异？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ac2kv">C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>联合训练让压缩表示适应位置无关与组合消费的约束；独立压缩只优化单段表示，可能丢掉组合后需要的信息。压缩比例相同不能证明拼接行为等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两段各自能回答局部问题，不代表其压缩表示拼起来就能回答跨段关系。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.17715">原论文</a> · <a href="../../../../reproductions/2607.17715-c2kv/">实现解读</a> · <a href="#qa-24bcb420d94c7597">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:c2kv" data-paper-title="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference 基础模型 Shanghai Jiao Tong University 2026-07-20 以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 c2kv；单 seed 变化为 +76.56% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 C²KV 复用接口中，Extractor 输出与下游拼接输入需要核对什么？ 应核对每段Z的形状、拼接边界及结构化attention消费方式，而非只统计压缩后长度。当前本地mini-suite未训练论文规模checkpoint或kernel，不能把Z可拼接当作完整复用能力验证。 示意：两个压缩段长度正确，但若边界和可见性混错，下游仍可能读取错误段落。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b33edaf19feb7824">C²KV 复用接口中，Extractor 输出与下游拼接输入需要核对什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ac2kv">C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>应核对每段Z的形状、拼接边界及结构化attention消费方式，而非只统计压缩后长度。当前本地mini-suite未训练论文规模checkpoint或kernel，不能把Z可拼接当作完整复用能力验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个压缩段长度正确，但若边界和可见性混错，下游仍可能读取错误段落。</p>
+<p class="ar-learning-sources">依据：核心公式、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.17715">原论文</a> · <a href="../../../../reproductions/2607.17715-c2kv/">实现解读</a> · <a href="#qa-b33edaf19feb7824">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:awq" data-paper-title="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration 基础模型 MIT / NVIDIA / Harvard / SJTU 2023-06-01 利用 calibration activation 找到显著输入通道，通过等价通道缩放保护约 1% 关键权重，再执行硬件友好的统一低比特 weight-only 量化。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。用 WikiText-2 激活统计搜索 AWQ 等价缩放并真实执行 W4 量化；未使用 TinyChat CUDA kernel，MSE 不代表端到端吞吐。本地相对变化不得与原文指标混写。本地对照口径：基线为 round-to-nearest W4，实验组为 activation-aware equivalent scaling W4，只改变论文核心机制；output_mse 0.0054 → 0.0052，相对基线 -4.22%。  inference-serving quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 AWQ 的 activation-aware，为什么不只看权重自身大小？ 量化误差对输出的影响还取决于输入激活。AWQ用校准激活识别显著通道，再做等价缩放后统一低比特weight-only量化，优先保护更影响输出的方向。 示意：同样大小的权重误差，在经常出现大激活的通道上可能造成更大输出扰动。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-awq-9367c7ce" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d1a4162d95cfb1d5">AWQ 的 activation-aware，为什么不只看权重自身大小？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aawq">AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT / NVIDIA / Harvard / SJTU</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>量化误差对输出的影响还取决于输入激活。AWQ用校准激活识别显著通道，再做等价缩放后统一低比特weight-only量化，优先保护更影响输出的方向。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同样大小的权重误差，在经常出现大激活的通道上可能造成更大输出扰动。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2306.00978">原论文</a> · <a href="../../../../reproductions/2306.00978-awq/">实现解读</a> · <a href="#qa-d1a4162d95cfb1d5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:awq" data-paper-title="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration 基础模型 MIT / NVIDIA / Harvard / SJTU 2023-06-01 利用 calibration activation 找到显著输入通道，通过等价通道缩放保护约 1% 关键权重，再执行硬件友好的统一低比特 weight-only 量化。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。用 WikiText-2 激活统计搜索 AWQ 等价缩放并真实执行 W4 量化；未使用 TinyChat CUDA kernel，MSE 不代表端到端吞吐。本地相对变化不得与原文指标混写。本地对照口径：基线为 round-to-nearest W4，实验组为 activation-aware equivalent scaling W4，只改变论文核心机制；output_mse 0.0054 → 0.0052，相对基线 -4.22%。  inference-serving quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 AWQ保护关键通道时，为何先做等价缩放，而不是给少量权重单独存更高精度？ 校准激活帮助识别对输出更敏感的输入通道，再对输入和权重作相互抵消的通道缩放，使关键权重在统一低比特码本中更易保真。浮点函数保持等价，量化误差却随缩放改变。保护对象由激活重要性指引，并不意味着所有大权重天然重要，也不自动解决动态KV缓存增长。 教学例子：两个权重数值相近，但一条输入通道经常幅度很大，它的误差对输出更显著；合法缩放可优先降低这条通道的量化影响，同时仍使用统一低比特格式。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-d1ecb6d714c57abd">AWQ保护关键通道时，为何先做等价缩放，而不是给少量权重单独存更高精度？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aawq">AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT / NVIDIA / Harvard / SJTU</p>
@@ -383,9 +1485,49 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2306.00978">原论文</a> · <a href="../../../../reproductions/2306.00978-awq/">实现解读</a> · <a href="#qa-d1ecb6d714c57abd">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gqa" data-paper-title="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints" data-learning-pending="false" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints 基础模型 Google Research 2023-05-22 多个 query head 共享较少的 K/V head，在 MHA 质量与 MQA 解码带宽之间取得可控折中。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。实际让 4 个 query heads 分组共享 2 个 K/V heads，并报告 KV cache 缩减；从头小模型训练替代论文从 MHA checkpoint 的 5% compute uptraining。本地数值不等同于原论文大模型、私有数据、生产流量或专用 kernel；本地相对变化不得与原文提升混写。本地对照口径：基线为同预算 llama_modern，实验组为 gqa；相对 PPL +2.15%。  attention kv-cache serving architecture 基础模型 推理压缩：权重、KV 缓存与服务带宽 GQA减少的是query head还是KV head，为什么这主要影响解码缓存与带宽？ 多个query head共享较少的key/value head，查询仍可保留多组投影和读取偏好。每个历史位置需要存的KV头数因此减少，逐步解码要读取的状态也相应变少。共享会约束不同头的独立性，形成MHA与更强共享之间的折中；它不是直接把历史token数量缩短。 教学例子：8个query head按组共享2个KV head，历史每个位置只存2组K/V，而不是8组；但8个查询仍可对共享的内容产生不同注意力权重。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:awq" data-paper-title="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration 基础模型 MIT / NVIDIA / Harvard / SJTU 2023-06-01 利用 calibration activation 找到显著输入通道，通过等价通道缩放保护约 1% 关键权重，再执行硬件友好的统一低比特 weight-only 量化。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。用 WikiText-2 激活统计搜索 AWQ 等价缩放并真实执行 W4 量化；未使用 TinyChat CUDA kernel，MSE 不代表端到端吞吐。本地相对变化不得与原文指标混写。本地对照口径：基线为 round-to-nearest W4，实验组为 activation-aware equivalent scaling W4，只改变论文核心机制；output_mse 0.0054 → 0.0052，相对基线 -4.22%。  inference-serving quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 AWQ 与 round-to-nearest W4 对照，主要增加了哪一步？ AWQ先搜索activation-aware等价通道缩放，再做W4量化；RTN直接按既定尺度取最近网格。两者都可保留统一低比特格式，区别不等于少数权重另存高精度。 示意：把关键通道重缩放后再round，和对原权重直接round可能留下不同误差。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-aedd4f3cf22864ab">AWQ 与 round-to-nearest W4 对照，主要增加了哪一步？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aawq">AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT / NVIDIA / Harvard / SJTU</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>AWQ先搜索activation-aware等价通道缩放，再做W4量化；RTN直接按既定尺度取最近网格。两者都可保留统一低比特格式，区别不等于少数权重另存高精度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>把关键通道重缩放后再round，和对原权重直接round可能留下不同误差。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2306.00978">原论文</a> · <a href="../../../../reproductions/2306.00978-awq/">实现解读</a> · <a href="#qa-aedd4f3cf22864ab">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:awq" data-paper-title="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration 基础模型 MIT / NVIDIA / Harvard / SJTU 2023-06-01 利用 calibration activation 找到显著输入通道，通过等价通道缩放保护约 1% 关键权重，再执行硬件友好的统一低比特 weight-only 量化。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。用 WikiText-2 激活统计搜索 AWQ 等价缩放并真实执行 W4 量化；未使用 TinyChat CUDA kernel，MSE 不代表端到端吞吐。本地相对变化不得与原文指标混写。本地对照口径：基线为 round-to-nearest W4，实验组为 activation-aware equivalent scaling W4，只改变论文核心机制；output_mse 0.0054 → 0.0052，相对基线 -4.22%。  inference-serving quantization 基础模型 推理压缩：权重、KV 缓存与服务带宽 AWQ 对权重乘 S 时，输入也必须做对应的逆缩放吗？ 需要。等价关系是XW=(XS⁻¹)(SW)，漏掉输入逆缩放会先改变浮点函数。缩放搜索应比较实际量化后的输出重建误差；本地MSE改善也不能代表TinyChat kernel吞吐。 示意：权重一通道乘2，输入对应通道须除2，未量化时才保持原输出。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-1ef8b97ca8a3077d">AWQ 对权重乘 S 时，输入也必须做对应的逆缩放吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aawq">AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · MIT / NVIDIA / Harvard / SJTU</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>需要。等价关系是XW=(XS⁻¹)(SW)，漏掉输入逆缩放会先改变浮点函数。缩放搜索应比较实际量化后的输出重建误差；本地MSE改善也不能代表TinyChat kernel吞吐。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>权重一通道乘2，输入对应通道须除2，未量化时才保持原输出。</p>
+<p class="ar-learning-sources">依据：核心公式、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2306.00978">原论文</a> · <a href="../../../../reproductions/2306.00978-awq/">实现解读</a> · <a href="#qa-1ef8b97ca8a3077d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gqa" data-paper-title="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints 基础模型 Google Research 2023-05-22 多个 query head 共享较少的 K/V head，在 MHA 质量与 MQA 解码带宽之间取得可控折中。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。实际让 4 个 query heads 分组共享 2 个 K/V heads，并报告 KV cache 缩减；从头小模型训练替代论文从 MHA checkpoint 的 5% compute uptraining。本地数值不等同于原论文大模型、私有数据、生产流量或专用 kernel；本地相对变化不得与原文提升混写。本地对照口径：基线为同预算 llama_modern，实验组为 gqa；相对 PPL +2.15%。  attention kv-cache serving architecture 基础模型 推理压缩：权重、KV 缓存与服务带宽 GQA 为什么让多个 query head 共用较少 K/V head？ 每个query仍可有自己的查询方向，而历史K/V以组共享，降低解码缓存与读取带宽。它在MHA的独立KV与MQA的单KV之间提供可控折中。 示意：四个query头可分两组，分别共享两份KV，而不是存四份KV历史。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-gqa-9496fcce" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-36f4e474bbcb6a45">GQA 为什么让多个 query head 共用较少 K/V head？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agqa">GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每个query仍可有自己的查询方向，而历史K/V以组共享，降低解码缓存与读取带宽。它在MHA的独立KV与MQA的单KV之间提供可控折中。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>四个query头可分两组，分别共享两份KV，而不是存四份KV历史。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.13245">原论文</a> · <a href="../../../../reproductions/2305.13245-gqa/">实现解读</a> · <a href="#qa-36f4e474bbcb6a45">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gqa" data-paper-title="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints 基础模型 Google Research 2023-05-22 多个 query head 共享较少的 K/V head，在 MHA 质量与 MQA 解码带宽之间取得可控折中。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。实际让 4 个 query heads 分组共享 2 个 K/V heads，并报告 KV cache 缩减；从头小模型训练替代论文从 MHA checkpoint 的 5% compute uptraining。本地数值不等同于原论文大模型、私有数据、生产流量或专用 kernel；本地相对变化不得与原文提升混写。本地对照口径：基线为同预算 llama_modern，实验组为 gqa；相对 PPL +2.15%。  attention kv-cache serving architecture 基础模型 推理压缩：权重、KV 缓存与服务带宽 GQA减少的是query head还是KV head，为什么这主要影响解码缓存与带宽？ 多个query head共享较少的key/value head，查询仍可保留多组投影和读取偏好。每个历史位置需要存的KV头数因此减少，逐步解码要读取的状态也相应变少。共享会约束不同头的独立性，形成MHA与更强共享之间的折中；它不是直接把历史token数量缩短。 教学例子：8个query head按组共享2个KV head，历史每个位置只存2组K/V，而不是8组；但8个查询仍可对共享的内容产生不同注意力权重。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
 <h2 id="qa-b644d6aec39b7b8b">GQA减少的是query head还是KV head，为什么这主要影响解码缓存与带宽？</h2>
 <p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agqa">GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints</a></p>
 <p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research</p>
@@ -394,6 +1536,32 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>8个query head按组共享2个KV head，历史每个位置只存2组K/V，而不是8组；但8个查询仍可对共享的内容产生不同注意力权重。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.13245">原论文</a> · <a href="../../../../reproductions/2305.13245-gqa/">实现解读</a> · <a href="#qa-b644d6aec39b7b8b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gqa" data-paper-title="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints 基础模型 Google Research 2023-05-22 多个 query head 共享较少的 K/V head，在 MHA 质量与 MQA 解码带宽之间取得可控折中。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。实际让 4 个 query heads 分组共享 2 个 K/V heads，并报告 KV cache 缩减；从头小模型训练替代论文从 MHA checkpoint 的 5% compute uptraining。本地数值不等同于原论文大模型、私有数据、生产流量或专用 kernel；本地相对变化不得与原文提升混写。本地对照口径：基线为同预算 llama_modern，实验组为 gqa；相对 PPL +2.15%。  attention kv-cache serving architecture 基础模型 推理压缩：权重、KV 缓存与服务带宽 MHA、GQA 与 MQA，主要沿哪一个 head 数量轴变化？ MHA通常每query头独立KV，MQA让所有query共享一组KV，GQA位于两者之间。减少的是KV组数，并非把query头一并删掉；质量与带宽仍需在具体模型上权衡。 示意：保持8个query头，KV可分别取8、2、1组形成不同共享程度。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-58190c8080d5c2fe">MHA、GQA 与 MQA，主要沿哪一个 head 数量轴变化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agqa">GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>MHA通常每query头独立KV，MQA让所有query共享一组KV，GQA位于两者之间。减少的是KV组数，并非把query头一并删掉；质量与带宽仍需在具体模型上权衡。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>保持8个query头，KV可分别取8、2、1组形成不同共享程度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.13245">原论文</a> · <a href="../../../../reproductions/2305.13245-gqa/">实现解读</a> · <a href="#qa-58190c8080d5c2fe">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gqa" data-paper-title="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints 基础模型 Google Research 2023-05-22 多个 query head 共享较少的 K/V head，在 MHA 质量与 MQA 解码带宽之间取得可控折中。 保真度：核心机制复现。保真度：核心机制复现。原文结论、本地公开数据实验和未复刻部分分开陈述。实际让 4 个 query heads 分组共享 2 个 K/V heads，并报告 KV cache 缩减；从头小模型训练替代论文从 MHA checkpoint 的 5% compute uptraining。本地数值不等同于原论文大模型、私有数据、生产流量或专用 kernel；本地相对变化不得与原文提升混写。本地对照口径：基线为同预算 llama_modern，实验组为 gqa；相对 PPL +2.15%。  attention kv-cache serving architecture 基础模型 推理压缩：权重、KV 缓存与服务带宽 实现 GQA 时，把共享 KV 临时展开成 query-head 数量就能证明缓存节省吗？ 逻辑广播可用于计算，但应区分持久缓存是否真的仅存较少KV组；若长期存展开副本就失去相应节省。还需核对g(h)映射与原checkpoint uptraining边界，本地从头小模型并非原协议。 示意：四个query共享两组KV时，缓存应保留两份历史，而不是每组再复制成两份。 2026-10-27">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-16543b687401639e">实现 GQA 时，把共享 KV 临时展开成 query-head 数量就能证明缓存节省吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agqa">GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>逻辑广播可用于计算，但应区分持久缓存是否真的仅存较少KV组；若长期存展开副本就失去相应节省。还需核对g(h)映射与原checkpoint uptraining边界，本地从头小模型并非原协议。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>四个query共享两组KV时，缓存应保留两份历史，而不是每组再复制成两份。</p>
+<p class="ar-learning-sources">依据：核心公式、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2305.13245">原论文</a> · <a href="../../../../reproductions/2305.13245-gqa/">实现解读</a> · <a href="#qa-16543b687401639e">问题链接</a></p>
 </details>
 </article>
 </div>

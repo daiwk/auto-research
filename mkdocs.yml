@@ -84,6 +84,10 @@ nav:
       - 长历史要不要每层都重新计算: learning/001-hstu-longer-slimper.md
   - 项目文档:
       - 项目 README: project-readme.md
+      - 安装与 Demo: readme_setup.md
+      - 实验与自动研究: readme_experiments.md
+      - 开发与证据约定: readme_development.md
+      - 交付与审计记录: readme_updates.md
       - GPT-6 Astra 协作指南: astra-collaboration.md
       - 自动研究平台 P1: research-platform-p1.md
       - 统一实验数据库与看板: experiment-tracking.md

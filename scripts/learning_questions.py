@@ -10,6 +10,12 @@ from pathlib import Path
 
 
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+LEVELS = {
+    "basics": "基础理解",
+    "mechanism": "核心机制",
+    "comparison": "方法对比",
+    "implementation": "实现细节",
+}
 
 
 def load_questions(root: Path, papers: dict[str, dict]) -> dict[str, list[dict]]:
@@ -31,6 +37,7 @@ def load_questions(root: Path, papers: dict[str, dict]) -> dict[str, list[dict]]
             source = (root / "docs" / papers[identity]["detail_path"]).read_text(encoding="utf-8")
             headings = source_headings(source)
             ids = set()
+            prompts = set()
             for question in questions:
                 if not isinstance(question, dict):
                     raise ValueError(f"invalid question: {identity}")
@@ -38,9 +45,15 @@ def load_questions(root: Path, papers: dict[str, dict]) -> dict[str, list[dict]]
                 if not isinstance(key, str) or not SLUG.fullmatch(key) or key in ids:
                     raise ValueError(f"invalid or duplicate question ID: {identity}: {key}")
                 ids.add(key)
+                if not isinstance(question.get("level"), str) or question["level"] not in LEVELS:
+                    raise ValueError(f"invalid question level: {identity}/{key}")
                 for field in ("question", "answer", "example", "added"):
                     if not isinstance(question.get(field), str) or not question[field].strip():
                         raise ValueError(f"question needs {field}: {identity}/{key}")
+                prompt = question["question"].strip()
+                if prompt in prompts:
+                    raise ValueError(f"duplicate question text: {identity}/{key}")
+                prompts.add(prompt)
                 try:
                     if date.fromisoformat(question["added"]).isoformat() != question["added"]:
                         raise ValueError()
@@ -88,3 +101,11 @@ def require_complete(cards: list[dict]) -> None:
     missing = [card["identity"] for card in cards if not card.get("questions")]
     if missing:
         raise ValueError(f"{len(missing)} papers need authored Q&A: " + ", ".join(missing[:20]))
+    incomplete = []
+    for card in cards:
+        present = {question["level"] for question in card["questions"]}
+        absent = [label for key, label in LEVELS.items() if key not in present]
+        if absent:
+            incomplete.append(f'{card["identity"]} ({", ".join(absent)})')
+    if incomplete:
+        raise ValueError(f"{len(incomplete)} papers need all four learning levels: " + ", ".join(incomplete[:20]))

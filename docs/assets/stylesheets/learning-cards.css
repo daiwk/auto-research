@@ -36,6 +36,40 @@
   flex-basis: 20rem;
 }
 
+.ar-learning-levels {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.8rem 0;
+  font-size: 0.7rem;
+}
+
+.ar-learning-levels > span {
+  margin-inline-end: 0.3rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.ar-learning-levels button {
+  padding: 0.3rem 0.6rem;
+  border: 0.05rem solid var(--ar-learning-line);
+  border-radius: 0.25rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ar-learning-levels button[aria-pressed="true"] {
+  border-color: var(--ar-learning-link);
+  color: var(--ar-learning-link);
+  background: var(--md-code-bg-color);
+}
+
+.md-typeset .ar-learning-qa .ar-learning-level {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--md-default-fg-color--light);
+}
+
 .ar-learning-browser [data-learning-search],
 .ar-learning-browser select {
   box-sizing: border-box;

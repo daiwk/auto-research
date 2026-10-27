@@ -61,7 +61,7 @@ def topic_repo(tmp_path):
     _write(tmp_path, "docs/learning/topics/recommendation.json", json.dumps(theme))
     _write(tmp_path, "docs/learning/questions/recommendation.json", json.dumps({
         "schema_version": 1, "papers": {"recommendation:first": {"questions": [{
-            "id": "mechanism", "question": "短查询为何仍需保留长历史？",
+            "id": "mechanism", "level": "mechanism", "question": "短查询为何仍需保留长历史？",
             "answer": "查询是读取入口，历史保存可寻址证据，二者不能混为同一状态。",
             "example": "教学例子：少量查询可按需读取多条旧记录。",
             "source_sections": ["背景与主要改动"], "added": "2026-10-27",
