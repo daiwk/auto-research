@@ -63,7 +63,7 @@ auto-research list
 
 欢迎提交问题、修正文档或新增论文组件：[Issues](https://github.com/daiwk/auto-research/issues) · [提交历史](https://github.com/daiwk/auto-research/commits/main/)。使用编码助手时先读 [AGENTS.md](https://github.com/daiwk/auto-research/blob/main/AGENTS.md)。
 
-每次变更经过 Python 契约检查和文档构建；新论文需要同步信息、源码/成本边界及四层问答。实验保留命令、版本、指标和失败记录；需要 CUDA 的新实现还必须提供实际 GPU 验证证据。
+Python 契约与文档构建由 CI 检查；新论文需要同步信息、源码/成本边界及四层问答。实验保留命令、版本、指标和失败记录；需要 CUDA 的新实现还必须提供实际 GPU 验证证据。
 
 <details>
 <summary>Star History</summary>
