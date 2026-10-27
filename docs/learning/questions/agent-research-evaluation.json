@@ -1,0 +1,1029 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:certified-selective-eval": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "选择性自动评测为什么允许一部分交给人工？",
+          "answer": "目标是在可证错误预算内自动处理可靠区域，而不是所有轨迹一律机器裁决。上置信界未达标时保留人工或其他评估，覆盖率与风险需一起报告。",
+          "example": "例如简单任务自动判，证据模糊的任务仍交审查，不能只报自动部分准确率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "选择性评测用错误率上置信界，比仅用自动区域的经验错误率多控制什么？",
+          "answer": "经验错误率只总结已观察样本，上置信界还反映有限证据下的不确定性。只有界低于预算才自动接管，证据不足时即使暂时零错，也可能继续交人工。它控制的是选定自动区域的风险证据，不能承诺每条自动判断绝不出错。",
+          "example": "教学例子：某小区域暂未发现错误，样本仍很少；经验值为零不代表错误上界已足够低，覆盖率不能据此随意扩大。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "本地bootstrap证书可以直接宣称论文语料覆盖率吗？",
+          "answer": "不能，mini-suite只验证聚类抽样和上界接管条件。任务身份、自动区域与错误标签应固定可追溯，置信上界而非点错误率需落在预算内才接管。",
+          "example": "例如样本错率低但上界仍高，不能提前宣布满足误判预算。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "为什么自动评分区域的错误证书要按任务簇 bootstrap，而非把所有轨迹当独立样本？",
+          "answer": "同任务多条轨迹共享难度与结构，独立抽样会低估相关性和不确定性。按簇重采样为自动判断区域建立错误率上界，只有低于预算才接管，其余保留人工或外部评估；低平均错误不等于任何阈值都可认证，证书还受校准分布与选择规则限制。",
+          "example": "例如一个任务生成一百条近似轨迹，不能当一百份独立成功证据压窄区间；应把这批一起作为任务簇处理。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:harness-design-study": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "Harness设计研究中的harness，具体包含模型之外的哪些决定？",
+          "answer": "它组织模型怎样计划、能使用什么动作空间，以及怎样管理上下文，再通过底层循环执行任务。这些是模型外的工作流程选择，不是替换一套模型权重。先识别可改动的harness组件，才能理解为何同一模型也会因执行方式不同而表现变化。",
+          "example": "教学例子：同一编码模型可以一次只看到文件片段，也可以获得压缩后的多文件上下文；这属于harness设置变化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "规划更详细与工具动作空间更丰富为什么不能合成一个提升结论？",
+          "answer": "二者影响成本和行为的路径不同，组合变化无法说明各自贡献。需有受控因素对照，且交互效应可能存在，不能把一次组合收益全归某一组件。",
+          "example": "例如同时加计划和新工具后成功，尚不知道主要帮助来自哪里。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "本地可控harness因素是否等于跑完SWE-bench？",
+          "answer": "不是，当前mini-suite只验证因素与控制流。模型版本、预算和工具协议需固定，实际基准题和执行证据未运行就不能报告相应能力分数。",
+          "example": "例如模拟一个工具动作成功，不能换算成真实仓库修复成功率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "固定底层执行循环后分别改 planning、action space 与 context，为什么更能解释 harness 收益？",
+          "answer": "完整框架对比常同时改变多个因素，无法判断涨分来自更多推理、易用动作还是更好状态管理。保持循环不变并单独控制组件，减少混杂，再分别看效果与成本；组件参考实现或统计合同并不等于已经运行原文大规模编码任务。",
+          "example": "例如只把文件编辑接口换成精确替换，其他提示与预算不变，才能更集中评价动作空间，而非把同时换模型的收益一起算入。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:fuse-evaluator": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "FUSE是在训练一个社交Agent，还是在提供可核验的社会推理评测环境？",
+          "answer": "这里讨论的是评测：在多Agent模拟中设置可验证的隐藏动机，观察助手如何理解用户转述和社会情境。隐藏状态为评分提供依据，并不是直接交给受测助手的答案。实现评测模拟或本地核，也不意味着已经训练出更好的社会推理模型。",
+          "example": "教学例子：模拟里知道甲的真实意图，助手只读用户转述后作判断；评测器随后核对，而非先把意图告诉助手。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "framing bias评测与普通问答准确率有什么区别？",
+          "answer": "表述框架可能引导归因，即使事实相同；对照转述与隐藏状态可测社会判断偏移。模拟行为不是所有真人关系，不能从小状态机推广全面社交理解。",
+          "example": "例如把同一迟到描述为敷衍或遇堵，框架可能改变助手判断。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "fuse-evaluator本地执行了哪些边界，是否调用十二外部LLM？",
+          "answer": "只执行observation-safe评测状态机，未调用该外部模型矩阵。公开观察与私有动机分开投影，不能把包含gold字段的内部对象直接传给代理回调。",
+          "example": "例如评分器知道真实关系，不代表助手输入也能拿到这列。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "隐藏动机可验证的模拟，为什么比只看用户转述是否流畅更适合测社会推理？",
+          "answer": "转述可能带偏见或遗漏，流畅回应未必识别各方真实目标。模拟环境保留不向被测者公开的动机与事件条件，评分侧据此检查推断，而非用表面措辞一致度代替；隐藏参考只能给验证器，固定逻辑 fixture 也不能冒充多 Agent 的真实语义交互。",
+          "example": "例如用户把同事拒绝请求说成敌意，模拟真因可能是资源冲突；评测应看助手是否据可见证据区分，而非附和转述。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:silr": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "SiLR的shadow-execute是在真实执行出错后撤销动作吗？",
+          "answer": "不是。它先在影子执行路径评估提案造成的状态，再由安全门决定是否进入真实环境。提案评估与真实副作用必须分开；若先真正执行再检查，就无法据同一门控声称阻止了违规动作，尤其是不能撤销的副作用。",
+          "example": "教学例子：先模拟一项配置修改会触及哪些约束，再决定是否提交；不是实际改坏配置后才检查并尝试回滚。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "乘积序与把多个违规程度加成一分有什么差别？",
+          "answer": "向量逐分支不恶化禁止用一处改善补偿另一处恶化，标量总分可能掩盖这种交换。约束结构必须保留，不能用某个权重总和声称等价安全门。",
+          "example": "例如省了存储却扩大权限，总分下降也不满足每分支都不恶化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "SiLR的shadow执行可以用不可靠模拟器替代真实效果吗？",
+          "answer": "不能据此宣称安全，准入依赖确定且覆盖充分的验证器。先shadow再比较状态，再真实执行；未建真实simulator时，本地只验证结构化判据与过程信号。",
+          "example": "例如模拟没建模删除副作用，向量看似不变也可能遗漏真实风险。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "系统已违规时，为什么安全门不能把所有仍不完全安全的动作都拒绝？",
+          "answer": "恢复可能需要经过尚有残余风险的中间状态，全拒绝会让系统被锁死。SiLR 先 shadow-execute，再要求每个受约束分支的严重度都不恶化，允许逐步改善；只看一个总分可能掩盖某分支变坏，shadow 结果也仍需对应真实执行合同。",
+          "example": "例如两个权限问题中先撤销一个，另一个暂时保留，整体尚未完全安全却是有效恢复；不能要求一步消除全部问题才允许动作。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:redevoagent": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "RedEvoAgent为什么把经验蒸馏成技能而非保存完整轨迹？",
+          "answer": "长轨迹噪声和上下文成本高，抽象可读技能更利复用；工具归因只聚焦真正决定成败环节。抽象仍可能丢细节，技能需留出验证后晋级。",
+          "example": "例如从一次长排查中提炼先验证权限边界，而不整段复制所有无关尝试。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "RedEvoAgent只归因决定成败的工具，与给整条成功轨迹的所有工具记功有什么区别？",
+          "answer": "整条轨迹成功不说明每次工具调用都有贡献，等额记功会把无关步骤也固化成技能。决定性归因尝试保留真正改变攻击结果的工具经验，减少技能库噪声。这里比较信用对象，不能把一次归因分数当成已识别的普遍因果规律。",
+          "example": "教学例子：轨迹先查一份无关页面，后用关键工具触发结果；成功标签不应让前一次无关查询自动成为必需技能。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "RedEvoAgent本地是否已对真实产品执行红队攻击？",
+          "answer": "没有，安全mini-suite只验证归因与技能更新控制流。公开产物回放不等于新外部攻击，技能来源、评估切分与替换证据需要记录，不把日志重放当真实执行。",
+          "example": "例如加载已有结果文件，只说明能读协议，不说明刚完成一次攻击。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "为什么经验技能晋级要在留出集优于 incumbent，而非只看原攻击轨迹成功？",
+          "answer": "原轨迹只能证明一次情境有效，技能抽象可能过拟合措辞或误把无关工具当关键因素。留出比较检验复用价值，严格提升才替换现任，避免持续累加低质经验；可读技能与真实执行之间仍需验证，本地筛选器不能代替完整评测行为。",
+          "example": "例如一条审计经验只在某个样例有效，换同类新场景失效，就不应仅凭原日志成功把它升级为默认技能。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:spec-driven-tests": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "规范驱动测试里的Pre、Post和Sug分别是什么，测试建议能代替行为契约吗？",
+          "answer": "Pre约束调用前应满足的条件，Post描述满足前提后应得到的行为，Sug提示怎样验证这些条件。建议不是函数契约本身；先把合法输入与预期结果写清，再标出已测和未测部分，才能判断生成测试遗漏了什么。",
+          "example": "教学例子：排序函数的Pre可限制输入可比较，Post要求结果有序且元素不变，Sug再建议检查重复值和空列表。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "fixed-source输入与向测试生成器暴露历史bug有什么区别？",
+          "answer": "原流程只读修复后源码和公开需求，buggy版本由私有评价器使用。给出旧补丁或bug位置会改变任务难度，不能当同协议测试发现能力。",
+          "example": "例如知道哪行曾经错过，可轻易定向写测试，却不是独立契约推导。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "编译失败或修改被测源码算成功检出bug吗？",
+          "answer": "都不算。相同测试先在fixed编译通过，在buggy编译成功后出现真实断言失败才检出；非法文件修改使运行作废，审计需外部可信diff，不能信模型自报。",
+          "example": "例如故意写不存在API导致旧版编译错，不是有效回归测试。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "先写前后置条件再生成测试，为什么能暴露直接写单测时的覆盖盲点？",
+          "answer": "规范把每个代码单元的输入限制与应保证行为显式列出，再标记已测未测条件，测试生成才有可检查的覆盖目标。它仍来源于读取源码与解释，不能自动保证规范忠实；论文自动比较没有人工修订，也不应把可选开发者步骤算成已执行条件。",
+          "example": "例如函数要求空输入返回空列表，规范可把它列为未测后置条件；直接模仿现有正常样例写测试可能一直漏掉边界。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:harnessopt-bench": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "HarnessOpt-Bench允许优化器改哪些东西，是重新训练底层模型吗？",
+          "answer": "搜索对象是prompt、工具、控制流与记忆等harness组件，评测关注在规定目标评估预算内改进这些组件的能力。不能把任意底层模型重训、增加隐藏训练数据也默认为同一搜索空间；候选版本与允许改动范围都应留痕。",
+          "example": "教学例子：优化器可试不同上下文压缩策略并评估；若偷偷换更强底座，收益便不能全归于harness优化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "开放搜索反馈与隐藏test为何必须分离？",
+          "answer": "优化过程会利用可见反馈选版本，隐藏集用于最终泛化。若每次搜索都看test，就把基准变成调参集，得分提高不能解释为新任务能力。",
+          "example": "例如试几十版后按测试最高挑一版，会高估未见效果。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "本地候选注册能替代可信执行与版本审计吗？",
+          "answer": "不能，需要真实预算计数、候选快照与隔离执行，未运行原模型或环境不能冒称benchmark成绩。相对提升公式在基线近零时需明确epsilon而非隐改分母。",
+          "example": "例如配置列表新增一个名字，不代表优化器已经实际改并测试它。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "为什么评测 harness 优化器要固定 target-evaluation 预算，而不只比较最终最高分？",
+          "answer": "更多评测本身就提供更多搜索机会，不控预算会混淆优化能力与资源投入。隐藏测试隔离候选选择，可信环境及版本档案支持审计改了什么；报告相对收益还需注意基线尺度，不能把搜索反馈里见过的最佳候选成绩当最终未见表现。",
+          "example": "例如一套优化器试一千次、另一套只试十次，即便前者最后更高，也不能直接说明更会优化；应先匹配评测调用预算。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:os-shepherd": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "OS-Shepherd在电脑任务里扮演操作Agent，还是判断轨迹成败的judge？",
+          "answer": "它是评估完整电脑操作轨迹是否成功的judge；执行点击、输入等动作的是受评操作Agent。OSReward提供人工验证任务与轨迹，用于检查这类奖励模型。先区分执行者与评分者，才能避免把judge识别成功的能力误称作自行完成任务。",
+          "example": "教学例子：操作Agent尝试保存文件，judge根据轨迹判断是否真的保存；judge判对并不代表它执行过保存动作。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "judge看末五状态加文本历史，与只看最终截图有什么差别？",
+          "answer": "终态截图可能缺少过程和隐性任务条件，历史补证据；但更长输入也带噪声。规定观察协议不同，不能换成任意摘要后仍把分数与原表直接比。",
+          "example": "例如窗口最后打开不代表中间文件修改真的保存。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "OSReward本地是否训练了开放9B或35B视觉judge？",
+          "answer": "没有，也未下载官方截图轨迹，只实现评测契约。预测verdict与人工标签在评分端汇合，类分母为空应明示，不把自动填充值当真实balanced accuracy。",
+          "example": "例如一批没有失败任务，就无法从这批估出正常失败recall。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "为什么普通 accuracy 会掩盖“几乎全判成功”的 reward model？",
+          "answer": "若成功样本占多数，宽松裁判把所有轨迹判成功也可能得到不错总准确率，却漏掉真实失败。分别报告 success recall、fail recall 及其均值能揭示两类能力；跨系统与困难子集还需真实验证标签，不能把几条接口诊断当开放 judge 的能力测量。",
+          "example": "例如九成样本成功，全判成功有九成 accuracy，但 fail recall 为零，balanced accuracy 只有一半，暴露对失败完全失明。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:finance-harness-protocol": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "FinanceGym的rubric分数3，是3%的成功率吗？",
+          "answer": "不是。单个rubric采用0到4的五级评分，3只是该尺度上的等级。题内先按四分满分归一，才能与其他题共同平均；分数解释仍取决于具体rubric。不要把原始等级、题目归一分和整体Outcome当成同一个量。",
+          "example": "教学例子：教学用一题两个rubric分别3分和1分，题内归一分是(3+1)/(4×2)=0.5，不是4%或两题命中率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "逐题等权与把全部rubric混平均有什么差别？",
+          "answer": "每题rubric数不同，直接混平均让细项多的题占更多权重；先按题归一再平均保留题级比较。论文五级评分也不能自改为任意连续满分。",
+          "example": "例如十条标准的题不应自动比两条标准的题重要五倍。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "金融协议发现时点泄漏后能把该行计零继续报均分吗？",
+          "answer": "不能，运行应判无效而非静默删行或置零。文档publication_date必须不晚于cutoff，thesis、rubric与未来证据不可给Agent；这是评测时点协议而非投资建议。",
+          "example": "例如工具偶然搜出事后文章，不能假装只是模型答错了一题。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "截止日后可核实的预测，为什么必须留在提交后的评测器而非给研究 Agent？",
+          "answer": "研究输入只能使用截止日前已可检索证据，未来材料若提前出现会把预测变成复述。thesis 与 rubric 也留在评分侧，分题归一后再平均以免题目条目数改变权重；时点泄漏使运行无效，不是随意记零或删行后继续汇总。",
+          "example": "例如报告预测下一季度趋势，后来公布的业绩只能在提交后核查，不能倒填进截止日前证据包让模型看似提前判断正确。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:agentdebugx": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "AgentDebugX为什么保留不可变原始轨迹再叠诊断？",
+          "answer": "失败定位需要完整事件顺序和证据，重写旧日志会掩盖真实行为。Detect、Attribute、Recover和Rerun分别产物可追溯，症状步骤不直接等于根因。",
+          "example": "例如工具报错发生在后一步，根因可能是前面传参错误。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与评测边界"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "Who&When提供reference answer意味着怎样的比较边界？",
+          "answer": "该诊断条件允许任务答案但不提供责任Agent或步骤，是with-ground-truth定位协议。不能省略答案特权后宣称它是无答案在线智能体能力对比。",
+          "example": "例如知道目标结果有助发现偏离，但仍不等于知道谁最先犯错。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与评测边界"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "AgentDebugX生成修复建议后能自动重放日志工具吗？",
+          "answer": "不能，实际重跑经过人或policy gate，不能从导入日志擅自执行任意外部命令。闭环结果需修后独立轨迹真实评分；memory或Error Hub收益未被原文评估。",
+          "example": "例如日志含删除命令，诊断器可以建议修正，不应直接再次运行。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与评测边界"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "为什么修复建议不能自动从导入日志重放任意外部工具？",
+          "answer": "日志是观察资料，可能过时、缺权限或包含有副作用的调用；检测归因与授权执行应分开。不可变原轨迹上叠加假设和建议，真实重跑经人或 policy gate 后形成独立证据；诊断器若有参考答案等特权输入，也必须与无答案在线能力明确区分。",
+          "example": "例如日志里有删除临时目录命令，调试器不能仅因导入了它就重新执行；应先建议修复，再由有权限的运行流程决定。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与评测边界"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:logact": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "LogAct为什么把投票提交与执行分开？",
+          "answer": "意图、审查与commit持久记录后才允许执行，让授权判断与外部副作用解耦，并可审计崩溃状态。对话里说同意不等于已有可信持久commit。",
+          "example": "例如先写入批准结果，再让执行器调用支付接口。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "LogAct的k-of-N批准，与必须等所有投票返回后才能决定有什么区别？",
+          "answer": "本地固定批准条件允许达到k票即提交；若已批准数加未投票数仍不足k，则可提前拒绝。它不必等待无力改变结果的剩余票，且同一Voter不能重复计票。这是固定阈值下的决策性质，不代表已实现所有动态审批策略。",
+          "example": "教学例子：三位Voter要求两票，前两票都批准即可提交；前两票都拒绝时，最后一票也无法凑足两票。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "本地LogAct的quorum和崩溃恢复怎样处理？",
+          "answer": "固定N命名voter至少k同意，同voter去重且不可改票；started无Result默认不重试。仅明确幂等并显式recover、排除仍活跃执行器后才用稳定key恢复，不支持任意动态策略语言。",
+          "example": "例如两次同人投票不能当两票，已提交也不意味着未知副作用可随意再做。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "动作已在共享日志 commit，崩溃后为什么仍不能无条件再次执行？",
+          "answer": "日志提交说明批准意图，不一定能确定外部副作用是否已经发生；崩溃可能出现在调用成功但回执未写入之间。恢复需幂等键或事务契约区分未执行与已执行，独立投票也只控制批准过程，不能凭对话记录保证外部 exactly-once。",
+          "example": "例如付款调用成功后进程崩溃，日志没有结果；直接重放可能重复扣款，应依赖幂等或事务查询，而非只看 commit 状态。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:tfrbench": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "TFRBench为什么同时验数值误差与推理一致性？",
+          "answer": "预测接近可能靠偶然，解释流畅也可能预测错，参考轨迹需两条都合格。构建时用标签筛选与反馈，因此参考制作过程不能直接算留出能力成绩。",
+          "example": "例如碰巧猜中趋势却无证据，与有根据但数值偏差大，均不完整合格。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "TFRBench的MASE与直接比较不同序列的MAE，尺度解释有什么区别？",
+          "answer": "MASE用历史季节差分的平均绝对变化归一化预测误差，使门槛相对于该序列的历史尺度定义。原始MAE仍带各序列单位，不能直接跨量纲比较。MASE小于一是数值准入条件，还需独立的一致性门槛；历史尺度为零时公式未定义。",
+          "example": "教学例子：同样差10，在高波动销量和近乎恒定温度里含义不同；先按各自历史季节变化归一，才有规定尺度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "TFRBench历史季节尺度为零时能加epsilon给高分吗？",
+          "answer": "不能，MASE未定义应拒绝该样本；参考准入严格MASE小于一且S至少四。复合排序权重需显式，本地策略不是作者唯一指定公式，未来真值只给评分器。",
+          "example": "例如常量历史无差分尺度，不能人为造一个分母再声称正常误差可比。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "长推理轨迹达到参考门槛，为什么摘要还要单独预测并再次过门？",
+          "answer": "摘要可能省掉决定预测的关键证据或条件，不能继承原轨迹的正确性。数值误差与推理一致性共同约束参考，且标签参与筛选只说明构建质量，不是留出能力成绩；历史尺度为零时指标未定义，应拒绝而非加任意 epsilon 制造良好结果。",
+          "example": "例如长轨迹解释季节变化并预测正确，摘要只剩“趋势向上”后重新预测可能失准，需要独立验证压缩是否保留了依据。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:convapparel": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "ConvApparel的PLSA是在训练同名主题模型吗？",
+          "answer": "不是。此处PLSA全称为Population-Level Statistical Alignment，检查模拟人群与真人的行为分布是否接近；本地统计核使用KS距离与带并列处理的MWU。它比较群体分布，不会逐条证明每段模拟对话都是真实的人类行为。",
+          "example": "教学例子：比较真人与模拟者的对话轮数分布，是群体行为对齐检查，并非从购物文本学习若干隐含主题。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "ConvApparel跨推荐策略验证，与在生成模拟数据的同一策略下验证有什么区别？",
+          "answer": "同策略验证可能只说明模拟器适应了熟悉的交互环境；跨策略把在一种策略下训练的模拟器放到另一策略，观察行为规律能否迁移。它补充分布相似和真假判别证据，但仍不是对所有真实部署策略的泛化保证。",
+          "example": "教学例子：只在偏热门的推荐器下训练模拟器，再放到偏探索的推荐器中，检查它是否仍呈现合理购物反应。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "PLSA在这里是主题模型吗，本地统计如何留痕？",
+          "answer": "不是，是Population-Level Statistical Alignment。本地小样本精确置换，大样本定种子加一修正Monte Carlo，是明示选择；HLS判别器应独立训练验证，不能用金标回填预测。",
+          "example": "例如KS距离计算通过，只证明统计核，不证明模拟器已和真人一致。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "为什么模拟购物目标成功，并不能证明用户模拟器像真人？",
+          "answer": "任务成功只反映与当前推荐策略配合完成目标，模拟器可能语气、行为分布或响应规律都不真实。群体统计、训练过的真假判别与跨策略反事实分别检查不同维度，互相不能替代；HLS 是判别器真人概率，不是购物成功率或人类真实认可。",
+          "example": "例如模拟用户每次立刻接受第一款商品，目标完成很快，却不像真人反复比较；换另一推荐策略时还可能完全失效。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:causal-armor": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "CausalArmor为什么在高权限动作前比较用户与工具归因？",
+          "answer": "不可信工具内容可能支配提案，留一消融测同一动作似然变化，工具归因超过用户时选择性清洗并重新提案。它是干预前诊断，不直接执行原动作。",
+          "example": "例如网页文字诱导删除文件，原用户并没要求该操作。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "CausalArmor定点清洗命中工具段，与把全部工具结果删空有何不同？",
+          "answer": "定点方案保留未命中的信息，只清洗被标记段，并遮蔽首个命中点之后可能已受影响的assistant内容再提案。全删会连合法证据一起丢失，改变可用上下文。清洗后仍需重新评估提案，不能认为删过文本就自动得到安全动作。",
+          "example": "教学例子：检索结果一段夹带指令时，清洗该段并撤去之后受其影响的草稿；其余正常检索证据可继续保留。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "CausalArmor缺少sanitizer或重新提案回调时怎么办？",
+          "answer": "扣留动作并标intervention_required，不伪造清洗或重跑；命中后遮蔽首点之后assistant内容。τ增大标更多段，负号不可写反，最终动作仍须正常授权执行。",
+          "example": "例如没有真实清洗器时不能删个字符串就宣称防护闭环成功。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "去掉不可信工具段后动作似然下降，为什么还不能直接称作因果安全证明？",
+          "answer": "留一消融是操作性归因，表明该段影响同一动作概率，但删除也可能改变上下文结构或移走合法证据。方法与用户请求归因比较，只清洗命中段，再遮蔽受污染后续并重新提案；阈值方向与重算流程需保持原义，单个低用户归因不是攻击结论。",
+          "example": "例如网页某段既含必要数值也含可疑指令，删段使动作概率下降不全是恶意影响；还需比较来源与具体动作的关系。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:airs-bench": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "AIRS-Bench要求研究Agent交付一段方法建议就够了吗？",
+          "answer": "不够。任务要求从问题、数据集与指标出发，提出方法、实现训练、分析实验并修订，考查端到端研究过程。Agent、搜索scaffold与执行harness是不同层，不能把一段听起来合理的研究计划当成已完成实验或任务结果。",
+          "example": "教学例子：提出“换一种损失”只是起点；还需实际实现、运行并根据允许的实验反馈决定是否修订。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "顺序MLGym与树搜索AIRA-dojo比较为什么需固定预算？",
+          "answer": "搜索组织影响试错覆盖和成本，无限树分支可消耗更多评估。固定资源和标签隔离才能评估scaffold差异，任务指标不同也不能直接相加成统一分数。",
+          "example": "例如多跑十倍候选得到更好模型，不应全部归因于搜索方法本身。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "AIRS-Bench评测脚本可见意味着test标签也可读吗？",
+          "answer": "不意味着，提交预测后由隔离test评分，候选选择只用允许验证反馈。原文部分任务超过SOTA不是本地成绩，未执行完整研究训练不能报告已复现。",
+          "example": "例如知道评分函数是准确率，不代表可以读取每个测试样本正确类。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "为什么只给问题、数据与指标，而不直接给基线解法，更能测研究 Agent？",
+          "answer": "研究过程包括提出方法、实现训练、分析实验和修订，给出完整基线方案会缩小自主设计部分。协议还要区分 Agent、搜索 scaffold 与运行 harness，避免把外层树搜索收益全归模型；任务上人工 SOTA 是参照，不是行动者可偷读的答案脚本。",
+          "example": "例如给分类数据与评分规则，让 Agent 自己决定模型和实验；若已提供最佳训练代码，评测更接近执行脚本而非研究设计。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:lifeagentbench": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "LifeAgentBench的长期生活记录，为什么不只是对一条事件做分类？",
+          "answer": "任务在饮食、睡眠、活动和情绪等记录上提出跨时间窗口、跨维度或跨用户的问题，通常要先取齐有关证据再计算或比较。输入中的一条记录不足以代表整个问题，记录筛选与统计的范围就是答案条件的一部分。",
+          "example": "教学例子：比较某周活动与睡眠的关系，需要同一用户该周两类记录；读到一天步数便直接答复会漏掉证据。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "SQL可执行、证据完整与最终正确有什么区别？",
+          "answer": "可执行只说明语法和运行，EX在其分母上查证据完整，Acc|EX再看完整证据条件的答案。混用分母会掩盖推理或检索问题。",
+          "example": "例如查询能跑但少筛了一位用户，仍未取全所需证据。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "只读SQL与Context Prompting怎样隔离gold？",
+          "answer": "前者模型先生成允许查询，执行结果再回给模型；后者先按用户筛公开证据，金标都在评分端。数字按规定分段容差，多项需同项数匹配，不能改substring凑通过。",
+          "example": "例如回答包含正确词但还多列错误项，不应因子串命中就算全对。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "SQL scorer 能算出确定答案，为什么不等于已实现 LifeAgent 的工具推理？",
+          "answer": "scorer 持有规则与记录来验证最终答案，不承担分解问题、检索证据、维护中间统计和修订计划。基准与工具基线的职责不同，不能让行动者直接读参考计算或把通过字段检查当成长期健康记录推理；这里只说明数据任务协议，不提供健康决策建议。",
+          "example": "例如验证器能计算一周平均睡眠，Agent 仍须自己选时间窗、查询记录并核对缺失项；调用参考答案函数会绕过这些步骤。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:coreflect": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "CoReflect里的planner、simulator、evaluator、analyzer分别产生什么？",
+          "answer": "planner组织模拟任务，simulator形成对话交互，evaluator按当前标准评价，analyzer从评价与反馈中提炼反思，再影响下一轮任务和标准。这些是语义模型职责，不是四个JSON字段；本地未用手写规则假冒这些核心模块。",
+          "example": "教学例子：某轮对话暴露评判标准含糊，analyzer提炼问题，后续再调整rubric并规划能检验该问题的新情境。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "CoReflect的persona-scenario一致性检查，与仅保证样本JSON格式合法有什么区别？",
+          "answer": "格式合法只保证字段可读，不能证明人物设定与情境在语义上相容。原文保留经过真实LLM一致性检查的persona-scenario；该筛选是任务质量的一部分。合法状态机或人为打分并不能补上缺失的语义检查与反思模型。",
+          "example": "教学例子：字段齐全却把人物设为“无法上网”又要求其刚完成网络预约，JSON仍合法，语义一致性却需要核验。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "CoReflect本地是否实现953场景和完整语义模块？",
+          "answer": "没有，目前文献收录，不强造低成本heuristic adapter。JSON状态机或对给定数字求均值不能代替真实LLM检查与对话生成，公式只解释原方法。",
+          "example": "例如循环次数增加不能证明评价器真的学会新判断维度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "为什么只更新 rubric 字符串或对给定分数求均值，不能复现 CoReflect 的反思共演化？",
+          "answer": "核心需要语义 planner 生成情境、simulator 产生对话、evaluator 评价，再由 analyzer 依据理由发现不足并同时改任务与准则。机械状态转移只实现外壳，没有这些语义判断与真实交互证据；原方法公式用于解释流程，不能被当成本地模块已运行。",
+          "example": "例如分析器应发现某类同理心评价遗漏再产生新情境，手工把权重从一改成二并不会自动获得这类语义反思能力。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:sopbench-protocol": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "SOPBench里的服务约束图，节点是在记录聊天步骤，还是规定服务前要验证什么？",
+          "answer": "它把服务连接到约束，再把约束连接到可执行的helper验证；结构表达服务何时被允许以及需要哪些前置检查，不是按聊天轮数排列的摘要。先找到服务依赖的约束，才能知道Agent该验证什么，而非只看最后回复是否顺畅。",
+          "example": "教学例子：某项服务要求先核验资格，图中应能沿服务找到资格约束和对应helper，而不是只出现一句“我已检查”。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "And、Or与Chain约束对验证顺序有什么不同？",
+          "answer": "And要求各条件但不强制子次序，Or允许已验真分支，Chain要求前后顺序。把三者统一为无序集合会放过先执行后检查等流程违规。",
+          "example": "例如身份核验后才可转账，是Chain，而非事后补验证也能凑齐。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "SOPBench helper调用记录能由Agent自报替代吗？",
+          "answer": "不能，procedure_complete需可信执行轨迹，验证必须真实发生且时序满足图。gold状态只供评分，不向代理泄露；当前协议组件不等于完整生产服务Agent能力。",
+          "example": "例如回答我已验证不代表日志里真的有有效helper调用。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "数据库最终状态正确，为什么仍可能在 SOPBench 判失败？",
+          "answer": "服务还需被允许，必要 helper 验证也要实际且按规定顺序发生。And、Or 与 Chain 表达不同前提逻辑，不能仅凭猜中结果绕过流程；完整通过要求资格、数据库与程序共同成立，把三者合并成最终状态检查会遗漏协议遵循能力。",
+          "example": "例如退款金额碰巧正确，但 Agent 没先验证订单资格，仍违反 SOP；Chain 要求先查资格再操作，事后补查不能抵消。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:gaia": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "GAIA每题的提交对象是完整推理长文，还是可核对的最终短答案？",
+          "answer": "评分对象是最终答案，经规定的规范化后与金标精确比较；完成题目仍可能需要浏览网页、读图与调用工具。先区分求解过程与提交格式，才能理解为什么写了很多合理步骤也未必获得最终命中，格式失败也不能掩盖为推理成功。",
+          "example": "教学例子：题目要求一个人名时，提交应给可核对的人名；大段搜索过程里没有明确最终答案，不能自动算命中。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "GAIA的规范化精确匹配，与让模型裁判按语义给分有何区别？",
+          "answer": "前者按固定规范化后的答案相等关系计算命中，后者需要额外裁判判断表达是否等义。两种评分器的容错与偏差不同，不能未经说明用语义裁判放宽匹配后仍报告同一GAIA分数。规范化也应是预先固定规则，而非看到金标后临时改写预测。",
+          "example": "教学例子：一种规则只处理允许的表面形式差异；若另请模型把一段模糊描述判为等义，就是更换了验收器。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "GAIA normalize能否在看gold后任意放宽？",
+          "answer": "不能，应固定允许的规范化和题集合，gold只在评分器出现。当前本地只验证接口或协议，没有完整真实网页和多模态任务运行，不能报告原基准成绩。",
+          "example": "例如仅因错答案含正确子串就改匹配规则，会改变评测定义。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "精确短答案为什么仍能考查多工具推理，而不只是记忆问答？",
+          "answer": "简短输出只是评分接口，得到答案可能需要浏览、多模态理解、计算与跨来源核对。规范化匹配把终点判断变得明确，却不显示中间证据质量，也不能独立解释失败来自哪一步；答对率需与真实执行轨迹区分，参考短答案不能提前进 Agent 提示。",
+          "example": "例如最终只输出一个年份，但需要先从图片识别人名，再浏览资料查事件并核对时间；短输出并不代表求解过程简单。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    },
+    "agent-research:autoformbench": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "AutoformBench为什么要求任务内所有证明义务通过？",
+          "answer": "高级形式化需定义、辅助引理和最终证明协同成立，单独补一个片段不足。可信Lean/Mathlib验证全部义务才算任务成功，不能按局部通过数替代成功率。",
+          "example": "例如主结论过了但依赖引理仍留sorry，整题尚未完成。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "AutoformBench与给定全部定义后只补一个孤立Lean证明，有何任务范围区别？",
+          "answer": "这里还要求构造支撑命题的定义与辅助引理，并完成任务内全部证明义务；孤立证明补全通常已固定更多形式化上下文。两者都可能通过Lean验证，但需要自主完成的形式化工作不同，不能只因同用验证器就合并成功率。",
+          "example": "教学例子：若缺少一个适当定义，Agent需先形式化该定义并证明辅助引理；只填最后一个by证明块没有完成整项任务。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "AutoformBench接口能把失败、超预算或基础设施错行删掉吗？",
+          "answer": "不能，要保留完整固定任务集合及实际CSV成本，名义上限不等于统一实花。接口导入已产生verdict不代表本次真实Harbor运行，未执行就需明确计划状态。",
+          "example": "例如只统计成功启动的任务，会把环境失败从分母洗掉并抬高成绩。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27"
+        },
+        {
+          "id": "mechanism",
+          "question": "source-present 与 source-free 为什么不能仅凭相同 task ID 直接比较分数？",
+          "answer": "可见材料不同会改变形式化难度：原文或参考论证提供定义与思路，公开无来源工作区则要求更多自主构建。两者即使目标同名也不是同一信息条件，所有证明义务还必须一起通过；失败、超预算或基础设施行不能从固定任务分母里静默删掉。",
+          "example": "例如同一个高等数学命题，一组能读教材证明、另一组只有 Lean 骨架，成绩差不应直接归因模型强弱，而要先匹配来源条件。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-10-27",
+          "level": "mechanism"
+        }
+      ]
+    }
+  }
+}

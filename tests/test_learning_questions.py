@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from scripts.generate_learning_cards import ROOT, _collection, generate, render
-from scripts.learning_questions import question_anchor, require_complete, source_headings
+from scripts.learning_questions import LEVELS, question_anchor, require_complete, source_headings
 
 
 def _write(root, relative, value):
@@ -17,8 +17,8 @@ def _write(root, relative, value):
     return path
 
 
-def _question(key="mechanism", added="2026-10-27"):
-    return {"id": key, "question": f"{key}为什么要保留连续gate？",
+def _question(key="mechanism", added="2026-10-27", level="mechanism"):
+    return {"id": key, "level": level, "question": f"{key}为什么要保留连续gate？",
             "answer": "索引选择离散，但选中gate仍把任务梯度传给选择器。",
             "example": "教学例子：相同两个索引，0.8/0.2与0.5/0.5产生不同输出。",
             "source_sections": ["背景与主要改动", "核心公式"], "added": added}
@@ -51,8 +51,10 @@ def question_repo(tmp_path):
 没有完整模型实验。
 """)
     bank = {"schema_version": 1, "papers": {
-        "recommendation:first": {"questions": [_question(), _question("cost", "2026-10-28")]},
-        "recommendation:second": {"questions": [_question("selection")]},
+        "recommendation:first": {"questions": [_question(), _question("cost", "2026-10-28", "implementation"),
+            _question("basics", level="basics"), _question("comparison", level="comparison")]},
+        "recommendation:second": {"questions": [_question("selection"),
+            *[_question(level, level=level) for level in LEVELS if level != "mechanism"]]},
     }}
     _write(tmp_path, "docs/learning/questions/recommendation.json", bank)
     return tmp_path, bank
@@ -61,9 +63,9 @@ def question_repo(tmp_path):
 def test_every_authored_question_is_rendered_with_answer_example_and_sources(question_repo):
     root, _ = question_repo
     text = render(root)
-    assert text.count('data-learning-card data-identity=') == 3
-    assert text.count('<details class="ar-learning-answer">') == 3
-    assert "3 个问题 · 2 篇论文" in text
+    assert text.count('data-learning-card data-identity=') == 8
+    assert text.count('<details class="ar-learning-answer">') == 8
+    assert "8 个问题 · 2 篇论文" in text
     assert "索引选择离散，但选中gate仍把任务梯度传给选择器" in text
     assert "教学例子：相同两个索引" in text
     assert "依据：背景与主要改动、核心公式" in text
@@ -85,7 +87,7 @@ def test_append_question_keeps_existing_bookmarks_and_updates_recent(question_re
     assert all_text.count('id="paper-recommendation-first-') == 1
     recent = (root / "docs/learning/recent.md").read_text()
     assert recent.index("later为什么") < recent.index("cost为什么") < recent.index("mechanism为什么")
-    assert "4 个问题 · 2 篇论文" in recent
+    assert "9 个问题 · 2 篇论文" in recent
 
 
 def test_recent_home_links_and_subtopic_bank_share_questions(question_repo):
@@ -110,7 +112,7 @@ def test_recent_home_links_and_subtopic_bank_share_questions(question_repo):
     anchor = question_anchor("recommendation:first", "cost")
     assert f'href="all/#{anchor}"' in hub
     assert 'cost为什么要保留连续gate' in hub and 'cost为什么要保留连续gate' in topic
-    assert '2 个问题 · 1 篇论文' in topic
+    assert '4 个问题 · 1 篇论文' in topic
     assert 'ar-learning-guide' in topic
 
 
@@ -142,6 +144,8 @@ def test_no_automatic_template_can_satisfy_question_coverage(question_repo):
     ("empty", "needs answer"), ("example", "needs example"),
     ("date", "invalid question date"), ("id", "duplicate question ID"),
     ("section", "missing source section"), ("unknown", "unknown question-bank paper"),
+    ("level", "invalid question level"), ("missing-level", "invalid question level"),
+    ("duplicate-text", "duplicate question text"),
 ])
 def test_editorial_contract_rejects_invalid_content_before_generation(question_repo, fault, message):
     root, bank = question_repo
@@ -158,6 +162,12 @@ def test_editorial_contract_rejects_invalid_content_before_generation(question_r
         question["source_sections"] = ["不存在的段落"]
     elif fault == "unknown":
         bank["papers"]["recommendation:unknown"] = {"questions": [_question()]}
+    elif fault == "level":
+        question["level"] = "made-up"
+    elif fault == "missing-level":
+        question.pop("level")
+    elif fault == "duplicate-text":
+        bank["papers"]["recommendation:first"]["questions"][1]["question"] = question["question"]
     _write(root, "docs/learning/questions/recommendation.json", bank)
     with pytest.raises(ValueError, match=message):
         generate(root)
@@ -188,4 +198,25 @@ def test_content_is_html_escaped_and_examples_do_not_create_source_headings(ques
 def test_current_repository_has_authored_qa_for_every_manifest_record():
     cards, _ = _collection(ROOT)
     require_complete(cards)
-    assert all(card["questions"] for card in cards)
+    assert all({q["level"] for q in card["questions"]} == set(LEVELS) for card in cards)
+
+
+def test_missing_learning_level_cannot_pass_publication(question_repo):
+    root, bank = question_repo
+    entry = bank["papers"]["recommendation:first"]
+    entry["questions"] = [q for q in entry["questions"] if q["level"] != "comparison"]
+    _write(root, "docs/learning/questions/recommendation.json", bank)
+    with pytest.raises(ValueError, match="all four learning levels.*方法对比"):
+        generate(root, require_questions=True)
+    assert not (root / "docs/learning/all.md").exists()
+
+
+def test_questions_follow_learning_order_without_changing_ids(question_repo):
+    root, _ = question_repo
+    text = render(root)
+    positions = [text.index('id="' + question_anchor("recommendation:first", key) + '"')
+                 for key in ("basics", "mechanism", "comparison", "cost")]
+    assert positions == sorted(positions)
+    for level, label in LEVELS.items():
+        assert f'data-level="{level}"' in text
+        assert f'>{label}</p>' in text

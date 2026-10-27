@@ -19,6 +19,7 @@
       const topic = root.querySelector("[data-learning-topic]");
       const status = root.querySelector("[data-learning-status]");
       const more = root.querySelector("[data-learning-more]");
+      const levels = Array.from(root.querySelectorAll("[data-learning-level]"));
       const cards = Array.from(grid.querySelectorAll("[data-learning-card]"), (card) => ({
         element: card,
         domain: card.dataset.domain || "",
@@ -26,6 +27,7 @@
         topic: card.dataset.topic || "",
         identity: card.dataset.identity || "",
         paperTitle: card.dataset.paperTitle || "",
+        level: card.dataset.level || "",
         pending: card.dataset.learningPending === "true",
         search: (card.dataset.search || card.textContent).toLowerCase(),
       }));
@@ -33,6 +35,8 @@
       let visible = pageSize;
       const params = new URLSearchParams(window.location.search);
       let selectedPaper = params.get("paper") || "";
+      let selectedLevel = levels.some(button => button.dataset.learningLevel === params.get("level"))
+        ? params.get("level") : "";
       const paperFilter = document.createElement("p");
       paperFilter.className = "ar-learning-paper-filter";
       const paperName = document.createElement("span");
@@ -89,6 +93,7 @@
             && (!selectedTheme || card.theme === selectedTheme)
             && (!selectedTopic || card.topic === selectedTopic)
             && (!selectedPaper || card.identity === selectedPaper)
+            && (!selectedLevel || card.level === selectedLevel)
             && words.every((word) => card.search.includes(word));
           if (matches) {
             matched += 1;
@@ -103,6 +108,7 @@
           }
         });
         empty.hidden = matched > 0;
+        levels.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.learningLevel === selectedLevel)));
         root.dataset.paperFiltered = selectedPaper ? "true" : "false";
         if (search) search.placeholder = selectedPaper ? "搜索本篇论文的问题" : "搜索问题、论文或机制";
         paperFilter.hidden = !selectedPaper;
@@ -119,7 +125,7 @@
         visible = pageSize;
         syncTopics();
         const url = new URL(window.location.href);
-        [["q", search?.value.trim()], ["theme", theme?.value], ["topic", topic?.value], ["paper", selectedPaper]].forEach(([key, value]) => {
+        [["q", search?.value.trim()], ["theme", theme?.value], ["topic", topic?.value], ["paper", selectedPaper], ["level", selectedLevel]].forEach(([key, value]) => {
           if (value) url.searchParams.set(key, value);
           else url.searchParams.delete(key);
         });
@@ -129,6 +135,10 @@
       }
 
       search?.addEventListener("input", reset);
+      levels.forEach(button => button.addEventListener("click", () => {
+        selectedLevel = button.dataset.learningLevel;
+        reset();
+      }));
       clearPaper.addEventListener("click", () => { selectedPaper = ""; reset(); });
       domain?.addEventListener("change", reset);
       theme?.addEventListener("change", () => { selectedPaper = ""; reset(); });
@@ -158,6 +168,7 @@
         if (theme) theme.value = "";
         if (topic) topic.value = "";
         if (domain) domain.value = "";
+        selectedLevel = "";
         if (selectedPaper !== cards[targetIndex].identity) selectedPaper = "";
         syncTopics();
         visible = Math.max(pageSize, targetIndex + 1);

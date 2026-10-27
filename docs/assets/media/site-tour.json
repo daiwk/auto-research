@@ -1,0 +1,61 @@
+{
+  "recorded": "2026-10-27",
+  "source_commit": "f05b7a015f888355a8aaa426cab76c5ea1ff68a4",
+  "capture_kind": "actual browser states; captions added during video editing",
+  "mp4_seconds": 48.0,
+  "webp_milliseconds": 48000,
+  "webp_frames": 7,
+  "width": 1080,
+  "height": 700,
+  "scenes": [
+    {
+      "title": "01 / 进入网站，无需安装",
+      "caption": "从首页进入论文库、学习卡片和自动研究工作流。",
+      "seconds": 6
+    },
+    {
+      "title": "02 / 找到相关论文",
+      "caption": "按领域、机构、主题或时间浏览，再查看方法简介与实现解读。",
+      "seconds": 6
+    },
+    {
+      "title": "03 / 从主题开始，目录按需展开",
+      "caption": "6 个主题、31 个子主题；问题按主题归档，避免一页铺满。",
+      "seconds": 6
+    },
+    {
+      "title": "04 / 每篇论文，分四层学习",
+      "caption": "基础理解 → 核心机制 → 方法对比 → 实现细节；支持单篇与层次筛选。",
+      "seconds": 8
+    },
+    {
+      "title": "05 / 先回答，再展开答案与例子",
+      "caption": "每问都有直接解释、教学例子和来源；保留实验与复现边界。",
+      "seconds": 8
+    },
+    {
+      "title": "06 / 新论文和旧论文补题，都能接着读",
+      "caption": "最近新增统一汇总；主题、子主题、层次与关键词可组合筛选。",
+      "seconds": 6
+    },
+    {
+      "title": "07 / 学完之后，核对真实实验",
+      "caption": "查看数据集、指标、seed 与验证说明，继续追溯原始指标产物。",
+      "seconds": 8
+    }
+  ],
+  "assets": {
+    "site-tour.mp4": {
+      "bytes": 1007976,
+      "sha256": "f95c891284400ff4d9dc36dc0294744ab7accfa3c0ae298097d75f0962fcdc4c"
+    },
+    "site-tour.webp": {
+      "bytes": 291298,
+      "sha256": "80aeab83225d4a94019ee43cd162d9d896b06c6a3ac1b90bfb843234a89d04a1"
+    },
+    "site-tour-poster.webp": {
+      "bytes": 33848,
+      "sha256": "5d3a41924f2a5ec439d6cbe3f86ada3b974ecc41bc019da3ebbdf8972b731948"
+    }
+  }
+}

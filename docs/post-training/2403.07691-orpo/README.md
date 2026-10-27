@@ -86,3 +86,8 @@ auto-research post-train --algorithm orpo \
 
 实现了 chosen SFT 与 odds-ratio preference penalty 的单阶段更新；本地把完整候选视为
 response action，未训练论文中的 Mistral/Llama 模型，KL 只用于统一报告而不参与目标。
+
+候选内核 `src/auto_research/post_training/algorithm_families/family_1.py` 在 log-odds 的
+`p` 与 `1-p` 项中加入 `1e-12`，并用 `logaddexp(0, -margin)` 计算偏好损失，
+降低 log 零与直接计算 softplus 的数值风险。这个常数属于本地数值保护，不是原论文超参数；
+完整候选概率也不等于真实语言模型的逐 token 响应概率。
