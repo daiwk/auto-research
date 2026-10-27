@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "theme": "system-one",
+  "topics": {
+    "typed-readout": {
+      "title": "同样输出候选分布，读出位置与缓存边界为何不同？",
+      "thesis": "类型化决策先把输出空间限定下来，但“无需生成长句”并不指定唯一架构。LLM2Jev读选项标签的语言概率，System One重排读首答案位置的候选字母，MJev-Spatial复用原生注意力Q/K，MetaEncoder则把请求和候选独立编码。先看打分依赖谁，再判断是否可缓存、能否开放检索，以及连续输出怎样离散化。",
+      "updated": "2026-10-27",
+      "axes": [
+        "评分来自语言词表、原生注意力还是向量相似度",
+        "候选是否联合上下文化及哪些表示可以缓存",
+        "输出是闭集选择、开放检索还是多阶段空间细化",
+        "训练读出与本地验证范围"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:llm2jev",
+          "position": "对括号数字选项的token对数概率求和并在有限选项中形成分布；微调组合listwise决策损失与基础模型辅助输出的KL锚定。",
+          "tradeoff": "可沿用语言模型读出，但多token标签需要完整计分；有限候选概率不自动具备候选不变性。本地仅候选打分/KL组件，未跑4B模型JevBench。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:metaencoder",
+          "position": "共享因果编码器分别编码请求和候选，取归一化末token向量，以温度缩放余弦分数做决策或检索。",
+          "tradeoff": "候选独立编码便于预计算；请求可含选项，不能据此宣称请求表示对候选集合不变。双塔压缩限制细粒度联合推理，完整30B评测成本过高未复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式与原文效果",
+            "本地复现与成本决策"
+          ]
+        },
+        {
+          "paper": "foundation-models:mjev-spatial",
+          "position": "decision marker的原生Q与各candidate-end marker的原生K打分，不增加独立分类头；计数分桶，二维点用三级区域选择。",
+          "tradeoff": "连续空间任务变成可约束的离散步骤，但裁剪/分桶改变了分辨率与调用次数；多阶段问题应先题内平均损失，不能把阶段多当成样本更多。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:system-one-rerank",
+          "position": "query和首阶段top-K候选进入同一多模态prompt，在首答案位置读取不同单token字母logits并候选内归一化。",
+          "tradeoff": "联合看候选便于setwise比较，候选表示不能直接当独立缓存。只重排top-K，外部保持原序；本地是诊断组件，未复现完整大模型检索矩阵或decision head训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "把“单步”拆成读出与任务流程",
+          "body": "LLM2Jev和System One重排都能直接读概率，但一个选项标签可能包含多个token，重排还须核对字母确为单token。MJev-Spatial的单次候选读出也不表示整项空间任务只调用一次：点定位连续选三个3×3区域，计数用分级表示。应比较完成同一任务的总前向次数与输入，而非只比较最后一层输出形式。",
+          "papers": [
+            "foundation-models:llm2jev",
+            "multimodal-models:system-one-rerank",
+            "foundation-models:mjev-spatial"
+          ]
+        },
+        {
+          "title": "缓存收益来自依赖关系",
+          "body": "MetaEncoder的候选只按自己的内容编码，适合离线建向量索引；System One重排让候选共同进入上下文，换一组对手可能改变其上下文化结果。MetaEncoder闭集请求还可以包含选项，因此候选缓存可复用不等于请求向量对选项变化不变。前者偏向可索引性，后者保留联合比较，不能从接口直接判定准确率胜负。",
+          "papers": [
+            "foundation-models:metaencoder",
+            "multimodal-models:system-one-rerank"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "candidate-cache-dependency",
+          "question": "都只输出候选概率，为什么MetaEncoder能预编码候选，而System One重排通常不能照搬？",
+          "answer": "MetaEncoder独立运行候选编码器，候选向量不读取本次请求或其他候选；联合重排中，候选在同一prompt里上下文化，缓存一个脱离该集合的表示不能保证得到同样分数。可缓存的是依赖不变的计算，不能由输出是概率来推断。",
+          "example": "示意：同一份工具说明可在双塔中编码一次供千次请求检索；把它与另外五个工具一同交给VLM比较时，换掉五个对手就改变了联合输入。",
+          "papers": [
+            "foundation-models:metaencoder",
+            "multimodal-models:system-one-rerank"
+          ]
+        },
+        {
+          "id": "spatial-choice-granularity",
+          "question": "如何把计数和点定位变成选择题，又为什么不能把它等同一次普通多选？",
+          "answer": "MJev-Spatial把数值拆成有界离散决策，点定位通过多轮区域细化逐步提高分辨率；LLM2Jev则对已给出的有限选项形成分布。前者的下一步输入依赖上一步所选区域，任务误差也会沿阶段传播，因而要核算完整流程而不是只看每步的softmax。",
+          "example": "示意：先在九宫格选右上角，再在原图该区域内细分；第一步选错区域，第二步再精确也不能找回已排除的位置。",
+          "papers": [
+            "foundation-models:mjev-spatial",
+            "foundation-models:llm2jev"
+          ]
+        },
+        {
+          "id": "conditional-mass-confidence",
+          "question": "候选内最高概率为0.9，就能说模型有90%把握选对吗？",
+          "answer": "不能。System One重排只在候选字母间归一化，即使这些字母在全词表里总质量很小，也会得到一个和为一的分布。MetaEncoder的温度softmax同样表达当前候选间相对匹配。是否校准到真实正确率，需要独立标注数据检验；相对份额本身不是正确性保证。",
+          "example": "示意：两个候选字母在全词表中的概率为0.009和0.001，候选内就得到0.9与0.1，但模型其余0.99质量落在别的token上。",
+          "papers": [
+            "multimodal-models:system-one-rerank",
+            "foundation-models:metaencoder"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "foundation-models:chinese-jev",
+        "foundation-models:editjev",
+        "foundation-models:gliclass",
+        "foundation-models:jev-portuguese-ir",
+        "foundation-models:llm2jev",
+        "foundation-models:metaencoder",
+        "foundation-models:mjev-spatial",
+        "foundation-models:pathjev",
+        "multimodal-models:system-one-rerank"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较llm2jev、metaencoder、mjev-spatial、system-one-rerank，梳理评分来自语言词表、原生注意力还是向量相似度与候选是否联合上下文化及哪些表示可以缓存，并补充跨论文问答。",
+          "papers": [
+            "foundation-models:chinese-jev",
+            "foundation-models:editjev",
+            "foundation-models:gliclass",
+            "foundation-models:jev-portuguese-ir",
+            "foundation-models:llm2jev",
+            "foundation-models:metaencoder",
+            "foundation-models:mjev-spatial",
+            "foundation-models:pathjev",
+            "multimodal-models:system-one-rerank"
+          ],
+          "source_revisions": {
+            "foundation-models:chinese-jev": "95b1946bb0ba8654afe9ba987168801cc450225b50f7cfb4fe954f39d303a892",
+            "foundation-models:editjev": "73e70d4c1b35c30468ecf5cc449684c0728a11bb3d2744fcc48ed152c071527c",
+            "foundation-models:gliclass": "58900d16a9d52fca3016d0e2b5aac2bfc9fed1137c796f8f51b84f0c6aa09734",
+            "foundation-models:jev-portuguese-ir": "c083c4ee03d1fff18bb89722ee0168c89034d193bf6f1c455f265388931fcf0a",
+            "foundation-models:llm2jev": "5fb8241b7b4af53bfcef2035c9ab72427d02fafaf7ef86cc180484a92f681019",
+            "foundation-models:metaencoder": "1da67427bf6e35e892b84a7539d8a72c7c5ab9ecee11771fed618ee2fbe2b0ee",
+            "foundation-models:mjev-spatial": "1f15f3a42bde2dbe68cfcf97e6e198477415bbe7cc0402669bb3c59425a3bf17",
+            "foundation-models:pathjev": "f9e5e3a10bb7f3bc3bcb2dd317150055ad3e3e0698bbf656fced223e7240bb52",
+            "multimodal-models:system-one-rerank": "2540a111fd8bb9ed5a79346d60470b71f76b81759e3a6012e6e5e1f2a7c22efc"
+          }
+        }
+      ]
+    },
+    "candidate-invariance": {
+      "title": "排序不变、概率校准与完整集合恢复，是三种不同承诺",
+      "thesis": "Prism-1约束分数的计算依赖，JEV请求审计设计配对干预，多正确选项审计检查分布能否恢复正确集合。三者分别回答“架构保证什么”“实验改变了什么”“评价目标是什么”，不能用合法输出或一次top-1准确率代替。",
+      "updated": "2026-10-27",
+      "axes": [
+        "独立选项打分的架构条件",
+        "问题、证据与候选资格的干预范围",
+        "相对赔率、绝对概率与集合恢复指标"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:prism-1",
+          "position": "每个选项只看共享状态、当前问题和自身block，各block重置相同起始位置；独立yes/no对数赔率再做选项softmax。",
+          "tradeoff": "保护固定证据下旧选项的相对赔率，允许新候选成为赢家；不保证准确率或抗共享上下文注入，不适合“以上皆非”等跨选项语义。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:jev-request-audit",
+          "position": "将新增问题、新增显示证据、新增候选资格分成三类配对干预，分别测翻转、ties、条件概率与允许标签质量。",
+          "tradeoff": "测量依赖固定公共输入和隔离评分标签；证据真的改变时不能要求答案保持不变。本地审计接口与原文付费模型能力结论分开。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "已验证结果与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:jev-multicorrect",
+          "position": "同时观察正确项概率差、排序、阈值后exact-set恢复和独立二元校准，区分一份类别分布与逐项正确概率。",
+          "tradeoff": "全部正确项排在前面仍可能无法用阈值完整恢复集合；阈值要在validation选定。原文模型响应未公开，本地只验证评分/隔离合同。",
+          "sections": [
+            "背景与主要改动",
+            "方法与本地协议",
+            "原文结论与复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先冻结证据，再讨论独立性",
+          "body": "Prism-1的不变性以共享状态和问题不变为前提。请求审计中，只增加候选资格必须保留全部显示证据；若同时添加了一段能解释问题的新材料，分数变化可能是合理的信息更新。审计应比较A/B条件概率或赔率，不能把softmax分母扩大导致的绝对概率下降算成偏好翻转。",
+          "papers": [
+            "foundation-models:prism-1",
+            "foundation-models:jev-request-audit"
+          ]
+        },
+        {
+          "title": "独立分数也不会自动变成多标签概率",
+          "body": "即使Prism-1让每个候选的分数不受其他选项干扰，选项softmax仍把总质量分配为一。多正确选项审计关心的是恢复整个正确集合，正确项之间依然会竞争质量；因此排序稳定不能推出每个正确项都过同一阈值，更不能推出候选份额已经校准为逐项正确率。",
+          "papers": [
+            "foundation-models:prism-1",
+            "foundation-models:jev-multicorrect"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "denominator-not-reversal",
+          "question": "加入无关C后，A的概率下降，是否已经违反Prism-1想保护的性质？",
+          "answer": "未必。先固定证据，比较A相对B的赔率或A/(A+B)。加入C会增加总分母，A的绝对份额可正常下降；只有旧二者相对偏好发生变化，才需要排查跨选项信息或位置依赖。请求审计正是将这类归一化效应与新增证据分开。",
+          "example": "示意：A、B指数分数为2和1时A占2/3；加入分数5的C后A占2/8，但A/B始终为2，没有发生旧候选偏好翻转。",
+          "papers": [
+            "foundation-models:prism-1",
+            "foundation-models:jev-request-audit"
+          ]
+        },
+        {
+          "id": "ranking-versus-set-recovery",
+          "question": "所有正确项都排在错误项之前，为什么仍不能证明多选题已经解决？",
+          "answer": "排序只要求相对次序，多选还要确定取多少项。候选softmax把一个单位质量分给全部选项，第二个正确项可能分到很低份额；固定阈值可能漏选，降低阈值又可能纳入错误项。必须另测exact-set恢复，并用独立验证集选择阈值。",
+          "example": "示意：A、B正确，分数份额为0.60、0.25、0.15。排序完全正确，但阈值0.4只返回A；top-1正确也没有揭示B被漏掉。",
+          "papers": [
+            "foundation-models:jev-multicorrect",
+            "foundation-models:prism-1"
+          ]
+        },
+        {
+          "id": "evidence-versus-eligibility",
+          "question": "为什么“把C加入候选”和“把描述C的证据加入上下文”不能放在同一组独立性测试里？",
+          "answer": "前者改变可选动作集合，后者改变模型知道的事实。Prism-1只约束固定共享证据下的选项独立分数；请求审计将两种干预分开，才能判断变化来自竞争关系还是合理取证。多正确项的评分也必须在固定正确集合和输入条件下解释。",
+          "example": "示意：工具C原本已完整显示，只把它从不可选变可选是资格变化；补上一句“C支持离线运算”则提供了新信息，A/B偏好可随任务证据改变。",
+          "papers": [
+            "foundation-models:jev-request-audit",
+            "foundation-models:prism-1"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "foundation-models:jev-multicorrect",
+        "foundation-models:jev-request-audit",
+        "foundation-models:prism-1"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较prism-1、jev-request-audit、jev-multicorrect，梳理独立选项打分的架构条件与问题、证据与候选资格的干预范围，并补充跨论文问答。",
+          "papers": [
+            "foundation-models:jev-multicorrect",
+            "foundation-models:jev-request-audit",
+            "foundation-models:prism-1"
+          ],
+          "source_revisions": {
+            "foundation-models:jev-multicorrect": "9c94d851227fa9e7abc7c1bbdd210fae04ea58cd492f116d7be14859f19dc4d1",
+            "foundation-models:jev-request-audit": "2e0b5a5da56302a2cb739b52774349cc6e701522bff69078772d9b193a45540a",
+            "foundation-models:prism-1": "29cbdd61c3845f2ebf28f3e915ae88661fb0799dff4596d434699d6e95e6ed1f"
+          }
+        }
+      ]
+    },
+    "adaptive-decisions": {
+      "title": "追加推理、跨语言路由与持续反馈，各在哪个时刻改变决策？",
+      "thesis": "按需决策有三条时间轴：Selective Reasoning在单题内分配推理和读取预算，跨语言级联在不同后端间分配请求，Jev-DLC用已发生反馈影响后续请求。能力评测提供基线边界，却不自动证明任何控制策略有效。所有选择都要在当前测试目标揭晓之前冻结或作出。",
+      "updated": "2026-10-27",
+      "axes": [
+        "单请求内控制与请求之间的状态更新",
+        "熵、校准、错误排序与任务准确率",
+        "验证集选阈值及测试时间的信息隔离",
+        "原文能力、统计复算与本地真实模型测量"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:selective-reasoning",
+          "position": "共享reader读空前缀和推理中途分布；benefit gate、读取trigger、接受/停止阈值分工控制推理。",
+          "tradeoff": "低熵只代表集中，预算耗尽须另记budget-forced；完整在线实验未复现，本地控制器和作者统计复算不等于重新生成答案。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界与成本结论"
+          ]
+        },
+        {
+          "paper": "foundation-models:jev-dlc",
+          "position": "冻结scorer之上维护保守/响应双通道，PA-I更新修正方向，以反馈前预测误差调整可靠性。",
+          "tradeoff": "不保留完整交互文本，但仍依赖外部表示与固定词表；只能在提交本次选择后接收反馈，更新不得回填当前成功。本地为随机外部logits的状态组件。",
+          "sections": [
+            "背景与主要改动",
+            "双通道、PA-I与可靠性",
+            "本地复现与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:jev-regional-transfer",
+          "position": "分别测跨语言准确率、概率校准与错误排序；按validation宏F1选低置信度路由比例，再冻结用于test。",
+          "tradeoff": "温度校准不保证把错题排到最前，翻译也非无条件有效；同句不同语言须聚类统计，不能当独立样本扩大证据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "已验证结果与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:jev-capability",
+          "position": "规范化知识、推理和多语言有限候选任务，以隔离标签评估一次选择，并分开供应商引用与实际测量。",
+          "tradeoff": "它是评测协议而非自适应算法；本地NanoJev的ARC结果不代表闭源Jev，13类接口支持也不表示13任务全量已测。",
+          "sections": [
+            "背景与主要改动",
+            "数据与评测契约",
+            "本地验证与边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "算力反馈与用户反馈不能混作一种循环",
+          "body": "Selective Reasoning在答案未知时观察自己的中间分布，决定是否再生成或读取；Jev-DLC在一个请求结束后接收accept/revoke，改变下一请求状态。前者不需要当前gold来决定停止，后者虽需要反馈也不得回头改本题成绩。二者可以组合，但必须分别记录单题预算和跨题适配后的泛化。",
+          "papers": [
+            "foundation-models:selective-reasoning",
+            "foundation-models:jev-dlc"
+          ]
+        },
+        {
+          "title": "概率好看与会挑难题不同",
+          "body": "跨语言迁移用ECE/Brier衡量概率校准，用风险覆盖等指标衡量错误排序，Selective Reasoning的归一化熵则只读当前分布集中程度。一个温度能改善校准，却不一定改善错题排序；能力评测中知识强、数学弱也不能直接变成逐题启动规则。应在验证集确定路由和预算，再独立测量不同任务与语言。",
+          "papers": [
+            "foundation-models:jev-regional-transfer",
+            "foundation-models:selective-reasoning",
+            "foundation-models:jev-capability"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "within-versus-between-requests",
+          "question": "Selective Reasoning的中途读取与Jev-DLC的revoke更新，为什么需要不同的评价时钟？",
+          "answer": "中途读取发生在当前目标未揭晓时，衡量追加算力是否改变当前选择；revoke已经揭示旧选择应改为什么，只能更新后续请求。若把反馈后的重答算成本题成功，就把已知标签混进预测，无法证明持续适配能力。",
+          "example": "示意：第10题先选A，再收到“改B”。DLC可据此帮助第11题；第10题仍按最初A计分。第10题推理到一半读取分布则尚未收到该反馈。",
+          "papers": [
+            "foundation-models:selective-reasoning",
+            "foundation-models:jev-dlc"
+          ]
+        },
+        {
+          "id": "calibration-does-not-route-errors",
+          "question": "概率校准改善后，为什么仍要单独测试低置信度路由和熵停止？",
+          "answer": "校准检查概率与总体正确频率是否对应，路由还要求错题在低置信度端聚集；熵停止只说明某次分布集中。跨语言迁移分别测这些性质，Selective Reasoning再用验证时确定的控制规则分配预算，不能把更低ECE直接当作更好的早停或fallback策略。",
+          "example": "示意：两个模型在各自0.8置信度分桶中都答对80%，但整个置信度排序中，一个把更多错误集中在最低分段，另一个把错误分散到各段；单看这个分桶不能判断级联能节省多少成本。",
+          "papers": [
+            "foundation-models:jev-regional-transfer",
+            "foundation-models:selective-reasoning"
+          ]
+        },
+        {
+          "id": "validation-budget-versus-test",
+          "question": "发现某语言或数学任务较弱后，能否在test上试许多路由比例再报告最好的策略？",
+          "answer": "不能。能力评测提示要分任务查看覆盖与误差，但不能把test变成策略选择集。跨语言级联先在validation宏F1下选最小达标路由比例，再固定评测；同样，是否启动推理和熵阈值也应预先冻结，保留预算被迫结束的情况。",
+          "example": "示意：验证集选择把20%最低置信度请求交给强模型；测试即使30%看起来更好，也不能把30%冒充原定策略，除非另开独立确认评测。",
+          "papers": [
+            "foundation-models:jev-regional-transfer",
+            "foundation-models:jev-capability",
+            "foundation-models:selective-reasoning"
+          ]
+        }
+      ],
+      "reviewed_papers": [
+        "foundation-models:jev-capability",
+        "foundation-models:jev-dlc",
+        "foundation-models:jev-regional-transfer",
+        "foundation-models:selective-reasoning"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较selective-reasoning、jev-dlc、jev-regional-transfer、jev-capability，梳理单请求内控制与请求之间的状态更新与熵、校准、错误排序与任务准确率，并补充跨论文问答。",
+          "papers": [
+            "foundation-models:jev-capability",
+            "foundation-models:jev-dlc",
+            "foundation-models:jev-regional-transfer",
+            "foundation-models:selective-reasoning"
+          ],
+          "source_revisions": {
+            "foundation-models:jev-capability": "9484343eb3f24d2ff8c29ecdb8396472ae1bdf62060678922467f9d94eb10033",
+            "foundation-models:jev-dlc": "4e952074b293d33374f3d5e20ae50c3e443d1a9642a72b343308cadfce8e8d4f",
+            "foundation-models:jev-regional-transfer": "3a550deb82128ff8f3339ffc10f50a730a3aef8a7167331ad5e905c9706f8360",
+            "foundation-models:selective-reasoning": "20c8743f26e83c2507091f8b09077a70fd3e41c6e3693892836627e3010e6d6b"
+          }
+        }
+      ]
+    }
+  }
+}

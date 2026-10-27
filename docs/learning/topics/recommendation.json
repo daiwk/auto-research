@@ -155,7 +155,7 @@
         "recommendation:hstu",
         "recommendation:rankmixer"
       ],
-      "reading_order": "先读DIN辨认候选条件化兴趣，再读HSTU理解历史状态如何逐层变化，最后读RankMixer区分字段交互；再看[长历史对比](../../001-hstu-longer-slimper.md)和[RankMixer四行例子](../../002-rankmixer-tokenmix.md)比较信息流，本地结果以各自数据与保真度为限。",
+      "reading_order": "先读 DIN 辨认候选条件化兴趣，再读 HSTU 理解历史状态如何逐层变化，最后读 RankMixer 区分字段交互；再看[本主题精读对比](../../deep-dives/recommendation/history-ranking-backbones.md)，比较 LONGER 的短查询路径与 SlimPer 的固定用户池。本地结果以各自数据与保真度为限。",
       "papers": [
         "recommendation:adaf2m2",
         "recommendation:argus",

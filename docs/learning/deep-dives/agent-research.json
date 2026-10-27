@@ -1,0 +1,1610 @@
+{
+  "schema_version": 1,
+  "theme": "agent-research",
+  "topics": {
+    "planning-and-search": {
+      "title": "规划先问何时见反馈，再问要不要展开搜索",
+      "thesis": "ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜索组织，Jev Lookahead 把后继模拟交给代码，DRAGO 则检查形式计划是否忠实。它们处理不同的不确定性：步骤未知、路线选择、环境可达性与规格错误，不应以搜索次数或本地满分统一排名。",
+      "axes": [
+        "计划在中间工具观察到来前还是之后生成",
+        "搜索单元是thought、环境动作还是完整计划",
+        "价值信号来自模型判断、真实执行还是符号探针",
+        "可恢复的分支与模拟状态是否有可靠隔离"
+      ],
+      "comparisons": [
+        {
+          "paper": "agent-research:react",
+          "position": "推理、动作和真实观察交替，每轮据最新结果决定下一步。",
+          "tradeoff": "适应中间变化，但历史和重复推理成本增长；本地经典mini使用确定性观察，不能当论文真实环境结果。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:rewoo",
+          "position": "Planner 先生成含证据变量的多步依赖，Worker 填工具结果，Solver 最后合成。",
+          "tradeoff": "减少 Planner 重读观察，但异常可能使原计划不再适用；依赖变量仍限制并行，本地只验证解耦控制流。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:tree-of-thoughts",
+          "position": "将可评价中间状态组成 thought tree，以 BFS/DFS 维护前沿并可回溯。",
+          "tradeoff": "能撤销早期方向，却依赖中间评价；本地 workflow coherence 替代 LM value，不说明开放推理能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:lats",
+          "position": "用 MCTS 组织行动、rollout 与价值回传，UCT 平衡已有回报和访问不足，失败生成反思。",
+          "tradeoff": "真实 rollout 增加外部约束也消耗预算；本地以完整计划为叶，未运行原文 LM value 或 WebShop。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:jev-lookahead",
+          "position": "逐动作克隆模拟后继，把新观察和新可用动作交给决策器比较进展。",
+          "tradeoff": "依赖可信且隔离的 simulator；独立对象不保证 RNG/外部资源隔离。本地词法 provider 只是替身。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "agent-research:drago",
+          "position": "以类型、契约、可达性和题意诊断定向修复形式规格，严格降低阻塞并防止删目标退化。",
+          "tradeoff": "求解器只验证给定形式化，仍可能形式上可解却题意错误；本地是正前提 STRIPS 子集，完整多模型实验高成本未复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现与边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先规划完整依赖，还是等观察再决定",
+          "body": "ReWOO 的变量引用说明它不是不看工具证据，而是不让 Planner 在每轮观察后重新生成整段思考；后续参数仍可由前序证据填入。ReAct 则让真实返回直接参与下一次选择，适合路径会随结果变化的任务。若工具步骤结构稳定，预规划可能减少重复输入；若异常会改变目标或可用操作，必须考虑重新决策路径。两者要按完整交付成本比较，不能只数 Planner 调用。",
+          "papers": [
+            "agent-research:react",
+            "agent-research:rewoo"
+          ]
+        },
+        {
+          "title": "搜索给机会，验证决定证据的含义",
+          "body": "ToT 与 LATS 都扩展多个方向，但前者突出中间状态评价和前沿组织，后者还通过执行与访问统计回传反馈。Jev Lookahead 进一步要求代码模拟提供可观察后继，DRAGO 用符号探针检查规格。外部计算也不是万能 oracle：模拟器可能不隔离，求解器可能解了错误规格。比较搜索器时应先固定它能看到的证据及失败含义，再讨论树宽、深度和预算。",
+          "papers": [
+            "agent-research:tree-of-thoughts",
+            "agent-research:lats",
+            "agent-research:jev-lookahead",
+            "agent-research:drago"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "dependency-versus-adaptation",
+          "question": "第一步查到用户身份后才能查订单，ReWOO 还能预规划吗？与 ReAct 的真正差别在哪里？",
+          "answer": "能，ReWOO 可先写出第二步引用第一步证据变量，Worker 等真实值返回后填入参数；预规划不等于预知工具结果。差别在于 Planner 不被每次观察反复打断，而 ReAct 会据返回重新决定行动。若身份查询异常使后续流程必须换路线，预先依赖图不一定足够，仍需处理失败和重规划。",
+          "example": "教学例：先查 customer_id 再查订单可预写；如果返回“用户合并，需要人工确认”，就不是简单替换变量值能继续的情况。",
+          "papers": [
+            "agent-research:rewoo",
+            "agent-research:react"
+          ]
+        },
+        {
+          "id": "frontier-versus-rollout",
+          "question": "ToT 当前评价低的一条 thought，LATS 为什么可能仍给它一次 rollout？",
+          "answer": "按层前沿选择可根据当前 value 剪枝，MCTS 的 UCT 则同时考虑已有 Q 和访问次数，少访问分支仍可能值得探索。外部 rollout 可能提供新回报，但不是免费纠正所有价值误判。比较应控制预算及评价器，不能把本地确定性 coherence 的搜索结果直接当成 LM value 或真实环境能力对照。",
+          "example": "教学例：一条路线看起来绕远，却可能打开关键资源；UCT 可因尚未尝试保留机会，固定前沿也可能已把它剪掉。",
+          "papers": [
+            "agent-research:tree-of-thoughts",
+            "agent-research:lats"
+          ]
+        },
+        {
+          "id": "simulation-versus-specification",
+          "question": "Jev 模拟显示动作能到达目标，DRAGO 求解器也说可解，为什么仍要核对用户原意？",
+          "answer": "两者验证的是已编码环境或规格中的后果。Jev Lookahead 需要模拟与真实状态一致且不泄露 reward/gold；DRAGO 需要形式规格忠实，不能通过删除目标获得可解。代码或求解器能排除某类错误，却无法自动保证自然语言需求已完整转成状态、约束和目标。",
+          "example": "教学例：用户要“送到A且保持低温”，规格只写“送到A”。模拟和求解都成功，仍没验证低温要求，因为它从未被编码。",
+          "papers": [
+            "agent-research:jev-lookahead",
+            "agent-research:drago"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "agent-research:drago",
+        "agent-research:janus",
+        "agent-research:jev-lookahead",
+        "agent-research:jev-spawn",
+        "agent-research:meta-reasoning",
+        "agent-research:sage-planner",
+        "agent-research:searchatlas",
+        "agent-research:deeprepro",
+        "agent-research:loongreflect",
+        "agent-research:toollift",
+        "agent-research:hyperagent",
+        "agent-research:sira",
+        "agent-research:lats",
+        "agent-research:rewoo",
+        "agent-research:tree-of-thoughts",
+        "agent-research:react"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较反馈时机、thought与MCTS搜索、代码后继模拟和形式规格诊断，区分规划效率与验证证据。",
+          "papers": [
+            "agent-research:drago",
+            "agent-research:janus",
+            "agent-research:jev-lookahead",
+            "agent-research:jev-spawn",
+            "agent-research:meta-reasoning",
+            "agent-research:sage-planner",
+            "agent-research:searchatlas",
+            "agent-research:deeprepro",
+            "agent-research:loongreflect",
+            "agent-research:toollift",
+            "agent-research:hyperagent",
+            "agent-research:sira",
+            "agent-research:lats",
+            "agent-research:rewoo",
+            "agent-research:tree-of-thoughts",
+            "agent-research:react"
+          ],
+          "source_revisions": {
+            "agent-research:drago": "782a0f46ed3b1c6fbd600b0c0faf2668c7744c511fbb00b4b2ec7b9442cee3a0",
+            "agent-research:janus": "e39e97b7165759113ef3661a74a990decd77bdc70de0a24f6a78c5f0ed82e2b7",
+            "agent-research:jev-lookahead": "a1e5bcdedda6f5b34fbd517680de018e453aa118cabe60e9addb0b794d3a2267",
+            "agent-research:jev-spawn": "d486ac336ff75637e164c08ebfd51a7f8471895d50e3cc2439a03f711d821b51",
+            "agent-research:meta-reasoning": "9faba6f6bde5e470212651149a15a782ba7c2fa445eca6e28d2cfc4875727f67",
+            "agent-research:sage-planner": "c6f16d573251b40ae80acd55d01ab2dbf2ec1b53798f1fe659a014fd8054b7eb",
+            "agent-research:searchatlas": "a6cb0277ce2036b8adda5bb7c382486e855d1c9ecc79a53f3f647e2b1ea46997",
+            "agent-research:deeprepro": "87b335c281377d3c0afd54b370011d9c93101c9655f9c3d137de2befc959d81b",
+            "agent-research:loongreflect": "980ff6bd77695d7e0ea9bad02971890e943bfcc9a7eea6d7a35ceb6874111822",
+            "agent-research:toollift": "f7f40170bec20fb8665950e8f62303722feab689d8c7d2f0f69b5de3140c52be",
+            "agent-research:hyperagent": "9ce2e23d00def1e96361a605af6f498e38c2b97c7b9d00d7e146b8be7dc20622",
+            "agent-research:sira": "95eadf0a82ba73874ad7624db3fbd5092baf71257fe6061432ac9e1bc6ead8a7",
+            "agent-research:lats": "8ae228f18aa0e2c89a457475688d251bb0c2899ee86fcd2b3e0a4e4d44411c4c",
+            "agent-research:rewoo": "ad0b4fa6b85e9984567a3f0041aa3cc13a9d769706c4c5b5562b7e33d70784ff",
+            "agent-research:tree-of-thoughts": "15d2dd3bb74da5efa3e7835189a36222a151d4c6c48d1ad25d93d5c8c8d67a0f",
+            "agent-research:react": "e356d3e717cb7cf1b6f307cb79728bffd7d3d9807443aa881c22dab763ac518e"
+          }
+        }
+      ]
+    },
+    "memory-and-skills": {
+      "title": "经验进入长期系统前，要解决存取、价值与准入",
+      "thesis": "MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。",
+      "axes": [
+        "对象是原始事件、压缩表示、运行状态还是可执行技能",
+        "决定发生在写入、读取、淘汰还是持久准入",
+        "价值来自相似度、当前成功、随机曝光还是下游任务",
+        "原始细节和错误后代是否可以恢复或撤销"
+      ],
+      "comparisons": [
+        {
+          "paper": "agent-research:memgpt",
+          "position": "分层管理核心信息、当前上下文和外部归档，以模型函数调用和 heartbeat 控制换入换出。",
+          "tradeoff": "外部容量不等于当前可见，检索仍可能漏证据；本地使用确定性 key 与代理成本，不是语义检索服务。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:memprice",
+          "position": "每项记忆选 raw/summary/abstraction/keywords/delete 中一版，以背包满足硬预算，队列价格反映长期占用。",
+          "tradeoff": "联合分配依赖效用和token大小输入，窗口已删细节只能经归档刷新恢复；本地只执行DP与状态合同。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现与边界"
+          ]
+        },
+        {
+          "paper": "agent-research:causal-memory-policy",
+          "position": "在固定候选池预留均衡随机曝光，估计设计下处理/对照净效应及标准误，不确定时保护记忆。",
+          "tradeoff": "处理一条会改变其他槽位分布，效应不能当独立加性系数；本地合成结果不证明真实问答或长期删除策略。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:voyager",
+          "position": "自动课程产生任务，代码执行和反馈修订后，将验证成功程序作为可检索技能继续组合。",
+          "tradeoff": "一次环境成功仍有适用前提；本地技能是结构化工具计划，没有 Mineflayer/GPT-4 或真实 Minecraft。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:vag",
+          "position": "在持久写入前检查结构、行为无害与语义一致，再按边际收益选择可兼容 Hot 技能集合。",
+          "tradeoff": "阻止污染早于事后删除，但验证仍受覆盖限制；本地只执行相关核心算子，候选发现不等于完整能力进化。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:skillrise",
+          "position": "同一policy交替求解与整理文档，当前结果监督solve，下游折扣结果监督curate。",
+          "tradeoff": "要求任务序列能暴露经验迁移价值；本地仅验证状态和phase信用，未做原文模型RL。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "资源分配器需要效用，但不会自动产生因果证据",
+          "body": "MemGPT 使信息可被移到归档，MemPrice 再在当前窗口联合分配多级表示；两者都需要决定什么值得留下。CMP 处理的是另一层：难题更常检索某条记忆，不能把相关失败都归咎于它，随机曝光才提供可识别的对照。将 CMP 的估计交给分配器也须保留曝光设计和不确定度，不能把固定槽位净效应直接当可随意相加的单项价值。",
+          "papers": [
+            "agent-research:memgpt",
+            "agent-research:memprice",
+            "agent-research:causal-memory-policy"
+          ]
+        },
+        {
+          "title": "当前成功、持久准入与未来受益是三个时点",
+          "body": "Voyager 让成功程序进入技能积累链，VaG 更强调新经验会影响后代，需在写入前检查并考虑共同使用的兼容性。SkillRise 又把整理行为交给下游任务结果评价：当前成功主要说明求解，不足以说明留下的文档帮助未来。这不是谁更先进的直线序列，而是不同证据合同：执行通过、库准入和跨任务学习应分别记录。",
+          "papers": [
+            "agent-research:voyager",
+            "agent-research:vag",
+            "agent-research:skillrise"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "allocation-versus-identification",
+          "question": "MemPrice 背包选中一条“高效用”记忆，为什么 CMP 仍会追问这个效用是怎样测出来的？",
+          "answer": "背包只在给定效用与大小下求联合分配，不证明上游估计可靠。如果记忆常在难题出现，观察到失败多可能只是选择偏差；CMP 用均衡随机曝光和对照估计设计下净作用，并保留标准误。这个净效应又受槽位替代影响，不能不加条件当成独立可加背包收益。",
+          "example": "教学例：故障排查记忆总在最难事故被检索，成功率低不说明它有害；先辨别没有它时会怎样，再讨论是否值得占窗口。",
+          "papers": [
+            "agent-research:memprice",
+            "agent-research:causal-memory-policy"
+          ]
+        },
+        {
+          "id": "successful-skill-versus-admission",
+          "question": "Voyager 一次执行成功的程序，为什么不能不经检查就当成 VaG 里可与所有技能共同使用的长期经验？",
+          "answer": "一次成功支持该环境中的执行路径，未说明程序在其他前提仍无害，也未排除与已有技能冲突。VaG 在写入前分开检查结构、行为和语义，再以集合边际价值选择兼容组合。两种机制可以讨论不同生命周期，但不能把成功、无害和组合收益合并成一张通过票。",
+          "example": "教学例：技能在空目录中成功，若暗含删除旧文件的前提，搬到共享目录可能有害；单次成功没有验证这个新作用域。",
+          "papers": [
+            "agent-research:voyager",
+            "agent-research:vag"
+          ]
+        },
+        {
+          "id": "current-outcome-versus-future-skill",
+          "question": "为什么 SkillRise 的整理文档不能直接沿用 Voyager 式当前任务成功信号？",
+          "answer": "当前成功主要说明刚才的动作完成目标，文档价值却体现在后续相关任务能否借它行动。SkillRise 将solve与curate分phase，用下游折扣回报监督后者，并只作用于对应生成token。Voyager 的成功程序准入提供执行证据，不能替代这项跨任务信用；漂亮但无用的总结也不应因当前成功自动获奖。",
+          "example": "教学例：当前任务靠偶然试错成功，文档若只写具体答案，下一题无法复用；下游评价才会暴露它没有留下可迁移步骤。",
+          "papers": [
+            "agent-research:skillrise",
+            "agent-research:voyager"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "agent-research:cache-engineering",
+        "agent-research:tokenworth",
+        "agent-research:memprice",
+        "agent-research:proper-agent",
+        "agent-research:memscope",
+        "agent-research:hy-memory",
+        "agent-research:transparent-compact",
+        "agent-research:formcraft",
+        "agent-research:t2mem",
+        "agent-research:near",
+        "agent-research:beyond-final-embedding",
+        "agent-research:hippocam",
+        "agent-research:mem-plus-plus",
+        "agent-research:causal-memory-policy",
+        "agent-research:belief-state-pos",
+        "agent-research:autocompact",
+        "agent-research:memfit",
+        "agent-research:upliftmem",
+        "agent-research:remem",
+        "agent-research:context-lm",
+        "agent-research:mnemon",
+        "agent-research:ccm",
+        "agent-research:interactive-memory",
+        "agent-research:evoskill-gui",
+        "agent-research:skill-retention",
+        "agent-research:grounded-memory",
+        "agent-research:memforest",
+        "agent-research:coskill",
+        "agent-research:atomrec",
+        "agent-research:skilldreamer",
+        "agent-research:spt",
+        "agent-research:covemem",
+        "agent-research:skill-state",
+        "agent-research:caskg",
+        "agent-research:skillforge",
+        "agent-research:hymem",
+        "agent-research:vag",
+        "agent-research:gse",
+        "agent-research:memorycpt",
+        "agent-research:vermem",
+        "agent-research:coevo-mem",
+        "agent-research:skillrise",
+        "agent-research:unimem",
+        "agent-research:hiskill",
+        "agent-research:memcon",
+        "agent-research:memento-skills",
+        "agent-research:u-mem",
+        "agent-research:pahf",
+        "agent-research:memskill",
+        "agent-research:sage",
+        "agent-research:legomem",
+        "agent-research:memtool",
+        "agent-research:memgpt",
+        "agent-research:voyager",
+        "agent-research:generative-agents"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较分层存储、记忆价格、随机曝光效用、成功程序积累、预提交准入与下游技能信用。",
+          "papers": [
+            "agent-research:cache-engineering",
+            "agent-research:tokenworth",
+            "agent-research:memprice",
+            "agent-research:proper-agent",
+            "agent-research:memscope",
+            "agent-research:hy-memory",
+            "agent-research:transparent-compact",
+            "agent-research:formcraft",
+            "agent-research:t2mem",
+            "agent-research:near",
+            "agent-research:beyond-final-embedding",
+            "agent-research:hippocam",
+            "agent-research:mem-plus-plus",
+            "agent-research:causal-memory-policy",
+            "agent-research:belief-state-pos",
+            "agent-research:autocompact",
+            "agent-research:memfit",
+            "agent-research:upliftmem",
+            "agent-research:remem",
+            "agent-research:context-lm",
+            "agent-research:mnemon",
+            "agent-research:ccm",
+            "agent-research:interactive-memory",
+            "agent-research:evoskill-gui",
+            "agent-research:skill-retention",
+            "agent-research:grounded-memory",
+            "agent-research:memforest",
+            "agent-research:coskill",
+            "agent-research:atomrec",
+            "agent-research:skilldreamer",
+            "agent-research:spt",
+            "agent-research:covemem",
+            "agent-research:skill-state",
+            "agent-research:caskg",
+            "agent-research:skillforge",
+            "agent-research:hymem",
+            "agent-research:vag",
+            "agent-research:gse",
+            "agent-research:memorycpt",
+            "agent-research:vermem",
+            "agent-research:coevo-mem",
+            "agent-research:skillrise",
+            "agent-research:unimem",
+            "agent-research:hiskill",
+            "agent-research:memcon",
+            "agent-research:memento-skills",
+            "agent-research:u-mem",
+            "agent-research:pahf",
+            "agent-research:memskill",
+            "agent-research:sage",
+            "agent-research:legomem",
+            "agent-research:memtool",
+            "agent-research:memgpt",
+            "agent-research:voyager",
+            "agent-research:generative-agents"
+          ],
+          "source_revisions": {
+            "agent-research:cache-engineering": "ad57cfde13d4b4bbb9bb4c0b53a9d0689cb150e5c230648f3f5addb3dd77a5c3",
+            "agent-research:tokenworth": "90b3484bbfe1df29e3211984309bb1103289680355a5e412ca961d770937b172",
+            "agent-research:memprice": "d4ee0743c138d1d79e69a22798bddc199b6cea29fbbbcb6d1410a067b48b8c40",
+            "agent-research:proper-agent": "c5d42a39470ce72302a257e5a72a8794f61bd14a338215ab41e5ef18d9eec247",
+            "agent-research:memscope": "aa1b1549215e468e6c678bff56961dcfec9fc9f606cf69099e3542b311468278",
+            "agent-research:hy-memory": "b8f26c2364c70d55003d44aa450d19e84bda007c205fbbbed9011ecb0f5c4cf2",
+            "agent-research:transparent-compact": "599010fae0e72c007cd142900822da1b21fd54f11dd604074d91f12659e9191f",
+            "agent-research:formcraft": "4a209903df8a0fc1fbf8779f00e589aa9ee3dd5e22e51cbe9ec4d4a88aa54e78",
+            "agent-research:t2mem": "bc5e92510ab6359cd80eb68ec9137cc64b472e60521adf6bb4a48e8f5b8fa288",
+            "agent-research:near": "780e0e732bad19fc0b08696a8c4d31c25ad8947903056ee9214d9aef2888f7eb",
+            "agent-research:beyond-final-embedding": "d0ccf1ffc763bf188793e0db5781602c5cd7a2e41816295f93859c841f49b55d",
+            "agent-research:hippocam": "cb2b38601b7590f00919052dfb110f7bbfcc3e88bd8af966d472f72246f2fd8f",
+            "agent-research:mem-plus-plus": "7451ca1d55f90a1c8807fc64076c57e45ab4b0b8a131b64f982f3d32d5e6a138",
+            "agent-research:causal-memory-policy": "964e66a4528f87902683f8cea525cd17bff0229872c04bb0a922e51a59085df4",
+            "agent-research:belief-state-pos": "cc20fb1de0627bb578f61ef7875a6af0db3daae8d8ba86cadd325fecf3a69ad2",
+            "agent-research:autocompact": "386048334384abcc2c181378b6344a5ec65a822875b817a27c02c3f5ed375555",
+            "agent-research:memfit": "867ea5f89bc64ded3eade1195bd96d8c151da544e846af1c9ae2be76bb816c13",
+            "agent-research:upliftmem": "893cea407913d7af077dae5b4d5dfe27ca3255c8604d41656d47deccd277d752",
+            "agent-research:remem": "d5d8f7279a3edb78a21d8194675f1ee236ced8e0b6fb890d61cc24b0a81d1813",
+            "agent-research:context-lm": "4fdb600ba4bc01a4cfdaaed3c13f39fdfbadb2d89a1c8e6c5a7e7dc16d5cf6ab",
+            "agent-research:mnemon": "a3a9e7ab74b78aabf57f675149ac77a61bf8885ea999e26004fbb6656677cad7",
+            "agent-research:ccm": "80b51ef9aa0c30f0c405b1337f4eb455f918bab304c1abfe82c473d10fa9c2e3",
+            "agent-research:interactive-memory": "06058e8505e1a82b05d1451a4291209bb1ef61cbec5964ba17da3f1e8c22be06",
+            "agent-research:evoskill-gui": "608a3a0fbb790b474cf0a858b14501f99bd024065d843642a391ce110ea47649",
+            "agent-research:skill-retention": "000599bb8baa4e5a83cafd98b3e93adf8ff6fb77340e9839129b8ac6d0ecffe9",
+            "agent-research:grounded-memory": "6bc301fa0658e25eb9ab4d9ee56b0bae6884fde9bd5439c2b293cac85fd4769c",
+            "agent-research:memforest": "79e6f34f132ccb1c98b9baa128d33288f17dd8e61036ba1d7b183ef43157b814",
+            "agent-research:coskill": "a23a84380c04ad6a28f8be37efa969789e45d663843c91b7586e9477926d27c9",
+            "agent-research:atomrec": "b1e210c42589cc5059a699e0db2d75112be065a0595e08d686e08b058e057efe",
+            "agent-research:skilldreamer": "3038f7bf5c79ff0d534f804c4ff624af3e99c3be634383393cbc2eddd5dd0cb8",
+            "agent-research:spt": "f48848b41b69947f7606479b3df1ddc4a77f3d5d6e4e22292cfcf2ce4593e1e9",
+            "agent-research:covemem": "959a830c3b04af2a27bd0278afb70aef87ab5b02c13d8d7fa581e59c3e750bf8",
+            "agent-research:skill-state": "539da27fc63f4bfe0d2f0bf8ca7f7187d2657f9671e17c7cd89be4f465b1b7dd",
+            "agent-research:caskg": "3fa9aa3f57bd21d75f73dc59f628eb5982caa79c9a87a322ecef1a18de11b5d6",
+            "agent-research:skillforge": "e1d8400cc7efa4c78ea7b9e4abcbaf8afff67181d50531e27ddc578d7645a9c2",
+            "agent-research:hymem": "c9758c1b7d03f41e2487a27fd202d7e589e6fd94cc0216996d9fc17921c15445",
+            "agent-research:vag": "31d88b528c83633b94bf56cf68e4c25dd6718895c7893aaf0cf176fb5ca6a4c0",
+            "agent-research:gse": "c5434a01132a71498389a6ab3bb6610ae1d3ca16db650a2f6ebb259cb2710eec",
+            "agent-research:memorycpt": "20d597fdc9da8385c123aa839abb1867a3a8599aee7a38fa9706ed627843bd22",
+            "agent-research:vermem": "8eadddc1ca6eae3b9349b00766771bce35bd3e46a6d0a78620566924c6c029dd",
+            "agent-research:coevo-mem": "48d4084d3086236671b23f286e96328efc18c02d2537013eb22705f99c5d64a5",
+            "agent-research:skillrise": "06458fafaf4bddc9f12e488fda51e9d4d782d380594148b7e292d9c8ef565f08",
+            "agent-research:unimem": "5b504dab3d8a5fc3af96baccdf4a5564d9e47382a02126bf01c659bc9a6c0121",
+            "agent-research:hiskill": "9fbc41e50f9f5186761a4f18e88aa4addb632a3f5170f229853f74109c6cf317",
+            "agent-research:memcon": "bde8ea8ee0efb81ebe113c9577863b1fbd087e0506457d6c3386f08f38ef0f96",
+            "agent-research:memento-skills": "c29a07693df29ca891ada74659f01bff99567f1206833eb36c415f44e903dd55",
+            "agent-research:u-mem": "d888e4b20c235b5bda09d3ecaf9060792bdcd0d382bbb26149d49ebb758e8895",
+            "agent-research:pahf": "d9b9f279ffa6ca567de26c91124aa6e69e447f579a932c9f2685a7e84dd9aab7",
+            "agent-research:memskill": "d2d004598a4f482d4e8dc7f1a714139819f92112b2f43072312576cf3ffdf20a",
+            "agent-research:sage": "8e3d9a4084c9c4b62f56b266e9171fe95905b03a718ddc093ed3f26bfef69e02",
+            "agent-research:legomem": "26f3f4017e60baad78d98778040304e5064567e61f865287c378e8ad1baed8f2",
+            "agent-research:memtool": "d51f7cf7709ac20008ebfbdcf72f2503c579c6ee21bdc2e0091d9b62086a3f4b",
+            "agent-research:memgpt": "468b0f83c09cf59f74f1961de490d034f5f454baae55fa2a36fcb391aa4407f3",
+            "agent-research:voyager": "97016f56264d541ae2ed051159259b91c5d6b798ee6d7c23967472be408edf75",
+            "agent-research:generative-agents": "560c3f265ecb081dc4a0a7a09237e97d44f5febb3929f83a3a699fb1128cf614"
+          }
+        }
+      ]
+    },
+    "tools-and-collaboration": {
+      "title": "从会调用到能交付：工具接口、可靠性与协作合同",
+      "thesis": "Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。",
+      "axes": [
+        "改进对象是调用策略、交互接口、工具选择还是团队协议",
+        "反馈来自语言loss、实际执行、结构交付物还是隐藏下游",
+        "协作状态是一段对话、显式中间物还是跨会话仓库资产",
+        "失败和资源如何进入最终交付口径"
+      ],
+      "comparisons": [
+        {
+          "paper": "agent-research:toolformer",
+          "position": "采样API候选，通过真实返回对后续token loss的帮助筛选，再继续语言模型训练。",
+          "tradeoff": "训练效用不等于所有部署工具可靠；本地确定性utility替代GPT-J loss，未执行完整continued training。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:swe-agent",
+          "position": "以专门ACI控制搜索、查看、精确编辑与测试，把软件任务变成可反复执行的动作循环。",
+          "tradeoff": "接口降低操作负担，不替代理解和验证；本地真实临时仓库属于micro benchmark，不是官方SWE-bench resolved rate。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:autogen",
+          "position": "以ConversableAgent、回复策略和停止条件编程消息交互，支持群聊与嵌套会话。",
+          "tradeoff": "抽象灵活但协议仍需设计，角色数量不等于协作质量；本地只执行消息与交接协议，未接完整运行时。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:metagpt",
+          "position": "把软件SOP写入角色流程，每步生产结构化中间物供下游消费和验证。",
+          "tradeoff": "结构化交付限制自由聊天，但上游错误仍可能被后续继承；本地有真实编辑测试，仍不代表完整LLM团队。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:rated",
+          "position": "冻结语义双encoder取Top-K，再由metadata与逐工具discounted LinUCB利用真实执行反馈重排。",
+          "tradeoff": "只知道选中工具的反馈，不能给未调用项虚构回报；本地encoder短训实际执行，但授权binding失败，未证明原生态能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、验证与边界"
+          ]
+        },
+        {
+          "paper": "agent-research:world-of-swecraft",
+          "position": "持久会话、issue/PR和包依赖组成软件世界，隐藏下游安装冻结版本检验集体产物。",
+          "tradeoff": "本地微基准通过不足以证明下游收益，指令计数也不是墙钟；完整55K会话环境高成本，本地未运行。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现与成本判断"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "会选工具，还不等于工具能用",
+          "body": "Toolformer 的调用样本依据后续预测是否受益筛选，它主要提供策略训练信号；SWE-agent 把可执行接口及返回形态整理给模型；RATED 再将语义相关与近期可靠性拆开。于是“模型愿意调用”“调用格式合法”“接口实际成功”和“答案完成任务”应是分开的记录。相关但失效的工具不能靠更高语义分弥补，接口成功也不能给未调用候选制造反事实奖励。",
+          "papers": [
+            "agent-research:toolformer",
+            "agent-research:swe-agent",
+            "agent-research:rated"
+          ]
+        },
+        {
+          "title": "消息协议、中间物与生态后果",
+          "body": "AutoGen 让谁回复、何时继续和停止成为可编程协议；MetaGPT 进一步把角色输入输出收束成SOP交付物。World of SWEcraft 将观察范围扩到跨仓库长期维护：一个包自己的测试可能通过，下游却被破坏。它们分别约束沟通控制、信息交接与最终外部影响，不能仅用消息数、角色数或产物数量替代后者。长期协作还需要持久资产与会话预算，而非无限加长单条群聊。",
+          "papers": [
+            "agent-research:autogen",
+            "agent-research:metagpt",
+            "agent-research:world-of-swecraft"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "usefulness-versus-reliability",
+          "question": "Toolformer 筛出一个有用API调用后，RATED 为什么仍可能在部署时降低这个工具的优先级？",
+          "answer": "训练筛选说明返回值曾帮助后续预测，不能保证服务一直可用或参数行为不漂移。RATED 先限定语义相关候选，再从实际选中工具的成功、错误和超时更新可靠性统计，用折扣适应变化。训练有用与当前可执行是两个条件，也不能因本次失败给所有未尝试工具打负分。",
+          "example": "教学例：汇率API在训练样本很有用，部署后连续超时；语义依旧匹配，但实际可靠性证据应影响下一次选择。",
+          "papers": [
+            "agent-research:toolformer",
+            "agent-research:rated"
+          ]
+        },
+        {
+          "id": "message-protocol-versus-artifact",
+          "question": "AutoGen 里已有程序员和测试员，为什么 MetaGPT 还强调结构化交付物，SWE-agent 又强调ACI？",
+          "answer": "角色名只说明职责，AutoGen 的回复与终止协议组织交互；MetaGPT 规定需求、设计、实现等角色具体交付什么，减少信息在自由聊天中漂移；SWE-agent 则约束单次查看、编辑和测试怎样落地。三者分别处理控制、信息合同和动作接口，可组合但不能互相冒充。",
+          "example": "教学例：测试员知道何时回复，不代表拿到了明确接口规格；即便规格完整，编辑命令若不能精确定位，代码仍会改错。",
+          "papers": [
+            "agent-research:autogen",
+            "agent-research:metagpt",
+            "agent-research:swe-agent"
+          ]
+        },
+        {
+          "id": "local-tests-versus-downstream",
+          "question": "MetaGPT/SWE-agent 的仓库测试通过后，World of SWEcraft 为什么还用隐藏下游包检查？",
+          "answer": "本仓库测试只能覆盖维护者可见合同，跨包接口变化可能破坏真实依赖者，也可能只优化自己可见的微基准。隐藏下游在冻结发布版本上安装并检查，评价不同层面的集体交付。失败包不能从速度平均里静默移除，strict/carry也需明确；这仍不是用一个本地micro通过推导生态能力。",
+          "example": "教学例：库作者把函数参数改名并更新自身测试，下游仍按旧参数调用而崩溃；只有依赖者检查能暴露这种回归。",
+          "papers": [
+            "agent-research:metagpt",
+            "agent-research:swe-agent",
+            "agent-research:world-of-swecraft"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "agent-research:rpl",
+        "agent-research:world-of-swecraft",
+        "agent-research:tracer",
+        "agent-research:structural-signal-retriever",
+        "agent-research:leash",
+        "agent-research:jev-agent-harness",
+        "agent-research:gemini-minecraft",
+        "agent-research:diviner",
+        "agent-research:aria",
+        "agent-research:rated",
+        "agent-research:jev-workflow",
+        "agent-research:mingbird",
+        "agent-research:cera-moa",
+        "agent-research:repoatlas",
+        "agent-research:hcrg",
+        "agent-research:feedback-scaffold",
+        "agent-research:swe-prime",
+        "agent-research:traceml",
+        "agent-research:topas",
+        "agent-research:progrouter",
+        "agent-research:adavdr",
+        "agent-research:smith",
+        "agent-research:pmcoder",
+        "agent-research:codegrep",
+        "agent-research:manta",
+        "agent-research:cam-df",
+        "agent-research:autoformbot",
+        "agent-research:prompts",
+        "agent-research:paperorchestra",
+        "agent-research:aira2",
+        "agent-research:dynamic-brt",
+        "agent-research:watch-and-learn",
+        "agent-research:toolgrad",
+        "agent-research:toolrl",
+        "agent-research:retool",
+        "agent-research:openhands",
+        "agent-research:swe-agent",
+        "agent-research:autogen",
+        "agent-research:metagpt",
+        "agent-research:toolbench",
+        "agent-research:critic",
+        "agent-research:camel",
+        "agent-research:hugginggpt",
+        "agent-research:art",
+        "agent-research:toolformer",
+        "agent-research:pal",
+        "agent-research:mrkl",
+        "agent-research:saycan",
+        "agent-research:webgpt"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较调用学习、ACI、消息编排、SOP交付、可靠性重排与隐藏下游协作评价。",
+          "papers": [
+            "agent-research:rpl",
+            "agent-research:world-of-swecraft",
+            "agent-research:tracer",
+            "agent-research:structural-signal-retriever",
+            "agent-research:leash",
+            "agent-research:jev-agent-harness",
+            "agent-research:gemini-minecraft",
+            "agent-research:diviner",
+            "agent-research:aria",
+            "agent-research:rated",
+            "agent-research:jev-workflow",
+            "agent-research:mingbird",
+            "agent-research:cera-moa",
+            "agent-research:repoatlas",
+            "agent-research:hcrg",
+            "agent-research:feedback-scaffold",
+            "agent-research:swe-prime",
+            "agent-research:traceml",
+            "agent-research:topas",
+            "agent-research:progrouter",
+            "agent-research:adavdr",
+            "agent-research:smith",
+            "agent-research:pmcoder",
+            "agent-research:codegrep",
+            "agent-research:manta",
+            "agent-research:cam-df",
+            "agent-research:autoformbot",
+            "agent-research:prompts",
+            "agent-research:paperorchestra",
+            "agent-research:aira2",
+            "agent-research:dynamic-brt",
+            "agent-research:watch-and-learn",
+            "agent-research:toolgrad",
+            "agent-research:toolrl",
+            "agent-research:retool",
+            "agent-research:openhands",
+            "agent-research:swe-agent",
+            "agent-research:autogen",
+            "agent-research:metagpt",
+            "agent-research:toolbench",
+            "agent-research:critic",
+            "agent-research:camel",
+            "agent-research:hugginggpt",
+            "agent-research:art",
+            "agent-research:toolformer",
+            "agent-research:pal",
+            "agent-research:mrkl",
+            "agent-research:saycan",
+            "agent-research:webgpt"
+          ],
+          "source_revisions": {
+            "agent-research:rpl": "7f8ed1a7017cbb9de1ac38ed3b19cb92166a12365ba7786fb408a41fab695e76",
+            "agent-research:world-of-swecraft": "4f9b2949738c9c1c7202db6eff78e974e164d61aad39dccbc4315db4c3e103c3",
+            "agent-research:tracer": "64466356c8e737899afefc8c3d198740c74a3f884e29b0e5ccd725b631f7f86b",
+            "agent-research:structural-signal-retriever": "170badf150718026c6a4dd954ca652e477c5bc895cece044da46b79eb299ff82",
+            "agent-research:leash": "d66cab37789b46329c987cbb04a465e30f9a366ee1fe6de2023272da7fc2fb4c",
+            "agent-research:jev-agent-harness": "854380423ac4e7193d6ea93e939b46d57ba8b4d4230373babc316666bcdb8351",
+            "agent-research:gemini-minecraft": "033bd078d777ce4b800d978ab35122ebbb44a7856a6ad392decda4aefc0b795d",
+            "agent-research:diviner": "745f0875a9d5757353c8fd007feb2fec2cd52b34a5f2b185e32d256033f57939",
+            "agent-research:aria": "e28706952774b5189f7b4ba16164b98e928852f0cc437dcc27702783e404703d",
+            "agent-research:rated": "dee2de92764a4b169a42a5012c6b93d8bd85fd1d02fc27094378d53d38cfad59",
+            "agent-research:jev-workflow": "ab9c58424b33eb981cda0f06504a6162f74afd6a6cfb91e08561d7c69c470d93",
+            "agent-research:mingbird": "fc0418818d5ef7fc01c23fdf6b6ca933c97c37269bd29cbe29dc7b64715e28ce",
+            "agent-research:cera-moa": "368fe3fe93846cd3e464db2c3851d5afce0ca9244046e32a35686ff67b3c447d",
+            "agent-research:repoatlas": "148b960a2764a1a0c5679bb05f367c6b519872ed6a38474edd963d10c77500a0",
+            "agent-research:hcrg": "6f4e225f2fa865499179df1cf80c7a7dbf174b189e563efd2615a9b91c4e80ef",
+            "agent-research:feedback-scaffold": "1730c0f6bbd5987b15506aa1490fdf8e602c594568ebaf556262861f36e6f39a",
+            "agent-research:swe-prime": "a8d33f6a920a44e8e04db0da01a3cb45965d2d4abde0c535515610d42d952677",
+            "agent-research:traceml": "bee7c5a654e95c7b7c74b1d638451cfbb5aa30a7a759ed3549187ba433531d96",
+            "agent-research:topas": "79282c730e2115f0bd89a39c727104fbe498259b3d457fdcfbec7f4e65aa4898",
+            "agent-research:progrouter": "037bb6a7d93ee8dfd23be606def5e7597f5c872b2aedd389280fc2792af167be",
+            "agent-research:adavdr": "e89000c93feea2008ee2c8a34d06b2e5f4902513406e76078fb9107ec40d58e5",
+            "agent-research:smith": "4b938ba2d250f698df36b076147d7326f29c90540459832645144e79465cee48",
+            "agent-research:pmcoder": "85fc39750ec9726c88cf166a3399813d990f71dc28c07b4b7a77e8cbab63b9ed",
+            "agent-research:codegrep": "367030fd3c7bbddc9c2dd1313b783283e00f4a7c3a1d9ef9f9a9d88798e0eb53",
+            "agent-research:manta": "e2544f8304c21c3a10da7414c40e25654123288283045d6cdbfdc54e3d64335e",
+            "agent-research:cam-df": "d761a4d27bbf6c21e172faa2202c00aa95e8963038a945f051e5bcdf1af0723d",
+            "agent-research:autoformbot": "47cbd05df4b6b53515f9e95e9893a2ad58e7efdc91866e6575eca605a46b74af",
+            "agent-research:prompts": "c03f9ab92abdf99a4ebd83412215fa2b25548d714d64593240d38119342bb057",
+            "agent-research:paperorchestra": "df8de2cf87758bdb41afd7aea881572d81e34a9ec76cf535287c1688607a673f",
+            "agent-research:aira2": "6498a3d439222ad000520c707d2de83290bbc3024269fe2e2cd6abd2eb3acf28",
+            "agent-research:dynamic-brt": "98dfab9b97d3d833ebf535dab1f0cdd118a88de33f4f631dde14695641d3d077",
+            "agent-research:watch-and-learn": "ab32ec9967d8c77a38c6a22c104280dc6aa613e62356ac7005a9ef6286e59590",
+            "agent-research:toolgrad": "5ef5efe10df5ae5573289493285b909e51efc0f64c98027aa504b0d0c9486c0d",
+            "agent-research:toolrl": "73074839af8d72e7f0fec01248fc2226cec3c1f46a585778b934360bf2041a64",
+            "agent-research:retool": "11042db2fadf131078841973f3a662bf7139a294f6889433a29ec7a0c8ae7605",
+            "agent-research:openhands": "5bcd4f747ffbe70bea4a8dcd08932ac2b59524071b944205121a99a634cb5758",
+            "agent-research:swe-agent": "dba28d4fec2bf383c2fb6b3cff63a667c1dc81f7214f383d9718338c6f5d3be1",
+            "agent-research:autogen": "e69c687bca917b0de609888dbb938a589eca73776f0544bd4b09d1d2627d0ab9",
+            "agent-research:metagpt": "85df7cdd8d7ae4151ebb5fc8978fd4997311c99353151903f093be3c53cc1ccb",
+            "agent-research:toolbench": "fd653767ec3fa982a58d46113cc484e01ca09bd226f37c053732507df14ccd13",
+            "agent-research:critic": "1315b411313b3dc0c0fcd7c117961e86175716d435d67bba8c08a18e98eb2324",
+            "agent-research:camel": "32b22e545300b80e737d6d9117ac65d462d39066549b31e6ccf37677925a7455",
+            "agent-research:hugginggpt": "dd4d332c25b70fcc1f855c522e5a97778abcce7ac6b07cda662ec281941abee2",
+            "agent-research:art": "881c8bf7fa3fca19fd1fac2e674c59c45e190a8e1f046dc7ed07a97247938390",
+            "agent-research:toolformer": "35e99799c56a3d3808016d2ec780ef0bbb6a5249974ca501c521ba793226ac07",
+            "agent-research:pal": "cd12d810aa8770e3e463436b4c3f35adade6196d36794bd345cc8faef155016a",
+            "agent-research:mrkl": "6245a66957df9a8d3f5a509373bff7cdafda9e5e0f2230dccfb046b41ac5685b",
+            "agent-research:saycan": "6ce47818ff2ecaf85f53ac855302a22a5636703edae44a9c8f911064e80e7747",
+            "agent-research:webgpt": "62d36b0afa0c39f764b6d4ab646e48b4e26741ae83442f896ac338291f20ec46"
+          }
+        }
+      ]
+    },
+    "harness-and-self-improvement": {
+      "title": "自改进先标对象：答案、经验、接口与系统版本",
+      "thesis": "Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。",
+      "axes": [
+        "可变对象是答案、文字经验、接口、模型还是交付物",
+        "变化仅服务当前任务还是成为持久版本",
+        "反馈用于提案、选择父本、接纳候选还是发布",
+        "失败候选是回滚、留在种群还是进入知识资产"
+      ],
+      "comparisons": [
+        {
+          "paper": "agent-research:self-refine",
+          "position": "同一模型显式生成草稿、任务维度反馈和修订，满足要求后停止。",
+          "tradeoff": "主要是当前输出循环，自评可能重复错误；本地确定性critic只验证状态迁移。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:reflexion",
+          "position": "将执行反馈变成自然语言反思，下一trial读取有界episodic memory。",
+          "tradeoff": "改变上下文而非梯度权重，教训可能错误或过时；本地模板反思与隔离ToolRoute结果需分开解释。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:harnesslens",
+          "position": "根据受影响行为选择成对验证任务，正增益之外还要求能归因到候选修改。",
+          "tradeoff": "局部接纳节省验证，但覆盖不等于全能力；本地ToolRoute协议不是论文全部benchmark。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:agent-s4",
+          "position": "固定任务Agent与Harness，编辑接口代码和使用知识，变异/交叉后代无论暂时分数高低都入种群。",
+          "tradeoff": "验证只用于父本选择且不暴露给构建者；本地仅可信callback控制器，无真实桌面接口演化，完整实验高成本。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "成本与复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:rsiflow",
+          "position": "依据证据在Model/Harness/Artifacts选择干预，同父代同批比较，仅有效且正增益时接受。",
+          "tradeoff": "失败仍从冻结父代重试，不等于任意代码自改；本地只执行作用域、配对与技能记录，没有模型训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射、成本与边界"
+          ]
+        },
+        {
+          "paper": "agent-research:agentx",
+          "position": "证据提案、仓库实现、护栏线上A/B和正负资产化组成推荐迭代闭环。",
+          "tradeoff": "主指标改善仍可被护栏否决；作者生产证据与本地确定性mini闭环不同，本地没有用户流量或SGPO大模型训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "把“记住改法”与“系统真的改变”分开",
+          "body": "Self-Refine 的修订对象是当前输出，Reflexion 的持久项是下次可见的文字经验；Agent S4 则把接口代码及知识作为仓库版本，使操作与观察本身可以变化。RSIFlow 再显式区分模型、流程和产物。它们都可能改善后续结果，却不能统称模型学会了：应该记录变了哪个对象、如何执行，以及下一任务继承什么，而不是只记一项policy update计数。",
+          "papers": [
+            "agent-research:self-refine",
+            "agent-research:reflexion",
+            "agent-research:agent-s4",
+            "agent-research:rsiflow"
+          ]
+        },
+        {
+          "title": "入种群、接纳和发布是三类决定",
+          "body": "Agent S4 保留暂时低分后代，验证分用于后续选择父本，这是非贪心搜索；RSIFlow 要有效且相对同父代提高才改变当前状态。HarnessLens 将接纳限制在行为相关的可归因证据，AgentX 的生产发布还要通过关键护栏。因此一个候选存在于档案、在局部验证通过与允许影响线上流量，不能由同一个“已接入”状态概括。这里比较的是规则和作用范围，不将不同论文的成绩排列成优劣。",
+          "papers": [
+            "agent-research:agent-s4",
+            "agent-research:rsiflow",
+            "agent-research:harnesslens",
+            "agent-research:agentx"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "revision-versus-episodic-learning",
+          "question": "同一回答修改三轮，与失败后留下经验再做下一次任务，Self-Refine和Reflexion在什么地方分开？",
+          "answer": "Self-Refine 围绕当前草稿产生反馈再修订，循环主要改变当前产物；Reflexion 将一次执行评价整理成经验，供下一trial的actor读取。二者都可使用同一冻结模型，不代表梯度训练。应检查反馈有没有进入后续上下文、是否适用新状态，以及结果有没有真实验证，不能仅用循环次数判断“学会”。",
+          "example": "教学例：把报告中的错数改对属于当前修订；留下“引用数字前核对原表”的经验供下次使用，才是跨trial可读状态。",
+          "papers": [
+            "agent-research:self-refine",
+            "agent-research:reflexion"
+          ]
+        },
+        {
+          "id": "population-versus-current-parent",
+          "question": "Agent S4保留低分后代，而RSIFlow拒绝不改善候选，两者为什么不构成矛盾？",
+          "answer": "它们维护的搜索状态不同。Agent S4 的种群保留探索来源，低分后代也可能参与后续搜索，私有验证决定父本选择；RSIFlow 每轮围绕冻结父代检验候选，失败后不改变下一次出发点。一个规则关注种群多样性，一个约束当前版本更新，不能把入档等同发布，也不能给两者套同一逐轮单调标准。",
+          "example": "教学例：接口变体甲暂时差但提供新操作，可留种群；某次流程修补乙无改善，RSIFlow仍从原流程再提下一候选。",
+          "papers": [
+            "agent-research:agent-s4",
+            "agent-research:rsiflow"
+          ]
+        },
+        {
+          "id": "local-admission-versus-production",
+          "question": "HarnessLens 的局部行为配对涨分，为什么不能直接替代 AgentX 的线上发布判断？",
+          "answer": "局部验证回答修改在所选行为上是否有正且可归因的收益；生产部署还涉及业务分布、关键护栏和真实资源。AgentX 主指标改善后仍允许护栏否决，并把正负实验保留供后续研究。两个阶段可衔接，但本地小协议通过没有提供用户流量因果证据，也不能自动授权发布。",
+          "example": "教学例：离线恢复流程成功更多，却增加线上请求延迟；局部功能证据成立，护栏仍可能要求拒绝上线。",
+          "papers": [
+            "agent-research:harnesslens",
+            "agent-research:agentx"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "agent-research:rsi-opt",
+        "agent-research:image-rsi",
+        "agent-research:harnessmm",
+        "agent-research:oo-harness",
+        "agent-research:agent-s4",
+        "agent-research:aptamer-lab-loop",
+        "agent-research:terminal-rsi",
+        "agent-research:rsiflow",
+        "agent-research:auto-sft",
+        "agent-research:athanor",
+        "agent-research:torsi",
+        "agent-research:harmony-harness",
+        "agent-research:rsi-anything",
+        "agent-research:harness2",
+        "agent-research:memento3",
+        "agent-research:mass",
+        "agent-research:evoalloc",
+        "agent-research:sentry",
+        "agent-research:seer-forecasting",
+        "agent-research:frugalevo",
+        "agent-research:flowright",
+        "agent-research:active-saddler",
+        "agent-research:rule-evolve",
+        "agent-research:video-rsi",
+        "agent-research:meta-skills",
+        "agent-research:branch-mixture",
+        "agent-research:harness-learning",
+        "agent-research:agentx-model-replay",
+        "agent-research:sciencebuddy",
+        "agent-research:maple",
+        "agent-research:ecdysis",
+        "agent-research:cobra-skills",
+        "agent-research:procedural-graphs",
+        "agent-research:harnesslens",
+        "agent-research:jit-agent",
+        "agent-research:openloopevolve",
+        "agent-research:agentx",
+        "agent-research:scientist-one",
+        "agent-research:hyperagents",
+        "agent-research:polca",
+        "agent-research:mars-research",
+        "agent-research:self-refine",
+        "agent-research:reflexion"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较当前修订、跨trial反思、局部验证、非贪心接口种群、分层干预与有护栏生产闭环。",
+          "papers": [
+            "agent-research:rsi-opt",
+            "agent-research:image-rsi",
+            "agent-research:harnessmm",
+            "agent-research:oo-harness",
+            "agent-research:agent-s4",
+            "agent-research:aptamer-lab-loop",
+            "agent-research:terminal-rsi",
+            "agent-research:rsiflow",
+            "agent-research:auto-sft",
+            "agent-research:athanor",
+            "agent-research:torsi",
+            "agent-research:harmony-harness",
+            "agent-research:rsi-anything",
+            "agent-research:harness2",
+            "agent-research:memento3",
+            "agent-research:mass",
+            "agent-research:evoalloc",
+            "agent-research:sentry",
+            "agent-research:seer-forecasting",
+            "agent-research:frugalevo",
+            "agent-research:flowright",
+            "agent-research:active-saddler",
+            "agent-research:rule-evolve",
+            "agent-research:video-rsi",
+            "agent-research:meta-skills",
+            "agent-research:branch-mixture",
+            "agent-research:harness-learning",
+            "agent-research:agentx-model-replay",
+            "agent-research:sciencebuddy",
+            "agent-research:maple",
+            "agent-research:ecdysis",
+            "agent-research:cobra-skills",
+            "agent-research:procedural-graphs",
+            "agent-research:harnesslens",
+            "agent-research:jit-agent",
+            "agent-research:openloopevolve",
+            "agent-research:agentx",
+            "agent-research:scientist-one",
+            "agent-research:hyperagents",
+            "agent-research:polca",
+            "agent-research:mars-research",
+            "agent-research:self-refine",
+            "agent-research:reflexion"
+          ],
+          "source_revisions": {
+            "agent-research:rsi-opt": "56521f574579870f5c042e71c28f6e7014d707bfc73c9761f496a04b14c5e653",
+            "agent-research:image-rsi": "8bf2ee750308ca3ca85124eadf510b9a51de1b60643ef75558083808da9ab4e2",
+            "agent-research:harnessmm": "72105c59968fc80af570b90acf5d470ace63c9e13870f12d66597fb22d389c09",
+            "agent-research:oo-harness": "e728a40b74e6d6c5e8688c4914cbb6c6cf0ce56ce1056b226195290a6cef83fb",
+            "agent-research:agent-s4": "594db9848f5821ac8ce76c6887c74633984fd8cd104c7170db1b157e4eb0a44f",
+            "agent-research:aptamer-lab-loop": "04537c56a0fd0380f330a5c30d1868004883a188206430f491172cf5e9309c9a",
+            "agent-research:terminal-rsi": "58c517c2805cbeadbe7f1b5cae04634c172ffb1ade964b5b0dbbd709c8831056",
+            "agent-research:rsiflow": "1b4c11a1a6d3b214da0926c4be00470901621ed0dd2ba6f636fb8ad1eb8928e4",
+            "agent-research:auto-sft": "13690aa171c879d50295fc095b55ff00d794c599e52bb02d84c01ccf628cce61",
+            "agent-research:athanor": "5b06c0a401676a58a36eae5bce62ca3aee5b4ef1e1de0ba1a98960f78faf72b1",
+            "agent-research:torsi": "14959b19326a9a3486bec11a496cc21fc28c659ffb1251462af06b37d673856c",
+            "agent-research:harmony-harness": "5abfb13a9e993a3c4e78784eec05ec75cccbe24148be64f01e2a71c3f174b520",
+            "agent-research:rsi-anything": "1a7c140e88bff0cdbcd3693f6f23a316fc748ce6ed0745efb7dbf74c73985a97",
+            "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a",
+            "agent-research:memento3": "01c4eb08c1db97beac5a32463168dd65e8aeb5a51d6cb4e4f692d2e4ae3dd520",
+            "agent-research:mass": "58c632fe8941cdcda8a3869464e5753fb8681a4b1bcfdfd4ada4f1a771e3096a",
+            "agent-research:evoalloc": "f4312d0c743a145f4d388b9d5c203325cec849ee3c2bb74c3df54731db7604dd",
+            "agent-research:sentry": "d2b7c8739c2fd65e2e254ac197bd1148eaa0749d80ddf4ecf1fe04b6e44f58ee",
+            "agent-research:seer-forecasting": "451090438577f89b613e97f7e8d1ad1d7e33d718bb3f0eba992d505514d1da69",
+            "agent-research:frugalevo": "23347ceb5ba34f1dc315c580bbf7b9951de23b79838d6dab5ce16a45785dba57",
+            "agent-research:flowright": "8910a946b82b89796ffe598fc00eab8fbb0cf967dddd5b27a6748321472f48a6",
+            "agent-research:active-saddler": "ac067a466b99868dd7fc654ddc8f488c67dc824976361b7e3c6500fa32b16bf6",
+            "agent-research:rule-evolve": "b10625a0f3067aaa153ce3df2e6c4f5ba7357dc201b59e2d5d5f383d248b6913",
+            "agent-research:video-rsi": "8756a87be960f72b7135f1f28eaeac42a03888e2c1ed845216f9ae9d14d1365a",
+            "agent-research:meta-skills": "61da70af1940e0bdb8f14d59d99c39a5c078c48fc6313b828ed5bab1a5afe466",
+            "agent-research:branch-mixture": "9ff8da85697148392d76e9ba8301b0e6aee0b59036dafe81260a42a2c8f27736",
+            "agent-research:harness-learning": "218f43e9fe5ba8148425f610a156bfd8b37796963e220058d8f56bbd3273b8f9",
+            "agent-research:agentx-model-replay": "08d2c398ff19e1fbd9cb60afd67f9454809b2a4a167da8bd7d422aae7d9c3ee0",
+            "agent-research:sciencebuddy": "b60ba6af53eb1e9849108f395313211214607686ad5c98fa51482a9a1bdef737",
+            "agent-research:maple": "d59714b8696cf77cc00f78944c7b04289f265e66176122506116ae4a66c97207",
+            "agent-research:ecdysis": "29d7493d0e0a846b446372c17550debe4be6a665b88dfb01e700d8380273fa94",
+            "agent-research:cobra-skills": "24d3ef159e999ae385e4dfb7c31428544164d858a2bce94e0f39ea47c4c5a582",
+            "agent-research:procedural-graphs": "a11d65443460cbb742dc3ace8b41e8c46dfab827f529b2df158e36fedb883170",
+            "agent-research:harnesslens": "3100193b7773779338fcb465a62d16395d2644032b7ca9772a236c377751ccd2",
+            "agent-research:jit-agent": "61c873cadd34684a618228a61a9b79eb84001a19504d5e5f1199bc46c072280f",
+            "agent-research:openloopevolve": "e532979559739bd86b6167ad694bee0a0de7c5a18e4f757fccc6a3cd95f03e45",
+            "agent-research:agentx": "001851227fa1f4608b813fb7c96f9a8ab1d1763d48a861e200c6aa44c9caf196",
+            "agent-research:scientist-one": "ea68cf997c23ac6af079225a8601259adee74beece77fac8e7cfa8fa29105e82",
+            "agent-research:hyperagents": "1979730922fe1fc814edeb47150a2a99f4321e7bb27941e59e6644a2ac5c90ec",
+            "agent-research:polca": "db81891906e0f62281f4c141732deb5f84b1aed0d7d90430a417db4a0719e6fc",
+            "agent-research:mars-research": "8ed47dabbc4068ab9a3b3f8312b6ac6696469e147d2f8787ddb4a2879ec7a05a",
+            "agent-research:self-refine": "5a1a0616bc08bfafc4cf3392fab8cdd8c8921c7917f536786d14f0d2a9f61eb3",
+            "agent-research:reflexion": "1e965361376edeaffb32977018bf433c52f7192a6a8cd44509c0730cbdc53f4d"
+          }
+        }
+      ]
+    },
+    "agent-policy-learning": {
+      "title": "交互学习：统一轨迹之后，信用和教师信息怎样分配",
+      "thesis": "Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepGPO分别利用重复状态、回报方差与命令依赖分配信用；Frontier-OPD和ASTEROID则改变教师数据怎样进入学生学习。记录成轨迹只是入口，训练目标和可见信息才定义算法。",
+      "axes": [
+        "监督单位是token、environment step、命令依赖还是专家轨迹",
+        "局部信用依赖状态重复、随机回报还是可信tracer",
+        "教师只提供分布/短桥，还是完整成功episode",
+        "特权信息处在训练侧还是部署输入中"
+      ],
+      "comparisons": [
+        {
+          "paper": "agent-research:agent-lightning",
+          "position": "将执行记录为统一MDP transition，解耦训练与执行，再接入credit assignment。",
+          "tradeoff": "统一接口不指定所有信用算法；本地只更新受控patch policy，没有对LLM运行LightningRL。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:gigpo",
+          "position": "完整轨迹组产生macro优势，相同anchor state的跨轨迹step组提供micro相对优势。",
+          "tradeoff": "依赖可信状态对齐和足够重复；本地以共享计划步骤代理anchor，不是实际环境状态合流。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:adastep",
+          "position": "用动作间解释的回报方差比例调节局部优势，动作内后续波动大时降低局部修正。",
+          "tradeoff": "不另训critic，但需要同锚多动作与重复样本；本地合成回报只检验估计方向，没有策略更新。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:depgpo",
+          "position": "从verifier资源向命令读写依赖反追，给直接/间接写入和支持读取分信用，并保持token加权优势均值。",
+          "tradeoff": "依赖真实tracer和verifier资源清理，不从shell文本猜依赖；本地手工命令诊断非Terminal-Bench训练。",
+          "sections": [
+            "背景与主要改动",
+            "公式与关键区别",
+            "复现边界与下一步"
+          ]
+        },
+        {
+          "paper": "agent-research:frontier-opd",
+          "position": "轨迹平衡聚合有符号师生分歧来挑介入状态，短教师桥加学生续跑经等长agreement门后仅桥响应入训练。",
+          "tradeoff": "排名不是接纳、agreement不是成功率，验证续跑不进入训练池；本地A100只验L1数值协议，完整训练高成本。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "agent-research:asteroid",
+          "position": "学生先收探索历史，再在同隐藏任务收专家完整成功轨迹，训练学生据自身历史预测专家动作。",
+          "tradeoff": "BAMDP跨episode与一般POMDP takeover不可混用；本地是单步三门、真实小模型训练诊断，非多步机器人能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "保留的定义机制与缩小边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "局部信用的来源决定何时能相信它",
+          "body": "GiGPO通过同锚状态中的动作回报比较补充全局优势；AdaStep进一步问差异有多少来自动作，有多少来自同动作后的随机路径。DepGPO不依赖同状态重复，而以文件、stdout和verifier资源的实际依赖提供另一种结构线索。三者不是可互换的“每步reward”：没有可信状态或tracer时，细粒度数字再多也不增加证据。Agent Lightning的统一transition有助接入，但不能自动补全这些条件。",
+          "papers": [
+            "agent-research:gigpo",
+            "agent-research:adastep",
+            "agent-research:depgpo",
+            "agent-research:agent-lightning"
+          ]
+        },
+        {
+          "title": "教师改变数据来源，不应改变部署可见世界",
+          "body": "Frontier-OPD在学生访问状态中选择短介入，接纳需比较实际桥长加续跑的同长窗口，且只把教师桥响应加入训练。ASTEROID在学生探索历史之后提供同隐藏任务的完整成功episode，使训练覆盖专家顺利开局之外的上下文。两者都利用教师，却采不同单位和目标；部署侧仍只能用公开观察与自身历史，不能为了方便重放把隐藏任务、gold或未来结果加进actor。",
+          "papers": [
+            "agent-research:frontier-opd",
+            "agent-research:asteroid"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "local-credit-evidence",
+          "question": "同一动作之后的成败差很大时，GiGPO、AdaStep与DepGPO为什么需要不同的判断材料？",
+          "answer": "GiGPO先在相同anchor中比较动作的局部回报；AdaStep再用动作内与总方差衡量局部差异是否可信，后续随机性高就压低修正。DepGPO则看命令产生的文件和数据是否沿依赖到达verifier，不直接用同动作方差。应按环境是否有可信重复状态或tracer选择证据，不能用合成anchor代替真实状态后宣称公平胜负。",
+          "example": "教学例：相同查询后有的轨迹答错，可能是后续写作波动；终端任务则可检查某个写文件命令是否真的供最终测试读取。",
+          "papers": [
+            "agent-research:gigpo",
+            "agent-research:adastep",
+            "agent-research:depgpo"
+          ]
+        },
+        {
+          "id": "bridge-versus-successful-episode",
+          "question": "Frontier-OPD的教师桥与ASTEROID的成功专家轨迹，为什么不能统一成“当前状态打一个专家标签”？",
+          "answer": "Frontier-OPD用短桥改变后续可达轨迹，再以桥加学生续跑的等长agreement比较决定是否收教师响应；ASTEROID让学生探索历史成为条件，再学习同任务完整专家episode，BAMDP还跨episode保持隐藏任务。二者的上下文、收集单位和接纳条件不同，单步标签会抹去各自定义性机制。",
+          "example": "教学例：教师帮学生越过一步阻塞后交还控制，与学生试错两次后读一整段成功专家示范，不是同一种训练样本。",
+          "papers": [
+            "agent-research:frontier-opd",
+            "agent-research:asteroid"
+          ]
+        },
+        {
+          "id": "transition-log-versus-actual-update",
+          "question": "把Agent Lightning的transition记录接上GiGPO或Frontier-OPD，什么时候才算真正完成训练集成？",
+          "answer": "记录必须能提供算法实际需要的状态、采样策略和合法监督，训练器还要按对应优势或蒸馏目标执行参数更新并评价。GiGPO需形成有效anchor组，Frontier-OPD需保留原历史、有效桥与训练池边界。只有方法名、计数或callback存在不够；本地受控patch更新与L1协议检查也不能冒充LLM策略训练。",
+          "example": "教学例：日志有一千条动作，但没有同状态关联或冻结师生概率，既无法直接算micro优势，也无法真实接纳教师桥。",
+          "papers": [
+            "agent-research:agent-lightning",
+            "agent-research:gigpo",
+            "agent-research:frontier-opd"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "agent-research:frontier-opd",
+        "agent-research:asteroid",
+        "agent-research:rsipo",
+        "agent-research:evo2",
+        "agent-research:race",
+        "agent-research:depgpo",
+        "agent-research:adastep",
+        "agent-research:graphhca",
+        "agent-research:dr-credit",
+        "agent-research:dependency-refinement",
+        "agent-research:harness-bandit",
+        "agent-research:t1-terminal-rl",
+        "agent-research:multi-harness-rl",
+        "agent-research:ace-data",
+        "agent-research:spo-plus-plus",
+        "agent-research:ahead",
+        "agent-research:autosaddler",
+        "agent-research:agent-g2",
+        "agent-research:auso",
+        "agent-research:sapo",
+        "agent-research:spade",
+        "agent-research:rtpo",
+        "agent-research:planpo",
+        "agent-research:trca",
+        "agent-research:sinkflex-rl",
+        "agent-research:residency-rl",
+        "agent-research:envace",
+        "agent-research:cipo",
+        "agent-research:agent-opsd",
+        "agent-research:state2state",
+        "agent-research:ocsd",
+        "agent-research:evoharness-rl",
+        "agent-research:hindsearch",
+        "agent-research:tapo",
+        "agent-research:grsd",
+        "agent-research:cast",
+        "agent-research:seed",
+        "agent-research:turn-opd",
+        "agent-research:steppo",
+        "agent-research:searl",
+        "agent-research:simula",
+        "agent-research:dmast",
+        "agent-research:pearl",
+        "agent-research:agent0",
+        "agent-research:agent-r1",
+        "agent-research:mua-rl",
+        "agent-research:agent-lightning",
+        "agent-research:webagent-r1",
+        "agent-research:gigpo",
+        "agent-research:ragen",
+        "agent-research:deepresearcher",
+        "agent-research:search-r1",
+        "agent-research:loop"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较transition接入、状态组信用、方差可靠性、命令依赖与两种教师数据机制，明确训练和部署信息边界。",
+          "papers": [
+            "agent-research:frontier-opd",
+            "agent-research:asteroid",
+            "agent-research:rsipo",
+            "agent-research:evo2",
+            "agent-research:race",
+            "agent-research:depgpo",
+            "agent-research:adastep",
+            "agent-research:graphhca",
+            "agent-research:dr-credit",
+            "agent-research:dependency-refinement",
+            "agent-research:harness-bandit",
+            "agent-research:t1-terminal-rl",
+            "agent-research:multi-harness-rl",
+            "agent-research:ace-data",
+            "agent-research:spo-plus-plus",
+            "agent-research:ahead",
+            "agent-research:autosaddler",
+            "agent-research:agent-g2",
+            "agent-research:auso",
+            "agent-research:sapo",
+            "agent-research:spade",
+            "agent-research:rtpo",
+            "agent-research:planpo",
+            "agent-research:trca",
+            "agent-research:sinkflex-rl",
+            "agent-research:residency-rl",
+            "agent-research:envace",
+            "agent-research:cipo",
+            "agent-research:agent-opsd",
+            "agent-research:state2state",
+            "agent-research:ocsd",
+            "agent-research:evoharness-rl",
+            "agent-research:hindsearch",
+            "agent-research:tapo",
+            "agent-research:grsd",
+            "agent-research:cast",
+            "agent-research:seed",
+            "agent-research:turn-opd",
+            "agent-research:steppo",
+            "agent-research:searl",
+            "agent-research:simula",
+            "agent-research:dmast",
+            "agent-research:pearl",
+            "agent-research:agent0",
+            "agent-research:agent-r1",
+            "agent-research:mua-rl",
+            "agent-research:agent-lightning",
+            "agent-research:webagent-r1",
+            "agent-research:gigpo",
+            "agent-research:ragen",
+            "agent-research:deepresearcher",
+            "agent-research:search-r1",
+            "agent-research:loop"
+          ],
+          "source_revisions": {
+            "agent-research:frontier-opd": "6f2ace5a3dd6594cb138b071583ec0d369a684936496168478a0850dc7b61f4b",
+            "agent-research:asteroid": "28bc580348b6037fb4ba276294f12befb70925e9efc8f23757a060e512d0226b",
+            "agent-research:rsipo": "acea59f0231c41a1b74cdde86a27d21eddf51163dc48d5ac8849807dd776ed69",
+            "agent-research:evo2": "beba06642bcc77ada8de20a53169ac3adca988e276f30f8f53d330f5bcabebfe",
+            "agent-research:race": "6e37519d1dba41f961aa5a801c1fa51bca1074eaaa18be55aea5ed85d470d398",
+            "agent-research:depgpo": "b7c6c29e82f4406273e531290a38874af5065c678f833476e7b90a26e0cedb0f",
+            "agent-research:adastep": "ecd6aa135b7917da58b2a2462f158635f1f5e6930f9b389d9db69e00252ba093",
+            "agent-research:graphhca": "6f61ccf38c84d0b8cd2393f0b4b8df1151a1984a56448307390ff8128d32cc20",
+            "agent-research:dr-credit": "57f0b8ad6d5f218d33ee5f2133d0e88ce5f6c3aef61fdca7f4167d8a74d9a2f0",
+            "agent-research:dependency-refinement": "02c439122a4f8bc315fc8a9782f7e90bb29286dbd85e69d284cf68618856cef8",
+            "agent-research:harness-bandit": "e79d825a83fef831d78335941a056c13d2abcb9cfdc27c94012a366b7ca6773b",
+            "agent-research:t1-terminal-rl": "9601e5721f17d528aa4f1a5fda145c8406ebe0c90e4b964f76f2684f72f5d4fc",
+            "agent-research:multi-harness-rl": "3ceb05eb5ffa6d3e5a8d72ffe4fe4a63b8e1651e12f7a0f9ecb0cc1b896f2cc8",
+            "agent-research:ace-data": "b040c674fb72f33298e61d32031fab4195c59d176dda775b8b878cd21d182b5a",
+            "agent-research:spo-plus-plus": "ffbef44f110a5d873a941bab9e502c803721f3afbc1f2f8110c401bde06c4a77",
+            "agent-research:ahead": "97a635510babdc2af813b8f887bf3bb03d492bfe6da41e962ad8e977f8b28af6",
+            "agent-research:autosaddler": "3684d142fc535e160bbfcd6db3464a660c503fdae1485214e0904daa1eab2a0a",
+            "agent-research:agent-g2": "9e66b96b1559711cb8a03d69582a829fb88500d7452e558cc334c976e77aab76",
+            "agent-research:auso": "b6c9cf92eb8f0be4583cf4a3a42d9dea4ef6d03e591b17566899aefd79e1fb4a",
+            "agent-research:sapo": "940238f0802ce73643018e1b55586e1942b226628d78a2858550907689825044",
+            "agent-research:spade": "9532f0f0201fae2239a769a6a3c914760dcf84361de82bf97da88fb9c7a05109",
+            "agent-research:rtpo": "1e977e33446db09466aa35d5c00a779bf6a8eb633ccf81cea1851c076154277f",
+            "agent-research:planpo": "f9cebfaa4ec6b250e6bb31d6e3674611243fb626584c2a229ca104da2dc166e7",
+            "agent-research:trca": "57d92ca897c3a6715c0d87edea07264d572f7a15291a1038ba46eb8a29f35757",
+            "agent-research:sinkflex-rl": "8bc4130f79130b521dc86267e7dd9894f5ba433c990eba8780bc747c53d591ea",
+            "agent-research:residency-rl": "235a88c275f1dac162df7e2d5e3dc4b93feaa4a80783102bfd9d89d6f170ff90",
+            "agent-research:envace": "2245b4f0310f733865ddb9674760671c1bcabbb3de7c9a45dc731247a6ed046b",
+            "agent-research:cipo": "82d05f81759c56ff6a43f9052f3adcc679def8e8050d4a822802401014d9d38f",
+            "agent-research:agent-opsd": "0536dc6e5f15a5b29246ea5da856944bf56586124eee4c18a29becfd582b9f3c",
+            "agent-research:state2state": "d97652bcf5c4a609fa1e35c17d3fc867b87cf26c1cd2f5cdc3917bfcdc565d4c",
+            "agent-research:ocsd": "1fa80d2626aa960a0a7c0877107c87d39e8111db26e9b6bf9a1e7d5498b8e615",
+            "agent-research:evoharness-rl": "b25ea2702d7d30534b6c901fa32ee423921d9cf6b9d912177338671545ea1a51",
+            "agent-research:hindsearch": "e86fae976d8b18e8b202e29c91e046035ee7498b3bfbfe998ba8205f0c9a7d26",
+            "agent-research:tapo": "afb2899402091db9852fb612fe622620e5fd24dd27901603ff85c96bdbe1da46",
+            "agent-research:grsd": "14138580df9fd3400d70cc5f7a56bcf4c4792601cc982c659014c1ac14b85211",
+            "agent-research:cast": "06de8bf9c9c2f2757c2be0b66136e944509865dd64dc59522c3ebb0800b571aa",
+            "agent-research:seed": "dbcbefae8f3fc39076018a17ac10dfcbb4819735c82dc1399895bf1998c99f9c",
+            "agent-research:turn-opd": "d733b3f53c8bfa0e3a9b93fe8ccc61bc7a793ceb17a144b18630ab6f2c3f14e5",
+            "agent-research:steppo": "3c5a82b66c6bcb85bd3176106e903cf68a3661e6d3c4d65e092ede759b9d8630",
+            "agent-research:searl": "0ef0bbbb781dd49f0a645e80af9396f8b8bcaf3878fa24a066c5a9187c711948",
+            "agent-research:simula": "c637d1ed7ed0b2116935125162e6ed0bbc557576d7b6fde9939d5b9e4e3eee8e",
+            "agent-research:dmast": "8fe536ebe2d259ea026f4597cc2f2885da2004b0e4c5fbbbdcd0c10ee1e1f0ed",
+            "agent-research:pearl": "532b148015bbbd2de06c926b5a15312dd5363cd425850d51adf04f4c408892d9",
+            "agent-research:agent0": "07547534243fdc256d9ba8ed5e9a24aa9c2f44459648bcc304a50c656a431975",
+            "agent-research:agent-r1": "3755158ee3892bb7fe18b0f06fed107252e4256b2ee532c671a1ff54fe605c8e",
+            "agent-research:mua-rl": "1cecc56db59011b1cd8bb4772f57f1c5f0c5744258a89300acccf74dd4e22662",
+            "agent-research:agent-lightning": "88baa5a31b38f5ab1099242151d513f0dafe5340c3852e144e001321ae05fc66",
+            "agent-research:webagent-r1": "9ff823af344f6529700f8e0adf4320a852f3348c06207df5201a71569c2c61ea",
+            "agent-research:gigpo": "04e545cea1c7a5927b091ffd5108a2d424a1af6d1d473e9ecf5a3c0af5894075",
+            "agent-research:ragen": "380004007b9778e401a42905aaf4331a6f16d43bc391e371a934bc633cd85c1d",
+            "agent-research:deepresearcher": "304ce8915140f3bc11fec646f4063c317393f70372ff0a916ff7140bf51b4da8",
+            "agent-research:search-r1": "94da20d367467c02698dda006661b6b4ec5e81ee3fe8241936b268c8930b5f3b",
+            "agent-research:loop": "fb686b27ba4596f2d8ec4a0c39a0700f75e3db48f4ecec24a9101e1649a259b9"
+          }
+        }
+      ]
+    },
+    "evaluation-and-reliability": {
+      "title": "评测追问四件事：完成了、稳健吗、靠什么、花多少",
+      "thesis": "GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy Bench检查用户模拟是否偷省信息获取；AlphaDiana完整记录失败与重试，HDA拆解harness涨分来源，选择性评测则约束自动裁判的错误区域。高分只有在这些协议讲清后才有可解释性。",
+      "axes": [
+        "测最终产物、输入稳健性、用户合同还是自动裁判风险",
+        "配对干预改变输入、算力或已检测捷径中的哪一项",
+        "缺失评分、重试和共享记忆是否留在分母与成本里",
+        "置信区间和证书以独立任务还是相关轨迹为单位"
+      ],
+      "comparisons": [
+        {
+          "paper": "agent-research:gaia",
+          "position": "真实工具与多模态问题以规范化短答案精确匹配、三级难度组织最终得分。",
+          "tradeoff": "最终正确不解释过程或依赖何种帮助；本地gaia-mini仅验证协议，不代表原466问题能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:agent-perturb",
+          "position": "四类输入面交叉三类扰动，只改一个目标并独立验证仍可解，再做双侧任务配对。",
+          "tradeoff": "语法有效不等于语义保真，未评分任务必须保留覆盖率和未知区间；本地算术fixture不是官方真实环境矩阵。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "真实性、gold 隔离与成本"
+          ]
+        },
+        {
+          "paper": "agent-research:user-proxy-bench",
+          "position": "把用户合同所有适用项的乘积作为UFS，单独审计用户是否在被问前泄露私有字段。",
+          "tradeoff": "任务reward不替代proxy保真，提前泄露可让任务成功但测不到主动询问；本地只验rubric与事件时序。",
+          "sections": [
+            "背景与主要改动",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "agent-research:alpha-diana",
+          "position": "以稳定逻辑样本区分attempt，保留未评分状态并累计所有重试成本，在统一政策下比较模型—Harness系统。",
+          "tradeoff": "已确认正确比例不是未知评分补齐后的真实成功率；缺成本时不报完整每成功token。本地只有合成会计协议。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "无 gold 边界与限制"
+          ]
+        },
+        {
+          "paper": "agent-research:harness-decomposition",
+          "position": "先检验配对增益，再构造人审算力匹配与捷径中和四臂，分解额外算力、已检测捷径和剩余项。",
+          "tradeoff": "中和只能覆盖已发现机制，剩余项仍可能含捷径，不能直接当迁移证据；本地只执行已测四臂统计。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现与边界"
+          ]
+        },
+        {
+          "paper": "agent-research:certified-selective-eval",
+          "position": "以任务簇bootstrap估计自动判断区域的错误率上界，证书低于预算才自动接管。",
+          "tradeoff": "依赖校准任务簇与目标自动区域，不能把轨迹数当独立样本；本地mini证书不代表论文语料覆盖或通用裁判可靠。",
+          "sections": [
+            "背景与主要改动",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "任务成功可以掩盖测量对象已经改变",
+          "body": "GAIA式终局精确答案说明交付是否匹配参考，但若模拟用户提前透露本应由Agent询问的信息，任务仍成功却少测了信息获取。User Proxy Bench因此把UFS与任务reward分开。AgentPerturb从另一方向要求输入修改仍保持目标和可求解性：故意破坏到无解再责怪Agent，也没有测到原本想测的稳健性。好评测应控制任务与可见信息，而不只让分数发生变化。",
+          "papers": [
+            "agent-research:gaia",
+            "agent-research:user-proxy-bench",
+            "agent-research:agent-perturb"
+          ]
+        },
+        {
+          "title": "配对设计之后，还要保留失败和归因条件",
+          "body": "AlphaDiana强调逻辑样本不随重试扩张，所有attempt成本都要累计，运行成功与已评分分开。HDA的四臂要求逐样本对齐、预算控制与人审中和，且先确认涨分再归因。选择性评测的簇级证书则处理另一种相关性：同任务多条轨迹不能伪装成许多独立校准样本。它们共同约束怎样解释数字，却没有把未知评分、未检测捷径或未覆盖任务自动变成已验证。",
+          "papers": [
+            "agent-research:alpha-diana",
+            "agent-research:harness-decomposition",
+            "agent-research:certified-selective-eval"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "success-versus-proxy-fidelity",
+          "question": "一个工具任务最终答对，为什么 User Proxy Bench 仍可能判该评测不合格，AgentPerturb又要求扰动后仍可解？",
+          "answer": "前者检查用户模拟是否遵守信息披露合同：没被问就给私有字段，会让Agent绕过本应展示的澄清能力。后者检查被改输入仍对应相同目标且可执行可求解，避免把无解任务冒充稳健性下降。终局准确率只看交付，两种协议分别约束帮助是否过量与破坏是否过量。",
+          "example": "教学例：订单号应先询问，模拟用户开场直接给出会偷省步骤；反过来删掉订单号却禁止澄清，也不能公平要求Agent完成。",
+          "papers": [
+            "agent-research:gaia",
+            "agent-research:user-proxy-bench",
+            "agent-research:agent-perturb"
+          ]
+        },
+        {
+          "id": "missing-pairs-and-retries",
+          "question": "扰动侧grader失败、干净侧正确，还有两次重试时，AgentPerturb与AlphaDiana会怎样防止“越失败分越好看”？",
+          "answer": "AgentPerturb只在双侧已评分的相同任务对计算配对差，同时保留全部请求的覆盖率和未知上下界，不静默删掉未测对。AlphaDiana让重试仍属同一逻辑样本，采用最新记录而非最好记录，所有已知attempt成本累计；评分或token缺失时不伪造完整成功成本。",
+          "example": "教学例：三次尝试花了很多token，最终grader中断；不能只保留先前一次成功，也不能把中断样本从请求分母里删掉。",
+          "papers": [
+            "agent-research:agent-perturb",
+            "agent-research:alpha-diana"
+          ]
+        },
+        {
+          "id": "gain-attribution-versus-risk-certificate",
+          "question": "HDA中和已检测捷径后仍涨分，与选择性评测的错误率证书通过，为什么是两种不同结论？",
+          "answer": "HDA比较四臂结果，剩余项是扣除已检测捷径和算力解释后的部分，仍可能含未知捷径，不能直接证明迁移。选择性证书则在校准任务簇上约束某个自动判断区域的错误上界，不解释某个harness为什么涨分。前者是收益来源分析，后者是判断接管条件，都需保留任务范围和统计单位。",
+          "example": "教学例：裁判在某区域的误判上界达标，不说明Agent提升来自推理；移除一种捷径后仍有效，也不保证裁判在新域同样可靠。",
+          "papers": [
+            "agent-research:harness-decomposition",
+            "agent-research:certified-selective-eval"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "agent-research:physical-engineering-exam",
+        "agent-research:scope-replay",
+        "agent-research:tool-bottleneck-bench",
+        "agent-research:shortcut-sensitivity",
+        "agent-research:scipivot",
+        "agent-research:probe",
+        "agent-research:librarian-agents",
+        "agent-research:harness-decomposition",
+        "agent-research:gacc-bench",
+        "agent-research:disagreement-routing",
+        "agent-research:agent-perturb",
+        "agent-research:ctxgap",
+        "agent-research:coda",
+        "agent-research:alpha-diana",
+        "agent-research:clasharness",
+        "agent-research:option-channel-attack",
+        "agent-research:ontrack",
+        "agent-research:specguard",
+        "agent-research:veriharness",
+        "agent-research:safe-self-improvement",
+        "agent-research:pace-capability",
+        "agent-research:defa",
+        "agent-research:user-proxy-bench",
+        "agent-research:certified-selective-eval",
+        "agent-research:harness-design-study",
+        "agent-research:fuse-evaluator",
+        "agent-research:silr",
+        "agent-research:redevoagent",
+        "agent-research:spec-driven-tests",
+        "agent-research:harnessopt-bench",
+        "agent-research:os-shepherd",
+        "agent-research:finance-harness-protocol",
+        "agent-research:agentdebugx",
+        "agent-research:logact",
+        "agent-research:tfrbench",
+        "agent-research:convapparel",
+        "agent-research:causal-armor",
+        "agent-research:airs-bench",
+        "agent-research:lifeagentbench",
+        "agent-research:coreflect",
+        "agent-research:sopbench-protocol",
+        "agent-research:gaia",
+        "agent-research:autoformbench"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较终局能力、单目标扰动、用户合同、失败重试会计、四臂归因与簇级选择性证书。",
+          "papers": [
+            "agent-research:physical-engineering-exam",
+            "agent-research:scope-replay",
+            "agent-research:tool-bottleneck-bench",
+            "agent-research:shortcut-sensitivity",
+            "agent-research:scipivot",
+            "agent-research:probe",
+            "agent-research:librarian-agents",
+            "agent-research:harness-decomposition",
+            "agent-research:gacc-bench",
+            "agent-research:disagreement-routing",
+            "agent-research:agent-perturb",
+            "agent-research:ctxgap",
+            "agent-research:coda",
+            "agent-research:alpha-diana",
+            "agent-research:clasharness",
+            "agent-research:option-channel-attack",
+            "agent-research:ontrack",
+            "agent-research:specguard",
+            "agent-research:veriharness",
+            "agent-research:safe-self-improvement",
+            "agent-research:pace-capability",
+            "agent-research:defa",
+            "agent-research:user-proxy-bench",
+            "agent-research:certified-selective-eval",
+            "agent-research:harness-design-study",
+            "agent-research:fuse-evaluator",
+            "agent-research:silr",
+            "agent-research:redevoagent",
+            "agent-research:spec-driven-tests",
+            "agent-research:harnessopt-bench",
+            "agent-research:os-shepherd",
+            "agent-research:finance-harness-protocol",
+            "agent-research:agentdebugx",
+            "agent-research:logact",
+            "agent-research:tfrbench",
+            "agent-research:convapparel",
+            "agent-research:causal-armor",
+            "agent-research:airs-bench",
+            "agent-research:lifeagentbench",
+            "agent-research:coreflect",
+            "agent-research:sopbench-protocol",
+            "agent-research:gaia",
+            "agent-research:autoformbench"
+          ],
+          "source_revisions": {
+            "agent-research:physical-engineering-exam": "9be812a11a5fdd73a4e84b9f22d2056c01b63c208023b72da975fd07e18cd470",
+            "agent-research:scope-replay": "5f76e07f404cf9451f8d458b7a984d2ff35e45f0b7c1b7fb46357307539d6125",
+            "agent-research:tool-bottleneck-bench": "d431c9b616dce17302c97896f2be14748b1e557dbdf863c3cb532317855ecb2d",
+            "agent-research:shortcut-sensitivity": "295cfb06128226eddc4e91115c370eea48ea4e36dba1f2d4feb3316996f41f0e",
+            "agent-research:scipivot": "62e19ea6e3579caec3f44b18de4211e9b5c0dbbbb5f29195eba5a32414027cff",
+            "agent-research:probe": "4b9e4a22dc1d386ecf2b231bcfa47bb915e4950b10a91f26130ca89231702cf7",
+            "agent-research:librarian-agents": "ad32dec9a3d6778b96dabc8a861d6c0a267bfb8604c83a597f5c5041349cd9e3",
+            "agent-research:harness-decomposition": "3e958ef2680b1a4b6a7c57c911bc5600f76f049dea860a42b502bb3e378958ae",
+            "agent-research:gacc-bench": "6957d1e473ae877270ea4bf20d7ddc95a6468baebf190b7439dc620d349c685b",
+            "agent-research:disagreement-routing": "04239496a21cb8584b5ecdb822e45cfffc99a36fda7ae662e5afc2e0deac0056",
+            "agent-research:agent-perturb": "48a9e1dc9ba05b73631fee28a656c334e3f3d207d76bb6e1b08f3dee0110b68b",
+            "agent-research:ctxgap": "ed66b5cd42504e543e7a2e43357d7d115de5a60da44bd7f6ee9adb9c733eeb99",
+            "agent-research:coda": "528cc58baecfba2f9191af79cb0b5f150820fa708f327e140f94c09a5d8084f0",
+            "agent-research:alpha-diana": "c66acec6eec8038a9b92932f6a68ac617cb883ba925aa1ac565adf372878e093",
+            "agent-research:clasharness": "1fe2721aea3354e0a1d889a970a1b34c549ea789bde7bce1e4d2e67453e244e6",
+            "agent-research:option-channel-attack": "e3bed2e957d08d768de8ec5883c6b17716d118ce1f5821976d7d0561625e8a93",
+            "agent-research:ontrack": "de1d55333e3bcdbe8bfa0041c2bb81aaeffb8acbeff3628edf81e555f77e6f62",
+            "agent-research:specguard": "064bda5a9497af70fbd8ed07f235b6d0f636cfb520664587cf08187060a7cdb5",
+            "agent-research:veriharness": "a18cc1d28ba3f2ab4324260bb218030efd5472b270f49b66ca66f5979eb2906b",
+            "agent-research:safe-self-improvement": "6a5fc09f9c5fbc4d6936b5b2cada0b12d29576be9073a90079e42458232ffc0f",
+            "agent-research:pace-capability": "a48c56a24930ec4256724bb1f388fcd1726c008c414ff9080ecb70c2229189ec",
+            "agent-research:defa": "da67b53d4ed0334cacc866bfa0c4487649b4587f204d9cb060dacef6074fb722",
+            "agent-research:user-proxy-bench": "d415873cbb379260c87b230a4bb250b67bed3f628ff32b671bb68e71b2ceb4b3",
+            "agent-research:certified-selective-eval": "4c92b23970fc4ef39d114d11c69df0fe8556fb651ed38e70b25c9b67084eb89f",
+            "agent-research:harness-design-study": "483c491b2466840aad3a42570b02158a0b96a0b93e0aef484999546b50d8110f",
+            "agent-research:fuse-evaluator": "d671cea8c8daefd92800ec9b34b94b2f627505aa4b348240afd5d4a99300ef11",
+            "agent-research:silr": "40c1a66247e08d4176a4a21f0656b17ba1babe39004f0c9d98f13379ec819d78",
+            "agent-research:redevoagent": "307c8890d0b36d94ab59d687674e42eebfa235d4e953ec921d2ccc38e8afc288",
+            "agent-research:spec-driven-tests": "ae535433885ba901b23ab5ac4e752d743478fca02ded6aa759ee5772d3b5bfdc",
+            "agent-research:harnessopt-bench": "52fd7489d4d25dfeed4fbdf6a4d9bd5572072230e2c36856921dbec46beb3cec",
+            "agent-research:os-shepherd": "bbd2d836b65628b3d83a130ec0d713f41ff38acfa574a2ee1aa755d3aa359764",
+            "agent-research:finance-harness-protocol": "63b49b05e79774f196612eac39db7fdf1944f622b2c7fb1f5d7c84673323674b",
+            "agent-research:agentdebugx": "4a68edeca9208cb293cd3cf72fdd03c7c88a30f5ceba711029407c6670c79391",
+            "agent-research:logact": "8c8c777db9ff96d147d7b42ee801bcad241419025ea9e91d5f959eb5af77a3e1",
+            "agent-research:tfrbench": "14f63418841921c9307118bb5f34fd2fc9fec8bb80512c9dd63e94406ddc85b3",
+            "agent-research:convapparel": "f84b588948c64d907f92dd1542540ef90f3939c767151cf9b1ca7cd3e905811a",
+            "agent-research:causal-armor": "af465c7296fac2946ba356f2ddd5966ea8a03631a80b220e973eb31ca62ff235",
+            "agent-research:airs-bench": "d2d21e40dbddc4be11f4b58ceb119b5d69cfc65193b9316e5f149ffccacedbc3",
+            "agent-research:lifeagentbench": "7a7deeed76309c66ad3d31cd388d0ece48a8aaa008917b0db05886b0f69a7d5a",
+            "agent-research:coreflect": "39406e0c3fad5590163b0f28a0b9272f3b22206811b7d0273c7d1ca692576707",
+            "agent-research:sopbench-protocol": "e9d9eab6b7dfa21d5b810b8d233ddb1f9f49771026ce3a05aae6c920b9ba941d",
+            "agent-research:gaia": "d8d18cafe45824ad6fa4841b6479dcba2a378c11b88c2ae895ce595192a50d1f",
+            "agent-research:autoformbench": "d2def41af1f87f010b9cdb0af70cfbc37250c2bd29b3478882c086f0bbc531ec"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -2,25 +2,21 @@
   "recommendation:hstu": {
     "summary": "HSTU 在输入窗口内逐层更新历史 token，用因果交互建模行为之间的依赖。学习重点是把历史首算成本与 M-FALCON 缓存后的多候选增量成本分开。",
     "local_scope": "本地为核心层与 all-position 训练的缩小实现，未复刻异构 action/time、Stochastic Length 或 M-FALCON。MovieLens-100K 的三 seed 结果仅适用于匹配 SASRec 的本地协议，不能外推到工业系统。",
-    "question": "有 M-FALCON 缓存后，哪些历史计算可以共享，哪些候选路径仍要重算？",
-    "curated_path": "learning/001-hstu-longer-slimper.md"
+    "question": "有 M-FALCON 缓存后，哪些历史计算可以共享，哪些候选路径仍要重算？"
   },
   "recommendation:longer": {
     "summary": "LONGER 先以 Token Merge 合并相邻行为，首层用少量 Query 读取长 K/V，后续沿短序列继续 self-attention。学习重点是区分合并输入和压缩查询这两步。",
     "local_scope": "当前本地 encode 拼接 global/merged/recent 后做单层 self-attention，尚缺论文的首层短 Q/长 K/V hybrid attention 路径和 causal mask。历史实验不作为该核心路径或生产缓存的验证。",
-    "question": "首层之后，模型还能否直接重新读取完整长 K/V？",
-    "curated_path": "learning/001-hstu-longer-slimper.md"
+    "question": "首层之后，模型还能否直接重新读取完整长 K/V？"
   },
   "recommendation:rankmixer": {
     "summary": "RankMixer 用固定的多头 TokenMix 让不同 feature token 的分量相遇，再由各 token 独立的 FFN 学习组合。这里替换的是异构特征交互模块；上游长序列模块仍可使用 attention。",
     "local_scope": "本地只有 seed 42 的 smoke。Shared FFN 与 Dense per-token 都含 TokenMix，且参数量不同，不能据此验证 TokenMix 优于 attention。Sparse 没有追平 Dense，当前路由与原文双 router DTSI 仍有差异。",
-    "question": "TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？",
-    "curated_path": "learning/002-rankmixer-tokenmix.md"
+    "question": "TokenMix 没有可训练参数，整个模型为什么仍能学习特征关系？"
   },
   "recommendation:slimper": {
     "summary": "SlimPer 每层用固定槽位的 user-item 知识库查询用户 token 池，执行 Select–Match–Refine。用户池保持可读，精炼层之间只传播小知识库；输入编码仍可带局部上下文。",
     "local_scope": "本地只在短历史 MovieLens 上验证缩小机制；NDCG@10 +1.29% 仅为 seed 42 的 smoke，未实测生产 QPS 或显存。ROO 共享用户编码，候选相关知识库仍逐候选更新。",
-    "question": "为什么用户 tokens 能共享，但 knowledge base 的更新结果不能全部共享？",
-    "curated_path": "learning/001-hstu-longer-slimper.md"
+    "question": "为什么用户 tokens 能共享，但 knowledge base 的更新结果不能全部共享？"
   }
 }

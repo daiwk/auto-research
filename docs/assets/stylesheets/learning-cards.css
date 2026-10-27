@@ -364,6 +364,85 @@
   font-variant-numeric: tabular-nums;
 }
 
+.ar-learning-topic-tile li > span {
+  flex-shrink: 0;
+  text-align: end;
+}
+
+.ar-learning-deep-link {
+  display: block;
+  font-size: 0.68rem;
+}
+
+/* A shelf is one theme; opening it reveals a finite set of authored readings. */
+.md-typeset .ar-deep-shelf {
+  border-color: var(--md-default-fg-color--lightest);
+  box-shadow: none;
+}
+
+.md-typeset .ar-deep-shelf > summary {
+  background: var(--md-code-bg-color);
+}
+
+.ar-deep-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  padding-top: 0.6rem;
+}
+
+.ar-deep-tile {
+  min-width: 0;
+  padding: 0.8rem;
+  border-inline-start: 0.12rem solid var(--md-typeset-a-color);
+  background: var(--md-code-bg-color);
+  overflow-wrap: anywhere;
+}
+
+.md-typeset .ar-deep-tile h2 {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.md-typeset .ar-deep-tile p {
+  font-size: 0.72rem;
+  line-height: 1.7;
+}
+
+.ar-deep-shelf :is(a, summary):focus-visible,
+.ar-deep-catalog > summary:focus-visible {
+  outline: 0.12rem solid var(--md-typeset-a-color);
+  outline-offset: 0.15rem;
+}
+
+.md-typeset .ar-deep-comparison :is(.md-typeset__scrollwrap, .md-typeset__table) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+  padding: 0;
+}
+
+.md-typeset .ar-deep-comparison table:not([class]) {
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.md-typeset .ar-deep-comparison :is(th, td) {
+  min-width: 0;
+  padding: 0.65rem;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 1.75;
+}
+
+.md-typeset .ar-deep-comparison th:nth-child(1) { width: 28%; }
+.md-typeset .ar-deep-comparison th:nth-child(2) { width: 34%; }
+.md-typeset .ar-deep-comparison th:nth-child(3) { width: 38%; }
+
 .md-typeset .ar-learning-boundary {
   margin: 0;
   padding: 0 0.6rem;
@@ -427,7 +506,8 @@
 
 @media (max-width: 44rem) {
   .ar-learning-grid,
-  .ar-learning-topics {
+  .ar-learning-topics,
+  .ar-deep-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -435,4 +515,34 @@
   .ar-learning-featured {
     padding: 0.85rem;
   }
+
+  .md-typeset .ar-deep-comparison :is(table, tbody, tr, td) {
+    display: block;
+    width: 100%;
+  }
+
+  .md-typeset .ar-deep-comparison thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .md-typeset .ar-deep-comparison tr {
+    margin-bottom: 0.8rem;
+    border: 0.05rem solid var(--md-default-fg-color--lightest);
+    border-radius: 0.35rem;
+  }
+
+  .md-typeset .ar-deep-comparison td::before {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--md-default-fg-color--light);
+    font-weight: 600;
+  }
+
+  .md-typeset .ar-deep-comparison td:nth-child(1)::before { content: "论文与来源"; }
+  .md-typeset .ar-deep-comparison td:nth-child(2)::before { content: "机制定位"; }
+  .md-typeset .ar-deep-comparison td:nth-child(3)::before { content: "得到与付出"; }
 }

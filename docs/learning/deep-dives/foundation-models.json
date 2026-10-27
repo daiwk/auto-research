@@ -1,0 +1,1232 @@
+{
+  "schema_version": 1,
+  "theme": "foundation-models",
+  "topics": {
+    "context-and-state": {
+      "title": "长上下文不是一条轴：位置、读取与状态压缩",
+      "thesis": "先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。",
+      "axes": [
+        "历史保存为逐 token KV、递归状态还是输入相关压缩系数",
+        "当前 query 是否能回到原始细节",
+        "未读取历史是省略、摘要代理还是已写入状态",
+        "额外代价发生在训练、前向求解还是索引读取"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:rope",
+          "position": "旋转 Q/K 的二维子空间，使点积通过相对位移表达位置；它仍可配合完整注意力。",
+          "tradeoff": "解决位置表达，不负责减少历史条数或 KV 带宽；本地小模型旋转路径不证明任意长度外推。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
+        },
+        {
+          "paper": "foundation-models:mamba",
+          "position": "让步长和读写向量依赖当前 token，把历史持续折入有界递归状态。",
+          "tradeoff": "不必逐 token 保留完整 KV，但未来只能利用状态中留下的信息；本地是原生 PyTorch scan，没有论文融合内核。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:native-sparse-attention",
+          "position": "压缩块提供全局轮廓，query 选块取细节，滑窗保留近期精确信息，三路门控融合。",
+          "tradeoff": "仍需设计与训练不同读取通路；选择错误时压缩概览未必能恢复细节。本地三路可训练，不代表论文长序列吞吐。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:openattention",
+          "position": "用 query 几何聚类，按代理误差估计分配精读预算，未读簇以带计数均值代理参与 softmax。",
+          "tradeoff": "尾部没有直接清零，但均值代理仍会丢失簇内差异；ErrorGate 依赖近似假设。本地仅单头算子诊断，完整实验高成本未复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
+        },
+        {
+          "paper": "foundation-models:ttr-compressor",
+          "position": "将一组 token 当作回归观测，每次前向解正则化最小二乘，以输入相关系数表示该组。",
+          "tradeoff": "不是推理时训练参数，也不是免费池化；dual 求解含 T³ 项，只有组长远小于维度时才适合简化成本。当前为机制诊断。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "位置可表达，不等于历史可访问",
+          "body": "RoPE 决定 query 与 key 如何携带相对位置信息；即使旋转完全正确，全注意力仍需处理可见历史。Mamba 则改变历史的存储与传播方式，用状态替代逐项访问。因而“位置外推失败”和“状态没记住一个细节”是两种故障：前者不能只靠加状态容量解释，后者也不能只靠换位置编码修好。选型时应先确认任务需要精确回查，还是主要依靠可持续更新的状态。",
+          "papers": [
+            "foundation-models:rope",
+            "foundation-models:mamba"
+          ]
+        },
+        {
+          "title": "压缩之后，还留不留回到细节的路",
+          "body": "NSA 的压缩分支旁边仍有 query 条件的精细选块；OpenAttention 把预算分给精确行，并让剩余内容以 log-count 均值代理留在归一化中。TTR 则把整个组映射成回归系数，没有因此承诺逐项可逆。三者都减少某种处理负担，但细节的恢复路径不同。比较时要追踪遗漏信息去了哪里，而不能仅比较输出向量数；这里的本地公式或短训练记录也不足以排序它们的长文能力。",
+          "papers": [
+            "foundation-models:native-sparse-attention",
+            "foundation-models:openattention",
+            "foundation-models:ttr-compressor"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "position-versus-memory",
+          "question": "任务漏掉很早出现的一次性编号，换 RoPE 与换成递归状态，为什么不能视为同一种修复？",
+          "answer": "RoPE 改变位置进入 QK 点积的方式，不会自动增加原始证据的访问机会；Mamba 改变历史如何被选择性写入状态，早期编号若没有被保留下来，后续也无原始 KV 可直接查询。应先诊断是位置关系失真、历史不可见，还是状态压缩遗漏，再决定是否需要 NSA 这类保留细节读取路径的结构。",
+          "example": "教学例：合同首页只有一次订单号，末尾才提问。正确相对位置并不等于模型必然读中该处；有界状态也不保证保存每个编号。",
+          "papers": [
+            "foundation-models:rope",
+            "foundation-models:mamba",
+            "foundation-models:native-sparse-attention"
+          ]
+        },
+        {
+          "id": "tail-proxy-versus-selection",
+          "question": "NSA 选中少数块，与 OpenAttention 同时保留未读簇代理，对遗漏内容做了什么不同处理？",
+          "answer": "NSA 把概览、选中块和近期滑窗作为不同分支，门控融合其输出；OpenAttention 在精确读取部分行后，把每个剩余簇作为带数量修正的代理放进同一注意力计算。前者依靠多路覆盖，后者近似未读尾部的质量与 value；二者都可能漏掉簇内或块内关键差异，不能把未直接读取写成没有误差。",
+          "example": "教学例：一百条记录中九十九条相似，一条含例外。概览或均值都可能稀释例外，需要检查选择器能否把它送入精读。",
+          "papers": [
+            "foundation-models:native-sparse-attention",
+            "foundation-models:openattention"
+          ]
+        },
+        {
+          "id": "input-adaptation-versus-parameter-update",
+          "question": "TTR 每次输入都重新拟合，和 Mamba 每个 token 都更新状态，是否意味着模型在部署时训练了权重？",
+          "answer": "都不能这样推断。TTR 在前向内用当前组求解回归系数，目标投影与正则参数由外层训练得到；Mamba 按固定参数和当前 token 更新递归状态。变化的是输入条件表示或运行状态，不是自动执行优化器。两者成本也不同：前者有线性方程求解，后者有逐步状态递推。",
+          "example": "教学例：同一冻结模型读两段不同文本会得到不同状态和系数；这与保存一份新的训练 checkpoint 是两件事。",
+          "papers": [
+            "foundation-models:ttr-compressor",
+            "foundation-models:mamba"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:alibi",
+        "foundation-models:autonomy-heads",
+        "foundation-models:conv-llm",
+        "foundation-models:dart",
+        "foundation-models:frac-ssm",
+        "foundation-models:gated-attention",
+        "foundation-models:gzip-sparse-attention",
+        "foundation-models:hymba",
+        "foundation-models:kronlstm",
+        "foundation-models:mamba",
+        "foundation-models:memory-mosaics-plus",
+        "foundation-models:minimax-sparse-attention",
+        "foundation-models:moba",
+        "foundation-models:mobius-rope",
+        "foundation-models:ms-gla",
+        "foundation-models:naju",
+        "foundation-models:native-sparse-attention",
+        "foundation-models:oal",
+        "foundation-models:oda",
+        "foundation-models:olmpool-long-context",
+        "foundation-models:openattention",
+        "foundation-models:orthros",
+        "foundation-models:rea",
+        "foundation-models:rope",
+        "foundation-models:sas-attention",
+        "foundation-models:stratified-sparse-attention",
+        "foundation-models:switch-attention",
+        "foundation-models:transmem",
+        "foundation-models:triadic-linear-attention",
+        "foundation-models:ttcd",
+        "foundation-models:ttr-compressor"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较位置编码、选择性状态、三路稀疏读取、尾部代理与前向回归压缩，明确历史信息的保存和恢复路径。",
+          "papers": [
+            "foundation-models:alibi",
+            "foundation-models:autonomy-heads",
+            "foundation-models:conv-llm",
+            "foundation-models:dart",
+            "foundation-models:frac-ssm",
+            "foundation-models:gated-attention",
+            "foundation-models:gzip-sparse-attention",
+            "foundation-models:hymba",
+            "foundation-models:kronlstm",
+            "foundation-models:mamba",
+            "foundation-models:memory-mosaics-plus",
+            "foundation-models:minimax-sparse-attention",
+            "foundation-models:moba",
+            "foundation-models:mobius-rope",
+            "foundation-models:ms-gla",
+            "foundation-models:naju",
+            "foundation-models:native-sparse-attention",
+            "foundation-models:oal",
+            "foundation-models:oda",
+            "foundation-models:olmpool-long-context",
+            "foundation-models:openattention",
+            "foundation-models:orthros",
+            "foundation-models:rea",
+            "foundation-models:rope",
+            "foundation-models:sas-attention",
+            "foundation-models:stratified-sparse-attention",
+            "foundation-models:switch-attention",
+            "foundation-models:transmem",
+            "foundation-models:triadic-linear-attention",
+            "foundation-models:ttcd",
+            "foundation-models:ttr-compressor"
+          ],
+          "source_revisions": {
+            "foundation-models:alibi": "a206f2d5e0513cb80e61a88a2a3b362b46547c168947bc8a126bf98f8d0413fe",
+            "foundation-models:autonomy-heads": "10504b0533c56f2bdb1d2362fdddb1809a91be58d99473e4de4a97d0fcfdf676",
+            "foundation-models:conv-llm": "90d40f31121da55e257ddc9dc2b37bd5ef73f70d34dbaefe3e2cb511eef16c36",
+            "foundation-models:dart": "e36d169b608fa6aa603ed0d6d045a3b3f2ce542d63dafdd89093270d4397e8bd",
+            "foundation-models:frac-ssm": "61866f47803ad2c1471747b6bb5ee5eb600d4a48fd4004a32c36e45037126d5c",
+            "foundation-models:gated-attention": "b54fd42633e645037c90e19956176ca9de6caea33c5dd7c9e022d9311f4e5a4d",
+            "foundation-models:gzip-sparse-attention": "28aee2e24a8fdafb54798a27080bc107fad5611ae47a60bd423c2d7f4b1dbd43",
+            "foundation-models:hymba": "1ab0fcf1bfed1b26d8abe5c5e099e466263874e393daadc04ce70eb688a31980",
+            "foundation-models:kronlstm": "387884f18f41ffa0328b284f09335984f0db88d73644c6299b1313bcdaf55022",
+            "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220",
+            "foundation-models:memory-mosaics-plus": "258eb7e1c4ae0da0a3d34f4af4971180c0e924069d7a59dea385284ee29e1bb6",
+            "foundation-models:minimax-sparse-attention": "87c2e373b5fca75034a5418378e2effe300722bcc82fe142311ad0ff424e2268",
+            "foundation-models:moba": "17cef51acf498da05db6213b5512c14b55c155bc6373b4cc0a9b0c1a31817bc1",
+            "foundation-models:mobius-rope": "da5c700577e80ae4298fd3e99564f5db000a30b26a0a87e0fa4e35ec26f9e329",
+            "foundation-models:ms-gla": "4fcd907ffbdcf0da1e5642d96f214ad87c0824e96936ce6090adfccdc9dbdfa0",
+            "foundation-models:naju": "69b254a8bf182e5301d4f950e7f54ad78b011fe53a20cd0c33d0c7f973678cab",
+            "foundation-models:native-sparse-attention": "898c268fd242c42d04b47376fd00675e99ad1541453a57d858333c59c2e3e963",
+            "foundation-models:oal": "a6b07c59d41dc5f8f75f73b0a40904158c2664f97e3fd7828efef6ea416ba8cb",
+            "foundation-models:oda": "82ddf84a3275f1913cc20c53511bec215805e9e233240b8d7ba0b5943e9a0b8b",
+            "foundation-models:olmpool-long-context": "7dd5f6071190905354d8f5f503573736f77980d7b5ac258738b7853334f6fe9e",
+            "foundation-models:openattention": "ba91161b6e4f8689b0678bc76987ed0925d2d25ccb86f860f62466ee597cff6b",
+            "foundation-models:orthros": "5ee59ccac8e70d3b179b126bcd076e3cb24f4c81bda306f494f0da76e650080c",
+            "foundation-models:rea": "d2c58b7dbd76749edcf6e1a7ec5d1c161154cb5a1a35afcd7177f419e88e42ff",
+            "foundation-models:rope": "964852564f2b9b0eeb0f9bc32648346062e0332df0e647922752dc5b5bee54c7",
+            "foundation-models:sas-attention": "f610fe532c3a4701ec0167221668c0c9e272d62ffb639f982e4c873e5c8d833d",
+            "foundation-models:stratified-sparse-attention": "ae6903ea6f5a54b08cff6e6083304f714c5fb80df98fba792af9286be35885b5",
+            "foundation-models:switch-attention": "9f8955eab46af4cf9a1d47d4af3a8c4ae23605219af2294653cfe74db4f3579e",
+            "foundation-models:transmem": "51538501cca68e0878fee2e7776168e5c4d336b90f29b001f389fb6e4494cefa",
+            "foundation-models:triadic-linear-attention": "ed35a4ed5b7b19259d2e4b2c1fd095ddeef73a37c6ae2915ba05d309d275aaf8",
+            "foundation-models:ttcd": "245f6c3f7aae17e232e10aee32b36c01c5a571d000813fc15a7f3dfb53900185",
+            "foundation-models:ttr-compressor": "e9abc343a15865e7c5ee4caa9be83444b5ffbbf5179ea219aa5c974c7e1d85ce"
+          }
+        }
+      ]
+    },
+    "conditional-compute": {
+      "title": "按需算力：选择专家、跳过计算，还是查回旧知识",
+      "thesis": "参数容量、每 token 激活量与部署时延是三件事。Switch 选择计算专家，Engram 和 Memory Grafting 查局部模式；AdaDSF、Telescopic LM 与 WIDE 则分别从 token—层、整体深度和组宽度分配计算。先识别路由对象，才能讨论容量和省算。",
+      "axes": [
+        "选择的是专家、层、head/channel 组还是离散记忆条目",
+        "容量保存在可训练网络还是冻结查表值",
+        "预算按 token、层、整个请求还是部署深度约束",
+        "稀疏分支是否真的跳过内核计算"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:switch-transformer",
+          "position": "每 token 仅激活一个 FFN 专家，以稀疏计算扩大总参数容量，并用辅助项控制负载。",
+          "tradeoff": "存储、专家容量和跨设备通信仍存在；本地 top-1 MoE 未复刻容量溢出与 all-to-all。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:engram",
+          "position": "规范化 n-gram 走哈希表，查出的可训练记忆经上下文门控注入早期层。",
+          "tradeoff": "擅长存局部模式，不替代组合推理；哈希冲突与表规模仍需考虑。本地可训练查表已执行，短预算结果并非论文收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:memory-grafting",
+          "position": "用预训练模型离线编码高频短语并冻结，在线最长后缀精确命中，未命中回退 hash Engram。",
+          "tradeoff": "把一部分知识获取成本移到离线 bank，命中覆盖与接口对齐成为新条件；本地 bank 小，未验证相对 Engram 的规模增益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:adadsf",
+          "position": "用 dense teacher 的层间变化分配层预算，再由逐层 router 只处理 Top-K token，其余走残差旁路。",
+          "tradeoff": "全局活跃比例要校准，token 路由需对齐教师；活跃 token 数不等于 GPU 实测 FLOPs 或时延。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:telescopic-lm",
+          "position": "训练随机深度前缀并保留全深 anchor，让同一 checkpoint 在多个完整前缀深度可用。",
+          "tradeoff": "控制的是可部署深度，不等于每个 token 都有细粒度层路由；本地只验证随机深度和 anchor 梯度路径。",
+          "sections": [
+            "背景与主要改动"
+          ]
+        },
+        {
+          "paper": "foundation-models:wide",
+          "position": "每 token 分别选择 attention head group 与 FFN channel group，使计算粒度细于整层。",
+          "tradeoff": "需要 mask 重排和设备内 block skip 才兑现速度；本地 dense kernel 下的稀疏率不能直接当加速。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "计算专家与条件记忆，不是同一类容量",
+          "body": "Switch 把输入送到一个网络专家执行非线性变换；Engram 根据离散局部片段取表值，再由上下文判断是否使用。Memory Grafting 进一步把部分表值来源改成冻结预训练模型的离线表示。相同的“大容量、少激活”描述掩盖了不同训练对象：专家权重、联合训练记忆表和冻结 bank 需要不同维护方式。查表仍要传输和融合，不能把期望常数时间寻址理解成整个层零成本。",
+          "papers": [
+            "foundation-models:switch-transformer",
+            "foundation-models:engram",
+            "foundation-models:memory-grafting"
+          ]
+        },
+        {
+          "title": "先写清预算的单位，再谈按需",
+          "body": "AdaDSF 的层预算控制有多少 token 进入各层；Telescopic LM 使一个深度前缀整体可用；WIDE 则把某个 token 的注意力组和 FFN 组分别路由。它们可以产生相近的平均活跃比例，却有不同的数据依赖、负载和内核形状。部署中若仍执行 dense matmul 后乘零，理论省算并没有变成时延收益。选型必须把训练兼容性和实际跳过粒度一起列出。",
+          "papers": [
+            "foundation-models:adadsf",
+            "foundation-models:telescopic-lm",
+            "foundation-models:wide"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "lookup-versus-expert",
+          "question": "高频短语重复出现时，增加一个 Switch 专家与加入 Engram/Memory Grafting，分别让系统多学了什么？",
+          "answer": "Switch 增加可被 router 选中的计算函数，仍需对当前 hidden 执行专家网络；Engram 学习离散 n-gram 对应表值，Memory Grafting 则复用外部预训练模型冻结的短语表示，并在未命中时回退。前者扩大条件计算，后两者分担局部模式的存取；它们都不能保证复杂组合关系由局部记忆直接回答。",
+          "example": "教学例：反复出现的产品名可由查表提供稳定线索；比较两个产品的适用条件，仍需要上下文与组合计算。",
+          "papers": [
+            "foundation-models:switch-transformer",
+            "foundation-models:engram",
+            "foundation-models:memory-grafting"
+          ]
+        },
+        {
+          "id": "budget-unit",
+          "question": "同样写“只用一半计算”，AdaDSF、Telescopic LM 和 WIDE 为什么可能产生不同执行图？",
+          "answer": "AdaDSF 可让不同 token 在不同层参与计算，Telescopic LM 使用某个完整深度前缀，WIDE 可在同一层为各 token 选择不同 head/channel 组。平均比例相同并不约束最慢路径、组形状或访存；需要分别记录 token—层分配、实际深度和组激活，才能确认是否满足相同部署预算。",
+          "example": "教学例：半数 token 跑全层、所有 token 跑半深度、每个 token 用半宽度，平均活跃量相近，却不是同一次前向。",
+          "papers": [
+            "foundation-models:adadsf",
+            "foundation-models:telescopic-lm",
+            "foundation-models:wide"
+          ]
+        },
+        {
+          "id": "sparsity-versus-latency",
+          "question": "为什么 Switch 的专家稀疏与 WIDE 的组稀疏，不能仅凭 mask 数量推算同样的加速？",
+          "answer": "专家选择可能引入分发与负载不均，组路由需要让硬件跳过相应块；两者的矩阵形状和访存方式不同。若本地参考先算完全部分支再屏蔽，mask 只改变数值；即使真正只算选中部分，也要计路由、重排和通信。应测目标负载下完整路径，而不能用理论激活比例替代时延。",
+          "example": "教学例：一层激活半数 FFN 通道，但为此多次小矩阵调用和重排，可能比一次大 dense 矩阵更慢。",
+          "papers": [
+            "foundation-models:switch-transformer",
+            "foundation-models:wide"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:adadsf",
+        "foundation-models:blt",
+        "foundation-models:ce-guided-moe",
+        "foundation-models:cots",
+        "foundation-models:elastic-expert-routing",
+        "foundation-models:engram",
+        "foundation-models:lift-feedback",
+        "foundation-models:lngram-v2",
+        "foundation-models:looped-latent-attention",
+        "foundation-models:macro",
+        "foundation-models:memory-grafting",
+        "foundation-models:mhc",
+        "foundation-models:mild",
+        "foundation-models:mirror-moe",
+        "foundation-models:msar",
+        "foundation-models:novelty-patching",
+        "foundation-models:penelope",
+        "foundation-models:persistent-recurrent-memory",
+        "foundation-models:rare",
+        "foundation-models:rd-attnres",
+        "foundation-models:repeat-aware-moe",
+        "foundation-models:sparse-decoding",
+        "foundation-models:switch-transformer",
+        "foundation-models:swrouter",
+        "foundation-models:telescopic-lm",
+        "foundation-models:wide"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较专家计算、离散查表、冻结短语嫁接与深度/宽度路由，区分容量、预算单位和硬件兑现条件。",
+          "papers": [
+            "foundation-models:adadsf",
+            "foundation-models:blt",
+            "foundation-models:ce-guided-moe",
+            "foundation-models:cots",
+            "foundation-models:elastic-expert-routing",
+            "foundation-models:engram",
+            "foundation-models:lift-feedback",
+            "foundation-models:lngram-v2",
+            "foundation-models:looped-latent-attention",
+            "foundation-models:macro",
+            "foundation-models:memory-grafting",
+            "foundation-models:mhc",
+            "foundation-models:mild",
+            "foundation-models:mirror-moe",
+            "foundation-models:msar",
+            "foundation-models:novelty-patching",
+            "foundation-models:penelope",
+            "foundation-models:persistent-recurrent-memory",
+            "foundation-models:rare",
+            "foundation-models:rd-attnres",
+            "foundation-models:repeat-aware-moe",
+            "foundation-models:sparse-decoding",
+            "foundation-models:switch-transformer",
+            "foundation-models:swrouter",
+            "foundation-models:telescopic-lm",
+            "foundation-models:wide"
+          ],
+          "source_revisions": {
+            "foundation-models:adadsf": "2b46889facecb5e59d751fc2bc3e30b6072ef171ac8e83addad76092695d1d41",
+            "foundation-models:blt": "346faee909fdd23b0fbaf33b6d4941c5dded7761384b5cff547e3d9ce76de256",
+            "foundation-models:ce-guided-moe": "d15968e1cfce96c0c581f15e2709976d2fe152767bd558d524b08a8da49730ff",
+            "foundation-models:cots": "11e6c01ccf2ece813d732e847de6cf528323f96bd7208e0cf776e2c1b8a58ca2",
+            "foundation-models:elastic-expert-routing": "9d38b4b090125035e8e99f28c950371bed84fff552841ad2c17349dc1084b3e1",
+            "foundation-models:engram": "c01626b4540a8845a9d7382670ec2bd988cdc6fb51d742a5177e8fd571bb79ed",
+            "foundation-models:lift-feedback": "cee6ce4ce01f7d81e1bd5b1efed4396d61d362cdeaa4d0bc8b83ed514744edf0",
+            "foundation-models:lngram-v2": "9b9f123bda1dfa0f4d73438128a27c77ca39c4af10e9cc8eb0f13506a4ee18ee",
+            "foundation-models:looped-latent-attention": "7ae31bde2489f4c6d5b2f15e7b4a9bd1753ffc570db37c04bbd2b294962456e5",
+            "foundation-models:macro": "e04ebc231cbf4f2e1672d70335b37743920b4eac0353c0b17bef7cdd83b9476f",
+            "foundation-models:memory-grafting": "c1e61bd811bfd506846b127614efb359ddba7a1dcfe7c6213c7e05957322c851",
+            "foundation-models:mhc": "21a19f00764c680dc7855baac5ab5111894a64b8981e5269d830c3b0fdb7b6c5",
+            "foundation-models:mild": "1d66c96e149410989597fe9ac5f9af3ad91a31442c554835f7947de2c7b00008",
+            "foundation-models:mirror-moe": "8767bb16b64e48b72b89265dad098632296df1d855b6c59c862c7acd5ce8c0ed",
+            "foundation-models:msar": "7a5425c5ac9f4dc06ba5beebfd37ccaa46244fbff6d27c10defab6b380534f07",
+            "foundation-models:novelty-patching": "8bc18ba338c4ead6d41cc9a243c5289e8afa03f8de0a6b261bff0fd538bd21eb",
+            "foundation-models:penelope": "4a68256895205ffb21eeacb79efa62e1e4e40cdef8412dfaed5f3a880baab76f",
+            "foundation-models:persistent-recurrent-memory": "4c03ef238302da5d29f27e9b286edcd4b05f7e64ff51df3bc53d0bc1a9f8224b",
+            "foundation-models:rare": "43c4ecfebfa8626449838caedcf6c05db9167bc90b1927e8802de268361b03a5",
+            "foundation-models:rd-attnres": "4d60f1665f9c81ee267e18e423bc17e842efe332a4550f6f5f12c1b34c474684",
+            "foundation-models:repeat-aware-moe": "250e0824912ebcda88719549fefe964c195a0975b0a55f760a890a1a221984af",
+            "foundation-models:sparse-decoding": "a4eb5c1cba9ad95589743891d1eb8a037ac1390a76b0d10a166ec6cf647f2ca3",
+            "foundation-models:switch-transformer": "71cfc2d850556aa59636dc714b8879095e954f5731b7daca20eb2faf603473b8",
+            "foundation-models:swrouter": "e12ef64f7a16cbe09e65e121e08a658d3a136415a3a125fe2fed4561f4d7d895",
+            "foundation-models:telescopic-lm": "dcffa4b00994402a02d5aba356a318aa7bc56a82188d8c4c58fcbd711df597ca",
+            "foundation-models:wide": "5b9e1149579c0e479a42584949379a0b763d47677f1f5ad11c723a7b74269797"
+          }
+        }
+      ]
+    },
+    "training-budget": {
+      "title": "训练预算：改数据、改更新方向，还是改比较口径",
+      "thesis": "同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。",
+      "axes": [
+        "改变数据出现频率、数据内容还是参数更新",
+        "使用在线反馈、先导拟合或离线教师",
+        "成本包含预处理、试验选参与优化器开销到哪一层",
+        "比较按数据量、墙钟还是冻结候选池预算"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:doremi",
+          "position": "小 proxy 根据各域相对 reference 的 excess loss 做 group DRO，再把学得配比交给目标模型。",
+          "tradeoff": "依赖 proxy 的域价值可迁移；本地两域 unigram 只核验配比路径，不能代替大型 target 的训练结果。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:data-mixing-laws",
+          "position": "先执行多组 pilot mixture，拟合域损失随比例与规模的变化，再搜索未训练配比。",
+          "tradeoff": "需要为先导实验付费，并承担模型与预算外推误差；本地小 proxy 不等于真实多规模 scaling curve。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:data-orchestra",
+          "position": "逐 chunk 选择 Drop、Untouch 或 Clean，清洗时再安排去噪、表面修复与教学增强。",
+          "tradeoff": "改变内容而非只改采样率，必须防止过度删除和改写；本地规则工具的负结果保留，不冒充原文大模型清洗。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:muon",
+          "position": "以 momentum 矩阵近似极分解形成隐藏矩阵更新方向，其他参数仍用辅助 AdamW。",
+          "tradeoff": "每步更新几何不同，正交化与辅助优化器也有时间开销；本地短预算没有复现论文规模效率。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:muon-paired-budget",
+          "position": "固定初始化、数据顺序与开发候选池，分别用数据 AUC、时间 AUC 和选参 regret 评价优化器。",
+          "tradeoff": "它是比较协议而非新优化公式；本地只做合成轨迹诊断，没有训练 Muon 或 AdamW。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:eco-optimizer",
+          "position": "直接更新低精度权重，把重量化误差注入已有动量，避免常驻 master weights。",
+          "tradeoff": "Adam 需逐元素有效步长，格式与舍入会影响误差；无缓冲规则不是任意情况精确等价。本地未实现或训练，完整实验高成本。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现与成本判断"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "选更多某域，与把该域内容改写，是两个干预",
+          "body": "DoReMi 根据 excess loss 调整域频率，Mixing Laws 通过 pilot 曲线预测配比，两者主要改变见到什么比例。DataOrchestra 直接决定每个 chunk 是否保留和如何编辑，会改变监督本身。清洗后语料更多或平均 loss 更低，都不能说明目标任务必然获益；要区分数据量变化、内容变化以及预处理费用。一个可复核实验应明确固定的是原始 token、处理后 token 还是训练步数。",
+          "papers": [
+            "foundation-models:doremi",
+            "foundation-models:data-mixing-laws",
+            "foundation-models:data-orchestra"
+          ]
+        },
+        {
+          "title": "预算口径可以让结论反转",
+          "body": "Muon 改变每步下降方向，ECO 改变持久状态与量化更新，二者都可能改变每步耗时。Muon Paired Budget 的价值在于把等数据与等时间分开，并冻结开发阶段选参，不为每种报告口径重新挑冠军。训练比较还要包括辅助 AdamW、预处理或 pilot 的实际成本；本地公式诊断与合成曲线只验证这些记账规则，不能作为真实训练效率胜负。",
+          "papers": [
+            "foundation-models:muon",
+            "foundation-models:eco-optimizer",
+            "foundation-models:muon-paired-budget"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "mixture-versus-rewrite",
+          "question": "某个数据域训练效果差，为什么提高 DoReMi 权重与让 DataOrchestra 清洗它，可能朝相反方向改变训练集？",
+          "answer": "DoReMi 将相对 reference 欠拟合的域赋予更多采样机会，默认域内内容仍值得学习；DataOrchestra 可能把某些 chunk 删除、保留或重写，直接改变有效内容。若差来自噪声，提高频率可能重复坏监督；若内容本来干净，强清洗又可能删掉有用信息。应先辨别问题，再用相同训练预算比较干预。",
+          "example": "教学例：罕见但正确的公式相对reference的excess loss高，可能值得更多曝光；乱码也可能难学，却应先清理。要区分域级学习价值与样本质量。",
+          "papers": [
+            "foundation-models:doremi",
+            "foundation-models:data-orchestra"
+          ]
+        },
+        {
+          "id": "proxy-feedback-versus-law",
+          "question": "DoReMi 与 Data Mixing Laws 都用小实验选大模型配比，依赖的迁移假设有什么不同？",
+          "answer": "DoReMi 依赖 proxy 的 excess-loss 动态能识别值得提高权重的域；Mixing Laws 依赖先导配比与规模数据足以拟合损失面，并预测未执行的组合。前者把反馈转成更新，后者把实验转成可外推模型，都可能被 proxy 与目标模型差异破坏。先导成本和独立目标评测都应保留，不能拿拟合值当已训练结果。",
+          "example": "教学例：小 proxy 认为代码域最欠拟合，但大模型可能已掌握它；同样，拟合曲线也可能在极端配比外推失败。",
+          "papers": [
+            "foundation-models:doremi",
+            "foundation-models:data-mixing-laws"
+          ]
+        },
+        {
+          "id": "equal-steps-versus-time",
+          "question": "Muon 在相同 token 下 loss 更低，为什么还不能宣布它在固定训练时间内更划算？",
+          "answer": "相同 token 控制了数据暴露，未控制单步正交化、辅助 AdamW 或系统吞吐开销。Paired Budget 应在共同实际时间范围比较验证曲线，并沿用已冻结开发选择，而不是为时间结果重新挑配置。ECO 的状态节省也需另测：减少存储不保证每步更快，质量与资源必须分别报告。",
+          "example": "教学例：方案甲每步更有效但慢一倍，方案乙在同一小时可多看数据；等步数赢家未必仍是等时间赢家。",
+          "papers": [
+            "foundation-models:muon",
+            "foundation-models:muon-paired-budget",
+            "foundation-models:eco-optimizer"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:adamw4bit",
+        "foundation-models:af-muon",
+        "foundation-models:bit-sparse",
+        "foundation-models:bmuon",
+        "foundation-models:data-mixing-laws",
+        "foundation-models:data-orchestra",
+        "foundation-models:data-quality-lsa",
+        "foundation-models:doremi",
+        "foundation-models:eco-optimizer",
+        "foundation-models:gaugequant",
+        "foundation-models:gemini-for-google",
+        "foundation-models:hardware-diversity",
+        "foundation-models:hilp",
+        "foundation-models:lazyflash",
+        "foundation-models:lct",
+        "foundation-models:me-pois",
+        "foundation-models:modular-robust-generative",
+        "foundation-models:muon",
+        "foundation-models:muon-paired-budget",
+        "foundation-models:musec",
+        "foundation-models:open-1b-audit",
+        "foundation-models:open-language-model",
+        "foundation-models:ppl-factory",
+        "foundation-models:rkl-policy-distillation",
+        "foundation-models:smrc-pmrc",
+        "foundation-models:t-muon",
+        "foundation-models:taco-optimizer",
+        "foundation-models:tess"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较域配比学习、配比曲线外推、逐样本处理、矩阵优化与低精度状态，并用配对预算协议解释结论口径。",
+          "papers": [
+            "foundation-models:adamw4bit",
+            "foundation-models:af-muon",
+            "foundation-models:bit-sparse",
+            "foundation-models:bmuon",
+            "foundation-models:data-mixing-laws",
+            "foundation-models:data-orchestra",
+            "foundation-models:data-quality-lsa",
+            "foundation-models:doremi",
+            "foundation-models:eco-optimizer",
+            "foundation-models:gaugequant",
+            "foundation-models:gemini-for-google",
+            "foundation-models:hardware-diversity",
+            "foundation-models:hilp",
+            "foundation-models:lazyflash",
+            "foundation-models:lct",
+            "foundation-models:me-pois",
+            "foundation-models:modular-robust-generative",
+            "foundation-models:muon",
+            "foundation-models:muon-paired-budget",
+            "foundation-models:musec",
+            "foundation-models:open-1b-audit",
+            "foundation-models:open-language-model",
+            "foundation-models:ppl-factory",
+            "foundation-models:rkl-policy-distillation",
+            "foundation-models:smrc-pmrc",
+            "foundation-models:t-muon",
+            "foundation-models:taco-optimizer",
+            "foundation-models:tess"
+          ],
+          "source_revisions": {
+            "foundation-models:adamw4bit": "fce200e7299b584a01615bad280f005698f18dfaa6e9ab4c25ebb02352479d55",
+            "foundation-models:af-muon": "eff4e72c1ef53b275691373df114f5a6beb42bdf5cc0c140192bd863ebaf7fd9",
+            "foundation-models:bit-sparse": "59b4355c7c270c0ff96b4caf83cc1c24acd08fc35ca98e4ce4b213729921ad47",
+            "foundation-models:bmuon": "63336111a063a03aac6cdbabba62e889b31a1798cdbd9d4d31f0f0406d45132f",
+            "foundation-models:data-mixing-laws": "71c42d6af6dca0a2b11e5d2899b54695a5514a0b08de1d4fe694aa96b9fa42aa",
+            "foundation-models:data-orchestra": "b9e3c1068982f4cb1526077c71b64e6baa645c98ad36eeae7a0060badc3456fe",
+            "foundation-models:data-quality-lsa": "5b9d51e312a8f59dbc18b9c6e42df3a0e4838db6a069f667090fdaffb49f6a1f",
+            "foundation-models:doremi": "69074a6f7687f46475834927f506eaed0643f5004dc05577eb347d6ab28632fb",
+            "foundation-models:eco-optimizer": "a7da5c72f5f8ac77a1928d9db59068a9e03727f8a8c2bd75d8fea56df3a36994",
+            "foundation-models:gaugequant": "04bb91219fc741193f4b2d3ed1ec18b1fa006814b3e0d1931d9d7d75cf807e59",
+            "foundation-models:gemini-for-google": "bd87cf9dca9a53de221343297c8cd1c769339d18369c820c9394ecfe6d3ee618",
+            "foundation-models:hardware-diversity": "dd3fe2e8cc13798840ac0e918c08b67897de5bde728232c8488132d8d386e8ae",
+            "foundation-models:hilp": "8aa5c8c6bc0d326afef35d1bdf990790f87afc4b77a2b60c8a360e1fe319fe9c",
+            "foundation-models:lazyflash": "d8feab6aafa18c1b6952b2e3771eabc3cb4107fadc6d295fa59fbd9d1f9bb60a",
+            "foundation-models:lct": "234759a872291395c063a0caa8d0ae2a2361a507b914978e194255a8eebfff5d",
+            "foundation-models:me-pois": "020372f891fbda2dd97b639b573392451eed2a5655e7fb62c2385d8be2cdf070",
+            "foundation-models:modular-robust-generative": "b0585aee352faf56f032b339220fbed2a5f721ec5d18d26daa081599fab2e10e",
+            "foundation-models:muon": "6f7a6338775ac9249d187d7ab3568f75332aae9cc637aea45edbbfd232896a35",
+            "foundation-models:muon-paired-budget": "28f49cad898a59825697f0c3e06a76a64f8ebccafdb730539f1aabdcb852fea0",
+            "foundation-models:musec": "7477c546e71b7f4defe2757116f7646420cedda0fb1008d777bd43ce7b843395",
+            "foundation-models:open-1b-audit": "b3c439f731fc68b403bb751c80ad6513b37b2ecff581dbbeb96db401d0af749f",
+            "foundation-models:open-language-model": "5cdc9361687e729b18bda418a58f9d0d1d45a6363c14abf54ed0ffcc1457734e",
+            "foundation-models:ppl-factory": "c5cdf8c6bbab440b533bce87167510fca894bb6eda24c621db3c7fc649f4b699",
+            "foundation-models:rkl-policy-distillation": "8e570e100620d7a65bb8c0f9b5c222fcd619f56461a52f8230b4810f43f5073b",
+            "foundation-models:smrc-pmrc": "024202e423dbb45b46db139f52a5b695a110cacd44832d485a961b77622d8800",
+            "foundation-models:t-muon": "35c5fe95a5d70dfb421f6500636c4bb507442ca61ffd6e844789b95ee96768e2",
+            "foundation-models:taco-optimizer": "5320893df645d8a44b41461d3e667d4b0e6908f0175bffc6e1786610b2233425",
+            "foundation-models:tess": "a55eeba07f32c67aff112f92e5f2fda2333e601534e6c88e387bdba408b486d1"
+          }
+        }
+      ]
+    },
+    "compression-and-cache": {
+      "title": "推理压缩先找瓶颈：权重、KV 内容与缓存层级",
+      "thesis": "AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。",
+      "axes": [
+        "压缩对象是权重、KV 头、token 还是分页存储",
+        "信息被量化、永久淘汰还是留在外部待取回",
+        "选择依赖激活、query、相似替代关系还是带宽模型",
+        "节省显存、带宽和重算时间分别需要什么条件"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:awq",
+          "position": "用校准激活识别显著输入通道，通过等价缩放保护其低比特权重重建。",
+          "tradeoff": "主要改权重存储与乘法接口，不解决历史长度；本地 W4 重建 MSE 不代表 TinyChat 端到端吞吐。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:gqa",
+          "position": "多个 query heads 共享较少 KV heads，减少每个历史位置的 KV 存储与读取。",
+          "tradeoff": "改变模型表示结构，通常需要适配；token 总数仍会增长。本地从头小训练不同于论文 checkpoint uptraining。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:drop-kv",
+          "position": "根据删除单项造成的 attention 输出扰动评分，同时考虑概率和 value 差异，保护近期窗口。",
+          "tradeoff": "单项近似并非任意组合的最优驱逐；本地是合成 QKV 与 A100 数值诊断，没有完整 cache 服务集成。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:twinkv",
+          "position": "在既定 eviction 之后，用冗余 donor 与无替代 orphan 成对交换，保持 KV 数不变。",
+          "tradeoff": "依赖 key 相似度及基础策略，不能保证每次 repair 改善；本地 checkpoint 重建负结果不隐去，也非完整生成基准。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "foundation-models:kvmem",
+          "position": "历史 KV 可留在分层 backing store，通过模型注意力空间检索 block，物化原生窗口内执行视图。",
+          "tradeoff": "不等于所有历史同时参加当前 attention；本地 Python 保留完整 backing cache，未实现异步 NVMe 系统且不宣称显存或延迟收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:remote-kv-tiers",
+          "position": "先比较远端加载与重新计算，再以 rank 分片和异步加载治理传输与队首阻塞。",
+          "tradeoff": "命中不一定更快，固定开销与带宽决定盈亏；论文端到端对比含布局变化，本地无分布式实现，完整实验高成本。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "容量下降有四种不同含义",
+          "body": "AWQ 让同一权重更省字节；GQA 让每个 token 需要更少 KV heads；DropKV 删除一些历史位置；TwinKV 则在相同位置预算内重新分配保留名额。前两者不自动减少历史长度，后两者也不减少模型权重。若服务主要受长输出 KV 增长限制，单做 AWQ 可能释放一些空间，却未处理增长机制；若瓶颈是权重读取，内容淘汰也未必带来对应收益。",
+          "papers": [
+            "foundation-models:awq",
+            "foundation-models:gqa",
+            "foundation-models:drop-kv",
+            "foundation-models:twinkv"
+          ]
+        },
+        {
+          "title": "删掉与移走，决定将来能不能重新访问",
+          "body": "DropKV/TwinKV 的当前保留集合会限制可见历史；KVMEM 把大地址空间与小执行视图区分，未选 block 仍可保留在 backing store。Remote KV Tiers 再追问取回来是否比重算便宜，其加载时间含固定开销与数据量除带宽。由此，缓存命中、原始数据仍在、GPU 显存下降和响应变快是不同证据。KVMEM 本地保留完整 backing cache、远端方案未实现的状态都应保持，不能拿逻辑架构替代系统测量。",
+          "papers": [
+            "foundation-models:drop-kv",
+            "foundation-models:kvmem",
+            "foundation-models:remote-kv-tiers"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "weights-versus-history",
+          "question": "长对话越跑越占显存，AWQ 与 GQA 各能改变什么，为什么仍可能需要内容选择？",
+          "answer": "AWQ 降低权重位宽，释放的是模型常驻权重空间；GQA 减少每个历史 token 的 KV heads，降低增长斜率，但 token 数仍继续增加。若还需限制历史总量，可考虑 DropKV 等选择策略，并接受信息遗漏风险。三种收益应分别按权重字节、每 token KV 字节和保留条数记账。",
+          "example": "教学例：把书柜本身做薄，不会减少每天新进的书；GQA 像缩小每本书，eviction 才是在固定格数里决定留哪本。",
+          "papers": [
+            "foundation-models:awq",
+            "foundation-models:gqa",
+            "foundation-models:drop-kv"
+          ]
+        },
+        {
+          "id": "importance-versus-substitution",
+          "question": "两个 KV 都很重要却高度重复时，DropKV 与 TwinKV 会怎样提出不同选择依据？",
+          "answer": "DropKV 用当前观察窗口中的输出扰动估计单项保留价值，value 与 attention 概率都参与；TwinKV 在基础保留结果上检查替代关系，把有 twin 的 donor 换给缺少替代者的 orphan。一个看单项输出影响，一个修集合覆盖，二者可以组合但没有普遍改善保证，交换后仍应检查质量与预算。",
+          "example": "教学例：保留了同一计划的两个近重复 token，却删掉唯一授权范围；集合修复可能建议交换，但必须验证 key 相似是否真代表可替代。",
+          "papers": [
+            "foundation-models:drop-kv",
+            "foundation-models:twinkv"
+          ]
+        },
+        {
+          "id": "cache-hit-versus-recompute",
+          "question": "KVMEM 找到旧 KV block 后，为什么 Remote KV Tiers 仍可能建议直接重算？",
+          "answer": "找到地址只说明数据可复用，加载还要支付固定延迟和传输时间。若远端带宽不足、block 太小或排队严重，T0 加数据量除带宽可能超过重新 prefill 的时间。KVMEM 的执行视图预算解决可见范围，远端盈亏模型解决获取方式，不能仅按命中率决定两者优劣。",
+          "example": "教学例：一个很短的旧前缀虽命中远端，但建立请求就耗很久；在本机重新计算可能更快，长前缀才摊薄固定成本。",
+          "papers": [
+            "foundation-models:kvmem",
+            "foundation-models:remote-kv-tiers"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:agentkv",
+        "foundation-models:awq",
+        "foundation-models:bakron",
+        "foundation-models:beaconkv",
+        "foundation-models:c2kv",
+        "foundation-models:distillcache",
+        "foundation-models:drop-kv",
+        "foundation-models:dualquant",
+        "foundation-models:flint",
+        "foundation-models:fpot",
+        "foundation-models:gqa",
+        "foundation-models:irekogpt",
+        "foundation-models:kvmem",
+        "foundation-models:leapquant",
+        "foundation-models:moezip",
+        "foundation-models:pn-mix",
+        "foundation-models:qevict",
+        "foundation-models:race-rope-compression",
+        "foundation-models:random-attention",
+        "foundation-models:remote-kv-tiers",
+        "foundation-models:replayssm",
+        "foundation-models:right-on-q",
+        "foundation-models:roleq",
+        "foundation-models:rope-relay",
+        "foundation-models:splash",
+        "foundation-models:stepquant",
+        "foundation-models:taskpress",
+        "foundation-models:twinkv",
+        "foundation-models:vfold"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较低比特权重、共享KV头、扰动驱逐、等预算修复、历史执行视图与远端加载，分开容量、恢复和时延证据。",
+          "papers": [
+            "foundation-models:agentkv",
+            "foundation-models:awq",
+            "foundation-models:bakron",
+            "foundation-models:beaconkv",
+            "foundation-models:c2kv",
+            "foundation-models:distillcache",
+            "foundation-models:drop-kv",
+            "foundation-models:dualquant",
+            "foundation-models:flint",
+            "foundation-models:fpot",
+            "foundation-models:gqa",
+            "foundation-models:irekogpt",
+            "foundation-models:kvmem",
+            "foundation-models:leapquant",
+            "foundation-models:moezip",
+            "foundation-models:pn-mix",
+            "foundation-models:qevict",
+            "foundation-models:race-rope-compression",
+            "foundation-models:random-attention",
+            "foundation-models:remote-kv-tiers",
+            "foundation-models:replayssm",
+            "foundation-models:right-on-q",
+            "foundation-models:roleq",
+            "foundation-models:rope-relay",
+            "foundation-models:splash",
+            "foundation-models:stepquant",
+            "foundation-models:taskpress",
+            "foundation-models:twinkv",
+            "foundation-models:vfold"
+          ],
+          "source_revisions": {
+            "foundation-models:agentkv": "da0ffcbfa4a6e003404512fd4977f68b25900bc7c65082fd6c61644a08722221",
+            "foundation-models:awq": "70f5ef31bcba296079d2bce8e6321adfd8e208f6a58c042b6d691afb8adfc0ee",
+            "foundation-models:bakron": "d286db2b3891e9c70c2f43f6458b269089d9d48180bcec7e922049d7a32458d4",
+            "foundation-models:beaconkv": "6314a23bfa59fb13ab1786c01fc0cc600ceed4a55cdecd0a3c7fdbb2ab9037ed",
+            "foundation-models:c2kv": "23cf32876877e8f309779a699bd74df42b7725d1a291dee167283fd4a745c149",
+            "foundation-models:distillcache": "90ff1025805318f1629b789acaf890da390f9ca022b91804c0a38b65045c3f01",
+            "foundation-models:drop-kv": "ae63dc1bfe00cb27d7b8d214da72e1a19f6d0eb1e68c9d17730c605428f6eef3",
+            "foundation-models:dualquant": "88f1833985537599b8a8db50bf43570b1d4dbea3004a4a9fc35dbb4d820e4f29",
+            "foundation-models:flint": "6370e1edd786aae2d1f9c30fb01768a06efe4dbbe9fc42eda5ddfc524d9d3a6c",
+            "foundation-models:fpot": "0a2ef9bb796c956193fd82971c01982f4855db425813e3bedb0491c2e2fa86f0",
+            "foundation-models:gqa": "ffa7f3cc8df0e83ee807e94334765885f2595cf939dfda1012e18d8eecb56658",
+            "foundation-models:irekogpt": "99a016f29b3b50d34df7cb90ac6297b181b15c3c3679ab771b68a163b757db0a",
+            "foundation-models:kvmem": "92a0834b6fbe22a96be3e493611900a37ea9b63cb073bd234aead5f7494fdbf5",
+            "foundation-models:leapquant": "ef74f4a4d33171a2ff9116c9fbc7de7ce02677ada0a513a7098c01ab14f03a21",
+            "foundation-models:moezip": "32b4eced778461faca1ffabd18350744af6e57607401cb6549fec559819415f1",
+            "foundation-models:pn-mix": "18809a7ee99ac871bd4b7ed25c33bd1075827987b592b616041f4249b7beb18a",
+            "foundation-models:qevict": "5bf1b22c90b616d68b1e4be2be744d212d34e498ece2f884ab36729a42061d6b",
+            "foundation-models:race-rope-compression": "19e81f859ccb720420d179ce22b1cec07c3ea4ed1070b3ff903e6dbca25f0f45",
+            "foundation-models:random-attention": "64ff7d771e52bfb5f966547285e1dfc0f67a6835f02cf7559c1d4316e6b69565",
+            "foundation-models:remote-kv-tiers": "5bddc7d9d0ee171bd32049d43ff4fb193c1cb71b7f6924b27b88014d048ae958",
+            "foundation-models:replayssm": "484da6cd97e204eb4fe6bab2d3a05149d52677a41c78bb1cb4e1e0dc9b5244ff",
+            "foundation-models:right-on-q": "4700e8a3036c7cc85b4b6e1c6abc5a6481d0d0b0a621a5988ffda60adecd6c4e",
+            "foundation-models:roleq": "969b553419ecd76abdb616cdc4ff5259bdce3254bb6543533de000645e6b7d6e",
+            "foundation-models:rope-relay": "9d993b9f8deb136b8c7ffc2a4eef256daac2799bbe8cb3b259ad68ae673cf358",
+            "foundation-models:splash": "a1eff010a6403755b46d2f401fa295977c624b88cc7c6260b96106b0e3f4a78f",
+            "foundation-models:stepquant": "2785e019963f2763cb2975780c71f91024ce4276177deb877f7cacdfb8c8c23d",
+            "foundation-models:taskpress": "cbf1f5c2031eb63b6581320db9a87ab3373b57ca4fa871e3f42ad12ee53c5af8",
+            "foundation-models:twinkv": "b65790bee18062097a2ac7a8c11788866e6c68bbc6bf67806d73da757a2cbe19",
+            "foundation-models:vfold": "ef6ac8bb11e380e39765e7880d44ee0d57c2a72e6c30254940c06f32ba18f5e6"
+          }
+        }
+      ]
+    },
+    "generation-paths": {
+      "title": "少做串行步骤：验证草稿与学习迭代不是同一条路",
+      "thesis": "推测解码用便宜提案换昂贵验证批次，精确校正可保持原 target 分布；扩散语言和数据空间迭代则改变生成轨迹或训练目标。比较时先问谁决定最终分布，再问每步做什么、跨步保留什么，以及 NFE 或接受长度能否转成真实时间收益。",
+      "axes": [
+        "最终分布由原target验证还是由新训练目标决定",
+        "提案来自独立draft、多未来头或去噪状态",
+        "跨步骤共享的是KV、hidden carry还是固定噪声",
+        "成本看验证接受长度、网络前向数还是完整墙钟"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:speculative-decoding",
+          "position": "draft 提出 token，target 批量验证，拒绝时按残差分布校正以保持 target 分布。",
+          "tradeoff": "加速取决于提案成本与接受长度；本地 Markov LM 调用数不是大模型 GPU 延迟。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:medusa",
+          "position": "在同一 backbone 上训练多个 future-token heads，构建候选树并集中验证。",
+          "tradeoff": "减少独立 draft 部署负担，却需训练未来头和树验证；不能把“多头并行”本身当成任意采样规则的精确分布证明。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:windowed-mtp",
+          "position": "只把 draft 的读取限制为 sink 与近期窗口，target 保持全历史及原验证规则。",
+          "tradeoff": "draft 便宜可能同时降低接受率；本地小模型一致性与 MPS 测量不代表百万上下文 B200 服务。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:dqwen35",
+          "position": "把混合 attention/RNN 骨干改成双向传播，用掩码去噪训练为 diffusion LM。",
+          "tradeoff": "改变条件结构与生成目标，需要重新训练；本地双向 kernel 诊断未加载原 9B 模型，不能当成无损 AR 加速。",
+          "sections": [
+            "背景与主要改动",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:pumba",
+          "position": "沿自身 progressive-unmasking 轨迹展开连续步骤，carry 在窗口内传递并接受 BPTT。",
+          "tradeoff": "训练窗口与截断控制计算和信用范围；本地只验 carry 梯度，不是 LLaDA-8B 少步能力复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:data-space-iteration",
+          "position": "固定一份噪声，在数据预测空间反复精炼；仅当前 refinement 建生成器梯度，teacher/fake 给蒸馏方向。",
+          "tradeoff": "步号不是 flow time，且目标不与语言模型相同；本地缩小图像模型三seed有正有负，像素特征距离不是 Inception FID。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界与 Evolve"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "并行提案不等于改写目标分布",
+          "body": "精确 speculative decoding 允许 draft 很不完美，因为 target 验证与残差校正负责最终分布；Windowed-MTP 因此可以只压 draft 上下文，把风险主要转为接受率与速度。Medusa 把提案放进 backbone 的多个未来头，仍要具体看验证和采样方式，不能仅凭树形并行宣称无损。核心边界是验证器的历史与规则是否保持，而非 draft 是否看到了全部信息。",
+          "papers": [
+            "foundation-models:speculative-decoding",
+            "foundation-models:windowed-mtp",
+            "foundation-models:medusa"
+          ]
+        },
+        {
+          "title": "同样是多步，步之间的依赖不同",
+          "body": "DQwen3.5 的步围绕掩码去噪，PUMBA 进一步让前一步 carry 对后续 loss 负责；Data-Space Iteration 的步则是在固定噪声下精炼数据预测，前缀 rollout 不建梯度。这些步骤不能按一个通用“迭代次数”直接比较，语言与图像任务的质量指标也不同。需要分别写清状态、条件与梯度跨越范围，再报告对应训练和推理成本。",
+          "papers": [
+            "foundation-models:dqwen35",
+            "foundation-models:pumba",
+            "foundation-models:data-space-iteration"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "draft-window-versus-target-window",
+          "question": "Windowed-MTP 缩小 draft 窗口，为什么与直接缩小 target 窗口不是同一种质量承诺？",
+          "answer": "精确推测解码允许 draft 分布变化，只要 target 仍在原历史上验证并采用正确校正，最终仍由原 target 分布决定。若连 target 窗口也缩小，条件分布本身已经改变，就不能沿用同一承诺。代价上，draft 越便宜未必越快，因为接受长度可能下降，需要把两侧成本一起除以实际接受量。",
+          "example": "教学例：草稿忘了早期人名，target 可拒绝并纠正；若 target 也看不到该人名，验证就不再是原完整历史下的模型。",
+          "papers": [
+            "foundation-models:windowed-mtp",
+            "foundation-models:speculative-decoding"
+          ]
+        },
+        {
+          "id": "future-heads-versus-denoising",
+          "question": "Medusa 同时提议多个未来 token，与 DQwen3.5 多位置去噪，为什么不能直接视为同一种并行生成？",
+          "answer": "Medusa 的未来头形成候选，backbone 验证决定接收哪些分支；DQwen3.5 则把混合骨干训练成双向掩码去噪模型，条件和训练目标都改变。前者主要重组原生成流程，后者学习新的生成过程。比较时需分别说明采样规则、训练投入和质量口径，不能用并行位置数推断输出分布等价。",
+          "example": "教学例：一次提出三个字后逐项核验，与一次填写多个空位后继续去噪，可能都有并行计算，却依赖不同上下文和接受机制。",
+          "papers": [
+            "foundation-models:medusa",
+            "foundation-models:dqwen35"
+          ]
+        },
+        {
+          "id": "carry-gradient-versus-prefix-stopgrad",
+          "question": "PUMBA 与 Data-Space Iteration 都复用前一步结果，为什么训练梯度不能用同一规则处理？",
+          "answer": "PUMBA 特意让窗口内梯度穿过 carry，使早期步骤学会为后续服务；Data-Space Iteration 对选定 refinement 的前缀 rollout 停止建图，只更新当前生成步骤，并冻结 teacher/fake 的生成器侧梯度。复用状态不自动规定可反传范围，混用会改变目标、内存成本和训练算法。",
+          "example": "教学例：把 PUMBA 每步 carry 全部 detach 会切断它要学的跨步信用；让数据空间前缀全部反传，也不再是已声明训练配方。",
+          "papers": [
+            "foundation-models:pumba",
+            "foundation-models:data-space-iteration"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:aspire",
+        "foundation-models:data-space-iteration",
+        "foundation-models:dblast",
+        "foundation-models:doublecat-semicat",
+        "foundation-models:dqwen35",
+        "foundation-models:echo",
+        "foundation-models:langdit",
+        "foundation-models:loopspec",
+        "foundation-models:medusa",
+        "foundation-models:pumba",
+        "foundation-models:r4t",
+        "foundation-models:register-tokens-dllm",
+        "foundation-models:speculative-decoding",
+        "foundation-models:tadm",
+        "foundation-models:windowed-mtp"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较精确草稿验证、多未来头、窗口draft、扩散语言与数据空间精炼，区分分布承诺、跨步状态和梯度范围。",
+          "papers": [
+            "foundation-models:aspire",
+            "foundation-models:data-space-iteration",
+            "foundation-models:dblast",
+            "foundation-models:doublecat-semicat",
+            "foundation-models:dqwen35",
+            "foundation-models:echo",
+            "foundation-models:langdit",
+            "foundation-models:loopspec",
+            "foundation-models:medusa",
+            "foundation-models:pumba",
+            "foundation-models:r4t",
+            "foundation-models:register-tokens-dllm",
+            "foundation-models:speculative-decoding",
+            "foundation-models:tadm",
+            "foundation-models:windowed-mtp"
+          ],
+          "source_revisions": {
+            "foundation-models:aspire": "b4529bb7f1eb1a90b0b9963066b54079641eb107ba34c6f586ded0b8474c6de4",
+            "foundation-models:data-space-iteration": "346250a4450eef15a45bc519ab35068f813efae5b8ac72cf9a84a91308910907",
+            "foundation-models:dblast": "7dd45efa44437b527b475a8c9b490575a8fe5f48f8f5791dd36ce05db13fb399",
+            "foundation-models:doublecat-semicat": "e56f6e2722e286b0517e94feb74f112332ab186b3d55b6525dbdb4b87af8e607",
+            "foundation-models:dqwen35": "1f25909a5a37a42548bbb72c3aa6526027be675a8796f710388ca65244c26f3f",
+            "foundation-models:echo": "612ea730975402219340aa6afecbe1dee1eb5ce8f450b9c5931c4ad36def8f09",
+            "foundation-models:langdit": "fcecab09c649dbbc02ff39441031bd4c5e1f7a06b73ad7ebca1f05263e4eb904",
+            "foundation-models:loopspec": "791bc00fc3c23fb9ccb926cc054f4d82a92d77d6fbdb18a2af907bf23778a23d",
+            "foundation-models:medusa": "24e5d01368dac7a49b08c238fa166bf00402178f02431c11b5af02c8b99b2308",
+            "foundation-models:pumba": "dab162d2a04abac883b984332ec61dc74e5cd76d49b3ede32bce8e19bd064346",
+            "foundation-models:r4t": "35e9b283e597101711aa143a290fd6b91f817d7adb38db933449f0286bbb7484",
+            "foundation-models:register-tokens-dllm": "0a936b7ae7209b9edc474a59c993339d62e9488fb8a863362a4bd0f6bb1cccb7",
+            "foundation-models:speculative-decoding": "fcd6e4a9f72a7f160b354d3ff3b13b82301a16a74b07f8e66c9c8c0d0dc8c9f5",
+            "foundation-models:tadm": "d4fb08e4ff8c42c1499135e91921b102a157fd013258756cda768e4b78d26478",
+            "foundation-models:windowed-mtp": "b840656c94bd1f6eeab2911ed89d384660a0b285516ae14c7119aa552ac698cf"
+          }
+        }
+      ]
+    },
+    "evaluation-and-evidence": {
+      "title": "能力证据：准确打分、节省观测与解释预测",
+      "thesis": "先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。",
+      "axes": [
+        "输出是任务正确标签、总分后验、候选排序还是可加解释",
+        "真实标签何时可见、由谁持有",
+        "依赖算法确定性、跨模型相关性还是验证器识别假设",
+        "节约的是评分调用、重复反馈还是解释成本"
+      ],
+      "comparisons": [
+        {
+          "paper": "foundation-models:xlgobench",
+          "position": "用确定性算法任务与精确 scorer 定义答案，模型只见 task/problem，不读取评分器 gold。",
+          "tradeoff": "检查的是给定算法族和复杂度，不自动覆盖开放问答；本地五任务小实例没有完整多语言或复杂度矩阵。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:proeval",
+          "position": "根据历史模型逐题相关性建立经验GP，对目标总分和不确定度建模，选择有价值的新观测。",
+          "tradeoff": "后验依赖历史关系可迁移；目标分数只能查询后揭示。本地四题数学夹具不构成真实模型评测节省。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:fuse-verifiers",
+          "position": "从多个验证器的分数矩阵估计质量与正确后验，再学习集成，真实正确标签留给外部评价。",
+          "tradeoff": "依赖多数优于随机、条件独立等识别假设，不保证相关裁判下可靠；本地尚未实现集成器。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "本地复现与成本判断"
+          ]
+        },
+        {
+          "paper": "foundation-models:tcab",
+          "position": "最大耦合让自适应策略在相同决策时共享反馈，以树结构组织共享，同时维持各策略边际轨迹。",
+          "tradeoff": "节省反馈要求正确耦合，不能任意复制异动作回报；本地 mini-suite 不证明理论渐近节约或生产A/B收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:detector-scope",
+          "position": "把外部SAE概念筛选后交给稀疏线性头，输出可由池化特征置零核验的logit贡献。",
+          "tradeoff": "解释是特征级而非改写文本的因果效果；本地只验合成激活上的L1组件，未训练完整检测器或SAE。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "确定性评分与概率替身，各自回答什么",
+          "body": "XLGoBench 由算法生成精确答案，适合判断一次结构化输出是否合规；ProEval 不是替任务重新定义正确性，而是利用已观测分数推断未全测模型的总体表现。后验均值和方差来自模型关系，不是每道题已被真实评分。两者可以组合：先确保 scorer 与 gold 隔离，再决定哪些真实评分最值得付费，保留预测与已测两种状态。",
+          "papers": [
+            "foundation-models:xlgobench",
+            "foundation-models:proeval"
+          ]
+        },
+        {
+          "title": "多一层证据，不等于无条件可靠",
+          "body": "FUSE 试图利用多个验证器而不直接读取真实标签，但其后验仍受相关性和识别假设限制。DetectorScope 的线性结构可精确分解 logit，却只证明某个池化特征对预测的数值贡献，不证明概念描述或输入文本的因果关系。TCAB 则约束共享反馈时的边际分布。三者把不同环节做得更可检查，不能互相代替，更不能仅凭解释流畅或反馈复用率高宣布能力已验证。",
+          "papers": [
+            "foundation-models:fuse-verifiers",
+            "foundation-models:detector-scope",
+            "foundation-models:tcab"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "oracle-versus-surrogate",
+          "question": "用 ProEval 少测一批模型时，为什么仍需像 XLGoBench 那样明确真实 scorer 和 gold 隔离？",
+          "answer": "ProEval 只改变评分获取和总分估计方式，真实观测仍必须来自合法任务评价。若目标答案提前进入模型输入，或未选题的目标分数进入后验，相关性再漂亮也在估计被污染结果。应把未查询预测、已查询分数和评分器内部答案分开；精确 scorer 的存在也不授权策略读取它的隐藏状态。",
+          "example": "教学例：代理选择第二题后才能拿到第二题分数；若初始化就用整张目标分数表建模型，就不能再声称通过少量查询估计。",
+          "papers": [
+            "foundation-models:proeval",
+            "foundation-models:xlgobench"
+          ]
+        },
+        {
+          "id": "posterior-versus-explanation",
+          "question": "FUSE 估计的“正确后验”与 DetectorScope 的“概念贡献”，为什么都不能直接当作事实正确证明？",
+          "answer": "FUSE 后验由验证器分数和识别假设估计，若裁判共同犯错或假设失效，概率也会偏；DetectorScope 的贡献精确说明池化特征置零后的 logit 差，却不证明概念解释真实或原文因果关系。一个是选择可靠性的统计模型，一个是预测函数的可加结构，需要分别接受独立标签与解释验证。",
+          "example": "教学例：几个裁判都偏爱长答案会共同误判；一个检测特征贡献很大，也可能只是数据集线索，而非真正的生成来源原因。",
+          "papers": [
+            "foundation-models:fuse-verifiers",
+            "foundation-models:detector-scope"
+          ]
+        },
+        {
+          "id": "shared-feedback-versus-imputed-feedback",
+          "question": "TCAB 共享同一决策的反馈，与 ProEval 根据历史相关性推断未测分数，为什么不能混记为真实观测？",
+          "answer": "TCAB 的共享建立在耦合后相同决策可复用实际反馈，同时维持各策略边际过程；ProEval 则根据历史协方差对尚未查询项形成后验。后者是推断值，前者也只有满足共享条件才可复用。无论哪种节省，都不能把不同动作的未知回报或未测题分数写成已经执行的结果。",
+          "example": "教学例：两个策略同选动作甲可复用甲的反馈；策略乙选了动作乙，就不能把甲的成功抄给它，哪怕历史上二者表现相关。",
+          "papers": [
+            "foundation-models:tcab",
+            "foundation-models:proeval"
+          ]
+        }
+      ],
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "foundation-models:activation-model-scanner",
+        "foundation-models:combinatorial-watermark",
+        "foundation-models:criticl",
+        "foundation-models:cross-lingual-exploration",
+        "foundation-models:deepsea",
+        "foundation-models:detector-scope",
+        "foundation-models:fuse-verifiers",
+        "foundation-models:gemma-priority-protocol",
+        "foundation-models:interpolated-null-calibration",
+        "foundation-models:mechanistic-etm",
+        "foundation-models:proeval",
+        "foundation-models:tcab",
+        "foundation-models:xlgobench"
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较精确算法评分、概率评测替身、无标签验证器融合、反馈耦合与可加概念解释，明确观测和推断的边界。",
+          "papers": [
+            "foundation-models:activation-model-scanner",
+            "foundation-models:combinatorial-watermark",
+            "foundation-models:criticl",
+            "foundation-models:cross-lingual-exploration",
+            "foundation-models:deepsea",
+            "foundation-models:detector-scope",
+            "foundation-models:fuse-verifiers",
+            "foundation-models:gemma-priority-protocol",
+            "foundation-models:interpolated-null-calibration",
+            "foundation-models:mechanistic-etm",
+            "foundation-models:proeval",
+            "foundation-models:tcab",
+            "foundation-models:xlgobench"
+          ],
+          "source_revisions": {
+            "foundation-models:activation-model-scanner": "9160cad6a859eb0edd5be4fdc3cb49cc0b6077d93f426931592b67298289ff73",
+            "foundation-models:combinatorial-watermark": "d590830b4211df0efa77bdd2b03619d6f9232e114bb5c750e683b264eab0f702",
+            "foundation-models:criticl": "896370d438ab92a70a84d972de63e97ca19ff6924c422988c3f7f42223624651",
+            "foundation-models:cross-lingual-exploration": "c64a84b3e9130ed3f7ab81496488749d6e1cae274215491ec33806d0679044e9",
+            "foundation-models:deepsea": "bc6db634376d4d5ecae131fc5bf9760c2f2b37c4610123e2919529c498da8293",
+            "foundation-models:detector-scope": "1cec4de6a6435be3970d4caedeef69ee5bd22fbbf384fc711cc4f313826e4f40",
+            "foundation-models:fuse-verifiers": "db9252a69f7df13458a0275206d6137bbc9ad0fbd671d3a4d96fe35da707d944",
+            "foundation-models:gemma-priority-protocol": "645389ebdbf527c8fb6d7e9d5248fbca2963f984bad424290343f830548f9c13",
+            "foundation-models:interpolated-null-calibration": "4149f6a705209effefe8e1fa43941b8566e4eef2e6a82054e3cdf68b176387ad",
+            "foundation-models:mechanistic-etm": "c4ae9d200aa2bbf2cc0e7bc40f2d6c363a09713adbc5cf2ef94da0cf4d1e99d2",
+            "foundation-models:proeval": "cc148ceb5167cf0b909f04441d1ab4d47b382022debe81d65496c74d579492c9",
+            "foundation-models:tcab": "4e44170ed798db644200079ceb211363e7fab52b15b9f010f8f5648a0f41bea7",
+            "foundation-models:xlgobench": "12c2082c37310106a20523d6a6845ba8f75628d01b7386fb40617c965c5df153"
+          }
+        }
+      ]
+    }
+  }
+}

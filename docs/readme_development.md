@@ -38,6 +38,22 @@ tests/reproductions/
 
 使用编码助手参与开发时，项目约束由根目录 `AGENTS.md` 维护；任务写法、完成证据和验证范围见 [GPT-6 Astra 协作指南](astra-collaboration.md)。
 
+## 新论文的学习内容
+
+每篇论文都要补齐基础理解、核心机制、方法对比、实现细节四层问答，再归入一个学习子主题。
+同时小幅更新该 topic 的[专题精读卡片](learning/deep-dives/index.md)：把新机制放进已有对照，
+按需要调整分析或跨论文问答，并追加日期、涉及论文与“改变了什么/为什么原有区分仍成立”。
+已有问答 ID 和更新历史保持稳定；逐篇问答与专题精读都不能只复制摘要。
+
+人工精读源在 `docs/learning/deep-dives/*.json`。`reviewed_papers` 必须与 topic 成员一致，
+`updates` 要覆盖新增身份，最新日期与 `updated` 一致；每条更新以 `source_revisions` 记录涉及 README 的 SHA256。旧论文机制或实现边界变更后，也需复核卡片并追加更新。生成器只渲染已写好的内容，
+不会自动替作者做语义比较。缺少归类、卡片或更新说明时，文档发布检查会失败。
+
+```bash
+python scripts/generate_learning_cards.py --require-questions --require-deep-dives
+python scripts/generate_learning_cards.py --check --require-questions --require-deep-dives
+```
+
 本轮参考了 [automated-w2s-research](https://github.com/safety-research/automated-w2s-research) 的 idea 隔离、统一配置、迭代研究和结果缓存设计，但没有合并其 Claude/Flask/RunPod/VERL 重型运行栈。逐项取舍见[架构采用记录](design/automated-w2s-adoption.md)。
 
 ## 提交 GitHub PR

@@ -114,9 +114,11 @@ def topic_tiles(themes: list[dict], href, *, expanded: bool = False) -> str:
         ]
         for topic in theme["topics"]:
             path = f"learning/paths/{theme['id']}/{topic['id']}.md"
+            deep = topic.get("deep_dive_path")
+            extra = (f'<a class="ar-learning-deep-link" href="{href(deep)}">精读对比</a>' if deep else '')
             lines.append(
                 f'<li><a href="{href(path)}">{esc(topic["title"])}</a>'
-                f'<span>{topic.get("question_count", 0)} 问</span></li>'
+                f'<span>{topic.get("question_count", 0)} 问{extra}</span></li>'
             )
         lines += ['</ul></details>', '</article>']
     return "\n".join(lines + ['</div>'])
@@ -152,6 +154,8 @@ def guide_pages(themes: list[dict], cards: list[dict], browser, page_href) -> di
                 f"# {topic['title']}", "",
                 f"[{theme['title']}](index.md) / {topic.get('question_count', 0)} 个问题 · {len(members)} 篇论文", "",
                 "先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。", "",
+                *([f'[阅读本主题精读卡片：多篇论文对比、分析与问答]({doc_href(topic["deep_dive_path"], path)})', ""]
+                  if topic.get("deep_dive_path") else []),
                 browser(members, themes, path=path, filters=False), "",
                 '<details class="ar-learning-guide" markdown="1"><summary>主题导读与阅读路线</summary>', "",
                 "## 先想一个问题", "", topic["question"], "",

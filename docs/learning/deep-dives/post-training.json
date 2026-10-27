@@ -1,0 +1,1570 @@
+{
+  "schema_version": 1,
+  "theme": "post-training",
+  "topics": {
+    "preference-and-alignment": {
+      "title": "偏好不是一个分数：先确定反馈格式，再选对齐目标",
+      "thesis": "DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "post-training:clean-rm",
+        "post-training:gaw-po",
+        "post-training:compo",
+        "post-training:sd-dpo",
+        "post-training:normalized-dpo",
+        "post-training:grip",
+        "post-training:pto",
+        "post-training:c2-dpo",
+        "post-training:rm-memorization-protocol",
+        "post-training:sa-dpo",
+        "post-training:group-dpo",
+        "post-training:probabilistic-autorater",
+        "post-training:benchmark-self-bias",
+        "post-training:simpo",
+        "post-training:orpo",
+        "post-training:kto",
+        "post-training:self-rewarding",
+        "post-training:spin",
+        "post-training:ipo",
+        "post-training:steerlm",
+        "post-training:rlaif",
+        "post-training:dpo",
+        "post-training:slic-hf",
+        "post-training:rrhf",
+        "post-training:constitutional-ai"
+      ],
+      "axes": [
+        "监督单位：同题偏好对、单条满意标签、带噪标签",
+        "参照与尺度：reference log-ratio、长度平均、odds",
+        "目标形状：持续拉开、有限间隔、SFT与偏好联合",
+        "错误来源：策略目标过强，还是标签本身有噪声"
+      ],
+      "comparisons": [
+        {
+          "paper": "post-training:dpo",
+          "position": "把同题chosen/rejected对转为相对冻结reference的log-ratio二分类，不单独训练RM。",
+          "tradeoff": "流程减少了显式RM与在线RL环节，但仍需要可靠偏好对；本地是候选动作损失验证，未训练原文自回归LLM。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:kto",
+          "position": "以单条desirable/undesirable反馈及policy到reference的KL参照点构造效用。",
+          "tradeoff": "不用人为凑同题偏好对，但两类权重、类别不平衡和参照分布仍需明确；本地是六候选线性策略。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:simpo",
+          "position": "以每token平均policy logp作隐式奖励，用固定margin训练偏好，去掉reference前向。",
+          "tradeoff": "长度尺度与偏好压力被明确写入目标；无reference不等于无反馈。已有真实token-loss路径，未复刻原文模型规模与judge。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:orpo",
+          "position": "在同一目标里联合chosen的SFT NLL与chosen/rejected的odds-ratio偏好项。",
+          "tradeoff": "单阶段兼顾绝对似然与相对偏好，但赔率有数值边界；本地完整候选action并非原文语言模型训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:ipo",
+          "position": "让相对reference的偏好gap拟合有限目标1/(2τ)，而非只要求差距不断增大。",
+          "tradeoff": "超过目标也会被拉回，改变的是目标形状；本地已有缩小的token级自由生成路径，不能据此推断原文大模型效果。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:clean-rm",
+          "position": "先用干净校准子集与语义—恢复偏好的joint OT估计双向噪声，再冻结估计器校正RM风险。",
+          "tradeoff": "校正依赖噪声率与校准代表性，signed loss不能擅自截零；完整RM/RLHF因成本过高未复现，当前是L1组件。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、代码映射与边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先问数据里有什么，别从流行loss反推标签",
+          "body": "DPO、SimPO、ORPO和IPO都消费同题回答的相对胜负，但KTO允许单条满意反馈。把不同问题的点赞与点踩拼成一对，等于新增了未观测的比较关系。CleanRM又位于另一层：它估计观察标签怎样偏离干净偏好，再校正训练风险；这不能由简单换一种偏好loss自动完成。",
+          "papers": [
+            "post-training:dpo",
+            "post-training:kto",
+            "post-training:clean-rm"
+          ]
+        },
+        {
+          "title": "“无reference”与“少过拟合”不是同一个开关",
+          "body": "SimPO移除reference但保留长度平均隐式奖励和固定margin；ORPO用SFT项与赔率偏好共同训练。IPO保留reference，并把最优间隔设为有限值。三者改变不同部件：部署或训练内存、回答长度尺度、优选文本绝对似然和间隔饱和行为都要分开看，不能用一个本地准确率替代这些区别。",
+          "papers": [
+            "post-training:simpo",
+            "post-training:orpo",
+            "post-training:ipo"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "binary-feedback-versus-pair",
+          "question": "只有用户对单条回答的点赞/点踩，应把记录凑成DPO对，还是先考虑KTO？",
+          "answer": "先保留原反馈单位。DPO需要同一提示下哪条回答更好的关系，KTO直接使用单条满意标签及KL参照点。不同问题的点赞和点踩不能自动产生相对偏好；若要使用成对目标，应另外收集或可靠构造同题比较，而不是仅为了适配loss硬配对。",
+          "example": "教学例子：甲问题的一条点赞答复与乙问题的一条点踩答复，没有告诉我们甲问题中哪条答复比另一条好。",
+          "papers": [
+            "post-training:dpo",
+            "post-training:kto"
+          ]
+        },
+        {
+          "id": "reference-free-two-objectives",
+          "question": "SimPO和ORPO都不用reference，是否只要关掉DPO参考模型就能互换？",
+          "answer": "不能。SimPO比较长度平均policy logp并减固定margin；ORPO还提高chosen自身似然，并比较赔率。直接删DPO参考项不会补上这两套定义，也不能保证长度与概率边界处理一致。相同的reference内存节省，不意味着相同训练压力。",
+          "example": "教学例子：两条回答相对差距变大时，ORPO的chosen NLL仍单独影响梯度；这不是SimPO固定margin项的别名。",
+          "papers": [
+            "post-training:simpo",
+            "post-training:orpo",
+            "post-training:dpo"
+          ]
+        },
+        {
+          "id": "finite-margin-versus-label-cleaning",
+          "question": "把DPO换成有限间隔IPO，就能修复被误标成rejected的正确回答吗？",
+          "answer": "不能自动修复。IPO限制模型要达到的相对间隔，但仍依赖给定偏好方向；标签反了，有限目标也可能朝错误方向训练。CleanRM针对的是噪声机制估计与风险校正，且其保证依赖估计准确，不能把目标不过度拉开当作标签已经干净。",
+          "example": "教学例子：若甲实际更好却被标为输，较温和地让甲输仍未纠正标签；噪声识别是另一项工作。",
+          "papers": [
+            "post-training:dpo",
+            "post-training:ipo",
+            "post-training:clean-rm"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较DPO/KTO反馈格式、SimPO/ORPO无reference目标、IPO有限间隔与CleanRM噪声校正；已阅25篇摘要，精读6篇。",
+          "papers": [
+            "post-training:clean-rm",
+            "post-training:gaw-po",
+            "post-training:compo",
+            "post-training:sd-dpo",
+            "post-training:normalized-dpo",
+            "post-training:grip",
+            "post-training:pto",
+            "post-training:c2-dpo",
+            "post-training:rm-memorization-protocol",
+            "post-training:sa-dpo",
+            "post-training:group-dpo",
+            "post-training:probabilistic-autorater",
+            "post-training:benchmark-self-bias",
+            "post-training:simpo",
+            "post-training:orpo",
+            "post-training:kto",
+            "post-training:self-rewarding",
+            "post-training:spin",
+            "post-training:ipo",
+            "post-training:steerlm",
+            "post-training:rlaif",
+            "post-training:dpo",
+            "post-training:slic-hf",
+            "post-training:rrhf",
+            "post-training:constitutional-ai"
+          ],
+          "source_revisions": {
+            "post-training:clean-rm": "cb89673dd1b8693093d1d3b68f55c307180d311a51a5234cf8026154abb69763",
+            "post-training:gaw-po": "55f873d81174d19b5e91e731d4990796b4dcf44fd3d7b60d394c2cacceb85edf",
+            "post-training:compo": "094da0195267e05c6b67413d6cb53a92aff3c87b74d8c6d0be6f31b0ccbd8cda",
+            "post-training:sd-dpo": "f73b4f40fdc7d775d0d659d24a1245415c5a49c8af3e97d0bde750bc715267cb",
+            "post-training:normalized-dpo": "025c3c79ef5f26942f097ff169728d2f12b67aff9b4e6297634f2efefdeb756a",
+            "post-training:grip": "da1153a808d80d951235e812c747e40ea45b8255ff11fdabc77202a4b197ac9c",
+            "post-training:pto": "223f6343bccba8f8de6e0a42ec10fd8a955fbf3a55a126c40897edeb33251c24",
+            "post-training:c2-dpo": "15d35504b6ea7277211b0d3e181d4b729dbf2f142509a473c54383504749863a",
+            "post-training:rm-memorization-protocol": "07420a5ca2cde7ffc11279a0a07caaaeab5a015fa2440aa16d2b0d72568f5975",
+            "post-training:sa-dpo": "80a41607b72da34a5ffab3b75235b2505eb3a07269eaba2412316319b433da00",
+            "post-training:group-dpo": "a448988b89e8bd6ded19bf5b7d6aa479b86b94725e77cce617eb7deae8c3d1de",
+            "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057",
+            "post-training:benchmark-self-bias": "30c5b785ac877843a2da71f00f935f4e72b054a643041783c480624aa76006e1",
+            "post-training:simpo": "cc1502d3d9aa69bbffc3c96dca62eab32640aa50608c4b4e1feabf12f10b59ec",
+            "post-training:orpo": "e567d2a6d228de3c55a92ff4ae724af454667a9a5be754924fd104ddd2d9bb62",
+            "post-training:kto": "8aaca649f20cf248967af06a24b620da847d5b4187a10f56fd2f103a9400de5d",
+            "post-training:self-rewarding": "860ad714f6211a198bd7d830f54934c0e9004dc289311ae5c2171b2979dca468",
+            "post-training:spin": "c6ed2668c3301ecb1302efc6c12b91b72a08fa822db4dffe9b5fa689d3f29a33",
+            "post-training:ipo": "38091eac1f9cb930803e83fdf2f942d66fd274955e00312075d2f5d4e7de97dd",
+            "post-training:steerlm": "7e0ae7062f233e2ead4d15faa1b5b601bb95397b158bc04ba99e742457f07f02",
+            "post-training:rlaif": "25307069d0666b799bc21ce563c94647d3853ff5b026da78bcc1c9258d0d5f17",
+            "post-training:dpo": "a54594bea7a424401714d5eebff0524039aed35495680075243dab7355be9acd",
+            "post-training:slic-hf": "274dc3fb96dc375c4d7515b7545a866beeb5fd26fc15eb2043d1712439460bdd",
+            "post-training:rrhf": "2f2ceb86185f701ccc8c7b6b026c23b84eb80c1a4c1537e7656f53a7429faa90",
+            "post-training:constitutional-ai": "0028e6be3f7dd52a6121858b4a8c21852885e9723dd1c9e253be6a19c41ebcbc"
+          }
+        }
+      ]
+    },
+    "policy-optimization": {
+      "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
+      "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "post-training:moer",
+        "post-training:cord",
+        "post-training:orl-diffusion",
+        "post-training:ggpo",
+        "post-training:tapo-trajectory",
+        "post-training:gppo-framework",
+        "post-training:zcpo",
+        "post-training:sharpening-tax",
+        "post-training:rlcpr",
+        "post-training:range-grpo",
+        "post-training:gmc-grpo",
+        "post-training:rfpo",
+        "post-training:graft",
+        "post-training:tlm-dre",
+        "post-training:mad-rl",
+        "post-training:tasco",
+        "post-training:probe-erpo",
+        "post-training:ttpo",
+        "post-training:rlvr-fusion",
+        "post-training:grin",
+        "post-training:erpo",
+        "post-training:gcpo",
+        "post-training:erils",
+        "post-training:reco-grpo",
+        "post-training:code-optimization-rl",
+        "post-training:off-context-grpo",
+        "post-training:iso-rlvr",
+        "post-training:ripo",
+        "post-training:sis",
+        "post-training:stare",
+        "post-training:kpop",
+        "post-training:gprl",
+        "post-training:conspo",
+        "post-training:missing-old-logits",
+        "post-training:luspo",
+        "post-training:calibration-aware-rl",
+        "post-training:online-icepop",
+        "post-training:minirl",
+        "post-training:icepop",
+        "post-training:gppo",
+        "post-training:tis",
+        "post-training:gspo",
+        "post-training:rlcr",
+        "post-training:cispo",
+        "post-training:ttrl",
+        "post-training:luffy",
+        "post-training:vapo",
+        "post-training:dr-grpo",
+        "post-training:dapo",
+        "post-training:reinforce-plus",
+        "post-training:rloo",
+        "post-training:grpo",
+        "post-training:remax",
+        "post-training:ppo-rlhf"
+      ],
+      "axes": [
+        "优势尺度：组均值、组标准差、长度归一化",
+        "更新单位：token surrogate或sequence ratio",
+        "采样有效性：零方差组与动态补采",
+        "分布角色：当前训练、旧训练、rollout引擎"
+      ],
+      "comparisons": [
+        {
+          "paper": "post-training:grpo",
+          "position": "用同题组的奖励均值和标准差替代critic，保留old-policy ratio、clip和reference KL。",
+          "tradeoff": "省去价值模型，却需要同题多响应；全组同奖励没有相对方向。本地是完整候选action，不是DeepSeekMath训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:dr-grpo",
+          "position": "去掉response内长度平均和组标准差，保留组内中心化，审查隐含难度与长度权重。",
+          "tradeoff": "去归一化改变不同组与轨迹的梯度相对尺度，不会创造全错组信号；本地伪长度仅用于诊断。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:dapo",
+          "position": "组合Clip-Higher、零方差组过滤、token-level loss和过长奖励处理。",
+          "tradeoff": "有效更新样本与实际生成预算要分别计数；本地长度来自伪token，未复刻长CoT分布式训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:gspo",
+          "position": "先对响应内log-ratio取平均再指数化，整条response共享sequence clip。",
+          "tradeoff": "改变异常token如何影响整条轨迹，不等于重新定义奖励；本地没有真实token轨迹或MoE路由。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:tis",
+          "position": "用训练侧与rollout引擎概率比校正训推差异，只对过大权重单侧截断。",
+          "tradeoff": "小ratio仍保留，重尾被限制；它不替代old-policy陈旧校正。本地用确定性引擎扰动验证梯度路径。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:icepop",
+          "position": "对训推ratio使用双侧有效区间，区间内保留原ratio，区间外策略梯度为零。",
+          "tradeoff": "会丢弃严重失配token，而不是把所有ratio夹回边界；本地未运行真实MoE集群。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先画概率比的分子分母，再讨论稳定性",
+          "body": "GSPO聚合的是当前策略相对旧策略的响应内log-ratio；TIS与IcePop关注相同权重在训练引擎和rollout引擎中的概率差。前者管理策略更新幅度，后者处理采样实现失配。同一训练流程可以同时需要两类因子，不能删掉一种后声称另一种已经覆盖全部偏差。",
+          "papers": [
+            "post-training:gspo",
+            "post-training:tis",
+            "post-training:icepop"
+          ]
+        },
+        {
+          "title": "归一化改变权重，不等于补上缺失信号",
+          "body": "GRPO组标准差、Dr. GRPO移除该尺度、DAPO按有效token汇总，都会改变样本之间的相对贡献。然而同题全对或全错时，中心化后仍可能没有方向。DAPO动态采样处理的是这类组进入更新的问题，代价应把被过滤前的生成也计入，不能仅按optimizer步数对齐成本。",
+          "papers": [
+            "post-training:grpo",
+            "post-training:dr-grpo",
+            "post-training:dapo"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "all-failed-group",
+          "question": "同题四条回答全错，把GRPO改成Dr. GRPO就能得到学习方向吗？",
+          "answer": "若奖励仍完全相同，去掉组标准差也不会改变减均值后全零的事实。Dr. GRPO主要改变尺度偏置，DAPO则会过滤零方差组并继续采样。若预算内始终没有可区分结果，仍需另外解决探索或监督，不能靠重命名归一化获得新信息。",
+          "example": "教学例子：奖励全为0时，0减组均值仍为0；把分母从标准差改成常量不会令某条轨迹突然更好。",
+          "papers": [
+            "post-training:grpo",
+            "post-training:dr-grpo",
+            "post-training:dapo"
+          ]
+        },
+        {
+          "id": "sequence-ratio-not-token-average",
+          "question": "GSPO是否等于先逐token做PPO裁剪，再把结果求平均？",
+          "answer": "不等于。GSPO先平均log-ratio形成一个响应级ratio，再用它裁剪整条响应；逐token裁剪是先分别作非线性选择。平均与裁剪不能任意交换，某个异常词元在两种流程里的影响不同。序列级奖励也不在数学上强制唯一一种surrogate。",
+          "example": "教学例子：一枚token的ratio很高，其余接近一；逐token方案可只裁它，GSPO则依据聚合后的单一ratio决定整条响应的权重。",
+          "papers": [
+            "post-training:grpo",
+            "post-training:gspo",
+            "post-training:dapo"
+          ]
+        },
+        {
+          "id": "tis-versus-icepop",
+          "question": "某token的训推ratio非常小，TIS与IcePop会怎样处理，和策略变旧是一回事吗？",
+          "answer": "TIS单侧上截断仍保留这个小权重，IcePop若低于下界会把本次策略梯度置零。它们审查的是训练引擎与rollout引擎的差异；当前权重相对旧采样权重的变化还需另算。不能把区间外mask称作普通PPO clip，也不能用它自动消除策略陈旧。",
+          "example": "教学例子：同一份权重因两套kernel给出不同概率，是训推问题；拿几步更新前的权重采样，则另有策略陈旧问题。",
+          "papers": [
+            "post-training:tis",
+            "post-training:icepop",
+            "post-training:gspo"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较GRPO/Dr. GRPO/DAPO的优势与归一化、GSPO序列ratio、TIS/IcePop训推校正；已阅54篇摘要，精读6篇。",
+          "papers": [
+            "post-training:moer",
+            "post-training:cord",
+            "post-training:orl-diffusion",
+            "post-training:ggpo",
+            "post-training:tapo-trajectory",
+            "post-training:gppo-framework",
+            "post-training:zcpo",
+            "post-training:sharpening-tax",
+            "post-training:rlcpr",
+            "post-training:range-grpo",
+            "post-training:gmc-grpo",
+            "post-training:rfpo",
+            "post-training:graft",
+            "post-training:tlm-dre",
+            "post-training:mad-rl",
+            "post-training:tasco",
+            "post-training:probe-erpo",
+            "post-training:ttpo",
+            "post-training:rlvr-fusion",
+            "post-training:grin",
+            "post-training:erpo",
+            "post-training:gcpo",
+            "post-training:erils",
+            "post-training:reco-grpo",
+            "post-training:code-optimization-rl",
+            "post-training:off-context-grpo",
+            "post-training:iso-rlvr",
+            "post-training:ripo",
+            "post-training:sis",
+            "post-training:stare",
+            "post-training:kpop",
+            "post-training:gprl",
+            "post-training:conspo",
+            "post-training:missing-old-logits",
+            "post-training:luspo",
+            "post-training:calibration-aware-rl",
+            "post-training:online-icepop",
+            "post-training:minirl",
+            "post-training:icepop",
+            "post-training:gppo",
+            "post-training:tis",
+            "post-training:gspo",
+            "post-training:rlcr",
+            "post-training:cispo",
+            "post-training:ttrl",
+            "post-training:luffy",
+            "post-training:vapo",
+            "post-training:dr-grpo",
+            "post-training:dapo",
+            "post-training:reinforce-plus",
+            "post-training:rloo",
+            "post-training:grpo",
+            "post-training:remax",
+            "post-training:ppo-rlhf"
+          ],
+          "source_revisions": {
+            "post-training:moer": "5e4be9edbab7fba3c7945f73f49a875ef24835d9ae6b7044e44f60fa60a80914",
+            "post-training:cord": "36735db8c5f16290550281a76e69e68461ece48ace445a744dbc09f2102541e1",
+            "post-training:orl-diffusion": "61fd35c2b6c66949846328e6ea75437083da79c96dae789e9f1594ce96d22df7",
+            "post-training:ggpo": "a20bc077e04ebbb84b3bfb2d067ff0860a24fa8eca212df4bf889710953f06c4",
+            "post-training:tapo-trajectory": "ae88223b20bde3cf59124995e25a6093921aeb40509bb3a2cc24f5cc48f8e156",
+            "post-training:gppo-framework": "fda8b934d2b7bf201ab83aceeb3c81140fd04d3e048f7ef899d0a163635a65ee",
+            "post-training:zcpo": "7bbacb2c4805c0bb7ac4ed47885fa6c1cf65602767a785d09c0ae8e84a20cc11",
+            "post-training:sharpening-tax": "600a27d376f6d835a0e2ebe74ff708504256df05769c1b6162d3fe5de6a628a8",
+            "post-training:rlcpr": "27ced7148330d740dfec46b030f7840700b0956a9b46b9f511ab7c6d7b0e01bf",
+            "post-training:range-grpo": "7ea48b6da634558e52ef0772673162a5be209bb5590d7500f855d1537c6e02d4",
+            "post-training:gmc-grpo": "2ddf4a7254be0064176e2adfeba8299a9258cc99ac73c087f15533d54e6c7b44",
+            "post-training:rfpo": "e0357b2a0c76ce7e948bba3ceb8c4e30853febd5d1ffb615b8eac2e17c9035aa",
+            "post-training:graft": "7a6da683a81dc37dc8be23b225e8b99c47794b54fe9fb402e70707c051107fc9",
+            "post-training:tlm-dre": "2f863944828fabe754076ae3f1746326bc7b45643dc422a0cdd9527f8d035ad3",
+            "post-training:mad-rl": "514b41631c946ddab798bb2b4728f72a2a84ecf4fb5422dba47bae82c71a36ef",
+            "post-training:tasco": "3f9d0e94c11e615a66b77d89577a14ab5411722dad005d44f57a3191cc25f018",
+            "post-training:probe-erpo": "a3aa21448b9a8972a63000c3a6147b0224bb3c9c0bb25271b092c6fef33474b2",
+            "post-training:ttpo": "ada90da09e3d0331abe859f17d328dfc6ce66d8bade8ce7d6128c3c323cd367d",
+            "post-training:rlvr-fusion": "7eb55502fdbd041ac9d369bc8ea95dfd6549d7787f9069cae18d7571a037e742",
+            "post-training:grin": "0361471c3d4541872268b5b8dbd133755bc6e83401fe96c11e0b4f84b64b704c",
+            "post-training:erpo": "5f3ce36ee0e2ebc4e21d39356e448be1558545dbe156f5bbd3eff62d0d9b0943",
+            "post-training:gcpo": "8e7327f70696e7d36010f00618bc1d5a0ccfe24a5f7299041eb8a3beac74332d",
+            "post-training:erils": "ceb8224fbba0f66a23b9b65abe94f744f7923f44d0776906e753496adf0324af",
+            "post-training:reco-grpo": "9cd45f8932025ef64e418800c283c9f8717c76f7a2fc10b60f351180d88f5a06",
+            "post-training:code-optimization-rl": "1dbd2aa2203f1005654b2203a717894de54b67f8b14f854f4fabfa6a8f1421ad",
+            "post-training:off-context-grpo": "af4d6b64a44e67a1a979d634fb12e4af7b73778ac971d59ff62baeaa7815e95f",
+            "post-training:iso-rlvr": "091da017a03d3bcacbbe8fef31153445ba31b8cc8475f43305c6807a741f8046",
+            "post-training:ripo": "7a4d3195cac9914756bcdf08aeb6c311efe1ce94b01d622bcc6d10f8f5fb3543",
+            "post-training:sis": "4e080a9273c0628a7f80856248c6774a8e4bc2961759fd5c2601aff8a4f2ba30",
+            "post-training:stare": "6ea69fb51658d400d00df79cc00c73eb6dee4de15f47556f8741797fe43a2359",
+            "post-training:kpop": "2ce7bbc6836ce68fb8a43fbe450c055e83241774b997f1c5d33c43cd88084b78",
+            "post-training:gprl": "cb24133dd14eb2b3958d5494269b2a52d973007cc5e225e85aa657165f09bdc5",
+            "post-training:conspo": "34b352c25773764076e7b74dd8ee4d38bbc46a1510b68dc3c8fd61e5ed2b1ac6",
+            "post-training:missing-old-logits": "b5d4fd8fbd3775010d1fc9fad232748e731108497da61c93a9310919e4c8a788",
+            "post-training:luspo": "65c66a561c437a1b3b98ff992a9f87abf9fa71bb405b5002263f4e1805208d1b",
+            "post-training:calibration-aware-rl": "3fed6bb531140f97829ae7558703e20b260fb1b4f92c65e724b4700058371941",
+            "post-training:online-icepop": "ee0e0ff8ca5ea6fdb7a48acd9463b3e9ca955912aa75315a672256b9f1c5a1a3",
+            "post-training:minirl": "2f5c7c775583a2308fc2e2162eae2955aeb553a76e875514184451d4bd0cf3c3",
+            "post-training:icepop": "0779fcae6dcb919e1fd302521c5ba6890ab185e0c6ecf0250154847aaefa1368",
+            "post-training:gppo": "0ff27997609b1b44e8007185695336862456b5c5d58d73962479588b337dd26e",
+            "post-training:tis": "523d2b1b155dbc3fd06097c0b090706f205175d615340a011b98b67c44b6da83",
+            "post-training:gspo": "fda878cdb88b508a8fe4a5ddaf65e51e5a0da920b18e85ad292627dd969d8ed3",
+            "post-training:rlcr": "f2a362132aa66abb8a2931694c74387c5e29509b82ba0ac211ccf98666b1f8f5",
+            "post-training:cispo": "6c141b4b3932d4c7e101c14f7a5aef2ebe3def2b6411d59b451ab4e9961e5184",
+            "post-training:ttrl": "d70c70839d1b7d00fc74a6d2ab24b21d1df0248371fb7214ed4c0b5bd96fd016",
+            "post-training:luffy": "1152766b8fdc17120a082a3589818ec7a975f1cda9f30d633f0b6aa6a4cc70f0",
+            "post-training:vapo": "989a2c60cf447e0ec8587044c2de8ee1cecce275de3a047602b53a793aa428fe",
+            "post-training:dr-grpo": "604e3c3df040305405bda2166f684e95d0b0263b9fcee56bca0fbe8fc5f6c2fa",
+            "post-training:dapo": "26eaf39347f63a41ff3363249e60b764650e19d150089ccf7543b8084602083f",
+            "post-training:reinforce-plus": "d51638b54f567a69e78f489bd40edc515a0714073349b98d6a62e62ba38fe290",
+            "post-training:rloo": "07ebf63638eb93c804d3122a7c60995c0a29db5eb1ab2023b10546f87a50a0a1",
+            "post-training:grpo": "43d89e0ce5fb714a0bd1158c64f9d7410596997dae717a03ba3dcdd99f21b6e2",
+            "post-training:remax": "b4f69fb52c4ee7f11f904590183f96ea4a0ccd1db1876c4ed99a3e49d674484f",
+            "post-training:ppo-rlhf": "d68c63a67f0b4d8005ab931d028b7478c93ba9b1565aae48c2409d570db084ab"
+          }
+        }
+      ]
+    },
+    "reward-and-credit": {
+      "title": "奖励从哪里来，信用才该分到哪里",
+      "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "post-training:mart-grpo",
+        "post-training:mge-po",
+        "post-training:tag-reward-gating",
+        "post-training:sif",
+        "post-training:progress-reward",
+        "post-training:opcredit",
+        "post-training:mrtpo",
+        "post-training:knowgpo",
+        "post-training:diverge-ideation",
+        "post-training:rap-walk",
+        "post-training:upturn",
+        "post-training:soar",
+        "post-training:residual-advantage",
+        "post-training:tvrl",
+        "post-training:my-fault",
+        "post-training:carm",
+        "post-training:t2spo",
+        "post-training:sharpo",
+        "post-training:pact",
+        "post-training:tiao",
+        "post-training:spear",
+        "post-training:v-rubrics",
+        "post-training:srpo",
+        "post-training:sa-mrpo",
+        "post-training:rubric-dropout",
+        "post-training:rrc",
+        "post-training:adrs",
+        "post-training:serpo",
+        "post-training:cort",
+        "post-training:tcr",
+        "post-training:dynamic-rubric",
+        "post-training:taco",
+        "post-training:scar-shapley-credit",
+        "post-training:intuitor",
+        "post-training:math-shepherd",
+        "post-training:process-supervision"
+      ],
+      "axes": [
+        "证据来源：人工步骤、正确续写比例、verifier、内在分布",
+        "信用粒度：步骤、token、奖励维度、动作chunk",
+        "修改方式：增加监督、重分配、降权、屏蔽",
+        "可见时间：生成时信息与事后回看"
+      ],
+      "comparisons": [
+        {
+          "paper": "post-training:process-supervision",
+          "position": "训练逐步PRM并优先标注不确定步骤，直接获得过程质量监督。",
+          "tradeoff": "依赖步骤标注与覆盖；本地候选机制实验不代表原文大规模过程评测。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:math-shepherd",
+          "position": "从中间步骤采样续写，以最终答案正确比例构造自动step label。",
+          "tradeoff": "减少人工逐步标签，但标签依赖续写策略与采样预算；本地未复刻原文训练规模。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:mrtpo",
+          "position": "固定采样策略，在全verifier上下文与留一信息块下重放，用全词表JSD定位各奖励相关token。",
+          "tradeoff": "守住奖励总信用但依赖信息块构造；完整SQL/工具实验成本过高未复现，当前为L1梯度诊断。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、代码映射与边界"
+          ]
+        },
+        {
+          "paper": "post-training:taco",
+          "position": "按局部tail risk只降低高风险token的正优势，负优势完整保留。",
+          "tradeoff": "防止答对轨迹把局部错误一并强化；本地surprisal代理未复刻原文上下文风险预测器。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:mart-grpo",
+          "position": "事后事件VLM定位最后未恢复错误，过滤失败边界之后的信用，保留原组优势和原分母。",
+          "tradeoff": "回溯边界不自动满足理想stopping-time条件；完整机器人/VLM训练成本过高未复现，A100证据仅验收L1组件。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "post-training:intuitor",
+          "position": "以逐token全词表KL(U∥policy)的长度平均作为self-certainty内在奖励。",
+          "tradeoff": "不需外部verifier但置信不保证正确；本地仍是相反KL方向的候选诊断，尚未实现定义性奖励。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "自动过程标签不是无条件的步骤真理",
+          "body": "人工过程监督直接询问某一步是否合理；Math-Shepherd估计的是从这一步继续采样后答对的比例。后者还混入当前续写器能否恢复、能否完成后续推理的信息。INTUITOR更进一步只读模型分布，连最终答案正确性都不是其原生证据；三者的标签含义应先分清，再比较成本。",
+          "papers": [
+            "post-training:process-supervision",
+            "post-training:math-shepherd",
+            "post-training:intuitor"
+          ]
+        },
+        {
+          "title": "同叫信用过滤，作用对象和守恒量却不同",
+          "body": "TACO只衰减正优势，避免正确整句污染局部低质量token；MART-GRPO在失败episode中遮去事后错误边界后的信用，原分母不变；MRTPO依据不同奖励信息块重分配正负信用，并控制总量与重分配幅度。它们不能都实现成“删掉可疑token后对剩余token求均值”。",
+          "papers": [
+            "post-training:taco",
+            "post-training:mart-grpo",
+            "post-training:mrtpo"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "step-truth-versus-continuation",
+          "question": "Math-Shepherd某一步续写成功率低，等同于人工PRM判定这一步逻辑错误吗？",
+          "answer": "不等同。续写成功率还受后续采样能力和预算影响，正确中间步骤也可能因后续难而低分；人工过程标签则直接评价该步。两种证据可以互补，却不能把自动标签无条件称为逻辑真值，评估时也要隔离训练用标准答案与受测模型输入。",
+          "example": "教学例子：前面列式正确，但模型不擅长后面的计算，多次续写都失败；这不能单独证明列式本身错。",
+          "papers": [
+            "post-training:process-supervision",
+            "post-training:math-shepherd"
+          ]
+        },
+        {
+          "id": "filter-denominator",
+          "question": "TACO与MART-GRPO都想少罚无辜步骤，为什么不能统一成删token后重新平均？",
+          "answer": "TACO保留负信用，只降低高风险正信用；MART-GRPO才针对失败后缀置零，并明确保留原有效action-token分母。删后重新平均会放大剩余项，改变目标。MRTPO又要求按奖励相关性保留信用总量，因此统一的“先删再均分”会抹掉三者定义。",
+          "example": "教学例子：原轨迹十个token中遮掉后四个，按六而非十归一，会使剩余负项更强；这不是MART原公式。",
+          "papers": [
+            "post-training:taco",
+            "post-training:mart-grpo",
+            "post-training:mrtpo"
+          ]
+        },
+        {
+          "id": "confidence-is-not-verification",
+          "question": "INTUITOR分布越尖锐，与Math-Shepherd更常续写答对，能视作同一种奖励增加吗？",
+          "answer": "不能。INTUITOR读取KL(U∥policy)，反映全词表分布形状；Math-Shepherd读取最终正确性频率。模型可以自信地错，且把KL方向反过来会得到另一种量。本地INTUITOR尚未实现原方向和逐词全词表计算，不能用其候选指标给两方法排能力名次。",
+          "example": "教学例子：模型每次都坚定输出同一个错误数值，分布可很尖锐，但对照标准答案的续写成功率仍为零。",
+          "papers": [
+            "post-training:intuitor",
+            "post-training:math-shepherd"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较人工/自动过程标签、MRTPO奖励定位、TACO正信用、MART失败后缀过滤与INTUITOR内在奖励；已阅36篇摘要，精读6篇。",
+          "papers": [
+            "post-training:mart-grpo",
+            "post-training:mge-po",
+            "post-training:tag-reward-gating",
+            "post-training:sif",
+            "post-training:progress-reward",
+            "post-training:opcredit",
+            "post-training:mrtpo",
+            "post-training:knowgpo",
+            "post-training:diverge-ideation",
+            "post-training:rap-walk",
+            "post-training:upturn",
+            "post-training:soar",
+            "post-training:residual-advantage",
+            "post-training:tvrl",
+            "post-training:my-fault",
+            "post-training:carm",
+            "post-training:t2spo",
+            "post-training:sharpo",
+            "post-training:pact",
+            "post-training:tiao",
+            "post-training:spear",
+            "post-training:v-rubrics",
+            "post-training:srpo",
+            "post-training:sa-mrpo",
+            "post-training:rubric-dropout",
+            "post-training:rrc",
+            "post-training:adrs",
+            "post-training:serpo",
+            "post-training:cort",
+            "post-training:tcr",
+            "post-training:dynamic-rubric",
+            "post-training:taco",
+            "post-training:scar-shapley-credit",
+            "post-training:intuitor",
+            "post-training:math-shepherd",
+            "post-training:process-supervision"
+          ],
+          "source_revisions": {
+            "post-training:mart-grpo": "6816fb69719fa029520d426c2b2a0783a4f74840df959bb203cb0b2d830408c4",
+            "post-training:mge-po": "79061d44785edab478a0b825f1d92f1fb96520f5a5f8742945638b3d78f3c2c7",
+            "post-training:tag-reward-gating": "80ae87925ddaed87f00e62a49e40d87dda1e0d9fe9b35484f0e54b281712298b",
+            "post-training:sif": "6887ec70436e2072c2647cfbd0ccc5966748d23ee5b2d45048cc81bccf5fb5b2",
+            "post-training:progress-reward": "404e1041009164a357a0d8c4288fe414f8e029ca323d293f07ad3dd14492cfd8",
+            "post-training:opcredit": "68850a49841d1702552ad4020e63204a73b9860466f8f33e47c304390cc5f4f0",
+            "post-training:mrtpo": "41945cae3036896a20b0dd0db3832718fd1df1f9cca29fb557fd726ae72c88f6",
+            "post-training:knowgpo": "f21ad1a9b327d9849f0493c57cea900b2a8c2a89de66a0f57082ef828d69e2bb",
+            "post-training:diverge-ideation": "bd24e8b2de14f1909e4634462dbd579e41d89024dc579ce58e5f3295f8d53adf",
+            "post-training:rap-walk": "3b5ef835fdf8a8b4014d8116e6c0a33633f0d6c7eb81f627c469bc4799624121",
+            "post-training:upturn": "bce03f4dd0c60a79a233911b32ff74ab168f1ef79dc20e7b6acd4a354714b83f",
+            "post-training:soar": "ca972c329a5f6fef22dd341fc5b6c1211d34aaff20a46d713dc4d6c2af462104",
+            "post-training:residual-advantage": "ea00ca575be197a7e08c8234a95fd64b6fd0c850bc5976b08e76c97ccb990bae",
+            "post-training:tvrl": "ce075a35eeddf757c5bd3590b394c1320c2dbbf9363328de5b7f41402b00aac6",
+            "post-training:my-fault": "2775759bbeb8cf1ef961cb1c684043d402c0ee3741e53154616197d458880810",
+            "post-training:carm": "3ad3edb69fe2e8eac89dac5bcd657a421e4e8be11f231a5a711ff8c770ab9257",
+            "post-training:t2spo": "3825d2cec7357aac252c6a87a9f620b11b1a87c31a9b1d32af0286fedb40542d",
+            "post-training:sharpo": "e3b9ba9110f8b6c16385e857050650c037d983f2d964ae5479611f514fef4f91",
+            "post-training:pact": "9b959e06f2497914ef5d46790f98be144280136627e3caaa6b90fbadf30e75e6",
+            "post-training:tiao": "5957cb262e34f3e8ef0d6479f2d1313f242dba01a9cb1389691512310ee27aaf",
+            "post-training:spear": "f0fa068aa97a0e54dff2750c47f973758349ab22ccc21822f4d56b0b97289755",
+            "post-training:v-rubrics": "5df351d8f4c301ffc56bbda74708e4236e03600d92be72371372e0ba28d3eee0",
+            "post-training:srpo": "c816df33f1470f4b594d86f9e4fcd4632acdf046caa057ca39061a5fd909d051",
+            "post-training:sa-mrpo": "f6b76ead832626465422575a53322666d3d1da9827881a961f86b3af0738bec5",
+            "post-training:rubric-dropout": "6336adf07eb694f13b58e23d30476814ecf920c7a1145b682a7c41c6ac86d324",
+            "post-training:rrc": "f8567ce8446c00cb0afaaa4e52e01592d81e03a807680241ca684d7976d92f29",
+            "post-training:adrs": "85e9eb103f8e5d9df3832f03415bcdfb1f1da30587ae47cba86998792764c409",
+            "post-training:serpo": "bb074d8ca20485ea4dc1f5c588734a736d0397b9a3d9c082573bb5b6317d656c",
+            "post-training:cort": "fe5e011f7715f95dde51c6818222ffe18a1ddf6b9968e68a594ea32abf100f8c",
+            "post-training:tcr": "60fee608cc0ffdd60e5a1ed081fd2d5d30f5f310d089bdd2ca024be6b3fe862c",
+            "post-training:dynamic-rubric": "c07b566ed4926d31d375558d5d4dcab3989d6dddb98123114dc9584c60480c7d",
+            "post-training:taco": "d0440e75bb674d0ae0ffc721691df4c8194541c9a460fd517b52cdb3f7955572",
+            "post-training:scar-shapley-credit": "2a9592a898a45d29687475feff9600e98b69b5d5ef8fb889532ccde70d8d1440",
+            "post-training:intuitor": "e23d63d21201d359ee094c21724a65cf1bcd84897498f2b2ca14b75905ac91ec",
+            "post-training:math-shepherd": "bd20779889ec2aef3b5c34adb87cc8a67c15d811aab371984ceef78f6b94e655",
+            "post-training:process-supervision": "1f28ef145ca1bf64ad87f68069e402128add9a209d0183b6a602ae9c92c470dd"
+          }
+        }
+      ]
+    },
+    "student-trajectory-distillation": {
+      "title": "沿学生前缀蒸馏：采样分布与散度方向要分开看",
+      "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "post-training:opst",
+        "post-training:userarena-optd",
+        "post-training:gift",
+        "post-training:projected-distillation",
+        "post-training:optd",
+        "post-training:ap-opd",
+        "post-training:simopd",
+        "post-training:gr-opd",
+        "post-training:ig-opd",
+        "post-training:divergence-routed-opd",
+        "post-training:state-opd",
+        "post-training:semi-opd",
+        "post-training:opd-learning-signals",
+        "post-training:sipo",
+        "post-training:ride-opd",
+        "post-training:oasis-opsd",
+        "post-training:ipd",
+        "post-training:flowmap-opd",
+        "post-training:drift-opd",
+        "post-training:dr-opd",
+        "post-training:lspd",
+        "post-training:recursive-opsd",
+        "post-training:gamma-opd",
+        "post-training:route-opd",
+        "post-training:opdvr",
+        "post-training:opd-search-plus",
+        "post-training:r2-opd",
+        "post-training:sr-opsd",
+        "post-training:u-opsd",
+        "post-training:rp-opsd",
+        "post-training:opd2",
+        "post-training:dash",
+        "post-training:causal-opd",
+        "post-training:pcsd",
+        "post-training:flux-opd",
+        "post-training:beta-opsd",
+        "post-training:relay-opd",
+        "post-training:opd-lm",
+        "post-training:gkd",
+        "post-training:minillm"
+      ],
+      "axes": [
+        "状态来源：教师示范、当前学生、初始学生固定轨迹",
+        "比较几何：FKL覆盖、RKL寻模态、JSD路由",
+        "局部处理：增加纠正方向或缩放原监督",
+        "证据类型：训练目标、缓存合同、学习信号诊断"
+      ],
+      "comparisons": [
+        {
+          "paper": "post-training:gkd",
+          "position": "让教师在学生实际生成的前缀上给分布监督，用student data fraction混合固定数据与on-policy状态。",
+          "tradeoff": "改善状态覆盖并不指定唯一散度；本地候选支撑集未训练原文T5序列模型。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:minillm",
+          "position": "在学生生成分布上优化RKL，并用teacher-mixed sampling、baseline和长度处理稳定估计。",
+          "tradeoff": "偏向学生可承载的教师模态，可能弱化欠覆盖方向；本地为候选采样与梯度方向验证。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:divergence-routed-opd",
+          "position": "所有位置保留RKL，仅在高JS分歧位置增加FKL，以候选并集的PPO surrogate实施纠正。",
+          "tradeoff": "路由支持教师高概率但学生少采到的候选，不等于全局改用FKL；完整训练未复现，微型在线更新为L1诊断。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果与验收"
+          ]
+        },
+        {
+          "paper": "post-training:ap-opd",
+          "position": "比较相邻块的原始惩罚统计，对突增后整块有符号监督统一回拉。",
+          "tradeoff": "不增加教师前向，也不换符号；阈值并非校准显著性检验。完整实验成本过高未复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、代码映射与边界"
+          ]
+        },
+        {
+          "paper": "post-training:semi-opd",
+          "position": "固定初始学生轨迹与教师评分，但每步重算当前学生logp及优势。",
+          "tradeoff": "省去重复采集，却不会自动覆盖新学生访问的全部状态；短预算checkpoint只验训练链路。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:opd-learning-signals",
+          "position": "同时观察残余loss、截断前梯度、两折occupancy、参数位移与CKA，区分损失和可用学习信号。",
+          "tradeoff": "这是相关性诊断设施，不是新优化算法；本地三步运行不复现长平台期，也不能证明失败原因。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "同在学生轨迹上，也可能学到不同方向",
+          "body": "GKD说明监督应覆盖学生会走到的前缀，但允许多种散度。MiniLLM选择学生到教师的RKL；当学生几乎不支持某教师候选时，该方向的纠正可能较弱。DrOPD保留RKL底座，只在高分歧处加入FKL，并从师生候选并集实施更新。采样状态、散度方向与被更新候选因此是三个可分别检查的部件。",
+          "papers": [
+            "post-training:gkd",
+            "post-training:minillm",
+            "post-training:divergence-routed-opd"
+          ]
+        },
+        {
+          "title": "loss大、梯度弱、局部尖峰，不是同一个故障",
+          "body": "OPD Learning Signals要求同时记录损失与梯度，避免把残余差异当作仍有强学习动力。AP-OPD处理的是相邻块惩罚突然上升，缩放整块而保留方向；它不构成对平台期原因的通用解释。Semi-OPD则改变状态复用方式，教师标签固定也不允许把学生相关优势固定下来。",
+          "papers": [
+            "post-training:opd-learning-signals",
+            "post-training:ap-opd",
+            "post-training:semi-opd"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "on-policy-not-one-kl",
+          "question": "GKD与MiniLLM都沿学生轨迹学习，为什么DrOPD还会额外加入FKL？",
+          "answer": "沿学生轨迹只确定前缀分布。MiniLLM的RKL倾向学生已支持的教师模态；学生给某教师候选极低概率时，纠正可能弱。DrOPD用高JS位置路由额外FKL，并保留教师候选支持。它没有更换采样者，也不是说所有位置都应无限增加FKL。",
+          "example": "教学例子：学生在同一错误前缀上总只考虑甲，教师偏好乙；访问该前缀并不自动保证乙获得足够纠正梯度。",
+          "papers": [
+            "post-training:gkd",
+            "post-training:minillm",
+            "post-training:divergence-routed-opd"
+          ]
+        },
+        {
+          "id": "frozen-teacher-versus-student-score",
+          "question": "Semi-OPD把教师评分缓存后，为什么不能连教师减学生的优势也永久缓存？",
+          "answer": "教师配置固定时，其评分可复用；学生参数每步改变，学生logp及二者差值必须重算。否则更新仍响应旧学生的错误程度。与GKD持续采新前缀相比，Semi-OPD另外固定了初始轨迹，这两个“固定”不能混成训练中所有概率都不再变化。",
+          "example": "教学例子：某token已被学生学会，旧缓存还保留很大教师优势，会继续施加过时的监督压力。",
+          "papers": [
+            "post-training:semi-opd",
+            "post-training:gkd",
+            "post-training:minillm"
+          ]
+        },
+        {
+          "id": "spike-versus-direction-repair",
+          "question": "AP-OPD回拉惩罚尖峰，与DrOPD在高分歧处加FKL，是相反的处理吗？",
+          "answer": "它们检测的对象不同。AP-OPD看相邻块原始惩罚是否突增，再缩放该块全部有符号系数；DrOPD看师生分布的JS与欠覆盖，增加指定纠正方向。一个改变局部强度，一个改变监督组成。不能只因都用“分歧”一词，就认定应对相同token作同样或相反操作。",
+          "example": "教学例子：持续高分歧却无块间跳升，可触发DrOPD路由而不触发AP回拉；两种门控不是同一阈值的反面。",
+          "papers": [
+            "post-training:ap-opd",
+            "post-training:divergence-routed-opd",
+            "post-training:opd-learning-signals"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：分开学生状态分布与散度方向，比较GKD/MiniLLM、DrOPD/AP-OPD、Semi-OPD和学习信号诊断；已阅40篇摘要，精读6篇。",
+          "papers": [
+            "post-training:opst",
+            "post-training:userarena-optd",
+            "post-training:gift",
+            "post-training:projected-distillation",
+            "post-training:optd",
+            "post-training:ap-opd",
+            "post-training:simopd",
+            "post-training:gr-opd",
+            "post-training:ig-opd",
+            "post-training:divergence-routed-opd",
+            "post-training:state-opd",
+            "post-training:semi-opd",
+            "post-training:opd-learning-signals",
+            "post-training:sipo",
+            "post-training:ride-opd",
+            "post-training:oasis-opsd",
+            "post-training:ipd",
+            "post-training:flowmap-opd",
+            "post-training:drift-opd",
+            "post-training:dr-opd",
+            "post-training:lspd",
+            "post-training:recursive-opsd",
+            "post-training:gamma-opd",
+            "post-training:route-opd",
+            "post-training:opdvr",
+            "post-training:opd-search-plus",
+            "post-training:r2-opd",
+            "post-training:sr-opsd",
+            "post-training:u-opsd",
+            "post-training:rp-opsd",
+            "post-training:opd2",
+            "post-training:dash",
+            "post-training:causal-opd",
+            "post-training:pcsd",
+            "post-training:flux-opd",
+            "post-training:beta-opsd",
+            "post-training:relay-opd",
+            "post-training:opd-lm",
+            "post-training:gkd",
+            "post-training:minillm"
+          ],
+          "source_revisions": {
+            "post-training:opst": "988595b5328fb93aa62b9858706d01adeafa2f362b2f7e421c367ef0bc4df5b4",
+            "post-training:userarena-optd": "3c7bdaaad5160991a8500ff0bac0e68fa7c380a71db9ed49fac49cf6f6f0f00d",
+            "post-training:gift": "e3bc0a3669467498e8d57896ec59617247e371621fda77e7b03276e1b7bee8a3",
+            "post-training:projected-distillation": "e0e17bff17993f5240eb1b7b00f9636f00c5d3ece167cbc3e31699c4d074925e",
+            "post-training:optd": "af7c0a8f611a38acb533e156b012f5cfb98e98f97565a72d0d684e593232c3ca",
+            "post-training:ap-opd": "c7c9bd11d4fd1e4ebf2ae7e058682d64378cd5fd5bfe61651a4ed20cb3b5699e",
+            "post-training:simopd": "80aedc14d94e4d836ea201d78ce845120210026bfa57b3d441d9eafbab532516",
+            "post-training:gr-opd": "f8a13321f771ae684f4d49ed3fca250cbfe54f325a5b542105261426bfc9358a",
+            "post-training:ig-opd": "5a0818723ce63ffa8827b2bd3557b7499c89603ce99306f8fd3e9dd863b27fa0",
+            "post-training:divergence-routed-opd": "4c235386d1ad4b692c8d0f9132abcc54c64c71a5a0475e26aac931474d796a24",
+            "post-training:state-opd": "12a63ff09c0e14afb01d76118c204a58c72dd3ab2f3e2ee70de0a4f55344d21b",
+            "post-training:semi-opd": "1f65c586f0ba66b5c472963cca6d27af741e04e6f8d04a889d19219cb9ab7851",
+            "post-training:opd-learning-signals": "6d792a75ff1fd93711b11e8d54d79b7059c03b83cd21828608ee84f7bfa90d21",
+            "post-training:sipo": "f44174198e2515193234816b3f599c8fcec35168dd4e51273e150f90f2eb3891",
+            "post-training:ride-opd": "994a07c5f022501f1a58b2779e640ad9dfcf82bdafd7290856ce319c150510ca",
+            "post-training:oasis-opsd": "94cf3d7c7016b85d434e0b37d5cfe586e7e2f371823eff19b2edd2e0113b81d0",
+            "post-training:ipd": "e497e39af7a96d3e339325b4b85797e4337e0749202154d1ad815dfe23d7af6e",
+            "post-training:flowmap-opd": "f865ae21ea4399ff514e65a5fa17eb15942867e32c66b804b5bbc1e22d0d8d60",
+            "post-training:drift-opd": "37d0b188adb26fdd3f6ce6fac26868acfe3838319e3e9c246b3cbcd718f8393f",
+            "post-training:dr-opd": "875f04b150b3fb071062b2238c1c204906f56aee5015159fef1c66c330cc6a23",
+            "post-training:lspd": "7d1362bb5720c656da5e81b64687e96453425cf958290ce21492149d8232c297",
+            "post-training:recursive-opsd": "fcfe432363e5ee570c2f04f865b2058db74d5e3e13f6b331d25453ff5a46e159",
+            "post-training:gamma-opd": "f82ebd84814723fa557a23c6e686eda9ad0931a594831e9b464485e45d1df4e2",
+            "post-training:route-opd": "4d95b4333914d5fb16d911177f6c81c0b7d43ed7ba8b203ba07bb6d10a47d98d",
+            "post-training:opdvr": "37091512d2b40baa8562fa75714415f27fb562dcccb75796e47c8d84ce00a86f",
+            "post-training:opd-search-plus": "3cef83cddd911953f89c2f70b771bc38d34104b2974c1e46425092b1828abbc3",
+            "post-training:r2-opd": "3b0285ecf6640ec6f6ac8baf1acdcb140dd979340448b5e942ed62a84be8ba67",
+            "post-training:sr-opsd": "4460f2bcedca450cafb3f326134144597d773e16f7116dbc4e412ba4a9060445",
+            "post-training:u-opsd": "fb62ddcdee4c31f183846769805fe6e55776fd773829b792400a361a26d871b6",
+            "post-training:rp-opsd": "9ae6d218afef6e70554a10a160b6ac524e98d281dbec7f7f27183f544fd420fc",
+            "post-training:opd2": "fab776cdcbbef8adfcd2ffa8a6ad5ee4c4bd53ab95d1cc7f73f0261a19894fd3",
+            "post-training:dash": "4c1be20eca914d92f87aa4a47f16a2942e0ed114d242fc4fe232ef1acfd87ce5",
+            "post-training:causal-opd": "e3f22ca18f528e5fc4b315d77e8fdfa572cfebfb052e7a6dbfbfaa88e3165340",
+            "post-training:pcsd": "8073aa9055afef949440d5e5e5f95fa116fb9bb0ea2fe96199c351b5c8c4d80c",
+            "post-training:flux-opd": "19200da261cb48eac90a3bc22b7f827d79954b1cf5f63695eed733c1c1c07faf",
+            "post-training:beta-opsd": "94b92b20f7cff25a93ac3a576deb91c58d80c57b0012938b21f82d08fc1e48e1",
+            "post-training:relay-opd": "db1ce9eb4c24ff52687be20b8650dc9335c439396ab60dfbabea642089a97998",
+            "post-training:opd-lm": "fd61f8e101ecfe187ac09038eb09aa5bb5f1cdcd881010354f2e6645904d45d8",
+            "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e",
+            "post-training:minillm": "9d3642836d8f054f83bb4909e0bca73de51c9c166c318255c456470d03da6648"
+          }
+        }
+      ]
+    },
+    "teacher-and-context": {
+      "title": "教师更强仍可能教错：信息、兼容性与成功行为保护",
+      "thesis": "教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "post-training:aopd",
+        "post-training:minimal-edit-opd",
+        "post-training:csd",
+        "post-training:visually-attributable-opd",
+        "post-training:apsd",
+        "post-training:spod",
+        "post-training:treeopsd",
+        "post-training:multiagent-opd",
+        "post-training:waypoint-opd",
+        "post-training:token-teacher-selection",
+        "post-training:tf-opd",
+        "post-training:shared-residual-distillation",
+        "post-training:oprd-reminder",
+        "post-training:elite-replay",
+        "post-training:cce-opd",
+        "post-training:rshd",
+        "post-training:loopsd",
+        "post-training:road-mopd",
+        "post-training:cast-opd",
+        "post-training:sguid",
+        "post-training:meta-opd",
+        "post-training:where-opd",
+        "post-training:weakest-link",
+        "post-training:pr-opd",
+        "post-training:maestro-opd",
+        "post-training:lego-opd",
+        "post-training:advisd",
+        "post-training:olive",
+        "post-training:mas-opd",
+        "post-training:opd-aha",
+        "post-training:nsd",
+        "post-training:compass-opd",
+        "post-training:oprd",
+        "post-training:weak-guide-rlvr",
+        "post-training:video-opsd",
+        "post-training:uc-mopd",
+        "post-training:clue-opsd",
+        "post-training:smopd",
+        "post-training:rstg",
+        "post-training:vad",
+        "post-training:crpo",
+        "post-training:distilled-rl",
+        "post-training:armor",
+        "post-training:mopd",
+        "post-training:polaris-hri",
+        "post-training:opcd",
+        "post-training:opsd"
+      ],
+      "axes": [
+        "教师来源：同参数特权视图或独立领域专家",
+        "组合粒度：按域、逐token路由、成功action保护",
+        "可比接口：同词表坐标或共同文本事件",
+        "信息归因：额外证据、语言先验与学生已会行为"
+      ],
+      "comparisons": [
+        {
+          "paper": "post-training:opsd",
+          "position": "同一模型以两种条件分布充当师生，教师额外看已验证答案，学生自行生成无答案前缀。",
+          "tradeoff": "额外信息仅限训练教师；本地候选双视图未复刻Qwen参数级训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:mopd",
+          "position": "各域先独立训练RL教师，再在同一学生rollout上混合领域分布信号。",
+          "tradeoff": "复用专家但共享学生仍可能出现域间干扰；本地确定性mini-suite不代表大模型能力融合。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:token-teacher-selection",
+          "position": "每个学生前缀按置信、Hellinger距离或对齐特征距离选教师，软路由算术混合概率。",
+          "tradeoff": "合适程度不等于教师更自信；异维特征不可直接相减。完整训练未复现，当前随机策略L1组件。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、代码映射与边界"
+          ]
+        },
+        {
+          "paper": "post-training:spod",
+          "position": "仅保护成功episode中教师原始完整action概率更低的decision，取消该处蒸馏并加软floor。",
+          "tradeoff": "其余decision继续学，soft floor不保证共享参数下永不退化；完整Agent实验因成本未复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、代码映射与边界"
+          ]
+        },
+        {
+          "paper": "post-training:csd",
+          "position": "先按字符区间与解码文本构造共同chunk事件，用链式概率及REST保留未匹配质量。",
+          "tradeoff": "跨tokenizer不再假装同ID同含义，但事件覆盖受限；本地是不同小词表的对齐与梯度诊断。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、代码映射与边界"
+          ]
+        },
+        {
+          "paper": "post-training:vad",
+          "position": "对比同一教师证据存在/移除视图，将原修正单侧投影到视觉方向后重建学生锚定目标。",
+          "tradeoff": "操作性对比不证明所有修正皆真视觉因果；本地过程证据轴替代真实crop，未运行原视觉模型。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "先确认教师信号说的是同一件事",
+          "body": "MOPD和token路由都可能混合多个教师，但域级组合与逐位置选择并不相同。若师生tokenizer不同，CSD还要求先构建解码文本等价事件，不能直接混合同坐标概率。OPSD则未必换更大模型，它利用额外条件提高教师信息量；这与增加独立专家是另一轴。",
+          "papers": [
+            "post-training:mopd",
+            "post-training:token-teacher-selection",
+            "post-training:csd",
+            "post-training:opsd"
+          ]
+        },
+        {
+          "title": "教师修正应被审查，而不是自动全部接纳",
+          "body": "SPOD指出学生成功动作也可能不符合教师偏好，保护粒度是具体action而不是整段成功episode。VAD进一步区分特权教师的修正来自视觉证据还是共享语言偏差。这两种约束分别审查“学生已有成功”与“教师证据来源”，不能只看teacher总分更高就跳过。",
+          "papers": [
+            "post-training:spod",
+            "post-training:vad",
+            "post-training:opsd"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "same-weights-privileged-view",
+          "question": "OPSD师生权重相同，为什么不是让学生直接抄标准答案？",
+          "answer": "两者条件不同：学生只读问题并生成自己的前缀，教师在训练时额外读已验证答案，再评分同一前缀。监督的是无特权条件下的学生分布。MOPD主要换独立领域教师，而非必须给学生额外上下文；无论哪种路径，都不能将训练参考答案接入正式学生预测输入。",
+          "example": "教学例子：教师知道解法来判断学生下一步，但学生生成时不能看到解法；给学生也加答案会变成另一种任务。",
+          "papers": [
+            "post-training:opsd",
+            "post-training:mopd"
+          ]
+        },
+        {
+          "id": "mixture-events-before-probabilities",
+          "question": "逐token教师路由能否直接平均不同tokenizer的同编号logits？",
+          "answer": "不能。路由软混合的是相同事件上的概率，平均logits或logp通常是另一种组合；不同tokenizer还可能让同ID对应不同文本。CSD先做文本事件对齐，并保留REST质量，再比较分布。教师选择发生得再细，也不能代替概率事件具有共同含义。",
+          "example": "教学例子：编号17在一位教师是完整词，在学生是词片段，二者不能因编号相同就被相加当作一个候选。",
+          "papers": [
+            "post-training:token-teacher-selection",
+            "post-training:csd",
+            "post-training:mopd"
+          ]
+        },
+        {
+          "id": "success-not-whole-episode-freeze",
+          "question": "学生episode成功但教师不喜欢其中一个action，SPOD会停掉整段学习吗？",
+          "answer": "不会。SPOD依据成功位和完整action原始概率比较，只在符合条件的decision取消蒸馏并施加软floor，其他decision继续正常学。普通MOPD或OPSD并不自动拥有这一保护；教师偏好与已验证成功不一致时，需要明确决定如何保留已有行为。",
+          "example": "教学例子：三步任务里第二步虽不常见却有效，只保护第二步不代表第一、三步的教师修正也要全部丢弃。",
+          "papers": [
+            "post-training:spod",
+            "post-training:mopd",
+            "post-training:opsd"
+          ]
+        },
+        {
+          "id": "privilege-not-visual-attribution",
+          "question": "给OPSD教师更多视觉证据，就能确定它的全部修正都来自看图吗？",
+          "answer": "不能。教师还可能改变语言先验、风格或继承错误前缀。VAD用同教师、同学生前缀的证据存在/移除对比构造视觉方向，并投影原修正；这是额外的归因设计，不是增加特权输入自动带来的性质，本地代理也不能冒充真实视觉归因能力。",
+          "example": "教学例子：换成证据crop后教师更爱简短措辞，简短偏好不必来自图像；需要对照视图区分共享变化。",
+          "papers": [
+            "post-training:opsd",
+            "post-training:vad"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较特权自教师、多领域与逐token路由、CSD文本事件对齐、SPOD成功保护和VAD视觉归因；已阅47篇摘要，精读6篇。",
+          "papers": [
+            "post-training:aopd",
+            "post-training:minimal-edit-opd",
+            "post-training:csd",
+            "post-training:visually-attributable-opd",
+            "post-training:apsd",
+            "post-training:spod",
+            "post-training:treeopsd",
+            "post-training:multiagent-opd",
+            "post-training:waypoint-opd",
+            "post-training:token-teacher-selection",
+            "post-training:tf-opd",
+            "post-training:shared-residual-distillation",
+            "post-training:oprd-reminder",
+            "post-training:elite-replay",
+            "post-training:cce-opd",
+            "post-training:rshd",
+            "post-training:loopsd",
+            "post-training:road-mopd",
+            "post-training:cast-opd",
+            "post-training:sguid",
+            "post-training:meta-opd",
+            "post-training:where-opd",
+            "post-training:weakest-link",
+            "post-training:pr-opd",
+            "post-training:maestro-opd",
+            "post-training:lego-opd",
+            "post-training:advisd",
+            "post-training:olive",
+            "post-training:mas-opd",
+            "post-training:opd-aha",
+            "post-training:nsd",
+            "post-training:compass-opd",
+            "post-training:oprd",
+            "post-training:weak-guide-rlvr",
+            "post-training:video-opsd",
+            "post-training:uc-mopd",
+            "post-training:clue-opsd",
+            "post-training:smopd",
+            "post-training:rstg",
+            "post-training:vad",
+            "post-training:crpo",
+            "post-training:distilled-rl",
+            "post-training:armor",
+            "post-training:mopd",
+            "post-training:polaris-hri",
+            "post-training:opcd",
+            "post-training:opsd"
+          ],
+          "source_revisions": {
+            "post-training:aopd": "6b5d84f591144e8efb60992868845adaaaffa09365cfe7a95fef83887c3a0aee",
+            "post-training:minimal-edit-opd": "f561d41e240e5bf8d7432d1c5ac5ffd5613d32ca01d52437e7216102c856cfbc",
+            "post-training:csd": "591df9af1614f7db05309f2e266245b850966b7be9c906c76936f6bd0fba1746",
+            "post-training:visually-attributable-opd": "0b6e38a966163901c2b78a8fa2523a4f6c83e68b5fa58b2bdeee298f9fec3848",
+            "post-training:apsd": "3736e718c4368a47aac4c5b9f2ceeeea5c43a06480a430f32619a28d60b3ccc5",
+            "post-training:spod": "fc77c99d7ef92137fe29e15080e6d79fbf955f5b51af0f0622cc6cfd786d8ff9",
+            "post-training:treeopsd": "4f3ccade6cebd5da769aa83706997118c5459a69a4e3ef50409c3f695ed83100",
+            "post-training:multiagent-opd": "0df5c877577caebf83af62e8f59bc7c4b8ec63ae6999f341ea514682038a2070",
+            "post-training:waypoint-opd": "ec931b44ac0a51b55885beaf13462bc727e5c42359ee24235b2adefbbc16debb",
+            "post-training:token-teacher-selection": "ed84847a6d6e1fff1f6f4e296738f06e617939e3abfb1774151381967e96d173",
+            "post-training:tf-opd": "a33b06adde0711a438f35bfc920bd89b491a16ce920421f33444547d24ef5f6c",
+            "post-training:shared-residual-distillation": "948969eabaae00068aec0e0a7d6efb0fbc3ec1288b77e48adea1b4ed7910fb02",
+            "post-training:oprd-reminder": "888d376982c7c945f064dc6fcae8a14f1eaecbb18b80b2dc2fc63208d9444140",
+            "post-training:elite-replay": "d0496be27d7335124d75caad23d500c88fd5bae24261eb0f39262c09eea82571",
+            "post-training:cce-opd": "f580ad51f0e9ad250a434691b06ed8f034b309063279477ce4642a6636241d1d",
+            "post-training:rshd": "890cd34b2d26bb817022ec1d86667057fafe7df203f24ef4fa5f20b3dc3f0151",
+            "post-training:loopsd": "a486a09457247840bf39f700246432d5ff5d873fe8ffa5177de9d483cfec03a5",
+            "post-training:road-mopd": "5b86fb9b789ecd0aff99ad7272b4731214b616d5cd33855ae94f3bc0af45a041",
+            "post-training:cast-opd": "99c5018f457be7446d9a75070440205a50523271f6f8475d664708cd09b51fbd",
+            "post-training:sguid": "1bea3617d31921ea3956edd5897678671a9de04e2882cb2b9cfcb6808bed3e35",
+            "post-training:meta-opd": "40ac4d24d928c46da50f002427272da63fcab1f790aef169134cfdf9c091a2e4",
+            "post-training:where-opd": "a468a8d337cc6cfa34ccf92edac071aa8b38451fa48fa557dd90f537cdca6422",
+            "post-training:weakest-link": "1383dcf03a4331f84b839b8dccebe67cf132bed3f71bd38182c22583835a3ae3",
+            "post-training:pr-opd": "b61a3813b49b7a2fc97c5f4b6bf37c1c8987b3c51a613cd988d304f83edb4569",
+            "post-training:maestro-opd": "0469e2673d0bc55379a0c801a9b3ea12ddc43faddb75f5c1a4ed4d5b0947a940",
+            "post-training:lego-opd": "121addddc396d8aa713ac119663a598a98e20091c3843b27f63ab764f3dbc85f",
+            "post-training:advisd": "0469a47fe4e92035e525d208aa326dcc418bebae3457c65086a7545fc5a91e7c",
+            "post-training:olive": "5cc802b0d3ebc5c2b40e3868d84aef736f1b86e03e337a6c022efa67a0b1f33c",
+            "post-training:mas-opd": "c6e4151e393dd97af183110d8c108d0d4d2b4b6894ad43dc29773efd5ae8b0e4",
+            "post-training:opd-aha": "bcbecef77a7befae4d493f2d620400463741d704a0a213f1b1cccbd77a06d1c8",
+            "post-training:nsd": "c62af59c5a697409c2ea47897079ff02c0968efc8b6233f1b4a7a7c84a5dd47f",
+            "post-training:compass-opd": "77f6f61759bf163d6ba0f40e29bfebd761fe45c58324ae8d021d601ff186442c",
+            "post-training:oprd": "b886dd3ef50bfc50eaad76a9fa318cb4f3b27572b8412420abf3909f7a67d738",
+            "post-training:weak-guide-rlvr": "15f1921db927d3fe2f76d075dcb0f9217f486cf71bc81fa19945edd545dff0e7",
+            "post-training:video-opsd": "82a7cae2588d9fd34fa061aadb9c9002dd4127c10cdffa1be1e16010872882a8",
+            "post-training:uc-mopd": "57d25dd7c1e4133ac6249cae85d0b319317cbc85fb9bbbf830eee32d497445af",
+            "post-training:clue-opsd": "6439507a9212e2d956327edfbf96e75d1923021afd0bf659257e5e7204a6271b",
+            "post-training:smopd": "7902b95aabab9a9465c10889cd3baf47a64a058285fbfb1d64939f83965b73ae",
+            "post-training:rstg": "ac4f366ad454d025a916573549795e5cbd2ebfda52807a07c3f4eedce31e342d",
+            "post-training:vad": "4a6c301e3443d4a91d873451446d2e69b999beaaab599d5a83a4218a30dc6e79",
+            "post-training:crpo": "7f2b0c2c5273ad328156f50e361a9a619a281425f43da74ed792392bad36d5e2",
+            "post-training:distilled-rl": "33ebb2f6028662744a876ea1ef36c4ea70de977f1ccf83daee88fa364c64ce26",
+            "post-training:armor": "3e2a5603cd142f234b0130174fdb318d187497c89bab4444853a4b56f5ad581e",
+            "post-training:mopd": "7da71c090377ae140bf459093ade7127dc3aa1437d327be7aa38bf692a287f80",
+            "post-training:polaris-hri": "600e093d03dd7f7fd810ba42af8e484cc7985bdd20d6c46380445977ec6bea6b",
+            "post-training:opcd": "8b236d0a1786b547d76b657c05f447322ec70892dd78e12582424ab45963d39a",
+            "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74"
+          }
+        }
+      ]
+    },
+    "data-and-budget": {
+      "title": "省掉哪一份算力：选问题、少生成、分枝与有条件重放",
+      "thesis": "数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。",
+      "updated": "2026-10-27",
+      "reviewed_papers": [
+        "post-training:ask-to-distill",
+        "post-training:tar-adaptive-replay",
+        "post-training:stopd",
+        "post-training:synthself",
+        "post-training:progressive-contraction",
+        "post-training:grpo-difficulty-curriculum",
+        "post-training:branch-opd",
+        "post-training:boundary-evo",
+        "post-training:recal",
+        "post-training:pivot",
+        "post-training:magicbeanstalk",
+        "post-training:grpo-dropout",
+        "post-training:dial-opd",
+        "post-training:lesser",
+        "post-training:follow-the-winners",
+        "post-training:dars",
+        "post-training:gats",
+        "post-training:ross",
+        "post-training:roft",
+        "post-training:retire-opd",
+        "post-training:trajectory-learnability",
+        "post-training:growmtp",
+        "post-training:stride-opd",
+        "post-training:df-opd",
+        "post-training:locus",
+        "post-training:adaptive-opd-gate",
+        "post-training:sparse-opd",
+        "post-training:specroll",
+        "post-training:rail",
+        "post-training:coba-rl",
+        "post-training:sparse-to-dense-reward-principle",
+        "post-training:lightning-opd",
+        "post-training:cross-script-knowledge-transfer",
+        "post-training:prompt-level-distillation",
+        "post-training:chord",
+        "post-training:spiral",
+        "post-training:absolute-zero",
+        "post-training:raft"
+      ],
+      "axes": [
+        "选择对象：问题、token位置、后缀、历史轨迹",
+        "额外代价：估难、前向特征、教师评分、bank构建",
+        "统计合同：逆概率权重、固定策略独立分枝、缓存一致性",
+        "学生变化：难度重估、当前logp刷新、被压制模式门控"
+      ],
+      "comparisons": [
+        {
+          "paper": "post-training:grpo-difficulty-curriculum",
+          "position": "以当前policy真实rollout成功率重估难度，按课程阶段保留样本。",
+          "tradeoff": "难度并非题长或永久标签；本地缩放课程与B5控制不等同原文完整阶段进展复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "边界与未完成项"
+          ]
+        },
+        {
+          "paper": "post-training:lesser",
+          "position": "以一次前向解析得到输出层梯度特征，替换昂贵的全参数逐样本梯度，原选择规则不变。",
+          "tradeoff": "只保证独立readout下的特征公式，不是全模型梯度等价；当前固定随机张量诊断，未做下游LLM训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:stopd",
+          "position": "生成前独立采anchor并确定block cutoff，保留token以精确inclusion probability加权。",
+          "tradeoff": "无偏论证针对gradient sum，不保证每次归一化Adam更新相同；完整长rollout未复现，已有真实短策略L1组件。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、代码映射与边界"
+          ]
+        },
+        {
+          "paper": "post-training:branch-opd",
+          "position": "按学生不确定性与师生分歧选fork，从同一冻结学生策略独立采多个suffix，公共前缀只计一次。",
+          "tradeoff": "在关键处分配更多生成预算，并非裁短或教师强制；本地短checkpoint未实跑同预算单轨基线。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射与复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:lightning-opd",
+          "position": "先采学生轨迹并由一致教师一次评分缓存，训练阶段只读取教师缓存。",
+          "tradeoff": "将教师成本移到预填充，不等于无教师成本或轨迹持续刷新；本地候选缓存未复刻Qwen token分布训练。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:tar-adaptive-replay",
+          "position": "从base正确轨迹建分散原型bank，只重放当前策略相对base已压制的轨迹与token。",
+          "tradeoff": "需计入bank生成和验证成本，且bank有限；完整实验未复现，当前随机模型L1诊断不证明语义多样性。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、代码映射与边界"
+          ]
+        }
+      ],
+      "analysis": [
+        {
+          "title": "题目难，不代表对当前学生最有训练价值",
+          "body": "课程以当前成功率定位难度带，学生更新后同题可以移入或移出。LESSER则近似获取任务相关梯度特征，选择依据不是题目长短或答错率本身。前者需要花rollout估难，后者需要候选与目标query前向；预算比较应包含筛选成本，目标query也不能从最终test取得。",
+          "papers": [
+            "post-training:grpo-difficulty-curriculum",
+            "post-training:lesser"
+          ]
+        },
+        {
+          "title": "生成、评分、重放是三本不同的账",
+          "body": "STOPD在生成前随机截断，依赖保留概率校正；BranchOPD在已选fork扩充学生后缀，公共前缀不能重复计信用；Lightning缓存教师评分，TAR缓存已验证base轨迹并按当前压制程度激活。它们省略或增加的计算不同，既不能仅数训练步，也不能只数训练期教师调用。",
+          "papers": [
+            "post-training:stopd",
+            "post-training:branch-opd",
+            "post-training:lightning-opd",
+            "post-training:tar-adaptive-replay"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "hardness-versus-selection-value",
+          "question": "课程认为一道题太难，LESSER就一定也该把它删掉吗？",
+          "answer": "不一定。课程依据当前策略成功率挑难度带，LESSER按候选与目标query的输出层梯度特征执行既定选择规则，衡量的是另一种相关性。难题可能含所需知识，也可能完全超出可学范围，不能只凭难度推出梯度选择结论。两种筛选还各有成本。",
+          "example": "教学例子：学生暂时做不出的领域题，仍可能与目标任务共享梯度方向；这不保证训练它有效，却也不是自动零价值。",
+          "papers": [
+            "post-training:grpo-difficulty-curriculum",
+            "post-training:lesser"
+          ]
+        },
+        {
+          "id": "cutoff-versus-branch",
+          "question": "STOPD与BranchOPD都改变后缀长度，为什么不能实现成同一种早停？",
+          "answer": "STOPD生成前随机选cutoff，以每个token的保留概率校正估计；BranchOPD先定位fork，再从同一冻结策略独立采多个后缀，公共前缀只计一次。一个减少观测并补权，一个在关键状态增加探索。事后随意截短既没有STOPD概率合同，也没有Branch的独立分枝。",
+          "example": "教学例子：预先抽到第64词截止，与在第64词分出三条续写，是相反的预算分配操作，不该只用“64词预算”概括。",
+          "papers": [
+            "post-training:stopd",
+            "post-training:branch-opd"
+          ]
+        },
+        {
+          "id": "teacher-cache-versus-behavior-bank",
+          "question": "Lightning缓存与TAR回放都复用旧数据，为什么TAR还要看当前学生概率？",
+          "answer": "Lightning缓存的是一致教师对初始学生轨迹的评分，以减少训练期教师调用；TAR保存的是base已验证正确行为，只有相对base被当前策略压制时才激活重放，并聚焦被压制token。固定bank不等于固定权重，更不能把训练期零教师调用理解为前期建库无成本。",
+          "example": "教学例子：某base解法当前仍常出现，TAR可给零重放；教师评分缓存仍可存在，两种“缓存命中”没有同一含义。",
+          "papers": [
+            "post-training:lightning-opd",
+            "post-training:tar-adaptive-replay"
+          ]
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-10-27",
+          "summary": "首版：比较课程/LESSER选样、STOPD少生成、BranchOPD分枝、Lightning教师缓存与TAR条件回放；已阅38篇摘要，精读6篇。",
+          "papers": [
+            "post-training:ask-to-distill",
+            "post-training:tar-adaptive-replay",
+            "post-training:stopd",
+            "post-training:synthself",
+            "post-training:progressive-contraction",
+            "post-training:grpo-difficulty-curriculum",
+            "post-training:branch-opd",
+            "post-training:boundary-evo",
+            "post-training:recal",
+            "post-training:pivot",
+            "post-training:magicbeanstalk",
+            "post-training:grpo-dropout",
+            "post-training:dial-opd",
+            "post-training:lesser",
+            "post-training:follow-the-winners",
+            "post-training:dars",
+            "post-training:gats",
+            "post-training:ross",
+            "post-training:roft",
+            "post-training:retire-opd",
+            "post-training:trajectory-learnability",
+            "post-training:growmtp",
+            "post-training:stride-opd",
+            "post-training:df-opd",
+            "post-training:locus",
+            "post-training:adaptive-opd-gate",
+            "post-training:sparse-opd",
+            "post-training:specroll",
+            "post-training:rail",
+            "post-training:coba-rl",
+            "post-training:sparse-to-dense-reward-principle",
+            "post-training:lightning-opd",
+            "post-training:cross-script-knowledge-transfer",
+            "post-training:prompt-level-distillation",
+            "post-training:chord",
+            "post-training:spiral",
+            "post-training:absolute-zero",
+            "post-training:raft"
+          ],
+          "source_revisions": {
+            "post-training:ask-to-distill": "8737810ef35a2de489e2170908b4ffbaa477564aba792c560681ef133200bfa3",
+            "post-training:tar-adaptive-replay": "d2aaf3b7d71dd8191e8458db6ecb30ec347ac3770f8ad1e8e7864e1ba784c269",
+            "post-training:stopd": "4559f7fe1cfb53fb0603b4845177f4138b6d07f3e6f9a5a236f4be6f4496cfc5",
+            "post-training:synthself": "77097294cf1c17a7ea9aea1ebc23bab935aa8d6a238f66fdce323bf7e84c256c",
+            "post-training:progressive-contraction": "88a1b993c5f9c2dcfb4d48b4974a9e13c34f5a6d8bff902e473d3b3cca63168d",
+            "post-training:grpo-difficulty-curriculum": "901d30e49d462f5f13f162abdb634c6b7c6115fc31c20a962498f0e097f47d4c",
+            "post-training:branch-opd": "791e4bb095cfe07c01c7e427b872a91864a3bfc56166f98b039dd685000a2027",
+            "post-training:boundary-evo": "6562c19d9fcf3347ab133a4334bcb9bf26240ce57d868c6319d00b8f7022d43b",
+            "post-training:recal": "e5f2aadc37cf03f67390a8ea6039809b81c27b5dedec645fe40a8d063c929af2",
+            "post-training:pivot": "0795760b245dfe5c214b81658e18ef86e61c105de30e5ea739a9c62deb5a4601",
+            "post-training:magicbeanstalk": "0dae11e5a22c809430fbc7f83c9d326e528c604f72ab5f82b90ef7568fe4ef6e",
+            "post-training:grpo-dropout": "96dfa5ae23433d3e1908e36e95216f24e5f00e3b7fb391c4874f23c56864ca87",
+            "post-training:dial-opd": "947c4a66db527caa10bb44235819e841a6086e9d959d0fbade349c91a70ca68c",
+            "post-training:lesser": "efd0a45a81ae7b58f504fed90763d336a2d67227271808055de87e951c19e804",
+            "post-training:follow-the-winners": "8c6998f6e8910f43fa0eafce9c926e1d3149e2c07bd91a1fcfa91355ea5db28f",
+            "post-training:dars": "132d50a031704e55e453fc77b950da71e633bd5cb3ced9976c222d68f1b665c6",
+            "post-training:gats": "6871939f4ac7f5eb752f4829f2bbaf566b34dfe995774637dbc12204a049dd7b",
+            "post-training:ross": "18cd943e7790ebfdc27c06f874cd7fb3b267b2edb1d16af2a60ddef07480c796",
+            "post-training:roft": "0bbf172692d2569f45906af648789f73aa44675f3b3dac30060c8ad7845abb3a",
+            "post-training:retire-opd": "c29be7075f340294f57e8dd204c0d0ab6d4cb5e4415c52b81ddb3eb0105ad978",
+            "post-training:trajectory-learnability": "3a5ccea4dbcb4f0c835f0239dd0af3d7d1367650ca40d9b641828579043ec9ef",
+            "post-training:growmtp": "cae3393592dfc571ce29580432cc8389c8bd9b42f92865bd323b9f6cbc19e74e",
+            "post-training:stride-opd": "bd0aaaa90661f40c15461fe93584d74169d784a017bad6e6dcb5a48fa1ab2249",
+            "post-training:df-opd": "693bbf898acc148c7eb424ea278efdd30d6d201da32898ef54657b560d2ab4b0",
+            "post-training:locus": "ee254aec01d323958e2cbc0cc360afc5d128905c1b043252bc0e34620ef6734a",
+            "post-training:adaptive-opd-gate": "191b0a47d2684a6eb3a5d18ba2b668db1df9470e4ff14d986295dc12b31c63c1",
+            "post-training:sparse-opd": "97d5dd7b466c0a36e4458271dce14c47b250abd75aaa8ca94742756ff103b5dd",
+            "post-training:specroll": "9a09d7f6f0abca554ebfe7413ef774b45dc7165d39432898793ce0076b933a74",
+            "post-training:rail": "1e60cba323dbe55dc7d133e062a7458d611618abd1e81c797b73fd5410e4aaf2",
+            "post-training:coba-rl": "4edb3020150c64982ce301e8112be2341ddb3c7ae7e6d90c418d0f80b9842275",
+            "post-training:sparse-to-dense-reward-principle": "f69d8096dea40adca7e04fb04286a0d7eeae15cd5475cd8d5a3ef704a53d2090",
+            "post-training:lightning-opd": "92530c8f3ad78ff5745d936a48bc1059a43b1bb7d696b789ce32614acab1954d",
+            "post-training:cross-script-knowledge-transfer": "ca06079e366e0abcde360999dfa35a8ec136fb38e0e7f967a88dcf8a2a8b5b1a",
+            "post-training:prompt-level-distillation": "d5f1fe6095b43382fd90888f83040a1f09b61f8eaf79934ecbd6a285797bc09a",
+            "post-training:chord": "999511f22515b48d8603340ab9c2db3493a952a06c3f3e2edcb530a67d33c939",
+            "post-training:spiral": "8baab85992a6054dee1f726e88a270042e15fdcd9e61d73623929d91a5d43e26",
+            "post-training:absolute-zero": "eaf9bee225a8a93e05d984a86555af3bfde8a4b629b8a52938ed08ecb5d623bd",
+            "post-training:raft": "d83285c5ba1fa2d5b98dda75d2767524b1e73d0f4bde1a663ad2fec7bb2ef01d"
+          }
+        }
+      ]
+    }
+  }
+}
