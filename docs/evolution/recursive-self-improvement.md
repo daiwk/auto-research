@@ -28,6 +28,10 @@ flowchart LR
 
 以下按“已实现的局部机制”和“待复核候选”区分，不把外部论文直接标为本地复现。
 
+- [DiscernMem](../agent-research/2610.36652-discernmem/README.md)：配对重放区分范围与内容问题，修复同时守住父记忆和无记忆基线，新版本重置旧效果证据；本地仅CPU测量/版本合同，不运行LLM修复或真实记忆环境。
+- [RuHarness](../agent-research/2610.36826-ruharness/README.md)：让rubric与harness协同进化，以六格联合后验的保守utility分位选准则，再通过独立validation决定更新；本地只实现统计frontier与门槛，没有完整自进化Agent。
+- [Google Sleep](../foundation-models/2606.03979-sleep-lti/README.md)：离线巩固将快记忆迁移到扩展慢模块；本地只实现LTI奖励，不生成梦境、不训练LoRA，也不把奖励核说成已实现递归学习。
+
 - [ImageRSI](../agent-research/2610.32120-image-rsi/README.md)：以真实图像生成、独立验证/修复和配对接纳扩展经验，再训练judge；本轮仅资料，完整生成/API/训练闭环成本过高，不复现（审查DONE），不以分数算术冒充judge。
 - [RSI-Opt](../agent-research/2610.32026-rsi-opt/README.md)：代码Agent修改优化器并通过真实多任务训练继承改进；仅资料收录，高成本搜索不复现，明确保留原文披露的held-out lineage与archive传播疑点。
 - [HarnessMM](../agent-research/2610.32813-harnessmm/README.md)：通过可审计的事件依赖图和callback边界证书减少重复调用；仅资料收录，完整原生harness矩阵不复现，不生成假的物理调用receipt。

@@ -216,6 +216,13 @@
     "multimodal-models:embedding-gemma2": {
       "questions": [
         {
+          "id": "formal-paper-projection", "level": "implementation",
+          "question": "新技术论文说先池化再投影，本地先读官方last_hidden_state再池化，是否少了一层？",
+          "answer": "没有直接少一层。固定官方实现已经在返回last_hidden_state前做无偏置embedding_projection，返回的是768维token表示。同权mask均值与线性投影可交换，因此本地池化投影后的token与论文顺序一致，不能再额外投影一次。新论文补充不把旧16图GPU结果升级为完整七套benchmark。",
+          "example": "教学例：两个token先各乘同一矩阵再平均，等于先平均再乘该矩阵；若换成非线性层或每token不同权重，就不能沿用这个等价关系。",
+          "source_sections": ["核心公式", "结果与边界"], "added": "2026-10-29"
+        },
+        {
           "id": "mechanism",
           "question": "Matryoshka 向量截断后为什么必须再次归一化？",
           "answer": "截断保留前若干维后，向量范数通常不再为一；直接点积会把保留能量差异混进相似度。重新归一化恢复余弦比较的尺度。它利用模型训练好的前缀表示，不等于任意 embedding 都能随意截断；池化时也必须排除 padding。",

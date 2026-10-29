@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="alignment-interfaces/">跨模态对齐：表征、连接器与监督</a></h2>
 <p>图像、语音和文字如何接上同一任务接口，学到的是相似度还是可生成的回答？</p>
-<p class="ar-learning-topic-meta">80 个问题 · 20 篇论文</p>
+<p class="ar-learning-topic-meta">81 个问题 · 20 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="visual-evidence-budget/">视觉证据预算：选 Token、选帧与按需回看</a></h2>
@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="world-state-actions/">视觉世界建模：状态、生成与动作条件</a></h2>
 <p>模型是在识别画面，还是能判断动作将怎样改变状态？</p>
-<p class="ar-learning-topic-meta">88 个问题 · 22 篇论文</p>
+<p class="ar-learning-topic-meta">92 个问题 · 23 篇论文</p>
 </article>
 </div>
 

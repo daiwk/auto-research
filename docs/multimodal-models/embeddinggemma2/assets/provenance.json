@@ -1,0 +1,12 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.37364v1",
+  "source_url": "https://arxiv.org/pdf/2610.37364v1#page=2",
+  "figure": "Figure 1 (whole source page, includes caption)",
+  "source_page_number": 2,
+  "image": "paper-figure-01.png",
+  "sha256": "76909c1fb8b20187bef9cac06dd0d0af4eac6e716a03149e0b658cee2e21ac67",
+  "source_pdf_sha256": "d27a36308db84598e8f1a6e66e45cb01a645390dfca229507ec63fea8586c83f",
+  "transformation": "whole PDF page rasterized at 1.4x; no redrawing",
+  "visually_verified": true,
+  "checked_on": "2026-10-29"
+}

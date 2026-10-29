@@ -15,17 +15,17 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="memory-and-skills/">记忆与技能：让经验可取回、可失效</a></h2>
 <p>上下文放不下时，应该保存什么，何时取回，旧经验又如何避免误导新任务？</p>
-<p class="ar-learning-topic-meta">220 个问题 · 55 篇论文</p>
+<p class="ar-learning-topic-meta">224 个问题 · 56 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="tools-and-collaboration/">工具与协作执行：把计划变成可检查的动作</a></h2>
 <p>模型已经有计划，怎样选择工具、解释返回值，并让多个角色共享可靠的执行状态？</p>
-<p class="ar-learning-topic-meta">196 个问题 · 49 篇论文</p>
+<p class="ar-learning-topic-meta">197 个问题 · 49 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a></h2>
 <p>失败之后，是改一次提示、积累经验，还是改变整个任务执行流程？</p>
-<p class="ar-learning-topic-meta">172 个问题 · 43 篇论文</p>
+<p class="ar-learning-topic-meta">176 个问题 · 44 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a></h2>

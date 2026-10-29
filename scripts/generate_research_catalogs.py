@@ -835,6 +835,11 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "rescom": ("推理与系统效率", "量化与残差补偿"),
+        "hope-hilbert": ("推理与系统效率", "结构剪枝与可逆压缩"),
+        "select-ttt": ("注意力与长上下文", "查询条件测试时训练"),
+        "sleep-lti": ("预训练与数据", "持续学习与记忆巩固"),
+        "gui-jepa": ("网络架构", "JEPA 与决策表征"),
         "detector-scope": ("推理与系统效率", "可审计检测与激活解释"),
         "dt-jepa": ("网络架构", "JEPA 与决策表征"),
         "editjev": ("推理与系统效率", "System One / JEV 与结构化决策"),

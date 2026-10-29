@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-10-27 · 22 篇主题资料 / 6 篇重点对照
+[多模态](../index.md) · 更新 2026-10-29 · 23 篇主题资料 / 7 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。
 
@@ -31,6 +31,7 @@ hide:
 | [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](../../../reproductions/2610.12417-woven/README.md) · [原始来源](https://arxiv.org/abs/2610.12417)<br>章节：背景与主要改动、核心公式、数据协议、公开资源与结果 | 以(s,a,s′)组织真实生成视频rollout，构造前向、反向与反事实视觉转移监督进入MLLM训练。 | 生成转移的可信度与OOD任务须另验；本地有小样本真实transition SFT，未运行后续GRPO。 |
 | [Persistent Planar Memory for Video World Models](../../../foundation-models/2610.23795-ppmem/README.md) · [原始来源](https://arxiv.org/abs/2610.23795)<br>章节：背景与主要改动、核心公式与流程、本地复现与成本判断 | 将局部平面primitive合并到世界坐标持久pool，光栅化深度反馈后续视频chunk。 | 压缩几何要处理遮挡、去重和相机条件；当前仅研究资料，完整视频/几何训练成本过高未复现。 |
 | [VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning](../../../reproductions/2608.26105-vbvr-pro/README.md) · [原始来源](https://arxiv.org/abs/2608.26105)<br>章节：背景与主要改动、核心公式、复现边界 | 以任务专用可执行scorer核对中间状态、约束和最终状态，为生成模型提供奖励。 | 确定性判据只覆盖明确定义任务；本地程序scorer不等同已训练14B/19B视频模型。 |
+| [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../../foundation-models/2610.36877-gui-jepa/README.md) · [原始来源](https://arxiv.org/abs/2610.36877v1)<br>章节：背景与主要改动、核心公式 | 候选动作条件残差predictor及ROI/global结构评分，listwise正例损失。 | 真实屏幕编码、候选生成与环境外置；没有GUI benchmark能力结果。 |
 
 </div>
 
@@ -47,6 +48,12 @@ LeWAM让控制与预测共同训练视觉表示，V-JEPA Policy则固定encoder�
 WOVEN用生成的视频转移提供训练材料，关键是视觉变化实际进入监督，而不是提示先写结果。PPMem另解决跨chunk与跨视角的几何持久性，给定下一相机轨迹不等于知道未来真实帧。VBVR-Pro把可执行约束变成验收，但scorer实现不自动带来强生成器；这三项分别对应数据、记忆与验证。
 
 对照来源：[woven](../../../reproductions/2610.12417-woven/README.md) · [ppmem](../../../foundation-models/2610.23795-ppmem/README.md) · [vbvr-pro](../../../reproductions/2608.26105-vbvr-pro/README.md)
+
+### 10月29日：新方法与来源变化
+
+GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结合动作ROI/global区域和结构余弦评分。它与像素视频生成的监督/输出不同，也不等于真实GUI执行器；当前组件接外部冻结latent和文本匹配分数，保留真实三层predictor与训练头，但不使用训练正样本标签替forward选动作。
+
+对照来源：[lewam](../../../reproductions/2610.12818-lewam/README.md) · [gui-jepa](../../../foundation-models/2610.36877-gui-jepa/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ WOVEN用生成的视频转移提供训练材料，关键是视觉变化实际进
 
     对照来源：[woven](../../../reproductions/2610.12417-woven/README.md) · [ppmem](../../../foundation-models/2610.23795-ppmem/README.md) · [vbvr-pro](../../../reproductions/2608.26105-vbvr-pro/README.md)
 
+### GUI-JEPA预测latent后继，为什么不能直接当作已在手机上验证动作成功？ {#cross-oct29-method-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 后继是学到的表示预测，模型可能漏掉状态约束；执行成功需真实环境反馈。小latent前向、候选排列等变和梯度检查只验证模块合同，不能替代动作到环境的闭环。
+
+    **教学例子：** 教学例：模型预测点击后的页面向量接近目标，不等于已经检测到真实设备按钮可点击或请求成功。
+
+    对照来源：[lewam](../../../reproductions/2610.12818-lewam/README.md) · [gui-jepa](../../../foundation-models/2610.36877-gui-jepa/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-29** · GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结合动作ROI/global区域和结构余弦评分。它与像素视频生成的监督/输出不同，也不等于真实GUI执行器；当前组件接外部冻结latent和文本匹配分数，保留真实三层predictor与训练头，但不使用训练正样本标签替forward选动作。
+
+涉及：[gui-jepa](../../../foundation-models/2610.36877-gui-jepa/README.md)
 
 **2026-10-27** · 首版：比较联合或冻结视觉编码的动作模型、预测与规划验收、WOVEN转移监督、PPMem几何记忆与VBVR程序评分；已阅22篇摘要，精读6篇。
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 22 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 23 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -116,6 +137,7 @@ WOVEN用生成的视频转移提供训练材料，关键是视觉变化实际进
 - [VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning](../../../reproductions/2608.26105-vbvr-pro/README.md)
 - [V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents](../../../foundation-models/2609.37250-vjepa-policy/README.md)
 - [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](../../../reproductions/2610.12417-woven/README.md)
+- [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../../foundation-models/2610.36877-gui-jepa/README.md)
 
 </details>
 

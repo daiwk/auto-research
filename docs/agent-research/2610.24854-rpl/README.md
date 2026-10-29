@@ -7,11 +7,13 @@
 | 论文链接 | [Learning to Program Retrievals](https://arxiv.org/abs/2610.24854)，核对[v1正文](https://arxiv.org/html/2610.24854v1) |
 | 公司/机构 | 一作Kyuyoung Kim：KAIST AI / Meta Superintelligence Labs；论文明确工作在Meta完成 |
 | 首次公开日期 | 2026-10-17 20:03:09 UTC；正文页眉的October 20不是arXiv v1首次公开日期 |
-| 原文开源代码 | 作者宣称发布代码，但v1正文、arXiv页及[一作官方主页](https://kykim0.github.io/publications/)本轮未找到可核验的RPL仓库链接；不标为已验证开源 |
+| 原文开源代码 | 10月29日补核[Meta官方retrieval-programs](https://github.com/facebookresearch/retrieval-programs)，固定 `992fda1f5f0eb01a8fb70202ff8f7a65aed48465`；原始工作CC BY-NC 4.0，vendored组件遵循各自许可，详见LICENSE。此前未找到链接的结论由本次官方发布证据更新 |
 | 本地 Adapter | `rpl`为组件键，不是完整训练adapter |
 | 本地复现代码 | `src/auto_research/agent_research/retrieval_program.py`；`scripts/run_oct21_rpl.py` |
 
 > **仅CPU typed-program组件。** 不实现策略模型、BM25/E5/Qwen神经检索/重排、任意Python执行、跨轮Python状态、GRPO或蒸馏训练。
+
+本轮只更新作者代码来源，不复制上游、修改本地运行路径或提高原有验证等级；官方仓库新公开不算新增论文。
 
 ## 原始论文总结
 

@@ -7,7 +7,7 @@ hide:
 
 # 学习信号、多任务与反馈偏差
 
-[搜广推](index.md) / 140 个问题 · 35 篇论文
+[搜广推](index.md) / 144 个问题 · 36 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">140 个问题 · 35 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kl-mopd" data-paper-title="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation 搜广推与 LLM 应用 Zhejiang University 2026-10-27 生成式推荐必须连续生成一个商品的多个语义 token；某个位置没学到转化教师的偏好，就可能使整个商品无法召回。把点击教师和价值教师每一步都按一半融合，忽略了两者在不同位置的学习难度可能相反。KL-MOPD先在冻结的初始学生生成前缀上，按位置估计学生到两位教师的反向 KL。该差距只校准一次，归一化后作为固定教师权重；训练时在当前学生自己的前缀上计算加权反向 KL。不应改成逐步动态重算，也不是先平均教师概率再蒸馏。 完整训练与生产实验成本过高，不复现（审查 DONE）；本地为 L1 可微损失组件 / diagnostic only，不是完整推荐器或在线采样器。完整训练与生产实验成本过高，不复现（审查 DONE）；未接入 Evolve。calibrate_weights和kl_mopd_loss保留完整词表的KL方向、固定逐位置权重、教师冻结及两级聚合。独立概率域参考、反向/正向KL负控、动态重校准负控、padding零梯度与真实学生更新均可检查。  多目标蒸馏 生成式推荐 搜广推 学习信号、多任务与反馈偏差 KL-MOPD为什么在每个SID位置区分两位教师的学习难度？ 完整商品ID需要多个token都选对。点击教师在前几个位置容易模仿、价值教师在后几个位置容易模仿，不代表整条ID都学好了。固定一半权重忽略这种位置差异，方法用初始学生到各教师的KL差距为难学的一方加权。 教学例：三段商品码第一段区分类别、后两段区分属性。某教师只在类别段与学生差很远，不能把整条序列的同一个教师权重套到所有位置。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<span id="paper-recommendation-kl-mopd-35d8ffea" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-225530c49babcf34">KL-MOPD为什么在每个SID位置区分两位教师的学习难度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Akl-mopd">KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整商品ID需要多个token都选对。点击教师在前几个位置容易模仿、价值教师在后几个位置容易模仿，不代表整条ID都学好了。固定一半权重忽略这种位置差异，方法用初始学生到各教师的KL差距为难学的一方加权。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三段商品码第一段区分类别、后两段区分属性。某教师只在类别段与学生差很远，不能把整条序列的同一个教师权重套到所有位置。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36973v1">原论文</a> · <a href="../../../../recommendation-components/2610.36973-kl-mopd/">实现解读</a> · <a href="#qa-225530c49babcf34">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kl-mopd" data-paper-title="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation 搜广推与 LLM 应用 Zhejiang University 2026-10-27 生成式推荐必须连续生成一个商品的多个语义 token；某个位置没学到转化教师的偏好，就可能使整个商品无法召回。把点击教师和价值教师每一步都按一半融合，忽略了两者在不同位置的学习难度可能相反。KL-MOPD先在冻结的初始学生生成前缀上，按位置估计学生到两位教师的反向 KL。该差距只校准一次，归一化后作为固定教师权重；训练时在当前学生自己的前缀上计算加权反向 KL。不应改成逐步动态重算，也不是先平均教师概率再蒸馏。 完整训练与生产实验成本过高，不复现（审查 DONE）；本地为 L1 可微损失组件 / diagnostic only，不是完整推荐器或在线采样器。完整训练与生产实验成本过高，不复现（审查 DONE）；未接入 Evolve。calibrate_weights和kl_mopd_loss保留完整词表的KL方向、固定逐位置权重、教师冻结及两级聚合。独立概率域参考、反向/正向KL负控、动态重校准负控、padding零梯度与真实学生更新均可检查。  多目标蒸馏 生成式推荐 搜广推 学习信号、多任务与反馈偏差 KL-MOPD的alpha来自当前学生，还是冻结初始学生？ 来自冻结初始学生在自身采样前缀上的校准差距，只在训练前估计一次。后续损失使用当前学生的前缀，但不随当前模型重新计算alpha；动态权重属于另一个目标。 教学例：初始某位置KL为1和3，权重固定为1/4、3/4。训练后差距变成2和1，也不自动交换这两个权重。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-dd274eb36d8c0d0d">KL-MOPD的alpha来自当前学生，还是冻结初始学生？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Akl-mopd">KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>来自冻结初始学生在自身采样前缀上的校准差距，只在训练前估计一次。后续损失使用当前学生的前缀，但不随当前模型重新计算alpha；动态权重属于另一个目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：初始某位置KL为1和3，权重固定为1/4、3/4。训练后差距变成2和1，也不自动交换这两个权重。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36973v1">原论文</a> · <a href="../../../../recommendation-components/2610.36973-kl-mopd/">实现解读</a> · <a href="#qa-dd274eb36d8c0d0d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kl-mopd" data-paper-title="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation 搜广推与 LLM 应用 Zhejiang University 2026-10-27 生成式推荐必须连续生成一个商品的多个语义 token；某个位置没学到转化教师的偏好，就可能使整个商品无法召回。把点击教师和价值教师每一步都按一半融合，忽略了两者在不同位置的学习难度可能相反。KL-MOPD先在冻结的初始学生生成前缀上，按位置估计学生到两位教师的反向 KL。该差距只校准一次，归一化后作为固定教师权重；训练时在当前学生自己的前缀上计算加权反向 KL。不应改成逐步动态重算，也不是先平均教师概率再蒸馏。 完整训练与生产实验成本过高，不复现（审查 DONE）；本地为 L1 可微损失组件 / diagnostic only，不是完整推荐器或在线采样器。完整训练与生产实验成本过高，不复现（审查 DONE）；未接入 Evolve。calibrate_weights和kl_mopd_loss保留完整词表的KL方向、固定逐位置权重、教师冻结及两级聚合。独立概率域参考、反向/正向KL负控、动态重校准负控、padding零梯度与真实学生更新均可检查。  多目标蒸馏 生成式推荐 搜广推 学习信号、多任务与反馈偏差 加权两项反向KL，等于把两位教师概率平均后算一次KL吗？ 一般不等价。加权的是学生到各教师的KL损失，而不是先做概率算术平均。方向还必须是KL(student||teacher)，不能换成教师到学生的正向KL。本地负控检查这两种计算不被混淆，不据此推出推荐收益。 教学例：两教师分别偏好不同token，算术混合会给两个峰都留质量；加权反向KL涉及对数教师分布，得到的梯度并不相同。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e1b61ee586eb6c08">加权两项反向KL，等于把两位教师概率平均后算一次KL吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Akl-mopd">KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一般不等价。加权的是学生到各教师的KL损失，而不是先做概率算术平均。方向还必须是KL(student||teacher)，不能换成教师到学生的正向KL。本地负控检查这两种计算不被混淆，不据此推出推荐收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两教师分别偏好不同token，算术混合会给两个峰都留质量；加权反向KL涉及对数教师分布，得到的梯度并不相同。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36973v1">原论文</a> · <a href="../../../../recommendation-components/2610.36973-kl-mopd/">实现解读</a> · <a href="#qa-e1b61ee586eb6c08">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kl-mopd" data-paper-title="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation 搜广推与 LLM 应用 Zhejiang University 2026-10-27 生成式推荐必须连续生成一个商品的多个语义 token；某个位置没学到转化教师的偏好，就可能使整个商品无法召回。把点击教师和价值教师每一步都按一半融合，忽略了两者在不同位置的学习难度可能相反。KL-MOPD先在冻结的初始学生生成前缀上，按位置估计学生到两位教师的反向 KL。该差距只校准一次，归一化后作为固定教师权重；训练时在当前学生自己的前缀上计算加权反向 KL。不应改成逐步动态重算，也不是先平均教师概率再蒸馏。 完整训练与生产实验成本过高，不复现（审查 DONE）；本地为 L1 可微损失组件 / diagnostic only，不是完整推荐器或在线采样器。完整训练与生产实验成本过高，不复现（审查 DONE）；未接入 Evolve。calibrate_weights和kl_mopd_loss保留完整词表的KL方向、固定逐位置权重、教师冻结及两级聚合。独立概率域参考、反向/正向KL负控、动态重校准负控、padding零梯度与真实学生更新均可检查。  多目标蒸馏 生成式推荐 搜广推 学习信号、多任务与反馈偏差 张量损失通过梯度检查，为什么还不能称已实现on-policy推荐训练？ 内核只看输入logits，不知道前缀由谁采样。初始学生校准、当前学生在线生成、冻结教师评分、语义ID解码和真实数据切分都需要外部链路。当前只有损失组件与小张量CPU/CUDA机制证据，没有推荐器能力比较。 教学例：把一份缓存的旧模型前缀传进来，公式依然能计算，但调用者不能把它声明为当前学生的在线采样。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f943ef4c424b8aa8">张量损失通过梯度检查，为什么还不能称已实现on-policy推荐训练？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Akl-mopd">KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Zhejiang University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>内核只看输入logits，不知道前缀由谁采样。初始学生校准、当前学生在线生成、冻结教师评分、语义ID解码和真实数据切分都需要外部链路。当前只有损失组件与小张量CPU/CUDA机制证据，没有推荐器能力比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把一份缓存的旧模型前缀传进来，公式依然能计算，但调用者不能把它声明为当前学生的在线采样。</p>
+<p class="ar-learning-sources">依据：本地复现与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36973v1">原论文</a> · <a href="../../../../recommendation-components/2610.36973-kl-mopd/">实现解读</a> · <a href="#qa-f943ef4c424b8aa8">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:hge" data-paper-title="Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/feedback-multitask-causality" data-search="Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion 搜广推与 LLM 应用 Meituan 2026-10-23 搜索广告排序的是门店、直播间等“容器”，成交却发生在内部商品上。单条成交金额既稀疏又高方差，简单把门店当成一个商品，容易忽略低价高频与高价低频商品的组合。HGE 先用 Hybrid Set-Aware Encoder 编码 top-K 商品的竞争关系，再在自注意力之后拼入用户、门店、上下文与查询。Proxy-Label Learning 分开预测门店是否成交、成交后每个商品的购买概率和数量； 论文私有日志训练和线上实验成本过高，不复现（审查 DONE）；实现范围为 HSAE、PLL、RCEF 的可微 L1 组件，不是完整广告模型。论文私有日志训练和线上实验成本过高，不复现（审查 DONE）；不据此宣称本地获得线上收益或接入 Evolve。HierarchicalGTV 接受外部商品 embedding、位置向量、上下文、价格和通用回归输出，不收答案/成交标签。以小尺寸可微模块验证：独立逐商品 Eq.5 参考、上下文不影响前置 MHSA、位置/价格/残差移除负控、融合两端点、商品概率之和可大于1、所有参数和输入的有限非零梯度。种子为42/43/44；指标只是合成机制误差和梯度，不是推荐准确率、收入或校准效果。  广告价值预估 层次化多任务学习 搜广推 学习信号、多任务与反馈偏差 HGE 的 top-K 商品是要展示的 K 个推荐结果，还是同一容器内部的输入？ 是同一候选门店或直播间内部的商品输入，模型最终估计的是容器价值。不同容器各有自己的商品集合，集合注意力先描述内部关系，再拼接用户、查询等上下文。top-K 只覆盖部分库存，不等于整店全部商品，更不是一次直接输出 K 家门店。 示意：两家店各输入三件商品，总共六件内部商品参与编码，最终仍得到两家店的价值分数；不能把这六件商品误当最终推荐列表。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 学习信号、多任务与反馈偏差</a></p>
 <span id="paper-recommendation-hge-0554c3a1" class="ar-learning-paper-anchor"></span>

@@ -1,0 +1,25 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.36794v1",
+  "source_url": "https://arxiv.org/pdf/2610.36794v1#page=4",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "242305184087aa3516ec10105fec0c443aeed3cf154464dfa48f0f15b3158c98",
+  "source_asset_sha256": "242305184087aa3516ec10105fec0c443aeed3cf154464dfa48f0f15b3158c98",
+  "pixel_dimensions": [
+    1224,
+    676
+  ],
+  "copyright": "Original paper authors; fixed arXiv v1 license applies",
+  "description": "Original PDF page crop including Figure2 and full caption; not redrawn",
+  "method_html_sha256": "a3f9402eaa9824d3b4a156cf0fdbad33ab7fbd4976fedcec66e8c1293c559144",
+  "caption": "Figure 2. Overview of Select-TTT. (1) The frozen LM head maps chunk hidden\nstates to logit space, where query-token scores are aggregated by top- k k mean pooling to assess chunk relevance. (2) Relevance scores are converted\ninto learning-rate multipliers. (3) In-Place TTT computes the NTP-aligned\nfast-weight updates. (4) The multipliers rescale these updates to selectively\nwrite query-relevant information into fast-weight memory.",
+  "visually_verified": true,
+  "source_pdf_sha256": "30da54123c87e782149528a87f75b9978bf6a2136258b73b921e5a59b8788137",
+  "page": 4,
+  "crop_rect_points": [
+    0.0,
+    0.0,
+    612.0,
+    337.62677001953125
+  ]
+}

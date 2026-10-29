@@ -7,7 +7,7 @@ hide:
 
 # 工具与协作执行：把计划变成可检查的动作
 
-[Agent](index.md) / 196 个问题 · 49 篇论文
+[Agent](index.md) / 197 个问题 · 49 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">197 个问题 · 49 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rpl" data-paper-title="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning Agent KAIST AI / Meta Superintelligence Labs 2026-10-17 固定检索pipeline把召回数量、融合和返回上下文绑在一起。RPL让策略生成短程序组合稀疏/稠密召回、RRF、去重和重排，只将显式打印的证据交回模型。为解决稀疏奖励难探索的问题，保留策略已有query，对最后一次检索程序做受语法约束的结构变异；执行核验通过后生成续写轨迹，再穿插蒸馏与RL。§3及附录B 成本过高，不复现（审查 DONE）；RetrievalProgram最多4个不同query，宽度取论文阶梯，最多20篇显式输出；execute只解释数据类并调用注入的SDK，不解析或执行Python源码。多路检索实际执行RRF，单路、列表内部或跨路遇到相同ID不同内容时统一拒绝，只有内容完全一致的重复才去重；重排不得注入召回外文档。RRF常数60是明确的本地惯例；输出是文档数上限，不是假装实现了论文2048-token观测限制。  检索与工具 可编程检索与结构变异 Agent 工具与协作执行：把计划变成可检查的动作 可编程检索为什么只把显式打印的文档交回模型？ 召回、融合、去重和重排可在程序内处理较大候选池，但模型上下文只接收最终明确输出。这样把检索计算与观察预算解耦；若把所有中间召回暗中拼回上下文，就绕过了程序选择和预算，不能声称相同检索策略。 例如稠密召回五十篇、重排后打印三篇，模型只应看到三篇，而不是同时读取隐藏的其余四十七篇。 2026-10-27">
@@ -67,6 +67,19 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如原查询不变，把召回从三扩到五可检验宽度是否补证据；若同时换成答案关键词，就混入另一种改进。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24854">原论文</a> · <a href="../../../../agent-research/2610.24854-rpl/">实现解读</a> · <a href="#qa-82a8516fcb0b64ae">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rpl" data-paper-title="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning Agent KAIST AI / Meta Superintelligence Labs 2026-10-17 固定检索pipeline把召回数量、融合和返回上下文绑在一起。RPL让策略生成短程序组合稀疏/稠密召回、RRF、去重和重排，只将显式打印的证据交回模型。为解决稀疏奖励难探索的问题，保留策略已有query，对最后一次检索程序做受语法约束的结构变异；执行核验通过后生成续写轨迹，再穿插蒸馏与RL。§3及附录B 成本过高，不复现（审查 DONE）；RetrievalProgram最多4个不同query，宽度取论文阶梯，最多20篇显式输出；execute只解释数据类并调用注入的SDK，不解析或执行Python源码。多路检索实际执行RRF，单路、列表内部或跨路遇到相同ID不同内容时统一拒绝，只有内容完全一致的重复才去重；重排不得注入召回外文档。RRF常数60是明确的本地惯例；输出是文档数上限，不是假装实现了论文2048-token观测限制。  检索与工具 可编程检索与结构变异 Agent 工具与协作执行：把计划变成可检查的动作 Meta公开RPL完整代码后，本地typed-program组件就自动变成完整复现了吗？ 不会。官方源码发布只改变来源可核验性；本地仍未运行神经检索器、跨轮Python状态、策略生成、GRPO或蒸馏训练。还要遵循主项目CC-BY-NC与vendored部分各自许可，不因仓库可见就自动复制或升级能力证据。 教学例：拿到完整工厂图纸，不等于已有的小型管道模拟器已经生产出同样产品；必须另验真实执行链路和成本。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-908c2d6b9d2abe39">Meta公开RPL完整代码后，本地typed-program组件就自动变成完整复现了吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arpl">Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · KAIST AI / Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。官方源码发布只改变来源可核验性；本地仍未运行神经检索器、跨轮Python状态、策略生成、GRPO或蒸馏训练。还要遵循主项目CC-BY-NC与vendored部分各自许可，不因仓库可见就自动复制或升级能力证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：拿到完整工厂图纸，不等于已有的小型管道模拟器已经生产出同样产品；必须另验真实执行链路和成本。</p>
+<p class="ar-learning-sources">依据：论文信息、背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.24854">原论文</a> · <a href="../../../../agent-research/2610.24854-rpl/">实现解读</a> · <a href="#qa-908c2d6b9d2abe39">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rpl" data-paper-title="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning Agent KAIST AI / Meta Superintelligence Labs 2026-10-17 固定检索pipeline把召回数量、融合和返回上下文绑在一起。RPL让策略生成短程序组合稀疏/稠密召回、RRF、去重和重排，只将显式打印的证据交回模型。为解决稀疏奖励难探索的问题，保留策略已有query，对最后一次检索程序做受语法约束的结构变异；执行核验通过后生成续写轨迹，再穿插蒸馏与RL。§3及附录B 成本过高，不复现（审查 DONE）；RetrievalProgram最多4个不同query，宽度取论文阶梯，最多20篇显式输出；execute只解释数据类并调用注入的SDK，不解析或执行Python源码。多路检索实际执行RRF，单路、列表内部或跨路遇到相同ID不同内容时统一拒绝，只有内容完全一致的重复才去重；重排不得注入召回外文档。RRF常数60是明确的本地惯例；输出是文档数上限，不是假装实现了论文2048-token观测限制。  检索与工具 可编程检索与结构变异 Agent 工具与协作执行：把计划变成可检查的动作 本地 RPL 的受限程序怎样控制召回规模、融合和最终输出？ 程序最多使用四个不同 query，召回与重排宽度取规定阶梯，多路召回要实际融合，并限制显式打印的文档数量。同 ID 异内容统一拒绝，重排不能注入召回外文档。本地只解释数据类和注入 SDK，文档数预算也不等于原文 token 限制或任意 Python 执行能力。 教学例：召回二十条再打印三条是合法的计算与观察分离；若重排偷偷补入一条未召回文档，就破坏了证据来源合同。 2026-10-27">

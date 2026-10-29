@@ -1,5 +1,9 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-29 新公告、优先机构与学习资料
+
+[本轮限定交付及来源快照](research-audits/oct29-components/README.md)：8个低成本L1组件，4项CUDA已在真实A100三种子执行，另4项纯CPU。Google Sleep与DeepMind HOPE分别是官网/源码触发的历史补漏；PailitaoMMSearch2.0完整实验仅资料收录、高成本不复现，Guided-RLVR另作高成本终态。已有EmbeddingGemma2补正式论文、Meta RPL补官方源码，不重复计新模型。38个逐篇新问题与9个专题精读同步更新。实际最新公告是10月28日，另补27日recent；目录/源码/首发分别记账，全局审查水位不变。
+
 ## Google EMNLP 历史25条逐篇收口
 
 [本批完整25条结论与验收](research-audits/google-emnlp25-closure/README.md)：14项低成本L1组件、8篇高成本完整实验不复现（审查DONE）、3篇不接收。10项CUDA路径在真实A100三种子验收，另4项纯CPU；不提升为完整模型/能力或Evolve证据。原先的25条元数据线索有了逐篇方法/成本/来源处置，不再留为未读队列；原会议页另外4条来源例外不在本次批准范围。全局审查水位不变。

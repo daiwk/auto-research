@@ -18,7 +18,7 @@
 | 冻结中间层探针与验证器自举 | [Unsupervised Multimodal Reward Modeling](../reproductions/2610.12707-umrm/README.md) | Massachusetts Institute of Technology，2026-10-08 | `umrm` |
 | 视觉 token 压缩与动态证据恢复 | [V-CoLA: Vision Token Compression with Linear Attention](../multimodal-models/2610.11251-vcola/README.md) | Alibaba Cloud Computing，2026-10-08 | `vcola` |
 | 视觉状态转移监督 | [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](../reproductions/2610.12417-woven/README.md) | Northwestern University，2026-10-08 | `woven` |
-| 视觉 token 与跨模态检索 | [EmbeddingGemma 2: Open Multimodal Embeddings](../multimodal-models/embeddinggemma2/README.md) | Google DeepMind，2026-10-06 | `embedding-gemma2` |
+| 视觉 token 与跨模态检索 | [EmbeddingGemma 2: Unified and Efficient Multimodal Representations](../multimodal-models/embeddinggemma2/README.md) | Google，2026-10-06 | `embedding-gemma2` |
 | 视觉 token 与跨模态检索 | [StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection](../multimodal-models/2609.16841-stacktok/README.md) | Sichuan University，2026-09-15 | `stacktok` |
 | 视频理解与 token 压缩 | [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](../multimodal-models/2609.16722-videomm/README.md) | University of Science and Technology of China，2026-09-15 | `videomm` |
 | 音频描述与对比排序 | [From Visual Cues to Spoken Narration: Rethinking Audio Description](../multimodal-models/2609.01725-cue2narrate-drl/README.md) | TU Darmstadt & hessian.AI，2026-09-01 | `cue2narrate-drl` |

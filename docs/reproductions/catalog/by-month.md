@@ -3,6 +3,8 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-10
+- [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../recommendation-components/2610.36973-kl-mopd/README.md)：先在冻结初始学生的生成前缀上按位置估计到两位教师的反向KL，以其比例固定教师权重。当前学生在自己的前缀上最小化加权反向KL；本地仅实现校准和可微损失，不运行推荐器或继承线上收入增益。
+- [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)：以原图和自由文本直接生成商品SID集合，用组合数据工具、商品知识CPT、混合推理预算SFT和意图均衡RL扩展统一多模态搜索。Sample–Beam分离推理采样与SID束生成以对齐多结果服务；完整实验高成本不复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion](../../recommendation-components/2610.32420-hge/README.md)：先以商品自注意力编码竞争，再注入用户/门店/上下文；将门店GTV拆为转化概率乘条件商品购买概率、数量和价格之和，再用有符号残差与按样本门控融合通用回归。本地是Eqs2--11可微L1组件，不含DIN/DCN、论文完整Dice塔或生产训练，不能声称复现+1.42%线上收益。
 - [OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models](../../recommendation-components/2610.30675-onelatent/README.md)：用探索/评价/归因三视角监督、三阶段latent-token对齐和活跃度课程训练，将在线生成缩为三层SID；异步缓存避开请求关键路径。正文量化A/B与全流量部署符合工业证据门槛；完整实验成本过高，不复现（审查 DONE）。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn](../../recommendation-components/2610.30941-pair/README.md)：通过曝光条件偏好对比目标、可学习位置历史注意力和归一化加性融合建模职业社交互补意图。本地仅实现可独立验证的向量/损失组件；原8GPU私有数据完整实验成本过高，不复现（审查 DONE）。

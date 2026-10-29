@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 116 个问题 · 29 篇论文
+[基础模型](index.md) / 124 个问题 · 31 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">116 个问题 · 29 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">124 个问题 · 31 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rescom" data-paper-title="ResCom: Activation Residual Compensation for Large Language Model Quantization" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ResCom: Activation Residual Compensation for Large Language Model Quantization 基础模型 Institute of Automation, Chinese Academy of Sciences 2026-10-25 低比特激活把不同输入压到同一量化格点后，只读取量化值的补偿器无法分辨格点内部的差异。ResCom 保留当前前向中的残差，在冻结既有量化模型之后，以低秩分支补回这些残差造成的输出变化；不重新优化主权重或量化器。它不是“找残差最大的通道”：残差很小也可能被主映射放大。论文通过输出误差与残差的交叉统计，按输出重建目标分配有限秩预算，并用带截距的正则化降秩回归闭式求解。 完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。本地状态：L1 独立闭式校准组件、diagnostic only，不是完整量化模型或原生低比特内核。完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。实现稳定可合并的中心化流式统计、Cholesky / 截断 SVD 求解和固定分支。可缩小维度，但保留输出感知、秩约束、未归一统计和不惩罚截距；不以普通 SVD() 或残差幅度排序替代论文目标。  推理与系统效率 量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么已经量化好的模型，还能从当前激活的舍入残差中找回信息？ 量化把一段连续输入映射到同一个格点，只看量化值无法分辨格点内的不同输入。但当前前向在舍入前后都能看到激活，两者之差仍保留被丢掉的信息。ResCom把这份残差送入固定低秩分支，而不是重新训练量化器。 教学例子：1.01与1.04都舍入为1.0，只看1.0的分支输出相同；残差0.01与0.04却允许补偿器给出不同输出。这不是论文模型准确率。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-rescom-f00947a9" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8dfbcbd312870357">为什么已经量化好的模型，还能从当前激活的舍入残差中找回信息？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arescom">ResCom: Activation Residual Compensation for Large Language Model Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Institute of Automation, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>量化把一段连续输入映射到同一个格点，只看量化值无法分辨格点内的不同输入。但当前前向在舍入前后都能看到激活，两者之差仍保留被丢掉的信息。ResCom把这份残差送入固定低秩分支，而不是重新训练量化器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>1.01与1.04都舍入为1.0，只看1.0的分支输出相同；残差0.01与0.04却允许补偿器给出不同输出。这不是论文模型准确率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.35955v1">原论文</a> · <a href="../../../../foundation-models/2610.35955-rescom/">实现解读</a> · <a href="#qa-8dfbcbd312870357">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rescom" data-paper-title="ResCom: Activation Residual Compensation for Large Language Model Quantization" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ResCom: Activation Residual Compensation for Large Language Model Quantization 基础模型 Institute of Automation, Chinese Academy of Sciences 2026-10-25 低比特激活把不同输入压到同一量化格点后，只读取量化值的补偿器无法分辨格点内部的差异。ResCom 保留当前前向中的残差，在冻结既有量化模型之后，以低秩分支补回这些残差造成的输出变化；不重新优化主权重或量化器。它不是“找残差最大的通道”：残差很小也可能被主映射放大。论文通过输出误差与残差的交叉统计，按输出重建目标分配有限秩预算，并用带截距的正则化降秩回归闭式求解。 完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。本地状态：L1 独立闭式校准组件、diagnostic only，不是完整量化模型或原生低比特内核。完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。实现稳定可合并的中心化流式统计、Cholesky / 截断 SVD 求解和固定分支。可缩小维度，但保留输出感知、秩约束、未归一统计和不惩罚截距；不以普通 SVD() 或残差幅度排序替代论文目标。  推理与系统效率 量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 ResCom为什么对白化后的输出交叉统计做SVD，而不是直接截断主权重？ 秩预算应分给真实出现且会影响输出的残差方向。残差Gram矩阵描述校准分布的尺度与相关性，误差-残差交叉统计描述其输出作用；Cholesky白化后截断SVD求解的是带ridge的输出重建目标。直接截断权重没有利用残差分布，目标不同。 教学例子：某方向残差很大却被主层几乎抑制，另一个方向残差小但被放大；有限秩应由输出损失判断，而非只按残差幅度选。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f90806934ea200c7">ResCom为什么对白化后的输出交叉统计做SVD，而不是直接截断主权重？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arescom">ResCom: Activation Residual Compensation for Large Language Model Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Institute of Automation, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>秩预算应分给真实出现且会影响输出的残差方向。残差Gram矩阵描述校准分布的尺度与相关性，误差-残差交叉统计描述其输出作用；Cholesky白化后截断SVD求解的是带ridge的输出重建目标。直接截断权重没有利用残差分布，目标不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某方向残差很大却被主层几乎抑制，另一个方向残差小但被放大；有限秩应由输出损失判断，而非只按残差幅度选。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.35955v1">原论文</a> · <a href="../../../../foundation-models/2610.35955-rescom/">实现解读</a> · <a href="#qa-f90806934ea200c7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rescom" data-paper-title="ResCom: Activation Residual Compensation for Large Language Model Quantization" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ResCom: Activation Residual Compensation for Large Language Model Quantization 基础模型 Institute of Automation, Chinese Academy of Sciences 2026-10-25 低比特激活把不同输入压到同一量化格点后，只读取量化值的补偿器无法分辨格点内部的差异。ResCom 保留当前前向中的残差，在冻结既有量化模型之后，以低秩分支补回这些残差造成的输出变化；不重新优化主权重或量化器。它不是“找残差最大的通道”：残差很小也可能被主映射放大。论文通过输出误差与残差的交叉统计，按输出重建目标分配有限秩预算，并用带截距的正则化降秩回归闭式求解。 完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。本地状态：L1 独立闭式校准组件、diagnostic only，不是完整量化模型或原生低比特内核。完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。实现稳定可合并的中心化流式统计、Cholesky / 截断 SVD 求解和固定分支。可缩小维度，但保留输出感知、秩约束、未归一统计和不惩罚截距；不以普通 SVD() 或残差幅度排序替代论文目标。  推理与系统效率 量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 给量化输入加低秩分支，与给舍入残差加低秩分支，关键差别是什么？ 前者仍只能读取量化值，因此无法区分落在同一格点的输入；后者读取被删除的部分，在同一预算下拥有不同的信息。ResCom又保持既有主路径冻结，所以它也不同于先拆出高精度权重、再重新量化剩余权重的方案。 教学例子：先分走一部分权重再量化，会改变主路径校准问题；在已冻结路径旁加UVd+b则不改变原量化设置，两者不能作为同一个实现。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ec528a42e7e51e74">给量化输入加低秩分支，与给舍入残差加低秩分支，关键差别是什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arescom">ResCom: Activation Residual Compensation for Large Language Model Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Institute of Automation, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者仍只能读取量化值，因此无法区分落在同一格点的输入；后者读取被删除的部分，在同一预算下拥有不同的信息。ResCom又保持既有主路径冻结，所以它也不同于先拆出高精度权重、再重新量化剩余权重的方案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先分走一部分权重再量化，会改变主路径校准问题；在已冻结路径旁加UVd+b则不改变原量化设置，两者不能作为同一个实现。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.35955v1">原论文</a> · <a href="../../../../foundation-models/2610.35955-rescom/">实现解读</a> · <a href="#qa-ec528a42e7e51e74">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rescom" data-paper-title="ResCom: Activation Residual Compensation for Large Language Model Quantization" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ResCom: Activation Residual Compensation for Large Language Model Quantization 基础模型 Institute of Automation, Chinese Academy of Sciences 2026-10-25 低比特激活把不同输入压到同一量化格点后，只读取量化值的补偿器无法分辨格点内部的差异。ResCom 保留当前前向中的残差，在冻结既有量化模型之后，以低秩分支补回这些残差造成的输出变化；不重新优化主权重或量化器。它不是“找残差最大的通道”：残差很小也可能被主映射放大。论文通过输出误差与残差的交叉统计，按输出重建目标分配有限秩预算，并用带截距的正则化降秩回归闭式求解。 完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。本地状态：L1 独立闭式校准组件、diagnostic only，不是完整量化模型或原生低比特内核。完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。实现稳定可合并的中心化流式统计、Cholesky / 截断 SVD 求解和固定分支。可缩小维度，但保留输出感知、秩约束、未归一统计和不惩罚截距；不以普通 SVD() 或残差幅度排序替代论文目标。  推理与系统效率 量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么收集一层统计后立刻挂上补偿，会破坏ResCom的校准合同？ 早层补偿改变后层所见激活，后层统计就不再来自同一个冻结原模型。论文先收集所有目标层，再安装分支；本地流式合并只合并同一冻结映射的样本。另外G与C是未除样本数的和，随意取平均而不调整ridge也会改变解。 教学例子：把样本数翻倍后G、C都加倍，固定ridge的相对强度随之变化；若悄悄把G、C除以样本数，不能继续声称同一个正则化问题。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-823e70895c07a37a">为什么收集一层统计后立刻挂上补偿，会破坏ResCom的校准合同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arescom">ResCom: Activation Residual Compensation for Large Language Model Quantization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Institute of Automation, Chinese Academy of Sciences</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>早层补偿改变后层所见激活，后层统计就不再来自同一个冻结原模型。论文先收集所有目标层，再安装分支；本地流式合并只合并同一冻结映射的样本。另外G与C是未除样本数的和，随意取平均而不调整ridge也会改变解。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>把样本数翻倍后G、C都加倍，固定ridge的相对强度随之变化；若悄悄把G、C除以样本数，不能继续声称同一个正则化问题。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.35955v1">原论文</a> · <a href="../../../../foundation-models/2610.35955-rescom/">实现解读</a> · <a href="#qa-823e70895c07a37a">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:moezip" data-paper-title="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs 基础模型 Korea University 2026-10-21 MoE 的 KV 删除会扰动 attention 输出，进而改变路由。MoEZip 用已观察 instruction token 的路由分布 Fisher trace 作为敏感性代理，经 attention 传播到 context 位置，预留全局 routing anchors；其余预算沿用调用者提供的 dense/MoE base compressor 分数。future answer 不可用于真实选择。 完整实验成本过高，不复现（审查 DONE）；3 seeds 仍只是 L1 机制诊断，不构成 MoE 能力或质量提升证据。fisher_trace、select_cache、compress_cache 保留两种 gate、跨头 max、全局 anchors、App C 默认预算边界、base 排除重复补齐及真实 KV gather。输出原 context 索引并维持升序，调用者必须据此保留 position IDs。base 分数是显式接口，不伪装成已实现 KVZip。  MoE路由 KV缓存与稀疏推理 基础模型 推理压缩：权重、KV 缓存与服务带宽 MoEZip 为什么把 KV 误差与专家路由联系起来？ 删除KV会改变attention输出，进而影响MoE router。普通压缩若只看attention质量，可能忽略路由敏感位置，因此方法从已观察instruction的gate与attention中估计全局routing anchors。 示意：一条KV虽不占最大attention，扰动它后却可能让token跨过专家选择边界。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-moezip-03b66820" class="ar-learning-paper-anchor"></span>
@@ -1405,6 +1458,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>窗口K=3在context第一个位置缺一个邻居，也仍按3归一化而非改除2。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.03276v1">原论文</a> · <a href="../../../../foundation-models/2608.03276-taskpress/">实现解读</a> · <a href="#qa-78c797341146a290">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hope-hilbert" data-paper-title="Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks 基础模型 Google DeepMind 2026-07-23 单看输入权重大小，可能把“函数完全相同、只是参数重新缩放”的神经元排出不同重要性。HOPE把一个神经元写成激活函数与输出向量的秩1张量：它在所有输入上的作用方向，比参数坐标本身更接近需要保留的功能。论文利用BN统计约束Gaussian surrogate，解析计算ReLU的功能核，并在同一失真尺度下比较PRUNE、MERGE和残差块EVICT。每次按失真除以初始模型参数收益做贪心选择，避免相邻层缩小后参数收益变化导致的选择偏差。上游新实现还提供可逆指令序列与DEFT的固定核心/可塑slack迁移流程； 完整实验为成本过高，不复现（审查 DONE），不自动重试。本地状态：纯 CPU、L1 精确子组件，diagnostic only。不是完整 HOPE 编码器、DEFT 或 ImageNet benchmark；完整实验为成本过高，不复现（审查 DONE），不自动重试。它也不是 Nested Learning / Sleep 中同名的 Hope 网络。精确一阶/自核、含偏置pair核、pairwise warped correlation与2×2算子Gram；支持中心化和未中心化口径的显式切换。  推理与系统效率 数据无关结构剪枝与Hilbert算子 基础模型 推理压缩：权重、KV 缓存与服务带宽 HOPE为什么不直接把权重小的神经元删掉？ 同一个ReLU神经元可以把输入及BN尺度放大、输出权重缩小，而整体函数不变。裸权重大小会跟着变，不能稳定表示功能重要性。HOPE比较的是激活函数与输出向量构成的Hilbert算子容量；这个比较仍依赖Gaussian surrogate，不等于真实数据上的重要性已得到证明。 示意：隐藏激活扩大7倍、输出权重除以7，预测保持不变；功能容量应不变，但只看输出权重会误以为它变得更不重要。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-hope-hilbert-ad1735c1" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-678a615e93864162">HOPE为什么不直接把权重小的神经元删掉？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahope-hilbert">Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同一个ReLU神经元可以把输入及BN尺度放大、输出权重缩小，而整体函数不变。裸权重大小会跟着变，不能稳定表示功能重要性。HOPE比较的是激活函数与输出向量构成的Hilbert算子容量；这个比较仍依赖Gaussian surrogate，不等于真实数据上的重要性已得到证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>隐藏激活扩大7倍、输出权重除以7，预测保持不变；功能容量应不变，但只看输出权重会误以为它变得更不重要。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.21366v1">原论文</a> · <a href="../../../../foundation-models/2607.21366-hope-hilbert/">实现解读</a> · <a href="#qa-678a615e93864162">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hope-hilbert" data-paper-title="Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks 基础模型 Google DeepMind 2026-07-23 单看输入权重大小，可能把“函数完全相同、只是参数重新缩放”的神经元排出不同重要性。HOPE把一个神经元写成激活函数与输出向量的秩1张量：它在所有输入上的作用方向，比参数坐标本身更接近需要保留的功能。论文利用BN统计约束Gaussian surrogate，解析计算ReLU的功能核，并在同一失真尺度下比较PRUNE、MERGE和残差块EVICT。每次按失真除以初始模型参数收益做贪心选择，避免相邻层缩小后参数收益变化导致的选择偏差。上游新实现还提供可逆指令序列与DEFT的固定核心/可塑slack迁移流程； 完整实验为成本过高，不复现（审查 DONE），不自动重试。本地状态：纯 CPU、L1 精确子组件，diagnostic only。不是完整 HOPE 编码器、DEFT 或 ImageNet benchmark；完整实验为成本过高，不复现（审查 DONE），不自动重试。它也不是 Nested Learning / Sleep 中同名的 Hope 网络。精确一阶/自核、含偏置pair核、pairwise warped correlation与2×2算子Gram；支持中心化和未中心化口径的显式切换。  推理与系统效率 数据无关结构剪枝与Hilbert算子 基础模型 推理压缩：权重、KV 缓存与服务带宽 “输入函数乘输出向量”为什么被称为秩1算子？ 一个神经元的输入激活是标量函数，每个输入只改变它的幅度；该标量始终沿同一个输出权重向量传递。因此整条输入函数景观映射到输出空间的一维方向，形成秩1张量。两神经元的内积等于激活核乘输出向量内积，不能只用输入权重cosine代替。 示意：激活从0.2变到0.8时，输出从0.2w变到0.8w，方向仍是w；换一个输出向量会改变功能相似度。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-868a387e39220c9a">“输入函数乘输出向量”为什么被称为秩1算子？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahope-hilbert">Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一个神经元的输入激活是标量函数，每个输入只改变它的幅度；该标量始终沿同一个输出权重向量传递。因此整条输入函数景观映射到输出空间的一维方向，形成秩1张量。两神经元的内积等于激活核乘输出向量内积，不能只用输入权重cosine代替。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>激活从0.2变到0.8时，输出从0.2w变到0.8w，方向仍是w；换一个输出向量会改变功能相似度。</p>
+<p class="ar-learning-sources">依据：核心公式、原论文关键图；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.21366v1">原论文</a> · <a href="../../../../foundation-models/2607.21366-hope-hilbert/">实现解读</a> · <a href="#qa-868a387e39220c9a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hope-hilbert" data-paper-title="Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks 基础模型 Google DeepMind 2026-07-23 单看输入权重大小，可能把“函数完全相同、只是参数重新缩放”的神经元排出不同重要性。HOPE把一个神经元写成激活函数与输出向量的秩1张量：它在所有输入上的作用方向，比参数坐标本身更接近需要保留的功能。论文利用BN统计约束Gaussian surrogate，解析计算ReLU的功能核，并在同一失真尺度下比较PRUNE、MERGE和残差块EVICT。每次按失真除以初始模型参数收益做贪心选择，避免相邻层缩小后参数收益变化导致的选择偏差。上游新实现还提供可逆指令序列与DEFT的固定核心/可塑slack迁移流程； 完整实验为成本过高，不复现（审查 DONE），不自动重试。本地状态：纯 CPU、L1 精确子组件，diagnostic only。不是完整 HOPE 编码器、DEFT 或 ImageNet benchmark；完整实验为成本过高，不复现（审查 DONE），不自动重试。它也不是 Nested Learning / Sleep 中同名的 Hope 网络。精确一阶/自核、含偏置pair核、pairwise warped correlation与2×2算子Gram；支持中心化和未中心化口径的显式切换。  推理与系统效率 数据无关结构剪枝与Hilbert算子 基础模型 推理压缩：权重、KV 缓存与服务带宽 HOPE的Hilbert压缩与Sleep中的Hope网络是一回事吗？ 不是。Hilbert Operator for Progressive Encoding分析冻结网络的功能容量，用PRUNE、MERGE和EVICT逐步压缩；Sleep中的Hope是多频率记忆网络，在学习与离线巩固阶段更新记忆。名称相似不代表算法相同。本地只提供前者的核、剪枝和单步恢复子组件。 示意：给冻结ResNet统计打剪枝分数，不能被描述成让语言模型睡眠后学会新知识。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-16be87c74267c415">HOPE的Hilbert压缩与Sleep中的Hope网络是一回事吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahope-hilbert">Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。Hilbert Operator for Progressive Encoding分析冻结网络的功能容量，用PRUNE、MERGE和EVICT逐步压缩；Sleep中的Hope是多频率记忆网络，在学习与离线巩固阶段更新记忆。名称相似不代表算法相同。本地只提供前者的核、剪枝和单步恢复子组件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>给冻结ResNet统计打剪枝分数，不能被描述成让语言模型睡眠后学会新知识。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、保留机制与接口、高成本完整实验与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.21366v1">原论文</a> · <a href="../../../../foundation-models/2607.21366-hope-hilbert/">实现解读</a> · <a href="#qa-16be87c74267c415">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hope-hilbert" data-paper-title="Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks 基础模型 Google DeepMind 2026-07-23 单看输入权重大小，可能把“函数完全相同、只是参数重新缩放”的神经元排出不同重要性。HOPE把一个神经元写成激活函数与输出向量的秩1张量：它在所有输入上的作用方向，比参数坐标本身更接近需要保留的功能。论文利用BN统计约束Gaussian surrogate，解析计算ReLU的功能核，并在同一失真尺度下比较PRUNE、MERGE和残差块EVICT。每次按失真除以初始模型参数收益做贪心选择，避免相邻层缩小后参数收益变化导致的选择偏差。上游新实现还提供可逆指令序列与DEFT的固定核心/可塑slack迁移流程； 完整实验为成本过高，不复现（审查 DONE），不自动重试。本地状态：纯 CPU、L1 精确子组件，diagnostic only。不是完整 HOPE 编码器、DEFT 或 ImageNet benchmark；完整实验为成本过高，不复现（审查 DONE），不自动重试。它也不是 Nested Learning / Sleep 中同名的 Hope 网络。精确一阶/自核、含偏置pair核、pairwise warped correlation与2×2算子Gram；支持中心化和未中心化口径的显式切换。  推理与系统效率 数据无关结构剪枝与Hilbert算子 基础模型 推理压缩：权重、KV 缓存与服务带宽 实现剪枝时，为什么既要固定初始参数收益，又要补偿下游BN均值？ 剪枝选择按失真除以初始参数收益比较；改用逐步缩小的邻接shape会改变收益口径。执行后，被删除激活的平均贡献消失，因此Dense消费者的BN运行均值要减去这份贡献，避免额外平移。补偿不保证保留每个样本的预测，undo精确恢复也不等于压缩准确率不降。 示意：某激活均值0.8、输出权重[1,2]，删除后消费者BN均值应减[0.8,1.6]；不能把补偿写成加法。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-aa4684949b6038fc">实现剪枝时，为什么既要固定初始参数收益，又要补偿下游BN均值？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahope-hilbert">Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>剪枝选择按失真除以初始参数收益比较；改用逐步缩小的邻接shape会改变收益口径。执行后，被删除激活的平均贡献消失，因此Dense消费者的BN运行均值要减去这份贡献，避免额外平移。补偿不保证保留每个样本的预测，undo精确恢复也不等于压缩准确率不降。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某激活均值0.8、输出权重[1,2]，删除后消费者BN均值应减[0.8,1.6]；不能把补偿写成加法。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、结果与负控、高成本完整实验与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.21366v1">原论文</a> · <a href="../../../../foundation-models/2607.21366-hope-hilbert/">实现解读</a> · <a href="#qa-aa4684949b6038fc">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:c2kv" data-paper-title="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference 基础模型 Shanghai Jiao Tong University 2026-07-20 以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。本地只验证论文可独立实现的算法路径，不把小规模 NumPy 实验冒充原论文规模训练或线上结果。本地使用固定长上下文/多模态/评测 mini-suite，未训练论文规模 checkpoint、未实现定制 CUDA kernel，也未复刻论文完整公开 benchmark。该实现用于确认核心数据流、公式和相对计算路径可执行。本地对照口径：基线为同样本 recent-window attention，实验组为 c2kv；单 seed 变化为 +76.56% 个百分点。  推理与系统效率 KV cache 基础模型 推理压缩：权重、KV 缓存与服务带宽 C²KV 为什么希望压缩后的 KV 既短又可拼接复用？ 单段缓存压缩并不保证多段组合后仍可用。方法以compression tokens和结构化attention联合学习压缩与复用，使多个压缩表示能作为后续模型的共同输入。 示意：几个文档片段分别压缩后，希望在新的组合查询中复用，而不是每次全部重新prefill。 2026-10-27">

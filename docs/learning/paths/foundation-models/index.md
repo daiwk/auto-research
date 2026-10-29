@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="context-and-state/">长上下文：注意力、递归状态与记忆</a></h2>
 <p>上下文变长时，模型保留的是可寻址的历史 token，还是压缩后的递归状态？</p>
-<p class="ar-learning-topic-meta">124 个问题 · 31 篇论文</p>
+<p class="ar-learning-topic-meta">132 个问题 · 33 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="conditional-compute/">按需计算：专家、弹性深宽与查表记忆</a></h2>
@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a></h2>
 <p>显存或时延不够时，真正占资源的是模型权重、历史状态，还是服务搬运？</p>
-<p class="ar-learning-topic-meta">116 个问题 · 29 篇论文</p>
+<p class="ar-learning-topic-meta">124 个问题 · 31 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="generation-paths/">生成路径：草稿验证、并行去噪与少步迭代</a></h2>

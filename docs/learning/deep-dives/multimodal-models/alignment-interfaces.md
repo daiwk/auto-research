@@ -7,7 +7,7 @@ hide:
 
 # 多模态对齐到底对齐什么：向量、视觉接口还是证据依赖
 
-[多模态](../index.md) · 更新 2026-10-27 · 20 篇主题资料 / 6 篇重点对照
+[多模态](../index.md) · 更新 2026-10-29 · 20 篇主题资料 / 6 篇重点对照
 
 CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。
 
@@ -28,7 +28,7 @@ CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条�
 | [Learning Transferable Visual Models From Natural Language Supervision](../../../reproductions/2103.00020-clip/README.md) · [原始来源](https://arxiv.org/abs/2103.00020)<br>章节：背景与主要改动、核心公式、复现边界 | 独立图文encoder映射到单位球面，用对称批内对比目标学习相似度。 | 类别文本可作零样本原型，但相似度不是开放回答；本地服饰图像双塔不代表四亿图文预训练。 |
 | [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../../reproductions/2301.12597-blip2/README.md) · [原始来源](https://arxiv.org/abs/2301.12597)<br>章节：背景与主要改动、核心公式、复现边界 | 固定数量learnable query经Q-Former交叉注意力提取视觉信息，接给冻结LLM。 | 可训练瓶颈控制视觉接口长度，也可能遗漏细节；本地四query未复刻两阶段大模型训练。 |
 | [Visual Instruction Tuning](../../../reproductions/2304.08485-llava/README.md) · [原始来源](https://arxiv.org/abs/2304.08485)<br>章节：背景与主要改动、核心公式、复现边界 | projector将视觉特征接入语言token空间，再用多模态指令监督学习条件回答。 | 形状对齐不能代替语义与指令训练；本地轻量问答头未执行GPT-4指令数据生成或LLaVA-13B。 |
-| [EmbeddingGemma 2: Open Multimodal Embeddings](../../../multimodal-models/embeddinggemma2/README.md) · [原始来源](https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/)<br>章节：背景与主要改动、核心公式、结果与边界 | 独立模态塔输出统一768维向量，MRL支持规定前缀截断后再归一化。 | 缩短向量与压缩视觉输入是不同预算；本地使用官方checkpoint仅验证文本、图像，未接全四模态。 |
+| [EmbeddingGemma 2: Unified and Efficient Multimodal Representations](../../../multimodal-models/embeddinggemma2/README.md) · [原始来源](https://arxiv.org/abs/2610.37364v1)<br>章节：背景与主要改动、核心公式、结果与边界 | 独立模态塔输出统一768维向量，MRL支持规定前缀截断后再归一化。 | 缩短向量与压缩视觉输入是不同预算；本地使用官方checkpoint仅验证文本、图像，未接全四模态。 |
 | [CV-OPD: Contrastive Vision On-policy Distillation](../../../reproductions/2610.13264-cv-opd/README.md) · [原始来源](https://arxiv.org/abs/2610.13264)<br>章节：背景与主要改动、核心公式、本地结果与边界、2026-10-14 A100 实测 | 学生读全图，正负教师只改crop且共享学生前缀，用JSD和CDL约束正确视觉依赖。 | 负crop构造、样本门与token门都影响监督；本地有真实VLM L1更新及A100诊断，非完整视觉能力复现。 |
 | [Unsupervised Multimodal Reward Modeling](../../../reproductions/2610.12707-umrm/README.md) · [原始来源](https://arxiv.org/abs/2610.12707)<br>章节：背景与主要改动、核心公式、数据协议与verifier边界、本地结果与验证状态 | 冻结VLM中间层，只池化response并训练无bias奖励头，以caption扰动构造偏好。 | 无人工偏好不等于全流程无标签；development选层和bootstrap verifier仍使用监督，局部奖励准度不保证真实policy选择效用。 |
 
@@ -47,6 +47,12 @@ CLIP和EmbeddingGemma 2要求向量在任务相似度下可比较，后者还允
 UMRM从caption扰动学习reward，进一步检验policy自产候选的选择效用，避免只在人工负例上自证。CV-OPD则在相同学生前缀上改变教师视觉证据，直接约束正负视图的分布关系。前者是评价器与负样本分布，后者是策略蒸馏关系；它们可以互补，却不能用一个reward benchmark证明完整视觉归因。
 
 对照来源：[umrm](../../../reproductions/2610.12707-umrm/README.md) · [cv-opd](../../../reproductions/2610.13264-cv-opd/README.md) · [llava](../../../reproductions/2304.08485-llava/README.md)
+
+### 10月29日：新方法与来源变化
+
+EmbeddingGemma 2新正式论文对应已有10月6日模型，不再增加重复身份。论文明确512维骨干均值后投影到768；固定官方实现已把线性投影放在last_hidden_state返回前，同权mask均值与投影可交换。本地旧16图GPU结果保持原等级，不能因论文发布升级为音频/视频或七套benchmark验收。
+
+对照来源：[clip](../../../reproductions/2103.00020-clip/README.md) · [embedding-gemma2](../../../multimodal-models/embeddinggemma2/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,9 +88,23 @@ UMRM从caption扰动学习reward，进一步检验policy自产候选的选择效
 
     对照来源：[umrm](../../../reproductions/2610.12707-umrm/README.md) · [cv-opd](../../../reproductions/2610.13264-cv-opd/README.md)
 
+### 正式论文顺序与官方代码顺序不同，何时可以沿用既有结果？ {#cross-oct29-method-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 先核实际算子。这里同一个无偏置线性投影与同权mask均值可交换，且运行源码和checkpoint未变；若是非线性、不同权重或重新训练，则不能据此自动等价。当前只更新文献来源。
+
+    **教学例子：** 教学例：mean(W h1,W h2)=W mean(h1,h2)；mean(GELU(h1),GELU(h2))通常不是GELU(mean(h1,h2))。
+
+    对照来源：[clip](../../../reproductions/2103.00020-clip/README.md) · [embedding-gemma2](../../../multimodal-models/embeddinggemma2/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-29** · EmbeddingGemma 2新正式论文对应已有10月6日模型，不再增加重复身份。论文明确512维骨干均值后投影到768；固定官方实现已把线性投影放在last_hidden_state返回前，同权mask均值与投影可交换。本地旧16图GPU结果保持原等级，不能因论文发布升级为音频/视频或七套benchmark验收。
+
+涉及：[embedding-gemma2](../../../multimodal-models/embeddinggemma2/README.md)
 
 **2026-10-27** · 首版：比较CLIP/EmbeddingGemma 2检索空间、BLIP-2/LLaVA视觉接口、CV-OPD证据依赖与UMRM奖励；已阅20篇摘要，精读6篇。
 
@@ -98,7 +118,7 @@ UMRM从caption扰动学习reward，进一步检验policy自产候选的选择效
 - [Learning Transferable Visual Models From Natural Language Supervision](../../../reproductions/2103.00020-clip/README.md)
 - [From Visual Cues to Spoken Narration: Rethinking Audio Description](../../../multimodal-models/2609.01725-cue2narrate-drl/README.md)
 - [CV-OPD: Contrastive Vision On-policy Distillation](../../../reproductions/2610.13264-cv-opd/README.md)
-- [EmbeddingGemma 2: Open Multimodal Embeddings](../../../multimodal-models/embeddinggemma2/README.md)
+- [EmbeddingGemma 2: Unified and Efficient Multimodal Representations](../../../multimodal-models/embeddinggemma2/README.md)
 - [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../../../multimodal-models/2610.32976-flexglue/README.md)
 - [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../../../reproductions/2608.12209-gas/README.md)
 - [LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation](../../../foundation-models/2610.22182-lamp/README.md)

@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "method": "sleep-lti",
+  "manifest_ref": "foundation-models:sleep-lti",
+  "paper": {
+    "key": "sleep-lti",
+    "title": "Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories"
+  },
+  "dataset": {
+    "id": "synthetic:oct29-sleep-lti-v1",
+    "revision": "sha256:3f7219ba159916cb75b163430bea88a71c6609663a5b8e6ad2a97040a220bb42",
+    "recipe": "fixed seeded mechanism contracts, no public capability dataset",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "single_edit_reward": 0.9,
+        "over_threshold_reward": 0.4,
+        "insertion_absolute_reward": 0.8571428571428572,
+        "exact_lexical_without_semantic": 0.6
+      },
+      "checks": {
+        "inclusive_threshold": true,
+        "semantic_branch_survives": true,
+        "max_length_normalizer": true,
+        "lexical_not_semantic_proxy": true,
+        "distance_symmetry": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "single_edit_reward": 0.9,
+        "over_threshold_reward": 0.4,
+        "insertion_absolute_reward": 0.8571428571428572,
+        "exact_lexical_without_semantic": 0.6
+      },
+      "checks": {
+        "inclusive_threshold": true,
+        "semantic_branch_survives": true,
+        "max_length_normalizer": true,
+        "lexical_not_semantic_proxy": true,
+        "distance_symmetry": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "single_edit_reward": 0.9,
+        "over_threshold_reward": 0.4,
+        "insertion_absolute_reward": 0.8571428571428572,
+        "exact_lexical_without_semantic": 0.6
+      },
+      "checks": {
+        "inclusive_threshold": true,
+        "semantic_branch_survives": true,
+        "max_length_normalizer": true,
+        "lexical_not_semantic_proxy": true,
+        "distance_symmetry": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "exact_lexical_without_semantic": {
+      "mean": 0.6,
+      "std": 0.0,
+      "n": 3
+    },
+    "insertion_absolute_reward": {
+      "mean": 0.8571428571428572,
+      "std": 0.0,
+      "n": 3
+    },
+    "over_threshold_reward": {
+      "mean": 0.4,
+      "std": 0.0,
+      "n": 3
+    },
+    "single_edit_reward": {
+      "mean": 0.9,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "component formulas/contracts only, not a capability or full paper reproduction"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "4fd3d0c5845f7f88b9a68333c33c9035f47b3983",
+    "artifact_path": "docs/foundation-models/2606.03979-sleep-lti/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct29_components.py": "8cd0b1227b5238ae2bb434f930cd851e60661e035991421b18decad77a65c806",
+      "docs/research-audits/oct29-components/execution-spec.json": "36fb236a14fba74c72a6521fe973d24040c7c5611902394a7ad6401cc7ebf715",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "src/auto_research/agent_research/discernmem.py": "e9aad2dc645eaf627056e5d9dce8dc03b746d722647049473dde610fa28e7ef2",
+      "src/auto_research/agent_research/ruharness.py": "fed7efd2af6d919a2f2ce358f5ded4a76ec96a08aa3b6a723e9255899850bd7c",
+      "src/auto_research/foundation_models/gui_jepa.py": "5feabf6cd9530a2841bfcc9b20199159550bf17af13b0a7e02509056237f5104",
+      "src/auto_research/foundation_models/hope_hilbert.py": "65f6af44919f7d4e517daad04660531a949c4badb274c4866ea903d9b2ef035c",
+      "src/auto_research/foundation_models/rescom.py": "b53f5dd44e6d4e72fc28b1c56fbffb06eb0262fbc647162f6dcc8ef440e9b567",
+      "src/auto_research/foundation_models/select_ttt.py": "b63aacbcd05d3a12e0a93460172e58991601989a08b89a4fb2235ed98d215e8f",
+      "src/auto_research/foundation_models/sleep_lti.py": "3f7219ba159916cb75b163430bea88a71c6609663a5b8e6ad2a97040a220bb42",
+      "src/auto_research/reproductions/kl_mopd.py": "01298abcd3e06a2dbad62e7a1ade42a605af203eeb54f2ebc826a8093568aa01"
+    },
+    "raw_runner_artifact_sha256": "1dcd8583f62acb77016c2a59f182b93792052a52a6641b9d5df12a182f2d76c0",
+    "dataset_fingerprint": "sha256:17a442f7f1642e0dfdc83da1e9f397bfc50c2a85cc86f55f34e3426a42150ff2"
+  }
+}

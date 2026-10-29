@@ -7,7 +7,7 @@ hide:
 
 # 经验进入长期系统前，要解决存取、价值与准入
 
-[Agent](../index.md) · 更新 2026-10-27 · 55 篇主题资料 / 6 篇重点对照
+[Agent](../index.md) · 更新 2026-10-29 · 56 篇主题资料 / 7 篇重点对照
 
 MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。
 
@@ -31,6 +31,7 @@ MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，C
 | [Voyager](../../../agent-research/2305.16291-voyager/README.md) · [原始来源](https://arxiv.org/abs/2305.16291)<br>章节：背景与主要改动、核心公式、复现边界 | 自动课程产生任务，代码执行和反馈修订后，将验证成功程序作为可检索技能继续组合。 | 一次环境成功仍有适用前提；本地技能是结构化工具计划，没有 Mineflayer/GPT-4 或真实 Minecraft。 |
 | [When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents](../../../agent-research/2608.05810-vag/README.md) · [原始来源](https://arxiv.org/abs/2608.05810)<br>章节：背景与主要改动、核心公式、复现边界 | 在持久写入前检查结构、行为无害与语义一致，再按边际收益选择可兼容 Hot 技能集合。 | 阻止污染早于事后删除，但验证仍受覆盖限制；本地只执行相关核心算子，候选发现不等于完整能力进化。 |
 | [SkillRise](../../../agent-research/2607.26784-skillrise/README.md) · [原始来源](https://arxiv.org/abs/2607.26784)<br>章节：背景与主要改动、核心公式、复现边界 | 同一policy交替求解与整理文档，当前结果监督solve，下游折扣结果监督curate。 | 要求任务序列能暴露经验迁移价值；本地仅验证状态和phase信用，未做原文模型RL。 |
+| [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../../../agent-research/2610.36652-discernmem/README.md) · [原始来源](https://arxiv.org/abs/2610.36652v1)<br>章节：背景与主要改动、核心公式 | 配对效果、范围优先归因、双参照修复门槛及版本证据清空。 | scope/defect/replay分数外部提供，不用规则冒充LLM诊断与修复。 |
 
 </div>
 
@@ -47,6 +48,12 @@ MemGPT 使信息可被移到归档，MemPrice 再在当前窗口联合分配多�
 Voyager 让成功程序进入技能积累链，VaG 更强调新经验会影响后代，需在写入前检查并考虑共同使用的兼容性。SkillRise 又把整理行为交给下游任务结果评价：当前成功主要说明求解，不足以说明留下的文档帮助未来。这不是谁更先进的直线序列，而是不同证据合同：执行通过、库准入和跨任务学习应分别记录。
 
 对照来源：[voyager](../../../agent-research/2305.16291-voyager/README.md) · [vag](../../../agent-research/2608.05810-vag/README.md) · [skillrise](../../../agent-research/2607.26784-skillrise/README.md)
+
+### 10月29日：新方法与来源变化
+
+DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任务、seed、配置做单记忆/无记忆配对重放，再检查修复是否同时守住父记忆与无记忆基线。它补充了简单追加反思的风险控制：团队结果差不能直接归罪某条记忆；新版本也不能继承旧版本已测效果。本地只做这些测量和版本合同，没有LLM修复或重放。
+
+对照来源：[memgpt](../../../agent-research/2310.08560-memgpt/README.md) · [discernmem](../../../agent-research/2610.36652-discernmem/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ Voyager 让成功程序进入技能积累链，VaG 更强调新经验会影响�
 
     对照来源：[skillrise](../../../agent-research/2607.26784-skillrise/README.md) · [voyager](../../../agent-research/2305.16291-voyager/README.md)
 
+### 为何修复后比父记忆好，还可能不能接收？ {#cross-oct29-method-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 父记忆本来就可能有害；候选还必须不弱于无记忆基线，守住历史任务并不增加完全失败数。单一正增益不能替代双参照非退化检查。
+
+    **教学例子：** 教学例：父记忆得0.2，候选0.4，无记忆0.8；候选比父版好，但仍不能据此称记忆有价值。
+
+    对照来源：[memgpt](../../../agent-research/2310.08560-memgpt/README.md) · [discernmem](../../../agent-research/2610.36652-discernmem/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-29** · DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任务、seed、配置做单记忆/无记忆配对重放，再检查修复是否同时守住父记忆与无记忆基线。它补充了简单追加反思的风险控制：团队结果差不能直接归罪某条记忆；新版本也不能继承旧版本已测效果。本地只做这些测量和版本合同，没有LLM修复或重放。
+
+涉及：[discernmem](../../../agent-research/2610.36652-discernmem/README.md)
 
 **2026-10-27** · 首版：比较分层存储、记忆价格、随机曝光效用、成功程序积累、预提交准入与下游技能信用。
 
 覆盖 55 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 55 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 56 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -149,6 +170,7 @@ Voyager 让成功程序进入技能积累链，VaG 更强调新经验会影响�
 - [MemGPT](../../../agent-research/2310.08560-memgpt/README.md)
 - [Voyager](../../../agent-research/2305.16291-voyager/README.md)
 - [Generative Agents](../../../agent-research/2304.03442-generative-agents/README.md)
+- [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../../../agent-research/2610.36652-discernmem/README.md)
 
 </details>
 

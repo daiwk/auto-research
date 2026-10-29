@@ -25,12 +25,12 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="generative-retrieval-reasoning/">生成式召回与推理推荐</a></h2>
 <p>把物品改写成token后，推荐究竟改变了哪一步？</p>
-<p class="ar-learning-topic-meta">240 个问题 · 60 篇论文</p>
+<p class="ar-learning-topic-meta">244 个问题 · 61 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="feedback-multitask-causality/">学习信号、多任务与反馈偏差</a></h2>
 <p>观察到的点击和转化，究竟能监督哪一个概率或价值？</p>
-<p class="ar-learning-topic-meta">140 个问题 · 35 篇论文</p>
+<p class="ar-learning-topic-meta">144 个问题 · 36 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="slates-business-value/">重排、展示与长期价值</a></h2>
