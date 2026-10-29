@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-29-priority-components",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_tier": "l1_mechanism",
+  "components": [
+    {
+      "key": "rescom",
+      "source": "src/auto_research/foundation_models/rescom.py",
+      "device": "cuda",
+      "checks": [
+        "calibration_factors_frozen",
+        "full_rank_ridge_independent_reference",
+        "heldout_activation_residual_error_reduced",
+        "intercept_matches_calibration_mean",
+        "rank_budget_retained",
+        "rank_zero_is_mean_only",
+        "same_quantized_bin_retains_distinct_residual",
+        "streamed_centered_moments_reference"
+      ],
+      "metrics": [
+        "correction_rank",
+        "heldout_error_after",
+        "heldout_error_before",
+        "mean_reference_error",
+        "model_calls",
+        "ridge_reference_error",
+        "stream_reference_error"
+      ],
+      "gates": [
+        {
+          "metric": "stream_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "ridge_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "heldout_error_after",
+          "op": "lt",
+          "other_metric": "heldout_error_before"
+        },
+        {
+          "metric": "correction_rank",
+          "op": "eq",
+          "value": 2
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "select-ttt",
+      "source": "src/auto_research/foundation_models/select_ttt.py",
+      "device": "cuda",
+      "checks": [
+        "apply_precedes_current_chunk_write",
+        "blockwise_lse_dense_query_ce_reference",
+        "clip_not_silently_renormalized",
+        "fast_weight_update_independent_reference",
+        "lower_ce_receives_stronger_write",
+        "query_multiplicity_retained",
+        "real_fast_weight_state_changes",
+        "unclipped_budget_sums_to_chunk_count"
+      ],
+      "metrics": [
+        "clipped_write_budget",
+        "model_calls",
+        "score_reference_error",
+        "state_reference_error",
+        "unclipped_write_budget",
+        "weight_delta"
+      ],
+      "gates": [
+        {
+          "metric": "score_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "state_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "weight_delta",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "clipped_write_budget",
+          "op": "eq",
+          "value": 1.2
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "gui-jepa",
+      "source": "src/auto_research/foundation_models/gui_jepa.py",
+      "device": "cuda",
+      "checks": [
+        "candidate_conditioned_latents_differ",
+        "candidate_permutation_equivariant",
+        "frozen_external_screen_receives_no_gradient",
+        "invalid_candidates_cannot_be_selected",
+        "predictor_and_structural_head_receive_gradient",
+        "three_real_transformer_layers",
+        "trainable_policy_parameters_change",
+        "weighted_listwise_independent_reference"
+      ],
+      "metrics": [
+        "environment_interactions",
+        "listwise_loss",
+        "loss_reference_error",
+        "parameter_delta",
+        "permutation_reference_error",
+        "predictor_gradient_norm",
+        "structural_gradient_norm"
+      ],
+      "gates": [
+        {
+          "metric": "permutation_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "loss_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "parameter_delta",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "predictor_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "structural_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "environment_interactions",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "kl-mopd",
+      "source": "src/auto_research/reproductions/kl_mopd.py",
+      "device": "cuda",
+      "checks": [
+        "calibration_frozen",
+        "dynamic_recalibration_negative_control",
+        "padding_zero_gradient",
+        "probability_reference",
+        "real_student_update",
+        "reverse_kl_direction",
+        "teachers_frozen"
+      ],
+      "metrics": [
+        "gradient_norm",
+        "loss_after",
+        "loss_before",
+        "reference_error",
+        "weight_sum_error"
+      ],
+      "gates": [
+        {
+          "metric": "reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "loss_after",
+          "op": "lt",
+          "other_metric": "loss_before"
+        },
+        {
+          "metric": "gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "weight_sum_error",
+          "op": "lt",
+          "value": 1e-12
+        }
+      ]
+    },
+    {
+      "key": "sleep-lti",
+      "source": "src/auto_research/foundation_models/sleep_lti.py",
+      "device": "cpu",
+      "checks": [
+        "distance_symmetry",
+        "inclusive_threshold",
+        "lexical_not_semantic_proxy",
+        "max_length_normalizer",
+        "semantic_branch_survives"
+      ],
+      "metrics": [
+        "exact_lexical_without_semantic",
+        "insertion_absolute_reward",
+        "over_threshold_reward",
+        "single_edit_reward"
+      ],
+      "gates": [
+        {
+          "metric": "single_edit_reward",
+          "op": "eq",
+          "value": 0.9
+        },
+        {
+          "metric": "over_threshold_reward",
+          "op": "eq",
+          "value": 0.4
+        },
+        {
+          "metric": "exact_lexical_without_semantic",
+          "op": "eq",
+          "value": 0.6
+        }
+      ]
+    },
+    {
+      "key": "hope-hilbert",
+      "source": "src/auto_research/foundation_models/hope_hilbert.py",
+      "device": "cpu",
+      "checks": [
+        "biased_cross_matches_conditional_integral",
+        "centering_is_not_silently_dropped",
+        "dense_bn_mean_compensated",
+        "positive_neuron_gauge_invariant",
+        "single_step_undo_exact",
+        "static_footprint_changes_selection",
+        "two_neuron_gram_psd"
+      ],
+      "metrics": [
+        "bn_mean_compensation_error",
+        "capacity_only_negative_control_rate_gap",
+        "cross_kernel_reference_error",
+        "gram_min_eigenvalue",
+        "mean_removal_negative_control_gap",
+        "restore_error",
+        "scale_invariance_error",
+        "selected_rate"
+      ],
+      "gates": [
+        {
+          "metric": "cross_kernel_reference_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "scale_invariance_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "restore_error",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "capacity_only_negative_control_rate_gap",
+          "op": "gt",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "discernmem",
+      "source": "src/auto_research/agent_research/discernmem.py",
+      "device": "cpu",
+      "checks": [
+        "avoidance_precedes_content",
+        "complete_failure_guard_not_tolerance_only",
+        "historical_regression_rejected",
+        "identity_owner_and_corrections_preserved",
+        "isolated_effect_not_team_credit",
+        "negative_use_requires_supported_defect",
+        "new_version_resets_old_evidence",
+        "repair_passes_both_references"
+      ],
+      "metrics": [
+        "accepted_trigger_gain",
+        "failure_count_negative_control",
+        "new_version_effects",
+        "paired_effect",
+        "parent_version_effects",
+        "regression_worst_margin"
+      ],
+      "gates": [
+        {
+          "metric": "paired_effect",
+          "op": "eq",
+          "value": -0.4
+        },
+        {
+          "metric": "new_version_effects",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "failure_count_negative_control",
+          "op": "eq",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "key": "ruharness",
+      "source": "src/auto_research/agent_research/ruharness.py",
+      "device": "cpu",
+      "checks": [
+        "duplicate_sets_have_unit_jaccard",
+        "finite_conservative_scores",
+        "fixed_seed_reproducible",
+        "formula_reference_counts",
+        "inactive_not_selected",
+        "no_candidate_preserves_incumbent",
+        "strict_epsilon_boundary",
+        "unverified_candidate_excluded"
+      ],
+      "metrics": [
+        "best_lower_quantile",
+        "duplicate_criterion_redundancy",
+        "frontier_size",
+        "posterior_samples_per_criterion",
+        "reference_discrimination",
+        "reference_failure_coverage",
+        "reference_predictive_validity"
+      ],
+      "gates": [
+        {
+          "metric": "reference_discrimination",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "reference_predictive_validity",
+          "op": "eq",
+          "value": 0.5
+        },
+        {
+          "metric": "posterior_samples_per_criterion",
+          "op": "eq",
+          "value": 2000
+        },
+        {
+          "metric": "frontier_size",
+          "op": "eq",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}
