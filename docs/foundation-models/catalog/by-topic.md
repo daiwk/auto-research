@@ -6,6 +6,7 @@
 
 ### JEPA 与决策表征
 
+- [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../foundation-models/2610.36877-gui-jepa/README.md)（`gui-jepa`）：多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。
 - [DT-JEPA: Learning to Predict Future Representations for Decision-Making](../../foundation-models/2610.32657-dt-jepa/README.md)（`dt-jepa`）：传统DT用单个return-to-go条件，无法区分回报相同但未来动力学不同的轨迹。本方法将条件改成由历史预测的未来latent分布：历史encoder生成Gaussian参数，EMA target encoder只在训练期编码真实未来；重参数采样的预测未来通过独立gamma/beta MLP调制DT hidden。离线目标为BC加Gaussian NLL；在线通过双target critic的较小值构建多步target，并优化Q1指导的actor目标。
 
 ### JEPA 与关系表征
@@ -84,6 +85,10 @@
 - [Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders](../../foundation-models/2507.23220-mechanistic-etm/README.md)（`mechanistic-etm`）：固定v3 Section4.2.2 Eqs9–13：δ~N(0,I)、θ=softmaxδ、βk=sigmoid(W_in vk+b)，W_in为冻结SAE ENCODER，不是decoder；每个feature计数~Binomial(Ntokens,[θβ]i)。variational q拓扑与MC noise显式外传，优化NLL+analytic Gaussian KL。Eqs16–19仅steering才用独立SAE DECODER列方向加权单位化，再移除已有parallel分量、注入指定strength。以不同encoder/decoder的负控防隐式绑权。
 
 ## 注意力与长上下文
+
+### 查询条件测试时训练
+
+- [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../foundation-models/2610.36794-select-ttt/README.md)（`select-ttt`）：In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对**用户问题 token**的预测程度，为每个 chunk 生成连续写入倍率。
 
 ### 注意力内核与反向传播
 
@@ -203,6 +208,10 @@
 - [Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance](../../reproductions/2403.16952-data-mixing-laws/README.md)（`data-mixing-laws`）：先训练多组小预算 domain mixture，拟合各评测域的混合缩放律，再搜索未训练过的最优配比。
 - [DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining](../../reproductions/2305.10429-doremi/README.md)（`doremi`）：用小型 proxy model 的 excess loss 做 group DRO，动态提升欠拟合域权重，再按所得配比训练目标模型。
 
+### 持续学习与记忆巩固
+
+- [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../foundation-models/2606.03979-sleep-lti/README.md)（`sleep-lti`）：上下文结束会丢失短期知识，直接更新基础权重又可能覆盖旧知识。Sleep在活跃学习之外增加离线巩固：多频率记忆模块间先计算未来基础更新但不应用，再扩展低秩专家、用更新前教师巩固到拟更新学生，最后应用更新并清理发送层专家。
+
 ### 企业数据与领域适配
 
 - [Customizing an LLM for Enterprise Software Engineering](../../foundation-models/2605.16517-gemini-for-google/README.md)（`gemini-for-google`）：从企业开发历史中提取高价值代码与交互信号，经过去重、质量过滤和污染控制形成中训练数据；用通用数据回放抑制灾难性遗忘，再做面向内部工具的后训练和部署评测。
@@ -315,6 +324,10 @@
 - [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
 
 ## 推理与系统效率
+
+### 量化与残差补偿
+
+- [ResCom: Activation Residual Compensation for Large Language Model Quantization](../../foundation-models/2610.35955-rescom/README.md)（`rescom`）：低比特激活把不同输入压到同一量化格点后，只读取量化值的补偿器无法分辨格点内部的差异。ResCom 保留当前前向中的残差 $d=x-Q(x)$，在冻结既有量化模型之后，以低秩分支补回这些残差造成的输出变化；不重新优化主权重或量化器。
 
 ### System One / JEV 与结构化决策
 
@@ -432,6 +445,10 @@
 ### 安全结构与激活诊断
 
 - [Detecting Safety Training Modification in Language Models via Activation Analysis](../../foundation-models/2608.05578-activation-model-scanner/README.md)（`activation-model-scanner`）：通过三个安全相关概念的对照输入，寻找中层激活的类别分离与方向；第一层检查分离程度，第二层与同架构基线比较方向和漂移。该结构信号存在明确盲区，不能替代行为安全评测。核心见[§IV](https://arxiv.org/html/2608.05578v1#S4)，代码约定核对固定上游 `extractor.py`。
+
+### 结构剪枝与可逆压缩
+
+- [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../foundation-models/2607.21366-hope-hilbert/README.md)（`hope-hilbert`）：单看输入权重大小，可能把“函数完全相同、只是参数重新缩放”的神经元排出不同重要性。HOPE把一个神经元写成激活函数与输出向量的秩1张量：它在所有输入上的作用方向，比参数坐标本身更接近需要保留的功能。
 
 ### 多语言知识探索
 

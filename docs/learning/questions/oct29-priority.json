@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:hope-hilbert": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "HOPE为什么不直接把权重小的神经元删掉？",
+          "answer": "同一个ReLU神经元可以把输入及BN尺度放大、输出权重缩小，而整体函数不变。裸权重大小会跟着变，不能稳定表示功能重要性。HOPE比较的是激活函数与输出向量构成的Hilbert算子容量；这个比较仍依赖Gaussian surrogate，不等于真实数据上的重要性已得到证明。",
+          "example": "示意：隐藏激活扩大7倍、输出权重除以7，预测保持不变；功能容量应不变，但只看输出权重会误以为它变得更不重要。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "mechanism",
+          "level": "mechanism",
+          "question": "“输入函数乘输出向量”为什么被称为秩1算子？",
+          "answer": "一个神经元的输入激活是标量函数，每个输入只改变它的幅度；该标量始终沿同一个输出权重向量传递。因此整条输入函数景观映射到输出空间的一维方向，形成秩1张量。两神经元的内积等于激活核乘输出向量内积，不能只用输入权重cosine代替。",
+          "example": "示意：激活从0.2变到0.8时，输出从0.2w变到0.8w，方向仍是w；换一个输出向量会改变功能相似度。",
+          "source_sections": ["核心公式", "原论文关键图"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "HOPE的Hilbert压缩与Sleep中的Hope网络是一回事吗？",
+          "answer": "不是。Hilbert Operator for Progressive Encoding分析冻结网络的功能容量，用PRUNE、MERGE和EVICT逐步压缩；Sleep中的Hope是多频率记忆网络，在学习与离线巩固阶段更新记忆。名称相似不代表算法相同。本地只提供前者的核、剪枝和单步恢复子组件。",
+          "example": "示意：给冻结ResNet统计打剪枝分数，不能被描述成让语言模型睡眠后学会新知识。",
+          "source_sections": ["背景与主要改动", "保留机制与接口", "高成本完整实验与复现边界"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "实现剪枝时，为什么既要固定初始参数收益，又要补偿下游BN均值？",
+          "answer": "剪枝选择按失真除以初始参数收益比较；改用逐步缩小的邻接shape会改变收益口径。执行后，被删除激活的平均贡献消失，因此Dense消费者的BN运行均值要减去这份贡献，避免额外平移。补偿不保证保留每个样本的预测，undo精确恢复也不等于压缩准确率不降。",
+          "example": "示意：某激活均值0.8、输出权重[1,2]，删除后消费者BN均值应减[0.8,1.6]；不能把补偿写成加法。",
+          "source_sections": ["核心公式", "数据协议、结果与负控", "高成本完整实验与复现边界"],
+          "added": "2026-10-29"
+        }
+      ]
+    }
+  }
+}

@@ -5,7 +5,7 @@
     "alignment-interfaces": {
       "title": "多模态对齐到底对齐什么：向量、视觉接口还是证据依赖",
       "thesis": "CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。",
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "reviewed_papers": [
         "foundation-models:blip2",
         "foundation-models:clip",
@@ -117,6 +117,14 @@
             "multimodal-models:cv-opd",
             "foundation-models:llava"
           ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "EmbeddingGemma 2新正式论文对应已有10月6日模型，不再增加重复身份。论文明确512维骨干均值后投影到768；固定官方实现已把线性投影放在last_hidden_state返回前，同权mask均值与投影可交换。本地旧16图GPU结果保持原等级，不能因论文发布升级为音频/视频或七套benchmark验收。",
+          "papers": [
+            "foundation-models:clip",
+            "multimodal-models:embedding-gemma2"
+          ]
         }
       ],
       "questions": [
@@ -149,6 +157,16 @@
           "papers": [
             "multimodal-models:umrm",
             "multimodal-models:cv-opd"
+          ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "正式论文顺序与官方代码顺序不同，何时可以沿用既有结果？",
+          "answer": "先核实际算子。这里同一个无偏置线性投影与同权mask均值可交换，且运行源码和checkpoint未变；若是非线性、不同权重或重新训练，则不能据此自动等价。当前只更新文献来源。",
+          "example": "教学例：mean(W h1,W h2)=W mean(h1,h2)；mean(GELU(h1),GELU(h2))通常不是GELU(mean(h1,h2))。",
+          "papers": [
+            "foundation-models:clip",
+            "multimodal-models:embedding-gemma2"
           ]
         }
       ],
@@ -199,6 +217,16 @@
             "foundation-models:smolvlm": "1ed215d62a47b1fb810b58f77ce1c172d7bd6489664c3cf7f90f7dbd82a5a7b3",
             "multimodal-models:umrm": "c1112e24c9522e3a549429a2c9a85f5fa0c71a14782a201d6b2e5ab64c80d3a1",
             "foundation-models:wemm-embedding": "64247d3de8d741f2f2438c87d75880429f8a2486ffaa3121bdf32f79851adeb4"
+          }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "EmbeddingGemma 2新正式论文对应已有10月6日模型，不再增加重复身份。论文明确512维骨干均值后投影到768；固定官方实现已把线性投影放在last_hidden_state返回前，同权mask均值与投影可交换。本地旧16图GPU结果保持原等级，不能因论文发布升级为音频/视频或七套benchmark验收。",
+          "papers": [
+            "multimodal-models:embedding-gemma2"
+          ],
+          "source_revisions": {
+            "multimodal-models:embedding-gemma2": "eff70bf2012d4fee3d5343c5e47707ce0d4d953155dc354b5ed71b48acc890f1"
           }
         }
       ]
@@ -393,7 +421,7 @@
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。",
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -416,7 +444,8 @@
         "multimodal-models:uniaction",
         "foundation-models:vbvr-pro",
         "foundation-models:vjepa-policy",
-        "multimodal-models:woven"
+        "multimodal-models:woven",
+        "foundation-models:gui-jepa"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -485,6 +514,15 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "foundation-models:gui-jepa",
+          "position": "候选动作条件残差predictor及ROI/global结构评分，listwise正例损失。",
+          "tradeoff": "真实屏幕编码、候选生成与环境外置；没有GUI benchmark能力结果。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
         }
       ],
       "analysis": [
@@ -504,6 +542,14 @@
             "multimodal-models:woven",
             "foundation-models:ppmem",
             "foundation-models:vbvr-pro"
+          ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结合动作ROI/global区域和结构余弦评分。它与像素视频生成的监督/输出不同，也不等于真实GUI执行器；当前组件接外部冻结latent和文本匹配分数，保留真实三层predictor与训练头，但不使用训练正样本标签替forward选动作。",
+          "papers": [
+            "foundation-models:lewam",
+            "foundation-models:gui-jepa"
           ]
         }
       ],
@@ -537,6 +583,16 @@
             "multimodal-models:woven",
             "foundation-models:ppmem",
             "foundation-models:vbvr-pro"
+          ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "GUI-JEPA预测latent后继，为什么不能直接当作已在手机上验证动作成功？",
+          "answer": "后继是学到的表示预测，模型可能漏掉状态约束；执行成功需真实环境反馈。小latent前向、候选排列等变和梯度检查只验证模块合同，不能替代动作到环境的闭环。",
+          "example": "教学例：模型预测点击后的页面向量接近目标，不等于已经检测到真实设备按钮可点击或请求成功。",
+          "papers": [
+            "foundation-models:lewam",
+            "foundation-models:gui-jepa"
           ]
         }
       ],
@@ -591,6 +647,16 @@
             "foundation-models:vbvr-pro": "9aefb2969c3d50aca759472a0843832c43c3283daf5c507f559dd63d15f6d784",
             "foundation-models:vjepa-policy": "bd556faa4f657cac639e6662804d80e39267f07b903ea87423fe32239a6e1905",
             "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
+          }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结合动作ROI/global区域和结构余弦评分。它与像素视频生成的监督/输出不同，也不等于真实GUI执行器；当前组件接外部冻结latent和文本匹配分数，保留真实三层predictor与训练头，但不使用训练正样本标签替forward选动作。",
+          "papers": [
+            "foundation-models:gui-jepa"
+          ],
+          "source_revisions": {
+            "foundation-models:gui-jepa": "5de10a527ec5abe710f7881beaf0ef48dfe68bb3cad8dab33703d8aa8574e02d"
           }
         }
       ]

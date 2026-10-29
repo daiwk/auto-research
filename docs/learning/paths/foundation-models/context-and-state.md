@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 124 个问题 · 31 篇论文
+[基础模型](index.md) / 132 个问题 · 33 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">124 个问题 · 31 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:select-ttt" data-paper-title="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training 基础模型 University of Science and Technology of China 2026-10-27 In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对用户问题 token的预测程度，为每个 chunk 生成连续写入倍率。它不是先找到 gold answer chunk 再加强写入。论文的 answer-chunk 实验只是动机分析；部署规则只用问题，不允许答案标记进入评分接口。 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 查询评分与 fast-weight 写入组件、diagnostic only，没有加载 LLM 或接入 LongMemEval。完整实验：成本过高，不复现（审查 DONE）；不是可执行 evolve 能力算子。实现词表分块 log-sum-exp 与直接问题 token logits、最低 CE top-k、温度 / clip 倍率及顺序 apply-then-write 参考。调用者必须提供真实模型的 RMSNorm 参数和 epsilon，以及原 In-Place TTT 的 NTP 对齐 keys / values；  注意力与长上下文 测试时训练与fast weights 基础模型 长上下文：注意力、递归状态与记忆 Select-TTT改变的是上下文检索，还是写入fast weights的力度？ 它保留In-Place TTT的分chunk写入，只按问题相关性缩放每个chunk的学习率。相关性来自冻结LM输出头对问题token的负对数概率，不另训检索器，也不直接丢弃所有低分chunk。问题不同，写入倍率也可能不同。 教学例子：同一长对话中，问搬家日期和问饮食偏好时，应强化的片段不同；这不表示模型拿到了哪一段包含标准答案的标签。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-select-ttt-1dc0ac0a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-99cdb22b8325ac12">Select-TTT改变的是上下文检索，还是写入fast weights的力度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aselect-ttt">Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它保留In-Place TTT的分chunk写入，只按问题相关性缩放每个chunk的学习率。相关性来自冻结LM输出头对问题token的负对数概率，不另训检索器，也不直接丢弃所有低分chunk。问题不同，写入倍率也可能不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一长对话中，问搬家日期和问饮食偏好时，应强化的片段不同；这不表示模型拿到了哪一段包含标准答案的标签。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36794v1">原论文</a> · <a href="../../../../foundation-models/2610.36794-select-ttt/">实现解读</a> · <a href="#qa-99cdb22b8325ac12">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:select-ttt" data-paper-title="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training 基础模型 University of Science and Technology of China 2026-10-27 In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对用户问题 token的预测程度，为每个 chunk 生成连续写入倍率。它不是先找到 gold answer chunk 再加强写入。论文的 answer-chunk 实验只是动机分析；部署规则只用问题，不允许答案标记进入评分接口。 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 查询评分与 fast-weight 写入组件、diagnostic only，没有加载 LLM 或接入 LongMemEval。完整实验：成本过高，不复现（审查 DONE）；不是可执行 evolve 能力算子。实现词表分块 log-sum-exp 与直接问题 token logits、最低 CE top-k、温度 / clip 倍率及顺序 apply-then-write 参考。调用者必须提供真实模型的 RMSNorm 参数和 epsilon，以及原 In-Place TTT 的 NTP 对齐 keys / values；  注意力与长上下文 测试时训练与fast weights 基础模型 长上下文：注意力、递归状态与记忆 为什么chunk相关性取最低CE位置的top-k均值，而不是最高CE？ 这里CE是问题token在当前hidden诱导的词表分布下的平均负对数概率；越低，说明该位置越能预测问题词汇。取最低CE的若干位置可保留局部相关证据，同时比只取单个最小值更稳健。把方向反过来会强化最不相关的位置。 教学例子：两位置的查询CE为1和6，取最相关的一项应选1；选6相当于把低概率误作高相关。问题序列中重复的token仍按出现次数计入平均。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-0936a469597e97bb">为什么chunk相关性取最低CE位置的top-k均值，而不是最高CE？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aselect-ttt">Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这里CE是问题token在当前hidden诱导的词表分布下的平均负对数概率；越低，说明该位置越能预测问题词汇。取最低CE的若干位置可保留局部相关证据，同时比只取单个最小值更稳健。把方向反过来会强化最不相关的位置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两位置的查询CE为1和6，取最相关的一项应选1；选6相当于把低概率误作高相关。问题序列中重复的token仍按出现次数计入平均。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36794v1">原论文</a> · <a href="../../../../foundation-models/2610.36794-select-ttt/">实现解读</a> · <a href="#qa-0936a469597e97bb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:select-ttt" data-paper-title="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training 基础模型 University of Science and Technology of China 2026-10-27 In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对用户问题 token的预测程度，为每个 chunk 生成连续写入倍率。它不是先找到 gold answer chunk 再加强写入。论文的 answer-chunk 实验只是动机分析；部署规则只用问题，不允许答案标记进入评分接口。 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 查询评分与 fast-weight 写入组件、diagnostic only，没有加载 LLM 或接入 LongMemEval。完整实验：成本过高，不复现（审查 DONE）；不是可执行 evolve 能力算子。实现词表分块 log-sum-exp 与直接问题 token logits、最低 CE top-k、温度 / clip 倍率及顺序 apply-then-write 参考。调用者必须提供真实模型的 RMSNorm 参数和 epsilon，以及原 In-Place TTT 的 NTP 对齐 keys / values；  注意力与长上下文 测试时训练与fast weights 基础模型 长上下文：注意力、递归状态与记忆 为什么不能把Select-TTT描述成“严格守恒的写入预算分配”？ 乘chunk数后的softmax在没有clip时和为chunk数；随后上限截断可能降低总和。论文描述近似保持平均学习率，不等于截断后严格守恒。再归一化会改变Eq.10，还可能重新超过单chunk上限，不能悄悄替换。 教学例子：三个chunk的softmax几乎全压到第一个，乘3后约为[3,0,0]；上限1.2后总和约1.2，不是3。这是公式例子，不是QA实验。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-aa77181e9a488912">为什么不能把Select-TTT描述成“严格守恒的写入预算分配”？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aselect-ttt">Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>乘chunk数后的softmax在没有clip时和为chunk数；随后上限截断可能降低总和。论文描述近似保持平均学习率，不等于截断后严格守恒。再归一化会改变Eq.10，还可能重新超过单chunk上限，不能悄悄替换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>三个chunk的softmax几乎全压到第一个，乘3后约为[3,0,0]；上限1.2后总和约1.2，不是3。这是公式例子，不是QA实验。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36794v1">原论文</a> · <a href="../../../../foundation-models/2610.36794-select-ttt/">实现解读</a> · <a href="#qa-aa77181e9a488912">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:select-ttt" data-paper-title="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training 基础模型 University of Science and Technology of China 2026-10-27 In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对用户问题 token的预测程度，为每个 chunk 生成连续写入倍率。它不是先找到 gold answer chunk 再加强写入。论文的 answer-chunk 实验只是动机分析；部署规则只用问题，不允许答案标记进入评分接口。 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 查询评分与 fast-weight 写入组件、diagnostic only，没有加载 LLM 或接入 LongMemEval。完整实验：成本过高，不复现（审查 DONE）；不是可执行 evolve 能力算子。实现词表分块 log-sum-exp 与直接问题 token logits、最低 CE top-k、温度 / clip 倍率及顺序 apply-then-write 参考。调用者必须提供真实模型的 RMSNorm 参数和 epsilon，以及原 In-Place TTT 的 NTP 对齐 keys / values；  注意力与长上下文 测试时训练与fast weights 基础模型 长上下文：注意力、递归状态与记忆 fast-weight参考实现为何必须先输出当前chunk，再写入它的keys与values？ 当前chunk输出使用更新前的状态，随后才把该chunk信息写入供后续使用。若先写后读，当前输出就利用了本应更新后才存在的value，改变因果顺序。本地只验证这种张量状态变化；真实NTP对齐特征、backbone和长对话评测尚未接入。 教学例子：初始W为0，第一个chunk先输出0，再写成W=1，第二个才能读到1；若第一个就输出1，已把当前写入提前使用。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f70c34eaf358e479">fast-weight参考实现为何必须先输出当前chunk，再写入它的keys与values？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aselect-ttt">Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当前chunk输出使用更新前的状态，随后才把该chunk信息写入供后续使用。若先写后读，当前输出就利用了本应更新后才存在的value，改变因果顺序。本地只验证这种张量状态变化；真实NTP对齐特征、backbone和长对话评测尚未接入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>初始W为0，第一个chunk先输出0，再写成W=1，第二个才能读到1；若第一个就输出1，已把当前写入提前使用。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36794v1">原论文</a> · <a href="../../../../foundation-models/2610.36794-select-ttt/">实现解读</a> · <a href="#qa-f70c34eaf358e479">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:openattention" data-paper-title="OpenAttention: One Percent Is Enough with Tail Proxies" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="OpenAttention: One Percent Is Enough with Tail Proxies 基础模型 Sogang University 2026-10-22 低读取率稀疏注意力不只需要选出少量重要 KV，还需要处理未读取的尾部。OpenAttention 在 query 二阶矩定义的几何空间内聚类，以 ErrorGate 估计簇内代理误差并分配精确读取预算；每个簇的未读部分成为一个带计数的均值代理。它不是单纯的 top-k 截断或均值池化。 完整实验成本过高，不复现（审查 DONE）。该小规模诊断仅核对公式与可执行性，不是语言模型能力比较。fit_cache、qgs_scores、errorgate、waterfill、residual_proxy_attention、attend 真实执行完整单头算子链。为便于独立核对，残余均值直接从未读行重算，而不是移植 Triton 的缓存和减法实现。全零误差按等权 water filling 处理；排序并列按原位置，空簇保持无代理，均为显式确定性边界。  高效注意力 KV缓存与稀疏推理 基础模型 长上下文：注意力、递归状态与记忆 OpenAttention 为什么不满足于“只读少量重要 KV”？ 低读取率下，未读尾部仍可能携带大量总权重。OpenAttention把精确读取与带计数的残余簇均值代理结合，尝试保留尾部质量，而非把所有未读token当作没有贡献。 示意：很多单项不突出的历史词，合起来的注意力质量也可能影响输出。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-openattention-57f03e45" class="ar-learning-paper-anchor"></span>
@@ -1246,6 +1299,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>理论上少读八成配对，但额外索引和执行方式可能让一次训练反而更慢。</p>
 <p class="ar-learning-sources">依据：本地复现；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.13392">原论文</a> · <a href="../../../../reproductions/2606.13392-minimax-sparse-attention/">实现解读</a> · <a href="#qa-0ce248cccdc3b3a1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:sleep-lti" data-paper-title="Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories 基础模型 Google Research 2026-06-02 上下文结束会丢失短期知识，直接更新基础权重又可能覆盖旧知识。Sleep在活跃学习之外增加离线巩固：多频率记忆模块间先计算未来基础更新但不应用，再扩展低秩专家、用更新前教师巩固到拟更新学生，最后应用更新并清理发送层专家。知识播种结合教师数据和学生自生成前缀上的蒸馏；LTI再让学生补全教师梦境，以冻结语义评审和阈值化token编辑相似度提供奖励。本地只实现后一个奖励公式，不能因为奖励可计算，就声称自修改、抗遗忘或知识巩固已完成。 完整Sleep实验成本过高，不复现（审查 DONE）；本地仅实现 LTI奖励的纯CPU L1组件，没有CMS、扩容、梦境生成、语义评审模型或LLM训练。完整Sleep实验成本过高，不复现（审查 DONE）；不接入Evolve。用已分词整数序列检查插入、删除、替换、阈值包含等号、按最大长度归一，以及语义分支独立性。42/43/44是合成机制种子，不是LLM模型比较。语义标签只在奖励侧输入，不参与被评测Agent的行动生成。  持续学习 离线记忆巩固 知识播种 基础模型 长上下文：注意力、递归状态与记忆 Sleep中的睡眠只是暂停训练，还是另一套学习阶段？ 是离线巩固阶段。方法在应用预计算基础更新前扩展慢模块，用更新前教师把快记忆巩固到拟更新学生，然后应用更新并清理发送层专家。它不是简单暂停或重放几条样本，本地也没有实现这一完整链路。 教学例：临时笔记要整理进长期知识库，先核对整理后的内容再清空临时笔记；只计算笔记相似度并不等于完成整理。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-sleep-lti-911eb3e3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d2752590c7dbcbcf">Sleep中的睡眠只是暂停训练，还是另一套学习阶段？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asleep-lti">Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>是离线巩固阶段。方法在应用预计算基础更新前扩展慢模块，用更新前教师把快记忆巩固到拟更新学生，然后应用更新并清理发送层专家。它不是简单暂停或重放几条样本，本地也没有实现这一完整链路。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：临时笔记要整理进长期知识库，先核对整理后的内容再清空临时笔记；只计算笔记相似度并不等于完成整理。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03979v2">原论文</a> · <a href="../../../../foundation-models/2606.03979-sleep-lti/">实现解读</a> · <a href="#qa-d2752590c7dbcbcf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:sleep-lti" data-paper-title="Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories 基础模型 Google Research 2026-06-02 上下文结束会丢失短期知识，直接更新基础权重又可能覆盖旧知识。Sleep在活跃学习之外增加离线巩固：多频率记忆模块间先计算未来基础更新但不应用，再扩展低秩专家、用更新前教师巩固到拟更新学生，最后应用更新并清理发送层专家。知识播种结合教师数据和学生自生成前缀上的蒸馏；LTI再让学生补全教师梦境，以冻结语义评审和阈值化token编辑相似度提供奖励。本地只实现后一个奖励公式，不能因为奖励可计算，就声称自修改、抗遗忘或知识巩固已完成。 完整Sleep实验成本过高，不复现（审查 DONE）；本地仅实现 LTI奖励的纯CPU L1组件，没有CMS、扩容、梦境生成、语义评审模型或LLM训练。完整Sleep实验成本过高，不复现（审查 DONE）；不接入Evolve。用已分词整数序列检查插入、删除、替换、阈值包含等号、按最大长度归一，以及语义分支独立性。42/43/44是合成机制种子，不是LLM模型比较。语义标签只在奖励侧输入，不参与被评测Agent的行动生成。  持续学习 离线记忆巩固 知识播种 基础模型 长上下文：注意力、递归状态与记忆 LTI的编辑距离门槛限制的是编辑次数还是相似度比例？ 门槛限制绝对token编辑次数；通过门槛后，字面奖励才用一减距离除以两段续写最大长度。阈值包含等号，不能把它换成固定相似度比例。 教学例：阈值为1时，一次替换无论发生在6token还是60token续写都通过，但归一化奖励分别为5/6和59/60。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-357fc7df50a38180">LTI的编辑距离门槛限制的是编辑次数还是相似度比例？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asleep-lti">Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>门槛限制绝对token编辑次数；通过门槛后，字面奖励才用一减距离除以两段续写最大长度。阈值包含等号，不能把它换成固定相似度比例。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：阈值为1时，一次替换无论发生在6token还是60token续写都通过，但归一化奖励分别为5/6和59/60。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03979v2">原论文</a> · <a href="../../../../foundation-models/2606.03979-sleep-lti/">实现解读</a> · <a href="#qa-357fc7df50a38180">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:sleep-lti" data-paper-title="Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories 基础模型 Google Research 2026-06-02 上下文结束会丢失短期知识，直接更新基础权重又可能覆盖旧知识。Sleep在活跃学习之外增加离线巩固：多频率记忆模块间先计算未来基础更新但不应用，再扩展低秩专家、用更新前教师巩固到拟更新学生，最后应用更新并清理发送层专家。知识播种结合教师数据和学生自生成前缀上的蒸馏；LTI再让学生补全教师梦境，以冻结语义评审和阈值化token编辑相似度提供奖励。本地只实现后一个奖励公式，不能因为奖励可计算，就声称自修改、抗遗忘或知识巩固已完成。 完整Sleep实验成本过高，不复现（审查 DONE）；本地仅实现 LTI奖励的纯CPU L1组件，没有CMS、扩容、梦境生成、语义评审模型或LLM训练。完整Sleep实验成本过高，不复现（审查 DONE）；不接入Evolve。用已分词整数序列检查插入、删除、替换、阈值包含等号、按最大长度归一，以及语义分支独立性。42/43/44是合成机制种子，不是LLM模型比较。语义标签只在奖励侧输入，不参与被评测Agent的行动生成。  持续学习 离线记忆巩固 知识播种 基础模型 长上下文：注意力、递归状态与记忆 字面距离超阈值，是否意味着语义奖励也要清零？ 不是。语义0/1由外部冻结评审独立给出，阈值只作用于字面分支。词面差很多也可能语义相同；仅用编辑距离替代语义模型会改变算法。 教学例：gamma为0.4、语义评审判同义，字面分支为零时总奖励仍为0.4，而不是零。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7ed013edbf092629">字面距离超阈值，是否意味着语义奖励也要清零？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asleep-lti">Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。语义0/1由外部冻结评审独立给出，阈值只作用于字面分支。词面差很多也可能语义相同；仅用编辑距离替代语义模型会改变算法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：gamma为0.4、语义评审判同义，字面分支为零时总奖励仍为0.4，而不是零。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03979v2">原论文</a> · <a href="../../../../foundation-models/2606.03979-sleep-lti/">实现解读</a> · <a href="#qa-7ed013edbf092629">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:sleep-lti" data-paper-title="Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories 基础模型 Google Research 2026-06-02 上下文结束会丢失短期知识，直接更新基础权重又可能覆盖旧知识。Sleep在活跃学习之外增加离线巩固：多频率记忆模块间先计算未来基础更新但不应用，再扩展低秩专家、用更新前教师巩固到拟更新学生，最后应用更新并清理发送层专家。知识播种结合教师数据和学生自生成前缀上的蒸馏；LTI再让学生补全教师梦境，以冻结语义评审和阈值化token编辑相似度提供奖励。本地只实现后一个奖励公式，不能因为奖励可计算，就声称自修改、抗遗忘或知识巩固已完成。 完整Sleep实验成本过高，不复现（审查 DONE）；本地仅实现 LTI奖励的纯CPU L1组件，没有CMS、扩容、梦境生成、语义评审模型或LLM训练。完整Sleep实验成本过高，不复现（审查 DONE）；不接入Evolve。用已分词整数序列检查插入、删除、替换、阈值包含等号、按最大长度归一，以及语义分支独立性。42/43/44是合成机制种子，不是LLM模型比较。语义标签只在奖励侧输入，不参与被评测Agent的行动生成。  持续学习 离线记忆巩固 知识播种 基础模型 长上下文：注意力、递归状态与记忆 本地Sleep奖励组件能证明模型已学会长期保留知识吗？ 不能。它只接收已分词续写与外部语义标签，验证奖励数值边界；没有梦境采样、CMS、参数扩展、LoRA训练、筛选或遗忘评测。完整高成本实验已明确不复现，不把奖励核注册为Evolve能力算子。 教学例：两段整数token得到0.9奖励，只说明该输入满足奖励公式，不说明任何语言模型权重发生了变化。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-da8dd16e738119ab">本地Sleep奖励组件能证明模型已学会长期保留知识吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asleep-lti">Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只接收已分词续写与外部语义标签，验证奖励数值边界；没有梦境采样、CMS、参数扩展、LoRA训练、筛选或遗忘评测。完整高成本实验已明确不复现，不把奖励核注册为Evolve能力算子。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两段整数token得到0.9奖励，只说明该输入满足奖励公式，不说明任何语言模型权重发生了变化。</p>
+<p class="ar-learning-sources">依据：本地复现与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03979v2">原论文</a> · <a href="../../../../foundation-models/2606.03979-sleep-lti/">实现解读</a> · <a href="#qa-da8dd16e738119ab">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:switch-attention" data-paper-title="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers 基础模型 Peking University / Huawei Technologies 2026-03-27 静态 hybrid attention 对所有 token 使用固定模式。Switch Attention 学习细粒度 router，只让需要全局信息的 token 走 full attention。 Fidelity: 核心机制复现。实现逐 token 动态选择 full/local attention 的可学习 router。本地使用可微 soft router，未复刻论文 STE 硬路由、32K continual pretraining 和 branch-selective fused kernel。本地对照口径：基线是 full-attention tiny Transformer；实验组动态混合 full 与 16-token local attention；30-step perplexity 相对 +0.19%（近似持平但略差）。  llm-architecture efficient-attention long-context 基础模型 长上下文：注意力、递归状态与记忆 Switch Attention 的 local 与 full 两条路径，分别能读到哪些历史？ local只看限定窗口内的可见位置，full可读完整因果历史。二者首先是证据范围与读取成本的差别；router根据token决定路径，不是让full路径访问未来token。 示意：回答刚出现的局部词组可能只需近邻，关联很久以前的信息才可能需要更广历史。 2026-10-27">

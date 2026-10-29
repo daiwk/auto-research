@@ -274,6 +274,9 @@
 ### 长序列压缩与检索
 - [ECHO: Efficient Cascade with Homogeneous Operators for Distillation-Guided 100K-Sequence Modeling](../../recommendation-components/2610.28569-echo-selector-loss/README.md)：用户侧DS保存原始历史记录，再由目标感知TFR读取；候选感知教师用逐目标软分布和选择边界成对监督训练DS。本地实现温度缩放CE、detached挖掘/权重与全batch归一边界损失，A100验证梯度隔离；不实现完整TWIN、实时双图或排名能力。
 
+### 大模型能力与推荐融合
+- [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)：以原图和自由文本直接生成商品SID集合，用组合数据工具、商品知识CPT、混合推理预算SFT和意图均衡RL扩展统一多模态搜索。Sample–Beam分离推理采样与SID束生成以对齐多结果服务；完整实验高成本不复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## 训练目标与决策优化
 
 ### 采样、蒸馏与强化学习
@@ -335,6 +338,9 @@
 
 ### 广告与商业决策
 - [Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion](../../recommendation-components/2610.32420-hge/README.md)：先以商品自注意力编码竞争，再注入用户/门店/上下文；将门店GTV拆为转化概率乘条件商品购买概率、数量和价格之和，再用有符号残差与按样本门控融合通用回归。本地是Eqs2--11可微L1组件，不含DIN/DCN、论文完整Dice塔或生产训练，不能声称复现+1.42%线上收益。
+
+### 大模型能力与推荐融合
+- [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../recommendation-components/2610.36973-kl-mopd/README.md)：先在冻结初始学生的生成前缀上按位置估计到两位教师的反向KL，以其比例固定教师权重。当前学生在自己的前缀上最小化加权反向KL；本地仅实现校准和可微损失，不运行推荐器或继承线上收入增益。
 
 ## 多阶段排序与混排
 

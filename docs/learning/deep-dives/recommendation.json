@@ -882,7 +882,7 @@
     "generative-retrieval-reasoning": {
       "title": "生成一个物品，先后跨过码本、模型分布与合法目录三道关",
       "thesis": "TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。",
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "axes": [
         "物品表示：离散码、稀疏—稠密级联与LLM继续预训练",
         "学习分布与推理搜索分别改变什么",
@@ -939,6 +939,15 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "recommendation:pailitao-mmsearch2",
+          "position": "统一图文到SID集合，多意图/预算训练与Sample–Beam服务对齐。",
+          "tradeoff": "完整多模型多阶段和私有生产实验高成本不复现；无本地占位模型。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
         }
       ],
       "analysis": [
@@ -958,6 +967,14 @@
           "papers": [
             "recommendation:static-constraint-decoding",
             "recommendation:reward-guided-decoding"
+          ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合，以数据工具、CPT、混合预算SFT和意图均衡RL扩展服务。Sample–Beam使推理采样与候选束生成分别对应训练/展示需要；大模型或更长思考不保证所有意图更好。与其他生成式召回对比时应固定候选集合、预算和生产混排口径，而不是只比模型名字。完整方案本地不复现。",
+          "papers": [
+            "recommendation:tiger",
+            "recommendation:pailitao-mmsearch2"
           ]
         }
       ],
@@ -990,6 +1007,16 @@
           "papers": [
             "recommendation:tiger",
             "recommendation:plum"
+          ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "为何不能把Pailitao的完整线上增益当作Sample–Beam一个模块的因果收益？",
+          "answer": "线上测的是完整部署配置，含训练数据、模型和最终呈现/混排。模块作用由匹配控制的离线消融提供不同证据，二者不可直接等同；本地仅资料收录，也没有可执行接口。",
+          "example": "教学例：换了训练数据、模型和候选混排后交易增加，不能仅因同时用了新beam配方就把全部提升归给beam。",
+          "papers": [
+            "recommendation:tiger",
+            "recommendation:pailitao-mmsearch2"
           ]
         }
       ],
@@ -1053,7 +1080,8 @@
         "recommendation:unisgr-v2",
         "recommendation:univa",
         "recommendation:wegr",
-        "recommendation:xrec"
+        "recommendation:xrec",
+        "recommendation:pailitao-mmsearch2"
       ],
       "updates": [
         {
@@ -1183,13 +1211,23 @@
             "recommendation:wegr": "f8c5d8e9ee1c664597e122a5e7755065082ae8f2d56a094cf576fa43cdebec48",
             "recommendation:xrec": "fc193c7fbf4c036059eb59c19c36a832d003b26e8b2b850fbc45aa677f0c83cf"
           }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合，以数据工具、CPT、混合预算SFT和意图均衡RL扩展服务。Sample–Beam使推理采样与候选束生成分别对应训练/展示需要；大模型或更长思考不保证所有意图更好。与其他生成式召回对比时应固定候选集合、预算和生产混排口径，而不是只比模型名字。完整方案本地不复现。",
+          "papers": [
+            "recommendation:pailitao-mmsearch2"
+          ],
+          "source_revisions": {
+            "recommendation:pailitao-mmsearch2": "a2a62e7242409056fe721d34b5ac7f68b2766ef7df81fd9ebf56e0df85948b89"
+          }
         }
       ]
     },
     "feedback-multitask-causality": {
       "title": "从CTR到满意度与uplift：先定义监督对象，再决定怎样共享",
       "thesis": "ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。",
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "axes": [
         "标签是条件事件、反馈测量还是潜在结果差",
         "任务共享发生在哪些参数和路由上",
@@ -1244,6 +1282,15 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "recommendation:kl-mopd",
+          "position": "一次校准位置级教师差距，以固定alpha最小化两项student||teacher KL。",
+          "tradeoff": "没有初始/当前学生采样器、推荐骨干或语义ID评测，不继承线上收益。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
         }
       ],
       "analysis": [
@@ -1263,6 +1310,14 @@
             "recommendation:flvm",
             "recommendation:incrementality",
             "recommendation:esmm"
+          ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分数：初始学生到两教师的KL差距校准一次并冻结，当前学生在自己前缀上计算加权反向KL。这与动态追逐当前KL或算术平均教师概率不同；线上收入+1.63%属于完整系统，本地只验损失与梯度，不推出业务因果效果。",
+          "papers": [
+            "recommendation:esmm",
+            "recommendation:kl-mopd"
           ]
         }
       ],
@@ -1296,6 +1351,16 @@
           "papers": [
             "recommendation:flvm",
             "recommendation:incrementality"
+          ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "两位教师的权重为何不能每一步按当前学生差距重新计算？",
+          "answer": "原方法的alpha来自固定初始策略，构成训练期间固定目标的一部分；动态计算会改变目标和梯度语义。即使某动态方案也有效，仍需作为不同方法单独验证。",
+          "example": "教学例：初始差距1比3给出1/4与3/4，后续差距变了仍保持原权重。",
+          "papers": [
+            "recommendation:esmm",
+            "recommendation:kl-mopd"
           ]
         }
       ],
@@ -1334,7 +1399,8 @@
         "recommendation:smes",
         "recommendation:twice",
         "recommendation:twitch-mor",
-        "recommendation:unimvt"
+        "recommendation:unimvt",
+        "recommendation:kl-mopd"
       ],
       "updates": [
         {
@@ -1413,6 +1479,16 @@
             "recommendation:twice": "6787db993d6620b2a2f2a8d804061a07d8c089f91fc25f0cf73f92dcf66b5821",
             "recommendation:twitch-mor": "7356130726ad3a788b6ba5085b025c267af884443b465a05eaa57bcdd206bcbf",
             "recommendation:unimvt": "45e4d2384cdce6dad2c542b71abc064929e55e2c36b9e4186698660a5a4ef1ab"
+          }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分数：初始学生到两教师的KL差距校准一次并冻结，当前学生在自己前缀上计算加权反向KL。这与动态追逐当前KL或算术平均教师概率不同；线上收入+1.63%属于完整系统，本地只验损失与梯度，不推出业务因果效果。",
+          "papers": [
+            "recommendation:kl-mopd"
+          ],
+          "source_revisions": {
+            "recommendation:kl-mopd": "32d21d9bb6b5b4edd04ddc4866523e424f3a1b27fe9d109d610240bf4da3c672"
           }
         }
       ]

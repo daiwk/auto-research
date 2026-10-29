@@ -7,7 +7,7 @@ hide:
 
 # 从CTR到满意度与uplift：先定义监督对象，再决定怎样共享
 
-[搜广推](../index.md) · 更新 2026-10-27 · 35 篇主题资料 / 5 篇重点对照
+[搜广推](../index.md) · 更新 2026-10-29 · 36 篇主题资料 / 6 篇重点对照
 
 ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。
 
@@ -30,6 +30,7 @@ ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享
 | [Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations](../../../reproductions/recsys2020-ple-ple/README.md) · [原始来源](https://doi.org/10.1145/3383313.3412236)<br>章节：背景与主要改动、核心公式 | 将共享专家与任务专属专家分组，CGC逐层抽取共同信息和任务特定信息。 | 专属路径有助于表达冲突任务，但增加容量与路由复杂度；是否缓解跷跷板须分任务看，不能由总体均值判定全部改善。 |
 | [Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation](../../../reproductions/2609.32839-flvm/README.md) · [原始来源](https://arxiv.org/abs/2609.32839)<br>章节：背景与主要改动、核心公式、本地复现 | 三维潜因子表达消费、主动参与、正负方向；反馈头按固定稀疏语义路由，叠加停止梯度的受限基线。 | 把时长等测量因素与偏好通道分开，但该结构不自动识别真实因果偏好；原文mask未公开，本地路由是明确的可检验选择，缺失反馈也不能补零标签。 |
 | [From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation](../../../reproductions/2608.10182-incrementality/README.md) · [原始来源](https://arxiv.org/abs/2608.10182)<br>章节：背景与主要改动、核心公式、复现边界 | 估计处理/不处理的潜在结果差，再按uplift及不确定度在固定触达预算下分配动作。 | 目标是动作带来的额外价值，不是高响应人群本来的结果；需要可信处理对照和识别条件，本地代理任务不能证明真实用户增量。 |
+| [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../../recommendation-components/2610.36973-kl-mopd/README.md) · [原始来源](https://arxiv.org/abs/2610.36973v1)<br>章节：背景与主要改动、核心公式 | 一次校准位置级教师差距，以固定alpha最小化两项student\|\|teacher KL。 | 没有初始/当前学生采样器、推荐骨干或语义ID评测，不继承线上收益。 |
 
 </div>
 
@@ -46,6 +47,12 @@ ESMM先把CTR、条件CVR和联合CTCVR说清，MMoE与PLE再决定这些或其�
 FLVM用受限基线和三因子路由区分观看、主动参与与正负方向，试图避免把长视频观看直接当喜欢。Incrementality要求比较同一动作有无干预时的潜在结果。前者是观测反馈的表示/测量设计，后者是反事实决策目标；更准的满意度代理仍不能替代可信对照。
 
 对照来源：[flvm](../../../reproductions/2609.32839-flvm/README.md) · [incrementality](../../../reproductions/2608.10182-incrementality/README.md) · [esmm](../../../reproductions/1804.07931-esmm/README.md)
+
+### 10月29日：新方法与来源变化
+
+KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分数：初始学生到两教师的KL差距校准一次并冻结，当前学生在自己前缀上计算加权反向KL。这与动态追逐当前KL或算术平均教师概率不同；线上收入+1.63%属于完整系统，本地只验损失与梯度，不推出业务因果效果。
+
+对照来源：[esmm](../../../reproductions/1804.07931-esmm/README.md) · [kl-mopd](../../../recommendation-components/2610.36973-kl-mopd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -81,15 +88,29 @@ FLVM用受限基线和三因子路由区分观看、主动参与与正负方向�
 
     对照来源：[flvm](../../../reproductions/2609.32839-flvm/README.md) · [incrementality](../../../reproductions/2608.10182-incrementality/README.md)
 
+### 两位教师的权重为何不能每一步按当前学生差距重新计算？ {#cross-oct29-method-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 原方法的alpha来自固定初始策略，构成训练期间固定目标的一部分；动态计算会改变目标和梯度语义。即使某动态方案也有效，仍需作为不同方法单独验证。
+
+    **教学例子：** 教学例：初始差距1比3给出1/4与3/4，后续差距变了仍保持原权重。
+
+    对照来源：[esmm](../../../reproductions/1804.07931-esmm/README.md) · [kl-mopd](../../../recommendation-components/2610.36973-kl-mopd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-29** · KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分数：初始学生到两教师的KL差距校准一次并冻结，当前学生在自己前缀上计算加权反向KL。这与动态追逐当前KL或算术平均教师概率不同；线上收入+1.63%属于完整系统，本地只验损失与梯度，不推出业务因果效果。
+
+涉及：[kl-mopd](../../../recommendation-components/2610.36973-kl-mopd/README.md)
 
 **2026-10-27** · 首版：比较esmm、mmoe、ple、flvm、incrementality，围绕标签是条件事件、反馈测量还是潜在结果差与任务共享发生在哪些参数和路由上建立分析和跨论文问答。
 
 覆盖 35 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 35 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -128,6 +149,7 @@ FLVM用受限基线和三因子路由区分观看、主动参与与正负方向�
 - [TWICE: Two-Clock, Two-Window Learning for Long-Horizon Conversion Prediction in Online Advertising](../../../reproductions/2607.25404-twice/README.md)
 - [Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting](../../../reproductions/2608.04455-twitch-mor/README.md)
 - [Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework](../../../reproductions/2602.12972-unimvt/README.md)
+- [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../../recommendation-components/2610.36973-kl-mopd/README.md)
 
 </details>
 

@@ -1,0 +1,14 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.36652v1",
+  "arxiv_id": "2610.36652",
+  "figure": "Figure 1",
+  "pdf_page": 3,
+  "source_url": "https://arxiv.org/pdf/2610.36652v1#page=3",
+  "image": "paper-figure-01.png",
+  "sha256": "dbc09d48080365812f45ed94a197e4041482bfd6f270ea038caf41972bd71b28",
+  "license": "CC BY 4.0",
+  "transformation": "pdftoppm PDF page 3 rendered as full-page PNG, scale-to 1600; no cropping or redraw",
+  "visually_verified": true,
+  "visual_review": "已目视核对Figure1三个子面板：MemoryUse、DMR、BLM；保留图注和整页，清晰可读",
+  "checked_on": "2026-10-29"
+}

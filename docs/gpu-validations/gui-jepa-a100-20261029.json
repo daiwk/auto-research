@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "adapter_key": "gui-jepa",
+  "validated_at": "2026-10-29",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python3",
+    "scripts/run_oct29_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "4fd3d0c5845f7f88b9a68333c33c9035f47b3983",
+    "--frozen-proof",
+    "oct29-frozen-proof.json",
+    "--output",
+    "results/components-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:oct29-gui-jepa-v1",
+    "revision": "sha256:5feabf6cd9530a2841bfcc9b20199159550bf17af13b0a7e02509056237f5104",
+    "recipe": "fixed seeded mechanism contracts, no public capability dataset",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "4fd3d0c5845f7f88b9a68333c33c9035f47b3983",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "environment_interactions": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "listwise_loss": {
+      "mean": 1.3664058256883576,
+      "std": 0.28484648330897255,
+      "n": 3
+    },
+    "loss_reference_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "parameter_delta": {
+      "mean": 0.0074125471027898255,
+      "std": 0.002973088208971817,
+      "n": 3
+    },
+    "permutation_reference_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "predictor_gradient_norm": {
+      "mean": 3.2644702477128673,
+      "std": 1.7093125515376673,
+      "n": 3
+    },
+    "structural_gradient_norm": {
+      "mean": 2.031146308580449,
+      "std": 0.6367933642027798,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct29_components.py": "8cd0b1227b5238ae2bb434f930cd851e60661e035991421b18decad77a65c806",
+    "docs/research-audits/oct29-components/execution-spec.json": "36fb236a14fba74c72a6521fe973d24040c7c5611902394a7ad6401cc7ebf715",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+    "src/auto_research/agent_research/discernmem.py": "e9aad2dc645eaf627056e5d9dce8dc03b746d722647049473dde610fa28e7ef2",
+    "src/auto_research/agent_research/ruharness.py": "fed7efd2af6d919a2f2ce358f5ded4a76ec96a08aa3b6a723e9255899850bd7c",
+    "src/auto_research/foundation_models/gui_jepa.py": "5feabf6cd9530a2841bfcc9b20199159550bf17af13b0a7e02509056237f5104",
+    "src/auto_research/foundation_models/hope_hilbert.py": "65f6af44919f7d4e517daad04660531a949c4badb274c4866ea903d9b2ef035c",
+    "src/auto_research/foundation_models/rescom.py": "b53f5dd44e6d4e72fc28b1c56fbffb06eb0262fbc647162f6dcc8ef440e9b567",
+    "src/auto_research/foundation_models/select_ttt.py": "b63aacbcd05d3a12e0a93460172e58991601989a08b89a4fb2235ed98d215e8f",
+    "src/auto_research/foundation_models/sleep_lti.py": "3f7219ba159916cb75b163430bea88a71c6609663a5b8e6ad2a97040a220bb42",
+    "src/auto_research/reproductions/kl_mopd.py": "01298abcd3e06a2dbad62e7a1ade42a605af203eeb54f2ebc826a8093568aa01"
+  },
+  "provenance": {
+    "commit": "4fd3d0c5845f7f88b9a68333c33c9035f47b3983",
+    "artifact_path": "docs/gpu-validations/gui-jepa-a100-20261029.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct29_components.py": "8cd0b1227b5238ae2bb434f930cd851e60661e035991421b18decad77a65c806",
+      "docs/research-audits/oct29-components/execution-spec.json": "36fb236a14fba74c72a6521fe973d24040c7c5611902394a7ad6401cc7ebf715",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "src/auto_research/agent_research/discernmem.py": "e9aad2dc645eaf627056e5d9dce8dc03b746d722647049473dde610fa28e7ef2",
+      "src/auto_research/agent_research/ruharness.py": "fed7efd2af6d919a2f2ce358f5ded4a76ec96a08aa3b6a723e9255899850bd7c",
+      "src/auto_research/foundation_models/gui_jepa.py": "5feabf6cd9530a2841bfcc9b20199159550bf17af13b0a7e02509056237f5104",
+      "src/auto_research/foundation_models/hope_hilbert.py": "65f6af44919f7d4e517daad04660531a949c4badb274c4866ea903d9b2ef035c",
+      "src/auto_research/foundation_models/rescom.py": "b53f5dd44e6d4e72fc28b1c56fbffb06eb0262fbc647162f6dcc8ef440e9b567",
+      "src/auto_research/foundation_models/select_ttt.py": "b63aacbcd05d3a12e0a93460172e58991601989a08b89a4fb2235ed98d215e8f",
+      "src/auto_research/foundation_models/sleep_lti.py": "3f7219ba159916cb75b163430bea88a71c6609663a5b8e6ad2a97040a220bb42",
+      "src/auto_research/reproductions/kl_mopd.py": "01298abcd3e06a2dbad62e7a1ade42a605af203eeb54f2ebc826a8093568aa01"
+    },
+    "raw_runner_artifact_sha256": "5f9d7ace5f52dc7e30df5e2550b62c4a6b0428f760734042e6107fe64e059da0",
+    "dataset_fingerprint": "sha256:297e40e0a16946a7d472c885cc37fa12b8deaf606ed2853aa8e65dd5ceb1016a",
+    "metric_artifact_path": "docs/foundation-models/2610.36877-gui-jepa/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

@@ -256,6 +256,15 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "agent-research:discernmem",
+          "position": "配对效果、范围优先归因、双参照修复门槛及版本证据清空。",
+          "tradeoff": "scope/defect/replay分数外部提供，不用规则冒充LLM诊断与修复。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
         }
       ],
       "analysis": [
@@ -275,6 +284,14 @@
             "agent-research:voyager",
             "agent-research:vag",
             "agent-research:skillrise"
+          ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任务、seed、配置做单记忆/无记忆配对重放，再检查修复是否同时守住父记忆与无记忆基线。它补充了简单追加反思的风险控制：团队结果差不能直接归罪某条记忆；新版本也不能继承旧版本已测效果。本地只做这些测量和版本合同，没有LLM修复或重放。",
+          "papers": [
+            "agent-research:memgpt",
+            "agent-research:discernmem"
           ]
         }
       ],
@@ -308,9 +325,19 @@
             "agent-research:skillrise",
             "agent-research:voyager"
           ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "为何修复后比父记忆好，还可能不能接收？",
+          "answer": "父记忆本来就可能有害；候选还必须不弱于无记忆基线，守住历史任务并不增加完全失败数。单一正增益不能替代双参照非退化检查。",
+          "example": "教学例：父记忆得0.2，候选0.4，无记忆0.8；候选比父版好，但仍不能据此称记忆有价值。",
+          "papers": [
+            "agent-research:memgpt",
+            "agent-research:discernmem"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "reviewed_papers": [
         "agent-research:cache-engineering",
         "agent-research:tokenworth",
@@ -366,7 +393,8 @@
         "agent-research:memtool",
         "agent-research:memgpt",
         "agent-research:voyager",
-        "agent-research:generative-agents"
+        "agent-research:generative-agents",
+        "agent-research:discernmem"
       ],
       "updates": [
         {
@@ -486,6 +514,16 @@
             "agent-research:voyager": "97016f56264d541ae2ed051159259b91c5d6b798ee6d7c23967472be408edf75",
             "agent-research:generative-agents": "560c3f265ecb081dc4a0a7a09237e97d44f5febb3929f83a3a699fb1128cf614"
           }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任务、seed、配置做单记忆/无记忆配对重放，再检查修复是否同时守住父记忆与无记忆基线。它补充了简单追加反思的风险控制：团队结果差不能直接归罪某条记忆；新版本也不能继承旧版本已测效果。本地只做这些测量和版本合同，没有LLM修复或重放。",
+          "papers": [
+            "agent-research:discernmem"
+          ],
+          "source_revisions": {
+            "agent-research:discernmem": "a5c82d9184ebece8d16e3b6d66033b0b11aafc776b4c3fec3b1fab7290a0c588"
+          }
         }
       ]
     },
@@ -578,6 +616,14 @@
             "agent-research:metagpt",
             "agent-research:world-of-swecraft"
           ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态；主体CC-BY-NC4，vendored检索/训练组件保留各自许可。代码公开不等于本地typed grammar突然覆盖任意Python、跨轮状态、神经检索或RL；本轮未复制源码或改变原L1证据。",
+          "papers": [
+            "agent-research:toolformer",
+            "agent-research:rpl"
+          ]
         }
       ],
       "questions": [
@@ -612,9 +658,19 @@
             "agent-research:swe-agent",
             "agent-research:world-of-swecraft"
           ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "官方仓库补上后，为何仍需保留RPL本地组件边界？",
+          "answer": "来源完整性与执行保真度是两条轴。拿到完整训练代码并未使已有受限SDK执行完整策略、神经检索或蒸馏；若以后接入，需要另定成本、真实运行与许可边界。",
+          "example": "教学例：原来能检查检索程序语法，现在知道官方训练入口，也不能把语法测试改叫多跳QA评测。",
+          "papers": [
+            "agent-research:toolformer",
+            "agent-research:rpl"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "reviewed_papers": [
         "agent-research:rpl",
         "agent-research:world-of-swecraft",
@@ -772,6 +828,16 @@
             "agent-research:saycan": "6ce47818ff2ecaf85f53ac855302a22a5636703edae44a9c8f911064e80e7747",
             "agent-research:webgpt": "62d36b0afa0c39f764b6d4ab646e48b4e26741ae83442f896ac338291f20ec46"
           }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态；主体CC-BY-NC4，vendored检索/训练组件保留各自许可。代码公开不等于本地typed grammar突然覆盖任意Python、跨轮状态、神经检索或RL；本轮未复制源码或改变原L1证据。",
+          "papers": [
+            "agent-research:rpl"
+          ],
+          "source_revisions": {
+            "agent-research:rpl": "4d76525fdffa5b6b2b80c6edeca04b18238a2f018752ad63bbc3b4da41635ae8"
+          }
         }
       ]
     },
@@ -844,6 +910,15 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "agent-research:ruharness",
+          "position": "六格联合后验、2000次抽样0.2分位、active frontier与validation准入。",
+          "tradeoff": "行为标签、执行结果和验证分数外置；统计排序不是完整自进化运行。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
         }
       ],
       "analysis": [
@@ -865,6 +940,14 @@
             "agent-research:rsiflow",
             "agent-research:harnesslens",
             "agent-research:agentx"
+          ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果联合表用Jeffreys-Dirichlet后验估计保守utility分位，集合新颖性和冗余仍固定来自已测轨迹。它把有限样本不确定性和候选准入分开，只有active准则能进入frontier，最终harness修改还要独立validation严格增益。本地没有LLM评审或harness生成。",
+          "papers": [
+            "agent-research:self-refine",
+            "agent-research:ruharness"
           ]
         }
       ],
@@ -898,9 +981,19 @@
             "agent-research:harnesslens",
             "agent-research:agentx"
           ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "RuHarness为什么不把新颖性和冗余也随每个Dirichlet样本重抽？",
+          "answer": "这两项来自固定轨迹集合的重叠关系，不是六格结果概率。把它们一同随机化会改变原文不确定性模型；后验保守分位也不等于已证明真实Agent更强。",
+          "example": "教学例：两条准则标记了完全相同的失败轨迹，抽一次成功/失败概率不应让这两集合忽然不再相同。",
+          "papers": [
+            "agent-research:self-refine",
+            "agent-research:ruharness"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "reviewed_papers": [
         "agent-research:rsi-opt",
         "agent-research:image-rsi",
@@ -944,7 +1037,8 @@
         "agent-research:polca",
         "agent-research:mars-research",
         "agent-research:self-refine",
-        "agent-research:reflexion"
+        "agent-research:reflexion",
+        "agent-research:ruharness"
       ],
       "updates": [
         {
@@ -1039,6 +1133,16 @@
             "agent-research:mars-research": "8ed47dabbc4068ab9a3b3f8312b6ac6696469e147d2f8787ddb4a2879ec7a05a",
             "agent-research:self-refine": "5a1a0616bc08bfafc4cf3392fab8cdd8c8921c7917f536786d14f0d2a9f61eb3",
             "agent-research:reflexion": "1e965361376edeaffb32977018bf433c52f7192a6a8cd44509c0730cbdc53f4d"
+          }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果联合表用Jeffreys-Dirichlet后验估计保守utility分位，集合新颖性和冗余仍固定来自已测轨迹。它把有限样本不确定性和候选准入分开，只有active准则能进入frontier，最终harness修改还要独立validation严格增益。本地没有LLM评审或harness生成。",
+          "papers": [
+            "agent-research:ruharness"
+          ],
+          "source_revisions": {
+            "agent-research:ruharness": "01c81c72f03453d7ecff3e3ab7e10ad03b9b84925a5fd8def1a87d678df02a37"
           }
         }
       ]

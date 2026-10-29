@@ -22,9 +22,12 @@
 
 - 2026-10-23 · [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../../multimodal-models/2610.32976-flexglue/README.md)（`flexglue`）：稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+## Google
+
+- 2026-10-06 · [EmbeddingGemma 2: Unified and Efficient Multimodal Representations](../../multimodal-models/embeddinggemma2/README.md)（`embedding-gemma2`）：EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。
+
 ## Google DeepMind
 
-- 2026-10-06 · [EmbeddingGemma 2: Open Multimodal Embeddings](../../multimodal-models/embeddinggemma2/README.md)（`embedding-gemma2`）：EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。
 - 2025-02-20 · [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../../reproductions/2502.14786-siglip2/README.md)（`siglip2`）：SigLIP 2 在 SigLIP 的 pairwise sigmoid loss 上组合 captioning pretraining、global-local self-distillation、masked prediction、在线数据筛选和 NaFlex 动态分辨率，改善语义、定位、 dense feature 与多语言公平性。
 
 ## Harvard University

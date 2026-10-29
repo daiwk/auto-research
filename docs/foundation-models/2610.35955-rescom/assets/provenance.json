@@ -1,0 +1,25 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.35955v1",
+  "source_url": "https://arxiv.org/pdf/2610.35955v1#page=4",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "87db4fdf7b0f8c27b38de8cc2da08dec5ce22d3f2cc6ac99878d5d339a4dfbe5",
+  "source_asset_sha256": "87db4fdf7b0f8c27b38de8cc2da08dec5ce22d3f2cc6ac99878d5d339a4dfbe5",
+  "pixel_dimensions": [
+    1224,
+    460
+  ],
+  "copyright": "Original paper authors; fixed arXiv v1 license applies",
+  "description": "Original PDF page crop including Figure2 and full caption; not redrawn",
+  "method_html_sha256": "2d6b7cbb977108adfc7286f5c1207f887bba4c1eca400bcc3343b2d27ba1a052",
+  "caption": "Figure 2: ResCom calibration and inference. Calibration pairs each activation rounding residual with the output contribution removed by rounding and fits a low-rank correction. At inference, the branch evaluates that correction for the current token and adds it to the frozen quantized output. The shared layer bias is omitted.",
+  "visually_verified": true,
+  "source_pdf_sha256": "7449d471a9735f519bc9bcc2696d08d1b9156b8829d3bb96330730da78ad98d4",
+  "page": 4,
+  "crop_rect_points": [
+    0.0,
+    0.0,
+    612.0,
+    229.73904418945312
+  ]
+}

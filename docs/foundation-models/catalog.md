@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| JEPA与世界模型 | [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](2610.36877-gui-jepa/README.md) | Shanghai Jiao Tong University / Nanyang Technological University，2026-10-27 | [原作者入口](https://github.com/bcwang-sjtu/GUI-JEPA)；原作者仓库可访问但固定commit仅README占位；方法源码尚未发布，不能称已开源可执行GUI-JEPA | `gui-jepa`：仅低成本组件，完整实验不复现 |
+| 注意力与长上下文 | [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](2610.36794-select-ttt/README.md) | University of Science and Technology of China，2026-10-27 | 未发现官方代码 | `select-ttt`：仅低成本组件，完整实验不复现 |
+| 推理与系统效率 | [ResCom: Activation Residual Compensation for Large Language Model Quantization](2610.35955-rescom/README.md) | Institute of Automation, Chinese Academy of Sciences，2026-10-25 | 未发现官方代码 | `rescom`：仅低成本组件，完整实验不复现 |
 | JEPA与世界模型 | [DT-JEPA: Learning to Predict Future Representations for Decision-Making](2610.32657-dt-jepa/README.md) | Southeast University，2026-10-23 | 未发现官方代码 | `dt-jepa`：仅低成本组件，完整实验不复现 |
 | System One / JEV | [EditJev: System One Routing for Image Editing Models](2610.32635-editjev/README.md) | Peking University，2026-10-23 | 未发现官方代码 | `editjev`：仅低成本组件，完整实验不复现 |
 | System One / JEV | [PathJev: Decision-Native Vision–Language Modelling for Histopathology](2610.32478-pathjev/README.md) | University of Naples Federico II，2026-10-23 | [原作者入口](https://github.com/CosmoIknosLab/PathJev)；作者方法仓库公开，固定commit目录包含src/inference/analysis/configs/tests及结果；公开模型https://huggingface.co/Cristiandieti/PathJev-P；本轮只核资源，不下载模型/病理数据 | 计划键 `pathjev`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
@@ -160,6 +163,7 @@
 | 预训练与数据 | [DataOrchestra: Learning to Orchestrate Per-Example Curation of Pretraining Data](../reproductions/2607.24717-data-orchestra/README.md) | Fudan University / Shanghai Jiao Tong University / SII-GAIR，2026-07-27 | [已开源](https://github.com/GAIR-NLP/DataOrchestra) | `data-orchestra` |
 | 推理与系统效率 | [Adaptive Depth Sparse Framework: Similarity-Driven Resource Allocation for Pre-Trained LLMs](../reproductions/2607.21291-adadsf/README.md) | Huawei ACS Lab / Southern University of Science and Technology，2026-07-23 | 未发现官方代码 | `adadsf` |
 | 注意力与长上下文 | [Anti-Periodic Positional Encoding: Möbius Boundary Conditions Make In-Context Retrieval Reliable](../reproductions/2607.21405-mobius-rope/README.md) | Independent researcher，2026-07-23 | 未发现官方代码 | `mobius-rope` |
+| 推理与系统效率 | [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](2607.21366-hope-hilbert/README.md) | Google DeepMind，2026-07-23 | [原作者入口](https://github.com/google-deepmind/hope)；Google DeepMind于2026-10-27新公开官方实现，固定f3c4b251d0c9dae05fb165b9bc645a5a52955e62；本地据论文独立实现子组件，不复制上游库 | `hope-hilbert`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Naju: A Native Discrete State-Space Model with Independent Retention and Writing for Long-Sequence Memory](../reproductions/2607.21000-naju/README.md) | Independent researchers，2026-07-23 | 未发现官方代码 | `naju` |
 | 注意力与长上下文 | [Parameter-free Adaptive Sparse Attention via Compression-Based Content Selection](../reproductions/2607.21752-gzip-sparse-attention/README.md) | Pennsylvania State University，2026-07-23 | 未发现官方代码 | `gzip-sparse-attention` |
 | 推理与系统效率 | [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../reproductions/2607.21535-windowed-mtp/README.md) | NVIDIA，2026-07-23 | [已开源](https://github.com/avalliappan-nvidia/windowed-mtp-b200) | `windowed-mtp` |
@@ -171,6 +175,7 @@
 | 注意力与长上下文 | [Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers](../reproductions/2607.15456-looped-latent-attention/README.md) | University of Maryland / Meta AI，2026-07-16 | 未发现官方代码 | `looped-latent-attention` |
 | 多语言推理与评估 | [Cross-Lingual Exploration for Parametric Knowledge](2606.24579-cross-lingual-exploration/README.md) | The Hebrew University of Jerusalem，2026-06-23 | 未发现官方代码 | 计划键 `cross-lingual-exploration`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 注意力与长上下文 | [MiniMax Sparse Attention](../reproductions/2606.13392-minimax-sparse-attention/README.md) | MiniMax，2026-06-11 | [已开源](https://github.com/MiniMax-AI/MSA) | `minimax-sparse-attention` |
+| 持续学习 | [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](2606.03979-sleep-lti/README.md) | Google Research，2026-06-02 | 未发现官方代码 | `sleep-lti`：仅低成本组件，完整实验不复现 |
 | 跨语言评测 | [XLGoBench: Detecting cross-lingual skill gaps with algorithmic tasks](2605.30788-xlgobench/README.md) | Google DeepMind，2026-05-29 | [原作者入口](https://zenodo.org/records/20423110)；作者补充材料v1公开：Zenodo20423110，文件MD5=1fd5dd56c216a407dd5a13f08b0f1065；无Git SHA，不伪造。只核正文与公开元数据，独立实现结构化scorer，不复制官方多语模板 | `xlgobench`：仅低成本组件，完整实验不复现 |
 | 网络架构 | [Memory Grafting: Scaling Language Model Pre-training via Offline Conditional Memory](../reproductions/2605.20948-memory-grafting/README.md) | Tsinghua University / Microsoft Research Asia，2026-05-20 | 未发现官方代码 | `memory-grafting` |
 | 企业 LLM | [Customizing an LLM for Enterprise Software Engineering](2605.16517-gemini-for-google/README.md) | Google，2026-05-15 | 未发现官方代码 | `gemini-for-google` |

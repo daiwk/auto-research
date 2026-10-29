@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-10-27 · 31 篇主题资料 / 5 篇重点对照
+[基础模型](../index.md) · 更新 2026-10-29 · 33 篇主题资料 / 7 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。
 
@@ -30,6 +30,8 @@ hide:
 | [Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention](../../../reproductions/2502.11089-native-sparse-attention/README.md) · [原始来源](https://arxiv.org/abs/2502.11089)<br>章节：背景与主要改动、核心公式、复现边界 | 压缩块提供全局轮廓，query 选块取细节，滑窗保留近期精确信息，三路门控融合。 | 仍需设计与训练不同读取通路；选择错误时压缩概览未必能恢复细节。本地三路可训练，不代表论文长序列吞吐。 |
 | [OpenAttention: One Percent Is Enough with Tail Proxies](../../../foundation-models/2610.30951-openattention/README.md) · [原始来源](https://arxiv.org/abs/2610.30951v1)<br>章节：背景与主要改动、核心公式 | 用 query 几何聚类，按代理误差估计分配精读预算，未读簇以带计数均值代理参与 softmax。 | 尾部没有直接清零，但均值代理仍会丢失簇内差异；ErrorGate 依赖近似假设。本地仅单头算子诊断，完整实验高成本未复现。 |
 | [Rethinking Sequence Compression with Test-time Regression](../../../foundation-models/2610.31574-ttr-compressor/README.md) · [原始来源](https://arxiv.org/abs/2610.31574v1)<br>章节：背景与主要改动、核心公式 | 将一组 token 当作回归观测，每次前向解正则化最小二乘，以输入相关系数表示该组。 | 不是推理时训练参数，也不是免费池化；dual 求解含 T³ 项，只有组长远小于维度时才适合简化成本。当前为机制诊断。 |
+| [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../../foundation-models/2610.36794-select-ttt/README.md) · [原始来源](https://arxiv.org/abs/2610.36794v1)<br>章节：背景与主要改动、核心公式 | 对query token的低CE位置top-k聚合，T×softmax分配并clip写入倍率。 | 必须传入真实冻结head/RMSNorm与NTP对齐特征；不含LLM或分布式内核。 |
+| [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../../foundation-models/2606.03979-sleep-lti/README.md) · [原始来源](https://arxiv.org/abs/2606.03979v2)<br>章节：背景与主要改动、核心公式 | 把外部语义二元奖励与阈值化token编辑相似度混合。 | 只做LTI奖励，不实现CMS、梦境、知识播种或LoRA，完整Sleep高成本不复现。 |
 
 </div>
 
@@ -46,6 +48,12 @@ RoPE 决定 query 与 key 如何携带相对位置信息；即使旋转完全正
 NSA 的压缩分支旁边仍有 query 条件的精细选块；OpenAttention 把预算分给精确行，并让剩余内容以 log-count 均值代理留在归一化中。TTR 则把整个组映射成回归系数，没有因此承诺逐项可逆。三者都减少某种处理负担，但细节的恢复路径不同。比较时要追踪遗漏信息去了哪里，而不能仅比较输出向量数；这里的本地公式或短训练记录也不足以排序它们的长文能力。
 
 对照来源：[native-sparse-attention](../../../reproductions/2502.11089-native-sparse-attention/README.md) · [openattention](../../../foundation-models/2610.30951-openattention/README.md) · [ttr-compressor](../../../foundation-models/2610.31574-ttr-compressor/README.md)
+
+### 10月29日：新方法与来源变化
+
+Select-TTT根据当前query的token概率质量调整上下文chunk写入fast weight的力度，apply-before-write保留时序；clip后总写入预算可能低于chunk数，不能再归一化伪装守恒。Sleep则把活跃与离线巩固分阶段，本地仅其LTI奖励。与冻结参数的状态更新相比，后者完整方法要训练扩展参数，不能把一个奖励核当成记忆已写入模型。
+
+对照来源：[rope](../../../reproductions/2104.09864-rope/README.md) · [select-ttt](../../../foundation-models/2610.36794-select-ttt/README.md) · [sleep-lti](../../../foundation-models/2606.03979-sleep-lti/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -81,15 +89,29 @@ NSA 的压缩分支旁边仍有 query 条件的精细选块；OpenAttention 把�
 
     对照来源：[ttr-compressor](../../../foundation-models/2610.31574-ttr-compressor/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
 
+### query条件写入系数变化，与Sleep奖励变化，分别能证明哪一步真的执行了？ {#cross-oct29-method-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** Select-TTT本地参考实际更新小fast-weight矩阵，可检查写入前输出和最终状态；Sleep本地只返回奖励，没有优化器或参数扩展。两者均不证明长上下文能力，更不能把奖励值直接解释为长期记忆保持率。
+
+    **教学例子：** 教学例：一份记忆表的数值真的改变，和给一段续写打0.9分，是不同的执行证据。
+
+    对照来源：[rope](../../../reproductions/2104.09864-rope/README.md) · [select-ttt](../../../foundation-models/2610.36794-select-ttt/README.md) · [sleep-lti](../../../foundation-models/2606.03979-sleep-lti/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-29** · Select-TTT根据当前query的token概率质量调整上下文chunk写入fast weight的力度，apply-before-write保留时序；clip后总写入预算可能低于chunk数，不能再归一化伪装守恒。Sleep则把活跃与离线巩固分阶段，本地仅其LTI奖励。与冻结参数的状态更新相比，后者完整方法要训练扩展参数，不能把一个奖励核当成记忆已写入模型。
+
+涉及：[select-ttt](../../../foundation-models/2610.36794-select-ttt/README.md) · [sleep-lti](../../../foundation-models/2606.03979-sleep-lti/README.md)
 
 **2026-10-27** · 首版：比较位置编码、选择性状态、三路稀疏读取、尾部代理与前向回归压缩，明确历史信息的保存和恢复路径。
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 31 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 33 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -124,6 +146,8 @@ NSA 的压缩分支旁边仍有 query 条件的精细选块；OpenAttention 把�
 - [Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling](../../../foundation-models/2609.36529-triadic-linear-attention/README.md)
 - [Learning What to Remember: Test-Time Training via Context Distillation](../../../reproductions/2608.01672-ttcd/README.md)
 - [Rethinking Sequence Compression with Test-time Regression](../../../foundation-models/2610.31574-ttr-compressor/README.md)
+- [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../../foundation-models/2610.36794-select-ttt/README.md)
+- [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../../foundation-models/2606.03979-sleep-lti/README.md)
 
 </details>
 

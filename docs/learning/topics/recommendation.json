@@ -309,7 +309,8 @@
         "recommendation:unisgr-v2",
         "recommendation:univa",
         "recommendation:wegr",
-        "recommendation:xrec"
+        "recommendation:xrec",
+        "recommendation:pailitao-mmsearch2"
       ]
     },
     {
@@ -364,7 +365,8 @@
         "recommendation:smes",
         "recommendation:twice",
         "recommendation:twitch-mor",
-        "recommendation:unimvt"
+        "recommendation:unimvt",
+        "recommendation:kl-mopd"
       ]
     },
     {

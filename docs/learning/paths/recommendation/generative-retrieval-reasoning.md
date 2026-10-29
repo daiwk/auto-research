@@ -7,7 +7,7 @@ hide:
 
 # 生成式召回与推理推荐
 
-[搜广推](index.md) / 240 个问题 · 60 篇论文
+[搜广推](index.md) / 244 个问题 · 61 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">240 个问题 · 60 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">244 个问题 · 61 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pailitao-mmsearch2" data-paper-title="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search 搜广推与 LLM 应用 Taobao &amp; Tmall Group of Alibaba 2026-10-27 用户上传图片并要求“同款换属性”或“找搭配”，检索关系与计算预算都不固定。PailitaoMMSearch2.0把原图、自由文本和可选上下文直接送入VLM，生成商品SID列表，不依赖一个先判意图再切多专家的路由器。数据工具按冷启动、质量校准和真实流量反馈组合；模型依次做商品知识CPT、混合推理预算SFT与意图均衡RL。Sample–Beam把推理部分采样和SID候选束生成分开，让训练的候选集合更接近线上多结果服务，而不是普通单响应GRPO换个名字。 资料收录，完整实验成本过高，不复现（审查 DONE）。未执行训练或推理，不产生metrics/GPU凭证。资料收录，完整实验成本过高，不复现（审查 DONE）。没有本地可执行模型、训练、benchmark或GPU结果，不注册adapter/Evolve。未执行训练或推理，不产生metrics/GPU凭证。论文涉及0.8B/2B/4B多模型、多预算、大规模多模态生产数据、CPT/SFT/RL与多场景线上实验；部分依赖私有数据，作者未给可据以重跑的完整GPU小时预算。相对单卡A100/A30或Mac，成本过高，不复现（审查 DONE）；不下载大资源、不运行试验、不自动重试。  多模态生成式搜索 Sample–Beam rollouts 搜广推 生成式召回与推理推荐 PailitaoMMSearch2.0是改写查询再检索，还是直接生成商品候选？ 模型消费原图和自由文本，直接生成可映射为商品的三层SID集合，解码就是候选生成。部分生产场景最终还会与既有链路结果混排，不能把端到端检索理解成所有线上模块都消失了。 教学例：用户上传衬衣照片要求找搭配裤子，生成的是候选商品ID，而不是只生成一句供别的搜索器使用的新查询。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<span id="paper-recommendation-pailitao-mmsearch2-204499bd" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-6ad4ec1f2700540d">PailitaoMMSearch2.0是改写查询再检索，还是直接生成商品候选？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apailitao-mmsearch2">PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Taobao &amp; Tmall Group of Alibaba</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模型消费原图和自由文本，直接生成可映射为商品的三层SID集合，解码就是候选生成。部分生产场景最终还会与既有链路结果混排，不能把端到端检索理解成所有线上模块都消失了。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用户上传衬衣照片要求找搭配裤子，生成的是候选商品ID，而不是只生成一句供别的搜索器使用的新查询。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36958v1">原论文</a> · <a href="../../../../recommendation-components/2610.36958-pailitao-mmsearch2/">实现解读</a> · <a href="#qa-6ad4ec1f2700540d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pailitao-mmsearch2" data-paper-title="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search 搜广推与 LLM 应用 Taobao &amp; Tmall Group of Alibaba 2026-10-27 用户上传图片并要求“同款换属性”或“找搭配”，检索关系与计算预算都不固定。PailitaoMMSearch2.0把原图、自由文本和可选上下文直接送入VLM，生成商品SID列表，不依赖一个先判意图再切多专家的路由器。数据工具按冷启动、质量校准和真实流量反馈组合；模型依次做商品知识CPT、混合推理预算SFT与意图均衡RL。Sample–Beam把推理部分采样和SID候选束生成分开，让训练的候选集合更接近线上多结果服务，而不是普通单响应GRPO换个名字。 资料收录，完整实验成本过高，不复现（审查 DONE）。未执行训练或推理，不产生metrics/GPU凭证。资料收录，完整实验成本过高，不复现（审查 DONE）。没有本地可执行模型、训练、benchmark或GPU结果，不注册adapter/Evolve。未执行训练或推理，不产生metrics/GPU凭证。论文涉及0.8B/2B/4B多模型、多预算、大规模多模态生产数据、CPT/SFT/RL与多场景线上实验；部分依赖私有数据，作者未给可据以重跑的完整GPU小时预算。相对单卡A100/A30或Mac，成本过高，不复现（审查 DONE）；不下载大资源、不运行试验、不自动重试。  多模态生成式搜索 Sample–Beam rollouts 搜广推 生成式召回与推理推荐 Sample–Beam为何把推理采样和商品束生成分开？ 线上要返回多个商品，单响应采样不完全对应候选集合服务。方法采样推理部分，再对SID做beam展开，使RL看到更接近服务的多候选结构；真实实现还需要论文的意图奖励与轨迹，普通beam函数不能代表整个方法。 教学例：同一段搭配理由后展开十个不同商品码，与独立采十条互不相关的完整理由和ID，是不同的训练分布。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8032636210dd476d">Sample–Beam为何把推理采样和商品束生成分开？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apailitao-mmsearch2">PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Taobao &amp; Tmall Group of Alibaba</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>线上要返回多个商品，单响应采样不完全对应候选集合服务。方法采样推理部分，再对SID做beam展开，使RL看到更接近服务的多候选结构；真实实现还需要论文的意图奖励与轨迹，普通beam函数不能代表整个方法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一段搭配理由后展开十个不同商品码，与独立采十条互不相关的完整理由和ID，是不同的训练分布。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36958v1">原论文</a> · <a href="../../../../recommendation-components/2610.36958-pailitao-mmsearch2/">实现解读</a> · <a href="#qa-8032636210dd476d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pailitao-mmsearch2" data-paper-title="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search 搜广推与 LLM 应用 Taobao &amp; Tmall Group of Alibaba 2026-10-27 用户上传图片并要求“同款换属性”或“找搭配”，检索关系与计算预算都不固定。PailitaoMMSearch2.0把原图、自由文本和可选上下文直接送入VLM，生成商品SID列表，不依赖一个先判意图再切多专家的路由器。数据工具按冷启动、质量校准和真实流量反馈组合；模型依次做商品知识CPT、混合推理预算SFT与意图均衡RL。Sample–Beam把推理部分采样和SID候选束生成分开，让训练的候选集合更接近线上多结果服务，而不是普通单响应GRPO换个名字。 资料收录，完整实验成本过高，不复现（审查 DONE）。未执行训练或推理，不产生metrics/GPU凭证。资料收录，完整实验成本过高，不复现（审查 DONE）。没有本地可执行模型、训练、benchmark或GPU结果，不注册adapter/Evolve。未执行训练或推理，不产生metrics/GPU凭证。论文涉及0.8B/2B/4B多模型、多预算、大规模多模态生产数据、CPT/SFT/RL与多场景线上实验；部分依赖私有数据，作者未给可据以重跑的完整GPU小时预算。相对单卡A100/A30或Mac，成本过高，不复现（审查 DONE）；不下载大资源、不运行试验、不自动重试。  多模态生成式搜索 Sample–Beam rollouts 搜广推 生成式召回与推理推荐 推理预算更大，PailitaoMMSearch2.0的检索效果就一定更好吗？ 不是。论文0.8B模型No-think的macro ER最高；2B模型Low-think在整体质量与延迟间更合适，而4B的不同意图又有不同变化。模型规模、任务意图和服务成本要一起看，不能据单项最优推广。 教学例：图片已清楚展示同款属性时，多写理由可能增加时延甚至干扰结果；需要组合约束的匹配题则可能更受益。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ba1eaa41311ff0a8">推理预算更大，PailitaoMMSearch2.0的检索效果就一定更好吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apailitao-mmsearch2">PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Taobao &amp; Tmall Group of Alibaba</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。论文0.8B模型No-think的macro ER最高；2B模型Low-think在整体质量与延迟间更合适，而4B的不同意图又有不同变化。模型规模、任务意图和服务成本要一起看，不能据单项最优推广。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：图片已清楚展示同款属性时，多写理由可能增加时延甚至干扰结果；需要组合约束的匹配题则可能更受益。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36958v1">原论文</a> · <a href="../../../../recommendation-components/2610.36958-pailitao-mmsearch2/">实现解读</a> · <a href="#qa-ba1eaa41311ff0a8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pailitao-mmsearch2" data-paper-title="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search 搜广推与 LLM 应用 Taobao &amp; Tmall Group of Alibaba 2026-10-27 用户上传图片并要求“同款换属性”或“找搭配”，检索关系与计算预算都不固定。PailitaoMMSearch2.0把原图、自由文本和可选上下文直接送入VLM，生成商品SID列表，不依赖一个先判意图再切多专家的路由器。数据工具按冷启动、质量校准和真实流量反馈组合；模型依次做商品知识CPT、混合推理预算SFT与意图均衡RL。Sample–Beam把推理部分采样和SID候选束生成分开，让训练的候选集合更接近线上多结果服务，而不是普通单响应GRPO换个名字。 资料收录，完整实验成本过高，不复现（审查 DONE）。未执行训练或推理，不产生metrics/GPU凭证。资料收录，完整实验成本过高，不复现（审查 DONE）。没有本地可执行模型、训练、benchmark或GPU结果，不注册adapter/Evolve。未执行训练或推理，不产生metrics/GPU凭证。论文涉及0.8B/2B/4B多模型、多预算、大规模多模态生产数据、CPT/SFT/RL与多场景线上实验；部分依赖私有数据，作者未给可据以重跑的完整GPU小时预算。相对单卡A100/A30或Mac，成本过高，不复现（审查 DONE）；不下载大资源、不运行试验、不自动重试。  多模态生成式搜索 Sample–Beam rollouts 搜广推 生成式召回与推理推荐 论文CTR提升0.58个百分点，能写成相对提升0.58%吗？ 不能，百分点是绝对差值，相对百分比还取决于基线CTR。论文线上结果来自完整部署配置，当前库只资料收录，未复现模型、私有数据训练或A/B，也不能将线上收益归因于一个本地占位组件。 教学例：基线CTR为10%，增加0.58个百分点变为10.58%，相对提升是5.8%；这里仅说明口径，不是补造论文基线。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-191febc5125e9909">论文CTR提升0.58个百分点，能写成相对提升0.58%吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apailitao-mmsearch2">PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Taobao &amp; Tmall Group of Alibaba</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能，百分点是绝对差值，相对百分比还取决于基线CTR。论文线上结果来自完整部署配置，当前库只资料收录，未复现模型、私有数据训练或A/B，也不能将线上收益归因于一个本地占位组件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：基线CTR为10%，增加0.58个百分点变为10.58%，相对提升是5.8%；这里仅说明口径，不是补造论文基线。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、本地复现与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36958v1">原论文</a> · <a href="../../../../recommendation-components/2610.36958-pailitao-mmsearch2/">实现解读</a> · <a href="#qa-191febc5125e9909">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onelatent" data-paper-title="OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models 搜广推与 LLM 应用 Kuaishou Technology 2026-10-22 推荐FRM的显式CoT会增加生成时延，也可能过度思考或被固定推理模板带偏。OneLatent先用探索、评价、归因三视角生成自适应教师监督，再学习三个潜在token接口，最后只生成三层语义ID，避免在线输出长推理文本。 成本过高，不复现（审查 DONE），不下载235B教师、不做56卡训练的缩小替身、不自动重试因此本项是资料与成本审查完成，没有本地模型、诊断proxy、benchmark指标、GPU回执或evolve映射。Appendix A.1原配置为7节点×每节点8GPU，即56GPU、全参数BF16、4096tokens、两有效epochs；监督涉及Qwen3-235B-A22B教师及工业数据。单张A100/A30或Mac不适合照搬完整矩阵，本轮不先下载/试跑来验证它昂贵。  大模型能力与推荐融合 潜在推理与生成式推荐 搜广推 生成式召回与推理推荐 OneLatent 的三视角教师监督为什么是探索、评价和归因，而非固定一条长 CoT？ 不同视角提供候选发现、比较与解释线索，模型按样本可用视角学习潜在接口，减少固定模板可能带来的偏置与过度思考。它只减少在线显式文本输出，不能据此证明潜在 token 忠实保存每个推理步骤。全参数训练也共同影响结果。 示意：某样本只有可靠评价理由，另一样本还有探索与归因，不必给二者硬塞同一长度推理；内部表示学到多少仍需独立检查。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-onelatent-08691361" class="ar-learning-paper-anchor"></span>

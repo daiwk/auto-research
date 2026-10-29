@@ -117,6 +117,7 @@
 
 ## Google DeepMind
 
+- 2026-07-23 · [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../foundation-models/2607.21366-hope-hilbert/README.md)（`hope-hilbert`）：单看输入权重大小，可能把“函数完全相同、只是参数重新缩放”的神经元排出不同重要性。HOPE把一个神经元写成激活函数与输出向量的秩1张量：它在所有输入上的作用方向，比参数坐标本身更接近需要保留的功能。
 - 2026-05-29 · [XLGoBench: Detecting cross-lingual skill gaps with algorithmic tasks](../../foundation-models/2605.30788-xlgobench/README.md)（`xlgobench`）：固定v1 Section2+AppendixC：SLT财富/系数整数−9..9并jumbled chain；DSA状态/动作数相同；PrDSA15动作、传播完整状态概率、top8集合顺序无关；GraphSP唯一最短路（本地rho0 backbone+bypass固定例）；T-RankHamiltonian DAG+transitive edges、nodes:edges1:3。callback只收task/problem白名单深拷贝，score完整JSON，无LLMjudge。
 - 2026-04-25 · [ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation](../../foundation-models/2604.23099-proeval/README.md)（`proeval`）：昂贵模型或评审器不适合每次全量评分。ProEval复用历史模型之间逐题表现的相关性，形成目标模型的概率评分替身；目标分数只在对应题被选中后传入更新。主源：[v1 §2.1–2.4 Eq2、5、7、10、12](https://arxiv.org/html/2604.23099v1#S2)。
 - 2025-02-20 · [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../../reproductions/2502.14786-siglip2/README.md)（`siglip2`）：SigLIP 2 在 SigLIP 的 pairwise sigmoid loss 上组合 captioning pretraining、global-local self-distillation、masked prediction、在线数据筛选和 NaFlex 动态分辨率，改善语义、定位、 dense feature 与多语言公平性。
@@ -124,6 +125,7 @@
 ## Google Research
 
 - 2026-10-19 · [DeepSEA: A Multilingual Evaluation Benchmark for Southeast Asia](../../foundation-models/2610.26155-deepsea/README.md)（`deepsea`）：现有多语言评测对东南亚低资源语言覆盖不足。DeepSEA 通过专业翻译与质量审核扩展五类公开任务，支持按语言资源层级比较推理、问答和生成表现；研究同时分析英语中转、错误类型及 tokenizer 效率。它是 benchmark，而非改变语言模型参数的训练算法。
+- 2026-06-02 · [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../foundation-models/2606.03979-sleep-lti/README.md)（`sleep-lti`）：上下文结束会丢失短期知识，直接更新基础权重又可能覆盖旧知识。Sleep在活跃学习之外增加离线巩固：多频率记忆模块间先计算未来基础更新但不应用，再扩展低秩专家、用更新前教师巩固到拟更新学生，最后应用更新并清理发送层专家。
 - 2026-04-30 · [Optimized Deferral for Imbalanced Settings](../../foundation-models/2604.27723-mild/README.md)（`mild`）：少数覆盖的专用专家容易被多数专家淹没。论文通过对不同专家设置不同margin约束来平衡学习。保留训练奖励而非以argmin成本生成单一硬标签；这是[v1 §5.3 mild目标、§4.2 margin建议](https://arxiv.org/html/2604.27723v1#S5.SS3)的低成本实现。
 - 2026-02-19 · [A Theoretical Framework for Modular Learning of Robust Generative Models](../../foundation-models/2602.17554-modular-robust-generative/README.md)（`modular-robust-generative`）：以冻结生成专家为基础，优化面对最差数据域的输入相关 gate。核心不是专家均值：逐输入 softmax **不保证整个生成分布积分为一**，必须额外约束全局质量。另将非因果教师采样轨迹蒸馏到只读前缀的因果 router。[§5.2、§6、§7.3](https://arxiv.org/html/2602.17554v1#S5.SS2) 给出实施过程。
 - 2026-01-29 · [ECO: Quantized Training without Full-Precision Master Weights](../../foundation-models/2601.22101-eco-optimizer/README.md)（`eco-optimizer`）：低精度训练通常仍保留高精度 master weights 累积微小更新。ECO 直接在量化权重上更新，将本次重量化误差注入已有动量，避免再保存主权重或持久误差缓冲；Adam 必须使用逐元素有效步长，不能把 SGDM 的标量系数照搬过去。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -195,6 +197,10 @@
 ## Inria
 
 - 2026-10-16 · [BMuon: Budgeting Muon's Spectral Geometry for Structured Compressibility](../../foundation-models/2610.23571-bmuon/README.md)（`bmuon`）：Muon的spectral-norm更新不一定产生容易按隐藏通道剪枝的权重。BMuon不在前向额外加gate，也不只是对训练好的Muon模型剪枝；它让**所有MLP块的隐藏通道共享同一分配预算**，并在每个通道的输入行/输出列两侧共同改变更新几何。
+
+## Institute of Automation, Chinese Academy of Sciences
+
+- 2026-10-25 · [ResCom: Activation Residual Compensation for Large Language Model Quantization](../../foundation-models/2610.35955-rescom/README.md)（`rescom`）：低比特激活把不同输入压到同一量化格点后，只读取量化值的补偿器无法分辨格点内部的差异。ResCom 保留当前前向中的残差 $d=x-Q(x)$，在冻结既有量化模型之后，以低秩分支补回这些残差造成的输出变化；不重新优化主权重或量化器。
 
 ## Institute of Computing Technology, Chinese Academy of Sciences
 
@@ -379,6 +385,7 @@
 
 ## Shanghai Jiao Tong University
 
+- 2026-10-27 · [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../foundation-models/2610.36877-gui-jepa/README.md)（`gui-jepa`）：多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。
 - 2026-10-09 · [Multi-Stream Attention Residuals](../../reproductions/2610.13630-msar/README.md)（`msar`）：标准残差把历史更新压成一个累加向量；AttnRes 能逐层检索，但只有一个深度注意力流。MSAR 保留每个完整 hidden 向量，用序列上下文产生不同尺度的完整视图，再对每个流独立做深度 softmax。
 - 2026-09-10 · [SWRouter: Similarity-Contractive Window Routing for Multi-Turn Large Language Model Conversations](../../foundation-models/2609.11414-swrouter/README.md)（`swrouter`）：按相邻语义相似度收缩多轮窗口，再用对比路由器选模型，并分开评测上下文构造和路由正确性。
 - 2026-07-20 · [C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference](../../reproductions/2607.17715-c2kv/README.md)（`c2kv`）：以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。
@@ -540,6 +547,10 @@
 
 - 2026-10-21 · [Building Auditable AI Text Detectors with Sparse Autoencoders](../../foundation-models/2610.30006-detector-scope/README.md)（`detector-scope`）：DetectorScope 把黑盒检测器的残差流转换为 SAE 稀疏特征，按 token 取最大值后跨层拼接，再用自动解释的验证分数筛掉不可靠概念。轻量 L1 线性头只使用保留特征，因此每个预测能分解成可置零核验的概念贡献，而不是在黑盒输出后补写理由。
 - 2026-10-20 · [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](../../foundation-models/2610.28458-locale-jepa/README.md)（`locale-jepa`）：LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配**均匀球分布**。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。
+
+## University of Science and Technology of China
+
+- 2026-10-27 · [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../foundation-models/2610.36794-select-ttt/README.md)（`select-ttt`）：In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对**用户问题 token**的预测程度，为每个 chunk 生成连续写入倍率。
 
 ## University of Southern California
 

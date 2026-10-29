@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-10-27 · 43 篇主题资料 / 6 篇重点对照
+[Agent](../index.md) · 更新 2026-10-29 · 44 篇主题资料 / 7 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。
 
@@ -31,6 +31,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [Evolving Agent Interfaces](../../../agent-research/2610.28601-agent-s4/README.md) · [原始来源](https://arxiv.org/abs/2610.28601)<br>章节：背景与主要改动、核心公式、成本与复现边界 | 固定任务Agent与Harness，编辑接口代码和使用知识，变异/交叉后代无论暂时分数高低都入种群。 | 验证只用于父本选择且不暴露给构建者；本地仅可信callback控制器，无真实桌面接口演化，完整实验高成本。 |
 | [RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent](../../../agent-research/2610.21791-rsiflow/README.md) · [原始来源](https://arxiv.org/abs/2610.21791)<br>章节：背景与主要改动、核心公式、代码映射、成本与边界 | 依据证据在Model/Harness/Artifacts选择干预，同父代同批比较，仅有效且正增益时接受。 | 失败仍从冻结父代重试，不等于任意代码自改；本地只执行作用域、配对与技能记录，没有模型训练。 |
 | [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](../../../agent-research/2606.26859-agentx/README.md) · [原始来源](https://arxiv.org/abs/2606.26859)<br>章节：背景与主要改动、核心公式、复现边界 | 证据提案、仓库实现、护栏线上A/B和正负资产化组成推荐迭代闭环。 | 主指标改善仍可被护栏否决；作者生产证据与本地确定性mini闭环不同，本地没有用户流量或SGPO大模型训练。 |
+| [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../../agent-research/2610.36826-ruharness/README.md) · [原始来源](https://arxiv.org/abs/2610.36826v1)<br>章节：背景与主要改动、核心公式 | 六格联合后验、2000次抽样0.2分位、active frontier与validation准入。 | 行为标签、执行结果和验证分数外置；统计排序不是完整自进化运行。 |
 
 </div>
 
@@ -47,6 +48,12 @@ Self-Refine 的修订对象是当前输出，Reflexion 的持久项是下次可�
 Agent S4 保留暂时低分后代，验证分用于后续选择父本，这是非贪心搜索；RSIFlow 要有效且相对同父代提高才改变当前状态。HarnessLens 将接纳限制在行为相关的可归因证据，AgentX 的生产发布还要通过关键护栏。因此一个候选存在于档案、在局部验证通过与允许影响线上流量，不能由同一个“已接入”状态概括。这里比较的是规则和作用范围，不将不同论文的成绩排列成优劣。
 
 对照来源：[agent-s4](../../../agent-research/2610.28601-agent-s4/README.md) · [rsiflow](../../../agent-research/2610.21791-rsiflow/README.md) · [harnesslens](../../../agent-research/2608.27311-harnesslens/README.md) · [agentx](../../../agent-research/2606.26859-agentx/README.md)
+
+### 10月29日：新方法与来源变化
+
+RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果联合表用Jeffreys-Dirichlet后验估计保守utility分位，集合新颖性和冗余仍固定来自已测轨迹。它把有限样本不确定性和候选准入分开，只有active准则能进入frontier，最终harness修改还要独立validation严格增益。本地没有LLM评审或harness生成。
+
+对照来源：[self-refine](../../../agent-research/2303.17651-self-refine/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ Agent S4 保留暂时低分后代，验证分用于后续选择父本，这是�
 
     对照来源：[harnesslens](../../../agent-research/2608.27311-harnesslens/README.md) · [agentx](../../../agent-research/2606.26859-agentx/README.md)
 
+### RuHarness为什么不把新颖性和冗余也随每个Dirichlet样本重抽？ {#cross-oct29-method-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 这两项来自固定轨迹集合的重叠关系，不是六格结果概率。把它们一同随机化会改变原文不确定性模型；后验保守分位也不等于已证明真实Agent更强。
+
+    **教学例子：** 教学例：两条准则标记了完全相同的失败轨迹，抽一次成功/失败概率不应让这两集合忽然不再相同。
+
+    对照来源：[self-refine](../../../agent-research/2303.17651-self-refine/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-29** · RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果联合表用Jeffreys-Dirichlet后验估计保守utility分位，集合新颖性和冗余仍固定来自已测轨迹。它把有限样本不确定性和候选准入分开，只有active准则能进入frontier，最终harness修改还要独立validation严格增益。本地没有LLM评审或harness生成。
+
+涉及：[ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
 **2026-10-27** · 首版：比较当前修订、跨trial反思、局部验证、非贪心接口种群、分层干预与有护栏生产闭环。
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 44 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -137,6 +158,7 @@ Agent S4 保留暂时低分后代，验证分用于后续选择父本，这是�
 - [MARS: Modular Agent with Reflective Search for Automated AI Research](../../../agent-research/2602.02660-mars-research/README.md)
 - [Self-Refine](../../../agent-research/2303.17651-self-refine/README.md)
 - [Reflexion](../../../agent-research/2303.11366-reflexion/README.md)
+- [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../../agent-research/2610.36826-ruharness/README.md)
 
 </details>
 

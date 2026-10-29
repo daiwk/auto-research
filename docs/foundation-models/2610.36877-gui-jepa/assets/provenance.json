@@ -1,0 +1,25 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.36877v1",
+  "source_url": "https://arxiv.org/pdf/2610.36877v1#page=3",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "0f06c286657614ad9c00bffe60e8e20edb6d68cd3b5c73b1d9f3ca68f2d315fa",
+  "source_asset_sha256": "0f06c286657614ad9c00bffe60e8e20edb6d68cd3b5c73b1d9f3ca68f2d315fa",
+  "pixel_dimensions": [
+    1191,
+    711
+  ],
+  "copyright": "Original paper authors; fixed arXiv v1 license applies",
+  "description": "Original PDF page crop including Figure2 and full caption; not redrawn",
+  "method_html_sha256": "afa1b222c338324f0dba4ed91db06c996f94ce7442b8db4a37e7fb7d5fe1ed52",
+  "caption": "Figure 2: Overview of GUI-JEPA. Top: on a real AndroidControl step, the frozen JEPA encoder embeds the screenshot once, the residual predictor turns it into one latent per candidate in a single batch, and the structural head and the text matcher score every candidate (bars: a trained base policy’s probabilities on this step; grids are schematic). Bottom: the training stages, and scoring in one pass versus decoding token by token (measured in Section 4.5 ). Circled numbers mark the stage that trains each module (1: JEPA pretraining, 2: policy training, 3: text rankers on the fixed policy); flame = trained, snowflake = frozen; green marks the recorded (correct) action.",
+  "visually_verified": true,
+  "source_pdf_sha256": "e8cf24056df9115b2f4507b9e763372aa8d1c7e877719cac01b5fa1cd98cd1e2",
+  "page": 3,
+  "crop_rect_points": [
+    0.0,
+    0.0,
+    595.2760009765625,
+    355.19708251953125
+  ]
+}

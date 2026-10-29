@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 220 个问题 · 55 篇论文
+[Agent](index.md) / 224 个问题 · 56 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">220 个问题 · 55 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">224 个问题 · 56 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:discernmem" data-paper-title="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems Agent East China Normal University 2026-10-27 团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。仅当负效应发生在适用范围内，而且配对轨迹支持具体缺陷时，才触发改写；已有avoid条件优先约束使用，不靠改写覆盖掉范围错误。修复不是只把眼前任务做对。候选需要同时通过触发任务、过去有用任务和相关任务上的保留性检查；新body生成新版本，父版本的正效果不能冒充新版本可靠性。 完整实验：成本过高，不复现（审查 DONE），不自动重试。图中的检索、LLM语义诊断和团队执行不在本地组件范围内。本地状态：L1 数值与版本规则组件，diagnostic only，不是多 Agent 记忆能力复现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部真实测量得分与显式任务/版本/角色/seed/配置，不是预造的Agent答案。paired_effect拒绝不一致的配对元数据；repair_gate拒绝空集、重复任务或缺触发任务，逐条比较父记忆和无记忆基线。revised_version保留identity/owner，拒绝source任务参与验证，并清空父版本效果。  Agent记忆 配对重放与非退化修复 Agent 记忆与技能：让经验可取回、可失效 一次团队失败，为什么不能直接把用过的记忆全部改写？ 失败可能来自别的角色、工具或不适用的场景。DiscernMem用相同任务、seed和配置的单记忆重放与无记忆重放衡量孤立注入效果；再区分规则内容确有缺陷，还是好规则超出使用范围。负效果本身仍不足以证明内容有错。 教学例：‘先修复源码再跑测试’可能适用于代码bug，但测试环境故障时继续改源码反而有害。应补avoid范围，而不是删除一条本来有用的源码修复经验。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-discernmem-43739873" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-208331253abf4012">一次团队失败，为什么不能直接把用过的记忆全部改写？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adiscernmem">Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · East China Normal University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>失败可能来自别的角色、工具或不适用的场景。DiscernMem用相同任务、seed和配置的单记忆重放与无记忆重放衡量孤立注入效果；再区分规则内容确有缺陷，还是好规则超出使用范围。负效果本身仍不足以证明内容有错。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：‘先修复源码再跑测试’可能适用于代码bug，但测试环境故障时继续改源码反而有害。应补avoid范围，而不是删除一条本来有用的源码修复经验。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36652v1">原论文</a> · <a href="../../../../agent-research/2610.36652-discernmem/">实现解读</a> · <a href="#qa-208331253abf4012">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:discernmem" data-paper-title="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems Agent East China Normal University 2026-10-27 团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。仅当负效应发生在适用范围内，而且配对轨迹支持具体缺陷时，才触发改写；已有avoid条件优先约束使用，不靠改写覆盖掉范围错误。修复不是只把眼前任务做对。候选需要同时通过触发任务、过去有用任务和相关任务上的保留性检查；新body生成新版本，父版本的正效果不能冒充新版本可靠性。 完整实验：成本过高，不复现（审查 DONE），不自动重试。图中的检索、LLM语义诊断和团队执行不在本地组件范围内。本地状态：L1 数值与版本规则组件，diagnostic only，不是多 Agent 记忆能力复现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部真实测量得分与显式任务/版本/角色/seed/配置，不是预造的Agent答案。paired_effect拒绝不一致的配对元数据；repair_gate拒绝空集、重复任务或缺触发任务，逐条比较父记忆和无记忆基线。revised_version保留identity/owner，拒绝source任务参与验证，并清空父版本效果。  Agent记忆 配对重放与非退化修复 Agent 记忆与技能：让经验可取回、可失效 候选修复为什么要同时比较父记忆与无记忆基线，而不是只要求比原规则好？ 父规则可能已经有害；只超过父规则仍可能弱于什么都不注入。论文要求固定触发与历史集合上的每个任务都不弱于两份参照的较大者减容差，还不能增加完全失败次数。它保护已测试任务的行为，不保证没见过的任务都安全。 教学例：父规则0.2、无记忆0.8、候选0.7。虽然候选超过父规则0.5，但默认0.01容差下仍达不到0.79，应拒绝。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-79284be821911bd5">候选修复为什么要同时比较父记忆与无记忆基线，而不是只要求比原规则好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adiscernmem">Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · East China Normal University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>父规则可能已经有害；只超过父规则仍可能弱于什么都不注入。论文要求固定触发与历史集合上的每个任务都不弱于两份参照的较大者减容差，还不能增加完全失败次数。它保护已测试任务的行为，不保证没见过的任务都安全。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：父规则0.2、无记忆0.8、候选0.7。虽然候选超过父规则0.5，但默认0.01容差下仍达不到0.79，应拒绝。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36652v1">原论文</a> · <a href="../../../../agent-research/2610.36652-discernmem/">实现解读</a> · <a href="#qa-79284be821911bd5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:discernmem" data-paper-title="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems Agent East China Normal University 2026-10-27 团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。仅当负效应发生在适用范围内，而且配对轨迹支持具体缺陷时，才触发改写；已有avoid条件优先约束使用，不靠改写覆盖掉范围错误。修复不是只把眼前任务做对。候选需要同时通过触发任务、过去有用任务和相关任务上的保留性检查；新body生成新版本，父版本的正效果不能冒充新版本可靠性。 完整实验：成本过高，不复现（审查 DONE），不自动重试。图中的检索、LLM语义诊断和团队执行不在本地组件范围内。本地状态：L1 数值与版本规则组件，diagnostic only，不是多 Agent 记忆能力复现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部真实测量得分与显式任务/版本/角色/seed/配置，不是预造的Agent答案。paired_effect拒绝不一致的配对元数据；repair_gate拒绝空集、重复任务或缺触发任务，逐条比较父记忆和无记忆基线。revised_version保留identity/owner，拒绝source任务参与验证，并清空父版本效果。  Agent记忆 配对重放与非退化修复 Agent 记忆与技能：让经验可取回、可失效 只在当前失败任务上试修复，与DiscernMem的跨任务验证有什么差别？ 只修眼前任务可能损害旧能力。DiscernMem固定触发、过去正效果与相关任务的验证集合，对每项而非平均分施加门槛；相关任务只要求不退化，不要求一定产生迁移提升。来源任务排除在历史验证之外，避免用记忆诞生的原例反复证明自己。 教学例：触发题从0.4升到0.9，旧任务从0.8掉到0.5；两题平均分变好也不能掩盖旧任务退化，应拒绝该修复。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ceac2d055153b0af">只在当前失败任务上试修复，与DiscernMem的跨任务验证有什么差别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adiscernmem">Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · East China Normal University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>只修眼前任务可能损害旧能力。DiscernMem固定触发、过去正效果与相关任务的验证集合，对每项而非平均分施加门槛；相关任务只要求不退化，不要求一定产生迁移提升。来源任务排除在历史验证之外，避免用记忆诞生的原例反复证明自己。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：触发题从0.4升到0.9，旧任务从0.8掉到0.5；两题平均分变好也不能掩盖旧任务退化，应拒绝该修复。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36652v1">原论文</a> · <a href="../../../../agent-research/2610.36652-discernmem/">实现解读</a> · <a href="#qa-ceac2d055153b0af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:discernmem" data-paper-title="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems Agent East China Normal University 2026-10-27 团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。仅当负效应发生在适用范围内，而且配对轨迹支持具体缺陷时，才触发改写；已有avoid条件优先约束使用，不靠改写覆盖掉范围错误。修复不是只把眼前任务做对。候选需要同时通过触发任务、过去有用任务和相关任务上的保留性检查；新body生成新版本，父版本的正效果不能冒充新版本可靠性。 完整实验：成本过高，不复现（审查 DONE），不自动重试。图中的检索、LLM语义诊断和团队执行不在本地组件范围内。本地状态：L1 数值与版本规则组件，diagnostic only，不是多 Agent 记忆能力复现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部真实测量得分与显式任务/版本/角色/seed/配置，不是预造的Agent答案。paired_effect拒绝不一致的配对元数据；repair_gate拒绝空集、重复任务或缺触发任务，逐条比较父记忆和无记忆基线。revised_version保留identity/owner，拒绝source任务参与验证，并清空父版本效果。  Agent记忆 配对重放与非退化修复 Agent 记忆与技能：让经验可取回、可失效 记忆body被改成新版本后，为何不能继承父版本累计的成功效果？ 效果证据绑定的是被实际使用的旧body；新规则尚未证明同样可靠。论文保留记忆identity、owner及合规修正记录，但清空旧效果，新版本为provisional。组件只执行这个版本规则，不代表已经实现LLM修复或多Agent任务能力。 教学例：v2在历史10题表现好，v3增加一个停止条件后，不能直接写‘v3已在10题验证’；v2记录需保留，而v3的effect记录从空开始。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3fc0461b8244cb89">记忆body被改成新版本后，为何不能继承父版本累计的成功效果？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Adiscernmem">Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · East China Normal University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>效果证据绑定的是被实际使用的旧body；新规则尚未证明同样可靠。论文保留记忆identity、owner及合规修正记录，但清空旧效果，新版本为provisional。组件只执行这个版本规则，不代表已经实现LLM修复或多Agent任务能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：v2在历史10题表现好，v3增加一个停止条件后，不能直接写‘v3已在10题验证’；v2记录需保留，而v3的effect记录从空开始。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36652v1">原论文</a> · <a href="../../../../agent-research/2610.36652-discernmem/">实现解读</a> · <a href="#qa-3fc0461b8244cb89">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cache-engineering" data-paper-title="Cache Engineering for Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Cache Engineering for Agents Agent Tsinghua University 2026-10-20 删改早期对话文本会使后续KV失效，重prefill又产生费用。作者保留逻辑文本，直接drop旧工具响应的KV，必要时repos重设保留键的位置；缓存状态取决于操作发生的历史，不能只根据最终token前缀判断是否可复用。AKV基于扩展radix结构管理位置版本、驱逐与恢复，并探索RSI生成缓存策略。§3–4 成本过高，不复现（审查 DONE）。本轮未实现、未运行、未下载模型。本轮未实现、未运行、未下载模型。不提供本地执行命令，不生成GPU收据或虚构指标；上游安装方式请看作者仓库。不能用少量RoPE张量运算冒充已接入AKV系统、真实推理或RSI。  Agent运行时 KV缓存管理与推理效率 Agent 记忆与技能：让经验可取回、可失效 长程 Agent 为什么会出现“聊天记录还在，推理缓存却放不下”的问题？ 逻辑对话保存文本，推理时的 KV cache 保存各层对历史 token 的中间表示，二者占用和用途不同。对话增长会让缓存内存与后续读取开销增加；Cache Engineering 研究直接管理这些状态，在保留逻辑记录的同时控制计算资源，但删缓存后的恢复仍有成本。 教学例：一万行工具日志仍保存在会话中，但暂时不再需要其 KV；以后重新用到日志时，系统可能必须重新计算表示。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-cache-engineering-55c07860" class="ar-learning-paper-anchor"></span>

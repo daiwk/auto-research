@@ -111,7 +111,8 @@
         "agent-research:memtool",
         "agent-research:memgpt",
         "agent-research:voyager",
-        "agent-research:generative-agents"
+        "agent-research:generative-agents",
+        "agent-research:discernmem"
       ]
     },
     {
@@ -243,7 +244,8 @@
         "agent-research:polca",
         "agent-research:mars-research",
         "agent-research:self-refine",
-        "agent-research:reflexion"
+        "agent-research:reflexion",
+        "agent-research:ruharness"
       ]
     },
     {

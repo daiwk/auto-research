@@ -7,7 +7,7 @@ hide:
 
 # 跨模态对齐：表征、连接器与监督
 
-[多模态](index.md) / 80 个问题 · 20 篇论文
+[多模态](index.md) / 81 个问题 · 20 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">80 个问题 · 20 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">81 个问题 · 20 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:flexglue" data-paper-title="FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation 多模态大模型 ETH Zurich 2026-10-23 稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。共视分支给每个token一个sigmoid vote，并在每层监督； 成本过高，不复现（审查 DONE）。原文第7页：冻结DINOv3 ConvNeXt-B、9层512维Transformer、8数据集、512×512图像，50epochs、每epoch150K样本，在4张H200上约4 GPU-days；gradient checkpointing后4张RTX4090约1.5天，另有10epoch消歧fine-tune与多数据集/重建评测。这里保持作者的GPU-days口径，不虚构单卡总时长。本轮没有operator、local command、metrics或GPU收据，gpu_validation_passed=false。保留作者仓库作为可查来源；  多模态表征 视觉匹配与几何 多模态 跨模态对齐：表征、连接器与监督 FlexGlue 的稠密网格为什么仍能处理任意位置的匹配查询？ 模型先在 stride-8 特征网格上进行全局交互，再把指定查询插值到网格特征中，通过跨图注意力读取另一图坐标。查询不必恰好位于某个固定 cell 中心，因此可在稠密表示上支持连续位置匹配，而非只返回固定关键点集合。 例如查询落在四个网格点之间，可先插值得到其特征，再到另一张图读取对应位置，而无需把它硬移到最近格点。 2026-10-27">
@@ -241,57 +241,70 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.12707">原论文</a> · <a href="../../../../reproductions/2610.12707-umrm/">实现解读</a> · <a href="#qa-b5de587fd0730601">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Open Multimodal Embeddings" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Open Multimodal Embeddings 多模态大模型 Google DeepMind 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。官方总参数约 740M，其中文本约 270M、视觉约 170M、音频约 300M。本地只实例化文本和视觉，约 440M，不使用随机小模型代替官方 checkpoint。 使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 统一 768 维空间是否意味着四种模态总要同时输入？ 不是。统一空间指各模态结果可以用同一种向量相似度比较，模态塔可按任务选择加载。文本、图像、音频和视频的支持范围也要与实际运行路径区分；当前本地只验证官方 checkpoint 的文本和图像，不代表其他输入管线已接通。 例如图搜文只需图像与文本路径；只运行这两条路径后，不能把音频检索也列作本地已验证功能。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Unified and Efficient Multimodal Representations" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Unified and Efficient Multimodal Representations 多模态大模型 Google 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。正式论文报告总参数744M，其中文本骨干（含embedder）271M、视觉167M、音频305M；作者报告图文路径439M，近似项存在取整。本地只实例化文本和视觉，不使用随机小模型代替官方checkpoint。 完整预训练及大型 benchmark 成本过高，不复现（审查 DONE），不自行扩规模或自动重试。使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 统一 768 维空间是否意味着四种模态总要同时输入？ 不是。统一空间指各模态结果可以用同一种向量相似度比较，模态塔可按任务选择加载。文本、图像、音频和视频的支持范围也要与实际运行路径区分；当前本地只验证官方 checkpoint 的文本和图像，不代表其他输入管线已接通。 例如图搜文只需图像与文本路径；只运行这两条路径后，不能把音频检索也列作本地已验证功能。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <span id="paper-multimodal-models-embedding-gemma2-1f83fce4" class="ar-learning-paper-anchor"></span>
 <p class="ar-learning-level">基础理解</p>
 <h2 id="qa-8d009645d6382686">统一 768 维空间是否意味着四种模态总要同时输入？</h2>
-<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Open Multimodal Embeddings</a></p>
-<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Unified and Efficient Multimodal Representations</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
 <p><strong>答案：</strong>不是。统一空间指各模态结果可以用同一种向量相似度比较，模态塔可按任务选择加载。文本、图像、音频和视频的支持范围也要与实际运行路径区分；当前本地只验证官方 checkpoint 的文本和图像，不代表其他输入管线已接通。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>例如图搜文只需图像与文本路径；只运行这两条路径后，不能把音频检索也列作本地已验证功能。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-8d009645d6382686">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37364v1">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-8d009645d6382686">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Open Multimodal Embeddings" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Open Multimodal Embeddings 多模态大模型 Google DeepMind 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。官方总参数约 740M，其中文本约 270M、视觉约 170M、音频约 300M。本地只实例化文本和视觉，约 440M，不使用随机小模型代替官方 checkpoint。 使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 Matryoshka 向量截断后为什么必须再次归一化？ 截断保留前若干维后，向量范数通常不再为一；直接点积会把保留能量差异混进相似度。重新归一化恢复余弦比较的尺度。它利用模型训练好的前缀表示，不等于任意 embedding 都能随意截断；池化时也必须排除 padding。 例如两条七百六十八维向量都截成一百二十八维，先各自归一化再检索，避免范数较大者平白占优。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Unified and Efficient Multimodal Representations" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Unified and Efficient Multimodal Representations 多模态大模型 Google 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。正式论文报告总参数744M，其中文本骨干（含embedder）271M、视觉167M、音频305M；作者报告图文路径439M，近似项存在取整。本地只实例化文本和视觉，不使用随机小模型代替官方checkpoint。 完整预训练及大型 benchmark 成本过高，不复现（审查 DONE），不自行扩规模或自动重试。使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 Matryoshka 向量截断后为什么必须再次归一化？ 截断保留前若干维后，向量范数通常不再为一；直接点积会把保留能量差异混进相似度。重新归一化恢复余弦比较的尺度。它利用模型训练好的前缀表示，不等于任意 embedding 都能随意截断；池化时也必须排除 padding。 例如两条七百六十八维向量都截成一百二十八维，先各自归一化再检索，避免范数较大者平白占优。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <p class="ar-learning-level">核心机制</p>
 <h2 id="qa-c1671088f314bae5">Matryoshka 向量截断后为什么必须再次归一化？</h2>
-<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Open Multimodal Embeddings</a></p>
-<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Unified and Efficient Multimodal Representations</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
 <p><strong>答案：</strong>截断保留前若干维后，向量范数通常不再为一；直接点积会把保留能量差异混进相似度。重新归一化恢复余弦比较的尺度。它利用模型训练好的前缀表示，不等于任意 embedding 都能随意截断；池化时也必须排除 padding。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>例如两条七百六十八维向量都截成一百二十八维，先各自归一化再检索，避免范数较大者平白占优。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-c1671088f314bae5">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37364v1">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-c1671088f314bae5">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Open Multimodal Embeddings" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Open Multimodal Embeddings 多模态大模型 Google DeepMind 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。官方总参数约 740M，其中文本约 270M、视觉约 170M、音频约 300M。本地只实例化文本和视觉，约 440M，不使用随机小模型代替官方 checkpoint。 使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 MRL 截断与随机删去向量维度有什么区别？ MRL 训练使预定的前缀维度也能承担表示任务，因此可保留前 128、256 或 512 维，再归一化。随机挑选维度没有这种训练约定；较短前缀节省存储与检索成本，但具体质量变化仍需按任务和固定维度报告。 例如完整向量有七百六十八维，取前一百二十八维属于预设使用方式；每次随机抽一百二十八维不是同一种压缩。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Unified and Efficient Multimodal Representations" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Unified and Efficient Multimodal Representations 多模态大模型 Google 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。正式论文报告总参数744M，其中文本骨干（含embedder）271M、视觉167M、音频305M；作者报告图文路径439M，近似项存在取整。本地只实例化文本和视觉，不使用随机小模型代替官方checkpoint。 完整预训练及大型 benchmark 成本过高，不复现（审查 DONE），不自行扩规模或自动重试。使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 MRL 截断与随机删去向量维度有什么区别？ MRL 训练使预定的前缀维度也能承担表示任务，因此可保留前 128、256 或 512 维，再归一化。随机挑选维度没有这种训练约定；较短前缀节省存储与检索成本，但具体质量变化仍需按任务和固定维度报告。 例如完整向量有七百六十八维，取前一百二十八维属于预设使用方式；每次随机抽一百二十八维不是同一种压缩。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <p class="ar-learning-level">方法对比</p>
 <h2 id="qa-eed6fdf443ec6128">MRL 截断与随机删去向量维度有什么区别？</h2>
-<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Open Multimodal Embeddings</a></p>
-<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Unified and Efficient Multimodal Representations</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
 <p><strong>答案：</strong>MRL 训练使预定的前缀维度也能承担表示任务，因此可保留前 128、256 或 512 维，再归一化。随机挑选维度没有这种训练约定；较短前缀节省存储与检索成本，但具体质量变化仍需按任务和固定维度报告。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>例如完整向量有七百六十八维，取前一百二十八维属于预设使用方式；每次随机抽一百二十八维不是同一种压缩。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-eed6fdf443ec6128">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37364v1">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-eed6fdf443ec6128">问题链接</a></p>
 </details>
 </article>
-<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Open Multimodal Embeddings" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Open Multimodal Embeddings 多模态大模型 Google DeepMind 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。官方总参数约 740M，其中文本约 270M、视觉约 170M、音频约 300M。本地只实例化文本和视觉，约 440M，不使用随机小模型代替官方 checkpoint。 使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 均值池化、截断和精度设置中有哪些不可忽略的细节？ 池化必须用 attention mask 排除 padding；截取前缀后再次 L2 归一化。文本查询与文档采用各自前缀，图像不加文本前缀；官方激活范围可能让 FP16 产生非有限值，本地固定 FP32，并显式拒绝非有限值或零向量。 例如两条内容相同、补齐长度不同的文本，应在 mask 池化后得到一致表示；把 padding 算入均值会制造长度依赖。 2026-10-27">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Unified and Efficient Multimodal Representations" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Unified and Efficient Multimodal Representations 多模态大模型 Google 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。正式论文报告总参数744M，其中文本骨干（含embedder）271M、视觉167M、音频305M；作者报告图文路径439M，近似项存在取整。本地只实例化文本和视觉，不使用随机小模型代替官方checkpoint。 完整预训练及大型 benchmark 成本过高，不复现（审查 DONE），不自行扩规模或自动重试。使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 新技术论文说先池化再投影，本地先读官方last_hidden_state再池化，是否少了一层？ 没有直接少一层。固定官方实现已经在返回last_hidden_state前做无偏置embedding_projection，返回的是768维token表示。同权mask均值与线性投影可交换，因此本地池化投影后的token与论文顺序一致，不能再额外投影一次。新论文补充不把旧16图GPU结果升级为完整七套benchmark。 教学例：两个token先各乘同一矩阵再平均，等于先平均再乘该矩阵；若换成非线性层或每token不同权重，就不能沿用这个等价关系。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6a5d62a51c0cdd94">新技术论文说先池化再投影，本地先读官方last_hidden_state再池化，是否少了一层？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Unified and Efficient Multimodal Representations</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有直接少一层。固定官方实现已经在返回last_hidden_state前做无偏置embedding_projection，返回的是768维token表示。同权mask均值与线性投影可交换，因此本地池化投影后的token与论文顺序一致，不能再额外投影一次。新论文补充不把旧16图GPU结果升级为完整七套benchmark。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个token先各乘同一矩阵再平均，等于先平均再乘该矩阵；若换成非线性层或每token不同权重，就不能沿用这个等价关系。</p>
+<p class="ar-learning-sources">依据：核心公式、结果与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37364v1">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-6a5d62a51c0cdd94">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:embedding-gemma2" data-paper-title="EmbeddingGemma 2: Unified and Efficient Multimodal Representations" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="EmbeddingGemma 2: Unified and Efficient Multimodal Representations 多模态大模型 Google 2026-10-06 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。正式论文报告总参数744M，其中文本骨干（含embedder）271M、视觉167M、音频305M；作者报告图文路径439M，近似项存在取整。本地只实例化文本和视觉，不使用随机小模型代替官方checkpoint。 完整预训练及大型 benchmark 成本过高，不复现（审查 DONE），不自行扩规模或自动重试。使用独立环境，避免改变旧论文依赖的 HF Hub &lt;2 环境。固定官方 Transformers 源码，而不是长期依赖浮动 main；缺少架构时直接报错，不换成别的 embedding 模型。  多模态基础模型 跨模态检索 Matryoshka 表示 多模态 跨模态对齐：表征、连接器与监督 均值池化、截断和精度设置中有哪些不可忽略的细节？ 池化必须用 attention mask 排除 padding；截取前缀后再次 L2 归一化。文本查询与文档采用各自前缀，图像不加文本前缀；官方激活范围可能让 FP16 产生非有限值，本地固定 FP32，并显式拒绝非有限值或零向量。 例如两条内容相同、补齐长度不同的文本，应在 mask 池化后得到一致表示；把 padding 算入均值会制造长度依赖。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <p class="ar-learning-level">实现细节</p>
 <h2 id="qa-1730598e354b01ed">均值池化、截断和精度设置中有哪些不可忽略的细节？</h2>
-<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Open Multimodal Embeddings</a></p>
-<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google DeepMind</p>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aembedding-gemma2">EmbeddingGemma 2: Unified and Efficient Multimodal Representations</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-27 · Google</p>
 <details class="ar-learning-answer"><summary>展开答案与例子</summary>
 <p><strong>答案：</strong>池化必须用 attention mask 排除 padding；截取前缀后再次 L2 归一化。文本查询与文档采用各自前缀，图像不加文本前缀；官方激活范围可能让 FP16 产生非有限值，本地固定 FP32，并显式拒绝非有限值或零向量。</p>
 <p class="ar-learning-example"><strong>教学例子：</strong>例如两条内容相同、补齐长度不同的文本，应在 mask 池化后得到一致表示；把 padding 算入均值会制造长度依赖。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、结果与边界；例子用于解释机制。</p>
-<p class="ar-learning-card__links"><a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-1730598e354b01ed">问题链接</a></p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37364v1">原论文</a> · <a href="../../../../multimodal-models/embeddinggemma2/">实现解读</a> · <a href="#qa-1730598e354b01ed">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:omni-embed-mini" data-paper-title="Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation 基础模型 原文首页未列第一作者机构 2026-10-01 冻结文本骨干，把每个媒体样本的稠密级联描述经同一文本骨干得到 teacher target，再训练轻量投影器和分阶段 LoRA 对齐六种模态。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。执行同几何空间的稠密描述蒸馏；未训练模态编码器或复现实测榜单。执行同几何空间的稠密描述蒸馏；未训练模态编码器或复现实测榜单。本地对照口径：基线为机制关闭或默认状态，实验组执行定义性算子；L1 不报告正式相对提升，百分比不适用。  多模态嵌入 蒸馏 LoRA 多模态 跨模态对齐：表征、连接器与监督 Omni-Embed-Mini接收媒体后，要输出一份新媒体，还是用于检索的向量？ 这里学习的是媒体的语义embedding，媒体表示与描述文本目标在同一向量空间比较；不是根据描述生成图片、音频或视频。稠密描述在训练时提供目标表示，实际媒体路径仍要编码媒体输入，不能把“多模态”直接理解成具备各种媒体生成能力。 教学例子：给一段音频得到可与文字查询比较的向量，是表示任务；按一句文字合成一段音频，则是另一个生成任务。 2026-10-27">

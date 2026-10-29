@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1034 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1043 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -33,12 +33,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/generative-retrieval-reasoning/">生成一个物品，先后跨过码本、模型分布与合法目录三道关</a></h2>
 <p>TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。</p>
-<p class="ar-learning-topic-meta">5 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">6 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/feedback-multitask-causality/">从CTR到满意度与uplift：先定义监督对象，再决定怎样共享</a></h2>
 <p>ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。</p>
-<p class="ar-learning-topic-meta">5 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">6 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/slates-business-value/">好物品怎样组成好列表：边际价值、策略权重与约束</a></h2>
@@ -57,7 +57,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/context-and-state/">长上下文不是一条轴：位置、读取与状态压缩</a></h2>
 <p>先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。</p>
-<p class="ar-learning-topic-meta">5 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/conditional-compute/">按需算力：选择专家、跳过计算，还是查回旧知识</a></h2>
@@ -72,7 +72,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/compression-and-cache/">推理压缩先找瓶颈：权重、KV 内容与缓存层级</a></h2>
 <p>AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">8 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/generation-paths/">少做串行步骤：验证草稿与学习迭代不是同一条路</a></h2>
@@ -110,7 +110,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/alignment-interfaces/">多模态对齐到底对齐什么：向量、视觉接口还是证据依赖</a></h2>
 <p>CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">6 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/visual-evidence-budget/">少看、晚看还是再看：把视觉预算放到正确阶段</a></h2>
@@ -120,7 +120,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/world-state-actions/">会预测下一幕，还不等于会行动或保持同一个世界</a></h2>
 <p>世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 </div></details>
 
@@ -168,17 +168,17 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/memory-and-skills/">经验进入长期系统前，要解决存取、价值与准入</a></h2>
 <p>MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/tools-and-collaboration/">从会调用到能交付：工具接口、可靠性与协作合同</a></h2>
 <p>Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">6 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>

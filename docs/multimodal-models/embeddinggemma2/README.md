@@ -2,13 +2,13 @@
 
 ## 论文信息
 
-这是官方模型发布与 checkpoint 接入，不是另造一篇 arXiv 论文，也不声称复现其预训练。
+这是10月6日官方模型发布与既有checkpoint接入；10月27日补充同模型的正式技术论文，不另造重复条目，也不声称复现其预训练。本轮只更新文献和学习说明，未更改运行代码或重跑/升级10月14日的GPU证据。
 
 | 项目 | 内容 |
 | --- | --- |
-| 论文链接 | [Google 官方发布说明](https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/)；[固定版本模型卡](https://huggingface.co/google/embeddinggemma-2/blob/914f7f89142e33e77833254d9c9b90c3cef7303b/README.md) |
-| 公司/机构 | Google DeepMind（官方发布，无论文一作排序） |
-| 首次公开日期 | 2026-10-06（官方发布日；仓库创建日不是发布日期） |
+| 论文链接 | [EmbeddingGemma 2: Unified and Efficient Multimodal Representations](https://arxiv.org/abs/2610.37364v1)；[Google原始模型发布](https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/)；[固定版本模型卡](https://huggingface.co/google/embeddinggemma-2/blob/914f7f89142e33e77833254d9c9b90c3cef7303b/README.md) |
+| 公司/机构 | 一作Henrique Schechter Vera；EmbeddingGemma Team, Google（论文列共同一作） |
+| 首次公开日期 | 模型官方发布2026-10-06；正式论文arXiv v1为2026-10-27 15:00:42 UTC。两日期分别记录，仓库创建日不是发布日期 |
 | 原文开源代码 | 是：[官方 Transformers 模型实现](https://github.com/huggingface/transformers/tree/28034545c35acac05793695bd5c878f66e6b544e/src/transformers/models/embedding_gemma2)与[公开权重](https://huggingface.co/google/embeddinggemma-2/tree/914f7f89142e33e77833254d9c9b90c3cef7303b)，Apache-2.0；完整原始训练数据/配方未公开 |
 | Adapter | `embedding-gemma2`（独立 checkpoint 推理组件，未注册论文训练 adapter） |
 | 本地复现代码 | [`src/auto_research/multimodal/embedding_gemma2.py`](https://github.com/daiwk/auto-research/blob/main/src/auto_research/multimodal/embedding_gemma2.py)；`scripts/run_embedding_gemma2.py` |
@@ -19,7 +19,7 @@
 
 EmbeddingGemma 2 将文本、图像、音频与视频映射到统一的 768 维空间，支持检索、分类和聚类。独立模态塔可以按需关闭；文本使用任务前缀，输出经 attention-mask 均值池化，MRL 允许保留前 128/256/512 维并重新归一化，以权衡质量与向量存储成本。
 
-官方总参数约 740M，其中文本约 270M、视觉约 170M、音频约 300M。本地只实例化文本和视觉，约 440M，不使用随机小模型代替官方 checkpoint。
+正式论文报告总参数744M，其中文本骨干（含embedder）271M、视觉167M、音频305M；作者报告图文路径439M，近似项存在取整。本地只实例化文本和视觉，不使用随机小模型代替官方checkpoint。论文还明确简化PLE由共享输入embedding投影而不是新增专用查表，不能据此宣称本地复现了其多阶段训练。
 
 ### 架构与数据流
 
@@ -35,7 +35,15 @@ flowchart LR
     N --> R[图文双向多正例检索]
 ```
 
-模型卡没有独立论文架构图；上图为本地重绘，不冒充原论文截图。官方参数、选择性加载和各维度结果均可在固定版本模型卡核对。
+上图为本地重绘，不冒充原论文截图；原先只有模型卡，现已补正式技术论文及其原图。官方参数、选择性加载和各维度结果仍可在固定版本模型卡核对。
+
+<!-- paper-figure:start -->
+### 原论文关键图
+
+![正式论文Figure1及图注所在页：统一多模态嵌入空间](assets/paper-figure-01.png)
+
+来自[固定v1 PDF](https://arxiv.org/pdf/2610.37364v1)，整页截图未重绘，来源页码和哈希见`assets/provenance.json`；论文CC BY4.0，版权归作者。原图列出的音频、视频能力不代表本地已接入这些路径。
+<!-- paper-figure:end -->
 
 ### 核心公式
 
@@ -45,6 +53,8 @@ e_d=\frac{z_{1:d}}{\lVert z_{1:d}\rVert_2},\quad d\in\{128,256,512,768\}.
 $$
 
 padding token 必须排除，截断后必须再次归一化。图像无需文本任务前缀；查询文本使用 `task: search result | query: `，文档使用 `title: none | text: `。不得使用 FP16：官方指出其激活范围可能产生非有限值；本地固定 FP32，并在输出处检查非有限值和零向量。
+
+正式论文Section2.1另写作“512维骨干均值池化→线性投影到768→L2”。固定官方Transformers提交的`EmbeddingGemma2TextModel`已在返回`last_hidden_state`前应用无偏置`embedding_projection`；本地公式中的 $h_t$ 是投影后的token表示。线性投影和同权mask均值可交换，因此没有缺省一层投影，也不能再投影一次。本轮只核对源码映射，不把旧16图结果称为新论文全部七套评测已复现。
 
 ### 论文离线与线上效果
 
@@ -89,7 +99,7 @@ checkpoint 固定为 `914f7f89142e33e77833254d9c9b90c3cef7303b`；只下载约 1
 
 详见[真实推理指标](metrics/coco16-a100-seed42.json)与[绑定源码的 GPU 回执](../../gpu-validations/embedding-gemma2-a100-20261014.json)。首次实跑发现平铺图像列表被官方 processor 当成单个多图样本，造成样本轴合并和 scorer 报错；失败及修复前 commit 保留在产物中。修复为嵌套单图 batch 后，在**同一**模型/样本/预算重新验证通过，没有为了效果改变评测条件。
 
-这是小候选库上的图文检索链路验证，不是完整 COCO/MTEB/MMEB，也不是训练或多种子模型比较。当前没有音频、视频、跨模态交错输入或 evolve genome 接入。完整预训练及大型 benchmark 按成本门槛暂缓，不自行扩规模。
+这是小候选库上的图文检索链路验证，不是完整 COCO/MTEB/MMEB，也不是训练或多种子模型比较。当前没有音频、视频、跨模态交错输入或 evolve genome 接入。完整预训练及大型 benchmark **成本过高，不复现（审查 DONE）**，不自行扩规模或自动重试。
 
 ### 代码映射
 

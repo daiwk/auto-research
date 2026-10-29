@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:rescom": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "为什么已经量化好的模型，还能从当前激活的舍入残差中找回信息？",
+          "answer": "量化把一段连续输入映射到同一个格点，只看量化值无法分辨格点内的不同输入。但当前前向在舍入前后都能看到激活，两者之差仍保留被丢掉的信息。ResCom把这份残差送入固定低秩分支，而不是重新训练量化器。",
+          "example": "教学例子：1.01与1.04都舍入为1.0，只看1.0的分支输出相同；残差0.01与0.04却允许补偿器给出不同输出。这不是论文模型准确率。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "mechanism",
+          "level": "mechanism",
+          "question": "ResCom为什么对白化后的输出交叉统计做SVD，而不是直接截断主权重？",
+          "answer": "秩预算应分给真实出现且会影响输出的残差方向。残差Gram矩阵描述校准分布的尺度与相关性，误差-残差交叉统计描述其输出作用；Cholesky白化后截断SVD求解的是带ridge的输出重建目标。直接截断权重没有利用残差分布，目标不同。",
+          "example": "教学例子：某方向残差很大却被主层几乎抑制，另一个方向残差小但被放大；有限秩应由输出损失判断，而非只按残差幅度选。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "给量化输入加低秩分支，与给舍入残差加低秩分支，关键差别是什么？",
+          "answer": "前者仍只能读取量化值，因此无法区分落在同一格点的输入；后者读取被删除的部分，在同一预算下拥有不同的信息。ResCom又保持既有主路径冻结，所以它也不同于先拆出高精度权重、再重新量化剩余权重的方案。",
+          "example": "教学例子：先分走一部分权重再量化，会改变主路径校准问题；在已冻结路径旁加UVd+b则不改变原量化设置，两者不能作为同一个实现。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "为什么收集一层统计后立刻挂上补偿，会破坏ResCom的校准合同？",
+          "answer": "早层补偿改变后层所见激活，后层统计就不再来自同一个冻结原模型。论文先收集所有目标层，再安装分支；本地流式合并只合并同一冻结映射的样本。另外G与C是未除样本数的和，随意取平均而不调整ridge也会改变解。",
+          "example": "教学例子：把样本数翻倍后G、C都加倍，固定ridge的相对强度随之变化；若悄悄把G、C除以样本数，不能继续声称同一个正则化问题。",
+          "source_sections": ["核心公式", "本地复现", "检查与负控"],
+          "added": "2026-10-29"
+        }
+      ]
+    },
+    "foundation-models:select-ttt": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "Select-TTT改变的是上下文检索，还是写入fast weights的力度？",
+          "answer": "它保留In-Place TTT的分chunk写入，只按问题相关性缩放每个chunk的学习率。相关性来自冻结LM输出头对问题token的负对数概率，不另训检索器，也不直接丢弃所有低分chunk。问题不同，写入倍率也可能不同。",
+          "example": "教学例子：同一长对话中，问搬家日期和问饮食偏好时，应强化的片段不同；这不表示模型拿到了哪一段包含标准答案的标签。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "mechanism",
+          "level": "mechanism",
+          "question": "为什么chunk相关性取最低CE位置的top-k均值，而不是最高CE？",
+          "answer": "这里CE是问题token在当前hidden诱导的词表分布下的平均负对数概率；越低，说明该位置越能预测问题词汇。取最低CE的若干位置可保留局部相关证据，同时比只取单个最小值更稳健。把方向反过来会强化最不相关的位置。",
+          "example": "教学例子：两位置的查询CE为1和6，取最相关的一项应选1；选6相当于把低概率误作高相关。问题序列中重复的token仍按出现次数计入平均。",
+          "source_sections": ["核心公式", "检查与负控"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "为什么不能把Select-TTT描述成“严格守恒的写入预算分配”？",
+          "answer": "乘chunk数后的softmax在没有clip时和为chunk数；随后上限截断可能降低总和。论文描述近似保持平均学习率，不等于截断后严格守恒。再归一化会改变Eq.10，还可能重新超过单chunk上限，不能悄悄替换。",
+          "example": "教学例子：三个chunk的softmax几乎全压到第一个，乘3后约为[3,0,0]；上限1.2后总和约1.2，不是3。这是公式例子，不是QA实验。",
+          "source_sections": ["核心公式", "检查与负控"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "fast-weight参考实现为何必须先输出当前chunk，再写入它的keys与values？",
+          "answer": "当前chunk输出使用更新前的状态，随后才把该chunk信息写入供后续使用。若先写后读，当前输出就利用了本应更新后才存在的value，改变因果顺序。本地只验证这种张量状态变化；真实NTP对齐特征、backbone和长对话评测尚未接入。",
+          "example": "教学例子：初始W为0，第一个chunk先输出0，再写成W=1，第二个才能读到1；若第一个就输出1，已把当前写入提前使用。",
+          "source_sections": ["核心公式", "本地复现", "检查与负控"],
+          "added": "2026-10-29"
+        }
+      ]
+    },
+    "foundation-models:gui-jepa": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "GUI-JEPA为什么不需要逐token生成动作？",
+          "answer": "它先从可访问性树枚举候选，再让每个候选条件化画面latent，一次批量打分选动作。动作空间来自观测侧枚举，不是语言模型自由生成。因此速度取决于候选数，也依赖像素型Agent不一定拥有的a11y输入，不能直接比较所有GUI系统。",
+          "example": "教学例子：页面已有三种可执行按钮动作，系统分别算三个分数后选最高者；这不同于先生成JSON文本，再解析其中坐标。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "mechanism",
+          "level": "mechanism",
+          "question": "为什么候选的动作与ROI需要先经过残差predictor，而不是直接送结构打分头？",
+          "answer": "论文刻意让候选相关视觉信息通过条件化latent路径，避免打分头绕开JEPA predictor。动作与ROI影响query，三层Transformer产生残差latent，再做ROI与全局池化。它用决策损失训练，不自动意味着这个latent是准确的未来画面预测。",
+          "example": "教学例子：两个都是click的按钮，ROI内容与坐标不同，应产生不同条件latent；若直接把原ROI接到额外捷径头，不能用该结果证明predictor有用。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "GUI-JEPA的latent打分，与“预测下一状态然后选最接近目标”有何区别？",
+          "answer": "它将latent作为通过listwise动作损失塑造的决策特征，而非把到目标的latent距离当作价值。论文随机初始化predictor也能匹配dynamics预训练版本，提示决策相关性和动力学预测不是一回事。不能从动作分数改善推导完整世界模型准确。",
+          "example": "教学例子：点击确认可能使画面变化很小却完成任务，打开动画可能让视觉距离更接近某目标图但动作错误；决策分数不等于像素或latent相似度。",
+          "source_sections": ["背景与主要改动", "核心公式", "论文离线与线上效果"],
+          "added": "2026-10-29"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "本地三层predictor和真实梯度通过验证，是否等于已经能操作Android？",
+          "answer": "不能。当前接口只读外部画面与condition latent，验证残差结构头、候选mask和加权listwise损失。编码器、a11y枚举、MiniLM ranker与执行环境都没有接入；正例仅给训练loss，不能传进forward让模型看答案。GPU张量验证不是AndroidControl成功率。",
+          "example": "教学例子：给两个合法latent候选反向更新参数，只能证明梯度路径工作；真正打开应用还需要从截图生成latent、找到合法候选、执行并观察下一页面。",
+          "source_sections": ["本地复现", "检查与负控", "高成本完整实验"],
+          "added": "2026-10-29"
+        }
+      ]
+    }
+  }
+}

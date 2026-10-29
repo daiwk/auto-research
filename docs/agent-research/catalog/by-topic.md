@@ -91,6 +91,10 @@
 
 - [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](../2609.18417-dependency-refinement/README.md)（`dependency-refinement`）：把多轮轨迹表示为轮级依赖 DAG，依次执行叶节点裁剪、严格合并和宽松合并，减少冗余消息同时保留最终答案依赖。
 
+### Agent记忆
+
+- [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../2610.36652-discernmem/README.md)（`discernmem`）：团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。
+
 ### 工具使用与可靠性
 
 - [Diviner: Agentic RCA with Human-Governed Adaptation for Large-Scale Infrastructure](../2610.21281-diviner/README.md)（`diviner`）：生产事故的症状可能跨推荐、排序、数据、配置和算力服务传播。LLM 能调用工具并不代表它能可靠诊断：超时不等于无异常，历史相似事故不证明本次根因，事后总结也不能作为事故发生时的证据。
@@ -194,6 +198,10 @@
 ### 红队技能进化
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
+
+### Agent自我进化
+
+- [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../2610.36826-ruharness/README.md)（`ruharness`）：Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。
 
 ### RSI 安全
 

@@ -115,7 +115,8 @@
         "multimodal-models:uniaction",
         "foundation-models:vbvr-pro",
         "foundation-models:vjepa-policy",
-        "multimodal-models:woven"
+        "multimodal-models:woven",
+        "foundation-models:gui-jepa"
       ]
     }
   ]

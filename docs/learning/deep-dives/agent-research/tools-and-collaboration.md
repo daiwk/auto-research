@@ -7,7 +7,7 @@ hide:
 
 # 从会调用到能交付：工具接口、可靠性与协作合同
 
-[Agent](../index.md) · 更新 2026-10-27 · 49 篇主题资料 / 6 篇重点对照
+[Agent](../index.md) · 更新 2026-10-29 · 49 篇主题资料 / 6 篇重点对照
 
 Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。
 
@@ -48,6 +48,12 @@ AutoGen 让谁回复、何时继续和停止成为可编程协议；MetaGPT 进�
 
 对照来源：[autogen](../../../agent-research/2308.08155-autogen/README.md) · [metagpt](../../../agent-research/2308.00352-metagpt/README.md) · [world-of-swecraft](../../../agent-research/2610.24061-world-of-swecraft/README.md)
 
+### 10月29日：新方法与来源变化
+
+Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态；主体CC-BY-NC4，vendored检索/训练组件保留各自许可。代码公开不等于本地typed grammar突然覆盖任意Python、跨轮状态、神经检索或RL；本轮未复制源码或改变原L1证据。
+
+对照来源：[toolformer](../../../agent-research/2302.04761-toolformer/README.md) · [rpl](../../../agent-research/2610.24854-rpl/README.md)
+
 ## 跨论文问答 {#questions}
 
 先想自己的答案，再展开；每个问题至少联系两篇论文。
@@ -82,9 +88,23 @@ AutoGen 让谁回复、何时继续和停止成为可编程协议；MetaGPT 进�
 
     对照来源：[metagpt](../../../agent-research/2308.00352-metagpt/README.md) · [swe-agent](../../../agent-research/2405.15793-swe-agent/README.md) · [world-of-swecraft](../../../agent-research/2610.24061-world-of-swecraft/README.md)
 
+### 官方仓库补上后，为何仍需保留RPL本地组件边界？ {#cross-oct29-method-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 来源完整性与执行保真度是两条轴。拿到完整训练代码并未使已有受限SDK执行完整策略、神经检索或蒸馏；若以后接入，需要另定成本、真实运行与许可边界。
+
+    **教学例子：** 教学例：原来能检查检索程序语法，现在知道官方训练入口，也不能把语法测试改叫多跳QA评测。
+
+    对照来源：[toolformer](../../../agent-research/2302.04761-toolformer/README.md) · [rpl](../../../agent-research/2610.24854-rpl/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-29** · Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态；主体CC-BY-NC4，vendored检索/训练组件保留各自许可。代码公开不等于本地typed grammar突然覆盖任意Python、跨轮状态、神经检索或RL；本轮未复制源码或改变原L1证据。
+
+涉及：[rpl](../../../agent-research/2610.24854-rpl/README.md)
 
 **2026-10-27** · 首版：比较调用学习、ACI、消息编排、SOP交付、可靠性重排与隐藏下游协作评价。
 

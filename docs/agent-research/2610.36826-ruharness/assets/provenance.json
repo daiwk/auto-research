@@ -1,0 +1,14 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.36826v1",
+  "arxiv_id": "2610.36826",
+  "figure": "Figure 2",
+  "source_page": "https://arxiv.org/html/2610.36826v1#S3.F2",
+  "source_url": "https://arxiv.org/html/2610.36826v1/Method.png",
+  "image": "paper-figure-01.png",
+  "sha256": "77bded47a771d33faa9b2fda6fe9bc1d56a0339b458d81421cc3a6216671bf93",
+  "license": "copyright original authors; arXiv non-exclusive distribution license",
+  "transformation": "none",
+  "visually_verified": true,
+  "visual_review": "已目视核对Figure2：行为盲评、criterion lifecycle、Top-K rubric frontier、六harness坐标和validation门槛，无重绘裁剪",
+  "checked_on": "2026-10-29"
+}

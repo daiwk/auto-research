@@ -58,6 +58,24 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "foundation-models:select-ttt",
+          "position": "对query token的低CE位置top-k聚合，T×softmax分配并clip写入倍率。",
+          "tradeoff": "必须传入真实冻结head/RMSNorm与NTP对齐特征；不含LLM或分布式内核。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
+        },
+        {
+          "paper": "foundation-models:sleep-lti",
+          "position": "把外部语义二元奖励与阈值化token编辑相似度混合。",
+          "tradeoff": "只做LTI奖励，不实现CMS、梦境、知识播种或LoRA，完整Sleep高成本不复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
         }
       ],
       "analysis": [
@@ -76,6 +94,15 @@
             "foundation-models:native-sparse-attention",
             "foundation-models:openattention",
             "foundation-models:ttr-compressor"
+          ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "Select-TTT根据当前query的token概率质量调整上下文chunk写入fast weight的力度，apply-before-write保留时序；clip后总写入预算可能低于chunk数，不能再归一化伪装守恒。Sleep则把活跃与离线巩固分阶段，本地仅其LTI奖励。与冻结参数的状态更新相比，后者完整方法要训练扩展参数，不能把一个奖励核当成记忆已写入模型。",
+          "papers": [
+            "foundation-models:rope",
+            "foundation-models:select-ttt",
+            "foundation-models:sleep-lti"
           ]
         }
       ],
@@ -110,9 +137,20 @@
             "foundation-models:ttr-compressor",
             "foundation-models:mamba"
           ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "query条件写入系数变化，与Sleep奖励变化，分别能证明哪一步真的执行了？",
+          "answer": "Select-TTT本地参考实际更新小fast-weight矩阵，可检查写入前输出和最终状态；Sleep本地只返回奖励，没有优化器或参数扩展。两者均不证明长上下文能力，更不能把奖励值直接解释为长期记忆保持率。",
+          "example": "教学例：一份记忆表的数值真的改变，和给一段续写打0.9分，是不同的执行证据。",
+          "papers": [
+            "foundation-models:rope",
+            "foundation-models:select-ttt",
+            "foundation-models:sleep-lti"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -144,7 +182,9 @@
         "foundation-models:transmem",
         "foundation-models:triadic-linear-attention",
         "foundation-models:ttcd",
-        "foundation-models:ttr-compressor"
+        "foundation-models:ttr-compressor",
+        "foundation-models:select-ttt",
+        "foundation-models:sleep-lti"
       ],
       "updates": [
         {
@@ -215,6 +255,18 @@
             "foundation-models:triadic-linear-attention": "ed35a4ed5b7b19259d2e4b2c1fd095ddeef73a37c6ae2915ba05d309d275aaf8",
             "foundation-models:ttcd": "245f6c3f7aae17e232e10aee32b36c01c5a571d000813fc15a7f3dfb53900185",
             "foundation-models:ttr-compressor": "e9abc343a15865e7c5ee4caa9be83444b5ffbbf5179ea219aa5c974c7e1d85ce"
+          }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "Select-TTT根据当前query的token概率质量调整上下文chunk写入fast weight的力度，apply-before-write保留时序；clip后总写入预算可能低于chunk数，不能再归一化伪装守恒。Sleep则把活跃与离线巩固分阶段，本地仅其LTI奖励。与冻结参数的状态更新相比，后者完整方法要训练扩展参数，不能把一个奖励核当成记忆已写入模型。",
+          "papers": [
+            "foundation-models:select-ttt",
+            "foundation-models:sleep-lti"
+          ],
+          "source_revisions": {
+            "foundation-models:select-ttt": "491118c2fc7561bd2c545980a3376a88f45fa4c67b8954eebf114f2f01c13083",
+            "foundation-models:sleep-lti": "cccbb45f84c92c7e776cc7bfa1b4a4fb1f8e7cd521f9b1c1314849a7a111d411"
           }
         }
       ]
@@ -725,6 +777,24 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "foundation-models:rescom",
+          "position": "以中心化残差/输出误差统计白化，再做截断SVD和截距恢复。",
+          "tradeoff": "校准只适用于固定宿主，未实现量化器或原生低比特内核。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
+        },
+        {
+          "paper": "foundation-models:hope-hilbert",
+          "position": "以biased Gaussian-ReLU核和Hilbert代理计算剪枝率，支持小Dense层均值补偿与单步恢复。",
+          "tradeoff": "假设激活的Gaussian代理，不实现MERGE/EVICT/完整HOPE或DEFT；与Sleep的Hope架构不是同一方法。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式"
+          ]
         }
       ],
       "analysis": [
@@ -745,6 +815,15 @@
             "foundation-models:drop-kv",
             "foundation-models:kvmem",
             "foundation-models:remote-kv-tiers"
+          ]
+        },
+        {
+          "title": "10月29日：新方法与来源变化",
+          "body": "ResCom与HOPE压缩的对象不同：前者在固定量化宿主外增加读取activation rounding residual的低秩校正，校准统计与截距需对应同一宿主；后者用Gaussian-ReLU/Hilbert代理评价神经元结构删除，并补偿下游均值。它们不是一个在任意模型上保证等价的剪枝量化组合；本地都只实现精确小组件，未跑LLM或ImageNet能力矩阵。",
+          "papers": [
+            "foundation-models:awq",
+            "foundation-models:rescom",
+            "foundation-models:hope-hilbert"
           ]
         }
       ],
@@ -779,9 +858,20 @@
             "foundation-models:kvmem",
             "foundation-models:remote-kv-tiers"
           ]
+        },
+        {
+          "id": "oct29-method-boundary",
+          "question": "为什么ResCom的校正rank预算不能直接当作HOPE的可删神经元数？",
+          "answer": "ResCom预算控制的是输出误差补偿分支的低秩容量，HOPE的候选成本还依赖神经元Hilbert容量与初始参数footprint。它们的参数位置、状态和校准假设不同，不能互换预算单位。",
+          "example": "教学例：保留一层的全部量化输出并加rank2校正，与删掉两个神经元再补下游均值，不是同一前向网络。",
+          "papers": [
+            "foundation-models:awq",
+            "foundation-models:rescom",
+            "foundation-models:hope-hilbert"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-10-29",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:awq",
@@ -811,7 +901,9 @@
         "foundation-models:stepquant",
         "foundation-models:taskpress",
         "foundation-models:twinkv",
-        "foundation-models:vfold"
+        "foundation-models:vfold",
+        "foundation-models:rescom",
+        "foundation-models:hope-hilbert"
       ],
       "updates": [
         {
@@ -878,6 +970,18 @@
             "foundation-models:taskpress": "cbf1f5c2031eb63b6581320db9a87ab3373b57ca4fa871e3f42ad12ee53c5af8",
             "foundation-models:twinkv": "b65790bee18062097a2ac7a8c11788866e6c68bbc6bf67806d73da757a2cbe19",
             "foundation-models:vfold": "ef6ac8bb11e380e39765e7880d44ee0d57c2a72e6c30254940c06f32ba18f5e6"
+          }
+        },
+        {
+          "date": "2026-10-29",
+          "summary": "ResCom与HOPE压缩的对象不同：前者在固定量化宿主外增加读取activation rounding residual的低秩校正，校准统计与截距需对应同一宿主；后者用Gaussian-ReLU/Hilbert代理评价神经元结构删除，并补偿下游均值。它们不是一个在任意模型上保证等价的剪枝量化组合；本地都只实现精确小组件，未跑LLM或ImageNet能力矩阵。",
+          "papers": [
+            "foundation-models:rescom",
+            "foundation-models:hope-hilbert"
+          ],
+          "source_revisions": {
+            "foundation-models:rescom": "542f6c2a3ec5756474d7e548385de4a03a7210cf72232455b34a46011e2ad462",
+            "foundation-models:hope-hilbert": "3a7d72d893b7fee736a7c441fc3a02a4ef8a3a94e031520698ef89515e59bd56"
           }
         }
       ]

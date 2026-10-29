@@ -7,7 +7,7 @@ hide:
 
 # 生成一个物品，先后跨过码本、模型分布与合法目录三道关
 
-[搜广推](../index.md) · 更新 2026-10-27 · 60 篇主题资料 / 5 篇重点对照
+[搜广推](../index.md) · 更新 2026-10-29 · 61 篇主题资料 / 6 篇重点对照
 
 TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。
 
@@ -30,6 +30,7 @@ TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补�
 | [PLUM: Adapting Pre-trained Language Models for Industrial-scale Generative Recommendations](../../../reproductions/2510.07784-plum/README.md) · [原始来源](https://arxiv.org/abs/2510.07784)<br>章节：背景与主要改动、核心公式、本地结果 | 从已有MoE LLM初始化，以行为和视频元数据CPT对齐，再做next-SID召回；SID-v2同时约束重建、量化和共现。 | 容量从大型ID表转向可扩展主干，但依赖CPT配方和预训练资源。线上生成SID不用点积索引，不代表没有SID映射、目录维护与解码成本。 |
 | [Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators](../../../recommendation-components/2602.22647-static-constraint-decoding/README.md) · [原始来源](https://arxiv.org/abs/2602.22647)<br>章节：背景与主要改动、核心公式、结果与边界 | 将合法token路径编成加速器内CSR迁移，先全词表log-softmax，再非法项置负无穷，并同步维护beam前缀和node状态。 | 改变约束执行的成本与合法性，不会创造模型未学到的偏好；不能在每个合法子集重新归一化后还声称保持同一条原模型路径分数。 |
 | [Reward Guided Decoding for Generative Recommendation](../../../reproductions/2607.25344-reward-guided-decoding/README.md) · [原始来源](https://arxiv.org/abs/2607.25344)<br>章节：背景与主要改动、核心公式、复现边界 | 固定生成先验P0，用exp(R/β)倾斜得到Q，以KL温度限制偏离，不重新训练生成器。 | reward可重排既有支持，却不能令P0为零的路径凭空出现；代理reward和线上价值不同，本地MovieLens构造任务不等于生产收益。 |
+| [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md) · [原始来源](https://arxiv.org/abs/2610.36958v1)<br>章节：背景与主要改动、核心公式 | 统一图文到SID集合，多意图/预算训练与Sample–Beam服务对齐。 | 完整多模型多阶段和私有生产实验高成本不复现；无本地占位模型。 |
 
 </div>
 
@@ -46,6 +47,12 @@ TIGER和PLUM先决定物品怎样映射到SID以及每步码的概率；COBRA再
 STATIC回答某前缀下哪些token能通向合法目录，Reward Guided Decoding回答在允许的分布中怎样偏向reward。前者的非法负无穷是可行域，后者的指数倾斜是软偏好；把库存违规只当有限惩罚，仍可能选出高reward的非法项。约束编译、原模型概率和业务价值应保留各自语义。
 
 对照来源：[static-constraint-decoding](../../../recommendation-components/2602.22647-static-constraint-decoding/README.md) · [reward-guided-decoding](../../../reproductions/2607.25344-reward-guided-decoding/README.md)
+
+### 10月29日：新方法与来源变化
+
+PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合，以数据工具、CPT、混合预算SFT和意图均衡RL扩展服务。Sample–Beam使推理采样与候选束生成分别对应训练/展示需要；大模型或更长思考不保证所有意图更好。与其他生成式召回对比时应固定候选集合、预算和生产混排口径，而不是只比模型名字。完整方案本地不复现。
+
+对照来源：[tiger](../../../reproductions/2305.05065-tiger/README.md) · [pailitao-mmsearch2](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -81,15 +88,29 @@ STATIC回答某前缀下哪些token能通向合法目录，Reward Guided Decodin
 
     对照来源：[tiger](../../../reproductions/2305.05065-tiger/README.md) · [plum](../../../reproductions/2510.07784-plum/README.md)
 
+### 为何不能把Pailitao的完整线上增益当作Sample–Beam一个模块的因果收益？ {#cross-oct29-method-boundary}
+
+??? note "展开答案与例子"
+
+    **答案：** 线上测的是完整部署配置，含训练数据、模型和最终呈现/混排。模块作用由匹配控制的离线消融提供不同证据，二者不可直接等同；本地仅资料收录，也没有可执行接口。
+
+    **教学例子：** 教学例：换了训练数据、模型和候选混排后交易增加，不能仅因同时用了新beam配方就把全部提升归给beam。
+
+    对照来源：[tiger](../../../reproductions/2305.05065-tiger/README.md) · [pailitao-mmsearch2](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-29** · PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合，以数据工具、CPT、混合预算SFT和意图均衡RL扩展服务。Sample–Beam使推理采样与候选束生成分别对应训练/展示需要；大模型或更长思考不保证所有意图更好。与其他生成式召回对比时应固定候选集合、预算和生产混排口径，而不是只比模型名字。完整方案本地不复现。
+
+涉及：[pailitao-mmsearch2](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)
 
 **2026-10-27** · 首版：比较tiger、cobra、plum、static-constraint-decoding、reward-guided-decoding，围绕物品表示：离散码、稀疏—稠密级联与LLM继续预训练与学习分布与推理搜索分别改变什么建立分析和跨论文问答。
 
 覆盖 60 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 60 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 61 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -153,6 +174,7 @@ STATIC回答某前缀下哪些token能通向合法目录，Reward Guided Decodin
 - [Unified Value Alignment for Generative Recommendation in Industrial Advertising](../../../reproductions/2605.05803-univa/README.md)
 - [WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat](../../../reproductions/2610.16979-wegr/README.md)
 - [X-Rec Technical Report](../../../reproductions/2609.29180-xrec/README.md)
+- [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)
 
 </details>
 

@@ -3751,6 +3751,13 @@
     "agent-research:rpl": {
       "questions": [
         {
+          "id": "official-code-versus-local-fidelity", "level": "implementation",
+          "question": "Meta公开RPL完整代码后，本地typed-program组件就自动变成完整复现了吗？",
+          "answer": "不会。官方源码发布只改变来源可核验性；本地仍未运行神经检索器、跨轮Python状态、策略生成、GRPO或蒸馏训练。还要遵循主项目CC-BY-NC与vendored部分各自许可，不因仓库可见就自动复制或升级能力证据。",
+          "example": "教学例：拿到完整工厂图纸，不等于已有的小型管道模拟器已经生产出同样产品；必须另验真实执行链路和成本。",
+          "source_sections": ["论文信息", "背景与主要改动"], "added": "2026-10-29"
+        },
+        {
           "id": "mechanism",
           "question": "为什么答案错误时仍可能保留检索程序监督，却屏蔽答案 span？",
           "answer": "程序可通过语法与执行核验，说明检索组合本身值得学习，最终答案错误不必把全部结构监督一并丢掉。反之，保留错误答案会教坏生成行为；程序或续写 actor 也不能看到 verifier 的 gold，环境观察不应被当成策略自己生成的训练 token。",

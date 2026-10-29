@@ -50,7 +50,9 @@
         "foundation-models:transmem",
         "foundation-models:triadic-linear-attention",
         "foundation-models:ttcd",
-        "foundation-models:ttr-compressor"
+        "foundation-models:ttr-compressor",
+        "foundation-models:select-ttt",
+        "foundation-models:sleep-lti"
       ]
     },
     {
@@ -190,7 +192,9 @@
         "foundation-models:stepquant",
         "foundation-models:taskpress",
         "foundation-models:twinkv",
-        "foundation-models:vfold"
+        "foundation-models:vfold",
+        "foundation-models:rescom",
+        "foundation-models:hope-hilbert"
       ]
     },
     {

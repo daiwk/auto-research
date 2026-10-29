@@ -1,0 +1,14 @@
+{
+  "paper_url": "https://arxiv.org/abs/2607.21366v1",
+  "source_url": "https://arxiv.org/pdf/2607.21366v1#page=8",
+  "figure": "Figure 1",
+  "image": "paper-figure-01.png",
+  "original_caption": "Visualizing the rank-1 tensor of a neuron. Left: The input phase computes a continuous (infinite-dimensional) scalar landscape g_i(x). Middle: The output phase defines a single, finite-dimensional weight vector w_out,i. Right: The tensor product binds them. The entire function's landscape (represented by the colored points) is mapped along the 1D subspace spanned by w_out,i, which enforces the definition of a rank-1 operator.",
+  "extraction": "PDF page 8 crop including original Figure 1 and full caption; no redrawing",
+  "pdf_page": 8,
+  "pdf_crop_points": [60, 85, 535, 322],
+  "pdf_sha256": "8106a86c0c72aee05b0fbcc5e13095edc03fe725538b1bfa5c50c18ea806067b",
+  "sha256": "fa7cd7a9c725f889bfe92057623fedffe57a01a77369eb69cc367e1015815696",
+  "license": "Figure copyright remains with original authors; upstream repository code/data license is separate",
+  "visually_inspected": true
+}

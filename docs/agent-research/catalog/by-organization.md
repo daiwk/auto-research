@@ -135,6 +135,10 @@
 
 - 2026-03-31 · 一作：Tim R. Davidson · [Reasoning-Driven Synthetic Data Generation and Evaluation](../2603.29791-simula/README.md)（`simula`）：单纯扩写种子容易遗漏概念或坍缩到相似样本。Simula 先按因素建立分类树，再控制全局节点组合与局部场景；独立批判过滤样本，并通过批内相对评分校准复杂度。
 
+## East China Normal University
+
+- 2026-10-27 · 一作：Yipeng Hao · [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../2610.36652-discernmem/README.md)（`discernmem`）：团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。
+
 ## FAIR at Meta
 
 - 未标注 · 一作：Charles Arnal / Ahmad Rammal（共同一作，随机排序） · [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](../autoformbench/README.md)（`autoformbench`）：AutoformBench 不只要求补一个孤立证明，而是让 Agent 在固定 Lean/Mathlib 上构造支撑高级数学命题的定义、辅助引理和证明。341 个任务来自 24 个数学来源，共有 1,155 个需要完成的证明义务；一个任务只有全部义务均通过可信验证才算成功。
@@ -220,6 +224,10 @@
 ## HKU
 
 - 2025-04-04 · 一作：Yuxiang Zheng · [DeepResearcher](../2504.03160-deepresearcher/README.md)（`deepresearcher`）：把 search、browse、证据收集和带引用回答作为一条轨迹，用答案与引用联合奖励训练研究策略。
+
+## Harbin Institute of Technology
+
+- 2026-10-27 · 一作：Hao Chen · [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../2610.36826-ruharness/README.md)（`ruharness`）：Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。
 
 ## Harbin Institute of Technology / Alibaba Cloud
 

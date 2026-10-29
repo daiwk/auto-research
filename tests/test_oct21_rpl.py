@@ -132,7 +132,10 @@ def test_meta_affiliation_publication_date_and_non_reproduction_catalog_contract
             for key in ("rpl", "cache-engineering")}
     assert rows["rpl"]["published_at"] == "2026-10-17T20:03:09Z"
     assert rows["rpl"]["first_author_affiliation"] == "KAIST AI / Meta Superintelligence Labs"
-    assert rows["rpl"]["code"] is None and "未找到" in rows["rpl"]["code_status"]
+    assert rows["rpl"]["code"] == "https://github.com/facebookresearch/retrieval-programs"
+    assert rows["rpl"]["upstream_revision"] == "992fda1f5f0eb01a8fb70202ff8f7a65aed48465"
+    assert "CC BY-NC 4.0" in rows["rpl"]["code_license"]
+    assert "不复制到本地或升级既有L1证据" in rows["rpl"]["code_status"]
     assert rows["rpl"]["implementation_status"] == "component_only"
     assert rows["cache-engineering"]["implementation_status"] == "deferred_high_cost"
     assert rows["cache-engineering"]["code"] == "https://github.com/thu-nics/AKV"

@@ -1,0 +1,63 @@
+{
+  "domain": "recommendation",
+  "key": "kl-mopd",
+  "title": "KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation",
+  "paper_url": "https://arxiv.org/abs/2610.36973v1",
+  "detail_path": "recommendation-components/2610.36973-kl-mopd/README.md",
+  "topic": [
+    "多目标蒸馏",
+    "生成式推荐"
+  ],
+  "browse_company": "Alibaba",
+  "browse_topic": [
+    "训练目标与决策优化",
+    "大模型能力与推荐融合"
+  ],
+  "first_author": "Weiqin Yang",
+  "first_author_affiliation": "Zhejiang University",
+  "published": "2026-10-27",
+  "published_at": "2026-10-27T10:28:05Z",
+  "announced_on": "2026-10-28",
+  "code": "https://github.com/Yandorn/KL-MOPD",
+  "code_status": "作者正文链接仓库可访问，固定28d9bcbd8fc9f5ccaa52def5db77d4c34bade965；本地独立据公式实现，不复制上游",
+  "code_license": "MIT",
+  "upstream_revision": "28d9bcbd8fc9f5ccaa52def5db77d4c34bade965",
+  "adapter": null,
+  "priority": "P1",
+  "intake_class": "new_announcement",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.reproductions.kl_mopd.kl_mopd_loss",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.kl_mopd import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/kl-mopd-a100-20261029.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "Alibaba e-commerce advertising",
+      "metric": "Advertising Revenue",
+      "lift_percent": 1.63,
+      "traffic": "5 days; control10%, treatment10%;p<0.05",
+      "source_url": "https://arxiv.org/html/2610.36973v1",
+      "source_location": "Section4, Table6;GMV+2.20%"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2610.36973v1",
+    "source_location": "Section4.1",
+    "model_scale": "TIGER/REG4Rec; two encoder/decoder layers dim64 on public datasets;5decoder layers dim1024 on Industry",
+    "data_scale": "three public datasets plus billion-scale private logs;last-two-day fine-tune/eval each>11M requests",
+    "available_resource": "One NVIDIA A100 or A30, or local Mac",
+    "estimated_cost_basis": "initial training, two teacher fine-tunes, distillation and multi-baseline sweeps, not a single tensor test;GPU hours undisclosed",
+    "decision": "成本过高，不复现（审查 DONE）；只执行公式组件，不下载大数据，不自动重试"
+  },
+  "summary": "先在冻结初始学生的生成前缀上按位置估计到两位教师的反向KL，以其比例固定教师权重。当前学生在自己的前缀上最小化加权反向KL；本地仅实现校准和可微损失，不运行推荐器或继承线上收入增益。",
+  "gpu_validation_passed": true
+}

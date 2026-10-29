@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 172 个问题 · 43 篇论文
+[Agent](index.md) / 176 个问题 · 44 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ruharness" data-paper-title="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement Agent Harbin Institute of Technology 2026-10-27 Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。不是命中几次失败就直接排最前。样本少时点估计容易虚高，方法对成功/失败与三种行为标签形成的六格联合分布做后验采样，以效用低分位选active标准。 完整实验：成本过高，不复现（审查 DONE），不自动重试。纯CPU三种子统计诊断：独立六格计数/公式参考、相同违规集合的Jaccard=1、联合Dirichlet完整参考、固定seed可重复、inactive不入选、未通过外部验证器的高分候选被排除，以及恰好0.05的增益不晋级。本地状态：L1 统计与验证门槛组件，diagnostic only，不是完整harness进化或Agent能力实现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部行为标签和任务结果，代码分别校验两种数据类型。contingency统计六格；set_statistics按真实轨迹位置计算N与Red；  Agent自我进化 Rubric与Harness协同进化 Agent 运行流程与自进化：改的是哪一层 Agent已经能自己改harness了，为什么还要同时更新rubric？ harness修复早期问题后，失败分布会变化。固定标准可能一直追踪已经消失的缺陷，也可能忽视新出现的行为问题。RuHarness从当前执行轨迹重新评估标准，保持任务目标不变，再用当前有诊断价值的标准指导下一步修改。 教学例：早期主要忘记调用搜索，后来搜索已正常但常在证据不足时提前提交。继续只奖励‘调用过搜索’就难以定位后一个问题。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-ruharness-cecd9850" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-2e575e0803773eb3">Agent已经能自己改harness了，为什么还要同时更新rubric？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aruharness">When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Harbin Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>harness修复早期问题后，失败分布会变化。固定标准可能一直追踪已经消失的缺陷，也可能忽视新出现的行为问题。RuHarness从当前执行轨迹重新评估标准，保持任务目标不变，再用当前有诊断价值的标准指导下一步修改。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：早期主要忘记调用搜索，后来搜索已正常但常在证据不足时提前提交。继续只奖励‘调用过搜索’就难以定位后一个问题。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36826v1">原论文</a> · <a href="../../../../agent-research/2610.36826-ruharness/">实现解读</a> · <a href="#qa-2e575e0803773eb3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ruharness" data-paper-title="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement Agent Harbin Institute of Technology 2026-10-27 Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。不是命中几次失败就直接排最前。样本少时点估计容易虚高，方法对成功/失败与三种行为标签形成的六格联合分布做后验采样，以效用低分位选active标准。 完整实验：成本过高，不复现（审查 DONE），不自动重试。纯CPU三种子统计诊断：独立六格计数/公式参考、相同违规集合的Jaccard=1、联合Dirichlet完整参考、固定seed可重复、inactive不入选、未通过外部验证器的高分候选被排除，以及恰好0.05的增益不晋级。本地状态：L1 统计与验证门槛组件，diagnostic only，不是完整harness进化或Agent能力实现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部行为标签和任务结果，代码分别校验两种数据类型。contingency统计六格；set_statistics按真实轨迹位置计算N与Red；  Agent自我进化 Rubric与Harness协同进化 Agent 运行流程与自进化：改的是哪一层 为什么区分度、覆盖率和预测性要从同一六格后验一起计算？ 三项统计来自同一成功/失败乘Violated/Satisfied/N/A列联表，本来相关。论文给六格各加0.5，抽2000份联合Dirichlet样本；每份重算三项，再取效用0.2分位。分别独立采样会丢掉共同数据的相关性。N和Red来自轨迹集合，采样时保持固定。 教学例：一个标准只观察到2次违规且都失败，点估计会很高；低分位后验会反映证据少的不确定性，而不会把2次命中等同于上百次稳定观测。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8cfddc49739eda77">为什么区分度、覆盖率和预测性要从同一六格后验一起计算？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aruharness">When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Harbin Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>三项统计来自同一成功/失败乘Violated/Satisfied/N/A列联表，本来相关。论文给六格各加0.5，抽2000份联合Dirichlet样本；每份重算三项，再取效用0.2分位。分别独立采样会丢掉共同数据的相关性。N和Red来自轨迹集合，采样时保持固定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个标准只观察到2次违规且都失败，点估计会很高；低分位后验会反映证据少的不确定性，而不会把2次命中等同于上百次稳定观测。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36826v1">原论文</a> · <a href="../../../../agent-research/2610.36826-ruharness/">实现解读</a> · <a href="#qa-8cfddc49739eda77">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ruharness" data-paper-title="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement Agent Harbin Institute of Technology 2026-10-27 Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。不是命中几次失败就直接排最前。样本少时点估计容易虚高，方法对成功/失败与三种行为标签形成的六格联合分布做后验采样，以效用低分位选active标准。 完整实验：成本过高，不复现（审查 DONE），不自动重试。纯CPU三种子统计诊断：独立六格计数/公式参考、相同违规集合的Jaccard=1、联合Dirichlet完整参考、固定seed可重复、inactive不入选、未通过外部验证器的高分候选被排除，以及恰好0.05的增益不晋级。本地状态：L1 统计与验证门槛组件，diagnostic only，不是完整harness进化或Agent能力实现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部行为标签和任务结果，代码分别校验两种数据类型。contingency统计六格；set_statistics按真实轨迹位置计算N与Red；  Agent自我进化 Rubric与Harness协同进化 Agent 运行流程与自进化：改的是哪一层 候选更符合rubric，是否就能直接升为下一轮harness？ 不能。rubric用来定位行为弱点与指导提案，不替代真正任务效果。论文要求候选先通过外部验证器，再在独立validation上与当前harness比较；只有最高分候选的增益严格超过门槛才更新，最终test不参与这个选择。 教学例：候选增加了很多‘检查证据’文字，但validation成功率没有提高，就应保留当前harness，而不是仅凭更漂亮的自我检查日志晋级。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-503b195db49bbbcd">候选更符合rubric，是否就能直接升为下一轮harness？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aruharness">When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Harbin Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。rubric用来定位行为弱点与指导提案，不替代真正任务效果。论文要求候选先通过外部验证器，再在独立validation上与当前harness比较；只有最高分候选的增益严格超过门槛才更新，最终test不参与这个选择。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：候选增加了很多‘检查证据’文字，但validation成功率没有提高，就应保留当前harness，而不是仅凭更漂亮的自我检查日志晋级。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36826v1">原论文</a> · <a href="../../../../agent-research/2610.36826-ruharness/">实现解读</a> · <a href="#qa-503b195db49bbbcd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ruharness" data-paper-title="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement Agent Harbin Institute of Technology 2026-10-27 Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。不是命中几次失败就直接排最前。样本少时点估计容易虚高，方法对成功/失败与三种行为标签形成的六格联合分布做后验采样，以效用低分位选active标准。 完整实验：成本过高，不复现（审查 DONE），不自动重试。纯CPU三种子统计诊断：独立六格计数/公式参考、相同违规集合的Jaccard=1、联合Dirichlet完整参考、固定seed可重复、inactive不入选、未通过外部验证器的高分候选被排除，以及恰好0.05的增益不晋级。本地状态：L1 统计与验证门槛组件，diagnostic only，不是完整harness进化或Agent能力实现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部行为标签和任务结果，代码分别校验两种数据类型。contingency统计六格；set_statistics按真实轨迹位置计算N与Red；  Agent自我进化 Rubric与Harness协同进化 Agent 运行流程与自进化：改的是哪一层 outcome-blind判断与后续使用成功/失败标签做统计矛盾吗？ 不矛盾。判断标准是否被满足时，judge只能看到行为证据，避免拿最终成败倒推违规；判断完成后，外部统计层才把行为标签与任务结果组合成六格表。组件只接收这两份输入，无法自动证明外部judge确实被盲化，不能据此宣称完整评测流程已接入。 教学例：先独立标记‘提交前是否检查目标文件’，封存标签后才揭晓测试成功与否；不能看到失败后才把原来模糊的检查行为改判违规。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3ad4f868d9fa0da1">outcome-blind判断与后续使用成功/失败标签做统计矛盾吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aruharness">When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Harbin Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不矛盾。判断标准是否被满足时，judge只能看到行为证据，避免拿最终成败倒推违规；判断完成后，外部统计层才把行为标签与任务结果组合成六格表。组件只接收这两份输入，无法自动证明外部judge确实被盲化，不能据此宣称完整评测流程已接入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先独立标记‘提交前是否检查目标文件’，封存标签后才揭晓测试成功与否；不能看到失败后才把原来模糊的检查行为改判违规。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36826v1">原论文</a> · <a href="../../../../agent-research/2610.36826-ruharness/">实现解读</a> · <a href="#qa-3ad4f868d9fa0da1">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:harnessmm" data-paper-title="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HarnessMM: Recursive Self-Improvement for Harness Token Efficiency Agent Tsinghua University 2026-10-23 Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。不支持的观察、缺少依赖、需要新语义判断时回到原慢 actor。 完整实验：成本过高，不复现（审查 DONE）；仅文献与成本收录。完整实验：成本过高，不复现（审查 DONE）；不自动重试，不阻塞水位。无 adapter、operator、运行命令、metrics 或 GPU receipt。本地不实现原生 harness 替代器，不制造 fake callback/receipt，不执行 LLM 生成动作或 shell，不用确定性 fixture 证明节省 token。仅保留规范文献及成本终态；promotion_eligible=false、evolve_integrated=false。既有 Agent tracing 框架不等于本论文已集成。  Agent评测与自进化 原生harness回调替代与成本审计 Agent 运行流程与自进化：改的是哪一层 HarnessMM 为什么认为工具反馈后再调用一次模型，有时是在重复已经完成的判断？ Agent 可能已在上一轮确定某个后续命令，只是等待前置工具返回；条件满足后再让模型重新推理，未必增加新信息。HarnessMM 研究复用这种已确定决策来减少慢调用。需要新的语义理解时仍应交回模型，复用范围不能扩展成任意预测未来动作。 教学例：已明确“文件创建成功后运行指定测试”，成功回执到来时可检查条件并执行；若出现未知错误，则需要重新判断。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-harnessmm-efa1b75e" class="ar-learning-paper-anchor"></span>

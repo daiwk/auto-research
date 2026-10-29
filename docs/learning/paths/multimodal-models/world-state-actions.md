@@ -7,7 +7,7 @@ hide:
 
 # 视觉世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 88 个问题 · 22 篇论文
+[多模态](index.md) / 92 个问题 · 23 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">88 个问题 · 22 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">92 个问题 · 23 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gui-jepa" data-paper-title="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents 基础模型 Shanghai Jiao Tong University / Nanyang Technological University 2026-10-27 多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。关键不是把“画面 latent 离目标越近”当动作价值。预测器通过真实候选上的 listwise 决策损失训练，结构头的候选视觉信息必须经过条件化 latent； 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 latent predictor / structural-head 组件、diagnostic only，不是 GUI Agent 或 AndroidControl 接入。完整实验：成本过高，不复现（审查 DONE）；不作为 evolve 能力证据。实现真实三层 Transformer residual predictor、候选 ROI / 全屏池化、cosine 结构头、动作类型 bias、外部 text score 相加、有效候选 mask 和 weighted listwise loss。  JEPA与世界模型 候选条件决策与GUI 多模态 视觉世界建模：状态、生成与动作条件 GUI-JEPA为什么不需要逐token生成动作？ 它先从可访问性树枚举候选，再让每个候选条件化画面latent，一次批量打分选动作。动作空间来自观测侧枚举，不是语言模型自由生成。因此速度取决于候选数，也依赖像素型Agent不一定拥有的a11y输入，不能直接比较所有GUI系统。 教学例子：页面已有三种可执行按钮动作，系统分别算三个分数后选最高者；这不同于先生成JSON文本，再解析其中坐标。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-gui-jepa-f231a89e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-6d61dbbeb9e00d39">GUI-JEPA为什么不需要逐token生成动作？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agui-jepa">GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Shanghai Jiao Tong University / Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它先从可访问性树枚举候选，再让每个候选条件化画面latent，一次批量打分选动作。动作空间来自观测侧枚举，不是语言模型自由生成。因此速度取决于候选数，也依赖像素型Agent不一定拥有的a11y输入，不能直接比较所有GUI系统。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>页面已有三种可执行按钮动作，系统分别算三个分数后选最高者；这不同于先生成JSON文本，再解析其中坐标。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36877v1">原论文</a> · <a href="../../../../foundation-models/2610.36877-gui-jepa/">实现解读</a> · <a href="#qa-6d61dbbeb9e00d39">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gui-jepa" data-paper-title="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents 基础模型 Shanghai Jiao Tong University / Nanyang Technological University 2026-10-27 多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。关键不是把“画面 latent 离目标越近”当动作价值。预测器通过真实候选上的 listwise 决策损失训练，结构头的候选视觉信息必须经过条件化 latent； 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 latent predictor / structural-head 组件、diagnostic only，不是 GUI Agent 或 AndroidControl 接入。完整实验：成本过高，不复现（审查 DONE）；不作为 evolve 能力证据。实现真实三层 Transformer residual predictor、候选 ROI / 全屏池化、cosine 结构头、动作类型 bias、外部 text score 相加、有效候选 mask 和 weighted listwise loss。  JEPA与世界模型 候选条件决策与GUI 多模态 视觉世界建模：状态、生成与动作条件 为什么候选的动作与ROI需要先经过残差predictor，而不是直接送结构打分头？ 论文刻意让候选相关视觉信息通过条件化latent路径，避免打分头绕开JEPA predictor。动作与ROI影响query，三层Transformer产生残差latent，再做ROI与全局池化。它用决策损失训练，不自动意味着这个latent是准确的未来画面预测。 教学例子：两个都是click的按钮，ROI内容与坐标不同，应产生不同条件latent；若直接把原ROI接到额外捷径头，不能用该结果证明predictor有用。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-012814975154e4eb">为什么候选的动作与ROI需要先经过残差predictor，而不是直接送结构打分头？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agui-jepa">GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Shanghai Jiao Tong University / Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文刻意让候选相关视觉信息通过条件化latent路径，避免打分头绕开JEPA predictor。动作与ROI影响query，三层Transformer产生残差latent，再做ROI与全局池化。它用决策损失训练，不自动意味着这个latent是准确的未来画面预测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个都是click的按钮，ROI内容与坐标不同，应产生不同条件latent；若直接把原ROI接到额外捷径头，不能用该结果证明predictor有用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36877v1">原论文</a> · <a href="../../../../foundation-models/2610.36877-gui-jepa/">实现解读</a> · <a href="#qa-012814975154e4eb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gui-jepa" data-paper-title="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents 基础模型 Shanghai Jiao Tong University / Nanyang Technological University 2026-10-27 多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。关键不是把“画面 latent 离目标越近”当动作价值。预测器通过真实候选上的 listwise 决策损失训练，结构头的候选视觉信息必须经过条件化 latent； 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 latent predictor / structural-head 组件、diagnostic only，不是 GUI Agent 或 AndroidControl 接入。完整实验：成本过高，不复现（审查 DONE）；不作为 evolve 能力证据。实现真实三层 Transformer residual predictor、候选 ROI / 全屏池化、cosine 结构头、动作类型 bias、外部 text score 相加、有效候选 mask 和 weighted listwise loss。  JEPA与世界模型 候选条件决策与GUI 多模态 视觉世界建模：状态、生成与动作条件 GUI-JEPA的latent打分，与“预测下一状态然后选最接近目标”有何区别？ 它将latent作为通过listwise动作损失塑造的决策特征，而非把到目标的latent距离当作价值。论文随机初始化predictor也能匹配dynamics预训练版本，提示决策相关性和动力学预测不是一回事。不能从动作分数改善推导完整世界模型准确。 教学例子：点击确认可能使画面变化很小却完成任务，打开动画可能让视觉距离更接近某目标图但动作错误；决策分数不等于像素或latent相似度。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e4c26d5506f18c85">GUI-JEPA的latent打分，与“预测下一状态然后选最接近目标”有何区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agui-jepa">GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Shanghai Jiao Tong University / Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它将latent作为通过listwise动作损失塑造的决策特征，而非把到目标的latent距离当作价值。论文随机初始化predictor也能匹配dynamics预训练版本，提示决策相关性和动力学预测不是一回事。不能从动作分数改善推导完整世界模型准确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>点击确认可能使画面变化很小却完成任务，打开动画可能让视觉距离更接近某目标图但动作错误；决策分数不等于像素或latent相似度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36877v1">原论文</a> · <a href="../../../../foundation-models/2610.36877-gui-jepa/">实现解读</a> · <a href="#qa-e4c26d5506f18c85">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gui-jepa" data-paper-title="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents 基础模型 Shanghai Jiao Tong University / Nanyang Technological University 2026-10-27 多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。关键不是把“画面 latent 离目标越近”当动作价值。预测器通过真实候选上的 listwise 决策损失训练，结构头的候选视觉信息必须经过条件化 latent； 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 latent predictor / structural-head 组件、diagnostic only，不是 GUI Agent 或 AndroidControl 接入。完整实验：成本过高，不复现（审查 DONE）；不作为 evolve 能力证据。实现真实三层 Transformer residual predictor、候选 ROI / 全屏池化、cosine 结构头、动作类型 bias、外部 text score 相加、有效候选 mask 和 weighted listwise loss。  JEPA与世界模型 候选条件决策与GUI 多模态 视觉世界建模：状态、生成与动作条件 本地三层predictor和真实梯度通过验证，是否等于已经能操作Android？ 不能。当前接口只读外部画面与condition latent，验证残差结构头、候选mask和加权listwise损失。编码器、a11y枚举、MiniLM ranker与执行环境都没有接入；正例仅给训练loss，不能传进forward让模型看答案。GPU张量验证不是AndroidControl成功率。 教学例子：给两个合法latent候选反向更新参数，只能证明梯度路径工作；真正打开应用还需要从截图生成latent、找到合法候选、执行并观察下一页面。 2026-10-29">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3b5a93ef5e4fcae4">本地三层predictor和真实梯度通过验证，是否等于已经能操作Android？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agui-jepa">GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-29 · Shanghai Jiao Tong University / Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。当前接口只读外部画面与condition latent，验证残差结构头、候选mask和加权listwise损失。编码器、a11y枚举、MiniLM ranker与执行环境都没有接入；正例仅给训练loss，不能传进forward让模型看答案。GPU张量验证不是AndroidControl成功率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>给两个合法latent候选反向更新参数，只能证明梯度路径工作；真正打开应用还需要从截图生成latent、找到合法候选、执行并观察下一页面。</p>
+<p class="ar-learning-sources">依据：本地复现、检查与负控、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36877v1">原论文</a> · <a href="../../../../foundation-models/2610.36877-gui-jepa/">实现解读</a> · <a href="#qa-3b5a93ef5e4fcae4">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dt-jepa" data-paper-title="DT-JEPA: Learning to Predict Future Representations for Decision-Making" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="DT-JEPA: Learning to Predict Future Representations for Decision-Making 基础模型 Southeast University 2026-10-23 传统DT用单个return-to-go条件，无法区分回报相同但未来动力学不同的轨迹。本方法将条件改成由历史预测的未来latent分布：历史encoder生成Gaussian参数，EMA target encoder只在训练期编码真实未来；重参数采样的预测未来通过独立gamma/beta MLP调制DT hidden。离线目标为BC加Gaussian NLL；在线通过双target critic的较小值构建多步target，并优化Q1指导的actor目标。 成本过高，不复现（审查 DONE）。D4RL共19个locomotion/navigation数据配置、主表5种子、多个未见reward的在线适配及基线/消融；附录DT4层/4头/512hidden、batch256/context20。原文未给总GPU小时，不臆测。完整offline+online矩阵超单卡短时预算，不安装MuJoCo、不下载轨迹、不启动环境试跑。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  JEPA与世界模型 未来表征与离线决策 多模态 视觉世界建模：状态、生成与动作条件 Decision Transformer 为什么可能需要比“期望回报是多少”更丰富的未来条件？ 不同轨迹可能获得相同总回报，却通向完全不同状态，单个 return-to-go 无法区分这些动力学。DT-JEPA 用从历史预测的未来表示分布作为条件，让动作选择获得更具体的未来信息。未来只是预测，不是部署时可读取的真实结果，仍要管理不确定性和训练信息隔离。 教学例：两条路线奖励相同，一条到充电区、另一条到出口；相同回报数字未说明当前该往哪走，未来状态特征提供另一类条件。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-dt-jepa-898e3cdc" class="ar-learning-paper-anchor"></span>
