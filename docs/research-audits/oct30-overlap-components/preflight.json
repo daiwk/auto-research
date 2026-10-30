@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-30-overlap-components",
+  "recorded_on": "2026-10-30",
+  "source_baseline": "docs/research-audits/oct29-components/source-coverage.json",
+  "scope_kind": "bounded-overlap-backfill",
+  "new_announcement_claimed": false,
+  "available_resource": "one NVIDIA A100 or A30, or local Mac; not concurrent GPU hosts",
+  "accepted_scope": "Ten standalone L1 formula/state/statistical components, no checkpoint or capability dataset, no LLM/API calls or end-to-end systems",
+  "estimated_component_cost": "seeded small arrays/tensors only; expected seconds to minutes, not measured yet; final timings belong to actual run artifacts",
+  "full_experiment_decision": "成本过高，不复现（审查 DONE）",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "papers": [
+    {"key": "concur", "id": "2610.36437", "priority": "P0", "paper_url": "https://arxiv.org/html/2610.36437v1", "component_device": "cpu", "accepted_component": "Exact auxiliary-advantage order/ceiling-tie projection and cumulative earned trust; not an RL trainer", "cost_basis": "Appendix D.2: full experiment uses 4x8 RTX PRO6000 GPUs across model/task RL runs; no such run is launched"},
+    {"key": "merlin", "id": "2610.37645", "priority": "P0", "paper_url": "https://arxiv.org/html/2610.37645v1", "component_device": "cuda", "accepted_component": "Raw segment moments, query-directed mean/variance and separately normalized gated routing; not a pretrained attention backbone", "cost_basis": "Full paper includes 50B-token GDN pretraining plus multi-billion-token midtraining and multi-size model/task matrix; no checkpoint or training data download"},
+    {"key": "crop", "id": "2604.14214", "priority": "P0", "paper_url": "https://arxiv.org/html/2604.14214v1", "component_device": "cpu", "accepted_component": "External-callback text-gradient composition and validation cost-regularized selection, mechanism fixtures only", "cost_basis": "Full Gemini3.1Pro-Thinking optimization and Gemini2Flash/Qwen7B task matrix require substantial API/LLM inference; no calls or weights"},
+    {"key": "pinger", "id": "2610.33435", "priority": "P0", "paper_url": "https://arxiv.org/html/2610.33435v1", "component_device": "cuda", "accepted_component": "Interleaved role mask, one-level hierarchical prefix selection and anchored prefix DPO kernels; not a recommender or fused serving kernel", "cost_basis": "Private PinCLIP/OmniSage/engagement data, billion-item catalog, RQ-VAE and 4-layer 768-d model with up to 6144 training tokens, serving/production A/B matrix; GPU-hours undisclosed, complete reproduction not affordable/available"},
+    {"key": "pinterest-rlbp", "id": "2610.33248", "priority": "P0", "paper_url": "https://arxiv.org/html/2610.33248v1", "component_device": "cuda", "accepted_component": "Nine PID multiplier actions, dual-objective TD/reward/fusion/top-K policy/IPS tensor kernels, no live bidding", "cost_basis": "Full model needs private 21-day logs plus 7-day evaluation, actual auction/PID integration and paid production experiments; GPU-hours undisclosed, uncertain complete cost closes without a probe"},
+    {"key": "fold-bias", "id": "2610.36520", "priority": "P1", "paper_url": "https://arxiv.org/html/2610.36520v1", "component_device": "cuda", "accepted_component": "Ridge-constrained bias direction, actual bf16 rounding followed by value refit; no vLLM/LLM integration", "cost_basis": "Full multi-model 1.7B/4B/8B/14B plus Llama quality/serving matrix requires large weights and long-context evaluations"},
+    {"key": "swim", "id": "2610.36662", "priority": "P1", "paper_url": "https://arxiv.org/html/2610.36662v1", "component_device": "cuda", "accepted_component": "Trainable Gaussian inverse dynamics, contrastive gate objective and detached sqrt-g metric; no world-model planner", "cost_basis": "Full five-environment multi-seed LeWM/CEM and task-training matrix is long-running; no environments or weights downloaded"},
+    {"key": "mpopd", "id": "2610.36477", "priority": "P1", "paper_url": "https://arxiv.org/html/2610.36477v2", "component_device": "cuda", "accepted_component": "Teacher-top-k geometric proposal, previous-token relative-support reweighting and loss gradients; no LLM sampler/trainer", "cost_basis": "Full LLM teacher/student rollout, proposal-model training and task/model matrix exceed bounded component budget; no checkpoint or capability benchmark downloads"},
+    {"key": "emma", "id": "2610.35966", "priority": "P1", "paper_url": "https://arxiv.org/html/2610.35966v1", "component_device": "cpu", "accepted_component": "Structured memory ownership and guarded one-edit transaction; external semantic safety attestations, not an autonomous agent", "cost_basis": "Full multi-task LLM agents, editing judges and real memory workloads require long rollouts/API inference; no LLM calls or gold-answer access"},
+    {"key": "evalalloc", "id": "2610.37276", "priority": "P1", "paper_url": "https://arxiv.org/html/2610.37276v1", "component_device": "cpu", "accepted_component": "Calibration/MAP and paired selection numeric kernels with external fixed response/prior models; not full MIRT/search infrastructure", "cost_basis": "Complete LLM search/evaluation and warmup/MIRT fitting matrix are not run; only explicit small-array statistical subcomponents accepted"}
+  ]
+}

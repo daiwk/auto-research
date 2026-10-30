@@ -1,0 +1,567 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-30-overlap-components",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_tier": "l1_mechanism",
+  "components": [
+    {
+      "key": "concur",
+      "source": "src/auto_research/post_training/concur.py",
+      "device": "cpu",
+      "checks": [
+        "all_pass_auxiliary_removed",
+        "below_ceiling_ties_not_collapsed",
+        "binary_primary_has_no_trust_reading",
+        "ceiling_tied",
+        "cone_energy_identity",
+        "mean_preserved",
+        "primary_order_preserved",
+        "sixty_one_readings_required",
+        "whitening_is_whole_batch"
+      ],
+      "metrics": [
+        "all_pass_magnitude",
+        "order_energy",
+        "projection_mean_error",
+        "pythagorean_error",
+        "tied_energy",
+        "valid_trust_readings"
+      ],
+      "gates": [
+        {
+          "metric": "projection_mean_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "pythagorean_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "all_pass_magnitude",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "valid_trust_readings",
+          "op": "eq",
+          "value": 61
+        }
+      ]
+    },
+    {
+      "key": "merlin",
+      "source": "src/auto_research/foundation_models/merlin.py",
+      "device": "cuda",
+      "checks": [
+        "alignment_mean_independent_reference",
+        "alignment_variance_independent_reference",
+        "completed_segments_have_exact_boundary",
+        "moments_gate_queries_receive_real_gradient",
+        "raw_second_is_not_variance",
+        "readout_aggregation_reference",
+        "segment_future_mask_blocks_readout_changes",
+        "two_softmax_mixture_not_logit_mixture"
+      ],
+      "metrics": [
+        "future_readout_leak_error",
+        "gradient_norm",
+        "mean_reference_error",
+        "minimum_gradient_group_norm",
+        "model_calls",
+        "raw_moment_negative_control_gap",
+        "single_softmax_negative_control_gap",
+        "variance_reference_error"
+      ],
+      "gates": [
+        {
+          "metric": "mean_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "variance_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "future_readout_leak_error",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "minimum_gradient_group_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "crop",
+      "source": "src/auto_research/agent_research/crop.py",
+      "device": "cpu",
+      "checks": [
+        "callback_doubles_not_capability",
+        "literal_gradient_concatenation",
+        "optimizer_reference_field_absent",
+        "score_matches_equation4",
+        "strict_length_gate",
+        "unvalidated_final_not_selected",
+        "validated_prompt_selected"
+      ],
+      "metrics": [
+        "brevity_callback_count",
+        "evaluated_prompt_count",
+        "reference_normalized_length",
+        "reference_normalized_score"
+      ],
+      "gates": [
+        {
+          "metric": "evaluated_prompt_count",
+          "op": "eq",
+          "value": 2
+        },
+        {
+          "metric": "brevity_callback_count",
+          "op": "eq",
+          "value": 2
+        },
+        {
+          "metric": "reference_normalized_score",
+          "op": "gt",
+          "value": 0.91999999
+        },
+        {
+          "metric": "reference_normalized_score",
+          "op": "lt",
+          "value": 0.92000001
+        },
+        {
+          "metric": "reference_normalized_length",
+          "op": "eq",
+          "value": 0.4
+        }
+      ]
+    },
+    {
+      "key": "pinger",
+      "source": "src/auto_research/reproductions/pinger_components.py",
+      "device": "cuda",
+      "checks": [
+        "actual_actor_update",
+        "dense_stream_invariant",
+        "frozen_reference",
+        "no_model_or_serving_calls",
+        "ordinary_causal_mask_is_not_equivalent",
+        "prefix_penalty_changes_parent_spread",
+        "prefix_sum_not_last_level_only",
+        "zero_penalty_matches_top_width"
+      ],
+      "metrics": [
+        "actor_gradient_norm",
+        "causal_mask_negative_control_gap",
+        "dense_compaction_max_error",
+        "greedy_selected_parents",
+        "last_prefix_only_loss_gap",
+        "loss_after",
+        "loss_before",
+        "penalized_selected_parents",
+        "pretrained_model_calls"
+      ],
+      "gates": [
+        {
+          "metric": "dense_compaction_max_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "causal_mask_negative_control_gap",
+          "op": "gt",
+          "value": 1e-06
+        },
+        {
+          "metric": "loss_after",
+          "op": "lt",
+          "other_metric": "loss_before"
+        },
+        {
+          "metric": "actor_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "penalized_selected_parents",
+          "op": "gt",
+          "other_metric": "greedy_selected_parents"
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "pinterest-rlbp",
+      "source": "src/auto_research/reproductions/pinterest_rlbp.py",
+      "device": "cuda",
+      "checks": [
+        "CPC_reduction_retains_negative_sign",
+        "actual_reward_regression_update",
+        "exact_top_k_support",
+        "fusion_changes_preference",
+        "nine_bounded_PID_actions",
+        "no_live_bidder_or_model_calls",
+        "opposite_backup_directions",
+        "ordinary_IPS_not_self_normalized"
+      ],
+      "metrics": [
+        "actor_gradient_norm",
+        "derivative_gain_error",
+        "ips_reference_error",
+        "max_min_backup_error",
+        "policy_row_mass_error",
+        "pretrained_model_calls",
+        "td_loss_after",
+        "td_loss_before",
+        "wrong_cpc_max_backup_gap"
+      ],
+      "gates": [
+        {
+          "metric": "td_loss_after",
+          "op": "lt",
+          "other_metric": "td_loss_before"
+        },
+        {
+          "metric": "actor_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "max_min_backup_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "wrong_cpc_max_backup_gap",
+          "op": "gt",
+          "value": 1
+        },
+        {
+          "metric": "policy_row_mass_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "derivative_gain_error",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "ips_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "pretrained_model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "fold-bias",
+      "source": "src/auto_research/foundation_models/fold_bias.py",
+      "device": "cuda",
+      "checks": [
+        "context_projection_mean_constraint",
+        "dropping_bias_changes_attention",
+        "keys_really_rounded_before_value_refit",
+        "offline_fit_is_frozen",
+        "rank_one_logit_identity_reference",
+        "ridge_constrained_kkt_reference",
+        "rounded_value_fit_normal_equations",
+        "same_value_output_error_bound"
+      ],
+      "metrics": [
+        "cache_rounding_attention_gap",
+        "drop_bias_output_error",
+        "kkt_reference_error",
+        "logit_identity_error",
+        "minimum_output_bound_slack",
+        "model_calls",
+        "projection_mean_error",
+        "value_normal_equation_error"
+      ],
+      "gates": [
+        {
+          "metric": "logit_identity_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "projection_mean_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "kkt_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "value_normal_equation_error",
+          "op": "lt",
+          "value": 1e-10
+        },
+        {
+          "metric": "cache_rounding_attention_gap",
+          "op": "gt",
+          "value": 1e-08
+        },
+        {
+          "metric": "minimum_output_bound_slack",
+          "op": "ge",
+          "value": -1e-12
+        },
+        {
+          "metric": "model_calls",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "swim",
+      "source": "src/auto_research/foundation_models/swim.py",
+      "device": "cuda",
+      "checks": [
+        "current_state_is_not_gated",
+        "cyclic_hinge_negative_reference",
+        "gates_and_inverse_model_really_train",
+        "gaussian_nll_independent_reference",
+        "infonce_selected_denominator_reference",
+        "latent_geometry_receives_real_gradient",
+        "sqrt_gate_distance_reference",
+        "stage_two_gate_target_is_detached"
+      ],
+      "metrics": [
+        "behavior_only_gate_gradient_norm",
+        "correlation_loss",
+        "environment_interactions",
+        "gate_gradient_norm",
+        "gate_parameter_delta",
+        "hinge_reference_error",
+        "infonce_reference_error",
+        "metric_reference_error",
+        "nll_reference_error",
+        "predictor_gradient_norm"
+      ],
+      "gates": [
+        {
+          "metric": "nll_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "hinge_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "infonce_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "metric_reference_error",
+          "op": "lt",
+          "value": 1e-12
+        },
+        {
+          "metric": "behavior_only_gate_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "gate_parameter_delta",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "environment_interactions",
+          "op": "eq",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "key": "mpopd",
+      "source": "src/auto_research/post_training/mpopd.py",
+      "device": "cuda",
+      "checks": [
+        "conditional_support_normalized",
+        "eta_endpoints_match",
+        "first_prefix_weight_one",
+        "geometric_not_arithmetic",
+        "padding_gradient_zero",
+        "proposal_update_decreases_fixed_objective",
+        "student_update_decreases_fixed_objective",
+        "teacher_and_old_proposal_frozen",
+        "weights_detached"
+      ],
+      "metrics": [
+        "active_tokens",
+        "geometric_arithmetic_distance",
+        "proposal_gradient_norm",
+        "proposal_loss_after",
+        "proposal_loss_before",
+        "student_gradient_norm",
+        "student_loss_after",
+        "student_loss_before"
+      ],
+      "gates": [
+        {
+          "metric": "student_loss_after",
+          "op": "lt",
+          "other_metric": "student_loss_before"
+        },
+        {
+          "metric": "proposal_loss_after",
+          "op": "lt",
+          "other_metric": "proposal_loss_before"
+        },
+        {
+          "metric": "student_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "proposal_gradient_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "geometric_arithmetic_distance",
+          "op": "gt",
+          "value": 1e-05
+        },
+        {
+          "metric": "active_tokens",
+          "op": "eq",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "key": "emma",
+      "source": "src/auto_research/agent_research/emma.py",
+      "device": "cpu",
+      "checks": [
+        "old_snapshot_not_mutated",
+        "one_skill_entry_changed",
+        "overflow_preserves_completed_prefix",
+        "overflow_preserves_suffix",
+        "six_contract_violations_refused",
+        "specialist_inherits_current_generalist",
+        "unused_edit_cannot_claim_exercised"
+      ],
+      "metrics": [
+        "original_plan_steps",
+        "original_skill_count",
+        "rejected_negative_controls",
+        "split_plan_steps",
+        "updated_skill_count"
+      ],
+      "gates": [
+        {
+          "metric": "original_skill_count",
+          "op": "eq",
+          "value": 0
+        },
+        {
+          "metric": "updated_skill_count",
+          "op": "eq",
+          "value": 1
+        },
+        {
+          "metric": "rejected_negative_controls",
+          "op": "eq",
+          "value": 6
+        },
+        {
+          "metric": "original_plan_steps",
+          "op": "eq",
+          "value": 3
+        },
+        {
+          "metric": "split_plan_steps",
+          "op": "eq",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "key": "evalalloc",
+      "source": "src/auto_research/agent_research/evalalloc.py",
+      "device": "cpu",
+      "checks": [
+        "MAP_predictions_finite",
+        "acquisition_without_replacement",
+        "budget_self_fit_and_hidden_cells_refused",
+        "cached_cells_not_reexecuted",
+        "common_core_preserved",
+        "full_observation_correction_zero",
+        "item_parameters_frozen_during_MAP",
+        "pooled_slope_clipped",
+        "search_union_cache_preserved"
+      ],
+      "metrics": [
+        "adjusted_score_a",
+        "completed_fitness",
+        "information_score_max",
+        "map_parameter_norm",
+        "missing_execution_cells",
+        "regression_slope",
+        "rejected_negative_controls"
+      ],
+      "gates": [
+        {
+          "metric": "map_parameter_norm",
+          "op": "gt",
+          "value": 0
+        },
+        {
+          "metric": "missing_execution_cells",
+          "op": "eq",
+          "value": 3
+        },
+        {
+          "metric": "regression_slope",
+          "op": "ge",
+          "value": 0
+        },
+        {
+          "metric": "regression_slope",
+          "op": "le",
+          "value": 1.5
+        },
+        {
+          "metric": "rejected_negative_controls",
+          "op": "eq",
+          "value": 3
+        }
+      ]
+    }
+  ]
+}
