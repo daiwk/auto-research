@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-30",
+  "review_scope": "Google/Google DeepMind/Meta bounded official publication directories, current blog landings, newly created public org repositories, and bounded recent repository activity. No claim of all-source exhaustion.",
+  "artifacts": {
+    "publication_inventory": "official-directory-check.json",
+    "primary_page_receipts": "official-primary-receipts.json",
+    "bounded_repo_activity": "official-repo-activity.json"
+  },
+  "directory_delta": {
+    "baseline": "docs/research-audits/oct29-components/official-source-inventory.json",
+    "baseline_kind": "committed original full parsed directory inventory; not reconstructed",
+    "pages_attempted": 44,
+    "pages_retrieved": 44,
+    "google_records": 435,
+    "meta_records": 144,
+    "deepmind_records": 266,
+    "new_urls": 0,
+    "removed_urls": 0,
+    "changed_records": 0,
+    "limitations": "Google29 and DeepMind9 pages use current pagination hints and inherited fallback. Meta6 pages remain an explicitly bounded slice, not exhaustive. A zero parsed directory delta does not prove no new paper exists elsewhere."
+  },
+  "blog_review": [
+    {
+      "organization": "Google",
+      "url": "https://research.google/blog/",
+      "latest_visible_date": "2026-10-27",
+      "latest_visible_item": "The sleep framework: A new way for LLMs to retain knowledge in continual learning",
+      "disposition": "already_collected_sleep_lti_no_new_paper"
+    },
+    {
+      "organization": "Google DeepMind",
+      "url": "https://deepmind.google/blog/",
+      "latest_relevant_items": [
+        "Genie 4: A new generation of world simulation",
+        "Gemini 4 Carbon: Our next frontier model"
+      ],
+      "disposition": "known_source_only_previews_no_verified_new_paper_or_code"
+    },
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/blog/",
+      "latest_visible_date": "2026-07-27",
+      "disposition": "no_new_visible_item_in_landing_slice_not_company_exhaustion"
+    }
+  ],
+  "repository_review": {
+    "new_public_repositories_created_on_or_after": "2026-10-29",
+    "organizations": [
+      "google-research",
+      "google-deepmind",
+      "facebookresearch"
+    ],
+    "total_new_repositories": 0,
+    "github_search_incomplete_results": false,
+    "recent_activity_scope": "latest30 repositories per org by pushed_at; metadata only, no per-repo prior SHA baseline",
+    "recent_activity_disposition": "Push timestamps are source leads, not new paper or public code-release evidence. No implementation count or paper count inferred from them. Full record preserved in bounded_repo_activity.",
+    "previously_resolved_releases_not_reopened": [
+      "google-deepmind/hope",
+      "facebookresearch/retrieval-programs",
+      "facebookresearch/sixthview_benchmark"
+    ]
+  },
+  "papers": [
+    {
+      "key": "crop",
+      "paper_id": "2604.14214v1",
+      "title": "CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization",
+      "published_at": "2026-04-08T19:31:25Z",
+      "intake_class": "historical_backfill",
+      "first_author": "Deep Shah",
+      "first_author_affiliation": "Google LLC",
+      "other_affiliations": [
+        "Google LLC",
+        "Purdue University"
+      ],
+      "institution_evidence": "PDF page1 and HTML author affiliations",
+      "sources": [
+        "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/",
+        "https://arxiv.org/abs/2604.14214",
+        "https://arxiv.org/html/2604.14214v1",
+        "https://arxiv.org/pdf/2604.14214v1"
+      ],
+      "dedup_result": "Only directory source-history rows existed, no catalog key, code module or individual README before this batch.",
+      "algorithm": "Algorithm1 and Eqs1-4: target response; training task text critique; strict output-token threshold brevity critique; concatenate task + newline + regularization text; external meta-optimizer rewrites prompt; accuracy minus lambda normalized mean output-token score selects prompt.",
+      "cost_basis": "Gemini3.1Pro Thinking optimizer, Gemini2Flash dual evaluators, Gemini2Flash and Qwen2.5-7B targets; GSM8K/LogiQA/BBH plus baselines and validation hyperparameter search. T/B and total cost not fully specified, do not assume cheap.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "low_cost_scope": "CPU callback control, typed gold-free target/optimizer interfaces, strict token gate, literal concatenation, fixed validation cohort/CoT normalization and no promotion of unvalidated final proposal. No LLM/API/model execution or Evolve capability.",
+      "fidelity_deviation": "Algorithm1 monitors training batch. Local selection explicitly strengthened to independent fixed validation with train-ID separation, documented as local anti-leakage contract.",
+      "code_status": "No author CROP repository link verified in official directory or complete reviewed paper; TextGrad is a dependency, not CROP upstream.",
+      "reported_result_caveat": "Table3 includes accuracy decreases, e.g. Gemini2Flash ObjectCounting96.0->94.8 while tokens101.2->19.6. Do not advertise token reductions as universally lossless.",
+      "online_ab": "not reported; general LLM/Agent prompt optimization, industrial production A/B gate not its selection basis"
+    },
+    {
+      "key": "concur",
+      "paper_id": "2610.36437v1",
+      "title": "CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning",
+      "published_at": "2026-10-27T00:36:59Z",
+      "intake_class": "same_announcement_backfill_not_today_first_publication",
+      "first_author": "Jixuan Leng",
+      "first_author_affiliation": "CMU",
+      "google_priority_basis": "Work while interning at Google; Google/Google DeepMind coauthors; do not rewrite first-author institution to Google.",
+      "sources": [
+        "https://arxiv.org/abs/2610.36437",
+        "https://arxiv.org/html/2610.36437v1"
+      ],
+      "method_checks": "Auxiliary group-standardized scores projected to primary partial-order cone. Tie ceiling scores by their mean then PAVA, but equal primary values below ceiling have no artificial equality constraint. No re-standardization after projection. Earned trust uses cumulative per-group agreement mean >2*SE, including current batch; binary primary never earns a reading. Whole-batch whitening follows weighted sum.",
+      "cost_basis": "AppendixD.2 explicitly 4 nodes x8 NVIDIA RTX PRO6000 =32GPUs per run; 300steps,512prompts,8responses,4K/8K completions; 3base models, multiple estimators and15benchmarks.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "code_status": "No method-author repository link verified in HTML; OpenR1 and benchmark references are not CONCUR code."
+    },
+    {
+      "key": "merlin",
+      "paper_id": "2610.37645v1",
+      "title": "Multi-State Linear Attention with Generalized Second-Order Routing",
+      "published_at": "2026-10-27T17:55:49Z",
+      "intake_class": "same_announcement_backfill_not_today_first_publication",
+      "first_author": "Hee Seung Hwang",
+      "first_author_affiliation": "Princeton University",
+      "google_priority_basis": "Coauthor Zhiwei Deng affiliated Google DeepMind; first author remains Princeton.",
+      "sources": [
+        "https://arxiv.org/abs/2610.37645",
+        "https://arxiv.org/html/2610.37645v1"
+      ],
+      "method_checks": "Store segment mean and raw second moment of projected routing keys. Recover q^Tmean and q^TsecondMoment*q-(q^Tmean)^2. Normalize mean and variance scores with separate softmaxes and learned temperatures, then mix by learned scalar gate. Do not replace with a single softmax of summed moments; retain causal visible-segment mask.",
+      "cost_basis": "GatedDeltaNet1.3B pretraining50B tokens; Mamba2-780M checkpoint pretrained300B tokens; both need 2B-token stage1 and60M-token stage2 at16K context/256-token segments, multiple baselines and long-context benchmarks.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "code_status": "No method-author repository link verified in reviewed paper; pretrained Mamba HF checkpoint is not MERLIN code."
+    }
+  ]
+}

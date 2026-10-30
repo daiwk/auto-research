@@ -100,6 +100,7 @@
 
 ## Carnegie Mellon University
 
+- 2026-10-27 · 一作：Jixuan Leng · [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](../2610.36437-concur/README.md)（`concur`）：多奖励RL常让主奖励决定辅助奖励是否生效，但逐分量标准化会破坏原先优先级：辅助分量可能反转主奖励的排序；所有响应都已正确时，微小长度差异也可能独自决定更新。CONCUR不重写奖励或调低全局权重，而是在每个prompt组内把门控辅助优势投影到与主奖励相容的最近分数。
 - 2026-04-17 · 一作：Jixuan Leng · [GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization](../2604.15602-group-dpo/README.md)（`group-dpo`）：GroupDPO 先无梯度计算**所有响应在当前参数点的全组导数**，再固定这些系数逐响应微批次反传，保留完整组目标的一阶梯度。它支持一条提示的多个正负响应，避免为计算组目标而同时保留整组模型激活；不保证替身损失值或二阶导数等价。
 
 ## Chongqing University
@@ -558,6 +559,7 @@
 
 ## University of Illinois Urbana-Champaign
 
+- 2026-10-27 · 一作：Sirui Chen · [Proposing Better Rollouts for On-Policy Distillation](../2610.36477-mpopd/README.md)（`mpopd`）：普通OPD从学生采样，教师却可能很少走到这些前缀，师生可达区域差距会被后续学生更新放大。MPOPD把采样策略本身作为优化对象：理想提案是学生与教师概率的几何混合，实际训练一个独立proposal近似它，从而生成时只运行proposal。
 - 2026-10-20 · 一作：Jiashuo Sun · [Ask to Distill: Learning to Synthesize Data for On-Policy Distillation](../2610.27450-ask-to-distill/README.md)（`ask-to-distill`）：问题决定学生会走到哪些前缀，因而决定教师能提供什么监督。A2D 冻结评分用的师生，训练独立的问题合成器；奖励同时要求“有差异”和“教师偏好的候选仍落在学生可达支持集”，然后筛选问题库，再从原始学生初始化执行 OPD。
 - 2026-10-15 · 一作：Bangji Yang · [Training-Free On-Policy Distillation](../2610.22236-tf-opd/README.md)（`tf-opd`）：共同初始化的专家模型，其线性层融合可以写成匹配各教师输出的最小二乘。关键不是任意协方差，而是每个教师在**自己生成的、经过终止和循环筛选的答案**上实际遇到的输入二阶矩；统计按 token 数归一，不能让长答案自然压倒其他领域。
 - 2026-10-14 · 一作：Xuanchang Zhang · [Gibbs-Gap Policy Optimization for Off-Policy RL with Verifiable Rewards](../2610.20814-ggpo/README.md)（`ggpo`）：behavior policy 负责产生样本，reference policy 负责 KL anchor，两者不是同一角色。组内 adjusted reward 全相同时，策略满足该 reference 的 Gibbs 目标。

@@ -7,9 +7,9 @@ hide:
 
 # 生成一个物品，先后跨过码本、模型分布与合法目录三道关
 
-[搜广推](../index.md) · 更新 2026-10-29 · 61 篇主题资料 / 6 篇重点对照
+[搜广推](../index.md) · 更新 2026-10-30 · 62 篇主题资料 / 7 篇重点对照
 
-TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。
+TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。 PinGER再把历史输入与SID监督拆开，并将前缀多样化选择、分层DPO和合法目录分别治理。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/recommendation/generative-retrieval-reasoning.md)
 
@@ -31,6 +31,7 @@ TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补�
 | [Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators](../../../recommendation-components/2602.22647-static-constraint-decoding/README.md) · [原始来源](https://arxiv.org/abs/2602.22647)<br>章节：背景与主要改动、核心公式、结果与边界 | 将合法token路径编成加速器内CSR迁移，先全词表log-softmax，再非法项置负无穷，并同步维护beam前缀和node状态。 | 改变约束执行的成本与合法性，不会创造模型未学到的偏好；不能在每个合法子集重新归一化后还声称保持同一条原模型路径分数。 |
 | [Reward Guided Decoding for Generative Recommendation](../../../reproductions/2607.25344-reward-guided-decoding/README.md) · [原始来源](https://arxiv.org/abs/2607.25344)<br>章节：背景与主要改动、核心公式、复现边界 | 固定生成先验P0，用exp(R/β)倾斜得到Q，以KL温度限制偏离，不重新训练生成器。 | reward可重排既有支持，却不能令P0为零的路径凭空出现；代理reward和线上价值不同，本地MovieLens构造任务不等于生产收益。 |
 | [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md) · [原始来源](https://arxiv.org/abs/2610.36958v1)<br>章节：背景与主要改动、核心公式 | 统一图文到SID集合，多意图/预算训练与Sample–Beam服务对齐。 | 完整多模型多阶段和私有生产实验高成本不复现；无本地占位模型。 |
+| [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../../recommendation-components/2610.33435-pinger/README.md) · [原始来源](https://arxiv.org/abs/2610.33435v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 训练交错SID/dense并关闭跨商品SID读取，服务删除过去SID；按LCP深度逐beam惩罚，所有SID前缀DPO与NTP锚联合后训练。 | 不同于TIGER逐项历史SID输入，也不能把前缀多样性当STATIC合法性；多样性会牺牲离线recall，本地无完整tokenizer/服务。 |
 
 </div>
 
@@ -53,6 +54,12 @@ STATIC回答某前缀下哪些token能通向合法目录，Reward Guided Decodin
 PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合，以数据工具、CPT、混合预算SFT和意图均衡RL扩展服务。Sample–Beam使推理采样与候选束生成分别对应训练/展示需要；大模型或更长思考不保证所有意图更好。与其他生成式召回对比时应固定候选集合、预算和生产混排口径，而不是只比模型名字。完整方案本地不复现。
 
 对照来源：[tiger](../../../reproductions/2305.05065-tiger/README.md) · [pailitao-mmsearch2](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)
+
+### 历史输入、候选覆盖与合法路径分别付费
+
+TIGER把历史商品表示成多级SID序列；PinGER保留SID逐级监督，却限制主干内的读取角色，让后续商品只读历史dense。这里dense仍可包含SID fusion，不能误写成没有离散信息。PinGER的LCP惩罚只改变同层beam如何分散名额，不负责排除不存在的SID；STATIC才显式编译合法迁移。更广前缀也非免费收益：原文λ=3时distinct@1上升而R@100下降。原文整栈线上增益不能被归到本地mask或DPO单核。
+
+对照来源：[pinger](../../../recommendation-components/2610.33435-pinger/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md) · [static-constraint-decoding](../../../recommendation-components/2602.22647-static-constraint-decoding/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -98,9 +105,23 @@ PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合�
 
     对照来源：[tiger](../../../reproductions/2305.05065-tiger/README.md) · [pailitao-mmsearch2](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)
 
+### PinGER的前缀多样化能代替STATIC合法目录掩码，或保证TIGER式离线召回同时提高吗？ {#cross-pinger-prefix-spread-versus-static-legality}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。LCP惩罚在候选父前缀间分散名额，是软选择偏好；STATIC定义哪些路径通向合法物品，是可行域。分散到更多子树还可能牺牲单一held-out物品的recall，PinGER原表也显示这种取舍。输入删SID、更多多样性和合法输出不可混成一项。
+
+    **教学例子：** 教学示意：三个语义类别都得到beam名额，仍可能含目录不存在的叶子；过滤非法叶子也不自动保证目标物品被保留下来。
+
+    对照来源：[pinger](../../../recommendation-components/2610.33435-pinger/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md) · [static-constraint-decoding](../../../recommendation-components/2602.22647-static-constraint-decoding/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-30** · 精读PinGER三mask规则、单层LCP惩罚和逐prefixDPO锚；与TIGER历史SID成本及STATIC合法迁移分轴对照，保留多样性/recall取舍和整栈线上证据边界。
+
+涉及：[pinger](../../../recommendation-components/2610.33435-pinger/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md) · [static-constraint-decoding](../../../recommendation-components/2602.22647-static-constraint-decoding/README.md)
 
 **2026-10-29** · PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合，以数据工具、CPT、混合预算SFT和意图均衡RL扩展服务。Sample–Beam使推理采样与候选束生成分别对应训练/展示需要；大模型或更长思考不保证所有意图更好。与其他生成式召回对比时应固定候选集合、预算和生产混排口径，而不是只比模型名字。完整方案本地不复现。
 
@@ -110,7 +131,7 @@ PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合�
 
 覆盖 60 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 61 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 62 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -175,6 +196,7 @@ PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合�
 - [WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat](../../../reproductions/2610.16979-wegr/README.md)
 - [X-Rec Technical Report](../../../reproductions/2609.29180-xrec/README.md)
 - [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)
+- [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../../recommendation-components/2610.33435-pinger/README.md)
 
 </details>
 

@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 224 个问题 · 56 篇论文
+[Agent](index.md) / 228 个问题 · 57 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">224 个问题 · 56 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">228 个问题 · 57 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:discernmem" data-paper-title="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems Agent East China Normal University 2026-10-27 团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。仅当负效应发生在适用范围内，而且配对轨迹支持具体缺陷时，才触发改写；已有avoid条件优先约束使用，不靠改写覆盖掉范围错误。修复不是只把眼前任务做对。候选需要同时通过触发任务、过去有用任务和相关任务上的保留性检查；新body生成新版本，父版本的正效果不能冒充新版本可靠性。 完整实验：成本过高，不复现（审查 DONE），不自动重试。图中的检索、LLM语义诊断和团队执行不在本地组件范围内。本地状态：L1 数值与版本规则组件，diagnostic only，不是多 Agent 记忆能力复现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部真实测量得分与显式任务/版本/角色/seed/配置，不是预造的Agent答案。paired_effect拒绝不一致的配对元数据；repair_gate拒绝空集、重复任务或缺触发任务，逐条比较父记忆和无记忆基线。revised_version保留identity/owner，拒绝source任务参与验证，并清空父版本效果。  Agent记忆 配对重放与非退化修复 Agent 记忆与技能：让经验可取回、可失效 一次团队失败，为什么不能直接把用过的记忆全部改写？ 失败可能来自别的角色、工具或不适用的场景。DiscernMem用相同任务、seed和配置的单记忆重放与无记忆重放衡量孤立注入效果；再区分规则内容确有缺陷，还是好规则超出使用范围。负效果本身仍不足以证明内容有错。 教学例：‘先修复源码再跑测试’可能适用于代码bug，但测试环境故障时继续改源码反而有害。应补avoid范围，而不是删除一条本来有用的源码修复经验。 2026-10-29">
@@ -80,6 +80,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：v2在历史10题表现好，v3增加一个停止条件后，不能直接写‘v3已在10题验证’；v2记录需保留，而v3的effect记录从空开始。</p>
 <p class="ar-learning-sources">依据：核心公式、数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36652v1">原论文</a> · <a href="../../../../agent-research/2610.36652-discernmem/">实现解读</a> · <a href="#qa-3fc0461b8244cb89">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:emma" data-paper-title="EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis Agent University of California San Diego 2026-10-25 把失败一律写进prompt、skill或新增agent，会让结构变化跟随backbone偏好而不是失败原因。EMMA把持久记忆分为controller路由规则、继承generalist的agent专门化、每步可分配的skill，并让每次反思只修改承担修复责任的一项。单次执行失误只产生本任务临时plan directive；通用工作习惯写prompt，方法缺失写skill，分解/派发错误归controller。上下文或轮数overflow首先拆分未完成步骤，保留已完成工作，不直接视为能力失败。 完整多模型多环境实验成本过高，不复现（审查 DONE）；apply_guarded_edit真实复制并修改一个内存条目，检查scope、参与者、完整行保留、轮换、大小、池上限、训练/剩余rerun边界。prompt_for在读取时继承当前generalist，splice_overflow只用现有agent/skill替换未完成步骤。  自进化与工作流 分层记忆与局部更新 Agent 记忆与技能：让经验可取回、可失效 EMMA为什么不把每次失败都写成新的skill？ 不同错误的修复责任不同。单次执行失误只需本任务plan指令，通用习惯归agent prompt，方法缺失归skill，路由错误归controller。写错层级的经验可能不再触发或干扰无关任务，结构化ownership用来限制这种任意增长。 教学例：忘记检查输入单位可成为可复用方法；某次误点按钮不一定需要永久增加一个单位检查skill，更不必新增agent。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-emma-e2de2da1" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-b5bc65c5db3ad6e9">EMMA为什么不把每次失败都写成新的skill？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aemma">EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · University of California San Diego</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同错误的修复责任不同。单次执行失误只需本任务plan指令，通用习惯归agent prompt，方法缺失归skill，路由错误归controller。写错层级的经验可能不再触发或干扰无关任务，结构化ownership用来限制这种任意增长。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：忘记检查输入单位可成为可复用方法；某次误点按钮不一定需要永久增加一个单位检查skill，更不必新增agent。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.35966v1">原论文</a> · <a href="../../../../agent-research/2610.35966-emma/">实现解读</a> · <a href="#qa-b5bc65c5db3ad6e9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:emma" data-paper-title="EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis Agent University of California San Diego 2026-10-25 把失败一律写进prompt、skill或新增agent，会让结构变化跟随backbone偏好而不是失败原因。EMMA把持久记忆分为controller路由规则、继承generalist的agent专门化、每步可分配的skill，并让每次反思只修改承担修复责任的一项。单次执行失误只产生本任务临时plan directive；通用工作习惯写prompt，方法缺失写skill，分解/派发错误归controller。上下文或轮数overflow首先拆分未完成步骤，保留已完成工作，不直接视为能力失败。 完整多模型多环境实验成本过高，不复现（审查 DONE）；apply_guarded_edit真实复制并修改一个内存条目，检查scope、参与者、完整行保留、轮换、大小、池上限、训练/剩余rerun边界。prompt_for在读取时继承当前generalist，splice_overflow只用现有agent/skill替换未完成步骤。  自进化与工作流 分层记忆与局部更新 Agent 记忆与技能：让经验可取回、可失效 反思提出的修改为何既要一次一个条目，又要保留至少60%的旧prompt行？ 单条目和所属scope限制改动位置，行保留和长度/池容量限制改动幅度，防止backbone重写整个系统。只允许参与失败尝试的agent被改；新条目还必须在下一次计划实际使用。结构可接受并不证明它一定改善任务结果。 教学例：旧prompt五行，只保留两行再换成全新角色会被拒绝；保留三行并加一条局部检查才满足60%门槛，仍需外部重跑。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c81e84114c9000a3">反思提出的修改为何既要一次一个条目，又要保留至少60%的旧prompt行？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aemma">EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · University of California San Diego</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单条目和所属scope限制改动位置，行保留和长度/池容量限制改动幅度，防止backbone重写整个系统。只允许参与失败尝试的agent被改；新条目还必须在下一次计划实际使用。结构可接受并不证明它一定改善任务结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧prompt五行，只保留两行再换成全新角色会被拒绝；保留三行并加一条局部检查才满足60%门槛，仍需外部重跑。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.35966v1">原论文</a> · <a href="../../../../agent-research/2610.35966-emma/">实现解读</a> · <a href="#qa-c81e84114c9000a3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:emma" data-paper-title="EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis Agent University of California San Diego 2026-10-25 把失败一律写进prompt、skill或新增agent，会让结构变化跟随backbone偏好而不是失败原因。EMMA把持久记忆分为controller路由规则、继承generalist的agent专门化、每步可分配的skill，并让每次反思只修改承担修复责任的一项。单次执行失误只产生本任务临时plan directive；通用工作习惯写prompt，方法缺失写skill，分解/派发错误归controller。上下文或轮数overflow首先拆分未完成步骤，保留已完成工作，不直接视为能力失败。 完整多模型多环境实验成本过高，不复现（审查 DONE）；apply_guarded_edit真实复制并修改一个内存条目，检查scope、参与者、完整行保留、轮换、大小、池上限、训练/剩余rerun边界。prompt_for在读取时继承当前generalist，splice_overflow只用现有agent/skill替换未完成步骤。  自进化与工作流 分层记忆与局部更新 Agent 记忆与技能：让经验可取回、可失效 context overflow与真正缺少能力，为何不能用相同的新增agent策略处理？ overflow可能只是子任务切得太粗，先把未完成步骤拆小并从原位置继续，可保留已完成工作。只有不存在合适能力或连续overflow的结构证据才支持新专门化；连续overflow时继续改prompt/skill也不符合改变拆分方式的要求。 教学例：前两步已产出表格，第三步材料太多。应保留前两步、把第三步拆成若干已有agent可执行步骤，而不是重新开始整条任务或把文件定位器当新专家。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-628c21208d8098ea">context overflow与真正缺少能力，为何不能用相同的新增agent策略处理？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aemma">EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · University of California San Diego</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>overflow可能只是子任务切得太粗，先把未完成步骤拆小并从原位置继续，可保留已完成工作。只有不存在合适能力或连续overflow的结构证据才支持新专门化；连续overflow时继续改prompt/skill也不符合改变拆分方式的要求。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：前两步已产出表格，第三步材料太多。应保留前两步、把第三步拆成若干已有agent可执行步骤，而不是重新开始整条任务或把文件定位器当新专家。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.35966v1">原论文</a> · <a href="../../../../agent-research/2610.35966-emma/">实现解读</a> · <a href="#qa-628c21208d8098ea">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:emma" data-paper-title="EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis Agent University of California San Diego 2026-10-25 把失败一律写进prompt、skill或新增agent，会让结构变化跟随backbone偏好而不是失败原因。EMMA把持久记忆分为controller路由规则、继承generalist的agent专门化、每步可分配的skill，并让每次反思只修改承担修复责任的一项。单次执行失误只产生本任务临时plan directive；通用工作习惯写prompt，方法缺失写skill，分解/派发错误归controller。上下文或轮数overflow首先拆分未完成步骤，保留已完成工作，不直接视为能力失败。 完整多模型多环境实验成本过高，不复现（审查 DONE）；apply_guarded_edit真实复制并修改一个内存条目，检查scope、参与者、完整行保留、轮换、大小、池上限、训练/剩余rerun边界。prompt_for在读取时继承当前generalist，splice_overflow只用现有agent/skill替换未完成步骤。  自进化与工作流 分层记忆与局部更新 Agent 记忆与技能：让经验可取回、可失效 本地守卫都通过，是否已证明记忆无泄漏且Agent能力更强？ 没有。代码只执行ownership、容量、行保留、轮换、生命周期和拼接等结构合同；语义去重、真正专门化与答案泄漏由独立外部服务给显式判断，本地不能自动证明其正确。当前没有被评测actor、LLM反思或真实任务轨迹，更不应输出全1能力分数。 教学例：外部服务误把含答案的提案标为安全，布尔接口本身无法发现语义错误；本地拒绝计数只能说明拒绝规则被触发，不能成为完整AppWorld成功率。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c89ecfb26059fd12">本地守卫都通过，是否已证明记忆无泄漏且Agent能力更强？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aemma">EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · University of California San Diego</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。代码只执行ownership、容量、行保留、轮换、生命周期和拼接等结构合同；语义去重、真正专门化与答案泄漏由独立外部服务给显式判断，本地不能自动证明其正确。当前没有被评测actor、LLM反思或真实任务轨迹，更不应输出全1能力分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：外部服务误把含答案的提案标为安全，布尔接口本身无法发现语义错误；本地拒绝计数只能说明拒绝规则被触发，不能成为完整AppWorld成功率。</p>
+<p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.35966v1">原论文</a> · <a href="../../../../agent-research/2610.35966-emma/">实现解读</a> · <a href="#qa-c89ecfb26059fd12">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cache-engineering" data-paper-title="Cache Engineering for Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Cache Engineering for Agents Agent Tsinghua University 2026-10-20 删改早期对话文本会使后续KV失效，重prefill又产生费用。作者保留逻辑文本，直接drop旧工具响应的KV，必要时repos重设保留键的位置；缓存状态取决于操作发生的历史，不能只根据最终token前缀判断是否可复用。AKV基于扩展radix结构管理位置版本、驱逐与恢复，并探索RSI生成缓存策略。§3–4 成本过高，不复现（审查 DONE）。本轮未实现、未运行、未下载模型。本轮未实现、未运行、未下载模型。不提供本地执行命令，不生成GPU收据或虚构指标；上游安装方式请看作者仓库。不能用少量RoPE张量运算冒充已接入AKV系统、真实推理或RSI。  Agent运行时 KV缓存管理与推理效率 Agent 记忆与技能：让经验可取回、可失效 长程 Agent 为什么会出现“聊天记录还在，推理缓存却放不下”的问题？ 逻辑对话保存文本，推理时的 KV cache 保存各层对历史 token 的中间表示，二者占用和用途不同。对话增长会让缓存内存与后续读取开销增加；Cache Engineering 研究直接管理这些状态，在保留逻辑记录的同时控制计算资源，但删缓存后的恢复仍有成本。 教学例：一万行工具日志仍保存在会话中，但暂时不再需要其 KV；以后重新用到日志时，系统可能必须重新计算表示。 2026-10-27">
@@ -3010,7 +3063,7 @@ hide:
 
 ## 记住这一点
 
-记忆是带写入、检索、更新和淘汰策略的状态系统。MemGPT 通过不同存储层移动信息，让有限窗口按需访问外部归档；Voyager 把成功程序积累成可检索技能。事实、临时推断与可执行技能有不同的复用条件：一条事实可能过期，一个程序也可能只适用于特定工具版本。先问未来要做哪个决策，再决定保留何种证据。
+记忆是带写入、检索、更新和淘汰策略的状态系统。MemGPT 通过不同存储层移动信息，让有限窗口按需访问外部归档；Voyager 把成功程序积累成可检索技能。事实、临时推断与可执行技能有不同的复用条件：一条事实可能过期，一个程序也可能只适用于特定工具版本。先问未来要做哪个决策，再决定保留何种证据。 EMMA要求先把一次执行失误、行为习惯、方法缺失和路由问题分开，再决定改临时计划、prompt、skill还是controller；存储分层之外还要明确修复责任。
 
 ## 一个例子
 

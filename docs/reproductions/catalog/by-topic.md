@@ -276,6 +276,7 @@
 
 ### 大模型能力与推荐融合
 - [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)：以原图和自由文本直接生成商品SID集合，用组合数据工具、商品知识CPT、混合推理预算SFT和意图均衡RL扩展统一多模态搜索。Sample–Beam分离推理采样与SID束生成以对齐多结果服务；完整实验高成本不复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../recommendation-components/2610.33435-pinger/README.md)：用训练专用SID与历史dense的非对称mask保留多级监督而压缩服务输入，再按共同前缀深度分配beam并用所有前缀DPO加NTP锚校准排序偏好。本地仅实现可核对的数值机制，不实现生产模型/稀疏kernel或复现线上收益。
 
 ## 训练目标与决策优化
 
@@ -338,6 +339,7 @@
 
 ### 广告与商业决策
 - [Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion](../../recommendation-components/2610.32420-hge/README.md)：先以商品自注意力编码竞争，再注入用户/门店/上下文；将门店GTV拆为转化概率乘条件商品购买概率、数量和价格之和，再用有符号残差与按样本门控融合通用回归。本地是Eqs2--11可微L1组件，不含DIN/DCN、论文完整Dice塔或生产训练，不能声称复现+1.42%线上收益。
+- [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../recommendation-components/2610.33248-pinterest-rlbp/README.md)：保留高频PID，在日级从9个P/I倍率动作中选择，分别回归预算利用率与CPC相对生产基线的变化，再按生命周期融合并top-K随机选择。实际部署gamma为0；本地实现双头目标、负CPC奖励与有界策略/IPS核，不实现私有Q网络或线上出价。
 
 ### 大模型能力与推荐融合
 - [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../recommendation-components/2610.36973-kl-mopd/README.md)：先在冻结初始学生的生成前缀上按位置估计到两位教师的反向KL，以其比例固定教师权重。当前学生在自己的前缀上最小化加权反向KL；本地仅实现校准和可微损失，不运行推荐器或继承线上收入增益。

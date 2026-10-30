@@ -20,12 +20,12 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a></h2>
 <p>一个最终分数，怎样转成不会奖励错误步骤的训练信号？</p>
-<p class="ar-learning-topic-meta">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-topic-meta">148 个问题 · 37 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
-<h2><a href="student-trajectory-distillation/">在策略蒸馏：沿学生实际走过的前缀学习</a></h2>
+<h2><a href="student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a></h2>
 <p>学生总在自己的错误前缀上继续生成，为什么只模仿教师完整答案可能教不到那里？</p>
-<p class="ar-learning-topic-meta">160 个问题 · 40 篇论文</p>
+<p class="ar-learning-topic-meta">164 个问题 · 41 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a></h2>

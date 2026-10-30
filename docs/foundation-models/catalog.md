@@ -10,8 +10,11 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推理与系统效率 | [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](2610.36520-fold-bias/README.md) | Independent Researcher，2026-10-27 | 未发现官方代码 | `fold-bias`：仅低成本组件，完整实验不复现 |
 | JEPA与世界模型 | [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](2610.36877-gui-jepa/README.md) | Shanghai Jiao Tong University / Nanyang Technological University，2026-10-27 | [原作者入口](https://github.com/bcwang-sjtu/GUI-JEPA)；原作者仓库可访问但固定commit仅README占位；方法源码尚未发布，不能称已开源可执行GUI-JEPA | `gui-jepa`：仅低成本组件，完整实验不复现 |
+| 注意力与长上下文 | [Multi-State Linear Attention with Generalized Second-Order Routing](2610.37645-merlin/README.md) | Princeton University，2026-10-27 | 未发现官方代码 | `merlin`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](2610.36794-select-ttt/README.md) | University of Science and Technology of China，2026-10-27 | 未发现官方代码 | `select-ttt`：仅低成本组件，完整实验不复现 |
+| JEPA与世界模型 | [SWIM: Learning What Matters from Behaviors for JEPA World Models](2610.36662-swim/README.md) | Boston University / Unity Technologies，2026-10-27 | 未发现官方代码 | `swim`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [ResCom: Activation Residual Compensation for Large Language Model Quantization](2610.35955-rescom/README.md) | Institute of Automation, Chinese Academy of Sciences，2026-10-25 | 未发现官方代码 | `rescom`：仅低成本组件，完整实验不复现 |
 | JEPA与世界模型 | [DT-JEPA: Learning to Predict Future Representations for Decision-Making](2610.32657-dt-jepa/README.md) | Southeast University，2026-10-23 | 未发现官方代码 | `dt-jepa`：仅低成本组件，完整实验不复现 |
 | System One / JEV | [EditJev: System One Routing for Image Editing Models](2610.32635-editjev/README.md) | Peking University，2026-10-23 | 未发现官方代码 | `editjev`：仅低成本组件，完整实验不复现 |

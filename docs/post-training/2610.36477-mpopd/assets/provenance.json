@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.36477v2",
+  "source_url": "https://arxiv.org/html/2610.36477v2/main.png",
+  "figure": "Figure 2",
+  "caption_summary_zh": "普通OPD的采样可累积师生不匹配；MPOPD用几何混合目标训练独立proposal，交替更新学生和提案策略。",
+  "asset": "paper-figure-01.png",
+  "sha256": "cc6628562c3146748e9823acf72ce74049069a122bc79d37d258d3d4dd667a29",
+  "width": 1305,
+  "height": 575,
+  "transformation": "original arXiv HTML figure; no redraw or crop",
+  "visually_inspected": true,
+  "reviewed_on": "2026-10-30"
+}

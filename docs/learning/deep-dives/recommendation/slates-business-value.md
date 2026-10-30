@@ -5,11 +5,11 @@ hide:
 
 <!-- Generated topic deep dive; edit docs/learning/deep-dives/*.json. -->
 
-# 好物品怎样组成好列表：边际价值、策略权重与约束
+# 从列表边际价值到出价控制：策略权重与约束
 
-[搜广推](../index.md) · 更新 2026-10-27 · 36 篇主题资料 / 4 篇重点对照
+[搜广推](../index.md) · 更新 2026-10-30 · 37 篇主题资料 / 5 篇重点对照
 
-CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。
+CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。 RLBP把相同的多目标治理问题带到日级PID参数选择，但其BU/CPC奖励和控制动作不能当成列表逐项效用。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/recommendation/slates-business-value.md)
 
@@ -29,6 +29,7 @@ CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计
 | [A Generative Re-ranking Model for List-level Multi-objective Optimization at Taobao](../../../reproductions/2505.07197-sort-gen/README.md) · [原始来源](https://arxiv.org/abs/2505.07197)<br>章节：背景与主要改动、核心公式、复现边界 | causal Transformer按前缀预测CLICK/PAY累计计数的ordered-regression概率，估计追加物品的边际价值；多目标队列与mask缩小搜索。 | 显式处理前缀效应，也引入队列候选范围和批量搜索近似；本地点击/交易/GMV是公开数据代理，单次PyTorch调用不等价生产kernel延迟。 |
 | [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../../../reproductions/2605.16344-prl-puts/README.md) · [原始来源](https://arxiv.org/abs/2605.16344)<br>章节：背景与主要改动、核心公式、复现边界 | 双头Q分别估计Repin和P2P utility，对不同权重策略作Pareto sweeping，再在线选择可治理策略。 | Pareto不劣只表示没有另一候选同时不差且至少一项更好，并不保证两项都超过原策略；策略权重选择与列表内逐项边际估计不同。 |
 | [Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems](../../../reproductions/2607.19357-primal-dual-decoding/README.md) · [原始来源](https://arxiv.org/abs/2607.19357)<br>章节：背景与主要改动、核心公式、复现边界 | 不重训生成器，在逐位置选择中加入辅助贡献，并用剩余约束松弛量以镜像下降更新乘子。 | 乘子可随已选前缀改变压力，但软惩罚不是硬可行性证明；若剩余候选无法满足约束，权重再大也不能制造可行解。本地只验证代理机制。 |
+| [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md) · [原始来源](https://arxiv.org/abs/2610.33248v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 日级选择九种P/I倍率且D固定，生产gamma0回归BU/CPC相对lift，推理用Qbu−betaQcpc再topK softmax，服务保留PID。 | 不同于PRL-PUTS的Repin/P2P策略扫描；CPC改善的reward仍是负值，多步max/min是扩展，生产beta幅度与数值预处理外置。 |
 
 </div>
 
@@ -45,6 +46,12 @@ CDM的MMR教师认为与已选内容重复会降低新增价值；SORT-Gen把列
 PRL-PUTS用Pareto扫描保留值得权衡的策略，Primal-Dual Decoding用动态乘子调整解码压力；二者都在表达目标取舍。SORT-Gen里的已选mask则阻止重复选择，属于另一种可行性条件。有限权重允许目标相互补偿，所以广告量、库存或去重的硬要求仍应独立验证，不能仅看总reward达标。
 
 对照来源：[prl-puts](../../../reproductions/2605.16344-prl-puts/README.md) · [primal-dual-decoding](../../../reproductions/2607.19357-primal-dual-decoding/README.md) · [sort-gen](../../../reproductions/2505.07197-sort-gen/README.md)
+
+### 相同双头形式，不是相同控制问题
+
+PRL-PUTS分别估计Repin/P2P效用，再扫描权重策略；RLBP的两个头则预测日级BU和CPC相对生产基线的变化，选择的是PID系数而非推荐物品。因为CPC越低越好，负lift不能先翻成正奖励再在融合时再次取负。部署gamma=0也意味着并未用跨日bootstrap学长期Q；生命周期取舍由外部beta表达。两头各自max/min的多步扩展不保证融合后就是组合目标的最优Q，七天A/B与两月非均衡holdout也应分开解释。
+
+对照来源：[pinterest-rlbp](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md) · [prl-puts](../../../reproductions/2605.16344-prl-puts/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -80,15 +87,29 @@ PRL-PUTS用Pareto扫描保留值得权衡的策略，Primal-Dual Decoding用动�
 
     对照来源：[primal-dual-decoding](../../../reproductions/2607.19357-primal-dual-decoding/README.md) · [sort-gen](../../../reproductions/2505.07197-sort-gen/README.md) · [prl-puts](../../../reproductions/2605.16344-prl-puts/README.md)
 
+### RLBP与PRL-PUTS都有双头Q和可调权重，为什么不能直接共享动作/奖励解释？ {#cross-rlbp-two-heads-not-listwise-q}
+
+??? note "展开答案与例子"
+
+    **答案：** PRL-PUTS围绕Repin/P2P的推荐策略取舍，RLBP按日选PID倍率以平衡预算利用率和CPC。RLBP保留负CPC lift，在Qbu−betaQcpc中让低成本更受偏好；部署gamma0是单步daily目标，不能套用一个通用长期列表Q解释两者。
+
+    **教学例子：** 教学示意：CPC从1降到0.9得到reward -0.1；减beta乘该值会提高融合分数。若先把它改为+0.1再照公式相减，就反而惩罚了成本下降。
+
+    对照来源：[pinterest-rlbp](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md) · [prl-puts](../../../reproductions/2605.16344-prl-puts/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-30** · 精读RLBP日级九动作、部署gamma0、负CPC lift、Q融合与外部预处理；相对PRL-PUTS双目标策略扫描区分状态/动作/回报，扩宽专题标题但保留稳定id和原阅读路径。
+
+涉及：[pinterest-rlbp](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md) · [prl-puts](../../../reproductions/2605.16344-prl-puts/README.md)
 
 **2026-10-27** · 首版：比较cdm、sort-gen、prl-puts、primal-dual-decoding，围绕价值属于单物品、已选前缀还是整套策略与训练期蒸馏与推理期搜索的分工建立分析和跨论文问答。
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -128,6 +149,7 @@ PRL-PUTS用Pareto扫描保留值得权衡的策略，Primal-Dual Decoding用动�
 - [Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation](../../../reproductions/2606.03866-taiji/README.md)
 - [Uncertainty as Remedy: Mitigating Satisfaction Label Bias in Short Video Multi-Objective Ensemble Ranking](../../../reproductions/2607.17092-uame/README.md)
 - [Breaking the Loop: An Empirical Comparison of Strategies for Novelty and Freshness in YouTube Music](../../../reproductions/2607.23749-youtube-freshness/README.md)
+- [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md)
 
 </details>
 

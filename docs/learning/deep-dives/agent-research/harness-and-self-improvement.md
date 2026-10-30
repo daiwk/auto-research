@@ -7,9 +7,9 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-10-29 · 44 篇主题资料 / 7 篇重点对照
+[Agent](../index.md) · 更新 2026-10-30 · 46 篇主题资料 / 9 篇重点对照
 
-Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。
+Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/agent-research/harness-and-self-improvement.md)
 
@@ -32,6 +32,8 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [RSIFlow: Adaptive Self-Improvement Workflows with an Evolving Meta-Agent](../../../agent-research/2610.21791-rsiflow/README.md) · [原始来源](https://arxiv.org/abs/2610.21791)<br>章节：背景与主要改动、核心公式、代码映射、成本与边界 | 依据证据在Model/Harness/Artifacts选择干预，同父代同批比较，仅有效且正增益时接受。 | 失败仍从冻结父代重试，不等于任意代码自改；本地只执行作用域、配对与技能记录，没有模型训练。 |
 | [AgentX: Towards Agent-Driven Self-Iteration of Industrial Recommender Systems](../../../agent-research/2606.26859-agentx/README.md) · [原始来源](https://arxiv.org/abs/2606.26859)<br>章节：背景与主要改动、核心公式、复现边界 | 证据提案、仓库实现、护栏线上A/B和正负资产化组成推荐迭代闭环。 | 主指标改善仍可被护栏否决；作者生产证据与本地确定性mini闭环不同，本地没有用户流量或SGPO大模型训练。 |
 | [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../../agent-research/2610.36826-ruharness/README.md) · [原始来源](https://arxiv.org/abs/2610.36826v1)<br>章节：背景与主要改动、核心公式 | 六格联合后验、2000次抽样0.2分位、active frontier与validation准入。 | 行为标签、执行结果和验证分数外置；统计排序不是完整自进化运行。 |
+| [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../../agent-research/2604.14214-crop/README.md) · [原始来源](https://arxiv.org/abs/2604.14214v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 固定目标权重，拼接任务与超阈值长度文本批评，外部元优化器重写系统提示；按准确率减CoT归一化token成本选已测提示。 | 不同于Self-Refine修当前答案；本地validation选优是明确防泄漏加强。确定性callback诊断不代表真实LLM无损缩短或完整evolve。 |
+| [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../../agent-research/2610.37276-evalalloc/README.md) · [原始来源](https://arxiv.org/abs/2610.37276v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用SEARCH观测的信息度选共享core与无放回item，固定外部item参照仅推断新候选参数；最终公共prefix补缓存并作配对校正。 | 预测不能覆盖已测cell，评测cell减少不等于token费用等比下降；warmup MIRT、cross-fit refit和完整successive halving未实现。 |
 
 </div>
 
@@ -54,6 +56,12 @@ Agent S4 保留暂时低分后代，验证分用于后续选择父本，这是�
 RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果联合表用Jeffreys-Dirichlet后验估计保守utility分位，集合新颖性和冗余仍固定来自已测轨迹。它把有限样本不确定性和候选准入分开，只有active准则能进入frontier，最终harness修改还要独立validation严格增益。本地没有LLM评审或harness生成。
 
 对照来源：[self-refine](../../../agent-research/2303.17651-self-refine/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
+
+### 修改对象、评判标准与评测预算要分三本账
+
+Self-Refine修当前输出，CROP则在训练样本反馈下改下一次通用系统提示，并明确计算输出token成本；它不把权重训练称为已完成。RuHarness维护能区分当前失败的rubric frontier，EvalAlloc另问应把真实评测cell花在哪些SEARCH items上：固定item参照做稀疏补全，只用预测填未观测项，最终以公共prefix与缓存确认。高rubric效用、较高预测fitness和留出任务真成功是三种证据，尤其不能把少一半cell直接宣传为少一半LLM费用。
+
+对照来源：[crop](../../../agent-research/2604.14214-crop/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md) · [self-refine](../../../agent-research/2303.17651-self-refine/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +107,33 @@ RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果
 
     对照来源：[self-refine](../../../agent-research/2303.17651-self-refine/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
+### CROP和Self-Refine都让模型读反馈改文本，为什么不能用同一个“修正成功”指标概括？ {#cross-crop-prompt-versus-current-answer}
+
+??? note "展开答案与例子"
+
+    **答案：** Self-Refine的主要修订对象是当前答案；CROP离线改系统提示，再以准确率和CoT归一化输出token成本选已测候选。当前样本答案变好不证明提示可迁移，提示更短也不保证答案更短或正确。真实LLM回调及独立validation仍是组件之外的证据。
+
+    **教学例子：** 教学示意：把一个算术答案改对，与得到适用于一批未见算术题的简洁系统提示，是两种验收；最后新写出的提示未评测时不能直接当最佳。
+
+    对照来源：[crop](../../../agent-research/2604.14214-crop/README.md) · [self-refine](../../../agent-research/2303.17651-self-refine/README.md)
+
+### EvalAlloc的高预测fitness与RuHarness的高准则效用，为什么都不能直接当真实Agent成功率？ {#cross-evalalloc-fitness-versus-rubric-frontier}
+
+??? note "展开答案与例子"
+
+    **答案：** EvalAlloc用固定参照估计未观测SEARCH结果，必须保留已测cell并最终确认；RuHarness衡量准则是否有保守的失败诊断价值，候选harness还需独立validation。两者分别治理观测预算和评判标准，不是已执行任务的替代答案。
+
+    **教学例子：** 教学示意：某候选只测20/300个item，补全均值0.8并不意味着已真实完成240项；一条准则能覆盖失败，也不等于使用它后任务已经成功。
+
+    对照来源：[evalalloc](../../../agent-research/2610.37276-evalalloc/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-30** · 精读CROP与EvalAlloc：以Self-Refine/RuHarness为对照，分开系统提示修改、rubric价值和SEARCH观测预算；补validation/CoT成本、观测优先补全、公共prefix确认及未实现MIRT/controller边界。
+
+涉及：[crop](../../../agent-research/2604.14214-crop/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md) · [self-refine](../../../agent-research/2303.17651-self-refine/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
 **2026-10-29** · RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果联合表用Jeffreys-Dirichlet后验估计保守utility分位，集合新颖性和冗余仍固定来自已测轨迹。它把有限样本不确定性和候选准入分开，只有active准则能进入frontier，最终harness修改还要独立validation严格增益。本地没有LLM评审或harness生成。
 
@@ -111,7 +143,7 @@ RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 44 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 46 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -159,6 +191,8 @@ RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果
 - [Self-Refine](../../../agent-research/2303.17651-self-refine/README.md)
 - [Reflexion](../../../agent-research/2303.11366-reflexion/README.md)
 - [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../../agent-research/2610.36826-ruharness/README.md)
+- [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../../agent-research/2604.14214-crop/README.md)
+- [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../../agent-research/2610.37276-evalalloc/README.md)
 
 </details>
 

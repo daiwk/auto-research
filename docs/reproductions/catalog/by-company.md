@@ -223,6 +223,8 @@
 - 2024-02 · [HSTU](../2402.17152-hstu/README.md)：以分层顺序转导单元建模超长行为历史，用生成式目标统一大规模推荐排序。
 
 ## Pinterest
+- [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../recommendation-components/2610.33435-pinger/README.md)：用训练专用SID与历史dense的非对称mask保留多级监督而压缩服务输入，再按共同前缀深度分配beam并用所有前缀DPO加NTP锚校准排序偏好。本地仅实现可核对的数值机制，不实现生产模型/稀疏kernel或复现线上收益。
+- [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../recommendation-components/2610.33248-pinterest-rlbp/README.md)：保留高频PID，在日级从9个P/I倍率动作中选择，分别回归预算利用率与CPC相对生产基线的变化，再按生命周期融合并top-K随机选择。实际部署gamma为0；本地实现双头目标、负CPC奖励与有界策略/IPS核，不实现私有Q网络或线上出价。
 - 2026-10 · [FORTE](../2610.13806-forte/README.md)：用类型约束的配对扰动、跨时间窗多目标门槛和真实重训选择可退役特征，再审计依赖消费者的移除顺序。
 - 2026-07 · [PinEqualizer](../2607.22518-pinequalizer/README.md)：贯通探索 corpus、召回、排序与 utility，通过 engagement dropout、内容交叉、分 cohort calibration 和 UCB 缓解 fresh 内容反馈回路。
 - 2026-07 · [PinDCO](../2609.11943-pindco/README.md)：以组件专塔学习相对广告基线的创意增量分数，再用 PAM 协调整页像素收益并以预筛控制成本。

@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 132 个问题 · 33 篇论文
+[基础模型](index.md) / 136 个问题 · 34 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">136 个问题 · 34 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:merlin" data-paper-title="Multi-State Linear Attention with Generalized Second-Order Routing" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Multi-State Linear Attention with Generalized Second-Order Routing 基础模型 Princeton University 2026-10-27 多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。MERLIN 在独立、较小维度的 routing 投影上保存 key 的均值和原始二阶矩，恢复每个查询的对齐均值及方差，再把两路 softmax 分布按门控混合。它改变的是段级 readout 的汇总，不是用二阶矩替换原模型的递归记忆，也不是精确还原完整 softmax 注意力。 完整训练与长上下文评测：成本过高，不复现（审查 DONE）；本地状态：L1 路由公式组件，diagnostic only。只验证由外部 routing keys / queries 和分段 readout 计算权重，不实现完整线性注意力层或 LLM。完整训练与长上下文评测：成本过高，不复现（审查 DONE）；不接入 evolve 晋级。组件接受等长分段的 routing keys，计算矩统计、对齐分数、两路权重和外部 readout 汇总。  注意力与长上下文 多状态线性注意力与段级路由 基础模型 长上下文：注意力、递归状态与记忆 为什么分段 key 均值相同，多状态注意力仍需要区别对待？ 均值只描述平均对齐，不能区分段内是否存在很强但被其他 keys 抵消的匹配。MERLIN额外保存原始二阶矩，从中计算特定query方向的对齐方差，再与均值路由混合。这是增加段级路由信息，不是恢复每个token的完整attention。 教学例子：一维两段keys分别为[-2,2]与[0,0]，均值都是0；query为1时，前者对齐方差4，后者0，均值路由看不出差别。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-merlin-4afaa9c4" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8c1c0aafb3dafdad">为什么分段 key 均值相同，多状态注意力仍需要区别对待？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amerlin">Multi-State Linear Attention with Generalized Second-Order Routing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>均值只描述平均对齐，不能区分段内是否存在很强但被其他 keys 抵消的匹配。MERLIN额外保存原始二阶矩，从中计算特定query方向的对齐方差，再与均值路由混合。这是增加段级路由信息，不是恢复每个token的完整attention。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一维两段keys分别为[-2,2]与[0,0]，均值都是0；query为1时，前者对齐方差4，后者0，均值路由看不出差别。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37645v1">原论文</a> · <a href="../../../../foundation-models/2610.37645-merlin/">实现解读</a> · <a href="#qa-8c1c0aafb3dafdad">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:merlin" data-paper-title="Multi-State Linear Attention with Generalized Second-Order Routing" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Multi-State Linear Attention with Generalized Second-Order Routing 基础模型 Princeton University 2026-10-27 多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。MERLIN 在独立、较小维度的 routing 投影上保存 key 的均值和原始二阶矩，恢复每个查询的对齐均值及方差，再把两路 softmax 分布按门控混合。它改变的是段级 readout 的汇总，不是用二阶矩替换原模型的递归记忆，也不是精确还原完整 softmax 注意力。 完整训练与长上下文评测：成本过高，不复现（审查 DONE）；本地状态：L1 路由公式组件，diagnostic only。只验证由外部 routing keys / queries 和分段 readout 计算权重，不实现完整线性注意力层或 LLM。完整训练与长上下文评测：成本过高，不复现（审查 DONE）；不接入 evolve 晋级。组件接受等长分段的 routing keys，计算矩统计、对齐分数、两路权重和外部 readout 汇总。  注意力与长上下文 多状态线性注意力与段级路由 基础模型 长上下文：注意力、递归状态与记忆 Eq.7的二阶矩与协方差差在哪里，为什么会影响路由？ 论文保存mean(kkᵀ)，没有预先减均值；查询方差随后由qᵀΣq−(qᵀμ)²恢复。若把协方差传进去再减一次均值平方，会重复中心化；若直接把原始二阶矩当作方差，则把均值强度也算进去。本地以逐key点积的方差作为独立参考。 教学例子：keys为[1,3]，均值2、原始二阶矩5、方差1；把5直接当方差会多算4，把已中心化的1再减4则得到错误的−3。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e291827c8e0288f6">Eq.7的二阶矩与协方差差在哪里，为什么会影响路由？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amerlin">Multi-State Linear Attention with Generalized Second-Order Routing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文保存mean(kkᵀ)，没有预先减均值；查询方差随后由qᵀΣq−(qᵀμ)²恢复。若把协方差传进去再减一次均值平方，会重复中心化；若直接把原始二阶矩当作方差，则把均值强度也算进去。本地以逐key点积的方差作为独立参考。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>keys为[1,3]，均值2、原始二阶矩5、方差1；把5直接当方差会多算4，把已中心化的1再减4则得到错误的−3。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37645v1">原论文</a> · <a href="../../../../foundation-models/2610.37645-merlin/">实现解读</a> · <a href="#qa-e291827c8e0288f6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:merlin" data-paper-title="Multi-State Linear Attention with Generalized Second-Order Routing" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Multi-State Linear Attention with Generalized Second-Order Routing 基础模型 Princeton University 2026-10-27 多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。MERLIN 在独立、较小维度的 routing 投影上保存 key 的均值和原始二阶矩，恢复每个查询的对齐均值及方差，再把两路 softmax 分布按门控混合。它改变的是段级 readout 的汇总，不是用二阶矩替换原模型的递归记忆，也不是精确还原完整 softmax 注意力。 完整训练与长上下文评测：成本过高，不复现（审查 DONE）；本地状态：L1 路由公式组件，diagnostic only。只验证由外部 routing keys / queries 和分段 readout 计算权重，不实现完整线性注意力层或 LLM。完整训练与长上下文评测：成本过高，不复现（审查 DONE）；不接入 evolve 晋级。组件接受等长分段的 routing keys，计算矩统计、对齐分数、两路权重和外部 readout 汇总。  注意力与长上下文 多状态线性注意力与段级路由 基础模型 长上下文：注意力、递归状态与记忆 混合两个softmax与先混合logits再softmax，为什么不能互换？ softmax是非线性映射。MERLIN先分别形成均值路由和方差路由的概率分布，再以gamma作概率混合；单个混合logitsoftmax会重新分配竞争关系和归一化常数。两者即使都归一化到1，也不是同一个路由规则。 教学例子：两段均值logits为[4,0]、方差logits为[0,0]、gamma为0.5，论文混合约为[0.741,0.259]；先混合logits[2,0]后softmax约为[0.881,0.119]。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6a6cbfe669675cd8">混合两个softmax与先混合logits再softmax，为什么不能互换？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amerlin">Multi-State Linear Attention with Generalized Second-Order Routing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>softmax是非线性映射。MERLIN先分别形成均值路由和方差路由的概率分布，再以gamma作概率混合；单个混合logitsoftmax会重新分配竞争关系和归一化常数。两者即使都归一化到1，也不是同一个路由规则。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两段均值logits为[4,0]、方差logits为[0,0]、gamma为0.5，论文混合约为[0.741,0.259]；先混合logits[2,0]后softmax约为[0.881,0.119]。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37645v1">原论文</a> · <a href="../../../../foundation-models/2610.37645-merlin/">实现解读</a> · <a href="#qa-6a6cbfe669675cd8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:merlin" data-paper-title="Multi-State Linear Attention with Generalized Second-Order Routing" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Multi-State Linear Attention with Generalized Second-Order Routing 基础模型 Princeton University 2026-10-27 多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。MERLIN 在独立、较小维度的 routing 投影上保存 key 的均值和原始二阶矩，恢复每个查询的对齐均值及方差，再把两路 softmax 分布按门控混合。它改变的是段级 readout 的汇总，不是用二阶矩替换原模型的递归记忆，也不是精确还原完整 softmax 注意力。 完整训练与长上下文评测：成本过高，不复现（审查 DONE）；本地状态：L1 路由公式组件，diagnostic only。只验证由外部 routing keys / queries 和分段 readout 计算权重，不实现完整线性注意力层或 LLM。完整训练与长上下文评测：成本过高，不复现（审查 DONE）；不接入 evolve 晋级。组件接受等长分段的 routing keys，计算矩统计、对齐分数、两路权重和外部 readout 汇总。  注意力与长上下文 多状态线性注意力与段级路由 基础模型 长上下文：注意力、递归状态与记忆 为什么本地只开放已完成段，不能把完整当前段统计直接给段内早期query？ 完整段均值和二阶矩包含该段后续token。如果早期query读取这些统计，会在路由阶段泄露未来。完整模型可以维护当前前缀的递归状态和矩，但本地没有实现这条路径，因此明确只开放已完成段，拒绝无可见段的调用，不用全段统计假装因果。 教学例子：段[start=4,length=4]覆盖位置4到7。query位置6时该段未完成，位置7时才可见；如果位置4就读取全部4个keys，已经用到了位置5到7。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6d276140dff602bb">为什么本地只开放已完成段，不能把完整当前段统计直接给段内早期query？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amerlin">Multi-State Linear Attention with Generalized Second-Order Routing</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整段均值和二阶矩包含该段后续token。如果早期query读取这些统计，会在路由阶段泄露未来。完整模型可以维护当前前缀的递归状态和矩，但本地没有实现这条路径，因此明确只开放已完成段，拒绝无可见段的调用，不用全段统计假装因果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>段[start=4,length=4]覆盖位置4到7。query位置6时该段未完成，位置7时才可见；如果位置4就读取全部4个keys，已经用到了位置5到7。</p>
+<p class="ar-learning-sources">依据：本地复现、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37645v1">原论文</a> · <a href="../../../../foundation-models/2610.37645-merlin/">实现解读</a> · <a href="#qa-6d276140dff602bb">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:select-ttt" data-paper-title="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training 基础模型 University of Science and Technology of China 2026-10-27 In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对用户问题 token的预测程度，为每个 chunk 生成连续写入倍率。它不是先找到 gold answer chunk 再加强写入。论文的 answer-chunk 实验只是动机分析；部署规则只用问题，不允许答案标记进入评分接口。 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 查询评分与 fast-weight 写入组件、diagnostic only，没有加载 LLM 或接入 LongMemEval。完整实验：成本过高，不复现（审查 DONE）；不是可执行 evolve 能力算子。实现词表分块 log-sum-exp 与直接问题 token logits、最低 CE top-k、温度 / clip 倍率及顺序 apply-then-write 参考。调用者必须提供真实模型的 RMSNorm 参数和 epsilon，以及原 In-Place TTT 的 NTP 对齐 keys / values；  注意力与长上下文 测试时训练与fast weights 基础模型 长上下文：注意力、递归状态与记忆 Select-TTT改变的是上下文检索，还是写入fast weights的力度？ 它保留In-Place TTT的分chunk写入，只按问题相关性缩放每个chunk的学习率。相关性来自冻结LM输出头对问题token的负对数概率，不另训检索器，也不直接丢弃所有低分chunk。问题不同，写入倍率也可能不同。 教学例子：同一长对话中，问搬家日期和问饮食偏好时，应强化的片段不同；这不表示模型拿到了哪一段包含标准答案的标签。 2026-10-29">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-select-ttt-1dc0ac0a" class="ar-learning-paper-anchor"></span>
@@ -1791,7 +1844,7 @@ hide:
 
 ## 记住这一点
 
-先分清位置关系、信息访问和状态容量。RoPE 对 Q/K 的二维子空间作位置相关旋转，让点积表达相对位移；它仍允许注意力访问窗口内历史。Mamba 则让状态更新的步长和读写参数依赖当前输入，把历史汇入递归状态。稀疏注意力和混合结构在两端之间选择：只读部分历史，或让部分层保留完整访问。
+先分清位置关系、信息访问和状态容量。RoPE 对 Q/K 的二维子空间作位置相关旋转，让点积表达相对位移；它仍允许注意力访问窗口内历史。Mamba 则让状态更新的步长和读写参数依赖当前输入，把历史汇入递归状态。稀疏注意力和混合结构在两端之间选择：只读部分历史，或让部分层保留完整访问。 MERLIN针对多段状态的读取聚合：用routing keys的一、二阶矩恢复查询对齐均值和方差，再分别softmax后门控混合，不能把它当作Mamba状态递推本身。
 
 ## 一个例子
 

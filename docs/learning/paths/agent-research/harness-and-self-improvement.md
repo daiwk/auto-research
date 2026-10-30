@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 176 个问题 · 44 篇论文
+[Agent](index.md) / 184 个问题 · 46 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">184 个问题 · 46 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evalalloc" data-paper-title="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution? Agent The University of Hong Kong 2026-10-27 搜索过程需要便宜但可比较的反馈，最后选冠军则需要更精确的实测确认。EvalAlloc先完整评测少量warmup候选，选出共享信息项并拟合响应模型；搜索时固定item参照，只推断新候选参数，再把真实观测与未观测预测补全。最终以公共随机prefix逐轮确认，复用搜索缓存而不是重新全跑。 完整LLM搜索/多基准实验成本过高，不复现（审查 DONE）；API只有SEARCH item索引和稀疏真实观测，没有DEV/TEST答案或完整隐藏成绩矩阵。FrozenItemModel复制并只读保存外部item参数/prior，MAP只改新candidate参数；来自外部的拟合数据与cross-fit provenance仍须调用者核验，布尔/身份声明不能替代真实训练证据。  自进化与工作流 预算分配与可靠选择 Agent 运行流程与自进化：改的是哪一层 搜索反馈便宜就够了，为什么最后仍要做额外确认？ 搜索时只需足够可比的低成本反馈来指导提案；最后选冠军需要区分接近的候选。EvalAlloc因此把预算分成共享信息项的稀疏搜索和复用缓存的配对确认，最终完整prefix靠真实观测决定，而不是一直相信模型补全。 教学例：两个候选预测分只差0.01时，可以先据便宜反馈继续探索，但最终选哪个不应只看这个不确定的差值。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-evalalloc-e28d06aa" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-475561c032d4eedb">搜索反馈便宜就够了，为什么最后仍要做额外确认？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aevalalloc">Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · The University of Hong Kong</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>搜索时只需足够可比的低成本反馈来指导提案；最后选冠军需要区分接近的候选。EvalAlloc因此把预算分成共享信息项的稀疏搜索和复用缓存的配对确认，最终完整prefix靠真实观测决定，而不是一直相信模型补全。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个候选预测分只差0.01时，可以先据便宜反馈继续探索，但最终选哪个不应只看这个不确定的差值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37276v1">原论文</a> · <a href="../../../../agent-research/2610.37276-evalalloc/">实现解读</a> · <a href="#qa-475561c032d4eedb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evalalloc" data-paper-title="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution? Agent The University of Hong Kong 2026-10-27 搜索过程需要便宜但可比较的反馈，最后选冠军则需要更精确的实测确认。EvalAlloc先完整评测少量warmup候选，选出共享信息项并拟合响应模型；搜索时固定item参照，只推断新候选参数，再把真实观测与未观测预测补全。最终以公共随机prefix逐轮确认，复用搜索缓存而不是重新全跑。 完整LLM搜索/多基准实验成本过高，不复现（审查 DONE）；API只有SEARCH item索引和稀疏真实观测，没有DEV/TEST答案或完整隐藏成绩矩阵。FrozenItemModel复制并只读保存外部item参数/prior，MAP只改新candidate参数；来自外部的拟合数据与cross-fit provenance仍须调用者核验，布尔/身份声明不能替代真实训练证据。  自进化与工作流 预算分配与可靠选择 Agent 运行流程与自进化：改的是哪一层 一个任务拿到0.9部分分，能否给信息项获取统计的成功次数加0.9？ 不能。论文获取统计只计满分次数a_i，用Beta后验估计p(1-p)的保守信息度；部分分在这个统计中计未满分，但仍作为分数进入响应模型。把两个阶段混用，会改变被选入sharedcore的item。 教学例：十次都是0.9分，获取统计a=0、n=10，不是a=9；这不是说0.9分在模型拟合和最终成绩中被当成0。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-acbbb6ce4a3b415b">一个任务拿到0.9部分分，能否给信息项获取统计的成功次数加0.9？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aevalalloc">Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · The University of Hong Kong</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。论文获取统计只计满分次数a_i，用Beta后验估计p(1-p)的保守信息度；部分分在这个统计中计未满分，但仍作为分数进入响应模型。把两个阶段混用，会改变被选入sharedcore的item。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：十次都是0.9分，获取统计a=0、n=10，不是a=9；这不是说0.9分在模型拟合和最终成绩中被当成0。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37276v1">原论文</a> · <a href="../../../../agent-research/2610.37276-evalalloc/">实现解读</a> · <a href="#qa-acbbb6ce4a3b415b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evalalloc" data-paper-title="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution? Agent The University of Hong Kong 2026-10-27 搜索过程需要便宜但可比较的反馈，最后选冠军则需要更精确的实测确认。EvalAlloc先完整评测少量warmup候选，选出共享信息项并拟合响应模型；搜索时固定item参照，只推断新候选参数，再把真实观测与未观测预测补全。最终以公共随机prefix逐轮确认，复用搜索缓存而不是重新全跑。 完整LLM搜索/多基准实验成本过高，不复现（审查 DONE）；API只有SEARCH item索引和稀疏真实观测，没有DEV/TEST答案或完整隐藏成绩矩阵。FrozenItemModel复制并只读保存外部item参数/prior，MAP只改新candidate参数；来自外部的拟合数据与cross-fit provenance仍须调用者核验，布尔/身份声明不能替代真实训练证据。  自进化与工作流 预算分配与可靠选择 Agent 运行流程与自进化：改的是哪一层 为什么相同大小的独立随机item集合不等于sharedcore？ 共同item为候选差值引入配对协方差，竞争候选常在多数item上一致，配对有助于减少集合难度差异。冻结item模型和prior还保证历代分数用同一参照；如果每个候选都重拟合item参数，旧分数与新分数就不再处于相同尺度。这个益处仍依赖候选相关性，不是普遍无条件降方差保证。 教学例：候选A全碰难题、B全碰易题时，平均分不能直接比较；让两者至少共享同一信息核心，比只规定两者都做60题更有可比性。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-19ec74cd1e637afe">为什么相同大小的独立随机item集合不等于sharedcore？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aevalalloc">Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · The University of Hong Kong</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>共同item为候选差值引入配对协方差，竞争候选常在多数item上一致，配对有助于减少集合难度差异。冻结item模型和prior还保证历代分数用同一参照；如果每个候选都重拟合item参数，旧分数与新分数就不再处于相同尺度。这个益处仍依赖候选相关性，不是普遍无条件降方差保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：候选A全碰难题、B全碰易题时，平均分不能直接比较；让两者至少共享同一信息核心，比只规定两者都做60题更有可比性。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37276v1">原论文</a> · <a href="../../../../agent-research/2610.37276-evalalloc/">实现解读</a> · <a href="#qa-19ec74cd1e637afe">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evalalloc" data-paper-title="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution? Agent The University of Hong Kong 2026-10-27 搜索过程需要便宜但可比较的反馈，最后选冠军则需要更精确的实测确认。EvalAlloc先完整评测少量warmup候选，选出共享信息项并拟合响应模型；搜索时固定item参照，只推断新候选参数，再把真实观测与未观测预测补全。最终以公共随机prefix逐轮确认，复用搜索缓存而不是重新全跑。 完整LLM搜索/多基准实验成本过高，不复现（审查 DONE）；API只有SEARCH item索引和稀疏真实观测，没有DEV/TEST答案或完整隐藏成绩矩阵。FrozenItemModel复制并只读保存外部item参数/prior，MAP只改新candidate参数；来自外部的拟合数据与cross-fit provenance仍须调用者核验，布尔/身份声明不能替代真实训练证据。  自进化与工作流 预算分配与可靠选择 Agent 运行流程与自进化：改的是哪一层 配对确认为什么保留搜索缓存的union，并检查cross-fit训练candidate身份？ 已执行cell不应重付成本，公共prefix只补缺失item；union也不能删掉原来的candidate特定观测。后续校正使用外部两折refit预测，当前candidate不能训练用来校正自己的item模型，否则产生自拟合偏差。全部item真实观测到时校正项为零。 教学例：A在搜索中已做item4，即使首轮prefix只有0/1/2，也保留4；计划需要四个新cell却只剩三个预算时应整轮拒绝，不能偷偷读完整隐藏成绩矩阵来选冠军。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-cd62ca40b7b37d16">配对确认为什么保留搜索缓存的union，并检查cross-fit训练candidate身份？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aevalalloc">Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · The University of Hong Kong</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>已执行cell不应重付成本，公共prefix只补缺失item；union也不能删掉原来的candidate特定观测。后续校正使用外部两折refit预测，当前candidate不能训练用来校正自己的item模型，否则产生自拟合偏差。全部item真实观测到时校正项为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A在搜索中已做item4，即使首轮prefix只有0/1/2，也保留4；计划需要四个新cell却只剩三个预算时应整轮拒绝，不能偷偷读完整隐藏成绩矩阵来选冠军。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.37276v1">原论文</a> · <a href="../../../../agent-research/2610.37276-evalalloc/">实现解读</a> · <a href="#qa-cd62ca40b7b37d16">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ruharness" data-paper-title="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement Agent Harbin Institute of Technology 2026-10-27 Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。不是命中几次失败就直接排最前。样本少时点估计容易虚高，方法对成功/失败与三种行为标签形成的六格联合分布做后验采样，以效用低分位选active标准。 完整实验：成本过高，不复现（审查 DONE），不自动重试。纯CPU三种子统计诊断：独立六格计数/公式参考、相同违规集合的Jaccard=1、联合Dirichlet完整参考、固定seed可重复、inactive不入选、未通过外部验证器的高分候选被排除，以及恰好0.05的增益不晋级。本地状态：L1 统计与验证门槛组件，diagnostic only，不是完整harness进化或Agent能力实现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部行为标签和任务结果，代码分别校验两种数据类型。contingency统计六格；set_statistics按真实轨迹位置计算N与Red；  Agent自我进化 Rubric与Harness协同进化 Agent 运行流程与自进化：改的是哪一层 Agent已经能自己改harness了，为什么还要同时更新rubric？ harness修复早期问题后，失败分布会变化。固定标准可能一直追踪已经消失的缺陷，也可能忽视新出现的行为问题。RuHarness从当前执行轨迹重新评估标准，保持任务目标不变，再用当前有诊断价值的标准指导下一步修改。 教学例：早期主要忘记调用搜索，后来搜索已正常但常在证据不足时提前提交。继续只奖励‘调用过搜索’就难以定位后一个问题。 2026-10-29">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-ruharness-cecd9850" class="ar-learning-paper-anchor"></span>
@@ -2096,6 +2149,59 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.26340">原论文</a> · <a href="../../../../agent-research/2605.26340-scientist-one/">实现解读</a> · <a href="#qa-79ed0d4a52806e10">问题链接</a></p>
 </details>
 </article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:crop" data-paper-title="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization Agent Google 2026-04-08 自动提示优化通常根据答错原因不断添加指令，可能使推理越来越长。CROP固定目标模型的权重，在离线优化阶段加入第二条文本反馈：任务评估器指出准确性问题；长度评估器在输出token数超过阈值时，建议逐步删掉叙述性冗余、保留必要计算。元优化器接收两条反馈，更新系统提示，最终推理仍只需要目标模型的一次前向生成。它既不是把答案硬截断，也不是向GRPO loss直接加长度reward，更不是对提示文本求数值梯度。“文本梯度”是外部评估模型生成的自然语言批评； 完整实验：成本过高，不复现（审查 DONE），不自动重试。诊断用确定性回调替身，不是LLM能力：检查12-token回复触发长度批评、4-token回复在阈值4时不触发；本地状态：L1 外部回调控制组件，diagnostic only，不是已验证的 LLM 提示优化能力或权重后训练。完整实验：成本过高，不复现（审查 DONE），不自动重试。optimize_prompt接受有限的外部预分批训练样本及五类回调：generate、task_evaluator、brevity_evaluator、optimizer、validate。它实际执行阈值分流、文本拼接、循环更新和最佳提示选择，不实现或默认调用任何LLM/API。  Agent自我进化 提示优化与推理成本 Agent 运行流程与自进化：改的是哪一层 CROP优化的是模型参数、单次答案，还是系统提示？ 它固定目标模型权重，离线迭代系统提示。目标模型先生成，任务批评器和长度批评器分别指出准确性与冗余问题，元优化器据此重写提示；部署时使用选好的提示进行一次生成。它不是对答案硬截断，也不是RL权重后训练。 教学示意：把“逐项解释每一步”逐轮改成“保留合并算式，删掉重复叙述”，属于提示优化；把回复超过50tokens直接截掉，不是CROP。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-crop-02b87dce" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1abbf5985f2cce1c">CROP优化的是模型参数、单次答案，还是系统提示？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acrop">CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它固定目标模型权重，离线迭代系统提示。目标模型先生成，任务批评器和长度批评器分别指出准确性与冗余问题，元优化器据此重写提示；部署时使用选好的提示进行一次生成。它不是对答案硬截断，也不是RL权重后训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>把“逐项解释每一步”逐轮改成“保留合并算式，删掉重复叙述”，属于提示优化；把回复超过50tokens直接截掉，不是CROP。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、原论文关键图；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14214v1">原论文</a> · <a href="../../../../agent-research/2604.14214-crop/">实现解读</a> · <a href="#qa-1abbf5985f2cce1c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:crop" data-paper-title="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization Agent Google 2026-04-08 自动提示优化通常根据答错原因不断添加指令，可能使推理越来越长。CROP固定目标模型的权重，在离线优化阶段加入第二条文本反馈：任务评估器指出准确性问题；长度评估器在输出token数超过阈值时，建议逐步删掉叙述性冗余、保留必要计算。元优化器接收两条反馈，更新系统提示，最终推理仍只需要目标模型的一次前向生成。它既不是把答案硬截断，也不是向GRPO loss直接加长度reward，更不是对提示文本求数值梯度。“文本梯度”是外部评估模型生成的自然语言批评； 完整实验：成本过高，不复现（审查 DONE），不自动重试。诊断用确定性回调替身，不是LLM能力：检查12-token回复触发长度批评、4-token回复在阈值4时不触发；本地状态：L1 外部回调控制组件，diagnostic only，不是已验证的 LLM 提示优化能力或权重后训练。完整实验：成本过高，不复现（审查 DONE），不自动重试。optimize_prompt接受有限的外部预分批训练样本及五类回调：generate、task_evaluator、brevity_evaluator、optimizer、validate。它实际执行阈值分流、文本拼接、循环更新和最佳提示选择，不实现或默认调用任何LLM/API。  Agent自我进化 提示优化与推理成本 Agent 运行流程与自进化：改的是哪一层 为什么长度批评有阈值，两个“文本梯度”又该怎样合并？ Sec.3.3只在生成token数严格超过阈值时调用长度批评，避免已简短的推理持续被压缩。Eq.3将任务批评、换行、长度批评逐样本拼接，再交给元优化器；这不是把两个数值loss求均值。长度批评应渐进删掉叙述性冗余，保留必要计算。 教学示意：阈值为40时，40-token回复不触发，41-token回复才触发；“检查单位换算”与“删除重复开场白”是两条文本反馈，不能用一个标量0.7代替。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f7cafa9a397e5728">为什么长度批评有阈值，两个“文本梯度”又该怎样合并？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acrop">CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Sec.3.3只在生成token数严格超过阈值时调用长度批评，避免已简短的推理持续被压缩。Eq.3将任务批评、换行、长度批评逐样本拼接，再交给元优化器；这不是把两个数值loss求均值。长度批评应渐进删掉叙述性冗余，保留必要计算。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>阈值为40时，40-token回复不触发，41-token回复才触发；“检查单位换算”与“删除重复开场白”是两条文本反馈，不能用一个标量0.7代替。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14214v1">原论文</a> · <a href="../../../../agent-research/2604.14214-crop/">实现解读</a> · <a href="#qa-f7cafa9a397e5728">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:crop" data-paper-title="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization Agent Google 2026-04-08 自动提示优化通常根据答错原因不断添加指令，可能使推理越来越长。CROP固定目标模型的权重，在离线优化阶段加入第二条文本反馈：任务评估器指出准确性问题；长度评估器在输出token数超过阈值时，建议逐步删掉叙述性冗余、保留必要计算。元优化器接收两条反馈，更新系统提示，最终推理仍只需要目标模型的一次前向生成。它既不是把答案硬截断，也不是向GRPO loss直接加长度reward，更不是对提示文本求数值梯度。“文本梯度”是外部评估模型生成的自然语言批评； 完整实验：成本过高，不复现（审查 DONE），不自动重试。诊断用确定性回调替身，不是LLM能力：检查12-token回复触发长度批评、4-token回复在阈值4时不触发；本地状态：L1 外部回调控制组件，diagnostic only，不是已验证的 LLM 提示优化能力或权重后训练。完整实验：成本过高，不复现（审查 DONE），不自动重试。optimize_prompt接受有限的外部预分批训练样本及五类回调：generate、task_evaluator、brevity_evaluator、optimizer、validate。它实际执行阈值分流、文本拼接、循环更新和最佳提示选择，不实现或默认调用任何LLM/API。  Agent自我进化 提示优化与推理成本 Agent 运行流程与自进化：改的是哪一层 CROP比单纯准确率提示优化多了什么，是否能说token节省完全无损？ 它在提示优化中同时引入长度文本反馈与输出token成本选优，而不是只追准确率。但论文Table3存在准确率下降：例如Gemini2Flash在ObjectCounting从96.0%降到94.8%，平均tokens从101.2降到19.6。应呈现成本—准确率权衡，不能把摘要的概括写成每个任务都无损。 教学示意：两个提示准确率都0.9，分别花100与50tokens，CROP分数可偏向后者；若短提示准确率明显更差，不能只展示长度下降。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-45e2a0411f0723d5">CROP比单纯准确率提示优化多了什么，是否能说token节省完全无损？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acrop">CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它在提示优化中同时引入长度文本反馈与输出token成本选优，而不是只追准确率。但论文Table3存在准确率下降：例如Gemini2Flash在ObjectCounting从96.0%降到94.8%，平均tokens从101.2降到19.6。应呈现成本—准确率权衡，不能把摘要的概括写成每个任务都无损。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个提示准确率都0.9，分别花100与50tokens，CROP分数可偏向后者；若短提示准确率明显更差，不能只展示长度下降。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14214v1">原论文</a> · <a href="../../../../agent-research/2604.14214-crop/">实现解读</a> · <a href="#qa-45e2a0411f0723d5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:crop" data-paper-title="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization Agent Google 2026-04-08 自动提示优化通常根据答错原因不断添加指令，可能使推理越来越长。CROP固定目标模型的权重，在离线优化阶段加入第二条文本反馈：任务评估器指出准确性问题；长度评估器在输出token数超过阈值时，建议逐步删掉叙述性冗余、保留必要计算。元优化器接收两条反馈，更新系统提示，最终推理仍只需要目标模型的一次前向生成。它既不是把答案硬截断，也不是向GRPO loss直接加长度reward，更不是对提示文本求数值梯度。“文本梯度”是外部评估模型生成的自然语言批评； 完整实验：成本过高，不复现（审查 DONE），不自动重试。诊断用确定性回调替身，不是LLM能力：检查12-token回复触发长度批评、4-token回复在阈值4时不触发；本地状态：L1 外部回调控制组件，diagnostic only，不是已验证的 LLM 提示优化能力或权重后训练。完整实验：成本过高，不复现（审查 DONE），不自动重试。optimize_prompt接受有限的外部预分批训练样本及五类回调：generate、task_evaluator、brevity_evaluator、optimizer、validate。它实际执行阈值分流、文本拼接、循环更新和最佳提示选择，不实现或默认调用任何LLM/API。  Agent自我进化 提示优化与推理成本 Agent 运行流程与自进化：改的是哪一层 本地如何避免用测试集或最后一个未测提示选优，为什么回调诊断不代表真实收益？ 本地要求固定validation revision和样本ID，与冻结CoT均长基准一致；train/test不能作为选优测量，训练ID不得重叠。每轮先验证当前提示，再请求下一提示，因此最后未测提案不会被选中。诊断中的模型与批评器是确定性测试替身，只证明门控、拼接和选择合同，不证明真实LLM会学到更好提示。 教学示意：已测提示A分数0.8、B分数0.9，优化器最后又提出C；C没有validation记录时只能返回B，不能因为C更新得最晚就返回C。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-029893dfd176215d">本地如何避免用测试集或最后一个未测提示选优，为什么回调诊断不代表真实收益？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acrop">CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>本地要求固定validation revision和样本ID，与冻结CoT均长基准一致；train/test不能作为选优测量，训练ID不得重叠。每轮先验证当前提示，再请求下一提示，因此最后未测提案不会被选中。诊断中的模型与批评器是确定性测试替身，只证明门控、拼接和选择合同，不证明真实LLM会学到更好提示。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>已测提示A分数0.8、B分数0.9，优化器最后又提出C；C没有validation记录时只能返回B，不能因为C更新得最晚就返回C。</p>
+<p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14214v1">原论文</a> · <a href="../../../../agent-research/2604.14214-crop/">实现解读</a> · <a href="#qa-029893dfd176215d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:hyperagents" data-paper-title="HyperAgents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="HyperAgents Agent University of British Columbia 2026-03-19 把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。本地执行论文父代分布和有界结构化 archive step；禁止执行生成代码或 shell，因此只验证搜索控制机制，不声称复现自指代码修改能力。三种子诊断：metrics/mechanism-seeds42-44.json  RSI 开放式进化 元认知自修改 Agent 运行流程与自进化：改的是哪一层 HyperAgents 为什么不仅改任务解法，还允许改“生成下一版解法”的程序？ 固定改进器会持续沿同一套提案和反思方式搜索，它自身的限制可能阻碍后续进步。HyperAgents 把任务程序与 meta 程序一起纳入可编辑对象，研究改进方法能否随经验演化。自改代码增加了验证难度，档案里出现新版本不等于真实性能或长期进步已得到证明。 教学例：某版本总提出相似改动，可以尝试修改提案器本身；之后仍要验证新提案器是否真的带来更有效候选。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-hyperagents-ae71283f" class="ar-learning-paper-anchor"></span>
@@ -2374,7 +2480,7 @@ hide:
 
 ## 记住这一点
 
-先区分三种变化：当前回合重新作答、跨回合保存语言经验，以及修改工具组织、工作流或运行框架。Reflexion 把失败反馈转为下一次尝试可读的经验，不更新模型权重；更完整的研究系统还会提出候选、实现、评估并保留谱系。每一层变化都要有独立验收：流程被改写不等于任务能力已经提升。
+先区分三种变化：当前回合重新作答、跨回合保存语言经验，以及修改工具组织、工作流或运行框架。Reflexion 把失败反馈转为下一次尝试可读的经验，不更新模型权重；更完整的研究系统还会提出候选、实现、评估并保留谱系。每一层变化都要有独立验收：流程被改写不等于任务能力已经提升。 CROP把系统提示作为离线可变对象，EvalAlloc则改变候选获得多少评测与如何估计fitness；前者的token目标与后者的cell预算不能混写成同一种自进化收益。
 
 ## 一个例子
 

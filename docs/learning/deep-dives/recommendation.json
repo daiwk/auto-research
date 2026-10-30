@@ -881,8 +881,8 @@
     },
     "generative-retrieval-reasoning": {
       "title": "生成一个物品，先后跨过码本、模型分布与合法目录三道关",
-      "thesis": "TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。",
-      "updated": "2026-10-29",
+      "thesis": "TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。 PinGER再把历史输入与SID监督拆开，并将前缀多样化选择、分层DPO和合法目录分别治理。",
+      "updated": "2026-10-30",
       "axes": [
         "物品表示：离散码、稀疏—稠密级联与LLM继续预训练",
         "学习分布与推理搜索分别改变什么",
@@ -948,6 +948,16 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "recommendation:pinger",
+          "position": "训练交错SID/dense并关闭跨商品SID读取，服务删除过去SID；按LCP深度逐beam惩罚，所有SID前缀DPO与NTP锚联合后训练。",
+          "tradeoff": "不同于TIGER逐项历史SID输入，也不能把前缀多样性当STATIC合法性；多样性会牺牲离线recall，本地无完整tokenizer/服务。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -975,6 +985,15 @@
           "papers": [
             "recommendation:tiger",
             "recommendation:pailitao-mmsearch2"
+          ]
+        },
+        {
+          "title": "历史输入、候选覆盖与合法路径分别付费",
+          "body": "TIGER把历史商品表示成多级SID序列；PinGER保留SID逐级监督，却限制主干内的读取角色，让后续商品只读历史dense。这里dense仍可包含SID fusion，不能误写成没有离散信息。PinGER的LCP惩罚只改变同层beam如何分散名额，不负责排除不存在的SID；STATIC才显式编译合法迁移。更广前缀也非免费收益：原文λ=3时distinct@1上升而R@100下降。原文整栈线上增益不能被归到本地mask或DPO单核。",
+          "papers": [
+            "recommendation:pinger",
+            "recommendation:tiger",
+            "recommendation:static-constraint-decoding"
           ]
         }
       ],
@@ -1017,6 +1036,17 @@
           "papers": [
             "recommendation:tiger",
             "recommendation:pailitao-mmsearch2"
+          ]
+        },
+        {
+          "id": "pinger-prefix-spread-versus-static-legality",
+          "question": "PinGER的前缀多样化能代替STATIC合法目录掩码，或保证TIGER式离线召回同时提高吗？",
+          "answer": "不能。LCP惩罚在候选父前缀间分散名额，是软选择偏好；STATIC定义哪些路径通向合法物品，是可行域。分散到更多子树还可能牺牲单一held-out物品的recall，PinGER原表也显示这种取舍。输入删SID、更多多样性和合法输出不可混成一项。",
+          "example": "教学示意：三个语义类别都得到beam名额，仍可能含目录不存在的叶子；过滤非法叶子也不自动保证目标物品被保留下来。",
+          "papers": [
+            "recommendation:pinger",
+            "recommendation:tiger",
+            "recommendation:static-constraint-decoding"
           ]
         }
       ],
@@ -1081,7 +1111,8 @@
         "recommendation:univa",
         "recommendation:wegr",
         "recommendation:xrec",
-        "recommendation:pailitao-mmsearch2"
+        "recommendation:pailitao-mmsearch2",
+        "recommendation:pinger"
       ],
       "updates": [
         {
@@ -1220,6 +1251,20 @@
           ],
           "source_revisions": {
             "recommendation:pailitao-mmsearch2": "a2a62e7242409056fe721d34b5ac7f68b2766ef7df81fd9ebf56e0df85948b89"
+          }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读PinGER三mask规则、单层LCP惩罚和逐prefixDPO锚；与TIGER历史SID成本及STATIC合法迁移分轴对照，保留多样性/recall取舍和整栈线上证据边界。",
+          "papers": [
+            "recommendation:pinger",
+            "recommendation:tiger",
+            "recommendation:static-constraint-decoding"
+          ],
+          "source_revisions": {
+            "recommendation:pinger": "419faa2749922aada03375d430278072c04fe17082af0d6a975dc36832be8571",
+            "recommendation:tiger": "8baf748cca80fb5364e9dd7280b98de93249f38e0f8f6930149c1c64afee63d5",
+            "recommendation:static-constraint-decoding": "8012c5264811bd13cf9092c6cfefaf8a1e896c207922e2715a879af06aa992bc"
           }
         }
       ]
@@ -1494,9 +1539,9 @@
       ]
     },
     "slates-business-value": {
-      "title": "好物品怎样组成好列表：边际价值、策略权重与约束",
-      "thesis": "CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。",
-      "updated": "2026-10-27",
+      "title": "从列表边际价值到出价控制：策略权重与约束",
+      "thesis": "CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。 RLBP把相同的多目标治理问题带到日级PID参数选择，但其BU/CPC奖励和控制动作不能当成列表逐项效用。",
+      "updated": "2026-10-30",
       "axes": [
         "价值属于单物品、已选前缀还是整套策略",
         "训练期蒸馏与推理期搜索的分工",
@@ -1543,6 +1588,16 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "recommendation:pinterest-rlbp",
+          "position": "日级选择九种P/I倍率且D固定，生产gamma0回归BU/CPC相对lift，推理用Qbu−betaQcpc再topK softmax，服务保留PID。",
+          "tradeoff": "不同于PRL-PUTS的Repin/P2P策略扫描；CPC改善的reward仍是负值，多步max/min是扩展，生产beta幅度与数值预处理外置。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -1562,6 +1617,14 @@
             "recommendation:prl-puts",
             "recommendation:primal-dual-decoding",
             "recommendation:sort-gen"
+          ]
+        },
+        {
+          "title": "相同双头形式，不是相同控制问题",
+          "body": "PRL-PUTS分别估计Repin/P2P效用，再扫描权重策略；RLBP的两个头则预测日级BU和CPC相对生产基线的变化，选择的是PID系数而非推荐物品。因为CPC越低越好，负lift不能先翻成正奖励再在融合时再次取负。部署gamma=0也意味着并未用跨日bootstrap学长期Q；生命周期取舍由外部beta表达。两头各自max/min的多步扩展不保证融合后就是组合目标的最优Q，七天A/B与两月非均衡holdout也应分开解释。",
+          "papers": [
+            "recommendation:pinterest-rlbp",
+            "recommendation:prl-puts"
           ]
         }
       ],
@@ -1595,6 +1658,16 @@
           "papers": [
             "recommendation:primal-dual-decoding",
             "recommendation:sort-gen",
+            "recommendation:prl-puts"
+          ]
+        },
+        {
+          "id": "rlbp-two-heads-not-listwise-q",
+          "question": "RLBP与PRL-PUTS都有双头Q和可调权重，为什么不能直接共享动作/奖励解释？",
+          "answer": "PRL-PUTS围绕Repin/P2P的推荐策略取舍，RLBP按日选PID倍率以平衡预算利用率和CPC。RLBP保留负CPC lift，在Qbu−betaQcpc中让低成本更受偏好；部署gamma0是单步daily目标，不能套用一个通用长期列表Q解释两者。",
+          "example": "教学示意：CPC从1降到0.9得到reward -0.1；减beta乘该值会提高融合分数。若先把它改为+0.1再照公式相减，就反而惩罚了成本下降。",
+          "papers": [
+            "recommendation:pinterest-rlbp",
             "recommendation:prl-puts"
           ]
         }
@@ -1635,7 +1708,8 @@
         "recommendation:swag-bid",
         "recommendation:taiji",
         "recommendation:uame",
-        "recommendation:youtube-freshness"
+        "recommendation:youtube-freshness",
+        "recommendation:pinterest-rlbp"
       ],
       "updates": [
         {
@@ -1716,6 +1790,18 @@
             "recommendation:taiji": "cd370dc1dabe123dacbbe431a1f42e28f4b29999cacb8d4b4c3f2734494f180d",
             "recommendation:uame": "a4e044005755b2e95e3d9ae553ff6f5ecd1c5f894b837d77253334721144738c",
             "recommendation:youtube-freshness": "1684254a676cd5108f2de90d964fea6413530e8b7d1ed1a00ded77cb0f1dea38"
+          }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读RLBP日级九动作、部署gamma0、负CPC lift、Q融合与外部预处理；相对PRL-PUTS双目标策略扫描区分状态/动作/回报，扩宽专题标题但保留稳定id和原阅读路径。",
+          "papers": [
+            "recommendation:pinterest-rlbp",
+            "recommendation:prl-puts"
+          ],
+          "source_revisions": {
+            "recommendation:pinterest-rlbp": "c60700a5cf962af1a65600d1eba677ee9cc17bb81bafcce4ccead6deb4436a62",
+            "recommendation:prl-puts": "66c54c2b0cfb4be2a7d8a46183d8f3700173366ee91ea6e27404daad8d368a61"
           }
         }
       ]

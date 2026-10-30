@@ -7,7 +7,7 @@ hide:
 
 # 视觉世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 92 个问题 · 23 篇论文
+[多模态](index.md) / 96 个问题 · 24 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">92 个问题 · 23 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">96 个问题 · 24 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gui-jepa" data-paper-title="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents 基础模型 Shanghai Jiao Tong University / Nanyang Technological University 2026-10-27 多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。关键不是把“画面 latent 离目标越近”当动作价值。预测器通过真实候选上的 listwise 决策损失训练，结构头的候选视觉信息必须经过条件化 latent； 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 latent predictor / structural-head 组件、diagnostic only，不是 GUI Agent 或 AndroidControl 接入。完整实验：成本过高，不复现（审查 DONE）；不作为 evolve 能力证据。实现真实三层 Transformer residual predictor、候选 ROI / 全屏池化、cosine 结构头、动作类型 bias、外部 text score 相加、有效候选 mask 和 weighted listwise loss。  JEPA与世界模型 候选条件决策与GUI 多模态 视觉世界建模：状态、生成与动作条件 GUI-JEPA为什么不需要逐token生成动作？ 它先从可访问性树枚举候选，再让每个候选条件化画面latent，一次批量打分选动作。动作空间来自观测侧枚举，不是语言模型自由生成。因此速度取决于候选数，也依赖像素型Agent不一定拥有的a11y输入，不能直接比较所有GUI系统。 教学例子：页面已有三种可执行按钮动作，系统分别算三个分数后选最高者；这不同于先生成JSON文本，再解析其中坐标。 2026-10-29">
@@ -80,6 +80,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>给两个合法latent候选反向更新参数，只能证明梯度路径工作；真正打开应用还需要从截图生成latent、找到合法候选、执行并观察下一页面。</p>
 <p class="ar-learning-sources">依据：本地复现、检查与负控、高成本完整实验；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36877v1">原论文</a> · <a href="../../../../foundation-models/2610.36877-gui-jepa/">实现解读</a> · <a href="#qa-3b5a93ef5e4fcae4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:swim" data-paper-title="SWIM: Learning What Matters from Behaviors for JEPA World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="SWIM: Learning What Matters from Behaviors for JEPA World Models 基础模型 Boston University / Unity Technologies 2026-10-27 JEPA world model 预测视觉 latent，但 latent 欧氏距离不一定反映规划进展。SCALE 用 simulator state 的距离校准 latent 几何；若状态中含无关坐标，均匀加权会把这些干扰也学进去。SWIM 先用已记录动作训练门控逆动力学，再把冻结的连续权重传给状态距离监督。第一阶段保留当前状态完整信息，只给未来位移逐坐标加 gate，避免把门控误写成当前与未来状态同时裁剪。 完整 world-model 训练与规划评测：成本过高，不复现（审查 DONE）；本地状态：L1 逆动力学门控目标与状态距离组件，diagnostic only，不含视觉 world model、环境或规划器。完整 world-model 训练与规划评测：成本过高，不复现（审查 DONE）；不是 Agent 成功率或 evolve 提升证据。GatedInverseDynamics 真实运行两层 LayerNorm / GELU MLP，输出 Gaussian mean 和限制在 [-5,2] 的 log standard deviation。论文 hidden width 1024，本地使用明确缩小的宽度以做 L1；  JEPA与世界模型 行为加权状态几何 多模态 视觉世界建模：状态、生成与动作条件 SWIM学到的是机器人策略，还是状态距离该看哪些坐标？ SWIM先从离线记录动作中学习连续状态坐标权重，再用它构造world-model几何监督。逆动力学预测记录动作只是学习权重的训练目标；实际部署仍由图像encoder、latent dynamics和CEM等规划器决定动作。本地仅实现门控目标与距离，不等于可执行机器人策略。 教学例子：状态含方块位置和背景灯颜色，行为数据可能让方块位置获得较高相对权重；这只改变“相距多远”的定义，并没有直接输出抓取轨迹。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-swim-9da395d5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-300d76e6b7918837">SWIM学到的是机器人策略，还是状态距离该看哪些坐标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aswim">SWIM: Learning What Matters from Behaviors for JEPA World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Boston University / Unity Technologies</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>SWIM先从离线记录动作中学习连续状态坐标权重，再用它构造world-model几何监督。逆动力学预测记录动作只是学习权重的训练目标；实际部署仍由图像encoder、latent dynamics和CEM等规划器决定动作。本地仅实现门控目标与距离，不等于可执行机器人策略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>状态含方块位置和背景灯颜色，行为数据可能让方块位置获得较高相对权重；这只改变“相距多远”的定义，并没有直接输出抓取轨迹。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36662v1">原论文</a> · <a href="../../../../foundation-models/2610.36662-swim/">实现解读</a> · <a href="#qa-300d76e6b7918837">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:swim" data-paper-title="SWIM: Learning What Matters from Behaviors for JEPA World Models" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="SWIM: Learning What Matters from Behaviors for JEPA World Models 基础模型 Boston University / Unity Technologies 2026-10-27 JEPA world model 预测视觉 latent，但 latent 欧氏距离不一定反映规划进展。SCALE 用 simulator state 的距离校准 latent 几何；若状态中含无关坐标，均匀加权会把这些干扰也学进去。SWIM 先用已记录动作训练门控逆动力学，再把冻结的连续权重传给状态距离监督。第一阶段保留当前状态完整信息，只给未来位移逐坐标加 gate，避免把门控误写成当前与未来状态同时裁剪。 完整 world-model 训练与规划评测：成本过高，不复现（审查 DONE）；本地状态：L1 逆动力学门控目标与状态距离组件，diagnostic only，不含视觉 world model、环境或规划器。完整 world-model 训练与规划评测：成本过高，不复现（审查 DONE）；不是 Agent 成功率或 evolve 提升证据。GatedInverseDynamics 真实运行两层 LayerNorm / GELU MLP，输出 Gaussian mean 和限制在 [-5,2] 的 log standard deviation。论文 hidden width 1024，本地使用明确缩小的宽度以做 L1；  JEPA与世界模型 行为加权状态几何 多模态 视觉世界建模：状态、生成与动作条件 为什么当前状态不能一起gate，为什么还需要真实错配的discrimination？ 当前状态提供动作发生的完整上下文，论文只门控未来位移；把两者都gate会改掉逆动力学输入定义。仅拟合正例时，模型可能忽略未来变化、只靠当前状态预测动作；cyclic错配让同一个当前状态和动作与错误未来对比，促使门控保留行为相关的位移信息。 教学例子：记录动作是向右，当前位置保持不变，正例未来向右；负例换成batch下一条未来再减当前位置。不能同时把当前状态也换掉，否则模型可能利用不同上下文区分正负。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a40912dd5fb29c9d">为什么当前状态不能一起gate，为什么还需要真实错配的discrimination？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aswim">SWIM: Learning What Matters from Behaviors for JEPA World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Boston University / Unity Technologies</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当前状态提供动作发生的完整上下文，论文只门控未来位移；把两者都gate会改掉逆动力学输入定义。仅拟合正例时，模型可能忽略未来变化、只靠当前状态预测动作；cyclic错配让同一个当前状态和动作与错误未来对比，促使门控保留行为相关的位移信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>记录动作是向右，当前位置保持不变，正例未来向右；负例换成batch下一条未来再减当前位置。不能同时把当前状态也换掉，否则模型可能利用不同上下文区分正负。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36662v1">原论文</a> · <a href="../../../../foundation-models/2610.36662-swim/">实现解读</a> · <a href="#qa-a40912dd5fb29c9d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:swim" data-paper-title="SWIM: Learning What Matters from Behaviors for JEPA World Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="SWIM: Learning What Matters from Behaviors for JEPA World Models 基础模型 Boston University / Unity Technologies 2026-10-27 JEPA world model 预测视觉 latent，但 latent 欧氏距离不一定反映规划进展。SCALE 用 simulator state 的距离校准 latent 几何；若状态中含无关坐标，均匀加权会把这些干扰也学进去。SWIM 先用已记录动作训练门控逆动力学，再把冻结的连续权重传给状态距离监督。第一阶段保留当前状态完整信息，只给未来位移逐坐标加 gate，避免把门控误写成当前与未来状态同时裁剪。 完整 world-model 训练与规划评测：成本过高，不复现（审查 DONE）；本地状态：L1 逆动力学门控目标与状态距离组件，diagnostic only，不含视觉 world model、环境或规划器。完整 world-model 训练与规划评测：成本过高，不复现（审查 DONE）；不是 Agent 成功率或 evolve 提升证据。GatedInverseDynamics 真实运行两层 LayerNorm / GELU MLP，输出 Gaussian mean 和限制在 [-5,2] 的 log standard deviation。论文 hidden width 1024，本地使用明确缩小的宽度以做 L1；  JEPA与世界模型 行为加权状态几何 多模态 视觉世界建模：状态、生成与动作条件 把状态乘g还是sqrt(g)，以及之后再标准化，会得到同一个距离吗？ 不会。要让平方距离中的每维系数是g，坐标必须乘sqrt(g)；乘g会得到g²。权重作用于已经标准化的状态，之后再逐坐标标准化会抵消缩放。整体gate尺度在Pearson相关中会抵消，且可被逆模型吸收，所以绝对gate值也不是唯一可识别的重要性刻度。 教学例子：一维差值2、gate0.25，目标距离为0.25×4=1；乘sqrt(g)=0.5再平方也是1，直接乘g再平方却是0.25。再除以缩放后的标准差会把0.5抵消。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c1b394272419a8ac">把状态乘g还是sqrt(g)，以及之后再标准化，会得到同一个距离吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aswim">SWIM: Learning What Matters from Behaviors for JEPA World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Boston University / Unity Technologies</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。要让平方距离中的每维系数是g，坐标必须乘sqrt(g)；乘g会得到g²。权重作用于已经标准化的状态，之后再逐坐标标准化会抵消缩放。整体gate尺度在Pearson相关中会抵消，且可被逆模型吸收，所以绝对gate值也不是唯一可识别的重要性刻度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一维差值2、gate0.25，目标距离为0.25×4=1；乘sqrt(g)=0.5再平方也是1，直接乘g再平方却是0.25。再除以缩放后的标准差会把0.5抵消。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36662v1">原论文</a> · <a href="../../../../foundation-models/2610.36662-swim/">实现解读</a> · <a href="#qa-c1b394272419a8ac">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:swim" data-paper-title="SWIM: Learning What Matters from Behaviors for JEPA World Models" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="SWIM: Learning What Matters from Behaviors for JEPA World Models 基础模型 Boston University / Unity Technologies 2026-10-27 JEPA world model 预测视觉 latent，但 latent 欧氏距离不一定反映规划进展。SCALE 用 simulator state 的距离校准 latent 几何；若状态中含无关坐标，均匀加权会把这些干扰也学进去。SWIM 先用已记录动作训练门控逆动力学，再把冻结的连续权重传给状态距离监督。第一阶段保留当前状态完整信息，只给未来位移逐坐标加 gate，避免把门控误写成当前与未来状态同时裁剪。 完整 world-model 训练与规划评测：成本过高，不复现（审查 DONE）；本地状态：L1 逆动力学门控目标与状态距离组件，diagnostic only，不含视觉 world model、环境或规划器。完整 world-model 训练与规划评测：成本过高，不复现（审查 DONE）；不是 Agent 成功率或 evolve 提升证据。GatedInverseDynamics 真实运行两层 LayerNorm / GELU MLP，输出 Gaussian mean 和限制在 [-5,2] 的 log standard deviation。论文 hidden width 1024，本地使用明确缩小的宽度以做 L1；  JEPA与世界模型 行为加权状态几何 多模态 视觉世界建模：状态、生成与动作条件 怎样防止组件测试把“L1让gate变小”误当作学到了行为，或把未来state泄露到规划？ 先单独检查去掉L1后的行为项仍给gate梯度，再检查真实optimizer更新，而不只看参数有变化。第二阶段state距离停梯度，未来state只在离线训练构造位移，部署接口不能读取它。常量距离的Pearson没有定义，应拒绝，不能加任意epsilon后当成几何学习有效。 教学例子：若只算λsum(g)，gate当然会下降，即使记录动作全被忽略；因此本地另算λ=0的梯度。若所有frame pairs距离都为0，相关度分母为0，应报错而不是写成功率1。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0989a9f5d8371bbd">怎样防止组件测试把“L1让gate变小”误当作学到了行为，或把未来state泄露到规划？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aswim">SWIM: Learning What Matters from Behaviors for JEPA World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Boston University / Unity Technologies</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先单独检查去掉L1后的行为项仍给gate梯度，再检查真实optimizer更新，而不只看参数有变化。第二阶段state距离停梯度，未来state只在离线训练构造位移，部署接口不能读取它。常量距离的Pearson没有定义，应拒绝，不能加任意epsilon后当成几何学习有效。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若只算λsum(g)，gate当然会下降，即使记录动作全被忽略；因此本地另算λ=0的梯度。若所有frame pairs距离都为0，相关度分母为0，应报错而不是写成功率1。</p>
+<p class="ar-learning-sources">依据：本地复现、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36662v1">原论文</a> · <a href="../../../../foundation-models/2610.36662-swim/">实现解读</a> · <a href="#qa-0989a9f5d8371bbd">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dt-jepa" data-paper-title="DT-JEPA: Learning to Predict Future Representations for Decision-Making" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="DT-JEPA: Learning to Predict Future Representations for Decision-Making 基础模型 Southeast University 2026-10-23 传统DT用单个return-to-go条件，无法区分回报相同但未来动力学不同的轨迹。本方法将条件改成由历史预测的未来latent分布：历史encoder生成Gaussian参数，EMA target encoder只在训练期编码真实未来；重参数采样的预测未来通过独立gamma/beta MLP调制DT hidden。离线目标为BC加Gaussian NLL；在线通过双target critic的较小值构建多步target，并优化Q1指导的actor目标。 成本过高，不复现（审查 DONE）。D4RL共19个locomotion/navigation数据配置、主表5种子、多个未见reward的在线适配及基线/消融；附录DT4层/4头/512hidden、batch256/context20。原文未给总GPU小时，不臆测。完整offline+online矩阵超单卡短时预算，不安装MuJoCo、不下载轨迹、不启动环境试跑。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  JEPA与世界模型 未来表征与离线决策 多模态 视觉世界建模：状态、生成与动作条件 Decision Transformer 为什么可能需要比“期望回报是多少”更丰富的未来条件？ 不同轨迹可能获得相同总回报，却通向完全不同状态，单个 return-to-go 无法区分这些动力学。DT-JEPA 用从历史预测的未来表示分布作为条件，让动作选择获得更具体的未来信息。未来只是预测，不是部署时可读取的真实结果，仍要管理不确定性和训练信息隔离。 教学例：两条路线奖励相同，一条到充电区、另一条到出口；相同回报数字未说明当前该往哪走，未来状态特征提供另一类条件。 2026-10-27">
@@ -1261,7 +1314,7 @@ hide:
 
 ## 记住这一点
 
-把观察、动作和后续状态放在一起，才能学习可用于预测或控制的表示。LeWAM 联合学习未来潜状态预测与动作 flow matching，让视觉表征和策略相互塑造；规划时再用潜动力学评价动作候选。WOVEN 则把视频生成的视觉转移组织成场景、动作、推理类型受控的监督，训练模型理解结果、原因与反事实。
+把观察、动作和后续状态放在一起，才能学习可用于预测或控制的表示。LeWAM 联合学习未来潜状态预测与动作 flow matching，让视觉表征和策略相互塑造；规划时再用潜动力学评价动作候选。WOVEN 则把视频生成的视觉转移组织成场景、动作、推理类型受控的监督，训练模型理解结果、原因与反事实。 SWIM补充“哪些状态坐标应影响latent距离”：离线逆动力学只门控未来位移，冻结gate后用sqrt(g)校准同帧对的状态距离；它不在规划时读取未来状态。
 
 ## 一个例子
 

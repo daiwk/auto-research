@@ -1,0 +1,25 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.36520v1",
+  "source_url": "https://arxiv.org/pdf/2610.36520v1#page=5",
+  "figure": "Figure 1",
+  "image": "paper-figure-01.png",
+  "image_sha256": "035d44df5643c46747d2986b91e3f1483cbafb2c7e83992785c7f71184bedc4e",
+  "source_asset_sha256": "035d44df5643c46747d2986b91e3f1483cbafb2c7e83992785c7f71184bedc4e",
+  "pixel_dimensions": [
+    1224,
+    898
+  ],
+  "copyright": "Original paper authors; fixed arXiv v1 license applies",
+  "description": "Original PDF page crop including Figure 1 and full caption; not redrawn",
+  "method_html_sha256": "41fe7eeb3acce50d5ccfdc55a8a1dde75ad5257c895e4d8691abe02ef6cc42b4",
+  "caption": "Figure 1: The fold moves each retained key along one shared direction u by βj\n√\nd, so a query near\nthe hyperplane q · u = 1 (shaded) sees the logit shift βj (q · u) ≈βj. Left: AM, a scalar bias βj per\nretained key kj. Right: the fold. For the orange open circle, a query far from the hyperplane, AM\nstill adds βj while the fold scales it by q · u.",
+  "visually_verified": true,
+  "source_pdf_sha256": "581537ced8e5226e7f9f6e95bc87f520a06e81c1ba752d7344c65dfc481520f1",
+  "page": 5,
+  "crop_rect_points": [
+    0.0,
+    0.0,
+    612.0,
+    448.5768127441406
+  ]
+}

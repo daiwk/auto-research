@@ -189,7 +189,7 @@
     },
     "memory-and-skills": {
       "title": "经验进入长期系统前，要解决存取、价值与准入",
-      "thesis": "MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。",
+      "thesis": "MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。",
       "axes": [
         "对象是原始事件、压缩表示、运行状态还是可执行技能",
         "决定发生在写入、读取、淘汰还是持久准入",
@@ -265,6 +265,16 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "agent-research:emma",
+          "position": "按controller/agent/skill组织持久记忆，依据失败scope只改责任条目；临时execution slip不写长期经验，overflow先拆未完成步骤。",
+          "tradeoff": "单编辑守卫不证明语义正确，安全判断仍外置；接受编辑后须下一次实际使用，不能以最终未重跑编辑冒充改进。完整多环境系统未复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -291,6 +301,14 @@
           "body": "DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任务、seed、配置做单记忆/无记忆配对重放，再检查修复是否同时守住父记忆与无记忆基线。它补充了简单追加反思的风险控制：团队结果差不能直接归罪某条记忆；新版本也不能继承旧版本已测效果。本地只做这些测量和版本合同，没有LLM修复或重放。",
           "papers": [
             "agent-research:memgpt",
+            "agent-research:discernmem"
+          ]
+        },
+        {
+          "title": "先定位修改责任，再证明这次修改有用",
+          "body": "DiscernMem用孤立注入与无记忆配对重放区分作用范围和内容缺陷，并以父记忆/无记忆双参照验收修复。EMMA更偏编辑组织：controller、agent specialization与skill有不同所有者，一次反思只能改承担责任的一项，执行失误只影响临时计划。一个解决归因与修复效果，一个约束该改哪层及如何exercise；结构合法不能替代配对收益，也不能把外部语义安全Boolean视为已实现的LLM审查。",
+          "papers": [
+            "agent-research:emma",
             "agent-research:discernmem"
           ]
         }
@@ -335,9 +353,19 @@
             "agent-research:memgpt",
             "agent-research:discernmem"
           ]
+        },
+        {
+          "id": "emma-single-edit-versus-memory-effect",
+          "question": "EMMA一次只改一项记忆，是否就已经完成DiscernMem要求的因果归因与修复验收？",
+          "answer": "没有。单编辑减少修改scope并明确责任，但还需实际使用和重跑；DiscernMem另用相同任务/seed的隔离记忆与无记忆结果，核对候选是否同时不弱于父版和无记忆。结构约束与效果证据不是相同的通过条件。",
+          "example": "教学示意：把一次检索拼写错误写成永久skill违反EMMA的scope规则；把skill文本改得合法也不能证明它比不使用记忆更有帮助。",
+          "papers": [
+            "agent-research:emma",
+            "agent-research:discernmem"
+          ]
         }
       ],
-      "updated": "2026-10-29",
+      "updated": "2026-10-30",
       "reviewed_papers": [
         "agent-research:cache-engineering",
         "agent-research:tokenworth",
@@ -394,7 +422,8 @@
         "agent-research:memgpt",
         "agent-research:voyager",
         "agent-research:generative-agents",
-        "agent-research:discernmem"
+        "agent-research:discernmem",
+        "agent-research:emma"
       ],
       "updates": [
         {
@@ -522,6 +551,18 @@
             "agent-research:discernmem"
           ],
           "source_revisions": {
+            "agent-research:discernmem": "a5c82d9184ebece8d16e3b6d66033b0b11aafc776b4c3fec3b1fab7290a0c588"
+          }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读EMMA的三层所有权、scope单编辑、overflow与下一尝试exercise义务；与DiscernMem的配对归因和双基线修复验收区分，保留未实现语义服务边界。",
+          "papers": [
+            "agent-research:emma",
+            "agent-research:discernmem"
+          ],
+          "source_revisions": {
+            "agent-research:emma": "93bec7aad432843c6c05e6463327d32b730280ae4f119987333b5ad654aec829",
             "agent-research:discernmem": "a5c82d9184ebece8d16e3b6d66033b0b11aafc776b4c3fec3b1fab7290a0c588"
           }
         }
@@ -843,7 +884,7 @@
     },
     "harness-and-self-improvement": {
       "title": "自改进先标对象：答案、经验、接口与系统版本",
-      "thesis": "Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。",
+      "thesis": "Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。",
       "axes": [
         "可变对象是答案、文字经验、接口、模型还是交付物",
         "变化仅服务当前任务还是成为持久版本",
@@ -919,6 +960,26 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "agent-research:crop",
+          "position": "固定目标权重，拼接任务与超阈值长度文本批评，外部元优化器重写系统提示；按准确率减CoT归一化token成本选已测提示。",
+          "tradeoff": "不同于Self-Refine修当前答案；本地validation选优是明确防泄漏加强。确定性callback诊断不代表真实LLM无损缩短或完整evolve。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "agent-research:evalalloc",
+          "position": "用SEARCH观测的信息度选共享core与无放回item，固定外部item参照仅推断新候选参数；最终公共prefix补缓存并作配对校正。",
+          "tradeoff": "预测不能覆盖已测cell，评测cell减少不等于token费用等比下降；warmup MIRT、cross-fit refit和完整successive halving未实现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -946,6 +1007,16 @@
           "title": "10月29日：新方法与来源变化",
           "body": "RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果联合表用Jeffreys-Dirichlet后验估计保守utility分位，集合新颖性和冗余仍固定来自已测轨迹。它把有限样本不确定性和候选准入分开，只有active准则能进入frontier，最终harness修改还要独立validation严格增益。本地没有LLM评审或harness生成。",
           "papers": [
+            "agent-research:self-refine",
+            "agent-research:ruharness"
+          ]
+        },
+        {
+          "title": "修改对象、评判标准与评测预算要分三本账",
+          "body": "Self-Refine修当前输出，CROP则在训练样本反馈下改下一次通用系统提示，并明确计算输出token成本；它不把权重训练称为已完成。RuHarness维护能区分当前失败的rubric frontier，EvalAlloc另问应把真实评测cell花在哪些SEARCH items上：固定item参照做稀疏补全，只用预测填未观测项，最终以公共prefix与缓存确认。高rubric效用、较高预测fitness和留出任务真成功是三种证据，尤其不能把少一半cell直接宣传为少一半LLM费用。",
+          "papers": [
+            "agent-research:crop",
+            "agent-research:evalalloc",
             "agent-research:self-refine",
             "agent-research:ruharness"
           ]
@@ -991,9 +1062,29 @@
             "agent-research:self-refine",
             "agent-research:ruharness"
           ]
+        },
+        {
+          "id": "crop-prompt-versus-current-answer",
+          "question": "CROP和Self-Refine都让模型读反馈改文本，为什么不能用同一个“修正成功”指标概括？",
+          "answer": "Self-Refine的主要修订对象是当前答案；CROP离线改系统提示，再以准确率和CoT归一化输出token成本选已测候选。当前样本答案变好不证明提示可迁移，提示更短也不保证答案更短或正确。真实LLM回调及独立validation仍是组件之外的证据。",
+          "example": "教学示意：把一个算术答案改对，与得到适用于一批未见算术题的简洁系统提示，是两种验收；最后新写出的提示未评测时不能直接当最佳。",
+          "papers": [
+            "agent-research:crop",
+            "agent-research:self-refine"
+          ]
+        },
+        {
+          "id": "evalalloc-fitness-versus-rubric-frontier",
+          "question": "EvalAlloc的高预测fitness与RuHarness的高准则效用，为什么都不能直接当真实Agent成功率？",
+          "answer": "EvalAlloc用固定参照估计未观测SEARCH结果，必须保留已测cell并最终确认；RuHarness衡量准则是否有保守的失败诊断价值，候选harness还需独立validation。两者分别治理观测预算和评判标准，不是已执行任务的替代答案。",
+          "example": "教学示意：某候选只测20/300个item，补全均值0.8并不意味着已真实完成240项；一条准则能覆盖失败，也不等于使用它后任务已经成功。",
+          "papers": [
+            "agent-research:evalalloc",
+            "agent-research:ruharness"
+          ]
         }
       ],
-      "updated": "2026-10-29",
+      "updated": "2026-10-30",
       "reviewed_papers": [
         "agent-research:rsi-opt",
         "agent-research:image-rsi",
@@ -1038,7 +1129,9 @@
         "agent-research:mars-research",
         "agent-research:self-refine",
         "agent-research:reflexion",
-        "agent-research:ruharness"
+        "agent-research:ruharness",
+        "agent-research:crop",
+        "agent-research:evalalloc"
       ],
       "updates": [
         {
@@ -1142,6 +1235,22 @@
             "agent-research:ruharness"
           ],
           "source_revisions": {
+            "agent-research:ruharness": "01c81c72f03453d7ecff3e3ab7e10ad03b9b84925a5fd8def1a87d678df02a37"
+          }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读CROP与EvalAlloc：以Self-Refine/RuHarness为对照，分开系统提示修改、rubric价值和SEARCH观测预算；补validation/CoT成本、观测优先补全、公共prefix确认及未实现MIRT/controller边界。",
+          "papers": [
+            "agent-research:crop",
+            "agent-research:evalalloc",
+            "agent-research:self-refine",
+            "agent-research:ruharness"
+          ],
+          "source_revisions": {
+            "agent-research:crop": "55e2954ae4dbabbd3ba050aa41c7af7f7b8149fa94df72381fa7e870fb17baa2",
+            "agent-research:evalalloc": "04e5b9c3cea405eb2244d2e0f4f062a70ae83b5076595524c750a99f4b3629be",
+            "agent-research:self-refine": "5a1a0616bc08bfafc4cf3392fab8cdd8c8921c7917f536786d14f0d2a9f61eb3",
             "agent-research:ruharness": "01c81c72f03453d7ecff3e3ab7e10ad03b9b84925a5fd8def1a87d678df02a37"
           }
         }

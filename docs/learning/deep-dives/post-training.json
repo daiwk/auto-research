@@ -520,8 +520,8 @@
     },
     "reward-and-credit": {
       "title": "奖励从哪里来，信用才该分到哪里",
-      "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。",
-      "updated": "2026-10-27",
+      "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。",
+      "updated": "2026-10-30",
       "reviewed_papers": [
         "post-training:mart-grpo",
         "post-training:mge-po",
@@ -558,7 +558,8 @@
         "post-training:scar-shapley-credit",
         "post-training:intuitor",
         "post-training:math-shepherd",
-        "post-training:process-supervision"
+        "post-training:process-supervision",
+        "post-training:concur"
       ],
       "axes": [
         "证据来源：人工步骤、正确续写比例、verifier、内在分布",
@@ -626,6 +627,16 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "post-training:concur",
+          "position": "组内先标准化，再把门控辅助分数作最近保序投影；到顶约束按T/A策略处理，最后整batch白化。",
+          "tradeoff": "主奖励以下的并列不强行相等，投影后不重新标准化；未门控分量仍可能反转排序。完整32GPU训练不复现，本地仅优势估计器。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -645,6 +656,14 @@
             "post-training:taco",
             "post-training:mart-grpo",
             "post-training:mrtpo"
+          ]
+        },
+        {
+          "title": "奖励维度优先级与token信用是两种坐标系",
+          "body": "TACO在同一响应的正优势内部，按token风险降低局部信用，负优势不变。CONCUR则比较同一prompt组中不同响应的主奖励与辅助奖励，修正辅助标准化分数的排序和到顶差异；它不定位哪一个token造成错误。把两者都写成“奖励乘一个小系数”会丢掉CONCUR的最近投影与TACO的正负分流。辅助到顶并列也不是终止梯度训练，而是让该辅助在此组不再单独排序。",
+          "papers": [
+            "post-training:concur",
+            "post-training:taco"
           ]
         }
       ],
@@ -678,6 +697,16 @@
           "papers": [
             "post-training:intuitor",
             "post-training:math-shepherd"
+          ]
+        },
+        {
+          "id": "concur-reward-axis-not-token-filter",
+          "question": "CONCUR为何不能直接复用TACO的风险权重，或只把长度奖励权重调小？",
+          "answer": "TACO按token风险衰减正信用，解决整条成功回答对局部错误的强化；CONCUR要求主奖励更高的响应不能得到更低的门控辅助分数，并在需要时合并到顶分数。统一缩放辅助仍保留原来可能反转的次序，也不等于最小距离保序投影。",
+          "example": "教学示意：两条响应正确性为0.6与0.9，长度标准化分数却为1与-1；都乘0.1不会修复辅助本身的反序，逐token风险又回答不了这两个响应的主次关系。",
+          "papers": [
+            "post-training:concur",
+            "post-training:taco"
           ]
         }
       ],
@@ -761,13 +790,25 @@
             "post-training:math-shepherd": "bd20779889ec2aef3b5c34adb87cc8a67c15d811aab371984ceef78f6b94e655",
             "post-training:process-supervision": "1f28ef145ca1bf64ad87f68069e402128add9a209d0183b6a602ae9c92c470dd"
           }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读CONCUR的辅助优势保序投影、到顶并列和整batch信任更新，与TACO的token正信用校准分轴比较；记录L1估计器而非32GPU训练能力。",
+          "papers": [
+            "post-training:concur",
+            "post-training:taco"
+          ],
+          "source_revisions": {
+            "post-training:concur": "e811ed06ea3b661df16afeb6c0ee2dd6859f63a1b6bc343ad0102b18361c92d1",
+            "post-training:taco": "d0440e75bb674d0ae0ffc721691df4c8194541c9a460fd517b52cdb3f7955572"
+          }
         }
       ]
     },
     "student-trajectory-distillation": {
-      "title": "沿学生前缀蒸馏：采样分布与散度方向要分开看",
-      "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。",
-      "updated": "2026-10-27",
+      "title": "轨迹蒸馏：采样者、提案与散度方向分开看",
+      "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。",
+      "updated": "2026-10-30",
       "reviewed_papers": [
         "post-training:opst",
         "post-training:userarena-optd",
@@ -808,7 +849,8 @@
         "post-training:relay-opd",
         "post-training:opd-lm",
         "post-training:gkd",
-        "post-training:minillm"
+        "post-training:minillm",
+        "post-training:mpopd"
       ],
       "axes": [
         "状态来源：教师示范、当前学生、初始学生固定轨迹",
@@ -876,6 +918,16 @@
             "核心公式",
             "代码映射与复现边界"
           ]
+        },
+        {
+          "paper": "post-training:mpopd",
+          "position": "用独立proposal拟合更新后师生的归一化几何混合，学生沿proposal轨迹以滞后一token的冻结单步ratio加权RKL。",
+          "tradeoff": "ratio不是累积乘积；每轮proposal从更新后学生重置。完整采样、LM复制和优化器编排未实现，小张量loss不能证明真实on-policy。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -895,6 +947,15 @@
             "post-training:opd-learning-signals",
             "post-training:ap-opd",
             "post-training:semi-opd"
+          ]
+        },
+        {
+          "title": "改采样者，不等于把学生target改成几何混合",
+          "body": "GKD让教师在学生访问的前缀上监督，MiniLLM进一步选定学生到教师的RKL并稳定估计。MPOPD保留学生向教师学习，却训练另一个proposal来改善轨迹可达性；师生几何混合供proposal拟合，不直接替代教师成为学生的target。采样差距以冻结old-student/old-proposal的前一token单步ratio处理，不是把整条路径ratio累乘。真实实现还须保证proposal每轮从更新后学生重置；只有外部logits接口不能证明这些轨迹来源。",
+          "papers": [
+            "post-training:mpopd",
+            "post-training:gkd",
+            "post-training:minillm"
           ]
         }
       ],
@@ -930,6 +991,17 @@
             "post-training:ap-opd",
             "post-training:divergence-routed-opd",
             "post-training:opd-learning-signals"
+          ]
+        },
+        {
+          "id": "mpopd-proposal-target-versus-student-target",
+          "question": "MPOPD把提案拟合到师生几何混合后，学生也应直接蒸馏这个混合target吗？",
+          "answer": "不应这样替换。几何混合决定proposal应从哪里采样，学生目标仍是向教师的RKL；加权学生loss还用冻结旧学生与旧proposal的单步ratio，并滞后一token。GKD/MiniLLM提示的“采样状态”和“散度方向”在这里又增加了独立提案轴。",
+          "example": "教学示意：proposal更容易提出教师支持的新前缀，不表示学生应只学一个折中教师；把采样分布直接当监督target，会同时改掉原方法的两个目标。",
+          "papers": [
+            "post-training:mpopd",
+            "post-training:gkd",
+            "post-training:minillm"
           ]
         }
       ],
@@ -1018,6 +1090,20 @@
             "post-training:beta-opsd": "94b92b20f7cff25a93ac3a576deb91c58d80c57b0012938b21f82d08fc1e48e1",
             "post-training:relay-opd": "db1ce9eb4c24ff52687be20b8650dc9335c439396ab60dfbabea642089a97998",
             "post-training:opd-lm": "fd61f8e101ecfe187ac09038eb09aa5bb5f1cdcd881010354f2e6645904d45d8",
+            "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e",
+            "post-training:minillm": "9d3642836d8f054f83bb4909e0bca73de51c9c166c318255c456470d03da6648"
+          }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读MPOPD v2，把独立proposal、学生RKL、教师top-k支持与滞后一token的冻结单步ratio分开；相对GKD/MiniLLM补充采样者可学习这一轴，保留proposal重置等外部前提。",
+          "papers": [
+            "post-training:mpopd",
+            "post-training:gkd",
+            "post-training:minillm"
+          ],
+          "source_revisions": {
+            "post-training:mpopd": "d0449fdb3b1d63ecef157d1fa8bb1b7f2e2ddd6ce25378481dd8cba142ad90e2",
             "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e",
             "post-training:minillm": "9d3642836d8f054f83bb4909e0bca73de51c9c166c318255c456470d03da6648"
           }

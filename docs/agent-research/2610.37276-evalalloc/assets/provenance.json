@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.37276v1",
+  "source_url": "https://arxiv.org/html/2610.37276v1/mainfig.png",
+  "figure": "Figure 3",
+  "caption_summary_zh": "完整warmup建立信息项与响应模型，搜索阶段固定参照和sharedcore，最终复用缓存并用公共prefix逐轮确认。",
+  "asset": "paper-figure-01.png",
+  "sha256": "b6f308be4cbe05141b66d0d1470fc18f545bd0883fa7130bcb87c478a8e0cfc6",
+  "width": 1830,
+  "height": 883,
+  "transformation": "original arXiv HTML figure; no redraw or crop",
+  "visually_inspected": true,
+  "reviewed_on": "2026-10-30"
+}

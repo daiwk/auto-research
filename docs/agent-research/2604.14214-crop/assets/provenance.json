@@ -1,0 +1,15 @@
+{
+  "paper_id": "2604.14214v1",
+  "figure": "Figure 1",
+  "source_url": "https://arxiv.org/pdf/2604.14214v1",
+  "source_page": 4,
+  "local_path": "paper-figure-01.png",
+  "source_pdf_sha256": "f1142d0d0ecfc0aa95464714bdfd31574080e5a2c762bf06bf47da8b0dd07d9b",
+  "sha256": "76b56f8e27767a4da38b19e351f3521b12660aad620fb90e2eb438de967a5523",
+  "license": "CC BY 4.0; copyright remains with the original authors",
+  "transformation": "Original PDF page 4 Figure1 and complete caption cropped with PyMuPDF, no redraw or content modifications",
+  "crop_pdf_points": [65, 65, 530, 266],
+  "render_scale": 3,
+  "visual_review": "已目视核对完整图与图注：gold仅到训练任务评估器，长度分支有严格阈值，双梯度输入元优化器并回写系统提示；无重绘。",
+  "checked_on": "2026-10-30"
+}

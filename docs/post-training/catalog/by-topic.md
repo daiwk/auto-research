@@ -41,6 +41,7 @@
 
 ### on-policy / context 蒸馏
 
+- [Proposing Better Rollouts for On-Policy Distillation](../2610.36477-mpopd/README.md)（`mpopd`）：普通OPD从学生采样，教师却可能很少走到这些前缀，师生可达区域差距会被后续学生更新放大。MPOPD把采样策略本身作为优化对象：理想提案是学生与教师概率的几何混合，实际训练一个独立proposal近似它，从而生成时只运行proposal。
 - [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../2610.32770-opst/README.md)（`opst`）：通常的 on-policy self-distillation 仍需要人工问题集。OPST 按主题自生成问题和特权解题线索，经独立重答、改写与学生难度门过滤，再由额外看到线索的 EMA 教师在学生实际生成的前缀上提供分布监督，而不是要求学生直接模仿生成器表述。
 - [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](../2610.30796-gift/README.md)（`gift`）：终局正确性驱动的 RL 梯度与教师模仿梯度可能相冲突。GIFT 在原始词表 logits 空间分解两者：先最少纳入冲突 token，再优先保留提供正交新方向的教师监督；训练逐步缩减被蒸馏的 token 数量，保留项的强度不稀释。
 - [UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents](../2610.30932-userarena-optd/README.md)（`userarena-optd`）：逐步动作命中率不能说明用户模拟器能否保持跨会话偏好，更不能说明模拟出来的推荐政策差异是否接近真实生产A/B。UserArena把细粒度页面、动作和跨会话记录统一成13种动作环境，分Replay与Rollout评估五层保真度：可执行性、局部行为、轨迹动态、个体群体差异和最终结果。
@@ -347,6 +348,12 @@
 - [CISPO / MiniMax-M1](../2506.13585-cispo/README.md)（`cispo`）：固定 rollout policy 采样，token 级计算 importance ratio，只裁剪比率以保留优势方向和有效梯度。
 - [VAPO](../2504.05118-vapo/README.md)（`vapo`）：长 CoT 的 value-based PPO 易受 critic bias、异质 response 长度和稀疏奖励影响。VAPO 预训练 value model，并依 response 长度调节 actor 的 GAE/更新策略，以更稳定地进行 value-based 推理 RL。
 
+### 步骤奖励与信用分配
+
+- [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](../2610.36437-concur/README.md)（`concur`）：多奖励RL常让主奖励决定辅助奖励是否生效，但逐分量标准化会破坏原先优先级：辅助分量可能反转主奖励的排序；所有响应都已正确时，微小长度差异也可能独自决定更新。CONCUR不重写奖励或调低全局权重，而是在每个prompt组内把门控辅助优势投影到与主奖励相容的最近分数。
+- [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](../2610.32431-mart-grpo/README.md)（`mart-grpo`）：一次机器人最终失败，不等于每个动作都导致失败；全轨迹负优势还会惩罚有价值的重抓和恢复尝试。MART-GRPO 用冻结事件 VLM 回看完整失败轨迹，定位最后一次未恢复错误，只保留截止该边界的失败反馈；成功轨迹、原组优势和原始 token 分母不变。
+- [T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning](../2610.00388-t2spo/README.md)（`t2spo`）：用历史成功轨迹中的剩余步数训练上下文内距离估计器，预测每个状态距离成功还多远；把相邻状态的距离改善转为步骤优势，与轨迹级奖励共同优化。冻结 TabPFN 避免额外训练 critic，失败轨迹不被误标成接近成功的正样本。
+
 ### 序列目标、长度与聚合偏置
 
 - [Trajectory-Aware Policy Optimization: Closing the State Distribution Gap in Long-Horizon LLM RL](../../reproductions/2610.13020-tapo-trajectory/README.md)（`tapo-trajectory`）：autoregressive轨迹的前序policy变化累积state distribution gap。TAPO对token前缀likelihood ratio取几何均值、按长度收紧clipping，并stop-gradient避免前序token反传进当前动作。
@@ -391,11 +398,6 @@
 - [GPRL](../2605.18721-gprl/README.md)（`gprl`）：单一标量 reward 容易掩盖 helpfulness、格式、推理和简洁度之间的冲突。GPRL 先在每个偏好维度内部计算 group-relative advantage，再根据上下文聚合；漂移控制器检测某个维度是否主导训练并调整权重。
 - [TTRL](../2504.16084-ttrl/README.md)（`ttrl`）：同一测试题多次采样，以多数一致答案作为伪标签并即时更新模型，不访问 gold label。
 - [REINFORCE++](../2501.03262-reinforce-plus/README.md)（`reinforce-plus`）：GRPO/RLOO 的 prompt-local 标准差会让不同难度组被随机方差重新加权。REINFORCE++ 保留组内中心化，但使用跨 batch 的全局优势尺度归一化，从而在不引入 critic 的前提下降低方差与局部偏置。
-
-### 步骤奖励与信用分配
-
-- [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](../2610.32431-mart-grpo/README.md)（`mart-grpo`）：一次机器人最终失败，不等于每个动作都导致失败；全轨迹负优势还会惩罚有价值的重抓和恢复尝试。MART-GRPO 用冻结事件 VLM 回看完整失败轨迹，定位最后一次未恢复错误，只保留截止该边界的失败反馈；成功轨迹、原组优势和原始 token 分母不变。
-- [T2SPO: Trajectory-to-Step Policy Optimization for Agentic Reinforcement Learning](../2610.00388-t2spo/README.md)（`t2spo`）：用历史成功轨迹中的剩余步数训练上下文内距离估计器，预测每个状态距离成功还多远；把相邻状态的距离改善转为步骤优势，与轨迹级奖励共同优化。冻结 TabPFN 避免额外训练 critic，失败轨迹不被误标成接近成功的正样本。
 
 ## 偏好建模与监督
 

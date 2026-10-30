@@ -420,8 +420,8 @@
     },
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
-      "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。",
-      "updated": "2026-10-29",
+      "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
+      "updated": "2026-10-30",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -445,7 +445,8 @@
         "foundation-models:vbvr-pro",
         "foundation-models:vjepa-policy",
         "multimodal-models:woven",
-        "foundation-models:gui-jepa"
+        "foundation-models:gui-jepa",
+        "foundation-models:swim"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -523,6 +524,16 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "foundation-models:swim",
+          "position": "用当前状态和门控未来位移预测固定记录动作chunk，NLL加cyclic discrimination与L1学习gate；随后以sqrt(g)加权状态距离校准latent几何。",
+          "tradeoff": "离线行为监督不是规划输入；gate只识别相对权重且不可二次标准化。本地不含视觉encoder、SIGReg、环境或CEM，完整训练不复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -549,6 +560,14 @@
           "body": "GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结合动作ROI/global区域和结构余弦评分。它与像素视频生成的监督/输出不同，也不等于真实GUI执行器；当前组件接外部冻结latent和文本匹配分数，保留真实三层predictor与训练头，但不使用训练正样本标签替forward选动作。",
           "papers": [
             "foundation-models:lewam",
+            "foundation-models:gui-jepa"
+          ]
+        },
+        {
+          "title": "行为监督可以改几何，但不应变成未来状态oracle",
+          "body": "GUI-JEPA在候选动作条件下生成latent残差，并通过候选决策损失学习打分；SWIM则先在离线记录上判断哪些状态位移更有助于预测当前固定动作chunk，再把连续gate冻结为latent几何的监督权重。两者都不能因latent运算通过就宣称执行成功。SWIM的h只控制未来state间隔，动作目标仍是当前决策步固定chunk；部署时逆动力学与真实未来state均不进入规划。sqrt(g)后再逐坐标标准化还会抵消权重。",
+          "papers": [
+            "foundation-models:swim",
             "foundation-models:gui-jepa"
           ]
         }
@@ -592,6 +611,16 @@
           "example": "教学例：模型预测点击后的页面向量接近目标，不等于已经检测到真实设备按钮可点击或请求成功。",
           "papers": [
             "foundation-models:lewam",
+            "foundation-models:gui-jepa"
+          ]
+        },
+        {
+          "id": "swim-training-future-not-planning-oracle",
+          "question": "SWIM训练读取q(t+h)，与GUI-JEPA按候选动作打分，为什么都不允许把真实后继直接交给部署策略？",
+          "answer": "q(t+h)是SWIM训练逆动力学和学习gate的离线标签，门控后迁移的是状态距离监督；部署只按图像latent规划。GUI-JEPA对后继的条件表示也只是模型计算，不是已观察环境反馈。真实后继若直接给受测策略，会把预测问题替换为oracle。",
+          "example": "教学示意：训练时可用录像中5h帧后的状态评估位移，但选择下一动作时不能先看录像答案；h变化也不把目标动作从固定五帧自动扩为整个h段。",
+          "papers": [
+            "foundation-models:swim",
             "foundation-models:gui-jepa"
           ]
         }
@@ -656,6 +685,18 @@
             "foundation-models:gui-jepa"
           ],
           "source_revisions": {
+            "foundation-models:gui-jepa": "5de10a527ec5abe710f7881beaf0ef48dfe68bb3cad8dab33703d8aa8574e02d"
+          }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读修正后的SWIM固定动作chunk与h分离、ungated当前state、cyclic负例、真实gate梯度及sqrt(g)几何迁移；与GUI-JEPA候选残差路径对照，不把训练未来状态当规划输入。",
+          "papers": [
+            "foundation-models:swim",
+            "foundation-models:gui-jepa"
+          ],
+          "source_revisions": {
+            "foundation-models:swim": "b1450b4ec070178de84e51ec3ca4999c68dc5726901f7f1abf85d8c14260f3b6",
             "foundation-models:gui-jepa": "5de10a527ec5abe710f7881beaf0ef48dfe68bb3cad8dab33703d8aa8574e02d"
           }
         }

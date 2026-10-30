@@ -7,6 +7,7 @@
 ### JEPA 与决策表征
 
 - [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../foundation-models/2610.36877-gui-jepa/README.md)（`gui-jepa`）：多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。
+- [SWIM: Learning What Matters from Behaviors for JEPA World Models](../../foundation-models/2610.36662-swim/README.md)（`swim`）：JEPA world model 预测视觉 latent，但 latent 欧氏距离不一定反映规划进展。SCALE 用 simulator state 的距离校准 latent 几何；若状态中含无关坐标，均匀加权会把这些干扰也学进去。SWIM 先用已记录动作训练门控逆动力学，再把冻结的连续权重传给状态距离监督。
 - [DT-JEPA: Learning to Predict Future Representations for Decision-Making](../../foundation-models/2610.32657-dt-jepa/README.md)（`dt-jepa`）：传统DT用单个return-to-go条件，无法区分回报相同但未来动力学不同的轨迹。本方法将条件改成由历史预测的未来latent分布：历史encoder生成Gaussian参数，EMA target encoder只在训练期编码真实未来；重参数采样的预测未来通过独立gamma/beta MLP调制DT hidden。离线目标为BC加Gaussian NLL；在线通过双target critic的较小值构建多步target，并优化Q1指导的actor目标。
 
 ### JEPA 与关系表征
@@ -85,6 +86,10 @@
 - [Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders](../../foundation-models/2507.23220-mechanistic-etm/README.md)（`mechanistic-etm`）：固定v3 Section4.2.2 Eqs9–13：δ~N(0,I)、θ=softmaxδ、βk=sigmoid(W_in vk+b)，W_in为冻结SAE ENCODER，不是decoder；每个feature计数~Binomial(Ntokens,[θβ]i)。variational q拓扑与MC noise显式外传，优化NLL+analytic Gaussian KL。Eqs16–19仅steering才用独立SAE DECODER列方向加权单位化，再移除已有parallel分量、注入指定strength。以不同encoder/decoder的负控防隐式绑权。
 
 ## 注意力与长上下文
+
+### 多状态线性注意力
+
+- [Multi-State Linear Attention with Generalized Second-Order Routing](../../foundation-models/2610.37645-merlin/README.md)（`merlin`）：多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。
 
 ### 查询条件测试时训练
 
@@ -324,6 +329,10 @@
 - [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
 
 ## 推理与系统效率
+
+### KV cache 与上下文压缩
+
+- [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../foundation-models/2610.36520-fold-bias/README.md)（`fold-bias`）：Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。
 
 ### 量化与残差补偿
 
