@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 策略优化 | [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](2610.36437-concur/README.md) | Carnegie Mellon University，2026-10-27 | 未发现官方代码 | `concur`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [Proposing Better Rollouts for On-Policy Distillation](2610.36477-mpopd/README.md) | University of Illinois Urbana-Champaign，2026-10-27 | [原作者入口](https://github.com/csr16/MPOPD)；作者公开仓库当前只有README和assets；这是论文/架构发布页，不是已发布可运行训练源码。固定revision见单篇信息块和来源核对。 | `mpopd`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](2610.32770-opst/README.md) | Google，2026-10-23 | 未发现官方代码 | `opst`：仅低成本组件，完整实验不复现 |
 | 策略优化 | [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](2610.32431-mart-grpo/README.md) | The University of Hong Kong，2026-10-23 | 未发现官方代码 | `mart-grpo`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](2610.30796-gift/README.md) | Shanghai Jiao Tong University，2026-10-22 | [原作者入口](https://github.com/lilifree/GIFT)；原作者源码可见；固定5e9a9dfdb371b7368949abbdc3a846d23a546557未找到第一方LICENSE/COPYING，GitHub license=null；未确认开放许可，不复制作者源码。本地根据论文独立实现 | `gift`：仅低成本组件，完整实验不复现 |

@@ -1,0 +1,53 @@
+{
+  "domain": "foundation-models",
+  "key": "merlin",
+  "title": "Multi-State Linear Attention with Generalized Second-Order Routing",
+  "paper_url": "https://arxiv.org/abs/2610.37645v1",
+  "reviewed_version_url": "https://arxiv.org/html/2610.37645v1",
+  "reviewed_version": "v1",
+  "detail_path": "foundation-models/2610.37645-merlin/README.md",
+  "topic": [
+    "注意力与长上下文",
+    "多状态线性注意力与段级路由"
+  ],
+  "first_author": "Hee Seung Hwang",
+  "first_author_affiliation": "Princeton University",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "published": "2026-10-27",
+  "published_at": "2026-10-27T17:55:49Z",
+  "code": null,
+  "upstream_revision": null,
+  "code_status": "固定v1全文与摘要页未找到可核验MERLIN源码；未找到/尚未发布，不以Gated DeltaNet或Mamba基线仓库替代",
+  "code_license": "无可核验方法源码许可证；论文为CC BY 4.0，本地据公式独立实现",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "same_announcement_overlap_backfill",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.foundation_models.merlin.routing_weights",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.merlin import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/merlin-a100-20261030.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v1 Section4.1 Training/Models及Table1：https://arxiv.org/html/2610.37645v1",
+    "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+    "model_scale": "Gated DeltaNet-1.3B和Mamba-2-780M，多状态注意力改造",
+    "data_scale": "2B tokens中期训练后再60M tokens，另有RULER和LongBench；原始预训练分别50B/300B tokens",
+    "paper_configuration": "16K上下文、256token等长段、多backbone多路由方法和消融",
+    "estimated_cost_basis": "论文模型/数据/评测矩阵的只读成本审查；未实测完整GPU小时，不虚构估计；L1只需外部小张量",
+    "decision": "完整实验成本过高，不复现（审查DONE），不下载/探针/自动重试。仅实现矩统计、路由与已完成段遮罩，不声称完整注意力层或LLM能力。"
+  },
+  "summary": "MERLIN保存分段routing keys均值和原始二阶矩，恢复查询对齐均值/方差，再混合两路独立softmax以聚合多状态readout。本地仅实现精确路由子核和已完成段因果边界，完整递归状态、LLM训练和评测不复现。"
+}

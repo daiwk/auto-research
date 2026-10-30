@@ -1,0 +1,14 @@
+{
+  "source_url": "https://arxiv.org/pdf/2610.33248v1",
+  "figure": "Figure 4",
+  "pdf_page": 7,
+  "pdf_sha256": "89d62bc40f5fbae7b412d0729c9e0c061b759fd1b12977908614b727774ac731",
+  "transformation": "unaltered full PDF page rendered at 1.6x; original figure and caption retained",
+  "asset": "paper-figure-01.png",
+  "arxiv_id": "2610.33248",
+  "sha256": "52e517bb32b00f7b2aed8ecd7c3dc076f127805ffc98f56a8c15d26e0de33cce",
+  "width": 980,
+  "height": 1268,
+  "visually_inspected": true,
+  "inspected_on": "2026-10-30"
+}

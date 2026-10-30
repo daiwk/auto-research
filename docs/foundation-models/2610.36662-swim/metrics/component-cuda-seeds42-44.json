@@ -1,0 +1,204 @@
+{
+  "schema_version": 2,
+  "method": "swim",
+  "manifest_ref": "foundation-models:swim",
+  "paper": {
+    "key": "swim",
+    "title": "SWIM: Learning What Matters from Behaviors for JEPA World Models"
+  },
+  "dataset": {
+    "id": "synthetic:oct30-swim-v1",
+    "revision": "sha256:4bedb2886bd22b76bc3225614d5028a77ce3e5eaf324735097ea4125cbcb1452",
+    "recipe": "fixed seeded formula/state/statistical contracts; no public capability dataset",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "metrics": {
+        "nll_reference_error": 0.0,
+        "hinge_reference_error": 2.220446049250313e-16,
+        "infonce_reference_error": 4.440892098500626e-16,
+        "metric_reference_error": 1.7763568394002505e-15,
+        "gate_gradient_norm": 0.06996352621855058,
+        "behavior_only_gate_gradient_norm": 0.06879256944731853,
+        "predictor_gradient_norm": 36.428898193646425,
+        "gate_parameter_delta": 6.996352621845329e-05,
+        "correlation_loss": 1.6258213378747808,
+        "environment_interactions": 0
+      },
+      "checks": {
+        "gaussian_nll_independent_reference": true,
+        "cyclic_hinge_negative_reference": true,
+        "infonce_selected_denominator_reference": true,
+        "current_state_is_not_gated": true,
+        "gates_and_inverse_model_really_train": true,
+        "sqrt_gate_distance_reference": true,
+        "stage_two_gate_target_is_detached": true,
+        "latent_geometry_receives_real_gradient": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "metrics": {
+        "nll_reference_error": 0.0,
+        "hinge_reference_error": 1.1102230246251565e-16,
+        "infonce_reference_error": 0.0,
+        "metric_reference_error": 1.7763568394002505e-15,
+        "gate_gradient_norm": 0.040494002269980664,
+        "behavior_only_gate_gradient_norm": 0.04532391065980429,
+        "predictor_gradient_norm": 19.149968733119522,
+        "gate_parameter_delta": 4.049400227002695e-05,
+        "correlation_loss": 0.6632984175397953,
+        "environment_interactions": 0
+      },
+      "checks": {
+        "gaussian_nll_independent_reference": true,
+        "cyclic_hinge_negative_reference": true,
+        "infonce_selected_denominator_reference": true,
+        "current_state_is_not_gated": true,
+        "gates_and_inverse_model_really_train": true,
+        "sqrt_gate_distance_reference": true,
+        "stage_two_gate_target_is_detached": true,
+        "latent_geometry_receives_real_gradient": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "metrics": {
+        "nll_reference_error": 0.0,
+        "hinge_reference_error": 0.0,
+        "infonce_reference_error": 0.0,
+        "metric_reference_error": 1.7763568394002505e-15,
+        "gate_gradient_norm": 0.18238549287909323,
+        "behavior_only_gate_gradient_norm": 0.18038760807852497,
+        "predictor_gradient_norm": 40.28855761589226,
+        "gate_parameter_delta": 0.000182385492879049,
+        "correlation_loss": 0.845916094370989,
+        "environment_interactions": 0
+      },
+      "checks": {
+        "gaussian_nll_independent_reference": true,
+        "cyclic_hinge_negative_reference": true,
+        "infonce_selected_denominator_reference": true,
+        "current_state_is_not_gated": true,
+        "gates_and_inverse_model_really_train": true,
+        "sqrt_gate_distance_reference": true,
+        "stage_two_gate_target_is_detached": true,
+        "latent_geometry_receives_real_gradient": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "behavior_only_gate_gradient_norm": {
+      "mean": 0.09816802939521593,
+      "std": 0.07216466465983769,
+      "n": 3
+    },
+    "correlation_loss": {
+      "mean": 1.0450119499285218,
+      "std": 0.5112161605599794,
+      "n": 3
+    },
+    "environment_interactions": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gate_gradient_norm": {
+      "mean": 0.09761434045587482,
+      "std": 0.07487806369564606,
+      "n": 3
+    },
+    "gate_parameter_delta": {
+      "mean": 9.761434045584309e-05,
+      "std": 7.487806369562135e-05,
+      "n": 3
+    },
+    "hinge_reference_error": {
+      "mean": 1.1102230246251565e-16,
+      "std": 1.1102230246251565e-16,
+      "n": 3
+    },
+    "infonce_reference_error": {
+      "mean": 1.4802973661668753e-16,
+      "std": 2.5639502485114184e-16,
+      "n": 3
+    },
+    "metric_reference_error": {
+      "mean": 1.7763568394002505e-15,
+      "std": 0.0,
+      "n": 3
+    },
+    "nll_reference_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "predictor_gradient_norm": {
+      "mean": 31.95580818088607,
+      "std": 11.25683728608587,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component contracts only, not a capability or complete paper reproduction"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "af9b9245aa85b4cbeb3da27ca701cc01cb94da86",
+    "artifact_path": "docs/foundation-models/2610.36662-swim/metrics/component-cuda-seeds42-44.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct30_components.py": "77a4a18b17587a04f06fda5b4d2d07998b50b8a7c670db61d594a12a94613379",
+      "docs/research-audits/oct30-overlap-components/execution-spec.json": "0afad26f7fc9ee66a0febd18ea5cf7b9cb6ded10d4c09c6efc30be05594d54dc",
+      "docs/research-audits/oct30-overlap-components/preflight.json": "193b954ae5600436cd55090b0a5e4e373f557963704e33ed70ecfd58cb99f4d5",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "src/auto_research/agent_research/crop.py": "6c73df58387b52fa4d73b68306b6f2991bc56096a35de30a90ae728fc50bbec9",
+      "src/auto_research/agent_research/emma.py": "4c237168aff9f5de2821e800dbaff348d2b02233417683eb6c2acc3431187f07",
+      "src/auto_research/agent_research/evalalloc.py": "e4debc6d0f1e4b2ee55703cec42278014a4fc10904a0ac8cd804983c612665d5",
+      "src/auto_research/foundation_models/fold_bias.py": "c9d316b7e6310adb647460f1c7ef6c59b26bfcdd8543566fbd35947356b2f24c",
+      "src/auto_research/foundation_models/merlin.py": "60267e6a6ff17dc96bb748737a6dbfae7fa234d2f17cdfe11f6dcc819b1a3836",
+      "src/auto_research/foundation_models/swim.py": "4bedb2886bd22b76bc3225614d5028a77ce3e5eaf324735097ea4125cbcb1452",
+      "src/auto_research/post_training/concur.py": "ea7de177dcc957e7c57b89b705b089ab8ce3e0be129b3be08ea8ab4c493f80b9",
+      "src/auto_research/post_training/mpopd.py": "dcc3940889a0ea3c7522f9558493788126845aefe1dc74d26d321078d7edc229",
+      "src/auto_research/reproductions/pinger_components.py": "0bc3fc9f8741a310fdfd1d41f6dc29b722144051c1ed4d5926e26c9402ef89db",
+      "src/auto_research/reproductions/pinterest_rlbp.py": "3551a1ac348e0d70beff1fbd70950d9583f4913b9623bc455c1350e14a766d3b"
+    },
+    "raw_runner_artifact_sha256": "a8715157c2fa709683c92e28230427e923ad34481168624a5c52320fc90be876",
+    "dataset_fingerprint": "sha256:b72d194dfbeb640ede5579d16e7938855a374d27f89e91857376574408ff9171"
+  }
+}

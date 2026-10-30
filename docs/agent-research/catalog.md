@@ -12,6 +12,8 @@
 |---|---|---|---|---|
 | Agent记忆 | [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](2610.36652-discernmem/README.md) | East China Normal University，2026-10-27 | [原作者入口](https://github.com/ECNU-ICALK/DiscernMem)；原作者代码已公开；2026-10-29核验HEAD 0d59f5fce155cbf5c695ada7f040c1d283e43ada与MIT许可。本地依据论文独立实现数值与版本规则，不复制上游数据或运行LLM。 | `discernmem`：仅低成本组件，完整实验不复现 |
 | Agent自我进化 | [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](2610.36826-ruharness/README.md) | Harbin Institute of Technology，2026-10-27 | 未发现官方代码 | `ruharness`：仅低成本组件，完整实验不复现 |
+| 自进化与工作流 | [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](2610.37276-evalalloc/README.md) | The University of Hong Kong，2026-10-27 | 未发现官方代码 | `evalalloc`：仅低成本组件，完整实验不复现 |
+| 自进化与工作流 | [EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis](2610.35966-emma/README.md) | University of California San Diego，2026-10-25 | 未发现官方代码 | `emma`：仅低成本组件，完整实验不复现 |
 | Agentic OPD / rollout budgeting | [Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond](2610.32802-frontier-opd/README.md) | Tsinghua University，2026-10-23 | [原作者入口](https://github.com/jiangz20/FrontierOPD)；原文声明仓库，但2026-10-26 git ls-remote返回Repository not found，raw LICENSE404；无法核验公开源码，不声明已确认开源 | `frontier-opd`：仅低成本组件，完整实验不复现 |
 | Agent评测与自进化 | [HarnessMM: Recursive Self-Improvement for Harness Token Efficiency](2610.32813-harnessmm/README.md) | Tsinghua University，2026-10-23 | 未发现官方代码 | 计划键 `harnessmm`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Agent评测与自进化 | [ImageRSI: Verification-Driven Recursive Self-Improvement for Agentic Image Generation](2610.32120-image-rsi/README.md) | University of Science and Technology of China，2026-10-23 | 未发现官方代码 | 计划键 `image-rsi`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
@@ -209,6 +211,7 @@
 | Step-aligned Agent RL | [StepPO](2604.18401-steppo/README.md) | University of Science and Technology of China，2026-04-20 | 未发现官方代码 | `steppo` |
 | 工具调用与环境执行 | [LogAct: Enabling Agentic Reliability via Shared Logs](2604.07988-logact/README.md) | Meta，2026-04-09 | [原作者入口](https://github.com/facebookresearch/logact)；原作者MIT仓库已公开；核对固定commit db395449fb2dbb534c8eec848900252ac8324ab2。本地独立实现有界单机SQLite协议，不安装作者插件或下载模型 | `logact`：仅低成本组件，完整实验不复现 |
 | 策略—工具图共进化 | [SEARL](2604.07791-searl/README.md) | Shanghai AI Laboratory，2026-04-09 | 未发现官方代码 | `searl` |
+| Agent自我进化 | [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](2604.14214-crop/README.md) | Google，2026-04-08 | 未发现官方代码 | `crop`：仅低成本组件，完整实验不复现 |
 | Agent 评测 | [TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems](2604.05364-tfrbench/README.md) | Google Cloud AI Research / University of Kentucky，2026-04-07 | 未发现官方代码 | `tfrbench`：CPU 评测接口，不执行模型 |
 | 多Agent协作 | [PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing](2604.05018-paperorchestra/README.md) | Google Cloud AI Research，2026-04-06 | 未发现官方代码 | 计划键 `paperorchestra`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Agent 数据合成 | [Reasoning-Driven Synthetic Data Generation and Evaluation](2603.29791-simula/README.md) | EPFL，2026-03-31 | 未发现官方代码 | `simula`：CPU 评测接口，不执行模型 |

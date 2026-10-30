@@ -1,0 +1,178 @@
+{
+  "schema_version": 2,
+  "method": "concur",
+  "manifest_ref": "post-training:concur",
+  "paper": {
+    "key": "concur",
+    "title": "CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning"
+  },
+  "dataset": {
+    "id": "synthetic:oct30-concur-v1",
+    "revision": "sha256:ea7de177dcc957e7c57b89b705b089ab8ce3e0be129b3be08ea8ab4c493f80b9",
+    "recipe": "fixed seeded formula/state/statistical contracts; no public capability dataset",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "metrics": {
+        "order_energy": 2.0543252740130515e-33,
+        "tied_energy": 1.8488927466117464e-32,
+        "projection_mean_error": 4.440892098500626e-16,
+        "pythagorean_error": 0.0,
+        "all_pass_magnitude": 5.551115123125783e-17,
+        "valid_trust_readings": 61
+      },
+      "checks": {
+        "primary_order_preserved": true,
+        "ceiling_tied": true,
+        "below_ceiling_ties_not_collapsed": true,
+        "mean_preserved": true,
+        "cone_energy_identity": true,
+        "all_pass_auxiliary_removed": true,
+        "binary_primary_has_no_trust_reading": true,
+        "sixty_one_readings_required": true,
+        "whitening_is_whole_batch": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "metrics": {
+        "order_energy": 1.486182947293485,
+        "tied_energy": 0.0,
+        "projection_mean_error": 2.220446049250313e-16,
+        "pythagorean_error": 0.0,
+        "all_pass_magnitude": 5.551115123125783e-17,
+        "valid_trust_readings": 61
+      },
+      "checks": {
+        "primary_order_preserved": true,
+        "ceiling_tied": true,
+        "below_ceiling_ties_not_collapsed": true,
+        "mean_preserved": true,
+        "cone_energy_identity": true,
+        "all_pass_auxiliary_removed": true,
+        "binary_primary_has_no_trust_reading": true,
+        "sixty_one_readings_required": true,
+        "whitening_is_whole_batch": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "metrics": {
+        "order_energy": 0.29079613859884046,
+        "tied_energy": 0.29079613859884046,
+        "projection_mean_error": 5.551115123125783e-17,
+        "pythagorean_error": 8.881784197001252e-16,
+        "all_pass_magnitude": 5.551115123125783e-17,
+        "valid_trust_readings": 61
+      },
+      "checks": {
+        "primary_order_preserved": true,
+        "ceiling_tied": true,
+        "below_ceiling_ties_not_collapsed": true,
+        "mean_preserved": true,
+        "cone_energy_identity": true,
+        "all_pass_auxiliary_removed": true,
+        "binary_primary_has_no_trust_reading": true,
+        "sixty_one_readings_required": true,
+        "whitening_is_whole_batch": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "all_pass_magnitude": {
+      "mean": 5.551115123125783e-17,
+      "std": 0.0,
+      "n": 3
+    },
+    "order_energy": {
+      "mean": 0.5923263619641085,
+      "std": 0.787639063853818,
+      "n": 3
+    },
+    "projection_mean_error": {
+      "mean": 2.4054832200211723e-16,
+      "std": 1.949487562649258e-16,
+      "n": 3
+    },
+    "pythagorean_error": {
+      "mean": 2.9605947323337506e-16,
+      "std": 5.127900497022837e-16,
+      "n": 3
+    },
+    "tied_energy": {
+      "mean": 0.09693204619961349,
+      "std": 0.16789122889934427,
+      "n": 3
+    },
+    "valid_trust_readings": {
+      "mean": 61,
+      "std": 0.0,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component contracts only, not a capability or complete paper reproduction"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "af9b9245aa85b4cbeb3da27ca701cc01cb94da86",
+    "artifact_path": "docs/post-training/2610.36437-concur/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_oct30_components.py": "77a4a18b17587a04f06fda5b4d2d07998b50b8a7c670db61d594a12a94613379",
+      "docs/research-audits/oct30-overlap-components/execution-spec.json": "0afad26f7fc9ee66a0febd18ea5cf7b9cb6ded10d4c09c6efc30be05594d54dc",
+      "docs/research-audits/oct30-overlap-components/preflight.json": "193b954ae5600436cd55090b0a5e4e373f557963704e33ed70ecfd58cb99f4d5",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "src/auto_research/agent_research/crop.py": "6c73df58387b52fa4d73b68306b6f2991bc56096a35de30a90ae728fc50bbec9",
+      "src/auto_research/agent_research/emma.py": "4c237168aff9f5de2821e800dbaff348d2b02233417683eb6c2acc3431187f07",
+      "src/auto_research/agent_research/evalalloc.py": "e4debc6d0f1e4b2ee55703cec42278014a4fc10904a0ac8cd804983c612665d5",
+      "src/auto_research/foundation_models/fold_bias.py": "c9d316b7e6310adb647460f1c7ef6c59b26bfcdd8543566fbd35947356b2f24c",
+      "src/auto_research/foundation_models/merlin.py": "60267e6a6ff17dc96bb748737a6dbfae7fa234d2f17cdfe11f6dcc819b1a3836",
+      "src/auto_research/foundation_models/swim.py": "4bedb2886bd22b76bc3225614d5028a77ce3e5eaf324735097ea4125cbcb1452",
+      "src/auto_research/post_training/concur.py": "ea7de177dcc957e7c57b89b705b089ab8ce3e0be129b3be08ea8ab4c493f80b9",
+      "src/auto_research/post_training/mpopd.py": "dcc3940889a0ea3c7522f9558493788126845aefe1dc74d26d321078d7edc229",
+      "src/auto_research/reproductions/pinger_components.py": "0bc3fc9f8741a310fdfd1d41f6dc29b722144051c1ed4d5926e26c9402ef89db",
+      "src/auto_research/reproductions/pinterest_rlbp.py": "3551a1ac348e0d70beff1fbd70950d9583f4913b9623bc455c1350e14a766d3b"
+    },
+    "raw_runner_artifact_sha256": "5680575049fa09e5ca738684184adc09618f04b6df3c4deb4c0c9730f6f009a7",
+    "dataset_fingerprint": "sha256:a93eb178a25ea93b36245711da1314c76284d2e635c97e3c03da5be4addf235c"
+  }
+}

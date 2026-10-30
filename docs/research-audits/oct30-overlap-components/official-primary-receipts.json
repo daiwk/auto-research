@@ -1,0 +1,135 @@
+{
+  "checked_at": "2026-10-30T06:37:07.231162+00:00",
+  "pages": [
+    {
+      "url": "https://research.google/blog/",
+      "checked_at": "2026-10-30T06:37:00.826782+00:00",
+      "status": "retrieved",
+      "sha256": "793884a4a0eef7fa19ee925163304245fa62987ca02cb056187730a638334c37",
+      "bytes": 181420,
+      "github_links": [
+        "https://github.com/google-research"
+      ]
+    },
+    {
+      "url": "https://deepmind.google/blog/",
+      "checked_at": "2026-10-30T06:37:00.828913+00:00",
+      "status": "retrieved",
+      "sha256": "95eea1faf109a8a0048eff70c641df7cfdee53edc6560b4e840d39d16cafef5d",
+      "bytes": 30563,
+      "github_links": []
+    },
+    {
+      "url": "https://ai.meta.com/blog/",
+      "checked_at": "2026-10-30T06:37:00.829061+00:00",
+      "status": "retrieved",
+      "sha256": "12bf806cb54fb42e90705f6410c121659461838052ce57b90078e1fcf0f6592c",
+      "bytes": 205080,
+      "github_links": [
+        "https://github.com/facebookresearch/"
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/",
+      "checked_at": "2026-10-30T06:37:00.829190+00:00",
+      "status": "retrieved",
+      "sha256": "592962c35b56225074e2f1a0aaa4bf6eea0879450745e2ddb4cac936f79be170",
+      "bytes": 145264,
+      "github_links": [
+        "https://github.com/google-research"
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2604.14214",
+      "checked_at": "2026-10-30T06:37:00.829309+00:00",
+      "status": "retrieved",
+      "sha256": "a13f87070b024a411a01527bed483367e1c3ae30b0df944740c0956e722eeca1",
+      "bytes": 41755,
+      "github_links": []
+    },
+    {
+      "url": "https://arxiv.org/html/2604.14214v1",
+      "checked_at": "2026-10-30T06:37:01.843168+00:00",
+      "status": "retrieved",
+      "sha256": "011731dce5f32bdecb02fae225dca8a1992d920d73058580fe3ee9e65e7445dc",
+      "bytes": 282030,
+      "github_links": [
+        "https://github.com/arXiv/html_feedback/issues",
+        "https://github.com/brucemiller/LaTeXML/issues",
+        "https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2610.36437",
+      "checked_at": "2026-10-30T06:37:01.970588+00:00",
+      "status": "retrieved",
+      "sha256": "42cf0360c48ec68f937d21dd52032f1957c462c651f4be36648fa44ac2131fda",
+      "bytes": 41197,
+      "github_links": []
+    },
+    {
+      "url": "https://arxiv.org/html/2610.36437v1",
+      "checked_at": "2026-10-30T06:37:02.076503+00:00",
+      "status": "retrieved",
+      "sha256": "cc37f3f40afffbba765a40d2dc2bef11ffbfeeafeec91c6596b5489a78b9e2d6",
+      "bytes": 676584,
+      "github_links": [
+        "https://github.com/EQ-bench/creative-writing-bench",
+        "https://github.com/arXiv/html_feedback/issues",
+        "https://github.com/brucemiller/LaTeXML/issues",
+        "https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML",
+        "https://github.com/huggingface/open-r1"
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2610.37645",
+      "checked_at": "2026-10-30T06:37:02.365190+00:00",
+      "status": "retrieved",
+      "sha256": "82879760e1b22365bc1e19bedf11470c4da917cb10005668ae7c098d74356d90",
+      "bytes": 41931,
+      "github_links": []
+    },
+    {
+      "url": "https://arxiv.org/html/2610.37645v1",
+      "checked_at": "2026-10-30T06:37:02.453696+00:00",
+      "status": "retrieved",
+      "sha256": "ce23c172845f3f0fb1a09510ebc63598253580f8c81f3b9553f1dee3cf1188de",
+      "bytes": 228201,
+      "github_links": [
+        "https://github.com/arXiv/html_feedback/issues",
+        "https://github.com/brucemiller/LaTeXML/issues",
+        "https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+      ]
+    }
+  ],
+  "repo_searches": [
+    {
+      "org": "google-research",
+      "endpoint": "search/repositories?q=org:google-research+created:>=2026-10-29&per_page=100",
+      "status": "retrieved",
+      "total_count": 0,
+      "incomplete_results": false,
+      "items": [],
+      "response_sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f"
+    },
+    {
+      "org": "google-deepmind",
+      "endpoint": "search/repositories?q=org:google-deepmind+created:>=2026-10-29&per_page=100",
+      "status": "retrieved",
+      "total_count": 0,
+      "incomplete_results": false,
+      "items": [],
+      "response_sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f"
+    },
+    {
+      "org": "facebookresearch",
+      "endpoint": "search/repositories?q=org:facebookresearch+created:>=2026-10-29&per_page=100",
+      "status": "retrieved",
+      "total_count": 0,
+      "incomplete_results": false,
+      "items": [],
+      "response_sha256": "4af480b8ee5b87b369a76c49bd22c9a783908272ebffbe97898f8ab0f0772a5f"
+    }
+  ],
+  "scope": "Official blog landing pages and new public repositories created on/after Oct29; not all repository commits or every official account."
+}

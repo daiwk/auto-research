@@ -1,5 +1,9 @@
 # 统一后续路线图与 TODO
 
+## 2026-10-30 来源零增量与重叠补漏
+
+[本轮固定10项交付与来源差集](research-audits/oct30-overlap-components/README.md)：Google合作CONCUR/MERLIN优先，另补Google四月CROP、两篇有生产A/B的Pinterest论文及五篇基础模型/后训练/Agent组件。6项CUDA已在真实A100三种子执行，4项纯CPU；完整高成本实验不复现、审查DONE。40个逐篇四层问答与9个专题精读同步。官方最新公告仍为10月28日，八类new及共享recent日期、Google/Meta/DeepMind有界目录身份差集均为0；这是补漏，不是10篇当天新首发，全局水位不变。
+
 ## 2026-10-29 新公告、优先机构与学习资料
 
 [本轮限定交付及来源快照](research-audits/oct29-components/README.md)：8个低成本L1组件，4项CUDA已在真实A100三种子执行，另4项纯CPU。Google Sleep与DeepMind HOPE分别是官网/源码触发的历史补漏；PailitaoMMSearch2.0完整实验仅资料收录、高成本不复现，Guided-RLVR另作高成本终态。已有EmbeddingGemma2补正式论文、Meta RPL补官方源码，不重复计新模型。38个逐篇新问题与9个专题精读同步更新。实际最新公告是10月28日，另补27日recent；目录/源码/首发分别记账，全局审查水位不变。

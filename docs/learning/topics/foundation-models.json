@@ -7,7 +7,7 @@
       "id": "context-and-state",
       "title": "长上下文：注意力、递归状态与记忆",
       "question": "上下文变长时，模型保留的是可寻址的历史 token，还是压缩后的递归状态？",
-      "takeaway": "先分清位置关系、信息访问和状态容量。RoPE 对 Q/K 的二维子空间作位置相关旋转，让点积表达相对位移；它仍允许注意力访问窗口内历史。Mamba 则让状态更新的步长和读写参数依赖当前输入，把历史汇入递归状态。稀疏注意力和混合结构在两端之间选择：只读部分历史，或让部分层保留完整访问。",
+      "takeaway": "先分清位置关系、信息访问和状态容量。RoPE 对 Q/K 的二维子空间作位置相关旋转，让点积表达相对位移；它仍允许注意力访问窗口内历史。Mamba 则让状态更新的步长和读写参数依赖当前输入，把历史汇入递归状态。稀疏注意力和混合结构在两端之间选择：只读部分历史，或让部分层保留完整访问。 MERLIN针对多段状态的读取聚合：用routing keys的一、二阶矩恢复查询对齐均值和方差，再分别softmax后门控混合，不能把它当作Mamba状态递推本身。",
       "example": "假设文档开头定义变量 x，三万 token 后要找回定义。完整注意力可以直接查询对应位置；递归模型必须把所需信息持续保存在状态里。若只保留局部窗口，就要检查有没有全局层或额外记忆，而不能只看宣传的上下文长度。",
       "pitfall": "线性复杂度不保证长距离精确检索，也不保证真实硬件更快。RoPE 不是无限长度外推保证；状态、窗口、训练长度和位置缩放都要一起核对。当前本地小模型结果不代表论文规模的能力。",
       "self_test": {
@@ -52,7 +52,8 @@
         "foundation-models:ttcd",
         "foundation-models:ttr-compressor",
         "foundation-models:select-ttt",
-        "foundation-models:sleep-lti"
+        "foundation-models:sleep-lti",
+        "foundation-models:merlin"
       ]
     },
     {
@@ -151,7 +152,7 @@
       "id": "compression-and-cache",
       "title": "推理压缩：权重、KV 缓存与服务带宽",
       "question": "显存或时延不够时，真正占资源的是模型权重、历史状态，还是服务搬运？",
-      "takeaway": "AWQ 依据校准激活识别重要通道，以等价缩放降低低比特权重量化误差；GQA 则让多个 Query head 共享较少的 KV head，减少每个历史位置要存的状态。KV 驱逐、量化和分层存储又分别改变保留哪些 token、每个状态用多少位、状态放在哪里。这些机制针对不同资源，不能互相替代。",
+      "takeaway": "AWQ 依据校准激活识别重要通道，以等价缩放降低低比特权重量化误差；GQA 则让多个 Query head 共享较少的 KV head，减少每个历史位置要存的状态。KV 驱逐、量化和分层存储又分别改变保留哪些 token、每个状态用多少位、状态放在哪里。这些机制针对不同资源，不能互相替代。 FoldBias不再选择丢哪些token，而是在给定保留keys和静态bias后，把bias写入共享方向位移；保持原head维度并在真实cache舍入后重拟合values，兼容性与质量仍须分别验证。",
       "example": "把 prompt 从 1k 拉到 32k，模型权重大小基本不变，KV 随序列和并发增长。W4 可能先解决装载问题，却解决不了无限增长的缓存；减少 KV head、压缩状态或驱逐 token 可降低缓存成本，但后两者还要检验量化误差或证据丢失。",
       "pitfall": "低比特文件变小不等于延迟成比例下降，解包 kernel、带宽和 batch 都有影响。缓存压缩也要检查恢复与重复使用条件。本地重建误差、解析元素数或 CPU 算子通过，不能代替 GPU 吞吐或长上下文能力测量。",
       "self_test": {
@@ -194,7 +195,8 @@
         "foundation-models:twinkv",
         "foundation-models:vfold",
         "foundation-models:rescom",
-        "foundation-models:hope-hilbert"
+        "foundation-models:hope-hilbert",
+        "foundation-models:fold-bias"
       ]
     },
     {

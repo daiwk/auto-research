@@ -5,11 +5,11 @@ hide:
 
 <!-- Generated topic deep dive; edit docs/learning/deep-dives/*.json. -->
 
-# 沿学生前缀蒸馏：采样分布与散度方向要分开看
+# 轨迹蒸馏：采样者、提案与散度方向分开看
 
-[LLM 后训练](../index.md) · 更新 2026-10-27 · 40 篇主题资料 / 6 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-10-30 · 41 篇主题资料 / 7 篇重点对照
 
-“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。
+“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/post-training/student-trajectory-distillation.md)
 
@@ -31,6 +31,7 @@ hide:
 | [Adaptive Pullback: Reweighting Supervision at Penalty Jumps in On-Policy Distillation](../../../post-training/2610.28194-ap-opd/README.md) · [原始来源](https://arxiv.org/abs/2610.28194v1)<br>章节：背景与主要改动、核心公式、结果、代码映射与边界 | 比较相邻块的原始惩罚统计，对突增后整块有符号监督统一回拉。 | 不增加教师前向，也不换符号；阈值并非校准显著性检验。完整实验成本过高未复现。 |
 | [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](../../../post-training/2610.11291-semi-opd/README.md) · [原始来源](https://arxiv.org/abs/2610.11291)<br>章节：背景与主要改动、核心公式、代码映射与复现边界 | 固定初始学生轨迹与教师评分，但每步重算当前学生logp及优势。 | 省去重复采集，却不会自动覆盖新学生访问的全部状态；短预算checkpoint只验训练链路。 |
 | [Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals](../../../post-training/2610.11247-opd-learning-signals/README.md) · [原始来源](https://arxiv.org/abs/2610.11247)<br>章节：背景与主要改动、核心公式、代码映射与复现边界 | 同时观察残余loss、截断前梯度、两折occupancy、参数位移与CKA，区分损失和可用学习信号。 | 这是相关性诊断设施，不是新优化算法；本地三步运行不复现长平台期，也不能证明失败原因。 |
+| [Proposing Better Rollouts for On-Policy Distillation](../../../post-training/2610.36477-mpopd/README.md) · [原始来源](https://arxiv.org/abs/2610.36477v2)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用独立proposal拟合更新后师生的归一化几何混合，学生沿proposal轨迹以滞后一token的冻结单步ratio加权RKL。 | ratio不是累积乘积；每轮proposal从更新后学生重置。完整采样、LM复制和优化器编排未实现，小张量loss不能证明真实on-policy。 |
 
 </div>
 
@@ -47,6 +48,12 @@ GKD说明监督应覆盖学生会走到的前缀，但允许多种散度。MiniL
 OPD Learning Signals要求同时记录损失与梯度，避免把残余差异当作仍有强学习动力。AP-OPD处理的是相邻块惩罚突然上升，缩放整块而保留方向；它不构成对平台期原因的通用解释。Semi-OPD则改变状态复用方式，教师标签固定也不允许把学生相关优势固定下来。
 
 对照来源：[opd-learning-signals](../../../post-training/2610.11247-opd-learning-signals/README.md) · [ap-opd](../../../post-training/2610.28194-ap-opd/README.md) · [semi-opd](../../../post-training/2610.11291-semi-opd/README.md)
+
+### 改采样者，不等于把学生target改成几何混合
+
+GKD让教师在学生访问的前缀上监督，MiniLLM进一步选定学生到教师的RKL并稳定估计。MPOPD保留学生向教师学习，却训练另一个proposal来改善轨迹可达性；师生几何混合供proposal拟合，不直接替代教师成为学生的target。采样差距以冻结old-student/old-proposal的前一token单步ratio处理，不是把整条路径ratio累乘。真实实现还须保证proposal每轮从更新后学生重置；只有外部logits接口不能证明这些轨迹来源。
+
+对照来源：[mpopd](../../../post-training/2610.36477-mpopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md) · [minillm](../../../post-training/2306.08543-minillm/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ OPD Learning Signals要求同时记录损失与梯度，避免把残余差异当
 
     对照来源：[ap-opd](../../../post-training/2610.28194-ap-opd/README.md) · [divergence-routed-opd](../../../post-training/2610.19572-divergence-routed-opd/README.md) · [opd-learning-signals](../../../post-training/2610.11247-opd-learning-signals/README.md)
 
+### MPOPD把提案拟合到师生几何混合后，学生也应直接蒸馏这个混合target吗？ {#cross-mpopd-proposal-target-versus-student-target}
+
+??? note "展开答案与例子"
+
+    **答案：** 不应这样替换。几何混合决定proposal应从哪里采样，学生目标仍是向教师的RKL；加权学生loss还用冻结旧学生与旧proposal的单步ratio，并滞后一token。GKD/MiniLLM提示的“采样状态”和“散度方向”在这里又增加了独立提案轴。
+
+    **教学例子：** 教学示意：proposal更容易提出教师支持的新前缀，不表示学生应只学一个折中教师；把采样分布直接当监督target，会同时改掉原方法的两个目标。
+
+    对照来源：[mpopd](../../../post-training/2610.36477-mpopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md) · [minillm](../../../post-training/2306.08543-minillm/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-30** · 精读MPOPD v2，把独立proposal、学生RKL、教师top-k支持与滞后一token的冻结单步ratio分开；相对GKD/MiniLLM补充采样者可学习这一轴，保留proposal重置等外部前提。
+
+涉及：[mpopd](../../../post-training/2610.36477-mpopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md) · [minillm](../../../post-training/2306.08543-minillm/README.md)
 
 **2026-10-27** · 首版：分开学生状态分布与散度方向，比较GKD/MiniLLM、DrOPD/AP-OPD、Semi-OPD和学习信号诊断；已阅40篇摘要，精读6篇。
 
 覆盖 40 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 40 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 41 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -134,6 +155,7 @@ OPD Learning Signals要求同时记录损失与梯度，避免把残余差异当
 - [OPDLM](../../../post-training/2606.06712-opd-lm/README.md)
 - [GKD](../../../post-training/2306.13649-gkd/README.md)
 - [MiniLLM](../../../post-training/2306.08543-minillm/README.md)
+- [Proposing Better Rollouts for On-Policy Distillation](../../../post-training/2610.36477-mpopd/README.md)
 
 </details>
 

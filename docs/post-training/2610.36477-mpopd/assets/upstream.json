@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/csr16/MPOPD",
+  "revision": "ac0971a1808d2719167be21c67501b66bed5a482",
+  "checked_on": "2026-10-30",
+  "root_files": ["README.md", "assets"],
+  "license_api": null,
+  "source_code_released": false,
+  "license_file_present": false,
+  "note": "Public paper/figure landing repository only; not a runnable training implementation."
+}

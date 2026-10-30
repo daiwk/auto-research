@@ -81,7 +81,7 @@
       "id": "world-state-actions",
       "title": "视觉世界建模：状态、生成与动作条件",
       "question": "模型是在识别画面，还是能判断动作将怎样改变状态？",
-      "takeaway": "把观察、动作和后续状态放在一起，才能学习可用于预测或控制的表示。LeWAM 联合学习未来潜状态预测与动作 flow matching，让视觉表征和策略相互塑造；规划时再用潜动力学评价动作候选。WOVEN 则把视频生成的视觉转移组织成场景、动作、推理类型受控的监督，训练模型理解结果、原因与反事实。",
+      "takeaway": "把观察、动作和后续状态放在一起，才能学习可用于预测或控制的表示。LeWAM 联合学习未来潜状态预测与动作 flow matching，让视觉表征和策略相互塑造；规划时再用潜动力学评价动作候选。WOVEN 则把视频生成的视觉转移组织成场景、动作、推理类型受控的监督，训练模型理解结果、原因与反事实。 SWIM补充“哪些状态坐标应影响latent距离”：离线逆动力学只门控未来位移，冻结gate后用sqrt(g)校准同帧对的状态距离；它不在规划时读取未来状态。",
       "example": "同一桌面，把杯子向左推和向右推应产生不同结果；只认出“桌上有杯子”不足以控制机器人。表征预测可避免逐像素重建，但仍要检验动作条件是否有效、rollout 多步后是否漂移，以及选出的动作能否在闭环环境到达目标。",
       "pitfall": "生成视频逼真、一步预测误差小或训练集问答分数高，都不自动证明规划有效。源场景与轨迹要分组隔离，反事实不能泄漏未来结果。本地 LeWAM 尚是非 holdout 闭环诊断，WOVEN 是小规模公开训练源实验；都不能替代原文完整泛化或机器人结论。",
       "self_test": {
@@ -116,7 +116,8 @@
         "foundation-models:vbvr-pro",
         "foundation-models:vjepa-policy",
         "multimodal-models:woven",
-        "foundation-models:gui-jepa"
+        "foundation-models:gui-jepa",
+        "foundation-models:swim"
       ]
     }
   ]

@@ -7,9 +7,9 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-10-29 · 23 篇主题资料 / 7 篇重点对照
+[多模态](../index.md) · 更新 2026-10-30 · 24 篇主题资料 / 8 篇重点对照
 
-世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。
+世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/multimodal-models/world-state-actions.md)
 
@@ -32,6 +32,7 @@ hide:
 | [Persistent Planar Memory for Video World Models](../../../foundation-models/2610.23795-ppmem/README.md) · [原始来源](https://arxiv.org/abs/2610.23795)<br>章节：背景与主要改动、核心公式与流程、本地复现与成本判断 | 将局部平面primitive合并到世界坐标持久pool，光栅化深度反馈后续视频chunk。 | 压缩几何要处理遮挡、去重和相机条件；当前仅研究资料，完整视频/几何训练成本过高未复现。 |
 | [VBVR-Pro: A Scalable and Verifiable Suite for Native Visual Reasoning](../../../reproductions/2608.26105-vbvr-pro/README.md) · [原始来源](https://arxiv.org/abs/2608.26105)<br>章节：背景与主要改动、核心公式、复现边界 | 以任务专用可执行scorer核对中间状态、约束和最终状态，为生成模型提供奖励。 | 确定性判据只覆盖明确定义任务；本地程序scorer不等同已训练14B/19B视频模型。 |
 | [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../../foundation-models/2610.36877-gui-jepa/README.md) · [原始来源](https://arxiv.org/abs/2610.36877v1)<br>章节：背景与主要改动、核心公式 | 候选动作条件残差predictor及ROI/global结构评分，listwise正例损失。 | 真实屏幕编码、候选生成与环境外置；没有GUI benchmark能力结果。 |
+| [SWIM: Learning What Matters from Behaviors for JEPA World Models](../../../foundation-models/2610.36662-swim/README.md) · [原始来源](https://arxiv.org/abs/2610.36662v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用当前状态和门控未来位移预测固定记录动作chunk，NLL加cyclic discrimination与L1学习gate；随后以sqrt(g)加权状态距离校准latent几何。 | 离线行为监督不是规划输入；gate只识别相对权重且不可二次标准化。本地不含视觉encoder、SIGReg、环境或CEM，完整训练不复现。 |
 
 </div>
 
@@ -54,6 +55,12 @@ WOVEN用生成的视频转移提供训练材料，关键是视觉变化实际进
 GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结合动作ROI/global区域和结构余弦评分。它与像素视频生成的监督/输出不同，也不等于真实GUI执行器；当前组件接外部冻结latent和文本匹配分数，保留真实三层predictor与训练头，但不使用训练正样本标签替forward选动作。
 
 对照来源：[lewam](../../../reproductions/2610.12818-lewam/README.md) · [gui-jepa](../../../foundation-models/2610.36877-gui-jepa/README.md)
+
+### 行为监督可以改几何，但不应变成未来状态oracle
+
+GUI-JEPA在候选动作条件下生成latent残差，并通过候选决策损失学习打分；SWIM则先在离线记录上判断哪些状态位移更有助于预测当前固定动作chunk，再把连续gate冻结为latent几何的监督权重。两者都不能因latent运算通过就宣称执行成功。SWIM的h只控制未来state间隔，动作目标仍是当前决策步固定chunk；部署时逆动力学与真实未来state均不进入规划。sqrt(g)后再逐坐标标准化还会抵消权重。
+
+对照来源：[swim](../../../foundation-models/2610.36662-swim/README.md) · [gui-jepa](../../../foundation-models/2610.36877-gui-jepa/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +106,23 @@ GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结
 
     对照来源：[lewam](../../../reproductions/2610.12818-lewam/README.md) · [gui-jepa](../../../foundation-models/2610.36877-gui-jepa/README.md)
 
+### SWIM训练读取q(t+h)，与GUI-JEPA按候选动作打分，为什么都不允许把真实后继直接交给部署策略？ {#cross-swim-training-future-not-planning-oracle}
+
+??? note "展开答案与例子"
+
+    **答案：** q(t+h)是SWIM训练逆动力学和学习gate的离线标签，门控后迁移的是状态距离监督；部署只按图像latent规划。GUI-JEPA对后继的条件表示也只是模型计算，不是已观察环境反馈。真实后继若直接给受测策略，会把预测问题替换为oracle。
+
+    **教学例子：** 教学示意：训练时可用录像中5h帧后的状态评估位移，但选择下一动作时不能先看录像答案；h变化也不把目标动作从固定五帧自动扩为整个h段。
+
+    对照来源：[swim](../../../foundation-models/2610.36662-swim/README.md) · [gui-jepa](../../../foundation-models/2610.36877-gui-jepa/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-30** · 精读修正后的SWIM固定动作chunk与h分离、ungated当前state、cyclic负例、真实gate梯度及sqrt(g)几何迁移；与GUI-JEPA候选残差路径对照，不把训练未来状态当规划输入。
+
+涉及：[swim](../../../foundation-models/2610.36662-swim/README.md) · [gui-jepa](../../../foundation-models/2610.36877-gui-jepa/README.md)
 
 **2026-10-29** · GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结合动作ROI/global区域和结构余弦评分。它与像素视频生成的监督/输出不同，也不等于真实GUI执行器；当前组件接外部冻结latent和文本匹配分数，保留真实三层predictor与训练头，但不使用训练正样本标签替forward选动作。
 
@@ -111,7 +132,7 @@ GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 23 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 24 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -138,6 +159,7 @@ GUI-JEPA在当前屏幕latent上预测候选动作导致的残差后继，并结
 - [V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents](../../../foundation-models/2609.37250-vjepa-policy/README.md)
 - [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](../../../reproductions/2610.12417-woven/README.md)
 - [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../../foundation-models/2610.36877-gui-jepa/README.md)
+- [SWIM: Learning What Matters from Behaviors for JEPA World Models](../../../foundation-models/2610.36662-swim/README.md)
 
 </details>
 

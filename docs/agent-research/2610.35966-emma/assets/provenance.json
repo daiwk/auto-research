@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.35966v1",
+  "source_url": "https://arxiv.org/html/2610.35966v1/figures/emma_architecture_v148.png",
+  "figure": "Figure 2",
+  "caption_summary_zh": "Controller逐步选择记忆并派发agent与skill；三层记忆跨任务保留，执行环境按尝试隔离，overflow触发未完成步骤拆分。",
+  "asset": "paper-figure-01.png",
+  "sha256": "87af71c484736cca58239f81e76ab427193bf1e8b414e37c04af641eea79af91",
+  "width": 2048,
+  "height": 1066,
+  "transformation": "original arXiv HTML figure; no redraw or crop",
+  "visually_inspected": true,
+  "reviewed_on": "2026-10-30"
+}

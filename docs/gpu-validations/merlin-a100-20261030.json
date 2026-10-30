@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "adapter_key": "merlin",
+  "validated_at": "2026-10-30",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "python3",
+    "scripts/run_oct30_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "af9b9245aa85b4cbeb3da27ca701cc01cb94da86",
+    "--frozen-proof",
+    "oct30-frozen-proof.json",
+    "--output",
+    "results/components-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:oct30-merlin-v1",
+    "revision": "sha256:60267e6a6ff17dc96bb748737a6dbfae7fa234d2f17cdfe11f6dcc819b1a3836",
+    "recipe": "fixed seeded formula/state/statistical contracts; no public capability dataset",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "af9b9245aa85b4cbeb3da27ca701cc01cb94da86",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "future_readout_leak_error": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 3
+    },
+    "gradient_norm": {
+      "mean": 13.222396710115484,
+      "std": 8.825992719600691,
+      "n": 3
+    },
+    "mean_reference_error": {
+      "mean": 3.7007434154171886e-16,
+      "std": 1.2819751242557092e-16,
+      "n": 3
+    },
+    "minimum_gradient_group_norm": {
+      "mean": 0.37238938577519615,
+      "std": 0.43466584627833077,
+      "n": 3
+    },
+    "model_calls": {
+      "mean": 0,
+      "std": 0.0,
+      "n": 3
+    },
+    "raw_moment_negative_control_gap": {
+      "mean": 0.19726462432032293,
+      "std": 0.05817440609089095,
+      "n": 3
+    },
+    "single_softmax_negative_control_gap": {
+      "mean": 0.09878066254130238,
+      "std": 0.06146435850165848,
+      "n": 3
+    },
+    "variance_reference_error": {
+      "mean": 2.3684757858670005e-15,
+      "std": 1.0255800994045674e-15,
+      "n": 3
+    }
+  },
+  "executed_source_sha256": {
+    "scripts/run_oct30_components.py": "77a4a18b17587a04f06fda5b4d2d07998b50b8a7c670db61d594a12a94613379",
+    "docs/research-audits/oct30-overlap-components/execution-spec.json": "0afad26f7fc9ee66a0febd18ea5cf7b9cb6ded10d4c09c6efc30be05594d54dc",
+    "docs/research-audits/oct30-overlap-components/preflight.json": "193b954ae5600436cd55090b0a5e4e373f557963704e33ed70ecfd58cb99f4d5",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+    "src/auto_research/agent_research/crop.py": "6c73df58387b52fa4d73b68306b6f2991bc56096a35de30a90ae728fc50bbec9",
+    "src/auto_research/agent_research/emma.py": "4c237168aff9f5de2821e800dbaff348d2b02233417683eb6c2acc3431187f07",
+    "src/auto_research/agent_research/evalalloc.py": "e4debc6d0f1e4b2ee55703cec42278014a4fc10904a0ac8cd804983c612665d5",
+    "src/auto_research/foundation_models/fold_bias.py": "c9d316b7e6310adb647460f1c7ef6c59b26bfcdd8543566fbd35947356b2f24c",
+    "src/auto_research/foundation_models/merlin.py": "60267e6a6ff17dc96bb748737a6dbfae7fa234d2f17cdfe11f6dcc819b1a3836",
+    "src/auto_research/foundation_models/swim.py": "4bedb2886bd22b76bc3225614d5028a77ce3e5eaf324735097ea4125cbcb1452",
+    "src/auto_research/post_training/concur.py": "ea7de177dcc957e7c57b89b705b089ab8ce3e0be129b3be08ea8ab4c493f80b9",
+    "src/auto_research/post_training/mpopd.py": "dcc3940889a0ea3c7522f9558493788126845aefe1dc74d26d321078d7edc229",
+    "src/auto_research/reproductions/pinger_components.py": "0bc3fc9f8741a310fdfd1d41f6dc29b722144051c1ed4d5926e26c9402ef89db",
+    "src/auto_research/reproductions/pinterest_rlbp.py": "3551a1ac348e0d70beff1fbd70950d9583f4913b9623bc455c1350e14a766d3b"
+  },
+  "provenance": {
+    "commit": "af9b9245aa85b4cbeb3da27ca701cc01cb94da86",
+    "artifact_path": "docs/gpu-validations/merlin-a100-20261030.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct30_components.py": "77a4a18b17587a04f06fda5b4d2d07998b50b8a7c670db61d594a12a94613379",
+      "docs/research-audits/oct30-overlap-components/execution-spec.json": "0afad26f7fc9ee66a0febd18ea5cf7b9cb6ded10d4c09c6efc30be05594d54dc",
+      "docs/research-audits/oct30-overlap-components/preflight.json": "193b954ae5600436cd55090b0a5e4e373f557963704e33ed70ecfd58cb99f4d5",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "src/auto_research/agent_research/crop.py": "6c73df58387b52fa4d73b68306b6f2991bc56096a35de30a90ae728fc50bbec9",
+      "src/auto_research/agent_research/emma.py": "4c237168aff9f5de2821e800dbaff348d2b02233417683eb6c2acc3431187f07",
+      "src/auto_research/agent_research/evalalloc.py": "e4debc6d0f1e4b2ee55703cec42278014a4fc10904a0ac8cd804983c612665d5",
+      "src/auto_research/foundation_models/fold_bias.py": "c9d316b7e6310adb647460f1c7ef6c59b26bfcdd8543566fbd35947356b2f24c",
+      "src/auto_research/foundation_models/merlin.py": "60267e6a6ff17dc96bb748737a6dbfae7fa234d2f17cdfe11f6dcc819b1a3836",
+      "src/auto_research/foundation_models/swim.py": "4bedb2886bd22b76bc3225614d5028a77ce3e5eaf324735097ea4125cbcb1452",
+      "src/auto_research/post_training/concur.py": "ea7de177dcc957e7c57b89b705b089ab8ce3e0be129b3be08ea8ab4c493f80b9",
+      "src/auto_research/post_training/mpopd.py": "dcc3940889a0ea3c7522f9558493788126845aefe1dc74d26d321078d7edc229",
+      "src/auto_research/reproductions/pinger_components.py": "0bc3fc9f8741a310fdfd1d41f6dc29b722144051c1ed4d5926e26c9402ef89db",
+      "src/auto_research/reproductions/pinterest_rlbp.py": "3551a1ac348e0d70beff1fbd70950d9583f4913b9623bc455c1350e14a766d3b"
+    },
+    "raw_runner_artifact_sha256": "a8715157c2fa709683c92e28230427e923ad34481168624a5c52320fc90be876",
+    "dataset_fingerprint": "sha256:bae7a68ca65fc3b46a8a3c8c0d9123189de9494cdeff6d95609b2671224c3b12",
+    "metric_artifact_path": "docs/foundation-models/2610.37645-merlin/metrics/component-cuda-seeds42-44.json"
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true
+}

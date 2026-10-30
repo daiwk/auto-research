@@ -236,7 +236,7 @@
       "id": "generative-retrieval-reasoning",
       "title": "生成式召回与推理推荐",
       "question": "把物品改写成token后，推荐究竟改变了哪一步？",
-      "takeaway": "生成式召回把候选选择改为在用户上下文下生成物品码：先建立可还原到目录的标识，再学习码序列分布，最后用约束解码得到可服务物品。TIGER串起量化与自回归检索，COBRA进一步级联稀疏码和稠密表示，PLUM把推荐数据继续预训练接到已有语言模型。偏好优化与推理token是在这条链路上改变训练或搜索。",
+      "takeaway": "生成式召回把候选选择改为在用户上下文下生成物品码：先建立可还原到目录的标识，再学习码序列分布，最后用约束解码得到可服务物品。TIGER串起量化与自回归检索，COBRA进一步级联稀疏码和稠密表示，PLUM把推荐数据继续预训练接到已有语言模型。偏好优化与推理token是在这条链路上改变训练或搜索。 PinGER在训练里保留各层SID标签，但用非对称mask使后续历史只读dense，服务可删过去SID；输入成本、前缀覆盖和合法目录仍是三项不同合同。",
       "example": "目录里只有代码(3,7)和(3,9)，模型却给(3,5)很高概率。即使生成文本看起来合理，这也不是有效商品；解码必须服从目录约束。若两个商品共享同一码，还要处理碰撞或保留后续区分路径。",
       "pitfall": "token loss下降不等于Recall提高，增加beam也不能恢复被错误码本或前缀约束排除的物品。部分论文同时生成列表，归组看主要生成机制，列表价值可接着读重排主题；本地缩小训练不等同于复现生产规模。",
       "self_test": {
@@ -310,7 +310,8 @@
         "recommendation:univa",
         "recommendation:wegr",
         "recommendation:xrec",
-        "recommendation:pailitao-mmsearch2"
+        "recommendation:pailitao-mmsearch2",
+        "recommendation:pinger"
       ]
     },
     {
@@ -371,9 +372,9 @@
     },
     {
       "id": "slates-business-value",
-      "title": "重排、展示与长期价值",
+      "title": "列表与业务控制：重排、出价和长期价值",
       "question": "把单个物品按分数排好，为什么还不等于一张好列表？",
-      "takeaway": "列表价值依赖邻居、位置和已选前缀。去冗余方法比较新增物品的边际贡献；SORT-Gen用前缀条件估计列表多目标价值；策略方法再调整探索、广告量、收益与长期反馈的取舍。标题、创意和页面布局也会改变用户看到什么，需把内容选择与呈现决策放进同一评估口径。",
+      "takeaway": "列表价值依赖邻居、位置和已选前缀。去冗余方法比较新增物品的边际贡献；SORT-Gen用前缀条件估计列表多目标价值；策略方法再调整探索、广告量、收益与长期反馈的取舍。标题、创意和页面布局也会改变用户看到什么，需把内容选择与呈现决策放进同一评估口径。 RLBP另在日级选择有界PID倍率，两个Q头学习BU与CPC，再按生命周期融合；多目标权重相似，不意味着它与列表重排使用同一种状态、动作或回报。",
       "example": "前三个候选都是同一滑雪镜头，分数为0.90、0.89、0.88，第四个是0.85的露营视频。逐项排序会选前三个；若重复内容的边际价值下降，列表模型可能选第四个。但是否值得牺牲即时分数，需要用相应目标与约束判断。",
       "pitfall": "把多个目标加权，不保证满足广告量或覆盖率的硬约束；提高多样性也不必然提高满意度。MovieLens上构造的点击、付费和GMV代理值只用于机制实验，不能写成真实收入；长期价值必须有相应时间范围的证据。",
       "self_test": {
@@ -422,7 +423,8 @@
         "recommendation:swag-bid",
         "recommendation:taiji",
         "recommendation:uame",
-        "recommendation:youtube-freshness"
+        "recommendation:youtube-freshness",
+        "recommendation:pinterest-rlbp"
       ]
     },
     {

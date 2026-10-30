@@ -1,0 +1,66 @@
+{
+  "domain": "recommendation",
+  "key": "pinger",
+  "title": "PinGER: Token-Efficient Generative Retrieval with Semantic IDs",
+  "paper_url": "https://arxiv.org/abs/2610.33435v1",
+  "reviewed_version_url": "https://arxiv.org/html/2610.33435v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2610.33435-pinger/README.md",
+  "topic": [
+    "生成式召回",
+    "非对称注意力与前缀多样化"
+  ],
+  "browse_company": "Pinterest",
+  "browse_topic": [
+    "生成、排序与冷启动",
+    "大模型能力与推荐融合"
+  ],
+  "first_author": "Xinyi Li",
+  "first_author_affiliation": "Pinterest",
+  "published": "2026-10-24",
+  "published_at": "2026-10-24T04:24:45Z",
+  "code": null,
+  "code_status": "固定v1正文与摘要未提供PinGER作者仓库，本轮未找到/未核验发布；引用的STATIC/FlashAttention不等于本方法源码",
+  "upstream_revision": null,
+  "code_license": "未找到原方法源码许可证；论文CC BY-NC-ND 4.0，本地据公式独立实现",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "overlap_backfill",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "local_operator": "auto_research.reproductions.pinger_components.select_prefix_candidates",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.pinger_components import diagnostic; print(diagnostic(42))'",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/pinger-a100-20261030.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "Pinterest Related Pins",
+      "metric": "saves",
+      "lift_percent": 0.62,
+      "traffic": "two-week live A/B against PinRec, fixed candidate budget, two-sided5% significance;traffic share not disclosed",
+      "source_url": "https://arxiv.org/html/2610.33435v1",
+      "source_location": "Section5.3.1/Table4;freshPinssaves+3.60%,not local evidence"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2610.33435v1",
+    "source_location": "Sections3–5/AppendixA",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "model_scale": "RQ-VAE plus 4-layer768-d decoder,5x2048codes,up to6144trainingtokens",
+    "data_scale": "private PinCLIP/OmniSage/engagement data and order1billion production corpus",
+    "paper_configuration": "multi-context/beam/feature/DPO comparisons, custom kernels and real serving/production A/B",
+    "estimated_cost_basis": "full GPU-hours undisclosed; private data and billion-item serving make total cost/material requirements unavailable; only small formula tensors accepted",
+    "decision": "完整实验成本过高，不复现（审查 DONE）；不下载、不试跑、不自动重试。只接受mask/单层前缀选择/分层DPO的L1组件，独立GPU验收不代表推荐器或服务栈复现。"
+  },
+  "summary": "用训练专用SID与历史dense的非对称mask保留多级监督而压缩服务输入，再按共同前缀深度分配beam并用所有前缀DPO加NTP锚校准排序偏好。本地仅实现可核对的数值机制，不实现生产模型/稀疏kernel或复现线上收益。"
+}

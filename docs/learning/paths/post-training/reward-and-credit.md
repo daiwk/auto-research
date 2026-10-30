@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 144 个问题 · 36 篇论文
+[LLM 后训练](index.md) / 148 个问题 · 37 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:concur" data-paper-title="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning LLM 后训练 Carnegie Mellon University 2026-10-27 多奖励RL常让主奖励决定辅助奖励是否生效，但逐分量标准化会破坏原先优先级：辅助分量可能反转主奖励的排序；所有响应都已正确时，微小长度差异也可能独自决定更新。CONCUR不重写奖励或调低全局权重，而是在每个prompt组内把门控辅助优势投影到与主奖励相容的最近分数。CONCUR-T始终合并主奖励到顶的辅助分数；CONCUR-A仅在累计一致性达到固定条件时放开这项约束。未门控的奖励保持原样，因此不能宣称所有多奖励组合都绝不反转排序。 完整32GPU、多模型多任务RL实验成本过高，不复现（审查 DONE）；输入是外部奖励矩阵及声明的主分量、门控列和权重；不是模型生成的答案。concur_batch先汇总整batch信任证据，再对任何组做投影，避免顺序改变同一batch的策略。Eq2未说明白化标准差的实现口径，因此调用者必须明确传batch_std_correction=0/1，不暗称其中一种是作者代码默认。  策略优化 多目标奖励与优势校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 原始奖励已经gate了辅助分量，为什么标准化后仍可能违背主奖励优先级？ gate只限制失败响应的原始辅助分数；每个奖励单独居中和缩放后，辅助差异可能被放大并反转主奖励排序。到顶组的主奖励又是常数，标准化为零，辅助就可能单独决定更新。CONCUR因此约束标准化后的分量，而不是只改原始gate。 教学例：两条都正确的响应只差极少长度奖励，主优势为零而长度优势可被缩放到单位方差；这不是模型真的学会更多正确答案的证据。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-concur-c984323b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-928962c2c93fbd5b">原始奖励已经gate了辅助分量，为什么标准化后仍可能违背主奖励优先级？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aconcur">CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>gate只限制失败响应的原始辅助分数；每个奖励单独居中和缩放后，辅助差异可能被放大并反转主奖励排序。到顶组的主奖励又是常数，标准化为零，辅助就可能单独决定更新。CONCUR因此约束标准化后的分量，而不是只改原始gate。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条都正确的响应只差极少长度奖励，主优势为零而长度优势可被缩放到单位方差；这不是模型真的学会更多正确答案的证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36437v1">原论文</a> · <a href="../../../../post-training/2610.36437-concur/">实现解读</a> · <a href="#qa-928962c2c93fbd5b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:concur" data-paper-title="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning LLM 后训练 Carnegie Mellon University 2026-10-27 多奖励RL常让主奖励决定辅助奖励是否生效，但逐分量标准化会破坏原先优先级：辅助分量可能反转主奖励的排序；所有响应都已正确时，微小长度差异也可能独自决定更新。CONCUR不重写奖励或调低全局权重，而是在每个prompt组内把门控辅助优势投影到与主奖励相容的最近分数。CONCUR-T始终合并主奖励到顶的辅助分数；CONCUR-A仅在累计一致性达到固定条件时放开这项约束。未门控的奖励保持原样，因此不能宣称所有多奖励组合都绝不反转排序。 完整32GPU、多模型多任务RL实验成本过高，不复现（审查 DONE）；输入是外部奖励矩阵及声明的主分量、门控列和权重；不是模型生成的答案。concur_batch先汇总整batch信任证据，再对任何组做投影，避免顺序改变同一batch的策略。Eq2未说明白化标准差的实现口径，因此调用者必须明确传batch_std_correction=0/1，不暗称其中一种是作者代码默认。  策略优化 多目标奖励与优势校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么PAVA前要按primary再按辅助分数排序，却不能把所有相同primary都平均？ 约束只要求primary严格更高时辅助分数不能更低；相同primary且未到顶的响应之间没有并列约束。先按辅助分数排列这些响应，可让PAVA只修复真正的跨primary违例。只有启用ceiling tie时，到顶响应才必须相等。 教学例：primary为[0.3,0.3,0.7]、辅助优势为[-1,0,1]已经可行，输出应保持不变；先把两个0.3位置平均成-0.5会加入论文没有的约束。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-aebcbcd2e1c9e89d">为什么PAVA前要按primary再按辅助分数排序，却不能把所有相同primary都平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aconcur">CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>约束只要求primary严格更高时辅助分数不能更低；相同primary且未到顶的响应之间没有并列约束。先按辅助分数排列这些响应，可让PAVA只修复真正的跨primary违例。只有启用ceiling tie时，到顶响应才必须相等。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：primary为[0.3,0.3,0.7]、辅助优势为[-1,0,1]已经可行，输出应保持不变；先把两个0.3位置平均成-0.5会加入论文没有的约束。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36437v1">原论文</a> · <a href="../../../../post-training/2610.36437-concur/">实现解读</a> · <a href="#qa-aebcbcd2e1c9e89d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:concur" data-paper-title="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning LLM 后训练 Carnegie Mellon University 2026-10-27 多奖励RL常让主奖励决定辅助奖励是否生效，但逐分量标准化会破坏原先优先级：辅助分量可能反转主奖励的排序；所有响应都已正确时，微小长度差异也可能独自决定更新。CONCUR不重写奖励或调低全局权重，而是在每个prompt组内把门控辅助优势投影到与主奖励相容的最近分数。CONCUR-T始终合并主奖励到顶的辅助分数；CONCUR-A仅在累计一致性达到固定条件时放开这项约束。未门控的奖励保持原样，因此不能宣称所有多奖励组合都绝不反转排序。 完整32GPU、多模型多任务RL实验成本过高，不复现（审查 DONE）；输入是外部奖励矩阵及声明的主分量、门控列和权重；不是模型生成的答案。concur_batch先汇总整batch信任证据，再对任何组做投影，避免顺序改变同一batch的策略。Eq2未说明白化标准差的实现口径，因此调用者必须明确传batch_std_correction=0/1，不暗称其中一种是作者代码默认。  策略优化 多目标奖励与优势校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 CONCUR-A超过双标准误门槛，是否就证明辅助奖励在到顶区域可靠？ 不是。它汇总passing且primary不同的响应对的一致性，至少61条有效读数后用均值大于两倍标准误的固定规则放开并列。读数随训练分布变化，并非独立同分布；到顶响应之间也未被该统计直接比较，所以作者不赋予显著性水平或普适可靠性保证。 教学例：前期辅助与主奖励正相关，后期反转，累计均值可能重新落回门槛内，ceiling应重新绑住，而不是第一次解锁后永久放开。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-2b9aaf1497f68e59">CONCUR-A超过双标准误门槛，是否就证明辅助奖励在到顶区域可靠？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aconcur">CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它汇总passing且primary不同的响应对的一致性，至少61条有效读数后用均值大于两倍标准误的固定规则放开并列。读数随训练分布变化，并非独立同分布；到顶响应之间也未被该统计直接比较，所以作者不赋予显著性水平或普适可靠性保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：前期辅助与主奖励正相关，后期反转，累计均值可能重新落回门槛内，ceiling应重新绑住，而不是第一次解锁后永久放开。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36437v1">原论文</a> · <a href="../../../../post-training/2610.36437-concur/">实现解读</a> · <a href="#qa-2b9aaf1497f68e59">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:concur" data-paper-title="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning LLM 后训练 Carnegie Mellon University 2026-10-27 多奖励RL常让主奖励决定辅助奖励是否生效，但逐分量标准化会破坏原先优先级：辅助分量可能反转主奖励的排序；所有响应都已正确时，微小长度差异也可能独自决定更新。CONCUR不重写奖励或调低全局权重，而是在每个prompt组内把门控辅助优势投影到与主奖励相容的最近分数。CONCUR-T始终合并主奖励到顶的辅助分数；CONCUR-A仅在累计一致性达到固定条件时放开这项约束。未门控的奖励保持原样，因此不能宣称所有多奖励组合都绝不反转排序。 完整32GPU、多模型多任务RL实验成本过高，不复现（审查 DONE）；输入是外部奖励矩阵及声明的主分量、门控列和权重；不是模型生成的答案。concur_batch先汇总整batch信任证据，再对任何组做投影，避免顺序改变同一batch的策略。Eq2未说明白化标准差的实现口径，因此调用者必须明确传batch_std_correction=0/1，不暗称其中一种是作者代码默认。  策略优化 多目标奖励与优势校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 同一batch的第一个组能否只用此前历史来决定CONCUR-A是否绑住ceiling？ 不能。Algorithm1先合并本batch所有有效读数，再让同一task/auxiliary共享本步策略，随后才逐组投影。逐组边读边更新会让数据排列改变估计器。最后白化也跨整个多任务batch，不能对各组独立归一化。 教学例：历史有60条正一致读数，当前batch第二个组带来第61条；第一个组也必须使用合并后的本步信任状态。本地数组通过只证明该顺序，不代表LLM训练收益。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-471defe083f8036a">同一batch的第一个组能否只用此前历史来决定CONCUR-A是否绑住ceiling？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aconcur">CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。Algorithm1先合并本batch所有有效读数，再让同一task/auxiliary共享本步策略，随后才逐组投影。逐组边读边更新会让数据排列改变估计器。最后白化也跨整个多任务batch，不能对各组独立归一化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史有60条正一致读数，当前batch第二个组带来第61条；第一个组也必须使用合并后的本步信任状态。本地数组通过只证明该顺序，不代表LLM训练收益。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36437v1">原论文</a> · <a href="../../../../post-training/2610.36437-concur/">实现解读</a> · <a href="#qa-471defe083f8036a">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mart-grpo" data-paper-title="When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning LLM 后训练 The University of Hong Kong 2026-10-23 一次机器人最终失败，不等于每个动作都导致失败；全轨迹负优势还会惩罚有价值的重抓和恢复尝试。MART-GRPO 用冻结事件 VLM 回看完整失败轨迹，定位最后一次未恢复错误，只保留截止该边界的失败反馈；成功轨迹、原组优势和原始 token 分母不变。论文先分析理想 stopping-time 条件下，何时删除零条件期望的后续梯度可以保持估计器期望；实际回溯 VLM 不自动满足这些理论条件。VLM 用三路同步摄像头、机器人状态、任务与帧/动作 chunk 对齐信息，报告最后一次可见且未恢复的错误起始区间； 这超过单张 A100/A30 或 Mac 的合理迭代预算，完整 actor/VLM 训练和机器人多任务评测为成本过高，不复现（审查 DONE）；诊断真实反传合成 logits，用独立概率空间 Eq.15 参考检查值与梯度、原分母、失败后缀零梯度和成功项保留；本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  策略优化 时序信用分配 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 MART-GRPO为什么在失败轨迹后半段屏蔽反馈？ 最终失败不代表后续每个动作都造成失败，恢复尝试也可能有价值。回溯定位最后未恢复错误，把其后的负向信用屏蔽，保留此前相关信号；不是提前停止机器人。 例如物体掉落后尝试重抓，不应仅因终局失败就把所有恢复动作同罚。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-mart-grpo-1903b786" class="ar-learning-paper-anchor"></span>
@@ -1950,7 +2003,7 @@ hide:
 
 ## 记住这一点
 
-奖励定义什么算好，信用分配决定哪段行为收到这个信号。过程监督直接评价中间步骤；Math-Shepherd从某一步继续采样，用最终可解性构造步骤标签。多目标与rubric方法还要决定不同标准对应哪些token，以及如何防止一项奖励掩盖另一项。结果奖励、步骤证据和训练优势相关，但不能直接当同一个量。
+奖励定义什么算好，信用分配决定哪段行为收到这个信号。过程监督直接评价中间步骤；Math-Shepherd从某一步继续采样，用最终可解性构造步骤标签。多目标与rubric方法还要决定不同标准对应哪些token，以及如何防止一项奖励掩盖另一项。结果奖励、步骤证据和训练优势相关，但不能直接当同一个量。 CONCUR把问题推进到奖励维度：即使原始长度奖励受正确性门控，标准化后仍可能反转主奖励排序，因此需明确投影约束，而非只把辅助权重调小。
 
 ## 一个例子
 

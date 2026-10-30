@@ -1,0 +1,560 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-30T06:28:09.615821+00:00",
+  "baseline": "docs/research-audits/oct29-components/official-source-inventory.json",
+  "baseline_sha256": "96d0be6810f3d571d86d2fa1a1de95c6e4b151c971ad2c65e87e96674e039316",
+  "current_canonical_records_equal_baseline": true,
+  "new_urls": 0,
+  "removed_urls": 0,
+  "changed_records": 0,
+  "record_counts": {
+    "Google": 435,
+    "Meta": 144,
+    "Google DeepMind": 266
+  },
+  "pages": [
+    {
+      "organization": "Google",
+      "page": 1,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+      "checked_at": "2026-10-30T06:27:45.465001+00:00",
+      "status": "retrieved",
+      "sha256": "fac3cbefdcc61343044eede79f05c9619cf62bef02d531e767094bf614e29059",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 2,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=2",
+      "checked_at": "2026-10-30T06:27:51.749184+00:00",
+      "status": "retrieved",
+      "sha256": "0fdba0a29821d2c527436e97e04e9ed7b39d265fc25f2ef4caf51fb33a4e1e98",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 3,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=3",
+      "checked_at": "2026-10-30T06:27:51.749422+00:00",
+      "status": "retrieved",
+      "sha256": "2a8e705e7a2c06ceed4791f2d81580b275927cf7092fff761fa999e28c0d8f49",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 4,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=4",
+      "checked_at": "2026-10-30T06:27:51.749601+00:00",
+      "status": "retrieved",
+      "sha256": "d19b840ffaebb25eae45e2e11cc994caf787dd23ae6792a1bc1d3896dd3d0715",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 5,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=5",
+      "checked_at": "2026-10-30T06:27:51.749904+00:00",
+      "status": "retrieved",
+      "sha256": "d354f82214b3c06fb91978514eac7e1623d3c65348d1ad3a97a3cbfadea194ad",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 6,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=6",
+      "checked_at": "2026-10-30T06:27:51.750105+00:00",
+      "status": "retrieved",
+      "sha256": "4c73156bafc4d07e8fdc43324ea5ca6d0b8b84f3164e8cf055fb7660d68bdebe",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 7,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=7",
+      "checked_at": "2026-10-30T06:27:51.750373+00:00",
+      "status": "retrieved",
+      "sha256": "c8ee250d5dffa7033919526ecf0ee438ab6d3abca3b2f646a6e4fef295f0edc4",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 8,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=8",
+      "checked_at": "2026-10-30T06:27:51.750578+00:00",
+      "status": "retrieved",
+      "sha256": "ff15af197baf3d193386413c57375405bd011944513a1bf61afb87f40118e8ca",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 9,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=9",
+      "checked_at": "2026-10-30T06:27:51.750716+00:00",
+      "status": "retrieved",
+      "sha256": "5704c9d63f23b5615f5085c57cc2dffacf84d9d1a8c899ef6e9fce6f45441c48",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 10,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=10",
+      "checked_at": "2026-10-30T06:27:54.422478+00:00",
+      "status": "retrieved",
+      "sha256": "4a11b168a69c2727715318ad13dbb2ec999c0e05b4563b6b3a06af64d85d41ea",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 11,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=11",
+      "checked_at": "2026-10-30T06:27:54.689537+00:00",
+      "status": "retrieved",
+      "sha256": "dd800a8cde0d7f83412b3a19b361375af0358b21ed215ab04b2d5d1f1fefa71b",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 12,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=12",
+      "checked_at": "2026-10-30T06:27:54.744358+00:00",
+      "status": "retrieved",
+      "sha256": "da14b60c05f661af15d0693c1175021245341a69601f0b8068dc311ce28f6053",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 13,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=13",
+      "checked_at": "2026-10-30T06:27:54.775237+00:00",
+      "status": "retrieved",
+      "sha256": "ec5aacb7266c96942e12037d4bba44556f1402c35b2e8ccb3c66c35598587cd4",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 14,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=14",
+      "checked_at": "2026-10-30T06:27:54.857236+00:00",
+      "status": "retrieved",
+      "sha256": "bedcd8302918cf79ac4e3a7ddbdf98cf56d22eda42412740bcd288b141391522",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 15,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=15",
+      "checked_at": "2026-10-30T06:27:54.915431+00:00",
+      "status": "retrieved",
+      "sha256": "fec650c99147857cfd310f8af6c15575aa252c43ca55f06efb18b7fe34fe1296",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 16,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=16",
+      "checked_at": "2026-10-30T06:27:55.087236+00:00",
+      "status": "retrieved",
+      "sha256": "cda5b11c3a259e7e4dbaa6812b82897d76e2589187e694c581bee65041061501",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 17,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=17",
+      "checked_at": "2026-10-30T06:27:55.103974+00:00",
+      "status": "retrieved",
+      "sha256": "cae38a88a6afe60f3ffee99f9a8b60af568e889398a1e3a139c821ca8741e2b3",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 18,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=18",
+      "checked_at": "2026-10-30T06:27:59.718696+00:00",
+      "status": "retrieved",
+      "sha256": "0d8d5e988d7d87e390c0e463a4096b4ca33d09286a00399dd6e6623d106ba429",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 19,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=19",
+      "checked_at": "2026-10-30T06:27:59.720190+00:00",
+      "status": "retrieved",
+      "sha256": "f03a6f9e811ae6b44d708b9d303a5c04ed67c6197c1506fe10cc8dd72dfd3adf",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 20,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=20",
+      "checked_at": "2026-10-30T06:27:59.736444+00:00",
+      "status": "retrieved",
+      "sha256": "ace7fd0a538035d8cecf8ca547b835a4b0844ee9b970b698ba1cdac31a359e30",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 21,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=21",
+      "checked_at": "2026-10-30T06:27:59.758328+00:00",
+      "status": "retrieved",
+      "sha256": "9b25f5c1bd39259ae5aaed8cf7da1587669b5b2d5d000fc589e3cadb8459721b",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 22,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=22",
+      "checked_at": "2026-10-30T06:27:59.768048+00:00",
+      "status": "retrieved",
+      "sha256": "2e6afb9563bd3be104c6e57fe45d396348ce9b110e537b4f967cf417d6910c1b",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 23,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=23",
+      "checked_at": "2026-10-30T06:27:59.786760+00:00",
+      "status": "retrieved",
+      "sha256": "13a287a7af83028dcbb0dd3e9803d23b6b4cb76469773bd924fc8b41206c8d97",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 24,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=24",
+      "checked_at": "2026-10-30T06:27:59.895301+00:00",
+      "status": "retrieved",
+      "sha256": "17eb4a2ce0b8b2cd9b1ccb25779c1b2cf8a6df474758809ee681edfe60c7a1c3",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 25,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=25",
+      "checked_at": "2026-10-30T06:28:00.225557+00:00",
+      "status": "retrieved",
+      "sha256": "4debcfc7c674184fa6315c277fc7bba77419f552a35e228865fb24932078544f",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 26,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=26",
+      "checked_at": "2026-10-30T06:28:02.219117+00:00",
+      "status": "retrieved",
+      "sha256": "40e2c04ac2bbe09a9ec9b05e3130b48b4afee0ea4e5d4b14c96b2d4756b66c01",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 27,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=27",
+      "checked_at": "2026-10-30T06:28:02.295847+00:00",
+      "status": "retrieved",
+      "sha256": "aeaee611a0d24fcbec1bf1b7ab31fc5af8b9649daede1b62496ed68a8f151d2a",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 28,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=28",
+      "checked_at": "2026-10-30T06:28:02.324068+00:00",
+      "status": "retrieved",
+      "sha256": "d8f9ce93297ff5c71c9d1564fdee97d65b9beb2bcd9c94ce9f961a483a015cb3",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google",
+      "page": 29,
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=29",
+      "checked_at": "2026-10-30T06:28:02.397308+00:00",
+      "status": "retrieved",
+      "sha256": "b6ac8fdb4fca97238ee41a7262739d1dedcd13f52b6ee2f712340d6913e2bd37",
+      "pagination_hints": [
+        29
+      ],
+      "parsed_records": 15
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 1,
+      "url": "https://deepmind.google/research/publications/",
+      "checked_at": "2026-10-30T06:27:45.469011+00:00",
+      "status": "retrieved",
+      "sha256": "3e877d9df06e81cde84f9a23926c01b92f7c573c3f98fb4f0ad376bea07389bd",
+      "pagination_hints": [
+        2,
+        3,
+        9
+      ],
+      "parsed_records": 30
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 2,
+      "url": "https://deepmind.google/research/publications/page/2/",
+      "checked_at": "2026-10-30T06:28:04.949348+00:00",
+      "status": "retrieved",
+      "sha256": "6621a4bf3bdb680bfca0079efdc72c687858faecdffc38384449a20f046e16e4",
+      "pagination_hints": [
+        3,
+        4,
+        9
+      ],
+      "parsed_records": 30
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 3,
+      "url": "https://deepmind.google/research/publications/page/3/",
+      "checked_at": "2026-10-30T06:28:05.058517+00:00",
+      "status": "retrieved",
+      "sha256": "362dbb03e2aef1272813ea524ae7f6a0e21c3f7ecbec41451a35fc7b033bb9d6",
+      "pagination_hints": [
+        2,
+        4,
+        5,
+        9
+      ],
+      "parsed_records": 30
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 4,
+      "url": "https://deepmind.google/research/publications/page/4/",
+      "checked_at": "2026-10-30T06:28:05.519496+00:00",
+      "status": "retrieved",
+      "sha256": "0c860700aabff62c3d11cc61476ef790a5f2a5478a79a98c5439bda245e4b704",
+      "pagination_hints": [
+        2,
+        3,
+        5,
+        6,
+        9
+      ],
+      "parsed_records": 30
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 5,
+      "url": "https://deepmind.google/research/publications/page/5/",
+      "checked_at": "2026-10-30T06:28:06.589941+00:00",
+      "status": "retrieved",
+      "sha256": "005a3a01e749e43d3afc41ca1e58419899011984a9442d69f598217c87c2c33f",
+      "pagination_hints": [
+        3,
+        4,
+        6,
+        7,
+        9
+      ],
+      "parsed_records": 30
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 6,
+      "url": "https://deepmind.google/research/publications/page/6/",
+      "checked_at": "2026-10-30T06:28:06.725702+00:00",
+      "status": "retrieved",
+      "sha256": "44d3f4027d2da7cf9aeec8bf284a0d7342eaf16ab1ce4b0d4f109c4853b59580",
+      "pagination_hints": [
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "parsed_records": 30
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 7,
+      "url": "https://deepmind.google/research/publications/page/7/",
+      "checked_at": "2026-10-30T06:28:06.971119+00:00",
+      "status": "retrieved",
+      "sha256": "fd13105805486fd05c1b62cdbd1252ff1606b70fce2ae115109b89e506d8d977",
+      "pagination_hints": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "parsed_records": 30
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 8,
+      "url": "https://deepmind.google/research/publications/page/8/",
+      "checked_at": "2026-10-30T06:28:07.141691+00:00",
+      "status": "retrieved",
+      "sha256": "f44085288ce606e1680cdb46699d3cdfd65803ef8212abf2f84b7b8d9493b197",
+      "pagination_hints": [
+        6,
+        7,
+        9
+      ],
+      "parsed_records": 30
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 9,
+      "url": "https://deepmind.google/research/publications/page/9/",
+      "checked_at": "2026-10-30T06:28:07.541796+00:00",
+      "status": "retrieved",
+      "sha256": "ecc3db7d4b8756e06738d5d6a30204dc49667534a316c569fa475203b0f80c4c",
+      "pagination_hints": [
+        7,
+        8
+      ],
+      "parsed_records": 26
+    },
+    {
+      "organization": "Meta",
+      "page": 1,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "checked_at": "2026-10-30T06:27:45.468909+00:00",
+      "status": "retrieved",
+      "sha256": "9e1a98adc86ec70a5d8f856d8368ccdeb326ae5bdc07c4a3d00e9a098bf40a5e",
+      "pagination_hints": [],
+      "parsed_records": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 2,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+      "checked_at": "2026-10-30T06:28:02.397675+00:00",
+      "status": "retrieved",
+      "sha256": "e50403af55bc900fac60eed5823485b6c9b7baf0fc18266d75588a405595533e",
+      "pagination_hints": [],
+      "parsed_records": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 3,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+      "checked_at": "2026-10-30T06:28:03.160617+00:00",
+      "status": "retrieved",
+      "sha256": "b16d3dad6d83c1cd5a52c2c1723904fd0e067322be1793d9bb4e6aeb3d6acbd7",
+      "pagination_hints": [],
+      "parsed_records": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 4,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+      "checked_at": "2026-10-30T06:28:03.176963+00:00",
+      "status": "retrieved",
+      "sha256": "5de0b4060737e5d05d088a073a288def6854a1b91bbe4876136cf848f744bd42",
+      "pagination_hints": [],
+      "parsed_records": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 5,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+      "checked_at": "2026-10-30T06:28:03.316214+00:00",
+      "status": "retrieved",
+      "sha256": "9ea3eefffa0e14c290cb807a0a6a7d22f8655bf2a9a115b3f2d78376a80730e6",
+      "pagination_hints": [],
+      "parsed_records": 24
+    },
+    {
+      "organization": "Meta",
+      "page": 6,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+      "checked_at": "2026-10-30T06:28:04.743291+00:00",
+      "status": "retrieved",
+      "sha256": "2138fb562f7c4a5eb41b25ecc4863f9b94865c2e502de5f1bb04258d94d838b5",
+      "pagination_hints": [],
+      "parsed_records": 24
+    }
+  ],
+  "all_sources_exhaustive": false,
+  "limitation": "Unchanged bounded directories and public-repo search do not prove no new paper exists elsewhere; Meta remains a six-page slice."
+}

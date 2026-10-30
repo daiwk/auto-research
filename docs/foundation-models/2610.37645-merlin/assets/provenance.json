@@ -1,0 +1,25 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.37645v1",
+  "source_url": "https://arxiv.org/pdf/2610.37645v1#page=4",
+  "figure": "Figure 2",
+  "image": "paper-figure-01.png",
+  "image_sha256": "fda5cad60540312ea73a8ed2069a13aa1f22cba828de638586141e80f672b048",
+  "source_asset_sha256": "fda5cad60540312ea73a8ed2069a13aa1f22cba828de638586141e80f672b048",
+  "pixel_dimensions": [
+    1224,
+    574
+  ],
+  "copyright": "Original paper authors; fixed arXiv v1 license applies",
+  "description": "Original PDF page crop including Figure 2 and full caption; not redrawn",
+  "method_html_sha256": "ce23c172845f3f0fb1a09510ebc63598253580f8c81f3b9553f1dee3cf1188de",
+  "caption": "Figure 2: MERLIN Overview. The context is split into segments Ci (middle row). Each segment\nstores a memory state (top row) and the first and second moments of its keys (bottom row). At po-\nsition t, the query qt reads segment-level outputs from memory states (step 1). The query computes\nthe mean and variance of the key-query alignment from the moments (step 2). The final output is\na weighted sum of segment-level outputs, where the weights are derived from a gated mix of the\nalignment mean and variance (step 3).",
+  "visually_verified": true,
+  "source_pdf_sha256": "773d9307643fe7d817d9d84bf3f06297bd5c414bb65e54a20574e198a25c57f9",
+  "page": 4,
+  "crop_rect_points": [
+    0.0,
+    0.0,
+    612.0,
+    286.5940246582031
+  ]
+}

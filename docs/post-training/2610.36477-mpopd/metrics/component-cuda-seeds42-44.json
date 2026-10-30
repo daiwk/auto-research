@@ -1,0 +1,194 @@
+{
+  "schema_version": 2,
+  "method": "mpopd",
+  "manifest_ref": "post-training:mpopd",
+  "paper": {
+    "key": "mpopd",
+    "title": "Proposing Better Rollouts for On-Policy Distillation"
+  },
+  "dataset": {
+    "id": "synthetic:oct30-mpopd-v1",
+    "revision": "sha256:dcc3940889a0ea3c7522f9558493788126845aefe1dc74d26d321078d7edc229",
+    "recipe": "fixed seeded formula/state/statistical contracts; no public capability dataset",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "metrics": {
+        "student_loss_before": 7.1590597311009265,
+        "student_loss_after": 6.635251107133015,
+        "proposal_loss_before": 0.3631547745937559,
+        "proposal_loss_after": 0.3545256005212726,
+        "student_gradient_norm": 1.6657983486071593,
+        "proposal_gradient_norm": 0.20897117731573459,
+        "geometric_arithmetic_distance": 0.07917255149619365,
+        "active_tokens": 7
+      },
+      "checks": {
+        "student_update_decreases_fixed_objective": true,
+        "proposal_update_decreases_fixed_objective": true,
+        "first_prefix_weight_one": true,
+        "weights_detached": true,
+        "teacher_and_old_proposal_frozen": true,
+        "padding_gradient_zero": true,
+        "geometric_not_arithmetic": true,
+        "eta_endpoints_match": true,
+        "conditional_support_normalized": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "metrics": {
+        "student_loss_before": 5.931193437208927,
+        "student_loss_after": 5.610434449539099,
+        "proposal_loss_before": 0.4528077789198657,
+        "proposal_loss_after": 0.4400780913597112,
+        "student_gradient_norm": 1.2860576286685323,
+        "proposal_gradient_norm": 0.25389534031767685,
+        "geometric_arithmetic_distance": 0.12927847295270997,
+        "active_tokens": 7
+      },
+      "checks": {
+        "student_update_decreases_fixed_objective": true,
+        "proposal_update_decreases_fixed_objective": true,
+        "first_prefix_weight_one": true,
+        "weights_detached": true,
+        "teacher_and_old_proposal_frozen": true,
+        "padding_gradient_zero": true,
+        "geometric_not_arithmetic": true,
+        "eta_endpoints_match": true,
+        "conditional_support_normalized": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "metrics": {
+        "student_loss_before": 4.297582912186185,
+        "student_loss_after": 4.156980201129356,
+        "proposal_loss_before": 0.4352204728139357,
+        "proposal_loss_after": 0.4255800586988076,
+        "student_gradient_norm": 0.8447555826712345,
+        "proposal_gradient_norm": 0.22054646080123855,
+        "geometric_arithmetic_distance": 0.07076989786168625,
+        "active_tokens": 7
+      },
+      "checks": {
+        "student_update_decreases_fixed_objective": true,
+        "proposal_update_decreases_fixed_objective": true,
+        "first_prefix_weight_one": true,
+        "weights_detached": true,
+        "teacher_and_old_proposal_frozen": true,
+        "padding_gradient_zero": true,
+        "geometric_not_arithmetic": true,
+        "eta_endpoints_match": true,
+        "conditional_support_normalized": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "active_tokens": {
+      "mean": 7,
+      "std": 0.0,
+      "n": 3
+    },
+    "geometric_arithmetic_distance": {
+      "mean": 0.09307364077019663,
+      "std": 0.03163453100724493,
+      "n": 3
+    },
+    "proposal_gradient_norm": {
+      "mean": 0.22780432614488333,
+      "std": 0.02332493434859206,
+      "n": 3
+    },
+    "proposal_loss_after": {
+      "mean": 0.4067279168599305,
+      "std": 0.045786019821558395,
+      "n": 3
+    },
+    "proposal_loss_before": {
+      "mean": 0.41706100877585245,
+      "std": 0.047505156528393794,
+      "n": 3
+    },
+    "student_gradient_norm": {
+      "mean": 1.2655371866489753,
+      "std": 0.41090585573758487,
+      "n": 3
+    },
+    "student_loss_after": {
+      "mean": 5.46755525260049,
+      "std": 1.2452981649285506,
+      "n": 3
+    },
+    "student_loss_before": {
+      "mean": 5.795945360165346,
+      "std": 1.4355247918634486,
+      "n": 3
+    }
+  },
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "bounded component contracts only, not a capability or complete paper reproduction"
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "af9b9245aa85b4cbeb3da27ca701cc01cb94da86",
+    "artifact_path": "docs/post-training/2610.36477-mpopd/metrics/component-cuda-seeds42-44.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_oct30_components.py": "77a4a18b17587a04f06fda5b4d2d07998b50b8a7c670db61d594a12a94613379",
+      "docs/research-audits/oct30-overlap-components/execution-spec.json": "0afad26f7fc9ee66a0febd18ea5cf7b9cb6ded10d4c09c6efc30be05594d54dc",
+      "docs/research-audits/oct30-overlap-components/preflight.json": "193b954ae5600436cd55090b0a5e4e373f557963704e33ed70ecfd58cb99f4d5",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_google_emnlp25_components.py": "bb336482f0927c7d1164d93534309a78d8258acaaab9f90549ef397fdf12a0d9",
+      "src/auto_research/agent_research/crop.py": "6c73df58387b52fa4d73b68306b6f2991bc56096a35de30a90ae728fc50bbec9",
+      "src/auto_research/agent_research/emma.py": "4c237168aff9f5de2821e800dbaff348d2b02233417683eb6c2acc3431187f07",
+      "src/auto_research/agent_research/evalalloc.py": "e4debc6d0f1e4b2ee55703cec42278014a4fc10904a0ac8cd804983c612665d5",
+      "src/auto_research/foundation_models/fold_bias.py": "c9d316b7e6310adb647460f1c7ef6c59b26bfcdd8543566fbd35947356b2f24c",
+      "src/auto_research/foundation_models/merlin.py": "60267e6a6ff17dc96bb748737a6dbfae7fa234d2f17cdfe11f6dcc819b1a3836",
+      "src/auto_research/foundation_models/swim.py": "4bedb2886bd22b76bc3225614d5028a77ce3e5eaf324735097ea4125cbcb1452",
+      "src/auto_research/post_training/concur.py": "ea7de177dcc957e7c57b89b705b089ab8ce3e0be129b3be08ea8ab4c493f80b9",
+      "src/auto_research/post_training/mpopd.py": "dcc3940889a0ea3c7522f9558493788126845aefe1dc74d26d321078d7edc229",
+      "src/auto_research/reproductions/pinger_components.py": "0bc3fc9f8741a310fdfd1d41f6dc29b722144051c1ed4d5926e26c9402ef89db",
+      "src/auto_research/reproductions/pinterest_rlbp.py": "3551a1ac348e0d70beff1fbd70950d9583f4913b9623bc455c1350e14a766d3b"
+    },
+    "raw_runner_artifact_sha256": "a8715157c2fa709683c92e28230427e923ad34481168624a5c52320fc90be876",
+    "dataset_fingerprint": "sha256:e190d7107a48ef8b8ec454c8dc3cbd02c84d50ef7310ad8688b289d9f89bc245"
+  }
+}

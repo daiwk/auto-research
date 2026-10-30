@@ -1,0 +1,13 @@
+{
+  "paper_url": "https://arxiv.org/abs/2610.36437v1",
+  "source_url": "https://arxiv.org/html/2610.36437v1/figures/concur.png",
+  "figure": "Figure 1",
+  "caption_summary_zh": "GDPO直接合并标准化奖励；CONCUR先对门控辅助分量做保序和到顶并列投影，A变体根据累计一致性决定是否放开并列。",
+  "asset": "paper-figure-01.png",
+  "sha256": "624dd9bda20accfa7dc26cb06894857c6964a250cd70e70ac00ffd001a9fee12",
+  "width": 5726,
+  "height": 2681,
+  "transformation": "original arXiv HTML figure; no redraw or crop",
+  "visually_inspected": true,
+  "reviewed_on": "2026-10-30"
+}

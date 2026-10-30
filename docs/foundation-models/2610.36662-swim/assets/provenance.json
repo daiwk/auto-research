@@ -1,0 +1,25 @@
+{
+  "paper_url": "https://arxiv.org/html/2610.36662v1",
+  "source_url": "https://arxiv.org/pdf/2610.36662v1#page=7",
+  "figure": "Figure 1",
+  "image": "paper-figure-01.png",
+  "image_sha256": "00981718fe9340b7fd3fe5ef060fcba4f812a300ba5d524e813c2a6beedc338c",
+  "source_asset_sha256": "00981718fe9340b7fd3fe5ef060fcba4f812a300ba5d524e813c2a6beedc338c",
+  "pixel_dimensions": [
+    1224,
+    693
+  ],
+  "copyright": "Original paper authors; fixed arXiv v1 license applies",
+  "description": "Original PDF page crop including Figure 1 and full caption; not redrawn",
+  "method_html_sha256": "32c10d0d66eda1e3dfd35cc1e049981d2b7ffb0f67e10c367ad56250b6ea5248",
+  "caption": "Figure 1: SWIM. (a) The behavioral predictor learns coordinate weights from current states, gated future\nchanges, and logged actions. (b) Frozen weights rescale standardized states. Squared latent and state distances\nfrom the same frame pairs enter the correlation loss, with state distances held fixed; prediction and SIGReg\nlosses are retained. The inset names physical features before standardization and shows illustrative weight bars;\nwithin this inset, θ denotes a joint angle. The training symbols are defined in Sections 4.1–4.2. Deployment uses\nimage-based latent planning; the behavioral predictor and logged future states are training-only components.",
+  "visually_verified": true,
+  "source_pdf_sha256": "24de87384fe7efc6c3de89f19e749000e75878fe7d04f83ffc78caa5f63a5f9f",
+  "page": 7,
+  "crop_rect_points": [
+    0.0,
+    0.0,
+    612.0,
+    346.0643310546875
+  ]
+}

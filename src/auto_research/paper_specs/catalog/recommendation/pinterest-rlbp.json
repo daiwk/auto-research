@@ -1,0 +1,66 @@
+{
+  "domain": "recommendation",
+  "key": "pinterest-rlbp",
+  "title": "Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest",
+  "paper_url": "https://arxiv.org/abs/2610.33248v1",
+  "reviewed_version_url": "https://arxiv.org/html/2610.33248v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2610.33248-pinterest-rlbp/README.md",
+  "topic": [
+    "广告出价与预算控制",
+    "RL与PID元控制"
+  ],
+  "browse_company": "Pinterest",
+  "browse_topic": [
+    "训练目标与决策优化",
+    "广告与商业决策"
+  ],
+  "first_author": "Yichu Zhou",
+  "first_author_affiliation": "Pinterest Inc.",
+  "published": "2026-10-23",
+  "published_at": "2026-10-23T19:52:02Z",
+  "code": null,
+  "code_status": "固定v1正文与摘要未提供RLBP作者仓库，本轮未找到/未核验发布，不将通用RL引用当作源码",
+  "upstream_revision": null,
+  "code_license": "未找到原方法源码许可证；论文CC BY4.0，本地据公式独立实现",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "overlap_backfill",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "local_operator": "auto_research.reproductions.pinterest_rlbp.two_head_td_loss",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.pinterest_rlbp import diagnostic; print(diagnostic(42))'",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/pinterest-rlbp-a100-20261030.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "Pinterest Auto-Bidding",
+      "metric": "eCPC",
+      "lift_percent": -0.25,
+      "traffic": "seven-day live A/B, same serving infrastructure, defaultPIDcontrol, p<0.05;trafficshareundisclosed",
+      "source_url": "https://arxiv.org/html/2610.33248v1",
+      "source_location": "Section6.2/Table3;alltreatedcampaign-days;revenueflat;postrolloutholdoutnotastatisticaltest"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2610.33248v1",
+    "source_location": "Sections3–6",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "model_scale": "private state encoder/sharedmultiheadQnetwork;deployedgamma0contextualbandit,notdirectneuralbidder",
+    "data_scale": "21dayprivateauctionlogs plus7dayheldout,live7dayA/Band2monthholdout",
+    "paper_configuration": "five-seedconfigablations,logging/explorationpolicy,productionPIDandpaidtraffic",
+    "estimated_cost_basis": "GPU-hours undisclosed; faithful complete cost uncertain and private production requirements unavailable, so no trial run; only bounded Eq3–11 tensors",
+    "decision": "完整实验成本过高，不复现（审查 DONE）；不下载、不调用bidder、不自动重试。低成本张量组件只验收奖励/双头目标/动作/策略/IPS，不冒称真实广告策略效果。"
+  },
+  "summary": "保留高频PID，在日级从9个P/I倍率动作中选择，分别回归预算利用率与CPC相对生产基线的变化，再按生命周期融合并top-K随机选择。实际部署gamma为0；本地实现双头目标、负CPC奖励与有界策略/IPS核，不实现私有Q网络或线上出价。"
+}

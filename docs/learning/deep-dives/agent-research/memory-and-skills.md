@@ -7,9 +7,9 @@ hide:
 
 # 经验进入长期系统前，要解决存取、价值与准入
 
-[Agent](../index.md) · 更新 2026-10-29 · 56 篇主题资料 / 7 篇重点对照
+[Agent](../index.md) · 更新 2026-10-30 · 57 篇主题资料 / 8 篇重点对照
 
-MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。
+MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/agent-research/memory-and-skills.md)
 
@@ -32,6 +32,7 @@ MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，C
 | [When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents](../../../agent-research/2608.05810-vag/README.md) · [原始来源](https://arxiv.org/abs/2608.05810)<br>章节：背景与主要改动、核心公式、复现边界 | 在持久写入前检查结构、行为无害与语义一致，再按边际收益选择可兼容 Hot 技能集合。 | 阻止污染早于事后删除，但验证仍受覆盖限制；本地只执行相关核心算子，候选发现不等于完整能力进化。 |
 | [SkillRise](../../../agent-research/2607.26784-skillrise/README.md) · [原始来源](https://arxiv.org/abs/2607.26784)<br>章节：背景与主要改动、核心公式、复现边界 | 同一policy交替求解与整理文档，当前结果监督solve，下游折扣结果监督curate。 | 要求任务序列能暴露经验迁移价值；本地仅验证状态和phase信用，未做原文模型RL。 |
 | [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../../../agent-research/2610.36652-discernmem/README.md) · [原始来源](https://arxiv.org/abs/2610.36652v1)<br>章节：背景与主要改动、核心公式 | 配对效果、范围优先归因、双参照修复门槛及版本证据清空。 | scope/defect/replay分数外部提供，不用规则冒充LLM诊断与修复。 |
+| [EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis](../../../agent-research/2610.35966-emma/README.md) · [原始来源](https://arxiv.org/abs/2610.35966v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 按controller/agent/skill组织持久记忆，依据失败scope只改责任条目；临时execution slip不写长期经验，overflow先拆未完成步骤。 | 单编辑守卫不证明语义正确，安全判断仍外置；接受编辑后须下一次实际使用，不能以最终未重跑编辑冒充改进。完整多环境系统未复现。 |
 
 </div>
 
@@ -54,6 +55,12 @@ Voyager 让成功程序进入技能积累链，VaG 更强调新经验会影响�
 DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任务、seed、配置做单记忆/无记忆配对重放，再检查修复是否同时守住父记忆与无记忆基线。它补充了简单追加反思的风险控制：团队结果差不能直接归罪某条记忆；新版本也不能继承旧版本已测效果。本地只做这些测量和版本合同，没有LLM修复或重放。
 
 对照来源：[memgpt](../../../agent-research/2310.08560-memgpt/README.md) · [discernmem](../../../agent-research/2610.36652-discernmem/README.md)
+
+### 先定位修改责任，再证明这次修改有用
+
+DiscernMem用孤立注入与无记忆配对重放区分作用范围和内容缺陷，并以父记忆/无记忆双参照验收修复。EMMA更偏编辑组织：controller、agent specialization与skill有不同所有者，一次反思只能改承担责任的一项，执行失误只影响临时计划。一个解决归因与修复效果，一个约束该改哪层及如何exercise；结构合法不能替代配对收益，也不能把外部语义安全Boolean视为已实现的LLM审查。
+
+对照来源：[emma](../../../agent-research/2610.35966-emma/README.md) · [discernmem](../../../agent-research/2610.36652-discernmem/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +106,23 @@ DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任�
 
     对照来源：[memgpt](../../../agent-research/2310.08560-memgpt/README.md) · [discernmem](../../../agent-research/2610.36652-discernmem/README.md)
 
+### EMMA一次只改一项记忆，是否就已经完成DiscernMem要求的因果归因与修复验收？ {#cross-emma-single-edit-versus-memory-effect}
+
+??? note "展开答案与例子"
+
+    **答案：** 没有。单编辑减少修改scope并明确责任，但还需实际使用和重跑；DiscernMem另用相同任务/seed的隔离记忆与无记忆结果，核对候选是否同时不弱于父版和无记忆。结构约束与效果证据不是相同的通过条件。
+
+    **教学例子：** 教学示意：把一次检索拼写错误写成永久skill违反EMMA的scope规则；把skill文本改得合法也不能证明它比不使用记忆更有帮助。
+
+    对照来源：[emma](../../../agent-research/2610.35966-emma/README.md) · [discernmem](../../../agent-research/2610.36652-discernmem/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-30** · 精读EMMA的三层所有权、scope单编辑、overflow与下一尝试exercise义务；与DiscernMem的配对归因和双基线修复验收区分，保留未实现语义服务边界。
+
+涉及：[emma](../../../agent-research/2610.35966-emma/README.md) · [discernmem](../../../agent-research/2610.36652-discernmem/README.md)
 
 **2026-10-29** · DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任务、seed、配置做单记忆/无记忆配对重放，再检查修复是否同时守住父记忆与无记忆基线。它补充了简单追加反思的风险控制：团队结果差不能直接归罪某条记忆；新版本也不能继承旧版本已测效果。本地只做这些测量和版本合同，没有LLM修复或重放。
 
@@ -111,7 +132,7 @@ DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任�
 
 覆盖 55 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 56 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 57 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -171,6 +192,7 @@ DiscernMem把失败先分为记忆使用范围不对和内容缺陷：对同任�
 - [Voyager](../../../agent-research/2305.16291-voyager/README.md)
 - [Generative Agents](../../../agent-research/2304.03442-generative-agents/README.md)
 - [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../../../agent-research/2610.36652-discernmem/README.md)
+- [EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis](../../../agent-research/2610.35966-emma/README.md)
 
 </details>
 

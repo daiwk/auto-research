@@ -7,7 +7,7 @@ hide:
 
 # 生成式召回与推理推荐
 
-[搜广推](index.md) / 244 个问题 · 61 篇论文
+[搜广推](index.md) / 248 个问题 · 62 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">244 个问题 · 61 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">248 个问题 · 62 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pailitao-mmsearch2" data-paper-title="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search 搜广推与 LLM 应用 Taobao &amp; Tmall Group of Alibaba 2026-10-27 用户上传图片并要求“同款换属性”或“找搭配”，检索关系与计算预算都不固定。PailitaoMMSearch2.0把原图、自由文本和可选上下文直接送入VLM，生成商品SID列表，不依赖一个先判意图再切多专家的路由器。数据工具按冷启动、质量校准和真实流量反馈组合；模型依次做商品知识CPT、混合推理预算SFT与意图均衡RL。Sample–Beam把推理部分采样和SID候选束生成分开，让训练的候选集合更接近线上多结果服务，而不是普通单响应GRPO换个名字。 资料收录，完整实验成本过高，不复现（审查 DONE）。未执行训练或推理，不产生metrics/GPU凭证。资料收录，完整实验成本过高，不复现（审查 DONE）。没有本地可执行模型、训练、benchmark或GPU结果，不注册adapter/Evolve。未执行训练或推理，不产生metrics/GPU凭证。论文涉及0.8B/2B/4B多模型、多预算、大规模多模态生产数据、CPT/SFT/RL与多场景线上实验；部分依赖私有数据，作者未给可据以重跑的完整GPU小时预算。相对单卡A100/A30或Mac，成本过高，不复现（审查 DONE）；不下载大资源、不运行试验、不自动重试。  多模态生成式搜索 Sample–Beam rollouts 搜广推 生成式召回与推理推荐 PailitaoMMSearch2.0是改写查询再检索，还是直接生成商品候选？ 模型消费原图和自由文本，直接生成可映射为商品的三层SID集合，解码就是候选生成。部分生产场景最终还会与既有链路结果混排，不能把端到端检索理解成所有线上模块都消失了。 教学例：用户上传衬衣照片要求找搭配裤子，生成的是候选商品ID，而不是只生成一句供别的搜索器使用的新查询。 2026-10-29">
@@ -80,6 +80,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：基线CTR为10%，增加0.58个百分点变为10.58%，相对提升是5.8%；这里仅说明口径，不是补造论文基线。</p>
 <p class="ar-learning-sources">依据：论文离线与线上效果、本地复现与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36958v1">原论文</a> · <a href="../../../../recommendation-components/2610.36958-pailitao-mmsearch2/">实现解读</a> · <a href="#qa-191febc5125e9909">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pinger" data-paper-title="PinGER: Token-Efficient Generative Retrieval with Semantic IDs" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PinGER: Token-Efficient Generative Retrieval with Semantic IDs 搜广推与 LLM 应用 Pinterest 2026-10-24 SID 检索把一个商品分成多级离散码，便于生成候选，却让历史输入随码层数膨胀。PinGER 在训练中交替摆放每件商品的 SID 和 dense token，通过角色相关 mask 让后续商品只能读取历史 dense；保留各级 SID 监督，服务时则删除历史 SID。dense 本身仍可由内容和 SID fusion 组成，不能误解为它完全不含离散信息。另一条改动是按共同前缀深度惩罚重复子树，而非只调采样温度。 完整实验成本过高，不复现（审查 DONE），未接入 Evolve。本地为 L1 数值机制组件 / diagnostic only：角色非对称 mask、单层前缀多样化选择、分层 DPO 与 NTP 锚。不实现完整推荐器、自定义 CUDA kernel 或生产服务；完整实验成本过高，不复现（审查 DONE），未接入 Evolve。两层真实小张量 attention 验证 dense 删 SID 后不变，并以普通 causal mask 作反例；等价测试假设保留 token 的输入/位置特征相同。  生成式召回 非对称注意力与前缀多样化 搜广推 生成式召回与推理推荐 PinGER为什么训练时保留SID，服务时却能把历史SID删掉？ 非对称mask使历史商品的信息只经dense token进入未来；历史SID不被其他商品或dense读取，因此不影响保留的dense状态。dense内部仍可以融合SID信息，删除独立SID位置不等于删除dense中的离散特征。 教学例：历史商品各有3个SID和1个dense，概念训练布局有4个位置；服务留下dense位置前后，若其输入特征一致，dense注意力结果可保持不变。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<span id="paper-recommendation-pinger-bbbb9458" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f9327d3b5e34e40b">PinGER为什么训练时保留SID，服务时却能把历史SID删掉？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apinger">PinGER: Token-Efficient Generative Retrieval with Semantic IDs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>非对称mask使历史商品的信息只经dense token进入未来；历史SID不被其他商品或dense读取，因此不影响保留的dense状态。dense内部仍可以融合SID信息，删除独立SID位置不等于删除dense中的离散特征。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史商品各有3个SID和1个dense，概念训练布局有4个位置；服务留下dense位置前后，若其输入特征一致，dense注意力结果可保持不变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.33435v1">原论文</a> · <a href="../../../../recommendation-components/2610.33435-pinger/">实现解读</a> · <a href="#qa-f9327d3b5e34e40b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pinger" data-paper-title="PinGER: Token-Efficient Generative Retrieval with Semantic IDs" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PinGER: Token-Efficient Generative Retrieval with Semantic IDs 搜广推与 LLM 应用 Pinterest 2026-10-24 SID 检索把一个商品分成多级离散码，便于生成候选，却让历史输入随码层数膨胀。PinGER 在训练中交替摆放每件商品的 SID 和 dense token，通过角色相关 mask 让后续商品只能读取历史 dense；保留各级 SID 监督，服务时则删除历史 SID。dense 本身仍可由内容和 SID fusion 组成，不能误解为它完全不含离散信息。另一条改动是按共同前缀深度惩罚重复子树，而非只调采样温度。 完整实验成本过高，不复现（审查 DONE），未接入 Evolve。本地为 L1 数值机制组件 / diagnostic only：角色非对称 mask、单层前缀多样化选择、分层 DPO 与 NTP 锚。不实现完整推荐器、自定义 CUDA kernel 或生产服务；完整实验成本过高，不复现（审查 DONE），未接入 Evolve。两层真实小张量 attention 验证 dense 删 SID 后不变，并以普通 causal mask 作反例；等价测试假设保留 token 的输入/位置特征相同。  生成式召回 非对称注意力与前缀多样化 搜广推 生成式召回与推理推荐 前缀多样化为什么不等同于把相同下一token都减一个分？ 它按父beam的最长公共前缀深度和已选名额累计罚分，同一父节点自身也受罚。不同层共享的前缀越深，重复子树被罚得越多；只看下一token会丢掉层级结构。 教学例：父前缀(1,2)与(1,3)共享1级，(1,2)与自身共享2级。先从(1,2)取一个孩子后，两类父节点罚分不同，不能统一减lambda。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-29956241de9aa37e">前缀多样化为什么不等同于把相同下一token都减一个分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apinger">PinGER: Token-Efficient Generative Retrieval with Semantic IDs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它按父beam的最长公共前缀深度和已选名额累计罚分，同一父节点自身也受罚。不同层共享的前缀越深，重复子树被罚得越多；只看下一token会丢掉层级结构。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：父前缀(1,2)与(1,3)共享1级，(1,2)与自身共享2级。先从(1,2)取一个孩子后，两类父节点罚分不同，不能统一减lambda。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.33435v1">原论文</a> · <a href="../../../../recommendation-components/2610.33435-pinger/">实现解读</a> · <a href="#qa-29956241de9aa37e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pinger" data-paper-title="PinGER: Token-Efficient Generative Retrieval with Semantic IDs" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PinGER: Token-Efficient Generative Retrieval with Semantic IDs 搜广推与 LLM 应用 Pinterest 2026-10-24 SID 检索把一个商品分成多级离散码，便于生成候选，却让历史输入随码层数膨胀。PinGER 在训练中交替摆放每件商品的 SID 和 dense token，通过角色相关 mask 让后续商品只能读取历史 dense；保留各级 SID 监督，服务时则删除历史 SID。dense 本身仍可由内容和 SID fusion 组成，不能误解为它完全不含离散信息。另一条改动是按共同前缀深度惩罚重复子树，而非只调采样温度。 完整实验成本过高，不复现（审查 DONE），未接入 Evolve。本地为 L1 数值机制组件 / diagnostic only：角色非对称 mask、单层前缀多样化选择、分层 DPO 与 NTP 锚。不实现完整推荐器、自定义 CUDA kernel 或生产服务；完整实验成本过高，不复现（审查 DONE），未接入 Evolve。两层真实小张量 attention 验证 dense 删 SID 后不变，并以普通 causal mask 作反例；等价测试假设保留 token 的输入/位置特征相同。  生成式召回 非对称注意力与前缀多样化 搜广推 生成式召回与推理推荐 多样化提高了线上兴趣覆盖，是否代表离线召回也一定提高？ 不是。原文lambda从0变3时distinct@1明显上升，R@100却下降；线上强惩罚仍更合适，体现目标和配置的差异。不能把离线表和另一beam宽度的生产A/B混成单项提升。 教学例：100个候选全来自同一类别可能容易命中旧偏好，却覆盖不了更多兴趣。增加类别覆盖是一种取舍，不是保证所有指标同向。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0ae0c3df86c6a36e">多样化提高了线上兴趣覆盖，是否代表离线召回也一定提高？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apinger">PinGER: Token-Efficient Generative Retrieval with Semantic IDs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。原文lambda从0变3时distinct@1明显上升，R@100却下降；线上强惩罚仍更合适，体现目标和配置的差异。不能把离线表和另一beam宽度的生产A/B混成单项提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：100个候选全来自同一类别可能容易命中旧偏好，却覆盖不了更多兴趣。增加类别覆盖是一种取舍，不是保证所有指标同向。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.33435v1">原论文</a> · <a href="../../../../recommendation-components/2610.33435-pinger/">实现解读</a> · <a href="#qa-0ae0c3df86c6a36e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pinger" data-paper-title="PinGER: Token-Efficient Generative Retrieval with Semantic IDs" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PinGER: Token-Efficient Generative Retrieval with Semantic IDs 搜广推与 LLM 应用 Pinterest 2026-10-24 SID 检索把一个商品分成多级离散码，便于生成候选，却让历史输入随码层数膨胀。PinGER 在训练中交替摆放每件商品的 SID 和 dense token，通过角色相关 mask 让后续商品只能读取历史 dense；保留各级 SID 监督，服务时则删除历史 SID。dense 本身仍可由内容和 SID fusion 组成，不能误解为它完全不含离散信息。另一条改动是按共同前缀深度惩罚重复子树，而非只调采样温度。 完整实验成本过高，不复现（审查 DONE），未接入 Evolve。本地为 L1 数值机制组件 / diagnostic only：角色非对称 mask、单层前缀多样化选择、分层 DPO 与 NTP 锚。不实现完整推荐器、自定义 CUDA kernel 或生产服务；完整实验成本过高，不复现（审查 DONE），未接入 Evolve。两层真实小张量 attention 验证 dense 删 SID 后不变，并以普通 causal mask 作反例；等价测试假设保留 token 的输入/位置特征相同。  生成式召回 非对称注意力与前缀多样化 搜广推 生成式召回与推理推荐 为何PinGER的DPO既要累积每级前缀，又要保留NTP锚？ 逐级前缀损失让较早的SID决定也接收偏好信号；只用完整ID最后一项会改变目标。NTP锚抑制偏好优化漂移。参考margin只是偏移logistic输入，不是已正确排序就硬停梯度；本地只验证这套公式，不训练真实推荐器。 教学例：三层SID要计算第1、1到2、1到3层的三项损失之和，再加NTP；不能只给最后一项三倍权重就当成等价。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a40d6e62f3c4f3a9">为何PinGER的DPO既要累积每级前缀，又要保留NTP锚？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Apinger">PinGER: Token-Efficient Generative Retrieval with Semantic IDs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Pinterest</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>逐级前缀损失让较早的SID决定也接收偏好信号；只用完整ID最后一项会改变目标。NTP锚抑制偏好优化漂移。参考margin只是偏移logistic输入，不是已正确排序就硬停梯度；本地只验证这套公式，不训练真实推荐器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三层SID要计算第1、1到2、1到3层的三项损失之和，再加NTP；不能只给最后一项三倍权重就当成等价。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.33435v1">原论文</a> · <a href="../../../../recommendation-components/2610.33435-pinger/">实现解读</a> · <a href="#qa-a40d6e62f3c4f3a9">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onelatent" data-paper-title="OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models 搜广推与 LLM 应用 Kuaishou Technology 2026-10-22 推荐FRM的显式CoT会增加生成时延，也可能过度思考或被固定推理模板带偏。OneLatent先用探索、评价、归因三视角生成自适应教师监督，再学习三个潜在token接口，最后只生成三层语义ID，避免在线输出长推理文本。 成本过高，不复现（审查 DONE），不下载235B教师、不做56卡训练的缩小替身、不自动重试因此本项是资料与成本审查完成，没有本地模型、诊断proxy、benchmark指标、GPU回执或evolve映射。Appendix A.1原配置为7节点×每节点8GPU，即56GPU、全参数BF16、4096tokens、两有效epochs；监督涉及Qwen3-235B-A22B教师及工业数据。单张A100/A30或Mac不适合照搬完整矩阵，本轮不先下载/试跑来验证它昂贵。  大模型能力与推荐融合 潜在推理与生成式推荐 搜广推 生成式召回与推理推荐 OneLatent 的三视角教师监督为什么是探索、评价和归因，而非固定一条长 CoT？ 不同视角提供候选发现、比较与解释线索，模型按样本可用视角学习潜在接口，减少固定模板可能带来的偏置与过度思考。它只减少在线显式文本输出，不能据此证明潜在 token 忠实保存每个推理步骤。全参数训练也共同影响结果。 示意：某样本只有可靠评价理由，另一样本还有探索与归因，不必给二者硬塞同一长度推理；内部表示学到多少仍需独立检查。 2026-10-27">
@@ -3275,7 +3328,7 @@ hide:
 
 ## 记住这一点
 
-生成式召回把候选选择改为在用户上下文下生成物品码：先建立可还原到目录的标识，再学习码序列分布，最后用约束解码得到可服务物品。TIGER串起量化与自回归检索，COBRA进一步级联稀疏码和稠密表示，PLUM把推荐数据继续预训练接到已有语言模型。偏好优化与推理token是在这条链路上改变训练或搜索。
+生成式召回把候选选择改为在用户上下文下生成物品码：先建立可还原到目录的标识，再学习码序列分布，最后用约束解码得到可服务物品。TIGER串起量化与自回归检索，COBRA进一步级联稀疏码和稠密表示，PLUM把推荐数据继续预训练接到已有语言模型。偏好优化与推理token是在这条链路上改变训练或搜索。 PinGER在训练里保留各层SID标签，但用非对称mask使后续历史只读dense，服务可删过去SID；输入成本、前缀覆盖和合法目录仍是三项不同合同。
 
 ## 一个例子
 

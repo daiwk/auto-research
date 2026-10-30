@@ -4,7 +4,7 @@
   "topics": {
     "context-and-state": {
       "title": "长上下文不是一条轴：位置、读取与状态压缩",
-      "thesis": "先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。",
+      "thesis": "先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。",
       "axes": [
         "历史保存为逐 token KV、递归状态还是输入相关压缩系数",
         "当前 query 是否能回到原始细节",
@@ -76,6 +76,16 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "foundation-models:merlin",
+          "position": "保存每段routing key均值与原始二阶矩，恢复query对齐方差；两路分别softmax再按门控混合外部state readouts。",
+          "tradeoff": "增加分段状态和矩存储，不精确重建逐token softmax；当前未完成段需外部递归处理，完整中期训练不复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -103,6 +113,14 @@
             "foundation-models:rope",
             "foundation-models:select-ttt",
             "foundation-models:sleep-lti"
+          ]
+        },
+        {
+          "title": "先写入状态，再决定读哪个段",
+          "body": "Mamba的选择性递推决定历史如何进入单个状态；MERLIN假设已有多个分段状态及其readout，再决定当前query该偏向哪个段。相同key均值可以掩盖一段内少数强匹配项，原始二阶矩使query能恢复对齐方差；但这只是聚合线索，不能把丢在段内压缩中的信息精确找回。Eq9还要求均值与方差各自归一化再混合，先混logits后softmax是另一个算法。等长段和因果可见性也都是接口前提。",
+          "papers": [
+            "foundation-models:merlin",
+            "foundation-models:mamba"
           ]
         }
       ],
@@ -148,9 +166,19 @@
             "foundation-models:select-ttt",
             "foundation-models:sleep-lti"
           ]
+        },
+        {
+          "id": "merlin-routing-not-state-recurrence",
+          "question": "MERLIN多保存一个二阶矩，就把Mamba式有界状态变成了完整attention吗？",
+          "answer": "没有。二阶矩用于估计query与每段routing keys对齐的方差，帮助段间readout聚合；原模型仍压缩每段内容，并没有保留所有token的值与逐项softmax。它增加一条读取线索而非撤销状态压缩。",
+          "example": "教学示意：两段key均值同为1，一段全是1，另一段是-1与3；均值路由分不清，方差可区分，但仍不能从两个矩恢复段内所有原始记录。",
+          "papers": [
+            "foundation-models:merlin",
+            "foundation-models:mamba"
+          ]
         }
       ],
-      "updated": "2026-10-29",
+      "updated": "2026-10-30",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -184,7 +212,8 @@
         "foundation-models:ttcd",
         "foundation-models:ttr-compressor",
         "foundation-models:select-ttt",
-        "foundation-models:sleep-lti"
+        "foundation-models:sleep-lti",
+        "foundation-models:merlin"
       ],
       "updates": [
         {
@@ -267,6 +296,18 @@
           "source_revisions": {
             "foundation-models:select-ttt": "491118c2fc7561bd2c545980a3376a88f45fa4c67b8954eebf114f2f01c13083",
             "foundation-models:sleep-lti": "cccbb45f84c92c7e776cc7bfa1b4a4fb1f8e7cd521f9b1c1314849a7a111d411"
+          }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读MERLIN Eq7-9，将raw二阶矩、对齐方差和两softmax门控聚合与Mamba递归写入分开；注明因果已完成段、外部当前段以及非精确attention边界。",
+          "papers": [
+            "foundation-models:merlin",
+            "foundation-models:mamba"
+          ],
+          "source_revisions": {
+            "foundation-models:merlin": "5549f39008d450d4a2446631403f0b94d55ea76f976bcc61197cb3c9f1fa0f01",
+            "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
           }
         }
       ]
@@ -710,7 +751,7 @@
     },
     "compression-and-cache": {
       "title": "推理压缩先找瓶颈：权重、KV 内容与缓存层级",
-      "thesis": "AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。",
+      "thesis": "AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。",
       "axes": [
         "压缩对象是权重、KV 头、token 还是分页存储",
         "信息被量化、永久淘汰还是留在外部待取回",
@@ -795,6 +836,16 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "foundation-models:fold-bias",
+          "position": "从上下文query拟合均值投影为1的共享方向，以K+√dβu折叠静态bias；实际bf16舍入后再最小二乘refit V。",
+          "tradeoff": "不像GQA减少KV头，也不负责AM选key/NNLS；不对任意未来query等价，值更换或舍入后不能直接套同值未舍入误差界。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -824,6 +875,14 @@
             "foundation-models:awq",
             "foundation-models:rescom",
             "foundation-models:hope-hilbert"
+          ]
+        },
+        {
+          "title": "能写进标准cache，不等于压缩误差消失",
+          "body": "GQA通过共享KV head改变每个token的存储结构；FoldBias保持head维度和query路径，处理的是已有压缩结果多出的静态logit bias。它将bias变成β(q·u)，只在投影接近1的query上近似原偏置，所以兼容标准kernel不意味着任意未来query等价。values须按舍入后的keys拟合，否则拟合与实际内核读入值不一致。AM的key选择、NNLS与engine安装仍是独立环节，本地小矩阵通过不提供吞吐或完整cache质量证据。",
+          "papers": [
+            "foundation-models:fold-bias",
+            "foundation-models:gqa"
           ]
         }
       ],
@@ -869,9 +928,19 @@
             "foundation-models:rescom",
             "foundation-models:hope-hilbert"
           ]
+        },
+        {
+          "id": "fold-bias-compatibility-not-universal-equivalence",
+          "question": "FoldBias保持head维度且可接标准kernel，为什么还必须测未来query质量？",
+          "answer": "折叠后的偏置是β(q·u)，并非对所有query恒等于β。上下文上拟合μ·u=1只约束该分布的平均投影，未来query可漂移。GQA减少KV头与这种bias近似也不是同一压缩对象；接口兼容、内存和质量需分别验收。",
+          "example": "教学示意：拟合query满足q·u≈1，后续query却为0.6，则原bias只剩约六成；即使张量shape完全能被kernel读取，attention仍已变化。",
+          "papers": [
+            "foundation-models:fold-bias",
+            "foundation-models:gqa"
+          ]
         }
       ],
-      "updated": "2026-10-29",
+      "updated": "2026-10-30",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:awq",
@@ -903,7 +972,8 @@
         "foundation-models:twinkv",
         "foundation-models:vfold",
         "foundation-models:rescom",
-        "foundation-models:hope-hilbert"
+        "foundation-models:hope-hilbert",
+        "foundation-models:fold-bias"
       ],
       "updates": [
         {
@@ -982,6 +1052,18 @@
           "source_revisions": {
             "foundation-models:rescom": "542f6c2a3ec5756474d7e548385de4a03a7210cf72232455b34a46011e2ad462",
             "foundation-models:hope-hilbert": "3a7d72d893b7fee736a7c441fc3a02a4ef8a3a94e031520698ef89515e59bd56"
+          }
+        },
+        {
+          "date": "2026-10-30",
+          "summary": "精读FoldBias的约束方向、rank-one位移、bf16先于value refit与同值误差界；相对GQA明确接口兼容与压缩结构的不同，保留未来query漂移风险。",
+          "papers": [
+            "foundation-models:fold-bias",
+            "foundation-models:gqa"
+          ],
+          "source_revisions": {
+            "foundation-models:fold-bias": "75acdc4bf86ed173dedadd355d09154087144327470a3a11a1856938b88ee9ce",
+            "foundation-models:gqa": "ffa7f3cc8df0e83ee807e94334765885f2595cf939dfda1012e18d8eecb56658"
           }
         }
       ]

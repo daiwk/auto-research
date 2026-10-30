@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 124 个问题 · 31 篇论文
+[基础模型](index.md) / 128 个问题 · 32 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">124 个问题 · 31 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">128 个问题 · 32 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fold-bias" data-paper-title="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels 基础模型 Independent Researcher 2026-10-27 Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。 完整质量 / serving 实验：成本过高，不复现（审查 DONE）；本地诊断用合成张量检验方程，不读 checkpoint 或 benchmark。本地状态：L1 key 折叠与 value 重拟合组件，diagnostic only。不实现完整 AM 压缩、LLM prefill 或 vLLM 注入。完整质量 / serving 实验：成本过高，不复现（审查 DONE）；不宣称加速或 evolve 能力。输入必须是调用者提供的上下文 queries、实际选中的 keys、AM 已拟合 biases，以及 full-cache 参考输出；没有用任意输出张量冒称真实 AM 校准。  推理与系统效率 KV缓存压缩与静态偏置编译 基础模型 推理压缩：权重、KV 缓存与服务带宽 把静态bias移进key，为什么不可能对所有未来query都严格等价？ key位移贡献的是query的线性函数，而非零bias是与query无关的常数；两者无法在整个query空间相等。FoldBias拟合共享方向u，让上下文query的q·u尽量接近1，未来query漂移仍可能导致误差。因此它是分布相关的近似，不是通用代数恒等替换。 教学例子：若query取零向量，任何key位移产生的logit变化都为0，不可能等于非零bias0.8；若某个query满足q·u=1，则该query的bias可精确表达。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-fold-bias-1b8893e9" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e4fe32856525b65d">把静态bias移进key，为什么不可能对所有未来query都严格等价？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afold-bias">Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>key位移贡献的是query的线性函数，而非零bias是与query无关的常数；两者无法在整个query空间相等。FoldBias拟合共享方向u，让上下文query的q·u尽量接近1，未来query漂移仍可能导致误差。因此它是分布相关的近似，不是通用代数恒等替换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若query取零向量，任何key位移产生的logit变化都为0，不可能等于非零bias0.8；若某个query满足q·u=1，则该query的bias可精确表达。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36520v1">原论文</a> · <a href="../../../../foundation-models/2610.36520-fold-bias/">实现解读</a> · <a href="#qa-e4fe32856525b65d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fold-bias" data-paper-title="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels 基础模型 Independent Researcher 2026-10-27 Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。 完整质量 / serving 实验：成本过高，不复现（审查 DONE）；本地诊断用合成张量检验方程，不读 checkpoint 或 benchmark。本地状态：L1 key 折叠与 value 重拟合组件，diagnostic only。不实现完整 AM 压缩、LLM prefill 或 vLLM 注入。完整质量 / serving 实验：成本过高，不复现（审查 DONE）；不宣称加速或 evolve 能力。输入必须是调用者提供的上下文 queries、实际选中的 keys、AM 已拟合 biases，以及 full-cache 参考输出；没有用任意输出张量冒称真实 AM 校准。  推理与系统效率 KV缓存压缩与静态偏置编译 基础模型 推理压缩：权重、KV 缓存与服务带宽 为何要把ridge解重新缩放到μᵀu=1，而不是直接用无约束最小二乘方向？ 无约束最小二乘会在平均偏差和投影离散之间折中，可能把所有bias整体衰减。论文在ridge稳定的逆协方差方向上重新定长，强制平均投影为1，再最小化该约束下的离散程度。协方差按N计算，ridge也随其trace定义，不能任意换成N−1口径。 教学例子：一维μ=2、方差1，无ridge时无约束LS方向为2/5，平均投影0.8；约束方向为1/2，平均投影恰为1。两者不是同一校准目标。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4c1c6936de7640a0">为何要把ridge解重新缩放到μᵀu=1，而不是直接用无约束最小二乘方向？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afold-bias">Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>无约束最小二乘会在平均偏差和投影离散之间折中，可能把所有bias整体衰减。论文在ridge稳定的逆协方差方向上重新定长，强制平均投影为1，再最小化该约束下的离散程度。协方差按N计算，ridge也随其trace定义，不能任意换成N−1口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一维μ=2、方差1，无ridge时无约束LS方向为2/5，平均投影0.8；约束方向为1/2，平均投影恰为1。两者不是同一校准目标。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36520v1">原论文</a> · <a href="../../../../foundation-models/2610.36520-fold-bias/">实现解读</a> · <a href="#qa-4c1c6936de7640a0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fold-bias" data-paper-title="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels 基础模型 Independent Researcher 2026-10-27 Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。 完整质量 / serving 实验：成本过高，不复现（审查 DONE）；本地诊断用合成张量检验方程，不读 checkpoint 或 benchmark。本地状态：L1 key 折叠与 value 重拟合组件，diagnostic only。不实现完整 AM 压缩、LLM prefill 或 vLLM 注入。完整质量 / serving 实验：成本过高，不复现（审查 DONE）；不宣称加速或 evolve 能力。输入必须是调用者提供的上下文 queries、实际选中的 keys、AM 已拟合 biases，以及 full-cache 参考输出；没有用任意输出张量冒称真实 AM 校准。  推理与系统效率 KV缓存压缩与静态偏置编译 基础模型 推理压缩：权重、KV 缓存与服务带宽 FoldBias为什么比直接删除bias更有根据，但又不能保证每个query都更好？ 删除bias相当于把所有bias乘0；折叠相当于乘q·u，在上下文拟合良好且未来query接近时更接近乘1。若未来query远离拟合超平面，q·u可能很差。误差界还依赖bias范围和values直径，只在同values、未舍入keys的比较成立，不自动覆盖重拟合后的serving系统。 教学例子：q·u=0.9时仅留下10%的bias误差；若漂移到−2，则误差系数为3，可能比删除bias的系数1更差。该例不是LLM准确率。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-20b2acd190796a3b">FoldBias为什么比直接删除bias更有根据，但又不能保证每个query都更好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afold-bias">Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>删除bias相当于把所有bias乘0；折叠相当于乘q·u，在上下文拟合良好且未来query接近时更接近乘1。若未来query远离拟合超平面，q·u可能很差。误差界还依赖bias范围和values直径，只在同values、未舍入keys的比较成立，不自动覆盖重拟合后的serving系统。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>q·u=0.9时仅留下10%的bias误差；若漂移到−2，则误差系数为3，可能比删除bias的系数1更差。该例不是LLM准确率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36520v1">原论文</a> · <a href="../../../../foundation-models/2610.36520-fold-bias/">实现解读</a> · <a href="#qa-20b2acd190796a3b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fold-bias" data-paper-title="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels 基础模型 Independent Researcher 2026-10-27 Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。 完整质量 / serving 实验：成本过高，不复现（审查 DONE）；本地诊断用合成张量检验方程，不读 checkpoint 或 benchmark。本地状态：L1 key 折叠与 value 重拟合组件，diagnostic only。不实现完整 AM 压缩、LLM prefill 或 vLLM 注入。完整质量 / serving 实验：成本过高，不复现（审查 DONE）；不宣称加速或 evolve 能力。输入必须是调用者提供的上下文 queries、实际选中的 keys、AM 已拟合 biases，以及 full-cache 参考输出；没有用任意输出张量冒称真实 AM 校准。  推理与系统效率 KV缓存压缩与静态偏置编译 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么必须先真实转成BF16，再拟合values？只在结果里写BF16不够吗？ values最小二乘拟合使用的attention必须与实际舍入后的keys一致。若先在高精度keys上拟合，再把keys舍入，得到的是另一个attention矩阵，正规方程不再对应最终keys。本地实际执行dtype转换再构造A，返回拟合精度系数；完整cache安装、values存储舍入和后端正确性仍需另验。 教学例子：折叠key的某分量为1.003，BF16会舍到1.0。拟合A时若仍使用1.003，相当于让values补偿一张部署时不会出现的attention表。 2026-10-30">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-09d707e834f73aa9">为什么必须先真实转成BF16，再拟合values？只在结果里写BF16不够吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afold-bias">Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-10-30 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>values最小二乘拟合使用的attention必须与实际舍入后的keys一致。若先在高精度keys上拟合，再把keys舍入，得到的是另一个attention矩阵，正规方程不再对应最终keys。本地实际执行dtype转换再构造A，返回拟合精度系数；完整cache安装、values存储舍入和后端正确性仍需另验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>折叠key的某分量为1.003，BF16会舍到1.0。拟合A时若仍使用1.003，相当于让values补偿一张部署时不会出现的attention表。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.36520v1">原论文</a> · <a href="../../../../foundation-models/2610.36520-fold-bias/">实现解读</a> · <a href="#qa-09d707e834f73aa9">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rescom" data-paper-title="ResCom: Activation Residual Compensation for Large Language Model Quantization" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="ResCom: Activation Residual Compensation for Large Language Model Quantization 基础模型 Institute of Automation, Chinese Academy of Sciences 2026-10-25 低比特激活把不同输入压到同一量化格点后，只读取量化值的补偿器无法分辨格点内部的差异。ResCom 保留当前前向中的残差，在冻结既有量化模型之后，以低秩分支补回这些残差造成的输出变化；不重新优化主权重或量化器。它不是“找残差最大的通道”：残差很小也可能被主映射放大。论文通过输出误差与残差的交叉统计，按输出重建目标分配有限秩预算，并用带截距的正则化降秩回归闭式求解。 完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。本地状态：L1 独立闭式校准组件、diagnostic only，不是完整量化模型或原生低比特内核。完整实验：成本过高，不复现（审查 DONE），不自动重试、不接入 evolve 晋级。实现稳定可合并的中心化流式统计、Cholesky / 截断 SVD 求解和固定分支。可缩小维度，但保留输出感知、秩约束、未归一统计和不惩罚截距；不以普通 SVD() 或残差幅度排序替代论文目标。  推理与系统效率 量化与残差补偿 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么已经量化好的模型，还能从当前激活的舍入残差中找回信息？ 量化把一段连续输入映射到同一个格点，只看量化值无法分辨格点内的不同输入。但当前前向在舍入前后都能看到激活，两者之差仍保留被丢掉的信息。ResCom把这份残差送入固定低秩分支，而不是重新训练量化器。 教学例子：1.01与1.04都舍入为1.0，只看1.0的分支输出相同；残差0.01与0.04却允许补偿器给出不同输出。这不是论文模型准确率。 2026-10-29">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-rescom-f00947a9" class="ar-learning-paper-anchor"></span>
@@ -1685,7 +1738,7 @@ hide:
 
 ## 记住这一点
 
-AWQ 依据校准激活识别重要通道，以等价缩放降低低比特权重量化误差；GQA 则让多个 Query head 共享较少的 KV head，减少每个历史位置要存的状态。KV 驱逐、量化和分层存储又分别改变保留哪些 token、每个状态用多少位、状态放在哪里。这些机制针对不同资源，不能互相替代。
+AWQ 依据校准激活识别重要通道，以等价缩放降低低比特权重量化误差；GQA 则让多个 Query head 共享较少的 KV head，减少每个历史位置要存的状态。KV 驱逐、量化和分层存储又分别改变保留哪些 token、每个状态用多少位、状态放在哪里。这些机制针对不同资源，不能互相替代。 FoldBias不再选择丢哪些token，而是在给定保留keys和静态bias后，把bias写入共享方向位移；保持原head维度并在真实cache舍入后重拟合values，兼容性与质量仍须分别验证。
 
 ## 一个例子
 

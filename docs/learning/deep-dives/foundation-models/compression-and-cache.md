@@ -7,9 +7,9 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-10-29 · 31 篇主题资料 / 8 篇重点对照
+[基础模型](../index.md) · 更新 2026-10-30 · 32 篇主题资料 / 9 篇重点对照
 
-AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。
+AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/foundation-models/compression-and-cache.md)
 
@@ -33,6 +33,7 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill](../../../foundation-models/2610.21500-remote-kv-tiers/README.md) · [原始来源](https://arxiv.org/abs/2610.21500)<br>章节：背景与主要改动、核心公式、复现边界 | 先比较远端加载与重新计算，再以 rank 分片和异步加载治理传输与队首阻塞。 | 命中不一定更快，固定开销与带宽决定盈亏；论文端到端对比含布局变化，本地无分布式实现，完整实验高成本。 |
 | [ResCom: Activation Residual Compensation for Large Language Model Quantization](../../../foundation-models/2610.35955-rescom/README.md) · [原始来源](https://arxiv.org/abs/2610.35955v1)<br>章节：背景与主要改动、核心公式 | 以中心化残差/输出误差统计白化，再做截断SVD和截距恢复。 | 校准只适用于固定宿主，未实现量化器或原生低比特内核。 |
 | [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../../foundation-models/2607.21366-hope-hilbert/README.md) · [原始来源](https://arxiv.org/abs/2607.21366v1)<br>章节：背景与主要改动、核心公式 | 以biased Gaussian-ReLU核和Hilbert代理计算剪枝率，支持小Dense层均值补偿与单步恢复。 | 假设激活的Gaussian代理，不实现MERGE/EVICT/完整HOPE或DEFT；与Sleep的Hope架构不是同一方法。 |
+| [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../../foundation-models/2610.36520-fold-bias/README.md) · [原始来源](https://arxiv.org/abs/2610.36520v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 从上下文query拟合均值投影为1的共享方向，以K+√dβu折叠静态bias；实际bf16舍入后再最小二乘refit V。 | 不像GQA减少KV头，也不负责AM选key/NNLS；不对任意未来query等价，值更换或舍入后不能直接套同值未舍入误差界。 |
 
 </div>
 
@@ -55,6 +56,12 @@ DropKV/TwinKV 的当前保留集合会限制可见历史；KVMEM 把大地址空
 ResCom与HOPE压缩的对象不同：前者在固定量化宿主外增加读取activation rounding residual的低秩校正，校准统计与截距需对应同一宿主；后者用Gaussian-ReLU/Hilbert代理评价神经元结构删除，并补偿下游均值。它们不是一个在任意模型上保证等价的剪枝量化组合；本地都只实现精确小组件，未跑LLM或ImageNet能力矩阵。
 
 对照来源：[awq](../../../reproductions/2306.00978-awq/README.md) · [rescom](../../../foundation-models/2610.35955-rescom/README.md) · [hope-hilbert](../../../foundation-models/2607.21366-hope-hilbert/README.md)
+
+### 能写进标准cache，不等于压缩误差消失
+
+GQA通过共享KV head改变每个token的存储结构；FoldBias保持head维度和query路径，处理的是已有压缩结果多出的静态logit bias。它将bias变成β(q·u)，只在投影接近1的query上近似原偏置，所以兼容标准kernel不意味着任意未来query等价。values须按舍入后的keys拟合，否则拟合与实际内核读入值不一致。AM的key选择、NNLS与engine安装仍是独立环节，本地小矩阵通过不提供吞吐或完整cache质量证据。
+
+对照来源：[fold-bias](../../../foundation-models/2610.36520-fold-bias/README.md) · [gqa](../../../reproductions/2305.13245-gqa/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -100,9 +107,23 @@ ResCom与HOPE压缩的对象不同：前者在固定量化宿主外增加读取a
 
     对照来源：[awq](../../../reproductions/2306.00978-awq/README.md) · [rescom](../../../foundation-models/2610.35955-rescom/README.md) · [hope-hilbert](../../../foundation-models/2607.21366-hope-hilbert/README.md)
 
+### FoldBias保持head维度且可接标准kernel，为什么还必须测未来query质量？ {#cross-fold-bias-compatibility-not-universal-equivalence}
+
+??? note "展开答案与例子"
+
+    **答案：** 折叠后的偏置是β(q·u)，并非对所有query恒等于β。上下文上拟合μ·u=1只约束该分布的平均投影，未来query可漂移。GQA减少KV头与这种bias近似也不是同一压缩对象；接口兼容、内存和质量需分别验收。
+
+    **教学例子：** 教学示意：拟合query满足q·u≈1，后续query却为0.6，则原bias只剩约六成；即使张量shape完全能被kernel读取，attention仍已变化。
+
+    对照来源：[fold-bias](../../../foundation-models/2610.36520-fold-bias/README.md) · [gqa](../../../reproductions/2305.13245-gqa/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-10-30** · 精读FoldBias的约束方向、rank-one位移、bf16先于value refit与同值误差界；相对GQA明确接口兼容与压缩结构的不同，保留未来query漂移风险。
+
+涉及：[fold-bias](../../../foundation-models/2610.36520-fold-bias/README.md) · [gqa](../../../reproductions/2305.13245-gqa/README.md)
 
 **2026-10-29** · ResCom与HOPE压缩的对象不同：前者在固定量化宿主外增加读取activation rounding residual的低秩校正，校准统计与截距需对应同一宿主；后者用Gaussian-ReLU/Hilbert代理评价神经元结构删除，并补偿下游均值。它们不是一个在任意模型上保证等价的剪枝量化组合；本地都只实现精确小组件，未跑LLM或ImageNet能力矩阵。
 
@@ -112,7 +133,7 @@ ResCom与HOPE压缩的对象不同：前者在固定量化宿主外增加读取a
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 31 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 32 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -147,6 +168,7 @@ ResCom与HOPE压缩的对象不同：前者在固定量化宿主外增加读取a
 - [VFold: Symmetry-Aware Cross-Layer Value Cache Compression](../../../foundation-models/2610.12338-vfold/README.md)
 - [ResCom: Activation Residual Compensation for Large Language Model Quantization](../../../foundation-models/2610.35955-rescom/README.md)
 - [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../../foundation-models/2607.21366-hope-hilbert/README.md)
+- [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../../foundation-models/2610.36520-fold-bias/README.md)
 
 </details>
 

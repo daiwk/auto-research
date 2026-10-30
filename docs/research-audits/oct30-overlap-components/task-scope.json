@@ -1,0 +1,677 @@
+{
+  "schema_version": 1,
+  "batch": "2026-10-30-overlap-components",
+  "counts": {
+    "selected_papers": 10,
+    "components_accepted": 10,
+    "gpu_validated_components": 6,
+    "cpu_only_components": 4,
+    "reference_only_high_cost_done": 0,
+    "components_pending_verification": 0,
+    "capability_reproductions_claimed": 0,
+    "latest_category_entries": 1478,
+    "latest_unique_identities": 1059,
+    "new_bulletin_identities_since_previous_capture": 0,
+    "selected_first_publications_after_previous_capture": 0,
+    "selected_historical_official_source_backfills": 1,
+    "selected_recent_overlap_backfills": 9
+  },
+  "selected_scope_complete": true,
+  "delivery_status": "bounded_scope_complete",
+  "all_sources_exhaustive": false,
+  "review_watermark_advanced": false,
+  "review_watermark": {
+    "before": "2026-10-15",
+    "after": "2026-10-15"
+  },
+  "fixed_component_keys": [
+    "concur",
+    "crop",
+    "emma",
+    "evalalloc",
+    "fold-bias",
+    "merlin",
+    "mpopd",
+    "pinger",
+    "pinterest-rlbp",
+    "swim"
+  ],
+  "reference_only_keys": [],
+  "papers": [
+    {
+      "domain": "post-training",
+      "key": "concur",
+      "title": "CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning",
+      "paper_url": "https://arxiv.org/abs/2610.36437v1",
+      "detail_path": "post-training/2610.36437-concur/README.md",
+      "priority": "P0",
+      "first_author": "Jixuan Leng",
+      "first_author_affiliation": "Carnegie Mellon University",
+      "published_at": "2026-10-27T00:36:59Z",
+      "cost_assessment": {
+        "source": "v1 AppendixD Tables3/4, SectionsD.1/D.2",
+        "model_scale": "Qwen3-4B/8B-Base和OLMo-3-7B；Gemma-4-26B-A4B训练/评测judge与8B reward model",
+        "paper_configuration": "每run 4节点×8 NVIDIA RTX PRO6000，300steps，batch512、每prompt8rollouts，训练响应4K/8K、评测最长32K",
+        "data_scale": "四任务混合，各模型每任务约9.8K–11.7K prompts，15项下游评测及多组估计器/消融",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "estimated_cost_basis": "原文明确32GPU/run及多模型长rollout矩阵，单卡预算不适合完整实验；不是本地测量",
+        "decision": "成本过高，不复现（审查 DONE）；不下载、不试完整训练、不自动重试。只验证无模型调用的CPU估计器组件。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.36437",
+      "intake_class": "same_bulletin_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "component_evidence": "docs/post-training/2610.36437-concur/metrics/component-cpu-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.36437v1"
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.CL/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "agent-research",
+      "key": "crop",
+      "title": "CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization",
+      "paper_url": "https://arxiv.org/abs/2604.14214v1",
+      "detail_path": "agent-research/2604.14214-crop/README.md",
+      "priority": "P0",
+      "first_author": "Deep Shah",
+      "first_author_affiliation": "Google",
+      "published_at": "2026-04-08T19:31:25Z",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2604.14214v1#S4",
+        "model_scale": "Gemini3.1Pro Thinking元优化器，Gemini2.0Flash双评估器，Gemini2.0Flash/Qwen2.5-7B目标模型",
+        "paper_configuration": "GSM8K、LogiQA、BBH ObjectCounting，逐样本双文本评估、多轮提示优化、多基线与validation超参搜索；每轮T/B与总GPU/API费用未完整报告，不推定便宜",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "decision": "多模型多数据集闭源API与7B反复推理矩阵成本过高，不复现（审查 DONE）；仅CPU纯控制组件，不下载权重、不调用模型/API、不自动重试"
+      },
+      "implementation_status": "component_only",
+      "id": "2604.14214",
+      "intake_class": "historical_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "component_evidence": "docs/agent-research/2604.14214-crop/metrics/component-cpu-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2604.14214v1"
+        },
+        {
+          "source_kind": "historical-google-directory-backfill",
+          "source_url": "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/"
+        }
+      ]
+    },
+    {
+      "domain": "agent-research",
+      "key": "emma",
+      "title": "EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis",
+      "paper_url": "https://arxiv.org/abs/2610.35966v1",
+      "detail_path": "agent-research/2610.35966-emma/README.md",
+      "priority": "P1",
+      "first_author": "Ruijia Niu",
+      "first_author_affiliation": "University of California San Diego",
+      "published_at": "2026-10-25T18:00:11Z",
+      "cost_assessment": {
+        "source": "v1 Sections5/AppendicesB/C",
+        "model_scale": "五种闭源/开放LLM backbone，controller高推理强度，反思与多Agent执行均真实模型调用",
+        "paper_configuration": "三benchmarks、多基线；每任务至多5次revision/6次fresh execution，每step至多30轮，executor600秒/24GiB",
+        "data_scale": "KramaBench28训练+76评测；AppWorld90训练+168/417评测；BBEH-mini92训练+368评测",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "estimated_cost_basis": "多模型多环境长轨迹反思矩阵，未给单卡可复现总时长；按成本不启动探针",
+        "decision": "成本过高，不复现（审查 DONE）；不调用LLM或部署完整AppWorld矩阵。只交付结构记忆/守卫子组件，不自动重试。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.35966",
+      "intake_class": "same_bulletin_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "component_evidence": "docs/agent-research/2610.35966-emma/metrics/component-cpu-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.35966v1"
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.AI/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.AI/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "agent-research",
+      "key": "evalalloc",
+      "title": "Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?",
+      "paper_url": "https://arxiv.org/abs/2610.37276v1",
+      "detail_path": "agent-research/2610.37276-evalalloc/README.md",
+      "priority": "P1",
+      "first_author": "Sichun Luo",
+      "first_author_affiliation": "The University of Hong Kong",
+      "published_at": "2026-10-27T14:06:26Z",
+      "cost_assessment": {
+        "source": "v1 Sections4.1/5/6",
+        "model_scale": "LLM proposer/executor；额外实验含gpt-oss120B及Llama3.1-8B",
+        "paper_configuration": "4benchmarks×2evolution frameworks×3runs，多基线；80/81 proposals×300SEARCHitems，额外DEV/TEST与多轮LLM执行",
+        "data_scale": "HotpotQA/HoVer/DROP/IFBench，各300SEARCH/150DEV及294或300TEST；最终SH公共prefix30/60/120/300",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "estimated_cost_basis": "长链LLM搜索/多臂跨基准矩阵明显超出低成本交付；未运行完整模型试探",
+        "decision": "成本过高，不复现（审查 DONE）；只交付明确标注的统计/配对轮子组件，不声称全框架已接入或节省实际LLM费用，不自动重试。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.37276",
+      "intake_class": "same_bulletin_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "component_evidence": "docs/agent-research/2610.37276-evalalloc/metrics/component-cpu-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.37276v1"
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.AI/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.CL/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.LG/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.AI/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.LG/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "foundation-models",
+      "key": "fold-bias",
+      "title": "Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels",
+      "paper_url": "https://arxiv.org/abs/2610.36520v1",
+      "detail_path": "foundation-models/2610.36520-fold-bias/README.md",
+      "priority": "P1",
+      "first_author": "Utkarsh Kanwat",
+      "first_author_affiliation": "Independent Researcher",
+      "published_at": "2026-10-27T02:22:37Z",
+      "cost_assessment": {
+        "source": "固定v1 Sections4-7及AppendixA.11 serving details：https://arxiv.org/html/2610.36520v1",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "model_scale": "Qwen3 1.7B/4B/8B/14B、Llama-3.1-8B及更大模型系统矩阵",
+        "data_scale": "QuALITY、LongHealth、LongBench长上下文质量和多预算比较",
+        "paper_configuration": "实际prefill/AM校准、KV connector、backend正确性和serving容量/解码速度；部分大模型容量实验为随机权重",
+        "estimated_cost_basis": "多模型/长上下文/serving协议只读审查，未实测完整GPU小时；小张量折叠和最小二乘无需模型",
+        "decision": "完整质量/serving实验成本过高，不复现（审查DONE），不下载/探针/自动重试。仅真实BF16舍入后的value重拟合及同value误差界，不声称完整AM或vLLM路径。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.36520",
+      "intake_class": "same_announcement_overlap_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "component_evidence": "docs/foundation-models/2610.36520-fold-bias/metrics/component-cuda-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.36520v1"
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.CL/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.LG/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.LG/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "foundation-models",
+      "key": "merlin",
+      "title": "Multi-State Linear Attention with Generalized Second-Order Routing",
+      "paper_url": "https://arxiv.org/abs/2610.37645v1",
+      "detail_path": "foundation-models/2610.37645-merlin/README.md",
+      "priority": "P0",
+      "first_author": "Hee Seung Hwang",
+      "first_author_affiliation": "Princeton University",
+      "published_at": "2026-10-27T17:55:49Z",
+      "cost_assessment": {
+        "source": "固定v1 Section4.1 Training/Models及Table1：https://arxiv.org/html/2610.37645v1",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "model_scale": "Gated DeltaNet-1.3B和Mamba-2-780M，多状态注意力改造",
+        "data_scale": "2B tokens中期训练后再60M tokens，另有RULER和LongBench；原始预训练分别50B/300B tokens",
+        "paper_configuration": "16K上下文、256token等长段、多backbone多路由方法和消融",
+        "estimated_cost_basis": "论文模型/数据/评测矩阵的只读成本审查；未实测完整GPU小时，不虚构估计；L1只需外部小张量",
+        "decision": "完整实验成本过高，不复现（审查DONE），不下载/探针/自动重试。仅实现矩统计、路由与已完成段遮罩，不声称完整注意力层或LLM能力。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.37645",
+      "intake_class": "same_announcement_overlap_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "component_evidence": "docs/foundation-models/2610.37645-merlin/metrics/component-cuda-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.37645v1"
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.CL/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "post-training",
+      "key": "mpopd",
+      "title": "Proposing Better Rollouts for On-Policy Distillation",
+      "paper_url": "https://arxiv.org/abs/2610.36477v2",
+      "detail_path": "post-training/2610.36477-mpopd/README.md",
+      "priority": "P1",
+      "first_author": "Sirui Chen",
+      "first_author_affiliation": "University of Illinois Urbana-Champaign",
+      "published_at": "2026-10-27T01:33:51Z",
+      "cost_assessment": {
+        "source": "v2 Section4, AppendixA.1/A.2/B.3",
+        "model_scale": "1.7B/4B/8B学生、独立proposal副本、4B/30B-A3B教师",
+        "paper_configuration": "原配置2GPU、TP=2；学生/proposal交替更新，batch128/256，4K训练rollout，16K评测，每题至多32次采样",
+        "data_scale": "DAPO-Math17K、ARPO10K、5K医学训练子集，16套评测及教师/支持集消融",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "estimated_cost_basis": "多份模型与长rollout/多基准矩阵，无法以小tensor梯度验证代替原规模；未试跑完整实验",
+        "decision": "成本过高，不复现（审查 DONE）；不下载、不试完整蒸馏、不自动重试。仅小tensor公式/梯度组件，CUDA验收单独绑定真实回执。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.36477",
+      "intake_class": "same_bulletin_backfill_with_revision",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "component_evidence": "docs/post-training/2610.36477-mpopd/metrics/component-cuda-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.36477v2"
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.AI/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.LG/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.AI/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.LG/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "recommendation",
+      "key": "pinger",
+      "title": "PinGER: Token-Efficient Generative Retrieval with Semantic IDs",
+      "paper_url": "https://arxiv.org/abs/2610.33435v1",
+      "detail_path": "recommendation-components/2610.33435-pinger/README.md",
+      "priority": "P0",
+      "first_author": "Xinyi Li",
+      "first_author_affiliation": "Pinterest",
+      "published_at": "2026-10-24T04:24:45Z",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.33435v1",
+        "source_location": "Sections3–5/AppendixA",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac",
+        "model_scale": "RQ-VAE plus 4-layer768-d decoder,5x2048codes,up to6144trainingtokens",
+        "data_scale": "private PinCLIP/OmniSage/engagement data and order1billion production corpus",
+        "paper_configuration": "multi-context/beam/feature/DPO comparisons, custom kernels and real serving/production A/B",
+        "estimated_cost_basis": "full GPU-hours undisclosed; private data and billion-item serving make total cost/material requirements unavailable; only small formula tensors accepted",
+        "decision": "完整实验成本过高，不复现（审查 DONE）；不下载、不试跑、不自动重试。只接受mask/单层前缀选择/分层DPO的L1组件，独立GPU验收不代表推荐器或服务栈复现。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.33435",
+      "intake_class": "overlap_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "component_evidence": "docs/recommendation-components/2610.33435-pinger/metrics/component-cuda-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.33435v1"
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.IR/recent?show=2000",
+          "announced_dates": [
+            "2026-10-27"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "recommendation",
+      "key": "pinterest-rlbp",
+      "title": "Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest",
+      "paper_url": "https://arxiv.org/abs/2610.33248v1",
+      "detail_path": "recommendation-components/2610.33248-pinterest-rlbp/README.md",
+      "priority": "P0",
+      "first_author": "Yichu Zhou",
+      "first_author_affiliation": "Pinterest Inc.",
+      "published_at": "2026-10-23T19:52:02Z",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.33248v1",
+        "source_location": "Sections3–6",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac",
+        "model_scale": "private state encoder/sharedmultiheadQnetwork;deployedgamma0contextualbandit,notdirectneuralbidder",
+        "data_scale": "21dayprivateauctionlogs plus7dayheldout,live7dayA/Band2monthholdout",
+        "paper_configuration": "five-seedconfigablations,logging/explorationpolicy,productionPIDandpaidtraffic",
+        "estimated_cost_basis": "GPU-hours undisclosed; faithful complete cost uncertain and private production requirements unavailable, so no trial run; only bounded Eq3–11 tensors",
+        "decision": "完整实验成本过高，不复现（审查 DONE）；不下载、不调用bidder、不自动重试。低成本张量组件只验收奖励/双头目标/动作/策略/IPS，不冒称真实广告策略效果。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.33248",
+      "intake_class": "overlap_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "component_evidence": "docs/recommendation-components/2610.33248-pinterest-rlbp/metrics/component-cuda-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.33248v1"
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.IR/recent?show=2000",
+          "announced_dates": [
+            "2026-10-27"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.LG/recent?show=2000",
+          "announced_dates": [
+            "2026-10-27"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "foundation-models",
+      "key": "swim",
+      "title": "SWIM: Learning What Matters from Behaviors for JEPA World Models",
+      "paper_url": "https://arxiv.org/abs/2610.36662v1",
+      "detail_path": "foundation-models/2610.36662-swim/README.md",
+      "priority": "P1",
+      "first_author": "Jiaming Hu",
+      "first_author_affiliation": "Boston University / Unity Technologies",
+      "published_at": "2026-10-27T05:28:28Z",
+      "cost_assessment": {
+        "source": "固定v1 AppendixA/E/F和Sections3-5：https://arxiv.org/html/2610.36662v1",
+        "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+        "model_scale": "1024hidden逆动力学及完整视觉encoder/action-conditioned LeWM world model",
+        "data_scale": "离线轨迹、五类环境/变体、多种子及结构化干扰变量诊断",
+        "paper_configuration": "Stage1 8000steps，hinge batch4096或InfoNCE batch1024/255 negatives，gate惩罚网格；另需world-model训练和CEM规划评测",
+        "estimated_cost_basis": "模型/训练批量/仿真评测矩阵只读审查；论文未提供完整可迁移GPU小时，未运行全实验；L1缩小MLP及batch，保留目标定义",
+        "decision": "完整world-model与规划实验成本过高，不复现（审查DONE），不下载/探针/自动重试。仅逆动力学门控目标、真实cyclic错配和冻结sqrt(g)距离，不声称完整JEPA或机器人策略。"
+      },
+      "implementation_status": "component_only",
+      "id": "2610.36662",
+      "intake_class": "same_announcement_overlap_backfill",
+      "status": "implemented",
+      "first_publication_after_previous_capture": false,
+      "component_accepted": true,
+      "component_implemented": true,
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "resolution": "bounded_l1_component_accepted",
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "component_evidence": "docs/foundation-models/2610.36662-swim/metrics/component-cuda-seeds42-44.json",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2610.36662v1"
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.CV/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-new",
+          "source_url": "https://arxiv.org/list/cs.RO/new?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.CV/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        },
+        {
+          "source_kind": "arxiv-recent",
+          "source_url": "https://arxiv.org/list/cs.RO/recent?show=2000",
+          "announced_dates": [
+            "2026-10-28"
+          ]
+        }
+      ]
+    }
+  ],
+  "updated_existing_keys": [],
+  "additional_dispositions": []
+}

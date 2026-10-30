@@ -170,6 +170,8 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "Agent自我进化": ("规划、搜索与反思", "Harness 与自我改进"),
+        "自进化与工作流": ("规划、搜索与反思", "Harness 与自我改进"),
         "工具与环境交互": ("工具调用与环境执行", "电脑操作与 reward 评测"),
         "Agent 训练与策略优化": ("Agentic RL 与后训练", "在策略蒸馏与上下文探索"),
         "RSI": ("规划、搜索与反思", "Harness 与自我改进"),
@@ -835,6 +837,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "merlin": ("注意力与长上下文", "多状态线性注意力"),
+        "fold-bias": ("推理与系统效率", "KV cache 与上下文压缩"),
+        "swim": ("网络架构", "JEPA 与决策表征"),
         "rescom": ("推理与系统效率", "量化与残差补偿"),
         "hope-hilbert": ("推理与系统效率", "结构剪枝与可逆压缩"),
         "select-ttt": ("注意力与长上下文", "查询条件测试时训练"),
